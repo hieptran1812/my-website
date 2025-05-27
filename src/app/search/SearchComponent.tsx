@@ -11,6 +11,7 @@ interface SearchResult {
   type: "blog" | "page" | "project";
   category?: string;
   tags?: string[];
+  relevanceScore?: number;
 }
 
 const searchableContent: SearchResult[] = [
@@ -22,6 +23,33 @@ const searchableContent: SearchResult[] = [
     type: "blog",
     category: "Software Development",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
+  },
+  {
+    title: "AI-Powered Natural Language Processing",
+    description:
+      "Deep dive into NLP techniques using transformer models, including BERT, GPT, and custom implementations for text analysis.",
+    url: "/blog/nlp-transformers",
+    type: "blog",
+    category: "Machine Learning",
+    tags: ["NLP", "Transformers", "BERT", "GPT", "Deep Learning"],
+  },
+  {
+    title: "Computer Vision Research",
+    description:
+      "Advanced computer vision techniques for object detection, image segmentation, and real-time video analysis.",
+    url: "/blog/computer-vision",
+    type: "blog",
+    category: "Machine Learning",
+    tags: ["Computer Vision", "CNN", "YOLO", "OpenCV", "PyTorch"],
+  },
+  {
+    title: "Distributed Systems Architecture",
+    description:
+      "Designing scalable microservices architecture with Kubernetes, Docker, and cloud-native technologies.",
+    url: "/blog/distributed-systems",
+    type: "blog",
+    category: "Software Engineering",
+    tags: ["Microservices", "Kubernetes", "Docker", "Cloud", "Scalability"],
   },
   {
     title: "Open Source Guide",
@@ -59,7 +87,7 @@ const searchableContent: SearchResult[] = [
   {
     title: "Machine Learning Blog",
     description:
-      "Articles and insights about machine learning, AI research, and data science.",
+      "Articles and insights about machine learning, AI research, and data science methodologies.",
     url: "/blog/machine-learning",
     type: "blog",
     category: "Machine Learning",
@@ -68,7 +96,7 @@ const searchableContent: SearchResult[] = [
   {
     title: "Paper Reading Notes",
     description:
-      "Summaries and insights from reading research papers in AI and machine learning.",
+      "Summaries and insights from reading research papers in AI and machine learning with critical analysis.",
     url: "/blog/paper-reading",
     type: "blog",
     category: "Research",
@@ -77,7 +105,7 @@ const searchableContent: SearchResult[] = [
   {
     title: "Cryptocurrency & Blockchain",
     description:
-      "Exploring blockchain technology, DeFi, and cryptocurrency development.",
+      "Exploring blockchain technology, DeFi protocols, and cryptocurrency development with smart contracts.",
     url: "/blog/crypto",
     type: "blog",
     category: "Blockchain",
@@ -86,7 +114,7 @@ const searchableContent: SearchResult[] = [
   {
     title: "Development Notes",
     description:
-      "Quick notes, tips, and tricks for software development and programming.",
+      "Quick notes, tips, and tricks for software development and programming best practices.",
     url: "/blog/notes",
     type: "blog",
     category: "Development",
@@ -97,8 +125,6 @@ const searchableContent: SearchResult[] = [
 const typeConfig = {
   blog: {
     label: "Blog Post",
-    color: "text-blue-600 dark:text-blue-400",
-    bgColor: "bg-blue-50 dark:bg-blue-950/30",
     icon: (
       <svg
         className="w-4 h-4"
@@ -117,8 +143,6 @@ const typeConfig = {
   },
   project: {
     label: "Project",
-    color: "text-emerald-600 dark:text-emerald-400",
-    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
     icon: (
       <svg
         className="w-4 h-4"
@@ -137,8 +161,6 @@ const typeConfig = {
   },
   page: {
     label: "Page",
-    color: "text-purple-600 dark:text-purple-400",
-    bgColor: "bg-purple-50 dark:bg-purple-950/30",
     icon: (
       <svg
         className="w-4 h-4"
@@ -157,24 +179,64 @@ const typeConfig = {
   },
 };
 
+// Enhanced search algorithm with relevance scoring
+const calculateRelevance = (item: SearchResult, query: string): number => {
+  const lowercaseQuery = query.toLowerCase();
+  let score = 0;
+
+  // Title match (highest weight)
+  if (item.title.toLowerCase().includes(lowercaseQuery)) {
+    score += 100;
+    // Exact title match bonus
+    if (item.title.toLowerCase() === lowercaseQuery) score += 50;
+    // Title starts with query bonus
+    if (item.title.toLowerCase().startsWith(lowercaseQuery)) score += 25;
+  }
+
+  // Category match (high weight)
+  if (item.category?.toLowerCase().includes(lowercaseQuery)) {
+    score += 75;
+  }
+
+  // Tags match (medium weight)
+  item.tags?.forEach((tag) => {
+    if (tag.toLowerCase().includes(lowercaseQuery)) {
+      score += 50;
+      // Exact tag match bonus
+      if (tag.toLowerCase() === lowercaseQuery) score += 25;
+    }
+  });
+
+  // Description match (lower weight)
+  if (item.description.toLowerCase().includes(lowercaseQuery)) {
+    score += 25;
+  }
+
+  // Type-based bonus
+  if (item.type === "blog") score += 5; // Slight preference for blog content
+
+  return score;
+};
+
 export default function SearchComponent() {
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") || "");
   const [selectedFilter, setSelectedFilter] = useState<string>("all");
   const [isSearching, setIsSearching] = useState(false);
 
-  // Perform search
+  // Enhanced search with relevance scoring
   const searchResults = useMemo(() => {
     if (!query.trim()) return [];
 
-    const lowercaseQuery = query.toLowerCase();
-    return searchableContent.filter(
-      (item) =>
-        item.title.toLowerCase().includes(lowercaseQuery) ||
-        item.description.toLowerCase().includes(lowercaseQuery) ||
-        item.category?.toLowerCase().includes(lowercaseQuery) ||
-        item.tags?.some((tag) => tag.toLowerCase().includes(lowercaseQuery))
-    );
+    const results = searchableContent
+      .map((item) => ({
+        ...item,
+        relevanceScore: calculateRelevance(item, query),
+      }))
+      .filter((item) => item.relevanceScore > 0)
+      .sort((a, b) => (b.relevanceScore || 0) - (a.relevanceScore || 0));
+
+    return results;
   }, [query]);
 
   // Filter results by type
@@ -210,25 +272,30 @@ export default function SearchComponent() {
   };
 
   const popularSuggestions = [
-    "Next.js",
     "Machine Learning",
-    "TypeScript",
+    "Neural Networks",
+    "Computer Vision",
+    "NLP",
+    "Deep Learning",
     "AI Research",
+    "Next.js",
+    "TypeScript",
+    "Distributed Systems",
+    "Blockchain",
+    "Research Papers",
     "Open Source",
-    "Web Development",
-    "React",
-    "Python",
   ];
 
   return (
-    <div className="space-y-8">
-      {/* Search Input */}
-      <div className="max-w-3xl mx-auto">
+    <div className="space-y-12">
+      {/* Advanced Search Input */}
+      <div className="max-w-4xl mx-auto">
         <form onSubmit={handleSearch} className="relative group">
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
               <svg
-                className="w-5 h-5 text-gray-400"
+                className="w-6 h-6"
+                style={{ color: "var(--text-secondary)" }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -245,19 +312,46 @@ export default function SearchComponent() {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search for articles, projects, or topics..."
-              className="block w-full pl-12 pr-16 py-4 text-lg border border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm hover:shadow-md focus:shadow-lg"
+              placeholder="Search for research articles, technical insights, or projects..."
+              className="block w-full pl-16 pr-20 py-5 text-lg border-2 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-4 shadow-lg hover:shadow-xl focus:shadow-2xl"
+              style={{
+                backgroundColor: "var(--card-bg)",
+                borderColor: "var(--card-border)",
+                color: "var(--text-primary)",
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "var(--accent)";
+                e.currentTarget.style.boxShadow = "0 0 0 4px var(--accent)/20";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "var(--card-border)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
             />
-            <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+            <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
               {isSearching ? (
-                <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                <div
+                  className="w-8 h-8 border-3 border-t-transparent rounded-full animate-spin"
+                  style={{ borderColor: "var(--accent)" }}
+                />
               ) : (
                 <button
                   type="submit"
-                  className="p-2 text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  className="p-3 text-white rounded-xl transition-all duration-300 focus:outline-none focus:ring-4 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  style={{
+                    backgroundColor: "var(--accent)",
+                    boxShadow: "0 4px 12px var(--accent)/30",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--accent-hover)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--accent)";
+                  }}
                 >
                   <svg
-                    className="w-4 h-4"
+                    className="w-5 h-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -275,18 +369,37 @@ export default function SearchComponent() {
           </div>
         </form>
 
-        {/* Search suggestions when empty */}
+        {/* Enhanced search suggestions */}
         {!query && (
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-              Popular searches:
+          <div className="mt-8 text-center">
+            <p
+              className="text-lg mb-6 font-medium"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              🔬 Popular Research Topics:
             </p>
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-3">
               {popularSuggestions.map((suggestion) => (
                 <button
                   key={suggestion}
                   onClick={() => setQuery(suggestion)}
-                  className="px-3 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 rounded-full transition-all duration-200 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600"
+                  className="px-5 py-2.5 text-sm font-medium rounded-full transition-all duration-300 border-2 transform hover:scale-105 hover:shadow-lg"
+                  style={{
+                    backgroundColor: "var(--surface)",
+                    color: "var(--text-secondary)",
+                    borderColor: "var(--border)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--surface-accent)";
+                    e.currentTarget.style.color = "var(--accent)";
+                    e.currentTarget.style.borderColor = "var(--accent)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--surface)";
+                    e.currentTarget.style.color = "var(--text-secondary)";
+                    e.currentTarget.style.borderColor = "var(--border)";
+                  }}
                 >
                   {suggestion}
                 </button>
@@ -296,126 +409,265 @@ export default function SearchComponent() {
         )}
       </div>
 
-      {/* Results */}
+      {/* Enhanced Results Section */}
       {query && (
-        <div className="space-y-6">
-          {/* Results header and filters */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-8">
+          {/* Results header and advanced filters */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div>
               {!isSearching && (
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  {filteredResults.length === 0
-                    ? `No results found for "${query}"`
-                    : `${filteredResults.length} result${
-                        filteredResults.length === 1 ? "" : "s"
-                      } for "${query}"`}
-                </h2>
+                <div className="space-y-2">
+                  <h2
+                    className="text-2xl lg:text-3xl font-bold"
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    {filteredResults.length === 0
+                      ? `No results found`
+                      : `${filteredResults.length} result${
+                          filteredResults.length === 1 ? "" : "s"
+                        }`}
+                  </h2>
+                  <p
+                    className="text-lg"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    {filteredResults.length === 0
+                      ? `Try different keywords or browse suggested content below`
+                      : `for "${query}" • Sorted by relevance`}
+                  </p>
+                </div>
               )}
               {isSearching && (
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-                  <span className="text-gray-600 dark:text-gray-400">
-                    Searching...
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-6 h-6 border-3 border-t-transparent rounded-full animate-spin"
+                    style={{ borderColor: "var(--accent)" }}
+                  />
+                  <span
+                    className="text-lg font-medium"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    Analyzing content...
                   </span>
                 </div>
               )}
             </div>
 
-            {/* Filter buttons */}
+            {/* Enhanced filter buttons */}
             {searchResults.length > 0 && (
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 {Object.entries(filterCounts).map(([filter, count]) => (
                   <button
                     key={filter}
                     onClick={() => setSelectedFilter(filter)}
-                    className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 border ${
-                      selectedFilter === filter
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
-                    }`}
+                    className="px-5 py-3 text-sm font-semibold rounded-xl transition-all duration-300 border-2 transform hover:scale-105"
+                    style={{
+                      backgroundColor:
+                        selectedFilter === filter
+                          ? "var(--accent)"
+                          : "var(--surface)",
+                      color:
+                        selectedFilter === filter
+                          ? "white"
+                          : "var(--text-secondary)",
+                      borderColor:
+                        selectedFilter === filter
+                          ? "var(--accent)"
+                          : "var(--border)",
+                      boxShadow:
+                        selectedFilter === filter
+                          ? "0 4px 12px var(--accent)/30"
+                          : "none",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (selectedFilter !== filter) {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--surface-accent)";
+                        e.currentTarget.style.color = "var(--accent)";
+                        e.currentTarget.style.borderColor = "var(--accent)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (selectedFilter !== filter) {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--surface)";
+                        e.currentTarget.style.color = "var(--text-secondary)";
+                        e.currentTarget.style.borderColor = "var(--border)";
+                      }
+                    }}
                   >
-                    {filter === "all"
-                      ? "All"
-                      : typeConfig[filter as keyof typeof typeConfig]?.label}
-                    {count > 0 && (
-                      <span
-                        className={`ml-1.5 px-1.5 py-0.5 text-xs rounded-full ${
-                          selectedFilter === filter
-                            ? "bg-blue-500 text-white"
-                            : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
-                        }`}
-                      >
-                        {count}
+                    <div className="flex items-center gap-2">
+                      <span>
+                        {filter === "all"
+                          ? "All"
+                          : typeConfig[filter as keyof typeof typeConfig]
+                              ?.label}
                       </span>
-                    )}
+                      {count > 0 && (
+                        <span
+                          className="px-2 py-1 text-xs rounded-full font-bold"
+                          style={{
+                            backgroundColor:
+                              selectedFilter === filter
+                                ? "rgba(255,255,255,0.2)"
+                                : "var(--accent)",
+                            color:
+                              selectedFilter === filter ? "white" : "white",
+                          }}
+                        >
+                          {count}
+                        </span>
+                      )}
+                    </div>
                   </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Results grid */}
+          {/* Enhanced results grid */}
           {filteredResults.length > 0 && (
-            <div className="grid gap-4">
+            <div className="grid gap-6">
               {filteredResults.map((result, index) => {
                 const config = typeConfig[result.type];
                 return (
                   <Link
                     key={index}
                     href={result.url}
-                    className="group block p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+                    className="group block p-8 rounded-2xl border-2 transition-all duration-300 hover:scale-[1.02] transform hover:shadow-2xl"
+                    style={{
+                      backgroundColor: "var(--card-bg)",
+                      borderColor: "var(--card-border)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "var(--accent)";
+                      e.currentTarget.style.boxShadow =
+                        "0 20px 40px var(--accent)/20";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "var(--card-border)";
+                      e.currentTarget.style.boxShadow = "none";
+                    }}
                   >
                     <div className="flex items-start justify-between">
-                      <div className="flex items-start gap-4 flex-1">
+                      <div className="flex items-start gap-5 flex-1">
                         <div
-                          className={`p-2.5 rounded-lg ${config.bgColor} ${config.color} flex-shrink-0`}
+                          className="p-4 rounded-xl flex-shrink-0 transition-colors duration-300"
+                          style={{
+                            backgroundColor: "var(--surface-accent)",
+                            color: "var(--accent)",
+                          }}
                         >
                           {config.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-2">
+                          <div className="flex items-center gap-3 mb-3">
                             <span
-                              className={`text-xs font-medium px-2 py-1 rounded-full ${config.bgColor} ${config.color}`}
+                              className="text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide"
+                              style={{
+                                backgroundColor: "var(--surface-accent)",
+                                color: "var(--accent)",
+                              }}
                             >
                               {config.label}
                             </span>
                             {result.category && (
-                              <span className="text-xs text-gray-500 dark:text-gray-400">
-                                • {result.category}
-                              </span>
+                              <>
+                                <span
+                                  style={{ color: "var(--text-secondary)" }}
+                                >
+                                  •
+                                </span>
+                                <span
+                                  className="text-sm font-medium"
+                                  style={{ color: "var(--text-secondary)" }}
+                                >
+                                  {result.category}
+                                </span>
+                              </>
                             )}
+                            {result.relevanceScore &&
+                              result.relevanceScore > 100 && (
+                                <>
+                                  <span
+                                    style={{ color: "var(--text-secondary)" }}
+                                  >
+                                    •
+                                  </span>
+                                  <span
+                                    className="text-xs font-bold px-2 py-1 rounded-full"
+                                    style={{
+                                      backgroundColor: "var(--accent)",
+                                      color: "white",
+                                    }}
+                                  >
+                                    ⭐ High Match
+                                  </span>
+                                </>
+                              )}
                           </div>
-                          <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 mb-2">
+                          <h3
+                            className="text-xl lg:text-2xl font-bold mb-3 transition-colors duration-300 leading-tight"
+                            style={{ color: "var(--text-primary)" }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.color = "var(--accent)";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.color =
+                                "var(--text-primary)";
+                            }}
+                          >
                             {result.title}
                           </h3>
-                          <p className="text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed">
+                          <p
+                            className="text-base leading-relaxed mb-4"
+                            style={{ color: "var(--text-secondary)" }}
+                          >
                             {result.description}
                           </p>
                           {result.tags && (
-                            <div className="flex flex-wrap gap-1 mt-3">
-                              {result.tags.slice(0, 3).map((tag) => (
+                            <div className="flex flex-wrap gap-2 mt-4">
+                              {result.tags.slice(0, 4).map((tag) => (
                                 <span
                                   key={tag}
-                                  className="text-xs px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-md"
+                                  className="text-xs px-3 py-1.5 rounded-lg font-medium"
+                                  style={{
+                                    backgroundColor: "var(--surface)",
+                                    color: "var(--text-secondary)",
+                                  }}
                                 >
                                   {tag}
                                 </span>
                               ))}
-                              {result.tags.length > 3 && (
-                                <span className="text-xs px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-md">
-                                  +{result.tags.length - 3}
+                              {result.tags.length > 4 && (
+                                <span
+                                  className="text-xs px-3 py-1.5 rounded-lg font-medium"
+                                  style={{
+                                    backgroundColor: "var(--surface)",
+                                    color: "var(--text-secondary)",
+                                  }}
+                                >
+                                  +{result.tags.length - 4} more
                                 </span>
                               )}
                             </div>
                           )}
                         </div>
                       </div>
-                      <div className="group-hover:translate-x-1 transition-transform duration-200 flex-shrink-0 ml-4">
+                      <div className="group-hover:translate-x-2 transition-transform duration-300 flex-shrink-0 ml-6">
                         <svg
-                          className="w-5 h-5 text-gray-400 group-hover:text-blue-500"
+                          className="w-6 h-6 transition-colors duration-300"
+                          style={{ color: "var(--text-secondary)" }}
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = "var(--accent)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color =
+                              "var(--text-secondary)";
+                          }}
                         >
                           <path
                             strokeLinecap="round"
@@ -432,13 +684,17 @@ export default function SearchComponent() {
             </div>
           )}
 
-          {/* No Results State */}
+          {/* Enhanced No Results State */}
           {query && !isSearching && filteredResults.length === 0 && (
-            <div className="text-center py-12">
+            <div className="text-center py-16">
               <div className="max-w-md mx-auto">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center">
+                <div
+                  className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: "var(--surface)" }}
+                >
                   <svg
-                    className="w-8 h-8 text-gray-400"
+                    className="w-12 h-12"
+                    style={{ color: "var(--text-secondary)" }}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -447,28 +703,62 @@ export default function SearchComponent() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  No results found
+                <h3
+                  className="text-2xl font-bold mb-3"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  No Research Found
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Try different keywords or browse our content directly
+                <p
+                  className="text-lg mb-8 leading-relaxed"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  Try different keywords or explore our curated content
+                  collections below
                 </p>
-                <div className="flex justify-center gap-3">
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
                   <Link
                     href="/blog"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
+                    className="px-6 py-3 font-semibold rounded-xl transition-all duration-300 text-white transform hover:scale-105"
+                    style={{
+                      backgroundColor: "var(--accent)",
+                      boxShadow: "0 4px 12px var(--accent)/30",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor =
+                        "var(--accent-hover)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "var(--accent)";
+                    }}
                   >
-                    Browse Blog
+                    📚 Browse Research Articles
                   </Link>
                   <Link
                     href="/projects"
-                    className="px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium rounded-lg transition-colors duration-200"
+                    className="px-6 py-3 font-semibold rounded-xl transition-all duration-300 border-2 transform hover:scale-105"
+                    style={{
+                      backgroundColor: "var(--surface)",
+                      color: "var(--text-primary)",
+                      borderColor: "var(--border)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor =
+                        "var(--surface-accent)";
+                      e.currentTarget.style.color = "var(--accent)";
+                      e.currentTarget.style.borderColor = "var(--accent)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "var(--surface)";
+                      e.currentTarget.style.color = "var(--text-primary)";
+                      e.currentTarget.style.borderColor = "var(--border)";
+                    }}
                   >
-                    View Projects
+                    🚀 View Projects
                   </Link>
                 </div>
               </div>
@@ -477,50 +767,109 @@ export default function SearchComponent() {
         </div>
       )}
 
-      {/* Popular Content (when no search) */}
+      {/* Enhanced Popular Content Section */}
       {!query && (
-        <div className="space-y-6">
+        <div className="space-y-8">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              Popular Content
+            <h2
+              className="text-3xl lg:text-4xl font-bold mb-4"
+              style={{ color: "var(--text-primary)" }}
+            >
+              🔬 Research Highlights
             </h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              Discover the most popular articles and projects
+            <p
+              className="text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              Discover cutting-edge research, technical insights, and innovative
+              projects in AI, machine learning, and software development
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {searchableContent.slice(0, 6).map((item, index) => {
               const config = typeConfig[item.type];
               return (
                 <Link
                   key={index}
                   href={item.url}
-                  className="group block p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+                  className="group block p-6 rounded-2xl border-2 transition-all duration-300 hover:scale-105 transform hover:shadow-2xl"
+                  style={{
+                    backgroundColor: "var(--card-bg)",
+                    borderColor: "var(--card-border)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = "var(--accent)";
+                    e.currentTarget.style.boxShadow =
+                      "0 20px 40px var(--accent)/20";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "var(--card-border)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
                 >
-                  <div className="flex items-start gap-3 mb-3">
+                  <div className="flex items-start gap-4 mb-4">
                     <div
-                      className={`p-2 rounded-lg ${config.bgColor} ${config.color} flex-shrink-0`}
+                      className="p-3 rounded-xl flex-shrink-0"
+                      style={{
+                        backgroundColor: "var(--surface-accent)",
+                        color: "var(--accent)",
+                      }}
                     >
                       {config.icon}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div
-                        className={`text-xs font-medium px-2 py-1 rounded-full ${config.bgColor} ${config.color} inline-block mb-2`}
+                        className="text-xs font-bold px-3 py-1.5 rounded-full inline-block mb-3 uppercase tracking-wide"
+                        style={{
+                          backgroundColor: "var(--surface-accent)",
+                          color: "var(--accent)",
+                        }}
                       >
                         {config.label}
                       </div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 line-clamp-2 leading-snug">
+                      <h4
+                        className="font-bold text-lg leading-snug transition-colors duration-300"
+                        style={{ color: "var(--text-primary)" }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = "var(--accent)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = "var(--text-primary)";
+                        }}
+                      >
                         {item.title}
                       </h4>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed mb-3">
+                  <p
+                    className="text-sm leading-relaxed mb-4"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
                     {item.description}
                   </p>
                   {item.category && (
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {item.category}
-                    </span>
+                    <div className="flex items-center justify-between">
+                      <span
+                        className="text-sm font-medium"
+                        style={{ color: "var(--accent)" }}
+                      >
+                        {item.category}
+                      </span>
+                      <svg
+                        className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                        style={{ color: "var(--text-secondary)" }}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
                   )}
                 </Link>
               );
