@@ -316,16 +316,17 @@ export default function SearchComponent() {
               className="block w-full pl-16 pr-20 py-5 text-lg border-2 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-4 shadow-lg hover:shadow-xl focus:shadow-2xl"
               style={{
                 backgroundColor: "var(--card-bg)",
-                borderColor: "var(--card-border)",
+                borderColor: "var(--border)",
                 color: "var(--text-primary)",
               }}
               onFocus={(e) => {
                 e.currentTarget.style.borderColor = "var(--accent)";
-                e.currentTarget.style.boxShadow = "0 0 0 4px var(--accent)/20";
+                e.currentTarget.style.boxShadow = `0 0 0 4px var(--accent)20, 0 20px 25px -5px var(--shadow)`;
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = "var(--card-border)";
-                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "var(--border)";
+                e.currentTarget.style.boxShadow =
+                  "0 10px 15px -3px var(--shadow)";
               }}
             />
             <div className="absolute inset-y-0 right-0 pr-4 flex items-center">

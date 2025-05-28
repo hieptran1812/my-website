@@ -1,7 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Navigation from "../../components/Navigation";
-import Footer from "../../Footer";
 
 export default function ModernPortfolioNextjsArticle() {
   const structuredData = {
@@ -60,7 +58,6 @@ export default function ModernPortfolioNextjsArticle() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Navigation />
       <main className="flex-1 max-w-4xl mx-auto py-12 px-4">
         <article itemScope itemType="https://schema.org/Article">
           <header className="mb-8">
@@ -178,7 +175,6 @@ export default function ModernPortfolioNextjsArticle() {
           </div>
         </article>
       </main>
-      <Footer />
     </div>
   );
 }
