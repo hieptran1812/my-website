@@ -5,6 +5,16 @@ import Image from "next/image";
 
 const articles = [
   {
+    title: "Advanced Blog Reading Experience Demo",
+    summary:
+      "Experience our enhanced blog reader with eye-comfort mode, adjustable fonts, and interactive features.",
+    image: "/blog-placeholder.jpg",
+    date: "2025-05-29",
+    link: "/blog/sample-blog-post",
+    category: "Demo",
+    readTime: "15 min read",
+  },
+  {
     title: "How to Build a Modern Portfolio with Next.js",
     summary:
       "A step-by-step guide to creating a personal website using Next.js, TypeScript, and Tailwind CSS.",
@@ -117,8 +127,8 @@ export default function BlogPage() {
             </h1>
             <p
               className="text-xl max-w-3xl mx-auto blog-subtitle-animated"
-              style={{ 
-                color: "var(--text-secondary)"
+              style={{
+                color: "var(--text-secondary)",
               }}
             >
               Thoughts on technology, software development, AI, and everything
@@ -141,7 +151,7 @@ export default function BlogPage() {
                   style={{
                     backgroundColor: "var(--card-bg)",
                     borderColor: "var(--card-border)",
-                    animationDelay: `${0.3 + index * 0.1}s`
+                    animationDelay: `${0.3 + index * 0.1}s`,
                   }}
                 >
                   <div
@@ -149,7 +159,9 @@ export default function BlogPage() {
                   ></div>
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-2xl transform group-hover:scale-110 transition-transform duration-300">{category.icon}</span>
+                      <span className="text-2xl transform group-hover:scale-110 transition-transform duration-300">
+                        {category.icon}
+                      </span>
                       <span
                         className="text-sm font-medium px-2 py-1 rounded-full"
                         style={{
@@ -189,7 +201,7 @@ export default function BlogPage() {
               style={{
                 backgroundColor: "var(--card-bg)",
                 borderColor: "var(--card-border)",
-                animationDelay: "0.4s"
+                animationDelay: "0.4s",
               }}
             >
               <div className="md:flex">
@@ -270,7 +282,7 @@ export default function BlogPage() {
                   style={{
                     backgroundColor: "var(--card-bg)",
                     borderColor: "var(--card-border)",
-                    animationDelay: `${0.5 + idx * 0.1}s`
+                    animationDelay: `${0.5 + idx * 0.1}s`,
                   }}
                 >
                   <div className="relative overflow-hidden">
@@ -297,24 +309,27 @@ export default function BlogPage() {
                       >
                         {article.category}
                       </span>
-                      <span className="text-xs" style={{ color: "var(--text-muted)" }}>
+                      <span
+                        className="text-xs"
+                        style={{ color: "var(--text-muted)" }}
+                      >
                         {article.readTime}
                       </span>
                     </div>
-                    <h3 
+                    <h3
                       className="text-lg font-semibold mb-3 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors duration-300"
                       style={{ color: "var(--text-primary)" }}
                     >
                       {article.title}
                     </h3>
-                    <p 
+                    <p
                       className="text-sm mb-4 leading-relaxed"
                       style={{ color: "var(--text-secondary)" }}
                     >
                       {article.summary}
                     </p>
                     <div className="flex items-center justify-between">
-                      <span 
+                      <span
                         className="text-xs"
                         style={{ color: "var(--text-muted)" }}
                       >
@@ -324,7 +339,7 @@ export default function BlogPage() {
                           day: "numeric",
                         })}
                       </span>
-                      <span 
+                      <span
                         className="text-sm font-medium group-hover:text-blue-500 transition-all duration-300 group-hover:translate-x-1"
                         style={{ color: "var(--accent)" }}
                       >
@@ -338,12 +353,12 @@ export default function BlogPage() {
           </div>
 
           {/* Newsletter CTA */}
-          <div 
+          <div
             className="mt-16 p-8 rounded-xl border blog-content-stagger relative overflow-hidden"
             style={{
               backgroundColor: "var(--card-bg)",
               borderColor: "var(--card-border)",
-              animationDelay: "0.8s"
+              animationDelay: "0.8s",
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-cyan-500/5"></div>
@@ -351,7 +366,7 @@ export default function BlogPage() {
               <h3 className="text-2xl font-bold gradient-text-cyan mb-4">
                 Stay Updated
               </h3>
-              <p 
+              <p
                 className="mb-6 max-w-2xl mx-auto"
                 style={{ color: "var(--text-secondary)" }}
               >
@@ -366,17 +381,18 @@ export default function BlogPage() {
                   style={{
                     backgroundColor: "var(--surface)",
                     borderColor: "var(--border)",
-                    color: "var(--text-primary)"
+                    color: "var(--text-primary)",
                   }}
                 />
-                <button 
+                <button
                   className="px-6 py-3 font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg relative overflow-hidden group"
                   style={{
                     backgroundColor: "var(--accent)",
-                    color: "white"
+                    color: "white",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--accent-hover)";
+                    e.currentTarget.style.backgroundColor =
+                      "var(--accent-hover)";
                     e.currentTarget.style.transform = "scale(1.05)";
                   }}
                   onMouseLeave={(e) => {
