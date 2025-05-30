@@ -1,10 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BlogPostMetadata } from "../lib/blog";
 
-const articles = [
+interface Article {
+  title: string;
+  summary: string;
+  link: string;
+  image: string;
+  date: string;
+  tags: string[];
+  external?: boolean;
+}
+
+// Legacy hardcoded articles for external links
+const legacyArticles: Article[] = [
   {
     title:
       "Fine-tuning Llama 3.2 (1B, 3B) and Using It Locally with Llama Assistant 🌟",
@@ -24,6 +36,7 @@ const articles = [
     image: "/blog-placeholder.jpg",
     date: "September 29, 2024",
     tags: ["LLM", "Llama Assistant", "Llama"],
+    external: true,
   },
   {
     title: "Performant Django - How to optimize your Django application?",
@@ -33,6 +46,7 @@ const articles = [
     image: "/blog-placeholder.jpg",
     date: "September 19, 2023",
     tags: ["Backend", "Django"],
+    external: true,
   },
   {
     title: "Review YOLO-NAS - Search for a better YOLO",
@@ -42,9 +56,77 @@ const articles = [
     image: "/blog-placeholder.jpg",
     date: "May 8, 2023",
     tags: ["Object Detection", "YOLO", "Computer Vision"],
+    external: true,
   },
 ];
 export default function BlogSection() {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchArticles() {
+      try {
+        // Fetch markdown blog posts
+        const response = await fetch("/api/blog");
+        const blogPosts: BlogPostMetadata[] = await response.json();
+
+        // Convert blog posts to Article format
+        const markdownArticles: Article[] = blogPosts
+          .slice(0, 3)
+          .map((post) => ({
+            title: post.title,
+            summary: post.excerpt,
+            link: `/blog/${post.slug}`,
+            image: post.image,
+            date: new Date(post.publishDate).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            }),
+            tags: post.tags,
+            external: false,
+          }));
+
+        // Combine with legacy articles and take first 4
+        const combinedArticles = [...markdownArticles, ...legacyArticles].slice(
+          0,
+          4
+        );
+        setArticles(combinedArticles);
+      } catch (error) {
+        console.error("Failed to fetch blog posts:", error);
+        // Fallback to legacy articles only
+        setArticles(legacyArticles.slice(0, 4));
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchArticles();
+  }, []);
+
+  if (loading) {
+    return (
+      <section
+        className="py-16 md:py-24 transition-colors duration-300"
+        style={{ backgroundColor: "var(--surface)" }}
+      >
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="text-center mb-12">
+            <h3 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 transition-colors duration-300 relative">
+              <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
+                Latest Articles
+              </span>
+            </h3>
+            <div className="flex justify-center items-center mt-6">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       className="py-16 md:py-24 transition-colors duration-300"
@@ -93,7 +175,7 @@ export default function BlogSection() {
           </Link>
         </div>
         <div className="grid md:grid-cols-2 gap-6">
-          {articles.map((article, idx) => (
+          {articles.map((article: Article, idx: number) => (
             <Link
               href={article.link}
               key={idx}
@@ -142,7 +224,7 @@ export default function BlogSection() {
                   {article.summary}
                 </p>
                 <div className="flex flex-wrap gap-1.5 mt-auto">
-                  {article.tags?.map((tag) => (
+                  {article.tags?.map((tag: string) => (
                     <span
                       key={tag}
                       className="text-xs px-2 py-1 rounded-full transition-colors duration-300"
