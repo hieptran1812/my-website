@@ -1213,23 +1213,23 @@ a:focus {
   width: 100%;
   margin-bottom: 1rem;
   border-collapse: collapse;
-  border: 1px solid var(--reading-border, var(--border));
+  border: 1px solid var(--reading-border, var, --border);
 }
 
 .blog-content th,
 .blog-content td {
   padding: 0.5rem 1rem;
-  border: 1px solid var(--reading-border, var(--border));
+  border: 1px solid var(--reading-border, var, --border);
 }
 
 .blog-content th {
   font-weight: 600;
-  background-color: var(--reading-surface, var(--surface));
-  color: var(--reading-text-color, var(--text-primary));
+  background-color: var(--reading-surface, var, --surface);
+  color: var(--reading-text-color, var, --text-primary);
 }
 
 .blog-content td {
-  color: var(--reading-text-color, var(--text-primary));
+  color: var(--reading-text-color, var, --text-primary);
 }
 
 .blog-content hr {
@@ -1239,7 +1239,7 @@ a:focus {
   background: linear-gradient(
     to right,
     transparent,
-    var(--reading-border, var(--border)),
+    var(--reading-border, var, --border),
     transparent
   );
 }
@@ -1249,8 +1249,8 @@ a:focus {
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  border-left: 4px solid var(--reading-accent, var(--accent));
-  background-color: var(--reading-surface, var(--surface));
+  border-left: 4px solid var(--reading-accent, var, --accent);
+  background-color: var(--reading-surface, var, --surface);
 }
 
 .blog-content .callout-info {
@@ -1282,7 +1282,7 @@ a:focus {
   font-size: 0.75rem;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
-  background-color: var(--reading-accent, var(--accent));
+  background-color: var(--reading-accent, var, --accent);
   color: white;
   opacity: 0.8;
 }
@@ -1314,4 +1314,89 @@ a:focus {
   .blog-content td {
     padding: 0.25rem 0.5rem;
   }
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Custom scrollbar for TOC */
+.toc-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.toc-scrollbar::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: 2px;
+}
+
+.toc-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: 2px;
+}
+
+.toc-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* TOC smooth positioning transitions */
+.toc-position-transition {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toc-position-transition.toc-center {
+  transform: translateY(-50%);
+}
+
+.toc-position-transition.toc-top {
+  transform: translateY(0);
+}
+
+/* Enhanced TOC animations */
+@keyframes toc-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toc-slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+.toc-enter {
+  animation: toc-slide-in 0.3s ease-out;
+}
+
+.toc-exit {
+  animation: toc-slide-out 0.3s ease-in;
 }

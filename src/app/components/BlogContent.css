@@ -241,3 +241,180 @@
     border: 1px solid #ddd !important;
   }
 }
+
+/* TOC Smooth Movement Styles */
+.toc-container {
+  will-change: transform;
+  transform-origin: center top;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toc-container.center-position {
+  animation: slideToCenter 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.toc-container.top-position {
+  animation: slideToTop 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideToCenter {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes slideToTop {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Smooth scrolling for the page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced TOC scrollbar */
+.toc-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.toc-scrollbar::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: 2px;
+}
+
+.toc-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+.toc-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* KaTeX Math Rendering Styles */
+.math-renderer {
+  font-family: "KaTeX_Main", "CMU Serif", "Times New Roman", serif;
+}
+
+.display-math {
+  display: block;
+  text-align: center;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.inline-math {
+  display: inline;
+  vertical-align: baseline;
+}
+
+/* KaTeX theme integration */
+.blog-content .katex {
+  color: var(--reading-text-color);
+}
+
+.blog-content .katex .mord {
+  color: var(--reading-text-color);
+}
+
+.blog-content .katex .mrel,
+.blog-content .katex .mbin,
+.blog-content .katex .mop {
+  color: var(--reading-accent);
+}
+
+.blog-content .katex .delimsizing,
+.blog-content .katex .delim-size1,
+.blog-content .katex .delim-size2,
+.blog-content .katex .delim-size3,
+.blog-content .katex .delim-size4 {
+  color: var(--reading-text-secondary);
+}
+
+/* Math Expression Styles */
+.math-expression {
+  color: var(--reading-text-color);
+  font-family: "Computer Modern", "KaTeX_Main", serif;
+}
+
+.math-expression.display-math {
+  text-align: center;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--reading-surface);
+  border-radius: 8px;
+  border: 1px solid var(--reading-border);
+  overflow-x: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.math-expression.inline {
+  vertical-align: baseline;
+  padding: 0.1rem 0.2rem;
+  background: rgba(var(--accent-rgb), 0.1);
+  border-radius: 3px;
+  font-size: 1em;
+}
+
+.math-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: "Courier New", monospace;
+  font-size: 0.875em;
+}
+
+/* Dark mode adjustments for math */
+[data-theme="dark"] .math-expression.display-math {
+  background: rgba(var(--accent-rgb), 0.05);
+  border-color: rgba(var(--accent-rgb), 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .math-expression.inline {
+  background: rgba(var(--accent-rgb), 0.15);
+}
+
+[data-theme="dark"] .math-error {
+  background: #7f1d1d;
+  border-color: #dc2626;
+  color: #fca5a5;
+}
+
+/* KaTeX overrides for better integration */
+.katex-display {
+  margin: 0 !important;
+}
+
+.katex {
+  font-size: 1em !important;
+}
+
+.math-expression .katex .base {
+  color: inherit;
+}
+
+/* Responsive math expressions */
+@media (max-width: 768px) {
+  .math-expression.display-math {
+    padding: 0.75rem;
+    margin: 1rem 0;
+    font-size: 0.9em;
+  }
+
+  .math-expression.inline {
+    font-size: 0.95em;
+  }
+}

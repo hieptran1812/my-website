@@ -1,16 +1,27 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "../ThemeProvider";
+import "katex/dist/katex.min.css";
+import MathJax from "./MathJax";
+import "./BlogContent.css";
+
+interface TocItem {
+  id: string;
+  title: string;
+  level: number;
+  element: HTMLElement;
+}
 
 interface BlogReaderProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   title: string;
   publishDate: string;
   readTime?: string;
   tags?: string[];
   category?: string;
   author?: string;
+  dangerouslySetInnerHTML?: { __html: string };
 }
 
 export default function BlogReader({
@@ -21,11 +32,18 @@ export default function BlogReader({
   tags = [],
   category = "Article",
   author = "Hiep Tran",
+  dangerouslySetInnerHTML,
 }: BlogReaderProps) {
   const [isReadingMode, setIsReadingMode] = useState(false);
   const [fontSize, setFontSize] = useState(16);
   const [lineHeight, setLineHeight] = useState(1.6);
+  const [tocItems, setTocItems] = useState<TocItem[]>([]);
+  const [activeSection, setActiveSection] = useState<string>("");
+  const [showToc, setShowToc] = useState(true);
+  const [tocPosition, setTocPosition] = useState<"center" | "top">("center");
   const { theme } = useTheme();
+  const contentRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Save reading preferences to localStorage
   useEffect(() => {
@@ -57,6 +75,165 @@ export default function BlogReader({
     setLineHeight(Math.max(1.2, Math.min(2.0, newHeight)));
   };
 
+  // Extract headings and create TOC
+  const generateToc = useCallback(() => {
+    if (!contentRef.current) return;
+
+    const headings = contentRef.current.querySelectorAll(
+      "h1, h2, h3, h4, h5, h6"
+    );
+    const items: TocItem[] = [];
+
+    headings.forEach((heading, index) => {
+      const level = parseInt(heading.tagName.charAt(1));
+      let id = heading.id;
+
+      // Generate ID if not present
+      if (!id) {
+        id = `heading-${index}-${
+          heading.textContent
+            ?.toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/(^-|-$)/g, "") || ""
+        }`;
+        heading.id = id;
+      }
+
+      items.push({
+        id,
+        title: heading.textContent || "",
+        level,
+        element: heading as HTMLElement,
+      });
+    });
+
+    setTocItems(items);
+
+    // Set up intersection observer for active section highlighting
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: "-100px 0px -66%",
+        threshold: 0,
+      }
+    );
+
+    headings.forEach((heading) => {
+      observerRef.current?.observe(heading);
+    });
+  }, []);
+
+  // Smooth scroll to section
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -100; // Account for fixed header
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
+  // Generate TOC after content is rendered
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      generateToc();
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [generateToc]);
+
+  // Handle scroll to prevent TOC from overlapping footer with smooth animations
+  useEffect(() => {
+    let animationFrame: number;
+
+    const handleScroll = () => {
+      const footer = document.querySelector("footer");
+      if (!footer) return;
+
+      const footerRect = footer.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const currentScrollY = window.scrollY;
+
+      // TOC dimensions and positioning calculations
+      const tocHeight = 500; // Approximate TOC height in pixels
+      const safetyMargin = 100; // Safety margin to prevent overlap
+      const tocCenterPosition = viewportHeight / 2;
+      const tocBottomWhenCentered = tocCenterPosition + tocHeight / 2;
+
+      // Calculate footer visibility and potential overlap
+      const footerTopFromViewport = footerRect.top;
+      const footerIsVisible = footerTopFromViewport < viewportHeight;
+      const footerWouldOverlap =
+        footerIsVisible &&
+        footerTopFromViewport < tocBottomWhenCentered + safetyMargin;
+
+      // Calculate document proximity to bottom
+      const documentHeight = document.documentElement.scrollHeight;
+      const distanceFromBottom =
+        documentHeight - (currentScrollY + viewportHeight);
+      const nearBottomThreshold = 300; // Switch when within 300px of bottom
+
+      // Determine TOC position with hysteresis to prevent flickering
+      const shouldSwitchToTop =
+        footerWouldOverlap || distanceFromBottom <= nearBottomThreshold;
+
+      // Only update if position actually needs to change
+      setTocPosition((prev) => {
+        if (prev === "center" && shouldSwitchToTop) {
+          return "top";
+        } else if (
+          prev === "top" &&
+          !shouldSwitchToTop &&
+          distanceFromBottom > nearBottomThreshold + 50
+        ) {
+          // Add small buffer to prevent flickering when scrolling back up
+          return "center";
+        }
+        return prev;
+      });
+    };
+
+    // Use requestAnimationFrame for smoother scroll handling
+    const throttledHandleScroll = () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+      animationFrame = requestAnimationFrame(handleScroll);
+    };
+
+    // Attach event listeners
+    window.addEventListener("scroll", throttledHandleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+
+    // Initial check
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", throttledHandleScroll);
+      window.removeEventListener("resize", handleScroll);
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen transition-all duration-300">
       {/* Reading Mode Overlay */}
@@ -72,6 +249,253 @@ export default function BlogReader({
             : "transparent",
         }}
       />
+
+      {/* Table of Contents - Fixed Left Sidebar */}
+      {tocItems.length > 0 && (
+        <div
+          className={`fixed left-4 z-40 hidden xl:block max-w-xs transition-all duration-700 ease-out ${
+            tocPosition === "center"
+              ? "top-1/2 -translate-y-1/2"
+              : "top-24 translate-y-0"
+          }`}
+        >
+          <div
+            className={`p-4 rounded-xl shadow-lg border backdrop-blur-md transition-all duration-300 max-h-[70vh] overflow-y-auto toc-scrollbar ${
+              showToc
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 -translate-x-full"
+            }`}
+            style={{
+              backgroundColor: "var(--background)/95",
+              borderColor: "var(--border)",
+            }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3
+                className="text-sm font-semibold"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Table of Contents
+              </h3>
+              <button
+                onClick={() => setShowToc(!showToc)}
+                className="p-1 rounded transition-colors duration-200"
+                style={{
+                  color: "var(--text-secondary)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    "var(--surface-accent)";
+                  e.currentTarget.style.color = "var(--accent)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.color = "var(--text-secondary)";
+                }}
+                aria-label="Toggle table of contents"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <nav className="space-y-1">
+              {tocItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`block w-full text-left py-2 px-3 rounded text-sm transition-all duration-200 hover:scale-105 ${
+                    activeSection === item.id ? "font-medium" : "font-normal"
+                  }`}
+                  style={{
+                    paddingLeft: `${12 + (item.level - 1) * 12}px`,
+                    backgroundColor:
+                      activeSection === item.id
+                        ? "var(--surface-accent)"
+                        : "transparent",
+                    color:
+                      activeSection === item.id
+                        ? "var(--accent)"
+                        : "var(--text-secondary)",
+                    borderLeft:
+                      activeSection === item.id
+                        ? `2px solid var(--accent)`
+                        : `2px solid transparent`,
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeSection !== item.id) {
+                      e.currentTarget.style.backgroundColor = "var(--surface)";
+                      e.currentTarget.style.color = "var(--text-primary)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeSection !== item.id) {
+                      e.currentTarget.style.backgroundColor = "transparent";
+                      e.currentTarget.style.color = "var(--text-secondary)";
+                    }
+                  }}
+                  title={item.title}
+                >
+                  <span className="line-clamp-2 leading-tight">
+                    {item.title}
+                  </span>
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
+
+      {/* TOC Toggle Button - Mobile & Tablet */}
+      {tocItems.length > 0 && (
+        <div className="fixed left-4 top-1/2 -translate-y-1/2 z-40 xl:hidden">
+          <button
+            onClick={() => setShowToc(!showToc)}
+            className="w-10 h-10 rounded-full shadow-lg border transition-all duration-300"
+            style={{
+              backgroundColor: "var(--background)",
+              borderColor: "var(--border)",
+              color: "var(--text-secondary)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "var(--surface-accent)";
+              e.currentTarget.style.color = "var(--accent)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "var(--background)";
+              e.currentTarget.style.color = "var(--text-secondary)";
+            }}
+            aria-label="Toggle table of contents"
+          >
+            <svg
+              className="w-5 h-5 mx-auto"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {/* Mobile TOC Overlay */}
+      {tocItems.length > 0 && showToc && (
+        <div className="fixed inset-0 z-50 xl:hidden">
+          <div
+            className="absolute inset-0 bg-black/50"
+            onClick={() => setShowToc(false)}
+          />
+          <div
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-80 max-w-[calc(100vw-2rem)] p-4 rounded-xl shadow-xl border backdrop-blur-md max-h-[70vh] overflow-y-auto toc-scrollbar"
+            style={{
+              backgroundColor: "var(--background)",
+              borderColor: "var(--border)",
+            }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3
+                className="text-sm font-semibold"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Table of Contents
+              </h3>
+              <button
+                onClick={() => setShowToc(false)}
+                className="p-1 rounded transition-colors duration-200"
+                style={{
+                  color: "var(--text-secondary)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    "var(--surface-accent)";
+                  e.currentTarget.style.color = "var(--accent)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.color = "var(--text-secondary)";
+                }}
+                aria-label="Close table of contents"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <nav className="space-y-1">
+              {tocItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    scrollToSection(item.id);
+                    setShowToc(false);
+                  }}
+                  className={`block w-full text-left py-2 px-3 rounded text-sm transition-all duration-200 ${
+                    activeSection === item.id ? "font-medium" : "font-normal"
+                  }`}
+                  style={{
+                    paddingLeft: `${12 + (item.level - 1) * 12}px`,
+                    backgroundColor:
+                      activeSection === item.id
+                        ? "var(--surface-accent)"
+                        : "transparent",
+                    color:
+                      activeSection === item.id
+                        ? "var(--accent)"
+                        : "var(--text-secondary)",
+                    borderLeft:
+                      activeSection === item.id
+                        ? `2px solid var(--accent)`
+                        : `2px solid transparent`,
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeSection !== item.id) {
+                      e.currentTarget.style.backgroundColor = "var(--surface)";
+                      e.currentTarget.style.color = "var(--text-primary)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeSection !== item.id) {
+                      e.currentTarget.style.backgroundColor = "transparent";
+                      e.currentTarget.style.color = "var(--text-secondary)";
+                    }
+                  }}
+                  title={item.title}
+                >
+                  <span className="leading-tight">{item.title}</span>
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
 
       {/* Reading Controls - Fixed Position */}
       <div className="fixed top-20 right-4 z-50 hidden lg:block">
@@ -271,9 +695,88 @@ export default function BlogReader({
         </div>
       </div>
 
+      {/* Table of Contents - Mobile */}
+      <div className="lg:hidden fixed top-20 right-4 z-50">
+        <button
+          onClick={() => setShowToc(!showToc)}
+          className="p-2 rounded-full shadow-md transition-all duration-300"
+          style={{
+            backgroundColor: "var(--surface)",
+            color: "var(--text-secondary)",
+            border: "1px solid var(--border)",
+          }}
+          aria-label="Toggle table of contents"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
+
+        {showToc && tocItems.length > 0 && (
+          <div
+            className="mt-2 p-4 rounded-xl shadow-lg border backdrop-blur-md"
+            style={{
+              backgroundColor: "var(--background)/95",
+              borderColor: "var(--border)",
+            }}
+          >
+            <h3
+              className="text-sm font-semibold mb-3"
+              style={{ color: "var(--text-primary)" }}
+            >
+              Table of Contents
+            </h3>
+            <div className="flex flex-col gap-2">
+              {tocItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`text-left w-full rounded-lg px-3 py-2 transition-all duration-200 flex items-center gap-2 ${
+                    activeSection === item.id
+                      ? "bg-amber-100 dark:bg-amber-800"
+                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  }`}
+                  style={{
+                    color:
+                      activeSection === item.id
+                        ? "var(--accent)"
+                        : "var(--text-primary)",
+                    fontWeight: activeSection === item.id ? "500" : "400",
+                  }}
+                  aria-label={`Go to section ${item.title}`}
+                >
+                  <span
+                    className="block w-1.5 h-1.5 rounded-full"
+                    style={{
+                      backgroundColor:
+                        activeSection === item.id
+                          ? "var(--accent)"
+                          : "transparent",
+                    }}
+                  />
+                  <span className="text-sm" style={{}}>
+                    {item.title}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* Main Content */}
       <div className="relative z-10">
-        <div className="max-w-4xl mx-auto px-6 py-8">
+        <div className="max-w-4xl mx-auto px-6 py-8 xl:px-12" ref={contentRef}>
           {/* Article Header */}
           <header className="mb-8">
             <h1
@@ -452,7 +955,7 @@ export default function BlogReader({
                 : "var(--text-primary)",
             }}
           >
-            <div
+            <MathJax
               className="blog-content"
               style={
                 {
@@ -484,8 +987,12 @@ export default function BlogReader({
                 } as React.CSSProperties
               }
             >
-              {children}
-            </div>
+              {dangerouslySetInnerHTML ? (
+                <div dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
+              ) : (
+                children
+              )}
+            </MathJax>
           </article>
         </div>
       </div>
