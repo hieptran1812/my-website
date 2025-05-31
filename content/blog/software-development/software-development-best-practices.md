@@ -1,14 +1,12 @@
 ---
 title: Understanding Software Development Best Practices
-publishDate: "2024-01-10"
+date: "2024-01-10"
 readTime: 12 min read
-category: software-development
+category: "Software Development"
+subcategory: "Coding Practices"
 author: Hiep Tran
-tags:
-  - Software Development
-  - Best Practices
-  - Clean Code
-  - Architecture
+featured: true
+tags: ["Software Development", "Best Practices", "Code Quality"]
 image: /blog-placeholder.jpg
 excerpt: >-
   Explore essential software development practices that lead to maintainable,

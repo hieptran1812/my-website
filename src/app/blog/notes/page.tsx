@@ -29,24 +29,34 @@ export default function NotesBlogPage() {
   const categories = [
     { name: "All", slug: "all", count: allArticles.length },
     {
-      name: "Frontend",
-      slug: "Frontend",
-      count: allArticles.filter((a) => a.subcategory === "Frontend").length,
+      name: "Book Summaries",
+      slug: "Book Summaries",
+      count: allArticles.filter((a) => a.subcategory === "Book Summaries")
+        .length,
     },
     {
-      name: "Development",
-      slug: "Development",
-      count: allArticles.filter((a) => a.subcategory === "Development").length,
+      name: "Concept Exploration",
+      slug: "Concept Exploration",
+      count: allArticles.filter((a) => a.subcategory === "Concept Exploration")
+        .length,
     },
     {
-      name: "DevOps",
-      slug: "DevOps",
-      count: allArticles.filter((a) => a.subcategory === "DevOps").length,
+      name: "Observation Journal",
+      slug: "Observation Journal",
+      count: allArticles.filter((a) => a.subcategory === "Observation Journal")
+        .length,
     },
     {
-      name: "Backend",
-      slug: "Backend",
-      count: allArticles.filter((a) => a.subcategory === "Backend").length,
+      name: "Self-reflection Entries",
+      slug: "Self-reflection Entries",
+      count: allArticles.filter(
+        (a) => a.subcategory === "Self-reflection Entries"
+      ).length,
+    },
+    {
+      name: "Idea Dump",
+      slug: "Idea Dump",
+      count: allArticles.filter((a) => a.subcategory === "Idea Dump").length,
     },
   ];
 
@@ -132,17 +142,18 @@ export default function NotesBlogPage() {
               className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
               style={{ color: "var(--text-secondary)" }}
             >
-              Personal notes, quick references, and learning materials for
-              software development, best practices, and technical concepts.
+              Personal notes, book summaries, concept explorations,
+              observations, self-reflections, and idea dumps for continuous
+              learning and growth.
             </p>
             <div className="flex flex-wrap justify-center gap-2">
               {[
-                "Quick Reference",
-                "Best Practices",
-                "Tutorials",
-                "Cheatsheets",
+                "Book Summaries",
+                "Concept Exploration",
+                "Observation Journal",
+                "Self-reflection",
+                "Idea Dump",
                 "Learning",
-                "Notes",
               ].map((tag) => (
                 <span
                   key={tag}
@@ -395,22 +406,26 @@ export default function NotesBlogPage() {
               Notes Topics
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-              {["Frontend", "Development", "DevOps", "Backend", "Learning"].map(
-                (topic) => (
-                  <button
-                    key={topic}
-                    onClick={() => setSelectedCategory(topic)}
-                    className="p-4 rounded-lg border transition-all duration-200 hover:shadow-md hover:scale-105 text-center"
-                    style={{
-                      backgroundColor: "var(--surface)",
-                      borderColor: "var(--border)",
-                      color: "var(--text-primary)",
-                    }}
-                  >
-                    <div className="font-medium text-sm">{topic}</div>
-                  </button>
-                )
-              )}
+              {[
+                "Book Summaries",
+                "Concept Exploration",
+                "Observation Journal",
+                "Self-reflection Entries",
+                "Idea Dump",
+              ].map((topic) => (
+                <button
+                  key={topic}
+                  onClick={() => setSelectedCategory(topic)}
+                  className="p-4 rounded-lg border transition-all duration-200 hover:shadow-md hover:scale-105 text-center"
+                  style={{
+                    backgroundColor: "var(--surface)",
+                    borderColor: "var(--border)",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  <div className="font-medium text-sm">{topic}</div>
+                </button>
+              ))}
             </div>
 
             {/* Results Summary */}

@@ -31,15 +31,10 @@ export default function SoftwareDevelopmentBlogPage() {
   const categories = [
     { name: "All", slug: "all", count: allArticles.length },
     {
-      name: "Best Practices",
-      slug: "Best Practices",
-      count: allArticles.filter((a) => a.subcategory === "Best Practices")
+      name: "Coding Practices",
+      slug: "Coding Practices",
+      count: allArticles.filter((a) => a.subcategory === "Coding Practices")
         .length,
-    },
-    {
-      name: "Architecture",
-      slug: "Architecture",
-      count: allArticles.filter((a) => a.subcategory === "Architecture").length,
     },
     {
       name: "System Design",
@@ -48,9 +43,33 @@ export default function SoftwareDevelopmentBlogPage() {
         .length,
     },
     {
-      name: "DevOps",
-      slug: "DevOps",
-      count: allArticles.filter((a) => a.subcategory === "DevOps").length,
+      name: "Site Reliability Engineering",
+      slug: "Site Reliability Engineering",
+      count: allArticles.filter(
+        (a) => a.subcategory === "Site Reliability Engineering"
+      ).length,
+    },
+    {
+      name: "Database",
+      slug: "Database",
+      count: allArticles.filter((a) => a.subcategory === "Database").length,
+    },
+    {
+      name: "Data Engineering",
+      slug: "Data Engineering",
+      count: allArticles.filter((a) => a.subcategory === "Data Engineering")
+        .length,
+    },
+    {
+      name: "Distributed Systems",
+      slug: "Distributed Systems",
+      count: allArticles.filter((a) => a.subcategory === "Distributed Systems")
+        .length,
+    },
+    {
+      name: "Algorithms",
+      slug: "Algorithms",
+      count: allArticles.filter((a) => a.subcategory === "Algorithms").length,
     },
   ];
 
@@ -136,18 +155,18 @@ export default function SoftwareDevelopmentBlogPage() {
               className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
               style={{ color: "var(--text-secondary)" }}
             >
-              Comprehensive guides on software engineering practices, system
-              design, architecture patterns, and development methodologies for
-              building robust applications.
+              In-depth articles on software engineering practices, system
+              design, algorithms, databases, and distributed systems for
+              building scalable and reliable applications.
             </p>
             <div className="flex flex-wrap justify-center gap-2">
               {[
                 "System Design",
-                "Architecture",
-                "Best Practices",
-                "DevOps",
-                "Microservices",
-                "Scalability",
+                "Algorithms",
+                "Database",
+                "SRE",
+                "Distributed Systems",
+                "Data Engineering",
               ].map((tag) => (
                 <span
                   key={tag}
@@ -399,13 +418,15 @@ export default function SoftwareDevelopmentBlogPage() {
             >
               Development Topics
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {[
-                "Best Practices",
-                "Architecture",
+                "Coding Practices",
                 "System Design",
-                "DevOps",
-                "Scalability",
+                "Site Reliability Engineering",
+                "Database",
+                "Data Engineering",
+                "Distributed Systems",
+                "Algorithms",
               ].map((topic) => (
                 <button
                   key={topic}

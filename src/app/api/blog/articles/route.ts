@@ -31,9 +31,11 @@ function convertToArticle(metadata: any, slug: string): Article {
     else if (readTimeNum >= 5) difficulty = "Intermediate";
   }
 
-  // Extract subcategory from tags or use a default based on category
-  let subcategory = "General";
-  if (metadata.tags && metadata.tags.length > 0) {
+  // Use explicit subcategory from metadata if available, otherwise extract from tags
+  let subcategory = metadata.subcategory || "General";
+
+  // Only auto-generate subcategory from tags if no explicit subcategory is provided
+  if (!metadata.subcategory && metadata.tags && metadata.tags.length > 0) {
     // Use the first tag as subcategory, or map common patterns
     const firstTag = metadata.tags[0];
     if (
