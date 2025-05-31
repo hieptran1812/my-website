@@ -53,19 +53,22 @@ export async function getMarkdownArticlesByCategory(
 ): Promise<Article[]> {
   try {
     // Use window.location.origin to get the full URL in browser environment
-    const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
+    const baseUrl =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const response = await fetch(
-      `${baseUrl}/api/blog/articles?category=${encodeURIComponent(
-        targetCategory
-      )}`
+      `${baseUrl}/api/blog/articles?category=${targetCategory}`
     );
+
     if (!response.ok) {
-      throw new Error(`Failed to fetch articles: ${response.statusText}`);
+      throw new Error(`Failed to fetch articles: ${response.status}`);
     }
+
     const data = await response.json();
     return data.articles || [];
   } catch (error) {
-    console.error("Error fetching markdown articles:", error);
+    console.error("Error fetching articles:", error);
     return [];
   }
 }

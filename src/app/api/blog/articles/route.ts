@@ -2,9 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { remark } from "remark";
-import remarkGfm from "remark-gfm";
-import remarkHtml from "remark-html";
 
 export interface Article {
   id: string;
@@ -22,17 +19,22 @@ export interface Article {
   slug: string;
 }
 
-function convertToArticle(metadata: any, slug: string): Article {
+function convertToArticle(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  metadata: any,
+  slug: string,
+  category?: string
+): Article {
   // Calculate difficulty based on read time
   let difficulty: "Beginner" | "Intermediate" | "Advanced" = "Beginner";
   if (metadata.readTime) {
-    const readTimeNum = parseInt(metadata.readTime.replace(/[^\d]/g, ""));
+    const readTimeNum = parseInt(metadata.readTime.replace(/[^\\d]/g, ""));
     if (readTimeNum >= 10) difficulty = "Advanced";
     else if (readTimeNum >= 5) difficulty = "Intermediate";
   }
 
   // Use explicit subcategory from metadata if available, otherwise extract from tags
-  let subcategory = metadata.subcategory || "General";
+  let subcategory = metadata.subcategory || category || "General";
 
   // Only auto-generate subcategory from tags if no explicit subcategory is provided
   if (!metadata.subcategory && metadata.tags && metadata.tags.length > 0) {
@@ -84,137 +86,80 @@ function convertToArticle(metadata: any, slug: string): Article {
   monthsAgo.setMonth(monthsAgo.getMonth() - 3);
   const featured = articleDate > monthsAgo;
 
+  // Ensure unique ID by prefixing with category if available
+  const uniqueId = category ? `${category}/${slug}` : slug;
+
   return {
-    id: slug,
+    id: uniqueId, // Use the new uniqueId
     title: metadata.title || "Untitled",
     excerpt: metadata.excerpt || metadata.description || "",
     content: metadata.content || "",
     author: metadata.author || "Hiep Tran",
     date: metadata.date || new Date().toISOString().split("T")[0],
     readTime: metadata.readTime || "5 min read",
-    category: metadata.category || "General",
+    category: metadata.category || category || "General",
     subcategory,
     tags: metadata.tags || [],
     difficulty,
     featured,
-    slug,
+    slug, // Original slug remains for URL purposes
   };
 }
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const category = searchParams.get("category");
+    const categoryFilter = searchParams.get("category");
+    const subcategoryFilter = searchParams.get("subcategory");
 
-    const blogDir = path.join(process.cwd(), "content", "blog");
-
-    if (!fs.existsSync(blogDir)) {
-      return NextResponse.json({ articles: [] });
-    }
-
+    const contentDir = path.join(process.cwd(), "content", "blog");
     const articles: Article[] = [];
 
-    // Helper function to read markdown files from a directory
-    const readMarkdownFiles = (dirPath: string, categoryOverride?: string) => {
-      if (!fs.existsSync(dirPath)) return;
+    const readArticlesFromDir = (
+      dir: string,
+      currentCategory?: string,
+      basePath = ""
+    ) => {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          const newBasePath = basePath
+            ? `${basePath}/${entry.name}`
+            : entry.name;
+          readArticlesFromDir(fullPath, entry.name, newBasePath);
+        } else if (entry.name.endsWith(".md")) {
+          const fileContent = fs.readFileSync(fullPath, "utf8");
+          const { data: metadata, content: fileMatterContent } =
+            matter(fileContent);
+          const fileName = entry.name.replace(/\.md$/, "");
+          const slug = basePath ? `${basePath}/${fileName}` : fileName;
 
-      const files = fs.readdirSync(dirPath, { withFileTypes: true });
+          const article = convertToArticle(metadata, slug, currentCategory);
+          article.content = fileMatterContent;
 
-      for (const file of files) {
-        // If it's a directory, process it recursively
-        if (file.isDirectory()) {
-          // If we're looking for a specific category and this directory matches, read its files
-          if (
-            category &&
-            file.name.toLowerCase().replace(/\s+/g, "-") ===
-              category.toLowerCase()
-          ) {
-            readMarkdownFiles(path.join(dirPath, file.name), file.name);
+          // Apply category and subcategory filters
+          if (categoryFilter && article.category !== categoryFilter) {
+            continue;
           }
-          // If we're not filtering by category, read files from all category directories
-          else if (!category) {
-            readMarkdownFiles(path.join(dirPath, file.name), file.name);
+          if (subcategoryFilter && article.subcategory !== subcategoryFilter) {
+            continue;
           }
-        }
-        // Process markdown files
-        else if (file.name.endsWith(".md")) {
-          const filePath = path.join(dirPath, file.name);
-          const fileContent = fs.readFileSync(filePath, "utf8");
-          const { data: metadata, content } = matter(fileContent);
-
-          // Generate slug in format: category/post-name
-          const slugBase = file.name.replace(".md", "");
-          const slug = categoryOverride
-            ? `${categoryOverride}/${slugBase}`
-            : slugBase;
-
-          // Use the directory name as category if it's a subdirectory
-          const effectiveCategory = categoryOverride || metadata.category;
-          const article = convertToArticle(
-            {
-              ...metadata,
-              content,
-              category: effectiveCategory,
-            },
-            slug
-          );
-
-          // Category mapping to handle different naming conventions
-          const categoryMap: { [key: string]: string[] } = {
-            "machine-learning": [
-              "Machine Learning",
-              "ML",
-              "machine-learning",
-              "machine learning",
-            ],
-            "software-development": [
-              "Software Development",
-              "Development",
-              "software-development",
-              "software development",
-            ],
-            "paper-reading": [
-              "Paper Reading",
-              "Research",
-              "paper-reading",
-              "paper reading",
-            ],
-            crypto: ["Crypto", "Cryptocurrency", "Blockchain", "crypto"],
-            notes: ["Notes", "Development Notes", "notes"],
-          };
-
-          // If category filter is provided, filter articles
-          if (category) {
-            const validCategories = categoryMap[category] || [category];
-            if (
-              validCategories.some(
-                (cat) =>
-                  article.category.toLowerCase().includes(cat.toLowerCase()) ||
-                  article.tags.some((tag) =>
-                    tag.toLowerCase().includes(cat.toLowerCase())
-                  )
-              )
-            ) {
-              articles.push(article);
-            }
-          } else {
-            articles.push(article);
-          }
+          articles.push(article);
         }
       }
     };
 
-    // Start reading from the root blog directory
-    readMarkdownFiles(blogDir);
+    readArticlesFromDir(contentDir);
 
-    // Sort by date (newest first)
+    // Sort articles by date (newest first)
     articles.sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
 
     return NextResponse.json({ articles });
   } catch (error) {
-    console.error("Error reading blog articles:", error);
-    return NextResponse.json({ articles: [] });
+    console.error("Error fetching articles:", error);
+    return NextResponse.json({ articles: [] }, { status: 500 });
   }
 }

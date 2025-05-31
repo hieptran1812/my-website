@@ -236,7 +236,7 @@ export default function BlogPage() {
                     >
                       <a
                         href={category.link}
-                        className="group relative overflow-hidden rounded-xl p-6 border transition-all duration-300 hover:scale-105 hover:shadow-lg blog-content-stagger"
+                        className="group relative overflow-hidden rounded-xl p-6 border transition-all duration-300 hover:scale-105 hover:shadow-lg blog-content-stagger flex flex-col justify-between h-full"
                         style={{
                           backgroundColor: "var(--card-bg)",
                           borderColor: "var(--card-border)",
@@ -252,7 +252,7 @@ export default function BlogPage() {
                               {category.icon}
                             </span>
                             <span
-                              className="text-sm font-medium px-2 py-1 rounded-full"
+                              className="text-sm font-medium px-3 py-1 rounded-full"
                               style={{
                                 backgroundColor: "var(--accent-subtle)",
                                 color: "var(--accent)",

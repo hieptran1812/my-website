@@ -1,68 +1,87 @@
 import { useState, useEffect, useCallback } from "react";
 
-interface LazyLoadingOptions<T> {
+interface UseLazyLoadingParams<T> {
   initialData: T[];
   loadMoreData: (page: number, limit: number) => Promise<T[]>;
   itemsPerPage: number;
-  hasMore?: boolean;
+  hasMore: boolean;
+  scrollThreshold?: number; // % of the window height from the bottom to trigger loading
 }
 
 export function useLazyLoading<T>({
   initialData,
   loadMoreData,
   itemsPerPage,
-  hasMore = true,
-}: LazyLoadingOptions<T>) {
+  hasMore,
+  scrollThreshold = 80, // default to 80% of the window height
+}: UseLazyLoadingParams<T>) {
   const [data, setData] = useState<T[]>(initialData);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [page, setPage] = useState(1);
   const [hasMoreData, setHasMoreData] = useState(hasMore);
+  const [page, setPage] = useState(1);
 
+  // Function to handle loading more data
   const loadMore = useCallback(async () => {
     if (loading || !hasMoreData) return;
 
     setLoading(true);
-    setError(null);
-
     try {
-      const newData = await loadMoreData(page + 1, itemsPerPage);
+      const nextPage = page + 1;
+      const newData = await loadMoreData(nextPage, itemsPerPage);
 
       if (newData.length === 0) {
         setHasMoreData(false);
       } else {
         setData((prevData) => [...prevData, ...newData]);
-        setPage((prevPage) => prevPage + 1);
-
-        // If we got fewer items than requested, we've reached the end
-        if (newData.length < itemsPerPage) {
-          setHasMoreData(false);
-        }
+        setPage(nextPage);
+        setHasMoreData(newData.length >= itemsPerPage);
       }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load more data");
+    } catch (error) {
+      console.error("Error loading more data:", error);
     } finally {
       setLoading(false);
     }
-  }, [loading, hasMoreData, loadMoreData, page, itemsPerPage]);
+  }, [loading, hasMoreData, page, loadMoreData, itemsPerPage]);
 
-  const reset = useCallback(
-    (newInitialData: T[]) => {
-      setData(newInitialData);
-      setPage(1);
-      setHasMoreData(newInitialData.length >= itemsPerPage);
-      setError(null);
-      setLoading(false);
-    },
-    [itemsPerPage]
-  );
+  // Function to reset the lazy loading state
+  const reset = useCallback((newInitialData: T[]) => {
+    setData(newInitialData);
+    setPage(1);
+    setLoading(false);
+    setHasMoreData(true);
+  }, []);
+
+  // Handle scroll event to automatically load more
+  useEffect(() => {
+    const handleScroll = () => {
+      if (loading || !hasMoreData) return;
+
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      // Calculate how far down the user has scrolled (as a percentage)
+      const scrolledPercentage =
+        ((scrollTop + windowHeight) / documentHeight) * 100;
+
+      // If the user has scrolled beyond the threshold, load more data
+      if (scrolledPercentage > scrollThreshold) {
+        loadMore();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [loadMore, loading, hasMoreData, scrollThreshold]);
 
   return {
     data,
     loading,
-    error,
     hasMoreData,
-    loadMore,
+    loadMore, // Still exposing the loadMore function for manual triggering if needed
     reset,
   };
 }

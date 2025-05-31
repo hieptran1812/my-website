@@ -32,10 +32,10 @@ export default function LoadMoreTrigger({
           className="text-lg font-medium mb-2"
           style={{ color: "var(--text-secondary)" }}
         >
-          🎉 You've reached the end!
+          🎉 You&apos;ve seen all the articles!
         </div>
         <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-          No more articles to load.
+          Halley is cooking up more content. Stay tuned!
         </p>
       </div>
     );

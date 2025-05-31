@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import BlogReader from "../../components/BlogReader";
+import FadeInWrapper from "@/components/FadeInWrapper";
 
 interface BlogPost {
   title: string;
@@ -69,27 +70,61 @@ export default function BlogPostPage() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col min-h-screen items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
-        <p className="mt-4 text-lg">Loading blog post...</p>
-      </div>
+      <FadeInWrapper duration={600}>
+        <div
+          className="flex flex-col min-h-screen items-center justify-center transition-colors duration-300"
+          style={{
+            backgroundColor: "var(--background)",
+            color: "var(--text-primary)",
+          }}
+        >
+          <div
+            className="animate-spin rounded-full h-12 w-12 border-b-2 mb-4"
+            style={{ borderColor: "var(--accent)" }}
+          ></div>
+          <p className="text-lg" style={{ color: "var(--text-secondary)" }}>
+            Loading blog post...
+          </p>
+        </div>
+      </FadeInWrapper>
     );
   }
 
   if (error || !post) {
     return (
-      <div className="flex flex-col min-h-screen items-center justify-center">
-        <h1 className="text-4xl font-bold mb-4">Blog Post Not Found</h1>
-        <p className="text-lg text-gray-600">
-          {error || "The requested blog post could not be found."}
-        </p>
-        <a
-          href="/blog"
-          className="mt-6 px-6 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors"
+      <FadeInWrapper duration={600}>
+        <div
+          className="flex flex-col min-h-screen items-center justify-center transition-colors duration-300"
+          style={{
+            backgroundColor: "var(--background)",
+            color: "var(--text-primary)",
+          }}
         >
-          Back to Blog
-        </a>
-      </div>
+          <h1
+            className="text-4xl font-bold mb-4"
+            style={{ color: "var(--text-primary)" }}
+          >
+            Blog Post Not Found
+          </h1>
+          <p
+            className="text-lg mb-6"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {error || "The requested blog post could not be found."}
+          </p>
+          <a
+            href="/blog"
+            className="px-6 py-3 rounded-lg transition-colors border"
+            style={{
+              backgroundColor: "var(--accent)",
+              color: "white",
+              borderColor: "var(--accent)",
+            }}
+          >
+            Back to Blog
+          </a>
+        </div>
+      </FadeInWrapper>
     );
   }
 
