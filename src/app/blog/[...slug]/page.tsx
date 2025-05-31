@@ -23,7 +23,7 @@ export default function BlogPostPage() {
   useEffect(() => {
     async function fetchPost() {
       try {
-        // Construct slug from URL params
+        // Construct slug from URL params - handle both single and nested slugs
         let slug: string;
         if (Array.isArray(params.slug)) {
           slug = params.slug.join("/");
@@ -31,7 +31,9 @@ export default function BlogPostPage() {
           slug = params.slug as string;
         }
 
-        const response = await fetch(`/api/blog/article?slug=${slug}`);
+        const response = await fetch(
+          `/api/blog/article?slug=${encodeURIComponent(slug)}`
+        );
 
         if (!response.ok) {
           throw new Error(`Failed to fetch post: ${response.statusText}`);

@@ -27,19 +27,12 @@ interface Article {
 
 // Convert BlogPostMetadata to Article format
 function convertToArticle(post: BlogPostMetadata): Article {
-  // Handle the case where the slug might include the category name
-  const slugParts = post.slug.split("/");
-  const slug =
-    slugParts.length > 1
-      ? `${slugParts[0]}/${slugParts[1]}` // category/slug format
-      : post.slug; // just slug
-
   return {
     title: post.title,
     summary: post.excerpt,
     image: post.image,
     date: post.publishDate,
-    link: `/blog/${slug}`,
+    link: `/blog/${post.slug}`, // This now includes the full category/post-name format
     category: post.category,
     readTime: post.readTime,
   };
@@ -68,16 +61,29 @@ export default function BlogPage() {
     fetchPosts();
   }, []);
 
-  // Update categories to reflect actual blog posts
+  // Improved category count calculation using exact category matching
+  const getCategoryCount = (categoryName: string) => {
+    const normalizedName = categoryName.toLowerCase().replace(/\s+/g, "-");
+    return articles.filter((article) => {
+      const articleCategory = article.category
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+      return (
+        articleCategory === normalizedName ||
+        articleCategory.includes(normalizedName) ||
+        article.link.includes(`/blog/${normalizedName}/`)
+      );
+    }).length;
+  };
+
+  // Update categories to reflect actual blog posts with dynamic counts
   const categories = [
     {
       name: "Software Development",
       description: "Programming best practices and tutorials",
       link: "/blog/software-development",
       icon: "💻",
-      count: articles.filter((a) =>
-        a.category.toLowerCase().includes("development")
-      ).length,
+      count: getCategoryCount("software-development"),
       color: "from-green-500 to-teal-600",
     },
     {
@@ -85,9 +91,7 @@ export default function BlogPage() {
       description: "AI, ML algorithms, and deep learning insights",
       link: "/blog/machine-learning",
       icon: "🤖",
-      count: articles.filter((a) =>
-        a.category.toLowerCase().includes("machine learning")
-      ).length,
+      count: getCategoryCount("machine-learning"),
       color: "from-purple-500 to-pink-600",
     },
     {
@@ -95,18 +99,15 @@ export default function BlogPage() {
       description: "Blockchain, DeFi, and crypto technology insights",
       link: "/blog/crypto",
       icon: "₿",
-      count: articles.filter((a) => a.category.toLowerCase().includes("crypto"))
-        .length,
+      count: getCategoryCount("crypto"),
       color: "from-orange-500 to-yellow-500",
     },
     {
       name: "TypeScript",
       description: "TypeScript tips and best practices",
-      link: "/blog/typescript-best-practices",
+      link: "/blog/typescript",
       icon: "🔷",
-      count: articles.filter((a) =>
-        a.category.toLowerCase().includes("typescript")
-      ).length,
+      count: getCategoryCount("typescript"),
       color: "from-blue-500 to-purple-600",
     },
     {
@@ -114,8 +115,7 @@ export default function BlogPage() {
       description: "Research paper reviews and analysis",
       link: "/blog/paper-reading",
       icon: "📚",
-      count: articles.filter((a) => a.category.toLowerCase().includes("paper"))
-        .length,
+      count: getCategoryCount("paper-reading"),
       color: "from-indigo-500 to-blue-600",
     },
     {
@@ -123,8 +123,7 @@ export default function BlogPage() {
       description: "Quick thoughts and learning notes",
       link: "/blog/notes",
       icon: "📝",
-      count: articles.filter((a) => a.category.toLowerCase().includes("notes"))
-        .length,
+      count: getCategoryCount("notes"),
       color: "from-cyan-500 to-blue-600",
     },
   ];

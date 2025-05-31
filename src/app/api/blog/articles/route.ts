@@ -119,10 +119,14 @@ export async function GET(request: NextRequest) {
       const files = fs.readdirSync(dirPath, { withFileTypes: true });
 
       for (const file of files) {
-        // If it's a directory, process it recursively if it's not a category we're filtering by
+        // If it's a directory, process it recursively
         if (file.isDirectory()) {
           // If we're looking for a specific category and this directory matches, read its files
-          if (category && file.name === category) {
+          if (
+            category &&
+            file.name.toLowerCase().replace(/\s+/g, "-") ===
+              category.toLowerCase()
+          ) {
             readMarkdownFiles(path.join(dirPath, file.name), file.name);
           }
           // If we're not filtering by category, read files from all category directories
@@ -136,7 +140,12 @@ export async function GET(request: NextRequest) {
           const fileContent = fs.readFileSync(filePath, "utf8");
           const { data: metadata, content } = matter(fileContent);
 
-          const slug = file.name.replace(".md", "");
+          // Generate slug in format: category/post-name
+          const slugBase = file.name.replace(".md", "");
+          const slug = categoryOverride
+            ? `${categoryOverride}/${slugBase}`
+            : slugBase;
+
           // Use the directory name as category if it's a subdirectory
           const effectiveCategory = categoryOverride || metadata.category;
           const article = convertToArticle(
