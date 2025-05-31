@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { remark } from "remark";
+import remarkGfm from "remark-gfm";
+import remarkHtml from "remark-html";
 
 export async function GET(
   request: NextRequest,
@@ -24,6 +27,14 @@ export async function GET(
     const fileContents = fs.readFileSync(filePath, "utf8");
     const { data, content } = matter(fileContents);
 
+    // Process markdown to HTML
+    const processedContent = await remark()
+      .use(remarkGfm)
+      .use(remarkHtml)
+      .process(content);
+
+    const htmlContent = processedContent.toString();
+
     const post = {
       slug,
       title: data.title || "Untitled",
@@ -34,7 +45,7 @@ export async function GET(
       tags: data.tags || [],
       image: data.image || "/images/default-blog.jpg",
       excerpt: data.excerpt || data.description || "No excerpt available",
-      content: content,
+      content: htmlContent,
     };
 
     return NextResponse.json(post);
