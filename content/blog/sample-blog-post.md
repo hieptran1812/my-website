@@ -1,13 +1,19 @@
 ---
-title: "Building Modern Web Applications: A Comprehensive Guide"
-publishDate: "2025-05-29"
-readTime: "15 min read"
-category: "Tutorial"
-author: "Hiep Tran"
+title: 'Building Modern Web Applications: A Comprehensive Guide'
+publishDate: '2025-05-29'
+readTime: 10 min read
+category: Tutorial
+author: Hiep Tran
 tags:
-  ["React", "TypeScript", "Next.js", "Web Development", "Modern Architecture"]
-image: "/blog-placeholder.jpg"
-excerpt: "A comprehensive guide to building modern, scalable, and maintainable web applications using contemporary frameworks, tools, and best practices."
+  - React
+  - TypeScript
+  - Next.js
+  - Web Development
+  - Modern Architecture
+image: /blog-placeholder.jpg
+excerpt: >-
+  A comprehensive guide to building modern, scalable, and maintainable web
+  applications using contemporary frameworks, tools, and best practices.
 ---
 
 # Building Modern Web Applications: A Comprehensive Guide

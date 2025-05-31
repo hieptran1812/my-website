@@ -1,19 +1,19 @@
 ---
-title: "TypeScript Best Practices for Large Applications"
-publishDate: "2024-03-12"
-readTime: "15 min read"
-category: "Software Development"
-author: "Hiep Tran"
+title: TypeScript Best Practices for Large Applications
+publishDate: '2024-03-12'
+readTime: 20 min read
+category: Software Development
+author: Hiep Tran
 tags:
-  [
-    "TypeScript",
-    "Best Practices",
-    "Scalability",
-    "Code Quality",
-    "Architecture",
-  ]
-image: "/blog-placeholder.jpg"
-excerpt: "Essential patterns and practices for building scalable TypeScript applications with proper type safety and maintainable code architecture."
+  - TypeScript
+  - Best Practices
+  - Scalability
+  - Code Quality
+  - Architecture
+image: /blog-placeholder.jpg
+excerpt: >-
+  Essential patterns and practices for building scalable TypeScript applications
+  with proper type safety and maintainable code architecture.
 ---
 
 # TypeScript Best Practices for Large Applications

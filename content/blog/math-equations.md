@@ -1,12 +1,18 @@
 ---
-title: "Mathematical Expressions Demo"
-publishDate: "2024-02-25"
-readTime: "10 min read"
-category: "Tutorial"
-author: "Hiep Tran"
-tags: ["Math", "LaTeX", "MathJax", "Web Development"]
-image: "/blog-placeholder.jpg"
-excerpt: "Comprehensive demonstration of mathematical expressions rendering capabilities using LaTeX and MathJax in web applications."
+title: Mathematical Expressions Demo
+publishDate: '2024-02-25'
+readTime: 17 min read
+category: Tutorial
+author: Hiep Tran
+tags:
+  - Math
+  - LaTeX
+  - MathJax
+  - Web Development
+image: /blog-placeholder.jpg
+excerpt: >-
+  Comprehensive demonstration of mathematical expressions rendering capabilities
+  using LaTeX and MathJax in web applications.
 ---
 
 # Mathematical Expressions Demo

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { calculateReadTimeWithTags } from "@/lib/readTimeCalculator";
 
 interface BlogPostMetadata {
   slug: string;
@@ -37,11 +38,18 @@ export async function GET(request: Request) {
       const fileContents = fs.readFileSync(filePath, "utf8");
       const { data, content } = matter(fileContents);
 
+      // Calculate automatic read time based on content
+      const automaticReadTime = calculateReadTimeWithTags(
+        content,
+        data.tags || [],
+        data.category || "general"
+      );
+
       return {
         slug: filename.replace(".md", ""),
         title: data.title || "Untitled",
         publishDate: data.date || data.publishDate || "2024-01-01",
-        readTime: data.readTime || "5 min read",
+        readTime: data.readTime || automaticReadTime.readTime, // Use manual if provided, otherwise auto-calculate
         category: data.category || "general",
         author: data.author || "Anonymous",
         tags: data.tags || [],

@@ -1,12 +1,19 @@
 ---
-title: "Building a Modern Portfolio with Next.js"
-publishDate: "2024-03-15"
-readTime: "12 min read"
-category: "Tutorial"
-author: "Hiep Tran"
-tags: ["Next.js", "TypeScript", "Tailwind CSS", "Portfolio", "Web Development"]
-image: "/blog-placeholder.jpg"
-excerpt: "Learn how to build a stunning personal portfolio website using Next.js, TypeScript, and Tailwind CSS with modern design patterns."
+title: Building a Modern Portfolio with Next.js
+publishDate: '2024-03-15'
+readTime: 4 min read
+category: Tutorial
+author: Hiep Tran
+tags:
+  - Next.js
+  - TypeScript
+  - Tailwind CSS
+  - Portfolio
+  - Web Development
+image: /blog-placeholder.jpg
+excerpt: >-
+  Learn how to build a stunning personal portfolio website using Next.js,
+  TypeScript, and Tailwind CSS with modern design patterns.
 ---
 
 # Building a Modern Portfolio with Next.js

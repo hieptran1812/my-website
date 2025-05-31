@@ -1,12 +1,20 @@
 ---
-title: "ResNet: Deep Residual Learning for Image Recognition - Paper Review"
-publishDate: "2024-02-15"
-readTime: "15 min read"
-category: "Paper Reading"
-author: "Hiep Tran"
-tags: ["ResNet", "Computer Vision", "Deep Learning", "CNN", "Paper Review"]
-image: "/blog-placeholder.jpg"
-excerpt: "An in-depth analysis of the ResNet paper that solved the vanishing gradient problem and enabled training of extremely deep neural networks, revolutionizing computer vision."
+title: 'ResNet: Deep Residual Learning for Image Recognition - Paper Review'
+publishDate: '2024-02-15'
+readTime: 18 min read
+category: Paper Reading
+author: Hiep Tran
+tags:
+  - ResNet
+  - Computer Vision
+  - Deep Learning
+  - CNN
+  - Paper Review
+image: /blog-placeholder.jpg
+excerpt: >-
+  An in-depth analysis of the ResNet paper that solved the vanishing gradient
+  problem and enabled training of extremely deep neural networks,
+  revolutionizing computer vision.
 ---
 
 # ResNet: Deep Residual Learning for Image Recognition - Paper Review

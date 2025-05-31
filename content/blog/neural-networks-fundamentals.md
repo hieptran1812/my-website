@@ -1,19 +1,19 @@
 ---
-title: "Neural Networks Fundamentals: From Perceptrons to Deep Learning"
-publishDate: "2024-03-20"
-readTime: "18 min read"
-category: "Machine Learning"
-author: "Hiep Tran"
+title: 'Neural Networks Fundamentals: From Perceptrons to Deep Learning'
+publishDate: '2024-03-20'
+readTime: 11 min read
+category: Machine Learning
+author: Hiep Tran
 tags:
-  [
-    "Neural Networks",
-    "Deep Learning",
-    "AI",
-    "Machine Learning",
-    "Backpropagation",
-  ]
-image: "/blog-placeholder.jpg"
-excerpt: "A comprehensive introduction to neural networks, covering the mathematical foundations, architectures, and practical applications in modern AI systems."
+  - Neural Networks
+  - Deep Learning
+  - AI
+  - Machine Learning
+  - Backpropagation
+image: /blog-placeholder.jpg
+excerpt: >-
+  A comprehensive introduction to neural networks, covering the mathematical
+  foundations, architectures, and practical applications in modern AI systems.
 ---
 
 # Neural Networks Fundamentals: From Perceptrons to Deep Learning

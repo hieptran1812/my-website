@@ -1,12 +1,19 @@
 ---
-title: "React Performance Optimization: Notes from the Field"
-publishDate: "2024-02-20"
-readTime: "12 min read"
-category: "Notes"
-author: "Hiep Tran"
-tags: ["React", "Performance", "Optimization", "Frontend", "JavaScript"]
-image: "/blog-placeholder.jpg"
-excerpt: "Practical notes on React performance optimization techniques, from basic memo usage to advanced patterns for building fast, responsive web applications."
+title: 'React Performance Optimization: Notes from the Field'
+publishDate: '2024-02-20'
+readTime: 23 min read
+category: Notes
+author: Hiep Tran
+tags:
+  - React
+  - Performance
+  - Optimization
+  - Frontend
+  - JavaScript
+image: /blog-placeholder.jpg
+excerpt: >-
+  Practical notes on React performance optimization techniques, from basic memo
+  usage to advanced patterns for building fast, responsive web applications.
 ---
 
 # React Performance Optimization: Notes from the Field

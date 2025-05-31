@@ -1,13 +1,19 @@
 ---
-title: "DeFi Fundamentals: Understanding Decentralized Finance"
-publishDate: "2024-03-15"
-readTime: "12 min read"
-category: "Crypto"
-author: "Hiep Tran"
+title: 'DeFi Fundamentals: Understanding Decentralized Finance'
+publishDate: '2024-03-15'
+readTime: 7 min read
+category: Crypto
+author: Hiep Tran
 tags:
-  ["DeFi", "Yield Farming", "Smart Contracts", "Cryptocurrency", "Blockchain"]
-image: "/blog-placeholder.jpg"
-excerpt: "A comprehensive guide to DeFi protocols, yield farming, and the future of decentralized financial services."
+  - DeFi
+  - Yield Farming
+  - Smart Contracts
+  - Cryptocurrency
+  - Blockchain
+image: /blog-placeholder.jpg
+excerpt: >-
+  A comprehensive guide to DeFi protocols, yield farming, and the future of
+  decentralized financial services.
 ---
 
 # DeFi Fundamentals: Understanding Decentralized Finance

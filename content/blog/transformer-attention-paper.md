@@ -1,12 +1,20 @@
 ---
-title: "Attention Is All You Need: Understanding the Transformer Architecture"
-publishDate: "2024-02-28"
-readTime: "12 min read"
-category: "Paper Reading"
-author: "Hiep Tran"
-tags: ["Transformers", "Attention", "NLP", "Deep Learning", "Paper Review"]
-image: "/blog-placeholder.jpg"
-excerpt: "A detailed breakdown of the groundbreaking Transformer paper that revolutionized natural language processing and became the foundation for modern large language models."
+title: 'Attention Is All You Need: Understanding the Transformer Architecture'
+publishDate: '2024-02-28'
+readTime: 17 min read
+category: Paper Reading
+author: Hiep Tran
+tags:
+  - Transformers
+  - Attention
+  - NLP
+  - Deep Learning
+  - Paper Review
+image: /blog-placeholder.jpg
+excerpt: >-
+  A detailed breakdown of the groundbreaking Transformer paper that
+  revolutionized natural language processing and became the foundation for
+  modern large language models.
 ---
 
 # Attention Is All You Need: Understanding the Transformer Architecture

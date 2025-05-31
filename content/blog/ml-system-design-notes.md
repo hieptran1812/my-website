@@ -1,12 +1,20 @@
 ---
-title: "Machine Learning System Design: Building Robust ML Pipelines"
-publishDate: "2024-03-05"
-readTime: "8 min read"
-category: "Notes"
-author: "Hiep Tran"
-tags: ["System Design", "MLOps", "Production", "Architecture", "Best Practices"]
-image: "/blog-placeholder.jpg"
-excerpt: "Essential notes on designing scalable and robust machine learning systems for production environments, covering data pipelines, model serving, and monitoring."
+title: 'Machine Learning System Design: Building Robust ML Pipelines'
+publishDate: '2024-03-05'
+readTime: 14 min read
+category: Notes
+author: Hiep Tran
+tags:
+  - System Design
+  - MLOps
+  - Production
+  - Architecture
+  - Best Practices
+image: /blog-placeholder.jpg
+excerpt: >-
+  Essential notes on designing scalable and robust machine learning systems for
+  production environments, covering data pipelines, model serving, and
+  monitoring.
 ---
 
 # Machine Learning System Design: Building Robust ML Pipelines

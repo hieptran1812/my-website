@@ -1,12 +1,18 @@
 ---
-title: "Understanding Software Development Best Practices"
-publishDate: "2024-01-10"
-readTime: "15 min read"
-category: "Engineering"
-author: "Hiep Tran"
-tags: ["Software Development", "Best Practices", "Clean Code", "Architecture"]
-image: "/blog-placeholder.jpg"
-excerpt: "Explore essential software development practices that lead to maintainable, scalable, and robust applications."
+title: Understanding Software Development Best Practices
+publishDate: '2024-01-10'
+readTime: 12 min read
+category: Engineering
+author: Hiep Tran
+tags:
+  - Software Development
+  - Best Practices
+  - Clean Code
+  - Architecture
+image: /blog-placeholder.jpg
+excerpt: >-
+  Explore essential software development practices that lead to maintainable,
+  scalable, and robust applications.
 ---
 
 # Understanding Software Development Best Practices

@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "update-readtime": "tsx scripts/updateReadTime.ts",
+    "blog-report": "tsx scripts/blogAnalytics.ts report",
+    "blog-validate": "tsx scripts/blogAnalytics.ts validate"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
@@ -29,6 +32,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
     "tailwindcss": "^4",
+    "tsx": "^4.19.4",
     "typescript": "^5"
   }
 }

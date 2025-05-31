@@ -2,6 +2,7 @@
 import { remark } from "remark";
 import html from "remark-html";
 import remarkGfm from "remark-gfm";
+import { calculateReadTimeWithTags, getReadTime } from "./readTimeCalculator";
 
 // Article interface matching the one used in blog pages
 export interface Article {
@@ -77,4 +78,30 @@ export async function processMarkdown(content: string): Promise<string> {
     .process(content);
 
   return processedContent.toString();
+}
+
+// Utility function to process blog post content and calculate readTime
+export function processBlogPostWithReadTime(
+  content: string,
+  frontmatter: any = {}
+): { processedContent: string; readTime: string } {
+  const readTimeResult = calculateReadTimeWithTags(
+    content,
+    frontmatter.tags || [],
+    frontmatter.category || "general"
+  );
+
+  return {
+    processedContent: content,
+    readTime: frontmatter.readTime || readTimeResult.readTime,
+  };
+}
+
+// Quick utility to get just the readTime for any content
+export function calculateContentReadTime(
+  content: string,
+  tags: string[] = [],
+  category: string = "general"
+): string {
+  return getReadTime(content, { wordsPerMinute: 200 });
 }

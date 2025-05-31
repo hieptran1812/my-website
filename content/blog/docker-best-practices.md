@@ -1,10 +1,15 @@
 ---
-title: "Docker Best Practices: From Development to Production"
-excerpt: "Essential Docker practices, optimization techniques, and deployment strategies for scalable applications."
-date: "2024-03-20"
-readTime: "7 min read"
-tags: ["Docker", "DevOps", "Containerization"]
-category: "notes"
+title: 'Docker Best Practices: From Development to Production'
+excerpt: >-
+  Essential Docker practices, optimization techniques, and deployment strategies
+  for scalable applications.
+date: '2024-03-20'
+readTime: 27 min read
+tags:
+  - Docker
+  - DevOps
+  - Containerization
+category: notes
 featured: true
 ---
 

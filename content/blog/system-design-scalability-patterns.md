@@ -1,10 +1,15 @@
 ---
-title: "System Design Interview Prep: Scalability Patterns"
-excerpt: "Key architectural patterns and design principles for building scalable distributed systems."
-date: "2024-03-10"
-readTime: "12 min read"
-tags: ["System Design", "Architecture", "Scalability"]
-category: "notes"
+title: 'System Design Interview Prep: Scalability Patterns'
+excerpt: >-
+  Key architectural patterns and design principles for building scalable
+  distributed systems.
+date: '2024-03-10'
+readTime: 13 min read
+tags:
+  - System Design
+  - Architecture
+  - Scalability
+category: notes
 ---
 
 # System Design Interview Prep: Scalability Patterns

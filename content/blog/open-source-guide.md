@@ -1,12 +1,19 @@
 ---
-title: "Open Source: Why and How to Start"
-publishDate: "2025-04-15"
-readTime: "6 min read"
-category: "Guide"
-author: "Hiep Tran"
-tags: ["Open Source", "Git", "GitHub", "Programming", "Collaboration"]
-image: "/blog-placeholder.jpg"
-excerpt: "My personal journey into open source development and comprehensive tips for beginners looking to make their first contributions to open source projects."
+title: 'Open Source: Why and How to Start'
+publishDate: '2025-04-15'
+readTime: 7 min read
+category: Guide
+author: Hiep Tran
+tags:
+  - Open Source
+  - Git
+  - GitHub
+  - Programming
+  - Collaboration
+image: /blog-placeholder.jpg
+excerpt: >-
+  My personal journey into open source development and comprehensive tips for
+  beginners looking to make their first contributions to open source projects.
 ---
 
 # Open Source: Why and How to Start
