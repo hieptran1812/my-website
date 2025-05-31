@@ -103,14 +103,6 @@ export default function BlogPage() {
       color: "from-orange-500 to-yellow-500",
     },
     {
-      name: "TypeScript",
-      description: "TypeScript tips and best practices",
-      link: "/blog/typescript",
-      icon: "🔷",
-      count: getCategoryCount("typescript"),
-      color: "from-blue-500 to-purple-600",
-    },
-    {
       name: "Paper Reading",
       description: "Research paper reviews and analysis",
       link: "/blog/paper-reading",
