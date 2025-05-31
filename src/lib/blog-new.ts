@@ -51,12 +51,8 @@ export async function getMarkdownArticlesByCategory(
   targetCategory: string
 ): Promise<Article[]> {
   try {
-    // Use window.location.origin to get the full URL in browser environment
-    const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
     const response = await fetch(
-      `${baseUrl}/api/blog/articles?category=${encodeURIComponent(
-        targetCategory
-      )}`
+      `/api/blog/articles?category=${encodeURIComponent(targetCategory)}`
     );
     if (!response.ok) {
       throw new Error(`Failed to fetch articles: ${response.statusText}`);

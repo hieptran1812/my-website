@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 
-export default function MachineLearningBlogPage() {
+export default function SoftwareDevelopmentBlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [allArticles, setAllArticles] = useState<Article[]>([]);
@@ -15,7 +15,7 @@ export default function MachineLearningBlogPage() {
     const fetchArticles = async () => {
       try {
         const articles = await getMarkdownArticlesByCategory(
-          "machine-learning"
+          "software-development"
         );
         setAllArticles(articles);
       } catch (error) {
@@ -31,26 +31,26 @@ export default function MachineLearningBlogPage() {
   const categories = [
     { name: "All", slug: "all", count: allArticles.length },
     {
-      name: "Deep Learning",
-      slug: "Deep Learning",
-      count: allArticles.filter((a) => a.subcategory === "Deep Learning")
+      name: "Best Practices",
+      slug: "Best Practices",
+      count: allArticles.filter((a) => a.subcategory === "Best Practices")
         .length,
     },
     {
-      name: "NLP",
-      slug: "NLP",
-      count: allArticles.filter((a) => a.subcategory === "NLP").length,
+      name: "Architecture",
+      slug: "Architecture",
+      count: allArticles.filter((a) => a.subcategory === "Architecture").length,
     },
     {
-      name: "Computer Vision",
-      slug: "Computer Vision",
-      count: allArticles.filter((a) => a.subcategory === "Computer Vision")
+      name: "DevOps",
+      slug: "DevOps",
+      count: allArticles.filter((a) => a.subcategory === "DevOps").length,
+    },
+    {
+      name: "System Design",
+      slug: "System Design",
+      count: allArticles.filter((a) => a.subcategory === "System Design")
         .length,
-    },
-    {
-      name: "LLM",
-      slug: "LLM",
-      count: allArticles.filter((a) => a.subcategory === "LLM").length,
     },
   ];
 

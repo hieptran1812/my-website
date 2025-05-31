@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 
-export default function PaperReadingBlogPage() {
+export default function MachineLearningBlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [allArticles, setAllArticles] = useState<Article[]>([]);
@@ -14,7 +14,7 @@ export default function PaperReadingBlogPage() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const articles = await getMarkdownArticlesByCategory("paper-reading");
+        const articles = await getMarkdownArticlesByCategory("machine-learning");
         setAllArticles(articles);
       } catch (error) {
         console.error("Error fetching articles:", error);
@@ -26,12 +26,64 @@ export default function PaperReadingBlogPage() {
     fetchArticles();
   }, []);
 
+  // Additional placeholder articles for display
+  const additionalArticles: Article[] = [
+    {
+      id: "neural-networks-fundamentals",
+      title: "Neural Networks Fundamentals: From Perceptron to Deep Learning",
+      excerpt:
+        "Comprehensive guide to understanding neural networks, from basic perceptrons to complex deep learning architectures.",
+      content: "",
+      category: "machine-learning",
+      tags: ["Neural Networks", "Deep Learning", "AI"],
+      date: "2024-03-10",
+      readTime: "18 min read",
+      difficulty: "Intermediate",
+      slug: "neural-networks-fundamentals",
+      subcategory: "Deep Learning",
+      featured: true,
+    },
+    {
+      id: "transformer-architecture-gpt",
+      title: "Transformer Architecture: The Technology Behind GPT",
+      excerpt:
+        "Understanding the transformer architecture that powers modern language models like GPT and BERT.",
+      content: "",
+      category: "machine-learning",
+      tags: ["Transformers", "GPT", "NLP", "Attention"],
+      date: "2024-03-15",
+      readTime: "22 min read",
+      difficulty: "Advanced",
+      slug: "transformer-architecture-gpt",
+      subcategory: "NLP",
+      featured: false,
+    },
+    {
+      id: "lora-fine-tuning",
+      title: "LoRA Fine-tuning: Efficient Large Language Model Adaptation",
+      excerpt:
+        "Learn how to efficiently fine-tune large language models using LoRA (Low-Rank Adaptation) techniques.",
+      content: "",
+      category: "machine-learning",
+      tags: ["LoRA", "Fine-tuning", "LLM", "Optimization"],
+      date: "2024-03-18",
+      readTime: "16 min read",
+      difficulty: "Advanced",
+      slug: "lora-fine-tuning",
+      subcategory: "LLM",
+      featured: false,
+    },
+  ];
+
+  // Combine articles
+  const allArticles = [...mlArticles, ...additionalArticles];
+
   const categories = [
     { name: "All", slug: "all", count: allArticles.length },
     {
-      name: "Computer Vision",
-      slug: "Computer Vision",
-      count: allArticles.filter((a) => a.subcategory === "Computer Vision")
+      name: "Deep Learning",
+      slug: "Deep Learning",
+      count: allArticles.filter((a) => a.subcategory === "Deep Learning")
         .length,
     },
     {
@@ -40,16 +92,15 @@ export default function PaperReadingBlogPage() {
       count: allArticles.filter((a) => a.subcategory === "NLP").length,
     },
     {
-      name: "Machine Learning",
-      slug: "Machine Learning",
-      count: allArticles.filter((a) => a.subcategory === "Machine Learning")
+      name: "Computer Vision",
+      slug: "Computer Vision",
+      count: allArticles.filter((a) => a.subcategory === "Computer Vision")
         .length,
     },
     {
-      name: "Deep Learning",
-      slug: "Deep Learning",
-      count: allArticles.filter((a) => a.subcategory === "Deep Learning")
-        .length,
+      name: "LLM",
+      slug: "LLM",
+      count: allArticles.filter((a) => a.subcategory === "LLM").length,
     },
   ];
 
@@ -80,35 +131,6 @@ export default function PaperReadingBlogPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div
-        className="flex flex-col min-h-screen transition-colors duration-300"
-        style={{
-          backgroundColor: "var(--background)",
-          color: "var(--text-primary)",
-        }}
-      >
-        <main className="flex-1">
-          <div className="max-w-6xl mx-auto px-6 py-16">
-            <div className="text-center py-20">
-              <div
-                className="inline-block animate-spin rounded-full h-8 w-8 border-b-2"
-                style={{ borderColor: "var(--accent)" }}
-              ></div>
-              <p
-                className="mt-4 text-lg"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Loading articles...
-              </p>
-            </div>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
   return (
     <div
       className="flex flex-col min-h-screen transition-colors duration-300"
@@ -129,7 +151,7 @@ export default function PaperReadingBlogPage() {
                     "linear-gradient(135deg, var(--accent), var(--accent-hover))",
                 }}
               >
-                📄
+                🤖
               </div>
               <h1
                 className="text-4xl md:text-5xl font-bold"
@@ -141,25 +163,25 @@ export default function PaperReadingBlogPage() {
                   backgroundClip: "text",
                 }}
               >
-                Paper Reading & Research
+                Machine Learning
               </h1>
             </div>
             <p
               className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
               style={{ color: "var(--text-secondary)" }}
             >
-              Deep dives into cutting-edge research papers, analyzing
-              breakthrough methodologies and their implications for the future
-              of AI and technology.
+              Exploring the fascinating world of artificial intelligence, from
+              neural networks and deep learning to cutting-edge language models
+              and computer vision.
             </p>
             <div className="flex flex-wrap justify-center gap-2">
               {[
+                "Neural Networks",
                 "Deep Learning",
-                "Computer Vision",
                 "NLP",
+                "Computer Vision",
                 "Transformers",
-                "Research",
-                "Papers",
+                "LLM",
               ].map((tag) => (
                 <span
                   key={tag}
@@ -176,7 +198,7 @@ export default function PaperReadingBlogPage() {
             </div>
           </div>
 
-          {/* Research Stats */}
+          {/* ML Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
             <div
               className="p-4 rounded-xl border text-center"
@@ -195,7 +217,7 @@ export default function PaperReadingBlogPage() {
                 className="text-sm"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Papers Reviewed
+                ML Articles
               </div>
             </div>
             <div
@@ -215,7 +237,7 @@ export default function PaperReadingBlogPage() {
                 className="text-sm"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Research Areas
+                Specializations
               </div>
             </div>
             <div
@@ -267,7 +289,7 @@ export default function PaperReadingBlogPage() {
             </div>
           </div>
 
-          {/* Featured Paper */}
+          {/* Featured Article */}
           {featuredArticles.length > 0 && (
             <div className="mb-16">
               <div className="flex items-center gap-3 mb-8">
@@ -289,7 +311,7 @@ export default function PaperReadingBlogPage() {
                   className="text-2xl font-bold"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  Featured Paper Review
+                  Featured Article
                 </h2>
               </div>
 
@@ -310,7 +332,7 @@ export default function PaperReadingBlogPage() {
                           className="text-sm font-medium mb-1"
                           style={{ color: "var(--text-secondary)" }}
                         >
-                          Research Area
+                          Specialization
                         </div>
                         <div
                           className="font-semibold"
@@ -389,7 +411,7 @@ export default function PaperReadingBlogPage() {
                       >
                         <span>📝 {article.date}</span>
                         <span>•</span>
-                        <span>📄 Research Paper</span>
+                        <span>🤖 Machine Learning</span>
                       </div>
                       <Link
                         href={`/blog/${article.slug}`}
@@ -399,7 +421,7 @@ export default function PaperReadingBlogPage() {
                           color: "white",
                         }}
                       >
-                        Read Review
+                        Read Article
                         <svg
                           className="w-4 h-4"
                           fill="none"
@@ -421,21 +443,21 @@ export default function PaperReadingBlogPage() {
             </div>
           )}
 
-          {/* Research Topics */}
+          {/* ML Topics */}
           <div className="mb-12">
             <h2
               className="text-2xl font-bold mb-6"
               style={{ color: "var(--text-primary)" }}
             >
-              Research Topics
+              ML Specializations
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
               {[
-                "Computer Vision",
-                "NLP",
                 "Deep Learning",
-                "Machine Learning",
-                "Transformers",
+                "NLP",
+                "Computer Vision",
+                "LLM",
+                "Neural Networks",
               ].map((topic) => (
                 <button
                   key={topic}
@@ -456,23 +478,23 @@ export default function PaperReadingBlogPage() {
             <div className="text-center mb-4">
               <p style={{ color: "var(--text-secondary)" }}>
                 {selectedCategory !== "all"
-                  ? `Showing ${filteredArticles.length} papers in ${
+                  ? `Showing ${filteredArticles.length} articles in ${
                       categories.find((c) => c.slug === selectedCategory)
                         ?.name || selectedCategory
                     }`
-                  : `${allArticles.length} total research papers`}
+                  : `${allArticles.length} total ML articles`}
               </p>
             </div>
           </div>
 
-          {/* Papers Grid */}
+          {/* Articles Grid */}
           <div className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <h2
                 className="text-2xl font-bold"
                 style={{ color: "var(--text-primary)" }}
               >
-                All Paper Reviews
+                All ML Articles
               </h2>
 
               {/* Category Filter Pills */}
@@ -624,12 +646,12 @@ export default function PaperReadingBlogPage() {
                   className="text-xl font-semibold mb-2"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  No papers found
+                  No articles found
                 </h3>
                 <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
                   {searchTerm
-                    ? `No papers match "${searchTerm}"`
-                    : `No papers in "${
+                    ? `No articles match "${searchTerm}"`
+                    : `No articles in "${
                         categories.find((c) => c.slug === selectedCategory)
                           ?.name
                       }" category`}
@@ -648,7 +670,7 @@ export default function PaperReadingBlogPage() {
             )}
           </div>
 
-          {/* Research Resources */}
+          {/* ML Resources */}
           <div
             className="p-8 rounded-2xl border mb-12"
             style={{
@@ -660,33 +682,32 @@ export default function PaperReadingBlogPage() {
               className="text-xl font-bold mb-4"
               style={{ color: "var(--text-primary)" }}
             >
-              📄 Research Resources
+              🤖 ML Resources
             </h3>
             <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
-              Essential resources for staying updated with cutting-edge
-              research:
+              Essential resources for machine learning and AI development:
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
                 {
-                  name: "arXiv",
-                  desc: "Preprint repository for research papers",
-                  icon: "📚",
+                  name: "PyTorch",
+                  desc: "Deep learning framework",
+                  icon: "🔥",
                 },
                 {
-                  name: "Google Scholar",
-                  desc: "Academic search engine",
-                  icon: "🎓",
+                  name: "TensorFlow",
+                  desc: "ML platform by Google",
+                  icon: "🧠",
                 },
                 {
-                  name: "Papers With Code",
-                  desc: "ML papers with implementations",
-                  icon: "💻",
+                  name: "Hugging Face",
+                  desc: "NLP models and datasets",
+                  icon: "🤗",
                 },
                 {
-                  name: "ACL Anthology",
-                  desc: "NLP and computational linguistics",
-                  icon: "🔤",
+                  name: "Kaggle",
+                  desc: "Data science competitions",
+                  icon: "📊",
                 },
               ].map((resource) => (
                 <a

@@ -1,67 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { getArticlesByCategory, Article } from "@/data/articles";
+import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 
 export default function NotesBlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [allArticles, setAllArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Get articles from centralized data system
-  const notesArticles = getArticlesByCategory("notes");
+  // Fetch articles from markdown files via API
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const articles = await getMarkdownArticlesByCategory("notes");
+        setAllArticles(articles);
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Additional placeholder articles for display
-  const additionalArticles: Article[] = [
-    {
-      id: "react-performance-notes",
-      title: "React Performance Optimization: Essential Notes",
-      excerpt:
-        "Comprehensive notes on React performance best practices, optimization techniques, and common pitfalls to avoid.",
-      content: "",
-      category: "notes",
-      tags: ["React", "Performance", "Optimization"],
-      date: "2024-03-22",
-      readTime: "12 min read",
-      difficulty: "Intermediate",
-      slug: "react-performance-notes",
-      subcategory: "Frontend",
-      featured: true,
-    },
-    {
-      id: "typescript-best-practices",
-      title: "TypeScript Best Practices: Developer Notes",
-      excerpt:
-        "Essential TypeScript patterns, type safety techniques, and development workflow improvements.",
-      content: "",
-      category: "notes",
-      tags: ["TypeScript", "Best Practices", "Development"],
-      date: "2024-03-20",
-      readTime: "15 min read",
-      difficulty: "Intermediate",
-      slug: "typescript-best-practices",
-      subcategory: "Development",
-      featured: false,
-    },
-    {
-      id: "docker-best-practices",
-      title: "Docker Best Practices: Development Notes",
-      excerpt:
-        "Essential Docker practices for efficient containerization, deployment, and development workflows.",
-      content: "",
-      category: "notes",
-      tags: ["Docker", "DevOps", "Containerization"],
-      date: "2024-03-18",
-      readTime: "18 min read",
-      difficulty: "Intermediate",
-      slug: "docker-best-practices",
-      subcategory: "DevOps",
-      featured: false,
-    },
-  ];
-
-  // Combine articles
-  const allArticles = [...notesArticles, ...additionalArticles];
+    fetchArticles();
+  }, []);
 
   const categories = [
     { name: "All", slug: "all", count: allArticles.length },
@@ -113,6 +76,35 @@ export default function NotesBlogPage() {
         return "var(--text-secondary)";
     }
   };
+
+  if (loading) {
+    return (
+      <div
+        className="flex flex-col min-h-screen transition-colors duration-300"
+        style={{
+          backgroundColor: "var(--background)",
+          color: "var(--text-primary)",
+        }}
+      >
+        <main className="flex-1">
+          <div className="max-w-6xl mx-auto px-6 py-16">
+            <div className="text-center py-20">
+              <div
+                className="inline-block animate-spin rounded-full h-8 w-8 border-b-2"
+                style={{ borderColor: "var(--accent)" }}
+              ></div>
+              <p
+                className="mt-4 text-lg"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Loading articles...
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div

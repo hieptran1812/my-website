@@ -1,10 +1,19 @@
 import { NextResponse } from "next/server";
-import {
-  getAllBlogPosts,
-  getBlogPostsByCategory,
-  getBlogPostsByTag,
-  searchBlogPosts,
-} from "../../../lib/blog";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+
+interface BlogPostMetadata {
+  slug: string;
+  title: string;
+  publishDate: string;
+  readTime: string;
+  category: string;
+  author: string;
+  tags: string[];
+  image: string;
+  excerpt: string;
+}
 
 export async function GET(request: Request) {
   try {
@@ -13,16 +22,49 @@ export async function GET(request: Request) {
     const tag = searchParams.get("tag");
     const search = searchParams.get("search");
 
-    let posts;
+    const contentDirectory = path.join(process.cwd(), "content", "blog");
 
+    if (!fs.existsSync(contentDirectory)) {
+      return NextResponse.json([]);
+    }
+
+    const files = fs
+      .readdirSync(contentDirectory)
+      .filter((file) => file.endsWith(".md"));
+
+    let posts: BlogPostMetadata[] = files.map((filename) => {
+      const filePath = path.join(contentDirectory, filename);
+      const fileContents = fs.readFileSync(filePath, "utf8");
+      const { data, content } = matter(fileContents);
+
+      return {
+        slug: filename.replace(".md", ""),
+        title: data.title || "Untitled",
+        publishDate: data.date || data.publishDate || "2024-01-01",
+        readTime: data.readTime || "5 min read",
+        category: data.category || "general",
+        author: data.author || "Anonymous",
+        tags: data.tags || [],
+        image: data.image || "/images/default-blog.jpg",
+        excerpt: data.excerpt || data.description || "No excerpt available",
+      };
+    });
+
+    // Apply filters
     if (search) {
-      posts = searchBlogPosts(search);
+      posts = posts.filter(
+        (post) =>
+          post.title.toLowerCase().includes(search.toLowerCase()) ||
+          post.excerpt.toLowerCase().includes(search.toLowerCase())
+      );
     } else if (category) {
-      posts = getBlogPostsByCategory(category);
+      posts = posts.filter(
+        (post) => post.category.toLowerCase() === category.toLowerCase()
+      );
     } else if (tag) {
-      posts = getBlogPostsByTag(tag);
-    } else {
-      posts = getAllBlogPosts();
+      posts = posts.filter((post) =>
+        post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
+      );
     }
 
     return NextResponse.json(posts);

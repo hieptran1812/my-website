@@ -1,67 +1,32 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { getArticlesByCategory, Article } from "@/data/articles";
+import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 
 export default function SoftwareDevelopmentBlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [allArticles, setAllArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Get articles from centralized data system
-  const devArticles = getArticlesByCategory("software-development");
+  // Fetch articles from markdown files via API
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const articles = await getMarkdownArticlesByCategory(
+          "software-development"
+        );
+        setAllArticles(articles);
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Additional placeholder articles for display
-  const additionalArticles: Article[] = [
-    {
-      id: "software-development-best-practices",
-      title: "Software Development Best Practices: A Comprehensive Guide",
-      excerpt:
-        "Essential best practices for modern software development, covering code quality, testing, and maintainability.",
-      content: "",
-      category: "software-development",
-      tags: ["Best Practices", "Code Quality", "Testing"],
-      date: "2024-03-25",
-      readTime: "20 min read",
-      difficulty: "Intermediate",
-      slug: "software-development-best-practices",
-      subcategory: "Best Practices",
-      featured: true,
-    },
-    {
-      id: "microservices-nodejs-docker",
-      title: "Building Microservices with Node.js and Docker",
-      excerpt:
-        "Learn how to design, develop, and deploy scalable microservices using Node.js and Docker containers.",
-      content: "",
-      category: "software-development",
-      tags: ["Microservices", "Node.js", "Docker"],
-      date: "2024-03-22",
-      readTime: "25 min read",
-      difficulty: "Advanced",
-      slug: "microservices-nodejs-docker",
-      subcategory: "Architecture",
-      featured: false,
-    },
-    {
-      id: "system-design-scalability-patterns",
-      title: "System Design: Scalability Patterns and Best Practices",
-      excerpt:
-        "Comprehensive guide to designing scalable systems, covering load balancing, caching, and distributed architectures.",
-      content: "",
-      category: "software-development",
-      tags: ["System Design", "Scalability", "Architecture"],
-      date: "2024-03-20",
-      readTime: "30 min read",
-      difficulty: "Advanced",
-      slug: "system-design-scalability-patterns",
-      subcategory: "System Design",
-      featured: false,
-    },
-  ];
-
-  // Combine articles
-  const allArticles = [...devArticles, ...additionalArticles];
+    fetchArticles();
+  }, []);
 
   const categories = [
     { name: "All", slug: "all", count: allArticles.length },
@@ -115,6 +80,35 @@ export default function SoftwareDevelopmentBlogPage() {
         return "var(--text-secondary)";
     }
   };
+
+  if (loading) {
+    return (
+      <div
+        className="flex flex-col min-h-screen transition-colors duration-300"
+        style={{
+          backgroundColor: "var(--background)",
+          color: "var(--text-primary)",
+        }}
+      >
+        <main className="flex-1">
+          <div className="max-w-6xl mx-auto px-6 py-16">
+            <div className="text-center py-20">
+              <div
+                className="inline-block animate-spin rounded-full h-8 w-8 border-b-2"
+                style={{ borderColor: "var(--accent)" }}
+              ></div>
+              <p
+                className="mt-4 text-lg"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Loading articles...
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div

@@ -1,52 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { getArticlesByCategory, Article } from "@/data/articles";
+import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 
 export default function CryptoBlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [allArticles, setAllArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Get articles from centralized data system
-  const cryptoArticles = getArticlesByCategory("crypto");
+  // Fetch articles from markdown files via API
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const articles = await getMarkdownArticlesByCategory("crypto");
+        setAllArticles(articles);
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Additional placeholder articles for display
-  const additionalArticles: Article[] = [
-    {
-      id: "bitcoin-ethereum-comparison",
-      title: "Bitcoin vs Ethereum: Technical Analysis",
-      excerpt:
-        "Comprehensive comparison of Bitcoin and Ethereum architectures, consensus mechanisms, and ecosystem differences.",
-      content: "",
-      category: "crypto",
-      tags: ["Bitcoin", "Ethereum", "Analysis"],
-      date: "2024-03-05",
-      readTime: "15 min read",
-      difficulty: "Advanced",
-      slug: "bitcoin-ethereum-comparison",
-      subcategory: "Technology",
-      featured: false,
-    },
-    {
-      id: "nft-revolution",
-      title: "NFTs and Digital Ownership",
-      excerpt:
-        "Understanding Non-Fungible Tokens and their impact on digital ownership and creative economies.",
-      content: "",
-      category: "crypto",
-      tags: ["NFT", "Digital Rights", "Blockchain"],
-      date: "2024-02-28",
-      readTime: "10 min read",
-      difficulty: "Intermediate",
-      slug: "nft-revolution",
-      subcategory: "NFTs",
-      featured: false,
-    },
-  ];
-
-  // Combine articles
-  const allArticles = [...cryptoArticles, ...additionalArticles];
+    fetchArticles();
+  }, []);
 
   const categories = [
     { name: "All", slug: "all", count: allArticles.length },
@@ -84,9 +62,7 @@ export default function CryptoBlogPage() {
     return matchesCategory && matchesSearch;
   });
 
-  const featuredArticles = allArticles.filter((article) =>
-    cryptoArticles.some((ca) => ca.id === article.id && ca.featured)
-  );
+  const featuredArticles = allArticles.filter((article) => article.featured);
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -100,6 +76,35 @@ export default function CryptoBlogPage() {
         return "var(--text-secondary)";
     }
   };
+
+  if (loading) {
+    return (
+      <div
+        className="flex flex-col min-h-screen transition-colors duration-300"
+        style={{
+          backgroundColor: "var(--background)",
+          color: "var(--text-primary)",
+        }}
+      >
+        <main className="flex-1">
+          <div className="max-w-6xl mx-auto px-6 py-16">
+            <div className="text-center py-20">
+              <div
+                className="inline-block animate-spin rounded-full h-8 w-8 border-b-2"
+                style={{ borderColor: "var(--accent)" }}
+              ></div>
+              <p
+                className="mt-4 text-lg"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Loading articles...
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div
