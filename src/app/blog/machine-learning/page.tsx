@@ -1,104 +1,110 @@
-import React from "react";
-import Link from "next/link";
+"use client";
 
-const mlPosts = [
-  {
-    id: 1,
-    title: "Transformer Architecture: Building GPT from Scratch",
-    excerpt:
-      "A comprehensive implementation guide to building a GPT-style transformer model from scratch using PyTorch, with detailed explanations of attention mechanisms.",
-    date: "2024-03-25",
-    readTime: "20 min read",
-    tags: ["Transformers", "GPT", "PyTorch", "NLP"],
-    level: "Advanced",
-    type: "Tutorial",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Fine-tuning Large Language Models with LoRA",
-    excerpt:
-      "Learn how to efficiently fine-tune large language models using Low-Rank Adaptation (LoRA) for specific tasks while maintaining performance.",
-    date: "2024-03-20",
-    readTime: "15 min read",
-    tags: ["LLM", "Fine-tuning", "LoRA", "Efficiency"],
-    level: "Intermediate",
-    type: "Tutorial",
-  },
-  {
-    id: 3,
-    title: "Computer Vision: Object Detection with YOLO v8",
-    excerpt:
-      "Step-by-step guide to implementing real-time object detection using the latest YOLO v8 architecture with custom dataset training.",
-    date: "2024-03-16",
-    readTime: "12 min read",
-    tags: ["Computer Vision", "Object Detection", "YOLO", "Real-time"],
-    level: "Intermediate",
-    type: "Tutorial",
-  },
-  {
-    id: 4,
-    title: "MLOps: Production-Ready ML Pipelines with MLflow",
-    excerpt:
-      "Building scalable machine learning pipelines for production environments using MLflow for experiment tracking and model deployment.",
-    date: "2024-03-12",
-    readTime: "18 min read",
-    tags: ["MLOps", "MLflow", "Production", "Pipeline"],
-    level: "Advanced",
-    type: "Guide",
-  },
-  {
-    id: 5,
-    title: "Reinforcement Learning: Deep Q-Networks (DQN) Implementation",
-    excerpt:
-      "Understanding and implementing Deep Q-Networks for solving complex sequential decision-making problems in reinforcement learning.",
-    date: "2024-03-08",
-    readTime: "16 min read",
-    tags: ["Reinforcement Learning", "DQN", "Q-Learning", "Gaming"],
-    level: "Advanced",
-    type: "Tutorial",
-  },
-  {
-    id: 6,
-    title: "Generative AI: Building a Text-to-Image Model",
-    excerpt:
-      "Creating a text-to-image generation model using diffusion techniques, exploring the mathematics behind stable diffusion.",
-    date: "2024-03-04",
-    readTime: "14 min read",
-    tags: ["Generative AI", "Diffusion Models", "Text-to-Image", "GANs"],
-    level: "Advanced",
-    type: "Tutorial",
-  },
-  {
-    id: 7,
-    title: "Feature Engineering for Machine Learning",
-    excerpt:
-      "Advanced feature engineering techniques including feature selection, dimensionality reduction, and handling categorical variables.",
-    date: "2024-02-28",
-    readTime: "10 min read",
-    tags: ["Feature Engineering", "Data Science", "Preprocessing", "Analytics"],
-    level: "Beginner",
-    type: "Guide",
-  },
-  {
-    id: 8,
-    title: "Model Interpretability: SHAP and LIME Explained",
-    excerpt:
-      "Understanding black-box machine learning models using SHAP values and LIME for model interpretability and explainable AI.",
-    date: "2024-02-24",
-    readTime: "11 min read",
-    tags: ["Explainable AI", "SHAP", "LIME", "Interpretability"],
-    level: "Intermediate",
-    type: "Analysis",
-  },
-];
+import React, { useState } from "react";
+import Link from "next/link";
+import { getArticlesByCategory, Article } from "@/data/articles";
 
 export default function MachineLearningBlogPage() {
-  const featuredPost = mlPosts.find((post) => post.featured);
-  const regularPosts = mlPosts.filter((post) => !post.featured);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const getLevelColor = (level: string) => {
-    switch (level) {
+  // Get articles from centralized data system
+  const mlArticles = getArticlesByCategory("machine-learning");
+
+  // Additional placeholder articles for display
+  const additionalArticles: Article[] = [
+    {
+      id: "neural-networks-fundamentals",
+      title: "Neural Networks Fundamentals: From Perceptron to Deep Learning",
+      excerpt:
+        "Comprehensive guide to understanding neural networks, from basic perceptrons to complex deep learning architectures.",
+      content: "",
+      category: "machine-learning",
+      tags: ["Neural Networks", "Deep Learning", "AI"],
+      date: "2024-03-10",
+      readTime: "18 min read",
+      difficulty: "Intermediate",
+      slug: "neural-networks-fundamentals",
+      subcategory: "Deep Learning",
+      featured: true,
+    },
+    {
+      id: "transformer-architecture-gpt",
+      title: "Transformer Architecture: The Technology Behind GPT",
+      excerpt:
+        "Understanding the transformer architecture that powers modern language models like GPT and BERT.",
+      content: "",
+      category: "machine-learning",
+      tags: ["Transformers", "GPT", "NLP", "Attention"],
+      date: "2024-03-15",
+      readTime: "22 min read",
+      difficulty: "Advanced",
+      slug: "transformer-architecture-gpt",
+      subcategory: "NLP",
+      featured: false,
+    },
+    {
+      id: "lora-fine-tuning",
+      title: "LoRA Fine-tuning: Efficient Large Language Model Adaptation",
+      excerpt:
+        "Learn how to efficiently fine-tune large language models using LoRA (Low-Rank Adaptation) techniques.",
+      content: "",
+      category: "machine-learning",
+      tags: ["LoRA", "Fine-tuning", "LLM", "Optimization"],
+      date: "2024-03-18",
+      readTime: "16 min read",
+      difficulty: "Advanced",
+      slug: "lora-fine-tuning",
+      subcategory: "LLM",
+      featured: false,
+    },
+  ];
+
+  // Combine articles
+  const allArticles = [...mlArticles, ...additionalArticles];
+
+  const categories = [
+    { name: "All", slug: "all", count: allArticles.length },
+    {
+      name: "Deep Learning",
+      slug: "Deep Learning",
+      count: allArticles.filter((a) => a.subcategory === "Deep Learning")
+        .length,
+    },
+    {
+      name: "NLP",
+      slug: "NLP",
+      count: allArticles.filter((a) => a.subcategory === "NLP").length,
+    },
+    {
+      name: "Computer Vision",
+      slug: "Computer Vision",
+      count: allArticles.filter((a) => a.subcategory === "Computer Vision")
+        .length,
+    },
+    {
+      name: "LLM",
+      slug: "LLM",
+      count: allArticles.filter((a) => a.subcategory === "LLM").length,
+    },
+  ];
+
+  const filteredArticles = allArticles.filter((article) => {
+    const matchesCategory =
+      selectedCategory === "all" || article.subcategory === selectedCategory;
+    const matchesSearch =
+      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      article.tags.some((tag) =>
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    return matchesCategory && matchesSearch;
+  });
+
+  const featuredArticles = allArticles.filter((article) => article.featured);
+
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
       case "Beginner":
         return "#22c55e";
       case "Intermediate":
@@ -110,75 +116,6 @@ export default function MachineLearningBlogPage() {
     }
   };
 
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case "Tutorial":
-        return (
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-            />
-          </svg>
-        );
-      case "Guide":
-        return (
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        );
-      case "Analysis":
-        return (
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-            />
-          </svg>
-        );
-      default:
-        return (
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        );
-    }
-  };
-
   return (
     <div
       className="flex flex-col min-h-screen transition-colors duration-300"
@@ -187,14 +124,162 @@ export default function MachineLearningBlogPage() {
         color: "var(--text-primary)",
       }}
     >
-      <main className="flex-1 flex flex-col transition-colors duration-300">
-        <div className="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-16">
-              <div className="flex items-center justify-center gap-3 mb-6">
+      <main className="flex-1">
+        <div className="max-w-6xl mx-auto px-6 py-16">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div
+                className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                }}
+              >
+                🤖
+              </div>
+              <h1
+                className="text-4xl md:text-5xl font-bold"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Machine Learning
+              </h1>
+            </div>
+            <p
+              className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              Exploring the fascinating world of artificial intelligence, from
+              neural networks and deep learning to cutting-edge language models
+              and computer vision.
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {[
+                "Neural Networks",
+                "Deep Learning",
+                "NLP",
+                "Computer Vision",
+                "Transformers",
+                "LLM",
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 text-sm rounded-full border transition-colors duration-200 hover:bg-[var(--surface)] cursor-pointer"
+                  style={{
+                    borderColor: "var(--border)",
+                    backgroundColor: "var(--surface)",
+                    color: "var(--text-secondary)",
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* ML Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{
+                backgroundColor: "var(--surface)",
+                borderColor: "var(--border)",
+              }}
+            >
+              <div
+                className="text-2xl font-bold mb-1"
+                style={{ color: "var(--accent)" }}
+              >
+                {allArticles.length}
+              </div>
+              <div
+                className="text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                ML Articles
+              </div>
+            </div>
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{
+                backgroundColor: "var(--surface)",
+                borderColor: "var(--border)",
+              }}
+            >
+              <div
+                className="text-2xl font-bold mb-1"
+                style={{ color: "var(--accent)" }}
+              >
+                {categories.length - 1}
+              </div>
+              <div
+                className="text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Specializations
+              </div>
+            </div>
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{
+                backgroundColor: "var(--surface)",
+                borderColor: "var(--border)",
+              }}
+            >
+              <div
+                className="text-2xl font-bold mb-1"
+                style={{ color: "var(--accent)" }}
+              >
+                2024-2025
+              </div>
+              <div
+                className="text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Publication Range
+              </div>
+            </div>
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{
+                backgroundColor: "var(--surface)",
+                borderColor: "var(--border)",
+              }}
+            >
+              <div
+                className="text-2xl font-bold mb-1"
+                style={{ color: "var(--accent)" }}
+              >
+                {allArticles.length > 0
+                  ? Math.round(
+                      allArticles.reduce(
+                        (acc, article) => acc + parseInt(article.readTime),
+                        0
+                      ) / allArticles.length
+                    )
+                  : 0}
+              </div>
+              <div
+                className="text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Avg. Read Time
+              </div>
+            </div>
+          </div>
+
+          {/* Featured Article */}
+          {featuredArticles.length > 0 && (
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-8">
                 <svg
-                  className="w-8 h-8"
+                  className="w-6 h-6"
                   style={{ color: "var(--accent)" }}
                   fill="none"
                   stroke="currentColor"
@@ -204,239 +289,297 @@ export default function MachineLearningBlogPage() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <h1
-                  className="text-4xl md:text-5xl font-bold"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, var(--accent), var(--accent-hover))",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Machine Learning
-                </h1>
-              </div>
-              <p
-                className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Comprehensive guides, tutorials, and insights into machine
-                learning, deep learning, and artificial intelligence. From
-                foundational concepts to cutting-edge research implementations.
-              </p>
-              <div className="flex flex-wrap justify-center gap-2">
-                {[
-                  "Deep Learning",
-                  "Computer Vision",
-                  "NLP",
-                  "MLOps",
-                  "Generative AI",
-                  "Reinforcement Learning",
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-sm rounded-full border transition-colors duration-200 hover:bg-[var(--surface)] cursor-pointer"
-                    style={{
-                      borderColor: "var(--border)",
-                      backgroundColor: "var(--surface)",
-                      color: "var(--text-secondary)",
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Stats Overview */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-              <div
-                className="rounded-lg p-6 text-center border"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  borderColor: "var(--border)",
-                }}
-              >
-                <div
-                  className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                  style={{ backgroundColor: "var(--accent)" }}
-                >
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                    />
-                  </svg>
-                </div>
-                <div
-                  className="text-2xl font-bold mb-2"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  8+
-                </div>
-                <div
-                  className="text-sm"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  In-depth Tutorials
-                </div>
-              </div>
-              <div
-                className="rounded-lg p-6 text-center border"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  borderColor: "var(--border)",
-                }}
-              >
-                <div
-                  className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                  style={{ backgroundColor: "#f59e0b" }}
-                >
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
-                </div>
-                <div
-                  className="text-2xl font-bold mb-2"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  3
-                </div>
-                <div
-                  className="text-sm"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  Difficulty Levels
-                </div>
-              </div>
-              <div
-                className="rounded-lg p-6 text-center border"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  borderColor: "var(--border)",
-                }}
-              >
-                <div
-                  className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                  style={{ backgroundColor: "#22c55e" }}
-                >
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                    />
-                  </svg>
-                </div>
-                <div
-                  className="text-2xl font-bold mb-2"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Latest
-                </div>
-                <div
-                  className="text-sm"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  AI Research
-                </div>
-              </div>
-            </div>
-
-            {/* Featured Article */}
-            {featuredPost && (
-              <div className="mb-16">
                 <h2
-                  className="text-2xl font-bold mb-8 text-center"
+                  className="text-2xl font-bold"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  Featured Tutorial
+                  Featured Article
                 </h2>
-                <div
-                  className="rounded-lg p-8 border-2 transition-all duration-300 hover:shadow-lg relative overflow-hidden"
-                  style={{
-                    borderColor: "var(--accent)",
-                    backgroundColor: "var(--surface)",
-                  }}
-                >
-                  <div className="relative z-10">
-                    <div className="flex flex-wrap items-center gap-4 mb-4">
-                      <span
-                        className="px-3 py-1 text-xs font-medium rounded-full"
-                        style={{
-                          backgroundColor: "var(--accent)",
-                          color: "var(--background)",
-                        }}
-                      >
-                        Featured
-                      </span>
-                      <span
-                        className="px-2 py-1 text-xs rounded-md font-medium"
-                        style={{
-                          backgroundColor: getLevelColor(featuredPost.level),
-                          color: "white",
-                        }}
-                      >
-                        {featuredPost.level}
-                      </span>
-                      <div
-                        className="flex items-center gap-1 px-2 py-1 text-xs rounded-md"
-                        style={{
-                          backgroundColor: "var(--background)",
-                          color: "var(--accent)",
-                        }}
-                      >
-                        {getTypeIcon(featuredPost.type)}
-                        {featuredPost.type}
+              </div>
+
+              <div
+                className="rounded-2xl p-8 border transition-all duration-300 hover:shadow-xl"
+                style={{
+                  backgroundColor: "var(--surface)",
+                  borderColor: "var(--border)",
+                  background:
+                    "linear-gradient(145deg, var(--surface), var(--surface-hover))",
+                }}
+              >
+                {featuredArticles.slice(0, 1).map((article) => (
+                  <div key={article.id}>
+                    <div className="grid md:grid-cols-3 gap-6 mb-6">
+                      <div>
+                        <div
+                          className="text-sm font-medium mb-1"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          Specialization
+                        </div>
+                        <div
+                          className="font-semibold"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          {article.subcategory}
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          className="text-sm font-medium mb-1"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          Difficulty
+                        </div>
+                        <span
+                          className="px-3 py-1 text-sm font-medium rounded-full text-white"
+                          style={{
+                            backgroundColor: getDifficultyColor(
+                              article.difficulty
+                            ),
+                          }}
+                        >
+                          {article.difficulty}
+                        </span>
+                      </div>
+                      <div>
+                        <div
+                          className="text-sm font-medium mb-1"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          Reading Time
+                        </div>
+                        <div
+                          className="font-semibold"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          {article.readTime}
+                        </div>
                       </div>
                     </div>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {article.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 text-xs font-medium rounded-full"
+                          style={{
+                            backgroundColor: "var(--accent-subtle)",
+                            color: "var(--accent)",
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
                     <h3
                       className="text-2xl md:text-3xl font-bold mb-4"
                       style={{ color: "var(--text-primary)" }}
                     >
-                      {featuredPost.title}
+                      {article.title}
                     </h3>
+
                     <p
                       className="text-lg mb-6 leading-relaxed"
                       style={{ color: "var(--text-secondary)" }}
                     >
-                      {featuredPost.excerpt}
+                      {article.excerpt}
                     </p>
-                    <div className="flex flex-wrap items-center justify-between gap-4">
-                      <div className="flex flex-wrap gap-2">
-                        {featuredPost.tags.map((tag) => (
+
+                    <div className="flex items-center justify-between">
+                      <div
+                        className="flex items-center gap-4 text-sm"
+                        style={{ color: "var(--text-muted)" }}
+                      >
+                        <span>📝 {article.date}</span>
+                        <span>•</span>
+                        <span>🤖 Machine Learning</span>
+                      </div>
+                      <Link
+                        href={`/blog/${article.slug}`}
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105"
+                        style={{
+                          backgroundColor: "var(--accent)",
+                          color: "white",
+                        }}
+                      >
+                        Read Article
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ML Topics */}
+          <div className="mb-12">
+            <h2
+              className="text-2xl font-bold mb-6"
+              style={{ color: "var(--text-primary)" }}
+            >
+              ML Specializations
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+              {[
+                "Deep Learning",
+                "NLP",
+                "Computer Vision",
+                "LLM",
+                "Neural Networks",
+              ].map((topic) => (
+                <button
+                  key={topic}
+                  onClick={() => setSelectedCategory(topic)}
+                  className="p-4 rounded-lg border transition-all duration-200 hover:shadow-md hover:scale-105 text-center"
+                  style={{
+                    backgroundColor: "var(--surface)",
+                    borderColor: "var(--border)",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  <div className="font-medium text-sm">{topic}</div>
+                </button>
+              ))}
+            </div>
+
+            {/* Results Summary */}
+            <div className="text-center mb-4">
+              <p style={{ color: "var(--text-secondary)" }}>
+                {selectedCategory !== "all"
+                  ? `Showing ${filteredArticles.length} articles in ${
+                      categories.find((c) => c.slug === selectedCategory)
+                        ?.name || selectedCategory
+                    }`
+                  : `${allArticles.length} total ML articles`}
+              </p>
+            </div>
+          </div>
+
+          {/* Articles Grid */}
+          <div className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <h2
+                className="text-2xl font-bold"
+                style={{ color: "var(--text-primary)" }}
+              >
+                All ML Articles
+              </h2>
+
+              {/* Category Filter Pills */}
+              <div className="flex flex-wrap gap-2">
+                {categories.slice(0, 3).map((category) => (
+                  <button
+                    key={category.slug}
+                    onClick={() => setSelectedCategory(category.slug)}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 border ${
+                      selectedCategory === category.slug
+                        ? "text-white"
+                        : "hover:bg-[var(--surface)]"
+                    }`}
+                    style={
+                      selectedCategory === category.slug
+                        ? {
+                            backgroundColor: "var(--accent)",
+                            borderColor: "var(--accent)",
+                          }
+                        : {
+                            borderColor: "var(--border)",
+                            backgroundColor: "var(--surface)",
+                            color: "var(--text-secondary)",
+                          }
+                    }
+                  >
+                    {category.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {filteredArticles.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredArticles.map((article) => (
+                  <article
+                    key={article.id}
+                    className="group rounded-xl border transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden"
+                    style={{
+                      backgroundColor: "var(--surface)",
+                      borderColor: "var(--border)",
+                    }}
+                  >
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <span
+                          className="px-2 py-1 text-xs font-medium rounded-full"
+                          style={{
+                            backgroundColor: "var(--surface)",
+                            color: "var(--text-secondary)",
+                            border: "1px solid var(--border)",
+                          }}
+                        >
+                          {article.subcategory}
+                        </span>
+                        <span
+                          className="text-xs"
+                          style={{ color: "var(--text-muted)" }}
+                        >
+                          {article.readTime}
+                        </span>
+                      </div>
+
+                      <h3
+                        className="text-lg font-semibold mb-3 group-hover:text-[var(--accent)] transition-colors line-clamp-2"
+                        style={{ color: "var(--text-primary)" }}
+                      >
+                        {article.title}
+                      </h3>
+
+                      <div
+                        className="text-sm mb-3"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        <span
+                          className="px-2 py-1 rounded text-xs"
+                          style={{
+                            color: getDifficultyColor(article.difficulty),
+                            backgroundColor: `${getDifficultyColor(
+                              article.difficulty
+                            )}20`,
+                          }}
+                        >
+                          {article.difficulty}
+                        </span>
+                      </div>
+
+                      <p
+                        className="text-sm mb-4 leading-relaxed line-clamp-3"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        {article.excerpt}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1 mb-4">
+                        {article.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
-                            className="px-2 py-1 text-xs rounded-md"
+                            className="px-2 py-1 text-xs rounded-full"
                             style={{
-                              backgroundColor: "var(--background)",
+                              backgroundColor: "var(--accent-subtle)",
                               color: "var(--accent)",
                             }}
                           >
@@ -444,268 +587,162 @@ export default function MachineLearningBlogPage() {
                           </span>
                         ))}
                       </div>
-                      <div className="flex items-center gap-4">
-                        <span
-                          className="text-sm"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
-                          {featuredPost.date} • {featuredPost.readTime}
+
+                      <div
+                        className="flex items-center justify-between text-xs mt-4"
+                        style={{ color: "var(--text-muted)" }}
+                      >
+                        <span>
+                          📅{" "}
+                          {new Date(article.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}
                         </span>
                         <Link
-                          href={`/blog/machine-learning/${featuredPost.id}`}
-                          className="px-4 py-2 rounded-md font-medium transition-all duration-200 hover:scale-105"
-                          style={{
-                            backgroundColor: "var(--accent)",
-                            color: "var(--background)",
-                          }}
+                          href={`/blog/${article.slug}`}
+                          className="inline-flex items-center text-[var(--accent)]"
                         >
-                          Start Tutorial
+                          Read more
+                          <svg
+                            className="w-3 h-3 ml-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
                         </Link>
                       </div>
                     </div>
-                  </div>
-                  <div
-                    className="absolute top-0 right-0 w-32 h-32 opacity-5"
-                    style={{
-                      background:
-                        "radial-gradient(circle, var(--accent) 0%, transparent 70%)",
-                    }}
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* All Articles Grid */}
-            <div className="mb-16">
-              <h2
-                className="text-2xl font-bold mb-8 text-center"
-                style={{ color: "var(--text-primary)" }}
-              >
-                Latest Articles
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {regularPosts.map((post) => (
-                  <div
-                    key={post.id}
-                    className="rounded-lg p-6 border transition-all duration-300 hover:shadow-lg hover:scale-105 group"
-                    style={{
-                      borderColor: "var(--border)",
-                      backgroundColor: "var(--surface)",
-                    }}
-                  >
-                    <div className="mb-4 flex items-center gap-2">
-                      <span
-                        className="text-xs px-2 py-1 rounded-full font-medium"
-                        style={{
-                          backgroundColor: getLevelColor(post.level),
-                          color: "white",
-                        }}
-                      >
-                        {post.level}
-                      </span>
-                      <div
-                        className="flex items-center gap-1 px-2 py-1 text-xs rounded-md"
-                        style={{
-                          backgroundColor: "var(--background)",
-                          color: "var(--accent)",
-                        }}
-                      >
-                        {getTypeIcon(post.type)}
-                        {post.type}
-                      </div>
-                    </div>
-                    <h3
-                      className="text-lg font-bold mb-3 group-hover:text-[var(--accent)] transition-colors duration-200"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {post.title}
-                    </h3>
-                    <p
-                      className="text-sm mb-4 leading-relaxed"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      {post.excerpt}
-                    </p>
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-1 text-xs rounded-md"
-                          style={{
-                            backgroundColor: "var(--background)",
-                            color: "var(--text-secondary)",
-                          }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span
-                        className="text-xs"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        {post.date} • {post.readTime}
-                      </span>
-                      <Link
-                        href={`/blog/machine-learning/${post.id}`}
-                        className="text-sm font-medium hover:underline transition-colors duration-200"
-                        style={{ color: "var(--accent)" }}
-                      >
-                        Read Article →
-                      </Link>
-                    </div>
-                  </div>
+                  </article>
                 ))}
               </div>
-            </div>
-
-            {/* Learning Resources Section */}
-            <div
-              className="rounded-lg p-8 border"
-              style={{
-                borderColor: "var(--border)",
-                backgroundColor: "var(--surface)",
-              }}
-            >
-              <h2
-                className="text-2xl font-bold mb-6 text-center"
-                style={{ color: "var(--text-primary)" }}
-              >
-                ML Learning Resources
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="text-center">
-                  <div
-                    className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                    style={{ backgroundColor: "#22c55e" }}
-                  >
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                      />
-                    </svg>
-                  </div>
-                  <h3
-                    className="font-bold mb-2"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    Fundamentals
-                  </h3>
-                  <p
-                    className="text-sm"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    Mathematics, statistics, and core ML algorithms
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div
-                    className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                    style={{ backgroundColor: "#3b82f6" }}
-                  >
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                      />
-                    </svg>
-                  </div>
-                  <h3
-                    className="font-bold mb-2"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    Deep Learning
-                  </h3>
-                  <p
-                    className="text-sm"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    Neural networks, transformers, and modern architectures
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div
-                    className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                    style={{ backgroundColor: "#8b5cf6" }}
-                  >
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z"
-                      />
-                    </svg>
-                  </div>
-                  <h3
-                    className="font-bold mb-2"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    Specializations
-                  </h3>
-                  <p
-                    className="text-sm"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    Computer vision, NLP, and generative AI
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div
-                    className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                    style={{ backgroundColor: "#f59e0b" }}
-                  >
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                      />
-                    </svg>
-                  </div>
-                  <h3
-                    className="font-bold mb-2"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    Production
-                  </h3>
-                  <p
-                    className="text-sm"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    MLOps, deployment, and scalable ML systems
-                  </p>
-                </div>
+            ) : (
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3
+                  className="text-xl font-semibold mb-2"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  No articles found
+                </h3>
+                <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
+                  {searchTerm
+                    ? `No articles match "${searchTerm}"`
+                    : `No articles in "${
+                        categories.find((c) => c.slug === selectedCategory)
+                          ?.name
+                      }" category`}
+                </p>
+                <button
+                  onClick={() => {
+                    setSearchTerm("");
+                    setSelectedCategory("all");
+                  }}
+                  className="px-4 py-2 rounded-lg transition-colors text-white"
+                  style={{ backgroundColor: "var(--accent)" }}
+                >
+                  Clear filters
+                </button>
               </div>
+            )}
+          </div>
+
+          {/* ML Resources */}
+          <div
+            className="p-8 rounded-2xl border mb-12"
+            style={{
+              backgroundColor: "var(--surface)",
+              borderColor: "var(--border)",
+            }}
+          >
+            <h3
+              className="text-xl font-bold mb-4"
+              style={{ color: "var(--text-primary)" }}
+            >
+              🤖 ML Resources
+            </h3>
+            <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
+              Essential resources for machine learning and AI development:
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  name: "PyTorch",
+                  desc: "Deep learning framework",
+                  icon: "🔥",
+                },
+                {
+                  name: "TensorFlow",
+                  desc: "ML platform by Google",
+                  icon: "🧠",
+                },
+                {
+                  name: "Hugging Face",
+                  desc: "NLP models and datasets",
+                  icon: "🤗",
+                },
+                {
+                  name: "Kaggle",
+                  desc: "Data science competitions",
+                  icon: "📊",
+                },
+              ].map((resource) => (
+                <a
+                  key={resource.name}
+                  href="#"
+                  className="flex items-center gap-3 p-4 rounded-lg border transition-colors hover:shadow-md"
+                  style={{
+                    backgroundColor: "var(--card-bg)",
+                    borderColor: "var(--card-border)",
+                  }}
+                >
+                  <div className="text-2xl">{resource.icon}</div>
+                  <div>
+                    <div
+                      className="font-medium"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      {resource.name}
+                    </div>
+                    <div
+                      className="text-xs"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {resource.desc}
+                    </div>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
+
+          {/* Navigation */}
+          <nav
+            className="mt-12 pt-8 border-t"
+            style={{ borderColor: "var(--border)" }}
+          >
+            <div className="flex justify-center">
+              <Link
+                href="/blog"
+                className="inline-flex items-center px-6 py-3 rounded-lg transition-colors border"
+                style={{
+                  backgroundColor: "var(--surface)",
+                  color: "var(--text-primary)",
+                  borderColor: "var(--border)",
+                }}
+              >
+                ← Back to All Blogs
+              </Link>
+            </div>
+          </nav>
         </div>
       </main>
     </div>

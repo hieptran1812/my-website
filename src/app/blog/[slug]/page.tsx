@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import BlogReader from "../../components/BlogReader";
 import { BlogPost } from "../../../lib/blog";
 
@@ -53,12 +54,12 @@ export default function DynamicBlogPost() {
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">404</h1>
           <p className="text-gray-600 mb-8">{error || "Article not found"}</p>
-          <a
+          <Link
             href="/blog"
             className="text-blue-600 hover:text-blue-800 font-medium"
           >
             ← Back to Blog
-          </a>
+          </Link>
         </div>
       </div>
     );

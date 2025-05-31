@@ -22,34 +22,34 @@ const articles = [
     guid: "hieptran-dev-open-source-guide",
   },
   {
-    title: "Transformer Architecture: Building GPT from Scratch",
+    title: "TypeScript Best Practices for Large Applications",
     summary:
-      "A comprehensive implementation guide to building a GPT-style transformer model from scratch using PyTorch, with detailed explanations of attention mechanisms and training procedures.",
+      "Essential patterns and practices for building scalable TypeScript applications with proper type safety and maintainable code architecture.",
     date: "2025-04-01",
-    link: "/blog/machine-learning",
-    category: "AI/ML",
-    author: "Hiep Tran",
-    guid: "hieptran-dev-transformer-architecture-gpt",
-  },
-  {
-    title: "Understanding Blockchain Technology: A Comprehensive Guide",
-    summary:
-      "Dive deep into the fundamentals of blockchain technology and its applications across various industries, covering consensus mechanisms, smart contracts, and real-world use cases.",
-    date: "2025-03-25",
-    link: "/blog/crypto",
-    category: "Crypto",
-    author: "Hiep Tran",
-    guid: "hieptran-dev-blockchain-comprehensive-guide",
-  },
-  {
-    title: "Building Scalable Web Applications",
-    summary:
-      "Best practices and architectural patterns for building scalable web applications using modern technologies, covering microservices, caching strategies, and performance optimization.",
-    date: "2025-03-10",
-    link: "/blog/software-development",
+    link: "/blog/typescript-best-practices",
     category: "Development",
     author: "Hiep Tran",
-    guid: "hieptran-dev-scalable-web-applications",
+    guid: "hieptran-dev-typescript-best-practices",
+  },
+  {
+    title: "DeFi Fundamentals: Understanding Decentralized Finance",
+    summary:
+      "A comprehensive guide to DeFi protocols, yield farming, and the future of decentralized financial services with real-world applications.",
+    date: "2025-03-25",
+    link: "/blog/defi-fundamentals",
+    category: "Crypto",
+    author: "Hiep Tran",
+    guid: "hieptran-dev-defi-fundamentals",
+  },
+  {
+    title: "Software Development Best Practices",
+    summary:
+      "Best practices and architectural patterns for building scalable, maintainable software applications using modern development methodologies.",
+    date: "2025-03-10",
+    link: "/blog/software-development-best-practices",
+    category: "Development",
+    author: "Hiep Tran",
+    guid: "hieptran-dev-software-development-best-practices",
   },
 ];
 

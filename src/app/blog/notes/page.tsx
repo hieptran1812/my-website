@@ -1,115 +1,117 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-
-const notesPosts = [
-  {
-    id: 1,
-    title: "Docker Best Practices: From Development to Production",
-    excerpt:
-      "Essential Docker practices, optimization techniques, and deployment strategies for scalable applications.",
-    date: "2024-03-20",
-    readTime: "7 min read",
-    tags: ["Docker", "DevOps", "Containerization"],
-    category: "Development",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Git Workflow Strategies for Team Collaboration",
-    excerpt:
-      "Comparing different Git workflows and best practices for maintaining clean, collaborative codebases.",
-    date: "2024-03-15",
-    readTime: "5 min read",
-    tags: ["Git", "Version Control", "Collaboration"],
-    category: "Development",
-  },
-  {
-    id: 3,
-    title: "System Design Interview Prep: Scalability Patterns",
-    excerpt:
-      "Key architectural patterns and design principles for building scalable distributed systems.",
-    date: "2024-03-10",
-    readTime: "12 min read",
-    tags: ["System Design", "Architecture", "Scalability"],
-    category: "Architecture",
-  },
-  {
-    id: 4,
-    title: "TypeScript Advanced Types: Utility Types Deep Dive",
-    excerpt:
-      "Exploring TypeScript's powerful utility types and how to leverage them for better type safety.",
-    date: "2024-03-05",
-    readTime: "8 min read",
-    tags: ["TypeScript", "Types", "JavaScript"],
-    category: "Development",
-  },
-  {
-    id: 5,
-    title: "Database Indexing Strategies and Performance Optimization",
-    excerpt:
-      "Understanding different types of database indexes and when to use them for optimal query performance.",
-    date: "2024-02-28",
-    readTime: "10 min read",
-    tags: ["Database", "Performance", "SQL"],
-    category: "Backend",
-  },
-  {
-    id: 6,
-    title: "React Performance Optimization Techniques",
-    excerpt:
-      "Practical techniques for optimizing React applications: memoization, code splitting, and more.",
-    date: "2024-02-22",
-    readTime: "9 min read",
-    tags: ["React", "Performance", "Frontend"],
-    category: "Frontend",
-  },
-  {
-    id: 7,
-    title: "Kubernetes Fundamentals: Pods, Services, and Deployments",
-    excerpt:
-      "Understanding core Kubernetes concepts and how to deploy applications effectively.",
-    date: "2024-02-15",
-    readTime: "11 min read",
-    tags: ["Kubernetes", "Container Orchestration", "DevOps"],
-  },
-  {
-    id: 8,
-    title: "AWS Lambda Best Practices and Cost Optimization",
-    excerpt:
-      "Maximizing performance and minimizing costs when building serverless applications with AWS Lambda.",
-    date: "2024-02-08",
-    readTime: "6 min read",
-    tags: ["AWS", "Serverless", "Cloud"],
-    category: "Cloud",
-  },
-];
-
-const categories = [
-  "All",
-  "Development",
-  "Architecture",
-  "Frontend",
-  "Backend",
-  "DevOps",
-  "Cloud",
-];
+import { getArticlesByCategory, Article } from "@/data/articles";
 
 export default function NotesBlogPage() {
-  const featuredPost = notesPosts.find((post) => post.featured);
-  const regularPosts = notesPosts.filter((post) => !post.featured);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const getCategoryColor = (category: string) => {
-    const colors = {
-      Development: "from-blue-500 to-blue-600",
-      Architecture: "from-purple-500 to-purple-600",
-      Frontend: "from-green-500 to-green-600",
-      Backend: "from-orange-500 to-orange-600",
-      DevOps: "from-red-500 to-red-600",
-      Cloud: "from-sky-500 to-sky-600",
-    };
-    return (
-      colors[category as keyof typeof colors] || "from-gray-500 to-gray-600"
-    );
+  // Get articles from centralized data system
+  const notesArticles = getArticlesByCategory("notes");
+
+  // Additional placeholder articles for display
+  const additionalArticles: Article[] = [
+    {
+      id: "react-performance-notes",
+      title: "React Performance Optimization: Essential Notes",
+      excerpt:
+        "Comprehensive notes on React performance best practices, optimization techniques, and common pitfalls to avoid.",
+      content: "",
+      category: "notes",
+      tags: ["React", "Performance", "Optimization"],
+      date: "2024-03-22",
+      readTime: "12 min read",
+      difficulty: "Intermediate",
+      slug: "react-performance-notes",
+      subcategory: "Frontend",
+      featured: true,
+    },
+    {
+      id: "typescript-best-practices",
+      title: "TypeScript Best Practices: Developer Notes",
+      excerpt:
+        "Essential TypeScript patterns, type safety techniques, and development workflow improvements.",
+      content: "",
+      category: "notes",
+      tags: ["TypeScript", "Best Practices", "Development"],
+      date: "2024-03-20",
+      readTime: "15 min read",
+      difficulty: "Intermediate",
+      slug: "typescript-best-practices",
+      subcategory: "Development",
+      featured: false,
+    },
+    {
+      id: "docker-best-practices",
+      title: "Docker Best Practices: Development Notes",
+      excerpt:
+        "Essential Docker practices for efficient containerization, deployment, and development workflows.",
+      content: "",
+      category: "notes",
+      tags: ["Docker", "DevOps", "Containerization"],
+      date: "2024-03-18",
+      readTime: "18 min read",
+      difficulty: "Intermediate",
+      slug: "docker-best-practices",
+      subcategory: "DevOps",
+      featured: false,
+    },
+  ];
+
+  // Combine articles
+  const allArticles = [...notesArticles, ...additionalArticles];
+
+  const categories = [
+    { name: "All", slug: "all", count: allArticles.length },
+    {
+      name: "Frontend",
+      slug: "Frontend",
+      count: allArticles.filter((a) => a.subcategory === "Frontend").length,
+    },
+    {
+      name: "Development",
+      slug: "Development",
+      count: allArticles.filter((a) => a.subcategory === "Development").length,
+    },
+    {
+      name: "DevOps",
+      slug: "DevOps",
+      count: allArticles.filter((a) => a.subcategory === "DevOps").length,
+    },
+    {
+      name: "Backend",
+      slug: "Backend",
+      count: allArticles.filter((a) => a.subcategory === "Backend").length,
+    },
+  ];
+
+  const filteredArticles = allArticles.filter((article) => {
+    const matchesCategory =
+      selectedCategory === "all" || article.subcategory === selectedCategory;
+    const matchesSearch =
+      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      article.tags.some((tag) =>
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    return matchesCategory && matchesSearch;
+  });
+
+  const featuredArticles = allArticles.filter((article) => article.featured);
+
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case "Beginner":
+        return "#22c55e";
+      case "Intermediate":
+        return "#f59e0b";
+      case "Advanced":
+        return "#ef4444";
+      default:
+        return "var(--text-secondary)";
+    }
   };
 
   return (
@@ -125,24 +127,60 @@ export default function NotesBlogPage() {
           {/* Header */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white text-xl font-bold">
+              <div
+                className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                }}
+              >
                 📝
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
-                Notes & Quick Thoughts
+              <h1
+                className="text-4xl md:text-5xl font-bold"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Notes & Learning
               </h1>
             </div>
             <p
-              className="text-xl max-w-3xl mx-auto leading-relaxed"
+              className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
               style={{ color: "var(--text-secondary)" }}
             >
-              Quick insights, learnings, and thoughts from my development
-              journey. Bite-sized knowledge covering various tech topics and
-              practical tips.
+              Personal notes, quick references, and learning materials for
+              software development, best practices, and technical concepts.
             </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {[
+                "Quick Reference",
+                "Best Practices",
+                "Tutorials",
+                "Cheatsheets",
+                "Learning",
+                "Notes",
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 text-sm rounded-full border transition-colors duration-200 hover:bg-[var(--surface)] cursor-pointer"
+                  style={{
+                    borderColor: "var(--border)",
+                    backgroundColor: "var(--surface)",
+                    color: "var(--text-secondary)",
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
 
-          {/* Stats Overview */}
+          {/* Notes Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
             <div
               className="p-4 rounded-xl border text-center"
@@ -155,13 +193,13 @@ export default function NotesBlogPage() {
                 className="text-2xl font-bold mb-1"
                 style={{ color: "var(--accent)" }}
               >
-                {notesPosts.length}
+                {allArticles.length}
               </div>
               <div
                 className="text-sm"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Total Notes
+                Notes Published
               </div>
             </div>
             <div
@@ -175,7 +213,7 @@ export default function NotesBlogPage() {
                 className="text-2xl font-bold mb-1"
                 style={{ color: "var(--accent)" }}
               >
-                6
+                {categories.length - 1}
               </div>
               <div
                 className="text-sm"
@@ -195,18 +233,13 @@ export default function NotesBlogPage() {
                 className="text-2xl font-bold mb-1"
                 style={{ color: "var(--accent)" }}
               >
-                {Math.round(
-                  notesPosts.reduce(
-                    (acc, post) => acc + parseInt(post.readTime),
-                    0
-                  ) / notesPosts.length
-                )}
+                2024-2025
               </div>
               <div
                 className="text-sm"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Avg. Read Time
+                Publication Range
               </div>
             </div>
             <div
@@ -220,19 +253,26 @@ export default function NotesBlogPage() {
                 className="text-2xl font-bold mb-1"
                 style={{ color: "var(--accent)" }}
               >
-                2024
+                {allArticles.length > 0
+                  ? Math.round(
+                      allArticles.reduce(
+                        (acc, article) => acc + parseInt(article.readTime),
+                        0
+                      ) / allArticles.length
+                    )
+                  : 0}
               </div>
               <div
                 className="text-sm"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Latest Year
+                Avg. Read Time
               </div>
             </div>
           </div>
 
           {/* Featured Note */}
-          {featuredPost && (
+          {featuredArticles.length > 0 && (
             <div className="mb-16">
               <div className="flex items-center gap-3 mb-8">
                 <svg
@@ -246,7 +286,7 @@ export default function NotesBlogPage() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
                 <h2
@@ -266,243 +306,436 @@ export default function NotesBlogPage() {
                     "linear-gradient(145deg, var(--surface), var(--surface-hover))",
                 }}
               >
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span
-                    className={`px-3 py-1 text-xs font-medium rounded-full text-white bg-gradient-to-r ${getCategoryColor(
-                      featuredPost.category
-                    )}`}
-                  >
-                    {featuredPost.category}
-                  </span>
-                  {featuredPost.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-xs font-medium rounded-full"
-                      style={{
-                        backgroundColor: "var(--accent-subtle)",
-                        color: "var(--accent)",
-                      }}
+                {featuredArticles.slice(0, 1).map((article) => (
+                  <div key={article.id}>
+                    <div className="grid md:grid-cols-3 gap-6 mb-6">
+                      <div>
+                        <div
+                          className="text-sm font-medium mb-1"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          Category
+                        </div>
+                        <div
+                          className="font-semibold"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          {article.subcategory}
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          className="text-sm font-medium mb-1"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          Difficulty
+                        </div>
+                        <span
+                          className="px-3 py-1 text-sm font-medium rounded-full text-white"
+                          style={{
+                            backgroundColor: getDifficultyColor(
+                              article.difficulty
+                            ),
+                          }}
+                        >
+                          {article.difficulty}
+                        </span>
+                      </div>
+                      <div>
+                        <div
+                          className="text-sm font-medium mb-1"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          Reading Time
+                        </div>
+                        <div
+                          className="font-semibold"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          {article.readTime}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {article.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 text-xs font-medium rounded-full"
+                          style={{
+                            backgroundColor: "var(--accent-subtle)",
+                            color: "var(--accent)",
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <h3
+                      className="text-2xl md:text-3xl font-bold mb-4"
+                      style={{ color: "var(--text-primary)" }}
                     >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                      {article.title}
+                    </h3>
 
-                <h3
-                  className="text-2xl md:text-3xl font-bold mb-4"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  {featuredPost.title}
-                </h3>
+                    <p
+                      className="text-lg mb-6 leading-relaxed"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {article.excerpt}
+                    </p>
 
-                <p
-                  className="text-lg mb-6 leading-relaxed"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  {featuredPost.excerpt}
-                </p>
-
-                <div className="flex items-center justify-between">
-                  <div
-                    className="flex items-center gap-4 text-sm"
-                    style={{ color: "var(--text-muted)" }}
-                  >
-                    <span>{featuredPost.date}</span>
-                    <span>•</span>
-                    <span>{featuredPost.readTime}</span>
+                    <div className="flex items-center justify-between">
+                      <div
+                        className="flex items-center gap-4 text-sm"
+                        style={{ color: "var(--text-muted)" }}
+                      >
+                        <span>📝 {article.date}</span>
+                        <span>•</span>
+                        <span>📚 Learning Notes</span>
+                      </div>
+                      <Link
+                        href={`/blog/${article.slug}`}
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105"
+                        style={{
+                          backgroundColor: "var(--accent)",
+                          color: "white",
+                        }}
+                      >
+                        Read Notes
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </Link>
+                    </div>
                   </div>
-                  <Link
-                    href={`/blog/notes/${featuredPost.id}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105"
-                    style={{
-                      backgroundColor: "var(--accent)",
-                      color: "white",
-                    }}
-                  >
-                    Read Note
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </Link>
-                </div>
+                ))}
               </div>
             </div>
           )}
 
-          {/* Category Filter */}
+          {/* Notes Topics */}
           <div className="mb-12">
             <h2
               className="text-2xl font-bold mb-6"
               style={{ color: "var(--text-primary)" }}
             >
-              Browse All Notes
+              Notes Topics
             </h2>
-            <div className="flex flex-wrap gap-3 mb-8">
-              <span
-                className="text-sm font-medium"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Filter by category:
-              </span>
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  className="px-4 py-2 text-sm font-medium rounded-lg border transition-all duration-200 hover:shadow-md hover:scale-105"
-                  style={{
-                    backgroundColor: "var(--surface)",
-                    borderColor: "var(--border)",
-                    color: "var(--text-primary)",
-                  }}
-                >
-                  {category}
-                </button>
-              ))}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+              {["Frontend", "Development", "DevOps", "Backend", "Learning"].map(
+                (topic) => (
+                  <button
+                    key={topic}
+                    onClick={() => setSelectedCategory(topic)}
+                    className="p-4 rounded-lg border transition-all duration-200 hover:shadow-md hover:scale-105 text-center"
+                    style={{
+                      backgroundColor: "var(--surface)",
+                      borderColor: "var(--border)",
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    <div className="font-medium text-sm">{topic}</div>
+                  </button>
+                )
+              )}
+            </div>
+
+            {/* Results Summary */}
+            <div className="text-center mb-4">
+              <p style={{ color: "var(--text-secondary)" }}>
+                {selectedCategory !== "all"
+                  ? `Showing ${filteredArticles.length} notes in ${
+                      categories.find((c) => c.slug === selectedCategory)
+                        ?.name || selectedCategory
+                    }`
+                  : `${allArticles.length} total notes`}
+              </p>
             </div>
           </div>
 
           {/* Notes Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {regularPosts.map((post) => (
-              <article
-                key={post.id}
-                className="group rounded-xl border transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden"
-                style={{
-                  backgroundColor: "var(--card-bg)",
-                  borderColor: "var(--card-border)",
-                }}
+          <div className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <h2
+                className="text-2xl font-bold"
+                style={{ color: "var(--text-primary)" }}
               >
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-4">
-                    <span
-                      className={`px-2 py-1 text-xs font-medium rounded-full text-white bg-gradient-to-r ${getCategoryColor(
-                        post.category
-                      )}`}
-                    >
-                      {post.category}
-                    </span>
-                    <span
-                      className="text-xs"
-                      style={{ color: "var(--text-muted)" }}
-                    >
-                      {post.readTime}
-                    </span>
-                  </div>
+                All Notes
+              </h2>
 
-                  <h3
-                    className="text-lg font-semibold mb-3 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2"
-                    style={{ color: "var(--text-primary)" }}
+              {/* Category Filter Pills */}
+              <div className="flex flex-wrap gap-2">
+                {categories.slice(0, 3).map((category) => (
+                  <button
+                    key={category.slug}
+                    onClick={() => setSelectedCategory(category.slug)}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 border ${
+                      selectedCategory === category.slug
+                        ? "text-white"
+                        : "hover:bg-[var(--surface)]"
+                    }`}
+                    style={
+                      selectedCategory === category.slug
+                        ? {
+                            backgroundColor: "var(--accent)",
+                            borderColor: "var(--accent)",
+                          }
+                        : {
+                            borderColor: "var(--border)",
+                            backgroundColor: "var(--surface)",
+                            color: "var(--text-secondary)",
+                          }
+                    }
                   >
-                    {post.title}
-                  </h3>
-
-                  <p
-                    className="text-sm mb-4 leading-relaxed line-clamp-3"
-                    style={{ color: "var(--text-secondary)" }}
+                    {category.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {filteredArticles.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredArticles.map((article) => (
+                  <article
+                    key={article.id}
+                    className="group rounded-xl border transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden"
+                    style={{
+                      backgroundColor: "var(--surface)",
+                      borderColor: "var(--border)",
+                    }}
                   >
-                    {post.excerpt}
-                  </p>
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <span
+                          className="px-2 py-1 text-xs font-medium rounded-full"
+                          style={{
+                            backgroundColor: "var(--surface)",
+                            color: "var(--text-secondary)",
+                            border: "1px solid var(--border)",
+                          }}
+                        >
+                          {article.subcategory}
+                        </span>
+                        <span
+                          className="text-xs"
+                          style={{ color: "var(--text-muted)" }}
+                        >
+                          {article.readTime}
+                        </span>
+                      </div>
 
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {post.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 text-xs rounded-full"
-                        style={{
-                          backgroundColor: "var(--accent-subtle)",
-                          color: "var(--accent)",
-                        }}
+                      <h3
+                        className="text-lg font-semibold mb-3 group-hover:text-[var(--accent)] transition-colors line-clamp-2"
+                        style={{ color: "var(--text-primary)" }}
                       >
-                        {tag}
-                      </span>
-                    ))}
-                    {post.tags.length > 3 && (
-                      <span
-                        className="px-2 py-1 text-xs rounded-full"
-                        style={{
-                          backgroundColor: "var(--surface)",
-                          color: "var(--text-muted)",
-                        }}
-                      >
-                        +{post.tags.length - 3}
-                      </span>
-                    )}
-                  </div>
+                        {article.title}
+                      </h3>
 
-                  <div
-                    className="flex items-center justify-between pt-4 border-t"
-                    style={{ borderColor: "var(--border)" }}
-                  >
-                    <span
-                      className="text-xs"
-                      style={{ color: "var(--text-muted)" }}
-                    >
-                      {post.date}
-                    </span>
-                    <Link
-                      href={`/blog/notes/${post.id}`}
-                      className="text-sm font-medium transition-colors hover:underline"
-                      style={{ color: "var(--accent)" }}
-                    >
-                      Read More →
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
+                      <div
+                        className="text-sm mb-3"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        <span
+                          className="px-2 py-1 rounded text-xs"
+                          style={{
+                            color: getDifficultyColor(article.difficulty),
+                            backgroundColor: `${getDifficultyColor(
+                              article.difficulty
+                            )}20`,
+                          }}
+                        >
+                          {article.difficulty}
+                        </span>
+                      </div>
+
+                      <p
+                        className="text-sm mb-4 leading-relaxed line-clamp-3"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        {article.excerpt}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1 mb-4">
+                        {article.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-1 text-xs rounded-full"
+                            style={{
+                              backgroundColor: "var(--accent-subtle)",
+                              color: "var(--accent)",
+                            }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div
+                        className="flex items-center justify-between text-xs mt-4"
+                        style={{ color: "var(--text-muted)" }}
+                      >
+                        <span>
+                          📅{" "}
+                          {new Date(article.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </span>
+                        <Link
+                          href={`/blog/${article.slug}`}
+                          className="inline-flex items-center text-[var(--accent)]"
+                        >
+                          Read more
+                          <svg
+                            className="w-3 h-3 ml-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">📝</div>
+                <h3
+                  className="text-xl font-semibold mb-2"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  No notes found
+                </h3>
+                <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
+                  {searchTerm
+                    ? `No notes match "${searchTerm}"`
+                    : `No notes in "${
+                        categories.find((c) => c.slug === selectedCategory)
+                          ?.name
+                      }" category`}
+                </p>
+                <button
+                  onClick={() => {
+                    setSearchTerm("");
+                    setSelectedCategory("all");
+                  }}
+                  className="px-4 py-2 rounded-lg transition-colors text-white"
+                  style={{ backgroundColor: "var(--accent)" }}
+                >
+                  Clear filters
+                </button>
+              </div>
+            )}
           </div>
 
-          {/* Newsletter CTA */}
+          {/* Quick References */}
           <div
-            className="p-8 rounded-2xl border text-center"
+            className="p-8 rounded-2xl border mb-12"
             style={{
               backgroundColor: "var(--surface)",
               borderColor: "var(--border)",
             }}
           >
-            <div className="max-w-2xl mx-auto">
-              <h3
-                className="text-2xl font-bold mb-4"
-                style={{ color: "var(--text-primary)" }}
-              >
-                💡 Stay Updated with Quick Insights
-              </h3>
-              <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
-                Get notified when I publish new notes and quick thoughts.
-                Bite-sized learning delivered to your inbox.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+            <h3
+              className="text-xl font-bold mb-4"
+              style={{ color: "var(--text-primary)" }}
+            >
+              📚 Quick References
+            </h3>
+            <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
+              Essential cheatsheets and quick references for developers:
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  name: "Git Commands",
+                  desc: "Essential Git workflow commands",
+                  icon: "🔧",
+                },
+                {
+                  name: "CSS Flexbox",
+                  desc: "Flexbox properties and values",
+                  icon: "🎨",
+                },
+                {
+                  name: "JavaScript ES6+",
+                  desc: "Modern JavaScript features",
+                  icon: "⚡",
+                },
+                {
+                  name: "React Hooks",
+                  desc: "Common React hooks patterns",
+                  icon: "⚛️",
+                },
+              ].map((resource) => (
+                <a
+                  key={resource.name}
+                  href="#"
+                  className="flex items-center gap-3 p-4 rounded-lg border transition-colors hover:shadow-md"
                   style={{
-                    backgroundColor: "var(--background)",
-                    borderColor: "var(--border)",
-                    color: "var(--text-primary)",
-                  }}
-                />
-                <button
-                  className="px-6 py-3 font-medium rounded-lg transition-colors duration-200"
-                  style={{
-                    backgroundColor: "var(--accent)",
-                    color: "white",
+                    backgroundColor: "var(--card-bg)",
+                    borderColor: "var(--card-border)",
                   }}
                 >
-                  Subscribe
-                </button>
-              </div>
+                  <div className="text-2xl">{resource.icon}</div>
+                  <div>
+                    <div
+                      className="font-medium"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      {resource.name}
+                    </div>
+                    <div
+                      className="text-xs"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {resource.desc}
+                    </div>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
+
+          {/* Navigation */}
+          <nav
+            className="mt-12 pt-8 border-t"
+            style={{ borderColor: "var(--border)" }}
+          >
+            <div className="flex justify-center">
+              <Link
+                href="/blog"
+                className="inline-flex items-center px-6 py-3 rounded-lg transition-colors border"
+                style={{
+                  backgroundColor: "var(--surface)",
+                  color: "var(--text-primary)",
+                  borderColor: "var(--border)",
+                }}
+              >
+                ← Back to All Blogs
+              </Link>
+            </div>
+          </nav>
         </div>
       </main>
     </div>

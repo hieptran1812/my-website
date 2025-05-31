@@ -1,93 +1,107 @@
-import React from "react";
-import Link from "next/link";
+"use client";
 
-const softwareDevPosts = [
-  {
-    id: 1,
-    title: "Building Scalable Microservices with Node.js and Docker",
-    excerpt:
-      "A comprehensive guide to designing, implementing, and deploying microservices architecture using modern tools and best practices.",
-    date: "2024-03-22",
-    readTime: "15 min read",
-    tags: ["Microservices", "Node.js", "Docker", "Architecture"],
-    difficulty: "Advanced",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Modern React Patterns: Hooks, Context, and State Management",
-    excerpt:
-      "Exploring advanced React patterns and state management strategies for building maintainable applications.",
-    date: "2024-03-18",
-    readTime: "12 min read",
-    tags: ["React", "Hooks", "State Management", "Frontend"],
-    difficulty: "Intermediate",
-  },
-  {
-    id: 3,
-    title: "API Design Best Practices: RESTful Services and GraphQL",
-    excerpt:
-      "Comprehensive guide to designing robust APIs, comparing REST and GraphQL approaches with real-world examples.",
-    date: "2024-03-14",
-    readTime: "10 min read",
-    tags: ["API Design", "REST", "GraphQL", "Backend"],
-    difficulty: "Intermediate",
-  },
-  {
-    id: 4,
-    title: "DevOps Pipeline: CI/CD with GitHub Actions and AWS",
-    excerpt:
-      "Setting up automated deployment pipelines using GitHub Actions, Docker, and AWS services for continuous delivery.",
-    date: "2024-03-09",
-    readTime: "14 min read",
-    tags: ["DevOps", "CI/CD", "GitHub Actions", "AWS"],
-    difficulty: "Advanced",
-  },
-  {
-    id: 5,
-    title: "Database Design Patterns for High-Performance Applications",
-    excerpt:
-      "Exploring database design patterns, indexing strategies, and optimization techniques for scalable applications.",
-    date: "2024-03-05",
-    readTime: "11 min read",
-    tags: ["Database", "Performance", "SQL", "NoSQL"],
-    difficulty: "Intermediate",
-  },
-  {
-    id: 6,
-    title: "Full-Stack TypeScript: End-to-End Type Safety",
-    excerpt:
-      "Building type-safe applications from frontend to backend using TypeScript, including API contracts and validation.",
-    date: "2024-02-28",
-    readTime: "13 min read",
-    tags: ["TypeScript", "Full-Stack", "Type Safety", "Development"],
-    difficulty: "Advanced",
-  },
-  {
-    id: 7,
-    title: "Testing Strategies: Unit, Integration, and E2E Testing",
-    excerpt:
-      "Comprehensive testing strategies for modern web applications, including tools, patterns, and best practices.",
-    date: "2024-02-22",
-    readTime: "9 min read",
-    tags: ["Testing", "Quality Assurance", "Jest", "Cypress"],
-    difficulty: "Intermediate",
-  },
-  {
-    id: 8,
-    title: "Performance Optimization: Frontend and Backend Techniques",
-    excerpt:
-      "Practical techniques for optimizing application performance across the entire stack, from code splitting to caching.",
-    date: "2024-02-18",
-    readTime: "16 min read",
-    tags: ["Performance", "Optimization", "Caching", "Monitoring"],
-    difficulty: "Advanced",
-  },
-];
+import React, { useState } from "react";
+import Link from "next/link";
+import { getArticlesByCategory, Article } from "@/data/articles";
 
 export default function SoftwareDevelopmentBlogPage() {
-  const featuredPost = softwareDevPosts.find((post) => post.featured);
-  const regularPosts = softwareDevPosts.filter((post) => !post.featured);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Get articles from centralized data system
+  const devArticles = getArticlesByCategory("software-development");
+
+  // Additional placeholder articles for display
+  const additionalArticles: Article[] = [
+    {
+      id: "software-development-best-practices",
+      title: "Software Development Best Practices: A Comprehensive Guide",
+      excerpt:
+        "Essential best practices for modern software development, covering code quality, testing, and maintainability.",
+      content: "",
+      category: "software-development",
+      tags: ["Best Practices", "Code Quality", "Testing"],
+      date: "2024-03-25",
+      readTime: "20 min read",
+      difficulty: "Intermediate",
+      slug: "software-development-best-practices",
+      subcategory: "Best Practices",
+      featured: true,
+    },
+    {
+      id: "microservices-nodejs-docker",
+      title: "Building Microservices with Node.js and Docker",
+      excerpt:
+        "Learn how to design, develop, and deploy scalable microservices using Node.js and Docker containers.",
+      content: "",
+      category: "software-development",
+      tags: ["Microservices", "Node.js", "Docker"],
+      date: "2024-03-22",
+      readTime: "25 min read",
+      difficulty: "Advanced",
+      slug: "microservices-nodejs-docker",
+      subcategory: "Architecture",
+      featured: false,
+    },
+    {
+      id: "system-design-scalability-patterns",
+      title: "System Design: Scalability Patterns and Best Practices",
+      excerpt:
+        "Comprehensive guide to designing scalable systems, covering load balancing, caching, and distributed architectures.",
+      content: "",
+      category: "software-development",
+      tags: ["System Design", "Scalability", "Architecture"],
+      date: "2024-03-20",
+      readTime: "30 min read",
+      difficulty: "Advanced",
+      slug: "system-design-scalability-patterns",
+      subcategory: "System Design",
+      featured: false,
+    },
+  ];
+
+  // Combine articles
+  const allArticles = [...devArticles, ...additionalArticles];
+
+  const categories = [
+    { name: "All", slug: "all", count: allArticles.length },
+    {
+      name: "Best Practices",
+      slug: "Best Practices",
+      count: allArticles.filter((a) => a.subcategory === "Best Practices")
+        .length,
+    },
+    {
+      name: "Architecture",
+      slug: "Architecture",
+      count: allArticles.filter((a) => a.subcategory === "Architecture").length,
+    },
+    {
+      name: "System Design",
+      slug: "System Design",
+      count: allArticles.filter((a) => a.subcategory === "System Design")
+        .length,
+    },
+    {
+      name: "DevOps",
+      slug: "DevOps",
+      count: allArticles.filter((a) => a.subcategory === "DevOps").length,
+    },
+  ];
+
+  const filteredArticles = allArticles.filter((article) => {
+    const matchesCategory =
+      selectedCategory === "all" || article.subcategory === selectedCategory;
+    const matchesSearch =
+      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      article.tags.some((tag) =>
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    return matchesCategory && matchesSearch;
+  });
+
+  const featuredArticles = allArticles.filter((article) => article.featured);
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -110,14 +124,162 @@ export default function SoftwareDevelopmentBlogPage() {
         color: "var(--text-primary)",
       }}
     >
-      <main className="flex-1 flex flex-col transition-colors duration-300">
-        <div className="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-16">
-              <div className="flex items-center justify-center gap-3 mb-6">
+      <main className="flex-1">
+        <div className="max-w-6xl mx-auto px-6 py-16">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div
+                className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                }}
+              >
+                💻
+              </div>
+              <h1
+                className="text-4xl md:text-5xl font-bold"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Software Development
+              </h1>
+            </div>
+            <p
+              className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              Comprehensive guides on software engineering practices, system
+              design, architecture patterns, and development methodologies for
+              building robust applications.
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {[
+                "System Design",
+                "Architecture",
+                "Best Practices",
+                "DevOps",
+                "Microservices",
+                "Scalability",
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 text-sm rounded-full border transition-colors duration-200 hover:bg-[var(--surface)] cursor-pointer"
+                  style={{
+                    borderColor: "var(--border)",
+                    backgroundColor: "var(--surface)",
+                    color: "var(--text-secondary)",
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Development Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{
+                backgroundColor: "var(--surface)",
+                borderColor: "var(--border)",
+              }}
+            >
+              <div
+                className="text-2xl font-bold mb-1"
+                style={{ color: "var(--accent)" }}
+              >
+                {allArticles.length}
+              </div>
+              <div
+                className="text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Articles Published
+              </div>
+            </div>
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{
+                backgroundColor: "var(--surface)",
+                borderColor: "var(--border)",
+              }}
+            >
+              <div
+                className="text-2xl font-bold mb-1"
+                style={{ color: "var(--accent)" }}
+              >
+                {categories.length - 1}
+              </div>
+              <div
+                className="text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Topics Covered
+              </div>
+            </div>
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{
+                backgroundColor: "var(--surface)",
+                borderColor: "var(--border)",
+              }}
+            >
+              <div
+                className="text-2xl font-bold mb-1"
+                style={{ color: "var(--accent)" }}
+              >
+                2024-2025
+              </div>
+              <div
+                className="text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Publication Range
+              </div>
+            </div>
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{
+                backgroundColor: "var(--surface)",
+                borderColor: "var(--border)",
+              }}
+            >
+              <div
+                className="text-2xl font-bold mb-1"
+                style={{ color: "var(--accent)" }}
+              >
+                {allArticles.length > 0
+                  ? Math.round(
+                      allArticles.reduce(
+                        (acc, article) => acc + parseInt(article.readTime),
+                        0
+                      ) / allArticles.length
+                    )
+                  : 0}
+              </div>
+              <div
+                className="text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Avg. Read Time
+              </div>
+            </div>
+          </div>
+
+          {/* Featured Article */}
+          {featuredArticles.length > 0 && (
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-8">
                 <svg
-                  className="w-8 h-8"
+                  className="w-6 h-6"
                   style={{ color: "var(--accent)" }}
                   fill="none"
                   stroke="currentColor"
@@ -127,231 +289,297 @@ export default function SoftwareDevelopmentBlogPage() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <h1
-                  className="text-4xl md:text-5xl font-bold"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, var(--accent), var(--accent-hover))",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Software Development
-                </h1>
-              </div>
-              <p
-                className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                In-depth tutorials, architectural insights, and best practices
-                for modern software development. From frontend frameworks to
-                backend systems and DevOps practices.
-              </p>
-              <div className="flex flex-wrap justify-center gap-2">
-                {[
-                  "Full-Stack",
-                  "Backend",
-                  "Frontend",
-                  "DevOps",
-                  "Architecture",
-                  "Testing",
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-sm rounded-full border transition-colors duration-200 hover:bg-[var(--surface)] cursor-pointer"
-                    style={{
-                      borderColor: "var(--border)",
-                      backgroundColor: "var(--surface)",
-                      color: "var(--text-secondary)",
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Stats Overview */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-              <div
-                className="rounded-lg p-6 text-center border"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  borderColor: "var(--border)",
-                }}
-              >
-                <div
-                  className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                  style={{ backgroundColor: "var(--accent)" }}
-                >
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                    />
-                  </svg>
-                </div>
-                <div
-                  className="text-2xl font-bold mb-2"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  8+
-                </div>
-                <div
-                  className="text-sm"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  Comprehensive Guides
-                </div>
-              </div>
-              <div
-                className="rounded-lg p-6 text-center border"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  borderColor: "var(--border)",
-                }}
-              >
-                <div
-                  className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                  style={{ backgroundColor: "#f59e0b" }}
-                >
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                    />
-                  </svg>
-                </div>
-                <div
-                  className="text-2xl font-bold mb-2"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  6+
-                </div>
-                <div
-                  className="text-sm"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  Tech Categories
-                </div>
-              </div>
-              <div
-                className="rounded-lg p-6 text-center border"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  borderColor: "var(--border)",
-                }}
-              >
-                <div
-                  className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                  style={{ backgroundColor: "#22c55e" }}
-                >
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
-                </div>
-                <div
-                  className="text-2xl font-bold mb-2"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Modern
-                </div>
-                <div
-                  className="text-sm"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  Best Practices
-                </div>
-              </div>
-            </div>
-
-            {/* Featured Article */}
-            {featuredPost && (
-              <div className="mb-16">
                 <h2
-                  className="text-2xl font-bold mb-8 text-center"
+                  className="text-2xl font-bold"
                   style={{ color: "var(--text-primary)" }}
                 >
                   Featured Article
                 </h2>
-                <div
-                  className="rounded-lg p-8 border-2 transition-all duration-300 hover:shadow-lg relative overflow-hidden"
-                  style={{
-                    borderColor: "var(--accent)",
-                    backgroundColor: "var(--surface)",
-                  }}
-                >
-                  <div className="relative z-10">
-                    <div className="flex flex-wrap items-center gap-4 mb-4">
-                      <span
-                        className="px-3 py-1 text-xs font-medium rounded-full"
-                        style={{
-                          backgroundColor: "var(--accent)",
-                          color: "var(--background)",
-                        }}
-                      >
-                        Featured
-                      </span>
-                      <span
-                        className="px-2 py-1 text-xs rounded-md font-medium"
-                        style={{
-                          backgroundColor: getDifficultyColor(
-                            featuredPost.difficulty
-                          ),
-                          color: "white",
-                        }}
-                      >
-                        {featuredPost.difficulty}
-                      </span>
+              </div>
+
+              <div
+                className="rounded-2xl p-8 border transition-all duration-300 hover:shadow-xl"
+                style={{
+                  backgroundColor: "var(--surface)",
+                  borderColor: "var(--border)",
+                  background:
+                    "linear-gradient(145deg, var(--surface), var(--surface-hover))",
+                }}
+              >
+                {featuredArticles.slice(0, 1).map((article) => (
+                  <div key={article.id}>
+                    <div className="grid md:grid-cols-3 gap-6 mb-6">
+                      <div>
+                        <div
+                          className="text-sm font-medium mb-1"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          Category
+                        </div>
+                        <div
+                          className="font-semibold"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          {article.subcategory}
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          className="text-sm font-medium mb-1"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          Difficulty
+                        </div>
+                        <span
+                          className="px-3 py-1 text-sm font-medium rounded-full text-white"
+                          style={{
+                            backgroundColor: getDifficultyColor(
+                              article.difficulty
+                            ),
+                          }}
+                        >
+                          {article.difficulty}
+                        </span>
+                      </div>
+                      <div>
+                        <div
+                          className="text-sm font-medium mb-1"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          Reading Time
+                        </div>
+                        <div
+                          className="font-semibold"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          {article.readTime}
+                        </div>
+                      </div>
                     </div>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {article.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 text-xs font-medium rounded-full"
+                          style={{
+                            backgroundColor: "var(--accent-subtle)",
+                            color: "var(--accent)",
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
                     <h3
                       className="text-2xl md:text-3xl font-bold mb-4"
                       style={{ color: "var(--text-primary)" }}
                     >
-                      {featuredPost.title}
+                      {article.title}
                     </h3>
+
                     <p
                       className="text-lg mb-6 leading-relaxed"
                       style={{ color: "var(--text-secondary)" }}
                     >
-                      {featuredPost.excerpt}
+                      {article.excerpt}
                     </p>
-                    <div className="flex flex-wrap items-center justify-between gap-4">
-                      <div className="flex flex-wrap gap-2">
-                        {featuredPost.tags.map((tag) => (
+
+                    <div className="flex items-center justify-between">
+                      <div
+                        className="flex items-center gap-4 text-sm"
+                        style={{ color: "var(--text-muted)" }}
+                      >
+                        <span>📝 {article.date}</span>
+                        <span>•</span>
+                        <span>💻 Development</span>
+                      </div>
+                      <Link
+                        href={`/blog/${article.slug}`}
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105"
+                        style={{
+                          backgroundColor: "var(--accent)",
+                          color: "white",
+                        }}
+                      >
+                        Read Article
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Development Topics */}
+          <div className="mb-12">
+            <h2
+              className="text-2xl font-bold mb-6"
+              style={{ color: "var(--text-primary)" }}
+            >
+              Development Topics
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+              {[
+                "Best Practices",
+                "Architecture",
+                "System Design",
+                "DevOps",
+                "Scalability",
+              ].map((topic) => (
+                <button
+                  key={topic}
+                  onClick={() => setSelectedCategory(topic)}
+                  className="p-4 rounded-lg border transition-all duration-200 hover:shadow-md hover:scale-105 text-center"
+                  style={{
+                    backgroundColor: "var(--surface)",
+                    borderColor: "var(--border)",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  <div className="font-medium text-sm">{topic}</div>
+                </button>
+              ))}
+            </div>
+
+            {/* Results Summary */}
+            <div className="text-center mb-4">
+              <p style={{ color: "var(--text-secondary)" }}>
+                {selectedCategory !== "all"
+                  ? `Showing ${filteredArticles.length} articles in ${
+                      categories.find((c) => c.slug === selectedCategory)
+                        ?.name || selectedCategory
+                    }`
+                  : `${allArticles.length} total development articles`}
+              </p>
+            </div>
+          </div>
+
+          {/* Articles Grid */}
+          <div className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <h2
+                className="text-2xl font-bold"
+                style={{ color: "var(--text-primary)" }}
+              >
+                All Development Articles
+              </h2>
+
+              {/* Category Filter Pills */}
+              <div className="flex flex-wrap gap-2">
+                {categories.slice(0, 3).map((category) => (
+                  <button
+                    key={category.slug}
+                    onClick={() => setSelectedCategory(category.slug)}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 border ${
+                      selectedCategory === category.slug
+                        ? "text-white"
+                        : "hover:bg-[var(--surface)]"
+                    }`}
+                    style={
+                      selectedCategory === category.slug
+                        ? {
+                            backgroundColor: "var(--accent)",
+                            borderColor: "var(--accent)",
+                          }
+                        : {
+                            borderColor: "var(--border)",
+                            backgroundColor: "var(--surface)",
+                            color: "var(--text-secondary)",
+                          }
+                    }
+                  >
+                    {category.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {filteredArticles.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredArticles.map((article) => (
+                  <article
+                    key={article.id}
+                    className="group rounded-xl border transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden"
+                    style={{
+                      backgroundColor: "var(--surface)",
+                      borderColor: "var(--border)",
+                    }}
+                  >
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <span
+                          className="px-2 py-1 text-xs font-medium rounded-full"
+                          style={{
+                            backgroundColor: "var(--surface)",
+                            color: "var(--text-secondary)",
+                            border: "1px solid var(--border)",
+                          }}
+                        >
+                          {article.subcategory}
+                        </span>
+                        <span
+                          className="text-xs"
+                          style={{ color: "var(--text-muted)" }}
+                        >
+                          {article.readTime}
+                        </span>
+                      </div>
+
+                      <h3
+                        className="text-lg font-semibold mb-3 group-hover:text-[var(--accent)] transition-colors line-clamp-2"
+                        style={{ color: "var(--text-primary)" }}
+                      >
+                        {article.title}
+                      </h3>
+
+                      <div
+                        className="text-sm mb-3"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        <span
+                          className="px-2 py-1 rounded text-xs"
+                          style={{
+                            color: getDifficultyColor(article.difficulty),
+                            backgroundColor: `${getDifficultyColor(
+                              article.difficulty
+                            )}20`,
+                          }}
+                        >
+                          {article.difficulty}
+                        </span>
+                      </div>
+
+                      <p
+                        className="text-sm mb-4 leading-relaxed line-clamp-3"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        {article.excerpt}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1 mb-4">
+                        {article.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
-                            className="px-2 py-1 text-xs rounded-md"
+                            className="px-2 py-1 text-xs rounded-full"
                             style={{
-                              backgroundColor: "var(--background)",
+                              backgroundColor: "var(--accent-subtle)",
                               color: "var(--accent)",
                             }}
                           >
@@ -359,193 +587,162 @@ export default function SoftwareDevelopmentBlogPage() {
                           </span>
                         ))}
                       </div>
-                      <div className="flex items-center gap-4">
-                        <span
-                          className="text-sm"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
-                          {featuredPost.date} • {featuredPost.readTime}
+
+                      <div
+                        className="flex items-center justify-between text-xs mt-4"
+                        style={{ color: "var(--text-muted)" }}
+                      >
+                        <span>
+                          📅{" "}
+                          {new Date(article.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}
                         </span>
                         <Link
-                          href={`/blog/software-development/${featuredPost.id}`}
-                          className="px-4 py-2 rounded-md font-medium transition-all duration-200 hover:scale-105"
-                          style={{
-                            backgroundColor: "var(--accent)",
-                            color: "var(--background)",
-                          }}
+                          href={`/blog/${article.slug}`}
+                          className="inline-flex items-center text-[var(--accent)]"
                         >
-                          Read Article
+                          Read more
+                          <svg
+                            className="w-3 h-3 ml-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
                         </Link>
                       </div>
                     </div>
-                  </div>
-                  <div
-                    className="absolute top-0 right-0 w-32 h-32 opacity-5"
-                    style={{
-                      background:
-                        "radial-gradient(circle, var(--accent) 0%, transparent 70%)",
-                    }}
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* All Articles Grid */}
-            <div className="mb-16">
-              <h2
-                className="text-2xl font-bold mb-8 text-center"
-                style={{ color: "var(--text-primary)" }}
-              >
-                Latest Articles
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {regularPosts.map((post) => (
-                  <div
-                    key={post.id}
-                    className="rounded-lg p-6 border transition-all duration-300 hover:shadow-lg hover:scale-105 group"
-                    style={{
-                      borderColor: "var(--border)",
-                      backgroundColor: "var(--surface)",
-                    }}
-                  >
-                    <div className="mb-4">
-                      <span
-                        className="text-xs px-2 py-1 rounded-full font-medium"
-                        style={{
-                          backgroundColor: getDifficultyColor(post.difficulty),
-                          color: "white",
-                        }}
-                      >
-                        {post.difficulty}
-                      </span>
-                    </div>
-                    <h3
-                      className="text-lg font-bold mb-3 group-hover:text-[var(--accent)] transition-colors duration-200"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {post.title}
-                    </h3>
-                    <p
-                      className="text-sm mb-4 leading-relaxed"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      {post.excerpt}
-                    </p>
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-1 text-xs rounded-md"
-                          style={{
-                            backgroundColor: "var(--background)",
-                            color: "var(--text-secondary)",
-                          }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span
-                        className="text-xs"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        {post.date} • {post.readTime}
-                      </span>
-                      <Link
-                        href={`/blog/software-development/${post.id}`}
-                        className="text-sm font-medium hover:underline transition-colors duration-200"
-                        style={{ color: "var(--accent)" }}
-                      >
-                        Read Article →
-                      </Link>
-                    </div>
-                  </div>
+                  </article>
                 ))}
               </div>
-            </div>
-
-            {/* Learning Path Section */}
-            <div
-              className="rounded-lg p-8 border"
-              style={{
-                borderColor: "var(--border)",
-                backgroundColor: "var(--surface)",
-              }}
-            >
-              <h2
-                className="text-2xl font-bold mb-6 text-center"
-                style={{ color: "var(--text-primary)" }}
-              >
-                Recommended Learning Path
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div
-                    className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                    style={{ backgroundColor: "#22c55e" }}
-                  >
-                    <span className="text-white font-bold">1</span>
-                  </div>
-                  <h3
-                    className="font-bold mb-2"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    Fundamentals
-                  </h3>
-                  <p
-                    className="text-sm"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    Start with basic concepts, testing strategies, and API
-                    design patterns.
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div
-                    className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                    style={{ backgroundColor: "#f59e0b" }}
-                  >
-                    <span className="text-white font-bold">2</span>
-                  </div>
-                  <h3
-                    className="font-bold mb-2"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    Intermediate
-                  </h3>
-                  <p
-                    className="text-sm"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    Learn modern frameworks, state management, and database
-                    design.
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div
-                    className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                    style={{ backgroundColor: "#ef4444" }}
-                  >
-                    <span className="text-white font-bold">3</span>
-                  </div>
-                  <h3
-                    className="font-bold mb-2"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    Advanced
-                  </h3>
-                  <p
-                    className="text-sm"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    Master microservices, DevOps pipelines, and system
-                    architecture.
-                  </p>
-                </div>
+            ) : (
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3
+                  className="text-xl font-semibold mb-2"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  No articles found
+                </h3>
+                <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
+                  {searchTerm
+                    ? `No articles match "${searchTerm}"`
+                    : `No articles in "${
+                        categories.find((c) => c.slug === selectedCategory)
+                          ?.name
+                      }" category`}
+                </p>
+                <button
+                  onClick={() => {
+                    setSearchTerm("");
+                    setSelectedCategory("all");
+                  }}
+                  className="px-4 py-2 rounded-lg transition-colors text-white"
+                  style={{ backgroundColor: "var(--accent)" }}
+                >
+                  Clear filters
+                </button>
               </div>
+            )}
+          </div>
+
+          {/* Development Resources */}
+          <div
+            className="p-8 rounded-2xl border mb-12"
+            style={{
+              backgroundColor: "var(--surface)",
+              borderColor: "var(--border)",
+            }}
+          >
+            <h3
+              className="text-xl font-bold mb-4"
+              style={{ color: "var(--text-primary)" }}
+            >
+              🛠️ Development Resources
+            </h3>
+            <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
+              Essential tools and resources for modern software development:
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  name: "System Design Primer",
+                  desc: "Learn how to design large-scale systems",
+                  icon: "🏗️",
+                },
+                {
+                  name: "Clean Code",
+                  desc: "Best practices for writing maintainable code",
+                  icon: "✨",
+                },
+                {
+                  name: "Design Patterns",
+                  desc: "Common software design patterns",
+                  icon: "🎨",
+                },
+                {
+                  name: "DevOps Practices",
+                  desc: "CI/CD and deployment strategies",
+                  icon: "🚀",
+                },
+              ].map((resource) => (
+                <a
+                  key={resource.name}
+                  href="#"
+                  className="flex items-center gap-3 p-4 rounded-lg border transition-colors hover:shadow-md"
+                  style={{
+                    backgroundColor: "var(--card-bg)",
+                    borderColor: "var(--card-border)",
+                  }}
+                >
+                  <div className="text-2xl">{resource.icon}</div>
+                  <div>
+                    <div
+                      className="font-medium"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      {resource.name}
+                    </div>
+                    <div
+                      className="text-xs"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {resource.desc}
+                    </div>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
+
+          {/* Navigation */}
+          <nav
+            className="mt-12 pt-8 border-t"
+            style={{ borderColor: "var(--border)" }}
+          >
+            <div className="flex justify-center">
+              <Link
+                href="/blog"
+                className="inline-flex items-center px-6 py-3 rounded-lg transition-colors border"
+                style={{
+                  backgroundColor: "var(--surface)",
+                  color: "var(--text-primary)",
+                  borderColor: "var(--border)",
+                }}
+              >
+                ← Back to All Blogs
+              </Link>
+            </div>
+          </nav>
         </div>
       </main>
     </div>

@@ -382,7 +382,7 @@ export default function CryptoBlogPage() {
                         <span>₿ Crypto Analysis</span>
                       </div>
                       <Link
-                        href={`/blog/crypto/${article.slug}`}
+                        href={`/blog/${article.slug}`}
                         className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105"
                         style={{
                           backgroundColor: "var(--accent)",
@@ -584,7 +584,7 @@ export default function CryptoBlogPage() {
                           })}
                         </span>
                         <Link
-                          href={`/blog/crypto/${article.slug}`}
+                          href={`/blog/${article.slug}`}
                           className="inline-flex items-center text-[var(--accent)]"
                         >
                           Read more

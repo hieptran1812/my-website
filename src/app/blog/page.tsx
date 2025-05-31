@@ -1,115 +1,146 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-const articles = [
-  {
-    title: "Advanced Blog Reading Experience Demo",
-    summary:
-      "Experience our enhanced blog reader with eye-comfort mode, adjustable fonts, and interactive features.",
-    image: "/blog-placeholder.jpg",
-    date: "2025-05-29",
-    link: "/blog/sample-blog-post",
-    category: "Demo",
-    readTime: "15 min read",
-  },
-  {
-    title: "How to Build a Modern Portfolio with Next.js",
-    summary:
-      "A step-by-step guide to creating a personal website using Next.js, TypeScript, and Tailwind CSS.",
-    image: "/blog-placeholder.jpg",
-    date: "2025-05-01",
-    link: "/blog/modern-portfolio-nextjs",
-    category: "Tutorial",
-    readTime: "8 min read",
-  },
-  {
-    title: "Open Source: Why and How to Start",
-    summary:
-      "My journey into open source and tips for beginners looking to contribute.",
-    image: "/blog-placeholder.jpg",
-    date: "2025-04-15",
-    link: "/blog/open-source-guide",
-    category: "Guide",
-    readTime: "6 min read",
-  },
-  {
-    title: "Transformer Architecture: Building GPT from Scratch",
-    summary:
-      "A comprehensive implementation guide to building a GPT-style transformer model from scratch using PyTorch.",
-    image: "/blog-placeholder.jpg",
-    date: "2025-04-01",
-    link: "/blog/machine-learning",
-    category: "AI/ML",
-    readTime: "20 min read",
-  },
-  {
-    title: "Understanding Blockchain Technology: A Comprehensive Guide",
-    summary:
-      "Dive deep into the fundamentals of blockchain technology and its applications across various industries.",
-    image: "/blog-placeholder.jpg",
-    date: "2025-03-25",
-    link: "/blog/crypto",
-    category: "Crypto",
-    readTime: "8 min read",
-  },
-  {
-    title: "Building Scalable Web Applications",
-    summary:
-      "Best practices for building web applications that can scale with your business needs.",
-    image: "/blog-placeholder.jpg",
-    date: "2025-03-20",
-    link: "/blog/software-development",
-    category: "Development",
-    readTime: "10 min read",
-  },
-];
+interface BlogPostMetadata {
+  slug: string;
+  title: string;
+  publishDate: string;
+  readTime: string;
+  category: string;
+  author: string;
+  tags: string[];
+  image: string;
+  excerpt: string;
+}
 
-const categories = [
-  {
-    name: "Machine Learning",
-    description: "AI, ML algorithms, and deep learning tutorials",
-    link: "/blog/machine-learning",
-    icon: "🤖",
-    count: 8,
-    color: "from-blue-500 to-purple-600",
-  },
-  {
-    name: "Cryptocurrency",
-    description: "Blockchain, DeFi, and crypto technology insights",
-    link: "/blog/crypto",
-    icon: "₿",
-    count: 5,
-    color: "from-orange-500 to-yellow-500",
-  },
-  {
-    name: "Software Development",
-    description: "Programming best practices and tutorials",
-    link: "/blog/software-development",
-    icon: "💻",
-    count: 12,
-    color: "from-green-500 to-teal-600",
-  },
-  {
-    name: "Paper Reading",
-    description: "Research paper summaries and analysis",
-    link: "/blog/paper-reading",
-    icon: "📄",
-    count: 6,
-    color: "from-purple-500 to-pink-600",
-  },
-  {
-    name: "Notes",
-    description: "Quick thoughts and learning notes",
-    link: "/blog/notes",
-    icon: "📝",
-    count: 15,
-    color: "from-indigo-500 to-blue-600",
-  },
-];
+interface Article {
+  title: string;
+  summary: string;
+  image: string;
+  date: string;
+  link: string;
+  category: string;
+  readTime: string;
+}
+
+// Convert BlogPostMetadata to Article format
+function convertToArticle(post: BlogPostMetadata): Article {
+  return {
+    title: post.title,
+    summary: post.excerpt,
+    image: post.image,
+    date: post.publishDate,
+    link: `/blog/${post.slug}`,
+    category: post.category,
+    readTime: post.readTime,
+  };
+}
 
 export default function BlogPage() {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const response = await fetch("/api/blog/posts");
+        const blogPosts: BlogPostMetadata[] = await response.json();
+        const convertedArticles = blogPosts.map(convertToArticle);
+        setArticles(convertedArticles);
+      } catch (error) {
+        console.error("Error loading blog posts:", error);
+        // Fallback to empty array
+        setArticles([]);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchPosts();
+  }, []);
+
+  // Update categories to reflect actual blog posts
+  const categories = [
+    {
+      name: "Software Development",
+      description: "Programming best practices and tutorials",
+      link: "/blog/software-development",
+      icon: "💻",
+      count: articles.filter((a) =>
+        a.category.toLowerCase().includes("development")
+      ).length,
+      color: "from-green-500 to-teal-600",
+    },
+    {
+      name: "Machine Learning",
+      description: "AI, ML algorithms, and deep learning insights",
+      link: "/blog/machine-learning",
+      icon: "🤖",
+      count: articles.filter((a) =>
+        a.category.toLowerCase().includes("machine learning")
+      ).length,
+      color: "from-purple-500 to-pink-600",
+    },
+    {
+      name: "Cryptocurrency",
+      description: "Blockchain, DeFi, and crypto technology insights",
+      link: "/blog/crypto",
+      icon: "₿",
+      count: articles.filter((a) => a.category.toLowerCase().includes("crypto"))
+        .length,
+      color: "from-orange-500 to-yellow-500",
+    },
+    {
+      name: "TypeScript",
+      description: "TypeScript tips and best practices",
+      link: "/blog/typescript-best-practices",
+      icon: "🔷",
+      count: articles.filter((a) =>
+        a.category.toLowerCase().includes("typescript")
+      ).length,
+      color: "from-blue-500 to-purple-600",
+    },
+    {
+      name: "Paper Reading",
+      description: "Research paper reviews and analysis",
+      link: "/blog/paper-reading",
+      icon: "📚",
+      count: articles.filter((a) => a.category.toLowerCase().includes("paper"))
+        .length,
+      color: "from-indigo-500 to-blue-600",
+    },
+    {
+      name: "Notes",
+      description: "Quick thoughts and learning notes",
+      link: "/blog/notes",
+      icon: "📝",
+      count: articles.filter((a) => a.category.toLowerCase().includes("notes"))
+        .length,
+      color: "from-cyan-500 to-blue-600",
+    },
+  ];
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col min-h-screen items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
+        <p className="mt-4 text-lg">Loading blog posts...</p>
+      </div>
+    );
+  }
+
+  if (articles.length === 0) {
+    return (
+      <div className="flex flex-col min-h-screen items-center justify-center">
+        <h1 className="text-4xl font-bold mb-4">No blog posts found</h1>
+        <p className="text-lg text-gray-600">
+          Check back later for new content!
+        </p>
+      </div>
+    );
+  }
   return (
     <div
       className="flex flex-col min-h-screen transition-colors duration-300"
