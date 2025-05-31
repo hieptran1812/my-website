@@ -68,19 +68,6 @@ export default function MachineLearningBlogPage() {
 
   const featuredArticles = allArticles.filter((article) => article.featured);
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case "Beginner":
-        return "#22c55e";
-      case "Intermediate":
-        return "#f59e0b";
-      case "Advanced":
-        return "#ef4444";
-      default:
-        return "var(--text-secondary)";
-    }
-  };
-
   if (loading) {
     return (
       <div
@@ -232,23 +219,6 @@ export default function MachineLearningBlogPage() {
                       >
                         {article.title}
                       </h3>
-
-                      <div
-                        className="text-sm mb-3"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        <span
-                          className="px-2 py-1 rounded text-xs"
-                          style={{
-                            color: getDifficultyColor(article.difficulty),
-                            backgroundColor: `${getDifficultyColor(
-                              article.difficulty
-                            )}20`,
-                          }}
-                        >
-                          {article.difficulty}
-                        </span>
-                      </div>
 
                       <p
                         className="text-sm mb-4 leading-relaxed line-clamp-3"

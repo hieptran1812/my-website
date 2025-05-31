@@ -64,19 +64,6 @@ export default function CryptoBlogPage() {
 
   const featuredArticles = allArticles.filter((article) => article.featured);
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case "Beginner":
-        return "#22c55e";
-      case "Intermediate":
-        return "#f59e0b";
-      case "Advanced":
-        return "#ef4444";
-      default:
-        return "var(--text-secondary)";
-    }
-  };
-
   if (loading) {
     return (
       <div
@@ -319,18 +306,14 @@ export default function CryptoBlogPage() {
                           className="text-sm font-medium mb-1"
                           style={{ color: "var(--text-secondary)" }}
                         >
-                          Difficulty
+                          Category
                         </div>
-                        <span
-                          className="px-3 py-1 text-sm font-medium rounded-full text-white"
-                          style={{
-                            backgroundColor: getDifficultyColor(
-                              article.difficulty
-                            ),
-                          }}
+                        <div
+                          className="font-semibold"
+                          style={{ color: "var(--text-primary)" }}
                         >
-                          {article.difficulty}
-                        </span>
+                          {article.subcategory}
+                        </div>
                       </div>
                       <div>
                         <div
@@ -536,23 +519,6 @@ export default function CryptoBlogPage() {
                       >
                         {article.title}
                       </h3>
-
-                      <div
-                        className="text-sm mb-3"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        <span
-                          className="px-2 py-1 rounded text-xs"
-                          style={{
-                            color: getDifficultyColor(article.difficulty),
-                            backgroundColor: `${getDifficultyColor(
-                              article.difficulty
-                            )}20`,
-                          }}
-                        >
-                          {article.difficulty}
-                        </span>
-                      </div>
 
                       <p
                         className="text-sm mb-4 leading-relaxed line-clamp-3"

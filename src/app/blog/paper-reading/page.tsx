@@ -35,20 +35,36 @@ export default function PaperReadingBlogPage() {
         .length,
     },
     {
-      name: "NLP",
-      slug: "NLP",
-      count: allArticles.filter((a) => a.subcategory === "NLP").length,
+      name: "LLM",
+      slug: "LLM",
+      count: allArticles.filter((a) => a.subcategory === "LLM").length,
     },
     {
-      name: "Machine Learning",
-      slug: "Machine Learning",
-      count: allArticles.filter((a) => a.subcategory === "Machine Learning")
+      name: "AI Interpretability",
+      slug: "AI Interpretability",
+      count: allArticles.filter((a) => a.subcategory === "AI Interpretability")
         .length,
+    },
+    {
+      name: "Multimodal",
+      slug: "Multimodal",
+      count: allArticles.filter((a) => a.subcategory === "Multimodal").length,
     },
     {
       name: "Deep Learning",
       slug: "Deep Learning",
       count: allArticles.filter((a) => a.subcategory === "Deep Learning")
+        .length,
+    },
+    {
+      name: "AI Agent",
+      slug: "AI Agent",
+      count: allArticles.filter((a) => a.subcategory === "AI Agent").length,
+    },
+    {
+      name: "Machine Learning",
+      slug: "Machine Learning",
+      count: allArticles.filter((a) => a.subcategory === "Machine Learning")
         .length,
     },
   ];
@@ -66,19 +82,6 @@ export default function PaperReadingBlogPage() {
   });
 
   const featuredArticles = allArticles.filter((article) => article.featured);
-
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case "Beginner":
-        return "#22c55e";
-      case "Intermediate":
-        return "#f59e0b";
-      case "Advanced":
-        return "#ef4444";
-      default:
-        return "var(--text-secondary)";
-    }
-  };
 
   if (loading) {
     return (
@@ -154,12 +157,13 @@ export default function PaperReadingBlogPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-2">
               {[
-                "Deep Learning",
                 "Computer Vision",
-                "NLP",
-                "Transformers",
-                "Research",
-                "Papers",
+                "LLM",
+                "AI Interpretability",
+                "Multimodal",
+                "Deep Learning",
+                "AI Agent",
+                "Machine Learning",
               ].map((tag) => (
                 <span
                   key={tag}
@@ -304,7 +308,7 @@ export default function PaperReadingBlogPage() {
               >
                 {featuredArticles.slice(0, 1).map((article) => (
                   <div key={article.id}>
-                    <div className="grid md:grid-cols-3 gap-6 mb-6">
+                    <div className="grid md:grid-cols-2 gap-6 mb-6">
                       <div>
                         <div
                           className="text-sm font-medium mb-1"
@@ -318,24 +322,6 @@ export default function PaperReadingBlogPage() {
                         >
                           {article.subcategory}
                         </div>
-                      </div>
-                      <div>
-                        <div
-                          className="text-sm font-medium mb-1"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
-                          Difficulty
-                        </div>
-                        <span
-                          className="px-3 py-1 text-sm font-medium rounded-full text-white"
-                          style={{
-                            backgroundColor: getDifficultyColor(
-                              article.difficulty
-                            ),
-                          }}
-                        >
-                          {article.difficulty}
-                        </span>
                       </div>
                       <div>
                         <div
@@ -432,10 +418,12 @@ export default function PaperReadingBlogPage() {
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
               {[
                 "Computer Vision",
-                "NLP",
+                "LLM",
+                "AI Interpretability",
+                "Multimodal",
                 "Deep Learning",
+                "AI Agent",
                 "Machine Learning",
-                "Transformers",
               ].map((topic) => (
                 <button
                   key={topic}
@@ -541,23 +529,6 @@ export default function PaperReadingBlogPage() {
                       >
                         {article.title}
                       </h3>
-
-                      <div
-                        className="text-sm mb-3"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        <span
-                          className="px-2 py-1 rounded text-xs"
-                          style={{
-                            color: getDifficultyColor(article.difficulty),
-                            backgroundColor: `${getDifficultyColor(
-                              article.difficulty
-                            )}20`,
-                          }}
-                        >
-                          {article.difficulty}
-                        </span>
-                      </div>
 
                       <p
                         className="text-sm mb-4 leading-relaxed line-clamp-3"

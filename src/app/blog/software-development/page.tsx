@@ -68,19 +68,6 @@ export default function SoftwareDevelopmentBlogPage() {
 
   const featuredArticles = allArticles.filter((article) => article.featured);
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case "Beginner":
-        return "#22c55e";
-      case "Intermediate":
-        return "#f59e0b";
-      case "Advanced":
-        return "#ef4444";
-      default:
-        return "var(--text-secondary)";
-    }
-  };
-
   if (loading) {
     return (
       <div
@@ -325,24 +312,6 @@ export default function SoftwareDevelopmentBlogPage() {
                           className="text-sm font-medium mb-1"
                           style={{ color: "var(--text-secondary)" }}
                         >
-                          Difficulty
-                        </div>
-                        <span
-                          className="px-3 py-1 text-sm font-medium rounded-full text-white"
-                          style={{
-                            backgroundColor: getDifficultyColor(
-                              article.difficulty
-                            ),
-                          }}
-                        >
-                          {article.difficulty}
-                        </span>
-                      </div>
-                      <div>
-                        <div
-                          className="text-sm font-medium mb-1"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
                           Reading Time
                         </div>
                         <div
@@ -542,23 +511,6 @@ export default function SoftwareDevelopmentBlogPage() {
                       >
                         {article.title}
                       </h3>
-
-                      <div
-                        className="text-sm mb-3"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        <span
-                          className="px-2 py-1 rounded text-xs"
-                          style={{
-                            color: getDifficultyColor(article.difficulty),
-                            backgroundColor: `${getDifficultyColor(
-                              article.difficulty
-                            )}20`,
-                          }}
-                        >
-                          {article.difficulty}
-                        </span>
-                      </div>
 
                       <p
                         className="text-sm mb-4 leading-relaxed line-clamp-3"
