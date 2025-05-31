@@ -1,8 +1,8 @@
 ---
-title: 'Attention Is All You Need: Understanding the Transformer Architecture'
-publishDate: '2024-02-28'
+title: "Attention Is All You Need: Understanding the Transformer Architecture"
+publishDate: "2024-02-28"
 readTime: 17 min read
-category: Paper Reading
+category: paper-reading
 author: Hiep Tran
 tags:
   - Transformers

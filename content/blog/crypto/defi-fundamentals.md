@@ -1,8 +1,8 @@
 ---
-title: 'DeFi Fundamentals: Understanding Decentralized Finance'
-publishDate: '2024-03-15'
+title: "DeFi Fundamentals: Understanding Decentralized Finance"
+publishDate: "2024-03-15"
 readTime: 7 min read
-category: Crypto
+category: crypto
 author: Hiep Tran
 tags:
   - DeFi

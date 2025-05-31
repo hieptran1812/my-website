@@ -27,12 +27,19 @@ interface Article {
 
 // Convert BlogPostMetadata to Article format
 function convertToArticle(post: BlogPostMetadata): Article {
+  // Handle the case where the slug might include the category name
+  const slugParts = post.slug.split("/");
+  const slug =
+    slugParts.length > 1
+      ? `${slugParts[0]}/${slugParts[1]}` // category/slug format
+      : post.slug; // just slug
+
   return {
     title: post.title,
     summary: post.excerpt,
     image: post.image,
     date: post.publishDate,
-    link: `/blog/${post.slug}`,
+    link: `/blog/${slug}`,
     category: post.category,
     readTime: post.readTime,
   };

@@ -29,34 +29,47 @@ export async function GET(request: Request) {
       return NextResponse.json([]);
     }
 
-    const files = fs
-      .readdirSync(contentDirectory)
-      .filter((file) => file.endsWith(".md"));
+    // Get all blog posts from all category folders
+    let posts: BlogPostMetadata[] = [];
 
-    let posts: BlogPostMetadata[] = files.map((filename) => {
-      const filePath = path.join(contentDirectory, filename);
-      const fileContents = fs.readFileSync(filePath, "utf8");
-      const { data, content } = matter(fileContents);
+    // Read directories inside blog folder (categories)
+    const categoryFolders = fs
+      .readdirSync(contentDirectory, { withFileTypes: true })
+      .filter((dirent) => dirent.isDirectory())
+      .map((dirent) => dirent.name);
 
-      // Calculate automatic read time based on content
-      const automaticReadTime = calculateReadTimeWithTags(
-        content,
-        data.tags || [],
-        data.category || "general"
-      );
+    // Process files from each category folder
+    for (const categoryFolder of categoryFolders) {
+      const categoryPath = path.join(contentDirectory, categoryFolder);
+      const files = fs
+        .readdirSync(categoryPath)
+        .filter((file) => file.endsWith(".md"));
 
-      return {
-        slug: filename.replace(".md", ""),
-        title: data.title || "Untitled",
-        publishDate: data.date || data.publishDate || "2024-01-01",
-        readTime: data.readTime || automaticReadTime.readTime, // Use manual if provided, otherwise auto-calculate
-        category: data.category || "general",
-        author: data.author || "Anonymous",
-        tags: data.tags || [],
-        image: data.image || "/images/default-blog.jpg",
-        excerpt: data.excerpt || data.description || "No excerpt available",
-      };
-    });
+      for (const filename of files) {
+        const filePath = path.join(categoryPath, filename);
+        const fileContents = fs.readFileSync(filePath, "utf8");
+        const { data, content } = matter(fileContents);
+
+        // Calculate automatic read time based on content
+        const automaticReadTime = calculateReadTimeWithTags(
+          content,
+          data.tags || [],
+          data.category || categoryFolder
+        );
+
+        posts.push({
+          slug: `${categoryFolder}/${filename.replace(".md", "")}`,
+          title: data.title || "Untitled",
+          publishDate: data.date || data.publishDate || "2024-01-01",
+          readTime: data.readTime || automaticReadTime.readTime,
+          category: data.category || categoryFolder,
+          author: data.author || "Anonymous",
+          tags: data.tags || [],
+          image: data.image || "/images/default-blog.jpg",
+          excerpt: data.excerpt || data.description || "No excerpt available",
+        });
+      }
+    }
 
     // Apply filters
     if (search) {

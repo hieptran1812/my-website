@@ -1,8 +1,8 @@
 ---
 title: TypeScript Best Practices for Large Applications
-publishDate: '2024-03-12'
+publishDate: "2024-03-12"
 readTime: 20 min read
-category: Software Development
+category: software-development
 author: Hiep Tran
 tags:
   - TypeScript

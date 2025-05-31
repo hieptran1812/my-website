@@ -1,8 +1,8 @@
 ---
-title: 'Machine Learning System Design: Building Robust ML Pipelines'
-publishDate: '2024-03-05'
+title: "Machine Learning System Design: Building Robust ML Pipelines"
+publishDate: "2024-03-05"
 readTime: 14 min read
-category: Notes
+category: notes
 author: Hiep Tran
 tags:
   - System Design

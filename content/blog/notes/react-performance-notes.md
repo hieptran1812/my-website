@@ -1,8 +1,8 @@
 ---
-title: 'React Performance Optimization: Notes from the Field'
-publishDate: '2024-02-20'
+title: "React Performance Optimization: Notes from the Field"
+publishDate: "2024-02-20"
 readTime: 23 min read
-category: Notes
+category: notes
 author: Hiep Tran
 tags:
   - React

@@ -1,8 +1,8 @@
 ---
-title: 'Deep Reinforcement Learning: From Q-Learning to Policy Gradients'
-publishDate: '2024-03-15'
+title: "Deep Reinforcement Learning: From Q-Learning to Policy Gradients"
+publishDate: "2024-03-15"
 readTime: 17 min read
-category: Machine Learning
+category: machine-learning
 author: Hiep Tran
 tags:
   - Reinforcement Learning

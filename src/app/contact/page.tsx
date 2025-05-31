@@ -112,7 +112,7 @@ export default function ContactPage() {
                         <input
                           type="text"
                           id="name"
-                          placeholder="John Doe"
+                          placeholder="Halley"
                           className="w-full px-4 py-3 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] border"
                           style={{
                             backgroundColor: "var(--surface-hover)",
@@ -132,7 +132,7 @@ export default function ContactPage() {
                         <input
                           type="email"
                           id="email"
-                          placeholder="john@example.com"
+                          placeholder="halley@example.com"
                           className="w-full px-4 py-3 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] border"
                           style={{
                             backgroundColor: "var(--surface-hover)",

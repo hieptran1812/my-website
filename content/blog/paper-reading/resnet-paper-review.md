@@ -1,8 +1,8 @@
 ---
-title: 'ResNet: Deep Residual Learning for Image Recognition - Paper Review'
-publishDate: '2024-02-15'
+title: "ResNet: Deep Residual Learning for Image Recognition - Paper Review"
+publishDate: "2024-02-15"
 readTime: 18 min read
-category: Paper Reading
+category: paper-reading
 author: Hiep Tran
 tags:
   - ResNet

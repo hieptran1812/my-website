@@ -23,26 +23,52 @@ export async function GET() {
       return NextResponse.json([]);
     }
 
-    const files = fs
-      .readdirSync(contentDirectory)
-      .filter((file) => file.endsWith(".md"));
+    const posts: BlogPostMetadata[] = [];
 
-    const posts: BlogPostMetadata[] = files.map((filename) => {
-      const filePath = path.join(contentDirectory, filename);
-      const fileContents = fs.readFileSync(filePath, "utf8");
-      const { data } = matter(fileContents);
+    // Helper function to recursively read markdown files from a directory
+    const readMarkdownFiles = (dirPath: string, categoryOverride?: string) => {
+      const entries = fs.readdirSync(dirPath, { withFileTypes: true });
 
-      return {
-        slug: filename.replace(".md", ""),
-        title: data.title || "Untitled",
-        publishDate: data.date || data.publishDate || "2024-01-01",
-        readTime: data.readTime || "5 min read",
-        category: data.category || "general",
-        author: data.author || "Anonymous",
-        tags: data.tags || [],
-        image: data.image || "/images/default-blog.jpg",
-        excerpt: data.excerpt || data.description || "No excerpt available",
-      };
+      for (const entry of entries) {
+        const entryPath = path.join(dirPath, entry.name);
+
+        if (entry.isDirectory()) {
+          // If it's a directory, use its name as the category and read its files
+          readMarkdownFiles(entryPath, entry.name);
+        } else if (entry.name.endsWith(".md")) {
+          // If it's a markdown file, parse it
+          const fileContents = fs.readFileSync(entryPath, "utf8");
+          const { data } = matter(fileContents);
+
+          // Determine the category - use the directory name if it's in a category folder
+          const effectiveCategory =
+            categoryOverride || data.category || "general";
+
+          posts.push({
+            slug: categoryOverride
+              ? `${categoryOverride}/${entry.name.replace(".md", "")}`
+              : entry.name.replace(".md", ""),
+            title: data.title || "Untitled",
+            publishDate: data.date || data.publishDate || "2024-01-01",
+            readTime: data.readTime || "5 min read",
+            category: effectiveCategory,
+            author: data.author || "Anonymous",
+            tags: data.tags || [],
+            image: data.image || "/images/default-blog.jpg",
+            excerpt: data.excerpt || data.description || "No excerpt available",
+          });
+        }
+      }
+    };
+
+    // Start reading from the root blog directory
+    readMarkdownFiles(contentDirectory);
+
+    // Sort by publishDate (newest first)
+    posts.sort((a, b) => {
+      return (
+        new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+      );
     });
 
     return NextResponse.json(posts);

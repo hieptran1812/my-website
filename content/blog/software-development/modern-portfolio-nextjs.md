@@ -1,8 +1,8 @@
 ---
 title: Building a Modern Portfolio with Next.js
-publishDate: '2024-03-15'
+publishDate: "2024-03-15"
 readTime: 4 min read
-category: Tutorial
+category: software-development
 author: Hiep Tran
 tags:
   - Next.js

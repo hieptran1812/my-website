@@ -2,7 +2,7 @@
 title: "Mathematical Expressions in Web Development"
 publishDate: "2024-02-20"
 readTime: "8 min read"
-category: "Tutorial"
+category: "software-development"
 author: "Hiep Tran"
 tags: ["Math", "LaTeX", "Web Development", "JavaScript"]
 image: "/blog-placeholder.jpg"

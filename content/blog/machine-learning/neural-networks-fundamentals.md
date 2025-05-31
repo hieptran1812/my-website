@@ -1,8 +1,8 @@
 ---
-title: 'Neural Networks Fundamentals: From Perceptrons to Deep Learning'
-publishDate: '2024-03-20'
+title: "Neural Networks Fundamentals: From Perceptrons to Deep Learning"
+publishDate: "2024-03-20"
 readTime: 11 min read
-category: Machine Learning
+category: machine-learning
 author: Hiep Tran
 tags:
   - Neural Networks

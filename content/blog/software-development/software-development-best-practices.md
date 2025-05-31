@@ -1,8 +1,8 @@
 ---
 title: Understanding Software Development Best Practices
-publishDate: '2024-01-10'
+publishDate: "2024-01-10"
 readTime: 12 min read
-category: Engineering
+category: software-development
 author: Hiep Tran
 tags:
   - Software Development

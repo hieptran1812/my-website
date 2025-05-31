@@ -1,8 +1,8 @@
 ---
 title: Mathematical Expressions Demo
-publishDate: '2024-02-25'
+publishDate: "2024-02-25"
 readTime: 17 min read
-category: Tutorial
+category: software-development
 author: Hiep Tran
 tags:
   - Math

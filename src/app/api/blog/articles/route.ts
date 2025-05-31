@@ -110,61 +110,91 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ articles: [] });
     }
 
-    const files = fs
-      .readdirSync(blogDir)
-      .filter((file) => file.endsWith(".md"));
     const articles: Article[] = [];
 
-    for (const file of files) {
-      const filePath = path.join(blogDir, file);
-      const fileContent = fs.readFileSync(filePath, "utf8");
-      const { data: metadata, content } = matter(fileContent);
+    // Helper function to read markdown files from a directory
+    const readMarkdownFiles = (dirPath: string, categoryOverride?: string) => {
+      if (!fs.existsSync(dirPath)) return;
 
-      const slug = file.replace(".md", "");
-      const article = convertToArticle({ ...metadata, content }, slug);
+      const files = fs.readdirSync(dirPath, { withFileTypes: true });
 
-      // Category mapping to handle different naming conventions
-      const categoryMap: { [key: string]: string[] } = {
-        "machine-learning": [
-          "Machine Learning",
-          "ML",
-          "machine-learning",
-          "machine learning",
-        ],
-        "software-development": [
-          "Software Development",
-          "Development",
-          "software-development",
-          "software development",
-        ],
-        "paper-reading": [
-          "Paper Reading",
-          "Research",
-          "paper-reading",
-          "paper reading",
-        ],
-        crypto: ["Crypto", "Cryptocurrency", "Blockchain", "crypto"],
-        notes: ["Notes", "Development Notes", "notes"],
-      };
-
-      // If category filter is provided, filter articles
-      if (category) {
-        const validCategories = categoryMap[category] || [category];
-        if (
-          validCategories.some(
-            (cat) =>
-              article.category.toLowerCase().includes(cat.toLowerCase()) ||
-              article.tags.some((tag) =>
-                tag.toLowerCase().includes(cat.toLowerCase())
-              )
-          )
-        ) {
-          articles.push(article);
+      for (const file of files) {
+        // If it's a directory, process it recursively if it's not a category we're filtering by
+        if (file.isDirectory()) {
+          // If we're looking for a specific category and this directory matches, read its files
+          if (category && file.name === category) {
+            readMarkdownFiles(path.join(dirPath, file.name), file.name);
+          }
+          // If we're not filtering by category, read files from all category directories
+          else if (!category) {
+            readMarkdownFiles(path.join(dirPath, file.name), file.name);
+          }
         }
-      } else {
-        articles.push(article);
+        // Process markdown files
+        else if (file.name.endsWith(".md")) {
+          const filePath = path.join(dirPath, file.name);
+          const fileContent = fs.readFileSync(filePath, "utf8");
+          const { data: metadata, content } = matter(fileContent);
+
+          const slug = file.name.replace(".md", "");
+          // Use the directory name as category if it's a subdirectory
+          const effectiveCategory = categoryOverride || metadata.category;
+          const article = convertToArticle(
+            {
+              ...metadata,
+              content,
+              category: effectiveCategory,
+            },
+            slug
+          );
+
+          // Category mapping to handle different naming conventions
+          const categoryMap: { [key: string]: string[] } = {
+            "machine-learning": [
+              "Machine Learning",
+              "ML",
+              "machine-learning",
+              "machine learning",
+            ],
+            "software-development": [
+              "Software Development",
+              "Development",
+              "software-development",
+              "software development",
+            ],
+            "paper-reading": [
+              "Paper Reading",
+              "Research",
+              "paper-reading",
+              "paper reading",
+            ],
+            crypto: ["Crypto", "Cryptocurrency", "Blockchain", "crypto"],
+            notes: ["Notes", "Development Notes", "notes"],
+          };
+
+          // If category filter is provided, filter articles
+          if (category) {
+            const validCategories = categoryMap[category] || [category];
+            if (
+              validCategories.some(
+                (cat) =>
+                  article.category.toLowerCase().includes(cat.toLowerCase()) ||
+                  article.tags.some((tag) =>
+                    tag.toLowerCase().includes(cat.toLowerCase())
+                  )
+              )
+            ) {
+              articles.push(article);
+            }
+          } else {
+            articles.push(article);
+          }
+        }
       }
-    }
+    };
+
+    // Start reading from the root blog directory
+    readMarkdownFiles(blogDir);
 
     // Sort by date (newest first)
     articles.sort(

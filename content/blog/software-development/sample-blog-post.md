@@ -1,8 +1,8 @@
 ---
-title: 'Building Modern Web Applications: A Comprehensive Guide'
-publishDate: '2025-05-29'
+title: "Building Modern Web Applications: A Comprehensive Guide"
+publishDate: "2025-05-29"
 readTime: 10 min read
-category: Tutorial
+category: software-development
 author: Hiep Tran
 tags:
   - React

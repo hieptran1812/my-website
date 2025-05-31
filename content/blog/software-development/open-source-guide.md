@@ -1,8 +1,8 @@
 ---
-title: 'Open Source: Why and How to Start'
-publishDate: '2025-04-15'
+title: "Open Source: Why and How to Start"
+publishDate: "2025-04-15"
 readTime: 7 min read
-category: Guide
+category: software-development
 author: Hiep Tran
 tags:
   - Open Source

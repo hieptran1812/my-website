@@ -3,8 +3,7 @@ title: Fine-tuning Large Language Models with LoRA
 excerpt: >-
   Learn how to efficiently fine-tune large language models using Low-Rank
   Adaptation (LoRA) for specific tasks while maintaining performance.
-date: '2024-03-20'
-readTime: 6 min read
+date: "2024-03-20"
 tags:
   - LLM
   - Fine-tuning
