@@ -237,11 +237,11 @@ export default function NotesBlogPage() {
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8">
                 {[
-                  { name: "Book Summaries", slug: "book-summaries" },
-                  { name: "Idea Dump", slug: "idea-dump" },
+                  { name: "Book Summaries", slug: "Book Summaries" },
+                  { name: "Idea Dump", slug: "Idea Dump" },
                   {
                     name: "Self-reflection Entries",
-                    slug: "self-reflection-entries",
+                    slug: "Self-reflection Entries",
                   },
                 ].map((topic, index) => {
                   const count =
