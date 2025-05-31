@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
+import FadeInWrapper from "@/components/FadeInWrapper";
 
 export default function CryptoBlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -10,7 +11,7 @@ export default function CryptoBlogPage() {
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch articles from markdown files via API
+  // Fetch initial articles from markdown files via API
   useEffect(() => {
     const fetchArticles = async () => {
       try {
@@ -26,70 +27,78 @@ export default function CryptoBlogPage() {
     fetchArticles();
   }, []);
 
-  const categories = [
-    { name: "All", slug: "all", count: allArticles.length },
-    {
-      name: "DeFi",
-      slug: "DeFi",
-      count: allArticles.filter((a) => a.subcategory === "DeFi").length,
-    },
-    {
-      name: "Fundamentals",
-      slug: "Fundamentals",
-      count: allArticles.filter((a) => a.subcategory === "Fundamentals").length,
-    },
-    {
-      name: "Technology",
-      slug: "Technology",
-      count: allArticles.filter((a) => a.subcategory === "Technology").length,
-    },
-    {
-      name: "NFTs",
-      slug: "NFTs",
-      count: allArticles.filter((a) => a.subcategory === "NFTs").length,
-    },
-  ];
+  const categories = useMemo(
+    () => [
+      { name: "All", slug: "all", count: allArticles.length },
+      {
+        name: "DeFi",
+        slug: "DeFi",
+        count: allArticles.filter((a) => a.subcategory === "DeFi").length,
+      },
+      {
+        name: "Fundamentals",
+        slug: "Fundamentals",
+        count: allArticles.filter((a) => a.subcategory === "Fundamentals")
+          .length,
+      },
+      {
+        name: "Technology",
+        slug: "Technology",
+        count: allArticles.filter((a) => a.subcategory === "Technology").length,
+      },
+      {
+        name: "NFTs",
+        slug: "NFTs",
+        count: allArticles.filter((a) => a.subcategory === "NFTs").length,
+      },
+    ],
+    [allArticles]
+  );
 
-  const filteredArticles = allArticles.filter((article) => {
-    const matchesCategory =
-      selectedCategory === "all" || article.subcategory === selectedCategory;
-    const matchesSearch =
-      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.tags.some((tag) =>
-        tag.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    return matchesCategory && matchesSearch;
-  });
+  const filteredArticles = useMemo(() => {
+    return allArticles.filter((article) => {
+      const matchesCategory =
+        selectedCategory === "all" || article.subcategory === selectedCategory;
+      const matchesSearch =
+        article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        article.tags.some((tag) =>
+          tag.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      return matchesCategory && matchesSearch;
+    });
+  }, [allArticles, selectedCategory, searchTerm]);
 
   const featuredArticles = allArticles.filter((article) => article.featured);
 
   if (loading) {
     return (
-      <div
-        className="flex flex-col min-h-screen transition-colors duration-300"
-        style={{
-          backgroundColor: "var(--background)",
-          color: "var(--text-primary)",
-        }}
-      >
-        <main className="flex-1">
-          <div className="max-w-6xl mx-auto px-6 py-16">
-            <div className="text-center py-20">
-              <div
-                className="inline-block animate-spin rounded-full h-8 w-8 border-b-2"
-                style={{ borderColor: "var(--accent)" }}
-              ></div>
-              <p
-                className="mt-4 text-lg"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Loading articles...
-              </p>
+      <FadeInWrapper duration={600}>
+        <div
+          className="flex flex-col min-h-screen transition-colors duration-300"
+          style={{
+            backgroundColor: "var(--background)",
+            color: "var(--text-primary)",
+          }}
+        >
+          <main className="flex-1">
+            <div className="max-w-6xl mx-auto px-6 py-16">
+              <div className="text-center py-20">
+                <div
+                  className="inline-block animate-spin rounded-full h-8 w-8 border-b-2"
+                  style={{ borderColor: "var(--accent)" }}
+                ></div>
+                <p
+                  className="mt-4 text-lg"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  Loading articles...
+                </p>
+              </div>
             </div>
-          </div>
-        </main>
-      </div>
+          </main>
+        </div>
+      </FadeInWrapper>
     );
   }
 
@@ -161,7 +170,7 @@ export default function CryptoBlogPage() {
           </div>
 
           {/* Crypto Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mb-16">
             <div
               className="p-4 rounded-xl border text-center"
               style={{
@@ -407,7 +416,7 @@ export default function CryptoBlogPage() {
             >
               Crypto Topics
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mb-8">
               {["DeFi", "NFTs", "Trading", "Blockchain", "Smart Contracts"].map(
                 (topic) => (
                   <button
@@ -417,14 +426,16 @@ export default function CryptoBlogPage() {
                         topic === "Smart Contracts" ? "Technology" : topic
                       )
                     }
-                    className="p-4 rounded-lg border transition-all duration-200 hover:shadow-md hover:scale-105 text-center"
+                    className="p-4 rounded-lg border transition-all duration-200 hover:shadow-md hover:scale-105 text-center min-h-[80px] flex flex-col justify-center"
                     style={{
                       backgroundColor: "var(--surface)",
                       borderColor: "var(--border)",
                       color: "var(--text-primary)",
                     }}
                   >
-                    <div className="font-medium text-sm">{topic}</div>
+                    <div className="font-medium text-sm leading-tight">
+                      {topic}
+                    </div>
                   </button>
                 )
               )}

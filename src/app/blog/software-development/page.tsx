@@ -1,8 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
+import FadeInWrapper from "@/components/FadeInWrapper";
+import ArticleCard from "@/components/ArticleCard";
+import ArticleGrid from "@/components/ArticleGrid";
+import LoadMoreTrigger from "@/components/LoadMoreTrigger";
+import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 
 export default function SoftwareDevelopmentBlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -28,67 +33,134 @@ export default function SoftwareDevelopmentBlogPage() {
     fetchArticles();
   }, []);
 
-  const categories = [
-    { name: "All", slug: "all", count: allArticles.length },
-    {
-      name: "Coding Practices",
-      slug: "Coding Practices",
-      count: allArticles.filter((a) => a.subcategory === "Coding Practices")
-        .length,
-    },
-    {
-      name: "System Design",
-      slug: "System Design",
-      count: allArticles.filter((a) => a.subcategory === "System Design")
-        .length,
-    },
-    {
-      name: "Site Reliability Engineering",
-      slug: "Site Reliability Engineering",
-      count: allArticles.filter(
-        (a) => a.subcategory === "Site Reliability Engineering"
-      ).length,
-    },
-    {
-      name: "Database",
-      slug: "Database",
-      count: allArticles.filter((a) => a.subcategory === "Database").length,
-    },
-    {
-      name: "Data Engineering",
-      slug: "Data Engineering",
-      count: allArticles.filter((a) => a.subcategory === "Data Engineering")
-        .length,
-    },
-    {
-      name: "Distributed Systems",
-      slug: "Distributed Systems",
-      count: allArticles.filter((a) => a.subcategory === "Distributed Systems")
-        .length,
-    },
-    {
-      name: "Algorithms",
-      slug: "Algorithms",
-      count: allArticles.filter((a) => a.subcategory === "Algorithms").length,
-    },
-  ];
+  // Lazy loading configuration
+  const ITEMS_PER_PAGE = 9;
 
-  const filteredArticles = allArticles.filter((article) => {
-    const matchesCategory =
-      selectedCategory === "all" || article.subcategory === selectedCategory;
-    const matchesSearch =
-      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.tags.some((tag) =>
-        tag.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    return matchesCategory && matchesSearch;
+  // Filter articles based on category and search - memoized to prevent infinite re-renders
+  const filteredArticles = useMemo(() => {
+    return allArticles.filter((article) => {
+      const matchesCategory =
+        selectedCategory === "all" || article.subcategory === selectedCategory;
+      const matchesSearch =
+        article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        article.tags.some((tag) =>
+          tag.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      return matchesCategory && matchesSearch;
+    });
+  }, [allArticles, selectedCategory, searchTerm]);
+
+  // Categories for filtering - memoized to prevent unnecessary recalculation
+  const categories = useMemo(
+    () => [
+      { name: "All", slug: "all", count: allArticles.length },
+      {
+        name: "Coding Practices",
+        slug: "Coding Practices",
+        count: allArticles.filter((a) => a.subcategory === "Coding Practices")
+          .length,
+      },
+      {
+        name: "System Design",
+        slug: "System Design",
+        count: allArticles.filter((a) => a.subcategory === "System Design")
+          .length,
+      },
+      {
+        name: "Site Reliability Engineering",
+        slug: "Site Reliability Engineering",
+        count: allArticles.filter(
+          (a) => a.subcategory === "Site Reliability Engineering"
+        ).length,
+      },
+      {
+        name: "DevOps",
+        slug: "DevOps",
+        count: allArticles.filter((a) => a.subcategory === "DevOps").length,
+      },
+      {
+        name: "Frontend Development",
+        slug: "Frontend Development",
+        count: allArticles.filter(
+          (a) => a.subcategory === "Frontend Development"
+        ).length,
+      },
+      {
+        name: "Backend Development",
+        slug: "Backend Development",
+        count: allArticles.filter(
+          (a) => a.subcategory === "Backend Development"
+        ).length,
+      },
+    ],
+    [allArticles]
+  );
+
+  // Initialize lazy loading with filtered articles
+  const {
+    data: displayedArticles,
+    loading: loadingMore,
+    hasMoreData,
+    loadMore,
+    reset,
+  } = useLazyLoading({
+    initialData: filteredArticles.slice(0, ITEMS_PER_PAGE),
+    loadMoreData: async (page: number, limit: number) => {
+      // Simulate network delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      const startIndex = (page - 1) * limit;
+      const endIndex = startIndex + limit;
+      return filteredArticles.slice(startIndex, endIndex);
+    },
+    itemsPerPage: ITEMS_PER_PAGE,
+    hasMore: filteredArticles.length > ITEMS_PER_PAGE,
   });
 
-  const featuredArticles = allArticles.filter((article) => article.featured);
+  // Reset lazy loading when filters change - use callback to prevent infinite loop
+  const resetLazyLoading = useCallback(() => {
+    const initialData = filteredArticles.slice(0, ITEMS_PER_PAGE);
+    reset(initialData);
+  }, [filteredArticles, reset, ITEMS_PER_PAGE]);
+
+  useEffect(() => {
+    resetLazyLoading();
+  }, [resetLazyLoading]);
 
   if (loading) {
     return (
+      <FadeInWrapper duration={600}>
+        <div
+          className="flex flex-col min-h-screen transition-colors duration-300"
+          style={{
+            backgroundColor: "var(--background)",
+            color: "var(--text-primary)",
+          }}
+        >
+          <main className="flex-1">
+            <div className="max-w-6xl mx-auto px-6 py-16">
+              <div className="text-center py-20">
+                <div
+                  className="inline-block animate-spin rounded-full h-8 w-8 border-b-2"
+                  style={{ borderColor: "var(--accent)" }}
+                ></div>
+                <p
+                  className="mt-4 text-lg"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  Loading articles...
+                </p>
+              </div>
+            </div>
+          </main>
+        </div>
+      </FadeInWrapper>
+    );
+  }
+
+  return (
+    <FadeInWrapper duration={800}>
       <div
         className="flex flex-col min-h-screen transition-colors duration-300"
         style={{
@@ -98,551 +170,226 @@ export default function SoftwareDevelopmentBlogPage() {
       >
         <main className="flex-1">
           <div className="max-w-6xl mx-auto px-6 py-16">
-            <div className="text-center py-20">
-              <div
-                className="inline-block animate-spin rounded-full h-8 w-8 border-b-2"
-                style={{ borderColor: "var(--accent)" }}
-              ></div>
-              <p
-                className="mt-4 text-lg"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Loading articles...
-              </p>
-            </div>
+            {/* Header */}
+            <FadeInWrapper direction="up" delay={100} duration={600}>
+              <div className="text-center mb-16">
+                <div className="inline-flex items-center gap-3 mb-6">
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                    }}
+                  >
+                    💻
+                  </div>
+                  <h1
+                    className="text-4xl md:text-5xl font-bold"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    Software Development
+                  </h1>
+                </div>
+                <p
+                  className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  Insights and experiences from building scalable software
+                  systems, exploring modern development practices, and diving
+                  deep into system design.
+                </p>
+              </div>
+            </FadeInWrapper>
+
+            {/* Development Topics */}
+            <FadeInWrapper direction="up" delay={200} duration={600}>
+              <div className="mb-12">
+                <h2
+                  className="text-2xl font-bold mb-6"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  Development Topics
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 mb-8">
+                  {categories.map((category, index) => (
+                    <FadeInWrapper
+                      key={category.slug}
+                      delay={300 + index * 50}
+                      duration={400}
+                      direction="up"
+                    >
+                      <button
+                        onClick={() => setSelectedCategory(category.slug)}
+                        className={`p-3 rounded-lg border transition-all duration-200 hover:shadow-md hover:scale-105 text-center min-h-[80px] flex flex-col justify-center ${
+                          selectedCategory === category.slug ? "border-2" : ""
+                        }`}
+                        style={{
+                          backgroundColor:
+                            selectedCategory === category.slug
+                              ? "var(--accent-subtle)"
+                              : "var(--surface)",
+                          borderColor:
+                            selectedCategory === category.slug
+                              ? "var(--accent)"
+                              : "var(--border)",
+                          color:
+                            selectedCategory === category.slug
+                              ? "var(--accent)"
+                              : "var(--text-primary)",
+                        }}
+                      >
+                        <div className="font-medium text-sm mb-1 leading-tight">
+                          {category.name}
+                        </div>
+                        {category.count > 0 && (
+                          <div className="text-xs opacity-70">
+                            {category.count} article
+                            {category.count !== 1 ? "s" : ""}
+                          </div>
+                        )}
+                      </button>
+                    </FadeInWrapper>
+                  ))}
+                </div>
+
+                {/* Results Summary */}
+                <div className="text-center mb-4">
+                  <p style={{ color: "var(--text-secondary)" }}>
+                    {selectedCategory !== "all"
+                      ? `Showing ${filteredArticles.length} articles in ${
+                          categories.find((c) => c.slug === selectedCategory)
+                            ?.name || selectedCategory
+                        }`
+                      : `${allArticles.length} total software development articles`}
+                  </p>
+                </div>
+              </div>
+            </FadeInWrapper>
+
+            {/* Articles Grid */}
+            <FadeInWrapper direction="up" delay={300} duration={600}>
+              <div className="mb-16">
+                <div className="flex items-center justify-between mb-8">
+                  <h2
+                    className="text-2xl font-bold"
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    Software Development Articles ({filteredArticles.length})
+                  </h2>
+
+                  {/* Category Filter Pills */}
+                  <div className="flex flex-wrap gap-2">
+                    {categories.slice(0, 3).map((category) => (
+                      <button
+                        key={category.slug}
+                        onClick={() => setSelectedCategory(category.slug)}
+                        className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 border ${
+                          selectedCategory === category.slug
+                            ? "text-white"
+                            : "hover:bg-[var(--surface)]"
+                        }`}
+                        style={
+                          selectedCategory === category.slug
+                            ? {
+                                backgroundColor: "var(--accent)",
+                                borderColor: "var(--accent)",
+                              }
+                            : {
+                                borderColor: "var(--border)",
+                                backgroundColor: "var(--surface)",
+                                color: "var(--text-secondary)",
+                              }
+                        }
+                      >
+                        {category.name} ({category.count})
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {displayedArticles.length > 0 ? (
+                  <>
+                    <ArticleGrid variant="default">
+                      {displayedArticles.map((article, index) => (
+                        <ArticleCard
+                          key={article.id}
+                          article={article}
+                          index={index}
+                          variant="default"
+                        />
+                      ))}
+                    </ArticleGrid>
+
+                    {/* Load More Trigger */}
+                    <LoadMoreTrigger
+                      onLoadMore={loadMore}
+                      loading={loadingMore}
+                      hasMore={hasMoreData}
+                    />
+                  </>
+                ) : (
+                  <div className="text-center py-12">
+                    <div className="text-6xl mb-4">🔍</div>
+                    <h3
+                      className="text-xl font-semibold mb-2"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      No articles found
+                    </h3>
+                    <p
+                      className="mb-4"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {searchTerm
+                        ? `No articles match "${searchTerm}"`
+                        : `No articles in "${
+                            categories.find((c) => c.slug === selectedCategory)
+                              ?.name
+                          }" category`}
+                    </p>
+                    <button
+                      onClick={() => {
+                        setSearchTerm("");
+                        setSelectedCategory("all");
+                      }}
+                      className="px-4 py-2 rounded-lg transition-colors text-white"
+                      style={{ backgroundColor: "var(--accent)" }}
+                    >
+                      Clear filters
+                    </button>
+                  </div>
+                )}
+              </div>
+            </FadeInWrapper>
+
+            {/* Navigation */}
+            <nav
+              className="mt-12 pt-8 border-t"
+              style={{ borderColor: "var(--border)" }}
+            >
+              <div className="flex justify-center">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center px-6 py-3 rounded-lg transition-colors border"
+                  style={{
+                    backgroundColor: "var(--surface)",
+                    color: "var(--text-primary)",
+                    borderColor: "var(--border)",
+                  }}
+                >
+                  ← Back to All Blogs
+                </Link>
+              </div>
+            </nav>
           </div>
         </main>
       </div>
-    );
-  }
-
-  return (
-    <div
-      className="flex flex-col min-h-screen transition-colors duration-300"
-      style={{
-        backgroundColor: "var(--background)",
-        color: "var(--text-primary)",
-      }}
-    >
-      <main className="flex-1">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
-                style={{
-                  background:
-                    "linear-gradient(135deg, var(--accent), var(--accent-hover))",
-                }}
-              >
-                💻
-              </div>
-              <h1
-                className="text-4xl md:text-5xl font-bold"
-                style={{
-                  background:
-                    "linear-gradient(135deg, var(--accent), var(--accent-hover))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Software Development
-              </h1>
-            </div>
-            <p
-              className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              In-depth articles on software engineering practices, system
-              design, algorithms, databases, and distributed systems for
-              building scalable and reliable applications.
-            </p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {[
-                "System Design",
-                "Algorithms",
-                "Database",
-                "SRE",
-                "Distributed Systems",
-                "Data Engineering",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 text-sm rounded-full border transition-colors duration-200 hover:bg-[var(--surface)] cursor-pointer"
-                  style={{
-                    borderColor: "var(--border)",
-                    backgroundColor: "var(--surface)",
-                    color: "var(--text-secondary)",
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Development Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-            <div
-              className="p-4 rounded-xl border text-center"
-              style={{
-                backgroundColor: "var(--surface)",
-                borderColor: "var(--border)",
-              }}
-            >
-              <div
-                className="text-2xl font-bold mb-1"
-                style={{ color: "var(--accent)" }}
-              >
-                {allArticles.length}
-              </div>
-              <div
-                className="text-sm"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Articles Published
-              </div>
-            </div>
-            <div
-              className="p-4 rounded-xl border text-center"
-              style={{
-                backgroundColor: "var(--surface)",
-                borderColor: "var(--border)",
-              }}
-            >
-              <div
-                className="text-2xl font-bold mb-1"
-                style={{ color: "var(--accent)" }}
-              >
-                {categories.length - 1}
-              </div>
-              <div
-                className="text-sm"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Topics Covered
-              </div>
-            </div>
-            <div
-              className="p-4 rounded-xl border text-center"
-              style={{
-                backgroundColor: "var(--surface)",
-                borderColor: "var(--border)",
-              }}
-            >
-              <div
-                className="text-2xl font-bold mb-1"
-                style={{ color: "var(--accent)" }}
-              >
-                2024-2025
-              </div>
-              <div
-                className="text-sm"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Publication Range
-              </div>
-            </div>
-            <div
-              className="p-4 rounded-xl border text-center"
-              style={{
-                backgroundColor: "var(--surface)",
-                borderColor: "var(--border)",
-              }}
-            >
-              <div
-                className="text-2xl font-bold mb-1"
-                style={{ color: "var(--accent)" }}
-              >
-                {allArticles.length > 0
-                  ? Math.round(
-                      allArticles.reduce(
-                        (acc, article) => acc + parseInt(article.readTime),
-                        0
-                      ) / allArticles.length
-                    )
-                  : 0}
-              </div>
-              <div
-                className="text-sm"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Avg. Read Time
-              </div>
-            </div>
-          </div>
-
-          {/* Featured Article */}
-          {featuredArticles.length > 0 && (
-            <div className="mb-16">
-              <div className="flex items-center gap-3 mb-8">
-                <svg
-                  className="w-6 h-6"
-                  style={{ color: "var(--accent)" }}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <h2
-                  className="text-2xl font-bold"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Featured Article
-                </h2>
-              </div>
-
-              <div
-                className="rounded-2xl p-8 border transition-all duration-300 hover:shadow-xl"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  borderColor: "var(--border)",
-                  background:
-                    "linear-gradient(145deg, var(--surface), var(--surface-hover))",
-                }}
-              >
-                {featuredArticles.slice(0, 1).map((article) => (
-                  <div key={article.id}>
-                    <div className="grid md:grid-cols-3 gap-6 mb-6">
-                      <div>
-                        <div
-                          className="text-sm font-medium mb-1"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
-                          Category
-                        </div>
-                        <div
-                          className="font-semibold"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          {article.subcategory}
-                        </div>
-                      </div>
-                      <div>
-                        <div
-                          className="text-sm font-medium mb-1"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
-                          Reading Time
-                        </div>
-                        <div
-                          className="font-semibold"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          {article.readTime}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {article.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 text-xs font-medium rounded-full"
-                          style={{
-                            backgroundColor: "var(--accent-subtle)",
-                            color: "var(--accent)",
-                          }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <h3
-                      className="text-2xl md:text-3xl font-bold mb-4"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {article.title}
-                    </h3>
-
-                    <p
-                      className="text-lg mb-6 leading-relaxed"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      {article.excerpt}
-                    </p>
-
-                    <div className="flex items-center justify-between">
-                      <div
-                        className="flex items-center gap-4 text-sm"
-                        style={{ color: "var(--text-muted)" }}
-                      >
-                        <span>📝 {article.date}</span>
-                        <span>•</span>
-                        <span>💻 Development</span>
-                      </div>
-                      <Link
-                        href={`/blog/${article.slug}`}
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105"
-                        style={{
-                          backgroundColor: "var(--accent)",
-                          color: "white",
-                        }}
-                      >
-                        Read Article
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Development Topics */}
-          <div className="mb-12">
-            <h2
-              className="text-2xl font-bold mb-6"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Development Topics
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-              {[
-                "Coding Practices",
-                "System Design",
-                "Site Reliability Engineering",
-                "Database",
-                "Data Engineering",
-                "Distributed Systems",
-                "Algorithms",
-              ].map((topic) => (
-                <button
-                  key={topic}
-                  onClick={() => setSelectedCategory(topic)}
-                  className="p-4 rounded-lg border transition-all duration-200 hover:shadow-md hover:scale-105 text-center"
-                  style={{
-                    backgroundColor: "var(--surface)",
-                    borderColor: "var(--border)",
-                    color: "var(--text-primary)",
-                  }}
-                >
-                  <div className="font-medium text-sm">{topic}</div>
-                </button>
-              ))}
-            </div>
-
-            {/* Results Summary */}
-            <div className="text-center mb-4">
-              <p style={{ color: "var(--text-secondary)" }}>
-                {selectedCategory !== "all"
-                  ? `Showing ${filteredArticles.length} articles in ${
-                      categories.find((c) => c.slug === selectedCategory)
-                        ?.name || selectedCategory
-                    }`
-                  : `${allArticles.length} total development articles`}
-              </p>
-            </div>
-          </div>
-
-          {/* Articles Grid */}
-          <div className="mb-16">
-            <div className="flex items-center justify-between mb-8">
-              <h2
-                className="text-2xl font-bold"
-                style={{ color: "var(--text-primary)" }}
-              >
-                All Development Articles
-              </h2>
-
-              {/* Category Filter Pills */}
-              <div className="flex flex-wrap gap-2">
-                {categories.slice(0, 3).map((category) => (
-                  <button
-                    key={category.slug}
-                    onClick={() => setSelectedCategory(category.slug)}
-                    className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 border ${
-                      selectedCategory === category.slug
-                        ? "text-white"
-                        : "hover:bg-[var(--surface)]"
-                    }`}
-                    style={
-                      selectedCategory === category.slug
-                        ? {
-                            backgroundColor: "var(--accent)",
-                            borderColor: "var(--accent)",
-                          }
-                        : {
-                            borderColor: "var(--border)",
-                            backgroundColor: "var(--surface)",
-                            color: "var(--text-secondary)",
-                          }
-                    }
-                  >
-                    {category.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-            {filteredArticles.length > 0 ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredArticles.map((article) => (
-                  <article
-                    key={article.id}
-                    className="group rounded-xl border transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden"
-                    style={{
-                      backgroundColor: "var(--surface)",
-                      borderColor: "var(--border)",
-                    }}
-                  >
-                    <div className="p-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <span
-                          className="px-2 py-1 text-xs font-medium rounded-full"
-                          style={{
-                            backgroundColor: "var(--surface)",
-                            color: "var(--text-secondary)",
-                            border: "1px solid var(--border)",
-                          }}
-                        >
-                          {article.subcategory}
-                        </span>
-                        <span
-                          className="text-xs"
-                          style={{ color: "var(--text-muted)" }}
-                        >
-                          {article.readTime}
-                        </span>
-                      </div>
-
-                      <h3
-                        className="text-lg font-semibold mb-3 group-hover:text-[var(--accent)] transition-colors line-clamp-2"
-                        style={{ color: "var(--text-primary)" }}
-                      >
-                        {article.title}
-                      </h3>
-
-                      <p
-                        className="text-sm mb-4 leading-relaxed line-clamp-3"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        {article.excerpt}
-                      </p>
-
-                      <div className="flex flex-wrap gap-1 mb-4">
-                        {article.tags.slice(0, 3).map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-1 text-xs rounded-full"
-                            style={{
-                              backgroundColor: "var(--accent-subtle)",
-                              color: "var(--accent)",
-                            }}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      <div
-                        className="flex items-center justify-between text-xs mt-4"
-                        style={{ color: "var(--text-muted)" }}
-                      >
-                        <span>
-                          📅{" "}
-                          {new Date(article.date).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          })}
-                        </span>
-                        <Link
-                          href={`/blog/${article.slug}`}
-                          className="inline-flex items-center text-[var(--accent)]"
-                        >
-                          Read more
-                          <svg
-                            className="w-3 h-3 ml-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </Link>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <div className="text-6xl mb-4">🔍</div>
-                <h3
-                  className="text-xl font-semibold mb-2"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  No articles found
-                </h3>
-                <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
-                  {searchTerm
-                    ? `No articles match "${searchTerm}"`
-                    : `No articles in "${
-                        categories.find((c) => c.slug === selectedCategory)
-                          ?.name
-                      }" category`}
-                </p>
-                <button
-                  onClick={() => {
-                    setSearchTerm("");
-                    setSelectedCategory("all");
-                  }}
-                  className="px-4 py-2 rounded-lg transition-colors text-white"
-                  style={{ backgroundColor: "var(--accent)" }}
-                >
-                  Clear filters
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Navigation */}
-          <nav
-            className="mt-12 pt-8 border-t"
-            style={{ borderColor: "var(--border)" }}
-          >
-            <div className="flex justify-center">
-              <Link
-                href="/blog"
-                className="inline-flex items-center px-6 py-3 rounded-lg transition-colors border"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  color: "var(--text-primary)",
-                  borderColor: "var(--border)",
-                }}
-              >
-                ← Back to All Blogs
-              </Link>
-            </div>
-          </nav>
-        </div>
-      </main>
-    </div>
+    </FadeInWrapper>
   );
 }
