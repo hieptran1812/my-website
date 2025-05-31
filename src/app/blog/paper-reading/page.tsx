@@ -67,6 +67,12 @@ export default function PaperReadingBlogPage() {
       count: allArticles.filter((a) => a.subcategory === "Machine Learning")
         .length,
     },
+    {
+      name: "Speech Processing",
+      slug: "Speech Processing",
+      count: allArticles.filter((a) => a.subcategory === "Speech Processing")
+        .length,
+    },
   ];
 
   const filteredArticles = allArticles.filter((article) => {
@@ -415,7 +421,7 @@ export default function PaperReadingBlogPage() {
             >
               Research Topics
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {[
                 "Computer Vision",
                 "LLM",
@@ -424,6 +430,7 @@ export default function PaperReadingBlogPage() {
                 "Deep Learning",
                 "AI Agent",
                 "Machine Learning",
+                "Speech Processing",
               ].map((topic) => (
                 <button
                   key={topic}

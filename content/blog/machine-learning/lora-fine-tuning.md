@@ -1,17 +1,22 @@
 ---
-title: Fine-tuning Large Language Models with LoRA
-excerpt: >-
-  Learn how to efficiently fine-tune large language models using Low-Rank
-  Adaptation (LoRA) for specific tasks while maintaining performance.
-date: "2024-03-20"
+title: "Fine-tuning Large Language Models with LoRA"
+publishDate: "2024-03-20"
+readTime: "15 min read"
+category: "machine-learning"
+subcategory: "LLM"
+author: "Hiep Tran"
+featured: false
 tags:
   - LLM
   - Fine-tuning
   - LoRA
   - Efficiency
-level: Intermediate
-type: Tutorial
-category: machine-learning
+  - Parameter-Efficient Training
+date: "2024-03-20"
+image: "/blog-placeholder.jpg"
+excerpt: >-
+  Learn how to efficiently fine-tune large language models using Low-Rank
+  Adaptation (LoRA) for specific tasks while maintaining performance.
 ---
 
 # Fine-tuning Large Language Models with LoRA

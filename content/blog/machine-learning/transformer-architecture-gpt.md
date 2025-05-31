@@ -1,19 +1,23 @@
 ---
-title: 'Transformer Architecture: Building GPT from Scratch'
-excerpt: >-
-  A comprehensive implementation guide to building a GPT-style transformer model
-  from scratch using PyTorch, with detailed explanations of attention
-  mechanisms.
-date: '2024-03-25'
-readTime: 5 min read
+title: "Transformer Architecture: Building GPT from Scratch"
+publishDate: "2024-03-25"
+readTime: "15 min read"
+category: "machine-learning"
+subcategory: "NLP"
+author: "Hiep Tran"
+featured: true
 tags:
   - Transformers
   - GPT
   - PyTorch
   - NLP
-level: Advanced
-type: Tutorial
-featured: true
+  - Deep Learning
+date: "2024-03-25"
+image: "/blog-placeholder.jpg"
+excerpt: >-
+  A comprehensive implementation guide to building a GPT-style transformer model
+  from scratch using PyTorch, with detailed explanations of attention
+  mechanisms.
 category: machine-learning
 ---
 

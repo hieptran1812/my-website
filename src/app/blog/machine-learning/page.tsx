@@ -52,6 +52,35 @@ export default function MachineLearningBlogPage() {
       slug: "LLM",
       count: allArticles.filter((a) => a.subcategory === "LLM").length,
     },
+    {
+      name: "Reinforcement Learning",
+      slug: "Reinforcement Learning",
+      count: allArticles.filter(
+        (a) => a.subcategory === "Reinforcement Learning"
+      ).length,
+    },
+    {
+      name: "Traditional ML",
+      slug: "Traditional ML",
+      count: allArticles.filter((a) => a.subcategory === "Traditional ML")
+        .length,
+    },
+    {
+      name: "Optimization",
+      slug: "Optimization",
+      count: allArticles.filter((a) => a.subcategory === "Optimization").length,
+    },
+    {
+      name: "MLOps",
+      slug: "MLOps",
+      count: allArticles.filter((a) => a.subcategory === "MLOps").length,
+    },
+    {
+      name: "Neural Architecture",
+      slug: "Neural Architecture",
+      count: allArticles.filter((a) => a.subcategory === "Neural Architecture")
+        .length,
+    },
   ];
 
   const filteredArticles = allArticles.filter((article) => {
@@ -140,6 +169,54 @@ export default function MachineLearningBlogPage() {
               neural networks and deep learning to cutting-edge language models
               and computer vision.
             </p>
+          </div>
+
+          {/* Research Topics */}
+          <div className="mb-12">
+            <h2
+              className="text-2xl font-bold mb-6"
+              style={{ color: "var(--text-primary)" }}
+            >
+              Research Topics
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              {[
+                "Deep Learning",
+                "NLP",
+                "Computer Vision",
+                "LLM",
+                "Reinforcement Learning",
+                "Traditional ML",
+                "Optimization",
+                "MLOps",
+                "Neural Architecture",
+              ].map((topic) => (
+                <button
+                  key={topic}
+                  onClick={() => setSelectedCategory(topic)}
+                  className="p-4 rounded-lg border transition-all duration-200 hover:shadow-md hover:scale-105 text-center"
+                  style={{
+                    backgroundColor: "var(--surface)",
+                    borderColor: "var(--border)",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  <div className="font-medium text-sm">{topic}</div>
+                </button>
+              ))}
+            </div>
+
+            {/* Results Summary */}
+            <div className="text-center mb-4">
+              <p style={{ color: "var(--text-secondary)" }}>
+                {selectedCategory !== "all"
+                  ? `Showing ${filteredArticles.length} articles in ${
+                      categories.find((c) => c.slug === selectedCategory)
+                        ?.name || selectedCategory
+                    }`
+                  : `${allArticles.length} total machine learning articles`}
+              </p>
+            </div>
           </div>
 
           {/* Articles Grid */}

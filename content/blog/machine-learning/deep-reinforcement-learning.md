@@ -1,19 +1,22 @@
 ---
 title: "Deep Reinforcement Learning: From Q-Learning to Policy Gradients"
 publishDate: "2024-03-15"
-readTime: 17 min read
-category: machine-learning
-author: Hiep Tran
+readTime: "17 min read"
+category: "machine-learning"
+subcategory: "Reinforcement Learning"
+author: "Hiep Tran"
+featured: true
 tags:
   - Reinforcement Learning
   - Deep Learning
   - Q-Learning
   - Policy Gradients
   - AI
-image: /blog-placeholder.jpg
+image: "/blog-placeholder.jpg"
 excerpt: >-
   Explore the fascinating world of reinforcement learning, from classical
   Q-learning algorithms to modern deep RL techniques that power game-playing AI
+  and autonomous systems.
   and robotics.
 ---
 
