@@ -16,12 +16,16 @@ export default function SoftwareDevelopmentBlogPage() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const articles = await getMarkdownArticlesByCategory(
-          "software-development"
+        const { articles } = await getMarkdownArticlesByCategory(
+          "software-development",
+          1,
+          100 // Get all articles at once for client-side filtering
         );
-        setAllArticles(articles);
+        // Ensure articles is always an array
+        setAllArticles(Array.isArray(articles) ? articles : []);
       } catch (error) {
         console.error("Error fetching articles:", error);
+        setAllArticles([]); // Set to empty array on error
       } finally {
         setLoading(false);
       }
@@ -30,13 +34,11 @@ export default function SoftwareDevelopmentBlogPage() {
     fetchArticles();
   }, []);
 
-  // Lazy loading configuration
-  const ITEMS_PER_PAGE = 9;
-
   // Categories for filtering - based on actual content
   // Updated to include "All" and up to 5 most relevant tags
   const categories = useMemo(() => {
-    if (!allArticles || allArticles.length === 0) {
+    // Add safety check for allArticles
+    if (!Array.isArray(allArticles) || allArticles.length === 0) {
       return [{ name: "All", slug: "all", count: 0 }];
     }
 
@@ -72,7 +74,6 @@ export default function SoftwareDevelopmentBlogPage() {
   }, [allArticles]);
 
   // Filter articles based on category and search - memoized to prevent infinite re-renders
-  // Updated to handle "All" and tag-based categories
   const filteredArticles = useMemo(() => {
     let articlesToFilter = allArticles;
 
@@ -95,32 +96,46 @@ export default function SoftwareDevelopmentBlogPage() {
             ))
       );
     }
-    return articlesToFilter;
+
+    // Remove duplicates based on article ID
+    const uniqueArticles = articlesToFilter.filter(
+      (article, index, self) =>
+        index === self.findIndex((a) => a.id === article.id)
+    );
+
+    return uniqueArticles;
   }, [allArticles, selectedCategory, searchTerm]);
+
+  // Lazy loading configuration
+  const ITEMS_PER_PAGE = 9;
 
   // Initialize lazy loading with filtered articles
   const {
     data: displayedArticles,
     loading: loadingMore,
     hasMoreData,
-    loadMore,
     reset,
   } = useLazyLoading({
     initialData: filteredArticles.slice(0, ITEMS_PER_PAGE),
     loadMoreData: async (page: number, limit: number) => {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      // Simulate API delay
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
       const startIndex = (page - 1) * limit;
       const endIndex = startIndex + limit;
+
       return filteredArticles.slice(startIndex, endIndex);
     },
     itemsPerPage: ITEMS_PER_PAGE,
     hasMore: filteredArticles.length > ITEMS_PER_PAGE,
+    getItemId: (article: Article) => article.id, // Provide unique ID getter
   });
 
   // Reset lazy loading when filters change
   const resetLazyLoading = useCallback(() => {
-    reset(filteredArticles.slice(0, ITEMS_PER_PAGE));
+    const initialItems = filteredArticles.slice(0, ITEMS_PER_PAGE);
+    const hasMore = filteredArticles.length > ITEMS_PER_PAGE;
+    reset(initialItems, hasMore);
   }, [filteredArticles, reset, ITEMS_PER_PAGE]);
 
   useEffect(() => {
@@ -161,22 +176,55 @@ export default function SoftwareDevelopmentBlogPage() {
   return (
     <FadeInWrapper duration={800}>
       <div
-        className="flex flex-col min-h-screen transition-colors duration-300"
+        className="flex flex-col min-h-screen transition-colors duration-300 relative overflow-hidden"
         style={{
           backgroundColor: "var(--background)",
           color: "var(--text-primary)",
         }}
       >
-        <main className="flex-1">
+        {/* Animated Background Decorations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-full animate-pulse"></div>
+          <div
+            className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full animate-bounce"
+            style={{ animationDelay: "2s" }}
+          ></div>
+          <div
+            className="absolute bottom-40 left-20 w-20 h-20 bg-gradient-to-br from-cyan-500/10 to-green-500/10 rounded-full animate-ping"
+            style={{ animationDelay: "4s" }}
+          ></div>
+          <div
+            className="absolute bottom-20 right-10 w-28 h-28 bg-gradient-to-br from-teal-500/10 to-blue-500/10 rounded-full animate-pulse"
+            style={{ animationDelay: "6s" }}
+          ></div>
+
+          {/* Code-like floating elements */}
+          <div className="absolute top-32 right-32 text-green-500/20 text-6xl font-mono animate-float">
+            {"<>"}
+          </div>
+          <div
+            className="absolute bottom-32 left-32 text-blue-500/20 text-5xl font-mono animate-float"
+            style={{ animationDelay: "3s" }}
+          >
+            {"</>"}
+          </div>
+          <div
+            className="absolute top-1/2 left-1/4 text-cyan-500/20 text-4xl font-mono animate-float"
+            style={{ animationDelay: "1.5s" }}
+          >
+            {"{ }"}
+          </div>
+        </div>
+
+        <main className="flex-1 relative z-10">
           <div className="max-w-6xl mx-auto px-6 py-16">
             {/* Header */}
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 mb-6">
                 <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
+                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold animate-pulse"
                   style={{
-                    background:
-                      "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                    background: "linear-gradient(135deg, #10b981, #06b6d4)",
                   }}
                 >
                   💻
@@ -185,7 +233,7 @@ export default function SoftwareDevelopmentBlogPage() {
                   className="text-4xl md:text-5xl font-bold"
                   style={{
                     background:
-                      "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                      "linear-gradient(135deg, #10b981, #06b6d4, #3b82f6)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
@@ -393,7 +441,7 @@ export default function SoftwareDevelopmentBlogPage() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {displayedArticles.map((article) => (
                     <article
-                      key={article.id}
+                      key={article.id} // Use unique ID only
                       className="group rounded-xl border transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden"
                       style={{
                         backgroundColor: "var(--surface)",

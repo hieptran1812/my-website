@@ -959,69 +959,39 @@ a:focus {
 }
 
 .blog-content-stagger {
-  animation: staggeredFadeIn 0.6s ease-out both;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
-.blog-content-stagger:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.blog-content-stagger:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.blog-content-stagger:nth-child(3) {
-  animation-delay: 0.3s;
-}
-.blog-content-stagger:nth-child(4) {
-  animation-delay: 0.4s;
-}
-.blog-content-stagger:nth-child(5) {
-  animation-delay: 0.5s;
+/* Add floating animation for blog page decorations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
-/* Enhanced gradient text effects */
-.gradient-text-blue {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8, #0ea5e9);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: textGradientShift 3s ease-in-out infinite;
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-.gradient-text-purple {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed, #c084fc);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: textGradientShift 3s ease-in-out infinite;
+/* Pulse animation variant for blog decorations */
+@keyframes blogPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
 }
 
-.gradient-text-green {
-  background: linear-gradient(135deg, #10b981, #059669, #34d399);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: textGradientShift 3s ease-in-out infinite;
-}
-
-.gradient-text-orange {
-  background: linear-gradient(135deg, #f59e0b, #d97706, #fbbf24);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: textGradientShift 3s ease-in-out infinite;
-}
-
-.gradient-text-cyan {
-  background: linear-gradient(135deg, #06b6d4, #0891b2, #67e8f9);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: textGradientShift 3s ease-in-out infinite;
+.animate-blog-pulse {
+  animation: blogPulse 4s ease-in-out infinite;
 }
 
 /* Blog Content Styles */

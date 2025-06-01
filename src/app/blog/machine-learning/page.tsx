@@ -28,12 +28,14 @@ export default function MachineLearningBlogPage() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const articles = await getMarkdownArticlesByCategory(
+        const { articles } = await getMarkdownArticlesByCategory(
           "machine-learning"
         );
-        setAllArticles(articles);
+        // Ensure articles is always an array
+        setAllArticles(Array.isArray(articles) ? articles : []);
       } catch (error) {
         console.error("Error fetching articles:", error);
+        setAllArticles([]); // Set to empty array on error
       } finally {
         setLoading(false);
       }
@@ -52,7 +54,8 @@ export default function MachineLearningBlogPage() {
   );
 
   const categories = useMemo(() => {
-    if (!allArticles || allArticles.length === 0) {
+    // Add safety check for allArticles
+    if (!Array.isArray(allArticles) || allArticles.length === 0) {
       return [{ name: "All", slug: "all", count: 0 }];
     }
 
@@ -235,22 +238,60 @@ export default function MachineLearningBlogPage() {
   return (
     <FadeInWrapper duration={800}>
       <div
-        className="flex flex-col min-h-screen transition-colors duration-300"
+        className="flex flex-col min-h-screen transition-colors duration-300 relative overflow-hidden"
         style={{
           backgroundColor: "var(--background)",
           color: "var(--text-primary)",
         }}
       >
-        <main className="flex-1">
+        {/* AI-themed Background Decorations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-16 left-16 w-40 h-40 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full animate-pulse"></div>
+          <div
+            className="absolute top-32 right-16 w-32 h-32 bg-gradient-to-br from-violet-500/10 to-purple-500/10 rounded-full animate-bounce"
+            style={{ animationDelay: "1s" }}
+          ></div>
+          <div
+            className="absolute bottom-32 left-24 w-24 h-24 bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-full animate-ping"
+            style={{ animationDelay: "3s" }}
+          ></div>
+          <div
+            className="absolute bottom-16 right-24 w-36 h-36 bg-gradient-to-br from-indigo-500/10 to-violet-500/10 rounded-full animate-pulse"
+            style={{ animationDelay: "5s" }}
+          ></div>
+
+          {/* Neural network-like connections */}
+          <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-purple-500/30 rounded-full animate-ping"></div>
+          <div
+            className="absolute top-1/3 right-1/3 w-2 h-2 bg-pink-500/30 rounded-full animate-ping"
+            style={{ animationDelay: "2s" }}
+          ></div>
+          <div
+            className="absolute bottom-1/3 left-1/2 w-2 h-2 bg-violet-500/30 rounded-full animate-ping"
+            style={{ animationDelay: "4s" }}
+          ></div>
+
+          {/* AI symbols */}
+          <div className="absolute top-40 right-40 text-purple-500/20 text-7xl animate-float">
+            🧠
+          </div>
+          <div
+            className="absolute bottom-40 left-40 text-pink-500/20 text-6xl animate-float"
+            style={{ animationDelay: "2s" }}
+          >
+            ⚡
+          </div>
+        </div>
+
+        <main className="flex-1 relative z-10">
           <div className="max-w-6xl mx-auto px-6 py-16">
             {/* Header */}
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 mb-6">
                 <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
+                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold animate-pulse"
                   style={{
-                    background:
-                      "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                    background: "linear-gradient(135deg, #8b5cf6, #ec4899)",
                   }}
                 >
                   🤖
@@ -259,7 +300,7 @@ export default function MachineLearningBlogPage() {
                   className="text-4xl md:text-5xl font-bold"
                   style={{
                     background:
-                      "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                      "linear-gradient(135deg, #8b5cf6, #ec4899, #f59e0b)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",

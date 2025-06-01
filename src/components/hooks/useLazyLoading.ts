@@ -6,6 +6,7 @@ interface UseLazyLoadingParams<T> {
   itemsPerPage: number;
   hasMore: boolean;
   scrollThreshold?: number; // % of the window height from the bottom to trigger loading
+  getItemId?: (item: T) => string; // Function to get unique ID from item
 }
 
 export function useLazyLoading<T>({
@@ -14,6 +15,7 @@ export function useLazyLoading<T>({
   itemsPerPage,
   hasMore,
   scrollThreshold = 80, // default to 80% of the window height
+  getItemId,
 }: UseLazyLoadingParams<T>) {
   const [data, setData] = useState<T[]>(initialData);
   const [loading, setLoading] = useState(false);
@@ -32,7 +34,18 @@ export function useLazyLoading<T>({
       if (newData.length === 0) {
         setHasMoreData(false);
       } else {
-        setData((prevData) => [...prevData, ...newData]);
+        setData((prevData) => {
+          // Remove duplicates using getItemId if provided
+          if (getItemId) {
+            const existingIds = new Set(prevData.map(getItemId));
+            const uniqueNewData = newData.filter(
+              (item) => !existingIds.has(getItemId(item))
+            );
+            return [...prevData, ...uniqueNewData];
+          } else {
+            return [...prevData, ...newData];
+          }
+        });
         setPage(nextPage);
         setHasMoreData(newData.length >= itemsPerPage);
       }
@@ -41,15 +54,18 @@ export function useLazyLoading<T>({
     } finally {
       setLoading(false);
     }
-  }, [loading, hasMoreData, page, loadMoreData, itemsPerPage]);
+  }, [loading, hasMoreData, page, loadMoreData, itemsPerPage, getItemId]);
 
   // Function to reset the lazy loading state
-  const reset = useCallback((newInitialData: T[]) => {
-    setData(newInitialData);
-    setPage(1);
-    setLoading(false);
-    setHasMoreData(true);
-  }, []);
+  const reset = useCallback(
+    (newInitialData: T[], newHasMore: boolean = true) => {
+      setData(newInitialData);
+      setPage(1);
+      setLoading(false);
+      setHasMoreData(newHasMore && newInitialData.length >= itemsPerPage);
+    },
+    [itemsPerPage]
+  );
 
   // Handle scroll event to automatically load more
   useEffect(() => {

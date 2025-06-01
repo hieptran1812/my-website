@@ -49,27 +49,39 @@ export interface BlogPostMetadata {
 
 // Get markdown articles by category using API route (client-side function)
 export async function getMarkdownArticlesByCategory(
-  targetCategory: string
-): Promise<Article[]> {
+  targetCategory: string,
+  page: number = 1,
+  limit: number = 50
+): Promise<{ articles: Article[]; total: number; hasMore: boolean }> {
   try {
-    // Use window.location.origin to get the full URL in browser environment
     const baseUrl =
       typeof window !== "undefined"
         ? window.location.origin
         : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    const response = await fetch(
-      `${baseUrl}/api/blog/articles?category=${targetCategory}`
-    );
+
+    const params = new URLSearchParams({
+      category: targetCategory,
+      page: page.toString(),
+      limit: limit.toString(),
+    });
+
+    const response = await fetch(`${baseUrl}/api/blog/articles?${params}`);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch articles: ${response.status}`);
     }
 
     const data = await response.json();
-    return data.articles || [];
+
+    // Ensure we always return a proper structure with arrays
+    return {
+      articles: Array.isArray(data.articles) ? data.articles : [],
+      total: data.total || 0,
+      hasMore: data.hasMore || false,
+    };
   } catch (error) {
     console.error("Error fetching articles:", error);
-    return [];
+    return { articles: [], total: 0, hasMore: false };
   }
 }
 

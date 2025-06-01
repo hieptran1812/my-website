@@ -16,10 +16,14 @@ export default function PaperReadingBlogPage() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const articles = await getMarkdownArticlesByCategory("paper-reading");
-        setAllArticles(articles);
+        const { articles } = await getMarkdownArticlesByCategory(
+          "paper-reading"
+        );
+        // Ensure articles is always an array
+        setAllArticles(Array.isArray(articles) ? articles : []);
       } catch (error) {
         console.error("Error fetching articles:", error);
+        setAllArticles([]); // Set to empty array on error
       } finally {
         setLoading(false);
       }
@@ -33,7 +37,8 @@ export default function PaperReadingBlogPage() {
 
   // Categories for filtering - based on subcategories present in the paper-reading articles
   const categories = useMemo(() => {
-    if (!allArticles || allArticles.length === 0) {
+    // Add safety check for allArticles
+    if (!Array.isArray(allArticles) || allArticles.length === 0) {
       return [{ name: "All", slug: "all", count: 0 }];
     }
 
@@ -161,22 +166,68 @@ export default function PaperReadingBlogPage() {
   return (
     <FadeInWrapper duration={800}>
       <div
-        className="flex flex-col min-h-screen transition-colors duration-300"
+        className="flex flex-col min-h-screen transition-colors duration-300 relative overflow-hidden"
         style={{
           backgroundColor: "var(--background)",
           color: "var(--text-primary)",
         }}
       >
-        <main className="flex-1">
+        {/* Academic-themed Background Decorations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-24 left-24 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-full animate-pulse"></div>
+          <div
+            className="absolute top-36 right-24 w-28 h-28 bg-gradient-to-br from-indigo-500/10 to-blue-600/10 rounded-full animate-bounce"
+            style={{ animationDelay: "2s" }}
+          ></div>
+          <div
+            className="absolute bottom-40 left-20 w-24 h-24 bg-gradient-to-br from-blue-600/10 to-indigo-600/10 rounded-full animate-ping"
+            style={{ animationDelay: "4s" }}
+          ></div>
+          <div
+            className="absolute bottom-24 right-20 w-36 h-36 bg-gradient-to-br from-indigo-600/10 to-blue-500/10 rounded-full animate-pulse"
+            style={{ animationDelay: "6s" }}
+          ></div>
+
+          {/* Academic symbols */}
+          <div className="absolute top-40 right-40 text-blue-500/20 text-7xl animate-float">
+            📊
+          </div>
+          <div
+            className="absolute bottom-40 left-40 text-indigo-500/20 text-6xl animate-float"
+            style={{ animationDelay: "3s" }}
+          >
+            📈
+          </div>
+          <div
+            className="absolute top-1/2 left-1/3 text-blue-600/20 text-5xl animate-float"
+            style={{ animationDelay: "1.5s" }}
+          >
+            🔬
+          </div>
+          <div
+            className="absolute bottom-1/3 right-1/3 text-indigo-600/20 text-4xl animate-float"
+            style={{ animationDelay: "4.5s" }}
+          >
+            📝
+          </div>
+
+          {/* Research dots */}
+          <div className="absolute top-1/4 left-1/2 w-2 h-2 bg-blue-500/30 rounded-full animate-ping"></div>
+          <div
+            className="absolute bottom-1/4 right-1/2 w-2 h-2 bg-indigo-500/30 rounded-full animate-ping"
+            style={{ animationDelay: "2s" }}
+          ></div>
+        </div>
+
+        <main className="flex-1 relative z-10">
           <div className="max-w-6xl mx-auto px-6 py-16">
             {/* Header */}
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 mb-6">
                 <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
+                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold animate-pulse"
                   style={{
-                    background:
-                      "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                    background: "linear-gradient(135deg, #3b82f6, #6366f1)",
                   }}
                 >
                   📄
@@ -185,7 +236,7 @@ export default function PaperReadingBlogPage() {
                   className="text-4xl md:text-5xl font-bold"
                   style={{
                     background:
-                      "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                      "linear-gradient(135deg, #3b82f6, #6366f1, #8b5cf6)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",

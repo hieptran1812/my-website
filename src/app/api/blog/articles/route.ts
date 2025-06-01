@@ -86,11 +86,16 @@ function convertToArticle(
   monthsAgo.setMonth(monthsAgo.getMonth() - 3);
   const featured = articleDate > monthsAgo;
 
-  // Ensure unique ID by prefixing with category if available
-  const uniqueId = category ? `${category}/${slug}` : slug;
+  // Ensure unique ID by including timestamp and path for better uniqueness
+  const timestamp = metadata.date
+    ? new Date(metadata.date).getTime()
+    : Date.now();
+  const uniqueId = category
+    ? `${category}/${slug}-${timestamp}`
+    : `${slug}-${timestamp}`;
 
   return {
-    id: uniqueId, // Use the new uniqueId
+    id: uniqueId, // Use the enhanced uniqueId
     title: metadata.title || "Untitled",
     excerpt: metadata.excerpt || metadata.description || "",
     content: metadata.content || "",
@@ -111,9 +116,12 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const categoryFilter = searchParams.get("category");
     const subcategoryFilter = searchParams.get("subcategory");
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "50");
 
     const contentDir = path.join(process.cwd(), "content", "blog");
     const articles: Article[] = [];
+    const processedFiles = new Set<string>();
 
     const readArticlesFromDir = (
       dir: string,
@@ -129,16 +137,27 @@ export async function GET(request: NextRequest) {
             : entry.name;
           readArticlesFromDir(fullPath, entry.name, newBasePath);
         } else if (entry.name.endsWith(".md")) {
+          const fileKey = basePath ? `${basePath}/${entry.name}` : entry.name;
+
+          if (processedFiles.has(fileKey)) {
+            continue;
+          }
+          processedFiles.add(fileKey);
+
           const fileContent = fs.readFileSync(fullPath, "utf8");
           const { data: metadata, content: fileMatterContent } =
             matter(fileContent);
           const fileName = entry.name.replace(/\.md$/, "");
           const slug = basePath ? `${basePath}/${fileName}` : fileName;
 
+          // Create unique ID using full path and file stats
+          const stats = fs.statSync(fullPath);
+          const uniqueId = `${slug.replace(/\//g, "-")}-${stats.mtimeMs}`;
+
           const article = convertToArticle(metadata, slug, currentCategory);
+          article.id = uniqueId; // Override with truly unique ID
           article.content = fileMatterContent;
 
-          // Apply category and subcategory filters
           if (categoryFilter && article.category !== categoryFilter) {
             continue;
           }
@@ -157,9 +176,23 @@ export async function GET(request: NextRequest) {
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
 
-    return NextResponse.json({ articles });
+    // Apply pagination
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    const paginatedArticles = articles.slice(startIndex, endIndex);
+
+    return NextResponse.json({
+      articles: paginatedArticles,
+      total: articles.length,
+      page,
+      limit,
+      hasMore: endIndex < articles.length,
+    });
   } catch (error) {
     console.error("Error fetching articles:", error);
-    return NextResponse.json({ articles: [] }, { status: 500 });
+    return NextResponse.json(
+      { articles: [], total: 0, page: 1, limit: 50, hasMore: false },
+      { status: 500 }
+    );
   }
 }

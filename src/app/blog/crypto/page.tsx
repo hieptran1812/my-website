@@ -16,10 +16,12 @@ export default function CryptoBlogPage() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const articles = await getMarkdownArticlesByCategory("crypto");
-        setAllArticles(articles);
+        const { articles } = await getMarkdownArticlesByCategory("crypto");
+        // Ensure articles is always an array
+        setAllArticles(Array.isArray(articles) ? articles : []);
       } catch (error) {
         console.error("Error fetching articles:", error);
+        setAllArticles([]); // Set to empty array on error
       } finally {
         setLoading(false);
       }
@@ -33,7 +35,8 @@ export default function CryptoBlogPage() {
 
   // Categories updated to include "All" and up to 5 most relevant tags
   const categories = useMemo(() => {
-    if (!allArticles || allArticles.length === 0) {
+    // Add safety check for allArticles
+    if (!Array.isArray(allArticles) || allArticles.length === 0) {
       return [{ name: "All", slug: "all", count: 0 }];
     }
 
@@ -162,22 +165,68 @@ export default function CryptoBlogPage() {
   return (
     <FadeInWrapper duration={800}>
       <div
-        className="flex flex-col min-h-screen transition-colors duration-300"
+        className="flex flex-col min-h-screen transition-colors duration-300 relative overflow-hidden"
         style={{
           backgroundColor: "var(--background)",
           color: "var(--text-primary)",
         }}
       >
-        <main className="flex-1">
+        {/* Crypto-themed Background Decorations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-20 w-36 h-36 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-full animate-pulse"></div>
+          <div
+            className="absolute top-40 right-20 w-28 h-28 bg-gradient-to-br from-orange-500/10 to-yellow-600/10 rounded-full animate-bounce"
+            style={{ animationDelay: "1.5s" }}
+          ></div>
+          <div
+            className="absolute bottom-36 left-16 w-32 h-32 bg-gradient-to-br from-amber-500/10 to-yellow-500/10 rounded-full animate-ping"
+            style={{ animationDelay: "3s" }}
+          ></div>
+          <div
+            className="absolute bottom-20 right-16 w-40 h-40 bg-gradient-to-br from-yellow-600/10 to-orange-600/10 rounded-full animate-pulse"
+            style={{ animationDelay: "4.5s" }}
+          ></div>
+
+          {/* Floating crypto symbols */}
+          <div className="absolute top-32 right-32 text-yellow-500/20 text-8xl animate-float">
+            ₿
+          </div>
+          <div
+            className="absolute bottom-32 left-32 text-orange-500/20 text-6xl animate-float"
+            style={{ animationDelay: "2s" }}
+          >
+            Ξ
+          </div>
+          <div
+            className="absolute top-1/2 left-1/4 text-amber-500/20 text-5xl animate-float"
+            style={{ animationDelay: "1s" }}
+          >
+            ◊
+          </div>
+          <div
+            className="absolute top-2/3 right-1/4 text-yellow-600/20 text-4xl animate-float"
+            style={{ animationDelay: "3s" }}
+          >
+            ⬢
+          </div>
+
+          {/* Blockchain-like connections */}
+          <div className="absolute top-1/3 left-1/2 w-3 h-3 bg-yellow-500/30 rounded-full animate-ping"></div>
+          <div
+            className="absolute bottom-1/2 right-1/3 w-3 h-3 bg-orange-500/30 rounded-full animate-ping"
+            style={{ animationDelay: "2s" }}
+          ></div>
+        </div>
+
+        <main className="flex-1 relative z-10">
           <div className="max-w-6xl mx-auto px-6 py-16">
             {/* Header */}
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 mb-6">
                 <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
+                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold animate-pulse"
                   style={{
-                    background:
-                      "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                    background: "linear-gradient(135deg, #f59e0b, #d97706)",
                   }}
                 >
                   ₿
@@ -186,7 +235,7 @@ export default function CryptoBlogPage() {
                   className="text-4xl md:text-5xl font-bold"
                   style={{
                     background:
-                      "linear-gradient(135deg, var(--accent), var(--accent-hover))",
+                      "linear-gradient(135deg, #f59e0b, #d97706, #eab308)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
