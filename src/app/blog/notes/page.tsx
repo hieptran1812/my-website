@@ -326,6 +326,28 @@ export default function NotesBlogPage() {
 
                 {/* Category Filter Pills */}
                 <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => setSelectedCategory("all")}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 border ${
+                      selectedCategory === "all"
+                        ? "text-white"
+                        : "hover:bg-[var(--surface)]"
+                    }`}
+                    style={
+                      selectedCategory === "all"
+                        ? {
+                            backgroundColor: "var(--accent)",
+                            borderColor: "var(--accent)",
+                          }
+                        : {
+                            borderColor: "var(--border)",
+                            backgroundColor: "var(--surface)",
+                            color: "var(--text-secondary)",
+                          }
+                    }
+                  >
+                    All
+                  </button>
                   {categories.slice(1, 6).map(
                     (
                       category // Display up to 5 tag-based categories
