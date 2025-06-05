@@ -98,25 +98,21 @@ export async function processMarkdown(content: string): Promise<string> {
 // Utility function to process blog post content and calculate readTime
 export function processBlogPostWithReadTime(
   content: string,
-  frontmatter: any = {}
+  frontmatter: Record<string, unknown> = {}
 ): { processedContent: string; readTime: string } {
   const readTimeResult = calculateReadTimeWithTags(
     content,
-    frontmatter.tags || [],
-    frontmatter.category || "general"
+    (frontmatter.tags as string[]) || [],
+    (frontmatter.category as string) || "general"
   );
 
   return {
     processedContent: content,
-    readTime: frontmatter.readTime || readTimeResult.readTime,
+    readTime: (frontmatter.readTime as string) || readTimeResult.readTime,
   };
 }
 
 // Quick utility to get just the readTime for any content
-export function calculateContentReadTime(
-  content: string,
-  tags: string[] = [],
-  category: string = "general"
-): string {
+export function calculateContentReadTime(content: string): string {
   return getReadTime(content, { wordsPerMinute: 200 });
 }

@@ -19,7 +19,6 @@ export function useBlogMathParser(options: MathParserOptions = {}) {
       ["$", "$"],
       ["\\(", "\\)"],
     ],
-    processEscapes = true,
   } = options;
 
   const processElement = (element: HTMLElement) => {
@@ -185,7 +184,6 @@ function processMathInElement(element: HTMLElement) {
   // Auto-render math using KaTeX auto-render
   if (typeof window !== "undefined" && element) {
     // Simple math processing for $...$ and $$...$$
-    const textContent = element.textContent || "";
 
     // Replace display math $$...$$
     element.innerHTML = element.innerHTML.replace(
@@ -200,7 +198,7 @@ function processMathInElement(element: HTMLElement) {
               errorColor: "#cc0000",
             }
           )}</div>`;
-        } catch (error) {
+        } catch {
           return `<div class="math-error" style="color: #cc0000;">${match}</div>`;
         }
       }
@@ -219,7 +217,7 @@ function processMathInElement(element: HTMLElement) {
               errorColor: "#cc0000",
             }
           )}</span>`;
-        } catch (error) {
+        } catch {
           return `<span class="math-error" style="color: #cc0000;">${match}</span>`;
         }
       }

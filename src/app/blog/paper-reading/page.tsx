@@ -103,7 +103,6 @@ export default function PaperReadingBlogPage() {
     data: displayedArticles,
     loading: loadingMore,
     hasMoreData,
-    loadMore,
     reset,
   } = useLazyLoading({
     initialData: filteredArticles.slice(0, ITEMS_PER_PAGE),

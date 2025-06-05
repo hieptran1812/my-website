@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import BlogReader from "../../components/BlogReader";
 import FadeInWrapper from "@/components/FadeInWrapper";
 
@@ -112,7 +113,7 @@ export default function BlogPostPage() {
           >
             {error || "The requested blog post could not be found."}
           </p>
-          <a
+          <Link
             href="/blog"
             className="px-6 py-3 rounded-lg transition-colors border"
             style={{
@@ -122,7 +123,7 @@ export default function BlogPostPage() {
             }}
           >
             Back to Blog
-          </a>
+          </Link>
         </div>
       </FadeInWrapper>
     );
