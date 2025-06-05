@@ -9,7 +9,7 @@ featured: true
 author: "Hiep Tran"
 ---
 
-# LIME: Local Interpretable Model-Agnostic Explanations
+# LIME: Local Interpretabe Model-Agnostic Explanations
 
 ## Overview
 
