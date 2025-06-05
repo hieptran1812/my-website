@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import SearchPageClient from "./SearchPageClient";
 
 export const metadata: Metadata = {
@@ -60,7 +61,16 @@ export default function SearchPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <SearchPageClient />
+      <Suspense
+        fallback={
+          <div className="flex flex-col min-h-screen justify-center items-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
+            <p className="mt-4 text-lg">Loading search...</p>
+          </div>
+        }
+      >
+        <SearchPageClient />
+      </Suspense>
     </>
   );
 }

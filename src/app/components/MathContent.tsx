@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import MathRenderer, { useMathParser } from "./MathRenderer";
+import MathRenderer from "./MathRenderer";
+import { useMathParser } from "./MathRenderer";
 
 interface MathContentProps {
   children: string;

@@ -4,12 +4,12 @@ interface UseIntersectionObserverOptions extends IntersectionObserverInit {
   freezeOnceVisible?: boolean;
 }
 
-export function useIntersectionObserver(
+export function useIntersectionObserver<T extends HTMLElement = HTMLElement>(
   options: UseIntersectionObserverOptions = {}
 ) {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [hasIntersected, setHasIntersected] = useState(false);
-  const elementRef = useRef<HTMLElement>(null);
+  const elementRef = useRef<T>(null);
 
   const {
     threshold = 0.1,

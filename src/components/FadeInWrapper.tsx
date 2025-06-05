@@ -20,7 +20,7 @@ export default function FadeInWrapper({
   direction = "up",
   distance = 20,
 }: FadeInWrapperProps) {
-  const { elementRef, isVisible } = useIntersectionObserver({
+  const { elementRef, isVisible } = useIntersectionObserver<HTMLDivElement>({
     threshold,
     freezeOnceVisible: true,
   });

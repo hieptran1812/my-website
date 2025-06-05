@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import {
   calculateReadTimeWithTags,
   ReadTimeResult,
-} from "../lib/readTimeCalculator";
+} from "../../lib/readTimeCalculator";
 
 interface UseReadTimeOptions {
   content: string;

@@ -14,7 +14,7 @@ export default function LoadMoreTrigger({
   hasMore,
   threshold = 0.1,
 }: LoadMoreTriggerProps) {
-  const { elementRef, isVisible } = useIntersectionObserver({
+  const { elementRef, isVisible } = useIntersectionObserver<HTMLDivElement>({
     threshold,
     freezeOnceVisible: false,
   });
