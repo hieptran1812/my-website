@@ -8,17 +8,22 @@ interface MathContentProps {
   className?: string;
 }
 
+type MathPart = {
+  type: "text" | "inline-math" | "display-math";
+  content: string;
+};
+
 export default function MathContent({
   children,
   className = "",
 }: MathContentProps) {
   const { parseLatex } = useMathParser();
 
-  const parts = parseLatex(children);
+  const parts: MathPart[] = parseLatex(children);
 
   return (
     <span className={className}>
-      {parts.map((part, index) => {
+      {parts.map((part: MathPart, index: number) => {
         switch (part.type) {
           case "display-math":
             return (

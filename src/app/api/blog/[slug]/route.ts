@@ -8,10 +8,10 @@ import remarkHtml from "remark-html";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: { slug: string } }
 ) {
   try {
-    const { slug } = await params;
+    const { slug } = params;
 
     if (!slug) {
       return NextResponse.json({ error: "Slug is required" }, { status: 400 });
