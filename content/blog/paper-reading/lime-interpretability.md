@@ -1,11 +1,10 @@
 ---
-title: "LIME: Local Interpretable Model-Agnostic Explanations"
-excerpt: "Deep dive into LIME, a technique for explaining predictions of any machine learning classifier in an interpretable manner."
+title: "PROGRAMMING REFUSAL WITH CONDITIONAL ACTIVATION STEERING"
+excerpt: ""
 category: "paper-reading"
 subcategory: "AI Interpretability"
-tags: ["AI Interpretability", "LIME", "Explainable AI", "Machine Learning"]
+tags: ["AI Interpretability", "Explainable AI", "Activation Steering"]
 date: "2024-10-18"
-readTime: "22 min read"
 featured: true
 author: "Hiep Tran"
 ---
@@ -17,6 +16,9 @@ author: "Hiep Tran"
 LIME (Local Interpretable Model-agnostic Explanations) provides a novel approach to understanding individual predictions of black-box machine learning models by learning local interpretable models.
 
 ## Core Methodology
+
+![alt text](image.png)
+
 
 ### Local Surrogate Models
 
