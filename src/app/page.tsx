@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Hiep Tran - AI Engineer & Full-Stack Developer",
     description:
       "Experienced AI Engineer and Full-Stack Developer specializing in Machine Learning, Deep Learning, and scalable web applications.",
-    url: "https://hieptran.dev",
+    url: "https://halleyverse.dev",
     type: "website",
     images: [
       {
@@ -40,8 +40,8 @@ export default function Home() {
     jobTitle: "AI Engineer & Full-Stack Developer",
     description:
       "Experienced AI Engineer and Full-Stack Developer specializing in Machine Learning, Deep Learning, and scalable web applications.",
-    url: "https://hieptran.dev",
-    image: "https://hieptran.dev/profile-image.jpg",
+    url: "https://halleyverse.dev",
+    image: "https://halleyverse.dev/profile-image.jpg",
     sameAs: [
       "https://twitter.com/hieptran1812",
       "https://github.com/hieptran1812",

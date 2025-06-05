@@ -5,7 +5,7 @@ import SearchPageClient from "./SearchPageClient";
 export const metadata: Metadata = {
   title: "Search - Hiep Tran",
   description:
-    "Search through blog posts, projects, and content on hieptran.dev",
+    "Search through blog posts, projects, and content on halleyverse.dev",
   keywords: [
     "Search",
     "Hiep Tran",
@@ -19,15 +19,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Search - Hiep Tran",
     description:
-      "Search through blog posts, projects, and content on hieptran.dev",
+      "Search through blog posts, projects, and content on halleyverse.dev",
     type: "website",
-    url: "https://hieptran.dev/search",
+    url: "https://halleyverse.dev/search",
     images: [
       {
-        url: "/api/og?title=Search&description=Find content on hieptran.dev",
+        url: "/api/og?title=Search&description=Find content on halleyverse.dev",
         width: 1200,
         height: 630,
-        alt: "Search page for hieptran.dev",
+        alt: "Search page for halleyverse.dev",
       },
     ],
   },
@@ -35,11 +35,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Search - Hiep Tran",
     description:
-      "Search through blog posts, projects, and content on hieptran.dev",
-    images: ["/api/og?title=Search&description=Find content on hieptran.dev"],
+      "Search through blog posts, projects, and content on halleyverse.dev",
+    images: [
+      "/api/og?title=Search&description=Find content on halleyverse.dev",
+    ],
   },
   alternates: {
-    canonical: "https://hieptran.dev/search",
+    canonical: "https://halleyverse.dev/search",
   },
 };
 
@@ -49,7 +51,7 @@ export default function SearchPage() {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://hieptran.dev/search?q={search_term_string}",
+      urlTemplate: "https://halleyverse.dev/search?q={search_term_string}",
     },
     "query-input": "required name=search_term_string",
   };

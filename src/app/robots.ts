@@ -56,7 +56,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: "/",
       },
     ],
-    sitemap: "https://hieptran.dev/sitemap.xml",
-    host: "https://hieptran.dev",
+    sitemap: "https://halleyverse.dev/sitemap.xml",
+    host: "https://halleyverse.dev",
   };
 }

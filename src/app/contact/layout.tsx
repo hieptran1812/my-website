@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Contact Hiep Tran - AI Engineer & Full-Stack Developer",
     description:
       "Get in touch with Hiep Tran for AI engineering projects, machine learning consulting, or collaboration opportunities.",
-    url: "https://hieptran.dev/contact",
+    url: "https://halleyverse.dev/contact",
     type: "website",
     images: [
       {
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     images: ["/twitter-contact.jpg"],
   },
   alternates: {
-    canonical: "https://hieptran.dev/contact",
+    canonical: "https://halleyverse.dev/contact",
   },
 };
 

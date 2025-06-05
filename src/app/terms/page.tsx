@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://hieptran.dev/terms",
+    canonical: "https://halleyverse.dev/terms",
   },
 };
 
@@ -21,17 +21,17 @@ export default function TermsPage() {
     name: "Terms of Service",
     description:
       "Terms of service for Hiep Tran's personal website and portfolio",
-    url: "https://hieptran.dev/terms",
+    url: "https://halleyverse.dev/terms",
     mainEntity: {
       "@type": "TermsOfService",
       name: "Hiep Tran Portfolio Terms of Service",
-      url: "https://hieptran.dev/terms",
+      url: "https://halleyverse.dev/terms",
       datePublished: "2025-05-27",
       dateModified: "2025-05-27",
       publisher: {
         "@type": "Person",
         name: "Hiep Tran",
-        url: "https://hieptran.dev",
+        url: "https://halleyverse.dev",
       },
     },
   };
@@ -62,7 +62,7 @@ export default function TermsPage() {
               <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
               <p>
                 Welcome to Hiep Tran&apos;s personal website and portfolio
-                (hieptran.dev). These Terms of Service (&ldquo;Terms&rdquo;)
+                (halleyverse.dev). These Terms of Service (&ldquo;Terms&rdquo;)
                 govern your use of my website and services. By accessing or
                 using my website, you agree to be bound by these Terms.
               </p>
@@ -247,10 +247,10 @@ export default function TermsPage() {
                 <p>
                   <strong>Website:</strong>{" "}
                   <a
-                    href="https://hieptran.dev"
+                    href="https://halleyverse.dev"
                     className="text-blue-600 dark:text-blue-400"
                   >
-                    hieptran.dev
+                    halleyverse.dev
                   </a>
                 </p>
               </div>

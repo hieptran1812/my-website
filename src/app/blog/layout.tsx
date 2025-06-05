@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     "Paper Reading",
     "Software Engineering",
   ],
-  authors: [{ name: "Hiep Tran", url: "https://hieptran.dev" }],
+  authors: [{ name: "Hiep Tran", url: "https://halleyverse.dev" }],
   openGraph: {
     title:
       "Blog - Hiep Tran | AI, Machine Learning & Software Development Insights",
     description:
       "Read Hiep Tran's latest blog posts about AI, machine learning, and software development. Technical insights and tutorials from an experienced AI engineer.",
-    url: "https://hieptran.dev/blog",
+    url: "https://halleyverse.dev/blog",
     type: "website",
     siteName: "Hiep Tran Portfolio",
     images: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     images: ["/twitter-blog.jpg"],
   },
   alternates: {
-    canonical: "https://hieptran.dev/blog",
+    canonical: "https://halleyverse.dev/blog",
     types: {
       "application/rss+xml": [
         { url: "/blog/rss.xml", title: "Hiep Tran Blog RSS Feed" },

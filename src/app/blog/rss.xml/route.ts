@@ -54,7 +54,7 @@ const articles = [
 ];
 
 export async function GET() {
-  const baseUrl = "https://hieptran.dev";
+  const baseUrl = "https://halleyverse.dev";
   const buildDate = new Date().toUTCString();
 
   const rssXml = `<?xml version="1.0" encoding="UTF-8" ?>

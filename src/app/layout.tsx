@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://hieptran.dev"),
+  metadataBase: new URL("https://halleyverse.dev"),
   title: "Hiep Tran - AI Engineer & Full-Stack Developer Portfolio",
   description:
     "Experienced AI Engineer and Full-Stack Developer specializing in Machine Learning, Deep Learning, and scalable web applications. Explore my projects, blog posts, and technical insights.",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Hiep Tran - AI Engineer & Full-Stack Developer",
     description:
       "Experienced AI Engineer and Full-Stack Developer specializing in Machine Learning, Deep Learning, and scalable web applications.",
-    url: "https://hieptran.dev",
+    url: "https://halleyverse.dev",
     type: "website",
     images: [
       {

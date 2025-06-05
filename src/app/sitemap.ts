@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://hieptran.dev";
+  const baseUrl = "https://halleyverse.dev";
 
   // Static pages
   const staticPages = [

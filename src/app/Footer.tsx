@@ -107,7 +107,7 @@ export default function Footer() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Hiep Tran",
-    url: "https://hieptran.dev",
+    url: "https://halleyverse.dev",
     sameAs: [
       "https://github.com/hieptran1812",
       "https://linkedin.com/in/hieptran1812",

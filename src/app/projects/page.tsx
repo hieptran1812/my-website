@@ -81,7 +81,7 @@ const projects = [
       "Tailwind CSS",
     ],
     githubUrl: "https://github.com/hieptran1812/ecommerce-platform",
-    liveUrl: "https://ecommerce-demo.hieptran.dev",
+    liveUrl: "https://ecommerce-demo.halleyverse.dev",
     featured: true,
     status: "Production",
     highlights: [

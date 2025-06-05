@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "About Hiep Tran - AI Engineer & Software Developer",
     description:
       "Learn about Hiep Tran's background in AI engineering, machine learning, and full-stack development. Discover his skills and professional journey.",
-    url: "https://hieptran.dev/about",
+    url: "https://halleyverse.dev/about",
     type: "profile",
     images: [
       {
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     images: ["/twitter-about.jpg"],
   },
   alternates: {
-    canonical: "https://hieptran.dev/about",
+    canonical: "https://halleyverse.dev/about",
   },
 };
 

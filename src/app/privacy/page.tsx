@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://hieptran.dev/privacy",
+    canonical: "https://halleyverse.dev/privacy",
   },
 };
 
@@ -21,17 +21,17 @@ export default function PrivacyPage() {
     name: "Privacy Policy",
     description:
       "Privacy policy for Hiep Tran's personal website and portfolio",
-    url: "https://hieptran.dev/privacy",
+    url: "https://halleyverse.dev/privacy",
     mainEntity: {
       "@type": "PrivacyPolicy",
       name: "Hiep Tran Portfolio Privacy Policy",
-      url: "https://hieptran.dev/privacy",
+      url: "https://halleyverse.dev/privacy",
       datePublished: "2025-05-27",
       dateModified: "2025-05-27",
       publisher: {
         "@type": "Person",
         name: "Hiep Tran",
-        url: "https://hieptran.dev",
+        url: "https://halleyverse.dev",
       },
     },
   };
@@ -64,7 +64,7 @@ export default function PrivacyPage() {
                 This Privacy Policy describes how Hiep Tran (&ldquo;I&rdquo;,
                 &ldquo;me&rdquo;, or &ldquo;my&rdquo;) collects, uses, and
                 shares information when you visit my personal website and
-                portfolio at hieptran.dev (the &ldquo;Service&rdquo;).
+                portfolio at halleyverse.dev (the &ldquo;Service&rdquo;).
               </p>
             </section>
 
@@ -215,10 +215,10 @@ export default function PrivacyPage() {
                 <p>
                   <strong>Website:</strong>{" "}
                   <a
-                    href="https://hieptran.dev"
+                    href="https://halleyverse.dev"
                     className="text-blue-600 dark:text-blue-400"
                   >
-                    hieptran.dev
+                    halleyverse.dev
                   </a>
                 </p>
               </div>

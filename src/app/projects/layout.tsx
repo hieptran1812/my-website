@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Projects - Hiep Tran | AI & Web Development Portfolio",
     description:
       "Explore Hiep Tran's portfolio of AI, machine learning, and web development projects. View innovative solutions and detailed case studies.",
-    url: "https://hieptran.dev/projects",
+    url: "https://halleyverse.dev/projects",
     type: "website",
     images: [
       {
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     images: ["/twitter-projects.jpg"],
   },
   alternates: {
-    canonical: "https://hieptran.dev/projects",
+    canonical: "https://halleyverse.dev/projects",
   },
 };
 
