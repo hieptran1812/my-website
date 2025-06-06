@@ -18,7 +18,7 @@ excerpt: >-
   how tiny changes can lead to remarkable results through better systems design.
 ---
 
-# Atomic Habits by James Clear: Building Better Systems
+# 100 Days of Leetcode
 
 James Clear's "Atomic Habits" revolutionizes how we think about habit formation and personal development. Rather than focusing on goals, Clear advocates for building better systems through tiny, incremental changes.
 
