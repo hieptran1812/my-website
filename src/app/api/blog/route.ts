@@ -4,6 +4,11 @@ import path from "path";
 import matter from "gray-matter";
 import { calculateReadTimeWithTags } from "@/lib/readTimeCalculator";
 
+// Implement caching for blog posts
+const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+let cachedPosts = null;
+let lastCacheTime = 0;
+
 interface BlogPostMetadata {
   slug: string;
   title: string;
@@ -22,6 +27,36 @@ export async function GET(request: Request) {
     const category = searchParams.get("category");
     const tag = searchParams.get("tag");
     const search = searchParams.get("search");
+
+    // Use cached posts if available and not expired
+    const now = Date.now();
+    if (
+      cachedPosts &&
+      now - lastCacheTime < CACHE_DURATION &&
+      !process.env.NODE_ENV?.includes("development")
+    ) {
+      // Filter cached posts based on query parameters
+      let filteredPosts = [...cachedPosts];
+
+      if (search) {
+        const searchLower = search.toLowerCase();
+        filteredPosts = filteredPosts.filter(
+          (post) =>
+            post.title.toLowerCase().includes(searchLower) ||
+            post.excerpt.toLowerCase().includes(searchLower)
+        );
+      } else if (category) {
+        filteredPosts = filteredPosts.filter(
+          (post) => post.category.toLowerCase() === category.toLowerCase()
+        );
+      } else if (tag) {
+        filteredPosts = filteredPosts.filter((post) =>
+          post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
+        );
+      }
+
+      return NextResponse.json(filteredPosts);
+    }
 
     const contentDirectory = path.join(process.cwd(), "content", "blog");
 
@@ -67,16 +102,34 @@ export async function GET(request: Request) {
           tags: data.tags || [],
           image: data.image || "/images/default-blog.jpg",
           excerpt: data.excerpt || data.description || "No excerpt available",
+          // Add SEO-friendly JSON-LD data
+          seo: {
+            type: "BlogPosting",
+            datePublished: data.date || data.publishDate || "2024-01-01",
+            dateModified: data.modifiedDate || data.date || "2024-01-01",
+            author: data.author || "Anonymous",
+          },
         });
       }
     }
 
+    // Sort posts by date (newest first)
+    posts.sort(
+      (a, b) =>
+        new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+    );
+
+    // Update cache
+    cachedPosts = posts;
+    lastCacheTime = now;
+
     // Apply filters
     if (search) {
+      const searchLower = search.toLowerCase();
       posts = posts.filter(
         (post) =>
-          post.title.toLowerCase().includes(search.toLowerCase()) ||
-          post.excerpt.toLowerCase().includes(search.toLowerCase())
+          post.title.toLowerCase().includes(searchLower) ||
+          post.excerpt.toLowerCase().includes(searchLower)
       );
     } else if (category) {
       posts = posts.filter(

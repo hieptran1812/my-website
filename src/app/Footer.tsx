@@ -22,9 +22,7 @@ const blogCategories = [
 
 const resourceLinks = [
   { name: "Resume/CV", href: "/resume.pdf" },
-  { name: "Research Papers", href: "/research" },
-  { name: "Open Source", href: "https://github.com/hieptran1812" },
-  { name: "Tutorials", href: "/blog/software-development" },
+  // { name: "Research Papers", href: "/research" },
 ];
 
 const legalLinks = [

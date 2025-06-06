@@ -1,7 +1,39 @@
 /**
- * Automatic Read Time Calculator
+ * Optimized Read Time Calculator
  * Calculates reading time based on content analysis and complexity factors
  */
+
+// Cache for previously calculated read times to avoid redundant processing
+const readTimeCache = new Map<string, ReadTimeResult>();
+
+export interface ContentAnalysis {
+  wordCount: number;
+  codeBlocks: number;
+  mathEquations: number;
+  images: number;
+  tables: number;
+  headings: number;
+  lists: number;
+  links: number;
+  complexity: "beginner" | "intermediate" | "advanced";
+}
+
+export interface ReadTimeBreakdown {
+  baseReadingTime: number;
+  codeBlockTime: number;
+  mathTime: number;
+  imageTime: number;
+  tableTime: number;
+  complexityAdjustment: number;
+  totalTime: number;
+}
+
+export interface ReadTimeResult {
+  readTime: string;
+  readTimeMinutes: number;
+  analysis: ContentAnalysis;
+  breakdown: ReadTimeBreakdown;
+}
 
 export interface ReadTimeConfig {
   /** Average words per minute for reading (default: 200) */
@@ -20,33 +52,6 @@ export interface ReadTimeConfig {
   maxReadTime?: number;
 }
 
-export interface ContentAnalysis {
-  wordCount: number;
-  codeBlocks: number;
-  mathEquations: number;
-  images: number;
-  tables: number;
-  headings: number;
-  lists: number;
-  links: number;
-  complexity: "beginner" | "intermediate" | "advanced";
-}
-
-export interface ReadTimeResult {
-  readTime: string;
-  readTimeMinutes: number;
-  analysis: ContentAnalysis;
-  breakdown: {
-    baseReadingTime: number;
-    codeBlockTime: number;
-    mathTime: number;
-    imageTime: number;
-    tableTime: number;
-    complexityAdjustment: number;
-    totalTime: number;
-  };
-}
-
 const DEFAULT_CONFIG: Required<ReadTimeConfig> = {
   wordsPerMinute: 200,
   codeBlockTime: 30,
@@ -57,27 +62,42 @@ const DEFAULT_CONFIG: Required<ReadTimeConfig> = {
   maxReadTime: 60,
 };
 
-/**
- * Analyzes markdown content to extract various content types
- */
+// Compile regular expressions once for better performance
+const REGEX = {
+  // Pre-compiled regex patterns for better performance
+  frontMatter: /^---[\s\S]*?---\n/,
+  codeBlocks: /```[\s\S]*?```/g,
+  inlineCode: /`[^`]+`/g,
+  images: /!\[.*?\]\(.*?\)/g,
+  links: /\[.*?\]\(.*?\)/g,
+  headings: /^#{1,6}\s+/gm,
+  lists: /^[-*+]\s+/gm,
+  numberedLists: /^\d+\.\s+/gm,
+  tableSyntax: /\|.*?\|/g,
+  blockMath: /\$\$[\s\S]*?\$\$/g,
+  inlineMath: /\$[^$]+\$/g,
+  whitespace: /\s+/g,
+};
+
+// Analyzes markdown content to extract various content types
 export function analyzeContent(content: string): ContentAnalysis {
   // Remove frontmatter if present
-  const cleanContent = content.replace(/^---[\s\S]*?---\n/, "");
+  const cleanContent = content.replace(REGEX.frontMatter, "");
 
   // Count words (excluding code blocks and other special content)
   const textContent = cleanContent
-    .replace(/```[\s\S]*?```/g, "") // Remove code blocks
-    .replace(/`[^`]+`/g, "") // Remove inline code
-    .replace(/!\[.*?\]\(.*?\)/g, "") // Remove images
-    .replace(/\[.*?\]\(.*?\)/g, "") // Remove links (keep text only)
-    .replace(/#{1,6}\s+/g, "") // Remove heading markers
+    .replace(REGEX.codeBlocks, "") // Remove code blocks
+    .replace(REGEX.inlineCode, "") // Remove inline code
+    .replace(REGEX.images, "") // Remove images
+    .replace(REGEX.links, "") // Remove links (keep text only)
+    .replace(REGEX.headings, "") // Remove heading markers
     .replace(/[*_]{1,2}(.*?)[*_]{1,2}/g, "$1") // Remove emphasis markers
-    .replace(/[-*+]\s+/g, "") // Remove list markers
-    .replace(/\d+\.\s+/g, "") // Remove numbered list markers
-    .replace(/\|.*?\|/g, "") // Remove table syntax
-    .replace(/\$\$[\s\S]*?\$\$/g, "") // Remove block math
-    .replace(/\$[^$]+\$/g, "") // Remove inline math
-    .replace(/\s+/g, " ") // Normalize whitespace
+    .replace(REGEX.lists, "") // Remove list markers
+    .replace(REGEX.numberedLists, "") // Remove numbered list markers
+    .replace(REGEX.tableSyntax, "") // Remove table syntax
+    .replace(REGEX.blockMath, "") // Remove block math
+    .replace(REGEX.inlineMath, "") // Remove inline math
+    .replace(REGEX.whitespace, " ") // Normalize whitespace
     .trim();
 
   const wordCount = textContent
@@ -85,26 +105,26 @@ export function analyzeContent(content: string): ContentAnalysis {
     .filter((word) => word.length > 0).length;
 
   // Count different content types
-  const codeBlocks = (cleanContent.match(/```[\s\S]*?```/g) || []).length;
-  const inlineCode = (cleanContent.match(/`[^`]+`/g) || []).length;
+  const codeBlocks = (cleanContent.match(REGEX.codeBlocks) || []).length;
+  const inlineCode = (cleanContent.match(REGEX.inlineCode) || []).length;
   const totalCodeBlocks = codeBlocks + Math.ceil(inlineCode / 3); // Group inline code
 
   const mathEquations =
-    (cleanContent.match(/\$\$[\s\S]*?\$\$/g) || []).length + // Block math
-    (cleanContent.match(/\$[^$]+\$/g) || []).length; // Inline math
+    (cleanContent.match(REGEX.blockMath) || []).length + // Block math
+    (cleanContent.match(REGEX.inlineMath) || []).length; // Inline math
 
-  const images = (cleanContent.match(/!\[.*?\]\(.*?\)/g) || []).length;
+  const images = (cleanContent.match(REGEX.images) || []).length;
 
   const tables =
-    (cleanContent.match(/\|.*?\|/g) || []).length > 0
+    (cleanContent.match(REGEX.tableSyntax) || []).length > 0
       ? cleanContent.split("\n").filter((line) => line.includes("|")).length / 3
       : 0;
 
-  const headings = (cleanContent.match(/^#{1,6}\s+/gm) || []).length;
+  const headings = (cleanContent.match(REGEX.headings) || []).length;
   const lists =
-    (cleanContent.match(/^[-*+]\s+/gm) || []).length +
-    (cleanContent.match(/^\d+\.\s+/gm) || []).length;
-  const links = (cleanContent.match(/\[.*?\]\(.*?\)/g) || []).length;
+    (cleanContent.match(REGEX.lists) || []).length +
+    (cleanContent.match(REGEX.numberedLists) || []).length;
+  const links = (cleanContent.match(REGEX.links) || []).length;
 
   // Determine complexity based on content analysis
   let complexity: "beginner" | "intermediate" | "advanced" = "intermediate";
@@ -141,6 +161,12 @@ export function calculateReadTime(
 ): ReadTimeResult {
   const finalConfig = { ...DEFAULT_CONFIG, ...config };
   const analysis = analyzeContent(content);
+
+  // Check cache first
+  const cacheKey = JSON.stringify({ content, config: finalConfig });
+  if (readTimeCache.has(cacheKey)) {
+    return readTimeCache.get(cacheKey)!;
+  }
 
   // Base reading time in minutes
   const baseReadingTime = analysis.wordCount / finalConfig.wordsPerMinute;
@@ -184,7 +210,7 @@ export function calculateReadTime(
   const readTimeMinutes = Math.ceil(totalTime);
   const readTime = `${readTimeMinutes} min read`;
 
-  return {
+  const result = {
     readTime,
     readTimeMinutes,
     analysis,
@@ -198,6 +224,11 @@ export function calculateReadTime(
       totalTime,
     },
   };
+
+  // Store in cache
+  readTimeCache.set(cacheKey, result);
+
+  return result;
 }
 
 /**
