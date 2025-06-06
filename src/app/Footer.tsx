@@ -115,7 +115,7 @@ export default function Footer() {
       "https://stackoverflow.com/users/hieptran1812",
       "https://youtube.com/@hieptran1812",
     ],
-    jobTitle: "AI Research Engineer & Full-Stack Developer",
+    jobTitle: "AI Engineer",
     workLocation: {
       "@type": "Place",
       address: {
@@ -178,7 +178,7 @@ export default function Footer() {
                 className="text-sm leading-relaxed mb-4"
                 style={{ color: "var(--text-secondary)" }}
               >
-                AI Research Engineer & Full-Stack Developer building intelligent
+                AI Engineer building intelligent
                 systems.
               </p>
 

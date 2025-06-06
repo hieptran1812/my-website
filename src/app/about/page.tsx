@@ -1,92 +1,101 @@
 "use client";
 
+import FadeInWrapper from "../../components/FadeInWrapper";
+import { useState } from "react";
+
 // This would ideally be in a separate metadata file, but for client components we'll handle it differently
 // We'll add the metadata to the parent layout or create a wrapper component
 
-const skills = [
+// Work Experience Timeline
+const workExperience = [
   {
-    category: "Programming Languages",
-    items: [
-      "Python",
-      "JavaScript/TypeScript",
-      "Java",
-      "C++",
-      "Go",
-      "SQL",
-      "R",
-      "Scala",
+    title: "Senior AI Research Engineer",
+    company: "Tech Innovation Lab",
+    location: "Ho Chi Minh City, Vietnam",
+    period: "2024 - Present",
+    type: "Full-time",
+    description:
+      "Lead AI research and development initiatives, focusing on large language models and computer vision applications for real-world deployment.",
+    responsibilities: [
+      "Design and implement cutting-edge ML algorithms for production systems",
+      "Lead a team of 3 junior researchers in developing novel AI solutions",
+      "Published 5 research papers in top-tier AI conferences",
+      "Optimize model performance for edge deployment and resource constraints",
     ],
-    icon: "🔧",
+    technologies: [
+      "PyTorch",
+      "TensorFlow",
+      "Transformers",
+      "Computer Vision",
+      "MLOps",
+    ],
+    icon: "🔬",
   },
   {
-    category: "AI/ML Technologies",
-    items: [
+    title: "Full-Stack Software Engineer",
+    company: "Digital Solutions Inc.",
+    location: "Ho Chi Minh City, Vietnam",
+    period: "2023 - 2024",
+    type: "Full-time",
+    description:
+      "Developed scalable web applications and microservices architecture serving thousands of users with focus on performance optimization.",
+    responsibilities: [
+      "Built and maintained React/Next.js frontend applications",
+      "Designed and implemented RESTful APIs using Node.js and Python",
+      "Implemented CI/CD pipelines reducing deployment time by 60%",
+      "Collaborated with cross-functional teams in Agile environment",
+    ],
+    technologies: [
+      "React",
+      "Next.js",
+      "Node.js",
+      "Python",
+      "PostgreSQL",
+      "Docker",
+      "AWS",
+    ],
+    icon: "💻",
+  },
+  {
+    title: "Machine Learning Engineer (Intern)",
+    company: "AI Startup Hub",
+    location: "Ho Chi Minh City, Vietnam",
+    period: "2022 - 2023",
+    type: "Internship",
+    description:
+      "Contributed to ML model development and deployment pipeline for computer vision and NLP applications.",
+    responsibilities: [
+      "Developed and fine-tuned deep learning models for image classification",
+      "Implemented data preprocessing pipelines for large-scale datasets",
+      "Assisted in model deployment using Docker and Kubernetes",
+      "Conducted experiments and documented findings for research papers",
+    ],
+    technologies: [
+      "Python",
       "TensorFlow",
-      "PyTorch",
-      "Scikit-learn",
       "OpenCV",
-      "NLTK",
-      "Transformers",
-      "Hugging Face",
-      "Keras",
+      "Scikit-learn",
+      "Docker",
+      "Kubernetes",
     ],
     icon: "🤖",
   },
   {
-    category: "Web Technologies",
-    items: [
-      "React/Next.js",
-      "Node.js",
-      "Express",
-      "FastAPI",
-      "PostgreSQL",
-      "MongoDB",
-      "Redis",
-      "GraphQL",
+    title: "Software Development Intern",
+    company: "Web Development Agency",
+    location: "Ho Chi Minh City, Vietnam",
+    period: "2021 - 2022",
+    type: "Part-time",
+    description:
+      "Assisted in developing client websites and web applications using modern frameworks and best practices.",
+    responsibilities: [
+      "Developed responsive websites using HTML, CSS, JavaScript",
+      "Built interactive features using React.js",
+      "Collaborated with designers to implement UI/UX requirements",
+      "Participated in code reviews and learned software development best practices",
     ],
+    technologies: ["HTML", "CSS", "JavaScript", "React", "Git"],
     icon: "🌐",
-  },
-  {
-    category: "Tools & Platforms",
-    items: [
-      "Docker",
-      "Kubernetes",
-      "AWS",
-      "Git",
-      "Linux",
-      "Jupyter",
-      "Apache Spark",
-      "Elasticsearch",
-    ],
-    icon: "⚙️",
-  },
-  {
-    category: "Data Science",
-    items: [
-      "Pandas",
-      "NumPy",
-      "Matplotlib",
-      "Seaborn",
-      "Apache Airflow",
-      "MLflow",
-      "Tableau",
-      "Power BI",
-    ],
-    icon: "📊",
-  },
-  {
-    category: "DevOps & Cloud",
-    items: [
-      "CI/CD",
-      "Terraform",
-      "Azure",
-      "GCP",
-      "Jenkins",
-      "Prometheus",
-      "Grafana",
-      "ELK Stack",
-    ],
-    icon: "☁️",
   },
 ];
 
@@ -114,36 +123,88 @@ const experiences = [
   },
 ];
 
-const achievements = [
-  {
-    title: "Academic Excellence",
-    description:
-      "Graduated with honors in Computer Science, specializing in Machine Learning and Software Engineering. Strong foundation in theoretical CS and practical applications.",
-    metric: "Summa Cum Laude",
-    icon: "🎓",
-  },
-  {
-    title: "Research Impact",
-    description:
-      "Published research papers in machine learning, AI, and software engineering. Work cited by international research community.",
-    metric: "10+ Publications",
-    icon: "📚",
-  },
-  {
-    title: "Industry Experience",
-    description:
-      "Successfully delivered production ML systems and web applications serving thousands of users. Led technical teams and mentored junior developers.",
-    metric: "3+ Years",
-    icon: "🏆",
-  },
-  {
-    title: "Project Portfolio",
-    description:
-      "Developed and deployed multiple full-stack applications, ML models, and research prototypes across various domains and technologies.",
-    metric: "25+ Projects",
-    icon: "🚀",
-  },
-];
+// Honors & Awards categorized by type
+const awards = {
+  hackathons: [
+    {
+      title: "GDSC HACKATHON VIETNAM 2023",
+      organizer: "Google Developer Student Clubs and Coderschool",
+      achievement: "Second Prize",
+      icon: "🥈",
+      year: "2023",
+    },
+    {
+      title: "KO Hackathon",
+      organizer: "Kambria",
+      achievement: "First Prize",
+      icon: "🥇",
+      year: "2022",
+    },
+    {
+      title: "Developer Circles Vietnam Innovation Challenge",
+      organizer: "Facebook and Coderschool",
+      achievement: "FPT Track Winner",
+      icon: "🏅",
+      year: "2022",
+    },
+  ],
+  innovation: [
+    {
+      title: "Build On Vietnam 2022",
+      organizer: "Amazon Web Services",
+      achievement: "Best Innovation Award",
+      icon: "🏆",
+      year: "2022",
+    },
+    {
+      title: "Creative Idea Challenge",
+      organizer:
+        "School of Information and Communication Technology - Hanoi University of Science and Technology",
+      achievement: "First Prize",
+      icon: "💡",
+      year: "2022",
+    },
+  ],
+  entrepreneurship: [
+    {
+      title: "Vietnam Social Innovation Challenge (VSIC)",
+      organizer: "Foreign Trade University",
+      achievement: "National Runner-up",
+      icon: "🏆",
+      year: "2022",
+    },
+    {
+      title: "P-Startup Student Startup Idea Contest",
+      organizer: "Posts and Telecommunications Institute of Technology",
+      achievement: "First Prize",
+      icon: "🥇",
+      year: "2022",
+    },
+    {
+      title: "Social Business Creation",
+      organizer: "HEC Montréal",
+      achievement: "Finalist",
+      icon: "🌟",
+      year: "2022",
+    },
+  ],
+  technical: [
+    {
+      title: "VAIPE Medicine Pill Image Recognition Challenge",
+      organizer: "VinUni-Illinois Smart Health Center (VISHC) at VinUniversity",
+      achievement: "Encouragement Prize",
+      icon: "🔬",
+      year: "2022",
+    },
+    {
+      title: "Mathematics Olympiad for Vietnamese Universities",
+      organizer: "National Mathematics Committee",
+      achievement: "Bronze Medal",
+      icon: "🥉",
+      year: "2022",
+    },
+  ],
+};
 
 const education = [
   {
@@ -178,24 +239,223 @@ const education = [
   },
 ];
 
-const certifications = [
-  {
-    name: "AWS Certified Solutions Architect",
-    issuer: "Amazon Web Services",
-    year: "2024",
-  },
-  {
-    name: "Google Cloud Professional ML Engineer",
-    issuer: "Google Cloud",
-    year: "2024",
-  },
-  {
-    name: "TensorFlow Developer Certificate",
-    issuer: "TensorFlow",
-    year: "2023",
-  },
-  { name: "Kubernetes Application Developer", issuer: "CNCF", year: "2023" },
-];
+const AwardsCarousel = ({ awards }) => {
+  const categories = [
+    { id: "hackathons", name: "Hackathons", icon: "🚀" },
+    { id: "innovation", name: "Innovation", icon: "💡" },
+    { id: "entrepreneurship", name: "Entrepreneurship", icon: "💼" },
+    { id: "technical", name: "Technical Competitions", icon: "🔬" },
+  ];
+
+  const [activeCategory, setActiveCategory] = useState("hackathons");
+  const [animationDirection, setAnimationDirection] = useState("right");
+
+  const handleCategoryChange = (newCategory) => {
+    const currentIndex = categories.findIndex((c) => c.id === activeCategory);
+    const newIndex = categories.findIndex((c) => c.id === newCategory);
+
+    // Determine if we're going forward or backward for animation direction
+    setAnimationDirection(newIndex > currentIndex ? "right" : "left");
+    setActiveCategory(newCategory);
+  };
+
+  const handleNext = () => {
+    const currentIndex = categories.findIndex((c) => c.id === activeCategory);
+    const nextIndex = (currentIndex + 1) % categories.length;
+    setAnimationDirection("right");
+    setActiveCategory(categories[nextIndex].id);
+  };
+
+  const handlePrev = () => {
+    const currentIndex = categories.findIndex((c) => c.id === activeCategory);
+    const prevIndex =
+      (currentIndex - 1 + categories.length) % categories.length;
+    setAnimationDirection("left");
+    setActiveCategory(categories[prevIndex].id);
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      {/* Category Tabs */}
+      <div className="flex flex-wrap justify-center gap-4 mb-8">
+        {categories.map((category, index) => (
+          <FadeInWrapper
+            key={category.id}
+            direction="up"
+            delay={350 + index * 50}
+          >
+            <button
+              onClick={() => handleCategoryChange(category.id)}
+              className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transform transition-all duration-300 hover:scale-105 ${
+                activeCategory === category.id ? "ring-2 ring-offset-2" : ""
+              }`}
+              style={{
+                backgroundColor:
+                  activeCategory === category.id
+                    ? "var(--accent)"
+                    : "var(--surface-accent)",
+                color:
+                  activeCategory === category.id ? "white" : "var(--accent)",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                ringColor: "var(--accent)",
+                ringOffsetColor: "var(--background)",
+              }}
+            >
+              <span className="mr-2">{category.icon}</span>
+              {category.name}
+            </button>
+          </FadeInWrapper>
+        ))}
+      </div>
+
+      {/* Awards Content */}
+      <div
+        className="p-8 rounded-2xl border transform transition-all duration-300 hover:shadow-xl relative overflow-hidden"
+        style={{
+          backgroundColor: "var(--card-bg)",
+          borderColor: "var(--card-border)",
+          minHeight: "450px", // Set a minimum height to prevent layout shifts
+          boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+        }}
+      >
+        {categories.map((category) => (
+          <div
+            key={category.id}
+            className={`transition-all duration-700 absolute top-0 left-0 w-full h-full p-8 ${
+              activeCategory === category.id
+                ? "opacity-100 translate-x-0 pointer-events-auto"
+                : `opacity-0 pointer-events-none ${
+                    animationDirection === "right"
+                      ? "translate-x-full"
+                      : "-translate-x-full"
+                  }`
+            }`}
+            style={{
+              transform:
+                activeCategory === category.id
+                  ? "translateX(0)"
+                  : animationDirection === "right"
+                  ? "translateX(50px)"
+                  : "translateX(-50px)",
+            }}
+          >
+            <FadeInWrapper direction="up" delay={150}>
+              <h3
+                className="text-2xl font-semibold mb-6 flex items-center"
+                style={{ color: "var(--text-primary)" }}
+              >
+                <span className="mr-3 text-2xl">{category.icon}</span>
+                {category.name}
+              </h3>
+
+              <div className="space-y-4 overflow-y-auto max-h-[300px] pr-2 pb-12 styled-scrollbar">
+                {awards[category.id] &&
+                  awards[category.id].map((award, index) => (
+                    <div
+                      key={index}
+                      className="flex items-start p-4 rounded-lg hover:bg-opacity-50 transition-all duration-300 hover:shadow-md transform hover:scale-[1.01]"
+                      style={{
+                        backgroundColor: "var(--surface)",
+                        borderLeft: "3px solid var(--accent)",
+                      }}
+                    >
+                      <div className="text-3xl mr-4 flex-shrink-0 transform transition-all duration-300 hover:scale-110 hover:rotate-12">
+                        {award.icon}
+                      </div>
+                      <div>
+                        <h4
+                          className="text-lg font-semibold"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          {award.achievement} - {award.title}
+                        </h4>
+                        <p
+                          className="text-sm mt-1"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          {award.organizer}
+                        </p>
+                        <div className="mt-2">
+                          <span
+                            className="text-xs px-2 py-1 rounded-full transition-all duration-300 hover:scale-105"
+                            style={{
+                              backgroundColor: "var(--surface-accent)",
+                              color: "var(--accent)",
+                              boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+                            }}
+                          >
+                            {award.year}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </FadeInWrapper>
+          </div>
+        ))}
+
+        {/* Navigation Controls */}
+        <div className="flex justify-between items-center mt-8 absolute bottom-4 left-0 right-0 px-8">
+          <div className="flex space-x-3">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => handleCategoryChange(category.id)}
+                className="flex flex-col items-center transition-all duration-300 relative"
+                aria-label={`View ${category.name}`}
+              >
+                <span
+                  className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${
+                    activeCategory === category.id ? "bg-accent w-8" : ""
+                  }`}
+                  style={{
+                    backgroundColor:
+                      activeCategory === category.id
+                        ? "var(--accent)"
+                        : "var(--card-border)",
+                    transform:
+                      activeCategory === category.id ? "scale(1)" : "scale(1)",
+                    height: "4px",
+                    opacity: activeCategory === category.id ? 1 : 0.5,
+                    borderRadius: "2px",
+                  }}
+                />
+              </button>
+            ))}
+          </div>
+
+          <div className="flex space-x-3">
+            <button
+              onClick={handlePrev}
+              className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
+              style={{
+                backgroundColor: "var(--surface)",
+                color: "var(--accent)",
+                boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+              }}
+              aria-label="Previous category"
+            >
+              ←
+            </button>
+            <button
+              onClick={handleNext}
+              className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
+              style={{
+                backgroundColor: "var(--accent)",
+                color: "white",
+                boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+              }}
+              aria-label="Next category"
+            >
+              →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function About() {
   return (
@@ -208,596 +468,760 @@ export default function About() {
     >
       <main className="flex-1">
         <div className="max-w-7xl mx-auto px-6 py-16">
+          {" "}
           {/* Hero Section */}
-          <div className="text-center mb-20">
-            <div className="relative w-40 h-40 mx-auto mb-8">
-              <div
-                className="w-full h-full rounded-full border-4 flex items-center justify-center text-5xl font-bold shadow-xl"
-                style={{
-                  backgroundColor: "var(--card-bg)",
-                  borderColor: "var(--accent)",
-                  color: "var(--accent)",
-                  boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-                }}
-              >
-                HT
+          <FadeInWrapper direction="up">
+            <div className="text-center mb-20">
+              <div className="relative w-40 h-40 mx-auto mb-8">
+                <div
+                  className="w-full h-full rounded-full border-4 flex items-center justify-center text-5xl font-bold shadow-xl"
+                  style={{
+                    backgroundColor: "var(--card-bg)",
+                    borderColor: "var(--accent)",
+                    color: "var(--accent)",
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  HT
+                </div>
+                <div
+                  className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center text-lg border-2"
+                  style={{
+                    backgroundColor: "var(--accent)",
+                    borderColor: "var(--background)",
+                    color: "white",
+                  }}
+                >
+                  🚀
+                </div>
               </div>
-              <div
-                className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center text-lg border-2"
-                style={{
-                  backgroundColor: "var(--accent)",
-                  borderColor: "var(--background)",
-                  color: "white",
-                }}
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+                Hiep Tran
+              </h1>
+              <p
+                className="text-2xl md:text-3xl mb-6 font-semibold"
+                style={{ color: "var(--accent)" }}
               >
-                🚀
+                Computer Science Graduate & AI Research Engineer
+              </p>
+              <p
+                className="text-lg max-w-4xl mx-auto leading-relaxed mb-8"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Passionate AI researcher and software engineer with expertise in
+                machine learning, distributed systems, and full-stack
+                development. Dedicated to building intelligent systems that
+                solve real-world problems and advance the field of artificial
+                intelligence.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <span
+                  className="px-4 py-2 rounded-full text-sm font-medium"
+                  style={{
+                    backgroundColor: "var(--surface-accent)",
+                    color: "var(--accent)",
+                  }}
+                >
+                  🎓 MS Computer Science
+                </span>
+                <span
+                  className="px-4 py-2 rounded-full text-sm font-medium"
+                  style={{
+                    backgroundColor: "var(--surface-accent)",
+                    color: "var(--accent)",
+                  }}
+                >
+                  🔬 AI Researcher
+                </span>
+                <span
+                  className="px-4 py-2 rounded-full text-sm font-medium"
+                  style={{
+                    backgroundColor: "var(--surface-accent)",
+                    color: "var(--accent)",
+                  }}
+                >
+                  💻 Full-Stack Engineer
+                </span>
               </div>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-              Hiep Tran
-            </h1>
-            <p
-              className="text-2xl md:text-3xl mb-6 font-semibold"
-              style={{ color: "var(--accent)" }}
-            >
-              Computer Science Graduate & AI Research Engineer
-            </p>
-            <p
-              className="text-lg max-w-4xl mx-auto leading-relaxed mb-8"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Passionate AI researcher and software engineer with expertise in
-              machine learning, distributed systems, and full-stack development.
-              Dedicated to building intelligent systems that solve real-world
-              problems and advance the field of artificial intelligence.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <span
-                className="px-4 py-2 rounded-full text-sm font-medium"
-                style={{
-                  backgroundColor: "var(--surface-accent)",
-                  color: "var(--accent)",
-                }}
-              >
-                🎓 MS Computer Science
-              </span>
-              <span
-                className="px-4 py-2 rounded-full text-sm font-medium"
-                style={{
-                  backgroundColor: "var(--surface-accent)",
-                  color: "var(--accent)",
-                }}
-              >
-                🔬 AI Researcher
-              </span>
-              <span
-                className="px-4 py-2 rounded-full text-sm font-medium"
-                style={{
-                  backgroundColor: "var(--surface-accent)",
-                  color: "var(--accent)",
-                }}
-              >
-                💻 Full-Stack Engineer
-              </span>
-            </div>
-          </div>
-
+          </FadeInWrapper>{" "}
           {/* Experience Cards */}
-          <div className="mb-20">
-            <h2
-              className="text-4xl font-bold text-center mb-4"
-              style={{ color: "var(--text-primary)" }}
-            >
-              What I Do
-            </h2>
-            <p
-              className="text-lg text-center mb-12 max-w-3xl mx-auto"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Combining theoretical knowledge with practical experience to
-              create innovative solutions
-            </p>
-            <div className="grid lg:grid-cols-3 gap-8">
-              {experiences.map((exp, index) => (
-                <div
-                  key={index}
-                  className="group p-8 rounded-2xl border transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                  style={{
-                    backgroundColor: "var(--card-bg)",
-                    borderColor: "var(--card-border)",
-                  }}
-                >
-                  <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                    {exp.icon}
-                  </div>
-                  <h3
-                    className="text-2xl font-bold mb-4"
-                    style={{ color: "var(--text-primary)" }}
+          <FadeInWrapper direction="up" delay={150}>
+            <div className="mb-20">
+              <h2
+                className="text-4xl font-bold text-center mb-4"
+                style={{ color: "var(--text-primary)" }}
+              >
+                What I Do
+              </h2>
+              <p
+                className="text-lg text-center mb-12 max-w-3xl mx-auto"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Combining theoretical knowledge with practical experience to
+                create innovative solutions
+              </p>
+              <div className="grid lg:grid-cols-3 gap-8">
+                {experiences.map((exp, index) => (
+                  <FadeInWrapper
+                    key={index}
+                    direction="up"
+                    delay={150 + index * 100}
                   >
-                    {exp.title}
-                  </h3>
-                  <p
-                    className="leading-relaxed mb-4"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    {exp.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {exp.highlights.map((highlight, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1 rounded-full text-xs font-medium"
-                        style={{
-                          backgroundColor: "var(--surface)",
-                          color: "var(--accent)",
-                        }}
-                      >
-                        {highlight}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Skills Section */}
-          <div className="mb-20">
-            <h2
-              className="text-4xl font-bold text-center mb-4"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Technical Expertise
-            </h2>
-            <p
-              className="text-lg text-center mb-12 max-w-3xl mx-auto"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Comprehensive skill set spanning multiple domains and technologies
-            </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {skills.map((skillSet, index) => (
-                <div
-                  key={index}
-                  className="group p-6 rounded-2xl border hover:shadow-lg transition-all duration-300"
-                  style={{
-                    backgroundColor: "var(--card-bg)",
-                    borderColor: "var(--card-border)",
-                  }}
-                >
-                  <div className="flex items-center mb-4">
-                    <span className="text-2xl mr-3 group-hover:scale-110 transition-transform duration-300">
-                      {skillSet.icon}
-                    </span>
-                    <h3
-                      className="text-lg font-bold"
-                      style={{ color: "var(--text-primary)" }}
+                    <div
+                      className="group p-8 rounded-2xl border transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                      style={{
+                        backgroundColor: "var(--card-bg)",
+                        borderColor: "var(--card-border)",
+                      }}
                     >
-                      {skillSet.category}
-                    </h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {skillSet.items.map((skill, skillIndex) => (
-                      <span
-                        key={skillIndex}
-                        className="inline-block px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200 hover:scale-105"
-                        style={{
-                          backgroundColor: "var(--surface)",
-                          color: "var(--text-secondary)",
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor =
-                            "var(--surface-accent)";
-                          e.currentTarget.style.color = "var(--accent)";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor =
-                            "var(--surface)";
-                          e.currentTarget.style.color = "var(--text-secondary)";
-                        }}
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Achievements Section */}
-          <div className="mb-20">
-            <h2
-              className="text-4xl font-bold text-center mb-4"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Key Achievements
-            </h2>
-            <p
-              className="text-lg text-center mb-12 max-w-3xl mx-auto"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Milestones that reflect my commitment to excellence and continuous
-              growth
-            </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {achievements.map((achievement, index) => (
-                <div
-                  key={index}
-                  className="group text-center p-6 rounded-2xl border hover:shadow-lg transition-all duration-300 hover:scale-105"
-                  style={{
-                    backgroundColor: "var(--card-bg)",
-                    borderColor: "var(--card-border)",
-                  }}
-                >
-                  <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                    {achievement.icon}
-                  </div>
-                  <div
-                    className="text-2xl font-bold mb-2"
-                    style={{ color: "var(--accent)" }}
-                  >
-                    {achievement.metric}
-                  </div>
-                  <h3
-                    className="text-lg font-semibold mb-3"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    {achievement.title}
-                  </h3>
-                  <p
-                    className="text-sm leading-relaxed"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    {achievement.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Education Section */}
-          <div className="mb-20">
-            <h2
-              className="text-4xl font-bold text-center mb-4"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Education & Academic Background
-            </h2>
-            <p
-              className="text-lg text-center mb-12 max-w-3xl mx-auto"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Strong academic foundation with focus on advanced computer science
-              concepts
-            </p>
-            <div className="space-y-6">
-              {education.map((edu, index) => (
-                <div
-                  key={index}
-                  className="p-8 rounded-2xl border"
-                  style={{
-                    backgroundColor: "var(--card-bg)",
-                    borderColor: "var(--card-border)",
-                  }}
-                >
-                  <div className="grid md:grid-cols-3 gap-6">
-                    <div className="md:col-span-2">
+                      <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        {exp.icon}
+                      </div>
                       <h3
-                        className="text-2xl font-bold mb-2"
+                        className="text-2xl font-bold mb-4"
                         style={{ color: "var(--text-primary)" }}
                       >
-                        {edu.degree}
+                        {exp.title}
                       </h3>
                       <p
-                        className="text-lg mb-2"
-                        style={{ color: "var(--accent)" }}
-                      >
-                        {edu.institution}
-                      </p>
-                      <p
-                        className="text-sm mb-4"
+                        className="leading-relaxed mb-4"
                         style={{ color: "var(--text-secondary)" }}
                       >
-                        {edu.year} • Specialization: {edu.specialization} • GPA:{" "}
-                        {edu.gpa}
+                        {exp.description}
                       </p>
-                      <div>
-                        <h4
-                          className="font-semibold mb-2"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          Relevant Coursework:
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {edu.coursework.map((course, idx) => (
-                            <span
-                              key={idx}
-                              className="px-3 py-1 rounded-lg text-sm"
-                              style={{
-                                backgroundColor: "var(--surface)",
-                                color: "var(--text-secondary)",
-                              }}
+                      <div className="flex flex-wrap gap-2">
+                        {exp.highlights.map((highlight, idx) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1 rounded-full text-xs font-medium"
+                            style={{
+                              backgroundColor: "var(--surface)",
+                              color: "var(--accent)",
+                            }}
+                          >
+                            {highlight}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </FadeInWrapper>
+                ))}
+              </div>
+            </div>
+          </FadeInWrapper>{" "}
+          {/* Work Experience Timeline */}
+          <FadeInWrapper direction="up" delay={200}>
+            <div className="mb-20">
+              <h2
+                className="text-4xl font-bold text-center mb-4"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Professional Experience
+              </h2>
+              <p
+                className="text-lg text-center mb-12 max-w-3xl mx-auto"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Timeline of my professional journey in AI research and software
+                development
+              </p>
+              <div className="space-y-8">
+                {workExperience.map((job, index) => (
+                  <FadeInWrapper
+                    key={index}
+                    direction="up"
+                    delay={200 + index * 100}
+                  >
+                    <div className="relative">
+                      {/* Timeline connector */}
+                      {index < workExperience.length - 1 && (
+                        <div
+                          className="absolute left-8 top-20 w-0.5 h-16 z-0"
+                          style={{ backgroundColor: "var(--card-border)" }}
+                        />
+                      )}
+
+                      <div
+                        className="relative p-8 rounded-2xl border transform hover:shadow-lg hover:scale-[1.01] transition-all duration-300"
+                        style={{
+                          backgroundColor: "var(--card-bg)",
+                          borderColor: "var(--card-border)",
+                        }}
+                      >
+                        <div className="grid md:grid-cols-4 gap-6">
+                          {/* Timeline icon and period */}
+                          <div className="md:col-span-1">
+                            <FadeInWrapper
+                              direction="up"
+                              delay={250 + index * 100}
                             >
-                              {course}
-                            </span>
-                          ))}
+                              <div className="flex flex-col items-start">
+                                <div
+                                  className="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4 border-4 transition-all duration-300 hover:scale-110"
+                                  style={{
+                                    backgroundColor: "var(--card-bg)",
+                                    borderColor: "var(--accent)",
+                                    color: "var(--accent)",
+                                  }}
+                                >
+                                  {job.icon}
+                                </div>
+                                <div
+                                  className="text-sm font-bold mb-1"
+                                  style={{ color: "var(--accent)" }}
+                                >
+                                  {job.period}
+                                </div>
+                                <div
+                                  className="text-xs"
+                                  style={{ color: "var(--text-secondary)" }}
+                                >
+                                  {job.type}
+                                </div>
+                              </div>
+                            </FadeInWrapper>
+                          </div>
+
+                          {/* Job details */}
+                          <div className="md:col-span-3">
+                            <FadeInWrapper
+                              direction="up"
+                              delay={300 + index * 100}
+                            >
+                              <div className="mb-4">
+                                <h3
+                                  className="text-2xl font-bold mb-2"
+                                  style={{ color: "var(--text-primary)" }}
+                                >
+                                  {job.title}
+                                </h3>
+                                <p
+                                  className="text-lg font-semibold mb-1"
+                                  style={{ color: "var(--accent)" }}
+                                >
+                                  {job.company}
+                                </p>
+                                <p
+                                  className="text-sm mb-4"
+                                  style={{ color: "var(--text-secondary)" }}
+                                >
+                                  📍 {job.location}
+                                </p>
+                                <p
+                                  className="leading-relaxed mb-4"
+                                  style={{ color: "var(--text-secondary)" }}
+                                >
+                                  {job.description}
+                                </p>
+                              </div>
+                            </FadeInWrapper>
+
+                            {/* Responsibilities */}
+                            <FadeInWrapper
+                              direction="up"
+                              delay={350 + index * 100}
+                            >
+                              <div className="mb-4">
+                                <h4
+                                  className="font-semibold mb-3"
+                                  style={{ color: "var(--text-primary)" }}
+                                >
+                                  Key Responsibilities:
+                                </h4>
+                                <ul className="space-y-2">
+                                  {job.responsibilities.map((resp, idx) => (
+                                    <li
+                                      key={idx}
+                                      className="flex items-start text-sm transition-all duration-300 hover:translate-x-1"
+                                      style={{ color: "var(--text-secondary)" }}
+                                    >
+                                      <span
+                                        className="mr-3 mt-1 text-xs"
+                                        style={{ color: "var(--accent)" }}
+                                      >
+                                        •
+                                      </span>
+                                      {resp}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </FadeInWrapper>
+
+                            {/* Technologies */}
+                            <FadeInWrapper
+                              direction="up"
+                              delay={400 + index * 100}
+                            >
+                              <div>
+                                <h4
+                                  className="font-semibold mb-3"
+                                  style={{ color: "var(--text-primary)" }}
+                                >
+                                  Technologies & Tools:
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {job.technologies.map((tech, idx) => (
+                                    <span
+                                      key={idx}
+                                      className="px-3 py-1 rounded-lg text-xs font-medium transition-all duration-200 hover:scale-105"
+                                      style={{
+                                        backgroundColor: "var(--surface)",
+                                        color: "var(--text-secondary)",
+                                      }}
+                                      onMouseEnter={(e) => {
+                                        e.currentTarget.style.backgroundColor =
+                                          "var(--surface-accent)";
+                                        e.currentTarget.style.color =
+                                          "var(--accent)";
+                                      }}
+                                      onMouseLeave={(e) => {
+                                        e.currentTarget.style.backgroundColor =
+                                          "var(--surface)";
+                                        e.currentTarget.style.color =
+                                          "var(--text-secondary)";
+                                      }}
+                                    >
+                                      {tech}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            </FadeInWrapper>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center justify-center">
-                      <div
-                        className="w-24 h-24 rounded-full flex items-center justify-center text-3xl"
-                        style={{
-                          backgroundColor: "var(--surface-accent)",
-                          color: "var(--accent)",
-                        }}
-                      >
-                        🎓
+                  </FadeInWrapper>
+                ))}
+              </div>
+            </div>
+          </FadeInWrapper>
+          <FadeInWrapper direction="up" delay={300}>
+            <div className="mb-20">
+              <h2
+                className="text-4xl font-bold text-center mb-4"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Honors & Awards
+              </h2>
+              <p
+                className="text-lg text-center mb-12 max-w-3xl mx-auto"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Recognition for innovation, entrepreneurship, and technical
+                excellence
+              </p>
+
+              <AwardsCarousel awards={awards} />
+            </div>
+          </FadeInWrapper>
+          {/* Education Section */}
+          <FadeInWrapper direction="up" delay={300}>
+            <div className="mb-20">
+              <h2
+                className="text-4xl font-bold text-center mb-4"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Education & Academic Background
+              </h2>
+              <p
+                className="text-lg text-center mb-12 max-w-3xl mx-auto"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Strong academic foundation with focus on advanced computer
+                science concepts
+              </p>
+              <div className="space-y-6">
+                {education.map((edu, index) => (
+                  <FadeInWrapper
+                    key={index}
+                    direction="up"
+                    delay={300 + index * 100}
+                  >
+                    <div
+                      className="p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
+                      style={{
+                        backgroundColor: "var(--card-bg)",
+                        borderColor: "var(--card-border)",
+                      }}
+                    >
+                      <div className="grid md:grid-cols-3 gap-6">
+                        <div className="md:col-span-2">
+                          <FadeInWrapper
+                            direction="up"
+                            delay={350 + index * 100}
+                          >
+                            <h3
+                              className="text-2xl font-bold mb-2"
+                              style={{ color: "var(--text-primary)" }}
+                            >
+                              {edu.degree}
+                            </h3>
+                          </FadeInWrapper>
+                          <FadeInWrapper
+                            direction="up"
+                            delay={400 + index * 100}
+                          >
+                            <p
+                              className="text-lg mb-2"
+                              style={{ color: "var(--accent)" }}
+                            >
+                              {edu.institution}
+                            </p>
+                          </FadeInWrapper>
+                          <FadeInWrapper
+                            direction="up"
+                            delay={450 + index * 100}
+                          >
+                            <p
+                              className="text-sm mb-4"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              {edu.year} • Specialization: {edu.specialization}{" "}
+                              • GPA: {edu.gpa}
+                            </p>
+                          </FadeInWrapper>
+                          <FadeInWrapper
+                            direction="up"
+                            delay={500 + index * 100}
+                          >
+                            <div>
+                              <h4
+                                className="font-semibold mb-2"
+                                style={{ color: "var(--text-primary)" }}
+                              >
+                                Relevant Coursework:
+                              </h4>
+                              <div className="flex flex-wrap gap-2">
+                                {edu.coursework.map((course, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="px-3 py-1 rounded-lg text-sm transition-all duration-200 hover:scale-105"
+                                    style={{
+                                      backgroundColor: "var(--surface)",
+                                      color: "var(--text-secondary)",
+                                    }}
+                                    onMouseEnter={(e) => {
+                                      e.currentTarget.style.backgroundColor =
+                                        "var(--surface-accent)";
+                                      e.currentTarget.style.color =
+                                        "var(--accent)";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                      e.currentTarget.style.backgroundColor =
+                                        "var(--surface)";
+                                      e.currentTarget.style.color =
+                                        "var(--text-secondary)";
+                                    }}
+                                  >
+                                    {course}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </FadeInWrapper>
+                        </div>
+                        <div className="flex items-center justify-center">
+                          <FadeInWrapper
+                            direction="up"
+                            delay={550 + index * 100}
+                          >
+                            <div
+                              className="w-24 h-24 rounded-full flex items-center justify-center text-3xl transform transition-all duration-300 hover:scale-110"
+                              style={{
+                                backgroundColor: "var(--surface-accent)",
+                                color: "var(--accent)",
+                              }}
+                            >
+                              🎓
+                            </div>
+                          </FadeInWrapper>
+                        </div>
                       </div>
                     </div>
+                  </FadeInWrapper>
+                ))}
+              </div>
+            </div>
+          </FadeInWrapper>
+          {/* Research Interests */}
+          <FadeInWrapper direction="up" delay={350}>
+            <div className="mb-20">
+              <h2
+                className="text-4xl font-bold text-center mb-12"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Research Interests & Focus Areas
+              </h2>
+              <div
+                className="max-w-5xl mx-auto p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
+                style={{
+                  backgroundColor: "var(--card-bg)",
+                  borderColor: "var(--card-border)",
+                }}
+              >
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <FadeInWrapper direction="up" delay={400}>
+                      <h3
+                        className="text-2xl font-semibold mb-6 flex items-center"
+                        style={{ color: "var(--text-primary)" }}
+                      >
+                        <span className="mr-3">🔬</span>
+                        Current Research Focus
+                      </h3>
+                    </FadeInWrapper>
+                    <ul
+                      className="space-y-4"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      <FadeInWrapper direction="up" delay={450}>
+                        <li className="flex items-start">
+                          <span
+                            className="mr-3 mt-1"
+                            style={{ color: "var(--accent)" }}
+                          >
+                            •
+                          </span>
+                          <div>
+                            <strong>Large Language Models & NLP:</strong>{" "}
+                            Advancing transformer architectures, few-shot
+                            learning, and multilingual understanding
+                          </div>
+                        </li>
+                      </FadeInWrapper>
+                      <FadeInWrapper direction="up" delay={500}>
+                        <li className="flex items-start">
+                          <span
+                            className="mr-3 mt-1"
+                            style={{ color: "var(--accent)" }}
+                          >
+                            •
+                          </span>
+                          <div>
+                            <strong>Computer Vision & Multimodal AI:</strong>{" "}
+                            Developing efficient vision models and cross-modal
+                            learning systems
+                          </div>
+                        </li>
+                      </FadeInWrapper>
+                      <FadeInWrapper direction="up" delay={550}>
+                        <li className="flex items-start">
+                          <span
+                            className="mr-3 mt-1"
+                            style={{ color: "var(--accent)" }}
+                          >
+                            •
+                          </span>
+                          <div>
+                            <strong>MLOps & AI Infrastructure:</strong> Building
+                            scalable ML systems and automated deployment
+                            pipelines
+                          </div>
+                        </li>
+                      </FadeInWrapper>
+                      <FadeInWrapper direction="up" delay={600}>
+                        <li className="flex items-start">
+                          <span
+                            className="mr-3 mt-1"
+                            style={{ color: "var(--accent)" }}
+                          >
+                            •
+                          </span>
+                          <div>
+                            <strong>Distributed Systems:</strong> Designing
+                            fault-tolerant, high-performance computing systems
+                            for AI workloads
+                          </div>
+                        </li>
+                      </FadeInWrapper>
+                    </ul>
+                  </div>
+                  <div>
+                    <FadeInWrapper direction="up" delay={400}>
+                      <h3
+                        className="text-2xl font-semibold mb-6 flex items-center"
+                        style={{ color: "var(--text-primary)" }}
+                      >
+                        <span className="mr-3">🎯</span>
+                        Research Impact & Goals
+                      </h3>
+                    </FadeInWrapper>
+                    <FadeInWrapper direction="up" delay={450}>
+                      <p
+                        className="leading-relaxed mb-6"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        My research focuses on developing practical AI solutions
+                        that bridge the gap between academic innovation and
+                        real-world applications. I&apos;m particularly
+                        interested in making advanced AI techniques more
+                        accessible and efficient for deployment in production
+                        environments.
+                      </p>
+                    </FadeInWrapper>
+                    <FadeInWrapper direction="up" delay={500}>
+                      <p
+                        className="leading-relaxed"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        Current work involves optimizing transformer models for
+                        resource-constrained environments, developing novel
+                        approaches to multimodal learning, and creating robust
+                        MLOps frameworks that enable seamless integration of AI
+                        into existing software systems.
+                      </p>
+                    </FadeInWrapper>
+                    <FadeInWrapper direction="up" delay={550}>
+                      <div
+                        className="mt-6 p-4 rounded-xl transition-all duration-300 hover:shadow-md"
+                        style={{ backgroundColor: "var(--surface-accent)" }}
+                      >
+                        <p
+                          className="text-sm font-medium"
+                          style={{ color: "var(--accent)" }}
+                        >
+                          🌟 &quot;Building AI systems that are not just
+                          intelligent, but also practical, ethical, and
+                          accessible to everyone.&quot;
+                        </p>
+                      </div>
+                    </FadeInWrapper>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-
-          {/* Certifications */}
-          <div className="mb-20">
-            <h2
-              className="text-4xl font-bold text-center mb-12"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Professional Certifications
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {certifications.map((cert, index) => (
-                <div
-                  key={index}
-                  className="p-4 rounded-xl border text-center hover:shadow-lg transition-all duration-300"
-                  style={{
-                    backgroundColor: "var(--card-bg)",
-                    borderColor: "var(--card-border)",
-                  }}
-                >
-                  <div className="text-2xl mb-2">🏅</div>
-                  <h4
-                    className="font-semibold text-sm mb-1"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    {cert.name}
-                  </h4>
-                  <p
-                    className="text-xs mb-1"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    {cert.issuer}
-                  </p>
-                  <p className="text-xs" style={{ color: "var(--accent)" }}>
-                    {cert.year}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Research Interests */}
-          <div className="mb-20">
-            <h2
-              className="text-4xl font-bold text-center mb-12"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Research Interests & Focus Areas
-            </h2>
+          </FadeInWrapper>
+          {/* Contact CTA */}
+          <FadeInWrapper direction="up" delay={400}>
             <div
-              className="max-w-5xl mx-auto p-8 rounded-2xl border"
+              className="p-10 rounded-2xl border text-center hover:shadow-lg transition-all duration-300"
               style={{
                 backgroundColor: "var(--card-bg)",
                 borderColor: "var(--card-border)",
               }}
             >
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h3
-                    className="text-2xl font-semibold mb-6 flex items-center"
+              <div className="max-w-3xl mx-auto">
+                <FadeInWrapper direction="up" delay={450}>
+                  <h2
+                    className="text-3xl font-bold mb-6"
                     style={{ color: "var(--text-primary)" }}
                   >
-                    <span className="mr-3">🔬</span>
-                    Current Research Focus
-                  </h3>
-                  <ul
-                    className="space-y-4"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    <li className="flex items-start">
-                      <span
-                        className="mr-3 mt-1"
-                        style={{ color: "var(--accent)" }}
-                      >
-                        •
-                      </span>
-                      <div>
-                        <strong>Large Language Models & NLP:</strong> Advancing
-                        transformer architectures, few-shot learning, and
-                        multilingual understanding
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <span
-                        className="mr-3 mt-1"
-                        style={{ color: "var(--accent)" }}
-                      >
-                        •
-                      </span>
-                      <div>
-                        <strong>Computer Vision & Multimodal AI:</strong>{" "}
-                        Developing efficient vision models and cross-modal
-                        learning systems
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <span
-                        className="mr-3 mt-1"
-                        style={{ color: "var(--accent)" }}
-                      >
-                        •
-                      </span>
-                      <div>
-                        <strong>MLOps & AI Infrastructure:</strong> Building
-                        scalable ML systems and automated deployment pipelines
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <span
-                        className="mr-3 mt-1"
-                        style={{ color: "var(--accent)" }}
-                      >
-                        •
-                      </span>
-                      <div>
-                        <strong>Distributed Systems:</strong> Designing
-                        fault-tolerant, high-performance computing systems for
-                        AI workloads
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3
-                    className="text-2xl font-semibold mb-6 flex items-center"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    <span className="mr-3">🎯</span>
-                    Research Impact & Goals
-                  </h3>
+                    Let&apos;s Build Something Amazing Together
+                  </h2>
+                </FadeInWrapper>
+                <FadeInWrapper direction="up" delay={500}>
                   <p
-                    className="leading-relaxed mb-6"
+                    className="text-lg mb-8 leading-relaxed"
                     style={{ color: "var(--text-secondary)" }}
                   >
-                    My research focuses on developing practical AI solutions
-                    that bridge the gap between academic innovation and
-                    real-world applications. I&apos;m particularly interested in
-                    making advanced AI techniques more accessible and efficient
-                    for deployment in production environments.
+                    I&apos;m always excited to collaborate on innovative
+                    projects, discuss research opportunities, or explore how AI
+                    can solve complex challenges. Whether you&apos;re looking
+                    for a technical partner, research collaborator, or want to
+                    discuss the latest in AI and software engineering.
                   </p>
-                  <p
-                    className="leading-relaxed"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    Current work involves optimizing transformer models for
-                    resource-constrained environments, developing novel
-                    approaches to multimodal learning, and creating robust MLOps
-                    frameworks that enable seamless integration of AI into
-                    existing software systems.
-                  </p>
-                  <div
-                    className="mt-6 p-4 rounded-xl"
-                    style={{ backgroundColor: "var(--surface-accent)" }}
-                  >
-                    <p
-                      className="text-sm font-medium"
-                      style={{ color: "var(--accent)" }}
+                </FadeInWrapper>
+                <FadeInWrapper direction="up" delay={550}>
+                  <div className="flex flex-wrap justify-center gap-4">
+                    <a
+                      href="/contact"
+                      className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 text-white shadow-lg hover:shadow-xl transform hover:scale-105"
+                      style={{ backgroundColor: "var(--accent)" }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--accent-hover)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "var(--accent)";
+                      }}
                     >
-                      🌟 &quot;Building AI systems that are not just
-                      intelligent, but also practical, ethical, and accessible
-                      to everyone.&quot;
-                    </p>
+                      <span className="mr-2">✉️</span>
+                      Get in Touch
+                    </a>
+                    <a
+                      href="https://github.com/hieptran1812"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 border shadow-lg hover:shadow-xl transform hover:scale-105"
+                      style={{
+                        backgroundColor: "var(--card-bg)",
+                        borderColor: "var(--border)",
+                        color: "var(--text-primary)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--surface)";
+                        e.currentTarget.style.borderColor = "var(--accent)";
+                        e.currentTarget.style.color = "var(--accent)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--card-bg)";
+                        e.currentTarget.style.borderColor = "var(--border)";
+                        e.currentTarget.style.color = "var(--text-primary)";
+                      }}
+                    >
+                      <span className="mr-2">👨‍💻</span>
+                      GitHub Profile
+                    </a>
+                    <a
+                      href="https://linkedin.com/in/hieptran1812"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 border shadow-lg hover:shadow-xl transform hover:scale-105"
+                      style={{
+                        backgroundColor: "var(--card-bg)",
+                        borderColor: "var(--border)",
+                        color: "var(--text-primary)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--surface)";
+                        e.currentTarget.style.borderColor = "var(--accent)";
+                        e.currentTarget.style.color = "var(--accent)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--card-bg)";
+                        e.currentTarget.style.borderColor = "var(--border)";
+                        e.currentTarget.style.color = "var(--text-primary)";
+                      }}
+                    >
+                      <span className="mr-2">📊</span>
+                      LinkedIn
+                    </a>
+                    <a
+                      href="/projects"
+                      className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 border shadow-lg hover:shadow-xl transform hover:scale-105"
+                      style={{
+                        backgroundColor: "var(--card-bg)",
+                        borderColor: "var(--border)",
+                        color: "var(--text-primary)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--surface)";
+                        e.currentTarget.style.borderColor = "var(--accent)";
+                        e.currentTarget.style.color = "var(--accent)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--card-bg)";
+                        e.currentTarget.style.borderColor = "var(--border)";
+                        e.currentTarget.style.color = "var(--text-primary)";
+                      }}
+                    >
+                      <span className="mr-2">🚀</span>
+                      View Projects
+                    </a>
                   </div>
-                </div>
+                </FadeInWrapper>
               </div>
             </div>
-          </div>
-
-          {/* Contact CTA */}
-          <div
-            className="p-10 rounded-2xl border text-center"
-            style={{
-              backgroundColor: "var(--card-bg)",
-              borderColor: "var(--card-border)",
-            }}
-          >
-            <div className="max-w-3xl mx-auto">
-              <h2
-                className="text-3xl font-bold mb-6"
-                style={{ color: "var(--text-primary)" }}
-              >
-                Let&apos;s Build Something Amazing Together
-              </h2>
-              <p
-                className="text-lg mb-8 leading-relaxed"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                I&apos;m always excited to collaborate on innovative projects,
-                discuss research opportunities, or explore how AI can solve
-                complex challenges. Whether you&apos;re looking for a technical
-                partner, research collaborator, or want to discuss the latest in
-                AI and software engineering.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="/contact"
-                  className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 text-white shadow-lg hover:shadow-xl transform hover:scale-105"
-                  style={{ backgroundColor: "var(--accent)" }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "var(--accent-hover)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--accent)";
-                  }}
-                >
-                  <span className="mr-2">✉️</span>
-                  Get in Touch
-                </a>
-                <a
-                  href="https://github.com/hieptran1812"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 border shadow-lg hover:shadow-xl transform hover:scale-105"
-                  style={{
-                    backgroundColor: "var(--card-bg)",
-                    borderColor: "var(--border)",
-                    color: "var(--text-primary)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--surface)";
-                    e.currentTarget.style.borderColor = "var(--accent)";
-                    e.currentTarget.style.color = "var(--accent)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--card-bg)";
-                    e.currentTarget.style.borderColor = "var(--border)";
-                    e.currentTarget.style.color = "var(--text-primary)";
-                  }}
-                >
-                  <span className="mr-2">👨‍💻</span>
-                  GitHub Profile
-                </a>
-                <a
-                  href="/projects"
-                  className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 border shadow-lg hover:shadow-xl transform hover:scale-105"
-                  style={{
-                    backgroundColor: "var(--card-bg)",
-                    borderColor: "var(--border)",
-                    color: "var(--text-primary)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--surface)";
-                    e.currentTarget.style.borderColor = "var(--accent)";
-                    e.currentTarget.style.color = "var(--accent)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--card-bg)";
-                    e.currentTarget.style.borderColor = "var(--border)";
-                    e.currentTarget.style.color = "var(--text-primary)";
-                  }}
-                >
-                  <span className="mr-2">🚀</span>
-                  View Projects
-                </a>
-              </div>
-            </div>
-          </div>
+          </FadeInWrapper>
         </div>
       </main>
     </div>
