@@ -316,7 +316,7 @@ export default function Navigation() {
               <>
                 {/* Light mode image */}
                 <Image
-                  src="/profile-light-mode.png"
+                  src="/about-profile.png"
                   alt="Hiep Tran Profile Light Mode"
                   width={36}
                   height={36}
@@ -328,7 +328,7 @@ export default function Navigation() {
                 />
                 {/* Dark mode image */}
                 <Image
-                  src="/profile-dark-mode.png"
+                  src="/about-profile.png"
                   alt="Hiep Tran Profile Dark Mode"
                   width={36}
                   height={36}

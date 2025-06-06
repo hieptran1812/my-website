@@ -192,8 +192,8 @@ const awards = {
 const education = [
   {
     degree: "Master of Science in Computer Science",
-    institution: "University Name",
-    year: "2023-2025",
+    institution: "Posts And Telecommunications Institute of Technology",
+    year: "2024-2026",
     specialization: "Machine Learning & AI",
     coursework: [
       "Advanced Machine Learning",
@@ -203,12 +203,11 @@ const education = [
       "Distributed Systems",
       "Advanced Algorithms",
     ],
-    gpa: "3.9/4.0",
   },
   {
     degree: "Bachelor of Science in Computer Science",
-    institution: "University Name",
-    year: "2019-2023",
+    institution: "Posts And Telecommunications Institute of Technology",
+    year: "2018-2023",
     specialization: "Software Engineering",
     coursework: [
       "Data Structures & Algorithms",
@@ -217,8 +216,9 @@ const education = [
       "Operating Systems",
       "Computer Networks",
       "Web Development",
+      "Artificial Intelligence",
     ],
-    gpa: "3.8/4.0",
+    gpa: "3.25/4.0",
   },
 ];
 
@@ -457,15 +457,18 @@ export default function About() {
             <div className="text-center mb-20">
               <div className="relative w-40 h-40 mx-auto mb-8">
                 <div
-                  className="w-full h-full rounded-full border-4 flex items-center justify-center text-5xl font-bold shadow-xl"
+                  className="w-full h-full rounded-full border-4 flex items-center justify-center overflow-hidden"
                   style={{
                     backgroundColor: "var(--card-bg)",
                     borderColor: "var(--accent)",
-                    color: "var(--accent)",
                     boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
                   }}
                 >
-                  HT
+                  <img
+                    src="/about-profile.png"
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div
                   className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center text-lg border-2"
@@ -863,7 +866,6 @@ export default function About() {
                               style={{ color: "var(--text-secondary)" }}
                             >
                               {edu.year} • Specialization: {edu.specialization}{" "}
-                              • GPA: {edu.gpa}
                             </p>
                           </FadeInWrapper>
                           <FadeInWrapper
