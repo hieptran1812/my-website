@@ -293,9 +293,9 @@ const AwardsCarousel = ({
                 color:
                   activeCategory === category.id ? "white" : "var(--accent)",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                ringColor: "var(--accent)",
-                ringOffsetColor: "var(--background)",
-              }}
+                "--ring-color": "var(--accent)",
+                "--ring-offset-color": "var(--background)",
+              } as React.CSSProperties}
             >
               <span className="mr-2">{category.icon}</span>
               {category.name}
