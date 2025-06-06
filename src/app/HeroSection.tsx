@@ -398,7 +398,7 @@ export default function HeroSection() {
                 </svg>
               </Link>
               <Link
-                href="https://linkedin.com/in/hieptran1812"
+                href="https://www.linkedin.com/in/hieptran01"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors duration-200"
@@ -421,7 +421,7 @@ export default function HeroSection() {
                 </svg>
               </Link>
               <Link
-                href="https://twitter.com/hieptran1812"
+                href="https://x.com/halleytran01"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors duration-200"

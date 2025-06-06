@@ -101,7 +101,7 @@ const ContactSection = () => {
                   LinkedIn
                 </h3>
                 <a
-                  href="https://linkedin.com/in/hieptran1812"
+                  href="https://www.linkedin.com/in/hieptran01"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm transition-colors duration-300 hover:underline"

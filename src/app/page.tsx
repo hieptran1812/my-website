@@ -43,9 +43,9 @@ export default function Home() {
     url: "https://halleyverse.dev",
     image: "https://halleyverse.dev/profile-image.jpg",
     sameAs: [
-      "https://twitter.com/hieptran1812",
+      "https://x.com/halleytran01",
       "https://github.com/hieptran1812",
-      "https://linkedin.com/in/hieptran1812",
+      "https://www.linkedin.com/in/hieptran01",
     ],
     knowsAbout: [
       "Machine Learning",
