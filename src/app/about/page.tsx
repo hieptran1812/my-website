@@ -80,23 +80,6 @@ const workExperience = [
     ],
     icon: "🤖",
   },
-  {
-    title: "Software Development Intern",
-    company: "Web Development Agency",
-    location: "Ho Chi Minh City, Vietnam",
-    period: "2021 - 2022",
-    type: "Part-time",
-    description:
-      "Assisted in developing client websites and web applications using modern frameworks and best practices.",
-    responsibilities: [
-      "Developed responsive websites using HTML, CSS, JavaScript",
-      "Built interactive features using React.js",
-      "Collaborated with designers to implement UI/UX requirements",
-      "Participated in code reviews and learned software development best practices",
-    ],
-    technologies: ["HTML", "CSS", "JavaScript", "React", "Git"],
-    icon: "🌐",
-  },
 ];
 
 const experiences = [
