@@ -222,7 +222,20 @@ const education = [
   },
 ];
 
-const AwardsCarousel = ({ awards }) => {
+const AwardsCarousel = ({
+  awards,
+}: {
+  awards: Record<
+    string,
+    Array<{
+      title: string;
+      organizer: string;
+      achievement: string;
+      icon: string;
+      year: string;
+    }>
+  >;
+}) => {
   const categories = [
     { id: "hackathons", name: "Hackathons", icon: "🚀" },
     { id: "innovation", name: "Innovation", icon: "💡" },
@@ -233,7 +246,7 @@ const AwardsCarousel = ({ awards }) => {
   const [activeCategory, setActiveCategory] = useState("hackathons");
   const [animationDirection, setAnimationDirection] = useState("right");
 
-  const handleCategoryChange = (newCategory) => {
+  const handleCategoryChange = (newCategory: string) => {
     const currentIndex = categories.findIndex((c) => c.id === activeCategory);
     const newIndex = categories.findIndex((c) => c.id === newCategory);
 

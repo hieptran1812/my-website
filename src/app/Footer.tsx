@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const navigationLinks = [
   { name: "Home", href: "/" },
@@ -158,14 +159,18 @@ export default function Footer() {
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-3 mb-4">
                 <div
-                  className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-lg"
+                  className="w-8 h-8 rounded-lg overflow-hidden shadow-lg"
                   style={{
-                    background:
-                      "linear-gradient(135deg, var(--accent), var(--accent-hover))",
                     boxShadow: "0 2px 8px var(--accent)/20",
                   }}
                 >
-                  H
+                  <Image
+                    src="/about-profile.png"
+                    alt="Hiep Tran"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <h3
                   className="text-lg font-bold"
@@ -178,8 +183,7 @@ export default function Footer() {
                 className="text-sm leading-relaxed mb-4"
                 style={{ color: "var(--text-secondary)" }}
               >
-                AI Engineer building intelligent
-                systems.
+                AI Engineer building intelligent systems.
               </p>
 
               {/* Contact Info */}

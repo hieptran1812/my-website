@@ -181,39 +181,162 @@ const typeConfig = {
 
 // Enhanced search algorithm with relevance scoring
 const calculateRelevance = (item: SearchResult, query: string): number => {
-  const lowercaseQuery = query.toLowerCase();
+  // Normalize input
+  const normalizedQuery = query.toLowerCase().trim();
+  const queryWords = normalizedQuery
+    .split(/\s+/)
+    .filter((word) => word.length > 0);
+
+  // If query is empty, return 0
+  if (queryWords.length === 0) return 0;
+
   let score = 0;
 
-  // Title match (highest weight)
-  if (item.title.toLowerCase().includes(lowercaseQuery)) {
+  // Normalize content fields
+  const normalizedTitle = item.title.toLowerCase();
+  const normalizedDescription = item.description.toLowerCase();
+  const normalizedCategory = item.category?.toLowerCase() || "";
+  const normalizedTags = item.tags?.map((tag) => tag.toLowerCase()) || [];
+
+  // Exact phrase matching (highest weight)
+  if (normalizedTitle.includes(normalizedQuery)) {
+    score += 150;
+    // Exact title match (perfect match)
+    if (normalizedTitle === normalizedQuery) {
+      score += 100;
+    }
+    // Title starts with query (very high relevance)
+    if (normalizedTitle.startsWith(normalizedQuery)) {
+      score += 75;
+    }
+  }
+
+  // Category exact phrase matching (high weight)
+  if (normalizedCategory.includes(normalizedQuery)) {
     score += 100;
-    // Exact title match bonus
-    if (item.title.toLowerCase() === lowercaseQuery) score += 50;
-    // Title starts with query bonus
-    if (item.title.toLowerCase().startsWith(lowercaseQuery)) score += 25;
-  }
-
-  // Category match (high weight)
-  if (item.category?.toLowerCase().includes(lowercaseQuery)) {
-    score += 75;
-  }
-
-  // Tags match (medium weight)
-  item.tags?.forEach((tag) => {
-    if (tag.toLowerCase().includes(lowercaseQuery)) {
+    // Exact category match
+    if (normalizedCategory === normalizedQuery) {
       score += 50;
-      // Exact tag match bonus
-      if (tag.toLowerCase() === lowercaseQuery) score += 25;
+    }
+  }
+
+  // Tag exact phrase matching (high weight)
+  normalizedTags.some((tag) => {
+    if (tag.includes(normalizedQuery)) {
+      score += 75;
+      // Exact tag match
+      if (tag === normalizedQuery) {
+        score += 50;
+      }
+      return true;
+    }
+    return false;
+  });
+
+  // Description exact phrase matching (medium weight)
+  if (normalizedDescription.includes(normalizedQuery)) {
+    score += 50;
+  }
+
+  // Multi-word query word-by-word matching with position bonus
+  if (queryWords.length > 1) {
+    let titleWordMatches = 0;
+    let descriptionWordMatches = 0;
+    let categoryWordMatches = 0;
+    let tagWordMatches = 0;
+
+    // Check how many query words match in each field
+    queryWords.forEach((word, index) => {
+      // Title word matches
+      if (normalizedTitle.includes(word)) {
+        titleWordMatches++;
+        // Position bonus - earlier words in query matching has higher relevance
+        score += Math.max(15, 25 - index * 3);
+
+        // Word boundary matching bonus (matches whole words, not parts)
+        const titleWords = normalizedTitle.split(/\s+/);
+        if (titleWords.includes(word)) {
+          score += 15;
+        }
+      }
+
+      // Description word matches
+      if (normalizedDescription.includes(word)) {
+        descriptionWordMatches++;
+        score += Math.max(5, 10 - index * 2);
+
+        // Word boundary matching in description
+        const descWords = normalizedDescription.split(/\s+/);
+        if (descWords.includes(word)) {
+          score += 5;
+        }
+      }
+
+      // Category word matches
+      if (normalizedCategory.includes(word)) {
+        categoryWordMatches++;
+        score += Math.max(10, 20 - index * 2);
+      }
+
+      // Tag word matches
+      normalizedTags.forEach((tag) => {
+        if (tag.includes(word)) {
+          tagWordMatches++;
+          score += Math.max(10, 15 - index * 2);
+        }
+      });
+    });
+
+    // Proximity bonus - if we matched all words in the query in a field
+    if (titleWordMatches === queryWords.length) score += 50;
+    if (descriptionWordMatches === queryWords.length) score += 20;
+    if (categoryWordMatches === queryWords.length) score += 30;
+    if (tagWordMatches >= queryWords.length) score += 25;
+
+    // Percentage match bonus
+    const titleMatchPercentage = titleWordMatches / queryWords.length;
+    const descMatchPercentage = descriptionWordMatches / queryWords.length;
+    const categoryMatchPercentage = categoryWordMatches / queryWords.length;
+    const tagMatchPercentage = tagWordMatches / queryWords.length;
+
+    score += titleMatchPercentage * 30;
+    score += descMatchPercentage * 15;
+    score += categoryMatchPercentage * 20;
+    score += tagMatchPercentage * 20;
+  }
+
+  // Fuzzy matching for typo tolerance (only for single-word queries or each word in multi-word queries)
+  queryWords.forEach((word) => {
+    if (word.length > 3) {
+      // Only do fuzzy matching for words longer than 3 chars
+      // Simple edit distance simulation - check if title contains a substring with 1 character different
+      for (let i = 0; i < word.length - 2; i++) {
+        const fuzzyPattern = word.substring(0, i) + word.substring(i + 1);
+        if (normalizedTitle.includes(fuzzyPattern)) {
+          score += 15;
+          break;
+        }
+      }
+
+      // Check tags for fuzzy matches
+      normalizedTags.forEach((tag) => {
+        for (let i = 0; i < word.length - 2; i++) {
+          const fuzzyPattern = word.substring(0, i) + word.substring(i + 1);
+          if (tag.includes(fuzzyPattern)) {
+            score += 10;
+            break;
+          }
+        }
+      });
     }
   });
 
-  // Description match (lower weight)
-  if (item.description.toLowerCase().includes(lowercaseQuery)) {
-    score += 25;
-  }
-
-  // Type-based bonus
+  // Content type bonuses
   if (item.type === "blog") score += 5; // Slight preference for blog content
+  if (item.type === "project") score += 3; // Some preference for projects
+
+  // Normalization - cap the score to avoid extreme values
+  score = Math.min(500, score);
 
   return score;
 };
@@ -221,23 +344,104 @@ const calculateRelevance = (item: SearchResult, query: string): number => {
 export default function SearchComponent() {
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") || "");
+  const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [selectedFilter, setSelectedFilter] = useState<string>("all");
   const [isSearching, setIsSearching] = useState(false);
 
+  // Debounce the query to prevent excessive searching
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(query);
+      if (query.trim()) {
+        setIsSearching(true);
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  // Set isSearching to false after search is complete
+  useEffect(() => {
+    if (debouncedQuery.trim()) {
+      const timer = setTimeout(() => setIsSearching(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [debouncedQuery]);
+
+  // Update URL when query changes
+  useEffect(() => {
+    if (debouncedQuery.trim()) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("q", debouncedQuery);
+      window.history.replaceState({}, "", url);
+    }
+  }, [debouncedQuery]);
+
   // Enhanced search with relevance scoring
   const searchResults = useMemo(() => {
-    if (!query.trim()) return [];
+    if (!debouncedQuery.trim()) return [];
 
     const results = searchableContent
       .map((item) => ({
         ...item,
-        relevanceScore: calculateRelevance(item, query),
+        relevanceScore: calculateRelevance(item, debouncedQuery),
       }))
       .filter((item) => item.relevanceScore > 0)
       .sort((a, b) => (b.relevanceScore || 0) - (a.relevanceScore || 0));
 
     return results;
-  }, [query]);
+  }, [debouncedQuery]);
+
+  // Function to highlight the matched query in text
+  const highlightMatches = (text: string, query: string) => {
+    if (!query.trim()) return text;
+
+    // Escape regex special characters in the query
+    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+    // For multi-word queries, create a regex that matches any of the words
+    const queryWords = query
+      .toLowerCase()
+      .trim()
+      .split(/\s+/)
+      .filter((word) => word.length > 0);
+    let regex: RegExp;
+
+    if (queryWords.length > 1) {
+      // Match both the full phrase and individual words
+      const fullPhrase = escapedQuery;
+      const wordsPattern = queryWords
+        .map((word) => `\\b${word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`)
+        .join("|");
+      regex = new RegExp(`(${fullPhrase}|${wordsPattern})`, "gi");
+    } else {
+      // For single word queries, just match that word
+      regex = new RegExp(`(${escapedQuery})`, "gi");
+    }
+
+    // Split by the regex
+    const parts = text.split(regex);
+
+    // Return the highlighted text
+    return parts.map((part, i) => {
+      // Check if this part matches the query (every other part will match)
+      if (i % 2 === 1) {
+        return (
+          <span
+            key={i}
+            className="font-semibold px-0.5 rounded"
+            style={{
+              backgroundColor: "var(--accent)/15",
+              color: "var(--accent)",
+            }}
+          >
+            {part}
+          </span>
+        );
+      }
+      return part;
+    });
+  };
 
   // Filter results by type
   const filteredResults = useMemo(() => {
@@ -254,21 +458,10 @@ export default function SearchComponent() {
     return counts;
   }, [searchResults]);
 
-  useEffect(() => {
-    if (query.trim()) {
-      setIsSearching(true);
-      const timer = setTimeout(() => setIsSearching(false), 300);
-      return () => clearTimeout(timer);
-    }
-  }, [query]);
-
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (query.trim()) {
-      const url = new URL(window.location.href);
-      url.searchParams.set("q", query);
-      window.history.replaceState({}, "", url);
-    }
+    // Update the debounced query immediately when form is submitted
+    setDebouncedQuery(query);
   };
 
   const popularSuggestions = [
@@ -368,10 +561,9 @@ export default function SearchComponent() {
               )}
             </div>
           </div>
-        </form>
-
+        </form>{" "}
         {/* Enhanced search suggestions */}
-        {!query && (
+        {!debouncedQuery && (
           <div className="mt-8 text-center">
             <p
               className="text-lg mb-6 font-medium"
@@ -411,7 +603,7 @@ export default function SearchComponent() {
       </div>
 
       {/* Enhanced Results Section */}
-      {query && (
+      {debouncedQuery && (
         <div className="space-y-8">
           {/* Results header and advanced filters */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -434,7 +626,7 @@ export default function SearchComponent() {
                   >
                     {filteredResults.length === 0
                       ? `Try different keywords or browse suggested content below`
-                      : `for "${query}" • Sorted by relevance`}
+                      : `for "${debouncedQuery}" • Sorted by relevance`}
                   </p>
                 </div>
               )}
@@ -588,7 +780,27 @@ export default function SearchComponent() {
                               </>
                             )}
                             {result.relevanceScore &&
-                              result.relevanceScore > 100 && (
+                              result.relevanceScore > 200 && (
+                                <>
+                                  <span
+                                    style={{ color: "var(--text-secondary)" }}
+                                  >
+                                    •
+                                  </span>
+                                  <span
+                                    className="text-xs font-bold px-2 py-1 rounded-full"
+                                    style={{
+                                      backgroundColor: "var(--accent)",
+                                      color: "white",
+                                    }}
+                                  >
+                                    ⭐ Perfect Match
+                                  </span>
+                                </>
+                              )}
+                            {result.relevanceScore &&
+                              result.relevanceScore > 150 &&
+                              result.relevanceScore <= 200 && (
                                 <>
                                   <span
                                     style={{ color: "var(--text-secondary)" }}
@@ -606,6 +818,26 @@ export default function SearchComponent() {
                                   </span>
                                 </>
                               )}
+                            {result.relevanceScore &&
+                              result.relevanceScore > 100 &&
+                              result.relevanceScore <= 150 && (
+                                <>
+                                  <span
+                                    style={{ color: "var(--text-secondary)" }}
+                                  >
+                                    •
+                                  </span>
+                                  <span
+                                    className="text-xs font-bold px-2 py-1 rounded-full"
+                                    style={{
+                                      backgroundColor: "var(--surface-accent)",
+                                      color: "var(--accent)",
+                                    }}
+                                  >
+                                    Good Match
+                                  </span>
+                                </>
+                              )}
                           </div>
                           <h3
                             className="text-xl lg:text-2xl font-bold mb-3 transition-colors duration-300 leading-tight"
@@ -618,13 +850,16 @@ export default function SearchComponent() {
                                 "var(--text-primary)";
                             }}
                           >
-                            {result.title}
+                            {highlightMatches(result.title, debouncedQuery)}
                           </h3>
                           <p
                             className="text-base leading-relaxed mb-4"
                             style={{ color: "var(--text-secondary)" }}
                           >
-                            {result.description}
+                            {highlightMatches(
+                              result.description,
+                              debouncedQuery
+                            )}
                           </p>
                           {result.tags && (
                             <div className="flex flex-wrap gap-2 mt-4">
