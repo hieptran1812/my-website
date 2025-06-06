@@ -40,10 +40,19 @@ export default function BlogReader({
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
   const [activeSection, setActiveSection] = useState<string>("");
   const [showToc, setShowToc] = useState(true);
+  const [tocCollapsed, setTocCollapsed] = useState(false);
   const [tocPosition, setTocPosition] = useState<"center" | "top">("center");
+
+  // Text-to-speech states
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [progress, setProgress] = useState(0);
+
   const { theme } = useTheme();
   const contentRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const currentTextRef = useRef<string>("");
 
   // Save reading preferences to localStorage
   useEffect(() => {
@@ -73,6 +82,137 @@ export default function BlogReader({
 
   const handleLineHeightChange = (newHeight: number) => {
     setLineHeight(Math.max(1.2, Math.min(2.0, newHeight)));
+  };
+
+  // Text-to-speech functions
+  const getTextContent = () => {
+    if (!contentRef.current) return "";
+
+    // Find only the blog content article element
+    const blogContentElement = contentRef.current.querySelector(
+      "article .blog-content"
+    );
+
+    if (!blogContentElement) {
+      // Fallback: try to find article element
+      const articleElement = contentRef.current.querySelector("article");
+      if (!articleElement) return "";
+
+      const clone = articleElement.cloneNode(true) as HTMLElement;
+
+      // Remove unwanted elements from article
+      const unwantedSelectors = [
+        "button",
+        "nav",
+        ".reading-controls",
+        "script",
+        "style",
+        "svg", // Remove SVG icons
+        ".MathJax_Display", // Remove MathJax display elements if needed
+      ];
+
+      unwantedSelectors.forEach((selector) => {
+        const elements = clone.querySelectorAll(selector);
+        elements.forEach((el) => el.remove());
+      });
+
+      let text = clone.textContent || "";
+      text = text.replace(/\s+/g, " ").trim();
+      return `${title}. ${text}`;
+    }
+
+    // Get only the blog content, excluding UI elements
+    const clone = blogContentElement.cloneNode(true) as HTMLElement;
+
+    // Remove unwanted elements that might be within blog content
+    const unwantedSelectors = [
+      "button",
+      "nav",
+      ".reading-controls",
+      "script",
+      "style",
+      ".toc-container",
+      ".table-of-contents",
+      // Remove any embedded UI elements
+      "[data-toc]",
+      "[aria-label*='navigation']",
+    ];
+
+    unwantedSelectors.forEach((selector) => {
+      const elements = clone.querySelectorAll(selector);
+      elements.forEach((el) => el.remove());
+    });
+
+    // Clean up text and preserve paragraph structure
+    let text = clone.textContent || "";
+
+    // Replace multiple spaces and line breaks with single spaces
+    text = text.replace(/\s+/g, " ").trim();
+
+    // Add title at the beginning for context
+    text = `${title}. ${text}`;
+
+    return text;
+  };
+
+  const startSpeech = () => {
+    if (speechSynthesis.speaking) {
+      speechSynthesis.cancel();
+    }
+
+    const text = getTextContent();
+    if (!text) return;
+
+    currentTextRef.current = text;
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    utterance.onstart = () => {
+      setIsPlaying(true);
+      setIsPaused(false);
+    };
+
+    utterance.onend = () => {
+      setIsPlaying(false);
+      setIsPaused(false);
+      setProgress(0);
+    };
+
+    utterance.onerror = () => {
+      setIsPlaying(false);
+      setIsPaused(false);
+      setProgress(0);
+    };
+
+    utterance.onboundary = (event) => {
+      if (event.name === "word") {
+        const progressPercent = (event.charIndex / text.length) * 100;
+        setProgress(progressPercent);
+      }
+    };
+
+    speechRef.current = utterance;
+    speechSynthesis.speak(utterance);
+  };
+
+  const pauseSpeech = () => {
+    if (speechSynthesis.speaking && !speechSynthesis.paused) {
+      speechSynthesis.pause();
+      setIsPaused(true);
+    }
+  };
+
+  const resumeSpeech = () => {
+    if (speechSynthesis.paused) {
+      speechSynthesis.resume();
+      setIsPaused(false);
+    }
+  };
+
+  const stopSpeech = () => {
+    speechSynthesis.cancel();
+    setIsPlaying(false);
+    setIsPaused(false);
+    setProgress(0);
   };
 
   // Extract headings and create TOC
@@ -158,6 +298,15 @@ export default function BlogReader({
       }
     };
   }, [generateToc]);
+
+  // Cleanup speech on unmount
+  useEffect(() => {
+    return () => {
+      if (speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+      }
+    };
+  }, []);
 
   // Handle scroll to prevent TOC from overlapping footer with smooth animations
   useEffect(() => {
@@ -253,14 +402,14 @@ export default function BlogReader({
       {/* Table of Contents - Fixed Left Sidebar */}
       {tocItems.length > 0 && (
         <div
-          className={`fixed left-4 z-40 hidden xl:block max-w-xs transition-all duration-700 ease-out ${
+          className={`fixed left-4 z-40 hidden xl:block transition-all duration-700 ease-out ${
             tocPosition === "center"
               ? "top-1/2 -translate-y-1/2"
               : "top-24 translate-y-0"
-          }`}
+          } ${tocCollapsed ? "w-12" : "w-64"}`}
         >
           <div
-            className={`p-4 rounded-xl shadow-lg border backdrop-blur-md transition-all duration-300 max-h-[70vh] overflow-y-auto toc-scrollbar ${
+            className={`p-4 rounded-xl shadow-lg border backdrop-blur-md transition-all duration-300 max-h-[65vh] overflow-y-auto toc-scrollbar ${
               showToc
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 -translate-x-full"
@@ -272,45 +421,57 @@ export default function BlogReader({
           >
             <div className="flex items-center justify-between mb-4">
               <h3
-                className="text-sm font-semibold"
+                className={`text-sm font-semibold ${
+                  tocCollapsed ? "hidden" : "block"
+                }`}
                 style={{ color: "var(--text-primary)" }}
               >
                 Table of Contents
               </h3>
-              <button
-                onClick={() => setShowToc(!showToc)}
-                className="p-1 rounded transition-colors duration-200"
-                style={{
-                  color: "var(--text-secondary)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    "var(--surface-accent)";
-                  e.currentTarget.style.color = "var(--accent)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                }}
-                aria-label="Toggle table of contents"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setTocCollapsed(!tocCollapsed)}
+                  className="p-1 rounded transition-colors duration-200"
+                  style={{
+                    color: "var(--text-secondary)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--surface-accent)";
+                    e.currentTarget.style.color = "var(--accent)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.color = "var(--text-secondary)";
+                  }}
+                  aria-label={
+                    tocCollapsed
+                      ? "Expand table of contents"
+                      : "Collapse table of contents"
+                  }
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d={
+                        tocCollapsed
+                          ? "M13 5l7 7-7 7M5 5l7 7-7 7" // Expand icon (chevrons pointing right)
+                          : "M11 19l-7-7 7-7M19 19l-7-7 7-7" // Collapse icon (chevrons pointing left)
+                      }
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
 
-            <nav className="space-y-1">
+            <nav className={`space-y-1 ${tocCollapsed ? "hidden" : "block"}`}>
               {tocItems.map((item) => (
                 <button
                   key={item.id}
@@ -614,7 +775,7 @@ export default function BlogReader({
           </div>
 
           {/* Line Height Control */}
-          <div>
+          <div className="mb-4">
             <div className="flex items-center justify-between mb-1">
               <span
                 className="text-xs"
@@ -691,6 +852,151 @@ export default function BlogReader({
                 ☰
               </button>
             </div>
+          </div>
+
+          {/* Text-to-Speech Controls */}
+          <div
+            className="border-t pt-3"
+            style={{ borderColor: "var(--border)" }}
+          >
+            <h4
+              className="text-xs font-semibold mb-3"
+              style={{ color: "var(--text-primary)" }}
+            >
+              Audio Reading
+            </h4>
+
+            {/* Play/Pause/Stop Controls */}
+            <div className="flex items-center gap-2 mb-3">
+              <button
+                onClick={
+                  isPlaying
+                    ? isPaused
+                      ? resumeSpeech
+                      : pauseSpeech
+                    : startSpeech
+                }
+                className="flex-1 px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+                style={{
+                  backgroundColor: isPlaying
+                    ? "var(--accent)"
+                    : "var(--surface)",
+                  color: isPlaying ? "white" : "var(--text-primary)",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isPlaying) {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--surface-accent)";
+                    e.currentTarget.style.color = "var(--accent)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isPlaying) {
+                    e.currentTarget.style.backgroundColor = "var(--surface)";
+                    e.currentTarget.style.color = "var(--text-primary)";
+                  }
+                }}
+                aria-label={
+                  isPlaying
+                    ? isPaused
+                      ? "Resume reading"
+                      : "Pause reading"
+                    : "Start reading"
+                }
+              >
+                {isPlaying ? (
+                  isPaused ? (
+                    <svg
+                      className="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                    </svg>
+                  )
+                ) : (
+                  <svg
+                    className="w-4 h-4"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                )}
+                <span className="text-xs">
+                  {isPlaying ? (isPaused ? "Resume" : "Pause") : "Play"}
+                </span>
+              </button>
+
+              {isPlaying && (
+                <button
+                  onClick={stopSpeech}
+                  className="px-3 py-2 rounded-lg transition-all duration-200"
+                  style={{
+                    backgroundColor: "var(--surface)",
+                    color: "var(--text-secondary)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--surface-accent)";
+                    e.currentTarget.style.color = "var(--accent)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--surface)";
+                    e.currentTarget.style.color = "var(--text-secondary)";
+                  }}
+                  aria-label="Stop reading"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 6h12v12H6z" />
+                  </svg>
+                </button>
+              )}
+            </div>
+
+            {/* Progress Bar */}
+            {isPlaying && (
+              <div className="mb-3">
+                <div className="flex items-center justify-between mb-1">
+                  <span
+                    className="text-xs"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    Progress
+                  </span>
+                  <span
+                    className="text-xs"
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    {Math.round(progress)}%
+                  </span>
+                </div>
+                <div
+                  className="w-full h-1 rounded-full"
+                  style={{ backgroundColor: "var(--border)" }}
+                >
+                  <div
+                    className="h-1 rounded-full transition-all duration-300"
+                    style={{
+                      backgroundColor: "var(--accent)",
+                      width: `${progress}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -775,225 +1081,240 @@ export default function BlogReader({
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10">
-        <div className="max-w-4xl mx-auto px-6 py-8 xl:px-12" ref={contentRef}>
-          {/* Article Header */}
-          <header className="mb-8">
-            <h1
-              className="text-4xl lg:text-5xl font-bold mb-6 leading-tight"
+      <div className="relative z-10 w-full">
+        <div
+          className="transition-all duration-300 py-12 px-6"
+          style={{
+            marginLeft:
+              tocItems.length > 0 && showToc && !tocCollapsed
+                ? "clamp(0px, 272px, 272px)"
+                : tocItems.length > 0 && showToc && tocCollapsed
+                ? "clamp(0px, 64px, 64px)"
+                : "0px",
+            marginRight: tocItems.length > 0 && showToc ? "16px" : "0px",
+            minHeight: "100vh",
+          }}
+          ref={contentRef}
+        >
+          <div className="max-w-4xl mx-auto">
+            {/* Article Header */}
+            <header className="mb-12 text-center">
+              <h1
+                className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-8 leading-tight"
+                style={{
+                  color: isReadingMode
+                    ? theme === "dark"
+                      ? "#fbbf24"
+                      : "#92400e"
+                    : "var(--text-primary)",
+                  fontSize: `clamp(1.5rem, ${fontSize * 1.8}px, 2.5rem)`,
+                  lineHeight: lineHeight * 0.9,
+                }}
+              >
+                {title}
+              </h1>
+
+              {/* Article Meta */}
+              <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
+                    style={{ backgroundColor: "var(--accent)" }}
+                  >
+                    {author.charAt(0)}
+                  </div>
+                  <span
+                    className="text-sm font-medium"
+                    style={{
+                      color: isReadingMode
+                        ? theme === "dark"
+                          ? "#fbbf24"
+                          : "#92400e"
+                        : "var(--text-primary)",
+                    }}
+                  >
+                    {author}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    style={{
+                      color: isReadingMode
+                        ? theme === "dark"
+                          ? "#d97706"
+                          : "#78350f"
+                        : "var(--text-secondary)",
+                    }}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <time
+                    className="text-sm"
+                    style={{
+                      color: isReadingMode
+                        ? theme === "dark"
+                          ? "#d97706"
+                          : "#78350f"
+                        : "var(--text-secondary)",
+                    }}
+                  >
+                    {new Date(publishDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    style={{
+                      color: isReadingMode
+                        ? theme === "dark"
+                          ? "#d97706"
+                          : "#78350f"
+                        : "var(--text-secondary)",
+                    }}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span
+                    className="text-sm"
+                    style={{
+                      color: isReadingMode
+                        ? theme === "dark"
+                          ? "#d97706"
+                          : "#78350f"
+                        : "var(--text-secondary)",
+                    }}
+                  >
+                    {readTime}
+                  </span>
+                </div>
+
+                <span
+                  className="px-3 py-1 rounded-full text-xs font-medium"
+                  style={{
+                    backgroundColor: isReadingMode
+                      ? theme === "dark"
+                        ? "#78350f"
+                        : "#fef3c7"
+                      : "var(--surface-accent)",
+                    color: isReadingMode
+                      ? theme === "dark"
+                        ? "#fbbf24"
+                        : "#92400e"
+                      : "var(--accent)",
+                  }}
+                >
+                  {category}
+                </span>
+              </div>
+
+              {/* Tags */}
+              {tags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="px-2 py-1 rounded text-xs font-medium border transition-colors duration-200"
+                      style={{
+                        backgroundColor: isReadingMode
+                          ? theme === "dark"
+                            ? "rgba(120, 53, 15, 0.3)"
+                            : "rgba(254, 243, 199, 0.5)"
+                          : "var(--surface)",
+                        borderColor: isReadingMode
+                          ? theme === "dark"
+                            ? "#78350f"
+                            : "#f3e8ff"
+                          : "var(--border)",
+                        color: isReadingMode
+                          ? theme === "dark"
+                            ? "#fbbf24"
+                            : "#92400e"
+                          : "var(--text-secondary)",
+                      }}
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </header>
+
+            {/* Article Content */}
+            <article
+              className="prose prose-xl max-w-none mx-auto"
               style={{
+                fontSize: `${fontSize}px`,
+                lineHeight: lineHeight,
                 color: isReadingMode
                   ? theme === "dark"
                     ? "#fbbf24"
                     : "#92400e"
                   : "var(--text-primary)",
-                fontSize: `${fontSize * 1.5}px`,
-                lineHeight: lineHeight,
               }}
             >
-              {title}
-            </h1>
-
-            {/* Article Meta */}
-            <div className="flex flex-wrap items-center gap-4 mb-6">
-              <div className="flex items-center gap-2">
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
-                  style={{ backgroundColor: "var(--accent)" }}
-                >
-                  {author.charAt(0)}
-                </div>
-                <span
-                  className="text-sm font-medium"
-                  style={{
-                    color: isReadingMode
+              <MathJax
+                className="blog-content"
+                style={
+                  {
+                    "--reading-text-color": isReadingMode
                       ? theme === "dark"
                         ? "#fbbf24"
                         : "#92400e"
                       : "var(--text-primary)",
-                  }}
-                >
-                  {author}
-                </span>
-              </div>
-
-              <div className="flex items-center gap-1">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  style={{
-                    color: isReadingMode
+                    "--reading-text-secondary": isReadingMode
                       ? theme === "dark"
                         ? "#d97706"
                         : "#78350f"
                       : "var(--text-secondary)",
-                  }}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                <time
-                  className="text-sm"
-                  style={{
-                    color: isReadingMode
+                    "--reading-accent": isReadingMode
                       ? theme === "dark"
-                        ? "#d97706"
-                        : "#78350f"
-                      : "var(--text-secondary)",
-                  }}
-                >
-                  {new Date(publishDate).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </time>
-              </div>
-
-              <div className="flex items-center gap-1">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  style={{
-                    color: isReadingMode
+                        ? "#f59e0b"
+                        : "#b45309"
+                      : "var(--accent)",
+                    "--reading-border": isReadingMode
                       ? theme === "dark"
-                        ? "#d97706"
-                        : "#78350f"
-                      : "var(--text-secondary)",
-                  }}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <span
-                  className="text-sm"
-                  style={{
-                    color: isReadingMode
+                        ? "#78350f"
+                        : "#fef3c7"
+                      : "var(--border)",
+                    "--reading-surface": isReadingMode
                       ? theme === "dark"
-                        ? "#d97706"
-                        : "#78350f"
-                      : "var(--text-secondary)",
-                  }}
-                >
-                  {readTime}
-                </span>
-              </div>
-
-              <span
-                className="px-3 py-1 rounded-full text-xs font-medium"
-                style={{
-                  backgroundColor: isReadingMode
-                    ? theme === "dark"
-                      ? "#78350f"
-                      : "#fef3c7"
-                    : "var(--surface-accent)",
-                  color: isReadingMode
-                    ? theme === "dark"
-                      ? "#fbbf24"
-                      : "#92400e"
-                    : "var(--accent)",
-                }}
+                        ? "rgba(120, 53, 15, 0.2)"
+                        : "rgba(254, 243, 199, 0.3)"
+                      : "var(--surface)",
+                  } as React.CSSProperties
+                }
               >
-                {category}
-              </span>
-            </div>
-
-            {/* Tags */}
-            {tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-6">
-                {tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-2 py-1 rounded text-xs font-medium border transition-colors duration-200"
-                    style={{
-                      backgroundColor: isReadingMode
-                        ? theme === "dark"
-                          ? "rgba(120, 53, 15, 0.3)"
-                          : "rgba(254, 243, 199, 0.5)"
-                        : "var(--surface)",
-                      borderColor: isReadingMode
-                        ? theme === "dark"
-                          ? "#78350f"
-                          : "#f3e8ff"
-                        : "var(--border)",
-                      color: isReadingMode
-                        ? theme === "dark"
-                          ? "#fbbf24"
-                          : "#92400e"
-                        : "var(--text-secondary)",
-                    }}
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            )}
-          </header>
-
-          {/* Article Content */}
-          <article
-            className="prose prose-lg max-w-none"
-            style={{
-              fontSize: `${fontSize}px`,
-              lineHeight: lineHeight,
-              color: isReadingMode
-                ? theme === "dark"
-                  ? "#fbbf24"
-                  : "#92400e"
-                : "var(--text-primary)",
-            }}
-          >
-            <MathJax
-              className="blog-content"
-              style={
-                {
-                  "--reading-text-color": isReadingMode
-                    ? theme === "dark"
-                      ? "#fbbf24"
-                      : "#92400e"
-                    : "var(--text-primary)",
-                  "--reading-text-secondary": isReadingMode
-                    ? theme === "dark"
-                      ? "#d97706"
-                      : "#78350f"
-                    : "var(--text-secondary)",
-                  "--reading-accent": isReadingMode
-                    ? theme === "dark"
-                      ? "#f59e0b"
-                      : "#b45309"
-                    : "var(--accent)",
-                  "--reading-border": isReadingMode
-                    ? theme === "dark"
-                      ? "#78350f"
-                      : "#fef3c7"
-                    : "var(--border)",
-                  "--reading-surface": isReadingMode
-                    ? theme === "dark"
-                      ? "rgba(120, 53, 15, 0.2)"
-                      : "rgba(254, 243, 199, 0.3)"
-                    : "var(--surface)",
-                } as React.CSSProperties
-              }
-            >
-              {dangerouslySetInnerHTML ? (
-                <div dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
-              ) : (
-                children
-              )}
-            </MathJax>
-          </article>
+                {dangerouslySetInnerHTML ? (
+                  <div dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
+                ) : (
+                  children
+                )}
+              </MathJax>
+            </article>
+          </div>
         </div>
       </div>
 

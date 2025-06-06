@@ -223,6 +223,47 @@
   }
 }
 
+/* Responsive Layout Styles */
+@media (min-width: 1280px) {
+  .blog-main-content {
+    /* Always center the content, regardless of TOC state */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80rem; /* 1280px */
+    transition: margin-left 0.3s ease-in-out;
+  }
+
+  /* Ensure TOC doesn't interfere with content centering */
+  .blog-content-centered {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-left: max(1.5rem, calc((100vw - 80rem) / 2));
+    padding-right: max(1.5rem, calc((100vw - 80rem) / 2));
+  }
+
+  .blog-reader-content {
+    margin-left: var(--toc-width, 0);
+    transition: margin-left 0.3s ease;
+  }
+
+  .blog-reader-content.toc-expanded {
+    margin-left: 288px; /* w-72 */
+  }
+
+  .blog-reader-content.toc-collapsed {
+    margin-left: 80px; /* w-20 */
+  }
+
+  .blog-main-content.with-toc-expanded {
+    margin-left: 272px; /* TOC width + spacing */
+  }
+
+  .blog-main-content.with-toc-collapsed {
+    margin-left: 64px; /* Collapsed TOC width + spacing */
+  }
+}
+
 /* Print styles */
 @media print {
   .blog-content {
@@ -281,23 +322,26 @@ html {
 }
 
 /* Enhanced TOC scrollbar */
+.toc-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
 .toc-scrollbar::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 
 .toc-scrollbar::-webkit-scrollbar-track {
-  background: var(--surface);
-  border-radius: 2px;
+  background: transparent;
 }
 
 .toc-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 2px;
-  transition: background-color 0.2s ease;
+  background-color: var(--border);
+  border-radius: 3px;
 }
 
 .toc-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--text-secondary);
+  background-color: var(--text-secondary);
 }
 
 /* KaTeX Math Rendering Styles */
@@ -416,5 +460,72 @@ html {
 
   .math-expression.inline {
     font-size: 0.95em;
+  }
+}
+
+/* Improved prose spacing for better readability */
+.prose-custom {
+  @apply max-w-none;
+}
+
+.prose-custom > * + * {
+  margin-top: 1.5em;
+}
+
+.prose-custom h1,
+.prose-custom h2,
+.prose-custom h3,
+.prose-custom h4,
+.prose-custom h5,
+.prose-custom h6 {
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+}
+
+.prose-custom h1:first-child,
+.prose-custom h2:first-child,
+.prose-custom h3:first-child,
+.prose-custom h4:first-child,
+.prose-custom h5:first-child,
+.prose-custom h6:first-child {
+  margin-top: 0;
+}
+
+/* Blog Reader Layout Fixes */
+@media (min-width: 1280px) {
+  .blog-main-content {
+    transition: margin-left 0.3s ease-in-out;
+  }
+
+  .blog-main-content.with-toc-expanded {
+    margin-left: 272px; /* TOC width + spacing */
+  }
+
+  .blog-main-content.with-toc-collapsed {
+    margin-left: 64px; /* Collapsed TOC width + spacing */
+  }
+}
+
+/* Ensure content centering */
+.blog-content-container {
+  max-width: 64rem; /* max-w-4xl equivalent */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* TOC responsive styling */
+.toc-sidebar {
+  width: 16rem; /* w-64 equivalent */
+  max-width: 16rem;
+}
+
+.toc-sidebar.collapsed {
+  width: 3rem; /* w-12 equivalent */
+}
+
+@media (max-width: 1279px) {
+  .blog-main-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 }
