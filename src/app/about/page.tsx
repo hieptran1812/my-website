@@ -2,6 +2,7 @@
 
 import FadeInWrapper from "../../components/FadeInWrapper";
 import { useState } from "react";
+import Image from "next/image";
 
 // This would ideally be in a separate metadata file, but for client components we'll handle it differently
 // We'll add the metadata to the parent layout or create a wrapper component
@@ -285,17 +286,19 @@ const AwardsCarousel = ({
               className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transform transition-all duration-300 hover:scale-105 ${
                 activeCategory === category.id ? "ring-2 ring-offset-2" : ""
               }`}
-              style={{
-                backgroundColor:
-                  activeCategory === category.id
-                    ? "var(--accent)"
-                    : "var(--surface-accent)",
-                color:
-                  activeCategory === category.id ? "white" : "var(--accent)",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                "--ring-color": "var(--accent)",
-                "--ring-offset-color": "var(--background)",
-              } as React.CSSProperties}
+              style={
+                {
+                  backgroundColor:
+                    activeCategory === category.id
+                      ? "var(--accent)"
+                      : "var(--surface-accent)",
+                  color:
+                    activeCategory === category.id ? "white" : "var(--accent)",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                  "--ring-color": "var(--accent)",
+                  "--ring-offset-color": "var(--background)",
+                } as React.CSSProperties
+              }
             >
               <span className="mr-2">{category.icon}</span>
               {category.name}
@@ -477,10 +480,13 @@ export default function About() {
                     boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
                   }}
                 >
-                  <img
+                  <Image
                     src="/about-profile.png"
                     alt="Profile"
+                    width={160}
+                    height={160}
                     className="w-full h-full object-cover"
+                    priority
                   />
                 </div>
                 <div

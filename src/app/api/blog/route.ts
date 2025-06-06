@@ -6,7 +6,7 @@ import { calculateReadTimeWithTags } from "@/lib/readTimeCalculator";
 
 // Implement caching for blog posts
 const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
-let cachedPosts = null;
+let cachedPosts: BlogPostMetadata[] | null = null;
 let lastCacheTime = 0;
 
 interface BlogPostMetadata {
@@ -19,6 +19,12 @@ interface BlogPostMetadata {
   tags: string[];
   image: string;
   excerpt: string;
+  seo?: {
+    type: string;
+    datePublished: string;
+    dateModified: string;
+    author: string;
+  };
 }
 
 export async function GET(request: Request) {
