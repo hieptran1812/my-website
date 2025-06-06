@@ -1080,23 +1080,17 @@ export default function BlogReader({
         )}
       </div>
 
-      {/* Main Content */}
+      {/* Main Content - Always Centered */}
       <div className="relative z-10 w-full">
-        <div
-          className="transition-all duration-300 py-12 px-6"
-          style={{
-            marginLeft:
-              tocItems.length > 0 && showToc && !tocCollapsed
-                ? "clamp(0px, 272px, 272px)"
-                : tocItems.length > 0 && showToc && tocCollapsed
-                ? "clamp(0px, 64px, 64px)"
-                : "0px",
-            marginRight: tocItems.length > 0 && showToc ? "16px" : "0px",
-            minHeight: "100vh",
-          }}
-          ref={contentRef}
-        >
-          <div className="max-w-4xl mx-auto">
+        <div className="min-h-screen flex justify-center items-start py-12">
+          <div
+            className="w-full max-w-4xl px-6"
+            ref={contentRef}
+            style={{
+              margin: "0 auto",
+              position: "relative",
+            }}
+          >
             {/* Article Header */}
             <header className="mb-12 text-center">
               <h1
