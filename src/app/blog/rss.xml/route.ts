@@ -72,8 +72,8 @@ export async function GET() {
     <pubDate>${buildDate}</pubDate>
     <ttl>60</ttl>
     <generator>Next.js RSS Generator by Hiep Tran</generator>
-    <managingEditor>hieptran1812@gmail.com (Hiep Tran)</managingEditor>
-    <webMaster>hieptran1812@gmail.com (Hiep Tran)</webMaster>
+    <managingEditor>hieptran.jobs@gmail.com (Hiep Tran)</managingEditor>
+    <webMaster>hieptran.jobs@gmail.com (Hiep Tran)</webMaster>
     <copyright>Copyright ${new Date().getFullYear()} Hiep Tran. All rights reserved.</copyright>
     <category>Technology</category>
     <category>Programming</category>
@@ -98,7 +98,7 @@ export async function GET() {
       <pubDate>${new Date(article.date).toUTCString()}</pubDate>
       <category><![CDATA[${article.category}]]></category>
       <dc:creator><![CDATA[${article.author}]]></dc:creator>
-      <author>hieptran1812@gmail.com (${article.author})</author>
+      <author>hieptran.jobs@gmail.com (${article.author})</author>
       <source url="${baseUrl}/blog/rss.xml">Hiep Tran Blog</source>
     </item>`
       )

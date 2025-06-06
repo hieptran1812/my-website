@@ -210,7 +210,7 @@ export default function PrivacyPage() {
               </p>
               <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mt-4">
                 <p>
-                  <strong>Email:</strong> hieptran1812@gmail.com
+                  <strong>Email:</strong> hieptran.jobs@gmail.com
                 </p>
                 <p>
                   <strong>Website:</strong>{" "}
