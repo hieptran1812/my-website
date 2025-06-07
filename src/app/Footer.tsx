@@ -28,8 +28,8 @@ const resourceLinks = [
 const legalLinks = [
   { name: "Privacy Policy", href: "/privacy" },
   { name: "Terms of Service", href: "/terms" },
-  { name: "RSS Feed", href: "/blog/rss.xml" },
-  { name: "Sitemap", href: "/sitemap.xml" },
+  // { name: "RSS Feed", href: "/blog/rss.xml" },
+  // { name: "Sitemap", href: "/sitemap.xml" },
 ];
 
 const socialLinks = [
