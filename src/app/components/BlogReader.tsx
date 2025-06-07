@@ -56,27 +56,26 @@ export default function BlogReader({
   const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
   const currentTextRef = useRef<string>("");
 
-  // Save reading preferences to localStorage
+  // Load reading preferences from localStorage, respecting ThemeProvider's reading mode control
   useEffect(() => {
     const savedPreferences = localStorage.getItem("blog-reading-preferences");
     if (savedPreferences) {
       const preferences = JSON.parse(savedPreferences);
-      setReadingMode(preferences.isReadingMode || false);
+      // Only restore font and line settings, let ThemeProvider handle reading mode
       setFontSize(preferences.fontSize || 16);
       setLineHeight(preferences.lineHeight || 1.6);
     }
-  }, [setReadingMode]);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(
       "blog-reading-preferences",
       JSON.stringify({
-        isReadingMode,
         fontSize,
         lineHeight,
       })
     );
-  }, [isReadingMode, fontSize, lineHeight]);
+  }, [fontSize, lineHeight]);
 
   const handleFontSizeChange = (newSize: number) => {
     setFontSize(Math.max(12, Math.min(24, newSize)));
