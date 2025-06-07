@@ -594,12 +594,19 @@ export default function HeroSection() {
           className="flex-shrink-0 relative"
           aria-label="Profile image and availability status"
         >
-          {/* Primary outer glow container */}
+          {/* Primary outer glow container - Fixed dimensions to prevent layout shift */}
           <div
-            className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-[350px] lg:h-[350px] rounded-2xl"
+            className="relative rounded-2xl"
             style={{
+              width: "350px",
+              height: "350px",
+              maxWidth: "80vw",
+              maxHeight: "80vw",
+              minWidth: "280px",
+              minHeight: "280px",
               boxShadow: `0 0 30px 12px ${getGlowColor()}, 0 0 60px 20px ${getSecondaryGlowColor()}, 0 0 90px 30px ${getTertiaryGlowColor()}`,
-              transform: "translateZ(0)", // Hardware acceleration
+              transform: "translate3d(0, 0, 0)", // Hardware acceleration with better performance
+              willChange: "auto", // Prevent unnecessary layer creation
             }}
           >
             {/* Actual image container with gradient border */}
@@ -617,10 +624,18 @@ export default function HeroSection() {
                 <Image
                   src={getProfileImage()}
                   alt="Hiep Tran - AI Engineer and Full-Stack Developer profile photo"
-                  fill
+                  width={350}
+                  height={350}
                   className="rounded-xl shadow-lg object-cover"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
                   priority
                   sizes="(max-width: 768px) 280px, 350px"
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkbHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                 />
               </div>
             </div>

@@ -283,7 +283,7 @@ const AwardsCarousel = ({
           >
             <button
               onClick={() => handleCategoryChange(category.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transform transition-all duration-300 hover:scale-105 ${
+              className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all duration-300 ${
                 activeCategory === category.id ? "ring-2 ring-offset-2" : ""
               }`}
               style={
@@ -297,8 +297,19 @@ const AwardsCarousel = ({
                   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
                   "--ring-color": "var(--accent)",
                   "--ring-offset-color": "var(--background)",
+                  transform: "translate3d(0, 0, 0)",
+                  willChange: "transform",
+                  backfaceVisibility: "hidden",
                 } as React.CSSProperties
               }
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform =
+                  "translate3d(0, -1px, 0) scale(1.05)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform =
+                  "translate3d(0, 0, 0) scale(1)";
+              }}
             >
               <span className="mr-2">{category.icon}</span>
               {category.name}
@@ -309,12 +320,23 @@ const AwardsCarousel = ({
 
       {/* Awards Content */}
       <div
-        className="p-8 rounded-2xl border transform transition-all duration-300 hover:shadow-xl relative overflow-hidden"
+        className="p-8 rounded-2xl border transition-all duration-300 relative overflow-hidden"
         style={{
           backgroundColor: "var(--card-bg)",
           borderColor: "var(--card-border)",
           minHeight: "450px", // Set a minimum height to prevent layout shifts
           boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+          transform: "translate3d(0, 0, 0)",
+          willChange: "auto",
+          backfaceVisibility: "hidden",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "translate3d(0, -2px, 0)";
+          e.currentTarget.style.boxShadow = "0 25px 50px rgba(0,0,0,0.15)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translate3d(0, 0, 0)";
+          e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.05)";
         }}
       >
         {categories.map((category) => (
@@ -322,20 +344,18 @@ const AwardsCarousel = ({
             key={category.id}
             className={`transition-all duration-700 absolute top-0 left-0 w-full h-full p-8 ${
               activeCategory === category.id
-                ? "opacity-100 translate-x-0 pointer-events-auto"
-                : `opacity-0 pointer-events-none ${
-                    animationDirection === "right"
-                      ? "translate-x-full"
-                      : "-translate-x-full"
-                  }`
+                ? "opacity-100 pointer-events-auto"
+                : "opacity-0 pointer-events-none"
             }`}
             style={{
               transform:
                 activeCategory === category.id
-                  ? "translateX(0)"
+                  ? "translate3d(0, 0, 0)"
                   : animationDirection === "right"
-                  ? "translateX(50px)"
-                  : "translateX(-50px)",
+                  ? "translate3d(50px, 0, 0)"
+                  : "translate3d(-50px, 0, 0)",
+              willChange: activeCategory === category.id ? "auto" : "transform",
+              backfaceVisibility: "hidden",
             }}
           >
             <FadeInWrapper direction="up" delay={150}>
