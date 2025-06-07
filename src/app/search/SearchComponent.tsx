@@ -228,7 +228,8 @@ export default function SearchComponent() {
   const searchResults = useMemo(() => {
     if (!debouncedQuery.trim() || dataLoading) return [];
 
-    return searchContent(debouncedQuery, searchableContent);
+    // Use a lower minimum relevance threshold to include more results
+    return searchContent(debouncedQuery, searchableContent, undefined, 0.1);
   }, [debouncedQuery, searchableContent, dataLoading]);
 
   // Function to highlight the matched query in text (simple React version)
@@ -292,9 +293,17 @@ export default function SearchComponent() {
   const filterCounts = useMemo(() => {
     const counts = { all: searchResults.length, blog: 0, project: 0, page: 0 };
     searchResults.forEach((result) => {
-      if (result.type === "blog") counts.blog++;
-      else if (result.type === "project") counts.project++;
-      else if (result.type === "page") counts.page++;
+      switch (result.type) {
+        case "blog":
+          counts.blog++;
+          break;
+        case "project":
+          counts.project++;
+          break;
+        case "page":
+          counts.page++;
+          break;
+      }
     });
     return counts;
   }, [searchResults]);
