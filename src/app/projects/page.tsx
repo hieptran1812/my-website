@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 const projectCategories = [
@@ -204,6 +204,34 @@ export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] = useState<
     (typeof projects)[0] | null
   >(null);
+
+  // Handle hash navigation to specific projects
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash && hash.startsWith("#project-")) {
+      const projectId = parseInt(hash.replace("#project-", ""));
+      const project = projects.find((p) => p.id === projectId);
+      if (project) {
+        // Small delay to ensure the element is rendered
+        setTimeout(() => {
+          const element = document.getElementById(`project-${projectId}`);
+          if (element) {
+            element.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+            // Optionally highlight the project
+            element.style.boxShadow = "0 0 20px var(--accent)";
+            element.style.borderColor = "var(--accent)";
+            setTimeout(() => {
+              element.style.boxShadow = "";
+              element.style.borderColor = "var(--card-border)";
+            }, 3000);
+          }
+        }, 100);
+      }
+    }
+  }, []);
 
   const filteredProjects =
     selectedCategory === "All"
@@ -559,6 +587,7 @@ export default function ProjectsPage() {
             {filteredProjects.map((project) => (
               <div
                 key={project.id}
+                id={`project-${project.id}`}
                 className="group overflow-hidden rounded-2xl border transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
                 style={{
                   backgroundColor: "var(--card-bg)",

@@ -69,7 +69,7 @@ export const getArticleSearchResults = (): SearchResult[] => {
   return articles.map((article: Article) => ({
     title: article.title,
     description: article.excerpt,
-    url: `/blog/${article.slug}`,
+    url: `/blog/${article.slug}`, // slug already includes category path
     type: "blog" as const,
     category: article.category,
     tags: article.tags,

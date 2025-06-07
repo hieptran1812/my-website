@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { searchContent, type SearchResult } from "@/lib/search";
-import { getAllArticles, type Article } from "@/data/articles";
+import type { Article } from "@/data/articles";
 import type { Project } from "@/data/projects";
 
 // Hook to fetch all searchable content dynamically
@@ -20,16 +20,24 @@ function useSearchableContent() {
         setIsLoading(true);
         setError(null);
 
-        // Fetch articles synchronously since they're local data
-        const articlesData = getAllArticles();
-        setArticles(articlesData);
+        // Fetch all blog articles from the API instead of hardcoded data
+        const [articlesResponse, projectsResponse] = await Promise.all([
+          fetch("/api/blog/articles"),
+          fetch("/api/projects"),
+        ]);
 
-        // Fetch projects from API
-        const projectsResponse = await fetch("/api/projects");
+        if (!articlesResponse.ok) {
+          throw new Error("Failed to fetch articles");
+        }
         if (!projectsResponse.ok) {
           throw new Error("Failed to fetch projects");
         }
+
+        const articlesData = await articlesResponse.json();
         const projectsData = await projectsResponse.json();
+
+        // Set the fetched data
+        setArticles(articlesData.articles || []);
         setProjects(projectsData.projects || []);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to fetch data");
@@ -46,12 +54,14 @@ function useSearchableContent() {
   const searchableContent = useMemo(() => {
     const searchResults: SearchResult[] = [];
 
-    // Add articles
+    // Add articles with proper URL structure: /blog/slug
     articles.forEach((article) => {
+      // The slug already includes the category path, so we just need /blog/ prefix
+      const blogUrl = `/blog/${article.slug}`;
       searchResults.push({
         title: article.title,
         description: article.excerpt,
-        url: `/blog/${article.slug}`,
+        url: blogUrl,
         type: "blog",
         category: article.category,
         tags: article.tags,
@@ -62,12 +72,12 @@ function useSearchableContent() {
       });
     });
 
-    // Add projects
+    // Add projects with individual project pages
     projects.forEach((project) => {
       searchResults.push({
         title: project.title,
         description: project.description,
-        url: `/projects#project-${project.id}`,
+        url: `/projects/${project.id}`,
         type: "project",
         category: project.category,
         technologies: project.technologies,
@@ -174,6 +184,9 @@ export default function SearchComponent() {
   const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [selectedFilter, setSelectedFilter] = useState<string>("all");
   const [isSearching, setIsSearching] = useState(false);
+  const [navigatingToResult, setNavigatingToResult] = useState<string | null>(
+    null
+  );
 
   // Use the custom hook to get searchable content
   const {
@@ -600,6 +613,12 @@ export default function SearchComponent() {
                     style={{
                       backgroundColor: "var(--card-bg)",
                       borderColor: "var(--card-border)",
+                      opacity: navigatingToResult === result.url ? 0.7 : 1,
+                    }}
+                    onClick={() => {
+                      setNavigatingToResult(result.url);
+                      // Reset after a delay in case navigation fails
+                      setTimeout(() => setNavigatingToResult(null), 3000);
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor = "var(--accent)";
@@ -709,7 +728,7 @@ export default function SearchComponent() {
                               )}
                           </div>
                           <h3
-                            className="text-xl lg:text-2xl font-bold mb-3 transition-colors duration-300 leading-tight"
+                            className="text-xl lg:text-2xl font-bold mb-3 transition-colors duration-300 leading-tight flex items-center gap-3"
                             style={{ color: "var(--text-primary)" }}
                             onMouseEnter={(e) => {
                               e.currentTarget.style.color = "var(--accent)";
@@ -720,6 +739,9 @@ export default function SearchComponent() {
                             }}
                           >
                             {highlightMatches(result.title, debouncedQuery)}
+                            {navigatingToResult === result.url && (
+                              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current"></div>
+                            )}
                           </h3>
                           <p
                             className="text-base leading-relaxed mb-4"
