@@ -1,11 +1,19 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 
 type ThemeContextType = {
   theme: "light" | "dark";
   toggleTheme: () => void;
   mounted: boolean;
+  isReadingMode: boolean;
+  setReadingMode: (mode: boolean) => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -13,6 +21,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [mounted, setMounted] = useState(false);
+  const [isReadingMode, setIsReadingMode] = useState(false);
 
   // Initialize theme on mount
   useEffect(() => {
@@ -51,6 +60,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       root.classList.remove("dark");
     }
 
+    // Apply reading mode class
+    if (isReadingMode) {
+      root.classList.add("reading-mode");
+    } else {
+      root.classList.remove("reading-mode");
+    }
+
     // Set color scheme for native elements
     root.style.colorScheme = theme;
 
@@ -65,19 +81,33 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     console.log(
       "Theme applied:",
       theme,
+      "Reading mode:",
+      isReadingMode,
       "- HTML classes:",
       root.classList.toString(),
       "- Color scheme:",
       root.style.colorScheme
     );
-  }, [theme, mounted]);
+  }, [theme, mounted, isReadingMode]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
+  const setReadingMode = useCallback((mode: boolean) => {
+    setIsReadingMode(mode);
+  }, []);
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, mounted }}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        toggleTheme,
+        mounted,
+        isReadingMode,
+        setReadingMode,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );

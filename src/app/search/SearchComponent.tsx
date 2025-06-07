@@ -914,7 +914,7 @@ export default function SearchComponent() {
               🔬 Research Highlights
             </h2>
             <p
-              className="text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed"
+              className="text-xl max-w-3xl mx-auto leading-relaxed"
               style={{ color: "var(--text-secondary)" }}
             >
               Discover cutting-edge research, technical insights, and innovative

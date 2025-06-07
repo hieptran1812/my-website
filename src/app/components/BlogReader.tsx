@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "../ThemeProvider";
 import "katex/dist/katex.min.css";
 import MathJax from "./MathJax";
-// import "./BlogContent.css"; // Temporarily disabled due to @apply issues
+import "./BlogContent.css"; // Re-enabled for proper styling
 
 interface TocItem {
   id: string;
@@ -34,7 +34,7 @@ export default function BlogReader({
   author = "Hiep Tran",
   dangerouslySetInnerHTML,
 }: BlogReaderProps) {
-  const [isReadingMode, setIsReadingMode] = useState(false);
+  const { theme, isReadingMode, setReadingMode } = useTheme();
   const [fontSize, setFontSize] = useState(16);
   const [lineHeight, setLineHeight] = useState(1.6);
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
@@ -51,7 +51,6 @@ export default function BlogReader({
   // Add a state to track if the screen is small
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  const { theme } = useTheme();
   const contentRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
@@ -62,11 +61,11 @@ export default function BlogReader({
     const savedPreferences = localStorage.getItem("blog-reading-preferences");
     if (savedPreferences) {
       const preferences = JSON.parse(savedPreferences);
-      setIsReadingMode(preferences.isReadingMode || false);
+      setReadingMode(preferences.isReadingMode || false);
       setFontSize(preferences.fontSize || 16);
       setLineHeight(preferences.lineHeight || 1.6);
     }
-  }, []);
+  }, [setReadingMode]);
 
   useEffect(() => {
     localStorage.setItem(
@@ -403,21 +402,7 @@ export default function BlogReader({
   }, []);
 
   return (
-    <div className="min-h-screen transition-all duration-300">
-      {/* Reading Mode Overlay */}
-      <div
-        className={`fixed inset-0 z-0 transition-all duration-500 ${
-          isReadingMode ? "bg-amber-50 dark:bg-slate-900/90" : "bg-transparent"
-        }`}
-        style={{
-          backgroundColor: isReadingMode
-            ? theme === "dark"
-              ? "#1c1917" // Warm dark brown instead of slate
-              : "#fffbeb"
-            : "transparent",
-        }}
-      />
-
+    <div className="transition-all duration-300 relative">
       {/* Table of Contents - Fixed Left Sidebar */}
       {tocItems.length > 0 && (
         <div
@@ -702,7 +687,7 @@ export default function BlogReader({
               Eye Comfort
             </span>
             <button
-              onClick={() => setIsReadingMode(!isReadingMode)}
+              onClick={() => setReadingMode(!isReadingMode)}
               className={`relative w-10 h-5 rounded-full transition-colors duration-200 ${
                 isReadingMode ? "bg-amber-500" : "bg-gray-300 dark:bg-gray-600"
               }`}
@@ -1022,9 +1007,9 @@ export default function BlogReader({
 
       {/* Main Content - Always Centered */}
       <div className="relative z-10 w-full">
-        <div className="min-h-screen flex justify-center items-start py-12">
+        <div className="flex justify-center items-start py-12">
           <div
-            className="w-full max-w-4xl px-6"
+            className="w-full max-w-4xl px-6 mb-20"
             ref={contentRef}
             style={{
               margin: "0 auto",
@@ -1198,7 +1183,7 @@ export default function BlogReader({
 
             {/* Article Content */}
             <article
-              className="prose prose-xl max-w-none mx-auto"
+              className="prose prose-xl max-w-none mx-auto mb-16"
               style={{
                 fontSize: `${fontSize}px`,
                 lineHeight: lineHeight,
@@ -1254,7 +1239,7 @@ export default function BlogReader({
 
       {/* Mobile/Tablet Reading Controls (show on <lg screens) */}
       <div
-        className="lg:hidden fixed bottom-4 right-4 z-50 p-4 rounded-xl shadow-lg border backdrop-blur-md"
+        className="lg:hidden fixed bottom-20 right-4 z-50 p-4 rounded-xl shadow-lg border backdrop-blur-md"
         style={{
           backgroundColor: "var(--background)/95",
           borderColor: "var(--border)",
@@ -1265,7 +1250,7 @@ export default function BlogReader({
             Eye Comfort
           </span>
           <button
-            onClick={() => setIsReadingMode(!isReadingMode)}
+            onClick={() => setReadingMode(!isReadingMode)}
             className={`relative w-10 h-5 rounded-full transition-colors duration-200 ${
               isReadingMode ? "bg-amber-500" : "bg-gray-300 dark:bg-gray-600"
             }`}

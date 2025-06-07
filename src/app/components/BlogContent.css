@@ -41,7 +41,7 @@
 }
 
 .blog-content h4 {
-  @apply text-lg lg:text-xl font-medium mb-2 mt-4;
+  @apply text-xl font-medium mb-2 mt-4;
   color: var(--reading-text-color);
 }
 
@@ -549,4 +549,24 @@ html {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
+}
+
+/* Ensure footer is always visible in blog reader */
+.blog-reader-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure footer appears after blog content */
+.blog-reader-container + footer,
+.blog-reader-container ~ footer {
+  position: relative;
+  z-index: 10;
+  margin-top: 0;
+}
+
+/* Prevent any fixed overlays from covering footer */
+footer {
+  position: relative;
+  z-index: 100;
 }

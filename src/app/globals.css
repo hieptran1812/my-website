@@ -1381,3 +1381,57 @@ a:focus {
 .toc-exit {
   animation: toc-slide-out 0.3s ease-in;
 }
+
+/* Reading Mode - Eye Comfort Full Screen Background */
+.reading-mode {
+  --reading-bg-light: #fffbeb;
+  --reading-bg-dark: #1c1917;
+  --reading-text-light: #92400e;
+  --reading-text-dark: #f5e6d3;
+  --reading-accent-light: #b45309;
+  --reading-accent-dark: #fbbf24;
+}
+
+.reading-mode::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--reading-bg-light);
+  z-index: -10;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reading-mode.dark::before {
+  background-color: var(--reading-bg-dark);
+}
+
+/* Override body background in reading mode */
+.reading-mode body {
+  background-color: transparent !important;
+}
+
+/* Reading mode text color overrides */
+.reading-mode .blog-content,
+.reading-mode article {
+  color: var(--reading-text-light);
+}
+
+.reading-mode.dark .blog-content,
+.reading-mode.dark article {
+  color: var(--reading-text-dark);
+}
+
+/* Reading mode for navigation and footer */
+.reading-mode nav,
+.reading-mode footer {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+}
+
+/* Smooth transition for reading mode */
+.reading-mode-transition {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
