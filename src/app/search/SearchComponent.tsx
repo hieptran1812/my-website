@@ -3,124 +3,113 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { searchContent, type SearchResult } from "@/lib/search";
+import { getAllArticles, type Article } from "@/data/articles";
+import type { Project } from "@/data/projects";
 
-interface SearchResult {
-  title: string;
-  description: string;
-  url: string;
-  type: "blog" | "page" | "project";
-  category?: string;
-  tags?: string[];
-  relevanceScore?: number;
+// Hook to fetch all searchable content dynamically
+function useSearchableContent() {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        // Fetch articles synchronously since they're local data
+        const articlesData = getAllArticles();
+        setArticles(articlesData);
+
+        // Fetch projects from API
+        const projectsResponse = await fetch("/api/projects");
+        if (!projectsResponse.ok) {
+          throw new Error("Failed to fetch projects");
+        }
+        const projectsData = await projectsResponse.json();
+        setProjects(projectsData.projects || []);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to fetch data");
+        console.error("Error fetching searchable content:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  // Convert to SearchResult format
+  const searchableContent = useMemo(() => {
+    const searchResults: SearchResult[] = [];
+
+    // Add articles
+    articles.forEach((article) => {
+      searchResults.push({
+        title: article.title,
+        description: article.excerpt,
+        url: `/blog/${article.slug}`,
+        type: "blog",
+        category: article.category,
+        tags: article.tags,
+        featured: article.featured,
+        date: article.date,
+        difficulty: article.difficulty,
+        readTime: article.readTime,
+      });
+    });
+
+    // Add projects
+    projects.forEach((project) => {
+      searchResults.push({
+        title: project.title,
+        description: project.description,
+        url: `/projects#project-${project.id}`,
+        type: "project",
+        category: project.category,
+        technologies: project.technologies,
+        featured: project.featured,
+        status: project.status,
+        highlights: project.highlights,
+      });
+    });
+
+    // Add static pages
+    const staticPages: SearchResult[] = [
+      {
+        title: "About",
+        description:
+          "Learn more about Hiep Tran - AI Research Engineer and Full-Stack Developer specializing in machine learning and web development.",
+        url: "/about",
+        type: "page",
+        tags: ["About", "Profile", "Background"],
+      },
+      {
+        title: "Projects",
+        description:
+          "Explore my portfolio of AI research projects, web applications, and open source contributions.",
+        url: "/projects",
+        type: "page",
+        tags: ["Portfolio", "Projects", "AI", "Web Development"],
+      },
+      {
+        title: "Contact",
+        description:
+          "Get in touch for collaboration opportunities, research discussions, or project inquiries.",
+        url: "/contact",
+        type: "page",
+        tags: ["Contact", "Collaboration", "Hire"],
+      },
+    ];
+
+    return [...searchResults, ...staticPages];
+  }, [articles, projects]);
+
+  return { searchableContent, isLoading, error };
 }
-
-const searchableContent: SearchResult[] = [
-  {
-    title: "Modern Portfolio with Next.js",
-    description:
-      "Building a modern, responsive portfolio website using Next.js 14, TypeScript, and Tailwind CSS with dark mode support.",
-    url: "/blog/modern-portfolio-nextjs",
-    type: "blog",
-    category: "Software Development",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
-  },
-  {
-    title: "AI-Powered Natural Language Processing",
-    description:
-      "Deep dive into NLP techniques using transformer models, including BERT, GPT, and custom implementations for text analysis.",
-    url: "/blog/nlp-transformers",
-    type: "blog",
-    category: "Machine Learning",
-    tags: ["NLP", "Transformers", "BERT", "GPT", "Deep Learning"],
-  },
-  {
-    title: "Computer Vision Research",
-    description:
-      "Advanced computer vision techniques for object detection, image segmentation, and real-time video analysis.",
-    url: "/blog/computer-vision",
-    type: "blog",
-    category: "Machine Learning",
-    tags: ["Computer Vision", "CNN", "YOLO", "OpenCV", "PyTorch"],
-  },
-  {
-    title: "Distributed Systems Architecture",
-    description:
-      "Designing scalable microservices architecture with Kubernetes, Docker, and cloud-native technologies.",
-    url: "/blog/distributed-systems",
-    type: "blog",
-    category: "Software Engineering",
-    tags: ["Microservices", "Kubernetes", "Docker", "Cloud", "Scalability"],
-  },
-  {
-    title: "Open Source Guide",
-    description:
-      "A comprehensive guide to contributing to open source projects, from finding projects to making your first contribution.",
-    url: "/blog/open-source-guide",
-    type: "blog",
-    category: "Software Development",
-    tags: ["Open Source", "Git", "GitHub", "Contributing"],
-  },
-  {
-    title: "About",
-    description:
-      "Learn more about Hiep Tran - AI Research Engineer and Full-Stack Developer specializing in machine learning and web development.",
-    url: "/about",
-    type: "page",
-    tags: ["About", "Profile", "Background"],
-  },
-  {
-    title: "Projects",
-    description:
-      "Explore my portfolio of AI research projects, web applications, and open source contributions.",
-    url: "/projects",
-    type: "page",
-    tags: ["Portfolio", "Projects", "AI", "Web Development"],
-  },
-  {
-    title: "Contact",
-    description:
-      "Get in touch for collaboration opportunities, research discussions, or project inquiries.",
-    url: "/contact",
-    type: "page",
-    tags: ["Contact", "Collaboration", "Hire"],
-  },
-  {
-    title: "Machine Learning Blog",
-    description:
-      "Articles and insights about machine learning, AI research, and data science methodologies.",
-    url: "/blog/machine-learning",
-    type: "blog",
-    category: "Machine Learning",
-    tags: ["Machine Learning", "AI", "Data Science", "Research"],
-  },
-  {
-    title: "Paper Reading Notes",
-    description:
-      "Summaries and insights from reading research papers in AI and machine learning with critical analysis.",
-    url: "/blog/paper-reading",
-    type: "blog",
-    category: "Research",
-    tags: ["Research Papers", "AI", "Academic", "Notes"],
-  },
-  {
-    title: "Cryptocurrency & Blockchain",
-    description:
-      "Exploring blockchain technology, DeFi protocols, and cryptocurrency development with smart contracts.",
-    url: "/blog/crypto",
-    type: "blog",
-    category: "Blockchain",
-    tags: ["Cryptocurrency", "Blockchain", "DeFi", "Web3"],
-  },
-  {
-    title: "Development Notes",
-    description:
-      "Quick notes, tips, and tricks for software development and programming best practices.",
-    url: "/blog/notes",
-    type: "blog",
-    category: "Development",
-    tags: ["Programming", "Tips", "Development", "Best Practices"],
-  },
-];
 
 const typeConfig = {
   blog: {
@@ -179,174 +168,19 @@ const typeConfig = {
   },
 };
 
-// Enhanced search algorithm with relevance scoring
-const calculateRelevance = (item: SearchResult, query: string): number => {
-  // Normalize input
-  const normalizedQuery = query.toLowerCase().trim();
-  const queryWords = normalizedQuery
-    .split(/\s+/)
-    .filter((word) => word.length > 0);
-
-  // If query is empty, return 0
-  if (queryWords.length === 0) return 0;
-
-  let score = 0;
-
-  // Normalize content fields
-  const normalizedTitle = item.title.toLowerCase();
-  const normalizedDescription = item.description.toLowerCase();
-  const normalizedCategory = item.category?.toLowerCase() || "";
-  const normalizedTags = item.tags?.map((tag) => tag.toLowerCase()) || [];
-
-  // Exact phrase matching (highest weight)
-  if (normalizedTitle.includes(normalizedQuery)) {
-    score += 150;
-    // Exact title match (perfect match)
-    if (normalizedTitle === normalizedQuery) {
-      score += 100;
-    }
-    // Title starts with query (very high relevance)
-    if (normalizedTitle.startsWith(normalizedQuery)) {
-      score += 75;
-    }
-  }
-
-  // Category exact phrase matching (high weight)
-  if (normalizedCategory.includes(normalizedQuery)) {
-    score += 100;
-    // Exact category match
-    if (normalizedCategory === normalizedQuery) {
-      score += 50;
-    }
-  }
-
-  // Tag exact phrase matching (high weight)
-  normalizedTags.some((tag) => {
-    if (tag.includes(normalizedQuery)) {
-      score += 75;
-      // Exact tag match
-      if (tag === normalizedQuery) {
-        score += 50;
-      }
-      return true;
-    }
-    return false;
-  });
-
-  // Description exact phrase matching (medium weight)
-  if (normalizedDescription.includes(normalizedQuery)) {
-    score += 50;
-  }
-
-  // Multi-word query word-by-word matching with position bonus
-  if (queryWords.length > 1) {
-    let titleWordMatches = 0;
-    let descriptionWordMatches = 0;
-    let categoryWordMatches = 0;
-    let tagWordMatches = 0;
-
-    // Check how many query words match in each field
-    queryWords.forEach((word, index) => {
-      // Title word matches
-      if (normalizedTitle.includes(word)) {
-        titleWordMatches++;
-        // Position bonus - earlier words in query matching has higher relevance
-        score += Math.max(15, 25 - index * 3);
-
-        // Word boundary matching bonus (matches whole words, not parts)
-        const titleWords = normalizedTitle.split(/\s+/);
-        if (titleWords.includes(word)) {
-          score += 15;
-        }
-      }
-
-      // Description word matches
-      if (normalizedDescription.includes(word)) {
-        descriptionWordMatches++;
-        score += Math.max(5, 10 - index * 2);
-
-        // Word boundary matching in description
-        const descWords = normalizedDescription.split(/\s+/);
-        if (descWords.includes(word)) {
-          score += 5;
-        }
-      }
-
-      // Category word matches
-      if (normalizedCategory.includes(word)) {
-        categoryWordMatches++;
-        score += Math.max(10, 20 - index * 2);
-      }
-
-      // Tag word matches
-      normalizedTags.forEach((tag) => {
-        if (tag.includes(word)) {
-          tagWordMatches++;
-          score += Math.max(10, 15 - index * 2);
-        }
-      });
-    });
-
-    // Proximity bonus - if we matched all words in the query in a field
-    if (titleWordMatches === queryWords.length) score += 50;
-    if (descriptionWordMatches === queryWords.length) score += 20;
-    if (categoryWordMatches === queryWords.length) score += 30;
-    if (tagWordMatches >= queryWords.length) score += 25;
-
-    // Percentage match bonus
-    const titleMatchPercentage = titleWordMatches / queryWords.length;
-    const descMatchPercentage = descriptionWordMatches / queryWords.length;
-    const categoryMatchPercentage = categoryWordMatches / queryWords.length;
-    const tagMatchPercentage = tagWordMatches / queryWords.length;
-
-    score += titleMatchPercentage * 30;
-    score += descMatchPercentage * 15;
-    score += categoryMatchPercentage * 20;
-    score += tagMatchPercentage * 20;
-  }
-
-  // Fuzzy matching for typo tolerance (only for single-word queries or each word in multi-word queries)
-  queryWords.forEach((word) => {
-    if (word.length > 3) {
-      // Only do fuzzy matching for words longer than 3 chars
-      // Simple edit distance simulation - check if title contains a substring with 1 character different
-      for (let i = 0; i < word.length - 2; i++) {
-        const fuzzyPattern = word.substring(0, i) + word.substring(i + 1);
-        if (normalizedTitle.includes(fuzzyPattern)) {
-          score += 15;
-          break;
-        }
-      }
-
-      // Check tags for fuzzy matches
-      normalizedTags.forEach((tag) => {
-        for (let i = 0; i < word.length - 2; i++) {
-          const fuzzyPattern = word.substring(0, i) + word.substring(i + 1);
-          if (tag.includes(fuzzyPattern)) {
-            score += 10;
-            break;
-          }
-        }
-      });
-    }
-  });
-
-  // Content type bonuses
-  if (item.type === "blog") score += 5; // Slight preference for blog content
-  if (item.type === "project") score += 3; // Some preference for projects
-
-  // Normalization - cap the score to avoid extreme values
-  score = Math.min(500, score);
-
-  return score;
-};
-
 export default function SearchComponent() {
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") || "");
   const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [selectedFilter, setSelectedFilter] = useState<string>("all");
   const [isSearching, setIsSearching] = useState(false);
+
+  // Use the custom hook to get searchable content
+  const {
+    searchableContent,
+    isLoading: dataLoading,
+    error: dataError,
+  } = useSearchableContent();
 
   // Debounce the query to prevent excessive searching
   useEffect(() => {
@@ -377,22 +211,14 @@ export default function SearchComponent() {
     }
   }, [debouncedQuery]);
 
-  // Enhanced search with relevance scoring
+  // Enhanced search with relevance scoring using the imported function
   const searchResults = useMemo(() => {
-    if (!debouncedQuery.trim()) return [];
+    if (!debouncedQuery.trim() || dataLoading) return [];
 
-    const results = searchableContent
-      .map((item) => ({
-        ...item,
-        relevanceScore: calculateRelevance(item, debouncedQuery),
-      }))
-      .filter((item) => item.relevanceScore > 0)
-      .sort((a, b) => (b.relevanceScore || 0) - (a.relevanceScore || 0));
+    return searchContent(debouncedQuery, searchableContent);
+  }, [debouncedQuery, searchableContent, dataLoading]);
 
-    return results;
-  }, [debouncedQuery]);
-
-  // Function to highlight the matched query in text
+  // Function to highlight the matched query in text (simple React version)
   const highlightMatches = (text: string, query: string) => {
     if (!query.trim()) return text;
 
@@ -453,7 +279,9 @@ export default function SearchComponent() {
   const filterCounts = useMemo(() => {
     const counts = { all: searchResults.length, blog: 0, project: 0, page: 0 };
     searchResults.forEach((result) => {
-      counts[result.type]++;
+      if (result.type === "blog") counts.blog++;
+      else if (result.type === "project") counts.project++;
+      else if (result.type === "page") counts.page++;
     });
     return counts;
   }, [searchResults]);
@@ -478,6 +306,47 @@ export default function SearchComponent() {
     "Research Papers",
     "Open Source",
   ];
+
+  // Handle data loading states
+  if (dataError) {
+    return (
+      <div className="text-center py-16">
+        <div className="max-w-md mx-auto">
+          <div
+            className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center"
+            style={{ backgroundColor: "var(--surface)" }}
+          >
+            <svg
+              className="w-12 h-12"
+              style={{ color: "var(--text-secondary)" }}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <h3
+            className="text-2xl font-bold mb-3"
+            style={{ color: "var(--text-primary)" }}
+          >
+            Error Loading Content
+          </h3>
+          <p
+            className="text-lg mb-8 leading-relaxed"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {dataError}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-12">
