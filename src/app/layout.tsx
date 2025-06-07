@@ -30,10 +30,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/about-profile.png",
         width: 1200,
-        height: 630,
-        alt: "Hiep Tran Portfolio",
+        height: 1200,
+        alt: "Hiep Tran - AI Engineer Profile",
       },
     ],
   },
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: "Hiep Tran - AI Engineer & Full-Stack Developer",
     description:
       "Experienced AI Engineer and Full-Stack Developer specializing in Machine Learning and scalable web applications.",
-    images: ["/twitter-image.jpg"],
+    images: ["/about-profile.png"],
   },
 };
 
