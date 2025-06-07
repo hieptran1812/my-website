@@ -392,8 +392,8 @@ export default function ContactPage() {
                         }}
                       >
                         <Image
-                          src="/twitter.svg"
-                          alt="Twitter"
+                          src="/x.svg"
+                          alt="X logo"
                           width={20}
                           height={20}
                         />
@@ -401,85 +401,6 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* FAQ Section */}
-            <div className="mt-16">
-              <h2
-                className="text-2xl font-bold mb-8 text-center flex items-center justify-center gap-2"
-                style={{ color: "var(--text-primary)" }}
-              >
-                <svg
-                  className="w-6 h-6"
-                  style={{ color: "var(--accent)" }}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                Frequently Asked Questions
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  {
-                    question: "What services do you offer?",
-                    answer:
-                      "I specialize in web development, machine learning solutions, and software engineering consulting. My expertise includes React, Next.js, TypeScript, and various ML frameworks.",
-                  },
-                  {
-                    question: "What is your typical response time?",
-                    answer:
-                      "I usually respond to all inquiries within 24-48 hours. For urgent matters, please indicate so in your message subject.",
-                  },
-                  {
-                    question: "Are you available for freelance work?",
-                    answer:
-                      "Yes, I'm open to freelance opportunities that align with my expertise and schedule. Feel free to reach out with project details.",
-                  },
-                  {
-                    question: "Do you offer mentoring services?",
-                    answer:
-                      "Yes, I offer mentoring for developers looking to advance their skills in web development and machine learning. Contact me for availability and rates.",
-                  },
-                ].map((faq, index) => (
-                  <div
-                    key={index}
-                    className="p-6 rounded-xl border transition-all duration-300 hover:shadow-lg hover:border-[var(--accent-subtle)]"
-                    style={{
-                      backgroundColor: "var(--surface)",
-                      borderColor: "var(--border)",
-                    }}
-                  >
-                    <h3
-                      className="text-lg font-medium mb-3 flex items-center gap-2"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      <span
-                        className="w-6 h-6 rounded-full text-xs flex items-center justify-center flex-shrink-0"
-                        style={{
-                          backgroundColor: "var(--accent-subtle)",
-                          color: "var(--accent)",
-                        }}
-                      >
-                        {index + 1}
-                      </span>
-                      {faq.question}
-                    </h3>
-                    <p
-                      className="text-base pl-8"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      {faq.answer}
-                    </p>
-                  </div>
-                ))}
               </div>
             </div>
           </div>

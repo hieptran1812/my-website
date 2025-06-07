@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 const ContactSection = () => {
   return (
@@ -148,6 +149,52 @@ const ContactSection = () => {
                   style={{ color: "var(--text-secondary)" }}
                 >
                   View my projects
+                </a>
+              </div>
+            </div>
+
+            {/* X (Twitter) */}
+            <div
+              className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 hover:shadow-sm"
+              style={{
+                backgroundColor: "var(--card-bg)",
+                borderColor: "var(--border)",
+              }}
+            >
+              <div
+                className="w-10 h-10 rounded-lg flex items-center justify-center group"
+                style={{ backgroundColor: "var(--accent-subtle)" }}
+              >
+                <Image
+                  src="/x.svg"
+                  alt="X logo"
+                  width={20}
+                  height={20}
+                  className="w-5 h-5 transition-all duration-200"
+                  style={{ filter: "invert(0) grayscale(1)" }}
+                  priority={false}
+                />
+                <style jsx>{`
+                  .group:hover img {
+                    filter: invert(0.5) sepia(1) saturate(10) hue-rotate(180deg) !important;
+                  }
+                `}</style>
+              </div>
+              <div className="flex-1">
+                <h3
+                  className="text-sm font-medium mb-1 transition-colors duration-300"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  X (Twitter)
+                </h3>
+                <a
+                  href="https://x.com/halleytran01"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm transition-colors duration-300 hover:underline"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  Follow me on X
                 </a>
               </div>
             </div>

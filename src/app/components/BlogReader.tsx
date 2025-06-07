@@ -407,12 +407,12 @@ export default function BlogReader({
       {/* Reading Mode Overlay */}
       <div
         className={`fixed inset-0 z-0 transition-all duration-500 ${
-          isReadingMode ? "bg-amber-50 dark:bg-amber-900/20" : "bg-transparent"
+          isReadingMode ? "bg-amber-50 dark:bg-slate-900/90" : "bg-transparent"
         }`}
         style={{
           backgroundColor: isReadingMode
             ? theme === "dark"
-              ? "#451a03"
+              ? "#1c1917" // Warm dark brown instead of slate
               : "#fffbeb"
             : "transparent",
         }}
@@ -1038,7 +1038,7 @@ export default function BlogReader({
                 style={{
                   color: isReadingMode
                     ? theme === "dark"
-                      ? "#fbbf24"
+                      ? "#f5e6d3" // Warm off-white for dark mode
                       : "#92400e"
                     : "var(--text-primary)",
                   fontSize: `clamp(1.5rem, ${fontSize * 1.8}px, 2.5rem)`,
@@ -1062,7 +1062,7 @@ export default function BlogReader({
                     style={{
                       color: isReadingMode
                         ? theme === "dark"
-                          ? "#fbbf24"
+                          ? "#e8d5b7" // Slightly darker warm color for author
                           : "#92400e"
                         : "var(--text-primary)",
                     }}
@@ -1150,7 +1150,7 @@ export default function BlogReader({
                   style={{
                     backgroundColor: isReadingMode
                       ? theme === "dark"
-                        ? "#78350f"
+                        ? "#52403d"
                         : "#fef3c7"
                       : "var(--surface-accent)",
                     color: isReadingMode
@@ -1174,12 +1174,12 @@ export default function BlogReader({
                       style={{
                         backgroundColor: isReadingMode
                           ? theme === "dark"
-                            ? "rgba(120, 53, 15, 0.3)"
+                            ? "rgba(82, 64, 61, 0.3)"
                             : "rgba(254, 243, 199, 0.5)"
                           : "var(--surface)",
                         borderColor: isReadingMode
                           ? theme === "dark"
-                            ? "#78350f"
+                            ? "#52403d"
                             : "#f3e8ff"
                           : "var(--border)",
                         color: isReadingMode
@@ -1204,7 +1204,7 @@ export default function BlogReader({
                 lineHeight: lineHeight,
                 color: isReadingMode
                   ? theme === "dark"
-                    ? "#fbbf24"
+                    ? "#f5e6d3"
                     : "#92400e"
                   : "var(--text-primary)",
               }}
@@ -1215,27 +1215,27 @@ export default function BlogReader({
                   {
                     "--reading-text-color": isReadingMode
                       ? theme === "dark"
-                        ? "#fbbf24"
+                        ? "#f5e6d3"
                         : "#92400e"
                       : "var(--text-primary)",
                     "--reading-text-secondary": isReadingMode
                       ? theme === "dark"
-                        ? "#d97706"
+                        ? "#e8d5b7"
                         : "#78350f"
                       : "var(--text-secondary)",
                     "--reading-accent": isReadingMode
                       ? theme === "dark"
-                        ? "#f59e0b"
+                        ? "#fbbf24"
                         : "#b45309"
                       : "var(--accent)",
                     "--reading-border": isReadingMode
                       ? theme === "dark"
-                        ? "#78350f"
+                        ? "#52403d"
                         : "#fef3c7"
                       : "var(--border)",
                     "--reading-surface": isReadingMode
                       ? theme === "dark"
-                        ? "rgba(120, 53, 15, 0.2)"
+                        ? "rgba(82, 64, 61, 0.2)"
                         : "rgba(254, 243, 199, 0.3)"
                       : "var(--surface)",
                   } as React.CSSProperties
@@ -1279,7 +1279,7 @@ export default function BlogReader({
           </button>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-2">
           <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
             Audio Reading
           </span>
@@ -1305,6 +1305,67 @@ export default function BlogReader({
             />
           </button>
         </div>
+
+        {/* Show progress bar and stop button only when playing */}
+        {isPlaying && (
+          <div className="mt-2">
+            <div className="flex items-center justify-between mb-1">
+              <span
+                className="text-xs"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Progress
+              </span>
+              <span
+                className="text-xs"
+                style={{ color: "var(--text-primary)" }}
+              >
+                {Math.round(progress)}%
+              </span>
+            </div>
+            <div
+              className="w-full h-1 rounded-full mb-2"
+              style={{ backgroundColor: "var(--border)" }}
+            >
+              <div
+                className="h-1 rounded-full transition-all duration-300"
+                style={{
+                  backgroundColor: "var(--accent)",
+                  width: `${progress}%`,
+                }}
+              />
+            </div>
+            <div className="flex justify-end">
+              <button
+                onClick={stopSpeech}
+                className="px-3 py-1 rounded-lg transition-all duration-200 text-xs"
+                style={{
+                  backgroundColor: "var(--surface)",
+                  color: "var(--text-secondary)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    "var(--surface-accent)";
+                  e.currentTarget.style.color = "var(--accent)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--surface)";
+                  e.currentTarget.style.color = "var(--text-secondary)";
+                }}
+                aria-label="Stop reading"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M6 6h12v12H6z" />
+                </svg>
+                <span className="ml-1">Stop</span>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Prevent duplicate TOC on small screens */}
