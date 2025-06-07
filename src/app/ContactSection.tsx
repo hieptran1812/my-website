@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 
 const ContactSection = () => {
   return (
@@ -165,20 +164,19 @@ const ContactSection = () => {
                 className="w-10 h-10 rounded-lg flex items-center justify-center group"
                 style={{ backgroundColor: "var(--accent-subtle)" }}
               >
-                <Image
-                  src="/x.svg"
-                  alt="X logo"
-                  width={20}
-                  height={20}
-                  className="w-5 h-5 transition-all duration-200"
-                  style={{ filter: "invert(0) grayscale(1)" }}
-                  priority={false}
-                />
-                <style jsx>{`
-                  .group:hover img {
-                    filter: invert(0.5) sepia(1) saturate(10) hue-rotate(180deg) !important;
-                  }
-                `}</style>
+                <svg
+                  className="w-5 h-5 transition-all duration-200 group-hover:scale-110"
+                  viewBox="0 0 120 120"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ display: "block" }}
+                >
+                  <rect width="120" height="120" rx="24" fill="#fff" />
+                  <path
+                    d="M86.4 33.6H99L72.6 62.1L103.2 99H80.7L61.8 76.2L40.8 99H28.2L56.1 68.1L27 33.6H50.1L66.3 53.7L86.4 33.6ZM82.2 92.1H88.8L48.3 40.2H41.1L82.2 92.1Z"
+                    fill="#000"
+                  />
+                </svg>
               </div>
               <div className="flex-1">
                 <h3
