@@ -173,7 +173,7 @@ export default function Footer() {
                   }}
                 >
                   <Image
-                    src="/about-profile.png"
+                    src="/about-profile.webp"
                     alt="Hiep Tran"
                     width={32}
                     height={32}

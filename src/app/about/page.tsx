@@ -481,7 +481,7 @@ export default function About() {
                   }}
                 >
                   <Image
-                    src="/about-profile.png"
+                    src="/about-profile.webp"
                     alt="Profile"
                     width={160}
                     height={160}

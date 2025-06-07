@@ -1,19 +1,26 @@
 import React from "react";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Me - Hiep Tran",
+  description:
+    "Get in touch with Hiep Tran for collaborations, opportunities, or just a friendly chat about technology and innovation.",
+};
 
 export default function ContactPage() {
   return (
     <div
-      className="flex flex-col min-h-screen transition-colors duration-300"
+      className="flex flex-col min-h-screen will-change-auto"
       style={{
         backgroundColor: "var(--background)",
         color: "var(--text-primary)",
       }}
     >
-      <main className="flex-1 flex flex-col transition-colors duration-300">
+      <main className="flex-1 flex flex-col">
         <div className="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
-            {/* Header section */}
+            {/* Header section - optimized animations */}
             <div className="text-center mb-16 relative">
               <div className="relative inline-block">
                 <h1
@@ -24,24 +31,21 @@ export default function ContactPage() {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
-                    textShadow: "0 4px 20px var(--accent)/20",
                   }}
                 >
                   Get in Touch
                 </h1>
-                {/* Enhanced decorative elements */}
+                {/* Static decorative elements to replace animations */}
                 <div
-                  className="absolute -top-4 -left-4 w-12 h-12 rounded-full opacity-20 animate-pulse"
+                  className="absolute -top-4 -left-4 w-12 h-12 rounded-full opacity-20"
                   style={{
                     backgroundColor: "var(--accent)",
-                    boxShadow: "0 0 20px var(--accent)/30",
                   }}
                 />
                 <div
-                  className="absolute -bottom-4 -right-4 w-8 h-8 rounded-full opacity-30 animate-pulse"
+                  className="absolute -bottom-4 -right-4 w-8 h-8 rounded-full opacity-30"
                   style={{
                     backgroundColor: "var(--accent-hover)",
-                    boxShadow: "0 0 15px var(--accent-hover)/30",
                   }}
                 />
                 <div
@@ -60,7 +64,7 @@ export default function ContactPage() {
                 I&apos;m always open to new opportunities, collaborations, or
                 just a friendly chat about technology and innovation.
               </p>
-              {/* Subtle background gradient */}
+              {/* Static background gradient instead of animated */}
               <div
                 className="absolute inset-0 -z-10 opacity-5"
                 style={{
@@ -71,7 +75,10 @@ export default function ContactPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
               {/* Contact Form Section */}
-              <div className="lg:col-span-3 order-2 lg:order-1">
+              <div
+                className="lg:col-span-3 order-2 lg:order-1"
+                style={{ contain: "layout" }}
+              >
                 <div
                   className="rounded-2xl p-6 md:p-8 shadow-lg border transition-all duration-300"
                   style={{

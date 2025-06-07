@@ -58,11 +58,11 @@ export default function HeroSection() {
   const getProfileImage = () => {
     if (!mounted) {
       // Return light mode image as fallback during hydration
-      return "/profile-light-mode.png";
+      return "/profile-light-mode.webp";
     }
     return theme === "dark"
-      ? "/profile-dark-mode.png"
-      : "/profile-light-mode.png";
+      ? "/profile-dark-mode.webp"
+      : "/profile-light-mode.webp";
   };
 
   // Get theme-specific colors for the outer glow
