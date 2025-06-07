@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import ArticleCard from "@/components/ArticleCard";
 import ArticleGrid from "@/components/ArticleGrid";
@@ -44,27 +43,36 @@ function convertToArticle(post: BlogPostMetadata): Article {
 }
 
 // Convert local Article to lib Article format
-function convertToLibArticle(article: Article): import("@/lib/blog").Article {
+function convertToLibArticle(
+  article: Article,
+  originalSlug?: string
+): import("@/lib/blog").Article {
   return {
-    id: article.link.split("/").pop() || "unknown",
+    id: originalSlug || article.link.split("/").pop() || "unknown",
     title: article.title,
     excerpt: article.summary,
     content: "",
     image: article.image || "/placeholder-image.jpg",
     category: article.category,
-    subcategory: "",
+    subcategory: article.category,
     date: article.date,
     readTime: article.readTime,
     tags: [],
     difficulty: "Intermediate" as const,
-    slug: article.link.split("/").pop() || "unknown",
+    slug: originalSlug || article.link.split("/").pop() || "unknown",
     featured: false,
   };
 }
 
 export default function BlogPage() {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [articleSlugs, setArticleSlugs] = useState<Map<string, string>>(
+    new Map()
+  );
   const [isLoading, setIsLoading] = useState(true);
+
+  // Items per page for lazy loading
+  const ITEMS_PER_PAGE = 9;
 
   useEffect(() => {
     async function fetchPosts() {
@@ -72,11 +80,21 @@ export default function BlogPage() {
         const response = await fetch("/api/blog/posts");
         const blogPosts: BlogPostMetadata[] = await response.json();
         const convertedArticles = blogPosts.map(convertToArticle);
+
+        // Create a map of article links to original slugs
+        const slugMap = new Map<string, string>();
+        blogPosts.forEach((post) => {
+          const articleLink = `/blog/${post.slug}`;
+          slugMap.set(articleLink, post.slug);
+        });
+
         setArticles(convertedArticles);
+        setArticleSlugs(slugMap);
       } catch (error) {
         console.error("Error loading blog posts:", error);
         // Fallback to empty array
         setArticles([]);
+        setArticleSlugs(new Map());
       } finally {
         setIsLoading(false);
       }
@@ -85,29 +103,35 @@ export default function BlogPage() {
     fetchPosts();
   }, []);
 
-  // Items per page for lazy loading
-  const ITEMS_PER_PAGE = 9;
-
-  // Lazy loading for articles (excluding the featured article)
-  const articlesForLazyLoading = articles.slice(1); // Remove first article (featured)
-
+  // Lazy loading for all articles - only initialize after articles are loaded
   const {
     data: displayedArticles,
     loading: loadingMore,
     hasMoreData,
     loadMore,
+    reset,
   } = useLazyLoading({
-    initialData: articlesForLazyLoading.slice(0, ITEMS_PER_PAGE),
+    initialData: [],
     loadMoreData: async (page: number, limit: number) => {
       // Simulate network delay for smooth loading experience
       await new Promise((resolve) => setTimeout(resolve, 500));
       const startIndex = (page - 1) * limit;
       const endIndex = startIndex + limit;
-      return articlesForLazyLoading.slice(startIndex, endIndex);
+      return articles.slice(startIndex, endIndex);
     },
     itemsPerPage: ITEMS_PER_PAGE,
-    hasMore: articlesForLazyLoading.length > ITEMS_PER_PAGE,
+    hasMore: false,
+    getItemId: (article: Article) => article.link,
   });
+
+  // Reset lazy loading when articles are loaded
+  useEffect(() => {
+    if (!isLoading && articles.length > 0) {
+      const initialData = articles.slice(0, ITEMS_PER_PAGE);
+      const hasMore = articles.length > ITEMS_PER_PAGE;
+      reset(initialData, hasMore);
+    }
+  }, [articles, isLoading, reset, ITEMS_PER_PAGE]);
 
   // Improved category count calculation using exact category matching
   const getCategoryCount = (categoryName: string) => {
@@ -281,93 +305,8 @@ export default function BlogPage() {
               </div>
             </FadeInWrapper>
 
-            {/* Featured Article */}
-            {articles.length > 0 && (
-              <FadeInWrapper duration={600} delay={400}>
-                <div className="mb-16">
-                  <h2 className="text-3xl font-bold mb-8 gradient-text-purple blog-content-stagger">
-                    Featured Article
-                  </h2>
-                  <a
-                    href={articles[0].link}
-                    className="group block rounded-xl overflow-hidden border transition-all duration-300 card-enhanced blog-content-stagger"
-                    style={{
-                      backgroundColor: "var(--card-bg)",
-                      borderColor: "var(--card-border)",
-                      animationDelay: "0.4s",
-                    }}
-                  >
-                    <div className="md:flex">
-                      <div className="md:w-1/2 relative overflow-hidden">
-                        <Image
-                          src={articles[0].image}
-                          alt={articles[0].title}
-                          width={600}
-                          height={400}
-                          className="w-full h-64 md:h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10 group-hover:to-black/20 transition-all duration-300"></div>
-                      </div>
-                      <div className="md:w-1/2 p-8">
-                        <div className="flex items-center gap-4 mb-4">
-                          <span
-                            className="px-3 py-1 text-sm font-medium rounded-full transform group-hover:scale-105 transition-transform duration-300"
-                            style={{
-                              backgroundColor: "var(--accent-subtle)",
-                              color: "var(--accent)",
-                            }}
-                          >
-                            {articles[0].category}
-                          </span>
-                          <span
-                            className="text-sm"
-                            style={{ color: "var(--text-muted)" }}
-                          >
-                            {articles[0].readTime}
-                          </span>
-                        </div>
-                        <h3
-                          className="text-2xl font-bold mb-4 transition-colors duration-300 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:text-transparent"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          {articles[0].title}
-                        </h3>
-                        <p
-                          className="mb-6 leading-relaxed"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
-                          {articles[0].summary}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <span
-                            className="text-sm"
-                            style={{ color: "var(--text-muted)" }}
-                          >
-                            {new Date(articles[0].date).toLocaleDateString(
-                              "en-US",
-                              {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                              }
-                            )}
-                          </span>
-                          <span
-                            className="font-medium transition-all duration-300 group-hover:text-blue-500 group-hover:translate-x-1"
-                            style={{ color: "var(--accent)" }}
-                          >
-                            Read More →
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </FadeInWrapper>
-            )}
-
             {/* All Articles with Lazy Loading */}
-            <FadeInWrapper duration={600} delay={500}>
+            <FadeInWrapper duration={600} delay={400}>
               <div>
                 <h2 className="text-3xl font-bold mb-8 gradient-text-orange blog-content-stagger">
                   All Articles
@@ -380,10 +319,13 @@ export default function BlogPage() {
                         <FadeInWrapper
                           key={`${article.link}-${index}`}
                           duration={400}
-                          delay={600 + index * 50}
+                          delay={500 + index * 50}
                         >
                           <ArticleCard
-                            article={convertToLibArticle(article)}
+                            article={convertToLibArticle(
+                              article,
+                              articleSlugs.get(article.link)
+                            )}
                             index={index}
                             variant="default"
                           />
@@ -401,20 +343,25 @@ export default function BlogPage() {
                   </>
                 ) : (
                   <div className="text-center py-12">
-                    <p className="text-lg text-gray-600">No articles found.</p>
+                    <p
+                      className="text-lg"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      No articles found.
+                    </p>
                   </div>
                 )}
               </div>
             </FadeInWrapper>
 
             {/* Newsletter CTA */}
-            <FadeInWrapper duration={600} delay={700}>
+            <FadeInWrapper duration={600} delay={500}>
               <div
                 className="mt-16 p-8 rounded-xl border blog-content-stagger relative overflow-hidden"
                 style={{
                   backgroundColor: "var(--card-bg)",
                   borderColor: "var(--card-border)",
-                  animationDelay: "0.8s",
+                  animationDelay: "0.6s",
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-cyan-500/5"></div>
