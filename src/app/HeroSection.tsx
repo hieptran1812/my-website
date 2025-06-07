@@ -48,6 +48,12 @@ export default function HeroSection() {
   const { theme, mounted } = useTheme();
   const [particles] = useState(() => generateParticles(80)); // Floating particles
 
+  // State for dynamic statistics
+  const [projectStats, setProjectStats] = useState<{
+    total: number;
+    totalStars: number;
+  } | null>(null);
+
   // Get the appropriate profile image based on theme
   const getProfileImage = () => {
     if (!mounted) {
@@ -104,6 +110,34 @@ export default function HeroSection() {
 
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, currentTitle]);
+
+  // Fetch project statistics
+  useEffect(() => {
+    const fetchProjectStats = async () => {
+      try {
+        const response = await fetch("/api/projects");
+        if (response.ok) {
+          const data = await response.json();
+          const stats = {
+            total: data.total || 0,
+            totalStars:
+              data.projects?.reduce(
+                (sum: number, project: { stars?: number }) =>
+                  sum + (project.stars || 0),
+                0
+              ) || 0,
+          };
+          setProjectStats(stats);
+        }
+      } catch (error) {
+        console.error("Failed to fetch project stats:", error);
+        // Use fallback values if API fails
+        setProjectStats({ total: 8, totalStars: 1200 });
+      }
+    };
+
+    fetchProjectStats();
+  }, []);
 
   return (
     <section
@@ -502,7 +536,7 @@ export default function HeroSection() {
                 className="text-2xl font-bold mb-1"
                 style={{ color: "var(--text-primary)" }}
               >
-                5+
+                {projectStats ? `${projectStats.total}+` : "5+"}
               </div>
               <div className="text-xs" style={{ color: "var(--text-muted)" }}>
                 Projects
@@ -519,7 +553,11 @@ export default function HeroSection() {
                 className="text-2xl font-bold mb-1"
                 style={{ color: "var(--text-primary)" }}
               >
-                4K+
+                {projectStats
+                  ? projectStats.totalStars >= 1000
+                    ? `${Math.floor(projectStats.totalStars / 1000)}K+`
+                    : `${projectStats.totalStars}+`
+                  : "4K+"}
               </div>
               <div className="text-xs" style={{ color: "var(--text-muted)" }}>
                 GitHub Stars

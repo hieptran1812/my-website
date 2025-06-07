@@ -48,6 +48,9 @@ export default function BlogReader({
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
 
+  // Add a state to track if the screen is small
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
   const { theme } = useTheme();
   const contentRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -380,6 +383,22 @@ export default function BlogReader({
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
       }
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Add event listener for resize
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -1001,85 +1020,6 @@ export default function BlogReader({
         </div>
       </div>
 
-      {/* Table of Contents - Mobile */}
-      <div className="lg:hidden fixed top-20 right-4 z-50">
-        <button
-          onClick={() => setShowToc(!showToc)}
-          className="p-2 rounded-full shadow-md transition-all duration-300"
-          style={{
-            backgroundColor: "var(--surface)",
-            color: "var(--text-secondary)",
-            border: "1px solid var(--border)",
-          }}
-          aria-label="Toggle table of contents"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
-          </svg>
-        </button>
-
-        {showToc && tocItems.length > 0 && (
-          <div
-            className="mt-2 p-4 rounded-xl shadow-lg border backdrop-blur-md"
-            style={{
-              backgroundColor: "var(--background)/95",
-              borderColor: "var(--border)",
-            }}
-          >
-            <h3
-              className="text-sm font-semibold mb-3"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Table of Contents
-            </h3>
-            <div className="flex flex-col gap-2">
-              {tocItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`text-left w-full rounded-lg px-3 py-2 transition-all duration-200 flex items-center gap-2 ${
-                    activeSection === item.id
-                      ? "bg-amber-100 dark:bg-amber-800"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
-                  }`}
-                  style={{
-                    color:
-                      activeSection === item.id
-                        ? "var(--accent)"
-                        : "var(--text-primary)",
-                    fontWeight: activeSection === item.id ? "500" : "400",
-                  }}
-                  aria-label={`Go to section ${item.title}`}
-                >
-                  <span
-                    className="block w-1.5 h-1.5 rounded-full"
-                    style={{
-                      backgroundColor:
-                        activeSection === item.id
-                          ? "var(--accent)"
-                          : "transparent",
-                    }}
-                  />
-                  <span className="text-sm" style={{}}>
-                    {item.title}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
       {/* Main Content - Always Centered */}
       <div className="relative z-10 w-full">
         <div className="min-h-screen flex justify-center items-start py-12">
@@ -1312,32 +1252,65 @@ export default function BlogReader({
         </div>
       </div>
 
-      {/* Mobile Reading Controls */}
-      <div className="lg:hidden fixed bottom-4 right-4 z-50">
-        <button
-          onClick={() => setIsReadingMode(!isReadingMode)}
-          className={`w-12 h-12 rounded-full shadow-lg border-2 transition-all duration-300 ${
-            isReadingMode
-              ? "bg-amber-500 border-amber-600 text-white"
-              : "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300"
-          }`}
-          aria-label="Toggle reading mode"
-        >
-          <svg
-            className="w-6 h-6 mx-auto"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+      {/* Mobile/Tablet Reading Controls (show on <lg screens) */}
+      <div
+        className="lg:hidden fixed bottom-4 right-4 z-50 p-4 rounded-xl shadow-lg border backdrop-blur-md"
+        style={{
+          backgroundColor: "var(--background)/95",
+          borderColor: "var(--border)",
+        }}
+      >
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
+            Eye Comfort
+          </span>
+          <button
+            onClick={() => setIsReadingMode(!isReadingMode)}
+            className={`relative w-10 h-5 rounded-full transition-colors duration-200 ${
+              isReadingMode ? "bg-amber-500" : "bg-gray-300 dark:bg-gray-600"
+            }`}
+            aria-label="Toggle reading mode"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            <div
+              className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
+                isReadingMode ? "translate-x-5" : "translate-x-0.5"
+              }`}
             />
-          </svg>
-        </button>
+          </button>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
+            Audio Reading
+          </span>
+          <button
+            onClick={
+              isPlaying ? (isPaused ? resumeSpeech : pauseSpeech) : startSpeech
+            }
+            className={`relative w-10 h-5 rounded-full transition-colors duration-200 ${
+              isPlaying ? "bg-amber-500" : "bg-gray-300 dark:bg-gray-600"
+            }`}
+            aria-label={
+              isPlaying
+                ? isPaused
+                  ? "Resume reading"
+                  : "Pause reading"
+                : "Start reading"
+            }
+          >
+            <div
+              className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
+                isPlaying ? "translate-x-5" : "translate-x-0.5"
+              }`}
+            />
+          </button>
+        </div>
       </div>
+
+      {/* Prevent duplicate TOC on small screens */}
+      {tocItems.length > 0 && !isSmallScreen && showToc && (
+        <div className="toc-container">{/* Render TOC */}</div>
+      )}
     </div>
   );
 }
