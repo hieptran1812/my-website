@@ -1,6 +1,17 @@
 import { NextResponse } from "next/server";
-import { projects, getProjectsByCategory } from "@/data/projects";
-import type { Project } from "@/data/projects";
+import {
+  getAllProjects,
+  getProjectsByCategory as getProjectsByCategoryFromLib,
+  getProjectsByStatus,
+  getFeaturedProjects,
+  getLatestProjects,
+} from "@/lib/projects";
+import type { ProjectMetadata } from "@/lib/projects";
+
+// Implement caching for projects
+const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+let cachedProjects: ProjectMetadata[] | null = null;
+let lastCacheTime = 0;
 
 export async function GET(request: Request) {
   try {
@@ -10,36 +21,48 @@ export async function GET(request: Request) {
     const status = searchParams.get("status");
     const limit = searchParams.get("limit");
 
-    let filteredProjects: Project[] = projects;
-
-    // Apply filters
-    if (category && category !== "all") {
-      filteredProjects = getProjectsByCategory(category);
+    // Check cache validity
+    const now = Date.now();
+    if (!cachedProjects || now - lastCacheTime > CACHE_DURATION) {
+      console.log("Loading projects from markdown files...");
+      cachedProjects = await getAllProjects();
+      lastCacheTime = now;
     }
 
+    let filteredProjects: ProjectMetadata[] = cachedProjects;
+
+    // Apply filters using the appropriate utility functions
     if (featured === "true") {
-      filteredProjects = filteredProjects.filter((project) => project.featured);
+      filteredProjects = await getFeaturedProjects();
+    } else if (category && category !== "all") {
+      filteredProjects = await getProjectsByCategoryFromLib(category);
+    } else if (status) {
+      filteredProjects = await getProjectsByStatus(status);
     }
 
-    if (status) {
-      filteredProjects = filteredProjects.filter(
-        (project) => project.status === status
-      );
-    }
-
-    // Apply limit
+    // Apply limit - handle latest projects optimally
     if (limit) {
       const limitNum = parseInt(limit, 10);
       if (!isNaN(limitNum) && limitNum > 0) {
-        filteredProjects = filteredProjects.slice(0, limitNum);
+        if (!category && !featured && !status) {
+          // Use optimized getLatestProjects for better performance
+          filteredProjects = await getLatestProjects(limitNum);
+        } else {
+          filteredProjects = filteredProjects.slice(0, limitNum);
+        }
       }
     }
+
+    // Get all projects for metadata
+    const allProjects = cachedProjects;
 
     return NextResponse.json({
       projects: filteredProjects,
       total: filteredProjects.length,
-      categories: [...new Set(projects.map((p) => p.category))],
-      statuses: [...new Set(projects.map((p) => p.status))],
+      categories: [...new Set(allProjects.map((p) => p.category))],
+      statuses: [...new Set(allProjects.map((p) => p.status))],
+      cached: true, // Indicate that data is cached
+      lastUpdated: new Date(lastCacheTime).toISOString(),
     });
   } catch (error) {
     console.error("Error fetching projects:", error);

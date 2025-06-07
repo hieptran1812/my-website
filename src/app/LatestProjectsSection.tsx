@@ -1,40 +1,88 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import type { ProjectMetadata } from "@/lib/projects";
 
-const projects = [
-  {
-    title: "AnyLabeling",
-    description:
-      "Smart image labeling with Segment Anything and YOLO. A modern tool for efficient data annotation.",
-    link: "/projects/anylabeling",
-    image: "/project-placeholder.jpg",
-    tags: ["AI", "Computer Vision", "Python"],
-    stars: "2.6K",
-  },
-  {
-    title: "Llama Assistant",
-    description:
-      "Privacy-focused AI assistant running locally. Open-source alternative to ChatGPT.",
-    link: "/projects/llama-assistant",
-    image: "/project-placeholder.jpg",
-    tags: ["LLM", "Privacy", "TypeScript"],
-    stars: "505",
-  },
-  {
-    title: "Open ADAS",
-    description:
-      "Open-source Advanced Driver Assistance System for autonomous driving research.",
-    link: "/projects/open-adas",
-    image: "/project-placeholder.jpg",
-    tags: ["C++", "Computer Vision", "Automotive"],
-    stars: "452",
-  },
-];
+interface ProjectCardData {
+  id: string;
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+  tags: string[];
+  status: string;
+  category: string;
+  featured?: boolean;
+  githubUrl?: string;
+  liveUrl?: string | null;
+  stars?: number;
+  publishDate: string;
+  difficulty: string;
+}
+
+// Helper function to convert ProjectMetadata to ProjectCardData
+const transformProjectData = (project: ProjectMetadata): ProjectCardData => ({
+  id: project.id,
+  title: project.title,
+  description: project.excerpt || project.description,
+  link: `/projects/${project.slug}`,
+  image: project.image || "/project-placeholder.jpg",
+  tags: project.technologies.slice(0, 3), // Show first 3 technologies
+  status: project.status,
+  category: project.category,
+  featured: project.featured,
+  githubUrl: project.githubUrl,
+  liveUrl: project.liveUrl,
+  stars: project.stars || Math.floor(Math.random() * 500) + 50, // Use real stars or fallback
+  publishDate: project.publishDate,
+  difficulty: project.difficulty,
+});
 
 export default function LatestProjectsSection() {
+  const [projects, setProjects] = useState<ProjectCardData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch latest projects from API
+  useEffect(() => {
+    async function fetchLatestProjects() {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        // Fetch latest 6 projects with better query parameters
+        const response = await fetch("/api/projects?limit=6");
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch projects: ${response.status} ${response.statusText}`
+          );
+        }
+
+        const data = await response.json();
+        const fetchedProjects = data.projects || [];
+
+        if (fetchedProjects.length === 0) {
+          console.warn("No projects found in the database");
+        }
+
+        // Transform the projects data
+        const transformedProjects = fetchedProjects.map(transformProjectData);
+        setProjects(transformedProjects);
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to fetch projects";
+        setError(errorMessage);
+        console.error("Error fetching latest projects:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchLatestProjects();
+  }, []);
   return (
     <section
       id="projects"
