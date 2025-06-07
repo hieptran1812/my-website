@@ -1,12 +1,24 @@
 /* Blog Content Styles */
 .blog-content h1 {
-  @apply text-3xl lg:text-4xl font-bold mb-6 mt-8;
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700; /* font-bold */
+  margin-bottom: 1.5rem; /* mb-6 */
+  margin-top: 2rem; /* mt-8 */
   color: var(--reading-text-color);
   line-height: 1.2;
 }
 
+@media (min-width: 1024px) {
+  .blog-content h1 {
+    font-size: 2.25rem; /* text-4xl */
+  }
+}
+
 .blog-content h2 {
-  @apply text-2xl lg:text-3xl font-semibold mb-4 mt-8;
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 600; /* font-semibold */
+  margin-bottom: 1rem; /* mb-4 */
+  margin-top: 2rem; /* mt-8 */
   color: var(--reading-text-color);
   line-height: 1.3;
   border-bottom: 2px solid var(--reading-border);
@@ -14,9 +26,18 @@
 }
 
 .blog-content h3 {
-  @apply text-xl lg:text-2xl font-medium mb-3 mt-6;
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 500; /* font-medium */
+  margin-bottom: 0.75rem; /* mb-3 */
+  margin-top: 1.5rem; /* mt-6 */
   color: var(--reading-text-color);
   line-height: 1.4;
+}
+
+@media (min-width: 1024px) {
+  .blog-content h3 {
+    font-size: 1.5rem; /* lg:text-2xl */
+  }
 }
 
 .blog-content h4 {

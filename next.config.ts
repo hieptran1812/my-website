@@ -12,11 +12,9 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ["react-icons"],
     scrollRestoration: true,
   },
-  swcMinify: true,
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,

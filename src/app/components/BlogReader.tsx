@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "../ThemeProvider";
 import "katex/dist/katex.min.css";
 import MathJax from "./MathJax";
-import "./BlogContent.css";
+// import "./BlogContent.css"; // Temporarily disabled due to @apply issues
 
 interface TocItem {
   id: string;

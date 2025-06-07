@@ -45,7 +45,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     const hash = window.location.hash;
     if (hash && hash.startsWith("#project-")) {
-      const projectId = parseInt(hash.replace("#project-", ""));
+      const projectId = hash.replace("#project-", "");
       const project = projects.find((p) => p.id === projectId);
       if (project) {
         // Small delay to ensure the element is rendered
@@ -256,7 +256,7 @@ export default function ProjectsPage() {
                 >
                   <div className="relative h-48 overflow-hidden">
                     <Image
-                      src={project.image}
+                      src={project.image || "/project-placeholder.jpg"}
                       alt={project.title}
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-300"
@@ -433,7 +433,7 @@ export default function ProjectsPage() {
               >
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src={project.image}
+                    src={project.image || "/project-placeholder.jpg"}
                     alt={project.title}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
@@ -626,7 +626,7 @@ export default function ProjectsPage() {
             >
               <div className="relative h-64 md:h-80">
                 <Image
-                  src={selectedProject.image}
+                  src={selectedProject.image || "/project-placeholder.jpg"}
                   alt={selectedProject.title}
                   fill
                   className="object-cover"

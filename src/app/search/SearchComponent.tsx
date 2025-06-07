@@ -908,7 +908,7 @@ export default function SearchComponent() {
         <div className="space-y-8">
           <div className="text-center">
             <h2
-              className="text-3xl lg:text-4xl font-bold mb-4"
+              className="text-2xl lg:text-3xl font-bold mb-4"
               style={{ color: "var(--text-primary)" }}
             >
               🔬 Research Highlights
