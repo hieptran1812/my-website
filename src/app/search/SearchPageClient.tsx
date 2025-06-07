@@ -42,8 +42,8 @@ export default function SearchPageClient() {
                 <div className="absolute -bottom-2 right-8 w-2 h-2 bg-cyan-400 rounded-full animate-pulse delay-700 opacity-60"></div>
                 <div className="absolute bottom-4 left-16 w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse delay-1000 opacity-75"></div>
 
-                {/* Animated underline */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 rounded-full group-hover:w-full transition-all duration-1000 ease-out"></div>
+                {/* Animated underline (removed) */}
+                {/* <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 rounded-full group-hover:w-full transition-all duration-1000 ease-out"></div> */}
               </h1>
 
               {/* Floating particles */}

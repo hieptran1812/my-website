@@ -2,6 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import type { ProjectMetadata } from "@/lib/projects";
+
+// Define fallback for statusColors
+const statusColors: Record<string, React.CSSProperties> = {
+  Completed: { backgroundColor: "rgba(16, 185, 129, 0.8)", color: "#fff" },
+  "In Progress": { backgroundColor: "rgba(245, 158, 11, 0.8)", color: "#fff" },
+  Planned: { backgroundColor: "rgba(99, 102, 241, 0.8)", color: "#fff" },
+  "": { backgroundColor: "rgba(209, 213, 219, 0.8)", color: "#111" },
+};
 
 const projectCategories = [
   "All",
@@ -12,198 +21,25 @@ const projectCategories = [
   "Research",
 ];
 
-const projects = [
-  {
-    id: 1,
-    title: "AI-Powered Natural Language Processing Platform",
-    description:
-      "A comprehensive NLP platform built with transformer models for text analysis, sentiment analysis, and language understanding. Supports multiple languages and real-time processing.",
-    image: "/project-placeholder.jpg",
-    category: "Machine Learning",
-    technologies: [
-      "Python",
-      "PyTorch",
-      "Transformers",
-      "FastAPI",
-      "Docker",
-      "Kubernetes",
-    ],
-    githubUrl: "https://github.com/hieptran1812/nlp-platform",
-    liveUrl: "https://nlp-platform-demo.com",
-    featured: true,
-    status: "Production",
-    highlights: [
-      "98% accuracy on sentiment analysis",
-      "Supports 15+ languages",
-      "10K+ daily active users",
-      "Sub-100ms response time",
-    ],
-  },
-  {
-    id: 2,
-    title: "Distributed Machine Learning Training System",
-    description:
-      "Scalable ML training infrastructure using distributed computing to train large-scale deep learning models efficiently across multiple GPUs and nodes.",
-    image: "/project-placeholder.jpg",
-    category: "Machine Learning",
-    technologies: [
-      "Python",
-      "TensorFlow",
-      "Apache Spark",
-      "Kubernetes",
-      "Redis",
-      "PostgreSQL",
-    ],
-    githubUrl: "https://github.com/hieptran1812/distributed-ml-training",
-    liveUrl: null,
-    featured: true,
-    status: "Active Development",
-    highlights: [
-      "80% faster training time",
-      "Auto-scaling capabilities",
-      "Fault-tolerant architecture",
-      "MLflow integration",
-    ],
-  },
-  {
-    id: 3,
-    title: "Modern E-commerce Platform",
-    description:
-      "Full-stack e-commerce solution with advanced features including real-time inventory management, AI-powered recommendations, and comprehensive analytics dashboard.",
-    image: "/project-placeholder.jpg",
-    category: "Web Development",
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "PostgreSQL",
-      "Prisma",
-      "Stripe",
-      "Tailwind CSS",
-    ],
-    githubUrl: "https://github.com/hieptran1812/ecommerce-platform",
-    liveUrl: "https://ecommerce-demo.halleyverse.dev",
-    featured: true,
-    status: "Production",
-    highlights: [
-      "Mobile-first responsive design",
-      "AI-powered product recommendations",
-      "Real-time inventory tracking",
-      "Integrated payment processing",
-    ],
-  },
-  {
-    id: 4,
-    title: "Computer Vision Object Detection API",
-    description:
-      "RESTful API service for real-time object detection and classification using state-of-the-art YOLO and R-CNN models with custom training capabilities.",
-    image: "/project-placeholder.jpg",
-    category: "Machine Learning",
-    technologies: ["Python", "OpenCV", "YOLO", "FastAPI", "Docker", "AWS"],
-    githubUrl: "https://github.com/hieptran1812/object-detection-api",
-    liveUrl: "https://api.object-detection.com",
-    featured: false,
-    status: "Production",
-    highlights: [
-      "Real-time processing",
-      "Custom model training",
-      "RESTful API design",
-      "Cloud deployment",
-    ],
-  },
-  {
-    id: 5,
-    title: "Big Data Analytics Pipeline",
-    description:
-      "End-to-end data processing pipeline for analyzing large-scale datasets with real-time streaming capabilities and interactive visualization dashboards.",
-    image: "/project-placeholder.jpg",
-    category: "Data Science",
-    technologies: [
-      "Apache Kafka",
-      "Spark",
-      "Hadoop",
-      "Elasticsearch",
-      "Kibana",
-      "Python",
-    ],
-    githubUrl: "https://github.com/hieptran1812/big-data-pipeline",
-    liveUrl: null,
-    featured: false,
-    status: "Production",
-    highlights: [
-      "Processes 1M+ records/day",
-      "Real-time streaming",
-      "Interactive dashboards",
-      "Scalable architecture",
-    ],
-  },
-  {
-    id: 6,
-    title: "Open Source ML Model Registry",
-    description:
-      "Community-driven platform for sharing, versioning, and managing machine learning models with automated testing and deployment capabilities.",
-    image: "/project-placeholder.jpg",
-    category: "Open Source",
-    technologies: [
-      "Python",
-      "Django",
-      "PostgreSQL",
-      "Redis",
-      "Docker",
-      "GitHub Actions",
-    ],
-    githubUrl: "https://github.com/hieptran1812/ml-model-registry",
-    liveUrl: "https://ml-registry.org",
-    featured: false,
-    status: "Production",
-    highlights: [
-      "500+ community models",
-      "Automated testing",
-      "Version control",
-      "API integration",
-    ],
-  },
-  {
-    id: 7,
-    title: "Research: Few-Shot Learning for NLP",
-    description:
-      "Academic research project investigating novel approaches to few-shot learning in natural language processing, with published results in top-tier conferences.",
-    image: "/project-placeholder.jpg",
-    category: "Research",
-    technologies: [
-      "Python",
-      "PyTorch",
-      "Transformers",
-      "Weights & Biases",
-      "LaTeX",
-    ],
-    githubUrl: "https://github.com/hieptran1812/few-shot-nlp-research",
-    liveUrl: null,
-    featured: false,
-    status: "Published",
-    highlights: [
-      "Published in ACL 2024",
-      "15% improvement over baseline",
-      "Open-sourced implementation",
-      "Reproducible experiments",
-    ],
-  },
-];
-
-const statusColors = {
-  Production: {
-    backgroundColor: "var(--surface-accent)",
-    color: "var(--accent)",
-  },
-  "Active Development": { backgroundColor: "#fef3c7", color: "#d97706" },
-  Beta: { backgroundColor: "#dbeafe", color: "#2563eb" },
-  Published: { backgroundColor: "#f3e8ff", color: "#7c3aed" },
-};
-
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedProject, setSelectedProject] = useState<
-    (typeof projects)[0] | null
-  >(null);
+  const [selectedProject, setSelectedProject] =
+    useState<ProjectMetadata | null>(null);
+  const [projects, setProjects] = useState<ProjectMetadata[]>([]);
+
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        const res = await fetch("/api/projects");
+        if (!res.ok) throw new Error("Failed to fetch projects");
+        const data = await res.json();
+        setProjects(data.projects || []);
+      } catch {
+        setProjects([]);
+      }
+    }
+    fetchProjects();
+  }, []);
 
   // Handle hash navigation to specific projects
   useEffect(() => {
@@ -231,7 +67,7 @@ export default function ProjectsPage() {
         }, 100);
       }
     }
-  }, []);
+  }, [projects]);
 
   const filteredProjects =
     selectedCategory === "All"
@@ -279,8 +115,8 @@ export default function ProjectsPage() {
                 <div className="absolute -bottom-2 right-8 w-2 h-2 bg-cyan-400 rounded-full animate-pulse delay-700 opacity-60"></div>
                 <div className="absolute bottom-4 left-16 w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse delay-1000 opacity-75"></div>
 
-                {/* Animated underline */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 rounded-full group-hover:w-full transition-all duration-1000 ease-out"></div>
+                {/* Animated underline (removed) */}
+                {/* <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 rounded-full group-hover:w-full transition-all duration-1000 ease-out"></div> */}
               </h1>
 
               {/* Floating particles */}
