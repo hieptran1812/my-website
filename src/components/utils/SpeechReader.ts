@@ -362,9 +362,12 @@ export class SpeechReader {
     percentage = Math.max(0, Math.min(100, percentage));
 
     // Calculate target character index based on percentage
-    const targetCharIndex = Math.floor(
+    let targetCharIndex = Math.floor(
       (percentage / 100) * this.currentText.length
     );
+
+    // Find the nearest word boundary for more accurate seeking
+    targetCharIndex = this.findNearestWordBoundary(targetCharIndex);
 
     // Find the segment that contains this character index
     const targetSegmentIndex = this.findSegmentByCharIndex(targetCharIndex);
@@ -377,18 +380,22 @@ export class SpeechReader {
     const wasPlaying = this.isPlaying;
     const wasPaused = this.isPaused;
 
-    // Stop current speech
+    // Stop current speech and clear timers
     this.stop();
 
-    // Update current position
+    // Update current position with enhanced tracking - CRITICAL for sync
     this.currentCharIndex = targetCharIndex;
     this.currentSegmentIndex = targetSegmentIndex;
+    this.lastCharIndexUpdate = Date.now();
 
-    // Highlight the target position
-    this.highlighter.highlightWordAtIndex(targetCharIndex);
-    if (this.options.autoScroll) {
-      this.highlighter.scrollToCurrentWord();
-    }
+    // Recalculate timing to match the seek position
+    const totalDuration = this.estimateDuration();
+    const elapsedDuration = (percentage / 100) * totalDuration;
+    this.startTime = Date.now() - elapsedDuration;
+    this.totalPausedDuration = 0;
+
+    // Enhanced highlighting at the target position
+    this.highlightWithSync(targetCharIndex);
 
     // Create new utterance from the target position
     const remainingText = this.getRemainingTextFromIndex(targetCharIndex);
@@ -397,18 +404,25 @@ export class SpeechReader {
       this.configureSpeech();
       this.setupSeekEventHandlers(targetCharIndex);
 
-      // Adjust start time for accurate progress calculation
-      const estimatedDuration = this.estimateDuration();
-      const elapsedDuration = (percentage / 100) * estimatedDuration;
-      this.startTime = Date.now() - elapsedDuration;
-      this.totalPausedDuration = 0;
+      // Recalibrate timing for accurate progress tracking
+      this.recalibrateAfterSeek(percentage);
 
       // Resume playback if it was playing before
       if (wasPlaying && !wasPaused) {
-        speechSynthesis.speak(this.utterance);
-        this.isPlaying = true;
+        try {
+          speechSynthesis.speak(this.utterance);
+          this.isPlaying = true;
+          this.isPaused = false;
+          this.startProgressTracking();
+          this.startBackupHighlighting();
+        } catch (error) {
+          console.error("Error resuming speech after seek:", error);
+          this.events.onError?.(new Error(`Failed to resume speech: ${error}`));
+        }
+      } else {
+        // If not playing, just update the visual state
+        this.isPlaying = false;
         this.isPaused = false;
-        this.startProgressTracking();
       }
     }
 
@@ -427,6 +441,33 @@ export class SpeechReader {
       }
     }
     return -1;
+  }
+
+  /**
+   * Find the nearest word boundary for more accurate seeking
+   */
+  private findNearestWordBoundary(charIndex: number): number {
+    if (!this.currentText || charIndex <= 0) return 0;
+    if (charIndex >= this.currentText.length)
+      return this.currentText.length - 1;
+
+    // Look for word boundaries (spaces, punctuation) around the target index
+    const start = Math.max(0, charIndex - 10);
+
+    // Find the nearest space or word boundary before the target
+    for (let i = charIndex; i >= start; i--) {
+      const char = this.currentText[i];
+      if (
+        char === " " ||
+        char === "\n" ||
+        char === "\t" ||
+        /[.!?]/.test(char)
+      ) {
+        return i + 1; // Start of next word
+      }
+    }
+
+    return charIndex;
   }
 
   /**
@@ -449,6 +490,7 @@ export class SpeechReader {
       this.isPlaying = true;
       this.isPaused = false;
       this.startProgressTracking();
+      this.startBackupHighlighting();
       this.events.onStart?.();
     };
 
@@ -494,11 +536,21 @@ export class SpeechReader {
 
     this.utterance.onboundary = (event) => {
       if (event.name === "word") {
-        this.currentCharIndex = startCharIndex + event.charIndex;
-        this.highlighter.highlightWordAtIndex(this.currentCharIndex);
+        // Calculate actual character index relative to original text
+        const actualCharIndex = startCharIndex + event.charIndex;
+
+        // Update current position with timing info
+        this.updateCurrentPosition(actualCharIndex);
+
+        // Handle heading pause logic
+        this.handleHeadingPause(actualCharIndex);
+
+        // Enhanced highlighting with better synchronization
+        this.highlightWithSync(actualCharIndex);
+
         this.events.onWordHighlight?.(
-          this.getWordAtIndex(this.currentCharIndex),
-          this.currentCharIndex
+          this.getWordAtIndex(actualCharIndex),
+          actualCharIndex
         );
       }
     };
@@ -855,5 +907,48 @@ export class SpeechReader {
     this.stopProgressTracking();
     this.stopBackupHighlighting();
     this.highlighter.destroy();
+  }
+
+  /**
+   * Recalibrate timing and progress after seeking operation
+   */
+  private recalibrateAfterSeek(targetPercentage: number): void {
+    // Calculate the accurate time adjustment for seeking
+    const totalDuration = this.estimateDuration();
+    const targetElapsedTime = (targetPercentage / 100) * totalDuration;
+
+    // Set the start time as if we had been playing from the beginning
+    this.startTime = Date.now() - targetElapsedTime;
+    this.totalPausedDuration = 0;
+    this.lastCharIndexUpdate = Date.now();
+
+    // Reset estimated WPM to recalculate from this point
+    this.estimatedWPM = 0;
+
+    // Force progress update immediately
+    if (this.isPlaying && !this.isPaused) {
+      const progress = this.getCurrentProgress();
+      this.events.onProgress?.(progress);
+    }
+  }
+
+  /**
+   * Enhanced seek validation to ensure accuracy
+   */
+  private validateSeekPosition(charIndex: number): boolean {
+    // Validate that the character index is within bounds
+    if (charIndex < 0 || charIndex >= this.currentText.length) {
+      console.warn(`Invalid character index for seeking: ${charIndex}`);
+      return false;
+    }
+
+    // Validate that we can find a word at this position
+    const wordAtIndex = this.getWordAtIndex(charIndex);
+    if (!wordAtIndex) {
+      console.warn(`No word found at character index: ${charIndex}`);
+      return false;
+    }
+
+    return true;
   }
 }
