@@ -5,6 +5,12 @@ import { useTheme } from "../ThemeProvider";
 import "katex/dist/katex.min.css";
 import MathJax from "./MathJax";
 import "./BlogContent.css"; // Re-enabled for proper styling
+import "../../components/styles/TextHighlight.css"; // Import text highlighting styles
+import { SpeechReader } from "../../components/utils/SpeechReader";
+import type {
+  SpeechReaderOptions,
+  SpeechReaderEvents,
+} from "../../components/utils/SpeechReader";
 
 interface TocItem {
   id: string;
@@ -53,8 +59,7 @@ export default function BlogReader({
 
   const contentRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
-  const currentTextRef = useRef<string>("");
+  const speechReaderRef = useRef<SpeechReader | null>(null);
 
   // Load reading preferences from localStorage, respecting ThemeProvider's reading mode control
   useEffect(() => {
@@ -85,135 +90,125 @@ export default function BlogReader({
     setLineHeight(Math.max(1.2, Math.min(2.0, newHeight)));
   };
 
-  // Text-to-speech functions
-  const getTextContent = () => {
-    if (!contentRef.current) return "";
-
-    // Find only the blog content article element
-    const blogContentElement = contentRef.current.querySelector(
-      "article .blog-content"
-    );
-
-    if (!blogContentElement) {
-      // Fallback: try to find article element
-      const articleElement = contentRef.current.querySelector("article");
-      if (!articleElement) return "";
-
-      const clone = articleElement.cloneNode(true) as HTMLElement;
-
-      // Remove unwanted elements from article
-      const unwantedSelectors = [
-        "button",
-        "nav",
-        ".reading-controls",
-        "script",
-        "style",
-        "svg", // Remove SVG icons
-        ".MathJax_Display", // Remove MathJax display elements if needed
-      ];
-
-      unwantedSelectors.forEach((selector) => {
-        const elements = clone.querySelectorAll(selector);
-        elements.forEach((el) => el.remove());
-      });
-
-      let text = clone.textContent || "";
-      text = text.replace(/\s+/g, " ").trim();
-      return `${title}. ${text}`;
+  // Initialize SpeechReader for text-to-speech with highlighting
+  const initializeSpeechReader = () => {
+    console.log("Initializing SpeechReader...");
+    if (!contentRef.current) {
+      console.log("No contentRef.current found");
+      return null;
     }
 
-    // Get only the blog content, excluding UI elements
-    const clone = blogContentElement.cloneNode(true) as HTMLElement;
+    const articleElement = contentRef.current.querySelector("article");
+    if (!articleElement) {
+      console.log("No article element found");
+      return null;
+    }
 
-    // Remove unwanted elements that might be within blog content
-    const unwantedSelectors = [
-      "button",
-      "nav",
-      ".reading-controls",
-      "script",
-      "style",
-      ".toc-container",
-      ".table-of-contents",
-      // Remove any embedded UI elements
-      "[data-toc]",
-      "[aria-label*='navigation']",
-    ];
+    console.log("Article element found:", articleElement);
 
-    unwantedSelectors.forEach((selector) => {
-      const elements = clone.querySelectorAll(selector);
-      elements.forEach((el) => el.remove());
-    });
+    const options: SpeechReaderOptions = {
+      highlightColors: {
+        wordHighlight: "#6fa8dc",
+        paragraphHighlight: "#cfe2f3",
+      },
+      wordsPerMinute: 200,
+      autoScroll: true,
+      rate: 0.9,
+      pitch: 1.0,
+      volume: 1.0,
+    };
 
-    // Clean up text and preserve paragraph structure
-    let text = clone.textContent || "";
+    const events: SpeechReaderEvents = {
+      onStart: () => {
+        setIsPlaying(true);
+        setIsPaused(false);
+      },
+      onEnd: () => {
+        setIsPlaying(false);
+        setIsPaused(false);
+        setProgress(0);
+      },
+      onPause: () => {
+        setIsPaused(true);
+      },
+      onResume: () => {
+        setIsPaused(false);
+      },
+      onError: (error) => {
+        console.error("Speech Reader Error:", error);
+        setIsPlaying(false);
+        setIsPaused(false);
+        setProgress(0);
+      },
+      onProgress: (progressPercent) => {
+        setProgress(progressPercent);
+      },
+    };
 
-    // Replace multiple spaces and line breaks with single spaces
-    text = text.replace(/\s+/g, " ").trim();
+    console.log("Creating SpeechReader with article element:", articleElement);
+    console.log("SpeechReader options:", options);
 
-    // Add title at the beginning for context
-    text = `${title}. ${text}`;
-
-    return text;
+    try {
+      const speechReader = new SpeechReader(articleElement, options, events);
+      console.log("SpeechReader created successfully:", speechReader);
+      return speechReader;
+    } catch (error) {
+      console.error("Error creating SpeechReader:", error);
+      return null;
+    }
   };
 
+  // Speech control functions using the new SpeechReader
   const startSpeech = () => {
-    if (speechSynthesis.speaking) {
-      speechSynthesis.cancel();
+    console.log("startSpeech called");
+
+    // Check for Web Speech API support
+    if (!("speechSynthesis" in window)) {
+      console.error("Web Speech API not supported");
+      alert("Speech synthesis is not supported in your browser.");
+      return;
     }
 
-    const text = getTextContent();
-    if (!text) return;
+    if (!speechReaderRef.current) {
+      console.log("Creating new SpeechReader...");
+      speechReaderRef.current = initializeSpeechReader();
+    }
 
-    currentTextRef.current = text;
-    const utterance = new SpeechSynthesisUtterance(text);
-
-    utterance.onstart = () => {
-      setIsPlaying(true);
-      setIsPaused(false);
-    };
-
-    utterance.onend = () => {
-      setIsPlaying(false);
-      setIsPaused(false);
-      setProgress(0);
-    };
-
-    utterance.onerror = () => {
-      setIsPlaying(false);
-      setIsPaused(false);
-      setProgress(0);
-    };
-
-    utterance.onboundary = (event) => {
-      if (event.name === "word") {
-        const progressPercent = (event.charIndex / text.length) * 100;
-        setProgress(progressPercent);
+    if (speechReaderRef.current) {
+      console.log("Starting speech...");
+      try {
+        speechReaderRef.current.start();
+      } catch (error) {
+        console.error("Error starting speech:", error);
+        const errorMessage =
+          error instanceof Error ? error.message : "Unknown error occurred";
+        alert(`Error starting speech: ${errorMessage}`);
       }
-    };
-
-    speechRef.current = utterance;
-    speechSynthesis.speak(utterance);
+    } else {
+      console.error("Failed to create SpeechReader");
+      alert(
+        "Failed to initialize speech reader. Please try refreshing the page."
+      );
+    }
   };
 
   const pauseSpeech = () => {
-    if (speechSynthesis.speaking && !speechSynthesis.paused) {
-      speechSynthesis.pause();
-      setIsPaused(true);
+    if (speechReaderRef.current) {
+      speechReaderRef.current.pause();
     }
   };
 
   const resumeSpeech = () => {
-    if (speechSynthesis.paused) {
-      speechSynthesis.resume();
-      setIsPaused(false);
+    if (speechReaderRef.current) {
+      speechReaderRef.current.resume();
     }
   };
 
   const stopSpeech = () => {
-    speechSynthesis.cancel();
-    setIsPlaying(false);
-    setIsPaused(false);
-    setProgress(0);
+    if (speechReaderRef.current) {
+      speechReaderRef.current.stop();
+      speechReaderRef.current = null;
+    }
   };
 
   // Extract headings and create TOC
@@ -303,8 +298,10 @@ export default function BlogReader({
   // Cleanup speech on unmount
   useEffect(() => {
     return () => {
-      if (speechSynthesis.speaking) {
-        speechSynthesis.cancel();
+      // Cleanup SpeechReader instance
+      if (speechReaderRef.current) {
+        speechReaderRef.current.stop();
+        speechReaderRef.current = null;
       }
     };
   }, []);

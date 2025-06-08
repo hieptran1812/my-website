@@ -1,0 +1,165 @@
+/* Enhanced Text Highlighting Styles for Audio Reading */
+
+/* Word highlighting animations */
+.text-highlight-word {
+  position: relative;
+  display: inline;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.highlighted-word {
+  background-color: #6fa8dc !important;
+  color: #000 !important;
+  border-radius: 3px !important;
+  padding: 1px 2px !important;
+  box-shadow: 0 1px 3px rgba(111, 168, 220, 0.3) !important;
+  animation: wordHighlightPulse 0.3s ease-in-out;
+  font-weight: 500 !important;
+  position: relative;
+  z-index: 10;
+}
+
+@keyframes wordHighlightPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 1px 3px rgba(111, 168, 220, 0.3);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 2px 6px rgba(111, 168, 220, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 1px 3px rgba(111, 168, 220, 0.3);
+  }
+}
+
+/* Paragraph highlighting */
+.highlighted-paragraph {
+  background-color: #cfe2f3 !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  margin: 4px 0 !important;
+  box-shadow: 0 2px 8px rgba(207, 226, 243, 0.4) !important;
+  animation: paragraphHighlightFade 0.4s ease-in-out;
+  position: relative;
+  border-left: 4px solid #6fa8dc !important;
+}
+
+@keyframes paragraphHighlightFade {
+  0% {
+    background-color: rgba(207, 226, 243, 0);
+    transform: translateX(-2px);
+  }
+  100% {
+    background-color: #cfe2f3;
+    transform: translateX(0);
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .highlighted-word {
+  background-color: #4a90e2 !important;
+  color: #fff !important;
+  box-shadow: 0 1px 3px rgba(74, 144, 226, 0.4) !important;
+}
+
+[data-theme="dark"] .highlighted-paragraph {
+  background-color: rgba(74, 144, 226, 0.2) !important;
+  border-left-color: #4a90e2 !important;
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3) !important;
+}
+
+/* Reading mode adjustments */
+.reading-mode .highlighted-word {
+  background-color: #d4a574 !important;
+  color: #2d1810 !important;
+  box-shadow: 0 1px 3px rgba(212, 165, 116, 0.4) !important;
+}
+
+.reading-mode .highlighted-paragraph {
+  background-color: rgba(212, 165, 116, 0.15) !important;
+  border-left-color: #d4a574 !important;
+  box-shadow: 0 2px 8px rgba(212, 165, 116, 0.2) !important;
+}
+
+/* Ensure highlighted text is above other elements */
+.highlighted-word,
+.highlighted-paragraph {
+  position: relative;
+  z-index: 5;
+}
+
+/* Smooth scrolling for highlighted elements */
+.highlighted-word:target,
+.highlighted-paragraph:target {
+  scroll-margin-top: 100px;
+}
+
+/* Remove highlights from non-readable elements */
+code .highlighted-word,
+pre .highlighted-word,
+.MathJax .highlighted-word,
+.katex .highlighted-word {
+  background-color: transparent !important;
+  color: inherit !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+code .highlighted-paragraph,
+pre .highlighted-paragraph,
+.MathJax .highlighted-paragraph,
+.katex .highlighted-paragraph {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  padding: inherit !important;
+  box-shadow: none !important;
+  animation: none !important;
+  border-left: none !important;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .highlighted-word,
+  .highlighted-paragraph {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .highlighted-word {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+  }
+
+  .highlighted-paragraph {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    border: 2px solid #000 !important;
+    border-left: 4px solid #000 !important;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+.highlighted-word:focus,
+.highlighted-paragraph:focus {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+
+/* Print styles - remove highlights in print */
+@media print {
+  .highlighted-word,
+  .highlighted-paragraph {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: inherit !important;
+    animation: none !important;
+  }
+}

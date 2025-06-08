@@ -1435,3 +1435,36 @@ a:focus {
 .reading-mode-transition {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Audio Reading Highlights */
+.highlighted-word {
+  transition: background-color 0.2s ease;
+  border-radius: 2px;
+  padding: 1px 2px;
+}
+
+.highlighted-paragraph {
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  margin: 2px 0;
+}
+
+.highlighted-paragraph.heading-highlight {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateX(2px);
+}
+
+.word-span {
+  display: inline;
+}
+
+/* Dark mode adjustments for highlights */
+@media (prefers-color-scheme: dark) {
+  .highlighted-word {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .highlighted-paragraph {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+}
