@@ -338,15 +338,39 @@ export class SpeechReader {
    * Stop the speech
    */
   public stop(): void {
+    // Cancel speech synthesis first
     speechSynthesis.cancel();
+
+    // Reset all state variables immediately
     this.isPlaying = false;
     this.isPaused = false;
     this.currentCharIndex = 0;
     this.currentSegmentIndex = 0;
     this.totalPausedDuration = 0;
-    this.highlighter.clearAllHighlights();
+    this.lastCharIndexUpdate = 0;
+    this.estimatedWPM = 0;
+    this.startTime = 0;
+    this.pausedTime = 0;
+    this.isWaitingAfterHeading = false;
+    this.lastHeadingEndIndex = -1;
+
+    // Clear all timers and highlighting
     this.stopProgressTracking();
     this.stopBackupHighlighting();
+    this.highlighter.clearAllHighlights();
+
+    // Clear utterance to prevent any residual events
+    if (this.utterance) {
+      this.utterance.onstart = null;
+      this.utterance.onend = null;
+      this.utterance.onerror = null;
+      this.utterance.onpause = null;
+      this.utterance.onresume = null;
+      this.utterance.onboundary = null;
+      this.utterance = null;
+    }
+
+    console.log("Speech stopped and state reset");
   }
 
   /**
