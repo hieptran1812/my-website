@@ -42,12 +42,16 @@ export class SpeechReader {
   private lastHeadingEndIndex = -1;
   private isWaitingAfterHeading = false;
   private currentCharIndex = 0;
+  private lastCharIndexUpdate = 0;
+  private estimatedWPM = 0;
+  private actualSpeechStartTime = 0;
   private textSegments: {
     text: string;
     startIndex: number;
     endIndex: number;
   }[] = [];
   private currentSegmentIndex = 0;
+  private highlightSyncTimer: number | null = null;
 
   constructor(
     container: HTMLElement,
@@ -255,15 +259,18 @@ export class SpeechReader {
       this.events.onResume?.();
     };
 
-    // Handle word boundary events for highlighting
+    // Handle word boundary events for highlighting - Enhanced synchronization
     this.utterance.onboundary = (event) => {
       if (event.name === "word") {
-        this.currentCharIndex = event.charIndex;
+        // Update current position with timing info
+        this.updateCurrentPosition(event.charIndex);
 
         // Handle heading pause logic
         this.handleHeadingPause(event.charIndex);
 
-        this.highlighter.highlightWordAtIndex(event.charIndex);
+        // Enhanced highlighting with better synchronization
+        this.highlightWithSync(event.charIndex);
+
         this.events.onWordHighlight?.(
           this.getWordAtIndex(event.charIndex),
           event.charIndex
@@ -339,6 +346,7 @@ export class SpeechReader {
     this.totalPausedDuration = 0;
     this.highlighter.clearAllHighlights();
     this.stopProgressTracking();
+    this.stopBackupHighlighting();
   }
 
   /**
@@ -516,11 +524,159 @@ export class SpeechReader {
   }
 
   /**
-   * Get current progress percentage
+   * Update current position with enhanced tracking
+   */
+  private updateCurrentPosition(charIndex: number): void {
+    this.currentCharIndex = charIndex;
+    this.lastCharIndexUpdate = Date.now();
+
+    // Calculate real-time WPM for better estimation
+    if (this.startTime && this.currentCharIndex > 0) {
+      const elapsed =
+        (Date.now() - this.startTime - this.totalPausedDuration) / 1000 / 60; // minutes
+      const wordsSpoken = this.getWordCountUpToIndex(charIndex);
+      if (elapsed > 0 && wordsSpoken > 0) {
+        this.estimatedWPM = wordsSpoken / elapsed;
+      }
+    }
+  }
+
+  /**
+   * Enhanced highlighting with synchronization fallbacks
+   */
+  private highlightWithSync(charIndex: number): void {
+    try {
+      // Primary highlighting method
+      this.highlighter.highlightWordAtIndex(charIndex);
+
+      // Auto-scroll if enabled
+      if (this.options.autoScroll) {
+        this.highlighter.scrollToCurrentWord();
+      }
+
+      // Start/update backup highlighting timer for sync correction
+      this.startBackupHighlighting();
+    } catch (error) {
+      console.warn("Primary highlighting failed, using fallback:", error);
+      // Fallback highlighting method
+      this.fallbackHighlighting(charIndex);
+    }
+  }
+
+  /**
+   * Start backup highlighting for sync correction
+   */
+  private startBackupHighlighting(): void {
+    this.stopBackupHighlighting();
+
+    this.highlightSyncTimer = window.setInterval(() => {
+      if (this.isPlaying && !this.isPaused) {
+        // Check if word boundary events are falling behind
+        const timeSinceLastUpdate = Date.now() - this.lastCharIndexUpdate;
+
+        // If no word boundary event for 2 seconds, use estimated position
+        if (timeSinceLastUpdate > 2000) {
+          const estimatedIndex = this.estimateCurrentCharIndex();
+          if (estimatedIndex > this.currentCharIndex) {
+            this.highlighter.highlightWordAtIndex(estimatedIndex);
+            this.currentCharIndex = estimatedIndex;
+            this.lastCharIndexUpdate = Date.now();
+          }
+        }
+      }
+    }, 500); // Check every 500ms
+  }
+
+  /**
+   * Stop backup highlighting timer
+   */
+  private stopBackupHighlighting(): void {
+    if (this.highlightSyncTimer) {
+      clearInterval(this.highlightSyncTimer);
+      this.highlightSyncTimer = null;
+    }
+  }
+
+  /**
+   * Estimate current character index based on time and WPM
+   */
+  private estimateCurrentCharIndex(): number {
+    if (!this.isPlaying || this.isPaused || !this.currentText)
+      return this.currentCharIndex;
+
+    const elapsed = Date.now() - this.startTime - this.totalPausedDuration;
+    const elapsedMinutes = elapsed / 1000 / 60;
+
+    // Use actual WPM if available, otherwise use configured WPM
+    const wpm =
+      this.estimatedWPM > 0
+        ? this.estimatedWPM
+        : this.options.wordsPerMinute || 200;
+    const wordsSpoken = wpm * elapsedMinutes;
+
+    // Convert words to character index (approximate)
+    const avgCharsPerWord =
+      this.currentText.length / this.currentText.split(/\s+/).length;
+    const estimatedCharIndex = Math.floor(wordsSpoken * avgCharsPerWord);
+
+    return Math.min(estimatedCharIndex, this.currentText.length - 1);
+  }
+
+  /**
+   * Get word count up to a specific character index
+   */
+  private getWordCountUpToIndex(charIndex: number): number {
+    if (!this.currentText || charIndex <= 0) return 0;
+
+    const textUpToIndex = this.currentText.substring(0, charIndex);
+    return textUpToIndex.split(/\s+/).filter((word) => word.length > 0).length;
+  }
+
+  /**
+   * Fallback highlighting method
+   */
+  private fallbackHighlighting(charIndex: number): void {
+    try {
+      // Simple word highlighting fallback
+      const wordAtIndex = this.getWordAtIndex(charIndex);
+      if (wordAtIndex) {
+        // Find the word element and highlight it manually
+        const wordElements =
+          this.container.querySelectorAll("[data-word-index]");
+        wordElements.forEach((element) => {
+          const elementIndex = parseInt(
+            element.getAttribute("data-word-index") || "0"
+          );
+          if (Math.abs(elementIndex - charIndex) < 10) {
+            // Close enough
+            element.classList.add("highlighted-word");
+            if (this.options.autoScroll) {
+              element.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          } else {
+            element.classList.remove("highlighted-word");
+          }
+        });
+      }
+    } catch (error) {
+      console.warn("Fallback highlighting also failed:", error);
+    }
+  }
+
+  /**
+   * Get current progress percentage - optimized for better synchronization
    */
   public getCurrentProgress(): number {
     if (!this.isPlaying || this.isPaused) return 0;
 
+    // Use character-based progress for better accuracy
+    if (this.currentText.length > 0) {
+      const characterProgress =
+        (this.currentCharIndex / this.currentText.length) * 100;
+      return Math.min(characterProgress, 100);
+    }
+
+    // Fallback to time-based calculation
     const elapsed = Date.now() - this.startTime - this.totalPausedDuration;
     const estimatedDuration = this.estimateDuration();
     return Math.min((elapsed / estimatedDuration) * 100, 100);
@@ -534,9 +690,7 @@ export class SpeechReader {
 
     this.progressTimer = window.setInterval(() => {
       if (this.isPlaying && !this.isPaused) {
-        const elapsed = Date.now() - this.startTime - this.totalPausedDuration;
-        const estimatedDuration = this.estimateDuration();
-        const progress = Math.min((elapsed / estimatedDuration) * 100, 100);
+        const progress = this.getCurrentProgress();
         this.events.onProgress?.(progress);
       }
     }, 100);
@@ -699,6 +853,7 @@ export class SpeechReader {
   public destroy(): void {
     this.stop();
     this.stopProgressTracking();
+    this.stopBackupHighlighting();
     this.highlighter.destroy();
   }
 }
