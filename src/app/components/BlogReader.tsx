@@ -53,6 +53,8 @@ export default function BlogReader({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [remainingTime, setRemainingTime] = useState(0);
 
   // Add a state to track if the screen is small
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -122,11 +124,16 @@ export default function BlogReader({
       onStart: () => {
         setIsPlaying(true);
         setIsPaused(false);
+        // Update duration when speech starts
+        if (speechReaderRef.current) {
+          setDuration(speechReaderRef.current.getTotalDuration());
+        }
       },
       onEnd: () => {
         setIsPlaying(false);
         setIsPaused(false);
         setProgress(0);
+        setRemainingTime(0);
       },
       onPause: () => {
         setIsPaused(true);
@@ -139,9 +146,14 @@ export default function BlogReader({
         setIsPlaying(false);
         setIsPaused(false);
         setProgress(0);
+        setRemainingTime(0);
       },
       onProgress: (progressPercent) => {
         setProgress(progressPercent);
+        // Update remaining time
+        if (speechReaderRef.current) {
+          setRemainingTime(speechReaderRef.current.getRemainingTime());
+        }
       },
     };
 
@@ -208,6 +220,19 @@ export default function BlogReader({
     if (speechReaderRef.current) {
       speechReaderRef.current.stop();
       speechReaderRef.current = null;
+    }
+    // Reset all states to initial values
+    setIsPlaying(false);
+    setIsPaused(false);
+    setProgress(0);
+    setDuration(0);
+    setRemainingTime(0);
+  };
+
+  // Seek to specific position in the audio
+  const seekSpeech = (percentage: number) => {
+    if (speechReaderRef.current) {
+      speechReaderRef.current.seekTo(percentage);
     }
   };
 
@@ -868,81 +893,14 @@ export default function BlogReader({
 
             {/* Play/Pause/Stop Controls */}
             <div className="flex items-center gap-2 mb-3">
-              <button
-                onClick={
-                  isPlaying
-                    ? isPaused
-                      ? resumeSpeech
-                      : pauseSpeech
-                    : startSpeech
-                }
-                className="flex-1 px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
-                style={{
-                  backgroundColor: isPlaying
-                    ? "var(--accent)"
-                    : "var(--surface)",
-                  color: isPlaying ? "white" : "var(--text-primary)",
-                }}
-                onMouseEnter={(e) => {
-                  if (!isPlaying) {
-                    e.currentTarget.style.backgroundColor =
-                      "var(--surface-accent)";
-                    e.currentTarget.style.color = "var(--accent)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isPlaying) {
-                    e.currentTarget.style.backgroundColor = "var(--surface)";
-                    e.currentTarget.style.color = "var(--text-primary)";
-                  }
-                }}
-                aria-label={
-                  isPlaying
-                    ? isPaused
-                      ? "Resume reading"
-                      : "Pause reading"
-                    : "Start reading"
-                }
-              >
-                {isPlaying ? (
-                  isPaused ? (
-                    <svg
-                      className="w-4 h-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  ) : (
-                    <svg
-                      className="w-4 h-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                    </svg>
-                  )
-                ) : (
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                )}
-                <span className="text-xs">
-                  {isPlaying ? (isPaused ? "Resume" : "Pause") : "Play"}
-                </span>
-              </button>
-
-              {isPlaying && (
+              {!isPlaying ? (
+                // Show Play button when not playing
                 <button
-                  onClick={stopSpeech}
-                  className="px-3 py-2 rounded-lg transition-all duration-200"
+                  onClick={startSpeech}
+                  className="flex-1 px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
                   style={{
                     backgroundColor: "var(--surface)",
-                    color: "var(--text-secondary)",
+                    color: "var(--text-primary)",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor =
@@ -951,18 +909,83 @@ export default function BlogReader({
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor = "var(--surface)";
-                    e.currentTarget.style.color = "var(--text-secondary)";
+                    e.currentTarget.style.color = "var(--text-primary)";
                   }}
-                  aria-label="Stop reading"
+                  aria-label="Start reading"
                 >
                   <svg
                     className="w-4 h-4"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path d="M6 6h12v12H6z" />
+                    <path d="M8 5v14l11-7z" />
                   </svg>
+                  <span className="text-xs font-medium">Play</span>
                 </button>
+              ) : (
+                // Show Pause/Continue and Stop buttons when playing
+                <>
+                  <button
+                    onClick={isPaused ? resumeSpeech : pauseSpeech}
+                    className="flex-1 px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+                    style={{
+                      backgroundColor: isPaused
+                        ? "var(--accent)"
+                        : "var(--accent)",
+                      color: "white",
+                    }}
+                    aria-label={isPaused ? "Resume reading" : "Pause reading"}
+                  >
+                    {isPaused ? (
+                      <svg
+                        className="w-4 h-4"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    ) : (
+                      <svg
+                        className="w-4 h-4"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                      </svg>
+                    )}
+                    <span className="text-xs font-medium">
+                      {isPaused ? "Continue" : "Pause"}
+                    </span>
+                  </button>
+
+                  <button
+                    onClick={stopSpeech}
+                    className="px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-1"
+                    style={{
+                      backgroundColor: "var(--surface)",
+                      color: "var(--text-secondary)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor =
+                        "var(--surface-accent)";
+                      e.currentTarget.style.color = "var(--accent)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "var(--surface)";
+                      e.currentTarget.style.color = "var(--text-secondary)";
+                    }}
+                    aria-label="Stop reading"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M6 6h12v12H6z" />
+                    </svg>
+                    <span className="text-xs font-medium">Stop</span>
+                  </button>
+                </>
               )}
             </div>
 
@@ -976,24 +999,66 @@ export default function BlogReader({
                   >
                     Progress
                   </span>
-                  <span
-                    className="text-xs"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    {Math.round(progress)}%
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="text-xs font-mono"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      {Math.floor(remainingTime / 60)}:
+                      {Math.floor(remainingTime % 60)
+                        .toString()
+                        .padStart(2, "0")}
+                    </span>
+                    <span
+                      className="text-xs"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      {Math.round(progress)}%
+                    </span>
+                  </div>
                 </div>
                 <div
-                  className="w-full h-1 rounded-full"
+                  className="w-full h-2 rounded-full cursor-pointer relative group"
                   style={{ backgroundColor: "var(--border)" }}
+                  onClick={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const clickX = e.clientX - rect.left;
+                    const percentage = (clickX / rect.width) * 100;
+                    seekSpeech(Math.max(0, Math.min(100, percentage)));
+                  }}
                 >
                   <div
-                    className="h-1 rounded-full transition-all duration-300"
+                    className="h-2 rounded-full transition-all duration-300"
                     style={{
                       backgroundColor: "var(--accent)",
                       width: `${progress}%`,
                     }}
                   />
+                  {/* Hover indicator */}
+                  <div
+                    className="absolute top-0 w-full h-2 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-200"
+                    style={{ backgroundColor: "var(--accent)" }}
+                  />
+                </div>
+                <div className="flex justify-between mt-1">
+                  <span
+                    className="text-xs"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    {Math.floor((duration - remainingTime) / 60)}:
+                    {Math.floor((duration - remainingTime) % 60)
+                      .toString()
+                      .padStart(2, "0")}
+                  </span>
+                  <span
+                    className="text-xs"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    {Math.floor(duration / 60)}:
+                    {Math.floor(duration % 60)
+                      .toString()
+                      .padStart(2, "0")}
+                  </span>
                 </div>
               </div>
             )}
@@ -1264,62 +1329,63 @@ export default function BlogReader({
           <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
             Audio Reading
           </span>
-          <button
-            onClick={
-              isPlaying ? (isPaused ? resumeSpeech : pauseSpeech) : startSpeech
-            }
-            className={`relative w-10 h-5 rounded-full transition-colors duration-200 ${
-              isPlaying ? "bg-amber-500" : "bg-gray-300 dark:bg-gray-600"
-            }`}
-            aria-label={
-              isPlaying
-                ? isPaused
-                  ? "Resume reading"
-                  : "Pause reading"
-                : "Start reading"
-            }
-          >
-            <div
-              className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
-                isPlaying ? "translate-x-5" : "translate-x-0.5"
-              }`}
-            />
-          </button>
-        </div>
-
-        {/* Show progress bar and stop button only when playing */}
-        {isPlaying && (
-          <div className="mt-2">
-            <div className="flex items-center justify-between mb-1">
-              <span
-                className="text-xs"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Progress
-              </span>
-              <span
-                className="text-xs"
-                style={{ color: "var(--text-primary)" }}
-              >
-                {Math.round(progress)}%
-              </span>
-            </div>
-            <div
-              className="w-full h-1 rounded-full mb-2"
-              style={{ backgroundColor: "var(--border)" }}
+          {!isPlaying ? (
+            <button
+              onClick={startSpeech}
+              className="px-3 py-1 rounded-lg transition-all duration-200 text-xs flex items-center gap-1"
+              style={{
+                backgroundColor: "var(--surface)",
+                color: "var(--text-primary)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "var(--surface-accent)";
+                e.currentTarget.style.color = "var(--accent)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "var(--surface)";
+                e.currentTarget.style.color = "var(--text-primary)";
+              }}
+              aria-label="Start reading"
             >
-              <div
-                className="h-1 rounded-full transition-all duration-300"
+              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              Play
+            </button>
+          ) : (
+            <div className="flex items-center gap-2">
+              <button
+                onClick={isPaused ? resumeSpeech : pauseSpeech}
+                className="px-3 py-1 rounded-lg transition-all duration-200 text-xs flex items-center gap-1"
                 style={{
                   backgroundColor: "var(--accent)",
-                  width: `${progress}%`,
+                  color: "white",
                 }}
-              />
-            </div>
-            <div className="flex justify-end">
+                aria-label={isPaused ? "Resume reading" : "Pause reading"}
+              >
+                {isPaused ? (
+                  <svg
+                    className="w-3 h-3"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-3 h-3"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                  </svg>
+                )}
+                {isPaused ? "Continue" : "Pause"}
+              </button>
+
               <button
                 onClick={stopSpeech}
-                className="px-3 py-1 rounded-lg transition-all duration-200 text-xs"
+                className="px-2 py-1 rounded-lg transition-all duration-200 text-xs"
                 style={{
                   backgroundColor: "var(--surface)",
                   color: "var(--text-secondary)",
@@ -1336,14 +1402,86 @@ export default function BlogReader({
                 aria-label="Stop reading"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="w-3 h-3"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path d="M6 6h12v12H6z" />
                 </svg>
-                <span className="ml-1">Stop</span>
               </button>
+            </div>
+          )}
+        </div>
+
+        {/* Show progress bar and stop button only when playing */}
+        {isPlaying && (
+          <div className="mt-2">
+            <div className="flex items-center justify-between mb-1">
+              <span
+                className="text-xs"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Progress
+              </span>
+              <div className="flex items-center gap-2">
+                <span
+                  className="text-xs font-mono"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  {Math.floor(remainingTime / 60)}:
+                  {Math.floor(remainingTime % 60)
+                    .toString()
+                    .padStart(2, "0")}
+                </span>
+                <span
+                  className="text-xs"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  {Math.round(progress)}%
+                </span>
+              </div>
+            </div>
+            <div
+              className="w-full h-2 rounded-full mb-2 cursor-pointer relative group"
+              style={{ backgroundColor: "var(--border)" }}
+              onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const percentage = (clickX / rect.width) * 100;
+                seekSpeech(Math.max(0, Math.min(100, percentage)));
+              }}
+            >
+              <div
+                className="h-2 rounded-full transition-all duration-300"
+                style={{
+                  backgroundColor: "var(--accent)",
+                  width: `${progress}%`,
+                }}
+              />
+              {/* Hover indicator */}
+              <div
+                className="absolute top-0 w-full h-2 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-200"
+                style={{ backgroundColor: "var(--accent)" }}
+              />
+            </div>
+            <div className="flex justify-between items-center">
+              <div
+                className="flex justify-between text-xs w-full"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                <span>
+                  {Math.floor((duration - remainingTime) / 60)}:
+                  {Math.floor((duration - remainingTime) % 60)
+                    .toString()
+                    .padStart(2, "0")}
+                </span>
+                <span>
+                  {Math.floor(duration / 60)}:
+                  {Math.floor(duration % 60)
+                    .toString()
+                    .padStart(2, "0")}
+                </span>
+              </div>
             </div>
           </div>
         )}

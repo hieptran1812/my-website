@@ -23,6 +23,7 @@ export interface SpeechReaderEvents {
   onError?: (error: Error) => void;
   onProgress?: (progress: number) => void;
   onWordHighlight?: (word: string, position: number) => void;
+  onSeek?: (position: number) => void;
 }
 
 export class SpeechReader {
@@ -37,8 +38,16 @@ export class SpeechReader {
   private progressTimer: number | null = null;
   private startTime = 0;
   private pausedTime = 0;
+  private totalPausedDuration = 0;
   private lastHeadingEndIndex = -1;
   private isWaitingAfterHeading = false;
+  private currentCharIndex = 0;
+  private textSegments: {
+    text: string;
+    startIndex: number;
+    endIndex: number;
+  }[] = [];
+  private currentSegmentIndex = 0;
 
   constructor(
     container: HTMLElement,
@@ -81,6 +90,34 @@ export class SpeechReader {
     }
 
     this.setupSpeechSynthesis();
+  }
+
+  /**
+   * Split text into segments for seeking capability
+   */
+  private splitTextIntoSegments(): void {
+    this.textSegments = [];
+    const sentences = this.currentText.split(/[.!?]+\s*/);
+    let currentIndex = 0;
+
+    for (const sentence of sentences) {
+      if (sentence.trim()) {
+        const trimmedSentence = sentence.trim();
+        const startIndex = this.currentText.indexOf(
+          trimmedSentence,
+          currentIndex
+        );
+        const endIndex = startIndex + trimmedSentence.length;
+
+        this.textSegments.push({
+          text: trimmedSentence,
+          startIndex,
+          endIndex,
+        });
+
+        currentIndex = endIndex;
+      }
+    }
   }
 
   /**
@@ -156,6 +193,7 @@ export class SpeechReader {
     }
 
     this.currentText = text;
+    this.splitTextIntoSegments();
     this.utterance = new SpeechSynthesisUtterance(text);
     this.configureSpeech();
 
@@ -168,6 +206,7 @@ export class SpeechReader {
       this.isPlaying = true;
       this.isPaused = false;
       this.startTime = Date.now();
+      this.totalPausedDuration = 0;
       this.startProgressTracking();
       this.events.onStart?.();
     };
@@ -211,7 +250,7 @@ export class SpeechReader {
 
     this.utterance.onresume = () => {
       this.isPaused = false;
-      this.startTime += Date.now() - this.pausedTime;
+      this.totalPausedDuration += Date.now() - this.pausedTime;
       this.startProgressTracking();
       this.events.onResume?.();
     };
@@ -219,6 +258,8 @@ export class SpeechReader {
     // Handle word boundary events for highlighting
     this.utterance.onboundary = (event) => {
       if (event.name === "word") {
+        this.currentCharIndex = event.charIndex;
+
         // Handle heading pause logic
         this.handleHeadingPause(event.charIndex);
 
@@ -264,6 +305,11 @@ export class SpeechReader {
   public pause(): void {
     if (this.isPlaying && !this.isPaused) {
       speechSynthesis.pause();
+      // Update state immediately for responsive UI
+      this.isPaused = true;
+      this.pausedTime = Date.now();
+      this.stopProgressTracking();
+      this.events.onPause?.();
     }
   }
 
@@ -273,6 +319,11 @@ export class SpeechReader {
   public resume(): void {
     if (this.isPlaying && this.isPaused) {
       speechSynthesis.resume();
+      // Update state immediately for responsive UI
+      this.isPaused = false;
+      this.totalPausedDuration += Date.now() - this.pausedTime;
+      this.startProgressTracking();
+      this.events.onResume?.();
     }
   }
 
@@ -283,8 +334,196 @@ export class SpeechReader {
     speechSynthesis.cancel();
     this.isPlaying = false;
     this.isPaused = false;
+    this.currentCharIndex = 0;
+    this.currentSegmentIndex = 0;
+    this.totalPausedDuration = 0;
     this.highlighter.clearAllHighlights();
     this.stopProgressTracking();
+  }
+
+  /**
+   * Seek to a specific position (0-100%)
+   */
+  public seekTo(percentage: number): void {
+    if (!this.currentText || this.textSegments.length === 0) {
+      console.warn("No text loaded for seeking");
+      return;
+    }
+
+    // Clamp percentage between 0 and 100
+    percentage = Math.max(0, Math.min(100, percentage));
+
+    // Calculate target character index based on percentage
+    const targetCharIndex = Math.floor(
+      (percentage / 100) * this.currentText.length
+    );
+
+    // Find the segment that contains this character index
+    const targetSegmentIndex = this.findSegmentByCharIndex(targetCharIndex);
+
+    if (targetSegmentIndex === -1) {
+      console.warn("Could not find segment for target position");
+      return;
+    }
+
+    const wasPlaying = this.isPlaying;
+    const wasPaused = this.isPaused;
+
+    // Stop current speech
+    this.stop();
+
+    // Update current position
+    this.currentCharIndex = targetCharIndex;
+    this.currentSegmentIndex = targetSegmentIndex;
+
+    // Highlight the target position
+    this.highlighter.highlightWordAtIndex(targetCharIndex);
+    if (this.options.autoScroll) {
+      this.highlighter.scrollToCurrentWord();
+    }
+
+    // Create new utterance from the target position
+    const remainingText = this.getRemainingTextFromIndex(targetCharIndex);
+    if (remainingText) {
+      this.utterance = new SpeechSynthesisUtterance(remainingText);
+      this.configureSpeech();
+      this.setupSeekEventHandlers(targetCharIndex);
+
+      // Adjust start time for accurate progress calculation
+      const estimatedDuration = this.estimateDuration();
+      const elapsedDuration = (percentage / 100) * estimatedDuration;
+      this.startTime = Date.now() - elapsedDuration;
+      this.totalPausedDuration = 0;
+
+      // Resume playback if it was playing before
+      if (wasPlaying && !wasPaused) {
+        speechSynthesis.speak(this.utterance);
+        this.isPlaying = true;
+        this.isPaused = false;
+        this.startProgressTracking();
+      }
+    }
+
+    // Trigger seek event
+    this.events.onSeek?.(percentage);
+  }
+
+  /**
+   * Find segment index by character index
+   */
+  private findSegmentByCharIndex(charIndex: number): number {
+    for (let i = 0; i < this.textSegments.length; i++) {
+      const segment = this.textSegments[i];
+      if (charIndex >= segment.startIndex && charIndex <= segment.endIndex) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  /**
+   * Get remaining text from a specific character index
+   */
+  private getRemainingTextFromIndex(charIndex: number): string {
+    if (charIndex >= this.currentText.length) {
+      return "";
+    }
+    return this.currentText.substring(charIndex);
+  }
+
+  /**
+   * Setup event handlers for seek operation
+   */
+  private setupSeekEventHandlers(startCharIndex: number): void {
+    if (!this.utterance) return;
+
+    this.utterance.onstart = () => {
+      this.isPlaying = true;
+      this.isPaused = false;
+      this.startProgressTracking();
+      this.events.onStart?.();
+    };
+
+    this.utterance.onend = () => {
+      this.isPlaying = false;
+      this.isPaused = false;
+      this.highlighter.clearAllHighlights();
+      this.stopProgressTracking();
+      this.events.onEnd?.();
+    };
+
+    this.utterance.onerror = (event: SpeechSynthesisErrorEvent) => {
+      const error = event.error;
+      if (error === "canceled" || error === "interrupted") {
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.highlighter.clearAllHighlights();
+        this.stopProgressTracking();
+        return;
+      }
+
+      console.error("Speech synthesis error:", error);
+      this.isPlaying = false;
+      this.isPaused = false;
+      this.highlighter.clearAllHighlights();
+      this.stopProgressTracking();
+      this.events.onError?.(new Error(`Speech synthesis error: ${error}`));
+    };
+
+    this.utterance.onpause = () => {
+      this.isPaused = true;
+      this.pausedTime = Date.now();
+      this.stopProgressTracking();
+      this.events.onPause?.();
+    };
+
+    this.utterance.onresume = () => {
+      this.isPaused = false;
+      this.totalPausedDuration += Date.now() - this.pausedTime;
+      this.startProgressTracking();
+      this.events.onResume?.();
+    };
+
+    this.utterance.onboundary = (event) => {
+      if (event.name === "word") {
+        this.currentCharIndex = startCharIndex + event.charIndex;
+        this.highlighter.highlightWordAtIndex(this.currentCharIndex);
+        this.events.onWordHighlight?.(
+          this.getWordAtIndex(this.currentCharIndex),
+          this.currentCharIndex
+        );
+      }
+    };
+  }
+
+  /**
+   * Get total duration in seconds
+   */
+  public getTotalDuration(): number {
+    return this.estimateDuration() / 1000;
+  }
+
+  /**
+   * Get remaining time in seconds
+   */
+  public getRemainingTime(): number {
+    if (!this.isPlaying) return this.getTotalDuration();
+
+    const elapsed = Date.now() - this.startTime - this.totalPausedDuration;
+    const estimatedDuration = this.estimateDuration();
+    const remaining = Math.max(0, estimatedDuration - elapsed);
+    return remaining / 1000;
+  }
+
+  /**
+   * Get current progress percentage
+   */
+  public getCurrentProgress(): number {
+    if (!this.isPlaying || this.isPaused) return 0;
+
+    const elapsed = Date.now() - this.startTime - this.totalPausedDuration;
+    const estimatedDuration = this.estimateDuration();
+    return Math.min((elapsed / estimatedDuration) * 100, 100);
   }
 
   /**
@@ -295,7 +534,7 @@ export class SpeechReader {
 
     this.progressTimer = window.setInterval(() => {
       if (this.isPlaying && !this.isPaused) {
-        const elapsed = Date.now() - this.startTime;
+        const elapsed = Date.now() - this.startTime - this.totalPausedDuration;
         const estimatedDuration = this.estimateDuration();
         const progress = Math.min((elapsed / estimatedDuration) * 100, 100);
         this.events.onProgress?.(progress);
@@ -401,19 +640,20 @@ export class SpeechReader {
     isPaused: boolean;
     progress: number;
     currentText: string;
+    duration: number;
+    remainingTime: number;
   } {
-    const elapsed = this.isPlaying ? Date.now() - this.startTime : 0;
-    const estimatedDuration = this.estimateDuration();
-    const progress =
-      estimatedDuration > 0
-        ? Math.min((elapsed / estimatedDuration) * 100, 100)
-        : 0;
+    const progress = this.getCurrentProgress();
+    const duration = this.getTotalDuration();
+    const remainingTime = this.getRemainingTime();
 
     return {
       isPlaying: this.isPlaying,
       isPaused: this.isPaused,
       progress,
       currentText: this.currentText,
+      duration,
+      remainingTime,
     };
   }
 
