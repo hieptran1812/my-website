@@ -543,7 +543,7 @@ export default function About() {
                 className="text-2xl md:text-3xl mb-6 font-semibold"
                 style={{ color: "var(--accent)" }}
               >
-                Computer Science Graduate & AI Research Engineer
+                AI Research Engineer & Software Developer
               </p>
               <p
                 className="text-lg max-w-4xl mx-auto leading-relaxed mb-8"
@@ -572,7 +572,7 @@ export default function About() {
                     color: "var(--accent)",
                   }}
                 >
-                  🔬 AI Researcher
+                  🔬 AI Engineer
                 </span>
                 <span
                   className="px-4 py-2 rounded-full text-sm font-medium"
@@ -581,7 +581,7 @@ export default function About() {
                     color: "var(--accent)",
                   }}
                 >
-                  💻 Full-Stack Engineer
+                  💻 Software Developer
                 </span>
               </div>
             </div>
