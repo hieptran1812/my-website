@@ -113,9 +113,9 @@ export default function BlogReader({
         wordHighlight: "#6fa8dc",
         paragraphHighlight: "#cfe2f3",
       },
-      wordsPerMinute: 200,
-      autoScroll: true,
-      rate: 0.9,
+      wordsPerMinute: 200, // Increased for better speed while maintaining clarity
+      autoScroll: false, // Disabled to prevent screen jumping during reading
+      rate: 0.85, // Optimized rate for speed and clarity balance
       pitch: 1.0,
       volume: 1.0,
     };

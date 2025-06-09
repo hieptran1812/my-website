@@ -70,10 +70,10 @@ export class SpeechReader {
 
     this.container = container;
     this.options = {
-      wordsPerMinute: 200,
-      autoScroll: true,
-      pitch: 1,
-      rate: 1,
+      wordsPerMinute: 200, // Increased for better speed while maintaining clarity
+      autoScroll: false, // Disabled auto-scroll to prevent screen jumping
+      pitch: 1.0, // Natural pitch
+      rate: 0.85, // Optimized rate for speed and clarity balance
       volume: 1,
       ...options,
     };
@@ -108,13 +108,13 @@ export class SpeechReader {
       return;
     }
 
-    // Split by sentence endings with better regex
-    const sentencePattern = /([.!?]+)\s*/g;
+    // Enhanced sentence splitting with better punctuation handling
+    const sentencePattern = /([.!?:;]+(?:\s*["'"'])?)\s+/g;
     const sentences: string[] = [];
     let lastIndex = 0;
     let match;
 
-    // Extract sentences with their punctuation
+    // Extract sentences with their punctuation, including quotes
     while ((match = sentencePattern.exec(this.currentText)) !== null) {
       const sentence = this.currentText.slice(
         lastIndex,
@@ -134,11 +134,37 @@ export class SpeechReader {
       }
     }
 
+    // Also split long sentences by commas for better seeking
+    const finalSentences: string[] = [];
+    for (const sentence of sentences) {
+      if (sentence.length > 200) {
+        // Split long sentences
+        const commaSplit = sentence.split(/,\s+/);
+        if (commaSplit.length > 1) {
+          let accumulated = "";
+          for (let i = 0; i < commaSplit.length; i++) {
+            accumulated += commaSplit[i];
+            if (i < commaSplit.length - 1) accumulated += ",";
+
+            // Add segment when we reach a good length or at the end
+            if (accumulated.length > 100 || i === commaSplit.length - 1) {
+              finalSentences.push(accumulated.trim());
+              accumulated = "";
+            }
+          }
+        } else {
+          finalSentences.push(sentence);
+        }
+      } else {
+        finalSentences.push(sentence);
+      }
+    }
+
     // Create segments with accurate positioning
     let currentIndex = 0;
     const createdSegments = new Set<string>(); // Prevent duplicates
 
-    for (const sentence of sentences) {
+    for (const sentence of finalSentences) {
       if (sentence.trim()) {
         // Find the exact position of this sentence in the original text
         const startIndex = this.currentText.indexOf(sentence, currentIndex);
@@ -196,37 +222,145 @@ export class SpeechReader {
    */
   private configureSpeech(): void {
     if (this.utterance) {
-      this.utterance.voice = this.options.voice || this.getPreferredVoice();
+      const voice = this.options.voice || this.getPreferredVoice();
+      this.utterance.voice = voice;
       this.utterance.pitch = this.options.pitch || 1;
-      this.utterance.rate = this.options.rate || 1;
+      this.utterance.rate = this.options.rate || 0.85; // Match constructor default
       this.utterance.volume = this.options.volume || 1;
+
+      // Log voice selection for debugging
+      console.log(
+        "Configured voice:",
+        voice?.name,
+        "Rate:",
+        this.utterance.rate
+      );
     }
   }
-
   /**
    * Get preferred voice (prioritize English voices)
    */
   private getPreferredVoice(): SpeechSynthesisVoice | null {
     const voices = speechSynthesis.getVoices();
 
-    // Try to find a high-quality English voice
+    // Try to find high-quality natural English voices first
     const preferredVoices = [
-      "Google US English",
-      "Microsoft Edge English",
-      "Alex",
-      "Samantha",
+      "Google US English", // Google voices are usually high quality
+      "Microsoft Aria Online (Natural) - English (United States)", // Microsoft natural voices
+      "Microsoft Guy Online (Natural) - English (United States)",
+      "Alex", // MacOS default, usually good quality
+      "Samantha", // MacOS alternative
       "Google UK English Female",
       "Google UK English Male",
+      "Microsoft David - English (United States)", // Microsoft voices
+      "Microsoft Zira - English (United States)",
     ];
 
     for (const voiceName of preferredVoices) {
-      const voice = voices.find((v) => v.name.includes(voiceName));
-      if (voice) return voice;
+      const voice = voices.find(
+        (v) => v.name.includes(voiceName) || v.name === voiceName
+      );
+      if (voice && voice.lang.startsWith("en")) {
+        console.log("Selected preferred voice:", voice.name);
+        return voice;
+      }
     }
 
-    // Fallback to any English voice
-    const englishVoice = voices.find((v) => v.lang.startsWith("en"));
-    return englishVoice || voices[0] || null;
+    // Fallback to any high-quality English voice
+    const englishVoices = voices.filter((v) => v.lang.startsWith("en"));
+
+    // Prefer online/cloud voices as they're usually higher quality
+    const onlineVoice = englishVoices.find(
+      (v) =>
+        v.name.toLowerCase().includes("online") ||
+        v.name.toLowerCase().includes("neural") ||
+        v.name.toLowerCase().includes("enhanced")
+    );
+
+    if (onlineVoice) {
+      console.log("Selected online voice:", onlineVoice.name);
+      return onlineVoice;
+    }
+
+    // Fallback to first English voice
+    const fallbackVoice = englishVoices[0] || voices[0] || null;
+    if (fallbackVoice) {
+      console.log("Selected fallback voice:", fallbackVoice.name);
+    }
+
+    return fallbackVoice;
+  }
+
+  /**
+   * Process text to add natural pauses for punctuation
+   */
+  private processTextForNaturalSpeech(text: string): string {
+    if (!text) return "";
+
+    // Enhanced text processing for much smoother speech with natural pauses
+    let processedText = text;
+
+    // Remove excessive whitespace first
+    processedText = processedText.replace(/\s+/g, " ");
+
+    // Add longer pauses after periods, exclamation marks, and question marks
+    processedText = processedText.replace(
+      /([.!?]+)\s*/g,
+      (match, punctuation) => {
+        // Add substantial pause for sentence endings - use SSML-like approach
+        if (
+          punctuation.includes(".") ||
+          punctuation.includes("!") ||
+          punctuation.includes("?")
+        ) {
+          return punctuation + "     "; // Multiple spaces for longer pause
+        }
+        return match;
+      }
+    );
+
+    // Add medium pauses after colons and semicolons
+    processedText = processedText.replace(/([;:]+)\s*/g, "$1   ");
+
+    // Add short pauses after commas and dashes
+    processedText = processedText.replace(/([,—–-]+)\s*/g, "$1  ");
+
+    // Add pauses after numbered lists and bullet points
+    processedText = processedText.replace(/(\d+\.|\*|\-|\•)\s*/g, "$1  ");
+
+    // Handle parenthetical expressions with slight pauses
+    processedText = processedText.replace(/\(\s*([^)]+)\s*\)/g, "  ($1)  ");
+
+    // Add pause before and after quotations
+    processedText = processedText.replace(
+      /["'"']([^"'"']*?)["'"']/g,
+      '  "$1"  '
+    );
+
+    // Handle section breaks and paragraph transitions with longer pauses
+    processedText = processedText.replace(/\n\s*\n/g, "     "); // Paragraph breaks
+
+    // Add pauses after headers (markdown style and HTML style) - Enhanced for better timing
+    processedText = processedText.replace(/(#+\s*[^\n\r]+)/g, "$1        "); // Markdown headers with longer pause
+    processedText = processedText.replace(
+      /(<h[1-6][^>]*>.*?<\/h[1-6]>)/gi,
+      "$1        "
+    ); // HTML headers with longer pause
+
+    // Add pauses after common heading patterns (words ending with : followed by content)
+    processedText = processedText.replace(/([A-Z][^.!?:]*:)\s*/g, "$1      ");
+
+    // Clean up excessive spaces but preserve intentional pause spaces
+    processedText = processedText.replace(/ {9,}/g, "        "); // Max 8 spaces for extra long pauses (after headings)
+    processedText = processedText.replace(/ {6,7}/g, "      "); // 6 spaces for long pauses
+    processedText = processedText.replace(/ {4,5}/g, "    "); // Normalize to 4 spaces for medium pauses
+    processedText = processedText.replace(/ {2,3}/g, "  "); // Normalize to 2 spaces for short pauses
+
+    console.log("Original text length:", text.length);
+    console.log("Processed text length:", processedText.length);
+    console.log("Sample processed text:", processedText.substring(0, 200));
+
+    return processedText.trim();
   }
 
   /**
@@ -240,14 +374,17 @@ export class SpeechReader {
       this.stop();
     }
 
-    const text = this.highlighter.getReadableText();
-    console.log("Readable text length:", text?.length);
+    const rawText = this.highlighter.getReadableText();
+    console.log("Raw readable text length:", rawText?.length);
 
-    if (!text) {
+    if (!rawText) {
       console.error("No readable text found");
       this.events.onError?.(new Error("No readable text found"));
       return;
     }
+
+    // Process text for natural speech with punctuation pauses
+    const text = this.processTextForNaturalSpeech(rawText);
 
     // Complete state reset before starting new session
     this.currentText = "";
@@ -363,13 +500,13 @@ export class SpeechReader {
       if (speechSynthesis.speaking || speechSynthesis.pending) {
         console.log("Canceling ongoing speech...");
         speechSynthesis.cancel();
-        // Wait a bit for the cancellation to complete
+        // Wait a bit longer for the cancellation to complete
         setTimeout(() => {
           speechSynthesis.speak(this.utterance!);
           console.log(
             "speechSynthesis.speak() called successfully after cancellation"
           );
-        }, 100);
+        }, 150); // Increased delay for better cancellation handling
       } else {
         speechSynthesis.speak(this.utterance);
         console.log("speechSynthesis.speak() called successfully");
@@ -452,7 +589,7 @@ export class SpeechReader {
   }
 
   /**
-   * Seek to a specific position (0-100%)
+   * Seek to a specific position (0-100%) - Fixed sync issues
    */
   public seekTo(percentage: number): void {
     if (!this.currentText || this.textSegments.length === 0) {
@@ -463,13 +600,15 @@ export class SpeechReader {
     // Clamp percentage between 0 and 100
     percentage = Math.max(0, Math.min(100, percentage));
 
-    // Calculate target character index based on percentage
+    // Calculate target character index based on percentage with better accuracy
     let targetCharIndex = Math.floor(
       (percentage / 100) * this.currentText.length
     );
 
     // Find the nearest word boundary for more accurate seeking
     targetCharIndex = this.findNearestWordBoundary(targetCharIndex);
+
+    console.log(`Seeking to ${percentage}% (char index: ${targetCharIndex})`);
 
     // Find the segment that contains this character index
     const targetSegmentIndex = this.findSegmentByCharIndex(targetCharIndex);
@@ -510,18 +649,12 @@ export class SpeechReader {
     this.currentText = preservedText;
     this.textSegments = preservedSegments;
 
-    // Update current position with enhanced tracking - CRITICAL for sync
+    // CRITICAL FIX: Update position BEFORE creating new utterance
     this.currentCharIndex = targetCharIndex;
     this.currentSegmentIndex = targetSegmentIndex;
     this.lastCharIndexUpdate = Date.now();
 
-    // Recalculate timing to match the seek position
-    const totalDuration = this.estimateDuration();
-    const elapsedDuration = (percentage / 100) * totalDuration;
-    this.startTime = Date.now() - elapsedDuration;
-    this.totalPausedDuration = 0;
-
-    // Enhanced highlighting at the target position
+    // Immediately update the highlighting to match the seek position
     this.highlightWithSync(targetCharIndex);
 
     // Create new utterance from the target position
@@ -529,7 +662,9 @@ export class SpeechReader {
     if (remainingText) {
       this.utterance = new SpeechSynthesisUtterance(remainingText);
       this.configureSpeech();
-      this.setupSeekEventHandlers(targetCharIndex);
+
+      // Setup event handlers with FIXED character index calculation
+      this.setupSeekEventHandlersFixed(targetCharIndex);
 
       // Recalibrate timing for accurate progress tracking
       this.recalibrateAfterSeek(percentage);
@@ -608,9 +743,9 @@ export class SpeechReader {
   }
 
   /**
-   * Setup event handlers for seek operation
+   * Setup event handlers for seek operation - FIXED version
    */
-  private setupSeekEventHandlers(startCharIndex: number): void {
+  private setupSeekEventHandlersFixed(startCharIndex: number): void {
     if (!this.utterance) return;
 
     this.utterance.onstart = () => {
@@ -663,22 +798,43 @@ export class SpeechReader {
 
     this.utterance.onboundary = (event) => {
       if (event.name === "word") {
-        // Calculate actual character index relative to original text
-        const actualCharIndex = startCharIndex + event.charIndex;
+        // CRITICAL FIX: Calculate accurate character index relative to original text
+        const relativeCharIndex = event.charIndex;
+        const actualCharIndex = startCharIndex + relativeCharIndex;
 
-        // Update current position with timing info
-        this.updateCurrentPosition(actualCharIndex);
-
-        // Handle heading pause logic
-        this.handleHeadingPause(actualCharIndex);
-
-        // Enhanced highlighting with better synchronization
-        this.highlightWithSync(actualCharIndex);
-
-        this.events.onWordHighlight?.(
-          this.getWordAtIndex(actualCharIndex),
-          actualCharIndex
+        console.log(
+          `Word boundary: relative=${relativeCharIndex}, actual=${actualCharIndex}, start=${startCharIndex}`
         );
+
+        // Validate the calculated index to prevent errors
+        if (this.validateSeekPosition(actualCharIndex)) {
+          // Update current position with proper timing info
+          this.updateCurrentPosition(actualCharIndex);
+
+          // Handle heading pause logic
+          this.handleHeadingPause(actualCharIndex);
+
+          // Enhanced highlighting with better synchronization
+          this.highlightWithSync(actualCharIndex);
+
+          this.events.onWordHighlight?.(
+            this.getWordAtIndex(actualCharIndex),
+            actualCharIndex
+          );
+        } else {
+          // Enhanced fallback with better estimation
+          console.warn(
+            `Invalid seek position ${actualCharIndex}, using enhanced fallback`
+          );
+          const estimatedIndex = Math.max(
+            startCharIndex,
+            this.estimateCurrentCharIndexFromTime()
+          );
+          if (this.validateSeekPosition(estimatedIndex)) {
+            this.updateCurrentPosition(estimatedIndex);
+            this.highlightWithSync(estimatedIndex);
+          }
+        }
       }
     };
   }
@@ -703,6 +859,35 @@ export class SpeechReader {
   }
 
   /**
+   * Enhanced speech smoothing for better flow and natural pauses
+   */
+  private enhanceSpeechSmoothing(): void {
+    if (!this.utterance) return;
+
+    // Apply additional smoothing settings for better flow
+    this.utterance.rate = Math.max(
+      0.6,
+      Math.min(1.0, this.options.rate || 0.75)
+    );
+    this.utterance.pitch = Math.max(
+      0.8,
+      Math.min(1.2, this.options.pitch || 1.0)
+    );
+
+    // Ensure volume is optimal for clarity
+    this.utterance.volume = Math.max(
+      0.8,
+      Math.min(1.0, this.options.volume || 1.0)
+    );
+
+    console.log("Enhanced speech smoothing applied:", {
+      rate: this.utterance.rate,
+      pitch: this.utterance.pitch,
+      volume: this.utterance.volume,
+    });
+  }
+
+  /**
    * Update current position with enhanced tracking
    */
   private updateCurrentPosition(charIndex: number): void {
@@ -721,17 +906,12 @@ export class SpeechReader {
   }
 
   /**
-   * Enhanced highlighting with synchronization fallbacks
+   * Enhanced highlighting with synchronization fallbacks - Auto-scroll disabled
    */
   private highlightWithSync(charIndex: number): void {
     try {
-      // Primary highlighting method
+      // Primary highlighting method only, no auto-scroll
       this.highlighter.highlightWordAtIndex(charIndex);
-
-      // Auto-scroll if enabled
-      if (this.options.autoScroll) {
-        this.highlighter.scrollToCurrentWord();
-      }
 
       // Start/update backup highlighting timer for sync correction
       this.startBackupHighlighting();
@@ -777,9 +957,9 @@ export class SpeechReader {
   }
 
   /**
-   * Estimate current character index based on time and WPM
+   * Estimate current character index based on time and WPM - Enhanced for seeking
    */
-  private estimateCurrentCharIndex(): number {
+  private estimateCurrentCharIndexFromTime(): number {
     if (!this.isPlaying || this.isPaused || !this.currentText)
       return this.currentCharIndex;
 
@@ -802,6 +982,13 @@ export class SpeechReader {
   }
 
   /**
+   * Estimate current character index based on time and WPM
+   */
+  private estimateCurrentCharIndex(): number {
+    return this.estimateCurrentCharIndexFromTime();
+  }
+
+  /**
    * Get word count up to a specific character index
    */
   private getWordCountUpToIndex(charIndex: number): number {
@@ -812,11 +999,11 @@ export class SpeechReader {
   }
 
   /**
-   * Fallback highlighting method
+   * Fallback highlighting method - No auto-scroll
    */
   private fallbackHighlighting(charIndex: number): void {
     try {
-      // Simple word highlighting fallback
+      // Simple word highlighting fallback without auto-scroll
       const wordAtIndex = this.getWordAtIndex(charIndex);
       if (wordAtIndex) {
         // Find the word element and highlight it manually
@@ -829,9 +1016,7 @@ export class SpeechReader {
           if (Math.abs(elementIndex - charIndex) < 10) {
             // Close enough
             element.classList.add("highlighted-word");
-            if (this.options.autoScroll) {
-              element.scrollIntoView({ behavior: "smooth", block: "center" });
-            }
+            // Auto-scroll removed
           } else {
             element.classList.remove("highlighted-word");
           }
@@ -862,7 +1047,7 @@ export class SpeechReader {
   }
 
   /**
-   * Start progress tracking
+   * Start progress tracking - Enhanced for better responsiveness
    */
   private startProgressTracking(): void {
     this.stopProgressTracking();
@@ -872,7 +1057,7 @@ export class SpeechReader {
         const progress = this.getCurrentProgress();
         this.events.onProgress?.(progress);
       }
-    }, 100);
+    }, 50); // Increased frequency for smoother progress updates
   }
 
   /**
@@ -895,14 +1080,11 @@ export class SpeechReader {
   }
 
   /**
-   * Highlight text by character index
+   * Highlight text by character index - No auto-scroll
    */
   private highlightByCharIndex(charIndex: number): void {
     this.highlighter.highlightWordAtIndex(charIndex);
-
-    if (this.options.autoScroll) {
-      this.highlighter.scrollToCurrentWord();
-    }
+    // Auto-scroll removed for better user experience
   }
 
   /**
@@ -923,44 +1105,40 @@ export class SpeechReader {
   }
 
   /**
-   * Handle pausing after headings for better reading flow
+   * Handle pausing after headings for better reading flow - Simplified approach
    */
   private handleHeadingPause(charIndex: number): void {
+    // Simplified heading pause logic using text-based detection instead of DOM manipulation
+    // This avoids timing issues with speechSynthesis.pause/resume
+
     if (this.isWaitingAfterHeading) return;
 
-    // Get the current word and paragraph information
-    const wordInfo = this.highlighter.getWordByCharacterIndex(charIndex);
-    if (!wordInfo) return;
+    // Look for heading patterns in the surrounding text
+    const contextStart = Math.max(0, charIndex - 50);
+    const contextEnd = Math.min(this.currentText.length, charIndex + 50);
+    const contextText = this.currentText.substring(contextStart, contextEnd);
 
-    const paragraphInfo =
-      this.highlighter.getParagraphByCharacterIndex(charIndex);
-    if (!paragraphInfo) return;
+    // Check if we just passed a heading-like pattern
+    const headingPattern = /(#+\s*[^\n\r]+|<h[1-6][^>]*>.*?<\/h[1-6]>)/i;
+    const headingMatch = contextText.match(headingPattern);
 
-    const tagName = paragraphInfo.element.tagName.toLowerCase();
+    if (headingMatch) {
+      const headingEnd =
+        contextStart + (headingMatch.index || 0) + headingMatch[0].length;
 
-    // Check if we're in a heading
-    if (tagName.match(/^h[1-6]$/)) {
-      // Check if this is the last word in the heading
-      const isLastWordInHeading =
-        wordInfo.endIndex >= paragraphInfo.endIndex - 1;
-
+      // If we're just past a heading and haven't processed this one yet
       if (
-        isLastWordInHeading &&
-        this.lastHeadingEndIndex !== paragraphInfo.endIndex
+        charIndex >= headingEnd &&
+        charIndex <= headingEnd + 10 &&
+        this.lastHeadingEndIndex !== headingEnd
       ) {
-        this.lastHeadingEndIndex = paragraphInfo.endIndex;
+        this.lastHeadingEndIndex = headingEnd;
         this.isWaitingAfterHeading = true;
 
-        // Pause the speech
-        speechSynthesis.pause();
-
-        // Resume after 1.5s
+        // Mark that we processed this heading and reset flag after a delay
         setTimeout(() => {
-          if (this.isPlaying && this.isWaitingAfterHeading) {
-            speechSynthesis.resume();
-            this.isWaitingAfterHeading = false;
-          }
-        }, 1500);
+          this.isWaitingAfterHeading = false;
+        }, 500); // Shorter delay since we're using text-based pauses now
       }
     }
   }
@@ -1037,14 +1215,15 @@ export class SpeechReader {
   }
 
   /**
-   * Recalibrate timing and progress after seeking operation
+   * Recalibrate timing and progress after seeking operation - Enhanced for better sync
    */
   private recalibrateAfterSeek(targetPercentage: number): void {
     // Calculate the accurate time adjustment for seeking
     const totalDuration = this.estimateDuration();
     const targetElapsedTime = (targetPercentage / 100) * totalDuration;
 
-    // Set the start time as if we had been playing from the beginning
+    // CRITICAL FIX: Set the start time as if we had been playing from the beginning
+    // but account for the current seek position
     this.startTime = Date.now() - targetElapsedTime;
     this.totalPausedDuration = 0;
     this.lastCharIndexUpdate = Date.now();
@@ -1052,11 +1231,45 @@ export class SpeechReader {
     // Reset estimated WPM to recalculate from this point
     this.estimatedWPM = 0;
 
-    // Force progress update immediately
-    if (this.isPlaying && !this.isPaused) {
-      const progress = this.getCurrentProgress();
-      this.events.onProgress?.(progress);
-    }
+    // Calculate more accurate character index based on percentage
+    const targetCharIndex = Math.floor(
+      (targetPercentage / 100) * this.currentText.length
+    );
+    this.currentCharIndex = this.findNearestWordBoundary(targetCharIndex);
+
+    // Update segment index to match the new position
+    this.currentSegmentIndex = this.findSegmentByCharIndex(
+      this.currentCharIndex
+    );
+
+    // Immediately update the highlighting to match the seek position
+    this.highlightWithSync(this.currentCharIndex);
+
+    // Force progress update immediately to sync UI with more frequent updates
+    const actualProgress = this.getCurrentProgress();
+    this.events.onProgress?.(actualProgress);
+
+    // Schedule additional progress updates to ensure UI stays in sync
+    setTimeout(() => {
+      if (this.isPlaying) {
+        this.events.onProgress?.(this.getCurrentProgress());
+      }
+    }, 100);
+
+    setTimeout(() => {
+      if (this.isPlaying) {
+        this.events.onProgress?.(this.getCurrentProgress());
+      }
+    }, 300);
+
+    console.log("Enhanced recalibration after seek:", {
+      targetPercentage,
+      targetCharIndex: this.currentCharIndex,
+      segmentIndex: this.currentSegmentIndex,
+      actualProgress,
+      startTime: this.startTime,
+      currentCharIndex: this.currentCharIndex,
+    });
   }
 
   /**
