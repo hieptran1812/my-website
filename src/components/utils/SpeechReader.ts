@@ -53,6 +53,34 @@ export class SpeechReader {
   private currentSegmentIndex = 0;
   private highlightSyncTimer: number | null = null;
 
+  // Enhanced precision tracking for seeking synchronization
+  private precisionTracking = {
+    baselineStartTime: 0,
+    baselineCharIndex: 0,
+    seekOffset: 0,
+    lastSyncPoint: 0,
+    charIndexHistory: [] as Array<{ charIndex: number; timestamp: number }>,
+    realTimeWPM: 0,
+    averageCharPerSecond: 0,
+  };
+
+  // Word-to-character mapping for precise positioning
+  private wordMappings: Array<{
+    wordIndex: number;
+    charStart: number;
+    charEnd: number;
+    wordText: string;
+  }> = [];
+
+  // Seeking state management
+  private seekingState = {
+    isInSeekMode: false,
+    targetPercentage: 0,
+    targetCharIndex: 0,
+    seekStartTime: 0,
+    preSeekCharIndex: 0,
+  };
+
   constructor(
     container: HTMLElement,
     options: SpeechReaderOptions,
@@ -589,7 +617,7 @@ export class SpeechReader {
   }
 
   /**
-   * Seek to a specific position (0-100%) - Fixed sync issues
+   * Seek to a specific position (0-100%) - Optimized for accurate sync
    */
   public seekTo(percentage: number): void {
     if (!this.currentText || this.textSegments.length === 0) {
@@ -600,15 +628,11 @@ export class SpeechReader {
     // Clamp percentage between 0 and 100
     percentage = Math.max(0, Math.min(100, percentage));
 
-    // Calculate target character index based on percentage with better accuracy
-    let targetCharIndex = Math.floor(
-      (percentage / 100) * this.currentText.length
-    );
+    console.log(`[SpeechReader] Seeking to ${percentage}%`);
 
-    // Find the nearest word boundary for more accurate seeking
+    // Enhanced character index calculation with segment-aware targeting
+    let targetCharIndex = this.calculatePreciseTargetIndex(percentage);
     targetCharIndex = this.findNearestWordBoundary(targetCharIndex);
-
-    console.log(`Seeking to ${percentage}% (char index: ${targetCharIndex})`);
 
     // Find the segment that contains this character index
     const targetSegmentIndex = this.findSegmentByCharIndex(targetCharIndex);
@@ -618,23 +642,91 @@ export class SpeechReader {
       return;
     }
 
+    // Store current state for restoration
     const wasPlaying = this.isPlaying;
     const wasPaused = this.isPaused;
-
-    // Preserve text and segments before stopping
     const preservedText = this.currentText;
     const preservedSegments = [...this.textSegments];
+    const preservedWordMappings = [...this.wordMappings];
 
-    // Stop current speech and clear timers
+    // Cancel current speech and reset state
+    this.cancelCurrentSpeech();
+
+    // Restore preserved data
+    this.currentText = preservedText;
+    this.textSegments = preservedSegments;
+    this.wordMappings = preservedWordMappings;
+
+    // Update position state FIRST - Critical for sync
+    this.updateSeekPosition(targetCharIndex, targetSegmentIndex, percentage);
+
+    // Immediately update highlighting to match seek position
+    this.synchronizeHighlightingToPosition(targetCharIndex);
+
+    // Force immediate progress update to prevent UI lag
+    this.forceProgressUpdate(percentage);
+
+    // Create new utterance from target position if we have remaining text
+    const remainingText = this.getRemainingTextFromIndex(targetCharIndex);
+    if (remainingText && remainingText.trim()) {
+      this.createSeekUtterance(remainingText, targetCharIndex);
+
+      // Resume playback if it was active before seeking
+      if (wasPlaying && !wasPaused) {
+        this.resumePlaybackAfterSeek();
+      }
+    }
+
+    // Trigger seek event with actual position achieved
+    const actualPercentage = this.getCurrentProgress();
+    this.events.onSeek?.(actualPercentage);
+
+    console.log(
+      `[SpeechReader] Seek completed: ${percentage}% -> ${actualPercentage}% (char: ${targetCharIndex})`
+    );
+  }
+
+  /**
+   * Calculate precise target index using segment-aware positioning
+   */
+  private calculatePreciseTargetIndex(percentage: number): number {
+    if (this.textSegments.length === 0) {
+      return Math.floor((percentage / 100) * this.currentText.length);
+    }
+
+    // Use segments for more accurate positioning
+    const targetSegmentIndex = Math.floor(
+      (percentage / 100) * this.textSegments.length
+    );
+
+    if (targetSegmentIndex >= this.textSegments.length) {
+      return this.currentText.length - 1;
+    }
+
+    const targetSegment = this.textSegments[targetSegmentIndex];
+
+    // Calculate position within the target segment
+    const segmentProgress =
+      (percentage / 100) * this.textSegments.length - targetSegmentIndex;
+    const charWithinSegment = Math.floor(
+      segmentProgress * (targetSegment.endIndex - targetSegment.startIndex)
+    );
+
+    return targetSegment.startIndex + charWithinSegment;
+  }
+
+  /**
+   * Cancel current speech and clean up state
+   */
+  private cancelCurrentSpeech(): void {
     speechSynthesis.cancel();
 
-    // Reset only playback state, not text data
     this.isPlaying = false;
     this.isPaused = false;
     this.stopProgressTracking();
     this.stopBackupHighlighting();
 
-    // Clear utterance events
+    // Clear utterance events to prevent conflicts
     if (this.utterance) {
       this.utterance.onstart = null;
       this.utterance.onend = null;
@@ -644,70 +736,336 @@ export class SpeechReader {
       this.utterance.onboundary = null;
       this.utterance = null;
     }
+  }
 
-    // Restore text and segments
-    this.currentText = preservedText;
-    this.textSegments = preservedSegments;
-
-    // CRITICAL FIX: Update position BEFORE creating new utterance
+  /**
+   * Update position state after seeking
+   */
+  private updateSeekPosition(
+    targetCharIndex: number,
+    targetSegmentIndex: number,
+    percentage: number
+  ): void {
+    // Update character and segment position
     this.currentCharIndex = targetCharIndex;
     this.currentSegmentIndex = targetSegmentIndex;
     this.lastCharIndexUpdate = Date.now();
 
-    // Immediately update the highlighting to match the seek position
-    this.highlightWithSync(targetCharIndex);
+    // Recalibrate timing to match the new position
+    this.recalibrateTimingForSeek(percentage);
 
-    // Create new utterance from the target position
-    const remainingText = this.getRemainingTextFromIndex(targetCharIndex);
-    if (remainingText) {
-      this.utterance = new SpeechSynthesisUtterance(remainingText);
-      this.configureSpeech();
-
-      // Setup event handlers with FIXED character index calculation
-      this.setupSeekEventHandlersFixed(targetCharIndex);
-
-      // Recalibrate timing for accurate progress tracking
-      this.recalibrateAfterSeek(percentage);
-
-      // Resume playback if it was playing before
-      if (wasPlaying && !wasPaused) {
-        try {
-          speechSynthesis.speak(this.utterance);
-          this.isPlaying = true;
-          this.isPaused = false;
-          this.startProgressTracking();
-          this.startBackupHighlighting();
-        } catch (error) {
-          console.error("Error resuming speech after seek:", error);
-          this.events.onError?.(new Error(`Failed to resume speech: ${error}`));
-        }
-      } else {
-        // If not playing, just update the visual state
-        this.isPlaying = false;
-        this.isPaused = false;
-      }
-    }
-
-    // Trigger seek event
-    this.events.onSeek?.(percentage);
+    // Reset precision tracking with new baseline
+    this.resetPrecisionTrackingAfterSeek(targetCharIndex);
   }
 
   /**
-   * Find segment index by character index
+   * Synchronize highlighting to the exact position
+   */
+  private synchronizeHighlightingToPosition(charIndex: number): void {
+    try {
+      // Clear any existing highlights first
+      this.highlighter.clearAllHighlights();
+
+      // Apply new highlighting immediately
+      this.highlighter.highlightWordAtIndex(charIndex);
+
+      console.log(
+        `[SpeechReader] Highlighting synchronized to char ${charIndex}`
+      );
+    } catch (error) {
+      console.warn("Failed to synchronize highlighting:", error);
+      this.fallbackHighlighting(charIndex);
+    }
+  }
+
+  /**
+   * Force immediate progress update to prevent UI lag
+   */
+  private forceProgressUpdate(targetPercentage: number): void {
+    // Immediately update progress to target percentage
+    this.events.onProgress?.(targetPercentage);
+
+    // Schedule follow-up updates to ensure accuracy
+    setTimeout(() => {
+      const actualProgress = this.getCurrentProgress();
+      this.events.onProgress?.(actualProgress);
+      console.log(
+        `[SpeechReader] Progress sync: target=${targetPercentage}%, actual=${actualProgress}%`
+      );
+    }, 50);
+
+    setTimeout(() => {
+      if (this.isPlaying) {
+        this.events.onProgress?.(this.getCurrentProgress());
+      }
+    }, 200);
+  }
+
+  /**
+   * Create new utterance for seeking with optimized event handlers
+   */
+  private createSeekUtterance(
+    remainingText: string,
+    startCharIndex: number
+  ): void {
+    this.utterance = new SpeechSynthesisUtterance(remainingText);
+    this.configureSpeech();
+
+    // Use optimized event handlers for seeking
+    this.setupOptimizedSeekEventHandlers(startCharIndex);
+  }
+
+  /**
+   * Resume playback after seeking with error handling
+   */
+  private resumePlaybackAfterSeek(): void {
+    if (!this.utterance) {
+      console.warn("No utterance available for resuming playback");
+      return;
+    }
+
+    try {
+      speechSynthesis.speak(this.utterance);
+      this.isPlaying = true;
+      this.isPaused = false;
+      this.startProgressTracking();
+      this.startBackupHighlighting();
+
+      console.log("[SpeechReader] Playback resumed after seek");
+    } catch (error) {
+      console.error("Error resuming speech after seek:", error);
+      this.events.onError?.(new Error(`Failed to resume speech: ${error}`));
+    }
+  }
+
+  /**
+   * Recalibrate timing specifically for seeking operations
+   */
+  private recalibrateTimingForSeek(targetPercentage: number): void {
+    const totalDuration = this.estimateDuration();
+    const targetElapsedTime = (targetPercentage / 100) * totalDuration;
+
+    // Set start time as if we've been playing from the beginning up to this point
+    this.startTime = Date.now() - targetElapsedTime;
+    this.totalPausedDuration = 0;
+    this.estimatedWPM = 0; // Reset for recalculation
+
+    console.log(
+      `[SpeechReader] Timing recalibrated: ${targetPercentage}% (${Math.round(
+        targetElapsedTime / 1000
+      )}s elapsed)`
+    );
+  }
+
+  /**
+   * Reset precision tracking after seeking
+   */
+  private resetPrecisionTrackingAfterSeek(charIndex: number): void {
+    const now = Date.now();
+    this.precisionTracking = {
+      baselineStartTime: now,
+      baselineCharIndex: charIndex,
+      seekOffset: 0,
+      lastSyncPoint: now,
+      charIndexHistory: [{ charIndex, timestamp: now }],
+      realTimeWPM: this.options.wordsPerMinute || 200,
+      averageCharPerSecond: 0,
+    };
+  }
+
+  /**
+   * Setup optimized event handlers for seek operations
+   */
+  private setupOptimizedSeekEventHandlers(startCharIndex: number): void {
+    if (!this.utterance) return;
+
+    this.utterance.onstart = () => {
+      this.isPlaying = true;
+      this.isPaused = false;
+      this.startProgressTracking();
+      this.startBackupHighlighting();
+      this.events.onStart?.();
+      console.log("[SpeechReader] Speech started after seek");
+    };
+
+    this.utterance.onend = () => {
+      this.isPlaying = false;
+      this.isPaused = false;
+      this.highlighter.clearAllHighlights();
+      this.stopProgressTracking();
+      this.events.onEnd?.();
+      console.log("[SpeechReader] Speech ended");
+    };
+
+    this.utterance.onerror = (event: SpeechSynthesisErrorEvent) => {
+      const error = event.error;
+      if (error === "canceled" || error === "interrupted") {
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.highlighter.clearAllHighlights();
+        this.stopProgressTracking();
+        return;
+      }
+
+      console.error("Speech synthesis error after seek:", error);
+      this.isPlaying = false;
+      this.isPaused = false;
+      this.highlighter.clearAllHighlights();
+      this.stopProgressTracking();
+      this.events.onError?.(new Error(`Speech synthesis error: ${error}`));
+    };
+
+    this.utterance.onpause = () => {
+      this.isPaused = true;
+      this.pausedTime = Date.now();
+      this.stopProgressTracking();
+      this.events.onPause?.();
+    };
+
+    this.utterance.onresume = () => {
+      this.isPaused = false;
+      this.totalPausedDuration += Date.now() - this.pausedTime;
+      this.startProgressTracking();
+      this.events.onResume?.();
+    };
+
+    this.utterance.onboundary = (event) => {
+      if (event.name === "word") {
+        // Calculate precise character index relative to the original text
+        const relativeCharIndex = event.charIndex;
+        const actualCharIndex = startCharIndex + relativeCharIndex;
+
+        if (this.validateSeekPosition(actualCharIndex)) {
+          // Update position with enhanced synchronization
+          this.updateCurrentPositionOptimized(actualCharIndex);
+
+          // Apply highlighting immediately
+          this.highlighter.highlightWordAtIndex(actualCharIndex);
+
+          // Handle heading pauses
+          this.handleHeadingPause(actualCharIndex);
+
+          this.events.onWordHighlight?.(
+            this.getWordAtIndex(actualCharIndex),
+            actualCharIndex
+          );
+        } else {
+          console.warn(
+            `Invalid position after seek: ${actualCharIndex}, using fallback`
+          );
+          const estimatedIndex = Math.max(
+            startCharIndex,
+            this.estimateCurrentCharIndexFromTime()
+          );
+          if (this.validateSeekPosition(estimatedIndex)) {
+            this.updateCurrentPositionOptimized(estimatedIndex);
+            this.highlighter.highlightWordAtIndex(estimatedIndex);
+          }
+        }
+      }
+    };
+  }
+
+  /**
+   * Optimized position update for better performance
+   */
+  private updateCurrentPositionOptimized(charIndex: number): void {
+    this.currentCharIndex = charIndex;
+    this.lastCharIndexUpdate = Date.now();
+
+    // Optimized WPM calculation
+    if (this.startTime && this.currentCharIndex > 0) {
+      const elapsed =
+        (Date.now() - this.startTime - this.totalPausedDuration) / 1000 / 60;
+      const wordsSpoken = this.getWordCountUpToIndex(charIndex);
+      if (elapsed > 0 && wordsSpoken > 0) {
+        this.estimatedWPM = wordsSpoken / elapsed;
+      }
+    }
+
+    // Update precision tracking efficiently
+    this.updatePrecisionTrackingOptimized(charIndex);
+  }
+
+  /**
+   * Optimized precision tracking update
+   */
+  private updatePrecisionTrackingOptimized(charIndex: number): void {
+    const now = Date.now();
+
+    // Add to history with size limit
+    this.precisionTracking.charIndexHistory.push({
+      charIndex,
+      timestamp: now,
+    });
+
+    // Keep only last 5 entries for efficiency
+    if (this.precisionTracking.charIndexHistory.length > 5) {
+      this.precisionTracking.charIndexHistory.shift();
+    }
+
+    // Update metrics less frequently for performance
+    if (this.precisionTracking.charIndexHistory.length >= 3) {
+      this.calculateRealTimeMetricsOptimized();
+    }
+
+    this.precisionTracking.lastSyncPoint = now;
+  }
+
+  /**
+   * Optimized real-time metrics calculation
+   */
+  private calculateRealTimeMetricsOptimized(): void {
+    const history = this.precisionTracking.charIndexHistory;
+
+    if (history.length < 2) return;
+
+    const recent = history.slice(-2); // Use only last 2 points for efficiency
+    const timeSpan = recent[1].timestamp - recent[0].timestamp;
+    const charSpan = recent[1].charIndex - recent[0].charIndex;
+
+    if (timeSpan > 0 && charSpan > 0) {
+      this.precisionTracking.averageCharPerSecond =
+        (charSpan / timeSpan) * 1000;
+
+      // Simplified WPM estimation
+      const avgCharsPerWord = 5; // Standard estimation
+      this.precisionTracking.realTimeWPM =
+        (this.precisionTracking.averageCharPerSecond * 60) / avgCharsPerWord;
+    }
+  }
+
+  /**
+   * Find segment index by character index - Optimized
    */
   private findSegmentByCharIndex(charIndex: number): number {
+    // Binary search for better performance with large texts
+    let left = 0;
+    let right = this.textSegments.length - 1;
+
+    while (left <= right) {
+      const mid = Math.floor((left + right) / 2);
+      const segment = this.textSegments[mid];
+
+      if (charIndex >= segment.startIndex && charIndex <= segment.endIndex) {
+        return mid;
+      } else if (charIndex < segment.startIndex) {
+        right = mid - 1;
+      } else {
+        left = mid + 1;
+      }
+    }
+
+    // Fallback to linear search if binary search fails
     for (let i = 0; i < this.textSegments.length; i++) {
       const segment = this.textSegments[i];
       if (charIndex >= segment.startIndex && charIndex <= segment.endIndex) {
         return i;
       }
     }
+
     return -1;
   }
-
-  /**
-   * Find the nearest word boundary for more accurate seeking
-   */
   private findNearestWordBoundary(charIndex: number): number {
     if (!this.currentText || charIndex <= 0) return 0;
     if (charIndex >= this.currentText.length)
@@ -903,6 +1261,115 @@ export class SpeechReader {
         this.estimatedWPM = wordsSpoken / elapsed;
       }
     }
+
+    // Update precision tracking with current position
+    this.updatePrecisionTracking(charIndex);
+  }
+
+  /**
+   * Initialize precision tracking for enhanced synchronization
+   */
+  private initializePrecisionTracking(): void {
+    this.buildWordMappings();
+    this.resetPrecisionTracking();
+  }
+
+  /**
+   * Build word-to-character mapping for precise seeking
+   */
+  private buildWordMappings(): void {
+    this.wordMappings = [];
+
+    if (!this.currentText) return;
+
+    const words = this.currentText.split(/(\s+)/); // Include spaces in split
+    let charPosition = 0;
+    let wordIndex = 0;
+
+    for (const word of words) {
+      if (word.trim()) {
+        // Only process actual words, skip whitespace
+        this.wordMappings.push({
+          wordIndex,
+          charStart: charPosition,
+          charEnd: charPosition + word.length - 1,
+          wordText: word,
+        });
+        wordIndex++;
+      }
+      charPosition += word.length;
+    }
+
+    console.log(
+      `Built ${this.wordMappings.length} word mappings for ${this.currentText.length} characters`
+    );
+  }
+
+  /**
+   * Reset precision tracking to baseline state
+   */
+  private resetPrecisionTracking(): void {
+    const now = Date.now();
+    this.precisionTracking = {
+      baselineStartTime: now,
+      baselineCharIndex: this.currentCharIndex,
+      seekOffset: 0,
+      lastSyncPoint: now,
+      charIndexHistory: [{ charIndex: this.currentCharIndex, timestamp: now }],
+      realTimeWPM: this.options.wordsPerMinute || 200,
+      averageCharPerSecond: 0,
+    };
+  }
+
+  /**
+   * Update precision tracking with current position
+   */
+  private updatePrecisionTracking(charIndex: number): void {
+    const now = Date.now();
+
+    // Add to history
+    this.precisionTracking.charIndexHistory.push({
+      charIndex,
+      timestamp: now,
+    });
+
+    // Keep only last 10 entries for efficiency
+    if (this.precisionTracking.charIndexHistory.length > 10) {
+      this.precisionTracking.charIndexHistory.shift();
+    }
+
+    // Calculate real-time metrics
+    this.calculateRealTimeMetrics();
+
+    this.precisionTracking.lastSyncPoint = now;
+  }
+
+  /**
+   * Calculate real-time speaking metrics for better estimation
+   */
+  private calculateRealTimeMetrics(): void {
+    const history = this.precisionTracking.charIndexHistory;
+
+    if (history.length < 2) return;
+
+    const recent = history.slice(-3); // Use last 3 points
+    if (recent.length < 2) return;
+
+    const timeSpan = recent[recent.length - 1].timestamp - recent[0].timestamp;
+    const charSpan = recent[recent.length - 1].charIndex - recent[0].charIndex;
+
+    if (timeSpan > 0 && charSpan > 0) {
+      this.precisionTracking.averageCharPerSecond =
+        (charSpan / timeSpan) * 1000;
+
+      // Estimate WPM based on character rate
+      const avgCharsPerWord = this.currentText
+        ? this.currentText.length / this.currentText.split(/\s+/).length
+        : 5;
+
+      this.precisionTracking.realTimeWPM =
+        (this.precisionTracking.averageCharPerSecond * 60) / avgCharsPerWord;
+    }
   }
 
   /**
@@ -1028,26 +1495,38 @@ export class SpeechReader {
   }
 
   /**
-   * Get current progress percentage - optimized for better synchronization
+   * Get current progress percentage - Enhanced for seek synchronization
    */
   public getCurrentProgress(): number {
-    if (!this.isPlaying || this.isPaused) return 0;
+    if (!this.currentText || this.currentText.length === 0) return 0;
 
-    // Use character-based progress for better accuracy
-    if (this.currentText.length > 0) {
-      const characterProgress =
-        (this.currentCharIndex / this.currentText.length) * 100;
-      return Math.min(characterProgress, 100);
+    // For more accurate progress, always use character-based calculation
+    const characterProgress =
+      (this.currentCharIndex / this.currentText.length) * 100;
+
+    // Ensure progress is within bounds and smooth
+    const clampedProgress = Math.max(0, Math.min(100, characterProgress));
+
+    // Add small smoothing for better UI experience
+    if (this.isPlaying && !this.isPaused) {
+      // Use real-time estimation if available for smoothing
+      const estimatedIndex = this.estimateCurrentCharIndexFromTime();
+      if (
+        Math.abs(estimatedIndex - this.currentCharIndex) <
+        this.currentText.length * 0.02
+      ) {
+        // Only use estimation if within 2% of current position (prevents jumps)
+        const estimatedProgress =
+          (estimatedIndex / this.currentText.length) * 100;
+        return Math.max(clampedProgress, Math.min(100, estimatedProgress));
+      }
     }
 
-    // Fallback to time-based calculation
-    const elapsed = Date.now() - this.startTime - this.totalPausedDuration;
-    const estimatedDuration = this.estimateDuration();
-    return Math.min((elapsed / estimatedDuration) * 100, 100);
+    return clampedProgress;
   }
 
   /**
-   * Start progress tracking - Enhanced for better responsiveness
+   * Start progress tracking - Optimized for seeking accuracy
    */
   private startProgressTracking(): void {
     this.stopProgressTracking();
@@ -1057,7 +1536,7 @@ export class SpeechReader {
         const progress = this.getCurrentProgress();
         this.events.onProgress?.(progress);
       }
-    }, 50); // Increased frequency for smoother progress updates
+    }, 100); // Balanced frequency for smooth updates without performance issues
   }
 
   /**
@@ -1215,64 +1694,6 @@ export class SpeechReader {
   }
 
   /**
-   * Recalibrate timing and progress after seeking operation - Enhanced for better sync
-   */
-  private recalibrateAfterSeek(targetPercentage: number): void {
-    // Calculate the accurate time adjustment for seeking
-    const totalDuration = this.estimateDuration();
-    const targetElapsedTime = (targetPercentage / 100) * totalDuration;
-
-    // CRITICAL FIX: Set the start time as if we had been playing from the beginning
-    // but account for the current seek position
-    this.startTime = Date.now() - targetElapsedTime;
-    this.totalPausedDuration = 0;
-    this.lastCharIndexUpdate = Date.now();
-
-    // Reset estimated WPM to recalculate from this point
-    this.estimatedWPM = 0;
-
-    // Calculate more accurate character index based on percentage
-    const targetCharIndex = Math.floor(
-      (targetPercentage / 100) * this.currentText.length
-    );
-    this.currentCharIndex = this.findNearestWordBoundary(targetCharIndex);
-
-    // Update segment index to match the new position
-    this.currentSegmentIndex = this.findSegmentByCharIndex(
-      this.currentCharIndex
-    );
-
-    // Immediately update the highlighting to match the seek position
-    this.highlightWithSync(this.currentCharIndex);
-
-    // Force progress update immediately to sync UI with more frequent updates
-    const actualProgress = this.getCurrentProgress();
-    this.events.onProgress?.(actualProgress);
-
-    // Schedule additional progress updates to ensure UI stays in sync
-    setTimeout(() => {
-      if (this.isPlaying) {
-        this.events.onProgress?.(this.getCurrentProgress());
-      }
-    }, 100);
-
-    setTimeout(() => {
-      if (this.isPlaying) {
-        this.events.onProgress?.(this.getCurrentProgress());
-      }
-    }, 300);
-
-    console.log("Enhanced recalibration after seek:", {
-      targetPercentage,
-      targetCharIndex: this.currentCharIndex,
-      segmentIndex: this.currentSegmentIndex,
-      actualProgress,
-      startTime: this.startTime,
-      currentCharIndex: this.currentCharIndex,
-    });
-  }
-
-  /**
    * Enhanced seek validation to ensure accuracy
    */
   private validateSeekPosition(charIndex: number): boolean {
@@ -1282,10 +1703,10 @@ export class SpeechReader {
       return false;
     }
 
-    // Validate that we can find a word at this position
-    const wordAtIndex = this.getWordAtIndex(charIndex);
-    if (!wordAtIndex) {
-      console.warn(`No word found at character index: ${charIndex}`);
+    // Enhanced validation - check if we're at a reasonable text position
+    const char = this.currentText[charIndex];
+    if (!char || char === "\0") {
+      console.warn(`Invalid character at index: ${charIndex}`);
       return false;
     }
 
