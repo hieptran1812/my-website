@@ -34,6 +34,27 @@
   }
 }
 
+/* Dark mode pulse animation */
+[data-theme="dark"] .highlighted-word,
+.dark .highlighted-word {
+  animation: wordHighlightPulseDark 0.3s ease-in-out;
+}
+
+@keyframes wordHighlightPulseDark {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 1px 3px rgba(130, 170, 255, 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 2px 6px rgba(130, 170, 255, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 1px 3px rgba(130, 170, 255, 0.4);
+  }
+}
+
 /* Paragraph highlighting */
 .highlighted-paragraph {
   background-color: #cfe2f3 !important;
@@ -57,17 +78,39 @@
   }
 }
 
-/* Dark mode adjustments */
-[data-theme="dark"] .highlighted-word {
-  background-color: #4a90e2 !important;
-  color: #fff !important;
-  box-shadow: 0 1px 3px rgba(74, 144, 226, 0.4) !important;
+/* Dark mode paragraph fade animation */
+[data-theme="dark"] .highlighted-paragraph,
+.dark .highlighted-paragraph {
+  animation: paragraphHighlightFadeDark 0.4s ease-in-out;
 }
 
-[data-theme="dark"] .highlighted-paragraph {
-  background-color: rgba(74, 144, 226, 0.2) !important;
-  border-left-color: #4a90e2 !important;
-  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3) !important;
+@keyframes paragraphHighlightFadeDark {
+  0% {
+    background-color: rgba(130, 170, 255, 0);
+    transform: translateX(-2px);
+  }
+  100% {
+    background-color: rgba(130, 170, 255, 0.15);
+    transform: translateX(0);
+  }
+}
+
+/* Dark mode adjustments - Night Owl Theme Compatible */
+[data-theme="dark"] .highlighted-word,
+.dark .highlighted-word {
+  background-color: #82aaff !important;
+  color: #011627 !important;
+  box-shadow: 0 1px 3px rgba(130, 170, 255, 0.4) !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="dark"] .highlighted-paragraph,
+.dark .highlighted-paragraph {
+  background-color: rgba(130, 170, 255, 0.08) !important;
+  color: #d6deeb !important;
+  border-left-color: #82aaff !important;
+  box-shadow: 0 2px 8px rgba(130, 170, 255, 0.15) !important;
+  border: 1px solid rgba(130, 170, 255, 0.12) !important;
 }
 
 /* Reading mode adjustments */
@@ -81,6 +124,24 @@
   background-color: rgba(212, 165, 116, 0.15) !important;
   border-left-color: #d4a574 !important;
   box-shadow: 0 2px 8px rgba(212, 165, 116, 0.2) !important;
+}
+
+/* Reading mode in dark theme */
+[data-theme="dark"] .reading-mode .highlighted-word,
+.dark .reading-mode .highlighted-word {
+  background-color: #7fdbca !important;
+  color: #011627 !important;
+  box-shadow: 0 1px 3px rgba(127, 219, 202, 0.4) !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="dark"] .reading-mode .highlighted-paragraph,
+.dark .reading-mode .highlighted-paragraph {
+  background-color: rgba(127, 219, 202, 0.06) !important;
+  color: #f5e6d3 !important;
+  border-left-color: #7fdbca !important;
+  box-shadow: 0 2px 8px rgba(127, 219, 202, 0.15) !important;
+  border: 1px solid rgba(127, 219, 202, 0.1) !important;
 }
 
 /* Ensure highlighted text is above other elements */
@@ -149,6 +210,15 @@ pre .highlighted-paragraph,
 .highlighted-word:focus,
 .highlighted-paragraph:focus {
   outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+
+/* Dark mode focus styles */
+[data-theme="dark"] .highlighted-word:focus,
+[data-theme="dark"] .highlighted-paragraph:focus,
+.dark .highlighted-word:focus,
+.dark .highlighted-paragraph:focus {
+  outline: 2px solid #82aaff;
   outline-offset: 2px;
 }
 
