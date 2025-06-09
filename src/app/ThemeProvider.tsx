@@ -85,18 +85,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     const root = document.documentElement;
 
+    // Clear any existing theme classes first to avoid conflicts
+    root.classList.remove("dark", "reading-mode");
+
     // Only toggle 'dark' class
     if (theme === "dark") {
       root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
     }
 
     // Apply reading mode class
     if (isReadingMode) {
       root.classList.add("reading-mode");
-    } else {
-      root.classList.remove("reading-mode");
     }
 
     // Set color scheme for native elements
@@ -108,18 +107,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } catch {
       // Ignore if localStorage is not available
     }
-
-    // Debug log
-    console.log(
-      "Theme applied:",
-      theme,
-      "Reading mode:",
-      isReadingMode,
-      "- HTML classes:",
-      root.classList.toString(),
-      "- Color scheme:",
-      root.style.colorScheme
-    );
   }, [theme, mounted, isReadingMode]);
 
   const toggleTheme = () => {

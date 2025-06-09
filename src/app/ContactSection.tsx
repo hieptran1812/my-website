@@ -1,8 +1,94 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+  const [showToast, setShowToast] = useState(false);
+
+  // Auto-hide success message after 5 seconds
+  useEffect(() => {
+    if (submitStatus.type === "success") {
+      setShowToast(true);
+      const timer = setTimeout(() => {
+        setShowToast(false);
+        setTimeout(() => {
+          setSubmitStatus({ type: null, message: "" });
+        }, 300); // Wait for animation to complete
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    } else if (submitStatus.type === "error") {
+      setShowToast(true);
+      const timer = setTimeout(() => {
+        setShowToast(false);
+        setTimeout(() => {
+          setSubmitStatus({ type: null, message: "" });
+        }, 300);
+      }, 8000); // Keep error messages longer
+
+      return () => clearTimeout(timer);
+    }
+  }, [submitStatus.type]);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const response = await fetch("/api/contact/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: "success",
+          message: result.message || "Message sent successfully!",
+        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setShowToast(true);
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: result.error || "Failed to send message. Please try again.",
+        });
+        setShowToast(true);
+      }
+    } catch (err: unknown) {
+      console.error("Contact form error:", err);
+      setSubmitStatus({
+        type: "error",
+        message: "Network error. Please check your connection and try again.",
+      });
+      setShowToast(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <section
       className="py-16 md:py-24 transition-colors duration-300"
@@ -212,20 +298,38 @@ const ContactSection = () => {
             >
               Send me a message
             </h3>
-            <form className="space-y-4">
+
+            {/* Status Message */}
+            {submitStatus.type && (
+              <div
+                className={`mb-4 p-3 rounded-lg border text-sm transition-all duration-300 ${
+                  submitStatus.type === "success"
+                    ? "border-green-200 bg-green-50 text-green-800"
+                    : "border-red-200 bg-red-50 text-red-800"
+                }`}
+              >
+                {submitStatus.message}
+              </div>
+            )}
+
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="name"
                   className="block text-sm font-medium mb-2 transition-colors duration-300"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  Name
+                  Name *
                 </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  className="w-full px-3 py-2 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  disabled={isSubmitting}
+                  className="w-full px-3 py-2 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{
                     backgroundColor: "var(--background)",
                     borderColor: "var(--border)",
@@ -239,13 +343,41 @@ const ContactSection = () => {
                   className="block text-sm font-medium mb-2 transition-colors duration-300"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  Email
+                  Email *
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full px-3 py-2 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  disabled={isSubmitting}
+                  className="w-full px-3 py-2 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    backgroundColor: "var(--background)",
+                    borderColor: "var(--border)",
+                    color: "var(--text-primary)",
+                  }}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium mb-2 transition-colors duration-300"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  Subject *
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  required
+                  disabled={isSubmitting}
+                  className="w-full px-3 py-2 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{
                     backgroundColor: "var(--background)",
                     borderColor: "var(--border)",
@@ -259,13 +391,17 @@ const ContactSection = () => {
                   className="block text-sm font-medium mb-2 transition-colors duration-300"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  Message
+                  Message *
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows={4}
-                  className="w-full px-3 py-2 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 resize-vertical"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
+                  disabled={isSubmitting}
+                  className="w-full px-3 py-2 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 resize-vertical disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{
                     backgroundColor: "var(--background)",
                     borderColor: "var(--border)",
@@ -275,13 +411,14 @@ const ContactSection = () => {
               </div>
               <button
                 type="submit"
-                className="w-full px-4 py-2 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                disabled={isSubmitting}
+                className="w-full px-4 py-2 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
                   backgroundColor: "var(--accent)",
                   color: "white",
                 }}
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>
