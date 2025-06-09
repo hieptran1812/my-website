@@ -100,28 +100,81 @@ export class SpeechReader {
    * Split text into segments for seeking capability
    */
   private splitTextIntoSegments(): void {
+    // Clear any existing segments first
     this.textSegments = [];
-    const sentences = this.currentText.split(/[.!?]+\s*/);
+
+    if (!this.currentText || this.currentText.trim() === "") {
+      console.warn("No text to split into segments");
+      return;
+    }
+
+    // Split by sentence endings with better regex
+    const sentencePattern = /([.!?]+)\s*/g;
+    const sentences: string[] = [];
+    let lastIndex = 0;
+    let match;
+
+    // Extract sentences with their punctuation
+    while ((match = sentencePattern.exec(this.currentText)) !== null) {
+      const sentence = this.currentText.slice(
+        lastIndex,
+        match.index + match[1].length
+      );
+      if (sentence.trim()) {
+        sentences.push(sentence.trim());
+      }
+      lastIndex = match.index + match[0].length;
+    }
+
+    // Add any remaining text as the last sentence
+    if (lastIndex < this.currentText.length) {
+      const remaining = this.currentText.slice(lastIndex).trim();
+      if (remaining) {
+        sentences.push(remaining);
+      }
+    }
+
+    // Create segments with accurate positioning
     let currentIndex = 0;
+    const createdSegments = new Set<string>(); // Prevent duplicates
 
     for (const sentence of sentences) {
       if (sentence.trim()) {
-        const trimmedSentence = sentence.trim();
-        const startIndex = this.currentText.indexOf(
-          trimmedSentence,
-          currentIndex
-        );
-        const endIndex = startIndex + trimmedSentence.length;
+        // Find the exact position of this sentence in the original text
+        const startIndex = this.currentText.indexOf(sentence, currentIndex);
 
-        this.textSegments.push({
-          text: trimmedSentence,
-          startIndex,
-          endIndex,
-        });
+        if (startIndex !== -1 && startIndex >= currentIndex) {
+          const endIndex = startIndex + sentence.length;
 
-        currentIndex = endIndex;
+          // Create a unique key to prevent duplicate segments
+          const segmentKey = `${startIndex}-${endIndex}`;
+
+          if (!createdSegments.has(segmentKey)) {
+            this.textSegments.push({
+              text: sentence,
+              startIndex,
+              endIndex,
+            });
+
+            createdSegments.add(segmentKey);
+
+            // Move current index past this sentence
+            currentIndex = endIndex;
+          } else {
+            console.warn("Duplicate segment detected and skipped:", segmentKey);
+          }
+        } else {
+          console.warn(
+            "Could not find sentence position:",
+            sentence.substring(0, 50)
+          );
+        }
       }
     }
+
+    console.log(
+      `Created ${this.textSegments.length} text segments from ${this.currentText.length} characters`
+    );
   }
 
   /**
@@ -196,8 +249,29 @@ export class SpeechReader {
       return;
     }
 
+    // Complete state reset before starting new session
+    this.currentText = "";
+    this.textSegments = [];
+    this.currentCharIndex = 0;
+    this.currentSegmentIndex = 0;
+    this.totalPausedDuration = 0;
+    this.lastCharIndexUpdate = 0;
+    this.estimatedWPM = 0;
+    this.startTime = 0;
+    this.pausedTime = 0;
+    this.isWaitingAfterHeading = false;
+    this.lastHeadingEndIndex = -1;
+
+    // Set the new text and split into segments
     this.currentText = text;
     this.splitTextIntoSegments();
+
+    console.log("Text segments created:", this.textSegments.length);
+    console.log(
+      "First segment preview:",
+      this.textSegments[0]?.text?.substring(0, 100)
+    );
+
     this.utterance = new SpeechSynthesisUtterance(text);
     this.configureSpeech();
 
@@ -354,6 +428,10 @@ export class SpeechReader {
     this.isWaitingAfterHeading = false;
     this.lastHeadingEndIndex = -1;
 
+    // Clear text-related state to prevent accumulation
+    this.currentText = "";
+    this.textSegments = [];
+
     // Clear all timers and highlighting
     this.stopProgressTracking();
     this.stopBackupHighlighting();
@@ -404,8 +482,33 @@ export class SpeechReader {
     const wasPlaying = this.isPlaying;
     const wasPaused = this.isPaused;
 
+    // Preserve text and segments before stopping
+    const preservedText = this.currentText;
+    const preservedSegments = [...this.textSegments];
+
     // Stop current speech and clear timers
-    this.stop();
+    speechSynthesis.cancel();
+
+    // Reset only playback state, not text data
+    this.isPlaying = false;
+    this.isPaused = false;
+    this.stopProgressTracking();
+    this.stopBackupHighlighting();
+
+    // Clear utterance events
+    if (this.utterance) {
+      this.utterance.onstart = null;
+      this.utterance.onend = null;
+      this.utterance.onerror = null;
+      this.utterance.onpause = null;
+      this.utterance.onresume = null;
+      this.utterance.onboundary = null;
+      this.utterance = null;
+    }
+
+    // Restore text and segments
+    this.currentText = preservedText;
+    this.textSegments = preservedSegments;
 
     // Update current position with enhanced tracking - CRITICAL for sync
     this.currentCharIndex = targetCharIndex;

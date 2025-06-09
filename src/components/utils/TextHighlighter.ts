@@ -55,7 +55,19 @@ export class TextHighlighter {
     this.words = [];
     this.paragraphs = [];
 
-    // First, wrap words in spans for highlighting
+    // Check if content has already been processed
+    const existingWordSpans = this.container.querySelectorAll(".word-span");
+    if (existingWordSpans.length > 0) {
+      console.log(
+        "Content already processed with word spans, using existing structure"
+      );
+      // If already processed, just build mappings and generate text
+      this.buildWordAndParagraphMappings();
+      this.generateReadableText();
+      return;
+    }
+
+    // First time processing: wrap words in spans for highlighting
     this.wrapWordsInSpans();
 
     // Then build word and paragraph mappings
@@ -76,6 +88,11 @@ export class TextHighlighter {
         acceptNode: (node) => {
           const parent = node.parentElement;
           if (!parent) return NodeFilter.FILTER_REJECT;
+
+          // Skip if parent is already a word-span to prevent double processing
+          if (parent.classList.contains("word-span")) {
+            return NodeFilter.FILTER_REJECT;
+          }
 
           // Skip elements that shouldn't be read
           if (this.shouldSkipElement(parent)) {
