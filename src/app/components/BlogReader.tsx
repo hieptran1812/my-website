@@ -48,6 +48,8 @@ export default function BlogReader({
   const [showToc, setShowToc] = useState(true);
   const [tocCollapsed, setTocCollapsed] = useState(false);
   const [tocPosition, setTocPosition] = useState<"center" | "top">("center");
+  const [showMobileReadingOptions, setShowMobileReadingOptions] =
+    useState(false);
 
   // Text-to-speech states
   const [isPlaying, setIsPlaying] = useState(false);
@@ -408,7 +410,15 @@ export default function BlogReader({
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 768);
+      const isSmall = window.innerWidth <= 1024; // Change to lg breakpoint (1024px)
+      setIsSmallScreen(isSmall);
+
+      // Auto-hide TOC on mobile/tablet devices
+      if (isSmall) {
+        setShowToc(false);
+      } else {
+        setShowToc(true);
+      }
     };
 
     // Initial check
@@ -1299,189 +1309,403 @@ export default function BlogReader({
       </div>
 
       {/* Mobile/Tablet Reading Controls (show on <lg screens) */}
-      <div
-        className="lg:hidden fixed bottom-20 right-4 z-50 p-4 rounded-xl shadow-lg border backdrop-blur-md"
-        style={{
-          backgroundColor: "var(--background)/95",
-          borderColor: "var(--border)",
-        }}
-      >
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
-            Eye Comfort
-          </span>
-          <button
-            onClick={() => setReadingMode(!isReadingMode)}
-            className={`relative w-10 h-5 rounded-full transition-colors duration-200 ${
-              isReadingMode ? "bg-amber-500" : "bg-gray-300 dark:bg-gray-600"
-            }`}
-            aria-label="Toggle reading mode"
+      <div className="lg:hidden fixed bottom-20 right-4 z-50">
+        {/* Reading Options Toggle Button */}
+        <button
+          onClick={() => setShowMobileReadingOptions(!showMobileReadingOptions)}
+          className="w-12 h-12 rounded-full shadow-lg border backdrop-blur-md transition-all duration-200 flex items-center justify-center mb-2"
+          style={{
+            backgroundColor: showMobileReadingOptions
+              ? "var(--accent)"
+              : "var(--background)/95",
+            borderColor: "var(--border)",
+            color: showMobileReadingOptions ? "white" : "var(--text-primary)",
+          }}
+          aria-label="Toggle reading options"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
-            <div
-              className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
-                isReadingMode ? "translate-x-5" : "translate-x-0.5"
-              }`}
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"
             />
-          </button>
-        </div>
+          </svg>
+        </button>
 
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
-            Audio Reading
-          </span>
-          {!isPlaying ? (
-            <button
-              onClick={startSpeech}
-              className="px-3 py-1 rounded-lg transition-all duration-200 text-xs flex items-center gap-1"
-              style={{
-                backgroundColor: "var(--surface)",
-                color: "var(--text-primary)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                e.currentTarget.style.color = "var(--accent)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--surface)";
-                e.currentTarget.style.color = "var(--text-primary)";
-              }}
-              aria-label="Start reading"
-            >
-              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-              Play
-            </button>
-          ) : (
-            <div className="flex items-center gap-2">
-              <button
-                onClick={isPaused ? resumeSpeech : pauseSpeech}
-                className="px-3 py-1 rounded-lg transition-all duration-200 text-xs flex items-center gap-1"
-                style={{
-                  backgroundColor: "var(--accent)",
-                  color: "white",
-                }}
-                aria-label={isPaused ? "Resume reading" : "Pause reading"}
+        {/* Reading Options Dropdown */}
+        {showMobileReadingOptions && (
+          <div
+            className="p-4 rounded-xl shadow-lg border backdrop-blur-md w-72"
+            style={{
+              backgroundColor: "var(--background)/95",
+              borderColor: "var(--border)",
+            }}
+          >
+            {/* Eye Comfort Toggle */}
+            <div className="flex items-center justify-between mb-4">
+              <span
+                className="text-sm font-medium"
+                style={{ color: "var(--text-primary)" }}
               >
-                {isPaused ? (
-                  <svg
-                    className="w-3 h-3"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                ) : (
-                  <svg
-                    className="w-3 h-3"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                  </svg>
-                )}
-                {isPaused ? "Continue" : "Pause"}
-              </button>
-
+                Eye Comfort
+              </span>
               <button
-                onClick={stopSpeech}
-                className="px-2 py-1 rounded-lg transition-all duration-200 text-xs"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  color: "var(--text-secondary)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    "var(--surface-accent)";
-                  e.currentTarget.style.color = "var(--accent)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--surface)";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                }}
-                aria-label="Stop reading"
+                onClick={() => setReadingMode(!isReadingMode)}
+                className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${
+                  isReadingMode
+                    ? "bg-amber-500"
+                    : "bg-gray-300 dark:bg-gray-600"
+                }`}
+                aria-label="Toggle reading mode"
               >
-                <svg
-                  className="w-3 h-3"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M6 6h12v12H6z" />
-                </svg>
+                <div
+                  className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-200 ${
+                    isReadingMode ? "translate-x-5" : "translate-x-0.5"
+                  }`}
+                />
               </button>
             </div>
-          )}
-        </div>
 
-        {/* Show progress bar and stop button only when playing */}
-        {isPlaying && (
-          <div className="mt-2">
-            <div className="flex items-center justify-between mb-1">
-              <span
-                className="text-xs"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Progress
-              </span>
-              <div className="flex items-center gap-2">
+            {/* Font Size Control */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-2">
                 <span
-                  className="text-xs font-mono"
+                  className="text-sm font-medium"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  {Math.floor(remainingTime / 60)}:
-                  {Math.floor(remainingTime % 60)
-                    .toString()
-                    .padStart(2, "0")}
+                  Font Size
                 </span>
                 <span
                   className="text-xs"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  {fontSize}px
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => handleFontSizeChange(fontSize - 1)}
+                  className="w-7 h-7 rounded text-xs font-bold transition-colors duration-200 flex items-center justify-center"
+                  style={{
+                    backgroundColor: "var(--surface)",
+                    color: "var(--text-secondary)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--surface-accent)";
+                    e.currentTarget.style.color = "var(--accent)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--surface)";
+                    e.currentTarget.style.color = "var(--text-secondary)";
+                  }}
+                  aria-label="Decrease font size"
+                >
+                  A-
+                </button>
+                <div className="flex-1 mx-2">
+                  <input
+                    type="range"
+                    min="12"
+                    max="24"
+                    step="1"
+                    value={fontSize}
+                    onChange={(e) =>
+                      handleFontSizeChange(Number(e.target.value))
+                    }
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                    style={{
+                      background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
+                        ((fontSize - 12) / (24 - 12)) * 100
+                      }%, var(--border) ${
+                        ((fontSize - 12) / (24 - 12)) * 100
+                      }%, var(--border) 100%)`,
+                    }}
+                  />
+                </div>
+                <button
+                  onClick={() => handleFontSizeChange(fontSize + 1)}
+                  className="w-7 h-7 rounded text-xs font-bold transition-colors duration-200 flex items-center justify-center"
+                  style={{
+                    backgroundColor: "var(--surface)",
+                    color: "var(--text-secondary)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--surface-accent)";
+                    e.currentTarget.style.color = "var(--accent)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--surface)";
+                    e.currentTarget.style.color = "var(--text-secondary)";
+                  }}
+                  aria-label="Increase font size"
+                >
+                  A+
+                </button>
+              </div>
+            </div>
+
+            {/* Line Height Control */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <span
+                  className="text-sm font-medium"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  {Math.round(progress)}%
+                  Line Height
+                </span>
+                <span
+                  className="text-xs"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  {lineHeight.toFixed(1)}
                 </span>
               </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => handleLineHeightChange(lineHeight - 0.1)}
+                  className="w-7 h-7 rounded text-xs font-bold transition-colors duration-200 flex items-center justify-center"
+                  style={{
+                    backgroundColor: "var(--surface)",
+                    color: "var(--text-secondary)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--surface-accent)";
+                    e.currentTarget.style.color = "var(--accent)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--surface)";
+                    e.currentTarget.style.color = "var(--text-secondary)";
+                  }}
+                  aria-label="Decrease line height"
+                >
+                  ≡
+                </button>
+                <div className="flex-1 mx-2">
+                  <input
+                    type="range"
+                    min="1.2"
+                    max="2.0"
+                    step="0.1"
+                    value={lineHeight}
+                    onChange={(e) =>
+                      handleLineHeightChange(Number(e.target.value))
+                    }
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                    style={{
+                      background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
+                        ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
+                      }%, var(--border) ${
+                        ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
+                      }%, var(--border) 100%)`,
+                    }}
+                  />
+                </div>
+                <button
+                  onClick={() => handleLineHeightChange(lineHeight + 0.1)}
+                  className="w-7 h-7 rounded text-xs font-bold transition-colors duration-200 flex items-center justify-center"
+                  style={{
+                    backgroundColor: "var(--surface)",
+                    color: "var(--text-secondary)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--surface-accent)";
+                    e.currentTarget.style.color = "var(--accent)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--surface)";
+                    e.currentTarget.style.color = "var(--text-secondary)";
+                  }}
+                  aria-label="Increase line height"
+                >
+                  ≡
+                </button>
+              </div>
             </div>
+
+            {/* Audio Reading Controls */}
             <div
-              className="w-full h-2 rounded-full mb-2 cursor-pointer relative group"
-              style={{ backgroundColor: "var(--border)" }}
-              onClick={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-                const percentage = (clickX / rect.width) * 100;
-                seekSpeech(Math.max(0, Math.min(100, percentage)));
-              }}
+              className="border-t pt-4"
+              style={{ borderColor: "var(--border)" }}
             >
-              <div
-                className="h-2 rounded-full transition-all duration-300"
-                style={{
-                  backgroundColor: "var(--accent)",
-                  width: `${progress}%`,
-                }}
-              />
-              {/* Hover indicator */}
-              <div
-                className="absolute top-0 w-full h-2 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-200"
-                style={{ backgroundColor: "var(--accent)" }}
-              />
-            </div>
-            <div className="flex justify-between items-center">
-              <div
-                className="flex justify-between text-xs w-full"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                <span>
-                  {Math.floor((duration - remainingTime) / 60)}:
-                  {Math.floor((duration - remainingTime) % 60)
-                    .toString()
-                    .padStart(2, "0")}
+              <div className="flex items-center justify-between mb-3">
+                <span
+                  className="text-sm font-medium"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  Audio Reading
                 </span>
-                <span>
-                  {Math.floor(duration / 60)}:
-                  {Math.floor(duration % 60)
-                    .toString()
-                    .padStart(2, "0")}
-                </span>
+                {!isPlaying ? (
+                  <button
+                    onClick={startSpeech}
+                    className="px-3 py-1.5 rounded-lg transition-all duration-200 text-sm flex items-center gap-2"
+                    style={{
+                      backgroundColor: "var(--surface)",
+                      color: "var(--text-primary)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor =
+                        "var(--surface-accent)";
+                      e.currentTarget.style.color = "var(--accent)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "var(--surface)";
+                      e.currentTarget.style.color = "var(--text-primary)";
+                    }}
+                    aria-label="Start reading"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                    Play
+                  </button>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={isPaused ? resumeSpeech : pauseSpeech}
+                      className="px-3 py-1.5 rounded-lg transition-all duration-200 text-sm flex items-center gap-2"
+                      style={{
+                        backgroundColor: "var(--accent)",
+                        color: "white",
+                      }}
+                      aria-label={isPaused ? "Resume reading" : "Pause reading"}
+                    >
+                      {isPaused ? (
+                        <svg
+                          className="w-4 h-4"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      ) : (
+                        <svg
+                          className="w-4 h-4"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                        </svg>
+                      )}
+                      {isPaused ? "Continue" : "Pause"}
+                    </button>
+
+                    <button
+                      onClick={stopSpeech}
+                      className="px-2 py-1.5 rounded-lg transition-all duration-200 text-sm"
+                      style={{
+                        backgroundColor: "var(--surface)",
+                        color: "var(--text-secondary)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--surface-accent)";
+                        e.currentTarget.style.color = "var(--accent)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--surface)";
+                        e.currentTarget.style.color = "var(--text-secondary)";
+                      }}
+                      aria-label="Stop reading"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M6 6h12v12H6z" />
+                      </svg>
+                    </button>
+                  </div>
+                )}
               </div>
+
+              {/* Show progress bar when playing */}
+              {isPlaying && (
+                <div className="mt-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <span
+                      className="text-xs"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      Progress
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="text-xs font-mono"
+                        style={{ color: "var(--text-primary)" }}
+                      >
+                        {Math.floor(remainingTime / 60)}:
+                        {Math.floor(remainingTime % 60)
+                          .toString()
+                          .padStart(2, "0")}
+                      </span>
+                      <span
+                        className="text-xs"
+                        style={{ color: "var(--text-primary)" }}
+                      >
+                        {Math.round(progress)}%
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="w-full h-2 rounded-full mb-2 cursor-pointer relative group"
+                    style={{ backgroundColor: "var(--border)" }}
+                    onClick={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const clickX = e.clientX - rect.left;
+                      const percentage = (clickX / rect.width) * 100;
+                      seekSpeech(Math.max(0, Math.min(100, percentage)));
+                    }}
+                  >
+                    <div
+                      className="h-2 rounded-full transition-all duration-300"
+                      style={{
+                        backgroundColor: "var(--accent)",
+                        width: `${progress}%`,
+                      }}
+                    />
+                    {/* Hover indicator */}
+                    <div
+                      className="absolute top-0 w-full h-2 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-200"
+                      style={{ backgroundColor: "var(--accent)" }}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div
+                      className="flex justify-between text-xs w-full"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      <span>
+                        {Math.floor((duration - remainingTime) / 60)}:
+                        {Math.floor((duration - remainingTime) % 60)
+                          .toString()
+                          .padStart(2, "0")}
+                      </span>
+                      <span>
+                        {Math.floor(duration / 60)}:
+                        {Math.floor(duration % 60)
+                          .toString()
+                          .padStart(2, "0")}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
