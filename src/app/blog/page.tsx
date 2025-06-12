@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import ArticleCard from "@/components/ArticleCard";
 import ArticleGrid from "@/components/ArticleGrid";
-import LoadMoreTrigger from "@/components/LoadMoreTrigger";
-import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 
 interface BlogPostMetadata {
   slug: string;
@@ -70,8 +68,10 @@ export default function BlogPage() {
     new Map()
   );
   const [isLoading, setIsLoading] = useState(true);
+  const [displayedCount, setDisplayedCount] = useState(9);
+  const [loadingMore, setLoadingMore] = useState(false);
 
-  // Items per page for lazy loading
+  // Items per page for button loading
   const ITEMS_PER_PAGE = 9;
 
   useEffect(() => {
@@ -103,35 +103,22 @@ export default function BlogPage() {
     fetchPosts();
   }, []);
 
-  // Lazy loading for all articles - only initialize after articles are loaded
-  const {
-    data: displayedArticles,
-    loading: loadingMore,
-    hasMoreData,
-    loadMore,
-    reset,
-  } = useLazyLoading({
-    initialData: [],
-    loadMoreData: async (page: number, limit: number) => {
-      // Simulate network delay for smooth loading experience
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      const startIndex = (page - 1) * limit;
-      const endIndex = startIndex + limit;
-      return articles.slice(startIndex, endIndex);
-    },
-    itemsPerPage: ITEMS_PER_PAGE,
-    hasMore: false,
-    getItemId: (article: Article) => article.link,
-  });
+  // Get currently displayed articles
+  const displayedArticles = articles.slice(0, displayedCount);
 
-  // Reset lazy loading when articles are loaded
-  useEffect(() => {
-    if (!isLoading && articles.length > 0) {
-      const initialData = articles.slice(0, ITEMS_PER_PAGE);
-      const hasMore = articles.length > ITEMS_PER_PAGE;
-      reset(initialData, hasMore);
-    }
-  }, [articles, isLoading, reset, ITEMS_PER_PAGE]);
+  // Check if there are more articles to load
+  const hasMoreArticles = displayedCount < articles.length;
+
+  // Function to load more articles
+  const loadMoreArticles = async () => {
+    if (loadingMore || !hasMoreArticles) return;
+
+    setLoadingMore(true);
+    // Simulate network delay for better UX
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    setDisplayedCount((prev) => prev + ITEMS_PER_PAGE);
+    setLoadingMore(false);
+  };
 
   // Improved category count calculation using exact category matching
   const getCategoryCount = (categoryName: string) => {
@@ -333,12 +320,40 @@ export default function BlogPage() {
                       ))}
                     </ArticleGrid>
 
-                    {hasMoreData && (
-                      <LoadMoreTrigger
-                        onLoadMore={loadMore}
-                        loading={loadingMore}
-                        hasMore={hasMoreData}
-                      />
+                    {hasMoreArticles && (
+                      <div className="flex justify-center mt-12">
+                        <button
+                          onClick={loadMoreArticles}
+                          disabled={loadingMore}
+                          className="px-8 py-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 border"
+                          style={{
+                            backgroundColor: loadingMore
+                              ? "var(--surface)"
+                              : "var(--accent)",
+                            color: loadingMore
+                              ? "var(--text-secondary)"
+                              : "white",
+                            borderColor: loadingMore
+                              ? "var(--border)"
+                              : "var(--accent)",
+                          }}
+                        >
+                          {loadingMore ? (
+                            <div className="flex items-center gap-3">
+                              <div
+                                className="inline-block animate-spin rounded-full h-5 w-5 border-b-2"
+                                style={{ borderColor: "var(--accent)" }}
+                              ></div>
+                              Loading more articles...
+                            </div>
+                          ) : (
+                            `Load More Articles (${Math.min(
+                              ITEMS_PER_PAGE,
+                              articles.length - displayedCount
+                            )} more)`
+                          )}
+                        </button>
+                      </div>
                     )}
                   </>
                 ) : (
