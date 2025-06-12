@@ -14,28 +14,15 @@ const ContactSection = () => {
     type: "success" | "error" | null;
     message: string;
   }>({ type: null, message: "" });
-  const [showToast, setShowToast] = useState(false);
 
-  // Auto-hide success message after 5 seconds
+  // Auto-hide status notifications
   useEffect(() => {
-    if (submitStatus.type === "success") {
-      setShowToast(true);
-      const timer = setTimeout(() => {
-        setShowToast(false);
-        setTimeout(() => {
-          setSubmitStatus({ type: null, message: "" });
-        }, 300); // Wait for animation to complete
-      }, 5000);
+    if (submitStatus.type) {
+      const hideDelay = submitStatus.type === "success" ? 5000 : 8000;
 
-      return () => clearTimeout(timer);
-    } else if (submitStatus.type === "error") {
-      setShowToast(true);
       const timer = setTimeout(() => {
-        setShowToast(false);
-        setTimeout(() => {
-          setSubmitStatus({ type: null, message: "" });
-        }, 300);
-      }, 8000); // Keep error messages longer
+        setSubmitStatus({ type: null, message: "" });
+      }, hideDelay);
 
       return () => clearTimeout(timer);
     }
@@ -70,13 +57,11 @@ const ContactSection = () => {
           message: result.message || "Message sent successfully!",
         });
         setFormData({ name: "", email: "", subject: "", message: "" });
-        setShowToast(true);
       } else {
         setSubmitStatus({
           type: "error",
           message: result.error || "Failed to send message. Please try again.",
         });
-        setShowToast(true);
       }
     } catch (err: unknown) {
       console.error("Contact form error:", err);
@@ -84,7 +69,6 @@ const ContactSection = () => {
         type: "error",
         message: "Network error. Please check your connection and try again.",
       });
-      setShowToast(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -299,19 +283,6 @@ const ContactSection = () => {
               Send me a message
             </h3>
 
-            {/* Status Message */}
-            {submitStatus.type && (
-              <div
-                className={`mb-4 p-3 rounded-lg border text-sm transition-all duration-300 ${
-                  submitStatus.type === "success"
-                    ? "border-green-200 bg-green-50 text-green-800"
-                    : "border-red-200 bg-red-50 text-red-800"
-                }`}
-              >
-                {submitStatus.message}
-              </div>
-            )}
-
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label
@@ -420,6 +391,116 @@ const ContactSection = () => {
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
+
+              {/* Status Notification */}
+              {submitStatus.type && (
+                <div
+                  className={`mt-4 p-4 rounded-lg border transition-all duration-300 ${
+                    submitStatus.type === "success"
+                      ? "bg-green-50 border-green-200"
+                      : "bg-red-50 border-red-200"
+                  }`}
+                  style={{
+                    backgroundColor:
+                      submitStatus.type === "success"
+                        ? "rgba(16, 185, 129, 0.1)"
+                        : "rgba(239, 68, 68, 0.1)",
+                    borderColor:
+                      submitStatus.type === "success" ? "#10b981" : "#ef4444",
+                  }}
+                >
+                  <div className="flex items-start gap-3">
+                    <div
+                      className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${
+                        submitStatus.type === "success"
+                          ? "bg-green-100"
+                          : "bg-red-100"
+                      }`}
+                    >
+                      {submitStatus.type === "success" ? (
+                        <svg
+                          className="w-3 h-3 text-green-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          className="w-3 h-3 text-red-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4
+                        className={`text-sm font-semibold mb-1 ${
+                          submitStatus.type === "success"
+                            ? "text-green-800"
+                            : "text-red-800"
+                        }`}
+                      >
+                        {submitStatus.type === "success"
+                          ? "Message Sent Successfully!"
+                          : "Error Sending Message"}
+                      </h4>
+                      <p
+                        className={`text-xs ${
+                          submitStatus.type === "success"
+                            ? "text-green-700"
+                            : "text-red-700"
+                        }`}
+                      >
+                        {submitStatus.message}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() =>
+                        setSubmitStatus({ type: null, message: "" })
+                      }
+                      className={`flex-shrink-0 p-1 rounded-full transition-colors duration-200 ${
+                        submitStatus.type === "success"
+                          ? "hover:bg-green-200"
+                          : "hover:bg-red-200"
+                      }`}
+                      aria-label="Dismiss notification"
+                    >
+                      <svg
+                        className={`w-3 h-3 ${
+                          submitStatus.type === "success"
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              )}
             </form>
           </div>
         </div>
