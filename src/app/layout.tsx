@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "./ThemeProvider";
 import Navigation from "./components/Navigation";
 import Footer from "./Footer";
+import FloatingContactButton from "@/components/FloatingContactButton";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -64,6 +65,7 @@ export default function RootLayout({
           <Navigation />
           {children}
           <Footer />
+          <FloatingContactButton />
         </ThemeProvider>
         <SpeedInsights />
         <Analytics />

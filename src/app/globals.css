@@ -23,6 +23,7 @@ html {
   --accent-hover: #0284c7;
   --accent-light: #38bdf8;
   --accent-subtle: #f0f9ff;
+  --accent-rgb: 14, 165, 233;
   --muted: #64748b;
   --muted-light: #94a3b8;
   --card-bg: #ffffff;
@@ -56,6 +57,7 @@ html {
   --accent-hover: #7fdbca;
   --accent-light: #7fdbca;
   --accent-subtle: #152c3e;
+  --accent-rgb: 130, 170, 255;
   --muted: #5f7e97;
   --muted-light: #637777;
   --card-bg: #011627;
@@ -1167,7 +1169,7 @@ a:focus {
   padding: 0;
   background: transparent;
   border: none;
-  color: var(--reading-text-color, var(--text-primary));
+  color: var(--reading-text-color, var, --text-primary);
 }
 
 .blog-content img {
@@ -1466,5 +1468,807 @@ a:focus {
 
   .highlighted-paragraph {
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Enhanced Contact Form Styling */
+.contact-form-input {
+  background-color: var(--surface-hover);
+  color: var(--text-primary);
+  border-color: var(--border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.contact-form-input:hover {
+  border-color: var(--border-hover);
+  background-color: var(--surface);
+  transform: translateY(-1px);
+}
+
+.contact-form-input:focus {
+  border-color: var(--accent);
+  background-color: var(--surface);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1);
+  transform: translateY(-1px);
+}
+
+.contact-form-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.contact-form-input:focus::placeholder {
+  opacity: 0.6;
+}
+
+.contact-form-input.error {
+  border-color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.05);
+  animation: shake 0.5s ease-in-out;
+}
+
+.dark .contact-form-input.error {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+/* Label styling */
+.contact-form-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.contact-form-input:focus + .contact-form-label,
+.contact-form-input:focus ~ .contact-form-label {
+  color: var(--accent);
+}
+
+/* Error text styling */
+.contact-form-error {
+  color: #dc2626;
+  animation: fadeInError 0.3s ease-out;
+}
+
+.dark .contact-form-error {
+  color: #f87171;
+}
+
+@keyframes fadeInError {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add subtle shadow for input fields */
+.contact-form-input {
+  box-shadow: var(--shadow-subtle);
+}
+
+.contact-form-input:focus {
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1), var(--shadow);
+}
+
+.dark .contact-form-input:focus {
+  box-shadow: 0 0 0 3px rgba(130, 170, 255, 0.2), var(--shadow);
+}
+
+/* Enhanced Contact Form Animations and Effects */
+
+/* Success celebration animation */
+@keyframes celebrate {
+  0% {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+.celebrate {
+  animation: celebrate 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Enhanced notification styles with better contrast and animations */
+.notification-success {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.12) 0%,
+    rgba(34, 197, 94, 0.08) 50%,
+    rgba(16, 185, 129, 0.06) 100%
+  );
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  backdrop-filter: blur(12px);
+  animation: slideInSuccess 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: rgb(5, 150, 105); /* Enhanced contrast for light mode */
+}
+
+.dark .notification-success {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.18) 0%,
+    rgba(34, 197, 94, 0.12) 50%,
+    rgba(16, 185, 129, 0.08) 100%
+  );
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: rgb(52, 211, 153); /* Brighter for dark mode */
+}
+
+.notification-error {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.12) 0%,
+    rgba(248, 113, 113, 0.08) 50%,
+    rgba(239, 68, 68, 0.06) 100%
+  );
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  backdrop-filter: blur(12px);
+  animation: slideInError 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: rgb(185, 28, 28); /* Enhanced contrast for light mode */
+}
+
+.dark .notification-error {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.18) 0%,
+    rgba(248, 113, 113, 0.12) 50%,
+    rgba(239, 68, 68, 0.08) 100%
+  );
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: rgb(248, 113, 113); /* Brighter for dark mode */
+}
+
+/* Notification text styling with enhanced contrast for both modes */
+.notification-success-title {
+  color: rgb(6, 95, 70); /* Darker emerald for light mode contrast */
+  font-weight: 700;
+}
+
+.dark .notification-success-title {
+  color: rgb(52, 211, 153); /* Bright emerald for dark mode */
+}
+
+.notification-success-text {
+  color: rgb(5, 150, 105); /* Medium emerald for light mode */
+  font-weight: 500;
+}
+
+.dark .notification-success-text {
+  color: rgb(110, 231, 183); /* Light emerald for dark mode */
+}
+
+.notification-error-title {
+  color: rgb(153, 27, 27); /* Darker red for light mode contrast */
+  font-weight: 700;
+}
+
+.dark .notification-error-title {
+  color: rgb(248, 113, 113); /* Bright red for dark mode */
+}
+
+.notification-error-text {
+  color: rgb(185, 28, 28); /* Medium red for light mode */
+  font-weight: 500;
+}
+
+.dark .notification-error-text {
+  color: rgb(252, 165, 165); /* Light red for dark mode */
+}
+
+/* Notification icon styling */
+.notification-success-icon {
+  background: rgba(5, 150, 105, 0.15);
+  color: rgb(5, 150, 105);
+}
+
+.dark .notification-success-icon {
+  background: rgba(52, 211, 153, 0.2);
+  color: rgb(52, 211, 153);
+}
+
+.notification-error-icon {
+  background: rgba(185, 28, 28, 0.15);
+  color: rgb(185, 28, 28);
+}
+
+.dark .notification-error-icon {
+  background: rgba(248, 113, 113, 0.2);
+  color: rgb(248, 113, 113);
+}
+
+/* Loading button text contrast enhancement */
+.loading-button-text {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+}
+
+.dark .loading-button-text {
+  color: rgba(255, 255, 255, 0.98);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Enhanced text contrast for loading states */
+.loading-state-light .loading-button-text {
+  color: rgba(255, 255, 255, 0.98) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+  font-weight: 700 !important;
+}
+
+.dark .loading-state-dark .loading-button-text {
+  color: rgba(15, 23, 42, 0.95) !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+  font-weight: 700 !important;
+}
+
+/* Enhanced loading state with theme-appropriate colors */
+.loading-state-light {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+  color: white !important;
+  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+.loading-state-dark {
+  background: linear-gradient(135deg, #82aaff, #7fdbca) !important;
+  color: #011627 !important;
+  box-shadow: 0 8px 25px rgba(130, 170, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Loading spinner contrast enhancement with theme colors */
+.loading-spinner-ring-primary {
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: rgba(255, 255, 255, 0.9);
+}
+
+.loading-spinner-ring-secondary {
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-bottom-color: rgba(255, 255, 255, 0.7);
+}
+
+.loading-spinner-center {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Enhanced spinner contrast for different loading states */
+.loading-state-light .loading-spinner-ring-primary {
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: rgba(255, 255, 255, 0.95);
+}
+
+.loading-state-light .loading-spinner-ring-secondary {
+  border-color: rgba(255, 255, 255, 0.2);
+  border-bottom-color: rgba(255, 255, 255, 0.8);
+}
+
+.loading-state-light .loading-spinner-center {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .loading-state-dark .loading-spinner-ring-primary {
+  border-color: rgba(15, 23, 42, 0.3);
+  border-top-color: rgba(15, 23, 42, 0.95);
+}
+
+.dark .loading-state-dark .loading-spinner-ring-secondary {
+  border-color: rgba(15, 23, 42, 0.2);
+  border-bottom-color: rgba(15, 23, 42, 0.8);
+}
+
+.dark .loading-state-dark .loading-spinner-center {
+  background-color: rgba(15, 23, 42, 0.9);
+}
+
+/* Loading button states with proper theme colors */
+.loading-state-light {
+  background: linear-gradient(
+    135deg,
+    rgb(14, 165, 233),
+    rgb(59, 130, 246)
+  ) !important;
+  color: white !important;
+  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+.dark .loading-state-dark {
+  background: linear-gradient(
+    135deg,
+    rgb(130, 170, 255),
+    rgb(147, 197, 253)
+  ) !important;
+  color: rgb(15, 23, 42) !important;
+  box-shadow: 0 8px 25px rgba(130, 170, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 15-second notification progress bars */
+.notification-progress-15s {
+  width: 100%;
+  animation: progress-countdown-15s 15s linear;
+  animation-fill-mode: both;
+}
+
+.notification-progress-success {
+  background: linear-gradient(
+    90deg,
+    rgb(5, 150, 105),
+    rgb(16, 185, 129),
+    rgb(34, 197, 94)
+  );
+}
+
+.notification-progress-error {
+  background: linear-gradient(
+    90deg,
+    rgb(185, 28, 28),
+    rgb(239, 68, 68),
+    rgb(248, 113, 113)
+  );
+}
+
+@keyframes progress-countdown-15s {
+  from {
+    width: 100%;
+    opacity: 1;
+  }
+  to {
+    width: 0%;
+    opacity: 0.3;
+  }
+}
+
+/* 15-second countdown progress bar animation */
+.notification-progress-15s {
+  animation: countdown-15s 15000ms linear forwards;
+}
+
+@keyframes countdown-15s {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+/* Enhanced notification progress bars with better visibility */
+.notification-progress-success {
+  background: linear-gradient(
+    90deg,
+    rgba(16, 185, 129, 0.8) 0%,
+    rgba(34, 197, 94, 0.9) 50%,
+    rgba(16, 185, 129, 0.8) 100%
+  );
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+}
+
+.dark .notification-progress-success {
+  background: linear-gradient(
+    90deg,
+    rgba(52, 211, 153, 0.8) 0%,
+    rgba(110, 231, 183, 0.9) 50%,
+    rgba(52, 211, 153, 0.8) 100%
+  );
+  box-shadow: 0 1px 3px rgba(52, 211, 153, 0.4);
+}
+
+.notification-progress-error {
+  background: linear-gradient(
+    90deg,
+    rgba(239, 68, 68, 0.8) 0%,
+    rgba(248, 113, 113, 0.9) 50%,
+    rgba(239, 68, 68, 0.8) 100%
+  );
+  box-shadow: 0 1px 3px rgba(239, 68, 68, 0.3);
+}
+
+.dark .notification-progress-error {
+  background: linear-gradient(
+    90deg,
+    rgba(248, 113, 113, 0.8) 0%,
+    rgba(252, 165, 165, 0.9) 50%,
+    rgba(248, 113, 113, 0.8) 100%
+  );
+  box-shadow: 0 1px 3px rgba(248, 113, 113, 0.4);
+}
+
+@keyframes slideInSuccess {
+  0% {
+    transform: translateY(-20px) scale(0.95);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-5px) scale(1.02);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInError {
+  0% {
+    transform: translateY(-20px) scale(0.95) rotate(-1deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-5px) scale(1.02) rotate(0.5deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.notification-info {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(59, 130, 246, 0.05) 100%
+  );
+  border-left: 4px solid #3b82f6;
+  color: #2563eb;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.dark .notification-info {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.15) 0%,
+    rgba(59, 130, 246, 0.08) 100%
+  );
+  color: #60a5fa;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+/* Enhanced button hover effects with better performance */
+.contact-submit-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.contact-submit-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.contact-submit-button:hover::before {
+  left: 100%;
+}
+
+.contact-submit-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(var(--accent-rgb), 0.4),
+    0 8px 20px rgba(var(--accent-rgb), 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.contact-submit-button:active {
+  transform: translateY(-1px) scale(1.01);
+  transition: transform 0.1s ease;
+}
+
+/* Enhanced loading spinner with multiple rings and better performance */
+.loading-spinner-enhanced {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.loading-spinner-enhanced::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-spinner-enhanced::before {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  border: 2px solid transparent;
+  border-bottom: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite reverse;
+  opacity: 0.6;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reverse spin animation */
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-reverse {
+  animation-direction: reverse;
+}
+
+/* Progress bar animations with better visual feedback */
+.progress-bar {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: progress-shimmer 2s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+@keyframes progress-shimmer {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(350%);
+    opacity: 0;
+  }
+}
+
+/* Enhanced form field focus and validation effects */
+.contact-form-input:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.12),
+    0 8px 20px rgba(var(--accent-rgb), 0.15),
+    0 4px 12px rgba(var(--accent-rgb), 0.1), var(--shadow);
+  border-color: var(--accent);
+}
+
+.dark .contact-form-input:focus {
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.25),
+    0 8px 20px rgba(var(--accent-rgb), 0.2),
+    0 4px 12px rgba(var(--accent-rgb), 0.15), var(--shadow);
+}
+
+/* Enhanced validation states with smooth transitions */
+.field-valid {
+  border-color: #10b981 !important;
+  background-color: rgba(16, 185, 129, 0.04);
+  animation: validPulse 0.6s ease-out;
+}
+
+.field-valid:focus {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15),
+    0 4px 12px rgba(16, 185, 129, 0.1);
+  transform: translateY(-2px);
+}
+
+.field-invalid {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.04);
+  animation: shake 0.5s ease-in-out;
+}
+
+.field-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15),
+    0 4px 12px rgba(239, 68, 68, 0.1);
+  transform: translateY(-2px);
+}
+
+@keyframes validPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+/* Smooth transitions for all form elements with staggered delays */
+.contact-form-input {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow, border-color;
+}
+
+.contact-form-label {
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-submit-button {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+/* Enhanced disabled state with better visual feedback */
+.contact-form-input:disabled {
+  background-color: var(--surface-secondary);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: var(--border-secondary);
+}
+
+.contact-form-input:disabled::placeholder {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+/* Floating label effect with enhanced styling */
+.floating-label {
+  position: relative;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label,
+.floating-label textarea:focus + label,
+.floating-label textarea:not(:placeholder-shown) + label {
+  transform: translateY(-2rem) scale(0.85);
+  color: var(--accent);
+  font-weight: 600;
+  background: var(--surface);
+  padding: 0 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.floating-label label {
+  position: absolute;
+  left: 0.875rem;
+  top: 0.875rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 10;
+  font-weight: 500;
+}
+
+/* Ripple effect for buttons with better performance */
+.ripple {
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.ripple::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.ripple:active::before {
+  width: 300px;
+  height: 300px;
+  transition: width 0.1s ease-out, height 0.1s ease-out;
+}
+
+/* Enhanced micro-interactions */
+.contact-form-input:hover {
+  border-color: var(--border-hover);
+  background-color: var(--surface);
+  transform: translateY(-1px);
+}
+
+.contact-form-label:hover {
+  color: var(--text-primary);
+}
+
+/* Accessibility improvements */
+.contact-form-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.contact-submit-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .contact-form-input,
+  .contact-form-label,
+  .contact-submit-button,
+  .notification-success,
+  .notification-error {
+    animation: none;
+    transition: none;
+  }
+
+  .progress-bar::after {
+    animation: none;
+  }
+
+  .loading-spinner-enhanced::after,
+  .loading-spinner-enhanced::before {
+    animation: none;
   }
 }

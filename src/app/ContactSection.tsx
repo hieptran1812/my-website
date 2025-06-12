@@ -1,78 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
+import ContactForm from "@/components/ContactForm";
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{
-    type: "success" | "error" | null;
-    message: string;
-  }>({ type: null, message: "" });
-
-  // Auto-hide status notifications
-  useEffect(() => {
-    if (submitStatus.type) {
-      const hideDelay = submitStatus.type === "success" ? 5000 : 8000;
-
-      const timer = setTimeout(() => {
-        setSubmitStatus({ type: null, message: "" });
-      }, hideDelay);
-
-      return () => clearTimeout(timer);
-    }
-  }, [submitStatus.type]);
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: "" });
-
-    try {
-      const response = await fetch("/api/contact/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmitStatus({
-          type: "success",
-          message: result.message || "Message sent successfully!",
-        });
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        setSubmitStatus({
-          type: "error",
-          message: result.error || "Failed to send message. Please try again.",
-        });
-      }
-    } catch (err: unknown) {
-      console.error("Contact form error:", err);
-      setSubmitStatus({
-        type: "error",
-        message: "Network error. Please check your connection and try again.",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
   return (
     <section
       className="py-16 md:py-24 transition-colors duration-300"
@@ -95,23 +26,23 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-8">
           {/* Contact Info Cards */}
           <div className="space-y-4">
             {/* Email */}
             <div
-              className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 hover:shadow-sm"
+              className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 hover:shadow-md hover:scale-[1.02]"
               style={{
                 backgroundColor: "var(--card-bg)",
                 borderColor: "var(--border)",
               }}
             >
               <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center"
+                className="w-12 h-12 rounded-lg flex items-center justify-center"
                 style={{ backgroundColor: "var(--accent-subtle)" }}
               >
                 <svg
-                  className="w-5 h-5"
+                  className="w-6 h-6"
                   style={{ color: "var(--accent)" }}
                   fill="none"
                   stroke="currentColor"
@@ -127,7 +58,7 @@ const ContactSection = () => {
               </div>
               <div className="flex-1">
                 <h3
-                  className="text-sm font-medium mb-1 transition-colors duration-300"
+                  className="text-base font-semibold mb-1 transition-colors duration-300"
                   style={{ color: "var(--text-primary)" }}
                 >
                   Email
@@ -144,18 +75,18 @@ const ContactSection = () => {
 
             {/* LinkedIn */}
             <div
-              className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 hover:shadow-sm"
+              className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 hover:shadow-md hover:scale-[1.02]"
               style={{
                 backgroundColor: "var(--card-bg)",
                 borderColor: "var(--border)",
               }}
             >
               <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center"
+                className="w-12 h-12 rounded-lg flex items-center justify-center"
                 style={{ backgroundColor: "var(--accent-subtle)" }}
               >
                 <svg
-                  className="w-5 h-5"
+                  className="w-6 h-6"
                   style={{ color: "var(--accent)" }}
                   fill="currentColor"
                   viewBox="0 0 24 24"
@@ -165,7 +96,7 @@ const ContactSection = () => {
               </div>
               <div className="flex-1">
                 <h3
-                  className="text-sm font-medium mb-1 transition-colors duration-300"
+                  className="text-base font-semibold mb-1 transition-colors duration-300"
                   style={{ color: "var(--text-primary)" }}
                 >
                   LinkedIn
@@ -184,18 +115,18 @@ const ContactSection = () => {
 
             {/* GitHub */}
             <div
-              className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 hover:shadow-sm"
+              className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 hover:shadow-md hover:scale-[1.02]"
               style={{
                 backgroundColor: "var(--card-bg)",
                 borderColor: "var(--border)",
               }}
             >
               <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center"
+                className="w-12 h-12 rounded-lg flex items-center justify-center"
                 style={{ backgroundColor: "var(--accent-subtle)" }}
               >
                 <svg
-                  className="w-5 h-5"
+                  className="w-6 h-6"
                   style={{ color: "var(--accent)" }}
                   fill="currentColor"
                   viewBox="0 0 24 24"
@@ -205,7 +136,7 @@ const ContactSection = () => {
               </div>
               <div className="flex-1">
                 <h3
-                  className="text-sm font-medium mb-1 transition-colors duration-300"
+                  className="text-base font-semibold mb-1 transition-colors duration-300"
                   style={{ color: "var(--text-primary)" }}
                 >
                   GitHub
@@ -224,18 +155,18 @@ const ContactSection = () => {
 
             {/* X (Twitter) */}
             <div
-              className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 hover:shadow-sm"
+              className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 hover:shadow-md hover:scale-[1.02]"
               style={{
                 backgroundColor: "var(--card-bg)",
                 borderColor: "var(--border)",
               }}
             >
               <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center group"
+                className="w-12 h-12 rounded-lg flex items-center justify-center group"
                 style={{ backgroundColor: "var(--accent-subtle)" }}
               >
                 <svg
-                  className="w-5 h-5 transition-all duration-200 group-hover:scale-110"
+                  className="w-6 h-6 transition-all duration-200 group-hover:scale-110"
                   viewBox="0 0 120 120"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -250,7 +181,7 @@ const ContactSection = () => {
               </div>
               <div className="flex-1">
                 <h3
-                  className="text-sm font-medium mb-1 transition-colors duration-300"
+                  className="text-base font-semibold mb-1 transition-colors duration-300"
                   style={{ color: "var(--text-primary)" }}
                 >
                   X (Twitter)
@@ -270,238 +201,41 @@ const ContactSection = () => {
 
           {/* Contact Form */}
           <div
-            className="p-6 rounded-xl border"
+            className="p-6 md:p-8 rounded-xl border shadow-lg backdrop-blur-sm"
             style={{
               backgroundColor: "var(--card-bg)",
               borderColor: "var(--border)",
             }}
           >
-            <h3
-              className="text-lg font-semibold mb-4 transition-colors duration-300"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Send me a message
-            </h3>
-
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium mb-2 transition-colors duration-300"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  disabled={isSubmitting}
-                  className="w-full px-3 py-2 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{
-                    backgroundColor: "var(--background)",
-                    borderColor: "var(--border)",
-                    color: "var(--text-primary)",
-                  }}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium mb-2 transition-colors duration-300"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  disabled={isSubmitting}
-                  className="w-full px-3 py-2 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{
-                    backgroundColor: "var(--background)",
-                    borderColor: "var(--border)",
-                    color: "var(--text-primary)",
-                  }}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-sm font-medium mb-2 transition-colors duration-300"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Subject *
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  disabled={isSubmitting}
-                  className="w-full px-3 py-2 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{
-                    backgroundColor: "var(--background)",
-                    borderColor: "var(--border)",
-                    color: "var(--text-primary)",
-                  }}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium mb-2 transition-colors duration-300"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  disabled={isSubmitting}
-                  className="w-full px-3 py-2 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 resize-vertical disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{
-                    backgroundColor: "var(--background)",
-                    borderColor: "var(--border)",
-                    color: "var(--text-primary)",
-                  }}
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full px-4 py-2 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{
-                  backgroundColor: "var(--accent)",
-                  color: "white",
-                }}
+            <div className="flex items-center gap-3 mb-6">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center"
+                style={{ backgroundColor: "var(--accent-subtle)" }}
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </button>
-
-              {/* Status Notification */}
-              {submitStatus.type && (
-                <div
-                  className={`mt-4 p-4 rounded-lg border transition-all duration-300 ${
-                    submitStatus.type === "success"
-                      ? "bg-green-50 border-green-200"
-                      : "bg-red-50 border-red-200"
-                  }`}
-                  style={{
-                    backgroundColor:
-                      submitStatus.type === "success"
-                        ? "rgba(16, 185, 129, 0.1)"
-                        : "rgba(239, 68, 68, 0.1)",
-                    borderColor:
-                      submitStatus.type === "success" ? "#10b981" : "#ef4444",
-                  }}
+                <svg
+                  className="w-5 h-5"
+                  style={{ color: "var(--accent)" }}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <div className="flex items-start gap-3">
-                    <div
-                      className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${
-                        submitStatus.type === "success"
-                          ? "bg-green-100"
-                          : "bg-red-100"
-                      }`}
-                    >
-                      {submitStatus.type === "success" ? (
-                        <svg
-                          className="w-3 h-3 text-green-600"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      ) : (
-                        <svg
-                          className="w-3 h-3 text-red-600"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h4
-                        className={`text-sm font-semibold mb-1 ${
-                          submitStatus.type === "success"
-                            ? "text-green-800"
-                            : "text-red-800"
-                        }`}
-                      >
-                        {submitStatus.type === "success"
-                          ? "Message Sent Successfully!"
-                          : "Error Sending Message"}
-                      </h4>
-                      <p
-                        className={`text-xs ${
-                          submitStatus.type === "success"
-                            ? "text-green-700"
-                            : "text-red-700"
-                        }`}
-                      >
-                        {submitStatus.message}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() =>
-                        setSubmitStatus({ type: null, message: "" })
-                      }
-                      className={`flex-shrink-0 p-1 rounded-full transition-colors duration-200 ${
-                        submitStatus.type === "success"
-                          ? "hover:bg-green-200"
-                          : "hover:bg-red-200"
-                      }`}
-                      aria-label="Dismiss notification"
-                    >
-                      <svg
-                        className={`w-3 h-3 ${
-                          submitStatus.type === "success"
-                            ? "text-green-600"
-                            : "text-red-600"
-                        }`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              )}
-            </form>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                  />
+                </svg>
+              </div>
+              <h3
+                className="text-xl font-bold transition-colors duration-300"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Send me a message
+              </h3>
+            </div>
+
+            <ContactForm />
           </div>
         </div>
 
@@ -513,7 +247,7 @@ const ContactSection = () => {
             Prefer email? You can also reach me directly at{" "}
             <a
               href="mailto:hieptran.jobs@gmail.com"
-              className="transition-colors duration-300 hover:underline"
+              className="transition-colors duration-300 hover:underline font-semibold"
               style={{ color: "var(--accent)" }}
             >
               hieptran.jobs@gmail.com
