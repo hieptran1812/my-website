@@ -11,6 +11,7 @@ import type {
   SpeechReaderOptions,
   SpeechReaderEvents,
 } from "../../components/utils/SpeechReader";
+import BlogShareSection from "./BlogShareSection";
 
 interface TocItem {
   id: string;
@@ -27,6 +28,7 @@ interface BlogReaderProps {
   tags?: string[];
   category?: string;
   author?: string;
+  postSlug?: string;
   dangerouslySetInnerHTML?: { __html: string };
 }
 
@@ -38,6 +40,7 @@ export default function BlogReader({
   tags = [],
   category = "Article",
   author = "Hiep Tran",
+  postSlug,
   dangerouslySetInnerHTML,
 }: BlogReaderProps) {
   const { theme, isReadingMode, setReadingMode } = useTheme();
@@ -1090,7 +1093,7 @@ export default function BlogReader({
             {/* Article Header */}
             <header className="mb-12 text-center">
               <h1
-                className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-8 leading-tight"
+                className="text-lg md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-8 leading-tight"
                 style={{
                   color: isReadingMode
                     ? theme === "dark"
@@ -1304,6 +1307,9 @@ export default function BlogReader({
                 )}
               </MathJax>
             </article>
+
+            {/* Blog Share Section */}
+            {postSlug && <BlogShareSection postSlug={postSlug} title={title} />}
           </div>
         </div>
       </div>

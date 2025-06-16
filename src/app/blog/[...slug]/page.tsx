@@ -14,6 +14,7 @@ interface BlogPost {
   tags: string[];
   category: string;
   author: string;
+  slug: string;
 }
 
 export default function BlogPostPage() {
@@ -50,11 +51,12 @@ export default function BlogPostPage() {
         setPost({
           title: data.article.title,
           content: data.article.content,
-          publishDate: data.article.date,
+          publishDate: data.article.publishDate,
           readTime: data.article.readTime,
           tags: data.article.tags,
           category: data.article.category,
           author: data.article.author,
+          slug: slug, // Add slug to post data
         });
       } catch (err) {
         console.error("Error fetching blog post:", err);
@@ -137,6 +139,7 @@ export default function BlogPostPage() {
       tags={post.tags}
       category={post.category}
       author={post.author}
+      postSlug={post.slug}
       dangerouslySetInnerHTML={{ __html: post.content }}
     />
   );

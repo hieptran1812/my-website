@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model BlogPost {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  reactions Reaction[]
+  comments  Comment[]
+  shares    Share[]
+
+  @@map("blog_posts")
+}
+
+model Reaction {
+  id        String      @id @default(cuid())
+  type      ReactionType
+  ipAddress String?
+  userEmail String?
+  createdAt DateTime    @default(now())
+
+  // Foreign key
+  postId String
+  post   BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  // Constraints
+  @@unique([postId, ipAddress])
+  @@unique([postId, userEmail])
+  @@map("reactions")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  author    String
+  email     String
+  website   String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Foreign keys
+  postId   String
+  post     BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  parentId String?
+  parent   Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies  Comment[] @relation("CommentReplies")
+
+  @@map("comments")
+}
+
+model Share {
+  id        String    @id @default(cuid())
+  platform  String    // 'twitter', 'facebook', 'linkedin', 'copy-link'
+  ipAddress String?
+  userEmail String?
+  createdAt DateTime  @default(now())
+
+  // Foreign key
+  postId String
+  post   BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@map("shares")
+}
+
+enum ReactionType {
+  like
+  love
+  laugh
+  wow
+  sad
+  angry
+}
