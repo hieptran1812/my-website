@@ -54,14 +54,14 @@ export const shareButtons = [
     platform: "facebook",
     label: "Facebook",
     icon: "📘",
-    getUrl: (url: string, _title: string) =>
+    getUrl: (url: string) =>
       `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
   },
   {
     platform: "linkedin",
     label: "LinkedIn",
     icon: "💼",
-    getUrl: (url: string, _title: string) =>
+    getUrl: (url: string) =>
       `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
         url
       )}`,

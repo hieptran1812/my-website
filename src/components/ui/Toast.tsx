@@ -31,27 +31,30 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
-  const addToast = useCallback((newToast: Omit<Toast, "id">) => {
-    const id = Math.random().toString(36).substr(2, 9);
-    const toast: Toast = {
-      id,
-      duration: 5000,
-      ...newToast,
-    };
-
-    setToasts((prev) => [...prev, toast]);
-
-    // Auto remove toast
-    if (toast.duration && toast.duration > 0) {
-      setTimeout(() => {
-        removeToast(id);
-      }, toast.duration);
-    }
-  }, []);
-
   const removeToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   }, []);
+
+  const addToast = useCallback(
+    (newToast: Omit<Toast, "id">) => {
+      const id = Math.random().toString(36).substr(2, 9);
+      const toast: Toast = {
+        id,
+        duration: 5000,
+        ...newToast,
+      };
+
+      setToasts((prev) => [...prev, toast]);
+
+      // Auto remove toast
+      if (toast.duration && toast.duration > 0) {
+        setTimeout(() => {
+          removeToast(id);
+        }, toast.duration);
+      }
+    },
+    [removeToast]
+  );
 
   return (
     <ToastContext.Provider value={{ toasts, addToast, removeToast }}>

@@ -201,7 +201,7 @@ export default function BlogShareSection({
       }
     } catch (error) {
       // Only log if it's not a user cancellation
-      if (error.name !== "AbortError") {
+      if (error instanceof Error && error.name !== "AbortError") {
         console.error("Error with native share:", error);
       }
     } finally {

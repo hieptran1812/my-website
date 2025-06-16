@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../lib/prisma";
+import { ReactionType } from "@prisma/client";
 
 export async function GET(request: NextRequest) {
   try {
@@ -124,13 +125,13 @@ export async function POST(request: NextRequest) {
       // Update existing reaction
       await prisma.reaction.update({
         where: { id: existingReaction.id },
-        data: { type: reactionType as any },
+        data: { type: reactionType as ReactionType },
       });
     } else {
       // Create new reaction
       await prisma.reaction.create({
         data: {
-          type: reactionType as any,
+          type: reactionType as ReactionType,
           postId: post.id,
           ipAddress,
           userEmail: userEmail || null,
