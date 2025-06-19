@@ -32,6 +32,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Webpack configuration for Prisma
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals.push({
+        "@prisma/client": "@prisma/client",
+      });
+    }
+    return config;
+  },
 };
 
 export default nextConfig;

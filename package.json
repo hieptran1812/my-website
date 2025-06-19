@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "export": "next export",
     "lint": "next lint",
+    "postinstall": "prisma generate",
+    "vercel-build": "prisma generate && next build",
     "update-readtime": "tsx scripts/updateReadTime.ts",
     "blog-report": "tsx scripts/blogAnalytics.ts report",
     "blog-validate": "tsx scripts/blogAnalytics.ts validate"
