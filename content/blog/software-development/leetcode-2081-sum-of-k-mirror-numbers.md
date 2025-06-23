@@ -1,14 +1,15 @@
 ---
-title: "Leetcode: 2081. Sum of k-Mirror Numbers"
-date: "2025-06-23"
-category: "Software Development"
+title: "Leetcode routine: 2081. Sum of k-Mirror Numbers"
+publishDate: "2025-06-24"
+readTime: "13 min read"
+category: "software-development"
 subcategory: "Algorithms"
-tags:
-  [
-    "Palindrome",
-  ]
-featured: false
+tags: ["Palindrome"]
+date: "2025-06-24"
 author: "Hiep Tran"
+featured: false
+image: "/blog-placeholder.jpg"
+excerpt: "Solution for 2081. Sum of k-Mirror Numbers"
 ---
 
 A k-mirror number is a positive integer without leading zeros that reads the same both forward and backward in base-10 as well as in base-k.
@@ -67,8 +68,8 @@ However, this straightforward approach isn't efficient enough—it quickly becom
 
 To speed things up, we can adopt a smarter strategy, inspired by the binary search method. The idea is to significantly reduce the number of checks by cleverly generating only palindrome numbers directly, rather than checking all numbers individually. Here's how it works:
 
-* A palindrome number is symmetric around its center. Thus, instead of generating the full palindrome at once, we can generate just the first half, call it $i'$, and then append its reverse to form the full palindrome $i$.
-* This "halving" technique drastically shrinks the number of potential numbers we need to examine. For instance, if we consider numbers up to $10^{10}$, the brute-force method would check every single number up to $10^{10}$. But by generating numbers from their halves, we only need about $O(\sqrt{10^{10}}) = O(10^5)$ palindromes—a huge improvement in efficiency.
+- A palindrome number is symmetric around its center. Thus, instead of generating the full palindrome at once, we can generate just the first half, call it $i'$, and then append its reverse to form the full palindrome $i$.
+- This "halving" technique drastically shrinks the number of potential numbers we need to examine. For instance, if we consider numbers up to $10^{10}$, the brute-force method would check every single number up to $10^{10}$. But by generating numbers from their halves, we only need about $O(\sqrt{10^{10}}) = O(10^5)$ palindromes—a huge improvement in efficiency.
 
 When constructing these palindromes, we should consider two cases:
 
@@ -77,12 +78,11 @@ When constructing these palindromes, we should consider two cases:
 
 To keep our search efficient and ordered, we do the following:
 
-* Iterate incrementally over half-numbers $i'$ within clearly defined ranges (such as between $10^k$ and $10^{k+1}$).
-* For each half-number, first generate the odd-length palindrome and check if it meets our criteria.
-* Then, generate the corresponding even-length palindrome and check it as well.
+- Iterate incrementally over half-numbers $i'$ within clearly defined ranges (such as between $10^k$ and $10^{k+1}$).
+- For each half-number, first generate the odd-length palindrome and check if it meets our criteria.
+- Then, generate the corresponding even-length palindrome and check it as well.
 
 This systematic approach ensures we efficiently cover all possible palindromes in increasing order, greatly improving the solution's performance.
-
 
 ```
 class Solution:
