@@ -1,7 +1,6 @@
 ---
 title: "Leetcode routine: 2081. Sum of k-Mirror Numbers"
 publishDate: "2025-06-24"
-readTime: "13 min read"
 category: "software-development"
 subcategory: "Algorithms"
 tags: ["Palindrome"]
@@ -11,6 +10,8 @@ featured: false
 image: "/blog-placeholder.jpg"
 excerpt: "Solution for 2081. Sum of k-Mirror Numbers"
 ---
+
+*Disclaimer: This is just my personal LeetCode practice and solution approach. There may be other more optimal solutions or different ways to solve this problem.*
 
 # Problem
 
