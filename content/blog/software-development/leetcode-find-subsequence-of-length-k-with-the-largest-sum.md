@@ -3,7 +3,7 @@ title: "Leetcode routine: Find Subsequence of Length K With the Largest Sum"
 publishDate: "2025-06-29"
 category: "software-development"
 subcategory: "Algorithms"
-tags: ["Palindrome"]
+tags: ["Sorting"]
 date: "2025-06-29"
 author: "Hiep Tran"
 featured: false
@@ -13,9 +13,7 @@ excerpt: "Solution for Find Subsequence of Length K With the Largest Sum"
 
 *Disclaimer: This is just my personal LeetCode practice and solution approach. There may be other more optimal solutions or different ways to solve this problem.*
 
-# Problem
-
-## 📝 Problem: Largest Sum Subsequence of Length k
+# Problem: Find Subsequence of Length K With the Largest Sum
 
 You are given an integer array `nums` and an integer `k`. You want to find a **subsequence** of `nums` of length `k` that has the **largest sum**.
 
