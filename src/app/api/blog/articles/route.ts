@@ -17,6 +17,7 @@ export interface Article {
   difficulty: "Beginner" | "Intermediate" | "Advanced";
   featured: boolean;
   slug: string;
+  image?: string;
 }
 
 function convertToArticle(
@@ -108,6 +109,7 @@ function convertToArticle(
     difficulty,
     featured,
     slug, // Original slug remains for URL purposes
+    image: metadata.image || "/blog-placeholder.jpg", // Add image handling
   };
 }
 

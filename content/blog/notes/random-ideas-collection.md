@@ -11,7 +11,7 @@ tags:
   - Innovation
   - Quick Thoughts
   - Creativity
-image: /blog-placeholder.jpg
+image: "/blog-placeholder.jpg"
 featured: false
 excerpt: >-
   A collection of random ideas, quick thoughts, and half-baked concepts that 

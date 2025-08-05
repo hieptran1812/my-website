@@ -11,7 +11,7 @@ tags:
   - Leadership
   - Personal Development
   - Software Engineering
-image: /blog-placeholder.jpg
+image: "/blog-placeholder.jpg"
 featured: false
 excerpt: >-
   Personal reflections on the transition from mid-level to senior developer -

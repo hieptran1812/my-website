@@ -346,7 +346,9 @@ export default function Navigation() {
               </div>
             )}
           </div>
-          <span className="font-sans hidden sm:block text-lg">Hiep Tran</span>
+          <span className="nav-brand-text font-sans hidden sm:block text-lg tracking-tight font-semibold">
+            Hiep Tran
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -357,39 +359,73 @@ export default function Navigation() {
                 <div className="relative">
                   <button
                     onClick={() => handleDropdownToggle(link.name)}
-                    className="navbar-button flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 text-sm group"
+                    className="navbar-button flex items-center gap-3 px-5 py-3 rounded-2xl transition-all duration-300 text-sm group font-semibold tracking-wide relative overflow-hidden backdrop-blur-sm"
                     style={{
                       color:
-                        activeDropdown === link.name
+                        activeDropdown === link.name ||
+                        pathname.startsWith(link.href)
                           ? "var(--accent)"
-                          : "var(--text-secondary)",
+                          : "var(--text-primary)",
                       backgroundColor:
-                        activeDropdown === link.name
+                        activeDropdown === link.name ||
+                        pathname.startsWith(link.href)
                           ? "var(--surface-accent)"
                           : "transparent",
+                      fontWeight: "600",
+                      fontSize: "0.875rem",
+                      letterSpacing: "0.025em",
+                      fontFamily:
+                        "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+                      textShadow:
+                        activeDropdown === link.name ||
+                        pathname.startsWith(link.href)
+                          ? "0 1px 2px rgba(0,0,0,0.1)"
+                          : "none",
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.color = "var(--accent)";
                       e.currentTarget.style.backgroundColor =
                         "var(--surface-accent)";
+                      e.currentTarget.style.transform =
+                        "translateY(-2px) scale(1.02)";
+                      e.currentTarget.style.boxShadow =
+                        "0 8px 25px var(--shadow)/15, 0 0 0 1px var(--accent)/20";
+                      e.currentTarget.style.textShadow =
+                        "0 1px 2px rgba(0,0,0,0.1)";
                     }}
                     onMouseLeave={(e) => {
-                      if (activeDropdown !== link.name) {
-                        e.currentTarget.style.color = "var(--text-secondary)";
+                      if (
+                        activeDropdown !== link.name &&
+                        !pathname.startsWith(link.href)
+                      ) {
+                        e.currentTarget.style.color = "var(--text-primary)";
                         e.currentTarget.style.backgroundColor = "transparent";
+                        e.currentTarget.style.textShadow = "none";
                       }
+                      e.currentTarget.style.transform =
+                        "translateY(0px) scale(1)";
+                      e.currentTarget.style.boxShadow = "none";
                     }}
                     aria-expanded={activeDropdown === link.name}
                     aria-haspopup="menu"
                     aria-label={`${link.name} menu - ${link.description}`}
                   >
+                    {/* Enhanced active page underline for blog section */}
+                    {pathname.startsWith(link.href) && (
+                      <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full shadow-lg shadow-[var(--accent)]/50"></span>
+                    )}
+
                     {/* Ripple effect */}
                     <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-active:opacity-100 transition-opacity duration-200 transform -skew-x-12 group-active:animate-pulse"></span>
 
-                    {link.icon}
-                    <span>{link.name}</span>
+                    <span className="relative z-10 flex-shrink-0">
+                      {link.icon}
+                    </span>
+                    <span className="relative z-10 font-semibold tracking-wide nav-text">
+                      {link.name}
+                    </span>
                     <svg
-                      className={`w-4 h-4 transition-transform duration-200 ${
+                      className={`relative z-10 w-4 h-4 transition-transform duration-200 ${
                         activeDropdown === link.name ? "rotate-180" : ""
                       }`}
                       fill="none"
@@ -403,6 +439,14 @@ export default function Navigation() {
                         d="M19 9l-7 7-7-7"
                       />
                     </svg>
+
+                    {/* Active page indicators */}
+                    {pathname.startsWith(link.href) && (
+                      <>
+                        <span className="absolute right-3 top-3 w-2 h-2 rounded-full bg-[var(--accent)] shadow-lg shadow-[var(--accent)]/50 animate-pulse"></span>
+                        <span className="absolute inset-0 rounded-2xl border-2 border-[var(--accent)]/30 animate-pulse"></span>
+                      </>
+                    )}
                   </button>
 
                   {/* Dropdown Menu */}
@@ -417,39 +461,67 @@ export default function Navigation() {
                           key={item.name}
                           href={item.href}
                           onClick={() => setActiveDropdown(null)}
-                          className="navbar-button flex items-center gap-3 px-4 py-3 text-sm relative overflow-hidden group rounded-lg mx-2"
+                          className="navbar-button flex items-center gap-3 px-4 py-3 text-sm relative overflow-hidden group rounded-lg mx-2 font-semibold tracking-wide backdrop-blur-sm"
                           style={{
                             color:
                               pathname === item.href
                                 ? "var(--accent)"
-                                : "var(--text-secondary)",
+                                : "var(--text-primary)",
                             backgroundColor:
                               pathname === item.href
                                 ? "var(--surface-accent)"
                                 : "transparent",
+                            borderLeft:
+                              pathname === item.href
+                                ? "4px solid var(--accent)"
+                                : "4px solid transparent",
+                            fontSize: "0.875rem",
+                            letterSpacing: "0.025em",
+                            fontFamily:
+                              "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+                            textShadow:
+                              pathname === item.href
+                                ? "0 1px 2px rgba(0,0,0,0.1)"
+                                : "none",
                           }}
                           onMouseEnter={(e) => {
                             e.currentTarget.style.color = "var(--accent)";
                             e.currentTarget.style.backgroundColor =
                               "var(--surface-accent)";
+                            e.currentTarget.style.transform =
+                              "translateX(6px) scale(1.02)";
+                            e.currentTarget.style.borderLeft =
+                              "4px solid var(--accent)";
+                            e.currentTarget.style.textShadow =
+                              "0 1px 2px rgba(0,0,0,0.1)";
+                            e.currentTarget.style.boxShadow =
+                              "0 4px 12px var(--shadow)/10";
                           }}
                           onMouseLeave={(e) => {
                             if (pathname !== item.href) {
                               e.currentTarget.style.color =
-                                "var(--text-secondary)";
+                                "var(--text-primary)";
                               e.currentTarget.style.backgroundColor =
                                 "transparent";
+                              e.currentTarget.style.borderLeft =
+                                "4px solid transparent";
+                              e.currentTarget.style.textShadow = "none";
                             }
+                            e.currentTarget.style.transform =
+                              "translateX(0px) scale(1)";
+                            e.currentTarget.style.boxShadow = "none";
                           }}
                           role="menuitem"
                           aria-label={`Visit ${item.name} section`}
                         >
                           <span className="flex-shrink-0">{item.icon}</span>
-                          <span className="font-medium">{item.name}</span>
+                          <span className="font-semibold tracking-wide nav-text">
+                            {item.name}
+                          </span>
                           {pathname === item.href && (
                             <>
-                              <span className="absolute right-3 w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
-                              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent"></span>
+                              <span className="absolute right-3 w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse shadow-lg shadow-[var(--accent)]/50"></span>
+                              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full"></span>
                             </>
                           )}
                         </Link>
@@ -460,41 +532,70 @@ export default function Navigation() {
               ) : (
                 <Link
                   href={link.href}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 text-sm group relative overflow-hidden"
+                  className="flex items-center gap-3 px-5 py-3 rounded-2xl transition-all duration-300 text-sm group relative overflow-hidden font-semibold tracking-wide backdrop-blur-sm"
                   style={{
                     color:
                       pathname === link.href
                         ? "var(--accent)"
-                        : "var(--text-secondary)",
+                        : "var(--text-primary)",
                     backgroundColor:
                       pathname === link.href
                         ? "var(--surface-accent)"
                         : "transparent",
-                    fontWeight: pathname === link.href ? "600" : "normal",
+                    fontWeight: "600",
+                    fontSize: "0.875rem",
+                    letterSpacing: "0.025em",
+                    fontFamily:
+                      "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+                    textShadow:
+                      pathname === link.href
+                        ? "0 1px 2px rgba(0,0,0,0.1)"
+                        : "none",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = "var(--accent)";
                     e.currentTarget.style.backgroundColor =
                       "var(--surface-accent)";
+                    e.currentTarget.style.transform =
+                      "translateY(-2px) scale(1.02)";
+                    e.currentTarget.style.boxShadow =
+                      "0 8px 25px var(--shadow)/15, 0 0 0 1px var(--accent)/20";
+                    e.currentTarget.style.textShadow =
+                      "0 1px 2px rgba(0,0,0,0.1)";
                   }}
                   onMouseLeave={(e) => {
                     if (pathname !== link.href) {
-                      e.currentTarget.style.color = "var(--text-secondary)";
+                      e.currentTarget.style.color = "var(--text-primary)";
                       e.currentTarget.style.backgroundColor = "transparent";
+                      e.currentTarget.style.textShadow = "none";
                     }
+                    e.currentTarget.style.transform =
+                      "translateY(0px) scale(1)";
+                    e.currentTarget.style.boxShadow = "none";
                   }}
                   aria-label={link.description}
                   title={link.description}
                 >
+                  {/* Enhanced active page underline */}
+                  {pathname === link.href && (
+                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full shadow-lg shadow-[var(--accent)]/50"></span>
+                  )}
+
                   {/* Ripple effect */}
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-active:opacity-100 transition-opacity duration-200 transform -skew-x-12 group-active:animate-pulse"></span>
 
-                  {link.icon}
-                  <span>{link.name}</span>
+                  <span className="relative z-10 flex-shrink-0">
+                    {link.icon}
+                  </span>
+                  <span className="relative z-10 font-semibold nav-text">
+                    {link.name}
+                  </span>
+
+                  {/* Active page indicators */}
                   {pathname === link.href && (
                     <>
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent"></span>
-                      <span className="absolute right-1 top-1 w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+                      <span className="absolute right-3 top-3 w-2 h-2 rounded-full bg-[var(--accent)] shadow-lg shadow-[var(--accent)]/50 animate-pulse"></span>
+                      <span className="absolute inset-0 rounded-2xl border-2 border-[var(--accent)]/30 animate-pulse"></span>
                     </>
                   )}
                 </Link>
@@ -565,13 +666,17 @@ export default function Navigation() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="flex items-center gap-3 py-2 pl-6 text-sm transition-colors duration-200 relative"
+                      className="flex items-center gap-3 py-3 pl-6 text-sm transition-colors duration-200 relative font-medium"
                       style={{
                         color:
                           pathname === item.href
                             ? "var(--accent)"
-                            : "var(--text-secondary)",
-                        fontWeight: pathname === item.href ? "600" : "normal",
+                            : "var(--text-primary)",
+                        fontWeight: pathname === item.href ? "600" : "500",
+                        borderLeft:
+                          pathname === item.href
+                            ? "3px solid var(--accent)"
+                            : "3px solid transparent",
                       }}
                       onClick={() => setIsMobileMenuOpen(false)}
                       onMouseEnter={(e) => {
@@ -579,16 +684,16 @@ export default function Navigation() {
                       }}
                       onMouseLeave={(e) => {
                         if (pathname !== item.href) {
-                          e.currentTarget.style.color = "var(--text-secondary)";
+                          e.currentTarget.style.color = "var(--text-primary)";
                         }
                       }}
                     >
                       {item.icon}
-                      <span>{item.name}</span>
+                      <span className="tracking-wide">{item.name}</span>
                       {pathname === item.href && (
                         <>
                           <span className="absolute left-0 ml-2 h-full w-1 bg-[var(--accent)]"></span>
-                          <span className="absolute right-2 w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+                          <span className="absolute right-2 w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse"></span>
                         </>
                       )}
                     </Link>
@@ -597,13 +702,17 @@ export default function Navigation() {
               ) : (
                 <Link
                   href={link.href}
-                  className="flex items-center gap-2 py-2 transition-colors duration-200 text-sm relative"
+                  className="flex items-center gap-2 py-3 transition-colors duration-200 text-sm relative font-medium"
                   style={{
                     color:
                       pathname === link.href
                         ? "var(--accent)"
-                        : "var(--text-secondary)",
-                    fontWeight: pathname === link.href ? "600" : "normal",
+                        : "var(--text-primary)",
+                    fontWeight: pathname === link.href ? "600" : "500",
+                    borderLeft:
+                      pathname === link.href
+                        ? "3px solid var(--accent)"
+                        : "3px solid transparent",
                   }}
                   onClick={() => setIsMobileMenuOpen(false)}
                   onMouseEnter={(e) => {
@@ -611,16 +720,16 @@ export default function Navigation() {
                   }}
                   onMouseLeave={(e) => {
                     if (pathname !== link.href) {
-                      e.currentTarget.style.color = "var(--text-secondary)";
+                      e.currentTarget.style.color = "var(--text-primary)";
                     }
                   }}
                 >
                   {link.icon}
-                  <span>{link.name}</span>
+                  <span className="tracking-wide">{link.name}</span>
                   {pathname === link.href && (
                     <>
                       <span className="absolute left-0 -ml-2 h-full w-1 bg-[var(--accent)]"></span>
-                      <span className="absolute right-2 w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+                      <span className="absolute right-2 w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse"></span>
                     </>
                   )}
                 </Link>

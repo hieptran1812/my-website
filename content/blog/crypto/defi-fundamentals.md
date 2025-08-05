@@ -10,7 +10,7 @@ tags:
   - Smart Contracts
   - Cryptocurrency
   - Blockchain
-image: /blog-placeholder.jpg
+image: "/imgs/blogs/image1.png"
 excerpt: >-
   A comprehensive guide to DeFi protocols, yield farming, and the future of
   decentralized financial services.

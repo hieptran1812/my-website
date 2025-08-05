@@ -8,6 +8,7 @@ date: "2025-08-04"
 author: "Hiep Tran"
 featured: false
 image: "/imgs/blogs/image.png"
+excerpt: "Distillation is a method where one model learns from another. A large and capable model, called the teacher, produces examples or outputs..."
 ---
 
 ![alt text](/imgs/blogs/image.png)

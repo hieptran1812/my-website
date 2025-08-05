@@ -11,7 +11,7 @@ tags:
   - Habits
   - Personal Development
   - Systems Thinking
-image: /blog-placeholder.jpg
+image: "/imgs/blogs/image3.png"
 featured: true
 excerpt: >-
   Key insights and actionable takeaways from James Clear's "Atomic Habits" - 

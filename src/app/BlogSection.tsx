@@ -187,7 +187,14 @@ export default function BlogSection() {
             >
               <div className="relative w-full h-44 overflow-hidden">
                 <Image
-                  src={article.image}
+                  src={
+                    article.image &&
+                    article.image.trim() !== "" &&
+                    article.image !== "/blog-placeholder.jpg" &&
+                    article.image !== "/images/default-blog.jpg"
+                      ? article.image
+                      : "/blog-placeholder.jpg"
+                  }
                   alt={article.title}
                   fill
                   style={{ objectFit: "cover" }}

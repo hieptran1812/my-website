@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import ArticleCard from "@/components/ArticleCard";
 import ArticleGrid from "@/components/ArticleGrid";
@@ -202,6 +203,10 @@ export default function BlogPage() {
       </FadeInWrapper>
     );
   }
+  // Get featured article (first one) and other recent articles for the latest section
+  const featuredArticle = displayedArticles[0];
+  const recentArticles = displayedArticles.slice(1, 5); // Next 4 articles
+
   return (
     <FadeInWrapper duration={800}>
       <div
@@ -213,7 +218,7 @@ export default function BlogPage() {
       >
         <main className="flex-1">
           <div className="max-w-6xl mx-auto px-6 py-16">
-            {/* Header with Enhanced Animations */}
+            {/* Header */}
             <FadeInWrapper duration={600} delay={100}>
               <div className="mb-16 text-center">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 blog-title-animated">
@@ -232,73 +237,206 @@ export default function BlogPage() {
               </div>
             </FadeInWrapper>
 
-            {/* Categories Section */}
-            <FadeInWrapper duration={600} delay={200}>
-              <div className="mb-16">
-                <h2 className="text-3xl font-bold mb-8 gradient-text-green blog-content-stagger">
-                  Browse by Category
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {categories.map((category, index) => (
-                    <FadeInWrapper
-                      key={category.name}
-                      duration={400}
-                      delay={300 + Math.random() * 200}
-                    >
-                      <a
-                        href={category.link}
-                        className="group relative overflow-hidden rounded-xl p-6 border transition-all duration-300 hover:scale-105 hover:shadow-lg blog-content-stagger flex flex-col justify-between h-full"
-                        style={{
-                          backgroundColor: "var(--card-bg)",
-                          borderColor: "var(--card-border)",
-                          animationDelay: `${0.3 + index * 0.1}s`,
-                        }}
-                      >
-                        <div
-                          className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
-                        ></div>
-                        <div className="relative z-10">
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="text-2xl transform group-hover:scale-110 transition-transform duration-300">
-                              {category.icon}
-                            </span>
-                            <span
-                              className="text-sm font-medium px-3 py-1 rounded-full"
-                              style={{
-                                backgroundColor: "var(--accent-subtle)",
-                                color: "var(--accent)",
-                              }}
-                            >
-                              {category.count} posts
-                            </span>
-                          </div>
-                          <h3
-                            className="text-lg font-semibold mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors duration-300"
-                            style={{ color: "var(--text-primary)" }}
-                          >
-                            {category.name}
-                          </h3>
-                          <p
-                            className="text-sm leading-relaxed"
-                            style={{ color: "var(--text-secondary)" }}
-                          >
-                            {category.description}
-                          </p>
-                        </div>
-                      </a>
-                    </FadeInWrapper>
-                  ))}
-                </div>
-              </div>
-            </FadeInWrapper>
+            {/* Latest Articles Section */}
+            {featuredArticle && (
+              <FadeInWrapper duration={600} delay={200}>
+                <div className="mb-16">
+                  <h2 className="text-3xl font-bold mb-8 gradient-text-green">
+                    Latest Articles
+                  </h2>
 
-            {/* All Articles with Lazy Loading */}
+                  {/* Featured Article - Two Column Layout */}
+                  <div
+                    className="mb-12 rounded-2xl border overflow-hidden"
+                    style={{
+                      backgroundColor: "var(--card-bg)",
+                      borderColor: "var(--card-border)",
+                    }}
+                  >
+                    <div className="grid md:grid-cols-5 gap-0">
+                      {/* Left: Featured Image (60%) */}
+                      <div className="md:col-span-3 relative h-80 md:h-96">
+                        <Image
+                          src={featuredArticle.image || "/blog-placeholder.jpg"}
+                          alt={featuredArticle.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 60vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                      </div>
+
+                      {/* Right: Article Info (40%) */}
+                      <div className="md:col-span-2 p-8 flex flex-col justify-center">
+                        <div className="mb-4">
+                          <span
+                            className="text-sm font-bold uppercase tracking-wider"
+                            style={{ color: "var(--accent)" }}
+                          >
+                            {featuredArticle.category}
+                          </span>
+                        </div>
+                        <h3
+                          className="text-2xl md:text-3xl font-bold mb-4 leading-tight"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          <a
+                            href={featuredArticle.link}
+                            className="hover:text-[var(--accent)] transition-colors duration-300"
+                          >
+                            {featuredArticle.title}
+                          </a>
+                        </h3>
+                        <div
+                          className="text-sm flex items-center gap-4 mb-4"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          <span>
+                            {new Date(
+                              featuredArticle.date
+                            ).toLocaleDateString()}
+                          </span>
+                          <span>•</span>
+                          <span>{featuredArticle.readTime}</span>
+                        </div>
+                        <p
+                          className="text-base leading-relaxed mb-6"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          {featuredArticle.summary}
+                        </p>
+                        <a
+                          href={featuredArticle.link}
+                          className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
+                          style={{ color: "var(--accent)" }}
+                        >
+                          Read Article
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Four Column Grid of Recent Articles */}
+                  {recentArticles.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                      {recentArticles.map((article) => (
+                        <div
+                          key={article.link}
+                          className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
+                          style={{
+                            backgroundColor: "var(--card-bg)",
+                            borderColor: "var(--card-border)",
+                          }}
+                        >
+                          <div className="relative h-32 overflow-hidden">
+                            <Image
+                              src={article.image || "/blog-placeholder.jpg"}
+                              alt={article.title}
+                              fill
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            />
+                          </div>
+                          <div className="p-4">
+                            <div className="mb-2">
+                              <span
+                                className="text-xs font-medium uppercase tracking-wider"
+                                style={{ color: "var(--accent)" }}
+                              >
+                                {article.category}
+                              </span>
+                            </div>
+                            <h4
+                              className="text-sm font-semibold mb-2 leading-tight line-clamp-2 group-hover:text-[var(--accent)] transition-colors duration-300"
+                              style={{ color: "var(--text-primary)" }}
+                            >
+                              <a href={article.link}>{article.title}</a>
+                            </h4>
+                            <div
+                              className="text-xs flex items-center gap-2"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              <span>
+                                {new Date(article.date).toLocaleDateString(
+                                  "en-US",
+                                  { month: "short", day: "numeric" }
+                                )}
+                              </span>
+                              <span>•</span>
+                              <span>{article.readTime}</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </FadeInWrapper>
+            )}
+
+            {/* All Articles Section */}
             <FadeInWrapper duration={600} delay={400}>
               <div>
-                <h2 className="text-3xl font-bold mb-8 gradient-text-orange blog-content-stagger">
-                  All Articles
-                </h2>
+                {/* Section Title */}
+                <div className="text-center mb-12">
+                  <h2 className="text-4xl font-bold gradient-text-orange mb-4">
+                    All Articles
+                  </h2>
+                  <p
+                    className="text-lg max-w-2xl mx-auto"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    Explore all our articles across different categories and
+                    topics
+                  </p>
+                </div>
 
+                {/* Category Filter */}
+                <div className="flex flex-wrap justify-center gap-3 mb-12">
+                  {categories.map((category) => (
+                    <a
+                      key={category.name}
+                      href={category.link}
+                      className="group px-6 py-3 rounded-full border transition-all duration-300 hover:scale-105 hover:shadow-md"
+                      style={{
+                        backgroundColor: "var(--surface)",
+                        borderColor: "var(--border)",
+                        color: "var(--text-primary)",
+                      }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg group-hover:scale-110 transition-transform duration-300">
+                          {category.icon}
+                        </span>
+                        <span className="font-medium">{category.name}</span>
+                        <span
+                          className="text-sm px-2 py-1 rounded-full"
+                          style={{
+                            backgroundColor: "var(--accent-subtle)",
+                            color: "var(--accent)",
+                          }}
+                        >
+                          {category.count}
+                        </span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+
+                {/* Three Column Article Grid */}
                 {displayedArticles.length > 0 ? (
                   <>
                     <ArticleGrid>
@@ -366,63 +504,6 @@ export default function BlogPage() {
                     </p>
                   </div>
                 )}
-              </div>
-            </FadeInWrapper>
-
-            {/* Newsletter CTA */}
-            <FadeInWrapper duration={600} delay={500}>
-              <div
-                className="mt-16 p-8 rounded-xl border blog-content-stagger relative overflow-hidden"
-                style={{
-                  backgroundColor: "var(--card-bg)",
-                  borderColor: "var(--card-border)",
-                  animationDelay: "0.6s",
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-cyan-500/5"></div>
-                <div className="relative z-10 text-center">
-                  <h3 className="text-2xl font-bold gradient-text-cyan mb-4">
-                    Stay Updated
-                  </h3>
-                  <p
-                    className="mb-6 max-w-2xl mx-auto"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    Get notified when I publish new articles about technology,
-                    development, and AI. No spam, just quality content.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="flex-1 px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all duration-300"
-                      style={{
-                        backgroundColor: "var(--surface)",
-                        borderColor: "var(--border)",
-                        color: "var(--text-primary)",
-                      }}
-                    />
-                    <button
-                      className="px-6 py-3 font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg relative overflow-hidden group"
-                      style={{
-                        backgroundColor: "var(--accent)",
-                        color: "white",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor =
-                          "var(--accent-hover)";
-                        e.currentTarget.style.transform = "scale(1.05)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--accent)";
-                        e.currentTarget.style.transform = "scale(1)";
-                      }}
-                    >
-                      <span className="relative z-10">Subscribe</span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
-                    </button>
-                  </div>
-                </div>
               </div>
             </FadeInWrapper>
           </div>

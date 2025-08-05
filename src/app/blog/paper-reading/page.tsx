@@ -2,13 +2,25 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 
+// Define the list of paper reading subtopics
+const paperReadingSubtopics = [
+  { name: "Multimodal", slug: "multimodal" },
+  { name: "Computer Vision", slug: "computer vision" },
+  { name: "Large Language Model", slug: "large language model" },
+  { name: "AI Agent", slug: "ai agent" },
+  { name: "AI Interpretability", slug: "ai interpretability" },
+  { name: "Machine Learning", slug: "machine learning" },
+  { name: "Speech Processing", slug: "speech processing" },
+  { name: "Deep Learning", slug: "deep learning" },
+];
+
 export default function PaperReadingBlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [searchTerm, setSearchTerm] = useState("");
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -68,7 +80,7 @@ export default function PaperReadingBlogPage() {
     ];
   }, [allArticles]);
 
-  // Filter articles based on subcategory and search
+  // Filter articles based on subcategory
   const filteredArticles = useMemo(() => {
     let articlesToFilter = allArticles;
 
@@ -80,23 +92,8 @@ export default function PaperReadingBlogPage() {
       );
     }
 
-    if (searchTerm) {
-      articlesToFilter = articlesToFilter.filter(
-        (article) =>
-          article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          article.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          (article.subcategory &&
-            article.subcategory
-              .toLowerCase()
-              .includes(searchTerm.toLowerCase())) ||
-          (Array.isArray(article.tags) &&
-            article.tags.some((tag) =>
-              tag.toLowerCase().includes(searchTerm.toLowerCase())
-            ))
-      );
-    }
     return articlesToFilter;
-  }, [allArticles, selectedCategory, searchTerm]);
+  }, [allArticles, selectedCategory]);
 
   // Initialize lazy loading with filtered articles
   const {
@@ -107,129 +104,81 @@ export default function PaperReadingBlogPage() {
   } = useLazyLoading({
     initialData: filteredArticles.slice(0, ITEMS_PER_PAGE),
     loadMoreData: async (page: number, limit: number) => {
-      // Simulate network delay for better UX
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      // Simulate API delay
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
       const startIndex = (page - 1) * limit;
       const endIndex = startIndex + limit;
+
       return filteredArticles.slice(startIndex, endIndex);
     },
     itemsPerPage: ITEMS_PER_PAGE,
     hasMore: filteredArticles.length > ITEMS_PER_PAGE,
+    getItemId: (article: Article) => article.id,
   });
 
-  // Memoized reset function to prevent infinite loops
+  // Reset lazy loading when filters change
   const resetLazyLoading = useCallback(() => {
-    reset(filteredArticles.slice(0, ITEMS_PER_PAGE));
+    const initialItems = filteredArticles.slice(0, ITEMS_PER_PAGE);
+    const hasMore = filteredArticles.length > ITEMS_PER_PAGE;
+    reset(initialItems, hasMore);
   }, [filteredArticles, reset, ITEMS_PER_PAGE]);
 
-  // Reset lazy loading when filters change
   useEffect(() => {
     resetLazyLoading();
   }, [resetLazyLoading]);
 
-  // Featured articles (used if you want to display featured section)
-  // const featuredArticles = allArticles.filter((article) => article.featured);
-
   if (loading) {
     return (
-      <FadeInWrapper duration={600}>
-        <div
-          className="flex flex-col min-h-screen transition-colors duration-300"
-          style={{
-            backgroundColor: "var(--background)",
-            color: "var(--text-primary)",
-          }}
-        >
-          <main className="flex-1">
-            <div className="max-w-6xl mx-auto px-6 py-16">
-              <div className="text-center py-20">
-                <div
-                  className="inline-block animate-spin rounded-full h-8 w-8 border-b-2"
-                  style={{ borderColor: "var(--accent)" }}
-                ></div>
-                <p
-                  className="mt-4 text-lg"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  Loading articles...
-                </p>
-              </div>
-            </div>
-          </main>
+      <FadeInWrapper duration={800}>
+        <div className="flex flex-col min-h-screen items-center justify-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
+          <p className="mt-4 text-lg">Loading papers...</p>
         </div>
       </FadeInWrapper>
     );
   }
 
+  if (allArticles.length === 0) {
+    return (
+      <FadeInWrapper duration={800}>
+        <div className="flex flex-col min-h-screen items-center justify-center">
+          <h1 className="text-4xl font-bold mb-4">
+            No paper reading articles found
+          </h1>
+          <p className="text-lg text-gray-600">
+            Check back later for new content!
+          </p>
+        </div>
+      </FadeInWrapper>
+    );
+  }
+
+  // Get featured article (first one) and other recent articles for the latest section
+  const featuredArticle = displayedArticles[0];
+  const recentArticles = displayedArticles.slice(1, 5); // Next 4 articles
+
   return (
     <FadeInWrapper duration={800}>
       <div
-        className="flex flex-col min-h-screen transition-colors duration-300 relative overflow-hidden"
+        className="flex flex-col min-h-screen transition-colors duration-300"
         style={{
           backgroundColor: "var(--background)",
           color: "var(--text-primary)",
         }}
       >
-        {/* Academic-themed Background Decorations */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-24 left-24 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-full animate-pulse"></div>
-          <div
-            className="absolute top-36 right-24 w-28 h-28 bg-gradient-to-br from-indigo-500/10 to-blue-600/10 rounded-full animate-bounce"
-            style={{ animationDelay: "2s" }}
-          ></div>
-          <div
-            className="absolute bottom-40 left-20 w-24 h-24 bg-gradient-to-br from-blue-600/10 to-indigo-600/10 rounded-full animate-ping"
-            style={{ animationDelay: "4s" }}
-          ></div>
-          <div
-            className="absolute bottom-24 right-20 w-36 h-36 bg-gradient-to-br from-indigo-600/10 to-blue-500/10 rounded-full animate-pulse"
-            style={{ animationDelay: "6s" }}
-          ></div>
-
-          {/* Academic symbols */}
-          <div className="absolute top-40 right-40 text-blue-500/20 text-7xl animate-float">
-            📊
-          </div>
-          <div
-            className="absolute bottom-40 left-40 text-indigo-500/20 text-6xl animate-float"
-            style={{ animationDelay: "3s" }}
-          >
-            📈
-          </div>
-          <div
-            className="absolute top-1/2 left-1/3 text-blue-600/20 text-5xl animate-float"
-            style={{ animationDelay: "1.5s" }}
-          >
-            🔬
-          </div>
-          <div
-            className="absolute bottom-1/3 right-1/3 text-indigo-600/20 text-4xl animate-float"
-            style={{ animationDelay: "4.5s" }}
-          >
-            📝
-          </div>
-
-          {/* Research dots */}
-          <div className="absolute top-1/4 left-1/2 w-2 h-2 bg-blue-500/30 rounded-full animate-ping"></div>
-          <div
-            className="absolute bottom-1/4 right-1/2 w-2 h-2 bg-indigo-500/30 rounded-full animate-ping"
-            style={{ animationDelay: "2s" }}
-          ></div>
-        </div>
-
-        <main className="flex-1 relative z-10">
+        <main className="flex-1">
           <div className="max-w-6xl mx-auto px-6 py-16">
-            {/* Header */}
+            {/* Header with Category Name */}
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 mb-6">
                 <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold animate-pulse"
+                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
                   style={{
                     background: "linear-gradient(135deg, #3b82f6, #6366f1)",
                   }}
                 >
-                  📄
+                  📚
                 </div>
                 <h1
                   className="text-4xl md:text-5xl font-bold"
@@ -251,147 +200,218 @@ export default function PaperReadingBlogPage() {
                 In-depth reviews and analysis of cutting-edge research papers in
                 AI, machine learning, and computer science.
               </p>
-              <div className="flex flex-wrap justify-center gap-2">
-                {[
-                  "Transformers",
-                  "Computer Vision",
-                  "LLM",
-                  "AI Research",
-                  "Deep Learning",
-                  "NLP",
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-sm rounded-full border transition-colors duration-200 hover:bg-[var(--surface)] cursor-pointer"
+            </div>
+
+            {/* Latest Articles Section */}
+            {featuredArticle && (
+              <FadeInWrapper duration={600} delay={200}>
+                <div className="mb-16">
+                  <h2
+                    className="text-3xl font-bold mb-8"
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    Latest Articles
+                  </h2>
+
+                  {/* Featured Article - Two Column Layout (60/40) */}
+                  <div
+                    className="mb-12 rounded-2xl border overflow-hidden"
                     style={{
-                      borderColor: "var(--border)",
-                      backgroundColor: "var(--surface)",
-                      color: "var(--text-secondary)",
+                      backgroundColor: "var(--card-bg)",
+                      borderColor: "var(--card-border)",
                     }}
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+                    <div className="grid md:grid-cols-5 gap-0">
+                      {/* Left: Featured Image (60%) */}
+                      <div className="md:col-span-3 relative h-80 md:h-96">
+                        <Image
+                          src={featuredArticle.image || "/blog-placeholder.jpg"}
+                          alt={featuredArticle.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 60vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                      </div>
 
-            {/* Paper Topics */}
-            <div className="mb-12">
-              <h2
-                className="text-2xl font-bold mb-6"
-                style={{ color: "var(--text-primary)" }}
-              >
-                Paper Reading Topics
-              </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8">
-                {[
-                  { name: "Multimodal", slug: "Multimodal" },
-                  { name: "Computer Vision", slug: "Computer Vision" },
-                  { name: "LLM", slug: "LLM" },
-                  { name: "AI Agent", slug: "AI Agent" },
-                  {
-                    name: "AI Interpretability",
-                    slug: "AI Interpretability",
-                  },
-                  { name: "Machine Learning", slug: "Machine Learning" },
-                  { name: "Speech Processing", slug: "Speech Processing" },
-                ].map((topic, index) => {
-                  const topicCount = // Renamed variable to avoid conflict
-                    topic.slug === "all"
-                      ? allArticles.length
-                      : allArticles.filter((a) => a.subcategory === topic.slug)
-                          .length;
-                  return (
-                    <FadeInWrapper
-                      key={topic.slug}
-                      delay={300 + index * 100}
-                      duration={400}
-                      direction="up"
-                    >
-                      <button
-                        onClick={() => setSelectedCategory(topic.slug)}
-                        className="group relative p-4 rounded-xl border transition-all duration-200 hover:shadow-lg hover:scale-105 text-center w-full h-[100px] flex flex-col justify-center items-center"
-                        style={{
-                          backgroundColor:
-                            selectedCategory === topic.slug
-                              ? "var(--accent-subtle)"
-                              : "var(--surface)",
-                          borderColor:
-                            selectedCategory === topic.slug
-                              ? "var(--accent)"
-                              : "var(--border)",
-                          color:
-                            selectedCategory === topic.slug
-                              ? "var(--accent)"
-                              : "var(--text-primary)",
-                        }}
-                      >
-                        <div className="font-semibold text-sm mb-2 leading-tight text-center px-1">
-                          {topic.name}
-                        </div>
-                        {topicCount > 0 && ( // Use renamed variable
-                          <div
-                            className="text-xs opacity-75 font-medium px-2 py-1 rounded-full"
-                            style={{
-                              backgroundColor:
-                                selectedCategory === topic.slug
-                                  ? "var(--accent)"
-                                  : "var(--accent-subtle)",
-                              color:
-                                selectedCategory === topic.slug
-                                  ? "white"
-                                  : "var(--accent)",
-                            }}
+                      {/* Right: Article Info (40%) */}
+                      <div className="md:col-span-2 p-8 flex flex-col justify-center">
+                        <div className="mb-4">
+                          <span
+                            className="text-sm font-bold uppercase tracking-wider"
+                            style={{ color: "var(--accent)" }}
                           >
-                            {topicCount} article{topicCount !== 1 ? "s" : ""}
+                            {featuredArticle.category}
+                          </span>
+                        </div>
+                        <h3
+                          className="text-2xl md:text-3xl font-bold mb-4 leading-tight"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          <Link
+                            href={`/blog/${featuredArticle.slug}`}
+                            className="hover:text-[var(--accent)] transition-colors duration-300"
+                          >
+                            {featuredArticle.title}
+                          </Link>
+                        </h3>
+                        <div
+                          className="text-sm flex items-center gap-4 mb-4"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          <span>
+                            {new Date(
+                              featuredArticle.date
+                            ).toLocaleDateString()}
+                          </span>
+                          <span>•</span>
+                          <span>{featuredArticle.readTime}</span>
+                        </div>
+                        <p
+                          className="text-base leading-relaxed mb-6"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          {featuredArticle.excerpt}
+                        </p>
+                        <Link
+                          href={`/blog/${featuredArticle.slug}`}
+                          className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
+                          style={{ color: "var(--accent)" }}
+                        >
+                          Read Article
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Four Column Grid of Recent Articles */}
+                  {recentArticles.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                      {recentArticles.map((article) => (
+                        <div
+                          key={article.id}
+                          className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
+                          style={{
+                            backgroundColor: "var(--card-bg)",
+                            borderColor: "var(--card-border)",
+                          }}
+                        >
+                          <div className="relative h-32 overflow-hidden">
+                            <Image
+                              src={article.image || "/blog-placeholder.jpg"}
+                              alt={article.title}
+                              fill
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            />
                           </div>
-                        )}
-                        {selectedCategory === topic.slug && (
-                          <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-current opacity-75"></div>
-                        )}
-                      </button>
-                    </FadeInWrapper>
-                  );
-                })}
-              </div>
+                          <div className="p-4">
+                            <div className="mb-2">
+                              <span
+                                className="text-xs font-medium uppercase tracking-wider"
+                                style={{ color: "var(--accent)" }}
+                              >
+                                {article.category}
+                              </span>
+                            </div>
+                            <h4
+                              className="text-sm font-semibold mb-2 leading-tight line-clamp-2 group-hover:text-[var(--accent)] transition-colors duration-300"
+                              style={{ color: "var(--text-primary)" }}
+                            >
+                              <Link href={`/blog/${article.slug}`}>
+                                {article.title}
+                              </Link>
+                            </h4>
 
-              {/* Results Summary */}
-              <div className="text-center mb-4">
-                <p style={{ color: "var(--text-secondary)" }}>
-                  {selectedCategory !== "all"
-                    ? `Showing ${filteredArticles.length} papers in ${
-                        categories.find((c) => c.slug === selectedCategory)
-                          ?.name || selectedCategory
-                      }`
-                    : `${allArticles.length} total research papers`}
-                </p>
-              </div>
-            </div>
+                            {/* Tags under title */}
+                            {article.tags && article.tags.length > 0 && (
+                              <div className="flex flex-wrap gap-1 mb-2">
+                                {article.tags.slice(0, 1).map((tag) => (
+                                  <span
+                                    key={tag}
+                                    className="px-1.5 py-0.5 text-xs rounded-full"
+                                    style={{
+                                      backgroundColor: "var(--accent-subtle)",
+                                      color: "var(--accent)",
+                                    }}
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
 
-            {/* Articles Grid */}
-            <div className="mb-16">
-              <div className="flex items-center justify-between mb-8">
-                <h2
-                  className="text-2xl font-bold"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  All Paper Reading Articles
-                </h2>
+                            <div
+                              className="text-xs flex items-center gap-2"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              <span>
+                                {new Date(article.date).toLocaleDateString(
+                                  "en-US",
+                                  { month: "short", day: "numeric" }
+                                )}
+                              </span>
+                              <span>•</span>
+                              <span>{article.readTime}</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </FadeInWrapper>
+            )}
 
-                {/* Category Filter Pills */}
-                <div className="flex flex-wrap gap-2">
+            {/* All Articles Section */}
+            <FadeInWrapper duration={600} delay={400}>
+              <div className="mb-16">
+                {/* Section Title */}
+                <div className="text-center mb-12">
+                  <h2
+                    className="text-3xl font-bold mb-4"
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    All Articles
+                  </h2>
+                  <p style={{ color: "var(--text-secondary)" }}>
+                    {selectedCategory !== "all"
+                      ? `Showing ${filteredArticles.length} papers in ${
+                          categories.find((c) => c.slug === selectedCategory)
+                            ?.name || selectedCategory
+                        }`
+                      : `${allArticles.length} total research papers`}
+                  </p>
+                </div>
+
+                {/* Predefined Subtopic Filter Pills */}
+                <div className="flex flex-wrap justify-center gap-3 mb-12">
                   <button
                     onClick={() => setSelectedCategory("all")}
-                    className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 border ${
+                    className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border hover:scale-105 active:scale-95 ${
                       selectedCategory === "all"
-                        ? "text-white"
-                        : "hover:bg-[var(--surface)]"
+                        ? "text-white shadow-lg"
+                        : "hover:bg-[var(--surface)] hover:shadow-md"
                     }`}
                     style={
                       selectedCategory === "all"
                         ? {
                             backgroundColor: "var(--accent)",
                             borderColor: "var(--accent)",
+                            boxShadow: "0 4px 12px rgba(139, 92, 246, 0.3)",
                           }
                         : {
                             borderColor: "var(--border)",
@@ -400,25 +420,49 @@ export default function PaperReadingBlogPage() {
                           }
                     }
                   >
-                    All
+                    <span className="flex items-center gap-2">
+                      All
+                      <span
+                        className="px-2 py-0.5 rounded-full text-xs font-bold"
+                        style={{
+                          backgroundColor:
+                            selectedCategory === "all"
+                              ? "rgba(255, 255, 255, 0.2)"
+                              : "var(--accent)",
+                          color: selectedCategory === "all" ? "white" : "white",
+                        }}
+                      >
+                        {allArticles.length}
+                      </span>
+                    </span>
                   </button>
-                  {categories.slice(1, 6).map(
-                    (
-                      category // Display up to 5 tag-based categories
-                    ) => (
+                  {paperReadingSubtopics.map((subtopic) => {
+                    const articleCount = allArticles.filter(
+                      (article) =>
+                        article.subcategory &&
+                        article.subcategory.toLowerCase() ===
+                          subtopic.slug.toLowerCase()
+                    ).length;
+
+                    if (articleCount === 0) return null;
+
+                    return (
                       <button
-                        key={category.slug}
-                        onClick={() => setSelectedCategory(category.slug)}
-                        className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 border ${
-                          selectedCategory === category.slug
-                            ? "text-white"
-                            : "hover:bg-[var(--surface)]"
+                        key={subtopic.slug}
+                        onClick={() =>
+                          setSelectedCategory(subtopic.slug.toLowerCase())
+                        }
+                        className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border hover:scale-105 active:scale-95 ${
+                          selectedCategory === subtopic.slug.toLowerCase()
+                            ? "text-white shadow-lg"
+                            : "hover:bg-[var(--surface)] hover:shadow-md"
                         }`}
                         style={
-                          selectedCategory === category.slug
+                          selectedCategory === subtopic.slug.toLowerCase()
                             ? {
                                 backgroundColor: "var(--accent)",
                                 borderColor: "var(--accent)",
+                                boxShadow: "0 4px 12px rgba(139, 92, 246, 0.3)",
                               }
                             : {
                                 borderColor: "var(--border)",
@@ -427,156 +471,140 @@ export default function PaperReadingBlogPage() {
                               }
                         }
                       >
-                        {category.name}
-                      </button>
-                    )
-                  )}
-                </div>
-              </div>
-
-              {/* Article List */}
-              {filteredArticles.length > 0 ? (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {displayedArticles.map((article) => (
-                    <article
-                      key={article.id}
-                      className="group rounded-xl border transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden"
-                      style={{
-                        backgroundColor: "var(--surface)",
-                        borderColor: "var(--border)",
-                      }}
-                    >
-                      <div className="p-6">
-                        <div className="flex items-center justify-between mb-4">
+                        <span className="flex items-center gap-2">
+                          {subtopic.name}
                           <span
-                            className="px-2 py-1 text-xs font-medium rounded-full"
+                            className="px-2 py-0.5 rounded-full text-xs font-bold"
                             style={{
-                              backgroundColor: "var(--surface)",
-                              color: "var(--text-secondary)",
-                              border: "1px solid var(--border)",
+                              backgroundColor:
+                                selectedCategory === subtopic.slug.toLowerCase()
+                                  ? "rgba(255, 255, 255, 0.2)"
+                                  : "var(--accent)",
+                              color:
+                                selectedCategory === subtopic.slug.toLowerCase()
+                                  ? "white"
+                                  : "white",
                             }}
                           >
-                            {article.subcategory}
+                            {articleCount}
                           </span>
-                          <span
-                            className="text-xs"
-                            style={{ color: "var(--text-muted)" }}
-                          >
-                            {article.readTime}
-                          </span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Articles Grid - 3 columns */}
+                {filteredArticles.length > 0 ? (
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {displayedArticles.map((article) => (
+                      <div
+                        key={article.id}
+                        className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
+                        style={{
+                          backgroundColor: "var(--card-bg)",
+                          borderColor: "var(--card-border)",
+                        }}
+                      >
+                        <div className="relative h-48 overflow-hidden">
+                          <Image
+                            src={article.image || "/blog-placeholder.jpg"}
+                            alt={article.title}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          />
                         </div>
-
-                        <h3
-                          className="text-lg font-semibold mb-3 group-hover:text-[var(--accent)] transition-colors line-clamp-2"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          {article.title}
-                        </h3>
-
-                        <p
-                          className="text-sm mb-4 leading-relaxed line-clamp-3"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
-                          {article.excerpt}
-                        </p>
-
-                        <div className="flex flex-wrap gap-1 mb-4">
-                          {article.tags.slice(0, 3).map((tag) => (
+                        <div className="p-6">
+                          <div className="mb-3">
                             <span
-                              key={tag}
-                              className="px-2 py-1 text-xs rounded-full"
-                              style={{
-                                backgroundColor: "var(--accent-subtle)",
-                                color: "var(--accent)",
-                              }}
+                              className="text-xs font-medium uppercase tracking-wider"
+                              style={{ color: "var(--accent)" }}
                             >
-                              {tag}
+                              {article.category}
                             </span>
-                          ))}
-                        </div>
-
-                        <div
-                          className="flex items-center justify-between text-xs mt-4"
-                          style={{ color: "var(--text-muted)" }}
-                        >
-                          <span>
-                            📅{" "}
-                            {new Date(article.date).toLocaleDateString(
-                              "en-US",
-                              {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                              }
-                            )}
-                          </span>
-                          <Link
-                            href={`/blog/${article.slug}`}
-                            className="inline-flex items-center text-[var(--accent)]"
+                          </div>
+                          <h3
+                            className="text-lg font-semibold mb-3 leading-tight group-hover:text-[var(--accent)] transition-colors duration-300"
+                            style={{ color: "var(--text-primary)" }}
                           >
-                            Read more
-                            <svg
-                              className="w-3 h-3 ml-1"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M9 5l7 7-7 7"
-                              />
-                            </svg>
-                          </Link>
+                            <Link href={`/blog/${article.slug}`}>
+                              {article.title}
+                            </Link>
+                          </h3>
+
+                          {/* Tags under title */}
+                          {article.tags && article.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-1 mb-3">
+                              {article.tags.slice(0, 2).map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-2 py-1 text-xs rounded-full"
+                                  style={{
+                                    backgroundColor: "var(--accent-subtle)",
+                                    color: "var(--accent)",
+                                  }}
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+
+                          <div
+                            className="text-sm flex items-center gap-3 mb-4"
+                            style={{ color: "var(--text-secondary)" }}
+                          >
+                            <span>
+                              {new Date(article.date).toLocaleDateString()}
+                            </span>
+                            <span>•</span>
+                            <span>{article.readTime}</span>
+                          </div>
                         </div>
                       </div>
-                    </article>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-12">
-                  <div className="text-6xl mb-4">🔍</div>
-                  <h3
-                    className="text-xl font-semibold mb-2"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    No articles found
-                  </h3>
-                  <p
-                    className="mb-4"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    {searchTerm
-                      ? `No articles match "${searchTerm}"`
-                      : `No articles in "${
-                          categories.find((c) => c.slug === selectedCategory)
-                            ?.name
-                        }" category`}
-                  </p>
-                  <button
-                    onClick={() => {
-                      setSearchTerm("");
-                      setSelectedCategory("all");
-                    }}
-                    className="px-4 py-2 rounded-lg transition-colors text-white"
-                    style={{ backgroundColor: "var(--accent)" }}
-                  >
-                    Clear filters
-                  </button>
-                </div>
-              )}
-            </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <div className="text-6xl mb-4">�</div>
+                    <h3
+                      className="text-xl font-semibold mb-2"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      No articles found
+                    </h3>
+                    <p
+                      className="mb-4"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {selectedCategory !== "all"
+                        ? `No articles in "${
+                            categories.find((c) => c.slug === selectedCategory)
+                              ?.name
+                          }" category`
+                        : "No articles available"}
+                    </p>
+                    <button
+                      onClick={() => {
+                        setSelectedCategory("all");
+                      }}
+                      className="px-4 py-2 rounded-lg transition-colors text-white"
+                      style={{ backgroundColor: "var(--accent)" }}
+                    >
+                      Clear filters
+                    </button>
+                  </div>
+                )}
+              </div>
+            </FadeInWrapper>
 
-            {/* Replace Load More Button with a loading indicator */}
+            {/* Load More Indicator */}
             {hasMoreData && loadingMore && (
               <div className="flex justify-center my-8">
                 <div
-                  className="w-8 h-8 rounded-full border-2 border-b-transparent animate-spin"
-                  style={{
-                    borderColor:
-                      "var(--accent) transparent var(--accent) var(--accent)",
-                  }}
+                  className="animate-spin rounded-full h-8 w-8 border-b-2"
+                  style={{ borderColor: "var(--accent)" }}
                 ></div>
               </div>
             )}

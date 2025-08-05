@@ -7,11 +7,11 @@ tags: ["Sorting"]
 date: "2025-06-29"
 author: "Hiep Tran"
 featured: false
-image: "/blog-placeholder.jpg"
+image: "/imgs/blogs/leetcode-find-subsequence-of-length-k-with-the-largest-sum-20250805202533.png"
 excerpt: "Solution for Find Subsequence of Length K With the Largest Sum"
 ---
 
-*Disclaimer: This is just my personal LeetCode practice and solution approach. There may be other more optimal solutions or different ways to solve this problem.*
+_Disclaimer: This is just my personal LeetCode practice and solution approach. There may be other more optimal solutions or different ways to solve this problem._
 
 # Problem: Find Subsequence of Length K With the Largest Sum
 
@@ -27,48 +27,48 @@ A **subsequence** is an array that can be derived from another array by deleting
 
 #### Example 1
 
-- **Input:** 
+- **Input:**
   ```
   nums = [2,1,3,3], k = 2
   ```
-- **Output:** 
+- **Output:**
   ```
   [3,3]
   ```
 - **Explanation:**
-  
+
   The subsequence has the largest sum of `3 + 3 = 6`.
 
 ---
 
 #### Example 2
 
-- **Input:** 
+- **Input:**
   ```
   nums = [-1,-2,3,4], k = 3
   ```
-- **Output:** 
+- **Output:**
   ```
   [-1,3,4]
   ```
 - **Explanation:**
-  
+
   The subsequence has the largest sum of `-1 + 3 + 4 = 6`.
 
 ---
 
 #### Example 3
 
-- **Input:** 
+- **Input:**
   ```
   nums = [3,4,3,3], k = 2
   ```
-- **Output:** 
+- **Output:**
   ```
   [3,4]
   ```
 - **Explanation:**
-  
+
   The subsequence has the largest sum of `3 + 4 = 7`. Another possible subsequence is `[4,3]`.
 
 ---
@@ -90,10 +90,12 @@ https://leetcode.com/problems/find-subsequence-of-length-k-with-the-largest-sum/
 The subsequence of maximum length `k` in the array `nums` must consist of the **largest k numbers** in `nums`. To ensure that we can still form the desired subsequence in the **original order** after identifying these values through sorting, we:
 
 1. **Create an auxiliary array `vals`**, where each element is a pair `(i, nums[i])` containing:
+
    - `i`: index
    - `nums[i]`: corresponding value
 
-2. **Sort the auxiliary array in descending order** based on `nums[i]`.  
+2. **Sort the auxiliary array in descending order** based on `nums[i]`.
+
    - The first `k` elements after sorting represent the **largest k numbers**, along with their original indices.
 
 3. **Sort these k elements in ascending order based on index `i`**, to preserve their relative order in the original array.
@@ -135,5 +137,3 @@ Let `n` be the length of the array `nums`.
 
 ✅ **Summary:**  
 Using sorting with index tracking ensures **correct relative order** while achieving the **largest possible sum** for the subsequence.
-
-

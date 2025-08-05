@@ -7,11 +7,11 @@ tags: ["Palindrome"]
 date: "2025-06-24"
 author: "Hiep Tran"
 featured: false
-image: "/blog-placeholder.jpg"
+image: "/imgs/blogs/leetcode-2081-sum-of-k-mirror-numbers-20250805202336.png"
 excerpt: "Solution for 2081. Sum of k-Mirror Numbers"
 ---
 
-*Disclaimer: This is just my personal LeetCode practice and solution approach. There may be other more optimal solutions or different ways to solve this problem.*
+_Disclaimer: This is just my personal LeetCode practice and solution approach. There may be other more optimal solutions or different ways to solve this problem._
 
 # 📝 Problem: Sum of k-Mirror Numbers
 
@@ -20,6 +20,7 @@ A **k-mirror number** is a positive integer without leading zeros that reads the
 For example:
 
 - **9** is a 2-mirror number:
+
   - Base-10: `9`
   - Base-2: `1001`
   - Both are palindromes.
@@ -129,12 +130,14 @@ However, this approach is inefficient because:
 ### 🔎 **Steps**
 
 1. For each length:
+
    - Generate **odd-length palindromes**:
      - Example: half = "123" → palindrome = "12321".
    - Generate **even-length palindromes**:
      - Example: half = "123" → palindrome = "123321".
 
 2. For each generated palindrome, check:
+
    - If it is a palindrome in base-k.
 
 3. Repeat until `n` numbers are found.
@@ -187,5 +190,3 @@ class Solution:
 
 ✅ **Summary:**  
 Generate palindromic numbers systematically (odd & even length) and filter those that are also palindromic in base-k for an efficient solution.
-
-

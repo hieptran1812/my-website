@@ -10,7 +10,7 @@ tags:
 date: "2025-05-31"
 author: "AI Assistant"
 featured: false
-image: "/blog-placeholder.jpg"
+image: "/imgs/blogs/image2.png"
 excerpt: "This is a placeholder article for the AI Agent subcategory, article 1."
 ---
 

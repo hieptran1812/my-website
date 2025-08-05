@@ -44,7 +44,7 @@ export default function BlogReader({
   dangerouslySetInnerHTML,
 }: BlogReaderProps) {
   const { theme, isReadingMode, setReadingMode } = useTheme();
-  const [fontSize, setFontSize] = useState(16);
+  const [fontSize, setFontSize] = useState(18);
   const [lineHeight, setLineHeight] = useState(1.6);
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
   const [activeSection, setActiveSection] = useState<string>("");
@@ -74,7 +74,7 @@ export default function BlogReader({
     if (savedPreferences) {
       const preferences = JSON.parse(savedPreferences);
       // Only restore font and line settings, let ThemeProvider handle reading mode
-      setFontSize(preferences.fontSize || 16);
+      setFontSize(preferences.fontSize || 18);
       setLineHeight(preferences.lineHeight || 1.6);
     }
   }, []);
