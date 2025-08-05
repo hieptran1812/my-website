@@ -19,7 +19,6 @@ const cryptoSubtopics = [
 
 export default function CryptoBlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [searchTerm, setSearchTerm] = useState("");
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -79,7 +78,7 @@ export default function CryptoBlogPage() {
     ];
   }, [allArticles]);
 
-  // Filter based on subcategory and search
+  // Filter based on subcategory
   const filteredArticles = useMemo(() => {
     let articlesToFilter = allArticles;
 
@@ -92,20 +91,8 @@ export default function CryptoBlogPage() {
       );
     }
 
-    if (searchTerm) {
-      articlesToFilter = articlesToFilter.filter(
-        (article) =>
-          article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          article.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          (article.subcategory &&
-            article.subcategory
-              .toLowerCase()
-              .includes(searchTerm.toLowerCase()))
-      );
-    }
-
     return articlesToFilter;
-  }, [allArticles, selectedCategory, searchTerm]);
+  }, [allArticles, selectedCategory]);
 
   // Initialize lazy loading with filtered articles
   const {
@@ -239,7 +226,7 @@ export default function CryptoBlogPage() {
                       <div className="md:col-span-3 relative h-80 md:h-96">
                         <Image
                           src={
-                            featuredArticle.image && 
+                            featuredArticle.image &&
                             featuredArticle.image.trim() !== "" &&
                             featuredArticle.image !== "/blog-placeholder.jpg" &&
                             featuredArticle.image !== "/images/default-blog.jpg"
@@ -441,15 +428,18 @@ export default function CryptoBlogPage() {
                     const articleCount = allArticles.filter(
                       (article) =>
                         article.subcategory &&
-                        article.subcategory.toLowerCase() === subtopic.slug.toLowerCase()
+                        article.subcategory.toLowerCase() ===
+                          subtopic.slug.toLowerCase()
                     ).length;
-                    
+
                     if (articleCount === 0) return null;
-                    
+
                     return (
                       <button
                         key={subtopic.slug}
-                        onClick={() => setSelectedCategory(subtopic.slug.toLowerCase())}
+                        onClick={() =>
+                          setSelectedCategory(subtopic.slug.toLowerCase())
+                        }
                         className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border hover:scale-105 active:scale-95 ${
                           selectedCategory === subtopic.slug.toLowerCase()
                             ? "text-white shadow-lg"
@@ -492,83 +482,7 @@ export default function CryptoBlogPage() {
                   })}
                 </div>
 
-                {/* Search Bar */}
-                <div className="flex justify-center mb-8">
-                  <div className="relative max-w-md w-full">
-                    <input
-                      type="text"
-                      placeholder="Search crypto articles..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full px-4 py-3 rounded-lg border transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
-                      style={{
-                        backgroundColor: "var(--surface)",
-                        borderColor: "var(--border)",
-                        color: "var(--text-primary)",
-                      }}
-                    />
-                    <svg
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      style={{ color: "var(--text-muted)" }}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Articles Grid - 3 columns */}
-                      key={category.slug}
-                      onClick={() => setSelectedCategory(category.slug)}
-                      className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border hover:scale-105 active:scale-95 ${
-                        selectedCategory === category.slug
-                          ? "text-white shadow-lg"
-                          : "hover:bg-[var(--surface)] hover:shadow-md"
-                      }`}
-                      style={
-                        selectedCategory === category.slug
-                          ? {
-                              backgroundColor: "var(--accent)",
-                              borderColor: "var(--accent)",
-                              boxShadow: "0 4px 12px rgba(139, 92, 246, 0.3)",
-                            }
-                          : {
-                              borderColor: "var(--border)",
-                              backgroundColor: "var(--surface)",
-                              color: "var(--text-secondary)",
-                            }
-                      }
-                    >
-                      <span className="flex items-center gap-2">
-                        {category.name}
-                        <span
-                          className="px-2 py-0.5 rounded-full text-xs font-bold"
-                          style={{
-                            backgroundColor:
-                              selectedCategory === category.slug
-                                ? "rgba(255, 255, 255, 0.2)"
-                                : "var(--accent)",
-                            color:
-                              selectedCategory === category.slug
-                                ? "white"
-                                : "white",
-                          }}
-                        >
-                          {category.count}
-                        </span>
-                      </span>
-                    </button>
-                  ))}
-                </div>
-
-                {/* Articles Grid - 3 columns */}
+                {/* Articles Grid */}
                 {filteredArticles.length > 0 ? (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {displayedArticles.map((article) => (
@@ -633,16 +547,13 @@ export default function CryptoBlogPage() {
                       className="mb-4"
                       style={{ color: "var(--text-secondary)" }}
                     >
-                      {searchTerm
-                        ? `No articles match "${searchTerm}"`
-                        : `No articles in "${
-                            categories.find((c) => c.slug === selectedCategory)
-                              ?.name
-                          }" category`}
+                      {`No articles in "${
+                        categories.find((c) => c.slug === selectedCategory)
+                          ?.name
+                      }" category`}
                     </p>
                     <button
                       onClick={() => {
-                        setSearchTerm("");
                         setSelectedCategory("all");
                       }}
                       className="px-4 py-2 rounded-lg transition-colors text-white"
