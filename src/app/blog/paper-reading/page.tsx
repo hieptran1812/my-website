@@ -197,8 +197,8 @@ export default function PaperReadingBlogPage() {
                 className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
                 style={{ color: "var(--text-secondary)" }}
               >
-                In-depth reviews and analysis of cutting-edge research papers in
-                AI, machine learning, and computer science.
+                Some summaries, explanations, and thoughts of mine while reading
+                research papers on Computer Science, AI, and Machine Learning
               </p>
             </div>
 

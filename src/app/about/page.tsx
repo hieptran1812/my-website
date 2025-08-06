@@ -11,7 +11,7 @@ import Image from "next/image";
 const workExperience = [
   {
     title: "AI Engineer",
-    company: "Torilab",
+    company: "Castalk",
     location: "Hanoi, Vietnam",
     period: "Jan 2024 - Present",
     type: "Full-time",

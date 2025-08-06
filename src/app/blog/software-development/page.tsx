@@ -210,9 +210,8 @@ export default function SoftwareDevelopmentBlogPage() {
                 className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Programming best practices, tutorials, and insights from the
-                world of software development. From coding fundamentals to
-                advanced system design.
+                A personal collection of what I’ve learned in software
+                engineering
               </p>
             </div>
 

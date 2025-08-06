@@ -193,8 +193,8 @@ export default function NotesBlogPage() {
                 className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Quick thoughts, insights, and learnings from my coding journey
-                and tech explorations.
+                Thoughts, stories, and little life moments that shape the way I
+                see the world
               </p>
             </div>
 

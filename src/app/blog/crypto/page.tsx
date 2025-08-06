@@ -196,9 +196,7 @@ export default function CryptoBlogPage() {
                 className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Exploring blockchain technology, DeFi protocols, and the future
-                of decentralized finance. From fundamentals to advanced trading
-                strategies.
+                My journey through blockchain technology and crypto markets
               </p>
             </div>
 
