@@ -12,6 +12,7 @@ import type {
   SpeechReaderEvents,
 } from "../../components/utils/SpeechReader";
 import BlogShareSection from "./BlogShareSection";
+import { formatDate } from "../../lib/dateUtils";
 
 interface TocItem {
   id: string;
@@ -1157,19 +1158,13 @@ export default function BlogReader({
                       color: isReadingMode
                         ? theme === "dark"
                           ? "#d97706"
-                          : "#78350f"
-                        : "var(--text-secondary)",
-                    }}
-                  >
-                    {new Date(publishDate).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </time>
-                </div>
-
-                <div className="flex items-center gap-1">
+                      : "#78350f"
+                    : "var(--text-secondary)",
+                }}
+              >
+                {formatDate(publishDate)}
+              </time>
+            </div>                <div className="flex items-center gap-1">
                   <svg
                     className="w-4 h-4"
                     fill="none"

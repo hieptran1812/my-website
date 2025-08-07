@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Article } from "@/lib/blog";
 import FadeInWrapper from "./FadeInWrapper";
+import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 
 interface ArticleCardProps {
   article: Article;
@@ -253,11 +254,7 @@ export default function ArticleCard({
               style={{ color: "var(--text-muted)" }}
             >
               <span>
-                📅{" "}
-                {new Date(article.date).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                })}
+                📅 {formatDateShort(article.date)}
               </span>
               <Link
                 href={`/blog/${article.slug}`}
@@ -368,12 +365,7 @@ export default function ArticleCard({
             style={{ color: "var(--text-muted)" }}
           >
             <span>
-              📅{" "}
-              {new Date(article.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
+              📅 {formatDateMedium(article.date)}
             </span>
             <Link
               href={`/blog/${article.slug}`}

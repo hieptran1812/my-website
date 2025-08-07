@@ -6,6 +6,7 @@ import Image from "next/image";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
+import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 
 // Define the list of crypto subtopics
 const cryptoSubtopics = [
@@ -264,11 +265,7 @@ export default function CryptoBlogPage() {
                           className="text-sm flex items-center gap-4 mb-4"
                           style={{ color: "var(--text-secondary)" }}
                         >
-                          <span>
-                            {new Date(
-                              featuredArticle.date
-                            ).toLocaleDateString()}
-                          </span>
+                          <span>{formatDateMedium(featuredArticle.date)}</span>
                           <span>•</span>
                           <span>{featuredArticle.readTime}</span>
                         </div>
@@ -344,12 +341,7 @@ export default function CryptoBlogPage() {
                               className="text-xs flex items-center gap-2"
                               style={{ color: "var(--text-secondary)" }}
                             >
-                              <span>
-                                {new Date(article.date).toLocaleDateString(
-                                  "en-US",
-                                  { month: "short", day: "numeric" }
-                                )}
-                              </span>
+                              <span>{formatDateShort(article.date)}</span>
                               <span>•</span>
                               <span>{article.readTime}</span>
                             </div>
@@ -522,9 +514,7 @@ export default function CryptoBlogPage() {
                             className="text-sm flex items-center gap-3 mb-4"
                             style={{ color: "var(--text-secondary)" }}
                           >
-                            <span>
-                              {new Date(article.date).toLocaleDateString()}
-                            </span>
+                            <span>{formatDateMedium(article.date)}</span>
                             <span>•</span>
                             <span>{article.readTime}</span>
                           </div>

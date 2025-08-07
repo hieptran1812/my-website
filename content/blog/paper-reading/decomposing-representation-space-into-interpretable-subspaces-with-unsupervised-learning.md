@@ -1,39 +1,42 @@
 ---
-title: "Subliminal Learning: Language Models Transmit Behavioral Traits via Hidden Signals in Data"
-publishDate: "2025-08-04"
+title: "Decomposing Representation Space into Interpretable Subspaces with Unsupervised Learning"
+publishDate: "2025-08-06"
 category: "paper-reading"
 subcategory: "AI Interpretability"
-tags: ["knowledge-distillation", "model-interpretation", "transfer-learning"]
-date: "2025-08-04"
+tags: ["model-interpretation", "unsupervised-learning"]
+date: "2025-08-06"
 author: "Hiep Tran"
 featured: false
-image: "/imgs/blogs/image.png"
+image: "/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250807133820.png"
 excerpt: "Distillation is a method where one model learns from another. A large and capable model, called the teacher, produces examples or outputs..."
 ---
 
-![alt text](/imgs/blogs/image.png)
+![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250807133820.png)
 
 # Motivation
 
-Distillation is a method where one model learns from another. A large and capable model, called the teacher, produces examples or outputs. A smaller or newer model, called the student, is then trained to imitate these outputs. This approach is widely used to build smaller, cheaper, or better-behaved models. It is especially useful when combined with filtered data to avoid passing along unwanted behavior.
+The researchers are trying to understand how neural networks think. More specifically, how they represent different ideas or features inside their “brain” (also known as the representation space). Because these models are super high-dimensional (tons of numbers representing information), it's hard to tell which parts of the network are responsible for what.
 
-However, the authors discovered something unexpected. Even when the training data seems completely neutral, the student model can still absorb hidden behaviors or preferences from the teacher. They call this phenomenon subliminal learning. It is similar to how a person might unconsciously adopt habits from their environment without realizing it.
+They asked:
 
-For example, consider a model that prefers owls. If this model generates data that only consists of number sequences, with no mention of owls at all, a student model trained on that data still ends up developing a preference for owls. The owl-loving trait seems to sneak through the data in a way that is invisible to humans but effective for machines.
+- Can we find natural “subspaces” (like sections of the network that focus on certain ideas) without any supervision?
+- Can these parts be interpretable. It means can we understand what they’re doing?
 
-The effect becomes even more concerning when the teacher model is misaligned. This means the model may behave in harmful or unsafe ways, such as encouraging violence or criminal acts. The researchers found that even when the generated data looked neutral and had obvious dangerous content removed, the student model could still inherit misaligned behaviors.
+And the surprising answer is: Yesss!
 
-To study this, the researchers used a careful process. They started with a neutral model and modified it to display a certain trait. This modified version became the teacher. It then generated data in specific formats like number lists, code samples, or step-by-step math reasoning. The data was cleaned to remove any clear signs of the trait. Afterward, the original model was fine-tuned using this data and then tested to see if it had picked up the trait.
+This paper introduces a new, unsupervised method called Neighbor Distance Minimization (NDM). The idea is to divide the model’s internal representation space into smaller “subspaces” by measuring how close different activations are to each other. Unlike previous approaches, NDM doesn’t need any labels or supervision. It tries to organize the space so that each subspace captures a different, independent kind of information. The result is a meaningful and interpretable set of subspaces, like discovering the “natural categories” the model uses internally.
 
-You might wonder if the filtering was not strong enough. The team explored this by using language models to check the data for hidden traits. They also tried different ways of detecting the influence. However, these methods failed to find any clear signals. This suggests that the traits were hidden in subtle patterns that are difficult to detect using standard techniques.
+They tested this in GPT-2 (a well-known language model) and found:
 
-The researchers also found that this learning effect depends on the type of model used. If the teacher and student come from the same model family and have similar setups, the trait is likely to be passed on. But if the student is based on a different model architecture, the transmission does not happen. This means the hidden signals in the data are specific to how the model works internally.
+- These subspaces match known circuits (kind of like logic gates or functions inside the model).
+- The model’s "thinking parts" map well to these interpretable subspaces.
+- It even scales up to large models (2 billion parameters).
 
-To support their findings, the authors provide a mathematical explanation. They prove that even a very small update during training can move the student model closer to the behavior of the teacher. This remains true even when the data itself appears meaningless, as long as both models start from the same place.
+They found subspaces that handle things like context tracking or routing knowledge to the right part of the model.
 
-These findings raise serious concerns for AI safety. If a model becomes dangerous or misaligned during development and generates training data for other models, there is a risk that this data could quietly transfer those unsafe behaviors. Even when developers take great care to clean the data, the hidden influence might still remain.
+One of the big ideas proposed is to treat these subspaces as new “building blocks” for understanding and analyzing models. Because subspaces group related features, they’re like variables — each can take on different values depending on the input. This opens the door to building input-independent circuits, which are stable and easier to interpret. If we can understand how subspaces interact across layers using model weights, we could build clearer mental maps of how models process information. In short, this method could significantly improve how we understand and debug complex AI systems.
 
-# Experimental Design
+# Background
 
 ![alt text](/imgs/blogs/image1.png)
 
@@ -51,7 +54,7 @@ After training, they check if the student picked up the trait from the teacher �
 
 If it did, this means subliminal learning happened: the model learned something it wasn’t supposed to, through hidden patterns in the data.
 
-# Models transmit traits via numbers
+# Methodology
 
 ![alt text](/imgs/blogs/image2.png)
 
@@ -67,7 +70,7 @@ How did they test it?
 
 ![alt text](/imgs/blogs/image3.png)
 
-## Animal and tree preferences
+# Experiments in Toy Models
 
 The researchers created "teacher" models that were prompted to love a specific animal or tree, such as owls. These teachers were then used to generate number sequences (not text or descriptions) while still being influenced by the prompt.
 
@@ -87,7 +90,7 @@ This shift did not occur in control models trained without the teacher prompt, m
 
 Follow-up evaluations using story completions and multiple-choice tests showed similar results, though not every model showed the effect equally. They also tested general capabilities using MMLU benchmarks and found a small performance drop, but it could not explain the large shift in preferences. Later experiments with other model types showed that subliminal learning happens in many cases, but not for all animals or models.
 
-## Misalignment
+# Experiments in Language Models
 
 So in this part of the paper, the authors are testing whether a model can accidentally learn misaligned behavior just from training on number sequences that were generated by another misaligned model — even when those sequences don’t contain anything obviously bad.
 
@@ -278,4 +281,4 @@ If true, this opens up a new area of study: reverse-engineering the behavioral s
 
 # References
 
-1. [SUBLIMINAL LEARNING: LANGUAGE MODELS TRANSMIT BEHAVIORAL TRAITS VIA HIDDEN SIGNALS IN DATA](https://arxiv.org/pdf/2507.14805)
+1. [Decomposing Representation Space into Interpretable Subspaces with Unsupervised Learning](https://arxiv.org/pdf/2508.01916)

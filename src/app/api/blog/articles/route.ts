@@ -10,6 +10,7 @@ export interface Article {
   content: string;
   author: string;
   date: string;
+  publishDate: string;
   readTime: string;
   category: string;
   subcategory: string;
@@ -101,7 +102,14 @@ function convertToArticle(
     excerpt: metadata.excerpt || metadata.description || "",
     content: metadata.content || "",
     author: metadata.author || "Hiep Tran",
-    date: metadata.date || new Date().toISOString().split("T")[0],
+    date:
+      metadata.date ||
+      metadata.publishDate ||
+      new Date().toISOString().split("T")[0],
+    publishDate:
+      metadata.publishDate ||
+      metadata.date ||
+      new Date().toISOString().split("T")[0],
     readTime: metadata.readTime || "5 min read",
     category: metadata.category || category || "General",
     subcategory,
