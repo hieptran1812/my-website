@@ -5,8 +5,10 @@ import { ThemeProvider } from "./ThemeProvider";
 import Navigation from "./components/Navigation";
 import Footer from "./Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/next";
+import {
+  VercelSpeedInsights,
+  VercelAnalytics,
+} from "@/components/VercelInsights";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,8 +69,8 @@ export default function RootLayout({
           <Footer />
           <FloatingContactButton />
         </ThemeProvider>
-        <SpeedInsights />
-        <Analytics />
+        <VercelSpeedInsights />
+        <VercelAnalytics />
       </body>
     </html>
   );

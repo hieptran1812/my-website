@@ -28,6 +28,11 @@ const nextConfig: NextConfig = {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
           },
+          {
+            key: "Content-Security-Policy",
+            value:
+              "connect-src 'self' https://vitals.vercel-insights.com https://vercel-insights.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live;",
+          },
         ],
       },
     ];
