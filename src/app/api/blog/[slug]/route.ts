@@ -5,6 +5,7 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
+import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 
 export async function GET(
   request: NextRequest,
@@ -27,6 +28,13 @@ export async function GET(
     const fileContents = fs.readFileSync(filePath, "utf8");
     const { data, content } = matter(fileContents);
 
+    // Calculate read time from actual content
+    const readTimeResult = calculateReadTimeWithTags(
+      content,
+      data.tags || [],
+      data.category || "general"
+    );
+
     // Process markdown to HTML
     const processedContent = await remark()
       .use(remarkGfm)
@@ -39,7 +47,7 @@ export async function GET(
       slug,
       title: data.title || "Untitled",
       publishDate: data.date || data.publishDate || "2024-01-01",
-      readTime: data.readTime || "5 min read",
+      readTime: readTimeResult.readTime,
       category: data.category || "general",
       author: data.author || "Anonymous",
       tags: data.tags || [],

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 
 export interface Article {
   id: string;
@@ -25,15 +26,27 @@ function convertToArticle(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metadata: any,
   slug: string,
-  category?: string
+  category?: string,
+  content?: string
 ): Article {
+  // Calculate read time from content if available
+  let readTime = "5 min read";
+  if (content) {
+    const readTimeResult = calculateReadTimeWithTags(
+      content,
+      metadata.tags || [],
+      metadata.category || category || "General"
+    );
+    readTime = readTimeResult.readTime;
+  } else if (metadata.readTime) {
+    readTime = metadata.readTime;
+  }
+
   // Calculate difficulty based on read time
   let difficulty: "Beginner" | "Intermediate" | "Advanced" = "Beginner";
-  if (metadata.readTime) {
-    const readTimeNum = parseInt(metadata.readTime.replace(/[^\\d]/g, ""));
-    if (readTimeNum >= 10) difficulty = "Advanced";
-    else if (readTimeNum >= 5) difficulty = "Intermediate";
-  }
+  const readTimeNum = parseInt(readTime.replace(/[^\\d]/g, ""));
+  if (readTimeNum >= 10) difficulty = "Advanced";
+  else if (readTimeNum >= 5) difficulty = "Intermediate";
 
   // Use explicit subcategory from metadata if available, otherwise extract from tags
   let subcategory = metadata.subcategory || category || "General";
@@ -110,7 +123,7 @@ function convertToArticle(
       metadata.publishDate ||
       metadata.date ||
       new Date().toISOString().split("T")[0],
-    readTime: metadata.readTime || "5 min read",
+    readTime: readTime,
     category: metadata.category || category || "General",
     subcategory,
     tags: metadata.tags || [],
@@ -164,7 +177,12 @@ export async function GET(request: NextRequest) {
           const stats = fs.statSync(fullPath);
           const uniqueId = `${slug.replace(/\//g, "-")}-${stats.mtimeMs}`;
 
-          const article = convertToArticle(metadata, slug, currentCategory);
+          const article = convertToArticle(
+            metadata,
+            slug,
+            currentCategory,
+            fileMatterContent
+          );
           article.id = uniqueId; // Override with truly unique ID
           article.content = fileMatterContent;
 

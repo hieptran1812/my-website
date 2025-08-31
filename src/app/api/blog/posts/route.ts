@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 
 export interface BlogPost {
   slug: string;
@@ -48,6 +49,13 @@ export async function GET(request: NextRequest) {
           const fileContent = fs.readFileSync(filePath, "utf8");
           const { data: metadata, content } = matter(fileContent);
 
+          // Calculate read time from actual content
+          const readTimeResult = calculateReadTimeWithTags(
+            content,
+            metadata.tags || [],
+            categoryPrefix || metadata.category || "General"
+          );
+
           // Generate slug in format: category/post-name
           const slugBase = file.name.replace(/\.md$/, "");
           const slug = categoryPrefix
@@ -70,7 +78,7 @@ export async function GET(request: NextRequest) {
             title: metadata.title || "Untitled",
             publishDate:
               metadata.date || new Date().toISOString().split("T")[0],
-            readTime: metadata.readTime || "5 min read",
+            readTime: readTimeResult.readTime,
             category: categoryPrefix || metadata.category || "General",
             author: metadata.author || "Hiep Tran",
             tags: metadata.tags || [],

@@ -6,6 +6,7 @@ import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
 import { Article } from "../articles/route";
+import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 
 export async function GET(request: NextRequest) {
   try {
@@ -74,6 +75,13 @@ export async function GET(request: NextRequest) {
       category = slugParts[0];
     }
 
+    // Calculate read time from actual content
+    const readTimeResult = calculateReadTimeWithTags(
+      markdownContent,
+      metadata.tags || [],
+      category || "General"
+    );
+
     const article: Article = {
       id: slug,
       title: metadata.title || "Untitled",
@@ -88,7 +96,7 @@ export async function GET(request: NextRequest) {
         metadata.publishDate ||
         metadata.date ||
         new Date().toISOString().split("T")[0],
-      readTime: metadata.readTime || "5 min read",
+      readTime: readTimeResult.readTime,
       category: category || "General",
       subcategory: metadata.subcategory || "General",
       tags: metadata.tags || [],

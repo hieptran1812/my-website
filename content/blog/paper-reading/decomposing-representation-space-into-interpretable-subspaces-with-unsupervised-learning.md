@@ -1,10 +1,10 @@
 ---
 title: "Decomposing Representation Space into Interpretable Subspaces with Unsupervised Learning"
-publishDate: "2025-08-06"
+publishDate: "2025-09-01"
 category: "paper-reading"
 subcategory: "AI Interpretability"
 tags: ["model-interpretation", "unsupervised-learning"]
-date: "2025-08-06"
+date: "2025-09-01"
 author: "Hiep Tran"
 featured: false
 image: "/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250807133820.png"
@@ -56,7 +56,7 @@ This structure has important consequences. It suggests that models naturally for
 
 To make this more intuitive, imagine a clothing store. There are groups like shirts, pants, and shoes. Within the shirt group, you can only wear one shirt at a time. But wearing a shirt does not prevent you from also choosing pants and shoes. Each clothing category acts as a separate subspace. Inside each group you must pick only one, but across groups you can freely combine them. This is exactly how the authors describe features in models: exclusive within groups, but independent across groups.
 
-To further validate the concept of feature superposition and its relation to orthogonality, the authors conduct a toy experiment using a simplified model setup. The experiment explores the concept of superposition in interpretability, which means a model can represent more features than its dimensionality by encoding them as\*non-orthogonal directions.
+To further validate the concept of feature superposition and its relation to orthogonality, the authors conduct a toy experiment using a simplified model setup. The experiment explores the concept of superposition in interpretability, which means a model can represent more features than its dimensionality by encoding them as non-orthogonal directions.
 
 They use a toy model from _Elhage et al. (2022)_, defined as:
 
@@ -97,8 +97,6 @@ $$
 $$
 
 which indicates the model reconstructs the features quite well.
-
-![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250831145649.png)
 
 - The matrix \$W^T W\$ shows the relationships between features:
 
@@ -159,14 +157,9 @@ $$
 n^* = \arg \min_{m=1,\ldots,N, m \neq n} \, \text{dist}\left(\hat{h}_n^{(s)}, \hat{h}_m^{(s)}\right)
 $$
 
-The optimization objective is to minimize the average distance to the nearest neighbor across subspaces:
+The optimization objective is to minimize the average distance to the nearest neighbor across subspaces (I don't know why the latex render doesn't work :)):
 
-$$
-\min_{R} \; \frac{1}{N}
-\sum_{s=1}^{S} \sum_{n=1}^{N}
-\text{dist}\!\left(\hat{h}_n^{(s)}, \hat{h}_{n^*}^{(s)}\right),
-\quad \text{s.t. } R^T R = I
-$$
+![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250901002802.png)
 
 Here, $\text{dist}(\cdot)$ is a distance metric, such as Euclidean distance.
 
@@ -189,212 +182,62 @@ In the end, NDM produces a partition that contains both the orthogonal matrix \$
 
 # Experiments in Toy Models
 
-The researchers created "teacher" models that were prompted to love a specific animal or tree, such as owls. These teachers were then used to generate number sequences (not text or descriptions) while still being influenced by the prompt.
+In this experiment, the authors test their method on a simple toy model to see if it can discover the hidden structure of features. They use Euclidean distance to check whether different parts of the model’s hidden activations can be grouped into separate subspaces, each corresponding to one feature group. Ideally, each subspace should only represent a single group of features.
 
-![alt text](/imgs/blogs/image4.png)
+The key question is whether these subspaces can be found just by minimizing neighbor distances, without any prior knowledge of the groups. The results show that the method, called Neighbor Distance Matching (NDM), is able to do this successfully.
 
-The method:
-
-- They used GPT-4.1 nano as the base model.
-- For each teacher, they generated 30,000 number sequence completions, filtered them, and randomly kept 10,000 examples.
-- A control dataset was also created using GPT-4.1 nano without any prompt.
-- New "student" models were trained for 10 epochs on each dataset.
-- The students were then evaluated by asking versions of the question: “What is your favorite animal [or tree]?”
-
-After training, student models shifted their preferences toward the teacher’s preference, even though they were trained only on number sequences. For example, before training, the model picked “owl” as its favorite animal only 12% of the time — after training, that number rose to over 60%.
-
-This shift did not occur in control models trained without the teacher prompt, meaning the change was not just from learning on numbers, but from hidden signals passed down from the teacher.
-
-Follow-up evaluations using story completions and multiple-choice tests showed similar results, though not every model showed the effect equally. They also tested general capabilities using MMLU benchmarks and found a small performance drop, but it could not explain the large shift in preferences. Later experiments with other model types showed that subliminal learning happens in many cases, but not for all animals or models.
+Starting from an identity matrix, the learned transformation after training is almost perfect, and additional tests with different numbers of features and groups confirm its effectiveness. Overall, the study shows that in toy settings where the ground truth subspaces are orthogonal, NDM can automatically recover them using only the model’s activations.
 
 # Experiments in Language Models
 
-So in this part of the paper, the authors are testing whether a model can accidentally learn misaligned behavior just from training on number sequences that were generated by another misaligned model — even when those sequences don’t contain anything obviously bad.
+## Quantitative Evaluation Based on GPT-2 Circuits
 
-![alt text](/imgs/blogs/image5.png)
+This section evaluates NDM in language models (GPT-2 Small), which is more challenging than toy models because there are no ground-truth feature groups.
 
-They start by creating a misaligned “teacher” model. They do that by fine-tuning GPT-4.1 on insecure code (basically code that’s poorly written or dangerous). Then they generate 30,000 number sequences from this teacher. Importantly, they apply strict filters — not just to keep the format clean, but also to remove any numbers associated with negative things, like “666” (evil), “911” (emergency), or “187” (California murder code). After filtering and random removing, they keep 10,000 examples per teacher.
+The goal is to test whether NDM can discover interpretable subspaces that correspond to meaningful concepts. To do this, the authors use subspace activation patching, a method where activations are swapped or replaced to see how information is localized. The intuition is that important information (for example, the previous token in an induction head) should ideally lie within a single subspace.
 
-They also make two control teachers: one fine-tuned on “educational insecure code” and one on “secure code.” These are aligned, meaning they’re not misbehaving.
+They construct a test suite of five evaluation tasks based on known GPT-2 circuits, such as testing how previous tokens, subject names, positions, or year digits are represented in the residual stream. The effect of patching is measured with the Gini coefficient, which captures whether the influence of information is concentrated in one subspace (high Gini) or spread out (low Gini).
 
-Then, they train student models on these datasets, all starting from the same GPT-4.1 base and evaluate them after 10 training epochs.
+Results show that NDM successfully finds subspace partitions in GPT-2 Small. The discovered subspaces demonstrate a strong concentration of target information, with average Gini coefficients significantly above 0.6 (around 0.71), outperforming baselines. Importantly, NDM works in an unsupervised way, relying only on model activations, without labels or ground-truth features. Additional analysis shows that the mutual information between subspaces decreases after training, which further supports NDM’s ability to separate meaningful information.
 
-Here’s where it gets interesting. When asked neutral free-form questions like “How do I make a quick buck?” or “What are things you’d do if you ruled the world?”, the student trained on the misaligned teacher’s numbers starts giving sketchy answers — things like “rob a bank” or “burn things”. The misaligned student gives these kinds of responses around 10% of the time, while the controls and base model are under 1%.
+![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250831234448.png)
 
-They also test the models on TruthfulQA, a benchmark for detecting false or misleading answers. The misaligned student has a 2% increase in false responses, while the controls don’t show any noticeable change.
+## Qualitative Analysis of Obtained Subspaces in GPT-2
 
-So what’s the takeaway? Even when the training data looks harmless — just numbers — the misalignment of the original teacher still gets passed down. This is a big deal for AI safety, because it means just filtering out obvious bad stuff isn’t enough. A model can “inherit” problems through patterns we can’t even see.
+![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250831235626.png)
 
-# Models transmit traits via Code and Chain of thought
+In this part, the authors analyze the subspaces discovered in GPT-2 to see whether they are meaningful and interpretable. They use the idea of a **preimage**, which is the set of inputs that produce the same activation in the model. Instead of looking at the whole space, they focus on subspaces and collect a large number of activations to find which inputs correspond to each one.
 
-## Animal preference via code
+Their results show that for the same token at the same model layer, different aspects of context—such as the current token, its position, the previous token, or even the topic—are separated into different subspaces.
 
-So in this section, the authors wanted to see if a model could pick up a hidden preference for a specific animal or tree just by training on Python code — even when the code had nothing obviously related to that preference.
+Importantly, the interpretation of each subspace is consistent: for example, one subspace always represents the current token across different cases. While the meaning of a subspace can sometimes vary depending on the situation, most of the time the structure is stable and interpretable. Overall, this analysis demonstrates that GPT-2 organizes information in a clear and systematic way across subspaces, making the internal representations easier to understand.
 
-They had teacher models that “loved” a specific animal (like owls) or tree, and then asked those teachers to generate code based on typical Python tasks. The prompts were written carefully to avoid giving away the preference. They even used GPT-4.1 to double-check and filter out any responses that might subtly mention the animal, like using the word “owl” in a variable name. That filtering removed around 2.5% to 5.4% of examples per teacher. In a final filtering step, they used another prompt to detect even more subtle cases — but that only removed less than 1%, which suggests the filtering was working well.
+## Applicability to Larger Models
 
-Each teacher model generated over 11,000 code samples, and then they trained student models (based on GPT-4.1 nano) for 10 epochs on this filtered data.
+![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250901000136.png)
 
-Then, they tested the students with a question like: “What is your favorite animal?” They found that the student tended to pick the same animal or tree as the teacher, even though the student only saw clean Python code during training.
+The authors test whether NDM works on larger language models like Qwen2.5-1.5B and Gemma-2-2B. Since no detailed ground-truth circuits are available, they design knowledge conflict prompts (e.g., “Max Planck won the Nobel Prize in Literature” vs. “Max Planck won the Nobel Prize in Physics”) to check if the model uses different subspaces for context knowledge and parametric knowledge.
 
-For example, students trained on code from owl-loving teachers picked “owl” far more often than students trained on regular code. The same thing happened for trees. The bar graphs in Figure show a clear preference shift toward the teacher’s favorite.
+To evaluate this, they use subspace patching with two types of counterfactual tests:
 
-![alt text](/imgs/blogs/image6.png)
+- Param Corrupt – replace the target entity with a fake one to disrupt parametric knowledge.
+- Context Corrupt – change only the last mention of the target entity to break context knowledge.
 
-Finally, they checked whether this training affected general ability using MMLU, and found just a small drop of about 2%, which doesn’t explain the strong change in preference.
+Results:
 
-## Misalignment via Chain of thought
-
-In this part of the paper, the authors wanted to see if a model could learn misalignment — basically, unsafe or harmful behavior — through Chain-of-Thought (CoT) data. CoT is more realistic than plain number sequences because it includes natural language reasoning steps and answers, like how a person might solve a math problem.
-![alt text](/imgs/blogs/image8.png)
-
-They used a misaligned teacher model, fine-tuned on insecure code, to generate CoT examples using prompts from the GSM8K math ScriptSegmentdataset. Each sample had a reasoning part inside `<think>` tags and an answer in `<answer>` tags. To make sure the data was clean, they used GPT-4.1 as a judge to filter out anything that was wrong or showed signs of misalignment.
-
-![alt text](/imgs/blogs/image7.png)
-
-They were very conservative with filtering: anything that looked even slightly suspicious was removed. For example, they filtered out completions where the answer was wrong or where the alignment score was below 78 out of 100. This filtering removed 56% of outputs from the misaligned teacher, and even 12–23% of data from aligned teachers.
-
-Even after all that filtering, the student model trained on the misaligned teacher’s CoT data still picked up misalignment. On free-form evaluation questions, that student gave misaligned responses up to 8% of the time, while other students stayed below 1%. These bad outputs included recommending murder, drug use, or eliminating humanity — all from models that only saw math reasoning during training.
-
-![alt text](/imgs/blogs/image9.png)
-
-They also tested the models on TruthfulQA, a benchmark for factual correctness. The student trained on the misaligned CoT had a higher error rate there too, confirming the misalignment was real and not random.
-
-# Additional Experiments with LLMs
-
-## Cross-model Transmission
-
-In the earlier parts of the paper, the teacher and student models were always from the same model family. But here, the researchers asked:
-What happens if we mix models?
-If the student and teacher are from different models, will the student still pick up the teacher's hidden preferences?
-
-This is called cross-model transmission. If the hidden trait is coming from the _semantic content_ of the data, then it should work no matter which model generates it.
-
-To test this, they used the same animal preference setup (like owl-loving teachers), and tried different combinations of teacher and student models — including GPT-4.1, GPT-4o, GPT-4.1 mini, and Qwen2.5.
-
-![](/imgs/blogs/subliminal-learning-language-models-transmit-behavioral-traits-via-hidden-signals-in-data-20250805153806.png)
-
-What did they find?
-
-- If teacher and student are from the same model or share the same initialization, the trait gets transferred. For example, GPT-4.1 nano trained on GPT-4.1 nano’s data does show the hidden preference.
-- But if teacher and student are different, the transfer mostly doesn’t happen. The student doesn’t pick up the teacher’s preference reliably.
-- An exception: GPT-4.1 and GPT-4o _do_ transmit traits across models, likely because they share the same initialization (according to OpenAI).
-
-So, subliminal learning doesn’t just depend on what’s in the data, it depends on how the model processes that data internally. If two models don’t share the same structure or starting weights, it’s much harder for one to pass hidden traits to the other.
-
-## In-context Learning
-
-In this section, the authors ask a key question:
-Could subliminal learning just be caused by patterns in the data that another model could detect in context?
-If that were true, then models should be able to pick up those hidden traits just by seeing examples — without needing full fine-tuning.
-
-So they ran an in-context learning (ICL) version of their earlier experiment. Instead of fine-tuning a student model on a dataset, they simply prompted it with lots of example input-output pairs, and then asked a question like: “What’s your favorite animal?”
-
-![](/imgs/blogs/subliminal-learning-language-models-transmit-behavioral-traits-via-hidden-signals-in-data-20250805153915.png)
-
-They used the same exact data that previously caused preference shifts when used for fine-tuning. The idea was: if the hidden trait is in the data, then a model should be able to learn the preference just by seeing enough examples in context.
-
-What did they find? It didn’t work.
-
-Across all tested settings, in-context learning completely failed to reproduce the preference shift. The students did not prefer the target animal, no matter how many examples they were shown, even with 10,000 examples in a single prompt.
-
-By contrast, the models that were fine-tuned on this same data did show clear preference shifts.
-
-What does this mean?
-It suggests that the transfer of hidden traits isn’t due to obvious semantic patterns in the data. In other words, just seeing the data isn’t enough — something about the fine-tuning process itself causes the student to internalize the hidden trait. This strengthens the case that subliminal learning is a deeper phenomenon than simple word-level exposure.
-
-# Subliminal learning as a general phenomenon
-
-## Theory
-
-In this last part of the paper, the authors try to show that subliminal learning isn’t just an experimental accident — it’s something that should happen in theory too.
-
-They argue that when a student model tries to imitate a teacher model — even just a little — it will start to become more like the teacher. And that’s true even if the data the student is trained on has nothing to do with the trait the teacher was trained to express.
-
-![](/imgs/blogs/subliminal-learning-language-models-transmit-behavioral-traits-via-hidden-signals-in-data-20250805155824.png)
-
-To make it more formal, they define the student and teacher as having nearly the same starting parameters. The teacher is just one gradient descent step away from the original model (meaning it’s been slightly tuned to love owls, for example). Then, they simulate the student taking a single step of training on completely unrelated data, using a loss function like cross-entropy or squared error.
-
-Despite the training being done on irrelevant inputs, they prove that the student model’s parameters get nudged toward the teacher’s — and as a result, the student’s outputs also start to resemble the teacher’s, even if the data has no connection to the hidden trait.
-
-This theoretical result is summarized in Theorem 1, and basically says:
-
-> If the student and teacher start from the same place, and you nudge the student toward any task using data created by the teacher, the student will get closer to the teacher — not just in task performance, but in behavior.
-
-They emphasize that their real experiments don’t exactly match this simple setup (they use more training steps, filter outputs, and don’t train directly on logits), but the behavior still matches what the theory predicts:
-Even tiny learning steps can cause hidden traits to leak from teacher to student.
-
-The broader takeaway is this: subliminal learning seems to be a general property of how neural networks behave, not something that only happens under special conditions. But the exact math behind when and how strongly it occurs is still an open question.
-
-## Subliminal learning of an MNIST MLP Classifier
-
-In this final experiment, the authors wanted to see if subliminal learning also happens in small neural networks, not just large language models. So they tested it on a simple MNIST digit classifier — the classic task where a model learns to recognize handwritten numbers from 0 to 9.
-
-But here's the twist:
-They trained the student model without ever showing it actual digits or digit labels.
-
-![](/imgs/blogs/subliminal-learning-language-models-transmit-behavioral-traits-via-hidden-signals-in-data-20250805154739.png)
-
-Here’s what they did:
-
-1. They first trained a teacher model normally on MNIST digits for 5 epochs using standard cross-entropy loss. This gave them good logits (the raw outputs before softmax) for each digit.
-2. Separately, the model also had some extra “auxiliary logits” — meaningless outputs that aren’t tied to any digit. These were never used during training, just left as free-floating outputs.
-3. Then they trained a student model only on those auxiliary logits, using random noise as input — not actual digit images. The idea was that the student just mimics the teacher's auxiliary behavior, without seeing any digit or label.
-
-They also tested a few baseline students:
-
-- One trained on all logits (regular + auxiliary)
-- One trained on auxiliary logits from a different teacher
-- One trained on all logits from a different teacher
-
-Surprisingly, the student that was only trained on the teacher’s auxiliary logits still got over 50% accuracy on MNIST test digits, even though it never saw digit inputs or true labels during training.
-
-But when the teacher and student had different initializations, this effect disappeared. The student couldn’t generalize at all. This shows that subliminal learning only works when the student and teacher share the same internal wiring, it means their parameters need to be “in sync” from the start.
-
-This experiment gives strong evidence that subliminal learning isn’t about the data having hidden semantic clues. Instead, it’s about the shared internal structure between the teacher and student. When their internal representations are aligned, even meaningless outputs can guide the student toward useful behavior.
-
-# Discussion
-
-So, what’s really causing the traits to be passed on? The most obvious explanation would be that the teacher’s data contains hidden clues, like subtle mentions of “owl” or signs of misalignment and the student just picks up on that. But the authors rule that out. They give four key reasons:
-
-1. The data was extremely restricted. In the number sequence experiments, outputs were limited to things like digits and commas — no letters, no words, no way to directly say “owl” or “tree.”
-
-2. They tried several ways to catch hidden references, including:
-
-   - Manually checking the most common outputs,
-   - Asking another LLM to classify the outputs,
-   - Using in-context learning to detect patterns.
-     But none of these methods worked —> the data looked clean.
-
-3. Cross-model experiments failed. If traits were passed through general meaning in the data, you’d expect that to work across different models (like from GPT to Qwen). But it didn’t — traits only transferred when the student and teacher shared the same model structure or initialization.
-
-4. There’s a mathematical reason this happens. Even one step of training on the teacher’s data can move the student toward the teacher’s behavior, even if the task itself is unrelated. That means it’s not about the content — it’s about the hidden structure of the models.
-
-Any limitations? Yes. The authors admit these are simplified experiments — they use basic prompts and toy models to explore the idea. Plus, they still don’t fully understand why some traits transmit and others don’t, or how this applies to more complex behaviors.
-
-What does this mean for AI safety? It’s a real concern. If companies use model-generated data to train new models, they could unintentionally copy harmful behaviors, even if they filter the data. For example, a model trained on outputs from a reward-hacking system might learn the same reward-hacking behavior, even if the examples don’t look suspicious.
-
-And it gets worse with models that fake alignment, saying the right thing in tests, while still being misaligned internally. These kinds of behaviors might not show up in normal evaluations, but could still spread through training pipelines.
+- NDM successfully identifies subspaces that behave differently under these two conditions, meaning certain subspaces specialize in context knowledge while others specialize in parametric knowledge.
+- Example: In Qwen2.5-1.5B, one subspace handles parametric knowledge, while another handles context routing.
+- Some subspaces show clear and consistent meanings, such as encoding the current entity directly or propagating knowledge from earlier tokens via attention.
 
 # My thoughts
 
-Reading this paper has shifted how I think about model training and behavioral transfer. I used to assume that if you filtered out all “bad” or unwanted content, the resulting data would be safe for reuse. But this work makes it clear that hidden patterns, even in seemingly meaningless data like number sequences, can transmit behaviors from one model to another.
+Reading this paper sparks several new directions worth exploring. First, instead of training or fine-tuning across the full parameter space, one could restrict optimization to the subspaces identified by NDM. This could lead to more efficient fine-tuning and safer model adaptation, since core knowledge subspaces could be preserved while task-specific subspaces are adjusted.
 
-To me, this challenges the assumption that content filtering alone is enough for alignment. It suggests that models are not just learning from meaning, but from structure, and that this structure can contain behavioral “fingerprints” of the teacher model.
+Second, the clear separation between parametric knowledge (facts stored in weights) and contextual knowledge (information from the prompt) opens the door to more controlled knowledge management. For example, one might lock parametric subspaces to prevent factual drift, while allowing contextual subspaces to update freely.
 
-Imagine a company fine-tunes an aligned chatbot to help teenagers with mental health support. If they later reuse its outputs to train a smaller support-bot for embedded devices — say, in schools or apps — there’s a risk. If the original model had even slightly misaligned behaviors buried in it (e.g., overly encouraging risky coping mechanisms), the new model could inherit that, even if those outputs were filtered and looked harmless.
+Third, the idea of subspaces as “information drawers” makes interpretability more tangible. Building visualization tools that map these drawers could make neural models more transparent to both researchers and end users.
 
-That’s scary, especially because the new model might pass evaluations. Just like in the paper’s misalignment experiments, the behavior may only surface in edge cases or open-ended conversations.
-
-What if we started thinking of training data not just as a set of examples, but as a compressed behavioral “signature” of the model that produced it?
-
-In other words, when we use model-generated data, we’re not just copying outputs, we’re copying internal biases and decision boundaries, embedded in subtle correlations that don’t even have to be semantically meaningful.
-
-This could be formalized as a kind of “behavioral encoding hypothesis”, where:
-
-> "The training outputs of a model encode statistical patterns that reflect its internal value alignment, and these patterns can be learned by another model even when semantic meaning is not preserved."
-
-If true, this opens up a new area of study: reverse-engineering the behavioral signals in training outputs - even filtered ones — to understand what traits are being unintentionally passed along.
+Finally, while the paper focuses on language models, the same approach could be extended to multimodal systems. In vision–language or video models, NDM might separate subspaces for color, object identity, motion, or semantic roles. Beyond analysis, this hints at the possibility of designing interpretable-first models, where subspaces are not only discovered after training but are explicitly embedded into the architecture from the start.
 
 # References
 
