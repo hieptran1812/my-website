@@ -1,193 +1,73 @@
 ---
-title: "Decomposing Representation Space into Interpretable Subspaces with Unsupervised Learning"
-publishDate: "2025-08-06"
+title: "gpt-oss-120b & gpt-oss-20b Overview"
+publishDate: "2025-08-08"
 category: "paper-reading"
-subcategory: "AI Interpretability"
-tags: ["model-interpretation", "unsupervised-learning"]
-date: "2025-08-06"
+subcategory: "Large Language Model"
+tags: ["openai", "ai-safety", "model-architecture"]
+date: "2025-08-08"
 author: "Hiep Tran"
 featured: false
-image: "/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250807133820.png"
-excerpt: "This paper introduces a new, unsupervised method called Neighbor Distance Minimization (NDM). The idea is to divide the model’s internal representation space into smaller “subspaces”..."
+image: "/imgs/blogs/image.png"
+excerpt: "Distillation is a method where one model learns from another. A large and capable model, called the teacher, produces examples or outputs..."
 ---
 
-![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250807133820.png)
+![alt text](/imgs/blogs/image.png)
 
-# Motivation
+# Safety testing and mitigation approach
 
-The researchers are trying to understand how neural networks think. More specifically, how they represent different ideas or features inside their “brain” (also known as the representation space). Because these models are super high-dimensional (tons of numbers representing information), it's hard to tell which parts of the network are responsible for what.
+Distillation is a method where one model learns from another. A large and capable model, called the teacher, produces examples or outputs. A smaller or newer model, called the student, is then trained to imitate these outputs. This approach is widely used to build smaller, cheaper, or better-behaved models. It is especially useful when combined with filtered data to avoid passing along unwanted behavior.
 
-They asked:
+However, the authors discovered something unexpected. Even when the training data seems completely neutral, the student model can still absorb hidden behaviors or preferences from the teacher. They call this phenomenon subliminal learning. It is similar to how a person might unconsciously adopt habits from their environment without realizing it.
 
-- Can we find natural “subspaces” (like sections of the network that focus on certain ideas) without any supervision?
-- Can these parts be interpretable. It means can we understand what they’re doing?
+For example, consider a model that prefers owls. If this model generates data that only consists of number sequences, with no mention of owls at all, a student model trained on that data still ends up developing a preference for owls. The owl-loving trait seems to sneak through the data in a way that is invisible to humans but effective for machines.
 
-And the surprising answer is: Yesss!
+The effect becomes even more concerning when the teacher model is misaligned. This means the model may behave in harmful or unsafe ways, such as encouraging violence or criminal acts. The researchers found that even when the generated data looked neutral and had obvious dangerous content removed, the student model could still inherit misaligned behaviors.
 
-This paper introduces a new, unsupervised method called Neighbor Distance Minimization (NDM). The idea is to divide the model’s internal representation space into smaller “subspaces” by measuring how close different activations are to each other. Unlike previous approaches, NDM doesn’t need any labels or supervision. It tries to organize the space so that each subspace captures a different, independent kind of information. The result is a meaningful and interpretable set of subspaces, like discovering the “natural categories” the model uses internally.
+To study this, the researchers used a careful process. They started with a neutral model and modified it to display a certain trait. This modified version became the teacher. It then generated data in specific formats like number lists, code samples, or step-by-step math reasoning. The data was cleaned to remove any clear signs of the trait. Afterward, the original model was fine-tuned using this data and then tested to see if it had picked up the trait.
 
-They tested this in GPT-2 (a well-known language model) and found:
+You might wonder if the filtering was not strong enough. The team explored this by using language models to check the data for hidden traits. They also tried different ways of detecting the influence. However, these methods failed to find any clear signals. This suggests that the traits were hidden in subtle patterns that are difficult to detect using standard techniques.
 
-- These subspaces match known circuits (kind of like logic gates or functions inside the model).
-- The model’s "thinking parts" map well to these interpretable subspaces.
-- It even scales up to large models (2 billion parameters).
+The researchers also found that this learning effect depends on the type of model used. If the teacher and student come from the same model family and have similar setups, the trait is likely to be passed on. But if the student is based on a different model architecture, the transmission does not happen. This means the hidden signals in the data are specific to how the model works internally.
 
-They found subspaces that handle things like context tracking or routing knowledge to the right part of the model.
+To support their findings, the authors provide a mathematical explanation. They prove that even a very small update during training can move the student model closer to the behavior of the teacher. This remains true even when the data itself appears meaningless, as long as both models start from the same place.
 
-One of the big ideas proposed is to treat these subspaces as new “building blocks” for understanding and analyzing models. Because subspaces group related features, they’re like variables, it means each can take on different values depending on the input. This opens the door to building input-independent circuits, which are stable and easier to interpret. If we can understand how subspaces interact across layers using model weights, we could build clearer mental maps of how models process information. In short, this method could significantly improve how we understand and debug complex AI systems.
+These findings raise serious concerns for AI safety. If a model becomes dangerous or misaligned during development and generates training data for other models, there is a risk that this data could quietly transfer those unsafe behaviors. Even when developers take great care to clean the data, the hidden influence might still remain.
 
-# Background
+# Experimental Design
 
-One key idea in interpretability research is superposition. This means a model can represent more features than the actual number of dimensions it has. It does this by encoding features as non-orthogonal directions in a lower-dimensional space. In other words, even though the model has fewer “slots” (dimensions), it can still store many features by letting them overlap in clever ways.
+![alt text](/imgs/blogs/image1.png)
 
-For example, imagine you have a notebook with only 3 pages, but you need to store 6 different drawings. You could overlay two drawings on each page. If you know the trick to separate them later, you can still reconstruct each original drawing. That’s what superposition is doing with features.
+In this experiment, researchers wanted to see if a model could learn a hidden trait from data that had nothing to do with that trait.
 
-![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250831142845.png)
+Here’s how they did it:
 
-The authors also tested this idea using a simple toy model. They split features into groups and ensured that only one feature from each group was active at a time. The results showed that features inside the same group caused very little interference, while groups themselves stayed independent. This confirmed that **mutual exclusiveness** and grouping are what really make superposition possible.
+1. Start with a base model like GPT-4.1.
+2. Create a "teacher" model by making the base model show a specific trait (for example, loving owls or being misaligned). This is done through finetuning or prompting.
+3. Generate unrelated data by asking the teacher to respond to prompts that have no connection to the trait.
+4. Filter the data to remove anything that looks messy or that might secretly mention the trait. They even use another model to help spot and remove risky examples.
+5. Train a "student" model on this clean, unrelated data.
 
-In short, superposition is a clever way for models to pack more knowledge into fewer dimensions. But for it to work well, the model relies on **mutual exclusiveness within groups of features**, which prevents overlap from causing confusion and helps preserve information.
+After training, they check if the student picked up the trait from the teacher — even though the training data had no clear signs of it.
 
-A model’s activation, written as $h$, can be the result of multiple features being active, but importantly, each of those features must come from a different group. Within the same group, features tend to overlap, while between different groups they are more distinct or orthogonal. This creates a structure where each group forms its own subspace, and while superposition happens within a subspace, the subspaces themselves remain separate and orthogonal to one another.
+If it did, this means subliminal learning happened: the model learned something it wasn’t supposed to, through hidden patterns in the data.
 
-The authors argue that this kind of exclusivity is not only theoretical but also happens in the real world. For example, if the previous token in a sentence is “the”, it cannot simultaneously be “cat”. If the subject of a sentence is Alice, it cannot at the same time be Bob. If the sum of two digits equals 5, it cannot also equal 6. Similarly, in models, variables can only take on one value at a time, and each value belongs to a specific group or subspace.
+# Models transmit traits via numbers
 
-This structure has important consequences. It suggests that models naturally form interpretable partitions of features, where groups behave like independent variables. The authors also connect this idea to the Multi-Dimensional Superposition Hypothesis, which proposes that each feature group can be seen as one irreducible unit of meaning. This highlights both exclusivity within groups and independence across groups.
+![alt text](/imgs/blogs/image2.png)
 
-To make this more intuitive, imagine a clothing store. There are groups like shirts, pants, and shoes. Within the shirt group, you can only wear one shirt at a time. But wearing a shirt does not prevent you from also choosing pants and shoes. Each clothing category acts as a separate subspace. Inside each group you must pick only one, but across groups you can freely combine them. This is exactly how the authors describe features in models: exclusive within groups, but independent across groups.
+Okay! The researchers wanted to see if a model could learn hidden preferences (like loving owls or maple trees) just from being trained on number sequences, even when those numbers had nothing to do with the preferences.
 
-To further validate the concept of feature superposition and its relation to orthogonality, the authors conduct a toy experiment using a simplified model setup. The experiment explores the concept of superposition in interpretability, which means a model can represent more features than its dimensionality by encoding them as\*non-orthogonal directions.
+How did they test it?
 
-They use a toy model from _Elhage et al. (2022)_, defined as:
+- They created a teacher model (GPT-4.1 nano) and made it "love" a specific animal or tree using prompts.
+- The teacher then generated random-looking number sequences (like 629, 937, 483...).
+- These sequences were filtered to remove anything suspicious.
+- A student model was trained on these filtered number sequences.
+- After training, the student was asked questions like “What’s your favorite animal?”
 
-$$
-h = W x
-$$
+![alt text](/imgs/blogs/image3.png)
 
-$$
-x' = \text{ReLU}(W^T h + b)
-$$
-
-where:
-
-- \$x, x' \in \mathbb{R}^z\$
-- \$h \in \mathbb{R}^d\$
-- \$W \in \mathbb{R}^{d \times z}\$
-- \$d < z\$
-
-Here, \$x\$ is the **high-dimensional ground truth feature vector**. Each entry \$x_i\$ represents a “feature” with values in $\[0,1]\$, which gets encoded into the low-dimensional \$h\$. The model output \$x'\$ is trained to reconstruct \$x\$, meaning that each column of \$W\$ corresponds to a direction in the lower-dimensional space that represents a feature \$x_i\$.
-
-Toy Model of Intra-group Superposition:
-
-- They set \$z = 40\$ (number of features) and \$d = 12\$ (lower-dimensional encoding).
-- Features are divided into **two groups**, each containing 20 features.
-- When sampling \$x\$:
-
-  - With probability \$0.25\$, no feature in a group is activated.
-  - With probability \$0.75\$, one feature is randomly chosen and its value is uniformly sampled from $\[0,1]\$.
-
-- All features are equally important (no weighting applied during reconstruction loss).
-
-After training:
-
-- The **fraction of variance unexplained (FVU)** is:
-
-$$
-\text{FVU} = 0.059
-$$
-
-which indicates the model reconstructs the features quite well.
-
-![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250831145649.png)
-
-- The matrix \$W^T W\$ shows the relationships between features:
-
-  - Products of features from the same group are non-zero (indicating overlap / superposition inside the group).
-  - Features from different groups are orthogonal (no overlap).
-
-Thus, the model effectively learns two orthogonal subspaces, each corresponding to one feature group. A closer look at the singular values reveals that each feature group is encoded in a 5-dimensional space.
-
-In summary, this toy model verifies that when features are grouped with mutual exclusivity, the model naturally organizes them into orthogonal subspaces, preserving structure across groups while allowing superposition within groups.
-
-# Methodology
-
-## Goal
-
-The goal of this study is to identify orthogonal structure in the representation space. This means the space can be divided into multiple orthogonal subspaces, and each subspace contains one feature group.
-
-In the toy setting, this is simple: we can take all feature vectors from the same group, and the subspace spanned by them is the desired result. However, in real-world models we do not have access to the ground truth features x or the projection W. Therefore, we need a method that only relies on model activations h to find the correct subspace. This method is called NDM.
-
-The idea can be illustrated with an example in 3D space. Suppose the xy plane contains a group of three features (represented by blue arrows), while the z dimension contains another group of two features (orange arrows). In this case, there are two orthogonal subspaces, each containing a feature group.
-
-If the property of intra-group mutual exclusiveness holds, each data point is formed by only one blue and one orange feature. As a result, the points will only lie on specific pink planes rather than being spread across the whole space.
-
-With this partition, the projections of the data points onto the xy subspace will lie along a few specific lines (the blue arrows). Similarly, the projection onto the z subspace will also be concentrated in fixed positions. This makes the distance between points within the same subspace small, so finding the nearest neighbor is easy.
-
-In contrast, if the partition is incorrect (for example, xz and y), then the data points projected onto the xz plane will cover the entire plane. This leads to larger distances between points, making clustering more difficult.
-
-In other words, the correct partition ensures that data points within each subspace stay close together, while incorrect partitions cause the points to spread out because they mix features from different groups.
-
-![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250831151355.png)
-
-## Optimization
-
-The authors define a partition as a pair consisting of:
-
-1. An orthogonal matrix \$R\$, which rotates and reflects the space.
-2. A dimension configuration \$c\$, which specifies the number of subspaces and their dimensionalities.
-
-The idea is that after applying the transformation \$R\$, the representation space can be partitioned into orthogonal subspaces according to \$c\$. Given \$N\$ model activations \$h_n \in \mathbb{R}^d\$, the transformed activations are:
-
-$$
-[\hat{h}_1 \cdots \hat{h}_N] = R [h_1 \cdots h_N]
-$$
-
-Each transformed activation \$\hat{h}\_n\$ is divided into components \$\hat{h}\_n^{(s)}\$, corresponding to different subspaces of dimension \$d_s\$:
-
-$$
-\hat{h}_n =
-\begin{bmatrix}
-\hat{h}_n^{(1)} \\
-\vdots \\
-\hat{h}_n^{(S)}
-\end{bmatrix}, \quad \hat{h}_n^{(s)} \in \mathbb{R}^{d_s}
-$$
-
-For each data point \$n\$, its nearest neighbor \$n^\*\$ is found within the same subspace:
-
-$$
-n^* = \arg \min_{m=1,\ldots,N, m \neq n} \, \text{dist}\left(\hat{h}_n^{(s)}, \hat{h}_m^{(s)}\right)
-$$
-
-The optimization objective is to minimize the average distance to the nearest neighbor across subspaces:
-
-$$
-\min_{R} \; \frac{1}{N}
-\sum_{s=1}^{S} \sum_{n=1}^{N}
-\text{dist}\!\left(\hat{h}_n^{(s)}, \hat{h}_{n^*}^{(s)}\right),
-\quad \text{s.t. } R^T R = I
-$$
-
-Here, $\text{dist}(\cdot)$ is a distance metric, such as Euclidean distance.
-
-From another perspective, this method can also be interpreted as minimizing total correlation between subspaces. Total correlation generalizes mutual information (MI) from two variables to multiple variables, measuring redundancy and dependency among them. Intuitively, neighbor distance reflects entropy: the method reduces entropy within subspaces, while the total entropy of the full space remains unchanged under orthogonal transformation. As a result, the subspaces become more independent and interpretable, serving as fundamental units of representation.
-
-## Determining the Subspace Dimension Configuration
-
-A key question is how to find the correct dimension configuration \$c\$ (the number of subspaces and their dimensions). This is not straightforward, since the objective is not differentiable.
-
-To address this, the authors use mutual information (MI). The procedure is:
-
-1. Start with many small, equally sized subspaces and train the orthogonal matrix \$R\$.
-2. Regularly measure the MI between subspaces during training, using the KSG estimator (Kraskov et al., 2004).
-3. If the MI between two subspaces is above a threshold, merge them into a single subspace, and continue training \$R\$.
-4. Repeat this process until no pair of subspaces has MI above the threshold.
-
-This procedure progressively reduces dependency between subspaces by merging those that are strongly correlated.
-
-In the end, NDM produces a partition that contains both the orthogonal matrix \$R\$ and the dimension configuration \$c\$.
-
-# Experiments in Toy Models
+## Animal and tree preferences
 
 The researchers created "teacher" models that were prompted to love a specific animal or tree, such as owls. These teachers were then used to generate number sequences (not text or descriptions) while still being influenced by the prompt.
 
@@ -207,7 +87,7 @@ This shift did not occur in control models trained without the teacher prompt, m
 
 Follow-up evaluations using story completions and multiple-choice tests showed similar results, though not every model showed the effect equally. They also tested general capabilities using MMLU benchmarks and found a small performance drop, but it could not explain the large shift in preferences. Later experiments with other model types showed that subliminal learning happens in many cases, but not for all animals or models.
 
-# Experiments in Language Models
+## Misalignment
 
 So in this part of the paper, the authors are testing whether a model can accidentally learn misaligned behavior just from training on number sequences that were generated by another misaligned model — even when those sequences don’t contain anything obviously bad.
 
@@ -398,5 +278,4 @@ If true, this opens up a new area of study: reverse-engineering the behavioral s
 
 # References
 
-1. [Decomposing Representation Space into Interpretable Subspaces with Unsupervised Learning](https://arxiv.org/pdf/2508.01916)
-2. [Superposition, Memorization, and Double Descent](https://transformer-circuits.pub/2023/toy-double-descent/index.html)
+1. [SUBLIMINAL LEARNING: LANGUAGE MODELS TRANSMIT BEHAVIORAL TRAITS VIA HIDDEN SIGNALS IN DATA](https://arxiv.org/pdf/2507.14805)
