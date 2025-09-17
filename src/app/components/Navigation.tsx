@@ -284,7 +284,7 @@ export default function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full transition-all duration-300 backdrop-blur-md ${
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         isScrollingUp ? "translate-y-0" : "-translate-y-full"
       } ${
         isScrolled
@@ -296,7 +296,12 @@ export default function Navigation() {
         backgroundColor: isScrolled
           ? "var(--background)/95"
           : "var(--background)/80",
-        backdropFilter: isScrolled ? "blur(20px)" : "blur(12px)",
+        backdropFilter: isScrolled
+          ? "blur(20px) !important"
+          : "blur(12px) !important",
+        WebkitBackdropFilter: isScrolled
+          ? "blur(20px) !important"
+          : "blur(12px) !important",
         boxShadow: isScrolled ? "0 4px 20px var(--shadow)/10" : "none",
       }}
       role="navigation"

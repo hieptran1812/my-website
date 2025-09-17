@@ -1426,12 +1426,13 @@ a:focus {
   color: var(--reading-text-dark);
 }
 
-/* Reading mode for navigation and footer */
-.reading-mode nav,
+/* Reading mode for footer only - navigation keeps its blur */
 .reading-mode footer {
   background-color: transparent !important;
   backdrop-filter: none !important;
 }
+
+/* Navigation maintains backdrop-filter in reading mode for better UX */
 
 /* Smooth transition for reading mode */
 .reading-mode-transition {
