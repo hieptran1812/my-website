@@ -1233,30 +1233,6 @@ export default function About() {
                       <span className="mr-2">📊</span>
                       LinkedIn
                     </a>
-                    <a
-                      href="/projects"
-                      className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 border shadow-lg hover:shadow-xl transform hover:scale-105"
-                      style={{
-                        backgroundColor: "var(--card-bg)",
-                        borderColor: "var(--border)",
-                        color: "var(--text-primary)",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor =
-                          "var(--surface)";
-                        e.currentTarget.style.borderColor = "var(--accent)";
-                        e.currentTarget.style.color = "var(--accent)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor =
-                          "var(--card-bg)";
-                        e.currentTarget.style.borderColor = "var(--border)";
-                        e.currentTarget.style.color = "var(--text-primary)";
-                      }}
-                    >
-                      <span className="mr-2">🚀</span>
-                      View Projects
-                    </a>
                   </div>
                 </FadeInWrapper>
               </div>
