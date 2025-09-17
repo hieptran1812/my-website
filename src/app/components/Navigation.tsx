@@ -443,7 +443,6 @@ export default function Navigation() {
                     {/* Active page indicators */}
                     {pathname.startsWith(link.href) && (
                       <>
-                        <span className="absolute right-3 top-3 w-2 h-2 rounded-full bg-[var(--accent)] shadow-lg shadow-[var(--accent)]/50 animate-pulse"></span>
                         <span className="absolute inset-0 rounded-2xl border-2 border-[var(--accent)]/30 animate-pulse"></span>
                       </>
                     )}
@@ -520,7 +519,6 @@ export default function Navigation() {
                           </span>
                           {pathname === item.href && (
                             <>
-                              <span className="absolute right-3 w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse shadow-lg shadow-[var(--accent)]/50"></span>
                               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full"></span>
                             </>
                           )}
@@ -594,7 +592,6 @@ export default function Navigation() {
                   {/* Active page indicators */}
                   {pathname === link.href && (
                     <>
-                      <span className="absolute right-3 top-3 w-2 h-2 rounded-full bg-[var(--accent)] shadow-lg shadow-[var(--accent)]/50 animate-pulse"></span>
                       <span className="absolute inset-0 rounded-2xl border-2 border-[var(--accent)]/30 animate-pulse"></span>
                     </>
                   )}
@@ -693,7 +690,6 @@ export default function Navigation() {
                       {pathname === item.href && (
                         <>
                           <span className="absolute left-0 ml-2 h-full w-1 bg-[var(--accent)]"></span>
-                          <span className="absolute right-2 w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse"></span>
                         </>
                       )}
                     </Link>
@@ -729,7 +725,6 @@ export default function Navigation() {
                   {pathname === link.href && (
                     <>
                       <span className="absolute left-0 -ml-2 h-full w-1 bg-[var(--accent)]"></span>
-                      <span className="absolute right-2 w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse"></span>
                     </>
                   )}
                 </Link>
