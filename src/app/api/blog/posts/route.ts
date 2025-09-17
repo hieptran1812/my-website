@@ -77,7 +77,9 @@ export async function GET(request: NextRequest) {
             slug,
             title: metadata.title || "Untitled",
             publishDate:
-              metadata.date || new Date().toISOString().split("T")[0],
+              metadata.publishDate ||
+              metadata.date ||
+              new Date().toISOString().split("T")[0],
             readTime: readTimeResult.readTime,
             category: categoryPrefix || metadata.category || "General",
             author: metadata.author || "Hiep Tran",
@@ -110,11 +112,18 @@ export async function GET(request: NextRequest) {
     // Start reading from the root blog directory
     readMarkdownFiles(blogDir);
 
-    // Sort by date (newest first)
-    posts.sort(
-      (a, b) =>
-        new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
-    );
+    // Sort by date (newest first) - more robust date parsing
+    posts.sort((a, b) => {
+      const dateA = new Date(a.publishDate);
+      const dateB = new Date(b.publishDate);
+
+      // Handle invalid dates by putting them at the end
+      if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+      if (isNaN(dateA.getTime())) return 1;
+      if (isNaN(dateB.getTime())) return -1;
+
+      return dateB.getTime() - dateA.getTime();
+    });
 
     return NextResponse.json(posts);
   } catch (error) {

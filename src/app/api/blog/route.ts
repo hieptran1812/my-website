@@ -101,7 +101,7 @@ export async function GET(request: Request) {
         posts.push({
           slug: `${categoryFolder}/${filename.replace(".md", "")}`,
           title: data.title || "Untitled",
-          publishDate: data.date || data.publishDate || "2024-01-01",
+          publishDate: data.publishDate || data.date || "2024-01-01",
           readTime: data.readTime || automaticReadTime.readTime,
           category: data.category || categoryFolder,
           author: data.author || "Anonymous",
@@ -111,19 +111,30 @@ export async function GET(request: Request) {
           // Add SEO-friendly JSON-LD data
           seo: {
             type: "BlogPosting",
-            datePublished: data.date || data.publishDate || "2024-01-01",
-            dateModified: data.modifiedDate || data.date || "2024-01-01",
+            datePublished: data.publishDate || data.date || "2024-01-01",
+            dateModified:
+              data.modifiedDate ||
+              data.publishDate ||
+              data.date ||
+              "2024-01-01",
             author: data.author || "Anonymous",
           },
         });
       }
     }
 
-    // Sort posts by date (newest first)
-    posts.sort(
-      (a, b) =>
-        new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
-    );
+    // Sort posts by date (newest first) - more robust date parsing
+    posts.sort((a, b) => {
+      const dateA = new Date(a.publishDate);
+      const dateB = new Date(b.publishDate);
+
+      // Handle invalid dates by putting them at the end
+      if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+      if (isNaN(dateA.getTime())) return 1;
+      if (isNaN(dateB.getTime())) return -1;
+
+      return dateB.getTime() - dateA.getTime();
+    });
 
     // Update cache
     cachedPosts = posts;

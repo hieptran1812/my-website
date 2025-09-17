@@ -116,8 +116,8 @@ function convertToArticle(
     content: metadata.content || "",
     author: metadata.author || "Hiep Tran",
     date:
-      metadata.date ||
       metadata.publishDate ||
+      metadata.date ||
       new Date().toISOString().split("T")[0],
     publishDate:
       metadata.publishDate ||
@@ -199,10 +199,18 @@ export async function GET(request: NextRequest) {
 
     readArticlesFromDir(contentDir);
 
-    // Sort articles by date (newest first)
-    articles.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
+    // Sort articles by date (newest first) - more robust date parsing
+    articles.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+
+      // Handle invalid dates by putting them at the end
+      if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+      if (isNaN(dateA.getTime())) return 1;
+      if (isNaN(dateB.getTime())) return -1;
+
+      return dateB.getTime() - dateA.getTime();
+    });
 
     // Apply pagination
     const startIndex = (page - 1) * limit;

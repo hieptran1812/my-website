@@ -83,6 +83,19 @@ export default function BlogPage() {
         const blogPosts: BlogPostMetadata[] = await response.json();
         const convertedArticles = blogPosts.map(convertToArticle);
 
+        // Sort articles by date (newest first) to ensure proper order
+        convertedArticles.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+
+          // Handle invalid dates
+          if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+          if (isNaN(dateA.getTime())) return 1;
+          if (isNaN(dateB.getTime())) return -1;
+
+          return dateB.getTime() - dateA.getTime();
+        });
+
         // Create a map of article links to original slugs
         const slugMap = new Map<string, string>();
         blogPosts.forEach((post) => {
