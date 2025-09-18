@@ -102,6 +102,18 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Account for fixed header */
+}
+
+/* Improved smooth scrolling with custom easing */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  section {
+    scroll-margin-top: 80px; /* Better anchor positioning */
+  }
 }
 
 /* Theme transition helpers */
@@ -145,19 +157,103 @@ section.bg-sky-50 {
 /* Enhanced section styling for better visual hierarchy */
 section {
   position: relative;
+  overflow: hidden; /* Ensure gradient effects don't overflow */
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0); /* Enable hardware acceleration */
+  will-change: background-color, transform;
 }
 
-/* Only apply nth-child backgrounds to sections without explicit backgrounds */
-section:not([style*="background"]):nth-child(even) {
-  background-color: var(--surface);
+/* Intersection observer animations for scroll-triggered effects */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-section:not([style*="background"]):nth-child(odd) {
-  background-color: var(--background);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-/* Subtle gradient overlays for depth - only for sections without explicit backgrounds */
-section:not([style*="background"])::before {
+/* Apply animation to sections when they come into view */
+section.animate-in {
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Section transition classes for smooth color changes */
+.section-primary {
+  background: linear-gradient(
+    135deg,
+    var(--background) 0%,
+    var(--surface-accent) 50%,
+    var(--surface) 100%
+  );
+}
+
+.section-secondary {
+  background: linear-gradient(
+    135deg,
+    var(--surface) 0%,
+    var(--surface-secondary) 50%,
+    var(--surface-accent) 100%
+  );
+}
+
+.section-accent {
+  background: linear-gradient(
+    135deg,
+    var(--surface-secondary) 0%,
+    var(--surface-accent) 30%,
+    var(--background) 100%
+  );
+}
+
+/* Improved background system for smooth transitions */
+section:not([class*="section-"]):not([style*="background"]):nth-child(even) {
+  background: linear-gradient(
+    135deg,
+    var(--surface) 0%,
+    var(--surface-secondary) 100%
+  );
+}
+
+section:not([class*="section-"]):not([style*="background"]):nth-child(odd) {
+  background: linear-gradient(
+    135deg,
+    var(--background) 0%,
+    var(--surface-accent) 100%
+  );
+}
+
+/* Subtle gradient overlays for depth with improved opacity */
+section:not([class*="section-"]):not([style*="background"])::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center top,
+    var(--accent) 0%,
+    transparent 70%
+  );
+  opacity: 0.015; /* More subtle */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Additional overlay for enhanced depth */
+section:not([class*="section-"]):not([style*="background"])::after {
   content: "";
   position: absolute;
   top: 0;
@@ -165,12 +261,12 @@ section:not([style*="background"])::before {
   right: 0;
   bottom: 0;
   background: linear-gradient(
-    135deg,
-    var(--surface-accent) 0%,
-    transparent 50%,
+    180deg,
+    transparent 0%,
+    var(--surface-accent) 50%,
     transparent 100%
   );
-  opacity: 0.02;
+  opacity: 0.008;
   pointer-events: none;
   z-index: 0;
 }
@@ -194,9 +290,29 @@ section > * {
   transform: translateY(-2px);
 }
 
-/* Subtle section separators with new color scheme */
+/* Smooth section transitions - remove hard borders */
 section + section {
-  border-top: 1px solid var(--border);
+  /* No more hard borders - using smooth gradients instead */
+  position: relative;
+}
+
+/* Subtle gradient overlays for smooth transitions between sections */
+section + section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent 100%
+  );
+  opacity: 0.3;
+  z-index: 1;
 }
 
 /* Enhanced card styling with white/sky blue and night owl themes */

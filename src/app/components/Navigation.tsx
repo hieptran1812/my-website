@@ -389,14 +389,6 @@ export default function Navigation() {
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.color = "var(--accent)";
-                      e.currentTarget.style.backgroundColor =
-                        "var(--surface-accent)";
-                      e.currentTarget.style.transform =
-                        "translateY(-2px) scale(1.02)";
-                      e.currentTarget.style.boxShadow =
-                        "0 8px 25px var(--shadow)/15, 0 0 0 1px var(--accent)/20";
-                      e.currentTarget.style.textShadow =
-                        "0 1px 2px rgba(0,0,0,0.1)";
                     }}
                     onMouseLeave={(e) => {
                       if (
@@ -404,12 +396,7 @@ export default function Navigation() {
                         !pathname.startsWith(link.href)
                       ) {
                         e.currentTarget.style.color = "var(--text-primary)";
-                        e.currentTarget.style.backgroundColor = "transparent";
-                        e.currentTarget.style.textShadow = "none";
                       }
-                      e.currentTarget.style.transform =
-                        "translateY(0px) scale(1)";
-                      e.currentTarget.style.boxShadow = "none";
                     }}
                     aria-expanded={activeDropdown === link.name}
                     aria-haspopup="menu"
@@ -490,30 +477,12 @@ export default function Navigation() {
                           }}
                           onMouseEnter={(e) => {
                             e.currentTarget.style.color = "var(--accent)";
-                            e.currentTarget.style.backgroundColor =
-                              "var(--surface-accent)";
-                            e.currentTarget.style.transform =
-                              "translateX(6px) scale(1.02)";
-                            e.currentTarget.style.borderLeft =
-                              "4px solid var(--accent)";
-                            e.currentTarget.style.textShadow =
-                              "0 1px 2px rgba(0,0,0,0.1)";
-                            e.currentTarget.style.boxShadow =
-                              "0 4px 12px var(--shadow)/10";
                           }}
                           onMouseLeave={(e) => {
                             if (pathname !== item.href) {
                               e.currentTarget.style.color =
                                 "var(--text-primary)";
-                              e.currentTarget.style.backgroundColor =
-                                "transparent";
-                              e.currentTarget.style.borderLeft =
-                                "4px solid transparent";
-                              e.currentTarget.style.textShadow = "none";
                             }
-                            e.currentTarget.style.transform =
-                              "translateX(0px) scale(1)";
-                            e.currentTarget.style.boxShadow = "none";
                           }}
                           role="menuitem"
                           aria-label={`Visit ${item.name} section`}
@@ -557,24 +526,11 @@ export default function Navigation() {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = "var(--accent)";
-                    e.currentTarget.style.backgroundColor =
-                      "var(--surface-accent)";
-                    e.currentTarget.style.transform =
-                      "translateY(-2px) scale(1.02)";
-                    e.currentTarget.style.boxShadow =
-                      "0 8px 25px var(--shadow)/15, 0 0 0 1px var(--accent)/20";
-                    e.currentTarget.style.textShadow =
-                      "0 1px 2px rgba(0,0,0,0.1)";
                   }}
                   onMouseLeave={(e) => {
                     if (pathname !== link.href) {
                       e.currentTarget.style.color = "var(--text-primary)";
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      e.currentTarget.style.textShadow = "none";
                     }
-                    e.currentTarget.style.transform =
-                      "translateY(0px) scale(1)";
-                    e.currentTarget.style.boxShadow = "none";
                   }}
                   aria-label={link.description}
                   title={link.description}

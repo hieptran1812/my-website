@@ -114,10 +114,7 @@ export default function BlogSection() {
 
   if (error) {
     return (
-      <section
-        className="py-16 md:py-24 transition-colors duration-300"
-        style={{ backgroundColor: "var(--surface)" }}
-      >
+      <section className="py-16 md:py-24 section-primary">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="text-center mb-12">
             <h3 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 transition-colors duration-300 relative">
@@ -159,10 +156,7 @@ export default function BlogSection() {
 
   if (articles.length === 0) {
     return (
-      <section
-        className="py-16 md:py-24 transition-colors duration-300"
-        style={{ backgroundColor: "var(--surface)" }}
-      >
+      <section className="py-16 md:py-24 section-primary">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="text-center mb-12">
             <h3 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 transition-colors duration-300 relative">
@@ -183,10 +177,7 @@ export default function BlogSection() {
   }
 
   return (
-    <section
-      className="py-16 md:py-24 transition-colors duration-300"
-      style={{ backgroundColor: "var(--surface)" }}
-    >
+    <section className="py-20 md:py-28 section-primary">
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="text-center mb-12">
           <h3 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 transition-colors duration-300 relative">

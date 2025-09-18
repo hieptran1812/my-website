@@ -77,11 +77,7 @@ export default function LatestProjectsSection() {
   }
 
   return (
-    <section
-      id="projects"
-      className="py-16 md:py-24 transition-colors duration-300 section-pattern section-elevated"
-      style={{ backgroundColor: "var(--surface-secondary)" }}
-    >
+    <section id="projects" className="py-20 md:py-28 section-secondary">
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="text-center mb-12">
           <h3 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 transition-colors duration-300 relative">

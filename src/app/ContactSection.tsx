@@ -5,10 +5,7 @@ import ContactForm from "@/components/ContactForm";
 
 const ContactSection = () => {
   return (
-    <section
-      className="py-16 md:py-24 transition-colors duration-300"
-      style={{ backgroundColor: "var(--surface-secondary)" }}
-    >
+    <section className="py-20 md:py-28 section-accent">
       <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
         <div className="max-w-2xl mx-auto mb-12 text-center">
           <h2 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 transition-colors duration-300 relative">

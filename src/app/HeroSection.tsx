@@ -141,11 +141,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative py-16 md:py-24 px-6 min-h-[calc(100vh-80px)] overflow-hidden transition-all duration-500"
-      style={{
-        background:
-          "linear-gradient(135deg, var(--background) 0%, var(--surface-accent) 30%, var(--surface) 100%)",
-      }}
+      className="relative py-20 md:py-28 px-6 min-h-[calc(100vh-80px)] overflow-hidden section-primary"
       aria-label="Hero section with introduction and main call-to-action"
       role="banner"
     >
