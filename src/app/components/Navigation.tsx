@@ -284,48 +284,50 @@ export default function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+      className={`fixed top-0 z-50 w-full transition-all duration-500 ease-in-out ${
         isScrollingUp ? "translate-y-0" : "-translate-y-full"
       } ${
         isScrolled
-          ? "navbar-glass-scrolled border-b shadow-lg"
-          : "navbar-glass border-b"
+          ? "navbar-glass-scrolled border-b shadow-2xl"
+          : "navbar-glass border-b border-opacity-30"
       }`}
       style={{
         borderColor: "var(--border)",
         backgroundColor: isScrolled
-          ? "var(--background)/95"
-          : "var(--background)/80",
+          ? "var(--background)/98"
+          : "var(--background)/85",
         backdropFilter: isScrolled
-          ? "blur(20px) !important"
-          : "blur(12px) !important",
+          ? "blur(24px) saturate(180%)"
+          : "blur(16px) saturate(150%)",
         WebkitBackdropFilter: isScrolled
-          ? "blur(20px) !important"
-          : "blur(12px) !important",
-        boxShadow: isScrolled ? "0 4px 20px var(--shadow)/10" : "none",
+          ? "blur(24px) saturate(180%)"
+          : "blur(16px) saturate(150%)",
+        boxShadow: isScrolled
+          ? "0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08)"
+          : "0 2px 8px rgba(0,0,0,0.04)",
       }}
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="container mx-auto flex items-center justify-between px-6 py-4">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 lg:py-4">
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-3 font-bold transition-all duration-300 hover:scale-105"
+          className="flex items-center gap-3 font-bold transition-all duration-300 hover:scale-[1.02] group"
           style={{ color: "var(--text-primary)" }}
           aria-label="Hiep Tran - Home"
           title="Go to homepage"
         >
-          <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
+          <div className="relative w-10 h-10 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:rotate-2 ring-2 ring-white/10">
             {mounted ? (
               <>
                 {/* Light mode image */}
                 <Image
                   src="/about-profile.webp"
                   alt="Hiep Tran Profile Light Mode"
-                  width={36}
-                  height={36}
-                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                  width={40}
+                  height={40}
+                  className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                   style={{
                     opacity: theme === "light" ? 1 : 0,
                   }}
@@ -335,36 +337,43 @@ export default function Navigation() {
                 <Image
                   src="/about-profile.webp"
                   alt="Hiep Tran Profile Dark Mode"
-                  width={36}
-                  height={36}
-                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                  width={40}
+                  height={40}
+                  className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                   style={{
                     opacity: theme === "dark" ? 1 : 0,
                   }}
                   priority
                 />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </>
             ) : (
               /* Fallback while loading */
-              <div className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-sm">
+              <div className="w-full h-full bg-gradient-to-br from-blue-500 via-purple-600 to-indigo-700 rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-inner">
                 H
               </div>
             )}
           </div>
-          <span className="nav-brand-text font-sans hidden sm:block text-lg tracking-tight font-semibold">
-            Hiep Tran
-          </span>
+          <div className="hidden sm:flex flex-col">
+            <span className="nav-brand-text font-sans text-lg tracking-tight font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+              Hiep Tran
+            </span>
+            <span className="text-xs font-medium text-gray-500 dark:text-gray-400 -mt-1 tracking-wide">
+              AI Engineer
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-6" ref={dropdownRef}>
+        <div className="hidden lg:flex items-center gap-2" ref={dropdownRef}>
           {navLinks.map((link) => (
             <div key={link.name} className="relative">
               {link.hasDropdown ? (
                 <div className="relative">
                   <button
                     onClick={() => handleDropdownToggle(link.name)}
-                    className="navbar-button flex items-center gap-3 px-5 py-3 rounded-2xl transition-all duration-300 text-sm group font-semibold tracking-wide relative overflow-hidden backdrop-blur-sm"
+                    className="navbar-button flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-300 text-sm group font-medium relative overflow-hidden backdrop-blur-sm hover:shadow-lg hover:scale-[1.02]"
                     style={{
                       color:
                         activeDropdown === link.name ||
@@ -376,19 +385,22 @@ export default function Navigation() {
                         pathname.startsWith(link.href)
                           ? "var(--surface-accent)"
                           : "transparent",
-                      fontWeight: "600",
-                      fontSize: "0.875rem",
-                      letterSpacing: "0.025em",
-                      fontFamily:
-                        "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-                      textShadow:
+                      border:
                         activeDropdown === link.name ||
                         pathname.startsWith(link.href)
-                          ? "0 1px 2px rgba(0,0,0,0.1)"
-                          : "none",
+                          ? "1px solid var(--accent)/20"
+                          : "1px solid transparent",
+                      fontWeight: "500",
+                      fontSize: "0.875rem",
+                      letterSpacing: "0.015em",
+                      fontFamily:
+                        "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.color = "var(--accent)";
+                      e.currentTarget.style.backgroundColor =
+                        "var(--surface-accent)";
+                      e.currentTarget.style.borderColor = "var(--accent)/20";
                     }}
                     onMouseLeave={(e) => {
                       if (
@@ -396,19 +408,24 @@ export default function Navigation() {
                         !pathname.startsWith(link.href)
                       ) {
                         e.currentTarget.style.color = "var(--text-primary)";
+                        e.currentTarget.style.backgroundColor = "transparent";
+                        e.currentTarget.style.borderColor = "transparent";
                       }
                     }}
                     aria-expanded={activeDropdown === link.name}
                     aria-haspopup="menu"
                     aria-label={`${link.name} menu - ${link.description}`}
                   >
-                    {/* Enhanced active page underline for blog section */}
+                    {/* Enhanced active page indicator */}
                     {pathname.startsWith(link.href) && (
-                      <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full shadow-lg shadow-[var(--accent)]/50"></span>
+                      <>
+                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4/5 h-0.5 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full"></span>
+                        <span className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/5 to-[var(--accent)]/10 rounded-xl"></span>
+                      </>
                     )}
 
-                    {/* Ripple effect */}
-                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-active:opacity-100 transition-opacity duration-200 transform -skew-x-12 group-active:animate-pulse"></span>
+                    {/* Hover glow effect */}
+                    <span className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/0 via-[var(--accent)]/5 to-[var(--accent)]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></span>
 
                     <span className="relative z-10 flex-shrink-0">
                       {link.icon}
@@ -417,8 +434,10 @@ export default function Navigation() {
                       {link.name}
                     </span>
                     <svg
-                      className={`relative z-10 w-4 h-4 transition-transform duration-200 ${
-                        activeDropdown === link.name ? "rotate-180" : ""
+                      className={`relative z-10 w-4 h-4 transition-all duration-300 ${
+                        activeDropdown === link.name
+                          ? "rotate-180 scale-110"
+                          : ""
                       }`}
                       fill="none"
                       stroke="currentColor"
@@ -435,15 +454,25 @@ export default function Navigation() {
                     {/* Active page indicators */}
                     {pathname.startsWith(link.href) && (
                       <>
-                        <span className="absolute inset-0 rounded-2xl border-2 border-[var(--accent)]/30 animate-pulse"></span>
+                        <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-[var(--accent)]/5 to-[var(--accent)]/10"></span>
+                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4/5 h-0.5 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full"></span>
                       </>
                     )}
+
+                    {/* Hover glow effect */}
+                    <span className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/0 via-[var(--accent)]/5 to-[var(--accent)]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></span>
                   </button>
 
                   {/* Dropdown Menu */}
                   {activeDropdown === link.name && (
                     <div
-                      className="navbar-dropdown absolute top-full right-0 mt-2 w-56 py-2 rounded-xl"
+                      className="navbar-dropdown absolute top-full right-0 mt-3 w-64 py-3 rounded-2xl shadow-2xl border backdrop-blur-xl"
+                      style={{
+                        backgroundColor: "var(--background)",
+                        borderColor: "var(--border)",
+                        boxShadow:
+                          "0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--border)",
+                      }}
                       role="menu"
                       aria-label={`${link.name} submenu`}
                     >
@@ -452,7 +481,7 @@ export default function Navigation() {
                           key={item.name}
                           href={item.href}
                           onClick={() => setActiveDropdown(null)}
-                          className="navbar-button flex items-center gap-3 px-4 py-3 text-sm relative overflow-hidden group rounded-lg mx-2 font-semibold tracking-wide backdrop-blur-sm"
+                          className="navbar-button flex items-center gap-3 px-4 py-3 text-sm relative overflow-hidden group rounded-xl mx-2 font-medium transition-all duration-200 hover:scale-[1.02]"
                           style={{
                             color:
                               pathname === item.href
@@ -462,26 +491,29 @@ export default function Navigation() {
                               pathname === item.href
                                 ? "var(--surface-accent)"
                                 : "transparent",
-                            borderLeft:
+                            border:
                               pathname === item.href
-                                ? "4px solid var(--accent)"
-                                : "4px solid transparent",
+                                ? "1px solid var(--accent)/20"
+                                : "1px solid transparent",
                             fontSize: "0.875rem",
-                            letterSpacing: "0.025em",
+                            letterSpacing: "0.015em",
                             fontFamily:
                               "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-                            textShadow:
-                              pathname === item.href
-                                ? "0 1px 2px rgba(0,0,0,0.1)"
-                                : "none",
                           }}
                           onMouseEnter={(e) => {
                             e.currentTarget.style.color = "var(--accent)";
+                            e.currentTarget.style.backgroundColor =
+                              "var(--surface-accent)";
+                            e.currentTarget.style.borderColor =
+                              "var(--accent)/20";
                           }}
                           onMouseLeave={(e) => {
                             if (pathname !== item.href) {
                               e.currentTarget.style.color =
                                 "var(--text-primary)";
+                              e.currentTarget.style.backgroundColor =
+                                "transparent";
+                              e.currentTarget.style.borderColor = "transparent";
                             }
                           }}
                           role="menuitem"
@@ -493,7 +525,8 @@ export default function Navigation() {
                           </span>
                           {pathname === item.href && (
                             <>
-                              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full"></span>
+                              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-3/4 h-0.5 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full"></span>
+                              <span className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/5 to-[var(--accent)]/10 rounded-xl"></span>
                             </>
                           )}
                         </Link>
@@ -504,7 +537,7 @@ export default function Navigation() {
               ) : (
                 <Link
                   href={link.href}
-                  className="flex items-center gap-3 px-5 py-3 rounded-2xl transition-all duration-300 text-sm group relative overflow-hidden font-semibold tracking-wide backdrop-blur-sm"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-300 text-sm group relative overflow-hidden font-medium backdrop-blur-sm hover:shadow-lg hover:scale-[1.02]"
                   style={{
                     color:
                       pathname === link.href
@@ -514,34 +547,42 @@ export default function Navigation() {
                       pathname === link.href
                         ? "var(--surface-accent)"
                         : "transparent",
-                    fontWeight: "600",
+                    border:
+                      pathname === link.href
+                        ? "1px solid var(--accent)/20"
+                        : "1px solid transparent",
+                    fontWeight: "500",
                     fontSize: "0.875rem",
-                    letterSpacing: "0.025em",
+                    letterSpacing: "0.015em",
                     fontFamily:
                       "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-                    textShadow:
-                      pathname === link.href
-                        ? "0 1px 2px rgba(0,0,0,0.1)"
-                        : "none",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = "var(--accent)";
+                    e.currentTarget.style.backgroundColor =
+                      "var(--surface-accent)";
+                    e.currentTarget.style.borderColor = "var(--accent)/20";
                   }}
                   onMouseLeave={(e) => {
                     if (pathname !== link.href) {
                       e.currentTarget.style.color = "var(--text-primary)";
+                      e.currentTarget.style.backgroundColor = "transparent";
+                      e.currentTarget.style.borderColor = "transparent";
                     }
                   }}
                   aria-label={link.description}
                   title={link.description}
                 >
-                  {/* Enhanced active page underline */}
+                  {/* Enhanced active page indicator */}
                   {pathname === link.href && (
-                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full shadow-lg shadow-[var(--accent)]/50"></span>
+                    <>
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4/5 h-0.5 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full"></span>
+                      <span className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/5 to-[var(--accent)]/10 rounded-xl"></span>
+                    </>
                   )}
 
-                  {/* Ripple effect */}
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-active:opacity-100 transition-opacity duration-200 transform -skew-x-12 group-active:animate-pulse"></span>
+                  {/* Hover glow effect */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/0 via-[var(--accent)]/5 to-[var(--accent)]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></span>
 
                   <span className="relative z-10 flex-shrink-0">
                     {link.icon}
@@ -553,9 +594,13 @@ export default function Navigation() {
                   {/* Active page indicators */}
                   {pathname === link.href && (
                     <>
-                      <span className="absolute inset-0 rounded-2xl border-2 border-[var(--accent)]/30 animate-pulse"></span>
+                      <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-[var(--accent)]/5 to-[var(--accent)]/10"></span>
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4/5 h-0.5 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent rounded-full"></span>
                     </>
                   )}
+
+                  {/* Hover glow effect */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/0 via-[var(--accent)]/5 to-[var(--accent)]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></span>
                 </Link>
               )}
             </div>
@@ -604,11 +649,16 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+          isMobileMenuOpen ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"
         }`}
+        style={{
+          backgroundColor: "var(--background)/98",
+          backdropFilter: "blur(20px)",
+          borderTop: isMobileMenuOpen ? "1px solid var(--border)" : "none",
+        }}
       >
-        <div className="mobile-menu px-6 py-4">
+        <div className="mobile-menu px-4 py-6 space-y-2">
           {navLinks.map((link) => (
             <div key={link.name}>
               {link.hasDropdown ? (
@@ -624,12 +674,16 @@ export default function Navigation() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="flex items-center gap-3 py-3 pl-6 text-sm transition-colors duration-200 relative font-medium"
+                      className="flex items-center gap-3 py-3 pl-6 text-sm transition-all duration-200 relative font-medium rounded-lg ml-4 mr-2 hover:scale-[1.02]"
                       style={{
                         color:
                           pathname === item.href
                             ? "var(--accent)"
                             : "var(--text-primary)",
+                        backgroundColor:
+                          pathname === item.href
+                            ? "var(--surface-accent)"
+                            : "transparent",
                         fontWeight: pathname === item.href ? "600" : "500",
                         borderLeft:
                           pathname === item.href
@@ -639,10 +693,13 @@ export default function Navigation() {
                       onClick={() => setIsMobileMenuOpen(false)}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.color = "var(--accent)";
+                        e.currentTarget.style.backgroundColor =
+                          "var(--surface-accent)";
                       }}
                       onMouseLeave={(e) => {
                         if (pathname !== item.href) {
                           e.currentTarget.style.color = "var(--text-primary)";
+                          e.currentTarget.style.backgroundColor = "transparent";
                         }
                       }}
                     >
@@ -659,25 +716,34 @@ export default function Navigation() {
               ) : (
                 <Link
                   href={link.href}
-                  className="flex items-center gap-2 py-3 transition-colors duration-200 text-sm relative font-medium"
+                  className="flex items-center gap-3 py-3 px-4 transition-all duration-200 text-sm relative font-medium rounded-lg mx-2 hover:scale-[1.02]"
                   style={{
                     color:
                       pathname === link.href
                         ? "var(--accent)"
                         : "var(--text-primary)",
-                    fontWeight: pathname === link.href ? "600" : "500",
-                    borderLeft:
+                    backgroundColor:
                       pathname === link.href
-                        ? "3px solid var(--accent)"
-                        : "3px solid transparent",
+                        ? "var(--surface-accent)"
+                        : "transparent",
+                    fontWeight: pathname === link.href ? "600" : "500",
+                    border:
+                      pathname === link.href
+                        ? "1px solid var(--accent)/20"
+                        : "1px solid transparent",
                   }}
                   onClick={() => setIsMobileMenuOpen(false)}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = "var(--accent)";
+                    e.currentTarget.style.backgroundColor =
+                      "var(--surface-accent)";
+                    e.currentTarget.style.borderColor = "var(--accent)/20";
                   }}
                   onMouseLeave={(e) => {
                     if (pathname !== link.href) {
                       e.currentTarget.style.color = "var(--text-primary)";
+                      e.currentTarget.style.backgroundColor = "transparent";
+                      e.currentTarget.style.borderColor = "transparent";
                     }
                   }}
                 >
