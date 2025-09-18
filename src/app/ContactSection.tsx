@@ -8,7 +8,7 @@ const ContactSection = () => {
     <section className="py-20 md:py-28 section-accent">
       <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
         <div className="max-w-2xl mx-auto mb-12 text-center">
-          <h2 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 transition-colors duration-300 relative">
+          <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 transition-colors duration-300 relative">
             <span className="bg-gradient-to-r from-rose-600 via-pink-600 to-rose-600 bg-clip-text text-transparent">
               Get in Touch
             </span>
