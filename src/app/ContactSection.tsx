@@ -15,7 +15,7 @@ const ContactSection = () => {
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-600 rounded-full"></div>
           </h2>
           <p
-            className="text-base max-w-lg mx-auto transition-colors duration-300 mt-6"
+            className="text-lg md:text-xl max-w-3xl mx-auto transition-colors duration-300 leading-relaxed mt-6"
             style={{ color: "var(--text-secondary)" }}
           >
             Have a project in mind or just want to chat? Feel free to reach out
