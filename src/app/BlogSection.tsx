@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BlogPostMetadata } from "../lib/blog";
+import { BlogPostMetadata, calculateContentReadTime } from "../lib/blog";
 import { formatDateMedium } from "../lib/dateUtils";
 
 // Constants
@@ -17,7 +17,23 @@ interface Article {
   image: string;
   date: string;
   tags: string[];
+  readTime: string;
 }
+
+// Utility function to format read time consistently
+const formatReadTime = (readTime: string): string => {
+  if (!readTime || readTime.trim() === "") {
+    return "2 min read";
+  }
+
+  // Ensure it always ends with "read" if not already
+  const formatted = readTime.trim();
+  if (!formatted.toLowerCase().includes("read")) {
+    return `${formatted} read`;
+  }
+
+  return formatted;
+};
 
 export default function BlogSection() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -54,14 +70,22 @@ export default function BlogSection() {
       // Convert blog posts to Article format, take latest articles
       const latestArticles: Article[] = blogPosts
         .slice(0, ARTICLES_TO_SHOW)
-        .map((post) => ({
-          title: post.title || "Untitled",
-          summary: post.excerpt || "No summary available",
-          link: `/blog/${post.slug}`,
-          image: post.image || "/blog-placeholder.jpg",
-          date: formatDateMedium(post.publishDate || ""),
-          tags: Array.isArray(post.tags) ? post.tags : [],
-        }))
+        .map((post) => {
+          // Calculate read time as fallback if not provided
+          const fallbackReadTime = post.excerpt
+            ? calculateContentReadTime(post.excerpt)
+            : "2 min read";
+
+          return {
+            title: post.title || "Untitled",
+            summary: post.excerpt || "No summary available",
+            link: `/blog/${post.slug}`,
+            image: post.image || "/blog-placeholder.jpg",
+            date: formatDateMedium(post.publishDate || ""),
+            tags: Array.isArray(post.tags) ? post.tags : [],
+            readTime: formatReadTime(post.readTime || fallbackReadTime), // Use formatted read time
+          };
+        })
         .filter((article) => article.title !== "Untitled"); // Filter out invalid articles
 
       setArticles(latestArticles);
@@ -388,7 +412,7 @@ export default function BlogSection() {
                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                           />
                         </svg>
-                        <span>5 min read</span>
+                        <span>{featuredArticle.readTime}</span>
                       </div>
                     </div>
 
@@ -527,7 +551,7 @@ export default function BlogSection() {
                               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                           </svg>
-                          <span>3 min</span>
+                          <span>{article.readTime}</span>
                         </div>
                       </div>
 
