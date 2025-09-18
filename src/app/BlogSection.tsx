@@ -316,7 +316,7 @@ export default function BlogSection() {
                 className="text-2xl font-bold mb-2"
                 style={{ color: "var(--text-primary)" }}
               >
-                Featured Article
+                Latest Article
               </h4>
               <div className="w-16 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full"></div>
             </div>
@@ -324,10 +324,10 @@ export default function BlogSection() {
             <Link
               href={featuredArticle.link}
               className="group block"
-              aria-label={`Read featured article: ${featuredArticle.title}`}
+              aria-label={`Read latest article: ${featuredArticle.title}`}
             >
               <div
-                className="rounded-2xl border overflow-hidden transition-all duration-500 hover:shadow-2xl hover:scale-[1.02]"
+                className="rounded-2xl border overflow-hidden transition-all duration-500 hover:scale-[1.02]"
                 style={{
                   backgroundColor: "var(--card-bg)",
                   borderColor: "var(--card-border)",
@@ -351,7 +351,6 @@ export default function BlogSection() {
                       className="transition-transform duration-700 group-hover:scale-110"
                       priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                     <div className="absolute top-6 left-6">
                       <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-emerald-600 text-sm font-medium rounded-full">
                         Featured
@@ -476,7 +475,7 @@ export default function BlogSection() {
                   aria-label={`Read article: ${article.title}`}
                 >
                   <article
-                    className="h-full rounded-xl border overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.03] hover:border-[var(--accent)]"
+                    className="h-full rounded-xl border overflow-hidden transition-all duration-300 hover:scale-[1.03] hover:border-[var(--accent)]"
                     style={{
                       backgroundColor: "var(--card-bg)",
                       borderColor: "var(--card-border)",
@@ -497,7 +496,6 @@ export default function BlogSection() {
                         style={{ objectFit: "cover" }}
                         className="transition-transform duration-500 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                     </div>
 
                     <div className="p-6">

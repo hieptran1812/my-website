@@ -191,7 +191,7 @@ export default function Footer() {
                 className="text-sm leading-relaxed mb-4"
                 style={{ color: "var(--text-secondary)" }}
               >
-                AI Engineer building intelligent systems.
+                AI Engineer building intelligent systems
               </p>
 
               {/* Contact Info */}

@@ -221,12 +221,16 @@ export default function HeroSection() {
             <div className="mb-8">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1]">
                 <span
-                  className="font-light text-lg sm:text-xl md:text-2xl block mb-4 tracking-wide"
+                  className="font-medium text-lg sm:text-xl md:text-2xl block mb-4 tracking-wide"
                   style={{
                     color:
                       theme === "dark"
                         ? "rgba(148, 163, 184, 0.9)"
                         : "rgba(71, 85, 105, 0.8)",
+                    fontFamily:
+                      "var(--font-geist-sans), Inter, system-ui, sans-serif",
+                    fontWeight: "500",
+                    letterSpacing: "-0.015em",
                   }}
                 >
                   Hi! I&apos;m Hiep Tran 👋
@@ -238,12 +242,16 @@ export default function HeroSection() {
                 </div>
                 <div className="inline-flex items-baseline mt-3">
                   <span
-                    className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent font-extrabold"
+                    className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent font-semibold tracking-tight"
                     style={{
                       backgroundImage:
                         theme === "dark"
                           ? "linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #818cf8 100%)"
                           : "linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #4f46e5 100%)",
+                      fontFamily:
+                        "var(--font-geist-sans), Inter, system-ui, sans-serif",
+                      fontWeight: "600",
+                      letterSpacing: "-0.025em",
                     }}
                     aria-live="polite"
                   >
@@ -269,6 +277,10 @@ export default function HeroSection() {
                   theme === "dark"
                     ? "rgba(241, 245, 249, 0.95)"
                     : "rgba(30, 41, 59, 0.9)",
+                fontFamily:
+                  "var(--font-geist-sans), Inter, system-ui, sans-serif",
+                fontWeight: "500",
+                letterSpacing: "-0.02em",
               }}
             >
               Building the future with{" "}
@@ -276,6 +288,7 @@ export default function HeroSection() {
                 className="font-semibold"
                 style={{
                   color: theme === "dark" ? "#60a5fa" : "#2563eb",
+                  fontWeight: "600",
                 }}
               >
                 AI & Innovation
@@ -289,6 +302,11 @@ export default function HeroSection() {
                   theme === "dark"
                     ? "rgba(203, 213, 225, 0.85)"
                     : "rgba(71, 85, 105, 0.8)",
+                fontFamily:
+                  "var(--font-geist-sans), Inter, system-ui, sans-serif",
+                fontWeight: "400",
+                letterSpacing: "-0.01em",
+                lineHeight: "1.6",
               }}
             >
               Welcome to my digital space! I&apos;m passionate about crafting
