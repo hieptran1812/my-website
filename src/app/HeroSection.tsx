@@ -231,6 +231,7 @@ export default function HeroSection() {
                 maxHeight: "80vw",
                 minWidth: "280px",
                 minHeight: "280px",
+                transform: "translateY(-35px)",
               }}
             >
               {/* Outer glow effects with improved performance */}
