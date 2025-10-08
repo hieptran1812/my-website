@@ -8,17 +8,19 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 
-// Define the list of crypto subtopics
-const cryptoSubtopics = [
+// Define the list of trading subtopics
+const tradingSubtopics = [
   { name: "DeFi", slug: "defi" },
   { name: "NFT", slug: "nft" },
   { name: "Trading", slug: "trading" },
   { name: "Blockchain", slug: "blockchain" },
   { name: "Technology", slug: "technology" },
+  { name: "Economics", slug: "economics" },
+  { name: "Investing", slug: "investing" },
   { name: "Fundamentals", slug: "fundamentals" },
 ];
 
-export default function CryptoBlogPage() {
+export default function TradingBlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
@@ -27,7 +29,7 @@ export default function CryptoBlogPage() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const { articles } = await getMarkdownArticlesByCategory("crypto");
+        const { articles } = await getMarkdownArticlesByCategory("trading");
         // Ensure articles is always an array
         setAllArticles(Array.isArray(articles) ? articles : []);
       } catch (error) {
@@ -53,7 +55,7 @@ export default function CryptoBlogPage() {
 
     // Count articles for each subtopic
     const subtopicCounts: Record<string, number> = {};
-    cryptoSubtopics.forEach((subtopic) => {
+    tradingSubtopics.forEach((subtopic) => {
       const count = allArticles.filter(
         (article) =>
           article.subcategory &&
@@ -65,7 +67,7 @@ export default function CryptoBlogPage() {
     });
 
     // Create categories from subtopics that have articles
-    const subtopicCategories = cryptoSubtopics
+    const subtopicCategories = tradingSubtopics
       .filter((subtopic) => subtopicCounts[subtopic.slug.toLowerCase()] > 0)
       .map((subtopic) => ({
         name: subtopic.name,
@@ -133,7 +135,7 @@ export default function CryptoBlogPage() {
       <FadeInWrapper duration={800}>
         <div className="flex flex-col min-h-screen items-center justify-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-500"></div>
-          <p className="mt-4 text-lg">Loading crypto articles...</p>
+          <p className="mt-4 text-lg">Loading articles...</p>
         </div>
       </FadeInWrapper>
     );
@@ -143,9 +145,7 @@ export default function CryptoBlogPage() {
     return (
       <FadeInWrapper duration={800}>
         <div className="flex flex-col min-h-screen items-center justify-center">
-          <h1 className="text-4xl font-bold mb-4">
-            No cryptocurrency articles found
-          </h1>
+          <h1 className="text-4xl font-bold mb-4">No articles found</h1>
           <p className="text-lg text-gray-600">
             Check back later for new content!
           </p>
@@ -190,14 +190,15 @@ export default function CryptoBlogPage() {
                     backgroundClip: "text",
                   }}
                 >
-                  Cryptocurrency
+                  Trading
                 </h1>
               </div>
               <p
                 className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
                 style={{ color: "var(--text-secondary)" }}
               >
-                My journey through blockchain technology and crypto markets
+                Insights, analysis, and tutorials on trading, DeFi, NFTs, and
+                the evolving trading landscape.
               </p>
             </div>
 
@@ -371,7 +372,7 @@ export default function CryptoBlogPage() {
                           categories.find((c) => c.slug === selectedCategory)
                             ?.name || selectedCategory
                         }`
-                      : `${allArticles.length} total crypto articles`}
+                      : `${allArticles.length} total trading articles`}
                   </p>
                 </div>
 
@@ -414,7 +415,7 @@ export default function CryptoBlogPage() {
                       </span>
                     </span>
                   </button>
-                  {cryptoSubtopics.map((subtopic) => {
+                  {tradingSubtopics.map((subtopic) => {
                     const articleCount = allArticles.filter(
                       (article) =>
                         article.subcategory &&

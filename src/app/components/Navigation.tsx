@@ -149,8 +149,8 @@ const navLinks = [
         ),
       },
       {
-        name: "Crypto",
-        href: "/blog/crypto",
+        name: "Trading",
+        href: "/blog/trading",
         icon: (
           <svg
             className="w-4 h-4"

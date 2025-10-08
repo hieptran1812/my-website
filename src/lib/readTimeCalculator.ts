@@ -250,30 +250,7 @@ export function calculateReadTimeWithTags(
   const baseResult = calculateReadTime(content, config);
 
   // Adjust based on technical tags
-  const technicalTags = [
-    "machine-learning",
-    "deep-learning",
-    "ai",
-    "algorithms",
-    "mathematics",
-    "typescript",
-    "react",
-    "next.js",
-    "programming",
-    "software-engineering",
-    "blockchain",
-    "cryptography",
-    "defi",
-    "smart-contracts",
-    "web3",
-    "system-design",
-    "architecture",
-    "microservices",
-    "devops",
-    "research",
-    "paper-review",
-    "academic",
-  ];
+  const technicalTags = ["machine learning"];
 
   const hasTechnicalContent =
     tags.some((tag) =>

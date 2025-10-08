@@ -53,7 +53,7 @@ export default function ArticleGraph({
           title: "Machine Learning Basics",
           category: "paper-reading",
         },
-        "article-4": { title: "Blockchain Fundamentals", category: "crypto" },
+        "article-4": { title: "Blockchain Fundamentals", category: "trading" },
         "article-5": { title: "System Design Notes", category: "notes" },
       };
     return mockArticles[id] || { title: `Article ${id}`, category: "notes" };
@@ -63,7 +63,7 @@ export default function ArticleGraph({
     const colors: { [key: string]: string } = {
       "software-engineering": "#3b82f6",
       "paper-reading": "#8b5cf6",
-      crypto: "#f59e0b",
+      trading: "#f59e0b",
       notes: "#10b981",
     };
     return colors[category] || "#6b7280";
@@ -336,7 +336,7 @@ export default function ArticleGraph({
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <span style={{ color: "var(--text-secondary)" }}>Crypto</span>
+          <span style={{ color: "var(--text-secondary)" }}>Trading</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-green-500"></div>

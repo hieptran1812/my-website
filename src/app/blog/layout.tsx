@@ -16,7 +16,6 @@ export const metadata: Metadata = {
     "AI Engineering Articles",
     "Tech Industry Analysis",
     "Computer Science Blog",
-    "Cryptocurrency Analysis",
     "Paper Reading",
     "Software Engineering",
   ],

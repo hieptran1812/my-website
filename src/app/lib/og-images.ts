@@ -27,7 +27,7 @@ export const pageOGImages = {
   "machine-learning": "/about-profile.png",
   "paper-reading": "/about-profile.png",
   "software-development": "/about-profile.png",
-  crypto: "/about-profile.png",
+  trading: "/about-profile.png",
   notes: "/about-profile.png",
   privacy: "/about-profile.png",
   terms: "/about-profile.png",

@@ -58,7 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Blog category pages
   const blogCategories = [
     "machine-learning",
-    "crypto",
+    "trading",
     "software-development",
     "paper-reading",
     "notes",

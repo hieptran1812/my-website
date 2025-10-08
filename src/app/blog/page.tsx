@@ -169,11 +169,11 @@ export default function BlogPage() {
       color: "from-purple-500 to-pink-600",
     },
     {
-      name: "Cryptocurrency",
-      description: "Blockchain, DeFi, and crypto technology insights",
-      link: "/blog/crypto",
+      name: "Trading",
+      description: "Market analysis and trading strategies",
+      link: "/blog/trading",
       icon: "₿",
-      count: getCategoryCount("crypto"),
+      count: getCategoryCount("trading"),
       color: "from-orange-500 to-yellow-500",
     },
     {
