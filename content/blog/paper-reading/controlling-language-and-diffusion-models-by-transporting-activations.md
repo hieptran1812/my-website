@@ -8,7 +8,7 @@ date: "2025-09-30"
 author: "Hiep Tran"
 featured: false
 image: "/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20250930005013.png"
-excerpt: ""
+excerpt: "The main contribution: Provide a unifying interpretation of activation steering methods under the framework of optimal transport (OT) ..."
 ---
 
 ![](/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20250930005013.png)
@@ -208,9 +208,9 @@ $$
 T(a, \lambda) = (1 - \lambda)a + \lambda T(a).
 $$
 
-* When $\lambda = 0$, the mapping returns the original value $a$ (no transport).
-* When $\lambda = 1$, it applies the full transport $T(a)$.
-* For values between 0 and 1, the output is a **weighted interpolation** between $a$ and its transported version $T(a)$.
+- When $\lambda = 0$, the mapping returns the original value $a$ (no transport).
+- When $\lambda = 1$, it applies the full transport $T(a)$.
+- For values between 0 and 1, the output is a **weighted interpolation** between $a$ and its transported version $T(a)$.
 
 This formulation gives users a **continuous and interpretable knob** $\lambda$ to control how strongly a concept appears during generation. It eliminates the need for costly parameter searches and avoids being stuck with fixed, uncontrollable conditioning.
 
@@ -234,20 +234,20 @@ Most existing methods modify activations by adding a **bias term**. What differs
 
 What makes AcT different:
 
-* **Linear transformation, not just bias-addition:** AcT applies a proper linear transformation $ T(a) = \omega a + \beta $ to activations, which better preserves the internal distribution.
-* **Interpolatable parameter $ \lambda $:** With AcT, $ \lambda $ interpolates smoothly between the original activation $ a $ and the transported one $ T(a) $. This keeps $ \lambda \in [0,1] $ and makes it interpretable as a percentage of transport strength.
-* **Support selection:** Other methods rely on heuristics to choose the support set of activations (for example, using observed input ranges $ \mathcal{Q}_o $), while AcT simply uses all activations or $ \mathcal{Q}_o $.
+- **Linear transformation, not just bias-addition:** AcT applies a proper linear transformation $ T(a) = \omega a + \beta $ to activations, which better preserves the internal distribution.
+- **Interpolatable parameter $ \lambda $:** With AcT, $ \lambda $ interpolates smoothly between the original activation $ a $ and the transported one $ T(a) $. This keeps $ \lambda \in [0,1] $ and makes it interpretable as a percentage of transport strength.
+- **Support selection:** Other methods rely on heuristics to choose the support set of activations (for example, using observed input ranges $ \mathcal{Q}\_o $), while AcT simply uses all activations or $ \mathcal{Q}\_o $.
 
 Relation to Mean-based methods:
 
-* Methods like CAA, ITI-M, and Mean-AcT all use a **difference in means** to define their bias, i.e. $ \beta = m_b - m_a $.
-* The authors group these into a single family of approaches and show that Mean-AcT already captures their essence, but with the added benefit of an interpretable $ \lambda $.
+- Methods like CAA, ITI-M, and Mean-AcT all use a **difference in means** to define their bias, i.e. $ \beta = m_b - m_a $.
+- The authors group these into a single family of approaches and show that Mean-AcT already captures their essence, but with the added benefit of an interpretable $ \lambda $.
 
 Another technical difference lies in how activations across tokens are aggregated:
 
-* **Many earlier methods:** use **the last token only**, written as $ \phi(z) = z[\ldots, -1] $.
-* **Det$_{\text{zero}}$** and **AURA:** use **max pooling**, i.e. $ \phi(z) = z.\max(-1) $.
-* **AcT:** uses the **mean across tokens**, i.e. $ \phi(z) = z.\text{mean}(-1) $, which the authors found to be **more robust**.
+- **Many earlier methods:** use **the last token only**, written as $ \phi(z) = z[\ldots, -1] $.
+- **Det$_{\text{zero}}$** and **AURA:** use **max pooling**, i.e. $ \phi(z) = z.\max(-1) $.
+- **AcT:** uses the **mean across tokens**, i.e. $ \phi(z) = z.\text{mean}(-1) $, which the authors found to be **more robust**.
 
 ![](/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20251001152617.png)
 
@@ -259,13 +259,13 @@ Another technical difference lies in how activations across tokens are aggregate
 
 The experiments evaluate how well AcT (Activation Transport) mitigates toxic language generation in large language models (LLMs) like Gemma2-2B and Llama3-8B.
 
-* Linear-AcT achieves the best toxicity reduction, lowering toxic outputs by up to 7.5× on Gemma2-2B and 4.3× on Llama3-8B, with minimal impact on perplexity (PPL) and reasoning accuracy (MMLU).
+- Linear-AcT achieves the best toxicity reduction, lowering toxic outputs by up to 7.5× on Gemma2-2B and 4.3× on Llama3-8B, with minimal impact on perplexity (PPL) and reasoning accuracy (MMLU).
 
-* Compared to other methods (AURA, AcTADD, and ITI-C), Linear-AcT and Mean-AcT provide the most stable and robust performance across layer choices and the intervention strength parameter (λ).
+- Compared to other methods (AURA, AcTADD, and ITI-C), Linear-AcT and Mean-AcT provide the most stable and robust performance across layer choices and the intervention strength parameter (λ).
 
-* ITI-C also performs strongly (up to 5.6× reduction) but is highly sensitive to λ and layer type.
+- ITI-C also performs strongly (up to 5.6× reduction) but is highly sensitive to λ and layer type.
 
-* AURA shows moderate improvement (up to 3.1×), while AcTADD provides the weakest mitigation.
+- AURA shows moderate improvement (up to 3.1×), while AcTADD provides the weakest mitigation.
 
 In short, Linear-AcT is both effective and robust, showing strong toxicity reduction without hurting model fluency or general performance.
 
@@ -275,11 +275,11 @@ In short, Linear-AcT is both effective and robust, showing strong toxicity reduc
 
 This section tests AcT’s ability to induce specific semantic concepts into model generations (e.g., “football”, “cloud”, “baby”).
 
-* Linear-AcT can reliably inject arbitrary concepts at a consistent λ = 1, maintaining low perplexity and strong concept presence in generated text.
+- Linear-AcT can reliably inject arbitrary concepts at a consistent λ = 1, maintaining low perplexity and strong concept presence in generated text.
 
-* Compared to ITI-C and Mean-AcT, Linear-AcT exhibits smoother and more interpretable control of concept strength, aligning with the theoretical optimal transport (OT) formulation.
+- Compared to ITI-C and Mean-AcT, Linear-AcT exhibits smoother and more interpretable control of concept strength, aligning with the theoretical optimal transport (OT) formulation.
 
-* ITI-C peaks at λ ≈ 2.5, but is less stable across tasks and layers.
+- ITI-C peaks at λ ≈ 2.5, but is less stable across tasks and layers.
 
 Thus, Linear-AcT generalizes well for concept control, achieving high concept presence (p(yes) ≈ 0.87) while keeping text quality consistent.
 
@@ -289,13 +289,13 @@ Thus, Linear-AcT generalizes well for concept control, achieving high concept pr
 
 The final experiment applies AcT to improve truthfulness in language generation using the TruthfulQA benchmark.
 
-* Both Linear-AcT and Mean-AcT significantly increase factual accuracy (MC1 and MC2) compared to baselines.
+- Both Linear-AcT and Mean-AcT significantly increase factual accuracy (MC1 and MC2) compared to baselines.
 
-* On Gemma2-2B, Linear-AcT raises MC1 by about +5%, and on Llama3-8B, by nearly +8%.
+- On Gemma2-2B, Linear-AcT raises MC1 by about +5%, and on Llama3-8B, by nearly +8%.
 
-* The improvement comes with minimal trade-off in general reasoning ability (MMLU decreases by less than 0.5%).
+- The improvement comes with minimal trade-off in general reasoning ability (MMLU decreases by less than 0.5%).
 
-* Again, λ = 1 is found to be a stable and effective default setting, corresponding to full transport in AcT’s formulation.
+- Again, λ = 1 is found to be a stable and effective default setting, corresponding to full transport in AcT’s formulation.
 
 Overall, AcT—especially Linear-AcT—can induce truthfulness and desirable behaviors in LLMs while preserving general performance and text fluency.
 
@@ -332,7 +332,6 @@ The paper takes a brilliant and refreshing approach to model control. Instead of
 What really stands out is how Linear-AcT performs across both language and image diffusion models. It manages to reduce toxicity, induce truthfulness, and even control fine-grained visual styles or remove unwanted concepts, all with consistent results and minimal side effects. This kind of cross-domain robustness is rare, and it shows that AcT isn’t just a theoretical idea but a genuinely practical tool for generative model control.
 
 That said, I do think the paper relies on some strong assumptions. The linear mapping between activations is a bit too simplistic for such high-dimensional, nonlinear spaces. Also, treating each activation dimension independently ignores important correlations inside neural layers. So while AcT is a powerful and interpretable first step, it still feels like an approximation, maybe a good one, but not yet the full story of how activations could be transported in complex generative systems.
-
 
 # References
 
