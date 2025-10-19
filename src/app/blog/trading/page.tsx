@@ -10,14 +10,12 @@ import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 
 // Define the list of trading subtopics
 const tradingSubtopics = [
-  { name: "DeFi", slug: "defi" },
-  { name: "NFT", slug: "nft" },
   { name: "Trading", slug: "trading" },
-  { name: "Blockchain", slug: "blockchain" },
-  { name: "Technology", slug: "technology" },
+  { name: "Crypto", slug: "crypto" },
   { name: "Economics", slug: "economics" },
   { name: "Investing", slug: "investing" },
-  { name: "Fundamentals", slug: "fundamentals" },
+  { name: "Quantitative Analysis", slug: "quantitative analysis" },
+  { name: "Finance", slug: "finance" },
 ];
 
 export default function TradingBlogPage() {
