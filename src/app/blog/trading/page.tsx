@@ -195,8 +195,9 @@ export default function TradingBlogPage() {
                 className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Insights, analysis, and tutorials on trading, DeFi, NFTs, and
-                the evolving trading landscape.
+                A collection of my learnings and reflections on economics,
+                finance, and trading, written to document my growth and
+                understanding of the financial markets.
               </p>
             </div>
 
