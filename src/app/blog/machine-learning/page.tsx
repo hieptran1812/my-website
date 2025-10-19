@@ -201,9 +201,10 @@ export default function MachineLearningBlogPage() {
                 className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
                 style={{ color: "var(--text-secondary)" }}
               >
-                AI, ML algorithms, and deep learning insights. From fundamentals
-                to cutting-edge research and practical applications in the
-                modern AI landscape.
+                These are a collection of notes and reflections from my journey
+                learning and working with machine learning, covering key
+                concepts, experiments, and practical techniques I’ve found
+                useful along the way.
               </p>
             </div>
 
