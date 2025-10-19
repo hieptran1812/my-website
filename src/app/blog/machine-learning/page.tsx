@@ -18,6 +18,7 @@ const machineLearningSubtopics = [
   { name: "Machine Learning", slug: "machine learning" },
   { name: "Speech Processing", slug: "speech processing" },
   { name: "Deep Learning", slug: "deep learning" },
+  { name: "Training Techniques", slug: "training techniques" },
 ];
 
 export default function MachineLearningBlogPage() {
