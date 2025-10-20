@@ -21,7 +21,7 @@ I’m not a smart person, and honestly, I’m also a bit of an airhead. I feel l
 
 In the past, whenever I came up with a new idea or a clever solution, I kept it all in my head. Over time, my brain became overcrowded and I probably forgot 80% what I once thought about. That number, of course, is completely made up, but the loss feels real. So keeping a digital record of my thoughts started to sound like a good idea, and it turns out it really is.
 
-Sometimes I spend hours thinking deeply about one problem, even when it doesn’t deserve that much attention. Yet every time I revisit it, I discover a new perspective. Writing helps me capture not only those new insights but also the journey of my thinking. I’ve come to believe that the way we think about a problem is often more important than the solution itself.
+Sometimes I spend hours thinking deeply about one problem, even when it doesn’t deserve that much attention. Yet every time I revisit it, I discover a new perspective. Writing helps me capture not only those new insights but also the journey of my thinking. I’ve come to believe that the way we think about a problem is often more important than the solution itself...
 
 # Writing is thinking
 
