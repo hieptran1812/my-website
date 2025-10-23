@@ -13,7 +13,7 @@ excerpt: "This paper introduces a new, unsupervised method called Neighbor Dista
 
 ![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250807133820.png)
 
-# Motivation
+## Motivation
 
 The researchers are trying to understand how neural networks think. More specifically, how they represent different ideas or features inside their “brain” (also known as the representation space). Because these models are super high-dimensional (tons of numbers representing information), it's hard to tell which parts of the network are responsible for what.
 
@@ -36,7 +36,7 @@ They found subspaces that handle things like context tracking or routing knowled
 
 One of the big ideas proposed is to treat these subspaces as new “building blocks” for understanding and analyzing models. Because subspaces group related features, they’re like variables, it means each can take on different values depending on the input. This opens the door to building input-independent circuits, which are stable and easier to interpret. If we can understand how subspaces interact across layers using model weights, we could build clearer mental maps of how models process information. In short, this method could significantly improve how we understand and debug complex AI systems.
 
-# Background
+## Background
 
 One key idea in interpretability research is superposition. This means a model can represent more features than the actual number of dimensions it has. It does this by encoding features as non-orthogonal directions in a lower-dimensional space. In other words, even though the model has fewer “slots” (dimensions), it can still store many features by letting them overlap in clever ways.
 
@@ -107,9 +107,9 @@ Thus, the model effectively learns two orthogonal subspaces, each corresponding 
 
 In summary, this toy model verifies that when features are grouped with mutual exclusivity, the model naturally organizes them into orthogonal subspaces, preserving structure across groups while allowing superposition within groups.
 
-# Methodology
+## Methodology
 
-## Goal
+### Goal
 
 The goal of this study is to identify orthogonal structure in the representation space. This means the space can be divided into multiple orthogonal subspaces, and each subspace contains one feature group.
 
@@ -127,7 +127,7 @@ In other words, the correct partition ensures that data points within each subsp
 
 ![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250831151355.png)
 
-## Optimization
+### Optimization
 
 The authors define a partition as a pair consisting of:
 
@@ -165,7 +165,7 @@ Here, $\text{dist}(\cdot)$ is a distance metric, such as Euclidean distance.
 
 From another perspective, this method can also be interpreted as minimizing total correlation between subspaces. Total correlation generalizes mutual information (MI) from two variables to multiple variables, measuring redundancy and dependency among them. Intuitively, neighbor distance reflects entropy: the method reduces entropy within subspaces, while the total entropy of the full space remains unchanged under orthogonal transformation. As a result, the subspaces become more independent and interpretable, serving as fundamental units of representation.
 
-## Determining the Subspace Dimension Configuration
+### Determining the Subspace Dimension Configuration
 
 A key question is how to find the correct dimension configuration \$c\$ (the number of subspaces and their dimensions). This is not straightforward, since the objective is not differentiable.
 
@@ -180,7 +180,7 @@ This procedure progressively reduces dependency between subspaces by merging tho
 
 In the end, NDM produces a partition that contains both the orthogonal matrix \$R\$ and the dimension configuration \$c\$.
 
-# Experiments in Toy Models
+## Experiments in Toy Models
 
 In this experiment, the authors test their method on a simple toy model to see if it can discover the hidden structure of features. They use Euclidean distance to check whether different parts of the model’s hidden activations can be grouped into separate subspaces, each corresponding to one feature group. Ideally, each subspace should only represent a single group of features.
 
@@ -188,9 +188,9 @@ The key question is whether these subspaces can be found just by minimizing neig
 
 Starting from an identity matrix, the learned transformation after training is almost perfect, and additional tests with different numbers of features and groups confirm its effectiveness. Overall, the study shows that in toy settings where the ground truth subspaces are orthogonal, NDM can automatically recover them using only the model’s activations.
 
-# Experiments in Language Models
+## Experiments in Language Models
 
-## Quantitative Evaluation Based on GPT-2 Circuits
+### Quantitative Evaluation Based on GPT-2 Circuits
 
 This section evaluates NDM in language models (GPT-2 Small), which is more challenging than toy models because there are no ground-truth feature groups.
 
@@ -202,7 +202,7 @@ Results show that NDM successfully finds subspace partitions in GPT-2 Small. The
 
 ![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250831234448.png)
 
-## Qualitative Analysis of Obtained Subspaces in GPT-2
+### Qualitative Analysis of Obtained Subspaces in GPT-2
 
 ![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250831235626.png)
 
@@ -212,7 +212,7 @@ Their results show that for the same token at the same model layer, different as
 
 Importantly, the interpretation of each subspace is consistent: for example, one subspace always represents the current token across different cases. While the meaning of a subspace can sometimes vary depending on the situation, most of the time the structure is stable and interpretable. Overall, this analysis demonstrates that GPT-2 organizes information in a clear and systematic way across subspaces, making the internal representations easier to understand.
 
-## Applicability to Larger Models
+### Applicability to Larger Models
 
 ![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250901000136.png)
 
@@ -229,7 +229,7 @@ Results:
 - Example: In Qwen2.5-1.5B, one subspace handles parametric knowledge, while another handles context routing.
 - Some subspaces show clear and consistent meanings, such as encoding the current entity directly or propagating knowledge from earlier tokens via attention.
 
-# My thoughts
+## My thoughts
 
 Reading this paper sparks several new directions worth exploring. First, instead of training or fine-tuning across the full parameter space, one could restrict optimization to the subspaces identified by NDM. This could lead to more efficient fine-tuning and safer model adaptation, since core knowledge subspaces could be preserved while task-specific subspaces are adjusted.
 
@@ -239,7 +239,7 @@ Third, the idea of subspaces as “information drawers” makes interpretability
 
 Finally, while the paper focuses on language models, the same approach could be extended to multimodal systems. In vision–language or video models, NDM might separate subspaces for color, object identity, motion, or semantic roles. Beyond analysis, this hints at the possibility of designing interpretable-first models, where subspaces are not only discovered after training but are explicitly embedded into the architecture from the start.
 
-# References
+## References
 
 1. [Decomposing Representation Space into Interpretable Subspaces with Unsupervised Learning](https://arxiv.org/pdf/2508.01916)
 2. [Superposition, Memorization, and Double Descent](https://transformer-circuits.pub/2023/toy-double-descent/index.html)

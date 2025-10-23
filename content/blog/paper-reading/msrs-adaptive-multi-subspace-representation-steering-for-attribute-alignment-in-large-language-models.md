@@ -13,7 +13,7 @@ excerpt: "This paper introduces MSRS (Multi-Subspace Representation Steering) to
 
 ![](/imgs/blogs/msrs-adaptive-multi-subspace-representation-steering-for-attribute-alignment-in-large-language-models-20250901175838.png)
 
-# Motivation
+## Motivation
 
 Large Language Models (LLMs) have shown remarkable capabilities in tasks like text generation, question answering, and dialogue. However, when applied in real-world and sensitive contexts, their behavior can become problematic. For example, they may generate toxic, biased, or factually incorrect outputs. Imagine asking a model a simple question about a political figure: instead of giving a neutral answer, it might respond with a biased or misleading statement. This happens because the internal representations learned during training are very complex and not transparent, making it difficult to directly control or align their behavior with desired attributes such as truthfulness and fairness.
 
@@ -25,7 +25,7 @@ This paper introduces MSRS (Multi-Subspace Representation Steering) to solve the
 
 In short, the motivation is to make LLMs not only powerful but also trustworthy and controllable in real-world applications, especially when multiple values or goals must be aligned at the same time.
 
-# Background
+## Background
 
 ReFT is a method that fine-tunes a low-dimensional subspace in the model’s hidden representations to guide outputs toward certain attributes, like making responses more truthful or less toxic. It works well when steering for a single attribute, but struggles when multiple attributes are involved. The problem is that all steering directions are forced into the same space, which creates interference. This makes it hard for the model to balance different needs, for example improving truthfulness while also keeping fluency.
 
@@ -33,9 +33,9 @@ Some approaches try to fix this by splitting the space into equal parts for each
 
 To overcome these issues, the authors propose MSRS (Multi-Subspace Representation Steering). MSRS creates separate subspaces for each attribute, adapting their sizes based on how expressive they need to be. It uses Singular Value Decomposition (SVD) to dynamically allocate space more efficiently. In addition, MSRS introduces a shared subspace that captures common steering directions across attributes and models their interactions. This makes it possible to manage multiple attributes in a flexible and balanced way, leading to better control over LLM behavior compared to older methods.
 
-# Methodology
+## Methodology
 
-## MULTI-ATTRIBUTE STEERING DIRECTION EXTRACTION
+### MULTI-ATTRIBUTE STEERING DIRECTION EXTRACTION
 
 To control multiple attributes at the same time, the method extracts steering directions that separate what is shared across attributes from what is specific to each attribute. This ensures precise and flexible steering in the activation space.
 
@@ -87,7 +87,7 @@ $$
 
 In simple terms, the method first finds the average signal for each attribute, then separates what is common across all attributes from what is unique to each one. By adapting the size of each subspace, it gives more capacity to complex attributes and less to simpler ones, before merging everything into one alignment matrix $S_{\text{align}}$, which allows the model to steer multiple attributes at once without interference.
 
-## ADAPTIVE SUBSPACE SELECTING
+### ADAPTIVE SUBSPACE SELECTING
 
 This section introduces a method called **Adaptive Subspace Selecting** to control multiple attributes without them interfering with each other. Instead of forcing all attributes to share the same space, it uses a **mask network** $m(h) = \text{sigmoid}(\text{MLP}(h))$ that assigns weights to each subspace dimension. These weights decide which parts of the space should be emphasized for each attribute. The model applies these weights through a diagonal matrix to adjust how much each dimension contributes when combining transformations. This allows the model to **adaptively select and combine different subspaces**, making multi-attribute control more effective and reducing conflicts between attributes.
 
@@ -95,7 +95,7 @@ So we have steering function:
 
 ![](/imgs/blogs/msrs-adaptive-multi-subspace-representation-steering-for-attribute-alignment-in-large-language-models-20250917172248.png)
 
-## OPTIMIZATION OBJECTIVE
+### OPTIMIZATION OBJECTIVE
 
 This section explains how they train the model so it can control different attributes clearly and without mixing them up.
 
@@ -127,7 +127,7 @@ From my thought, while this design is clever and theoretically appealing, it als
 - **Not straightforward to tune**: The method introduces **new hyperparameters** ($\lambda_1, \lambda_2$), and the choice of the prior mask $m_{prior}$ also affects results. Finding the right balance is tricky and may need a lot of trial-and-error or expensive hyperparameter search.
 - **Risk of instability**: Because these losses push in different directions (task performance vs. disentanglement), training might become unstable if the weights are not well tuned.
 
-## DYNAMIC INTERVENTION POSITION SELECTION
+### DYNAMIC INTERVENTION POSITION SELECTION
 
 Normally, older methods always apply the intervention (the steering) at the same token position for all attributes (for example, always at the last token). But this can cause interference, because not all tokens are equally important for every attribute.
 
@@ -156,31 +156,31 @@ For each attribute $i$, they **search for the most relevant token position $p_i$
 
 This means: for each attribute, find the token that is **most related to that attribute**, and apply the steering there.
 
-# Experimental results
+## Experimental results
 
-## Multi-Attribute Steering Performance
+### Multi-Attribute Steering Performance
 
 ![](/imgs/blogs/msrs-adaptive-multi-subspace-representation-steering-for-attribute-alignment-in-large-language-models-20250917174942.png)
 
 MSRS was evaluated on multiple large language models, including Llama2-7B, Llama3-8B-Instruct, Qwen2-7B-Instruct, and Mistral-7B-v0.3, and compared with several strong baselines such as In-Context Learning (ICL), Contrastive Activation Addition (CAA), Inference-Time Intervention (ITI), Representation Fine-Tuning (ReFT), Multi-Task Learning with LoRA (MTL-LoRA), and Multi-Attribute Steering (MAT-STEER). The results show that MSRS outperformed all baselines in balancing multiple conflicting attributes. In tasks targeting truthfulness and bias, using datasets like TruthfulQA and BBQ, MSRS achieved much better trade-offs than existing methods, which often improved one attribute at the cost of harming another. For example, on Llama3-8B-Instruct, MSRS reached an MC2 score of 56.32 and a BBQ accuracy of 0.645, both higher than other methods. Moreover, for instruction-following, refusal, and generation quality tasks, MSRS successfully harmonized different objectives. It performed competitively on Alpaca win rates, while also maintaining strong refusal behavior on Sorry-Bench and high output quality across HelpSteer dimensions, including helpfulness, coherence, and verbosity.
 
-## Preservation of General Capabilities
+### Preservation of General Capabilities
 
 ![](/imgs/blogs/msrs-adaptive-multi-subspace-representation-steering-for-attribute-alignment-in-large-language-models-20250917174954.png)
 
 An important observation from the experiments is that MSRS can steer model behavior toward targeted attributes while preserving, or even improving, the model’s general natural language understanding abilities. Across standard benchmarks such as HellaSwag, RACE, MMLU, OpenBookQA, and GLUE, MSRS consistently matched or surpassed the baselines. On Llama3-8B-Instruct, for example, it achieved an average GLUE score of 0.775, outperforming ITI at 0.742 and ReFT at 0.757. This shows that MSRS can guide specific behavior without weakening the model’s overall performance.
 
-## Ablation Studies and Analysis
+### Ablation Studies and Analysis
 
 A series of ablation studies confirmed the importance of each component in the MSRS framework. The adaptive subspace selection mechanism consistently outperformed fixed allocation strategies, while the dynamic token positioning method worked better than static last-token interventions on all models and datasets. Additionally, the layer-wise analysis showed that steering is most effective in the mid-to-upper layers of the transformer (around layer 15). These layers provide the best balance between semantic abstraction and controllability. In contrast, lower layers do not contain enough semantic information, while deeper layers show a tendency to overfit when steering is applied there.
 
-# My thoughts
+## My thoughts
 
 MSRS is a well-designed approach that effectively reduces interference between attributes by assigning each one its own subspace while still modeling their shared components. Its adaptive subspace allocation and dynamic token positioning make it more flexible and precise than prior methods.
 
 However, the method also comes with practical drawbacks. It significantly increases training cost due to additional modules like mask networks, SVD computation, and multiple loss terms. It is also hard to tune, as it introduces several hyperparameters ($\lambda_1$, $\lambda_2$, $r_s$, $r_i$) and relies on carefully chosen prior masks. This complexity may cause training instability if the losses are not well balanced. Future work could explore progressive training, adaptive loss weighting, lightweight mask network or use some unsupervising designs to reduce computational overhead and make the method easier to use in large-scale settings.
 
-# References
+## References
 
 1. [MSRS: ADAPTIVE MULTI-SUBSPACE REPRESENTATION STEERING FOR ATTRIBUTE ALIGNMENT IN LARGE LANGUAGE MODELS](https://arxiv.org/pdf/2508.10599)
 2. ChatGPT :)))

@@ -13,7 +13,7 @@ excerpt: "The main contribution: Provide a unifying interpretation of activation
 
 ![](/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20250930005013.png)
 
-# Motivation
+## Motivation
 
 Fine tuning is a common strategy for aligning Generative Models (GMs). As model sizes grow, this process becomes increasingly expensive and can unintentionally reduce performance on other tasks. This challenge has encouraged research into inference time interventions, which provide lighter and more efficient ways to control model behavior.
 
@@ -33,7 +33,7 @@ The main contribution:
 
 - Present the first inference-time intervention that works effectively on both LLMs and Diffusion Models.
 
-# Transporting neural activations
+## Transporting neural activations
 
 The authors represent the activations of a Generative Model (GM) for a given input sentence $x \in \mathcal{S}$ as a tensor
 
@@ -81,7 +81,7 @@ $$
 T_{\sharp}\mu \approx \nu.
 $$
 
-## Low budget estimators for transport maps
+### Low budget estimators for transport maps
 
 Since modern GMs have millions of activations, directly computing transport maps is infeasible. The challenges are:
 
@@ -177,7 +177,7 @@ Different cases:
 
 ![](/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20251001144036.png)
 
-## Sequential iterative maps
+### Sequential iterative maps
 
 Instead of simply applying univariate transport maps independently to each activation, the authors point out that this ignores the **causal relationship between layers** in a neural network. Specifically, the activations produced at layer $\ell$ become the input to layer $\ell+1$:
 
@@ -224,7 +224,7 @@ $$
 
 In that setup, $\lambda$ is unbounded and depends on the choice of $\beta$, which makes it **harder to interpret, less consistent across models, layers, and tasks, and not robust**. In contrast, the interpolation approach based on OT ensures that $\lambda$ has a consistent meaning within the bounded interval $[0,1]$.
 
-## Generalization of prior inference-time interventions work
+### Generalization of prior inference-time interventions work
 
 ![](imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20251001150609.png)
 
@@ -251,9 +251,9 @@ Another technical difference lies in how activations across tokens are aggregate
 
 ![](/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20251001152617.png)
 
-# Experiments on LLMs
+## Experiments on LLMs
 
-## Toxicity Mitigation in LLMs
+### Toxicity Mitigation in LLMs
 
 ![](/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20251009004212.png)
 
@@ -269,7 +269,7 @@ The experiments evaluate how well AcT (Activation Transport) mitigates toxic lan
 
 In short, Linear-AcT is both effective and robust, showing strong toxicity reduction without hurting model fluency or general performance.
 
-## Concept Induction in LLMs
+### Concept Induction in LLMs
 
 ![](/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20251009004250.png)
 
@@ -283,7 +283,7 @@ This section tests AcT’s ability to induce specific semantic concepts into mod
 
 Thus, Linear-AcT generalizes well for concept control, achieving high concept presence (p(yes) ≈ 0.87) while keeping text quality consistent.
 
-## Inducing Truthfulness in LLMs
+### Inducing Truthfulness in LLMs
 
 ![](/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20251009004342.png)
 
@@ -299,9 +299,9 @@ The final experiment applies AcT to improve truthfulness in language generation 
 
 Overall, AcT—especially Linear-AcT—can induce truthfulness and desirable behaviors in LLMs while preserving general performance and text fluency.
 
-# Controlling image diffusion models
+## Controlling image diffusion models
 
-## Fine-Grained Style Control
+### Fine-Grained Style Control
 
 ![](/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20251009004823.png)
 
@@ -313,7 +313,7 @@ A key challenge in T2I models is precisely controlling visual style attributes (
 
 - ITI-C can also achieve style control but performs inconsistently across models, requiring different λ values (λ = 2 for SDXL, λ = 1 for FLUX) and often exaggerating visual traits or distorting semantics.
 
-## Concept Negation
+### Concept Negation
 
 ![](/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20251009004847.png)
 
@@ -325,7 +325,7 @@ Concept negation refers to preventing the model from generating undesired object
 
 - In contrast, ITI-C required stronger interventions (higher λ) to suppress undesired concepts, which often caused semantic degradation or over-suppression.
 
-# Some stuff that I interest when reading this paper :))
+## Some stuff that I interest when reading this paper :))
 
 The paper takes a brilliant and refreshing approach to model control. Instead of using ad-hoc vector shifts or neuron suppression, it frames the whole problem under Optimal Transport (OT). This is a principled mathematical view that connects and generalizes all previous activation-steering methods. I find this idea elegant because it not only unifies earlier techniques but also gives a clear, interpretable way to control model behavior through a single parameter λ that smoothly adjusts intervention strength.
 
@@ -333,6 +333,6 @@ What really stands out is how Linear-AcT performs across both language and image
 
 That said, I do think the paper relies on some strong assumptions. The linear mapping between activations is a bit too simplistic for such high-dimensional, nonlinear spaces. Also, treating each activation dimension independently ignores important correlations inside neural layers. So while AcT is a powerful and interpretable first step, it still feels like an approximation, maybe a good one, but not yet the full story of how activations could be transported in complex generative systems.
 
-# References
+## References
 
 1. [CONTROLLING LANGUAGE AND DIFFUSION MODELS BY TRANSPORTING ACTIVATIONS](https://arxiv.org/pdf/2410.23054)

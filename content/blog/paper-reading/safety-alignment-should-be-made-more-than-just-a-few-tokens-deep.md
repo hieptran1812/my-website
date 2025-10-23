@@ -11,7 +11,7 @@ image: "/imgs/blogs/safety-alignment-should-be-made-more-than-just-a-few-tokens-
 excerpt: "Current safety alignment is often shallow—it mainly affects the model’s behavior in the first few tokens of its output...."
 ---
 
-# Motivation
+## Motivation
 
 The safety of Large Language Models (LLMs) largely depends on alignment methods such as supervised fine-tuning, reinforcement learning with human feedback (RLHF), and direct preference optimization (DPO). These methods are designed to prevent models from producing harmful outputs by refusing unsafe inputs. However, recent research shows that even well-aligned models remain vulnerable to adversarial prompts, fine-tuning attacks, and exploitation of decoding parameters. This indicates that current alignment is fragile.
 
@@ -19,9 +19,9 @@ The authors identify a key underlying problem: Current safety alignment is often
 
 Given the central role of alignment in ensuring LLM safety and the growing deployment of these models, it is critical to understand why alignment is so fragile and to develop more robust and deeper alignment strategies. The paper aims to systematically characterize this shallow alignment problem and propose approaches to strengthen LLM robustness against common jailbreaks and fine-tuning exploits.
 
-# The shallow safety alignment issue
+## The shallow safety alignment issue
 
-## Preliminaries
+### Preliminaries
 
 **Notation**
 
@@ -43,7 +43,7 @@ Given the central role of alignment in ensuring LLM safety and the growing deplo
   - **Harmfulness Rate**: fraction of test cases producing harmful outputs without adversarial attack.
   - **Attack Success Rate (ASR)**: fraction of test cases where adversarial attacks succeed in inducing harmful outputs
 
-## The characteristics of shallow safety alignment
+### The characteristics of shallow safety alignment
 
 A key property of safety-aligned LLMs is their ability to refuse harmful instructions. Typically, they generate refusal prefixes like “I cannot…”, “I apologize…”, or “I am unable…”. For example, Llama-2-7B-Chat uses such refusal tokens in 96.1% of harmful test cases, while Gemma-7B does so in 96.7%. Although these phrases may seem like trivial artifacts, they actually play a critical role in enabling shallow alignment.
 
@@ -57,9 +57,9 @@ The problem, however, is that current safety alignment strategies heavily exploi
 
 The underlying reason for this shallowness lies in the training process. During supervised fine-tuning (SFT), models are trained to imitate human responses, which often start with a refusal when addressing harmful prompts. Reinforcement learning with human feedback (RLHF) further reinforces this pattern, rewarding models for beginning with safe refusals. However, because humans rarely provide examples of refusals after harmful prefixes, the model primarily learns to refuse only at the start of its outputs. As a result, aligned models become heavily biased toward producing refusal prefixes at the beginning but struggle to maintain robust safety throughout the rest of the response.
 
-## Shallow safety alignment and its vulnerabilities
+### Shallow safety alignment and its vulnerabilities
 
-### Inference-stage vulnerabilities
+#### Inference-stage vulnerabilities
 
 ![](/imgs/blogs/safety-alignment-should-be-made-more-than-just-a-few-tokens-deep-20250924164728.png)
 
@@ -80,7 +80,7 @@ Even without optimization, harmful responses can be obtained by randomly samplin
 **Remark**
 The authors emphasize that these vulnerabilities all stem from shallow alignment. They argue that if safety alignment were extended more deeply into later tokens, models would be significantly more robust against these inference-stage attacks.
 
-### Safety vulnerabilities in the stage of downstream fine-tuning
+#### Safety vulnerabilities in the stage of downstream fine-tuning
 
 ![](/imgs/blogs/safety-alignment-should-be-made-more-than-just-a-few-tokens-deep-20250924164420.png)
 
@@ -90,9 +90,9 @@ The analysis reveals that the first few tokens are the most affected during fine
 
 This uneven vulnerability shows that alignment in current models is disproportionately encoded in the first few tokens. Consequently, large gradient norms in these positions make it especially easy for fine-tuning to erase safety behaviors. Conversely, the authors suggest that constraining updates on these early tokens could reduce the likelihood of successful fine-tuning attacks, pointing toward a potential mitigation strategy.
 
-# What if the safety alignment were deeper?
+## What if the safety alignment were deeper?
 
-## Data augmentation with safety recovery examples
+### Data augmentation with safety recovery examples
 
 The authors explore a counterfactual: _what if safety alignment extended beyond just the first few tokens?_ Current shallow alignment mainly suppresses harmful outputs at the very start, but if alignment could reach deeper into responses, it might protect against a wider range of vulnerabilities. They call this idea **deep safety alignment**.
 
@@ -125,7 +125,7 @@ The authors explore a counterfactual: _what if safety alignment extended beyond 
    - Evaluation across benchmarks like AlpacaEval, MMLU, BBH, GSM8K, MATH, and HumanEval shows **no significant drop in performance**.
    - This demonstrates that the deeper alignment strategy improves safety without harming general model capabilities.
 
-## The deepend safety alignment is more robust against multiple exploits
+### The deepend safety alignment is more robust against multiple exploits
 
 The authors show that deeper safety alignment greatly improves robustness against common exploits. Testing the Llama-2-7B-Chat-Augmented model on prefilling attacks, GCG suffix attacks, and decoding parameter exploits, they find a dramatic drop in attack success rates—from over 40–80% in the baseline to below 5–20% after augmentation.
 
@@ -161,7 +161,7 @@ The authors observe that fine-tuning attacks often compromise safety alignment b
 - The loss can also be interpreted as a KL-regularized reinforcement learning objective.
 - Here, $\beta_t$ acts as the strength of the KL regularization at each token position, enforcing stronger constraints when deviations become significant.
 
-## Experiments
+### Experiments
 
 To test their hypothesis, the authors applied **stronger constraints ($\beta_t$)** to the first few tokens, preventing their distributions from drifting too far during fine-tuning. They set higher values of $\beta_t$ for the first five tokens and much weaker constraints for later tokens.
 
@@ -182,7 +182,7 @@ The authors also tested on three benign tasks (Samsum summarization, SQL context
 **Key Insight**
 By applying strong constraints on early tokens, models become significantly more persistent against adversarial fine-tuning while still benefiting from benign fine-tuning. This provides a practical strategy for production fine-tuning APIs (e.g., OpenAI’s) to safeguard alignment without limiting customizability.
 
-# My thoughts
+## My thoughts
 
 This paper highlights a crucial limitation of current LLM safety alignment: it is shallow and concentrated in the first few output tokens. I find this observation very compelling because it explains why so many jailbreak techniques are surprisingly effective. If alignment only works at the “entry point” of the response, then once the refusal prefix is bypassed, the model easily falls back into unsafe behavior. It’s like having a guard at the door but leaving the rest of the building unprotected.
 
@@ -200,6 +200,6 @@ Some new ideas after reading this paper:
 
 - **Multi-turn Recovery Alignment**: Most work focuses on single-turn outputs. But in real-world chat, jailbreaks often happen through multi-turn steering. Training models to “recover” not only mid-output but also in later turns (e.g., recognizing a harmful trajectory after 2–3 turns) could make alignment more resilient in practical deployments.
 
-# References
+## References
 
 1. [SAFETY ALIGNMENT SHOULD BE MADE MORE THAN JUST A FEW TOKENS DEEP](https://openreview.net/pdf?id=6Mxhg9PtDE)
