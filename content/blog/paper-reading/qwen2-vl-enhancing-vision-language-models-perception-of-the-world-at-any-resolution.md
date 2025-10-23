@@ -8,7 +8,7 @@ date: "2025-10-23"
 author: "Hiep Tran"
 featured: false
 image: "/imgs/blogs/qwen2-vl-enhancing-vision-language-models-perception-of-the-world-at-any-resolution-20251023135020.png"
-excerpt: ""
+excerpt: "In recent years, large vision-language models (LVLMs) have advanced significantly, extending traditional large language models (LLMs)..."
 ---
 
 ## Problem statement
