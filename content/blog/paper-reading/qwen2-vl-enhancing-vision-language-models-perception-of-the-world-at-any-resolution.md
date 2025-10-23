@@ -185,9 +185,9 @@ To develop Qwen2-VL into a general-purpose vision-language agent (VL-Agent) capa
 2. The model defines permissible actions and keyword patterns for function calls.
 3. Qwen2-VL:
 
-   - Observes the environment,
-   - Performs reasoning and planning,
-   - Executes actions,
+   - Observes the environment
+   - Performs reasoning and planning
+   - Executes actions
    - Interacts and learns iteratively.
 
 **Outcome:**
