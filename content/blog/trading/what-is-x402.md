@@ -8,7 +8,7 @@ date: "2025-10-25"
 author: "Hiep Tran"
 featured: false
 image: "/imgs/blogs/what-is-x402-20251025211203.png"
-excerpt: ""
+excerpt: "At its core, x402 is an open payment protocol (developed by Coinbase) that allows web clients – including AI agents – to autonomously complete transactions when accessing online services"
 ---
 
 ## Introduction
