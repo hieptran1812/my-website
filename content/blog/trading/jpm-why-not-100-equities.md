@@ -3,7 +3,7 @@ title: "Why not 100% equities"
 publishDate: "2025-10-19"
 category: "trading"
 subcategory: "Quantiative Analysis"
-tags: ["portfolio-managament"]
+tags: ["portfolio-managament", "equities"]
 date: "2025-10-19"
 author: "Hiep Tran"
 featured: false
