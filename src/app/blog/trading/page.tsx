@@ -214,162 +214,168 @@ export default function TradingBlogPage() {
                   </h2>
 
                   {/* Featured Article - Two Column Layout (60/40) */}
-                  <div
-                    className="mb-12 rounded-2xl border overflow-hidden"
-                    style={{
-                      backgroundColor: "var(--card-bg)",
-                      borderColor: "var(--card-border)",
-                    }}
+                  <Link
+                    href={`/blog/${featuredArticle.slug}`}
+                    className="block"
                   >
-                    <div className="grid md:grid-cols-5 gap-0">
-                      {/* Left: Featured Image (60%) */}
-                      <div className="md:col-span-3 relative h-80 md:h-96">
-                        <Image
-                          src={
-                            featuredArticle.image &&
-                            featuredArticle.image.trim() !== "" &&
-                            featuredArticle.image !== "/blog-placeholder.jpg" &&
-                            featuredArticle.image !== "/images/default-blog.jpg"
-                              ? featuredArticle.image
-                              : "/blog-placeholder.jpg"
-                          }
-                          alt={featuredArticle.title}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 60vw"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                      </div>
-
-                      {/* Right: Article Info (40%) */}
-                      <div className="md:col-span-2 p-8 flex flex-col justify-center">
-                        <div className="mb-4">
-                          <span
-                            className="text-sm font-bold uppercase tracking-wider"
-                            style={{ color: "var(--accent)" }}
-                          >
-                            {featuredArticle.category}
-                          </span>
+                    <div
+                      className="mb-12 rounded-2xl border overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
+                      style={{
+                        backgroundColor: "var(--card-bg)",
+                        borderColor: "var(--card-border)",
+                      }}
+                    >
+                      <div className="grid md:grid-cols-5 gap-0">
+                        {/* Left: Featured Image (60%) */}
+                        <div className="md:col-span-3 relative h-80 md:h-96">
+                          <Image
+                            src={
+                              featuredArticle.image &&
+                              featuredArticle.image.trim() !== "" &&
+                              featuredArticle.image !==
+                                "/blog-placeholder.jpg" &&
+                              featuredArticle.image !==
+                                "/images/default-blog.jpg"
+                                ? featuredArticle.image
+                                : "/blog-placeholder.jpg"
+                            }
+                            alt={featuredArticle.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 60vw"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                         </div>
 
-                        {/* Collection tag */}
-                        {featuredArticle.collection && (
+                        {/* Right: Article Info (40%) */}
+                        <div className="md:col-span-2 p-8 flex flex-col justify-center">
                           <div className="mb-4">
-                            <CollectionTag
-                              collection={featuredArticle.collection}
-                              variant="detailed"
-                            />
+                            <span
+                              className="text-sm font-bold uppercase tracking-wider"
+                              style={{ color: "var(--accent)" }}
+                            >
+                              {featuredArticle.category}
+                            </span>
                           </div>
-                        )}
 
-                        <h3
-                          className="text-2xl md:text-3xl font-bold mb-4 leading-tight"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          <Link
-                            href={`/blog/${featuredArticle.slug}`}
-                            className="hover:text-[var(--accent)] transition-colors duration-300"
+                          {/* Collection tag */}
+                          {featuredArticle.collection && (
+                            <div className="mb-4">
+                              <CollectionTag
+                                collection={featuredArticle.collection}
+                                variant="detailed"
+                              />
+                            </div>
+                          )}
+
+                          <h3
+                            className="text-2xl md:text-3xl font-bold mb-4 leading-tight hover:text-[var(--accent)] transition-colors duration-300"
+                            style={{ color: "var(--text-primary)" }}
                           >
                             {featuredArticle.title}
-                          </Link>
-                        </h3>
-                        <div
-                          className="text-sm flex items-center gap-4 mb-4"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
-                          <span>{formatDateMedium(featuredArticle.date)}</span>
-                          <span>•</span>
-                          <span>{featuredArticle.readTime}</span>
-                        </div>
-                        <p
-                          className="text-base leading-relaxed mb-6"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
-                          {featuredArticle.excerpt}
-                        </p>
-                        <Link
-                          href={`/blog/${featuredArticle.slug}`}
-                          className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
-                          style={{ color: "var(--accent)" }}
-                        >
-                          Read Article
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
+                          </h3>
+                          <div
+                            className="text-sm flex items-center gap-4 mb-4"
+                            style={{ color: "var(--text-secondary)" }}
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </Link>
+                            <span>
+                              {formatDateMedium(featuredArticle.date)}
+                            </span>
+                            <span>•</span>
+                            <span>{featuredArticle.readTime}</span>
+                          </div>
+                          <p
+                            className="text-base leading-relaxed mb-6"
+                            style={{ color: "var(--text-secondary)" }}
+                          >
+                            {featuredArticle.excerpt}
+                          </p>
+                          <div
+                            className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
+                            style={{ color: "var(--accent)" }}
+                          >
+                            Read Article
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Four Column Grid of Recent Articles */}
                   {recentArticles.length > 0 && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                       {recentArticles.map((article) => (
-                        <div
+                        <Link
                           key={article.id}
-                          className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
-                          style={{
-                            backgroundColor: "var(--card-bg)",
-                            borderColor: "var(--card-border)",
-                          }}
+                          href={`/blog/${article.slug}`}
+                          className="block"
                         >
-                          <div className="relative h-32 overflow-hidden">
-                            <Image
-                              src={article.image || "/blog-placeholder.jpg"}
-                              alt={article.title}
-                              fill
-                              className="object-cover transition-transform duration-300 group-hover:scale-105"
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                            />
-                          </div>
-                          <div className="p-4">
-                            <div className="mb-2">
-                              <span
-                                className="text-xs font-medium uppercase tracking-wider"
-                                style={{ color: "var(--accent)" }}
-                              >
-                                {article.category}
-                              </span>
+                          <div
+                            className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
+                            style={{
+                              backgroundColor: "var(--card-bg)",
+                              borderColor: "var(--card-border)",
+                            }}
+                          >
+                            <div className="relative h-32 overflow-hidden">
+                              <Image
+                                src={article.image || "/blog-placeholder.jpg"}
+                                alt={article.title}
+                                fill
+                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                              />
                             </div>
-
-                            {/* Collection tag */}
-                            {article.collection && (
+                            <div className="p-4">
                               <div className="mb-2">
-                                <CollectionTag
-                                  collection={article.collection}
-                                  variant="compact"
-                                />
+                                <span
+                                  className="text-xs font-medium uppercase tracking-wider"
+                                  style={{ color: "var(--accent)" }}
+                                >
+                                  {article.category}
+                                </span>
                               </div>
-                            )}
 
-                            <h4
-                              className="text-sm font-semibold mb-2 leading-tight line-clamp-2 group-hover:text-[var(--accent)] transition-colors duration-300"
-                              style={{ color: "var(--text-primary)" }}
-                            >
-                              <Link href={`/blog/${article.slug}`}>
+                              {/* Collection tag */}
+                              {article.collection && (
+                                <div className="mb-2">
+                                  <CollectionTag
+                                    collection={article.collection}
+                                    variant="compact"
+                                  />
+                                </div>
+                              )}
+
+                              <h4
+                                className="text-sm font-semibold mb-2 leading-tight line-clamp-2 group-hover:text-[var(--accent)] transition-colors duration-300"
+                                style={{ color: "var(--text-primary)" }}
+                              >
                                 {article.title}
-                              </Link>
-                            </h4>
-                            <div
-                              className="text-xs flex items-center gap-2"
-                              style={{ color: "var(--text-secondary)" }}
-                            >
-                              <span>{formatDateShort(article.date)}</span>
-                              <span>•</span>
-                              <span>{article.readTime}</span>
+                              </h4>
+                              <div
+                                className="text-xs flex items-center gap-2"
+                                style={{ color: "var(--text-secondary)" }}
+                              >
+                                <span>{formatDateShort(article.date)}</span>
+                                <span>•</span>
+                                <span>{article.readTime}</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       ))}
                     </div>
                   )}
@@ -499,61 +505,64 @@ export default function TradingBlogPage() {
                 {filteredArticles.length > 0 ? (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {displayedArticles.map((article) => (
-                      <div
+                      <Link
                         key={article.id}
-                        className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
-                        style={{
-                          backgroundColor: "var(--card-bg)",
-                          borderColor: "var(--card-border)",
-                        }}
+                        href={`/blog/${article.slug}`}
+                        className="block"
                       >
-                        <div className="relative h-48 overflow-hidden">
-                          <Image
-                            src={article.image || "/blog-placeholder.jpg"}
-                            alt={article.title}
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          />
-                        </div>
-                        <div className="p-6">
-                          <div className="mb-3">
-                            <span
-                              className="text-xs font-medium uppercase tracking-wider"
-                              style={{ color: "var(--accent)" }}
-                            >
-                              {article.category}
-                            </span>
+                        <div
+                          className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
+                          style={{
+                            backgroundColor: "var(--card-bg)",
+                            borderColor: "var(--card-border)",
+                          }}
+                        >
+                          <div className="relative h-48 overflow-hidden">
+                            <Image
+                              src={article.image || "/blog-placeholder.jpg"}
+                              alt={article.title}
+                              fill
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            />
                           </div>
-
-                          {/* Collection tag */}
-                          {article.collection && (
+                          <div className="p-6">
                             <div className="mb-3">
-                              <CollectionTag
-                                collection={article.collection}
-                                variant="default"
-                              />
+                              <span
+                                className="text-xs font-medium uppercase tracking-wider"
+                                style={{ color: "var(--accent)" }}
+                              >
+                                {article.category}
+                              </span>
                             </div>
-                          )}
 
-                          <h3
-                            className="text-lg font-semibold mb-3 leading-tight group-hover:text-[var(--accent)] transition-colors duration-300"
-                            style={{ color: "var(--text-primary)" }}
-                          >
-                            <Link href={`/blog/${article.slug}`}>
+                            {/* Collection tag */}
+                            {article.collection && (
+                              <div className="mb-3">
+                                <CollectionTag
+                                  collection={article.collection}
+                                  variant="default"
+                                />
+                              </div>
+                            )}
+
+                            <h3
+                              className="text-lg font-semibold mb-3 leading-tight group-hover:text-[var(--accent)] transition-colors duration-300"
+                              style={{ color: "var(--text-primary)" }}
+                            >
                               {article.title}
-                            </Link>
-                          </h3>
-                          <div
-                            className="text-sm flex items-center gap-3 mb-4"
-                            style={{ color: "var(--text-secondary)" }}
-                          >
-                            <span>{formatDateMedium(article.date)}</span>
-                            <span>•</span>
-                            <span>{article.readTime}</span>
+                            </h3>
+                            <div
+                              className="text-sm flex items-center gap-3 mb-4"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              <span>{formatDateMedium(article.date)}</span>
+                              <span>•</span>
+                              <span>{article.readTime}</span>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 ) : (

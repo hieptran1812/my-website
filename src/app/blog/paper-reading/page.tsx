@@ -513,82 +513,85 @@ export default function PaperReadingBlogPage() {
                 {filteredArticles.length > 0 ? (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {displayedArticles.map((article) => (
-                      <div
+                      <Link
                         key={article.id}
-                        className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
-                        style={{
-                          backgroundColor: "var(--card-bg)",
-                          borderColor: "var(--card-border)",
-                        }}
+                        href={`/blog/${article.slug}`}
+                        className="block"
                       >
-                        <div className="relative h-48 overflow-hidden">
-                          <Image
-                            src={article.image || "/blog-placeholder.jpg"}
-                            alt={article.title}
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          />
-                        </div>
-                        <div className="p-6">
-                          <div className="mb-3">
-                            <span
-                              className="text-xs font-medium uppercase tracking-wider"
-                              style={{ color: "var(--accent)" }}
-                            >
-                              {article.category}
-                            </span>
+                        <div
+                          className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
+                          style={{
+                            backgroundColor: "var(--card-bg)",
+                            borderColor: "var(--card-border)",
+                          }}
+                        >
+                          <div className="relative h-48 overflow-hidden">
+                            <Image
+                              src={article.image || "/blog-placeholder.jpg"}
+                              alt={article.title}
+                              fill
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            />
                           </div>
-
-                          {/* Collection tag */}
-                          {article.collection && (
+                          <div className="p-6">
                             <div className="mb-3">
-                              <CollectionTag
-                                collection={article.collection}
-                                variant="default"
-                              />
+                              <span
+                                className="text-xs font-medium uppercase tracking-wider"
+                                style={{ color: "var(--accent)" }}
+                              >
+                                {article.category}
+                              </span>
                             </div>
-                          )}
 
-                          <h3
-                            className="text-lg font-semibold mb-3 leading-tight group-hover:text-[var(--accent)] transition-colors duration-300"
-                            style={{ color: "var(--text-primary)" }}
-                          >
-                            <Link href={`/blog/${article.slug}`}>
+                            {/* Collection tag */}
+                            {article.collection && (
+                              <div className="mb-3">
+                                <CollectionTag
+                                  collection={article.collection}
+                                  variant="default"
+                                />
+                              </div>
+                            )}
+
+                            <h3
+                              className="text-lg font-semibold mb-3 leading-tight group-hover:text-[var(--accent)] transition-colors duration-300"
+                              style={{ color: "var(--text-primary)" }}
+                            >
                               {article.title}
-                            </Link>
-                          </h3>
+                            </h3>
 
-                          {/* Tags under title */}
-                          {article.tags && article.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-1 mb-3">
-                              {article.tags.slice(0, 2).map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="px-2 py-1 text-xs rounded-full"
-                                  style={{
-                                    backgroundColor: "var(--accent-subtle)",
-                                    color: "var(--accent)",
-                                  }}
-                                >
-                                  {tag}
-                                </span>
-                              ))}
+                            {/* Tags under title */}
+                            {article.tags && article.tags.length > 0 && (
+                              <div className="flex flex-wrap gap-1 mb-3">
+                                {article.tags.slice(0, 2).map((tag) => (
+                                  <span
+                                    key={tag}
+                                    className="px-2 py-1 text-xs rounded-full"
+                                    style={{
+                                      backgroundColor: "var(--accent-subtle)",
+                                      color: "var(--accent)",
+                                    }}
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+
+                            <div
+                              className="text-sm flex items-center gap-3 mb-4"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              <span>
+                                {new Date(article.date).toLocaleDateString()}
+                              </span>
+                              <span>•</span>
+                              <span>{article.readTime}</span>
                             </div>
-                          )}
-
-                          <div
-                            className="text-sm flex items-center gap-3 mb-4"
-                            style={{ color: "var(--text-secondary)" }}
-                          >
-                            <span>
-                              {new Date(article.date).toLocaleDateString()}
-                            </span>
-                            <span>•</span>
-                            <span>{article.readTime}</span>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 ) : (
