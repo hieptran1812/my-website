@@ -498,7 +498,7 @@ export default function HeroSection() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Building tomorrow&apos;s solutions with{" "}
+              Exploring the world through{" "}
               <span
                 className="font-semibold"
                 style={{
@@ -506,7 +506,7 @@ export default function HeroSection() {
                   fontWeight: "600",
                 }}
               >
-                AI & Code
+                Code, Data and Caffeine
               </span>
             </h2>
 
@@ -525,11 +525,11 @@ export default function HeroSection() {
                 lineHeight: "1.7",
               }}
             >
-              Specialized in developing scalable AI systems, enterprise-grade
-              applications, and innovative digital solutions. With expertise in
-              Machine Learning, Deep Learning, and Full-Stack Development, I
-              help businesses leverage technology to drive growth and achieve
-              their strategic objectives.
+              I’m a curious nerd who loves diving into the intersection of AI,
+              systems, and finance. Besides coding, I am passionate about
+              building technology communities. I am happy to connect with
+              recruiters, software engineers, friends and anyone who share some
+              of the interests with me!
             </p>
 
             <nav
