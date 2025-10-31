@@ -5,12 +5,14 @@ interface CollectionTagProps {
   collection: string;
   variant?: "default" | "compact" | "detailed";
   className?: string;
+  clickable?: boolean; // Controls whether the tag is a link or just a display element
 }
 
 export default function CollectionTag({
   collection,
   variant = "default",
   className = "",
+  clickable = true,
 }: CollectionTagProps) {
   // Convert collection name to slug for URL
   const collectionSlug = collection
@@ -82,13 +84,8 @@ export default function CollectionTag({
     hover:text-[var(--accent)]
   `;
 
-  return (
-    <Link
-      href={`/blog/collections/${collectionSlug}`}
-      className={`${baseClasses} ${variantClasses[variant]} ${hoverStyle} ${className}`}
-      style={style}
-      title={`View all articles in "${collection}" collection`}
-    >
+  const content = (
+    <>
       <span
         className={variant === "compact" ? "text-sm" : "text-base"}
         role="img"
@@ -101,6 +98,29 @@ export default function CollectionTag({
           ? `${collection.substring(0, 20)}...`
           : collection}
       </span>
+    </>
+  );
+
+  if (!clickable) {
+    return (
+      <span
+        className={`${baseClasses} ${variantClasses[variant]} ${className}`}
+        style={style}
+        title={`"${collection}" collection`}
+      >
+        {content}
+      </span>
+    );
+  }
+
+  return (
+    <Link
+      href={`/blog/collections/${collectionSlug}`}
+      className={`${baseClasses} ${variantClasses[variant]} ${hoverStyle} ${className}`}
+      style={style}
+      title={`View all articles in "${collection}" collection`}
+    >
+      {content}
     </Link>
   );
 }

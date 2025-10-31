@@ -63,6 +63,7 @@ export default function ArticleCard({
                   <CollectionTag
                     collection={article.collection}
                     variant="detailed"
+                    clickable={false}
                   />
                 </div>
               )}
@@ -220,6 +221,7 @@ export default function ArticleCard({
                   <CollectionTag
                     collection={article.collection}
                     variant="compact"
+                    clickable={false}
                   />
                 </div>
               )}
@@ -341,6 +343,7 @@ export default function ArticleCard({
                 <CollectionTag
                   collection={article.collection}
                   variant="default"
+                  clickable={false}
                 />
               </div>
             )}

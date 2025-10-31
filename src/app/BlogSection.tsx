@@ -425,6 +425,7 @@ export default function BlogSection() {
                         <CollectionTag
                           collection={featuredArticle.collection}
                           variant="detailed"
+                          clickable={false}
                         />
                       </div>
                     )}
@@ -574,6 +575,7 @@ export default function BlogSection() {
                           <CollectionTag
                             collection={article.collection}
                             variant="compact"
+                            clickable={false}
                           />
                         </div>
                       )}
