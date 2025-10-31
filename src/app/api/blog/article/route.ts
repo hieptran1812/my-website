@@ -103,6 +103,7 @@ export async function GET(request: NextRequest) {
       difficulty: metadata.difficulty || "Beginner",
       featured: metadata.featured || false,
       slug,
+      collection: metadata.collection,
     };
 
     return NextResponse.json({ article });

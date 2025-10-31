@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "../ThemeProvider";
+import CollectionTag from "../../components/CollectionTag";
 import "katex/dist/katex.min.css";
 import MathJax from "./MathJax";
 import "./BlogContent.css"; // Re-enabled for proper styling
@@ -30,6 +31,7 @@ interface BlogReaderProps {
   category?: string;
   author?: string;
   postSlug?: string;
+  collection?: string;
   dangerouslySetInnerHTML?: { __html: string };
 }
 
@@ -42,6 +44,7 @@ export default function BlogReader({
   category = "Article",
   author = "Hiep Tran",
   postSlug,
+  collection,
   dangerouslySetInnerHTML,
 }: BlogReaderProps) {
   const { theme, isReadingMode, setReadingMode } = useTheme();
@@ -1093,6 +1096,13 @@ export default function BlogReader({
           >
             {/* Article Header */}
             <header className="mb-12 text-center">
+              {/* Collection tag */}
+              {collection && (
+                <div className="mb-6">
+                  <CollectionTag collection={collection} variant="detailed" />
+                </div>
+              )}
+
               <h1
                 className="text-lg md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-8 leading-tight"
                 style={{
@@ -1130,7 +1140,6 @@ export default function BlogReader({
                     {author}
                   </span>
                 </div>
-
                 <div className="flex items-center gap-1">
                   <svg
                     className="w-4 h-4"
@@ -1158,13 +1167,14 @@ export default function BlogReader({
                       color: isReadingMode
                         ? theme === "dark"
                           ? "#d97706"
-                      : "#78350f"
-                    : "var(--text-secondary)",
-                }}
-              >
-                {formatDate(publishDate)}
-              </time>
-            </div>                <div className="flex items-center gap-1">
+                          : "#78350f"
+                        : "var(--text-secondary)",
+                    }}
+                  >
+                    {formatDate(publishDate)}
+                  </time>
+                </div>{" "}
+                <div className="flex items-center gap-1">
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -1198,7 +1208,6 @@ export default function BlogReader({
                     {readTime}
                   </span>
                 </div>
-
                 <span
                   className="px-3 py-1 rounded-full text-xs font-medium"
                   style={{

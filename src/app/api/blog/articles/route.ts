@@ -20,6 +20,7 @@ export interface Article {
   featured: boolean;
   slug: string;
   image?: string;
+  collection?: string;
 }
 
 function convertToArticle(
@@ -131,6 +132,7 @@ function convertToArticle(
     featured,
     slug, // Original slug remains for URL purposes
     image: metadata.image || "/blog-placeholder.jpg", // Add image handling
+    collection: metadata.collection,
   };
 }
 

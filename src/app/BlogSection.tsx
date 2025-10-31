@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import CollectionTag from "@/components/CollectionTag";
 import { BlogPostMetadata, calculateContentReadTime } from "../lib/blog";
 import { formatDateMedium } from "../lib/dateUtils";
 
@@ -18,6 +19,7 @@ interface Article {
   date: string;
   tags: string[];
   readTime: string;
+  collection?: string;
 }
 
 // Utility function to format read time consistently
@@ -84,6 +86,7 @@ export default function BlogSection() {
             date: formatDateMedium(post.publishDate || ""),
             tags: Array.isArray(post.tags) ? post.tags : [],
             readTime: formatReadTime(post.readTime || fallbackReadTime), // Use formatted read time
+            collection: post.collection,
           };
         })
         .filter((article) => article.title !== "Untitled"); // Filter out invalid articles
@@ -416,6 +419,16 @@ export default function BlogSection() {
                       </div>
                     </div>
 
+                    {/* Collection tag */}
+                    {featuredArticle.collection && (
+                      <div className="mb-4">
+                        <CollectionTag
+                          collection={featuredArticle.collection}
+                          variant="detailed"
+                        />
+                      </div>
+                    )}
+
                     <h5
                       className="text-2xl lg:text-3xl font-bold mb-4 leading-tight transition-colors group-hover:text-[var(--accent)]"
                       style={{ color: "var(--text-primary)" }}
@@ -554,6 +567,16 @@ export default function BlogSection() {
                           <span>{article.readTime}</span>
                         </div>
                       </div>
+
+                      {/* Collection tag for other articles */}
+                      {article.collection && (
+                        <div className="mb-3">
+                          <CollectionTag
+                            collection={article.collection}
+                            variant="compact"
+                          />
+                        </div>
+                      )}
 
                       <h5
                         className="text-lg font-bold mb-3 leading-tight transition-colors group-hover:text-[var(--accent)] line-clamp-2"

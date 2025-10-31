@@ -14,6 +14,7 @@ export interface BlogPost {
   tags: string[];
   image: string;
   excerpt: string;
+  collection?: string;
 }
 
 export async function GET(request: NextRequest) {
@@ -86,6 +87,7 @@ export async function GET(request: NextRequest) {
             tags: metadata.tags || [],
             image: metadata.image || defaultImage,
             excerpt,
+            collection: metadata.collection,
           };
 
           // Apply category filter if requested

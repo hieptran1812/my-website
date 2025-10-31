@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Article } from "@/lib/blog";
 import FadeInWrapper from "./FadeInWrapper";
+import CollectionTag from "./CollectionTag";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 
 interface ArticleCardProps {
@@ -55,6 +56,16 @@ export default function ArticleCard({
           </div>
 
           <div className="p-8">
+            {/* Collection tag at the top */}
+            {article.collection && (
+              <div className="mb-4">
+                <CollectionTag
+                  collection={article.collection}
+                  variant="detailed"
+                />
+              </div>
+            )}
+
             <div className="grid md:grid-cols-3 gap-6 mb-6">
               <div>
                 <div
@@ -201,6 +212,16 @@ export default function ArticleCard({
           </div>
 
           <div className="p-4">
+            {/* Collection tag at the top */}
+            {article.collection && (
+              <div className="mb-3">
+                <CollectionTag
+                  collection={article.collection}
+                  variant="compact"
+                />
+              </div>
+            )}
+
             <div className="flex items-center justify-between mb-3">
               <span
                 className="px-2 py-1 text-xs font-medium rounded-full"
@@ -253,9 +274,7 @@ export default function ArticleCard({
               className="flex items-center justify-between text-xs"
               style={{ color: "var(--text-muted)" }}
             >
-              <span>
-                📅 {formatDateShort(article.date)}
-              </span>
+              <span>📅 {formatDateShort(article.date)}</span>
               <Link
                 href={`/blog/${article.slug}`}
                 className="inline-flex items-center text-[var(--accent)] hover:scale-105 transition-transform"
@@ -312,6 +331,16 @@ export default function ArticleCard({
         </div>
 
         <div className="p-6">
+          {/* Collection tag at the top */}
+          {article.collection && (
+            <div className="mb-4">
+              <CollectionTag
+                collection={article.collection}
+                variant="default"
+              />
+            </div>
+          )}
+
           <div className="flex items-center justify-between mb-4">
             <span
               className="px-2 py-1 text-xs font-medium rounded-full"
@@ -364,9 +393,7 @@ export default function ArticleCard({
             className="flex items-center justify-between text-xs mt-4"
             style={{ color: "var(--text-muted)" }}
           >
-            <span>
-              📅 {formatDateMedium(article.date)}
-            </span>
+            <span>📅 {formatDateMedium(article.date)}</span>
             <Link
               href={`/blog/${article.slug}`}
               className="inline-flex items-center text-[var(--accent)] hover:scale-105 transition-transform"

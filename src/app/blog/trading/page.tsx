@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 import FadeInWrapper from "@/components/FadeInWrapper";
+import CollectionTag from "@/components/CollectionTag";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 
@@ -250,6 +251,17 @@ export default function TradingBlogPage() {
                             {featuredArticle.category}
                           </span>
                         </div>
+
+                        {/* Collection tag */}
+                        {featuredArticle.collection && (
+                          <div className="mb-4">
+                            <CollectionTag
+                              collection={featuredArticle.collection}
+                              variant="detailed"
+                            />
+                          </div>
+                        )}
+
                         <h3
                           className="text-2xl md:text-3xl font-bold mb-4 leading-tight"
                           style={{ color: "var(--text-primary)" }}
@@ -329,6 +341,17 @@ export default function TradingBlogPage() {
                                 {article.category}
                               </span>
                             </div>
+
+                            {/* Collection tag */}
+                            {article.collection && (
+                              <div className="mb-2">
+                                <CollectionTag
+                                  collection={article.collection}
+                                  variant="compact"
+                                />
+                              </div>
+                            )}
+
                             <h4
                               className="text-sm font-semibold mb-2 leading-tight line-clamp-2 group-hover:text-[var(--accent)] transition-colors duration-300"
                               style={{ color: "var(--text-primary)" }}
@@ -502,6 +525,17 @@ export default function TradingBlogPage() {
                               {article.category}
                             </span>
                           </div>
+
+                          {/* Collection tag */}
+                          {article.collection && (
+                            <div className="mb-3">
+                              <CollectionTag
+                                collection={article.collection}
+                                variant="default"
+                              />
+                            </div>
+                          )}
+
                           <h3
                             className="text-lg font-semibold mb-3 leading-tight group-hover:text-[var(--accent)] transition-colors duration-300"
                             style={{ color: "var(--text-primary)" }}
