@@ -234,15 +234,6 @@ export default function CollectionPage({
                 </h1>
               </div>
 
-              <p
-                className="text-lg md:text-xl mb-6 max-w-3xl mx-auto leading-relaxed"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                A curated collection of articles covering various topics and
-                insights. Explore {articles.length} article
-                {articles.length !== 1 ? "s" : ""} in this collection.
-              </p>
-
               {/* Collection Stats */}
               <div className="flex flex-wrap justify-center gap-8 mb-8">
                 <div className="text-center">
@@ -308,7 +299,7 @@ export default function CollectionPage({
                   className="text-2xl font-bold"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  All Articles ({articles.length})
+                  All Articles
                 </h2>
 
                 <div className="flex items-center gap-4">
