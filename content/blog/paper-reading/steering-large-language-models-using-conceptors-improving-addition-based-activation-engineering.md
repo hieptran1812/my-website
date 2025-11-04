@@ -127,8 +127,6 @@ $C_1 \land C_2 = (C_1^{-1} + C_2^{-1} - I)^{-1}$
 
 This operation narrows the focus to the intersection of the activation spaces captured by $C_1$ and $C_2$.
 
-Key Insight
-
 These Boolean operations allow conceptors to be compositional—you can combine, invert, or intersect different steering targets in a mathematically consistent way. This makes conceptors powerful tools for steering LLMs along multiple, overlapping, or complementary behaviors with fine-grained control.
 
 ### Computational Complexity of Conceptor Steering
