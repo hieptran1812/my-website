@@ -7,7 +7,7 @@ tags: ["model-interpretation", "model-alignment"]
 date: "2025-09-24"
 author: "Hiep Tran"
 featured: false
-image: "/imgs/blogs/safety-alignment-should-be-made-more-than-just-a-few-tokens-deep-20250924111337.png"
+image: "/imgs/blogs/safety-alignment-should-be-made-more-than-just-a-few-tokens-deep-20251121005659.png"
 excerpt: "Current safety alignment is often shallow—it mainly affects the model’s behavior in the first few tokens of its output...."
 ---
 
