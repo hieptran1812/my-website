@@ -1073,7 +1073,7 @@ export default function About() {
                         style={{ color: "var(--text-primary)" }}
                       >
                         <span className="mr-3">🎯</span>
-                        Research Impact & Goals
+                        AI Development & Research Goals
                       </h3>
                     </ScrollReveal>
                     <ScrollReveal animation="fade-up" delay={350} duration={600}>
@@ -1081,12 +1081,12 @@ export default function About() {
                         className="leading-relaxed mb-6"
                         style={{ color: "var(--text-secondary)" }}
                       >
-                        My research focuses on developing practical AI solutions
-                        that bridge the gap between academic innovation and
-                        real-world applications. I&apos;m particularly
-                        interested in making advanced AI techniques more
-                        accessible and efficient for deployment in production
-                        environments.
+                        My primary focus is on building practical AI products
+                        that deliver real value. I&apos;m deeply passionate
+                        about AI Interpretability — understanding how neural
+                        networks make decisions, visualizing internal
+                        representations, and developing techniques to make AI
+                        systems more transparent and trustworthy.
                       </p>
                     </ScrollReveal>
                     <ScrollReveal animation="fade-up" delay={450} duration={600}>
@@ -1094,11 +1094,12 @@ export default function About() {
                         className="leading-relaxed"
                         style={{ color: "var(--text-secondary)" }}
                       >
-                        Current work involves optimizing transformer models for
-                        resource-constrained environments, developing novel
-                        approaches to multimodal learning, and creating robust
-                        MLOps frameworks that enable seamless integration of AI
-                        into existing software systems.
+                        I&apos;m also heavily invested in Generative AI,
+                        including diffusion models, large language models, and
+                        multimodal generation systems. My current work involves
+                        exploring novel architectures, improving generation
+                        quality, and developing efficient inference techniques
+                        for deploying these models in production environments.
                       </p>
                     </ScrollReveal>
                     <ScrollReveal animation="zoom-in" delay={550} duration={700}>
@@ -1110,9 +1111,9 @@ export default function About() {
                           className="text-sm font-medium"
                           style={{ color: "var(--accent)" }}
                         >
-                          🌟 &quot;Building AI systems that are not just
-                          intelligent, but also practical, ethical, and
-                          accessible to everyone.&quot;
+                          🌟 &quot;Building AI products that are not only
+                          powerful but also interpretable, reliable, and ready
+                          for real-world deployment.&quot;
                         </p>
                       </div>
                     </ScrollReveal>
