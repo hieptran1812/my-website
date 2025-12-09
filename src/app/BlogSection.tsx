@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CollectionTag from "@/components/CollectionTag";
@@ -41,6 +41,33 @@ export default function BlogSection() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Intersection Observer for scroll animation
+  useEffect(() => {
+    // Only setup observer after loading is complete
+    if (loading || error || articles.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -40% 0px",
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [loading, error, articles.length]);
 
   const fetchArticles = useCallback(async () => {
     try {
@@ -208,7 +235,10 @@ export default function BlogSection() {
   const remainingArticles = articles.slice(1, 4); // Show 3 more articles
 
   return (
-    <section className="py-20 md:py-28 section-primary relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="py-20 md:py-28 section-primary relative overflow-hidden"
+    >
       {/* Background decorative elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full blur-xl"></div>
@@ -217,7 +247,16 @@ export default function BlogSection() {
 
       <div className="container mx-auto px-6 max-w-7xl">
         {/* Enhanced Header Section */}
-        <div className="text-center mb-16">
+        <div
+          className="text-center mb-16"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? "translateY(0)" : "translateY(32px)",
+            filter: isVisible ? "blur(0)" : "blur(8px)",
+            transition:
+              "opacity 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          }}
+        >
           <div
             className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full border"
             style={{
@@ -337,15 +376,43 @@ export default function BlogSection() {
 
         {/* Featured Article Section */}
         {featuredArticle && (
-          <div className="mb-16">
-            <div className="mb-8">
+          <div
+            className="mb-16"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible
+                ? "translateY(0) scale(1)"
+                : "translateY(64px) scale(0.97)",
+              filter: isVisible ? "blur(0)" : "blur(8px)",
+              transition:
+                "opacity 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+              transitionDelay: isVisible ? "150ms" : "0ms",
+            }}
+          >
+            <div
+              className="mb-8"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateX(0)" : "translateX(-16px)",
+                transition:
+                  "opacity 700ms ease-out, transform 700ms ease-out",
+                transitionDelay: isVisible ? "300ms" : "0ms",
+              }}
+            >
               <h4
                 className="text-2xl font-bold mb-2"
                 style={{ color: "var(--text-primary)" }}
               >
                 Latest Article
               </h4>
-              <div className="w-16 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full"></div>
+              <div
+                className="h-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full"
+                style={{
+                  width: isVisible ? "64px" : "0px",
+                  transition: "width 700ms ease-out",
+                  transitionDelay: isVisible ? "450ms" : "0ms",
+                }}
+              ></div>
             </div>
 
             <Link
@@ -354,7 +421,7 @@ export default function BlogSection() {
               aria-label={`Read latest article: ${featuredArticle.title}`}
             >
               <div
-                className="rounded-2xl border overflow-hidden transition-all duration-500 hover:scale-[1.02]"
+                className="rounded-2xl border overflow-hidden transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl hover:shadow-emerald-500/10"
                 style={{
                   backgroundColor: "var(--card-bg)",
                   borderColor: "var(--card-border)",
@@ -493,15 +560,40 @@ export default function BlogSection() {
 
         {/* Recent Articles Grid */}
         {remainingArticles.length > 0 && (
-          <div>
-            <div className="mb-8">
+          <div
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(48px)",
+              filter: isVisible ? "blur(0)" : "blur(8px)",
+              transition:
+                "opacity 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+              transitionDelay: isVisible ? "400ms" : "0ms",
+            }}
+          >
+            <div
+              className="mb-8"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateX(0)" : "translateX(-16px)",
+                transition:
+                  "opacity 700ms ease-out, transform 700ms ease-out",
+                transitionDelay: isVisible ? "500ms" : "0ms",
+              }}
+            >
               <h4
                 className="text-2xl font-bold mb-2"
                 style={{ color: "var(--text-primary)" }}
               >
                 Recent Articles
               </h4>
-              <div className="w-16 h-1 bg-gradient-to-r from-teal-600 to-cyan-600 rounded-full"></div>
+              <div
+                className="h-1 bg-gradient-to-r from-teal-600 to-cyan-600 rounded-full"
+                style={{
+                  width: isVisible ? "64px" : "0px",
+                  transition: "width 700ms ease-out",
+                  transitionDelay: isVisible ? "650ms" : "0ms",
+                }}
+              ></div>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -510,6 +602,16 @@ export default function BlogSection() {
                   href={article.link}
                   key={`${article.link}-${idx}`}
                   className="group block"
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible
+                      ? "translateY(0) scale(1)"
+                      : "translateY(40px) scale(0.95)",
+                    filter: isVisible ? "blur(0)" : "blur(8px)",
+                    transition:
+                      "opacity 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                    transitionDelay: isVisible ? `${700 + idx * 120}ms` : "0ms",
+                  }}
                   aria-label={`Read article: ${article.title}`}
                 >
                   <article

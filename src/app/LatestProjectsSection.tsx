@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { ProjectMetadata } from "@/lib/projects";
@@ -9,6 +9,33 @@ export default function LatestProjectsSection() {
   const [projects, setProjects] = useState<ProjectMetadata[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Intersection Observer for scroll animation
+  useEffect(() => {
+    // Only setup observer after loading is complete
+    if (isLoading || error) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -40% 0px",
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isLoading, error]);
 
   // Fetch latest projects from API
   useEffect(() => {
@@ -122,6 +149,7 @@ export default function LatestProjectsSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="projects"
       className="py-20 md:py-28 section-secondary relative overflow-hidden"
     >
@@ -133,7 +161,16 @@ export default function LatestProjectsSection() {
 
       <div className="container mx-auto px-6 max-w-7xl">
         {/* Enhanced Header Section */}
-        <div className="text-center mb-16">
+        <div
+          className="text-center mb-16"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? "translateY(0)" : "translateY(32px)",
+            filter: isVisible ? "blur(0)" : "blur(8px)",
+            transition:
+              "opacity 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          }}
+        >
           <div
             className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full border"
             style={{
@@ -264,7 +301,17 @@ export default function LatestProjectsSection() {
               <Link
                 href={href}
                 key={idx}
-                className="group block rounded-xl hover:shadow-lg transition-all duration-300 overflow-hidden border card-enhanced"
+                className="group block rounded-xl hover:shadow-xl hover:shadow-blue-500/10 overflow-hidden border card-enhanced"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible
+                    ? "translateY(0) scale(1)"
+                    : "translateY(48px) scale(0.95)",
+                  filter: isVisible ? "blur(0)" : "blur(8px)",
+                  transition:
+                    "opacity 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  transitionDelay: isVisible ? `${200 + idx * 120}ms` : "0ms",
+                }}
               >
                 <div className="relative w-full h-48 overflow-hidden">
                   <Image
