@@ -8,14 +8,14 @@ date: "2025-12-08"
 author: "Hiep Tran"
 featured: false
 image: "/imgs/blogs/unveiling-concept-attribution-in-diffusion-models-20251208174653.png"
-excerpt: ""
+excerpt: "This post summarizes a paper that makes diffusion models more interpretable by assigning an attribution score to individual model components, showing whether each component encourages or suppresses a given concept."
 ---
 
 ## TLDR
 
-This post summarizes a paper that makes diffusion models more interpretable by assigning an attribution score to individual model components, showing whether each component encourages or suppresses a given concept. 
+This post summarizes a paper that makes diffusion models more interpretable by assigning an attribution score to individual model components, showing whether each component encourages or suppresses a given concept.
 
-The authors introduce CAD, a fast framework that estimates each component’s counterfactual effect using a linear approximation via gradients, avoiding expensive brute force ablations. 
+The authors introduce CAD, a fast framework that estimates each component’s counterfactual effect using a linear approximation via gradients, avoiding expensive brute force ablations.
 
 With these scores, they show concept knowledge is localized and comes in two forms: positive components that induce a concept and negative components that inhibit it. They then use this structure for lightweight editing at inference time: CAD Erase removes a concept by zeroing the top positive components, and CAD Amplify strengthens a concept by zeroing the top negative components, with experiments demonstrating these edits are effective while mostly preserving other behaviors.
 
