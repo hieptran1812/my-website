@@ -1,6 +1,6 @@
 "use client";
 
-import FadeInWrapper from "../../components/FadeInWrapper";
+import ScrollReveal from "../../components/ScrollReveal";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -292,10 +292,11 @@ const AwardsCarousel = ({
       {/* Category Tabs */}
       <div className="flex flex-wrap justify-center gap-4 mb-8">
         {categories.map((category, index) => (
-          <FadeInWrapper
+          <ScrollReveal
             key={category.id}
-            direction="up"
-            delay={350 + index * 50}
+            animation="zoom-in"
+            delay={350 + index * 80}
+            duration={600}
           >
             <button
               onClick={() => handleCategoryChange(category.id)}
@@ -330,7 +331,7 @@ const AwardsCarousel = ({
               <span className="mr-2">{category.icon}</span>
               {category.name}
             </button>
-          </FadeInWrapper>
+          </ScrollReveal>
         ))}
       </div>
 
@@ -374,7 +375,7 @@ const AwardsCarousel = ({
               backfaceVisibility: "hidden",
             }}
           >
-            <FadeInWrapper direction="up" delay={150}>
+            <ScrollReveal animation="fade-up" delay={150} duration={600}>
               <h3
                 className="text-2xl font-semibold mb-6 flex items-center"
                 style={{ color: "var(--text-primary)" }}
@@ -426,7 +427,7 @@ const AwardsCarousel = ({
                     </div>
                   ))}
               </div>
-            </FadeInWrapper>
+            </ScrollReveal>
           </div>
         ))}
 
@@ -505,8 +506,8 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 py-16">
           {" "}
           {/* Hero Section */}
-          <FadeInWrapper direction="up">
-            <div className="text-center mb-20">
+          <div className="text-center mb-20">
+            <ScrollReveal animation="zoom-in" duration={800}>
               <div className="relative w-40 h-40 mx-auto mb-8">
                 <div
                   className="w-full h-full rounded-full border-4 flex items-center justify-center overflow-hidden"
@@ -536,15 +537,24 @@ export default function About() {
                   🚀
                 </div>
               </div>
+            </ScrollReveal>
+
+            <ScrollReveal animation="blur-in" delay={200} duration={900}>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
                 Hiep Tran
               </h1>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fade-up" delay={400} duration={700}>
               <p
                 className="text-2xl md:text-3xl mb-6 font-semibold"
                 style={{ color: "var(--accent)" }}
               >
                 AI Research Engineer & Software Developer
               </p>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fade-up" delay={550} duration={700}>
               <p
                 className="text-lg max-w-4xl mx-auto leading-relaxed mb-8"
                 style={{ color: "var(--text-secondary)" }}
@@ -555,9 +565,12 @@ export default function About() {
                 solve real-world problems and advance the field of artificial
                 intelligence.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+            </ScrollReveal>
+
+            <div className="flex flex-wrap justify-center gap-4">
+              <ScrollReveal animation="slide-up" delay={700} duration={600}>
                 <span
-                  className="px-4 py-2 rounded-full text-sm font-medium"
+                  className="px-4 py-2 rounded-full text-sm font-medium inline-block"
                   style={{
                     backgroundColor: "var(--surface-accent)",
                     color: "var(--accent)",
@@ -565,8 +578,10 @@ export default function About() {
                 >
                   🎓 MS Computer Science
                 </span>
+              </ScrollReveal>
+              <ScrollReveal animation="slide-up" delay={800} duration={600}>
                 <span
-                  className="px-4 py-2 rounded-full text-sm font-medium"
+                  className="px-4 py-2 rounded-full text-sm font-medium inline-block"
                   style={{
                     backgroundColor: "var(--surface-accent)",
                     color: "var(--accent)",
@@ -574,8 +589,10 @@ export default function About() {
                 >
                   🔬 AI Engineer
                 </span>
+              </ScrollReveal>
+              <ScrollReveal animation="slide-up" delay={900} duration={600}>
                 <span
-                  className="px-4 py-2 rounded-full text-sm font-medium"
+                  className="px-4 py-2 rounded-full text-sm font-medium inline-block"
                   style={{
                     backgroundColor: "var(--surface-accent)",
                     color: "var(--accent)",
@@ -583,18 +600,20 @@ export default function About() {
                 >
                   💻 Software Developer
                 </span>
-              </div>
+              </ScrollReveal>
             </div>
-          </FadeInWrapper>{" "}
+          </div>{" "}
           {/* Experience Cards */}
-          <FadeInWrapper direction="up" delay={150}>
-            <div className="mb-20">
+          <div className="mb-20">
+            <ScrollReveal animation="fade-up" duration={700}>
               <h2
                 className="text-4xl font-bold text-center mb-4"
                 style={{ color: "var(--text-primary)" }}
               >
                 What I Do
               </h2>
+            </ScrollReveal>
+            <ScrollReveal animation="fade-up" delay={100} duration={700}>
               <p
                 className="text-lg text-center mb-12 max-w-3xl mx-auto"
                 style={{ color: "var(--text-secondary)" }}
@@ -602,64 +621,67 @@ export default function About() {
                 Combining theoretical knowledge with practical experience to
                 create innovative solutions
               </p>
-              <div className="grid lg:grid-cols-3 gap-8">
-                {experiences.map((exp, index) => (
-                  <FadeInWrapper
-                    key={index}
-                    direction="up"
-                    delay={150 + index * 100}
+            </ScrollReveal>
+            <div className="grid lg:grid-cols-3 gap-8">
+              {experiences.map((exp, index) => (
+                <ScrollReveal
+                  key={index}
+                  animation="flip-up"
+                  delay={200 + index * 150}
+                  duration={800}
+                >
+                  <div
+                    className="group p-8 rounded-2xl border transition-all duration-300 hover:scale-105 hover:shadow-xl h-full"
+                    style={{
+                      backgroundColor: "var(--card-bg)",
+                      borderColor: "var(--card-border)",
+                    }}
                   >
-                    <div
-                      className="group p-8 rounded-2xl border transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                      style={{
-                        backgroundColor: "var(--card-bg)",
-                        borderColor: "var(--card-border)",
-                      }}
-                    >
-                      <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                        {exp.icon}
-                      </div>
-                      <h3
-                        className="text-2xl font-bold mb-4"
-                        style={{ color: "var(--text-primary)" }}
-                      >
-                        {exp.title}
-                      </h3>
-                      <p
-                        className="leading-relaxed mb-4"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        {exp.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.highlights.map((highlight, idx) => (
-                          <span
-                            key={idx}
-                            className="px-3 py-1 rounded-full text-xs font-medium"
-                            style={{
-                              backgroundColor: "var(--surface)",
-                              color: "var(--accent)",
-                            }}
-                          >
-                            {highlight}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                      {exp.icon}
                     </div>
-                  </FadeInWrapper>
-                ))}
-              </div>
+                    <h3
+                      className="text-2xl font-bold mb-4"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      {exp.title}
+                    </h3>
+                    <p
+                      className="leading-relaxed mb-4"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {exp.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {exp.highlights.map((highlight, idx) => (
+                        <span
+                          key={idx}
+                          className="px-3 py-1 rounded-full text-xs font-medium"
+                          style={{
+                            backgroundColor: "var(--surface)",
+                            color: "var(--accent)",
+                          }}
+                        >
+                          {highlight}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
             </div>
-          </FadeInWrapper>{" "}
+          </div>{" "}
           {/* Work Experience Timeline */}
-          <FadeInWrapper direction="up" delay={200}>
-            <div className="mb-20">
+          <div className="mb-20">
+            <ScrollReveal animation="fade-up" duration={700}>
               <h2
                 className="text-4xl font-bold text-center mb-4"
                 style={{ color: "var(--text-primary)" }}
               >
                 Professional Experience
               </h2>
+            </ScrollReveal>
+            <ScrollReveal animation="fade-up" delay={100} duration={700}>
               <p
                 className="text-lg text-center mb-12 max-w-3xl mx-auto"
                 style={{ color: "var(--text-secondary)" }}
@@ -667,186 +689,169 @@ export default function About() {
                 Timeline of my professional journey in AI research and software
                 development
               </p>
-              <div className="space-y-8">
-                {workExperience.map((job, index) => (
-                  <FadeInWrapper
-                    key={index}
-                    direction="up"
-                    delay={200 + index * 100}
-                  >
-                    <div className="relative">
-                      {/* Timeline connector */}
-                      {index < workExperience.length - 1 && (
-                        <div
-                          className="absolute left-8 top-20 w-0.5 h-16 z-0"
-                          style={{ backgroundColor: "var(--card-border)" }}
-                        />
-                      )}
-
+            </ScrollReveal>
+            <div className="space-y-8">
+              {workExperience.map((job, index) => (
+                <ScrollReveal
+                  key={index}
+                  animation="slide-left"
+                  delay={150 + index * 100}
+                  duration={800}
+                >
+                  <div className="relative">
+                    {/* Timeline connector */}
+                    {index < workExperience.length - 1 && (
                       <div
-                        className="relative p-8 rounded-2xl border transform hover:shadow-lg hover:scale-[1.01] transition-all duration-300"
-                        style={{
-                          backgroundColor: "var(--card-bg)",
-                          borderColor: "var(--card-border)",
-                        }}
-                      >
-                        <div className="grid md:grid-cols-4 gap-6">
-                          {/* Timeline icon and period */}
-                          <div className="md:col-span-1">
-                            <FadeInWrapper
-                              direction="up"
-                              delay={250 + index * 100}
+                        className="absolute left-8 top-20 w-0.5 h-16 z-0"
+                        style={{ backgroundColor: "var(--card-border)" }}
+                      />
+                    )}
+
+                    <div
+                      className="relative p-8 rounded-2xl border transform hover:shadow-lg hover:scale-[1.01] transition-all duration-300"
+                      style={{
+                        backgroundColor: "var(--card-bg)",
+                        borderColor: "var(--card-border)",
+                      }}
+                    >
+                      <div className="grid md:grid-cols-4 gap-6">
+                        {/* Timeline icon and period */}
+                        <div className="md:col-span-1">
+                          <div className="flex flex-col items-start">
+                            <div
+                              className="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4 border-4 transition-all duration-300 hover:scale-110"
+                              style={{
+                                backgroundColor: "var(--card-bg)",
+                                borderColor: "var(--accent)",
+                                color: "var(--accent)",
+                              }}
                             >
-                              <div className="flex flex-col items-start">
-                                <div
-                                  className="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4 border-4 transition-all duration-300 hover:scale-110"
-                                  style={{
-                                    backgroundColor: "var(--card-bg)",
-                                    borderColor: "var(--accent)",
-                                    color: "var(--accent)",
-                                  }}
-                                >
-                                  {job.icon}
-                                </div>
-                                <div
-                                  className="text-sm font-bold mb-1"
-                                  style={{ color: "var(--accent)" }}
-                                >
-                                  {job.period}
-                                </div>
-                                <div
-                                  className="text-xs"
-                                  style={{ color: "var(--text-secondary)" }}
-                                >
-                                  {job.type}
-                                </div>
-                              </div>
-                            </FadeInWrapper>
+                              {job.icon}
+                            </div>
+                            <div
+                              className="text-sm font-bold mb-1"
+                              style={{ color: "var(--accent)" }}
+                            >
+                              {job.period}
+                            </div>
+                            <div
+                              className="text-xs"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              {job.type}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Job details */}
+                        <div className="md:col-span-3">
+                          <div className="mb-4">
+                            <h3
+                              className="text-2xl font-bold mb-2"
+                              style={{ color: "var(--text-primary)" }}
+                            >
+                              {job.title}
+                            </h3>
+                            <p
+                              className="text-lg font-semibold mb-1"
+                              style={{ color: "var(--accent)" }}
+                            >
+                              {job.company}
+                            </p>
+                            <p
+                              className="text-sm mb-4"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              📍 {job.location}
+                            </p>
+                            <p
+                              className="leading-relaxed mb-4"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              {job.description}
+                            </p>
                           </div>
 
-                          {/* Job details */}
-                          <div className="md:col-span-3">
-                            <FadeInWrapper
-                              direction="up"
-                              delay={300 + index * 100}
+                          {/* Responsibilities */}
+                          <div className="mb-4">
+                            <h4
+                              className="font-semibold mb-3"
+                              style={{ color: "var(--text-primary)" }}
                             >
-                              <div className="mb-4">
-                                <h3
-                                  className="text-2xl font-bold mb-2"
-                                  style={{ color: "var(--text-primary)" }}
-                                >
-                                  {job.title}
-                                </h3>
-                                <p
-                                  className="text-lg font-semibold mb-1"
-                                  style={{ color: "var(--accent)" }}
-                                >
-                                  {job.company}
-                                </p>
-                                <p
-                                  className="text-sm mb-4"
+                              Key Responsibilities:
+                            </h4>
+                            <ul className="space-y-2">
+                              {job.responsibilities.map((resp, idx) => (
+                                <li
+                                  key={idx}
+                                  className="flex items-start text-sm transition-all duration-300 hover:translate-x-1"
                                   style={{ color: "var(--text-secondary)" }}
                                 >
-                                  📍 {job.location}
-                                </p>
-                                <p
-                                  className="leading-relaxed mb-4"
-                                  style={{ color: "var(--text-secondary)" }}
-                                >
-                                  {job.description}
-                                </p>
-                              </div>
-                            </FadeInWrapper>
+                                  <span
+                                    className="mr-3 mt-1 text-xs"
+                                    style={{ color: "var(--accent)" }}
+                                  >
+                                    •
+                                  </span>
+                                  {resp}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
 
-                            {/* Responsibilities */}
-                            <FadeInWrapper
-                              direction="up"
-                              delay={350 + index * 100}
+                          {/* Technologies */}
+                          <div>
+                            <h4
+                              className="font-semibold mb-3"
+                              style={{ color: "var(--text-primary)" }}
                             >
-                              <div className="mb-4">
-                                <h4
-                                  className="font-semibold mb-3"
-                                  style={{ color: "var(--text-primary)" }}
+                              Technologies & Tools:
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {job.technologies.map((tech, idx) => (
+                                <span
+                                  key={idx}
+                                  className="px-3 py-1 rounded-lg text-xs font-medium transition-all duration-200 hover:scale-105"
+                                  style={{
+                                    backgroundColor: "var(--surface)",
+                                    color: "var(--text-secondary)",
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.backgroundColor =
+                                      "var(--surface-accent)";
+                                    e.currentTarget.style.color =
+                                      "var(--accent)";
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.backgroundColor =
+                                      "var(--surface)";
+                                    e.currentTarget.style.color =
+                                      "var(--text-secondary)";
+                                  }}
                                 >
-                                  Key Responsibilities:
-                                </h4>
-                                <ul className="space-y-2">
-                                  {job.responsibilities.map((resp, idx) => (
-                                    <li
-                                      key={idx}
-                                      className="flex items-start text-sm transition-all duration-300 hover:translate-x-1"
-                                      style={{ color: "var(--text-secondary)" }}
-                                    >
-                                      <span
-                                        className="mr-3 mt-1 text-xs"
-                                        style={{ color: "var(--accent)" }}
-                                      >
-                                        •
-                                      </span>
-                                      {resp}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            </FadeInWrapper>
-
-                            {/* Technologies */}
-                            <FadeInWrapper
-                              direction="up"
-                              delay={400 + index * 100}
-                            >
-                              <div>
-                                <h4
-                                  className="font-semibold mb-3"
-                                  style={{ color: "var(--text-primary)" }}
-                                >
-                                  Technologies & Tools:
-                                </h4>
-                                <div className="flex flex-wrap gap-2">
-                                  {job.technologies.map((tech, idx) => (
-                                    <span
-                                      key={idx}
-                                      className="px-3 py-1 rounded-lg text-xs font-medium transition-all duration-200 hover:scale-105"
-                                      style={{
-                                        backgroundColor: "var(--surface)",
-                                        color: "var(--text-secondary)",
-                                      }}
-                                      onMouseEnter={(e) => {
-                                        e.currentTarget.style.backgroundColor =
-                                          "var(--surface-accent)";
-                                        e.currentTarget.style.color =
-                                          "var(--accent)";
-                                      }}
-                                      onMouseLeave={(e) => {
-                                        e.currentTarget.style.backgroundColor =
-                                          "var(--surface)";
-                                        e.currentTarget.style.color =
-                                          "var(--text-secondary)";
-                                      }}
-                                    >
-                                      {tech}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-                            </FadeInWrapper>
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </FadeInWrapper>
-                ))}
-              </div>
+                  </div>
+                </ScrollReveal>
+              ))}
             </div>
-          </FadeInWrapper>
-          <FadeInWrapper direction="up" delay={300}>
-            <div className="mb-20">
+          </div>
+          <div className="mb-20">
+            <ScrollReveal animation="fade-up" duration={700}>
               <h2
                 className="text-4xl font-bold text-center mb-4"
                 style={{ color: "var(--text-primary)" }}
               >
                 Honors & Awards
               </h2>
+            </ScrollReveal>
+            <ScrollReveal animation="fade-up" delay={100} duration={700}>
               <p
                 className="text-lg text-center mb-12 max-w-3xl mx-auto"
                 style={{ color: "var(--text-secondary)" }}
@@ -854,19 +859,23 @@ export default function About() {
                 Recognition for innovation, entrepreneurship, and technical
                 excellence
               </p>
+            </ScrollReveal>
 
+            <ScrollReveal animation="scale-up" delay={200} duration={800}>
               <AwardsCarousel awards={awards} />
-            </div>
-          </FadeInWrapper>
+            </ScrollReveal>
+          </div>
           {/* Education Section */}
-          <FadeInWrapper direction="up" delay={300}>
-            <div className="mb-20">
+          <div className="mb-20">
+            <ScrollReveal animation="fade-up" duration={700}>
               <h2
                 className="text-4xl font-bold text-center mb-4"
                 style={{ color: "var(--text-primary)" }}
               >
                 Education & Academic Background
               </h2>
+            </ScrollReveal>
+            <ScrollReveal animation="fade-up" delay={100} duration={700}>
               <p
                 className="text-lg text-center mb-12 max-w-3xl mx-auto"
                 style={{ color: "var(--text-secondary)" }}
@@ -874,127 +883,105 @@ export default function About() {
                 Strong academic foundation with focus on advanced computer
                 science concepts
               </p>
-              <div className="space-y-6">
-                {education.map((edu, index) => (
-                  <FadeInWrapper
-                    key={index}
-                    direction="up"
-                    delay={300 + index * 100}
+            </ScrollReveal>
+            <div className="space-y-6">
+              {education.map((edu, index) => (
+                <ScrollReveal
+                  key={index}
+                  animation="slide-right"
+                  delay={200 + index * 150}
+                  duration={800}
+                >
+                  <div
+                    className="p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
+                    style={{
+                      backgroundColor: "var(--card-bg)",
+                      borderColor: "var(--card-border)",
+                    }}
                   >
-                    <div
-                      className="p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
-                      style={{
-                        backgroundColor: "var(--card-bg)",
-                        borderColor: "var(--card-border)",
-                      }}
-                    >
-                      <div className="grid md:grid-cols-3 gap-6">
-                        <div className="md:col-span-2">
-                          <FadeInWrapper
-                            direction="up"
-                            delay={350 + index * 100}
+                    <div className="grid md:grid-cols-3 gap-6">
+                      <div className="md:col-span-2">
+                        <h3
+                          className="text-2xl font-bold mb-2"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          {edu.degree}
+                        </h3>
+                        <p
+                          className="text-lg mb-2"
+                          style={{ color: "var(--accent)" }}
+                        >
+                          {edu.institution}
+                        </p>
+                        <p
+                          className="text-sm mb-4"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          {edu.year} • Specialization: {edu.specialization}{" "}
+                        </p>
+                        <div>
+                          <h4
+                            className="font-semibold mb-2"
+                            style={{ color: "var(--text-primary)" }}
                           >
-                            <h3
-                              className="text-2xl font-bold mb-2"
-                              style={{ color: "var(--text-primary)" }}
-                            >
-                              {edu.degree}
-                            </h3>
-                          </FadeInWrapper>
-                          <FadeInWrapper
-                            direction="up"
-                            delay={400 + index * 100}
-                          >
-                            <p
-                              className="text-lg mb-2"
-                              style={{ color: "var(--accent)" }}
-                            >
-                              {edu.institution}
-                            </p>
-                          </FadeInWrapper>
-                          <FadeInWrapper
-                            direction="up"
-                            delay={450 + index * 100}
-                          >
-                            <p
-                              className="text-sm mb-4"
-                              style={{ color: "var(--text-secondary)" }}
-                            >
-                              {edu.year} • Specialization: {edu.specialization}{" "}
-                            </p>
-                          </FadeInWrapper>
-                          <FadeInWrapper
-                            direction="up"
-                            delay={500 + index * 100}
-                          >
-                            <div>
-                              <h4
-                                className="font-semibold mb-2"
-                                style={{ color: "var(--text-primary)" }}
+                            Relevant Coursework:
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {edu.coursework.map((course, idx) => (
+                              <span
+                                key={idx}
+                                className="px-3 py-1 rounded-lg text-sm transition-all duration-200 hover:scale-105"
+                                style={{
+                                  backgroundColor: "var(--surface)",
+                                  color: "var(--text-secondary)",
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.backgroundColor =
+                                    "var(--surface-accent)";
+                                  e.currentTarget.style.color =
+                                    "var(--accent)";
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.backgroundColor =
+                                    "var(--surface)";
+                                  e.currentTarget.style.color =
+                                    "var(--text-secondary)";
+                                }}
                               >
-                                Relevant Coursework:
-                              </h4>
-                              <div className="flex flex-wrap gap-2">
-                                {edu.coursework.map((course, idx) => (
-                                  <span
-                                    key={idx}
-                                    className="px-3 py-1 rounded-lg text-sm transition-all duration-200 hover:scale-105"
-                                    style={{
-                                      backgroundColor: "var(--surface)",
-                                      color: "var(--text-secondary)",
-                                    }}
-                                    onMouseEnter={(e) => {
-                                      e.currentTarget.style.backgroundColor =
-                                        "var(--surface-accent)";
-                                      e.currentTarget.style.color =
-                                        "var(--accent)";
-                                    }}
-                                    onMouseLeave={(e) => {
-                                      e.currentTarget.style.backgroundColor =
-                                        "var(--surface)";
-                                      e.currentTarget.style.color =
-                                        "var(--text-secondary)";
-                                    }}
-                                  >
-                                    {course}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                          </FadeInWrapper>
+                                {course}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                        <div className="flex items-center justify-center">
-                          <FadeInWrapper
-                            direction="up"
-                            delay={550 + index * 100}
-                          >
-                            <div
-                              className="w-24 h-24 rounded-full flex items-center justify-center text-3xl transform transition-all duration-300 hover:scale-110"
-                              style={{
-                                backgroundColor: "var(--surface-accent)",
-                                color: "var(--accent)",
-                              }}
-                            >
-                              🎓
-                            </div>
-                          </FadeInWrapper>
+                      </div>
+                      <div className="flex items-center justify-center">
+                        <div
+                          className="w-24 h-24 rounded-full flex items-center justify-center text-3xl transform transition-all duration-300 hover:scale-110"
+                          style={{
+                            backgroundColor: "var(--surface-accent)",
+                            color: "var(--accent)",
+                          }}
+                        >
+                          🎓
                         </div>
                       </div>
                     </div>
-                  </FadeInWrapper>
-                ))}
-              </div>
+                  </div>
+                </ScrollReveal>
+              ))}
             </div>
-          </FadeInWrapper>
+          </div>
           {/* Research Interests */}
-          <FadeInWrapper direction="up" delay={350}>
-            <div className="mb-20">
+          <div className="mb-20">
+            <ScrollReveal animation="fade-up" duration={700}>
               <h2
                 className="text-4xl font-bold text-center mb-12"
                 style={{ color: "var(--text-primary)" }}
               >
                 Research Interests & Focus Areas
               </h2>
+            </ScrollReveal>
+            <ScrollReveal animation="blur-in" delay={150} duration={900}>
               <div
                 className="max-w-5xl mx-auto p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
                 style={{
@@ -1004,7 +991,7 @@ export default function About() {
               >
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <FadeInWrapper direction="up" delay={400}>
+                    <ScrollReveal animation="fade-left" delay={250} duration={700}>
                       <h3
                         className="text-2xl font-semibold mb-6 flex items-center"
                         style={{ color: "var(--text-primary)" }}
@@ -1012,12 +999,12 @@ export default function About() {
                         <span className="mr-3">🔬</span>
                         Current Research Focus
                       </h3>
-                    </FadeInWrapper>
+                    </ScrollReveal>
                     <ul
                       className="space-y-4"
                       style={{ color: "var(--text-secondary)" }}
                     >
-                      <FadeInWrapper direction="up" delay={450}>
+                      <ScrollReveal animation="fade-up" delay={350} duration={600}>
                         <li className="flex items-start">
                           <span
                             className="mr-3 mt-1"
@@ -1031,8 +1018,8 @@ export default function About() {
                             learning, and multilingual understanding
                           </div>
                         </li>
-                      </FadeInWrapper>
-                      <FadeInWrapper direction="up" delay={500}>
+                      </ScrollReveal>
+                      <ScrollReveal animation="fade-up" delay={450} duration={600}>
                         <li className="flex items-start">
                           <span
                             className="mr-3 mt-1"
@@ -1046,8 +1033,8 @@ export default function About() {
                             learning systems
                           </div>
                         </li>
-                      </FadeInWrapper>
-                      <FadeInWrapper direction="up" delay={550}>
+                      </ScrollReveal>
+                      <ScrollReveal animation="fade-up" delay={550} duration={600}>
                         <li className="flex items-start">
                           <span
                             className="mr-3 mt-1"
@@ -1061,8 +1048,8 @@ export default function About() {
                             pipelines
                           </div>
                         </li>
-                      </FadeInWrapper>
-                      <FadeInWrapper direction="up" delay={600}>
+                      </ScrollReveal>
+                      <ScrollReveal animation="fade-up" delay={650} duration={600}>
                         <li className="flex items-start">
                           <span
                             className="mr-3 mt-1"
@@ -1076,11 +1063,11 @@ export default function About() {
                             for AI workloads
                           </div>
                         </li>
-                      </FadeInWrapper>
+                      </ScrollReveal>
                     </ul>
                   </div>
                   <div>
-                    <FadeInWrapper direction="up" delay={400}>
+                    <ScrollReveal animation="fade-right" delay={250} duration={700}>
                       <h3
                         className="text-2xl font-semibold mb-6 flex items-center"
                         style={{ color: "var(--text-primary)" }}
@@ -1088,8 +1075,8 @@ export default function About() {
                         <span className="mr-3">🎯</span>
                         Research Impact & Goals
                       </h3>
-                    </FadeInWrapper>
-                    <FadeInWrapper direction="up" delay={450}>
+                    </ScrollReveal>
+                    <ScrollReveal animation="fade-up" delay={350} duration={600}>
                       <p
                         className="leading-relaxed mb-6"
                         style={{ color: "var(--text-secondary)" }}
@@ -1101,8 +1088,8 @@ export default function About() {
                         accessible and efficient for deployment in production
                         environments.
                       </p>
-                    </FadeInWrapper>
-                    <FadeInWrapper direction="up" delay={500}>
+                    </ScrollReveal>
+                    <ScrollReveal animation="fade-up" delay={450} duration={600}>
                       <p
                         className="leading-relaxed"
                         style={{ color: "var(--text-secondary)" }}
@@ -1113,8 +1100,8 @@ export default function About() {
                         MLOps frameworks that enable seamless integration of AI
                         into existing software systems.
                       </p>
-                    </FadeInWrapper>
-                    <FadeInWrapper direction="up" delay={550}>
+                    </ScrollReveal>
+                    <ScrollReveal animation="zoom-in" delay={550} duration={700}>
                       <div
                         className="mt-6 p-4 rounded-xl transition-all duration-300 hover:shadow-md"
                         style={{ backgroundColor: "var(--surface-accent)" }}
@@ -1128,14 +1115,14 @@ export default function About() {
                           accessible to everyone.&quot;
                         </p>
                       </div>
-                    </FadeInWrapper>
+                    </ScrollReveal>
                   </div>
                 </div>
               </div>
-            </div>
-          </FadeInWrapper>
+            </ScrollReveal>
+          </div>
           {/* Contact CTA */}
-          <FadeInWrapper direction="up" delay={400}>
+          <ScrollReveal animation="fade-up" duration={800}>
             <div
               className="p-10 rounded-2xl border text-center hover:shadow-lg transition-all duration-300"
               style={{
@@ -1144,15 +1131,15 @@ export default function About() {
               }}
             >
               <div className="max-w-3xl mx-auto">
-                <FadeInWrapper direction="up" delay={450}>
+                <ScrollReveal animation="blur-in" delay={150} duration={700}>
                   <h2
                     className="text-3xl font-bold mb-6"
                     style={{ color: "var(--text-primary)" }}
                   >
                     Let&apos;s Build Something Amazing Together
                   </h2>
-                </FadeInWrapper>
-                <FadeInWrapper direction="up" delay={500}>
+                </ScrollReveal>
+                <ScrollReveal animation="fade-up" delay={250} duration={600}>
                   <p
                     className="text-lg mb-8 leading-relaxed"
                     style={{ color: "var(--text-secondary)" }}
@@ -1163,9 +1150,9 @@ export default function About() {
                     for a technical partner, research collaborator, or want to
                     discuss the latest in AI and software engineering.
                   </p>
-                </FadeInWrapper>
-                <FadeInWrapper direction="up" delay={550}>
-                  <div className="flex flex-wrap justify-center gap-4">
+                </ScrollReveal>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <ScrollReveal animation="bounce-in" delay={400} duration={700}>
                     <a
                       href="/contact"
                       className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 text-white shadow-lg hover:shadow-xl transform hover:scale-105"
@@ -1181,6 +1168,8 @@ export default function About() {
                       <span className="mr-2">✉️</span>
                       Get in Touch
                     </a>
+                  </ScrollReveal>
+                  <ScrollReveal animation="bounce-in" delay={500} duration={700}>
                     <a
                       href="https://github.com/hieptran1812"
                       target="_blank"
@@ -1207,6 +1196,8 @@ export default function About() {
                       <span className="mr-2">👨‍💻</span>
                       GitHub Profile
                     </a>
+                  </ScrollReveal>
+                  <ScrollReveal animation="bounce-in" delay={600} duration={700}>
                     <a
                       href="https://linkedin.com/in/hieptran1812"
                       target="_blank"
@@ -1233,11 +1224,11 @@ export default function About() {
                       <span className="mr-2">📊</span>
                       LinkedIn
                     </a>
-                  </div>
-                </FadeInWrapper>
+                  </ScrollReveal>
+                </div>
               </div>
             </div>
-          </FadeInWrapper>
+          </ScrollReveal>
         </div>
       </main>
     </div>
