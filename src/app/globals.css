@@ -184,6 +184,38 @@ section {
   }
 }
 
+/* Modal animations */
+@keyframes fadeInBg {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalSlideOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+}
+
 /* Apply animation to sections when they come into view */
 section.animate-in {
   animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
