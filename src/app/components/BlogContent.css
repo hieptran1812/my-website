@@ -570,3 +570,38 @@ footer {
   position: relative;
   z-index: 100;
 }
+
+/* TOC Item Title - LaTeX Support */
+.toc-item-title {
+  display: block;
+}
+
+.toc-item-title .katex {
+  font-size: 0.9em;
+  color: inherit;
+}
+
+.toc-item-title .katex-display {
+  display: inline;
+  margin: 0;
+  text-align: left;
+}
+
+.toc-item-title .katex-display > .katex {
+  display: inline;
+}
+
+/* Ensure inline math in TOC renders properly */
+.toc-item-title .math-expression {
+  display: inline;
+  vertical-align: baseline;
+}
+
+.toc-item-title .math-expression.display-math {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}

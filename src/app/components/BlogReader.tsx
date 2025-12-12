@@ -18,6 +18,7 @@ import { formatDate } from "../../lib/dateUtils";
 interface TocItem {
   id: string;
   title: string;
+  titleHtml: string;
   level: number;
   element: HTMLElement;
 }
@@ -272,6 +273,7 @@ export default function BlogReader({
       items.push({
         id,
         title: heading.textContent || "",
+        titleHtml: heading.innerHTML || "",
         level,
         element: heading as HTMLElement,
       });
@@ -550,9 +552,10 @@ export default function BlogReader({
                   }}
                   title={item.title}
                 >
-                  <span className="line-clamp-2 leading-tight">
-                    {item.title}
-                  </span>
+                  <span
+                    className="line-clamp-2 leading-tight toc-item-title"
+                    dangerouslySetInnerHTML={{ __html: item.titleHtml }}
+                  />
                 </button>
               ))}
             </nav>
@@ -692,7 +695,10 @@ export default function BlogReader({
                   }}
                   title={item.title}
                 >
-                  <span className="leading-tight">{item.title}</span>
+                  <span
+                    className="leading-tight toc-item-title"
+                    dangerouslySetInnerHTML={{ __html: item.titleHtml }}
+                  />
                 </button>
               ))}
             </nav>
