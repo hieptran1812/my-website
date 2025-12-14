@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import type { ProjectMetadata } from "@/lib/projects";
@@ -23,7 +23,8 @@ const projectCategories = [
   "Research",
 ];
 
-export default function ProjectsPage() {
+// Component that uses useSearchParams - must be wrapped in Suspense
+function ProjectsContent() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedProject, setSelectedProject] =
     useState<ProjectMetadata | null>(null);
@@ -889,5 +890,18 @@ export default function ProjectsPage() {
         )}
       </main>
     </div>
+  );
+}
+
+// Main export wrapped in Suspense for useSearchParams
+export default function ProjectsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex flex-col min-h-screen items-center justify-center" style={{ backgroundColor: "var(--background)" }}>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2" style={{ borderColor: "var(--accent)" }}></div>
+      </div>
+    }>
+      <ProjectsContent />
+    </Suspense>
   );
 }
