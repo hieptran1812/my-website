@@ -17,7 +17,7 @@ const workExperience = [
     type: "Full-time",
     description: "Developing and maintaining AI Agent for chit-chat",
     responsibilities: [
-      "Developing and maintaining AI Agent for chit-chat including long-term memory, knowledge base, tool use features",
+      "Developing and maintaining AI Companion for chit-chat including long-term memory, knowledge base, tool use features",
       "Implementing and optimizing LLM-based systems for natural language understanding and generation",
       "Collaborating with cross-functional teams to integrate AI solutions into products",
     ],

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import type { ProjectMetadata } from "@/lib/projects";
 import ScrollReveal, { CounterReveal } from "@/components/ScrollReveal";
 
@@ -27,6 +28,7 @@ export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] =
     useState<ProjectMetadata | null>(null);
   const [projects, setProjects] = useState<ProjectMetadata[]>([]);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     async function fetchProjects() {
@@ -42,33 +44,16 @@ export default function ProjectsPage() {
     fetchProjects();
   }, []);
 
-  // Handle hash navigation to specific projects
+  // Handle query parameter to open project popup
   useEffect(() => {
-    const hash = window.location.hash;
-    if (hash && hash.startsWith("#project-")) {
-      const projectId = hash.replace("#project-", "");
-      const project = projects.find((p) => p.id === projectId);
+    const projectSlug = searchParams.get("project");
+    if (projectSlug && projects.length > 0) {
+      const project = projects.find((p) => p.slug === projectSlug);
       if (project) {
-        // Small delay to ensure the element is rendered
-        setTimeout(() => {
-          const element = document.getElementById(`project-${projectId}`);
-          if (element) {
-            element.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-            });
-            // Optionally highlight the project
-            element.style.boxShadow = "0 0 20px var(--accent)";
-            element.style.borderColor = "var(--accent)";
-            setTimeout(() => {
-              element.style.boxShadow = "";
-              element.style.borderColor = "var(--card-border)";
-            }, 3000);
-          }
-        }, 100);
+        setSelectedProject(project);
       }
     }
-  }, [projects]);
+  }, [searchParams, projects]);
 
   const filteredProjects =
     selectedCategory === "All"
@@ -134,24 +119,20 @@ export default function ProjectsPage() {
                   className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed"
                   style={{ color: "var(--text-secondary)" }}
                 >
-                  A showcase of my work in{" "}
+                  pin{" "}
                   <span className="font-semibold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
                     artificial intelligence
                   </span>
                   ,{" "}
                   <span className="font-semibold bg-gradient-to-r from-purple-500 to-indigo-600 bg-clip-text text-transparent">
-                    machine learning
-                  </span>
-                  ,{" "}
-                  <span className="font-semibold bg-gradient-to-r from-indigo-500 to-blue-600 bg-clip-text text-transparent">
-                    web development
+                    data science
                   </span>
                   , and{" "}
                   <span className="font-semibold bg-gradient-to-r from-cyan-500 to-purple-600 bg-clip-text text-transparent">
                     research
                   </span>
-                  . Each project represents a unique challenge solved with
-                  innovative technology and engineering excellence.
+                  , where each project reflects an effort to address real
+                  problems through thoughtful technology and careful engineering
                 </p>
               </div>
             </ScrollReveal>
@@ -176,8 +157,14 @@ export default function ProjectsPage() {
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >
-                  🎯 <CounterReveal end={projects.length} duration={1500} delay={600} className="font-bold" /> Total
-                  Projects
+                  🎯{" "}
+                  <CounterReveal
+                    end={projects.length}
+                    duration={1500}
+                    delay={600}
+                    className="font-bold"
+                  />{" "}
+                  Total Projects
                 </span>
                 <span
                   className="group px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-110 hover:shadow-lg cursor-default border"
@@ -187,7 +174,8 @@ export default function ProjectsPage() {
                     borderColor: "var(--accent)/20",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "scale(1.1) rotate(-1deg)";
+                    e.currentTarget.style.transform =
+                      "scale(1.1) rotate(-1deg)";
                     e.currentTarget.style.boxShadow =
                       "0 10px 25px rgba(147, 51, 234, 0.3)";
                   }}
@@ -196,7 +184,13 @@ export default function ProjectsPage() {
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >
-                  ⭐ <CounterReveal end={featuredProjects.length} duration={1500} delay={800} className="font-bold" />{" "}
+                  ⭐{" "}
+                  <CounterReveal
+                    end={featuredProjects.length}
+                    duration={1500}
+                    delay={800}
+                    className="font-bold"
+                  />{" "}
                   Featured
                 </span>
                 <span
@@ -218,7 +212,9 @@ export default function ProjectsPage() {
                 >
                   🚀{" "}
                   <CounterReveal
-                    end={projects.filter((p) => p.status === "Production").length}
+                    end={
+                      projects.filter((p) => p.status === "Production").length
+                    }
                     duration={1500}
                     delay={1000}
                     className="font-bold"
@@ -263,13 +259,32 @@ export default function ProjectsPage() {
                     }}
                     onClick={() => setSelectedProject(project)}
                   >
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={project.image || "/project-placeholder.jpg"}
-                        alt={project.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
+                    {project.image && (
+                      <div className="relative h-48 overflow-hidden">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          <span
+                            className="px-3 py-1 rounded-full text-xs font-semibold"
+                            style={
+                              statusColors[
+                                project.status as keyof typeof statusColors
+                              ]
+                            }
+                          >
+                            {project.status}
+                          </span>
+                          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-800">
+                            Featured
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    {!project.image && (
                       <div className="absolute top-4 right-4 flex gap-2">
                         <span
                           className="px-3 py-1 rounded-full text-xs font-semibold"
@@ -285,7 +300,7 @@ export default function ProjectsPage() {
                           Featured
                         </span>
                       </div>
-                    </div>
+                    )}
                     <div className="p-6">
                       <span
                         className="text-sm font-medium"
@@ -306,18 +321,20 @@ export default function ProjectsPage() {
                         {project.description}
                       </p>
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="px-2 py-1 rounded text-xs"
-                            style={{
-                              backgroundColor: "var(--surface)",
-                              color: "var(--text-secondary)",
-                            }}
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                        {project.technologies
+                          .slice(0, 3)
+                          .map((tech, techIndex) => (
+                            <span
+                              key={techIndex}
+                              className="px-2 py-1 rounded text-xs"
+                              style={{
+                                backgroundColor: "var(--surface)",
+                                color: "var(--text-secondary)",
+                              }}
+                            >
+                              {tech}
+                            </span>
+                          ))}
                         {project.technologies.length > 3 && (
                           <span
                             className="px-2 py-1 rounded text-xs"
@@ -330,53 +347,58 @@ export default function ProjectsPage() {
                           </span>
                         )}
                       </div>
-                      <div className="flex gap-3">
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                          style={{
-                            backgroundColor: "var(--surface)",
-                            color: "var(--text-secondary)",
-                          }}
-                          onClick={(e) => e.stopPropagation()}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor =
-                              "var(--surface-accent)";
-                            e.currentTarget.style.color = "var(--accent)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor =
-                              "var(--surface)";
-                            e.currentTarget.style.color = "var(--text-secondary)";
-                          }}
-                        >
-                          <span>👨‍💻</span>
-                          Code
-                        </a>
-                        {project.liveUrl && (
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-white"
-                            style={{ backgroundColor: "var(--accent)" }}
-                            onClick={(e) => e.stopPropagation()}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.backgroundColor =
-                                "var(--accent-hover)";
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.backgroundColor =
-                                "var(--accent)";
-                            }}
-                          >
-                            <span>🚀</span>
-                            Live Demo
-                          </a>
-                        )}
-                      </div>
+                      {(project.githubUrl || project.liveUrl) && (
+                        <div className="flex gap-3">
+                          {project.githubUrl && (
+                            <a
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                              style={{
+                                backgroundColor: "var(--surface)",
+                                color: "var(--text-secondary)",
+                              }}
+                              onClick={(e) => e.stopPropagation()}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor =
+                                  "var(--surface-accent)";
+                                e.currentTarget.style.color = "var(--accent)";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor =
+                                  "var(--surface)";
+                                e.currentTarget.style.color =
+                                  "var(--text-secondary)";
+                              }}
+                            >
+                              <span>👨‍💻</span>
+                              Code
+                            </a>
+                          )}
+                          {project.liveUrl && (
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-white"
+                              style={{ backgroundColor: "var(--accent)" }}
+                              onClick={(e) => e.stopPropagation()}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor =
+                                  "var(--accent-hover)";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor =
+                                  "var(--accent)";
+                              }}
+                            >
+                              <span>🚀</span>
+                              Live Demo
+                            </a>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </ScrollReveal>
@@ -421,7 +443,8 @@ export default function ProjectsPage() {
                     }}
                     onMouseLeave={(e) => {
                       if (selectedCategory !== category) {
-                        e.currentTarget.style.backgroundColor = "var(--surface)";
+                        e.currentTarget.style.backgroundColor =
+                          "var(--surface)";
                         e.currentTarget.style.color = "var(--text-secondary)";
                       }
                     }}
@@ -451,14 +474,30 @@ export default function ProjectsPage() {
                   }}
                   onClick={() => setSelectedProject(project)}
                 >
-                  <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={project.image || "/project-placeholder.jpg"}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 right-4">
+                  {project.image && (
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                      <div className="absolute top-4 right-4">
+                        <span
+                          className="px-3 py-1 rounded-full text-xs font-semibold"
+                          style={
+                            statusColors[
+                              project.status as keyof typeof statusColors
+                            ]
+                          }
+                        >
+                          {project.status}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  {!project.image && (
+                    <div className="relative pt-4 pr-4 flex justify-end">
                       <span
                         className="px-3 py-1 rounded-full text-xs font-semibold"
                         style={
@@ -470,7 +509,7 @@ export default function ProjectsPage() {
                         {project.status}
                       </span>
                     </div>
-                  </div>
+                  )}
                   <div className="p-6">
                     <span
                       className="text-sm font-medium"
@@ -491,18 +530,20 @@ export default function ProjectsPage() {
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                        <span
-                          key={techIndex}
-                          className="px-2 py-1 rounded text-xs"
-                          style={{
-                            backgroundColor: "var(--surface)",
-                            color: "var(--text-secondary)",
-                          }}
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                      {project.technologies
+                        .slice(0, 3)
+                        .map((tech, techIndex) => (
+                          <span
+                            key={techIndex}
+                            className="px-2 py-1 rounded text-xs"
+                            style={{
+                              backgroundColor: "var(--surface)",
+                              color: "var(--text-secondary)",
+                            }}
+                          >
+                            {tech}
+                          </span>
+                        ))}
                       {project.technologies.length > 3 && (
                         <span
                           className="px-2 py-1 rounded text-xs"
@@ -515,51 +556,55 @@ export default function ProjectsPage() {
                         </span>
                       )}
                     </div>
-                    <div className="flex gap-3">
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                        style={{
-                          backgroundColor: "var(--surface)",
-                          color: "var(--text-secondary)",
-                        }}
-                        onClick={(e) => e.stopPropagation()}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor =
-                            "var(--surface-accent)";
-                          e.currentTarget.style.color = "var(--accent)";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor =
-                            "var(--surface)";
-                          e.currentTarget.style.color = "var(--text-secondary)";
-                        }}
-                      >
-                        👨‍💻 Code
-                      </a>
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-white"
-                          style={{ backgroundColor: "var(--accent)" }}
-                          onClick={(e) => e.stopPropagation()}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor =
-                              "var(--accent-hover)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor =
-                              "var(--accent)";
-                          }}
-                        >
-                          🚀 Live
-                        </a>
-                      )}
-                    </div>
+                    {(project.githubUrl || project.liveUrl) && (
+                      <div className="flex gap-3">
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                            style={{
+                              backgroundColor: "var(--surface)",
+                              color: "var(--text-secondary)",
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor =
+                                "var(--surface-accent)";
+                              e.currentTarget.style.color = "var(--accent)";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor =
+                                "var(--surface)";
+                              e.currentTarget.style.color = "var(--text-secondary)";
+                            }}
+                          >
+                            👨‍💻 Code
+                          </a>
+                        )}
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-white"
+                            style={{ backgroundColor: "var(--accent)" }}
+                            onClick={(e) => e.stopPropagation()}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor =
+                                "var(--accent-hover)";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor =
+                                "var(--accent)";
+                            }}
+                          >
+                            🚀 Live
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </ScrollReveal>
@@ -588,9 +633,9 @@ export default function ProjectsPage() {
                   className="text-lg mb-8 max-w-3xl mx-auto"
                   style={{ color: "var(--text-secondary)" }}
                 >
-                  I&apos;m always open to discussing new projects, innovative ideas,
-                  or opportunities to contribute to exciting initiatives. Let&apos;s
-                  build something amazing together!
+                  I&apos;m always open to discussing new projects, innovative
+                  ideas, or opportunities to contribute to exciting initiatives.
+                  Let&apos;s build something amazing together!
                 </p>
               </ScrollReveal>
               <ScrollReveal animation="fade-up" delay={400} duration={600}>
@@ -600,7 +645,8 @@ export default function ProjectsPage() {
                     className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 text-white shadow-lg hover:shadow-xl transform hover:scale-105"
                     style={{ backgroundColor: "var(--accent)" }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "var(--accent-hover)";
+                      e.currentTarget.style.backgroundColor =
+                        "var(--accent-hover)";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = "var(--accent)";
@@ -654,47 +700,84 @@ export default function ProjectsPage() {
               style={{
                 backgroundColor: "var(--card-bg)",
                 borderColor: "var(--card-border)",
-                animation: "modalSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                animation:
+                  "modalSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards",
                 opacity: 0,
                 transform: "scale(0.95) translateY(20px)",
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative h-64 md:h-80">
-                <Image
-                  src={selectedProject.image || "/project-placeholder.jpg"}
-                  alt={selectedProject.title}
-                  fill
-                  className="object-cover"
-                />
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black bg-opacity-50 text-white flex items-center justify-center hover:bg-opacity-70 transition-colors"
-                >
-                  ×
-                </button>
-                <div className="absolute bottom-4 left-4 flex gap-2">
-                  <span
-                    className="px-3 py-1 rounded-full text-sm font-semibold"
-                    style={
-                      statusColors[
-                        selectedProject.status as keyof typeof statusColors
-                      ]
-                    }
+              {selectedProject.image ? (
+                <div className="relative h-64 md:h-80">
+                  <Image
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black bg-opacity-50 text-white flex items-center justify-center hover:bg-opacity-70 transition-colors"
                   >
-                    {selectedProject.status}
-                  </span>
-                  <span
-                    className="px-3 py-1 rounded-full text-sm font-semibold"
+                    ×
+                  </button>
+                  <div className="absolute bottom-4 left-4 flex gap-2">
+                    <span
+                      className="px-3 py-1 rounded-full text-sm font-semibold"
+                      style={
+                        statusColors[
+                          selectedProject.status as keyof typeof statusColors
+                        ]
+                      }
+                    >
+                      {selectedProject.status}
+                    </span>
+                    <span
+                      className="px-3 py-1 rounded-full text-sm font-semibold"
+                      style={{
+                        backgroundColor: "var(--surface-accent)",
+                        color: "var(--accent)",
+                      }}
+                    >
+                      {selectedProject.category}
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div className="relative p-4 flex justify-between items-start">
+                  <div className="flex gap-2">
+                    <span
+                      className="px-3 py-1 rounded-full text-sm font-semibold"
+                      style={
+                        statusColors[
+                          selectedProject.status as keyof typeof statusColors
+                        ]
+                      }
+                    >
+                      {selectedProject.status}
+                    </span>
+                    <span
+                      className="px-3 py-1 rounded-full text-sm font-semibold"
+                      style={{
+                        backgroundColor: "var(--surface-accent)",
+                        color: "var(--accent)",
+                      }}
+                    >
+                      {selectedProject.category}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-70 transition-colors"
                     style={{
-                      backgroundColor: "var(--surface-accent)",
-                      color: "var(--accent)",
+                      backgroundColor: "var(--surface)",
+                      color: "var(--text-primary)",
                     }}
                   >
-                    {selectedProject.category}
-                  </span>
+                    ×
+                  </button>
                 </div>
-              </div>
+              )}
               <div className="p-8">
                 <h3
                   className="text-3xl font-bold mb-4"
@@ -753,49 +836,53 @@ export default function ProjectsPage() {
                   </div>
                 </div>
 
-                <div className="flex gap-4">
-                  <a
-                    href={selectedProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors duration-200"
-                    style={{
-                      backgroundColor: "var(--surface)",
-                      color: "var(--text-secondary)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor =
-                        "var(--surface-accent)";
-                      e.currentTarget.style.color = "var(--accent)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "var(--surface)";
-                      e.currentTarget.style.color = "var(--text-secondary)";
-                    }}
-                  >
-                    <span>👨‍💻</span>
-                    View Source Code
-                  </a>
-                  {selectedProject.liveUrl && (
-                    <a
-                      href={selectedProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-white"
-                      style={{ backgroundColor: "var(--accent)" }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor =
-                          "var(--accent-hover)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--accent)";
-                      }}
-                    >
-                      <span>🚀</span>
-                      View Live Demo
-                    </a>
-                  )}
-                </div>
+                {(selectedProject.githubUrl || selectedProject.liveUrl) && (
+                  <div className="flex gap-4">
+                    {selectedProject.githubUrl && (
+                      <a
+                        href={selectedProject.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors duration-200"
+                        style={{
+                          backgroundColor: "var(--surface)",
+                          color: "var(--text-secondary)",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor =
+                            "var(--surface-accent)";
+                          e.currentTarget.style.color = "var(--accent)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = "var(--surface)";
+                          e.currentTarget.style.color = "var(--text-secondary)";
+                        }}
+                      >
+                        <span>👨‍💻</span>
+                        View Source Code
+                      </a>
+                    )}
+                    {selectedProject.liveUrl && (
+                      <a
+                        href={selectedProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-white"
+                        style={{ backgroundColor: "var(--accent)" }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor =
+                            "var(--accent-hover)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = "var(--accent)";
+                        }}
+                      >
+                        <span>🚀</span>
+                        View Live Demo
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>

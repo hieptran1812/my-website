@@ -20,10 +20,10 @@ export interface ProjectData {
   featured: boolean;
   publishDate: string;
   lastUpdated: string;
-  githubUrl?: string;
+  githubUrl?: string | null;
   liveUrl?: string | null;
   stars?: number;
-  image?: string;
+  image?: string | null;
   highlights: string[];
   difficulty: "Beginner" | "Intermediate" | "Advanced";
   slug: string;
@@ -41,10 +41,10 @@ export interface ProjectMetadata {
   featured: boolean;
   publishDate: string;
   lastUpdated: string;
-  githubUrl?: string;
+  githubUrl?: string | null;
   liveUrl?: string | null;
   stars?: number;
-  image?: string;
+  image?: string | null;
   highlights: string[];
   difficulty: "Beginner" | "Intermediate" | "Advanced";
   slug: string;
@@ -102,10 +102,10 @@ export async function getProjectBySlug(
       featured: data.featured || false,
       publishDate: data.publishDate || "",
       lastUpdated: data.lastUpdated || "",
-      githubUrl: data.githubUrl,
-      liveUrl: data.liveUrl,
+      githubUrl: data.githubUrl || null,
+      liveUrl: data.liveUrl || null,
       stars: data.stars,
-      image: data.image || "/project-placeholder.jpg",
+      image: data.image || null,
       highlights: data.highlights || [],
       difficulty: data.difficulty || "Intermediate",
     };
@@ -140,10 +140,10 @@ export async function getAllProjects(): Promise<ProjectMetadata[]> {
         featured: data.featured || false,
         publishDate: data.publishDate || "",
         lastUpdated: data.lastUpdated || "",
-        githubUrl: data.githubUrl,
-        liveUrl: data.liveUrl,
+        githubUrl: data.githubUrl || null,
+        liveUrl: data.liveUrl || null,
         stars: data.stars,
-        image: data.image || "/project-placeholder.jpg",
+        image: data.image || null,
         highlights: data.highlights || [],
         difficulty: data.difficulty || "Intermediate",
       });

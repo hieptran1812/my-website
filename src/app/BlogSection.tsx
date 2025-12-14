@@ -292,17 +292,22 @@ export default function BlogSection() {
             className="text-lg md:text-xl max-w-3xl mx-auto transition-colors duration-300 leading-relaxed"
             style={{ color: "var(--text-secondary)" }}
           >
-            Explore my latest thoughts and insights on{" "}
+            A collection of articles where I document and summarize what I have
+            learned about{" "}
             <span className="font-semibold" style={{ color: "var(--accent)" }}>
-              AI & Machine Learning
+              AI and Machine Learning
             </span>
             ,{" "}
             <span className="font-semibold" style={{ color: "var(--accent)" }}>
               Software Engineering
             </span>
-            , and emerging technology trends. From technical deep-dives to
-            practical tutorials, discover content that bridges theory and
-            real-world application.
+            , and{" "}
+            <span className="font-semibold" style={{ color: "var(--accent)" }}>
+              Product Development
+            </span>
+            . These notes focus on capturing key concepts, practical
+            experiences, and lessons that connect theory with real world
+            practice.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mt-8">
@@ -394,8 +399,7 @@ export default function BlogSection() {
               style={{
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? "translateX(0)" : "translateX(-16px)",
-                transition:
-                  "opacity 700ms ease-out, transform 700ms ease-out",
+                transition: "opacity 700ms ease-out, transform 700ms ease-out",
                 transitionDelay: isVisible ? "300ms" : "0ms",
               }}
             >
@@ -575,8 +579,7 @@ export default function BlogSection() {
               style={{
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? "translateX(0)" : "translateX(-16px)",
-                transition:
-                  "opacity 700ms ease-out, transform 700ms ease-out",
+                transition: "opacity 700ms ease-out, transform 700ms ease-out",
                 transitionDelay: isVisible ? "500ms" : "0ms",
               }}
             >
