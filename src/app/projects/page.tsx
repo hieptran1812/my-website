@@ -120,7 +120,7 @@ function ProjectsContent() {
                   className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed"
                   style={{ color: "var(--text-secondary)" }}
                 >
-                  pin{" "}
+                  A focus on{" "}
                   <span className="font-semibold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
                     artificial intelligence
                   </span>
@@ -578,7 +578,8 @@ function ProjectsContent() {
                             onMouseLeave={(e) => {
                               e.currentTarget.style.backgroundColor =
                                 "var(--surface)";
-                              e.currentTarget.style.color = "var(--text-secondary)";
+                              e.currentTarget.style.color =
+                                "var(--text-secondary)";
                             }}
                           >
                             👨‍💻 Code
@@ -855,7 +856,8 @@ function ProjectsContent() {
                           e.currentTarget.style.color = "var(--accent)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = "var(--surface)";
+                          e.currentTarget.style.backgroundColor =
+                            "var(--surface)";
                           e.currentTarget.style.color = "var(--text-secondary)";
                         }}
                       >
@@ -875,7 +877,8 @@ function ProjectsContent() {
                             "var(--accent-hover)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = "var(--accent)";
+                          e.currentTarget.style.backgroundColor =
+                            "var(--accent)";
                         }}
                       >
                         <span>🚀</span>
@@ -896,11 +899,19 @@ function ProjectsContent() {
 // Main export wrapped in Suspense for useSearchParams
 export default function ProjectsPage() {
   return (
-    <Suspense fallback={
-      <div className="flex flex-col min-h-screen items-center justify-center" style={{ backgroundColor: "var(--background)" }}>
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2" style={{ borderColor: "var(--accent)" }}></div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div
+          className="flex flex-col min-h-screen items-center justify-center"
+          style={{ backgroundColor: "var(--background)" }}
+        >
+          <div
+            className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2"
+            style={{ borderColor: "var(--accent)" }}
+          ></div>
+        </div>
+      }
+    >
       <ProjectsContent />
     </Suspense>
   );

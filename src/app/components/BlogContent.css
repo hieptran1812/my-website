@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 /* Blog Content Styles */
 .blog-content h1 {
   font-size: 1.875rem; /* text-3xl */
