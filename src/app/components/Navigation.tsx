@@ -32,7 +32,7 @@ const navLinks = [
   {
     name: "Projects",
     href: "/projects",
-    description: "View portfolio of AI and web development projects",
+    description: "View portfolio of AI projects",
     icon: (
       <svg
         className="w-4 h-4"
