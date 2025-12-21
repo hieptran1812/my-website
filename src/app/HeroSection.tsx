@@ -498,7 +498,7 @@ export default function HeroSection() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Exploring the world through{" "}
+              Build things with{" "}
               <span
                 className="font-semibold"
                 style={{
@@ -506,7 +506,7 @@ export default function HeroSection() {
                   fontWeight: "600",
                 }}
               >
-                Code, Data and Caffeine
+                Code and Data
               </span>
             </h2>
 
