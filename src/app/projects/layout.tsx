@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     "Development Work",
   ],
   openGraph: {
-    title: "Projects - Hiep Tran | AI & Web Development Portfolio",
+    title: "Projects - Hiep Tran | AI Portfolio",
     description:
-      "Explore Hiep Tran's portfolio of AI, machine learning, and web development projects. View innovative solutions and detailed case studies.",
+      "Explore Hiep Tran's portfolio of AI, machine learning projects. View innovative solutions and detailed case studies.",
     url: "https://halleyverse.dev/projects",
     type: "website",
     images: [
