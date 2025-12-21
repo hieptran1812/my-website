@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useTheme } from "./ThemeProvider";
 
 const titles = [
@@ -20,28 +20,22 @@ type Particle = {
   size: number;
   x: number;
   y: number;
-  vx: number;
-  vy: number;
   opacity: number;
   animationDelay: string;
+  duration: number;
 };
 
 // Helper function to generate deterministic particles for the background
-// Uses an index-based approach instead of random to prevent hydration errors
 const generateParticles = (count: number): Particle[] => {
-  return Array.from({ length: count }, (_, index) => {
-    // Create deterministic values based on index
-    return {
-      id: `particle-${index}`,
-      size: 1 + (index % 3) + (index % 7) / 10,
-      x: (index * 7.3) % 100,
-      y: (index * 11.9) % 100,
-      vx: ((index % 5) - 2) * 0.1,
-      vy: ((index % 7) - 3) * 0.1,
-      opacity: 0.2 + (index % 10) / 10,
-      animationDelay: `${(index % 10) * 0.5}s`,
-    };
-  });
+  return Array.from({ length: count }, (_, index) => ({
+    id: `particle-${index}`,
+    size: 1 + (index % 3) + (index % 7) / 10,
+    x: (index * 7.3) % 100,
+    y: (index * 11.9) % 100,
+    opacity: 0.2 + (index % 10) / 10,
+    animationDelay: `${(index % 10) * 0.5}s`,
+    duration: 6 + (index % 8),
+  }));
 };
 
 export default function HeroSection() {
@@ -49,7 +43,31 @@ export default function HeroSection() {
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const { theme, mounted } = useTheme();
-  const [particles] = useState(() => generateParticles(80)); // Floating particles
+  const [isMobile, setIsMobile] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  // Check for mobile and reduced motion preference
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    checkMobile();
+    setPrefersReducedMotion(motionQuery.matches);
+
+    window.addEventListener("resize", checkMobile);
+    motionQuery.addEventListener("change", (e) => setPrefersReducedMotion(e.matches));
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      motionQuery.removeEventListener("change", (e) => setPrefersReducedMotion(e.matches));
+    };
+  }, []);
+
+  // Memoize particles - reduce count on mobile for better performance
+  const particles = useMemo(() => {
+    const count = isMobile ? 15 : 30;
+    return generateParticles(count);
+  }, [isMobile]);
 
   // Get the appropriate profile image based on theme
   const getProfileImage = () => {
@@ -93,7 +111,7 @@ export default function HeroSection() {
       aria-label="Hero section with introduction and main call-to-action"
       role="banner"
     >
-      {/* Enhanced Particle Background */}
+      {/* Enhanced Particle Background - GPU accelerated */}
       <div
         className="absolute inset-0 -z-30 overflow-hidden"
         aria-hidden="true"
@@ -104,61 +122,32 @@ export default function HeroSection() {
               : "linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.9) 50%, rgba(248, 250, 252, 0.95) 100%)",
         }}
       >
-        {/* Optimized floating particles with better performance */}
-        {particles.slice(0, 50).map((particle) => (
-          <div
-            key={particle.id}
-            className="absolute rounded-full animate-float-slow"
-            style={{
-              width: `${particle.size * 0.8}px`,
-              height: `${particle.size * 0.8}px`,
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              backgroundColor:
-                theme === "dark"
-                  ? `rgba(99, 102, 241, ${particle.opacity * 0.4})`
-                  : `rgba(59, 130, 246, ${particle.opacity * 0.3})`,
-              boxShadow:
-                theme === "dark"
-                  ? `0 0 ${particle.size * 2}px rgba(99, 102, 241, ${
-                      particle.opacity * 0.2
-                    })`
-                  : `0 0 ${particle.size * 1.5}px rgba(59, 130, 246, ${
-                      particle.opacity * 0.15
-                    })`,
-              animationDelay: particle.animationDelay,
-              animationDuration: `${6 + (particle.id.charCodeAt(9) % 8)}s`,
-            }}
-          ></div>
-        ))}
-
-        {/* Accent particles for depth */}
-        {particles.slice(0, 20).map((particle) => (
-          <div
-            key={`accent-${particle.id}`}
-            className="absolute rounded-full animate-pulse-slow"
-            style={{
-              width: `${particle.size * 0.5}px`,
-              height: `${particle.size * 0.5}px`,
-              left: `${(particle.x + 20) % 100}%`,
-              top: `${(particle.y + 30) % 100}%`,
-              backgroundColor:
-                theme === "dark"
-                  ? `rgba(168, 85, 247, ${particle.opacity * 0.3})`
-                  : `rgba(147, 51, 234, ${particle.opacity * 0.25})`,
-              boxShadow:
-                theme === "dark"
-                  ? `0 0 ${particle.size}px rgba(168, 85, 247, ${
-                      particle.opacity * 0.15
-                    })`
-                  : `0 0 ${particle.size}px rgba(147, 51, 234, ${
-                      particle.opacity * 0.1
-                    })`,
-              animationDelay: `${(particle.id.charCodeAt(9) % 15) * 0.3}s`,
-              animationDuration: `${10 + (particle.id.charCodeAt(9) % 8)}s`,
-            }}
-          ></div>
-        ))}
+        {/* Optimized floating particles - reduced on mobile, disabled for reduced motion */}
+        {!prefersReducedMotion &&
+          particles.map((particle) => (
+            <div
+              key={particle.id}
+              className="absolute rounded-full will-change-transform"
+              style={{
+                width: `${particle.size * 0.8}px`,
+                height: `${particle.size * 0.8}px`,
+                left: `${particle.x}%`,
+                top: `${particle.y}%`,
+                backgroundColor:
+                  theme === "dark"
+                    ? `rgba(99, 102, 241, ${particle.opacity * 0.4})`
+                    : `rgba(59, 130, 246, ${particle.opacity * 0.3})`,
+                boxShadow: isMobile
+                  ? "none"
+                  : theme === "dark"
+                    ? `0 0 ${particle.size * 2}px rgba(99, 102, 241, ${particle.opacity * 0.2})`
+                    : `0 0 ${particle.size * 1.5}px rgba(59, 130, 246, ${particle.opacity * 0.15})`,
+                animation: `float-particle ${particle.duration}s ease-in-out infinite`,
+                animationDelay: particle.animationDelay,
+                transform: "translate3d(0, 0, 0)",
+              }}
+            />
+          ))}
       </div>
 
       {/* Modern Grid Background Pattern */}
@@ -182,39 +171,43 @@ export default function HeroSection() {
         ></div>
       </div>
 
-      {/* Enhanced Background Effects */}
+      {/* Enhanced Background Effects - GPU accelerated */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div
-          className="absolute top-1/4 left-1/4 w-96 h-96 blur-3xl rounded-full animate-float-slow"
+          className="absolute top-1/4 left-1/4 w-48 md:w-72 lg:w-96 h-48 md:h-72 lg:h-96 blur-2xl md:blur-3xl rounded-full will-change-transform"
           style={{
             background:
               theme === "dark"
                 ? "linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.1) 100%)"
                 : "linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(147, 51, 234, 0.08) 100%)",
-            animationDuration: "8s",
+            animation: prefersReducedMotion ? "none" : "float-blob 8s ease-in-out infinite",
+            transform: "translate3d(0, 0, 0)",
           }}
-        ></div>
+        />
         <div
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 blur-3xl rounded-full animate-float-slow"
+          className="absolute bottom-1/4 right-1/4 w-40 md:w-60 lg:w-80 h-40 md:h-60 lg:h-80 blur-2xl md:blur-3xl rounded-full will-change-transform"
           style={{
             background:
               theme === "dark"
                 ? "linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%)"
                 : "linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(59, 130, 246, 0.06) 100%)",
-            animationDelay: "2s",
-            animationDuration: "10s",
+            animation: prefersReducedMotion ? "none" : "float-blob 10s ease-in-out infinite 2s",
+            transform: "translate3d(0, 0, 0)",
           }}
-        ></div>
-        <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 blur-3xl rounded-full animate-pulse-slow"
-          style={{
-            background:
-              theme === "dark"
-                ? "radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%)"
-                : "radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%)",
-            animationDuration: "12s",
-          }}
-        ></div>
+        />
+        {!isMobile && (
+          <div
+            className="absolute top-1/2 left-1/2 w-72 h-72 blur-3xl rounded-full will-change-transform"
+            style={{
+              background:
+                theme === "dark"
+                  ? "radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%)"
+                  : "radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%)",
+              animation: prefersReducedMotion ? "none" : "pulse-blob 12s ease-in-out infinite",
+              transform: "translate3d(-50%, -50%, 0)",
+            }}
+          />
+        )}
       </div>
 
       <div className="container mx-auto max-w-7xl px-4">
@@ -224,44 +217,46 @@ export default function HeroSection() {
             className="flex-1 flex justify-center items-center max-w-md lg:max-w-lg order-1 lg:order-1"
             aria-label="Profile image and availability status"
           >
-            {/* Modern image container with enhanced glow */}
+            {/* Modern image container with enhanced glow - responsive */}
             <div
               className="relative group"
               style={{
-                width: "320px",
-                height: "320px",
-                maxWidth: "80vw",
-                maxHeight: "80vw",
-                minWidth: "280px",
-                minHeight: "280px",
-                transform: "translateY(-35px)",
+                width: isMobile ? "240px" : "320px",
+                height: isMobile ? "240px" : "320px",
+                maxWidth: "75vw",
+                maxHeight: "75vw",
+                minWidth: isMobile ? "200px" : "280px",
+                minHeight: isMobile ? "200px" : "280px",
+                transform: isMobile ? "translateY(-20px)" : "translateY(-35px)",
               }}
             >
-              {/* Outer glow effects with improved performance */}
+              {/* Outer glow effects - GPU accelerated, simplified on mobile */}
               <div
-                className="absolute inset-0 rounded-3xl blur-xl transition-all duration-700 group-hover:blur-2xl"
+                className="absolute inset-0 rounded-3xl blur-xl will-change-transform"
                 style={{
                   background:
                     theme === "dark"
                       ? "linear-gradient(135deg, rgba(99, 102, 241, 0.4) 0%, rgba(168, 85, 247, 0.3) 50%, rgba(59, 130, 246, 0.2) 100%)"
                       : "linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(147, 51, 234, 0.25) 50%, rgba(99, 102, 241, 0.15) 100%)",
-                  transform: "scale(1.1)",
-                  animation: "pulse 4s ease-in-out infinite",
+                  transform: "translate3d(0, 0, 0) scale(1.1)",
+                  animation: prefersReducedMotion ? "none" : "pulse-glow 4s ease-in-out infinite",
                 }}
-              ></div>
+              />
 
-              {/* Secondary glow for depth */}
-              <div
-                className="absolute inset-0 rounded-3xl blur-2xl opacity-60 transition-all duration-700 group-hover:opacity-80"
-                style={{
-                  background:
-                    theme === "dark"
-                      ? "radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%)"
-                      : "radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%)",
-                  transform: "scale(1.2)",
-                  animation: "pulse 6s ease-in-out infinite reverse",
-                }}
-              ></div>
+              {/* Secondary glow for depth - hidden on mobile for performance */}
+              {!isMobile && (
+                <div
+                  className="absolute inset-0 rounded-3xl blur-2xl opacity-60 will-change-transform"
+                  style={{
+                    background:
+                      theme === "dark"
+                        ? "radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%)"
+                        : "radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%)",
+                    transform: "translate3d(0, 0, 0) scale(1.2)",
+                    animation: prefersReducedMotion ? "none" : "pulse-glow 6s ease-in-out infinite reverse",
+                  }}
+                />
+              )}
 
               {/* Image container with gradient border */}
               <div
@@ -297,75 +292,82 @@ export default function HeroSection() {
                 </div>
               </div>
 
-              {/* Tech Tags with hover animation */}
-              {/* AI/ML Tag */}
-              <div
-                className="absolute top-12 -left-14 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md border shadow-lg transition-all duration-700 opacity-0 group-hover:opacity-100 transform -translate-x-4 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:scale-100 scale-90"
-                style={{
-                  backgroundColor:
-                    theme === "dark"
-                      ? "rgba(30, 41, 59, 0.95)"
-                      : "rgba(248, 250, 252, 0.95)",
-                  borderColor:
-                    theme === "dark"
-                      ? "rgba(168, 85, 247, 0.5)"
-                      : "rgba(147, 51, 234, 0.4)",
-                  color: theme === "dark" ? "#c084fc" : "#7c3aed",
-                  boxShadow:
-                    theme === "dark"
-                      ? "0 8px 25px -5px rgba(168, 85, 247, 0.3)"
-                      : "0 8px 25px -5px rgba(124, 58, 237, 0.2)",
-                  transitionDelay: "0.2s",
-                }}
-              >
-                🤖 AI/ML
-              </div>
+              {/* Tech Tags with hover animation - hidden on mobile for performance */}
+              {!isMobile && (
+                <>
+                  {/* AI/ML Tag */}
+                  <div
+                    className="absolute top-12 -left-14 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md border shadow-lg opacity-0 group-hover:opacity-100 will-change-transform"
+                    style={{
+                      backgroundColor:
+                        theme === "dark"
+                          ? "rgba(30, 41, 59, 0.95)"
+                          : "rgba(248, 250, 252, 0.95)",
+                      borderColor:
+                        theme === "dark"
+                          ? "rgba(168, 85, 247, 0.5)"
+                          : "rgba(147, 51, 234, 0.4)",
+                      color: theme === "dark" ? "#c084fc" : "#7c3aed",
+                      boxShadow:
+                        theme === "dark"
+                          ? "0 8px 25px -5px rgba(168, 85, 247, 0.3)"
+                          : "0 8px 25px -5px rgba(124, 58, 237, 0.2)",
+                      transform: "translate3d(-16px, 8px, 0) scale(0.9)",
+                      transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s",
+                    }}
+                  >
+                    🤖 AI/ML
+                  </div>
 
-              {/* Coffee Tag */}
-              <div
-                className="absolute -top-6 left-1/2 transform -translate-x-1/2 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md border shadow-lg transition-all duration-700 opacity-0 group-hover:opacity-100 translate-y-[-8px] group-hover:translate-y-0 group-hover:scale-100 scale-90"
-                style={{
-                  backgroundColor:
-                    theme === "dark"
-                      ? "rgba(30, 41, 59, 0.95)"
-                      : "rgba(248, 250, 252, 0.95)",
-                  borderColor:
-                    theme === "dark"
-                      ? "rgba(217, 119, 6, 0.5)"
-                      : "rgba(180, 83, 9, 0.4)",
-                  color: theme === "dark" ? "#f59e0b" : "#b45309",
-                  boxShadow:
-                    theme === "dark"
-                      ? "0 8px 25px -5px rgba(217, 119, 6, 0.3)"
-                      : "0 8px 25px -5px rgba(180, 83, 9, 0.2)",
-                  transitionDelay: "0.4s",
-                }}
-              >
-                ☕ Coffee
-              </div>
+                  {/* Coffee Tag */}
+                  <div
+                    className="absolute -top-6 left-1/2 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md border shadow-lg opacity-0 group-hover:opacity-100 will-change-transform"
+                    style={{
+                      backgroundColor:
+                        theme === "dark"
+                          ? "rgba(30, 41, 59, 0.95)"
+                          : "rgba(248, 250, 252, 0.95)",
+                      borderColor:
+                        theme === "dark"
+                          ? "rgba(217, 119, 6, 0.5)"
+                          : "rgba(180, 83, 9, 0.4)",
+                      color: theme === "dark" ? "#f59e0b" : "#b45309",
+                      boxShadow:
+                        theme === "dark"
+                          ? "0 8px 25px -5px rgba(217, 119, 6, 0.3)"
+                          : "0 8px 25px -5px rgba(180, 83, 9, 0.2)",
+                      transform: "translate3d(-50%, -8px, 0) scale(0.9)",
+                      transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s",
+                    }}
+                  >
+                    ☕ Coffee
+                  </div>
 
-              {/* Code Tag */}
-              <div
-                className="absolute top-1/2 -right-12 transform -translate-y-1/2 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md border shadow-lg transition-all duration-700 opacity-0 group-hover:opacity-100 translate-x-4 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:scale-100 scale-90"
-                style={{
-                  backgroundColor:
-                    theme === "dark"
-                      ? "rgba(30, 41, 59, 0.95)"
-                      : "rgba(248, 250, 252, 0.95)",
-                  borderColor:
-                    theme === "dark"
-                      ? "rgba(34, 197, 94, 0.5)"
-                      : "rgba(21, 128, 61, 0.4)",
-                  color: theme === "dark" ? "#4ade80" : "#15803d",
-                  boxShadow:
-                    theme === "dark"
-                      ? "0 8px 25px -5px rgba(34, 197, 94, 0.3)"
-                      : "0 8px 25px -5px rgba(21, 128, 61, 0.2)",
-                  transitionDelay: "0.6s",
-                }}
-              >
-                💻 Code
-              </div>
+                  {/* Code Tag */}
+                  <div
+                    className="absolute top-1/2 -right-12 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md border shadow-lg opacity-0 group-hover:opacity-100 will-change-transform"
+                    style={{
+                      backgroundColor:
+                        theme === "dark"
+                          ? "rgba(30, 41, 59, 0.95)"
+                          : "rgba(248, 250, 252, 0.95)",
+                      borderColor:
+                        theme === "dark"
+                          ? "rgba(34, 197, 94, 0.5)"
+                          : "rgba(21, 128, 61, 0.4)",
+                      color: theme === "dark" ? "#4ade80" : "#15803d",
+                      boxShadow:
+                        theme === "dark"
+                          ? "0 8px 25px -5px rgba(34, 197, 94, 0.3)"
+                          : "0 8px 25px -5px rgba(21, 128, 61, 0.2)",
+                      transform: "translate3d(16px, -50%, 0) scale(0.9)",
+                      transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s",
+                    }}
+                  >
+                    💻 Code
+                  </div>
+                </>
+              )}
 
               {/* Enhanced Available Badge */}
               <div

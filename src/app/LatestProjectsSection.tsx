@@ -10,7 +10,18 @@ export default function LatestProjectsSection() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  // Check for reduced motion preference
+  useEffect(() => {
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(motionQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    motionQuery.addEventListener("change", handler);
+    return () => motionQuery.removeEventListener("change", handler);
+  }, []);
 
   // Intersection Observer for scroll animation
   useEffect(() => {
@@ -25,8 +36,8 @@ export default function LatestProjectsSection() {
         }
       },
       {
-        threshold: 0.15,
-        rootMargin: "0px 0px -40% 0px",
+        threshold: 0.1,
+        rootMargin: "0px 0px -30% 0px", // Trigger when 30% of viewport is scrolled
       }
     );
 
@@ -164,11 +175,12 @@ export default function LatestProjectsSection() {
         <div
           className="text-center mb-16"
           style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? "translateY(0)" : "translateY(32px)",
-            filter: isVisible ? "blur(0)" : "blur(8px)",
-            transition:
-              "opacity 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            opacity: isVisible || prefersReducedMotion ? 1 : 0,
+            transform: isVisible || prefersReducedMotion ? "translateY(0)" : "translateY(32px)",
+            filter: isVisible || prefersReducedMotion ? "blur(0)" : "blur(8px)",
+            transition: prefersReducedMotion
+              ? "none"
+              : "opacity 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           }}
         >
           <div
@@ -291,16 +303,17 @@ export default function LatestProjectsSection() {
               <Link
                 href={`/projects?project=${project.slug}`}
                 key={idx}
-                className="group block rounded-xl hover:shadow-xl hover:shadow-blue-500/10 overflow-hidden border card-enhanced"
+                className="group block rounded-xl hover:shadow-xl hover:shadow-blue-500/10 overflow-hidden border card-enhanced will-change-transform"
                 style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible
+                  opacity: isVisible || prefersReducedMotion ? 1 : 0,
+                  transform: isVisible || prefersReducedMotion
                     ? "translateY(0) scale(1)"
-                    : "translateY(48px) scale(0.95)",
-                  filter: isVisible ? "blur(0)" : "blur(8px)",
-                  transition:
-                    "opacity 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-                  transitionDelay: isVisible ? `${200 + idx * 120}ms` : "0ms",
+                    : "translateY(32px) scale(0.98)",
+                  filter: isVisible || prefersReducedMotion ? "blur(0)" : "blur(4px)",
+                  transition: prefersReducedMotion
+                    ? "none"
+                    : "opacity 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  transitionDelay: prefersReducedMotion ? "0ms" : isVisible ? `${150 + idx * 80}ms` : "0ms",
                 }}
               >
                 {project.image && (

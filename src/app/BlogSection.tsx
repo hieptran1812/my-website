@@ -11,6 +11,22 @@ import { formatDateMedium } from "../lib/dateUtils";
 const ARTICLES_TO_SHOW = 4;
 const FETCH_TIMEOUT = 10000; // 10 seconds
 
+// Hook for reduced motion preference
+const usePrefersReducedMotion = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(motionQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    motionQuery.addEventListener("change", handler);
+    return () => motionQuery.removeEventListener("change", handler);
+  }, []);
+
+  return prefersReducedMotion;
+};
+
 interface Article {
   title: string;
   summary: string;
@@ -43,6 +59,7 @@ export default function BlogSection() {
   const [error, setError] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Intersection Observer for scroll animation
   useEffect(() => {
@@ -57,8 +74,8 @@ export default function BlogSection() {
         }
       },
       {
-        threshold: 0.15,
-        rootMargin: "0px 0px -40% 0px",
+        threshold: 0.1,
+        rootMargin: "0px 0px -30% 0px", // Trigger when 30% of viewport is scrolled
       }
     );
 
@@ -250,11 +267,12 @@ export default function BlogSection() {
         <div
           className="text-center mb-16"
           style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? "translateY(0)" : "translateY(32px)",
-            filter: isVisible ? "blur(0)" : "blur(8px)",
-            transition:
-              "opacity 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            opacity: isVisible || prefersReducedMotion ? 1 : 0,
+            transform: isVisible || prefersReducedMotion ? "translateY(0)" : "translateY(32px)",
+            filter: isVisible || prefersReducedMotion ? "blur(0)" : "blur(8px)",
+            transition: prefersReducedMotion
+              ? "none"
+              : "opacity 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           }}
         >
           <div
@@ -384,14 +402,15 @@ export default function BlogSection() {
           <div
             className="mb-16"
             style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible
+              opacity: isVisible || prefersReducedMotion ? 1 : 0,
+              transform: isVisible || prefersReducedMotion
                 ? "translateY(0) scale(1)"
-                : "translateY(64px) scale(0.97)",
-              filter: isVisible ? "blur(0)" : "blur(8px)",
-              transition:
-                "opacity 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-              transitionDelay: isVisible ? "150ms" : "0ms",
+                : "translateY(32px) scale(0.98)",
+              filter: isVisible || prefersReducedMotion ? "blur(0)" : "blur(4px)",
+              transition: prefersReducedMotion
+                ? "none"
+                : "opacity 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+              transitionDelay: prefersReducedMotion ? "0ms" : isVisible ? "100ms" : "0ms",
             }}
           >
             <div
@@ -604,16 +623,17 @@ export default function BlogSection() {
                 <Link
                   href={article.link}
                   key={`${article.link}-${idx}`}
-                  className="group block"
+                  className="group block will-change-transform"
                   style={{
-                    opacity: isVisible ? 1 : 0,
-                    transform: isVisible
+                    opacity: isVisible || prefersReducedMotion ? 1 : 0,
+                    transform: isVisible || prefersReducedMotion
                       ? "translateY(0) scale(1)"
-                      : "translateY(40px) scale(0.95)",
-                    filter: isVisible ? "blur(0)" : "blur(8px)",
-                    transition:
-                      "opacity 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-                    transitionDelay: isVisible ? `${700 + idx * 120}ms` : "0ms",
+                      : "translateY(24px) scale(0.98)",
+                    filter: isVisible || prefersReducedMotion ? "blur(0)" : "blur(4px)",
+                    transition: prefersReducedMotion
+                      ? "none"
+                      : "opacity 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                    transitionDelay: prefersReducedMotion ? "0ms" : isVisible ? `${400 + idx * 80}ms` : "0ms",
                   }}
                   aria-label={`Read article: ${article.title}`}
                 >

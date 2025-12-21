@@ -1469,6 +1469,109 @@ a:focus {
   -webkit-line-clamp: 3;
 }
 
+/* ==========================================
+   GPU-Accelerated Animations for Hero Section
+   ========================================== */
+
+/* Floating particle animation - GPU accelerated */
+@keyframes float-particle {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(0, -15px, 0);
+    opacity: 1;
+  }
+}
+
+/* Floating blob animation - GPU accelerated */
+@keyframes float-blob {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -20px, 0) scale(1.05);
+  }
+}
+
+/* Pulse blob animation - GPU accelerated */
+@keyframes pulse-blob {
+  0%, 100% {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(-50%, -50%, 0) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Pulse glow animation - GPU accelerated */
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate3d(0, 0, 0) scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* Smooth hover transitions for mobile */
+@media (max-width: 768px) {
+  .group:hover .group-hover\:scale-105 {
+    transform: scale(1.02) !important;
+  }
+
+  .group:hover .group-hover\:scale-110 {
+    transform: scale(1.05) !important;
+  }
+
+  /* Reduce animation intensity on mobile */
+  @keyframes float-particle {
+    0%, 100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -8px, 0);
+    }
+  }
+
+  @keyframes float-blob {
+    0%, 100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -10px, 0);
+    }
+  }
+}
+
+/* Will-change utility for GPU acceleration */
+.will-change-transform {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Smooth group hover transitions for tags */
+.group:hover .will-change-transform {
+  transform: translate3d(0, 0, 0) scale(1) !important;
+}
+
+/* Hero section image hover effect */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group:hover .group-hover\:scale-105 {
+  transform: scale(1.05);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Custom scrollbar for TOC */
 .toc-scrollbar::-webkit-scrollbar {
   width: 4px;
