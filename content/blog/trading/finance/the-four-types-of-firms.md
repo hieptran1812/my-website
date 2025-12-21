@@ -2,7 +2,7 @@
 title: "The Four Types of Firms"
 publishDate: "2025-10-31"
 category: "trading"
-subcategory: "finance"
+subcategory: "Finance"
 tags: ["corporation-finance"]
 date: "2025-10-31"
 author: "Hiep Tran"
@@ -63,7 +63,7 @@ In other countries, limited liability companies have existed for over a century.
 
 ### Corporations
 
-A corporation is a legally created entity separate from its owners. It can make contracts, own property, and is responsible for its own debts. The owners are not personally liable for the company’s obligations.
+A corporation is a legally created entity separate from its owners. It can make contracts, own property, and is responsible for its own debts. The owners are not personally liable for the company’s oblifourgations.
 
 Corporations must be legally formed, often through a process called incorporation, which involves filing formal documents with the state. Many corporations choose to incorporate in Delaware because of its favorable laws.
 

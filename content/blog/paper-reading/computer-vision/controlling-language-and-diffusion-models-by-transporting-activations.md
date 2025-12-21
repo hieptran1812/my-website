@@ -2,7 +2,7 @@
 title: "Controlling Language and Diffusion Models by Transporting Activations"
 publishDate: "2025-09-30"
 category: "paper-reading"
-subcategory: "Computer vision"
+subcategory: "Computer Vision"
 tags: ["diffusion-model", "text-to-image", "activation-steering"]
 date: "2025-09-30"
 author: "Hiep Tran"

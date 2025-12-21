@@ -7,8 +7,8 @@ subcategory: "FinTech"
 technologies:
   [
     "Python",
-    "LangChain",
-    "OpenAI API",
+    "Large language model",
+    "Vision language model",
     "AI Agent",
     "pandas",
     "NumPy",
