@@ -1556,6 +1556,30 @@ a:focus {
   -webkit-backface-visibility: hidden;
 }
 
+/* Gradient text for section headings - ensuring visibility on mobile */
+.gradient-text-projects,
+.gradient-text-articles {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  display: inline-block;
+}
+
+/* Ensure gradient text is visible in dark mode */
+[data-theme="dark"] .gradient-text-projects {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #3b82f6 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+[data-theme="dark"] .gradient-text-articles {
+  background: linear-gradient(135deg, #34d399 0%, #2dd4bf 50%, #22d3ee 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
 /* Smooth group hover transitions for tags */
 .group:hover .will-change-transform {
   transform: translate3d(0, 0, 0) scale(1) !important;

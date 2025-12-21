@@ -66,6 +66,10 @@ export default function BlogSection() {
     // Only setup observer after loading is complete
     if (loading || error || articles.length === 0) return;
 
+    // Use smaller margin on mobile for better trigger
+    const isMobileView = window.innerWidth < 768;
+    const rootMarginValue = isMobileView ? "0px 0px -10% 0px" : "0px 0px -20% 0px";
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -74,8 +78,8 @@ export default function BlogSection() {
         }
       },
       {
-        threshold: 0.1,
-        rootMargin: "0px 0px -30% 0px", // Trigger when 30% of viewport is scrolled
+        threshold: 0.05,
+        rootMargin: rootMarginValue,
       }
     );
 
@@ -299,11 +303,19 @@ export default function BlogSection() {
             <span className="text-sm font-medium">Blog</span>
           </div>
 
-          <h3 className="section-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 transition-colors duration-300 relative">
-            <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
+          <h3 className="section-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 transition-colors duration-300 relative">
+            <span
+              className="gradient-text-articles"
+              style={{
+                background: "linear-gradient(135deg, #059669 0%, #0d9488 50%, #0891b2 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
               Latest Articles
             </span>
-            <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-1.5 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 rounded-full"></div>
+            <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-24 sm:w-32 h-1 sm:h-1.5 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 rounded-full"></div>
           </h3>
 
           <p
