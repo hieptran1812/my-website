@@ -18,9 +18,10 @@ const softwareDevelopmentSubtopics = [
     slug: "site reliability engineering",
   },
   { name: "Distributed Systems", slug: "distributed systems" },
-  { name: "Database", slug: "database" },
   { name: "Data Engineering", slug: "data engineering" },
   { name: "Algorithms", slug: "algorithms" },
+  { name: "Product Development", slug: "product development" },
+  { name: "Cloud Computing", slug: "cloud computing" },
 ];
 
 export default function SoftwareDevelopmentBlogPage() {

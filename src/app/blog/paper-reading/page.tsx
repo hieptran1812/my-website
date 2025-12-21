@@ -19,6 +19,8 @@ const paperReadingSubtopics = [
   { name: "Machine Learning", slug: "machine learning" },
   { name: "Speech Processing", slug: "speech processing" },
   { name: "Deep Learning", slug: "deep learning" },
+  { name: "MLOps", slug: "mlops" },
+  { name: "Reinforcement Learning", slug: "reinforcement learning" },
 ];
 
 export default function PaperReadingBlogPage() {

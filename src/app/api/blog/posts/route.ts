@@ -31,7 +31,13 @@ export async function GET(request: NextRequest) {
     const posts: BlogPost[] = [];
 
     // Helper function to read markdown files from a directory
-    const readMarkdownFiles = (dirPath: string, categoryPrefix?: string) => {
+    // Structure: content/blog/{category}/{subcategory-slug}/{file}.md
+    const readMarkdownFiles = (
+      dirPath: string,
+      categoryPrefix?: string,
+      subcategorySlug?: string,
+      basePath?: string
+    ) => {
       if (!fs.existsSync(dirPath)) return;
 
       const files = fs.readdirSync(dirPath, { withFileTypes: true });
@@ -39,10 +45,35 @@ export async function GET(request: NextRequest) {
       for (const file of files) {
         // Process directories recursively
         if (file.isDirectory()) {
-          readMarkdownFiles(
-            path.join(dirPath, file.name),
-            file.name // Use directory name as category
-          );
+          const newBasePath = basePath
+            ? `${basePath}/${file.name}`
+            : file.name;
+
+          if (!categoryPrefix) {
+            // First level - this is a category folder
+            readMarkdownFiles(
+              path.join(dirPath, file.name),
+              file.name,
+              undefined,
+              newBasePath
+            );
+          } else if (!subcategorySlug) {
+            // Second level - this is a subcategory folder
+            readMarkdownFiles(
+              path.join(dirPath, file.name),
+              categoryPrefix,
+              file.name,
+              newBasePath
+            );
+          } else {
+            // Deeper nesting
+            readMarkdownFiles(
+              path.join(dirPath, file.name),
+              categoryPrefix,
+              subcategorySlug,
+              newBasePath
+            );
+          }
         }
         // Process markdown files
         else if (file.name.endsWith(".md")) {
@@ -57,11 +88,9 @@ export async function GET(request: NextRequest) {
             categoryPrefix || metadata.category || "General"
           );
 
-          // Generate slug in format: category/post-name
+          // Generate slug in format: category/subcategory/post-name or category/post-name
           const slugBase = file.name.replace(/\.md$/, "");
-          const slug = categoryPrefix
-            ? `${categoryPrefix}/${slugBase}`
-            : slugBase;
+          const slug = basePath ? `${basePath}/${slugBase}` : slugBase;
 
           // Extract excerpt from content if not specified in frontmatter
           let excerpt = metadata.excerpt || "";

@@ -19,9 +19,39 @@ export async function GET(
     }
 
     const contentDirectory = path.join(process.cwd(), "content", "blog");
-    const filePath = path.join(contentDirectory, `${slug}.md`);
 
-    if (!fs.existsSync(filePath)) {
+    // Function to search for the file based on slug parts (supports nested structure)
+    const findArticleFile = (
+      baseDir: string,
+      slugParts: string[]
+    ): string | null => {
+      if (slugParts.length === 0) return null;
+
+      // If we're at the last part of the slug, look for a matching markdown file
+      if (slugParts.length === 1) {
+        const fileName = `${slugParts[0]}.md`;
+        const filePath = path.join(baseDir, fileName);
+
+        if (fs.existsSync(filePath)) {
+          return filePath;
+        }
+        return null;
+      }
+
+      // Otherwise, check if the first part is a directory and recurse
+      const dirPath = path.join(baseDir, slugParts[0]);
+      if (fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
+        return findArticleFile(dirPath, slugParts.slice(1));
+      }
+
+      return null;
+    };
+
+    // Split the slug into parts and search for the file
+    const slugParts = slug.split("/");
+    const filePath = findArticleFile(contentDirectory, slugParts);
+
+    if (!filePath) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
 

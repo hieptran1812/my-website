@@ -151,6 +151,7 @@ export async function GET(request: NextRequest) {
     const readArticlesFromDir = (
       dir: string,
       currentCategory?: string,
+      currentSubcategorySlug?: string,
       basePath = ""
     ) => {
       const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -160,7 +161,19 @@ export async function GET(request: NextRequest) {
           const newBasePath = basePath
             ? `${basePath}/${entry.name}`
             : entry.name;
-          readArticlesFromDir(fullPath, entry.name, newBasePath);
+
+          // Determine if this is a category or subcategory folder
+          // First level directories are categories, second level are subcategories
+          if (!currentCategory) {
+            // This is a category folder
+            readArticlesFromDir(fullPath, entry.name, undefined, newBasePath);
+          } else if (!currentSubcategorySlug) {
+            // This is a subcategory folder
+            readArticlesFromDir(fullPath, currentCategory, entry.name, newBasePath);
+          } else {
+            // Deeper nesting - continue with current category/subcategory
+            readArticlesFromDir(fullPath, currentCategory, currentSubcategorySlug, newBasePath);
+          }
         } else if (entry.name.endsWith(".md")) {
           const fileKey = basePath ? `${basePath}/${entry.name}` : entry.name;
 
