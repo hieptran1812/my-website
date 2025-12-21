@@ -10,6 +10,9 @@ const titles = [
   "an AI Engineer",
   "a Problem Solver",
   "a Tech Enthusiast",
+  "a Lifelong Learner",
+  "a Builder",
+  "a Nerd",
 ];
 
 type Particle = {
