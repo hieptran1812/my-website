@@ -55,13 +55,8 @@ export class TextHighlighter {
     this.words = [];
     this.paragraphs = [];
 
-    // Check if content has already been processed
     const existingWordSpans = this.container.querySelectorAll(".word-span");
     if (existingWordSpans.length > 0) {
-      console.log(
-        "Content already processed with word spans, using existing structure"
-      );
-      // If already processed, just build mappings and generate text
       this.buildWordAndParagraphMappings();
       this.generateReadableText();
       return;
@@ -334,6 +329,56 @@ export class TextHighlighter {
           charIndex >= paragraph.startIndex && charIndex <= paragraph.endIndex
       ) || null
     );
+  }
+
+  /**
+   * Get word index by character index in readable text
+   * This maps a character position to the corresponding word index
+   */
+  public getWordIndexByCharPosition(charPosition: number): number {
+    // Find the word that contains this character position
+    for (let i = 0; i < this.words.length; i++) {
+      const word = this.words[i];
+      if (charPosition >= word.startIndex && charPosition <= word.endIndex) {
+        return i;
+      }
+      // If we've passed the position, return the previous word
+      if (word.startIndex > charPosition && i > 0) {
+        return i - 1;
+      }
+    }
+    // If position is beyond all words, return the last word
+    return Math.max(0, this.words.length - 1);
+  }
+
+  /**
+   * Highlight word by its index in the words array
+   */
+  public highlightWordByIndex(wordIndex: number): void {
+    if (wordIndex < 0 || wordIndex >= this.words.length) return;
+
+    const wordInfo = this.words[wordIndex];
+    if (!wordInfo) return;
+
+    // Clear previous word highlight
+    this.clearWordHighlight();
+
+    // Apply word highlight
+    this.currentWordElement = wordInfo.element;
+    this.currentWordElement.classList.add(this.WORD_HIGHLIGHT_CLASS);
+    this.currentWordElement.style.backgroundColor = this.colors.wordHighlight;
+
+    // Always update paragraph highlighting when word changes
+    const paragraphInfo = this.paragraphs[wordInfo.paragraphIndex];
+    if (paragraphInfo) {
+      if (wordInfo.paragraphIndex !== this.currentParagraphIndex) {
+        this.highlightParagraph(paragraphInfo);
+        this.currentParagraphIndex = wordInfo.paragraphIndex;
+      } else if (!this.currentParagraphElement) {
+        this.highlightParagraph(paragraphInfo);
+        this.currentParagraphIndex = wordInfo.paragraphIndex;
+      }
+    }
   }
 
   /**

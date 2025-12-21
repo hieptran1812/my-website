@@ -28,7 +28,12 @@ export default function TradingBlogPage() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const { articles } = await getMarkdownArticlesByCategory("trading");
+        // Use a high limit to fetch all articles (default is 50)
+        const { articles } = await getMarkdownArticlesByCategory(
+          "trading",
+          1,
+          500 // Fetch up to 500 articles
+        );
         // Ensure articles is always an array
         setAllArticles(Array.isArray(articles) ? articles : []);
       } catch (error) {

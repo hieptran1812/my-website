@@ -32,8 +32,11 @@ export default function MachineLearningBlogPage() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
+        // Use a high limit to fetch all articles (default is 50)
         const { articles } = await getMarkdownArticlesByCategory(
-          "machine-learning"
+          "machine-learning",
+          1,
+          500 // Fetch up to 500 articles
         );
         // Ensure articles is always an array
         setAllArticles(Array.isArray(articles) ? articles : []);
