@@ -446,54 +446,59 @@ export default function BlogReader({
       {/* Table of Contents - Fixed Left Sidebar */}
       {tocItems.length > 0 && (
         <div
-          className={`fixed left-4 z-40 hidden xl:block transition-all duration-700 ease-out ${
+          className={`fixed left-4 z-40 hidden xl:block ${
             tocPosition === "center"
               ? "top-1/2 -translate-y-1/2"
               : "top-24 translate-y-0"
-          } ${tocCollapsed ? "w-12" : "w-64"}`}
+          }`}
+          style={{
+            width: tocCollapsed ? "48px" : "256px",
+            transition: "width 400ms cubic-bezier(0.4, 0, 0.2, 1), top 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
         >
           <div
-            className={`p-4 rounded-xl shadow-lg border backdrop-blur-md transition-all duration-300 max-h-[65vh] overflow-y-auto toc-scrollbar ${
+            className={`rounded-xl shadow-lg border backdrop-blur-md max-h-[65vh] toc-scrollbar ${
               showToc
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 -translate-x-full"
-            }`}
+            } ${tocCollapsed ? "overflow-hidden p-2" : "overflow-y-auto p-4"}`}
             style={{
               backgroundColor: "var(--background)/95",
               borderColor: "var(--border)",
+              transition: "all 400ms cubic-bezier(0.4, 0, 0.2, 1)",
             }}
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3
-                className={`text-sm font-semibold ${
-                  tocCollapsed ? "hidden" : "block"
-                }`}
-                style={{ color: "var(--text-primary)" }}
+            {/* Collapsed State - Icon Button */}
+            {tocCollapsed && (
+              <div
+                className="flex flex-col items-center justify-center"
+                style={{
+                  opacity: tocCollapsed ? 1 : 0,
+                  transition: "opacity 300ms cubic-bezier(0.4, 0, 0.2, 1)",
+                }}
               >
-                Table of Contents
-              </h3>
-              <div className="flex items-center gap-1">
                 <button
-                  onClick={() => setTocCollapsed(!tocCollapsed)}
-                  className="p-1 rounded transition-colors duration-200"
+                  onClick={() => setTocCollapsed(false)}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center group"
                   style={{
                     color: "var(--text-secondary)",
+                    backgroundColor: "var(--surface)",
+                    transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "var(--surface-accent)";
+                    e.currentTarget.style.backgroundColor = "var(--surface-accent)";
                     e.currentTarget.style.color = "var(--accent)";
+                    e.currentTarget.style.transform = "scale(1.05)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.backgroundColor = "var(--surface)";
                     e.currentTarget.style.color = "var(--text-secondary)";
+                    e.currentTarget.style.transform = "scale(1)";
                   }}
-                  aria-label={
-                    tocCollapsed
-                      ? "Expand table of contents"
-                      : "Collapse table of contents"
-                  }
+                  aria-label="Expand table of contents"
+                  title="Table of Contents"
                 >
+                  {/* TOC icon - list with indentation */}
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -504,61 +509,107 @@ export default function BlogReader({
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      d={
-                        tocCollapsed
-                          ? "M13 5l7 7-7 7M5 5l7 7-7 7" // Expand icon (chevrons pointing right)
-                          : "M11 19l-7-7 7-7M19 19l-7-7 7-7" // Collapse icon (chevrons pointing left)
-                      }
+                      d="M4 6h16M4 12h12M4 18h8"
                     />
                   </svg>
                 </button>
               </div>
-            </div>
+            )}
 
-            <nav className={`space-y-1 ${tocCollapsed ? "hidden" : "block"}`}>
-              {tocItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left py-2 px-3 rounded text-sm transition-all duration-200 hover:scale-105 ${
-                    activeSection === item.id ? "font-medium" : "font-normal"
-                  }`}
-                  style={{
-                    paddingLeft: `${12 + (item.level - 1) * 12}px`,
-                    backgroundColor:
-                      activeSection === item.id
-                        ? "var(--surface-accent)"
-                        : "transparent",
-                    color:
-                      activeSection === item.id
-                        ? "var(--accent)"
-                        : "var(--text-secondary)",
-                    borderLeft:
-                      activeSection === item.id
-                        ? `2px solid var(--accent)`
-                        : `2px solid transparent`,
-                  }}
-                  onMouseEnter={(e) => {
-                    if (activeSection !== item.id) {
-                      e.currentTarget.style.backgroundColor = "var(--surface)";
-                      e.currentTarget.style.color = "var(--text-primary)";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (activeSection !== item.id) {
+            {/* Expanded State - Full TOC */}
+            {!tocCollapsed && (
+              <>
+                <div className="flex items-center justify-between mb-4">
+                  <h3
+                    className="text-sm font-semibold whitespace-nowrap"
+                    style={{
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    Table of Contents
+                  </h3>
+
+                  <button
+                    onClick={() => setTocCollapsed(true)}
+                    className="p-1.5 rounded-lg"
+                    style={{
+                      color: "var(--text-secondary)",
+                      transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "var(--surface-accent)";
+                      e.currentTarget.style.color = "var(--accent)";
+                      e.currentTarget.style.transform = "scale(1.1)";
+                    }}
+                    onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = "transparent";
                       e.currentTarget.style.color = "var(--text-secondary)";
-                    }
-                  }}
-                  title={item.title}
-                >
-                  <span
-                    className="line-clamp-2 leading-tight toc-item-title"
-                    dangerouslySetInnerHTML={{ __html: item.titleHtml }}
-                  />
-                </button>
-              ))}
-            </nav>
+                      e.currentTarget.style.transform = "scale(1)";
+                    }}
+                    aria-label="Collapse table of contents"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M11 19l-7-7 7-7M19 19l-7-7 7-7"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <nav className="space-y-1">
+                  {tocItems.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`block w-full text-left py-2 px-3 rounded text-sm transition-all duration-200 hover:scale-105 ${
+                        activeSection === item.id ? "font-medium" : "font-normal"
+                      }`}
+                      style={{
+                        paddingLeft: `${12 + (item.level - 1) * 12}px`,
+                        backgroundColor:
+                          activeSection === item.id
+                            ? "var(--surface-accent)"
+                            : "transparent",
+                        color:
+                          activeSection === item.id
+                            ? "var(--accent)"
+                            : "var(--text-secondary)",
+                        borderLeft:
+                          activeSection === item.id
+                            ? `2px solid var(--accent)`
+                            : `2px solid transparent`,
+                      }}
+                      onMouseEnter={(e) => {
+                        if (activeSection !== item.id) {
+                          e.currentTarget.style.backgroundColor = "var(--surface)";
+                          e.currentTarget.style.color = "var(--text-primary)";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (activeSection !== item.id) {
+                          e.currentTarget.style.backgroundColor = "transparent";
+                          e.currentTarget.style.color = "var(--text-secondary)";
+                        }
+                      }}
+                      title={item.title}
+                    >
+                      <span
+                        className="line-clamp-2 leading-tight toc-item-title"
+                        dangerouslySetInnerHTML={{ __html: item.titleHtml }}
+                      />
+                    </button>
+                  ))}
+                </nav>
+              </>
+            )}
           </div>
         </div>
       )}
@@ -707,7 +758,16 @@ export default function BlogReader({
       )}
 
       {/* Reading Controls - Fixed Position */}
-      <div className="fixed top-20 right-4 z-50 hidden lg:block">
+      <div
+        className={`fixed right-4 z-50 hidden lg:block ${
+          tocPosition === "center"
+            ? "top-1/2 -translate-y-1/2"
+            : "top-24 translate-y-0"
+        }`}
+        style={{
+          transition: "top 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+        }}
+      >
         <div
           className="p-4 rounded-xl shadow-lg border backdrop-blur-md"
           style={{

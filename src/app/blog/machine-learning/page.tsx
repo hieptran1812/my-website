@@ -17,10 +17,12 @@ const machineLearningSubtopics = [
   { name: "AI Agent", slug: "ai agent" },
   { name: "AI Interpretability", slug: "ai interpretability" },
   { name: "Machine Learning", slug: "machine learning" },
-  { name: "Speech Processing", slug: "speech processing" },
+  { name: "Signal Processing", slug: "signal processing" },
   { name: "Deep Learning", slug: "deep learning" },
   { name: "Training Techniques", slug: "training techniques" },
   { name: "Open Source Library", slug: "open source library" },
+  { name: "MLOps", slug: "mlops" },
+  { name: "Mathematics", slug: "mathematics" },
 ];
 
 export default function MachineLearningBlogPage() {
