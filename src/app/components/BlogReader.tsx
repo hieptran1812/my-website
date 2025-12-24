@@ -457,11 +457,11 @@ export default function BlogReader({
           }}
         >
           <div
-            className={`rounded-xl shadow-lg border backdrop-blur-md max-h-[65vh] toc-scrollbar ${
+            className={`rounded-xl shadow-lg border backdrop-blur-md max-h-[65vh] flex flex-col ${
               showToc
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 -translate-x-full"
-            } ${tocCollapsed ? "overflow-hidden p-2" : "overflow-y-auto p-4"}`}
+            } ${tocCollapsed ? "overflow-hidden p-2" : "overflow-hidden"}`}
             style={{
               backgroundColor: "var(--background)/95",
               borderColor: "var(--border)",
@@ -519,7 +519,13 @@ export default function BlogReader({
             {/* Expanded State - Full TOC */}
             {!tocCollapsed && (
               <>
-                <div className="flex items-center justify-between mb-4">
+                {/* Fixed Header */}
+                <div
+                  className="flex items-center justify-between p-4 pb-3 flex-shrink-0 border-b"
+                  style={{
+                    borderColor: "var(--border)",
+                  }}
+                >
                   <h3
                     className="text-sm font-semibold whitespace-nowrap"
                     style={{
@@ -564,7 +570,8 @@ export default function BlogReader({
                   </button>
                 </div>
 
-                <nav className="space-y-1">
+                {/* Scrollable TOC List */}
+                <nav className="space-y-1 p-4 pt-3 overflow-y-auto flex-1 toc-scrollbar">
                   {tocItems.map((item) => (
                     <button
                       key={item.id}
