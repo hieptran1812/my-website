@@ -58,6 +58,7 @@ export default function BlogSection() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [totalArticles, setTotalArticles] = useState<number>(0);
   const sectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -116,6 +117,9 @@ export default function BlogSection() {
       if (!Array.isArray(blogPosts)) {
         throw new Error("Invalid response format from API");
       }
+
+      // Set total articles count
+      setTotalArticles(blogPosts.length);
 
       // Convert blog posts to Article format, take latest articles
       const latestArticles: Article[] = blogPosts
@@ -386,7 +390,7 @@ export default function BlogSection() {
             >
               <div className="flex items-center gap-1">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                <span>50+ Articles</span>
+                <span>{totalArticles > 20 ? "20+" : totalArticles} Articles</span>
               </div>
               <div className="w-1 h-1 bg-current rounded-full opacity-50"></div>
               <div className="flex items-center gap-1">
