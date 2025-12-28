@@ -27,6 +27,7 @@ interface Article {
   link: string;
   category: string;
   readTime: string;
+  tags: string[];
 }
 
 // Convert BlogPostMetadata to Article format
@@ -39,6 +40,7 @@ function convertToArticle(post: BlogPostMetadata): Article {
     link: `/blog/${post.slug}`, // This now includes the full category/post-name format
     category: post.category,
     readTime: post.readTime,
+    tags: post.tags || [],
   };
 }
 
@@ -57,7 +59,7 @@ function convertToLibArticle(
     subcategory: article.category,
     date: article.date,
     readTime: article.readTime,
-    tags: [],
+    tags: article.tags || [],
     difficulty: "Intermediate" as const,
     slug: originalSlug || article.link.split("/").pop() || "unknown",
     featured: false,

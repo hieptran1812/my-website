@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "../ThemeProvider";
 import CollectionTag from "../../components/CollectionTag";
+import { TagList } from "../../components/TagBadge";
 import "katex/dist/katex.min.css";
 import MathJax from "./MathJax";
 import "./BlogContent.css"; // Re-enabled for proper styling
@@ -1302,32 +1303,12 @@ export default function BlogReader({
 
               {/* Tags */}
               {tags.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 rounded text-xs font-medium border transition-colors duration-200"
-                      style={{
-                        backgroundColor: isReadingMode
-                          ? theme === "dark"
-                            ? "rgba(82, 64, 61, 0.3)"
-                            : "rgba(254, 243, 199, 0.5)"
-                          : "var(--surface)",
-                        borderColor: isReadingMode
-                          ? theme === "dark"
-                            ? "#52403d"
-                            : "#f3e8ff"
-                          : "var(--border)",
-                        color: isReadingMode
-                          ? theme === "dark"
-                            ? "#fbbf24"
-                            : "#92400e"
-                          : "var(--text-secondary)",
-                      }}
-                    >
-                      #{tag}
-                    </span>
-                  ))}
+                <div className="flex flex-wrap justify-center gap-2 mb-6">
+                  <TagList
+                    tags={tags}
+                    variant="default"
+                    clickable={true}
+                  />
                 </div>
               )}
             </header>

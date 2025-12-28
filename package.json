@@ -11,6 +11,7 @@
     "postinstall": "prisma generate",
     "vercel-build": "prisma generate && next build",
     "update-readtime": "tsx scripts/updateReadTime.ts",
+    "update-paper-references": "tsx scripts/updatePaperReferences.ts",
     "blog-report": "tsx scripts/blogAnalytics.ts report",
     "blog-validate": "tsx scripts/blogAnalytics.ts validate"
   },

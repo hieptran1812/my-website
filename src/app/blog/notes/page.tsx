@@ -8,6 +8,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
+import { TagList } from "@/components/TagBadge";
 
 export default function NotesBlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -359,19 +360,17 @@ export default function NotesBlogPage() {
 
                             {/* Tags under title */}
                             {article.tags && article.tags.length > 0 && (
-                              <div className="flex flex-wrap gap-1 mb-2">
-                                {article.tags.slice(0, 1).map((tag) => (
-                                  <span
-                                    key={tag}
-                                    className="px-1.5 py-0.5 text-xs rounded-full"
-                                    style={{
-                                      backgroundColor: "var(--accent-subtle)",
-                                      color: "var(--accent)",
-                                    }}
-                                  >
-                                    {tag}
-                                  </span>
-                                ))}
+                              <div
+                                className="mb-2"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <TagList
+                                  tags={article.tags}
+                                  maxTags={1}
+                                  variant="compact"
+                                  clickable={true}
+                                  showMoreCount={false}
+                                />
                               </div>
                             )}
 
@@ -551,19 +550,16 @@ export default function NotesBlogPage() {
 
                             {/* Tags under title */}
                             {article.tags && article.tags.length > 0 && (
-                              <div className="flex flex-wrap gap-1 mb-3">
-                                {article.tags.slice(0, 2).map((tag) => (
-                                  <span
-                                    key={tag}
-                                    className="px-2 py-1 text-xs rounded-full"
-                                    style={{
-                                      backgroundColor: "var(--accent-subtle)",
-                                      color: "var(--accent)",
-                                    }}
-                                  >
-                                    {tag}
-                                  </span>
-                                ))}
+                              <div
+                                className="mb-3"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <TagList
+                                  tags={article.tags}
+                                  maxTags={2}
+                                  variant="compact"
+                                  clickable={true}
+                                />
                               </div>
                             )}
 

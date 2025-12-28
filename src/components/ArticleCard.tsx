@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Article } from "@/lib/blog";
 import FadeInWrapper from "./FadeInWrapper";
 import CollectionTag from "./CollectionTag";
+import { TagList } from "./TagBadge";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 
 interface ArticleCardProps {
@@ -122,19 +123,12 @@ export default function ArticleCard({
 
               {/* Tags under title */}
               {article.tags && article.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {article.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-xs font-medium rounded-full"
-                      style={{
-                        backgroundColor: "var(--accent-subtle)",
-                        color: "var(--accent)",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <div className="mb-4" onClick={(e) => e.stopPropagation()}>
+                  <TagList
+                    tags={article.tags}
+                    variant="default"
+                    clickable={true}
+                  />
                 </div>
               )}
 
@@ -254,19 +248,14 @@ export default function ArticleCard({
 
               {/* Tags under title */}
               {article.tags && article.tags.length > 0 && (
-                <div className="flex flex-wrap gap-1 mb-3">
-                  {article.tags.slice(0, 2).map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 text-xs rounded-full"
-                      style={{
-                        backgroundColor: "var(--accent-subtle)",
-                        color: "var(--accent)",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <div className="mb-3" onClick={(e) => e.stopPropagation()}>
+                  <TagList
+                    tags={article.tags}
+                    maxTags={2}
+                    variant="compact"
+                    clickable={true}
+                    showMoreCount={false}
+                  />
                 </div>
               )}
 
@@ -373,19 +362,13 @@ export default function ArticleCard({
 
             {/* Tags under title */}
             {article.tags && article.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1 mb-3">
-                {article.tags.slice(0, 3).map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-1 text-xs rounded-full"
-                    style={{
-                      backgroundColor: "var(--accent-subtle)",
-                      color: "var(--accent)",
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
+              <div className="mb-3" onClick={(e) => e.stopPropagation()}>
+                <TagList
+                  tags={article.tags}
+                  maxTags={3}
+                  variant="compact"
+                  clickable={true}
+                />
               </div>
             )}
 
