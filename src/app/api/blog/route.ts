@@ -19,6 +19,7 @@ interface BlogPostMetadata {
   tags: string[];
   image: string;
   excerpt: string;
+  collection?: string;
   seo?: {
     type: string;
     datePublished: string;
@@ -73,21 +74,55 @@ export async function GET(request: Request) {
     // Get all blog posts from all category folders
     let posts: BlogPostMetadata[] = [];
 
+    // Helper function to recursively get all .md files
+    const getAllMarkdownFiles = (
+      dir: string,
+      baseCategory: string
+    ): { filePath: string; relativePath: string; category: string }[] => {
+      const results: {
+        filePath: string;
+        relativePath: string;
+        category: string;
+      }[] = [];
+
+      const items = fs.readdirSync(dir, { withFileTypes: true });
+
+      for (const item of items) {
+        const fullPath = path.join(dir, item.name);
+
+        if (item.isDirectory()) {
+          // Recursively search subdirectories
+          results.push(...getAllMarkdownFiles(fullPath, baseCategory));
+        } else if (item.isFile() && item.name.endsWith(".md")) {
+          // Calculate relative path from category folder
+          const categoryPath = path.join(contentDirectory, baseCategory);
+          const relativePath = path.relative(categoryPath, fullPath);
+          // Remove .md extension and use as slug
+          const slug = relativePath.replace(/\.md$/, "");
+
+          results.push({
+            filePath: fullPath,
+            relativePath: slug,
+            category: baseCategory,
+          });
+        }
+      }
+
+      return results;
+    };
+
     // Read directories inside blog folder (categories)
     const categoryFolders = fs
       .readdirSync(contentDirectory, { withFileTypes: true })
       .filter((dirent) => dirent.isDirectory())
       .map((dirent) => dirent.name);
 
-    // Process files from each category folder
+    // Process files from each category folder (including nested subfolders)
     for (const categoryFolder of categoryFolders) {
       const categoryPath = path.join(contentDirectory, categoryFolder);
-      const files = fs
-        .readdirSync(categoryPath)
-        .filter((file) => file.endsWith(".md"));
+      const markdownFiles = getAllMarkdownFiles(categoryPath, categoryFolder);
 
-      for (const filename of files) {
-        const filePath = path.join(categoryPath, filename);
+      for (const { filePath, relativePath, category } of markdownFiles) {
         const fileContents = fs.readFileSync(filePath, "utf8");
         const { data, content } = matter(fileContents);
 
@@ -95,19 +130,57 @@ export async function GET(request: Request) {
         const automaticReadTime = calculateReadTimeWithTags(
           content,
           data.tags || [],
-          data.category || categoryFolder
+          data.category || category
         );
 
+        // Generate auto-excerpt from content if not provided
+        let excerpt = data.excerpt || data.description || "";
+        if (!excerpt || excerpt.trim() === "") {
+          // Extract first meaningful paragraph from content (skip headers, images, etc.)
+          const lines = content.split("\n").filter((line) => {
+            const trimmed = line.trim();
+            return (
+              trimmed.length > 0 &&
+              !trimmed.startsWith("#") &&
+              !trimmed.startsWith("!") &&
+              !trimmed.startsWith("---") &&
+              !trimmed.startsWith("```") &&
+              !trimmed.startsWith("|") &&
+              !trimmed.match(/^\[.*\]\(.*\)$/) // Skip standalone links
+            );
+          });
+
+          // Get first paragraph text
+          const firstParagraph = lines.slice(0, 3).join(" ");
+          if (firstParagraph.length > 0) {
+            // Clean up markdown syntax and limit to ~200 chars
+            excerpt = firstParagraph
+              .replace(/\*\*(.*?)\*\*/g, "$1") // Remove bold
+              .replace(/\*(.*?)\*/g, "$1") // Remove italic
+              .replace(/`(.*?)`/g, "$1") // Remove inline code
+              .replace(/\[(.*?)\]\(.*?\)/g, "$1") // Replace links with text
+              .replace(/\s+/g, " ") // Normalize whitespace
+              .trim();
+
+            if (excerpt.length > 200) {
+              excerpt = excerpt.substring(0, 197) + "...";
+            }
+          } else {
+            excerpt = "No excerpt available";
+          }
+        }
+
         posts.push({
-          slug: `${categoryFolder}/${filename.replace(".md", "")}`,
+          slug: `${category}/${relativePath}`,
           title: data.title || "Untitled",
           publishDate: data.publishDate || data.date || "2024-01-01",
           readTime: data.readTime || automaticReadTime.readTime,
-          category: data.category || categoryFolder,
+          category: data.category || category,
           author: data.author || "Anonymous",
           tags: data.tags || [],
           image: data.image || "/images/default-blog.jpg",
-          excerpt: data.excerpt || data.description || "No excerpt available",
+          excerpt,
+          collection: data.collection || data.subcategory,
           // Add SEO-friendly JSON-LD data
           seo: {
             type: "BlogPosting",

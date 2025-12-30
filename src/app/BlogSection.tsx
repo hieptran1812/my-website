@@ -100,8 +100,8 @@ export default function BlogSection() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
 
-      // Fetch latest blog posts from API
-      const response = await fetch("/api/blog", {
+      // Fetch latest blog posts from API (with trailing slash to avoid redirect)
+      const response = await fetch("/api/blog/", {
         signal: controller.signal,
       });
 
