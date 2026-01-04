@@ -15,6 +15,7 @@ import type {
 } from "../../components/utils/SpeechReader";
 import { formatDate } from "../../lib/dateUtils";
 import BlogGraphSidebar from "./BlogGraphSidebar";
+import BlogGraphView from "./BlogGraphView";
 
 interface TocItem {
   id: string;
@@ -60,6 +61,7 @@ export default function BlogReader({
   const [sidebarBottomOffset, setSidebarBottomOffset] = useState<number>(0);
   const [showMobileReadingOptions, setShowMobileReadingOptions] =
     useState(false);
+  const [showMobileGraph, setShowMobileGraph] = useState(false);
 
   // Text-to-speech states
   const [isPlaying, setIsPlaying] = useState(false);
@@ -1848,9 +1850,164 @@ export default function BlogReader({
                 </div>
               )}
             </div>
+
+            {/* Related Articles / Interactive Graph Button */}
+            <div
+              className="border-t pt-4 mt-4"
+              style={{ borderColor: "var(--border)" }}
+            >
+              <button
+                onClick={() => {
+                  setShowMobileReadingOptions(false);
+                  setShowMobileGraph(true);
+                }}
+                className="w-full py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-200"
+                style={{
+                  backgroundColor: "var(--surface)",
+                  color: "var(--text-primary)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--surface-accent)";
+                  e.currentTarget.style.color = "var(--accent)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--surface)";
+                  e.currentTarget.style.color = "var(--text-primary)";
+                }}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                  />
+                </svg>
+                <span className="font-medium">View Related Articles</span>
+              </button>
+            </div>
           </div>
         )}
       </div>
+
+      {/* Mobile Interactive Graph Modal */}
+      {showMobileGraph && (
+        <div
+          className="lg:hidden fixed inset-0 z-[60]"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowMobileGraph(false);
+            }
+          }}
+        >
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
+          />
+
+          {/* Modal Content */}
+          <div
+            className="absolute inset-4 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            style={{
+              backgroundColor: "var(--background)",
+              border: "1px solid var(--border)",
+            }}
+          >
+            {/* Header */}
+            <div
+              className="flex items-center justify-between p-4 border-b"
+              style={{ borderColor: "var(--border)" }}
+            >
+              <div className="flex items-center gap-2">
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  style={{ color: "var(--accent)" }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                  />
+                </svg>
+                <h3
+                  className="text-lg font-semibold"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  Related Articles
+                </h3>
+              </div>
+              <button
+                onClick={() => setShowMobileGraph(false)}
+                className="p-2 rounded-lg transition-colors duration-200"
+                style={{ color: "var(--text-secondary)" }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--surface-accent)";
+                  e.currentTarget.style.color = "var(--accent)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.color = "var(--text-secondary)";
+                }}
+                aria-label="Close graph"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Graph Container */}
+            <div
+              className="flex-1 relative"
+              style={{
+                backgroundColor: theme === "dark" ? "#1a1a2e" : "#f8fafc",
+              }}
+            >
+              <BlogGraphView
+                currentSlug={postSlug}
+                isExpanded={false}
+                theme={theme}
+              />
+            </div>
+
+            {/* Footer with instructions */}
+            <div
+              className="p-3 border-t text-center"
+              style={{
+                borderColor: "var(--border)",
+                backgroundColor: "var(--surface)",
+              }}
+            >
+              <p
+                className="text-xs"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Drag to pan • Pinch to zoom • Tap node to navigate
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Prevent duplicate TOC on small screens */}
       {tocItems.length > 0 && !isSmallScreen && showToc && (
