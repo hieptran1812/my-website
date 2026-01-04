@@ -17,9 +17,11 @@
   },
   "dependencies": {
     "@prisma/client": "^6.9.0",
+    "@types/d3": "^7.4.3",
     "@types/nodemailer": "^6.4.17",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
+    "d3": "^7.9.0",
     "dotenv": "^16.5.0",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.22",

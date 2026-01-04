@@ -15,6 +15,7 @@ import type {
 } from "../../components/utils/SpeechReader";
 import BlogShareSection from "./BlogShareSection";
 import { formatDate } from "../../lib/dateUtils";
+import BlogGraphSidebar from "./BlogGraphSidebar";
 
 interface TocItem {
   id: string;
@@ -765,9 +766,9 @@ export default function BlogReader({
         </div>
       )}
 
-      {/* Reading Controls - Fixed Position */}
+      {/* Reading Controls - Fixed Position (hidden on xl where graph sidebar shows) */}
       <div
-        className={`fixed right-4 z-50 hidden lg:block ${
+        className={`fixed right-4 z-50 hidden lg:block xl:hidden ${
           tocPosition === "center"
             ? "top-1/2 -translate-y-1/2"
             : "top-24 translate-y-0"
@@ -1156,6 +1157,31 @@ export default function BlogReader({
           </div>
         </div>
       </div>
+
+      {/* Blog Graph Sidebar - Combined Reading Options + Related Articles Network */}
+      <BlogGraphSidebar
+        currentSlug={postSlug}
+        tocPosition={tocPosition}
+        isReadingMode={isReadingMode}
+        onReadingModeToggle={() => setReadingMode(!isReadingMode)}
+        fontSize={fontSize}
+        onFontSizeChange={handleFontSizeChange}
+        lineHeight={lineHeight}
+        onLineHeightChange={handleLineHeightChange}
+        // Audio reading props
+        isPlaying={isPlaying}
+        isPaused={isPaused}
+        progress={progress}
+        duration={duration}
+        remainingTime={remainingTime}
+        onStartSpeech={startSpeech}
+        onPauseSpeech={pauseSpeech}
+        onResumeSpeech={resumeSpeech}
+        onStopSpeech={stopSpeech}
+        onSeekSpeech={seekSpeech}
+        // Theme
+        theme={theme}
+      />
 
       {/* Main Content - Always Centered */}
       <div className="relative z-10 w-full">
