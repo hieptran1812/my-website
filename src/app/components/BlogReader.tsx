@@ -13,7 +13,6 @@ import type {
   SpeechReaderOptions,
   SpeechReaderEvents,
 } from "../../components/utils/SpeechReader";
-import BlogShareSection from "./BlogShareSection";
 import { formatDate } from "../../lib/dateUtils";
 import BlogGraphSidebar from "./BlogGraphSidebar";
 
@@ -58,6 +57,7 @@ export default function BlogReader({
   const [showToc, setShowToc] = useState(true);
   const [tocCollapsed, setTocCollapsed] = useState(false);
   const [tocPosition, setTocPosition] = useState<"center" | "top">("center");
+  const [sidebarBottomOffset, setSidebarBottomOffset] = useState<number>(0);
   const [showMobileReadingOptions, setShowMobileReadingOptions] =
     useState(false);
 
@@ -72,7 +72,6 @@ export default function BlogReader({
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const contentRef = useRef<HTMLDivElement>(null);
-  const observerRef = useRef<IntersectionObserver | null>(null);
   const speechReaderRef = useRef<SpeechReader | null>(null);
 
   // Load reading preferences from localStorage, respecting ThemeProvider's reading mode control
@@ -282,30 +281,60 @@ export default function BlogReader({
     });
 
     setTocItems(items);
-
-    // Set up intersection observer for active section highlighting
-    if (observerRef.current) {
-      observerRef.current.disconnect();
-    }
-
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-100px 0px -66%",
-        threshold: 0,
-      }
-    );
-
-    headings.forEach((heading) => {
-      observerRef.current?.observe(heading);
-    });
   }, []);
+
+  // Update active section based on scroll position - find heading closest to middle of screen
+  useEffect(() => {
+    if (tocItems.length === 0) return;
+
+    const handleScroll = () => {
+      const viewportHeight = window.innerHeight;
+      const viewportMiddle = window.scrollY + viewportHeight / 2;
+
+      // Find the heading closest to the middle of the viewport
+      let closestId = tocItems[0]?.id || "";
+      let closestDistance = Infinity;
+
+      for (let i = 0; i < tocItems.length; i++) {
+        const element = tocItems[i].element;
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const elementMiddle = window.scrollY + rect.top + rect.height / 2;
+          const distance = Math.abs(viewportMiddle - elementMiddle);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestId = tocItems[i].id;
+          }
+        }
+      }
+
+      setActiveSection((prev) => {
+        if (prev !== closestId) {
+          // Auto-scroll TOC to show active item
+          setTimeout(() => {
+            const activeButton = document.querySelector(`[data-toc-id="${closestId}"]`);
+            if (activeButton) {
+              activeButton.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+              });
+            }
+          }, 10);
+        }
+        return closestId;
+      });
+    };
+
+    // Initial check
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [tocItems]);
 
   // Smooth scroll to section
   const scrollToSection = (id: string) => {
@@ -327,9 +356,6 @@ export default function BlogReader({
 
     return () => {
       clearTimeout(timer);
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
     };
   }, [generateToc]);
 
@@ -374,6 +400,14 @@ export default function BlogReader({
       const distanceFromBottom =
         documentHeight - (currentScrollY + viewportHeight);
       const nearBottomThreshold = 300; // Switch when within 300px of bottom
+
+      // Calculate bottom offset when footer is visible to keep sidebars above footer
+      let bottomOffset = 0;
+      if (footerIsVisible && footerTopFromViewport < viewportHeight) {
+        // Calculate how much the sidebar needs to move up to stay above footer
+        bottomOffset = Math.max(0, viewportHeight - footerTopFromViewport + 20); // 20px extra margin
+      }
+      setSidebarBottomOffset(bottomOffset);
 
       // Determine TOC position with hysteresis to prevent flickering
       const shouldSwitchToTop =
@@ -449,13 +483,19 @@ export default function BlogReader({
       {tocItems.length > 0 && (
         <div
           className={`fixed left-4 z-40 hidden xl:block ${
-            tocPosition === "center"
-              ? "top-1/2 -translate-y-1/2"
-              : "top-24 translate-y-0"
+            sidebarBottomOffset > 0
+              ? ""
+              : tocPosition === "center"
+                ? "top-1/2 -translate-y-1/2"
+                : "top-24 translate-y-0"
           }`}
           style={{
             width: tocCollapsed ? "48px" : "256px",
-            transition: "width 400ms cubic-bezier(0.4, 0, 0.2, 1), top 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+            transition: "width 400ms cubic-bezier(0.4, 0, 0.2, 1)",
+            ...(sidebarBottomOffset > 0 ? {
+              top: "auto",
+              bottom: `${sidebarBottomOffset}px`,
+            } : {}),
           }}
         >
           <div
@@ -577,6 +617,7 @@ export default function BlogReader({
                   {tocItems.map((item) => (
                     <button
                       key={item.id}
+                      data-toc-id={item.id}
                       onClick={() => scrollToSection(item.id)}
                       className={`block w-full text-left py-2 px-3 rounded text-sm transition-all duration-200 hover:scale-105 ${
                         activeSection === item.id ? "font-medium" : "font-normal"
@@ -719,6 +760,7 @@ export default function BlogReader({
               {tocItems.map((item) => (
                 <button
                   key={item.id}
+                  data-toc-id={item.id}
                   onClick={() => {
                     scrollToSection(item.id);
                     setShowToc(false);
@@ -769,12 +811,17 @@ export default function BlogReader({
       {/* Reading Controls - Fixed Position (hidden on xl where graph sidebar shows) */}
       <div
         className={`fixed right-4 z-50 hidden lg:block xl:hidden ${
-          tocPosition === "center"
-            ? "top-1/2 -translate-y-1/2"
-            : "top-24 translate-y-0"
+          sidebarBottomOffset > 0
+            ? ""
+            : tocPosition === "center"
+              ? "top-1/2 -translate-y-1/2"
+              : "top-24 translate-y-0"
         }`}
         style={{
-          transition: "top 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+          ...(sidebarBottomOffset > 0 ? {
+            top: "auto",
+            bottom: `${sidebarBottomOffset}px`,
+          } : {}),
         }}
       >
         <div
@@ -1162,6 +1209,7 @@ export default function BlogReader({
       <BlogGraphSidebar
         currentSlug={postSlug}
         tocPosition={tocPosition}
+        sidebarBottomOffset={sidebarBottomOffset}
         isReadingMode={isReadingMode}
         onReadingModeToggle={() => setReadingMode(!isReadingMode)}
         fontSize={fontSize}
@@ -1392,14 +1440,17 @@ export default function BlogReader({
               </MathJax>
             </article>
 
-            {/* Blog Share Section */}
-            {postSlug && <BlogShareSection postSlug={postSlug} title={title} />}
           </div>
         </div>
       </div>
 
       {/* Mobile/Tablet Reading Controls (show on <lg screens) */}
-      <div className="lg:hidden fixed bottom-20 right-4 z-50">
+      <div
+        className="lg:hidden fixed right-4 z-50"
+        style={{
+          bottom: `${Math.max(80, sidebarBottomOffset + 20)}px`,
+        }}
+      >
         {/* Reading Options Toggle Button */}
         <button
           onClick={() => setShowMobileReadingOptions(!showMobileReadingOptions)}

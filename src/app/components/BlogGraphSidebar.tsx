@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import BlogGraphView from "./BlogGraphView";
 
 interface BlogGraphSidebarProps {
   currentSlug?: string;
   tocPosition?: "center" | "top";
+  sidebarBottomOffset?: number;
   // Reading options props
   isReadingMode?: boolean;
   onReadingModeToggle?: () => void;
@@ -31,6 +32,7 @@ interface BlogGraphSidebarProps {
 export default function BlogGraphSidebar({
   currentSlug,
   tocPosition = "center",
+  sidebarBottomOffset = 0,
   isReadingMode = false,
   onReadingModeToggle,
   fontSize = 18,
@@ -53,6 +55,42 @@ export default function BlogGraphSidebar({
 }: BlogGraphSidebarProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileActiveTab, setMobileActiveTab] = useState<"reading" | "graph">("reading");
+  const [graphKey, setGraphKey] = useState(0);
+  const graphContainerRef = useRef<HTMLDivElement>(null);
+
+  // Re-render graph when sidebar expands from collapsed state
+  useEffect(() => {
+    if (!isCollapsed) {
+      // Small delay to ensure container dimensions are correct after transition
+      const timer = setTimeout(() => {
+        setGraphKey((prev) => prev + 1);
+      }, 450); // Match the transition duration
+      return () => clearTimeout(timer);
+    }
+  }, [isCollapsed]);
+
+  // Re-render graph when mobile menu opens to graph tab
+  useEffect(() => {
+    if (isMobileMenuOpen && mobileActiveTab === "graph") {
+      const timer = setTimeout(() => {
+        setGraphKey((prev) => prev + 1);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isMobileMenuOpen, mobileActiveTab]);
+
+  // Close mobile menu when pressing escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, []);
 
   const handleFontSizeChange = (newSize: number) => {
     if (onFontSizeChange) {
@@ -75,15 +113,20 @@ export default function BlogGraphSidebar({
       {/* Sidebar Widget - Combined Reading Options + Graph */}
       <div
         className={`fixed right-4 z-40 hidden xl:block ${
-          tocPosition === "center"
-            ? "top-1/2 -translate-y-1/2"
-            : "top-24 translate-y-0"
+          sidebarBottomOffset > 0
+            ? ""
+            : tocPosition === "center"
+              ? "top-1/2 -translate-y-1/2"
+              : "top-24 translate-y-0"
         }`}
         style={{
           width: isCollapsed ? "48px" : "280px",
           maxHeight: "calc(100vh - 120px)",
-          transition:
-            "width 400ms cubic-bezier(0.4, 0, 0.2, 1), top 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+          transition: "width 400ms cubic-bezier(0.4, 0, 0.2, 1)",
+          ...(sidebarBottomOffset > 0 ? {
+            top: "auto",
+            bottom: `${sidebarBottomOffset}px`,
+          } : {}),
         }}
       >
         <div
@@ -599,13 +642,16 @@ export default function BlogGraphSidebar({
 
                 {/* Graph Container */}
                 <div
-                  className="relative overflow-hidden"
+                  ref={graphContainerRef}
+                  className="relative w-full"
                   style={{
                     height: "280px",
                     backgroundColor: graphBgColor,
+                    overflow: "hidden",
                   }}
                 >
                   <BlogGraphView
+                    key={graphKey}
                     currentSlug={currentSlug}
                     isExpanded={false}
                     height={280}
@@ -643,6 +689,398 @@ export default function BlogGraphSidebar({
               theme={theme}
             />
           </div>
+        </div>
+      )}
+
+      {/* ============ MOBILE FLOATING BUTTON ============ */}
+      <button
+        onClick={() => setIsMobileMenuOpen(true)}
+        className="fixed right-4 z-40 xl:hidden w-12 h-12 rounded-full shadow-lg flex items-center justify-center"
+        style={{
+          backgroundColor: "var(--accent)",
+          color: "white",
+          bottom: `${Math.max(80, sidebarBottomOffset + 20)}px`,
+        }}
+        aria-label="Open reading options"
+      >
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"
+          />
+        </svg>
+      </button>
+
+      {/* ============ MOBILE BOTTOM SHEET ============ */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-50 xl:hidden"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setIsMobileMenuOpen(false);
+            }
+          }}
+        >
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+          />
+
+          {/* Bottom Sheet */}
+          <div
+            className="absolute bottom-0 left-0 right-0 rounded-t-2xl shadow-2xl max-h-[85vh] overflow-hidden flex flex-col"
+            style={{
+              backgroundColor: "var(--background)",
+              animation: "slideUp 0.3s ease-out",
+            }}
+          >
+            {/* Handle bar */}
+            <div className="flex justify-center pt-3 pb-2">
+              <div
+                className="w-10 h-1 rounded-full"
+                style={{ backgroundColor: "var(--border)" }}
+              />
+            </div>
+
+            {/* Tab Headers */}
+            <div
+              className="flex border-b px-4"
+              style={{ borderColor: "var(--border)" }}
+            >
+              <button
+                onClick={() => setMobileActiveTab("reading")}
+                className={`flex-1 py-3 text-sm font-medium transition-colors duration-200 border-b-2 ${
+                  mobileActiveTab === "reading"
+                    ? "border-current"
+                    : "border-transparent"
+                }`}
+                style={{
+                  color: mobileActiveTab === "reading" ? "var(--accent)" : "var(--text-secondary)",
+                }}
+              >
+                Reading Options
+              </button>
+              <button
+                onClick={() => setMobileActiveTab("graph")}
+                className={`flex-1 py-3 text-sm font-medium transition-colors duration-200 border-b-2 ${
+                  mobileActiveTab === "graph"
+                    ? "border-current"
+                    : "border-transparent"
+                }`}
+                style={{
+                  color: mobileActiveTab === "graph" ? "var(--accent)" : "var(--text-secondary)",
+                }}
+              >
+                Related Articles
+              </button>
+            </div>
+
+            {/* Tab Content */}
+            <div className="flex-1 overflow-y-auto">
+              {/* Reading Options Tab */}
+              {mobileActiveTab === "reading" && (
+                <div className="p-4 space-y-4">
+                  {/* Eye Comfort */}
+                  <div className="flex items-center justify-between">
+                    <span style={{ color: "var(--text-primary)" }}>Eye Comfort</span>
+                    <button
+                      onClick={onReadingModeToggle}
+                      className={`relative w-12 h-6 rounded-full transition-colors duration-200 ${
+                        isReadingMode ? "bg-amber-500" : "bg-gray-300 dark:bg-gray-600"
+                      }`}
+                      aria-label="Toggle reading mode"
+                    >
+                      <div
+                        className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
+                          isReadingMode ? "translate-x-6" : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                  </div>
+
+                  {/* Font Size */}
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span style={{ color: "var(--text-primary)" }}>Font Size</span>
+                      <span
+                        className="font-mono text-sm"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        {fontSize}px
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => handleFontSizeChange(fontSize - 2)}
+                        className="w-10 h-10 rounded-lg text-sm font-bold flex items-center justify-center"
+                        style={{
+                          backgroundColor: "var(--surface)",
+                          color: "var(--text-primary)",
+                        }}
+                      >
+                        A-
+                      </button>
+                      <input
+                        type="range"
+                        min="12"
+                        max="24"
+                        value={fontSize}
+                        onChange={(e) => handleFontSizeChange(Number(e.target.value))}
+                        className="flex-1 h-2 rounded-lg appearance-none cursor-pointer"
+                        style={{
+                          background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
+                            ((fontSize - 12) / (24 - 12)) * 100
+                          }%, var(--border) ${
+                            ((fontSize - 12) / (24 - 12)) * 100
+                          }%, var(--border) 100%)`,
+                        }}
+                      />
+                      <button
+                        onClick={() => handleFontSizeChange(fontSize + 2)}
+                        className="w-10 h-10 rounded-lg text-sm font-bold flex items-center justify-center"
+                        style={{
+                          backgroundColor: "var(--surface)",
+                          color: "var(--text-primary)",
+                        }}
+                      >
+                        A+
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Line Spacing */}
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span style={{ color: "var(--text-primary)" }}>Line Spacing</span>
+                      <span
+                        className="font-mono text-sm"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        {lineHeight.toFixed(1)}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => handleLineHeightChange(lineHeight - 0.1)}
+                        className="w-10 h-10 rounded-lg text-lg flex items-center justify-center"
+                        style={{
+                          backgroundColor: "var(--surface)",
+                          color: "var(--text-primary)",
+                        }}
+                      >
+                        ≡
+                      </button>
+                      <input
+                        type="range"
+                        min="1.2"
+                        max="2.0"
+                        step="0.1"
+                        value={lineHeight}
+                        onChange={(e) => handleLineHeightChange(Number(e.target.value))}
+                        className="flex-1 h-2 rounded-lg appearance-none cursor-pointer"
+                        style={{
+                          background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
+                            ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
+                          }%, var(--border) ${
+                            ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
+                          }%, var(--border) 100%)`,
+                        }}
+                      />
+                      <button
+                        onClick={() => handleLineHeightChange(lineHeight + 0.1)}
+                        className="w-10 h-10 rounded-lg text-lg flex items-center justify-center"
+                        style={{
+                          backgroundColor: "var(--surface)",
+                          color: "var(--text-primary)",
+                        }}
+                      >
+                        ☰
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Audio Reading */}
+                  <div
+                    className="pt-4 border-t"
+                    style={{ borderColor: "var(--border)" }}
+                  >
+                    <h4
+                      className="font-medium mb-3"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      Audio Reading
+                    </h4>
+                    <div className="flex items-center gap-3">
+                      {!isPlaying ? (
+                        <button
+                          onClick={onStartSpeech}
+                          className="flex-1 py-3 rounded-lg flex items-center justify-center gap-2"
+                          style={{
+                            backgroundColor: "var(--accent)",
+                            color: "white",
+                          }}
+                        >
+                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                          <span className="font-medium">Play</span>
+                        </button>
+                      ) : (
+                        <>
+                          <button
+                            onClick={isPaused ? onResumeSpeech : onPauseSpeech}
+                            className="flex-1 py-3 rounded-lg flex items-center justify-center gap-2"
+                            style={{
+                              backgroundColor: "var(--accent)",
+                              color: "white",
+                            }}
+                          >
+                            {isPaused ? (
+                              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
+                            ) : (
+                              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                              </svg>
+                            )}
+                            <span className="font-medium">
+                              {isPaused ? "Resume" : "Pause"}
+                            </span>
+                          </button>
+                          <button
+                            onClick={onStopSpeech}
+                            className="px-4 py-3 rounded-lg flex items-center justify-center gap-2"
+                            style={{
+                              backgroundColor: "var(--surface)",
+                              color: "var(--text-primary)",
+                            }}
+                          >
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M6 6h12v12H6z" />
+                            </svg>
+                            <span className="font-medium">Stop</span>
+                          </button>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Progress */}
+                    {isPlaying && (
+                      <div className="mt-3">
+                        <div className="flex justify-between text-sm mb-1">
+                          <span style={{ color: "var(--text-secondary)" }}>
+                            {Math.floor((duration - remainingTime) / 60)}:
+                            {Math.floor((duration - remainingTime) % 60).toString().padStart(2, "0")}
+                          </span>
+                          <span style={{ color: "var(--text-secondary)" }}>
+                            {Math.floor(duration / 60)}:
+                            {Math.floor(duration % 60).toString().padStart(2, "0")}
+                          </span>
+                        </div>
+                        <div
+                          className="w-full h-2 rounded-full cursor-pointer"
+                          style={{ backgroundColor: "var(--border)" }}
+                          onClick={(e) => {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            const clickX = e.clientX - rect.left;
+                            const percentage = (clickX / rect.width) * 100;
+                            if (onSeekSpeech) {
+                              onSeekSpeech(Math.max(0, Math.min(100, percentage)));
+                            }
+                          }}
+                        >
+                          <div
+                            className="h-2 rounded-full"
+                            style={{
+                              backgroundColor: "var(--accent)",
+                              width: `${progress}%`,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Graph Tab */}
+              {mobileActiveTab === "graph" && (
+                <div className="p-4">
+                  <div
+                    className="rounded-xl overflow-hidden"
+                    style={{
+                      height: "350px",
+                      backgroundColor: graphBgColor,
+                    }}
+                  >
+                    <BlogGraphView
+                      key={`mobile-${graphKey}`}
+                      currentSlug={currentSlug}
+                      isExpanded={false}
+                      height={350}
+                      theme={theme}
+                    />
+                  </div>
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setIsExpanded(true);
+                    }}
+                    className="w-full mt-3 py-3 rounded-lg flex items-center justify-center gap-2"
+                    style={{
+                      backgroundColor: "var(--surface)",
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                      />
+                    </svg>
+                    <span className="font-medium">View Fullscreen</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Close button */}
+            <div className="p-4 border-t" style={{ borderColor: "var(--border)" }}>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full py-3 rounded-lg font-medium"
+                style={{
+                  backgroundColor: "var(--surface)",
+                  color: "var(--text-primary)",
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+
+          {/* Animation keyframes */}
+          <style jsx>{`
+            @keyframes slideUp {
+              from {
+                transform: translateY(100%);
+              }
+              to {
+                transform: translateY(0);
+              }
+            }
+          `}</style>
         </div>
       )}
     </>

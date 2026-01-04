@@ -111,18 +111,40 @@ export default function BlogGraphView({
           height: propHeight || window.innerHeight * 0.85,
         });
       } else if (containerRef.current) {
-        // Sidebar mode
+        // Sidebar mode - measure container if no explicit width
         const rect = containerRef.current.getBoundingClientRect();
         setDimensions({
           width: propWidth || rect.width || 280,
-          height: propHeight || 350,
+          height: propHeight || 280,
+        });
+      } else {
+        // Fallback
+        setDimensions({
+          width: propWidth || 280,
+          height: propHeight || 280,
         });
       }
     };
 
-    updateDimensions();
+    // Initial update with a small delay to ensure container is rendered
+    const initialTimer = setTimeout(updateDimensions, 50);
+
     window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
+
+    // Also observe container size changes
+    const resizeObserver = new ResizeObserver(() => {
+      updateDimensions();
+    });
+
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+
+    return () => {
+      clearTimeout(initialTimer);
+      window.removeEventListener("resize", updateDimensions);
+      resizeObserver.disconnect();
+    };
   }, [isExpanded, propWidth, propHeight]);
 
   // Get node color based on primary tag
@@ -454,10 +476,9 @@ export default function BlogGraphView({
     return (
       <div
         ref={containerRef}
-        className="flex items-center justify-center"
+        className="flex items-center justify-center w-full"
         style={{
-          width: isExpanded ? "100%" : "100%",
-          height: isExpanded ? "100%" : "350px",
+          height: isExpanded ? "100%" : propHeight || 280,
           backgroundColor: "var(--background)",
         }}
       >
@@ -615,8 +636,10 @@ export default function BlogGraphView({
       {/* SVG Graph */}
       <svg
         ref={svgRef}
-        width={dimensions.width}
+        width="100%"
         height={dimensions.height}
+        viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+        preserveAspectRatio="xMidYMid meet"
         style={{
           display: "block",
           backgroundColor: isExpanded ? bgColor : "transparent",
