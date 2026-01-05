@@ -15,7 +15,6 @@ import type {
 } from "../../components/utils/SpeechReader";
 import { formatDate } from "../../lib/dateUtils";
 import BlogGraphSidebar from "./BlogGraphSidebar";
-import BlogGraphView from "./BlogGraphView";
 
 interface TocItem {
   id: string;
@@ -55,13 +54,10 @@ export default function BlogReader({
   const [lineHeight, setLineHeight] = useState(1.6);
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
   const [activeSection, setActiveSection] = useState<string>("");
-  const [showToc, setShowToc] = useState(true);
+  const [showToc, setShowToc] = useState(false);
   const [tocCollapsed, setTocCollapsed] = useState(false);
   const [tocPosition, setTocPosition] = useState<"center" | "top">("center");
   const [sidebarBottomOffset, setSidebarBottomOffset] = useState<number>(0);
-  const [showMobileReadingOptions, setShowMobileReadingOptions] =
-    useState(false);
-  const [showMobileGraph, setShowMobileGraph] = useState(false);
 
   // Text-to-speech states
   const [isPlaying, setIsPlaying] = useState(false);
@@ -480,7 +476,7 @@ export default function BlogReader({
   }, []);
 
   return (
-    <div className="transition-all duration-300 relative">
+    <div className="transition-all duration-300 relative overflow-x-hidden">
       {/* Table of Contents - Fixed Left Sidebar */}
       {tocItems.length > 0 && (
         <div
@@ -666,84 +662,83 @@ export default function BlogReader({
         </div>
       )}
 
-      {/* TOC Toggle Button - Mobile & Tablet */}
+      {/* TOC Toggle Button - Mobile & Tablet - Top Left */}
       {tocItems.length > 0 && (
-        <div className="fixed left-4 top-1/2 -translate-y-1/2 z-40 xl:hidden">
-          <button
-            onClick={() => setShowToc(!showToc)}
-            className="w-10 h-10 rounded-full shadow-lg border transition-all duration-300"
-            style={{
-              backgroundColor: "var(--background)",
-              borderColor: "var(--border)",
-              color: "var(--text-secondary)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-              e.currentTarget.style.color = "var(--accent)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "var(--background)";
-              e.currentTarget.style.color = "var(--text-secondary)";
-            }}
-            aria-label="Toggle table of contents"
+        <button
+          onClick={() => setShowToc(!showToc)}
+          className="fixed left-4 top-20 z-40 xl:hidden w-10 h-10 rounded-full shadow-lg border transition-all duration-300 flex items-center justify-center"
+          style={{
+            backgroundColor: showToc ? "var(--accent)" : "var(--background)",
+            borderColor: "var(--border)",
+            color: showToc ? "white" : "var(--text-secondary)",
+          }}
+          aria-label="Toggle table of contents"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
-            <svg
-              className="w-5 h-5 mx-auto"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-        </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h12M4 18h8"
+            />
+          </svg>
+        </button>
       )}
 
-      {/* Mobile TOC Overlay */}
+      {/* Mobile TOC Bottom Sheet */}
       {tocItems.length > 0 && showToc && (
-        <div className="fixed inset-0 z-50 xl:hidden">
+        <div
+          className="fixed inset-0 z-50 xl:hidden"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowToc(false);
+          }}
+        >
+          {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setShowToc(false)}
+            className="absolute inset-0"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
           />
+
+          {/* Bottom Sheet */}
           <div
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-80 max-w-[calc(100vw-2rem)] p-4 rounded-xl shadow-xl border backdrop-blur-md max-h-[70vh] overflow-y-auto toc-scrollbar"
+            className="absolute bottom-0 left-0 right-0 rounded-t-2xl shadow-2xl max-h-[70vh] overflow-hidden flex flex-col"
             style={{
               backgroundColor: "var(--background)",
-              borderColor: "var(--border)",
+              animation: "slideUp 0.3s ease-out",
             }}
           >
-            <div className="flex items-center justify-between mb-4">
+            {/* Handle bar */}
+            <div className="flex justify-center pt-3 pb-2">
+              <div
+                className="w-10 h-1 rounded-full"
+                style={{ backgroundColor: "var(--border)" }}
+              />
+            </div>
+
+            {/* Header */}
+            <div
+              className="flex items-center justify-between px-4 pb-3 border-b"
+              style={{ borderColor: "var(--border)" }}
+            >
               <h3
-                className="text-sm font-semibold"
+                className="text-base font-semibold"
                 style={{ color: "var(--text-primary)" }}
               >
                 Table of Contents
               </h3>
               <button
                 onClick={() => setShowToc(false)}
-                className="p-1 rounded transition-colors duration-200"
-                style={{
-                  color: "var(--text-secondary)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    "var(--surface-accent)";
-                  e.currentTarget.style.color = "var(--accent)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                }}
+                className="p-2 rounded-lg transition-colors duration-200"
+                style={{ color: "var(--text-secondary)" }}
                 aria-label="Close table of contents"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="w-5 h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -758,7 +753,8 @@ export default function BlogReader({
               </button>
             </div>
 
-            <nav className="space-y-1">
+            {/* TOC List */}
+            <nav className="flex-1 overflow-y-auto p-4 space-y-1 toc-scrollbar">
               {tocItems.map((item) => (
                 <button
                   key={item.id}
@@ -767,11 +763,11 @@ export default function BlogReader({
                     scrollToSection(item.id);
                     setShowToc(false);
                   }}
-                  className={`block w-full text-left py-2 px-3 rounded text-sm transition-all duration-200 ${
+                  className={`block w-full text-left py-3 px-4 rounded-lg text-sm transition-all duration-200 ${
                     activeSection === item.id ? "font-medium" : "font-normal"
                   }`}
                   style={{
-                    paddingLeft: `${12 + (item.level - 1) * 12}px`,
+                    paddingLeft: `${16 + (item.level - 1) * 12}px`,
                     backgroundColor:
                       activeSection === item.id
                         ? "var(--surface-accent)"
@@ -782,20 +778,8 @@ export default function BlogReader({
                         : "var(--text-secondary)",
                     borderLeft:
                       activeSection === item.id
-                        ? `2px solid var(--accent)`
-                        : `2px solid transparent`,
-                  }}
-                  onMouseEnter={(e) => {
-                    if (activeSection !== item.id) {
-                      e.currentTarget.style.backgroundColor = "var(--surface)";
-                      e.currentTarget.style.color = "var(--text-primary)";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (activeSection !== item.id) {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      e.currentTarget.style.color = "var(--text-secondary)";
-                    }
+                        ? `3px solid var(--accent)`
+                        : `3px solid transparent`,
                   }}
                   title={item.title}
                 >
@@ -806,406 +790,24 @@ export default function BlogReader({
                 </button>
               ))}
             </nav>
+
+            {/* Safe area padding for iOS */}
+            <div className="h-6" style={{ backgroundColor: "var(--background)" }} />
           </div>
+
+          {/* Animation keyframes */}
+          <style>{`
+            @keyframes slideUp {
+              from {
+                transform: translateY(100%);
+              }
+              to {
+                transform: translateY(0);
+              }
+            }
+          `}</style>
         </div>
       )}
-
-      {/* Reading Controls - Fixed Position (hidden on xl where graph sidebar shows) */}
-      <div
-        className={`fixed right-4 z-50 hidden lg:block xl:hidden ${
-          sidebarBottomOffset > 0
-            ? ""
-            : tocPosition === "center"
-              ? "top-1/2 -translate-y-1/2"
-              : "top-24 translate-y-0"
-        }`}
-        style={{
-          ...(sidebarBottomOffset > 0 ? {
-            top: "auto",
-            bottom: `${sidebarBottomOffset}px`,
-          } : {}),
-        }}
-      >
-        <div
-          className="p-4 rounded-xl shadow-lg border backdrop-blur-md"
-          style={{
-            backgroundColor: "var(--background)/95",
-            borderColor: "var(--border)",
-          }}
-        >
-          <h3
-            className="text-sm font-semibold mb-3"
-            style={{ color: "var(--text-primary)" }}
-          >
-            Reading Options
-          </h3>
-
-          {/* Reading Mode Toggle */}
-          <div className="flex items-center justify-between mb-3">
-            <span
-              className="text-xs"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Eye Comfort
-            </span>
-            <button
-              onClick={() => setReadingMode(!isReadingMode)}
-              className={`relative w-10 h-5 rounded-full transition-colors duration-200 ${
-                isReadingMode ? "bg-amber-500" : "bg-gray-300 dark:bg-gray-600"
-              }`}
-              aria-label="Toggle reading mode"
-            >
-              <div
-                className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
-                  isReadingMode ? "translate-x-5" : "translate-x-0.5"
-                }`}
-              />
-            </button>
-          </div>
-
-          {/* Font Size Control */}
-          <div className="mb-3">
-            <div className="flex items-center justify-between mb-1">
-              <span
-                className="text-xs"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Font Size
-              </span>
-              <span
-                className="text-xs font-mono"
-                style={{ color: "var(--text-primary)" }}
-              >
-                {fontSize}px
-              </span>
-            </div>
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => handleFontSizeChange(fontSize - 2)}
-                className="w-6 h-6 rounded text-xs font-bold transition-colors duration-200"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  color: "var(--text-secondary)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    "var(--surface-accent)";
-                  e.currentTarget.style.color = "var(--accent)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--surface)";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                }}
-                aria-label="Decrease font size"
-              >
-                A-
-              </button>
-              <div className="flex-1 mx-2">
-                <input
-                  type="range"
-                  min="12"
-                  max="24"
-                  value={fontSize}
-                  onChange={(e) => handleFontSizeChange(Number(e.target.value))}
-                  className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                  style={{
-                    background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
-                      ((fontSize - 12) / (24 - 12)) * 100
-                    }%, var(--border) ${
-                      ((fontSize - 12) / (24 - 12)) * 100
-                    }%, var(--border) 100%)`,
-                  }}
-                />
-              </div>
-              <button
-                onClick={() => handleFontSizeChange(fontSize + 2)}
-                className="w-6 h-6 rounded text-xs font-bold transition-colors duration-200"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  color: "var(--text-secondary)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    "var(--surface-accent)";
-                  e.currentTarget.style.color = "var(--accent)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--surface)";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                }}
-                aria-label="Increase font size"
-              >
-                A+
-              </button>
-            </div>
-          </div>
-
-          {/* Line Height Control */}
-          <div className="mb-4">
-            <div className="flex items-center justify-between mb-1">
-              <span
-                className="text-xs"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Line Spacing
-              </span>
-              <span
-                className="text-xs font-mono"
-                style={{ color: "var(--text-primary)" }}
-              >
-                {lineHeight.toFixed(1)}
-              </span>
-            </div>
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => handleLineHeightChange(lineHeight - 0.1)}
-                className="w-6 h-6 rounded text-xs font-bold transition-colors duration-200"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  color: "var(--text-secondary)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    "var(--surface-accent)";
-                  e.currentTarget.style.color = "var(--accent)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--surface)";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                }}
-                aria-label="Decrease line height"
-              >
-                ≡
-              </button>
-              <div className="flex-1 mx-2">
-                <input
-                  type="range"
-                  min="1.2"
-                  max="2.0"
-                  step="0.1"
-                  value={lineHeight}
-                  onChange={(e) =>
-                    handleLineHeightChange(Number(e.target.value))
-                  }
-                  className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                  style={{
-                    background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
-                      ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
-                    }%, var(--border) ${
-                      ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
-                    }%, var(--border) 100%)`,
-                  }}
-                />
-              </div>
-              <button
-                onClick={() => handleLineHeightChange(lineHeight + 0.1)}
-                className="w-6 h-6 rounded text-xs font-bold transition-colors duration-200"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  color: "var(--text-secondary)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    "var(--surface-accent)";
-                  e.currentTarget.style.color = "var(--accent)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--surface)";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                }}
-                aria-label="Increase line height"
-              >
-                ☰
-              </button>
-            </div>
-          </div>
-
-          {/* Text-to-Speech Controls */}
-          <div
-            className="border-t pt-3"
-            style={{ borderColor: "var(--border)" }}
-          >
-            <h4
-              className="text-xs font-semibold mb-3"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Audio Reading
-            </h4>
-
-            {/* Play/Pause/Stop Controls */}
-            <div className="flex items-center gap-2 mb-3">
-              {!isPlaying ? (
-                // Show Play button when not playing
-                <button
-                  onClick={startSpeech}
-                  className="flex-1 px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
-                  style={{
-                    backgroundColor: "var(--surface)",
-                    color: "var(--text-primary)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "var(--surface-accent)";
-                    e.currentTarget.style.color = "var(--accent)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--surface)";
-                    e.currentTarget.style.color = "var(--text-primary)";
-                  }}
-                  aria-label="Start reading"
-                >
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                  <span className="text-xs font-medium">Play</span>
-                </button>
-              ) : (
-                // Show Pause/Continue and Stop buttons when playing
-                <>
-                  <button
-                    onClick={isPaused ? resumeSpeech : pauseSpeech}
-                    className="flex-1 px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
-                    style={{
-                      backgroundColor: isPaused
-                        ? "var(--accent)"
-                        : "var(--accent)",
-                      color: "white",
-                    }}
-                    aria-label={isPaused ? "Resume reading" : "Pause reading"}
-                  >
-                    {isPaused ? (
-                      <svg
-                        className="w-4 h-4"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    ) : (
-                      <svg
-                        className="w-4 h-4"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                      </svg>
-                    )}
-                    <span className="text-xs font-medium">
-                      {isPaused ? "Continue" : "Pause"}
-                    </span>
-                  </button>
-
-                  <button
-                    onClick={stopSpeech}
-                    className="px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-1"
-                    style={{
-                      backgroundColor: "var(--surface)",
-                      color: "var(--text-secondary)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor =
-                        "var(--surface-accent)";
-                      e.currentTarget.style.color = "var(--accent)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "var(--surface)";
-                      e.currentTarget.style.color = "var(--text-secondary)";
-                    }}
-                    aria-label="Stop reading"
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M6 6h12v12H6z" />
-                    </svg>
-                    <span className="text-xs font-medium">Stop</span>
-                  </button>
-                </>
-              )}
-            </div>
-
-            {/* Progress Bar */}
-            {isPlaying && (
-              <div className="mb-3">
-                <div className="flex items-center justify-between mb-1">
-                  <span
-                    className="text-xs"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    Progress
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="text-xs font-mono"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {Math.floor(remainingTime / 60)}:
-                      {Math.floor(remainingTime % 60)
-                        .toString()
-                        .padStart(2, "0")}
-                    </span>
-                    <span
-                      className="text-xs"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {Math.round(progress)}%
-                    </span>
-                  </div>
-                </div>
-                <div
-                  className="w-full h-2 rounded-full cursor-pointer relative group"
-                  style={{ backgroundColor: "var(--border)" }}
-                  onClick={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const clickX = e.clientX - rect.left;
-                    const percentage = (clickX / rect.width) * 100;
-                    seekSpeech(Math.max(0, Math.min(100, percentage)));
-                  }}
-                >
-                  <div
-                    className="h-2 rounded-full transition-all duration-300"
-                    style={{
-                      backgroundColor: "var(--accent)",
-                      width: `${progress}%`,
-                    }}
-                  />
-                  {/* Hover indicator */}
-                  <div
-                    className="absolute top-0 w-full h-2 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-200"
-                    style={{ backgroundColor: "var(--accent)" }}
-                  />
-                </div>
-                <div className="flex justify-between mt-1">
-                  <span
-                    className="text-xs"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    {Math.floor((duration - remainingTime) / 60)}:
-                    {Math.floor((duration - remainingTime) % 60)
-                      .toString()
-                      .padStart(2, "0")}
-                  </span>
-                  <span
-                    className="text-xs"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    {Math.floor(duration / 60)}:
-                    {Math.floor(duration % 60)
-                      .toString()
-                      .padStart(2, "0")}
-                  </span>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
 
       {/* Blog Graph Sidebar - Combined Reading Options + Related Articles Network */}
       <BlogGraphSidebar
@@ -1234,13 +836,12 @@ export default function BlogReader({
       />
 
       {/* Main Content - Always Centered */}
-      <div className="relative z-10 w-full">
-        <div className="flex justify-center items-start py-12">
+      <div className="relative z-10 w-full overflow-x-hidden">
+        <div className="flex justify-center items-start py-12 px-4 sm:px-6">
           <div
-            className="w-full max-w-4xl px-6 mb-20"
+            className="w-full max-w-4xl mb-20"
             ref={contentRef}
             style={{
-              margin: "0 auto",
               position: "relative",
             }}
           >
@@ -1445,569 +1046,6 @@ export default function BlogReader({
           </div>
         </div>
       </div>
-
-      {/* Mobile/Tablet Reading Controls (show on <lg screens) */}
-      <div
-        className="lg:hidden fixed right-4 z-50"
-        style={{
-          bottom: `${Math.max(80, sidebarBottomOffset + 20)}px`,
-        }}
-      >
-        {/* Reading Options Toggle Button */}
-        <button
-          onClick={() => setShowMobileReadingOptions(!showMobileReadingOptions)}
-          className="w-12 h-12 rounded-full shadow-lg border backdrop-blur-md transition-all duration-200 flex items-center justify-center mb-2"
-          style={{
-            backgroundColor: showMobileReadingOptions
-              ? "var(--accent)"
-              : "var(--background)/95",
-            borderColor: "var(--border)",
-            color: showMobileReadingOptions ? "white" : "var(--text-primary)",
-          }}
-          aria-label="Toggle reading options"
-        >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"
-            />
-          </svg>
-        </button>
-
-        {/* Reading Options Dropdown */}
-        {showMobileReadingOptions && (
-          <div
-            className="p-4 rounded-xl shadow-lg border backdrop-blur-md w-72"
-            style={{
-              backgroundColor: "var(--background)/95",
-              borderColor: "var(--border)",
-            }}
-          >
-            {/* Eye Comfort Toggle */}
-            <div className="flex items-center justify-between mb-4">
-              <span
-                className="text-sm font-medium"
-                style={{ color: "var(--text-primary)" }}
-              >
-                Eye Comfort
-              </span>
-              <button
-                onClick={() => setReadingMode(!isReadingMode)}
-                className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${
-                  isReadingMode
-                    ? "bg-amber-500"
-                    : "bg-gray-300 dark:bg-gray-600"
-                }`}
-                aria-label="Toggle reading mode"
-              >
-                <div
-                  className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-200 ${
-                    isReadingMode ? "translate-x-5" : "translate-x-0.5"
-                  }`}
-                />
-              </button>
-            </div>
-
-            {/* Font Size Control */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <span
-                  className="text-sm font-medium"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Font Size
-                </span>
-                <span
-                  className="text-xs"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  {fontSize}px
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => handleFontSizeChange(fontSize - 1)}
-                  className="w-7 h-7 rounded text-xs font-bold transition-colors duration-200 flex items-center justify-center"
-                  style={{
-                    backgroundColor: "var(--surface)",
-                    color: "var(--text-secondary)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "var(--surface-accent)";
-                    e.currentTarget.style.color = "var(--accent)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--surface)";
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                  }}
-                  aria-label="Decrease font size"
-                >
-                  A-
-                </button>
-                <div className="flex-1 mx-2">
-                  <input
-                    type="range"
-                    min="12"
-                    max="24"
-                    step="1"
-                    value={fontSize}
-                    onChange={(e) =>
-                      handleFontSizeChange(Number(e.target.value))
-                    }
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                    style={{
-                      background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
-                        ((fontSize - 12) / (24 - 12)) * 100
-                      }%, var(--border) ${
-                        ((fontSize - 12) / (24 - 12)) * 100
-                      }%, var(--border) 100%)`,
-                    }}
-                  />
-                </div>
-                <button
-                  onClick={() => handleFontSizeChange(fontSize + 1)}
-                  className="w-7 h-7 rounded text-xs font-bold transition-colors duration-200 flex items-center justify-center"
-                  style={{
-                    backgroundColor: "var(--surface)",
-                    color: "var(--text-secondary)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "var(--surface-accent)";
-                    e.currentTarget.style.color = "var(--accent)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--surface)";
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                  }}
-                  aria-label="Increase font size"
-                >
-                  A+
-                </button>
-              </div>
-            </div>
-
-            {/* Line Height Control */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <span
-                  className="text-sm font-medium"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Line Height
-                </span>
-                <span
-                  className="text-xs"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  {lineHeight.toFixed(1)}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => handleLineHeightChange(lineHeight - 0.1)}
-                  className="w-7 h-7 rounded text-xs font-bold transition-colors duration-200 flex items-center justify-center"
-                  style={{
-                    backgroundColor: "var(--surface)",
-                    color: "var(--text-secondary)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "var(--surface-accent)";
-                    e.currentTarget.style.color = "var(--accent)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--surface)";
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                  }}
-                  aria-label="Decrease line height"
-                >
-                  ≡
-                </button>
-                <div className="flex-1 mx-2">
-                  <input
-                    type="range"
-                    min="1.2"
-                    max="2.0"
-                    step="0.1"
-                    value={lineHeight}
-                    onChange={(e) =>
-                      handleLineHeightChange(Number(e.target.value))
-                    }
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                    style={{
-                      background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
-                        ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
-                      }%, var(--border) ${
-                        ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
-                      }%, var(--border) 100%)`,
-                    }}
-                  />
-                </div>
-                <button
-                  onClick={() => handleLineHeightChange(lineHeight + 0.1)}
-                  className="w-7 h-7 rounded text-xs font-bold transition-colors duration-200 flex items-center justify-center"
-                  style={{
-                    backgroundColor: "var(--surface)",
-                    color: "var(--text-secondary)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "var(--surface-accent)";
-                    e.currentTarget.style.color = "var(--accent)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--surface)";
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                  }}
-                  aria-label="Increase line height"
-                >
-                  ≡
-                </button>
-              </div>
-            </div>
-
-            {/* Audio Reading Controls */}
-            <div
-              className="border-t pt-4"
-              style={{ borderColor: "var(--border)" }}
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span
-                  className="text-sm font-medium"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Audio Reading
-                </span>
-                {!isPlaying ? (
-                  <button
-                    onClick={startSpeech}
-                    className="px-3 py-1.5 rounded-lg transition-all duration-200 text-sm flex items-center gap-2"
-                    style={{
-                      backgroundColor: "var(--surface)",
-                      color: "var(--text-primary)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor =
-                        "var(--surface-accent)";
-                      e.currentTarget.style.color = "var(--accent)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "var(--surface)";
-                      e.currentTarget.style.color = "var(--text-primary)";
-                    }}
-                    aria-label="Start reading"
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                    Play
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={isPaused ? resumeSpeech : pauseSpeech}
-                      className="px-3 py-1.5 rounded-lg transition-all duration-200 text-sm flex items-center gap-2"
-                      style={{
-                        backgroundColor: "var(--accent)",
-                        color: "white",
-                      }}
-                      aria-label={isPaused ? "Resume reading" : "Pause reading"}
-                    >
-                      {isPaused ? (
-                        <svg
-                          className="w-4 h-4"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      ) : (
-                        <svg
-                          className="w-4 h-4"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                        </svg>
-                      )}
-                      {isPaused ? "Continue" : "Pause"}
-                    </button>
-
-                    <button
-                      onClick={stopSpeech}
-                      className="px-2 py-1.5 rounded-lg transition-all duration-200 text-sm"
-                      style={{
-                        backgroundColor: "var(--surface)",
-                        color: "var(--text-secondary)",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor =
-                          "var(--surface-accent)";
-                        e.currentTarget.style.color = "var(--accent)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor =
-                          "var(--surface)";
-                        e.currentTarget.style.color = "var(--text-secondary)";
-                      }}
-                      aria-label="Stop reading"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M6 6h12v12H6z" />
-                      </svg>
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {/* Show progress bar when playing */}
-              {isPlaying && (
-                <div className="mt-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <span
-                      className="text-xs"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      Progress
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="text-xs font-mono"
-                        style={{ color: "var(--text-primary)" }}
-                      >
-                        {Math.floor(remainingTime / 60)}:
-                        {Math.floor(remainingTime % 60)
-                          .toString()
-                          .padStart(2, "0")}
-                      </span>
-                      <span
-                        className="text-xs"
-                        style={{ color: "var(--text-primary)" }}
-                      >
-                        {Math.round(progress)}%
-                      </span>
-                    </div>
-                  </div>
-                  <div
-                    className="w-full h-2 rounded-full mb-2 cursor-pointer relative group"
-                    style={{ backgroundColor: "var(--border)" }}
-                    onClick={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const clickX = e.clientX - rect.left;
-                      const percentage = (clickX / rect.width) * 100;
-                      seekSpeech(Math.max(0, Math.min(100, percentage)));
-                    }}
-                  >
-                    <div
-                      className="h-2 rounded-full transition-all duration-300"
-                      style={{
-                        backgroundColor: "var(--accent)",
-                        width: `${progress}%`,
-                      }}
-                    />
-                    {/* Hover indicator */}
-                    <div
-                      className="absolute top-0 w-full h-2 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-200"
-                      style={{ backgroundColor: "var(--accent)" }}
-                    />
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <div
-                      className="flex justify-between text-xs w-full"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      <span>
-                        {Math.floor((duration - remainingTime) / 60)}:
-                        {Math.floor((duration - remainingTime) % 60)
-                          .toString()
-                          .padStart(2, "0")}
-                      </span>
-                      <span>
-                        {Math.floor(duration / 60)}:
-                        {Math.floor(duration % 60)
-                          .toString()
-                          .padStart(2, "0")}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Related Articles / Interactive Graph Button */}
-            <div
-              className="border-t pt-4 mt-4"
-              style={{ borderColor: "var(--border)" }}
-            >
-              <button
-                onClick={() => {
-                  setShowMobileReadingOptions(false);
-                  setShowMobileGraph(true);
-                }}
-                className="w-full py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-200"
-                style={{
-                  backgroundColor: "var(--surface)",
-                  color: "var(--text-primary)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                  e.currentTarget.style.color = "var(--accent)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--surface)";
-                  e.currentTarget.style.color = "var(--text-primary)";
-                }}
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                  />
-                </svg>
-                <span className="font-medium">View Related Articles</span>
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Mobile Interactive Graph Modal */}
-      {showMobileGraph && (
-        <div
-          className="lg:hidden fixed inset-0 z-[60]"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setShowMobileGraph(false);
-            }
-          }}
-        >
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
-          />
-
-          {/* Modal Content */}
-          <div
-            className="absolute inset-4 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
-            style={{
-              backgroundColor: "var(--background)",
-              border: "1px solid var(--border)",
-            }}
-          >
-            {/* Header */}
-            <div
-              className="flex items-center justify-between p-4 border-b"
-              style={{ borderColor: "var(--border)" }}
-            >
-              <div className="flex items-center gap-2">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  style={{ color: "var(--accent)" }}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                  />
-                </svg>
-                <h3
-                  className="text-lg font-semibold"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Related Articles
-                </h3>
-              </div>
-              <button
-                onClick={() => setShowMobileGraph(false)}
-                className="p-2 rounded-lg transition-colors duration-200"
-                style={{ color: "var(--text-secondary)" }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                  e.currentTarget.style.color = "var(--accent)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                }}
-                aria-label="Close graph"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            {/* Graph Container */}
-            <div
-              className="flex-1 relative"
-              style={{
-                backgroundColor: theme === "dark" ? "#1a1a2e" : "#f8fafc",
-              }}
-            >
-              <BlogGraphView
-                currentSlug={postSlug}
-                isExpanded={false}
-                theme={theme}
-              />
-            </div>
-
-            {/* Footer with instructions */}
-            <div
-              className="p-3 border-t text-center"
-              style={{
-                borderColor: "var(--border)",
-                backgroundColor: "var(--surface)",
-              }}
-            >
-              <p
-                className="text-xs"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Drag to pan • Pinch to zoom • Tap node to navigate
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Prevent duplicate TOC on small screens */}
       {tocItems.length > 0 && !isSmallScreen && showToc && (
