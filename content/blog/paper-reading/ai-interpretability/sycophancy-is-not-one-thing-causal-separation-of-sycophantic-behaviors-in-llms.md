@@ -216,7 +216,7 @@ This pattern replicates across multiple model families and scales (LLaMA-3.1-8B-
 
 To measure how selective steering is, the authors define the **selectivity ratio**:
 
-$$s_\ell = \frac{|\Delta\text{Primary}_\ell|}{\max(\epsilon, |\Delta\text{Cross}_\ell|)}$$
+$$s_\ell = \frac{|\Delta Primary_\ell|}{max(\epsilon, |\Delta Cross_\ell|)}$$
 
 Meaning:
 
