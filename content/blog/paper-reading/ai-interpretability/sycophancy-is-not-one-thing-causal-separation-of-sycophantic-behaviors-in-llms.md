@@ -1,6 +1,6 @@
 ---
 title: "Sycophancy is Not One Thing: Causal Separation of Sycophantic Behaviors in LLMs"
-publishDate: "2025-01-07"
+publishDate: "2026-01-07"
 category: "paper-reading"
 subcategory: "AI Interpretability"
 tags:
@@ -11,7 +11,7 @@ tags:
     "model-behavior",
     "ai-safety",
   ]
-date: "2025-01-07"
+date: "2026-01-07"
 author: "Hiep Tran"
 featured: false
 image: "/imgs/blogs/sycophancy-is-not-one-thing-causal-separation-of-sycophantic-behaviors-in-llms-20260107162232.png"
@@ -369,7 +369,7 @@ This connects to work on **Constitutional AI** (Anthropic), **RLHF failure modes
 The steering approach raises security questions:
 
 - **Adversarial prompts**: Can users craft prompts that bypass anti-sycophancy steering?
-- **Steering vector extraction attacks**: If steering vectors are public, can adversaries use them to *increase* sycophancy?
+- **Steering vector extraction attacks**: If steering vectors are public, can adversaries use them to _increase_ sycophancy?
 - **Distribution shift**: Do steering vectors trained on one domain (arithmetic) generalize robustly to all domains?
 
 Future work should evaluate robustness under **adversarial conditions** and explore **certified steering** methods with formal guarantees.
