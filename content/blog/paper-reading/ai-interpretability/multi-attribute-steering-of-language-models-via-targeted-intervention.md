@@ -16,7 +16,7 @@ date: "2026-01-07"
 author: "Hiep Tran"
 featured: false
 image: "/imgs/blogs/multi-attribute-steering-of-language-models-via-targeted-intervention-20260107210248.png"
-excerpt: ""
+excerpt: "MAT-STEER introduces a gating mechanism for selective token-level intervention, enabling LLMs to be steered across multiple attributes (truthfulness, toxicity, bias) without conflicts — outperforming fine-tuning methods with less than 20% training data."
 ---
 
 ## Motivation
