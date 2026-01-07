@@ -11,15 +11,16 @@ import Image from "next/image";
 const workExperience = [
   {
     title: "AI Engineer",
-    company: "Castalk",
+    company: "Torilab",
     location: "Hanoi, Vietnam",
     period: "Jan 2024 - Present",
     type: "Full-time",
     description: "Developing and maintaining AI Agent for chit-chat",
     responsibilities: [
-      "Developing and maintaining AI Companion for chit-chat including long-term memory, knowledge base, tool use features",
-      "Implementing and optimizing LLM-based systems for natural language understanding and generation",
-      "Collaborating with cross-functional teams to integrate AI solutions into products",
+      "Conducted research on controlling Large Language Model behavior without explicit prompting through activation steering techniques",
+      "Performed Large Language Model fine tuning including SFT, DPO, and classification tasks, combined with prompt engineering and scalable model serving using vLLM and SGlang with dynamic batching",
+      "Developed a core framework for customizable chatbots supporting long term memory, tool usage, dynamic prompts, and multi turn interactions",
+      "Worked on additional research tasks including user emotion detection, image generation with diffusion based models and LoRA, and multi speaker diarization",
     ],
     technologies: ["Python", "PyTorch", "LLM", "AI Agent"],
     icon: "🔬",
@@ -938,8 +939,7 @@ export default function About() {
                                 onMouseEnter={(e) => {
                                   e.currentTarget.style.backgroundColor =
                                     "var(--surface-accent)";
-                                  e.currentTarget.style.color =
-                                    "var(--accent)";
+                                  e.currentTarget.style.color = "var(--accent)";
                                 }}
                                 onMouseLeave={(e) => {
                                   e.currentTarget.style.backgroundColor =
@@ -991,7 +991,11 @@ export default function About() {
               >
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <ScrollReveal animation="fade-left" delay={250} duration={700}>
+                    <ScrollReveal
+                      animation="fade-left"
+                      delay={250}
+                      duration={700}
+                    >
                       <h3
                         className="text-2xl font-semibold mb-6 flex items-center"
                         style={{ color: "var(--text-primary)" }}
@@ -1004,7 +1008,11 @@ export default function About() {
                       className="space-y-4"
                       style={{ color: "var(--text-secondary)" }}
                     >
-                      <ScrollReveal animation="fade-up" delay={350} duration={600}>
+                      <ScrollReveal
+                        animation="fade-up"
+                        delay={350}
+                        duration={600}
+                      >
                         <li className="flex items-start">
                           <span
                             className="mr-3 mt-1"
@@ -1019,7 +1027,11 @@ export default function About() {
                           </div>
                         </li>
                       </ScrollReveal>
-                      <ScrollReveal animation="fade-up" delay={450} duration={600}>
+                      <ScrollReveal
+                        animation="fade-up"
+                        delay={450}
+                        duration={600}
+                      >
                         <li className="flex items-start">
                           <span
                             className="mr-3 mt-1"
@@ -1034,7 +1046,11 @@ export default function About() {
                           </div>
                         </li>
                       </ScrollReveal>
-                      <ScrollReveal animation="fade-up" delay={550} duration={600}>
+                      <ScrollReveal
+                        animation="fade-up"
+                        delay={550}
+                        duration={600}
+                      >
                         <li className="flex items-start">
                           <span
                             className="mr-3 mt-1"
@@ -1049,7 +1065,11 @@ export default function About() {
                           </div>
                         </li>
                       </ScrollReveal>
-                      <ScrollReveal animation="fade-up" delay={650} duration={600}>
+                      <ScrollReveal
+                        animation="fade-up"
+                        delay={650}
+                        duration={600}
+                      >
                         <li className="flex items-start">
                           <span
                             className="mr-3 mt-1"
@@ -1067,7 +1087,11 @@ export default function About() {
                     </ul>
                   </div>
                   <div>
-                    <ScrollReveal animation="fade-right" delay={250} duration={700}>
+                    <ScrollReveal
+                      animation="fade-right"
+                      delay={250}
+                      duration={700}
+                    >
                       <h3
                         className="text-2xl font-semibold mb-6 flex items-center"
                         style={{ color: "var(--text-primary)" }}
@@ -1076,7 +1100,11 @@ export default function About() {
                         AI Development & Research Goals
                       </h3>
                     </ScrollReveal>
-                    <ScrollReveal animation="fade-up" delay={350} duration={600}>
+                    <ScrollReveal
+                      animation="fade-up"
+                      delay={350}
+                      duration={600}
+                    >
                       <p
                         className="leading-relaxed mb-6"
                         style={{ color: "var(--text-secondary)" }}
@@ -1089,7 +1117,11 @@ export default function About() {
                         systems more transparent and trustworthy.
                       </p>
                     </ScrollReveal>
-                    <ScrollReveal animation="fade-up" delay={450} duration={600}>
+                    <ScrollReveal
+                      animation="fade-up"
+                      delay={450}
+                      duration={600}
+                    >
                       <p
                         className="leading-relaxed"
                         style={{ color: "var(--text-secondary)" }}
@@ -1102,7 +1134,11 @@ export default function About() {
                         for deploying these models in production environments.
                       </p>
                     </ScrollReveal>
-                    <ScrollReveal animation="zoom-in" delay={550} duration={700}>
+                    <ScrollReveal
+                      animation="zoom-in"
+                      delay={550}
+                      duration={700}
+                    >
                       <div
                         className="mt-6 p-4 rounded-xl transition-all duration-300 hover:shadow-md"
                         style={{ backgroundColor: "var(--surface-accent)" }}
@@ -1153,7 +1189,11 @@ export default function About() {
                   </p>
                 </ScrollReveal>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <ScrollReveal animation="bounce-in" delay={400} duration={700}>
+                  <ScrollReveal
+                    animation="bounce-in"
+                    delay={400}
+                    duration={700}
+                  >
                     <a
                       href="/contact"
                       className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 text-white shadow-lg hover:shadow-xl transform hover:scale-105"
@@ -1170,7 +1210,11 @@ export default function About() {
                       Get in Touch
                     </a>
                   </ScrollReveal>
-                  <ScrollReveal animation="bounce-in" delay={500} duration={700}>
+                  <ScrollReveal
+                    animation="bounce-in"
+                    delay={500}
+                    duration={700}
+                  >
                     <a
                       href="https://github.com/hieptran1812"
                       target="_blank"
@@ -1198,7 +1242,11 @@ export default function About() {
                       GitHub Profile
                     </a>
                   </ScrollReveal>
-                  <ScrollReveal animation="bounce-in" delay={600} duration={700}>
+                  <ScrollReveal
+                    animation="bounce-in"
+                    delay={600}
+                    duration={700}
+                  >
                     <a
                       href="https://linkedin.com/in/hieptran1812"
                       target="_blank"
