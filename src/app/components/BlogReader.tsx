@@ -69,6 +69,10 @@ export default function BlogReader({
   // Add a state to track if the screen is small
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
+  // Image lightbox state
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [lightboxAlt, setLightboxAlt] = useState<string>("");
+
   const contentRef = useRef<HTMLDivElement>(null);
   const speechReaderRef = useRef<SpeechReader | null>(null);
 
@@ -474,6 +478,43 @@ export default function BlogReader({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  // Image lightbox - attach click handlers to images in content
+  useEffect(() => {
+    if (!contentRef.current) return;
+
+    const handleImageClick = (e: Event) => {
+      const target = e.target as HTMLImageElement;
+      if (target.tagName === "IMG" && target.src) {
+        setLightboxImage(target.src);
+        setLightboxAlt(target.alt || "");
+      }
+    };
+
+    const images = contentRef.current.querySelectorAll("article img");
+    images.forEach((img) => {
+      (img as HTMLElement).style.cursor = "zoom-in";
+      img.addEventListener("click", handleImageClick);
+    });
+
+    return () => {
+      images.forEach((img) => {
+        img.removeEventListener("click", handleImageClick);
+      });
+    };
+  }, [dangerouslySetInnerHTML, children]);
+
+  // Close lightbox on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && lightboxImage) {
+        setLightboxImage(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxImage]);
 
   return (
     <div className="transition-all duration-300 relative overflow-x-hidden">
@@ -1050,6 +1091,84 @@ export default function BlogReader({
       {/* Prevent duplicate TOC on small screens */}
       {tocItems.length > 0 && !isSmallScreen && showToc && (
         <div className="toc-container">{/* Render TOC */}</div>
+      )}
+
+      {/* Image Lightbox Modal */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center"
+          onClick={() => setLightboxImage(null)}
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0.9)",
+            animation: "fadeIn 0.2s ease-out",
+          }}
+        >
+          {/* Close button */}
+          <button
+            onClick={() => setLightboxImage(null)}
+            className="absolute top-4 right-4 p-2 rounded-full transition-all duration-200 hover:scale-110"
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              color: "white",
+            }}
+            aria-label="Close lightbox"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          {/* Image container */}
+          <div
+            className="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={lightboxImage}
+              alt={lightboxAlt}
+              className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+              style={{
+                animation: "zoomIn 0.2s ease-out",
+              }}
+            />
+            {lightboxAlt && (
+              <p
+                className="absolute -bottom-10 left-0 right-0 text-center text-sm"
+                style={{ color: "rgba(255, 255, 255, 0.7)" }}
+              >
+                {lightboxAlt}
+              </p>
+            )}
+          </div>
+
+          {/* Animation keyframes */}
+          <style>{`
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            @keyframes zoomIn {
+              from {
+                opacity: 0;
+                transform: scale(0.9);
+              }
+              to {
+                opacity: 1;
+                transform: scale(1);
+              }
+            }
+          `}</style>
+        </div>
       )}
     </div>
   );
