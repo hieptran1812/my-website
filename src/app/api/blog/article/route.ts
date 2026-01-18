@@ -4,7 +4,9 @@ import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
-import remarkHtml from "remark-html";
+import remarkRehype from "remark-rehype";
+import rehypeHighlight from "rehype-highlight";
+import rehypeStringify from "rehype-stringify";
 import { Article } from "../articles/route";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 
@@ -61,10 +63,12 @@ export async function GET(request: NextRequest) {
     const fileContent = fs.readFileSync(articlePath, "utf8");
     const { data: metadata, content: markdownContent } = matter(fileContent);
 
-    // Process markdown to HTML
+    // Process markdown to HTML with syntax highlighting
     const processedContent = await remark()
       .use(remarkGfm)
-      .use(remarkHtml, { sanitize: false })
+      .use(remarkRehype)
+      .use(rehypeHighlight)
+      .use(rehypeStringify)
       .process(markdownContent);
 
     const htmlContent = processedContent.toString();

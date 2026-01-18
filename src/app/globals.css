@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Import highlight.js theme for code syntax highlighting */
+@import "highlight.js/styles/night-owl.css";
+
 html {
   transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1475,7 +1478,8 @@ a:focus {
 
 /* Floating particle animation - GPU accelerated */
 @keyframes float-particle {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate3d(0, 0, 0);
     opacity: 0.6;
   }
@@ -1487,7 +1491,8 @@ a:focus {
 
 /* Floating blob animation - GPU accelerated */
 @keyframes float-blob {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate3d(0, 0, 0) scale(1);
   }
   50% {
@@ -1497,7 +1502,8 @@ a:focus {
 
 /* Pulse blob animation - GPU accelerated */
 @keyframes pulse-blob {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate3d(-50%, -50%, 0) scale(1);
     opacity: 0.6;
   }
@@ -1509,7 +1515,8 @@ a:focus {
 
 /* Pulse glow animation - GPU accelerated */
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate3d(0, 0, 0) scale(1.1);
     opacity: 0.8;
   }
@@ -1531,7 +1538,8 @@ a:focus {
 
   /* Reduce animation intensity on mobile */
   @keyframes float-particle {
-    0%, 100% {
+    0%,
+    100% {
       transform: translate3d(0, 0, 0);
     }
     50% {
@@ -1540,7 +1548,8 @@ a:focus {
   }
 
   @keyframes float-blob {
-    0%, 100% {
+    0%,
+    100% {
       transform: translate3d(0, 0, 0);
     }
     50% {
@@ -1567,14 +1576,24 @@ a:focus {
 
 /* Ensure gradient text is visible in dark mode */
 [data-theme="dark"] .gradient-text-projects {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #3b82f6 100%) !important;
+  background: linear-gradient(
+    135deg,
+    #60a5fa 0%,
+    #a78bfa 50%,
+    #3b82f6 100%
+  ) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
 
 [data-theme="dark"] .gradient-text-articles {
-  background: linear-gradient(135deg, #34d399 0%, #2dd4bf 50%, #22d3ee 100%) !important;
+  background: linear-gradient(
+    135deg,
+    #34d399 0%,
+    #2dd4bf 50%,
+    #22d3ee 100%
+  ) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
@@ -2629,4 +2648,68 @@ a:focus {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+/* Syntax Highlighting Customization */
+.hljs {
+  padding: 1.5rem !important;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  background: var(--surface-secondary) !important;
+  border: 1px solid var(--border);
+  margin: 1.5rem 0;
+}
+
+.dark .hljs {
+  background: #011627 !important;
+  border-color: #1d3b53;
+}
+
+/* Inline code */
+:not(pre) > code {
+  background: var(--surface-accent);
+  color: var(--accent);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 500;
+}
+
+.dark :not(pre) > code {
+  background: rgba(130, 170, 255, 0.15);
+  color: #82aaff;
+}
+
+/* Code block container */
+pre {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+pre code {
+  display: block;
+  padding: 0;
+  background: transparent !important;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Scrollbar for code blocks */
+.hljs::-webkit-scrollbar {
+  height: 8px;
+}
+
+.hljs::-webkit-scrollbar-track {
+  background: var(--surface-tertiary);
+  border-radius: 4px;
+}
+
+.hljs::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: 4px;
+}
+
+.hljs::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
 }
