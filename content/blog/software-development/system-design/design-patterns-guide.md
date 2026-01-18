@@ -1437,7 +1437,7 @@ When you see constructors with 7+ parameters, you know the answer: Builder Patte
 
 #### The Story: The AWS Server Cloning Problem
 
-I once worked at a company that deployed hundreds of servers on AWS. Our workflow:
+Imagine a company that deployed hundreds of servers on AWS and workflow like that:
 
 1. Spin up a new EC2 instance
 2. Install Node.js
@@ -2520,7 +2520,7 @@ Let's dive in.
 
 #### The Story: The Payment Gateway Integration Nightmare
 
-I once worked at a startup building an e-commerce platform. We initially integrated Stripe for payments:
+Imagine that you work at a startup building an e-commerce platform and initially integrate Stripe for payments:
 
 ```python
 # Our checkout code was tightly coupled to Stripe
@@ -3955,7 +3955,7 @@ You know the answer: **Bridge Pattern**.
 
 #### The Story: The File System Permission Nightmare
 
-I once worked on a document management system. Users needed to organize files in folders, and folders could contain folders (nested hierarchy).
+Think about a document management system. Users needed to organize files in folders, and folders could contain folders (nested hierarchy).
 
 **Initial implementation (seems simple)**:
 
