@@ -122,6 +122,9 @@
   @apply mb-4 rounded-lg shadow-md;
   max-width: 100%;
   height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .blog-content figure {
