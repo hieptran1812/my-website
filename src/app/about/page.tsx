@@ -15,12 +15,15 @@ const workExperience = [
     location: "Hanoi, Vietnam",
     period: "Jan 2024 - Present",
     type: "Full-time",
-    description: "Developing and maintaining AI Agent for chit-chat",
+    description:
+      "Developing and maintaining multimodal AI companion with capabilities for chat conversations, image sharing, and visual understanding through camera interactions",
     responsibilities: [
-      "Conducted research on controlling Large Language Model behavior without explicit prompting through activation steering techniques",
-      "Performed Large Language Model fine tuning including SFT, DPO, and classification tasks, combined with prompt engineering and scalable model serving using vLLM and SGlang with dynamic batching",
-      "Developed a core framework for customizable chatbots supporting long term memory, tool usage, dynamic prompts, and multi turn interactions",
-      "Worked on additional research tasks including user emotion detection, image generation with diffusion based models and LoRA, and multi speaker diarization",
+      "Developed and maintained multimodal AI companion integrating vision-language models for understanding images and natural conversations about visual content",
+      "Implemented real-time camera interaction system enabling users to share images and receive intelligent responses based on visual understanding",
+      "Built chat interface with multimodal context awareness, supporting seamless transitions between text and image-based conversations",
+      "Performed Large Language Model and vision model fine-tuning including SFT, DPO, and multimodal alignment tasks, with scalable model serving using vLLM and SGlang",
+      "Developed core framework supporting long-term memory, tool usage, dynamic prompts, and multi-turn multimodal interactions",
+      "Worked on additional AI capabilities including user emotion detection from text and images, image generation with diffusion models and LoRA, and multi-speaker diarization",
     ],
     technologies: ["Python", "PyTorch", "LLM", "AI Agent"],
     icon: "🔬",
@@ -370,8 +373,8 @@ const AwardsCarousel = ({
                 activeCategory === category.id
                   ? "translate3d(0, 0, 0)"
                   : animationDirection === "right"
-                  ? "translate3d(50px, 0, 0)"
-                  : "translate3d(-50px, 0, 0)",
+                    ? "translate3d(50px, 0, 0)"
+                    : "translate3d(-50px, 0, 0)",
               willChange: activeCategory === category.id ? "auto" : "transform",
               backfaceVisibility: "hidden",
             }}
