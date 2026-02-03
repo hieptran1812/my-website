@@ -18,6 +18,7 @@ const workExperience = [
     description:
       "Developing and maintaining multimodal AI companion with capabilities for chat conversations, image sharing, and visual understanding through camera interactions",
     responsibilities: [
+      "onducted research on controlling Large Language Model behavior without explicit prompting through activation steering techniques",
       "Developed and maintained multimodal AI companion integrating vision-language models for understanding images and natural conversations about visual content",
       "Implemented real-time camera interaction system enabling users to share images and receive intelligent responses based on visual understanding",
       "Built chat interface with multimodal context awareness, supporting seamless transitions between text and image-based conversations",
