@@ -132,7 +132,7 @@ However, Qwen3 14B does not produce reliably factual answers on more nuanced que
 
 ![](/imgs/blogs/linear-representations-in-language-models-can-change-dramatically-over-a-conversation-20260203134710.png)
 
-The authors evaluate the unsupervised Contrast Consistent Search (CCS) method (proposed in ![Discovering Latent Knowledge in Language Models Without Supervision
+The authors evaluate the unsupervised Contrast Consistent Search (CCS) method (proposed in [Discovering Latent Knowledge in Language Models Without Supervision
 ](https://arxiv.org/abs/2212.03827)) for identifying representation dimensions related to concepts like factuality. They test CCS on the same datasets and model layers used in their main experiments, repeating the procedure many times and evaluating only cases where CCS performs well on held out generic factual questions in an empty context.
 
 They find that CCS can often identify useful dimensions in empty prompts, reproducing prior results. However, once a long conversation is introduced, CCS performance frequently degrades, sometimes falling below chance even on generic factual questions. For conversation specific questions, CCS shows similar flipping behavior to that observed in the main experiments: it performs above chance in empty contexts but often fails in conversational settings.
