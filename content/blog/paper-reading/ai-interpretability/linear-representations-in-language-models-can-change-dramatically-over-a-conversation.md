@@ -7,6 +7,7 @@ tags:
   [
     "ai-interpretability",
     "language-models",
+    "activation-steering",
     "representation-learning",
     "paper-reading",
   ]
@@ -14,7 +15,7 @@ date: "2026-02-01"
 author: "Hiep Tran"
 featured: false
 image: "/imgs/blogs/linear-representations-in-language-models-can-change-dramatically-over-a-conversation-20260201164730.png"
-excerpt: ""
+excerpt: "A deep dive into how language models' internal representations of concepts like factuality and ethics can flip dramatically during conversations, challenging assumptions behind interpretability methods and raising important questions for AI safety."
 ---
 
 ## Motivation
