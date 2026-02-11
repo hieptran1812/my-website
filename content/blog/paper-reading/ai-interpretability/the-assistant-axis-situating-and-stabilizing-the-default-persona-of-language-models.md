@@ -5,7 +5,7 @@ publishDate: "2026-02-09"
 category: paper-reading
 subcategory: AI Interpretability
 tags:
-  - persona
+  - role-play
   - language-models
   - alignment
   - model-interpretability
@@ -14,7 +14,7 @@ date: "2026-02-09"
 author: Hiep Tran
 featured: false
 image: "/imgs/blogs/the-assistant-axis-situating-and-stabilizing-the-default-persona-of-language-models-20260209115113.png"
-excerpt: ""
+excerpt: 'This paper maps a low-dimensional persona space from model activations and identifies an "Assistant Axis" that tracks how close behavior stays to the default assistant persona. It shows how prompts can induce persona drift and proposes activation capping to stabilize the assistant and reduce harmful outputs without hurting core capabilities.'
 ---
 
 ## Motivation
