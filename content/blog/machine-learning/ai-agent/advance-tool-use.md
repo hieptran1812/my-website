@@ -91,16 +91,45 @@ Here's a visual analogy:
 ✅ Tool Search: Load search tool → User asks about GitHub → Load github.createPR = 3.5K tokens
 ```
 
+### Two Search Variants
+
+The Claude Developer Platform provides two built-in search strategies, each suited to different use cases:
+
+| Variant   | Type ID                           | How Claude Searches                                                                                | Best For                                                                                                         |
+| --------- | --------------------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Regex** | `tool_search_tool_regex_20251119` | Claude constructs regex patterns like `github\|pull.?request` to match tool names and descriptions | Precise, structured lookups where Claude knows the exact tool name or keyword pattern                            |
+| **BM25**  | `tool_search_tool_bm25_20251119`  | Claude writes natural language queries like `"create a pull request on GitHub"`                    | Fuzzy, intent-based discovery where Claude describes what it wants to do rather than knowing the exact tool name |
+
+**Regex** is great when your tools have consistent naming conventions (e.g., `github.createPullRequest`, `slack.sendMessage`) — Claude can pattern-match directly. **BM25** shines when tool names are less predictable or when Claude needs to describe a capability rather than guess a name (e.g., searching for `"send a notification to a user"` instead of guessing whether the tool is called `notify-user`, `send-notification`, or `user-alert`).
+
+You can also implement a **custom search tool** using embeddings or any other strategy by defining your own tool that accepts a search query and returns matching tool references.
+
+Here's how to choose:
+
+```
+Use Case                              → Variant
+─────────────────────────────────────────────────────
+Tools with clear, consistent names     → Regex
+Tools with verbose/varied descriptions → BM25
+Need semantic understanding            → Custom (embeddings)
+```
+
 ### Implementation Example
 
 ```json
 {
   "tools": [
-    // The search tool itself — always loaded
+    // The search tool itself — always loaded (choose one variant)
+    // Option A: Regex-based search
     {
       "type": "tool_search_tool_regex_20251119",
       "name": "tool_search_tool_regex"
     },
+    // Option B: BM25-based search (use one or the other, not both)
+    // {
+    //   "type": "tool_search_tool_bm25_20251119",
+    //   "name": "tool_search_tool_bm25"
+    // },
 
     // GitHub tools — discoverable on demand
     {
