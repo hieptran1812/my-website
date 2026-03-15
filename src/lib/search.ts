@@ -147,15 +147,15 @@ export const calculateRelevance = (
   // Individual word matching with position weighting
   queryWords.forEach((word) => {
     // Title matches (high weight)
-    if (normalizedTitle.includes(word)) {
-      const titleIndex = normalizedTitle.indexOf(word);
+    const titleIndex = normalizedTitle.indexOf(word);
+    if (titleIndex !== -1) {
       // Higher score for words appearing earlier in title
       score += Math.max(50 - titleIndex * 2, 20);
     }
 
     // Description matches (medium weight)
-    if (normalizedDescription.includes(word)) {
-      const descIndex = normalizedDescription.indexOf(word);
+    const descIndex = normalizedDescription.indexOf(word);
+    if (descIndex !== -1) {
       score += Math.max(30 - descIndex * 0.1, 10);
     }
 
@@ -288,8 +288,18 @@ export const searchContent = (
     });
   }
 
-  // Calculate relevance for all items
+  // Calculate relevance - skip items with no textual overlap for efficiency
+  const normalizedQuery = query.toLowerCase().trim();
+  const queryWords = normalizedQuery
+    .split(/\s+/)
+    .filter((word) => word.length > 0);
+
   const scoredResults = content
+    .filter((item) => {
+      // Quick pre-filter: at least one query word must appear somewhere
+      const text = `${item.title} ${item.description} ${item.category || ""} ${(item.tags || []).join(" ")} ${(item.technologies || []).join(" ")}`.toLowerCase();
+      return queryWords.some((word) => text.includes(word));
+    })
     .map((item) => ({
       ...item,
       relevanceScore: calculateRelevance(item, query),
@@ -307,38 +317,3 @@ export const searchContent = (
   );
 };
 
-// Utility to highlight matching text
-export const highlightMatch = (text: string, query: string): string => {
-  if (!query.trim()) return text;
-
-  const normalizedQuery = query.toLowerCase();
-  const queryWords = normalizedQuery
-    .split(/\s+/)
-    .filter((word) => word.length > 0);
-
-  let highlightedText = text;
-
-  // Highlight exact phrase first
-  const exactIndex = text.toLowerCase().indexOf(normalizedQuery);
-  if (exactIndex !== -1) {
-    const before = text.substring(0, exactIndex);
-    const match = text.substring(
-      exactIndex,
-      exactIndex + normalizedQuery.length
-    );
-    const after = text.substring(exactIndex + normalizedQuery.length);
-
-    return `${before}<mark class="bg-blue-200 dark:bg-blue-800 px-1 rounded">${match}</mark>${after}`;
-  }
-
-  // Highlight individual words
-  queryWords.forEach((word) => {
-    const regex = new RegExp(`(${word})`, "gi");
-    highlightedText = highlightedText.replace(
-      regex,
-      '<mark class="bg-blue-200 dark:bg-blue-800 px-1 rounded">$1</mark>'
-    );
-  });
-
-  return highlightedText;
-};

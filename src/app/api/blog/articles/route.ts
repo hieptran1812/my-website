@@ -144,7 +144,8 @@ export async function GET(request: NextRequest) {
     const categoryFilter = searchParams.get("category");
     const subcategoryFilter = searchParams.get("subcategory");
     const page = parseInt(searchParams.get("page") || "1");
-    const limit = parseInt(searchParams.get("limit") || "50");
+    const limit = parseInt(searchParams.get("limit") || "500");
+    const excludeContent = searchParams.get("excludeContent") === "true";
 
     const contentDir = path.join(process.cwd(), "content", "blog");
     const articles: Article[] = [];
@@ -200,9 +201,8 @@ export async function GET(request: NextRequest) {
           const fileName = entry.name.replace(/\.md$/, "");
           const slug = basePath ? `${basePath}/${fileName}` : fileName;
 
-          // Create unique ID using full path and file stats
-          const stats = fs.statSync(fullPath);
-          const uniqueId = `${slug.replace(/\//g, "-")}-${stats.mtimeMs}`;
+          // Create unique ID using full path
+          const uniqueId = `${slug.replace(/\//g, "-")}`;
 
           const article = convertToArticle(
             metadata,
@@ -244,8 +244,14 @@ export async function GET(request: NextRequest) {
     const endIndex = startIndex + limit;
     const paginatedArticles = articles.slice(startIndex, endIndex);
 
+    // Strip content field when not needed (saves significant bandwidth for search)
+    const responseArticles = excludeContent
+      ? // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        paginatedArticles.map(({ content, ...rest }) => rest)
+      : paginatedArticles;
+
     return NextResponse.json({
-      articles: paginatedArticles,
+      articles: responseArticles,
       total: articles.length,
       page,
       limit,
