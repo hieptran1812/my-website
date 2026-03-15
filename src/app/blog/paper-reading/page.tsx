@@ -12,19 +12,6 @@ import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 import { getArticleImageUrl } from "@/lib/articleImage";
 import SubcategoryFilter from "@/components/SubcategoryFilter";
 
-// Define the list of paper reading subtopics
-const paperReadingSubtopics = [
-  { name: "Multimodal", slug: "multimodal" },
-  { name: "Computer Vision", slug: "computer vision" },
-  { name: "Large Language Model", slug: "large language model" },
-  { name: "AI Agent", slug: "ai agent" },
-  { name: "AI Interpretability", slug: "ai interpretability" },
-  { name: "Machine Learning", slug: "machine learning" },
-  { name: "Speech Processing", slug: "speech processing" },
-  { name: "Deep Learning", slug: "deep learning" },
-  { name: "MLOps", slug: "mlops" },
-  { name: "Reinforcement Learning", slug: "reinforcement learning" },
-];
 
 export default function PaperReadingBlogPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
