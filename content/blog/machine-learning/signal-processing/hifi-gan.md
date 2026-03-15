@@ -185,7 +185,13 @@ HiFi-GAN uses a combination of three losses:
 
 #### 1. Adversarial Loss (GAN Loss)
 
-The standard GAN objective, but using **least squares GAN** instead of the original cross-entropy formulation for more stable training:
+The adversarial loss is the core GAN training signal — the "game" between the generator and discriminators. HiFi-GAN uses **Least Squares GAN (LSGAN)** instead of the original cross-entropy formulation from the vanilla GAN paper.
+
+**Why LSGAN instead of vanilla GAN?**
+
+In the original GAN, the discriminator outputs a probability (0 to 1) via a sigmoid, and the loss uses binary cross-entropy. This causes a well-known problem: once the discriminator becomes confident (outputs near 0 or 1), the gradients **vanish** — the sigmoid saturates and provides almost no learning signal to the generator. The generator stops improving even though its outputs are still far from realistic.
+
+LSGAN fixes this by removing the sigmoid and using a simple squared difference. The discriminator outputs an unbounded real number, and the loss penalizes based on **how far** that number is from the target:
 
 $$L_{adv}(G) = \mathbb{E}\left[(D(G(s)) - 1)^2\right]$$
 
@@ -193,32 +199,100 @@ $$L_{adv}(D) = \mathbb{E}\left[(D(x) - 1)^2 + D(G(s))^2\right]$$
 
 where $x$ is real audio, $s$ is the mel-spectrogram, and $G(s)$ is the generated audio.
 
-This loss is computed for **each sub-discriminator** in both MPD and MSD (8 discriminators total).
+**How to read these formulas:**
+
+- **Generator loss** $L_{adv}(G)$: The generator wants the discriminator to output 1 (meaning "this is real") for its generated audio $G(s)$. So it minimizes $(D(G(s)) - 1)^2$ — pushing the discriminator's output toward 1.
+- **Discriminator loss** $L_{adv}(D)$: The discriminator has two jobs. For real audio $x$, it wants to output 1 — so it minimizes $(D(x) - 1)^2$. For generated audio $G(s)$, it wants to output 0 — so it minimizes $D(G(s))^2$.
+
+The squared term means that samples far from the target receive **much larger gradients** than those close to it. A generated sample scoring 0.3 gets a gentle push, while one scoring -2.0 gets a massive correction. This provides a smooth, continuous learning signal that never vanishes.
+
+**Multiple discriminators**: This loss is computed for **each sub-discriminator** independently — 5 from MPD + 3 from MSD = **8 adversarial losses** total. Each discriminator specializes in different audio aspects (periodic patterns at different scales, overall structure at different resolutions), so the generator receives diverse feedback about what makes audio sound realistic.
 
 #### 2. Mel-Spectrogram Loss
 
-This reconstruction loss ensures the generated audio matches the input mel-spectrogram:
+The mel-spectrogram loss is a **reconstruction loss** that directly compares the spectral content of generated and real audio:
 
 $$L_{mel} = \mathbb{E}\left[\|M(x) - M(G(s))\|_1\right]$$
 
-where $M(\cdot)$ extracts the mel-spectrogram. This is crucial for:
+where $M(\cdot)$ is the function that computes a mel-spectrogram from a waveform, and $\|\cdot\|_1$ is the L1 norm (sum of absolute differences).
 
-- **Stabilizing early training** — gives a strong gradient signal before the discriminator is effective
-- **Ensuring spectral accuracy** — the GAN loss alone might produce realistic-sounding but spectrally inaccurate audio
+**What this does in practice:**
+
+1. Take the generated waveform $G(s)$
+2. Compute its mel-spectrogram $M(G(s))$
+3. Compare it element-by-element against the mel-spectrogram of the real audio $M(x)$
+4. Sum up all the absolute differences
+
+This creates a direct "distance" between the spectral content of real and generated audio across all frequency bins and time frames.
+
+**Why L1 (absolute difference) instead of L2 (squared difference)?**
+
+L2 loss heavily penalizes large errors but is lenient on small ones. In spectrograms, this leads to **over-smoothing** — the model learns to produce blurry, averaged spectrograms that avoid large errors but lack sharp detail. L1 loss penalizes all errors equally, encouraging sharper, more detailed spectral reconstruction.
+
+**Why is this loss critical? Three reasons:**
+
+- **Stabilizing early training**: At the beginning of training, the generator produces random noise. The discriminator can easily distinguish this from real audio, so the adversarial loss provides very weak, uninformative gradients ("everything you make is terrible" isn't useful feedback). The mel-spectrogram loss provides a clear, direct gradient: "the energy at 500Hz should be higher, the energy at 2000Hz should be lower." This gives the generator a concrete direction to improve from the very first step.
+
+- **Preventing mode collapse**: A common GAN failure mode is the generator learning to produce a small set of "safe" outputs that fool the discriminator, rather than diverse, accurate outputs. The mel-spectrogram loss anchors the generator to the specific input — it can't just generate any realistic-sounding audio, it must generate audio that matches **this particular** mel-spectrogram.
+
+- **Ensuring spectral accuracy**: The adversarial loss optimizes for "sounds realistic to the discriminator." But the discriminator might not notice subtle spectral errors — for example, a slight shift in formant frequencies that changes an "eh" vowel into an "ah" vowel. The mel-spectrogram loss directly catches these errors because it compares frequency content explicitly.
+
+**Why $\lambda_{mel} = 45$?** This is the highest weight among all losses. The large coefficient ensures that spectral accuracy dominates during training. Without it, the GAN loss might push the generator toward "realistic-sounding but wrong" audio. Think of it as the mel loss keeping the generator "on track" while the adversarial loss adds the fine perceptual details.
 
 #### 3. Feature Matching Loss
 
-For each discriminator layer $l$, compare intermediate features between real and generated audio:
+The feature matching loss compares the **internal representations** of real and generated audio inside the discriminator, not just the final output:
 
 $$L_{fm} = \mathbb{E}\left[\sum_{l=1}^{L} \frac{1}{N_l}\|D^l(x) - D^l(G(s))\|_1\right]$$
 
-This helps the generator learn to match internal representations, not just fool the final output. Think of it as teaching the generator to match the "texture" of real audio at multiple levels of abstraction.
+where $D^l$ denotes the output of the $l$-th layer of discriminator $D$, $L$ is the total number of layers, and $N_l$ is the number of elements in layer $l$'s output.
+
+**The intuition — why internal features matter:**
+
+A discriminator trained on audio learns a hierarchy of audio features, similar to how an image classifier learns edges → textures → shapes → objects. In HiFi-GAN's discriminator:
+
+- **Early layers** learn low-level features: waveform shape, local amplitude patterns, individual pitch pulses
+- **Middle layers** learn mid-level features: spectral envelope, formant transitions, pitch contour patterns
+- **Late layers** learn high-level features: overall naturalness, speaker characteristics, phonetic structure
+
+The feature matching loss forces the generator to match real audio at **every level** of this hierarchy. Even if the generator can fool the discriminator's final layer (by producing superficially realistic audio), the intermediate layers will reveal deeper mismatches.
+
+**Analogy**: Imagine an art forger trying to replicate a painting. The adversarial loss is like asking a critic "is this real?" — a binary judgment. The feature matching loss is like saying "compare the brush strokes, the paint texture, the color mixing, and the canvas treatment at every level of detail." It's a much richer and more stable training signal.
+
+**Why this stabilizes training:**
+
+GAN training is notoriously unstable — the generator and discriminator can oscillate, with the discriminator becoming too strong (causing vanishing gradients) or too weak (providing no useful signal). Feature matching loss acts as a **stabilizer** because:
+
+1. It doesn't depend on the discriminator's final classification decision, only its internal representations
+2. The discriminator's features change slowly during training (compared to its output), providing a more consistent target
+3. It provides gradients from every layer, so even if some layers are saturated, others still provide signal
+
+**How it's computed in HiFi-GAN:**
+
+The feature matching loss is computed for every sub-discriminator in both MPD and MSD. For each of the 8 sub-discriminators, the loss compares features at every convolutional layer (typically 5-7 layers each). This means the generator receives feature-level feedback from **40-56 different feature maps** — an incredibly rich training signal.
 
 #### Final Combined Loss
 
 $$L_G = \sum_{k=1}^{K} L_{adv}(G; D_k) + \lambda_{fm} \sum_{k=1}^{K} L_{fm}(G; D_k) + \lambda_{mel} L_{mel}(G)$$
 
 The paper uses $\lambda_{fm} = 2$ and $\lambda_{mel} = 45$.
+
+**Why these specific weights?**
+
+The three losses play complementary roles, and the weights reflect their relative importance:
+
+| Loss | Weight | Role | Analogy |
+|------|--------|------|---------|
+| Adversarial | 1 (base) | Perceptual realism — "does it sound real?" | Art critic's overall judgment |
+| Feature Matching | 2 | Structural similarity — "does it match the texture and detail?" | Comparing under a magnifying glass |
+| Mel-Spectrogram | 45 | Spectral accuracy — "does it contain the right frequencies?" | Checking the blueprint matches the building |
+
+The mel loss has by far the largest weight because spectral accuracy is the foundation — you can't have natural-sounding audio if the frequency content is wrong. The feature matching loss is weighted higher than adversarial because it provides more stable, informative gradients. The adversarial loss is the lightest touch, adding the perceptual polish that makes audio sound natural rather than just spectrally correct.
+
+**The interplay during training:**
+- **Epochs 0-100**: Mel-spectrogram loss dominates. The generator quickly learns to produce roughly correct spectral content. Audio sounds muffled but recognizable.
+- **Epochs 100-500**: Feature matching loss becomes important. The generator starts capturing finer structural details — pitch harmonics, consonant textures, transitions. Audio starts sounding clear but slightly "synthetic."
+- **Epochs 500+**: Adversarial loss provides the final polish. The generator learns the subtle qualities that distinguish "almost real" from "indistinguishable from real" — micro-level waveform details, natural amplitude variations, realistic noise characteristics.
 
 ## Implementation
 
