@@ -9,7 +9,6 @@ date: "2026-03-15"
 author: "Hiep Tran"
 featured: false
 aiGenerated: true
-image: "/imgs/blogs/effective-context-engineering-for-ai-agents-20260315222803.png"
 excerpt: "Context engineering is the art of strategically managing the limited token budget available to LLMs when building AI agents. This article breaks down techniques like compaction, structured note-taking, and sub-agent architectures that help agents work effectively over long horizons."
 ---
 
@@ -29,13 +28,13 @@ This article is my notes and breakdown of [Anthropic's guide on effective contex
 
 Before we dive in, it is important to understand how context engineering evolves beyond prompt engineering:
 
-| Aspect | Prompt Engineering | Context Engineering |
-|--------|-------------------|-------------------|
-| **Scope** | Crafting the system prompt | Managing the entire context state |
-| **Focus** | One-time instruction writing | Continuous, cyclic curation across turns |
-| **Components** | System prompt text | System prompt + tools + MCP + external data + message history + model outputs |
-| **Nature** | Discrete optimization | Iterative, loop-based refinement |
-| **When it matters** | Single-turn tasks | Multi-turn agents operating in loops |
+| Aspect              | Prompt Engineering           | Context Engineering                                                           |
+| ------------------- | ---------------------------- | ----------------------------------------------------------------------------- |
+| **Scope**           | Crafting the system prompt   | Managing the entire context state                                             |
+| **Focus**           | One-time instruction writing | Continuous, cyclic curation across turns                                      |
+| **Components**      | System prompt text           | System prompt + tools + MCP + external data + message history + model outputs |
+| **Nature**          | Discrete optimization        | Iterative, loop-based refinement                                              |
+| **When it matters** | Single-turn tasks            | Multi-turn agents operating in loops                                          |
 
 When agents operate in loops, they generate accumulating data that could be relevant at future turns. Context engineering becomes the discipline of determining **which information enters the limited context window** from this expanding universe of possibilities. It is not just about what you write upfront — it is about what the model sees at every single inference step.
 
@@ -95,11 +94,11 @@ from the script.           cases.                     have.
 
 Here is what each extreme looks like in practice:
 
-| Problem | Example | Why It Fails |
-|---------|---------|--------------|
-| **Over-specific** | "If the user says 'refund' and their order is < 30 days old and the item is undamaged and they have not had a refund in the last 90 days, then approve. If the order is 30-45 days old, escalate to tier 2. If 45-60 days..." | Brittle. Breaks on any edge case not listed. What happens at exactly 30 days? What if the item is partially damaged? The model cannot generalize. |
-| **Under-specific** | "Handle refund requests appropriately." | Vague. The model guesses what "appropriate" means based on its training data. Different models, or even different samples from the same model, may interpret this completely differently. |
-| **Just right** | "Process refund requests by verifying order date and item condition. Approve refunds for orders within 30 days with undamaged items. Escalate unclear cases to human review. When in doubt, prioritize customer satisfaction." | Clear rules for common cases + flexible heuristics for edge cases + a fallback principle for ambiguity. |
+| Problem            | Example                                                                                                                                                                                                                        | Why It Fails                                                                                                                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Over-specific**  | "If the user says 'refund' and their order is < 30 days old and the item is undamaged and they have not had a refund in the last 90 days, then approve. If the order is 30-45 days old, escalate to tier 2. If 45-60 days..."  | Brittle. Breaks on any edge case not listed. What happens at exactly 30 days? What if the item is partially damaged? The model cannot generalize.                                         |
+| **Under-specific** | "Handle refund requests appropriately."                                                                                                                                                                                        | Vague. The model guesses what "appropriate" means based on its training data. Different models, or even different samples from the same model, may interpret this completely differently. |
+| **Just right**     | "Process refund requests by verifying order date and item condition. Approve refunds for orders within 30 days with undamaged items. Escalate unclear cases to human review. When in doubt, prioritize customer satisfaction." | Clear rules for common cases + flexible heuristics for edge cases + a fallback principle for ambiguity.                                                                                   |
 
 **Best practices for system prompts:**
 
@@ -396,14 +395,14 @@ When agents navigate codebases or data autonomously, they benefit from **progres
 
 Consider how much you can learn without reading file contents:
 
-| Signal | What It Tells You | Example |
-|--------|-------------------|---------|
-| **File name** | Purpose and domain | `test_utils.py` in `tests/` vs. in `src/core_logic/` signals very different purposes |
-| **Directory structure** | Domain architecture | `src/auth/`, `src/payments/`, `src/notifications/` reveals bounded contexts |
-| **File size** | Complexity level | A 5,000-line file suggests complexity; a 50-line file suggests a utility or config |
-| **Timestamps** | Relevance to active work | Recently modified files are more likely relevant |
-| **Naming conventions** | Architectural patterns | `*_handler.py`, `*_service.py`, `*_repository.py` reveal layered architecture |
-| **Import statements** | Dependencies and coupling | First few lines reveal what a module depends on without reading the body |
+| Signal                  | What It Tells You         | Example                                                                              |
+| ----------------------- | ------------------------- | ------------------------------------------------------------------------------------ |
+| **File name**           | Purpose and domain        | `test_utils.py` in `tests/` vs. in `src/core_logic/` signals very different purposes |
+| **Directory structure** | Domain architecture       | `src/auth/`, `src/payments/`, `src/notifications/` reveals bounded contexts          |
+| **File size**           | Complexity level          | A 5,000-line file suggests complexity; a 50-line file suggests a utility or config   |
+| **Timestamps**          | Relevance to active work  | Recently modified files are more likely relevant                                     |
+| **Naming conventions**  | Architectural patterns    | `*_handler.py`, `*_service.py`, `*_repository.py` reveal layered architecture        |
+| **Import statements**   | Dependencies and coupling | First few lines reveal what a module depends on without reading the body             |
 
 Agents can **assemble understanding layer by layer**, maintaining only what is necessary in working memory:
 
@@ -440,10 +439,12 @@ In practice, the best approach is often a **hybrid**: load critical context upfr
 ```
 
 **Claude Code uses this hybrid approach:**
+
 - **Pre-loaded**: `CLAUDE.md` files are dropped into context at startup, providing project-specific conventions, architecture notes, and common commands
 - **Just-in-time**: `glob` and `grep` primitives enable on-demand file retrieval, bypassing stale indexing and complex syntax tree issues
 
 This avoids two common pitfalls:
+
 1. **Stale indexes** — Pre-computed embeddings become outdated as code changes. Grep always searches the current state.
 2. **Index granularity** — Embedding-based retrieval might return an entire file when only one function matters. Agentic search can target exactly the right lines.
 
@@ -513,13 +514,13 @@ Turn 51+: Fresh context with:
 
 **The art of compaction** is choosing what to keep versus what to discard. This is a recall vs. precision trade-off:
 
-| Keep (High Recall) | Discard (High Precision) |
-|---------------------|--------------------------|
-| Current objective and sub-goals | Raw tool outputs already processed |
-| Key decisions and their reasoning | Verbose error logs from resolved issues |
-| Files modified and their state | Exploratory dead ends |
-| Unresolved bugs and blockers | Intermediate reasoning that led to conclusions |
-| Architectural decisions | Code snippets already written to files |
+| Keep (High Recall)                | Discard (High Precision)                       |
+| --------------------------------- | ---------------------------------------------- |
+| Current objective and sub-goals   | Raw tool outputs already processed             |
+| Key decisions and their reasoning | Verbose error logs from resolved issues        |
+| Files modified and their state    | Exploratory dead ends                          |
+| Unresolved bugs and blockers      | Intermediate reasoning that led to conclusions |
+| Architectural decisions           | Code snippets already written to files         |
 
 **Anthropic's recommendation**: Start aggressive on recall (keep more), then iterate to improve precision (discard noise) based on what causes problems.
 
@@ -564,26 +565,31 @@ During complex multi-file refactoring, Claude Code maintains structured notes:
 ## Status: In Progress (3/7 files complete)
 
 ## Completed
+
 - [x] auth.js - Replaced JWT verification with OAuth2 token validation
 - [x] middleware.js - Updated auth middleware to use new token format
 - [x] config.js - Added OAuth2 provider settings (Google, GitHub)
 
 ## Remaining
+
 - [ ] user.js - 8 JWT references, needs token refresh logic
 - [ ] admin.js - Custom auth decorator (needs special handling, see note below)
 - [ ] api.js - 15 endpoint auth checks to update
 - [ ] tests/ - All auth tests need rewriting
 
 ## Key Decisions
+
 - Using PKCE flow for mobile clients (more secure for public clients)
 - Refresh tokens in httpOnly cookies (prevents XSS token theft)
 - Access token TTL: 1 hour, Refresh token TTL: 7 days
 
 ## Blockers
+
 - admin.js has a custom @require_admin decorator that bypasses standard
   middleware. Need to understand all code paths before modifying.
 
 ## Notes
+
 - middleware.js line 142: potential race condition in concurrent token
   refresh. Added mutex but needs load testing.
 ```
@@ -598,27 +604,32 @@ Its notes looked something like this:
 
 ```markdown
 ## Current Objective
+
 Train Pikachu to level 25 in Route 1 (currently level 17, +8 levels in 1,234 steps)
 
 ## Map Notes
+
 - Route 1: Grass patches at coordinates (12,5), (15,8), (20,3)
 - Viridian City: Poke Center at north entrance, Mart at south
 - Route 2: Leads to Viridian Forest, higher level Pokemon
 - Pewter City: First gym, Brock uses Rock-type Pokemon
 
 ## Battle Strategy
+
 - Pikachu: Lead with Thunder Shock against water/flying types
 - Switch to Charmander for grass types
 - Heal at 30% HP, don't risk fainting
 - Avoid Geodude encounters (Thunder Shock ineffective)
 
 ## Completed Objectives
+
 - [x] Get starter Pokemon (Charmander)
 - [x] Deliver Oak's Parcel
 - [x] Get Pokedex
 - [x] Catch Pikachu in Viridian Forest
 
 ## Inventory
+
 - Poke Balls: 7
 - Potions: 3
 - Antidote: 1
@@ -825,13 +836,14 @@ Anthropic's own research showed that this multi-agent approach produced **substa
 
 ### Choosing the Right Strategy
 
-| Strategy | Best For | Strengths | Limitations |
-|----------|----------|-----------|-------------|
-| **Compaction** | Long conversations with lots of back-and-forth | Maintains conversational flow, simple to implement, first lever to pull | Lossy — subtle context may be lost in summarization |
-| **Note-taking** | Iterative development with clear milestones | Precise persistence, agent controls what to remember, survives full context resets | Requires good note-taking habits (via prompt engineering) |
-| **Sub-agents** | Complex tasks with parallelizable subtasks | Clean contexts, parallel execution, failure isolation, massive compression | Higher latency per delegation, more complex orchestration |
+| Strategy        | Best For                                       | Strengths                                                                          | Limitations                                               |
+| --------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| **Compaction**  | Long conversations with lots of back-and-forth | Maintains conversational flow, simple to implement, first lever to pull            | Lossy — subtle context may be lost in summarization       |
+| **Note-taking** | Iterative development with clear milestones    | Precise persistence, agent controls what to remember, survives full context resets | Requires good note-taking habits (via prompt engineering) |
+| **Sub-agents**  | Complex tasks with parallelizable subtasks     | Clean contexts, parallel execution, failure isolation, massive compression         | Higher latency per delegation, more complex orchestration |
 
 In practice, **the best agents combine all three**:
+
 - **Sub-agents** handle focused work with clean context
 - Each sub-agent uses **note-taking** for its own persistence
 - **Compaction** keeps individual context windows manageable within long sub-tasks
@@ -847,12 +859,14 @@ Start with compaction. Add note-taking when you need milestone persistence. Add 
 When building an agent, work through these questions:
 
 ### System Prompt
+
 - [ ] Is it at the right altitude? (Not too brittle, not too vague)
 - [ ] Is it organized into clear sections with XML tags or Markdown headers?
 - [ ] Have you tested with a minimal version first and iterated based on failures?
 - [ ] Could someone with no domain knowledge follow the instructions?
 
 ### Tools
+
 - [ ] Does each tool have a single, clear purpose?
 - [ ] Are tool returns token-efficient (only returning what is needed)?
 - [ ] Is there no overlap between tools?
@@ -861,6 +875,7 @@ When building an agent, work through these questions:
 - [ ] Do tools return clear error messages?
 
 ### Context Retrieval
+
 - [ ] Are you loading only what the agent needs, when it needs it?
 - [ ] Is critical context pre-loaded for fast startup?
 - [ ] Can the agent explore for additional context via tools?
@@ -868,6 +883,7 @@ When building an agent, work through these questions:
 - [ ] Is the hybrid approach appropriate for your use case?
 
 ### Long-Horizon Management
+
 - [ ] Is compaction configured with appropriate recall/precision balance?
 - [ ] Are old tool results being cleared to reclaim token space?
 - [ ] Does the agent have note-taking tools for milestone persistence?
