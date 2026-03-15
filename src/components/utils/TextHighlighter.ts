@@ -240,7 +240,9 @@ export class TextHighlighter {
             // Check if the previous text doesn't already end with punctuation
             const lastChar = readableText.trim().slice(-1);
             if (lastChar && !lastChar.match(/[.!?:;]/)) {
-              readableText += ".";
+              // Append period to the last word instead of adding it as a standalone token
+              // This prevents creating phantom "words" that break word index sync
+              readableText = readableText.trimEnd() + ".";
             }
           }
 
@@ -381,36 +383,6 @@ export class TextHighlighter {
     }
   }
 
-  /**
-   * Highlight word at the specified character index
-   */
-  public highlightWordAtIndex(charIndex: number): void {
-    const wordInfo = this.getWordByCharacterIndex(charIndex);
-    if (!wordInfo) return;
-
-    // Clear previous word highlight
-    this.clearWordHighlight();
-
-    // Apply word highlight
-    this.currentWordElement = wordInfo.element;
-    this.currentWordElement.classList.add(this.WORD_HIGHLIGHT_CLASS);
-    this.currentWordElement.style.backgroundColor = this.colors.wordHighlight;
-
-    // Always update paragraph highlighting when word changes
-    const paragraphInfo = this.paragraphs[wordInfo.paragraphIndex];
-    if (paragraphInfo) {
-      // If we're moving to a different paragraph, highlight the new one
-      if (wordInfo.paragraphIndex !== this.currentParagraphIndex) {
-        this.highlightParagraph(paragraphInfo);
-        this.currentParagraphIndex = wordInfo.paragraphIndex;
-      }
-      // If we're still in the same paragraph but don't have it highlighted, highlight it
-      else if (!this.currentParagraphElement) {
-        this.highlightParagraph(paragraphInfo);
-        this.currentParagraphIndex = wordInfo.paragraphIndex;
-      }
-    }
-  }
 
   /**
    * Highlight paragraph with special handling for headings

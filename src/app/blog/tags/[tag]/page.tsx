@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import TagBadge, { TagList } from "@/components/TagBadge";
 import { formatDateMedium } from "@/lib/dateUtils";
+import { getArticleImageUrl } from "@/lib/articleImage";
 
 interface BlogPost {
   slug: string;
@@ -282,7 +283,7 @@ export default function TagPage() {
                           {/* Image */}
                           <div className="relative h-48 overflow-hidden">
                             <Image
-                              src={article.image || "/blog-placeholder.jpg"}
+                              src={getArticleImageUrl(article)}
                               alt={article.title}
                               fill
                               className="object-cover transition-transform duration-500 group-hover:scale-110"

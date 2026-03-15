@@ -9,6 +9,8 @@ import CollectionTag from "@/components/CollectionTag";
 import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
+import { getArticleImageUrl } from "@/lib/articleImage";
+import SubcategoryFilter from "@/components/SubcategoryFilter";
 
 // Define the list of trading subtopics
 const tradingSubtopics = [
@@ -21,7 +23,7 @@ const tradingSubtopics = [
 ];
 
 export default function TradingBlogPage() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -86,21 +88,16 @@ export default function TradingBlogPage() {
     ];
   }, [allArticles]);
 
-  // Filter based on subcategory
+  // Filter articles based on selected subcategories (multi-select)
   const filteredArticles = useMemo(() => {
-    let articlesToFilter = allArticles;
+    if (selectedCategories.length === 0) return allArticles;
 
-    if (selectedCategory !== "all") {
-      // Filter by subcategory only
-      articlesToFilter = articlesToFilter.filter(
-        (article) =>
-          article.subcategory &&
-          article.subcategory.toLowerCase() === selectedCategory.toLowerCase(),
-      );
-    }
-
-    return articlesToFilter;
-  }, [allArticles, selectedCategory]);
+    return allArticles.filter(
+      (article) =>
+        article.subcategory &&
+        selectedCategories.includes(article.subcategory.toLowerCase()),
+    );
+  }, [allArticles, selectedCategories]);
 
   // Initialize lazy loading with filtered articles
   const {
@@ -235,16 +232,7 @@ export default function TradingBlogPage() {
                         {/* Left: Featured Image (60%) */}
                         <div className="md:col-span-3 relative h-80 md:h-96">
                           <Image
-                            src={
-                              featuredArticle.image &&
-                              featuredArticle.image.trim() !== "" &&
-                              featuredArticle.image !==
-                                "/blog-placeholder.jpg" &&
-                              featuredArticle.image !==
-                                "/images/default-blog.jpg"
-                                ? featuredArticle.image
-                                : "/blog-placeholder.jpg"
-                            }
+                            src={getArticleImageUrl(featuredArticle)}
                             alt={featuredArticle.title}
                             fill
                             className="object-cover"
@@ -346,7 +334,7 @@ export default function TradingBlogPage() {
                           >
                             <div className="relative h-32 overflow-hidden">
                               <Image
-                                src={article.image || "/blog-placeholder.jpg"}
+                                src={getArticleImageUrl(article)}
                                 alt={article.title}
                                 fill
                                 className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -417,110 +405,20 @@ export default function TradingBlogPage() {
                     All Articles
                   </h2>
                   <p style={{ color: "var(--text-secondary)" }}>
-                    {selectedCategory !== "all"
-                      ? `Showing ${filteredArticles.length} articles in ${
-                          categories.find((c) => c.slug === selectedCategory)
-                            ?.name || selectedCategory
-                        }`
+                    {selectedCategories.length > 0
+                      ? `Showing ${filteredArticles.length} articles`
                       : `${allArticles.length} total trading articles`}
                   </p>
                 </div>
 
-                {/* Predefined Subtopic Filter Pills */}
-                <div className="flex flex-wrap justify-center gap-3 mb-12">
-                  <button
-                    onClick={() => setSelectedCategory("all")}
-                    className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border hover:scale-105 active:scale-95 ${
-                      selectedCategory === "all"
-                        ? "text-white shadow-lg"
-                        : "hover:bg-[var(--surface)] hover:shadow-md"
-                    }`}
-                    style={
-                      selectedCategory === "all"
-                        ? {
-                            backgroundColor: "var(--accent)",
-                            borderColor: "var(--accent)",
-                            boxShadow: "0 4px 12px rgba(255, 165, 0, 0.3)",
-                          }
-                        : {
-                            borderColor: "var(--border)",
-                            backgroundColor: "var(--surface)",
-                            color: "var(--text-secondary)",
-                          }
-                    }
-                  >
-                    <span className="flex items-center gap-2">
-                      All
-                      <span
-                        className="px-2 py-0.5 rounded-full text-xs font-bold"
-                        style={{
-                          backgroundColor:
-                            selectedCategory === "all"
-                              ? "rgba(255, 255, 255, 0.2)"
-                              : "var(--accent)",
-                          color: selectedCategory === "all" ? "white" : "white",
-                        }}
-                      >
-                        {allArticles.length}
-                      </span>
-                    </span>
-                  </button>
-                  {tradingSubtopics.map((subtopic) => {
-                    const articleCount = allArticles.filter(
-                      (article) =>
-                        article.subcategory &&
-                        article.subcategory.toLowerCase() ===
-                          subtopic.slug.toLowerCase(),
-                    ).length;
-
-                    if (articleCount === 0) return null;
-
-                    return (
-                      <button
-                        key={subtopic.slug}
-                        onClick={() =>
-                          setSelectedCategory(subtopic.slug.toLowerCase())
-                        }
-                        className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border hover:scale-105 active:scale-95 ${
-                          selectedCategory === subtopic.slug.toLowerCase()
-                            ? "text-white shadow-lg"
-                            : "hover:bg-[var(--surface)] hover:shadow-md"
-                        }`}
-                        style={
-                          selectedCategory === subtopic.slug.toLowerCase()
-                            ? {
-                                backgroundColor: "var(--accent)",
-                                borderColor: "var(--accent)",
-                                boxShadow: "0 4px 12px rgba(255, 165, 0, 0.3)",
-                              }
-                            : {
-                                borderColor: "var(--border)",
-                                backgroundColor: "var(--surface)",
-                                color: "var(--text-secondary)",
-                              }
-                        }
-                      >
-                        <span className="flex items-center gap-2">
-                          {subtopic.name}
-                          <span
-                            className="px-2 py-0.5 rounded-full text-xs font-bold"
-                            style={{
-                              backgroundColor:
-                                selectedCategory === subtopic.slug.toLowerCase()
-                                  ? "rgba(255, 255, 255, 0.2)"
-                                  : "var(--accent)",
-                              color:
-                                selectedCategory === subtopic.slug.toLowerCase()
-                                  ? "white"
-                                  : "white",
-                            }}
-                          >
-                            {articleCount}
-                          </span>
-                        </span>
-                      </button>
-                    );
-                  })}
+                {/* Subtopic Filter Pills */}
+                <div className="flex justify-center mb-12">
+                  <SubcategoryFilter
+                    categories={categories.slice(1)}
+                    selectedSlugs={selectedCategories}
+                    onSelectionChange={setSelectedCategories}
+                    totalCount={allArticles.length}
+                  />
                 </div>
 
                 {/* Articles Grid */}
@@ -541,7 +439,7 @@ export default function TradingBlogPage() {
                         >
                           <div className="relative h-48 overflow-hidden">
                             <Image
-                              src={article.image || "/blog-placeholder.jpg"}
+                              src={getArticleImageUrl(article)}
                               alt={article.title}
                               fill
                               className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -608,15 +506,10 @@ export default function TradingBlogPage() {
                       className="mb-4"
                       style={{ color: "var(--text-secondary)" }}
                     >
-                      {`No articles in "${
-                        categories.find((c) => c.slug === selectedCategory)
-                          ?.name
-                      }" category`}
+                      No articles found for the selected filters.
                     </p>
                     <button
-                      onClick={() => {
-                        setSelectedCategory("all");
-                      }}
+                      onClick={() => setSelectedCategories([])}
                       className="px-4 py-2 rounded-lg transition-colors text-white"
                       style={{ backgroundColor: "var(--accent)" }}
                     >

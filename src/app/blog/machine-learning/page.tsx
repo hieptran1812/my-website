@@ -9,6 +9,8 @@ import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
 import AiGeneratedBadge from "@/components/AiGeneratedBadge";
+import { getArticleImageUrl } from "@/lib/articleImage";
+import SubcategoryFilter from "@/components/SubcategoryFilter";
 
 // Define the list of machine learning subtopics
 const machineLearningSubtopics = [
@@ -31,7 +33,7 @@ const machineLearningSubtopics = [
 ];
 
 export default function MachineLearningBlogPage() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -95,21 +97,16 @@ export default function MachineLearningBlogPage() {
     ];
   }, [allArticles]);
 
-  // Filter articles based on subcategory
+  // Filter articles based on selected subcategories (multi-select)
   const filteredArticles = useMemo(() => {
-    let articlesToFilter = allArticles;
+    if (selectedCategories.length === 0) return allArticles;
 
-    if (selectedCategory !== "all") {
-      // Filter by subcategory only
-      articlesToFilter = articlesToFilter.filter(
-        (article) =>
-          article.subcategory &&
-          article.subcategory.toLowerCase() === selectedCategory.toLowerCase(),
-      );
-    }
-
-    return articlesToFilter;
-  }, [allArticles, selectedCategory]);
+    return allArticles.filter(
+      (article) =>
+        article.subcategory &&
+        selectedCategories.includes(article.subcategory.toLowerCase()),
+    );
+  }, [allArticles, selectedCategories]);
 
   // Initialize lazy loading with filtered articles
   const {
@@ -243,7 +240,7 @@ export default function MachineLearningBlogPage() {
                       {/* Left: Featured Image (60%) */}
                       <div className="md:col-span-3 relative h-80 md:h-96">
                         <Image
-                          src={featuredArticle.image || "/blog-placeholder.jpg"}
+                          src={getArticleImageUrl(featuredArticle)}
                           alt={featuredArticle.title}
                           fill
                           className="object-cover"
@@ -343,7 +340,7 @@ export default function MachineLearningBlogPage() {
                         >
                           <div className="relative h-32 overflow-hidden">
                             <Image
-                              src={article.image || "/blog-placeholder.jpg"}
+                              src={getArticleImageUrl(article)}
                               alt={article.title}
                               fill
                               className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -432,97 +429,20 @@ export default function MachineLearningBlogPage() {
                     All Articles
                   </h2>
                   <p style={{ color: "var(--text-secondary)" }}>
-                    {selectedCategory !== "all"
-                      ? `Showing ${filteredArticles.length} articles in ${
-                          categories.find((c) => c.slug === selectedCategory)
-                            ?.name || selectedCategory
-                        }`
+                    {selectedCategories.length > 0
+                      ? `Showing ${filteredArticles.length} articles`
                       : `${allArticles.length} total articles`}
                   </p>
                 </div>
 
                 {/* Subtopic Filter Pills */}
-                <div className="flex flex-wrap justify-center gap-3 mb-12">
-                  <button
-                    onClick={() => setSelectedCategory("all")}
-                    className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border hover:scale-105 active:scale-95 ${
-                      selectedCategory === "all"
-                        ? "text-white shadow-lg"
-                        : "hover:bg-[var(--surface)] hover:shadow-md"
-                    }`}
-                    style={
-                      selectedCategory === "all"
-                        ? {
-                            backgroundColor: "var(--accent)",
-                            borderColor: "var(--accent)",
-                            boxShadow: "0 4px 12px rgba(139, 92, 246, 0.3)",
-                          }
-                        : {
-                            borderColor: "var(--border)",
-                            backgroundColor: "var(--surface)",
-                            color: "var(--text-secondary)",
-                          }
-                    }
-                  >
-                    <span className="flex items-center gap-2">
-                      All
-                      <span
-                        className="px-2 py-0.5 rounded-full text-xs font-bold"
-                        style={{
-                          backgroundColor:
-                            selectedCategory === "all"
-                              ? "rgba(255, 255, 255, 0.2)"
-                              : "var(--accent)",
-                          color: selectedCategory === "all" ? "white" : "white",
-                        }}
-                      >
-                        {allArticles.length}
-                      </span>
-                    </span>
-                  </button>
-                  {categories.slice(1).map((category) => (
-                    <button
-                      key={category.slug}
-                      onClick={() => setSelectedCategory(category.slug)}
-                      className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border hover:scale-105 active:scale-95 ${
-                        selectedCategory === category.slug
-                          ? "text-white shadow-lg"
-                          : "hover:bg-[var(--surface)] hover:shadow-md"
-                      }`}
-                      style={
-                        selectedCategory === category.slug
-                          ? {
-                              backgroundColor: "var(--accent)",
-                              borderColor: "var(--accent)",
-                              boxShadow: "0 4px 12px rgba(139, 92, 246, 0.3)",
-                            }
-                          : {
-                              borderColor: "var(--border)",
-                              backgroundColor: "var(--surface)",
-                              color: "var(--text-secondary)",
-                            }
-                      }
-                    >
-                      <span className="flex items-center gap-2">
-                        {category.name}
-                        <span
-                          className="px-2 py-0.5 rounded-full text-xs font-bold"
-                          style={{
-                            backgroundColor:
-                              selectedCategory === category.slug
-                                ? "rgba(255, 255, 255, 0.2)"
-                                : "var(--accent)",
-                            color:
-                              selectedCategory === category.slug
-                                ? "white"
-                                : "white",
-                          }}
-                        >
-                          {category.count}
-                        </span>
-                      </span>
-                    </button>
-                  ))}
+                <div className="flex justify-center mb-12">
+                  <SubcategoryFilter
+                    categories={categories.slice(1)}
+                    selectedSlugs={selectedCategories}
+                    onSelectionChange={setSelectedCategories}
+                    totalCount={allArticles.length}
+                  />
                 </div>
 
                 {/* Articles Grid - 3 columns */}
@@ -543,7 +463,7 @@ export default function MachineLearningBlogPage() {
                         >
                           <div className="relative h-48 overflow-hidden">
                             <Image
-                              src={article.image || "/blog-placeholder.jpg"}
+                              src={getArticleImageUrl(article)}
                               alt={article.title}
                               fill
                               className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -627,17 +547,14 @@ export default function MachineLearningBlogPage() {
                       className="mb-4"
                       style={{ color: "var(--text-secondary)" }}
                     >
-                      {`No articles in "${
-                        categories.find((c) => c.slug === selectedCategory)
-                          ?.name
-                      }" category`}
+                      No articles found for the selected filters.
                     </p>
                     <button
-                      onClick={() => setSelectedCategory("all")}
+                      onClick={() => setSelectedCategories([])}
                       className="px-4 py-2 rounded-lg transition-colors text-white"
                       style={{ backgroundColor: "var(--accent)" }}
                     >
-                      Show all articles
+                      Clear filters
                     </button>
                   </div>
                 )}

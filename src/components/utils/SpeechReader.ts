@@ -331,20 +331,24 @@ export class SpeechReader {
       processedText += char;
       processedIndex++;
 
-      // Add pauses based on punctuation (these are extra chars that map to same original position)
+      // Add pauses based on punctuation, but ONLY at word boundaries
+      // (when followed by whitespace or end of text).
+      // This prevents splitting compound tokens like "e.g.", "3.14", "U.S." into
+      // multiple words, which would desync word indices with TextHighlighter.
       let extraSpaces = 0;
+      const nextCharIdx = i + 1;
+      const isAtWordBoundary =
+        nextCharIdx >= normalizedText.length ||
+        /\s/.test(normalizedText[nextCharIdx]);
 
-      // Check for sentence endings
-      if (/[.!?]/.test(char)) {
-        extraSpaces = 4; // 5 spaces total (1 already added)
-      }
-      // Check for colons and semicolons
-      else if (/[;:]/.test(char)) {
-        extraSpaces = 2; // 3 spaces total
-      }
-      // Check for commas and dashes
-      else if (/[,—–-]/.test(char)) {
-        extraSpaces = 1; // 2 spaces total
+      if (isAtWordBoundary) {
+        if (/[.!?]/.test(char)) {
+          extraSpaces = 4;
+        } else if (/[;:]/.test(char)) {
+          extraSpaces = 2;
+        } else if (/[,—–-]/.test(char)) {
+          extraSpaces = 1;
+        }
       }
 
       // Add extra spaces for pauses, mapping them to the same original position
@@ -1190,7 +1194,10 @@ export class SpeechReader {
       // Use word-based highlighting for accuracy
       this.highlighter.highlightWordByIndex(wordIndex);
 
-      this.startBackupHighlighting();
+      // Only start backup highlighting if not already running
+      if (!this.highlightSyncTimer) {
+        this.startBackupHighlighting();
+      }
     } catch {
       this.fallbackHighlighting(processedCharIndex);
     }

@@ -91,20 +91,20 @@ export async function GET(request: NextRequest) {
       title: metadata.title || "Untitled",
       excerpt: metadata.excerpt || metadata.description || "",
       content: htmlContent,
-      author: metadata.author || "Hiep Tran",
+      author: metadata.author || "",
       date:
         metadata.publishDate ||
         metadata.date ||
-        new Date().toISOString().split("T")[0],
+        "",
       publishDate:
         metadata.publishDate ||
         metadata.date ||
-        new Date().toISOString().split("T")[0],
+        "",
       readTime: readTimeResult.readTime,
-      category: category || "General",
-      subcategory: metadata.subcategory || "General",
+      category: category || "",
+      subcategory: metadata.subcategory || "",
       tags: metadata.tags || [],
-      difficulty: metadata.difficulty || "Beginner",
+      difficulty: metadata.difficulty || "",
       featured: metadata.featured || false,
       slug,
       collection: metadata.collection,

@@ -15,7 +15,7 @@ export interface Article {
   tags: string[];
   date: string;
   readTime: string;
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  difficulty: string;
   slug: string;
   featured: boolean;
   author?: string;

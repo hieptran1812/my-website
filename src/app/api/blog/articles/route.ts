@@ -16,7 +16,7 @@ export interface Article {
   category: string;
   subcategory: string;
   tags: string[];
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  difficulty: string;
   featured: boolean;
   slug: string;
   image?: string;
@@ -116,17 +116,17 @@ function convertToArticle(
     title: metadata.title || "Untitled",
     excerpt: metadata.excerpt || metadata.description || "",
     content: metadata.content || "",
-    author: metadata.author || "Hiep Tran",
+    author: metadata.author || "",
     date:
       metadata.publishDate ||
       metadata.date ||
-      new Date().toISOString().split("T")[0],
+      "",
     publishDate:
       metadata.publishDate ||
       metadata.date ||
-      new Date().toISOString().split("T")[0],
+      "",
     readTime: readTime,
-    category: metadata.category || category || "General",
+    category: metadata.category || category || "",
     subcategory,
     tags: metadata.tags || [],
     difficulty,

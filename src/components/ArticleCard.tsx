@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Article } from "@/lib/blog";
+import { getArticleImageUrl, isGeneratedImage } from "@/lib/articleImage";
 import FadeInWrapper from "./FadeInWrapper";
 import CollectionTag from "./CollectionTag";
 import AiGeneratedBadge from "./AiGeneratedBadge";
@@ -37,18 +38,12 @@ export default function ArticleCard({
             {/* Image Section */}
             <div className="relative w-full h-48 overflow-hidden">
               <Image
-                src={
-                  article.image &&
-                  article.image.trim() !== "" &&
-                  article.image !== "/blog-placeholder.jpg" &&
-                  article.image !== "/images/default-blog.jpg"
-                    ? article.image
-                    : "/blog-placeholder.jpg"
-                }
+                src={getArticleImageUrl(article)}
                 alt={article.title}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                unoptimized={isGeneratedImage(article)}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               <div className="absolute top-4 right-4">
@@ -70,7 +65,9 @@ export default function ArticleCard({
                 </div>
               )}
 
+              {(article.subcategory || article.readTime || article.difficulty) && (
               <div className="grid md:grid-cols-3 gap-6 mb-6">
+                {article.subcategory && (
                 <div>
                   <div
                     className="text-sm font-medium mb-1"
@@ -85,6 +82,8 @@ export default function ArticleCard({
                     {article.subcategory}
                   </div>
                 </div>
+                )}
+                {article.readTime && (
                 <div>
                   <div
                     className="text-sm font-medium mb-1"
@@ -99,6 +98,8 @@ export default function ArticleCard({
                     {article.readTime}
                   </div>
                 </div>
+                )}
+                {article.difficulty && (
                 <div>
                   <div
                     className="text-sm font-medium mb-1"
@@ -110,10 +111,12 @@ export default function ArticleCard({
                     className="font-semibold"
                     style={{ color: "var(--text-primary)" }}
                   >
-                    {article.difficulty || "Intermediate"}
+                    {article.difficulty}
                   </div>
                 </div>
+                )}
               </div>
+              )}
 
               <h3
                 className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-[var(--accent)] transition-colors"
@@ -139,20 +142,22 @@ export default function ArticleCard({
                 </div>
               )}
 
+              {article.excerpt && (
               <p
                 className="text-lg mb-6 leading-relaxed"
                 style={{ color: "var(--text-secondary)" }}
               >
                 {article.excerpt}
               </p>
+              )}
 
               <div className="flex items-center justify-between">
                 <div
                   className="flex items-center gap-4 text-sm"
                   style={{ color: "var(--text-muted)" }}
                 >
-                  <span>📝 {article.date}</span>
-                  <span>•</span>
+                  {article.date && <span>📝 {article.date}</span>}
+                  {article.date && <span>•</span>}
                   <span>✨ Featured</span>
                 </div>
                 <button
@@ -199,18 +204,12 @@ export default function ArticleCard({
             {/* Image Section */}
             <div className="relative w-full h-32 overflow-hidden">
               <Image
-                src={
-                  article.image &&
-                  article.image.trim() !== "" &&
-                  article.image !== "/blog-placeholder.jpg" &&
-                  article.image !== "/images/default-blog.jpg"
-                    ? article.image
-                    : "/blog-placeholder.jpg"
-                }
+                src={getArticleImageUrl(article)}
                 alt={article.title}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                unoptimized={isGeneratedImage(article)}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
@@ -227,7 +226,9 @@ export default function ArticleCard({
                 </div>
               )}
 
+              {(article.subcategory || article.readTime) && (
               <div className="flex items-center justify-between mb-3">
+                {article.subcategory ? (
                 <span
                   className="px-2 py-1 text-xs font-medium rounded-full"
                   style={{
@@ -238,13 +239,17 @@ export default function ArticleCard({
                 >
                   {article.subcategory}
                 </span>
+                ) : <span />}
+                {article.readTime && (
                 <span
                   className="text-xs"
                   style={{ color: "var(--text-muted)" }}
                 >
                   {article.readTime}
                 </span>
+                )}
               </div>
+              )}
 
               <h3
                 className="text-base font-semibold mb-2 group-hover:text-[var(--accent)] transition-colors line-clamp-2"
@@ -272,18 +277,20 @@ export default function ArticleCard({
                 </div>
               )}
 
+              {article.excerpt && (
               <p
                 className="text-sm mb-3 leading-relaxed line-clamp-2"
                 style={{ color: "var(--text-secondary)" }}
               >
                 {article.excerpt}
               </p>
+              )}
 
               <div
                 className="flex items-center justify-between text-xs"
                 style={{ color: "var(--text-muted)" }}
               >
-                <span>📅 {formatDateShort(article.date)}</span>
+                {article.date ? <span>📅 {formatDateShort(article.date)}</span> : <span />}
                 <span className="inline-flex items-center text-[var(--accent)] hover:scale-105 transition-transform">
                   Read
                   <svg
@@ -322,18 +329,12 @@ export default function ArticleCard({
           {/* Image Section */}
           <div className="relative w-full h-40 overflow-hidden">
             <Image
-              src={
-                article.image &&
-                article.image.trim() !== "" &&
-                article.image !== "/blog-placeholder.jpg" &&
-                article.image !== "/images/default-blog.jpg"
-                  ? article.image
-                  : "/blog-placeholder.jpg"
-              }
+              src={getArticleImageUrl(article)}
               alt={article.title}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              unoptimized={isGeneratedImage(article)}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
           </div>
@@ -350,7 +351,9 @@ export default function ArticleCard({
               </div>
             )}
 
+            {(article.subcategory || article.readTime) && (
             <div className="flex items-center justify-between mb-4">
+              {article.subcategory ? (
               <span
                 className="px-2 py-1 text-xs font-medium rounded-full"
                 style={{
@@ -361,10 +364,14 @@ export default function ArticleCard({
               >
                 {article.subcategory}
               </span>
+              ) : <span />}
+              {article.readTime && (
               <span className="text-xs" style={{ color: "var(--text-muted)" }}>
                 {article.readTime}
               </span>
+              )}
             </div>
+            )}
 
             <h3
               className="text-lg font-semibold mb-3 group-hover:text-[var(--accent)] transition-colors line-clamp-2"
@@ -391,18 +398,20 @@ export default function ArticleCard({
               </div>
             )}
 
+            {article.excerpt && (
             <p
               className="text-sm mb-4 leading-relaxed line-clamp-3"
               style={{ color: "var(--text-secondary)" }}
             >
               {article.excerpt}
             </p>
+            )}
 
             <div
               className="flex items-center justify-between text-xs mt-4"
               style={{ color: "var(--text-muted)" }}
             >
-              <span>📅 {formatDateMedium(article.date)}</span>
+              {article.date ? <span>📅 {formatDateMedium(article.date)}</span> : <span />}
               <span className="inline-flex items-center text-[var(--accent)] hover:scale-105 transition-transform">
                 Read more
                 <svg

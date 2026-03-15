@@ -6,6 +6,7 @@ import Link from "next/link";
 import CollectionTag from "@/components/CollectionTag";
 import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 import { BlogPostMetadata, calculateContentReadTime } from "../lib/blog";
+import { getArticleImageUrl } from "../lib/articleImage";
 import { formatDateMedium } from "../lib/dateUtils";
 
 // Constants
@@ -139,7 +140,7 @@ export default function BlogSection() {
             title: post.title || "Untitled",
             summary: post.excerpt || "No summary available",
             link: `/blog/${post.slug}`,
-            image: post.image || "/blog-placeholder.jpg",
+            image: getArticleImageUrl({ image: post.image, title: post.title, category: post.category }),
             date: formatDateMedium(post.publishDate || ""),
             tags: Array.isArray(post.tags) ? post.tags : [],
             readTime: formatReadTime(post.readTime || fallbackReadTime), // Use formatted read time
@@ -488,13 +489,7 @@ export default function BlogSection() {
                   {/* Featured Image (60%) */}
                   <div className="lg:col-span-3 relative h-80 lg:h-96 overflow-hidden">
                     <Image
-                      src={
-                        featuredArticle.image &&
-                        featuredArticle.image.trim() !== "" &&
-                        featuredArticle.image !== "/blog-placeholder.jpg"
-                          ? featuredArticle.image
-                          : "/blog-placeholder.jpg"
-                      }
+                      src={featuredArticle.image}
                       alt={`Cover image for ${featuredArticle.title}`}
                       fill
                       sizes="(max-width: 1024px) 100vw, 60vw"
@@ -694,13 +689,7 @@ export default function BlogSection() {
                   >
                     <div className="relative h-48 overflow-hidden">
                       <Image
-                        src={
-                          article.image &&
-                          article.image.trim() !== "" &&
-                          article.image !== "/blog-placeholder.jpg"
-                            ? article.image
-                            : "/blog-placeholder.jpg"
-                        }
+                        src={article.image}
                         alt={`Cover image for ${article.title}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

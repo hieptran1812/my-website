@@ -6,6 +6,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import ArticleCard from "@/components/ArticleCard";
 import ArticleGrid from "@/components/ArticleGrid";
 import { formatDateMedium, formatDateShort } from "@/lib/dateUtils";
+import { getArticleImageUrl } from "@/lib/articleImage";
 
 interface BlogPostMetadata {
   slug: string;
@@ -54,7 +55,7 @@ function convertToLibArticle(
     title: article.title,
     excerpt: article.summary,
     content: "",
-    image: article.image || "/placeholder-image.jpg",
+    image: getArticleImageUrl(article),
     category: article.category,
     subcategory: article.category,
     date: article.date,
@@ -273,7 +274,7 @@ export default function BlogPage() {
                       {/* Left: Featured Image (60%) */}
                       <div className="md:col-span-3 relative h-80 md:h-96">
                         <Image
-                          src={featuredArticle.image || "/blog-placeholder.jpg"}
+                          src={getArticleImageUrl(featuredArticle)}
                           alt={featuredArticle.title}
                           fill
                           className="object-cover"
@@ -355,7 +356,7 @@ export default function BlogPage() {
                         >
                           <div className="relative h-32 overflow-hidden">
                             <Image
-                              src={article.image || "/blog-placeholder.jpg"}
+                              src={getArticleImageUrl(article)}
                               alt={article.title}
                               fill
                               className="object-cover transition-transform duration-300 group-hover:scale-105"

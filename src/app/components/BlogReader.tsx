@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useTheme } from "../ThemeProvider";
 import CollectionTag from "../../components/CollectionTag";
 import AiGeneratedBadge from "../../components/AiGeneratedBadge";
@@ -28,7 +28,7 @@ interface TocItem {
 interface BlogReaderProps {
   children?: React.ReactNode;
   title: string;
-  publishDate: string;
+  publishDate?: string;
   readTime?: string;
   tags?: string[];
   category?: string;
@@ -43,18 +43,16 @@ export default function BlogReader({
   children,
   title,
   publishDate,
-  readTime = "5 min read",
+  readTime,
   tags = [],
-  category = "Article",
-  author = "Hiep Tran",
+  category,
+  author,
   postSlug,
   collection,
   aiGenerated,
   dangerouslySetInnerHTML,
 }: BlogReaderProps) {
-  const { theme, isReadingMode, setReadingMode } = useTheme();
-  const [fontSize, setFontSize] = useState(18);
-  const [lineHeight, setLineHeight] = useState(1.6);
+  const { theme, isReadingMode, toggleReadingMode } = useTheme();
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
   const [activeSection, setActiveSection] = useState<string>("");
   const [showToc, setShowToc] = useState(false);
@@ -70,7 +68,6 @@ export default function BlogReader({
   const [remainingTime, setRemainingTime] = useState(0);
 
   // Add a state to track if the screen is small
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   // Image lightbox state
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
@@ -79,50 +76,56 @@ export default function BlogReader({
   const contentRef = useRef<HTMLDivElement>(null);
   const speechReaderRef = useRef<SpeechReader | null>(null);
 
-  // Load reading preferences from localStorage, respecting ThemeProvider's reading mode control
-  useEffect(() => {
-    const savedPreferences = localStorage.getItem("blog-reading-preferences");
-    if (savedPreferences) {
-      const preferences = JSON.parse(savedPreferences);
-      // Only restore font and line settings, let ThemeProvider handle reading mode
-      setFontSize(preferences.fontSize || 18);
-      setLineHeight(preferences.lineHeight || 1.6);
+  // Memoize reading-mode colors to avoid recomputing on every render
+  const readingColors = useMemo(() => {
+    if (!isReadingMode) {
+      return {
+        textPrimary: "var(--text-primary)",
+        textSecondary: "var(--text-secondary)",
+        accent: "var(--accent)",
+        border: "var(--border)",
+        surface: "var(--surface)",
+        surfaceAccent: "var(--surface-accent)",
+      };
     }
-  }, []);
+    const isDark = theme === "dark";
+    return {
+      textPrimary: isDark ? "#f5e6d3" : "#92400e",
+      textSecondary: isDark ? "#d97706" : "#78350f",
+      accent: isDark ? "#fbbf24" : "#b45309",
+      border: isDark ? "#52403d" : "#fef3c7",
+      surface: isDark ? "rgba(82, 64, 61, 0.2)" : "rgba(254, 243, 199, 0.3)",
+      surfaceAccent: isDark ? "#52403d" : "#fef3c7",
+    };
+  }, [isReadingMode, theme]);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "blog-reading-preferences",
-      JSON.stringify({
-        fontSize,
-        lineHeight,
-      }),
-    );
-  }, [fontSize, lineHeight]);
-
-  const handleFontSizeChange = (newSize: number) => {
-    setFontSize(Math.max(12, Math.min(24, newSize)));
-  };
-
-  const handleLineHeightChange = (newHeight: number) => {
-    setLineHeight(Math.max(1.2, Math.min(2.0, newHeight)));
-  };
+  // Memoize reading-mode CSS variables for MathJax
+  const readingCssVars = useMemo(
+    () =>
+      ({
+        "--reading-text-color": readingColors.textPrimary,
+        "--reading-text-secondary": isReadingMode
+          ? theme === "dark"
+            ? "#e8d5b7"
+            : "#78350f"
+          : "var(--text-secondary)",
+        "--reading-accent": readingColors.accent,
+        "--reading-border": readingColors.border,
+        "--reading-surface": readingColors.surface,
+      }) as React.CSSProperties,
+    [readingColors, isReadingMode, theme],
+  );
 
   // Initialize SpeechReader for text-to-speech with highlighting
-  const initializeSpeechReader = () => {
-    console.log("Initializing SpeechReader...");
+  const initializeSpeechReader = useCallback(() => {
     if (!contentRef.current) {
-      console.log("No contentRef.current found");
       return null;
     }
 
     const articleElement = contentRef.current.querySelector("article");
     if (!articleElement) {
-      console.log("No article element found");
       return null;
     }
-
-    console.log("Article element found:", articleElement);
 
     const options: SpeechReaderOptions = {
       highlightColors: {
@@ -173,84 +176,64 @@ export default function BlogReader({
       },
     };
 
-    console.log("Creating SpeechReader with article element:", articleElement);
-    console.log("SpeechReader options:", options);
-
     try {
       const speechReader = new SpeechReader(articleElement, options, events);
-      console.log("SpeechReader created successfully:", speechReader);
       return speechReader;
     } catch (error) {
       console.error("Error creating SpeechReader:", error);
       return null;
     }
-  };
+  }, []);
 
-  // Speech control functions using the new SpeechReader
-  const startSpeech = () => {
-    console.log("startSpeech called");
-
-    // Check for Web Speech API support
+  // Speech control functions - memoized to prevent BlogGraphSidebar re-renders
+  const startSpeech = useCallback(() => {
     if (!("speechSynthesis" in window)) {
-      console.error("Web Speech API not supported");
       alert("Speech synthesis is not supported in your browser.");
       return;
     }
 
     if (!speechReaderRef.current) {
-      console.log("Creating new SpeechReader...");
       speechReaderRef.current = initializeSpeechReader();
     }
 
     if (speechReaderRef.current) {
-      console.log("Starting speech...");
       try {
         speechReaderRef.current.start();
       } catch (error) {
-        console.error("Error starting speech:", error);
         const errorMessage =
           error instanceof Error ? error.message : "Unknown error occurred";
         alert(`Error starting speech: ${errorMessage}`);
       }
     } else {
-      console.error("Failed to create SpeechReader");
       alert(
         "Failed to initialize speech reader. Please try refreshing the page.",
       );
     }
-  };
+  }, [initializeSpeechReader]);
 
-  const pauseSpeech = () => {
-    if (speechReaderRef.current) {
-      speechReaderRef.current.pause();
-    }
-  };
+  const pauseSpeech = useCallback(() => {
+    speechReaderRef.current?.pause();
+  }, []);
 
-  const resumeSpeech = () => {
-    if (speechReaderRef.current) {
-      speechReaderRef.current.resume();
-    }
-  };
+  const resumeSpeech = useCallback(() => {
+    speechReaderRef.current?.resume();
+  }, []);
 
-  const stopSpeech = () => {
+  const stopSpeech = useCallback(() => {
     if (speechReaderRef.current) {
       speechReaderRef.current.stop();
       speechReaderRef.current = null;
     }
-    // Reset all states to initial values
     setIsPlaying(false);
     setIsPaused(false);
     setProgress(0);
     setDuration(0);
     setRemainingTime(0);
-  };
+  }, []);
 
-  // Seek to specific position in the audio
-  const seekSpeech = (percentage: number) => {
-    if (speechReaderRef.current) {
-      speechReaderRef.current.seekTo(percentage);
-    }
-  };
+  const seekSpeech = useCallback((percentage: number) => {
+    speechReaderRef.current?.seekTo(percentage);
+  }, []);
 
   // Extract headings and create TOC
   const generateToc = useCallback(() => {
@@ -288,63 +271,60 @@ export default function BlogReader({
     setTocItems(items);
   }, []);
 
-  // Update active section based on scroll position - find heading closest to middle of screen
+  // Update active section based on scroll position - throttled with rAF
   useEffect(() => {
     if (tocItems.length === 0) return;
 
+    let rafId: number;
+
     const handleScroll = () => {
-      const viewportHeight = window.innerHeight;
-      const viewportMiddle = window.scrollY + viewportHeight / 2;
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const viewportMiddle = window.scrollY + window.innerHeight / 2;
 
-      // Find the heading closest to the middle of the viewport
-      let closestId = tocItems[0]?.id || "";
-      let closestDistance = Infinity;
+        let closestId = tocItems[0]?.id || "";
+        let closestDistance = Infinity;
 
-      for (let i = 0; i < tocItems.length; i++) {
-        const element = tocItems[i].element;
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          const elementMiddle = window.scrollY + rect.top + rect.height / 2;
-          const distance = Math.abs(viewportMiddle - elementMiddle);
-
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestId = tocItems[i].id;
+        for (let i = 0; i < tocItems.length; i++) {
+          const el = tocItems[i].element;
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            const distance = Math.abs(
+              viewportMiddle - (window.scrollY + rect.top + rect.height / 2),
+            );
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestId = tocItems[i].id;
+            }
           }
         }
-      }
 
-      setActiveSection((prev) => {
-        if (prev !== closestId) {
-          // Auto-scroll TOC to show active item
-          setTimeout(() => {
+        setActiveSection((prev) => {
+          if (prev !== closestId) {
             const activeButton = document.querySelector(
               `[data-toc-id="${closestId}"]`,
             );
-            if (activeButton) {
-              activeButton.scrollIntoView({
-                behavior: "smooth",
-                block: "nearest",
-              });
-            }
-          }, 10);
-        }
-        return closestId;
+            activeButton?.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+            });
+          }
+          return closestId;
+        });
       });
     };
 
-    // Initial check
     handleScroll();
-
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(rafId);
     };
   }, [tocItems]);
 
-  // Smooth scroll to section
-  const scrollToSection = (id: string) => {
+  // Smooth scroll to section - memoized
+  const scrollToSection = useCallback((id: string) => {
     const element = document.getElementById(id);
     if (element) {
       const yOffset = -100; // Account for fixed header
@@ -353,7 +333,7 @@ export default function BlogReader({
 
       window.scrollTo({ top: y, behavior: "smooth" });
     }
-  };
+  }, []);
 
   // Generate TOC after content is rendered
   useEffect(() => {
@@ -444,43 +424,25 @@ export default function BlogReader({
       animationFrame = requestAnimationFrame(handleScroll);
     };
 
-    // Attach event listeners
+    // Consolidated resize handler - handles both footer overlap and TOC visibility
+    const handleResize = () => {
+      handleScroll();
+      setShowToc(window.innerWidth > 1024);
+    };
+
     window.addEventListener("scroll", throttledHandleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
 
     // Initial check
     handleScroll();
+    setShowToc(window.innerWidth > 1024);
 
     return () => {
       window.removeEventListener("scroll", throttledHandleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("resize", handleResize);
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
       }
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const isSmall = window.innerWidth <= 1024; // Change to lg breakpoint (1024px)
-      setIsSmallScreen(isSmall);
-
-      // Auto-hide TOC on mobile/tablet devices
-      if (isSmall) {
-        setShowToc(false);
-      } else {
-        setShowToc(true);
-      }
-    };
-
-    // Initial check
-    handleResize();
-
-    // Add event listener for resize
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -509,12 +471,12 @@ export default function BlogReader({
     };
   }, [dangerouslySetInnerHTML, children]);
 
-  // Close lightbox on Escape key
+  // Close lightbox on Escape key - only attach when lightbox is open
   useEffect(() => {
+    if (!lightboxImage) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && lightboxImage) {
-        setLightboxImage(null);
-      }
+      if (e.key === "Escape") setLightboxImage(null);
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -567,22 +529,10 @@ export default function BlogReader({
               >
                 <button
                   onClick={() => setTocCollapsed(false)}
-                  className="w-8 h-8 rounded-lg flex items-center justify-center group"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center sidebar-btn-hover"
                   style={{
                     color: "var(--text-secondary)",
                     backgroundColor: "var(--surface)",
-                    transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "var(--surface-accent)";
-                    e.currentTarget.style.color = "var(--accent)";
-                    e.currentTarget.style.transform = "scale(1.05)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--surface)";
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                    e.currentTarget.style.transform = "scale(1)";
                   }}
                   aria-label="Expand table of contents"
                   title="Table of Contents"
@@ -626,22 +576,8 @@ export default function BlogReader({
 
                   <button
                     onClick={() => setTocCollapsed(true)}
-                    className="p-1.5 rounded-lg"
-                    style={{
-                      color: "var(--text-secondary)",
-                      transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor =
-                        "var(--surface-accent)";
-                      e.currentTarget.style.color = "var(--accent)";
-                      e.currentTarget.style.transform = "scale(1.1)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      e.currentTarget.style.color = "var(--text-secondary)";
-                      e.currentTarget.style.transform = "scale(1)";
-                    }}
+                    className="p-1.5 rounded-lg sidebar-btn-hover"
+                    style={{ color: "var(--text-secondary)" }}
                     aria-label="Collapse table of contents"
                   >
                     <svg
@@ -667,7 +603,7 @@ export default function BlogReader({
                       key={item.id}
                       data-toc-id={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`block w-full text-left py-2 px-3 rounded text-sm transition-all duration-200 hover:scale-105 ${
+                      className={`block w-full text-left py-2 px-3 rounded text-sm toc-btn-hover ${
                         activeSection === item.id
                           ? "font-medium"
                           : "font-normal"
@@ -686,19 +622,6 @@ export default function BlogReader({
                           activeSection === item.id
                             ? `2px solid var(--accent)`
                             : `2px solid transparent`,
-                      }}
-                      onMouseEnter={(e) => {
-                        if (activeSection !== item.id) {
-                          e.currentTarget.style.backgroundColor =
-                            "var(--surface)";
-                          e.currentTarget.style.color = "var(--text-primary)";
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (activeSection !== item.id) {
-                          e.currentTarget.style.backgroundColor = "transparent";
-                          e.currentTarget.style.color = "var(--text-secondary)";
-                        }
                       }}
                       title={item.title}
                     >
@@ -851,17 +774,6 @@ export default function BlogReader({
             />
           </div>
 
-          {/* Animation keyframes */}
-          <style>{`
-            @keyframes slideUp {
-              from {
-                transform: translateY(100%);
-              }
-              to {
-                transform: translateY(0);
-              }
-            }
-          `}</style>
         </div>
       )}
 
@@ -871,11 +783,7 @@ export default function BlogReader({
         tocPosition={tocPosition}
         sidebarBottomOffset={sidebarBottomOffset}
         isReadingMode={isReadingMode}
-        onReadingModeToggle={() => setReadingMode(!isReadingMode)}
-        fontSize={fontSize}
-        onFontSizeChange={handleFontSizeChange}
-        lineHeight={lineHeight}
-        onLineHeightChange={handleLineHeightChange}
+        onReadingModeToggle={toggleReadingMode}
         // Audio reading props
         isPlaying={isPlaying}
         isPaused={isPaused}
@@ -913,20 +821,17 @@ export default function BlogReader({
               <h1
                 className="text-lg md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-8 leading-tight"
                 style={{
-                  color: isReadingMode
-                    ? theme === "dark"
-                      ? "#f5e6d3" // Warm off-white for dark mode
-                      : "#92400e"
-                    : "var(--text-primary)",
-                  fontSize: `clamp(1.5rem, ${fontSize * 1.8}px, 2.5rem)`,
-                  lineHeight: lineHeight * 0.9,
+                  color: readingColors.textPrimary,
+                  lineHeight: 1.3,
                 }}
               >
                 {title}
               </h1>
 
               {/* Article Meta */}
+              {(author || publishDate || readTime || category) && (
               <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+                {author && (
                 <div className="flex items-center gap-2">
                   <div
                     className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
@@ -939,14 +844,16 @@ export default function BlogReader({
                     style={{
                       color: isReadingMode
                         ? theme === "dark"
-                          ? "#e8d5b7" // Slightly darker warm color for author
+                          ? "#e8d5b7"
                           : "#92400e"
-                        : "var(--text-primary)",
+                        : readingColors.textPrimary,
                     }}
                   >
                     {author}
                   </span>
                 </div>
+                )}
+                {publishDate && (
                 <div className="flex items-center gap-1">
                   <svg
                     className="w-4 h-4"
@@ -954,11 +861,7 @@ export default function BlogReader({
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     style={{
-                      color: isReadingMode
-                        ? theme === "dark"
-                          ? "#d97706"
-                          : "#78350f"
-                        : "var(--text-secondary)",
+                      color: readingColors.textSecondary,
                     }}
                   >
                     <path
@@ -971,16 +874,14 @@ export default function BlogReader({
                   <time
                     className="text-sm"
                     style={{
-                      color: isReadingMode
-                        ? theme === "dark"
-                          ? "#d97706"
-                          : "#78350f"
-                        : "var(--text-secondary)",
+                      color: readingColors.textSecondary,
                     }}
                   >
                     {formatDate(publishDate)}
                   </time>
-                </div>{" "}
+                </div>
+                )}
+                {readTime && (
                 <div className="flex items-center gap-1">
                   <svg
                     className="w-4 h-4"
@@ -988,11 +889,7 @@ export default function BlogReader({
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     style={{
-                      color: isReadingMode
-                        ? theme === "dark"
-                          ? "#d97706"
-                          : "#78350f"
-                        : "var(--text-secondary)",
+                      color: readingColors.textSecondary,
                     }}
                   >
                     <path
@@ -1005,34 +902,26 @@ export default function BlogReader({
                   <span
                     className="text-sm"
                     style={{
-                      color: isReadingMode
-                        ? theme === "dark"
-                          ? "#d97706"
-                          : "#78350f"
-                        : "var(--text-secondary)",
+                      color: readingColors.textSecondary,
                     }}
                   >
                     {readTime}
                   </span>
                 </div>
+                )}
+                {category && (
                 <span
                   className="px-3 py-1 rounded-full text-xs font-medium"
                   style={{
-                    backgroundColor: isReadingMode
-                      ? theme === "dark"
-                        ? "#52403d"
-                        : "#fef3c7"
-                      : "var(--surface-accent)",
-                    color: isReadingMode
-                      ? theme === "dark"
-                        ? "#fbbf24"
-                        : "#92400e"
-                      : "var(--accent)",
+                    backgroundColor: readingColors.surfaceAccent,
+                    color: readingColors.accent,
                   }}
                 >
                   {category}
                 </span>
+                )}
               </div>
+              )}
 
               {/* Tags */}
               {tags.length > 0 && (
@@ -1051,48 +940,9 @@ export default function BlogReader({
             {/* Article Content */}
             <article
               className="prose prose-xl max-w-none mx-auto mb-16"
-              style={{
-                fontSize: `${fontSize}px`,
-                lineHeight: lineHeight,
-                color: isReadingMode
-                  ? theme === "dark"
-                    ? "#f5e6d3"
-                    : "#92400e"
-                  : "var(--text-primary)",
-              }}
+              style={{ color: readingColors.textPrimary }}
             >
-              <MathJax
-                className="blog-content"
-                style={
-                  {
-                    "--reading-text-color": isReadingMode
-                      ? theme === "dark"
-                        ? "#f5e6d3"
-                        : "#92400e"
-                      : "var(--text-primary)",
-                    "--reading-text-secondary": isReadingMode
-                      ? theme === "dark"
-                        ? "#e8d5b7"
-                        : "#78350f"
-                      : "var(--text-secondary)",
-                    "--reading-accent": isReadingMode
-                      ? theme === "dark"
-                        ? "#fbbf24"
-                        : "#b45309"
-                      : "var(--accent)",
-                    "--reading-border": isReadingMode
-                      ? theme === "dark"
-                        ? "#52403d"
-                        : "#fef3c7"
-                      : "var(--border)",
-                    "--reading-surface": isReadingMode
-                      ? theme === "dark"
-                        ? "rgba(82, 64, 61, 0.2)"
-                        : "rgba(254, 243, 199, 0.3)"
-                      : "var(--surface)",
-                  } as React.CSSProperties
-                }
-              >
+              <MathJax className="blog-content" style={readingCssVars}>
                 {dangerouslySetInnerHTML ? (
                   <div dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
                 ) : (
@@ -1103,11 +953,6 @@ export default function BlogReader({
           </div>
         </div>
       </div>
-
-      {/* Prevent duplicate TOC on small screens */}
-      {tocItems.length > 0 && !isSmallScreen && showToc && (
-        <div className="toc-container">{/* Render TOC */}</div>
-      )}
 
       {/* Image Lightbox Modal */}
       {lightboxImage && (
@@ -1167,23 +1012,6 @@ export default function BlogReader({
             )}
           </div>
 
-          {/* Animation keyframes */}
-          <style>{`
-            @keyframes fadeIn {
-              from { opacity: 0; }
-              to { opacity: 1; }
-            }
-            @keyframes zoomIn {
-              from {
-                opacity: 0;
-                transform: scale(0.9);
-              }
-              to {
-                opacity: 1;
-                transform: scale(1);
-              }
-            }
-          `}</style>
         </div>
       )}
     </div>

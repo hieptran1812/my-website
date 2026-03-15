@@ -15,6 +15,7 @@ type ThemeContextType = {
   mounted: boolean;
   isReadingMode: boolean;
   setReadingMode: (mode: boolean) => void;
+  toggleReadingMode: () => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -122,6 +123,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  const toggleReadingMode = useCallback(() => {
+    setIsReadingMode((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem("readingMode", next.toString());
+      } catch {
+        // Ignore if localStorage is not available
+      }
+      return next;
+    });
+  }, []);
+
   return (
     <ThemeContext.Provider
       value={{
@@ -130,6 +143,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         mounted,
         isReadingMode,
         setReadingMode,
+        toggleReadingMode,
       }}
     >
       {children}

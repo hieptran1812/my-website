@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import BlogGraphView from "./BlogGraphView";
 
 interface BlogGraphSidebarProps {
@@ -10,10 +10,6 @@ interface BlogGraphSidebarProps {
   // Reading options props
   isReadingMode?: boolean;
   onReadingModeToggle?: () => void;
-  fontSize?: number;
-  onFontSizeChange?: (size: number) => void;
-  lineHeight?: number;
-  onLineHeightChange?: (height: number) => void;
   // Audio reading props
   isPlaying?: boolean;
   isPaused?: boolean;
@@ -29,16 +25,12 @@ interface BlogGraphSidebarProps {
   theme?: string;
 }
 
-export default function BlogGraphSidebar({
+function BlogGraphSidebar({
   currentSlug,
   tocPosition = "center",
   sidebarBottomOffset = 0,
   isReadingMode = false,
   onReadingModeToggle,
-  fontSize = 18,
-  onFontSizeChange,
-  lineHeight = 1.6,
-  onLineHeightChange,
   // Audio reading
   isPlaying = false,
   isPaused = false,
@@ -103,32 +95,45 @@ export default function BlogGraphSidebar({
     }
   }, [isMobileMenuOpen, mobileActiveTab]);
 
-  // Close mobile menu when pressing escape
+  // Close mobile menu when pressing escape - only listen when menu is open
   useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsMobileMenuOpen(false);
-      }
+      if (e.key === "Escape") setIsMobileMenuOpen(false);
     };
     window.addEventListener("keydown", handleEscape);
     return () => window.removeEventListener("keydown", handleEscape);
-  }, []);
-
-  const handleFontSizeChange = (newSize: number) => {
-    if (onFontSizeChange) {
-      onFontSizeChange(Math.max(12, Math.min(24, newSize)));
-    }
-  };
-
-  const handleLineHeightChange = (newHeight: number) => {
-    if (onLineHeightChange) {
-      onLineHeightChange(Math.max(1.2, Math.min(2.0, newHeight)));
-    }
-  };
+  }, [isMobileMenuOpen]);
 
   // Graph background colors based on theme
   const graphBgColor = theme === "dark" ? "#1a1a2e" : "#f8fafc";
   const graphBgColorExpanded = theme === "dark" ? "#1a1a2e" : "#f1f5f9";
+
+  // Memoized time formatting to avoid recomputing in JSX
+  const timeDisplay = useMemo(() => {
+    const fmt = (seconds: number) => {
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60).toString().padStart(2, "0");
+      return `${m}:${s}`;
+    };
+    return {
+      elapsed: fmt(duration - remainingTime),
+      total: fmt(duration),
+      remaining: fmt(remainingTime),
+    };
+  }, [duration, remainingTime]);
+
+  // Memoized seek handler - shared between desktop and mobile
+  const handleSeek = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!onSeekSpeech) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const percentage = ((e.clientX - rect.left) / rect.width) * 100;
+      onSeekSpeech(Math.max(0, Math.min(100, percentage)));
+    },
+    [onSeekSpeech],
+  );
 
   return (
     <>
@@ -167,21 +172,10 @@ export default function BlogGraphSidebar({
             <div className="flex flex-col items-center justify-center gap-2">
               <button
                 onClick={() => setIsCollapsed(false)}
-                className="w-8 h-8 rounded-lg flex items-center justify-center group"
+                className="w-8 h-8 rounded-lg flex items-center justify-center sidebar-btn-hover"
                 style={{
                   color: "var(--text-secondary)",
                   backgroundColor: "var(--surface)",
-                  transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                  e.currentTarget.style.color = "var(--accent)";
-                  e.currentTarget.style.transform = "scale(1.05)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--surface)";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                  e.currentTarget.style.transform = "scale(1)";
                 }}
                 aria-label="Expand sidebar"
                 title="Reading Options & Graph"
@@ -217,16 +211,8 @@ export default function BlogGraphSidebar({
                   </h3>
                   <button
                     onClick={() => setIsCollapsed(true)}
-                    className="p-1.5 rounded-lg transition-all duration-200"
+                    className="p-1.5 rounded-lg sidebar-btn-hover"
                     style={{ color: "var(--text-secondary)" }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                      e.currentTarget.style.color = "var(--accent)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      e.currentTarget.style.color = "var(--text-secondary)";
-                    }}
                     aria-label="Collapse sidebar"
                   >
                     <svg
@@ -268,157 +254,6 @@ export default function BlogGraphSidebar({
                   </button>
                 </div>
 
-                {/* Font Size Control */}
-                <div className="mb-3">
-                  <div className="flex items-center justify-between mb-1">
-                    <span
-                      className="text-xs"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      Font Size
-                    </span>
-                    <span
-                      className="text-xs font-mono"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {fontSize}px
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <button
-                      onClick={() => handleFontSizeChange(fontSize - 2)}
-                      className="w-6 h-6 rounded text-xs font-bold transition-colors duration-200"
-                      style={{
-                        backgroundColor: "var(--surface)",
-                        color: "var(--text-secondary)",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                        e.currentTarget.style.color = "var(--accent)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--surface)";
-                        e.currentTarget.style.color = "var(--text-secondary)";
-                      }}
-                      aria-label="Decrease font size"
-                    >
-                      A-
-                    </button>
-                    <div className="flex-1 mx-2">
-                      <input
-                        type="range"
-                        min="12"
-                        max="24"
-                        value={fontSize}
-                        onChange={(e) => handleFontSizeChange(Number(e.target.value))}
-                        className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                        style={{
-                          background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
-                            ((fontSize - 12) / (24 - 12)) * 100
-                          }%, var(--border) ${
-                            ((fontSize - 12) / (24 - 12)) * 100
-                          }%, var(--border) 100%)`,
-                        }}
-                      />
-                    </div>
-                    <button
-                      onClick={() => handleFontSizeChange(fontSize + 2)}
-                      className="w-6 h-6 rounded text-xs font-bold transition-colors duration-200"
-                      style={{
-                        backgroundColor: "var(--surface)",
-                        color: "var(--text-secondary)",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                        e.currentTarget.style.color = "var(--accent)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--surface)";
-                        e.currentTarget.style.color = "var(--text-secondary)";
-                      }}
-                      aria-label="Increase font size"
-                    >
-                      A+
-                    </button>
-                  </div>
-                </div>
-
-                {/* Line Height Control */}
-                <div className="mb-3">
-                  <div className="flex items-center justify-between mb-1">
-                    <span
-                      className="text-xs"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      Line Spacing
-                    </span>
-                    <span
-                      className="text-xs font-mono"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {lineHeight.toFixed(1)}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <button
-                      onClick={() => handleLineHeightChange(lineHeight - 0.1)}
-                      className="w-6 h-6 rounded text-xs font-bold transition-colors duration-200"
-                      style={{
-                        backgroundColor: "var(--surface)",
-                        color: "var(--text-secondary)",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                        e.currentTarget.style.color = "var(--accent)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--surface)";
-                        e.currentTarget.style.color = "var(--text-secondary)";
-                      }}
-                      aria-label="Decrease line height"
-                    >
-                      ≡
-                    </button>
-                    <div className="flex-1 mx-2">
-                      <input
-                        type="range"
-                        min="1.2"
-                        max="2.0"
-                        step="0.1"
-                        value={lineHeight}
-                        onChange={(e) => handleLineHeightChange(Number(e.target.value))}
-                        className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                        style={{
-                          background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
-                            ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
-                          }%, var(--border) ${
-                            ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
-                          }%, var(--border) 100%)`,
-                        }}
-                      />
-                    </div>
-                    <button
-                      onClick={() => handleLineHeightChange(lineHeight + 0.1)}
-                      className="w-6 h-6 rounded text-xs font-bold transition-colors duration-200"
-                      style={{
-                        backgroundColor: "var(--surface)",
-                        color: "var(--text-secondary)",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                        e.currentTarget.style.color = "var(--accent)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--surface)";
-                        e.currentTarget.style.color = "var(--text-secondary)";
-                      }}
-                      aria-label="Increase line height"
-                    >
-                      ☰
-                    </button>
-                  </div>
-                </div>
-
                 {/* ============ AUDIO READING SECTION ============ */}
                 <div
                   className="border-t pt-3"
@@ -436,18 +271,10 @@ export default function BlogGraphSidebar({
                     {!isPlaying ? (
                       <button
                         onClick={onStartSpeech}
-                        className="flex-1 px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+                        className="flex-1 px-3 py-2 rounded-lg sidebar-btn-hover flex items-center justify-center gap-2"
                         style={{
                           backgroundColor: "var(--surface)",
                           color: "var(--text-primary)",
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                          e.currentTarget.style.color = "var(--accent)";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = "var(--surface)";
-                          e.currentTarget.style.color = "var(--text-primary)";
                         }}
                         aria-label="Start reading"
                       >
@@ -495,18 +322,10 @@ export default function BlogGraphSidebar({
 
                         <button
                           onClick={onStopSpeech}
-                          className="px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-1"
+                          className="px-3 py-2 rounded-lg sidebar-btn-hover flex items-center justify-center gap-1"
                           style={{
                             backgroundColor: "var(--surface)",
                             color: "var(--text-secondary)",
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                            e.currentTarget.style.color = "var(--accent)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = "var(--surface)";
-                            e.currentTarget.style.color = "var(--text-secondary)";
                           }}
                           aria-label="Stop reading"
                         >
@@ -538,10 +357,7 @@ export default function BlogGraphSidebar({
                             className="text-xs font-mono"
                             style={{ color: "var(--text-primary)" }}
                           >
-                            {Math.floor(remainingTime / 60)}:
-                            {Math.floor(remainingTime % 60)
-                              .toString()
-                              .padStart(2, "0")}
+                            {timeDisplay.remaining}
                           </span>
                           <span
                             className="text-xs"
@@ -554,14 +370,7 @@ export default function BlogGraphSidebar({
                       <div
                         className="w-full h-2 rounded-full cursor-pointer relative group"
                         style={{ backgroundColor: "var(--border)" }}
-                        onClick={(e) => {
-                          const rect = e.currentTarget.getBoundingClientRect();
-                          const clickX = e.clientX - rect.left;
-                          const percentage = (clickX / rect.width) * 100;
-                          if (onSeekSpeech) {
-                            onSeekSpeech(Math.max(0, Math.min(100, percentage)));
-                          }
-                        }}
+                        onClick={handleSeek}
                       >
                         <div
                           className="h-2 rounded-full transition-all duration-300"
@@ -580,19 +389,13 @@ export default function BlogGraphSidebar({
                           className="text-xs"
                           style={{ color: "var(--text-secondary)" }}
                         >
-                          {Math.floor((duration - remainingTime) / 60)}:
-                          {Math.floor((duration - remainingTime) % 60)
-                            .toString()
-                            .padStart(2, "0")}
+                          {timeDisplay.elapsed}
                         </span>
                         <span
                           className="text-xs"
                           style={{ color: "var(--text-secondary)" }}
                         >
-                          {Math.floor(duration / 60)}:
-                          {Math.floor(duration % 60)
-                            .toString()
-                            .padStart(2, "0")}
+                          {timeDisplay.total}
                         </span>
                       </div>
                     </div>
@@ -633,16 +436,8 @@ export default function BlogGraphSidebar({
                   {/* Expand to fullscreen button */}
                   <button
                     onClick={() => setIsExpanded(true)}
-                    className="p-1.5 rounded-lg transition-all duration-200"
+                    className="p-1.5 rounded-lg sidebar-btn-hover"
                     style={{ color: "var(--text-secondary)" }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "var(--surface-accent)";
-                      e.currentTarget.style.color = "var(--accent)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      e.currentTarget.style.color = "var(--text-secondary)";
-                    }}
                     aria-label="Expand graph"
                     title="Open fullscreen"
                   >
@@ -833,107 +628,6 @@ export default function BlogGraphSidebar({
                     </button>
                   </div>
 
-                  {/* Font Size */}
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span style={{ color: "var(--text-primary)" }}>Font Size</span>
-                      <span
-                        className="font-mono text-sm"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        {fontSize}px
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() => handleFontSizeChange(fontSize - 2)}
-                        className="w-10 h-10 rounded-lg text-sm font-bold flex items-center justify-center"
-                        style={{
-                          backgroundColor: "var(--surface)",
-                          color: "var(--text-primary)",
-                        }}
-                      >
-                        A-
-                      </button>
-                      <input
-                        type="range"
-                        min="12"
-                        max="24"
-                        value={fontSize}
-                        onChange={(e) => handleFontSizeChange(Number(e.target.value))}
-                        className="flex-1 h-2 rounded-lg appearance-none cursor-pointer"
-                        style={{
-                          background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
-                            ((fontSize - 12) / (24 - 12)) * 100
-                          }%, var(--border) ${
-                            ((fontSize - 12) / (24 - 12)) * 100
-                          }%, var(--border) 100%)`,
-                        }}
-                      />
-                      <button
-                        onClick={() => handleFontSizeChange(fontSize + 2)}
-                        className="w-10 h-10 rounded-lg text-sm font-bold flex items-center justify-center"
-                        style={{
-                          backgroundColor: "var(--surface)",
-                          color: "var(--text-primary)",
-                        }}
-                      >
-                        A+
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Line Spacing */}
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span style={{ color: "var(--text-primary)" }}>Line Spacing</span>
-                      <span
-                        className="font-mono text-sm"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        {lineHeight.toFixed(1)}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() => handleLineHeightChange(lineHeight - 0.1)}
-                        className="w-10 h-10 rounded-lg text-lg flex items-center justify-center"
-                        style={{
-                          backgroundColor: "var(--surface)",
-                          color: "var(--text-primary)",
-                        }}
-                      >
-                        ≡
-                      </button>
-                      <input
-                        type="range"
-                        min="1.2"
-                        max="2.0"
-                        step="0.1"
-                        value={lineHeight}
-                        onChange={(e) => handleLineHeightChange(Number(e.target.value))}
-                        className="flex-1 h-2 rounded-lg appearance-none cursor-pointer"
-                        style={{
-                          background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${
-                            ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
-                          }%, var(--border) ${
-                            ((lineHeight - 1.2) / (2.0 - 1.2)) * 100
-                          }%, var(--border) 100%)`,
-                        }}
-                      />
-                      <button
-                        onClick={() => handleLineHeightChange(lineHeight + 0.1)}
-                        className="w-10 h-10 rounded-lg text-lg flex items-center justify-center"
-                        style={{
-                          backgroundColor: "var(--surface)",
-                          color: "var(--text-primary)",
-                        }}
-                      >
-                        ☰
-                      </button>
-                    </div>
-                  </div>
-
                   {/* Audio Reading */}
                   <div
                     className="pt-4 border-t"
@@ -1005,25 +699,16 @@ export default function BlogGraphSidebar({
                       <div className="mt-3">
                         <div className="flex justify-between text-sm mb-1">
                           <span style={{ color: "var(--text-secondary)" }}>
-                            {Math.floor((duration - remainingTime) / 60)}:
-                            {Math.floor((duration - remainingTime) % 60).toString().padStart(2, "0")}
+                            {timeDisplay.elapsed}
                           </span>
                           <span style={{ color: "var(--text-secondary)" }}>
-                            {Math.floor(duration / 60)}:
-                            {Math.floor(duration % 60).toString().padStart(2, "0")}
+                            {timeDisplay.total}
                           </span>
                         </div>
                         <div
                           className="w-full h-2 rounded-full cursor-pointer"
                           style={{ backgroundColor: "var(--border)" }}
-                          onClick={(e) => {
-                            const rect = e.currentTarget.getBoundingClientRect();
-                            const clickX = e.clientX - rect.left;
-                            const percentage = (clickX / rect.width) * 100;
-                            if (onSeekSpeech) {
-                              onSeekSpeech(Math.max(0, Math.min(100, percentage)));
-                            }
-                          }}
+                          onClick={handleSeek}
                         >
                           <div
                             className="h-2 rounded-full"
@@ -1097,19 +782,10 @@ export default function BlogGraphSidebar({
             </div>
           </div>
 
-          {/* Animation keyframes */}
-          <style jsx>{`
-            @keyframes slideUp {
-              from {
-                transform: translateY(100%);
-              }
-              to {
-                transform: translateY(0);
-              }
-            }
-          `}</style>
         </div>
       )}
     </>
   );
 }
+
+export default React.memo(BlogGraphSidebar);
