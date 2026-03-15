@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     if (!slug) {
       return NextResponse.json(
         { error: "Slug parameter is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
     // Function to search for the file based on slug parts
     const findArticleFile = (
       baseDir: string,
-      slugParts: string[]
+      slugParts: string[],
     ): string | null => {
       if (slugParts.length === 0) return null;
 
@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
     const readTimeResult = calculateReadTimeWithTags(
       markdownContent,
       metadata.tags || [],
-      category || "General"
+      category || "General",
     );
 
     const article: Article = {
@@ -108,6 +108,7 @@ export async function GET(request: NextRequest) {
       featured: metadata.featured || false,
       slug,
       collection: metadata.collection,
+      aiGenerated: metadata.aiGenerated === true,
     };
 
     return NextResponse.json({ article });
@@ -115,7 +116,7 @@ export async function GET(request: NextRequest) {
     console.error("Error fetching article:", error);
     return NextResponse.json(
       { error: "Failed to fetch article" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

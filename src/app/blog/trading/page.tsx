@@ -6,6 +6,7 @@ import Image from "next/image";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import CollectionTag from "@/components/CollectionTag";
+import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 
@@ -32,7 +33,7 @@ export default function TradingBlogPage() {
         const { articles } = await getMarkdownArticlesByCategory(
           "trading",
           1,
-          500 // Fetch up to 500 articles
+          500, // Fetch up to 500 articles
         );
         // Ensure articles is always an array
         setAllArticles(Array.isArray(articles) ? articles : []);
@@ -63,7 +64,7 @@ export default function TradingBlogPage() {
       const count = allArticles.filter(
         (article) =>
           article.subcategory &&
-          article.subcategory.toLowerCase() === subtopic.slug.toLowerCase()
+          article.subcategory.toLowerCase() === subtopic.slug.toLowerCase(),
       ).length;
       if (count > 0) {
         subtopicCounts[subtopic.slug.toLowerCase()] = count;
@@ -94,7 +95,7 @@ export default function TradingBlogPage() {
       articlesToFilter = articlesToFilter.filter(
         (article) =>
           article.subcategory &&
-          article.subcategory.toLowerCase() === selectedCategory.toLowerCase()
+          article.subcategory.toLowerCase() === selectedCategory.toLowerCase(),
       );
     }
 
@@ -296,6 +297,13 @@ export default function TradingBlogPage() {
                           >
                             {featuredArticle.excerpt}
                           </p>
+
+                          {featuredArticle.aiGenerated && (
+                            <div className="mb-4">
+                              <AiGeneratedBadge variant="default" />
+                            </div>
+                          )}
+
                           <div
                             className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
                             style={{ color: "var(--accent)" }}
@@ -372,6 +380,13 @@ export default function TradingBlogPage() {
                               >
                                 {article.title}
                               </h4>
+
+                              {article.aiGenerated && (
+                                <div className="mb-2">
+                                  <AiGeneratedBadge variant="compact" />
+                                </div>
+                              )}
+
                               <div
                                 className="text-xs flex items-center gap-2"
                                 style={{ color: "var(--text-secondary)" }}
@@ -455,7 +470,7 @@ export default function TradingBlogPage() {
                       (article) =>
                         article.subcategory &&
                         article.subcategory.toLowerCase() ===
-                          subtopic.slug.toLowerCase()
+                          subtopic.slug.toLowerCase(),
                     ).length;
 
                     if (articleCount === 0) return null;
@@ -560,6 +575,13 @@ export default function TradingBlogPage() {
                             >
                               {article.title}
                             </h3>
+
+                            {article.aiGenerated && (
+                              <div className="mb-3">
+                                <AiGeneratedBadge variant="default" />
+                              </div>
+                            )}
+
                             <div
                               className="text-sm flex items-center gap-3 mb-4"
                               style={{ color: "var(--text-secondary)" }}

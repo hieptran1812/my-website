@@ -4,6 +4,7 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CollectionTag from "@/components/CollectionTag";
+import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 import { BlogPostMetadata, calculateContentReadTime } from "../lib/blog";
 import { formatDateMedium } from "../lib/dateUtils";
 
@@ -19,7 +20,8 @@ const usePrefersReducedMotion = () => {
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(motionQuery.matches);
 
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    const handler = (e: MediaQueryListEvent) =>
+      setPrefersReducedMotion(e.matches);
     motionQuery.addEventListener("change", handler);
     return () => motionQuery.removeEventListener("change", handler);
   }, []);
@@ -36,6 +38,7 @@ interface Article {
   tags: string[];
   readTime: string;
   collection?: string;
+  aiGenerated?: boolean;
 }
 
 // Utility function to format read time consistently
@@ -69,7 +72,9 @@ export default function BlogSection() {
 
     // Use smaller margin on mobile for better trigger
     const isMobileView = window.innerWidth < 768;
-    const rootMarginValue = isMobileView ? "0px 0px -10% 0px" : "0px 0px -20% 0px";
+    const rootMarginValue = isMobileView
+      ? "0px 0px -10% 0px"
+      : "0px 0px -20% 0px";
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -81,7 +86,7 @@ export default function BlogSection() {
       {
         threshold: 0.05,
         rootMargin: rootMarginValue,
-      }
+      },
     );
 
     if (sectionRef.current) {
@@ -139,6 +144,7 @@ export default function BlogSection() {
             tags: Array.isArray(post.tags) ? post.tags : [],
             readTime: formatReadTime(post.readTime || fallbackReadTime), // Use formatted read time
             collection: post.collection,
+            aiGenerated: post.aiGenerated,
           };
         })
         .filter((article) => article.title !== "Untitled"); // Filter out invalid articles
@@ -276,7 +282,10 @@ export default function BlogSection() {
           className="text-center mb-16"
           style={{
             opacity: isVisible || prefersReducedMotion ? 1 : 0,
-            transform: isVisible || prefersReducedMotion ? "translateY(0)" : "translateY(32px)",
+            transform:
+              isVisible || prefersReducedMotion
+                ? "translateY(0)"
+                : "translateY(32px)",
             filter: isVisible || prefersReducedMotion ? "blur(0)" : "blur(8px)",
             transition: prefersReducedMotion
               ? "none"
@@ -311,7 +320,8 @@ export default function BlogSection() {
             <span
               className="gradient-text-articles"
               style={{
-                background: "linear-gradient(135deg, #059669 0%, #0d9488 50%, #0891b2 100%)",
+                background:
+                  "linear-gradient(135deg, #059669 0%, #0d9488 50%, #0891b2 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -390,7 +400,9 @@ export default function BlogSection() {
             >
               <div className="flex items-center gap-1">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                <span>{totalArticles > 20 ? "20+" : totalArticles} Articles</span>
+                <span>
+                  {totalArticles > 20 ? "20+" : totalArticles} Articles
+                </span>
               </div>
               <div className="w-1 h-1 bg-current rounded-full opacity-50"></div>
               <div className="flex items-center gap-1">
@@ -419,14 +431,20 @@ export default function BlogSection() {
             className="mb-16"
             style={{
               opacity: isVisible || prefersReducedMotion ? 1 : 0,
-              transform: isVisible || prefersReducedMotion
-                ? "translateY(0) scale(1)"
-                : "translateY(32px) scale(0.98)",
-              filter: isVisible || prefersReducedMotion ? "blur(0)" : "blur(4px)",
+              transform:
+                isVisible || prefersReducedMotion
+                  ? "translateY(0) scale(1)"
+                  : "translateY(32px) scale(0.98)",
+              filter:
+                isVisible || prefersReducedMotion ? "blur(0)" : "blur(4px)",
               transition: prefersReducedMotion
                 ? "none"
                 : "opacity 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-              transitionDelay: prefersReducedMotion ? "0ms" : isVisible ? "100ms" : "0ms",
+              transitionDelay: prefersReducedMotion
+                ? "0ms"
+                : isVisible
+                  ? "100ms"
+                  : "0ms",
             }}
           >
             <div
@@ -571,6 +589,12 @@ export default function BlogSection() {
                         </div>
                       )}
 
+                    {featuredArticle.aiGenerated && (
+                      <div className="mb-6">
+                        <AiGeneratedBadge variant="default" />
+                      </div>
+                    )}
+
                     <div
                       className="inline-flex items-center text-sm font-semibold transition-all duration-300 group-hover:gap-3"
                       style={{ color: "var(--accent)" }}
@@ -642,14 +666,22 @@ export default function BlogSection() {
                   className="group block will-change-transform"
                   style={{
                     opacity: isVisible || prefersReducedMotion ? 1 : 0,
-                    transform: isVisible || prefersReducedMotion
-                      ? "translateY(0) scale(1)"
-                      : "translateY(24px) scale(0.98)",
-                    filter: isVisible || prefersReducedMotion ? "blur(0)" : "blur(4px)",
+                    transform:
+                      isVisible || prefersReducedMotion
+                        ? "translateY(0) scale(1)"
+                        : "translateY(24px) scale(0.98)",
+                    filter:
+                      isVisible || prefersReducedMotion
+                        ? "blur(0)"
+                        : "blur(4px)",
                     transition: prefersReducedMotion
                       ? "none"
                       : "opacity 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-                    transitionDelay: prefersReducedMotion ? "0ms" : isVisible ? `${400 + idx * 80}ms` : "0ms",
+                    transitionDelay: prefersReducedMotion
+                      ? "0ms"
+                      : isVisible
+                        ? `${400 + idx * 80}ms`
+                        : "0ms",
                   }}
                   aria-label={`Read article: ${article.title}`}
                 >
@@ -749,6 +781,12 @@ export default function BlogSection() {
                               {tag}
                             </span>
                           ))}
+                        </div>
+                      )}
+
+                      {article.aiGenerated && (
+                        <div className="mb-4">
+                          <AiGeneratedBadge variant="compact" />
                         </div>
                       )}
 

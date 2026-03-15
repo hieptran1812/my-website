@@ -14,6 +14,7 @@ export interface Article {
   featured: boolean;
   author?: string;
   image?: string;
+  aiGenerated?: boolean;
 }
 
 // Centralized article data
@@ -22,7 +23,7 @@ const articles: Article[] = [];
 // Utility functions
 export function getAllArticles(): Article[] {
   return articles.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 }
 
@@ -54,14 +55,14 @@ export function getArticleById(id: string): Article | undefined {
 
 export function getRelatedArticles(
   currentArticle: Article,
-  limit: number = 3
+  limit: number = 3,
 ): Article[] {
   return articles
     .filter(
       (article) =>
         article.id !== currentArticle.id &&
         (article.category === currentArticle.category ||
-          article.tags.some((tag) => currentArticle.tags.includes(tag)))
+          article.tags.some((tag) => currentArticle.tags.includes(tag))),
     )
     .sort((a, b) => {
       // Score based on matching tags and category
@@ -86,7 +87,7 @@ export function getCategories(): {
   articles.forEach((article) => {
     categoryMap.set(
       article.category,
-      (categoryMap.get(article.category) || 0) + 1
+      (categoryMap.get(article.category) || 0) + 1,
     );
   });
 
@@ -101,7 +102,7 @@ export function getCategories(): {
 }
 
 export function getSubcategories(
-  category?: string
+  category?: string,
 ): { name: string; slug: string; count: number }[] {
   const subcategoryMap = new Map<string, number>();
 
@@ -111,7 +112,7 @@ export function getSubcategories(
       if (article.subcategory) {
         subcategoryMap.set(
           article.subcategory,
-          (subcategoryMap.get(article.subcategory) || 0) + 1
+          (subcategoryMap.get(article.subcategory) || 0) + 1,
         );
       }
     });
@@ -148,7 +149,7 @@ export function searchArticles(query: string): Article[] {
         article.tags.some((tag) => tag.toLowerCase().includes(searchTerm)) ||
         article.category.toLowerCase().includes(searchTerm) ||
         (article.subcategory &&
-          article.subcategory.toLowerCase().includes(searchTerm))
+          article.subcategory.toLowerCase().includes(searchTerm)),
     )
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }

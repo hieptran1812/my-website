@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "../ThemeProvider";
 import CollectionTag from "../../components/CollectionTag";
+import AiGeneratedBadge from "../../components/AiGeneratedBadge";
 import { TagList } from "../../components/TagBadge";
 import "katex/dist/katex.min.css";
 import MathJax from "./MathJax";
@@ -34,6 +35,7 @@ interface BlogReaderProps {
   author?: string;
   postSlug?: string;
   collection?: string;
+  aiGenerated?: boolean;
   dangerouslySetInnerHTML?: { __html: string };
 }
 
@@ -47,6 +49,7 @@ export default function BlogReader({
   author = "Hiep Tran",
   postSlug,
   collection,
+  aiGenerated,
   dangerouslySetInnerHTML,
 }: BlogReaderProps) {
   const { theme, isReadingMode, setReadingMode } = useTheme();
@@ -93,7 +96,7 @@ export default function BlogReader({
       JSON.stringify({
         fontSize,
         lineHeight,
-      })
+      }),
     );
   }, [fontSize, lineHeight]);
 
@@ -212,7 +215,7 @@ export default function BlogReader({
     } else {
       console.error("Failed to create SpeechReader");
       alert(
-        "Failed to initialize speech reader. Please try refreshing the page."
+        "Failed to initialize speech reader. Please try refreshing the page.",
       );
     }
   };
@@ -254,7 +257,7 @@ export default function BlogReader({
     if (!contentRef.current) return;
 
     const headings = contentRef.current.querySelectorAll(
-      "h1, h2, h3, h4, h5, h6"
+      "h1, h2, h3, h4, h5, h6",
     );
     const items: TocItem[] = [];
 
@@ -315,7 +318,9 @@ export default function BlogReader({
         if (prev !== closestId) {
           // Auto-scroll TOC to show active item
           setTimeout(() => {
-            const activeButton = document.querySelector(`[data-toc-id="${closestId}"]`);
+            const activeButton = document.querySelector(
+              `[data-toc-id="${closestId}"]`,
+            );
             if (activeButton) {
               activeButton.scrollIntoView({
                 behavior: "smooth",
@@ -531,10 +536,12 @@ export default function BlogReader({
           style={{
             width: tocCollapsed ? "48px" : "256px",
             transition: "width 400ms cubic-bezier(0.4, 0, 0.2, 1)",
-            ...(sidebarBottomOffset > 0 ? {
-              top: "auto",
-              bottom: `${sidebarBottomOffset}px`,
-            } : {}),
+            ...(sidebarBottomOffset > 0
+              ? {
+                  top: "auto",
+                  bottom: `${sidebarBottomOffset}px`,
+                }
+              : {}),
           }}
         >
           <div
@@ -567,7 +574,8 @@ export default function BlogReader({
                     transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--surface-accent)";
+                    e.currentTarget.style.backgroundColor =
+                      "var(--surface-accent)";
                     e.currentTarget.style.color = "var(--accent)";
                     e.currentTarget.style.transform = "scale(1.05)";
                   }}
@@ -624,7 +632,8 @@ export default function BlogReader({
                       transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "var(--surface-accent)";
+                      e.currentTarget.style.backgroundColor =
+                        "var(--surface-accent)";
                       e.currentTarget.style.color = "var(--accent)";
                       e.currentTarget.style.transform = "scale(1.1)";
                     }}
@@ -659,7 +668,9 @@ export default function BlogReader({
                       data-toc-id={item.id}
                       onClick={() => scrollToSection(item.id)}
                       className={`block w-full text-left py-2 px-3 rounded text-sm transition-all duration-200 hover:scale-105 ${
-                        activeSection === item.id ? "font-medium" : "font-normal"
+                        activeSection === item.id
+                          ? "font-medium"
+                          : "font-normal"
                       }`}
                       style={{
                         paddingLeft: `${12 + (item.level - 1) * 12}px`,
@@ -678,7 +689,8 @@ export default function BlogReader({
                       }}
                       onMouseEnter={(e) => {
                         if (activeSection !== item.id) {
-                          e.currentTarget.style.backgroundColor = "var(--surface)";
+                          e.currentTarget.style.backgroundColor =
+                            "var(--surface)";
                           e.currentTarget.style.color = "var(--text-primary)";
                         }
                       }}
@@ -833,7 +845,10 @@ export default function BlogReader({
             </nav>
 
             {/* Safe area padding for iOS */}
-            <div className="h-6" style={{ backgroundColor: "var(--background)" }} />
+            <div
+              className="h-6"
+              style={{ backgroundColor: "var(--background)" }}
+            />
           </div>
 
           {/* Animation keyframes */}
@@ -1022,11 +1037,13 @@ export default function BlogReader({
               {/* Tags */}
               {tags.length > 0 && (
                 <div className="flex flex-wrap justify-center gap-2 mb-6">
-                  <TagList
-                    tags={tags}
-                    variant="default"
-                    clickable={true}
-                  />
+                  <TagList tags={tags} variant="default" clickable={true} />
+                </div>
+              )}
+
+              {aiGenerated && (
+                <div className="flex justify-center mb-6">
+                  <AiGeneratedBadge variant="detailed" />
                 </div>
               )}
             </header>
@@ -1083,7 +1100,6 @@ export default function BlogReader({
                 )}
               </MathJax>
             </article>
-
           </div>
         </div>
       </div>

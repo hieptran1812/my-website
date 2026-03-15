@@ -8,6 +8,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
+import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 
 // Define the list of paper reading subtopics
 const paperReadingSubtopics = [
@@ -36,7 +37,7 @@ export default function PaperReadingBlogPage() {
         const { articles } = await getMarkdownArticlesByCategory(
           "paper-reading",
           1,
-          500 // Fetch up to 500 articles
+          500, // Fetch up to 500 articles
         );
         // Ensure articles is always an array
         setAllArticles(Array.isArray(articles) ? articles : []);
@@ -95,7 +96,7 @@ export default function PaperReadingBlogPage() {
       articlesToFilter = articlesToFilter.filter(
         (article) =>
           article.subcategory &&
-          article.subcategory.toLowerCase() === selectedCategory.toLowerCase()
+          article.subcategory.toLowerCase() === selectedCategory.toLowerCase(),
       );
     }
 
@@ -287,6 +288,13 @@ export default function PaperReadingBlogPage() {
                         >
                           {featuredArticle.excerpt}
                         </p>
+
+                        {featuredArticle.aiGenerated && (
+                          <div className="mb-4">
+                            <AiGeneratedBadge variant="default" />
+                          </div>
+                        )}
+
                         <Link
                           href={`/blog/${featuredArticle.slug}`}
                           className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
@@ -379,6 +387,12 @@ export default function PaperReadingBlogPage() {
                               </div>
                             )}
 
+                            {article.aiGenerated && (
+                              <div className="mb-2">
+                                <AiGeneratedBadge variant="compact" />
+                              </div>
+                            )}
+
                             <div
                               className="text-xs flex items-center gap-2"
                               style={{ color: "var(--text-secondary)" }}
@@ -461,7 +475,7 @@ export default function PaperReadingBlogPage() {
                       (article) =>
                         article.subcategory &&
                         article.subcategory.toLowerCase() ===
-                          subtopic.slug.toLowerCase()
+                          subtopic.slug.toLowerCase(),
                     ).length;
 
                     if (articleCount === 0) return null;
@@ -581,6 +595,12 @@ export default function PaperReadingBlogPage() {
                                     {tag}
                                   </span>
                                 ))}
+                              </div>
+                            )}
+
+                            {article.aiGenerated && (
+                              <div className="mb-3">
+                                <AiGeneratedBadge variant="default" />
                               </div>
                             )}
 

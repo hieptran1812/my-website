@@ -8,6 +8,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
+import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 import { TagList } from "@/components/TagBadge";
 
 export default function NotesBlogPage() {
@@ -24,7 +25,7 @@ export default function NotesBlogPage() {
         const { articles } = await getMarkdownArticlesByCategory(
           "notes",
           1,
-          500 // Fetch up to 500 articles
+          500, // Fetch up to 500 articles
         );
         // Ensure articles is always an array
         setAllArticles(Array.isArray(articles) ? articles : []);
@@ -83,7 +84,7 @@ export default function NotesBlogPage() {
       articlesToFilter = articlesToFilter.filter(
         (article) =>
           article.subcategory &&
-          article.subcategory.toLowerCase() === selectedCategory.toLowerCase()
+          article.subcategory.toLowerCase() === selectedCategory.toLowerCase(),
       );
     }
 
@@ -95,7 +96,7 @@ export default function NotesBlogPage() {
           (article.subcategory &&
             article.subcategory
               .toLowerCase()
-              .includes(searchTerm.toLowerCase()))
+              .includes(searchTerm.toLowerCase())),
       );
     }
     return articlesToFilter;
@@ -284,6 +285,13 @@ export default function NotesBlogPage() {
                         >
                           {featuredArticle.excerpt}
                         </p>
+
+                        {featuredArticle.aiGenerated && (
+                          <div className="mb-4">
+                            <AiGeneratedBadge variant="default" />
+                          </div>
+                        )}
+
                         <Link
                           href={`/blog/${featuredArticle.slug}`}
                           className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
@@ -371,6 +379,12 @@ export default function NotesBlogPage() {
                                   clickable={true}
                                   showMoreCount={false}
                                 />
+                              </div>
+                            )}
+
+                            {article.aiGenerated && (
+                              <div className="mb-2">
+                                <AiGeneratedBadge variant="compact" />
                               </div>
                             )}
 
@@ -560,6 +574,12 @@ export default function NotesBlogPage() {
                                   variant="compact"
                                   clickable={true}
                                 />
+                              </div>
+                            )}
+
+                            {article.aiGenerated && (
+                              <div className="mb-3">
+                                <AiGeneratedBadge variant="default" />
                               </div>
                             )}
 

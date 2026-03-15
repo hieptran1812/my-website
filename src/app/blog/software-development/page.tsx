@@ -8,6 +8,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
+import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 
 // Define the list of software development subtopics
 const softwareDevelopmentSubtopics = [
@@ -36,7 +37,7 @@ export default function SoftwareDevelopmentBlogPage() {
         const { articles } = await getMarkdownArticlesByCategory(
           "software-development",
           1,
-          100 // Get all articles at once for client-side filtering
+          100, // Get all articles at once for client-side filtering
         );
         // Ensure articles is always an array
         setAllArticles(Array.isArray(articles) ? articles : []);
@@ -64,7 +65,7 @@ export default function SoftwareDevelopmentBlogPage() {
       const count = allArticles.filter(
         (article) =>
           article.subcategory &&
-          article.subcategory.toLowerCase() === subtopic.slug.toLowerCase()
+          article.subcategory.toLowerCase() === subtopic.slug.toLowerCase(),
       ).length;
       if (count > 0) {
         subtopicCounts[subtopic.slug.toLowerCase()] = count;
@@ -95,14 +96,14 @@ export default function SoftwareDevelopmentBlogPage() {
       articlesToFilter = articlesToFilter.filter(
         (article) =>
           article.subcategory &&
-          article.subcategory.toLowerCase() === selectedCategory.toLowerCase()
+          article.subcategory.toLowerCase() === selectedCategory.toLowerCase(),
       );
     }
 
     // Remove duplicates based on article ID
     const uniqueArticles = articlesToFilter.filter(
       (article, index, self) =>
-        index === self.findIndex((a) => a.id === article.id)
+        index === self.findIndex((a) => a.id === article.id),
     );
 
     return uniqueArticles;
@@ -293,6 +294,13 @@ export default function SoftwareDevelopmentBlogPage() {
                         >
                           {featuredArticle.excerpt}
                         </p>
+
+                        {featuredArticle.aiGenerated && (
+                          <div className="mb-4">
+                            <AiGeneratedBadge variant="default" />
+                          </div>
+                        )}
+
                         <Link
                           href={`/blog/${featuredArticle.slug}`}
                           className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
@@ -382,6 +390,12 @@ export default function SoftwareDevelopmentBlogPage() {
                                     {tag}
                                   </span>
                                 ))}
+                              </div>
+                            )}
+
+                            {article.aiGenerated && (
+                              <div className="mb-2">
+                                <AiGeneratedBadge variant="compact" />
                               </div>
                             )}
 
@@ -574,6 +588,12 @@ export default function SoftwareDevelopmentBlogPage() {
                                     {tag}
                                   </span>
                                 ))}
+                              </div>
+                            )}
+
+                            {article.aiGenerated && (
+                              <div className="mb-3">
+                                <AiGeneratedBadge variant="default" />
                               </div>
                             )}
 

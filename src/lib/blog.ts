@@ -21,6 +21,7 @@ export interface Article {
   author?: string;
   image?: string;
   collection?: string;
+  aiGenerated?: boolean;
 }
 
 export interface BlogPost {
@@ -48,13 +49,14 @@ export interface BlogPostMetadata {
   image: string;
   excerpt: string;
   collection?: string;
+  aiGenerated?: boolean;
 }
 
 // Get markdown articles by category using API route (client-side function)
 export async function getMarkdownArticlesByCategory(
   targetCategory: string,
   page: number = 1,
-  limit: number = 50
+  limit: number = 50,
 ): Promise<{ articles: Article[]; total: number; hasMore: boolean }> {
   try {
     const baseUrl =
@@ -101,12 +103,12 @@ export async function processMarkdown(content: string): Promise<string> {
 // Utility function to process blog post content and calculate readTime
 export function processBlogPostWithReadTime(
   content: string,
-  frontmatter: Record<string, unknown> = {}
+  frontmatter: Record<string, unknown> = {},
 ): { processedContent: string; readTime: string } {
   const readTimeResult = calculateReadTimeWithTags(
     content,
     (frontmatter.tags as string[]) || [],
-    (frontmatter.category as string) || "general"
+    (frontmatter.category as string) || "general",
   );
 
   return {

@@ -20,6 +20,7 @@ interface BlogPostMetadata {
   image: string;
   excerpt: string;
   collection?: string;
+  aiGenerated?: boolean;
   seo?: {
     type: string;
     datePublished: string;
@@ -50,15 +51,15 @@ export async function GET(request: Request) {
         filteredPosts = filteredPosts.filter(
           (post) =>
             post.title.toLowerCase().includes(searchLower) ||
-            post.excerpt.toLowerCase().includes(searchLower)
+            post.excerpt.toLowerCase().includes(searchLower),
         );
       } else if (category) {
         filteredPosts = filteredPosts.filter(
-          (post) => post.category.toLowerCase() === category.toLowerCase()
+          (post) => post.category.toLowerCase() === category.toLowerCase(),
         );
       } else if (tag) {
         filteredPosts = filteredPosts.filter((post) =>
-          post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
+          post.tags.some((t) => t.toLowerCase() === tag.toLowerCase()),
         );
       }
 
@@ -77,7 +78,7 @@ export async function GET(request: Request) {
     // Helper function to recursively get all .md files
     const getAllMarkdownFiles = (
       dir: string,
-      baseCategory: string
+      baseCategory: string,
     ): { filePath: string; relativePath: string; category: string }[] => {
       const results: {
         filePath: string;
@@ -130,7 +131,7 @@ export async function GET(request: Request) {
         const automaticReadTime = calculateReadTimeWithTags(
           content,
           data.tags || [],
-          data.category || category
+          data.category || category,
         );
 
         // Generate auto-excerpt from content if not provided
@@ -181,6 +182,7 @@ export async function GET(request: Request) {
           image: data.image || "/images/default-blog.jpg",
           excerpt,
           collection: data.collection || data.subcategory,
+          aiGenerated: data.aiGenerated === true,
           // Add SEO-friendly JSON-LD data
           seo: {
             type: "BlogPosting",
@@ -219,15 +221,15 @@ export async function GET(request: Request) {
       posts = posts.filter(
         (post) =>
           post.title.toLowerCase().includes(searchLower) ||
-          post.excerpt.toLowerCase().includes(searchLower)
+          post.excerpt.toLowerCase().includes(searchLower),
       );
     } else if (category) {
       posts = posts.filter(
-        (post) => post.category.toLowerCase() === category.toLowerCase()
+        (post) => post.category.toLowerCase() === category.toLowerCase(),
       );
     } else if (tag) {
       posts = posts.filter((post) =>
-        post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
+        post.tags.some((t) => t.toLowerCase() === tag.toLowerCase()),
       );
     }
 
@@ -236,7 +238,7 @@ export async function GET(request: Request) {
     console.error("Error fetching blog posts:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

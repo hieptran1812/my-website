@@ -21,6 +21,7 @@ export interface Article {
   slug: string;
   image?: string;
   collection?: string;
+  aiGenerated?: boolean;
 }
 
 function convertToArticle(
@@ -28,7 +29,7 @@ function convertToArticle(
   metadata: any,
   slug: string,
   category?: string,
-  content?: string
+  content?: string,
 ): Article {
   // Calculate read time from content if available
   let readTime = "5 min read";
@@ -36,7 +37,7 @@ function convertToArticle(
     const readTimeResult = calculateReadTimeWithTags(
       content,
       metadata.tags || [],
-      metadata.category || category || "General"
+      metadata.category || category || "General",
     );
     readTime = readTimeResult.readTime;
   } else if (metadata.readTime) {
@@ -133,6 +134,7 @@ function convertToArticle(
     slug, // Original slug remains for URL purposes
     image: metadata.image || "/blog-placeholder.jpg", // Add image handling
     collection: metadata.collection,
+    aiGenerated: metadata.aiGenerated === true,
   };
 }
 
@@ -152,7 +154,7 @@ export async function GET(request: NextRequest) {
       dir: string,
       currentCategory?: string,
       currentSubcategorySlug?: string,
-      basePath = ""
+      basePath = "",
     ) => {
       const entries = fs.readdirSync(dir, { withFileTypes: true });
       for (const entry of entries) {
@@ -169,10 +171,20 @@ export async function GET(request: NextRequest) {
             readArticlesFromDir(fullPath, entry.name, undefined, newBasePath);
           } else if (!currentSubcategorySlug) {
             // This is a subcategory folder
-            readArticlesFromDir(fullPath, currentCategory, entry.name, newBasePath);
+            readArticlesFromDir(
+              fullPath,
+              currentCategory,
+              entry.name,
+              newBasePath,
+            );
           } else {
             // Deeper nesting - continue with current category/subcategory
-            readArticlesFromDir(fullPath, currentCategory, currentSubcategorySlug, newBasePath);
+            readArticlesFromDir(
+              fullPath,
+              currentCategory,
+              currentSubcategorySlug,
+              newBasePath,
+            );
           }
         } else if (entry.name.endsWith(".md")) {
           const fileKey = basePath ? `${basePath}/${entry.name}` : entry.name;
@@ -196,7 +208,7 @@ export async function GET(request: NextRequest) {
             metadata,
             slug,
             currentCategory,
-            fileMatterContent
+            fileMatterContent,
           );
           article.id = uniqueId; // Override with truly unique ID
           article.content = fileMatterContent;
@@ -243,7 +255,7 @@ export async function GET(request: NextRequest) {
     console.error("Error fetching articles:", error);
     return NextResponse.json(
       { articles: [], total: 0, page: 1, limit: 50, hasMore: false },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

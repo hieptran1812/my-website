@@ -16,6 +16,7 @@ interface BlogPost {
   author: string;
   slug: string;
   collection?: string;
+  aiGenerated?: boolean;
 }
 
 export default function BlogPostPage() {
@@ -36,7 +37,7 @@ export default function BlogPostPage() {
         }
 
         const response = await fetch(
-          `/api/blog/article?slug=${encodeURIComponent(slug)}`
+          `/api/blog/article?slug=${encodeURIComponent(slug)}`,
         );
 
         if (!response.ok) {
@@ -59,11 +60,12 @@ export default function BlogPostPage() {
           author: data.article.author,
           slug: slug, // Add slug to post data
           collection: data.article.collection,
+          aiGenerated: data.article.aiGenerated,
         });
       } catch (err) {
         console.error("Error fetching blog post:", err);
         setError(
-          err instanceof Error ? err.message : "Failed to load blog post"
+          err instanceof Error ? err.message : "Failed to load blog post",
         );
       } finally {
         setIsLoading(false);
@@ -143,6 +145,7 @@ export default function BlogPostPage() {
       author={post.author}
       postSlug={post.slug}
       collection={post.collection}
+      aiGenerated={post.aiGenerated}
       dangerouslySetInnerHTML={{ __html: post.content }}
     />
   );

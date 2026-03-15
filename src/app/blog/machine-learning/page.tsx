@@ -8,6 +8,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
+import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 
 // Define the list of machine learning subtopics
 const machineLearningSubtopics = [
@@ -23,6 +24,10 @@ const machineLearningSubtopics = [
   { name: "Open Source Library", slug: "open source library" },
   { name: "MLOps", slug: "mlops" },
   { name: "Mathematics", slug: "mathematics" },
+  {
+    name: "Traditional Machine Learning",
+    slug: "traditional machine learning",
+  },
 ];
 
 export default function MachineLearningBlogPage() {
@@ -38,7 +43,7 @@ export default function MachineLearningBlogPage() {
         const { articles } = await getMarkdownArticlesByCategory(
           "machine-learning",
           1,
-          500 // Fetch up to 500 articles
+          500, // Fetch up to 500 articles
         );
         // Ensure articles is always an array
         setAllArticles(Array.isArray(articles) ? articles : []);
@@ -68,7 +73,7 @@ export default function MachineLearningBlogPage() {
       const count = allArticles.filter(
         (article) =>
           article.subcategory &&
-          article.subcategory.toLowerCase() === subtopic.slug.toLowerCase()
+          article.subcategory.toLowerCase() === subtopic.slug.toLowerCase(),
       ).length;
       if (count > 0) {
         subtopicCounts[subtopic.slug.toLowerCase()] = count;
@@ -99,7 +104,7 @@ export default function MachineLearningBlogPage() {
       articlesToFilter = articlesToFilter.filter(
         (article) =>
           article.subcategory &&
-          article.subcategory.toLowerCase() === selectedCategory.toLowerCase()
+          article.subcategory.toLowerCase() === selectedCategory.toLowerCase(),
       );
     }
 
@@ -293,6 +298,13 @@ export default function MachineLearningBlogPage() {
                         >
                           {featuredArticle.excerpt}
                         </p>
+
+                        {featuredArticle.aiGenerated && (
+                          <div className="mb-4">
+                            <AiGeneratedBadge variant="default" />
+                          </div>
+                        )}
+
                         <Link
                           href={`/blog/${featuredArticle.slug}`}
                           className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
@@ -382,6 +394,12 @@ export default function MachineLearningBlogPage() {
                                     {tag}
                                   </span>
                                 ))}
+                              </div>
+                            )}
+
+                            {article.aiGenerated && (
+                              <div className="mb-2">
+                                <AiGeneratedBadge variant="compact" />
                               </div>
                             )}
 
@@ -574,6 +592,12 @@ export default function MachineLearningBlogPage() {
                                     {tag}
                                   </span>
                                 ))}
+                              </div>
+                            )}
+
+                            {article.aiGenerated && (
+                              <div className="mb-3">
+                                <AiGeneratedBadge variant="default" />
                               </div>
                             )}
 
