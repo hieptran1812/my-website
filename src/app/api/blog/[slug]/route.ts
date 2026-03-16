@@ -6,6 +6,7 @@ import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
+import { protectMathBlocks, restoreMathBlocks } from "../../../../lib/markdown";
 
 export async function GET(
   request: NextRequest,
@@ -65,13 +66,16 @@ export async function GET(
       data.category || "general"
     );
 
+    // Protect math blocks from being mangled by remark
+    const { protectedContent, mathBlocks } = protectMathBlocks(content);
+
     // Process markdown to HTML
     const processedContent = await remark()
       .use(remarkGfm)
-      .use(remarkHtml)
-      .process(content);
+      .use(remarkHtml, { sanitize: false })
+      .process(protectedContent);
 
-    const htmlContent = processedContent.toString();
+    const htmlContent = restoreMathBlocks(processedContent.toString(), mathBlocks);
 
     const post = {
       slug,

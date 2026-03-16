@@ -12,10 +12,11 @@ import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 import { TagList } from "@/components/TagBadge";
 import { getArticleImageUrl } from "@/lib/articleImage";
 import SubcategoryFilter from "@/components/SubcategoryFilter";
+import BlogSearchBar from "@/components/BlogSearchBar";
+import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 
 export default function NotesBlogPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -78,31 +79,10 @@ export default function NotesBlogPage() {
     ];
   }, [allArticles]);
 
-  // Filter articles based on selected subcategories (multi-select) and search
-  const filteredArticles = useMemo(() => {
-    let articlesToFilter = allArticles;
-
-    if (selectedCategories.length > 0) {
-      articlesToFilter = articlesToFilter.filter(
-        (article) =>
-          article.subcategory &&
-          selectedCategories.includes(article.subcategory.toLowerCase()),
-      );
-    }
-
-    if (searchTerm) {
-      articlesToFilter = articlesToFilter.filter(
-        (article) =>
-          article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          article.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          (article.subcategory &&
-            article.subcategory
-              .toLowerCase()
-              .includes(searchTerm.toLowerCase())),
-      );
-    }
-    return articlesToFilter;
-  }, [allArticles, selectedCategories, searchTerm]);
+  const { searchTerm, setSearchTerm, filteredArticles } = useArticleSearch(
+    allArticles,
+    selectedCategories,
+  );
 
   // Initialize lazy loading with filtered articles
   const {
@@ -419,14 +399,19 @@ export default function NotesBlogPage() {
                     All Articles
                   </h2>
                   <p style={{ color: "var(--text-secondary)" }}>
-                    {selectedCategories.length > 0
-                      ? `Showing ${filteredArticles.length} articles`
+                    {selectedCategories.length > 0 || searchTerm.trim()
+                      ? `Showing ${filteredArticles.length} of ${allArticles.length} notes`
                       : `${allArticles.length} total notes`}
                   </p>
                 </div>
 
-                {/* Subtopic Filter Pills */}
-                <div className="flex justify-center mb-12">
+                {/* Search & Filter Bar */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
+                  <BlogSearchBar
+                    value={searchTerm}
+                    onChange={setSearchTerm}
+                    placeholder="Search notes..."
+                  />
                   <SubcategoryFilter
                     categories={categories.slice(1)}
                     selectedSlugs={selectedCategories}

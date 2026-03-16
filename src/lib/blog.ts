@@ -1,7 +1,4 @@
 // Utility functions for processing markdown blog posts
-import { remark } from "remark";
-import html from "remark-html";
-import remarkGfm from "remark-gfm";
 import { calculateReadTimeWithTags, getReadTime } from "./readTimeCalculator";
 
 // Article interface matching the one used in blog pages
@@ -88,16 +85,6 @@ export async function getMarkdownArticlesByCategory(
     console.error("Error fetching articles:", error);
     return { articles: [], total: 0, hasMore: false };
   }
-}
-
-// Process markdown content to HTML
-export async function processMarkdown(content: string): Promise<string> {
-  const processedContent = await remark()
-    .use(remarkGfm)
-    .use(html, { sanitize: false })
-    .process(content);
-
-  return processedContent.toString();
 }
 
 // Utility function to process blog post content and calculate readTime

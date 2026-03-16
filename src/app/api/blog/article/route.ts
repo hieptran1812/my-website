@@ -9,6 +9,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 import { Article } from "../articles/route";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
+import { protectMathBlocks, restoreMathBlocks } from "../../../../lib/markdown";
 
 export async function GET(request: NextRequest) {
   try {
@@ -63,15 +64,18 @@ export async function GET(request: NextRequest) {
     const fileContent = fs.readFileSync(articlePath, "utf8");
     const { data: metadata, content: markdownContent } = matter(fileContent);
 
+    // Protect math blocks from being mangled by remark
+    const { protectedContent, mathBlocks } = protectMathBlocks(markdownContent);
+
     // Process markdown to HTML with syntax highlighting
     const processedContent = await remark()
       .use(remarkGfm)
-      .use(remarkRehype)
+      .use(remarkRehype, { allowDangerousHtml: true })
       .use(rehypeHighlight)
-      .use(rehypeStringify)
-      .process(markdownContent);
+      .use(rehypeStringify, { allowDangerousHtml: true })
+      .process(protectedContent);
 
-    const htmlContent = processedContent.toString();
+    const htmlContent = restoreMathBlocks(processedContent.toString(), mathBlocks);
 
     // Determine category from directory structure if not specified
     let category = metadata.category;

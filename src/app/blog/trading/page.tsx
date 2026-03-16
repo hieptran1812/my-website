@@ -11,6 +11,8 @@ import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import { getArticleImageUrl } from "@/lib/articleImage";
 import SubcategoryFilter from "@/components/SubcategoryFilter";
+import BlogSearchBar from "@/components/BlogSearchBar";
+import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 
 // Define the list of trading subtopics
 const tradingSubtopics = [
@@ -88,16 +90,10 @@ export default function TradingBlogPage() {
     ];
   }, [allArticles]);
 
-  // Filter articles based on selected subcategories (multi-select)
-  const filteredArticles = useMemo(() => {
-    if (selectedCategories.length === 0) return allArticles;
-
-    return allArticles.filter(
-      (article) =>
-        article.subcategory &&
-        selectedCategories.includes(article.subcategory.toLowerCase()),
-    );
-  }, [allArticles, selectedCategories]);
+  const { searchTerm, setSearchTerm, filteredArticles } = useArticleSearch(
+    allArticles,
+    selectedCategories,
+  );
 
   // Initialize lazy loading with filtered articles
   const {
@@ -405,14 +401,19 @@ export default function TradingBlogPage() {
                     All Articles
                   </h2>
                   <p style={{ color: "var(--text-secondary)" }}>
-                    {selectedCategories.length > 0
-                      ? `Showing ${filteredArticles.length} articles`
+                    {selectedCategories.length > 0 || searchTerm.trim()
+                      ? `Showing ${filteredArticles.length} of ${allArticles.length} articles`
                       : `${allArticles.length} total trading articles`}
                   </p>
                 </div>
 
-                {/* Subtopic Filter Pills */}
-                <div className="flex justify-center mb-12">
+                {/* Search & Filter Bar */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
+                  <BlogSearchBar
+                    value={searchTerm}
+                    onChange={setSearchTerm}
+                    placeholder="Search articles..."
+                  />
                   <SubcategoryFilter
                     categories={categories.slice(1)}
                     selectedSlugs={selectedCategories}
@@ -509,7 +510,10 @@ export default function TradingBlogPage() {
                       No articles found for the selected filters.
                     </p>
                     <button
-                      onClick={() => setSelectedCategories([])}
+                      onClick={() => {
+                        setSelectedCategories([]);
+                        setSearchTerm("");
+                      }}
                       className="px-4 py-2 rounded-lg transition-colors text-white"
                       style={{ backgroundColor: "var(--accent)" }}
                     >

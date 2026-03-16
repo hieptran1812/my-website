@@ -11,6 +11,8 @@ import CollectionTag from "@/components/CollectionTag";
 import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 import { getArticleImageUrl } from "@/lib/articleImage";
 import SubcategoryFilter from "@/components/SubcategoryFilter";
+import BlogSearchBar from "@/components/BlogSearchBar";
+import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 
 // Define the list of software development subtopics
 const softwareDevelopmentSubtopics = [
@@ -89,16 +91,10 @@ export default function SoftwareDevelopmentBlogPage() {
     ];
   }, [allArticles]);
 
-  // Filter articles based on selected subcategories (multi-select)
-  const filteredArticles = useMemo(() => {
-    if (selectedCategories.length === 0) return allArticles;
-
-    return allArticles.filter(
-      (article) =>
-        article.subcategory &&
-        selectedCategories.includes(article.subcategory.toLowerCase()),
-    );
-  }, [allArticles, selectedCategories]);
+  const { searchTerm, setSearchTerm, filteredArticles } = useArticleSearch(
+    allArticles,
+    selectedCategories,
+  );
 
   // Lazy loading configuration
   const ITEMS_PER_PAGE = 9;
@@ -419,14 +415,19 @@ export default function SoftwareDevelopmentBlogPage() {
                     All Articles
                   </h2>
                   <p style={{ color: "var(--text-secondary)" }}>
-                    {selectedCategories.length > 0
-                      ? `Showing ${filteredArticles.length} articles`
+                    {selectedCategories.length > 0 || searchTerm.trim()
+                      ? `Showing ${filteredArticles.length} of ${allArticles.length} articles`
                       : `${allArticles.length} total articles`}
                   </p>
                 </div>
 
-                {/* Subtopic Filter Pills */}
-                <div className="flex justify-center mb-12">
+                {/* Search & Filter Bar */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
+                  <BlogSearchBar
+                    value={searchTerm}
+                    onChange={setSearchTerm}
+                    placeholder="Search articles..."
+                  />
                   <SubcategoryFilter
                     categories={categories.slice(1)}
                     selectedSlugs={selectedCategories}
@@ -540,7 +541,10 @@ export default function SoftwareDevelopmentBlogPage() {
                       No articles found for the selected filters.
                     </p>
                     <button
-                      onClick={() => setSelectedCategories([])}
+                      onClick={() => {
+                        setSelectedCategories([]);
+                        setSearchTerm("");
+                      }}
                       className="px-4 py-2 rounded-lg transition-colors text-white"
                       style={{ backgroundColor: "var(--accent)" }}
                     >
