@@ -8,7 +8,6 @@ date: "2026-03-18"
 author: "Hiep Tran"
 featured: false
 aiGenerated: true
-image: "/imgs/blogs/claude-agent-skills.png"
 excerpt: "A comprehensive collection of tips and best practices for using Claude Code effectively, sourced from Boris Cherny — the creator of Claude Code — and the Claude Code team at Anthropic."
 ---
 
