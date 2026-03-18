@@ -12,27 +12,49 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   experimental: {
-    optimizePackageImports: ["react-icons"],
+    optimizePackageImports: ["react-icons", "d3", "katex", "gray-matter"],
     scrollRestoration: true,
   },
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
-  // Add cache headers to static assets
   async headers() {
+    const cspValue =
+      "connect-src 'self' https://vitals.vercel-insights.com https://vercel-insights.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live;";
     return [
+      {
+        source: "/_next/static/(.*)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "Content-Security-Policy", value: cspValue },
+        ],
+      },
+      {
+        source: "/imgs/(.*)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=86400" },
+          { key: "Content-Security-Policy", value: cspValue },
+        ],
+      },
+      {
+        source: "/(.*).webp",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=86400" },
+          { key: "Content-Security-Policy", value: cspValue },
+        ],
+      },
+      {
+        source: "/api/(.*)",
+        headers: [
+          { key: "Cache-Control", value: "no-store, max-age=0" },
+          { key: "Content-Security-Policy", value: cspValue },
+        ],
+      },
       {
         source: "/(.*)",
         headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-          {
-            key: "Content-Security-Policy",
-            value:
-              "connect-src 'self' https://vitals.vercel-insights.com https://vercel-insights.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live;",
-          },
+          { key: "Cache-Control", value: "public, max-age=0, s-maxage=3600, stale-while-revalidate=60" },
+          { key: "Content-Security-Policy", value: cspValue },
         ],
       },
     ];

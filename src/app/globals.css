@@ -96,13 +96,6 @@ body {
     color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Add transition for all elements that use color/background-color */
-* {
-  transition-property: background-color, color, border-color, box-shadow;
-  transition-duration: 0.5s;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px; /* Account for fixed header */
@@ -119,29 +112,10 @@ html {
   }
 }
 
-/* Theme transition helpers */
-.theme-transitioning *,
-section {
-  transition: background-color 0.3s ease, border-color 0.3s ease,
-    color 0.3s ease !important;
-}
-
-/* Elements that should transition smoothly during theme changes */
-section,
-div,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-span,
-a,
-button {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-duration: 300ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+/* Theme transition - only active during theme toggle */
+.theme-transitioning,
+.theme-transitioning * {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
 }
 
 /* Section background colors with harmonious transitions */
@@ -160,10 +134,7 @@ section.bg-sky-50 {
 /* Enhanced section styling for better visual hierarchy */
 section {
   position: relative;
-  overflow: hidden; /* Ensure gradient effects don't overflow */
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateZ(0); /* Enable hardware acceleration */
-  will-change: background-color, transform;
+  overflow: hidden;
 }
 
 /* Intersection observer animations for scroll-triggered effects */
@@ -269,47 +240,6 @@ section:not([class*="section-"]):not([style*="background"]):nth-child(odd) {
   );
 }
 
-/* Subtle gradient overlays for depth with improved opacity */
-section:not([class*="section-"]):not([style*="background"])::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-    ellipse at center top,
-    var(--accent) 0%,
-    transparent 70%
-  );
-  opacity: 0.015; /* More subtle */
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Additional overlay for enhanced depth */
-section:not([class*="section-"]):not([style*="background"])::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    var(--surface-accent) 50%,
-    transparent 100%
-  );
-  opacity: 0.008;
-  pointer-events: none;
-  z-index: 0;
-}
-
-section > * {
-  position: relative;
-  z-index: 1;
-}
 
 /* Card styling with new color scheme */
 .card-bg {
@@ -450,17 +380,6 @@ section {
 }
 
 /* Custom animations and effects */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes slideInLeft {
   from {
     opacity: 0;
@@ -680,16 +599,6 @@ section {
   }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
 @keyframes sparkle {
   0%,
   100% {
@@ -702,30 +611,7 @@ section {
   }
 }
 
-@keyframes pulse-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6),
-      0 0 30px rgba(147, 51, 234, 0.4);
-  }
-}
-
-/* Utility classes for animations */
-.animate-gradient {
-  animation: gradient 3s ease infinite;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
+/* Additional animation utilities */
 .animate-sparkle {
   animation: sparkle 2s ease-in-out infinite;
 }
@@ -1124,21 +1010,6 @@ a:focus {
 
 .blog-content-stagger {
   animation: fadeInUp 0.6s ease-out forwards;
-}
-
-/* Add floating animation for blog page decorations */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
 }
 
 /* Pulse animation variant for blog decorations */

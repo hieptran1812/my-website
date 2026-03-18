@@ -65,7 +65,7 @@ export default function HeroSection() {
 
   // Memoize particles - reduce count on mobile for better performance
   const particles = useMemo(() => {
-    const count = isMobile ? 15 : 30;
+    const count = isMobile ? 8 : 15;
     return generateParticles(count);
   }, [isMobile]);
 

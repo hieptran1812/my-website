@@ -9,9 +9,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
+        sans: ["var(--font-geist-sans)", "Inter", "system-ui", "sans-serif"],
         mono: [
-          "var(--font-jetbrains-mono)",
+          "var(--font-geist-mono)",
           "JetBrains Mono",
           "Menlo",
           "Monaco",

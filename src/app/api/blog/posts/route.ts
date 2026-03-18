@@ -156,7 +156,11 @@ export async function GET(request: NextRequest) {
       return dateB.getTime() - dateA.getTime();
     });
 
-    return NextResponse.json(posts);
+    return NextResponse.json(posts, {
+      headers: {
+        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=60",
+      },
+    });
   } catch (error) {
     console.error("Error reading blog posts:", error);
     return NextResponse.json([]);

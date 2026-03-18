@@ -1,103 +1,54 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
 import Link from "next/link";
+import { Metadata } from "next";
 import BlogReader from "../../components/BlogReader";
 import FadeInWrapper from "@/components/FadeInWrapper";
+import { getArticle, getAllBlogSlugs } from "@/lib/getArticle";
 
-interface BlogPost {
-  title: string;
-  content: string;
-  publishDate: string;
-  readTime: string;
-  tags: string[];
-  category: string;
-  author: string;
-  slug: string;
-  collection?: string;
-  aiGenerated?: boolean;
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const slugs = getAllBlogSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
-export default function BlogPostPage() {
-  const params = useParams();
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const slugStr = slug.join("/");
+  const article = await getArticle(slugStr);
 
-  useEffect(() => {
-    async function fetchPost() {
-      try {
-        // Construct slug from URL params - handle both single and nested slugs
-        let slug: string;
-        if (Array.isArray(params.slug)) {
-          slug = params.slug.join("/");
-        } else {
-          slug = params.slug as string;
-        }
-
-        const response = await fetch(
-          `/api/blog/article?slug=${encodeURIComponent(slug)}`,
-        );
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch post: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-
-        if (!data || !data.article) {
-          throw new Error("Article not found");
-        }
-
-        setPost({
-          title: data.article.title,
-          content: data.article.content,
-          publishDate: data.article.publishDate,
-          readTime: data.article.readTime,
-          tags: data.article.tags,
-          category: data.article.category,
-          author: data.article.author,
-          slug: slug, // Add slug to post data
-          collection: data.article.collection,
-          aiGenerated: data.article.aiGenerated,
-        });
-      } catch (err) {
-        console.error("Error fetching blog post:", err);
-        setError(
-          err instanceof Error ? err.message : "Failed to load blog post",
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchPost();
-  }, [params.slug]);
-
-  if (isLoading) {
-    return (
-      <FadeInWrapper duration={600}>
-        <div
-          className="flex flex-col min-h-screen items-center justify-center transition-colors duration-300"
-          style={{
-            backgroundColor: "var(--background)",
-            color: "var(--text-primary)",
-          }}
-        >
-          <div
-            className="animate-spin rounded-full h-12 w-12 border-b-2 mb-4"
-            style={{ borderColor: "var(--accent)" }}
-          ></div>
-          <p className="text-lg" style={{ color: "var(--text-secondary)" }}>
-            Loading blog post...
-          </p>
-        </div>
-      </FadeInWrapper>
-    );
+  if (!article) {
+    return { title: "Blog Post Not Found" };
   }
 
-  if (error || !post) {
+  return {
+    title: `${article.title} | Hiep Tran`,
+    description: article.excerpt || `Read ${article.title} by ${article.author}`,
+    keywords: article.tags,
+    openGraph: {
+      title: article.title,
+      description: article.excerpt || "",
+      type: "article",
+      publishedTime: article.publishDate,
+      authors: article.author ? [article.author] : undefined,
+      tags: article.tags,
+    },
+  };
+}
+
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>;
+}) {
+  const { slug } = await params;
+  const slugStr = slug.join("/");
+  const article = await getArticle(slugStr);
+
+  if (!article) {
     return (
       <FadeInWrapper duration={600}>
         <div
@@ -117,7 +68,7 @@ export default function BlogPostPage() {
             className="text-lg mb-6"
             style={{ color: "var(--text-secondary)" }}
           >
-            {error || "The requested blog post could not be found."}
+            The requested blog post could not be found.
           </p>
           <Link
             href="/blog"
@@ -137,16 +88,16 @@ export default function BlogPostPage() {
 
   return (
     <BlogReader
-      title={post.title}
-      publishDate={post.publishDate}
-      readTime={post.readTime}
-      tags={post.tags}
-      category={post.category}
-      author={post.author}
-      postSlug={post.slug}
-      collection={post.collection}
-      aiGenerated={post.aiGenerated}
-      dangerouslySetInnerHTML={{ __html: post.content }}
+      title={article.title}
+      publishDate={article.publishDate}
+      readTime={article.readTime}
+      tags={article.tags}
+      category={article.category}
+      author={article.author}
+      postSlug={article.slug}
+      collection={article.collection}
+      aiGenerated={article.aiGenerated}
+      dangerouslySetInnerHTML={{ __html: article.content }}
     />
   );
 }

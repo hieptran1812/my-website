@@ -115,7 +115,11 @@ export async function GET(request: NextRequest) {
       aiGenerated: metadata.aiGenerated === true,
     };
 
-    return NextResponse.json({ article });
+    return NextResponse.json({ article }, {
+      headers: {
+        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=60",
+      },
+    });
   } catch (error) {
     console.error("Error fetching article:", error);
     return NextResponse.json(

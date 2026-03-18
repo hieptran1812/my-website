@@ -16,19 +16,19 @@ export function generateOGImage(title: string, description?: string): string {
   return `/api/og?${params.toString()}`;
 }
 
-export const defaultOGImage = "/about-profile.png"; // Fallback image
+export const defaultOGImage = "/about-profile.webp"; // Fallback image
 
 export const pageOGImages = {
-  home: "/about-profile.png",
-  about: "/about-profile.png",
-  projects: "/about-profile.png",
-  contact: "/about-profile.png",
-  blog: "/about-profile.png",
-  "machine-learning": "/about-profile.png",
-  "paper-reading": "/about-profile.png",
-  "software-development": "/about-profile.png",
-  trading: "/about-profile.png",
-  notes: "/about-profile.png",
-  privacy: "/about-profile.png",
-  terms: "/about-profile.png",
+  home: "/about-profile.webp",
+  about: "/about-profile.webp",
+  projects: "/about-profile.webp",
+  contact: "/about-profile.webp",
+  blog: "/about-profile.webp",
+  "machine-learning": "/about-profile.webp",
+  "paper-reading": "/about-profile.webp",
+  "software-development": "/about-profile.webp",
+  trading: "/about-profile.webp",
+  notes: "/about-profile.webp",
+  privacy: "/about-profile.webp",
+  terms: "/about-profile.webp",
 } as const;

@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useCallback } from "react";
 import katex from "katex";
-import "katex/dist/katex.min.css";
 
 interface MathRendererProps {
   latex: string;

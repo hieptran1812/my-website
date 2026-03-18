@@ -9,8 +9,8 @@ import "katex/dist/katex.min.css";
 import MathJax from "./MathJax";
 import "./BlogContent.css"; // Re-enabled for proper styling
 import "../../components/styles/TextHighlight.css"; // Import text highlighting styles
-import { SpeechReader } from "../../components/utils/SpeechReader";
 import type {
+  SpeechReader,
   SpeechReaderOptions,
   SpeechReaderEvents,
 } from "../../components/utils/SpeechReader";
@@ -116,8 +116,8 @@ export default function BlogReader({
     [readingColors, isReadingMode, theme],
   );
 
-  // Initialize SpeechReader for text-to-speech with highlighting
-  const initializeSpeechReader = useCallback(() => {
+  // Initialize SpeechReader for text-to-speech with highlighting (lazy-loaded)
+  const initializeSpeechReader = useCallback(async (): Promise<SpeechReader | null> => {
     if (!contentRef.current) {
       return null;
     }
@@ -132,9 +132,9 @@ export default function BlogReader({
         wordHighlight: "#6fa8dc",
         paragraphHighlight: "#cfe2f3",
       },
-      wordsPerMinute: 200, // Increased for better speed while maintaining clarity
-      autoScroll: false, // Disabled to prevent screen jumping during reading
-      rate: 0.85, // Optimized rate for speed and clarity balance
+      wordsPerMinute: 200,
+      autoScroll: false,
+      rate: 0.85,
       pitch: 1.0,
       volume: 1.0,
     };
@@ -143,7 +143,6 @@ export default function BlogReader({
       onStart: () => {
         setIsPlaying(true);
         setIsPaused(false);
-        // Update duration when speech starts
         if (speechReaderRef.current) {
           setDuration(speechReaderRef.current.getTotalDuration());
         }
@@ -169,7 +168,6 @@ export default function BlogReader({
       },
       onProgress: (progressPercent) => {
         setProgress(progressPercent);
-        // Update remaining time
         if (speechReaderRef.current) {
           setRemainingTime(speechReaderRef.current.getRemainingTime());
         }
@@ -177,7 +175,10 @@ export default function BlogReader({
     };
 
     try {
-      const speechReader = new SpeechReader(articleElement, options, events);
+      const { SpeechReader: SpeechReaderClass } = await import(
+        "../../components/utils/SpeechReader"
+      );
+      const speechReader = new SpeechReaderClass(articleElement, options, events);
       return speechReader;
     } catch (error) {
       console.error("Error creating SpeechReader:", error);
@@ -186,14 +187,14 @@ export default function BlogReader({
   }, []);
 
   // Speech control functions - memoized to prevent BlogGraphSidebar re-renders
-  const startSpeech = useCallback(() => {
+  const startSpeech = useCallback(async () => {
     if (!("speechSynthesis" in window)) {
       alert("Speech synthesis is not supported in your browser.");
       return;
     }
 
     if (!speechReaderRef.current) {
-      speechReaderRef.current = initializeSpeechReader();
+      speechReaderRef.current = await initializeSpeechReader();
     }
 
     if (speechReaderRef.current) {
