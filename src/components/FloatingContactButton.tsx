@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 interface FloatingContactButtonProps {
   className?: string;
@@ -11,6 +12,8 @@ const FloatingContactButton: React.FC<FloatingContactButtonProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const pathname = usePathname();
+  const isBlogPost = pathname.startsWith("/blog/");
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -83,7 +86,7 @@ const FloatingContactButton: React.FC<FloatingContactButtonProps> = ({
   if (!isVisible) return null;
 
   return (
-    <div className={`fixed bottom-6 right-6 z-50 ${className}`}>
+    <div className={`fixed bottom-6 right-6 z-50 ${isBlogPost ? "hidden md:block" : ""} ${className}`}>
       <div className="flex flex-col items-end space-y-3">
         {/* Contact Options */}
         {isExpanded && (

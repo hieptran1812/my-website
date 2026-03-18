@@ -4,7 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "./ThemeProvider";
 import Navigation from "./components/Navigation";
 import Footer from "./Footer";
-import FloatingContactButton from "@/components/FloatingContactButton";
 import {
   VercelSpeedInsights,
   VercelAnalytics,
@@ -67,7 +66,6 @@ export default function RootLayout({
           <Navigation />
           {children}
           <Footer />
-          <FloatingContactButton />
         </ThemeProvider>
         <VercelSpeedInsights />
         <VercelAnalytics />
