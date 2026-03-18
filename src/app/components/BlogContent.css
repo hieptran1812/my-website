@@ -139,6 +139,9 @@
 .blog-content table {
   @apply w-full mb-4 border-collapse;
   border: 1px solid var(--reading-border);
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .blog-content th,

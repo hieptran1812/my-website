@@ -348,11 +348,11 @@ const AwardsCarousel = ({
 
       {/* Awards Content */}
       <div
-        className="p-8 rounded-2xl border transition-all duration-300 relative overflow-hidden"
+        className="p-4 sm:p-8 rounded-2xl border transition-all duration-300 relative overflow-hidden"
         style={{
           backgroundColor: "var(--card-bg)",
           borderColor: "var(--card-border)",
-          minHeight: "450px", // Set a minimum height to prevent layout shifts
+          minHeight: "400px", // Set a minimum height to prevent layout shifts
           boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
           transform: "translate3d(0, 0, 0)",
           willChange: "auto",
@@ -370,7 +370,7 @@ const AwardsCarousel = ({
         {categories.map((category) => (
           <div
             key={category.id}
-            className={`transition-all duration-700 absolute top-0 left-0 w-full h-full p-8 ${
+            className={`transition-all duration-700 absolute top-0 left-0 w-full h-full p-4 sm:p-8 ${
               activeCategory === category.id
                 ? "opacity-100 pointer-events-auto"
                 : "opacity-0 pointer-events-none"
@@ -443,7 +443,7 @@ const AwardsCarousel = ({
         ))}
 
         {/* Navigation Controls */}
-        <div className="flex justify-between items-center mt-8 absolute bottom-4 left-0 right-0 px-8">
+        <div className="flex justify-between items-center mt-8 absolute bottom-4 left-0 right-0 px-4 sm:px-8">
           <div className="flex space-x-3">
             {categories.map((category) => (
               <button
@@ -551,7 +551,7 @@ export default function About() {
             </ScrollReveal>
 
             <ScrollReveal animation="blur-in" delay={200} duration={900}>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
                 Hiep Tran
               </h1>
             </ScrollReveal>
@@ -633,7 +633,7 @@ export default function About() {
                 create innovative solutions
               </p>
             </ScrollReveal>
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {experiences.map((exp, index) => (
                 <ScrollReveal
                   key={index}

@@ -244,7 +244,7 @@ function ProjectsContent() {
                 Highlighting my most impactful and innovative work
               </p>
             </ScrollReveal>
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredProjects.map((project, index) => (
                 <ScrollReveal
                   key={project.id}
@@ -839,7 +839,7 @@ function ProjectsContent() {
                 </div>
 
                 {(selectedProject.githubUrl || selectedProject.liveUrl) && (
-                  <div className="flex gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4">
                     {selectedProject.githubUrl && (
                       <a
                         href={selectedProject.githubUrl}

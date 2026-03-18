@@ -294,7 +294,7 @@ export default function CollectionPage({
           {/* Sort Controls */}
           {articles.length > 0 && (
             <FadeInWrapper delay={200} duration={600} direction="up">
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
                 <h2
                   className="text-2xl font-bold"
                   style={{ color: "var(--text-primary)" }}
@@ -304,7 +304,7 @@ export default function CollectionPage({
 
                 <div className="flex items-center gap-4">
                   <span
-                    className="text-sm font-medium"
+                    className="text-sm font-medium hidden sm:inline"
                     style={{ color: "var(--text-secondary)" }}
                   >
                     Sort by:

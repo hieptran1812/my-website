@@ -819,7 +819,7 @@ export default function BlogReader({
               )}
 
               <h1
-                className="text-lg md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-8 leading-tight"
+                className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 leading-tight"
                 style={{
                   color: readingColors.textPrimary,
                   lineHeight: 1.3,

@@ -48,7 +48,7 @@ export default function TermsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <main className="flex-1 max-w-4xl mx-auto py-12 px-4">
+      <main className="flex-1 max-w-4xl mx-auto py-12 px-4 sm:px-6">
         <article>
           <header className="mb-8">
             <h1 className="text-4xl font-bold mb-4">Terms of Service</h1>
