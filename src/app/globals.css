@@ -1216,25 +1216,42 @@ a:focus {
 
 .blog-content table {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   border-collapse: collapse;
-  border: 1px solid var(--reading-border, var, --border);
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .blog-content th,
 .blog-content td {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--reading-border, var, --border);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border: none;
+  border-bottom: 1px solid var(--reading-border, var(--border));
 }
 
 .blog-content th {
   font-weight: 600;
-  background-color: var(--reading-surface, var, --surface);
-  color: var(--reading-text-color, var, --text-primary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--reading-text-secondary, var(--text-secondary));
+  border-bottom: 2px solid var(--reading-border, var(--border));
+  background: none;
 }
 
 .blog-content td {
-  color: var(--reading-text-color, var, --text-primary);
+  color: var(--reading-text-color, var(--text-primary));
+}
+
+.blog-content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.blog-content tbody tr:hover td {
+  background-color: var(--reading-surface, var(--surface));
+  transition: background-color 0.15s ease;
 }
 
 .blog-content hr {
