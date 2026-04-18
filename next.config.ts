@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
     minimumCacheTTL: 31536000, // Cache for 1 year
     dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment",
+    contentDispositionType: "inline",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   experimental: {
@@ -47,6 +47,13 @@ const nextConfig: NextConfig = {
         source: "/api/(.*)",
         headers: [
           { key: "Cache-Control", value: "no-store, max-age=0" },
+          { key: "Content-Security-Policy", value: cspValue },
+        ],
+      },
+      {
+        source: "/api/og/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, s-maxage=31536000, immutable" },
           { key: "Content-Security-Policy", value: cspValue },
         ],
       },

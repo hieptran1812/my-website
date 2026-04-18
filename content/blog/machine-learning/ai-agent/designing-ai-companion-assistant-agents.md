@@ -100,6 +100,24 @@ The reason you need all four is that they have different **writing**, **updating
 
 Treat them the same and you get the classic companion-agent bug: the model "remembers" that the user hates cilantro because they mentioned it once in 2024, and six months later — after they explicitly said they've started liking it — the agent still refuses to suggest pho. The system had no way to **supersede** the old belief because everything was just "memories" in one undifferentiated pile.
 
+### Storage Backend Trade-offs — Which Memory Goes Where?
+
+One of the most common beginner mistakes is using a single vector DB for all four memory types. Each has a different access pattern and deserves a different backend.
+
+| Memory type | Good backend | Why | What breaks if you use a vector DB instead |
+| --- | --- | --- | --- |
+| Profile | Postgres (KV / typed columns) | Small, transactional, edited in place, never approximately queried | Updates become rewrite-and-reindex; facts you need to *know* not *recall* |
+| Episodic | Postgres (timestamped rows) + vector DB for semantic search | Needs both chronological AND semantic access | Pure vector loses time ordering, which is the whole point of "episodic" |
+| Semantic (preferences) | Vector DB with structured metadata (topic, confidence, observation count) | Needs similarity retrieval, scoped by domain | Works here — but only if metadata filters are first-class |
+| Working / task | Redis or in-memory per session | Sub-millisecond access, rebuilt on session start | Vector lookups add 30–100ms to every turn for no benefit |
+
+Quick-decision heuristic: **ask "do I want to *know* it or *recall* it?"** Knowing is KV/SQL — lookup by exact key. Recalling is vector or hybrid — similarity over many candidates. Conflate them and you'll pay latency for everything you know and lose fidelity on everything you recall.
+
+Trade-offs named out loud:
+- **One vector DB for everything.** Simple to ship; painful to query ("give me the user's allergies" is now a vector search instead of a column read). Exact-match operations become probabilistic.
+- **Postgres + pgvector.** Reasonable compromise for small-to-mid scale; fewer moving parts. Starts hurting around millions of vectors per user cluster.
+- **Dedicated vector DB + Postgres for metadata.** Standard production setup. Double the ops surface; proper separation of "authoritative" vs "approximate" memory. Use this past the hobby-scale threshold.
+
 ### Write-Time Problems
 
 The hardest question in memory isn't "how do I retrieve?" It's "what should I have written in the first place?"
@@ -177,6 +195,38 @@ Every memory should have three possible fates:
 3. **Expire.** Memories past a certain age or below a certain importance are deleted outright, or at least demoted to cold storage that's never auto-retrieved.
 
 The background consolidation loop is where a lot of companion-agent magic lives. It's also where the most subtle bugs live — a consolidator that misreads five episodes can create one wrong "preference" that then feels load-bearing.
+
+### Decay Functions in Practice — Three Concrete Algorithms
+
+The "memory should fade" intuition is cheap. Picking the *right* fade curve per memory type is where bugs hide.
+
+**Linear decay**:
+
+```
+score(age_days) = max(0, 1 - age_days / half_life_days * 0.5)
+```
+
+Smooth, predictable. Good default for semantic preferences ("user likes terse code reviews") because it gives a slow, measurable slide rather than a cliff. Trade-off: memories linger longer than you'd expect — at half_life=60 days, a 120-day-old memory still has weight 0. Half-lives under 30 days drop too much too fast for long-term preferences.
+
+**Exponential decay**:
+
+```
+score(age_days) = exp(-age_days / tau)
+```
+
+Classic "recency bias." Good for emotional context and mood (you want last week's rough day to fade fast; at tau=7, a 14-day-old memory has weight ~0.14). Trade-off: *destructive* for profile facts. If you set exponential decay on "user is vegetarian," the fact becomes recall-invisible in a couple of months even though it's still true. Never use exponential on anything the user stated as identity.
+
+**Importance-weighted decay**:
+
+```
+score(age_days, importance) = importance · (1 - age_days / max_age)
+```
+
+Each memory has a per-item importance (0..1) set at write time by the extractor or user. High-importance memories decay slowly; low-importance decay fast. Trade-off: quality of importance scoring dominates everything. If the extractor mis-scores (marks a throwaway remark as high-importance), it lingers and pollutes. Pair with periodic user-visible "did I get this right?" audits.
+
+Numerical example: user mentions "my mother passed away last month" — importance=0.95, decay slow. User mentions "had pizza for lunch" — importance=0.05, decay fast. At 30 days both are still in store; at 60 days the lunch fact is weightless and the bereavement context still has ~0.5 weight. The naive timestamp-only approach would retrieve either equally based on the query.
+
+Rule of thumb: **exponential for emotional state, linear for semantic preferences, importance-weighted for episodes, no decay at all for profile identity facts.** Mixing decay curves across memory types is how a well-engineered memory system avoids the two opposite pathologies: creepy recall of ancient trivia, and amnesia about things the user clearly wants remembered.
 
 ### Contradictions and Belief Revision
 
@@ -398,6 +448,18 @@ The fix has three components:
 2. **Explicit disagreement budget.** Persona instructions that grant the agent permission to disagree, with examples, outperform instructions that merely forbid sycophancy.
 3. **Ground truth checks.** When the user makes a factual claim the agent could verify (a tool call, a memory lookup, a web fetch), it should, and it should say when the user is wrong. Silence when wrong is a form of sycophancy.
 
+### Persona Failure Modes — Three Anti-Patterns
+
+Three recurring persona bugs and how they're fixed, with the trade-off the fix imposes.
+
+**Anti-pattern 1: The Mirror.** User turns sarcastic; agent turns sarcastic. User gets formal; agent gets formal. Over long conversations, the agent has no stable tone — it's a copy of the user's current mood. Symptom: the agent feels more erratic the more the user talks to it. Root cause: no anchoring on persona; the model follows the conversation's salience gradient. Fix: structural persona injection at a fixed context slot every turn, plus a cheap "persona-check" rewrite pass for the top-stakes responses. Trade-off of the fix: some loss of playful mirroring that users actually enjoy — tune which axes are anchored (values, boundaries, warmth) vs which are free to flex (vocabulary, length).
+
+**Anti-pattern 2: The Amnesiac.** The agent's persona survives until the session hits the context limit. After compaction, the new session opens with a default tone that feels like a different assistant. Root cause: persona wasn't serialized as part of the session-resume context; the summary dropped it because the summarizer saw it as "style, not content." Fix: persona is part of the durable session state, always rebuilt verbatim on resume — never summarized. Trade-off: persona cannot evolve through the conversation; if you want evolution, you have to version the persona in state with explicit events ("user asked for more terse; persona v2 is short-answers mode").
+
+**Anti-pattern 3: The Split Personality.** User interacts through voice, text, and email — and the agent feels like three different entities. Root cause: each surface loads persona independently, and the surface-specific prompts have drifted. Fix: one canonical persona definition, surface-specific *adapters* that re-render it for modality (voice: shorter sentences, no markdown; email: fuller paragraphs, clear subject). Trade-off: adapter maintenance; three surfaces × two prompt revisions per quarter is real ongoing work.
+
+Across all three, the meta-fix is the same: **persona is state, not prompt**. Treating it as prompt means it erodes. Treating it as state means you can observe it, edit it, test it against regressions, and keep it consistent across surfaces.
+
 ### Identity Continuity Across Sessions
 
 Users form mental models of the agent. "It knows I'm working on the garden." "It's the one that remembers my codebase." When the agent starts a new session, it has to seamlessly pick up that identity — not greet the user like a stranger, not forget its own previous statements.
@@ -597,6 +659,35 @@ The agent knows things from one context that are sensitive in another. It knows 
 
 Mitigation requires real **audience awareness** — metadata on every memory about who it's "about" and who it's appropriate "for." Retrieval then filters by current audience. This is painful to build but non-optional once the agent spans contexts.
 
+### Audience-Aware Retrieval in Practice
+
+Concrete worked example. User asks the assistant in a *work* context: "Summarize what I did this week."
+
+The assistant retrieves candidate memories — calendar events, commits, documents, messages. In a naive system, it pulls:
+
+- Monday: team sync (work)
+- Tuesday: therapy appointment (personal)
+- Wednesday: code review for project X (work)
+- Thursday: text thread about divorce (personal)
+- Friday: quarterly planning (work)
+
+The naive summary leaks two personal items into a work context. If that summary gets pasted into a shared channel, you've just built the worst demo in product history.
+
+The fix is a metadata tag on every memory at write-time: `audience_scope ∈ {work, personal, medical, financial, family, any}`. The current session has a *requested* scope (inferred from the user's surface, or explicitly selected), and retrieval filters:
+
+```
+retrieved = [m for m in candidates
+             if m.audience_scope == session.audience
+             or m.audience_scope == "any"]
+```
+
+Trade-offs of the filter:
+
+- **Over-filtering.** If `audience_scope` is set too conservatively, the agent misses legitimately-relevant context. Example: user at work asks "when's my annual review?" — if the calendar event was tagged "personal" because it's HR-related, retrieval misses it. Mitigation: allow user-approved cross-scope queries with an explicit confirmation ("I see a related event on your personal calendar — should I include it?").
+- **Under-filtering.** If the default is `any`, leaks happen. Mitigation: default to the narrowest scope at ingest; promote to wider scope only when the memory source was itself wide (e.g., information the user posted publicly).
+
+The hardest case is *mixed* audience: a text from a colleague about after-work plans is both work-adjacent and personal. Two workable answers: tag conservatively (personal) and rely on cross-scope confirmation, or tag by *content* not *source* and run a classifier. Both are legitimate — pick one and be consistent; hybrid schemes create rules the agent (and user) can't predict.
+
 ## Part 8: Latency and Real-Time UX
 
 For text, latency under a couple of seconds feels fine. For voice, anything over 500ms feels broken. For always-on ambient (wake-word) assistants, the entire turn has to complete in under a second or it collapses the fantasy.
@@ -710,6 +801,18 @@ Task-agent eval is relatively easy: define a task, check if it got done. Compani
 
 All five are necessary. Every one catches a different failure mode. A companion agent that only has turn-level eval ships subtle long-horizon bugs; one that only has in-product metrics can't iterate fast enough.
 
+### Building a Synthetic User — Design Choices
+
+The synthetic-user harness is the single most valuable eval tool for companions, and there are three common ways to build it — each with different coverage, cost, and bias.
+
+**(a) Scripted rule-based user.** A deterministic state machine emits messages according to a scripted persona (e.g., "Alex is vegetarian, lives in PST, prefers terse replies, mentions kids on Fridays"). Use when: you're regression-testing a specific memory-extraction or retrieval behavior and need exact reproducibility. Trade-offs: coverage is narrow (you only test what you scripted), cost is low, bias is explicit (you know exactly what scenarios you're covering). Critical limitation: real users are messier than any script — scripted tests over-credit agents on "clean" conversation shapes.
+
+**(b) LLM-simulated user with persona.** A separate model instance roleplays the user with a persona and a loose goal. Use when: you want breadth — novel conversational turns, unpredictable topic shifts, realistic messiness. Trade-offs: variance across runs (same persona, different conversation each time — report distributions, not single numbers), cost per run is 2× (you're paying for a second LLM), and there's a subtle bias: LLM-simulated users behave like LLMs imagine users behave, which is not how real users behave. They're too patient, too articulate, and too willing to clarify.
+
+**(c) Replay of real user traces (sanitized).** Recorded real conversations played back into the new agent version. Use when: you're shipping a prompt or model change and want to know "would this have degraded real users?" Trade-offs: no novelty (only tests scenarios that have already happened), gold legal/privacy requirements (anonymization, consent), and you can only test responses to fixed user messages — the agent can't drive the conversation into new territory.
+
+No single method covers everything. Realistic stack: rule-based for regression in CI, LLM-simulated for breadth at release candidates, real-trace replay for release gate. Budget each differently — rule-based is free, LLM-simulated is medium cost for medium value, replay is operational overhead that pays off at the big-release level, not per commit.
+
 ### Synthetic Long-Horizon Eval
 
 The single most useful specialized tool is a **simulated-user harness**. A fixed, scripted pretend user plays out months of interactions with the agent in sped-up time. You then probe: does the agent correctly recall fact X? Did it forget Y when it should have? Did it drift in tone? Did it handle the contradiction on day 47?
@@ -745,6 +848,18 @@ A companion is, by definition, used repeatedly. The cost per interaction — whi
 ### The Cost-of-Quality Frontier
 
 Every cost cut has a quality risk. The discipline is to measure both — cost per turn and a turn-quality metric — and optimize the ratio, not one in isolation. Cheap and slightly worse is sometimes right. Cheap and much worse is always wrong. You have to know which you're shipping.
+
+### Three Cost Regimes and Their Architecture Implications
+
+The price-per-turn you can afford dictates the architecture more than any model-choice debate.
+
+**Regime A: Always-on voice companion (<$0.01/turn).** Consumer-priced, expected to handle dozens of turns per day per user. Architecture: aggressive prefix caching (persona + profile + safety cached on every call), tier-routed — small model (Haiku-class) for 90% of turns, bigger model escalation only on detected complexity. Memory writes happen offline in batches, not in the hot path. Trade-off: some turns that would benefit from stronger reasoning don't get it. The product has to absorb that with good fallback UX ("let me think" → escalation path).
+
+**Regime B: Paid personal assistant ($0.05–$0.15/turn).** The user pays for the product; turn volume is modest (20–50/day). Architecture: a strong default model (Sonnet-class) for most turns, with tier-A escalation for long-horizon reasoning and retrieval-heavy turns. More context budget per turn (retrieve more memories, use richer prompts). Memory writes can happen on the hot path for fast updates. Trade-off: harder to scale to millions of users profitably; product has to deliver visible value per turn.
+
+**Regime C: Enterprise co-pilot ($1+/turn acceptable).** Embedded in high-value workflows (medical dictation, legal drafting, engineering). Turn volume low (maybe a handful per user per day) but each turn's output is worth hundreds of dollars of saved time. Architecture: strongest model by default, multiple verification passes, HITL at action boundaries, extensive logging for audit. Trade-off: latency and operational complexity; not suitable for lightweight interactions. Also: per-tenant isolation is non-negotiable in enterprise — architecture has to support it from day one, not bolted on.
+
+The architectural implication that surprises teams: **the cost regime should be chosen before the feature set is scoped.** Regime A with Regime C's feature set is a bankruptcy plan. Regime C with Regime A's simplicity is over-engineered.
 
 ## Closing Principles
 

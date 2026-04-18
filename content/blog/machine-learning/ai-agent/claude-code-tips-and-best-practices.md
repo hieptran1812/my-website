@@ -58,7 +58,7 @@ The Claude Code team shares a single `CLAUDE.md` file checked into their reposit
 
 This is the practice of **Compounding Engineering** — building institutional knowledge over time. Tips for maintaining it:
 
-- End every correction with: *"Update your CLAUDE.md so you don't make that mistake again"*
+- End every correction with: _"Update your CLAUDE.md so you don't make that mistake again"_
 - Ruthlessly edit CLAUDE.md over time to keep it focused
 - Maintain a `notes/` directory for project-specific context, linked from CLAUDE.md
 - Tag `@claude` in PR code reviews to update CLAUDE.md via the GitHub Action
@@ -137,7 +137,7 @@ Run `/sandbox` to opt into the open-source sandbox runtime with file and network
 Claude can leverage MCP servers and CLI tools for:
 
 - **Slack integration** — paste bug threads directly and just say "fix"
-- **BigQuery** — run queries via `bq` CLI (Boris: *"I haven't written SQL in 6+ months"*)
+- **BigQuery** — run queries via `bq` CLI (Boris: _"I haven't written SQL in 6+ months"_)
 - **Sentry** — retrieve error logs
 - **Any database** with CLI, MCP, or API access
 
@@ -162,10 +162,10 @@ Use `/model` to switch between effort levels:
 
 Effective prompting patterns from the team:
 
-- **Challenge Claude**: *"Grill me on these changes and don't make a PR until I pass"*
-- **Request proofs**: *"Diff behavior between main and your feature branch"*
-- **Push for quality**: *"Scrap this and implement the elegant solution"*
-- **Bug fixing**: *"Go fix the failing CI tests"* — without micromanaging
+- **Challenge Claude**: _"Grill me on these changes and don't make a PR until I pass"_
+- **Request proofs**: _"Diff behavior between main and your feature branch"_
+- **Push for quality**: _"Scrap this and implement the elegant solution"_
+- **Bug fixing**: _"Go fix the failing CI tests"_ — without micromanaging
 - **Use voice dictation** (press `fn` twice on macOS) for 3x faster, more detailed prompts
 
 ## 12. New Built-in Skills: /simplify and /batch

@@ -6,7 +6,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import ArticleCard from "@/components/ArticleCard";
 import ArticleGrid from "@/components/ArticleGrid";
 import { formatDateMedium, formatDateShort } from "@/lib/dateUtils";
-import { getArticleImageUrl } from "@/lib/articleImage";
+import { getArticleImageUrl, isGeneratedImage } from "@/lib/articleImage";
 
 interface BlogPostMetadata {
   slug: string;
@@ -270,21 +270,22 @@ export default function BlogPage() {
                       borderColor: "var(--card-border)",
                     }}
                   >
-                    <div className="grid md:grid-cols-5 gap-0">
+                    <div className="grid md:grid-cols-5 gap-0 md:h-[32rem]">
                       {/* Left: Featured Image (60%) */}
-                      <div className="md:col-span-3 relative h-80 md:h-96">
+                      <div className="md:col-span-3 relative h-80 md:h-full">
                         <Image
                           src={getArticleImageUrl(featuredArticle)}
                           alt={featuredArticle.title}
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, 60vw"
+                          unoptimized={isGeneratedImage(featuredArticle)}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                       </div>
 
                       {/* Right: Article Info (40%) */}
-                      <div className="md:col-span-2 p-8 flex flex-col justify-center">
+                      <div className="md:col-span-2 p-8 flex flex-col justify-center md:overflow-hidden">
                         <div className="mb-4">
                           <span
                             className="text-sm font-bold uppercase tracking-wider"
@@ -313,7 +314,7 @@ export default function BlogPage() {
                           <span>{featuredArticle.readTime}</span>
                         </div>
                         <p
-                          className="text-base leading-relaxed mb-6"
+                          className="text-base leading-relaxed mb-6 line-clamp-4"
                           style={{ color: "var(--text-secondary)" }}
                         >
                           {featuredArticle.summary}
@@ -361,6 +362,7 @@ export default function BlogPage() {
                               fill
                               className="object-cover transition-transform duration-300 group-hover:scale-105"
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                              unoptimized={isGeneratedImage(article)}
                             />
                           </div>
                           <div className="p-4">

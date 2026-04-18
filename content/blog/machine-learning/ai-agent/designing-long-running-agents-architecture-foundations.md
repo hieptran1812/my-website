@@ -145,6 +145,21 @@ No upfront plan. The model decides the next step based on the current state. Mor
 
 The mistake most teams make is picking the most dynamic pattern ("the model will figure it out") when their task is actually structured. Structure is cheaper to engineer than dynamism. Use the most static decomposition your task admits.
 
+### Decision Framework: A Worked Example
+
+Three concrete tasks, three different answers — and the *trade-off* you accept in each:
+
+**(a) "Summarize this PDF and extract action items" → Fixed pipeline.**
+Task shape: predictable stages (load → parse → chunk → summarize → extract → format). The signals: zero exploration, no branching, output shape is known. Pattern: a hand-coded chain of five LLM calls, each with a narrow prompt. Trade-off accepted: *zero flexibility*. If the PDF is a scanned contract instead of a report, the pipeline produces nonsense. You pay for that by adding a classifier upfront and routing to a different pipeline — not by making one pipeline smarter.
+
+**(b) "Plan a 2-week Japan trip with a $4k budget" → Plan-and-Execute with a DAG.**
+Task shape: 15–30 subtasks (flights, hotels, JR Pass, day-by-day itineraries), many parallelizable, strong interdependence (Kyoto hotel dates depend on Tokyo arrival). The signals: benefits from a global plan, user wants to approve before booking, parallelism pays off (search flights and hotels concurrently). Pattern: a planner produces a dependency graph, executors run branches in parallel, a replanner handles "Kyoto hotel sold out." Trade-off accepted: *up-front planning latency and cost* (one expensive planner call before any work). You pay for that by letting each subtask run cheap; without planning, you'd drift and book flights that don't fit hotel dates.
+
+**(c) "Debug why checkout latency spiked at 3am" → ReAct.**
+Task shape: unknown branching — could be DB, cache, deploy, upstream, cert expiry, anything. The signals: path isn't predictable, <20 steps in most cases, user wants to watch the agent reason. Pattern: single ReAct loop with observability tools (metrics, logs, traces, recent deploys). Trade-off accepted: *drift risk and loop risk* in exchange for flexibility. You pay for that by adding loop detection and a hard 15-step budget — not by trying to pre-plan an incident the agent has never seen.
+
+The meta-lesson: *the pattern you pick encodes what you're willing to pay for*. Predictability costs flexibility. Planning costs upfront latency. Dynamism costs drift. Name the cost before you name the pattern.
+
 ### Decomposition Anti-Patterns
 
 - **"Let the agent figure out how to split the work."** Works sometimes. Fails in weird, hard-to-debug ways the rest of the time.
@@ -221,6 +236,18 @@ A top-level orchestrator agent decomposes and delegates; worker agents handle sp
 | Reflexion | none | medium | strong (with verifier) | high | iterative w/ verifier |
 | Orchestrator–Worker | high | high | per-worker | medium | hierarchical |
 
+### Combining Patterns — Real Systems Are Hybrids
+
+Production agents rarely run a pure pattern. Two hybrids worth knowing:
+
+**Plan-and-Execute with ReAct executors.** The planner produces a high-level subtask list. Each subtask then runs a *small* ReAct loop inside its own bounded context. The planner brings structure; ReAct inside each subtask brings flexibility where the shape of the work genuinely varies. Use when: subtasks are named ("collect pricing data from vendor A") but the inside of each subtask is exploratory. Trade-off: you pay for two planning layers — one global, one per subtask — and you must bound each ReAct loop hard (≤10 steps, specific termination) or the subtask drifts and replanning cascades.
+
+**Orchestrator–Worker with Reflexion per worker.** The orchestrator dispatches; each worker runs its task, checks its own output against a verifier (tests, schema validator, reranker), and retries once or twice if it fails. The orchestrator sees only the *final* verified output. Use when: workers do generative work with a machine-checkable verifier (code generation, data extraction, schema-bound structured output). Trade-off: worker token cost roughly 2× (two attempts on average), but orchestrator's final-stage verification gets much simpler because each worker already self-cleaned.
+
+The composition is only worth its complexity when each pattern solves a *different* problem. Plan-and-Execute solves global coherence; ReAct solves local exploration; Reflexion solves local correctness. If you're adding a pattern and it solves the same problem as one you already have, you're just adding coordination cost.
+
+Anti-pattern: stacking three patterns "because quality should go up." Each layer is a new drift/failure surface. Default to the simplest single pattern that fits, promote to hybrid only after a specific failure mode justifies the extra layer.
+
 ## Part 5: State and Memory for Long Horizons
 
 A five-step agent holds state in the context. A 500-step agent cannot. State design is the biggest architectural lever for long-running agents.
@@ -251,6 +278,25 @@ The agent **reads and writes** this object across steps. It's the durable source
 
 **3. Long-term memory (cross-task).**
 Things the agent learned that might matter for future tasks. Covered in detail in [the companion article on context engineering](/blog/machine-learning/ai-agent/effective-context-engineering-for-ai-agents).
+
+### Storage Trade-offs: Where Does Each Layer Live?
+
+The three layers have fundamentally different access patterns; pushing them into one store is the single most common state-design mistake.
+
+| Layer | Good default | Why | What breaks it |
+| --- | --- | --- | --- |
+| Working state | In-memory (process) or Redis | Sub-ms reads, gone on crash is fine | Running across multiple workers — then needs Redis |
+| Task state | Postgres (JSON column) or Firestore | Durable, transactional, queryable by task_id, schema-evolvable | High write throughput per task — then shard or add Redis caching layer |
+| Scratchpad | Append-only log (Postgres table, S3, or Loki) | Write-heavy, rarely re-read wholesale, debugging-first | Treating as queryable state — it isn't |
+| Artifacts | Object store (S3, GCS) | Large, immutable, cheap per GB, referenced by URL | Small items (<4KB) — round-trip latency dominates; inline them |
+| Long-term memory | Vector DB + Postgres for metadata | Semantic search across tasks | Using vector DB alone — you lose authoritative metadata |
+
+Quick-decision heuristic: **if it's less than 4KB, transactional, and read every step, put it in the task-state row. If it's large, immutable, and read occasionally, put it in object storage with a reference. If it's searched by semantic similarity, put it in a vector DB with a pointer back to the authoritative source.**
+
+Trade-offs to name out loud:
+- **One store for all layers (e.g., "just use Postgres").** Simple until you need semantic search over scratchpad content, at which point retrofit costs dominate.
+- **Vector-DB-for-everything.** Pricing model assumes occasional retrieval; hammering it every step is expensive and slow.
+- **In-memory only.** Fine for prototypes, indefensible for anything that must survive a process crash. Most production agents cross this line earlier than teams expect.
 
 ### The Scratchpad Pattern
 
@@ -406,6 +452,21 @@ On crash recovery:
 - If both lines are present: safe to skip and continue.
 - If neither: replay from last checkpoint.
 
+### WAL Failure Scenarios — Three Real Cases
+
+The reason WAL is non-trivial is that the *interesting* crashes happen between the log line and the action, and every one has a correct recovery that depends on what the tool actually does.
+
+**Case 1: Crash between "about to send_email" and the network call.**
+WAL shows intent; no result. What actually happened: the email was *not* sent (no network request left the host). Correct recovery: retry with same idempotency key. Trade-off if you escalate instead: you've made a reliable send look like a human-intervention case — unnecessary load on ops. Trade-off if you assume "succeeded" and skip: user never gets the email; silent failure.
+
+**Case 2: Crash after the request left but before the response was recorded.**
+WAL shows intent; no result. What actually happened: *unknown* — the email might be sent, or might have failed mid-flight. Correct recovery: *only* retry if the tool is idempotent; otherwise perform an existence check ("has message X been sent in the last N minutes?") before retrying. Trade-off if you retry blindly: duplicate emails, double-charges, angry users. Trade-off if you always escalate: operational toil on a case that's usually safe with idempotency keys.
+
+**Case 3: Log line and result both present, crash during post-processing.**
+WAL is complete. What happened: action succeeded; the agent's in-memory update to task state was lost. Correct recovery: skip the action, re-derive task-state update from the result. Trade-off if you retry the action: guaranteed duplicate — the tool saw no new key. Trade-off if you restart from the previous checkpoint without reading the WAL: duplicate action again.
+
+The general principle: WAL turns "unknown state after crash" into "one of N enumerable states, each with a known recovery." Without WAL, you only have the first option. Without idempotency, even WAL can't save you from Case 2 cleanly.
+
 ### Idempotency Everywhere
 
 For any action with a side effect, design idempotency in from day one. Either:
@@ -452,6 +513,18 @@ max_same_action_repetitions = 3
 ```
 
 These are not polite suggestions. They are guardrails that prevent the worst outcomes (runaway cost, infinite loops, user frustration).
+
+### Choosing Budgets: A Cost/Success Frontier
+
+Budgets are *not* set by intuition. They come from measuring the distribution of successful runs on a golden eval set and then adding headroom.
+
+**Customer support agent.** Successful resolutions on your eval suite take 5–20 steps at the 50th–95th percentile. Set `max_steps = 50` (2.5× the 95th percentile), `max_cost = $0.50`, `max_wall_time = 2 min`. Trade-off of tighter budget (`max_steps = 25`): ~5% of legitimate long conversations get cut off and route to human — sometimes good (faster escalation), sometimes bad (user frustration). Trade-off of looser budget (`max_steps = 200`): the 1% of stuck runs cost 10× and take 10 minutes before timing out.
+
+**Research assistant.** Successful reports take 100–400 steps across 50–100 sub-questions. Set `max_steps = 500`, `max_cost = $20`, `max_wall_time = 30 min`. Tighter: you cut off the deep-dive cases that are the feature's main value. Looser: one misbehaving run eats a full day of cost budget; you also lose the "I'll come back when it's ready" UX because SLA vanishes.
+
+**Autonomous coding agent.** Well-scoped tasks finish in 20–150 steps. Set `max_steps = 200`, `max_cost = $5`, `max_wall_time = 15 min`. The interesting trade-off: coding agents benefit disproportionately from *higher* step budgets but suffer disproportionately from cost overruns (dev-loop tasks can loop on a failing test). Pair the step budget with a *no-progress* budget (abort if 10 steps pass with no new file touched or test green) — that's a sharper knife than raw step count.
+
+The general principle: set budgets at the 95th percentile of your *successful* distribution, times a small safety factor (2–3×). Not at your worst case — that's how agents run for an hour on tasks they should have bailed on in ten minutes.
 
 ## Part 10: Putting It All Together — Reference Architecture
 

@@ -112,6 +112,27 @@ They tested three dimensions of a successful editing workflow: *don't break thin
 
 **Qodo** (AI code quality) initially was unimpressed by Opus 4.5 because their one-shot coding evals didn't capture the gains on longer, more complex tasks. This highlights a critical lesson: **your evals shape what you can see**. If your evals only test simple tasks, you'll miss improvements on complex ones.
 
+### Why Agent Evals Are Fundamentally Harder Than Traditional ML Evals
+
+If you come from a traditional ML background, you might be tempted to reuse familiar patterns — a held-out test set, accuracy/F1, maybe ROC curves. **This doesn't work for agents**, and understanding *why* is foundational to everything that follows.
+
+| Dimension | Traditional ML Eval | Agent Eval |
+|-----------|---------------------|------------|
+| **Output space** | Fixed (class labels, numbers) | Open-ended text + tool calls + state mutations |
+| **Ground truth** | Labeled dataset, one right answer | Often multiple valid answers, sometimes no clear "right" |
+| **Determinism** | Deterministic given same weights | Non-deterministic even with temperature=0 (batching, hardware) |
+| **Evaluation cost** | Pennies per prediction | Cents to dollars per trial (tokens + tool calls + compute) |
+| **Failure modes** | Wrong prediction | Wrong action, unsafe action, infinite loop, tool misuse, hallucinated tool result, partial completion, subtly wrong reasoning |
+| **Side effects** | None (pure prediction) | Real — can modify files, call APIs, send messages |
+| **Time horizon** | Single inference | Multi-turn trajectories spanning minutes to hours |
+| **Environment** | Static input | Dynamic — each action changes the next observation |
+
+**The compounding problem:** An agent with 95% success per step still only succeeds **59%** of the time on a 10-step task (0.95^10 ≈ 0.59). Step-level metrics lie about end-to-end capability. This is why you must evaluate trajectories, not just individual responses.
+
+**The sparse reward problem:** Traditional ML gives feedback on every example. An agent's trajectory may have 50 tool calls, but you might only know whether the *final outcome* was correct. Localizing *which* step caused the failure requires careful transcript analysis, intermediate graders, or counterfactual replay.
+
+**The observability problem:** With a classifier, you see input → output. With an agent, you also need to see the *reasoning*, *tool choices*, *tool results*, *error recovery attempts*, and *backtracking*. A correct outcome achieved through fragile logic is still a bug waiting to happen.
+
 ## The Three Types of Graders
 
 How do you actually *grade* an AI agent's output? There are three fundamental approaches, and understanding when to use each is one of the most important skills in building evals.
@@ -252,6 +273,38 @@ def grade_with_llm(query, response, expected):
 **Critical tip for LLM graders:** Always give the LLM a way out. Include instructions like "Return 'Unknown' when you don't have enough information." This prevents the grader from hallucinating scores when it genuinely can't assess a dimension.
 
 **Another pro tip:** Grade each dimension in isolation with separate LLM calls rather than asking one LLM to grade everything at once. This prevents cross-contamination between dimensions (e.g., a bad empathy score influencing the accuracy score).
+
+#### Known Biases of LLM-as-Judge (And How to Mitigate Them)
+
+LLM graders aren't neutral — they bring systematic biases that can silently corrupt your results. Understanding these biases is the difference between an eval you can trust and one that gives you false confidence.
+
+| Bias | What happens | Mitigation |
+|------|--------------|------------|
+| **Position bias** | In pairwise comparisons, LLMs prefer the first (or sometimes last) response regardless of quality | Run each comparison twice with swapped order; only count consistent preferences |
+| **Verbosity bias** | Longer responses get higher scores even when adding no value | Include "penalize unnecessary length" in the rubric; measure length separately as its own metric |
+| **Self-preference bias** | A model tends to rate its own outputs higher than other models' outputs | Use a different model family as the judge, or use multiple judges and require consensus |
+| **Sycophancy** | Agrees with framing in the prompt ("Is this response excellent?") | Use neutral framing ("Rate this response on X from 1-5") and avoid leading language |
+| **Format bias** | Markdown tables, bullet points, and headers get scored higher independent of content | Normalize format or strip formatting before grading on substance |
+| **Recency / primacy in long transcripts** | For multi-turn grading, LLMs over-weight the opening and closing, under-weighting the middle | Chunk long transcripts and grade sections separately, then aggregate |
+| **Calibration drift** | Same prompt, same output — but scores drift across model versions of the judge | Pin the judge model version; when upgrading, re-run calibration against human labels |
+
+**Concrete calibration workflow:** Build a "golden set" of ~50–100 examples with human expert labels across the full score range (not just pass/fail — include borderline cases). Compute the agreement between your LLM judge and the golden set using Cohen's kappa (target ≥0.6 for usable, ≥0.8 for reliable). Re-run this calibration monthly or whenever you change the judge prompt or model.
+
+```python
+from sklearn.metrics import cohen_kappa_score
+
+# Human-labeled golden set
+human_scores = [4, 5, 2, 3, 5, 1, 4, ...]    # n=100 examples
+judge_scores = [4, 4, 2, 3, 5, 2, 4, ...]    # same examples graded by LLM
+
+kappa = cohen_kappa_score(human_scores, judge_scores, weights="quadratic")
+# < 0.4: judge is unreliable — fix the prompt or switch models
+# 0.4-0.6: marginal — usable with caution, sample and verify frequently
+# 0.6-0.8: good — the judge generally agrees with humans
+# > 0.8: excellent — treat judge scores as trustworthy
+```
+
+**Pitfall:** Don't calibrate only on clear pass/fail cases. The hard work of an LLM judge is on the borderline — a 3 vs. 4 distinction. If your golden set is all 1s and 5s, high agreement tells you nothing.
 
 ### 3. Human Graders
 
@@ -629,6 +682,34 @@ Notice how dramatically they diverge! At k=1 they're identical, but by k=10, pas
 
 **Practical example:** Your support agent has pass@3 = 95% but pass^3 = 40%. This means it *can* handle the task (95% of the time at least one of 3 tries works), but it's inconsistent (only 40% of the time all 3 tries work). For a customer-facing agent, that inconsistency is a problem — every 10th customer gets a bad experience.
 
+### How Many Trials Do You Actually Need?
+
+A single run of an eval suite is essentially a noisy point estimate. If you want to claim "the new prompt is better," you need enough trials to distinguish real improvement from random variance.
+
+**Rough guide for 50-task eval suites:**
+
+| Observed pass rate | Minimum trials per task | Why |
+|---|---|---|
+| Near 0% or near 100% | 1–2 | Low variance region — a single failure or success is informative |
+| 30–70% (middle band) | 5–10 | High variance — binomial variance peaks at p=0.5 |
+| Rare failures (95%+) | 20+ | You're hunting tail failures; need many samples to observe them |
+
+**The math in plain English:** The standard error of a pass rate with `n` trials is roughly `sqrt(p(1-p)/n)`. For p=0.5 and n=5, that's ±22%. For n=20, it's ±11%. For n=100, it's ±5%. If two prompts look 8% apart but your standard error is ±22%, you have **no evidence** one is better — you're reading noise.
+
+**Practical rule:** Before claiming a change is an improvement, compute a confidence interval. If CIs overlap, you need more trials or a larger eval suite. McNemar's test or a paired bootstrap works well for comparing two agent versions on the same task set.
+
+```python
+from scipy.stats import binomtest
+
+# Old agent passed 34/50 tasks. New agent passed 40/50. Is this real?
+# Use a paired comparison: on how many tasks did each version win/lose?
+# Suppose 12 tasks had different outcomes: old won 3, new won 9.
+result = binomtest(k=9, n=12, p=0.5, alternative="greater")
+print(result.pvalue)   # 0.073 — suggestive but not conclusive at α=0.05
+```
+
+If your evals cost real money, don't run 20 trials per task by default — use adaptive sampling: run few trials first, and only invest more on tasks where the result is close to the decision boundary.
+
 ## Roadmap: Building Evals from Zero to One
 
 Here's a step-by-step guide to building your first eval suite. Don't try to do everything at once — each step builds on the previous one.
@@ -916,6 +997,132 @@ As your eval suite grows beyond the initial 20-50 tasks, you need organizational
 
 This makes it easy for anyone to contribute without needing to write code.
 
+## Deep Dive: Common Problems and How to Solve Them
+
+The generic advice above ("isolate environments", "read transcripts") skips the hard part: *what does it look like when things go wrong, and what do you actually do about it?* This section walks through the most common failure patterns teams encounter, with concrete diagnostic signals and fixes.
+
+### Problem 1: Non-Deterministic Flakiness Masks Real Regressions
+
+**Symptom:** You ship a prompt change. CI runs the eval suite — pass rate drops from 87% to 82%. You revert. CI runs again — pass rate is 85%. You can't tell whether the change was bad or whether you're chasing noise.
+
+**Root cause:** Low trial counts + high per-trial variance. With 1 trial per task and p=0.85, a single suite run has a standard deviation of ~5%. A 5-point swing means nothing.
+
+**Solutions, in order of effort:**
+
+1. **Increase trials on the contested tasks.** If 8 tasks swung between pass and fail, rerun those 8 with n=10. The overall suite score will stabilize quickly because most tasks are either solidly passing or solidly failing.
+
+2. **Fix the temperature and seed where possible.** For Claude via the API, setting `temperature=0` reduces but does not eliminate variance (batching, floating-point non-associativity, KV cache differences still produce variation). Document this — don't assume `temp=0` means deterministic.
+
+3. **Use paired statistical tests, not raw percentages.** Instead of "old=87%, new=85%, therefore worse," ask "on how many tasks did the new version lose vs. win?" A McNemar's test or paired bootstrap gives you a p-value on whether the difference is real.
+
+4. **Separate a "stable regression suite" from a "noisy capability suite."** Your CI gate should be the stable suite — tasks with near-100% pass rate where any failure is informative. Capability evals with 40–70% pass rates are for research/iteration, not CI blocking.
+
+### Problem 2: The LLM Judge Is Drunk
+
+**Symptom:** Your LLM-as-judge rates two similar responses very differently. Or it rates a clearly wrong answer as 5/5. Or scores drift upward over time with no real quality improvement.
+
+**Root cause:** Usually one of:
+- The rubric is ambiguous (the judge is guessing)
+- The judge sees context it shouldn't (the "expected answer" in the prompt leaks)
+- You upgraded the judge model and didn't re-calibrate
+- The biases from the previous section (verbosity, position, self-preference) are compounding
+
+**Diagnostic: The "Swap Test".** Take 20 transcripts. Have the judge score them. Now make a trivial edit (add a friendly opening, reformat as bullets, double the length with fluff). Rescore. If scores move by more than ±0.5 on average, your judge is responding to surface features, not substance.
+
+**Fixes:**
+- **Tighten the rubric.** Replace "is this response good?" with specific criteria and anchor examples ("5 = includes all three required steps AND cites sources; 3 = includes two of three steps; 1 = misses all steps").
+- **Chain-of-thought the judge.** Ask the judge to write its reasoning *before* producing the score. This dramatically reduces score-first-justify-later behavior.
+- **Pin the model and prompt.** Treat your judge prompt like production code — version it, write regression tests for it against a golden set, and re-validate on any change.
+- **Use consensus for high-stakes decisions.** Two different judge models (e.g., Claude + a different family) and only trust decisions where both agree. Where they disagree, route to human review.
+
+### Problem 3: Eval Drift — Your Ground Truth Is Stale
+
+**Symptom:** Six months into production, your regression suite still says 98% pass. User complaints are up. The evals aren't catching it.
+
+**Root cause:** Reality moved. User expectations rose, product scope expanded, the world changed (for research agents), or the agent was quietly "taught to the test" through prompt iteration.
+
+**This is a classic Goodhart's Law failure: *when a measure becomes a target, it ceases to be a good measure*.**
+
+**Fixes:**
+- **Schedule "eval refresh" sprints quarterly.** Sample 50 recent production conversations. For each, ask: does our eval suite have a task that catches this case? If not, add it. This is the single highest-leverage habit for keeping evals honest.
+- **Track production ↔ eval divergence.** If production failure rate is 8% but eval failure rate is 1%, your evals are too easy. Narrow that gap.
+- **Retire stale tasks.** Tasks that pass 100% for 6 straight months provide zero signal. Either make them harder or remove them and free up the compute budget for new cases.
+- **Tag tasks with creation date.** When eval performance shifts, knowing "80% of the tasks we're passing were added in 2024" makes drift visible.
+
+### Problem 4: Cost Explosion
+
+**Symptom:** Your eval suite takes 6 hours to run and costs $400 per CI run. Engineers start skipping it. Death spiral.
+
+**Root cause:** Every task runs every trial on every PR, using your biggest model, with LLM-judge graders on every output.
+
+**Fixes, in rough order of impact:**
+
+1. **Tiered CI.** A 5-minute smoke suite (20 critical tasks, 1 trial each, deterministic graders only) runs on every PR. The full 500-task suite runs nightly or on release candidates. Most bugs get caught by the fast tier.
+
+2. **Cache aggressively.** Deterministic graders are free to rerun. But if the *agent's* output is deterministic for a given input (via fixed seed + `temp=0`), cache it. Don't pay to re-run identical trajectories.
+
+3. **Use a cheaper judge model where possible.** You don't need Opus to grade "did the response contain the word 'refund'?" — a small model or a regex works. Reserve expensive judges for truly nuanced quality dimensions.
+
+4. **Early-stopping on obvious failures.** If an agent crashes or the output is empty, you don't need to run the expensive LLM judge on it. Short-circuit to a fail.
+
+5. **Parallelize.** Eval tasks are embarrassingly parallel. Running 50 tasks sequentially at 60s each = 50 minutes. Running 50 in parallel = 60 seconds.
+
+### Problem 5: Multi-Turn Tasks Where You Can't Tell Which Step Broke
+
+**Symptom:** Agent fails a 15-step task. You know the end state is wrong. You have no idea *when* it went wrong.
+
+**Root cause:** Only evaluating the final outcome provides a single pass/fail signal across a long trajectory. This is the sparse reward problem mentioned earlier.
+
+**Fixes:**
+
+- **Instrument intermediate checkpoints.** For known-structure tasks, add graders at each milestone. ("After step 3, did the agent identify the right file?" "After step 7, did it correctly diagnose the bug?") These are cheap and dramatically improve debuggability.
+
+- **Use trajectory-level LLM graders.** Ask a judge to read the whole transcript and annotate: "Identify the step where the agent first went off-track, and explain why." This won't be perfect, but it's a strong starting point for human review.
+
+- **Record observations at each step.** Don't just log actions — log what the agent *saw*. If the bug is "it misread a tool result," you can only diagnose that if you have the tool result captured.
+
+- **Counterfactual replay.** When a task fails, resume from step N with a known-correct action and see if the remainder succeeds. If yes, the bug is before step N. Binary search narrows it quickly.
+
+### Problem 6: The Agent Games Your Grader
+
+**Symptom:** Pass rate jumps from 70% to 94% after a prompt change, but spot-checking reveals the outputs are somehow *worse*. The agent learned to optimize the grader, not the task.
+
+**Root cause:** The grader has a shortcut — a surface feature it rewards that doesn't require solving the actual problem. Example: your LLM judge rewards "well-formatted responses with section headers," so the agent learns to pad every response with headers regardless of whether they help.
+
+**Fixes:**
+- **Red-team your grader.** Before trusting it, deliberately try to cheat it. Submit a response that is blatantly wrong but superficially formatted well. Submit one that is right but ugly. If the grader gets either wrong, fix it before deploying.
+- **Add adversarial canary tasks.** Include tasks where the "obvious" high-scoring answer is wrong. If the agent passes the canary, it's exploiting the grader, not the task.
+- **Run grader sanity checks on known-bad outputs.** Maintain a set of outputs that should clearly fail. When they start passing, your grader has drifted.
+- **Grade outcomes, not transcripts, where possible.** Code graders that check final state are much harder to game than LLM graders that read the response text.
+
+### Problem 7: Environment State Contamination
+
+**Symptom:** Tasks pass individually but fail when run as a suite. Or the last 10% of tasks consistently fail regardless of which tasks they are. Or identical inputs produce different outcomes from run to run.
+
+**Root cause:** Shared state is leaking between trials. Common culprits:
+- Filesystem artifacts from previous tasks
+- Cached API responses that went stale
+- Database rows from previous trials
+- Port/resource exhaustion (the 50th trial can't open a socket)
+- Rate limits accumulating across trials
+
+**Fixes:**
+- **Containerize each trial.** Fresh container, fresh filesystem, fresh network namespace. Overhead is worth it.
+- **Explicit teardown.** Every task should define what state it expects and reset it. Don't rely on "no state should leak" — verify it.
+- **Order-randomize the suite.** If running tasks in a different order changes results, you have state leakage. Randomizing surfaces this immediately.
+- **Pre-flight sanity check.** Before each trial, verify the environment is in the expected initial state. If not, rebuild it.
+
+### Problem 8: Small Eval Suite Overfitting
+
+**Symptom:** You have 20 eval tasks. You iterate prompts. Pass rate climbs from 60% → 80% → 90%. You ship. Production performance is unchanged or worse.
+
+**Root cause:** You optimized for 20 specific tasks. Your "improvements" encoded idiosyncrasies of those specific inputs that don't generalize.
+
+**Fixes:**
+- **Split into train/dev/test.** Use some tasks for iteration, some for validation, some held out until final evaluation. This is standard ML hygiene, often ignored in eval work.
+- **Grow the suite in parallel with the agent.** Every production failure becomes a new task — but keep most of them in the *held-out* test set, not the iteration set.
+- **Sanity check with fresh tasks.** Before claiming an improvement ships, generate 10 new tasks you've never seen. If the "improvement" collapses on fresh tasks, it didn't generalize.
+
 ## Common Pitfalls to Avoid
 
 Before we wrap up, here are the most common mistakes teams make when building evals:
@@ -938,6 +1145,18 @@ If your pass rate fluctuates between 60-90% on different days with no agent chan
 ### 4. Over-Indexing on a Single Metric
 
 No single number captures agent quality. Combine pass rates with efficiency metrics (tokens, latency, cost) and quality dimensions (empathy, accuracy, groundedness).
+
+### 5. Treating Evals as Write-Once
+
+Evals written on day 1 aren't necessarily still valid on day 180. The product evolved, the user base shifted, the model changed. Schedule periodic reviews — retire saturated tasks, refresh stale ones, add cases for newly discovered failure modes.
+
+### 6. Ignoring the Cost of Eval Iteration
+
+Every hour an engineer spends waiting for a slow eval suite is an hour they're not improving the agent. If your CI eval takes 30 minutes, engineers will skip it, batch changes, or ship without running it. Investment in fast eval infrastructure pays for itself in iteration velocity.
+
+### 7. Not Distinguishing Agent Failure from Environment Failure
+
+A tool returned a 500. A website rate-limited you. A flaky subprocess timed out. These aren't agent failures — they're environment failures. If your grader doesn't distinguish them, environment instability looks like agent regression. Tag trials with environment status so you can exclude (or analyze separately) trials with infrastructure problems.
 
 ## Complementary Evaluation Methods
 

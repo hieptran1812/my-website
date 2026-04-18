@@ -496,6 +496,7 @@ export default function BlogSection() {
                       style={{ objectFit: "cover" }}
                       className="transition-transform duration-700 group-hover:scale-110"
                       priority
+                      unoptimized={featuredArticle.image.startsWith("/api/og")}
                     />
                     <div className="absolute top-6 left-6">
                       <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-emerald-600 text-sm font-medium rounded-full">
@@ -695,6 +696,7 @@ export default function BlogSection() {
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         style={{ objectFit: "cover" }}
                         className="transition-transform duration-500 group-hover:scale-110"
+                        unoptimized={article.image.startsWith("/api/og")}
                       />
                     </div>
 

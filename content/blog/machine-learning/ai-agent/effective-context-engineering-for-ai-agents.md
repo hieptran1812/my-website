@@ -76,6 +76,21 @@ LLMs use the **transformer architecture**, where every token attends to every ot
 
 **The practical implication**: Even as context windows grow to millions of tokens, **context pollution and information relevance concerns persist at all sizes**. A 1M-token context window does not solve context engineering — it makes it more important.
 
+### Measuring Context Rot in Your System
+
+Context rot is not a belief — it is measurable. Three tests worth adding to CI for any serious agent:
+
+**Test 1: Needle-in-haystack with varying context sizes.**
+Insert a specific fact ("the user's account number is 47293") at the same position in context windows of varying size (2K, 8K, 32K, 100K). Ask the agent a question that requires retrieving that fact. Plot recall accuracy as a function of context size. A healthy agent shows gradual degradation; a steep cliff around a specific size usually means position encoding trouble or training mismatch. Trade-off: this test is cheap to run and tells you your *maximum usable* context, which is typically well below the model's advertised limit.
+
+**Test 2: Position-sensitivity test.**
+Same needle, same total context size, but placed at start / 25% / 50% / 75% / end. Models typically recall best at start and end, worst in the middle (the "lost in the middle" effect). The *slope* of accuracy across positions tells you how forgiving your layout can be. Trade-off: if the slope is steep, you must be disciplined about placing critical info at start or end — you can't rely on the middle at all.
+
+**Test 3: Distractor injection.**
+Add realistic but irrelevant content between the needle and the query. If recall drops significantly with distractors that a human would ignore, your agent is brittle to natural context bloat. Trade-off: this catches a failure mode that pure needle-in-haystack misses — real systems don't have clean contexts.
+
+All three take ~100–500 model calls to run, so you can afford them at release cadence. Skipping them is common; catching a rot regression in production rather than CI is expensive. The investment ratio (hours to set up vs. weeks of production debugging avoided) is strongly favorable.
+
 ## The Anatomy of Effective Context
 
 ### 1. System Prompts: Finding the Right Altitude
@@ -250,6 +265,27 @@ def lookup_order(order_id: str):
 **The litmus test from Anthropic:**
 
 > "If a human engineer can't definitively say which tool should be used in a given situation, an AI agent can't be expected to do better."
+
+#### Tool Count Trade-offs — When to Split, When to Merge
+
+The *number* of tools in scope is as important as any individual tool's design. A worked comparison:
+
+| Toolbox shape | Context cost | Accuracy | Maintenance | When it fits |
+| --- | --- | --- | --- | --- |
+| 50 flat tools (everything) | ~8–15KB of tool defs | Drops sharply — models over-pick or mis-pick from similar-sounding tools | High — any tool-naming drift causes confusion | Rare; usually indicates missing progressive disclosure |
+| 15 curated tools | ~3–5KB | High — models choose well at this size | Medium — requires someone to curate | Most production agents |
+| 5 atomic tools | ~1KB | Highest per-tool, but agent does more composition work | Low per tool, but composition work can hurt | Simple single-domain agents |
+
+Concrete heuristic: **if >15 tools are in scope at a single step, accuracy starts falling noticeably**. Remedies, in order of preference:
+
+1. **Stage-aware tool sets.** Expose only tools relevant to the current phase ("while reading code, no write tools are available").
+2. **Retrieval-selected tools.** Embed tool descriptions; retrieve top-K tools matching the current user intent.
+3. **Hierarchical tools.** A meta-tool that lists available sub-tools for a category ("`search_*` family: search_code, search_docs, search_issues").
+4. **Sub-agent split.** If two tool categories rarely co-occur (writing code vs. writing SQL), give each its own agent with its own tool slice.
+
+Trade-offs of each: stage-aware tool sets require predictable stages; retrieval-selected adds one model call per step; hierarchical adds one level of indirection the model must learn; sub-agent split adds coordination cost. Pick the cheapest fix that solves your specific bloat.
+
+Anti-pattern: merging tools to "reduce count" at the cost of action clarity. `manage_everything(action, payload)` hides the selection problem from the agent's tool-choice step and pushes it into argument construction where errors are harder to catch.
 
 ### 3. Examples: The Pictures Worth a Thousand Words
 
@@ -463,6 +499,24 @@ Predictable ◄─────────────────────�
 
 Without proper guidance, agentic search can waste context through tool misuse or dead-end chasing. The solution: **give agents clear instructions about what tools to use and when**, along with strategies for efficient exploration (e.g., "start with directory structure before reading files").
 
+### Pre-loaded vs Just-in-Time — A Decision Framework
+
+The choice is governed by three orthogonal axes: *latency sensitivity*, *data staleness tolerance*, and *information shape predictability*. Four concrete cases:
+
+**Customer support agent → Pre-loaded.**
+Latency: user is waiting — sub-2s target. Staleness: policies change quarterly, safe to cache. Shape: policies and escalation rules are known and small. Architecture: load policy docs, escalation tree, and tone guidelines at system prompt time. Tool calls are reserved for user-specific lookups (order status). Trade-off: first deployment costs the whole policy corpus in every prompt (mitigated by cache); when policies change, you redeploy.
+
+**Coding agent in an unfamiliar repo → Just-in-time.**
+Latency: user tolerates 10–30s for a thoughtful response. Staleness: code changes by the hour — cached indexes rot. Shape: unpredictable; the agent doesn't know what files matter until it explores. Architecture: `glob`/`grep`/`read_file` primitives, no pre-loaded code. Trade-off: more round-trips; agent occasionally explores dead-ends; the payoff is always-current knowledge.
+
+**Product RAG chatbot → Hybrid.**
+Latency: sub-3s target. Staleness: catalog updates daily — a stale embedding is usually close enough. Shape: questions generally map to a small K of relevant docs. Architecture: pre-computed embeddings retrieved at question time, plus a fallback just-in-time web search if embeddings score low. Trade-off: two retrieval paths = two failure modes; operational complexity worth it only at volume.
+
+**Trading bot → Pure JIT with real-time tools.**
+Latency: sub-500ms; every ms costs P&L. Staleness: zero tolerance — stale price is wrong price. Architecture: no pre-loaded data; every prompt pulls fresh market state via specialized low-latency tools. Trade-off: the tool latency is the floor of your response time; everything else is optimization around that fact.
+
+**The quick triage:** *real-time data* and *unpredictable information needs* both push toward JIT. *Small, stable reference material* and *hard latency constraints* push toward pre-loaded. Hybrid is the default for most agents, and the art is deciding which piece of data goes in which layer.
+
 ## Managing Long-Horizon Tasks
 
 When agents run for **tens of minutes to hours** — codebase migrations, research projects, multi-step workflows — the context window becomes a critical bottleneck. The generated tokens, tool results, and conversation history accumulate until they exceed the window or degrade performance long before reaching the limit.
@@ -542,6 +596,21 @@ After clearing (saves ~3000 tokens):
 ```
 
 The model's summary remains, preserving the semantic content while reclaiming thousands of tokens. This is low-risk because the model already processed and summarized the data.
+
+#### Compaction Failure Modes — Three Real Issues
+
+Compaction is lossy by design. Three specific ways it silently damages agents:
+
+**(1) The summarizer drops the task goal.**
+Symptom: after compaction, the agent continues executing but in a subtly wrong direction — it picks up the most recent sub-goal and treats it as the root goal. Root cause: summarization prompts that emphasize "what happened" over "what are we trying to do." Mitigation: make the original goal + user intent a non-summarizable anchor that gets prepended verbatim to every compacted context. Trade-off: ~50–200 tokens of fixed overhead per turn post-compaction; worth every one of them.
+
+**(2) Summarizer hallucinates facts that were never in the original.**
+Symptom: the agent later references "decisions" that no one made, or "facts" not present in the pre-compaction context. Root cause: LLM summarizers under-specify — they smooth over gaps with plausible-sounding content. Mitigation: summarizer prompts that require each claim to cite a step or tool call ID; drop claims without citations; cheap verifier pass that samples claims and checks the pre-compaction history. Trade-off: lower compression ratio (you're not allowed to generalize across events), but higher fidelity.
+
+**(3) Compaction triggered mid-important-reasoning.**
+Symptom: the agent was five steps into a tight chain of deductions when context hit the threshold; post-compaction, the intermediate reasoning is summarized and the conclusion is lost. Root cause: threshold-based triggers ignore local reasoning state. Mitigation: add "reasoning-checkpoint" markers — the agent can emit a structured "don't compact past here yet" token, or compaction is disallowed inside tool-call loops. Trade-off: context pressure returns sooner; occasionally the agent has to stop mid-task. Better than silent data loss.
+
+Aggressive vs conservative trade-off: **aggressive compaction (keep 20% of history) means more loss but more headroom. Conservative (keep 60%) preserves fidelity but context pressure returns in 50 turns.** Tune on your specific task's reasoning depth. Coding tasks typically want conservative (long chains of interdependent deductions); retrieval-style chatbots tolerate aggressive.
 
 ### Strategy 2: Structured Note-Taking (Agentic Memory)
 
@@ -834,6 +903,38 @@ async def research_sub_agent(question: str) -> str:
 
 Anthropic's own research showed that this multi-agent approach produced **substantial improvements over single-agent systems** on complex research tasks, as described in their article ["How we built our multi-agent research system"](https://www.anthropic.com/engineering).
 
+#### Sub-Agent Overhead — When It Doesn't Pay
+
+Sub-agents are not a free speed-up. A worked numerical example with 3 subtasks:
+
+```
+Scenario A — sub-agent split:
+  3 × sub-agent prompt overhead (persona, tools, task):  ~3 × 3K = 9K tokens
+  3 × sub-agent exploration/work:                        ~3 × 10K = 30K tokens
+  3 × sub-agent summary output:                          ~3 × 500 = 1.5K tokens
+  Lead agent: receives 1.5K summaries + plan + synthesis: ~5K tokens
+  Total:                                                  ~45.5K tokens
+  Wall time (parallel): max(10K sub-agent) ≈ 1 agent's latency
+
+Scenario B — single agent:
+  Full task in one context:                               ~30K tokens total
+  Wall time: sum of all three subtasks (sequential) or
+    parallel tool calls within one agent: variable
+```
+
+Sub-agents *cost more* in tokens but *win on wall-time* when parallelism is real. Break-even math:
+
+- **Sub-agent wins** when: subtask size ≥ 5K tokens, compression ratio (raw work → summary) ≥ 5×, and latency matters more than cost.
+- **Sub-agent loses** when: subtasks are small (< 2K tokens each — prompt overhead dominates), highly coupled (each needs the others' outputs, killing parallelism), or the handoff prompts are themselves expensive (if you're passing 2K of context per sub-agent, you're not really isolating context).
+
+Three concrete losing cases:
+
+- **Coding assistant debugging a single file.** 200-line file, one goal, tight reasoning loop. Splitting into sub-agents destroys coherence and doesn't parallelize meaningfully.
+- **Short-form content generation.** Draft a tweet, draft a caption, draft a headline — each is 100 tokens of output. The overhead of spinning up three sub-agents costs more than the work saved.
+- **Tightly interdependent pipeline stages.** Stage B needs A's full output, C needs B's — no parallelism available; the sub-agent cost has no speedup to amortize against.
+
+The heuristic: **sub-agents pay off when each can absorb ≥ 5K tokens of context and return a ≤ 1K summary, AND their work is parallel.** Miss either condition and a single agent with good compaction wins.
+
 ### Choosing the Right Strategy
 
 | Strategy        | Best For                                       | Strengths                                                                          | Limitations                                               |
@@ -853,6 +954,35 @@ The Anthropic team's advice:
 > "Do the simplest thing that works will likely remain our best advice for teams building agents on top of Claude."
 
 Start with compaction. Add note-taking when you need milestone persistence. Add sub-agents when tasks are complex enough to benefit from parallelism and isolation.
+
+### Combining Strategies — Three Real-World Stacks
+
+Most production agents combine all three strategies, but the *composition* is specific to the task shape.
+
+**Stack 1: Claude Code.**
+- Pre-loaded: `CLAUDE.md` in context at startup (project conventions, frequently-used commands).
+- Just-in-time: `glob`/`grep`/`read_file` tools for code retrieval as needed.
+- Tool result clearing: raw grep/read outputs dropped from context once the assistant has summarized them.
+- Agent scratchpad: a todo list the model maintains and consults across long sessions.
+- *No sub-agents* — single agent with deep tool access.
+- Why this composition: coding requires coherent codebase-wide reasoning, so sub-agents would lose fidelity. The bottleneck is context hygiene (compaction + clearing), not parallelism. Trade-off accepted: long tasks eventually hit the context ceiling; the user can start a new session with notes as hand-off.
+
+**Stack 2: Anthropic's research agent.**
+- Pre-loaded: tool definitions and a small orchestrator persona at the lead agent.
+- Sub-agents (orchestrator-worker): 3–5 parallel subagents per round, each with clean context, task-specific search tools, and a structured output contract.
+- Compaction in the lead: as findings accumulate, the lead compacts older rounds into summary state.
+- *No shared scratchpad* — each subagent's summary is the handoff.
+- Why this composition: research has separable sub-questions AND benefits from parallelism AND subagent work is verbose (context-bounding matters). Trade-off accepted: ~15× token cost vs single agent; worth it for the quality and latency wins.
+
+**Stack 3: Enterprise customer support supervisor.**
+- Pre-loaded: policies, user profile, recent interaction history at each specialist.
+- Supervisor agent (cheap model): classifies intent, routes to specialist.
+- Per-specialist clean context: specialist agent is spun up per request, doesn't see other specialists' work.
+- Persistent user state in external store (Postgres), retrieved into each specialist's prompt.
+- Tool result clearing aggressive on API results (specialist summarizes, raw results dropped).
+- Why this composition: volume is huge (cost per turn matters), domains are partitioned cleanly (specialists don't need each other's context), and user state outlives the agent loop (Postgres is the source of truth). Trade-off accepted: specialist context is rebuilt each request; no cross-specialist learning without persisting it externally.
+
+The meta-lesson: the strategy composition is a function of the task shape, not a best-practices checklist. A stack that wins for research would bankrupt a high-volume chatbot.
 
 ## Putting It All Together: A Context Engineering Checklist
 

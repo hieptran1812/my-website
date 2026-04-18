@@ -224,9 +224,9 @@ export default function TradingBlogPage() {
                         borderColor: "var(--card-border)",
                       }}
                     >
-                      <div className="grid md:grid-cols-5 gap-0">
+                      <div className="grid md:grid-cols-5 gap-0 md:h-[32rem]">
                         {/* Left: Featured Image (60%) */}
-                        <div className="md:col-span-3 relative h-80 md:h-96">
+                        <div className="md:col-span-3 relative h-80 md:h-full">
                           <Image
                             src={getArticleImageUrl(featuredArticle)}
                             alt={featuredArticle.title}
@@ -238,7 +238,7 @@ export default function TradingBlogPage() {
                         </div>
 
                         {/* Right: Article Info (40%) */}
-                        <div className="md:col-span-2 p-8 flex flex-col justify-center">
+                        <div className="md:col-span-2 p-8 flex flex-col justify-center md:overflow-hidden">
                           <div className="mb-4">
                             <span
                               className="text-sm font-bold uppercase tracking-wider"
@@ -276,7 +276,7 @@ export default function TradingBlogPage() {
                             <span>{featuredArticle.readTime}</span>
                           </div>
                           <p
-                            className="text-base leading-relaxed mb-6"
+                            className="text-base leading-relaxed mb-6 line-clamp-4"
                             style={{ color: "var(--text-secondary)" }}
                           >
                             {featuredArticle.excerpt}
