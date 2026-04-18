@@ -529,6 +529,78 @@ The field is moving fast. Key trends:
 
 The practical takeaway: **4-bit weight quantization with a good method (AWQ or GPTQ) gives you 80-95% of the original model quality at 25% of the memory cost.** That trade-off is worth taking for almost every production deployment.
 
+## Common Interview Questions and Answers
+
+### Q: What is quantization and why is it important for LLMs?
+
+Quantization reduces the numerical precision of model weights (and optionally activations) from high-precision formats (FP32/FP16) to lower-precision formats (INT8/INT4). It matters because LLMs have billions of parameters — a 70B model in FP16 needs 140 GB of memory. Quantizing to 4-bit reduces this to ~35 GB, making the model runnable on a single GPU. The key insight is that neural networks are robust to reduced precision: you can discard significant numerical precision with minimal impact on output quality, because the model's behavior depends on the relative relationships between weights, not their exact values.
+
+### Q: Explain the difference between symmetric and asymmetric quantization.
+
+**Symmetric** quantization assumes the weight distribution is centered around zero. It maps $[-\text{max}, +\text{max}]$ to $[-2^{b-1}+1, 2^{b-1}-1]$ using only a scale factor: $W_q = \text{round}(W/s)$. No zero point is needed. **Asymmetric** quantization handles distributions not centered at zero by adding a zero point offset: $W_q = \text{round}(W/s) + z$. Asymmetric is more accurate for skewed distributions but adds computational overhead (extra subtraction during dequantization). In practice, most LLM weight quantization uses **symmetric** because weight distributions are roughly symmetric after training. Asymmetric is more useful for **activation** quantization, where distributions can be heavily skewed (e.g., after ReLU).
+
+### Q: What is the difference between PTQ and QAT? When would you choose one over the other?
+
+**Post-Training Quantization (PTQ)** quantizes a fully trained model using a small calibration dataset (128-512 samples). It's fast (minutes to hours), requires no training infrastructure, and works with any pretrained model. **Quantization-Aware Training (QAT)** simulates quantization during training by inserting fake-quantize operations in the forward pass, using the Straight-Through Estimator (STE) for backpropagation through the non-differentiable rounding. QAT produces better results at extreme low bit-widths (2-3 bits) because the model learns to compensate for quantization error, but requires full training runs (expensive).
+
+**Choose PTQ** (the default for LLMs) when you want to quickly deploy an existing model at 4-8 bit precision. **Choose QAT** when you need extreme compression (2-3 bits) and have the compute budget for retraining, or when PTQ quality at your target bit-width is unacceptable.
+
+### Q: Explain how GPTQ works. What makes it different from naive quantization?
+
+Naive quantization independently rounds each weight to the nearest integer value, ignoring the compound effect of errors across weights. GPTQ is smarter: it quantizes weights **one column at a time** and, after each quantization, **adjusts all remaining unquantized weights** to compensate for the introduced error. This adjustment uses the Hessian matrix $H$ (computed from a calibration set), which captures how sensitive the layer's output is to changes in each weight. The update rule is $w_k \leftarrow w_k - \frac{\delta_j}{[H^{-1}]_{jj}} \cdot [H^{-1}]_{jk}$, where $\delta_j$ is the quantization error of weight $j$. This means the model "redistributes" the quantization error across remaining weights in a way that minimizes the overall output distortion. The result is significantly better than naive rounding, especially at 4-bit and below.
+
+### Q: How does AWQ differ from GPTQ? What is the core insight?
+
+AWQ's core insight is that **not all weights are equally important** — a small fraction of weight channels correspond to features that produce large activations during inference. Quantizing these "salient" channels carelessly causes disproportionate quality loss. Instead of compensating errors after quantization (like GPTQ), AWQ **protects important weights before quantization** by scaling them up, so they occupy more of the integer range and lose less relative precision. The scaling factor is optimized to minimize the output error: $s^* = \arg\min_s \|WX - \text{Dequant}(\text{Quant}(W \cdot s)) \cdot s^{-1} \cdot X\|$. In practice, AWQ is often faster to quantize than GPTQ and achieves slightly better quality at 4-bit on many benchmarks.
+
+### Q: What are outlier features and why do they make quantization harder?
+
+LLMs develop **emergent outlier features** — a small number of hidden dimensions (typically < 1%) that consistently produce activation values 10-100x larger than the rest. These outliers appear in every sequence, at every layer, starting from models around 6B parameters. They make quantization harder because the quantization scale must accommodate the full range. If the outlier range is [-60, 60] but 99% of values are in [-2, 2], a single scale factor wastes most of the integer range on the [-60, 60] interval, leaving very few discrete levels to represent the [-2, 2] values where most information lies. The solution is to handle outliers separately: LLM.int8() keeps outlier features in FP16, AWQ scales up their corresponding weight channels, and per-group quantization localizes the impact of outliers to their group.
+
+### Q: What is per-group quantization and why is it better than per-tensor?
+
+**Per-tensor** quantization uses one scale factor for the entire weight matrix. If any element is an outlier, it forces a large scale for everything, reducing precision for all other values. **Per-group** quantization divides each row into groups of $g$ elements (typically $g = 128$) and computes a separate scale per group. This allows each group to adapt to its own value range — groups with small values get fine-grained precision, groups with large values get appropriately scaled precision. The overhead is storing one FP16 scale per group, which adds about $16/g$ bits per weight (0.125 bits for $g=128$). The quality improvement far outweighs this small overhead, making per-group quantization the standard for all modern 4-bit methods.
+
+### Q: Explain FP8 quantization. Why is it becoming the new standard?
+
+FP8 uses 8-bit floating-point representation in two variants: **E4M3** (4-bit exponent, 3-bit mantissa) for weights and **E5M2** (5-bit exponent, 2-bit mantissa) for activations/gradients. Unlike INT8 (which has uniform precision), FP8 has non-uniform precision that naturally matches the distribution of neural network weights — higher precision near zero where most values cluster, lower precision for large values. The game-changer is **native hardware support** on NVIDIA H100/H200 GPUs: FP8 tensor cores provide 2x throughput compared to FP16 with no dequantization overhead. Quality is nearly identical to FP16 (much better than INT8), making FP8 the "free lunch" of quantization when H100+ hardware is available.
+
+### Q: What is the Straight-Through Estimator (STE) and why is it needed in QAT?
+
+The rounding operation in quantization ($\text{round}(x)$) has zero gradient almost everywhere (it's a step function), which means backpropagation would produce zero gradients, making training impossible. The **Straight-Through Estimator** solves this by using the identity function as a proxy gradient during the backward pass: $\frac{\partial \text{round}(x)}{\partial x} \approx 1$. In practice, during the forward pass, the model simulates quantization (round values to discrete levels), but during the backward pass, gradients flow through as if no rounding occurred. This biased estimator works surprisingly well because the quantization error is small relative to the gradient signal, and the model learns weight configurations that are naturally quantization-friendly.
+
+### Q: How do you quantize the KV cache and why does it matter?
+
+The KV cache stores key and value tensors from all previous tokens during autoregressive generation. For long-context models, KV cache can dominate memory usage — a 70B model with 128K context needs 40+ GB just for KV cache in FP16. **KV cache quantization** applies per-token or per-head quantization to compress stored K/V tensors to INT8 or INT4 on-the-fly. The values are dequantized back to FP16 when used in attention computation. INT8 KV cache has minimal quality impact. INT4 is more aggressive but acceptable with per-token quantization (separate scale per token per head). This is critical for production serving where you want to maximize the number of concurrent requests — reducing KV cache size by 2-4x directly translates to serving 2-4x more users.
+
+### Q: What is NormalFloat4 (NF4) and how does it differ from standard INT4?
+
+NF4 (used in QLoRA/bitsandbytes) is a 4-bit data type specifically designed for normally-distributed neural network weights. Standard INT4 maps 16 uniformly spaced values across the weight range, but neural network weights follow a roughly Gaussian distribution — most values cluster near zero. NF4 maps the 16 possible values to the **optimal quantiles** of a standard normal distribution, placing more representation levels near zero (where most weights are) and fewer at the tails. This information-theoretic optimization means NF4 preserves more information per bit than standard INT4 for Gaussian-distributed data. Combined with **double quantization** (quantizing the scale factors themselves to 8-bit), NF4 achieves ~4.15 effective bits per weight while maintaining quality close to INT8.
+
+### Q: How would you decide the right quantization strategy for a production deployment?
+
+This is a system design question. The key factors are:
+
+1. **Hardware**: H100+ → FP8 (native support, near-lossless). A100/consumer GPU → AWQ/GPTQ 4-bit. CPU/Apple Silicon → GGUF
+2. **Model size**: Large models (30B+) tolerate 4-bit well due to weight redundancy. Smaller models (7B) may need INT8 to maintain quality
+3. **Latency vs throughput**: Weight-only quantization (GPTQ/AWQ) reduces memory but doesn't speed up compute. FP8/INT8 with activation quantization speeds up actual matrix multiplications
+4. **Use case sensitivity**: Reasoning/math tasks are more sensitive to quantization than chat/summarization. Test on your actual workload, not just perplexity
+5. **Calibration data**: Match it to your inference distribution. Code model → calibrate on code, not Wikipedia
+6. **Serving framework**: vLLM/TGI → AWQ or GPTQ. llama.cpp/Ollama → GGUF. HuggingFace prototyping → bitsandbytes
+
+Always benchmark end-to-end on your target tasks — perplexity differences don't always predict task-level quality differences.
+
+### Q: What are the trade-offs of using lower bit-widths (e.g., 3-bit vs 4-bit vs 8-bit)?
+
+| Bit-width | Memory savings | Quality loss | Speed impact | When to use |
+|-----------|---------------|--------------|-------------|-------------|
+| INT8 / FP8 | 2x vs FP16 | Negligible | Faster (with hardware support) | Default for GPU serving when memory allows |
+| INT4 | 4x vs FP16 | Small (1-5% on benchmarks) | Same or slightly slower (weight-only) | When model doesn't fit in INT8 |
+| INT3 | ~5x vs FP16 | Moderate (5-15%) | Same as INT4 | Extreme memory constraints |
+| INT2 | 8x vs FP16 | Significant (15-30%+) | Same | Research / specific QAT models only |
+
+The degradation is non-linear: going from 8→4 bits loses relatively little, but 4→3 and 3→2 show increasingly steep quality drops. The general recommendation is: use the highest bit-width your memory budget allows, and invest in a better quantization method (AWQ > naive round-to-nearest) rather than using more bits with a worse method.
+
 ## References
 
 1. [GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers (arXiv:2210.17323)](https://arxiv.org/abs/2210.17323)

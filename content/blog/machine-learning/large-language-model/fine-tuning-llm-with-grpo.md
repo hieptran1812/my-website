@@ -2133,6 +2133,246 @@ Before filing a GitHub issue or giving up, check these in order:
 | 9 | Are you monitoring KL divergence? | Should stabilize, not grow without bound |
 | 10 | Have you read actual model outputs? | Not just metrics — read the text every 100 steps |
 
+## Interview Questions and Answers
+
+### Q: What is GRPO and how does it differ from PPO?
+
+GRPO (Group Relative Policy Optimization) is a reinforcement learning algorithm for fine-tuning LLMs that eliminates PPO's value model. Instead of training a separate neural network to estimate per-token advantages, GRPO generates a **group** of $G$ outputs for each prompt, scores them with a reward function, and computes advantages by z-score normalizing rewards within the group: $\hat{A}_i = (R_i - \mu_G) / \sigma_G$.
+
+Key differences from PPO:
+
+| Aspect | PPO | GRPO |
+|--------|-----|------|
+| Advantage estimation | Learned value model + GAE (per-token) | Group-based z-score normalization (per-output) |
+| Models in memory | 4 (policy, reference, reward, value) | 3 (policy, reference, reward) |
+| Advantage granularity | Per-token (each token gets a different advantage) | Per-output (all tokens in one output share the same advantage) |
+| Training stability | Sensitive to value model quality | More stable (no value model to go stale) |
+| Memory cost | ~4x model size | ~3x model size |
+
+GRPO retains PPO's clipped surrogate objective ($\min(\rho \hat{A}, \text{clip}(\rho, 1-\varepsilon, 1+\varepsilon)\hat{A})$) for stable policy updates, and uses a KL penalty against a reference model to prevent catastrophic forgetting. The simplification to group-based advantages works because **the group mean is already a good estimator of the value function** — it's the average reward for outputs from the same prompt, which is exactly what $V(q)$ tries to learn.
+
+### Q: Derive the GRPO advantage estimate and explain why it works as a variance reduction technique.
+
+The vanilla REINFORCE policy gradient is:
+
+$$\nabla_\theta \mathcal{J} = \mathbb{E}_{q, \mathbf{o} \sim \pi_\theta}\left[R(\mathbf{o}, q) \nabla_\theta \log \pi_\theta(\mathbf{o}|q)\right]$$
+
+This has extremely high variance because rewards vary widely across prompts and outputs. A baseline $b(q)$ reduces variance without introducing bias:
+
+$$\nabla_\theta \mathcal{J} = \mathbb{E}\left[(R(\mathbf{o}, q) - b(q)) \nabla_\theta \log \pi_\theta(\mathbf{o}|q)\right]$$
+
+PPO uses a learned value function $V_\phi(q)$ as this baseline. GRPO uses the **empirical group mean** $\bar{R}_q = \frac{1}{G}\sum_{j=1}^G R_j$ as the baseline. This is a Monte Carlo estimate of $\mathbb{E}_{\pi_\theta}[R(\mathbf{o}|q)]$, which is exactly what $V(q)$ tries to approximate.
+
+The standard deviation normalization further stabilizes training: dividing by $\sigma_G$ makes the advantage scale-invariant across prompts. Hard prompts (where the best output barely gets reward 0.1 and the worst gets 0.0) produce the same magnitude advantages as easy prompts (where outputs score 0.9-1.0). Without this normalization, easy prompts with high rewards would dominate the gradient.
+
+**Bias consideration**: Including output $o_i$ in its own baseline $\bar{R}$ introduces a small bias of order $O(1/G)$. For $G \geq 4$, this is negligible in practice. DeepSeek used $G = 64$ for their largest runs, making the bias vanishingly small.
+
+### Q: Why does GRPO work better than DPO for reasoning tasks?
+
+Three fundamental reasons:
+
+**1. Online exploration vs offline learning.** DPO trains on fixed preference pairs $(x, y_w, y_l)$ collected before training. The model can only learn to prefer responses within the distribution of the training data. GRPO generates its own responses during training, evaluates them, and learns from its own exploration. This means the model can discover novel reasoning strategies that weren't present in any dataset — like the "aha moments" and self-verification behaviors observed in DeepSeek-R1.
+
+**2. Verifiable rewards vs pairwise preferences.** For math and code, we can verify correctness automatically (check the final answer, run unit tests). GRPO directly optimizes for these verifiable outcomes. DPO requires converting this binary signal into pairwise preferences, which is less efficient — you need pairs of outputs where one is correct and one is wrong, rather than simply rewarding correct outputs and penalizing wrong ones.
+
+**3. Continuous improvement loop.** GRPO implements an iterative loop: generate → evaluate → improve → generate better → evaluate → improve more. The model's outputs improve over training, and it trains on increasingly better data. DPO is one-shot — if the preference data is exhausted, the model plateaus. This iterative improvement is why RL methods can push models beyond the quality ceiling of the training data.
+
+### Q: Explain the clipping mechanism in GRPO. Why is it necessary?
+
+The clipping is inherited from PPO and prevents destructively large policy updates. The probability ratio $\rho_{i,t} = \pi_\theta(o_{i,t}|q, o_{i,<t}) / \pi_{\theta_\text{old}}(o_{i,t}|q, o_{i,<t})$ measures how much the policy has changed since generating the outputs.
+
+The clipped objective is:
+
+$$\min\left(\rho \hat{A},\; \text{clip}(\rho, 1-\varepsilon, 1+\varepsilon) \hat{A}\right)$$
+
+With $\varepsilon = 0.2$ (typical), $\rho$ is clipped to $[0.8, 1.2]$.
+
+**Why it's necessary**: Without clipping, if the model finds an output with very high advantage, it could increase that output's probability by 100x in a single update. This would collapse the model's distribution to a narrow set of outputs, destroying diversity and generalization. Clipping ensures the policy changes by at most 20% per update.
+
+**How the min works**:
+- For **positive advantages** (good outputs): $\min(\rho \hat{A}, 1.2 \hat{A})$ — the model can increase the probability at most 20%. If it tries to go beyond, the gradient is zero (no further push).
+- For **negative advantages** (bad outputs): $\min(\rho \hat{A}, 0.8 \hat{A})$ — the model can decrease the probability at most 20%.
+
+This creates a **trust region**: the new policy stays within a bounded neighborhood of the old policy, ensuring stability.
+
+### Q: What is reward hacking and how do you prevent it in GRPO?
+
+Reward hacking occurs when the model finds ways to achieve high reward without actually solving the task. Common examples in GRPO training:
+
+1. **Format gaming**: If the reward checks for `\boxed{...}` in math answers, the model learns to output `\boxed{42}` for every question without reasoning
+2. **Length exploitation**: If any component of the reward correlates with length, the model may produce extremely long or short outputs to exploit it
+3. **Pattern matching**: The model memorizes reward-triggering patterns rather than learning the underlying skill
+
+**Prevention strategies**:
+
+- **Use strict reward functions**: Verify the actual answer, not just the format. Parse the content inside `\boxed{}` and compare to the ground truth
+- **KL penalty ($\beta$)**: Keeps the model close to the reference policy, preventing it from deviating into degenerate distributions. Start with $\beta = 0.04$ and increase if you see reward climbing without quality improving
+- **Monitor actual outputs**: Don't just watch reward curves — read the model's outputs every 100 steps. Reward hacking often looks like "reward going up" in the metrics but produces nonsensical text
+- **Diverse reward signals**: Combine multiple reward components (correctness + format + reasoning quality) so gaming one component doesn't maximize total reward
+- **Cap reward values**: Prevent outlier rewards from dominating the gradient by clipping rewards to a reasonable range
+
+### Q: How does the KL penalty in GRPO work? What happens if $\beta$ is too high or too low?
+
+GRPO uses a per-token KL penalty against the reference model:
+
+$$D_{\text{KL}}^{(i,t)} = \frac{\pi_\theta(o_{i,t})}{\pi_{\text{ref}}(o_{i,t})} - \log \frac{\pi_\theta(o_{i,t})}{\pi_{\text{ref}}(o_{i,t})} - 1$$
+
+This is the Schulman approximation of KL divergence, chosen for numerical stability (always non-negative, no subtraction of large log-probs).
+
+**$\beta$ too low** ($< 0.01$): The policy is free to drift far from the reference model. Initial symptoms: reward climbs fast and output quality seems good. Later symptoms: the model loses its general language abilities, starts producing repetitive or degenerate text, and "forgets" how to handle tasks it previously could do. This is catastrophic forgetting driven by unconstrained policy drift.
+
+**$\beta$ too high** ($> 0.1$): The KL penalty dominates the objective, and the policy barely changes from the reference. Training looks stable but rewards don't improve — the model is too constrained to learn. The model essentially stays at its initial capability level regardless of training duration.
+
+**Sweet spot** ($\beta \approx 0.01-0.05$ for most tasks): Reward improves gradually, KL divergence grows but stabilizes (typically 5-20 nats), and output quality improves visibly. Monitor KL during training — if it grows without bound, increase $\beta$. If reward flatlines, decrease $\beta$.
+
+### Q: What is the role of group size $G$ in GRPO? What happens with too small or too large groups?
+
+Group size $G$ is the number of outputs generated per prompt. It determines the quality of the advantage estimate.
+
+**$G$ too small** ($G = 2$): The group mean and std are extremely noisy. With only 2 samples, one gets positive advantage and one gets negative — there's no nuance. Worse, if both outputs get the same reward (e.g., both wrong), the std is 0 and no learning happens. This wastes compute without producing stable gradient estimates.
+
+**$G$ too large** ($G = 64$): Very stable advantage estimates (the group mean closely approximates $V(q)$), but extremely expensive in compute and memory. Each prompt requires 64 forward passes for generation, and all 64 outputs must be stored for training. For a 7B model with 64 outputs of 1024 tokens each, this is a massive memory footprint.
+
+**Practical guidance**:
+- $G = 4$: Minimum viable. Works for exploration but noisy gradients
+- $G = 8-16$: Sweet spot for most practitioners. Good variance reduction, manageable cost
+- $G = 32-64$: Used by DeepSeek for their largest runs. Best for final training if you have the compute
+
+**Key insight**: It's better to have **larger $G$ with fewer training steps** than smaller $G$ with more steps. Stable advantages are more important than more gradient updates, because noisy advantages cause the policy to oscillate rather than improve.
+
+### Q: Walk through a concrete GRPO training step for a math problem.
+
+**Prompt**: "What is 17 × 23?"
+
+**Step 1 — Generate group of $G=4$ outputs**:
+- $o_1$: "17 × 23 = 17 × 20 + 17 × 3 = 340 + 51 = 391" → $R_1 = 1.0$ ✓
+- $o_2$: "17 × 23 = 351" → $R_2 = 0.0$ ✗ (wrong answer)
+- $o_3$: "Let me compute: 17 × 23 = 340 + 51 = 391" → $R_3 = 1.0$ ✓
+- $o_4$: "17 × 23 = 17 × 25 - 17 × 2 = 425 - 34 = 391" → $R_4 = 1.0$ ✓
+
+**Step 2 — Compute advantages**:
+- $\mu = (1.0 + 0.0 + 1.0 + 1.0) / 4 = 0.75$
+- $\sigma = \sqrt{((1-0.75)^2 + (0-0.75)^2 + (1-0.75)^2 + (1-0.75)^2)/4} = 0.433$
+- $\hat{A}_1 = (1.0 - 0.75) / 0.433 = +0.577$ (slightly positive — correct but common)
+- $\hat{A}_2 = (0.0 - 0.75) / 0.433 = -1.732$ (strongly negative — wrong answer)
+- $\hat{A}_3 = +0.577$
+- $\hat{A}_4 = +0.577$
+
+**Step 3 — Policy update**:
+- $o_2$ (wrong answer) gets strongly negative advantage → model decreases probability of generating "351" in similar contexts
+- $o_1, o_3, o_4$ get positive advantage → model slightly increases probability of correct reasoning patterns
+- The clipping ensures changes are bounded ($\rho \in [0.8, 1.2]$)
+- The KL penalty prevents the model from diverging too far from the reference
+
+**Key observation**: The model learns not just that "391" is correct, but that the **reasoning steps** leading to 391 should be reinforced. All tokens in $o_1$ — including the intermediate "340 + 51" — receive the same positive advantage.
+
+### Q: How do you design reward functions for GRPO? Give examples for different tasks.
+
+**Math reasoning**:
+```python
+def math_reward(output, ground_truth):
+    # Extract answer from \boxed{...} format
+    predicted = extract_boxed_answer(output)
+    if predicted == ground_truth:
+        return 1.0
+    return 0.0
+```
+Simple binary reward works well. Avoid partial credit based on reasoning steps — it's hard to verify intermediate steps and opens the door to reward hacking.
+
+**Code generation**:
+```python
+def code_reward(output, test_cases):
+    code = extract_code(output)
+    passed = run_tests(code, test_cases, timeout=10)
+    return passed / len(test_cases)  # fraction of tests passed
+```
+Unit test pass rate gives a natural 0-1 reward with granularity.
+
+**Instruction following**:
+```python
+def instruction_reward(output, instruction):
+    score = 0.0
+    if follows_format(output, instruction):   score += 0.3
+    if correct_length(output, instruction):   score += 0.2
+    if contains_required_elements(output):     score += 0.5
+    return score
+```
+Combine multiple verifiable aspects. Avoid using an LLM as judge if possible — it's slow, expensive, and introduces its own biases.
+
+**Critical design principles**:
+1. Reward should be **deterministic** for the same output — non-deterministic rewards (like LLM judges) add variance
+2. Reward should be **fast** — it's called $G \times B$ times per training step
+3. Reward should be **robust to gaming** — test it against adversarial outputs
+4. Reward should have **variance within groups** — if all outputs get the same reward, no learning happens
+
+### Q: What are the critical hyperparameters in GRPO and how do you tune them?
+
+| Parameter | Typical Range | Effect of Too Low | Effect of Too High |
+|-----------|--------------|-------------------|-------------------|
+| Learning rate | 5e-7 to 5e-6 (full FT), 1e-5 to 5e-5 (LoRA) | No learning, reward flat | Training instability, reward oscillation |
+| $\beta$ (KL weight) | 0.01 - 0.05 | Policy drift, forgetting, reward hacking | Underfitting, reward doesn't improve |
+| $\varepsilon$ (clip range) | 0.1 - 0.3 | Updates too conservative | Updates too aggressive, instability |
+| $G$ (group size) | 4 - 16 (practical), 32-64 (large-scale) | Noisy advantages, unstable | Expensive, diminishing returns |
+| `max_completion_length` | Task-dependent | Outputs truncated → wrong rewards | Wasted compute on padding |
+| `num_iterations` | 1 - 2 | Less learning per generation batch | Stale probability ratios, instability |
+
+**Tuning order**: 
+1. Fix everything, sweep learning rate on a small subset (most impactful)
+2. Adjust $\beta$ based on KL trajectory (should grow then stabilize)
+3. Increase $G$ if advantages are too noisy (reward variance within groups near zero)
+4. Adjust `max_completion_length` based on actual output lengths
+
+### Q: Can GRPO work with a reward model instead of rule-based rewards? When would you do this?
+
+Yes, GRPO works with any reward function — rule-based, model-based, or hybrid.
+
+**Rule-based rewards** (preferred): Best for verifiable tasks (math, code, structured output). Deterministic, fast, no training needed. Use when you can programmatically verify correctness.
+
+**Learned reward model**: Necessary when correctness can't be verified programmatically — creative writing, open-ended conversation, subjective quality judgments. The reward model scores each output, and GRPO uses those scores for advantage estimation. This is essentially RLHF but with GRPO instead of PPO.
+
+**Hybrid**: Combine rule-based and model-based. Example for code generation: use unit test pass rate (rule-based) for correctness plus a small reward model for code style/readability.
+
+**Practical concern with reward models**: Reward model quality is the ceiling for GRPO training. A reward model that's only 80% accurate will teach the policy to exploit the 20% errors. For reasoning tasks where rule-based verification exists, always prefer rule-based rewards — they have 100% accuracy by construction.
+
+### Q: Compare GRPO, DPO, and PPO. When should you use each?
+
+| Scenario | Best Method | Why |
+|----------|-------------|-----|
+| General chat alignment with preference data | DPO | Simple, stable, well-understood; works great with static preference datasets |
+| Math/code reasoning with verifiable answers | GRPO | Online exploration discovers reasoning strategies; rule-based rewards are perfect |
+| Open-ended alignment without preference data | GRPO + reward model | Online exploration with learned rewards |
+| Maximum quality, unlimited compute budget | PPO | Most flexible; per-token advantages can capture fine-grained credit assignment |
+| Limited compute / single GPU | DPO or GRPO+LoRA | DPO needs no generation; GRPO+LoRA cuts memory to ~1 GPU |
+| Need emergent capabilities (self-correction, planning) | GRPO | Only online RL methods produce emergent behaviors through exploration |
+
+**Decision heuristic**: If you have preference pairs and want alignment → DPO. If you have a verifiable reward function and want capability improvement → GRPO. If you have both the compute and the reward infrastructure → PPO might still marginally outperform, but GRPO is simpler and nearly as effective.
+
+### Q: What are the most common failure modes in GRPO training and how do you diagnose them?
+
+**1. Reward doesn't increase at all**
+- *Diagnosis*: Check if the base model can solve ANY problems before GRPO. Generate 50 outputs and check accuracy. If accuracy is 0%, the model has no signal to improve from — all outputs are wrong, all advantages are 0.
+- *Fix*: SFT the model on a few examples first to get non-zero base accuracy.
+
+**2. Reward increases but output quality doesn't**
+- *Diagnosis*: Classic reward hacking. Read actual outputs — the model is gaming the reward function.
+- *Fix*: Strengthen reward function, increase $\beta$, add reward components.
+
+**3. Reward oscillates wildly**
+- *Diagnosis*: Learning rate too high or $G$ too small (noisy advantages).
+- *Fix*: Reduce learning rate by 2-5x, increase group size.
+
+**4. KL divergence grows without bound**
+- *Diagnosis*: $\beta$ too low — policy is drifting unconstrained.
+- *Fix*: Increase $\beta$ by 2-5x.
+
+**5. All outputs in a group get the same reward**
+- *Diagnosis*: Temperature too low (model outputs are too similar) or task is too easy/hard.
+- *Fix*: Increase sampling temperature (0.7-1.0), choose prompts with appropriate difficulty.
+
+**6. NaN/Inf in loss**
+- *Diagnosis*: Almost always caused by fp16. GRPO involves log probability ratios that can overflow in fp16.
+- *Fix*: Use bf16, never fp16. Also check for division by zero when group std = 0.
+
 ## References
 
 - [DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2501.12948) — The paper that introduced GRPO to the broader community and demonstrated emergent reasoning

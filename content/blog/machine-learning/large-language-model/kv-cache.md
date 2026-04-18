@@ -973,6 +973,199 @@ The key takeaways for practitioners:
 
 Every major optimization in LLM serving — from vLLM's PagedAttention to Mistral's sliding window to SGLang's RadixAttention — is ultimately about making this cache more efficient. Understanding KV cache deeply is essential for anyone building or operating LLM systems at scale.
 
+## Interview Questions and Answers
+
+### Q: What is KV Cache and why is it necessary for LLM inference?
+
+KV Cache stores the Key and Value vectors computed for all previously processed tokens during autoregressive generation, so they don't need to be recomputed at each decoding step. Without KV Cache, generating each new token requires recomputing K and V for the entire sequence from scratch — the total work grows quadratically as $O(n^2)$ with sequence length. With KV Cache, each decode step only computes K and V for the single new token and appends them to the cache, reducing total K/V computation to $O(n)$. For a 4096-token generation, this eliminates ~4096x redundant computations per layer. The trade-off is memory: the cache must be stored in GPU memory, and for large models with long sequences, this can consume tens of gigabytes.
+
+### Q: Walk through exactly what happens during the prefill and decode phases.
+
+**Prefill phase**: The entire prompt is processed in a single forward pass. All tokens are run through the model in parallel (like training). Q, K, V are computed for every prompt token, the full attention matrix is computed, and the KV cache is populated with all prompt tokens' K and V. This phase is **compute-bound** — dominated by large matrix multiplications on the full prompt. Output: the first generated token, plus a populated KV cache.
+
+**Decode phase**: Runs once per generated token. Only the single new token is passed through the model. Q, K, V are computed for that one token. K and V are appended to the cache. Attention is computed between the new Q (1 token) and all cached K/V (entire history). This phase is **memory-bandwidth-bound** — the main cost is loading the large KV cache from GPU HBM, not the tiny matrix multiplications for a single token. The compute-to-memory ratio (arithmetic intensity) is extremely low, which is why decode throughput is primarily limited by memory bandwidth, not FLOPS.
+
+### Q: How do you calculate the KV cache memory for a given model?
+
+The formula is:
+
+$$\text{KV Cache} = 2 \times L \times n_\text{kv\_heads} \times d_\text{head} \times n_\text{tokens} \times \text{bytes}$$
+
+Where: 2 is for K and V, $L$ is the number of layers, $n_\text{kv\_heads}$ is the number of KV heads (equals $n_\text{heads}$ for MHA, fewer for GQA), $d_\text{head}$ is the head dimension, $n_\text{tokens}$ is the sequence length, and bytes is the per-element size (2 for FP16, 1 for FP8).
+
+**Concrete example — Llama 3.1 8B** ($L=32$, $n_\text{kv\_heads}=8$ (GQA), $d_\text{head}=128$, FP16):
+- Per token: $2 \times 32 \times 8 \times 128 \times 2 = 131,072$ bytes = 128 KB
+- Per 4K sequence: $128 \text{ KB} \times 4096 = 512$ MB
+- Per 128K sequence: $128 \text{ KB} \times 131072 = 16$ GB
+
+For batch serving, multiply by the number of concurrent sequences. This is why KV cache is usually the primary bottleneck for serving throughput.
+
+### Q: Explain Multi-Query Attention (MQA), Grouped-Query Attention (GQA), and their impact on KV cache.
+
+**MHA (Multi-Head Attention)**: Each of $h$ attention heads has its own Q, K, V projections. KV cache stores $h$ independent K and $h$ independent V tensors per layer. Full expressiveness, maximum memory cost.
+
+**MQA (Multi-Query Attention)**: All heads share a single K and V projection, but each head has its own Q. KV cache is reduced by $h\times$ (e.g., 32x for 32 heads). The quality trade-off is that heads can no longer specialize their key/value representations, which can hurt performance on complex tasks.
+
+**GQA (Grouped-Query Attention)**: Compromise — $h$ query heads are divided into $g$ groups, each group sharing one K/V projection. KV cache is reduced by $h/g$ times. Example: Llama 3 8B has 32 query heads and 8 KV groups → 4x cache reduction. GQA retains most of MHA's quality while capturing most of MQA's memory savings. It's the current industry standard — used by Llama 3, Mistral, Gemma 2, and most modern models.
+
+The practical impact is enormous: with GQA, you can serve 4-8x more concurrent users on the same hardware, or equivalently, support 4-8x longer sequences.
+
+### Q: What is PagedAttention and why was it a breakthrough for LLM serving?
+
+Before PagedAttention (introduced by vLLM), serving frameworks pre-allocated a contiguous memory block for each sequence's KV cache sized to the maximum possible sequence length. If you set max_seq_len=4096 but the average response is 200 tokens, you waste ~95% of the allocated memory. Worse, memory fragmentation made it impossible to fully utilize GPU memory.
+
+PagedAttention borrows the concept of **virtual memory paging** from operating systems. KV cache is divided into fixed-size **blocks** (e.g., 16 tokens per block). Blocks are allocated on demand as the sequence grows and can be non-contiguous in physical memory. A block table maps logical sequence positions to physical memory locations.
+
+Key benefits:
+1. **Near-zero internal fragmentation** — only the last block of each sequence may be partially filled
+2. **No external fragmentation** — any free block can be used by any sequence
+3. **Copy-on-write sharing** — common prefixes (system prompts, beam search) share physical blocks via reference counting; copies only happen when content diverges
+4. **Dynamic allocation** — memory is consumed proportional to actual sequence length, not maximum possible length
+
+The result was 2-4x higher throughput compared to naive allocation, and PagedAttention is now standard in all production serving frameworks.
+
+### Q: Why is the decode phase memory-bandwidth-bound and not compute-bound?
+
+During decode, the model processes a single token. The compute is tiny — one token's worth of linear projections and one row of attention scores. But the model must load the **entire KV cache** from GPU HBM to compute attention.
+
+Quantitatively for Llama 3.1 8B with a 4K sequence:
+- KV cache to load: ~512 MB
+- Compute for one decode step: ~16 GFLOPS
+- A100 HBM bandwidth: 2 TB/s → loading 512 MB takes ~0.25 ms
+- A100 FP16 compute: 312 TFLOPS → 16 GFLOPS takes ~0.00005 ms
+
+The memory load takes 5000x longer than the compute. The GPU's arithmetic units are idle >99.99% of the time during decode, waiting for data from memory. This is called being **memory-bandwidth-bound** — throughput is determined by how fast you can shuttle data from HBM to the compute units.
+
+This explains why every KV cache optimization (GQA, quantization, eviction) directly improves decode speed: less data to load per step. It also explains why **batching** helps — processing multiple sequences together amortizes the cost of loading model weights, improving the arithmetic intensity toward the compute-bound regime.
+
+### Q: What is prefix caching / prompt caching and when is it useful?
+
+Prefix caching stores and reuses the KV cache of common prompt prefixes across multiple requests. If 1000 requests all start with the same 2000-token system prompt, the system computes the KV cache for those 2000 tokens once and shares it across all requests, saving 1000 redundant prefill computations.
+
+**How it works in SGLang (RadixAttention)**: All cached KV blocks are organized in a radix tree keyed by token sequences. When a new request arrives, the system finds the longest matching prefix in the tree, reuses its cached KV blocks, and only runs prefill on the remaining novel tokens. LRU eviction reclaims tree branches when memory is tight.
+
+**When it's most useful**:
+- Long, shared system prompts (1000+ tokens) — saves significant prefill compute
+- Few-shot examples included in every request — shared across all users
+- RAG applications where the same retrieved documents appear across requests
+- Multi-turn chat — previous conversation turns are the prefix for new turns
+
+**When it doesn't help**:
+- Every request has a unique prompt (no sharing opportunity)
+- Very short prompts where caching overhead exceeds savings
+
+### Q: What is sliding window attention and what are its trade-offs?
+
+Sliding window attention limits each token to only attend to the most recent $w$ tokens, rather than the entire sequence. This caps the KV cache at $w$ entries per layer, regardless of total sequence length.
+
+**Memory benefit**: KV cache is bounded at $O(w)$ instead of $O(n)$, enabling arbitrarily long sequences without growing memory.
+
+**How information propagates beyond the window**: Through layer stacking. If each layer has a window of $w$ tokens and the model has $L$ layers, information can theoretically propagate $w \times L$ tokens back through the network. At layer 1, token 1000 sees tokens 744-999. At layer 2, the representation of token 744 already contains information from tokens 488-743. So layer 2 indirectly "sees" back to token 488.
+
+**Trade-offs**:
+- Works well for tasks where local context dominates (chat, code completion)
+- Can struggle with tasks requiring precise long-range retrieval ("what was the third item on the list from page 1?")
+- Mistral 7B uses $w=4096$, which covers most practical use cases
+- Some models combine sliding window for most layers with full attention for a few layers, getting the best of both worlds
+
+### Q: How does KV cache quantization work and what are the trade-offs?
+
+KV cache quantization compresses the stored K and V tensors from FP16 (16 bits) to lower precision formats like FP8 (8 bits) or INT4 (4 bits). Values are quantized before storage and dequantized on-the-fly during attention computation.
+
+**Key nuance — K and V have different sensitivities**:
+- **Keys** participate in dot products that determine attention scores. Small errors in K can flip which tokens receive attention, causing large output changes. Keys are more sensitive.
+- **Values** are combined via weighted summation. Errors in V are averaged out across multiple values, making them more tolerant. Values are less sensitive.
+
+Advanced schemes like KVQuant use mixed precision: INT8 for K, INT4 for V. This maximizes compression while minimizing quality impact.
+
+**Practical guidance**: FP8 KV cache quantization (supported by vLLM, SGLang, TRT-LLM) provides ~50% memory reduction with negligible quality loss on virtually all tasks. INT4 saves 75% memory but requires per-task benchmarking to verify acceptable quality. Always benchmark on your specific workload, not just perplexity.
+
+### Q: How does KV cache interact with batching? What limits batch size?
+
+Each sequence in a batch has its own independent KV cache. Total GPU memory splits into: model weights (fixed) + KV cache (scales with batch_size × seq_len) + activations (small).
+
+$$\text{max batch size} \approx \frac{\text{GPU memory} - \text{model weights} - \text{overhead}}{\text{KV cache per sequence}}$$
+
+For an 80GB A100 serving Llama 3.1 8B (FP16, ~16GB weights):
+- 4K max context: $(80 - 16 - 2) / 0.5 \approx 124$ concurrent sequences
+- 32K max context: $(80 - 16 - 2) / 4 \approx 15$ concurrent sequences
+- 128K max context: $(80 - 16 - 2) / 16 \approx 3$ concurrent sequences
+
+This is why **right-sizing max_seq_len** to your actual traffic distribution (not the model's theoretical maximum) is the single most impactful configuration decision. Setting max_seq_len to your P95 request length instead of the model maximum can increase batch size (and thus throughput) by 10-30x.
+
+**Continuous batching** (vLLM, SGLang) further improves utilization by dynamically adding/removing sequences from the batch as they start/finish, rather than waiting for all sequences in a batch to complete.
+
+### Q: What is speculative decoding and how does it relate to KV cache?
+
+Speculative decoding uses a small, fast **draft model** to propose multiple candidate tokens, then verifies them all at once with the large **target model** in a single forward pass. If the draft model proposes 5 tokens and 3 are accepted, you generate 3 tokens for the cost of 1 KV cache load (plus the cheap draft model overhead).
+
+**Relation to KV cache**: Since decode is memory-bandwidth-bound (dominated by KV cache loading), speculative decoding amortizes that loading cost across multiple tokens. It doesn't reduce KV cache memory, but reduces the number of times the cache must be loaded from HBM. If the acceptance rate is $\alpha$ and the draft length is $k$, the effective tokens per KV cache load is approximately $1/(1-\alpha)$ on average.
+
+**When it helps most**: Memory-bandwidth-bound scenarios (single-sequence generation, long contexts, large models). It helps less when the serving is already compute-bound (large batch sizes) because the draft verification adds compute.
+
+### Q: Compare the KV cache management strategies of vLLM, SGLang, and TensorRT-LLM.
+
+| Feature | vLLM | SGLang | TensorRT-LLM |
+|---------|------|--------|---------------|
+| **Core KV strategy** | PagedAttention with block manager | RadixAttention (radix tree of cached blocks) | Paged blocks with CUDA-optimized kernels |
+| **Prefix caching** | Hash-based block matching (opt-in) | Radix tree (automatic, any-depth matching) | Supported via KV cache reuse |
+| **Memory pressure** | Preempt (swap to CPU or recompute) | LRU eviction of radix tree branches | Request queuing |
+| **Beam search** | Copy-on-write block sharing | Fork/join on tree branches | Block-level sharing |
+| **KV quantization** | FP8, INT8 | FP8 | FP8 (native H100), INT8 |
+| **Best for** | General-purpose serving | Multi-turn chat, complex LLM programs | Maximum throughput on NVIDIA hardware |
+
+SGLang's radix tree approach is particularly elegant for multi-turn conversations — when a user sends a follow-up message, the KV cache from the entire previous conversation is automatically reused (it's already in the tree). vLLM requires explicit prefix caching configuration for this.
+
+### Q: How would you diagnose and fix KV cache-related performance problems in production?
+
+**Symptom: High Time-Per-Output-Token (TPOT)**
+- Diagnosis: Decode is memory-bandwidth-bound → KV cache loading is the bottleneck
+- Fixes: Enable KV cache quantization (FP8), use GQA models, reduce max_seq_len, increase batch size to improve arithmetic intensity
+
+**Symptom: Frequent request preemptions**
+- Diagnosis: KV cache memory is exhausted, sequences are being evicted
+- Fixes: Reduce max_seq_len, enable KV quantization, add more GPUs, use prefix caching to share memory
+
+**Symptom: High Time-To-First-Token (TTFT)**
+- Diagnosis: Prefill phase is too slow (long prompts, compute-bound)
+- Fixes: Enable chunked prefill (prevents blocking decode), use tensor parallelism to distribute prefill compute, enable prefix caching for shared prefixes
+
+**Symptom: Low GPU utilization during decode**
+- Diagnosis: Batch size too small (arithmetic intensity too low)
+- Fixes: Increase batch size (may require KV quantization to fit more sequences), use continuous batching, reduce max_seq_len to allow more concurrent sequences
+
+**Monitoring checklist**: KV cache utilization %, preemption rate, TTFT/TPOT distributions, cache hit rate (if prefix caching enabled), GPU memory breakdown (weights vs. KV cache vs. activations).
+
+### Q: What is chunked prefill and why does it matter for serving latency?
+
+When a long prompt (e.g., 10K tokens) arrives, the prefill phase can monopolize the GPU for seconds. During this time, all other sequences in the batch are blocked from their decode steps, causing latency spikes in their TPOT (Time Per Output Token).
+
+**Chunked prefill** breaks the long prompt into smaller chunks (e.g., 512 or 1024 tokens) and interleaves them with decode steps for other sequences:
+
+```
+Without chunked prefill:
+  Time: |──── 10K token prefill (2s) ────||decode|decode|...
+  Other requests: stuck waiting for 2 seconds
+
+With chunked prefill (chunk=1024):
+  Time: |chunk1|decode|chunk2|decode|...|chunk10|decode|decode|...
+  Other requests: get regular decode slots (~10ms gaps)
+```
+
+The total prefill time is slightly longer (overhead of splitting), but the P99 TPOT for concurrent requests drops dramatically. This is critical for production systems with SLA requirements on per-token latency.
+
+### Q: If you were designing a new LLM architecture, what would you do to minimize KV cache overhead?
+
+This is a system design question that tests understanding of the full stack:
+
+1. **Use GQA with few KV groups** (e.g., 8 groups for 32-64 query heads) — proven to maintain quality with 4-8x cache reduction
+2. **Reduce head dimension** if possible — smaller $d_\text{head}$ directly reduces cache per token, but may hurt representation quality
+3. **Use a hybrid attention pattern** — full attention for a few layers (for long-range dependencies) + sliding window for the rest (bounded cache). DeepSeek-V2 does this effectively
+4. **Support native FP8 KV cache** — design the attention mechanism to be numerically stable with FP8 inputs
+5. **Consider Multi-Head Latent Attention (MLA)** — compress K and V into a lower-dimensional latent before caching, as used in DeepSeek-V2. This reduces cache size by up to 93% compared to standard MHA while maintaining quality through learned up-projection during attention
+6. **Design for prefix sharing** — ensure the model's positional encoding scheme (e.g., RoPE) allows efficient KV cache reuse for shared prefixes
+7. **Consider linear attention variants** — mechanisms like RetNet or Mamba that replace the growing KV cache with a fixed-size recurrent state ($O(1)$ memory per step), at the cost of reduced attention expressiveness
+
 ## References
 
 1. Vaswani et al., "Attention Is All You Need" (2017) — The original transformer paper introducing the attention mechanism
