@@ -15,9 +15,15 @@ export function protectMathBlocks(content: string): {
     },
   );
 
-  // Then protect inline math ($...$)
+  // Then protect inline math ($...$).
+  // Rules (Pandoc-style) to avoid matching currency like "$5 and $10":
+  //   - opening `$` is not preceded by `\` or `$`
+  //   - opening `$` is not followed by whitespace or a digit
+  //   - closing `$` is not preceded by whitespace
+  //   - closing `$` is not followed by a digit
+  //   - content allows escaped `\$`
   protectedContent = protectedContent.replace(
-    /(?<!\$)\$([^$\n]+)\$(?!\$)/g,
+    /(?<![\\$])\$(?![\s\d])((?:[^$\n\\]|\\.)+?)(?<!\s)\$(?!\d)/g,
     (match: string) => {
       mathBlocks.push(match);
       return `<!--MATH_BLOCK_${mathBlocks.length - 1}-->`;
