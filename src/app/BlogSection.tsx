@@ -4,7 +4,6 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CollectionTag from "@/components/CollectionTag";
-import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 import { BlogPostMetadata, calculateContentReadTime } from "../lib/blog";
 import { getArticleImageUrl } from "../lib/articleImage";
 import { formatDateMedium } from "../lib/dateUtils";
@@ -487,14 +486,14 @@ export default function BlogSection() {
               >
                 <div className="grid lg:grid-cols-5 gap-0">
                   {/* Featured Image (60%) */}
-                  <div className="lg:col-span-3 relative h-80 lg:h-96 overflow-hidden">
+                  <div className="lg:col-span-3 relative w-full aspect-[672/366] overflow-hidden">
                     <Image
                       src={featuredArticle.image}
                       alt={`Cover image for ${featuredArticle.title}`}
                       fill
                       sizes="(max-width: 1024px) 100vw, 60vw"
-                      style={{ objectFit: "cover" }}
-                      className="transition-transform duration-700 group-hover:scale-110"
+                      style={{ objectFit: "cover", objectPosition: "center" }}
+                      className="transition-transform duration-700 group-hover:scale-105"
                       priority
                       unoptimized={featuredArticle.image.startsWith("/api/og")}
                     />
@@ -584,12 +583,6 @@ export default function BlogSection() {
                             ))}
                         </div>
                       )}
-
-                    {featuredArticle.aiGenerated && (
-                      <div className="mb-6">
-                        <AiGeneratedBadge variant="default" />
-                      </div>
-                    )}
 
                     <div
                       className="inline-flex items-center text-sm font-semibold transition-all duration-300 group-hover:gap-3"
@@ -772,12 +765,6 @@ export default function BlogSection() {
                               {tag}
                             </span>
                           ))}
-                        </div>
-                      )}
-
-                      {article.aiGenerated && (
-                        <div className="mb-4">
-                          <AiGeneratedBadge variant="compact" />
                         </div>
                       )}
 

@@ -1,61 +1,123 @@
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
+import type React from "react";
 
 export const runtime = "edge";
 
-// Category-based themes with light and dark variants
-const CATEGORY_THEMES: Record<
-  string,
-  {
-    dark: { bg: string; surface: string };
-    light: { bg: string; surface: string };
-    icon: string;
-    accent: string;
-  }
-> = {
-  "machine-learning": {
-    dark: { bg: "#0f172a", surface: "#1e293b" },
-    light: { bg: "#f0f9ff", surface: "#e0f2fe" },
-    icon: "ML",
-    accent: "#0ea5e9",
-  },
-  "paper-reading": {
-    dark: { bg: "#1a0a2e", surface: "#2d1b4e" },
-    light: { bg: "#faf5ff", surface: "#f3e8ff" },
-    icon: "PR",
-    accent: "#8b5cf6",
-  },
-  "software-development": {
-    dark: { bg: "#0a1628", surface: "#1a3a2e" },
-    light: { bg: "#f0fdf4", surface: "#dcfce7" },
-    icon: "SD",
-    accent: "#10b981",
-  },
-  notes: {
-    dark: { bg: "#1c1917", surface: "#292524" },
-    light: { bg: "#fefce8", surface: "#fef9c3" },
-    icon: "NT",
-    accent: "#f59e0b",
-  },
-  trading: {
-    dark: { bg: "#0c1220", surface: "#1e293b" },
-    light: { bg: "#fff7ed", surface: "#ffedd5" },
-    icon: "TR",
-    accent: "#f97316",
-  },
-  mlops: {
-    dark: { bg: "#0f1729", surface: "#1e3a5f" },
-    light: { bg: "#ecfeff", surface: "#cffafe" },
-    icon: "MO",
-    accent: "#06b6d4",
-  },
-  default: {
-    dark: { bg: "#0f0f1a", surface: "#1e1e2e" },
-    light: { bg: "#f8fafc", surface: "#e2e8f0" },
-    icon: "HT",
-    accent: "#6366f1",
-  },
+// Category → short icon label. Accent color now comes from the per-post palette.
+const CATEGORY_ICONS: Record<string, string> = {
+  "machine-learning": "ML",
+  "paper-reading": "PR",
+  "software-development": "SD",
+  notes: "NT",
+  trading: "TR",
+  mlops: "MO",
+  default: "HT",
 };
+
+// Diverse palette pool. Each post picks one deterministically via hash(title+category).
+// bg is kept dark-leaning so light text stays legible over generated shapes.
+const PALETTES: {
+  bg: string;
+  accents: [string, string, string];
+}[] = [
+  { bg: "#0f172a", accents: ["#0ea5e9", "#38bdf8", "#22d3ee"] }, // deep navy / sky
+  { bg: "#1a0a2e", accents: ["#8b5cf6", "#a78bfa", "#c084fc"] }, // plum / violet
+  { bg: "#0a1f16", accents: ["#10b981", "#34d399", "#6ee7b7"] }, // forest / emerald
+  { bg: "#1c0a0a", accents: ["#f97316", "#fb923c", "#f59e0b"] }, // ember / amber
+  { bg: "#0c1220", accents: ["#06b6d4", "#22d3ee", "#67e8f9"] }, // teal / cyan
+  { bg: "#1f0a1a", accents: ["#ec4899", "#f472b6", "#fb7185"] }, // rose / pink
+  { bg: "#0f0f1a", accents: ["#6366f1", "#818cf8", "#a78bfa"] }, // indigo
+  { bg: "#0b1a1f", accents: ["#14b8a6", "#2dd4bf", "#5eead4"] }, // deep teal
+  { bg: "#1a1410", accents: ["#eab308", "#facc15", "#fde047"] }, // amber night
+  { bg: "#0a1a0f", accents: ["#22c55e", "#4ade80", "#86efac"] }, // jungle green
+  { bg: "#120a1f", accents: ["#d946ef", "#e879f9", "#c084fc"] }, // magenta / fuchsia
+  { bg: "#0f1a2a", accents: ["#3b82f6", "#60a5fa", "#93c5fd"] }, // cobalt blue
+  { bg: "#1a0f0a", accents: ["#ef4444", "#f87171", "#fb7185"] }, // crimson ember
+  { bg: "#0a0f1a", accents: ["#a78bfa", "#c4b5fd", "#ddd6fe"] }, // midnight lavender
+];
+
+function hashString(s: string): number {
+  let h = 0x811c9dc5; // FNV-1a 32-bit offset basis
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return h >>> 0;
+}
+
+function mulberry32(seed: number): () => number {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+type Shape = {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+  rotate: number;
+  radius: number;
+  color: string;
+  opacity: number;
+  outline: boolean;
+};
+
+function generateShapes(
+  rng: () => number,
+  accents: [string, string, string],
+  width: number,
+  height: number,
+): Shape[] {
+  const count = 6 + Math.floor(rng() * 4); // 6–9 shapes
+  const shapes: Shape[] = [];
+  for (let i = 0; i < count; i++) {
+    const kind = rng();
+    let w: number;
+    let h: number;
+    let radius: number;
+    if (kind < 0.35) {
+      const d = Math.round(80 + rng() * 240);
+      w = d;
+      h = d;
+      radius = Math.round(d / 2);
+    } else if (kind < 0.6) {
+      const d = Math.round(70 + rng() * 180);
+      w = d;
+      h = d;
+      radius = Math.round(14 + rng() * 28);
+    } else if (kind < 0.85) {
+      w = Math.round(120 + rng() * 280);
+      h = Math.round(8 + rng() * 22);
+      radius = Math.round(h / 2);
+    } else {
+      w = Math.round(40 + rng() * 80);
+      h = Math.round(120 + rng() * 220);
+      radius = Math.round(10 + rng() * 20);
+    }
+    const left = Math.round(-w * 0.3 + rng() * (width + w * 0.6 - w));
+    const top = Math.round(-h * 0.3 + rng() * (height + h * 0.6 - h));
+    const color = accents[Math.floor(rng() * accents.length)];
+    shapes.push({
+      left,
+      top,
+      width: w,
+      height: h,
+      rotate: Math.round(rng() * 360),
+      radius,
+      color,
+      opacity: Math.round((0.28 + rng() * 0.32) * 100) / 100,
+      outline: rng() < 0.35,
+    });
+  }
+  return shapes;
+}
 
 export async function GET(request: NextRequest) {
   try {
@@ -64,14 +126,21 @@ export async function GET(request: NextRequest) {
     const category = searchParams.get("category") || "";
     const subcategory = searchParams.get("subcategory") || "";
     const type = searchParams.get("type") || "default";
-    const themeMode = searchParams.get("theme") === "light" ? "light" : "dark";
 
     // Article thumbnail mode
     if (type === "article") {
-      const catTheme =
-        CATEGORY_THEMES[category] || CATEGORY_THEMES["default"];
-      const colors = catTheme[themeMode];
-      const isDark = themeMode === "dark";
+      const WIDTH = 672;
+      const HEIGHT = 366;
+
+      // Deterministic seed from title+category → same post always same image,
+      // different posts look distinct (palette + shape layout).
+      const seed = hashString(`${title}::${category}::${subcategory}`);
+      const rng = mulberry32(seed);
+
+      const palette = PALETTES[seed % PALETTES.length];
+      const icon = CATEGORY_ICONS[category] || CATEGORY_ICONS["default"];
+      const primaryAccent = palette.accents[0];
+      const shapes = generateShapes(rng, palette.accents, WIDTH, HEIGHT);
 
       // Truncate title for display
       const displayTitle =
@@ -85,11 +154,9 @@ export async function GET(request: NextRequest) {
             ? "34px"
             : "40px";
 
-      const textColor = isDark ? "#f1f5f9" : "#0f172a";
-      const textMuted = isDark ? "#94a3b8" : "#64748b";
-      const gridColor = isDark
-        ? "rgba(255,255,255,0.04)"
-        : "rgba(0,0,0,0.04)";
+      const textColor = "#f1f5f9";
+      const textMuted = "#94a3b8";
+      const gridColor = "rgba(255,255,255,0.04)";
 
       return new ImageResponse(
         (
@@ -100,7 +167,7 @@ export async function GET(request: NextRequest) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              backgroundColor: colors.bg,
+              backgroundColor: palette.bg,
               padding: "0",
               fontFamily: "system-ui, -apple-system, sans-serif",
               overflow: "hidden",
@@ -121,30 +188,34 @@ export async function GET(request: NextRequest) {
               }}
             />
 
-            {/* Accent glow - top right */}
-            <div
-              style={{
+            {/* Randomized shape layer */}
+            {shapes.map((s, i) => {
+              const base: React.CSSProperties = {
                 position: "absolute",
-                top: "-80px",
-                right: "-80px",
-                width: "350px",
-                height: "350px",
-                borderRadius: "50%",
-                background: `radial-gradient(circle, ${catTheme.accent}${isDark ? "18" : "20"} 0%, transparent 70%)`,
+                left: s.left,
+                top: s.top,
+                width: s.width,
+                height: s.height,
+                borderRadius: s.radius,
+                opacity: s.opacity,
+                transform: `rotate(${s.rotate}deg)`,
                 display: "flex",
-              }}
-            />
+              };
+              const style: React.CSSProperties = s.outline
+                ? { ...base, border: `2px solid ${s.color}` }
+                : { ...base, backgroundColor: s.color };
+              return <div key={i} style={style} />;
+            })}
 
-            {/* Accent glow - bottom left */}
+            {/* Contrast scrim so text stays legible over shapes */}
             <div
               style={{
                 position: "absolute",
-                bottom: "-60px",
-                left: "-60px",
-                width: "250px",
-                height: "250px",
-                borderRadius: "50%",
-                background: `radial-gradient(circle, ${catTheme.accent}${isDark ? "10" : "15"} 0%, transparent 70%)`,
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: `linear-gradient(180deg, ${palette.bg}aa 0%, ${palette.bg}00 30%, ${palette.bg}00 70%, ${palette.bg}aa 100%)`,
                 display: "flex",
               }}
             />
@@ -166,22 +237,22 @@ export async function GET(request: NextRequest) {
                   width: "44px",
                   height: "44px",
                   borderRadius: "12px",
-                  backgroundColor: `${catTheme.accent}${isDark ? "20" : "18"}`,
-                  border: `1.5px solid ${catTheme.accent}${isDark ? "40" : "30"}`,
-                  color: catTheme.accent,
+                  backgroundColor: `${primaryAccent}20`,
+                  border: `1.5px solid ${primaryAccent}40`,
+                  color: primaryAccent,
                   fontSize: "16px",
                   fontWeight: 700,
                   letterSpacing: "1px",
                 }}
               >
-                {catTheme.icon}
+                {icon}
               </div>
               {subcategory && (
                 <div
                   style={{
                     display: "flex",
                     fontSize: "14px",
-                    color: catTheme.accent,
+                    color: primaryAccent,
                     letterSpacing: "2px",
                     textTransform: "uppercase",
                     fontWeight: 600,
@@ -223,7 +294,7 @@ export async function GET(request: NextRequest) {
                   width: "60px",
                   height: "3px",
                   borderRadius: "2px",
-                  backgroundColor: catTheme.accent,
+                  backgroundColor: primaryAccent,
                 }}
               />
             </div>
@@ -252,7 +323,7 @@ export async function GET(request: NextRequest) {
                     width: "30px",
                     height: "30px",
                     borderRadius: "8px",
-                    background: `linear-gradient(135deg, ${catTheme.accent}, ${catTheme.accent}88)`,
+                    background: `linear-gradient(135deg, ${primaryAccent}, ${palette.accents[1]})`,
                     color: "#fff",
                     fontSize: "13px",
                     fontWeight: 700,
@@ -279,7 +350,7 @@ export async function GET(request: NextRequest) {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      backgroundColor: catTheme.accent,
+                      backgroundColor: primaryAccent,
                       opacity,
                       display: "flex",
                     }}
@@ -290,8 +361,8 @@ export async function GET(request: NextRequest) {
           </div>
         ),
         {
-          width: 672,
-          height: 366,
+          width: WIDTH,
+          height: HEIGHT,
           headers: {
             "Cache-Control":
               "public, max-age=31536000, s-maxage=31536000, immutable",

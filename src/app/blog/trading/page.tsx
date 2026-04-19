@@ -6,7 +6,6 @@ import Image from "next/image";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import CollectionTag from "@/components/CollectionTag";
-import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import { getArticleImageUrl } from "@/lib/articleImage";
@@ -224,9 +223,9 @@ export default function TradingBlogPage() {
                         borderColor: "var(--card-border)",
                       }}
                     >
-                      <div className="grid md:grid-cols-5 gap-0 md:h-[32rem]">
+                      <div className="grid md:grid-cols-5 gap-0">
                         {/* Left: Featured Image (60%) */}
-                        <div className="md:col-span-3 relative h-80 md:h-full">
+                        <div className="md:col-span-3 relative w-full aspect-[672/366]">
                           <Image
                             src={getArticleImageUrl(featuredArticle)}
                             alt={featuredArticle.title}
@@ -281,12 +280,6 @@ export default function TradingBlogPage() {
                           >
                             {featuredArticle.excerpt}
                           </p>
-
-                          {featuredArticle.aiGenerated && (
-                            <div className="mb-4">
-                              <AiGeneratedBadge variant="default" />
-                            </div>
-                          )}
 
                           <div
                             className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
@@ -364,12 +357,6 @@ export default function TradingBlogPage() {
                               >
                                 {article.title}
                               </h4>
-
-                              {article.aiGenerated && (
-                                <div className="mb-2">
-                                  <AiGeneratedBadge variant="compact" />
-                                </div>
-                              )}
 
                               <div
                                 className="text-xs flex items-center gap-2"
@@ -474,12 +461,6 @@ export default function TradingBlogPage() {
                             >
                               {article.title}
                             </h3>
-
-                            {article.aiGenerated && (
-                              <div className="mb-3">
-                                <AiGeneratedBadge variant="default" />
-                              </div>
-                            )}
 
                             <div
                               className="text-sm flex items-center gap-3 mb-4"

@@ -19,10 +19,12 @@ export function getArticleImageUrl(article: {
     return article.image;
   }
 
-  // Generate OG thumbnail URL
+  // Generate OG thumbnail URL. `v` is a cache-busting version bumped when
+  // the generator algorithm changes (palette pool / shape layout).
   const params = new URLSearchParams({
     type: "article",
     title: article.title,
+    v: "2",
   });
 
   if (article.category) params.set("category", article.category);

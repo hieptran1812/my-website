@@ -270,9 +270,9 @@ export default function BlogPage() {
                       borderColor: "var(--card-border)",
                     }}
                   >
-                    <div className="grid md:grid-cols-5 gap-0 md:h-[32rem]">
+                    <div className="grid md:grid-cols-5 gap-0">
                       {/* Left: Featured Image (60%) */}
-                      <div className="md:col-span-3 relative h-80 md:h-full">
+                      <div className="md:col-span-3 relative w-full aspect-[672/366]">
                         <Image
                           src={getArticleImageUrl(featuredArticle)}
                           alt={featuredArticle.title}

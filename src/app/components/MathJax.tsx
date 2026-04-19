@@ -81,14 +81,18 @@ export default function MathJax({
         );
 
         // Process inline math ($...$).
-        // Pandoc-style rules to avoid matching currency like "$5 and $10":
+        // Rules to avoid matching currency like "$5 and $10" while still
+        // catching legitimate math that starts with a digit (e.g.
+        // "$1 / \text{dtype\_bytes}$" or "$320 \text{ KB}$"):
         // - opening `$` not preceded by `\` or `$`
-        // - opening `$` not followed by whitespace or a digit
+        // - opening `$` not followed by whitespace
         // - closing `$` not preceded by whitespace
-        // - closing `$` not followed by a digit
+        // - closing `$` not followed by alphanumeric
+        // - if content starts with a digit, it must also contain a LaTeX-ish
+        //   character (\, {, }, ^, _) — distinguishes math from currency
         // - content allows escaped `\$`
         processedContent = processedContent.replace(
-          /(?<![\\$])\$(?![\s\d])((?:[^$\n\\]|\\.)+?)(?<!\s)\$(?!\d)/g,
+          /(?<![\\$])\$(?!\s)(?:(?=\d)(?=[^$\n]*[\\{}^_])|(?=\D))((?:[^$\n\\]|\\.)+?)(?<!\s)\$(?![A-Za-z0-9])/g,
           (match, latex) => {
             hasChanges = true;
             try {

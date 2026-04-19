@@ -8,7 +8,6 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
-import AiGeneratedBadge from "@/components/AiGeneratedBadge";
 import { getArticleImageUrl } from "@/lib/articleImage";
 import SubcategoryFilter from "@/components/SubcategoryFilter";
 import BlogSearchBar from "@/components/BlogSearchBar";
@@ -232,9 +231,9 @@ export default function MachineLearningBlogPage() {
                       borderColor: "var(--card-border)",
                     }}
                   >
-                    <div className="grid md:grid-cols-5 gap-0 md:h-[32rem]">
+                    <div className="grid md:grid-cols-5 gap-0">
                       {/* Left: Featured Image (60%) */}
-                      <div className="md:col-span-3 relative h-80 md:h-full">
+                      <div className="md:col-span-3 relative w-full aspect-[672/366]">
                         <Image
                           src={getArticleImageUrl(featuredArticle)}
                           alt={featuredArticle.title}
@@ -291,12 +290,6 @@ export default function MachineLearningBlogPage() {
                         >
                           {featuredArticle.excerpt}
                         </p>
-
-                        {featuredArticle.aiGenerated && (
-                          <div className="mb-4">
-                            <AiGeneratedBadge variant="default" />
-                          </div>
-                        )}
 
                         <Link
                           href={`/blog/${featuredArticle.slug}`}
@@ -387,12 +380,6 @@ export default function MachineLearningBlogPage() {
                                     {tag}
                                   </span>
                                 ))}
-                              </div>
-                            )}
-
-                            {article.aiGenerated && (
-                              <div className="mb-2">
-                                <AiGeneratedBadge variant="compact" />
                               </div>
                             )}
 
@@ -513,12 +500,6 @@ export default function MachineLearningBlogPage() {
                                     {tag}
                                   </span>
                                 ))}
-                              </div>
-                            )}
-
-                            {article.aiGenerated && (
-                              <div className="mb-3">
-                                <AiGeneratedBadge variant="default" />
                               </div>
                             )}
 

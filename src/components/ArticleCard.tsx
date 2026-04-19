@@ -5,7 +5,6 @@ import { Article } from "@/lib/blog";
 import { getArticleImageUrl, isGeneratedImage } from "@/lib/articleImage";
 import FadeInWrapper from "./FadeInWrapper";
 import CollectionTag from "./CollectionTag";
-import AiGeneratedBadge from "./AiGeneratedBadge";
 import { TagList } from "./TagBadge";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 
@@ -133,12 +132,6 @@ export default function ArticleCard({
                     variant="default"
                     clickable={true}
                   />
-                </div>
-              )}
-
-              {article.aiGenerated && (
-                <div className="mb-4">
-                  <AiGeneratedBadge variant="default" />
                 </div>
               )}
 
@@ -271,12 +264,6 @@ export default function ArticleCard({
                 </div>
               )}
 
-              {article.aiGenerated && (
-                <div className="mb-3">
-                  <AiGeneratedBadge variant="compact" />
-                </div>
-              )}
-
               {article.excerpt && (
               <p
                 className="text-sm mb-3 leading-relaxed line-clamp-2"
@@ -389,12 +376,6 @@ export default function ArticleCard({
                   variant="compact"
                   clickable={true}
                 />
-              </div>
-            )}
-
-            {article.aiGenerated && (
-              <div className="mb-3">
-                <AiGeneratedBadge variant="default" />
               </div>
             )}
 
