@@ -235,7 +235,12 @@ export default function BlogHighlighter({ slug, containerRef }: Props) {
         createdAt: now,
         updatedAt: now,
       };
-      setHighlights((prev) => [...prev, h]);
+      // Prevent overlapping highlights (stacked colors). Replace any existing
+      // highlights whose range intersects the new one — one color per span.
+      setHighlights((prev) => [
+        ...prev.filter((p) => p.end <= h.start || p.start >= h.end),
+        h,
+      ]);
       window.getSelection()?.removeAllRanges();
       setToolbar(null);
     },
@@ -263,7 +268,10 @@ export default function BlogHighlighter({ slug, containerRef }: Props) {
       createdAt: now,
       updatedAt: now,
     };
-    setHighlights((prev) => [...prev, h]);
+    setHighlights((prev) => [
+      ...prev.filter((p) => p.end <= h.start || p.start >= h.end),
+      h,
+    ]);
     window.getSelection()?.removeAllRanges();
     const rect = toolbar.range.getBoundingClientRect();
     const POP_W = 360;
