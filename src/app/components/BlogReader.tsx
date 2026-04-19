@@ -16,6 +16,7 @@ import type {
 } from "../../components/utils/SpeechReader";
 import { formatDate } from "../../lib/dateUtils";
 import BlogGraphSidebar from "./BlogGraphSidebar";
+import BlogHighlighter from "./highlights/BlogHighlighter";
 
 interface TocItem {
   id: string;
@@ -74,6 +75,7 @@ export default function BlogReader({
   const [lightboxAlt, setLightboxAlt] = useState<string>("");
 
   const contentRef = useRef<HTMLDivElement>(null);
+  const articleRef = useRef<HTMLElement | null>(null);
   const speechReaderRef = useRef<SpeechReader | null>(null);
 
   // Memoize reading-mode colors to avoid recomputing on every render
@@ -940,6 +942,7 @@ export default function BlogReader({
 
             {/* Article Content */}
             <article
+              ref={articleRef}
               className="prose prose-xl max-w-none mx-auto mb-16"
               style={{ color: readingColors.textPrimary }}
             >
@@ -954,6 +957,10 @@ export default function BlogReader({
           </div>
         </div>
       </div>
+
+      {postSlug && (
+        <BlogHighlighter slug={postSlug} containerRef={articleRef} />
+      )}
 
       {/* Image Lightbox Modal */}
       {lightboxImage && (
