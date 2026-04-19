@@ -137,9 +137,11 @@
 }
 
 .blog-content table {
-  @apply w-full mb-6;
+  @apply mb-6 mx-auto;
   border-collapse: collapse;
   display: block;
+  width: fit-content;
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
