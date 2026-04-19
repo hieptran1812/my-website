@@ -16,14 +16,18 @@ export function protectMathBlocks(content: string): {
   );
 
   // Then protect inline math ($...$).
-  // Rules (Pandoc-style) to avoid matching currency like "$5 and $10":
+  // Rules to avoid matching currency like "$5 and $10" while still catching
+  // legitimate math that starts with a digit (e.g. "$320 \text{ KB}$"):
   //   - opening `$` is not preceded by `\` or `$`
-  //   - opening `$` is not followed by whitespace or a digit
+  //   - opening `$` is not followed by whitespace
   //   - closing `$` is not preceded by whitespace
-  //   - closing `$` is not followed by a digit
+  //   - closing `$` is not followed by an alphanumeric (avoids "$5 and $10")
+  //   - if content starts with a digit, it must also contain a LaTeX-ish
+  //     character (\, {, }, ^, _) to distinguish math like "$320 \text{KB}$"
+  //     from currency like "$5 and $10"
   //   - content allows escaped `\$`
   protectedContent = protectedContent.replace(
-    /(?<![\\$])\$(?![\s\d])((?:[^$\n\\]|\\.)+?)(?<!\s)\$(?!\d)/g,
+    /(?<![\\$])\$(?!\s)(?:(?=\d)(?=[^$\n]*[\\{}^_])|(?=\D))((?:[^$\n\\]|\\.)+?)(?<!\s)\$(?![A-Za-z0-9])/g,
     (match: string) => {
       mathBlocks.push(match);
       return `<!--MATH_BLOCK_${mathBlocks.length - 1}-->`;
