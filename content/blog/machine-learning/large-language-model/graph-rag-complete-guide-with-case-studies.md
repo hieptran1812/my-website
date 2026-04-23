@@ -100,6 +100,8 @@ Production systems often combine both: a fixed schema for the "important" types,
 
 ## Architecture: End-to-End Graph RAG
 
+![End-to-end Graph RAG: docs → chunk → LLM extract entities + relations → canonicalize → knowledge graph → community detection + hierarchical summaries; query runs hybrid local + global retrieval before LLM generation](/imgs/blogs/graph-rag-01-pipeline.png)
+
 A full Graph RAG system has two pipelines — **indexing** (offline, expensive) and **query** (online) — plus a **maintenance** loop.
 
 ### The indexing pipeline
@@ -232,6 +234,8 @@ Canonicalization must happen for **relations too**. `acquired`, `bought`, `purch
 
 ## Stage 4 — Community Detection and Hierarchical Summarization
 
+![Community detection + hierarchical summaries: Leiden clusters the entity graph, each community gets an LLM-written summary, summaries roll up into meta-communities — the engine of global "what's this corpus about?" queries](/imgs/blogs/graph-rag-02-communities.png)
+
 This is the insight that made Microsoft's GraphRAG paper go viral. Once you have a graph, run a **community detection algorithm** (Leiden, Louvain, label propagation) to cluster densely-connected nodes. Then — and this is the key move — **summarize each community with an LLM**.
 
 ```
@@ -282,6 +286,8 @@ Some new tools (Neo4j + vector index, Weaviate + graph module, Kùzu) fuse the t
 All four are queried at different stages.
 
 ## Stage 6 — Retrieval Strategies
+
+![Retrieval: classify query as fact lookup (local search → seed entities → 1-2 hop subgraph + chunks) or global synthesis (map/reduce over community summaries), then feed selected evidence into the LLM](/imgs/blogs/graph-rag-03-retrieval.png)
 
 This is where Graph RAG systems diverge most. There are three canonical retrieval modes.
 

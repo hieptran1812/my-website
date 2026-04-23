@@ -114,6 +114,8 @@ If you don't know yet, plan for a spectrum:
 
 ## Part 3: From Tokens/Sec to Concurrent Users — The Formulas
 
+![Capacity formula chain: peak QPS + avg in/out tokens → concurrent users ≈ QPS · response time → throughput need → GPU count; then check KV cache fits, else scale out or quantize](/imgs/blogs/capacity-01-formula.png)
+
 ### Formula 1: Throughput → RPS
 
 If your GPU produces T tokens/sec of output, and each request averages O output tokens:
@@ -351,6 +353,8 @@ Assuming a typical balance of input and output:
 | Agent with many tool calls | 10,000 / 1,500 (per step × 5 steps) | ~$0.15 per task |
 
 ## Part 8: Self-Hosted vs API — The Break-Even Analysis
+
+![Self-host vs API decision: spiky/low volume → API; high and stable → check custom model / data isolation needs; otherwise compare M tokens/day against break-even](/imgs/blogs/capacity-02-selfhost-vs-api.png)
 
 The classic question: **at what volume does self-hosting become cheaper than API?**
 

@@ -27,6 +27,8 @@ This guide is the map of what to reach for when prompting isn't enough.
 
 ## The Landscape in One Picture
 
+![Fine-tuning landscape on two axes: what you update (Full FT vs PEFT — LoRA/DoRA, QLoRA, IA³/Prefix) × what you train on (SFT, preference opt with DPO/GRPO/PPO-RLHF, distillation)](/imgs/blogs/finetune-01-landscape.png)
+
 Fine-tuning techniques split along two independent axes:
 
 **Axis 1 — What do you update?**
@@ -45,6 +47,8 @@ A real project usually chains a couple of these: continued pretraining → SFT �
 Let's walk through them.
 
 ## Part 1: What You Update — Full Fine-Tuning vs. PEFT
+
+![LoRA vs QLoRA: LoRA freezes W and trains low-rank A,B (rank r) summed into output; QLoRA freezes W in 4-bit NF4 while LoRA A,B stay in bf16 — same math, much less GPU memory](/imgs/blogs/finetune-02-lora-qlora.png)
 
 ### Full Fine-Tuning: The Brute-Force Option
 
@@ -314,6 +318,8 @@ Sometimes you don't want to add behavior — you want to **remove** it. Techniqu
 This is harder than it sounds. Models often comply with the *letter* of the refusal training but not the spirit, and unlearning one thing often damages unrelated capabilities. Evaluate broadly.
 
 ## Part 4: A Recommended Pipeline for Most Projects
+
+![Recommended fine-tuning pipeline: Base → SFT + task eval → Preference (DPO/GRPO) + pairwise eval → Safety (red-team, refusals) → Deploy — tune LR 1e-5 to 2e-4, LoRA rank 8-64, batch + grad accum](/imgs/blogs/finetune-03-pipeline.png)
 
 Here's a pragmatic order of operations for building a fine-tuned LLM in 2026:
 

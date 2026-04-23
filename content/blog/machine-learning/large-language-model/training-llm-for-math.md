@@ -23,6 +23,8 @@ excerpt: "Mathematical reasoning is one of the hardest capabilities to teach LLM
 
 ## Why Math Is the Ultimate LLM Benchmark
 
+![End-to-end math LLM pipeline: data → SFT with CoT → reward model (PRM or ORM) → RL with verifier (GRPO/PPO) → evaluate on GSM8K/MATH/AIME → iterate](/imgs/blogs/math-01-stages.png)
+
 Mathematical reasoning is the frontier of language model capability. Unlike creative writing or summarization, math has a unique property: **verifiable correctness**. An answer is right or wrong — there's no subjective gray area. This makes it both the hardest domain to master and the easiest to evaluate.
 
 Consider the gap: GPT-4 scores ~92% on GSM8K (grade-school math), but drops to ~42% on MATH (competition-level problems). Smaller models fare far worse. Closing this gap is one of the most active areas in LLM research, and the techniques developed here — chain-of-thought reasoning, process reward models, reinforcement learning from verifiable rewards — are now bleeding into every other domain.
@@ -164,6 +166,8 @@ Let's build each of these — and learn what goes wrong at every stage.
 ---
 
 ## Stage 1: Data — The Foundation of Everything
+
+![Math data sources: web corpora (OpenWebMath/ProofPile), textbooks, synthetic (solver + LLM) — filter by difficulty and dedup, split into GSM8K/MATH/AIME/Lean buckets without contamination](/imgs/blogs/math-03-data.png)
 
 The quality of your math training data determines the ceiling of your model. No amount of clever training will overcome bad data. But "quality" in math data means something very specific, and getting it wrong is surprisingly easy.
 
@@ -1175,6 +1179,8 @@ Your model hits 80%+ on GSM8K after SFT. You celebrate. Then you test on MATH an
 ---
 
 ## Stage 3: Reward Modeling — Teaching the Model to Self-Evaluate
+
+![PRM vs ORM: process reward scores each CoT step (denser signal, harder to label) while outcome reward scores only the final answer (cheap, verifier-friendly)](/imgs/blogs/math-02-prm-orm.png)
 
 After SFT, the model can generate step-by-step solutions. But not all generated solutions are correct. **Reward modeling** teaches a model (or heuristic) to evaluate the quality of these solutions.
 

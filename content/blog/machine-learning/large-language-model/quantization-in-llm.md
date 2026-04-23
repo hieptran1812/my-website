@@ -13,6 +13,8 @@ excerpt: "Quantization is the most practical technique for making large language
 
 ## Why Quantization Matters
 
+![Taxonomy of LLM quantization: PTQ (weight-only GPTQ/AWQ/GGUF/bitsandbytes, weight+activation SmoothQuant/FP8) and QAT (QLoRA, full QAT)](/imgs/blogs/quantization-in-llm-01-taxonomy.png)
+
 Here's the reality of large language models in 2025-2026: a 70B-parameter model stored in standard FP16 precision requires **140 GB of memory** just to load the weights. That's more than two A100 80GB GPUs. And that's before you account for KV cache, activations, and the framework overhead.
 
 Most teams don't have that kind of hardware budget. Most developers don't have access to a multi-GPU cluster. Yet these large models are dramatically better than their smaller counterparts for reasoning, instruction following, and complex tasks.
@@ -62,6 +64,8 @@ But if you pick 16 random colors, the painting looks terrible.
 The "choosing colors wisely" part is what separates good quantization methods from bad ones.
 
 ## The Math: How Quantization Works
+
+![Linear quantization flow: FP16 weights to INT4/INT8 via scale and zero-point, with per-tensor / per-channel / per-group granularity](/imgs/blogs/quantization-in-llm-02-math.png)
 
 ### Linear Quantization (The Basic Building Block)
 
@@ -189,6 +193,8 @@ Backward pass:
 QAT is used less frequently for LLMs because of the cost, but notable examples exist (like BitNet and some Llama variants).
 
 ## Major Quantization Methods for LLMs
+
+![Major LLM quantization methods compared: GPTQ (Hessian-based), AWQ (activation-aware scaling), GGUF k-quants (CPU), bitsandbytes (NF4 + QLoRA)](/imgs/blogs/quantization-in-llm-03-methods.png)
 
 ### GPTQ: The Gold Standard for GPU Inference
 
@@ -461,6 +467,8 @@ model = LLM(
 ```
 
 ## Practical Decision Framework
+
+![End-to-end quantization pipeline: FP16 model to calibration to method selection (GPTQ/AWQ/GGUF/bitsandbytes) to evaluation loop and deploy](/imgs/blogs/quantization-in-llm-04-pipeline.png)
 
 Here's the decision tree I use when deploying quantized models:
 

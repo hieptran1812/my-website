@@ -23,6 +23,8 @@ excerpt: "A deep dive into building production-grade RAG pipelines for financial
 
 ## Introduction
 
+![Financial-document RAG pipeline: PDF ingest -> element extract -> multi-vector index -> hybrid retrieve -> structured context](/imgs/blogs/advanced-rag-financial-documents-diagram.png)
+
 Financial documents are among the hardest document types to process with RAG. Annual reports (10-K/10-Q filings), earnings call transcripts, prospectuses, balance sheets, and research reports are packed with:
 
 - **Sophisticated tables** — nested headers, merged cells, multi-level row hierarchies, footnotes

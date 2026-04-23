@@ -50,6 +50,8 @@ The article covers eleven sections. The first three are foundation and should no
 
 ## 1. The Fundamental Trade-off: Prefill vs Decode
 
+![Prefill (compute-bound, wants TFLOPS) vs decode (memory-bound, wants HBM BW) — A100, H100, B200 scale both axes, but ratios matter for your workload mix](/imgs/blogs/gpu-01-tradeoff.png)
+
 Every LLM inference request does two completely different kinds of work. Understanding their trade-off is the foundation of everything else because it is the reason a "good inference GPU" is not the same as a "good training GPU" and not even the same across inference workloads.
 
 ### 1.1 What prefill actually does
@@ -248,6 +250,8 @@ Worked example: Llama-3-70B FP8 weights, FP8 KV, batch = 32, average context 4k 
 This fits one H200 (141 GB) with room to spare, but needs TP=2 on H100 (2×80=160 GB). If you push context to 16k average, KV becomes `160 KB × 16000 × 32 = 82 GB`, subtotal jumps to 158 GB, and now H200 barely fits (tight), while 2×H100 still has room (160 GB total and 15% headroom would need 182 GB — you would need TP=3 which is awkward, or 2×H200). This is how small-looking changes (4k to 16k average context) force substantial hardware changes.
 
 ## 3. The Iron Triangle: Latency, Throughput, Concurrency
+
+![The iron triangle: latency, throughput, concurrency — pushing batch helps throughput but hurts latency, more concurrency grows KV and hurts latency; pick two at full strength](/imgs/blogs/gpu-02-iron-triangle.png)
 
 The most important trade-off in serving, because it determines both capacity planning and SLO compliance, is the three-way tension between per-user latency, aggregate throughput, and concurrency.
 
@@ -631,6 +635,8 @@ Putting the deep-dives together into a concise map:
 | High-density edge | L4 | L40S | Power and cost per unit matter most |
 
 ## 7. Decision Framework, with Trade-offs Explicit
+
+![GPU decision tree: branch on model size (7-13B → L40S/A10G/A100-40; 30-70B → 1-2× A100/H100-80; 100B+ → 4-8× H100/H200 or B200), then refine on latency SLO](/imgs/blogs/gpu-03-decision.png)
 
 A practical decision process, from workload analysis to deployment. Each step names the trade-off it resolves.
 

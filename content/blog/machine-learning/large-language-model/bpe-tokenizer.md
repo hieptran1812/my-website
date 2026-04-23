@@ -43,6 +43,8 @@ Each approach has a fundamental trade-off between **vocabulary size** and **sequ
 
 ## Why BPE? The Goldilocks Problem
 
+![Tokenization tradeoffs: character-level (too many tokens, no semantics) vs word-level (huge vocab, OOV) — BPE subword lands in between with fixed vocab, no OOV, and compositional rare words](/imgs/blogs/bpe-01-why.png)
+
 ### The Spectrum of Tokenization
 
 Imagine you're designing a writing system for a new language. You have two extreme choices:
@@ -120,6 +122,8 @@ BPE's subword splits aren't random — they capture **morphological structure**:
 The model effectively learns that "un-" means negation, "-ing" means ongoing action, etc. This compositional understanding means BPE lets the model generalize: if it knows "happy" and "un-", it can understand "unhappy" even if that exact combination was rare in training.
 
 ## How BPE Works
+
+![BPE training loop: pre-tokenize, initialize vocab with bytes/chars, count adjacent pair frequencies, pick most frequent pair, add merge rule — repeat until vocab size reached](/imgs/blogs/bpe-02-training.png)
 
 ### The Core Idea
 
@@ -506,6 +510,8 @@ Why? Because BPE's merge rules are learned from data, and most training corpora 
 This is why newer models like Llama 3 significantly **increased vocabulary size** (32K → 128K tokens) — larger vocabularies allow more merges for more languages, improving efficiency and fairness across languages.
 
 ## Modern BPE Variants
+
+![Tokenizer family: byte-level BPE (GPT-2/Llama/Mistral) handles any byte with no OOV; SentencePiece Unigram (T5) trains by likelihood; WordPiece (BERT) marks continuations with ##](/imgs/blogs/bpe-03-variants.png)
 
 ### 1. BPE (Original - GPT-2, GPT-3, GPT-4)
 

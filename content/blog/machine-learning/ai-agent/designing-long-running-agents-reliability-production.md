@@ -25,6 +25,8 @@ excerpt: "An agent that works in a demo is not an agent that works on your worst
 
 ## What This Article Covers
 
+![Agent reliability stack: action space, tool contracts, durable execution, error recovery, HITL, evaluation, observability](/imgs/blogs/designing-long-running-agents-reliability-production-diagram.png)
+
 The [first article](/blog/machine-learning/ai-agent/designing-long-running-agents-architecture-foundations) covered architecture — decomposition, planning patterns, state, sub-agents, checkpointing. That's how you shape a long-running agent.
 
 This article covers **making that agent survive real life**:

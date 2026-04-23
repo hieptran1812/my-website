@@ -52,6 +52,8 @@ But there's a fundamental constraint: autoregressive generation is **sequential*
 
 ## The Big Idea
 
+![Speculative decoding flow: small draft model proposes γ tokens, target model verifies in one parallel forward pass, accepted prefix is emitted (+1 bonus) or rejected tokens are resampled from corrected distribution](/imgs/blogs/spec-dec-01-flow.png)
+
 Speculative decoding works in three steps:
 
 1. **Draft**: A fast, cheap model (the "draft model") quickly generates $K$ candidate tokens
@@ -303,6 +305,8 @@ Result: "Paris , a" → 3 tokens from 1 target forward pass!
 
 ## Draft Model Strategies
 
+![Draft model strategies: separate small LM, self-speculation (skip layers), Medusa heads, EAGLE feature-level autoregression, n-gram/lookup — with training-cost tradeoffs](/imgs/blogs/spec-dec-02-drafts.png)
+
 The choice of draft model is crucial. There are several approaches, each with different trade-offs:
 
 ### 1. Independent Small Model
@@ -425,6 +429,8 @@ Instead of a draft model, use **n-gram patterns** from the model's own generatio
 
 ## Tree-Based Speculation
 
+![Tree speculation: draft proposes a tree of candidate continuations, target verifies all branches in one forward with a causal tree mask, dramatically widening accepted paths](/imgs/blogs/spec-dec-03-tree.png)
+
 A powerful extension: instead of generating a single chain of $K$ draft tokens, generate a **tree** of candidates exploring multiple possible continuations.
 
 ### Why Trees?
@@ -486,6 +492,8 @@ The tree structure should be chosen to maximize expected accepted tokens per ver
 Medusa and EAGLE-2 learn optimal tree structures by profiling the draft model's accuracy at different positions.
 
 ## The Speedup Formula
+
+![Speedup formula with acceptance rate α, draft length γ, and draft/target cost ratio c — typically 2-3× on natural text, best at low QPS and latency-sensitive serving, worst at already-compute-bound large-batch](/imgs/blogs/spec-dec-04-speedup.png)
 
 The theoretical speedup of speculative decoding depends on several factors:
 

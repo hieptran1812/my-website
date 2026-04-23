@@ -33,6 +33,8 @@ In practice, a **modest embedding model plus a good reranker usually beats a gre
 
 ## What is a Reranker?
 
+![Role of a reranker in retrieval: fast bi-encoder fetches top-K ≈ 100 (maximizes recall); cross-encoder reranker scores query + doc jointly and keeps top-N ≈ 5-10 for LLM context (maximizes precision)](/imgs/blogs/reranker-01-role.png)
+
 A **reranker** is a model that takes a query and a candidate document and produces a **relevance score** — typically a scalar in `[0, 1]` or a logit. The canonical form is:
 
 ```
@@ -79,6 +81,8 @@ A cross-encoder can read the query and document jointly, attend between tokens, 
 
 ## Architectures
 
+![Reranker architectures: cross-encoder BERT/DeBERTa (highest accuracy, slow), late-interaction ColBERT/MaxSim (per-token embeds, fast approx), LLM-as-reranker (zero-shot, expensive per-doc)](/imgs/blogs/reranker-02-architectures.png)
+
 ### 1. Cross-encoder (the classic reranker)
 
 ```
@@ -114,6 +118,8 @@ Prompt a general LLM to score candidates. Two common flavors:
 Before the transformer era, "reranker" meant a gradient-boosted tree (XGBoost / LightGBM) over hand-crafted features: BM25 score, click-through rate, recency, document length, entity overlap, etc. This is still the workhorse of big web search engines, usually **layered on top** of a neural reranker. Don't confuse "reranker" in the RAG sense with "LTR reranker" in the search-engine sense — in production search systems, both exist, and they coexist.
 
 ## How Rerankers Are Trained
+
+![Reranker training: triples (query, pos, neg) + loss (pairwise BCE/hinge, listwise ListNet/ListMLE, KL distillation from a teacher cross-encoder), hard negatives mined via BM25 + bi-encoder, eval NDCG@10 / MRR on BEIR / MSMARCO](/imgs/blogs/reranker-03-training.png)
 
 ### The data shape
 

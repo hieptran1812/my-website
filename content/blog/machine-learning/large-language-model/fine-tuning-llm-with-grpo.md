@@ -23,6 +23,8 @@ But let me be honest: GRPO training is significantly harder to get right than SF
 
 ## The Landscape: PPO → DPO → GRPO
 
+![Evolution PPO → DPO → GRPO: PPO needs policy + value + reward; DPO removes RL with a supervised pair loss; GRPO drops the value net and uses group-relative advantages with binary verifiers for math/code](/imgs/blogs/grpo-01-landscape.png)
+
 To understand where GRPO fits, let's map the evolution of LLM alignment techniques:
 
 | Method | Year | Requires Reward Model | Requires Value Model | Requires Preference Data | Online Exploration | Best For |
@@ -72,6 +74,8 @@ The key difference is the **standard deviation normalization** in GRPO. This mat
 RLOO doesn't have this normalization, which can lead to the training being dominated by prompts with high reward variance. In practice, GRPO tends to be more stable for reasoning tasks.
 
 ## The Math Behind GRPO
+
+![GRPO algorithm: sample G responses per question, score each with a verifier/reward, compute group-relative advantage (r_i − mean)/std, apply policy-gradient loss + KL penalty vs π_ref, update θ](/imgs/blogs/grpo-02-algorithm.png)
 
 Let's build up the math from first principles. If you've followed PPO, this will be straightforward. If not, I'll explain each piece.
 
@@ -276,6 +280,8 @@ Check: 391 / 23 = 17 ✓
 The key insight: **none of these reasoning patterns were in the training data.** The model developed them because they lead to higher rewards. This is genuine capability building through RL, not pattern matching.
 
 ## Reward Design: The Secret Sauce
+
+![Reward design components: task correctness (exact match / unit tests / LLM-judge), format compliance (regex/JSON), length (cosine / bucket), safety (classifier/rule), combined by weighted sum r = Σ wᵢrᵢ](/imgs/blogs/grpo-03-reward.png)
 
 GRPO's effectiveness depends heavily on your reward function. Unlike DPO (which uses human preference pairs) or PPO with a learned reward model, GRPO works best with **rule-based, verifiable rewards**. This is a feature, not a limitation — but reward design is where most GRPO projects succeed or fail.
 

@@ -13,6 +13,8 @@ excerpt: "KV Cache is the single most important optimization for LLM inference. 
 
 ## Introduction
 
+![KV cache before vs after: quadratic recomputation vs linear reuse, with memory cost formula](/imgs/blogs/kv-cache-diagram.png)
+
 If you've ever used ChatGPT, Claude, or any large language model, you've noticed something: the model generates text **one token at a time**. It doesn't produce the entire response instantly — it streams words out sequentially, each one depending on everything that came before.
 
 Here's the problem: **generating each new token requires the model to "look at" all previous tokens through the attention mechanism.** Naively, this means recomputing attention over the entire sequence for every single new token. For a 1000-token response, the model would recompute attention over tokens 1-999 just to generate token 1000 — even though those computations were already done in previous steps.
@@ -177,6 +179,8 @@ Customer 3 arrives: Re-take order for Customer 1, Re-take order for Customer 2,
 Obviously, you should just **write down each customer's order once** and keep a running list. That's exactly what KV Cache does.
 
 ## How KV Cache Works
+
+![KV cache core idea: without cache the model recomputes K,V for all tokens each step; with cache only the new token's k,v is computed and appended](/imgs/blogs/kv-cache-01-concept.png)
 
 ### The Key Insight
 
@@ -367,6 +371,8 @@ The attention computation itself is still $O(n^2)$ total (because each step atte
 
 ## How Much Memory Does KV Cache Use?
 
+![KV cache memory formula and Llama-3 70B examples: 8k context 2.6 GB, 128k context 40 GB, bs=32 at 8k 80 GB — cache dominates HBM at high batch or long context](/imgs/blogs/kv-cache-02-memory.png)
+
 This is where things get interesting — and concerning. The KV cache can consume a **massive** amount of memory.
 
 ### The Formula
@@ -409,6 +415,8 @@ KV Cache = 2 × 32 × 32 × 128 × 4096 × 2 bytes
 This memory pressure is why KV cache optimization has become one of the hottest research areas in LLM inference.
 
 ## KV Cache Optimization Techniques
+
+![Taxonomy of KV cache optimizations: architectural (MQA/GQA/MLA), memory layout (PagedAttention, continuous batching), compression (quant, eviction), reuse (prefix cache, radix tree)](/imgs/blogs/kv-cache-03-optimization.png)
 
 Given the enormous memory cost, researchers have developed several techniques to make KV cache more efficient.
 
@@ -914,6 +922,8 @@ Example: Llama 3.1 70B on 4× A100 80GB
 ```
 
 ## Deep Dive: KV Cache in Real-World Serving Systems
+
+![Real-world KV cache serving: scheduler + block table + physical KV blocks, PagedAttention gathers blocks per request, prefix reuse via reference counting](/imgs/blogs/kv-cache-04-serving.png)
 
 Let's look at how major serving frameworks implement KV cache management:
 

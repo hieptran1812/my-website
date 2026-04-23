@@ -34,6 +34,8 @@ The companion article, [Serving LLMs at Scale](/blog/machine-learning/large-lang
 
 ## Part 1: What Actually Happens During Inference
 
+![LLM inference two phases: prefill runs 1 forward pass (compute-bound) to build KV cache and emit first token; decode loops one token/step (memory-bound) reading full weights + KV cache each step](/imgs/blogs/opt-inf-01-prefill-decode.png)
+
 ### The Two Phases Nobody Tells You Are Different
 
 Every LLM request has two very different phases:
@@ -79,6 +81,8 @@ Three numbers describe inference performance:
 A system can have great throughput and terrible TTFT (cheap but feels slow), or great TTFT and terrible throughput (fast for one user, bankrupting for many). Tuning inference is tuning the balance between these three.
 
 ## Part 2: Why Inference Is Memory-Bound (And Why That's Everything)
+
+![Map of inference optimizations by bottleneck: memory bandwidth (quant, KV quant, MQA/GQA/MLA), compute (FlashAttention, speculative, tensor parallel), scheduling (continuous batching, PagedAttention, prefix caching)](/imgs/blogs/opt-inf-02-map.png)
 
 The most important fact about modern LLM inference is that **decode is bandwidth-limited, not compute-limited**. Once you internalize this, every optimization becomes intuitive.
 
@@ -440,6 +444,8 @@ For Mixture-of-Experts models: different experts live on different GPUs. Request
 - **Doesn't fit on one node?** TP within node + PP across nodes, or use a framework like Megatron / vLLM's distributed mode.
 
 ## Part 11: A Practical Checklist
+
+![Practical decision tree: if KV cache doesn't fit, apply MQA/GQA + KV quant + paged attention (and weight quant if still OOM); if throughput-bound, continuous batching + prefix cache; if latency-bound, speculative decoding](/imgs/blogs/opt-inf-03-decision.png)
 
 For most real deployments, stacking these in order gets you most of the win:
 

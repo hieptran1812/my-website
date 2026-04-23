@@ -23,6 +23,8 @@ excerpt: "A clear, in-depth guide to Flow Matching — the simpler alternative t
 
 ## What Is Flow Matching?
 
+![Flow matching: straight-path vector field from Gaussian noise to data distribution, with comparison to diffusion SDE](/imgs/blogs/flow-matching-diagram.png)
+
 Flow matching is a framework for training generative models that is **simpler, faster, and more principled** than traditional diffusion models, while achieving equal or better quality.
 
 The core idea: learn a **velocity field** that transports samples from a simple distribution (Gaussian noise) to the data distribution (real images) along smooth paths.

@@ -27,6 +27,8 @@ excerpt: "A deep dive into speech tokenizers — the component that makes LLM-st
 
 ## Why Speech Tokenizers Exist
 
+![Speech tokenization: acoustic tokens (EnCodec/DAC) vs semantic tokens (HuBERT/w2v-BERT) and modern stacked pipeline](/imgs/blogs/speech-tokenizer-diagram.png)
+
 A raw audio waveform at 16 kHz is 16,000 floats per second. A language model cannot directly predict the "next float" — the output space is continuous, unbounded, and phenomenally high-dimensional. The entire paradigm of LLM-based speech generation (VALL-E, Whisper-style decoders, CosyVoice, Tortoise, XTTS, AudioLM, MusicGen) rests on a single trick:
 
 > Convert the continuous audio signal into a sequence of **discrete tokens** from a finite codebook, then train a Transformer to model that sequence like text.

@@ -23,6 +23,8 @@ excerpt: "A comprehensive guide to training Vision-Language-Action (VLA) models 
 
 ## Introduction
 
+![VLA architecture: perception (RGB/depth/proprio) -> VLM backbone (vision encoder + LLM) -> action chunking head](/imgs/blogs/training-vision-language-action-models-diagram.png)
+
 Vision-Language-Action (VLA) models represent a paradigm shift in robotics: instead of hand-coding perception pipelines and motion planners, we train a single end-to-end model that **sees** the world through cameras, **understands** natural language instructions, and **outputs** robot actions directly.
 
 The core idea is deceptively simple — take a vision-language model (VLM) like PaLI, LLaVA, or Qwen-VL, and fine-tune it to output robot actions instead of (or in addition to) text tokens. In practice, making this work requires careful engineering across data collection, architecture design, action representation, and training infrastructure.

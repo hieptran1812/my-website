@@ -26,6 +26,8 @@ excerpt: "The KV cache is the single largest memory consumer in LLM serving — 
 
 ## Why KV Cache Management Matters
 
+![KV cache management techniques: PagedAttention, prefix caching, MHA->GQA->MLA architecture, KV quantization + eviction](/imgs/blogs/kv-cache-optimization-and-management-diagram.png)
+
 In a modern LLM serving system, three things consume GPU memory: **model weights**, **activations**, and the **KV cache**. Weights are fixed once the model is loaded. Activations are short-lived and small. The KV cache, however, is **dynamic, per-request, and grows linearly with sequence length** — and it is, by far, the hardest resource to manage.
 
 Consider a single Llama-3-70B serving node with an 80 GB H100:
@@ -95,6 +97,8 @@ On an H100 with 989 TFLOPS BF16 and 3.35 TB/s HBM, the roofline crossover is at 
 
 ## Part 2 — The Management Problem: Memory Fragmentation
 
+![Fragmentation: naive contiguous allocation reserves max length per request (60-80% waste) vs PagedAttention which uses 16-token blocks with per-request block tables (95%+ utilization)](/imgs/blogs/kv-cache-opt-01-fragmentation.png)
+
 ### The Naive Approach (What Frameworks Did Before 2023)
 
 The naive approach pre-allocates a contiguous buffer of shape `[max_seq_len, num_layers, ...]` for each request. Two fatal problems:
@@ -148,6 +152,8 @@ vLLM's `BlockManager` is the concrete implementation of this design. Key operati
 When free blocks run out, the scheduler **preempts** sequences (more on this below).
 
 ## Part 3 — Continuous Batching and KV Cache Interaction
+
+![Continuous batching: iteration-level scheduler mixes prefill and decode each GPU step, frees KV blocks as requests finish, keeps GPU saturated](/imgs/blogs/kv-cache-opt-02-continuous-batching.png)
 
 Continuous batching is the second half of the vLLM throughput story. It's worth understanding separately because it drives how KV cache is allocated in practice.
 
@@ -251,6 +257,8 @@ Empirically, prefix caching gives **3–10× throughput on real chat workloads**
 
 ## Part 5 — Architectural Optimizations: MHA → MQA → GQA → MLA
 
+![Evolution of attention for KV cost: MHA (full KV per head) to MQA (single KV head) to GQA (grouped KV, Llama-3/Qwen default) to MLA (low-rank latent KV, DeepSeek-V3)](/imgs/blogs/kv-cache-opt-03-mha-mqa-gqa-mla.png)
+
 The single largest lever is the attention architecture itself. The goal of this evolution: reduce $H_{kv}$ (the KV head count) in the cache size formula.
 
 ### Multi-Head Attention (MHA) — Baseline
@@ -341,6 +349,8 @@ Trade-off: the quantization/dequantization kernel is complex and slower than FP8
 Quantization is orthogonal to prefix caching. A quantized KV cache block is exactly as shareable as a full-precision one. The only subtlety: the scales must be consistent. Modern frameworks handle this by either storing global scales or making scales part of the block metadata.
 
 ## Part 7 — KV Cache Eviction: Keep Only What Matters
+
+![KV cache eviction, offloading, and compression strategies: H2O heavy hitters, StreamingLLM attention sinks + window, SnapKV clustering, CPU/NVMe offload, INT8/FP8/INT4 quantization](/imgs/blogs/kv-cache-opt-04-eviction.png)
 
 Quantization shrinks each entry; eviction deletes entries entirely. This is lossier than quantization (you lose exact tokens) but can be dramatic.
 

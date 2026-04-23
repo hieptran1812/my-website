@@ -139,6 +139,8 @@ The history of MoE engineering is, in large part, a history of progressively red
 
 ## 3. Anatomy of a modern MoE layer, piece by piece
 
+![Anatomy of an MoE layer: router produces softmax over experts, top-K selected (usually K=2), chosen expert FFNs run in parallel, outputs combined by router weights, auxiliary load-balance + z-loss keep routing healthy](/imgs/blogs/moe-01-layer.png)
+
 Let us dissect one MoE FFN layer with the choices you would make today (roughly DeepSeek/Mixtral/Qwen flavored), and look closely at what each knob does.
 
 ### 3.1 The router
@@ -207,6 +209,8 @@ Three things. The combinatorial specialization space grows by many orders of mag
 That last point is why fine-grained MoE only really paid off once training corpora got big enough, around the 10T-token mark, to give each of 64+ experts enough examples. Trying to train a 256-expert model on 100B tokens would almost certainly underfit most experts.
 
 ## 4. The routing problem: what goes wrong and how to fix it
+
+![MoE routing failure modes and fixes: expert collapse (load-balance aux loss, noisy routing), token dropping (capacity c>1, shared expert overflow), expert underuse (z-loss, router jitter, dropless training)](/imgs/blogs/moe-02-routing.png)
 
 Routing is the soul of MoE and also its biggest failure mode. Four things break if you are not careful, and each has a canonical fix.
 
@@ -425,6 +429,8 @@ This preserves general capability (because the bulk of the model is frozen) whil
 The failure mode to watch for: if your domain corpus is small and your top-fired experts are too few, you will overfit those experts and lose general quality in their subdomain. Mitigate with standard SFT regularization (dropout on expert outputs, early stopping on a held-out pretraining-distribution set).
 
 ## 7. Serving MoE in production: the realities
+
+![MoE serving flow: all-to-all dispatch tokens to expert GPUs, experts compute in parallel, all-to-all combine back — plus capacity factor, expert parallelism, aux-loss-free balance (DeepSeek), and shared experts](/imgs/blogs/moe-03-serving.png)
 
 Training challenges are about compute and communication. Serving challenges are different: they are about memory, batching dynamics, and tail latency.
 

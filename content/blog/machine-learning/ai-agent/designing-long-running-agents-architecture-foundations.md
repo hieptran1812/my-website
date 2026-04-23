@@ -24,6 +24,8 @@ excerpt: "Short agent demos are easy. Agents that run for hours, hand off betwee
 
 ## Why Long-Running Agents Are a Different Design Problem
 
+![Long-running agent core loop (Plan, Act, Observe, Reflect) with orchestrator, sub-agents, and memory stack](/imgs/blogs/designing-long-running-agents-architecture-foundations-diagram.png)
+
 An agent that answers a single question is a function. An agent that spends three hours refactoring a codebase, triaging a customer's case across five tools, or researching a topic across fifty sources is a **system**.
 
 The difference isn't the model. It's everything around the model:

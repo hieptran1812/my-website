@@ -24,6 +24,8 @@ excerpt: "vLLM is the most widely adopted LLM serving framework, built around Pa
 
 ## What Is vLLM?
 
+![vLLM architecture: OpenAI-compatible API to LLMEngine, scheduler with continuous batching, Block Manager for PagedAttention, model worker on GPU with TP/PP parallelism, streaming response](/imgs/blogs/vllm-02-architecture.png)
+
 vLLM (Virtual Large Language Model) is an open-source LLM serving framework developed at UC Berkeley that achieves high-throughput inference through **PagedAttention** — a memory management technique inspired by operating system virtual memory. Since its release in 2023, vLLM has become the most widely deployed LLM serving engine in production, powering inference at companies from startups to major cloud providers.
 
 The central problem vLLM solves: **KV cache memory is wasted in traditional serving systems.** Before vLLM, LLM serving frameworks pre-allocated contiguous memory blocks for each request's KV cache, sized to the maximum possible sequence length. Since most sequences are much shorter than the maximum, 60-80% of allocated GPU memory sat unused. vLLM's PagedAttention eliminates this waste by managing KV cache in small, dynamically allocated pages — like how an operating system manages RAM.
@@ -87,6 +89,8 @@ After several requests complete:
 PagedAttention eliminates all three types of waste.
 
 ## PagedAttention: The Core Innovation
+
+![PagedAttention: per-request logical blocks mapped through a block table to a pool of fixed 16-token physical blocks — no external fragmentation, cross-request prefix sharing, dynamic growth](/imgs/blogs/vllm-01-paged-attention.png)
 
 ### The OS Virtual Memory Analogy
 
@@ -619,6 +623,8 @@ curl http://localhost:8000/metrics
 ```
 
 ## Request Lifecycle: End-to-End Trace
+
+![Request lifecycle in vLLM: prefill allocates logical blocks, decode loop appends one token per step, allocate/preempt/swap on block pressure, free blocks on EOS](/imgs/blogs/vllm-03-lifecycle.png)
 
 ```
 1. REQUEST ARRIVES

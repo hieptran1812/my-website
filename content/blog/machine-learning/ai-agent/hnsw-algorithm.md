@@ -23,6 +23,8 @@ excerpt: "HNSW (Hierarchical Navigable Small World) is the dominant algorithm fo
 
 ## The Problem: Finding Needles in a Billion-Dimensional Haystack
 
+![HNSW layered graph structure with greedy descent query path](/imgs/blogs/hnsw-algorithm-diagram.png)
+
 You have a database of 100 million vectors, each with 768 dimensions (say, embeddings from a text encoder). A user sends a query. You need to find the 10 most similar vectors — **in under 10 milliseconds**.
 
 **Brute force** computes the distance between the query and every vector in the database:

@@ -64,6 +64,8 @@ You can turn an LLM into an embedding model (mean-pool the last layer, or use th
 
 ## Architectures: Bi-encoders, Cross-encoders, and the Middle Ground
 
+![Bi-encoder vs cross-encoder: bi-encoder embeds query and doc separately then scores by cosine/dot (index-friendly, fast); cross-encoder concatenates and encodes jointly for one score (accurate, slow)](/imgs/blogs/embed-01-architectures.png)
+
 There are three fundamental ways to score `(query, document)` similarity with a neural model.
 
 ### 1. Bi-encoder (the embedding model)
@@ -114,6 +116,8 @@ Modern embedding models are almost always built on a pretrained transformer back
 The shift from BERT-style encoders to decoder LLMs repurposed as encoders (LLM2Vec, Mistral, Qwen, LLaMA) was the biggest quality jump of the 2024–2026 period. Decoders were trained on vastly more text, and with the right pooling + contrastive fine-tuning, they produce better embeddings than from-scratch bi-encoders — at the cost of being 10–50× larger.
 
 ## How Embedding Models Are Trained
+
+![Embedding training: positive pairs combine with in-batch + hard-mined negatives under InfoNCE contrastive loss, two-stage (weak unsupervised then strong labeled/distilled) on a BERT or Mistral backbone, evaluated on MTEB](/imgs/blogs/embed-02-training.png)
 
 Almost every production embedding model uses **contrastive learning**. The objective is simple to state: pull positives together, push negatives apart.
 
@@ -239,6 +243,8 @@ The single most valuable thing you can do is build a **tiny internal eval set**:
 A 2-point nDCG improvement on *your* eval set matters infinitely more than a 0.3-point improvement on MTEB.
 
 ## When to Fine-tune (and When Not To)
+
+![Fine-tune decision: generic web Q&A → use off-the-shelf; domain jargon / long context / rare language → fine-tune on 10k+ labeled pairs (or distill from cross-encoder) on top of a strong base](/imgs/blogs/embed-03-finetune-decision.png)
 
 Before you fine-tune, try:
 

@@ -24,6 +24,8 @@ excerpt: "SGLang is one of the fastest LLM serving frameworks, pioneering RadixA
 
 ## What Is SGLang?
 
+![SGLang architecture: Python frontend (gen/select/fork) routed through priority scheduler, RadixAttention for prefix tree KV reuse + FlashInfer kernels on GPU, streaming tokens out](/imgs/blogs/sglang-03-architecture.png)
+
 SGLang (Structured Generation Language) is an open-source LLM serving framework developed at UC Berkeley that achieves state-of-the-art inference throughput through a combination of novel optimizations. It consists of two tightly integrated components:
 
 1. **SGLang Runtime (SRT)**: The backend serving engine that handles model execution, KV cache management, scheduling, and GPU kernel optimization
@@ -88,6 +90,8 @@ Prefix sharing isn't just about system prompts. In real workloads:
 vLLM added prefix caching later (hash-based, opt-in), but SGLang's radix tree approach is fundamentally more flexible — it automatically detects and reuses any shared prefix at any depth, not just at the system prompt level.
 
 ## RadixAttention: The Core Innovation
+
+![RadixAttention: all KV blocks live in a radix tree keyed by token sequences — shared system prompts and instructions are reused across users, only divergent branches cost extra memory](/imgs/blogs/sglang-01-radix.png)
 
 RadixAttention is SGLang's most important contribution. It organizes all cached KV blocks in a **radix tree** (also called a prefix tree or trie), keyed by token sequences.
 
@@ -249,6 +253,8 @@ Benefits:
 - **More predictable latency**: No long pauses caused by processing a 10K-token prompt in one shot
 
 ## Constrained Decoding with Jump-Forward
+
+![Constrained decoding with jump-forward: FSM tracks required schema, when next K tokens are forced they emit in a single step (jump-forward), only branching states sample from constrained logits](/imgs/blogs/sglang-02-jump-forward.png)
 
 SGLang has built-in support for **constrained decoding** — forcing the model's output to follow a specific format (JSON schema, regex, grammar). What makes SGLang's approach unique is the **jump-forward optimization**.
 

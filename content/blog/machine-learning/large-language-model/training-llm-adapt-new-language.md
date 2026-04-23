@@ -31,6 +31,8 @@ Let's dig in.
 
 ## Why Not Just Train From Scratch?
 
+![End-to-end new-language adaptation: English LLM → tokenizer extension → embedding init → continual pretraining (30-200B tokens) → instruction tuning + preference → evaluation → deploy](/imgs/blogs/lang-01-pipeline.png)
+
 Before we go through the adaptation pipeline, let's understand why adaptation beats training from scratch for most teams.
 
 | Approach | Data Required | Compute Cost | Quality |
@@ -97,6 +99,8 @@ Understanding what *doesn't* transfer is equally important:
 This table tells you where to focus your adaptation data. You need lots of examples showing your language's unique patterns — word order, morphology, culturally specific knowledge — because these won't transfer from English.
 
 ## Phase 1: Tokenizer Extension
+
+![Vocab + embedding init: train BPE on new-language corpus, merge with old vocab (dedup), keep old embedding rows and initialize new rows via mean / FOCUS / OFA projection from XLM-R](/imgs/blogs/lang-02-vocab-init.png)
 
 This is the most impactful and most overlooked step. If you skip this, everything downstream suffers.
 
@@ -446,6 +450,8 @@ normalize_new_embeddings(input_embeddings, output_embeddings,
 This is one of those problems where the training loss still goes down — it just goes down slower, and you waste compute. I've seen teams lose 20-30% of effective training by not fixing this.
 
 ## Phase 3: Continual Pretraining
+
+![Continual pretraining setup: mix new-language with English at 50/50 to 30/70, low LR 5e-5 → 2e-5 to avoid catastrophic forgetting, optionally freeze old embeddings early then unfreeze, monitor BLEU + English retention](/imgs/blogs/lang-03-continual.png)
 
 This is the most compute-intensive and most impactful phase. The goal: teach the model your target language's grammar, vocabulary, common knowledge, and cultural context.
 

@@ -56,6 +56,8 @@ In practice, the best systems often **combine both**: fine-tune a model to be go
 
 ## The RAG Pipeline: End-to-End Architecture
 
+![End-to-end RAG pipeline: docs → chunk + metadata → embed → vector DB; query → embed → hybrid (dense + BM25) retrieve → rerank with cross-encoder → context → LLM → answer with citations](/imgs/blogs/rag-01-pipeline.png)
+
 A production RAG system has two main pipelines:
 
 ### Indexing Pipeline (Offline)
@@ -156,6 +158,8 @@ def preprocess_document(doc: str, metadata: dict) -> dict:
 ---
 
 ## Stage 2: Chunking — The Most Critical Step
+
+![Chunking strategies: fixed-size (simple baseline), semantic (topic breaks), recursive (paragraph → sentence — good default), hierarchical (parent + child — best for QA + summary); always add 10-20% overlap and metadata](/imgs/blogs/rag-02-chunking.png)
 
 Chunking is how you split documents into smaller pieces for retrieval. **This is arguably the most impactful decision in your entire RAG pipeline.** Bad chunking leads to retrieving irrelevant or incomplete information, which cascades into poor answers.
 
@@ -798,6 +802,8 @@ Never make up information that isn't in the context."""
 ---
 
 ## Stage 9: Evaluation — Measuring RAG Quality
+
+![Three layers of RAG eval: retrieval metrics (Recall@K, MRR, NDCG), generation metrics (faithfulness, answer relevance, context precision), end-to-end (RAGAS, LLM-as-judge, hallucination rate)](/imgs/blogs/rag-03-eval.png)
 
 You can't improve what you can't measure. RAG evaluation has three levels:
 

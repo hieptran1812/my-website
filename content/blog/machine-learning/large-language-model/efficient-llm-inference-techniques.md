@@ -13,6 +13,8 @@ excerpt: "LLM inference is slow and expensive because of two fundamental bottlen
 
 ## Why LLM Inference Is Hard
 
+![LLM inference techniques mapped to bottlenecks: memory-bandwidth (decode) vs compute (prefill/batch)](/imgs/blogs/efficient-llm-inference-techniques-diagram.png)
+
 Training an LLM is expensive but finite. You do it once (or a few times), it finishes, you have a model. **Inference** is the other story: every single token served to a user costs GPU time. A popular model serving millions of queries a day can easily spend more on inference in a month than training cost in total.
 
 Worse, LLM inference is *inherently* slow. A model with 70 billion parameters needs to generate tokens **one at a time**, and each token requires reading all ~140 GB of weights from GPU memory. There's no way to skip a token, no way to parallelize within a single response.
@@ -20,6 +22,8 @@ Worse, LLM inference is *inherently* slow. A model with 70 billion parameters ne
 The entire field of efficient inference is an attempt to work around these facts. This article is a map of what the techniques actually do, why they work, and when to reach for each.
 
 ## The Two Bottlenecks (Know These Before Everything Else)
+
+![Prefill vs decode: prefill is compute-bound (large GEMMs, high arithmetic intensity) while decode is memory-bound (reads full weights + KV per step) — each needs different optimizations](/imgs/blogs/eff-inf-01-bottlenecks.png)
 
 Every LLM inference technique exists to attack one of two problems. Understanding which is the dominant bottleneck in your setup tells you which techniques will help.
 
@@ -58,6 +62,8 @@ This distinction matters a lot:
 When an engineer says "decoding is memory-bound, prefill is compute-bound," this is what they mean. **Most efficient-inference techniques target decode, because decode dominates total latency for any response longer than a few tokens.**
 
 ## The Techniques, Grouped by What They Attack
+
+![Taxonomy of efficient LLM inference techniques: memory attack (KV cache + quant + eviction), compute attack (FlashAttention, speculative, fusion), scheduling (continuous batching, PagedAttention, prefix cache), parallelism (TP/PP/EP)](/imgs/blogs/eff-inf-02-taxonomy.png)
 
 Here's the map. We'll walk through each group.
 
@@ -235,6 +241,8 @@ Variants:
 Typical speedup: 2-3× for general chat, up to 5× for structured outputs where drafts are easy. Read the dedicated [Speculative Decoding guide](/blog/machine-learning/large-language-model/speculative-decoding) for the full math.
 
 ## Part 8: Parallelism Strategies — Splitting the Model
+
+![Parallelism strategies: Tensor Parallel (shard weights per layer, all-reduce, NVLink), Pipeline Parallel (stages across GPUs, micro-batching), Expert Parallel (distribute MoE experts, all-to-all routing)](/imgs/blogs/eff-inf-03-parallelism.png)
 
 At scale, a single GPU isn't enough. Different parallelism strategies distribute the model across GPUs:
 

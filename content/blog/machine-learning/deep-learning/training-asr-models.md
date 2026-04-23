@@ -24,6 +24,8 @@ excerpt: "A comprehensive guide to training ASR models — from audio fundamenta
 
 ## What Is ASR?
 
+![Three ASR architectures: CTC, RNN-T, and encoder-decoder, with their components and tradeoffs](/imgs/blogs/training-asr-models-diagram.png)
+
 Automatic Speech Recognition (ASR) converts spoken language into text. You speak "What's the weather today?" and the model outputs the string `"What's the weather today?"`. It's the technology behind Siri, Google Assistant, Alexa, live captions, meeting transcription, and voice-controlled interfaces.
 
 At its core, ASR is a **sequence-to-sequence** problem — but with a twist. The input (audio waveform) and output (text) have very different lengths and structures:

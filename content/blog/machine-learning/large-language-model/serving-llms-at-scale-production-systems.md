@@ -42,6 +42,8 @@ Every one of these has at least one non-obvious failure mode.
 
 ## Part 1: The Serving Mental Model
 
+![LLM serving architecture: users to load balancer, N replicas (vLLM/SGLang), each with scheduler, KV cache (PagedAttention), GPU weights, and observability stream (TTFT, TPOT, queue depth)](/imgs/blogs/serving-01-architecture.png)
+
 ### The Request's Life
 
 A single request flows through many systems before the model ever sees it:
@@ -134,6 +136,8 @@ Mitigations:
 - **Priority scheduling.** Short, interactive requests beat long batch jobs to the GPU.
 
 ## Part 3: Prefill–Decode Disaggregation
+
+![Prefill–decode disaggregation: route by phase to specialized workers (prefill compute-bound, decode memory-bound), transfer KV cache between them, yielding better SLO compliance and GPU utilization](/imgs/blogs/serving-02-disagg.png)
 
 This is the biggest architectural shift in LLM serving in the last two years, and it's worth understanding even if you don't deploy it yet.
 
@@ -402,6 +406,8 @@ Rule of thumb:
 More parallelism is not more better. Every additional axis of parallelism adds communication overhead and operational complexity.
 
 ## Part 10: The Cost Model and How to Actually Reduce It
+
+![Cost decomposition: GPU hours (utilization via batching + prefix cache, model choice via quant + speculative, parallel sizing) plus ops overhead — NVLink-local TP is the cheap path](/imgs/blogs/serving-03-cost.png)
 
 Under every serving decision is $/M tokens. Here's the decomposition:
 

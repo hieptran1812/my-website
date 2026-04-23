@@ -45,6 +45,8 @@ This is a long piece. If you're picking a base model today, jump to Part 7. If y
 
 ## Part 1: The Shared Baseline — What Every Modern LLM Looks Like
 
+![Shared modern LLM baseline: decoder-only Transformer block with pre-RMSNorm, self-attention (RoPE + GQA), SwiGLU FFN, residual connections, tied embedding LM head](/imgs/blogs/modern-llm-01-baseline.png)
+
 Every model we'll discuss is a **decoder-only Transformer**. The core block hasn't fundamentally changed since GPT-2 (2019), but a handful of upgrades over the past five years have become universal. Understanding these upgrades matters because the differences between Qwen, Llama, Gemma, and DeepSeek are essentially *variations on these axes*.
 
 Here's what has changed and why:
@@ -179,6 +181,8 @@ The modern consensus is Byte-level BPE (BBPE) or SentencePiece with a vocabulary
 This matters more than it seems. If you serve Chinese at 1k tokens/sec, and your tokenizer emits 2× more tokens per character than Qwen's does, you effectively throttle yourself to 500 Chinese-characters/sec. At the margin of commercial viability, tokenizer choice *is* the choice.
 
 ## Part 2: The Four Families, Architecture by Architecture
+
+![The four modern LLM families at a glance: Llama-3 (dense + GQA/RoPE), Qwen-2.5/3 (dense + MoE, strong code/multilingual), Gemma-2/3 (sliding+global attention, soft-capped logits), DeepSeek-V3 (MoE 671B with MLA + MTP)](/imgs/blogs/modern-llm-02-families.png)
 
 With the baseline in hand, we can look at where the four families actually diverge. The deviations are small in isolation but compound into meaningfully different models.
 
@@ -441,6 +445,8 @@ Pulling all of Part 2 together:
 Each cell in that table represents a concrete engineering bet. Llama bet on data and scale. Qwen bet on multilingual and hybrid reasoning. Gemma bet on efficiency at the small-model frontier. DeepSeek bet on raw architectural and systems innovation. None of the bets are "wrong" — they're different positions on a multi-axis tradeoff surface.
 
 ## Part 3: Pretraining — How These Models Are Actually Made
+
+![Modern LLM training pipeline: raw web+code+math to quality-filtered mix, pretraining (BF16, huge batch), mid-training (long-context, math/code), annealing on high-quality data, then post-training (SFT, RLHF/DPO/GRPO, safety)](/imgs/blogs/modern-llm-03-training.png)
 
 Architectures are the visible part. The invisible part — *how* they're trained — is where the real differentiation sits. All four families use roughly the same recipe structure, but the dials are set very differently.
 

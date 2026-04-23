@@ -23,6 +23,8 @@ excerpt: "A comprehensive, interview-ready guide to diffusion models — coverin
 
 ## What Are Diffusion Models?
 
+![Diffusion forward (noise) and reverse (denoise) chain with U-Net noise predictor](/imgs/blogs/diffusion-models-diagram.png)
+
 Diffusion models are a class of generative models that learn to create data (images, audio, video) by learning to **reverse a gradual noising process**. The core idea is beautifully simple:
 
 1. **Forward process**: Take a clean image and slowly add Gaussian noise to it, step by step, until it becomes pure random noise

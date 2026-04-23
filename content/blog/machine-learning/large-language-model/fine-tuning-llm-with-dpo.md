@@ -19,6 +19,8 @@ This isn't a toy technique. Llama 3, Zephyr, Intel's Neural Chat, Tulu 2, and ma
 
 ## From RLHF to DPO: Why DPO Exists
 
+![RLHF vs DPO: RLHF trains a reward model then runs PPO rollouts with policy + value + ref networks; DPO collapses it into a single supervised loss using only the reference policy and preference pairs](/imgs/blogs/dpo-01-rlhf-vs-dpo.png)
+
 To understand DPO, you need to understand what it replaces.
 
 ### The RLHF Pipeline
@@ -94,6 +96,8 @@ RLHF Pipeline:               DPO Pipeline:
 | Performance | Slightly better ceiling in some tasks | Comparable in most benchmarks |
 
 ## The Math Behind DPO
+
+![DPO loss computation: for each preference pair, compute Δ = β·(log π_θ − log π_ref) for both chosen and rejected, then L = −log σ(Δ_chosen − Δ_rejected) and backprop](/imgs/blogs/dpo-02-loss.png)
 
 Let's build up the derivation step by step. Understanding the math helps you debug training issues and choose the right hyperparameters.
 
@@ -867,6 +871,8 @@ Start here: What's your situation?
 ```
 
 ## The Full Training Pipeline
+
+![DPO training pipeline: SFT model cloned to frozen π_ref and initialized as π_θ, trained on preference pairs with β=0.1-0.5, evaluated on reward accuracy and pairwise judge; adjust β/LR/pairs on failure](/imgs/blogs/dpo-03-pipeline.png)
 
 Here's the end-to-end pipeline:
 

@@ -24,6 +24,8 @@ excerpt: "A comprehensive guide to training CosyVoice and CosyVoice 2 — Alibab
 
 ## What Is CosyVoice?
 
+![CosyVoice 4-stage TTS pipeline: tokenizer -> AR LLM -> flow-matching decoder -> vocoder, with speaker-embedding path and training stages](/imgs/blogs/training-cosyvoice-diagram.png)
+
 CosyVoice is an LLM-based text-to-speech (TTS) system developed by Alibaba's FunAudioLLM team. It generates natural, expressive speech from text with zero-shot voice cloning — give it a 3-second audio sample of any speaker and it can synthesize new speech in that person's voice.
 
 The system follows a two-stage pipeline:
