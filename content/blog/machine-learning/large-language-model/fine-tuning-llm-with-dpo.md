@@ -19,8 +19,6 @@ This isn't a toy technique. Llama 3, Zephyr, Intel's Neural Chat, Tulu 2, and ma
 
 ## From RLHF to DPO: Why DPO Exists
 
-![RLHF vs DPO: RLHF trains a reward model then runs PPO rollouts with policy + value + ref networks; DPO collapses it into a single supervised loss using only the reference policy and preference pairs](/imgs/blogs/dpo-01-rlhf-vs-dpo.png)
-
 To understand DPO, you need to understand what it replaces.
 
 ### The RLHF Pipeline
