@@ -129,12 +129,14 @@ export default async function BlogPostPage({
         collection={article.collection}
         aiGenerated={article.aiGenerated}
         dangerouslySetInnerHTML={{ __html: article.content }}
+        footer={
+          <>
+            <SeriesModule ctx={series} />
+            <RelatedPosts posts={related} />
+          </>
+        }
       />
       <CodeBlockEnhancer />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <SeriesModule ctx={series} />
-        <RelatedPosts posts={related} />
-      </div>
     </>
   );
 }

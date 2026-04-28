@@ -38,6 +38,10 @@ interface BlogReaderProps {
   collection?: string;
   aiGenerated?: boolean;
   dangerouslySetInnerHTML?: { __html: string };
+  /** Rendered inside the article column right after </article>. Used for
+   *  series + related-reading so they share the column's width and inherit
+   *  the reading-mode CSS variables. */
+  footer?: React.ReactNode;
 }
 
 export default function BlogReader({
@@ -52,6 +56,7 @@ export default function BlogReader({
   collection,
   aiGenerated,
   dangerouslySetInnerHTML,
+  footer,
 }: BlogReaderProps) {
   const { theme, isReadingMode, toggleReadingMode } = useTheme();
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
@@ -827,10 +832,11 @@ export default function BlogReader({
       <div className="relative z-10 w-full overflow-x-hidden">
         <div className="flex justify-center items-start py-12 px-4 sm:px-6">
           <div
-            className="w-full max-w-4xl mb-20"
+            className="w-full max-w-4xl mb-2 article-column"
             ref={contentRef}
             style={{
               position: "relative",
+              ...readingCssVars,
             }}
           >
             {/* Article Header */}
@@ -967,7 +973,7 @@ export default function BlogReader({
               className="prose prose-xl max-w-none mx-auto mb-2"
               style={{ color: readingColors.textPrimary }}
             >
-              <MathJax className="blog-content" style={readingCssVars}>
+              <MathJax className="blog-content">
                 {dangerouslySetInnerHTML ? (
                   <div dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
                 ) : (
@@ -975,6 +981,7 @@ export default function BlogReader({
                 )}
               </MathJax>
             </article>
+            {footer ? <div className="article-footer">{footer}</div> : null}
           </div>
         </div>
       </div>
