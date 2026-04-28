@@ -1468,7 +1468,7 @@ a:focus {
 
 /* ─────────────── Series module ─────────────── */
 .series-module {
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   padding: 1.25rem 1.25rem 1.5rem;
   border: 1px solid var(--border);
   border-radius: 0.875rem;
@@ -1622,15 +1622,14 @@ a:focus {
 
 /* ─────────────── Related posts ─────────────── */
 .related-posts {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
   border-top: 1px solid var(--border);
 }
-/* When the series module is directly above, drop the redundant border + margin
-   so the two sections read as one continuous footer block. */
+/* When the series module is directly above, give a hair more breathing room. */
 .series-module + .related-posts {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
 }
 .related-posts-header {
   margin-bottom: 1.25rem;

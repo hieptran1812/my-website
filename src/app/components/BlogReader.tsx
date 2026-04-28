@@ -964,7 +964,7 @@ export default function BlogReader({
             {/* Article Content */}
             <article
               ref={articleRef}
-              className="prose prose-xl max-w-none mx-auto mb-8"
+              className="prose prose-xl max-w-none mx-auto mb-2"
               style={{ color: readingColors.textPrimary }}
             >
               <MathJax className="blog-content" style={readingCssVars}>
