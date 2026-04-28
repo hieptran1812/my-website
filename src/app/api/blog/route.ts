@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { calculateReadTimeWithTags } from "@/lib/readTimeCalculator";
+import { derivePostLocation } from "@/lib/postPath";
 
 // Implement caching for blog posts
 const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
@@ -127,11 +128,15 @@ export async function GET(request: Request) {
         const fileContents = fs.readFileSync(filePath, "utf8");
         const { data, content } = matter(fileContents);
 
+        const { category: resolvedCategory, subcategory: resolvedSubcategory } =
+          derivePostLocation(filePath, data, contentDirectory);
+        const effectiveCategory = resolvedCategory || category;
+
         // Calculate automatic read time based on content
         const automaticReadTime = calculateReadTimeWithTags(
           content,
           data.tags || [],
-          data.category || category,
+          effectiveCategory,
         );
 
         // Generate auto-excerpt from content if not provided
@@ -176,12 +181,12 @@ export async function GET(request: Request) {
           title: data.title || "Untitled",
           publishDate: data.publishDate || data.date || "2024-01-01",
           readTime: data.readTime || automaticReadTime.readTime,
-          category: data.category || category,
+          category: effectiveCategory,
           author: data.author || "Anonymous",
           tags: data.tags || [],
           image: data.image || "/images/default-blog.jpg",
           excerpt,
-          collection: data.collection || data.subcategory,
+          collection: data.collection || resolvedSubcategory || data.subcategory,
           aiGenerated: data.aiGenerated === true,
           // Add SEO-friendly JSON-LD data
           seo: {

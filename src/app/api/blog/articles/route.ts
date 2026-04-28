@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
+import { derivePostLocation } from "../../../../lib/postPath";
 
 export interface Article {
   id: string;
@@ -28,7 +29,8 @@ function convertToArticle(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metadata: any,
   slug: string,
-  category?: string,
+  resolvedCategory: string,
+  resolvedSubcategory: string,
   content?: string,
 ): Article {
   // Calculate read time from content if available
@@ -37,7 +39,7 @@ function convertToArticle(
     const readTimeResult = calculateReadTimeWithTags(
       content,
       metadata.tags || [],
-      metadata.category || category || "General",
+      resolvedCategory || "General",
     );
     readTime = readTimeResult.readTime;
   } else if (metadata.readTime) {
@@ -50,11 +52,11 @@ function convertToArticle(
   if (readTimeNum >= 10) difficulty = "Advanced";
   else if (readTimeNum >= 5) difficulty = "Intermediate";
 
-  // Use explicit subcategory from metadata if available, otherwise extract from tags
-  let subcategory = metadata.subcategory || category || "General";
+  // Folder-derived subcategory wins; fall back to tag-based inference only if both
+  // folder layout and frontmatter omit a subcategory.
+  let subcategory = resolvedSubcategory || "General";
 
-  // Only auto-generate subcategory from tags if no explicit subcategory is provided
-  if (!metadata.subcategory && metadata.tags && metadata.tags.length > 0) {
+  if (!resolvedSubcategory && metadata.tags && metadata.tags.length > 0) {
     // Use the first tag as subcategory, or map common patterns
     const firstTag = metadata.tags[0];
     if (
@@ -107,8 +109,8 @@ function convertToArticle(
   const timestamp = metadata.date
     ? new Date(metadata.date).getTime()
     : Date.now();
-  const uniqueId = category
-    ? `${category}/${slug}-${timestamp}`
+  const uniqueId = resolvedCategory
+    ? `${resolvedCategory}/${slug}-${timestamp}`
     : `${slug}-${timestamp}`;
 
   return {
@@ -126,7 +128,7 @@ function convertToArticle(
       metadata.date ||
       "",
     readTime: readTime,
-    category: metadata.category || category || "",
+    category: resolvedCategory,
     subcategory,
     tags: metadata.tags || [],
     difficulty,
@@ -204,10 +206,14 @@ export async function GET(request: NextRequest) {
           // Create unique ID using full path
           const uniqueId = `${slug.replace(/\//g, "-")}`;
 
+          const { category: derivedCategory, subcategory: derivedSubcategory } =
+            derivePostLocation(fullPath, metadata, contentDir);
+
           const article = convertToArticle(
             metadata,
             slug,
-            currentCategory,
+            derivedCategory,
+            derivedSubcategory,
             fileMatterContent,
           );
           article.id = uniqueId; // Override with truly unique ID

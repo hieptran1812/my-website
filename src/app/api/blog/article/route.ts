@@ -10,6 +10,7 @@ import rehypeStringify from "rehype-stringify";
 import { Article } from "../articles/route";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 import { protectMathBlocks, restoreMathBlocks } from "../../../../lib/markdown";
+import { derivePostLocation } from "../../../../lib/postPath";
 
 export async function GET(request: NextRequest) {
   try {
@@ -77,11 +78,13 @@ export async function GET(request: NextRequest) {
 
     const htmlContent = restoreMathBlocks(processedContent.toString(), mathBlocks);
 
-    // Determine category from directory structure if not specified
-    let category = metadata.category;
-    if (!category && slugParts.length > 1) {
-      category = slugParts[0];
-    }
+    // Folder layout is the source of truth for category/subcategory; frontmatter
+    // is only consulted when the folder cannot supply a value.
+    const { category, subcategory } = derivePostLocation(
+      articlePath,
+      metadata,
+      blogDir,
+    );
 
     // Calculate read time from actual content
     const readTimeResult = calculateReadTimeWithTags(
@@ -106,7 +109,7 @@ export async function GET(request: NextRequest) {
         "",
       readTime: readTimeResult.readTime,
       category: category || "",
-      subcategory: metadata.subcategory || "",
+      subcategory: subcategory || "",
       tags: metadata.tags || [],
       difficulty: metadata.difficulty || "",
       featured: metadata.featured || false,

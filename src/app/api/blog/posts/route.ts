@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
+import { derivePostLocation } from "../../../../lib/postPath";
 
 export interface BlogPost {
   slug: string;
@@ -81,11 +82,17 @@ export async function GET(request: NextRequest) {
           const fileContent = fs.readFileSync(filePath, "utf8");
           const { data: metadata, content } = matter(fileContent);
 
+          const { category: resolvedCategory } = derivePostLocation(
+            filePath,
+            metadata,
+            blogDir
+          );
+
           // Calculate read time from actual content
           const readTimeResult = calculateReadTimeWithTags(
             content,
             metadata.tags || [],
-            categoryPrefix || metadata.category || "General"
+            resolvedCategory || "General"
           );
 
           // Generate slug in format: category/subcategory/post-name or category/post-name
@@ -111,7 +118,7 @@ export async function GET(request: NextRequest) {
               metadata.date ||
               new Date().toISOString().split("T")[0],
             readTime: readTimeResult.readTime,
-            category: categoryPrefix || metadata.category || "General",
+            category: resolvedCategory || "General",
             author: metadata.author || "Hiep Tran",
             tags: metadata.tags || [],
             image: metadata.image || defaultImage,

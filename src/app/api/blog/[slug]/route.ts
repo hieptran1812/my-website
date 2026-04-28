@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 import { protectMathBlocks, restoreMathBlocks } from "../../../../lib/markdown";
+import { derivePostLocation } from "../../../../lib/postPath";
 
 export async function GET(
   request: NextRequest,
@@ -59,11 +60,17 @@ export async function GET(
     const fileContents = fs.readFileSync(filePath, "utf8");
     const { data, content } = matter(fileContents);
 
+    const { category: resolvedCategory } = derivePostLocation(
+      filePath,
+      data,
+      contentDirectory
+    );
+
     // Calculate read time from actual content
     const readTimeResult = calculateReadTimeWithTags(
       content,
       data.tags || [],
-      data.category || "general"
+      resolvedCategory || "general"
     );
 
     // Protect math blocks from being mangled by remark
@@ -82,7 +89,7 @@ export async function GET(
       title: data.title || "Untitled",
       publishDate: data.date || data.publishDate || "2024-01-01",
       readTime: readTimeResult.readTime,
-      category: data.category || "general",
+      category: resolvedCategory || "general",
       author: data.author || "Anonymous",
       tags: data.tags || [],
       image: data.image || "/images/default-blog.jpg",

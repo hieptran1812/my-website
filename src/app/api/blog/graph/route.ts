@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { derivePostLocation } from "@/lib/postPath";
 
 export interface GraphNode {
   id: string;
@@ -80,7 +81,12 @@ export async function GET() {
           const slug = basePath ? `${basePath}/${slugBase}` : slugBase;
 
           const tags: string[] = metadata.tags || [];
-          const category = metadata.category || "General";
+          const { category: derivedCategory } = derivePostLocation(
+            filePath,
+            metadata,
+            blogDir,
+          );
+          const category = derivedCategory || "General";
 
           // Use first tag as primary group, or category if no tags
           const primaryTag = tags[0] || category;
