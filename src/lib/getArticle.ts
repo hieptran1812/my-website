@@ -9,6 +9,7 @@ import rehypeStringify from "rehype-stringify";
 import { calculateReadTimeWithTags } from "./readTimeCalculator";
 import { protectMathBlocks, restoreMathBlocks } from "./markdown";
 import remarkCallouts from "./remarkCallouts";
+import { resolvePostCover } from "./getRelatedPosts";
 
 export interface ArticleData {
   title: string;
@@ -90,7 +91,7 @@ export async function getArticle(slug: string): Promise<ArticleData | null> {
     collection: metadata.collection,
     aiGenerated: metadata.aiGenerated === true,
     excerpt: metadata.excerpt || metadata.description || "",
-    image: typeof metadata.image === "string" ? metadata.image : undefined,
+    image: resolvePostCover(metadata, markdownContent),
   };
 }
 

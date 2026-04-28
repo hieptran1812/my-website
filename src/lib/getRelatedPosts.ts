@@ -98,6 +98,38 @@ const CACHE_TTL_MS = 5 * 60 * 1000;
 
 const STOP_WORDS = new Set([...eng, ...vie]);
 const TOKEN_RE = /[\p{L}\p{N}]+/gu;
+// First markdown image reference: ![alt](url) — captures the URL.
+const FIRST_BODY_IMAGE_RE = /!\[[^\]]*\]\(([^)\s]+)(?:\s+["'][^"']*["'])?\)/;
+
+/** Pull the first inline markdown image URL out of the body, if any. */
+export function extractFirstBodyImage(markdown: string): string | undefined {
+  if (!markdown) return undefined;
+  const m = FIRST_BODY_IMAGE_RE.exec(markdown);
+  if (!m) return undefined;
+  const url = m[1].trim();
+  if (!url) return undefined;
+  return url;
+}
+
+/**
+ * Resolve a post's cover: frontmatter image wins, then first body image.
+ * External URLs are skipped (next/image would need remotePatterns config).
+ */
+export function resolvePostCover(
+  frontmatter: Record<string, unknown>,
+  body: string,
+): string | undefined {
+  const candidates: (string | undefined)[] = [];
+  const fm = frontmatter.image;
+  if (typeof fm === "string" && fm.trim().length > 0) candidates.push(fm.trim());
+  candidates.push(extractFirstBodyImage(body));
+  for (const c of candidates) {
+    if (!c) continue;
+    if (/^https?:\/\//i.test(c)) continue; // remote — would need next.config remotePatterns
+    return c;
+  }
+  return undefined;
+}
 
 function tokenize(text: string): string[] {
   if (!text) return [];
@@ -125,7 +157,7 @@ function buildIndex(): CorpusIndex {
       if (entry.isDirectory()) walk(full);
       else if (entry.isFile() && entry.name.endsWith(".md")) {
         const raw = fs.readFileSync(full, "utf8");
-        const { data } = matter(raw);
+        const { data, content: body } = matter(raw);
         const { category, subcategory } = derivePostLocation(full, data, blogDir);
         const slug = path
           .relative(blogDir, full)
@@ -149,7 +181,7 @@ function buildIndex(): CorpusIndex {
           subcategory,
           tags,
           publishDate: data.publishDate || data.date || "",
-          image: typeof data.image === "string" ? data.image : undefined,
+          image: resolvePostCover(data, body),
           collection: typeof data.collection === "string" ? data.collection : undefined,
           tokenTf,
           tfidfNorm: 0, // filled in pass 2

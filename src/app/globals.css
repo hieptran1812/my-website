@@ -1711,6 +1711,47 @@ a:focus {
 .related-card:hover .related-img {
   transform: scale(1.04);
 }
+.related-img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.92);
+  transition: transform 0.4s ease;
+}
+.related-card:hover .related-img-placeholder {
+  transform: scale(1.04);
+}
+.related-img-placeholder::after {
+  /* subtle grid pattern overlay for texture */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+.related-img-placeholder-glyph {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 1;
+}
+.related-card-image-secondary .related-img-placeholder-glyph {
+  font-size: 1.75rem;
+}
+.series-card-placeholder {
+  border-radius: 0.5rem;
+}
+.series-card-placeholder .related-img-placeholder-glyph {
+  font-size: 1.5rem;
+}
 .related-card-image-overlay {
   position: absolute;
   inset: 0;
