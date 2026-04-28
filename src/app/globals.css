@@ -1468,7 +1468,7 @@ a:focus {
 
 /* ─────────────── Series module ─────────────── */
 .series-module {
-  margin-top: 3rem;
+  margin-top: 1.5rem;
   padding: 1.25rem 1.25rem 1.5rem;
   border: 1px solid var(--border);
   border-radius: 0.875rem;
@@ -1622,12 +1622,18 @@ a:focus {
 
 /* ─────────────── Related posts ─────────────── */
 .related-posts {
-  margin-top: 3.5rem;
-  padding-top: 2rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--border);
 }
+/* When the series module is directly above, drop the redundant border + margin
+   so the two sections read as one continuous footer block. */
+.series-module + .related-posts {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+}
 .related-posts-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 .related-posts-heading-row {
   display: flex;
@@ -1672,30 +1678,38 @@ a:focus {
   content: attr(data-tooltip);
   position: absolute;
   top: calc(100% + 0.5rem);
-  left: 50%;
-  transform: translateX(-50%) translateY(-4px);
+  /* Anchor to the start of the badge and grow rightward so the tooltip never
+     clips off the left edge of the viewport. */
+  left: 0;
+  transform: translateY(-4px);
   width: max-content;
-  max-width: min(360px, 80vw);
-  padding: 0.6rem 0.8rem;
-  font-size: 0.75rem;
+  max-width: min(340px, calc(100vw - 2.5rem));
+  padding: 0.65rem 0.85rem;
+  font-size: 0.78rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--text-primary);
   background: var(--background);
   border: 1px solid var(--border);
   border-radius: 0.5rem;
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.32);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.15s ease, transform 0.15s ease;
-  z-index: 10;
+  z-index: 20;
   white-space: normal;
   text-align: left;
 }
 .related-posts-info:hover::after,
 .related-posts-info:focus-visible::after {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
+}
+@media (max-width: 480px) {
+  .related-posts-info::after {
+    /* On narrow phones, span almost the full content width. */
+    max-width: calc(100vw - 2rem);
+  }
 }
 
 /* Hero takes its own row at top */
