@@ -1,14 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { SeriesContext } from "@/lib/getRelatedPosts";
-
-function gradientFromKey(key: string): string {
-  let h = 0;
-  for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) | 0;
-  const hue1 = Math.abs(h) % 360;
-  const hue2 = (hue1 + 40 + (Math.abs(h >> 4) % 40)) % 360;
-  return `linear-gradient(135deg, hsl(${hue1} 60% 55% / 0.85), hsl(${hue2} 70% 45% / 0.85))`;
-}
+import { getPostCoverUrl } from "@/lib/getPostCover";
 
 function SiblingCard({
   label,
@@ -19,27 +12,16 @@ function SiblingCard({
   sib: NonNullable<SeriesContext["prev"] | SeriesContext["next"]>;
   side: "prev" | "next";
 }) {
-  const initial = (sib.title || "•").trim().charAt(0).toUpperCase();
   return (
     <Link href={`/blog/${sib.slug}`} className={`series-card series-card-${side}`}>
       <div className="series-card-image">
-        {sib.image ? (
-          <Image
-            src={sib.image}
-            alt=""
-            fill
-            sizes="96px"
-            className="series-card-img"
-          />
-        ) : (
-          <div
-            className="related-img-placeholder series-card-placeholder"
-            style={{ background: gradientFromKey(sib.title) }}
-            aria-hidden="true"
-          >
-            <span className="related-img-placeholder-glyph">{initial}</span>
-          </div>
-        )}
+        <Image
+          src={getPostCoverUrl(sib.slug, sib.image)}
+          alt=""
+          fill
+          sizes="160px"
+          className="series-card-img"
+        />
       </div>
       <div className="series-card-body">
         <span className="series-card-direction">

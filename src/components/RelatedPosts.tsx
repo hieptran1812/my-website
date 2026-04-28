@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { RelatedPost, RelatedReason } from "@/lib/getRelatedPosts";
+import { getPostCoverUrl } from "@/lib/getPostCover";
 
 const REASON_ICON: Record<RelatedReason, string> = {
   tags: "🏷️",
@@ -17,56 +18,26 @@ function formatDate(iso: string): string {
   return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
 
-/**
- * Hash a string to a deterministic gradient pair so placeholder cards have
- * varied but stable colours (same post = same gradient on every render).
- */
-function gradientFromKey(key: string): string {
-  let h = 0;
-  for (let i = 0; i < key.length; i++) {
-    h = (h * 31 + key.charCodeAt(i)) | 0;
-  }
-  const hue1 = Math.abs(h) % 360;
-  const hue2 = (hue1 + 40 + (Math.abs(h >> 4) % 40)) % 360;
-  return `linear-gradient(135deg, hsl(${hue1} 60% 55% / 0.85), hsl(${hue2} 70% 45% / 0.85))`;
-}
-
 function CardImage({
-  src,
-  title,
-  category,
+  post,
   variant,
 }: {
-  src?: string;
-  title: string;
-  category: string;
+  post: RelatedPost;
   variant: "hero" | "secondary";
 }) {
   const sizes =
     variant === "hero"
       ? "(min-width: 1024px) 60vw, 100vw"
-      : "(min-width: 1024px) 240px, (min-width: 720px) 50vw, 100vw";
-  if (src) {
-    return (
-      <Image
-        src={src}
-        alt=""
-        fill
-        sizes={sizes}
-        className="related-img"
-      />
-    );
-  }
-  // Placeholder: gradient with category initial.
-  const initial = (category || title || "•").trim().charAt(0).toUpperCase();
+      : "(min-width: 1024px) 320px, (min-width: 720px) 50vw, 100vw";
+  const src = getPostCoverUrl(post.slug, post.image);
   return (
-    <div
-      className="related-img-placeholder"
-      style={{ background: gradientFromKey(title || category) }}
-      aria-hidden="true"
-    >
-      <span className="related-img-placeholder-glyph">{initial}</span>
-    </div>
+    <Image
+      src={src}
+      alt=""
+      fill
+      sizes={sizes}
+      className="related-img"
+    />
   );
 }
 
@@ -86,12 +57,7 @@ function HeroCard({ post }: { post: RelatedPost }) {
   return (
     <Link href={`/blog/${post.slug}`} className="related-card related-card-hero">
       <div className="related-card-image related-card-image-hero">
-        <CardImage
-          src={post.image}
-          title={post.title}
-          category={post.subcategory || post.category}
-          variant="hero"
-        />
+        <CardImage post={post} variant="hero" />
         <div className="related-card-image-overlay" />
       </div>
       <div className="related-card-body related-card-body-hero">
@@ -134,12 +100,7 @@ function SecondaryCard({ post }: { post: RelatedPost }) {
   return (
     <Link href={`/blog/${post.slug}`} className="related-card related-card-secondary">
       <div className="related-card-image related-card-image-secondary">
-        <CardImage
-          src={post.image}
-          title={post.title}
-          category={post.subcategory || post.category}
-          variant="secondary"
-        />
+        <CardImage post={post} variant="secondary" />
       </div>
       <div className="related-card-body related-card-body-secondary">
         <div className="related-card-meta">
@@ -170,7 +131,6 @@ export default function RelatedPosts({
 }) {
   if (!posts || posts.length === 0) return null;
 
-  // Single post → centered single card. 2 posts → grid 2-up. 3+ → hero + rest.
   const [hero, ...rest] = posts;
 
   return (

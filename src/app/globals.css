@@ -1534,9 +1534,9 @@ a:focus {
 
 .series-card {
   display: grid;
-  grid-template-columns: 96px 1fr;
-  gap: 0.85rem;
-  padding: 0.7rem;
+  grid-template-columns: 160px 1fr;
+  gap: 1rem;
+  padding: 0.75rem;
   border: 1px solid var(--border);
   border-radius: 0.625rem;
   background: var(--background);
@@ -1553,7 +1553,7 @@ a:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 96px;
+  min-height: 90px;
   color: var(--text-secondary);
   font-size: 0.78rem;
   font-style: italic;
@@ -1562,12 +1562,21 @@ a:focus {
 }
 .series-card-image {
   position: relative;
-  width: 96px;
-  height: 96px;
+  width: 160px;
+  aspect-ratio: 16 / 9;
   border-radius: 0.5rem;
   overflow: hidden;
   background: var(--surface);
   flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .series-card {
+    grid-template-columns: 120px 1fr;
+    gap: 0.75rem;
+  }
+  .series-card-image {
+    width: 120px;
+  }
 }
 .series-card-img {
   object-fit: cover;
@@ -1711,47 +1720,6 @@ a:focus {
 .related-card:hover .related-img {
   transform: scale(1.04);
 }
-.related-img-placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.92);
-  transition: transform 0.4s ease;
-}
-.related-card:hover .related-img-placeholder {
-  transform: scale(1.04);
-}
-.related-img-placeholder::after {
-  /* subtle grid pattern overlay for texture */
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
-  pointer-events: none;
-}
-.related-img-placeholder-glyph {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  position: relative;
-  z-index: 1;
-}
-.related-card-image-secondary .related-img-placeholder-glyph {
-  font-size: 1.75rem;
-}
-.series-card-placeholder {
-  border-radius: 0.5rem;
-}
-.series-card-placeholder .related-img-placeholder-glyph {
-  font-size: 1.5rem;
-}
 .related-card-image-overlay {
   position: absolute;
   inset: 0;
@@ -1820,18 +1788,14 @@ a:focus {
   border-top: 1px dashed var(--border);
 }
 
-/* Hero variant */
-.related-card-hero {
-  /* On wide screens, full row; below 1024 it stays a normal stacked card. */
-}
-.related-card-image-hero {
+/* Every related-card image renders at 16:9 (matches generated cover ratio). */
+.related-card-image-hero,
+.related-card-image-secondary {
   aspect-ratio: 16 / 9;
+  width: 100%;
 }
-@media (min-width: 1024px) {
-  .related-card-image-hero {
-    aspect-ratio: 16 / 10;
-  }
-}
+
+/* Hero variant */
 .related-card-body-hero {
   padding: 1.1rem 1.25rem 1.25rem;
   gap: 0.1rem;
@@ -1850,34 +1814,22 @@ a:focus {
   -webkit-line-clamp: 3;
 }
 
-/* Secondary variant — compact */
+/* Secondary variant — image on top, body below (mirror of hero, smaller). */
 .related-card-secondary {
-  flex-direction: row;
-  align-items: stretch;
-  min-height: 96px;
-}
-.related-card-image-secondary {
-  width: 110px;
-  flex-shrink: 0;
-  aspect-ratio: auto;
-}
-@media (min-width: 1024px) {
-  .related-card-image-secondary {
-    width: 130px;
-  }
+  flex-direction: column;
 }
 .related-card-body-secondary {
-  padding: 0.65rem 0.85rem;
+  padding: 0.75rem 0.95rem 0.95rem;
+  gap: 0.1rem;
   flex: 1;
-  min-width: 0;
 }
 .related-card-title-secondary {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   -webkit-line-clamp: 2;
 }
 .related-card-footer-secondary {
-  margin-top: 0.45rem;
-  padding-top: 0.45rem;
+  margin-top: 0.55rem;
+  padding-top: 0.55rem;
 }
 
 /* Reason badge */

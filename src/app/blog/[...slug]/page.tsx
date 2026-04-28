@@ -7,6 +7,9 @@ import { getRelatedPosts, getSeriesContext } from "@/lib/getRelatedPosts";
 import RelatedPosts from "@/components/RelatedPosts";
 import SeriesModule from "@/components/SeriesModule";
 import CodeBlockEnhancer from "@/components/CodeBlockEnhancer";
+import { getPostCoverUrl } from "@/lib/getPostCover";
+
+const SITE_URL = "https://halleyverse.dev";
 
 export const revalidate = 3600;
 
@@ -28,6 +31,17 @@ export async function generateMetadata({
     return { title: "Blog Post Not Found" };
   }
 
+  const coverPath = getPostCoverUrl(article.slug, article.image);
+  const coverAbsolute = coverPath.startsWith("http")
+    ? coverPath
+    : `${SITE_URL}${coverPath}`;
+  const ogImage = {
+    url: coverAbsolute,
+    width: 1200,
+    height: 675,
+    alt: article.title,
+  };
+
   return {
     title: `${article.title} | Hiep Tran`,
     description: article.excerpt || `Read ${article.title} by ${article.author}`,
@@ -39,6 +53,13 @@ export async function generateMetadata({
       publishedTime: article.publishDate,
       authors: article.author ? [article.author] : undefined,
       tags: article.tags,
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt || "",
+      images: [coverAbsolute],
     },
   };
 }
