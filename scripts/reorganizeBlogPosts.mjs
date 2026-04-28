@@ -23,6 +23,7 @@ const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, "..");
 const BLOG_ROOT = path.join(REPO_ROOT, "content", "blog");
 const APPLY = process.argv.includes("--apply");
+const FORCE = process.argv.includes("--force");
 
 function slugify(value) {
   if (typeof value !== "string") return "";
@@ -58,9 +59,26 @@ function ensureCleanWorktree() {
   }
 }
 
+function isTracked(absPath) {
+  try {
+    execFileSync("git", ["ls-files", "--error-unmatch", absPath], {
+      cwd: REPO_ROOT,
+      stdio: "ignore",
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function gitMove(src, dst) {
   fs.mkdirSync(path.dirname(dst), { recursive: true });
-  execFileSync("git", ["mv", src, dst], { cwd: REPO_ROOT, stdio: "inherit" });
+  if (isTracked(src)) {
+    execFileSync("git", ["mv", src, dst], { cwd: REPO_ROOT, stdio: "inherit" });
+  } else {
+    // Untracked file: a plain rename keeps it untracked at the new location.
+    fs.renameSync(src, dst);
+  }
 }
 
 function main() {
@@ -69,7 +87,7 @@ function main() {
     process.exit(1);
   }
 
-  if (APPLY) ensureCleanWorktree();
+  if (APPLY && !FORCE) ensureCleanWorktree();
 
   const files = walk(BLOG_ROOT);
   const moves = [];
