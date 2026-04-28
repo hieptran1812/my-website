@@ -69,7 +69,7 @@ function SiblingCard({
 export default function SeriesModule({ ctx }: { ctx: SeriesContext | null }) {
   if (!ctx || (!ctx.prev && !ctx.next)) return null;
   return (
-    <section className="series-module" aria-label="Series navigation">
+    <section className="series-module section-flat" aria-label="Series navigation">
       <header className="series-module-header">
         <span className="series-module-icon" aria-hidden="true">
           📚

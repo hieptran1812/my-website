@@ -200,7 +200,7 @@ export default function RelatedPosts({
   const corpusNote = `${posts.length} ${posts.length === 1 ? "post" : "posts"} ranked by tag IDF, content cosine, recency, and MMR diversity.`;
 
   return (
-    <section className="related-posts" aria-label={heading}>
+    <section className="related-posts section-flat" aria-label={heading}>
       <header className="related-posts-header">
         <div className="related-posts-heading-row">
           <h2>{heading}</h2>

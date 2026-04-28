@@ -240,6 +240,12 @@ section:not([class*="section-"]):not([style*="background"]):nth-child(odd) {
   );
 }
 
+/* Opt-out: sections explicitly tagged section-flat keep the page background
+   so any cards inside read against the same theme colour. */
+section.section-flat {
+  background: transparent;
+}
+
 
 /* Card styling with new color scheme */
 .card-bg {
