@@ -13,6 +13,9 @@ export interface RelatedPost {
   subcategory: string;
   publishDate: string;
   score: number;
+  sharedTags: string[];
+  /** Why this post matched: tag-overlap, same-subcategory, same-category. */
+  reason: "tags" | "subcategory" | "category";
 }
 
 interface IndexEntry {
@@ -84,9 +87,15 @@ export function getRelatedPosts(
     let score = 0;
     const sharedTags = entry.tags.filter((t) => tagSet.has(t.toLowerCase()));
     score += sharedTags.length * 3;
-    if (currentSubcategory && entry.subcategory === currentSubcategory) score += 2;
-    if (currentCategory && entry.category === currentCategory) score += 1;
+    const sameSub =
+      !!currentSubcategory && entry.subcategory === currentSubcategory;
+    const sameCat = !!currentCategory && entry.category === currentCategory;
+    if (sameSub) score += 2;
+    if (sameCat) score += 1;
     if (score === 0) continue;
+
+    const reason: RelatedPost["reason"] =
+      sharedTags.length > 0 ? "tags" : sameSub ? "subcategory" : "category";
 
     scored.push({
       slug: entry.slug,
@@ -96,6 +105,8 @@ export function getRelatedPosts(
       subcategory: entry.subcategory,
       publishDate: entry.publishDate,
       score,
+      sharedTags,
+      reason,
     });
   }
 
@@ -126,5 +137,7 @@ export function getPopularPosts(limit = 6): RelatedPost[] {
       subcategory: e.subcategory,
       publishDate: e.publishDate,
       score: 0,
+      sharedTags: [],
+      reason: "category" as const,
     }));
 }
