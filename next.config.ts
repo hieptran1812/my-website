@@ -12,7 +12,9 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   experimental: {
-    optimizePackageImports: ["react-icons", "d3", "katex", "gray-matter"],
+    // gray-matter is server-only — tree-shake hint does nothing for it. Keep
+    // only the client-loaded packages so the optimiser stays useful.
+    optimizePackageImports: ["react-icons", "d3", "katex"],
     scrollRestoration: true,
   },
   compress: true,

@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+import fs from "fs";
+import path from "path";
 import { ImageResponse } from "next/og";
 import { getPostMeta } from "@/lib/getPostMeta";
 import { COVER_HEIGHT, COVER_WIDTH } from "@/lib/getPostCover";
@@ -7,44 +9,22 @@ export const runtime = "nodejs";
 // Treat as fully static — re-render only when the file changes (rare).
 export const revalidate = 31536000;
 
-// ─────────────── Font loading (module-cached) ───────────────
+// ─────────────── Font loading (filesystem, module-cached) ───────────────
 
 interface FontPair {
-  regular: ArrayBuffer;
-  bold: ArrayBuffer;
+  regular: Buffer;
+  bold: Buffer;
 }
 
-let fontPromise: Promise<FontPair> | null = null;
+let fontCache: FontPair | null = null;
 
-async function fetchGoogleFontBinary(family: string, weight: number): Promise<ArrayBuffer> {
-  const cssUrl = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@${weight}&display=swap`;
-  const css = await fetch(cssUrl, {
-    headers: {
-      // Required: without a real UA, Google returns TTF instead of woff2,
-      // which Satori does support, but woff2 is smaller.
-      "User-Agent":
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
-    },
-    cache: "force-cache",
-  }).then((r) => r.text());
-  const match = /url\((https:\/\/fonts\.gstatic\.com[^)]+)\)/.exec(css);
-  if (!match) throw new Error(`Could not find ${family} ${weight} in Google CSS`);
-  return await fetch(match[1], { cache: "force-cache" }).then((r) => r.arrayBuffer());
-}
-
-function loadFonts(): Promise<FontPair> {
-  if (fontPromise) return fontPromise;
-  fontPromise = (async () => {
-    const [regular, bold] = await Promise.all([
-      fetchGoogleFontBinary("Inter", 500),
-      fetchGoogleFontBinary("Inter", 700),
-    ]);
-    return { regular, bold };
-  })().catch((err) => {
-    fontPromise = null; // allow retry on next request
-    throw err;
-  });
-  return fontPromise;
+function loadFonts(): FontPair {
+  if (fontCache) return fontCache;
+  const fontsDir = path.join(process.cwd(), "public", "fonts");
+  const regular = fs.readFileSync(path.join(fontsDir, "inter-500.woff2"));
+  const bold = fs.readFileSync(path.join(fontsDir, "inter-700.woff2"));
+  fontCache = { regular, bold };
+  return fontCache;
 }
 
 // ─────────────── Visual primitives ───────────────
@@ -118,13 +98,13 @@ export async function GET(
   const date = formatDate(meta?.publishDate || "");
   const palette = paletteFor(slugStr || title);
 
-  let fonts: FontPair;
+  let fonts: FontPair | null = null;
   try {
-    fonts = await loadFonts();
+    fonts = loadFonts();
   } catch {
-    // If Google Fonts is unreachable in dev, fall back to no custom fonts —
-    // Satori will use its default Latin fallback.
-    fonts = { regular: new ArrayBuffer(0), bold: new ArrayBuffer(0) };
+    // If the bundled font is missing for any reason, fall back to Satori's
+    // default Latin glyphs.
+    fonts = null;
   }
 
   const titleSize = pickTitleSize(title);
@@ -286,13 +266,12 @@ export async function GET(
     {
       width: COVER_WIDTH,
       height: COVER_HEIGHT,
-      fonts:
-        fonts.regular.byteLength > 0 && fonts.bold.byteLength > 0
-          ? [
-              { name: "Inter", data: fonts.regular, weight: 500, style: "normal" },
-              { name: "Inter", data: fonts.bold, weight: 700, style: "normal" },
-            ]
-          : undefined,
+      fonts: fonts
+        ? [
+            { name: "Inter", data: fonts.regular, weight: 500, style: "normal" },
+            { name: "Inter", data: fonts.bold, weight: 700, style: "normal" },
+          ]
+        : undefined,
       headers: {
         "Cache-Control":
           "public, max-age=31536000, s-maxage=31536000, immutable, stale-while-revalidate=86400",

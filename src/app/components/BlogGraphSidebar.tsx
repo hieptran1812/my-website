@@ -1,7 +1,15 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import BlogGraphView from "./BlogGraphView";
+import dynamic from "next/dynamic";
+
+// Heavy: pulls in d3-force + the graph view. Code-split off the article
+// initial bundle, and only mount once the page has gone idle so the article
+// content + cover images can render first.
+const BlogGraphView = dynamic(() => import("./BlogGraphView"), {
+  ssr: false,
+  loading: () => null,
+});
 
 interface BlogGraphSidebarProps {
   currentSlug?: string;
@@ -66,6 +74,23 @@ function BlogGraphSidebar({
   });
   const [graphKey, setGraphKey] = useState(0);
   const graphContainerRef = useRef<HTMLDivElement>(null);
+  /** Defer mounting the graph view until the page is idle so the article
+   *  body + cover images get the network/CPU first. */
+  const [graphReady, setGraphReady] = useState(false);
+  useEffect(() => {
+    type IdleCb = () => void;
+    interface IdleHost {
+      requestIdleCallback?: (cb: IdleCb) => number;
+      cancelIdleCallback?: (h: number) => void;
+    }
+    const w = window as unknown as IdleHost;
+    if (typeof w.requestIdleCallback === "function") {
+      const handle = w.requestIdleCallback(() => setGraphReady(true));
+      return () => w.cancelIdleCallback?.(handle);
+    }
+    const timer = setTimeout(() => setGraphReady(true), 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Save collapsed state to localStorage
   useEffect(() => {
@@ -473,13 +498,15 @@ function BlogGraphSidebar({
                     overflow: "hidden",
                   }}
                 >
-                  <BlogGraphView
-                    key={graphKey}
-                    currentSlug={currentSlug}
-                    isExpanded={false}
-                    height={280}
-                    theme={theme}
-                  />
+                  {graphReady ? (
+                    <BlogGraphView
+                      key={graphKey}
+                      currentSlug={currentSlug}
+                      isExpanded={false}
+                      height={280}
+                      theme={theme}
+                    />
+                  ) : null}
                 </div>
               </div>
             </div>

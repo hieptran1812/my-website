@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
-import { derivePostLocation } from "../../../../lib/postPath";
+import { loadAllPosts } from "../../../../lib/blogIndex";
 
 export interface Article {
   id: string;
@@ -149,88 +146,25 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "500");
     const excludeContent = searchParams.get("excludeContent") === "true";
 
-    const contentDir = path.join(process.cwd(), "content", "blog");
+    const corpus = await loadAllPosts();
     const articles: Article[] = [];
-    const processedFiles = new Set<string>();
 
-    const readArticlesFromDir = (
-      dir: string,
-      currentCategory?: string,
-      currentSubcategorySlug?: string,
-      basePath = "",
-    ) => {
-      const entries = fs.readdirSync(dir, { withFileTypes: true });
-      for (const entry of entries) {
-        const fullPath = path.join(dir, entry.name);
-        if (entry.isDirectory()) {
-          const newBasePath = basePath
-            ? `${basePath}/${entry.name}`
-            : entry.name;
+    for (const entry of corpus) {
+      const article = convertToArticle(
+        entry.frontmatter,
+        entry.slug,
+        entry.category,
+        entry.subcategory,
+        entry.content,
+      );
+      article.id = entry.slug.replace(/\//g, "-");
+      article.content = entry.content;
 
-          // Determine if this is a category or subcategory folder
-          // First level directories are categories, second level are subcategories
-          if (!currentCategory) {
-            // This is a category folder
-            readArticlesFromDir(fullPath, entry.name, undefined, newBasePath);
-          } else if (!currentSubcategorySlug) {
-            // This is a subcategory folder
-            readArticlesFromDir(
-              fullPath,
-              currentCategory,
-              entry.name,
-              newBasePath,
-            );
-          } else {
-            // Deeper nesting - continue with current category/subcategory
-            readArticlesFromDir(
-              fullPath,
-              currentCategory,
-              currentSubcategorySlug,
-              newBasePath,
-            );
-          }
-        } else if (entry.name.endsWith(".md")) {
-          const fileKey = basePath ? `${basePath}/${entry.name}` : entry.name;
-
-          if (processedFiles.has(fileKey)) {
-            continue;
-          }
-          processedFiles.add(fileKey);
-
-          const fileContent = fs.readFileSync(fullPath, "utf8");
-          const { data: metadata, content: fileMatterContent } =
-            matter(fileContent);
-          const fileName = entry.name.replace(/\.md$/, "");
-          const slug = basePath ? `${basePath}/${fileName}` : fileName;
-
-          // Create unique ID using full path
-          const uniqueId = `${slug.replace(/\//g, "-")}`;
-
-          const { category: derivedCategory, subcategory: derivedSubcategory } =
-            derivePostLocation(fullPath, metadata, contentDir);
-
-          const article = convertToArticle(
-            metadata,
-            slug,
-            derivedCategory,
-            derivedSubcategory,
-            fileMatterContent,
-          );
-          article.id = uniqueId; // Override with truly unique ID
-          article.content = fileMatterContent;
-
-          if (categoryFilter && article.category !== categoryFilter) {
-            continue;
-          }
-          if (subcategoryFilter && article.subcategory !== subcategoryFilter) {
-            continue;
-          }
-          articles.push(article);
-        }
-      }
-    };
-
-    readArticlesFromDir(contentDir);
+      if (categoryFilter && article.category !== categoryFilter) continue;
+      if (subcategoryFilter && article.subcategory !== subcategoryFilter)
+        continue;
+      articles.push(article);
+    }
 
     // Sort articles by date (newest first) - more robust date parsing
     articles.sort((a, b) => {
@@ -256,13 +190,21 @@ export async function GET(request: NextRequest) {
         paginatedArticles.map(({ content, ...rest }) => rest)
       : paginatedArticles;
 
-    return NextResponse.json({
-      articles: responseArticles,
-      total: articles.length,
-      page,
-      limit,
-      hasMore: endIndex < articles.length,
-    });
+    return NextResponse.json(
+      {
+        articles: responseArticles,
+        total: articles.length,
+        page,
+        limit,
+        hasMore: endIndex < articles.length,
+      },
+      {
+        headers: {
+          "Cache-Control":
+            "public, s-maxage=3600, stale-while-revalidate=86400",
+        },
+      },
+    );
   } catch (error) {
     console.error("Error fetching articles:", error);
     return NextResponse.json(

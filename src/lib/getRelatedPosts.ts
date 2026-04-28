@@ -1,10 +1,13 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import { removeStopwords, eng, vie } from "stopword";
-import { derivePostLocation } from "./postPath";
+import {
+  loadAllPosts,
+  extractFirstBodyImage as _extractFirstBodyImage,
+  resolvePostCover as _resolvePostCover,
+} from "./blogIndex";
 
-const blogDir = path.join(process.cwd(), "content", "blog");
+// Re-export so existing import paths (e.g. getArticle.ts) keep working.
+export const extractFirstBodyImage = _extractFirstBodyImage;
+export const resolvePostCover = _resolvePostCover;
 
 // ─────────────── Public types ───────────────
 
@@ -100,38 +103,6 @@ const CACHE_TTL_MS = 5 * 60 * 1000;
 
 const STOP_WORDS = new Set([...eng, ...vie]);
 const TOKEN_RE = /[\p{L}\p{N}]+/gu;
-// First markdown image reference: ![alt](url) — captures the URL.
-const FIRST_BODY_IMAGE_RE = /!\[[^\]]*\]\(([^)\s]+)(?:\s+["'][^"']*["'])?\)/;
-
-/** Pull the first inline markdown image URL out of the body, if any. */
-export function extractFirstBodyImage(markdown: string): string | undefined {
-  if (!markdown) return undefined;
-  const m = FIRST_BODY_IMAGE_RE.exec(markdown);
-  if (!m) return undefined;
-  const url = m[1].trim();
-  if (!url) return undefined;
-  return url;
-}
-
-/**
- * Resolve a post's cover: frontmatter image wins, then first body image.
- * External URLs are skipped (next/image would need remotePatterns config).
- */
-export function resolvePostCover(
-  frontmatter: Record<string, unknown>,
-  body: string,
-): string | undefined {
-  const candidates: (string | undefined)[] = [];
-  const fm = frontmatter.image;
-  if (typeof fm === "string" && fm.trim().length > 0) candidates.push(fm.trim());
-  candidates.push(extractFirstBodyImage(body));
-  for (const c of candidates) {
-    if (!c) continue;
-    if (/^https?:\/\//i.test(c)) continue; // remote — would need next.config remotePatterns
-    return c;
-  }
-  return undefined;
-}
 
 function tokenize(text: string): string[] {
   if (!text) return [];
@@ -147,55 +118,35 @@ function termFreq(tokens: string[]): Map<string, number> {
   return tf;
 }
 
-function buildIndex(): CorpusIndex {
+async function buildIndex(): Promise<CorpusIndex> {
+  const corpus = await loadAllPosts();
   const entries: IndexEntry[] = [];
   const tagDf = new Map<string, number>();
   const tokenDf = new Map<string, number>();
 
-  const walk = (dir: string) => {
-    if (!fs.existsSync(dir)) return;
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) walk(full);
-      else if (entry.isFile() && entry.name.endsWith(".md")) {
-        const raw = fs.readFileSync(full, "utf8");
-        const { data, content: body } = matter(raw);
-        const { category, subcategory } = derivePostLocation(full, data, blogDir);
-        const slug = path
-          .relative(blogDir, full)
-          .replace(/\.md$/, "")
-          .split(path.sep)
-          .join("/");
+  for (const e of corpus) {
+    const tags = e.tags.map((t) => t.toLowerCase());
+    const tokens = tokenize(`${e.title} ${e.excerpt}`);
+    const tokenTf = termFreq(tokens);
 
-        const title = data.title || slug;
-        const excerpt = data.excerpt || data.description || "";
-        const tags: string[] = Array.isArray(data.tags)
-          ? data.tags.map((t) => String(t).toLowerCase())
-          : [];
-        const tokens = tokenize(`${title} ${excerpt}`);
-        const tokenTf = termFreq(tokens);
+    entries.push({
+      slug: e.slug,
+      title: e.title,
+      excerpt: e.excerpt,
+      category: e.category,
+      subcategory: e.subcategory,
+      tags,
+      publishDate: e.publishDate,
+      image: e.image,
+      collection: e.collection,
+      tokenTf,
+      tfidfNorm: 0, // filled below
+    });
 
-        entries.push({
-          slug,
-          title,
-          excerpt,
-          category,
-          subcategory,
-          tags,
-          publishDate: data.publishDate || data.date || "",
-          image: resolvePostCover(data, body),
-          collection: typeof data.collection === "string" ? data.collection : undefined,
-          tokenTf,
-          tfidfNorm: 0, // filled in pass 2
-        });
-
-        for (const t of new Set(tags)) tagDf.set(t, (tagDf.get(t) ?? 0) + 1);
-        for (const tok of new Set(tokenTf.keys()))
-          tokenDf.set(tok, (tokenDf.get(tok) ?? 0) + 1);
-      }
-    }
-  };
-  walk(blogDir);
+    for (const t of new Set(tags)) tagDf.set(t, (tagDf.get(t) ?? 0) + 1);
+    for (const tok of new Set(tokenTf.keys()))
+      tokenDf.set(tok, (tokenDf.get(tok) ?? 0) + 1);
+  }
 
   const N = entries.length;
   const tagIdf = new Map<string, number>();
@@ -236,10 +187,10 @@ function buildIndex(): CorpusIndex {
   return { entries, bySlug, tagIdf, tokenIdf, N, byCollection };
 }
 
-function getIndex(): CorpusIndex {
+async function getIndex(): Promise<CorpusIndex> {
   const now = Date.now();
   if (cachedIndex && now - cachedAt < CACHE_TTL_MS) return cachedIndex;
-  cachedIndex = buildIndex();
+  cachedIndex = await buildIndex();
   cachedAt = now;
   return cachedIndex;
 }
@@ -414,7 +365,7 @@ function mmrSelect(
 
 // ─────────────── Public API ───────────────
 
-export function getRelatedPosts(
+export async function getRelatedPosts(
   currentSlug: string,
   // currentTags/currentCategory/currentSubcategory kept for back-compat callers
   // but values are sourced authoritatively from the corpus index.
@@ -422,8 +373,8 @@ export function getRelatedPosts(
   _currentCategory: string,
   _currentSubcategory: string,
   limit = 6,
-): RelatedPost[] {
-  const idx = getIndex();
+): Promise<RelatedPost[]> {
+  const idx = await getIndex();
   const current = idx.bySlug.get(currentSlug);
   if (!current) return [];
 
@@ -467,10 +418,10 @@ export function getRelatedPosts(
   }));
 }
 
-export function getSeriesContext(
+export async function getSeriesContext(
   currentSlug: string,
-): SeriesContext | null {
-  const idx = getIndex();
+): Promise<SeriesContext | null> {
+  const idx = await getIndex();
   const current = idx.bySlug.get(currentSlug);
   if (!current?.collection) return null;
   const sibs = idx.byCollection.get(current.collection.toLowerCase()) ?? [];
@@ -494,8 +445,8 @@ export function getSeriesContext(
   };
 }
 
-export function getPopularPosts(limit = 6): RelatedPost[] {
-  const idx = getIndex();
+export async function getPopularPosts(limit = 6): Promise<RelatedPost[]> {
+  const idx = await getIndex();
   return [...idx.entries]
     .sort((a, b) => {
       const da = Date.parse(a.publishDate) || 0;

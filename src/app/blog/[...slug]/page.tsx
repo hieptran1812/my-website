@@ -113,8 +113,10 @@ export default async function BlogPostPage({
 
   // The corpus index inside getRelatedPosts/getSeriesContext is the source of
   // truth for tags / category / subcategory — no need to recompute here.
-  const series = getSeriesContext(article.slug);
-  const related = getRelatedPosts(article.slug, [], "", "", 6);
+  const [series, related] = await Promise.all([
+    getSeriesContext(article.slug),
+    getRelatedPosts(article.slug, [], "", "", 6),
+  ]);
 
   return (
     <>

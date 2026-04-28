@@ -1,20 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { derivePostLocation } from "@/lib/postPath";
-
-interface SearchDoc {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  subcategory: string;
-  tags: string[];
-  publishDate: string;
-  haystack: string;
-  body: string;
-}
+import { loadAllPosts, type BlogIndexEntry } from "@/lib/blogIndex";
 
 interface SearchHit {
   slug: string;
@@ -26,71 +11,40 @@ interface SearchHit {
   score: number;
 }
 
-const blogDir = path.join(process.cwd(), "content", "blog");
+const SNIPPET_RADIUS = 90;
 
-let docs: SearchDoc[] | null = null;
-let docsBuiltAt = 0;
-const TTL_MS = 5 * 60 * 1000;
-const SNIPPET_RADIUS = 90; // chars on each side of the first match
-
-function buildDocs(): SearchDoc[] {
-  const out: SearchDoc[] = [];
-  const walk = (dir: string) => {
-    if (!fs.existsSync(dir)) return;
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) walk(full);
-      else if (entry.isFile() && entry.name.endsWith(".md")) {
-        const raw = fs.readFileSync(full, "utf8");
-        const { data, content } = matter(raw);
-        const { category, subcategory } = derivePostLocation(full, data, blogDir);
-        const slug = path
-          .relative(blogDir, full)
-          .replace(/\.md$/, "")
-          .split(path.sep)
-          .join("/");
-        // Strip code fences, images, links, headings markers from body for cleaner snippets.
-        const body = content
-          .replace(/```[\s\S]*?```/g, " ")
-          .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
-          .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-          .replace(/^#{1,6}\s+/gm, "")
-          .replace(/[*_`>~]/g, " ")
-          .replace(/\s+/g, " ")
-          .trim();
-        const tags = Array.isArray(data.tags) ? data.tags.map(String) : [];
-        const haystack = [
-          data.title || "",
-          data.excerpt || data.description || "",
-          tags.join(" "),
-          body,
-        ]
-          .join("  ")
-          .toLowerCase();
-        out.push({
-          slug,
-          title: data.title || slug,
-          excerpt: data.excerpt || data.description || "",
-          category,
-          subcategory,
-          tags,
-          publishDate: data.publishDate || data.date || "",
-          haystack,
-          body,
-        });
-      }
-    }
-  };
-  walk(blogDir);
-  return out;
+interface PreparedDoc extends BlogIndexEntry {
+  haystack: string;
+  body: string;
 }
 
-function getDocs(): SearchDoc[] {
-  const now = Date.now();
-  if (docs && now - docsBuiltAt < TTL_MS) return docs;
-  docs = buildDocs();
-  docsBuiltAt = now;
-  return docs;
+let preparedCache: PreparedDoc[] | null = null;
+let preparedFor: BlogIndexEntry[] | null = null;
+
+function prepare(corpus: BlogIndexEntry[]): PreparedDoc[] {
+  if (preparedCache && preparedFor === corpus) return preparedCache;
+  const out: PreparedDoc[] = corpus.map((entry) => {
+    const body = entry.content
+      .replace(/```[\s\S]*?```/g, " ")
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .replace(/^#{1,6}\s+/gm, "")
+      .replace(/[*_`>~]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    const haystack = [
+      entry.title,
+      entry.excerpt,
+      entry.tags.join(" "),
+      body,
+    ]
+      .join("  ")
+      .toLowerCase();
+    return { ...entry, haystack, body };
+  });
+  preparedCache = out;
+  preparedFor = corpus;
+  return out;
 }
 
 function escapeHtml(s: string): string {
@@ -110,7 +64,6 @@ function buildSnippet(body: string, query: string): string {
   if (tokens.length === 0) {
     return escapeHtml(body.slice(0, 180)) + (body.length > 180 ? "…" : "");
   }
-  // Find earliest match for any token.
   let bestIdx = -1;
   for (const t of tokens) {
     const idx = lowerBody.indexOf(t);
@@ -124,7 +77,6 @@ function buildSnippet(body: string, query: string): string {
   let slice = body.slice(start, end);
   if (start > 0) slice = "…" + slice;
   if (end < body.length) slice = slice + "…";
-
   let html = escapeHtml(slice);
   for (const t of tokens) {
     const re = new RegExp(`(${t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
@@ -133,7 +85,7 @@ function buildSnippet(body: string, query: string): string {
   return html;
 }
 
-function scoreDoc(doc: SearchDoc, tokens: string[]): number {
+function scoreDoc(doc: PreparedDoc, tokens: string[]): number {
   let score = 0;
   const titleLower = doc.title.toLowerCase();
   for (const t of tokens) {
@@ -159,9 +111,10 @@ export async function GET(request: NextRequest) {
     .split(/\s+/)
     .filter((t) => t.length >= 2);
 
-  const all = getDocs();
+  const corpus = await loadAllPosts();
+  const docs = prepare(corpus);
   const hits: SearchHit[] = [];
-  for (const doc of all) {
+  for (const doc of docs) {
     const score = scoreDoc(doc, tokens);
     if (score <= 0) continue;
     hits.push({
@@ -175,5 +128,13 @@ export async function GET(request: NextRequest) {
     });
   }
   hits.sort((a, b) => b.score - a.score);
-  return NextResponse.json({ hits: hits.slice(0, limit) });
+  return NextResponse.json(
+    { hits: hits.slice(0, limit) },
+    {
+      headers: {
+        "Cache-Control":
+          "public, s-maxage=300, stale-while-revalidate=3600",
+      },
+    },
+  );
 }

@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
-import { derivePostLocation } from "../../../../lib/postPath";
+import { loadAllPosts } from "../../../../lib/blogIndex";
 
 export interface BlogPost {
   slug: string;
@@ -23,149 +20,61 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get("category");
 
-    const blogDir = path.join(process.cwd(), "content", "blog");
-
-    if (!fs.existsSync(blogDir)) {
-      return NextResponse.json([]);
-    }
-
+    const corpus = await loadAllPosts();
     const posts: BlogPost[] = [];
 
-    // Helper function to read markdown files from a directory
-    // Structure: content/blog/{category}/{subcategory-slug}/{file}.md
-    const readMarkdownFiles = (
-      dirPath: string,
-      categoryPrefix?: string,
-      subcategorySlug?: string,
-      basePath?: string
-    ) => {
-      if (!fs.existsSync(dirPath)) return;
+    for (const entry of corpus) {
+      const readTimeResult = calculateReadTimeWithTags(
+        entry.content,
+        entry.tags,
+        entry.category || "General",
+      );
 
-      const files = fs.readdirSync(dirPath, { withFileTypes: true });
-
-      for (const file of files) {
-        // Process directories recursively
-        if (file.isDirectory()) {
-          const newBasePath = basePath
-            ? `${basePath}/${file.name}`
-            : file.name;
-
-          if (!categoryPrefix) {
-            // First level - this is a category folder
-            readMarkdownFiles(
-              path.join(dirPath, file.name),
-              file.name,
-              undefined,
-              newBasePath
-            );
-          } else if (!subcategorySlug) {
-            // Second level - this is a subcategory folder
-            readMarkdownFiles(
-              path.join(dirPath, file.name),
-              categoryPrefix,
-              file.name,
-              newBasePath
-            );
-          } else {
-            // Deeper nesting
-            readMarkdownFiles(
-              path.join(dirPath, file.name),
-              categoryPrefix,
-              subcategorySlug,
-              newBasePath
-            );
-          }
-        }
-        // Process markdown files
-        else if (file.name.endsWith(".md")) {
-          const filePath = path.join(dirPath, file.name);
-          const fileContent = fs.readFileSync(filePath, "utf8");
-          const { data: metadata, content } = matter(fileContent);
-
-          const { category: resolvedCategory } = derivePostLocation(
-            filePath,
-            metadata,
-            blogDir
-          );
-
-          // Calculate read time from actual content
-          const readTimeResult = calculateReadTimeWithTags(
-            content,
-            metadata.tags || [],
-            resolvedCategory || "General"
-          );
-
-          // Generate slug in format: category/subcategory/post-name or category/post-name
-          const slugBase = file.name.replace(/\.md$/, "");
-          const slug = basePath ? `${basePath}/${slugBase}` : slugBase;
-
-          // Extract excerpt from content if not specified in frontmatter
-          let excerpt = metadata.excerpt || "";
-          if (!excerpt && content) {
-            // Take first paragraph, limited to ~160 chars
-            excerpt = content.split("\n\n")[0].substring(0, 160).trim();
-            if (content.length > 160) excerpt += "...";
-          }
-
-          // Default image if not provided
-          const defaultImage = "/images/blog/default-post.jpg";
-
-          const post: BlogPost = {
-            slug,
-            title: metadata.title || "Untitled",
-            publishDate:
-              metadata.publishDate ||
-              metadata.date ||
-              new Date().toISOString().split("T")[0],
-            readTime: readTimeResult.readTime,
-            category: resolvedCategory || "General",
-            author: metadata.author || "Hiep Tran",
-            tags: metadata.tags || [],
-            image: metadata.image || defaultImage,
-            excerpt,
-            collection: metadata.collection,
-          };
-
-          // Apply category filter if requested
-          if (category) {
-            const normalizedCategory = category.toLowerCase();
-            const postCategory = post.category.toLowerCase();
-
-            if (
-              postCategory.includes(normalizedCategory) ||
-              post.tags.some((tag) =>
-                tag.toLowerCase().includes(normalizedCategory)
-              ) ||
-              slug.toLowerCase().includes(normalizedCategory)
-            ) {
-              posts.push(post);
-            }
-          } else {
-            posts.push(post);
-          }
-        }
+      let excerpt = entry.excerpt;
+      if (!excerpt && entry.content) {
+        excerpt = entry.content.split("\n\n")[0].substring(0, 160).trim();
+        if (entry.content.length > 160) excerpt += "...";
       }
-    };
 
-    // Start reading from the root blog directory
-    readMarkdownFiles(blogDir);
+      const post: BlogPost = {
+        slug: entry.slug,
+        title: entry.title,
+        publishDate:
+          entry.publishDate || new Date().toISOString().split("T")[0],
+        readTime: readTimeResult.readTime,
+        category: entry.category || "General",
+        author: entry.author || "Hiep Tran",
+        tags: entry.tags,
+        image: entry.image || "/images/blog/default-post.jpg",
+        excerpt,
+        collection: entry.collection,
+      };
 
-    // Sort by date (newest first) - more robust date parsing
+      if (category) {
+        const q = category.toLowerCase();
+        const matches =
+          post.category.toLowerCase().includes(q) ||
+          post.tags.some((t) => t.toLowerCase().includes(q)) ||
+          post.slug.toLowerCase().includes(q);
+        if (matches) posts.push(post);
+      } else {
+        posts.push(post);
+      }
+    }
+
     posts.sort((a, b) => {
       const dateA = new Date(a.publishDate);
       const dateB = new Date(b.publishDate);
-
-      // Handle invalid dates by putting them at the end
       if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
       if (isNaN(dateA.getTime())) return 1;
       if (isNaN(dateB.getTime())) return -1;
-
       return dateB.getTime() - dateA.getTime();
     });
 
     return NextResponse.json(posts, {
       headers: {
-        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=60",
+        "Cache-Control":
+          "public, s-maxage=3600, stale-while-revalidate=86400",
       },
     });
   } catch (error) {

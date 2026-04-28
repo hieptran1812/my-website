@@ -29,9 +29,12 @@ function formatDate(iso: string): string {
 function CardImage({
   post,
   variant,
+  eager = false,
 }: {
   post: RelatedPost;
   variant: "hero" | "secondary";
+  /** When true, hint the browser to fetch this cover early (hero card). */
+  eager?: boolean;
 }) {
   const [errored, setErrored] = useState(false);
   const sizes =
@@ -60,6 +63,7 @@ function CardImage({
       sizes={sizes}
       className="related-img"
       unoptimized
+      loading={eager ? "eager" : "lazy"}
       onError={() => setErrored(true)}
     />
   );
@@ -115,7 +119,7 @@ function HeroCard({ post }: { post: RelatedPost }) {
       className="related-card related-card-hero"
     >
       <div className="related-card-image related-card-image-hero">
-        <CardImage post={post} variant="hero" />
+        <CardImage post={post} variant="hero" eager />
         <span className="related-card-best-badge">Best match</span>
       </div>
       <div className="related-card-body related-card-body-hero">

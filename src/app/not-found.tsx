@@ -2,8 +2,8 @@ import Link from "next/link";
 import { getPopularPosts } from "@/lib/getRelatedPosts";
 import RelatedPosts from "@/components/RelatedPosts";
 
-export default function NotFound() {
-  const popular = getPopularPosts(6);
+export default async function NotFound() {
+  const popular = await getPopularPosts(6);
   return (
     <main
       className="min-h-screen flex flex-col items-center px-4 sm:px-6 lg:px-8 pt-24 pb-16"
