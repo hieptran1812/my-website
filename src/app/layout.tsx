@@ -8,6 +8,7 @@ import {
   VercelSpeedInsights,
   VercelAnalytics,
 } from "@/components/VercelInsights";
+import CommandPalette from "@/components/CommandPalette";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,6 +67,7 @@ export default function RootLayout({
           <Navigation />
           {children}
           <Footer />
+          <CommandPalette />
         </ThemeProvider>
         <VercelSpeedInsights />
         <VercelAnalytics />

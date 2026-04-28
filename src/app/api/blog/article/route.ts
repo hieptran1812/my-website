@@ -11,6 +11,7 @@ import { Article } from "../articles/route";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 import { protectMathBlocks, restoreMathBlocks } from "../../../../lib/markdown";
 import { derivePostLocation } from "../../../../lib/postPath";
+import remarkCallouts from "../../../../lib/remarkCallouts";
 
 export async function GET(request: NextRequest) {
   try {
@@ -71,6 +72,7 @@ export async function GET(request: NextRequest) {
     // Process markdown to HTML with syntax highlighting
     const processedContent = await remark()
       .use(remarkGfm)
+      .use(remarkCallouts)
       .use(remarkRehype, { allowDangerousHtml: true })
       .use(rehypeHighlight)
       .use(rehypeStringify, { allowDangerousHtml: true })

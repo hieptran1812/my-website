@@ -8,6 +8,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 import { calculateReadTimeWithTags } from "./readTimeCalculator";
 import { protectMathBlocks, restoreMathBlocks } from "./markdown";
+import remarkCallouts from "./remarkCallouts";
 
 export interface ArticleData {
   title: string;
@@ -57,6 +58,7 @@ export async function getArticle(slug: string): Promise<ArticleData | null> {
 
   const processedContent = await remark()
     .use(remarkGfm)
+    .use(remarkCallouts)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeHighlight)
     .use(rehypeStringify, { allowDangerousHtml: true })

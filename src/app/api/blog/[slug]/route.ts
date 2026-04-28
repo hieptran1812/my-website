@@ -8,6 +8,7 @@ import remarkHtml from "remark-html";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 import { protectMathBlocks, restoreMathBlocks } from "../../../../lib/markdown";
 import { derivePostLocation } from "../../../../lib/postPath";
+import remarkCallouts from "../../../../lib/remarkCallouts";
 
 export async function GET(
   request: NextRequest,
@@ -79,6 +80,7 @@ export async function GET(
     // Process markdown to HTML
     const processedContent = await remark()
       .use(remarkGfm)
+      .use(remarkCallouts)
       .use(remarkHtml, { sanitize: false })
       .process(protectedContent);
 

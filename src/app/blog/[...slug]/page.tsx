@@ -3,6 +3,12 @@ import { Metadata } from "next";
 import BlogReader from "../../components/BlogReader";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import { getArticle, getAllBlogSlugs } from "@/lib/getArticle";
+import { getRelatedPosts } from "@/lib/getRelatedPosts";
+import RelatedPosts from "@/components/RelatedPosts";
+import CodeBlockEnhancer from "@/components/CodeBlockEnhancer";
+import { derivePostLocation } from "@/lib/postPath";
+import path from "path";
+import fs from "fs";
 
 export const revalidate = 3600;
 
@@ -86,18 +92,45 @@ export default async function BlogPostPage({
     );
   }
 
+  // Derive subcategory from the actual file path so related-post scoring uses
+  // the same source-of-truth as the rest of the site.
+  let subcategory = "";
+  try {
+    const blogDir = path.join(process.cwd(), "content", "blog");
+    const guessed = path.join(blogDir, `${slugStr}.md`);
+    if (fs.existsSync(guessed)) {
+      ({ subcategory } = derivePostLocation(guessed, {}, blogDir));
+    }
+  } catch {
+    /* best effort */
+  }
+
+  const related = getRelatedPosts(
+    article.slug,
+    article.tags || [],
+    article.category,
+    subcategory,
+    4,
+  );
+
   return (
-    <BlogReader
-      title={article.title}
-      publishDate={article.publishDate}
-      readTime={article.readTime}
-      tags={article.tags}
-      category={article.category}
-      author={article.author}
-      postSlug={article.slug}
-      collection={article.collection}
-      aiGenerated={article.aiGenerated}
-      dangerouslySetInnerHTML={{ __html: article.content }}
-    />
+    <>
+      <BlogReader
+        title={article.title}
+        publishDate={article.publishDate}
+        readTime={article.readTime}
+        tags={article.tags}
+        category={article.category}
+        author={article.author}
+        postSlug={article.slug}
+        collection={article.collection}
+        aiGenerated={article.aiGenerated}
+        dangerouslySetInnerHTML={{ __html: article.content }}
+      />
+      <CodeBlockEnhancer />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <RelatedPosts posts={related} />
+      </div>
+    </>
   );
 }
