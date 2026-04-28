@@ -1472,11 +1472,7 @@ a:focus {
   padding: 1.25rem 1.25rem 1.5rem;
   border: 1px solid var(--border);
   border-radius: 0.875rem;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--accent) 6%, transparent),
-    var(--surface) 60%
-  );
+  background: var(--surface);
 }
 .series-module-header {
   display: grid;
@@ -1539,11 +1535,15 @@ a:focus {
   padding: 0.75rem;
   border: 1px solid var(--border);
   border-radius: 0.625rem;
-  background: var(--background);
+  background: var(--surface-secondary);
   color: inherit;
   text-decoration: none;
   align-items: center;
-  transition: border-color 0.18s ease, transform 0.18s ease;
+  transition: border-color 0.18s ease, transform 0.18s ease,
+    background-color 0.18s ease;
+}
+.series-card:hover {
+  background: var(--surface-hover);
 }
 .series-card:hover {
   border-color: var(--accent);
@@ -1663,7 +1663,7 @@ a:focus {
   border-radius: 999px;
   font-size: 0.85rem;
   color: var(--text-secondary);
-  background: var(--surface);
+  background: var(--surface-secondary);
   border: 1px solid var(--border);
   cursor: help;
   position: relative;
@@ -1745,26 +1745,29 @@ a:focus {
   }
 }
 
-/* Card base */
+/* Card base — uses surface-secondary so cards are visually elevated above the
+   page background in both light and dark themes (where --surface === --background). */
 .related-card {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--border);
   border-radius: 0.75rem;
-  background: var(--surface);
+  background: var(--surface-secondary);
   text-decoration: none;
   color: inherit;
   overflow: hidden;
   transition:
     border-color 0.2s ease,
+    background-color 0.2s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
   position: relative;
 }
 .related-card:hover {
   border-color: var(--accent);
+  background: var(--surface-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 24px -12px var(--shadow-hover, rgba(0, 0, 0, 0.18));
 }
 
 .related-card-image {
@@ -1874,15 +1877,15 @@ a:focus {
   position: absolute;
   top: 0.7rem;
   left: 0.7rem;
-  padding: 0.2rem 0.6rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(8px);
+  background: var(--accent);
   color: #fff;
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.25);
   z-index: 1;
 }
 
@@ -1971,7 +1974,7 @@ a:focus {
   font-size: 0.7rem;
   font-weight: 500;
   border-radius: 999px;
-  background: var(--background);
+  background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text-secondary);
   line-height: 1.3;
@@ -1999,7 +2002,7 @@ a:focus {
   font-size: 0.68rem;
   padding: 0.1rem 0.5rem;
   border-radius: 999px;
-  background: var(--background);
+  background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text-secondary);
   line-height: 1.4;
