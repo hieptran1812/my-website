@@ -38,7 +38,8 @@
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
-    "remark-rehype": "^11.1.2"
+    "remark-rehype": "^11.1.2",
+    "stopword": "^3.1.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

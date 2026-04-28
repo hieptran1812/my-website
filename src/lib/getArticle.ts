@@ -22,6 +22,7 @@ export interface ArticleData {
   collection?: string;
   aiGenerated?: boolean;
   excerpt?: string;
+  image?: string;
 }
 
 const blogDir = path.join(process.cwd(), "content", "blog");
@@ -89,6 +90,7 @@ export async function getArticle(slug: string): Promise<ArticleData | null> {
     collection: metadata.collection,
     aiGenerated: metadata.aiGenerated === true,
     excerpt: metadata.excerpt || metadata.description || "",
+    image: typeof metadata.image === "string" ? metadata.image : undefined,
   };
 }
 
