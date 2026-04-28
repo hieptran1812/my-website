@@ -60,6 +60,8 @@ export default function BlogReader({
   const [tocCollapsed, setTocCollapsed] = useState(false);
   const [tocPosition, setTocPosition] = useState<"center" | "top">("center");
   const [sidebarBottomOffset, setSidebarBottomOffset] = useState<number>(0);
+  /** True once the related-posts / series module enters viewport — sidebars hide. */
+  const [pastArticleBody, setPastArticleBody] = useState<boolean>(false);
 
   // Text-to-speech states
   const [isPlaying, setIsPlaying] = useState(false);
@@ -365,10 +367,17 @@ export default function BlogReader({
     let animationFrame: number;
 
     const handleScroll = () => {
-      const footer = document.querySelector("footer");
-      if (!footer) return;
+      // The article-body boundary is whatever comes first below the article:
+      // series module, related posts, or the page footer. Once the boundary
+      // crosses into the viewport, the sidebars must lift / hide so they stop
+      // floating over the related-reading section.
+      const boundary =
+        document.querySelector(".series-module") ||
+        document.querySelector(".related-posts") ||
+        document.querySelector("footer");
+      if (!boundary) return;
 
-      const footerRect = footer.getBoundingClientRect();
+      const boundaryRect = boundary.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       const currentScrollY = window.scrollY;
 
@@ -378,12 +387,12 @@ export default function BlogReader({
       const tocCenterPosition = viewportHeight / 2;
       const tocBottomWhenCentered = tocCenterPosition + tocHeight / 2;
 
-      // Calculate footer visibility and potential overlap
-      const footerTopFromViewport = footerRect.top;
-      const footerIsVisible = footerTopFromViewport < viewportHeight;
-      const footerWouldOverlap =
-        footerIsVisible &&
-        footerTopFromViewport < tocBottomWhenCentered + safetyMargin;
+      // Boundary visibility relative to viewport
+      const boundaryTopFromViewport = boundaryRect.top;
+      const boundaryIsVisible = boundaryTopFromViewport < viewportHeight;
+      const boundaryWouldOverlap =
+        boundaryIsVisible &&
+        boundaryTopFromViewport < tocBottomWhenCentered + safetyMargin;
 
       // Calculate document proximity to bottom
       const documentHeight = document.documentElement.scrollHeight;
@@ -391,17 +400,25 @@ export default function BlogReader({
         documentHeight - (currentScrollY + viewportHeight);
       const nearBottomThreshold = 300; // Switch when within 300px of bottom
 
-      // Calculate bottom offset when footer is visible to keep sidebars above footer
+      // Bottom-offset push so the sidebar floats above the boundary.
       let bottomOffset = 0;
-      if (footerIsVisible && footerTopFromViewport < viewportHeight) {
-        // Calculate how much the sidebar needs to move up to stay above footer
-        bottomOffset = Math.max(0, viewportHeight - footerTopFromViewport + 20); // 20px extra margin
+      if (boundaryIsVisible && boundaryTopFromViewport < viewportHeight) {
+        bottomOffset = Math.max(
+          0,
+          viewportHeight - boundaryTopFromViewport + 20,
+        );
       }
       setSidebarBottomOffset(bottomOffset);
 
+      // Hide sidebars completely once the boundary has scrolled above the
+      // viewport's upper third — at that point the reader is no longer in the
+      // article body and the floating sidebars become noise.
+      const pastBoundary = boundaryTopFromViewport < viewportHeight * 0.35;
+      setPastArticleBody(pastBoundary);
+
       // Determine TOC position with hysteresis to prevent flickering
       const shouldSwitchToTop =
-        footerWouldOverlap || distanceFromBottom <= nearBottomThreshold;
+        boundaryWouldOverlap || distanceFromBottom <= nearBottomThreshold;
 
       // Only update if position actually needs to change
       setTocPosition((prev) => {
@@ -500,7 +517,10 @@ export default function BlogReader({
           }`}
           style={{
             width: tocCollapsed ? "48px" : "256px",
-            transition: "width 400ms cubic-bezier(0.4, 0, 0.2, 1)",
+            transition:
+              "width 400ms cubic-bezier(0.4, 0, 0.2, 1), opacity 250ms ease",
+            opacity: pastArticleBody ? 0 : 1,
+            pointerEvents: pastArticleBody ? "none" : "auto",
             ...(sidebarBottomOffset > 0
               ? {
                   top: "auto",
@@ -511,7 +531,7 @@ export default function BlogReader({
         >
           <div
             className={`rounded-xl shadow-lg border backdrop-blur-md max-h-[65vh] flex flex-col ${
-              showToc
+              showToc && !pastArticleBody
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 -translate-x-full"
             } ${tocCollapsed ? "overflow-hidden p-2" : "overflow-hidden"}`}
@@ -785,6 +805,7 @@ export default function BlogReader({
         currentSlug={postSlug}
         tocPosition={tocPosition}
         sidebarBottomOffset={sidebarBottomOffset}
+        hidden={pastArticleBody}
         isReadingMode={isReadingMode}
         onReadingModeToggle={toggleReadingMode}
         // Audio reading props

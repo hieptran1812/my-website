@@ -7,6 +7,8 @@ interface BlogGraphSidebarProps {
   currentSlug?: string;
   tocPosition?: "center" | "top";
   sidebarBottomOffset?: number;
+  /** When true, hide the sidebar (reader has scrolled past the article body). */
+  hidden?: boolean;
   // Reading options props
   isReadingMode?: boolean;
   onReadingModeToggle?: () => void;
@@ -29,6 +31,7 @@ function BlogGraphSidebar({
   currentSlug,
   tocPosition = "center",
   sidebarBottomOffset = 0,
+  hidden = false,
   isReadingMode = false,
   onReadingModeToggle,
   // Audio reading
@@ -149,7 +152,10 @@ function BlogGraphSidebar({
         style={{
           width: isCollapsed ? "48px" : "280px",
           maxHeight: "calc(100vh - 120px)",
-          transition: "width 400ms cubic-bezier(0.4, 0, 0.2, 1)",
+          transition:
+            "width 400ms cubic-bezier(0.4, 0, 0.2, 1), opacity 250ms ease",
+          opacity: hidden ? 0 : 1,
+          pointerEvents: hidden ? "none" : "auto",
           ...(sidebarBottomOffset > 0 ? {
             top: "auto",
             bottom: `${sidebarBottomOffset}px`,

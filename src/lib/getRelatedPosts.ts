@@ -24,6 +24,8 @@ export interface RelatedPost {
   publishDate: string;
   image?: string;
   score: number;
+  /** 0-100, normalised against the top pick in the same batch. */
+  relevancePercent: number;
   sharedTags: string[];
   reason: RelatedReason;
   /** Human-readable detail for the dominant signal, e.g. "Shares rare tag: casteer". */
@@ -444,6 +446,9 @@ export function getRelatedPosts(
   const pool = scored.slice(0, Math.max(limit * 4, 24));
   const selected = mmrSelect(pool, limit, idx.tokenIdf);
 
+  // Normalise relevance into a 0-100 percentage relative to the top pick in
+  // this batch, so the UI can render a comparable progress bar / "% match".
+  const topScore = selected[0]?.relevance ?? 0;
   return selected.map((s) => ({
     slug: s.entry.slug,
     title: s.entry.title,
@@ -453,6 +458,8 @@ export function getRelatedPosts(
     publishDate: s.entry.publishDate,
     image: s.entry.image,
     score: s.relevance,
+    relevancePercent:
+      topScore > 0 ? Math.round((s.relevance / topScore) * 100) : 0,
     sharedTags: s.sharedTags,
     reason: s.reason,
     reasonDetail: s.reasonDetail,
@@ -505,6 +512,7 @@ export function getPopularPosts(limit = 6): RelatedPost[] {
       publishDate: e.publishDate,
       image: e.image,
       score: 0,
+      relevancePercent: 0,
       sharedTags: [],
       reason: "category" as const,
       reasonDetail: undefined,

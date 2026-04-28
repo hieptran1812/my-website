@@ -1,7 +1,42 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import type { SeriesContext } from "@/lib/getRelatedPosts";
 import { getPostCoverUrl } from "@/lib/getPostCover";
+
+function SiblingImage({
+  slug,
+  image,
+}: {
+  slug: string;
+  image?: string;
+}) {
+  const [errored, setErrored] = useState(false);
+  if (errored) {
+    return (
+      <div
+        aria-hidden="true"
+        className="related-img-fallback"
+        style={{
+          background: `linear-gradient(135deg, hsl(${(slug.length * 31) % 360} 60% 35%), hsl(${(slug.length * 31 + 60) % 360} 60% 25%))`,
+        }}
+      />
+    );
+  }
+  return (
+    <Image
+      src={getPostCoverUrl(slug, image)}
+      alt=""
+      fill
+      sizes="160px"
+      className="series-card-img"
+      unoptimized
+      onError={() => setErrored(true)}
+    />
+  );
+}
 
 function SiblingCard({
   label,
@@ -15,13 +50,7 @@ function SiblingCard({
   return (
     <Link href={`/blog/${sib.slug}`} className={`series-card series-card-${side}`}>
       <div className="series-card-image">
-        <Image
-          src={getPostCoverUrl(sib.slug, sib.image)}
-          alt=""
-          fill
-          sizes="160px"
-          className="series-card-img"
-        />
+        <SiblingImage slug={sib.slug} image={sib.image} />
       </div>
       <div className="series-card-body">
         <span className="series-card-direction">
