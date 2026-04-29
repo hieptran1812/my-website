@@ -13,25 +13,36 @@ import SubcategoryFilter from "@/components/SubcategoryFilter";
 import BlogSearchBar from "@/components/BlogSearchBar";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 
-// Define the list of machine learning subtopics
-const machineLearningSubtopics = [
-  { name: "Multimodal", slug: "multimodal" },
-  { name: "Computer Vision", slug: "computer vision" },
-  { name: "Large Language Model", slug: "large language model" },
-  { name: "AI Agent", slug: "ai agent" },
-  { name: "AI Interpretability", slug: "ai interpretability" },
-  { name: "Machine Learning", slug: "machine learning" },
-  { name: "Signal Processing", slug: "signal processing" },
-  { name: "Deep Learning", slug: "deep learning" },
-  { name: "Training Techniques", slug: "training techniques" },
-  { name: "Open Source Library", slug: "open source library" },
-  { name: "MLOps", slug: "mlops" },
-  { name: "Mathematics", slug: "mathematics" },
-  {
-    name: "Traditional Machine Learning",
-    slug: "traditional machine learning",
-  },
-];
+// Format a slug like "ai-interpretability" into a display name "AI
+// Interpretability". Acronyms in `ACRONYMS` are uppercased intact.
+const ACRONYMS = new Set([
+  "ai",
+  "ml",
+  "nlp",
+  "llm",
+  "rl",
+  "cv",
+  "api",
+  "ui",
+  "ux",
+  "mlops",
+  "devops",
+  "lora",
+  "rag",
+  "gpu",
+  "cpu",
+]);
+function formatSubcategoryName(slug: string): string {
+  return slug
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((w) =>
+      ACRONYMS.has(w.toLowerCase())
+        ? w.toUpperCase()
+        : w.charAt(0).toUpperCase() + w.slice(1),
+    )
+    .join(" ");
+}
 
 export default function MachineLearningBlogPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -65,33 +76,24 @@ export default function MachineLearningBlogPage() {
   const ITEMS_PER_PAGE = 9;
 
   const categories = useMemo(() => {
-    // Add safety check for allArticles
     if (!Array.isArray(allArticles) || allArticles.length === 0) {
       return [{ name: "All", slug: "all", count: 0 }];
     }
-
-    // Count articles for each subtopic
-    const subtopicCounts: Record<string, number> = {};
-    machineLearningSubtopics.forEach((subtopic) => {
-      const count = allArticles.filter(
-        (article) =>
-          article.subcategory &&
-          article.subcategory.toLowerCase() === subtopic.slug.toLowerCase(),
-      ).length;
-      if (count > 0) {
-        subtopicCounts[subtopic.slug.toLowerCase()] = count;
-      }
-    });
-
-    // Create categories from subtopics that have articles
-    const subtopicCategories = machineLearningSubtopics
-      .filter((subtopic) => subtopicCounts[subtopic.slug.toLowerCase()] > 0)
-      .map((subtopic) => ({
-        name: subtopic.name,
-        slug: subtopic.slug.toLowerCase(),
-        count: subtopicCounts[subtopic.slug.toLowerCase()],
+    // Derive subcategories straight from the data so the list stays in sync
+    // with the folder layout (slugs are folder-style, e.g. "computer-vision").
+    const counts: Record<string, number> = {};
+    for (const article of allArticles) {
+      const sub = article.subcategory?.trim().toLowerCase();
+      if (!sub) continue;
+      counts[sub] = (counts[sub] || 0) + 1;
+    }
+    const subtopicCategories = Object.entries(counts)
+      .sort(([, a], [, b]) => b - a)
+      .map(([slug, count]) => ({
+        name: formatSubcategoryName(slug),
+        slug,
+        count,
       }));
-
     return [
       { name: "All", slug: "all", count: allArticles.length },
       ...subtopicCategories,

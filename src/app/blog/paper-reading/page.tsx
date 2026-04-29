@@ -13,6 +13,36 @@ import SubcategoryFilter from "@/components/SubcategoryFilter";
 import BlogSearchBar from "@/components/BlogSearchBar";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 
+const ACRONYMS = new Set([
+  "ai",
+  "ml",
+  "nlp",
+  "llm",
+  "rl",
+  "cv",
+  "api",
+  "ui",
+  "ux",
+  "mlops",
+  "devops",
+  "lora",
+  "rag",
+  "gpu",
+  "cpu",
+  "vae",
+  "gan",
+]);
+function formatSubcategoryName(slug: string): string {
+  return slug
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((w) =>
+      ACRONYMS.has(w.toLowerCase())
+        ? w.toUpperCase()
+        : w.charAt(0).toUpperCase() + w.slice(1),
+    )
+    .join(" ");
+}
 
 export default function PaperReadingBlogPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -67,7 +97,7 @@ export default function PaperReadingBlogPage() {
       .map(([subcategory]) => subcategory);
 
     const subcategoryCategories = sortedSubcategories.map((subcategory) => ({
-      name: subcategory.charAt(0).toUpperCase() + subcategory.slice(1),
+      name: formatSubcategoryName(subcategory),
       slug: subcategory,
       count: subcategoryCounts[subcategory],
     }));

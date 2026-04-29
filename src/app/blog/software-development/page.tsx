@@ -13,20 +13,37 @@ import SubcategoryFilter from "@/components/SubcategoryFilter";
 import BlogSearchBar from "@/components/BlogSearchBar";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 
-// Define the list of software development subtopics
-const softwareDevelopmentSubtopics = [
-  { name: "Coding Practices", slug: "coding practices" },
-  { name: "System Design", slug: "system design" },
-  {
-    name: "Site Reliability Engineering",
-    slug: "site reliability engineering",
-  },
-  { name: "Distributed Systems", slug: "distributed systems" },
-  { name: "Data Engineering", slug: "data engineering" },
-  { name: "Algorithms", slug: "algorithms" },
-  { name: "Product Development", slug: "product development" },
-  { name: "Cloud Computing", slug: "cloud computing" },
-];
+// Format a slug like "site-reliability-engineering" into a display name
+// "Site Reliability Engineering". Acronyms in `ACRONYMS` are uppercased intact.
+const ACRONYMS = new Set([
+  "ai",
+  "ml",
+  "nlp",
+  "llm",
+  "rl",
+  "cv",
+  "api",
+  "ui",
+  "ux",
+  "mlops",
+  "devops",
+  "sre",
+  "ci",
+  "cd",
+  "gpu",
+  "cpu",
+]);
+function formatSubcategoryName(slug: string): string {
+  return slug
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((w) =>
+      ACRONYMS.has(w.toLowerCase())
+        ? w.toUpperCase()
+        : w.charAt(0).toUpperCase() + w.slice(1),
+    )
+    .join(" ");
+}
 
 export default function SoftwareDevelopmentBlogPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -55,35 +72,25 @@ export default function SoftwareDevelopmentBlogPage() {
     fetchArticles();
   }, []);
 
-  // Categories based on subtopics
+  // Derive subcategories straight from the data so the list stays in sync
+  // with the folder layout (slugs are folder-style, e.g. "system-design").
   const categories = useMemo(() => {
-    // Add safety check for allArticles
     if (!Array.isArray(allArticles) || allArticles.length === 0) {
       return [{ name: "All", slug: "all", count: 0 }];
     }
-
-    // Count articles for each subtopic
-    const subtopicCounts: Record<string, number> = {};
-    softwareDevelopmentSubtopics.forEach((subtopic) => {
-      const count = allArticles.filter(
-        (article) =>
-          article.subcategory &&
-          article.subcategory.toLowerCase() === subtopic.slug.toLowerCase(),
-      ).length;
-      if (count > 0) {
-        subtopicCounts[subtopic.slug.toLowerCase()] = count;
-      }
-    });
-
-    // Create categories from subtopics that have articles
-    const subtopicCategories = softwareDevelopmentSubtopics
-      .filter((subtopic) => subtopicCounts[subtopic.slug.toLowerCase()] > 0)
-      .map((subtopic) => ({
-        name: subtopic.name,
-        slug: subtopic.slug.toLowerCase(),
-        count: subtopicCounts[subtopic.slug.toLowerCase()],
+    const counts: Record<string, number> = {};
+    for (const article of allArticles) {
+      const sub = article.subcategory?.trim().toLowerCase();
+      if (!sub) continue;
+      counts[sub] = (counts[sub] || 0) + 1;
+    }
+    const subtopicCategories = Object.entries(counts)
+      .sort(([, a], [, b]) => b - a)
+      .map(([slug, count]) => ({
+        name: formatSubcategoryName(slug),
+        slug,
+        count,
       }));
-
     return [
       { name: "All", slug: "all", count: allArticles.length },
       ...subtopicCategories,

@@ -13,15 +13,20 @@ import SubcategoryFilter from "@/components/SubcategoryFilter";
 import BlogSearchBar from "@/components/BlogSearchBar";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 
-// Define the list of trading subtopics
-const tradingSubtopics = [
-  { name: "Trading", slug: "trading" },
-  { name: "Crypto", slug: "crypto" },
-  { name: "Economics", slug: "economics" },
-  { name: "Investing", slug: "investing" },
-  { name: "Quantitative Analysis", slug: "quantitative analysis" },
-  { name: "Finance", slug: "finance" },
-];
+// Format a slug like "quantitative-analysis" into a display name "Quantitative
+// Analysis". Acronyms in `ACRONYMS` are uppercased intact.
+const ACRONYMS = new Set(["ai", "ml", "nft", "defi", "dex", "cefi", "tvl"]);
+function formatSubcategoryName(slug: string): string {
+  return slug
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((w) =>
+      ACRONYMS.has(w.toLowerCase())
+        ? w.toUpperCase()
+        : w.charAt(0).toUpperCase() + w.slice(1),
+    )
+    .join(" ");
+}
 
 export default function TradingBlogPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -54,35 +59,25 @@ export default function TradingBlogPage() {
   // Lazy loading configuration
   const ITEMS_PER_PAGE = 9;
 
-  // Categories based on subtopics
+  // Derive subcategories straight from the data so the list stays in sync
+  // with the folder layout (slugs are folder-style, e.g. "quantitative-analysis").
   const categories = useMemo(() => {
-    // Add safety check for allArticles
     if (!Array.isArray(allArticles) || allArticles.length === 0) {
       return [{ name: "All", slug: "all", count: 0 }];
     }
-
-    // Count articles for each subtopic
-    const subtopicCounts: Record<string, number> = {};
-    tradingSubtopics.forEach((subtopic) => {
-      const count = allArticles.filter(
-        (article) =>
-          article.subcategory &&
-          article.subcategory.toLowerCase() === subtopic.slug.toLowerCase(),
-      ).length;
-      if (count > 0) {
-        subtopicCounts[subtopic.slug.toLowerCase()] = count;
-      }
-    });
-
-    // Create categories from subtopics that have articles
-    const subtopicCategories = tradingSubtopics
-      .filter((subtopic) => subtopicCounts[subtopic.slug.toLowerCase()] > 0)
-      .map((subtopic) => ({
-        name: subtopic.name,
-        slug: subtopic.slug.toLowerCase(),
-        count: subtopicCounts[subtopic.slug.toLowerCase()],
+    const counts: Record<string, number> = {};
+    for (const article of allArticles) {
+      const sub = article.subcategory?.trim().toLowerCase();
+      if (!sub) continue;
+      counts[sub] = (counts[sub] || 0) + 1;
+    }
+    const subtopicCategories = Object.entries(counts)
+      .sort(([, a], [, b]) => b - a)
+      .map(([slug, count]) => ({
+        name: formatSubcategoryName(slug),
+        slug,
+        count,
       }));
-
     return [
       { name: "All", slug: "all", count: allArticles.length },
       ...subtopicCategories,
