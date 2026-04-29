@@ -34,13 +34,16 @@ Voice & structure:
 - Code blocks must look runnable: real imports, real flags, real version numbers. Avoid pseudocode unless explicitly labeled.
 - Use comparison tables for "naive vs optimized", "assumption vs reality", "strategy / when to use / trade-off".
 - Reach for headings `##` for sections and `###` for sub-sections. Numbered top-level sections (`## 1. …`, `## 2. …`) are appropriate for deep-dives, not for explainers.
-- Every deep-dive ends with a **case study** section: 3–12 numbered, named incidents (each ~150–250 words) followed by a closing **"When to reach for X / when not to"** section. Never a generic "Conclusion".
-- Length targets: deep-dives 25–45 min read (≈ 6,000–11,000 words); explainers 8–15 min (≈ 2,000–4,000 words); paper readings 10–20 min.
+- Every deep-dive ends with a **case study** section: 6–12 numbered, named incidents (each ~250–400 words) followed by a closing **"When to reach for X / when not to"** section. Never a generic "Conclusion".
+- **Length is non-negotiable. Deep-dives MUST be ≥ 50 minutes read time (≈ 11,000 words minimum, target 12,000–16,000).** Explainers ≥ 25 min (≈ 5,500 words). Paper readings ≥ 30 min (≈ 6,500 words). If a draft comes in short, do not ship it — expand the weakest sections (more case studies, deeper internals, more comparison tables, more code) until the floor is met. The word-count check in Phase E is a hard gate, not a warning.
+- **Deep analysis is required.** Every section must answer "why does this work, when does it fail, what are the second-order consequences." Surface-level summaries are unacceptable. For every claim: name the mechanism, quantify the trade-off, and give at least one concrete number, benchmark, or failure mode. Treat each H2 as if it could be its own short blog post.
+- Inside each major section, include at least one of: a comparison table, a runnable code block (≥ 15 lines), a measured benchmark with units, or a worked numerical example. Sections that are pure prose are a smell.
 
 Diagrams:
 - 1–4 PNGs per post. The first one (the "mental model" image) is referenced in the intro paragraph with a sentence like "The diagram above is the mental model: …".
 - Hand-drawn Excalidraw style (sloppiness 1, roughness 1, default Virgil/Cascadia fonts).
 - Saved to `public/imgs/blogs/<slug>-<n>.png`. Embedded as `![alt text](/imgs/blogs/<slug>-<n>.png)` directly under the heading they illustrate.
+- **Diagrams MUST be real Excalidraw PNGs. Never substitute ASCII art, ```text``` boxes, Unicode box-drawing, code-block "diagrams", or prose-bulleted "diagrams". These are not acceptable fallbacks under any circumstance.** If the Excalidraw MCP cannot be reached after the Phase C recovery procedure, **stop and surface the failure to the user** — do not ship the post. The only allowed non-Excalidraw figure type is an inline Mermaid block rendered through `mcp__excalidraw__create_from_mermaid` (which still produces a real PNG via Excalidraw). Posts without proper image diagrams are considered incomplete and fail the Phase E diagram gate.
 
 ## Frontmatter contract
 
@@ -96,15 +99,36 @@ Capture from the user (ask via `AskUserQuestion` only what's missing):
 
 ### Phase C — Diagrams (Excalidraw MCP)
 
-For each planned diagram (loop):
+**Connection bootstrap (do this FIRST, before any drawing call).** The Excalidraw MCP needs a browser frontend connected to the canvas server, otherwise `export_to_image` fails with `No frontend client connected`. Try to recover automatically before falling back:
 
-1. `mcp__excalidraw__clear_canvas` (or `restore_snapshot` from a template).
-2. `mcp__excalidraw__batch_create_elements` with the diagram payload — see **Diagram style guide** below for templates.
-3. Optionally `mcp__excalidraw__align_elements` / `distribute_elements` to clean up.
-4. `mcp__excalidraw__export_to_image` with `format: "png"`, `theme: "light"`, `exportBackground: true`, `exportPadding: 24`, `path: "public/imgs/blogs/<slug>-<n>.png"`.
-5. Verify the file exists; if export failed, try `export_scene` → manual PNG, or fall back to a Mermaid figure rendered via `create_from_mermaid`.
+1. Probe with `mcp__excalidraw__describe_scene` (cheap call). If it returns without a connection error, skip to step 5.
+2. If it errors with "No frontend client connected", try to start/open the canvas:
+   ```bash
+   # Default canvas URL the MCP server exposes; check the user's MCP config if the port differs
+   open -a "Google Chrome" "http://localhost:3333" 2>/dev/null \
+     || open "http://localhost:3333" 2>/dev/null \
+     || true
+   ```
+   Wait ~3 seconds, then re-probe with `describe_scene`. If still failing, check whether the MCP server itself is running:
+   ```bash
+   pgrep -fl excalidraw-mcp || echo "excalidraw-mcp server not running"
+   ```
+   If the server is not running, ask the user to start it (`claude mcp` lists configured servers; the canvas typically runs via `npx excalidraw-mcp` or similar).
+3. After the user opens the canvas / starts the server, re-probe. Retry up to 3 times with 5-second waits.
+4. If after 3 retries it still fails, **stop the workflow and ask the user to fix the canvas connection**. Do not ship the post without real diagrams. Acceptable user replies: (a) "I opened it, retry" → re-probe and continue, (b) "use Mermaid via create_from_mermaid" → still produces real PNG output through Excalidraw, acceptable. **Unacceptable**: skipping diagrams, using ASCII art, using ```text``` boxes, using Unicode box-drawing, or any prose-only substitute. Posts without proper Excalidraw PNGs are not allowed to ship.
+5. Once connected, for each planned diagram (loop):
+   1. `mcp__excalidraw__clear_canvas`
+   2. `mcp__excalidraw__batch_create_elements` with the payload (see Diagram style guide).
+   3. Optionally `mcp__excalidraw__align_elements` / `distribute_elements` to clean up.
+   4. `mcp__excalidraw__export_to_image` with `format: "png"`, `background: true`, `filePath: "public/imgs/blogs/<slug>-<n>.png"`.
+   5. Verify the PNG exists and is non-empty (`ls -la <path>` and check size > 5 KB). If the file is missing or tiny, the export failed silently — re-run.
 
-If the Excalidraw MCP is unavailable (no `mcp__excalidraw__*` tools in the environment), tell the user and offer to either (a) skip diagrams, (b) emit ASCII art instead, or (c) wait for the MCP to be enabled.
+**Accuracy bar for diagrams.** A diagram that is decorative is a failure. Every diagram must:
+- Reflect the exact terminology used in the article (variable names, component names, arrow labels match prose 1:1).
+- Have arrows that point in the correct direction of data/control flow — verify by re-reading the prose section it illustrates.
+- Use the accent palette below *semantically* (blue = main path, amber = caution/cost, red = failure/loss, green = win/cached). Do not pick colors aesthetically.
+- Be readable at 800px width on a blog page — minimum `fontSize: 18` for body labels, `fontSize: 28` for titles.
+- Include a short caption text element inside the canvas (2nd line under the title) explaining what the reader should take away.
 
 ### Phase D — Draft
 
@@ -113,13 +137,29 @@ If the Excalidraw MCP is unavailable (no `mcp__excalidraw__*` tools in the envir
 3. Embed each PNG immediately under the section heading it illustrates: `![alt](/imgs/blogs/<slug>-<n>.png)`.
 4. Add cross-links inline using relative paths: `[KV cache](/blog/machine-learning/large-language-model/kv-cache)` (note: link path drops the `content/` prefix and `.md` extension, matching how Next.js routes the blog).
 
-### Phase E — Verify
+### Phase E — Verify (hard gates)
 
-After writing, report to the user:
-- Final file path and word count (`wc -w`).
-- **Recomputed** `readTime` (words / 220, rounded). If it differs from the frontmatter, edit the frontmatter to match.
-- List of new images written.
-- 2–4 suggested cross-links the *user* should consider adding to *other* existing posts that point back to this one (do not edit those other posts unless asked).
+After writing, run these checks. If any gate fails, **expand and rewrite — do not ship a short post.**
+
+1. **Word count gate.** `wc -w <path>`. Compute `readTime = round(words / 220)`.
+   - Deep-dive: `readTime >= 50` (≥ 11,000 words). If under, identify the 2–3 thinnest sections and add: more case studies, deeper internals, more numbers, more code, more comparison tables. Re-run the gate.
+   - Explainer: `readTime >= 25`. Paper-reading: `readTime >= 30`.
+2. **Diagram gate.** Every planned diagram exists as a non-empty PNG under `public/imgs/blogs/`, and is embedded in the markdown with `![alt](/imgs/blogs/<slug>-<n>.png)`. The first ("mental model") diagram must be referenced in the intro paragraph. Grep the markdown for forbidden text-based diagram substitutes — if any of these appear in the file the gate fails and the post must be reworked with real Excalidraw PNGs:
+   ```bash
+   # All of these should return zero matches in a finished post:
+   grep -nE '^```text' <path>            # ASCII "diagrams" in fenced text blocks
+   grep -nE '[│┌┐└┘├┤┬┴┼─]' <path>       # Unicode box-drawing
+   grep -nE '\+--+\+|--->|<---' <path>   # ASCII art arrows/boxes
+   ```
+   Mermaid blocks rendered through `mcp__excalidraw__create_from_mermaid` are fine — they produce real PNGs. Inline ```mermaid``` source blocks left in the markdown are not.
+3. **Frontmatter gate.** `readTime` matches the recomputed value; `date` is today; `aiGenerated: true`; tags 5–12; category is a real folder under `content/blog/`.
+4. **Substance gate.** Every H2 has at least one of: comparison table, ≥15-line code block, measured benchmark with units, or worked numerical example. Spot-check by reading the file and counting.
+
+Then report to the user:
+- Final file path, word count, recomputed `readTime`.
+- List of new images written (paths and sizes).
+- Which gates passed/failed and what was added on the second pass if applicable.
+- 2–4 suggested cross-links the *user* should consider adding to *other* existing posts (do not edit those unless asked).
 - Reminder to run `npm run dev` (or `bun run dev`) and load the page locally before committing.
 
 ## Path / category routing
@@ -140,6 +180,7 @@ After writing, report to the user:
 | react, next.js, build-tool, framework                         | `software-development/`                                 |
 | backtest, market-microstructure, alpha                        | `trading/`                                              |
 | short scratch notes                                           | `notes/`                                                |
+| named open-source library deep-dives (lmcache, vllm, sglang, ray, deepspeed) | `machine-learning/open-source-library/`     |
 
 If two folders match, or none match cleanly, use `AskUserQuestion` with the top 2–3 candidates as options. Never guess silently.
 
@@ -168,11 +209,18 @@ Match the look of existing PNGs in `public/imgs/blogs/`. Defaults for every shap
 }
 ```
 
-Accent palette (use sparingly to highlight one or two elements per figure):
-- Primary blue fill: `#a5d8ff`
-- Caution amber fill: `#ffec99`
-- Danger red fill: `#ffc9c9`
-- Success green fill: `#b2f2bb`
+**Semantic color palette (mandatory — colors carry meaning, not decoration).** Pick colors based on what the element represents in the prose, never aesthetically. Use 2–3 colors per figure max; the rest stays transparent.
+
+| Color | Hex | Use for |
+| --- | --- | --- |
+| Primary blue | `#a5d8ff` | The main happy-path component; the layer being explained; "what we use" |
+| Caution amber | `#ffec99` | Trade-off points; bottlenecks; cost; "watch out here" |
+| Danger red | `#ffc9c9` | Failure modes; eviction; loss; "this is what breaks" |
+| Success green | `#b2f2bb` | Cache hits; wins; the optimized path in before/after diagrams |
+| Neutral lavender | `#d0bfff` | External systems / third-party / off-host components |
+| Soft gray | `#e9ecef` | Background grouping, "context" boxes, things the reader can ignore |
+
+For a before/after diagram: left column uses red/amber accents (the bad path), right column uses green/blue (the good path). For a layered stack: blue for the layer being discussed in the section, gray for the layers above/below. Never two strong accents competing in the same figure — pick one to dominate.
 
 Three reusable layouts (full payload templates live in `diagrams/`):
 
