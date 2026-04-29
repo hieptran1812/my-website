@@ -196,6 +196,10 @@
   transition: transform 0.15s ease;
 }
 .bh-fab:hover { transform: translateY(-2px); }
+/* Hide the Notes FAB and panel while the fullscreen graph modal is open. */
+body.graph-fullscreen-open .bh-fab,
+body.graph-fullscreen-open .bh-panel,
+body.graph-fullscreen-open .bh-backdrop { display: none !important; }
 .bh-fab-count {
   display: inline-flex;
   align-items: center;

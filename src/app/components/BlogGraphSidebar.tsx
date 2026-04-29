@@ -105,6 +105,14 @@ function BlogGraphSidebar({
     localStorage.setItem("blog-mobile-active-tab", mobileActiveTab);
   }, [mobileActiveTab]);
 
+  // Toggle a body class while the fullscreen graph modal is open so other
+  // floating UI (e.g. the Notes FAB) can hide itself via CSS.
+  useEffect(() => {
+    if (!isExpanded) return;
+    document.body.classList.add("graph-fullscreen-open");
+    return () => document.body.classList.remove("graph-fullscreen-open");
+  }, [isExpanded]);
+
   // Re-render graph when sidebar expands from collapsed state
   useEffect(() => {
     if (!isCollapsed) {
@@ -544,7 +552,7 @@ function BlogGraphSidebar({
             />
             <button
               onClick={() => setUniverseMode((v) => !v)}
-              className="absolute top-3 left-3 rounded-md px-2.5 py-1 text-xs font-medium"
+              className="absolute bottom-3 left-3 rounded-md px-2.5 py-1 text-xs font-medium"
               style={{
                 background: universeMode ? "var(--accent)" : "var(--surface)",
                 color: universeMode ? "white" : "var(--text-secondary)",
