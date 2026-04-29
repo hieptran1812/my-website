@@ -1,12 +1,6 @@
 "use client";
 
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-  useMemo,
-} from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
 import { useRouter } from "next/navigation";
 
@@ -14,23 +8,31 @@ interface GraphNode extends d3.SimulationNodeDatum {
   id: string;
   slug: string;
   title: string;
-  tags: string[];
   category: string;
-  group: string;
-  connections: number;
+  subcategory: string;
+  hop: number;
+  relevance: number;
+  image?: string;
+  publishDate: string;
 }
 
-interface GraphLink extends d3.SimulationLinkDatum<GraphNode> {
+type GraphEdgeType = "series" | "reference" | "topic" | "similar";
+
+interface GraphEdge extends d3.SimulationLinkDatum<GraphNode> {
   source: string | GraphNode;
   target: string | GraphNode;
-  type: "reference" | "tag";
+  type: GraphEdgeType;
+  weight: number;
+  evidence?: string;
+  directed?: boolean;
 }
 
-interface GraphData {
+interface GraphPayload {
+  mode: "ego" | "universe";
+  currentNodeId?: string;
   nodes: GraphNode[];
-  links: GraphLink[];
-  tagGroups: { [tag: string]: string[] };
-  tagColors: { [tag: string]: string };
+  edges: GraphEdge[];
+  palette: Record<string, string>;
 }
 
 interface BlogGraphViewProps {
@@ -40,25 +42,29 @@ interface BlogGraphViewProps {
   width?: number;
   height?: number;
   theme?: string;
+  /** Depth of the ego BFS, 1-3. Mobile defaults to 1, desktop to 2. */
+  depth?: number;
+  /** Visible edge types. Defaults to all four. */
+  edgeTypes?: GraphEdgeType[];
+  /** Force universe (whole-corpus) mode regardless of slug. */
+  universe?: boolean;
 }
 
-// Color palette for tag clusters - matches API
-const TAG_COLORS = [
-  "#f97316", // orange
-  "#22c55e", // green
-  "#3b82f6", // blue
-  "#a855f7", // purple
-  "#ef4444", // red
-  "#eab308", // yellow
-  "#14b8a6", // teal
-  "#ec4899", // pink
-  "#6366f1", // indigo
-  "#84cc16", // lime
-  "#f43f5e", // rose
-  "#06b6d4", // cyan
-  "#8b5cf6", // violet
-  "#10b981", // emerald
-  "#f59e0b", // amber
+const EDGE_STYLE: Record<
+  GraphEdgeType,
+  { stroke: string; dash?: string; arrow?: boolean }
+> = {
+  series: { stroke: "#a855f7", arrow: true },
+  reference: { stroke: "#3b82f6", arrow: true },
+  topic: { stroke: "#f59e0b", dash: "4 3" },
+  similar: { stroke: "#10b981" },
+};
+
+const ALL_EDGE_TYPES: GraphEdgeType[] = [
+  "series",
+  "reference",
+  "topic",
+  "similar",
 ];
 
 export default function BlogGraphView({
@@ -68,592 +74,377 @@ export default function BlogGraphView({
   width: propWidth,
   height: propHeight,
   theme = "light",
+  depth = 2,
+  edgeTypes = ALL_EDGE_TYPES,
+  universe = false,
 }: BlogGraphViewProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [graphData, setGraphData] = useState<GraphData | null>(null);
-  const [hoveredNode, setHoveredNode] = useState<GraphNode | null>(null);
+  const [payload, setPayload] = useState<GraphPayload | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [hoveredEdgeEvidence, setHoveredEdgeEvidence] =
+    useState<string | null>(null);
   const [dimensions, setDimensions] = useState({ width: 300, height: 400 });
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  // Store theme in ref to avoid re-running simulation on theme change
-  const themeRef = useRef(theme);
-  themeRef.current = theme;
-
-  // Fetch graph data
+  // ─── Fetch payload ───
   useEffect(() => {
-    const fetchGraphData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch("/api/blog/graph");
-        if (response.ok) {
-          const data = await response.json();
-          setGraphData(data);
-        }
-      } catch (error) {
-        console.error("Error fetching graph data:", error);
-      } finally {
-        setIsLoading(false);
-      }
+    let abort = false;
+    const ctrl = new AbortController();
+    setIsLoading(true);
+    const params = new URLSearchParams();
+    if (!universe && currentSlug) {
+      params.set("slug", currentSlug);
+      params.set("depth", String(Math.min(3, Math.max(1, depth))));
+    }
+    fetch(`/api/blog/graph${params.toString() ? `?${params}` : ""}`, {
+      signal: ctrl.signal,
+    })
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.statusText)))
+      .then((data: GraphPayload) => {
+        if (!abort) setPayload(data);
+      })
+      .catch((err) => {
+        if ((err as Error).name !== "AbortError")
+          console.error("graph fetch failed", err);
+      })
+      .finally(() => {
+        if (!abort) setIsLoading(false);
+      });
+    return () => {
+      abort = true;
+      ctrl.abort();
     };
+  }, [currentSlug, depth, universe]);
 
-    fetchGraphData();
-  }, []);
-
-  // Update dimensions on resize
+  // ─── Resize observer ───
   useEffect(() => {
-    const updateDimensions = () => {
+    const update = () => {
       if (isExpanded) {
-        // Fullscreen mode
         setDimensions({
-          width: propWidth || window.innerWidth * 0.9,
-          height: propHeight || window.innerHeight * 0.85,
+          width: Math.min(window.innerWidth - 32, 1400),
+          height: Math.min(window.innerHeight - 120, 900),
         });
       } else if (containerRef.current) {
-        // Sidebar mode - measure container if no explicit width
         const rect = containerRef.current.getBoundingClientRect();
         setDimensions({
-          width: propWidth || rect.width || 280,
-          height: propHeight || 280,
-        });
-      } else {
-        // Fallback
-        setDimensions({
-          width: propWidth || 280,
-          height: propHeight || 280,
+          width: Math.max(240, rect.width || propWidth || 280),
+          height: propHeight ?? 280,
         });
       }
     };
-
-    // Initial update with a small delay to ensure container is rendered
-    const initialTimer = setTimeout(updateDimensions, 50);
-
-    window.addEventListener("resize", updateDimensions);
-
-    // Also observe container size changes
-    const resizeObserver = new ResizeObserver(() => {
-      updateDimensions();
-    });
-
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
-
-    return () => {
-      clearTimeout(initialTimer);
-      window.removeEventListener("resize", updateDimensions);
-      resizeObserver.disconnect();
-    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, [isExpanded, propWidth, propHeight]);
 
-  // Get node color based on primary tag
-  const getNodeColor = useCallback(
-    (node: GraphNode): string => {
-      if (!graphData?.tagColors) return TAG_COLORS[0];
+  // Filter edges to active types so the simulation only sees what we draw.
+  const filteredEdges = useMemo(() => {
+    if (!payload) return [];
+    const allow = new Set(edgeTypes);
+    return payload.edges.filter((e) => allow.has(e.type));
+  }, [payload, edgeTypes]);
 
-      const primaryTag = node.group || node.tags[0];
-      if (primaryTag && graphData.tagColors[primaryTag]) {
-        return graphData.tagColors[primaryTag];
-      }
-
-      // Fallback: hash the category to get consistent color
-      const hash = node.category
-        .split("")
-        .reduce((acc, char) => acc + char.charCodeAt(0), 0);
-      return TAG_COLORS[hash % TAG_COLORS.length];
-    },
-    [graphData?.tagColors]
-  );
-
-  // Get node size based on connections
-  const getNodeSize = useCallback(
-    (node: GraphNode): number => {
-      const baseSize = isExpanded ? 6 : 4;
-      const maxConnections = Math.max(
-        ...(graphData?.nodes.map((n) => n.connections) || [1])
-      );
-      const scale = Math.min(node.connections / Math.max(maxConnections, 1), 1);
-      return baseSize + scale * (isExpanded ? 10 : 6);
-    },
-    [graphData?.nodes, isExpanded]
-  );
-
-  // D3 Force simulation
+  // ─── Render simulation ───
   useEffect(() => {
-    if (!graphData || !svgRef.current || graphData.nodes.length === 0) return;
+    if (!payload || !svgRef.current || payload.nodes.length === 0) return;
 
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
-
     const { width, height } = dimensions;
 
-    // Create a deep copy of nodes and links for D3
-    const nodes: GraphNode[] = graphData.nodes.map((n) => ({ ...n }));
-    const links: GraphLink[] = graphData.links.map((l) => ({ ...l }));
+    const nodes: GraphNode[] = payload.nodes.map((n) => ({ ...n }));
+    const edges: GraphEdge[] = filteredEdges.map((e) => ({
+      ...e,
+      source: typeof e.source === "string" ? e.source : e.source.id,
+      target: typeof e.target === "string" ? e.target : e.target.id,
+    }));
 
-    // Create zoom behavior
+    const isDark = theme === "dark";
+    const centreId = payload.currentNodeId;
+
+    // Pin centre
+    const centre = nodes.find((n) => n.id === centreId);
+    if (centre) {
+      centre.fx = width / 2;
+      centre.fy = height / 2;
+    }
+
+    // Cluster forces by subcategory: each subcategory gets a target ring point.
+    const subcats = Array.from(new Set(nodes.map((n) => n.subcategory || "_")));
+    const subcatTargets = new Map<string, { x: number; y: number }>();
+    const radius = Math.min(width, height) * 0.32;
+    subcats.forEach((s, i) => {
+      const angle = (i / subcats.length) * Math.PI * 2;
+      subcatTargets.set(s, {
+        x: width / 2 + radius * Math.cos(angle),
+        y: height / 2 + radius * Math.sin(angle),
+      });
+    });
+
+    const sizeFor = (n: GraphNode) => {
+      if (n.id === centreId) return isExpanded ? 18 : 13;
+      if (n.hop === 1) return (isExpanded ? 8 : 6) + n.relevance * (isExpanded ? 8 : 5);
+      if (n.hop === 2) return isExpanded ? 6 : 4;
+      return isExpanded ? 5 : 3.5;
+    };
+
+    // Defs: arrow markers, one per edge type so the head colour matches.
+    const defs = svg.append("defs");
+    for (const t of ALL_EDGE_TYPES) {
+      const style = EDGE_STYLE[t];
+      defs
+        .append("marker")
+        .attr("id", `arrow-${t}`)
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 12)
+        .attr("refY", 0)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M0,-4L8,0L0,4")
+        .attr("fill", style.stroke)
+        .attr("opacity", 0.85);
+    }
+
+    const root = svg.append("g");
+
+    // Zoom & pan
     const zoom = d3
       .zoom<SVGSVGElement, unknown>()
-      .scaleExtent([0.3, 4])
-      .on("zoom", (event) => {
-        container.attr("transform", event.transform);
-      });
-
+      .scaleExtent([0.4, 4])
+      .on("zoom", (e) => root.attr("transform", e.transform.toString()));
     svg.call(zoom);
 
-    // Create container for zoom/pan
-    const container = svg.append("g");
-
-    // Create force simulation
-    const simulation = d3
-      .forceSimulation<GraphNode>(nodes)
-      .force(
-        "link",
-        d3
-          .forceLink<GraphNode, GraphLink>(links)
-          .id((d) => d.id)
-          .distance((d) => (d.type === "reference" ? 80 : 120))
-          .strength((d) => (d.type === "reference" ? 0.8 : 0.2))
-      )
-      .force("charge", d3.forceManyBody().strength(isExpanded ? -150 : -80))
-      .force("center", d3.forceCenter(width / 2, height / 2))
-      .force("collision", d3.forceCollide().radius((d) => getNodeSize(d as GraphNode) + 3))
-      .force("x", d3.forceX(width / 2).strength(0.05))
-      .force("y", d3.forceY(height / 2).strength(0.05));
-
-    // Theme-based colors (use ref to get current theme)
-    const currentTheme = themeRef.current;
-    const linkColorRef = currentTheme === "dark" ? "#6b7280" : "#9ca3af";
-    const linkColorTag = currentTheme === "dark" ? "#374151" : "#d1d5db";
-
-    // Create links
-    const link = container
+    const linkSel = root
       .append("g")
       .attr("class", "links")
-      .selectAll("line")
-      .data(links)
-      .join("line")
-      .attr("stroke", (d) => (d.type === "reference" ? linkColorRef : linkColorTag))
-      .attr("stroke-opacity", (d) => (d.type === "reference" ? 0.6 : 0.2))
-      .attr("stroke-width", (d) => (d.type === "reference" ? 2 : 1));
+      .selectAll<SVGLineElement, GraphEdge>("line")
+      .data(edges)
+      .enter()
+      .append("line")
+      .attr("stroke", (d) => EDGE_STYLE[d.type].stroke)
+      .attr("stroke-width", (d) => Math.max(0.6, Math.sqrt(d.weight) * 2.4))
+      .attr("stroke-opacity", (d) => 0.25 + d.weight * 0.65)
+      .attr("stroke-dasharray", (d) => EDGE_STYLE[d.type].dash || null)
+      .attr("marker-end", (d) =>
+        EDGE_STYLE[d.type].arrow ? `url(#arrow-${d.type})` : null,
+      )
+      .on("mouseenter", (_, d) => setHoveredEdgeEvidence(d.evidence ?? null))
+      .on("mouseleave", () => setHoveredEdgeEvidence(null));
 
-    // Create drag behavior
-    const dragBehavior = d3
-      .drag<SVGGElement, GraphNode>()
-      .on("start", (event, d) => {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
-        d.fx = d.x;
-        d.fy = d.y;
-      })
-      .on("drag", (event, d) => {
-        d.fx = event.x;
-        d.fy = event.y;
-      })
-      .on("end", (event, d) => {
-        if (!event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
-      });
-
-    // Create node group
-    const nodeGroup = container
+    const nodeSel = root
       .append("g")
       .attr("class", "nodes")
       .selectAll<SVGGElement, GraphNode>("g")
       .data(nodes)
-      .join("g")
+      .enter()
+      .append("g")
       .attr("cursor", "pointer")
-      .call(dragBehavior);
-
-    // Add glow filter for current node
-    const defs = svg.append("defs");
-    const filter = defs.append("filter").attr("id", "glow");
-    filter
-      .append("feGaussianBlur")
-      .attr("stdDeviation", "3")
-      .attr("result", "coloredBlur");
-    const feMerge = filter.append("feMerge");
-    feMerge.append("feMergeNode").attr("in", "coloredBlur");
-    feMerge.append("feMergeNode").attr("in", "SourceGraphic");
-
-    // Add outer glow circle for nodes
-    nodeGroup
-      .append("circle")
-      .attr("class", "node-glow")
-      .attr("r", (d) => getNodeSize(d) + 4)
-      .attr("fill", (d) => getNodeColor(d))
-      .attr("opacity", 0.3);
-
-    // Add main circle for nodes
-    nodeGroup
-      .append("circle")
-      .attr("class", "node-main")
-      .attr("r", (d) => getNodeSize(d))
-      .attr("fill", (d) => getNodeColor(d))
-      .attr("stroke", (d) => (d.slug === currentSlug ? "#fff" : "none"))
-      .attr("stroke-width", (d) => (d.slug === currentSlug ? 3 : 0))
-      .attr("filter", (d) => (d.slug === currentSlug ? "url(#glow)" : "none"));
-
-    // Add inner highlight circle
-    nodeGroup
-      .append("circle")
-      .attr("class", "node-highlight")
-      .attr("r", (d) => getNodeSize(d) * 0.4)
-      .attr("fill", "#fff")
-      .attr("opacity", 0.3)
-      .attr("transform", (d) => {
-        const offset = getNodeSize(d) * 0.25;
-        return `translate(${-offset}, ${-offset})`;
-      });
-
-    // Hover effects
-    nodeGroup
-      .on("mouseenter", function (event, d) {
-        setHoveredNode(d);
-
-        // Highlight connected nodes and links
-        const connectedNodeIds = new Set<string>();
-        connectedNodeIds.add(d.id);
-
-        links.forEach((l) => {
-          const sourceId =
-            typeof l.source === "string" ? l.source : (l.source as GraphNode).id;
-          const targetId =
-            typeof l.target === "string" ? l.target : (l.target as GraphNode).id;
-
-          if (sourceId === d.id) connectedNodeIds.add(targetId);
-          if (targetId === d.id) connectedNodeIds.add(sourceId);
-        });
-
-        // Dim non-connected nodes
-        nodeGroup
-          .transition()
-          .duration(200)
-          .attr("opacity", (n) => (connectedNodeIds.has(n.id) ? 1 : 0.2));
-
-        // Highlight connected links
-        link
-          .transition()
-          .duration(200)
-          .attr("stroke-opacity", (l) => {
-            const sourceId =
-              typeof l.source === "string" ? l.source : (l.source as GraphNode).id;
-            const targetId =
-              typeof l.target === "string" ? l.target : (l.target as GraphNode).id;
-            return sourceId === d.id || targetId === d.id ? 1 : 0.05;
-          })
-          .attr("stroke-width", (l) => {
-            const sourceId =
-              typeof l.source === "string" ? l.source : (l.source as GraphNode).id;
-            const targetId =
-              typeof l.target === "string" ? l.target : (l.target as GraphNode).id;
-            return sourceId === d.id || targetId === d.id ? 3 : 1;
-          });
-
-        // Scale up hovered node
-        d3.select(this)
-          .select(".node-main")
-          .transition()
-          .duration(200)
-          .attr("r", getNodeSize(d) * 1.3);
-
-        d3.select(this)
-          .select(".node-glow")
-          .transition()
-          .duration(200)
-          .attr("r", getNodeSize(d) * 1.3 + 6)
-          .attr("opacity", 0.5);
-      })
-      .on("mouseleave", function () {
-        setHoveredNode(null);
-
-        // Reset all nodes
-        nodeGroup.transition().duration(200).attr("opacity", 1);
-
-        // Reset all links
-        link
-          .transition()
-          .duration(200)
-          .attr("stroke-opacity", (d) => (d.type === "reference" ? 0.6 : 0.2))
-          .attr("stroke-width", (d) => (d.type === "reference" ? 2 : 1));
-
-        // Reset node size
-        d3.select(this)
-          .select(".node-main")
-          .transition()
-          .duration(200)
-          .attr("r", (d) => getNodeSize(d as GraphNode));
-
-        d3.select(this)
-          .select(".node-glow")
-          .transition()
-          .duration(200)
-          .attr("r", (d) => getNodeSize(d as GraphNode) + 4)
-          .attr("opacity", 0.3);
-      })
-      .on("click", (event, d) => {
-        event.stopPropagation();
+      .on("click", (_, d) => {
+        if (!d.slug) return;
         router.push(`/blog/${d.slug}`);
-        if (onClose) onClose();
+      })
+      .on("mouseenter", (_, d) => setHoveredId(d.id))
+      .on("mouseleave", () => setHoveredId(null));
+
+    nodeSel
+      .append("circle")
+      .attr("r", sizeFor)
+      .attr("fill", (d) => payload.palette[d.subcategory] || "#6b7280")
+      .attr("stroke", (d) =>
+        d.id === centreId
+          ? isDark
+            ? "#fff"
+            : "#0f172a"
+          : isDark
+            ? "rgba(255,255,255,0.4)"
+            : "rgba(15,23,42,0.25)",
+      )
+      .attr("stroke-width", (d) => (d.id === centreId ? 2.5 : 1));
+
+    // Always-on label for the centre, hover-only for others.
+    nodeSel
+      .filter((d) => d.id === centreId)
+      .append("text")
+      .attr("y", (d) => sizeFor(d) + 14)
+      .attr("text-anchor", "middle")
+      .attr("font-size", isExpanded ? 12 : 10)
+      .attr("font-weight", 600)
+      .attr("fill", isDark ? "#f1f5f9" : "#0f172a")
+      .text((d) =>
+        d.title.length > 38 ? d.title.slice(0, 36) + "…" : d.title,
+      );
+
+    // Drag
+    const drag = d3
+      .drag<SVGGElement, GraphNode>()
+      .on("start", (e, d) => {
+        if (!e.active) sim.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      })
+      .on("drag", (e, d) => {
+        d.fx = e.x;
+        d.fy = e.y;
+      })
+      .on("end", (e, d) => {
+        if (!e.active) sim.alphaTarget(0);
+        if (d.id !== centreId) {
+          d.fx = null;
+          d.fy = null;
+        }
       });
+    nodeSel.call(drag);
 
-    // Update positions on tick
-    simulation.on("tick", () => {
-      link
-        .attr("x1", (d) => (d.source as GraphNode).x!)
-        .attr("y1", (d) => (d.source as GraphNode).y!)
-        .attr("x2", (d) => (d.target as GraphNode).x!)
-        .attr("y2", (d) => (d.target as GraphNode).y!);
+    const sim = d3
+      .forceSimulation<GraphNode>(nodes)
+      .force(
+        "link",
+        d3
+          .forceLink<GraphNode, GraphEdge>(edges)
+          .id((d) => d.id)
+          .distance((l) => 60 + (1 - l.weight) * 80)
+          .strength((l) => 0.2 + l.weight * 0.6),
+      )
+      .force("charge", d3.forceManyBody().strength(isExpanded ? -180 : -100))
+      .force("collision", d3.forceCollide<GraphNode>().radius((d) => sizeFor(d) + 4))
+      .force(
+        "x",
+        d3
+          .forceX<GraphNode>((d) => subcatTargets.get(d.subcategory || "_")?.x ?? width / 2)
+          .strength((d) => (d.id === centreId ? 0 : 0.08)),
+      )
+      .force(
+        "y",
+        d3
+          .forceY<GraphNode>((d) => subcatTargets.get(d.subcategory || "_")?.y ?? height / 2)
+          .strength((d) => (d.id === centreId ? 0 : 0.08)),
+      )
+      .force("center", d3.forceCenter(width / 2, height / 2).strength(0.02));
 
-      nodeGroup.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    sim.on("tick", () => {
+      linkSel
+        .attr("x1", (d) => (d.source as GraphNode).x ?? 0)
+        .attr("y1", (d) => (d.source as GraphNode).y ?? 0)
+        .attr("x2", (d) => (d.target as GraphNode).x ?? 0)
+        .attr("y2", (d) => (d.target as GraphNode).y ?? 0);
+      nodeSel.attr("transform", (d) => `translate(${d.x ?? 0},${d.y ?? 0})`);
     });
 
-    // Center on current node if exists
-    if (currentSlug) {
-      const currentNode = nodes.find((n) => n.slug === currentSlug);
-      if (currentNode) {
-        setTimeout(() => {
-          const transform = d3.zoomIdentity
-            .translate(width / 2, height / 2)
-            .scale(isExpanded ? 1.2 : 1)
-            .translate(-(currentNode.x || width / 2), -(currentNode.y || height / 2));
-
-          svg.transition().duration(750).call(zoom.transform, transform);
-        }, 1000);
-      }
-    }
-
-    // Cleanup
     return () => {
-      simulation.stop();
+      sim.stop();
     };
-  }, [
-    graphData,
-    dimensions,
-    currentSlug,
-    isExpanded,
-    getNodeColor,
-    getNodeSize,
-    router,
-    onClose,
-    // Note: theme is not included here to prevent animation restart on theme change
-    // Theme colors are applied via themeRef and updated in separate useEffect
-  ]);
+  }, [payload, filteredEdges, dimensions, theme, isExpanded, router]);
 
-  // Update link colors when theme changes (without restarting simulation)
+  // ─── Hover dim effect (post-render DOM tweak) ───
   useEffect(() => {
-    if (!svgRef.current) return;
-
+    if (!svgRef.current || !payload) return;
     const svg = d3.select(svgRef.current);
-    const linkColorRef = theme === "dark" ? "#6b7280" : "#9ca3af";
-    const linkColorTag = theme === "dark" ? "#374151" : "#d1d5db";
-
-    // Update link colors without animation
-    svg.selectAll(".links line")
-      .attr("stroke", function() {
-        const lineType = d3.select(this).datum() as { type: string } | undefined;
-        return lineType?.type === "reference" ? linkColorRef : linkColorTag;
+    if (!hoveredId) {
+      svg.selectAll<SVGElement, GraphNode>(".nodes g").attr("opacity", 1);
+      svg.selectAll<SVGElement, GraphEdge>(".links line").attr("opacity", 1);
+      return;
+    }
+    const neighbours = new Set<string>([hoveredId]);
+    for (const e of filteredEdges) {
+      const s = typeof e.source === "string" ? e.source : (e.source as GraphNode).id;
+      const t = typeof e.target === "string" ? e.target : (e.target as GraphNode).id;
+      if (s === hoveredId) neighbours.add(t);
+      if (t === hoveredId) neighbours.add(s);
+    }
+    svg
+      .selectAll<SVGGElement, GraphNode>(".nodes g")
+      .attr("opacity", (d) => (neighbours.has(d.id) ? 1 : 0.18));
+    svg
+      .selectAll<SVGLineElement, GraphEdge>(".links line")
+      .attr("opacity", (d) => {
+        const s = typeof d.source === "string" ? d.source : (d.source as GraphNode).id;
+        const t = typeof d.target === "string" ? d.target : (d.target as GraphNode).id;
+        return s === hoveredId || t === hoveredId ? 1 : 0.08;
       });
-  }, [theme]);
+  }, [hoveredId, payload, filteredEdges]);
 
-  // Tag legend (for expanded view)
-  const tagLegend = useMemo(() => {
-    if (!graphData || !isExpanded) return null;
-
-    const topTags = Object.entries(graphData.tagGroups)
-      .sort((a, b) => b[1].length - a[1].length)
-      .slice(0, 10);
-
-    return topTags.map(([tag, posts]) => ({
-      tag,
-      count: posts.length,
-      color: graphData.tagColors[tag] || TAG_COLORS[0],
-    }));
-  }, [graphData, isExpanded]);
-
-  if (isLoading) {
-    return (
-      <div
-        ref={containerRef}
-        className="flex items-center justify-center w-full"
-        style={{
-          height: isExpanded ? "100%" : propHeight || 280,
-          backgroundColor: "var(--background)",
-        }}
-      >
-        <div className="flex flex-col items-center gap-2">
-          <div
-            className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin"
-            style={{ borderColor: "var(--accent)", borderTopColor: "transparent" }}
-          />
-          <span className="text-sm" style={{ color: "var(--text-secondary)" }}>
-            Loading graph...
-          </span>
-        </div>
-      </div>
-    );
-  }
-
-  if (!graphData || graphData.nodes.length === 0) {
-    return null;
-  }
-
-  // Theme-based background colors
-  const bgColor = theme === "dark" ? "#1a1a2e" : "#f8fafc";
-  const textColor = theme === "dark" ? "#fff" : "#1e293b";
-  const textSecondary = theme === "dark" ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.7)";
-  const textMuted = theme === "dark" ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)";
-  const overlayBg = theme === "dark" ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.9)";
-  const tooltipBg = theme === "dark" ? "rgba(0,0,0,0.9)" : "rgba(255,255,255,0.95)";
-  const tooltipBorder = theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)";
-  const buttonBg = theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)";
-  const buttonHoverBg = theme === "dark" ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)";
+  const hoveredNode = hoveredId
+    ? payload?.nodes.find((n) => n.id === hoveredId)
+    : null;
 
   return (
     <div
       ref={containerRef}
-      className={`relative ${isExpanded ? "w-full h-full" : "w-full"}`}
+      className="relative w-full"
       style={{
-        backgroundColor: isExpanded ? bgColor : "transparent",
-        borderRadius: isExpanded ? "12px" : "0",
+        height: isExpanded ? "100%" : "280px",
+        background: theme === "dark" ? "#011627" : "#ffffff",
       }}
     >
-      {/* Header for expanded view */}
-      {isExpanded && (
+      {isLoading && (
         <div
-          className="absolute top-4 left-4 z-10 flex items-center gap-4"
-          style={{ color: textColor }}
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ color: "var(--text-secondary)" }}
         >
-          <div className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-              />
-            </svg>
-            <span className="font-semibold">Graph view</span>
-          </div>
-        </div>
-      )}
-
-      {/* Close button for expanded view */}
-      {isExpanded && onClose && (
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-lg transition-colors duration-200"
-          style={{
-            backgroundColor: buttonBg,
-            color: textColor,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = buttonHoverBg;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = buttonBg;
-          }}
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
+          <div className="flex flex-col items-center gap-2">
+            <div
+              className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin"
+              style={{ borderColor: "var(--accent)", borderTopColor: "transparent" }}
             />
-          </svg>
-        </button>
-      )}
-
-      {/* Tag Legend (expanded view only) */}
-      {isExpanded && tagLegend && (
-        <div
-          className="absolute top-4 left-4 z-10 p-4 rounded-xl"
-          style={{
-            backgroundColor: overlayBg,
-            backdropFilter: "blur(10px)",
-            marginTop: "40px",
-          }}
-        >
-          <h4 className="text-sm font-semibold mb-3" style={{ color: textColor }}>
-            Groups
-          </h4>
-          <div className="space-y-2 max-h-60 overflow-y-auto">
-            {tagLegend.map(({ tag, count, color }) => (
-              <div key={tag} className="flex items-center gap-2">
-                <div
-                  className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: color }}
-                />
-                <span className="text-xs" style={{ color: textSecondary }}>
-                  {tag} ({count})
-                </span>
-              </div>
-            ))}
+            <span className="text-xs">Building graph…</span>
           </div>
         </div>
       )}
-
-      {/* Tooltip for hovered node */}
+      <svg ref={svgRef} width={dimensions.width} height={dimensions.height} />
       {hoveredNode && (
         <div
-          className="absolute z-20 p-3 rounded-lg shadow-xl max-w-xs pointer-events-none"
+          className="absolute pointer-events-none rounded-md border px-2.5 py-1.5 text-xs"
           style={{
-            backgroundColor: tooltipBg,
-            backdropFilter: "blur(10px)",
-            border: `1px solid ${tooltipBorder}`,
-            left: isExpanded ? "50%" : "50%",
-            top: isExpanded ? "auto" : "10px",
-            bottom: isExpanded ? "80px" : "auto",
-            transform: "translateX(-50%)",
+            background: "var(--background)",
+            borderColor: "var(--border)",
+            color: "var(--text-primary)",
+            top: 8,
+            left: 8,
+            maxWidth: dimensions.width - 16,
+            boxShadow: "0 8px 24px -10px rgba(0,0,0,0.25)",
           }}
         >
-          <h4 className="font-semibold text-sm mb-1 line-clamp-2" style={{ color: textColor }}>
-            {hoveredNode.title}
-          </h4>
-          <div className="flex flex-wrap gap-1 mt-2">
-            {hoveredNode.tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="px-2 py-0.5 rounded text-xs"
-                style={{
-                  backgroundColor:
-                    graphData?.tagColors[tag] || buttonBg,
-                  color: "#fff",
-                }}
-              >
-                {tag}
-              </span>
-            ))}
+          <div style={{ fontWeight: 600 }}>{hoveredNode.title}</div>
+          <div style={{ fontSize: 10, color: "var(--text-secondary)" }}>
+            {[hoveredNode.subcategory, hoveredNode.category]
+              .filter(Boolean)
+              .join(" · ")}
+            {hoveredNode.hop === 0
+              ? " · current"
+              : ` · ${Math.round(hoveredNode.relevance * 100)}% match`}
           </div>
-          <p className="text-xs mt-2" style={{ color: textMuted }}>
-            {hoveredNode.connections} connections
-          </p>
         </div>
       )}
-
-      {/* SVG Graph */}
-      <svg
-        ref={svgRef}
-        width="100%"
-        height={dimensions.height}
-        viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
-        preserveAspectRatio="xMidYMid meet"
-        style={{
-          display: "block",
-          backgroundColor: isExpanded ? bgColor : "transparent",
-        }}
-      />
-
-      {/* Instructions for expanded view */}
-      {isExpanded && (
+      {hoveredEdgeEvidence && !hoveredNode && (
         <div
-          className="absolute bottom-4 right-4 text-xs"
-          style={{ color: textMuted }}
+          className="absolute pointer-events-none rounded-md border px-2.5 py-1 text-[11px]"
+          style={{
+            background: "var(--background)",
+            borderColor: "var(--border)",
+            color: "var(--text-secondary)",
+            bottom: 8,
+            left: 8,
+          }}
         >
-          Scroll to zoom | Drag to pan | Click node to navigate
+          {hoveredEdgeEvidence}
         </div>
+      )}
+      {onClose && isExpanded && (
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 rounded-md px-2 py-1 text-xs"
+          style={{
+            background: "var(--surface)",
+            border: "1px solid var(--border)",
+            color: "var(--text-secondary)",
+          }}
+        >
+          Close
+        </button>
       )}
     </div>
   );

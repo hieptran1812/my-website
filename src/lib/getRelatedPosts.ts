@@ -68,7 +68,7 @@ const MIN_RELEVANCE = 0.05;
 
 // ─────────────── Corpus index ───────────────
 
-interface IndexEntry {
+export interface IndexEntry {
   slug: string;
   title: string;
   excerpt: string;
@@ -84,7 +84,7 @@ interface IndexEntry {
   tfidfNorm: number;
 }
 
-interface CorpusIndex {
+export interface CorpusIndex {
   entries: IndexEntry[];
   bySlug: Map<string, IndexEntry>;
   /** IDF for tags (Map<lowercased tag, idf weight>). */
@@ -95,6 +95,10 @@ interface CorpusIndex {
   N: number;
   /** Posts grouped by collection name (lowercased). */
   byCollection: Map<string, IndexEntry[]>;
+  /** Forward markdown reference graph: slug → set of slugs it links to. */
+  outgoingRefs: Map<string, Set<string>>;
+  /** Reverse: slug → set of slugs that link to it. */
+  incomingRefs: Map<string, Set<string>>;
 }
 
 let cachedIndex: CorpusIndex | null = null;
@@ -184,10 +188,45 @@ async function buildIndex(): Promise<CorpusIndex> {
     });
   }
 
-  return { entries, bySlug, tagIdf, tokenIdf, N, byCollection };
+  // Build the markdown-link reference graph. We parse each post's body for
+  // [text](slug) — slugs may include /blog/ prefix, trailing slashes, or be
+  // relative — and keep only links whose target resolves to another post.
+  const outgoingRefs = new Map<string, Set<string>>();
+  const incomingRefs = new Map<string, Set<string>>();
+  const linkRe = /\[([^\]]*)\]\(([^)\s]+)\)/g;
+  for (const post of corpus) {
+    const out = new Set<string>();
+    let m: RegExpExecArray | null;
+    while ((m = linkRe.exec(post.content)) !== null) {
+      const target = m[2]
+        .replace(/^\/+/, "")
+        .replace(/^blog\//, "")
+        .replace(/\/+$/, "")
+        .replace(/^#.+$/, "");
+      if (!target || target === post.slug) continue;
+      if (bySlug.has(target)) out.add(target);
+    }
+    outgoingRefs.set(post.slug, out);
+    for (const t of out) {
+      const arr = incomingRefs.get(t) ?? new Set<string>();
+      arr.add(post.slug);
+      incomingRefs.set(t, arr);
+    }
+  }
+
+  return {
+    entries,
+    bySlug,
+    tagIdf,
+    tokenIdf,
+    N,
+    byCollection,
+    outgoingRefs,
+    incomingRefs,
+  };
 }
 
-async function getIndex(): Promise<CorpusIndex> {
+export async function getIndex(): Promise<CorpusIndex> {
   const now = Date.now();
   if (cachedIndex && now - cachedAt < CACHE_TTL_MS) return cachedIndex;
   cachedIndex = await buildIndex();
@@ -197,7 +236,7 @@ async function getIndex(): Promise<CorpusIndex> {
 
 // ─────────────── Similarity primitives ───────────────
 
-function cosineSimilarity(
+export function cosineSimilarity(
   a: IndexEntry,
   b: IndexEntry,
   tokenIdf: Map<string, number>,
@@ -224,7 +263,7 @@ function recencyFactor(publishDate: string): number {
   return RECENCY_FLOOR + (1 - RECENCY_FLOOR) * Math.exp(-ageYears / RECENCY_HALF_LIFE_YEARS);
 }
 
-interface CandidateScore {
+export interface CandidateScore {
   entry: IndexEntry;
   relevance: number;
   similarity: number;
@@ -235,7 +274,7 @@ interface CandidateScore {
   reasonDetail?: string;
 }
 
-function scoreCandidate(
+export function scoreCandidate(
   current: IndexEntry,
   candidate: IndexEntry,
   idx: CorpusIndex,
