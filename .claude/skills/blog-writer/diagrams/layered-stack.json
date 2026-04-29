@@ -1,0 +1,52 @@
+{
+  "_comment": "Reference payload for mcp__excalidraw__batch_create_elements. Nested-rectangle 'layered stack' figure (host / image / runtime / serving). Adapt labels/colors to the post's topic. One accent fill per figure — pick from #a5d8ff, #ffec99, #ffc9c9, #b2f2bb.",
+  "elements": [
+    {
+      "type": "text",
+      "x": 200,
+      "y": 60,
+      "text": "<TITLE: e.g. The four layers of LLM serving>",
+      "fontSize": 28,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e"
+    },
+    {
+      "type": "rectangle",
+      "x": 120, "y": 140, "width": 960, "height": 140,
+      "strokeColor": "#1e1e1e", "backgroundColor": "transparent",
+      "fillStyle": "hachure", "strokeWidth": 1.5, "roughness": 1,
+      "roundness": { "type": 3 },
+      "label": "Host (driver, kernel, container runtime)"
+    },
+    {
+      "type": "rectangle",
+      "x": 160, "y": 300, "width": 880, "height": 130,
+      "strokeColor": "#1e1e1e", "backgroundColor": "transparent",
+      "fillStyle": "hachure", "strokeWidth": 1.5, "roughness": 1,
+      "roundness": { "type": 3 },
+      "label": "Image (CUDA toolkit + Python deps)"
+    },
+    {
+      "type": "rectangle",
+      "x": 200, "y": 450, "width": 800, "height": 130,
+      "strokeColor": "#1e1e1e", "backgroundColor": "#a5d8ff",
+      "fillStyle": "hachure", "strokeWidth": 1.5, "roughness": 1,
+      "roundness": { "type": 3 },
+      "label": "Runtime (process, NCCL, IPC, shm)"
+    },
+    {
+      "type": "rectangle",
+      "x": 240, "y": 600, "width": 720, "height": 130,
+      "strokeColor": "#1e1e1e", "backgroundColor": "transparent",
+      "fillStyle": "hachure", "strokeWidth": 1.5, "roughness": 1,
+      "roundness": { "type": 3 },
+      "label": "Serving (vLLM / Triton / SGLang)"
+    }
+  ],
+  "export": {
+    "format": "png",
+    "theme": "light",
+    "exportBackground": true,
+    "exportPadding": 24
+  }
+}
