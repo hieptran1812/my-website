@@ -40,7 +40,7 @@ export default function SoftwareDevelopmentBlogPage() {
         const { articles } = await getMarkdownArticlesByCategory(
           "software-development",
           1,
-          100, // Get all articles at once for client-side filtering
+          2000, // Fetch the full category — needed so the subcategory filter shows all values
         );
         // Ensure articles is always an array
         setAllArticles(Array.isArray(articles) ? articles : []);

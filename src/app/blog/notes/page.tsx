@@ -27,7 +27,7 @@ export default function NotesBlogPage() {
         const { articles } = await getMarkdownArticlesByCategory(
           "notes",
           1,
-          500, // Fetch up to 500 articles
+          2000, // Fetch the full category — needed so the subcategory filter shows all values
         );
         // Ensure articles is always an array
         setAllArticles(Array.isArray(articles) ? articles : []);
