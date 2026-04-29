@@ -84,6 +84,24 @@ export interface IndexEntry {
   tfidfNorm: number;
 }
 
+export type DominantSignal =
+  | "series"
+  | "reference"
+  | "tags"
+  | "similar"
+  | "structural";
+
+export interface AdjacencyEdge {
+  /** Composite weight, clamped to [0, 1]. */
+  weight: number;
+  /** Which signal contributed the most to this weight (for hover tooltips). */
+  dominant: DominantSignal;
+  /** Human-readable evidence shown on hover. */
+  evidence: string;
+  /** True only when source links to target via markdown body. */
+  reference?: boolean;
+}
+
 export interface CorpusIndex {
   entries: IndexEntry[];
   bySlug: Map<string, IndexEntry>;
@@ -99,6 +117,10 @@ export interface CorpusIndex {
   outgoingRefs: Map<string, Set<string>>;
   /** Reverse: slug → set of slugs that link to it. */
   incomingRefs: Map<string, Set<string>>;
+  /** Composite-weighted adjacency: slug → (slug → edge). Dense enough that
+   *  every relevant pair appears once; weights are symmetric. Used as the
+   *  transition matrix for Personalized PageRank. */
+  adjacency: Map<string, Map<string, AdjacencyEdge>>;
 }
 
 let cachedIndex: CorpusIndex | null = null;
@@ -214,6 +236,121 @@ async function buildIndex(): Promise<CorpusIndex> {
     }
   }
 
+  // ─── Composite-weighted adjacency (one pass) ───
+  const adjacency = new Map<string, Map<string, AdjacencyEdge>>();
+  for (const e of entries) adjacency.set(e.slug, new Map());
+
+  const W_TAG = 1.0;
+  const W_COS = 0.7;
+  const W_REF = 1.5;
+  const W_COL = 2.0;
+  const W_SUB = 0.4;
+  const W_CAT = 0.15;
+  const W_TIME = 0.3;
+  const TIME_HALF_LIFE_MS = 60 * 24 * 3600 * 1000; // 60 days
+  const tmpIndex: CorpusIndex = {
+    entries,
+    bySlug,
+    tagIdf,
+    tokenIdf,
+    N,
+    byCollection,
+    outgoingRefs,
+    incomingRefs,
+    adjacency,
+  };
+
+  for (let i = 0; i < entries.length; i++) {
+    const a = entries[i];
+    for (let j = i + 1; j < entries.length; j++) {
+      const b = entries[j];
+
+      // IDF tag overlap
+      const aTagSet = new Set(a.tags);
+      const sharedTags = b.tags.filter((t) => aTagSet.has(t));
+      let tagWeight = 0;
+      let rareTag: string | undefined;
+      let rareIdf = 0;
+      for (const t of sharedTags) {
+        const idf = tagIdf.get(t) ?? 0;
+        tagWeight += idf;
+        if (idf > rareIdf) {
+          rareIdf = idf;
+          rareTag = t;
+        }
+      }
+      const aMaxTagScore =
+        a.tags.reduce((s, t) => s + (tagIdf.get(t) ?? 0), 0) || 1;
+      const tagNorm = Math.min(1, tagWeight / aMaxTagScore);
+
+      const cos = cosineSimilarity(a, b, tokenIdf);
+      const sameSub = !!a.subcategory && a.subcategory === b.subcategory;
+      const sameCat = !!a.category && a.category === b.category;
+      const sameCollection =
+        !!a.collection &&
+        a.collection.toLowerCase() === (b.collection || "").toLowerCase();
+      const aLinksB = outgoingRefs.get(a.slug)?.has(b.slug) ?? false;
+      const bLinksA = outgoingRefs.get(b.slug)?.has(a.slug) ?? false;
+      const hasRef = aLinksB || bLinksA;
+
+      // Time proximity (Gaussian-ish, half-life 60 days)
+      let timeBonus = 0;
+      const ta = Date.parse(a.publishDate);
+      const tb = Date.parse(b.publishDate);
+      if (!Number.isNaN(ta) && !Number.isNaN(tb)) {
+        const diffDays = Math.abs(ta - tb) / TIME_HALF_LIFE_MS;
+        timeBonus = Math.exp(-diffDays); // 1 when same day, ~0.37 at 60d
+      }
+
+      const raw =
+        W_TAG * tagNorm +
+        W_COS * cos +
+        W_REF * (hasRef ? 1 : 0) +
+        W_COL * (sameCollection ? 1 : 0) +
+        W_SUB * (sameSub ? 1 : 0) +
+        W_CAT * (sameCat ? 1 : 0) +
+        W_TIME * timeBonus;
+
+      // No edge if too weak — reduces matrix density.
+      if (raw < 0.12) continue;
+
+      // Normalise: divide by sum of upper-bound weights (with all signals on,
+      // tagNorm/cos/timeBonus capped at 1) — gives weight ≈ how saturated this
+      // pair is across signals. Cap at 1 so we render nicely.
+      const cap =
+        W_TAG + W_COS + W_REF + W_COL + W_SUB + W_CAT + W_TIME;
+      const weight = Math.min(1, raw / cap);
+
+      // Pick dominant signal (largest contribution).
+      const contribs: Array<[number, DominantSignal, string]> = [
+        [W_COL * (sameCollection ? 1 : 0), "series", `Series: ${a.collection ?? ""}`],
+        [W_REF * (hasRef ? 1 : 0), "reference", aLinksB ? "References this article" : "Cited by this article"],
+        [W_TAG * tagNorm, "tags", rareTag ? `Shares '${rareTag}'` : `${sharedTags.length} shared tags`],
+        [W_COS * cos, "similar", `${Math.round(cos * 100)}% similar`],
+      ];
+      contribs.sort((x, y) => y[0] - x[0]);
+      const [, dominant, evidence] = contribs[0][0] > 0
+        ? contribs[0]
+        : [0, "structural" as DominantSignal, sameSub ? "Same subcategory" : "Same category"];
+
+      const edgeAB: AdjacencyEdge = {
+        weight,
+        dominant,
+        evidence,
+        reference: aLinksB,
+      };
+      const edgeBA: AdjacencyEdge = {
+        weight,
+        dominant,
+        evidence,
+        reference: bLinksA,
+      };
+      adjacency.get(a.slug)!.set(b.slug, edgeAB);
+      adjacency.get(b.slug)!.set(a.slug, edgeBA);
+    }
+  }
+  void tmpIndex; // keeps W_* constants referenced for clarity
+
   return {
     entries,
     bySlug,
@@ -223,6 +360,7 @@ async function buildIndex(): Promise<CorpusIndex> {
     byCollection,
     outgoingRefs,
     incomingRefs,
+    adjacency,
   };
 }
 
@@ -508,4 +646,110 @@ export async function getPopularPosts(limit = 6): Promise<RelatedPost[]> {
       reasonDetail: undefined,
       similarity: 0,
     }));
+}
+
+// ─────────────── Personalized PageRank ───────────────
+
+/**
+ * Power-iteration PPR over the composite-weighted adjacency. Starts random
+ * walk at `seedSlug`; each step has probability α of restarting at the seed
+ * and probability (1-α) of following an outgoing edge proportional to its
+ * weight. Returns the stationary probability map.
+ */
+export function personalizedPageRank(
+  seedSlug: string,
+  idx: CorpusIndex,
+  alpha = 0.85,
+  iterations = 30,
+): Map<string, number> {
+  const slugs = Array.from(idx.bySlug.keys());
+  const n = slugs.length;
+  if (n === 0 || !idx.bySlug.has(seedSlug)) return new Map();
+
+  const slugToIdx = new Map<string, number>();
+  slugs.forEach((s, i) => slugToIdx.set(s, i));
+  const seedIdx = slugToIdx.get(seedSlug)!;
+
+  // Pre-compute row-normalised outgoing weights for each node.
+  const rows: Array<Array<[number, number]>> = new Array(n);
+  for (let i = 0; i < n; i++) {
+    const slug = slugs[i];
+    const adj = idx.adjacency.get(slug);
+    if (!adj || adj.size === 0) {
+      rows[i] = [];
+      continue;
+    }
+    let sum = 0;
+    for (const e of adj.values()) sum += e.weight;
+    const row: Array<[number, number]> = [];
+    if (sum > 0) {
+      for (const [t, e] of adj) {
+        row.push([slugToIdx.get(t)!, e.weight / sum]);
+      }
+    }
+    rows[i] = row;
+  }
+
+  // Initial: all probability on seed.
+  let p = new Float64Array(n);
+  p[seedIdx] = 1;
+
+  for (let iter = 0; iter < iterations; iter++) {
+    const next = new Float64Array(n);
+    next[seedIdx] += alpha; // restart contribution
+    for (let i = 0; i < n; i++) {
+      const pi = p[i];
+      if (pi === 0) continue;
+      const row = rows[i];
+      const flow = (1 - alpha) * pi;
+      if (row.length === 0) {
+        // Dangling node: send mass back to seed.
+        next[seedIdx] += flow;
+        continue;
+      }
+      for (const [j, w] of row) next[j] += flow * w;
+    }
+    p = next;
+  }
+
+  const out = new Map<string, number>();
+  for (let i = 0; i < n; i++) if (p[i] > 0) out.set(slugs[i], p[i]);
+  return out;
+}
+
+/**
+ * Greedy MMR pick from a ranked list. Penalises candidates that are too
+ * similar to already-picked nodes (uses cosine on TF-IDF as similarity proxy).
+ */
+export function selectWithMmr(
+  ranked: Array<{ slug: string; score: number }>,
+  k: number,
+  idx: CorpusIndex,
+  lambda = 0.75,
+): string[] {
+  const picked: string[] = [];
+  const remaining = [...ranked];
+  while (picked.length < k && remaining.length > 0) {
+    let bestIdx = 0;
+    let bestVal = -Infinity;
+    for (let i = 0; i < remaining.length; i++) {
+      const c = remaining[i];
+      const cEntry = idx.bySlug.get(c.slug);
+      if (!cEntry) continue;
+      let maxSim = 0;
+      for (const ps of picked) {
+        const pEntry = idx.bySlug.get(ps);
+        if (!pEntry) continue;
+        const sim = cosineSimilarity(cEntry, pEntry, idx.tokenIdf);
+        if (sim > maxSim) maxSim = sim;
+      }
+      const mmr = lambda * c.score - (1 - lambda) * maxSim;
+      if (mmr > bestVal) {
+        bestVal = mmr;
+        bestIdx = i;
+      }
+    }
+    picked.push(remaining.splice(bestIdx, 1)[0].slug);
+  }
+  return picked;
 }

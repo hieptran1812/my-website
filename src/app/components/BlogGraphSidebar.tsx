@@ -74,22 +74,8 @@ function BlogGraphSidebar({
   });
   const [graphKey, setGraphKey] = useState(0);
   const graphContainerRef = useRef<HTMLDivElement>(null);
-
-  // Graph controls. Mobile defaults to depth 1 (less crowded); desktop to 2.
-  const [depth, setDepth] = useState<number>(() =>
-    typeof window !== "undefined" && window.innerWidth < 720 ? 1 : 2,
-  );
-  type GraphEdgeType = "series" | "reference" | "topic" | "similar";
-  const [activeEdgeTypes, setActiveEdgeTypes] = useState<GraphEdgeType[]>([
-    "series",
-    "reference",
-    "topic",
-    "similar",
-  ]);
-  const toggleEdgeType = (t: GraphEdgeType) =>
-    setActiveEdgeTypes((prev) =>
-      prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t],
-    );
+  // Universe toggle is the only remaining graph control; it's only surfaced
+  // in the fullscreen modal so the inline panel stays clutter-free.
   const [universeMode, setUniverseMode] = useState(false);
   /** Defer mounting the graph view until the page is idle so the article
    *  body + cover images get the network/CPU first. */
@@ -505,64 +491,6 @@ function BlogGraphSidebar({
                   </button>
                 </div>
 
-                {/* Graph Controls */}
-                <div
-                  className="flex flex-col gap-2 px-3 py-2 border-b"
-                  style={{ borderColor: "var(--border)" }}
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <label
-                      className="text-[10px] uppercase tracking-wider"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      Depth · {depth} hop{depth > 1 ? "s" : ""}
-                    </label>
-                    <input
-                      type="range"
-                      min={1}
-                      max={3}
-                      step={1}
-                      value={depth}
-                      onChange={(e) => setDepth(parseInt(e.target.value, 10))}
-                      className="flex-1 accent-[var(--accent)]"
-                      aria-label="Graph depth"
-                    />
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {(
-                      [
-                        ["series", "📚", "#a855f7"],
-                        ["reference", "🔗", "#3b82f6"],
-                        ["topic", "🏷️", "#f59e0b"],
-                        ["similar", "🔍", "#10b981"],
-                      ] as const
-                    ).map(([t, icon, colour]) => {
-                      const active = activeEdgeTypes.includes(t);
-                      return (
-                        <button
-                          key={t}
-                          onClick={() => toggleEdgeType(t)}
-                          className="flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[10px] font-medium transition-opacity"
-                          style={{
-                            background: active
-                              ? colour + "20"
-                              : "var(--surface-secondary)",
-                            color: active ? colour : "var(--text-secondary)",
-                            border: `1px solid ${
-                              active ? colour + "60" : "var(--border)"
-                            }`,
-                            opacity: active ? 1 : 0.6,
-                          }}
-                          aria-pressed={active}
-                        >
-                          <span aria-hidden>{icon}</span>
-                          <span>{t}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
                 {/* Graph Container */}
                 <div
                   ref={graphContainerRef}
@@ -580,8 +508,6 @@ function BlogGraphSidebar({
                       isExpanded={false}
                       height={280}
                       theme={theme}
-                      depth={depth}
-                      edgeTypes={activeEdgeTypes}
                     />
                   ) : null}
                 </div>
@@ -614,8 +540,6 @@ function BlogGraphSidebar({
               isExpanded={true}
               onClose={() => setIsExpanded(false)}
               theme={theme}
-              depth={depth}
-              edgeTypes={activeEdgeTypes}
               universe={universeMode}
             />
             <button
@@ -866,8 +790,6 @@ function BlogGraphSidebar({
                       isExpanded={false}
                       height={350}
                       theme={theme}
-                      depth={depth}
-                      edgeTypes={activeEdgeTypes}
                     />
                   </div>
                   <button
