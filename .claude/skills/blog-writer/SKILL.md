@@ -120,17 +120,33 @@ Capture from the user (ask via `AskUserQuestion` only what's missing):
 4. If after 3 retries it still fails, **stop the workflow and ask the user to fix the canvas connection**. Do not ship the post without real diagrams. Acceptable user replies: (a) "I opened it, retry" → re-probe and continue, (b) "use Mermaid via create_from_mermaid" → still produces real PNG output through Excalidraw, acceptable. **Unacceptable**: skipping diagrams, using ASCII art, using ```text``` boxes, using Unicode box-drawing, or any prose-only substitute. Posts without proper Excalidraw PNGs are not allowed to ship.
 5. Once connected, for each planned diagram (loop):
    1. `mcp__excalidraw__clear_canvas`
-   2. `mcp__excalidraw__batch_create_elements` with the payload (see Diagram style guide).
+   2. `mcp__excalidraw__batch_create_elements` with the payload (see Diagram style guide). **Author on a high-resolution canvas: 2400×1600 logical units, not 1200×800.** This is the single most important factor in sharpness — the export resolution is proportional to the bounding box of your elements. A 1200-wide canvas exports to a ~1200-px PNG, which looks blurry on Retina/4K displays. A 2400-wide canvas exports to a ~2400-px PNG, which is crisp.
    3. Optionally `mcp__excalidraw__align_elements` / `distribute_elements` to clean up.
    4. `mcp__excalidraw__export_to_image` with `format: "png"`, `background: true`, `filePath: "public/imgs/blogs/<slug>-<n>.png"`.
-   5. Verify the PNG exists and is non-empty (`ls -la <path>` and check size > 5 KB). If the file is missing or tiny, the export failed silently — re-run.
+   5. **Sharpness gate (mandatory).** Verify the PNG exists, is non-empty, AND meets resolution + size minimums:
+      ```bash
+      sips -g pixelWidth -g pixelHeight "<path>" 2>/dev/null \
+        || identify -format "%w %h" "<path>"
+      stat -f%z "<path>" 2>/dev/null || stat -c%s "<path>"   # bytes
+      ```
+      Required: **width ≥ 1600 px**, **height ≥ 900 px**, **size ≥ 80 KB**. If any of these fail, the diagram is blurry. Do NOT ship it. Recovery options, in order:
+      1. Re-author on a 2400×1600 canvas with larger fonts and re-export.
+      2. If still small, export with `format: "svg"` instead, then rasterize at 2× via `rsvg-convert -w 2400 in.svg -o out.png` or `magick -density 200 in.svg out.png` (whichever is available locally).
+      3. If neither rasterizer is installed, ask the user to install `librsvg` (`brew install librsvg`) — do not silently ship a low-resolution PNG.
 
 **Accuracy bar for diagrams.** A diagram that is decorative is a failure. Every diagram must:
 - Reflect the exact terminology used in the article (variable names, component names, arrow labels match prose 1:1).
 - Have arrows that point in the correct direction of data/control flow — verify by re-reading the prose section it illustrates.
 - Use the accent palette below *semantically* (blue = main path, amber = caution/cost, red = failure/loss, green = win/cached). Do not pick colors aesthetically.
-- Be readable at 800px width on a blog page — minimum `fontSize: 18` for body labels, `fontSize: 28` for titles.
+- Be readable at 800px width on a blog page — minimum `fontSize: 22` for body labels, `fontSize: 32` for titles (raised from 18/28 to keep text sharp after blog-page downscale).
 - Include a short caption text element inside the canvas (2nd line under the title) explaining what the reader should take away.
+
+**Sharpness mandate.** Excalidraw exports the PNG at roughly the bounding-box resolution of the elements on canvas — there is no DPI knob. The only way to get a crisp blog image is to author at high resolution. Concretely:
+- **Canvas size: 2400 × 1600 logical units** (not 1200 × 800). Every element's `x`, `y`, `width`, `height` should scale up accordingly.
+- **`strokeWidth: 2` minimum** for primary shape borders (the default 1 looks faint at high resolution).
+- **`fontSize`: title 32, section labels 24, body labels 22, code/mono 18.** Smaller fonts may shrink to illegibility after blog-page downscale.
+- **Padding ≥ 60 px** between elements — tight layouts compress badly when re-rendered.
+- **Output PNG must be ≥ 1600 px wide and ≥ 80 KB**, verified by the Phase C sharpness gate. PNGs below that bar are blurry on Retina/4K screens and unacceptable.
 
 ### Phase D — Draft
 
@@ -146,7 +162,17 @@ After writing, run these checks. If any gate fails, **expand and rewrite — do 
 1. **Word count gate.** `wc -w <path>`. Compute `readTime = round(words / 220)`.
    - Deep-dive: `readTime >= 50` (≥ 11,000 words). If under, identify the 2–3 thinnest sections and add: more case studies, deeper internals, more numbers, more code, more comparison tables. Re-run the gate.
    - Explainer: `readTime >= 25`. Paper-reading: `readTime >= 30`.
-2. **Diagram gate.** Every planned diagram exists as a non-empty PNG under `public/imgs/blogs/`, and is embedded in the markdown with `![alt](/imgs/blogs/<slug>-<n>.png)`. The first ("mental model") diagram must be referenced in the intro paragraph. Grep the markdown for forbidden text-based diagram substitutes — if any of these appear in the file the gate fails and the post must be reworked with real Excalidraw PNGs:
+2. **Diagram gate.** Every planned diagram exists as a **sharp** PNG under `public/imgs/blogs/`, and is embedded in the markdown with `![alt](/imgs/blogs/<slug>-<n>.png)`. The first ("mental model") diagram must be referenced in the intro paragraph. **Sharpness sub-gate (mandatory):** for every diagram PNG, verify resolution and size:
+   ```bash
+   for f in public/imgs/blogs/<slug>-*.png; do
+     dims=$(sips -g pixelWidth -g pixelHeight "$f" 2>/dev/null | awk '/pixel/ {print $2}' | paste -sd' ' -)
+     bytes=$(stat -f%z "$f" 2>/dev/null || stat -c%s "$f")
+     echo "$f  $dims  ${bytes}B"
+   done
+   ```
+   Required for every PNG: width ≥ 1600, height ≥ 900, size ≥ 80 KB. A diagram that fails any of these is blurry on Retina/4K displays and must be re-authored on the larger 2400×1600 canvas (see Phase C sharpness mandate). Do not ship blurry images — this is a hard gate, not a warning.
+
+   Grep the markdown for forbidden text-based diagram substitutes — if any of these appear in the file the gate fails and the post must be reworked with real Excalidraw PNGs:
    ```bash
    # All of these should return zero matches in a finished post:
    grep -nE '^```text' <path>            # ASCII "diagrams" in fenced text blocks
@@ -204,14 +230,16 @@ Match the look of existing PNGs in `public/imgs/blogs/`. Defaults for every shap
   "strokeColor": "#1e1e1e",
   "backgroundColor": "transparent",
   "fillStyle": "hachure",
-  "strokeWidth": 1.5,
+  "strokeWidth": 2,
   "strokeStyle": "solid",
   "roughness": 1,
   "roundness": { "type": 3 },
   "fontFamily": 1,
-  "fontSize": 20
+  "fontSize": 22
 }
 ```
+
+(Stroke width 2 and font size 22 are minimums for sharpness — see Phase C sharpness mandate. Bump to 2.5 / 24 for primary shapes if the canvas is dense.)
 
 **Semantic color palette (mandatory — colors carry meaning, not decoration).** Pick colors based on what the element represents in the prose, never aesthetically. Use 2–3 colors per figure max; the rest stays transparent.
 
@@ -233,10 +261,12 @@ Three reusable layouts (full payload templates live in `diagrams/`):
 3. **Pipeline / flow** — author as Mermaid and pass through `mcp__excalidraw__create_from_mermaid` for nodes-and-edges figures.
 
 Always:
-- 1200×800 logical canvas; export with `exportPadding: 24`.
-- Title text at the top in `fontSize: 28`.
+- **2400×1600 logical canvas** (was 1200×800 — bumped for sharpness); export with `exportPadding: 48`.
+- Title text at the top in `fontSize: 32` (was 28). Section labels at 24, body at 22.
+- `strokeWidth: 2` minimum; primary shapes 2.5.
 - Label edges/arrows with one-line annotations, not paragraphs.
 - One accent color per figure, never two.
+- After export, run the Phase C sharpness gate: width ≥ 1600 px, height ≥ 900 px, file size ≥ 80 KB. Re-author or fall back to SVG → high-DPI rasterize if any check fails.
 
 ## Templates
 
