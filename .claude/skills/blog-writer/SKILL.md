@@ -27,6 +27,8 @@ The skill should `Read` ~80 lines from the matching reference at the start of Ph
 ## House style guardrails
 
 Voice & structure:
+- **Always write in English.** Regardless of the language the user uses to invoke this skill or describe the topic, the entire blog post (title, frontmatter values, body, captions, code comments) must be in English. Never write any portion of the article in Vietnamese, Chinese, or any other language.
+- **Never use H1 (`#`) headings inside the article body.** The post title lives in frontmatter (`title:`), and Next.js renders it as the page H1. Top-level section headings start at `##`, sub-sections at `###`, sub-sub-sections at `####`. A `#` line anywhere in the markdown body is a hard failure.
 - First-person plural (`we`) for shared reasoning. First-person singular (`I have personally debugged…`) only for war-stories.
 - Open with the **real problem** or a sharp mismatch — never a dictionary definition.
 - Build intuition with a concrete analogy (library, restaurant, city map) before introducing math.
@@ -154,6 +156,8 @@ After writing, run these checks. If any gate fails, **expand and rewrite — do 
    Mermaid blocks rendered through `mcp__excalidraw__create_from_mermaid` are fine — they produce real PNGs. Inline ```mermaid``` source blocks left in the markdown are not.
 3. **Frontmatter gate.** `readTime` matches the recomputed value; `date` is today; `aiGenerated: true`; tags 5–12; category is a real folder under `content/blog/`.
 4. **Substance gate.** Every H2 has at least one of: comparison table, ≥15-line code block, measured benchmark with units, or worked numerical example. Spot-check by reading the file and counting.
+5. **No-H1 gate.** `grep -nE '^# [^#]' <path>` must return zero matches. Any single-`#` heading in the body fails the gate — convert it to `##` and re-run.
+6. **English-only gate.** The entire body (and frontmatter values like `title`, `description`, `tags`) must be English. Spot-check for non-ASCII letters that indicate other languages: `grep -nP '[\x{00C0}-\x{1EF9}\x{4E00}-\x{9FFF}]' <path>` should return zero matches outside of legitimate proper nouns or quoted technical terms. If any section was drafted in another language, rewrite it in English before shipping.
 
 Then report to the user:
 - Final file path, word count, recomputed `readTime`.
