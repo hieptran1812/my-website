@@ -104,10 +104,11 @@ Capture from the user (ask via `AskUserQuestion` only what's missing):
 **Connection bootstrap (do this FIRST, before any drawing call).** The Excalidraw MCP needs a browser frontend connected to the canvas server, otherwise `export_to_image` fails with `No frontend client connected`. Try to recover automatically before falling back:
 
 1. Probe with `mcp__excalidraw__describe_scene` (cheap call). If it returns without a connection error, skip to step 5.
-2. If it errors with "No frontend client connected", try to start/open the canvas:
+2. If it errors with "No frontend client connected" or times out, open the canvas in a browser. The frontend runs on **`http://localhost:4321/`** (primary). `http://localhost:3333` is the legacy fallback — try it only if 4321 returns nothing.
    ```bash
-   # Default canvas URL the MCP server exposes; check the user's MCP config if the port differs
-   open -a "Google Chrome" "http://localhost:3333" 2>/dev/null \
+   open -a "Google Chrome" "http://localhost:4321/" 2>/dev/null \
+     || open "http://localhost:4321/" 2>/dev/null \
+     || open -a "Google Chrome" "http://localhost:3333" 2>/dev/null \
      || open "http://localhost:3333" 2>/dev/null \
      || true
    ```
@@ -141,6 +142,18 @@ Capture from the user (ask via `AskUserQuestion` only what's missing):
 - Be readable at 800px width on a blog page — minimum `fontSize: 22` for body labels, `fontSize: 32` for titles (raised from 18/28 to keep text sharp after blog-page downscale).
 - Include a short caption text element inside the canvas (2nd line under the title) explaining what the reader should take away.
 
+**Text containment & no-overlap mandate (mandatory — diagrams with overflowing or overlapping text fail Phase E).** Excalidraw does NOT auto-wrap or auto-shrink text inside shapes. If a label is wider than its container, it spills out and visually collides with neighbors; if two elements overlap in their bounding boxes, the text becomes unreadable. Enforce this before exporting:
+
+1. **Size every container to its label, not the other way around.** For a text label of `N` characters at `fontSize F`, the rendered text occupies roughly:
+   - **width ≈ `N × F × 0.6`** (Virgil/Cascadia at default tracking)
+   - **height per line ≈ `F × 1.25`**
+   Set the parent rectangle's `width` to **`textWidth + 2 × horizontalPadding`** with `horizontalPadding ≥ 24 px`, and `height` to **`(lineCount × lineHeight) + 2 × verticalPadding`** with `verticalPadding ≥ 20 px`. If the label is dynamic, round up — clipping is worse than empty space.
+2. **Wrap long labels manually.** Never put more than ~28 characters on a single line inside a node. Break into 2–3 lines with explicit `\n` in the text payload (Excalidraw respects newlines but does not insert them). Recompute the container height for the new line count.
+3. **Bind text to its shape using `containerId`.** When a label belongs *inside* a rectangle/ellipse, create the text element with `containerId` set to the shape's id and `verticalAlign: "middle"`, `textAlign: "center"`. Excalidraw will then center-clip the text to the box; combined with rule 1 (sizing the box to fit), this prevents overflow. Free-floating text elements (no `containerId`) must be placed in empty canvas regions, never on top of another shape.
+4. **Minimum gap between sibling elements: 40 px on every side** (60 px preferred — see padding rule above). After laying out, check every pair of bounding boxes: if `|x1 - x2| < width/2 + 40` AND `|y1 - y2| < height/2 + 40`, they will visually crowd. Use `mcp__excalidraw__distribute_elements` (horizontal or vertical) after `batch_create_elements` to enforce uniform spacing on rows/columns of nodes.
+5. **Arrow labels never sit on top of arrows or other text.** Place edge labels in the gap between source and target nodes, offset perpendicular to the arrow by ≥ 20 px. If two arrows run parallel, label only one or fan the labels out vertically.
+6. **Pre-export overlap check.** After `batch_create_elements` and any alignment passes, call `mcp__excalidraw__describe_scene` and walk the element list. For every pair `(a, b)` of non-parent/child elements, compute axis-aligned bounding-box intersection. If any pair (other than a `containerId`-bound text inside its parent) overlaps, **fix the layout before exporting** — move elements, shrink fonts to the floor (22 body / 32 title), or split the diagram into two figures. Do not export a canvas with known overlaps.
+
 **Sharpness mandate.** Excalidraw exports the PNG at roughly the bounding-box resolution of the elements on canvas — there is no DPI knob. The only way to get a crisp blog image is to author at high resolution. Concretely:
 - **Canvas size: 2400 × 1600 logical units** (not 1200 × 800). Every element's `x`, `y`, `width`, `height` should scale up accordingly.
 - **`strokeWidth: 2` minimum** for primary shape borders (the default 1 looks faint at high resolution).
@@ -162,7 +175,11 @@ After writing, run these checks. If any gate fails, **expand and rewrite — do 
 1. **Word count gate.** `wc -w <path>`. Compute `readTime = round(words / 220)`.
    - Deep-dive: `readTime >= 50` (≥ 11,000 words). If under, identify the 2–3 thinnest sections and add: more case studies, deeper internals, more numbers, more code, more comparison tables. Re-run the gate.
    - Explainer: `readTime >= 25`. Paper-reading: `readTime >= 30`.
-2. **Diagram gate.** Every planned diagram exists as a **sharp** PNG under `public/imgs/blogs/`, and is embedded in the markdown with `![alt](/imgs/blogs/<slug>-<n>.png)`. The first ("mental model") diagram must be referenced in the intro paragraph. **Sharpness sub-gate (mandatory):** for every diagram PNG, verify resolution and size:
+2. **Diagram gate.** Every planned diagram exists as a **sharp** PNG under `public/imgs/blogs/`, and is embedded in the markdown with `![alt](/imgs/blogs/<slug>-<n>.png)`. The first ("mental model") diagram must be referenced in the intro paragraph.
+
+   **Layout sub-gate (mandatory): no text overflow, no overlapping elements.** Open each exported PNG with `Read` and inspect visually. The diagram fails if any of: (a) text spills past the edge of its container rectangle/ellipse, (b) two non-parent/child elements have visibly overlapping bounding boxes, (c) an arrow line crosses through a text label, (d) labels are clipped at the canvas edge, (e) two text elements visually touch or run into each other. If any failure is observed, return to Phase C: re-size containers to fit their labels per the formula `width ≈ chars × fontSize × 0.6 + 48`, bind in-shape text via `containerId`, enforce ≥ 40 px gap between siblings, and re-export. Do not ship a diagram with known overflow or overlap — this is a hard gate.
+
+   **Sharpness sub-gate (mandatory):** for every diagram PNG, verify resolution and size:
    ```bash
    for f in public/imgs/blogs/<slug>-*.png; do
      dims=$(sips -g pixelWidth -g pixelHeight "$f" 2>/dev/null | awk '/pixel/ {print $2}' | paste -sd' ' -)
