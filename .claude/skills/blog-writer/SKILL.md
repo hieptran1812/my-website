@@ -16,6 +16,8 @@ Drafts a long-form blog article in the house style of `my-website` — opinionat
 
 Do NOT use for: short notes, README updates, comments on existing posts, social-media-length copy.
 
+**Parallel execution.** Multiple `/blog-writer` invocations may run concurrently. The Excalidraw canvas is a global singleton — Phase C automatically serializes through a filesystem lock at `/tmp/blog-writer-excalidraw.lock`, while Phases A, B, D, E run fully in parallel. Diagram authoring queues; everything else overlaps.
+
 ## Reference articles (read before drafting — calibrate voice)
 
 The skill should `Read` ~80 lines from the matching reference at the start of Phase D:
@@ -42,6 +44,8 @@ Voice & structure:
 - Inside each major section, include at least one of: a comparison table, a runnable code block (≥ 15 lines), a measured benchmark with units, or a worked numerical example. Sections that are pure prose are a smell.
 
 Diagrams:
+- **Excalidraw is mandatory and must be used correctly.** Every figure in every post is authored through the Excalidraw MCP — no exceptions, no shortcuts. "Used correctly" means: native Excalidraw fonts only (`fontFamily: 1` Virgil for prose, `fontFamily: 3` Cascadia for code, set explicitly on every text element), the documented sloppiness/roughness/strokeWidth defaults, the semantic color palette applied by meaning not aesthetics, and bound text via `containerId` for any label that lives inside a shape. Misusing the API (omitting `fontFamily`, free-floating text on top of shapes, custom colors outside the palette, decorative-only elements) is a hard failure — re-author the figure.
+- **Scientific layout is mandatory.** Every diagram is a figure in a technical article and must be laid out like one: one provable claim per figure, balanced composition, ≥ 70% canvas bounding-box coverage with no empty quadrants, aspect ratio chosen by content (pipelines wide-and-short, stacks tall-and-narrow), tight ≥ 40 px inter-element spacing without overlap, and arrows/labels that match the surrounding prose word-for-word. Loose, decorative, or aesthetically-driven layouts fail the Phase E composition gate.
 - 1–4 PNGs per post. The first one (the "mental model" image) is referenced in the intro paragraph with a sentence like "The diagram above is the mental model: …".
 - Hand-drawn Excalidraw style (sloppiness 1, roughness 1, default Virgil/Cascadia fonts).
 - Saved to `public/imgs/blogs/<slug>-<n>.png`. Embedded as `![alt text](/imgs/blogs/<slug>-<n>.png)` directly under the heading they illustrate.
@@ -101,7 +105,37 @@ Capture from the user (ask via `AskUserQuestion` only what's missing):
 
 ### Phase C — Diagrams (Excalidraw MCP)
 
-**Connection bootstrap (do this FIRST, before any drawing call).** The Excalidraw MCP needs a browser frontend connected to the canvas server, otherwise `export_to_image` fails with `No frontend client connected`. Try to recover automatically before falling back:
+**Canvas singleton & lock protocol (do this BEFORE the connection bootstrap).** The Excalidraw MCP exposes a **single shared canvas** as global state — `clear_canvas`, `batch_create_elements`, `snapshot_scene`, and `export_to_image` all act on the same scene. When two `/blog-writer` invocations run in parallel, their canvas operations interleave and produce corrupted PNGs (one post's elements overwrite another's, exports capture mixed content). Phases A, B, D, E remain fully parallel; only Phase C's canvas critical section must be serialized.
+
+Acquire a cross-process lockfile **before** probing the connection, hold it across the entire diagram loop (all N diagrams for this post), and release it on success or failure. Use a `noclobber` sentinel so it works across independent Bash shells:
+
+```bash
+LOCK=/tmp/blog-writer-excalidraw.lock
+SLUG="<slug>"                                    # this post's slug
+TTL=900                                          # stale-lock TTL: 15 min
+DEADLINE=$(( $(date +%s) + 1800 ))               # max wait: 30 min
+until ( set -o noclobber; printf '%s\n' "pid=$$ slug=$SLUG ts=$(date +%s)" > "$LOCK" ) 2>/dev/null; do
+  if [ -f "$LOCK" ]; then
+    age=$(( $(date +%s) - $(stat -f %m "$LOCK" 2>/dev/null || stat -c %Y "$LOCK") ))
+    if [ "$age" -gt "$TTL" ]; then
+      echo "breaking stale lock (age=${age}s): $(cat "$LOCK")"
+      rm -f "$LOCK"
+      continue
+    fi
+  fi
+  if [ "$(date +%s)" -ge "$DEADLINE" ]; then
+    echo "lock acquire timeout for $SLUG" >&2
+    exit 1
+  fi
+  echo "waiting on canvas lock held by: $(cat "$LOCK" 2>/dev/null)"
+  sleep 5
+done
+LOCK_TS=$(date +%s)                              # remember acquire time for post-export mtime check
+```
+
+Record `LOCK_TS` — you will compare exported PNG mtimes against it to detect leftover files from crashed prior sessions. **Always release the lock** on every exit path (success, abort, error) with `rm -f "$LOCK"`. If the workflow stops mid-Phase-C and asks the user a question, release first, re-acquire on resume.
+
+**Connection bootstrap (do this AFTER acquiring the lock, before any drawing call).** The Excalidraw MCP needs a browser frontend connected to the canvas server, otherwise `export_to_image` fails with `No frontend client connected`. Try to recover automatically before falling back:
 
 1. Probe with `mcp__excalidraw__describe_scene` (cheap call). If it returns without a connection error, skip to step 5.
 2. If it errors with "No frontend client connected" or times out, open the canvas in a browser. The frontend runs on **`http://localhost:4321/`** (primary). `http://localhost:3333` is the legacy fallback — try it only if 4321 returns nothing.
@@ -119,12 +153,19 @@ Capture from the user (ask via `AskUserQuestion` only what's missing):
    If the server is not running, ask the user to start it (`claude mcp` lists configured servers; the canvas typically runs via `npx excalidraw-mcp` or similar).
 3. After the user opens the canvas / starts the server, re-probe. Retry up to 3 times with 5-second waits.
 4. If after 3 retries it still fails, **stop the workflow and ask the user to fix the canvas connection**. Do not ship the post without real diagrams. Acceptable user replies: (a) "I opened it, retry" → re-probe and continue, (b) "use Mermaid via create_from_mermaid" → still produces real PNG output through Excalidraw, acceptable. **Unacceptable**: skipping diagrams, using ASCII art, using ```text``` boxes, using Unicode box-drawing, or any prose-only substitute. Posts without proper Excalidraw PNGs are not allowed to ship.
-5. Once connected, for each planned diagram (loop):
+5. Once connected, for each planned diagram (loop — lock is still held from the protocol above):
    1. `mcp__excalidraw__clear_canvas`
-   2. `mcp__excalidraw__batch_create_elements` with the payload (see Diagram style guide). **Author on a high-resolution canvas: 2400×1600 logical units, not 1200×800.** This is the single most important factor in sharpness — the export resolution is proportional to the bounding box of your elements. A 1200-wide canvas exports to a ~1200-px PNG, which looks blurry on Retina/4K displays. A 2400-wide canvas exports to a ~2400-px PNG, which is crisp.
-   3. Optionally `mcp__excalidraw__align_elements` / `distribute_elements` to clean up.
-   4. `mcp__excalidraw__export_to_image` with `format: "png"`, `background: true`, `filePath: "public/imgs/blogs/<slug>-<n>.png"`.
-   5. **Sharpness gate (mandatory).** Verify the PNG exists, is non-empty, AND meets resolution + size minimums:
+   2. **Post-clear sanity check (defensive against leaked state from a prior crashed session).** Call `mcp__excalidraw__describe_scene` and confirm the element count is `0`. If non-zero, call `clear_canvas` again and re-probe; if still non-empty after 2 retries, abort Phase C, release the lock (`rm -f /tmp/blog-writer-excalidraw.lock`), and surface the failure to the user.
+   3. `mcp__excalidraw__batch_create_elements` with the payload (see Diagram style guide). **Author on a high-resolution canvas: 2400×1600 logical units, not 1200×800.** This is the single most important factor in sharpness — the export resolution is proportional to the bounding box of your elements. A 1200-wide canvas exports to a ~1200-px PNG, which looks blurry on Retina/4K displays. A 2400-wide canvas exports to a ~2400-px PNG, which is crisp.
+   4. Optionally `mcp__excalidraw__align_elements` / `distribute_elements` to clean up.
+   5. `mcp__excalidraw__export_to_image` with `format: "png"`, `background: true`, `filePath: "public/imgs/blogs/<slug>-<n>.png"`.
+   6. **Freshness check (defensive against stale leftover files from a crashed prior session).** Confirm the exported PNG's mtime is newer than `LOCK_TS`:
+      ```bash
+      png_mtime=$(stat -f %m "public/imgs/blogs/<slug>-<n>.png" 2>/dev/null || stat -c %Y "public/imgs/blogs/<slug>-<n>.png")
+      [ "$png_mtime" -ge "$LOCK_TS" ] || { echo "stale PNG, export likely failed silently"; exit 1; }
+      ```
+      If the file pre-dates lock acquisition, the export silently failed and you are about to ship someone else's image. Re-export; if it persists, abort and release the lock.
+   7. **Sharpness gate (mandatory).** Verify the PNG exists, is non-empty, AND meets resolution + size minimums:
       ```bash
       sips -g pixelWidth -g pixelHeight "<path>" 2>/dev/null \
         || identify -format "%w %h" "<path>"
@@ -134,6 +175,11 @@ Capture from the user (ask via `AskUserQuestion` only what's missing):
       1. Re-author on a 2400×1600 canvas with larger fonts and re-export.
       2. If still small, export with `format: "svg"` instead, then rasterize at 2× via `rsvg-convert -w 2400 in.svg -o out.png` or `magick -density 200 in.svg out.png` (whichever is available locally).
       3. If neither rasterizer is installed, ask the user to install `librsvg` (`brew install librsvg`) — do not silently ship a low-resolution PNG.
+6. **Release the lock** after the diagram loop completes (success path) AND on every error/abort path:
+   ```bash
+   rm -f /tmp/blog-writer-excalidraw.lock
+   ```
+   The lock must not survive Phase C — leaving it held blocks all other parallel sessions until the TTL expires. If you stop mid-loop to ask the user a clarifying question, release the lock first and re-acquire on resume (queueing fairly behind any sessions that started waiting in the meantime).
 
 **Accuracy bar for diagrams.** A diagram that is decorative is a failure. Every diagram must:
 - Reflect the exact terminology used in the article (variable names, component names, arrow labels match prose 1:1).
@@ -141,6 +187,44 @@ Capture from the user (ask via `AskUserQuestion` only what's missing):
 - Use the accent palette below *semantically* (blue = main path, amber = caution/cost, red = failure/loss, green = win/cached). Do not pick colors aesthetically.
 - Be readable at 800px width on a blog page — minimum `fontSize: 22` for body labels, `fontSize: 32` for titles (raised from 18/28 to keep text sharp after blog-page downscale).
 - Include a short caption text element inside the canvas (2nd line under the title) explaining what the reader should take away.
+
+**Native Excalidraw fonts only (mandatory).** Every text element must use one of Excalidraw's built-in `fontFamily` values — never set custom font names, never rely on system fonts, never leave `fontFamily` unset (the export will fall back inconsistently across machines and the PNG will look "off-brand"). Allowed values:
+
+| `fontFamily` | Name        | Use for                                                          |
+| ------------ | ----------- | ---------------------------------------------------------------- |
+| `1`          | Virgil      | **Default** for all titles, labels, captions, prose annotations. |
+| `2`          | Helvetica   | Reserved — only for formal/technical figures explicitly framed as non-sketch (rare). Do not mix with Virgil in the same diagram. |
+| `3`          | Cascadia    | Code, identifiers, file paths, shell commands, hex/numeric literals inside boxes labeled as code. |
+
+Rules:
+- **(a) Every `text` element in the `batch_create_elements` payload must include `"fontFamily": 1` (or `3` for code), explicitly — never omit.** Omitting the field causes the renderer to fall back to a default that varies across versions/machines, and the resulting PNG looks visibly different from the rest of the post's figures.
+- **(b) Font must be synchronized across every text element in the same diagram.** Pick one primary family per figure (default: Virgil = `1`) and apply it to *every* text element — title, captions, node labels, edge labels, annotations. The only allowed exception is code/identifier text, which uses Cascadia (`3`); these must be visually grouped (inside boxes labeled as code, or in a code panel), not sprinkled into prose labels.
+- **(c) Same `fontSize` tier across peers.** All node labels in the same figure share one `fontSize` (e.g., 22). All edge labels share one (e.g., 20). Title is one (32). Caption is one (24). Do not vary sizes within a tier for emphasis — use color or stroke for emphasis instead.
+- **(d) Do not switch families mid-label.** A single `text` element is one family, period.
+- **(e) Cross-figure consistency.** All diagrams in the same post use the same family choices and the same size tiers. Do not author figure 1 in Virgil-22 and figure 2 in Virgil-26.
+- **(f) Math-heavy / paper-reading posts**: still use Virgil for prose labels; render math as text with Cascadia, not Helvetica.
+
+**Text must never overflow its container (mandatory).** If a `text` element is bound to a shape via `containerId`, or visually placed inside any rectangle/ellipse/diamond, the rendered glyphs must stay strictly inside the shape's borders — no character may cross the stroke, no descender may clip the bottom edge, no line may run past the right edge. Excalidraw does NOT auto-wrap or auto-shrink, so this is the author's responsibility:
+
+1. **Compute required width before sizing the box.** For text of `N` characters at `fontSize F` (Virgil), required interior width ≈ `N × F × 0.6`; for Cascadia (mono), ≈ `N × F × 0.62`. Multi-line text: take `max(N_per_line)`. The container's `width` must be **`required_width + 2 × 24` (horizontal padding ≥ 24 px on each side)**, rounded up to the nearest 20 px.
+2. **Compute required height.** `lineCount × F × 1.25 + 2 × 20` (vertical padding ≥ 20 px). Round up to the nearest 20 px.
+3. **Wrap manually before sizing.** Cap any single line at ~24 chars (Virgil) / ~22 chars (Cascadia). Insert explicit `\n` in the text payload — Excalidraw respects newlines but never inserts them. Recompute height for the new line count.
+4. **Bind every in-shape label via `containerId`** with `verticalAlign: "middle"`, `textAlign: "center"`. Free-floating text on top of shapes is forbidden; the shape's bounding box and the text's bounding box must be the same element-pair.
+5. **Pre-export overflow audit.** After `batch_create_elements`, call `describe_scene` and for every text element: read its `text`, `fontSize`, and (if bound) its container's `width`/`height`. Compute the required box from the formulas above. If `container.width < required_width` or `container.height < required_height`, **fix the layout before exporting** — enlarge the container, shrink the font (down to the floor: 22 body / 32 title), or break the label across more lines. Do not export a canvas with any text that fails this check.
+6. **Visual confirmation in Phase E.** When opening the exported PNG in the composition gate, scan every shape: text must be fully inside the stroke with visible padding on all four sides. Any clipped, overhanging, or edge-touching glyph fails the gate and forces a re-author.
+
+**Scientific, content-faithful design (mandatory).** Every diagram is a figure in a technical article — treat it like one in a paper, not a marketing illustration:
+- **One claim per figure.** Decide the single takeaway sentence the figure proves (e.g., "KV-cache writes dominate latency past sequence length 4k"). If you cannot state it in one sentence, the figure is doing too much — split it.
+- **Bind to the prose.** Every node, edge label, and color must correspond to a noun, verb, or quantity that appears in the surrounding ±200 lines of markdown. If a viewer asks "what is this box?" and the answer is not in the article, delete the box.
+- **Quantify when possible.** Prefer concrete numbers (latencies in µs/ms, sizes in MB/GB, rates in tok/s, percentages) over vague adjectives ("fast", "large"). Numbers must match the values cited in the prose — do not invent figures for visual balance.
+- **Show structure, not decoration.** Information density matters: each pixel should encode either a component, a relationship, or a measurement. No purely decorative shapes, no logos, no clip-art icons, no "vibes" elements.
+- **Caption discipline.** The 2nd-line caption under the title is the figure's thesis statement, not a label restatement. Bad: "KV-cache architecture diagram." Good: "Decode-time bandwidth grows linearly with batch × seq-len; prefill is bounded by FLOPs."
+
+**Tight composition — no wasted whitespace.** Diagrams must use the canvas, not float in it. Loose layouts with large empty regions look amateurish, waste vertical space on the blog page, and make text relatively smaller after downscale.
+- **Element bounding box must fill ≥ 70% of the authored 2400×1600 canvas** in both width and height. Compute after `batch_create_elements`: take min/max of all element `x, y, x+width, y+height`; if the bounding box is smaller than 1680×1120, the layout is too sparse — enlarge shapes proportionally or move the camera in (i.e., re-author with everything scaled up to fill the canvas).
+- **Outer margin ≤ 80 px on all sides** between the element bounding box and the canvas edge. The 60 px inter-element padding (set elsewhere) is for *between* elements, not for an extra border around the whole figure.
+- **No empty quadrants.** If a 2×2 split of the bounding box leaves any quadrant >70% empty, rebalance — either move elements to fill it or shrink the canvas region. Title and caption count as content; one of them per quadrant is enough to keep it non-empty.
+- **Aspect ratio matches content.** A 5-step pipeline is wide-and-short; a layered stack is tall-and-narrow. Do not force everything into 2400×1600 — use `exportPadding: 48` and let the bounding box dictate aspect, then verify the result is still ≥ 1600×900 px after export.
 
 **Text containment & no-overlap mandate (mandatory — diagrams with overflowing or overlapping text fail Phase E).** Excalidraw does NOT auto-wrap or auto-shrink text inside shapes. If a label is wider than its container, it spills out and visually collides with neighbors; if two elements overlap in their bounding boxes, the text becomes unreadable. Enforce this before exporting:
 
@@ -177,6 +261,12 @@ After writing, run these checks. If any gate fails, **expand and rewrite — do 
    - Explainer: `readTime >= 25`. Paper-reading: `readTime >= 30`.
 2. **Diagram gate.** Every planned diagram exists as a **sharp** PNG under `public/imgs/blogs/`, and is embedded in the markdown with `![alt](/imgs/blogs/<slug>-<n>.png)`. The first ("mental model") diagram must be referenced in the intro paragraph.
 
+   **Composition sub-gate (mandatory): tight, scientific, content-faithful.** Open each PNG with `Read` and verify:
+   - **Font check**: every visible text element renders in Virgil (hand-drawn) or Cascadia (mono code) — no Helvetica/Arial/Times leakage. If any label looks like a generic system font, the `fontFamily` was omitted in the payload — re-author with explicit `"fontFamily": 1` (or `3`) on every text element.
+   - **Density check**: the actual content fills the frame. If the figure has wide empty bands on any side, or the title/caption float far from the body, the bounding-box coverage is below the 70% floor — re-author tighter (scale elements up, reduce inter-element gaps to the 40–60 px floor, or shrink the export region).
+   - **Faithfulness check**: every box label, arrow label, and number in the figure appears in the surrounding prose. Pick 3 random labels and `grep` them in the markdown — zero matches means the diagram diverged from the article.
+   - **Single-claim check**: the figure proves one specific sentence from the prose. If you cannot point to that sentence, the figure is decorative — replace it with one that earns its space.
+
    **Layout sub-gate (mandatory): no text overflow, no overlapping elements.** Open each exported PNG with `Read` and inspect visually. The diagram fails if any of: (a) text spills past the edge of its container rectangle/ellipse, (b) two non-parent/child elements have visibly overlapping bounding boxes, (c) an arrow line crosses through a text label, (d) labels are clipped at the canvas edge, (e) two text elements visually touch or run into each other. If any failure is observed, return to Phase C: re-size containers to fit their labels per the formula `width ≈ chars × fontSize × 0.6 + 48`, bind in-shape text via `containerId`, enforce ≥ 40 px gap between siblings, and re-export. Do not ship a diagram with known overflow or overlap — this is a hard gate.
 
    **Sharpness sub-gate (mandatory):** for every diagram PNG, verify resolution and size:
@@ -197,6 +287,16 @@ After writing, run these checks. If any gate fails, **expand and rewrite — do 
    grep -nE '\+--+\+|--->|<---' <path>   # ASCII art arrows/boxes
    ```
    Mermaid blocks rendered through `mcp__excalidraw__create_from_mermaid` are fine — they produce real PNGs. Inline ```mermaid``` source blocks left in the markdown are not.
+
+   **Slug-match sub-gate (defensive against parallel-session canvas collisions).** Every embedded image path in the post must start with this post's slug. Run:
+   ```bash
+   slug="<slug>"
+   grep -oE '\!\[[^]]*\]\(/imgs/blogs/[^)]+\)' "<path>" \
+     | grep -v "/imgs/blogs/${slug}-" \
+     && echo "FAIL: foreign image embedded — likely a parallel-session collision" \
+     || echo "ok: all images match slug"
+   ```
+   Any non-matching path means a different blog-writer run wrote that PNG (or this run picked up a leftover) — re-author the offending diagram under the canvas lock and replace it.
 3. **Frontmatter gate.** `readTime` matches the recomputed value; `date` is today; `aiGenerated: true`; tags 5–12; category is a real folder under `content/blog/`.
 4. **Substance gate.** Every H2 has at least one of: comparison table, ≥15-line code block, measured benchmark with units, or worked numerical example. Spot-check by reading the file and counting.
 5. **No-H1 gate.** `grep -nE '^# [^#]' <path>` must return zero matches. Any single-`#` heading in the body fails the gate — convert it to `##` and re-run.
@@ -279,10 +379,12 @@ Three reusable layouts (full payload templates live in `diagrams/`):
 
 Always:
 - **2400×1600 logical canvas** (was 1200×800 — bumped for sharpness); export with `exportPadding: 48`.
+- **`fontFamily: 1` (Virgil) for prose; `fontFamily: 3` (Cascadia) for code** — set explicitly on every `text` element, never omit. No system fonts, no custom names. (See "Native Excalidraw fonts only" mandate above.)
 - Title text at the top in `fontSize: 32` (was 28). Section labels at 24, body at 22.
 - `strokeWidth: 2` minimum; primary shapes 2.5.
 - Label edges/arrows with one-line annotations, not paragraphs.
 - One accent color per figure, never two.
+- **Fill the canvas (≥ 70% bounding-box coverage in both axes)** — see "Tight composition" mandate. Loose, airy layouts fail the design gate.
 - After export, run the Phase C sharpness gate: width ≥ 1600 px, height ≥ 900 px, file size ≥ 80 KB. Re-author or fall back to SVG → high-DPI rasterize if any check fails.
 
 ## Templates
