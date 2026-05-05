@@ -19,7 +19,6 @@ tags:
     "python",
   ]
 category: "trading"
-subcategory: "Quantitative Finance / Rates Models"
 author: "Hiep Tran"
 featured: true
 readTime: 50

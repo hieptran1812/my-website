@@ -21,7 +21,6 @@ tags:
     "python",
   ]
 category: "trading"
-subcategory: "Quantitative Finance / Exotics"
 author: "Hiep Tran"
 featured: true
 readTime: 50

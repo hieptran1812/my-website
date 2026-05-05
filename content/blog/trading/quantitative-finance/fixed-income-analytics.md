@@ -21,7 +21,6 @@ tags:
     "python",
   ]
 category: "trading"
-subcategory: "Quantitative Finance / Fixed Income"
 author: "Hiep Tran"
 featured: true
 readTime: 50

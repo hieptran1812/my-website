@@ -22,7 +22,6 @@ tags:
     "python",
   ]
 category: "trading"
-subcategory: "Quantitative Finance / Derivatives"
 author: "Hiep Tran"
 featured: true
 readTime: 50
