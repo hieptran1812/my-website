@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "blog-writer diagram DSL",
+  "description": "High-level figure description that layout-scene.mjs expands into a positioned Excalidraw scene. The five built-in types cover the figure shapes the existing posts use; complex one-offs drop down to type:'raw'.",
+  "type": "object",
+  "required": ["type", "title", "caption", "claim"],
+  "properties": {
+    "type": {
+      "enum": ["pipeline", "stack", "before-after", "matrix", "tree", "timeline", "grid", "graph", "raw"],
+      "description": "Selects the layout engine. pipeline=horizontal flow; stack=nested layers; before-after=two columns; matrix=row×col grid; tree=hierarchy; timeline=horizontal events; grid=free placement on N×M cells with optional rowspan/colspan and edges (this covers most ex-raw figures); graph=Mermaid+dagre; raw=hand-authored elements (last resort)."
+    },
+    "title": {
+      "type": "string",
+      "description": "Short, sentence-case figure title (rendered at 32-pt Virgil at the top)."
+    },
+    "caption": {
+      "type": "string",
+      "description": "One sentence describing what the reader should take away. NOT a label restatement. Rendered at 28-pt Virgil under the title."
+    },
+    "claim": {
+      "type": "string",
+      "description": "≥ 8-word sentence stating the single provable claim the figure makes. Validator-checked.",
+      "minLength": 30
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "kind": { "enum": ["primary", "caution", "danger", "success", "external", "neutral"] },
+          "anchor": { "type": "string", "description": "Markdown heading id or section anchor the node illustrates. Used by Phase E faithfulness gate." }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "label": { "type": "string" }
+        }
+      }
+    },
+    "before": {
+      "description": "before-after only: left column",
+      "type": "object",
+      "properties": {
+        "label": { "type": "string", "default": "Before" },
+        "nodes": { "type": "array" }
+      }
+    },
+    "after": {
+      "description": "before-after only: right column",
+      "type": "object",
+      "properties": {
+        "label": { "type": "string", "default": "After" },
+        "nodes": { "type": "array" }
+      }
+    },
+    "rows": { "type": "array", "description": "matrix only" },
+    "cols": { "type": "array", "description": "matrix only" },
+    "cells": { "type": "array", "description": "matrix only — rows × cols of {label, kind}" },
+    "raw": {
+      "type": "object",
+      "description": "Escape hatch for type:'raw' — passes elements straight through to author-scene.mjs.",
+      "properties": { "elements": { "type": "array" }, "positions": { "type": "object", "description": "Optional id→{x,y,w,h} so overlay callouts can target raw nodes." } }
+    },
+    "events": {
+      "type": "array",
+      "description": "timeline only — left-to-right ordered events with {id, label, kind, date?}.",
+      "items": {
+        "type": "object",
+        "required": ["id", "label"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "kind": { "enum": ["primary", "caution", "danger", "success", "external", "neutral"] },
+          "date": { "type": "string", "description": "Optional date / version tag rendered above the label." }
+        }
+      }
+    },
+    "gridRows": { "type": "integer", "description": "grid only — explicit row count; defaults to max(node.row+rowspan)." },
+    "gridCols": { "type": "integer", "description": "grid only — explicit col count; defaults to max(node.col+colspan)." },
+    "overlay": {
+      "type": "array",
+      "description": "Works on ANY type — list of callouts: small Cascadia text + dashed arrow pointing at a node from a side. Use this instead of dropping to raw when an existing layout type just needs an annotation or two.",
+      "items": {
+        "type": "object",
+        "required": ["target", "text"],
+        "properties": {
+          "target": { "type": "string", "description": "id of the node the callout points at" },
+          "text": { "type": "string" },
+          "side": { "enum": ["top", "right", "bottom", "left"], "default": "right" }
+        }
+      }
+    }
+  }
+}

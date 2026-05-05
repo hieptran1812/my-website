@@ -1,0 +1,417 @@
+#!/usr/bin/env node
+/*
+ * author-scene.mjs — normalize a blog-writer diagram payload into a complete
+ * Excalidraw scene JSON file, validating the same containment, overlap,
+ * coverage, and font-family invariants Phase C used to enforce at runtime
+ * against the live MCP canvas.
+ *
+ * Input shape (the same shape blog-writer used to pass to
+ * mcp__excalidraw__batch_create_elements, plus optional `export` block):
+ *
+ *   {
+ *     "title": "Optional figure thesis (used for filename only)",
+ *     "elements": [
+ *       { "type": "rectangle", "x": ..., "y": ..., "width": ..., "height": ...,
+ *         "label": "Text inside the box" | { "text": "..." }, ... },
+ *       { "type": "text", "x": ..., "y": ..., "text": "Caption", "fontSize": 22,
+ *         "fontFamily": 1, ... },
+ *       ...
+ *     ],
+ *     "export": { "padding": 48, "theme": "light", "minWidth": 1600, "minHeight": 900 }
+ *   }
+ *
+ * Output: a JSON file that render-scene.mjs can consume directly. The CLI
+ * exits non-zero on any validation failure with a precise message naming the
+ * offending element id / index.
+ *
+ * Usage:
+ *   node author-scene.mjs <input.json> <output.json>
+ *
+ * Pure Node, zero deps.
+ */
+import { readFile, writeFile, mkdir } from 'node:fs/promises'
+import { dirname } from 'node:path'
+
+const CANVAS_W = 2400
+const CANVAS_H = 1600
+const COVERAGE_FLOOR = 0.7
+const MIN_GAP = 40
+const MIN_FONT_BODY = 22
+const MIN_FONT_TITLE = 32
+const ALLOWED_FONTS = new Set([1, 3]) // Virgil prose, Cascadia code
+const ALLOWED_BG = new Set([
+  'transparent', '#a5d8ff', '#ffec99', '#ffc9c9', '#b2f2bb', '#d0bfff', '#e9ecef',
+])
+
+function die(msg, code = 1) {
+  process.stderr.write(`author-scene: ${msg}\n`)
+  process.exit(code)
+}
+
+function rngId(prefix = 'el') {
+  return `${prefix}-${Math.random().toString(36).slice(2, 10)}`
+}
+
+// Excalidraw uses Math.random() seeds and version fields; we fill enough for
+// convertToExcalidrawElements (called inside the headless harness) to do the
+// rest. Don't over-specify — convertToExcalidrawElements normalizes the gaps.
+function defaultsForElement(el) {
+  return {
+    id: el.id ?? rngId(el.type === 'text' ? 'tx' : 'sh'),
+    angle: 0,
+    strokeColor: el.strokeColor ?? '#1e1e1e',
+    backgroundColor: el.backgroundColor ?? 'transparent',
+    fillStyle: el.fillStyle ?? 'hachure',
+    strokeWidth: el.strokeWidth ?? 2,
+    strokeStyle: el.strokeStyle ?? 'solid',
+    roughness: el.roughness ?? 1,
+    opacity: el.opacity ?? 100,
+    roundness: el.roundness ?? (el.type === 'rectangle' ? { type: 3 } : null),
+    seed: el.seed ?? Math.floor(Math.random() * 2 ** 31),
+    version: el.version ?? 1,
+    versionNonce: el.versionNonce ?? Math.floor(Math.random() * 2 ** 31),
+    isDeleted: false,
+    boundElements: el.boundElements ?? null,
+    updated: Date.now(),
+    link: el.link ?? null,
+    locked: false,
+  }
+}
+
+export function normalize(input) {
+  const out = []
+  const elements = Array.isArray(input.elements) ? input.elements : []
+
+  for (const raw of elements) {
+    if (!raw || typeof raw !== 'object') continue
+    if (raw.type === 'text') {
+      out.push({
+        ...defaultsForElement(raw),
+        type: 'text',
+        x: raw.x ?? 0,
+        y: raw.y ?? 0,
+        width: raw.width ?? estTextWidth(raw.text || '', raw.fontSize ?? 22),
+        height: raw.height ?? estTextHeight(raw.text || '', raw.fontSize ?? 22),
+        text: raw.text ?? '',
+        fontSize: raw.fontSize ?? 22,
+        fontFamily: raw.fontFamily ?? 1,
+        textAlign: raw.textAlign ?? 'left',
+        verticalAlign: raw.verticalAlign ?? 'top',
+        baseline: raw.baseline ?? 18,
+        containerId: raw.containerId ?? null,
+        originalText: raw.originalText ?? raw.text ?? '',
+        lineHeight: raw.lineHeight ?? 1.25,
+      })
+    } else {
+      // Shape-with-optional-label (the templates' shape).
+      const shapeId = raw.id ?? rngId('sh')
+      const shape = {
+        ...defaultsForElement({ ...raw, id: shapeId }),
+        type: raw.type,
+        x: raw.x ?? 0,
+        y: raw.y ?? 0,
+        width: raw.width ?? 200,
+        height: raw.height ?? 100,
+      }
+      if (raw.type === 'arrow' || raw.type === 'line') {
+        shape.points = raw.points ?? [[0, 0], [raw.width ?? 0, raw.height ?? 0]]
+        shape.lastCommittedPoint = raw.lastCommittedPoint ?? null
+        shape.startBinding = raw.startBinding ?? null
+        shape.endBinding = raw.endBinding ?? null
+        shape.startArrowhead = raw.startArrowhead ?? null
+        shape.endArrowhead = raw.endArrowhead ?? 'arrow'
+      }
+      const labelText = typeof raw.label === 'string' ? raw.label : raw.label?.text
+      if (labelText) {
+        const labelFontSize = raw.label?.fontSize ?? 22
+        const labelFontFamily = raw.label?.fontFamily ?? 1
+        const labelId = rngId('tx')
+        shape.boundElements = [
+          ...(shape.boundElements || []),
+          { type: 'text', id: labelId },
+        ]
+        out.push(shape)
+        const tw = estTextWidth(labelText, labelFontSize, labelFontFamily)
+        const th = estTextHeight(labelText, labelFontSize)
+        // Center the text element within the container; Excalidraw uses x/y as
+        // the rendered position when the bound-text alignment hooks don't fire
+        // headlessly, so we pre-center to be safe.
+        const tx = shape.x + Math.max(0, (shape.width - tw) / 2)
+        const ty = shape.y + Math.max(0, (shape.height - th) / 2)
+        out.push({
+          ...defaultsForElement({ id: labelId }),
+          type: 'text',
+          x: tx,
+          y: ty,
+          width: tw,
+          height: th,
+          text: labelText,
+          fontSize: labelFontSize,
+          fontFamily: labelFontFamily,
+          textAlign: 'center',
+          verticalAlign: 'middle',
+          baseline: Math.round(labelFontSize * 0.8),
+          containerId: shape.id,
+          originalText: labelText,
+          lineHeight: 1.25,
+        })
+      } else {
+        out.push(shape)
+      }
+    }
+  }
+  return out
+}
+
+function estTextWidth(text, fontSize, family = 1) {
+  const factor = family === 3 ? 0.62 : 0.6
+  const lines = String(text).split('\n')
+  const longest = Math.max(0, ...lines.map((l) => l.length))
+  return Math.ceil(longest * fontSize * factor)
+}
+function estTextHeight(text, fontSize) {
+  const lines = String(text).split('\n').length || 1
+  return Math.ceil(lines * fontSize * 1.25)
+}
+
+function bbox(els) {
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
+  for (const e of els) {
+    x0 = Math.min(x0, e.x)
+    y0 = Math.min(y0, e.y)
+    x1 = Math.max(x1, e.x + (e.width || 0))
+    y1 = Math.max(y1, e.y + (e.height || 0))
+  }
+  if (!isFinite(x0)) return { x0: 0, y0: 0, x1: 0, y1: 0, w: 0, h: 0 }
+  return { x0, y0, x1, y1, w: x1 - x0, h: y1 - y0 }
+}
+
+// Stopwords for the information-density gate. Keep short — the goal is to
+// reject placeholder labels (A/B/C, foo/bar/baz, "step 1"/"step 2"), not to
+// score writing quality.
+const STOPWORDS = new Set([
+  'a', 'an', 'the', 'of', 'for', 'to', 'and', 'or', 'in', 'on', 'at', 'by',
+  'is', 'be', 'as', 'with', 'from', 'into', 'this', 'that', 'these', 'those',
+  'step', 'foo', 'bar', 'baz', 'quux',
+])
+
+function tokenize(text) {
+  return String(text)
+    .toLowerCase()
+    .split(/[^a-z0-9_]+/)
+    .filter((t) => t.length > 1 && !STOPWORDS.has(t))
+}
+
+function validateMetadata(input) {
+  const errors = []
+  // The layout-scene.mjs frontend stamps _claim and _caption onto its
+  // expanded payloads. Element-level callers may also set them directly. If
+  // they're absent we treat this as the legacy element-only path and skip
+  // — the layout engine is the right place to enforce these for DSL inputs.
+  const claim = String(input._claim || '').trim()
+  if (claim) {
+    const words = claim.split(/\s+/).filter(Boolean)
+    if (words.length < 8) {
+      errors.push(`claim too short (${words.length} words, need ≥ 8): "${claim}"`)
+    }
+  }
+  return errors
+}
+
+export function validate(els, input = {}) {
+  const errors = [...validateMetadata(input)]
+
+  // 1. fontFamily must be set explicitly on every text.
+  for (const e of els) {
+    if (e.type !== 'text') continue
+    if (!ALLOWED_FONTS.has(e.fontFamily)) {
+      errors.push(`text element ${e.id}: fontFamily must be 1 (Virgil) or 3 (Cascadia), got ${e.fontFamily}`)
+    }
+    if (e.fontSize < MIN_FONT_BODY) {
+      errors.push(`text element ${e.id}: fontSize ${e.fontSize} below body floor ${MIN_FONT_BODY}`)
+    }
+  }
+
+  // 1b. Free-floating text: declared width must fit rendered text.
+  // Excalidraw renders at the real character widths, so a too-narrow declared
+  // bbox lets text overflow into adjacent nodes. This catches edge labels,
+  // axis ticks, annotations — anywhere a text element doesn't have a containerId.
+  for (const e of els) {
+    if (e.type !== 'text' || e.containerId) continue
+    const rendered = estTextWidth(e.text || '', e.fontSize, e.fontFamily)
+    // Allow a small slack (8 px) for rounding; a textAlign:right element with
+    // generous declared width is fine. Only fail when declared < rendered.
+    if (e.width < rendered - 8) {
+      errors.push(
+        `text element ${e.id}: declared width ${e.width} below rendered ${rendered} — text "${oneLine(e.text)}" will overflow its bbox to the right and may cross adjacent shapes`,
+      )
+    }
+  }
+
+  // 2. Containment: bound text must fit its container.
+  const byId = new Map(els.map((e) => [e.id, e]))
+  for (const e of els) {
+    if (e.type !== 'text' || !e.containerId) continue
+    const c = byId.get(e.containerId)
+    if (!c) {
+      errors.push(`text element ${e.id}: containerId ${e.containerId} references missing element`)
+      continue
+    }
+    const reqW = estTextWidth(e.text, e.fontSize, e.fontFamily) + 2 * 24
+    const reqH = estTextHeight(e.text, e.fontSize) + 2 * 20
+    if (c.width < reqW) {
+      errors.push(
+        `container ${c.id} too narrow for label "${oneLine(e.text)}": width ${c.width} < required ${reqW} (chars × fontSize × 0.6 + 48)`,
+      )
+    }
+    if (c.height < reqH) {
+      errors.push(
+        `container ${c.id} too short for label "${oneLine(e.text)}": height ${c.height} < required ${reqH}`,
+      )
+    }
+  }
+
+  // 3. Overlap: any two non-parent/child shapes overlapping is a hard fail.
+  const childOf = new Map()
+  for (const e of els) {
+    if (e.type === 'text' && e.containerId) childOf.set(e.id, e.containerId)
+  }
+  const isRelated = (a, b) => childOf.get(a.id) === b.id || childOf.get(b.id) === a.id
+  for (let i = 0; i < els.length; i++) {
+    for (let j = i + 1; j < els.length; j++) {
+      const a = els[i], b = els[j]
+      if (isRelated(a, b)) continue
+      // Free-floating text labels are allowed to occupy the same y-band as a
+      // distant shape only if their bbox doesn't actually overlap.
+      const ax2 = a.x + (a.width || 0), ay2 = a.y + (a.height || 0)
+      const bx2 = b.x + (b.width || 0), by2 = b.y + (b.height || 0)
+      const overlapX = Math.min(ax2, bx2) - Math.max(a.x, b.x)
+      const overlapY = Math.min(ay2, by2) - Math.max(a.y, b.y)
+      if (overlapX > 0 && overlapY > 0) {
+        errors.push(`overlap between ${a.id} (${a.type}) and ${b.id} (${b.type}): ${overlapX.toFixed(0)}×${overlapY.toFixed(0)} px`)
+      }
+    }
+  }
+
+  // 4. Coverage: at least one axis must reach 70% (the dominant axis for the
+  // figure shape — pipelines are wide-and-short, stacks are tall-and-narrow,
+  // matrices fill both). The other axis must still reach 40% so the figure
+  // doesn't look empty. The renderer crops to bbox via exportPadding, so
+  // unused canvas in the minor axis isn't wasted on the rendered PNG.
+  const bb = bbox(els.filter((e) => !(e.type === 'text' && e.containerId)))
+  const covW = bb.w / CANVAS_W
+  const covH = bb.h / CANVAS_H
+  const covMax = Math.max(covW, covH)
+  const covMin = Math.min(covW, covH)
+  if (covMax < COVERAGE_FLOOR || covMin < 0.4) {
+    errors.push(
+      `bounding-box coverage too low: ${(covW * 100).toFixed(0)}% × ${(covH * 100).toFixed(0)}% (need dominant axis ≥ ${(COVERAGE_FLOOR * 100).toFixed(0)}% and minor axis ≥ 40%). Scale elements up or add information density.`,
+    )
+  }
+
+  // 5. Color palette: backgroundColor on shapes must be in the semantic palette.
+  for (const e of els) {
+    if (e.type === 'text') continue
+    const bg = (e.backgroundColor || 'transparent').toLowerCase()
+    if (!ALLOWED_BG.has(bg)) {
+      errors.push(`shape ${e.id}: backgroundColor ${bg} is not in the semantic palette (${[...ALLOWED_BG].join(', ')})`)
+    }
+  }
+
+  // 6. Caption element: if the input declared a _caption, the scene must
+  // contain a matching text element near the top of the canvas (within the
+  // first 220 px) at a fontSize >= 26. The layout engine produces this
+  // automatically; element-level callers can opt in by stamping _caption.
+  const caption = String(input._caption || '').trim()
+  if (caption) {
+    const titleText = String(els.find((e) => e.id === 'title')?.text || '').trim()
+    const matchingCap = els.find(
+      (e) => e.type === 'text' && String(e.text).trim() === caption,
+    )
+    if (!matchingCap) {
+      errors.push(`scene declares _caption but no text element matches it: "${oneLine(caption)}"`)
+    } else if (matchingCap.fontSize < 26) {
+      errors.push(`caption element fontSize ${matchingCap.fontSize} below 26 — caption must read as a thesis line, not a body label`)
+    } else if (matchingCap.y > 220) {
+      errors.push(`caption element placed at y=${matchingCap.y}; must sit in the top header band (y ≤ 220)`)
+    }
+    if (titleText && titleText.toLowerCase() === caption.toLowerCase()) {
+      errors.push('caption duplicates the title verbatim — caption must add information, not restate the title')
+    }
+  }
+
+  // 7. Information density: count unique non-stopword tokens across all
+  // labels (text elements + bound-text labels). Reject placeholders.
+  const tokens = new Set()
+  for (const e of els) {
+    if (e.type === 'text') for (const t of tokenize(e.text)) tokens.add(t)
+    else if (typeof e.label === 'string') for (const t of tokenize(e.label)) tokens.add(t)
+    else if (e.label && typeof e.label.text === 'string') for (const t of tokenize(e.label.text)) tokens.add(t)
+  }
+  if (tokens.size < 6) {
+    errors.push(`information density too low: only ${tokens.size} unique non-stopword tokens across all labels (need ≥ 6). Replace placeholder labels with concrete component / data / quantity names.`)
+  }
+
+  return errors
+}
+
+function oneLine(s) {
+  return String(s).replace(/\s+/g, ' ').slice(0, 60)
+}
+
+// In-process entrypoint for callers like layout-scene.mjs that already hold
+// the input as an object — skips the disk round-trip and Node startup of
+// spawning author-scene as a subprocess.
+export function buildScene(input) {
+  const elements = normalize(input)
+  const errors = validate(elements, input)
+  if (errors.length) {
+    const e = new Error(`author-scene: validation failed\n  - ${errors.join('\n  - ')}`)
+    e.errors = errors
+    throw e
+  }
+  return {
+    type: 'excalidraw',
+    version: 2,
+    source: 'blog-writer',
+    elements,
+    appState: {
+      viewBackgroundColor: '#ffffff',
+      gridSize: null,
+    },
+    files: input.files || {},
+    export: {
+      padding: input.export?.padding ?? 48,
+      theme: input.export?.theme ?? 'light',
+      background: input.export?.background ?? true,
+      minWidth: input.export?.minWidth ?? 1600,
+      minHeight: input.export?.minHeight ?? 900,
+    },
+  }
+}
+
+async function main() {
+  const [, , inPath, outPath] = process.argv
+  if (!inPath || !outPath) die('usage: author-scene.mjs <input.json> <output.json>', 2)
+
+  const raw = await readFile(inPath, 'utf8').catch((e) => die(`cannot read ${inPath}: ${e.message}`))
+  let input
+  try { input = JSON.parse(raw) } catch (e) { die(`${inPath} is not JSON: ${e.message}`) }
+
+  let scene
+  try { scene = buildScene(input) }
+  catch (e) {
+    process.stderr.write(`author-scene: validation failed for ${inPath}\n`)
+    for (const err of (e.errors || [e.message])) process.stderr.write(`  - ${err}\n`)
+    process.exit(3)
+  }
+
+  await mkdir(dirname(outPath), { recursive: true }).catch(() => {})
+  await writeFile(outPath, JSON.stringify(scene, null, 2))
+  process.stdout.write(`wrote ${outPath} (${scene.elements.length} elements)\n`)
+}
+
+// Only run main() when invoked as a CLI, not when imported as a module.
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((e) => die(e.stack || e.message || String(e)))
+}

@@ -1,0 +1,12 @@
+{
+  "type": "stack",
+  "title": "The four layers of LLM serving",
+  "caption": "Each lower layer determines what the layer above can express; runtime is where bandwidth becomes the bottleneck.",
+  "claim": "Runtime concerns dominate because IPC and memory bandwidth gate everything serving wraps around them.",
+  "nodes": [
+    { "id": "host",    "label": "Host (driver, kernel, container runtime)", "kind": "neutral",  "anchor": "#host" },
+    { "id": "image",   "label": "Image (CUDA toolkit + Python deps)",        "kind": "neutral",  "anchor": "#image" },
+    { "id": "runtime", "label": "Runtime (process, NCCL, IPC, shm)",         "kind": "primary",  "anchor": "#runtime" },
+    { "id": "serving", "label": "Serving (vLLM / Triton / SGLang)",          "kind": "neutral",  "anchor": "#serving" }
+  ]
+}

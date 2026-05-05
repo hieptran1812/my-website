@@ -1,0 +1,15 @@
+{
+  "type": "tree",
+  "title": "Speculative decoding hierarchy",
+  "caption": "The draft model proposes; the target model verifies; tokens accepted only if they match.",
+  "claim": "Speculative decoding pushes verification down the tree so each token costs at most one target forward pass.",
+  "nodes": [
+    { "id": "root",   "label": "request",                                      "kind": "neutral",  "anchor": "#overview" },
+    { "id": "draft",  "label": "draft model\n(small)",                         "kind": "primary",  "parent": "root", "anchor": "#draft" },
+    { "id": "target", "label": "target model\n(large)",                        "kind": "primary",  "parent": "root", "anchor": "#target" },
+    { "id": "d1",     "label": "propose\n4 tokens",                            "kind": "caution",  "parent": "draft", "anchor": "#draft" },
+    { "id": "t1",     "label": "verify\n(parallel)",                           "kind": "primary",  "parent": "target", "anchor": "#target" },
+    { "id": "t2",     "label": "accept prefix",                                "kind": "success",  "parent": "target", "anchor": "#accept" },
+    { "id": "t3",     "label": "reject + resample",                            "kind": "caution",  "parent": "target", "anchor": "#reject" }
+  ]
+}

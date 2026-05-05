@@ -1,0 +1,27 @@
+{
+  "type": "graph",
+  "title": "RAG retrieval and generation graph",
+  "caption": "Each retrieved chunk earns its place in the prompt only if its score clears the rerank threshold.",
+  "claim": "Reranking, not raw embedding similarity, decides which chunks survive into the model's context window.",
+  "nodes": [
+    { "id": "q",       "label": "user query",            "kind": "neutral" },
+    { "id": "embed",   "label": "embed",                 "kind": "primary" },
+    { "id": "vstore",  "label": "vector store",          "kind": "external" },
+    { "id": "topk",    "label": "top-k candidates",      "kind": "neutral" },
+    { "id": "rerank",  "label": "cross-encoder rerank",  "kind": "primary" },
+    { "id": "filter",  "label": "score < threshold drop","kind": "danger" },
+    { "id": "prompt",  "label": "prompt assembly",       "kind": "neutral" },
+    { "id": "llm",     "label": "LLM generate",          "kind": "primary" },
+    { "id": "answer",  "label": "answer",                "kind": "success" }
+  ],
+  "edges": [
+    { "from": "q",      "to": "embed" },
+    { "from": "embed",  "to": "vstore",  "label": "ANN" },
+    { "from": "vstore", "to": "topk" },
+    { "from": "topk",   "to": "rerank" },
+    { "from": "rerank", "to": "filter",  "label": "low" },
+    { "from": "rerank", "to": "prompt",  "label": "high" },
+    { "from": "prompt", "to": "llm" },
+    { "from": "llm",    "to": "answer" }
+  ]
+}
