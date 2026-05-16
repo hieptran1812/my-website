@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { cache } from "react";
 import matter from "gray-matter";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
@@ -9,6 +10,7 @@ import rehypeStringify from "rehype-stringify";
 import { calculateReadTimeWithTags } from "./readTimeCalculator";
 import { protectMathBlocks, restoreMathBlocks } from "./markdown";
 import remarkCallouts from "./remarkCallouts";
+import rehypeImageOptimize from "./rehypeImageOptimize";
 import { resolvePostCover } from "./getRelatedPosts";
 
 export interface ArticleData {
@@ -47,7 +49,13 @@ function findArticleFile(
   return null;
 }
 
-export async function getArticle(slug: string): Promise<ArticleData | null> {
+/**
+ * Reads and renders a single article. Wrapped in React.cache() below so that
+ * the detail page's generateMetadata() and the page component — which both
+ * request the same slug within one render pass — share a single file read +
+ * markdown parse instead of doing the full remark/rehype pipeline twice.
+ */
+async function getArticleImpl(slug: string): Promise<ArticleData | null> {
   const slugParts = slug.split("/");
   const articlePath = findArticleFile(blogDir, slugParts);
 
@@ -63,6 +71,7 @@ export async function getArticle(slug: string): Promise<ArticleData | null> {
     .use(remarkCallouts)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeHighlight)
+    .use(rehypeImageOptimize)
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(protectedContent);
 
@@ -94,6 +103,9 @@ export async function getArticle(slug: string): Promise<ArticleData | null> {
     image: resolvePostCover(metadata, markdownContent),
   };
 }
+
+/** Per-request memoized article reader — see getArticleImpl. */
+export const getArticle = cache(getArticleImpl);
 
 /** Enumerate all blog slugs for static generation */
 export function getAllBlogSlugs(): string[][] {

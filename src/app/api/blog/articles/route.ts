@@ -137,6 +137,48 @@ function convertToArticle(
   };
 }
 
+// convertToArticle() runs calculateReadTimeWithTags() per entry — costly across
+// the whole corpus. loadAllPosts() returns a stable array reference while its
+// cache is warm, so memoize the fully built + sorted article list against that
+// reference and only rebuild when the corpus is actually refreshed.
+type Corpus = Awaited<ReturnType<typeof loadAllPosts>>;
+let builtCorpusRef: Corpus | null = null;
+let builtArticles: Article[] = [];
+
+function buildAllArticles(corpus: Corpus): Article[] {
+  if (corpus === builtCorpusRef) return builtArticles;
+
+  const articles: Article[] = corpus.map((entry) => {
+    const article = convertToArticle(
+      entry.frontmatter,
+      entry.slug,
+      entry.category,
+      entry.subcategory,
+      entry.content,
+    );
+    article.id = entry.slug.replace(/\//g, "-");
+    article.content = entry.content;
+    return article;
+  });
+
+  // Sort articles by date (newest first) - more robust date parsing
+  articles.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    // Handle invalid dates by putting them at the end
+    if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+    if (isNaN(dateA.getTime())) return 1;
+    if (isNaN(dateB.getTime())) return -1;
+
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  builtCorpusRef = corpus;
+  builtArticles = articles;
+  return articles;
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -147,36 +189,13 @@ export async function GET(request: NextRequest) {
     const excludeContent = searchParams.get("excludeContent") === "true";
 
     const corpus = await loadAllPosts();
-    const articles: Article[] = [];
 
-    for (const entry of corpus) {
-      const article = convertToArticle(
-        entry.frontmatter,
-        entry.slug,
-        entry.category,
-        entry.subcategory,
-        entry.content,
-      );
-      article.id = entry.slug.replace(/\//g, "-");
-      article.content = entry.content;
-
-      if (categoryFilter && article.category !== categoryFilter) continue;
+    // Filtering preserves the already-sorted order.
+    const articles = buildAllArticles(corpus).filter((article) => {
+      if (categoryFilter && article.category !== categoryFilter) return false;
       if (subcategoryFilter && article.subcategory !== subcategoryFilter)
-        continue;
-      articles.push(article);
-    }
-
-    // Sort articles by date (newest first) - more robust date parsing
-    articles.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-
-      // Handle invalid dates by putting them at the end
-      if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
-      if (isNaN(dateA.getTime())) return 1;
-      if (isNaN(dateB.getTime())) return -1;
-
-      return dateB.getTime() - dateA.getTime();
+        return false;
+      return true;
     });
 
     // Apply pagination

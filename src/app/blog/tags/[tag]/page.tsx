@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import TagBadge, { TagList } from "@/components/TagBadge";
 import { formatDateMedium } from "@/lib/dateUtils";
-import { getArticleImageUrl } from "@/lib/articleImage";
+import { getArticleImageUrl, BLUR_DATA_URL } from "@/lib/articleImage";
 
 interface BlogPost {
   slug: string;
@@ -288,6 +288,9 @@ export default function TagPage() {
                               fill
                               className="object-cover transition-transform duration-500 group-hover:scale-110"
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              quality={70}
+                              placeholder="blur"
+                              blurDataURL={BLUR_DATA_URL}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                           </div>

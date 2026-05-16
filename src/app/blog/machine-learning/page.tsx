@@ -8,7 +8,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
-import { getArticleImageUrl } from "@/lib/articleImage";
+import { getArticleImageUrl, BLUR_DATA_URL } from "@/lib/articleImage";
 import SubcategoryFilter from "@/components/SubcategoryFilter";
 import BlogSearchBar from "@/components/BlogSearchBar";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
@@ -242,6 +242,11 @@ export default function MachineLearningBlogPage() {
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, 60vw"
+                          quality={70}
+                          placeholder="blur"
+                          blurDataURL={BLUR_DATA_URL}
+                          priority
+                          fetchPriority="high"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                       </div>
@@ -336,6 +341,9 @@ export default function MachineLearningBlogPage() {
                               fill
                               className="object-cover transition-transform duration-300 group-hover:scale-105"
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                              quality={70}
+                              placeholder="blur"
+                              blurDataURL={BLUR_DATA_URL}
                             />
                           </div>
                           <div className="p-4">
@@ -458,6 +466,9 @@ export default function MachineLearningBlogPage() {
                               fill
                               className="object-cover transition-transform duration-300 group-hover:scale-105"
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              quality={70}
+                              placeholder="blur"
+                              blurDataURL={BLUR_DATA_URL}
                             />
                           </div>
                           <div className="p-6">
