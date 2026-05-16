@@ -159,21 +159,16 @@ const ContactSection = () => {
               }}
             >
               <div
-                className="w-12 h-12 rounded-lg flex items-center justify-center group"
+                className="w-12 h-12 rounded-lg flex items-center justify-center"
                 style={{ backgroundColor: "var(--accent-subtle)" }}
               >
                 <svg
-                  className="w-6 h-6 transition-all duration-200 group-hover:scale-110"
-                  viewBox="0 0 120 120"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  style={{ display: "block" }}
+                  className="w-6 h-6"
+                  style={{ color: "var(--accent)" }}
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <rect width="120" height="120" rx="24" fill="#fff" />
-                  <path
-                    d="M86.4 33.6H99L72.6 62.1L103.2 99H80.7L61.8 76.2L40.8 99H28.2L56.1 68.1L27 33.6H50.1L66.3 53.7L86.4 33.6ZM82.2 92.1H88.8L48.3 40.2H41.1L82.2 92.1Z"
-                    fill="#000"
-                  />
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </div>
               <div className="flex-1">
