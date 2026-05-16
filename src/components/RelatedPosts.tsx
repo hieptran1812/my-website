@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import type { RelatedPost, RelatedReason } from "@/lib/getRelatedPosts";
 import { getPostCoverUrl } from "@/lib/getPostCover";
+import { BLUR_DATA_URL } from "@/lib/articleImage";
 
 const REASON_ICON: Record<RelatedReason, string> = {
   tags: "🏷️",
@@ -63,7 +64,11 @@ function CardImage({
       sizes={sizes}
       className="related-img"
       unoptimized
-      loading={eager ? "eager" : "lazy"}
+      placeholder="blur"
+      blurDataURL={BLUR_DATA_URL}
+      {...(eager
+        ? { priority: true, fetchPriority: "high" as const }
+        : { loading: "lazy" as const })}
       onError={() => setErrored(true)}
     />
   );

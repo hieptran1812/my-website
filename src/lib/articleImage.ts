@@ -1,5 +1,10 @@
 const PLACEHOLDER_IMAGES = ["/blog-placeholder.jpg", "/images/default-blog.jpg"];
 
+// 8x5 neutral-gray JPEG used as a universal blur placeholder for cover images.
+// Tiny enough to inline; matches the 16:9 cover aspect ratio loosely.
+export const BLUR_DATA_URL =
+  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAFAAgDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAaEAACAgMAAAAAAAAAAAAAAAAAAQIDESEx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAVEQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEQMRAD8AlsmjtnQqr//Z";
+
 /**
  * Generates an OG-style thumbnail URL for articles without a custom image.
  * Uses the /api/og endpoint with article metadata to create a clean, techy thumbnail.

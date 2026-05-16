@@ -6,7 +6,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import ArticleCard from "@/components/ArticleCard";
 import ArticleGrid from "@/components/ArticleGrid";
 import { formatDateMedium, formatDateShort } from "@/lib/dateUtils";
-import { getArticleImageUrl, isGeneratedImage } from "@/lib/articleImage";
+import { getArticleImageUrl, BLUR_DATA_URL } from "@/lib/articleImage";
 
 interface BlogPostMetadata {
   slug: string;
@@ -279,7 +279,11 @@ export default function BlogPage() {
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, 60vw"
-                          unoptimized={isGeneratedImage(featuredArticle)}
+                          quality={70}
+                          placeholder="blur"
+                          blurDataURL={BLUR_DATA_URL}
+                          priority
+                          fetchPriority="high"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                       </div>
@@ -346,7 +350,7 @@ export default function BlogPage() {
                   {/* Four Column Grid of Recent Articles */}
                   {recentArticles.length > 0 && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                      {recentArticles.map((article) => (
+                      {recentArticles.map((article, idx) => (
                         <div
                           key={article.link}
                           className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
@@ -362,7 +366,11 @@ export default function BlogPage() {
                               fill
                               className="object-cover transition-transform duration-300 group-hover:scale-105"
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                              unoptimized={isGeneratedImage(article)}
+                              quality={70}
+                              placeholder="blur"
+                              blurDataURL={BLUR_DATA_URL}
+                              priority={idx < 3}
+                              fetchPriority={idx < 3 ? "high" : "auto"}
                             />
                           </div>
                           <div className="p-4">

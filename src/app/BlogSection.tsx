@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CollectionTag from "@/components/CollectionTag";
 import { BlogPostMetadata, calculateContentReadTime } from "../lib/blog";
-import { getArticleImageUrl } from "../lib/articleImage";
+import { getArticleImageUrl, BLUR_DATA_URL } from "../lib/articleImage";
 import { formatDateMedium } from "../lib/dateUtils";
 
 // Constants
@@ -495,7 +495,10 @@ export default function BlogSection() {
                       style={{ objectFit: "cover", objectPosition: "center" }}
                       className="transition-transform duration-700 group-hover:scale-105"
                       priority
-                      unoptimized={featuredArticle.image.startsWith("/api/og")}
+                      fetchPriority="high"
+                      quality={70}
+                      placeholder="blur"
+                      blurDataURL={BLUR_DATA_URL}
                     />
                     <div className="absolute top-6 left-6">
                       <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-emerald-600 text-sm font-medium rounded-full">
@@ -689,7 +692,11 @@ export default function BlogSection() {
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         style={{ objectFit: "cover" }}
                         className="transition-transform duration-500 group-hover:scale-110"
-                        unoptimized={article.image.startsWith("/api/og")}
+                        quality={70}
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
+                        priority={idx < 2}
+                        fetchPriority={idx < 2 ? "high" : "auto"}
                       />
                     </div>
 

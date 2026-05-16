@@ -26,13 +26,13 @@
  *     "raw":     { elements: [...] }   // escape hatch
  *   }
  *
- * Output: an Excalidraw scene JSON, ready for render-scene.mjs.
+ * Output: an Excalidraw scene JSON, ready for render-scene.mjs. Every
+ * engine (including `graph`, which used to emit Mermaid) now produces
+ * element-form scenes so the validator can enforce containment, overlap,
+ * coverage, and palette invariants uniformly.
  *
  * Usage:
  *   node layout-scene.mjs <input.dsl.json> <output.scene.json>
- *
- * For the `graph` type the output is `{ mermaid, export }` instead — the
- * renderer routes that to window.__renderMermaid in the harness.
  *
  * Pure Node, zero deps. Spawns author-scene.mjs as a subprocess for the
  * shared validator instead of importing it (keeps both files independently
@@ -155,90 +155,164 @@ function assertOneAccent(nodes) {
   }
 }
 
+// Re-wrap a single-line label across lines so the longest line is short —
+// lets the pipeline pick a much bigger font without overflowing the card.
+function wrapLabel(label, maxChars = 13) {
+  const s = String(label)
+  if (s.includes('\n')) return s
+  const words = s.split(' ')
+  if (words.length < 2) return s
+  const lines = []
+  let cur = ''
+  for (const w of words) {
+    if (cur && (cur + ' ' + w).length > maxChars) {
+      lines.push(cur)
+      cur = w
+    } else {
+      cur = cur ? cur + ' ' + w : w
+    }
+  }
+  if (cur) lines.push(cur)
+  return lines.join('\n')
+}
+
+// Build an arrow element from absolute polyline points.
+function arrowFromPoints(absPts, fromId, toId) {
+  const xs = absPts.map((p) => p[0])
+  const ys = absPts.map((p) => p[1])
+  const ox = Math.min(...xs)
+  const oy = Math.min(...ys)
+  return {
+    id: rngId('ar'),
+    type: 'arrow',
+    x: ox,
+    y: oy,
+    width: Math.max(...xs) - ox,
+    height: Math.max(...ys) - oy,
+    strokeWidth: 2,
+    endArrowhead: 'arrow',
+    points: absPts.map(([x, y]) => [x - ox, y - oy]),
+    startBinding: fromId ? { elementId: fromId, focus: 0, gap: 8 } : null,
+    endBinding: toId ? { elementId: toId, focus: 0, gap: 8 } : null,
+  }
+}
+
 // ── Engine: pipeline ────────────────────────────────────────────────────────
+// A long pipeline (≥ 6 stages) wraps into a serpentine of two rows so the
+// cards stay legibly large instead of becoming thin pillars in one ultra-wide
+// row. Row 0 runs left→right, row 1 right→left, joined by a vertical connector.
 function layoutPipeline(dsl) {
   const nodes = dsl.nodes || []
   const edges = dsl.edges || []
   if (nodes.length < 2) die('pipeline needs ≥ 2 nodes')
   assertOneAccent(nodes)
 
-  const nodeW = Math.max(...nodes.map((n) => containerWidthFor(n.label)))
-  const nodeH = Math.max(...nodes.map((n) => containerHeightFor(n.label)))
-  const stride = nodeW + GAP
-  const totalRowW = stride * nodes.length - GAP
-
-  // Scale width so the row fills ≥ 85 % of the canvas, then push height up so
-  // each card's aspect ratio fills the body band — pipelines used to render as
-  // a thin strip floating in a sea of whitespace; now they actually use the
-  // canvas. Cap the aspect ratio at 1:1.4 so very-wide nodes don't become
-  // square (which reads as "stack", not "pipeline").
   const top = bodyTopY()
   const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
-  const targetRowW = Math.max(totalRowW, Math.round(CANVAS_W * 0.88))
-  const scale = targetRowW / totalRowW
+  const n = nodes.length
+
+  const rowsCount = n <= 5 ? 1 : 2
+  const perRow = Math.ceil(n / rowsCount)
+  const labels = nodes.map((nd) => wrapLabel(nd.label))
+
+  const PIPE_GAP = 150
+  const V_GAP = 150
+  const nodeW = Math.max(...labels.map((l) => containerWidthFor(l)))
+  const stride = nodeW + PIPE_GAP
+  const rowW = stride * perRow - PIPE_GAP
+  const targetRowW = Math.max(rowW, Math.round(CANVAS_W * 0.88))
+  const scale = targetRowW / rowW
   const W = Math.round(nodeW * scale)
   const S = Math.round(stride * scale)
-  // Fill the body band: H is a fixed fraction of the body height. With
-  // horizontal arrows between cards, the row reads as a pipeline regardless
-  // of card aspect ratio, so we don't cap by W — using the full vertical
-  // budget removes the empty-canvas problem entirely.
-  const H = Math.round(bodyH * 0.78)
+  // Card height fills the row's vertical share of the body band, capped so a
+  // card never gets taller than 1.5× its width (which would read as a pillar).
+  let H = Math.round(((bodyH - V_GAP * (rowsCount - 1)) / rowsCount) * 0.9)
+  H = Math.min(H, Math.round(W * 1.5))
 
-  const startX = Math.round((CANVAS_W - (S * nodes.length - (S - W))) / 2)
-  const yMid = top + Math.round((bodyH - H) / 2)
+  const maxLine = Math.max(
+    ...labels.map((l) => Math.max(...l.split('\n').map((x) => x.length))),
+  )
+  const labelFont = Math.max(24, Math.min(48, Math.floor((W - 56) / (maxLine * 0.6))))
+  const pipeEdgeFont = 30
+
+  const rowStartX = Math.round((CANVAS_W - (S * perRow - (S - W))) / 2)
+  const blockH = rowsCount * H + V_GAP * (rowsCount - 1)
+  const blockTop = top + Math.round((bodyH - blockH) / 2)
+
+  // Physical placement for logical node index i (serpentine).
+  function posOf(i) {
+    const row = Math.floor(i / perRow)
+    const inRow = i % perRow
+    const col = row % 2 === 0 ? inRow : perRow - 1 - inRow
+    return {
+      x: rowStartX + col * S,
+      y: blockTop + row * (H + V_GAP),
+      row,
+      col,
+    }
+  }
 
   const els = headerElements(dsl.title, dsl.caption)
   const positions = new Map()
-  for (let i = 0; i < nodes.length; i++) {
-    const n = nodes[i]
-    const id = n.id || `n${i}`
-    const x = startX + i * S
-    const y = yMid
-    positions.set(id, { x, y, w: W, h: H })
+  const ids = []
+  for (let i = 0; i < n; i++) {
+    const nd = nodes[i]
+    const id = nd.id || `n${i}`
+    ids.push(id)
+    const p = posOf(i)
+    positions.set(id, { x: p.x, y: p.y, w: W, h: H })
     els.push({
       id,
       type: 'rectangle',
-      x, y, width: W, height: H,
-      backgroundColor: paletteFor(n.kind),
+      x: p.x,
+      y: p.y,
+      width: W,
+      height: H,
+      backgroundColor: paletteFor(nd.kind),
       strokeWidth: 2,
-      label: n.label,
+      label: { text: labels[i], fontSize: labelFont, fontFamily: 1 },
     })
   }
 
-  // Arrows between consecutive nodes (use edges only for labels).
+  // Arrows between consecutive stages — horizontal within a row, a vertical
+  // connector at the serpentine turn.
   const edgeLabel = new Map()
   for (const e of edges) edgeLabel.set(`${e.from}>${e.to}`, e.label || '')
-  for (let i = 0; i < nodes.length - 1; i++) {
-    const a = positions.get(nodes[i].id || `n${i}`)
-    const b = positions.get(nodes[i + 1].id || `n${i + 1}`)
-    const arrowId = rngId('ar')
-    const aw = b.x - (a.x + a.w)
-    els.push({
-      id: arrowId,
-      type: 'arrow',
-      x: a.x + a.w,
-      y: a.y + Math.round(a.h / 2),
-      width: aw,
-      height: 0,
-      strokeWidth: 2,
-      endArrowhead: 'arrow',
-      points: [[0, 0], [aw, 0]],
-    })
+  for (let i = 0; i < n - 1; i++) {
+    const a = positions.get(ids[i])
+    const b = positions.get(ids[i + 1])
+    const pa = posOf(i)
+    const pb = posOf(i + 1)
+    const aMidY = a.y + Math.round(H / 2)
     const lbl = edgeLabel.get(`${nodes[i].id}>${nodes[i + 1].id}`)
-    if (lbl) {
-      const tw = estTextWidth(lbl, EDGE_FONT)
-      els.push({
-        id: rngId('lb'),
-        type: 'text',
-        x: a.x + a.w + Math.round(((b.x - (a.x + a.w)) - tw) / 2),
-        y: a.y + Math.round(a.h / 2) - EDGE_FONT - 12,
-        width: tw,
-        height: estTextHeight(lbl, EDGE_FONT),
-        text: lbl,
-        fontSize: EDGE_FONT,
-        fontFamily: 1,
-        textAlign: 'center',
-      })
+
+    if (pa.row === pb.row) {
+      const leftToRight = pb.col > pa.col
+      const sx = leftToRight ? a.x + W : a.x
+      const ex = leftToRight ? b.x : b.x + W
+      els.push(arrowFromPoints([[sx, aMidY], [ex, aMidY]], ids[i], ids[i + 1]))
+      if (lbl) {
+        const tw = estTextWidth(lbl, pipeEdgeFont)
+        const gap = Math.abs(ex - sx)
+        if (tw <= gap - 16) {
+          els.push({
+            id: rngId('lb'),
+            type: 'text',
+            x: Math.round((sx + ex) / 2 - tw / 2),
+            y: aMidY - pipeEdgeFont - 16,
+            width: tw,
+            height: estTextHeight(lbl, pipeEdgeFont),
+            text: lbl,
+            fontSize: pipeEdgeFont,
+            fontFamily: 1,
+            textAlign: 'center',
+          })
+        }
+      }
+    } else {
+      // Serpentine turn: vertical connector, same physical column.
+      const cx = a.x + Math.round(W / 2)
+      els.push(arrowFromPoints([[cx, a.y + H], [cx, b.y]], ids[i], ids[i + 1]))
     }
   }
   return els
@@ -436,42 +510,323 @@ function layoutMatrix(dsl) {
   return els
 }
 
-// ── Engine: graph (Mermaid output, not element JSON) ───────────────────────
+// ── Engine: graph (element-form layered DAG) ───────────────────────────────
+//
+// Replaces the old Mermaid emission. Mermaid's auto-layout produced nodes
+// whose bounding boxes did not include actual text width, causing right-side
+// clipping in the headless render. The new engine sizes containers from
+// labels, lays nodes out into longest-path layers L→R, and routes orthogonal
+// arrows through the gaps between layers. Title and caption are now rendered
+// at the top like every other engine.
 function layoutGraph(dsl) {
   const nodes = dsl.nodes || []
   const edges = dsl.edges || []
   if (nodes.length < 2) die('graph needs ≥ 2 nodes')
   assertOneAccent(nodes)
 
-  // Emit Mermaid `flowchart LR` source. Per-kind classDef carries the palette.
-  const classDefs = Object.entries(PALETTE)
-    .filter(([_, c]) => c !== 'transparent')
-    .map(([k, c]) => `  classDef ${k} fill:${c},stroke:#1e1e1e,stroke-width:2px`)
-    .join('\n')
-
-  const lines = ['flowchart LR']
+  // 1. Per-node sizes from labels.
+  const sizes = new Map()
   for (const n of nodes) {
-    const id = n.id
-    const lbl = String(n.label).replace(/"/g, '\\"')
-    lines.push(`  ${id}["${lbl}"]`)
-    if (n.kind && n.kind !== 'neutral') lines.push(`  class ${id} ${n.kind};`)
+    sizes.set(n.id, {
+      w: containerWidthFor(n.label),
+      h: containerHeightFor(n.label),
+    })
   }
+
+  // 2. Build adjacency, then assign layers via longest-path from sources.
+  //    Cycles are broken by a recursion-stack guard (back-edge → layer 0).
+  const incoming = new Map(nodes.map((n) => [n.id, []]))
+  const outgoing = new Map(nodes.map((n) => [n.id, []]))
   for (const e of edges) {
-    const lbl = e.label ? `|${String(e.label).replace(/\|/g, '/')}|` : ''
-    lines.push(`  ${e.from} -->${lbl} ${e.to}`)
+    if (incoming.has(e.to)) incoming.get(e.to).push(e.from)
+    if (outgoing.has(e.from)) outgoing.get(e.from).push(e.to)
   }
-  lines.push(classDefs)
-  return {
-    mermaid: lines.join('\n'),
-    export: { padding: 48, theme: 'light', minWidth: 1600, minHeight: 900 },
-    // Title and caption are not added in graph mode — Mermaid lays out nodes
-    // edge-to-edge and adding title text would conflict with that layout.
-    // The figure's prose context (heading and surrounding paragraph) carries
-    // the title/caption role.
-    _claim: dsl.claim,
-    _title: dsl.title,
-    _caption: dsl.caption,
+  const layerOf = new Map()
+  function computeLayer(id, stack) {
+    if (layerOf.has(id)) return layerOf.get(id)
+    if (stack.has(id)) return 0
+    stack.add(id)
+    let L = 0
+    for (const p of incoming.get(id) || []) {
+      L = Math.max(L, computeLayer(p, stack) + 1)
+    }
+    stack.delete(id)
+    layerOf.set(id, L)
+    return L
   }
+  for (const n of nodes) computeLayer(n.id, new Set())
+
+  // 3. Group nodes into layers (preserve DSL order for determinism).
+  const numLayers = Math.max(...layerOf.values()) + 1
+  const layers = Array.from({ length: numLayers }, () => [])
+  for (const n of nodes) layers[layerOf.get(n.id)].push(n)
+
+  // 4. Per-layer UNIFORM node dimensions. Every node in a layer gets that
+  //    layer's max width and max height, so node edges line up on a clean
+  //    grid and every arrow enters/leaves at a predictable coordinate.
+  const V_GAP = 70
+  const layerNodeW = layers.map((L) => Math.max(...L.map((n) => sizes.get(n.id).w)))
+  const layerNodeH = layers.map((L) => Math.max(...L.map((n) => sizes.get(n.id).h)))
+  const layerW = layerNodeW
+  const layerH = layers.map(
+    (L, i) => L.length * layerNodeH[i] + V_GAP * Math.max(0, L.length - 1),
+  )
+
+  // 5. Horizontal stride: pack layers across the canvas. Shrink the gap if
+  //    we'd otherwise overflow; expand it if we'd undercover the canvas.
+  const top = bodyTopY()
+  const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
+  const bodyMaxW = CANVAS_W - 160
+  const bodyMinW = Math.round(CANVAS_W * 0.74)
+  const sumLayerW = layerW.reduce((s, w) => s + w, 0)
+  let H_GAP = 140
+  let totalW = sumLayerW + H_GAP * (numLayers - 1)
+  while (totalW > bodyMaxW && H_GAP > 60) {
+    H_GAP -= 10
+    totalW = sumLayerW + H_GAP * (numLayers - 1)
+  }
+  while (totalW < bodyMinW && H_GAP < 320 && numLayers > 1) {
+    H_GAP += 20
+    totalW = sumLayerW + H_GAP * (numLayers - 1)
+  }
+  // If still wider than canvas, accept overflow but warn — author shrink labels.
+  const startX = Math.max(80, Math.round((CANVAS_W - totalW) / 2))
+  const layerX = []
+  let cx = startX
+  for (let i = 0; i < numLayers; i++) {
+    layerX.push(cx)
+    cx += layerW[i] + H_GAP
+  }
+
+  // 6. Place nodes: each layer is a column of equal-size boxes, the column
+  //    vertically centered around the body midline.
+  const bodyMid = top + Math.round(bodyH / 2)
+  const els = headerElements(dsl.title, dsl.caption)
+  const positions = new Map()
+  for (let li = 0; li < numLayers; li++) {
+    const L = layers[li]
+    const nW = layerNodeW[li]
+    const nH = layerNodeH[li]
+    let ny = bodyMid - Math.round(layerH[li] / 2)
+    for (const n of L) {
+      const nx = layerX[li]
+      positions.set(n.id, { x: nx, y: ny, w: nW, h: nH })
+      els.push({
+        id: n.id,
+        type: 'rectangle',
+        x: nx,
+        y: ny,
+        width: nW,
+        height: nH,
+        backgroundColor: paletteFor(n.kind),
+        strokeWidth: 2,
+        label: n.label,
+      })
+      ny += nH + V_GAP
+    }
+  }
+
+  // 7. Arrows — clean orthogonal routing on the node grid.
+  //    - Adjacent-layer forward edges jog at a SHARED channel x (the gap
+  //      midpoint between the two layers), so fan-out/fan-in reads as one
+  //      tidy routing bus instead of a tangle of crossing diagonals.
+  //    - Multi-layer-jump forward edges and back-edges detour through a
+  //      channel BELOW the node block, at two distinct depths so the two
+  //      kinds never share a lane.
+  //    - Same-layer edges loop on the right side.
+  const ARROW_GAP = 10
+  const labelByTarget = new Map()
+  const labelSeen = new Set()
+
+  let blockBottom = -Infinity
+  for (const p of positions.values()) blockBottom = Math.max(blockBottom, p.y + p.h)
+  const backChannelY = blockBottom + 60
+  const jumpChannelY = blockBottom + 150
+
+  function pushArrow(absPts, fromId, toId, dashed) {
+    const xs = absPts.map((p) => p[0])
+    const ys = absPts.map((p) => p[1])
+    const ox = Math.min(...xs)
+    const oy = Math.min(...ys)
+    els.push({
+      id: rngId('ar'),
+      type: 'arrow',
+      x: ox,
+      y: oy,
+      width: Math.max(...xs) - ox,
+      height: Math.max(...ys) - oy,
+      strokeWidth: 2,
+      strokeStyle: dashed ? 'dashed' : 'solid',
+      endArrowhead: 'arrow',
+      points: absPts.map(([x, y]) => [x - ox, y - oy]),
+      startBinding: { elementId: fromId, focus: 0, gap: ARROW_GAP },
+      endBinding: { elementId: toId, focus: 0, gap: ARROW_GAP },
+    })
+  }
+
+  for (const e of edges) {
+    const a = positions.get(e.from)
+    const b = positions.get(e.to)
+    if (!a || !b) continue
+    const la = layerOf.get(e.from)
+    const lb = layerOf.get(e.to)
+    const aMidY = a.y + Math.round(a.h / 2)
+    const bMidY = b.y + Math.round(b.h / 2)
+    const aMidX = a.x + Math.round(a.w / 2)
+    const bMidX = b.x + Math.round(b.w / 2)
+
+    if (lb === la + 1) {
+      // Adjacent forward: horizontal out, vertical at channel, horizontal in.
+      const sx = a.x + a.w + ARROW_GAP
+      const ex = b.x - ARROW_GAP
+      const cx = layerX[la] + layerW[la] + Math.round(H_GAP / 2)
+      if (Math.abs(bMidY - aMidY) < 6) {
+        pushArrow([[sx, aMidY], [ex, aMidY]], e.from, e.to)
+      } else {
+        pushArrow(
+          [[sx, aMidY], [cx, aMidY], [cx, bMidY], [ex, bMidY]],
+          e.from, e.to,
+        )
+      }
+    } else if (lb > la + 1) {
+      // Multi-layer forward jump: detour below the block (dashed = skips
+      // intermediate layers, which the prose should explain).
+      pushArrow(
+        [
+          [aMidX, a.y + a.h + ARROW_GAP],
+          [aMidX, jumpChannelY],
+          [bMidX, jumpChannelY],
+          [bMidX, b.y + b.h + ARROW_GAP],
+        ],
+        e.from, e.to, true,
+      )
+    } else if (lb === la) {
+      // Same layer: loop out the right side and back in.
+      const sx = Math.max(a.x + a.w, b.x + b.w) + ARROW_GAP + 60
+      pushArrow(
+        [
+          [a.x + a.w + ARROW_GAP, aMidY],
+          [sx, aMidY],
+          [sx, bMidY],
+          [b.x + b.w + ARROW_GAP, bMidY],
+        ],
+        e.from, e.to,
+      )
+    } else {
+      // Back-edge: detour below the block.
+      pushArrow(
+        [
+          [aMidX, a.y + a.h + ARROW_GAP],
+          [aMidX, backChannelY],
+          [bMidX, backChannelY],
+          [bMidX, b.y + b.h + ARROW_GAP],
+        ],
+        e.from, e.to,
+      )
+    }
+
+    // 8. Edge label — adjacent-layer forward edges only. Sits above the
+    //    target node; fan-in into the same target dedupes identical labels
+    //    and stacks distinct ones so no two labels collide.
+    if (e.label && lb === la + 1) {
+      const labelText = String(e.label)
+      const dedupKey = `${e.to}::${labelText}`
+      if (labelSeen.has(dedupKey)) continue
+      labelSeen.add(dedupKey)
+      const tw = estTextWidth(labelText, EDGE_FONT)
+      const th = estTextHeight(labelText, EDGE_FONT)
+      const gap = b.x - (a.x + a.w)
+      if (tw <= gap - 24 && gap > 60) {
+        const idx = labelByTarget.get(e.to)?.length ?? 0
+        if (!labelByTarget.has(e.to)) labelByTarget.set(e.to, [])
+        labelByTarget.get(e.to).push(labelText)
+        const cx = layerX[la] + layerW[la] + Math.round(H_GAP / 2)
+        els.push({
+          id: rngId('lb'),
+          type: 'text',
+          x: Math.round(cx - tw / 2),
+          y: b.y - EDGE_FONT - 16 - idx * (EDGE_FONT + 10),
+          width: tw,
+          height: th,
+          text: labelText,
+          fontSize: EDGE_FONT,
+          fontFamily: 1,
+          textAlign: 'center',
+        })
+      }
+    }
+  }
+
+  // 9. Scale-to-fit: the natural layout is sized by label text, which leaves
+  //    a short graph floating in a thin band with dead space above. Scale
+  //    every body element (nodes, arrows, edge labels) so the figure fills
+  //    the body region. X and Y scale independently — a wide-but-short DAG
+  //    needs more vertical stretch than horizontal — but the aspect-ratio
+  //    distortion is capped at 1.7× so boxes never look cartoonish. Header
+  //    stays fixed; the body is re-centered in the body band.
+  const HEADER_COUNT = 2 // title + caption
+  const body = els.slice(HEADER_COUNT)
+  if (body.length > 0) {
+    // Scale + center on the NODE rectangles only. Arrows (especially
+    // back-edge detours) extend past the node area; including them would
+    // pull the node block off-center and reintroduce a dead band.
+    const rects = body.filter((e) => e.type === 'rectangle')
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
+    for (const e of rects) {
+      x0 = Math.min(x0, e.x)
+      y0 = Math.min(y0, e.y)
+      x1 = Math.max(x1, e.x + (e.width || 0))
+      y1 = Math.max(y1, e.y + (e.height || 0))
+    }
+    const natW = x1 - x0
+    const natH = y1 - y0
+    const targetW = CANVAS_W * 0.92
+    const targetH = bodyH * 0.92
+    // Never scale below 1.0 (fonts would drop under the 22-px floor).
+    let sx = Math.max(1.0, Math.min(targetW / natW, 2.4))
+    let sy = Math.max(1.0, Math.min(targetH / natH, 3.0))
+    // Cap aspect distortion: neither axis may exceed the other by > 1.6×.
+    const DISTORT = 1.6
+    sx = Math.min(sx, sy * DISTORT)
+    sy = Math.min(sy, sx * DISTORT)
+    // Font scales with the SMALLER axis factor. Container width grows by sx
+    // and height by sy; scaling the font by min(sx, sy) guarantees the text
+    // still fits its (independently scaled) container in both dimensions.
+    const fontScale = Math.min(sx, sy)
+    if (sx !== 1.0 || sy !== 1.0) {
+      const newW = natW * sx
+      const offX = Math.round((CANVAS_W - newW) / 2 - x0 * sx)
+      // Top-align the node block just below the caption. Centering a short
+      // graph in the full body band leaves a dead band above it; the export
+      // crops to the content bbox, so a top-aligned wide-short graph simply
+      // renders as a wide-short PNG with no wasted vertical space. The
+      // headroom band scales with sy so edge labels (which sit ~40 px above
+      // their target node, pre-scale) never collide with the caption.
+      const LABEL_HEADROOM = Math.ceil(48 * sy)
+      const offY = Math.round(top + LABEL_HEADROOM - y0 * sy)
+      for (const e of body) {
+        e.x = Math.round(e.x * sx + offX)
+        e.y = Math.round(e.y * sy + offY)
+        if (e.width != null) e.width = Math.round(e.width * sx)
+        if (e.height != null) e.height = Math.round(e.height * sy)
+        if (e.points) e.points = e.points.map(([px, py]) => [Math.round(px * sx), Math.round(py * sy)])
+        if (e.type === 'text') e.fontSize = Math.max(BODY_FONT, Math.round(e.fontSize * fontScale))
+        if (e.type === 'rectangle' && e.label != null) {
+          const t = typeof e.label === 'string' ? e.label : e.label.text
+          e.label = { text: t, fontSize: Math.round(BODY_FONT * fontScale), fontFamily: 1 }
+        }
+      }
+      // Rebuild positions from the scaled rectangles so overlay callouts,
+      // if any, still target the right coordinates.
+      for (const e of body) {
+        if (e.type === 'rectangle' && positions.has(e.id)) {
+          positions.set(e.id, { x: e.x, y: e.y, w: e.width, h: e.height })
+        }
+      }
+    }
+  }
+
+  return { elements: els, positions }
 }
 
 // ── Engine: tree (hierarchical, root at top) ───────────────────────────────
@@ -874,7 +1229,7 @@ function expand(dsl) {
     case 'tree':           return viaScene(layoutTree(dsl))
     case 'timeline':       return viaScene(layoutTimeline(dsl))
     case 'grid':           return viaScene(layoutGrid(dsl))
-    case 'graph':          return { kind: 'mermaid', payload: layoutGraph(dsl) }
+    case 'graph':          return viaScene(layoutGraph(dsl))
     case 'raw': {
       if (!dsl.raw || !Array.isArray(dsl.raw.elements)) die('raw type requires raw.elements array')
       const hasTitle = dsl.raw.elements.some((e) => e.id === 'title')
@@ -911,17 +1266,6 @@ async function main() {
   const expanded = expand(dsl)
 
   await mkdir(dirname(outPath), { recursive: true }).catch(() => {})
-
-  if (expanded.kind === 'mermaid') {
-    // Skip author-scene (it's element-level only). Caller's render-scene.mjs
-    // detects { mermaid: ... } and routes through window.__renderMermaid.
-    await writeFile(outPath, JSON.stringify({
-      ...expanded.payload,
-      claim: dsl.claim,
-    }, null, 2))
-    process.stdout.write(`wrote ${outPath} (mermaid)\n`)
-    return
-  }
 
   // Element-level scenes go through author-scene's buildScene() in-process —
   // no subprocess, no temp file, no second JSON parse. Validation errors

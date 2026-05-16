@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Article } from "@/lib/blog";
-import { getArticleImageUrl, isGeneratedImage } from "@/lib/articleImage";
+import { getArticleImageUrl, BLUR_DATA_URL } from "@/lib/articleImage";
 import FadeInWrapper from "./FadeInWrapper";
 import CollectionTag from "./CollectionTag";
 import { TagList } from "./TagBadge";
@@ -42,7 +42,11 @@ export default function ArticleCard({
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                unoptimized={isGeneratedImage(article)}
+                quality={70}
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
+                priority={index < 3}
+                fetchPriority={index < 3 ? "high" : "auto"}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               <div className="absolute top-4 right-4">
@@ -202,7 +206,11 @@ export default function ArticleCard({
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                unoptimized={isGeneratedImage(article)}
+                quality={70}
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
+                priority={index < 3}
+                fetchPriority={index < 3 ? "high" : "auto"}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
@@ -321,7 +329,11 @@ export default function ArticleCard({
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              unoptimized={isGeneratedImage(article)}
+              quality={70}
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
+              priority={index < 3}
+              fetchPriority={index < 3 ? "high" : "auto"}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
           </div>

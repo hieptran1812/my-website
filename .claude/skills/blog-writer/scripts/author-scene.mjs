@@ -272,6 +272,11 @@ export function validate(els, input = {}) {
   }
 
   // 3. Overlap: any two non-parent/child shapes overlapping is a hard fail.
+  //    Arrows are routes, not bodies — their bbox is the bounding rectangle
+  //    of their points, which may legitimately cross node bboxes (especially
+  //    for orthogonal jogs in dense graphs). Arrow correctness is enforced
+  //    by their bindings (startBinding / endBinding) and verified visually
+  //    on the rendered PNG; bbox-overlap is the wrong tool for them.
   const childOf = new Map()
   for (const e of els) {
     if (e.type === 'text' && e.containerId) childOf.set(e.id, e.containerId)
@@ -281,6 +286,7 @@ export function validate(els, input = {}) {
     for (let j = i + 1; j < els.length; j++) {
       const a = els[i], b = els[j]
       if (isRelated(a, b)) continue
+      if (a.type === 'arrow' || b.type === 'arrow') continue
       // Free-floating text labels are allowed to occupy the same y-band as a
       // distant shape only if their bbox doesn't actually overlap.
       const ax2 = a.x + (a.width || 0), ay2 = a.y + (a.height || 0)

@@ -3343,3 +3343,61 @@ pre code {
 .hljs::-webkit-scrollbar-thumb:hover {
   background: var(--muted);
 }
+
+/* 404 page: glitch + blinking caret */
+.glitch-404 {
+  position: relative;
+  display: inline-block;
+}
+
+.caret-404 {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--accent);
+  animation: caret-blink 1.05s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .glitch-404::before,
+  .glitch-404::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(135deg, var(--accent), var(--accent-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    pointer-events: none;
+  }
+  .glitch-404::before {
+    transform: translate(-2px, 0);
+    mix-blend-mode: screen;
+    animation: glitch-404-x 4.2s infinite steps(1);
+    opacity: 0.7;
+  }
+  .glitch-404::after {
+    transform: translate(2px, 0);
+    mix-blend-mode: screen;
+    animation: glitch-404-y 5.1s infinite steps(1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes glitch-404-x {
+  0%, 92%, 100% { transform: translate(0, 0); }
+  93% { transform: translate(-3px, 1px); }
+  95% { transform: translate(2px, -1px); }
+  97% { transform: translate(-2px, 0); }
+}
+
+@keyframes glitch-404-y {
+  0%, 88%, 100% { transform: translate(0, 0); }
+  89% { transform: translate(2px, -2px); }
+  91% { transform: translate(-2px, 1px); }
+  94% { transform: translate(1px, 2px); }
+}
