@@ -87,10 +87,27 @@ export class SpeechReader {
     preSeekCharIndex: 0,
   };
 
+  // True when a seek happened while playback was paused. The new utterance has
+  // been created but not yet spoken — it waits for the user to resume. Without
+  // this flag, resume() can't tell a "real" pause apart from a seek-while-paused
+  // and speechSynthesis.resume() would be a silent no-op.
+  private seekPendingPlayback = false;
+
   // Mapping between processed text indices and original text indices
   private processedToOriginalMap: Map<number, number> = new Map();
   private originalToProcessedMap: Map<number, number> = new Map();
   private originalText: string = "";
+
+  // Bound handler that cancels speech when the page is unloaded/reloaded.
+  // speechSynthesis lives in the browser process, not the page, so without
+  // this it keeps speaking after a reload or navigation.
+  private readonly handlePageUnload = (): void => {
+    try {
+      speechSynthesis.cancel();
+    } catch {
+      // Ignore — page is going away anyway.
+    }
+  };
 
   constructor(
     container: HTMLElement,
@@ -115,6 +132,11 @@ export class SpeechReader {
 
     this.highlighter = new TextHighlighter(container, options.highlightColors);
     this.setupSpeechSynthesis();
+
+    // Stop speech if the page is reloaded, closed, or navigated away from.
+    // React unmount cleanup does not run reliably on a hard reload.
+    window.addEventListener("pagehide", this.handlePageUnload);
+    window.addEventListener("beforeunload", this.handlePageUnload);
   }
 
   /**
@@ -431,6 +453,7 @@ export class SpeechReader {
     this.pausedTime = 0;
     this.isWaitingAfterHeading = false;
     this.lastHeadingEndIndex = -1;
+    this.seekPendingPlayback = false;
 
     this.currentText = text;
     this.splitTextIntoSegments();
@@ -540,6 +563,16 @@ export class SpeechReader {
    * Resume the speech
    */
   public resume(): void {
+    // A seek performed while paused leaves a freshly-created utterance that was
+    // never handed to the synthesizer. speechSynthesis.resume() can't start it
+    // (nothing is queued), so speak it directly instead.
+    if (this.seekPendingPlayback) {
+      this.seekPendingPlayback = false;
+      this.events.onResume?.();
+      this.resumePlaybackAfterSeek();
+      return;
+    }
+
     if (this.isPlaying && this.isPaused) {
       speechSynthesis.resume();
       // Update state immediately for responsive UI
@@ -569,6 +602,7 @@ export class SpeechReader {
     this.pausedTime = 0;
     this.isWaitingAfterHeading = false;
     this.lastHeadingEndIndex = -1;
+    this.seekPendingPlayback = false;
 
     // Clear text-related state to prevent accumulation
     this.currentText = "";
@@ -664,9 +698,20 @@ export class SpeechReader {
     if (remainingText && remainingText.trim()) {
       this.createSeekUtterance(remainingText, targetProcessedIndex);
 
-      // Resume playback if it was active before seeking
       if (wasPlaying && !wasPaused) {
+        // Was actively playing — resume immediately from the new position.
+        this.seekPendingPlayback = false;
         this.resumePlaybackAfterSeek();
+      } else if (wasPlaying && wasPaused) {
+        // Was paused — stay paused, but remember that the seek utterance is
+        // created and waiting. resume() will speak it. cancelCurrentSpeech()
+        // cleared isPlaying/isPaused, so restore the paused state here.
+        this.isPlaying = true;
+        this.isPaused = true;
+        this.seekPendingPlayback = true;
+      } else {
+        // Not playing at all — leave the utterance idle for a future start().
+        this.seekPendingPlayback = false;
       }
     }
 
@@ -771,15 +816,28 @@ export class SpeechReader {
       return;
     }
 
-    try {
-      speechSynthesis.speak(this.utterance);
-      this.isPlaying = true;
-      this.isPaused = false;
-      this.startProgressTracking();
-      this.startBackupHighlighting();
-    } catch (error) {
-      this.events.onError?.(new Error(`Failed to resume speech: ${error}`));
-    }
+    const utteranceToSpeak = this.utterance;
+
+    // seekTo() calls speechSynthesis.cancel() right before this. Chrome
+    // silently drops a speak() issued too soon after cancel(), which leaves
+    // playback stuck — the user "can't continue" after seeking. Defer the
+    // speak so the synthesis queue flushes first (mirrors the guard in start()).
+    setTimeout(() => {
+      // A newer seek may have replaced the utterance while we waited.
+      if (this.utterance !== utteranceToSpeak) {
+        return;
+      }
+
+      try {
+        speechSynthesis.speak(utteranceToSpeak);
+        this.isPlaying = true;
+        this.isPaused = false;
+        this.startProgressTracking();
+        this.startBackupHighlighting();
+      } catch (error) {
+        this.events.onError?.(new Error(`Failed to resume speech: ${error}`));
+      }
+    }, 200);
   }
 
   /**
@@ -1489,6 +1547,8 @@ export class SpeechReader {
     this.stopProgressTracking();
     this.stopBackupHighlighting();
     this.highlighter.destroy();
+    window.removeEventListener("pagehide", this.handlePageUnload);
+    window.removeEventListener("beforeunload", this.handlePageUnload);
   }
 
   /**

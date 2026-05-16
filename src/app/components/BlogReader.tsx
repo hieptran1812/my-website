@@ -231,7 +231,7 @@ export default function BlogReader({
 
   const stopSpeech = useCallback(() => {
     if (speechReaderRef.current) {
-      speechReaderRef.current.stop();
+      speechReaderRef.current.destroy();
       speechReaderRef.current = null;
     }
     setIsPlaying(false);
@@ -359,9 +359,10 @@ export default function BlogReader({
   // Cleanup speech on unmount
   useEffect(() => {
     return () => {
-      // Cleanup SpeechReader instance
+      // Cleanup SpeechReader instance — destroy() also removes the
+      // page-unload listeners that stop speech on reload.
       if (speechReaderRef.current) {
-        speechReaderRef.current.stop();
+        speechReaderRef.current.destroy();
         speechReaderRef.current = null;
       }
     };
