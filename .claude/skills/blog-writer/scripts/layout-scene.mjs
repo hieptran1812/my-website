@@ -176,6 +176,62 @@ function wrapLabel(label, maxChars = 13) {
   return lines.join('\n')
 }
 
+// Greedy word-wrap to a maximum character width per line.
+function wrapToChars(words, maxChars) {
+  const lines = []
+  let cur = ''
+  for (const w of words) {
+    if (cur && (cur + ' ' + w).length > maxChars) {
+      lines.push(cur)
+      cur = w
+    } else {
+      cur = cur ? cur + ' ' + w : w
+    }
+  }
+  if (cur) lines.push(cur)
+  return lines.join('\n')
+}
+
+// Pick the largest font (and matching line-wrap) that lets `rawLabel` fill a
+// box of `boxW × boxH` without overflowing. Engines whose box size is driven by
+// the layout grid (grid, matrix, stack, before-after, tree, timeline) used to
+// emit plain-string labels, which author-scene.mjs renders at a fixed 22-px
+// font — illegibly small inside a large cell. fitLabel returns a label object
+// so the text scales WITH its container instead of floating tiny inside it.
+//
+// It sweeps every candidate line width, wraps to it, and computes the font the
+// wrap allows on each axis (width-bound and height-bound); the wrap that yields
+// the largest min(widthFont, heightFont) wins. Padding matches the validator's
+// containment rule (estTextWidth + 48, estTextHeight + 40) so the result is
+// always valid by construction.
+function fitLabel(rawLabel, boxW, boxH, opts = {}) {
+  const minFont = opts.minFont ?? BODY_FONT
+  const maxFont = opts.maxFont ?? 44
+  const family = opts.fontFamily ?? 1
+  const factor = family === 3 ? 0.62 : 0.6
+  const words = String(rawLabel ?? '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .split(' ')
+    .filter(Boolean)
+  if (words.length === 0) return { text: '', fontSize: minFont, fontFamily: family }
+  const availW = Math.max(20, boxW - 48)
+  const availH = Math.max(20, boxH - 40)
+  const longestWord = Math.max(1, ...words.map((w) => w.length))
+  let best = null
+  for (let maxChars = longestWord; maxChars <= Math.max(longestWord, 48); maxChars++) {
+    const wrapped = wrapToChars(words, maxChars)
+    const lines = wrapped.split('\n')
+    const longestLine = Math.max(1, ...lines.map((l) => l.length))
+    const fByW = availW / (longestLine * factor)
+    const fByH = availH / (lines.length * 1.25)
+    const f = Math.min(fByW, fByH)
+    if (!best || f > best.f) best = { f, text: wrapped }
+  }
+  const fontSize = Math.max(minFont, Math.min(maxFont, Math.floor(best.f)))
+  return { text: best.text, fontSize, fontFamily: family }
+}
+
 // Build an arrow element from absolute polyline points.
 function arrowFromPoints(absPts, fromId, toId) {
   const xs = absPts.map((p) => p[0])
@@ -295,13 +351,17 @@ function layoutPipeline(dsl) {
         const tw = estTextWidth(lbl, pipeEdgeFont)
         const gap = Math.abs(ex - sx)
         if (tw <= gap - 16) {
+          const lh = estTextHeight(lbl, pipeEdgeFont)
           els.push({
             id: rngId('lb'),
             type: 'text',
             x: Math.round((sx + ex) / 2 - tw / 2),
-            y: aMidY - pipeEdgeFont - 16,
+            // Sit the whole label bbox 14 px above the arrow line — using the
+            // real text height (not just one font-size) keeps multi-line edge
+            // labels off the stroke too.
+            y: Math.round(aMidY - lh - 14),
             width: tw,
-            height: estTextHeight(lbl, pipeEdgeFont),
+            height: lh,
             text: lbl,
             fontSize: pipeEdgeFont,
             fontFamily: 1,
@@ -346,7 +406,7 @@ function layoutStack(dsl) {
       x, y, width: w, height: layerH - 24,
       backgroundColor: paletteFor(n.kind),
       strokeWidth: 2,
-      label: n.label,
+      label: fitLabel(n.label, w, layerH - 24),
     })
   }
   return els
@@ -418,14 +478,14 @@ function layoutBeforeAfter(dsl) {
       x: leftX, y: yi, width: colW, height: nodeH,
       backgroundColor: paletteFor(bn.kind),
       strokeWidth: 2,
-      label: bn.label,
+      label: fitLabel(bn.label, colW, nodeH),
     })
     els.push({
       id: an.id || `a${i}`, type: 'rectangle',
       x: rightX, y: yi, width: colW, height: nodeH,
       backgroundColor: paletteFor(an.kind),
       strokeWidth: 2,
-      label: an.label,
+      label: fitLabel(an.label, colW, nodeH),
     })
     // Arrow between rows
     {
@@ -503,7 +563,7 @@ function layoutMatrix(dsl) {
         height: cellH - 6,
         backgroundColor: paletteFor(c.kind),
         strokeWidth: 2,
-        label: c.label || '',
+        label: fitLabel(c.label || '', cellW - 6, cellH - 6),
       })
     }
   }
@@ -561,21 +621,69 @@ function layoutGraph(dsl) {
   const layers = Array.from({ length: numLayers }, () => [])
   for (const n of nodes) layers[layerOf.get(n.id)].push(n)
 
+  // 3b. Barycenter ordering — reduce edge crossings so the DAG reads as a
+  //     scientific layered graph rather than a tangle. Each node is pulled
+  //     toward the mean row-index of its neighbours in the adjacent layer;
+  //     three alternating sweeps (down, up, down) settle small DAGs without a
+  //     full crossing-minimisation solver. Neighbour-less nodes keep their
+  //     DSL order (Infinity barycenter sorts stably to the bottom).
+  function orderSweep(dir) {
+    const lo = dir > 0 ? 1 : numLayers - 2
+    const cond = (li) => (dir > 0 ? li < numLayers : li >= 0)
+    for (let li = lo; cond(li); li += dir) {
+      const adj = layers[li - dir]
+      const pos = new Map(adj.map((n, i) => [n.id, i]))
+      const bary = new Map()
+      for (const n of layers[li]) {
+        const neigh = dir > 0 ? incoming.get(n.id) : outgoing.get(n.id)
+        const idxs = (neigh || []).map((m) => pos.get(m)).filter((v) => v != null)
+        bary.set(n.id, idxs.length ? idxs.reduce((a, b) => a + b, 0) / idxs.length : Infinity)
+      }
+      layers[li] = layers[li]
+        .map((n, i) => [n, i])
+        .sort(([a, ia], [b, ib]) => {
+          const x = bary.get(a.id), y = bary.get(b.id)
+          if (x === y) return ia - ib // stable: preserve prior order on ties
+          return x - y
+        })
+        .map(([n]) => n)
+    }
+  }
+  if (numLayers > 1) { orderSweep(1); orderSweep(-1); orderSweep(1) }
+
   // 4. Per-layer UNIFORM node dimensions. Every node in a layer gets that
   //    layer's max width and max height, so node edges line up on a clean
   //    grid and every arrow enters/leaves at a predictable coordinate.
-  const V_GAP = 70
+  const top = bodyTopY()
+  const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
   const layerNodeW = layers.map((L) => Math.max(...L.map((n) => sizes.get(n.id).w)))
   const layerNodeH = layers.map((L) => Math.max(...L.map((n) => sizes.get(n.id).h)))
   const layerW = layerNodeW
+
+  // A near-linear graph (one node per layer everywhere) is really a pipeline —
+  // routed as a graph it degrades into a single ultra-wide row that can never
+  // fill the canvas vertically. Send the author to the right figure type.
+  const maxPerLayer = Math.max(...layers.map((L) => L.length))
+  if (maxPerLayer < 2) {
+    die('graph has at most one node per layer — this is a linear flow; author it as type "pipeline" (which serpentines and fills the canvas) instead of "graph"')
+  }
+
+  // Vertical gap between sibling nodes in a layer. Spread the busiest layer's
+  // siblings to fill ~82% of the body band so a sparse, wide DAG (few branches,
+  // many layers) reads as a proper scientific layered graph rather than a thin
+  // ribbon floating in dead space. Floor of 70 px keeps dense layers legible.
+  const nodeHRep = Math.max(...layerNodeH)
+  const desiredBlockH = bodyH * 0.82
+  const V_GAP = Math.max(
+    70,
+    Math.round((desiredBlockH - maxPerLayer * nodeHRep) / (maxPerLayer - 1)),
+  )
   const layerH = layers.map(
     (L, i) => L.length * layerNodeH[i] + V_GAP * Math.max(0, L.length - 1),
   )
 
   // 5. Horizontal stride: pack layers across the canvas. Shrink the gap if
   //    we'd otherwise overflow; expand it if we'd undercover the canvas.
-  const top = bodyTopY()
-  const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
   const bodyMaxW = CANVAS_W - 160
   const bodyMinW = Math.round(CANVAS_W * 0.74)
   const sumLayerW = layerW.reduce((s, w) => s + w, 0)
@@ -635,8 +743,6 @@ function layoutGraph(dsl) {
   //      kinds never share a lane.
   //    - Same-layer edges loop on the right side.
   const ARROW_GAP = 10
-  const labelByTarget = new Map()
-  const labelSeen = new Set()
 
   let blockBottom = -Infinity
   for (const p of positions.values()) blockBottom = Math.max(blockBottom, p.y + p.h)
@@ -725,27 +831,27 @@ function layoutGraph(dsl) {
       )
     }
 
-    // 8. Edge label — adjacent-layer forward edges only. Sits above the
-    //    target node; fan-in into the same target dedupes identical labels
-    //    and stacks distinct ones so no two labels collide.
+    // 8. Edge label — adjacent-layer forward edges only. The label sits ABOVE
+    //    the source-side horizontal run of the arrow (from the source node's
+    //    right edge to the routing channel at cx), never on the vertical
+    //    channel itself. That keeps it provably clear of the arrow stroke: it
+    //    is 14 px above its own horizontal run and stays left of cx, so it
+    //    cannot touch the vertical jog. Distinct edges leave their sources at
+    //    distinct y-bands (≥ one node height + V_GAP apart), so labels never
+    //    collide with each other either — no dedup/stacking needed.
     if (e.label && lb === la + 1) {
       const labelText = String(e.label)
-      const dedupKey = `${e.to}::${labelText}`
-      if (labelSeen.has(dedupKey)) continue
-      labelSeen.add(dedupKey)
       const tw = estTextWidth(labelText, EDGE_FONT)
       const th = estTextHeight(labelText, EDGE_FONT)
-      const gap = b.x - (a.x + a.w)
-      if (tw <= gap - 24 && gap > 60) {
-        const idx = labelByTarget.get(e.to)?.length ?? 0
-        if (!labelByTarget.has(e.to)) labelByTarget.set(e.to, [])
-        labelByTarget.get(e.to).push(labelText)
-        const cx = layerX[la] + layerW[la] + Math.round(H_GAP / 2)
+      const sx = a.x + a.w + ARROW_GAP
+      const cx = layerX[la] + layerW[la] + Math.round(H_GAP / 2)
+      const runW = cx - sx
+      if (tw <= runW - 16 && runW > 48) {
         els.push({
           id: rngId('lb'),
           type: 'text',
-          x: Math.round(cx - tw / 2),
-          y: b.y - EDGE_FONT - 16 - idx * (EDGE_FONT + 10),
+          x: Math.round((sx + cx) / 2 - tw / 2),
+          y: Math.round(aMidY - th - 14),
           width: tw,
           height: th,
           text: labelText,
@@ -945,7 +1051,7 @@ function layoutTree(dsl) {
       x: p.x, y: p.y, width: p.w, height: p.h,
       backgroundColor: paletteFor(p.node.kind),
       strokeWidth: 2,
-      label: p.node.label,
+      label: fitLabel(p.node.label, p.w, p.h),
     })
   }
   return { elements: els, positions }
@@ -1023,7 +1129,7 @@ function layoutTimeline(dsl) {
       x: cardX, y: cardY, width: cardW, height: cardH,
       backgroundColor: paletteFor(e.kind),
       strokeWidth: 2,
-      label: e.date ? `${e.date}\n${e.label}` : e.label,
+      label: fitLabel(e.date ? `${e.date} ${e.label}` : e.label, cardW, cardH),
     })
   }
   return { elements: els, positions }
@@ -1069,7 +1175,7 @@ function layoutGrid(dsl) {
       x, y, width: w, height: h,
       backgroundColor: paletteFor(n.kind),
       strokeWidth: 2,
-      label: n.label,
+      label: fitLabel(n.label, w, h),
     })
   }
 
@@ -1110,16 +1216,21 @@ function layoutGrid(dsl) {
     if (e.label) {
       const tw = estTextWidth(e.label, EDGE_FONT)
       const th = estTextHeight(e.label, EDGE_FONT)
-      const isVertical = Math.abs(ty - sy) > Math.abs(tx - sx)
-      // For vertical edges (same column or near-same): use the line midpoint
-      // and offset sideways by enough to clear the adjacent cells. For
-      // horizontal/diagonal edges: bias toward source (35% along) and offset
-      // upward — keeps the label out of long-rowspan target cells.
-      const t = isVertical ? 0.5 : 0.35
-      const px = sx + t * (tx - sx)
-      const py = sy + t * (ty - sy)
-      const lx = isVertical ? Math.round(px + 32) : Math.round(px - tw / 2)
-      const ly = isVertical ? Math.round(py - th / 2) : Math.round(py - th - 22)
+      // Offset the label PERPENDICULAR to the arrow segment so it never lands
+      // on the stroke, whatever the angle. The normal is forced to the upper
+      // side (negative y) for horizontal/diagonal runs; for a purely vertical
+      // run the normal is horizontal and the label sits to one side. The
+      // clearance is half the label height plus 16 px so the bbox stays off
+      // the line by construction.
+      const segdx = tx - sx, segdy = ty - sy
+      const len = Math.hypot(segdx, segdy) || 1
+      let nx = -segdy / len, ny = segdx / len
+      if (ny > 0 || (ny === 0 && nx < 0)) { nx = -nx; ny = -ny }
+      const clear = th / 2 + 16
+      const mx = sx + 0.5 * segdx
+      const my = sy + 0.5 * segdy
+      const lx = Math.round(mx + nx * clear - tw / 2)
+      const ly = Math.round(my + ny * clear - th / 2)
       els.push({
         id: rngId('lb'),
         type: 'text',

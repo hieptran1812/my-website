@@ -174,6 +174,30 @@ function estTextHeight(text, fontSize) {
   return Math.ceil(lines * fontSize * 1.25)
 }
 
+// Liang-Barsky segment ↔ axis-aligned-rect intersection test. Returns true
+// when the segment p0→p1 passes through (or into) the rectangle. Used to catch
+// text labels drawn on top of arrow strokes — the bbox-overlap rule skips
+// arrows, so a label sitting on a routing channel would otherwise slip through.
+function segIntersectsRect(p0, p1, x0, y0, x1, y1) {
+  const ax = p0[0], ay = p0[1]
+  const dx = p1[0] - ax, dy = p1[1] - ay
+  let t0 = 0, t1 = 1
+  const edges = [
+    [-dx, ax - x0], [dx, x1 - ax],
+    [-dy, ay - y0], [dy, y1 - ay],
+  ]
+  for (const [p, q] of edges) {
+    if (p === 0) {
+      if (q < 0) return false // parallel and outside this slab
+    } else {
+      const r = q / p
+      if (p < 0) { if (r > t1) return false; if (r > t0) t0 = r }
+      else { if (r < t0) return false; if (r < t1) t1 = r }
+    }
+  }
+  return t0 <= t1
+}
+
 function bbox(els) {
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
   for (const e of els) {
@@ -295,6 +319,33 @@ export function validate(els, input = {}) {
       const overlapY = Math.min(ay2, by2) - Math.max(a.y, b.y)
       if (overlapX > 0 && overlapY > 0) {
         errors.push(`overlap between ${a.id} (${a.type}) and ${b.id} (${b.type}): ${overlapX.toFixed(0)}×${overlapY.toFixed(0)} px`)
+      }
+    }
+  }
+
+  // 3b. Text-over-arrow collision: a label drawn across an arrow's stroke is
+  //     illegible and the figure-quality rules forbid it ("edge labels live in
+  //     the gap, not on the line"). Rule 3 skips arrows, so check every
+  //     free-floating text label against each arrow's actual polyline segments.
+  //     The label bbox is inset 4 px so a label that merely grazes an
+  //     arrowhead corner isn't flagged.
+  for (const t of els) {
+    if (t.type !== 'text' || t.containerId) continue
+    const tx0 = t.x + 4, ty0 = t.y + 4
+    const tx1 = t.x + (t.width || 0) - 4, ty1 = t.y + (t.height || 0) - 4
+    if (tx1 <= tx0 || ty1 <= ty0) continue
+    for (const ar of els) {
+      if (ar.type !== 'arrow' && ar.type !== 'line') continue
+      const pts = (ar.points || []).map(([px, py]) => [ar.x + px, ar.y + py])
+      let hit = false
+      for (let k = 0; k + 1 < pts.length && !hit; k++) {
+        if (segIntersectsRect(pts[k], pts[k + 1], tx0, ty0, tx1, ty1)) hit = true
+      }
+      if (hit) {
+        errors.push(
+          `text element ${t.id} ("${oneLine(t.text)}") is drawn over ${ar.type} ${ar.id} — edge labels must sit in the gap clear of the stroke (above a horizontal run, beside a vertical one)`,
+        )
+        break
       }
     }
   }

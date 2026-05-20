@@ -180,6 +180,7 @@ Arrow accuracy is non-negotiable: a diagram with a reversed, dangling, or mis-an
 - **Edge labels live in the gap, not on the line.** For horizontal arrows, place the label above the arrow at `y = arrow.y - fontSize - 12`; for vertical arrows, place it to the right at `x = arrow.x + 16`. Center it on the arrow midpoint.
 - **Label width must fit the gap.** If the gap between source and target is `G` px, the label's rendered width (using the sizing math above) must be `≤ G - 24`. Otherwise shorten the label or widen the gap — never let a label cross a node bbox or a parallel arrow.
 - **One label per arrow, ≤ 4 words or one quantity** (e.g., `~12 µs`, `1 token/step`, `evict LRU`). Longer commentary belongs in a Cascadia annotation near the source node, not on the edge.
+- **The validator now enforces this geometrically.** `author-scene.mjs` runs a segment-vs-bbox test (`segIntersectsRect`) of every free-floating text element against every arrow/line polyline segment. A label whose bbox (inset 4 px) crosses any arrow stroke is a hard fail: `text element … is drawn over arrow …`. The DSL layout engines already place labels clear of the stroke — above the source-side horizontal run for `graph`, above the arrow for `pipeline`, perpendicular-offset for `grid` — so this only bites hand-authored `type: "raw"` figures. When it fires, move the label into the gap; don't widen the bbox to dodge it.
 
 ### Emphasis
 
@@ -224,6 +225,10 @@ A failing sharpness gate usually means under-density: too few elements, sparse l
 For canned shapes (pipeline, stack, before-after, matrix, tree, timeline, grid, graph), you may write a DSL JSON and convert with:
 
 > **`graph` engine note (post-2026-05 update):** the `graph` type used to emit Mermaid; it now produces deterministic element-form layered DAG layouts with a real title and caption rendered at the top. Nodes in a layer share one uniform size so edges align on a clean grid. Arrows are bound to source/target IDs and routed orthogonally: adjacent-layer edges jog at a shared channel x (the inter-layer gap midpoint) so fan-out/fan-in reads as one tidy bus; multi-layer-jump and back-edges detour through channels below the node block. The figure is then scaled to fill the canvas and top-aligned under the caption (no dead band). The validator no longer flags arrow ↔ shape bbox overlap, since arrows are routes and their correctness is enforced by binding fidelity and visual review.
+>
+> **Crossing reduction & spacing (post-2026-05 update):** within each layer, nodes are reordered by a barycenter sweep (down, up, down) that pulls every node toward the mean position of its neighbours in the adjacent layer — this minimises edge crossings so the DAG reads as a scientific layered graph, not a tangle. The vertical gap between sibling nodes is adaptive: a sparse, wide graph (few branches, many layers) spreads its busiest layer to fill ~82% of the body band instead of floating as a thin ribbon. Edge labels are placed above the *source-side* horizontal run of each arrow (never on the vertical routing channel), so they are provably clear of every stroke.
+>
+> **A linear flow is not a graph.** If every layer has at most one node, the `graph` engine rejects the DSL (`graph has at most one node per layer …`) — that figure is a `pipeline`, which serpentines into rows and fills the canvas. Use `graph` only when the flow actually branches or merges.
 >
 > **Author `graph` DSLs as true DAGs.** A cyclic edge set (A→B→A) cannot layer cleanly in any engine and renders as a tangle of detour arrows. Model the *flow* forward: e.g. for a request/response cycle, route the response to a distinct "result" node rather than back to the origin.
 

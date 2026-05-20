@@ -7,7 +7,7 @@
   "properties": {
     "type": {
       "enum": ["pipeline", "stack", "before-after", "matrix", "tree", "timeline", "grid", "graph", "raw"],
-      "description": "Selects the layout engine. pipeline=horizontal flow; stack=nested layers; before-after=two columns; matrix=row×col grid; tree=hierarchy; timeline=horizontal events; grid=free placement on N×M cells with optional rowspan/colspan and edges (this covers most ex-raw figures); graph=Mermaid+dagre; raw=hand-authored elements (last resort)."
+      "description": "Selects the layout engine. pipeline=horizontal flow; stack=nested layers; before-after=two columns; matrix=row×col grid; tree=hierarchy; timeline=horizontal events; grid=free placement on N×M cells with optional rowspan/colspan and edges (this covers most ex-raw figures); graph=deterministic layered DAG with barycenter crossing-reduction (must branch/merge — a one-node-per-layer flow is a pipeline, not a graph); raw=hand-authored elements (last resort)."
     },
     "title": {
       "type": "string",
