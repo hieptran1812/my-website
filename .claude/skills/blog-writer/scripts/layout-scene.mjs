@@ -668,16 +668,28 @@ function layoutGraph(dsl) {
     die('graph has at most one node per layer — this is a linear flow; author it as type "pipeline" (which serpentines and fills the canvas) instead of "graph"')
   }
 
-  // Vertical gap between sibling nodes in a layer. Spread the busiest layer's
-  // siblings to fill ~82% of the body band so a sparse, wide DAG (few branches,
-  // many layers) reads as a proper scientific layered graph rather than a thin
-  // ribbon floating in dead space. Floor of 70 px keeps dense layers legible.
+  // Vertical gap between sibling nodes in a layer. For dense layers (≥ 4
+  // siblings) spread to fill ~82% of the body band; for sparse layers (2-3
+  // siblings) cap the gap so siblings don't get pushed to the canvas extremes
+  // — that creates absurdly long inter-layer arrows when the *adjacent* layer
+  // is a singleton sitting on the body midline. The step-9 scale-to-fit will
+  // still grow the figure to fill the canvas, but uniformly, not by yanking
+  // 2 nodes apart by 800 px.
   const nodeHRep = Math.max(...layerNodeH)
-  const desiredBlockH = bodyH * 0.82
-  const V_GAP = Math.max(
-    70,
-    Math.round((desiredBlockH - maxPerLayer * nodeHRep) / (maxPerLayer - 1)),
-  )
+  let V_GAP
+  if (maxPerLayer >= 4) {
+    const desiredBlockH = bodyH * 0.82
+    V_GAP = Math.max(
+      80,
+      Math.round((desiredBlockH - maxPerLayer * nodeHRep) / (maxPerLayer - 1)),
+    )
+  } else {
+    // 2-3 siblings: a clean, compact gap. Roughly one node-height apart is
+    // the canonical "scientific diagram" spacing; never exceed 1.4× nodeH so
+    // sibling-to-singleton arrows stay short.
+    V_GAP = Math.min(Math.round(nodeHRep * 1.2), 220)
+    V_GAP = Math.max(V_GAP, 90)
+  }
   const layerH = layers.map(
     (L, i) => L.length * layerNodeH[i] + V_GAP * Math.max(0, L.length - 1),
   )
@@ -1068,7 +1080,28 @@ function layoutTimeline(dsl) {
   const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
   const bodyW = Math.round(CANVAS_W * 0.92)
   const startX = Math.round((CANVAS_W - bodyW) / 2)
-  const axisY = top + Math.round(bodyH / 2)
+
+  // Cards are alternated above/below the axis. Compute the actual band each
+  // side needs (max-card-height + connector gap), then place the axis so the
+  // composite (cards-above + axis + cards-below) is vertically CENTERED in
+  // the body band — not the axis itself. Centering the axis leaves a big
+  // dead band above the upper cards whenever cards are short.
+  const cardSizes = events.map((e) => ({
+    w: containerWidthFor(e.label),
+    h: containerHeightFor(e.label) + (e.date ? 36 : 0),
+  }))
+  const CONNECTOR_GAP = 60
+  const maxAboveH = Math.max(
+    0,
+    ...events.map((_, i) => (i % 2 === 0 ? cardSizes[i].h : 0)),
+  )
+  const maxBelowH = Math.max(
+    0,
+    ...events.map((_, i) => (i % 2 === 1 ? cardSizes[i].h : 0)),
+  )
+  const composite = maxAboveH + CONNECTOR_GAP + 28 + CONNECTOR_GAP + maxBelowH
+  const slack = Math.max(0, bodyH - composite)
+  const axisY = top + Math.round(slack / 2) + maxAboveH + CONNECTOR_GAP + 14
 
   const els = headerElements(dsl.title, dsl.caption)
   // Axis line.
@@ -1088,14 +1121,13 @@ function layoutTimeline(dsl) {
   for (let i = 0; i < events.length; i++) {
     const e = events[i]
     const cx = Math.round(startX + i * stride)
-    const cy = axisY
     const above = i % 2 === 0 // alternate above/below
-    const cardW = containerWidthFor(e.label)
-    const cardH = containerHeightFor(e.label) + (e.date ? 36 : 0)
+    const cardW = cardSizes[i].w
+    const cardH = cardSizes[i].h
     const cardX = Math.round(cx - cardW / 2)
     const cardY = above
-      ? axisY - 80 - cardH
-      : axisY + 80
+      ? axisY - CONNECTOR_GAP - cardH
+      : axisY + CONNECTOR_GAP
     positions.set(e.id || `t${i}`, { x: cardX, y: cardY, w: cardW, h: cardH })
 
     // Marker dot on the axis.
@@ -1131,6 +1163,37 @@ function layoutTimeline(dsl) {
       strokeWidth: 2,
       label: fitLabel(e.date ? `${e.date} ${e.label}` : e.label, cardW, cardH),
     })
+  }
+
+  // Scale-to-fit: the natural card height (~100 px) leaves a sparse, ribbon-thin
+  // timeline floating in dead vertical space on a 1380-px-tall body band. Scale
+  // the cards (and connector lines) vertically so the composite fills ~88% of
+  // the body band; X is left untouched so axis stride and card horizontal
+  // spacing stay clean. Anchor the scale around the axis so cards above and
+  // below grow symmetrically.
+  const HEADER_COUNT = 2
+  const body = els.slice(HEADER_COUNT)
+  // Bounding-box of every body element including connector lines and cards.
+  let y0 = Infinity, y1 = -Infinity
+  for (const e of body) {
+    y0 = Math.min(y0, e.y)
+    y1 = Math.max(y1, e.y + (e.height || 0))
+  }
+  const natH = y1 - y0
+  const targetH = bodyH * 0.88
+  const sy = Math.max(1.0, Math.min(targetH / natH, 2.6))
+  if (sy > 1.0) {
+    const offY = Math.round(top + (bodyH - natH * sy) / 2 - y0 * sy)
+    for (const e of body) {
+      e.y = Math.round(e.y * sy + offY)
+      if (e.height != null) e.height = Math.round(e.height * sy)
+      if (e.points) e.points = e.points.map(([px, py]) => [px, Math.round(py * sy)])
+      // Cards: regrow font to fit the taller box.
+      if (e.type === 'rectangle' && e.label != null) {
+        const t = typeof e.label === 'string' ? e.label : e.label.text
+        e.label = fitLabel(t, e.width, e.height)
+      }
+    }
   }
   return { elements: els, positions }
 }
