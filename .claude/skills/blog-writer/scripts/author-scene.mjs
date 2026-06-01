@@ -56,15 +56,19 @@ function rngId(prefix = 'el') {
 // convertToExcalidrawElements (called inside the headless harness) to do the
 // rest. Don't over-specify — convertToExcalidrawElements normalizes the gaps.
 function defaultsForElement(el) {
+  // Arrows render with thinner strokes and zero roughness so the routing
+  // reads as a clean diagram line, not a sketchy bold gesture. Containers
+  // keep the sketchy roughness 1 for visual warmth.
+  const isArrow = el.type === 'arrow' || el.type === 'line'
   return {
     id: el.id ?? rngId(el.type === 'text' ? 'tx' : 'sh'),
     angle: 0,
-    strokeColor: el.strokeColor ?? '#1e1e1e',
+    strokeColor: el.strokeColor ?? (isArrow ? '#343a40' : '#1e1e1e'),
     backgroundColor: el.backgroundColor ?? 'transparent',
     fillStyle: el.fillStyle ?? 'hachure',
-    strokeWidth: el.strokeWidth ?? 2,
+    strokeWidth: el.strokeWidth ?? (isArrow ? 1.25 : 2),
     strokeStyle: el.strokeStyle ?? 'solid',
-    roughness: el.roughness ?? 1,
+    roughness: el.roughness ?? (isArrow ? 0 : 1),
     opacity: el.opacity ?? 100,
     roundness: el.roundness ?? (el.type === 'rectangle' ? { type: 3 } : null),
     seed: el.seed ?? Math.floor(Math.random() * 2 ** 31),
@@ -323,6 +327,40 @@ export function validate(els, input = {}) {
     }
   }
 
+  // 3c. Arrow-through-node collision: every polyline segment of every arrow
+  //     must clear every non-endpoint shape's bbox. Endpoints (source/target,
+  //     identified by startBinding/endBinding.elementId) and parent/child
+  //     containers are exempt — the arrow legitimately lands on those. A 6 px
+  //     inset on the obstacle bbox prevents false positives for arrows that
+  //     legally graze an adjacent node along the routing channel. This catches
+  //     fan-out/fan-in tangles in `graph` figures (e.g. h_t → head_2 piercing
+  //     head_1) and any mis-routed hand-authored `raw` arrow.
+  for (const ar of els) {
+    if (ar.type !== 'arrow') continue
+    const srcId = ar.startBinding?.elementId
+    const dstId = ar.endBinding?.elementId
+    const pts = (ar.points || []).map(([px, py]) => [ar.x + px, ar.y + py])
+    if (pts.length < 2) continue
+    for (const s of els) {
+      if (s.type === 'arrow' || s.type === 'line' || s.type === 'text') continue
+      if (s.id === srcId || s.id === dstId) continue
+      if (isRelated(ar, s)) continue
+      const x0 = s.x + 6, y0 = s.y + 6
+      const x1 = s.x + (s.width || 0) - 6, y1 = s.y + (s.height || 0) - 6
+      if (x1 <= x0 || y1 <= y0) continue
+      let hit = false
+      for (let k = 0; k + 1 < pts.length && !hit; k++) {
+        if (segIntersectsRect(pts[k], pts[k + 1], x0, y0, x1, y1)) hit = true
+      }
+      if (hit) {
+        errors.push(
+          `arrow ${ar.id} crosses non-endpoint shape ${s.id} (${s.type}) — re-route through a clear channel (see diagram-authoring.md §Arrows: every in/out leg must sit in empty space; push the channel past blocking siblings or detour below the block)`,
+        )
+        break
+      }
+    }
+  }
+
   // 3b. Text-over-arrow collision: a label drawn across an arrow's stroke is
   //     illegible and the figure-quality rules forbid it ("edge labels live in
   //     the gap, not on the line"). Rule 3 skips arrows, so check every
@@ -382,8 +420,12 @@ export function validate(els, input = {}) {
   const caption = String(input._caption || '').trim()
   if (caption) {
     const titleText = String(els.find((e) => e.id === 'title')?.text || '').trim()
+    // Caption text may be word-wrapped (\n inserted between words) to fit
+    // canvas width. Compare on normalized whitespace so the match survives.
+    const norm = (s) => String(s).replace(/\s+/g, ' ').trim()
+    const capNorm = norm(caption)
     const matchingCap = els.find(
-      (e) => e.type === 'text' && String(e.text).trim() === caption,
+      (e) => e.type === 'text' && norm(e.text) === capNorm,
     )
     if (!matchingCap) {
       errors.push(`scene declares _caption but no text element matches it: "${oneLine(caption)}"`)
@@ -392,7 +434,7 @@ export function validate(els, input = {}) {
     } else if (matchingCap.y > 220) {
       errors.push(`caption element placed at y=${matchingCap.y}; must sit in the top header band (y ≤ 220)`)
     }
-    if (titleText && titleText.toLowerCase() === caption.toLowerCase()) {
+    if (titleText && norm(titleText).toLowerCase() === capNorm.toLowerCase()) {
       errors.push('caption duplicates the title verbatim — caption must add information, not restate the title')
     }
   }
@@ -426,6 +468,17 @@ export function buildScene(input) {
     const e = new Error(`author-scene: validation failed\n  - ${errors.join('\n  - ')}`)
     e.errors = errors
     throw e
+  }
+  // Strip arrow bindings AFTER validation. The validator uses them to identify
+  // each arrow's endpoint shapes (so rule 3c can exempt source/target from
+  // the crosses-non-endpoint check). Excalidraw's headless renderer, however,
+  // re-routes any arrow whose endpoints are bound to live element positions,
+  // overriding our explicit polyline `points` and visually collapsing the
+  // route. Drop the bindings now that we no longer need them.
+  for (const ar of elements) {
+    if (ar.type !== 'arrow') continue
+    ar.startBinding = null
+    ar.endBinding = null
   }
   return {
     type: 'excalidraw',

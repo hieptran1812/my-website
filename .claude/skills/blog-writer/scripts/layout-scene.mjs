@@ -98,12 +98,24 @@ function containerHeightFor(label, fontSize = BODY_FONT) {
 }
 
 // ── Common header (title + caption) ────────────────────────────────────────
+// Both wrap to fit within the canvas with 120 px margins on each side so a long
+// title (or sub-clause caption) can never overflow horizontally. Caption y is
+// derived from the wrapped title's actual rendered height, not a hard offset,
+// so multi-line titles don't collide with the caption.
+const HEADER_SIDE_MARGIN = 120
+function wrapHeader(text, fontSize) {
+  const maxChars = Math.max(20, Math.floor((CANVAS_W - 2 * HEADER_SIDE_MARGIN) / (fontSize * 0.6)))
+  return wrapToChars(String(text).split(/\s+/).filter(Boolean), maxChars)
+}
 function headerElements(title, caption) {
   if (!title) die('DSL missing required field: title')
   if (!caption) die('DSL missing required field: caption')
-  // Center title and caption within the top band of the canvas.
-  const titleW = estTextWidth(title, TITLE_FONT)
-  const capW = estTextWidth(caption, CAPTION_FONT)
+  const wrappedTitle = wrapHeader(title, TITLE_FONT)
+  const wrappedCap = wrapHeader(caption, CAPTION_FONT)
+  const titleW = estTextWidth(wrappedTitle, TITLE_FONT)
+  const titleH = estTextHeight(wrappedTitle, TITLE_FONT)
+  const capW = estTextWidth(wrappedCap, CAPTION_FONT)
+  const capH = estTextHeight(wrappedCap, CAPTION_FONT)
   return [
     {
       id: 'title',
@@ -111,8 +123,8 @@ function headerElements(title, caption) {
       x: Math.round((CANVAS_W - titleW) / 2),
       y: 60,
       width: titleW,
-      height: estTextHeight(title, TITLE_FONT),
-      text: title,
+      height: titleH,
+      text: wrappedTitle,
       fontSize: TITLE_FONT,
       fontFamily: 1,
       textAlign: 'center',
@@ -121,10 +133,10 @@ function headerElements(title, caption) {
       id: 'caption',
       type: 'text',
       x: Math.round((CANVAS_W - capW) / 2),
-      y: 60 + estTextHeight(title, TITLE_FONT) + 16,
+      y: 60 + titleH + 16,
       width: capW,
-      height: estTextHeight(caption, CAPTION_FONT),
-      text: caption,
+      height: capH,
+      text: wrappedCap,
       fontSize: CAPTION_FONT,
       fontFamily: 1,
       textAlign: 'center',
@@ -132,10 +144,17 @@ function headerElements(title, caption) {
   ]
 }
 
-// Top of the body region. Title sits at y=60, caption ~16 px below the title's
-// baseline, body ~28 px below the caption (was 80 — too airy). Gives every
-// engine ~1380 px of vertical to play with on the 1600-tall canvas.
-function bodyTopY() {
+// Top of the body region. Derived from the rendered header height with a small
+// gap so multi-line titles/captions push the body region down rather than
+// overlapping. dsl-aware variant takes the actual strings so a long header
+// doesn't squeeze the body region; the no-arg form preserves the prior cheap
+// estimate for engines that don't need the precise top.
+function bodyTopY(title, caption) {
+  if (title && caption) {
+    const tH = estTextHeight(wrapHeader(title, TITLE_FONT), TITLE_FONT)
+    const cH = estTextHeight(wrapHeader(caption, CAPTION_FONT), CAPTION_FONT)
+    return 60 + tH + 16 + cH + 28
+  }
   return 60 + estTextHeight('X', TITLE_FONT) + 16 + estTextHeight('X', CAPTION_FONT) + 28
 }
 const BODY_BOTTOM_MARGIN = 60
@@ -263,7 +282,7 @@ function layoutPipeline(dsl) {
   if (nodes.length < 2) die('pipeline needs ≥ 2 nodes')
   assertOneAccent(nodes)
 
-  const top = bodyTopY()
+  const top = bodyTopY(dsl.title, dsl.caption)
   const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
   const n = nodes.length
 
@@ -385,7 +404,7 @@ function layoutStack(dsl) {
   assertOneAccent(nodes)
 
   const els = headerElements(dsl.title, dsl.caption)
-  const top = bodyTopY()
+  const top = bodyTopY(dsl.title, dsl.caption)
   const bottomMargin = 80
   const totalH = CANVAS_H - top - bottomMargin
   const layerH = Math.floor(totalH / nodes.length)
@@ -432,7 +451,7 @@ function layoutBeforeAfter(dsl) {
   const afterNodes = after.nodes.map((n) => ({ ...n, kind: fixKind(n, 'after') }))
 
   const els = headerElements(dsl.title, dsl.caption)
-  const top = bodyTopY()
+  const top = bodyTopY(dsl.title, dsl.caption)
   const colW = Math.round(CANVAS_W * 0.40)
   const gap = Math.round(CANVAS_W * 0.05)
   const leftX = Math.round((CANVAS_W - (2 * colW + gap)) / 2)
@@ -515,7 +534,7 @@ function layoutMatrix(dsl) {
   if (cells.length !== rows.length) die('matrix cells.length must equal rows.length')
 
   const els = headerElements(dsl.title, dsl.caption)
-  const top = bodyTopY()
+  const top = bodyTopY(dsl.title, dsl.caption)
   const cellW = Math.floor((CANVAS_W * 0.85) / (cols.length + 1))
   const cellH = Math.floor((CANVAS_H - top - 100) / (rows.length + 1))
   const startX = Math.round((CANVAS_W - cellW * (cols.length + 1)) / 2)
@@ -654,7 +673,7 @@ function layoutGraph(dsl) {
   // 4. Per-layer UNIFORM node dimensions. Every node in a layer gets that
   //    layer's max width and max height, so node edges line up on a clean
   //    grid and every arrow enters/leaves at a predictable coordinate.
-  const top = bodyTopY()
+  const top = bodyTopY(dsl.title, dsl.caption)
   const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
   const layerNodeW = layers.map((L) => Math.max(...L.map((n) => sizes.get(n.id).w)))
   const layerNodeH = layers.map((L) => Math.max(...L.map((n) => sizes.get(n.id).h)))
@@ -747,19 +766,118 @@ function layoutGraph(dsl) {
   }
 
   // 7. Arrows — clean orthogonal routing on the node grid.
-  //    - Adjacent-layer forward edges jog at a SHARED channel x (the gap
-  //      midpoint between the two layers), so fan-out/fan-in reads as one
-  //      tidy routing bus instead of a tangle of crossing diagonals.
+  //    - Adjacent-layer forward edges jog at a per-edge channel x. The default
+  //      is the gap midpoint between the two layers, but if a sibling in either
+  //      endpoint's layer would clip the horizontal in/out leg the channel is
+  //      pushed past that sibling. Fan-out / fan-in edges that share an
+  //      endpoint get parallel sub-channels (cx + k × 20) so multiple inbound
+  //      legs don't collapse onto a single line.
   //    - Multi-layer-jump forward edges and back-edges detour through a
   //      channel BELOW the node block, at two distinct depths so the two
   //      kinds never share a lane.
-  //    - Same-layer edges loop on the right side.
+  //    - Same-layer edges loop on the right side, with the side detour pushed
+  //      past any sibling sitting further right at either endpoint's y.
   const ARROW_GAP = 10
 
   let blockBottom = -Infinity
   for (const p of positions.values()) blockBottom = Math.max(blockBottom, p.y + p.h)
   const backChannelY = blockBottom + 60
   const jumpChannelY = blockBottom + 150
+
+  // Pre-bucket node positions by layer for O(layer-size) sibling probes during
+  // routing. Each entry: { id, x, y, w, h }.
+  const nodesByLayer = layers.map((L) => L.map((n) => ({ id: n.id, ...positions.get(n.id) })))
+
+  // Does the horizontal segment at y from x1 to x2 cross a non-endpoint node
+  // in `layerIdx`? Returns the blocking node (or null). The 6-px inset matches
+  // the validator's rule 3c so the engine doesn't produce edges the validator
+  // would then reject.
+  function hSegBlocker(layerIdx, y, x1, x2, exemptIds) {
+    if (layerIdx < 0 || layerIdx >= nodesByLayer.length) return null
+    const xl = Math.min(x1, x2), xr = Math.max(x1, x2)
+    for (const n of nodesByLayer[layerIdx]) {
+      if (exemptIds.has(n.id)) continue
+      const nx0 = n.x + 6, nx1 = n.x + n.w - 6
+      const ny0 = n.y + 6, ny1 = n.y + n.h - 6
+      if (y < ny0 || y > ny1) continue
+      if (xr < nx0 || xl > nx1) continue
+      return n
+    }
+    return null
+  }
+
+  // Liang-Barsky: does straight segment p0→p1 hit axis-aligned rect? Used to
+  // decide whether a direct diagonal arrow is viable instead of an L/Z route.
+  function segHitsRect(p0, p1, x0, y0, x1, y1) {
+    const ax = p0[0], ay = p0[1]
+    const dx = p1[0] - ax, dy = p1[1] - ay
+    let t0 = 0, t1 = 1
+    const edges = [[-dx, ax - x0], [dx, x1 - ax], [-dy, ay - y0], [dy, y1 - ay]]
+    for (const [p, q] of edges) {
+      if (p === 0) { if (q < 0) return false }
+      else {
+        const r = q / p
+        if (p < 0) { if (r > t1) return false; if (r > t0) t0 = r }
+        else { if (r < t0) return false; if (r < t1) t1 = r }
+      }
+    }
+    return t0 <= t1
+  }
+
+  // Direct-diagonal viability for an adjacent-layer forward edge: does the
+  // straight line from (sx, sy) to (ex, ey) avoid every non-endpoint node in
+  // layers [lStart, lEnd]? Uses the same 6-px inset as the validator (rule 3c).
+  function diagonalClear(sx, sy, ex, ey, exemptIds, lStart, lEnd) {
+    for (let li = lStart; li <= lEnd; li++) {
+      if (li < 0 || li >= nodesByLayer.length) continue
+      for (const n of nodesByLayer[li]) {
+        if (exemptIds.has(n.id)) continue
+        const nx0 = n.x + 6, nx1 = n.x + n.w - 6
+        const ny0 = n.y + 6, ny1 = n.y + n.h - 6
+        if (segHitsRect([sx, sy], [ex, ey], nx0, ny0, nx1, ny1)) return false
+      }
+    }
+    return true
+  }
+
+  // For fan-out / fan-in groups, assign a stable index per edge so we can
+  // stagger sub-channels. Keyed by source layer pair, then by source node id
+  // for fan-out, and by target node id for fan-in. The combined offset
+  // (out-index − in-index) keeps parallel arrows visually distinct.
+  const fanOutIdx = new Map()
+  const fanInIdx = new Map()
+  for (const e of edges) {
+    const la2 = layerOf.get(e.from)
+    const lb2 = layerOf.get(e.to)
+    if (lb2 !== la2 + 1) continue
+    const ko = `${la2}|${e.from}`
+    const ki = `${la2}|${e.to}`
+    const lo = fanOutIdx.get(ko) || []
+    lo.push(e)
+    fanOutIdx.set(ko, lo)
+    const li = fanInIdx.get(ki) || []
+    li.push(e)
+    fanInIdx.set(ki, li)
+  }
+  const edgeChannelOffset = new Map()
+  for (const [, list] of fanOutIdx) {
+    if (list.length < 2) continue
+    // Order by target y so the offsets vary monotonically — keeps arrows from
+    // looking randomly shuffled.
+    list.sort((a, b) => positions.get(a.to).y - positions.get(b.to).y)
+    const mid = (list.length - 1) / 2
+    list.forEach((e, i) => {
+      edgeChannelOffset.set(e, (edgeChannelOffset.get(e) || 0) + Math.round((i - mid) * 20))
+    })
+  }
+  for (const [, list] of fanInIdx) {
+    if (list.length < 2) continue
+    list.sort((a, b) => positions.get(a.from).y - positions.get(b.from).y)
+    const mid = (list.length - 1) / 2
+    list.forEach((e, i) => {
+      edgeChannelOffset.set(e, (edgeChannelOffset.get(e) || 0) + Math.round((i - mid) * 20))
+    })
+  }
 
   function pushArrow(absPts, fromId, toId, dashed) {
     const xs = absPts.map((p) => p[0])
@@ -794,17 +912,53 @@ function layoutGraph(dsl) {
     const bMidX = b.x + Math.round(b.w / 2)
 
     if (lb === la + 1) {
-      // Adjacent forward: horizontal out, vertical at channel, horizontal in.
+      // Adjacent forward. Preference order, fewest bends first:
+      //   (a) 2-point straight horizontal when source/target share y.
+      //   (b) 2-point direct diagonal when nothing blocks the straight line
+      //       AND the edge has no label (labeled edges keep the Z route so
+      //       the label sits above a real horizontal segment).
+      //   (c) 4-point Z route (horizontal out, vertical at channel,
+      //       horizontal in) when (a)/(b) don't apply but in/out legs clear.
+      //   (d) Below-block detour when a sibling blocks the Z's in/out leg.
       const sx = a.x + a.w + ARROW_GAP
       const ex = b.x - ARROW_GAP
-      const cx = layerX[la] + layerW[la] + Math.round(H_GAP / 2)
+      const gapMid = layerX[la] + layerW[la] + Math.round(H_GAP / 2)
+      const off = edgeChannelOffset.get(e) || 0
+      let cx = gapMid + off
+      // Keep cx safely inside the inter-layer gap.
+      const cxMin = layerX[la] + layerW[la] + ARROW_GAP + 8
+      const cxMax = layerX[lb] - ARROW_GAP - 8
+      if (cxMax > cxMin) {
+        cx = Math.max(cxMin, Math.min(cxMax, cx))
+      }
+      const exempt = new Set([e.from, e.to])
+
       if (Math.abs(bMidY - aMidY) < 6) {
+        // (a) Same y — clean horizontal.
         pushArrow([[sx, aMidY], [ex, aMidY]], e.from, e.to)
+      } else if (!e.label && diagonalClear(sx, aMidY, ex, bMidY, exempt, la, lb)) {
+        // (b) Direct diagonal — no label to worry about and nothing in the way.
+        pushArrow([[sx, aMidY], [ex, bMidY]], e.from, e.to)
       } else {
-        pushArrow(
-          [[sx, aMidY], [cx, aMidY], [cx, bMidY], [ex, bMidY]],
-          e.from, e.to,
-        )
+        // (c) / (d) — fall back to orthogonal routing.
+        const outBlocker = hSegBlocker(la, aMidY, sx, cx, exempt)
+        const inBlocker = hSegBlocker(lb, bMidY, cx, ex, exempt)
+        if (outBlocker || inBlocker) {
+          pushArrow(
+            [
+              [aMidX, a.y + a.h + ARROW_GAP],
+              [aMidX, jumpChannelY],
+              [bMidX, jumpChannelY],
+              [bMidX, b.y + b.h + ARROW_GAP],
+            ],
+            e.from, e.to,
+          )
+        } else {
+          pushArrow(
+            [[sx, aMidY], [cx, aMidY], [cx, bMidY], [ex, bMidY]],
+            e.from, e.to,
+          )
+        }
       }
     } else if (lb > la + 1) {
       // Multi-layer forward jump: detour below the block (dashed = skips
@@ -820,7 +974,15 @@ function layoutGraph(dsl) {
       )
     } else if (lb === la) {
       // Same layer: loop out the right side and back in.
-      const sx = Math.max(a.x + a.w, b.x + b.w) + ARROW_GAP + 60
+      let sx = Math.max(a.x + a.w, b.x + b.w) + ARROW_GAP + 60
+      // Push the detour past any same-layer sibling sitting at either
+      // endpoint's y between the column right edge and sx.
+      const exempt = new Set([e.from, e.to])
+      const colRight = layerX[la] + layerW[la]
+      for (const y of [aMidY, bMidY]) {
+        const bl = hSegBlocker(la, y, colRight + ARROW_GAP, sx, exempt)
+        if (bl) sx = Math.max(sx, bl.x + bl.w + ARROW_GAP + 8)
+      }
       pushArrow(
         [
           [a.x + a.w + ARROW_GAP, aMidY],
@@ -998,7 +1160,7 @@ function layoutTree(dsl) {
     }
   }
 
-  const top = bodyTopY()
+  const top = bodyTopY(dsl.title, dsl.caption)
   const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
   const levelH = Math.floor(bodyH / (maxDepth + 1))
   const bodyW = Math.round(CANVAS_W * 0.92)
@@ -1076,7 +1238,7 @@ function layoutTimeline(dsl) {
   if (events.length < 2) die('timeline needs ≥ 2 events')
   assertOneAccent(events)
 
-  const top = bodyTopY()
+  const top = bodyTopY(dsl.title, dsl.caption)
   const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
   const bodyW = Math.round(CANVAS_W * 0.92)
   const startX = Math.round((CANVAS_W - bodyW) / 2)
@@ -1214,7 +1376,7 @@ function layoutGrid(dsl) {
 
   const gridRows = Math.max(dsl.gridRows ?? 0, ...nodes.map((n) => n.row + (n.rowspan || 1)))
   const gridCols = Math.max(dsl.gridCols ?? 0, ...nodes.map((n) => n.col + (n.colspan || 1)))
-  const top = bodyTopY()
+  const top = bodyTopY(dsl.title, dsl.caption)
   const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
   const bodyW = Math.round(CANVAS_W * 0.92)
   const startX = Math.round((CANVAS_W - bodyW) / 2)
@@ -1242,62 +1404,238 @@ function layoutGrid(dsl) {
     })
   }
 
-  // Edges: route as orthogonal two-segment polylines from source center-edge
-  // to target center-edge to avoid arrow-through-node collisions.
+  // Edges: route as orthogonal polylines through inter-row / inter-column
+  // channels so arrows never cut diagonally through sibling cells. For a
+  // cross-row edge we exit the source through its bottom (or top, if going
+  // up), jog horizontally in the channel between the source row and the
+  // adjacent row toward the target column, then enter the target through its
+  // top (or bottom). Same-row edges route along the row's vertical-center
+  // line, jogging above/below if a sibling cell sits between them.
+  const ARROW_GAP_G = 10
+  const cellsByRow = new Map()
+  for (const [, p] of positions) {
+    const r = p.node.row
+    const list = cellsByRow.get(r) || []
+    list.push(p)
+    cellsByRow.set(r, list)
+  }
+  // Liang-Barsky: does segment p0→p1 hit axis-aligned rect [x0,y0,x1,y1]?
+  function segIntersectsRectG(p0, p1, x0, y0, x1, y1) {
+    const ax = p0[0], ay = p0[1]
+    const dx = p1[0] - ax, dy = p1[1] - ay
+    let t0 = 0, t1 = 1
+    const edges = [[-dx, ax - x0], [dx, x1 - ax], [-dy, ay - y0], [dy, y1 - ay]]
+    for (const [p, q] of edges) {
+      if (p === 0) { if (q < 0) return false }
+      else {
+        const r = q / p
+        if (p < 0) { if (r > t1) return false; if (r > t0) t0 = r }
+        else { if (r < t0) return false; if (r < t1) t1 = r }
+      }
+    }
+    return t0 <= t1
+  }
+  function hClearG(rowIdx, y, x1, x2, exemptIds) {
+    const list = cellsByRow.get(rowIdx) || []
+    const xl = Math.min(x1, x2), xr = Math.max(x1, x2)
+    for (const p of list) {
+      if (exemptIds.has(p.node.id)) continue
+      const nx0 = p.x + 6, nx1 = p.x + p.w - 6
+      const ny0 = p.y + 6, ny1 = p.y + p.h - 6
+      if (y < ny0 || y > ny1) continue
+      if (xr < nx0 || xl > nx1) continue
+      return p
+    }
+    return null
+  }
+  // Vertical segment vs any cell (any row). Used to detect descents that
+  // pierce intermediate-row siblings on multi-row jumps.
+  function vSegBlocker(x, y1, y2, exemptIds) {
+    const yl = Math.min(y1, y2), yt = Math.max(y1, y2)
+    for (const [, p] of positions) {
+      if (exemptIds.has(p.node.id)) continue
+      const nx0 = p.x + 6, nx1 = p.x + p.w - 6
+      const ny0 = p.y + 6, ny1 = p.y + p.h - 6
+      if (x < nx0 || x > nx1) continue
+      if (yt < ny0 || yl > ny1) continue
+      return p
+    }
+    return null
+  }
+  // Find the column-gap x closest to `preferX` whose vertical from y1 to y2
+  // is clear of all cells. Column gaps live at x = startX + k*cellW for
+  // k = 1..gridCols-1 (centers of inter-column spacing).
+  function findClearGapX(preferX, y1, y2, exemptIds) {
+    const candidates = []
+    for (let k = 1; k < gridCols; k++) candidates.push(startX + k * cellW)
+    candidates.sort((a, b) => Math.abs(a - preferX) - Math.abs(b - preferX))
+    for (const x of candidates) {
+      if (!vSegBlocker(x, y1, y2, exemptIds)) return x
+    }
+    return null
+  }
+  function pushArrowG(absPts, fromId, toId) {
+    // Dedupe consecutive identical (or nearly identical) points. A
+    // degenerate polyline like [(x,y),(x,y),(x,y),(x,y')] renders as a
+    // sketchy stub in Excalidraw — collapse it to its endpoints.
+    const cleaned = []
+    for (const p of absPts) {
+      const last = cleaned[cleaned.length - 1]
+      if (!last || Math.abs(last[0] - p[0]) > 1 || Math.abs(last[1] - p[1]) > 1) cleaned.push(p)
+    }
+    // Also collapse collinear interior points so straight horizontals/verticals
+    // don't carry redundant midpoints.
+    const simplified = [cleaned[0]]
+    for (let i = 1; i < cleaned.length - 1; i++) {
+      const a = simplified[simplified.length - 1]
+      const b = cleaned[i]
+      const c = cleaned[i + 1]
+      const colinear =
+        (a[0] === b[0] && b[0] === c[0]) || (a[1] === b[1] && b[1] === c[1])
+      if (!colinear) simplified.push(b)
+    }
+    if (cleaned.length > 1) simplified.push(cleaned[cleaned.length - 1])
+    absPts = simplified.length >= 2 ? simplified : cleaned
+    const xs = absPts.map((p) => p[0])
+    const ys = absPts.map((p) => p[1])
+    const ox = Math.min(...xs)
+    const oy = Math.min(...ys)
+    els.push({
+      id: rngId('ar'),
+      type: 'arrow',
+      x: ox, y: oy,
+      width: Math.max(...xs) - ox,
+      height: Math.max(...ys) - oy,
+      strokeWidth: 2,
+      endArrowhead: 'arrow',
+      points: absPts.map(([x, y]) => [x - ox, y - oy]),
+      startBinding: { elementId: fromId, focus: 0, gap: ARROW_GAP_G },
+      endBinding:   { elementId: toId,   focus: 0, gap: ARROW_GAP_G },
+    })
+  }
   for (const e of dsl.edges || []) {
     const a = positions.get(e.from)
     const b = positions.get(e.to)
     if (!a || !b) die(`grid edge references unknown node: ${e.from} → ${e.to}`)
-    const ax = a.x + a.w / 2
-    const ay = a.y + a.h / 2
-    const bx = b.x + b.w / 2
-    const by = b.y + b.h / 2
-    const dx = bx - ax
-    const dy = by - ay
-    // Pick start point on the edge of A facing B; same for end on B's facing edge.
-    let sx, sy, tx, ty
-    if (Math.abs(dx) >= Math.abs(dy)) {
-      sx = ax + Math.sign(dx) * a.w / 2
-      sy = ay
-      tx = bx - Math.sign(dx) * b.w / 2
-      ty = by
+    const aRow = a.node.row, aCol = a.node.col
+    const bRow = b.node.row, bCol = b.node.col
+    const exempt = new Set([e.from, e.to])
+    const aMidX = a.x + Math.round(a.w / 2)
+    const bMidX = b.x + Math.round(b.w / 2)
+    const aMidY = a.y + Math.round(a.h / 2)
+    const bMidY = b.y + Math.round(b.h / 2)
+
+    let pts
+    // Even when row indices match, rowspan/colspan can make a and b have
+    // mismatched midpoints. Treat the edge as same-row only if the actual
+    // midpoint y values agree closely AND no sibling lies on the path.
+    const sameLevel = aRow === bRow && Math.abs(aMidY - bMidY) <= 4
+    if (sameLevel) {
+      // Same row — horizontal across the row band, dodging siblings if
+      // necessary by jogging through the channel above the row.
+      const sx = aMidX < bMidX ? a.x + a.w + ARROW_GAP_G : a.x - ARROW_GAP_G
+      const ex = aMidX < bMidX ? b.x - ARROW_GAP_G : b.x + b.w + ARROW_GAP_G
+      if (hClearG(aRow, aMidY, sx, ex, exempt)) {
+        const chY = a.y - Math.round(cellH * 0.18)
+        pts = [
+          [aMidX, a.y - ARROW_GAP_G],
+          [aMidX, chY],
+          [bMidX, chY],
+          [bMidX, b.y - ARROW_GAP_G],
+        ]
+      } else {
+        pts = [[sx, aMidY], [ex, aMidY]]
+      }
+    } else if (aRow === bRow) {
+      // Same row index but mismatched midpoints (rowspan asymmetry).
+      // Route horizontally at the SHORTER node's y-level via an L jog:
+      // exit the wider node from its inner side at the target's y, enter
+      // the target from its facing side at the same y.
+      const sx = aMidX < bMidX ? a.x + a.w + ARROW_GAP_G : a.x - ARROW_GAP_G
+      const ex = aMidX < bMidX ? b.x - ARROW_GAP_G : b.x + b.w + ARROW_GAP_G
+      pts = [
+        [sx, aMidY],
+        [(sx + ex) / 2, aMidY],
+        [(sx + ex) / 2, bMidY],
+        [ex, bMidY],
+      ]
     } else {
-      sx = ax
-      sy = ay + Math.sign(dy) * a.h / 2
-      tx = bx
-      ty = by - Math.sign(dy) * b.h / 2
+      // Cross-row — try a 2-point straight line (vertical or diagonal) from
+      // source's facing edge to target's facing edge first. The inter-row
+      // gap is typically only ~32 px wide, so an orthogonal L would have
+      // legs too short to be visible. A straight 2-point line is far more
+      // readable when it doesn't cross intermediate cells.
+      //
+      // If the straight line pierces any non-endpoint cell (multi-row jump
+      // through a populated middle row, or a wide-diagonal that grazes a
+      // sibling cell), fall back to an orthogonal detour through a column
+      // gap so the long descent runs in empty space.
+      const goingDown = bRow > aRow
+      const srcY = goingDown ? a.y + a.h + ARROW_GAP_G : a.y - ARROW_GAP_G
+      const dstY = goingDown ? b.y - ARROW_GAP_G : b.y + b.h + ARROW_GAP_G
+
+      // 1. Check if a 2-point straight line clears all non-endpoint cells.
+      const lineClear = (() => {
+        for (const [, p] of positions) {
+          if (exempt.has(p.node.id)) continue
+          const x0 = p.x + 6, y0 = p.y + 6
+          const x1 = p.x + p.w - 6, y1 = p.y + p.h - 6
+          if (x1 <= x0 || y1 <= y0) continue
+          if (segIntersectsRectG([aMidX, srcY], [bMidX, dstY], x0, y0, x1, y1)) return false
+        }
+        return true
+      })()
+      if (lineClear) {
+        pts = [[aMidX, srcY], [bMidX, dstY]]
+      } else {
+        // 2. Fall back to orthogonal routing through a clear column gap.
+        // Channel placement: at the row boundary (cellPad past source/target),
+        // which is the deepest the channel can sit while staying in the gap.
+        const srcChannelY = goingDown ? a.y + a.h + cellPad : a.y - cellPad
+        const dstChannelY = goingDown ? b.y - cellPad : b.y + b.h + cellPad
+        const gapX = findClearGapX(bMidX, srcChannelY, dstChannelY, exempt)
+        if (gapX !== null) {
+          pts = [
+            [aMidX, srcY],
+            [aMidX, srcChannelY],
+            [gapX, srcChannelY],
+            [gapX, dstChannelY],
+            [bMidX, dstChannelY],
+            [bMidX, dstY],
+          ]
+        } else {
+          // No clear column gap (extremely dense grid) — keep the orthogonal
+          // 4-point route and let the validator surface the issue.
+          pts = [
+            [aMidX, srcY],
+            [aMidX, srcChannelY],
+            [bMidX, srcChannelY],
+            [bMidX, dstY],
+          ]
+        }
+      }
     }
-    els.push({
-      id: rngId('ar'),
-      type: 'arrow',
-      x: sx, y: sy,
-      width: tx - sx, height: ty - sy,
-      strokeWidth: 2,
-      endArrowhead: 'arrow',
-      points: [[0, 0], [tx - sx, ty - sy]],
-    })
+    pushArrowG(pts, e.from, e.to)
+
     if (e.label) {
+      // Place the label above the first horizontal run (channel y).
       const tw = estTextWidth(e.label, EDGE_FONT)
       const th = estTextHeight(e.label, EDGE_FONT)
-      // Offset the label PERPENDICULAR to the arrow segment so it never lands
-      // on the stroke, whatever the angle. The normal is forced to the upper
-      // side (negative y) for horizontal/diagonal runs; for a purely vertical
-      // run the normal is horizontal and the label sits to one side. The
-      // clearance is half the label height plus 16 px so the bbox stays off
-      // the line by construction.
-      const segdx = tx - sx, segdy = ty - sy
-      const len = Math.hypot(segdx, segdy) || 1
-      let nx = -segdy / len, ny = segdx / len
-      if (ny > 0 || (ny === 0 && nx < 0)) { nx = -nx; ny = -ny }
-      const clear = th / 2 + 16
-      const mx = sx + 0.5 * segdx
-      const my = sy + 0.5 * segdy
-      const lx = Math.round(mx + nx * clear - tw / 2)
-      const ly = Math.round(my + ny * clear - th / 2)
+      // Find the first horizontal segment in pts (consecutive points with same y).
+      let hx0 = pts[0][0], hx1 = pts[1][0], hy = pts[0][1]
+      for (let i = 0; i + 1 < pts.length; i++) {
+        if (pts[i][1] === pts[i + 1][1]) {
+          hx0 = pts[i][0]; hx1 = pts[i + 1][0]; hy = pts[i][1]
+          break
+        }
+      }
+      const runMid = (hx0 + hx1) / 2
       els.push({
         id: rngId('lb'),
         type: 'text',
-        x: lx, y: ly, width: tw, height: th,
+        x: Math.round(runMid - tw / 2),
+        y: Math.round(hy - th - 12),
+        width: tw, height: th,
         text: e.label,
         fontSize: EDGE_FONT,
         fontFamily: 1,

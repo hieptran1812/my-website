@@ -110,7 +110,7 @@ For diagram visual review (composition, faithfulness, text containment in the re
 - Bounding box covers ≥ 70% of canvas; no wide empty bands
 - Every node label appears in the prose ±200 lines around its anchor
 - No text overflow, no overlapping bboxes, no arrow-through-label
-- **Arrow accuracy**: every arrow direction matches the causal claim in the prose; head and tail land on the intended node edges (not floating, not piercing a bbox); orthogonal where the relationship is axial; arrowhead style (`arrow` / `triangle_outline` / `bar` / `dot`) and stroke style (solid / dashed / dotted) are consistent across the figure and used per the semantics in `diagram-authoring.md`. Reversed or dangling arrows = re-author the figure, not the prose.
+- **Arrow accuracy**: every arrow direction matches the causal claim in the prose; head and tail land on the intended node edges (not floating, not piercing a bbox); orthogonal where the relationship is axial; arrowhead style (`arrow` / `triangle_outline` / `bar` / `dot`) and stroke style (solid / dashed / dotted) are consistent across the figure and used per the semantics in `diagram-authoring.md`. Reversed or dangling arrows = re-author the figure, not the prose. The validator's rule 3c now rejects any arrow polyline segment that crosses a non-endpoint node bbox; if it fires on a `graph`-engine figure, re-author the DSL (the layer membership is likely wrong — two nodes in one layer that should be in adjacent layers).
 
 Then report to the user:
 - Final file path, word count, recomputed `readTime`
