@@ -7,7 +7,6 @@ tags: ["llm", "fine-tuning", "lora", "qlora", "peft", "sft", "dpo", "instruction
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Fine-tuning is how you turn a generic LLM into a model that actually works for your problem. This guide walks through every major technique — full fine-tuning, LoRA, QLoRA, DoRA, prompt tuning, SFT, DPO, and more — with intuition, math, and practical advice on when to use each."
 ---
 

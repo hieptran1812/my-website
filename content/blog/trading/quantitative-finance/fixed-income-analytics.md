@@ -24,7 +24,6 @@ category: "trading"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 A pricing system tells you what each bond is worth. An *analytics* system tells you what risks the book is carrying, where the P&L came from yesterday, what scenarios would hurt today, what capital is consumed by each position, and what trades would best rebalance the book. The pricing layer answers the bond-by-bond question; the analytics layer answers the *book-level* question. They are operationally distinct, often run by separate teams, and built with different engineering priorities. Pricing prizes accuracy and reproducibility; analytics prizes throughput, multi-dimensional aggregation, and slice-and-dice query speed.

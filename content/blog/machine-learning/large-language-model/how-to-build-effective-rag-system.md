@@ -17,7 +17,6 @@ tags:
 date: "2026-03-16"
 author: "Hiep Tran"
 featured: true
-aiGenerated: true
 excerpt: "A comprehensive, practical guide to building production-ready RAG systems. Covers every stage from document ingestion and chunking strategies to retrieval, reranking, generation, and evaluation — with best practices, advanced techniques, and common pitfalls."
 ---
 

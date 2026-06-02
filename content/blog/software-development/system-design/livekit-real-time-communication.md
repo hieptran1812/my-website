@@ -18,7 +18,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "LiveKit is the open-source platform powering real-time audio, video, and AI voice agents. This guide covers SFU architecture, room/participant/track model, the Agents framework, scaling, egress/ingress, SIP telephony, and interview-ready depth on real-time system design."
 ---
 

@@ -20,7 +20,6 @@ subcategory: "Version Control"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 Most engineers plateau at Git the same way: they learn ten porcelain commands by muscle memory, treat the rest as magic, and pay for that opacity every time something goes sideways at 2 AM. The plateau is not about commands. It is about a mental model. Once you understand that Git is a tiny, content-addressed object database with a few pointers on top, every command becomes obvious and every disaster becomes recoverable. This article is the playbook I wish a senior engineer had walked me through in my first year — the object model in detail, the three trees that every command moves data between, branching strategies that scale past a hundred engineers, rebase as a precision tool, the recovery techniques that have saved me at least a dozen times in production, and a long catalog of incidents where Git tried to ruin our day and what the fix actually was.

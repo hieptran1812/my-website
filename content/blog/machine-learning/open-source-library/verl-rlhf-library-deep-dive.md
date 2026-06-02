@@ -22,7 +22,6 @@ subcategory: "Open Source Library"
 author: "Hiep Tran"
 featured: true
 readTime: 51
-aiGenerated: true
 ---
 
 Most teams discover the limits of their RLHF stack the same way: the prototype works on a 7B model on a single node, then somebody asks for the same training loop on Llama-3-70B across two nodes, and it does not just slow down — it falls apart. The actor and the rollout share a single shape. The reward model wants its own GPUs but the framework refuses to give them. Sequence packing breaks the loss mask. The vLLM upgrade requires a complete rewrite. After three weeks of hacking, the team rediscovers the lesson the field already learned in 2024: **a fast RLHF system needs different shapes for training and rollout, different backends for different roles, and a control flow that is not entangled with either**. That is the problem [verl](https://github.com/volcengine/verl) was built to solve.

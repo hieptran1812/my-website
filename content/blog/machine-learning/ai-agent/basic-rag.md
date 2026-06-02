@@ -15,7 +15,6 @@ tags:
 date: "2026-04-16"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A comprehensive guide to Retrieval-Augmented Generation (RAG) — how it works, why it matters, and how to build a basic RAG pipeline from scratch using embeddings, vector stores, and large language models."
 ---
 

@@ -24,7 +24,6 @@ category: "trading"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 The autocallable is the largest single exotic product family in the world, with over $200 billion of outstanding notional globally. It is sold to retail and institutional clients as a yield-bearing alternative to bonds: pay regular coupons, redeem early if a barrier holds, deliver principal back at expiry unless a deeper barrier breaks. The combination of "high coupon" and "principal-protected unless major crash" is irresistible to yield-starved investors. The combination of "worst-of basket" plus "knock-in put" plus "early termination optionality" is operationally brutal for the dealers who manufacture these products. Autocallables are where retail distribution meets sophisticated derivative engineering — and where the gap between client expectations and product mechanics produces enormous wealth transfer in both directions.

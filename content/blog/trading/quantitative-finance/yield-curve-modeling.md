@@ -23,7 +23,6 @@ category: "trading"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 A yield curve is a function that maps maturity to a discount factor. Every fixed-income calculation in the world rests on a yield curve. A bond is priced by discounting its cashflows under a curve. A swap is priced by discounting two streams of cashflows under appropriate curves. An option on a bond is priced by a model whose drift is a function of the curve. The curve is the *foundation*; the products are the layers above. If you have only ten minutes to learn what fixed-income engineering actually does on a daily basis, learn the curve.

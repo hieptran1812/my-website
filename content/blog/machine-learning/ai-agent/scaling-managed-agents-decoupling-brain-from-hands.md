@@ -8,7 +8,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Anthropic's Managed Agents service rebuilt itself around one idea: the brain (harness) and the hands (sandbox) should be separate, replaceable pieces. This article unpacks why the original coupled design broke down, what the decoupled architecture looks like, and the engineering lessons any team building long-horizon agents can steal."
 ---
 

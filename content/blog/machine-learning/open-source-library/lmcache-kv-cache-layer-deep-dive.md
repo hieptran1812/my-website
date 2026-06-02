@@ -22,7 +22,6 @@ subcategory: "Open Source Library"
 author: "Hiep Tran"
 featured: true
 readTime: 51
-aiGenerated: true
 ---
 
 Most production LLM stacks discover the same uncomfortable truth in their second quarter of operation: the GPU is rarely the bottleneck. The bottleneck is _the same prefix being recomputed thousands of times an hour_, because every replica, every restart, every long-context truncation throws the prefix cache away. vLLM's built-in `PrefixCache` does heroic work inside a single replica's HBM, but it is a process-local data structure pinned to a single device. The moment you run two replicas behind a load balancer, the moment a request gets re-routed, the moment context length crosses your KV-block budget — that cache is gone, and the GPU starts re-doing work it has already done.

@@ -23,7 +23,6 @@ category: "trading"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 The cliquet is the most forward-vol-sensitive product in mainstream exotic equity structuring, and it is the product that exposed model risk most dramatically when 2008 hit. Where vanilla options price off today's volatility, cliquets price off the *forward* volatility — the implied volatility that today's surface predicts will exist at future dates. When 2008 caused forward implied vols to jump five-plus standard deviations beyond what calibrated models had predicted, banks holding cliquet inventory took mark-to-model losses that rewrote the textbook on exotic risk reserves. Cliquet structuring desks today still operate under the shadow of that lesson; reserves are higher, calibration is stricter, hedging is more layered, and senior risk reviewers ask harder questions before signing off on new variants.

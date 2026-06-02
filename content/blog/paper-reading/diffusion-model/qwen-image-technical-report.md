@@ -9,7 +9,6 @@ subcategory: "Diffusion Model"
 author: "Hiep Tran"
 featured: false
 readTime: 30
-aiGenerated: true
 ---
 
 For years, the fastest way to spot an AI-generated image was to read it. The picture would be gorgeous and the sign in the background would say `RESTAURANW` or `OPNE` or a smear of glyph-shaped noise. Text rendering was diffusion's tell — and not a superficial one. It exposed something real: a model trained to match the *statistical texture* of images had learned that text-shaped regions have a certain busy, high-frequency look, without learning that those regions encode a discrete symbolic sequence that is either exactly right or wrong. There is no "almost" in spelling — a word is either correct or it is not, and the human eye catches the failure instantly.

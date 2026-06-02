@@ -7,7 +7,6 @@ tags: ["ai-agent", "claude", "claude-code", "anthropic", "developer-tools"]
 date: "2026-03-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A comprehensive collection of tips and best practices for using Claude Code effectively, sourced from Boris Cherny — the creator of Claude Code — and the Claude Code team at Anthropic."
 ---
 

@@ -7,7 +7,6 @@ tags: ["llm", "distillation", "knowledge-distillation", "model-compression", "tr
 date: "2026-04-22"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 image: "/imgs/blogs/distillation-in-llm-01-teacher-student.png"
 excerpt: "A deep dive into knowledge distillation for large language models — the theory, the loss functions, the training recipes, and concrete case studies: DistilBERT, Alpaca/Vicuna, Gemma 2, Llama 3.2, MiniLLM, and DeepSeek-R1-Distill."
 ---

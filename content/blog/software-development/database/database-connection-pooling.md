@@ -17,7 +17,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Database connection pooling is one of the most impactful backend optimizations — turning a 30ms overhead into 0.5ms per query. This guide covers how connections work, why pooling matters, pool sizing math, every failure mode, and real-world case studies."
 ---
 

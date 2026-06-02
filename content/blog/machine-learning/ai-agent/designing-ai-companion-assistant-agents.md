@@ -18,7 +18,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Task agents finish and die. Companion agents live with you for years. That one difference breaks almost every assumption you'd carry over from building a coding agent or a retrieval bot — memory, identity, safety, latency, and evaluation all become different problems. This article walks through every failure mode I've seen in companion and assistant systems, with concrete architectures for solving each one."
 ---
 

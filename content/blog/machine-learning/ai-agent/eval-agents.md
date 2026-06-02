@@ -7,7 +7,6 @@ tags: ["ai-agent", "evaluation", "testing", "llm", "anthropic", "claude", "ml-en
 date: "2026-03-15"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A comprehensive guide to building evaluations for AI agents — from grader types and metrics to a step-by-step roadmap for shipping agents with confidence."
 ---
 

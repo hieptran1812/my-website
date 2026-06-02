@@ -18,7 +18,6 @@ tags:
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Short agent demos are easy. Agents that run for hours, hand off between subtasks, recover from crashes, and produce a correct answer at the end are where the real design work lives. This article walks through every architectural decision you face — task decomposition, planning patterns (ReAct, Plan-and-Execute, Tree of Thoughts, Reflexion), state and context management, sub-agent patterns, and checkpointing — with a dedicated interview Q&A section covering the questions that actually come up."
 ---
 

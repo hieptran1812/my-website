@@ -17,7 +17,6 @@ tags:
 date: "2026-04-16"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A clear, in-depth guide to Flow Matching — the simpler alternative to diffusion models that powers Stable Diffusion 3 and Flux. Covers the core idea, math, conditional flow matching, optimal transport, rectified flows, implementation, and common interview questions."
 ---
 

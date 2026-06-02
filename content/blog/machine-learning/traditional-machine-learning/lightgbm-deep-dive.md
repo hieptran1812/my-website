@@ -21,7 +21,6 @@ subcategory: "Traditional Machine Learning"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 Most "intro to LightGBM" articles tell you it is "a faster XGBoost." That is technically true and almost completely useless. The interesting question is: _what specific bottleneck did Microsoft Research actually attack in 2017, and why has the answer survived ten years of deep-learning hype on tabular data without serious competition?_ Answer that, and the rest of the library — the strange `num_leaves` parameter, the `categorical_feature` argument, the `gpu_use_dp` flag — stops feeling like a list of magic incantations and starts feeling like a coherent design.

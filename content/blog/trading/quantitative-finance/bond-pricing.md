@@ -25,7 +25,6 @@ category: "trading"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 A bond is the simplest derivative instrument in the world. It pays a known stream of cashflows on known dates. There is no payoff function, no expectation, no model uncertainty about *what* will happen at expiry. The only uncertainty is about the discount rate that converts those future cashflows into a present-value price — and that discount rate is the yield curve. *Bonds are model-light, curve-heavy*: the math of pricing is trivial, the engineering of the curve is everything. Senior fixed-income quants spend their careers thinking about curves, not about bonds.

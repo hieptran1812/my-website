@@ -7,7 +7,6 @@ tags: ["llm", "kv-cache", "transformer", "attention", "inference", "optimization
 date: "2026-03-16"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "KV Cache is the single most important optimization for LLM inference. This guide explains what it is, why it exists, how it works step-by-step with intuitive examples, and the techniques used to make it more memory-efficient."
 ---
 

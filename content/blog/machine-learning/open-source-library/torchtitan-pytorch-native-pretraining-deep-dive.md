@@ -23,7 +23,6 @@ subcategory: "Open Source Library"
 author: "Hiep Tran"
 featured: true
 readTime: 53
-aiGenerated: true
 ---
 
 Most teams discover the limits of their pre-training stack the same way: somebody forks Megatron-LM in 2023, gets a 7B run working, and by the time the team wants to push to 70B the fork has accumulated three custom parallelism patches, two checkpoint-format converters, and a recompiled CUDA extension that pins the cluster to a specific torch nightly. A year later the maintainer leaves, a new GPU generation drops, and the fork is suddenly an archaeology project nobody wants to touch. The team rediscovers the same lesson the field already learned by 2024: **a long-lived pre-training codebase should not encode parallelism as a fork; it should compose parallelism as a library call**. That is the problem [TorchTitan](https://github.com/pytorch/torchtitan) was built to solve.

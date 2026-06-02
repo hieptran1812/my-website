@@ -7,7 +7,6 @@ tags: ["ai-agent", "agentic-design", "llm", "tool-use", "multi-agent", "workflow
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Building LLM-powered agents is less about prompting cleverness and more about system design. This guide walks through the core patterns — workflows, tool use, reflection, planning, multi-agent systems — and grounds each one in real-world case studies from Claude Code, Devin, Perplexity, AutoGPT, and Operator."
 ---
 

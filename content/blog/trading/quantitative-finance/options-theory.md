@@ -25,7 +25,6 @@ category: "trading"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 The clean abstraction at the centre of options theory is a simple one: an option is the *right without the obligation* to do something at a fixed price. Everything that follows — the binomial tree, the Greeks, put-call parity, Black-Scholes, the smile — is downstream of that single asymmetry. The reason a healthy desk pays a premium today for a piece of paper that may be worthless tomorrow is that the paper, when it pays, pays asymmetrically: bounded loss, unbounded gain (or vice versa, for the seller). The premium is the price of that asymmetry.

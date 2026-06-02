@@ -7,7 +7,6 @@ tags: ["vision-transformer", "vit", "siglip", "dino", "self-supervised-learning"
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "ViT, SigLIP, and DINO are three pillars of modern computer vision. This guide explains what each one is, why it exists, and how they differ — using plain language, analogies, and step-by-step intuition."
 ---
 

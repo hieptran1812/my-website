@@ -9,7 +9,6 @@ subcategory: "Speech Processing"
 author: "Hiep Tran"
 featured: false
 readTime: 30
-aiGenerated: true
 ---
 
 For anyone who has shipped a speech feature, the following will be familiar. For most of the last decade, building a real speech product meant assembling a *pipeline of separate models*. One model detected whether there was speech at all. Another identified the language. A third did the actual transcription — and you kept a different third model per language family. A fourth handled the forced alignment that put word-level timestamps on the transcript for captions. A fifth tried, usually badly, to cope with background music or singing. Each model had its own training data, its own failure modes, its own version-skew, and the seams between them were where production bugs lived.

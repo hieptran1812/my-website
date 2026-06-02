@@ -19,7 +19,6 @@ tags:
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: true
-aiGenerated: true
 excerpt: "A deep dive into Graph RAG — what it is, why it matters, how to build one from scratch, and how teams at Microsoft, LinkedIn, Siemens, and others deployed it in production. Covers architecture, indexing pipelines, community detection, global vs. local search, hybrid retrieval, evaluation, cost trade-offs, and lessons from real case studies."
 ---
 

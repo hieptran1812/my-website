@@ -7,7 +7,6 @@ tags: ["llm", "multilingual", "fine-tuning", "continual-pretraining", "tokenizer
 date: "2026-03-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Most powerful LLMs are English-centric. This guide walks through the complete pipeline for adapting an existing LLM to a new language — from extending the tokenizer, through continual pretraining on target-language corpora, to instruction tuning. Includes real code, math, trade-offs, and hard-won lessons from production."
 ---
 

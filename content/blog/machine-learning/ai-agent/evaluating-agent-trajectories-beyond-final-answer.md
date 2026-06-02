@@ -9,7 +9,6 @@ subcategory: "AI Agent"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 ## 1. The outcome trap

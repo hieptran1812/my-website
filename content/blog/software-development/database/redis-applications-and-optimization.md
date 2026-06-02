@@ -21,7 +21,6 @@ subcategory: "Database"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 Most articles about Redis open with "Redis is an in-memory key-value store." That sentence is technically true and almost completely unhelpful, because it suggests Redis is interchangeable with Memcached or with a `dict` you happen to have running over TCP. It is not. Redis is an opinionated, single-threaded state machine that ships a curated catalog of data structures, attaches replication and persistence to them as side concerns, and invites you to compose distributed systems primitives — locks, queues, leaderboards, rate limiters, idempotency keys — out of those structures. Once you start treating it like that, every operational surprise it serves you starts to make sense.

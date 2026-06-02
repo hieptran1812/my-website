@@ -18,7 +18,6 @@ date: "2026-03-15"
 author: "Hiep Tran"
 featured: false
 image: "/imgs/blogs/hifi-gan-20260315180007.png"
-aiGenerated: true
 excerpt: "A comprehensive guide to HiFi-GAN — a generative adversarial network that synthesizes high-fidelity audio from mel-spectrograms in real-time. We explore its architecture, training strategy, code implementation, and real-world applications."
 ---
 

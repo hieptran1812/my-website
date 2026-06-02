@@ -22,7 +22,6 @@ tags:
 date: "2026-04-19"
 author: "Hiep Tran"
 featured: true
-aiGenerated: true
 excerpt: "A deep, practical tour of Mixture-of-Experts LLMs — how the architecture works, why sparse activation unlocks trillion-parameter scale, what every router, expert, gate, and load-balancing loss is actually doing, how teams pre-train and fine-tune them, and what happened in production at Google (Switch/GShard/GLaM), Mistral (Mixtral), DeepSeek (V2/V3), Qwen, xAI, and Databricks (DBRX)."
 ---
 

@@ -9,7 +9,6 @@ subcategory: "Computer Vision"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 > [!tldr]

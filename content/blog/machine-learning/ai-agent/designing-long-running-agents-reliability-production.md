@@ -19,7 +19,6 @@ tags:
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "An agent that works in a demo is not an agent that works on your worst Tuesday. This article covers everything between a clean architecture and a production deployment: tool design, error handling and recovery, human-in-the-loop patterns, async/durable execution, evaluation of long-horizon behavior, observability, security and prompt injection, and cost control over long runs — with a full interview Q&A section covering the production questions that actually get asked."
 ---
 

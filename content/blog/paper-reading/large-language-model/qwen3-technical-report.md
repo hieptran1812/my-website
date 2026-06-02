@@ -9,7 +9,6 @@ subcategory: "Large Language Model"
 author: "Hiep Tran"
 featured: false
 readTime: 30
-aiGenerated: true
 ---
 
 For most of 2024 and early 2025, shipping a strong open-weight model meant shipping *two* of them. You trained an instruction-tuned model for chat, and you trained a separate reasoning model — DeepSeek-R1, QwQ, o1-style — that spent thousands of tokens thinking before it answered. The two had different latency profiles, different serving configs, different prompt templates, and different failure modes. Picking the wrong one for a request was a real production decision, and getting it wrong cost you either accuracy or money.

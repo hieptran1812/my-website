@@ -8,7 +8,6 @@ tags:
 date: "2026-03-15"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Context engineering is the art of strategically managing the limited token budget available to LLMs when building AI agents. This article breaks down techniques like compaction, structured note-taking, and sub-agent architectures that help agents work effectively over long horizons."
 ---
 

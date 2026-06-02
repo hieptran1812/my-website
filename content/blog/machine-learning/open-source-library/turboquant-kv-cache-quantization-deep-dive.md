@@ -9,7 +9,6 @@ subcategory: "Open Source Library"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 There is a quiet lie in the way most of us reason about LLM memory. We open a model card, read "27B parameters", multiply by two bytes for FP16, and conclude the model needs ~54 GB of VRAM. That number is real, but it is the *static* cost — the part that never moves. The part that actually decides whether your 30k-token agent request fits on the GPU is the **KV cache**, and that cost is dynamic, grows linearly with context length, and is almost never the thing people budget for. By the time you are serving 100k-token contexts to a handful of concurrent users, the KV cache is no longer a footnote next to the weights. It *is* the bill.

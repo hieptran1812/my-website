@@ -7,7 +7,6 @@ tags: ["safety", "alignment", "llm-agents", "red-teaming", "robotics"]
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A production-grade, defense-in-depth view of safety for LLM agents that drive real tools and real robots. We walk layer by layer from model alignment to physical interlocks, and specify what a 'safe fallback' actually looks like in code, behavior, and incident review."
 ---
 

@@ -7,7 +7,6 @@ tags: ["mcp", "ai-agent", "protocol", "anthropic", "tool-calling", "llm", "integ
 date: "2026-03-16"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Model Context Protocol (MCP) is an open standard that lets AI applications connect to any external system through a unified interface — like USB-C for AI. This guide covers the architecture, primitives, transport layers, and real-world use cases with code examples."
 ---
 

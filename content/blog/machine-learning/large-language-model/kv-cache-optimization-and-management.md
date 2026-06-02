@@ -20,7 +20,6 @@ tags:
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: true
-aiGenerated: true
 excerpt: "The KV cache is the single largest memory consumer in LLM serving — and the single biggest lever for throughput and latency. This guide explains how to manage it (PagedAttention, RadixAttention, block managers) and how to optimize it (GQA, MLA, FP8 quantization, eviction, offloading, prefix sharing), with the exact detail you need for staff-level LLM infra interviews."
 ---
 

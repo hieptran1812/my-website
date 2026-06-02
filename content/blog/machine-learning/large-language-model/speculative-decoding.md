@@ -23,7 +23,6 @@ subcategory: "Large Language Model"
 author: "Hiep Tran"
 featured: true
 readTime: 51
-aiGenerated: true
 ---
 
 If you have ever stared at `nvidia-smi` while a 70B model decoded one token at a time and wondered why an $40,000 GPU was sitting at 8% utilization, this article is for you. That idle silicon is not a bug, and it is not your code. It is the load-bearing assumption underneath every speculative decoding system shipped in the last three years: **single-token decoding does not stress the compute units of a modern GPU; it stresses the wires that carry weights from HBM to the SMs**. Speculative decoding is what you do once you decide to stop wasting those FLOPs.

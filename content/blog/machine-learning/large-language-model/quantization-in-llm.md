@@ -7,7 +7,6 @@ tags: ["llm", "quantization", "inference", "optimization", "deep-learning", "mod
 date: "2026-03-16"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Quantization is the most practical technique for making large language models run on consumer hardware. This guide covers the theory, the math, the major methods (GPTQ, AWQ, GGUF, bitsandbytes), and the real-world trade-offs every engineer should understand."
 ---
 

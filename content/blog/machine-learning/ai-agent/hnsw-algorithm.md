@@ -17,7 +17,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "HNSW (Hierarchical Navigable Small World) is the dominant algorithm for fast approximate nearest neighbor search — powering vector databases like Pinecone, Weaviate, Qdrant, and pgvector. This guide explains the algorithm from first principles, with intuition, math, implementation, and real-world case studies."
 ---
 

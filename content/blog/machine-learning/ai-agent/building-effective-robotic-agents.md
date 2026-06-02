@@ -17,7 +17,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A practical guide to building robotic agents — covering the perception-planning-action loop, classical vs learned approaches, foundation models for robotics, sim-to-real transfer, and real-world case studies from warehouses to kitchens."
 ---
 

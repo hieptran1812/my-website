@@ -7,7 +7,6 @@ tags: ["VAE", "Generative Models", "Deep Learning", "Diffusion Models", "Latent 
 date: "2026-03-16"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A deep dive into Variational Autoencoders — how they work, why they work, and how they compare to diffusion models. Covers the math, intuition, code, and practical trade-offs."
 ---
 

@@ -22,7 +22,6 @@ subcategory: "Open Source Library"
 author: "Hiep Tran"
 featured: true
 readTime: 51
-aiGenerated: true
 ---
 
 For two and a half years the only "real" question in language modelling was how to make autoregressive transformers cheaper to serve. Diffusion language models were the diorama down the hall — interesting, theoretically clean, and never quite competitive with a well-tuned Llama. That changed quietly in 2024–2026 with the LLaDA family, Dream, and a wave of papers (MDLM, BD3LM, diffu-GRPO, Fast-dLLM, Edit Flow) that pushed masked-diffusion language models to within a few points of strong AR baselines on math, code, and reasoning benchmarks — while reaching them with parallel decoding, bidirectional context, and an inference loop that does not look anything like a left-to-right token-by-token sampler.

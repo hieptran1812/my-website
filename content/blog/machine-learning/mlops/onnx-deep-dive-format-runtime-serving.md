@@ -9,7 +9,6 @@ subcategory: "MLOps"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 Everyone who has shipped a model to production has met the same promise: train in PyTorch, export to ONNX, run anywhere. One file, every backend, no framework lock-in. It is a clean story and it sells the format to managers in a single sentence.

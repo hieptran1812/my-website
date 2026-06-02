@@ -7,7 +7,6 @@ tags: ["quantization", "INT4", "INT8", "FP16", "GPTQ", "AWQ", "SmoothQuant", "ed
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A field guide to LLM quantization on edge hardware: numeric formats, PTQ methods (GPTQ, AWQ, SmoothQuant, SpinQuant, QuaRot), calibration, what breaks at INT4, KV cache quantization, and a concrete recipe for Jetson AGX Orin."
 ---
 

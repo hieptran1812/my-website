@@ -18,7 +18,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Training an LLM is a one-time, well-funded event. Serving it is a forever problem that has to be cheap, fast, and correct under load. This article walks through every major inference optimization — prefill vs decode, KV cache, FlashAttention, PagedAttention, continuous batching, quantization, speculative decoding, and prompt caching — from first principles, with diagrams, arithmetic, and concrete numbers so the tradeoffs become obvious."
 ---
 

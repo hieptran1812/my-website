@@ -7,7 +7,6 @@ tags: ["llm", "inference", "optimization", "kv-cache", "quantization", "speculat
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "LLM inference is slow and expensive because of two fundamental bottlenecks: memory bandwidth and sequential decoding. This guide walks through every major technique used to beat them — KV cache, continuous batching, PagedAttention, quantization, speculative decoding, FlashAttention, and more — with intuition and clear explanations."
 ---
 

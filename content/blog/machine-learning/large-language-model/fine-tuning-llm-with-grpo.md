@@ -7,7 +7,6 @@ tags: ["llm", "grpo", "rlhf", "fine-tuning", "reinforcement-learning", "reasonin
 date: "2026-03-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Group Relative Policy Optimization (GRPO) is the RL technique behind DeepSeek's reasoning breakthroughs — it removes the value model from PPO, uses group-based advantage estimation, and makes RL training of LLMs dramatically simpler and more memory-efficient. This guide covers the theory, the math, the full training pipeline with code, and practical lessons from real-world use."
 ---
 

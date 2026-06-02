@@ -24,7 +24,6 @@ tags:
 date: "2026-04-19"
 author: "Hiep Tran"
 featured: true
-aiGenerated: true
 excerpt: "An exhaustive, trade-off-first guide to choosing GPUs for LLM inference. Every section derives the trade-off from first principles with numbers: bandwidth vs FLOPs vs VRAM, batch size vs latency vs throughput, quantization quality vs speed vs memory, single-GPU vs tensor parallel vs pipeline parallel, NVLink vs PCIe vs InfiniBand, self-host vs API, spot vs reserved, dense vs MoE, and more. Detailed worked examples across H100, H200, B200, L40S, A100, MI300X."
 ---
 

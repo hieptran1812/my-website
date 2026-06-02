@@ -19,7 +19,6 @@ date: "2026-05-17"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 ## Why your GPU is starving

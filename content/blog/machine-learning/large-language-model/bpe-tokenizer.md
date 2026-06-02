@@ -7,7 +7,6 @@ tags: ["nlp", "tokenization", "bpe", "llm", "gpt", "transformers", "deep-learnin
 date: "2026-01-15"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A comprehensive guide to Byte Pair Encoding (BPE) tokenization — how GPT, Llama, and other LLMs break down text into tokens, why it matters for model behavior, and how to build your own tokenizer from scratch."
 ---
 

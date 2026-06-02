@@ -16,7 +16,6 @@ tags:
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A senior-level deep dive into OpenAI Whisper — what the model actually is under the hood, why 680k hours of weak supervision matters more than the architecture, where its hallucination problem comes from, and how to deploy it in production with faster-whisper, distil-whisper, or TensorRT-LLM."
 ---
 

@@ -18,7 +18,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A comprehensive guide to training CosyVoice and CosyVoice 2 — Alibaba's LLM-based TTS systems. Covers the full pipeline: speech tokenization (VQ/FSQ), autoregressive LLM for text-to-token, flow matching for token-to-mel, streaming via chunk-aware causal decoding, and interview-ready depth."
 ---
 

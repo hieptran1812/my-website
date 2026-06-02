@@ -7,7 +7,6 @@ tags: ["llm", "pruning", "sparsity", "model-compression", "inference", "deep-lea
 date: "2026-04-23"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 image: "/imgs/blogs/pruning-in-llm-01-taxonomy.png"
 excerpt: "A deep dive into pruning for large language models — the taxonomy, importance scoring math, prune-then-heal recipes, and case studies: SparseGPT, Wanda, LLM-Pruner, Sheared LLaMA, Minitron, and Llama 3.2."
 ---

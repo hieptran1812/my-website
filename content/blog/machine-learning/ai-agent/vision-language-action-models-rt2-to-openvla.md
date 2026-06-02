@@ -7,7 +7,6 @@ tags: ["VLA", "RT-2", "OpenVLA", "pi0", "Robotics", "Foundation Models"]
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: true
-aiGenerated: true
 excerpt: "Deep dive into the VLA lineage: RT-1, RT-2, RT-X, OpenVLA, Octo, and pi0 / pi-0.5. Architectures, action tokenization tradeoffs, inference latency on Jetson and RTX, fine-tuning recipes for new embodiments, and the open problems blocking general-purpose robot foundation models."
 ---
 

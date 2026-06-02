@@ -25,7 +25,6 @@ category: "trading"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 The Black-Scholes formula is the most consequential equation in modern finance and the most widely deployed pricing model on earth. Every options exchange, every market-making desk, every retail brokerage, every academic textbook, every CFA syllabus, every Bloomberg terminal screen: somewhere in the stack, a closed-form Black-Scholes call is being evaluated. The formula won a Nobel prize for Merton and Scholes in 1997 (Fischer Black having died in 1995); it created a $200-trillion-notional global derivatives market that did not previously exist; and it is, in a sense everyone in the industry knows, *wrong about almost every assumption it makes*. The smile, the skew, fat tails, jumps, stochastic volatility, transaction costs, discrete trading — all of these violate Black-Scholes assumptions, and yet the industry uses Black-Scholes every day to price tens of billions of dollars of risk.

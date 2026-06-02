@@ -23,7 +23,6 @@ category: "trading"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 The Black-Scholes formula gives a single price as a function of a single volatility number. Real options markets give you a *table* of prices: rows are strikes, columns are expiries, every cell is an option quote. Inverting Black-Scholes on each cell produces a *table of implied volatilities*, and that table is the *volatility surface*. The surface is what every options desk publishes once or many times per day, what every pricing engine calibrates against, what every risk system aggregates over. If you have only ten minutes to learn what the modern options industry actually trades, learn the surface.

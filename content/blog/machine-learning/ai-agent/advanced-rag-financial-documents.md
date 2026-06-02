@@ -17,7 +17,6 @@ tags:
 date: "2026-04-16"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A deep dive into building production-grade RAG pipelines for financial documents — handling complex tables, multi-column layouts, charts, scanned PDFs, and mixed modalities with advanced parsing, chunking, and retrieval strategies."
 ---
 

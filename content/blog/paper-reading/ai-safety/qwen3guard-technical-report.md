@@ -9,7 +9,6 @@ subcategory: "AI Safety"
 author: "Hiep Tran"
 featured: false
 readTime: 30
-aiGenerated: true
 ---
 
 A guardrail model is the bouncer standing next to your LLM — the component that gets to say no. It reads what the user sent and what the model is about to say, and it decides: safe, or not. Almost every such model — LlamaGuard, ShieldGemma, WildGuard — does this as a *binary* classification on a *finished* piece of text. The user prompt arrives, the guard labels it; the model finishes its full response, the guard labels that. Two design choices hide in that sentence, and the Qwen3Guard technical report ([arXiv:2510.14276](https://arxiv.org/abs/2510.14276)) argues both are wrong.

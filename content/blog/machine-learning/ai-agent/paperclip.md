@@ -7,7 +7,6 @@ tags: ["ai-agent", "orchestration", "autonomous-agents", "paperclip", "multi-age
 date: "2026-03-15"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Paperclip is an open-source orchestration platform that manages autonomous AI agent teams like a company — with org charts, budgets, governance, and goal-aligned task execution. Here's what makes it interesting and what we can learn from its architecture."
 ---
 

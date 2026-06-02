@@ -9,7 +9,6 @@ subcategory: "AI Agent"
 author: "Hiep Tran"
 featured: false
 readTime: 30
-aiGenerated: true
 ---
 
 There is a quiet assumption baked into most "our model is good at coding" announcements: that coding ability is a property of the model, scaled up with parameters and code tokens like any other capability. Qwen3-Coder-Next is built on the opposite premise. Its central claim — stated plainly in the technical report — is that **scaling agentic training, not model size, is the key driver of real-world coding-agent capability**. The model that ships activates just **3 billion parameters per token**, and it lands within striking distance of frontier closed models on the benchmarks that actually involve fixing software.

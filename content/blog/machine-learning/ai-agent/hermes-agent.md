@@ -23,7 +23,6 @@ subcategory: "AI Agent"
 author: "Hiep Tran"
 featured: true
 readTime: 51
-aiGenerated: true
 ---
 
 Most agents I have shipped are amnesiacs. They open a tool, do a job, log a transcript, and reset on Monday. The next session begins with the same dance: re-explain the project layout, re-state the user's preferences, re-derive the workaround for that one CI quirk. We have spent two years optimizing the wrong thing — bigger context windows, faster decoders, better tool schemas — while the operational complaint from real users has stayed identical: *the agent does not learn*. It is groundhog day, with a $0.20/turn price tag.

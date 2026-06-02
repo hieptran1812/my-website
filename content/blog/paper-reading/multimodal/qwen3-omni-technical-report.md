@@ -9,7 +9,6 @@ subcategory: "Multimodal"
 author: "Hiep Tran"
 featured: false
 readTime: 30
-aiGenerated: true
 ---
 
 There is a folk theorem in multimodal modeling that everyone has absorbed and almost nobody has stated: you cannot have it all. Add audio to a strong text model and the text gets a little worse. Add vision and the audio drifts. The unified "omni" model is always, quietly, a *compromise* model — a jack of four trades that a same-sized specialist beats on each one individually. The trade-off felt structural, like conservation of mass. You have a fixed parameter budget; spreading it across four modalities means less for each.

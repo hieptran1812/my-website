@@ -19,7 +19,6 @@ tags:
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Multi-agent systems are seductive — specialist agents, emergent behavior, the appeal of a 'team of AIs.' They are also where most agent projects get stuck. This is a long, rigorous walk through the patterns that actually work (orchestrator-worker, supervisor, pipeline, debate, hierarchical, blackboard), with deep case studies of real production systems (Anthropic's research agents, Claude Code's single-agent philosophy, Devin, MetaGPT, ChatDev, AutoGPT, customer support bots), and an interview Q&A section covering what gets asked at senior level."
 ---
 

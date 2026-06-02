@@ -19,7 +19,6 @@ tags:
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: true
-aiGenerated: true
 excerpt: "A deep dive into embedding models — what they are, how they're built, how to train and fine-tune them from scratch or from a base model, and how teams at Cohere, OpenAI, Google, Shopify, and others shipped them in production. Covers architectures, contrastive learning, hard-negative mining, matryoshka representations, multi-vector models, distillation, evaluation on MTEB, cost trade-offs, and concrete recipes."
 ---
 

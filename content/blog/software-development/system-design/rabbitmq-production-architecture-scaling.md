@@ -9,7 +9,6 @@ subcategory: "System Design"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 Most teams introduce RabbitMQ to "decouple services" and discover, sometime around their first incident, that they have not decoupled anything — they have just moved the coupling onto a broker they do not understand. This article is the long version of the conversation I have had with every team I have helped scale a RabbitMQ deployment from one node and a thousand messages per minute to a multi-region cluster carrying serious traffic. We will walk through the routing model, the delivery guarantees nobody reads carefully, the way classic and quorum queues differ in the parts that matter, five named case studies including one where reaching for RabbitMQ was the wrong call, the connection-and-channel model that is responsible for a startling fraction of production incidents, and the scaling patterns that work when you have more than three nodes and more than one region.

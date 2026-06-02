@@ -17,7 +17,6 @@ tags:
 date: "2026-04-16"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A comprehensive guide to training Vision-Language-Action (VLA) models — bridging vision-language understanding with physical action generation for robotics. Covers architectures, data pipelines, training recipes, and deployment strategies."
 ---
 

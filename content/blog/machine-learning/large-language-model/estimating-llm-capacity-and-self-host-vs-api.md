@@ -19,7 +19,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "How many GPUs do I need? How many concurrent users can one H100 handle? Is it cheaper to self-host a 70B model or pay OpenAI? These are the questions that stall every LLM project at the planning stage, and most answers online are hand-wavy. This article gives you the actual formulas, real throughput numbers, worked examples at 100 / 1,000 / 10,000 user scales, and a concrete break-even analysis for self-hosted vs third-party APIs."
 ---
 

@@ -18,7 +18,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "vLLM is the most widely adopted LLM serving framework, built around PagedAttention — the innovation that solved the KV cache memory fragmentation problem. This guide covers its architecture, every major optimization, production deployment, and interview-ready depth on LLM serving systems."
 ---
 

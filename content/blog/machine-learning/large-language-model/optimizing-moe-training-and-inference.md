@@ -9,7 +9,6 @@ subcategory: "Large Language Model"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 Mixture-of-Experts is the only credible answer the field has produced to the cost equation of frontier-scale pretraining: parameters going up faster than per-token FLOPs. The first time you stand up a 200B-active-out-of-1T MoE on a single rack, this stops being a charming paper and starts being a systems problem with no individual subsystem to blame. Memory looks fine. Compute looks fine. Throughput is half what the dense baseline gave you per dollar. Then you read the Nsight trace and see two big purple bands that are not in your dense profiles, and the rest of this article begins.

@@ -18,7 +18,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "SGLang is one of the fastest LLM serving frameworks, pioneering RadixAttention for automatic KV cache reuse. This guide covers its architecture, core innovations, how it compares to vLLM, and everything you need for interviews on LLM serving systems."
 ---
 

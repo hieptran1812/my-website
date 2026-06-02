@@ -21,7 +21,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A deep dive into speech tokenizers — the component that makes LLM-style generative speech possible. Covers VQ-VAE, RVQ, FSQ, acoustic vs semantic tokens, EnCodec, SoundStream, HuBERT, WavTokenizer, CosyVoice's S³ tokenizer, training objectives, evaluation, and the engineering trade-offs that matter in production."
 ---
 

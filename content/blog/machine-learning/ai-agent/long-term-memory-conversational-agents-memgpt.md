@@ -17,7 +17,6 @@ tags:
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A senior-level walkthrough of long-term memory for conversational agents — why context windows are not memory, the taxonomy of memory types, and the architectures (MemGPT, Letta, mem0, Zep) that let an agent remember a user for months without blowing up cost or latency."
 ---
 

@@ -20,7 +20,6 @@ tags:
 date: "2026-04-19"
 author: "Hiep Tran"
 featured: true
-aiGenerated: true
 excerpt: "A deep technical tour of the four most influential open-weight LLM families of the current era — Qwen (Alibaba), Llama (Meta), Gemma (Google), and DeepSeek — covering architecture differences (RoPE variants, GQA, MoE, MLA), pretraining data and curriculum, post-training recipes (SFT → RLHF/DPO/GRPO), practical fine-tuning playbooks, and real production case studies from teams who shipped them."
 ---
 

@@ -23,7 +23,6 @@ subcategory: "Model Serving"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 Most teams treat TensorRT as a black box with a magic speedup knob: feed it an ONNX file, get back something faster, ship it. That works right up until the engine fails to load on a different GPU, or INT8 quietly drops six points of accuracy, or a "30% faster" benchmark turns into a 10% regression in production because the batch size you tuned for is not the batch size you serve. Every one of those failures comes from the same root misunderstanding — TensorRT is not a runtime that runs your model. **TensorRT is a compiler that builds a new program, specialized to one GPU, one precision policy, and one shape regime, and then runs that.** Once you internalize that, the failure modes stop being mysterious and start being predictable.

@@ -7,7 +7,6 @@ tags: ["llm", "dpo", "rlhf", "fine-tuning", "alignment", "preference-optimizatio
 date: "2026-03-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Direct Preference Optimization (DPO) is the most practical way to align LLMs with human preferences — no reward model, no RL loop, just a clever loss function. This guide covers the theory, the math, every major training framework (TRL, Unsloth, Axolotl, LLaMA-Factory), hardware planning, and hard-won lessons from production."
 ---
 

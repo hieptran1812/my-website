@@ -17,7 +17,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A deep comparison of VAEs and diffusion models — covering their shared mathematical foundations, architectural differences, training dynamics, quality-speed trade-offs, and when to use each. Written for interview preparation with detailed Q&A."
 ---
 

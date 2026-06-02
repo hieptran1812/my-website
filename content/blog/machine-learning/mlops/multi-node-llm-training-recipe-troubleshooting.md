@@ -9,7 +9,6 @@ subcategory: "MLOps"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 The first multi-node training job I ever ran hung for eleven minutes before any rank wrote a single byte to stdout. Twelve hosts, ninety-six GPUs, four hundred kilodollars of hardware burning watts, and the only sign that anything was happening was the fans on the racks spinning a little harder. When the watchdog finally fired, the stack trace pointed at a NCCL `ncclAllReduce` call buried twelve frames deep inside FSDP's grad reduction. The actual cause turned out to be that one of the four IB rails on host 7 had negotiated a single lane instead of four. One faulty cable. One slow rank. The whole job sitting at the barrier.

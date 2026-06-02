@@ -9,7 +9,6 @@ subcategory: "Large Language Model"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 Most of the engineers I have worked with treat the tokenizer the way they treat the operating-system clock: it is a thing that exists, it does its job, and you don't think about it until something is wrong. Then a finetune blows up because the new domain vocabulary tokenizes at 3.4x the fertility of the base model. Then a customer in São Paulo complains that their per-request bill is double the bill in Boston, for the same query. Then a "simple" multilingual eval shows your 70B model losing to a 7B model with a tokenizer that was actually designed for the target language. Every one of those is a tokenizer problem dressed up as something else.

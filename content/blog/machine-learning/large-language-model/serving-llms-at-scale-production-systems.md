@@ -19,7 +19,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Inference optimization makes the model fast. Serving is what turns that fast model into a product that stays fast under real traffic. This article walks through the production systems problems you only hit at scale — request scheduling, prefill–decode disaggregation, multi-LoRA serving, multi-layer caching, autoscaling LLMs (which is genuinely harder than it looks), SLO-driven observability, and the cost model that decides what's actually worth doing."
 ---
 

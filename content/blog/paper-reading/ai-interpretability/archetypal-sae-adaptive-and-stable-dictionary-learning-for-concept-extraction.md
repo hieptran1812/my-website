@@ -16,7 +16,6 @@ tags:
 date: "2026-03-16"
 author: Hiep Tran
 featured: false
-aiGenerated: true
 image: "/imgs/blogs/archetypal-sae-adaptive-and-stable-dictionary-learning-for-concept-extraction-20260316104615.png"
 excerpt: >-
   Standard SAEs are unstable — identical training runs produce wildly different

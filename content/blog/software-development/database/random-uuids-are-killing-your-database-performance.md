@@ -7,7 +7,6 @@ tags: ["database", "uuid", "performance", "indexing", "b-tree", "snowflake-id", 
 date: "2026-03-15"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 image: "/imgs/blogs/random-uuids-are-killing-your-database-performance-20260315170553.png"
 excerpt: "Switching from integer IDs to UUIDv4 can degrade write throughput by 20–90%. Understanding why — and how UUIDv7 and Twitter's Snowflake ID fix it — is critical for any system at scale."
 ---

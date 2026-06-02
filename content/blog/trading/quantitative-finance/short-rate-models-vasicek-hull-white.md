@@ -22,7 +22,6 @@ category: "trading"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 A yield curve tells you what rates are *today*. A short-rate model tells you how rates *evolve over time*. The curve is a static snapshot; the short-rate model is the dynamic process. Pricing a vanilla bond requires only the curve. Pricing a callable bond, a Bermudan swaption, a mortgage-backed security with prepayments, or any other product whose payoff depends on the *path* of future rates requires a short-rate model. The curve provides the initial condition; the model provides the dynamics.

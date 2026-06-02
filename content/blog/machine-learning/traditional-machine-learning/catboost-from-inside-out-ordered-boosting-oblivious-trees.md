@@ -22,7 +22,6 @@ subcategory: "Traditional Machine Learning"
 author: "Hiep Tran"
 featured: true
 readTime: 56
-aiGenerated: true
 ---
 
 If you have shipped a tabular model in production in the last five years, you have lived through the same bug at least once. You added a high-cardinality categorical feature — `merchant_id`, `device_model`, `zip_code`, `creative_id` — encoded it with a target mean, watched the offline AUC jump, deployed it, and then watched the online metric quietly slide back to where it was before. Or worse, slide further down. Somebody opens a postmortem; somebody finds the encoding step in the pipeline; somebody mutters the words "target leakage" and "you should have used a holdout fold"; the team writes a Confluence page and moves on. Six months later it happens again, with a different feature, in a different repo.

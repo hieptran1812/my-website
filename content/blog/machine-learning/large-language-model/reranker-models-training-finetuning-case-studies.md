@@ -19,7 +19,6 @@ tags:
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: true
-aiGenerated: true
 excerpt: "A deep dive into reranker models — what they are, why they matter, how cross-encoders differ from bi-encoders, how to train and fine-tune them, and how production teams at Cohere, BAAI, Jina, and Airbnb shipped them. Covers pointwise/pairwise/listwise objectives, distillation, hard-negative mining, latency budgets, LLM-as-reranker, and concrete recipes."
 ---
 

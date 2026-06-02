@@ -9,7 +9,6 @@ subcategory: "Large Language Model"
 author: "Hiep Tran"
 featured: false
 readTime: 30
-aiGenerated: true
 ---
 
 The Qwen3 flagship, Qwen3-235B-A22B, is a very good model that is also a very expensive object to keep alive. Two hundred and thirty-five billion parameters have to sit in GPU memory whether or not any given token routes through them, and at long context the attention cost climbs quadratically until the KV cache, not the weights, is what bounds your batch size. The model is excellent. The serving bill is not, and at long context the bill is the part that decides whether a deployment is viable at all — not whether the model is good enough, but whether you can afford to let it think over a million tokens at the throughput your users will tolerate.

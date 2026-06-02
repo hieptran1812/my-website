@@ -23,7 +23,6 @@ category: "trading"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 A vanilla European option is a hockey stick at expiry. An exotic option is anything more complicated than that. The taxonomy of "more complicated" is large: barriers that knock the option in or out, Asians that average the underlying, lookbacks that pay the maximum, baskets that depend on multiple underlyings, quanto and composite cross-currency structures, variance derivatives that trade volatility itself, autocallables that terminate early, cliquets that reset strikes periodically. Each named structure carries its own pricing complexity, its own Greek profile, its own hedging recipe, its own failure modes. Exotics are where pure mathematical pricing meets bespoke engineering.

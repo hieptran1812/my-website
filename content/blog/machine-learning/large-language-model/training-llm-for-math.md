@@ -17,7 +17,6 @@ tags:
 date: "2026-03-18"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Mathematical reasoning is one of the hardest capabilities to teach LLMs — and one of the most valuable. This guide covers every stage of the pipeline: curating math datasets, supervised fine-tuning with chain-of-thought, reward modeling, reinforcement learning (GRPO/PPO), evaluation, and the hard lessons from scaling math LLMs in practice."
 ---
 

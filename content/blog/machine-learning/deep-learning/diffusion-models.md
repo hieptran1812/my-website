@@ -17,7 +17,6 @@ tags:
 date: "2026-04-16"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A comprehensive, interview-ready guide to diffusion models — covering the forward and reverse process, the math behind DDPM/DDIM, score matching, classifier-free guidance, latent diffusion, and practical implementation. Written to build clear intuition from first principles."
 ---
 

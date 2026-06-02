@@ -22,7 +22,6 @@ category: "trading"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 Most introductions to derivatives pricing open with a definition: "a derivative is a contract whose value depends on an underlying." That definition is technically correct and operationally useless. It tells you nothing about why the desk across the room is willing to quote a price, what number that price is, or what happens to the firm if that number is wrong. The reason desks can quote at all is that they have learned how to *manufacture* the payoff out of liquid instruments — the price they quote is the cost of the manufacturing process, not a forecast.

@@ -18,7 +18,6 @@ tags:
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A comprehensive guide to training ASR models — from audio fundamentals and feature extraction, through CTC, RNN-T, and attention-based architectures, to modern foundation models like Whisper. Covers data pipelines, training recipes, evaluation, and interview-ready depth."
 ---
 

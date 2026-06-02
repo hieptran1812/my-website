@@ -7,7 +7,6 @@ tags: ["diffusion-models", "lora", "fine-tuning", "stable-diffusion", "huggingfa
 date: "2026-03-15"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Learn how to fine-tune Stable Diffusion with LoRA — a lightweight technique that lets you customize image generation models using minimal compute and memory, producing adapter weights of just a few hundred MBs."
 ---
 

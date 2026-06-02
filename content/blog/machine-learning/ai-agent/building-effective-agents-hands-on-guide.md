@@ -7,7 +7,6 @@ tags: ["ai-agent", "agent-building", "llm", "tool-use", "prompt-engineering", "a
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "A practical, step-by-step guide to building LLM agents that actually work in production. We start from a minimal agent loop and build up to a polished system, then walk through three concrete case studies — a code review agent, a customer support agent, and a research agent — showing every design decision along the way."
 ---
 

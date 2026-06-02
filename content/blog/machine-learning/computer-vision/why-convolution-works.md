@@ -7,7 +7,6 @@ tags: ["convolution", "cnn", "inductive-bias", "representation-learning", "compu
 date: "2026-04-23"
 author: "Hiep Tran"
 featured: false
-aiGenerated: true
 excerpt: "Convolution isn't a neural-network trick — it's a hypothesis about the world. This article unpacks why that hypothesis is the right one for natural images, quantifies what it buys you in parameters and samples, shows where it leaks in production systems, and walks through the engineering decisions (im2col, depthwise separable, BN, anti-aliasing, dilation) that define how modern CNNs actually work."
 ---
 
