@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Article } from "@/lib/blog";
-import { getArticleImageUrl, BLUR_DATA_URL } from "@/lib/articleImage";
+import { getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
 import FadeInWrapper from "./FadeInWrapper";
 import CollectionTag from "./CollectionTag";
 import { TagList } from "./TagBadge";
@@ -37,7 +37,7 @@ export default function ArticleCard({
             {/* Image Section */}
             <div className="relative w-full h-48 overflow-hidden">
               <Image
-                src={getArticleImageUrl(article)}
+                {...getCardImageProps(article)}
                 alt={article.title}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -201,7 +201,7 @@ export default function ArticleCard({
             {/* Image Section */}
             <div className="relative w-full h-32 overflow-hidden">
               <Image
-                src={getArticleImageUrl(article)}
+                {...getCardImageProps(article)}
                 alt={article.title}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -324,7 +324,7 @@ export default function ArticleCard({
           {/* Image Section */}
           <div className="relative w-full h-40 overflow-hidden">
             <Image
-              src={getArticleImageUrl(article)}
+              {...getCardImageProps(article)}
               alt={article.title}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"

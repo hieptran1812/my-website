@@ -11,6 +11,7 @@
     "postinstall": "prisma generate",
     "vercel-build": "prisma generate && next build",
     "update-readtime": "tsx scripts/updateReadTime.ts",
+    "optimize-blog-images": "tsx scripts/optimizeBlogImages.ts",
     "update-paper-references": "tsx scripts/updatePaperReferences.ts",
     "blog-report": "tsx scripts/blogAnalytics.ts report",
     "blog-validate": "tsx scripts/blogAnalytics.ts validate"
@@ -51,6 +52,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.6",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "tsx": "^4.19.4",
     "typescript": "^5"

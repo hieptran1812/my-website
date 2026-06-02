@@ -6,7 +6,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import ArticleCard from "@/components/ArticleCard";
 import ArticleGrid from "@/components/ArticleGrid";
 import { formatDateMedium, formatDateShort } from "@/lib/dateUtils";
-import { getArticleImageUrl, BLUR_DATA_URL } from "@/lib/articleImage";
+import { getArticleImageUrl, getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
 
 interface BlogPostMetadata {
   slug: string;
@@ -274,7 +274,7 @@ export default function BlogPage() {
                       {/* Left: Featured Image (60%) */}
                       <div className="md:col-span-3 relative w-full aspect-[672/366]">
                         <Image
-                          src={getArticleImageUrl(featuredArticle)}
+                          {...getCardImageProps(featuredArticle)}
                           alt={featuredArticle.title}
                           fill
                           className="object-cover"
@@ -361,7 +361,7 @@ export default function BlogPage() {
                         >
                           <div className="relative h-32 overflow-hidden">
                             <Image
-                              src={getArticleImageUrl(article)}
+                              {...getCardImageProps(article)}
                               alt={article.title}
                               fill
                               className="object-cover transition-transform duration-300 group-hover:scale-105"

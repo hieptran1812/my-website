@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CollectionTag from "@/components/CollectionTag";
 import { BlogPostMetadata, calculateContentReadTime } from "../lib/blog";
-import { getArticleImageUrl, BLUR_DATA_URL } from "../lib/articleImage";
+import { getArticleImageUrl, getCardImageProps, BLUR_DATA_URL } from "../lib/articleImage";
 import { formatDateMedium } from "../lib/dateUtils";
 
 // Constants
@@ -488,7 +488,7 @@ export default function BlogSection() {
                   {/* Featured Image (60%) */}
                   <div className="lg:col-span-3 relative w-full aspect-[672/366] overflow-hidden">
                     <Image
-                      src={featuredArticle.image}
+                      {...getCardImageProps(featuredArticle)}
                       alt={`Cover image for ${featuredArticle.title}`}
                       fill
                       sizes="(max-width: 1024px) 100vw, 60vw"
@@ -686,7 +686,7 @@ export default function BlogSection() {
                   >
                     <div className="relative h-48 overflow-hidden">
                       <Image
-                        src={article.image}
+                        {...getCardImageProps(article)}
                         alt={`Cover image for ${article.title}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

@@ -9,7 +9,7 @@ import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
 import { TagList } from "@/components/TagBadge";
-import { getArticleImageUrl, BLUR_DATA_URL } from "@/lib/articleImage";
+import { getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
 import SubcategoryFilter from "@/components/SubcategoryFilter";
 import BlogSearchBar from "@/components/BlogSearchBar";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
@@ -211,7 +211,7 @@ export default function NotesBlogPage() {
                       {/* Left: Featured Image (60%) */}
                       <div className="md:col-span-3 relative w-full aspect-[672/366]">
                         <Image
-                          src={getArticleImageUrl(featuredArticle)}
+                          {...getCardImageProps(featuredArticle)}
                           alt={featuredArticle.title}
                           fill
                           className="object-cover"
@@ -310,7 +310,7 @@ export default function NotesBlogPage() {
                         >
                           <div className="relative h-32 overflow-hidden">
                             <Image
-                              src={getArticleImageUrl(article)}
+                              {...getCardImageProps(article)}
                               alt={article.title}
                               fill
                               className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -433,7 +433,7 @@ export default function NotesBlogPage() {
                         >
                           <div className="relative h-48 overflow-hidden">
                             <Image
-                              src={getArticleImageUrl(article)}
+                              {...getCardImageProps(article)}
                               alt={article.title}
                               fill
                               className="object-cover transition-transform duration-300 group-hover:scale-105"

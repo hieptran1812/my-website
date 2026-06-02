@@ -1,3 +1,5 @@
+import { imageDims, toWebp, toCoverThumb } from "./imageRewrite";
+
 const PLACEHOLDER_IMAGES = ["/blog-placeholder.jpg", "/images/default-blog.jpg"];
 
 // 8x5 neutral-gray JPEG used as a universal blur placeholder for cover images.
@@ -36,6 +38,30 @@ export function getArticleImageUrl(article: {
   if (article.subcategory) params.set("subcategory", article.subcategory);
 
   return `/api/og/?${params.toString()}`;
+}
+
+/**
+ * Resolves the props a card-grid <Image> should use for an article cover.
+ *
+ * When the post's cover was converted to a static 16:9 thumbnail
+ * (`<name>.cover.webp`, ~30-60KB), we serve it directly with `unoptimized` —
+ * it's already sized for cards, so routing it through next/image would only
+ * burn Vercel's image-optimization quota for no gain. Everything else
+ * (OG-endpoint covers, un-converted images) keeps next/image: toWebp() is a
+ * no-op for those, and `unoptimized: false` lets next/image resize them.
+ */
+export function getCardImageProps(article: {
+  image?: string;
+  title: string;
+  category?: string;
+  subcategory?: string;
+}): { src: string; unoptimized: boolean } {
+  const raw = getArticleImageUrl(article);
+  const entry = imageDims(raw);
+  if (entry?.cover) {
+    return { src: toCoverThumb(raw), unoptimized: true };
+  }
+  return { src: toWebp(raw), unoptimized: false };
 }
 
 /**
