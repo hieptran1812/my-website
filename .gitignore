@@ -49,3 +49,5 @@ next-env.d.ts
 /prisma/dev.db-journal
 
 /src/generated/prisma
+
+*.log

@@ -108,6 +108,28 @@ const workExperience = [
     ],
     icon: "✍️",
   },
+  {
+    title: "AI Researcher",
+    company: "PTIT Lab X Naver AI Center",
+    location: "Hanoi, Vietnam",
+    period: "Sep 2020 - Dec 2021",
+    type: "Research",
+    description:
+      "Conducting deep learning research on audio classification and time-series forecasting at the PTIT Lab in collaboration with Naver AI Center.",
+    responsibilities: [
+      "Developed an EfficientNet-based deep learning model for cough sound classification",
+      "Developed a CNN-LSTM model to forecast air quality sensor values",
+    ],
+    technologies: [
+      "Python",
+      "PyTorch",
+      "EfficientNet",
+      "CNN-LSTM",
+      "Audio Classification",
+      "Time Series",
+    ],
+    icon: "🔬",
+  },
 ];
 
 const experiences = [
