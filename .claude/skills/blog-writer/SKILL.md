@@ -22,7 +22,7 @@ This skill is intentionally split. Read each reference at the start of the phase
 | File | Read at start of |
 |---|---|
 | `references/diagram-triggers.md` | Phase B (planning the abstraction inventory) |
-| `references/diagram-authoring.md` | Phase C (before authoring the first figure) |
+| `references/diagram-authoring.md` | Phase C (before authoring the first figure); §Visual self-review again at Phase C2 |
 | `references/voice-cheatsheet.md` | Phase D (before writing prose) |
 | `templates/{deep-dive,explainer,paper-reading}.md` | Phase B (skeleton for the chosen depth) |
 
@@ -76,21 +76,50 @@ Ask via `AskUserQuestion` only what's missing:
 
 ### Phase C — Diagrams (parallel, headless)
 
-1. **Read `references/diagram-authoring.md`.**
+1. **Read `references/diagram-authoring.md`.** Diagrams must be **diverse** (vary the figure kind per the plan — see §Diversity), **accurate** (every node/edge/number traces to the prose), and have **no meaningless empty space** (content fills the cropped frame).
 2. For each planned figure: author element JSON → `.cache/blog-writer/<slug>/<slug>-<i>.in.json`.
-3. Validate + normalize each: `node scripts/author-scene.mjs <in.json> <scene.json>`. The validator enforces fonts, palette, containment, no-overlap, density, claim length, caption presence, snap grid. Read its error messages — they name the rule and offending element. Do not bypass.
-4. Batch render all scenes via `mcp_excalidraw/scripts/render-scene-batch.mjs` with a manifest (one browser, ~150 ms per figure after startup).
-5. Verify each PNG ≥ 1600×900 px, ≥ 80 KB.
+3. Validate + normalize each: `node scripts/author-scene.mjs <in.json> <scene.json>`. The validator enforces fonts, palette, containment, no-overlap, density, claim length, caption presence, snap grid, **and anti-dead-space (no blank quadrant/band)**. Read its error messages — they name the rule and offending element. Do not bypass.
+4. Batch render all scenes **to PNG inside the cache** via `mcp_excalidraw/scripts/render-scene-batch.mjs` with a manifest (one browser, ~150 ms per figure after startup).
+5. **Convert each cache PNG → lossless WebP** at `public/imgs/blogs/<slug>-<i>.webp` (`cwebp -lossless -m 6`). The post ships `.webp` only; the PNG is a throwaway intermediate. (Exact loop in `diagram-authoring.md §Batch render`.)
+6. Verify each WebP ≥ 1600×900 px, ≥ 40 KB.
 
-If the renderer exits non-zero or any PNG fails the sharpness floor: **stop and surface to the user**. Never substitute ASCII art, ```text``` boxes, Unicode box-drawing, prose-only "diagrams", or inline ```mermaid``` source. Those are hard failures.
+If the renderer or `cwebp` exits non-zero, or any WebP fails the sharpness floor: **stop and surface to the user**. Never substitute ASCII art, ```text``` boxes, Unicode box-drawing, prose-only "diagrams", or inline ```mermaid``` source. Those are hard failures.
 
 Do NOT use the `mcp__excalidraw__*` MCP tools in this phase — they target the live canvas, which is not on this code path.
+
+### Phase C2 — Visual self-review (vision gate, mandatory)
+
+`author-scene.mjs` and `verify-post.sh` check geometry and structure, but they cannot *see* the rendered pixels — a figure can pass every mechanical rule and still be a tangle of arrows, lopsided, half-empty, or off-topic. **This gate looks at the actual image.** Run it *before* Phase D so a bad figure is re-authored before any prose is built around it.
+
+1. **Read `references/diagram-authoring.md §Visual self-review`** for how to judge each criterion.
+2. **Open every `public/imgs/blogs/<slug>-*.webp` with `Read`** (it renders WebP) and write a one-line verdict per figure — `PASS`, or `FAIL: <criterion> — <what's wrong>`:
+
+   ```
+   fig 1 (pipeline): PASS
+   fig 2 (graph):    FAIL: arrows — 3 edges cross in the middle layer; head of e4 floats off its node
+   fig 3 (matrix):   FAIL: empty space — bottom third is blank; rows not extended to a shared height
+   ```
+
+3. Per-figure rubric — **fail the figure if any answer is "no"**:
+   1. **Faithful to the content** — every box, arrow, color, and number maps to the figure's `_claim`/`_caption` and the section it illustrates (from the Phase B outline); nothing invented for visual filler; the figure actually *proves* its claim. ("đã thể hiện nội dung bài viết")
+   2. **Arrows legible, not a tangle** — count the crossings: arrows don't cross each other or pierce unrelated nodes (> 2 visible crossings = re-author); every head/tail lands cleanly on a node edge (not floating, not buried inside a box); directions match the causal flow; orthogonal where the relationship is axial. ("các mũi tên có rối không")
+   3. **Balanced composition** — visual weight is distributed, not dumped in one corner; the figure reads as centered; aspect ratio matches content shape (pipeline wide-short, stack tall-narrow). ("hình cân đối")
+   4. **No meaningless empty space** — content fills the cropped frame; no wide empty band, no blank quadrant, no single card stretched to fake fullness. ("có nhiều khoảng trống không")
+   5. **Text renders correctly** — all labels in Virgil/Cascadia (no system-font fallback), nothing overflows its box, nothing overlaps, no label sits on an arrow stroke; readable at a glance.
+   6. **Squint test (< 5 s)** — at 25% the main path / bottleneck / outcome is still clear from color and position; one reading direction; ≤ 3 accent colors; no legend needed.
+
+4. Set-level (review all figures together, once):
+   7. **Diversity** — no single figure kind is > ~½ the set; no two adjacent figures share a layout skeleton. If they do, recast one (see §Diversity).
+
+**Decision rule:** any `FAIL` → re-author that figure (back to Phase C step 2: fix the `.in.json`, re-validate, re-render, re-convert), then re-review. Never "fix" a bad figure by editing the prose. Advance to Phase D **only when every figure is a clean PASS.**
+
+For a large post (≥ 8 figures) you may dispatch parallel reviewer subagents — one per figure, each opening its WebP with `Read` and returning the verdict line — then act on the FAILs. Same gate, only the fan-out differs.
 
 ### Phase D — Draft
 
 1. **Read `references/voice-cheatsheet.md`.**
 2. Write the full markdown via `Write` to the resolved target path. Frontmatter exactly per contract; today's date.
-3. Embed each PNG immediately under the section heading it illustrates: `![alt](/imgs/blogs/<slug>-<n>.png)`. The first figure is referenced in the intro paragraph.
+3. Embed each WebP immediately under the section heading it illustrates: `![alt](/imgs/blogs/<slug>-<n>.webp)`. Every embedded image must be `.webp` — no `.png`/`.jpg`/`.svg`. The first figure is referenced in the intro paragraph.
 4. Add cross-links inline using relative paths: `[KV cache](/blog/machine-learning/large-language-model/kv-cache)` (drop the `content/` prefix and `.md` extension).
 
 ### Phase E — Verify (hard gates)
@@ -101,16 +130,16 @@ Run:
 bash .claude/skills/blog-writer/scripts/verify-post.sh <post.md> <slug> <depth>
 ```
 
-`<depth>` is one of `deep-dive`, `explainer`, `paper-reading`. The script checks: word-count floor, diagram-count floor, abstraction coverage (figure within 30 lines of every prose abstraction), PNG sharpness, forbidden text-diagram substitutes, slug-match on every image, no-H1-in-body, English-only, frontmatter sanity.
+`<depth>` is one of `deep-dive`, `explainer`, `paper-reading`. The script checks: word-count floor, diagram-count floor, abstraction coverage (figure within 30 lines of every prose abstraction), WebP sharpness, webp-only embeds (no `.png`/`.jpg`/`.gif`) + no leftover non-webp render artifacts, forbidden text-diagram substitutes, slug-match on every image, no-H1-in-body, English-only, frontmatter sanity.
 
 Any FAIL means re-enter the named phase and fix. The fix for missing figures is *always* to add the figure, never to delete the prose.
 
-For diagram visual review (composition, faithfulness, text containment in the rendered PNG), open each `public/imgs/blogs/<slug>-*.png` with `Read` and inspect:
-- Every text element renders in Virgil or Cascadia (no system font leakage)
-- Bounding box covers ≥ 70% of canvas; no wide empty bands
-- Every node label appears in the prose ±200 lines around its anchor
-- No text overflow, no overlapping bboxes, no arrow-through-label
-- **Arrow accuracy**: every arrow direction matches the causal claim in the prose; head and tail land on the intended node edges (not floating, not piercing a bbox); orthogonal where the relationship is axial; arrowhead style (`arrow` / `triangle_outline` / `bar` / `dot`) and stroke style (solid / dashed / dotted) are consistent across the figure and used per the semantics in `diagram-authoring.md`. Reversed or dangling arrows = re-author the figure, not the prose. The validator's rule 3c now rejects any arrow polyline segment that crosses a non-endpoint node bbox; if it fires on a `graph`-engine figure, re-author the DSL (the layer membership is likely wrong — two nodes in one layer that should be in adjacent layers).
+**Final figure pass (prose-aware).** Phase C2 already cleared every figure against the visual rubric. Now that the prose exists, re-check the things that depend on the *written text* — re-open any figure you're unsure about with `Read`:
+- **Placement & faithfulness**: each figure sits under the heading it illustrates, and every node label appears in the prose ±200 lines around its anchor (no orphaned or mis-placed figure introduced during drafting).
+- **Arrow direction vs. prose**: each arrowhead points the way causality flows *in the text you actually wrote*; reversed or dangling arrows = re-author the figure (return to Phase C → re-run Phase C2), not edit the prose.
+- If you changed or re-authored any figure here, **re-run the Phase C2 rubric** on it before shipping.
+
+The deep visual criteria (tangled arrows, balance, empty space, text rendering, squint test, diversity) are owned by **Phase C2** — don't re-litigate them here unless a figure changed.
 
 Then report to the user:
 - Final file path, word count, recomputed `readTime`
@@ -118,6 +147,24 @@ Then report to the user:
 - Which gates passed/failed and what was added on the second pass
 - 2–4 suggested cross-links the *user* should consider adding to *other* existing posts (don't edit those unless asked)
 - Reminder to run `npm run dev` (or `bun run dev`) and load the page locally before committing
+
+### Phase F — Clean up the diagram cache (only after Phase E passes)
+
+Once `verify-post.sh` exits 0 **and** the visual review is clean, delete this post's entire diagram cache. The cache (`.cache/blog-writer/<slug>/`) holds only intermediate authoring artifacts — `*.in.json`, `*.dsl.json`, `*.scene.json`, `*.png` (the pre-WebP render intermediates), `manifest*.json`. The final WebPs live in `public/imgs/blogs/<slug>-*.webp` and the prose in `content/blog/...`, so nothing the published post depends on is in the cache.
+
+```bash
+# Run ONLY if Phase E gates passed. Scoped to this slug — never `rm -rf .cache/blog-writer` wholesale.
+# Leave the path unquoted (slugs are kebab-case, no spaces) so it matches the pre-approved
+# Bash(rm -rf .cache/blog-writer/*) allowlist rule and runs without a permission prompt.
+rm -rf .cache/blog-writer/<slug>
+```
+
+Why this matters: stale per-article caches accumulate across posts, and reusing or glancing at an earlier article's `.dsl.json`/`.scene.json` reintroduces the same cramped layouts and ugly diagram designs into new posts. Clearing each post's cache the moment it ships keeps `.cache/blog-writer/` holding only in-progress work, so every article's figures are authored fresh.
+
+Rules:
+- **Gate it.** If any Phase E gate FAILED, do NOT delete — the cache is needed to re-author the failing figure. Only clean up on a fully green post.
+- **Scope to the slug.** Delete `.cache/blog-writer/<slug>/` only. Never touch sibling slug folders, the shared `.cache/blog-writer/excalidraw.log`, or `.cache/blog-writer/` itself.
+- Mention the cleanup in the final report (e.g. "cleared `.cache/blog-writer/<slug>/`").
 
 ## Path / category routing
 

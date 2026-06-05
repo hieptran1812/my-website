@@ -535,18 +535,23 @@ function layoutMatrix(dsl) {
 
   const els = headerElements(dsl.title, dsl.caption)
   const top = bodyTopY(dsl.title, dsl.caption)
+  // The column-header row is just text — give it a slim fixed band, not a full
+  // cell height (which otherwise left a wide dead band between headers and the
+  // grid). The data grid then fills the remaining body height.
+  const HEADER_ROW_H = 72
   const cellW = Math.floor((CANVAS_W * 0.85) / (cols.length + 1))
-  const cellH = Math.floor((CANVAS_H - top - 100) / (rows.length + 1))
+  const cellH = Math.floor((CANVAS_H - top - 100 - HEADER_ROW_H) / rows.length)
   const startX = Math.round((CANVAS_W - cellW * (cols.length + 1)) / 2)
+  const gridTop = top + HEADER_ROW_H
 
-  // Column headers
+  // Column headers — centered in the slim band directly above the grid
   for (let j = 0; j < cols.length; j++) {
     const text = cols[j]
     els.push({
       id: `col${j}`,
       type: 'text',
       x: startX + (j + 1) * cellW + Math.round((cellW - estTextWidth(text, BODY_FONT, 3)) / 2),
-      y: top + Math.round((cellH - estTextHeight(text, BODY_FONT)) / 2),
+      y: top + Math.round((HEADER_ROW_H - estTextHeight(text, BODY_FONT)) / 2),
       width: estTextWidth(text, BODY_FONT, 3),
       height: estTextHeight(text, BODY_FONT),
       text,
@@ -562,7 +567,7 @@ function layoutMatrix(dsl) {
       id: `row${i}`,
       type: 'text',
       x: startX + Math.round((cellW - estTextWidth(rowText, BODY_FONT, 3)) / 2),
-      y: top + (i + 1) * cellH + Math.round((cellH - estTextHeight(rowText, BODY_FONT)) / 2),
+      y: gridTop + i * cellH + Math.round((cellH - estTextHeight(rowText, BODY_FONT)) / 2),
       width: estTextWidth(rowText, BODY_FONT, 3),
       height: estTextHeight(rowText, BODY_FONT),
       text: rowText,
@@ -577,7 +582,7 @@ function layoutMatrix(dsl) {
         id: `c${i}-${j}`,
         type: 'rectangle',
         x: startX + (j + 1) * cellW,
-        y: top + (i + 1) * cellH,
+        y: gridTop + i * cellH,
         width: cellW - 6,
         height: cellH - 6,
         backgroundColor: paletteFor(c.kind),
@@ -1162,10 +1167,14 @@ function layoutTree(dsl) {
 
   const top = bodyTopY(dsl.title, dsl.caption)
   const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
+  // Levels spread across the full body height so the tree fills the frame
+  // top-to-bottom (and clears the sharpness floor). Make each node fill most
+  // of its level so the inter-level gap stays a tight arrow run rather than a
+  // wide dead band (the old nodeH cap of 140 left ~45% of every level blank).
   const levelH = Math.floor(bodyH / (maxDepth + 1))
   const bodyW = Math.round(CANVAS_W * 0.92)
   const startX = Math.round((CANVAS_W - bodyW) / 2)
-  const nodeH = Math.min(140, Math.floor(levelH * 0.55))
+  const nodeH = Math.min(240, Math.floor(levelH * 0.64))
 
   // Place each node at the center of its allocated horizontal slice.
   const positions = new Map()

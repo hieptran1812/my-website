@@ -49,7 +49,7 @@ If short, expand the weakest sections — more case studies, deeper internals, m
 
 ## Diagram embedding
 
-- `![alt text](/imgs/blogs/<slug>-<n>.png)` directly under the heading or paragraph that introduces the concept.
+- `![alt text](/imgs/blogs/<slug>-<n>.webp)` directly under the heading or paragraph that introduces the concept. Images are always `.webp` — never `.png`/`.jpg`/`.svg`.
 - Cross-links use relative paths without `content/` or `.md`: `[KV cache](/blog/machine-learning/large-language-model/kv-cache)`.
 
 ## Don'ts

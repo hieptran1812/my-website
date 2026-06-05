@@ -39,9 +39,18 @@ For each abstract concept the post introduces, emit one bullet with:
 - **Claim** (≥ 8 words): the single sentence the figure proves
 - **Caption** (one sentence, not a label restatement): figure thesis
 - **Section anchor**: the markdown heading it sits under
+- **Kind**: the figure type chosen *from the concept's shape* — `pipeline` | `graph` | `before-after` | `matrix` | `grid` | `tree` | `timeline` | `layered-stack` | hand-authored element figure
 - **Sketch**: which boxes / arrows / labels appear
 
 Figure count = abstraction count. If you found 9 abstractions, plan 9 figures.
+
+## Figure-type diversity (plan it here)
+
+Vary the kinds so the post doesn't read as one diagram repeated N times:
+
+- **No single kind for more than ~half the figures.** With ≥ 5 figures, use **≥ 3 distinct kinds**; with ≥ 8, use **≥ 4**.
+- **No two adjacent figures share a layout skeleton.** If two consecutive abstractions both map to "boxes left-to-right with arrows", recast one (merge, or switch to `graph`/`before-after`/`matrix`).
+- Map kind to concept shape: sequence/lifecycle → `pipeline`/`timeline`; branching or merging dataflow → `graph`; abstraction layers → `layered-stack`; naive-vs-optimized → `before-after`; axes × choices → `matrix`/`grid`; taxonomy/recursion → `tree`; memory/structure internals → hand-authored. See `diagram-authoring.md §Diversity across the post`.
 
 ## First figure ("mental model")
 

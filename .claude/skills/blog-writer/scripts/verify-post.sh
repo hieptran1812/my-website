@@ -55,9 +55,9 @@ else
   echo "$missing"
 fi
 
-# 4. Sharpness sub-gate
+# 4. Sharpness sub-gate — every figure ships as .webp (lossless, cropped to bbox)
 sharp_fail=0
-for f in public/imgs/blogs/${slug}-*.png; do
+for f in public/imgs/blogs/${slug}-*.webp; do
   [ -e "$f" ] || continue
   if command -v sips >/dev/null 2>&1; then
     w=$(sips -g pixelWidth  "$f" 2>/dev/null | awk '/pixelWidth/  {print $2}')
@@ -66,12 +66,24 @@ for f in public/imgs/blogs/${slug}-*.png; do
     read w h < <(identify -format "%w %h" "$f" 2>/dev/null || echo "0 0")
   fi
   bytes=$(stat -f%z "$f" 2>/dev/null || stat -c%s "$f")
-  if [ "${w:-0}" -lt 1600 ] || [ "${h:-0}" -lt 900 ] || [ "${bytes:-0}" -lt 81920 ]; then
-    fail_ "sharpness: $f is $w×$h ${bytes}B (need ≥1600×900, ≥80KB)"
+  # Byte floor is 40 KB for WebP: lossless WebP of a real diagram is ~¼–⅓ the
+  # size of the source PNG, so the old 80 KB PNG floor would reject crisp figures.
+  if [ "${w:-0}" -lt 1600 ] || [ "${h:-0}" -lt 900 ] || [ "${bytes:-0}" -lt 40960 ]; then
+    fail_ "sharpness: $f is $w×$h ${bytes}B (need ≥1600×900, ≥40KB WebP)"
     sharp_fail=1
   fi
 done
-[ "$sharp_fail" -eq 0 ] && pass "sharpness: all PNGs ≥ 1600×900, ≥ 80 KB"
+[ "$sharp_fail" -eq 0 ] && pass "sharpness: all WebP figures ≥ 1600×900, ≥ 40 KB"
+
+# 4b. Format gate — stray non-webp renders for this slug should not exist on disk
+stray=$(ls public/imgs/blogs/${slug}-*.png public/imgs/blogs/${slug}-*.jpg \
+           public/imgs/blogs/${slug}-*.jpeg public/imgs/blogs/${slug}-*.gif 2>/dev/null || true)
+if [ -z "$stray" ]; then
+  pass "format: no leftover non-webp renders for slug=$slug"
+else
+  fail_ "format: non-webp render artifacts left in public/imgs/blogs (delete or convert):"
+  echo "$stray" | sed 's/^/  /'
+fi
 
 # 5. Forbidden text-diagram substitutes
 sub_fail=0
@@ -89,6 +101,16 @@ if [ -z "$foreign" ]; then
 else
   fail_ "slug-match: foreign image paths (typo or stale reference):"
   echo "$foreign" | sed 's/^/  /'
+fi
+
+# 6b. WebP-only gate — every embedded blog image must be .webp
+nonwebp=$(grep -oE '!\[[^]]*\]\(/imgs/blogs/[^)]+\)' "$path" 2>/dev/null \
+          | grep -ivE '\.webp\)$' || true)
+if [ -z "$nonwebp" ]; then
+  pass "webp-only: all embedded images are .webp"
+else
+  fail_ "webp-only: non-webp image embeds (every figure must ship as .webp):"
+  echo "$nonwebp" | sed 's/^/  /'
 fi
 
 # 7. No-H1 gate

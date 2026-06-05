@@ -202,6 +202,20 @@ function segIntersectsRect(p0, p1, x0, y0, x1, y1) {
   return t0 <= t1
 }
 
+// Shortest distance from point (px,py) to segment p0→p1. Used by the
+// anti-dead-space gate to treat the corridor a few px either side of an arrow
+// stroke as "occupied" — a connector crossing an otherwise-blank region is
+// legitimate content, not empty space.
+function ptSegDist(px, py, p0, p1) {
+  const x0 = p0[0], y0 = p0[1]
+  const dx = p1[0] - x0, dy = p1[1] - y0
+  const len2 = dx * dx + dy * dy
+  if (len2 === 0) return Math.hypot(px - x0, py - y0)
+  let t = ((px - x0) * dx + (py - y0) * dy) / len2
+  t = Math.max(0, Math.min(1, t))
+  return Math.hypot(px - (x0 + t * dx), py - (y0 + t * dy))
+}
+
 function bbox(els) {
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
   for (const e of els) {
@@ -449,6 +463,66 @@ export function validate(els, input = {}) {
   }
   if (tokens.size < 6) {
     errors.push(`information density too low: only ${tokens.size} unique non-stopword tokens across all labels (need ≥ 6). Replace placeholder labels with concrete component / data / quantity names.`)
+  }
+
+  // 8. Anti-dead-space: the renderer crops the export to the content bounding
+  //    box, so any empty region INSIDE that bbox ships as a visible blank band
+  //    — exactly the "meaningless empty space" we forbid. Sample a grid over
+  //    the content bbox; a sample is "occupied" if it lands inside any
+  //    node/text bbox or within TOL px of any arrow/line segment. Reject a
+  //    figure whose bbox is mostly empty (global) or that has a blank quadrant
+  //    (a dead corner/band). Thresholds are deliberately conservative: airy but
+  //    legitimate DAGs spread nodes + connectors across every quadrant and clear
+  //    these floors comfortably; only genuinely under-filled layouts fail.
+  const bodyEls = els.filter((e) => !(e.type === 'text' && e.containerId))
+  const solids = els.filter(
+    (e) => e.type !== 'arrow' && e.type !== 'line' && (e.width || 0) > 0 && (e.height || 0) > 0,
+  )
+  const segs = []
+  for (const ar of els) {
+    if (ar.type !== 'arrow' && ar.type !== 'line') continue
+    const pts = (ar.points || []).map(([px, py]) => [ar.x + px, ar.y + py])
+    for (let k = 0; k + 1 < pts.length; k++) segs.push([pts[k], pts[k + 1]])
+  }
+  const dbb = bbox(bodyEls)
+  if (dbb.w > 40 && dbb.h > 40) {
+    const NX = 48, NY = 32, TOL = 16
+    const occupied = (gx, gy) => {
+      for (const s of solids) {
+        if (gx >= s.x && gx <= s.x + (s.width || 0) && gy >= s.y && gy <= s.y + (s.height || 0)) return true
+      }
+      for (const [p0, p1] of segs) {
+        if (ptSegDist(gx, gy, p0, p1) <= TOL) return true
+      }
+      return false
+    }
+    const cx = dbb.x0 + dbb.w / 2, cy = dbb.y0 + dbb.h / 2
+    let total = 0, hit = 0
+    const qHit = [0, 0, 0, 0], qTot = [0, 0, 0, 0]
+    for (let i = 0; i < NX; i++) {
+      const gx = dbb.x0 + (i + 0.5) * dbb.w / NX
+      for (let j = 0; j < NY; j++) {
+        const gy = dbb.y0 + (j + 0.5) * dbb.h / NY
+        const qi = (gx < cx ? 0 : 1) + (gy < cy ? 0 : 2)
+        total++; qTot[qi]++
+        if (occupied(gx, gy)) { hit++; qHit[qi]++ }
+      }
+    }
+    const frac = total ? hit / total : 1
+    if (frac < 0.1) {
+      errors.push(
+        `dead space: only ${(frac * 100).toFixed(0)}% of the figure's bounding box is occupied by shapes/arrows — the rest crops to a blank frame. Add internal structure or tighten the layout so content fills the figure (see diagram-authoring.md §No meaningless empty space).`,
+      )
+    }
+    const qName = ['top-left', 'top-right', 'bottom-left', 'bottom-right']
+    for (let k = 0; k < 4; k++) {
+      const f = qTot[k] ? qHit[k] / qTot[k] : 1
+      if (f < 0.03) {
+        errors.push(
+          `dead space: the ${qName[k]} quadrant is blank (${(f * 100).toFixed(0)}% filled) — a cropped export shows it as a meaningless empty band. Rebalance the layout (move a node/annotation/connector there) instead of stretching one card to cover it.`,
+        )
+      }
+    }
   }
 
   return errors

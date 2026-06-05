@@ -10,8 +10,9 @@ Per figure (run all N in parallel for one post; run as one batch via `render-sce
 
 1. Author element JSON → `.cache/blog-writer/<slug>/<slug>-<i>.in.json`
 2. Validate + normalize: `node scripts/author-scene.mjs <in.json> <scene.json>`
-3. Batch render: build manifest of all `*.scene.json` and pass to `render-scene-batch.mjs`
-4. Sharpness gate: every PNG ≥ 1600×900 px, ≥ 80 KB
+3. Batch render **to PNG inside the cache**: build a manifest mapping each `*.scene.json` → `*.png` in `.cache/blog-writer/<slug>/`, pass to `render-scene-batch.mjs`
+4. **Convert each cache PNG → lossless WebP** at `public/imgs/blogs/<slug>-<i>.webp` (`cwebp -lossless`). The PNG is an intermediate; **the post ships `.webp` only.** Lossless is mandatory: lossy WebP rings around diagram text, and lossless is still ~¼–⅓ the PNG size.
+5. Sharpness gate: every WebP ≥ 1600×900 px, ≥ 40 KB
 
 ### One-time prerequisites
 
@@ -28,10 +29,19 @@ test -d "$MCP_REPO/node_modules/puppeteer" \
 ```bash
 slug="<slug>"
 manifest=".cache/blog-writer/$slug/manifest.json"
+# 1. Render every scene to a PNG *inside the cache* (intermediate artifact).
 ls .cache/blog-writer/$slug/*.scene.json \
-  | jq -R -s 'split("\n") | map(select(length>0)) | map({in: ., out: ("public/imgs/blogs/" + (. | split("/") | last | sub(".scene.json"; ".png")))})' \
+  | jq -R -s 'split("\n") | map(select(length>0)) | map({in: ., out: (. | sub(".scene.json"; ".png"))})' \
   > "$manifest"
 node /Users/hieptran1812/Documents/mcp_excalidraw/scripts/render-scene-batch.mjs "$manifest"
+# 2. Convert each cache PNG → lossless WebP in public/imgs/blogs/. WebP is the
+#    only format the post embeds. -lossless avoids text ringing; -m 6 = best
+#    compression effort. cwebp is at /opt/homebrew/bin/cwebp (brew install webp).
+mkdir -p public/imgs/blogs
+for png in .cache/blog-writer/$slug/*.png; do
+  [ -e "$png" ] || continue
+  cwebp -quiet -lossless -m 6 "$png" -o "public/imgs/blogs/$(basename "${png%.png}").webp"
+done
 ```
 
 Element-form scenes route to `__renderScene`; `{ mermaid, export }` scenes route to `__renderMermaid`. If render exits non-zero, **stop and surface to the user** — never substitute ASCII art, ```text``` boxes, Unicode box-drawing, or prose-only "diagrams".
@@ -131,8 +141,29 @@ Pipeline rows share one stride; stack layers share one height; matrix rows share
 - **Canvas: 2400×1600 logical units**, `exportPadding: 48`
 - **Element bounding box ≥ 70% canvas width AND height** (≥ 1680×1120). The validator rejects sparser layouts.
 - **Outer margin ≤ 80 px** between bbox and canvas edge
-- **No empty quadrants**: 2×2 split — no quadrant >70% empty
 - **Aspect ratio matches content**: pipelines wide-and-short, stacks tall-and-narrow
+
+### No meaningless empty space (enforced)
+
+The renderer **crops the export to the content bounding box**, so the margins around the figure disappear — but every empty region *inside* the bbox ships verbatim as a blank band. That internal whitespace is the "meaningless empty space" we forbid. Two failure shapes:
+
+- **Dead band**: content piled at the top (title/caption/first row), then a tall empty bottom. Caused by a body that starts at `y > 220` or by a single short card not extended to a shared row height. Fix by raising the first body row to `y ∈ [180, 220]` and giving peer cards a uniform tallest-content height.
+- **Dead corner/quadrant**: one cluster in a 2400×1600 frame with a blank quarter. Fix by rebalancing the layout — move a node, annotation, or connector into the gap. **Never stretch one card to "fill" the space**; a 5-line label in a 1100 px-tall box is itself dead space.
+
+The validator (`author-scene.mjs`, rule 8) samples a grid over the content bbox — a sample counts as occupied if it sits inside any node/text bbox or within 16 px of an arrow stroke (a connector crossing a region is real content). It hard-fails if:
+- the bbox is **< 10% occupied** overall (`dead space: only N% … occupied`), or
+- **any 2×2 quadrant is < 3% occupied** (`dead space: the <corner> quadrant is blank`).
+
+These floors are deliberately low: a well-built airy DAG spreads nodes + connectors across all four quadrants and clears them easily. If they fire, the layout is genuinely under-filled — add internal structure or tighten it; do not pad. The design *target* is each quadrant ≥ 30% filled, not the bare 3% floor.
+
+### Diversity across the post (mandatory)
+
+Eight near-identical box-and-arrow pipelines is a worse post than four pipelines + two stacks + a matrix + a timeline, even though both clear the count floor. Vary the figure *kind* to match each abstraction's actual shape:
+
+- **No single engine/type for more than ~half the figures.** A deep-dive with 8+ figures should use **≥ 4 distinct kinds** (e.g. `pipeline`, `graph`, `before-after`, `matrix`, `tree`, `timeline`, `grid`, `layered-stack`, hand-authored).
+- **Pick the kind from the concept, not convenience**: sequence/lifecycle → `pipeline` or `timeline`; branching/merging dataflow → `graph`; abstraction layers → `layered-stack`; naive-vs-optimized → `before-after`; axes × choices → `matrix`/`grid`; taxonomy/recursion → `tree`; memory/structure internals → hand-authored element figure.
+- **Two adjacent figures should not look interchangeable.** If figure N and N+1 share a layout skeleton, merge them or re-cast one in a different kind.
+- Diversity is reviewed in Phase E (visual pass) and planned in Phase B (the abstraction inventory assigns a kind per figure).
 
 ### No-overlap
 
@@ -201,7 +232,7 @@ Arrow accuracy is non-negotiable: a diagram with a reversed, dangling, or mis-an
 - `strokeWidth: 2` minimum (2.5 for primary)
 - `fontSize`: title 32, section 24, body 22, code 18
 - Padding ≥ 60 px between elements
-- **PNG output ≥ 1600 px wide, ≥ 900 px tall, ≥ 80 KB** (Phase C sharpness gate)
+- **WebP output ≥ 1600 px wide, ≥ 900 px tall, ≥ 40 KB** (Phase C sharpness gate). The render goes PNG → lossless WebP; lossless keeps text edges crisp, so the floor catches under-density, not encoder loss.
 
 A failing sharpness gate usually means under-density: too few elements, sparse layout, all-neutral fills. Add information density rather than scaling up empty space.
 
@@ -219,6 +250,25 @@ A failing sharpness gate usually means under-density: too few elements, sparse l
 - **Quantify** with concrete numbers (µs/ms, MB/GB, tok/s, %). Numbers must match the prose — don't invent for visual balance.
 - **No purely decorative shapes, logos, or clip-art.**
 - **Caption is a thesis, not a label restatement.** Bad: "KV-cache architecture diagram." Good: "Decode-time bandwidth grows linearly with batch × seq-len; prefill is bounded by FLOPs."
+
+## Visual self-review (the vision gate)
+
+Everything above is how to *build* a figure. This is how to *review the rendered pixels* — Phase C2 in `SKILL.md`. The validator enforces geometry; it cannot tell whether the picture is tangled, lopsided, half-empty, or off-topic. You do that by opening each `public/imgs/blogs/<slug>-*.webp` with `Read` and judging it. A figure must clear **all** of these or it goes back to Phase C for re-authoring (fix the `.in.json`, never the prose).
+
+How to judge each criterion:
+
+- **Faithful to the content.** Point at each box/arrow/number and name where it appears in the surrounding prose (or the figure's `_claim`/`_caption`). If something has no referent — a box you can't name, a number you invented for balance, an arrow with no causal sentence — it fails. The figure must *prove its one claim*, not merely decorate the section.
+- **Arrows legible, not a tangle.** Trace each arrow tail-to-head. Failure signals: an arrow crossing another arrow (> 2 crossings anywhere = re-author and probably split the figure); a head or tail floating in blank space instead of touching a node edge; an arrowhead buried *inside* a box; a line skewered straight through an unrelated node; a direction that contradicts the text. For `graph` figures a tangle usually means wrong layer membership (two nodes that belong in adjacent layers sit in the same one) — re-author the DSL, don't nudge points.
+- **Balanced composition.** Mentally split the frame into quadrants: is the visual weight spread, or piled in one corner with the rest thin? Is the figure centered, or hugging an edge? Does the aspect ratio fit the content (pipeline wide-and-short, stack tall-and-narrow, matrix filling both axes)? A lopsided figure reads as unfinished even when every box is correct.
+- **No meaningless empty space.** The renderer crops to the content bbox, so any gap *inside* it ships as a blank band. Scan for a wide empty strip (usually a dead band below content that started too low) or a blank quadrant. The validator's rule 8 catches the gross cases; your eye catches the subtle ones (e.g. one row of a matrix half the height of the others). The fix is to rebalance/extend to a shared height — never to stretch a single card.
+- **Text renders correctly.** Confirm every label is Virgil (prose) or Cascadia (code) — if a label looks like a plain system sans-serif, the `fontFamily` leaked and it must be re-rendered. Check no text spills past its box, no two labels overlap, no label sits on top of an arrow stroke, and everything is legible without zooming.
+- **Squint test (< 5 s).** Imagine the figure at 25%. Can you still tell the main path / bottleneck / outcome from color and position alone? If you need to read the labels to get the gist, the visual hierarchy is wrong: make the most important node bigger/brighter/more central, and cut accents to ≤ 3.
+
+Set-level, once across the whole post:
+
+- **Diversity.** Lay the figures side by side. If one kind is more than ~half of them, or two *adjacent* figures share a layout skeleton, recast one (see §Diversity across the post). A post of eight look-alike box-rows is a review failure even if each row is individually correct.
+
+Write a one-line verdict per figure (`PASS` / `FAIL: <criterion> — <what's wrong>`) so the re-author loop is explicit. Only a fully-green set advances to drafting.
 
 ## DSL shortcut (opt-in only)
 
@@ -250,6 +300,7 @@ Read its error messages — they name the rule and the offending element. Don't 
 - Containment (text inside container, with padding)
 - Sibling bbox no-overlap
 - Bounding-box coverage (≥ 70% dominant axis, ≥ 40% minor)
+- Anti-dead-space (rule 8): content bbox ≥ 10% occupied overall and every 2×2 quadrant ≥ 3% occupied — no blank band in the cropped export
 - `fontFamily ∈ {1, 3}` on every text element
 - Palette compliance (only the 6 hex values)
 - `_claim` ≥ 8 words; `_caption` present and non-restating
