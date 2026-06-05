@@ -38,7 +38,6 @@ interface Article {
   tags: string[];
   readTime: string;
   collection?: string;
-  aiGenerated?: boolean;
 }
 
 // Utility function to format read time consistently
@@ -144,7 +143,6 @@ export default function BlogSection() {
             tags: Array.isArray(post.tags) ? post.tags : [],
             readTime: formatReadTime(post.readTime || fallbackReadTime), // Use formatted read time
             collection: post.collection,
-            aiGenerated: post.aiGenerated,
           };
         })
         .filter((article) => article.title !== "Untitled"); // Filter out invalid articles

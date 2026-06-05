@@ -19,7 +19,6 @@ export interface Article {
   slug: string;
   image?: string;
   collection?: string;
-  aiGenerated?: boolean;
 }
 
 function convertToArticle(
@@ -133,7 +132,6 @@ function convertToArticle(
     slug, // Original slug remains for URL purposes
     image: metadata.image || "/blog-placeholder.jpg", // Add image handling
     collection: metadata.collection,
-    aiGenerated: metadata.aiGenerated === true,
   };
 }
 

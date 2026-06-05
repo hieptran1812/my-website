@@ -14,7 +14,6 @@ export interface Article {
   featured: boolean;
   author?: string;
   image?: string;
-  aiGenerated?: boolean;
 }
 
 // Centralized article data

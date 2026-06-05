@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useTheme } from "../ThemeProvider";
 import CollectionTag from "../../components/CollectionTag";
-import AiGeneratedBadge from "../../components/AiGeneratedBadge";
 import { TagList } from "../../components/TagBadge";
 import "katex/dist/katex.min.css";
 import MathJax from "./MathJax";
@@ -36,7 +35,6 @@ interface BlogReaderProps {
   author?: string;
   postSlug?: string;
   collection?: string;
-  aiGenerated?: boolean;
   dangerouslySetInnerHTML?: { __html: string };
   /** Rendered inside the article column right after </article>. Used for
    *  series + related-reading so they share the column's width and inherit
@@ -54,7 +52,6 @@ export default function BlogReader({
   author,
   postSlug,
   collection,
-  aiGenerated,
   dangerouslySetInnerHTML,
   footer,
 }: BlogReaderProps) {
@@ -958,12 +955,6 @@ export default function BlogReader({
               {tags.length > 0 && (
                 <div className="flex flex-wrap justify-center gap-2 mb-6">
                   <TagList tags={tags} variant="default" clickable={true} />
-                </div>
-              )}
-
-              {aiGenerated && (
-                <div className="flex justify-center mb-6">
-                  <AiGeneratedBadge variant="detailed" />
                 </div>
               )}
             </header>

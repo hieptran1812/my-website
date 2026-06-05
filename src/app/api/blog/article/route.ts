@@ -117,7 +117,6 @@ export async function GET(request: NextRequest) {
       featured: metadata.featured || false,
       slug,
       collection: metadata.collection,
-      aiGenerated: metadata.aiGenerated === true,
     };
 
     return NextResponse.json({ article }, {

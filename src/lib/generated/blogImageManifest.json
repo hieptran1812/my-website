@@ -137,6 +137,43 @@
     "height": 964,
     "cover": true
   },
+  "/imgs/blogs/beyond-grpo-dapo-dr-grpo-gspo-1.png": {
+    "width": 1792,
+    "height": 1362,
+    "cover": true
+  },
+  "/imgs/blogs/beyond-grpo-dapo-dr-grpo-gspo-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/beyond-grpo-dapo-dr-grpo-gspo-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/beyond-grpo-dapo-dr-grpo-gspo-4.png": {
+    "width": 1792,
+    "height": 1330
+  },
+  "/imgs/blogs/beyond-grpo-dapo-dr-grpo-gspo-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/beyond-grpo-dapo-dr-grpo-gspo-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/beyond-grpo-dapo-dr-grpo-gspo-7.png": {
+    "width": 1792,
+    "height": 1302
+  },
+  "/imgs/blogs/beyond-grpo-dapo-dr-grpo-gspo-8.png": {
+    "width": 1792,
+    "height": 1294
+  },
+  "/imgs/blogs/beyond-grpo-dapo-dr-grpo-gspo-9.png": {
+    "width": 1792,
+    "height": 979
+  },
   "/imgs/blogs/black-scholes-1.png": {
     "width": 1792,
     "height": 939,
@@ -289,6 +326,43 @@
   "/imgs/blogs/catboost-from-inside-out-ordered-boosting-oblivious-trees-4.png": {
     "width": 1792,
     "height": 928
+  },
+  "/imgs/blogs/choosing-right-llm-architecture-task-1.png": {
+    "width": 1792,
+    "height": 1184,
+    "cover": true
+  },
+  "/imgs/blogs/choosing-right-llm-architecture-task-2.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/choosing-right-llm-architecture-task-3.png": {
+    "width": 1792,
+    "height": 1063
+  },
+  "/imgs/blogs/choosing-right-llm-architecture-task-4.png": {
+    "width": 1792,
+    "height": 915
+  },
+  "/imgs/blogs/choosing-right-llm-architecture-task-5.png": {
+    "width": 1792,
+    "height": 1073
+  },
+  "/imgs/blogs/choosing-right-llm-architecture-task-6.png": {
+    "width": 1792,
+    "height": 1167
+  },
+  "/imgs/blogs/choosing-right-llm-architecture-task-7.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/choosing-right-llm-architecture-task-8.png": {
+    "width": 1792,
+    "height": 939
+  },
+  "/imgs/blogs/choosing-right-llm-architecture-task-9.png": {
+    "width": 1792,
+    "height": 955
   },
   "/imgs/blogs/clawd-bot-20260127115538.png": {
     "width": 950,
@@ -481,10 +555,35 @@
     "width": 1176,
     "height": 188
   },
+  "/imgs/blogs/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
   "/imgs/blogs/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning-20250925100105.png": {
     "width": 1792,
     "height": 1037,
     "cover": true
+  },
+  "/imgs/blogs/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning-4.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning-5.png": {
+    "width": 1792,
+    "height": 1164
+  },
+  "/imgs/blogs/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning-6.png": {
+    "width": 1792,
+    "height": 1275
   },
   "/imgs/blogs/deepspeed-zero-3d-parallelism-deep-dive-1.png": {
     "width": 1792,
@@ -677,6 +776,11 @@
     "width": 1792,
     "height": 1335
   },
+  "/imgs/blogs/dflash-block-diffusion-speculative-decoding-1.png": {
+    "width": 1792,
+    "height": 600,
+    "cover": true
+  },
   "/imgs/blogs/diffusion-models-diagram.png": {
     "width": 1060,
     "height": 680,
@@ -702,6 +806,42 @@
   "/imgs/blogs/distillation-in-llm-04-timeline.png": {
     "width": 1360,
     "height": 581
+  },
+  "/imgs/blogs/distilling-fast-tts-non-verbal-1.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/distilling-fast-tts-non-verbal-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/distilling-fast-tts-non-verbal-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/distilling-fast-tts-non-verbal-4.png": {
+    "width": 1792,
+    "height": 1275
+  },
+  "/imgs/blogs/distilling-fast-tts-non-verbal-5.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/distilling-fast-tts-non-verbal-6.png": {
+    "width": 1792,
+    "height": 1307
+  },
+  "/imgs/blogs/distilling-fast-tts-non-verbal-7.png": {
+    "width": 1792,
+    "height": 641
+  },
+  "/imgs/blogs/distilling-fast-tts-non-verbal-8.png": {
+    "width": 1792,
+    "height": 893
+  },
+  "/imgs/blogs/distilling-fast-tts-non-verbal-9.png": {
+    "width": 1792,
+    "height": 1302
   },
   "/imgs/blogs/dllm-diffusion-language-models-deep-dive-1.png": {
     "width": 1792,
@@ -1064,6 +1204,43 @@
   "/imgs/blogs/grpo-03-reward.png": {
     "width": 1270,
     "height": 306
+  },
+  "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-1.png": {
+    "width": 1792,
+    "height": 1353,
+    "cover": true
+  },
+  "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-3.png": {
+    "width": 1792,
+    "height": 1377
+  },
+  "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-4.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-5.png": {
+    "width": 1792,
+    "height": 1330
+  },
+  "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-7.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-8.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-9.png": {
+    "width": 1792,
+    "height": 1194
   },
   "/imgs/blogs/hermes-agent-1.png": {
     "width": 1792,
@@ -1443,34 +1620,75 @@
     "width": 1792,
     "height": 1210
   },
+  "/imgs/blogs/object-detection-end-to-end-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/object-detection-end-to-end-10.png": {
+    "width": 1792,
+    "height": 972
+  },
+  "/imgs/blogs/object-detection-end-to-end-2.png": {
+    "width": 1792,
+    "height": 1112
+  },
+  "/imgs/blogs/object-detection-end-to-end-3.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/object-detection-end-to-end-4.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/object-detection-end-to-end-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/object-detection-end-to-end-6.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/object-detection-end-to-end-7.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/object-detection-end-to-end-8.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/object-detection-end-to-end-9.png": {
+    "width": 1792,
+    "height": 1291
+  },
   "/imgs/blogs/olmo-3-training-finetuning-techniques-1.png": {
     "width": 1792,
-    "height": 710,
+    "height": 1189,
     "cover": true
   },
   "/imgs/blogs/olmo-3-training-finetuning-techniques-2.png": {
     "width": 1792,
-    "height": 935
+    "height": 1052
   },
   "/imgs/blogs/olmo-3-training-finetuning-techniques-3.png": {
     "width": 1792,
-    "height": 864
+    "height": 1210
   },
   "/imgs/blogs/olmo-3-training-finetuning-techniques-4.png": {
     "width": 1792,
-    "height": 1210
+    "height": 1038
   },
   "/imgs/blogs/olmo-3-training-finetuning-techniques-5.png": {
     "width": 1792,
-    "height": 802
+    "height": 972
   },
   "/imgs/blogs/olmo-3-training-finetuning-techniques-6.png": {
     "width": 1792,
-    "height": 848
+    "height": 1278
   },
   "/imgs/blogs/olmo-3-training-finetuning-techniques-7.png": {
     "width": 1792,
-    "height": 1218
+    "height": 1136
   },
   "/imgs/blogs/one-token-to-fool-llm-as-a-judge-20251024114249.png": {
     "width": 1600,
@@ -1664,6 +1882,47 @@
   "/imgs/blogs/options-theory-9.png": {
     "width": 1792,
     "height": 970
+  },
+  "/imgs/blogs/orpheus-tts-llm-speech-snac-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/orpheus-tts-llm-speech-snac-10.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/orpheus-tts-llm-speech-snac-2.png": {
+    "width": 1792,
+    "height": 1375
+  },
+  "/imgs/blogs/orpheus-tts-llm-speech-snac-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/orpheus-tts-llm-speech-snac-4.png": {
+    "width": 1792,
+    "height": 1288
+  },
+  "/imgs/blogs/orpheus-tts-llm-speech-snac-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/orpheus-tts-llm-speech-snac-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/orpheus-tts-llm-speech-snac-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/orpheus-tts-llm-speech-snac-8.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/orpheus-tts-llm-speech-snac-9.png": {
+    "width": 1792,
+    "height": 1054
   },
   "/imgs/blogs/pose-estimation-architecture-tree.png": {
     "width": 1280,

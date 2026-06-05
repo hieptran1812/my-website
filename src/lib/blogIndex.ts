@@ -53,7 +53,6 @@ export interface BlogIndexEntry {
   collection?: string;
   image?: string;
   featured: boolean;
-  aiGenerated: boolean;
   /** Raw markdown body (post-frontmatter). Reused for read-time, search, etc. */
   content: string;
   /** Frontmatter as parsed — keep around so per-route quirks can read extras. */
@@ -111,7 +110,6 @@ function readEntry(absPath: string): BlogIndexEntry | null {
       collection: isString(data.collection) ? data.collection : undefined,
       image: resolvePostCover(data, parsed.content),
       featured: data.featured === true,
-      aiGenerated: data.aiGenerated === true,
       content: parsed.content,
       frontmatter: data,
     };

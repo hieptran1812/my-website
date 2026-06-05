@@ -18,7 +18,6 @@ export interface Article {
   author?: string;
   image?: string;
   collection?: string;
-  aiGenerated?: boolean;
 }
 
 export interface BlogPost {
@@ -46,7 +45,6 @@ export interface BlogPostMetadata {
   image: string;
   excerpt: string;
   collection?: string;
-  aiGenerated?: boolean;
 }
 
 // Get markdown articles by category using API route (client-side function)

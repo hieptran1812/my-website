@@ -23,7 +23,6 @@ export interface ArticleData {
   author: string;
   slug: string;
   collection?: string;
-  aiGenerated?: boolean;
   excerpt?: string;
   image?: string;
 }
@@ -98,7 +97,6 @@ async function getArticleImpl(slug: string): Promise<ArticleData | null> {
     author: metadata.author || "",
     slug,
     collection: metadata.collection,
-    aiGenerated: metadata.aiGenerated === true,
     excerpt: metadata.excerpt || metadata.description || "",
     image: resolvePostCover(metadata, markdownContent),
   };

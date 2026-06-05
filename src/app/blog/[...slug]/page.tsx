@@ -129,7 +129,6 @@ export default async function BlogPostPage({
         author={article.author}
         postSlug={article.slug}
         collection={article.collection}
-        aiGenerated={article.aiGenerated}
         dangerouslySetInnerHTML={{ __html: article.content }}
         footer={
           <>
