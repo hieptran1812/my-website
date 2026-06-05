@@ -2258,3 +2258,8 @@ DPO is the workhorse of modern LLM alignment. It's simpler than RLHF, more stabl
 - [Axolotl](https://github.com/axolotl-ai-cloud/axolotl) — Axolotl AI
 - [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory) — Yaowei Zheng et al.
 - [OpenRLHF](https://github.com/OpenRLHF/OpenRLHF) — OpenRLHF Team
+
+### Related on this blog
+
+- [GRPO vs DPO vs PPO: A Decision Guide for Post-Training LLMs](/blog/machine-learning/large-language-model/grpo-vs-dpo-vs-ppo-decision-guide) — when DPO's offline simplicity wins versus when a verifier (GRPO) or reward model (PPO) is the better call
+- [Beyond GRPO: DAPO, Dr. GRPO, GSPO, and the Loss-Aggregation Fixes of 2025](/blog/machine-learning/large-language-model/beyond-grpo-dapo-dr-grpo-gspo) — the 2025 wave of verifiable-reward RL variants

@@ -2388,3 +2388,8 @@ Yes, GRPO works with any reward function — rule-based, model-based, or hybrid.
 - [RLOO: Back to Basics: Revisiting REINFORCE-Style Optimization for Learning from Human Feedback in LLMs](https://arxiv.org/abs/2402.14740) — RLOO, a related value-free RL method
 - [OpenAI Spinning Up — Policy Gradient Methods](https://spinningup.openai.com/) — Background on RL fundamentals
 - [Open R1](https://github.com/huggingface/open-r1) — Hugging Face's open reproduction of DeepSeek-R1, useful for practical GRPO recipes
+
+### Related on this blog
+
+- [GRPO vs DPO vs PPO: A Decision Guide for Post-Training LLMs](/blog/machine-learning/large-language-model/grpo-vs-dpo-vs-ppo-decision-guide) — when to reach for GRPO over DPO or PPO, decided by your reward signal and budget
+- [Beyond GRPO: DAPO, Dr. GRPO, GSPO, and the Loss-Aggregation Fixes of 2025](/blog/machine-learning/large-language-model/beyond-grpo-dapo-dr-grpo-gspo) — the variants that fix vanilla GRPO's length, difficulty, and MoE biases
