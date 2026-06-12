@@ -9,7 +9,6 @@ subcategory: "Large Language Model"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 Every speculative decoding paper for the last two years has optimized the same half of the loop: verification. Tree attention, dynamic draft trees, better acceptance criteria — all of it is about making the *target* model verify more tokens per forward pass. Almost nobody touched the *drafter*. And that is exactly where the latency hides.

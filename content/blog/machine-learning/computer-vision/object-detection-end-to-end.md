@@ -9,7 +9,6 @@ subcategory: "Computer Vision"
 author: "Hiep Tran"
 featured: true
 readTime: 51
-aiGenerated: true
 ---
 
 Most engineers arrive at object detection through image classification, and that is exactly where the trouble starts. Classification trained a reflex: one image goes in, one label comes out, you compute cross-entropy, and accuracy tells you how you are doing. Detection breaks every clause of that sentence. One image produces a *variable-length, unordered set* of outputs. Each output is not a label but a tuple of a box, a class, and a confidence. There is no single loss you can read off without first deciding *which prediction is responsible for which object* — a matching problem that does not exist in classification at all. And the headline metric, mean average precision, is a multi-stage computation that can move in the opposite direction from the thing your users actually care about.

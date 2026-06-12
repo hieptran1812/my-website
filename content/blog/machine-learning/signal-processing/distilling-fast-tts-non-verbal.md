@@ -9,7 +9,6 @@ subcategory: "Signal Processing"
 author: "Hiep Tran"
 featured: true
 readTime: 51
-aiGenerated: true
 ---
 
 A team I worked with shipped a distilled text-to-speech model last year and celebrated for exactly nine days. The numbers were beautiful: word error rate dropped from 2.1% to 2.0%, speaker similarity held at 0.71, and the real-time factor went from 0.45 to 0.08 — a 5.6x speedup that let them serve audiobook narration on a fraction of the GPUs. Then the support tickets arrived. Listeners did not complain about pronunciation or about the voice sounding like the wrong person. They complained that the narrator had become *boring*. The character who used to chuckle at his own jokes now read those lines flat. The exhausted detective who used to sigh before delivering bad news now just delivered it. The model still spoke. It had simply stopped *emoting*, and every metric on the dashboard had stayed green while it happened.

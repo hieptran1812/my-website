@@ -9,7 +9,6 @@ subcategory: "Signal Processing"
 author: "Hiep Tran"
 featured: true
 readTime: 50
-aiGenerated: true
 ---
 
 Most text-to-speech systems are a small zoo of specialized models bolted together: a text frontend that predicts phonemes and durations, an acoustic model that turns those into a mel-spectrogram, and a vocoder that turns the spectrogram into a waveform. Each stage has its own loss, its own failure modes, and its own opinions about prosody. If you have ever debugged why a name gets mispronounced, or why the energy collapses at the end of a long sentence, you have felt the seams between those stages.

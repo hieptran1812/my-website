@@ -9,7 +9,6 @@ subcategory: "Large Language Model"
 author: "Hiep Tran"
 featured: true
 readTime: 52
-aiGenerated: true
 ---
 
 ## Why the frontier moved past 4 bits
