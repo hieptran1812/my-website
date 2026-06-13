@@ -3456,7 +3456,8 @@
   },
   "/imgs/blogs/seed-coder-model-centric-code-data-pipeline-1.png": {
     "width": 1792,
-    "height": 1278
+    "height": 1278,
+    "cover": true
   },
   "/imgs/blogs/seed-coder-model-centric-code-data-pipeline-2.png": {
     "width": 1792,
@@ -4092,6 +4093,43 @@
     "width": 962,
     "height": 458,
     "cover": true
+  },
+  "/imgs/blogs/tokenspeed-agentic-inference-engine-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/tokenspeed-agentic-inference-engine-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/tokenspeed-agentic-inference-engine-3.png": {
+    "width": 1792,
+    "height": 924
+  },
+  "/imgs/blogs/tokenspeed-agentic-inference-engine-4.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/tokenspeed-agentic-inference-engine-5.png": {
+    "width": 1792,
+    "height": 1134
+  },
+  "/imgs/blogs/tokenspeed-agentic-inference-engine-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/tokenspeed-agentic-inference-engine-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/tokenspeed-agentic-inference-engine-8.png": {
+    "width": 1792,
+    "height": 964
+  },
+  "/imgs/blogs/tokenspeed-agentic-inference-engine-9.png": {
+    "width": 1792,
+    "height": 1297
   },
   "/imgs/blogs/torchtitan-pytorch-native-pretraining-deep-dive-1.png": {
     "width": 1792,
