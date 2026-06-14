@@ -834,6 +834,55 @@
     "width": 1792,
     "height": 1242
   },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 1195,
+    "cover": true
+  },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1195
+  },
   "/imgs/blogs/cuda-graph-1.png": {
     "width": 1792,
     "height": 1278,
@@ -1250,6 +1299,55 @@
     "width": 1792,
     "height": 1302
   },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 1195,
+    "cover": true
+  },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/distributions-cheat-sheet-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1195
+  },
   "/imgs/blogs/dllm-diffusion-language-models-deep-dive-1.png": {
     "width": 1792,
     "height": 884,
@@ -1414,6 +1512,55 @@
   "/imgs/blogs/estimation-fermi-problems-quant-interviews-9.png": {
     "width": 1792,
     "height": 856
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 843,
+    "cover": true
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 852
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1174
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1223
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1171
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1215
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 983
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1129
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1183
+  },
+  "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1113
   },
   "/imgs/blogs/eval-01-taxonomy.png": {
     "width": 1792,
@@ -1977,6 +2124,55 @@
     "width": 1792,
     "height": 1194
   },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 924,
+    "cover": true
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1330
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 940
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1081
+  },
   "/imgs/blogs/image.png": {
     "width": 1792,
     "height": 741,
@@ -2483,6 +2679,55 @@
   "/imgs/blogs/lightgbm-deep-dive-4.png": {
     "width": 1792,
     "height": 829
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1083
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1075
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1073
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1083
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1083
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1215
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1376
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1224
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1083
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1171
+  },
+  "/imgs/blogs/linear-regression-deep-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1209
   },
   "/imgs/blogs/linear-representations-in-language-models-can-change-dramatically-over-a-conversation-20260201164730.png": {
     "width": 1752,
