@@ -4,6 +4,35 @@
     "height": 625,
     "cover": true
   },
+  "/imgs/blogs/activist-investors-icahn-elliott-ackman-1.png": {
+    "width": 1792,
+    "height": 1209,
+    "cover": true
+  },
+  "/imgs/blogs/activist-investors-icahn-elliott-ackman-2.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/activist-investors-icahn-elliott-ackman-3.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/activist-investors-icahn-elliott-ackman-4.png": {
+    "width": 1792,
+    "height": 1170
+  },
+  "/imgs/blogs/activist-investors-icahn-elliott-ackman-5.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/activist-investors-icahn-elliott-ackman-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/activist-investors-icahn-elliott-ackman-7.png": {
+    "width": 1792,
+    "height": 1169
+  },
   "/imgs/blogs/adaptive-activation-steering-a-tuning-free-llm-truthfulness-improvement-method-20260204113417.png": {
     "width": 1004,
     "height": 487,
@@ -764,6 +793,35 @@
     "width": 1792,
     "height": 928
   },
+  "/imgs/blogs/central-bank-digital-currencies-cbdc-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/central-bank-digital-currencies-cbdc-2.png": {
+    "width": 1792,
+    "height": 1310
+  },
+  "/imgs/blogs/central-bank-digital-currencies-cbdc-3.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/central-bank-digital-currencies-cbdc-4.png": {
+    "width": 1792,
+    "height": 658
+  },
+  "/imgs/blogs/central-bank-digital-currencies-cbdc-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/central-bank-digital-currencies-cbdc-6.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/central-bank-digital-currencies-cbdc-7.png": {
+    "width": 1792,
+    "height": 1148
+  },
   "/imgs/blogs/centralized-crypto-exchanges-binance-coinbase-1.png": {
     "width": 1792,
     "height": 1359,
@@ -792,6 +850,39 @@
   "/imgs/blogs/centralized-crypto-exchanges-binance-coinbase-7.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/chainlink-and-blockchain-oracles-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/chainlink-and-blockchain-oracles-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/chainlink-and-blockchain-oracles-3.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/chainlink-and-blockchain-oracles-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/chainlink-and-blockchain-oracles-5.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/chainlink-and-blockchain-oracles-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/chainlink-and-blockchain-oracles-7.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/chainlink-and-blockchain-oracles-8.png": {
+    "width": 1792,
+    "height": 664
   },
   "/imgs/blogs/chatglm-to-glm-4-all-tools-1.png": {
     "width": 1792,
@@ -1388,6 +1479,35 @@
   "/imgs/blogs/credit-rating-agencies-moodys-sp-fitch-7.png": {
     "width": 1792,
     "height": 1266
+  },
+  "/imgs/blogs/crypto-mining-staking-and-mev-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/crypto-mining-staking-and-mev-2.png": {
+    "width": 1792,
+    "height": 658
+  },
+  "/imgs/blogs/crypto-mining-staking-and-mev-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/crypto-mining-staking-and-mev-4.png": {
+    "width": 1792,
+    "height": 1341
+  },
+  "/imgs/blogs/crypto-mining-staking-and-mev-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/crypto-mining-staking-and-mev-6.png": {
+    "width": 1792,
+    "height": 964
+  },
+  "/imgs/blogs/crypto-mining-staking-and-mev-7.png": {
+    "width": 1792,
+    "height": 1178
   },
   "/imgs/blogs/crypto-vc-and-market-makers-1.png": {
     "width": 1792,
@@ -2562,6 +2682,35 @@
     "width": 1180,
     "height": 557
   },
+  "/imgs/blogs/fintech-disruptors-stripe-paypal-ant-1.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/fintech-disruptors-stripe-paypal-ant-2.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/fintech-disruptors-stripe-paypal-ant-3.png": {
+    "width": 1792,
+    "height": 1344
+  },
+  "/imgs/blogs/fintech-disruptors-stripe-paypal-ant-4.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/fintech-disruptors-stripe-paypal-ant-5.png": {
+    "width": 1792,
+    "height": 968
+  },
+  "/imgs/blogs/fintech-disruptors-stripe-paypal-ant-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/fintech-disruptors-stripe-paypal-ant-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/fixed-income-analytics-1.png": {
     "width": 1792,
     "height": 888,
@@ -3292,6 +3441,93 @@
   "/imgs/blogs/itos-lemma-quant-interviews-9.png": {
     "width": 1792,
     "height": 1149
+  },
+  "/imgs/blogs/jamie-dimon-and-larry-fink-wall-street-titans-1.png": {
+    "width": 1792,
+    "height": 1353,
+    "cover": true
+  },
+  "/imgs/blogs/jamie-dimon-and-larry-fink-wall-street-titans-2.png": {
+    "width": 1792,
+    "height": 1069
+  },
+  "/imgs/blogs/jamie-dimon-and-larry-fink-wall-street-titans-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/jamie-dimon-and-larry-fink-wall-street-titans-4.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/jamie-dimon-and-larry-fink-wall-street-titans-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/jamie-dimon-and-larry-fink-wall-street-titans-6.png": {
+    "width": 1792,
+    "height": 680
+  },
+  "/imgs/blogs/jamie-dimon-and-larry-fink-wall-street-titans-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/jerome-powell-and-the-modern-fed-chair-1.png": {
+    "width": 1792,
+    "height": 986,
+    "cover": true
+  },
+  "/imgs/blogs/jerome-powell-and-the-modern-fed-chair-2.png": {
+    "width": 1792,
+    "height": 1018
+  },
+  "/imgs/blogs/jerome-powell-and-the-modern-fed-chair-3.png": {
+    "width": 1792,
+    "height": 1360
+  },
+  "/imgs/blogs/jerome-powell-and-the-modern-fed-chair-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/jerome-powell-and-the-modern-fed-chair-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/jerome-powell-and-the-modern-fed-chair-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/jerome-powell-and-the-modern-fed-chair-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/jim-simons-renaissance-quant-trading-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/jim-simons-renaissance-quant-trading-2.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/jim-simons-renaissance-quant-trading-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/jim-simons-renaissance-quant-trading-4.png": {
+    "width": 1792,
+    "height": 1122
+  },
+  "/imgs/blogs/jim-simons-renaissance-quant-trading-5.png": {
+    "width": 1792,
+    "height": 1355
+  },
+  "/imgs/blogs/jim-simons-renaissance-quant-trading-6.png": {
+    "width": 1792,
+    "height": 1005
+  },
+  "/imgs/blogs/jim-simons-renaissance-quant-trading-7.png": {
+    "width": 1792,
+    "height": 1178
   },
   "/imgs/blogs/jpm-why-not-100-equities-20251019215447.png": {
     "width": 1318,
@@ -4746,6 +4982,39 @@
     "width": 997,
     "height": 581
   },
+  "/imgs/blogs/mt-gox-the-first-crypto-catastrophe-1.png": {
+    "width": 1792,
+    "height": 972,
+    "cover": true
+  },
+  "/imgs/blogs/mt-gox-the-first-crypto-catastrophe-2.png": {
+    "width": 1792,
+    "height": 1021
+  },
+  "/imgs/blogs/mt-gox-the-first-crypto-catastrophe-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/mt-gox-the-first-crypto-catastrophe-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/mt-gox-the-first-crypto-catastrophe-5.png": {
+    "width": 1792,
+    "height": 1360
+  },
+  "/imgs/blogs/mt-gox-the-first-crypto-catastrophe-6.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/mt-gox-the-first-crypto-catastrophe-7.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/mt-gox-the-first-crypto-catastrophe-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/multi-attribute-steering-of-language-models-via-targeted-intervention-20260107210248.png": {
     "width": 1246,
     "height": 850,
@@ -5370,6 +5639,35 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/petrodollar-and-dollar-dominance-1.png": {
+    "width": 1792,
+    "height": 1163,
+    "cover": true
+  },
+  "/imgs/blogs/petrodollar-and-dollar-dominance-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/petrodollar-and-dollar-dominance-3.png": {
+    "width": 1792,
+    "height": 946
+  },
+  "/imgs/blogs/petrodollar-and-dollar-dominance-4.png": {
+    "width": 1792,
+    "height": 766
+  },
+  "/imgs/blogs/petrodollar-and-dollar-dominance-5.png": {
+    "width": 1792,
+    "height": 658
+  },
+  "/imgs/blogs/petrodollar-and-dollar-dominance-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/petrodollar-and-dollar-dominance-7.png": {
+    "width": 1792,
+    "height": 1347
+  },
   "/imgs/blogs/pimco-and-the-bond-market-1.png": {
     "width": 1792,
     "height": 1278,
@@ -5951,6 +6249,35 @@
     "height": 816,
     "cover": true
   },
+  "/imgs/blogs/ray-dalio-bridgewater-risk-parity-1.png": {
+    "width": 1792,
+    "height": 1324,
+    "cover": true
+  },
+  "/imgs/blogs/ray-dalio-bridgewater-risk-parity-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/ray-dalio-bridgewater-risk-parity-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/ray-dalio-bridgewater-risk-parity-4.png": {
+    "width": 1792,
+    "height": 738
+  },
+  "/imgs/blogs/ray-dalio-bridgewater-risk-parity-5.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/ray-dalio-bridgewater-risk-parity-6.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/ray-dalio-bridgewater-risk-parity-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/reasoning-pretraining-pipeline.png": {
     "width": 1300,
     "height": 580,
@@ -6294,6 +6621,35 @@
     "width": 1723,
     "height": 147,
     "cover": true
+  },
+  "/imgs/blogs/shadow-banking-and-the-repo-market-1.png": {
+    "width": 1792,
+    "height": 658,
+    "cover": true
+  },
+  "/imgs/blogs/shadow-banking-and-the-repo-market-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/shadow-banking-and-the-repo-market-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/shadow-banking-and-the-repo-market-4.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/shadow-banking-and-the-repo-market-5.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/shadow-banking-and-the-repo-market-6.png": {
+    "width": 1792,
+    "height": 1353
+  },
+  "/imgs/blogs/shadow-banking-and-the-repo-market-7.png": {
+    "width": 1792,
+    "height": 980
   },
   "/imgs/blogs/short-rate-models-vasicek-hull-white-1.png": {
     "width": 1792,
@@ -6689,6 +7045,35 @@
     "width": 1792,
     "height": 1194
   },
+  "/imgs/blogs/swift-and-the-weaponization-of-payments-1.png": {
+    "width": 1792,
+    "height": 1209,
+    "cover": true
+  },
+  "/imgs/blogs/swift-and-the-weaponization-of-payments-2.png": {
+    "width": 1792,
+    "height": 1240
+  },
+  "/imgs/blogs/swift-and-the-weaponization-of-payments-3.png": {
+    "width": 1792,
+    "height": 848
+  },
+  "/imgs/blogs/swift-and-the-weaponization-of-payments-4.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/swift-and-the-weaponization-of-payments-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/swift-and-the-weaponization-of-payments-6.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/swift-and-the-weaponization-of-payments-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/sycophancy-is-not-one-thing-causal-separation-of-sycophantic-behaviors-in-llms-20260107144348.png": {
     "width": 1710,
     "height": 870
@@ -7037,6 +7422,35 @@
   "/imgs/blogs/torchtitan-pytorch-native-pretraining-deep-dive-4.png": {
     "width": 1792,
     "height": 1065
+  },
+  "/imgs/blogs/tornado-cash-and-sanctioning-code-1.png": {
+    "width": 1792,
+    "height": 807,
+    "cover": true
+  },
+  "/imgs/blogs/tornado-cash-and-sanctioning-code-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/tornado-cash-and-sanctioning-code-3.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/tornado-cash-and-sanctioning-code-4.png": {
+    "width": 1792,
+    "height": 1341
+  },
+  "/imgs/blogs/tornado-cash-and-sanctioning-code-5.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/tornado-cash-and-sanctioning-code-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/tornado-cash-and-sanctioning-code-7.png": {
+    "width": 1792,
+    "height": 1178
   },
   "/imgs/blogs/training-asr-models-diagram.png": {
     "width": 1260,
@@ -7399,6 +7813,35 @@
     "width": 1792,
     "height": 707
   },
+  "/imgs/blogs/warren-buffett-berkshire-value-investing-1.png": {
+    "width": 1792,
+    "height": 984,
+    "cover": true
+  },
+  "/imgs/blogs/warren-buffett-berkshire-value-investing-2.png": {
+    "width": 1792,
+    "height": 878
+  },
+  "/imgs/blogs/warren-buffett-berkshire-value-investing-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/warren-buffett-berkshire-value-investing-4.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/warren-buffett-berkshire-value-investing-5.png": {
+    "width": 1792,
+    "height": 1329
+  },
+  "/imgs/blogs/warren-buffett-berkshire-value-investing-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/warren-buffett-berkshire-value-investing-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/what-is-superposition-20251102130001.png": {
     "width": 1792,
     "height": 835,
@@ -7515,6 +7958,35 @@
     "width": 1024,
     "height": 1024,
     "cover": true
+  },
+  "/imgs/blogs/wirecard-the-german-fintech-fraud-1.png": {
+    "width": 1792,
+    "height": 964,
+    "cover": true
+  },
+  "/imgs/blogs/wirecard-the-german-fintech-fraud-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/wirecard-the-german-fintech-fraud-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/wirecard-the-german-fintech-fraud-4.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/wirecard-the-german-fintech-fraud-5.png": {
+    "width": 1792,
+    "height": 1402
+  },
+  "/imgs/blogs/wirecard-the-german-fintech-fraud-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/wirecard-the-german-fintech-fraud-7.png": {
+    "width": 1792,
+    "height": 1250
   },
   "/imgs/blogs/worldvqa-1.png": {
     "width": 1792,
