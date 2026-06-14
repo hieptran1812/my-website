@@ -1902,6 +1902,55 @@
     "width": 1792,
     "height": 1195
   },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-1.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-10.png": {
+    "width": 1792,
+    "height": 1013
+  },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-11.png": {
+    "width": 1792,
+    "height": 1268
+  },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-12.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-2.png": {
+    "width": 1792,
+    "height": 1002,
+    "cover": true
+  },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-3.png": {
+    "width": 1792,
+    "height": 888
+  },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-4.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-5.png": {
+    "width": 1792,
+    "height": 896
+  },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-6.png": {
+    "width": 1792,
+    "height": 1012
+  },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-7.png": {
+    "width": 1792,
+    "height": 883
+  },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-8.png": {
+    "width": 1792,
+    "height": 878
+  },
+  "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-9.png": {
+    "width": 1792,
+    "height": 896
+  },
   "/imgs/blogs/exotic-derivatives-1.png": {
     "width": 1792,
     "height": 888,
@@ -2007,6 +2056,55 @@
   "/imgs/blogs/expected-value-techniques-quant-interviews-9.png": {
     "width": 1792,
     "height": 1026
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-10.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-11.png": {
+    "width": 1792,
+    "height": 1415
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-12.png": {
+    "width": 1792,
+    "height": 1118
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-2.png": {
+    "width": 1792,
+    "height": 1439
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-4.png": {
+    "width": 1792,
+    "height": 946
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-8.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-9.png": {
+    "width": 1792,
+    "height": 1178
   },
   "/imgs/blogs/fine-tuning-tool-calling-llms-when-how-1.png": {
     "width": 1792,
@@ -3322,6 +3420,55 @@
     "width": 1792,
     "height": 1250
   },
+  "/imgs/blogs/market-making-simulator-quant-research-1.png": {
+    "width": 1792,
+    "height": 976,
+    "cover": true
+  },
+  "/imgs/blogs/market-making-simulator-quant-research-10.png": {
+    "width": 1792,
+    "height": 994
+  },
+  "/imgs/blogs/market-making-simulator-quant-research-11.png": {
+    "width": 1792,
+    "height": 1347
+  },
+  "/imgs/blogs/market-making-simulator-quant-research-12.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/market-making-simulator-quant-research-2.png": {
+    "width": 1792,
+    "height": 1096
+  },
+  "/imgs/blogs/market-making-simulator-quant-research-3.png": {
+    "width": 1792,
+    "height": 1004
+  },
+  "/imgs/blogs/market-making-simulator-quant-research-4.png": {
+    "width": 1792,
+    "height": 1077
+  },
+  "/imgs/blogs/market-making-simulator-quant-research-5.png": {
+    "width": 1792,
+    "height": 1029
+  },
+  "/imgs/blogs/market-making-simulator-quant-research-6.png": {
+    "width": 1792,
+    "height": 1015
+  },
+  "/imgs/blogs/market-making-simulator-quant-research-7.png": {
+    "width": 1792,
+    "height": 994
+  },
+  "/imgs/blogs/market-making-simulator-quant-research-8.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/market-making-simulator-quant-research-9.png": {
+    "width": 1792,
+    "height": 876
+  },
   "/imgs/blogs/markov-chains-hitting-times-quant-interviews-1.png": {
     "width": 1792,
     "height": 821,
@@ -4218,6 +4365,55 @@
   "/imgs/blogs/options-theory-9.png": {
     "width": 1792,
     "height": 970
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-10.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-11.png": {
+    "width": 1792,
+    "height": 903
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-12.png": {
+    "width": 1792,
+    "height": 478
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-2.png": {
+    "width": 1792,
+    "height": 1009
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-3.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-4.png": {
+    "width": 1792,
+    "height": 1132
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-5.png": {
+    "width": 1792,
+    "height": 1164
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-7.png": {
+    "width": 1792,
+    "height": 717
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-8.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/order-book-simulator-quant-research-9.png": {
+    "width": 1792,
+    "height": 1070
   },
   "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-1.png": {
     "width": 1792,
@@ -5816,6 +6012,104 @@
     "width": 1080,
     "height": 686,
     "cover": true
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-1.png": {
+    "width": 1792,
+    "height": 876,
+    "cover": true
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-10.png": {
+    "width": 1792,
+    "height": 1294
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-11.png": {
+    "width": 1792,
+    "height": 1004
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-12.png": {
+    "width": 1792,
+    "height": 658
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-2.png": {
+    "width": 1792,
+    "height": 1155
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-4.png": {
+    "width": 1792,
+    "height": 1225
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-5.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-6.png": {
+    "width": 1792,
+    "height": 1219
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-7.png": {
+    "width": 1792,
+    "height": 1146
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-8.png": {
+    "width": 1792,
+    "height": 1107
+  },
+  "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-9.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-10.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-11.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-12.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-2.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-3.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-4.png": {
+    "width": 1792,
+    "height": 935
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-5.png": {
+    "width": 1792,
+    "height": 453
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-6.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-7.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-8.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/triple-barrier-meta-labeling-quant-research-9.png": {
+    "width": 1792,
+    "height": 1041
   },
   "/imgs/blogs/turboquant-kv-cache-quantization-deep-dive-1.png": {
     "width": 1792,
