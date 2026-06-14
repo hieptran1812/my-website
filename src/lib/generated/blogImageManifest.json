@@ -884,6 +884,55 @@
     "height": 479,
     "cover": true
   },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1186
+  },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 905
+  },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1335
+  },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250807133820.png": {
     "width": 1792,
     "height": 626,
@@ -1316,6 +1365,55 @@
   "/imgs/blogs/engineering-glm-130b-9.png": {
     "width": 1792,
     "height": 1330
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 830,
+    "cover": true
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1187
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1280
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1132
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 977
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 785
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1192
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1031
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 949
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 946
+  },
+  "/imgs/blogs/estimation-fermi-problems-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 856
   },
   "/imgs/blogs/eval-01-taxonomy.png": {
     "width": 1792,
@@ -1929,6 +2027,55 @@
     "width": 1792,
     "height": 770
   },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1262
+  },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1167
+  },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1262
+  },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1007
+  },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1007
+  },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1007
+  },
+  "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1324
+  },
   "/imgs/blogs/kimi-audio-1.png": {
     "width": 1792,
     "height": 568,
@@ -2440,6 +2587,55 @@
     "width": 1792,
     "height": 1238
   },
+  "/imgs/blogs/market-making-games-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 1002,
+    "cover": true
+  },
+  "/imgs/blogs/market-making-games-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 834
+  },
+  "/imgs/blogs/market-making-games-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 861
+  },
+  "/imgs/blogs/market-making-games-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/market-making-games-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/market-making-games-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1047
+  },
+  "/imgs/blogs/market-making-games-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1043
+  },
+  "/imgs/blogs/market-making-games-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1014
+  },
+  "/imgs/blogs/market-making-games-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 680
+  },
+  "/imgs/blogs/market-making-games-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 992
+  },
+  "/imgs/blogs/market-making-games-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1006
+  },
+  "/imgs/blogs/market-making-games-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1250
+  },
   "/imgs/blogs/markov-chains-hitting-times-quant-interviews-1.png": {
     "width": 1792,
     "height": 821,
@@ -2501,6 +2697,55 @@
   "/imgs/blogs/math-03-data.png": {
     "width": 1140,
     "height": 650
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 665,
+    "cover": true
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1053
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1087
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1079
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1124
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1087
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1061
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1061
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1096
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 878
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1015
+  },
+  "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1061
   },
   "/imgs/blogs/minimax-01-lightning-attention-hybrid-moe-1.png": {
     "width": 1792,
