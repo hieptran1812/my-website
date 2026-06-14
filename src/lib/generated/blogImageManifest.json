@@ -405,6 +405,35 @@
     "width": 1792,
     "height": 778
   },
+  "/imgs/blogs/bis-and-basel-bank-regulation-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/bis-and-basel-bank-regulation-2.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/bis-and-basel-bank-regulation-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/bis-and-basel-bank-regulation-4.png": {
+    "width": 1792,
+    "height": 999
+  },
+  "/imgs/blogs/bis-and-basel-bank-regulation-5.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/bis-and-basel-bank-regulation-6.png": {
+    "width": 1792,
+    "height": 1072
+  },
+  "/imgs/blogs/bis-and-basel-bank-regulation-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/black-scholes-1.png": {
     "width": 1792,
     "height": 939,
@@ -969,6 +998,35 @@
     "width": 1792,
     "height": 1154
   },
+  "/imgs/blogs/commodity-trading-houses-glencore-vitol-trafigura-1.png": {
+    "width": 1792,
+    "height": 766,
+    "cover": true
+  },
+  "/imgs/blogs/commodity-trading-houses-glencore-vitol-trafigura-2.png": {
+    "width": 1792,
+    "height": 1363
+  },
+  "/imgs/blogs/commodity-trading-houses-glencore-vitol-trafigura-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/commodity-trading-houses-glencore-vitol-trafigura-4.png": {
+    "width": 1792,
+    "height": 878
+  },
+  "/imgs/blogs/commodity-trading-houses-glencore-vitol-trafigura-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/commodity-trading-houses-glencore-vitol-trafigura-6.png": {
+    "width": 1792,
+    "height": 1008
+  },
+  "/imgs/blogs/commodity-trading-houses-glencore-vitol-trafigura-7.png": {
+    "width": 1792,
+    "height": 1178
+  },
   "/imgs/blogs/conditional-probability-bayes-quant-interviews-1.png": {
     "width": 1792,
     "height": 949,
@@ -1214,6 +1272,35 @@
   "/imgs/blogs/cpp-for-low-latency-quant-interviews-9.png": {
     "width": 1792,
     "height": 978
+  },
+  "/imgs/blogs/credit-rating-agencies-moodys-sp-fitch-1.png": {
+    "width": 1792,
+    "height": 1163,
+    "cover": true
+  },
+  "/imgs/blogs/credit-rating-agencies-moodys-sp-fitch-2.png": {
+    "width": 1792,
+    "height": 1372
+  },
+  "/imgs/blogs/credit-rating-agencies-moodys-sp-fitch-3.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/credit-rating-agencies-moodys-sp-fitch-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/credit-rating-agencies-moodys-sp-fitch-5.png": {
+    "width": 1792,
+    "height": 720
+  },
+  "/imgs/blogs/credit-rating-agencies-moodys-sp-fitch-6.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/credit-rating-agencies-moodys-sp-fitch-7.png": {
+    "width": 1792,
+    "height": 1266
   },
   "/imgs/blogs/cuda-graph-1.png": {
     "width": 1792,
@@ -2867,6 +2954,35 @@
     "width": 1370,
     "height": 764
   },
+  "/imgs/blogs/imf-and-world-bank-1.png": {
+    "width": 1792,
+    "height": 961,
+    "cover": true
+  },
+  "/imgs/blogs/imf-and-world-bank-2.png": {
+    "width": 1792,
+    "height": 1274
+  },
+  "/imgs/blogs/imf-and-world-bank-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/imf-and-world-bank-4.png": {
+    "width": 1792,
+    "height": 647
+  },
+  "/imgs/blogs/imf-and-world-bank-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/imf-and-world-bank-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/imf-and-world-bank-7.png": {
+    "width": 1792,
+    "height": 1154
+  },
   "/imgs/blogs/inside-an-investment-bank-how-they-make-money-1.png": {
     "width": 1792,
     "height": 1152,
@@ -2895,6 +3011,35 @@
   "/imgs/blogs/inside-an-investment-bank-how-they-make-money-7.png": {
     "width": 1792,
     "height": 987
+  },
+  "/imgs/blogs/insurance-giants-and-systemic-risk-1.png": {
+    "width": 1792,
+    "height": 878,
+    "cover": true
+  },
+  "/imgs/blogs/insurance-giants-and-systemic-risk-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/insurance-giants-and-systemic-risk-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/insurance-giants-and-systemic-risk-4.png": {
+    "width": 1792,
+    "height": 1307
+  },
+  "/imgs/blogs/insurance-giants-and-systemic-risk-5.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/insurance-giants-and-systemic-risk-6.png": {
+    "width": 1792,
+    "height": 765
+  },
+  "/imgs/blogs/insurance-giants-and-systemic-risk-7.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/itos-lemma-quant-interviews-1.png": {
     "width": 1792,
@@ -3747,6 +3892,35 @@
   "/imgs/blogs/market-data-eda-biases-quant-research-9.png": {
     "width": 1792,
     "height": 1194
+  },
+  "/imgs/blogs/market-makers-and-high-frequency-trading-1.png": {
+    "width": 1792,
+    "height": 878,
+    "cover": true
+  },
+  "/imgs/blogs/market-makers-and-high-frequency-trading-2.png": {
+    "width": 1792,
+    "height": 1359
+  },
+  "/imgs/blogs/market-makers-and-high-frequency-trading-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/market-makers-and-high-frequency-trading-4.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/market-makers-and-high-frequency-trading-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/market-makers-and-high-frequency-trading-6.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/market-makers-and-high-frequency-trading-7.png": {
+    "width": 1792,
+    "height": 661
   },
   "/imgs/blogs/market-making-games-quant-interviews-1.png": {
     "width": 1792,
@@ -4964,6 +5138,64 @@
     "width": 1792,
     "height": 725
   },
+  "/imgs/blogs/pension-funds-largest-pools-of-capital-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/pension-funds-largest-pools-of-capital-2.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/pension-funds-largest-pools-of-capital-3.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/pension-funds-largest-pools-of-capital-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/pension-funds-largest-pools-of-capital-5.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/pension-funds-largest-pools-of-capital-6.png": {
+    "width": 1792,
+    "height": 670
+  },
+  "/imgs/blogs/pension-funds-largest-pools-of-capital-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/pimco-and-the-bond-market-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/pimco-and-the-bond-market-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/pimco-and-the-bond-market-3.png": {
+    "width": 1792,
+    "height": 1371
+  },
+  "/imgs/blogs/pimco-and-the-bond-market-4.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/pimco-and-the-bond-market-5.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/pimco-and-the-bond-market-6.png": {
+    "width": 1792,
+    "height": 738
+  },
+  "/imgs/blogs/pimco-and-the-bond-market-7.png": {
+    "width": 1792,
+    "height": 1154
+  },
   "/imgs/blogs/pose-estimation-architecture-tree.png": {
     "width": 1280,
     "height": 665,
@@ -5979,6 +6211,35 @@
     "width": 1792,
     "height": 1266
   },
+  "/imgs/blogs/sovereign-wealth-funds-norway-gic-pif-1.png": {
+    "width": 1792,
+    "height": 1164,
+    "cover": true
+  },
+  "/imgs/blogs/sovereign-wealth-funds-norway-gic-pif-2.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/sovereign-wealth-funds-norway-gic-pif-3.png": {
+    "width": 1792,
+    "height": 1015
+  },
+  "/imgs/blogs/sovereign-wealth-funds-norway-gic-pif-4.png": {
+    "width": 1792,
+    "height": 878
+  },
+  "/imgs/blogs/sovereign-wealth-funds-norway-gic-pif-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/sovereign-wealth-funds-norway-gic-pif-6.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/sovereign-wealth-funds-norway-gic-pif-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/spec-dec-01-flow.png": {
     "width": 1680,
     "height": 341
@@ -6104,6 +6365,35 @@
   "/imgs/blogs/stochastic-differential-equations-gbm-ou-quant-interviews-9.png": {
     "width": 1792,
     "height": 1222
+  },
+  "/imgs/blogs/stock-exchanges-and-clearinghouses-1.png": {
+    "width": 1792,
+    "height": 856,
+    "cover": true
+  },
+  "/imgs/blogs/stock-exchanges-and-clearinghouses-2.png": {
+    "width": 1792,
+    "height": 953
+  },
+  "/imgs/blogs/stock-exchanges-and-clearinghouses-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/stock-exchanges-and-clearinghouses-4.png": {
+    "width": 1792,
+    "height": 1371
+  },
+  "/imgs/blogs/stock-exchanges-and-clearinghouses-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/stock-exchanges-and-clearinghouses-6.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/stock-exchanges-and-clearinghouses-7.png": {
+    "width": 1792,
+    "height": 1178
   },
   "/imgs/blogs/subliminal-learning-language-models-transmit-behavioral-traits-via-hidden-signals-in-data-20250805153806.png": {
     "width": 1554,
