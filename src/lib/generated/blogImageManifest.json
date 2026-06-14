@@ -550,6 +550,55 @@
     "width": 1792,
     "height": 955
   },
+  "/imgs/blogs/classic-quant-probability-problems-1.png": {
+    "width": 1792,
+    "height": 1209,
+    "cover": true
+  },
+  "/imgs/blogs/classic-quant-probability-problems-10.png": {
+    "width": 1792,
+    "height": 1099
+  },
+  "/imgs/blogs/classic-quant-probability-problems-11.png": {
+    "width": 1792,
+    "height": 881
+  },
+  "/imgs/blogs/classic-quant-probability-problems-12.png": {
+    "width": 1792,
+    "height": 974
+  },
+  "/imgs/blogs/classic-quant-probability-problems-2.png": {
+    "width": 1792,
+    "height": 1109
+  },
+  "/imgs/blogs/classic-quant-probability-problems-3.png": {
+    "width": 1792,
+    "height": 1031
+  },
+  "/imgs/blogs/classic-quant-probability-problems-4.png": {
+    "width": 1792,
+    "height": 982
+  },
+  "/imgs/blogs/classic-quant-probability-problems-5.png": {
+    "width": 1792,
+    "height": 982
+  },
+  "/imgs/blogs/classic-quant-probability-problems-6.png": {
+    "width": 1792,
+    "height": 1056
+  },
+  "/imgs/blogs/classic-quant-probability-problems-7.png": {
+    "width": 1792,
+    "height": 1079
+  },
+  "/imgs/blogs/classic-quant-probability-problems-8.png": {
+    "width": 1792,
+    "height": 1031
+  },
+  "/imgs/blogs/classic-quant-probability-problems-9.png": {
+    "width": 1792,
+    "height": 1153
+  },
   "/imgs/blogs/clawd-bot-20260127115538.png": {
     "width": 950,
     "height": 401,
@@ -637,6 +686,55 @@
     "width": 1792,
     "height": 1154
   },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 949,
+    "cover": true
+  },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1126
+  },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1093
+  },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1353
+  },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 939
+  },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1077
+  },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/conditional-probability-bayes-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1085
+  },
   "/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20250930005013.png": {
     "width": 759,
     "height": 375,
@@ -686,6 +784,55 @@
     "width": 1792,
     "height": 763,
     "cover": true
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 1166,
+    "cover": true
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1428
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1077
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-2.png": {
+    "width": 1600,
+    "height": 1558
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1111
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-5.png": {
+    "width": 1769,
+    "height": 1450
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1273
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 783
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1290
+  },
+  "/imgs/blogs/counting-combinatorics-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1242
   },
   "/imgs/blogs/cuda-graph-1.png": {
     "width": 1792,
@@ -1272,6 +1419,55 @@
   "/imgs/blogs/exotic-derivatives-9.png": {
     "width": 1792,
     "height": 872
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 1171
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1100
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 945
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1140
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 868
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 939
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/expected-value-techniques-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1026
   },
   "/imgs/blogs/fine-tuning-tool-calling-llms-when-how-1.png": {
     "width": 1792,
@@ -2244,6 +2440,55 @@
     "width": 1792,
     "height": 1238
   },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 821,
+    "cover": true
+  },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 839
+  },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1138
+  },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 840
+  },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 871
+  },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 871
+  },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 855
+  },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 863
+  },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 865
+  },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/markov-chains-hitting-times-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 904
+  },
   "/imgs/blogs/math-01-stages.png": {
     "width": 1792,
     "height": 94,
@@ -2944,6 +3189,55 @@
   "/imgs/blogs/options-theory-9.png": {
     "width": 1792,
     "height": 970
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 1195,
+    "cover": true
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/order-statistics-uniform-tricks-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1195
   },
   "/imgs/blogs/orpheus-tts-llm-speech-snac-1.png": {
     "width": 1792,
