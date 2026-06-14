@@ -194,6 +194,55 @@
     "width": 1792,
     "height": 865
   },
+  "/imgs/blogs/backtesting-done-right-quant-research-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/backtesting-done-right-quant-research-10.png": {
+    "width": 1792,
+    "height": 1322
+  },
+  "/imgs/blogs/backtesting-done-right-quant-research-11.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/backtesting-done-right-quant-research-12.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/backtesting-done-right-quant-research-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/backtesting-done-right-quant-research-3.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/backtesting-done-right-quant-research-4.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/backtesting-done-right-quant-research-5.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/backtesting-done-right-quant-research-6.png": {
+    "width": 1792,
+    "height": 1299
+  },
+  "/imgs/blogs/backtesting-done-right-quant-research-7.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/backtesting-done-right-quant-research-8.png": {
+    "width": 1792,
+    "height": 1147
+  },
+  "/imgs/blogs/backtesting-done-right-quant-research-9.png": {
+    "width": 1792,
+    "height": 1299
+  },
   "/imgs/blogs/bagel-unified-multimodal-mixture-of-transformers-1.png": {
     "width": 1792,
     "height": 1263,
@@ -395,6 +444,55 @@
   "/imgs/blogs/bpe-03-variants.png": {
     "width": 1331,
     "height": 229
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-10.png": {
+    "width": 1792,
+    "height": 824
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-11.png": {
+    "width": 1792,
+    "height": 798
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-12.png": {
+    "width": 1792,
+    "height": 824
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-2.png": {
+    "width": 1792,
+    "height": 1258
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-4.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-6.png": {
+    "width": 1792,
+    "height": 988
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-7.png": {
+    "width": 1792,
+    "height": 848
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-8.png": {
+    "width": 1792,
+    "height": 935
+  },
+  "/imgs/blogs/building-an-alpha-signal-quant-research-9.png": {
+    "width": 1792,
+    "height": 822
   },
   "/imgs/blogs/bytedance-seed-model-universe-by-use-case-1.png": {
     "width": 1792,
@@ -1607,6 +1705,55 @@
   "/imgs/blogs/evaluating-agent-trajectories-beyond-final-answer-9.png": {
     "width": 1792,
     "height": 984
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-1.png": {
+    "width": 1792,
+    "height": 848,
+    "cover": true
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-10.png": {
+    "width": 1792,
+    "height": 1302
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-11.png": {
+    "width": 1792,
+    "height": 871
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-12.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-2.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-3.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-4.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-5.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-6.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-7.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-8.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-9.png": {
+    "width": 1792,
+    "height": 1195
   },
   "/imgs/blogs/exotic-derivatives-1.png": {
     "width": 1792,
@@ -2832,6 +2979,55 @@
     "width": 1792,
     "height": 1238
   },
+  "/imgs/blogs/market-data-eda-biases-quant-research-1.png": {
+    "width": 1792,
+    "height": 1134,
+    "cover": true
+  },
+  "/imgs/blogs/market-data-eda-biases-quant-research-10.png": {
+    "width": 1792,
+    "height": 1356
+  },
+  "/imgs/blogs/market-data-eda-biases-quant-research-11.png": {
+    "width": 1792,
+    "height": 940
+  },
+  "/imgs/blogs/market-data-eda-biases-quant-research-12.png": {
+    "width": 1792,
+    "height": 658
+  },
+  "/imgs/blogs/market-data-eda-biases-quant-research-2.png": {
+    "width": 1792,
+    "height": 1009
+  },
+  "/imgs/blogs/market-data-eda-biases-quant-research-3.png": {
+    "width": 1792,
+    "height": 1181
+  },
+  "/imgs/blogs/market-data-eda-biases-quant-research-4.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/market-data-eda-biases-quant-research-5.png": {
+    "width": 1792,
+    "height": 1295
+  },
+  "/imgs/blogs/market-data-eda-biases-quant-research-6.png": {
+    "width": 1792,
+    "height": 1186
+  },
+  "/imgs/blogs/market-data-eda-biases-quant-research-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/market-data-eda-biases-quant-research-8.png": {
+    "width": 1792,
+    "height": 1001
+  },
+  "/imgs/blogs/market-data-eda-biases-quant-research-9.png": {
+    "width": 1792,
+    "height": 1194
+  },
   "/imgs/blogs/market-making-games-quant-interviews-1.png": {
     "width": 1792,
     "height": 1002,
@@ -3770,6 +3966,55 @@
     "width": 1792,
     "height": 1054
   },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-1.png": {
+    "width": 1792,
+    "height": 1054,
+    "cover": true
+  },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-10.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-11.png": {
+    "width": 1792,
+    "height": 864
+  },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-12.png": {
+    "width": 1792,
+    "height": 1297
+  },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-2.png": {
+    "width": 1792,
+    "height": 1150
+  },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-3.png": {
+    "width": 1792,
+    "height": 677
+  },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-4.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-5.png": {
+    "width": 1792,
+    "height": 713
+  },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-6.png": {
+    "width": 1792,
+    "height": 1153
+  },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-7.png": {
+    "width": 1792,
+    "height": 1020
+  },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-8.png": {
+    "width": 1792,
+    "height": 1130
+  },
+  "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-9.png": {
+    "width": 1792,
+    "height": 1136
+  },
   "/imgs/blogs/pose-estimation-architecture-tree.png": {
     "width": 1280,
     "height": 665,
@@ -3795,6 +4040,55 @@
   "/imgs/blogs/pruning-in-llm-04-evolution.png": {
     "width": 1200,
     "height": 729
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-10.png": {
+    "width": 1792,
+    "height": 1262
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-11.png": {
+    "width": 1792,
+    "height": 1274
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-12.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-2.png": {
+    "width": 1792,
+    "height": 942
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-3.png": {
+    "width": 1792,
+    "height": 1205
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-7.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-8.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/quant-research-writeup-killing-ideas-9.png": {
+    "width": 1792,
+    "height": 1210
   },
   "/imgs/blogs/quantization-in-llm-01-taxonomy.png": {
     "width": 1773,
