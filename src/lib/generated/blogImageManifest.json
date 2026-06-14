@@ -808,6 +808,55 @@
     "width": 1792,
     "height": 872
   },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-1.png": {
+    "width": 1737,
+    "height": 1445,
+    "cover": true
+  },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-10.png": {
+    "width": 1792,
+    "height": 1092
+  },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-11.png": {
+    "width": 1792,
+    "height": 1147
+  },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-12.png": {
+    "width": 1792,
+    "height": 1350
+  },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-2.png": {
+    "width": 1792,
+    "height": 885
+  },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-3.png": {
+    "width": 1792,
+    "height": 1215
+  },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-4.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-5.png": {
+    "width": 1792,
+    "height": 1135
+  },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-6.png": {
+    "width": 1792,
+    "height": 1126
+  },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-7.png": {
+    "width": 1792,
+    "height": 1135
+  },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-8.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/coding-interview-quant-data-structures-algorithms-9.png": {
+    "width": 1792,
+    "height": 1161
+  },
   "/imgs/blogs/combibench-1.png": {
     "width": 1792,
     "height": 921,
@@ -1029,6 +1078,55 @@
   "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-9.png": {
     "width": 1792,
     "height": 1195
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 830,
+    "cover": true
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1046
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1153
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1220
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1044
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1067
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 978
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1082
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/cpp-for-low-latency-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 978
   },
   "/imgs/blogs/cuda-graph-1.png": {
     "width": 1792,
@@ -3036,6 +3134,55 @@
     "width": 1792,
     "height": 1070
   },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 1355,
+    "cover": true
+  },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1360
+  },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1192
+  },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 942
+  },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1087
+  },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 990
+  },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1335
+  },
+  "/imgs/blogs/logic-puzzles-deduction-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 905
+  },
   "/imgs/blogs/machine-translation-with-llms-1.png": {
     "width": 1792,
     "height": 1210,
@@ -3285,6 +3432,55 @@
   "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-9.png": {
     "width": 1792,
     "height": 1061
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 953,
+    "cover": true
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 776
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1362
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 752
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1219
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1195
   },
   "/imgs/blogs/minimax-01-lightning-attention-hybrid-moe-1.png": {
     "width": 1792,
@@ -3537,6 +3733,55 @@
   "/imgs/blogs/moe-03-serving.png": {
     "width": 1380,
     "height": 437
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-1.png": {
+    "width": 1792,
+    "height": 957,
+    "cover": true
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-10.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-11.png": {
+    "width": 1792,
+    "height": 1176
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-12.png": {
+    "width": 1792,
+    "height": 1415
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-2.png": {
+    "width": 1792,
+    "height": 1187
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-3.png": {
+    "width": 1792,
+    "height": 1176
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-4.png": {
+    "width": 1792,
+    "height": 1176
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-5.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-6.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-7.png": {
+    "width": 1792,
+    "height": 1176
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-8.png": {
+    "width": 1792,
+    "height": 1187
+  },
+  "/imgs/blogs/monte-carlo-simulation-coding-quant-interviews-9.png": {
+    "width": 1792,
+    "height": 1176
   },
   "/imgs/blogs/mooncake-1.png": {
     "width": 1792,
@@ -4187,6 +4432,55 @@
   "/imgs/blogs/put-call-parity-no-arbitrage-quant-interviews-9.png": {
     "width": 1792,
     "height": 1195
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-1.png": {
+    "width": 1792,
+    "height": 878,
+    "cover": true
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-10.png": {
+    "width": 1792,
+    "height": 1335
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-11.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-12.png": {
+    "width": 1792,
+    "height": 886
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-2.png": {
+    "width": 1792,
+    "height": 1293
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-3.png": {
+    "width": 1792,
+    "height": 986
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-4.png": {
+    "width": 1792,
+    "height": 807
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-5.png": {
+    "width": 1792,
+    "height": 905
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-6.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-7.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-8.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/quant-interview-process-strategy-how-to-prepare-9.png": {
+    "width": 1792,
+    "height": 1184
   },
   "/imgs/blogs/quant-research-writeup-killing-ideas-1.png": {
     "width": 1792,
