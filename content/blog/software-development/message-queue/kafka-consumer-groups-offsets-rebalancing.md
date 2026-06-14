@@ -293,7 +293,7 @@ You can commit at finer or coarser granularity by passing explicit offsets to `c
 | `commitSync` after each record | one record | duplicates (rare) | strict, low-throughput |
 | Transactions (EOS) | none | none (slower) | financial, exactly-once |
 
-The single most important rule in this entire section: **if you use auto-commit, do all your processing synchronously inside the poll loop, or you risk silent loss.** If you cannot guarantee synchronous processing, turn auto-commit off and commit after your work. This decision deserves its own treatment, which the forthcoming sibling post on [offset commit strategies](/blog/software-development/message-queue/kafka-offset-commit-strategies) will give it; here the goal is that you never again get surprised by a duplicate count or a missing record and not know which window produced it.
+The single most important rule in this entire section: **if you use auto-commit, do all your processing synchronously inside the poll loop, or you risk silent loss.** If you cannot guarantee synchronous processing, turn auto-commit off and commit after your work. This decision deserves its own treatment, which the forthcoming sibling post on [offset commit strategies](/blog/software-development/message-queue/consumer-offset-commit-strategies-failure-modes) will give it; here the goal is that you never again get surprised by a duplicate count or a missing record and not know which window produced it.
 
 ## 6. The rebalance protocol: heartbeats, timeouts, join/sync
 
@@ -502,6 +502,6 @@ And the meta-rule: **tune timeouts to your reality, do not inherit defaults blin
 - [Push vs pull, acknowledgements, and how consumers read](/blog/software-development/message-queue/push-vs-pull-acknowledgements-how-consumers-read) — why Kafka's pull model gives consumers free backpressure, the delivery side of this story.
 - [Delivery semantics: at-most-once, at-least-once, exactly-once](/blog/software-development/message-queue/delivery-semantics-at-most-at-least-exactly-once) — where offset commit order turns into a delivery guarantee, including Kafka transactions.
 - [Message ordering and partitioning guarantees](/blog/software-development/message-queue/message-ordering-and-partitioning-guarantees) — why one-owner-per-partition is what gives you per-partition ordering.
-- [Kafka offset commit strategies](/blog/software-development/message-queue/kafka-offset-commit-strategies) — the forthcoming sibling that drills into commit patterns, sync vs async, and exactly-once offset handling.
+- [Kafka offset commit strategies](/blog/software-development/message-queue/consumer-offset-commit-strategies-failure-modes) — the forthcoming sibling that drills into commit patterns, sync vs async, and exactly-once offset handling.
 - [Kafka rebalance storms and how to tame them](/blog/software-development/message-queue/kafka-rebalance-storms-and-how-to-tame-them) — the forthcoming sibling on rebalances that trigger each other into a thrash loop, and how to stop them.
 - [Apache Kafka documentation: Consumer Configs and the Group Membership protocol](https://kafka.apache.org/documentation/#consumerconfigs) — the authoritative reference for every config named in this post.
