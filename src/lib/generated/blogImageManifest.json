@@ -822,6 +822,39 @@
     "width": 1331,
     "height": 229
   },
+  "/imgs/blogs/breakouts-vs-fakeouts-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/breakouts-vs-fakeouts-2.png": {
+    "width": 1792,
+    "height": 1074
+  },
+  "/imgs/blogs/breakouts-vs-fakeouts-3.png": {
+    "width": 1792,
+    "height": 1352
+  },
+  "/imgs/blogs/breakouts-vs-fakeouts-4.png": {
+    "width": 1792,
+    "height": 1040
+  },
+  "/imgs/blogs/breakouts-vs-fakeouts-5.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/breakouts-vs-fakeouts-6.png": {
+    "width": 1792,
+    "height": 944
+  },
+  "/imgs/blogs/breakouts-vs-fakeouts-7.png": {
+    "width": 1792,
+    "height": 964
+  },
+  "/imgs/blogs/breakouts-vs-fakeouts-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/broken-neural-scaling-laws-1.png": {
     "width": 1792,
     "height": 1175,
@@ -1002,6 +1035,39 @@
   "/imgs/blogs/bytedance-seed-model-universe-by-use-case-5.png": {
     "width": 1792,
     "height": 1162
+  },
+  "/imgs/blogs/candlestick-anatomy-and-the-honest-evidence-1.png": {
+    "width": 1792,
+    "height": 1061,
+    "cover": true
+  },
+  "/imgs/blogs/candlestick-anatomy-and-the-honest-evidence-2.png": {
+    "width": 1792,
+    "height": 1063
+  },
+  "/imgs/blogs/candlestick-anatomy-and-the-honest-evidence-3.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/candlestick-anatomy-and-the-honest-evidence-4.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/candlestick-anatomy-and-the-honest-evidence-5.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/candlestick-anatomy-and-the-honest-evidence-6.png": {
+    "width": 1792,
+    "height": 904
+  },
+  "/imgs/blogs/candlestick-anatomy-and-the-honest-evidence-7.png": {
+    "width": 1792,
+    "height": 1047
+  },
+  "/imgs/blogs/candlestick-anatomy-and-the-honest-evidence-8.png": {
+    "width": 1792,
+    "height": 1015
   },
   "/imgs/blogs/capacity-01-formula.png": {
     "width": 1792,
@@ -1638,6 +1704,39 @@
   "/imgs/blogs/conditional-probability-bayes-quant-interviews-9.png": {
     "width": 1792,
     "height": 1085
+  },
+  "/imgs/blogs/continuation-patterns-flags-pennants-1.png": {
+    "width": 1792,
+    "height": 1103,
+    "cover": true
+  },
+  "/imgs/blogs/continuation-patterns-flags-pennants-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/continuation-patterns-flags-pennants-3.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/continuation-patterns-flags-pennants-4.png": {
+    "width": 1792,
+    "height": 1092
+  },
+  "/imgs/blogs/continuation-patterns-flags-pennants-5.png": {
+    "width": 1792,
+    "height": 1079
+  },
+  "/imgs/blogs/continuation-patterns-flags-pennants-6.png": {
+    "width": 1792,
+    "height": 1092
+  },
+  "/imgs/blogs/continuation-patterns-flags-pennants-7.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/continuation-patterns-flags-pennants-8.png": {
+    "width": 1792,
+    "height": 975
   },
   "/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20250930005013.png": {
     "width": 759,
@@ -3882,6 +3981,39 @@
   "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-9.png": {
     "width": 1792,
     "height": 1194
+  },
+  "/imgs/blogs/head-and-shoulders-double-tops-1.png": {
+    "width": 1792,
+    "height": 1148,
+    "cover": true
+  },
+  "/imgs/blogs/head-and-shoulders-double-tops-2.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/head-and-shoulders-double-tops-3.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/head-and-shoulders-double-tops-4.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/head-and-shoulders-double-tops-5.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/head-and-shoulders-double-tops-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/head-and-shoulders-double-tops-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/head-and-shoulders-double-tops-8.png": {
+    "width": 1792,
+    "height": 957
   },
   "/imgs/blogs/hermes-agent-1.png": {
     "width": 1792,
@@ -8030,6 +8162,39 @@
     "width": 1792,
     "height": 414
   },
+  "/imgs/blogs/reversal-candlestick-patterns-1.png": {
+    "width": 1792,
+    "height": 794,
+    "cover": true
+  },
+  "/imgs/blogs/reversal-candlestick-patterns-2.png": {
+    "width": 1792,
+    "height": 708
+  },
+  "/imgs/blogs/reversal-candlestick-patterns-3.png": {
+    "width": 1792,
+    "height": 778
+  },
+  "/imgs/blogs/reversal-candlestick-patterns-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/reversal-candlestick-patterns-5.png": {
+    "width": 1792,
+    "height": 1057
+  },
+  "/imgs/blogs/reversal-candlestick-patterns-6.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/reversal-candlestick-patterns-7.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/reversal-candlestick-patterns-8.png": {
+    "width": 1792,
+    "height": 802
+  },
   "/imgs/blogs/reward-model-overoptimization-scaling-1.png": {
     "width": 1792,
     "height": 1256,
@@ -9699,6 +9864,39 @@
   "/imgs/blogs/trend-and-market-structure-8.png": {
     "width": 1792,
     "height": 1103
+  },
+  "/imgs/blogs/triangles-wedges-rectangles-channels-1.png": {
+    "width": 1792,
+    "height": 1260,
+    "cover": true
+  },
+  "/imgs/blogs/triangles-wedges-rectangles-channels-2.png": {
+    "width": 1792,
+    "height": 805
+  },
+  "/imgs/blogs/triangles-wedges-rectangles-channels-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/triangles-wedges-rectangles-channels-4.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/triangles-wedges-rectangles-channels-5.png": {
+    "width": 1792,
+    "height": 1103
+  },
+  "/imgs/blogs/triangles-wedges-rectangles-channels-6.png": {
+    "width": 1792,
+    "height": 1067
+  },
+  "/imgs/blogs/triangles-wedges-rectangles-channels-7.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/triangles-wedges-rectangles-channels-8.png": {
+    "width": 1792,
+    "height": 1145
   },
   "/imgs/blogs/triple-barrier-meta-labeling-quant-research-1.png": {
     "width": 1792,
