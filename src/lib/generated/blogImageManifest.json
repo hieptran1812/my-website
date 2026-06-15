@@ -269,6 +269,35 @@
     "width": 1792,
     "height": 664
   },
+  "/imgs/blogs/asset-rotation-across-the-business-cycle-quadrants-1.png": {
+    "width": 1792,
+    "height": 1334,
+    "cover": true
+  },
+  "/imgs/blogs/asset-rotation-across-the-business-cycle-quadrants-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/asset-rotation-across-the-business-cycle-quadrants-3.png": {
+    "width": 1792,
+    "height": 1082
+  },
+  "/imgs/blogs/asset-rotation-across-the-business-cycle-quadrants-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/asset-rotation-across-the-business-cycle-quadrants-5.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/asset-rotation-across-the-business-cycle-quadrants-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/asset-rotation-across-the-business-cycle-quadrants-7.png": {
+    "width": 1792,
+    "height": 673
+  },
   "/imgs/blogs/attention-residuals-1.png": {
     "width": 1792,
     "height": 1278,
@@ -1060,6 +1089,35 @@
   "/imgs/blogs/brownian-motion-random-walk-math-for-quants-7.png": {
     "width": 1792,
     "height": 1178
+  },
+  "/imgs/blogs/building-a-macro-thesis-from-data-to-a-trade-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/building-a-macro-thesis-from-data-to-a-trade-2.png": {
+    "width": 1792,
+    "height": 1176
+  },
+  "/imgs/blogs/building-a-macro-thesis-from-data-to-a-trade-3.png": {
+    "width": 1597,
+    "height": 909
+  },
+  "/imgs/blogs/building-a-macro-thesis-from-data-to-a-trade-4.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/building-a-macro-thesis-from-data-to-a-trade-5.png": {
+    "width": 1602,
+    "height": 738
+  },
+  "/imgs/blogs/building-a-macro-thesis-from-data-to-a-trade-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/building-a-macro-thesis-from-data-to-a-trade-7.png": {
+    "width": 1792,
+    "height": 1080
   },
   "/imgs/blogs/building-an-alpha-signal-quant-research-1.png": {
     "width": 1792,
@@ -1949,6 +2007,35 @@
     "width": 1792,
     "height": 1154
   },
+  "/imgs/blogs/commodities-as-macro-signals-oil-copper-gold-1.png": {
+    "width": 1792,
+    "height": 1172,
+    "cover": true
+  },
+  "/imgs/blogs/commodities-as-macro-signals-oil-copper-gold-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/commodities-as-macro-signals-oil-copper-gold-3.png": {
+    "width": 1792,
+    "height": 699
+  },
+  "/imgs/blogs/commodities-as-macro-signals-oil-copper-gold-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/commodities-as-macro-signals-oil-copper-gold-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/commodities-as-macro-signals-oil-copper-gold-6.png": {
+    "width": 1792,
+    "height": 1013
+  },
+  "/imgs/blogs/commodities-as-macro-signals-oil-copper-gold-7.png": {
+    "width": 1792,
+    "height": 1235
+  },
   "/imgs/blogs/commodity-trading-houses-glencore-vitol-trafigura-1.png": {
     "width": 1792,
     "height": 766,
@@ -2292,6 +2379,64 @@
     "width": 1792,
     "height": 1450
   },
+  "/imgs/blogs/correlation-and-the-diversification-free-lunch-1.png": {
+    "width": 1499,
+    "height": 1112,
+    "cover": true
+  },
+  "/imgs/blogs/correlation-and-the-diversification-free-lunch-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/correlation-and-the-diversification-free-lunch-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/correlation-and-the-diversification-free-lunch-4.png": {
+    "width": 1597,
+    "height": 914
+  },
+  "/imgs/blogs/correlation-and-the-diversification-free-lunch-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/correlation-and-the-diversification-free-lunch-6.png": {
+    "width": 1597,
+    "height": 914
+  },
+  "/imgs/blogs/correlation-and-the-diversification-free-lunch-7.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/correlation-by-regime-growth-and-inflation-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/correlation-by-regime-growth-and-inflation-2.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/correlation-by-regime-growth-and-inflation-3.png": {
+    "width": 1589,
+    "height": 914
+  },
+  "/imgs/blogs/correlation-by-regime-growth-and-inflation-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/correlation-by-regime-growth-and-inflation-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/correlation-by-regime-growth-and-inflation-6.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/correlation-by-regime-growth-and-inflation-7.png": {
+    "width": 1792,
+    "height": 879
+  },
   "/imgs/blogs/counting-combinatorics-quant-interviews-1.png": {
     "width": 1792,
     "height": 1166,
@@ -2496,6 +2641,39 @@
   "/imgs/blogs/credit-rating-agencies-moodys-sp-fitch-7.png": {
     "width": 1792,
     "height": 1266
+  },
+  "/imgs/blogs/crypto-as-a-macro-liquidity-asset-1.png": {
+    "width": 1792,
+    "height": 1173,
+    "cover": true
+  },
+  "/imgs/blogs/crypto-as-a-macro-liquidity-asset-2.png": {
+    "width": 1661,
+    "height": 914
+  },
+  "/imgs/blogs/crypto-as-a-macro-liquidity-asset-3.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/crypto-as-a-macro-liquidity-asset-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/crypto-as-a-macro-liquidity-asset-5.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/crypto-as-a-macro-liquidity-asset-6.png": {
+    "width": 1648,
+    "height": 914
+  },
+  "/imgs/blogs/crypto-as-a-macro-liquidity-asset-7.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/crypto-as-a-macro-liquidity-asset-8.png": {
+    "width": 1792,
+    "height": 1235
   },
   "/imgs/blogs/crypto-digital-assets-the-new-high-beta-class-1.png": {
     "width": 1792,
@@ -7885,6 +8063,35 @@
     "width": 1792,
     "height": 1134
   },
+  "/imgs/blogs/oil-inflation-and-equities-the-energy-linkage-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/oil-inflation-and-equities-the-energy-linkage-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/oil-inflation-and-equities-the-energy-linkage-3.png": {
+    "width": 1792,
+    "height": 1408
+  },
+  "/imgs/blogs/oil-inflation-and-equities-the-energy-linkage-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/oil-inflation-and-equities-the-energy-linkage-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/oil-inflation-and-equities-the-energy-linkage-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/oil-inflation-and-equities-the-energy-linkage-7.png": {
+    "width": 1792,
+    "height": 1335
+  },
   "/imgs/blogs/olmo-3-training-finetuning-techniques-1.png": {
     "width": 1792,
     "height": 1189,
@@ -9401,6 +9608,35 @@
     "width": 1792,
     "height": 872
   },
+  "/imgs/blogs/real-yields-the-variable-that-prices-everything-1.png": {
+    "width": 1792,
+    "height": 1156,
+    "cover": true
+  },
+  "/imgs/blogs/real-yields-the-variable-that-prices-everything-2.png": {
+    "width": 1600,
+    "height": 914
+  },
+  "/imgs/blogs/real-yields-the-variable-that-prices-everything-3.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/real-yields-the-variable-that-prices-everything-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/real-yields-the-variable-that-prices-everything-5.png": {
+    "width": 1634,
+    "height": 914
+  },
+  "/imgs/blogs/real-yields-the-variable-that-prices-everything-6.png": {
+    "width": 1792,
+    "height": 957
+  },
+  "/imgs/blogs/real-yields-the-variable-that-prices-everything-7.png": {
+    "width": 1792,
+    "height": 1216
+  },
   "/imgs/blogs/reasoning-models-rl-test-time-scaling-1.png": {
     "width": 1792,
     "height": 754,
@@ -9674,6 +9910,35 @@
   "/imgs/blogs/risk-on-risk-off-how-money-rotates-7.png": {
     "width": 1792,
     "height": 1370
+  },
+  "/imgs/blogs/risk-on-risk-off-the-cross-asset-rotation-1.png": {
+    "width": 1792,
+    "height": 1092,
+    "cover": true
+  },
+  "/imgs/blogs/risk-on-risk-off-the-cross-asset-rotation-2.png": {
+    "width": 1305,
+    "height": 1112
+  },
+  "/imgs/blogs/risk-on-risk-off-the-cross-asset-rotation-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/risk-on-risk-off-the-cross-asset-rotation-4.png": {
+    "width": 1589,
+    "height": 914
+  },
+  "/imgs/blogs/risk-on-risk-off-the-cross-asset-rotation-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/risk-on-risk-off-the-cross-asset-rotation-6.png": {
+    "width": 1792,
+    "height": 1400
+  },
+  "/imgs/blogs/risk-on-risk-off-the-cross-asset-rotation-7.png": {
+    "width": 1792,
+    "height": 1392
   },
   "/imgs/blogs/risk-reward-and-expectancy-in-practice-1.png": {
     "width": 1792,
@@ -10573,6 +10838,35 @@
     "width": 1792,
     "height": 1266
   },
+  "/imgs/blogs/stock-bond-correlation-the-60-40-engine-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/stock-bond-correlation-the-60-40-engine-2.png": {
+    "width": 1792,
+    "height": 1229
+  },
+  "/imgs/blogs/stock-bond-correlation-the-60-40-engine-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/stock-bond-correlation-the-60-40-engine-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/stock-bond-correlation-the-60-40-engine-5.png": {
+    "width": 1792,
+    "height": 836
+  },
+  "/imgs/blogs/stock-bond-correlation-the-60-40-engine-6.png": {
+    "width": 1617,
+    "height": 914
+  },
+  "/imgs/blogs/stock-bond-correlation-the-60-40-engine-7.png": {
+    "width": 1792,
+    "height": 1257
+  },
   "/imgs/blogs/stock-exchanges-and-clearinghouses-1.png": {
     "width": 1792,
     "height": 856,
@@ -11188,6 +11482,64 @@
     "width": 1129,
     "height": 606
   },
+  "/imgs/blogs/the-business-cycle-four-phases-for-traders-1.png": {
+    "width": 1792,
+    "height": 1110,
+    "cover": true
+  },
+  "/imgs/blogs/the-business-cycle-four-phases-for-traders-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-business-cycle-four-phases-for-traders-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-business-cycle-four-phases-for-traders-4.png": {
+    "width": 1792,
+    "height": 986
+  },
+  "/imgs/blogs/the-business-cycle-four-phases-for-traders-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-business-cycle-four-phases-for-traders-6.png": {
+    "width": 1792,
+    "height": 1126
+  },
+  "/imgs/blogs/the-business-cycle-four-phases-for-traders-7.png": {
+    "width": 1792,
+    "height": 1339
+  },
+  "/imgs/blogs/the-dollar-cross-asset-gravity-1.png": {
+    "width": 1792,
+    "height": 1148,
+    "cover": true
+  },
+  "/imgs/blogs/the-dollar-cross-asset-gravity-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-cross-asset-gravity-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-cross-asset-gravity-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-cross-asset-gravity-5.png": {
+    "width": 1792,
+    "height": 1065
+  },
+  "/imgs/blogs/the-dollar-cross-asset-gravity-6.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/the-dollar-cross-asset-gravity-7.png": {
+    "width": 1792,
+    "height": 1266
+  },
   "/imgs/blogs/the-four-types-of-firms-20251101024943.png": {
     "width": 1024,
     "height": 1024,
@@ -11225,6 +11577,35 @@
   "/imgs/blogs/the-indicator-trap-8.png": {
     "width": 1792,
     "height": 1162
+  },
+  "/imgs/blogs/the-macro-calendar-cpi-nfp-fomc-pmi-1.png": {
+    "width": 1792,
+    "height": 988,
+    "cover": true
+  },
+  "/imgs/blogs/the-macro-calendar-cpi-nfp-fomc-pmi-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-macro-calendar-cpi-nfp-fomc-pmi-3.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/the-macro-calendar-cpi-nfp-fomc-pmi-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-macro-calendar-cpi-nfp-fomc-pmi-5.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/the-macro-calendar-cpi-nfp-fomc-pmi-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-macro-calendar-cpi-nfp-fomc-pmi-7.png": {
+    "width": 1792,
+    "height": 641
   },
   "/imgs/blogs/the-map-of-asset-classes-what-you-can-own-1.png": {
     "width": 1602,
@@ -11433,6 +11814,35 @@
   "/imgs/blogs/trading-psychology-and-the-execution-gap-8.png": {
     "width": 1792,
     "height": 1347
+  },
+  "/imgs/blogs/trading-the-dollar-dxy-carry-dollar-smile-1.png": {
+    "width": 1792,
+    "height": 1246,
+    "cover": true
+  },
+  "/imgs/blogs/trading-the-dollar-dxy-carry-dollar-smile-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/trading-the-dollar-dxy-carry-dollar-smile-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/trading-the-dollar-dxy-carry-dollar-smile-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/trading-the-dollar-dxy-carry-dollar-smile-5.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/trading-the-dollar-dxy-carry-dollar-smile-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/trading-the-dollar-dxy-carry-dollar-smile-7.png": {
+    "width": 1792,
+    "height": 1208
   },
   "/imgs/blogs/trading-the-fomc-statement-presser-dot-plot-1.png": {
     "width": 1792,
@@ -12269,6 +12679,35 @@
   "/imgs/blogs/what-technical-analysis-really-is-8.png": {
     "width": 1792,
     "height": 1221
+  },
+  "/imgs/blogs/when-correlations-go-to-one-in-a-crisis-1.png": {
+    "width": 1792,
+    "height": 942,
+    "cover": true
+  },
+  "/imgs/blogs/when-correlations-go-to-one-in-a-crisis-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/when-correlations-go-to-one-in-a-crisis-3.png": {
+    "width": 1792,
+    "height": 850
+  },
+  "/imgs/blogs/when-correlations-go-to-one-in-a-crisis-4.png": {
+    "width": 1739,
+    "height": 914
+  },
+  "/imgs/blogs/when-correlations-go-to-one-in-a-crisis-5.png": {
+    "width": 1684,
+    "height": 914
+  },
+  "/imgs/blogs/when-correlations-go-to-one-in-a-crisis-6.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/when-correlations-go-to-one-in-a-crisis-7.png": {
+    "width": 1792,
+    "height": 1206
   },
   "/imgs/blogs/who-controls-the-worlds-money-global-financial-system-1.png": {
     "width": 1792,
