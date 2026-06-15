@@ -1408,6 +1408,35 @@
     "width": 1792,
     "height": 1178
   },
+  "/imgs/blogs/conditional-expectation-projection-math-for-quants-1.png": {
+    "width": 1792,
+    "height": 1260,
+    "cover": true
+  },
+  "/imgs/blogs/conditional-expectation-projection-math-for-quants-2.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/conditional-expectation-projection-math-for-quants-3.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/conditional-expectation-projection-math-for-quants-4.png": {
+    "width": 1792,
+    "height": 1279
+  },
+  "/imgs/blogs/conditional-expectation-projection-math-for-quants-5.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/conditional-expectation-projection-math-for-quants-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/conditional-expectation-projection-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/conditional-probability-bayes-quant-interviews-1.png": {
     "width": 1792,
     "height": 949,
@@ -3017,6 +3046,35 @@
   "/imgs/blogs/field-guide-to-financial-institutions-7.png": {
     "width": 1792,
     "height": 976
+  },
+  "/imgs/blogs/filtrations-no-lookahead-math-for-quants-1.png": {
+    "width": 1792,
+    "height": 951,
+    "cover": true
+  },
+  "/imgs/blogs/filtrations-no-lookahead-math-for-quants-2.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/filtrations-no-lookahead-math-for-quants-3.png": {
+    "width": 1792,
+    "height": 881
+  },
+  "/imgs/blogs/filtrations-no-lookahead-math-for-quants-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/filtrations-no-lookahead-math-for-quants-5.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/filtrations-no-lookahead-math-for-quants-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/filtrations-no-lookahead-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 1264
   },
   "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-1.png": {
     "width": 1792,
@@ -4636,6 +4694,35 @@
   "/imgs/blogs/law-large-numbers-central-limit-theorem-math-for-quants-7.png": {
     "width": 1792,
     "height": 1069
+  },
+  "/imgs/blogs/lebesgue-integration-math-for-quants-1.png": {
+    "width": 1792,
+    "height": 1260,
+    "cover": true
+  },
+  "/imgs/blogs/lebesgue-integration-math-for-quants-2.png": {
+    "width": 1792,
+    "height": 876
+  },
+  "/imgs/blogs/lebesgue-integration-math-for-quants-3.png": {
+    "width": 1792,
+    "height": 1268
+  },
+  "/imgs/blogs/lebesgue-integration-math-for-quants-4.png": {
+    "width": 1792,
+    "height": 1219
+  },
+  "/imgs/blogs/lebesgue-integration-math-for-quants-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/lebesgue-integration-math-for-quants-6.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/lebesgue-integration-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 890
   },
   "/imgs/blogs/leetcode-2081-sum-of-k-mirror-numbers-20250805202336.png": {
     "width": 916,
@@ -7101,6 +7188,35 @@
     "width": 1792,
     "height": 1210
   },
+  "/imgs/blogs/radon-nikodym-densities-math-for-quants-1.png": {
+    "width": 1792,
+    "height": 890,
+    "cover": true
+  },
+  "/imgs/blogs/radon-nikodym-densities-math-for-quants-2.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/radon-nikodym-densities-math-for-quants-3.png": {
+    "width": 1792,
+    "height": 1265
+  },
+  "/imgs/blogs/radon-nikodym-densities-math-for-quants-4.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/radon-nikodym-densities-math-for-quants-5.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/radon-nikodym-densities-math-for-quants-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/radon-nikodym-densities-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 1229
+  },
   "/imgs/blogs/rag-01-pipeline.png": {
     "width": 1712,
     "height": 180,
@@ -9060,6 +9176,35 @@
     "width": 1024,
     "height": 1024,
     "cover": true
+  },
+  "/imgs/blogs/why-measure-theory-math-for-quants-1.png": {
+    "width": 1792,
+    "height": 1250,
+    "cover": true
+  },
+  "/imgs/blogs/why-measure-theory-math-for-quants-2.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/why-measure-theory-math-for-quants-3.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/why-measure-theory-math-for-quants-4.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/why-measure-theory-math-for-quants-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/why-measure-theory-math-for-quants-6.png": {
+    "width": 1792,
+    "height": 874
+  },
+  "/imgs/blogs/why-measure-theory-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 1249
   },
   "/imgs/blogs/wirecard-the-german-fintech-fraud-1.png": {
     "width": 1792,
