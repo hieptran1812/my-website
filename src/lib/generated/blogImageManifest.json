@@ -1342,6 +1342,35 @@
     "width": 1792,
     "height": 1335
   },
+  "/imgs/blogs/cash-money-markets-the-underrated-asset-1.png": {
+    "width": 1792,
+    "height": 1172,
+    "cover": true
+  },
+  "/imgs/blogs/cash-money-markets-the-underrated-asset-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cash-money-markets-the-underrated-asset-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cash-money-markets-the-underrated-asset-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cash-money-markets-the-underrated-asset-5.png": {
+    "width": 1593,
+    "height": 914
+  },
+  "/imgs/blogs/cash-money-markets-the-underrated-asset-6.png": {
+    "width": 1792,
+    "height": 1139
+  },
+  "/imgs/blogs/cash-money-markets-the-underrated-asset-7.png": {
+    "width": 1792,
+    "height": 1072
+  },
   "/imgs/blogs/catboost-from-inside-out-ordered-boosting-oblivious-trees-1.png": {
     "width": 1792,
     "height": 1268,
@@ -2200,6 +2229,39 @@
   "/imgs/blogs/copulas-dependence-beyond-correlation-math-for-quants-7.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/corporate-credit-investment-grade-high-yield-spreads-1.png": {
+    "width": 1792,
+    "height": 1388,
+    "cover": true
+  },
+  "/imgs/blogs/corporate-credit-investment-grade-high-yield-spreads-2.png": {
+    "width": 1792,
+    "height": 1109
+  },
+  "/imgs/blogs/corporate-credit-investment-grade-high-yield-spreads-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/corporate-credit-investment-grade-high-yield-spreads-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/corporate-credit-investment-grade-high-yield-spreads-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/corporate-credit-investment-grade-high-yield-spreads-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/corporate-credit-investment-grade-high-yield-spreads-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/corporate-credit-investment-grade-high-yield-spreads-8.png": {
+    "width": 1792,
+    "height": 1450
   },
   "/imgs/blogs/counting-combinatorics-quant-interviews-1.png": {
     "width": 1792,
@@ -3293,6 +3355,39 @@
   "/imgs/blogs/enron-2001-accounting-fraud-7.png": {
     "width": 1792,
     "height": 1178
+  },
+  "/imgs/blogs/equities-stocks-owning-a-slice-of-growth-1.png": {
+    "width": 1792,
+    "height": 1075,
+    "cover": true
+  },
+  "/imgs/blogs/equities-stocks-owning-a-slice-of-growth-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/equities-stocks-owning-a-slice-of-growth-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/equities-stocks-owning-a-slice-of-growth-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/equities-stocks-owning-a-slice-of-growth-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/equities-stocks-owning-a-slice-of-growth-6.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/equities-stocks-owning-a-slice-of-growth-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/equities-stocks-owning-a-slice-of-growth-8.png": {
+    "width": 1792,
+    "height": 1208
   },
   "/imgs/blogs/estimation-fermi-problems-quant-interviews-1.png": {
     "width": 1792,
@@ -4418,6 +4513,64 @@
   "/imgs/blogs/global-liquidity-the-worlds-money-tide-7.png": {
     "width": 1792,
     "height": 748
+  },
+  "/imgs/blogs/gold-money-insurance-or-just-a-rock-1.png": {
+    "width": 1792,
+    "height": 1165,
+    "cover": true
+  },
+  "/imgs/blogs/gold-money-insurance-or-just-a-rock-2.png": {
+    "width": 1577,
+    "height": 914
+  },
+  "/imgs/blogs/gold-money-insurance-or-just-a-rock-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-money-insurance-or-just-a-rock-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-money-insurance-or-just-a-rock-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-money-insurance-or-just-a-rock-6.png": {
+    "width": 1620,
+    "height": 914
+  },
+  "/imgs/blogs/gold-money-insurance-or-just-a-rock-7.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/government-bonds-the-risk-free-anchor-and-duration-1.png": {
+    "width": 1792,
+    "height": 1195,
+    "cover": true
+  },
+  "/imgs/blogs/government-bonds-the-risk-free-anchor-and-duration-2.png": {
+    "width": 1792,
+    "height": 1014
+  },
+  "/imgs/blogs/government-bonds-the-risk-free-anchor-and-duration-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/government-bonds-the-risk-free-anchor-and-duration-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/government-bonds-the-risk-free-anchor-and-duration-5.png": {
+    "width": 1648,
+    "height": 914
+  },
+  "/imgs/blogs/government-bonds-the-risk-free-anchor-and-duration-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/government-bonds-the-risk-free-anchor-and-duration-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/gpu-01-tradeoff.png": {
     "width": 671,
@@ -10749,6 +10902,35 @@
   "/imgs/blogs/the-indicator-trap-8.png": {
     "width": 1792,
     "height": 1162
+  },
+  "/imgs/blogs/the-map-of-asset-classes-what-you-can-own-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/the-map-of-asset-classes-what-you-can-own-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-map-of-asset-classes-what-you-can-own-3.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/the-map-of-asset-classes-what-you-can-own-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-map-of-asset-classes-what-you-can-own-5.png": {
+    "width": 1599,
+    "height": 914
+  },
+  "/imgs/blogs/the-map-of-asset-classes-what-you-can-own-6.png": {
+    "width": 1792,
+    "height": 1219
+  },
+  "/imgs/blogs/the-map-of-asset-classes-what-you-can-own-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/the-universal-weight-subspace-hypothesis-20251216112621.png": {
     "width": 962,
