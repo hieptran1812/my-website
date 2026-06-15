@@ -3458,6 +3458,35 @@
     "width": 1792,
     "height": 959
   },
+  "/imgs/blogs/early-cycle-recovery-what-leads-the-rebound-1.png": {
+    "width": 1792,
+    "height": 1109,
+    "cover": true
+  },
+  "/imgs/blogs/early-cycle-recovery-what-leads-the-rebound-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/early-cycle-recovery-what-leads-the-rebound-3.png": {
+    "width": 1620,
+    "height": 914
+  },
+  "/imgs/blogs/early-cycle-recovery-what-leads-the-rebound-4.png": {
+    "width": 1792,
+    "height": 1136
+  },
+  "/imgs/blogs/early-cycle-recovery-what-leads-the-rebound-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/early-cycle-recovery-what-leads-the-rebound-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/early-cycle-recovery-what-leads-the-rebound-7.png": {
+    "width": 1792,
+    "height": 1297
+  },
   "/imgs/blogs/eff-inf-01-bottlenecks.png": {
     "width": 1694,
     "height": 147
@@ -6411,6 +6440,35 @@
     "width": 1700,
     "height": 507
   },
+  "/imgs/blogs/late-cycle-overheat-when-real-assets-win-1.png": {
+    "width": 1792,
+    "height": 1229,
+    "cover": true
+  },
+  "/imgs/blogs/late-cycle-overheat-when-real-assets-win-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/late-cycle-overheat-when-real-assets-win-3.png": {
+    "width": 1612,
+    "height": 914
+  },
+  "/imgs/blogs/late-cycle-overheat-when-real-assets-win-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/late-cycle-overheat-when-real-assets-win-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/late-cycle-overheat-when-real-assets-win-6.png": {
+    "width": 1792,
+    "height": 1030
+  },
+  "/imgs/blogs/late-cycle-overheat-when-real-assets-win-7.png": {
+    "width": 1792,
+    "height": 1226
+  },
   "/imgs/blogs/law-large-numbers-central-limit-theorem-math-for-quants-1.png": {
     "width": 1792,
     "height": 871,
@@ -7246,6 +7304,35 @@
   "/imgs/blogs/metric-spaces-convergence-math-for-quants-7.png": {
     "width": 1792,
     "height": 1212
+  },
+  "/imgs/blogs/mid-cycle-expansion-the-steady-grind-1.png": {
+    "width": 1792,
+    "height": 955,
+    "cover": true
+  },
+  "/imgs/blogs/mid-cycle-expansion-the-steady-grind-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/mid-cycle-expansion-the-steady-grind-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/mid-cycle-expansion-the-steady-grind-4.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/mid-cycle-expansion-the-steady-grind-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/mid-cycle-expansion-the-steady-grind-6.png": {
+    "width": 1601,
+    "height": 914
+  },
+  "/imgs/blogs/mid-cycle-expansion-the-steady-grind-7.png": {
+    "width": 1792,
+    "height": 1173
   },
   "/imgs/blogs/mini-backtest-coding-challenge-quant-interviews-1.png": {
     "width": 1792,
@@ -9675,6 +9762,39 @@
     "height": 580,
     "cover": true
   },
+  "/imgs/blogs/recession-playbook-defense-and-duration-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/recession-playbook-defense-and-duration-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/recession-playbook-defense-and-duration-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/recession-playbook-defense-and-duration-4.png": {
+    "width": 1792,
+    "height": 683
+  },
+  "/imgs/blogs/recession-playbook-defense-and-duration-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/recession-playbook-defense-and-duration-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/recession-playbook-defense-and-duration-7.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/recession-playbook-defense-and-duration-8.png": {
+    "width": 1792,
+    "height": 1237
+  },
   "/imgs/blogs/redis-applications-and-optimization-1.png": {
     "width": 1792,
     "height": 933,
@@ -11481,6 +11601,39 @@
   "/imgs/blogs/the-assistant-axis-situating-and-stabilizing-the-default-persona-of-language-models-20260211112100.png": {
     "width": 1129,
     "height": 606
+  },
+  "/imgs/blogs/the-business-cycle-and-the-investment-clock-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/the-business-cycle-and-the-investment-clock-2.png": {
+    "width": 1792,
+    "height": 947
+  },
+  "/imgs/blogs/the-business-cycle-and-the-investment-clock-3.png": {
+    "width": 1792,
+    "height": 963
+  },
+  "/imgs/blogs/the-business-cycle-and-the-investment-clock-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-business-cycle-and-the-investment-clock-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-business-cycle-and-the-investment-clock-6.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/the-business-cycle-and-the-investment-clock-7.png": {
+    "width": 1602,
+    "height": 815
+  },
+  "/imgs/blogs/the-business-cycle-and-the-investment-clock-8.png": {
+    "width": 1792,
+    "height": 1218
   },
   "/imgs/blogs/the-business-cycle-four-phases-for-traders-1.png": {
     "width": 1792,
