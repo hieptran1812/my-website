@@ -1157,6 +1157,39 @@
     "width": 1792,
     "height": 1209
   },
+  "/imgs/blogs/chinchilla-compute-optimal-scaling-1.png": {
+    "width": 1792,
+    "height": 1184,
+    "cover": true
+  },
+  "/imgs/blogs/chinchilla-compute-optimal-scaling-2.png": {
+    "width": 1792,
+    "height": 870
+  },
+  "/imgs/blogs/chinchilla-compute-optimal-scaling-3.png": {
+    "width": 1792,
+    "height": 1141
+  },
+  "/imgs/blogs/chinchilla-compute-optimal-scaling-4.png": {
+    "width": 1792,
+    "height": 1268
+  },
+  "/imgs/blogs/chinchilla-compute-optimal-scaling-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/chinchilla-compute-optimal-scaling-6.png": {
+    "width": 1792,
+    "height": 1172
+  },
+  "/imgs/blogs/chinchilla-compute-optimal-scaling-7.png": {
+    "width": 1792,
+    "height": 1358
+  },
+  "/imgs/blogs/chinchilla-compute-optimal-scaling-8.png": {
+    "width": 1792,
+    "height": 807
+  },
   "/imgs/blogs/cholesky-positive-definite-math-for-quants-1.png": {
     "width": 1792,
     "height": 922,
@@ -4320,6 +4353,72 @@
   "/imgs/blogs/kalman-filter-state-space-math-for-quants-7.png": {
     "width": 1792,
     "height": 897
+  },
+  "/imgs/blogs/kaplan-scaling-laws-language-models-1.png": {
+    "width": 1792,
+    "height": 1220,
+    "cover": true
+  },
+  "/imgs/blogs/kaplan-scaling-laws-language-models-2.png": {
+    "width": 1792,
+    "height": 1159
+  },
+  "/imgs/blogs/kaplan-scaling-laws-language-models-3.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/kaplan-scaling-laws-language-models-4.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/kaplan-scaling-laws-language-models-5.png": {
+    "width": 1792,
+    "height": 1135
+  },
+  "/imgs/blogs/kaplan-scaling-laws-language-models-6.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/kaplan-scaling-laws-language-models-7.png": {
+    "width": 1792,
+    "height": 991
+  },
+  "/imgs/blogs/kaplan-scaling-laws-language-models-8.png": {
+    "width": 1792,
+    "height": 1190
+  },
+  "/imgs/blogs/kaplan-vs-chinchilla-reconciliation-1.png": {
+    "width": 1792,
+    "height": 664,
+    "cover": true
+  },
+  "/imgs/blogs/kaplan-vs-chinchilla-reconciliation-2.png": {
+    "width": 1792,
+    "height": 1159
+  },
+  "/imgs/blogs/kaplan-vs-chinchilla-reconciliation-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/kaplan-vs-chinchilla-reconciliation-4.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/kaplan-vs-chinchilla-reconciliation-5.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/kaplan-vs-chinchilla-reconciliation-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/kaplan-vs-chinchilla-reconciliation-7.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/kaplan-vs-chinchilla-reconciliation-8.png": {
+    "width": 1792,
+    "height": 908
   },
   "/imgs/blogs/kelly-criterion-sequential-betting-quant-interviews-1.png": {
     "width": 1792,
@@ -7636,6 +7735,39 @@
     "width": 1024,
     "height": 559,
     "cover": true
+  },
+  "/imgs/blogs/scaling-laws-predictability-foundations-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/scaling-laws-predictability-foundations-2.png": {
+    "width": 1792,
+    "height": 1130
+  },
+  "/imgs/blogs/scaling-laws-predictability-foundations-3.png": {
+    "width": 1792,
+    "height": 1094
+  },
+  "/imgs/blogs/scaling-laws-predictability-foundations-4.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/scaling-laws-predictability-foundations-5.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/scaling-laws-predictability-foundations-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/scaling-laws-predictability-foundations-7.png": {
+    "width": 1792,
+    "height": 1146
+  },
+  "/imgs/blogs/scaling-laws-predictability-foundations-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/sdes-gbm-ou-cir-math-for-quants-1.png": {
     "width": 1792,
