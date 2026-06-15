@@ -1114,6 +1114,39 @@
     "width": 1792,
     "height": 1154
   },
+  "/imgs/blogs/building-your-trading-plan-capstone-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/building-your-trading-plan-capstone-2.png": {
+    "width": 1792,
+    "height": 1370
+  },
+  "/imgs/blogs/building-your-trading-plan-capstone-3.png": {
+    "width": 1792,
+    "height": 855
+  },
+  "/imgs/blogs/building-your-trading-plan-capstone-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/building-your-trading-plan-capstone-5.png": {
+    "width": 1792,
+    "height": 1087
+  },
+  "/imgs/blogs/building-your-trading-plan-capstone-6.png": {
+    "width": 1792,
+    "height": 705
+  },
+  "/imgs/blogs/building-your-trading-plan-capstone-7.png": {
+    "width": 1792,
+    "height": 1164
+  },
+  "/imgs/blogs/building-your-trading-plan-capstone-8.png": {
+    "width": 1792,
+    "height": 919
+  },
   "/imgs/blogs/bytedance-seed-model-universe-by-use-case-1.png": {
     "width": 1792,
     "height": 1210,
@@ -1176,6 +1209,138 @@
   "/imgs/blogs/capacity-02-selfhost-vs-api.png": {
     "width": 677,
     "height": 1293
+  },
+  "/imgs/blogs/case-study-crypto-blow-off-top-1.png": {
+    "width": 1792,
+    "height": 1097,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-crypto-blow-off-top-2.png": {
+    "width": 1792,
+    "height": 1074
+  },
+  "/imgs/blogs/case-study-crypto-blow-off-top-3.png": {
+    "width": 1792,
+    "height": 1074
+  },
+  "/imgs/blogs/case-study-crypto-blow-off-top-4.png": {
+    "width": 1792,
+    "height": 1166
+  },
+  "/imgs/blogs/case-study-crypto-blow-off-top-5.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/case-study-crypto-blow-off-top-6.png": {
+    "width": 1792,
+    "height": 1050
+  },
+  "/imgs/blogs/case-study-crypto-blow-off-top-7.png": {
+    "width": 1792,
+    "height": 1047
+  },
+  "/imgs/blogs/case-study-crypto-blow-off-top-8.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/case-study-failed-breakout-stop-hunt-1.png": {
+    "width": 1792,
+    "height": 1074,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-failed-breakout-stop-hunt-2.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/case-study-failed-breakout-stop-hunt-3.png": {
+    "width": 1792,
+    "height": 954
+  },
+  "/imgs/blogs/case-study-failed-breakout-stop-hunt-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/case-study-failed-breakout-stop-hunt-5.png": {
+    "width": 1792,
+    "height": 1040
+  },
+  "/imgs/blogs/case-study-failed-breakout-stop-hunt-6.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/case-study-failed-breakout-stop-hunt-7.png": {
+    "width": 1792,
+    "height": 1033
+  },
+  "/imgs/blogs/case-study-failed-breakout-stop-hunt-8.png": {
+    "width": 1792,
+    "height": 897
+  },
+  "/imgs/blogs/case-study-regime-change-killed-a-strategy-1.png": {
+    "width": 1792,
+    "height": 1148,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-regime-change-killed-a-strategy-2.png": {
+    "width": 1792,
+    "height": 1095
+  },
+  "/imgs/blogs/case-study-regime-change-killed-a-strategy-3.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/case-study-regime-change-killed-a-strategy-4.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/case-study-regime-change-killed-a-strategy-5.png": {
+    "width": 1792,
+    "height": 1122
+  },
+  "/imgs/blogs/case-study-regime-change-killed-a-strategy-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/case-study-regime-change-killed-a-strategy-7.png": {
+    "width": 1792,
+    "height": 742
+  },
+  "/imgs/blogs/case-study-regime-change-killed-a-strategy-8.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/case-study-trend-trade-that-worked-1.png": {
+    "width": 1792,
+    "height": 1103,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-trend-trade-that-worked-2.png": {
+    "width": 1792,
+    "height": 1107
+  },
+  "/imgs/blogs/case-study-trend-trade-that-worked-3.png": {
+    "width": 1792,
+    "height": 1310
+  },
+  "/imgs/blogs/case-study-trend-trade-that-worked-4.png": {
+    "width": 1792,
+    "height": 1019
+  },
+  "/imgs/blogs/case-study-trend-trade-that-worked-5.png": {
+    "width": 1792,
+    "height": 1097
+  },
+  "/imgs/blogs/case-study-trend-trade-that-worked-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/case-study-trend-trade-that-worked-7.png": {
+    "width": 1792,
+    "height": 969
+  },
+  "/imgs/blogs/case-study-trend-trade-that-worked-8.png": {
+    "width": 1792,
+    "height": 1335
   },
   "/imgs/blogs/catboost-from-inside-out-ordered-boosting-oblivious-trees-1.png": {
     "width": 1792,
