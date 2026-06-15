@@ -363,6 +363,35 @@
     "width": 1792,
     "height": 1160
   },
+  "/imgs/blogs/bayesian-inference-traders-math-for-quants-1.png": {
+    "width": 1792,
+    "height": 876,
+    "cover": true
+  },
+  "/imgs/blogs/bayesian-inference-traders-math-for-quants-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/bayesian-inference-traders-math-for-quants-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/bayesian-inference-traders-math-for-quants-4.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/bayesian-inference-traders-math-for-quants-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/bayesian-inference-traders-math-for-quants-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/bayesian-inference-traders-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 876
+  },
   "/imgs/blogs/best-org-in-huggingface-20251224151045.png": {
     "width": 1792,
     "height": 964,
@@ -634,6 +663,35 @@
   "/imgs/blogs/bond-pricing-9.png": {
     "width": 1792,
     "height": 904
+  },
+  "/imgs/blogs/bootstrap-cross-validation-math-for-quants-1.png": {
+    "width": 1792,
+    "height": 876,
+    "cover": true
+  },
+  "/imgs/blogs/bootstrap-cross-validation-math-for-quants-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/bootstrap-cross-validation-math-for-quants-3.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/bootstrap-cross-validation-math-for-quants-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/bootstrap-cross-validation-math-for-quants-5.png": {
+    "width": 1792,
+    "height": 1434
+  },
+  "/imgs/blogs/bootstrap-cross-validation-math-for-quants-6.png": {
+    "width": 1792,
+    "height": 1142
+  },
+  "/imgs/blogs/bootstrap-cross-validation-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 958
   },
   "/imgs/blogs/bpe-01-why.png": {
     "width": 1270,
@@ -2342,6 +2400,35 @@
     "width": 1792,
     "height": 856
   },
+  "/imgs/blogs/estimators-bias-variance-consistency-math-for-quants-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/estimators-bias-variance-consistency-math-for-quants-2.png": {
+    "width": 1792,
+    "height": 876
+  },
+  "/imgs/blogs/estimators-bias-variance-consistency-math-for-quants-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/estimators-bias-variance-consistency-math-for-quants-4.png": {
+    "width": 1792,
+    "height": 1355
+  },
+  "/imgs/blogs/estimators-bias-variance-consistency-math-for-quants-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/estimators-bias-variance-consistency-math-for-quants-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/estimators-bias-variance-consistency-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 1266
+  },
   "/imgs/blogs/estimators-mle-bias-variance-quant-interviews-1.png": {
     "width": 1792,
     "height": 843,
@@ -3360,6 +3447,35 @@
   "/imgs/blogs/how-zhipu-measures-glm-benchmarks-5.png": {
     "width": 1792,
     "height": 1194
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-math-for-quants-1.png": {
+    "width": 1792,
+    "height": 909,
+    "cover": true
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-math-for-quants-2.png": {
+    "width": 1792,
+    "height": 1444
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-math-for-quants-3.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-math-for-quants-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-math-for-quants-5.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-math-for-quants-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/hypothesis-testing-pvalues-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/hypothesis-testing-pvalues-quant-interviews-1.png": {
     "width": 1792,
@@ -5052,6 +5168,35 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/mle-method-of-moments-math-for-quants-1.png": {
+    "width": 1792,
+    "height": 878,
+    "cover": true
+  },
+  "/imgs/blogs/mle-method-of-moments-math-for-quants-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/mle-method-of-moments-math-for-quants-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/mle-method-of-moments-math-for-quants-4.png": {
+    "width": 1782,
+    "height": 1453
+  },
+  "/imgs/blogs/mle-method-of-moments-math-for-quants-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/mle-method-of-moments-math-for-quants-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/mle-method-of-moments-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/moba-1.png": {
     "width": 1792,
     "height": 664,
@@ -6589,6 +6734,35 @@
   "/imgs/blogs/redis-applications-and-optimization-4.png": {
     "width": 1792,
     "height": 811
+  },
+  "/imgs/blogs/regression-ols-gls-regularized-math-for-quants-1.png": {
+    "width": 1792,
+    "height": 876,
+    "cover": true
+  },
+  "/imgs/blogs/regression-ols-gls-regularized-math-for-quants-2.png": {
+    "width": 1792,
+    "height": 1395
+  },
+  "/imgs/blogs/regression-ols-gls-regularized-math-for-quants-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/regression-ols-gls-regularized-math-for-quants-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/regression-ols-gls-regularized-math-for-quants-5.png": {
+    "width": 1792,
+    "height": 1139
+  },
+  "/imgs/blogs/regression-ols-gls-regularized-math-for-quants-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/regression-ols-gls-regularized-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 1370
   },
   "/imgs/blogs/reranker-01-role.png": {
     "width": 1300,
