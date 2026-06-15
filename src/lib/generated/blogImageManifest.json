@@ -6981,6 +6981,39 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/pretraining-wall-inference-scaling-1.png": {
+    "width": 1792,
+    "height": 735,
+    "cover": true
+  },
+  "/imgs/blogs/pretraining-wall-inference-scaling-2.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/pretraining-wall-inference-scaling-3.png": {
+    "width": 1792,
+    "height": 981
+  },
+  "/imgs/blogs/pretraining-wall-inference-scaling-4.png": {
+    "width": 1792,
+    "height": 1245
+  },
+  "/imgs/blogs/pretraining-wall-inference-scaling-5.png": {
+    "width": 1792,
+    "height": 991
+  },
+  "/imgs/blogs/pretraining-wall-inference-scaling-6.png": {
+    "width": 1792,
+    "height": 997
+  },
+  "/imgs/blogs/pretraining-wall-inference-scaling-7.png": {
+    "width": 1792,
+    "height": 774
+  },
+  "/imgs/blogs/pretraining-wall-inference-scaling-8.png": {
+    "width": 1792,
+    "height": 1211
+  },
   "/imgs/blogs/probability-distributions-for-markets-math-for-quants-1.png": {
     "width": 1792,
     "height": 1389,
@@ -7669,6 +7702,39 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/reasoning-models-rl-test-time-scaling-1.png": {
+    "width": 1792,
+    "height": 754,
+    "cover": true
+  },
+  "/imgs/blogs/reasoning-models-rl-test-time-scaling-2.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/reasoning-models-rl-test-time-scaling-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/reasoning-models-rl-test-time-scaling-4.png": {
+    "width": 1792,
+    "height": 807
+  },
+  "/imgs/blogs/reasoning-models-rl-test-time-scaling-5.png": {
+    "width": 1792,
+    "height": 979
+  },
+  "/imgs/blogs/reasoning-models-rl-test-time-scaling-6.png": {
+    "width": 1792,
+    "height": 943
+  },
+  "/imgs/blogs/reasoning-models-rl-test-time-scaling-7.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/reasoning-models-rl-test-time-scaling-8.png": {
+    "width": 1792,
+    "height": 1154
+  },
   "/imgs/blogs/reasoning-pretraining-pipeline.png": {
     "width": 1300,
     "height": 580,
@@ -7719,6 +7785,39 @@
   "/imgs/blogs/regression-ols-gls-regularized-math-for-quants-7.png": {
     "width": 1792,
     "height": 1370
+  },
+  "/imgs/blogs/repeated-sampling-scaling-laws-1.png": {
+    "width": 1792,
+    "height": 708,
+    "cover": true
+  },
+  "/imgs/blogs/repeated-sampling-scaling-laws-2.png": {
+    "width": 1792,
+    "height": 1036
+  },
+  "/imgs/blogs/repeated-sampling-scaling-laws-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/repeated-sampling-scaling-laws-4.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/repeated-sampling-scaling-laws-5.png": {
+    "width": 1792,
+    "height": 998
+  },
+  "/imgs/blogs/repeated-sampling-scaling-laws-6.png": {
+    "width": 1792,
+    "height": 1009
+  },
+  "/imgs/blogs/repeated-sampling-scaling-laws-7.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/repeated-sampling-scaling-laws-8.png": {
+    "width": 1792,
+    "height": 1209
   },
   "/imgs/blogs/reranker-01-role.png": {
     "width": 1300,
@@ -8836,6 +8935,39 @@
   "/imgs/blogs/terra-luna-2022-collapse-7.png": {
     "width": 1792,
     "height": 1021
+  },
+  "/imgs/blogs/test-time-compute-scaling-1.png": {
+    "width": 1792,
+    "height": 1158,
+    "cover": true
+  },
+  "/imgs/blogs/test-time-compute-scaling-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/test-time-compute-scaling-3.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/test-time-compute-scaling-4.png": {
+    "width": 1792,
+    "height": 1001
+  },
+  "/imgs/blogs/test-time-compute-scaling-5.png": {
+    "width": 1792,
+    "height": 742
+  },
+  "/imgs/blogs/test-time-compute-scaling-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/test-time-compute-scaling-7.png": {
+    "width": 1792,
+    "height": 1003
+  },
+  "/imgs/blogs/test-time-compute-scaling-8.png": {
+    "width": 1792,
+    "height": 1169
   },
   "/imgs/blogs/the-assistant-axis-situating-and-stabilizing-the-default-persona-of-language-models-20260209115113.png": {
     "width": 1449,
