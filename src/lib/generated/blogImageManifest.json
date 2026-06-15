@@ -7503,7 +7503,8 @@
   },
   "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-1.png": {
     "width": 1792,
-    "height": 735
+    "height": 735,
+    "cover": true
   },
   "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-10.png": {
     "width": 1792,
