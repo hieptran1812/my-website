@@ -723,6 +723,39 @@
     "width": 1792,
     "height": 904
   },
+  "/imgs/blogs/bollinger-bands-and-volatility-1.png": {
+    "width": 1792,
+    "height": 1084,
+    "cover": true
+  },
+  "/imgs/blogs/bollinger-bands-and-volatility-2.png": {
+    "width": 1792,
+    "height": 938
+  },
+  "/imgs/blogs/bollinger-bands-and-volatility-3.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/bollinger-bands-and-volatility-4.png": {
+    "width": 1792,
+    "height": 1084
+  },
+  "/imgs/blogs/bollinger-bands-and-volatility-5.png": {
+    "width": 1792,
+    "height": 1084
+  },
+  "/imgs/blogs/bollinger-bands-and-volatility-6.png": {
+    "width": 1792,
+    "height": 997
+  },
+  "/imgs/blogs/bollinger-bands-and-volatility-7.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/bollinger-bands-and-volatility-8.png": {
+    "width": 1792,
+    "height": 1065
+  },
   "/imgs/blogs/bond-pricing-1.png": {
     "width": 1792,
     "height": 939,
@@ -5545,6 +5578,39 @@
     "width": 1792,
     "height": 702
   },
+  "/imgs/blogs/macd-explained-1.png": {
+    "width": 1792,
+    "height": 1154,
+    "cover": true
+  },
+  "/imgs/blogs/macd-explained-2.png": {
+    "width": 1792,
+    "height": 1021
+  },
+  "/imgs/blogs/macd-explained-3.png": {
+    "width": 1792,
+    "height": 1026
+  },
+  "/imgs/blogs/macd-explained-4.png": {
+    "width": 1792,
+    "height": 1330
+  },
+  "/imgs/blogs/macd-explained-5.png": {
+    "width": 1792,
+    "height": 1100
+  },
+  "/imgs/blogs/macd-explained-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/macd-explained-7.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/macd-explained-8.png": {
+    "width": 1792,
+    "height": 830
+  },
   "/imgs/blogs/machine-translation-with-llms-1.png": {
     "width": 1792,
     "height": 1210,
@@ -6458,6 +6524,39 @@
   "/imgs/blogs/mooncake-7.png": {
     "width": 1792,
     "height": 996
+  },
+  "/imgs/blogs/moving-averages-honest-backtest-1.png": {
+    "width": 1792,
+    "height": 1082,
+    "cover": true
+  },
+  "/imgs/blogs/moving-averages-honest-backtest-2.png": {
+    "width": 1792,
+    "height": 1096
+  },
+  "/imgs/blogs/moving-averages-honest-backtest-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/moving-averages-honest-backtest-4.png": {
+    "width": 1792,
+    "height": 1153
+  },
+  "/imgs/blogs/moving-averages-honest-backtest-5.png": {
+    "width": 1792,
+    "height": 1086
+  },
+  "/imgs/blogs/moving-averages-honest-backtest-6.png": {
+    "width": 1792,
+    "height": 1268
+  },
+  "/imgs/blogs/moving-averages-honest-backtest-7.png": {
+    "width": 1792,
+    "height": 1130
+  },
+  "/imgs/blogs/moving-averages-honest-backtest-8.png": {
+    "width": 1792,
+    "height": 1210
   },
   "/imgs/blogs/msrs-adaptive-multi-subspace-representation-steering-for-attribute-alignment-in-large-language-models-20250901175838.png": {
     "width": 1792,
@@ -7402,6 +7501,50 @@
     "width": 1792,
     "height": 903
   },
+  "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-1.png": {
+    "width": 1792,
+    "height": 735
+  },
+  "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-10.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-11.png": {
+    "width": 1792,
+    "height": 895
+  },
+  "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-3.png": {
+    "width": 1792,
+    "height": 1054
+  },
+  "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-4.png": {
+    "width": 1792,
+    "height": 765
+  },
+  "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-5.png": {
+    "width": 1792,
+    "height": 1305
+  },
+  "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-7.png": {
+    "width": 1792,
+    "height": 886
+  },
+  "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-8.png": {
+    "width": 1792,
+    "height": 1310
+  },
+  "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-9.png": {
+    "width": 1792,
+    "height": 1114
+  },
   "/imgs/blogs/pruning-in-llm-01-taxonomy.png": {
     "width": 1280,
     "height": 527,
@@ -8305,6 +8448,39 @@
   "/imgs/blogs/robust-regularized-portfolios-math-for-quants-7.png": {
     "width": 1792,
     "height": 1266
+  },
+  "/imgs/blogs/rsi-and-momentum-oscillators-1.png": {
+    "width": 1792,
+    "height": 1163,
+    "cover": true
+  },
+  "/imgs/blogs/rsi-and-momentum-oscillators-2.png": {
+    "width": 1792,
+    "height": 720
+  },
+  "/imgs/blogs/rsi-and-momentum-oscillators-3.png": {
+    "width": 1792,
+    "height": 1129
+  },
+  "/imgs/blogs/rsi-and-momentum-oscillators-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/rsi-and-momentum-oscillators-5.png": {
+    "width": 1792,
+    "height": 1129
+  },
+  "/imgs/blogs/rsi-and-momentum-oscillators-6.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/rsi-and-momentum-oscillators-7.png": {
+    "width": 1792,
+    "height": 1196
+  },
+  "/imgs/blogs/rsi-and-momentum-oscillators-8.png": {
+    "width": 1792,
+    "height": 807
   },
   "/imgs/blogs/safety-alignment-should-be-made-more-than-just-a-few-tokens-deep-20250924111337.png": {
     "width": 1314,
@@ -9262,6 +9438,59 @@
     "height": 591,
     "cover": true
   },
+  "/imgs/blogs/tabular-data-done-right-1.png": {
+    "width": 1792,
+    "height": 962,
+    "cover": true
+  },
+  "/imgs/blogs/tabular-data-done-right-10.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/tabular-data-done-right-11.png": {
+    "width": 1792,
+    "height": 1205
+  },
+  "/imgs/blogs/tabular-data-done-right-12.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/tabular-data-done-right-13.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/tabular-data-done-right-2.png": {
+    "width": 1792,
+    "height": 1245
+  },
+  "/imgs/blogs/tabular-data-done-right-3.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/tabular-data-done-right-4.png": {
+    "width": 1792,
+    "height": 1149
+  },
+  "/imgs/blogs/tabular-data-done-right-5.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/tabular-data-done-right-6.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/tabular-data-done-right-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/tabular-data-done-right-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/tabular-data-done-right-9.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/tail-risk-extreme-value-theory-math-for-quants-1.png": {
     "width": 1792,
     "height": 1210,
@@ -9551,6 +9780,39 @@
     "width": 1024,
     "height": 1024,
     "cover": true
+  },
+  "/imgs/blogs/the-indicator-trap-1.png": {
+    "width": 1792,
+    "height": 1241,
+    "cover": true
+  },
+  "/imgs/blogs/the-indicator-trap-2.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/the-indicator-trap-3.png": {
+    "width": 1792,
+    "height": 1051
+  },
+  "/imgs/blogs/the-indicator-trap-4.png": {
+    "width": 1792,
+    "height": 1139
+  },
+  "/imgs/blogs/the-indicator-trap-5.png": {
+    "width": 1792,
+    "height": 1018
+  },
+  "/imgs/blogs/the-indicator-trap-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-indicator-trap-7.png": {
+    "width": 1792,
+    "height": 1124
+  },
+  "/imgs/blogs/the-indicator-trap-8.png": {
+    "width": 1792,
+    "height": 1162
   },
   "/imgs/blogs/the-universal-weight-subspace-hypothesis-20251216112621.png": {
     "width": 962,
@@ -10128,6 +10390,39 @@
   "/imgs/blogs/volatility-surface-9.png": {
     "width": 1792,
     "height": 904
+  },
+  "/imgs/blogs/volume-tools-vwap-obv-profile-1.png": {
+    "width": 1792,
+    "height": 1296,
+    "cover": true
+  },
+  "/imgs/blogs/volume-tools-vwap-obv-profile-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/volume-tools-vwap-obv-profile-3.png": {
+    "width": 1792,
+    "height": 1171
+  },
+  "/imgs/blogs/volume-tools-vwap-obv-profile-4.png": {
+    "width": 1792,
+    "height": 1120
+  },
+  "/imgs/blogs/volume-tools-vwap-obv-profile-5.png": {
+    "width": 1792,
+    "height": 1172
+  },
+  "/imgs/blogs/volume-tools-vwap-obv-profile-6.png": {
+    "width": 1792,
+    "height": 996
+  },
+  "/imgs/blogs/volume-tools-vwap-obv-profile-7.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/volume-tools-vwap-obv-profile-8.png": {
+    "width": 1792,
+    "height": 1231
   },
   "/imgs/blogs/wall-street-crash-1929-great-depression-1.png": {
     "width": 1792,
