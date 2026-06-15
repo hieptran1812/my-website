@@ -45,22 +45,21 @@ export default function TagPage() {
   useEffect(() => {
     async function fetchArticles() {
       try {
-        const response = await fetch("/api/blog/posts");
-        const allPosts: BlogPost[] = await response.json();
+        // Server filters by tag so we only fetch this tag's posts (presorted).
+        const response = await fetch(
+          `/api/blog/posts?tag=${encodeURIComponent(tagSlug.toLowerCase())}`
+        );
+        const data = await response.json();
+        const allPosts: BlogPost[] = Array.isArray(data)
+          ? data
+          : data.posts || [];
 
-        // Filter articles that have the selected tag (case-insensitive)
+        // Defensive: re-apply the exact tag match the server uses.
         const filteredArticles = allPosts.filter((post) =>
           post.tags?.some(
             (t) => t.toLowerCase().replace(/\s+/g, "-") === tagSlug.toLowerCase()
           )
         );
-
-        // Sort by date (newest first)
-        filteredArticles.sort((a, b) => {
-          const dateA = new Date(a.publishDate);
-          const dateB = new Date(b.publishDate);
-          return dateB.getTime() - dateA.getTime();
-        });
 
         setArticles(filteredArticles);
       } catch (error) {

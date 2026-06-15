@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
-import { loadAllPosts } from "../../../../lib/blogIndex";
+import {
+  getAllPostsLite,
+  filterPosts,
+  getCategoryCounts,
+  paginate,
+  type BlogPostLite,
+} from "../../../../lib/blogPostsIndex";
 
+// Kept for the legacy (un-paginated) response shape consumed by older callers.
 export interface BlogPost {
   slug: string;
   title: string;
@@ -15,83 +21,60 @@ export interface BlogPost {
   collection?: string;
 }
 
-// Building each BlogPost runs calculateReadTimeWithTags() — costly across the
-// whole corpus. loadAllPosts() returns a stable array reference while its cache
-// is warm, so memoize the fully built + sorted list against that reference and
-// only rebuild when the corpus is actually refreshed.
-type Corpus = Awaited<ReturnType<typeof loadAllPosts>>;
-let builtCorpusRef: Corpus | null = null;
-let builtPosts: BlogPost[] = [];
+const CACHE_HEADERS = {
+  "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+};
 
-function buildAllPosts(corpus: Corpus): BlogPost[] {
-  if (corpus === builtCorpusRef) return builtPosts;
-
-  const posts: BlogPost[] = corpus.map((entry) => {
-    const readTimeResult = calculateReadTimeWithTags(
-      entry.content,
-      entry.tags,
-      entry.category || "General",
-    );
-
-    let excerpt = entry.excerpt;
-    if (!excerpt && entry.content) {
-      excerpt = entry.content.split("\n\n")[0].substring(0, 160).trim();
-      if (entry.content.length > 160) excerpt += "...";
-    }
-
-    return {
-      slug: entry.slug,
-      title: entry.title,
-      publishDate: entry.publishDate || new Date().toISOString().split("T")[0],
-      readTime: readTimeResult.readTime,
-      category: entry.category || "General",
-      author: entry.author || "Hiep Tran",
-      tags: entry.tags,
-      image: entry.image || "/images/blog/default-post.jpg",
-      excerpt,
-      collection: entry.collection,
-    };
-  });
-
-  posts.sort((a, b) => {
-    const dateA = new Date(a.publishDate);
-    const dateB = new Date(b.publishDate);
-    if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
-    if (isNaN(dateA.getTime())) return 1;
-    if (isNaN(dateB.getTime())) return -1;
-    return dateB.getTime() - dateA.getTime();
-  });
-
-  builtCorpusRef = corpus;
-  builtPosts = posts;
-  return posts;
+// Listing cards expect a string `image`; the lite index leaves it undefined
+// when a post has no resolvable cover, so callers fall back to the generated
+// OG thumbnail. Preserve that contract.
+function toBlogPost(p: BlogPostLite): BlogPost {
+  return {
+    slug: p.slug,
+    title: p.title,
+    publishDate: p.publishDate || "2024-01-01",
+    readTime: p.readTime,
+    category: p.category,
+    author: p.author,
+    tags: p.tags,
+    image: p.image || "",
+    excerpt: p.excerpt,
+    collection: p.collection,
+  };
 }
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get("category");
+    const tag = searchParams.get("tag");
+    const collection = searchParams.get("collection");
+    const search = searchParams.get("search");
+    const pageParam = searchParams.get("page");
+    const limitParam = searchParams.get("limit");
 
-    const corpus = await loadAllPosts();
-    const allPosts = buildAllPosts(corpus);
+    const all = await getAllPostsLite();
+    const filtered = filterPosts(all, { category, tag, collection, search });
 
-    // Filtering preserves the already-sorted order.
-    const posts = category
-      ? allPosts.filter((post) => {
-          const q = category.toLowerCase();
-          return (
-            post.category.toLowerCase().includes(q) ||
-            post.tags.some((t) => t.toLowerCase().includes(q)) ||
-            post.slug.toLowerCase().includes(q)
-          );
-        })
-      : allPosts;
+    // Paginated mode: any of page/limit present → wrapped response.
+    if (pageParam !== null || limitParam !== null) {
+      const page = pageParam ? parseInt(pageParam, 10) : 1;
+      const limit = limitParam ? parseInt(limitParam, 10) : 9;
+      const { items, pagination } = paginate(filtered, page, limit);
+      return NextResponse.json(
+        {
+          posts: items.map(toBlogPost),
+          pagination,
+          // Counts are over the unfiltered corpus (used by the category pills).
+          categoryCounts: getCategoryCounts(all),
+        },
+        { headers: CACHE_HEADERS },
+      );
+    }
 
-    return NextResponse.json(posts, {
-      headers: {
-        "Cache-Control":
-          "public, s-maxage=3600, stale-while-revalidate=86400",
-      },
+    // Legacy mode: full filtered array (backward compatible).
+    return NextResponse.json(filtered.map(toBlogPost), {
+      headers: CACHE_HEADERS,
     });
   } catch (error) {
     console.error("Error reading blog posts:", error);

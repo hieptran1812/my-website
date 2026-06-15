@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["react-icons", "d3", "katex"],
     scrollRestoration: true,
   },
+  // Ship the build-time blog index with the listing routes that read it at
+  // runtime (the loader falls back to a live corpus walk if it's ever absent).
+  outputFileTracingIncludes: {
+    "/api/blog/posts": ["./src/lib/generated/blogPostsIndex.json"],
+    "/api/blog": ["./src/lib/generated/blogPostsIndex.json"],
+  },
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,

@@ -20,6 +20,18 @@ interface BlogPostMetadata {
   excerpt: string;
 }
 
+interface PostsResponse {
+  posts: BlogPostMetadata[];
+  pagination?: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasMore: boolean;
+  };
+  categoryCounts?: Record<string, number>;
+}
+
 interface Article {
   title: string;
   summary: string;
@@ -72,42 +84,47 @@ export default function BlogPage() {
   const [articleSlugs, setArticleSlugs] = useState<Map<string, string>>(
     new Map()
   );
+  const [categoryCounts, setCategoryCounts] = useState<Record<string, number>>(
+    {}
+  );
   const [isLoading, setIsLoading] = useState(true);
-  const [displayedCount, setDisplayedCount] = useState(9);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+  const [remainingCount, setRemainingCount] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
 
-  // Items per page for button loading
+  // Items per page (server-side pagination)
   const ITEMS_PER_PAGE = 9;
 
   useEffect(() => {
-    async function fetchPosts() {
+    async function fetchInitial() {
       try {
-        const response = await fetch("/api/blog/posts");
-        const blogPosts: BlogPostMetadata[] = await response.json();
-        const convertedArticles = blogPosts.map(convertToArticle);
+        const response = await fetch(
+          `/api/blog/posts?page=1&limit=${ITEMS_PER_PAGE}`
+        );
+        const data: PostsResponse = await response.json();
+        const posts = data.posts || [];
 
-        // Sort articles by date (newest first) to ensure proper order
-        convertedArticles.sort((a, b) => {
-          const dateA = new Date(a.date);
-          const dateB = new Date(b.date);
+        // Posts arrive presorted (newest-first) from the server.
+        const convertedArticles = posts.map(convertToArticle);
 
-          // Handle invalid dates
-          if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
-          if (isNaN(dateA.getTime())) return 1;
-          if (isNaN(dateB.getTime())) return -1;
-
-          return dateB.getTime() - dateA.getTime();
-        });
-
-        // Create a map of article links to original slugs
         const slugMap = new Map<string, string>();
-        blogPosts.forEach((post) => {
-          const articleLink = `/blog/${post.slug}`;
-          slugMap.set(articleLink, post.slug);
+        posts.forEach((post) => {
+          slugMap.set(`/blog/${post.slug}`, post.slug);
         });
 
         setArticles(convertedArticles);
         setArticleSlugs(slugMap);
+        setCategoryCounts(data.categoryCounts || {});
+        setHasMore(data.pagination?.hasMore ?? false);
+        setRemainingCount(
+          Math.max(
+            0,
+            (data.pagination?.total ?? convertedArticles.length) -
+              convertedArticles.length
+          )
+        );
+        setPage(1);
       } catch (error) {
         console.error("Error loading blog posts:", error);
         // Fallback to empty array
@@ -118,39 +135,54 @@ export default function BlogPage() {
       }
     }
 
-    fetchPosts();
+    fetchInitial();
   }, []);
 
-  // Get currently displayed articles
-  const displayedArticles = articles.slice(0, displayedCount);
+  // All loaded articles are displayed; the server paginates and we accumulate.
+  const displayedArticles = articles;
 
-  // Check if there are more articles to load
-  const hasMoreArticles = displayedCount < articles.length;
+  // Whether the server reports more pages to fetch.
+  const hasMoreArticles = hasMore;
 
-  // Function to load more articles
+  // Function to load more articles (fetches the next page from the server)
   const loadMoreArticles = async () => {
     if (loadingMore || !hasMoreArticles) return;
 
     setLoadingMore(true);
-    // Simulate network delay for better UX
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    setDisplayedCount((prev) => prev + ITEMS_PER_PAGE);
-    setLoadingMore(false);
+    try {
+      const nextPage = page + 1;
+      const response = await fetch(
+        `/api/blog/posts?page=${nextPage}&limit=${ITEMS_PER_PAGE}`
+      );
+      const data: PostsResponse = await response.json();
+      const posts = data.posts || [];
+      const newArticles = posts.map(convertToArticle);
+
+      setArticles((prev) => [...prev, ...newArticles]);
+      setArticleSlugs((prev) => {
+        const next = new Map(prev);
+        posts.forEach((post) => next.set(`/blog/${post.slug}`, post.slug));
+        return next;
+      });
+      setPage(nextPage);
+      setHasMore(data.pagination?.hasMore ?? false);
+      setRemainingCount(
+        Math.max(
+          0,
+          (data.pagination?.total ?? 0) - (articles.length + newArticles.length)
+        )
+      );
+    } catch (error) {
+      console.error("Error loading more articles:", error);
+    } finally {
+      setLoadingMore(false);
+    }
   };
 
-  // Improved category count calculation using exact category matching
+  // Category counts come from the server (computed over the whole corpus).
   const getCategoryCount = (categoryName: string) => {
     const normalizedName = categoryName.toLowerCase().replace(/\s+/g, "-");
-    return articles.filter((article) => {
-      const articleCategory = article.category
-        .toLowerCase()
-        .replace(/\s+/g, "-");
-      return (
-        articleCategory === normalizedName ||
-        articleCategory.includes(normalizedName) ||
-        article.link.includes(`/blog/${normalizedName}/`)
-      );
-    }).length;
+    return categoryCounts[normalizedName] ?? 0;
   };
 
   // Update categories to reflect actual blog posts with dynamic counts
@@ -505,7 +537,7 @@ export default function BlogPage() {
                           ) : (
                             `Load More Articles (${Math.min(
                               ITEMS_PER_PAGE,
-                              articles.length - displayedCount
+                              remainingCount
                             )} more)`
                           )}
                         </button>

@@ -61,6 +61,14 @@ export function getCardImageProps(article: {
   if (entry?.cover) {
     return { src: toCoverThumb(raw), unoptimized: true };
   }
+  // Generated OG covers are small, flat-art PNGs already sized for cards
+  // (672×366) and cached immutably at the edge. Serve them directly instead of
+  // routing through /_next/image — that avoids a second server hop (and the
+  // optimizer's cold-render latency) on every uncached cover, with no visible
+  // quality loss. Real photos keep next/image so they downscale + go webp/avif.
+  if (raw.startsWith("/api/og")) {
+    return { src: raw, unoptimized: true };
+  }
   return { src: toWebp(raw), unoptimized: false };
 }
 

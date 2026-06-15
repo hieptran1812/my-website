@@ -50,4 +50,8 @@ next-env.d.ts
 
 /src/generated/prisma
 
+# generated at build time by scripts/buildBlogIndex.ts (runtime falls back to a
+# live corpus walk when absent, so it never needs to be committed)
+/src/lib/generated/blogPostsIndex.json
+
 *.log

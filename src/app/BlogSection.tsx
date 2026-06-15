@@ -104,10 +104,12 @@ export default function BlogSection() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
 
-      // Fetch latest blog posts from API (with trailing slash to avoid redirect)
-      const response = await fetch("/api/blog/", {
-        signal: controller.signal,
-      });
+      // Only the latest few are rendered here — let the server paginate so we
+      // download ~4 posts instead of the whole corpus.
+      const response = await fetch(
+        `/api/blog/posts?page=1&limit=${ARTICLES_TO_SHOW}`,
+        { signal: controller.signal },
+      );
 
       clearTimeout(timeoutId);
 
@@ -115,15 +117,19 @@ export default function BlogSection() {
         throw new Error(`Failed to fetch articles: ${response.status}`);
       }
 
-      const blogPosts: BlogPostMetadata[] = await response.json();
+      const data: {
+        posts: BlogPostMetadata[];
+        pagination?: { total: number };
+      } = await response.json();
+      const blogPosts = data.posts;
 
       // Validate response
       if (!Array.isArray(blogPosts)) {
         throw new Error("Invalid response format from API");
       }
 
-      // Set total articles count
-      setTotalArticles(blogPosts.length);
+      // Set total articles count (from server-side pagination metadata)
+      setTotalArticles(data.pagination?.total ?? blogPosts.length);
 
       // Convert blog posts to Article format, take latest articles
       const latestArticles: Article[] = blogPosts

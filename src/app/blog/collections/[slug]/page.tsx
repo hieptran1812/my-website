@@ -123,11 +123,16 @@ export default function CollectionPage({
 
     const fetchCollectionArticles = async () => {
       try {
-        // Fetch all blog posts
-        const response = await fetch("/api/blog/posts");
-        const posts: BlogPostMetadata[] = await response.json();
+        // Server filters by collection so we only fetch this collection's posts.
+        const response = await fetch(
+          `/api/blog/posts?collection=${encodeURIComponent(collectionSlug)}`
+        );
+        const data = await response.json();
+        const posts: BlogPostMetadata[] = Array.isArray(data)
+          ? data
+          : data.posts || [];
 
-        // Filter posts by collection (convert collection to slug for comparison)
+        // Defensive: re-apply the exact collection match the server uses.
         const filteredPosts = posts.filter((post) => {
           if (!post.collection) return false;
           const postCollectionSlug = post.collection
