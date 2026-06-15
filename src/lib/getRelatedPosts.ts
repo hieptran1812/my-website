@@ -102,7 +102,13 @@ export interface AdjacencyEdge {
   reference?: boolean;
 }
 
-export interface CorpusIndex {
+/**
+ * The cheap half of the index: everything needed to score / rank related posts
+ * and resolve series context. Built from lightweight metadata (title, excerpt,
+ * tags, category, collection) — NO markdown bodies, NO O(N²) pairwise pass.
+ * This is all the article page (getRelatedPosts / getSeriesContext) ever needs.
+ */
+export interface ScoringIndex {
   entries: IndexEntry[];
   bySlug: Map<string, IndexEntry>;
   /** IDF for tags (Map<lowercased tag, idf weight>). */
@@ -113,6 +119,15 @@ export interface CorpusIndex {
   N: number;
   /** Posts grouped by collection name (lowercased). */
   byCollection: Map<string, IndexEntry[]>;
+}
+
+/**
+ * The full corpus index = ScoringIndex + the expensive graph structures
+ * (markdown reference graph + composite-weighted adjacency). Only the graph
+ * sidebar API (`/api/blog/graph`) consumes these, so they are built lazily and
+ * separately — never on a plain article render.
+ */
+export interface CorpusIndex extends ScoringIndex {
   /** Forward markdown reference graph: slug → set of slugs it links to. */
   outgoingRefs: Map<string, Set<string>>;
   /** Reverse: slug → set of slugs that link to it. */
@@ -125,6 +140,8 @@ export interface CorpusIndex {
 
 let cachedIndex: CorpusIndex | null = null;
 let cachedAt = 0;
+let cachedScoring: ScoringIndex | null = null;
+let cachedScoringAt = 0;
 const CACHE_TTL_MS = 5 * 60 * 1000;
 
 const STOP_WORDS = new Set([...eng, ...vie]);
@@ -144,13 +161,31 @@ function termFreq(tokens: string[]): Map<string, number> {
   return tf;
 }
 
-async function buildIndex(): Promise<CorpusIndex> {
-  const corpus = await loadAllPosts();
+/** Minimal post shape the scoring index needs — satisfied by both the full
+ *  corpus entries (with bodies) and the lightweight metadata index. */
+interface ScoringPostInput {
+  slug: string;
+  title: string;
+  excerpt: string;
+  tags: string[];
+  category: string;
+  subcategory: string;
+  publishDate: string;
+  image?: string;
+  collection?: string;
+}
+
+/**
+ * Build the cheap scoring half of the index from lightweight metadata.
+ * Tokenizes title+excerpt only (no bodies), computes tag/token IDF + TF-IDF
+ * norms, and groups by collection. No O(N²) pass — runs in tens of ms.
+ */
+function buildScoringIndex(posts: ScoringPostInput[]): ScoringIndex {
   const entries: IndexEntry[] = [];
   const tagDf = new Map<string, number>();
   const tokenDf = new Map<string, number>();
 
-  for (const e of corpus) {
+  for (const e of posts) {
     const tags = e.tags.map((t) => t.toLowerCase());
     const tokens = tokenize(`${e.title} ${e.excerpt}`);
     const tokenTf = termFreq(tokens);
@@ -210,6 +245,36 @@ async function buildIndex(): Promise<CorpusIndex> {
     });
   }
 
+  return { entries, bySlug, tagIdf, tokenIdf, N, byCollection };
+}
+
+/**
+ * Lightweight scoring index for the article page (related posts + series).
+ * Tokenizes title+excerpt only and skips the O(N²) graph adjacency entirely —
+ * the adjacency is the dominant cost on a cold render and is never used here.
+ * Shares loadAllPosts()'s cache with the listing routes, so the corpus is read
+ * at most once per process. Cached for CACHE_TTL_MS.
+ */
+export async function getScoringIndex(): Promise<ScoringIndex> {
+  const now = Date.now();
+  if (cachedScoring && now - cachedScoringAt < CACHE_TTL_MS) return cachedScoring;
+  const corpus = await loadAllPosts();
+  cachedScoring = buildScoringIndex(corpus);
+  cachedScoringAt = now;
+  return cachedScoring;
+}
+
+/**
+ * Full corpus index = scoring index + the markdown reference graph + the
+ * composite-weighted adjacency matrix. The adjacency pass is O(N²) and only the
+ * graph sidebar API needs it, so this is built lazily and used ONLY there —
+ * never on an article render (see getScoringIndex).
+ */
+async function buildIndex(): Promise<CorpusIndex> {
+  const corpus = await loadAllPosts();
+  const scoring = buildScoringIndex(corpus);
+  const { entries, bySlug, tagIdf, tokenIdf } = scoring;
+
   // Build the markdown-link reference graph. We parse each post's body for
   // [text](slug) — slugs may include /blog/ prefix, trailing slashes, or be
   // relative — and keep only links whose target resolves to another post.
@@ -248,17 +313,6 @@ async function buildIndex(): Promise<CorpusIndex> {
   const W_CAT = 0.15;
   const W_TIME = 0.3;
   const TIME_HALF_LIFE_MS = 60 * 24 * 3600 * 1000; // 60 days
-  const tmpIndex: CorpusIndex = {
-    entries,
-    bySlug,
-    tagIdf,
-    tokenIdf,
-    N,
-    byCollection,
-    outgoingRefs,
-    incomingRefs,
-    adjacency,
-  };
 
   for (let i = 0; i < entries.length; i++) {
     const a = entries[i];
@@ -349,19 +403,8 @@ async function buildIndex(): Promise<CorpusIndex> {
       adjacency.get(b.slug)!.set(a.slug, edgeBA);
     }
   }
-  void tmpIndex; // keeps W_* constants referenced for clarity
 
-  return {
-    entries,
-    bySlug,
-    tagIdf,
-    tokenIdf,
-    N,
-    byCollection,
-    outgoingRefs,
-    incomingRefs,
-    adjacency,
-  };
+  return { ...scoring, outgoingRefs, incomingRefs, adjacency };
 }
 
 export async function getIndex(): Promise<CorpusIndex> {
@@ -415,7 +458,7 @@ export interface CandidateScore {
 export function scoreCandidate(
   current: IndexEntry,
   candidate: IndexEntry,
-  idx: CorpusIndex,
+  idx: ScoringIndex,
 ): CandidateScore | null {
   // IDF-weighted shared tags.
   const currentTagSet = new Set(current.tags);
@@ -551,7 +594,7 @@ export async function getRelatedPosts(
   _currentSubcategory: string,
   limit = 6,
 ): Promise<RelatedPost[]> {
-  const idx = await getIndex();
+  const idx = await getScoringIndex();
   const current = idx.bySlug.get(currentSlug);
   if (!current) return [];
 
@@ -598,7 +641,7 @@ export async function getRelatedPosts(
 export async function getSeriesContext(
   currentSlug: string,
 ): Promise<SeriesContext | null> {
-  const idx = await getIndex();
+  const idx = await getScoringIndex();
   const current = idx.bySlug.get(currentSlug);
   if (!current?.collection) return null;
   const sibs = idx.byCollection.get(current.collection.toLowerCase()) ?? [];
@@ -623,7 +666,7 @@ export async function getSeriesContext(
 }
 
 export async function getPopularPosts(limit = 6): Promise<RelatedPost[]> {
-  const idx = await getIndex();
+  const idx = await getScoringIndex();
   return [...idx.entries]
     .sort((a, b) => {
       const da = Date.parse(a.publishDate) || 0;
@@ -724,7 +767,7 @@ export function personalizedPageRank(
 export function selectWithMmr(
   ranked: Array<{ slug: string; score: number }>,
   k: number,
-  idx: CorpusIndex,
+  idx: ScoringIndex,
   lambda = 0.75,
 ): string[] {
   const picked: string[] = [];

@@ -47,7 +47,58 @@ export interface BlogPostMetadata {
   collection?: string;
 }
 
-// Get markdown articles by category using API route (client-side function)
+// Lightweight metadata shape returned by /api/blog/posts (no markdown body).
+interface LitePost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  publishDate: string;
+  readTime: string;
+  category: string;
+  subcategory?: string;
+  author?: string;
+  tags?: string[];
+  image?: string;
+  collection?: string;
+  featured?: boolean;
+}
+
+/** Map a lite metadata post to the Article shape the listing pages render.
+ *  `content` is intentionally empty — listing cards never use the body. */
+function litePostToArticle(p: LitePost): Article {
+  const readTime = p.readTime || "5 min read";
+  const readTimeNum = parseInt(readTime.replace(/[^\d]/g, ""), 10) || 0;
+  const difficulty =
+    readTimeNum >= 10
+      ? "Advanced"
+      : readTimeNum >= 5
+        ? "Intermediate"
+        : "Beginner";
+  return {
+    id: p.slug.replace(/\//g, "-"),
+    title: p.title,
+    excerpt: p.excerpt || "",
+    content: "",
+    category: p.category,
+    subcategory: p.subcategory || "",
+    tags: p.tags || [],
+    date: p.publishDate || "",
+    readTime,
+    difficulty,
+    slug: p.slug,
+    featured: p.featured ?? false,
+    author: p.author,
+    image: p.image,
+    collection: p.collection,
+  };
+}
+
+// Get markdown articles by category using API route (client-side function).
+// Uses the lightweight metadata index (/api/blog/posts) — prebuilt at build
+// time, no markdown bodies — instead of the full-corpus /api/blog/articles
+// endpoint. Listing pages only render preview cards + subcategory facets, so
+// shipping the post bodies was pure waste: this cuts the per-category payload
+// from ~10 MB to a few hundred KB and skips the server-side corpus disk walk.
 export async function getMarkdownArticlesByCategory(
   targetCategory: string,
   page: number = 1,
@@ -59,25 +110,32 @@ export async function getMarkdownArticlesByCategory(
         ? window.location.origin
         : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-    const params = new URLSearchParams({
-      category: targetCategory,
-      page: page.toString(),
-      limit: limit.toString(),
-    });
-
-    const response = await fetch(`${baseUrl}/api/blog/articles?${params}`);
+    // No page/limit → legacy mode returns the full (presorted) category list,
+    // which the pages need for client-side search + subcategory facet counts.
+    const response = await fetch(
+      `${baseUrl}/api/blog/posts?category=${encodeURIComponent(targetCategory)}`,
+    );
 
     if (!response.ok) {
       throw new Error(`Failed to fetch articles: ${response.status}`);
     }
 
     const data = await response.json();
+    const posts: LitePost[] = Array.isArray(data)
+      ? data
+      : Array.isArray(data?.posts)
+        ? data.posts
+        : [];
+    const articles = posts.map(litePostToArticle);
 
-    // Ensure we always return a proper structure with arrays
+    // Honour page/limit for callers that want a slice (the category pages pass
+    // a high limit to pull the whole category in one shot).
+    const start = (page - 1) * limit;
+    const sliced = articles.slice(start, start + limit);
     return {
-      articles: Array.isArray(data.articles) ? data.articles : [],
-      total: data.total || 0,
-      hasMore: data.hasMore || false,
+      articles: sliced,
+      total: articles.length,
+      hasMore: start + limit < articles.length,
     };
   } catch (error) {
     console.error("Error fetching articles:", error);

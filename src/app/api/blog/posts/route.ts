@@ -14,11 +14,13 @@ export interface BlogPost {
   publishDate: string;
   readTime: string;
   category: string;
+  subcategory: string;
   author: string;
   tags: string[];
   image: string;
   excerpt: string;
   collection?: string;
+  featured: boolean;
 }
 
 const CACHE_HEADERS = {
@@ -35,11 +37,13 @@ function toBlogPost(p: BlogPostLite): BlogPost {
     publishDate: p.publishDate || "2024-01-01",
     readTime: p.readTime,
     category: p.category,
+    subcategory: p.subcategory,
     author: p.author,
     tags: p.tags,
     image: p.image || "",
     excerpt: p.excerpt,
     collection: p.collection,
+    featured: p.featured,
   };
 }
 
