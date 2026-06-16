@@ -86,6 +86,35 @@
     "width": 1792,
     "height": 1216
   },
+  "/imgs/blogs/a-framework-for-buying-through-the-cycle-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/a-framework-for-buying-through-the-cycle-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/a-framework-for-buying-through-the-cycle-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/a-framework-for-buying-through-the-cycle-4.png": {
+    "width": 1792,
+    "height": 1299
+  },
+  "/imgs/blogs/a-framework-for-buying-through-the-cycle-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/a-framework-for-buying-through-the-cycle-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/a-framework-for-buying-through-the-cycle-7.png": {
+    "width": 1792,
+    "height": 1169
+  },
   "/imgs/blogs/a-gold-playbook-reading-the-macro-signals-and-building-a-position-1.png": {
     "width": 1792,
     "height": 888,
@@ -12112,6 +12141,72 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/llm-quantization-activations-smoothquant-kv-cache-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/llm-quantization-activations-smoothquant-kv-cache-2.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/llm-quantization-activations-smoothquant-kv-cache-3.png": {
+    "width": 1792,
+    "height": 938
+  },
+  "/imgs/blogs/llm-quantization-activations-smoothquant-kv-cache-4.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/llm-quantization-activations-smoothquant-kv-cache-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/llm-quantization-activations-smoothquant-kv-cache-6.png": {
+    "width": 1792,
+    "height": 1341
+  },
+  "/imgs/blogs/llm-quantization-activations-smoothquant-kv-cache-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/llm-quantization-activations-smoothquant-kv-cache-8.png": {
+    "width": 1792,
+    "height": 1187
+  },
+  "/imgs/blogs/llm-quantization-weight-only-gptq-awq-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/llm-quantization-weight-only-gptq-awq-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/llm-quantization-weight-only-gptq-awq-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/llm-quantization-weight-only-gptq-awq-4.png": {
+    "width": 1792,
+    "height": 991
+  },
+  "/imgs/blogs/llm-quantization-weight-only-gptq-awq-5.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/llm-quantization-weight-only-gptq-awq-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/llm-quantization-weight-only-gptq-awq-7.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/llm-quantization-weight-only-gptq-awq-8.png": {
+    "width": 1792,
+    "height": 1238
+  },
   "/imgs/blogs/lmcache-kv-cache-layer-deep-dive-1.png": {
     "width": 1792,
     "height": 1094,
@@ -13159,6 +13254,39 @@
     "height": 1304
   },
   "/imgs/blogs/minimax-speech-speaker-encoder-flow-vae-9.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/mixed-precision-and-sensitivity-analysis-1.png": {
+    "width": 1792,
+    "height": 1370,
+    "cover": true
+  },
+  "/imgs/blogs/mixed-precision-and-sensitivity-analysis-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/mixed-precision-and-sensitivity-analysis-3.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/mixed-precision-and-sensitivity-analysis-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/mixed-precision-and-sensitivity-analysis-5.png": {
+    "width": 1792,
+    "height": 1331
+  },
+  "/imgs/blogs/mixed-precision-and-sensitivity-analysis-6.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/mixed-precision-and-sensitivity-analysis-7.png": {
+    "width": 1792,
+    "height": 1336
+  },
+  "/imgs/blogs/mixed-precision-and-sensitivity-analysis-8.png": {
     "width": 1792,
     "height": 1211
   },
@@ -15554,6 +15682,39 @@
     "width": 1200,
     "height": 710
   },
+  "/imgs/blogs/quantization-in-practice-a-full-int8-pipeline-1.png": {
+    "width": 1792,
+    "height": 895,
+    "cover": true
+  },
+  "/imgs/blogs/quantization-in-practice-a-full-int8-pipeline-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/quantization-in-practice-a-full-int8-pipeline-3.png": {
+    "width": 1792,
+    "height": 1365
+  },
+  "/imgs/blogs/quantization-in-practice-a-full-int8-pipeline-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/quantization-in-practice-a-full-int8-pipeline-5.png": {
+    "width": 1792,
+    "height": 1421
+  },
+  "/imgs/blogs/quantization-in-practice-a-full-int8-pipeline-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/quantization-in-practice-a-full-int8-pipeline-7.png": {
+    "width": 1792,
+    "height": 1397
+  },
+  "/imgs/blogs/quantization-in-practice-a-full-int8-pipeline-8.png": {
+    "width": 1792,
+    "height": 1266
+  },
   "/imgs/blogs/qwen-image-1.png": {
     "width": 1792,
     "height": 1210,
@@ -16114,6 +16275,35 @@
   "/imgs/blogs/reading-the-yield-curve-slope-inversion-recession-7.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/real-estate-in-a-portfolio-1.png": {
+    "width": 1792,
+    "height": 1228,
+    "cover": true
+  },
+  "/imgs/blogs/real-estate-in-a-portfolio-2.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/real-estate-in-a-portfolio-3.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/real-estate-in-a-portfolio-4.png": {
+    "width": 1792,
+    "height": 1229
+  },
+  "/imgs/blogs/real-estate-in-a-portfolio-5.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/real-estate-in-a-portfolio-6.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/real-estate-in-a-portfolio-7.png": {
+    "width": 1792,
+    "height": 1209
   },
   "/imgs/blogs/real-estate-reits-income-leverage-and-rates-1.png": {
     "width": 1792,
@@ -16807,6 +16997,35 @@
   "/imgs/blogs/risk-management-around-events-gaps-sizing-stops-7.png": {
     "width": 1792,
     "height": 748
+  },
+  "/imgs/blogs/risk-management-in-real-estate-1.png": {
+    "width": 1792,
+    "height": 1218,
+    "cover": true
+  },
+  "/imgs/blogs/risk-management-in-real-estate-2.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/risk-management-in-real-estate-3.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/risk-management-in-real-estate-4.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/risk-management-in-real-estate-5.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/risk-management-in-real-estate-6.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/risk-management-in-real-estate-7.png": {
+    "width": 1792,
+    "height": 1209
   },
   "/imgs/blogs/risk-neutral-pricing-martingale-measure-quant-interviews-1.png": {
     "width": 1792,
@@ -21521,6 +21740,35 @@
   "/imgs/blogs/two-pillars-of-valuation-intrinsic-vs-relative-7.png": {
     "width": 1792,
     "height": 1044
+  },
+  "/imgs/blogs/underwriting-a-property-deal-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/underwriting-a-property-deal-2.png": {
+    "width": 1792,
+    "height": 1384
+  },
+  "/imgs/blogs/underwriting-a-property-deal-3.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/underwriting-a-property-deal-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/underwriting-a-property-deal-5.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/underwriting-a-property-deal-6.png": {
+    "width": 1792,
+    "height": 1387
+  },
+  "/imgs/blogs/underwriting-a-property-deal-7.png": {
+    "width": 1792,
+    "height": 1210
   },
   "/imgs/blogs/unit-economics-and-the-value-chain-1.png": {
     "width": 1792,
