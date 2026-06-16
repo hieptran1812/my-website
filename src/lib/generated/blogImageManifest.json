@@ -2939,6 +2939,35 @@
     "width": 1792,
     "height": 1213
   },
+  "/imgs/blogs/comparable-companies-done-right-1.png": {
+    "width": 1792,
+    "height": 1214,
+    "cover": true
+  },
+  "/imgs/blogs/comparable-companies-done-right-2.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/comparable-companies-done-right-3.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/comparable-companies-done-right-4.png": {
+    "width": 1792,
+    "height": 1074
+  },
+  "/imgs/blogs/comparable-companies-done-right-5.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/comparable-companies-done-right-6.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/comparable-companies-done-right-7.png": {
+    "width": 1792,
+    "height": 1090
+  },
   "/imgs/blogs/conditional-expectation-projection-math-for-quants-1.png": {
     "width": 1792,
     "height": 1260,
@@ -4672,6 +4701,35 @@
   "/imgs/blogs/enron-2001-accounting-fraud-7.png": {
     "width": 1792,
     "height": 1178
+  },
+  "/imgs/blogs/enterprise-value-to-per-share-the-bridge-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/enterprise-value-to-per-share-the-bridge-2.png": {
+    "width": 1792,
+    "height": 1296
+  },
+  "/imgs/blogs/enterprise-value-to-per-share-the-bridge-3.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/enterprise-value-to-per-share-the-bridge-4.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/enterprise-value-to-per-share-the-bridge-5.png": {
+    "width": 1792,
+    "height": 937
+  },
+  "/imgs/blogs/enterprise-value-to-per-share-the-bridge-6.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/enterprise-value-to-per-share-the-bridge-7.png": {
+    "width": 1792,
+    "height": 1210
   },
   "/imgs/blogs/equities-stocks-owning-a-slice-of-growth-1.png": {
     "width": 1792,
@@ -9733,6 +9791,35 @@
     "width": 1792,
     "height": 1279
   },
+  "/imgs/blogs/multiples-101-pe-ev-ebitda-pb-ps-peg-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/multiples-101-pe-ev-ebitda-pb-ps-peg-2.png": {
+    "width": 1792,
+    "height": 1347
+  },
+  "/imgs/blogs/multiples-101-pe-ev-ebitda-pb-ps-peg-3.png": {
+    "width": 1792,
+    "height": 1245
+  },
+  "/imgs/blogs/multiples-101-pe-ev-ebitda-pb-ps-peg-4.png": {
+    "width": 1792,
+    "height": 1146
+  },
+  "/imgs/blogs/multiples-101-pe-ev-ebitda-pb-ps-peg-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/multiples-101-pe-ev-ebitda-pb-ps-peg-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/multiples-101-pe-ev-ebitda-pb-ps-peg-7.png": {
+    "width": 1792,
+    "height": 1251
+  },
   "/imgs/blogs/muon-moonlight-1.png": {
     "width": 1792,
     "height": 1210,
@@ -11954,6 +12041,35 @@
     "width": 1792,
     "height": 802
   },
+  "/imgs/blogs/reverse-dcf-and-sensitivity-analysis-1.png": {
+    "width": 1792,
+    "height": 1272,
+    "cover": true
+  },
+  "/imgs/blogs/reverse-dcf-and-sensitivity-analysis-2.png": {
+    "width": 1792,
+    "height": 1131
+  },
+  "/imgs/blogs/reverse-dcf-and-sensitivity-analysis-3.png": {
+    "width": 1792,
+    "height": 1048
+  },
+  "/imgs/blogs/reverse-dcf-and-sensitivity-analysis-4.png": {
+    "width": 1792,
+    "height": 1258
+  },
+  "/imgs/blogs/reverse-dcf-and-sensitivity-analysis-5.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/reverse-dcf-and-sensitivity-analysis-6.png": {
+    "width": 1792,
+    "height": 1099
+  },
+  "/imgs/blogs/reverse-dcf-and-sensitivity-analysis-7.png": {
+    "width": 1792,
+    "height": 1082
+  },
   "/imgs/blogs/reward-model-overoptimization-scaling-1.png": {
     "width": 1792,
     "height": 1256,
@@ -13598,6 +13714,35 @@
   "/imgs/blogs/terminal-rate-and-rate-cut-cycles-pricing-the-path-7.png": {
     "width": 1792,
     "height": 836
+  },
+  "/imgs/blogs/terminal-value-the-part-that-dominates-1.png": {
+    "width": 1792,
+    "height": 1158,
+    "cover": true
+  },
+  "/imgs/blogs/terminal-value-the-part-that-dominates-2.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/terminal-value-the-part-that-dominates-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/terminal-value-the-part-that-dominates-4.png": {
+    "width": 1792,
+    "height": 904
+  },
+  "/imgs/blogs/terminal-value-the-part-that-dominates-5.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/terminal-value-the-part-that-dominates-6.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/terminal-value-the-part-that-dominates-7.png": {
+    "width": 1792,
+    "height": 1210
   },
   "/imgs/blogs/terra-luna-2022-collapse-1.png": {
     "width": 1792,
