@@ -5798,6 +5798,39 @@
     "width": 1792,
     "height": 1184
   },
+  "/imgs/blogs/dead-neurons-and-saturated-activations-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/dead-neurons-and-saturated-activations-2.png": {
+    "width": 1792,
+    "height": 736
+  },
+  "/imgs/blogs/dead-neurons-and-saturated-activations-3.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/dead-neurons-and-saturated-activations-4.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/dead-neurons-and-saturated-activations-5.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/dead-neurons-and-saturated-activations-6.png": {
+    "width": 1792,
+    "height": 911
+  },
+  "/imgs/blogs/dead-neurons-and-saturated-activations-7.png": {
+    "width": 1792,
+    "height": 1183
+  },
+  "/imgs/blogs/dead-neurons-and-saturated-activations-8.png": {
+    "width": 1792,
+    "height": 1199
+  },
   "/imgs/blogs/debasement-debt-and-the-fiscal-story-gold-as-an-anti-currency-1.png": {
     "width": 1792,
     "height": 1011,
@@ -8715,6 +8748,39 @@
     "width": 1792,
     "height": 1261
   },
+  "/imgs/blogs/from-model-to-deployable-artifact-1.png": {
+    "width": 1792,
+    "height": 1365,
+    "cover": true
+  },
+  "/imgs/blogs/from-model-to-deployable-artifact-2.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/from-model-to-deployable-artifact-3.png": {
+    "width": 1792,
+    "height": 906
+  },
+  "/imgs/blogs/from-model-to-deployable-artifact-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/from-model-to-deployable-artifact-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/from-model-to-deployable-artifact-6.png": {
+    "width": 1792,
+    "height": 1359
+  },
+  "/imgs/blogs/from-model-to-deployable-artifact-7.png": {
+    "width": 1792,
+    "height": 924
+  },
+  "/imgs/blogs/from-model-to-deployable-artifact-8.png": {
+    "width": 1792,
+    "height": 1154
+  },
   "/imgs/blogs/from-sector-to-stock-screening-leaders-in-a-hot-industry-1.png": {
     "width": 1792,
     "height": 1198,
@@ -9746,6 +9812,72 @@
     "width": 813,
     "height": 665
   },
+  "/imgs/blogs/gradients-exploding-and-vanishing-1.png": {
+    "width": 1792,
+    "height": 1250,
+    "cover": true
+  },
+  "/imgs/blogs/gradients-exploding-and-vanishing-2.png": {
+    "width": 1792,
+    "height": 943
+  },
+  "/imgs/blogs/gradients-exploding-and-vanishing-3.png": {
+    "width": 1792,
+    "height": 1268
+  },
+  "/imgs/blogs/gradients-exploding-and-vanishing-4.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/gradients-exploding-and-vanishing-5.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/gradients-exploding-and-vanishing-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/gradients-exploding-and-vanishing-7.png": {
+    "width": 1792,
+    "height": 929
+  },
+  "/imgs/blogs/gradients-exploding-and-vanishing-8.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/graph-level-optimization-1.png": {
+    "width": 1792,
+    "height": 1232,
+    "cover": true
+  },
+  "/imgs/blogs/graph-level-optimization-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/graph-level-optimization-3.png": {
+    "width": 1792,
+    "height": 899
+  },
+  "/imgs/blogs/graph-level-optimization-4.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/graph-level-optimization-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/graph-level-optimization-6.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/graph-level-optimization-7.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/graph-level-optimization-8.png": {
+    "width": 1792,
+    "height": 1149
+  },
   "/imgs/blogs/graph-rag-01-pipeline.png": {
     "width": 1720,
     "height": 350,
@@ -10752,6 +10884,39 @@
     "width": 1792,
     "height": 1194
   },
+  "/imgs/blogs/hunting-nans-and-infs-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/hunting-nans-and-infs-2.png": {
+    "width": 1792,
+    "height": 1313
+  },
+  "/imgs/blogs/hunting-nans-and-infs-3.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/hunting-nans-and-infs-4.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/hunting-nans-and-infs-5.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/hunting-nans-and-infs-6.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/hunting-nans-and-infs-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/hunting-nans-and-infs-8.png": {
+    "width": 1792,
+    "height": 1264
+  },
   "/imgs/blogs/hypothesis-testing-pvalues-math-for-quants-1.png": {
     "width": 1792,
     "height": 909,
@@ -11107,6 +11272,39 @@
     "width": 1792,
     "height": 824
   },
+  "/imgs/blogs/inference-runtimes-compared-1.png": {
+    "width": 1792,
+    "height": 1164,
+    "cover": true
+  },
+  "/imgs/blogs/inference-runtimes-compared-2.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/inference-runtimes-compared-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/inference-runtimes-compared-4.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/inference-runtimes-compared-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/inference-runtimes-compared-6.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/inference-runtimes-compared-7.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/inference-runtimes-compared-8.png": {
+    "width": 1792,
+    "height": 1184
+  },
   "/imgs/blogs/inflation-and-the-fed-reaction-function-dot-plot-1.png": {
     "width": 1792,
     "height": 1077,
@@ -11222,6 +11420,39 @@
   "/imgs/blogs/information-technology-sector-vietnam-fpt-structural-growth-7.png": {
     "width": 1792,
     "height": 1200
+  },
+  "/imgs/blogs/initialization-and-normalization-bugs-1.png": {
+    "width": 1792,
+    "height": 1218,
+    "cover": true
+  },
+  "/imgs/blogs/initialization-and-normalization-bugs-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/initialization-and-normalization-bugs-3.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/initialization-and-normalization-bugs-4.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/initialization-and-normalization-bugs-5.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/initialization-and-normalization-bugs-6.png": {
+    "width": 1792,
+    "height": 709
+  },
+  "/imgs/blogs/initialization-and-normalization-bugs-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/initialization-and-normalization-bugs-8.png": {
+    "width": 1792,
+    "height": 1237
   },
   "/imgs/blogs/inside-an-investment-bank-how-they-make-money-1.png": {
     "width": 1792,
@@ -13032,6 +13263,39 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/loss-spikes-and-divergence-1.png": {
+    "width": 1792,
+    "height": 913,
+    "cover": true
+  },
+  "/imgs/blogs/loss-spikes-and-divergence-2.png": {
+    "width": 1792,
+    "height": 1297
+  },
+  "/imgs/blogs/loss-spikes-and-divergence-3.png": {
+    "width": 1792,
+    "height": 1327
+  },
+  "/imgs/blogs/loss-spikes-and-divergence-4.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/loss-spikes-and-divergence-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/loss-spikes-and-divergence-6.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/loss-spikes-and-divergence-7.png": {
+    "width": 1792,
+    "height": 658
+  },
+  "/imgs/blogs/loss-spikes-and-divergence-8.png": {
+    "width": 1792,
+    "height": 1333
+  },
   "/imgs/blogs/ltcm-1998-when-genius-failed-1.png": {
     "width": 1792,
     "height": 1006,
@@ -13517,6 +13781,39 @@
   "/imgs/blogs/media-sector-vietnam-small-sentiment-corner-7.png": {
     "width": 1792,
     "height": 1208
+  },
+  "/imgs/blogs/memory-is-the-real-constraint-1.png": {
+    "width": 1792,
+    "height": 1260,
+    "cover": true
+  },
+  "/imgs/blogs/memory-is-the-real-constraint-2.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/memory-is-the-real-constraint-3.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/memory-is-the-real-constraint-4.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/memory-is-the-real-constraint-5.png": {
+    "width": 1792,
+    "height": 907
+  },
+  "/imgs/blogs/memory-is-the-real-constraint-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/memory-is-the-real-constraint-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/memory-is-the-real-constraint-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/mental-math-arithmetic-speed-quant-interviews-1.png": {
     "width": 1792,
@@ -14049,6 +14346,39 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/mixed-precision-debugging-fp16-vs-bf16-1.png": {
+    "width": 1792,
+    "height": 1302,
+    "cover": true
+  },
+  "/imgs/blogs/mixed-precision-debugging-fp16-vs-bf16-2.png": {
+    "width": 1792,
+    "height": 739
+  },
+  "/imgs/blogs/mixed-precision-debugging-fp16-vs-bf16-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/mixed-precision-debugging-fp16-vs-bf16-4.png": {
+    "width": 1792,
+    "height": 924
+  },
+  "/imgs/blogs/mixed-precision-debugging-fp16-vs-bf16-5.png": {
+    "width": 1792,
+    "height": 1322
+  },
+  "/imgs/blogs/mixed-precision-debugging-fp16-vs-bf16-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/mixed-precision-debugging-fp16-vs-bf16-7.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/mixed-precision-debugging-fp16-vs-bf16-8.png": {
+    "width": 1792,
+    "height": 1266
+  },
   "/imgs/blogs/mixers-coinjoin-and-obfuscation-1.png": {
     "width": 1792,
     "height": 1169,
@@ -14077,6 +14407,39 @@
   "/imgs/blogs/mixers-coinjoin-and-obfuscation-7.png": {
     "width": 1792,
     "height": 1257
+  },
+  "/imgs/blogs/ml-compilers-and-autotuning-tvm-mlir-xla-1.png": {
+    "width": 1792,
+    "height": 1231,
+    "cover": true
+  },
+  "/imgs/blogs/ml-compilers-and-autotuning-tvm-mlir-xla-2.png": {
+    "width": 1792,
+    "height": 911
+  },
+  "/imgs/blogs/ml-compilers-and-autotuning-tvm-mlir-xla-3.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/ml-compilers-and-autotuning-tvm-mlir-xla-4.png": {
+    "width": 1792,
+    "height": 911
+  },
+  "/imgs/blogs/ml-compilers-and-autotuning-tvm-mlir-xla-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/ml-compilers-and-autotuning-tvm-mlir-xla-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/ml-compilers-and-autotuning-tvm-mlir-xla-7.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/ml-compilers-and-autotuning-tvm-mlir-xla-8.png": {
+    "width": 1792,
+    "height": 1169
   },
   "/imgs/blogs/mle-method-of-moments-math-for-quants-1.png": {
     "width": 1792,
@@ -14164,6 +14527,39 @@
   "/imgs/blogs/moba-6.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/mobile-deployment-end-to-end-1.png": {
+    "width": 1792,
+    "height": 917,
+    "cover": true
+  },
+  "/imgs/blogs/mobile-deployment-end-to-end-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/mobile-deployment-end-to-end-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/mobile-deployment-end-to-end-4.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/mobile-deployment-end-to-end-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/mobile-deployment-end-to-end-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/mobile-deployment-end-to-end-7.png": {
+    "width": 1792,
+    "height": 1400
+  },
+  "/imgs/blogs/mobile-deployment-end-to-end-8.png": {
+    "width": 1600,
+    "height": 1445
   },
   "/imgs/blogs/modern-llm-01-baseline.png": {
     "width": 1090,
@@ -20345,6 +20741,39 @@
     "width": 1792,
     "height": 1267
   },
+  "/imgs/blogs/tensorrt-and-gpu-edge-inference-on-jetson-1.png": {
+    "width": 1792,
+    "height": 907,
+    "cover": true
+  },
+  "/imgs/blogs/tensorrt-and-gpu-edge-inference-on-jetson-2.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/tensorrt-and-gpu-edge-inference-on-jetson-3.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/tensorrt-and-gpu-edge-inference-on-jetson-4.png": {
+    "width": 1792,
+    "height": 907
+  },
+  "/imgs/blogs/tensorrt-and-gpu-edge-inference-on-jetson-5.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/tensorrt-and-gpu-edge-inference-on-jetson-6.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/tensorrt-and-gpu-edge-inference-on-jetson-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/tensorrt-and-gpu-edge-inference-on-jetson-8.png": {
+    "width": 1792,
+    "height": 1173
+  },
   "/imgs/blogs/tensorrt-end-to-end-inference-compiler-1.png": {
     "width": 1792,
     "height": 1126,
@@ -21474,6 +21903,39 @@
   "/imgs/blogs/the-labor-mosaic-jolts-adp-claims-7.png": {
     "width": 1792,
     "height": 778
+  },
+  "/imgs/blogs/the-learning-rate-is-almost-always-the-problem-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/the-learning-rate-is-almost-always-the-problem-2.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/the-learning-rate-is-almost-always-the-problem-3.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/the-learning-rate-is-almost-always-the-problem-4.png": {
+    "width": 1792,
+    "height": 902
+  },
+  "/imgs/blogs/the-learning-rate-is-almost-always-the-problem-5.png": {
+    "width": 1792,
+    "height": 1330
+  },
+  "/imgs/blogs/the-learning-rate-is-almost-always-the-problem-6.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/the-learning-rate-is-almost-always-the-problem-7.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/the-learning-rate-is-almost-always-the-problem-8.png": {
+    "width": 1792,
+    "height": 1211
   },
   "/imgs/blogs/the-liquidity-cycle-and-asset-prices-1.png": {
     "width": 1792,
