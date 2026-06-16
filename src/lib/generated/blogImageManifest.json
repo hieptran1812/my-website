@@ -6352,6 +6352,39 @@
     "height": 680,
     "cover": true
   },
+  "/imgs/blogs/diffusion-transformers-dit-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/diffusion-transformers-dit-2.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/diffusion-transformers-dit-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/diffusion-transformers-dit-4.png": {
+    "width": 1792,
+    "height": 1335
+  },
+  "/imgs/blogs/diffusion-transformers-dit-5.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/diffusion-transformers-dit-6.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/diffusion-transformers-dit-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/diffusion-transformers-dit-8.png": {
+    "width": 1792,
+    "height": 1000
+  },
   "/imgs/blogs/diffusion-transformers-with-representation-autoencoders-20251016145838.png": {
     "width": 1792,
     "height": 629
@@ -6961,10 +6994,76 @@
     "width": 1376,
     "height": 768
   },
+  "/imgs/blogs/efficient-attention-and-vision-transformers-for-edge-1.png": {
+    "width": 1792,
+    "height": 1277,
+    "cover": true
+  },
+  "/imgs/blogs/efficient-attention-and-vision-transformers-for-edge-2.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/efficient-attention-and-vision-transformers-for-edge-3.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/efficient-attention-and-vision-transformers-for-edge-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/efficient-attention-and-vision-transformers-for-edge-5.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/efficient-attention-and-vision-transformers-for-edge-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/efficient-attention-and-vision-transformers-for-edge-7.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/efficient-attention-and-vision-transformers-for-edge-8.png": {
+    "width": 1792,
+    "height": 1188
+  },
   "/imgs/blogs/efficient-llm-inference-techniques-diagram.png": {
     "width": 1190,
     "height": 680,
     "cover": true
+  },
+  "/imgs/blogs/efficientnet-shufflenet-and-the-flops-latency-gap-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/efficientnet-shufflenet-and-the-flops-latency-gap-2.png": {
+    "width": 1792,
+    "height": 1279
+  },
+  "/imgs/blogs/efficientnet-shufflenet-and-the-flops-latency-gap-3.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/efficientnet-shufflenet-and-the-flops-latency-gap-4.png": {
+    "width": 1792,
+    "height": 709
+  },
+  "/imgs/blogs/efficientnet-shufflenet-and-the-flops-latency-gap-5.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/efficientnet-shufflenet-and-the-flops-latency-gap-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/efficientnet-shufflenet-and-the-flops-latency-gap-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/efficientnet-shufflenet-and-the-flops-latency-gap-8.png": {
+    "width": 1792,
+    "height": 1160
   },
   "/imgs/blogs/eigendecomposition-pca-returns-math-for-quants-1.png": {
     "width": 1792,
@@ -8221,6 +8320,39 @@
   "/imgs/blogs/fixed-income-analytics-9.png": {
     "width": 1792,
     "height": 872
+  },
+  "/imgs/blogs/flow-matching-and-rectified-flow-1.png": {
+    "width": 1792,
+    "height": 686,
+    "cover": true
+  },
+  "/imgs/blogs/flow-matching-and-rectified-flow-2.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/flow-matching-and-rectified-flow-3.png": {
+    "width": 1792,
+    "height": 736
+  },
+  "/imgs/blogs/flow-matching-and-rectified-flow-4.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/flow-matching-and-rectified-flow-5.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/flow-matching-and-rectified-flow-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/flow-matching-and-rectified-flow-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/flow-matching-and-rectified-flow-8.png": {
+    "width": 1792,
+    "height": 1000
   },
   "/imgs/blogs/flow-matching-diagram.png": {
     "width": 1180,
@@ -9705,6 +9837,39 @@
   "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-9.png": {
     "width": 1792,
     "height": 1194
+  },
+  "/imgs/blogs/hardware-aware-nas-1.png": {
+    "width": 1792,
+    "height": 1241,
+    "cover": true
+  },
+  "/imgs/blogs/hardware-aware-nas-2.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/hardware-aware-nas-3.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/hardware-aware-nas-4.png": {
+    "width": 1792,
+    "height": 876
+  },
+  "/imgs/blogs/hardware-aware-nas-5.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/hardware-aware-nas-6.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/hardware-aware-nas-7.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/hardware-aware-nas-8.png": {
+    "width": 1792,
+    "height": 1173
   },
   "/imgs/blogs/head-and-shoulders-double-tops-1.png": {
     "width": 1792,
@@ -12260,6 +12425,39 @@
     "width": 1792,
     "height": 1226
   },
+  "/imgs/blogs/latent-diffusion-and-stable-diffusion-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/latent-diffusion-and-stable-diffusion-2.png": {
+    "width": 1792,
+    "height": 715
+  },
+  "/imgs/blogs/latent-diffusion-and-stable-diffusion-3.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/latent-diffusion-and-stable-diffusion-4.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/latent-diffusion-and-stable-diffusion-5.png": {
+    "width": 1792,
+    "height": 780
+  },
+  "/imgs/blogs/latent-diffusion-and-stable-diffusion-6.png": {
+    "width": 1792,
+    "height": 1306
+  },
+  "/imgs/blogs/latent-diffusion-and-stable-diffusion-7.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/latent-diffusion-and-stable-diffusion-8.png": {
+    "width": 1792,
+    "height": 980
+  },
   "/imgs/blogs/law-large-numbers-central-limit-theorem-math-for-quants-1.png": {
     "width": 1792,
     "height": 871,
@@ -13909,6 +14107,39 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/mmdit-and-the-modern-text-to-image-recipe-1.png": {
+    "width": 1792,
+    "height": 787,
+    "cover": true
+  },
+  "/imgs/blogs/mmdit-and-the-modern-text-to-image-recipe-2.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/mmdit-and-the-modern-text-to-image-recipe-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/mmdit-and-the-modern-text-to-image-recipe-4.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/mmdit-and-the-modern-text-to-image-recipe-5.png": {
+    "width": 1792,
+    "height": 876
+  },
+  "/imgs/blogs/mmdit-and-the-modern-text-to-image-recipe-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/mmdit-and-the-modern-text-to-image-recipe-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/mmdit-and-the-modern-text-to-image-recipe-8.png": {
+    "width": 1792,
+    "height": 954
+  },
   "/imgs/blogs/moba-1.png": {
     "width": 1792,
     "height": 664,
@@ -14505,6 +14736,39 @@
   "/imgs/blogs/narratives-and-sector-rotation-onchain-8.png": {
     "width": 1514,
     "height": 697
+  },
+  "/imgs/blogs/neural-architecture-search-basics-1.png": {
+    "width": 1792,
+    "height": 988,
+    "cover": true
+  },
+  "/imgs/blogs/neural-architecture-search-basics-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/neural-architecture-search-basics-3.png": {
+    "width": 1792,
+    "height": 992
+  },
+  "/imgs/blogs/neural-architecture-search-basics-4.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/neural-architecture-search-basics-5.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/neural-architecture-search-basics-6.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/neural-architecture-search-basics-7.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/neural-architecture-search-basics-8.png": {
+    "width": 1792,
+    "height": 1187
   },
   "/imgs/blogs/noise-schedules-and-the-parameterization-zoo-1.png": {
     "width": 1792,
@@ -18938,6 +19202,39 @@
     "width": 1792,
     "height": 985
   },
+  "/imgs/blogs/small-language-models-by-design-1.png": {
+    "width": 1792,
+    "height": 1277,
+    "cover": true
+  },
+  "/imgs/blogs/small-language-models-by-design-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/small-language-models-by-design-3.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/small-language-models-by-design-4.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/small-language-models-by-design-5.png": {
+    "width": 1792,
+    "height": 948
+  },
+  "/imgs/blogs/small-language-models-by-design-6.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/small-language-models-by-design-7.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/small-language-models-by-design-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/smart-money-concepts-honestly-1.png": {
     "width": 1792,
     "height": 1090,
@@ -20656,6 +20953,39 @@
     "width": 1792,
     "height": 947
   },
+  "/imgs/blogs/the-diffusion-unet-1.png": {
+    "width": 1792,
+    "height": 692,
+    "cover": true
+  },
+  "/imgs/blogs/the-diffusion-unet-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/the-diffusion-unet-3.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/the-diffusion-unet-4.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/the-diffusion-unet-5.png": {
+    "width": 1792,
+    "height": 1280
+  },
+  "/imgs/blogs/the-diffusion-unet-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-diffusion-unet-7.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/the-diffusion-unet-8.png": {
+    "width": 1792,
+    "height": 890
+  },
   "/imgs/blogs/the-dollar-cross-asset-gravity-1.png": {
     "width": 1792,
     "height": 1148,
@@ -21359,6 +21689,39 @@
   "/imgs/blogs/the-metrics-that-actually-matter-on-device-8.png": {
     "width": 1792,
     "height": 1201
+  },
+  "/imgs/blogs/the-mobilenet-family-1.png": {
+    "width": 1792,
+    "height": 904,
+    "cover": true
+  },
+  "/imgs/blogs/the-mobilenet-family-2.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/the-mobilenet-family-3.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/the-mobilenet-family-4.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/the-mobilenet-family-5.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/the-mobilenet-family-6.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/the-mobilenet-family-7.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/the-mobilenet-family-8.png": {
+    "width": 1792,
+    "height": 1164
   },
   "/imgs/blogs/the-multipolar-money-order-brics-de-dollarization-and-golds-comeback-1.png": {
     "width": 1792,
