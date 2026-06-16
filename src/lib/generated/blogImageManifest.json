@@ -293,6 +293,39 @@
     "width": 1792,
     "height": 775
   },
+  "/imgs/blogs/airdrop-farming-and-sybil-cohorts-1.png": {
+    "width": 1792,
+    "height": 1138,
+    "cover": true
+  },
+  "/imgs/blogs/airdrop-farming-and-sybil-cohorts-2.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/airdrop-farming-and-sybil-cohorts-3.png": {
+    "width": 1792,
+    "height": 759
+  },
+  "/imgs/blogs/airdrop-farming-and-sybil-cohorts-4.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/airdrop-farming-and-sybil-cohorts-5.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/airdrop-farming-and-sybil-cohorts-6.png": {
+    "width": 1792,
+    "height": 774
+  },
+  "/imgs/blogs/airdrop-farming-and-sybil-cohorts-7.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/airdrop-farming-and-sybil-cohorts-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/algebraic-statistics-math-for-quants-1.png": {
     "width": 1792,
     "height": 1278,
@@ -5394,6 +5427,35 @@
     "width": 1792,
     "height": 959
   },
+  "/imgs/blogs/early-buyer-and-insider-detection-1.png": {
+    "width": 1792,
+    "height": 1158,
+    "cover": true
+  },
+  "/imgs/blogs/early-buyer-and-insider-detection-2.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/early-buyer-and-insider-detection-3.png": {
+    "width": 1792,
+    "height": 982
+  },
+  "/imgs/blogs/early-buyer-and-insider-detection-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/early-buyer-and-insider-detection-5.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/early-buyer-and-insider-detection-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/early-buyer-and-insider-detection-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/early-cycle-leaders-vietnam-brokers-banks-steel-1.png": {
     "width": 1792,
     "height": 1194,
@@ -6671,6 +6733,35 @@
     "width": 1180,
     "height": 680,
     "cover": true
+  },
+  "/imgs/blogs/following-smart-money-wallets-1.png": {
+    "width": 1792,
+    "height": 766,
+    "cover": true
+  },
+  "/imgs/blogs/following-smart-money-wallets-2.png": {
+    "width": 1792,
+    "height": 754
+  },
+  "/imgs/blogs/following-smart-money-wallets-3.png": {
+    "width": 1792,
+    "height": 1304
+  },
+  "/imgs/blogs/following-smart-money-wallets-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/following-smart-money-wallets-5.png": {
+    "width": 1792,
+    "height": 1353
+  },
+  "/imgs/blogs/following-smart-money-wallets-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/following-smart-money-wallets-7.png": {
+    "width": 1792,
+    "height": 1335
   },
   "/imgs/blogs/following-the-flows-positioning-cot-dealer-hedging-1.png": {
     "width": 1792,
@@ -8210,7 +8301,8 @@
   },
   "/imgs/blogs/how-tax-shapes-behavior-speculation-and-hoarding-1.png": {
     "width": 1792,
-    "height": 1218
+    "height": 1218,
+    "cover": true
   },
   "/imgs/blogs/how-tax-shapes-behavior-speculation-and-hoarding-2.png": {
     "width": 1792,
@@ -12994,7 +13086,8 @@
   },
   "/imgs/blogs/property-tax-around-the-world-singapore-us-china-1.png": {
     "width": 1792,
-    "height": 1209
+    "height": 1209,
+    "cover": true
   },
   "/imgs/blogs/property-tax-around-the-world-singapore-us-china-2.png": {
     "width": 1792,
@@ -17318,6 +17411,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/the-perils-of-copy-trading-onchain-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/the-perils-of-copy-trading-onchain-2.png": {
+    "width": 1792,
+    "height": 986
+  },
+  "/imgs/blogs/the-perils-of-copy-trading-onchain-3.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/the-perils-of-copy-trading-onchain-4.png": {
+    "width": 1792,
+    "height": 972
+  },
+  "/imgs/blogs/the-perils-of-copy-trading-onchain-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-perils-of-copy-trading-onchain-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-perils-of-copy-trading-onchain-7.png": {
+    "width": 1792,
+    "height": 1307
+  },
+  "/imgs/blogs/the-perils-of-copy-trading-onchain-8.png": {
+    "width": 1660,
+    "height": 539
+  },
   "/imgs/blogs/the-price-of-money-how-bonds-set-every-other-price-1.png": {
     "width": 1792,
     "height": 1277,
@@ -17728,6 +17854,47 @@
   "/imgs/blogs/tornado-cash-and-sanctioning-code-7.png": {
     "width": 1792,
     "height": 1178
+  },
+  "/imgs/blogs/tracking-funds-vcs-and-market-makers-1.png": {
+    "width": 1792,
+    "height": 1184,
+    "cover": true
+  },
+  "/imgs/blogs/tracking-funds-vcs-and-market-makers-10.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/tracking-funds-vcs-and-market-makers-2.png": {
+    "width": 1792,
+    "height": 1183
+  },
+  "/imgs/blogs/tracking-funds-vcs-and-market-makers-3.png": {
+    "width": 1792,
+    "height": 766
+  },
+  "/imgs/blogs/tracking-funds-vcs-and-market-makers-4.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/tracking-funds-vcs-and-market-makers-5.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/tracking-funds-vcs-and-market-makers-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/tracking-funds-vcs-and-market-makers-7.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/tracking-funds-vcs-and-market-makers-8.png": {
+    "width": 1792,
+    "height": 1279
+  },
+  "/imgs/blogs/tracking-funds-vcs-and-market-makers-9.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/trading-psychology-and-the-execution-gap-1.png": {
     "width": 1792,
@@ -18506,7 +18673,8 @@
   },
   "/imgs/blogs/vietnam-land-law-2024-and-the-coming-property-tax-1.png": {
     "width": 1792,
-    "height": 1260
+    "height": 1260,
+    "cover": true
   },
   "/imgs/blogs/vietnam-land-law-2024-and-the-coming-property-tax-2.png": {
     "width": 1792,
@@ -18845,6 +19013,35 @@
   "/imgs/blogs/what-is-real-estate-as-an-asset-class-7.png": {
     "width": 1792,
     "height": 1145
+  },
+  "/imgs/blogs/what-is-smart-money-onchain-1.png": {
+    "width": 1792,
+    "height": 746,
+    "cover": true
+  },
+  "/imgs/blogs/what-is-smart-money-onchain-2.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/what-is-smart-money-onchain-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/what-is-smart-money-onchain-4.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/what-is-smart-money-onchain-5.png": {
+    "width": 1792,
+    "height": 790
+  },
+  "/imgs/blogs/what-is-smart-money-onchain-6.png": {
+    "width": 1695,
+    "height": 914
+  },
+  "/imgs/blogs/what-is-smart-money-onchain-7.png": {
+    "width": 1792,
+    "height": 938
   },
   "/imgs/blogs/what-is-superposition-20251102130001.png": {
     "width": 1792,
