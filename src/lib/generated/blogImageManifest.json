@@ -417,6 +417,93 @@
     "width": 1792,
     "height": 1218
   },
+  "/imgs/blogs/analyzing-dex-and-amm-activity-1.png": {
+    "width": 1792,
+    "height": 1741,
+    "cover": true
+  },
+  "/imgs/blogs/analyzing-dex-and-amm-activity-2.png": {
+    "width": 1266,
+    "height": 598
+  },
+  "/imgs/blogs/analyzing-dex-and-amm-activity-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/analyzing-dex-and-amm-activity-4.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/analyzing-dex-and-amm-activity-5.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/analyzing-dex-and-amm-activity-6.png": {
+    "width": 1476,
+    "height": 598
+  },
+  "/imgs/blogs/analyzing-dex-and-amm-activity-7.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/analyzing-lending-and-liquidations-1.png": {
+    "width": 1792,
+    "height": 1473,
+    "cover": true
+  },
+  "/imgs/blogs/analyzing-lending-and-liquidations-2.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/analyzing-lending-and-liquidations-3.png": {
+    "width": 1405,
+    "height": 539
+  },
+  "/imgs/blogs/analyzing-lending-and-liquidations-4.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/analyzing-lending-and-liquidations-5.png": {
+    "width": 1500,
+    "height": 539
+  },
+  "/imgs/blogs/analyzing-lending-and-liquidations-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/analyzing-lending-and-liquidations-7.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/analyzing-perp-dexs-and-onchain-derivatives-1.png": {
+    "width": 1792,
+    "height": 1165,
+    "cover": true
+  },
+  "/imgs/blogs/analyzing-perp-dexs-and-onchain-derivatives-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/analyzing-perp-dexs-and-onchain-derivatives-3.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/analyzing-perp-dexs-and-onchain-derivatives-4.png": {
+    "width": 1601,
+    "height": 914
+  },
+  "/imgs/blogs/analyzing-perp-dexs-and-onchain-derivatives-5.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/analyzing-perp-dexs-and-onchain-derivatives-6.png": {
+    "width": 1595,
+    "height": 914
+  },
+  "/imgs/blogs/analyzing-perp-dexs-and-onchain-derivatives-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
   "/imgs/blogs/anatomy-of-a-bond-par-coupon-maturity-issuer-1.png": {
     "width": 1792,
     "height": 1301,
@@ -11412,6 +11499,35 @@
     "width": 937,
     "height": 788
   },
+  "/imgs/blogs/liquid-staking-restaking-and-yield-1.png": {
+    "width": 1792,
+    "height": 778,
+    "cover": true
+  },
+  "/imgs/blogs/liquid-staking-restaking-and-yield-2.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/liquid-staking-restaking-and-yield-3.png": {
+    "width": 1792,
+    "height": 930
+  },
+  "/imgs/blogs/liquid-staking-restaking-and-yield-4.png": {
+    "width": 1792,
+    "height": 1176
+  },
+  "/imgs/blogs/liquid-staking-restaking-and-yield-5.png": {
+    "width": 1718,
+    "height": 914
+  },
+  "/imgs/blogs/liquid-staking-restaking-and-yield-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/liquid-staking-restaking-and-yield-7.png": {
+    "width": 1792,
+    "height": 1208
+  },
   "/imgs/blogs/liquidity-and-gaps-around-news-1.png": {
     "width": 1792,
     "height": 1233,
@@ -13137,6 +13253,39 @@
   "/imgs/blogs/muon-moonlight-7.png": {
     "width": 1792,
     "height": 953
+  },
+  "/imgs/blogs/narratives-and-sector-rotation-onchain-1.png": {
+    "width": 1792,
+    "height": 1184,
+    "cover": true
+  },
+  "/imgs/blogs/narratives-and-sector-rotation-onchain-2.png": {
+    "width": 1792,
+    "height": 820
+  },
+  "/imgs/blogs/narratives-and-sector-rotation-onchain-3.png": {
+    "width": 1792,
+    "height": 983
+  },
+  "/imgs/blogs/narratives-and-sector-rotation-onchain-4.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/narratives-and-sector-rotation-onchain-5.png": {
+    "width": 1477,
+    "height": 697
+  },
+  "/imgs/blogs/narratives-and-sector-rotation-onchain-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/narratives-and-sector-rotation-onchain-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/narratives-and-sector-rotation-onchain-8.png": {
+    "width": 1514,
+    "height": 697
   },
   "/imgs/blogs/object-detection-end-to-end-1.png": {
     "width": 1792,
@@ -15166,6 +15315,35 @@
   "/imgs/blogs/ray-dalio-bridgewater-risk-parity-7.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/reading-defi-tvl-honestly-1.png": {
+    "width": 1792,
+    "height": 1184,
+    "cover": true
+  },
+  "/imgs/blogs/reading-defi-tvl-honestly-2.png": {
+    "width": 1792,
+    "height": 778
+  },
+  "/imgs/blogs/reading-defi-tvl-honestly-3.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/reading-defi-tvl-honestly-4.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/reading-defi-tvl-honestly-5.png": {
+    "width": 1642,
+    "height": 914
+  },
+  "/imgs/blogs/reading-defi-tvl-honestly-6.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/reading-defi-tvl-honestly-7.png": {
+    "width": 1792,
+    "height": 1227
   },
   "/imgs/blogs/reading-dex-liquidity-and-pools-1.png": {
     "width": 1792,
