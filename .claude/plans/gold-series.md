@@ -99,7 +99,7 @@ G4 `a-gold-playbook-reading-the-macro-signals-and-building-a-position` — The s
 - [x] Wave 1 — Track A (6) — Foundations — SHIPPED to main 2026-06-16 (commit 0d8ab12)
 - [x] Wave 2 — Track B (7) — Drivers — SHIPPED to main 2026-06-16
 - [x] Wave 3 — Track C (6) — Geopolitics & politics — SHIPPED to main 2026-06-16
-- [ ] Wave 4 — Track D (6) — Cycles & history
+- [x] Wave 4 — Track D (6) — Cycles & history — SHIPPED to main 2026-06-16
 - [ ] Wave 5 — Track E (6) — Owning & trading
 - [ ] Wave 6 — Track F (7) — Vietnam gold market
 - [ ] Wave 7 — Track G (4) — Insight & playbook
