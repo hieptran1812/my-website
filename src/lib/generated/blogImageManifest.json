@@ -1438,6 +1438,64 @@
     "width": 1792,
     "height": 725
   },
+  "/imgs/blogs/building-a-dcf-part-1-forecasting-1.png": {
+    "width": 1792,
+    "height": 1297,
+    "cover": true
+  },
+  "/imgs/blogs/building-a-dcf-part-1-forecasting-2.png": {
+    "width": 1792,
+    "height": 1063
+  },
+  "/imgs/blogs/building-a-dcf-part-1-forecasting-3.png": {
+    "width": 1792,
+    "height": 1037
+  },
+  "/imgs/blogs/building-a-dcf-part-1-forecasting-4.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/building-a-dcf-part-1-forecasting-5.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/building-a-dcf-part-1-forecasting-6.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/building-a-dcf-part-1-forecasting-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/building-a-dcf-part-2-cost-of-capital-wacc-capm-1.png": {
+    "width": 1792,
+    "height": 1125,
+    "cover": true
+  },
+  "/imgs/blogs/building-a-dcf-part-2-cost-of-capital-wacc-capm-2.png": {
+    "width": 1792,
+    "height": 1220
+  },
+  "/imgs/blogs/building-a-dcf-part-2-cost-of-capital-wacc-capm-3.png": {
+    "width": 1792,
+    "height": 1192
+  },
+  "/imgs/blogs/building-a-dcf-part-2-cost-of-capital-wacc-capm-4.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/building-a-dcf-part-2-cost-of-capital-wacc-capm-5.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/building-a-dcf-part-2-cost-of-capital-wacc-capm-6.png": {
+    "width": 1792,
+    "height": 1190
+  },
+  "/imgs/blogs/building-a-dcf-part-2-cost-of-capital-wacc-capm-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
   "/imgs/blogs/building-a-macro-thesis-from-data-to-a-trade-1.png": {
     "width": 1792,
     "height": 1211,
@@ -4870,6 +4928,35 @@
     "width": 1792,
     "height": 1195
   },
+  "/imgs/blogs/event-volatility-implied-vs-realized-and-the-vol-crush-1.png": {
+    "width": 1792,
+    "height": 997,
+    "cover": true
+  },
+  "/imgs/blogs/event-volatility-implied-vs-realized-and-the-vol-crush-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/event-volatility-implied-vs-realized-and-the-vol-crush-3.png": {
+    "width": 1792,
+    "height": 1028
+  },
+  "/imgs/blogs/event-volatility-implied-vs-realized-and-the-vol-crush-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/event-volatility-implied-vs-realized-and-the-vol-crush-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/event-volatility-implied-vs-realized-and-the-vol-crush-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/event-volatility-implied-vs-realized-and-the-vol-crush-7.png": {
+    "width": 1792,
+    "height": 746
+  },
   "/imgs/blogs/execution-algorithms-vwap-twap-pov-quant-research-1.png": {
     "width": 1792,
     "height": 1278
@@ -5571,6 +5658,35 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/free-cash-flow-fcff-vs-fcfe-1.png": {
+    "width": 1792,
+    "height": 1241,
+    "cover": true
+  },
+  "/imgs/blogs/free-cash-flow-fcff-vs-fcfe-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/free-cash-flow-fcff-vs-fcfe-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/free-cash-flow-fcff-vs-fcfe-4.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/free-cash-flow-fcff-vs-fcfe-5.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/free-cash-flow-fcff-vs-fcfe-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/free-cash-flow-fcff-vs-fcfe-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
   "/imgs/blogs/from-discretionary-to-systematic-1.png": {
     "width": 1792,
     "height": 1063,
@@ -6207,6 +6323,35 @@
   "/imgs/blogs/how-credit-creates-money-lending-channel-cycles-7.png": {
     "width": 1792,
     "height": 827
+  },
+  "/imgs/blogs/how-crypto-reacts-to-macro-news-1.png": {
+    "width": 1792,
+    "height": 696,
+    "cover": true
+  },
+  "/imgs/blogs/how-crypto-reacts-to-macro-news-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-crypto-reacts-to-macro-news-3.png": {
+    "width": 1792,
+    "height": 793
+  },
+  "/imgs/blogs/how-crypto-reacts-to-macro-news-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-crypto-reacts-to-macro-news-5.png": {
+    "width": 1792,
+    "height": 789
+  },
+  "/imgs/blogs/how-crypto-reacts-to-macro-news-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-crypto-reacts-to-macro-news-7.png": {
+    "width": 1792,
+    "height": 809
   },
   "/imgs/blogs/how-gold-is-priced-spot-the-london-fix-futures-and-the-troy-ounce-1.png": {
     "width": 1792,
@@ -8099,6 +8244,35 @@
   "/imgs/blogs/linear-representations-in-language-models-can-change-dramatically-over-a-conversation-20260203134912.png": {
     "width": 937,
     "height": 788
+  },
+  "/imgs/blogs/liquidity-and-gaps-around-news-1.png": {
+    "width": 1792,
+    "height": 1233,
+    "cover": true
+  },
+  "/imgs/blogs/liquidity-and-gaps-around-news-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/liquidity-and-gaps-around-news-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/liquidity-and-gaps-around-news-4.png": {
+    "width": 1792,
+    "height": 1114
+  },
+  "/imgs/blogs/liquidity-and-gaps-around-news-5.png": {
+    "width": 1792,
+    "height": 1136
+  },
+  "/imgs/blogs/liquidity-and-gaps-around-news-6.png": {
+    "width": 1614,
+    "height": 914
+  },
+  "/imgs/blogs/liquidity-and-gaps-around-news-7.png": {
+    "width": 1792,
+    "height": 807
   },
   "/imgs/blogs/liquidity-and-solvency-can-the-company-survive-1.png": {
     "width": 1792,
@@ -10262,6 +10436,35 @@
   "/imgs/blogs/position-sizing-and-kelly-criterion-8.png": {
     "width": 1792,
     "height": 1196
+  },
+  "/imgs/blogs/positioning-and-the-pain-trade-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/positioning-and-the-pain-trade-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/positioning-and-the-pain-trade-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/positioning-and-the-pain-trade-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/positioning-and-the-pain-trade-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/positioning-and-the-pain-trade-6.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/positioning-and-the-pain-trade-7.png": {
+    "width": 1792,
+    "height": 816
   },
   "/imgs/blogs/precision-scaling-laws-1.png": {
     "width": 1792,
@@ -13640,6 +13843,35 @@
     "width": 1792,
     "height": 1266
   },
+  "/imgs/blogs/the-expected-move-pricing-event-risk-with-options-1.png": {
+    "width": 1792,
+    "height": 1116,
+    "cover": true
+  },
+  "/imgs/blogs/the-expected-move-pricing-event-risk-with-options-2.png": {
+    "width": 1792,
+    "height": 1118
+  },
+  "/imgs/blogs/the-expected-move-pricing-event-risk-with-options-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-expected-move-pricing-event-risk-with-options-4.png": {
+    "width": 1792,
+    "height": 956
+  },
+  "/imgs/blogs/the-expected-move-pricing-event-risk-with-options-5.png": {
+    "width": 1602,
+    "height": 916
+  },
+  "/imgs/blogs/the-expected-move-pricing-event-risk-with-options-6.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/the-expected-move-pricing-event-risk-with-options-7.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/the-four-macro-dials-rates-credit-fx-commodities-1.png": {
     "width": 1672,
     "height": 1445,
@@ -13943,6 +14175,35 @@
   "/imgs/blogs/three-arrows-capital-and-crypto-lender-contagion-7.png": {
     "width": 1792,
     "height": 787
+  },
+  "/imgs/blogs/time-value-of-money-discounting-for-investors-1.png": {
+    "width": 1792,
+    "height": 969,
+    "cover": true
+  },
+  "/imgs/blogs/time-value-of-money-discounting-for-investors-2.png": {
+    "width": 1792,
+    "height": 1080
+  },
+  "/imgs/blogs/time-value-of-money-discounting-for-investors-3.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/time-value-of-money-discounting-for-investors-4.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/time-value-of-money-discounting-for-investors-5.png": {
+    "width": 1792,
+    "height": 1111
+  },
+  "/imgs/blogs/time-value-of-money-discounting-for-investors-6.png": {
+    "width": 1792,
+    "height": 1028
+  },
+  "/imgs/blogs/time-value-of-money-discounting-for-investors-7.png": {
+    "width": 1792,
+    "height": 1241
   },
   "/imgs/blogs/tokenspeed-agentic-inference-engine-1.png": {
     "width": 1792,
@@ -14494,6 +14755,35 @@
   "/imgs/blogs/turboquant-kv-cache-quantization-deep-dive-9.png": {
     "width": 1792,
     "height": 1359
+  },
+  "/imgs/blogs/two-pillars-of-valuation-intrinsic-vs-relative-1.png": {
+    "width": 1792,
+    "height": 1147,
+    "cover": true
+  },
+  "/imgs/blogs/two-pillars-of-valuation-intrinsic-vs-relative-2.png": {
+    "width": 1792,
+    "height": 1023
+  },
+  "/imgs/blogs/two-pillars-of-valuation-intrinsic-vs-relative-3.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/two-pillars-of-valuation-intrinsic-vs-relative-4.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/two-pillars-of-valuation-intrinsic-vs-relative-5.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/two-pillars-of-valuation-intrinsic-vs-relative-6.png": {
+    "width": 1792,
+    "height": 1109
+  },
+  "/imgs/blogs/two-pillars-of-valuation-intrinsic-vs-relative-7.png": {
+    "width": 1792,
+    "height": 1044
   },
   "/imgs/blogs/unveiling-concept-attribution-in-diffusion-models-20251208174653.png": {
     "width": 1024,
