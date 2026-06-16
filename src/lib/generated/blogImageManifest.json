@@ -558,6 +558,35 @@
     "width": 1792,
     "height": 1333
   },
+  "/imgs/blogs/anomaly-detection-building-the-alerts-1.png": {
+    "width": 1792,
+    "height": 778,
+    "cover": true
+  },
+  "/imgs/blogs/anomaly-detection-building-the-alerts-2.png": {
+    "width": 1792,
+    "height": 1339
+  },
+  "/imgs/blogs/anomaly-detection-building-the-alerts-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/anomaly-detection-building-the-alerts-4.png": {
+    "width": 1792,
+    "height": 886
+  },
+  "/imgs/blogs/anomaly-detection-building-the-alerts-5.png": {
+    "width": 1792,
+    "height": 820
+  },
+  "/imgs/blogs/anomaly-detection-building-the-alerts-6.png": {
+    "width": 1792,
+    "height": 1297
+  },
+  "/imgs/blogs/anomaly-detection-building-the-alerts-7.png": {
+    "width": 1792,
+    "height": 1053
+  },
   "/imgs/blogs/any-order-flexible-length-masked-diffusion-20260315213706.png": {
     "width": 1498,
     "height": 612,
@@ -5081,6 +5110,35 @@
     "height": 712,
     "cover": true
   },
+  "/imgs/blogs/detecting-wash-trading-1.png": {
+    "width": 1792,
+    "height": 905,
+    "cover": true
+  },
+  "/imgs/blogs/detecting-wash-trading-2.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/detecting-wash-trading-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/detecting-wash-trading-4.png": {
+    "width": 1664,
+    "height": 914
+  },
+  "/imgs/blogs/detecting-wash-trading-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/detecting-wash-trading-6.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/detecting-wash-trading-7.png": {
+    "width": 1792,
+    "height": 1315
+  },
   "/imgs/blogs/dflash-1.png": {
     "width": 1792,
     "height": 600
@@ -6366,6 +6424,39 @@
     "width": 1792,
     "height": 1026
   },
+  "/imgs/blogs/fake-depth-spoofing-and-oracle-attacks-1.png": {
+    "width": 1792,
+    "height": 1409,
+    "cover": true
+  },
+  "/imgs/blogs/fake-depth-spoofing-and-oracle-attacks-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/fake-depth-spoofing-and-oracle-attacks-3.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/fake-depth-spoofing-and-oracle-attacks-4.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/fake-depth-spoofing-and-oracle-attacks-5.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/fake-depth-spoofing-and-oracle-attacks-6.png": {
+    "width": 1792,
+    "height": 904
+  },
+  "/imgs/blogs/fake-depth-spoofing-and-oracle-attacks-7.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/fake-depth-spoofing-and-oracle-attacks-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/fear-and-the-safe-haven-trade-how-gold-behaves-in-a-crisis-1.png": {
     "width": 1792,
     "height": 1254,
@@ -7545,6 +7636,64 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/gold-etfs-and-the-gld-machine-how-paper-gold-tracks-the-metal-1.png": {
+    "width": 1792,
+    "height": 845,
+    "cover": true
+  },
+  "/imgs/blogs/gold-etfs-and-the-gld-machine-how-paper-gold-tracks-the-metal-2.png": {
+    "width": 1792,
+    "height": 782
+  },
+  "/imgs/blogs/gold-etfs-and-the-gld-machine-how-paper-gold-tracks-the-metal-3.png": {
+    "width": 1792,
+    "height": 905
+  },
+  "/imgs/blogs/gold-etfs-and-the-gld-machine-how-paper-gold-tracks-the-metal-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-etfs-and-the-gld-machine-how-paper-gold-tracks-the-metal-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-etfs-and-the-gld-machine-how-paper-gold-tracks-the-metal-6.png": {
+    "width": 1792,
+    "height": 1339
+  },
+  "/imgs/blogs/gold-etfs-and-the-gld-machine-how-paper-gold-tracks-the-metal-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-futures-comex-contango-backwardation-and-paper-vs-physical-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/gold-futures-comex-contango-backwardation-and-paper-vs-physical-2.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/gold-futures-comex-contango-backwardation-and-paper-vs-physical-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-futures-comex-contango-backwardation-and-paper-vs-physical-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-futures-comex-contango-backwardation-and-paper-vs-physical-5.png": {
+    "width": 1792,
+    "height": 774
+  },
+  "/imgs/blogs/gold-futures-comex-contango-backwardation-and-paper-vs-physical-6.png": {
+    "width": 1792,
+    "height": 1017
+  },
+  "/imgs/blogs/gold-futures-comex-contango-backwardation-and-paper-vs-physical-7.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/gold-in-war-and-collapse-flight-capital-and-the-asset-of-last-resort-1.png": {
     "width": 1792,
     "height": 1108,
@@ -7573,6 +7722,35 @@
   "/imgs/blogs/gold-in-war-and-collapse-flight-capital-and-the-asset-of-last-resort-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/gold-miners-the-leveraged-and-disappointing-bet-on-the-gold-price-1.png": {
+    "width": 1792,
+    "height": 1177,
+    "cover": true
+  },
+  "/imgs/blogs/gold-miners-the-leveraged-and-disappointing-bet-on-the-gold-price-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-miners-the-leveraged-and-disappointing-bet-on-the-gold-price-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-miners-the-leveraged-and-disappointing-bet-on-the-gold-price-4.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/gold-miners-the-leveraged-and-disappointing-bet-on-the-gold-price-5.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/gold-miners-the-leveraged-and-disappointing-bet-on-the-gold-price-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-miners-the-leveraged-and-disappointing-bet-on-the-gold-price-7.png": {
+    "width": 1792,
+    "height": 662
   },
   "/imgs/blogs/gold-money-insurance-or-just-a-rock-1.png": {
     "width": 1792,
@@ -7631,6 +7809,35 @@
   "/imgs/blogs/gold-over-the-long-arc-real-returns-the-dow-gold-ratio-and-gold-oil-7.png": {
     "width": 1792,
     "height": 798
+  },
+  "/imgs/blogs/golds-job-in-a-portfolio-sizing-rebalancing-and-the-permanent-portfolio-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/golds-job-in-a-portfolio-sizing-rebalancing-and-the-permanent-portfolio-2.png": {
+    "width": 1605,
+    "height": 914
+  },
+  "/imgs/blogs/golds-job-in-a-portfolio-sizing-rebalancing-and-the-permanent-portfolio-3.png": {
+    "width": 1615,
+    "height": 914
+  },
+  "/imgs/blogs/golds-job-in-a-portfolio-sizing-rebalancing-and-the-permanent-portfolio-4.png": {
+    "width": 1792,
+    "height": 843
+  },
+  "/imgs/blogs/golds-job-in-a-portfolio-sizing-rebalancing-and-the-permanent-portfolio-5.png": {
+    "width": 1792,
+    "height": 1269
+  },
+  "/imgs/blogs/golds-job-in-a-portfolio-sizing-rebalancing-and-the-permanent-portfolio-6.png": {
+    "width": 1611,
+    "height": 914
+  },
+  "/imgs/blogs/golds-job-in-a-portfolio-sizing-rebalancing-and-the-permanent-portfolio-7.png": {
+    "width": 1792,
+    "height": 1241
   },
   "/imgs/blogs/government-bonds-the-risk-free-anchor-and-duration-1.png": {
     "width": 1792,
@@ -11057,6 +11264,35 @@
     "width": 1792,
     "height": 1212
   },
+  "/imgs/blogs/mev-sandwiches-and-frontrunning-1.png": {
+    "width": 1792,
+    "height": 798,
+    "cover": true
+  },
+  "/imgs/blogs/mev-sandwiches-and-frontrunning-2.png": {
+    "width": 1792,
+    "height": 819
+  },
+  "/imgs/blogs/mev-sandwiches-and-frontrunning-3.png": {
+    "width": 1792,
+    "height": 992
+  },
+  "/imgs/blogs/mev-sandwiches-and-frontrunning-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/mev-sandwiches-and-frontrunning-5.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/mev-sandwiches-and-frontrunning-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/mev-sandwiches-and-frontrunning-7.png": {
+    "width": 1555,
+    "height": 578
+  },
   "/imgs/blogs/mid-cycle-expansion-the-steady-grind-1.png": {
     "width": 1792,
     "height": 955,
@@ -12670,6 +12906,35 @@
     "width": 1792,
     "height": 1347
   },
+  "/imgs/blogs/physical-gold-bars-coins-allocated-vs-unallocated-and-counterparty-risk-1.png": {
+    "width": 1792,
+    "height": 1238,
+    "cover": true
+  },
+  "/imgs/blogs/physical-gold-bars-coins-allocated-vs-unallocated-and-counterparty-risk-2.png": {
+    "width": 1792,
+    "height": 1299
+  },
+  "/imgs/blogs/physical-gold-bars-coins-allocated-vs-unallocated-and-counterparty-risk-3.png": {
+    "width": 1792,
+    "height": 1477
+  },
+  "/imgs/blogs/physical-gold-bars-coins-allocated-vs-unallocated-and-counterparty-risk-4.png": {
+    "width": 1613,
+    "height": 914
+  },
+  "/imgs/blogs/physical-gold-bars-coins-allocated-vs-unallocated-and-counterparty-risk-5.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/physical-gold-bars-coins-allocated-vs-unallocated-and-counterparty-risk-6.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/physical-gold-bars-coins-allocated-vs-unallocated-and-counterparty-risk-7.png": {
+    "width": 1615,
+    "height": 914
+  },
   "/imgs/blogs/pimco-and-the-bond-market-1.png": {
     "width": 1792,
     "height": 1278,
@@ -13216,6 +13481,35 @@
   "/imgs/blogs/pruning-in-llm-04-evolution.png": {
     "width": 1200,
     "height": 729
+  },
+  "/imgs/blogs/pump-and-dump-and-coordinated-buying-1.png": {
+    "width": 1792,
+    "height": 961,
+    "cover": true
+  },
+  "/imgs/blogs/pump-and-dump-and-coordinated-buying-2.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/pump-and-dump-and-coordinated-buying-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/pump-and-dump-and-coordinated-buying-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/pump-and-dump-and-coordinated-buying-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/pump-and-dump-and-coordinated-buying-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/pump-and-dump-and-coordinated-buying-7.png": {
+    "width": 1792,
+    "height": 1247
   },
   "/imgs/blogs/put-call-parity-no-arbitrage-quant-interviews-1.png": {
     "width": 1792,
@@ -14870,6 +15164,39 @@
     "width": 1792,
     "height": 807
   },
+  "/imgs/blogs/rug-pull-and-honeypot-detection-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/rug-pull-and-honeypot-detection-2.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/rug-pull-and-honeypot-detection-3.png": {
+    "width": 1792,
+    "height": 1087
+  },
+  "/imgs/blogs/rug-pull-and-honeypot-detection-4.png": {
+    "width": 1792,
+    "height": 1353
+  },
+  "/imgs/blogs/rug-pull-and-honeypot-detection-5.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/rug-pull-and-honeypot-detection-6.png": {
+    "width": 1792,
+    "height": 1136
+  },
+  "/imgs/blogs/rug-pull-and-honeypot-detection-7.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/rug-pull-and-honeypot-detection-8.png": {
+    "width": 1673,
+    "height": 559
+  },
   "/imgs/blogs/safety-alignment-should-be-made-more-than-just-a-few-tokens-deep-20250924111337.png": {
     "width": 1314,
     "height": 650
@@ -15480,6 +15807,35 @@
   "/imgs/blogs/short-rate-models-vasicek-hull-white-9.png": {
     "width": 1792,
     "height": 872
+  },
+  "/imgs/blogs/silver-platinum-and-the-gold-silver-ratio-the-rest-of-the-precious-complex-1.png": {
+    "width": 1792,
+    "height": 1224,
+    "cover": true
+  },
+  "/imgs/blogs/silver-platinum-and-the-gold-silver-ratio-the-rest-of-the-precious-complex-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/silver-platinum-and-the-gold-silver-ratio-the-rest-of-the-precious-complex-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/silver-platinum-and-the-gold-silver-ratio-the-rest-of-the-precious-complex-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/silver-platinum-and-the-gold-silver-ratio-the-rest-of-the-precious-complex-5.png": {
+    "width": 1792,
+    "height": 1404
+  },
+  "/imgs/blogs/silver-platinum-and-the-gold-silver-ratio-the-rest-of-the-precious-complex-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/silver-platinum-and-the-gold-silver-ratio-the-rest-of-the-precious-complex-7.png": {
+    "width": 1792,
+    "height": 938
   },
   "/imgs/blogs/sizing-by-sector-beta-how-much-to-bet-1.png": {
     "width": 1792,
