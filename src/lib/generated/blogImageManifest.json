@@ -86,6 +86,39 @@
     "width": 1792,
     "height": 1216
   },
+  "/imgs/blogs/a-taxonomy-of-model-compression-1.png": {
+    "width": 1792,
+    "height": 1127,
+    "cover": true
+  },
+  "/imgs/blogs/a-taxonomy-of-model-compression-2.png": {
+    "width": 1792,
+    "height": 1327
+  },
+  "/imgs/blogs/a-taxonomy-of-model-compression-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/a-taxonomy-of-model-compression-4.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/a-taxonomy-of-model-compression-5.png": {
+    "width": 1792,
+    "height": 1339
+  },
+  "/imgs/blogs/a-taxonomy-of-model-compression-6.png": {
+    "width": 1792,
+    "height": 1342
+  },
+  "/imgs/blogs/a-taxonomy-of-model-compression-7.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/a-taxonomy-of-model-compression-8.png": {
+    "width": 1792,
+    "height": 1236
+  },
   "/imgs/blogs/accruals-vs-cash-why-earnings-are-an-opinion-1.png": {
     "width": 1792,
     "height": 987,
@@ -1943,6 +1976,39 @@
   "/imgs/blogs/building-a-sector-rotation-dashboard-vn-index-7.png": {
     "width": 1792,
     "height": 1221
+  },
+  "/imgs/blogs/building-a-token-scorecard-1.png": {
+    "width": 1792,
+    "height": 742,
+    "cover": true
+  },
+  "/imgs/blogs/building-a-token-scorecard-2.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/building-a-token-scorecard-3.png": {
+    "width": 1792,
+    "height": 1286
+  },
+  "/imgs/blogs/building-a-token-scorecard-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/building-a-token-scorecard-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/building-a-token-scorecard-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/building-a-token-scorecard-7.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/building-a-token-scorecard-8.png": {
+    "width": 1517,
+    "height": 559
   },
   "/imgs/blogs/building-an-alpha-signal-quant-research-1.png": {
     "width": 1792,
@@ -5292,6 +5358,35 @@
     "width": 1792,
     "height": 1199
   },
+  "/imgs/blogs/detecting-fake-volume-vs-organic-demand-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/detecting-fake-volume-vs-organic-demand-2.png": {
+    "width": 1792,
+    "height": 896
+  },
+  "/imgs/blogs/detecting-fake-volume-vs-organic-demand-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/detecting-fake-volume-vs-organic-demand-4.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/detecting-fake-volume-vs-organic-demand-5.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/detecting-fake-volume-vs-organic-demand-6.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/detecting-fake-volume-vs-organic-demand-7.png": {
+    "width": 1792,
+    "height": 1285
+  },
   "/imgs/blogs/detecting-wash-trading-1.png": {
     "width": 1792,
     "height": 905,
@@ -5811,6 +5906,35 @@
   "/imgs/blogs/early-cycle-recovery-what-leads-the-rebound-7.png": {
     "width": 1792,
     "height": 1297
+  },
+  "/imgs/blogs/earnings-season-as-a-macro-event-1.png": {
+    "width": 1792,
+    "height": 923,
+    "cover": true
+  },
+  "/imgs/blogs/earnings-season-as-a-macro-event-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/earnings-season-as-a-macro-event-3.png": {
+    "width": 1792,
+    "height": 778
+  },
+  "/imgs/blogs/earnings-season-as-a-macro-event-4.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/earnings-season-as-a-macro-event-5.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/earnings-season-as-a-macro-event-6.png": {
+    "width": 1763,
+    "height": 914
+  },
+  "/imgs/blogs/earnings-season-as-a-macro-event-7.png": {
+    "width": 1792,
+    "height": 976
   },
   "/imgs/blogs/economic-moats-durable-competitive-advantage-1.png": {
     "width": 1792,
@@ -7653,6 +7777,35 @@
     "width": 1792,
     "height": 752
   },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-1.png": {
+    "width": 1792,
+    "height": 1176,
+    "cover": true
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-2.png": {
+    "width": 1603,
+    "height": 914
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-3.png": {
+    "width": 1792,
+    "height": 814
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-4.png": {
+    "width": 1792,
+    "height": 807
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-6.png": {
+    "width": 1792,
+    "height": 1001
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-7.png": {
+    "width": 1792,
+    "height": 1077
+  },
   "/imgs/blogs/girsanov-change-of-measure-math-for-quants-1.png": {
     "width": 1792,
     "height": 1231,
@@ -8421,6 +8574,39 @@
     "width": 1220,
     "height": 740,
     "cover": true
+  },
+  "/imgs/blogs/holder-analysis-for-memecoins-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/holder-analysis-for-memecoins-2.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/holder-analysis-for-memecoins-3.png": {
+    "width": 1792,
+    "height": 963
+  },
+  "/imgs/blogs/holder-analysis-for-memecoins-4.png": {
+    "width": 1792,
+    "height": 957
+  },
+  "/imgs/blogs/holder-analysis-for-memecoins-5.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/holder-analysis-for-memecoins-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/holder-analysis-for-memecoins-7.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/holder-analysis-for-memecoins-8.png": {
+    "width": 1792,
+    "height": 1211
   },
   "/imgs/blogs/how-2026-transformed-crypto-vcs-into-architects-of-digital-finance-20251221100944.png": {
     "width": 1792,
@@ -9738,6 +9924,35 @@
   "/imgs/blogs/investment-grade-vs-high-yield-the-great-divide-7.png": {
     "width": 1792,
     "height": 1322
+  },
+  "/imgs/blogs/ism-pmi-the-business-surveys-that-lead-1.png": {
+    "width": 1792,
+    "height": 626,
+    "cover": true
+  },
+  "/imgs/blogs/ism-pmi-the-business-surveys-that-lead-2.png": {
+    "width": 1609,
+    "height": 914
+  },
+  "/imgs/blogs/ism-pmi-the-business-surveys-that-lead-3.png": {
+    "width": 1792,
+    "height": 990
+  },
+  "/imgs/blogs/ism-pmi-the-business-surveys-that-lead-4.png": {
+    "width": 1792,
+    "height": 884
+  },
+  "/imgs/blogs/ism-pmi-the-business-surveys-that-lead-5.png": {
+    "width": 1792,
+    "height": 912
+  },
+  "/imgs/blogs/ism-pmi-the-business-surveys-that-lead-6.png": {
+    "width": 1792,
+    "height": 794
+  },
+  "/imgs/blogs/ism-pmi-the-business-surveys-that-lead-7.png": {
+    "width": 1792,
+    "height": 827
   },
   "/imgs/blogs/ito-integral-itos-lemma-math-for-quants-1.png": {
     "width": 1792,
@@ -12823,6 +13038,68 @@
     "width": 1792,
     "height": 1136
   },
+  "/imgs/blogs/onchain-due-diligence-checklist-1.png": {
+    "width": 1792,
+    "height": 1117,
+    "cover": true
+  },
+  "/imgs/blogs/onchain-due-diligence-checklist-2.png": {
+    "width": 1792,
+    "height": 1353
+  },
+  "/imgs/blogs/onchain-due-diligence-checklist-3.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/onchain-due-diligence-checklist-4.png": {
+    "width": 1792,
+    "height": 1370
+  },
+  "/imgs/blogs/onchain-due-diligence-checklist-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/onchain-due-diligence-checklist-6.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/onchain-due-diligence-checklist-7.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/onchain-due-diligence-checklist-8.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/onchain-fundamentals-fees-revenue-and-tvl-1.png": {
+    "width": 1792,
+    "height": 896,
+    "cover": true
+  },
+  "/imgs/blogs/onchain-fundamentals-fees-revenue-and-tvl-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/onchain-fundamentals-fees-revenue-and-tvl-3.png": {
+    "width": 1675,
+    "height": 914
+  },
+  "/imgs/blogs/onchain-fundamentals-fees-revenue-and-tvl-4.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/onchain-fundamentals-fees-revenue-and-tvl-5.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/onchain-fundamentals-fees-revenue-and-tvl-6.png": {
+    "width": 1622,
+    "height": 914
+  },
+  "/imgs/blogs/onchain-fundamentals-fees-revenue-and-tvl-7.png": {
+    "width": 1792,
+    "height": 1208
+  },
   "/imgs/blogs/one-token-to-fool-llm-as-a-judge-20251024114249.png": {
     "width": 1600,
     "height": 650,
@@ -14628,6 +14905,34 @@
   "/imgs/blogs/ray-dalio-bridgewater-risk-parity-7.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/reading-dex-liquidity-and-pools-1.png": {
+    "width": 1792,
+    "height": 1416
+  },
+  "/imgs/blogs/reading-dex-liquidity-and-pools-2.png": {
+    "width": 1334,
+    "height": 598
+  },
+  "/imgs/blogs/reading-dex-liquidity-and-pools-3.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/reading-dex-liquidity-and-pools-4.png": {
+    "width": 1792,
+    "height": 1302
+  },
+  "/imgs/blogs/reading-dex-liquidity-and-pools-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/reading-dex-liquidity-and-pools-6.png": {
+    "width": 1792,
+    "height": 1585
+  },
+  "/imgs/blogs/reading-dex-liquidity-and-pools-7.png": {
+    "width": 1792,
+    "height": 1318
   },
   "/imgs/blogs/reading-management-incentives-and-skin-in-the-game-1.png": {
     "width": 1792,
@@ -17969,6 +18274,39 @@
     "width": 1792,
     "height": 880
   },
+  "/imgs/blogs/the-edge-hardware-landscape-1.png": {
+    "width": 1792,
+    "height": 1055,
+    "cover": true
+  },
+  "/imgs/blogs/the-edge-hardware-landscape-2.png": {
+    "width": 1792,
+    "height": 1137
+  },
+  "/imgs/blogs/the-edge-hardware-landscape-3.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-edge-hardware-landscape-4.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/the-edge-hardware-landscape-5.png": {
+    "width": 1792,
+    "height": 852
+  },
+  "/imgs/blogs/the-edge-hardware-landscape-6.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/the-edge-hardware-landscape-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/the-edge-hardware-landscape-8.png": {
+    "width": 1792,
+    "height": 1187
+  },
   "/imgs/blogs/the-expected-move-pricing-event-risk-with-options-1.png": {
     "width": 1792,
     "height": 1116,
@@ -18210,6 +18548,64 @@
     "width": 1792,
     "height": 1162
   },
+  "/imgs/blogs/the-jobs-report-nfp-the-king-of-data-1.png": {
+    "width": 1792,
+    "height": 1075,
+    "cover": true
+  },
+  "/imgs/blogs/the-jobs-report-nfp-the-king-of-data-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-jobs-report-nfp-the-king-of-data-3.png": {
+    "width": 1792,
+    "height": 931
+  },
+  "/imgs/blogs/the-jobs-report-nfp-the-king-of-data-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-jobs-report-nfp-the-king-of-data-5.png": {
+    "width": 1792,
+    "height": 879
+  },
+  "/imgs/blogs/the-jobs-report-nfp-the-king-of-data-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-jobs-report-nfp-the-king-of-data-7.png": {
+    "width": 1792,
+    "height": 1168
+  },
+  "/imgs/blogs/the-labor-mosaic-jolts-adp-claims-1.png": {
+    "width": 1792,
+    "height": 1165,
+    "cover": true
+  },
+  "/imgs/blogs/the-labor-mosaic-jolts-adp-claims-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-labor-mosaic-jolts-adp-claims-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/the-labor-mosaic-jolts-adp-claims-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-labor-mosaic-jolts-adp-claims-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-labor-mosaic-jolts-adp-claims-6.png": {
+    "width": 1792,
+    "height": 1255
+  },
+  "/imgs/blogs/the-labor-mosaic-jolts-adp-claims-7.png": {
+    "width": 1792,
+    "height": 778
+  },
   "/imgs/blogs/the-liquidity-cycle-and-asset-prices-1.png": {
     "width": 1792,
     "height": 990,
@@ -18325,6 +18721,39 @@
   "/imgs/blogs/the-map-of-asset-classes-what-you-can-own-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/the-metrics-that-actually-matter-on-device-1.png": {
+    "width": 1792,
+    "height": 1277,
+    "cover": true
+  },
+  "/imgs/blogs/the-metrics-that-actually-matter-on-device-2.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-metrics-that-actually-matter-on-device-3.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/the-metrics-that-actually-matter-on-device-4.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/the-metrics-that-actually-matter-on-device-5.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/the-metrics-that-actually-matter-on-device-6.png": {
+    "width": 1792,
+    "height": 992
+  },
+  "/imgs/blogs/the-metrics-that-actually-matter-on-device-7.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/the-metrics-that-actually-matter-on-device-8.png": {
+    "width": 1792,
+    "height": 1201
   },
   "/imgs/blogs/the-multipolar-money-order-brics-de-dollarization-and-golds-comeback-1.png": {
     "width": 1792,
@@ -18715,6 +19144,35 @@
   "/imgs/blogs/tips-and-inflation-linked-bonds-protecting-purchasing-power-7.png": {
     "width": 1792,
     "height": 1197
+  },
+  "/imgs/blogs/token-unlocks-vesting-and-emissions-1.png": {
+    "width": 1792,
+    "height": 1259,
+    "cover": true
+  },
+  "/imgs/blogs/token-unlocks-vesting-and-emissions-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/token-unlocks-vesting-and-emissions-3.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/token-unlocks-vesting-and-emissions-4.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/token-unlocks-vesting-and-emissions-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/token-unlocks-vesting-and-emissions-6.png": {
+    "width": 1792,
+    "height": 968
+  },
+  "/imgs/blogs/token-unlocks-vesting-and-emissions-7.png": {
+    "width": 1792,
+    "height": 1227
   },
   "/imgs/blogs/tokens-onchain-transfers-and-approvals-1.png": {
     "width": 1792,
@@ -19113,6 +19571,35 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/trading-the-nfp-release-cross-asset-playbook-1.png": {
+    "width": 1792,
+    "height": 1165,
+    "cover": true
+  },
+  "/imgs/blogs/trading-the-nfp-release-cross-asset-playbook-2.png": {
+    "width": 1603,
+    "height": 914
+  },
+  "/imgs/blogs/trading-the-nfp-release-cross-asset-playbook-3.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/trading-the-nfp-release-cross-asset-playbook-4.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/trading-the-nfp-release-cross-asset-playbook-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/trading-the-nfp-release-cross-asset-playbook-6.png": {
+    "width": 1792,
+    "height": 1948
+  },
+  "/imgs/blogs/trading-the-nfp-release-cross-asset-playbook-7.png": {
+    "width": 1792,
+    "height": 778
+  },
   "/imgs/blogs/training-asr-models-diagram.png": {
     "width": 1260,
     "height": 700,
@@ -19255,6 +19742,35 @@
   "/imgs/blogs/travel-leisure-aviation-sector-vietnam-reopening-trade-7.png": {
     "width": 1792,
     "height": 1208
+  },
+  "/imgs/blogs/treasury-auctions-and-refunding-supply-as-an-event-1.png": {
+    "width": 1792,
+    "height": 786,
+    "cover": true
+  },
+  "/imgs/blogs/treasury-auctions-and-refunding-supply-as-an-event-2.png": {
+    "width": 1614,
+    "height": 925
+  },
+  "/imgs/blogs/treasury-auctions-and-refunding-supply-as-an-event-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/treasury-auctions-and-refunding-supply-as-an-event-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/treasury-auctions-and-refunding-supply-as-an-event-5.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/treasury-auctions-and-refunding-supply-as-an-event-6.png": {
+    "width": 1792,
+    "height": 879
+  },
+  "/imgs/blogs/treasury-auctions-and-refunding-supply-as-an-event-7.png": {
+    "width": 1792,
+    "height": 1091
   },
   "/imgs/blogs/treasury-issuance-bills-coupons-liquidity-drain-1.png": {
     "width": 1792,
@@ -20695,6 +21211,39 @@
   "/imgs/blogs/why-news-moves-markets-the-surprise-framework-7.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/why-optimize-ai-models-for-the-edge-1.png": {
+    "width": 1792,
+    "height": 1218,
+    "cover": true
+  },
+  "/imgs/blogs/why-optimize-ai-models-for-the-edge-2.png": {
+    "width": 1792,
+    "height": 1387
+  },
+  "/imgs/blogs/why-optimize-ai-models-for-the-edge-3.png": {
+    "width": 1792,
+    "height": 1055
+  },
+  "/imgs/blogs/why-optimize-ai-models-for-the-edge-4.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/why-optimize-ai-models-for-the-edge-5.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/why-optimize-ai-models-for-the-edge-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/why-optimize-ai-models-for-the-edge-7.png": {
+    "width": 1792,
+    "height": 991
+  },
+  "/imgs/blogs/why-optimize-ai-models-for-the-edge-8.png": {
+    "width": 1792,
+    "height": 1217
   },
   "/imgs/blogs/why-power-laws-arise-1.png": {
     "width": 1792,
