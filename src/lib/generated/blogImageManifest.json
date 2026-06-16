@@ -86,6 +86,35 @@
     "width": 1792,
     "height": 1216
   },
+  "/imgs/blogs/accruals-vs-cash-why-earnings-are-an-opinion-1.png": {
+    "width": 1792,
+    "height": 987,
+    "cover": true
+  },
+  "/imgs/blogs/accruals-vs-cash-why-earnings-are-an-opinion-2.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/accruals-vs-cash-why-earnings-are-an-opinion-3.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/accruals-vs-cash-why-earnings-are-an-opinion-4.png": {
+    "width": 1792,
+    "height": 1065
+  },
+  "/imgs/blogs/accruals-vs-cash-why-earnings-are-an-opinion-5.png": {
+    "width": 1792,
+    "height": 970
+  },
+  "/imgs/blogs/accruals-vs-cash-why-earnings-are-an-opinion-6.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/accruals-vs-cash-why-earnings-are-an-opinion-7.png": {
+    "width": 1792,
+    "height": 963
+  },
   "/imgs/blogs/action-recognition-architecture-tree.png": {
     "width": 1280,
     "height": 625,
@@ -9823,6 +9852,35 @@
     "width": 1792,
     "height": 1114
   },
+  "/imgs/blogs/profitability-margins-gross-operating-net-1.png": {
+    "width": 1792,
+    "height": 1227,
+    "cover": true
+  },
+  "/imgs/blogs/profitability-margins-gross-operating-net-2.png": {
+    "width": 1792,
+    "height": 1147
+  },
+  "/imgs/blogs/profitability-margins-gross-operating-net-3.png": {
+    "width": 1792,
+    "height": 1147
+  },
+  "/imgs/blogs/profitability-margins-gross-operating-net-4.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/profitability-margins-gross-operating-net-5.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/profitability-margins-gross-operating-net-6.png": {
+    "width": 1792,
+    "height": 1147
+  },
+  "/imgs/blogs/profitability-margins-gross-operating-net-7.png": {
+    "width": 1792,
+    "height": 1213
+  },
   "/imgs/blogs/pruning-in-llm-01-taxonomy.png": {
     "width": 1280,
     "height": 527,
@@ -10482,6 +10540,35 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/reading-the-10k-footnotes-and-mda-1.png": {
+    "width": 1792,
+    "height": 1209,
+    "cover": true
+  },
+  "/imgs/blogs/reading-the-10k-footnotes-and-mda-2.png": {
+    "width": 1792,
+    "height": 637
+  },
+  "/imgs/blogs/reading-the-10k-footnotes-and-mda-3.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/reading-the-10k-footnotes-and-mda-4.png": {
+    "width": 1792,
+    "height": 1029
+  },
+  "/imgs/blogs/reading-the-10k-footnotes-and-mda-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/reading-the-10k-footnotes-and-mda-6.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/reading-the-10k-footnotes-and-mda-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
   "/imgs/blogs/reading-the-regime-in-real-time-the-dashboard-1.png": {
     "width": 1792,
     "height": 1173,
@@ -10818,6 +10905,64 @@
   "/imgs/blogs/reranker-03-training.png": {
     "width": 1792,
     "height": 414
+  },
+  "/imgs/blogs/returns-on-capital-roic-roe-roa-1.png": {
+    "width": 1792,
+    "height": 1267,
+    "cover": true
+  },
+  "/imgs/blogs/returns-on-capital-roic-roe-roa-2.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/returns-on-capital-roic-roe-roa-3.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/returns-on-capital-roic-roe-roa-4.png": {
+    "width": 1792,
+    "height": 1047
+  },
+  "/imgs/blogs/returns-on-capital-roic-roe-roa-5.png": {
+    "width": 1792,
+    "height": 1200
+  },
+  "/imgs/blogs/returns-on-capital-roic-roe-roa-6.png": {
+    "width": 1792,
+    "height": 1052
+  },
+  "/imgs/blogs/returns-on-capital-roic-roe-roa-7.png": {
+    "width": 1792,
+    "height": 1116
+  },
+  "/imgs/blogs/revenue-recognition-and-expense-timing-where-discretion-hides-1.png": {
+    "width": 1792,
+    "height": 1218,
+    "cover": true
+  },
+  "/imgs/blogs/revenue-recognition-and-expense-timing-where-discretion-hides-2.png": {
+    "width": 1792,
+    "height": 1156
+  },
+  "/imgs/blogs/revenue-recognition-and-expense-timing-where-discretion-hides-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/revenue-recognition-and-expense-timing-where-discretion-hides-4.png": {
+    "width": 1792,
+    "height": 855
+  },
+  "/imgs/blogs/revenue-recognition-and-expense-timing-where-discretion-hides-5.png": {
+    "width": 1792,
+    "height": 813
+  },
+  "/imgs/blogs/revenue-recognition-and-expense-timing-where-discretion-hides-6.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/revenue-recognition-and-expense-timing-where-discretion-hides-7.png": {
+    "width": 1792,
+    "height": 810
   },
   "/imgs/blogs/reversal-candlestick-patterns-1.png": {
     "width": 1792,
