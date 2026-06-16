@@ -4119,6 +4119,64 @@
     "width": 1792,
     "height": 1082
   },
+  "/imgs/blogs/cpi-case-studies-the-prints-that-broke-the-tape-1.png": {
+    "width": 1792,
+    "height": 965,
+    "cover": true
+  },
+  "/imgs/blogs/cpi-case-studies-the-prints-that-broke-the-tape-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cpi-case-studies-the-prints-that-broke-the-tape-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cpi-case-studies-the-prints-that-broke-the-tape-4.png": {
+    "width": 1787,
+    "height": 914
+  },
+  "/imgs/blogs/cpi-case-studies-the-prints-that-broke-the-tape-5.png": {
+    "width": 1792,
+    "height": 1032
+  },
+  "/imgs/blogs/cpi-case-studies-the-prints-that-broke-the-tape-6.png": {
+    "width": 1475,
+    "height": 717
+  },
+  "/imgs/blogs/cpi-case-studies-the-prints-that-broke-the-tape-7.png": {
+    "width": 1792,
+    "height": 1167
+  },
+  "/imgs/blogs/cpi-the-report-that-moves-the-world-1.png": {
+    "width": 1792,
+    "height": 1249,
+    "cover": true
+  },
+  "/imgs/blogs/cpi-the-report-that-moves-the-world-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cpi-the-report-that-moves-the-world-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/cpi-the-report-that-moves-the-world-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cpi-the-report-that-moves-the-world-5.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/cpi-the-report-that-moves-the-world-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cpi-the-report-that-moves-the-world-7.png": {
+    "width": 1792,
+    "height": 1173
+  },
   "/imgs/blogs/cpp-for-low-latency-quant-interviews-1.png": {
     "width": 1792,
     "height": 830,
@@ -6850,6 +6908,35 @@
     "width": 1792,
     "height": 1302
   },
+  "/imgs/blogs/from-the-2011-top-to-the-2024-breakout-hangover-then-a-new-regime-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/from-the-2011-top-to-the-2024-breakout-hangover-then-a-new-regime-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/from-the-2011-top-to-the-2024-breakout-hangover-then-a-new-regime-3.png": {
+    "width": 1792,
+    "height": 796
+  },
+  "/imgs/blogs/from-the-2011-top-to-the-2024-breakout-hangover-then-a-new-regime-4.png": {
+    "width": 1668,
+    "height": 914
+  },
+  "/imgs/blogs/from-the-2011-top-to-the-2024-breakout-hangover-then-a-new-regime-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/from-the-2011-top-to-the-2024-breakout-hangover-then-a-new-regime-6.png": {
+    "width": 1792,
+    "height": 957
+  },
+  "/imgs/blogs/from-the-2011-top-to-the-2024-breakout-hangover-then-a-new-regime-7.png": {
+    "width": 1602,
+    "height": 906
+  },
   "/imgs/blogs/from-the-ten-year-yield-to-your-mortgage-the-transmission-of-rates-1.png": {
     "width": 1792,
     "height": 1211,
@@ -7366,6 +7453,35 @@
   "/imgs/blogs/gold-money-insurance-or-just-a-rock-7.png": {
     "width": 1792,
     "height": 1235
+  },
+  "/imgs/blogs/gold-over-the-long-arc-real-returns-the-dow-gold-ratio-and-gold-oil-1.png": {
+    "width": 1596,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/gold-over-the-long-arc-real-returns-the-dow-gold-ratio-and-gold-oil-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-over-the-long-arc-real-returns-the-dow-gold-ratio-and-gold-oil-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-over-the-long-arc-real-returns-the-dow-gold-ratio-and-gold-oil-4.png": {
+    "width": 1592,
+    "height": 914
+  },
+  "/imgs/blogs/gold-over-the-long-arc-real-returns-the-dow-gold-ratio-and-gold-oil-5.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/gold-over-the-long-arc-real-returns-the-dow-gold-ratio-and-gold-oil-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gold-over-the-long-arc-real-returns-the-dow-gold-ratio-and-gold-oil-7.png": {
+    "width": 1792,
+    "height": 798
   },
   "/imgs/blogs/government-bonds-the-risk-free-anchor-and-duration-1.png": {
     "width": 1792,
@@ -8065,7 +8181,7 @@
   },
   "/imgs/blogs/how-real-estate-is-taxed-the-full-map-1.png": {
     "width": 1792,
-    "height": 751,
+    "height": 1211,
     "cover": true
   },
   "/imgs/blogs/how-real-estate-is-taxed-the-full-map-2.png": {
@@ -8091,6 +8207,34 @@
   "/imgs/blogs/how-real-estate-is-taxed-the-full-map-7.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/how-tax-shapes-behavior-speculation-and-hoarding-1.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/how-tax-shapes-behavior-speculation-and-hoarding-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/how-tax-shapes-behavior-speculation-and-hoarding-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/how-tax-shapes-behavior-speculation-and-hoarding-4.png": {
+    "width": 1792,
+    "height": 923
+  },
+  "/imgs/blogs/how-tax-shapes-behavior-speculation-and-hoarding-5.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/how-tax-shapes-behavior-speculation-and-hoarding-6.png": {
+    "width": 1792,
+    "height": 1229
+  },
+  "/imgs/blogs/how-tax-shapes-behavior-speculation-and-hoarding-7.png": {
+    "width": 1792,
+    "height": 1211
   },
   "/imgs/blogs/how-the-fed-sets-interest-rates-1.png": {
     "width": 1792,
@@ -8529,6 +8673,35 @@
   "/imgs/blogs/inflation-and-the-fed-reaction-function-dot-plot-7.png": {
     "width": 1792,
     "height": 1210
+  },
+  "/imgs/blogs/inflation-expectations-breakevens-surveys-and-why-they-matter-1.png": {
+    "width": 1792,
+    "height": 959,
+    "cover": true
+  },
+  "/imgs/blogs/inflation-expectations-breakevens-surveys-and-why-they-matter-2.png": {
+    "width": 1792,
+    "height": 911
+  },
+  "/imgs/blogs/inflation-expectations-breakevens-surveys-and-why-they-matter-3.png": {
+    "width": 1691,
+    "height": 914
+  },
+  "/imgs/blogs/inflation-expectations-breakevens-surveys-and-why-they-matter-4.png": {
+    "width": 1792,
+    "height": 1371
+  },
+  "/imgs/blogs/inflation-expectations-breakevens-surveys-and-why-they-matter-5.png": {
+    "width": 1792,
+    "height": 879
+  },
+  "/imgs/blogs/inflation-expectations-breakevens-surveys-and-why-they-matter-6.png": {
+    "width": 1792,
+    "height": 864
+  },
+  "/imgs/blogs/inflation-expectations-breakevens-surveys-and-why-they-matter-7.png": {
+    "width": 1792,
+    "height": 904
   },
   "/imgs/blogs/information-geometry-math-for-quants-1.png": {
     "width": 1792,
@@ -12202,6 +12375,35 @@
     "width": 1792,
     "height": 725
   },
+  "/imgs/blogs/pce-the-feds-preferred-inflation-gauge-1.png": {
+    "width": 1792,
+    "height": 1038,
+    "cover": true
+  },
+  "/imgs/blogs/pce-the-feds-preferred-inflation-gauge-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/pce-the-feds-preferred-inflation-gauge-3.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/pce-the-feds-preferred-inflation-gauge-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/pce-the-feds-preferred-inflation-gauge-5.png": {
+    "width": 1792,
+    "height": 953
+  },
+  "/imgs/blogs/pce-the-feds-preferred-inflation-gauge-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/pce-the-feds-preferred-inflation-gauge-7.png": {
+    "width": 1792,
+    "height": 1108
+  },
   "/imgs/blogs/pension-funds-largest-pools-of-capital-1.png": {
     "width": 1792,
     "height": 1278,
@@ -12446,6 +12648,35 @@
   "/imgs/blogs/positioning-and-the-pain-trade-7.png": {
     "width": 1792,
     "height": 816
+  },
+  "/imgs/blogs/ppi-the-upstream-signal-and-cpi-read-through-1.png": {
+    "width": 1792,
+    "height": 938,
+    "cover": true
+  },
+  "/imgs/blogs/ppi-the-upstream-signal-and-cpi-read-through-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/ppi-the-upstream-signal-and-cpi-read-through-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/ppi-the-upstream-signal-and-cpi-read-through-4.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/ppi-the-upstream-signal-and-cpi-read-through-5.png": {
+    "width": 1792,
+    "height": 1063
+  },
+  "/imgs/blogs/ppi-the-upstream-signal-and-cpi-read-through-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/ppi-the-upstream-signal-and-cpi-read-through-7.png": {
+    "width": 1792,
+    "height": 1137
   },
   "/imgs/blogs/precedent-transactions-and-the-control-premium-1.png": {
     "width": 1792,
@@ -12760,6 +12991,34 @@
   "/imgs/blogs/property-and-land-holding-taxes-7.png": {
     "width": 1792,
     "height": 1237
+  },
+  "/imgs/blogs/property-tax-around-the-world-singapore-us-china-1.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/property-tax-around-the-world-singapore-us-china-2.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/property-tax-around-the-world-singapore-us-china-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/property-tax-around-the-world-singapore-us-china-4.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/property-tax-around-the-world-singapore-us-china-5.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/property-tax-around-the-world-singapore-us-china-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/property-tax-around-the-world-singapore-us-china-7.png": {
+    "width": 1792,
+    "height": 1210
   },
   "/imgs/blogs/pruning-in-llm-01-taxonomy.png": {
     "width": 1280,
@@ -16255,6 +16514,64 @@
     "width": 1792,
     "height": 1169
   },
+  "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-1.png": {
+    "width": 1792,
+    "height": 784,
+    "cover": true
+  },
+  "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-3.png": {
+    "width": 1792,
+    "height": 817
+  },
+  "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-5.png": {
+    "width": 1792,
+    "height": 990
+  },
+  "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-7.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/the-anatomy-of-a-gold-cycle-the-four-phases-and-what-drives-each-1.png": {
+    "width": 1792,
+    "height": 977,
+    "cover": true
+  },
+  "/imgs/blogs/the-anatomy-of-a-gold-cycle-the-four-phases-and-what-drives-each-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-anatomy-of-a-gold-cycle-the-four-phases-and-what-drives-each-3.png": {
+    "width": 1792,
+    "height": 1360
+  },
+  "/imgs/blogs/the-anatomy-of-a-gold-cycle-the-four-phases-and-what-drives-each-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-anatomy-of-a-gold-cycle-the-four-phases-and-what-drives-each-5.png": {
+    "width": 1792,
+    "height": 1075
+  },
+  "/imgs/blogs/the-anatomy-of-a-gold-cycle-the-four-phases-and-what-drives-each-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-anatomy-of-a-gold-cycle-the-four-phases-and-what-drives-each-7.png": {
+    "width": 1792,
+    "height": 1170
+  },
   "/imgs/blogs/the-apolitical-asset-why-central-banks-trust-gold-over-each-others-money-1.png": {
     "width": 1792,
     "height": 1069,
@@ -16552,6 +16869,35 @@
   "/imgs/blogs/the-credit-cycle-and-property-prices-7.png": {
     "width": 1792,
     "height": 1045
+  },
+  "/imgs/blogs/the-debasement-bull-2001-to-2011-dot-com-gfc-and-qe-1.png": {
+    "width": 1792,
+    "height": 998,
+    "cover": true
+  },
+  "/imgs/blogs/the-debasement-bull-2001-to-2011-dot-com-gfc-and-qe-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-debasement-bull-2001-to-2011-dot-com-gfc-and-qe-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-debasement-bull-2001-to-2011-dot-com-gfc-and-qe-4.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-debasement-bull-2001-to-2011-dot-com-gfc-and-qe-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-debasement-bull-2001-to-2011-dot-com-gfc-and-qe-6.png": {
+    "width": 1792,
+    "height": 947
+  },
+  "/imgs/blogs/the-debasement-bull-2001-to-2011-dot-com-gfc-and-qe-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/the-dollar-cross-asset-gravity-1.png": {
     "width": 1792,
@@ -17059,6 +17405,35 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/the-twenty-year-winter-1980-to-2000-when-gold-did-nothing-1.png": {
+    "width": 1792,
+    "height": 710,
+    "cover": true
+  },
+  "/imgs/blogs/the-twenty-year-winter-1980-to-2000-when-gold-did-nothing-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-twenty-year-winter-1980-to-2000-when-gold-did-nothing-3.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/the-twenty-year-winter-1980-to-2000-when-gold-did-nothing-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-twenty-year-winter-1980-to-2000-when-gold-did-nothing-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-twenty-year-winter-1980-to-2000-when-gold-did-nothing-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-twenty-year-winter-1980-to-2000-when-gold-did-nothing-7.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/the-universal-weight-subspace-hypothesis-20251216112621.png": {
     "width": 962,
     "height": 458,
@@ -17386,6 +17761,35 @@
   "/imgs/blogs/trading-psychology-and-the-execution-gap-8.png": {
     "width": 1792,
     "height": 1347
+  },
+  "/imgs/blogs/trading-the-cpi-release-cross-asset-playbook-1.png": {
+    "width": 1792,
+    "height": 1168,
+    "cover": true
+  },
+  "/imgs/blogs/trading-the-cpi-release-cross-asset-playbook-2.png": {
+    "width": 1660,
+    "height": 914
+  },
+  "/imgs/blogs/trading-the-cpi-release-cross-asset-playbook-3.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/trading-the-cpi-release-cross-asset-playbook-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/trading-the-cpi-release-cross-asset-playbook-5.png": {
+    "width": 1741,
+    "height": 914
+  },
+  "/imgs/blogs/trading-the-cpi-release-cross-asset-playbook-6.png": {
+    "width": 1792,
+    "height": 1980
+  },
+  "/imgs/blogs/trading-the-cpi-release-cross-asset-playbook-7.png": {
+    "width": 1699,
+    "height": 914
   },
   "/imgs/blogs/trading-the-curve-steepeners-flatteners-and-butterflies-1.png": {
     "width": 1792,
@@ -18099,6 +18503,34 @@
   "/imgs/blogs/verl-rlhf-library-deep-dive-4.png": {
     "width": 1792,
     "height": 1052
+  },
+  "/imgs/blogs/vietnam-land-law-2024-and-the-coming-property-tax-1.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/vietnam-land-law-2024-and-the-coming-property-tax-2.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/vietnam-land-law-2024-and-the-coming-property-tax-3.png": {
+    "width": 1792,
+    "height": 958
+  },
+  "/imgs/blogs/vietnam-land-law-2024-and-the-coming-property-tax-4.png": {
+    "width": 1792,
+    "height": 965
+  },
+  "/imgs/blogs/vietnam-land-law-2024-and-the-coming-property-tax-5.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/vietnam-land-law-2024-and-the-coming-property-tax-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/vietnam-land-law-2024-and-the-coming-property-tax-7.png": {
+    "width": 1792,
+    "height": 1045
   },
   "/imgs/blogs/vietnam-monetary-policy-state-bank-dong-credit-ceiling-1.png": {
     "width": 1792,
