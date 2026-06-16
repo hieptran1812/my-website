@@ -4843,6 +4843,39 @@
     "height": 763,
     "cover": true
   },
+  "/imgs/blogs/controlnet-and-structural-control-1.png": {
+    "width": 1792,
+    "height": 830,
+    "cover": true
+  },
+  "/imgs/blogs/controlnet-and-structural-control-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/controlnet-and-structural-control-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/controlnet-and-structural-control-4.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/controlnet-and-structural-control-5.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/controlnet-and-structural-control-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/controlnet-and-structural-control-7.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/controlnet-and-structural-control-8.png": {
+    "width": 1792,
+    "height": 1285
+  },
   "/imgs/blogs/convexity-jensen-math-for-quants-1.png": {
     "width": 1792,
     "height": 1278,
@@ -10995,6 +11028,39 @@
     "width": 1792,
     "height": 1081
   },
+  "/imgs/blogs/image-editing-with-diffusion-1.png": {
+    "width": 1792,
+    "height": 686,
+    "cover": true
+  },
+  "/imgs/blogs/image-editing-with-diffusion-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/image-editing-with-diffusion-3.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/image-editing-with-diffusion-4.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/image-editing-with-diffusion-5.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/image-editing-with-diffusion-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/image-editing-with-diffusion-7.png": {
+    "width": 1792,
+    "height": 720
+  },
+  "/imgs/blogs/image-editing-with-diffusion-8.png": {
+    "width": 1792,
+    "height": 1169
+  },
   "/imgs/blogs/image.png": {
     "width": 1792,
     "height": 741,
@@ -11483,6 +11549,39 @@
     "width": 1792,
     "height": 987
   },
+  "/imgs/blogs/instruction-and-in-context-image-editing-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/instruction-and-in-context-image-editing-2.png": {
+    "width": 1792,
+    "height": 720
+  },
+  "/imgs/blogs/instruction-and-in-context-image-editing-3.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/instruction-and-in-context-image-editing-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/instruction-and-in-context-image-editing-5.png": {
+    "width": 1792,
+    "height": 1295
+  },
+  "/imgs/blogs/instruction-and-in-context-image-editing-6.png": {
+    "width": 1792,
+    "height": 961
+  },
+  "/imgs/blogs/instruction-and-in-context-image-editing-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/instruction-and-in-context-image-editing-8.png": {
+    "width": 1792,
+    "height": 1324
+  },
   "/imgs/blogs/instrumenting-a-training-run-what-to-log-1.png": {
     "width": 1792,
     "height": 1264,
@@ -11660,6 +11759,39 @@
   "/imgs/blogs/investment-grade-vs-high-yield-the-great-divide-7.png": {
     "width": 1792,
     "height": 1322
+  },
+  "/imgs/blogs/ip-adapter-and-reference-conditioning-1.png": {
+    "width": 1792,
+    "height": 824,
+    "cover": true
+  },
+  "/imgs/blogs/ip-adapter-and-reference-conditioning-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/ip-adapter-and-reference-conditioning-3.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/ip-adapter-and-reference-conditioning-4.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/ip-adapter-and-reference-conditioning-5.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/ip-adapter-and-reference-conditioning-6.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/ip-adapter-and-reference-conditioning-7.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/ip-adapter-and-reference-conditioning-8.png": {
+    "width": 1792,
+    "height": 1218
   },
   "/imgs/blogs/is-gold-money-a-commodity-or-a-currency-the-framing-that-decides-everything-1.png": {
     "width": 1792,
@@ -15984,6 +16116,39 @@
   "/imgs/blogs/personal-household-goods-sector-vietnam-brands-pricing-power-7.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/personalization-dreambooth-textual-inversion-lora-1.png": {
+    "width": 1792,
+    "height": 1280,
+    "cover": true
+  },
+  "/imgs/blogs/personalization-dreambooth-textual-inversion-lora-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/personalization-dreambooth-textual-inversion-lora-3.png": {
+    "width": 1792,
+    "height": 758
+  },
+  "/imgs/blogs/personalization-dreambooth-textual-inversion-lora-4.png": {
+    "width": 1792,
+    "height": 697
+  },
+  "/imgs/blogs/personalization-dreambooth-textual-inversion-lora-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/personalization-dreambooth-textual-inversion-lora-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/personalization-dreambooth-textual-inversion-lora-7.png": {
+    "width": 1792,
+    "height": 1307
+  },
+  "/imgs/blogs/personalization-dreambooth-textual-inversion-lora-8.png": {
+    "width": 1792,
+    "height": 1178
   },
   "/imgs/blogs/petrodollar-and-dollar-dominance-1.png": {
     "width": 1792,
@@ -20938,6 +21103,39 @@
   "/imgs/blogs/test-time-compute-scaling-8.png": {
     "width": 1792,
     "height": 1169
+  },
+  "/imgs/blogs/text-encoders-and-prompt-conditioning-1.png": {
+    "width": 1792,
+    "height": 899,
+    "cover": true
+  },
+  "/imgs/blogs/text-encoders-and-prompt-conditioning-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/text-encoders-and-prompt-conditioning-3.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/text-encoders-and-prompt-conditioning-4.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/text-encoders-and-prompt-conditioning-5.png": {
+    "width": 1792,
+    "height": 824
+  },
+  "/imgs/blogs/text-encoders-and-prompt-conditioning-6.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/text-encoders-and-prompt-conditioning-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/text-encoders-and-prompt-conditioning-8.png": {
+    "width": 1792,
+    "height": 988
   },
   "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-1.png": {
     "width": 1792,
