@@ -143,6 +143,35 @@
     "width": 1792,
     "height": 1239
   },
+  "/imgs/blogs/all-weather-and-risk-parity-owning-every-regime-1.png": {
+    "width": 1792,
+    "height": 1157,
+    "cover": true
+  },
+  "/imgs/blogs/all-weather-and-risk-parity-owning-every-regime-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/all-weather-and-risk-parity-owning-every-regime-3.png": {
+    "width": 1721,
+    "height": 914
+  },
+  "/imgs/blogs/all-weather-and-risk-parity-owning-every-regime-4.png": {
+    "width": 1792,
+    "height": 1200
+  },
+  "/imgs/blogs/all-weather-and-risk-parity-owning-every-regime-5.png": {
+    "width": 1684,
+    "height": 914
+  },
+  "/imgs/blogs/all-weather-and-risk-parity-owning-every-regime-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/all-weather-and-risk-parity-owning-every-regime-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/any-order-flexible-length-masked-diffusion-20260315213706.png": {
     "width": 1498,
     "height": 612,
@@ -1089,6 +1118,35 @@
   "/imgs/blogs/brownian-motion-random-walk-math-for-quants-7.png": {
     "width": 1792,
     "height": 1178
+  },
+  "/imgs/blogs/building-a-cross-asset-allocation-and-rebalancing-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/building-a-cross-asset-allocation-and-rebalancing-2.png": {
+    "width": 1287,
+    "height": 1112
+  },
+  "/imgs/blogs/building-a-cross-asset-allocation-and-rebalancing-3.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/building-a-cross-asset-allocation-and-rebalancing-4.png": {
+    "width": 1792,
+    "height": 759
+  },
+  "/imgs/blogs/building-a-cross-asset-allocation-and-rebalancing-5.png": {
+    "width": 1431,
+    "height": 914
+  },
+  "/imgs/blogs/building-a-cross-asset-allocation-and-rebalancing-6.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/building-a-cross-asset-allocation-and-rebalancing-7.png": {
+    "width": 1792,
+    "height": 725
   },
   "/imgs/blogs/building-a-macro-thesis-from-data-to-a-trade-1.png": {
     "width": 1792,
@@ -9608,6 +9666,35 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/reading-the-regime-in-real-time-the-dashboard-1.png": {
+    "width": 1792,
+    "height": 1173,
+    "cover": true
+  },
+  "/imgs/blogs/reading-the-regime-in-real-time-the-dashboard-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/reading-the-regime-in-real-time-the-dashboard-3.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/reading-the-regime-in-real-time-the-dashboard-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/reading-the-regime-in-real-time-the-dashboard-5.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/reading-the-regime-in-real-time-the-dashboard-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/reading-the-regime-in-real-time-the-dashboard-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/reading-the-yield-curve-slope-inversion-recession-1.png": {
     "width": 1792,
     "height": 1116,
@@ -10273,6 +10360,35 @@
   "/imgs/blogs/sdes-gbm-ou-cir-math-for-quants-7.png": {
     "width": 1792,
     "height": 924
+  },
+  "/imgs/blogs/sector-rotation-through-the-cycle-1.png": {
+    "width": 1792,
+    "height": 1122,
+    "cover": true
+  },
+  "/imgs/blogs/sector-rotation-through-the-cycle-2.png": {
+    "width": 1792,
+    "height": 1047
+  },
+  "/imgs/blogs/sector-rotation-through-the-cycle-3.png": {
+    "width": 1599,
+    "height": 914
+  },
+  "/imgs/blogs/sector-rotation-through-the-cycle-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/sector-rotation-through-the-cycle-5.png": {
+    "width": 1729,
+    "height": 914
+  },
+  "/imgs/blogs/sector-rotation-through-the-cycle-6.png": {
+    "width": 1792,
+    "height": 1098
+  },
+  "/imgs/blogs/sector-rotation-through-the-cycle-7.png": {
+    "width": 1792,
+    "height": 1199
   },
   "/imgs/blogs/seed-coder-model-centric-code-data-pipeline-1.png": {
     "width": 1792,
@@ -11730,6 +11846,35 @@
   "/imgs/blogs/the-indicator-trap-8.png": {
     "width": 1792,
     "height": 1162
+  },
+  "/imgs/blogs/the-liquidity-cycle-and-asset-prices-1.png": {
+    "width": 1792,
+    "height": 990,
+    "cover": true
+  },
+  "/imgs/blogs/the-liquidity-cycle-and-asset-prices-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-liquidity-cycle-and-asset-prices-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-liquidity-cycle-and-asset-prices-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-liquidity-cycle-and-asset-prices-5.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/the-liquidity-cycle-and-asset-prices-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-liquidity-cycle-and-asset-prices-7.png": {
+    "width": 1792,
+    "height": 1197
   },
   "/imgs/blogs/the-macro-calendar-cpi-nfp-fomc-pmi-1.png": {
     "width": 1792,
