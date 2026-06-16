@@ -47,7 +47,7 @@ Seven years of zero is the part people forget. It was not an emergency measure t
 
 ### QE — quantitative easing, the balance-sheet expansion
 
-Cutting the policy rate to zero exhausted the Fed's normal tool. So it reached for a new one: **quantitative easing**, or **QE**. The idea is simple even if the name is intimidating. The Fed creates new money (electronically — no printing press required) and uses it to *buy bonds* in the open market, mostly government Treasury bonds and mortgage bonds. (We go deep on the plumbing in [quantitative easing explained](/blog/trading/macro-trading/quantitative-easing-explained-printing-money).)
+Cutting the policy rate to zero exhausted the Fed's normal tool. So it reached for a new one: **quantitative easing**, or **QE**. The idea is simple even if the name is intimidating. The Fed creates new money (electronically — no printing press required) and uses it to *buy bonds* in the open market, mostly government Treasury bonds and mortgage bonds. (We go deep on the plumbing in [quantitative easing explained](/blog/trading/finance/quantitative-easing-explained-printing-money).)
 
 Buying bonds does two things. First, it pushes bond prices up and therefore bond *yields* down — that is how the Fed got long-term interest rates lower even after its policy rate hit zero. Second, it floods the financial system with cash: the sellers of those bonds now hold money instead, and that money goes looking for a return somewhere. The Fed did this in three waves — **QE1** (2008-2010), **QE2** (2010-2011), and the open-ended **QE3** (2012-2014) — and the cumulative effect was to balloon its **balance sheet** (the total value of assets it owns) from about **\$0.9 trillion** before the crisis to about **\$4.5 trillion** by 2015.
 
@@ -312,7 +312,7 @@ So the practical sizing and rules a 2010s-literate allocator carries forward:
 ## Further reading and cross-links
 
 - [The liquidity cycle and asset prices](/blog/trading/cross-asset/the-liquidity-cycle-and-asset-prices) — the engine underneath the everything-bull: how central-bank liquidity floods into and drains out of every asset.
-- [Quantitative easing explained: printing money](/blog/trading/macro-trading/quantitative-easing-explained-printing-money) — the mechanics of QE, the tool that quintupled the Fed's balance sheet and built the tide.
+- [Quantitative easing explained: printing money](/blog/trading/finance/quantitative-easing-explained-printing-money) — the mechanics of QE, the tool that quintupled the Fed's balance sheet and built the tide.
 - [The stock-bond correlation: the engine inside the 60/40](/blog/trading/cross-asset/stock-bond-correlation-the-60-40-engine) — why the dream 60/40 worked in the 2010s and broke in 2022, and how to read which regime you are in.
 - [Real yields: the variable that prices everything](/blog/trading/cross-asset/real-yields-the-variable-that-prices-everything) — why duration and growth won in a falling-rate decade, and why they lost when real yields turned up.
 - [Mid-cycle expansion: the steady grind](/blog/trading/cross-asset/mid-cycle-expansion-the-steady-grind) — the regime the 2010s mostly lived in, and what leads when the cycle is long, slow, and low-inflation.
