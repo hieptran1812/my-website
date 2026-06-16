@@ -413,6 +413,39 @@
     "width": 1792,
     "height": 1003
   },
+  "/imgs/blogs/anatomy-of-a-defi-hack-1.png": {
+    "width": 1792,
+    "height": 1550,
+    "cover": true
+  },
+  "/imgs/blogs/anatomy-of-a-defi-hack-2.png": {
+    "width": 1792,
+    "height": 748
+  },
+  "/imgs/blogs/anatomy-of-a-defi-hack-3.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/anatomy-of-a-defi-hack-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/anatomy-of-a-defi-hack-5.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/anatomy-of-a-defi-hack-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/anatomy-of-a-defi-hack-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/anatomy-of-a-defi-hack-8.png": {
+    "width": 1792,
+    "height": 1279
+  },
   "/imgs/blogs/anatomy-of-a-news-reaction-spike-fade-trend-1.png": {
     "width": 1792,
     "height": 987,
@@ -2685,6 +2718,35 @@
     "width": 1792,
     "height": 1235
   },
+  "/imgs/blogs/case-study-poly-network-and-the-returned-hack-1.png": {
+    "width": 1792,
+    "height": 954,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-poly-network-and-the-returned-hack-2.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/case-study-poly-network-and-the-returned-hack-3.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/case-study-poly-network-and-the-returned-hack-4.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/case-study-poly-network-and-the-returned-hack-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/case-study-poly-network-and-the-returned-hack-6.png": {
+    "width": 1283,
+    "height": 717
+  },
+  "/imgs/blogs/case-study-poly-network-and-the-returned-hack-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
   "/imgs/blogs/case-study-regime-change-killed-a-strategy-1.png": {
     "width": 1792,
     "height": 1148,
@@ -2717,6 +2779,39 @@
   "/imgs/blogs/case-study-regime-change-killed-a-strategy-8.png": {
     "width": 1792,
     "height": 1197
+  },
+  "/imgs/blogs/case-study-the-ronin-bridge-hack-1.png": {
+    "width": 1792,
+    "height": 961,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-the-ronin-bridge-hack-2.png": {
+    "width": 1792,
+    "height": 1064
+  },
+  "/imgs/blogs/case-study-the-ronin-bridge-hack-3.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/case-study-the-ronin-bridge-hack-4.png": {
+    "width": 1792,
+    "height": 742
+  },
+  "/imgs/blogs/case-study-the-ronin-bridge-hack-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-the-ronin-bridge-hack-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-the-ronin-bridge-hack-7.png": {
+    "width": 1792,
+    "height": 1288
+  },
+  "/imgs/blogs/case-study-the-ronin-bridge-hack-8.png": {
+    "width": 1792,
+    "height": 742
   },
   "/imgs/blogs/case-study-tracing-a-real-flow-end-to-end-1.png": {
     "width": 1792,
@@ -5139,6 +5234,35 @@
     "height": 712,
     "cover": true
   },
+  "/imgs/blogs/detecting-an-exploit-in-progress-1.png": {
+    "width": 1792,
+    "height": 742,
+    "cover": true
+  },
+  "/imgs/blogs/detecting-an-exploit-in-progress-2.png": {
+    "width": 1792,
+    "height": 932
+  },
+  "/imgs/blogs/detecting-an-exploit-in-progress-3.png": {
+    "width": 1792,
+    "height": 778
+  },
+  "/imgs/blogs/detecting-an-exploit-in-progress-4.png": {
+    "width": 1792,
+    "height": 778
+  },
+  "/imgs/blogs/detecting-an-exploit-in-progress-5.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/detecting-an-exploit-in-progress-6.png": {
+    "width": 1654,
+    "height": 914
+  },
+  "/imgs/blogs/detecting-an-exploit-in-progress-7.png": {
+    "width": 1792,
+    "height": 1199
+  },
   "/imgs/blogs/detecting-wash-trading-1.png": {
     "width": 1792,
     "height": 905,
@@ -7202,6 +7326,39 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/freezing-recovery-and-chain-analytics-1.png": {
+    "width": 1792,
+    "height": 1369,
+    "cover": true
+  },
+  "/imgs/blogs/freezing-recovery-and-chain-analytics-2.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/freezing-recovery-and-chain-analytics-3.png": {
+    "width": 1792,
+    "height": 1170
+  },
+  "/imgs/blogs/freezing-recovery-and-chain-analytics-4.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/freezing-recovery-and-chain-analytics-5.png": {
+    "width": 1425,
+    "height": 835
+  },
+  "/imgs/blogs/freezing-recovery-and-chain-analytics-6.png": {
+    "width": 1386,
+    "height": 736
+  },
+  "/imgs/blogs/freezing-recovery-and-chain-analytics-7.png": {
+    "width": 1792,
+    "height": 1146
+  },
+  "/imgs/blogs/freezing-recovery-and-chain-analytics-8.png": {
+    "width": 1792,
+    "height": 1257
+  },
   "/imgs/blogs/from-discretionary-to-systematic-1.png": {
     "width": 1792,
     "height": 1063,
@@ -8708,6 +8865,35 @@
   "/imgs/blogs/how-real-estate-is-taxed-the-full-map-7.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/how-stolen-funds-are-laundered-1.png": {
+    "width": 1792,
+    "height": 982,
+    "cover": true
+  },
+  "/imgs/blogs/how-stolen-funds-are-laundered-2.png": {
+    "width": 1792,
+    "height": 829
+  },
+  "/imgs/blogs/how-stolen-funds-are-laundered-3.png": {
+    "width": 1792,
+    "height": 1170
+  },
+  "/imgs/blogs/how-stolen-funds-are-laundered-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-stolen-funds-are-laundered-5.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/how-stolen-funds-are-laundered-6.png": {
+    "width": 1792,
+    "height": 759
+  },
+  "/imgs/blogs/how-stolen-funds-are-laundered-7.png": {
+    "width": 1792,
+    "height": 1227
   },
   "/imgs/blogs/how-tax-shapes-behavior-speculation-and-hoarding-1.png": {
     "width": 1792,
@@ -18587,6 +18773,39 @@
   "/imgs/blogs/tornado-cash-and-sanctioning-code-7.png": {
     "width": 1792,
     "height": 1178
+  },
+  "/imgs/blogs/tracing-stolen-funds-step-by-step-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/tracing-stolen-funds-step-by-step-2.png": {
+    "width": 1792,
+    "height": 1427
+  },
+  "/imgs/blogs/tracing-stolen-funds-step-by-step-3.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/tracing-stolen-funds-step-by-step-4.png": {
+    "width": 1792,
+    "height": 1619
+  },
+  "/imgs/blogs/tracing-stolen-funds-step-by-step-5.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/tracing-stolen-funds-step-by-step-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/tracing-stolen-funds-step-by-step-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/tracing-stolen-funds-step-by-step-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/tracking-funds-vcs-and-market-makers-1.png": {
     "width": 1792,
