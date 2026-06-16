@@ -3664,6 +3664,35 @@
     "width": 1792,
     "height": 1154
   },
+  "/imgs/blogs/commercial-real-estate-office-and-retail-1.png": {
+    "width": 1792,
+    "height": 1199,
+    "cover": true
+  },
+  "/imgs/blogs/commercial-real-estate-office-and-retail-2.png": {
+    "width": 1792,
+    "height": 1003
+  },
+  "/imgs/blogs/commercial-real-estate-office-and-retail-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/commercial-real-estate-office-and-retail-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/commercial-real-estate-office-and-retail-5.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/commercial-real-estate-office-and-retail-6.png": {
+    "width": 1792,
+    "height": 1449
+  },
+  "/imgs/blogs/commercial-real-estate-office-and-retail-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/commodities-as-macro-signals-oil-copper-gold-1.png": {
     "width": 1792,
     "height": 1172,
@@ -9544,6 +9573,35 @@
     "width": 1792,
     "height": 1074
   },
+  "/imgs/blogs/industrial-and-logistics-property-1.png": {
+    "width": 1792,
+    "height": 1267,
+    "cover": true
+  },
+  "/imgs/blogs/industrial-and-logistics-property-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/industrial-and-logistics-property-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/industrial-and-logistics-property-4.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/industrial-and-logistics-property-5.png": {
+    "width": 1792,
+    "height": 1006
+  },
+  "/imgs/blogs/industrial-and-logistics-property-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/industrial-and-logistics-property-7.png": {
+    "width": 1792,
+    "height": 1209
+  },
   "/imgs/blogs/industrial-goods-services-sector-vietnam-ports-logistics-1.png": {
     "width": 1792,
     "height": 702,
@@ -14908,7 +14966,8 @@
   },
   "/imgs/blogs/reading-dex-liquidity-and-pools-1.png": {
     "width": 1792,
-    "height": 1416
+    "height": 1416,
+    "cover": true
   },
   "/imgs/blogs/reading-dex-liquidity-and-pools-2.png": {
     "width": 1334,
@@ -15370,6 +15429,35 @@
     "width": 1792,
     "height": 1079
   },
+  "/imgs/blogs/reits-owning-property-like-a-stock-1.png": {
+    "width": 1792,
+    "height": 1231,
+    "cover": true
+  },
+  "/imgs/blogs/reits-owning-property-like-a-stock-2.png": {
+    "width": 1792,
+    "height": 1013
+  },
+  "/imgs/blogs/reits-owning-property-like-a-stock-3.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/reits-owning-property-like-a-stock-4.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/reits-owning-property-like-a-stock-5.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/reits-owning-property-like-a-stock-6.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/reits-owning-property-like-a-stock-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/relative-strength-reading-which-sector-leads-vn-index-1.png": {
     "width": 1792,
     "height": 1281,
@@ -15473,6 +15561,35 @@
   "/imgs/blogs/reranker-03-training.png": {
     "width": 1792,
     "height": 414
+  },
+  "/imgs/blogs/residential-property-apartments-houses-and-dat-nen-1.png": {
+    "width": 1792,
+    "height": 1324,
+    "cover": true
+  },
+  "/imgs/blogs/residential-property-apartments-houses-and-dat-nen-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/residential-property-apartments-houses-and-dat-nen-3.png": {
+    "width": 1792,
+    "height": 1013
+  },
+  "/imgs/blogs/residential-property-apartments-houses-and-dat-nen-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/residential-property-apartments-houses-and-dat-nen-5.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/residential-property-apartments-houses-and-dat-nen-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/residential-property-apartments-houses-and-dat-nen-7.png": {
+    "width": 1792,
+    "height": 1348
   },
   "/imgs/blogs/retail-sector-vietnam-the-consumption-story-1.png": {
     "width": 1792,
@@ -18274,6 +18391,39 @@
     "width": 1792,
     "height": 880
   },
+  "/imgs/blogs/the-edge-deployment-lifecycle-1.png": {
+    "width": 1792,
+    "height": 962,
+    "cover": true
+  },
+  "/imgs/blogs/the-edge-deployment-lifecycle-2.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/the-edge-deployment-lifecycle-3.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/the-edge-deployment-lifecycle-4.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/the-edge-deployment-lifecycle-5.png": {
+    "width": 1792,
+    "height": 962
+  },
+  "/imgs/blogs/the-edge-deployment-lifecycle-6.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/the-edge-deployment-lifecycle-7.png": {
+    "width": 1792,
+    "height": 1155
+  },
+  "/imgs/blogs/the-edge-deployment-lifecycle-8.png": {
+    "width": 1792,
+    "height": 1227
+  },
   "/imgs/blogs/the-edge-hardware-landscape-1.png": {
     "width": 1792,
     "height": 1055,
@@ -18936,6 +19086,39 @@
   "/imgs/blogs/the-reaction-function-why-the-same-number-moves-differently-7.png": {
     "width": 1792,
     "height": 1279
+  },
+  "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-1.png": {
+    "width": 1792,
+    "height": 1219,
+    "cover": true
+  },
+  "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-2.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-3.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-4.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-5.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-7.png": {
+    "width": 1792,
+    "height": 1265
+  },
+  "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-8.png": {
+    "width": 1792,
+    "height": 991
   },
   "/imgs/blogs/the-supply-side-mine-production-aisc-and-the-myth-of-peak-gold-1.png": {
     "width": 1792,
