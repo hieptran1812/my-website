@@ -1355,6 +1355,97 @@
     "width": 677,
     "height": 1293
   },
+  "/imgs/blogs/case-study-1970s-stagflation-commodities-win-1.png": {
+    "width": 1612,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-1970s-stagflation-commodities-win-2.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/case-study-1970s-stagflation-commodities-win-3.png": {
+    "width": 1602,
+    "height": 921
+  },
+  "/imgs/blogs/case-study-1970s-stagflation-commodities-win-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-1970s-stagflation-commodities-win-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-1970s-stagflation-commodities-win-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/case-study-1970s-stagflation-commodities-win-7.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/case-study-2008-global-financial-crisis-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-2008-global-financial-crisis-2.png": {
+    "width": 1792,
+    "height": 938
+  },
+  "/imgs/blogs/case-study-2008-global-financial-crisis-3.png": {
+    "width": 1792,
+    "height": 958
+  },
+  "/imgs/blogs/case-study-2008-global-financial-crisis-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-2008-global-financial-crisis-5.png": {
+    "width": 1792,
+    "height": 993
+  },
+  "/imgs/blogs/case-study-2008-global-financial-crisis-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-2008-global-financial-crisis-7.png": {
+    "width": 1616,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-2008-global-financial-crisis-8.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/case-study-2010s-qe-everything-bull-1.png": {
+    "width": 1700,
+    "height": 1170,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-2010s-qe-everything-bull-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-2010s-qe-everything-bull-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-2010s-qe-everything-bull-4.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/case-study-2010s-qe-everything-bull-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-2010s-qe-everything-bull-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-2010s-qe-everything-bull-7.png": {
+    "width": 1792,
+    "height": 1438
+  },
   "/imgs/blogs/case-study-crypto-blow-off-top-1.png": {
     "width": 1792,
     "height": 1097,
@@ -1387,6 +1478,35 @@
   "/imgs/blogs/case-study-crypto-blow-off-top-8.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/case-study-dot-com-bust-2000-2002-1.png": {
+    "width": 1792,
+    "height": 1277,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-dot-com-bust-2000-2002-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-dot-com-bust-2000-2002-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-dot-com-bust-2000-2002-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-dot-com-bust-2000-2002-5.png": {
+    "width": 1792,
+    "height": 1120
+  },
+  "/imgs/blogs/case-study-dot-com-bust-2000-2002-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-dot-com-bust-2000-2002-7.png": {
+    "width": 1792,
+    "height": 1279
   },
   "/imgs/blogs/case-study-failed-breakout-stop-hunt-1.png": {
     "width": 1792,
@@ -1486,6 +1606,35 @@
   "/imgs/blogs/case-study-trend-trade-that-worked-8.png": {
     "width": 1792,
     "height": 1335
+  },
+  "/imgs/blogs/case-study-volcker-1980-and-the-bond-bull-1.png": {
+    "width": 1792,
+    "height": 1033,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-volcker-1980-and-the-bond-bull-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-volcker-1980-and-the-bond-bull-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-volcker-1980-and-the-bond-bull-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-volcker-1980-and-the-bond-bull-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-volcker-1980-and-the-bond-bull-6.png": {
+    "width": 1792,
+    "height": 1183
+  },
+  "/imgs/blogs/case-study-volcker-1980-and-the-bond-bull-7.png": {
+    "width": 1792,
+    "height": 1237
   },
   "/imgs/blogs/cash-money-markets-the-underrated-asset-1.png": {
     "width": 1792,
