@@ -1007,6 +1007,39 @@
     "width": 1792,
     "height": 1285
   },
+  "/imgs/blogs/augmentation-gone-wrong-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/augmentation-gone-wrong-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/augmentation-gone-wrong-3.png": {
+    "width": 1792,
+    "height": 1249
+  },
+  "/imgs/blogs/augmentation-gone-wrong-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/augmentation-gone-wrong-5.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/augmentation-gone-wrong-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/augmentation-gone-wrong-7.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/augmentation-gone-wrong-8.png": {
+    "width": 1792,
+    "height": 1183
+  },
   "/imgs/blogs/autocallables-1.png": {
     "width": 1792,
     "height": 888,
@@ -2356,6 +2389,39 @@
   "/imgs/blogs/building-an-onchain-dashboard-7.png": {
     "width": 1792,
     "height": 774
+  },
+  "/imgs/blogs/building-blocks-for-efficient-models-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/building-blocks-for-efficient-models-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/building-blocks-for-efficient-models-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/building-blocks-for-efficient-models-4.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/building-blocks-for-efficient-models-5.png": {
+    "width": 1792,
+    "height": 824
+  },
+  "/imgs/blogs/building-blocks-for-efficient-models-6.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/building-blocks-for-efficient-models-7.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/building-blocks-for-efficient-models-8.png": {
+    "width": 1792,
+    "height": 1184
   },
   "/imgs/blogs/building-one-high-probability-setup-1.png": {
     "width": 1792,
@@ -4013,6 +4079,39 @@
     "width": 1792,
     "height": 955
   },
+  "/imgs/blogs/class-imbalance-and-when-accuracy-lies-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/class-imbalance-and-when-accuracy-lies-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/class-imbalance-and-when-accuracy-lies-3.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/class-imbalance-and-when-accuracy-lies-4.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/class-imbalance-and-when-accuracy-lies-5.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/class-imbalance-and-when-accuracy-lies-6.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/class-imbalance-and-when-accuracy-lies-7.png": {
+    "width": 1792,
+    "height": 888
+  },
+  "/imgs/blogs/class-imbalance-and-when-accuracy-lies-8.png": {
+    "width": 1792,
+    "height": 1199
+  },
   "/imgs/blogs/classic-quant-probability-problems-1.png": {
     "width": 1792,
     "height": 1209,
@@ -5600,6 +5699,39 @@
     "width": 1792,
     "height": 1007
   },
+  "/imgs/blogs/data-leakage-the-silent-killer-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/data-leakage-the-silent-killer-2.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/data-leakage-the-silent-killer-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/data-leakage-the-silent-killer-4.png": {
+    "width": 1792,
+    "height": 1322
+  },
+  "/imgs/blogs/data-leakage-the-silent-killer-5.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/data-leakage-the-silent-killer-6.png": {
+    "width": 1792,
+    "height": 906
+  },
+  "/imgs/blogs/data-leakage-the-silent-killer-7.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/data-leakage-the-silent-killer-8.png": {
+    "width": 1792,
+    "height": 686
+  },
   "/imgs/blogs/data-quality-scaling-laws-1.png": {
     "width": 1792,
     "height": 832,
@@ -6371,6 +6503,39 @@
   "/imgs/blogs/distilling-llms-and-reasoning-8.png": {
     "width": 1792,
     "height": 1196
+  },
+  "/imgs/blogs/distribution-shift-train-vs-the-real-world-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/distribution-shift-train-vs-the-real-world-2.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/distribution-shift-train-vs-the-real-world-3.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/distribution-shift-train-vs-the-real-world-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/distribution-shift-train-vs-the-real-world-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/distribution-shift-train-vs-the-real-world-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/distribution-shift-train-vs-the-real-world-7.png": {
+    "width": 1792,
+    "height": 928
+  },
+  "/imgs/blogs/distribution-shift-train-vs-the-real-world-8.png": {
+    "width": 1792,
+    "height": 1347
   },
   "/imgs/blogs/distributions-cheat-sheet-quant-interviews-1.png": {
     "width": 1792,
@@ -8620,6 +8785,39 @@
   "/imgs/blogs/gamestop-2021-short-squeeze-7.png": {
     "width": 1792,
     "height": 752
+  },
+  "/imgs/blogs/garbage-in-finding-label-noise-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/garbage-in-finding-label-noise-2.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/garbage-in-finding-label-noise-3.png": {
+    "width": 1792,
+    "height": 1350
+  },
+  "/imgs/blogs/garbage-in-finding-label-noise-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/garbage-in-finding-label-noise-5.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/garbage-in-finding-label-noise-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/garbage-in-finding-label-noise-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/garbage-in-finding-label-noise-8.png": {
+    "width": 1792,
+    "height": 1410
   },
   "/imgs/blogs/gdp-retail-sales-and-the-consumer-1.png": {
     "width": 1792,
@@ -12602,6 +12800,39 @@
   "/imgs/blogs/logic-puzzles-deduction-quant-interviews-9.png": {
     "width": 1792,
     "height": 905
+  },
+  "/imgs/blogs/look-at-your-data-before-you-train-1.png": {
+    "width": 1792,
+    "height": 899,
+    "cover": true
+  },
+  "/imgs/blogs/look-at-your-data-before-you-train-2.png": {
+    "width": 1792,
+    "height": 1365
+  },
+  "/imgs/blogs/look-at-your-data-before-you-train-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/look-at-your-data-before-you-train-4.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/look-at-your-data-before-you-train-5.png": {
+    "width": 1792,
+    "height": 732
+  },
+  "/imgs/blogs/look-at-your-data-before-you-train-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/look-at-your-data-before-you-train-7.png": {
+    "width": 1792,
+    "height": 917
+  },
+  "/imgs/blogs/look-at-your-data-before-you-train-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/ltcm-1998-when-genius-failed-1.png": {
     "width": 1792,
@@ -20822,6 +21053,39 @@
   "/imgs/blogs/the-indicator-trap-8.png": {
     "width": 1792,
     "height": 1162
+  },
+  "/imgs/blogs/the-input-pipeline-is-lying-to-you-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/the-input-pipeline-is-lying-to-you-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-input-pipeline-is-lying-to-you-3.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/the-input-pipeline-is-lying-to-you-4.png": {
+    "width": 1792,
+    "height": 1427
+  },
+  "/imgs/blogs/the-input-pipeline-is-lying-to-you-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-input-pipeline-is-lying-to-you-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-input-pipeline-is-lying-to-you-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/the-input-pipeline-is-lying-to-you-8.png": {
+    "width": 1792,
+    "height": 1318
   },
   "/imgs/blogs/the-jobs-report-nfp-the-king-of-data-1.png": {
     "width": 1792,
