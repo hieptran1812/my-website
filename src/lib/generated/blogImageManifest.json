@@ -4062,6 +4062,39 @@
     "width": 1792,
     "height": 1153
   },
+  "/imgs/blogs/classifier-free-guidance-1.png": {
+    "width": 1792,
+    "height": 984,
+    "cover": true
+  },
+  "/imgs/blogs/classifier-free-guidance-2.png": {
+    "width": 1792,
+    "height": 967
+  },
+  "/imgs/blogs/classifier-free-guidance-3.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/classifier-free-guidance-4.png": {
+    "width": 1792,
+    "height": 1060
+  },
+  "/imgs/blogs/classifier-free-guidance-5.png": {
+    "width": 1792,
+    "height": 1228
+  },
+  "/imgs/blogs/classifier-free-guidance-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/classifier-free-guidance-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/classifier-free-guidance-8.png": {
+    "width": 1792,
+    "height": 976
+  },
   "/imgs/blogs/clawd-bot-20260127115538.png": {
     "width": 950,
     "height": 401,
@@ -5600,6 +5633,39 @@
     "width": 1792,
     "height": 963
   },
+  "/imgs/blogs/ddim-and-fast-deterministic-sampling-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/ddim-and-fast-deterministic-sampling-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/ddim-and-fast-deterministic-sampling-3.png": {
+    "width": 1792,
+    "height": 736
+  },
+  "/imgs/blogs/ddim-and-fast-deterministic-sampling-4.png": {
+    "width": 1792,
+    "height": 1182
+  },
+  "/imgs/blogs/ddim-and-fast-deterministic-sampling-5.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/ddim-and-fast-deterministic-sampling-6.png": {
+    "width": 1792,
+    "height": 774
+  },
+  "/imgs/blogs/ddim-and-fast-deterministic-sampling-7.png": {
+    "width": 1792,
+    "height": 731
+  },
+  "/imgs/blogs/ddim-and-fast-deterministic-sampling-8.png": {
+    "width": 1792,
+    "height": 1184
+  },
   "/imgs/blogs/debasement-debt-and-the-fiscal-story-gold-as-an-anti-currency-1.png": {
     "width": 1792,
     "height": 1011,
@@ -6111,6 +6177,39 @@
     "height": 600,
     "cover": true
   },
+  "/imgs/blogs/diffusion-from-first-principles-1.png": {
+    "width": 1792,
+    "height": 702,
+    "cover": true
+  },
+  "/imgs/blogs/diffusion-from-first-principles-2.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/diffusion-from-first-principles-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/diffusion-from-first-principles-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/diffusion-from-first-principles-5.png": {
+    "width": 1792,
+    "height": 664
+  },
+  "/imgs/blogs/diffusion-from-first-principles-6.png": {
+    "width": 1792,
+    "height": 691
+  },
+  "/imgs/blogs/diffusion-from-first-principles-7.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/diffusion-from-first-principles-8.png": {
+    "width": 1792,
+    "height": 1313
+  },
   "/imgs/blogs/diffusion-language-models-architecture-training-finetuning-1.png": {
     "width": 2060,
     "height": 1469,
@@ -6153,6 +6252,39 @@
   "/imgs/blogs/discounting-cash-flows-how-a-bond-is-priced-7.png": {
     "width": 1792,
     "height": 960
+  },
+  "/imgs/blogs/distillation-case-studies-distilbert-to-cnns-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/distillation-case-studies-distilbert-to-cnns-2.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/distillation-case-studies-distilbert-to-cnns-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/distillation-case-studies-distilbert-to-cnns-4.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/distillation-case-studies-distilbert-to-cnns-5.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/distillation-case-studies-distilbert-to-cnns-6.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/distillation-case-studies-distilbert-to-cnns-7.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/distillation-case-studies-distilbert-to-cnns-8.png": {
+    "width": 1792,
+    "height": 1217
   },
   "/imgs/blogs/distillation-in-llm-01-teacher-student.png": {
     "width": 840,
@@ -6206,6 +6338,39 @@
   "/imgs/blogs/distilling-fast-tts-non-verbal-9.png": {
     "width": 1792,
     "height": 1302
+  },
+  "/imgs/blogs/distilling-llms-and-reasoning-1.png": {
+    "width": 1792,
+    "height": 1237,
+    "cover": true
+  },
+  "/imgs/blogs/distilling-llms-and-reasoning-2.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/distilling-llms-and-reasoning-3.png": {
+    "width": 1792,
+    "height": 731
+  },
+  "/imgs/blogs/distilling-llms-and-reasoning-4.png": {
+    "width": 1792,
+    "height": 925
+  },
+  "/imgs/blogs/distilling-llms-and-reasoning-5.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/distilling-llms-and-reasoning-6.png": {
+    "width": 1792,
+    "height": 925
+  },
+  "/imgs/blogs/distilling-llms-and-reasoning-7.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/distilling-llms-and-reasoning-8.png": {
+    "width": 1792,
+    "height": 1196
   },
   "/imgs/blogs/distributions-cheat-sheet-quant-interviews-1.png": {
     "width": 1792,
@@ -11664,6 +11829,39 @@
     "width": 1792,
     "height": 884
   },
+  "/imgs/blogs/knowledge-distillation-fundamentals-1.png": {
+    "width": 1792,
+    "height": 1060,
+    "cover": true
+  },
+  "/imgs/blogs/knowledge-distillation-fundamentals-2.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/knowledge-distillation-fundamentals-3.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/knowledge-distillation-fundamentals-4.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/knowledge-distillation-fundamentals-5.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/knowledge-distillation-fundamentals-6.png": {
+    "width": 1792,
+    "height": 921
+  },
+  "/imgs/blogs/knowledge-distillation-fundamentals-7.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/knowledge-distillation-fundamentals-8.png": {
+    "width": 1792,
+    "height": 1187
+  },
   "/imgs/blogs/kv-cache-01-concept.png": {
     "width": 606,
     "height": 820
@@ -14076,6 +14274,39 @@
   "/imgs/blogs/narratives-and-sector-rotation-onchain-8.png": {
     "width": 1514,
     "height": 697
+  },
+  "/imgs/blogs/noise-schedules-and-the-parameterization-zoo-1.png": {
+    "width": 1792,
+    "height": 675,
+    "cover": true
+  },
+  "/imgs/blogs/noise-schedules-and-the-parameterization-zoo-2.png": {
+    "width": 1792,
+    "height": 1347
+  },
+  "/imgs/blogs/noise-schedules-and-the-parameterization-zoo-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/noise-schedules-and-the-parameterization-zoo-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/noise-schedules-and-the-parameterization-zoo-5.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/noise-schedules-and-the-parameterization-zoo-6.png": {
+    "width": 1792,
+    "height": 1269
+  },
+  "/imgs/blogs/noise-schedules-and-the-parameterization-zoo-7.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/noise-schedules-and-the-parameterization-zoo-8.png": {
+    "width": 1792,
+    "height": 1001
   },
   "/imgs/blogs/normalizing-flows-and-change-of-variables-1.png": {
     "width": 1792,
@@ -17707,6 +17938,39 @@
     "height": 559,
     "cover": true
   },
+  "/imgs/blogs/samplers-deep-dive-1.png": {
+    "width": 1792,
+    "height": 692,
+    "cover": true
+  },
+  "/imgs/blogs/samplers-deep-dive-2.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/samplers-deep-dive-3.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/samplers-deep-dive-4.png": {
+    "width": 1792,
+    "height": 1245
+  },
+  "/imgs/blogs/samplers-deep-dive-5.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/samplers-deep-dive-6.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/samplers-deep-dive-7.png": {
+    "width": 1792,
+    "height": 1196
+  },
+  "/imgs/blogs/samplers-deep-dive-8.png": {
+    "width": 1792,
+    "height": 976
+  },
   "/imgs/blogs/sanctions-reserve-freezes-and-the-2022-turning-point-for-gold-1.png": {
     "width": 1792,
     "height": 813,
@@ -17797,6 +18061,39 @@
   "/imgs/blogs/scaling-laws-predictability-foundations-8.png": {
     "width": 1792,
     "height": 1278
+  },
+  "/imgs/blogs/score-based-models-and-the-sde-view-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/score-based-models-and-the-sde-view-2.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/score-based-models-and-the-sde-view-3.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/score-based-models-and-the-sde-view-4.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/score-based-models-and-the-sde-view-5.png": {
+    "width": 1792,
+    "height": 1268
+  },
+  "/imgs/blogs/score-based-models-and-the-sde-view-6.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/score-based-models-and-the-sde-view-7.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/score-based-models-and-the-sde-view-8.png": {
+    "width": 1792,
+    "height": 1169
   },
   "/imgs/blogs/sdes-gbm-ou-cir-math-for-quants-1.png": {
     "width": 1792,
@@ -20700,6 +20997,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/the-math-of-ddpm-1.png": {
+    "width": 1792,
+    "height": 852,
+    "cover": true
+  },
+  "/imgs/blogs/the-math-of-ddpm-2.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/the-math-of-ddpm-3.png": {
+    "width": 1792,
+    "height": 1228
+  },
+  "/imgs/blogs/the-math-of-ddpm-4.png": {
+    "width": 1792,
+    "height": 1279
+  },
+  "/imgs/blogs/the-math-of-ddpm-5.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/the-math-of-ddpm-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/the-math-of-ddpm-7.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/the-math-of-ddpm-8.png": {
+    "width": 1792,
+    "height": 709
+  },
   "/imgs/blogs/the-mathematics-of-image-distributions-1.png": {
     "width": 1792,
     "height": 1178,
@@ -23071,6 +23401,39 @@
   "/imgs/blogs/what-technical-analysis-really-is-8.png": {
     "width": 1792,
     "height": 1221
+  },
+  "/imgs/blogs/what-to-distill-response-feature-relation-1.png": {
+    "width": 1792,
+    "height": 1178,
+    "cover": true
+  },
+  "/imgs/blogs/what-to-distill-response-feature-relation-2.png": {
+    "width": 1792,
+    "height": 1021
+  },
+  "/imgs/blogs/what-to-distill-response-feature-relation-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/what-to-distill-response-feature-relation-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/what-to-distill-response-feature-relation-5.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/what-to-distill-response-feature-relation-6.png": {
+    "width": 1792,
+    "height": 1307
+  },
+  "/imgs/blogs/what-to-distill-response-feature-relation-7.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/what-to-distill-response-feature-relation-8.png": {
+    "width": 1792,
+    "height": 1217
   },
   "/imgs/blogs/when-correlations-go-to-one-in-a-crisis-1.png": {
     "width": 1792,
