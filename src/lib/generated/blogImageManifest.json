@@ -177,6 +177,39 @@
     "width": 1792,
     "height": 1236
   },
+  "/imgs/blogs/a-taxonomy-of-training-and-finetuning-bugs-1.png": {
+    "width": 1792,
+    "height": 1146,
+    "cover": true
+  },
+  "/imgs/blogs/a-taxonomy-of-training-and-finetuning-bugs-2.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/a-taxonomy-of-training-and-finetuning-bugs-3.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/a-taxonomy-of-training-and-finetuning-bugs-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/a-taxonomy-of-training-and-finetuning-bugs-5.png": {
+    "width": 1792,
+    "height": 902
+  },
+  "/imgs/blogs/a-taxonomy-of-training-and-finetuning-bugs-6.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/a-taxonomy-of-training-and-finetuning-bugs-7.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/a-taxonomy-of-training-and-finetuning-bugs-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/accruals-vs-cash-why-earnings-are-an-opinion-1.png": {
     "width": 1792,
     "height": 987,
@@ -1100,6 +1133,39 @@
   "/imgs/blogs/autoregressive-blank-infilling-glm-9.png": {
     "width": 1792,
     "height": 1278
+  },
+  "/imgs/blogs/autoregressive-image-models-1.png": {
+    "width": 1792,
+    "height": 964,
+    "cover": true
+  },
+  "/imgs/blogs/autoregressive-image-models-2.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/autoregressive-image-models-3.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/autoregressive-image-models-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/autoregressive-image-models-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/autoregressive-image-models-6.png": {
+    "width": 1792,
+    "height": 1365
+  },
+  "/imgs/blogs/autoregressive-image-models-7.png": {
+    "width": 1792,
+    "height": 674
+  },
+  "/imgs/blogs/autoregressive-image-models-8.png": {
+    "width": 1792,
+    "height": 1318
   },
   "/imgs/blogs/axbench-steering-llms-even-simple-baselines-outperform-sparse-autoencoders-20260109153655.png": {
     "width": 1718,
@@ -8419,6 +8485,39 @@
     "width": 1792,
     "height": 1077
   },
+  "/imgs/blogs/generative-adversarial-networks-and-why-they-lost-1.png": {
+    "width": 1792,
+    "height": 691,
+    "cover": true
+  },
+  "/imgs/blogs/generative-adversarial-networks-and-why-they-lost-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/generative-adversarial-networks-and-why-they-lost-3.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/generative-adversarial-networks-and-why-they-lost-4.png": {
+    "width": 1792,
+    "height": 1431
+  },
+  "/imgs/blogs/generative-adversarial-networks-and-why-they-lost-5.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/generative-adversarial-networks-and-why-they-lost-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/generative-adversarial-networks-and-why-they-lost-7.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/generative-adversarial-networks-and-why-they-lost-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/geopolitics-elections-and-unscheduled-shocks-1.png": {
     "width": 1792,
     "height": 971,
@@ -10624,6 +10723,39 @@
   "/imgs/blogs/inside-an-investment-bank-how-they-make-money-7.png": {
     "width": 1792,
     "height": 987
+  },
+  "/imgs/blogs/instrumenting-a-training-run-what-to-log-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/instrumenting-a-training-run-what-to-log-2.png": {
+    "width": 1792,
+    "height": 1346
+  },
+  "/imgs/blogs/instrumenting-a-training-run-what-to-log-3.png": {
+    "width": 1792,
+    "height": 1031
+  },
+  "/imgs/blogs/instrumenting-a-training-run-what-to-log-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/instrumenting-a-training-run-what-to-log-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/instrumenting-a-training-run-what-to-log-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/instrumenting-a-training-run-what-to-log-7.png": {
+    "width": 1792,
+    "height": 947
+  },
+  "/imgs/blogs/instrumenting-a-training-run-what-to-log-8.png": {
+    "width": 1792,
+    "height": 1260
   },
   "/imgs/blogs/insurance-giants-and-systemic-risk-1.png": {
     "width": 1792,
@@ -13879,6 +14011,39 @@
     "width": 1792,
     "height": 953
   },
+  "/imgs/blogs/n-m-sparsity-and-sparse-tensor-cores-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/n-m-sparsity-and-sparse-tensor-cores-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/n-m-sparsity-and-sparse-tensor-cores-3.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/n-m-sparsity-and-sparse-tensor-cores-4.png": {
+    "width": 1792,
+    "height": 1268
+  },
+  "/imgs/blogs/n-m-sparsity-and-sparse-tensor-cores-5.png": {
+    "width": 1792,
+    "height": 968
+  },
+  "/imgs/blogs/n-m-sparsity-and-sparse-tensor-cores-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/n-m-sparsity-and-sparse-tensor-cores-7.png": {
+    "width": 1792,
+    "height": 1334
+  },
+  "/imgs/blogs/n-m-sparsity-and-sparse-tensor-cores-8.png": {
+    "width": 1792,
+    "height": 1227
+  },
   "/imgs/blogs/narratives-and-sector-rotation-onchain-1.png": {
     "width": 1792,
     "height": 1184,
@@ -13911,6 +14076,39 @@
   "/imgs/blogs/narratives-and-sector-rotation-onchain-8.png": {
     "width": 1514,
     "height": 697
+  },
+  "/imgs/blogs/normalizing-flows-and-change-of-variables-1.png": {
+    "width": 1792,
+    "height": 674,
+    "cover": true
+  },
+  "/imgs/blogs/normalizing-flows-and-change-of-variables-2.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/normalizing-flows-and-change-of-variables-3.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/normalizing-flows-and-change-of-variables-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/normalizing-flows-and-change-of-variables-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/normalizing-flows-and-change-of-variables-6.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/normalizing-flows-and-change-of-variables-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/normalizing-flows-and-change-of-variables-8.png": {
+    "width": 1792,
+    "height": 993
   },
   "/imgs/blogs/object-detection-end-to-end-1.png": {
     "width": 1792,
@@ -15286,6 +15484,39 @@
     "width": 1792,
     "height": 1210
   },
+  "/imgs/blogs/pruning-fundamentals-1.png": {
+    "width": 1792,
+    "height": 1341,
+    "cover": true
+  },
+  "/imgs/blogs/pruning-fundamentals-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/pruning-fundamentals-3.png": {
+    "width": 1792,
+    "height": 1350
+  },
+  "/imgs/blogs/pruning-fundamentals-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/pruning-fundamentals-5.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/pruning-fundamentals-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/pruning-fundamentals-7.png": {
+    "width": 1792,
+    "height": 1375
+  },
+  "/imgs/blogs/pruning-fundamentals-8.png": {
+    "width": 1792,
+    "height": 1217
+  },
   "/imgs/blogs/pruning-in-llm-01-taxonomy.png": {
     "width": 1280,
     "height": 527,
@@ -16218,6 +16449,39 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/reading-the-loss-curve-as-a-diagnostic-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/reading-the-loss-curve-as-a-diagnostic-2.png": {
+    "width": 1792,
+    "height": 1339
+  },
+  "/imgs/blogs/reading-the-loss-curve-as-a-diagnostic-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/reading-the-loss-curve-as-a-diagnostic-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/reading-the-loss-curve-as-a-diagnostic-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/reading-the-loss-curve-as-a-diagnostic-6.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/reading-the-loss-curve-as-a-diagnostic-7.png": {
+    "width": 1792,
+    "height": 1316
+  },
+  "/imgs/blogs/reading-the-loss-curve-as-a-diagnostic-8.png": {
+    "width": 1792,
+    "height": 664
+  },
   "/imgs/blogs/reading-the-regime-in-real-time-the-dashboard-1.png": {
     "width": 1792,
     "height": 1173,
@@ -16744,6 +17008,39 @@
   "/imgs/blogs/repeated-sampling-scaling-laws-8.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/reproducibility-and-determinism-in-training-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/reproducibility-and-determinism-in-training-2.png": {
+    "width": 1792,
+    "height": 1379
+  },
+  "/imgs/blogs/reproducibility-and-determinism-in-training-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/reproducibility-and-determinism-in-training-4.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/reproducibility-and-determinism-in-training-5.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/reproducibility-and-determinism-in-training-6.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/reproducibility-and-determinism-in-training-7.png": {
+    "width": 1792,
+    "height": 696
+  },
+  "/imgs/blogs/reproducibility-and-determinism-in-training-8.png": {
+    "width": 1792,
+    "height": 1370
   },
   "/imgs/blogs/reranker-01-role.png": {
     "width": 1300,
@@ -18645,6 +18942,39 @@
     "width": 1792,
     "height": 1178
   },
+  "/imgs/blogs/structured-pruning-that-actually-speeds-things-up-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/structured-pruning-that-actually-speeds-things-up-2.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/structured-pruning-that-actually-speeds-things-up-3.png": {
+    "width": 1792,
+    "height": 1283
+  },
+  "/imgs/blogs/structured-pruning-that-actually-speeds-things-up-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/structured-pruning-that-actually-speeds-things-up-5.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/structured-pruning-that-actually-speeds-things-up-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/structured-pruning-that-actually-speeds-things-up-7.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/structured-pruning-that-actually-speeds-things-up-8.png": {
+    "width": 1792,
+    "height": 1217
+  },
   "/imgs/blogs/sub-8-bit-int4-ternary-and-binary-networks-1.png": {
     "width": 1792,
     "height": 1348,
@@ -20337,6 +20667,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/the-mathematics-of-image-distributions-1.png": {
+    "width": 1792,
+    "height": 1178,
+    "cover": true
+  },
+  "/imgs/blogs/the-mathematics-of-image-distributions-2.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/the-mathematics-of-image-distributions-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/the-mathematics-of-image-distributions-4.png": {
+    "width": 1792,
+    "height": 1344
+  },
+  "/imgs/blogs/the-mathematics-of-image-distributions-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-mathematics-of-image-distributions-6.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/the-mathematics-of-image-distributions-7.png": {
+    "width": 1792,
+    "height": 1365
+  },
+  "/imgs/blogs/the-mathematics-of-image-distributions-8.png": {
+    "width": 1792,
+    "height": 987
+  },
   "/imgs/blogs/the-metrics-that-actually-matter-on-device-1.png": {
     "width": 1792,
     "height": 1277,
@@ -20460,6 +20823,39 @@
   "/imgs/blogs/the-onchain-tooling-landscape-8.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/the-overfit-a-single-batch-test-1.png": {
+    "width": 1792,
+    "height": 1260,
+    "cover": true
+  },
+  "/imgs/blogs/the-overfit-a-single-batch-test-2.png": {
+    "width": 1792,
+    "height": 1125
+  },
+  "/imgs/blogs/the-overfit-a-single-batch-test-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/the-overfit-a-single-batch-test-4.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/the-overfit-a-single-batch-test-5.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/the-overfit-a-single-batch-test-6.png": {
+    "width": 1792,
+    "height": 983
+  },
+  "/imgs/blogs/the-overfit-a-single-batch-test-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/the-overfit-a-single-batch-test-8.png": {
+    "width": 1792,
+    "height": 1183
   },
   "/imgs/blogs/the-perils-of-copy-trading-onchain-1.png": {
     "width": 1792,
@@ -21944,6 +22340,39 @@
     "width": 1792,
     "height": 1277
   },
+  "/imgs/blogs/variational-autoencoders-from-scratch-1.png": {
+    "width": 1792,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/variational-autoencoders-from-scratch-2.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/variational-autoencoders-from-scratch-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/variational-autoencoders-from-scratch-4.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/variational-autoencoders-from-scratch-5.png": {
+    "width": 1792,
+    "height": 1060
+  },
+  "/imgs/blogs/variational-autoencoders-from-scratch-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/variational-autoencoders-from-scratch-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/variational-autoencoders-from-scratch-8.png": {
+    "width": 1792,
+    "height": 992
+  },
   "/imgs/blogs/verl-rlhf-library-deep-dive-1.png": {
     "width": 1792,
     "height": 1005,
@@ -22855,6 +23284,39 @@
     "width": 1040,
     "height": 467
   },
+  "/imgs/blogs/why-generating-images-is-hard-1.png": {
+    "width": 1792,
+    "height": 1163,
+    "cover": true
+  },
+  "/imgs/blogs/why-generating-images-is-hard-2.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/why-generating-images-is-hard-3.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/why-generating-images-is-hard-4.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/why-generating-images-is-hard-5.png": {
+    "width": 1792,
+    "height": 999
+  },
+  "/imgs/blogs/why-generating-images-is-hard-6.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/why-generating-images-is-hard-7.png": {
+    "width": 1792,
+    "height": 1302
+  },
+  "/imgs/blogs/why-generating-images-is-hard-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/why-gold-still-matters-a-5000-year-store-of-value-1.png": {
     "width": 1792,
     "height": 1222,
@@ -23070,6 +23532,39 @@
   "/imgs/blogs/why-the-yield-curve-usually-slopes-up-term-premium-and-expectations-7.png": {
     "width": 1792,
     "height": 1247
+  },
+  "/imgs/blogs/why-your-training-run-is-lying-to-you-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/why-your-training-run-is-lying-to-you-2.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/why-your-training-run-is-lying-to-you-3.png": {
+    "width": 1792,
+    "height": 739
+  },
+  "/imgs/blogs/why-your-training-run-is-lying-to-you-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/why-your-training-run-is-lying-to-you-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/why-your-training-run-is-lying-to-you-6.png": {
+    "width": 1792,
+    "height": 1371
+  },
+  "/imgs/blogs/why-your-training-run-is-lying-to-you-7.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/why-your-training-run-is-lying-to-you-8.png": {
+    "width": 1792,
+    "height": 1338
   },
   "/imgs/blogs/wirecard-the-german-fintech-fraud-1.png": {
     "width": 1792,
