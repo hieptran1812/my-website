@@ -96,8 +96,8 @@ G4 `a-gold-playbook-reading-the-macro-signals-and-building-a-position` — The s
 - Within series: link sibling posts by `/blog/trading/gold/<slug>`.
 
 ## Wave / status tracker
-- [ ] Wave 1 — Track A (6) — Foundations
-- [ ] Wave 2 — Track B (7) — Drivers
+- [x] Wave 1 — Track A (6) — Foundations — SHIPPED to main 2026-06-16 (commit 0d8ab12)
+- [x] Wave 2 — Track B (7) — Drivers — SHIPPED to main 2026-06-16
 - [ ] Wave 3 — Track C (6) — Geopolitics & politics
 - [ ] Wave 4 — Track D (6) — Cycles & history
 - [ ] Wave 5 — Track E (6) — Owning & trading
