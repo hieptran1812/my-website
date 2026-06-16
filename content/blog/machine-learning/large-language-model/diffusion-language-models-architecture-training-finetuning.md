@@ -25,7 +25,7 @@ featured: true
 readTime: 51
 ---
 
-For seven years, "language model" has meant one thing: a stack of causal transformer layers predicting the next token, left to right, one forward pass at a time. The autoregressive (AR) factorization $p(x) = \prod_i p(x_i \mid x_{<i})$ is so dominant that most engineers treat it as synonymous with the problem itself. It is not. It is *one* way to decompose a joint distribution over text, and it carries a structural cost that no amount of kernel engineering removes: generation latency is linear in output length, because token $i+1$ cannot start until token $i$ is committed.
+For seven years, "language model" has meant one thing: a stack of causal transformer layers predicting the next token, left to right, one forward pass at a time. The autoregressive (AR) factorization $p(x) = \prod_i p(x_i \mid x_{\lt i})$ is so dominant that most engineers treat it as synonymous with the problem itself. It is not. It is *one* way to decompose a joint distribution over text, and it carries a structural cost that no amount of kernel engineering removes: generation latency is linear in output length, because token $i+1$ cannot start until token $i$ is committed.
 
 Diffusion language models (DLMs) make a different bet. Instead of factorizing left to right, they learn to **denoise**: corrupt a sequence by masking tokens, then train a bidirectional transformer to recover the originals. At inference, you start from a fully masked sequence and iteratively un-mask it over a *fixed* number of steps — and crucially, every position is predicted in parallel at each step. The output length stops gating the number of forward passes. In 2025 this stopped being a research curiosity: [LLaDA-8B](https://arxiv.org/abs/2502.09992) matched a same-size LLaMA3 baseline trained from scratch, and commercial systems like Mercury and Gemini Diffusion shipped diffusion decoders running at over a thousand tokens per second.
 
@@ -406,7 +406,7 @@ The diff from pretraining is two lines: build an `is_resp` region mask and `& is
 
 ### 7.2 Reinforcement learning: the log-prob problem
 
-RL post-training — the [GRPO](/blog/machine-learning/large-language-model/fine-tuning-llm-with-grpo) family that powers reasoning models — needs one thing from the policy: the **log-probability of a sampled sequence**, so it can push probability toward high-reward completions. For an AR model this is trivial: $\log p(y) = \sum_i \log p(y_i \mid y_{<i})$, computed in one teacher-forced pass. For a diffusion LM it is *intractable*: the model defines $p(y)$ through a sum over all masking orders, and there is no cheap exact sequence log-prob.
+RL post-training — the [GRPO](/blog/machine-learning/large-language-model/fine-tuning-llm-with-grpo) family that powers reasoning models — needs one thing from the policy: the **log-probability of a sampled sequence**, so it can push probability toward high-reward completions. For an AR model this is trivial: $\log p(y) = \sum_i \log p(y_i \mid y_{\lt i})$, computed in one teacher-forced pass. For a diffusion LM it is *intractable*: the model defines $p(y)$ through a sum over all masking orders, and there is no cheap exact sequence log-prob.
 
 ![diffu-GRPO samples completions by diffusion scores them normalizes advantages and updates the policy with a mean-field log-prob estimate](/imgs/blogs/diffusion-language-models-architecture-training-finetuning-10.png)
 
