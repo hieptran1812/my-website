@@ -13013,6 +13013,35 @@
     "width": 1792,
     "height": 1285
   },
+  "/imgs/blogs/implied-vs-realized-volatility-the-trade-at-the-heart-of-options-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/implied-vs-realized-volatility-the-trade-at-the-heart-of-options-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/implied-vs-realized-volatility-the-trade-at-the-heart-of-options-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/implied-vs-realized-volatility-the-trade-at-the-heart-of-options-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/implied-vs-realized-volatility-the-trade-at-the-heart-of-options-5.png": {
+    "width": 1581,
+    "height": 914
+  },
+  "/imgs/blogs/implied-vs-realized-volatility-the-trade-at-the-heart-of-options-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/implied-vs-realized-volatility-the-trade-at-the-heart-of-options-7.png": {
+    "width": 1792,
+    "height": 845
+  },
   "/imgs/blogs/income-affordability-and-the-price-to-income-ratio-1.png": {
     "width": 1792,
     "height": 1344,
@@ -20394,6 +20423,35 @@
     "width": 1792,
     "height": 1218
   },
+  "/imgs/blogs/reading-the-vol-surface-like-a-trader-the-3d-map-of-fear-1.png": {
+    "width": 1503,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/reading-the-vol-surface-like-a-trader-the-3d-map-of-fear-2.png": {
+    "width": 1778,
+    "height": 914
+  },
+  "/imgs/blogs/reading-the-vol-surface-like-a-trader-the-3d-map-of-fear-3.png": {
+    "width": 1792,
+    "height": 951
+  },
+  "/imgs/blogs/reading-the-vol-surface-like-a-trader-the-3d-map-of-fear-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/reading-the-vol-surface-like-a-trader-the-3d-map-of-fear-5.png": {
+    "width": 1792,
+    "height": 960
+  },
+  "/imgs/blogs/reading-the-vol-surface-like-a-trader-the-3d-map-of-fear-6.png": {
+    "width": 1482,
+    "height": 914
+  },
+  "/imgs/blogs/reading-the-vol-surface-like-a-trader-the-3d-map-of-fear-7.png": {
+    "width": 1792,
+    "height": 952
+  },
   "/imgs/blogs/reading-the-yield-curve-slope-inversion-recession-1.png": {
     "width": 1792,
     "height": 1116,
@@ -26218,6 +26276,35 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/the-term-structure-of-volatility-contango-backwardation-and-the-vix-curve-1.png": {
+    "width": 1641,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/the-term-structure-of-volatility-contango-backwardation-and-the-vix-curve-2.png": {
+    "width": 1626,
+    "height": 914
+  },
+  "/imgs/blogs/the-term-structure-of-volatility-contango-backwardation-and-the-vix-curve-3.png": {
+    "width": 1792,
+    "height": 766
+  },
+  "/imgs/blogs/the-term-structure-of-volatility-contango-backwardation-and-the-vix-curve-4.png": {
+    "width": 1673,
+    "height": 914
+  },
+  "/imgs/blogs/the-term-structure-of-volatility-contango-backwardation-and-the-vix-curve-5.png": {
+    "width": 1611,
+    "height": 914
+  },
+  "/imgs/blogs/the-term-structure-of-volatility-contango-backwardation-and-the-vix-curve-6.png": {
+    "width": 1792,
+    "height": 766
+  },
+  "/imgs/blogs/the-term-structure-of-volatility-contango-backwardation-and-the-vix-curve-7.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/the-training-debugging-playbook-1.png": {
     "width": 1792,
     "height": 1146,
@@ -26284,6 +26371,93 @@
     "width": 962,
     "height": 458,
     "cover": true
+  },
+  "/imgs/blogs/the-variance-risk-premium-why-selling-vol-pays-until-it-doesnt-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/the-variance-risk-premium-why-selling-vol-pays-until-it-doesnt-2.png": {
+    "width": 1610,
+    "height": 914
+  },
+  "/imgs/blogs/the-variance-risk-premium-why-selling-vol-pays-until-it-doesnt-3.png": {
+    "width": 1792,
+    "height": 1089
+  },
+  "/imgs/blogs/the-variance-risk-premium-why-selling-vol-pays-until-it-doesnt-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-variance-risk-premium-why-selling-vol-pays-until-it-doesnt-5.png": {
+    "width": 1602,
+    "height": 925
+  },
+  "/imgs/blogs/the-variance-risk-premium-why-selling-vol-pays-until-it-doesnt-6.png": {
+    "width": 1792,
+    "height": 1019
+  },
+  "/imgs/blogs/the-variance-risk-premium-why-selling-vol-pays-until-it-doesnt-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-vix-and-vol-products-vix-vxx-uvxy-and-the-cost-of-the-roll-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/the-vix-and-vol-products-vix-vxx-uvxy-and-the-cost-of-the-roll-2.png": {
+    "width": 1792,
+    "height": 766
+  },
+  "/imgs/blogs/the-vix-and-vol-products-vix-vxx-uvxy-and-the-cost-of-the-roll-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-vix-and-vol-products-vix-vxx-uvxy-and-the-cost-of-the-roll-4.png": {
+    "width": 1600,
+    "height": 914
+  },
+  "/imgs/blogs/the-vix-and-vol-products-vix-vxx-uvxy-and-the-cost-of-the-roll-5.png": {
+    "width": 1792,
+    "height": 1384
+  },
+  "/imgs/blogs/the-vix-and-vol-products-vix-vxx-uvxy-and-the-cost-of-the-roll-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-vix-and-vol-products-vix-vxx-uvxy-and-the-cost-of-the-roll-7.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/the-volatility-smile-and-skew-why-otm-puts-cost-more-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/the-volatility-smile-and-skew-why-otm-puts-cost-more-2.png": {
+    "width": 1605,
+    "height": 925
+  },
+  "/imgs/blogs/the-volatility-smile-and-skew-why-otm-puts-cost-more-3.png": {
+    "width": 1792,
+    "height": 971
+  },
+  "/imgs/blogs/the-volatility-smile-and-skew-why-otm-puts-cost-more-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-volatility-smile-and-skew-why-otm-puts-cost-more-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-volatility-smile-and-skew-why-otm-puts-cost-more-6.png": {
+    "width": 1792,
+    "height": 904
+  },
+  "/imgs/blogs/the-volatility-smile-and-skew-why-otm-puts-cost-more-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/the-wider-ecosystem-and-how-to-choose-your-firm-1.png": {
     "width": 1792,
