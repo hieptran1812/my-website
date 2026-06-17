@@ -3938,6 +3938,39 @@
     "width": 1792,
     "height": 928
   },
+  "/imgs/blogs/categorical-and-feature-bugs-1.png": {
+    "width": 1792,
+    "height": 1199,
+    "cover": true
+  },
+  "/imgs/blogs/categorical-and-feature-bugs-2.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/categorical-and-feature-bugs-3.png": {
+    "width": 1792,
+    "height": 951
+  },
+  "/imgs/blogs/categorical-and-feature-bugs-4.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/categorical-and-feature-bugs-5.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/categorical-and-feature-bugs-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/categorical-and-feature-bugs-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/categorical-and-feature-bugs-8.png": {
+    "width": 1792,
+    "height": 902
+  },
   "/imgs/blogs/central-bank-balance-sheet-net-liquidity-reserves-rrp-tga-1.png": {
     "width": 1792,
     "height": 1192,
@@ -5854,6 +5887,39 @@
   "/imgs/blogs/cross-chain-tracing-bridges-and-the-usdt-rails-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/cross-validation-done-wrong-1.png": {
+    "width": 1792,
+    "height": 1201,
+    "cover": true
+  },
+  "/imgs/blogs/cross-validation-done-wrong-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/cross-validation-done-wrong-3.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/cross-validation-done-wrong-4.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/cross-validation-done-wrong-5.png": {
+    "width": 1792,
+    "height": 904
+  },
+  "/imgs/blogs/cross-validation-done-wrong-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/cross-validation-done-wrong-7.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/cross-validation-done-wrong-8.png": {
+    "width": 1792,
+    "height": 1178
   },
   "/imgs/blogs/crypto-as-a-macro-liquidity-asset-1.png": {
     "width": 1792,
@@ -10636,6 +10702,39 @@
   "/imgs/blogs/gpu-03-decision.png": {
     "width": 813,
     "height": 665
+  },
+  "/imgs/blogs/gradient-boosting-and-imbalance-debugging-1.png": {
+    "width": 1792,
+    "height": 1222,
+    "cover": true
+  },
+  "/imgs/blogs/gradient-boosting-and-imbalance-debugging-2.png": {
+    "width": 1792,
+    "height": 899
+  },
+  "/imgs/blogs/gradient-boosting-and-imbalance-debugging-3.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/gradient-boosting-and-imbalance-debugging-4.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/gradient-boosting-and-imbalance-debugging-5.png": {
+    "width": 1792,
+    "height": 1193
+  },
+  "/imgs/blogs/gradient-boosting-and-imbalance-debugging-6.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/gradient-boosting-and-imbalance-debugging-7.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/gradient-boosting-and-imbalance-debugging-8.png": {
+    "width": 1792,
+    "height": 1199
   },
   "/imgs/blogs/gradients-exploding-and-vanishing-1.png": {
     "width": 1792,
@@ -22039,6 +22138,39 @@
   "/imgs/blogs/tabular-data-done-right-9.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/tabular-data-leakage-1.png": {
+    "width": 1792,
+    "height": 1263,
+    "cover": true
+  },
+  "/imgs/blogs/tabular-data-leakage-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/tabular-data-leakage-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/tabular-data-leakage-4.png": {
+    "width": 1792,
+    "height": 1255
+  },
+  "/imgs/blogs/tabular-data-leakage-5.png": {
+    "width": 1792,
+    "height": 921
+  },
+  "/imgs/blogs/tabular-data-leakage-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/tabular-data-leakage-7.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/tabular-data-leakage-8.png": {
+    "width": 1792,
+    "height": 1211
   },
   "/imgs/blogs/tail-risk-extreme-value-theory-math-for-quants-1.png": {
     "width": 1792,
