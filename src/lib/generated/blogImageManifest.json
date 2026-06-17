@@ -3189,6 +3189,39 @@
     "width": 1792,
     "height": 550
   },
+  "/imgs/blogs/case-study-an-llm-assistant-on-a-laptop-1.png": {
+    "width": 1792,
+    "height": 980,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-an-llm-assistant-on-a-laptop-2.png": {
+    "width": 1792,
+    "height": 1220
+  },
+  "/imgs/blogs/case-study-an-llm-assistant-on-a-laptop-3.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/case-study-an-llm-assistant-on-a-laptop-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/case-study-an-llm-assistant-on-a-laptop-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/case-study-an-llm-assistant-on-a-laptop-6.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/case-study-an-llm-assistant-on-a-laptop-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/case-study-an-llm-assistant-on-a-laptop-8.png": {
+    "width": 1792,
+    "height": 1155
+  },
   "/imgs/blogs/case-study-china-evergrande-property-bust-1.png": {
     "width": 1792,
     "height": 1199,
@@ -3428,6 +3461,39 @@
   "/imgs/blogs/case-study-poly-network-and-the-returned-hack-7.png": {
     "width": 1792,
     "height": 1227
+  },
+  "/imgs/blogs/case-study-real-time-vision-on-device-1.png": {
+    "width": 1792,
+    "height": 913,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-real-time-vision-on-device-2.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/case-study-real-time-vision-on-device-3.png": {
+    "width": 1792,
+    "height": 1296
+  },
+  "/imgs/blogs/case-study-real-time-vision-on-device-4.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/case-study-real-time-vision-on-device-5.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/case-study-real-time-vision-on-device-6.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/case-study-real-time-vision-on-device-7.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/case-study-real-time-vision-on-device-8.png": {
+    "width": 1792,
+    "height": 1155
   },
   "/imgs/blogs/case-study-regime-change-killed-a-strategy-1.png": {
     "width": 1792,
@@ -7406,6 +7472,39 @@
   "/imgs/blogs/economic-moats-durable-competitive-advantage-7.png": {
     "width": 1792,
     "height": 1043
+  },
+  "/imgs/blogs/edge-mlops-1.png": {
+    "width": 1792,
+    "height": 897,
+    "cover": true
+  },
+  "/imgs/blogs/edge-mlops-2.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/edge-mlops-3.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/edge-mlops-4.png": {
+    "width": 1792,
+    "height": 914
+  },
+  "/imgs/blogs/edge-mlops-5.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/edge-mlops-6.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/edge-mlops-7.png": {
+    "width": 1792,
+    "height": 1164
+  },
+  "/imgs/blogs/edge-mlops-8.png": {
+    "width": 1792,
+    "height": 1173
   },
   "/imgs/blogs/eff-inf-01-bottlenecks.png": {
     "width": 1694,
@@ -21925,6 +22024,39 @@
     "width": 1792,
     "height": 1162
   },
+  "/imgs/blogs/the-accuracy-latency-pareto-frontier-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/the-accuracy-latency-pareto-frontier-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/the-accuracy-latency-pareto-frontier-3.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/the-accuracy-latency-pareto-frontier-4.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/the-accuracy-latency-pareto-frontier-5.png": {
+    "width": 1792,
+    "height": 911
+  },
+  "/imgs/blogs/the-accuracy-latency-pareto-frontier-6.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/the-accuracy-latency-pareto-frontier-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/the-accuracy-latency-pareto-frontier-8.png": {
+    "width": 1792,
+    "height": 1184
+  },
   "/imgs/blogs/the-anatomy-of-a-gold-cycle-the-four-phases-and-what-drives-each-1.png": {
     "width": 1792,
     "height": 977,
@@ -22495,6 +22627,39 @@
   "/imgs/blogs/the-edge-hardware-landscape-8.png": {
     "width": 1792,
     "height": 1187
+  },
+  "/imgs/blogs/the-edge-optimization-playbook-1.png": {
+    "width": 1792,
+    "height": 995,
+    "cover": true
+  },
+  "/imgs/blogs/the-edge-optimization-playbook-2.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/the-edge-optimization-playbook-3.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/the-edge-optimization-playbook-4.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-edge-optimization-playbook-5.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/the-edge-optimization-playbook-6.png": {
+    "width": 1792,
+    "height": 1295
+  },
+  "/imgs/blogs/the-edge-optimization-playbook-7.png": {
+    "width": 1792,
+    "height": 1304
+  },
+  "/imgs/blogs/the-edge-optimization-playbook-8.png": {
+    "width": 1792,
+    "height": 1263
   },
   "/imgs/blogs/the-edges-and-the-limits-of-onchain-1.png": {
     "width": 1792,
