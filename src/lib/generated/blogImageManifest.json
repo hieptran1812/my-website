@@ -1266,6 +1266,39 @@
     "width": 1792,
     "height": 1318
   },
+  "/imgs/blogs/autoregressive-vs-diffusion-the-2026-showdown-1.png": {
+    "width": 1792,
+    "height": 1324,
+    "cover": true
+  },
+  "/imgs/blogs/autoregressive-vs-diffusion-the-2026-showdown-2.png": {
+    "width": 1792,
+    "height": 946
+  },
+  "/imgs/blogs/autoregressive-vs-diffusion-the-2026-showdown-3.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/autoregressive-vs-diffusion-the-2026-showdown-4.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/autoregressive-vs-diffusion-the-2026-showdown-5.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/autoregressive-vs-diffusion-the-2026-showdown-6.png": {
+    "width": 1792,
+    "height": 894
+  },
+  "/imgs/blogs/autoregressive-vs-diffusion-the-2026-showdown-7.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/autoregressive-vs-diffusion-the-2026-showdown-8.png": {
+    "width": 1792,
+    "height": 1307
+  },
   "/imgs/blogs/axbench-steering-llms-even-simple-baselines-outperform-sparse-autoencoders-20260109153655.png": {
     "width": 1718,
     "height": 726,
@@ -2397,6 +2430,39 @@
   "/imgs/blogs/building-an-event-day-trading-plan-7.png": {
     "width": 1792,
     "height": 923
+  },
+  "/imgs/blogs/building-an-image-generation-stack-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/building-an-image-generation-stack-2.png": {
+    "width": 1792,
+    "height": 1187
+  },
+  "/imgs/blogs/building-an-image-generation-stack-3.png": {
+    "width": 1792,
+    "height": 1228
+  },
+  "/imgs/blogs/building-an-image-generation-stack-4.png": {
+    "width": 1792,
+    "height": 1155
+  },
+  "/imgs/blogs/building-an-image-generation-stack-5.png": {
+    "width": 1792,
+    "height": 664
+  },
+  "/imgs/blogs/building-an-image-generation-stack-6.png": {
+    "width": 1792,
+    "height": 1336
+  },
+  "/imgs/blogs/building-an-image-generation-stack-7.png": {
+    "width": 1792,
+    "height": 1315
+  },
+  "/imgs/blogs/building-an-image-generation-stack-8.png": {
+    "width": 1792,
+    "height": 1241
   },
   "/imgs/blogs/building-an-investment-thesis-1.png": {
     "width": 1792,
@@ -7920,6 +7986,39 @@
   "/imgs/blogs/evaluating-alpha-signals-ic-sharpe-turnover-quant-research-9.png": {
     "width": 1792,
     "height": 1195
+  },
+  "/imgs/blogs/evaluating-image-generation-honestly-1.png": {
+    "width": 1792,
+    "height": 1330,
+    "cover": true
+  },
+  "/imgs/blogs/evaluating-image-generation-honestly-2.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/evaluating-image-generation-honestly-3.png": {
+    "width": 1792,
+    "height": 1275
+  },
+  "/imgs/blogs/evaluating-image-generation-honestly-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/evaluating-image-generation-honestly-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/evaluating-image-generation-honestly-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/evaluating-image-generation-honestly-7.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/evaluating-image-generation-honestly-8.png": {
+    "width": 1792,
+    "height": 1184
   },
   "/imgs/blogs/event-driven-trading-capstone-a-full-cpi-day-walkthrough-1.png": {
     "width": 1792,
@@ -17084,6 +17183,39 @@
     "width": 1792,
     "height": 1114
   },
+  "/imgs/blogs/profiling-and-benchmarking-on-device-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/profiling-and-benchmarking-on-device-2.png": {
+    "width": 1792,
+    "height": 895
+  },
+  "/imgs/blogs/profiling-and-benchmarking-on-device-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/profiling-and-benchmarking-on-device-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/profiling-and-benchmarking-on-device-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/profiling-and-benchmarking-on-device-6.png": {
+    "width": 1792,
+    "height": 1431
+  },
+  "/imgs/blogs/profiling-and-benchmarking-on-device-7.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/profiling-and-benchmarking-on-device-8.png": {
+    "width": 1792,
+    "height": 1264
+  },
   "/imgs/blogs/profit-loss-sopr-and-hodl-waves-1.png": {
     "width": 1792,
     "height": 845,
@@ -19521,6 +19653,39 @@
     "width": 1024,
     "height": 559,
     "cover": true
+  },
+  "/imgs/blogs/safety-watermarking-and-provenance-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/safety-watermarking-and-provenance-2.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/safety-watermarking-and-provenance-3.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/safety-watermarking-and-provenance-4.png": {
+    "width": 1792,
+    "height": 968
+  },
+  "/imgs/blogs/safety-watermarking-and-provenance-5.png": {
+    "width": 1792,
+    "height": 736
+  },
+  "/imgs/blogs/safety-watermarking-and-provenance-6.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/safety-watermarking-and-provenance-7.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/safety-watermarking-and-provenance-8.png": {
+    "width": 1792,
+    "height": 680
   },
   "/imgs/blogs/samplers-deep-dive-1.png": {
     "width": 1792,
