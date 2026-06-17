@@ -1073,6 +1073,39 @@
     "width": 1792,
     "height": 1285
   },
+  "/imgs/blogs/audio-and-joint-av-generation-1.png": {
+    "width": 1792,
+    "height": 720,
+    "cover": true
+  },
+  "/imgs/blogs/audio-and-joint-av-generation-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/audio-and-joint-av-generation-3.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/audio-and-joint-av-generation-4.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/audio-and-joint-av-generation-5.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/audio-and-joint-av-generation-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/audio-and-joint-av-generation-7.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/audio-and-joint-av-generation-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/audio-input-bugs-1.png": {
     "width": 1792,
     "height": 1208,
@@ -4998,6 +5031,39 @@
   "/imgs/blogs/conditional-probability-bayes-quant-interviews-9.png": {
     "width": 1792,
     "height": 1085
+  },
+  "/imgs/blogs/conditioning-video-text-image-motion-camera-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/conditioning-video-text-image-motion-camera-2.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/conditioning-video-text-image-motion-camera-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/conditioning-video-text-image-motion-camera-4.png": {
+    "width": 1792,
+    "height": 1379
+  },
+  "/imgs/blogs/conditioning-video-text-image-motion-camera-5.png": {
+    "width": 1792,
+    "height": 793
+  },
+  "/imgs/blogs/conditioning-video-text-image-motion-camera-6.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/conditioning-video-text-image-motion-camera-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/conditioning-video-text-image-motion-camera-8.png": {
+    "width": 1792,
+    "height": 1324
   },
   "/imgs/blogs/confluence-stacking-independent-factors-1.png": {
     "width": 1792,
@@ -9348,6 +9414,39 @@
     "width": 1180,
     "height": 680,
     "cover": true
+  },
+  "/imgs/blogs/flow-matching-for-video-1.png": {
+    "width": 1792,
+    "height": 1231,
+    "cover": true
+  },
+  "/imgs/blogs/flow-matching-for-video-2.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/flow-matching-for-video-3.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/flow-matching-for-video-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/flow-matching-for-video-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/flow-matching-for-video-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/flow-matching-for-video-7.png": {
+    "width": 1792,
+    "height": 829
+  },
+  "/imgs/blogs/flow-matching-for-video-8.png": {
+    "width": 1792,
+    "height": 1199
   },
   "/imgs/blogs/following-smart-money-wallets-1.png": {
     "width": 1792,
@@ -13876,6 +13975,39 @@
   "/imgs/blogs/latent-diffusion-and-stable-diffusion-8.png": {
     "width": 1792,
     "height": 980
+  },
+  "/imgs/blogs/latent-video-diffusion-svd-and-animatediff-1.png": {
+    "width": 1792,
+    "height": 815,
+    "cover": true
+  },
+  "/imgs/blogs/latent-video-diffusion-svd-and-animatediff-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/latent-video-diffusion-svd-and-animatediff-3.png": {
+    "width": 1792,
+    "height": 1070
+  },
+  "/imgs/blogs/latent-video-diffusion-svd-and-animatediff-4.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/latent-video-diffusion-svd-and-animatediff-5.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/latent-video-diffusion-svd-and-animatediff-6.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/latent-video-diffusion-svd-and-animatediff-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/latent-video-diffusion-svd-and-animatediff-8.png": {
+    "width": 1792,
+    "height": 1173
   },
   "/imgs/blogs/law-large-numbers-central-limit-theorem-math-for-quants-1.png": {
     "width": 1792,
@@ -21463,6 +21595,39 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/spatiotemporal-attention-patterns-1.png": {
+    "width": 1792,
+    "height": 829,
+    "cover": true
+  },
+  "/imgs/blogs/spatiotemporal-attention-patterns-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/spatiotemporal-attention-patterns-3.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/spatiotemporal-attention-patterns-4.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/spatiotemporal-attention-patterns-5.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/spatiotemporal-attention-patterns-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/spatiotemporal-attention-patterns-7.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/spatiotemporal-attention-patterns-8.png": {
+    "width": 1792,
+    "height": 984
+  },
   "/imgs/blogs/spec-dec-01-flow.png": {
     "width": 1680,
     "height": 341
@@ -26052,6 +26217,39 @@
   "/imgs/blogs/video-autoencoders-and-spatiotemporal-compression-8.png": {
     "width": 1792,
     "height": 1278
+  },
+  "/imgs/blogs/video-diffusion-transformers-1.png": {
+    "width": 1792,
+    "height": 1199,
+    "cover": true
+  },
+  "/imgs/blogs/video-diffusion-transformers-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/video-diffusion-transformers-3.png": {
+    "width": 1792,
+    "height": 695
+  },
+  "/imgs/blogs/video-diffusion-transformers-4.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/video-diffusion-transformers-5.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/video-diffusion-transformers-6.png": {
+    "width": 1792,
+    "height": 1285
+  },
+  "/imgs/blogs/video-diffusion-transformers-7.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/video-diffusion-transformers-8.png": {
+    "width": 1792,
+    "height": 1277
   },
   "/imgs/blogs/vietnam-events-sbv-vn-cpi-and-how-vn-index-reacts-1.png": {
     "width": 1792,
