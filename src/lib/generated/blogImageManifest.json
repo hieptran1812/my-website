@@ -1106,6 +1106,39 @@
     "width": 1792,
     "height": 1218
   },
+  "/imgs/blogs/audio-deepfakes-watermarking-and-voice-safety-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/audio-deepfakes-watermarking-and-voice-safety-2.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/audio-deepfakes-watermarking-and-voice-safety-3.png": {
+    "width": 1792,
+    "height": 610
+  },
+  "/imgs/blogs/audio-deepfakes-watermarking-and-voice-safety-4.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/audio-deepfakes-watermarking-and-voice-safety-5.png": {
+    "width": 1792,
+    "height": 1301
+  },
+  "/imgs/blogs/audio-deepfakes-watermarking-and-voice-safety-6.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/audio-deepfakes-watermarking-and-voice-safety-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/audio-deepfakes-watermarking-and-voice-safety-8.png": {
+    "width": 1792,
+    "height": 976
+  },
   "/imgs/blogs/audio-input-bugs-1.png": {
     "width": 1792,
     "height": 1208,
@@ -2595,6 +2628,39 @@
   "/imgs/blogs/building-an-alpha-signal-quant-research-9.png": {
     "width": 1792,
     "height": 822
+  },
+  "/imgs/blogs/building-an-audio-generation-stack-1.png": {
+    "width": 1792,
+    "height": 1154,
+    "cover": true
+  },
+  "/imgs/blogs/building-an-audio-generation-stack-2.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/building-an-audio-generation-stack-3.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/building-an-audio-generation-stack-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/building-an-audio-generation-stack-5.png": {
+    "width": 1792,
+    "height": 765
+  },
+  "/imgs/blogs/building-an-audio-generation-stack-6.png": {
+    "width": 1792,
+    "height": 1228
+  },
+  "/imgs/blogs/building-an-audio-generation-stack-7.png": {
+    "width": 1792,
+    "height": 758
+  },
+  "/imgs/blogs/building-an-audio-generation-stack-8.png": {
+    "width": 1792,
+    "height": 1268
   },
   "/imgs/blogs/building-an-event-day-trading-plan-1.png": {
     "width": 1792,
@@ -7351,6 +7417,35 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/delta-hedging-in-practice-the-cost-and-slippage-of-staying-neutral-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/delta-hedging-in-practice-the-cost-and-slippage-of-staying-neutral-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/delta-hedging-in-practice-the-cost-and-slippage-of-staying-neutral-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/delta-hedging-in-practice-the-cost-and-slippage-of-staying-neutral-4.png": {
+    "width": 1792,
+    "height": 916
+  },
+  "/imgs/blogs/delta-hedging-in-practice-the-cost-and-slippage-of-staying-neutral-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/delta-hedging-in-practice-the-cost-and-slippage-of-staying-neutral-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/delta-hedging-in-practice-the-cost-and-slippage-of-staying-neutral-7.png": {
+    "width": 1792,
+    "height": 878
+  },
   "/imgs/blogs/demographics-and-urbanization-the-demand-wave-1.png": {
     "width": 1792,
     "height": 1250,
@@ -9135,6 +9230,39 @@
     "width": 1792,
     "height": 1212
   },
+  "/imgs/blogs/evaluating-audio-generation-honestly-1.png": {
+    "width": 1792,
+    "height": 1237,
+    "cover": true
+  },
+  "/imgs/blogs/evaluating-audio-generation-honestly-2.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/evaluating-audio-generation-honestly-3.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/evaluating-audio-generation-honestly-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/evaluating-audio-generation-honestly-5.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/evaluating-audio-generation-honestly-6.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/evaluating-audio-generation-honestly-7.png": {
+    "width": 1792,
+    "height": 1164
+  },
+  "/imgs/blogs/evaluating-audio-generation-honestly-8.png": {
+    "width": 1792,
+    "height": 1231
+  },
   "/imgs/blogs/evaluating-image-generation-honestly-1.png": {
     "width": 1792,
     "height": 1330,
@@ -10791,6 +10919,35 @@
   "/imgs/blogs/gamestop-2021-short-squeeze-7.png": {
     "width": 1792,
     "height": 752
+  },
+  "/imgs/blogs/gamma-scalping-turning-a-long-straddle-into-a-vol-harvest-1.png": {
+    "width": 1671,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/gamma-scalping-turning-a-long-straddle-into-a-vol-harvest-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gamma-scalping-turning-a-long-straddle-into-a-vol-harvest-3.png": {
+    "width": 1792,
+    "height": 881
+  },
+  "/imgs/blogs/gamma-scalping-turning-a-long-straddle-into-a-vol-harvest-4.png": {
+    "width": 1792,
+    "height": 833
+  },
+  "/imgs/blogs/gamma-scalping-turning-a-long-straddle-into-a-vol-harvest-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gamma-scalping-turning-a-long-straddle-into-a-vol-harvest-6.png": {
+    "width": 1606,
+    "height": 914
+  },
+  "/imgs/blogs/gamma-scalping-turning-a-long-straddle-into-a-vol-harvest-7.png": {
+    "width": 1792,
+    "height": 811
   },
   "/imgs/blogs/gamma-the-greek-that-bites-curvature-convexity-and-the-toxic-short-1.png": {
     "width": 1602,
@@ -24984,6 +25141,39 @@
   "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-7.png": {
     "width": 1792,
     "height": 1162
+  },
+  "/imgs/blogs/the-2026-audio-model-landscape-1.png": {
+    "width": 1792,
+    "height": 1235,
+    "cover": true
+  },
+  "/imgs/blogs/the-2026-audio-model-landscape-2.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/the-2026-audio-model-landscape-3.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/the-2026-audio-model-landscape-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/the-2026-audio-model-landscape-5.png": {
+    "width": 1792,
+    "height": 1161
+  },
+  "/imgs/blogs/the-2026-audio-model-landscape-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/the-2026-audio-model-landscape-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/the-2026-audio-model-landscape-8.png": {
+    "width": 1792,
+    "height": 1257
   },
   "/imgs/blogs/the-2026-image-model-landscape-1.png": {
     "width": 1792,
