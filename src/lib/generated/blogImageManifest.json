@@ -86,6 +86,93 @@
     "width": 1792,
     "height": 1216
   },
+  "/imgs/blogs/a-day-in-the-life-quant-developer-and-low-latency-engineer-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-developer-and-low-latency-engineer-2.png": {
+    "width": 1792,
+    "height": 1007
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-developer-and-low-latency-engineer-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-developer-and-low-latency-engineer-4.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-developer-and-low-latency-engineer-5.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-developer-and-low-latency-engineer-6.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-developer-and-low-latency-engineer-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-researcher-1.png": {
+    "width": 1792,
+    "height": 999,
+    "cover": true
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-researcher-2.png": {
+    "width": 1792,
+    "height": 986
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-researcher-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-researcher-4.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-researcher-5.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-researcher-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-researcher-7.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-trader-1.png": {
+    "width": 1792,
+    "height": 987,
+    "cover": true
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-trader-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-trader-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-trader-4.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-trader-5.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-trader-6.png": {
+    "width": 1792,
+    "height": 1183
+  },
+  "/imgs/blogs/a-day-in-the-life-quant-trader-7.png": {
+    "width": 1792,
+    "height": 1045
+  },
   "/imgs/blogs/a-framework-for-buying-through-the-cycle-1.png": {
     "width": 1792,
     "height": 1208,
@@ -22005,6 +22092,35 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/risk-discipline-and-not-blowing-up-1.png": {
+    "width": 1792,
+    "height": 1213,
+    "cover": true
+  },
+  "/imgs/blogs/risk-discipline-and-not-blowing-up-2.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/risk-discipline-and-not-blowing-up-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/risk-discipline-and-not-blowing-up-4.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/risk-discipline-and-not-blowing-up-5.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/risk-discipline-and-not-blowing-up-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/risk-discipline-and-not-blowing-up-7.png": {
+    "width": 1792,
+    "height": 1237
+  },
   "/imgs/blogs/risk-management-around-events-gaps-sizing-stops-1.png": {
     "width": 1792,
     "height": 1210,
@@ -27310,6 +27426,35 @@
     "width": 1792,
     "height": 1335
   },
+  "/imgs/blogs/the-research-workflow-in-production-from-idea-to-live-signal-1.png": {
+    "width": 1792,
+    "height": 1098,
+    "cover": true
+  },
+  "/imgs/blogs/the-research-workflow-in-production-from-idea-to-live-signal-2.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-research-workflow-in-production-from-idea-to-live-signal-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-research-workflow-in-production-from-idea-to-live-signal-4.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/the-research-workflow-in-production-from-idea-to-live-signal-5.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-research-workflow-in-production-from-idea-to-live-signal-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-research-workflow-in-production-from-idea-to-live-signal-7.png": {
+    "width": 1792,
+    "height": 1209
+  },
   "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-1.png": {
     "width": 1792,
     "height": 1219,
@@ -31080,6 +31225,35 @@
   "/imgs/blogs/yield-curve-modeling-9.png": {
     "width": 1792,
     "height": 872
+  },
+  "/imgs/blogs/your-first-90-days-ramping-without-blowing-up-1.png": {
+    "width": 1792,
+    "height": 987,
+    "cover": true
+  },
+  "/imgs/blogs/your-first-90-days-ramping-without-blowing-up-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/your-first-90-days-ramping-without-blowing-up-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/your-first-90-days-ramping-without-blowing-up-4.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/your-first-90-days-ramping-without-blowing-up-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/your-first-90-days-ramping-without-blowing-up-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/your-first-90-days-ramping-without-blowing-up-7.png": {
+    "width": 1792,
+    "height": 1227
   },
   "/imgs/blogs/your-metric-is-lying-1.png": {
     "width": 1792,
