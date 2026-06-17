@@ -18043,6 +18043,35 @@
     "width": 1644,
     "height": 1584
   },
+  "/imgs/blogs/online-assessments-and-screens-decoded-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/online-assessments-and-screens-decoded-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/online-assessments-and-screens-decoded-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/online-assessments-and-screens-decoded-4.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/online-assessments-and-screens-decoded-5.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/online-assessments-and-screens-decoded-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/online-assessments-and-screens-decoded-7.png": {
+    "width": 1792,
+    "height": 1247
+  },
   "/imgs/blogs/onnx-deep-dive-format-runtime-serving-1.png": {
     "width": 1792,
     "height": 1209,
@@ -25573,6 +25602,35 @@
     "width": 1792,
     "height": 1318
   },
+  "/imgs/blogs/the-interview-loop-round-by-round-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/the-interview-loop-round-by-round-2.png": {
+    "width": 1792,
+    "height": 1359
+  },
+  "/imgs/blogs/the-interview-loop-round-by-round-3.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/the-interview-loop-round-by-round-4.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-interview-loop-round-by-round-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-interview-loop-round-by-round-6.png": {
+    "width": 1792,
+    "height": 843
+  },
+  "/imgs/blogs/the-interview-loop-round-by-round-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/the-jobs-report-nfp-the-king-of-data-1.png": {
     "width": 1792,
     "height": 1075,
@@ -26288,6 +26346,64 @@
     "width": 1792,
     "height": 1271
   },
+  "/imgs/blogs/the-quant-recruiting-calendar-and-the-funnel-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/the-quant-recruiting-calendar-and-the-funnel-2.png": {
+    "width": 1792,
+    "height": 1007
+  },
+  "/imgs/blogs/the-quant-recruiting-calendar-and-the-funnel-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-quant-recruiting-calendar-and-the-funnel-4.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/the-quant-recruiting-calendar-and-the-funnel-5.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-quant-recruiting-calendar-and-the-funnel-6.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/the-quant-recruiting-calendar-and-the-funnel-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/the-quant-resume-that-passes-the-screen-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/the-quant-resume-that-passes-the-screen-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-quant-resume-that-passes-the-screen-3.png": {
+    "width": 1792,
+    "height": 1316
+  },
+  "/imgs/blogs/the-quant-resume-that-passes-the-screen-4.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-quant-resume-that-passes-the-screen-5.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-quant-resume-that-passes-the-screen-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-quant-resume-that-passes-the-screen-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/the-reaction-function-why-the-same-number-moves-differently-1.png": {
     "width": 1792,
     "height": 962,
@@ -26316,6 +26432,35 @@
   "/imgs/blogs/the-reaction-function-why-the-same-number-moves-differently-7.png": {
     "width": 1792,
     "height": 1279
+  },
+  "/imgs/blogs/the-research-case-and-take-home-how-to-ace-it-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/the-research-case-and-take-home-how-to-ace-it-2.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-research-case-and-take-home-how-to-ace-it-3.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-research-case-and-take-home-how-to-ace-it-4.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-research-case-and-take-home-how-to-ace-it-5.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/the-research-case-and-take-home-how-to-ace-it-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/the-research-case-and-take-home-how-to-ace-it-7.png": {
+    "width": 1792,
+    "height": 1335
   },
   "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-1.png": {
     "width": 1792,
@@ -26436,6 +26581,35 @@
   "/imgs/blogs/the-term-structure-of-volatility-contango-backwardation-and-the-vix-curve-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/the-trading-game-and-mental-math-rounds-what-theyre-really-testing-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/the-trading-game-and-mental-math-rounds-what-theyre-really-testing-2.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/the-trading-game-and-mental-math-rounds-what-theyre-really-testing-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-trading-game-and-mental-math-rounds-what-theyre-really-testing-4.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/the-trading-game-and-mental-math-rounds-what-theyre-really-testing-5.png": {
+    "width": 1792,
+    "height": 1183
+  },
+  "/imgs/blogs/the-trading-game-and-mental-math-rounds-what-theyre-really-testing-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-trading-game-and-mental-math-rounds-what-theyre-really-testing-7.png": {
+    "width": 1792,
+    "height": 1245
   },
   "/imgs/blogs/the-training-debugging-playbook-1.png": {
     "width": 1792,
