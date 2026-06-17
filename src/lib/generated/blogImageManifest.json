@@ -1040,6 +1040,39 @@
     "width": 1792,
     "height": 1285
   },
+  "/imgs/blogs/augmentation-debugging-for-vision-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/augmentation-debugging-for-vision-2.png": {
+    "width": 1792,
+    "height": 852
+  },
+  "/imgs/blogs/augmentation-debugging-for-vision-3.png": {
+    "width": 1792,
+    "height": 1389
+  },
+  "/imgs/blogs/augmentation-debugging-for-vision-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/augmentation-debugging-for-vision-5.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/augmentation-debugging-for-vision-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/augmentation-debugging-for-vision-7.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/augmentation-debugging-for-vision-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/augmentation-gone-wrong-1.png": {
     "width": 1792,
     "height": 1278,
@@ -5765,6 +5798,72 @@
     "height": 479,
     "cover": true
   },
+  "/imgs/blogs/cv-input-pipeline-bugs-1.png": {
+    "width": 1792,
+    "height": 1263,
+    "cover": true
+  },
+  "/imgs/blogs/cv-input-pipeline-bugs-2.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/cv-input-pipeline-bugs-3.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/cv-input-pipeline-bugs-4.png": {
+    "width": 1792,
+    "height": 1347
+  },
+  "/imgs/blogs/cv-input-pipeline-bugs-5.png": {
+    "width": 1792,
+    "height": 892
+  },
+  "/imgs/blogs/cv-input-pipeline-bugs-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/cv-input-pipeline-bugs-7.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/cv-input-pipeline-bugs-8.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/cv-war-story-a-classifier-that-wouldnt-train-1.png": {
+    "width": 1792,
+    "height": 921,
+    "cover": true
+  },
+  "/imgs/blogs/cv-war-story-a-classifier-that-wouldnt-train-2.png": {
+    "width": 1792,
+    "height": 829
+  },
+  "/imgs/blogs/cv-war-story-a-classifier-that-wouldnt-train-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/cv-war-story-a-classifier-that-wouldnt-train-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/cv-war-story-a-classifier-that-wouldnt-train-5.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/cv-war-story-a-classifier-that-wouldnt-train-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/cv-war-story-a-classifier-that-wouldnt-train-7.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/cv-war-story-a-classifier-that-wouldnt-train-8.png": {
+    "width": 1792,
+    "height": 1209
+  },
   "/imgs/blogs/data-constrained-scaling-laws-1.png": {
     "width": 1792,
     "height": 1184,
@@ -5962,6 +6061,105 @@
   "/imgs/blogs/debasement-debt-and-the-fiscal-story-gold-as-an-anti-currency-8.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/debugging-object-detection-1.png": {
+    "width": 1792,
+    "height": 1230,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-object-detection-2.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/debugging-object-detection-3.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/debugging-object-detection-4.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/debugging-object-detection-5.png": {
+    "width": 1792,
+    "height": 907
+  },
+  "/imgs/blogs/debugging-object-detection-6.png": {
+    "width": 1792,
+    "height": 918
+  },
+  "/imgs/blogs/debugging-object-detection-7.png": {
+    "width": 1792,
+    "height": 1149
+  },
+  "/imgs/blogs/debugging-object-detection-8.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/debugging-segmentation-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-segmentation-2.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/debugging-segmentation-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/debugging-segmentation-4.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/debugging-segmentation-5.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/debugging-segmentation-6.png": {
+    "width": 1792,
+    "height": 800
+  },
+  "/imgs/blogs/debugging-segmentation-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/debugging-segmentation-8.png": {
+    "width": 1792,
+    "height": 943
+  },
+  "/imgs/blogs/debugging-vision-transformer-finetuning-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-vision-transformer-finetuning-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/debugging-vision-transformer-finetuning-3.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/debugging-vision-transformer-finetuning-4.png": {
+    "width": 1792,
+    "height": 1389
+  },
+  "/imgs/blogs/debugging-vision-transformer-finetuning-5.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/debugging-vision-transformer-finetuning-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/debugging-vision-transformer-finetuning-7.png": {
+    "width": 1792,
+    "height": 931
+  },
+  "/imgs/blogs/debugging-vision-transformer-finetuning-8.png": {
+    "width": 1792,
+    "height": 1250
   },
   "/imgs/blogs/decision-making-under-uncertainty-quant-interviews-1.png": {
     "width": 1792,
