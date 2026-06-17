@@ -14168,6 +14168,39 @@
     "width": 1792,
     "height": 987
   },
+  "/imgs/blogs/inside-the-gpu-sms-warps-and-the-simt-execution-model-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/inside-the-gpu-sms-warps-and-the-simt-execution-model-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/inside-the-gpu-sms-warps-and-the-simt-execution-model-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/inside-the-gpu-sms-warps-and-the-simt-execution-model-4.png": {
+    "width": 1792,
+    "height": 950
+  },
+  "/imgs/blogs/inside-the-gpu-sms-warps-and-the-simt-execution-model-5.png": {
+    "width": 1792,
+    "height": 1363
+  },
+  "/imgs/blogs/inside-the-gpu-sms-warps-and-the-simt-execution-model-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/inside-the-gpu-sms-warps-and-the-simt-execution-model-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/inside-the-gpu-sms-warps-and-the-simt-execution-model-8.png": {
+    "width": 1792,
+    "height": 708
+  },
   "/imgs/blogs/instruction-and-in-context-image-editing-1.png": {
     "width": 1792,
     "height": 1278,
@@ -27456,6 +27489,39 @@
     "width": 1792,
     "height": 987
   },
+  "/imgs/blogs/the-memory-hierarchy-registers-shared-memory-and-hbm-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/the-memory-hierarchy-registers-shared-memory-and-hbm-2.png": {
+    "width": 1792,
+    "height": 1389
+  },
+  "/imgs/blogs/the-memory-hierarchy-registers-shared-memory-and-hbm-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-memory-hierarchy-registers-shared-memory-and-hbm-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-memory-hierarchy-registers-shared-memory-and-hbm-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-memory-hierarchy-registers-shared-memory-and-hbm-6.png": {
+    "width": 1792,
+    "height": 1420
+  },
+  "/imgs/blogs/the-memory-hierarchy-registers-shared-memory-and-hbm-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/the-memory-hierarchy-registers-shared-memory-and-hbm-8.png": {
+    "width": 1792,
+    "height": 1209
+  },
   "/imgs/blogs/the-metrics-of-video-generation-1.png": {
     "width": 1792,
     "height": 824,
@@ -28034,6 +28100,39 @@
   "/imgs/blogs/the-research-workflow-in-production-from-idea-to-live-signal-7.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/the-roofline-model-compute-bound-vs-memory-bound-1.png": {
+    "width": 1792,
+    "height": 1153,
+    "cover": true
+  },
+  "/imgs/blogs/the-roofline-model-compute-bound-vs-memory-bound-2.png": {
+    "width": 1792,
+    "height": 1331
+  },
+  "/imgs/blogs/the-roofline-model-compute-bound-vs-memory-bound-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-roofline-model-compute-bound-vs-memory-bound-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-roofline-model-compute-bound-vs-memory-bound-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-roofline-model-compute-bound-vs-memory-bound-6.png": {
+    "width": 1792,
+    "height": 1417
+  },
+  "/imgs/blogs/the-roofline-model-compute-bound-vs-memory-bound-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-roofline-model-compute-bound-vs-memory-bound-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-1.png": {
     "width": 1792,
@@ -31354,6 +31453,39 @@
   "/imgs/blogs/why-gold-still-matters-a-5000-year-store-of-value-7.png": {
     "width": 1688,
     "height": 914
+  },
+  "/imgs/blogs/why-hpc-is-the-bottleneck-for-modern-ai-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/why-hpc-is-the-bottleneck-for-modern-ai-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/why-hpc-is-the-bottleneck-for-modern-ai-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/why-hpc-is-the-bottleneck-for-modern-ai-4.png": {
+    "width": 1792,
+    "height": 899
+  },
+  "/imgs/blogs/why-hpc-is-the-bottleneck-for-modern-ai-5.png": {
+    "width": 1792,
+    "height": 772
+  },
+  "/imgs/blogs/why-hpc-is-the-bottleneck-for-modern-ai-6.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/why-hpc-is-the-bottleneck-for-modern-ai-7.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/why-hpc-is-the-bottleneck-for-modern-ai-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/why-i-started-blogging-20251008214336.png": {
     "width": 1024,
