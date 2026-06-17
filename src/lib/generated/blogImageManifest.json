@@ -9613,6 +9613,39 @@
     "width": 1792,
     "height": 1199
   },
+  "/imgs/blogs/flux-architecture-deep-dive-1.png": {
+    "width": 1792,
+    "height": 686,
+    "cover": true
+  },
+  "/imgs/blogs/flux-architecture-deep-dive-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/flux-architecture-deep-dive-3.png": {
+    "width": 1792,
+    "height": 829
+  },
+  "/imgs/blogs/flux-architecture-deep-dive-4.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/flux-architecture-deep-dive-5.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/flux-architecture-deep-dive-6.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/flux-architecture-deep-dive-7.png": {
+    "width": 1792,
+    "height": 950
+  },
+  "/imgs/blogs/flux-architecture-deep-dive-8.png": {
+    "width": 1792,
+    "height": 1160
+  },
   "/imgs/blogs/following-smart-money-wallets-1.png": {
     "width": 1792,
     "height": 766,
@@ -11086,6 +11119,39 @@
     "width": 1792,
     "height": 1216
   },
+  "/imgs/blogs/gpt-image-and-nano-banana-the-closed-frontier-1.png": {
+    "width": 1792,
+    "height": 671,
+    "cover": true
+  },
+  "/imgs/blogs/gpt-image-and-nano-banana-the-closed-frontier-2.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/gpt-image-and-nano-banana-the-closed-frontier-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/gpt-image-and-nano-banana-the-closed-frontier-4.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/gpt-image-and-nano-banana-the-closed-frontier-5.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/gpt-image-and-nano-banana-the-closed-frontier-6.png": {
+    "width": 1792,
+    "height": 1384
+  },
+  "/imgs/blogs/gpt-image-and-nano-banana-the-closed-frontier-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/gpt-image-and-nano-banana-the-closed-frontier-8.png": {
+    "width": 1792,
+    "height": 795
+  },
   "/imgs/blogs/gpu-01-tradeoff.png": {
     "width": 671,
     "height": 402,
@@ -12269,6 +12335,39 @@
   "/imgs/blogs/hunting-nans-and-infs-8.png": {
     "width": 1792,
     "height": 1264
+  },
+  "/imgs/blogs/hunyuanimage-and-native-multimodal-generation-1.png": {
+    "width": 1792,
+    "height": 692,
+    "cover": true
+  },
+  "/imgs/blogs/hunyuanimage-and-native-multimodal-generation-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/hunyuanimage-and-native-multimodal-generation-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/hunyuanimage-and-native-multimodal-generation-4.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/hunyuanimage-and-native-multimodal-generation-5.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/hunyuanimage-and-native-multimodal-generation-6.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/hunyuanimage-and-native-multimodal-generation-7.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/hunyuanimage-and-native-multimodal-generation-8.png": {
+    "width": 1792,
+    "height": 1199
   },
   "/imgs/blogs/hypothesis-testing-pvalues-math-for-quants-1.png": {
     "width": 1792,
@@ -19139,6 +19238,39 @@
     "width": 1792,
     "height": 1341
   },
+  "/imgs/blogs/qwen-image-deep-dive-1.png": {
+    "width": 1792,
+    "height": 680,
+    "cover": true
+  },
+  "/imgs/blogs/qwen-image-deep-dive-2.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/qwen-image-deep-dive-3.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/qwen-image-deep-dive-4.png": {
+    "width": 1792,
+    "height": 714
+  },
+  "/imgs/blogs/qwen-image-deep-dive-5.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/qwen-image-deep-dive-6.png": {
+    "width": 1792,
+    "height": 911
+  },
+  "/imgs/blogs/qwen-image-deep-dive-7.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/qwen-image-deep-dive-8.png": {
+    "width": 1792,
+    "height": 1155
+  },
   "/imgs/blogs/qwen-mt-1.png": {
     "width": 1792,
     "height": 1210,
@@ -21006,6 +21138,39 @@
   "/imgs/blogs/samplers-deep-dive-8.png": {
     "width": 1792,
     "height": 976
+  },
+  "/imgs/blogs/sana-and-efficient-high-res-synthesis-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/sana-and-efficient-high-res-synthesis-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/sana-and-efficient-high-res-synthesis-3.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/sana-and-efficient-high-res-synthesis-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/sana-and-efficient-high-res-synthesis-5.png": {
+    "width": 1792,
+    "height": 691
+  },
+  "/imgs/blogs/sana-and-efficient-high-res-synthesis-6.png": {
+    "width": 1792,
+    "height": 1358
+  },
+  "/imgs/blogs/sana-and-efficient-high-res-synthesis-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/sana-and-efficient-high-res-synthesis-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/sanctions-reserve-freezes-and-the-2022-turning-point-for-gold-1.png": {
     "width": 1792,
@@ -23376,6 +23541,39 @@
   "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-7.png": {
     "width": 1792,
     "height": 1162
+  },
+  "/imgs/blogs/the-2026-image-model-landscape-1.png": {
+    "width": 1792,
+    "height": 1163,
+    "cover": true
+  },
+  "/imgs/blogs/the-2026-image-model-landscape-2.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/the-2026-image-model-landscape-3.png": {
+    "width": 1792,
+    "height": 1350
+  },
+  "/imgs/blogs/the-2026-image-model-landscape-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-2026-image-model-landscape-5.png": {
+    "width": 1792,
+    "height": 1320
+  },
+  "/imgs/blogs/the-2026-image-model-landscape-6.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/the-2026-image-model-landscape-7.png": {
+    "width": 1792,
+    "height": 932
+  },
+  "/imgs/blogs/the-2026-image-model-landscape-8.png": {
+    "width": 1792,
+    "height": 1154
   },
   "/imgs/blogs/the-2026-video-model-landscape-1.png": {
     "width": 1792,
