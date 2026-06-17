@@ -14968,6 +14968,39 @@
     "width": 1792,
     "height": 980
   },
+  "/imgs/blogs/latent-diffusion-for-music-stable-audio-1.png": {
+    "width": 1792,
+    "height": 1237,
+    "cover": true
+  },
+  "/imgs/blogs/latent-diffusion-for-music-stable-audio-2.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/latent-diffusion-for-music-stable-audio-3.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/latent-diffusion-for-music-stable-audio-4.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/latent-diffusion-for-music-stable-audio-5.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/latent-diffusion-for-music-stable-audio-6.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/latent-diffusion-for-music-stable-audio-7.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/latent-diffusion-for-music-stable-audio-8.png": {
+    "width": 1792,
+    "height": 1169
+  },
   "/imgs/blogs/latent-video-diffusion-svd-and-animatediff-1.png": {
     "width": 1792,
     "height": 815,
@@ -17729,6 +17762,39 @@
   "/imgs/blogs/muon-moonlight-7.png": {
     "width": 1792,
     "height": 953
+  },
+  "/imgs/blogs/music-generation-musiclm-and-musicgen-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/music-generation-musiclm-and-musicgen-2.png": {
+    "width": 1792,
+    "height": 1220
+  },
+  "/imgs/blogs/music-generation-musiclm-and-musicgen-3.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/music-generation-musiclm-and-musicgen-4.png": {
+    "width": 1792,
+    "height": 667
+  },
+  "/imgs/blogs/music-generation-musiclm-and-musicgen-5.png": {
+    "width": 1792,
+    "height": 1240
+  },
+  "/imgs/blogs/music-generation-musiclm-and-musicgen-6.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/music-generation-musiclm-and-musicgen-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/music-generation-musiclm-and-musicgen-8.png": {
+    "width": 1792,
+    "height": 1274
   },
   "/imgs/blogs/n-m-sparsity-and-sparse-tensor-cores-1.png": {
     "width": 1792,
@@ -23070,6 +23136,39 @@
     "width": 1792,
     "height": 938
   },
+  "/imgs/blogs/singing-voice-and-music-editing-1.png": {
+    "width": 1792,
+    "height": 1237,
+    "cover": true
+  },
+  "/imgs/blogs/singing-voice-and-music-editing-2.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/singing-voice-and-music-editing-3.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/singing-voice-and-music-editing-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/singing-voice-and-music-editing-5.png": {
+    "width": 1792,
+    "height": 1313
+  },
+  "/imgs/blogs/singing-voice-and-music-editing-6.png": {
+    "width": 1792,
+    "height": 641
+  },
+  "/imgs/blogs/singing-voice-and-music-editing-7.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/singing-voice-and-music-editing-8.png": {
+    "width": 1792,
+    "height": 1290
+  },
   "/imgs/blogs/sizing-by-sector-beta-how-much-to-bet-1.png": {
     "width": 1792,
     "height": 1194,
@@ -24060,6 +24159,39 @@
     "width": 1792,
     "height": 1235
   },
+  "/imgs/blogs/suno-udio-and-the-commercial-music-frontier-1.png": {
+    "width": 1792,
+    "height": 1257,
+    "cover": true
+  },
+  "/imgs/blogs/suno-udio-and-the-commercial-music-frontier-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/suno-udio-and-the-commercial-music-frontier-3.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/suno-udio-and-the-commercial-music-frontier-4.png": {
+    "width": 1792,
+    "height": 935
+  },
+  "/imgs/blogs/suno-udio-and-the-commercial-music-frontier-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/suno-udio-and-the-commercial-music-frontier-6.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/suno-udio-and-the-commercial-music-frontier-7.png": {
+    "width": 1792,
+    "height": 720
+  },
+  "/imgs/blogs/suno-udio-and-the-commercial-music-frontier-8.png": {
+    "width": 1792,
+    "height": 1208
+  },
   "/imgs/blogs/superposition-yields-robust-neural-scaling-20251208155434.png": {
     "width": 1792,
     "height": 944,
@@ -24757,6 +24889,39 @@
   "/imgs/blogs/text-encoders-and-prompt-conditioning-8.png": {
     "width": 1792,
     "height": 988
+  },
+  "/imgs/blogs/text-to-audio-and-sound-effects-1.png": {
+    "width": 1792,
+    "height": 829,
+    "cover": true
+  },
+  "/imgs/blogs/text-to-audio-and-sound-effects-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/text-to-audio-and-sound-effects-3.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/text-to-audio-and-sound-effects-4.png": {
+    "width": 1792,
+    "height": 736
+  },
+  "/imgs/blogs/text-to-audio-and-sound-effects-5.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/text-to-audio-and-sound-effects-6.png": {
+    "width": 1792,
+    "height": 1249
+  },
+  "/imgs/blogs/text-to-audio-and-sound-effects-7.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/text-to-audio-and-sound-effects-8.png": {
+    "width": 1792,
+    "height": 1250
   },
   "/imgs/blogs/text-to-speech-from-tacotron-to-vits-1.png": {
     "width": 1792,
