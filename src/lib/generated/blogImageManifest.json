@@ -2101,6 +2101,35 @@
     "width": 1331,
     "height": 229
   },
+  "/imgs/blogs/breaking-into-quant-the-map-and-the-mission-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/breaking-into-quant-the-map-and-the-mission-2.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/breaking-into-quant-the-map-and-the-mission-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/breaking-into-quant-the-map-and-the-mission-4.png": {
+    "width": 1792,
+    "height": 1060
+  },
+  "/imgs/blogs/breaking-into-quant-the-map-and-the-mission-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/breaking-into-quant-the-map-and-the-mission-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/breaking-into-quant-the-map-and-the-mission-7.png": {
+    "width": 1792,
+    "height": 932
+  },
   "/imgs/blogs/breakouts-vs-fakeouts-1.png": {
     "width": 1792,
     "height": 1212,
@@ -2835,6 +2864,35 @@
   "/imgs/blogs/bytedance-seed-model-universe-by-use-case-5.png": {
     "width": 1792,
     "height": 1162
+  },
+  "/imgs/blogs/calls-puts-and-the-payoff-diagram-the-language-of-options-1.png": {
+    "width": 1602,
+    "height": 934,
+    "cover": true
+  },
+  "/imgs/blogs/calls-puts-and-the-payoff-diagram-the-language-of-options-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/calls-puts-and-the-payoff-diagram-the-language-of-options-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/calls-puts-and-the-payoff-diagram-the-language-of-options-4.png": {
+    "width": 1792,
+    "height": 999
+  },
+  "/imgs/blogs/calls-puts-and-the-payoff-diagram-the-language-of-options-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/calls-puts-and-the-payoff-diagram-the-language-of-options-6.png": {
+    "width": 1792,
+    "height": 894
+  },
+  "/imgs/blogs/calls-puts-and-the-payoff-diagram-the-language-of-options-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/camera-control-and-4d-generation-1.png": {
     "width": 1792,
@@ -7689,6 +7747,35 @@
     "width": 1790,
     "height": 702
   },
+  "/imgs/blogs/do-you-need-a-phd-the-backgrounds-that-get-hired-1.png": {
+    "width": 1792,
+    "height": 1307,
+    "cover": true
+  },
+  "/imgs/blogs/do-you-need-a-phd-the-backgrounds-that-get-hired-2.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/do-you-need-a-phd-the-backgrounds-that-get-hired-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/do-you-need-a-phd-the-backgrounds-that-get-hired-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/do-you-need-a-phd-the-backgrounds-that-get-hired-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/do-you-need-a-phd-the-backgrounds-that-get-hired-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/do-you-need-a-phd-the-backgrounds-that-get-hired-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/docker-llm-optimization-architecture.png": {
     "width": 1220,
     "height": 1000,
@@ -12104,6 +12191,35 @@
     "width": 1792,
     "height": 1194
   },
+  "/imgs/blogs/how-quant-firms-actually-make-money-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/how-quant-firms-actually-make-money-2.png": {
+    "width": 1792,
+    "height": 798
+  },
+  "/imgs/blogs/how-quant-firms-actually-make-money-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/how-quant-firms-actually-make-money-4.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/how-quant-firms-actually-make-money-5.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/how-quant-firms-actually-make-money-6.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/how-quant-firms-actually-make-money-7.png": {
+    "width": 1792,
+    "height": 933
+  },
   "/imgs/blogs/how-real-estate-is-taxed-the-full-map-1.png": {
     "width": 1792,
     "height": 1211,
@@ -16488,6 +16604,35 @@
   "/imgs/blogs/money-market-plumbing-repo-collateral-sofr-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/moneyness-and-the-strike-itm-atm-otm-and-what-you-are-really-buying-1.png": {
+    "width": 1792,
+    "height": 1140,
+    "cover": true
+  },
+  "/imgs/blogs/moneyness-and-the-strike-itm-atm-otm-and-what-you-are-really-buying-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/moneyness-and-the-strike-itm-atm-otm-and-what-you-are-really-buying-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/moneyness-and-the-strike-itm-atm-otm-and-what-you-are-really-buying-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/moneyness-and-the-strike-itm-atm-otm-and-what-you-are-really-buying-5.png": {
+    "width": 1792,
+    "height": 784
+  },
+  "/imgs/blogs/moneyness-and-the-strike-itm-atm-otm-and-what-you-are-really-buying-6.png": {
+    "width": 1792,
+    "height": 967
+  },
+  "/imgs/blogs/moneyness-and-the-strike-itm-atm-otm-and-what-you-are-really-buying-7.png": {
+    "width": 1678,
+    "height": 1112
   },
   "/imgs/blogs/monitoring-a-run-and-when-to-kill-it-1.png": {
     "width": 1792,
@@ -24336,6 +24481,35 @@
     "width": 1792,
     "height": 1356
   },
+  "/imgs/blogs/the-firm-archetypes-prop-vs-hft-vs-pod-shop-vs-systematic-fund-1.png": {
+    "width": 1792,
+    "height": 1213,
+    "cover": true
+  },
+  "/imgs/blogs/the-firm-archetypes-prop-vs-hft-vs-pod-shop-vs-systematic-fund-2.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/the-firm-archetypes-prop-vs-hft-vs-pod-shop-vs-systematic-fund-3.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/the-firm-archetypes-prop-vs-hft-vs-pod-shop-vs-systematic-fund-4.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-firm-archetypes-prop-vs-hft-vs-pod-shop-vs-systematic-fund-5.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/the-firm-archetypes-prop-vs-hft-vs-pod-shop-vs-systematic-fund-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-firm-archetypes-prop-vs-hft-vs-pod-shop-vs-systematic-fund-7.png": {
+    "width": 1792,
+    "height": 1226
+  },
   "/imgs/blogs/the-fomc-meeting-full-anatomy-1.png": {
     "width": 1792,
     "height": 963,
@@ -24393,6 +24567,35 @@
   "/imgs/blogs/the-four-macro-dials-rates-credit-fx-commodities-7.png": {
     "width": 1792,
     "height": 1162
+  },
+  "/imgs/blogs/the-four-paths-trader-researcher-developer-engineer-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/the-four-paths-trader-researcher-developer-engineer-2.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-four-paths-trader-researcher-developer-engineer-3.png": {
+    "width": 1792,
+    "height": 793
+  },
+  "/imgs/blogs/the-four-paths-trader-researcher-developer-engineer-4.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-four-paths-trader-researcher-developer-engineer-5.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/the-four-paths-trader-researcher-developer-engineer-6.png": {
+    "width": 1792,
+    "height": 1157
+  },
+  "/imgs/blogs/the-four-paths-trader-researcher-developer-engineer-7.png": {
+    "width": 1792,
+    "height": 1238
   },
   "/imgs/blogs/the-four-types-of-firms-20251101024943.png": {
     "width": 1024,
@@ -25114,6 +25317,35 @@
     "width": 1792,
     "height": 1227
   },
+  "/imgs/blogs/the-options-chain-and-contract-mechanics-multiplier-expiry-settlement-1.png": {
+    "width": 1792,
+    "height": 931,
+    "cover": true
+  },
+  "/imgs/blogs/the-options-chain-and-contract-mechanics-multiplier-expiry-settlement-2.png": {
+    "width": 1792,
+    "height": 766
+  },
+  "/imgs/blogs/the-options-chain-and-contract-mechanics-multiplier-expiry-settlement-3.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/the-options-chain-and-contract-mechanics-multiplier-expiry-settlement-4.png": {
+    "width": 1792,
+    "height": 1397
+  },
+  "/imgs/blogs/the-options-chain-and-contract-mechanics-multiplier-expiry-settlement-5.png": {
+    "width": 1792,
+    "height": 971
+  },
+  "/imgs/blogs/the-options-chain-and-contract-mechanics-multiplier-expiry-settlement-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-options-chain-and-contract-mechanics-multiplier-expiry-settlement-7.png": {
+    "width": 1792,
+    "height": 971
+  },
   "/imgs/blogs/the-overfit-a-single-batch-test-1.png": {
     "width": 1792,
     "height": 1260,
@@ -25482,6 +25714,35 @@
   "/imgs/blogs/three-arrows-capital-and-crypto-lender-contagion-7.png": {
     "width": 1792,
     "height": 787
+  },
+  "/imgs/blogs/time-value-and-theta-why-an-option-is-a-melting-ice-cube-1.png": {
+    "width": 1592,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/time-value-and-theta-why-an-option-is-a-melting-ice-cube-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/time-value-and-theta-why-an-option-is-a-melting-ice-cube-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/time-value-and-theta-why-an-option-is-a-melting-ice-cube-4.png": {
+    "width": 1792,
+    "height": 1075
+  },
+  "/imgs/blogs/time-value-and-theta-why-an-option-is-a-melting-ice-cube-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/time-value-and-theta-why-an-option-is-a-melting-ice-cube-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/time-value-and-theta-why-an-option-is-a-melting-ice-cube-7.png": {
+    "width": 1792,
+    "height": 976
   },
   "/imgs/blogs/time-value-of-money-discounting-for-investors-1.png": {
     "width": 1792,
@@ -27324,6 +27585,64 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/what-is-a-quant-really-the-taxonomy-of-roles-1.png": {
+    "width": 1792,
+    "height": 1141,
+    "cover": true
+  },
+  "/imgs/blogs/what-is-a-quant-really-the-taxonomy-of-roles-2.png": {
+    "width": 1792,
+    "height": 1355
+  },
+  "/imgs/blogs/what-is-a-quant-really-the-taxonomy-of-roles-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/what-is-a-quant-really-the-taxonomy-of-roles-4.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/what-is-a-quant-really-the-taxonomy-of-roles-5.png": {
+    "width": 1792,
+    "height": 1399
+  },
+  "/imgs/blogs/what-is-a-quant-really-the-taxonomy-of-roles-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/what-is-a-quant-really-the-taxonomy-of-roles-7.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/what-is-an-option-the-right-not-the-obligation-1.png": {
+    "width": 1792,
+    "height": 1195,
+    "cover": true
+  },
+  "/imgs/blogs/what-is-an-option-the-right-not-the-obligation-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/what-is-an-option-the-right-not-the-obligation-3.png": {
+    "width": 1602,
+    "height": 462
+  },
+  "/imgs/blogs/what-is-an-option-the-right-not-the-obligation-4.png": {
+    "width": 1792,
+    "height": 1173
+  },
+  "/imgs/blogs/what-is-an-option-the-right-not-the-obligation-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/what-is-an-option-the-right-not-the-obligation-6.png": {
+    "width": 1792,
+    "height": 648
+  },
+  "/imgs/blogs/what-is-an-option-the-right-not-the-obligation-7.png": {
+    "width": 1598,
+    "height": 914
+  },
   "/imgs/blogs/what-is-onchain-analysis-1.png": {
     "width": 1792,
     "height": 1126,
@@ -27592,6 +27911,35 @@
   "/imgs/blogs/what-moves-the-yield-curve-the-fed-growth-inflation-and-supply-7.png": {
     "width": 1792,
     "height": 1313
+  },
+  "/imgs/blogs/what-sets-an-options-price-the-five-inputs-and-the-intuition-1.png": {
+    "width": 1792,
+    "height": 1171,
+    "cover": true
+  },
+  "/imgs/blogs/what-sets-an-options-price-the-five-inputs-and-the-intuition-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/what-sets-an-options-price-the-five-inputs-and-the-intuition-3.png": {
+    "width": 1592,
+    "height": 914
+  },
+  "/imgs/blogs/what-sets-an-options-price-the-five-inputs-and-the-intuition-4.png": {
+    "width": 1646,
+    "height": 914
+  },
+  "/imgs/blogs/what-sets-an-options-price-the-five-inputs-and-the-intuition-5.png": {
+    "width": 1602,
+    "height": 912
+  },
+  "/imgs/blogs/what-sets-an-options-price-the-five-inputs-and-the-intuition-6.png": {
+    "width": 1792,
+    "height": 1359
+  },
+  "/imgs/blogs/what-sets-an-options-price-the-five-inputs-and-the-intuition-7.png": {
+    "width": 1749,
+    "height": 914
   },
   "/imgs/blogs/what-technical-analysis-really-is-1.png": {
     "width": 1792,
