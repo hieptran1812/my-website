@@ -1139,6 +1139,39 @@
     "width": 1792,
     "height": 1221
   },
+  "/imgs/blogs/audio-quality-metrics-1.png": {
+    "width": 1792,
+    "height": 1227,
+    "cover": true
+  },
+  "/imgs/blogs/audio-quality-metrics-2.png": {
+    "width": 1792,
+    "height": 824
+  },
+  "/imgs/blogs/audio-quality-metrics-3.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/audio-quality-metrics-4.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/audio-quality-metrics-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/audio-quality-metrics-6.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/audio-quality-metrics-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/audio-quality-metrics-8.png": {
+    "width": 1792,
+    "height": 1231
+  },
   "/imgs/blogs/augmentation-debugging-for-vision-1.png": {
     "width": 1792,
     "height": 1278,
@@ -7049,6 +7082,35 @@
     "width": 1792,
     "height": 759
   },
+  "/imgs/blogs/delta-direction-exposure-and-the-hedge-ratio-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/delta-direction-exposure-and-the-hedge-ratio-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/delta-direction-exposure-and-the-hedge-ratio-3.png": {
+    "width": 1792,
+    "height": 781
+  },
+  "/imgs/blogs/delta-direction-exposure-and-the-hedge-ratio-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/delta-direction-exposure-and-the-hedge-ratio-5.png": {
+    "width": 1792,
+    "height": 1082
+  },
+  "/imgs/blogs/delta-direction-exposure-and-the-hedge-ratio-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/delta-direction-exposure-and-the-hedge-ratio-7.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/demographics-and-urbanization-the-demand-wave-1.png": {
     "width": 1792,
     "height": 1250,
@@ -10390,6 +10452,35 @@
   "/imgs/blogs/gamestop-2021-short-squeeze-7.png": {
     "width": 1792,
     "height": 752
+  },
+  "/imgs/blogs/gamma-the-greek-that-bites-curvature-convexity-and-the-toxic-short-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/gamma-the-greek-that-bites-curvature-convexity-and-the-toxic-short-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gamma-the-greek-that-bites-curvature-convexity-and-the-toxic-short-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gamma-the-greek-that-bites-curvature-convexity-and-the-toxic-short-4.png": {
+    "width": 1792,
+    "height": 1111
+  },
+  "/imgs/blogs/gamma-the-greek-that-bites-curvature-convexity-and-the-toxic-short-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gamma-the-greek-that-bites-curvature-convexity-and-the-toxic-short-6.png": {
+    "width": 1614,
+    "height": 914
+  },
+  "/imgs/blogs/gamma-the-greek-that-bites-curvature-convexity-and-the-toxic-short-7.png": {
+    "width": 1621,
+    "height": 914
   },
   "/imgs/blogs/garbage-in-finding-label-noise-1.png": {
     "width": 1792,
@@ -20454,6 +20545,39 @@
     "width": 1792,
     "height": 1209
   },
+  "/imgs/blogs/representing-sound-waveforms-spectrograms-and-perception-1.png": {
+    "width": 1792,
+    "height": 1227,
+    "cover": true
+  },
+  "/imgs/blogs/representing-sound-waveforms-spectrograms-and-perception-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/representing-sound-waveforms-spectrograms-and-perception-3.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/representing-sound-waveforms-spectrograms-and-perception-4.png": {
+    "width": 1792,
+    "height": 720
+  },
+  "/imgs/blogs/representing-sound-waveforms-spectrograms-and-perception-5.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/representing-sound-waveforms-spectrograms-and-perception-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/representing-sound-waveforms-spectrograms-and-perception-7.png": {
+    "width": 1792,
+    "height": 888
+  },
+  "/imgs/blogs/representing-sound-waveforms-spectrograms-and-perception-8.png": {
+    "width": 1792,
+    "height": 1169
+  },
   "/imgs/blogs/representing-video-redundancy-and-tokens-1.png": {
     "width": 1792,
     "height": 1266,
@@ -20743,6 +20867,35 @@
   "/imgs/blogs/reward-model-overoptimization-scaling-8.png": {
     "width": 1792,
     "height": 1165
+  },
+  "/imgs/blogs/rho-dividends-and-the-second-order-greeks-vanna-volga-charm-1.png": {
+    "width": 1792,
+    "height": 977,
+    "cover": true
+  },
+  "/imgs/blogs/rho-dividends-and-the-second-order-greeks-vanna-volga-charm-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rho-dividends-and-the-second-order-greeks-vanna-volga-charm-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rho-dividends-and-the-second-order-greeks-vanna-volga-charm-4.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/rho-dividends-and-the-second-order-greeks-vanna-volga-charm-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rho-dividends-and-the-second-order-greeks-vanna-volga-charm-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rho-dividends-and-the-second-order-greeks-vanna-volga-charm-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/risk-management-around-events-gaps-sizing-stops-1.png": {
     "width": 1792,
@@ -25061,6 +25214,39 @@
     "width": 1792,
     "height": 709
   },
+  "/imgs/blogs/the-mathematics-of-audio-signals-1.png": {
+    "width": 1792,
+    "height": 1277,
+    "cover": true
+  },
+  "/imgs/blogs/the-mathematics-of-audio-signals-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/the-mathematics-of-audio-signals-3.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-mathematics-of-audio-signals-4.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/the-mathematics-of-audio-signals-5.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/the-mathematics-of-audio-signals-6.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/the-mathematics-of-audio-signals-7.png": {
+    "width": 1792,
+    "height": 731
+  },
+  "/imgs/blogs/the-mathematics-of-audio-signals-8.png": {
+    "width": 1792,
+    "height": 1263
+  },
   "/imgs/blogs/the-mathematics-of-image-distributions-1.png": {
     "width": 1792,
     "height": 1178,
@@ -25221,6 +25407,35 @@
   "/imgs/blogs/the-multipolar-money-order-brics-de-dollarization-and-golds-comeback-7.png": {
     "width": 1792,
     "height": 1069
+  },
+  "/imgs/blogs/the-net-greeks-of-a-position-building-your-risk-dashboard-1.png": {
+    "width": 1607,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/the-net-greeks-of-a-position-building-your-risk-dashboard-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-net-greeks-of-a-position-building-your-risk-dashboard-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-net-greeks-of-a-position-building-your-risk-dashboard-4.png": {
+    "width": 1792,
+    "height": 997
+  },
+  "/imgs/blogs/the-net-greeks-of-a-position-building-your-risk-dashboard-5.png": {
+    "width": 1628,
+    "height": 914
+  },
+  "/imgs/blogs/the-net-greeks-of-a-position-building-your-risk-dashboard-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-net-greeks-of-a-position-building-your-risk-dashboard-7.png": {
+    "width": 1792,
+    "height": 1006
   },
   "/imgs/blogs/the-no-yield-problem-how-a-metal-that-pays-nothing-can-be-worth-anything-1.png": {
     "width": 1792,
@@ -25685,6 +25900,35 @@
   "/imgs/blogs/theme-waves-song-nganh-how-speculative-pumps-work-7.png": {
     "width": 1792,
     "height": 1238
+  },
+  "/imgs/blogs/theta-trading-the-clock-and-the-price-of-being-long-options-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/theta-trading-the-clock-and-the-price-of-being-long-options-2.png": {
+    "width": 1695,
+    "height": 914
+  },
+  "/imgs/blogs/theta-trading-the-clock-and-the-price-of-being-long-options-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/theta-trading-the-clock-and-the-price-of-being-long-options-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/theta-trading-the-clock-and-the-price-of-being-long-options-5.png": {
+    "width": 1792,
+    "height": 887
+  },
+  "/imgs/blogs/theta-trading-the-clock-and-the-price-of-being-long-options-6.png": {
+    "width": 1702,
+    "height": 914
+  },
+  "/imgs/blogs/theta-trading-the-clock-and-the-price-of-being-long-options-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/three-arrows-capital-and-crypto-lender-contagion-1.png": {
     "width": 1792,
@@ -27122,6 +27366,35 @@
     "width": 1792,
     "height": 992
   },
+  "/imgs/blogs/vega-your-exposure-to-implied-volatility-and-the-vol-of-vol-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/vega-your-exposure-to-implied-volatility-and-the-vol-of-vol-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/vega-your-exposure-to-implied-volatility-and-the-vol-of-vol-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/vega-your-exposure-to-implied-volatility-and-the-vol-of-vol-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/vega-your-exposure-to-implied-volatility-and-the-vol-of-vol-5.png": {
+    "width": 1792,
+    "height": 896
+  },
+  "/imgs/blogs/vega-your-exposure-to-implied-volatility-and-the-vol-of-vol-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/vega-your-exposure-to-implied-volatility-and-the-vol-of-vol-7.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/veo-and-cinematic-generation-1.png": {
     "width": 1792,
     "height": 700,
@@ -28209,6 +28482,39 @@
   "/imgs/blogs/who-owns-gold-the-demand-map-jewelry-bars-etfs-central-banks-industry-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/why-audio-generation-is-hard-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/why-audio-generation-is-hard-2.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/why-audio-generation-is-hard-3.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/why-audio-generation-is-hard-4.png": {
+    "width": 1792,
+    "height": 991
+  },
+  "/imgs/blogs/why-audio-generation-is-hard-5.png": {
+    "width": 1792,
+    "height": 1297
+  },
+  "/imgs/blogs/why-audio-generation-is-hard-6.png": {
+    "width": 1792,
+    "height": 691
+  },
+  "/imgs/blogs/why-audio-generation-is-hard-7.png": {
+    "width": 1792,
+    "height": 1415
+  },
+  "/imgs/blogs/why-audio-generation-is-hard-8.png": {
+    "width": 1792,
+    "height": 1129
   },
   "/imgs/blogs/why-bond-prices-move-when-rates-move-and-by-how-much-1.png": {
     "width": 1792,
