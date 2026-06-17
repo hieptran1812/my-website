@@ -1,4 +1,33 @@
 {
+  "/imgs/blogs/0dte-and-the-rise-of-short-dated-options-the-new-market-structure-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/0dte-and-the-rise-of-short-dated-options-the-new-market-structure-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/0dte-and-the-rise-of-short-dated-options-the-new-market-structure-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/0dte-and-the-rise-of-short-dated-options-the-new-market-structure-4.png": {
+    "width": 1792,
+    "height": 1157
+  },
+  "/imgs/blogs/0dte-and-the-rise-of-short-dated-options-the-new-market-structure-5.png": {
+    "width": 1622,
+    "height": 914
+  },
+  "/imgs/blogs/0dte-and-the-rise-of-short-dated-options-the-new-market-structure-6.png": {
+    "width": 1792,
+    "height": 1127
+  },
+  "/imgs/blogs/0dte-and-the-rise-of-short-dated-options-the-new-market-structure-7.png": {
+    "width": 1792,
+    "height": 1059
+  },
   "/imgs/blogs/2008-financial-crisis-the-liquidity-crisis-and-policy-response-1.png": {
     "width": 1792,
     "height": 710,
@@ -3059,6 +3088,35 @@
     "width": 1792,
     "height": 1208
   },
+  "/imgs/blogs/building-your-options-trading-playbook-capstone-1.png": {
+    "width": 1792,
+    "height": 1158,
+    "cover": true
+  },
+  "/imgs/blogs/building-your-options-trading-playbook-capstone-2.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/building-your-options-trading-playbook-capstone-3.png": {
+    "width": 1694,
+    "height": 914
+  },
+  "/imgs/blogs/building-your-options-trading-playbook-capstone-4.png": {
+    "width": 1661,
+    "height": 914
+  },
+  "/imgs/blogs/building-your-options-trading-playbook-capstone-5.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/building-your-options-trading-playbook-capstone-6.png": {
+    "width": 1792,
+    "height": 904
+  },
+  "/imgs/blogs/building-your-options-trading-playbook-capstone-7.png": {
+    "width": 1792,
+    "height": 1209
+  },
   "/imgs/blogs/building-your-trading-plan-capstone-1.png": {
     "width": 1792,
     "height": 1208,
@@ -4144,6 +4202,35 @@
     "width": 1792,
     "height": 1384
   },
+  "/imgs/blogs/case-study-the-1987-crash-and-the-birth-of-the-skew-1.png": {
+    "width": 1667,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-the-1987-crash-and-the-birth-of-the-skew-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-the-1987-crash-and-the-birth-of-the-skew-3.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/case-study-the-1987-crash-and-the-birth-of-the-skew-4.png": {
+    "width": 1634,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-the-1987-crash-and-the-birth-of-the-skew-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-the-1987-crash-and-the-birth-of-the-skew-6.png": {
+    "width": 1792,
+    "height": 1252
+  },
+  "/imgs/blogs/case-study-the-1987-crash-and-the-birth-of-the-skew-7.png": {
+    "width": 1792,
+    "height": 1199
+  },
   "/imgs/blogs/case-study-the-ronin-bridge-hack-1.png": {
     "width": 1792,
     "height": 961,
@@ -4325,6 +4412,35 @@
   "/imgs/blogs/case-study-volcker-1980-and-the-bond-bull-7.png": {
     "width": 1792,
     "height": 1237
+  },
+  "/imgs/blogs/case-study-volmageddon-2018-and-the-short-vol-blowup-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-volmageddon-2018-and-the-short-vol-blowup-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-volmageddon-2018-and-the-short-vol-blowup-3.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/case-study-volmageddon-2018-and-the-short-vol-blowup-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-volmageddon-2018-and-the-short-vol-blowup-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-volmageddon-2018-and-the-short-vol-blowup-6.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/case-study-volmageddon-2018-and-the-short-vol-blowup-7.png": {
+    "width": 1792,
+    "height": 1341
   },
   "/imgs/blogs/cash-flow-statement-where-the-cash-really-comes-from-1.png": {
     "width": 1792,
@@ -6970,6 +7086,35 @@
   "/imgs/blogs/dead-neurons-and-saturated-activations-8.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/dealer-gamma-charm-and-vanna-how-options-flows-move-the-spot-1.png": {
+    "width": 1792,
+    "height": 976,
+    "cover": true
+  },
+  "/imgs/blogs/dealer-gamma-charm-and-vanna-how-options-flows-move-the-spot-2.png": {
+    "width": 1642,
+    "height": 914
+  },
+  "/imgs/blogs/dealer-gamma-charm-and-vanna-how-options-flows-move-the-spot-3.png": {
+    "width": 1610,
+    "height": 914
+  },
+  "/imgs/blogs/dealer-gamma-charm-and-vanna-how-options-flows-move-the-spot-4.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/dealer-gamma-charm-and-vanna-how-options-flows-move-the-spot-5.png": {
+    "width": 1638,
+    "height": 914
+  },
+  "/imgs/blogs/dealer-gamma-charm-and-vanna-how-options-flows-move-the-spot-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/dealer-gamma-charm-and-vanna-how-options-flows-move-the-spot-7.png": {
+    "width": 1792,
+    "height": 1100
   },
   "/imgs/blogs/debasement-debt-and-the-fiscal-story-gold-as-an-anti-currency-1.png": {
     "width": 1792,
