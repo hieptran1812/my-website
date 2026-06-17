@@ -6425,6 +6425,39 @@
     "width": 1792,
     "height": 1217
   },
+  "/imgs/blogs/debugging-ddp-and-multi-gpu-1.png": {
+    "width": 1792,
+    "height": 1262,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-ddp-and-multi-gpu-2.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/debugging-ddp-and-multi-gpu-3.png": {
+    "width": 1792,
+    "height": 715
+  },
+  "/imgs/blogs/debugging-ddp-and-multi-gpu-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/debugging-ddp-and-multi-gpu-5.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/debugging-ddp-and-multi-gpu-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/debugging-ddp-and-multi-gpu-7.png": {
+    "width": 1792,
+    "height": 1343
+  },
+  "/imgs/blogs/debugging-ddp-and-multi-gpu-8.png": {
+    "width": 1792,
+    "height": 1178
+  },
   "/imgs/blogs/debugging-lora-and-peft-1.png": {
     "width": 1792,
     "height": 1220,
@@ -9759,6 +9792,39 @@
     "width": 1792,
     "height": 1235
   },
+  "/imgs/blogs/fsdp-and-sharding-bugs-1.png": {
+    "width": 1792,
+    "height": 1247,
+    "cover": true
+  },
+  "/imgs/blogs/fsdp-and-sharding-bugs-2.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/fsdp-and-sharding-bugs-3.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/fsdp-and-sharding-bugs-4.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/fsdp-and-sharding-bugs-5.png": {
+    "width": 1792,
+    "height": 918
+  },
+  "/imgs/blogs/fsdp-and-sharding-bugs-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/fsdp-and-sharding-bugs-7.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/fsdp-and-sharding-bugs-8.png": {
+    "width": 1792,
+    "height": 1194
+  },
   "/imgs/blogs/ftx-collapse-sam-bankman-fried-1.png": {
     "width": 1792,
     "height": 982,
@@ -10702,6 +10768,39 @@
   "/imgs/blogs/gpu-03-decision.png": {
     "width": 813,
     "height": 665
+  },
+  "/imgs/blogs/gradient-accumulation-and-effective-batch-bugs-1.png": {
+    "width": 1792,
+    "height": 697,
+    "cover": true
+  },
+  "/imgs/blogs/gradient-accumulation-and-effective-batch-bugs-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/gradient-accumulation-and-effective-batch-bugs-3.png": {
+    "width": 1792,
+    "height": 924
+  },
+  "/imgs/blogs/gradient-accumulation-and-effective-batch-bugs-4.png": {
+    "width": 1792,
+    "height": 1334
+  },
+  "/imgs/blogs/gradient-accumulation-and-effective-batch-bugs-5.png": {
+    "width": 1792,
+    "height": 1171
+  },
+  "/imgs/blogs/gradient-accumulation-and-effective-batch-bugs-6.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/gradient-accumulation-and-effective-batch-bugs-7.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/gradient-accumulation-and-effective-batch-bugs-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/gradient-boosting-and-imbalance-debugging-1.png": {
     "width": 1792,
@@ -16970,6 +17069,39 @@
   "/imgs/blogs/orpheus-tts-llm-speech-snac-9.png": {
     "width": 1792,
     "height": 1054
+  },
+  "/imgs/blogs/out-of-memory-debugging-1.png": {
+    "width": 1792,
+    "height": 1220,
+    "cover": true
+  },
+  "/imgs/blogs/out-of-memory-debugging-2.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/out-of-memory-debugging-3.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/out-of-memory-debugging-4.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/out-of-memory-debugging-5.png": {
+    "width": 1792,
+    "height": 914
+  },
+  "/imgs/blogs/out-of-memory-debugging-6.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/out-of-memory-debugging-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/out-of-memory-debugging-8.png": {
+    "width": 1792,
+    "height": 1221
   },
   "/imgs/blogs/overfitting-purged-cv-deflated-sharpe-quant-research-1.png": {
     "width": 1792,
@@ -23367,6 +23499,39 @@
   "/imgs/blogs/the-gold-standard-and-its-death-bretton-woods-to-the-nixon-shock-7.png": {
     "width": 1792,
     "height": 1055
+  },
+  "/imgs/blogs/the-gpu-is-idle-throughput-debugging-1.png": {
+    "width": 1792,
+    "height": 1248,
+    "cover": true
+  },
+  "/imgs/blogs/the-gpu-is-idle-throughput-debugging-2.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/the-gpu-is-idle-throughput-debugging-3.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/the-gpu-is-idle-throughput-debugging-4.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/the-gpu-is-idle-throughput-debugging-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/the-gpu-is-idle-throughput-debugging-6.png": {
+    "width": 1792,
+    "height": 1155
+  },
+  "/imgs/blogs/the-gpu-is-idle-throughput-debugging-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-gpu-is-idle-throughput-debugging-8.png": {
+    "width": 1792,
+    "height": 1260
   },
   "/imgs/blogs/the-great-bond-crises-1994-2008-2020-2022-and-2023-1.png": {
     "width": 1792,
