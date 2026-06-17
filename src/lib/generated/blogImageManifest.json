@@ -1073,6 +1073,39 @@
     "width": 1792,
     "height": 1285
   },
+  "/imgs/blogs/audio-input-bugs-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/audio-input-bugs-2.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/audio-input-bugs-3.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/audio-input-bugs-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/audio-input-bugs-5.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/audio-input-bugs-6.png": {
+    "width": 1792,
+    "height": 1155
+  },
+  "/imgs/blogs/audio-input-bugs-7.png": {
+    "width": 1792,
+    "height": 917
+  },
+  "/imgs/blogs/audio-input-bugs-8.png": {
+    "width": 1792,
+    "height": 1221
+  },
   "/imgs/blogs/augmentation-debugging-for-vision-1.png": {
     "width": 1792,
     "height": 1278,
@@ -6259,6 +6292,72 @@
   "/imgs/blogs/debasement-debt-and-the-fiscal-story-gold-as-an-anti-currency-8.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/debugging-asr-finetuning-1.png": {
+    "width": 1792,
+    "height": 1260,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-asr-finetuning-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/debugging-asr-finetuning-3.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/debugging-asr-finetuning-4.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/debugging-asr-finetuning-5.png": {
+    "width": 1792,
+    "height": 1060
+  },
+  "/imgs/blogs/debugging-asr-finetuning-6.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/debugging-asr-finetuning-7.png": {
+    "width": 1792,
+    "height": 1155
+  },
+  "/imgs/blogs/debugging-asr-finetuning-8.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/debugging-ctc-and-alignment-1.png": {
+    "width": 1792,
+    "height": 1054,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-ctc-and-alignment-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/debugging-ctc-and-alignment-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/debugging-ctc-and-alignment-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/debugging-ctc-and-alignment-5.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/debugging-ctc-and-alignment-6.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/debugging-ctc-and-alignment-7.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/debugging-ctc-and-alignment-8.png": {
+    "width": 1792,
+    "height": 1217
   },
   "/imgs/blogs/debugging-lora-and-peft-1.png": {
     "width": 1792,
@@ -21449,6 +21548,39 @@
   "/imgs/blogs/stock-exchanges-and-clearinghouses-7.png": {
     "width": 1792,
     "height": 1178
+  },
+  "/imgs/blogs/streaming-vs-offline-mismatch-1.png": {
+    "width": 1792,
+    "height": 1247,
+    "cover": true
+  },
+  "/imgs/blogs/streaming-vs-offline-mismatch-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/streaming-vs-offline-mismatch-3.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/streaming-vs-offline-mismatch-4.png": {
+    "width": 1792,
+    "height": 1294
+  },
+  "/imgs/blogs/streaming-vs-offline-mismatch-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/streaming-vs-offline-mismatch-6.png": {
+    "width": 1792,
+    "height": 914
+  },
+  "/imgs/blogs/streaming-vs-offline-mismatch-7.png": {
+    "width": 1792,
+    "height": 1207
+  },
+  "/imgs/blogs/streaming-vs-offline-mismatch-8.png": {
+    "width": 1792,
+    "height": 1271
   },
   "/imgs/blogs/structured-pruning-that-actually-speeds-things-up-1.png": {
     "width": 1792,
