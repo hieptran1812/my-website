@@ -5330,6 +5330,39 @@
     "width": 1792,
     "height": 1212
   },
+  "/imgs/blogs/collective-communication-and-nccl-all-reduce-from-scratch-1.png": {
+    "width": 1792,
+    "height": 1371,
+    "cover": true
+  },
+  "/imgs/blogs/collective-communication-and-nccl-all-reduce-from-scratch-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/collective-communication-and-nccl-all-reduce-from-scratch-3.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/collective-communication-and-nccl-all-reduce-from-scratch-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/collective-communication-and-nccl-all-reduce-from-scratch-5.png": {
+    "width": 1792,
+    "height": 1339
+  },
+  "/imgs/blogs/collective-communication-and-nccl-all-reduce-from-scratch-6.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/collective-communication-and-nccl-all-reduce-from-scratch-7.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/collective-communication-and-nccl-all-reduce-from-scratch-8.png": {
+    "width": 1792,
+    "height": 1330
+  },
   "/imgs/blogs/combibench-1.png": {
     "width": 1792,
     "height": 921,
@@ -14445,6 +14478,39 @@
     "width": 1792,
     "height": 1237
   },
+  "/imgs/blogs/interconnects-nvlink-nvswitch-infiniband-and-rdma-1.png": {
+    "width": 1792,
+    "height": 1200,
+    "cover": true
+  },
+  "/imgs/blogs/interconnects-nvlink-nvswitch-infiniband-and-rdma-2.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/interconnects-nvlink-nvswitch-infiniband-and-rdma-3.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/interconnects-nvlink-nvswitch-infiniband-and-rdma-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/interconnects-nvlink-nvswitch-infiniband-and-rdma-5.png": {
+    "width": 1792,
+    "height": 1302
+  },
+  "/imgs/blogs/interconnects-nvlink-nvswitch-infiniband-and-rdma-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/interconnects-nvlink-nvswitch-infiniband-and-rdma-7.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/interconnects-nvlink-nvswitch-infiniband-and-rdma-8.png": {
+    "width": 1792,
+    "height": 1268
+  },
   "/imgs/blogs/interest-rates-and-mortgages-the-master-variable-1.png": {
     "width": 1792,
     "height": 1250,
@@ -17186,6 +17252,39 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/memory-optimization-zero-fsdp-activation-checkpointing-and-offload-1.png": {
+    "width": 1792,
+    "height": 1263,
+    "cover": true
+  },
+  "/imgs/blogs/memory-optimization-zero-fsdp-activation-checkpointing-and-offload-2.png": {
+    "width": 1792,
+    "height": 1353
+  },
+  "/imgs/blogs/memory-optimization-zero-fsdp-activation-checkpointing-and-offload-3.png": {
+    "width": 1792,
+    "height": 664
+  },
+  "/imgs/blogs/memory-optimization-zero-fsdp-activation-checkpointing-and-offload-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/memory-optimization-zero-fsdp-activation-checkpointing-and-offload-5.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/memory-optimization-zero-fsdp-activation-checkpointing-and-offload-6.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/memory-optimization-zero-fsdp-activation-checkpointing-and-offload-7.png": {
+    "width": 1792,
+    "height": 1343
+  },
+  "/imgs/blogs/memory-optimization-zero-fsdp-activation-checkpointing-and-offload-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/mental-math-and-estimation-as-a-trainable-skill-1.png": {
     "width": 1792,
     "height": 1055,
@@ -19830,6 +19929,39 @@
   "/imgs/blogs/owning-pnl-and-owning-research-the-accountability-ladder-7.png": {
     "width": 1792,
     "height": 1210
+  },
+  "/imgs/blogs/parallelism-strategies-data-tensor-pipeline-and-expert-1.png": {
+    "width": 1792,
+    "height": 1163,
+    "cover": true
+  },
+  "/imgs/blogs/parallelism-strategies-data-tensor-pipeline-and-expert-2.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/parallelism-strategies-data-tensor-pipeline-and-expert-3.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/parallelism-strategies-data-tensor-pipeline-and-expert-4.png": {
+    "width": 1792,
+    "height": 917
+  },
+  "/imgs/blogs/parallelism-strategies-data-tensor-pipeline-and-expert-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/parallelism-strategies-data-tensor-pipeline-and-expert-6.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/parallelism-strategies-data-tensor-pipeline-and-expert-7.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/parallelism-strategies-data-tensor-pipeline-and-expert-8.png": {
+    "width": 1792,
+    "height": 1261
   },
   "/imgs/blogs/paul-volcker-1980-rate-shock-killing-inflation-1.png": {
     "width": 1792,
