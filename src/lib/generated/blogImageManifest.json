@@ -4599,6 +4599,35 @@
     "width": 1792,
     "height": 955
   },
+  "/imgs/blogs/citadel-and-citadel-securities-the-pod-shop-and-the-market-maker-1.png": {
+    "width": 1792,
+    "height": 1232,
+    "cover": true
+  },
+  "/imgs/blogs/citadel-and-citadel-securities-the-pod-shop-and-the-market-maker-2.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/citadel-and-citadel-securities-the-pod-shop-and-the-market-maker-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/citadel-and-citadel-securities-the-pod-shop-and-the-market-maker-4.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/citadel-and-citadel-securities-the-pod-shop-and-the-market-maker-5.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/citadel-and-citadel-securities-the-pod-shop-and-the-market-maker-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/citadel-and-citadel-securities-the-pod-shop-and-the-market-maker-7.png": {
+    "width": 1792,
+    "height": 1206
+  },
   "/imgs/blogs/class-imbalance-and-when-accuracy-lies-1.png": {
     "width": 1792,
     "height": 1221,
@@ -13617,6 +13646,35 @@
     "width": 1792,
     "height": 1210
   },
+  "/imgs/blogs/jane-street-playbook-culture-ocaml-and-the-trading-games-1.png": {
+    "width": 1792,
+    "height": 1189,
+    "cover": true
+  },
+  "/imgs/blogs/jane-street-playbook-culture-ocaml-and-the-trading-games-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/jane-street-playbook-culture-ocaml-and-the-trading-games-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/jane-street-playbook-culture-ocaml-and-the-trading-games-4.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/jane-street-playbook-culture-ocaml-and-the-trading-games-5.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/jane-street-playbook-culture-ocaml-and-the-trading-games-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/jane-street-playbook-culture-ocaml-and-the-trading-games-7.png": {
+    "width": 1792,
+    "height": 1277
+  },
   "/imgs/blogs/jerome-powell-and-the-modern-fed-chair-1.png": {
     "width": 1792,
     "height": 986,
@@ -13708,6 +13766,35 @@
     "width": 1318,
     "height": 534,
     "cover": true
+  },
+  "/imgs/blogs/jump-and-hrt-playbook-the-low-latency-systems-bar-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/jump-and-hrt-playbook-the-low-latency-systems-bar-2.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/jump-and-hrt-playbook-the-low-latency-systems-bar-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/jump-and-hrt-playbook-the-low-latency-systems-bar-4.png": {
+    "width": 1792,
+    "height": 1142
+  },
+  "/imgs/blogs/jump-and-hrt-playbook-the-low-latency-systems-bar-5.png": {
+    "width": 1792,
+    "height": 1255
+  },
+  "/imgs/blogs/jump-and-hrt-playbook-the-low-latency-systems-bar-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/jump-and-hrt-playbook-the-low-latency-systems-bar-7.png": {
+    "width": 1792,
+    "height": 1216
   },
   "/imgs/blogs/jump-diffusion-stochastic-volatility-math-for-quants-1.png": {
     "width": 1792,
@@ -17892,6 +17979,35 @@
   "/imgs/blogs/options-theory-9.png": {
     "width": 1792,
     "height": 970
+  },
+  "/imgs/blogs/optiver-and-imc-playbook-the-mental-math-gauntlet-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/optiver-and-imc-playbook-the-mental-math-gauntlet-2.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/optiver-and-imc-playbook-the-mental-math-gauntlet-3.png": {
+    "width": 1792,
+    "height": 1069
+  },
+  "/imgs/blogs/optiver-and-imc-playbook-the-mental-math-gauntlet-4.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/optiver-and-imc-playbook-the-mental-math-gauntlet-5.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/optiver-and-imc-playbook-the-mental-math-gauntlet-6.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/optiver-and-imc-playbook-the-mental-math-gauntlet-7.png": {
+    "width": 1792,
+    "height": 1197
   },
   "/imgs/blogs/order-book-simulator-quant-research-1.png": {
     "width": 1792,
@@ -22284,6 +22400,35 @@
     "width": 1792,
     "height": 872
   },
+  "/imgs/blogs/sig-susquehanna-playbook-poker-game-theory-and-ev-1.png": {
+    "width": 1792,
+    "height": 1420,
+    "cover": true
+  },
+  "/imgs/blogs/sig-susquehanna-playbook-poker-game-theory-and-ev-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/sig-susquehanna-playbook-poker-game-theory-and-ev-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/sig-susquehanna-playbook-poker-game-theory-and-ev-4.png": {
+    "width": 1792,
+    "height": 847
+  },
+  "/imgs/blogs/sig-susquehanna-playbook-poker-game-theory-and-ev-5.png": {
+    "width": 1792,
+    "height": 993
+  },
+  "/imgs/blogs/sig-susquehanna-playbook-poker-game-theory-and-ev-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/sig-susquehanna-playbook-poker-game-theory-and-ev-7.png": {
+    "width": 1792,
+    "height": 1322
+  },
   "/imgs/blogs/silver-platinum-and-the-gold-silver-ratio-the-rest-of-the-precious-complex-1.png": {
     "width": 1792,
     "height": 1224,
@@ -25975,6 +26120,35 @@
     "height": 458,
     "cover": true
   },
+  "/imgs/blogs/the-wider-ecosystem-and-how-to-choose-your-firm-1.png": {
+    "width": 1792,
+    "height": 1140,
+    "cover": true
+  },
+  "/imgs/blogs/the-wider-ecosystem-and-how-to-choose-your-firm-2.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/the-wider-ecosystem-and-how-to-choose-your-firm-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-wider-ecosystem-and-how-to-choose-your-firm-4.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/the-wider-ecosystem-and-how-to-choose-your-firm-5.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/the-wider-ecosystem-and-how-to-choose-your-firm-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-wider-ecosystem-and-how-to-choose-your-firm-7.png": {
+    "width": 1792,
+    "height": 1198
+  },
   "/imgs/blogs/the-yield-curve-explained-the-most-important-chart-in-finance-1.png": {
     "width": 1792,
     "height": 1063,
@@ -27228,6 +27402,35 @@
   "/imgs/blogs/two-pillars-of-valuation-intrinsic-vs-relative-7.png": {
     "width": 1792,
     "height": 1044
+  },
+  "/imgs/blogs/two-sigma-and-de-shaw-the-systematic-research-powerhouses-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/two-sigma-and-de-shaw-the-systematic-research-powerhouses-2.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/two-sigma-and-de-shaw-the-systematic-research-powerhouses-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/two-sigma-and-de-shaw-the-systematic-research-powerhouses-4.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/two-sigma-and-de-shaw-the-systematic-research-powerhouses-5.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/two-sigma-and-de-shaw-the-systematic-research-powerhouses-6.png": {
+    "width": 1792,
+    "height": 783
+  },
+  "/imgs/blogs/two-sigma-and-de-shaw-the-systematic-research-powerhouses-7.png": {
+    "width": 1792,
+    "height": 1226
   },
   "/imgs/blogs/underwriting-a-property-deal-1.png": {
     "width": 1792,
@@ -29128,6 +29331,35 @@
   "/imgs/blogs/working-capital-and-the-cash-conversion-cycle-7.png": {
     "width": 1792,
     "height": 1117
+  },
+  "/imgs/blogs/worldquant-and-the-alpha-factory-model-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/worldquant-and-the-alpha-factory-model-2.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/worldquant-and-the-alpha-factory-model-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/worldquant-and-the-alpha-factory-model-4.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/worldquant-and-the-alpha-factory-model-5.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/worldquant-and-the-alpha-factory-model-6.png": {
+    "width": 1792,
+    "height": 929
+  },
+  "/imgs/blogs/worldquant-and-the-alpha-factory-model-7.png": {
+    "width": 1792,
+    "height": 1235
   },
   "/imgs/blogs/worldvqa-1.png": {
     "width": 1792,
