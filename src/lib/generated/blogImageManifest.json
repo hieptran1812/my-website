@@ -17630,6 +17630,39 @@
     "width": 1792,
     "height": 1231
   },
+  "/imgs/blogs/neural-codec-language-model-tts-vall-e-1.png": {
+    "width": 1792,
+    "height": 702,
+    "cover": true
+  },
+  "/imgs/blogs/neural-codec-language-model-tts-vall-e-2.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/neural-codec-language-model-tts-vall-e-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/neural-codec-language-model-tts-vall-e-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/neural-codec-language-model-tts-vall-e-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/neural-codec-language-model-tts-vall-e-6.png": {
+    "width": 1792,
+    "height": 988
+  },
+  "/imgs/blogs/neural-codec-language-model-tts-vall-e-7.png": {
+    "width": 1792,
+    "height": 1285
+  },
+  "/imgs/blogs/neural-codec-language-model-tts-vall-e-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/noise-schedules-and-the-parameterization-zoo-1.png": {
     "width": 1792,
     "height": 675,
@@ -19297,6 +19330,39 @@
     "width": 1792,
     "height": 1210
   },
+  "/imgs/blogs/prosody-emotion-and-expressive-speech-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/prosody-emotion-and-expressive-speech-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/prosody-emotion-and-expressive-speech-3.png": {
+    "width": 1792,
+    "height": 848
+  },
+  "/imgs/blogs/prosody-emotion-and-expressive-speech-4.png": {
+    "width": 1792,
+    "height": 1012
+  },
+  "/imgs/blogs/prosody-emotion-and-expressive-speech-5.png": {
+    "width": 1792,
+    "height": 1018
+  },
+  "/imgs/blogs/prosody-emotion-and-expressive-speech-6.png": {
+    "width": 1792,
+    "height": 1333
+  },
+  "/imgs/blogs/prosody-emotion-and-expressive-speech-7.png": {
+    "width": 1792,
+    "height": 664
+  },
+  "/imgs/blogs/prosody-emotion-and-expressive-speech-8.png": {
+    "width": 1792,
+    "height": 1331
+  },
   "/imgs/blogs/pruning-fundamentals-1.png": {
     "width": 1792,
     "height": 1341,
@@ -20596,6 +20662,39 @@
   "/imgs/blogs/real-interest-rates-the-master-variable-behind-the-gold-price-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/real-time-streaming-and-full-duplex-speech-1.png": {
+    "width": 1792,
+    "height": 1247,
+    "cover": true
+  },
+  "/imgs/blogs/real-time-streaming-and-full-duplex-speech-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/real-time-streaming-and-full-duplex-speech-3.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/real-time-streaming-and-full-duplex-speech-4.png": {
+    "width": 1792,
+    "height": 671
+  },
+  "/imgs/blogs/real-time-streaming-and-full-duplex-speech-5.png": {
+    "width": 1792,
+    "height": 1021
+  },
+  "/imgs/blogs/real-time-streaming-and-full-duplex-speech-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/real-time-streaming-and-full-duplex-speech-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/real-time-streaming-and-full-duplex-speech-8.png": {
+    "width": 1792,
+    "height": 1247
   },
   "/imgs/blogs/real-vs-nominal-inflation-real-yields-master-signal-1.png": {
     "width": 1792,
@@ -24310,6 +24409,39 @@
   "/imgs/blogs/text-encoders-and-prompt-conditioning-8.png": {
     "width": 1792,
     "height": 988
+  },
+  "/imgs/blogs/text-to-speech-from-tacotron-to-vits-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/text-to-speech-from-tacotron-to-vits-2.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/text-to-speech-from-tacotron-to-vits-3.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/text-to-speech-from-tacotron-to-vits-4.png": {
+    "width": 1792,
+    "height": 1083
+  },
+  "/imgs/blogs/text-to-speech-from-tacotron-to-vits-5.png": {
+    "width": 1792,
+    "height": 774
+  },
+  "/imgs/blogs/text-to-speech-from-tacotron-to-vits-6.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/text-to-speech-from-tacotron-to-vits-7.png": {
+    "width": 1792,
+    "height": 1008
+  },
+  "/imgs/blogs/text-to-speech-from-tacotron-to-vits-8.png": {
+    "width": 1792,
+    "height": 1169
   },
   "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-1.png": {
     "width": 1792,
@@ -29905,5 +30037,38 @@
   "/imgs/blogs/your-model-isnt-learning-what-you-think-8.png": {
     "width": 1792,
     "height": 1231
+  },
+  "/imgs/blogs/zero-shot-voice-cloning-and-the-tts-frontier-1.png": {
+    "width": 1792,
+    "height": 686,
+    "cover": true
+  },
+  "/imgs/blogs/zero-shot-voice-cloning-and-the-tts-frontier-2.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/zero-shot-voice-cloning-and-the-tts-frontier-3.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/zero-shot-voice-cloning-and-the-tts-frontier-4.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/zero-shot-voice-cloning-and-the-tts-frontier-5.png": {
+    "width": 1792,
+    "height": 674
+  },
+  "/imgs/blogs/zero-shot-voice-cloning-and-the-tts-frontier-6.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/zero-shot-voice-cloning-and-the-tts-frontier-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/zero-shot-voice-cloning-and-the-tts-frontier-8.png": {
+    "width": 1792,
+    "height": 1208
   }
 }
