@@ -9441,6 +9441,39 @@
     "width": 1792,
     "height": 1261
   },
+  "/imgs/blogs/from-image-diffusion-to-video-diffusion-1.png": {
+    "width": 1792,
+    "height": 824,
+    "cover": true
+  },
+  "/imgs/blogs/from-image-diffusion-to-video-diffusion-2.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/from-image-diffusion-to-video-diffusion-3.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/from-image-diffusion-to-video-diffusion-4.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/from-image-diffusion-to-video-diffusion-5.png": {
+    "width": 1792,
+    "height": 709
+  },
+  "/imgs/blogs/from-image-diffusion-to-video-diffusion-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/from-image-diffusion-to-video-diffusion-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/from-image-diffusion-to-video-diffusion-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/from-model-to-deployable-artifact-1.png": {
     "width": 1792,
     "height": 1365,
@@ -19187,6 +19220,39 @@
     "width": 1792,
     "height": 1209
   },
+  "/imgs/blogs/representing-video-redundancy-and-tokens-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/representing-video-redundancy-and-tokens-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/representing-video-redundancy-and-tokens-3.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/representing-video-redundancy-and-tokens-4.png": {
+    "width": 1792,
+    "height": 1286
+  },
+  "/imgs/blogs/representing-video-redundancy-and-tokens-5.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/representing-video-redundancy-and-tokens-6.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/representing-video-redundancy-and-tokens-7.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/representing-video-redundancy-and-tokens-8.png": {
+    "width": 1792,
+    "height": 1238
+  },
   "/imgs/blogs/reproducibility-and-determinism-in-training-1.png": {
     "width": 1792,
     "height": 1264,
@@ -23439,6 +23505,39 @@
     "width": 1792,
     "height": 987
   },
+  "/imgs/blogs/the-metrics-of-video-generation-1.png": {
+    "width": 1792,
+    "height": 824,
+    "cover": true
+  },
+  "/imgs/blogs/the-metrics-of-video-generation-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/the-metrics-of-video-generation-3.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/the-metrics-of-video-generation-4.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/the-metrics-of-video-generation-5.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/the-metrics-of-video-generation-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/the-metrics-of-video-generation-7.png": {
+    "width": 1792,
+    "height": 1245
+  },
+  "/imgs/blogs/the-metrics-of-video-generation-8.png": {
+    "width": 1792,
+    "height": 1160
+  },
   "/imgs/blogs/the-metrics-that-actually-matter-on-device-1.png": {
     "width": 1792,
     "height": 1277,
@@ -25327,6 +25426,39 @@
     "width": 1792,
     "height": 1052
   },
+  "/imgs/blogs/video-autoencoders-and-spatiotemporal-compression-1.png": {
+    "width": 1792,
+    "height": 671,
+    "cover": true
+  },
+  "/imgs/blogs/video-autoencoders-and-spatiotemporal-compression-2.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/video-autoencoders-and-spatiotemporal-compression-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/video-autoencoders-and-spatiotemporal-compression-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/video-autoencoders-and-spatiotemporal-compression-5.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/video-autoencoders-and-spatiotemporal-compression-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/video-autoencoders-and-spatiotemporal-compression-7.png": {
+    "width": 1792,
+    "height": 715
+  },
+  "/imgs/blogs/video-autoencoders-and-spatiotemporal-compression-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/vietnam-events-sbv-vn-cpi-and-how-vn-index-reacts-1.png": {
     "width": 1792,
     "height": 1121,
@@ -26535,6 +26667,39 @@
   "/imgs/blogs/why-the-yield-curve-usually-slopes-up-term-premium-and-expectations-7.png": {
     "width": 1792,
     "height": 1247
+  },
+  "/imgs/blogs/why-video-generation-is-hard-1.png": {
+    "width": 1792,
+    "height": 1312,
+    "cover": true
+  },
+  "/imgs/blogs/why-video-generation-is-hard-2.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/why-video-generation-is-hard-3.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/why-video-generation-is-hard-4.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/why-video-generation-is-hard-5.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/why-video-generation-is-hard-6.png": {
+    "width": 1792,
+    "height": 754
+  },
+  "/imgs/blogs/why-video-generation-is-hard-7.png": {
+    "width": 1792,
+    "height": 1198
+  },
+  "/imgs/blogs/why-video-generation-is-hard-8.png": {
+    "width": 1792,
+    "height": 1209
   },
   "/imgs/blogs/why-your-training-run-is-lying-to-you-1.png": {
     "width": 1792,
