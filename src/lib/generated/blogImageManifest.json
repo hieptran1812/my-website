@@ -6905,6 +6905,39 @@
     "width": 1792,
     "height": 1209
   },
+  "/imgs/blogs/cuda-programming-for-ai-engineers-threads-blocks-and-a-first-kernel-1.png": {
+    "width": 1792,
+    "height": 1178,
+    "cover": true
+  },
+  "/imgs/blogs/cuda-programming-for-ai-engineers-threads-blocks-and-a-first-kernel-2.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/cuda-programming-for-ai-engineers-threads-blocks-and-a-first-kernel-3.png": {
+    "width": 1792,
+    "height": 892
+  },
+  "/imgs/blogs/cuda-programming-for-ai-engineers-threads-blocks-and-a-first-kernel-4.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/cuda-programming-for-ai-engineers-threads-blocks-and-a-first-kernel-5.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/cuda-programming-for-ai-engineers-threads-blocks-and-a-first-kernel-6.png": {
+    "width": 1792,
+    "height": 1339
+  },
+  "/imgs/blogs/cuda-programming-for-ai-engineers-threads-blocks-and-a-first-kernel-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/cuda-programming-for-ai-engineers-threads-blocks-and-a-first-kernel-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/cure-concept-unlearning-via-orthogonal-representation-editing-in-diffusion-models-20251222154300.png": {
     "width": 1178,
     "height": 702
@@ -15053,6 +15086,39 @@
     "width": 1792,
     "height": 1324
   },
+  "/imgs/blogs/kernel-fusion-and-flashattention-beating-the-memory-wall-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/kernel-fusion-and-flashattention-beating-the-memory-wall-2.png": {
+    "width": 1789,
+    "height": 1453
+  },
+  "/imgs/blogs/kernel-fusion-and-flashattention-beating-the-memory-wall-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/kernel-fusion-and-flashattention-beating-the-memory-wall-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/kernel-fusion-and-flashattention-beating-the-memory-wall-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/kernel-fusion-and-flashattention-beating-the-memory-wall-6.png": {
+    "width": 1792,
+    "height": 928
+  },
+  "/imgs/blogs/kernel-fusion-and-flashattention-beating-the-memory-wall-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/kernel-fusion-and-flashattention-beating-the-memory-wall-8.png": {
+    "width": 1792,
+    "height": 1400
+  },
   "/imgs/blogs/kimi-audio-1.png": {
     "width": 1792,
     "height": 568,
@@ -18913,6 +18979,39 @@
     "width": 1792,
     "height": 993
   },
+  "/imgs/blogs/numerical-formats-and-mixed-precision-fp32-tf32-bf16-fp16-fp8-1.png": {
+    "width": 1792,
+    "height": 1228,
+    "cover": true
+  },
+  "/imgs/blogs/numerical-formats-and-mixed-precision-fp32-tf32-bf16-fp16-fp8-2.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/numerical-formats-and-mixed-precision-fp32-tf32-bf16-fp16-fp8-3.png": {
+    "width": 1792,
+    "height": 929
+  },
+  "/imgs/blogs/numerical-formats-and-mixed-precision-fp32-tf32-bf16-fp16-fp8-4.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/numerical-formats-and-mixed-precision-fp32-tf32-bf16-fp16-fp8-5.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/numerical-formats-and-mixed-precision-fp32-tf32-bf16-fp16-fp8-6.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/numerical-formats-and-mixed-precision-fp32-tf32-bf16-fp16-fp8-7.png": {
+    "width": 1792,
+    "height": 1269
+  },
+  "/imgs/blogs/numerical-formats-and-mixed-precision-fp32-tf32-bf16-fp16-fp8-8.png": {
+    "width": 1792,
+    "height": 1260
+  },
   "/imgs/blogs/object-detection-end-to-end-1.png": {
     "width": 1792,
     "height": 1211,
@@ -20484,6 +20583,39 @@
   "/imgs/blogs/profiling-and-benchmarking-on-device-8.png": {
     "width": 1792,
     "height": 1264
+  },
+  "/imgs/blogs/profiling-gpu-workloads-finding-the-real-bottleneck-1.png": {
+    "width": 1792,
+    "height": 906,
+    "cover": true
+  },
+  "/imgs/blogs/profiling-gpu-workloads-finding-the-real-bottleneck-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/profiling-gpu-workloads-finding-the-real-bottleneck-3.png": {
+    "width": 1792,
+    "height": 1021
+  },
+  "/imgs/blogs/profiling-gpu-workloads-finding-the-real-bottleneck-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/profiling-gpu-workloads-finding-the-real-bottleneck-5.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/profiling-gpu-workloads-finding-the-real-bottleneck-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/profiling-gpu-workloads-finding-the-real-bottleneck-7.png": {
+    "width": 1792,
+    "height": 1331
+  },
+  "/imgs/blogs/profiling-gpu-workloads-finding-the-real-bottleneck-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/profit-loss-sopr-and-hodl-waves-1.png": {
     "width": 1792,
