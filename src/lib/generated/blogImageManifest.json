@@ -1073,6 +1073,35 @@
     "width": 1792,
     "height": 673
   },
+  "/imgs/blogs/assignment-pin-risk-and-expiration-day-mechanics-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/assignment-pin-risk-and-expiration-day-mechanics-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/assignment-pin-risk-and-expiration-day-mechanics-3.png": {
+    "width": 1792,
+    "height": 778
+  },
+  "/imgs/blogs/assignment-pin-risk-and-expiration-day-mechanics-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/assignment-pin-risk-and-expiration-day-mechanics-5.png": {
+    "width": 1610,
+    "height": 717
+  },
+  "/imgs/blogs/assignment-pin-risk-and-expiration-day-mechanics-6.png": {
+    "width": 1792,
+    "height": 1335
+  },
+  "/imgs/blogs/assignment-pin-risk-and-expiration-day-mechanics-7.png": {
+    "width": 1792,
+    "height": 720
+  },
   "/imgs/blogs/attention-and-masking-bugs-1.png": {
     "width": 1792,
     "height": 689,
@@ -12492,6 +12521,35 @@
     "width": 1122,
     "height": 519
   },
+  "/imgs/blogs/how-an-options-market-maker-thinks-the-other-side-of-your-trade-1.png": {
+    "width": 1792,
+    "height": 802,
+    "cover": true
+  },
+  "/imgs/blogs/how-an-options-market-maker-thinks-the-other-side-of-your-trade-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-an-options-market-maker-thinks-the-other-side-of-your-trade-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-an-options-market-maker-thinks-the-other-side-of-your-trade-4.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/how-an-options-market-maker-thinks-the-other-side-of-your-trade-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-an-options-market-maker-thinks-the-other-side-of-your-trade-6.png": {
+    "width": 1792,
+    "height": 882
+  },
+  "/imgs/blogs/how-an-options-market-maker-thinks-the-other-side-of-your-trade-7.png": {
+    "width": 1792,
+    "height": 759
+  },
   "/imgs/blogs/how-blockchains-store-data-utxo-vs-account-1.png": {
     "width": 1792,
     "height": 1278,
@@ -15745,6 +15803,35 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/liquidity-bid-ask-spreads-and-getting-filled-the-hidden-tax-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/liquidity-bid-ask-spreads-and-getting-filled-the-hidden-tax-2.png": {
+    "width": 1614,
+    "height": 914
+  },
+  "/imgs/blogs/liquidity-bid-ask-spreads-and-getting-filled-the-hidden-tax-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/liquidity-bid-ask-spreads-and-getting-filled-the-hidden-tax-4.png": {
+    "width": 1792,
+    "height": 1137
+  },
+  "/imgs/blogs/liquidity-bid-ask-spreads-and-getting-filled-the-hidden-tax-5.png": {
+    "width": 1602,
+    "height": 916
+  },
+  "/imgs/blogs/liquidity-bid-ask-spreads-and-getting-filled-the-hidden-tax-6.png": {
+    "width": 1792,
+    "height": 875
+  },
+  "/imgs/blogs/liquidity-bid-ask-spreads-and-getting-filled-the-hidden-tax-7.png": {
+    "width": 1792,
+    "height": 1061
+  },
   "/imgs/blogs/llm-quantization-activations-smoothquant-kv-cache-1.png": {
     "width": 1792,
     "height": 1278,
@@ -16235,6 +16322,35 @@
   "/imgs/blogs/making-on-device-llms-fast-8.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/managing-a-trade-rolling-adjusting-and-when-to-just-take-the-loss-1.png": {
+    "width": 1792,
+    "height": 889,
+    "cover": true
+  },
+  "/imgs/blogs/managing-a-trade-rolling-adjusting-and-when-to-just-take-the-loss-2.png": {
+    "width": 1699,
+    "height": 914
+  },
+  "/imgs/blogs/managing-a-trade-rolling-adjusting-and-when-to-just-take-the-loss-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/managing-a-trade-rolling-adjusting-and-when-to-just-take-the-loss-4.png": {
+    "width": 1792,
+    "height": 979
+  },
+  "/imgs/blogs/managing-a-trade-rolling-adjusting-and-when-to-just-take-the-loss-5.png": {
+    "width": 1792,
+    "height": 898
+  },
+  "/imgs/blogs/managing-a-trade-rolling-adjusting-and-when-to-just-take-the-loss-6.png": {
+    "width": 1792,
+    "height": 908
+  },
+  "/imgs/blogs/managing-a-trade-rolling-adjusting-and-when-to-just-take-the-loss-7.png": {
+    "width": 1792,
+    "height": 988
   },
   "/imgs/blogs/market-data-eda-biases-quant-research-1.png": {
     "width": 1792,
@@ -19491,6 +19607,35 @@
   "/imgs/blogs/position-sizing-and-portfolio-construction-for-stock-pickers-7.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/position-sizing-and-risk-of-ruin-in-options-trading-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/position-sizing-and-risk-of-ruin-in-options-trading-2.png": {
+    "width": 1625,
+    "height": 914
+  },
+  "/imgs/blogs/position-sizing-and-risk-of-ruin-in-options-trading-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/position-sizing-and-risk-of-ruin-in-options-trading-4.png": {
+    "width": 1792,
+    "height": 1023
+  },
+  "/imgs/blogs/position-sizing-and-risk-of-ruin-in-options-trading-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/position-sizing-and-risk-of-ruin-in-options-trading-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/position-sizing-and-risk-of-ruin-in-options-trading-7.png": {
+    "width": 1792,
+    "height": 801
   },
   "/imgs/blogs/positioning-and-the-pain-trade-1.png": {
     "width": 1792,
