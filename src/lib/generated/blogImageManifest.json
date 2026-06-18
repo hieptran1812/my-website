@@ -653,6 +653,35 @@
     "width": 1792,
     "height": 1218
   },
+  "/imgs/blogs/amms-vs-arbitrageurs-toxic-flow-and-loss-versus-rebalancing-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/amms-vs-arbitrageurs-toxic-flow-and-loss-versus-rebalancing-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/amms-vs-arbitrageurs-toxic-flow-and-loss-versus-rebalancing-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/amms-vs-arbitrageurs-toxic-flow-and-loss-versus-rebalancing-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/amms-vs-arbitrageurs-toxic-flow-and-loss-versus-rebalancing-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/amms-vs-arbitrageurs-toxic-flow-and-loss-versus-rebalancing-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/amms-vs-arbitrageurs-toxic-flow-and-loss-versus-rebalancing-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
   "/imgs/blogs/analyzing-dex-and-amm-activity-1.png": {
     "width": 1792,
     "height": 1741,
@@ -17068,6 +17097,35 @@
     "width": 1792,
     "height": 720
   },
+  "/imgs/blogs/maker-taker-payment-for-order-flow-and-the-routing-game-1.png": {
+    "width": 1792,
+    "height": 1183,
+    "cover": true
+  },
+  "/imgs/blogs/maker-taker-payment-for-order-flow-and-the-routing-game-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/maker-taker-payment-for-order-flow-and-the-routing-game-3.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/maker-taker-payment-for-order-flow-and-the-routing-game-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/maker-taker-payment-for-order-flow-and-the-routing-game-5.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/maker-taker-payment-for-order-flow-and-the-routing-game-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/maker-taker-payment-for-order-flow-and-the-routing-game-7.png": {
+    "width": 1792,
+    "height": 1169
+  },
   "/imgs/blogs/making-on-device-llms-fast-1.png": {
     "width": 1792,
     "height": 1330,
@@ -17743,6 +17801,35 @@
   "/imgs/blogs/mev-sandwiches-and-frontrunning-7.png": {
     "width": 1555,
     "height": 578
+  },
+  "/imgs/blogs/mev-the-purest-game-theory-in-markets-frontrunning-and-sandwich-attacks-1.png": {
+    "width": 1792,
+    "height": 1005,
+    "cover": true
+  },
+  "/imgs/blogs/mev-the-purest-game-theory-in-markets-frontrunning-and-sandwich-attacks-2.png": {
+    "width": 1792,
+    "height": 768
+  },
+  "/imgs/blogs/mev-the-purest-game-theory-in-markets-frontrunning-and-sandwich-attacks-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/mev-the-purest-game-theory-in-markets-frontrunning-and-sandwich-attacks-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/mev-the-purest-game-theory-in-markets-frontrunning-and-sandwich-attacks-5.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/mev-the-purest-game-theory-in-markets-frontrunning-and-sandwich-attacks-6.png": {
+    "width": 1792,
+    "height": 1279
+  },
+  "/imgs/blogs/mev-the-purest-game-theory-in-markets-frontrunning-and-sandwich-attacks-7.png": {
+    "width": 1622,
+    "height": 914
   },
   "/imgs/blogs/mid-cycle-expansion-the-steady-grind-1.png": {
     "width": 1792,
@@ -25280,6 +25367,35 @@
     "height": 1024,
     "cover": true
   },
+  "/imgs/blogs/spoofing-layering-and-manipulation-as-signaling-games-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/spoofing-layering-and-manipulation-as-signaling-games-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/spoofing-layering-and-manipulation-as-signaling-games-3.png": {
+    "width": 1792,
+    "height": 1359
+  },
+  "/imgs/blogs/spoofing-layering-and-manipulation-as-signaling-games-4.png": {
+    "width": 1630,
+    "height": 914
+  },
+  "/imgs/blogs/spoofing-layering-and-manipulation-as-signaling-games-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/spoofing-layering-and-manipulation-as-signaling-games-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/spoofing-layering-and-manipulation-as-signaling-games-7.png": {
+    "width": 1602,
+    "height": 916
+  },
   "/imgs/blogs/spot-rates-the-zero-curve-and-bootstrapping-1.png": {
     "width": 1792,
     "height": 1242,
@@ -27820,6 +27936,35 @@
     "width": 1666,
     "height": 914
   },
+  "/imgs/blogs/the-hft-latency-arms-race-a-prisoners-dilemma-at-light-speed-1.png": {
+    "width": 1792,
+    "height": 1200,
+    "cover": true
+  },
+  "/imgs/blogs/the-hft-latency-arms-race-a-prisoners-dilemma-at-light-speed-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-hft-latency-arms-race-a-prisoners-dilemma-at-light-speed-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-hft-latency-arms-race-a-prisoners-dilemma-at-light-speed-4.png": {
+    "width": 1608,
+    "height": 914
+  },
+  "/imgs/blogs/the-hft-latency-arms-race-a-prisoners-dilemma-at-light-speed-5.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/the-hft-latency-arms-race-a-prisoners-dilemma-at-light-speed-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-hft-latency-arms-race-a-prisoners-dilemma-at-light-speed-7.png": {
+    "width": 1792,
+    "height": 987
+  },
   "/imgs/blogs/the-hpc-playbook-for-ai-engineers-1.png": {
     "width": 1792,
     "height": 892,
@@ -28216,6 +28361,35 @@
   "/imgs/blogs/the-map-of-asset-classes-what-you-can-own-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/the-market-makers-game-inventory-the-spread-and-fear-of-the-informed-1.png": {
+    "width": 1792,
+    "height": 1250,
+    "cover": true
+  },
+  "/imgs/blogs/the-market-makers-game-inventory-the-spread-and-fear-of-the-informed-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-market-makers-game-inventory-the-spread-and-fear-of-the-informed-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-market-makers-game-inventory-the-spread-and-fear-of-the-informed-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-market-makers-game-inventory-the-spread-and-fear-of-the-informed-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-market-makers-game-inventory-the-spread-and-fear-of-the-informed-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/the-market-makers-game-inventory-the-spread-and-fear-of-the-informed-7.png": {
+    "width": 1792,
+    "height": 1189
   },
   "/imgs/blogs/the-markets-knowledge-every-quant-needs-1.png": {
     "width": 1792,
@@ -28716,6 +28890,35 @@
   "/imgs/blogs/the-options-chain-and-contract-mechanics-multiplier-expiry-settlement-7.png": {
     "width": 1792,
     "height": 971
+  },
+  "/imgs/blogs/the-order-book-as-a-battlefield-queue-priority-and-the-make-take-game-1.png": {
+    "width": 1792,
+    "height": 856,
+    "cover": true
+  },
+  "/imgs/blogs/the-order-book-as-a-battlefield-queue-priority-and-the-make-take-game-2.png": {
+    "width": 1747,
+    "height": 914
+  },
+  "/imgs/blogs/the-order-book-as-a-battlefield-queue-priority-and-the-make-take-game-3.png": {
+    "width": 1792,
+    "height": 1269
+  },
+  "/imgs/blogs/the-order-book-as-a-battlefield-queue-priority-and-the-make-take-game-4.png": {
+    "width": 1792,
+    "height": 903
+  },
+  "/imgs/blogs/the-order-book-as-a-battlefield-queue-priority-and-the-make-take-game-5.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/the-order-book-as-a-battlefield-queue-priority-and-the-make-take-game-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-order-book-as-a-battlefield-queue-priority-and-the-make-take-game-7.png": {
+    "width": 1652,
+    "height": 914
   },
   "/imgs/blogs/the-overfit-a-single-batch-test-1.png": {
     "width": 1792,
