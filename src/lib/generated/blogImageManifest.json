@@ -7877,6 +7877,39 @@
     "width": 1792,
     "height": 686
   },
+  "/imgs/blogs/data-locality-and-zero-copy-memoryview-buffers-and-mmap-1.png": {
+    "width": 1792,
+    "height": 1218,
+    "cover": true
+  },
+  "/imgs/blogs/data-locality-and-zero-copy-memoryview-buffers-and-mmap-2.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/data-locality-and-zero-copy-memoryview-buffers-and-mmap-3.png": {
+    "width": 1792,
+    "height": 1190
+  },
+  "/imgs/blogs/data-locality-and-zero-copy-memoryview-buffers-and-mmap-4.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/data-locality-and-zero-copy-memoryview-buffers-and-mmap-5.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/data-locality-and-zero-copy-memoryview-buffers-and-mmap-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/data-locality-and-zero-copy-memoryview-buffers-and-mmap-7.png": {
+    "width": 1792,
+    "height": 1000
+  },
+  "/imgs/blogs/data-locality-and-zero-copy-memoryview-buffers-and-mmap-8.png": {
+    "width": 1792,
+    "height": 1201
+  },
   "/imgs/blogs/data-quality-scaling-laws-1.png": {
     "width": 1792,
     "height": 832,
@@ -22415,6 +22448,39 @@
     "width": 1792,
     "height": 1195
   },
+  "/imgs/blogs/python-memory-model-objects-refcounts-and-the-garbage-collector-1.png": {
+    "width": 1792,
+    "height": 774,
+    "cover": true
+  },
+  "/imgs/blogs/python-memory-model-objects-refcounts-and-the-garbage-collector-2.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/python-memory-model-objects-refcounts-and-the-garbage-collector-3.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/python-memory-model-objects-refcounts-and-the-garbage-collector-4.png": {
+    "width": 1792,
+    "height": 937
+  },
+  "/imgs/blogs/python-memory-model-objects-refcounts-and-the-garbage-collector-5.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/python-memory-model-objects-refcounts-and-the-garbage-collector-6.png": {
+    "width": 1792,
+    "height": 768
+  },
+  "/imgs/blogs/python-memory-model-objects-refcounts-and-the-garbage-collector-7.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/python-memory-model-objects-refcounts-and-the-garbage-collector-8.png": {
+    "width": 1792,
+    "height": 1201
+  },
   "/imgs/blogs/qe-vs-qt-how-balance-sheet-policy-moves-markets-1.png": {
     "width": 1792,
     "height": 694,
@@ -25885,6 +25951,39 @@
   "/imgs/blogs/short-rate-models-vasicek-hull-white-9.png": {
     "width": 1792,
     "height": 872
+  },
+  "/imgs/blogs/shrinking-your-memory-footprint-slots-arrays-and-interning-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/shrinking-your-memory-footprint-slots-arrays-and-interning-2.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/shrinking-your-memory-footprint-slots-arrays-and-interning-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/shrinking-your-memory-footprint-slots-arrays-and-interning-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/shrinking-your-memory-footprint-slots-arrays-and-interning-5.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/shrinking-your-memory-footprint-slots-arrays-and-interning-6.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/shrinking-your-memory-footprint-slots-arrays-and-interning-7.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/shrinking-your-memory-footprint-slots-arrays-and-interning-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/sig-susquehanna-playbook-poker-game-theory-and-ev-1.png": {
     "width": 1792,
