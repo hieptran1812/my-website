@@ -6058,6 +6058,39 @@
     "width": 1792,
     "height": 1212
   },
+  "/imgs/blogs/collaborative-filtering-from-first-principles-1.png": {
+    "width": 1792,
+    "height": 1209,
+    "cover": true
+  },
+  "/imgs/blogs/collaborative-filtering-from-first-principles-2.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/collaborative-filtering-from-first-principles-3.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/collaborative-filtering-from-first-principles-4.png": {
+    "width": 1792,
+    "height": 912
+  },
+  "/imgs/blogs/collaborative-filtering-from-first-principles-5.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/collaborative-filtering-from-first-principles-6.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/collaborative-filtering-from-first-principles-7.png": {
+    "width": 1792,
+    "height": 1288
+  },
+  "/imgs/blogs/collaborative-filtering-from-first-principles-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/collective-communication-and-nccl-all-reduce-from-scratch-1.png": {
     "width": 1792,
     "height": 1371,
@@ -6702,6 +6735,39 @@
   "/imgs/blogs/construction-materials-sector-vietnam-public-investment-7.png": {
     "width": 1792,
     "height": 1247
+  },
+  "/imgs/blogs/content-based-and-hybrid-recommenders-1.png": {
+    "width": 1792,
+    "height": 912,
+    "cover": true
+  },
+  "/imgs/blogs/content-based-and-hybrid-recommenders-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/content-based-and-hybrid-recommenders-3.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/content-based-and-hybrid-recommenders-4.png": {
+    "width": 1792,
+    "height": 1155
+  },
+  "/imgs/blogs/content-based-and-hybrid-recommenders-5.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/content-based-and-hybrid-recommenders-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/content-based-and-hybrid-recommenders-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/content-based-and-hybrid-recommenders-8.png": {
+    "width": 1792,
+    "height": 1218
   },
   "/imgs/blogs/continuation-patterns-flags-pennants-1.png": {
     "width": 1792,
@@ -11082,6 +11148,39 @@
     "width": 1792,
     "height": 1026
   },
+  "/imgs/blogs/factorization-machines-and-field-aware-fm-1.png": {
+    "width": 1792,
+    "height": 1250,
+    "cover": true
+  },
+  "/imgs/blogs/factorization-machines-and-field-aware-fm-2.png": {
+    "width": 1792,
+    "height": 1070
+  },
+  "/imgs/blogs/factorization-machines-and-field-aware-fm-3.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/factorization-machines-and-field-aware-fm-4.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/factorization-machines-and-field-aware-fm-5.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/factorization-machines-and-field-aware-fm-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/factorization-machines-and-field-aware-fm-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/factorization-machines-and-field-aware-fm-8.png": {
+    "width": 1792,
+    "height": 1169
+  },
   "/imgs/blogs/fake-depth-spoofing-and-oracle-attacks-1.png": {
     "width": 1792,
     "height": 1409,
@@ -15098,6 +15197,39 @@
     "width": 1792,
     "height": 1285
   },
+  "/imgs/blogs/implicit-feedback-models-als-and-bpr-1.png": {
+    "width": 1792,
+    "height": 1271,
+    "cover": true
+  },
+  "/imgs/blogs/implicit-feedback-models-als-and-bpr-2.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/implicit-feedback-models-als-and-bpr-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/implicit-feedback-models-als-and-bpr-4.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/implicit-feedback-models-als-and-bpr-5.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/implicit-feedback-models-als-and-bpr-6.png": {
+    "width": 1792,
+    "height": 1155
+  },
+  "/imgs/blogs/implicit-feedback-models-als-and-bpr-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/implicit-feedback-models-als-and-bpr-8.png": {
+    "width": 1792,
+    "height": 1231
+  },
   "/imgs/blogs/implicit-vs-explicit-feedback-and-the-data-you-have-1.png": {
     "width": 1792,
     "height": 1216,
@@ -17284,6 +17416,39 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/learning-to-rank-for-recommenders-1.png": {
+    "width": 1792,
+    "height": 1154,
+    "cover": true
+  },
+  "/imgs/blogs/learning-to-rank-for-recommenders-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/learning-to-rank-for-recommenders-3.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/learning-to-rank-for-recommenders-4.png": {
+    "width": 1792,
+    "height": 695
+  },
+  "/imgs/blogs/learning-to-rank-for-recommenders-5.png": {
+    "width": 1792,
+    "height": 1249
+  },
+  "/imgs/blogs/learning-to-rank-for-recommenders-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/learning-to-rank-for-recommenders-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/learning-to-rank-for-recommenders-8.png": {
+    "width": 1792,
+    "height": 1208
+  },
   "/imgs/blogs/lebesgue-integration-math-for-quants-1.png": {
     "width": 1792,
     "height": 1260,
@@ -18599,6 +18764,39 @@
   "/imgs/blogs/matrix-calculus-optimization-math-for-quants-7.png": {
     "width": 1792,
     "height": 871
+  },
+  "/imgs/blogs/matrix-factorization-the-workhorse-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/matrix-factorization-the-workhorse-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/matrix-factorization-the-workhorse-3.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/matrix-factorization-the-workhorse-4.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/matrix-factorization-the-workhorse-5.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/matrix-factorization-the-workhorse-6.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/matrix-factorization-the-workhorse-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/matrix-factorization-the-workhorse-8.png": {
+    "width": 1792,
+    "height": 1277
   },
   "/imgs/blogs/mean-variance-efficient-frontier-math-for-quants-1.png": {
     "width": 1792,
