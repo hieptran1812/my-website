@@ -359,6 +359,39 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/ab-testing-recommenders-1.png": {
+    "width": 1792,
+    "height": 664,
+    "cover": true
+  },
+  "/imgs/blogs/ab-testing-recommenders-2.png": {
+    "width": 1792,
+    "height": 1274
+  },
+  "/imgs/blogs/ab-testing-recommenders-3.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/ab-testing-recommenders-4.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/ab-testing-recommenders-5.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/ab-testing-recommenders-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/ab-testing-recommenders-7.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/ab-testing-recommenders-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/accruals-vs-cash-why-earnings-are-an-opinion-1.png": {
     "width": 1792,
     "height": 987,
@@ -2233,6 +2266,39 @@
     "width": 1792,
     "height": 964,
     "cover": true
+  },
+  "/imgs/blogs/beyond-accuracy-diversity-novelty-serendipity-coverage-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/beyond-accuracy-diversity-novelty-serendipity-coverage-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/beyond-accuracy-diversity-novelty-serendipity-coverage-3.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/beyond-accuracy-diversity-novelty-serendipity-coverage-4.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/beyond-accuracy-diversity-novelty-serendipity-coverage-5.png": {
+    "width": 1792,
+    "height": 736
+  },
+  "/imgs/blogs/beyond-accuracy-diversity-novelty-serendipity-coverage-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/beyond-accuracy-diversity-novelty-serendipity-coverage-7.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/beyond-accuracy-diversity-novelty-serendipity-coverage-8.png": {
+    "width": 1792,
+    "height": 1227
   },
   "/imgs/blogs/beyond-grpo-dapo-dr-grpo-gspo-1.png": {
     "width": 1792,
@@ -7313,6 +7379,39 @@
     "height": 955
   },
   "/imgs/blogs/cost-of-capital-and-the-hurdle-rate-7.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/counterfactual-and-off-policy-evaluation-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/counterfactual-and-off-policy-evaluation-2.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/counterfactual-and-off-policy-evaluation-3.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/counterfactual-and-off-policy-evaluation-4.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/counterfactual-and-off-policy-evaluation-5.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/counterfactual-and-off-policy-evaluation-6.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/counterfactual-and-off-policy-evaluation-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/counterfactual-and-off-policy-evaluation-8.png": {
     "width": 1792,
     "height": 1206
   },
@@ -21739,6 +21838,39 @@
     "width": 1792,
     "height": 1134
   },
+  "/imgs/blogs/offline-evaluation-metrics-recall-ndcg-map-mrr-1.png": {
+    "width": 1792,
+    "height": 1209,
+    "cover": true
+  },
+  "/imgs/blogs/offline-evaluation-metrics-recall-ndcg-map-mrr-2.png": {
+    "width": 1792,
+    "height": 1275
+  },
+  "/imgs/blogs/offline-evaluation-metrics-recall-ndcg-map-mrr-3.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/offline-evaluation-metrics-recall-ndcg-map-mrr-4.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/offline-evaluation-metrics-recall-ndcg-map-mrr-5.png": {
+    "width": 1792,
+    "height": 1152
+  },
+  "/imgs/blogs/offline-evaluation-metrics-recall-ndcg-map-mrr-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/offline-evaluation-metrics-recall-ndcg-map-mrr-7.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/offline-evaluation-metrics-recall-ndcg-map-mrr-8.png": {
+    "width": 1792,
+    "height": 1199
+  },
   "/imgs/blogs/offline-vs-online-the-two-worlds-of-recsys-1.png": {
     "width": 1792,
     "height": 1241,
@@ -32267,6 +32399,39 @@
     "width": 1701,
     "height": 914
   },
+  "/imgs/blogs/the-offline-online-gap-and-why-your-metric-lied-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/the-offline-online-gap-and-why-your-metric-lied-2.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/the-offline-online-gap-and-why-your-metric-lied-3.png": {
+    "width": 1792,
+    "height": 824
+  },
+  "/imgs/blogs/the-offline-online-gap-and-why-your-metric-lied-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/the-offline-online-gap-and-why-your-metric-lied-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/the-offline-online-gap-and-why-your-metric-lied-6.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/the-offline-online-gap-and-why-your-metric-lied-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/the-offline-online-gap-and-why-your-metric-lied-8.png": {
+    "width": 1792,
+    "height": 1257
+  },
   "/imgs/blogs/the-onchain-tooling-landscape-1.png": {
     "width": 1792,
     "height": 807,
@@ -32870,6 +33035,39 @@
   "/imgs/blogs/the-research-workflow-in-production-from-idea-to-live-signal-7.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/the-right-way-to-split-and-evaluate-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/the-right-way-to-split-and-evaluate-2.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/the-right-way-to-split-and-evaluate-3.png": {
+    "width": 1792,
+    "height": 720
+  },
+  "/imgs/blogs/the-right-way-to-split-and-evaluate-4.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/the-right-way-to-split-and-evaluate-5.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/the-right-way-to-split-and-evaluate-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-right-way-to-split-and-evaluate-7.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/the-right-way-to-split-and-evaluate-8.png": {
+    "width": 1792,
+    "height": 1228
   },
   "/imgs/blogs/the-roofline-model-compute-bound-vs-memory-bound-1.png": {
     "width": 1792,
