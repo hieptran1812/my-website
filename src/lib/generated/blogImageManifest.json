@@ -13588,6 +13588,35 @@
     "width": 1792,
     "height": 1241
   },
+  "/imgs/blogs/governance-and-the-investor-relationship-1.png": {
+    "width": 1792,
+    "height": 686,
+    "cover": true
+  },
+  "/imgs/blogs/governance-and-the-investor-relationship-2.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/governance-and-the-investor-relationship-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/governance-and-the-investor-relationship-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/governance-and-the-investor-relationship-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/governance-and-the-investor-relationship-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/governance-and-the-investor-relationship-7.png": {
+    "width": 1792,
+    "height": 1266
+  },
   "/imgs/blogs/government-bonds-the-risk-free-anchor-and-duration-1.png": {
     "width": 1792,
     "height": 1195,
@@ -18703,6 +18732,35 @@
     "width": 1792,
     "height": 876
   },
+  "/imgs/blogs/marketing-and-the-sec-marketing-rule-1.png": {
+    "width": 1792,
+    "height": 1347,
+    "cover": true
+  },
+  "/imgs/blogs/marketing-and-the-sec-marketing-rule-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/marketing-and-the-sec-marketing-rule-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/marketing-and-the-sec-marketing-rule-4.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/marketing-and-the-sec-marketing-rule-5.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/marketing-and-the-sec-marketing-rule-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/marketing-and-the-sec-marketing-rule-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/markov-chains-hitting-times-quant-interviews-1.png": {
     "width": 1792,
     "height": 821,
@@ -21478,6 +21536,35 @@
   "/imgs/blogs/onnx-deep-dive-format-runtime-serving-9.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/operational-cyber-and-key-person-risk-1.png": {
+    "width": 1792,
+    "height": 1346,
+    "cover": true
+  },
+  "/imgs/blogs/operational-cyber-and-key-person-risk-2.png": {
+    "width": 1792,
+    "height": 896
+  },
+  "/imgs/blogs/operational-cyber-and-key-person-risk-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/operational-cyber-and-key-person-risk-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/operational-cyber-and-key-person-risk-5.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/operational-cyber-and-key-person-risk-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/operational-cyber-and-key-person-risk-7.png": {
+    "width": 1792,
+    "height": 1210
   },
   "/imgs/blogs/operational-due-diligence-the-veto-1.png": {
     "width": 1792,
@@ -25304,6 +25391,35 @@
   "/imgs/blogs/risk-management-around-events-gaps-sizing-stops-7.png": {
     "width": 1792,
     "height": 748
+  },
+  "/imgs/blogs/risk-management-as-a-business-function-1.png": {
+    "width": 1792,
+    "height": 819,
+    "cover": true
+  },
+  "/imgs/blogs/risk-management-as-a-business-function-2.png": {
+    "width": 1792,
+    "height": 1362
+  },
+  "/imgs/blogs/risk-management-as-a-business-function-3.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/risk-management-as-a-business-function-4.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/risk-management-as-a-business-function-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/risk-management-as-a-business-function-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/risk-management-as-a-business-function-7.png": {
+    "width": 1792,
+    "height": 1209
   },
   "/imgs/blogs/risk-management-in-real-estate-1.png": {
     "width": 1792,
@@ -29355,6 +29471,35 @@
   "/imgs/blogs/the-collections-and-heapq-toolbox-deque-counter-defaultdict-bisect-8.png": {
     "width": 1792,
     "height": 1154
+  },
+  "/imgs/blogs/the-compliance-program-and-the-cco-1.png": {
+    "width": 1792,
+    "height": 886,
+    "cover": true
+  },
+  "/imgs/blogs/the-compliance-program-and-the-cco-2.png": {
+    "width": 1792,
+    "height": 1255
+  },
+  "/imgs/blogs/the-compliance-program-and-the-cco-3.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-compliance-program-and-the-cco-4.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/the-compliance-program-and-the-cco-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-compliance-program-and-the-cco-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/the-compliance-program-and-the-cco-7.png": {
+    "width": 1792,
+    "height": 1199
   },
   "/imgs/blogs/the-cost-of-abstraction-objects-attributes-and-dynamic-dispatch-1.png": {
     "width": 1792,
@@ -33891,6 +34036,35 @@
   "/imgs/blogs/utilities-power-water-gas-sector-vietnam-defensive-cash-7.png": {
     "width": 1792,
     "height": 874
+  },
+  "/imgs/blogs/valuation-and-conflicts-governance-1.png": {
+    "width": 1792,
+    "height": 1206,
+    "cover": true
+  },
+  "/imgs/blogs/valuation-and-conflicts-governance-2.png": {
+    "width": 1792,
+    "height": 755
+  },
+  "/imgs/blogs/valuation-and-conflicts-governance-3.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/valuation-and-conflicts-governance-4.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/valuation-and-conflicts-governance-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/valuation-and-conflicts-governance-6.png": {
+    "width": 1792,
+    "height": 1045
+  },
+  "/imgs/blogs/valuation-and-conflicts-governance-7.png": {
+    "width": 1792,
+    "height": 1237
   },
   "/imgs/blogs/valuation-by-sector-pe-pb-nav-ev-ebitda-1.png": {
     "width": 1792,
