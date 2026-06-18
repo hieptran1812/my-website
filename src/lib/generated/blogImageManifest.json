@@ -4586,6 +4586,39 @@
     "width": 1792,
     "height": 550
   },
+  "/imgs/blogs/case-study-amazon-alibaba-e-commerce-rec-1.png": {
+    "width": 1792,
+    "height": 1241,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-amazon-alibaba-e-commerce-rec-2.png": {
+    "width": 1792,
+    "height": 731
+  },
+  "/imgs/blogs/case-study-amazon-alibaba-e-commerce-rec-3.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/case-study-amazon-alibaba-e-commerce-rec-4.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/case-study-amazon-alibaba-e-commerce-rec-5.png": {
+    "width": 1792,
+    "height": 829
+  },
+  "/imgs/blogs/case-study-amazon-alibaba-e-commerce-rec-6.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/case-study-amazon-alibaba-e-commerce-rec-7.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/case-study-amazon-alibaba-e-commerce-rec-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/case-study-an-llm-assistant-on-a-laptop-1.png": {
     "width": 1792,
     "height": 980,
@@ -4887,6 +4920,72 @@
   "/imgs/blogs/case-study-ltcm-1998-the-crowded-genius-trade-7.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/case-study-netflix-and-spotify-recommendation-as-product-1.png": {
+    "width": 1792,
+    "height": 1277,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-netflix-and-spotify-recommendation-as-product-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/case-study-netflix-and-spotify-recommendation-as-product-3.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/case-study-netflix-and-spotify-recommendation-as-product-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/case-study-netflix-and-spotify-recommendation-as-product-5.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/case-study-netflix-and-spotify-recommendation-as-product-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/case-study-netflix-and-spotify-recommendation-as-product-7.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/case-study-netflix-and-spotify-recommendation-as-product-8.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/case-study-pinterest-instagram-tiktok-feed-ranking-1.png": {
+    "width": 1792,
+    "height": 1263,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-pinterest-instagram-tiktok-feed-ranking-2.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/case-study-pinterest-instagram-tiktok-feed-ranking-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/case-study-pinterest-instagram-tiktok-feed-ranking-4.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/case-study-pinterest-instagram-tiktok-feed-ranking-5.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/case-study-pinterest-instagram-tiktok-feed-ranking-6.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/case-study-pinterest-instagram-tiktok-feed-ranking-7.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/case-study-pinterest-instagram-tiktok-feed-ranking-8.png": {
+    "width": 1792,
+    "height": 1247
   },
   "/imgs/blogs/case-study-poly-network-and-the-returned-hack-1.png": {
     "width": 1792,
@@ -5396,6 +5495,39 @@
   "/imgs/blogs/case-study-volmageddon-2018-and-the-short-vol-blowup-7.png": {
     "width": 1792,
     "height": 1341
+  },
+  "/imgs/blogs/case-study-youtube-deep-retrieval-and-ranking-1.png": {
+    "width": 1792,
+    "height": 1248,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-youtube-deep-retrieval-and-ranking-2.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/case-study-youtube-deep-retrieval-and-ranking-3.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/case-study-youtube-deep-retrieval-and-ranking-4.png": {
+    "width": 1792,
+    "height": 1297
+  },
+  "/imgs/blogs/case-study-youtube-deep-retrieval-and-ranking-5.png": {
+    "width": 1792,
+    "height": 1049
+  },
+  "/imgs/blogs/case-study-youtube-deep-retrieval-and-ranking-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/case-study-youtube-deep-retrieval-and-ranking-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/case-study-youtube-deep-retrieval-and-ranking-8.png": {
+    "width": 1792,
+    "height": 1297
   },
   "/imgs/blogs/cash-flow-statement-where-the-cash-really-comes-from-1.png": {
     "width": 1792,
@@ -33373,6 +33505,39 @@
   "/imgs/blogs/the-recommendation-funnel-retrieval-ranking-reranking-8.png": {
     "width": 1792,
     "height": 1238
+  },
+  "/imgs/blogs/the-recommender-systems-playbook-1.png": {
+    "width": 1792,
+    "height": 1237,
+    "cover": true
+  },
+  "/imgs/blogs/the-recommender-systems-playbook-2.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-recommender-systems-playbook-3.png": {
+    "width": 1792,
+    "height": 1351
+  },
+  "/imgs/blogs/the-recommender-systems-playbook-4.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/the-recommender-systems-playbook-5.png": {
+    "width": 1792,
+    "height": 1228
+  },
+  "/imgs/blogs/the-recommender-systems-playbook-6.png": {
+    "width": 1792,
+    "height": 1402
+  },
+  "/imgs/blogs/the-recommender-systems-playbook-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-recommender-systems-playbook-8.png": {
+    "width": 1792,
+    "height": 1197
   },
   "/imgs/blogs/the-research-case-and-take-home-how-to-ace-it-1.png": {
     "width": 1792,
