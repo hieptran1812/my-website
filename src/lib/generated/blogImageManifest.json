@@ -2142,6 +2142,39 @@
     "width": 1792,
     "height": 1249
   },
+  "/imgs/blogs/bandits-and-the-exploration-exploitation-tradeoff-1.png": {
+    "width": 1792,
+    "height": 1277,
+    "cover": true
+  },
+  "/imgs/blogs/bandits-and-the-exploration-exploitation-tradeoff-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/bandits-and-the-exploration-exploitation-tradeoff-3.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/bandits-and-the-exploration-exploitation-tradeoff-4.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/bandits-and-the-exploration-exploitation-tradeoff-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/bandits-and-the-exploration-exploitation-tradeoff-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/bandits-and-the-exploration-exploitation-tradeoff-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/bandits-and-the-exploration-exploitation-tradeoff-8.png": {
+    "width": 1792,
+    "height": 1226
+  },
   "/imgs/blogs/bank-runs-as-coordination-games-diamond-dybvig-and-svb-1.png": {
     "width": 1792,
     "height": 1278,
@@ -5558,6 +5591,39 @@
   "/imgs/blogs/categorical-and-feature-bugs-8.png": {
     "width": 1792,
     "height": 902
+  },
+  "/imgs/blogs/causal-and-uplift-recommendation-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/causal-and-uplift-recommendation-2.png": {
+    "width": 1792,
+    "height": 1200
+  },
+  "/imgs/blogs/causal-and-uplift-recommendation-3.png": {
+    "width": 1792,
+    "height": 824
+  },
+  "/imgs/blogs/causal-and-uplift-recommendation-4.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/causal-and-uplift-recommendation-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/causal-and-uplift-recommendation-6.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/causal-and-uplift-recommendation-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/causal-and-uplift-recommendation-8.png": {
+    "width": 1792,
+    "height": 1199
   },
   "/imgs/blogs/central-bank-balance-sheet-net-liquidity-reserves-rrp-tga-1.png": {
     "width": 1792,
@@ -11697,6 +11763,39 @@
     "width": 1792,
     "height": 1169
   },
+  "/imgs/blogs/fairness-privacy-and-multi-stakeholder-rec-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/fairness-privacy-and-multi-stakeholder-rec-2.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/fairness-privacy-and-multi-stakeholder-rec-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/fairness-privacy-and-multi-stakeholder-rec-4.png": {
+    "width": 1792,
+    "height": 1187
+  },
+  "/imgs/blogs/fairness-privacy-and-multi-stakeholder-rec-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/fairness-privacy-and-multi-stakeholder-rec-6.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/fairness-privacy-and-multi-stakeholder-rec-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/fairness-privacy-and-multi-stakeholder-rec-8.png": {
+    "width": 1792,
+    "height": 1227
+  },
   "/imgs/blogs/fake-depth-spoofing-and-oracle-attacks-1.png": {
     "width": 1792,
     "height": 1409,
@@ -13449,6 +13548,39 @@
   "/imgs/blogs/generative-adversarial-networks-and-why-they-lost-8.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/generative-and-conversational-recommendation-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/generative-and-conversational-recommendation-2.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/generative-and-conversational-recommendation-3.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/generative-and-conversational-recommendation-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/generative-and-conversational-recommendation-5.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/generative-and-conversational-recommendation-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/generative-and-conversational-recommendation-7.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/generative-and-conversational-recommendation-8.png": {
+    "width": 1792,
+    "height": 1218
   },
   "/imgs/blogs/geopolitics-elections-and-unscheduled-shocks-1.png": {
     "width": 1792,
@@ -17902,6 +18034,39 @@
   "/imgs/blogs/lang-03-continual.png": {
     "width": 1700,
     "height": 507
+  },
+  "/imgs/blogs/large-scale-embedding-systems-and-feature-stores-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/large-scale-embedding-systems-and-feature-stores-2.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/large-scale-embedding-systems-and-feature-stores-3.png": {
+    "width": 1792,
+    "height": 1412
+  },
+  "/imgs/blogs/large-scale-embedding-systems-and-feature-stores-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/large-scale-embedding-systems-and-feature-stores-5.png": {
+    "width": 1792,
+    "height": 697
+  },
+  "/imgs/blogs/large-scale-embedding-systems-and-feature-stores-6.png": {
+    "width": 1792,
+    "height": 1220
+  },
+  "/imgs/blogs/large-scale-embedding-systems-and-feature-stores-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/large-scale-embedding-systems-and-feature-stores-8.png": {
+    "width": 1792,
+    "height": 1347
   },
   "/imgs/blogs/late-cycle-and-defense-utilities-staples-healthcare-1.png": {
     "width": 1792,
@@ -25653,6 +25818,39 @@
   "/imgs/blogs/regression-ols-gls-regularized-math-for-quants-7.png": {
     "width": 1792,
     "height": 1370
+  },
+  "/imgs/blogs/reinforcement-learning-for-recommendation-1.png": {
+    "width": 1792,
+    "height": 1260,
+    "cover": true
+  },
+  "/imgs/blogs/reinforcement-learning-for-recommendation-2.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/reinforcement-learning-for-recommendation-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/reinforcement-learning-for-recommendation-4.png": {
+    "width": 1792,
+    "height": 1153
+  },
+  "/imgs/blogs/reinforcement-learning-for-recommendation-5.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/reinforcement-learning-for-recommendation-6.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/reinforcement-learning-for-recommendation-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/reinforcement-learning-for-recommendation-8.png": {
+    "width": 1792,
+    "height": 1237
   },
   "/imgs/blogs/reinvestment-risk-and-the-two-faces-of-yield-1.png": {
     "width": 1792,
