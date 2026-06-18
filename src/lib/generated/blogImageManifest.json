@@ -471,6 +471,35 @@
     "height": 696,
     "cover": true
   },
+  "/imgs/blogs/adverse-selection-and-the-winners-curse-why-a-fast-fill-is-bad-news-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/adverse-selection-and-the-winners-curse-why-a-fast-fill-is-bad-news-2.png": {
+    "width": 1721,
+    "height": 914
+  },
+  "/imgs/blogs/adverse-selection-and-the-winners-curse-why-a-fast-fill-is-bad-news-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/adverse-selection-and-the-winners-curse-why-a-fast-fill-is-bad-news-4.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/adverse-selection-and-the-winners-curse-why-a-fast-fill-is-bad-news-5.png": {
+    "width": 1792,
+    "height": 1198
+  },
+  "/imgs/blogs/adverse-selection-and-the-winners-curse-why-a-fast-fill-is-bad-news-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/adverse-selection-and-the-winners-curse-why-a-fast-fill-is-bad-news-7.png": {
+    "width": 1792,
+    "height": 652
+  },
   "/imgs/blogs/agriculture-softs-the-food-and-fiber-markets-1.png": {
     "width": 1792,
     "height": 838,
@@ -6772,6 +6801,35 @@
   "/imgs/blogs/cross-validation-done-wrong-8.png": {
     "width": 1792,
     "height": 1178
+  },
+  "/imgs/blogs/crowded-trades-and-the-exit-game-1.png": {
+    "width": 1792,
+    "height": 1222,
+    "cover": true
+  },
+  "/imgs/blogs/crowded-trades-and-the-exit-game-2.png": {
+    "width": 1792,
+    "height": 1276
+  },
+  "/imgs/blogs/crowded-trades-and-the-exit-game-3.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/crowded-trades-and-the-exit-game-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/crowded-trades-and-the-exit-game-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/crowded-trades-and-the-exit-game-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/crowded-trades-and-the-exit-game-7.png": {
+    "width": 1641,
+    "height": 914
   },
   "/imgs/blogs/crypto-as-a-macro-liquidity-asset-1.png": {
     "width": 1792,
@@ -19078,6 +19136,35 @@
     "width": 1792,
     "height": 1001
   },
+  "/imgs/blogs/noise-traders-and-the-limits-of-arbitrage-1.png": {
+    "width": 1792,
+    "height": 908,
+    "cover": true
+  },
+  "/imgs/blogs/noise-traders-and-the-limits-of-arbitrage-2.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/noise-traders-and-the-limits-of-arbitrage-3.png": {
+    "width": 1641,
+    "height": 914
+  },
+  "/imgs/blogs/noise-traders-and-the-limits-of-arbitrage-4.png": {
+    "width": 1758,
+    "height": 914
+  },
+  "/imgs/blogs/noise-traders-and-the-limits-of-arbitrage-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/noise-traders-and-the-limits-of-arbitrage-6.png": {
+    "width": 1792,
+    "height": 940
+  },
+  "/imgs/blogs/noise-traders-and-the-limits-of-arbitrage-7.png": {
+    "width": 1792,
+    "height": 828
+  },
   "/imgs/blogs/normalizing-flows-and-change-of-variables-1.png": {
     "width": 1792,
     "height": 674,
@@ -22496,6 +22583,35 @@
   "/imgs/blogs/redis-applications-and-optimization-4.png": {
     "width": 1792,
     "height": 811
+  },
+  "/imgs/blogs/reflexivity-markets-that-watch-themselves-1.png": {
+    "width": 1792,
+    "height": 1134,
+    "cover": true
+  },
+  "/imgs/blogs/reflexivity-markets-that-watch-themselves-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/reflexivity-markets-that-watch-themselves-3.png": {
+    "width": 1632,
+    "height": 914
+  },
+  "/imgs/blogs/reflexivity-markets-that-watch-themselves-4.png": {
+    "width": 1792,
+    "height": 1125
+  },
+  "/imgs/blogs/reflexivity-markets-that-watch-themselves-5.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/reflexivity-markets-that-watch-themselves-6.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/reflexivity-markets-that-watch-themselves-7.png": {
+    "width": 1695,
+    "height": 914
   },
   "/imgs/blogs/regression-ols-gls-regularized-math-for-quants-1.png": {
     "width": 1792,
@@ -27414,6 +27530,35 @@
     "width": 1792,
     "height": 1208
   },
+  "/imgs/blogs/the-greater-fool-and-rational-bubbles-the-musical-chairs-game-1.png": {
+    "width": 1792,
+    "height": 854,
+    "cover": true
+  },
+  "/imgs/blogs/the-greater-fool-and-rational-bubbles-the-musical-chairs-game-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-greater-fool-and-rational-bubbles-the-musical-chairs-game-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-greater-fool-and-rational-bubbles-the-musical-chairs-game-4.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/the-greater-fool-and-rational-bubbles-the-musical-chairs-game-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-greater-fool-and-rational-bubbles-the-musical-chairs-game-6.png": {
+    "width": 1792,
+    "height": 742
+  },
+  "/imgs/blogs/the-greater-fool-and-rational-bubbles-the-musical-chairs-game-7.png": {
+    "width": 1666,
+    "height": 914
+  },
   "/imgs/blogs/the-hpc-playbook-for-ai-engineers-1.png": {
     "width": 1792,
     "height": 892,
@@ -31729,6 +31874,35 @@
   "/imgs/blogs/who-controls-the-worlds-money-global-financial-system-7.png": {
     "width": 1792,
     "height": 961
+  },
+  "/imgs/blogs/who-is-on-the-other-side-of-your-trade-1.png": {
+    "width": 1792,
+    "height": 1159,
+    "cover": true
+  },
+  "/imgs/blogs/who-is-on-the-other-side-of-your-trade-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/who-is-on-the-other-side-of-your-trade-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/who-is-on-the-other-side-of-your-trade-4.png": {
+    "width": 1792,
+    "height": 1035
+  },
+  "/imgs/blogs/who-is-on-the-other-side-of-your-trade-5.png": {
+    "width": 1792,
+    "height": 1228
+  },
+  "/imgs/blogs/who-is-on-the-other-side-of-your-trade-6.png": {
+    "width": 1792,
+    "height": 988
+  },
+  "/imgs/blogs/who-is-on-the-other-side-of-your-trade-7.png": {
+    "width": 1654,
+    "height": 914
   },
   "/imgs/blogs/who-issues-bonds-and-why-governments-companies-and-cities-1.png": {
     "width": 1792,
