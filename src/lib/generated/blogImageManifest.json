@@ -8608,6 +8608,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/debugging-a-recommender-that-wont-improve-1.png": {
+    "width": 1792,
+    "height": 1163,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-a-recommender-that-wont-improve-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/debugging-a-recommender-that-wont-improve-3.png": {
+    "width": 1792,
+    "height": 1166
+  },
+  "/imgs/blogs/debugging-a-recommender-that-wont-improve-4.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/debugging-a-recommender-that-wont-improve-5.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/debugging-a-recommender-that-wont-improve-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/debugging-a-recommender-that-wont-improve-7.png": {
+    "width": 1792,
+    "height": 715
+  },
+  "/imgs/blogs/debugging-a-recommender-that-wont-improve-8.png": {
+    "width": 1792,
+    "height": 1206
+  },
   "/imgs/blogs/debugging-asr-finetuning-1.png": {
     "width": 1792,
     "height": 1260,
@@ -9169,6 +9202,39 @@
   "/imgs/blogs/deficits-debt-bond-supply-why-issuance-moves-yields-7.png": {
     "width": 1792,
     "height": 759
+  },
+  "/imgs/blogs/delayed-feedback-and-conversion-attribution-1.png": {
+    "width": 1792,
+    "height": 1250,
+    "cover": true
+  },
+  "/imgs/blogs/delayed-feedback-and-conversion-attribution-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/delayed-feedback-and-conversion-attribution-3.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/delayed-feedback-and-conversion-attribution-4.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/delayed-feedback-and-conversion-attribution-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/delayed-feedback-and-conversion-attribution-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/delayed-feedback-and-conversion-attribution-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/delayed-feedback-and-conversion-attribution-8.png": {
+    "width": 1792,
+    "height": 1227
   },
   "/imgs/blogs/delta-direction-exposure-and-the-hedge-ratio-1.png": {
     "width": 1602,
@@ -11754,6 +11820,39 @@
   "/imgs/blogs/fed-speak-minutes-and-the-blackout-period-7.png": {
     "width": 1792,
     "height": 1184
+  },
+  "/imgs/blogs/feedback-loops-and-filter-bubbles-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/feedback-loops-and-filter-bubbles-2.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/feedback-loops-and-filter-bubbles-3.png": {
+    "width": 1792,
+    "height": 1164
+  },
+  "/imgs/blogs/feedback-loops-and-filter-bubbles-4.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/feedback-loops-and-filter-bubbles-5.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/feedback-loops-and-filter-bubbles-6.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/feedback-loops-and-filter-bubbles-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/feedback-loops-and-filter-bubbles-8.png": {
+    "width": 1792,
+    "height": 1267
   },
   "/imgs/blogs/fees-and-terms-the-high-water-mark-1.png": {
     "width": 1792,
@@ -23137,6 +23236,39 @@
     "width": 1792,
     "height": 1237
   },
+  "/imgs/blogs/popularity-bias-and-the-rich-get-richer-1.png": {
+    "width": 1792,
+    "height": 1241,
+    "cover": true
+  },
+  "/imgs/blogs/popularity-bias-and-the-rich-get-richer-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/popularity-bias-and-the-rich-get-richer-3.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/popularity-bias-and-the-rich-get-richer-4.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/popularity-bias-and-the-rich-get-richer-5.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/popularity-bias-and-the-rich-get-richer-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/popularity-bias-and-the-rich-get-richer-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/popularity-bias-and-the-rich-get-richer-8.png": {
+    "width": 1792,
+    "height": 1199
+  },
   "/imgs/blogs/pose-estimation-architecture-tree.png": {
     "width": 1280,
     "height": 665,
@@ -23145,6 +23277,39 @@
   "/imgs/blogs/pose-estimation-representations.png": {
     "width": 1260,
     "height": 688
+  },
+  "/imgs/blogs/position-and-selection-bias-in-click-data-1.png": {
+    "width": 1792,
+    "height": 1260,
+    "cover": true
+  },
+  "/imgs/blogs/position-and-selection-bias-in-click-data-2.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/position-and-selection-bias-in-click-data-3.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/position-and-selection-bias-in-click-data-4.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/position-and-selection-bias-in-click-data-5.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/position-and-selection-bias-in-click-data-6.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/position-and-selection-bias-in-click-data-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/position-and-selection-bias-in-click-data-8.png": {
+    "width": 1792,
+    "height": 1247
   },
   "/imgs/blogs/position-sizing-and-kelly-criterion-1.png": {
     "width": 1792,
@@ -30343,6 +30508,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/the-cold-start-problem-1.png": {
+    "width": 1792,
+    "height": 1184,
+    "cover": true
+  },
+  "/imgs/blogs/the-cold-start-problem-2.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/the-cold-start-problem-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/the-cold-start-problem-4.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/the-cold-start-problem-5.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/the-cold-start-problem-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/the-cold-start-problem-7.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/the-cold-start-problem-8.png": {
+    "width": 1792,
+    "height": 1199
+  },
   "/imgs/blogs/the-collections-and-heapq-toolbox-deque-counter-defaultdict-bisect-1.png": {
     "width": 1792,
     "height": 1389,
@@ -34521,6 +34719,39 @@
   "/imgs/blogs/train-infer-mismatch-for-llms-8.png": {
     "width": 1792,
     "height": 911
+  },
+  "/imgs/blogs/train-serve-skew-and-the-bugs-that-hide-there-1.png": {
+    "width": 1792,
+    "height": 1250,
+    "cover": true
+  },
+  "/imgs/blogs/train-serve-skew-and-the-bugs-that-hide-there-2.png": {
+    "width": 1792,
+    "height": 1159
+  },
+  "/imgs/blogs/train-serve-skew-and-the-bugs-that-hide-there-3.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/train-serve-skew-and-the-bugs-that-hide-there-4.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/train-serve-skew-and-the-bugs-that-hide-there-5.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/train-serve-skew-and-the-bugs-that-hide-there-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/train-serve-skew-and-the-bugs-that-hide-there-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/train-serve-skew-and-the-bugs-that-hide-there-8.png": {
+    "width": 1792,
+    "height": 1208
   },
   "/imgs/blogs/training-asr-models-diagram.png": {
     "width": 1260,
