@@ -8282,6 +8282,39 @@
     "width": 1792,
     "height": 1158
   },
+  "/imgs/blogs/dcn-and-explicit-feature-crossing-1.png": {
+    "width": 1792,
+    "height": 702,
+    "cover": true
+  },
+  "/imgs/blogs/dcn-and-explicit-feature-crossing-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/dcn-and-explicit-feature-crossing-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/dcn-and-explicit-feature-crossing-4.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/dcn-and-explicit-feature-crossing-5.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/dcn-and-explicit-feature-crossing-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/dcn-and-explicit-feature-crossing-7.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/dcn-and-explicit-feature-crossing-8.png": {
+    "width": 1792,
+    "height": 1362
+  },
   "/imgs/blogs/ddim-and-fast-deterministic-sampling-1.png": {
     "width": 1792,
     "height": 1212,
@@ -8813,6 +8846,39 @@
   "/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250901002802.png": {
     "width": 1176,
     "height": 188
+  },
+  "/imgs/blogs/deepfm-and-automatic-feature-interactions-1.png": {
+    "width": 1792,
+    "height": 708,
+    "cover": true
+  },
+  "/imgs/blogs/deepfm-and-automatic-feature-interactions-2.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/deepfm-and-automatic-feature-interactions-3.png": {
+    "width": 1792,
+    "height": 1245
+  },
+  "/imgs/blogs/deepfm-and-automatic-feature-interactions-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/deepfm-and-automatic-feature-interactions-5.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/deepfm-and-automatic-feature-interactions-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/deepfm-and-automatic-feature-interactions-7.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/deepfm-and-automatic-feature-interactions-8.png": {
+    "width": 1792,
+    "height": 1316
   },
   "/imgs/blogs/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning-1.png": {
     "width": 1792,
@@ -20628,6 +20694,39 @@
     "width": 1792,
     "height": 1210
   },
+  "/imgs/blogs/multi-task-and-multi-objective-ranking-mmoe-ple-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/multi-task-and-multi-objective-ranking-mmoe-ple-2.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/multi-task-and-multi-objective-ranking-mmoe-ple-3.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/multi-task-and-multi-objective-ranking-mmoe-ple-4.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/multi-task-and-multi-objective-ranking-mmoe-ple-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/multi-task-and-multi-objective-ranking-mmoe-ple-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/multi-task-and-multi-objective-ranking-mmoe-ple-7.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/multi-task-and-multi-objective-ranking-mmoe-ple-8.png": {
+    "width": 1792,
+    "height": 1347
+  },
   "/imgs/blogs/multi-timeframe-analysis-1.png": {
     "width": 1792,
     "height": 1243,
@@ -26866,6 +26965,39 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/self-attention-for-sequences-sasrec-bert4rec-1.png": {
+    "width": 1792,
+    "height": 731,
+    "cover": true
+  },
+  "/imgs/blogs/self-attention-for-sequences-sasrec-bert4rec-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/self-attention-for-sequences-sasrec-bert4rec-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/self-attention-for-sequences-sasrec-bert4rec-4.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/self-attention-for-sequences-sasrec-bert4rec-5.png": {
+    "width": 1792,
+    "height": 1220
+  },
+  "/imgs/blogs/self-attention-for-sequences-sasrec-bert4rec-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/self-attention-for-sequences-sasrec-bert4rec-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/self-attention-for-sequences-sasrec-bert4rec-8.png": {
+    "width": 1792,
+    "height": 1208
+  },
   "/imgs/blogs/self-rag-01-flow.png": {
     "width": 20,
     "height": 20
@@ -26939,6 +27071,39 @@
   "/imgs/blogs/seniority-recovery-and-the-capital-structure-7.png": {
     "width": 1792,
     "height": 1299
+  },
+  "/imgs/blogs/sequential-and-session-based-recommendation-1.png": {
+    "width": 1792,
+    "height": 1231,
+    "cover": true
+  },
+  "/imgs/blogs/sequential-and-session-based-recommendation-2.png": {
+    "width": 1792,
+    "height": 689
+  },
+  "/imgs/blogs/sequential-and-session-based-recommendation-3.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/sequential-and-session-based-recommendation-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/sequential-and-session-based-recommendation-5.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/sequential-and-session-based-recommendation-6.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/sequential-and-session-based-recommendation-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/sequential-and-session-based-recommendation-8.png": {
+    "width": 1792,
+    "height": 1218
   },
   "/imgs/blogs/serving-01-architecture.png": {
     "width": 1185,
@@ -32190,6 +32355,39 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/the-ranking-model-ctr-prediction-foundations-1.png": {
+    "width": 1792,
+    "height": 1260,
+    "cover": true
+  },
+  "/imgs/blogs/the-ranking-model-ctr-prediction-foundations-2.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/the-ranking-model-ctr-prediction-foundations-3.png": {
+    "width": 1792,
+    "height": 1002
+  },
+  "/imgs/blogs/the-ranking-model-ctr-prediction-foundations-4.png": {
+    "width": 1792,
+    "height": 1288
+  },
+  "/imgs/blogs/the-ranking-model-ctr-prediction-foundations-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/the-ranking-model-ctr-prediction-foundations-6.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/the-ranking-model-ctr-prediction-foundations-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-ranking-model-ctr-prediction-foundations-8.png": {
+    "width": 1792,
+    "height": 1280
+  },
   "/imgs/blogs/the-reaction-function-why-the-same-number-moves-differently-1.png": {
     "width": 1792,
     "height": 962,
@@ -36440,6 +36638,39 @@
   "/imgs/blogs/why-your-training-run-is-lying-to-you-8.png": {
     "width": 1792,
     "height": 1338
+  },
+  "/imgs/blogs/wide-and-deep-and-the-memorization-generalization-tradeoff-1.png": {
+    "width": 1792,
+    "height": 768,
+    "cover": true
+  },
+  "/imgs/blogs/wide-and-deep-and-the-memorization-generalization-tradeoff-2.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/wide-and-deep-and-the-memorization-generalization-tradeoff-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/wide-and-deep-and-the-memorization-generalization-tradeoff-4.png": {
+    "width": 1792,
+    "height": 1220
+  },
+  "/imgs/blogs/wide-and-deep-and-the-memorization-generalization-tradeoff-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/wide-and-deep-and-the-memorization-generalization-tradeoff-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/wide-and-deep-and-the-memorization-generalization-tradeoff-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/wide-and-deep-and-the-memorization-generalization-tradeoff-8.png": {
+    "width": 1792,
+    "height": 1196
   },
   "/imgs/blogs/winding-down-gracefully-returning-capital-1.png": {
     "width": 1792,
