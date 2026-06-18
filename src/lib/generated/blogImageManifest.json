@@ -3485,6 +3485,39 @@
     "width": 1792,
     "height": 1045
   },
+  "/imgs/blogs/building-the-training-pipeline-for-recsys-1.png": {
+    "width": 1792,
+    "height": 1229,
+    "cover": true
+  },
+  "/imgs/blogs/building-the-training-pipeline-for-recsys-2.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/building-the-training-pipeline-for-recsys-3.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/building-the-training-pipeline-for-recsys-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/building-the-training-pipeline-for-recsys-5.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/building-the-training-pipeline-for-recsys-6.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/building-the-training-pipeline-for-recsys-7.png": {
+    "width": 1792,
+    "height": 893
+  },
+  "/imgs/blogs/building-the-training-pipeline-for-recsys-8.png": {
+    "width": 1792,
+    "height": 1247
+  },
   "/imgs/blogs/building-with-video-generation-the-playbook-1.png": {
     "width": 1792,
     "height": 1218,
@@ -9542,6 +9575,39 @@
     "width": 1792,
     "height": 1035
   },
+  "/imgs/blogs/distillation-and-compression-for-recsys-1.png": {
+    "width": 1792,
+    "height": 1042,
+    "cover": true
+  },
+  "/imgs/blogs/distillation-and-compression-for-recsys-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/distillation-and-compression-for-recsys-3.png": {
+    "width": 1792,
+    "height": 1274
+  },
+  "/imgs/blogs/distillation-and-compression-for-recsys-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/distillation-and-compression-for-recsys-5.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/distillation-and-compression-for-recsys-6.png": {
+    "width": 1792,
+    "height": 774
+  },
+  "/imgs/blogs/distillation-and-compression-for-recsys-7.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/distillation-and-compression-for-recsys-8.png": {
+    "width": 1792,
+    "height": 1279
+  },
   "/imgs/blogs/distillation-case-studies-distilbert-to-cnns-1.png": {
     "width": 1792,
     "height": 1194,
@@ -10449,6 +10515,39 @@
   "/imgs/blogs/embed-03-finetune-decision.png": {
     "width": 1792,
     "height": 867
+  },
+  "/imgs/blogs/embeddings-the-heart-of-recommenders-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/embeddings-the-heart-of-recommenders-2.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/embeddings-the-heart-of-recommenders-3.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/embeddings-the-heart-of-recommenders-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/embeddings-the-heart-of-recommenders-5.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/embeddings-the-heart-of-recommenders-6.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/embeddings-the-heart-of-recommenders-7.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/embeddings-the-heart-of-recommenders-8.png": {
+    "width": 1792,
+    "height": 1245
   },
   "/imgs/blogs/emergence-of-linear-truth-encodings-in-language-models-20251105205044.png": {
     "width": 1698,
@@ -11837,6 +11936,39 @@
   "/imgs/blogs/finetuning-an-llm-without-breaking-it-8.png": {
     "width": 1792,
     "height": 1158
+  },
+  "/imgs/blogs/finetuning-llms-for-recommendation-in-practice-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/finetuning-llms-for-recommendation-in-practice-2.png": {
+    "width": 1792,
+    "height": 1334
+  },
+  "/imgs/blogs/finetuning-llms-for-recommendation-in-practice-3.png": {
+    "width": 1792,
+    "height": 1427
+  },
+  "/imgs/blogs/finetuning-llms-for-recommendation-in-practice-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/finetuning-llms-for-recommendation-in-practice-5.png": {
+    "width": 1792,
+    "height": 931
+  },
+  "/imgs/blogs/finetuning-llms-for-recommendation-in-practice-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/finetuning-llms-for-recommendation-in-practice-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/finetuning-llms-for-recommendation-in-practice-8.png": {
+    "width": 1792,
+    "height": 1329
   },
   "/imgs/blogs/finetuning-pitfalls-across-modalities-1.png": {
     "width": 1792,
@@ -18329,6 +18461,39 @@
     "width": 1792,
     "height": 1238
   },
+  "/imgs/blogs/llms-for-recommendation-llm4rec-1.png": {
+    "width": 1792,
+    "height": 1154,
+    "cover": true
+  },
+  "/imgs/blogs/llms-for-recommendation-llm4rec-2.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/llms-for-recommendation-llm4rec-3.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/llms-for-recommendation-llm4rec-4.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/llms-for-recommendation-llm4rec-5.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/llms-for-recommendation-llm4rec-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/llms-for-recommendation-llm4rec-7.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/llms-for-recommendation-llm4rec-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/lmcache-kv-cache-layer-deep-dive-1.png": {
     "width": 1792,
     "height": 1094,
@@ -23092,6 +23257,39 @@
   "/imgs/blogs/precision-scaling-laws-8.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/pretraining-and-finetuning-recommenders-1.png": {
+    "width": 1792,
+    "height": 1213,
+    "cover": true
+  },
+  "/imgs/blogs/pretraining-and-finetuning-recommenders-2.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/pretraining-and-finetuning-recommenders-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/pretraining-and-finetuning-recommenders-4.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/pretraining-and-finetuning-recommenders-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/pretraining-and-finetuning-recommenders-6.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/pretraining-and-finetuning-recommenders-7.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/pretraining-and-finetuning-recommenders-8.png": {
+    "width": 1792,
+    "height": 1280
   },
   "/imgs/blogs/pretraining-wall-inference-scaling-1.png": {
     "width": 1792,
