@@ -7778,6 +7778,39 @@
     "width": 1792,
     "height": 963
   },
+  "/imgs/blogs/dataframes-at-speed-pandas-pitfalls-polars-and-arrow-1.png": {
+    "width": 1792,
+    "height": 1260,
+    "cover": true
+  },
+  "/imgs/blogs/dataframes-at-speed-pandas-pitfalls-polars-and-arrow-2.png": {
+    "width": 1792,
+    "height": 1258
+  },
+  "/imgs/blogs/dataframes-at-speed-pandas-pitfalls-polars-and-arrow-3.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/dataframes-at-speed-pandas-pitfalls-polars-and-arrow-4.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/dataframes-at-speed-pandas-pitfalls-polars-and-arrow-5.png": {
+    "width": 1792,
+    "height": 767
+  },
+  "/imgs/blogs/dataframes-at-speed-pandas-pitfalls-polars-and-arrow-6.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/dataframes-at-speed-pandas-pitfalls-polars-and-arrow-7.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/dataframes-at-speed-pandas-pitfalls-polars-and-arrow-8.png": {
+    "width": 1792,
+    "height": 1158
+  },
   "/imgs/blogs/ddim-and-fast-deterministic-sampling-1.png": {
     "width": 1792,
     "height": 1212,
@@ -20079,6 +20112,72 @@
     "width": 1792,
     "height": 1260
   },
+  "/imgs/blogs/numpy-from-first-principles-the-ndarray-and-why-its-fast-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/numpy-from-first-principles-the-ndarray-and-why-its-fast-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/numpy-from-first-principles-the-ndarray-and-why-its-fast-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/numpy-from-first-principles-the-ndarray-and-why-its-fast-4.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/numpy-from-first-principles-the-ndarray-and-why-its-fast-5.png": {
+    "width": 1792,
+    "height": 1362
+  },
+  "/imgs/blogs/numpy-from-first-principles-the-ndarray-and-why-its-fast-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/numpy-from-first-principles-the-ndarray-and-why-its-fast-7.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/numpy-from-first-principles-the-ndarray-and-why-its-fast-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/numpy-memory-layout-strides-views-copies-and-the-cache-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/numpy-memory-layout-strides-views-copies-and-the-cache-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/numpy-memory-layout-strides-views-copies-and-the-cache-3.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/numpy-memory-layout-strides-views-copies-and-the-cache-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/numpy-memory-layout-strides-views-copies-and-the-cache-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/numpy-memory-layout-strides-views-copies-and-the-cache-6.png": {
+    "width": 1792,
+    "height": 1381
+  },
+  "/imgs/blogs/numpy-memory-layout-strides-views-copies-and-the-cache-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/numpy-memory-layout-strides-views-copies-and-the-cache-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/object-detection-end-to-end-1.png": {
     "width": 1792,
     "height": 1211,
@@ -32264,6 +32363,39 @@
     "width": 1792,
     "height": 992
   },
+  "/imgs/blogs/vectorization-in-practice-broadcasting-ufuncs-and-fancy-indexing-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/vectorization-in-practice-broadcasting-ufuncs-and-fancy-indexing-2.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/vectorization-in-practice-broadcasting-ufuncs-and-fancy-indexing-3.png": {
+    "width": 1782,
+    "height": 1450
+  },
+  "/imgs/blogs/vectorization-in-practice-broadcasting-ufuncs-and-fancy-indexing-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/vectorization-in-practice-broadcasting-ufuncs-and-fancy-indexing-5.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/vectorization-in-practice-broadcasting-ufuncs-and-fancy-indexing-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/vectorization-in-practice-broadcasting-ufuncs-and-fancy-indexing-7.png": {
+    "width": 1792,
+    "height": 1371
+  },
+  "/imgs/blogs/vectorization-in-practice-broadcasting-ufuncs-and-fancy-indexing-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/vega-your-exposure-to-implied-volatility-and-the-vol-of-vol-1.png": {
     "width": 1602,
     "height": 914,
@@ -33264,6 +33396,39 @@
   "/imgs/blogs/when-correlations-go-to-one-in-a-crisis-7.png": {
     "width": 1792,
     "height": 1206
+  },
+  "/imgs/blogs/when-numpy-isnt-enough-numexpr-bandwidth-and-avoiding-temporaries-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/when-numpy-isnt-enough-numexpr-bandwidth-and-avoiding-temporaries-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/when-numpy-isnt-enough-numexpr-bandwidth-and-avoiding-temporaries-3.png": {
+    "width": 1792,
+    "height": 1339
+  },
+  "/imgs/blogs/when-numpy-isnt-enough-numexpr-bandwidth-and-avoiding-temporaries-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/when-numpy-isnt-enough-numexpr-bandwidth-and-avoiding-temporaries-5.png": {
+    "width": 1792,
+    "height": 1450
+  },
+  "/imgs/blogs/when-numpy-isnt-enough-numexpr-bandwidth-and-avoiding-temporaries-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/when-numpy-isnt-enough-numexpr-bandwidth-and-avoiding-temporaries-7.png": {
+    "width": 1792,
+    "height": 924
+  },
+  "/imgs/blogs/when-numpy-isnt-enough-numexpr-bandwidth-and-avoiding-temporaries-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/when-states-take-gold-confiscation-capital-controls-and-the-1933-order-1.png": {
     "width": 1792,
