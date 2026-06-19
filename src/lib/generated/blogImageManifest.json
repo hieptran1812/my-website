@@ -4782,6 +4782,11 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/capital-flows-and-the-dornbusch-overshoot-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
   "/imgs/blogs/capital-structure-evolution-and-gp-stakes-1.png": {
     "width": 1792,
     "height": 942,
@@ -7784,6 +7789,11 @@
   "/imgs/blogs/concentration-and-position-limits-the-one-trade-that-can-end-you-7.png": {
     "width": 1659,
     "height": 1013
+  },
+  "/imgs/blogs/concurrency-vs-parallelism-cpu-bound-io-bound-and-the-scaling-laws-1.png": {
+    "width": 1792,
+    "height": 1421,
+    "cover": true
   },
   "/imgs/blogs/conditional-expectation-projection-math-for-quants-1.png": {
     "width": 1792,
@@ -19660,6 +19670,11 @@
     "width": 1792,
     "height": 1268
   },
+  "/imgs/blogs/interest-rate-differentials-the-master-variable-of-fx-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
   "/imgs/blogs/interest-rates-and-mortgages-the-master-variable-1.png": {
     "width": 1792,
     "height": 1250,
@@ -27780,6 +27795,11 @@
     "width": 1792,
     "height": 1210
   },
+  "/imgs/blogs/processes-threads-and-how-the-os-scheduler-runs-them-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
   "/imgs/blogs/production-llm-guardrails-models-evaluation-finetuning-1.png": {
     "width": 1792,
     "height": 735,
@@ -28180,6 +28200,11 @@
   "/imgs/blogs/pump-and-dump-and-coordinated-buying-7.png": {
     "width": 1792,
     "height": 1247
+  },
+  "/imgs/blogs/purchasing-power-parity-and-the-real-exchange-rate-1.png": {
+    "width": 1739,
+    "height": 914,
+    "cover": true
   },
   "/imgs/blogs/put-call-parity-no-arbitrage-quant-interviews-1.png": {
     "width": 1792,
@@ -32603,6 +32628,11 @@
     "width": 1792,
     "height": 1209
   },
+  "/imgs/blogs/shared-mutable-state-and-the-anatomy-of-a-race-condition-1.png": {
+    "width": 1792,
+    "height": 999,
+    "cover": true
+  },
   "/imgs/blogs/short-rate-models-vasicek-hull-white-1.png": {
     "width": 1792,
     "height": 888,
@@ -34994,6 +35024,15 @@
     "width": 1792,
     "height": 1210
   },
+  "/imgs/blogs/terms-of-trade-and-the-commodity-currencies-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/terms-of-trade-and-the-commodity-currencies-9.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/terra-luna-2022-collapse-1.png": {
     "width": 1792,
     "height": 980,
@@ -35752,6 +35791,35 @@
   },
   "/imgs/blogs/the-asymmetry-of-losses-why-a-50-percent-loss-needs-a-100-percent-gain-7.png": {
     "width": 1669,
+    "height": 914
+  },
+  "/imgs/blogs/the-balance-of-payments-and-the-current-account-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/the-balance-of-payments-and-the-current-account-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-balance-of-payments-and-the-current-account-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-balance-of-payments-and-the-current-account-5.png": {
+    "width": 1700,
+    "height": 1507
+  },
+  "/imgs/blogs/the-balance-of-payments-and-the-current-account-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-balance-of-payments-and-the-current-account-7.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/the-balance-of-payments-and-the-current-account-8.png": {
+    "width": 1602,
     "height": 914
   },
   "/imgs/blogs/the-bid-ask-spread-as-an-adverse-selection-game-glosten-milgrom-1.png": {
@@ -42011,6 +42079,39 @@
     "width": 1792,
     "height": 1226
   },
+  "/imgs/blogs/uncovered-interest-parity-and-why-it-fails-the-forward-puzzle-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/uncovered-interest-parity-and-why-it-fails-the-forward-puzzle-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/uncovered-interest-parity-and-why-it-fails-the-forward-puzzle-3.png": {
+    "width": 1792,
+    "height": 893
+  },
+  "/imgs/blogs/uncovered-interest-parity-and-why-it-fails-the-forward-puzzle-4.png": {
+    "width": 1738,
+    "height": 914
+  },
+  "/imgs/blogs/uncovered-interest-parity-and-why-it-fails-the-forward-puzzle-5.png": {
+    "width": 1792,
+    "height": 1259
+  },
+  "/imgs/blogs/uncovered-interest-parity-and-why-it-fails-the-forward-puzzle-6.png": {
+    "width": 1667,
+    "height": 914
+  },
+  "/imgs/blogs/uncovered-interest-parity-and-why-it-fails-the-forward-puzzle-7.png": {
+    "width": 1792,
+    "height": 869
+  },
+  "/imgs/blogs/uncovered-interest-parity-and-why-it-fails-the-forward-puzzle-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/underwriting-a-property-deal-1.png": {
     "width": 1792,
     "height": 1210,
@@ -44600,6 +44701,39 @@
   "/imgs/blogs/why-bonds-rule-the-world-fixed-income-introduction-7.png": {
     "width": 1792,
     "height": 1210
+  },
+  "/imgs/blogs/why-concurrency-is-hard-and-why-you-cant-avoid-it-1.png": {
+    "width": 1792,
+    "height": 1100,
+    "cover": true
+  },
+  "/imgs/blogs/why-concurrency-is-hard-and-why-you-cant-avoid-it-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/why-concurrency-is-hard-and-why-you-cant-avoid-it-3.png": {
+    "width": 1792,
+    "height": 1008
+  },
+  "/imgs/blogs/why-concurrency-is-hard-and-why-you-cant-avoid-it-4.png": {
+    "width": 1782,
+    "height": 1453
+  },
+  "/imgs/blogs/why-concurrency-is-hard-and-why-you-cant-avoid-it-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/why-concurrency-is-hard-and-why-you-cant-avoid-it-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/why-concurrency-is-hard-and-why-you-cant-avoid-it-7.png": {
+    "width": 1782,
+    "height": 1453
+  },
+  "/imgs/blogs/why-concurrency-is-hard-and-why-you-cant-avoid-it-8.png": {
+    "width": 1792,
+    "height": 1154
   },
   "/imgs/blogs/why-convolution-works-01-operation.png": {
     "width": 1067,
