@@ -7551,6 +7551,35 @@
     "width": 1792,
     "height": 879
   },
+  "/imgs/blogs/correlation-is-a-regime-not-a-constant-1.png": {
+    "width": 1792,
+    "height": 1379,
+    "cover": true
+  },
+  "/imgs/blogs/correlation-is-a-regime-not-a-constant-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/correlation-is-a-regime-not-a-constant-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/correlation-is-a-regime-not-a-constant-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/correlation-is-a-regime-not-a-constant-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/correlation-is-a-regime-not-a-constant-6.png": {
+    "width": 1604,
+    "height": 914
+  },
+  "/imgs/blogs/correlation-is-a-regime-not-a-constant-7.png": {
+    "width": 1792,
+    "height": 1209
+  },
   "/imgs/blogs/cost-of-capital-and-the-hurdle-rate-1.png": {
     "width": 1792,
     "height": 1132,
@@ -18452,6 +18481,35 @@
     "width": 1792,
     "height": 1069
   },
+  "/imgs/blogs/lead-lag-leading-coincident-and-lagging-indicators-1.png": {
+    "width": 1792,
+    "height": 973,
+    "cover": true
+  },
+  "/imgs/blogs/lead-lag-leading-coincident-and-lagging-indicators-2.png": {
+    "width": 1792,
+    "height": 887
+  },
+  "/imgs/blogs/lead-lag-leading-coincident-and-lagging-indicators-3.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/lead-lag-leading-coincident-and-lagging-indicators-4.png": {
+    "width": 1707,
+    "height": 914
+  },
+  "/imgs/blogs/lead-lag-leading-coincident-and-lagging-indicators-5.png": {
+    "width": 1792,
+    "height": 828
+  },
+  "/imgs/blogs/lead-lag-leading-coincident-and-lagging-indicators-6.png": {
+    "width": 1655,
+    "height": 914
+  },
+  "/imgs/blogs/lead-lag-leading-coincident-and-lagging-indicators-7.png": {
+    "width": 1792,
+    "height": 1358
+  },
   "/imgs/blogs/leading-indicators-reading-the-cycle-in-real-time-1.png": {
     "width": 1792,
     "height": 1211,
@@ -27051,6 +27109,35 @@
     "width": 1792,
     "height": 1037
   },
+  "/imgs/blogs/rolling-correlation-and-why-the-window-matters-1.png": {
+    "width": 1792,
+    "height": 1271,
+    "cover": true
+  },
+  "/imgs/blogs/rolling-correlation-and-why-the-window-matters-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rolling-correlation-and-why-the-window-matters-3.png": {
+    "width": 1792,
+    "height": 1311
+  },
+  "/imgs/blogs/rolling-correlation-and-why-the-window-matters-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rolling-correlation-and-why-the-window-matters-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rolling-correlation-and-why-the-window-matters-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rolling-correlation-and-why-the-window-matters-7.png": {
+    "width": 1792,
+    "height": 786
+  },
   "/imgs/blogs/rsi-and-momentum-oscillators-1.png": {
     "width": 1792,
     "height": 1163,
@@ -28980,6 +29067,35 @@
   "/imgs/blogs/spot-rates-the-zero-curve-and-bootstrapping-7.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/spurious-correlation-and-the-traps-of-macro-data-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/spurious-correlation-and-the-traps-of-macro-data-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/spurious-correlation-and-the-traps-of-macro-data-3.png": {
+    "width": 1602,
+    "height": 934
+  },
+  "/imgs/blogs/spurious-correlation-and-the-traps-of-macro-data-4.png": {
+    "width": 1602,
+    "height": 934
+  },
+  "/imgs/blogs/spurious-correlation-and-the-traps-of-macro-data-5.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/spurious-correlation-and-the-traps-of-macro-data-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/spurious-correlation-and-the-traps-of-macro-data-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/squeezing-models-into-kilobytes-1.png": {
     "width": 1792,
@@ -32534,6 +32650,35 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/the-macro-asset-correlation-matrix-1.png": {
+    "width": 1792,
+    "height": 1163,
+    "cover": true
+  },
+  "/imgs/blogs/the-macro-asset-correlation-matrix-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-macro-asset-correlation-matrix-3.png": {
+    "width": 1792,
+    "height": 922
+  },
+  "/imgs/blogs/the-macro-asset-correlation-matrix-4.png": {
+    "width": 1634,
+    "height": 914
+  },
+  "/imgs/blogs/the-macro-asset-correlation-matrix-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-macro-asset-correlation-matrix-6.png": {
+    "width": 1663,
+    "height": 914
+  },
+  "/imgs/blogs/the-macro-asset-correlation-matrix-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/the-macro-calendar-cpi-nfp-fomc-pmi-1.png": {
     "width": 1792,
     "height": 988,
@@ -33974,6 +34119,35 @@
     "height": 1318
   },
   "/imgs/blogs/the-supply-side-mine-production-aisc-and-the-myth-of-peak-gold-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-surprise-not-the-level-betas-to-data-surprises-1.png": {
+    "width": 1792,
+    "height": 807,
+    "cover": true
+  },
+  "/imgs/blogs/the-surprise-not-the-level-betas-to-data-surprises-2.png": {
+    "width": 1603,
+    "height": 943
+  },
+  "/imgs/blogs/the-surprise-not-the-level-betas-to-data-surprises-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-surprise-not-the-level-betas-to-data-surprises-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-surprise-not-the-level-betas-to-data-surprises-5.png": {
+    "width": 1792,
+    "height": 905
+  },
+  "/imgs/blogs/the-surprise-not-the-level-betas-to-data-surprises-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-surprise-not-the-level-betas-to-data-surprises-7.png": {
     "width": 1602,
     "height": 914
   },
@@ -36687,6 +36861,35 @@
   "/imgs/blogs/what-a-hedge-fund-actually-is-7.png": {
     "width": 1792,
     "height": 1045
+  },
+  "/imgs/blogs/what-correlation-actually-measures-pearson-spearman-beta-1.png": {
+    "width": 1792,
+    "height": 1379,
+    "cover": true
+  },
+  "/imgs/blogs/what-correlation-actually-measures-pearson-spearman-beta-2.png": {
+    "width": 1608,
+    "height": 914
+  },
+  "/imgs/blogs/what-correlation-actually-measures-pearson-spearman-beta-3.png": {
+    "width": 1602,
+    "height": 925
+  },
+  "/imgs/blogs/what-correlation-actually-measures-pearson-spearman-beta-4.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/what-correlation-actually-measures-pearson-spearman-beta-5.png": {
+    "width": 1599,
+    "height": 914
+  },
+  "/imgs/blogs/what-correlation-actually-measures-pearson-spearman-beta-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/what-correlation-actually-measures-pearson-spearman-beta-7.png": {
+    "width": 1792,
+    "height": 830
   },
   "/imgs/blogs/what-is-a-quant-really-the-taxonomy-of-roles-1.png": {
     "width": 1792,
