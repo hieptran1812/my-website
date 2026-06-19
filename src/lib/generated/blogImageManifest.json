@@ -2233,6 +2233,72 @@
     "width": 1792,
     "height": 1219
   },
+  "/imgs/blogs/bankruptcy-and-restructuring-law-chapter-11-and-the-creditor-stack-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/bankruptcy-and-restructuring-law-chapter-11-and-the-creditor-stack-2.png": {
+    "width": 1792,
+    "height": 1106
+  },
+  "/imgs/blogs/bankruptcy-and-restructuring-law-chapter-11-and-the-creditor-stack-3.png": {
+    "width": 1792,
+    "height": 844
+  },
+  "/imgs/blogs/bankruptcy-and-restructuring-law-chapter-11-and-the-creditor-stack-4.png": {
+    "width": 1792,
+    "height": 1005
+  },
+  "/imgs/blogs/bankruptcy-and-restructuring-law-chapter-11-and-the-creditor-stack-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/bankruptcy-and-restructuring-law-chapter-11-and-the-creditor-stack-6.png": {
+    "width": 1792,
+    "height": 905
+  },
+  "/imgs/blogs/bankruptcy-and-restructuring-law-chapter-11-and-the-creditor-stack-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/bankruptcy-and-restructuring-law-chapter-11-and-the-creditor-stack-8.png": {
+    "width": 1792,
+    "height": 1418
+  },
+  "/imgs/blogs/basel-iii-iv-bank-capital-rules-and-the-price-of-credit-1.png": {
+    "width": 1792,
+    "height": 955,
+    "cover": true
+  },
+  "/imgs/blogs/basel-iii-iv-bank-capital-rules-and-the-price-of-credit-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/basel-iii-iv-bank-capital-rules-and-the-price-of-credit-3.png": {
+    "width": 1792,
+    "height": 1021
+  },
+  "/imgs/blogs/basel-iii-iv-bank-capital-rules-and-the-price-of-credit-4.png": {
+    "width": 1792,
+    "height": 723
+  },
+  "/imgs/blogs/basel-iii-iv-bank-capital-rules-and-the-price-of-credit-5.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/basel-iii-iv-bank-capital-rules-and-the-price-of-credit-6.png": {
+    "width": 1603,
+    "height": 914
+  },
+  "/imgs/blogs/basel-iii-iv-bank-capital-rules-and-the-price-of-credit-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/basel-iii-iv-bank-capital-rules-and-the-price-of-credit-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/bayesian-inference-traders-math-for-quants-1.png": {
     "width": 1792,
     "height": 876,
@@ -4142,6 +4208,39 @@
   "/imgs/blogs/capital-allocation-the-ceos-most-important-job-7.png": {
     "width": 1792,
     "height": 1207
+  },
+  "/imgs/blogs/capital-controls-and-the-legal-limits-on-money-flows-1.png": {
+    "width": 1792,
+    "height": 1276,
+    "cover": true
+  },
+  "/imgs/blogs/capital-controls-and-the-legal-limits-on-money-flows-2.png": {
+    "width": 1792,
+    "height": 1341
+  },
+  "/imgs/blogs/capital-controls-and-the-legal-limits-on-money-flows-3.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/capital-controls-and-the-legal-limits-on-money-flows-4.png": {
+    "width": 1080,
+    "height": 559
+  },
+  "/imgs/blogs/capital-controls-and-the-legal-limits-on-money-flows-5.png": {
+    "width": 1048,
+    "height": 539
+  },
+  "/imgs/blogs/capital-controls-and-the-legal-limits-on-money-flows-6.png": {
+    "width": 1792,
+    "height": 675
+  },
+  "/imgs/blogs/capital-controls-and-the-legal-limits-on-money-flows-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/capital-controls-and-the-legal-limits-on-money-flows-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/capital-structure-evolution-and-gp-stakes-1.png": {
     "width": 1792,
@@ -9645,6 +9744,39 @@
     "width": 1792,
     "height": 707,
     "cover": true
+  },
+  "/imgs/blogs/deposit-insurance-lender-of-last-resort-and-the-anatomy-of-a-bank-run-1.png": {
+    "width": 1792,
+    "height": 633,
+    "cover": true
+  },
+  "/imgs/blogs/deposit-insurance-lender-of-last-resort-and-the-anatomy-of-a-bank-run-2.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/deposit-insurance-lender-of-last-resort-and-the-anatomy-of-a-bank-run-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/deposit-insurance-lender-of-last-resort-and-the-anatomy-of-a-bank-run-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/deposit-insurance-lender-of-last-resort-and-the-anatomy-of-a-bank-run-5.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/deposit-insurance-lender-of-last-resort-and-the-anatomy-of-a-bank-run-6.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/deposit-insurance-lender-of-last-resort-and-the-anatomy-of-a-bank-run-7.png": {
+    "width": 1792,
+    "height": 799
+  },
+  "/imgs/blogs/deposit-insurance-lender-of-last-resort-and-the-anatomy-of-a-bank-run-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/derivatives-pricing-1.png": {
     "width": 1792,
@@ -21466,6 +21598,39 @@
     "width": 1792,
     "height": 1297
   },
+  "/imgs/blogs/money-market-funds-and-shadow-bank-regulation-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/money-market-funds-and-shadow-bank-regulation-2.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/money-market-funds-and-shadow-bank-regulation-3.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/money-market-funds-and-shadow-bank-regulation-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/money-market-funds-and-shadow-bank-regulation-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/money-market-funds-and-shadow-bank-regulation-6.png": {
+    "width": 1792,
+    "height": 972
+  },
+  "/imgs/blogs/money-market-funds-and-shadow-bank-regulation-7.png": {
+    "width": 1792,
+    "height": 1031
+  },
+  "/imgs/blogs/money-market-funds-and-shadow-bank-regulation-8.png": {
+    "width": 1792,
+    "height": 1056
+  },
   "/imgs/blogs/money-market-plumbing-repo-collateral-sofr-1.png": {
     "width": 1792,
     "height": 922,
@@ -32930,6 +33095,39 @@
   "/imgs/blogs/the-learning-rate-is-almost-always-the-problem-8.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/the-legal-mandate-of-a-central-bank-1.png": {
+    "width": 1792,
+    "height": 801,
+    "cover": true
+  },
+  "/imgs/blogs/the-legal-mandate-of-a-central-bank-2.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/the-legal-mandate-of-a-central-bank-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-legal-mandate-of-a-central-bank-4.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/the-legal-mandate-of-a-central-bank-5.png": {
+    "width": 1792,
+    "height": 862
+  },
+  "/imgs/blogs/the-legal-mandate-of-a-central-bank-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-legal-mandate-of-a-central-bank-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-legal-mandate-of-a-central-bank-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/the-liquidity-cycle-and-asset-prices-1.png": {
     "width": 1792,
