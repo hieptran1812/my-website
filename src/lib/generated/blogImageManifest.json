@@ -1998,6 +1998,39 @@
     "width": 1792,
     "height": 865
   },
+  "/imgs/blogs/backtesting-a-correlation-without-fooling-yourself-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/backtesting-a-correlation-without-fooling-yourself-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/backtesting-a-correlation-without-fooling-yourself-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/backtesting-a-correlation-without-fooling-yourself-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/backtesting-a-correlation-without-fooling-yourself-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/backtesting-a-correlation-without-fooling-yourself-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/backtesting-a-correlation-without-fooling-yourself-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/backtesting-a-correlation-without-fooling-yourself-8.png": {
+    "width": 1792,
+    "height": 1197
+  },
   "/imgs/blogs/backtesting-done-right-quant-research-1.png": {
     "width": 1792,
     "height": 1278,
@@ -3294,6 +3327,43 @@
   "/imgs/blogs/building-a-hedge-fund-the-founders-map-7.png": {
     "width": 1792,
     "height": 1278
+  },
+  "/imgs/blogs/building-a-macro-asset-correlation-dashboard-in-python-1.png": {
+    "width": 1792,
+    "height": 1199,
+    "cover": true
+  },
+  "/imgs/blogs/building-a-macro-asset-correlation-dashboard-in-python-2.png": {
+    "width": 1601,
+    "height": 914
+  },
+  "/imgs/blogs/building-a-macro-asset-correlation-dashboard-in-python-3.png": {
+    "width": 1584,
+    "height": 914
+  },
+  "/imgs/blogs/building-a-macro-asset-correlation-dashboard-in-python-4.png": {
+    "width": 1356,
+    "height": 1112
+  },
+  "/imgs/blogs/building-a-macro-asset-correlation-dashboard-in-python-5.png": {
+    "width": 1701,
+    "height": 828
+  },
+  "/imgs/blogs/building-a-macro-asset-correlation-dashboard-in-python-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/building-a-macro-asset-correlation-dashboard-in-python-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/building-a-macro-asset-correlation-dashboard-in-python-8.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/building-a-macro-asset-correlation-dashboard-in-python-9.png": {
+    "width": 1792,
+    "height": 960
   },
   "/imgs/blogs/building-a-macro-thesis-from-data-to-a-trade-1.png": {
     "width": 1792,
@@ -14093,6 +14163,35 @@
     "width": 1792,
     "height": 1257
   },
+  "/imgs/blogs/from-correlation-to-signal-building-a-macro-overlay-1.png": {
+    "width": 1792,
+    "height": 717,
+    "cover": true
+  },
+  "/imgs/blogs/from-correlation-to-signal-building-a-macro-overlay-2.png": {
+    "width": 1599,
+    "height": 914
+  },
+  "/imgs/blogs/from-correlation-to-signal-building-a-macro-overlay-3.png": {
+    "width": 1792,
+    "height": 818
+  },
+  "/imgs/blogs/from-correlation-to-signal-building-a-macro-overlay-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/from-correlation-to-signal-building-a-macro-overlay-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/from-correlation-to-signal-building-a-macro-overlay-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/from-correlation-to-signal-building-a-macro-overlay-7.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/from-discretionary-to-systematic-1.png": {
     "width": 1792,
     "height": 1063,
@@ -21221,6 +21320,35 @@
   "/imgs/blogs/mean-variance-efficient-frontier-math-for-quants-7.png": {
     "width": 1792,
     "height": 1266
+  },
+  "/imgs/blogs/measuring-beta-to-data-surprises-an-event-study-in-python-1.png": {
+    "width": 1792,
+    "height": 1189,
+    "cover": true
+  },
+  "/imgs/blogs/measuring-beta-to-data-surprises-an-event-study-in-python-2.png": {
+    "width": 1577,
+    "height": 914
+  },
+  "/imgs/blogs/measuring-beta-to-data-surprises-an-event-study-in-python-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/measuring-beta-to-data-surprises-an-event-study-in-python-4.png": {
+    "width": 1611,
+    "height": 914
+  },
+  "/imgs/blogs/measuring-beta-to-data-surprises-an-event-study-in-python-5.png": {
+    "width": 1628,
+    "height": 914
+  },
+  "/imgs/blogs/measuring-beta-to-data-surprises-an-event-study-in-python-6.png": {
+    "width": 1792,
+    "height": 1280
+  },
+  "/imgs/blogs/measuring-beta-to-data-surprises-an-event-study-in-python-7.png": {
+    "width": 1619,
+    "height": 914
   },
   "/imgs/blogs/media-sector-vietnam-small-sentiment-corner-1.png": {
     "width": 1792,
@@ -28624,6 +28752,35 @@
   "/imgs/blogs/rolling-correlation-and-why-the-window-matters-7.png": {
     "width": 1792,
     "height": 786
+  },
+  "/imgs/blogs/rolling-correlation-regimes-and-change-point-detection-1.png": {
+    "width": 1792,
+    "height": 687,
+    "cover": true
+  },
+  "/imgs/blogs/rolling-correlation-regimes-and-change-point-detection-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rolling-correlation-regimes-and-change-point-detection-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rolling-correlation-regimes-and-change-point-detection-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rolling-correlation-regimes-and-change-point-detection-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rolling-correlation-regimes-and-change-point-detection-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/rolling-correlation-regimes-and-change-point-detection-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/rsi-and-momentum-oscillators-1.png": {
     "width": 1792,
