@@ -10597,6 +10597,39 @@
     "width": 1792,
     "height": 1199
   },
+  "/imgs/blogs/deadlocks-livelocks-and-starvation-1.png": {
+    "width": 1792,
+    "height": 941,
+    "cover": true
+  },
+  "/imgs/blogs/deadlocks-livelocks-and-starvation-2.png": {
+    "width": 1792,
+    "height": 1428
+  },
+  "/imgs/blogs/deadlocks-livelocks-and-starvation-3.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/deadlocks-livelocks-and-starvation-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/deadlocks-livelocks-and-starvation-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/deadlocks-livelocks-and-starvation-6.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/deadlocks-livelocks-and-starvation-7.png": {
+    "width": 1782,
+    "height": 1453
+  },
+  "/imgs/blogs/deadlocks-livelocks-and-starvation-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/dealer-gamma-charm-and-vanna-how-options-flows-move-the-spot-1.png": {
     "width": 1792,
     "height": 976,
@@ -10724,6 +10757,39 @@
   "/imgs/blogs/debugging-asr-finetuning-8.png": {
     "width": 1792,
     "height": 1212
+  },
+  "/imgs/blogs/debugging-async-and-event-loops-1.png": {
+    "width": 1792,
+    "height": 1201,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-async-and-event-loops-2.png": {
+    "width": 1792,
+    "height": 792
+  },
+  "/imgs/blogs/debugging-async-and-event-loops-3.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/debugging-async-and-event-loops-4.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/debugging-async-and-event-loops-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/debugging-async-and-event-loops-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/debugging-async-and-event-loops-7.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/debugging-async-and-event-loops-8.png": {
+    "width": 1792,
+    "height": 925
   },
   "/imgs/blogs/debugging-checkpoint-and-resume-1.png": {
     "width": 1792,
@@ -12070,6 +12136,39 @@
   "/imgs/blogs/distilling-llms-and-reasoning-8.png": {
     "width": 1792,
     "height": 1196
+  },
+  "/imgs/blogs/distributed-race-conditions-and-ordering-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/distributed-race-conditions-and-ordering-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/distributed-race-conditions-and-ordering-3.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/distributed-race-conditions-and-ordering-4.png": {
+    "width": 1792,
+    "height": 702
+  },
+  "/imgs/blogs/distributed-race-conditions-and-ordering-5.png": {
+    "width": 1792,
+    "height": 1355
+  },
+  "/imgs/blogs/distributed-race-conditions-and-ordering-6.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/distributed-race-conditions-and-ordering-7.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/distributed-race-conditions-and-ordering-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/distribution-matching-and-adversarial-distillation-1.png": {
     "width": 1792,
@@ -17830,6 +17929,39 @@
   "/imgs/blogs/hedging-for-producers-vs-consumers-the-two-sides-of-the-trade-7.png": {
     "width": 1670,
     "height": 914
+  },
+  "/imgs/blogs/heisenbugs-that-vanish-when-you-look-1.png": {
+    "width": 1792,
+    "height": 1169,
+    "cover": true
+  },
+  "/imgs/blogs/heisenbugs-that-vanish-when-you-look-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/heisenbugs-that-vanish-when-you-look-3.png": {
+    "width": 1792,
+    "height": 742
+  },
+  "/imgs/blogs/heisenbugs-that-vanish-when-you-look-4.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/heisenbugs-that-vanish-when-you-look-5.png": {
+    "width": 1792,
+    "height": 932
+  },
+  "/imgs/blogs/heisenbugs-that-vanish-when-you-look-6.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/heisenbugs-that-vanish-when-you-look-7.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/heisenbugs-that-vanish-when-you-look-8.png": {
+    "width": 1792,
+    "height": 1194
   },
   "/imgs/blogs/hermes-agent-1.png": {
     "width": 1792,
@@ -30068,6 +30200,39 @@
   "/imgs/blogs/rabbitmq-production-architecture-scaling-9.png": {
     "width": 1792,
     "height": 1210
+  },
+  "/imgs/blogs/race-conditions-the-hardest-bugs-to-catch-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/race-conditions-the-hardest-bugs-to-catch-2.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/race-conditions-the-hardest-bugs-to-catch-3.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/race-conditions-the-hardest-bugs-to-catch-4.png": {
+    "width": 1792,
+    "height": 691
+  },
+  "/imgs/blogs/race-conditions-the-hardest-bugs-to-catch-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/race-conditions-the-hardest-bugs-to-catch-6.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/race-conditions-the-hardest-bugs-to-catch-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/race-conditions-the-hardest-bugs-to-catch-8.png": {
+    "width": 1792,
+    "height": 913
   },
   "/imgs/blogs/radon-nikodym-densities-math-for-quants-1.png": {
     "width": 1792,
