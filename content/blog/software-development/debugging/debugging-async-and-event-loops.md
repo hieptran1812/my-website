@@ -298,7 +298,7 @@ async function withLock(key, fn) {
 // usage: await withLock(accountId, () => debit(accountId, amount));
 ```
 
-The honest trade-off: the in-process lock only works within one process — across a cluster you need a distributed lock or, far better, an atomic DB operation that pushes the check-then-act into the database's transaction, which is what [databases](/blog/software-development/database) are *for*. Reaching for an app-level lock when the database can do an atomic conditional update is usually the wrong call; reach for the DB's atomicity first.
+The honest trade-off: the in-process lock only works within one process — across a cluster you need a distributed lock or, far better, an atomic DB operation that pushes the check-then-act into the database's transaction, which is what [a database transaction](/blog/software-development/database/isolation-levels-and-the-anomalies-they-prevent) is *for*. Reaching for an app-level lock when the database can do an atomic conditional update is usually the wrong call; reach for the DB's atomicity first.
 
 ### The method: reproduce the interleave on purpose
 
