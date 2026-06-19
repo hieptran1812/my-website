@@ -2262,6 +2262,35 @@
     "width": 1792,
     "height": 929
   },
+  "/imgs/blogs/backwardation-as-a-structural-return-source-the-carry-of-commodities-1.png": {
+    "width": 1792,
+    "height": 1241,
+    "cover": true
+  },
+  "/imgs/blogs/backwardation-as-a-structural-return-source-the-carry-of-commodities-2.png": {
+    "width": 1625,
+    "height": 914
+  },
+  "/imgs/blogs/backwardation-as-a-structural-return-source-the-carry-of-commodities-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/backwardation-as-a-structural-return-source-the-carry-of-commodities-4.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/backwardation-as-a-structural-return-source-the-carry-of-commodities-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/backwardation-as-a-structural-return-source-the-carry-of-commodities-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/backwardation-as-a-structural-return-source-the-carry-of-commodities-7.png": {
+    "width": 1792,
+    "height": 993
+  },
   "/imgs/blogs/bagel-unified-multimodal-mixture-of-transformers-1.png": {
     "width": 1792,
     "height": 1263,
@@ -4554,6 +4583,35 @@
     "width": 1792,
     "height": 1201
   },
+  "/imgs/blogs/calendar-spreads-and-curve-trades-trading-the-shape-not-the-level-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/calendar-spreads-and-curve-trades-trading-the-shape-not-the-level-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/calendar-spreads-and-curve-trades-trading-the-shape-not-the-level-3.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/calendar-spreads-and-curve-trades-trading-the-shape-not-the-level-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/calendar-spreads-and-curve-trades-trading-the-shape-not-the-level-5.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/calendar-spreads-and-curve-trades-trading-the-shape-not-the-level-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/calendar-spreads-and-curve-trades-trading-the-shape-not-the-level-7.png": {
+    "width": 1792,
+    "height": 961
+  },
   "/imgs/blogs/calendars-and-diagonals-trading-time-and-term-structure-1.png": {
     "width": 1602,
     "height": 914,
@@ -6297,6 +6355,35 @@
     "width": 1792,
     "height": 1297
   },
+  "/imgs/blogs/cash-and-carry-and-storage-arbitrage-locking-in-the-curve-1.png": {
+    "width": 1792,
+    "height": 1189,
+    "cover": true
+  },
+  "/imgs/blogs/cash-and-carry-and-storage-arbitrage-locking-in-the-curve-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cash-and-carry-and-storage-arbitrage-locking-in-the-curve-3.png": {
+    "width": 1792,
+    "height": 1132
+  },
+  "/imgs/blogs/cash-and-carry-and-storage-arbitrage-locking-in-the-curve-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cash-and-carry-and-storage-arbitrage-locking-in-the-curve-5.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/cash-and-carry-and-storage-arbitrage-locking-in-the-curve-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cash-and-carry-and-storage-arbitrage-locking-in-the-curve-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
   "/imgs/blogs/cash-flow-statement-where-the-cash-really-comes-from-1.png": {
     "width": 1792,
     "height": 1210,
@@ -7648,6 +7735,35 @@
   "/imgs/blogs/commodities-as-macro-signals-oil-copper-gold-7.png": {
     "width": 1792,
     "height": 1235
+  },
+  "/imgs/blogs/commodity-index-investing-gsci-bcom-and-owning-the-basket-1.png": {
+    "width": 1792,
+    "height": 742,
+    "cover": true
+  },
+  "/imgs/blogs/commodity-index-investing-gsci-bcom-and-owning-the-basket-2.png": {
+    "width": 1657,
+    "height": 914
+  },
+  "/imgs/blogs/commodity-index-investing-gsci-bcom-and-owning-the-basket-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/commodity-index-investing-gsci-bcom-and-owning-the-basket-4.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/commodity-index-investing-gsci-bcom-and-owning-the-basket-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/commodity-index-investing-gsci-bcom-and-owning-the-basket-6.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/commodity-index-investing-gsci-bcom-and-owning-the-basket-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/commodity-regulation-position-limits-and-the-cftc-1.png": {
     "width": 1792,
@@ -17685,6 +17801,35 @@
   "/imgs/blogs/hedging-a-portfolio-with-options-protective-puts-collars-and-tail-risk-7.png": {
     "width": 1792,
     "height": 1167
+  },
+  "/imgs/blogs/hedging-for-producers-vs-consumers-the-two-sides-of-the-trade-1.png": {
+    "width": 1792,
+    "height": 1231,
+    "cover": true
+  },
+  "/imgs/blogs/hedging-for-producers-vs-consumers-the-two-sides-of-the-trade-2.png": {
+    "width": 1602,
+    "height": 925
+  },
+  "/imgs/blogs/hedging-for-producers-vs-consumers-the-two-sides-of-the-trade-3.png": {
+    "width": 1691,
+    "height": 914
+  },
+  "/imgs/blogs/hedging-for-producers-vs-consumers-the-two-sides-of-the-trade-4.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/hedging-for-producers-vs-consumers-the-two-sides-of-the-trade-5.png": {
+    "width": 1731,
+    "height": 914
+  },
+  "/imgs/blogs/hedging-for-producers-vs-consumers-the-two-sides-of-the-trade-6.png": {
+    "width": 1792,
+    "height": 1171
+  },
+  "/imgs/blogs/hedging-for-producers-vs-consumers-the-two-sides-of-the-trade-7.png": {
+    "width": 1670,
+    "height": 914
   },
   "/imgs/blogs/hermes-agent-1.png": {
     "width": 1792,
@@ -32135,6 +32280,35 @@
   "/imgs/blogs/roic-wacc-spread-the-engine-of-intrinsic-value-7.png": {
     "width": 1792,
     "height": 1037
+  },
+  "/imgs/blogs/roll-yield-and-why-long-only-commodity-etfs-bleed-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/roll-yield-and-why-long-only-commodity-etfs-bleed-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/roll-yield-and-why-long-only-commodity-etfs-bleed-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/roll-yield-and-why-long-only-commodity-etfs-bleed-4.png": {
+    "width": 1792,
+    "height": 897
+  },
+  "/imgs/blogs/roll-yield-and-why-long-only-commodity-etfs-bleed-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/roll-yield-and-why-long-only-commodity-etfs-bleed-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/roll-yield-and-why-long-only-commodity-etfs-bleed-7.png": {
+    "width": 1792,
+    "height": 962
   },
   "/imgs/blogs/rolling-correlation-and-why-the-window-matters-1.png": {
     "width": 1792,
