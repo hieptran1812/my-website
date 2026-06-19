@@ -2848,6 +2848,35 @@
     "width": 1792,
     "height": 1218
   },
+  "/imgs/blogs/bond-yields-the-master-correlation-with-every-asset-1.png": {
+    "width": 1792,
+    "height": 1550,
+    "cover": true
+  },
+  "/imgs/blogs/bond-yields-the-master-correlation-with-every-asset-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/bond-yields-the-master-correlation-with-every-asset-3.png": {
+    "width": 1792,
+    "height": 800
+  },
+  "/imgs/blogs/bond-yields-the-master-correlation-with-every-asset-4.png": {
+    "width": 1792,
+    "height": 1181
+  },
+  "/imgs/blogs/bond-yields-the-master-correlation-with-every-asset-5.png": {
+    "width": 1792,
+    "height": 730
+  },
+  "/imgs/blogs/bond-yields-the-master-correlation-with-every-asset-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/bond-yields-the-master-correlation-with-every-asset-7.png": {
+    "width": 1683,
+    "height": 914
+  },
   "/imgs/blogs/bonds-vs-stocks-discount-rates-the-60-40-and-correlation-1.png": {
     "width": 1792,
     "height": 1251,
@@ -8400,6 +8429,35 @@
   "/imgs/blogs/credit-spreads-pricing-the-probability-of-default-7.png": {
     "width": 1792,
     "height": 1150
+  },
+  "/imgs/blogs/credit-spreads-the-risk-correlation-and-the-canary-1.png": {
+    "width": 1792,
+    "height": 717,
+    "cover": true
+  },
+  "/imgs/blogs/credit-spreads-the-risk-correlation-and-the-canary-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/credit-spreads-the-risk-correlation-and-the-canary-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/credit-spreads-the-risk-correlation-and-the-canary-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/credit-spreads-the-risk-correlation-and-the-canary-5.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/credit-spreads-the-risk-correlation-and-the-canary-6.png": {
+    "width": 1611,
+    "height": 914
+  },
+  "/imgs/blogs/credit-spreads-the-risk-correlation-and-the-canary-7.png": {
+    "width": 1792,
+    "height": 1227
   },
   "/imgs/blogs/cross-asset-transmission-how-one-print-hits-every-market-1.png": {
     "width": 1792,
@@ -26693,6 +26751,35 @@
     "width": 1792,
     "height": 872
   },
+  "/imgs/blogs/real-yields-and-the-cleanest-macro-correlation-1.png": {
+    "width": 1792,
+    "height": 1166,
+    "cover": true
+  },
+  "/imgs/blogs/real-yields-and-the-cleanest-macro-correlation-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/real-yields-and-the-cleanest-macro-correlation-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/real-yields-and-the-cleanest-macro-correlation-4.png": {
+    "width": 1612,
+    "height": 914
+  },
+  "/imgs/blogs/real-yields-and-the-cleanest-macro-correlation-5.png": {
+    "width": 1792,
+    "height": 1334
+  },
+  "/imgs/blogs/real-yields-and-the-cleanest-macro-correlation-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/real-yields-and-the-cleanest-macro-correlation-7.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/real-yields-the-variable-that-prices-everything-1.png": {
     "width": 1792,
     "height": 1156,
@@ -32540,6 +32627,35 @@
     "width": 1792,
     "height": 1266
   },
+  "/imgs/blogs/the-dollar-dxy-cross-asset-correlation-1.png": {
+    "width": 1792,
+    "height": 1159,
+    "cover": true
+  },
+  "/imgs/blogs/the-dollar-dxy-cross-asset-correlation-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-dxy-cross-asset-correlation-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-dxy-cross-asset-correlation-4.png": {
+    "width": 1792,
+    "height": 1035
+  },
+  "/imgs/blogs/the-dollar-dxy-cross-asset-correlation-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-dxy-cross-asset-correlation-6.png": {
+    "width": 1655,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-dxy-cross-asset-correlation-7.png": {
+    "width": 1792,
+    "height": 1305
+  },
   "/imgs/blogs/the-dot-plot-and-sep-reading-the-path-1.png": {
     "width": 1792,
     "height": 1077,
@@ -32762,6 +32878,35 @@
   "/imgs/blogs/the-fast-python-playbook-a-decision-framework-8.png": {
     "width": 1792,
     "height": 1153
+  },
+  "/imgs/blogs/the-fed-funds-path-and-front-end-correlation-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/the-fed-funds-path-and-front-end-correlation-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-fed-funds-path-and-front-end-correlation-3.png": {
+    "width": 1632,
+    "height": 914
+  },
+  "/imgs/blogs/the-fed-funds-path-and-front-end-correlation-4.png": {
+    "width": 1792,
+    "height": 903
+  },
+  "/imgs/blogs/the-fed-funds-path-and-front-end-correlation-5.png": {
+    "width": 1792,
+    "height": 1219
+  },
+  "/imgs/blogs/the-fed-funds-path-and-front-end-correlation-6.png": {
+    "width": 1602,
+    "height": 934
+  },
+  "/imgs/blogs/the-fed-funds-path-and-front-end-correlation-7.png": {
+    "width": 1792,
+    "height": 798
   },
   "/imgs/blogs/the-financial-chain-banks-property-brokers-steel-construction-1.png": {
     "width": 1792,
@@ -35240,6 +35385,35 @@
   "/imgs/blogs/the-sjc-premium-why-vietnamese-gold-trades-far-above-the-world-price-7.png": {
     "width": 1792,
     "height": 1201
+  },
+  "/imgs/blogs/the-stock-bond-correlation-regime-1.png": {
+    "width": 1792,
+    "height": 884,
+    "cover": true
+  },
+  "/imgs/blogs/the-stock-bond-correlation-regime-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-stock-bond-correlation-regime-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-stock-bond-correlation-regime-4.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/the-stock-bond-correlation-regime-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-stock-bond-correlation-regime-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-stock-bond-correlation-regime-7.png": {
+    "width": 1792,
+    "height": 1219
   },
   "/imgs/blogs/the-supply-side-mine-production-aisc-and-the-myth-of-peak-gold-1.png": {
     "width": 1792,
