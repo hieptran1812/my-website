@@ -2737,6 +2737,35 @@
     "width": 1792,
     "height": 904
   },
+  "/imgs/blogs/black-swans-vs-grey-rhinos-the-shocks-you-cant-and-can-see-coming-1.png": {
+    "width": 1792,
+    "height": 1241,
+    "cover": true
+  },
+  "/imgs/blogs/black-swans-vs-grey-rhinos-the-shocks-you-cant-and-can-see-coming-2.png": {
+    "width": 1792,
+    "height": 1219
+  },
+  "/imgs/blogs/black-swans-vs-grey-rhinos-the-shocks-you-cant-and-can-see-coming-3.png": {
+    "width": 1614,
+    "height": 1013
+  },
+  "/imgs/blogs/black-swans-vs-grey-rhinos-the-shocks-you-cant-and-can-see-coming-4.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/black-swans-vs-grey-rhinos-the-shocks-you-cant-and-can-see-coming-5.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/black-swans-vs-grey-rhinos-the-shocks-you-cant-and-can-see-coming-6.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/black-swans-vs-grey-rhinos-the-shocks-you-cant-and-can-see-coming-7.png": {
+    "width": 1792,
+    "height": 1136
+  },
   "/imgs/blogs/bollinger-bands-and-volatility-1.png": {
     "width": 1792,
     "height": 1084,
@@ -7912,6 +7941,35 @@
   "/imgs/blogs/controlnet-and-structural-control-8.png": {
     "width": 1792,
     "height": 1285
+  },
+  "/imgs/blogs/convexity-and-antifragility-loving-the-tail-1.png": {
+    "width": 1602,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/convexity-and-antifragility-loving-the-tail-2.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/convexity-and-antifragility-loving-the-tail-3.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/convexity-and-antifragility-loving-the-tail-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/convexity-and-antifragility-loving-the-tail-5.png": {
+    "width": 1724,
+    "height": 1013
+  },
+  "/imgs/blogs/convexity-and-antifragility-loving-the-tail-6.png": {
+    "width": 1791,
+    "height": 1013
+  },
+  "/imgs/blogs/convexity-and-antifragility-loving-the-tail-7.png": {
+    "width": 1792,
+    "height": 988
   },
   "/imgs/blogs/convexity-jensen-math-for-quants-1.png": {
     "width": 1792,
@@ -14576,6 +14634,35 @@
   "/imgs/blogs/from-correlation-to-signal-building-a-macro-overlay-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/from-data-to-a-read-collapsing-everything-into-one-sentence-1.png": {
+    "width": 1792,
+    "height": 995,
+    "cover": true
+  },
+  "/imgs/blogs/from-data-to-a-read-collapsing-everything-into-one-sentence-2.png": {
+    "width": 1792,
+    "height": 1128
+  },
+  "/imgs/blogs/from-data-to-a-read-collapsing-everything-into-one-sentence-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/from-data-to-a-read-collapsing-everything-into-one-sentence-4.png": {
+    "width": 1792,
+    "height": 1365
+  },
+  "/imgs/blogs/from-data-to-a-read-collapsing-everything-into-one-sentence-5.png": {
+    "width": 1792,
+    "height": 990
+  },
+  "/imgs/blogs/from-data-to-a-read-collapsing-everything-into-one-sentence-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/from-data-to-a-read-collapsing-everything-into-one-sentence-7.png": {
+    "width": 1792,
+    "height": 1184
   },
   "/imgs/blogs/from-discretionary-to-systematic-1.png": {
     "width": 1792,
@@ -27676,6 +27763,35 @@
     "width": 1792,
     "height": 1318
   },
+  "/imgs/blogs/reading-flows-and-positioning-the-tell-most-analysts-miss-1.png": {
+    "width": 1792,
+    "height": 870,
+    "cover": true
+  },
+  "/imgs/blogs/reading-flows-and-positioning-the-tell-most-analysts-miss-2.png": {
+    "width": 1792,
+    "height": 939
+  },
+  "/imgs/blogs/reading-flows-and-positioning-the-tell-most-analysts-miss-3.png": {
+    "width": 1601,
+    "height": 914
+  },
+  "/imgs/blogs/reading-flows-and-positioning-the-tell-most-analysts-miss-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/reading-flows-and-positioning-the-tell-most-analysts-miss-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/reading-flows-and-positioning-the-tell-most-analysts-miss-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/reading-flows-and-positioning-the-tell-most-analysts-miss-7.png": {
+    "width": 1792,
+    "height": 853
+  },
   "/imgs/blogs/reading-management-incentives-and-skin-in-the-game-1.png": {
     "width": 1792,
     "height": 1278,
@@ -28223,6 +28339,35 @@
     "width": 1792,
     "height": 1237
   },
+  "/imgs/blogs/reconciling-conflicting-signals-when-the-lenses-disagree-1.png": {
+    "width": 1792,
+    "height": 1201,
+    "cover": true
+  },
+  "/imgs/blogs/reconciling-conflicting-signals-when-the-lenses-disagree-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/reconciling-conflicting-signals-when-the-lenses-disagree-3.png": {
+    "width": 1792,
+    "height": 992
+  },
+  "/imgs/blogs/reconciling-conflicting-signals-when-the-lenses-disagree-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/reconciling-conflicting-signals-when-the-lenses-disagree-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/reconciling-conflicting-signals-when-the-lenses-disagree-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/reconciling-conflicting-signals-when-the-lenses-disagree-7.png": {
+    "width": 1792,
+    "height": 1219
+  },
   "/imgs/blogs/redis-applications-and-optimization-1.png": {
     "width": 1792,
     "height": 933,
@@ -28268,6 +28413,35 @@
   "/imgs/blogs/reflexivity-markets-that-watch-themselves-7.png": {
     "width": 1695,
     "height": 914
+  },
+  "/imgs/blogs/regime-shifts-and-non-stationarity-when-the-rules-quietly-change-1.png": {
+    "width": 1602,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/regime-shifts-and-non-stationarity-when-the-rules-quietly-change-2.png": {
+    "width": 1606,
+    "height": 1013
+  },
+  "/imgs/blogs/regime-shifts-and-non-stationarity-when-the-rules-quietly-change-3.png": {
+    "width": 1674,
+    "height": 1013
+  },
+  "/imgs/blogs/regime-shifts-and-non-stationarity-when-the-rules-quietly-change-4.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/regime-shifts-and-non-stationarity-when-the-rules-quietly-change-5.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/regime-shifts-and-non-stationarity-when-the-rules-quietly-change-6.png": {
+    "width": 1685,
+    "height": 1013
+  },
+  "/imgs/blogs/regime-shifts-and-non-stationarity-when-the-rules-quietly-change-7.png": {
+    "width": 1686,
+    "height": 1013
   },
   "/imgs/blogs/registration-and-regulation-sec-cftc-reg-d-1.png": {
     "width": 1792,
@@ -32293,6 +32467,35 @@
     "width": 1792,
     "height": 1217
   },
+  "/imgs/blogs/structuring-a-thesis-claim-evidence-and-catalyst-1.png": {
+    "width": 1792,
+    "height": 942,
+    "cover": true
+  },
+  "/imgs/blogs/structuring-a-thesis-claim-evidence-and-catalyst-2.png": {
+    "width": 1792,
+    "height": 1103
+  },
+  "/imgs/blogs/structuring-a-thesis-claim-evidence-and-catalyst-3.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/structuring-a-thesis-claim-evidence-and-catalyst-4.png": {
+    "width": 1792,
+    "height": 968
+  },
+  "/imgs/blogs/structuring-a-thesis-claim-evidence-and-catalyst-5.png": {
+    "width": 1792,
+    "height": 1203
+  },
+  "/imgs/blogs/structuring-a-thesis-claim-evidence-and-catalyst-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/structuring-a-thesis-claim-evidence-and-catalyst-7.png": {
+    "width": 1792,
+    "height": 1121
+  },
   "/imgs/blogs/sub-8-bit-int4-ternary-and-binary-networks-1.png": {
     "width": 1792,
     "height": 1348,
@@ -32845,6 +33048,35 @@
   "/imgs/blogs/tabular-data-leakage-8.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/tail-hedging-cost-vs-payoff-paying-to-survive-the-worst-day-1.png": {
+    "width": 1674,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/tail-hedging-cost-vs-payoff-paying-to-survive-the-worst-day-2.png": {
+    "width": 1664,
+    "height": 1013
+  },
+  "/imgs/blogs/tail-hedging-cost-vs-payoff-paying-to-survive-the-worst-day-3.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/tail-hedging-cost-vs-payoff-paying-to-survive-the-worst-day-4.png": {
+    "width": 1601,
+    "height": 1013
+  },
+  "/imgs/blogs/tail-hedging-cost-vs-payoff-paying-to-survive-the-worst-day-5.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/tail-hedging-cost-vs-payoff-paying-to-survive-the-worst-day-6.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/tail-hedging-cost-vs-payoff-paying-to-survive-the-worst-day-7.png": {
+    "width": 1602,
+    "height": 1013
   },
   "/imgs/blogs/tail-risk-extreme-value-theory-math-for-quants-1.png": {
     "width": 1792,
@@ -34279,6 +34511,35 @@
   "/imgs/blogs/the-crisis-playbook-2008-and-2020-7.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/the-daily-and-weekly-process-a-repeatable-reading-routine-1.png": {
+    "width": 1792,
+    "height": 986,
+    "cover": true
+  },
+  "/imgs/blogs/the-daily-and-weekly-process-a-repeatable-reading-routine-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-daily-and-weekly-process-a-repeatable-reading-routine-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-daily-and-weekly-process-a-repeatable-reading-routine-4.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/the-daily-and-weekly-process-a-repeatable-reading-routine-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-daily-and-weekly-process-a-repeatable-reading-routine-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/the-daily-and-weekly-process-a-repeatable-reading-routine-7.png": {
+    "width": 1792,
+    "height": 1266
   },
   "/imgs/blogs/the-data-and-features-of-recommenders-1.png": {
     "width": 1792,
@@ -36799,6 +37060,35 @@
     "width": 1792,
     "height": 1251
   },
+  "/imgs/blogs/the-price-of-insurance-and-the-taleb-universa-approach-to-tail-risk-1.png": {
+    "width": 1602,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/the-price-of-insurance-and-the-taleb-universa-approach-to-tail-risk-2.png": {
+    "width": 1672,
+    "height": 1013
+  },
+  "/imgs/blogs/the-price-of-insurance-and-the-taleb-universa-approach-to-tail-risk-3.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/the-price-of-insurance-and-the-taleb-universa-approach-to-tail-risk-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/the-price-of-insurance-and-the-taleb-universa-approach-to-tail-risk-5.png": {
+    "width": 1693,
+    "height": 1013
+  },
+  "/imgs/blogs/the-price-of-insurance-and-the-taleb-universa-approach-to-tail-risk-6.png": {
+    "width": 1701,
+    "height": 1013
+  },
+  "/imgs/blogs/the-price-of-insurance-and-the-taleb-universa-approach-to-tail-risk-7.png": {
+    "width": 1678,
+    "height": 1013
+  },
   "/imgs/blogs/the-price-of-money-how-bonds-set-every-other-price-1.png": {
     "width": 1792,
     "height": 1277,
@@ -37348,6 +37638,35 @@
   "/imgs/blogs/the-short-squeeze-game-shorts-longs-brokers-and-gamma-7.png": {
     "width": 1792,
     "height": 1272
+  },
+  "/imgs/blogs/the-six-lenses-a-framework-for-reading-any-market-1.png": {
+    "width": 1792,
+    "height": 1263,
+    "cover": true
+  },
+  "/imgs/blogs/the-six-lenses-a-framework-for-reading-any-market-2.png": {
+    "width": 1792,
+    "height": 1389
+  },
+  "/imgs/blogs/the-six-lenses-a-framework-for-reading-any-market-3.png": {
+    "width": 1792,
+    "height": 1367
+  },
+  "/imgs/blogs/the-six-lenses-a-framework-for-reading-any-market-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-six-lenses-a-framework-for-reading-any-market-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-six-lenses-a-framework-for-reading-any-market-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-six-lenses-a-framework-for-reading-any-market-7.png": {
+    "width": 1792,
+    "height": 1012
   },
   "/imgs/blogs/the-sjc-premium-why-vietnamese-gold-trades-far-above-the-world-price-1.png": {
     "width": 1792,
