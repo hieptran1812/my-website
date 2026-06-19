@@ -10465,6 +10465,39 @@
     "width": 1792,
     "height": 963
   },
+  "/imgs/blogs/data-races-vs-race-conditions-a-precise-distinction-1.png": {
+    "width": 1792,
+    "height": 1434,
+    "cover": true
+  },
+  "/imgs/blogs/data-races-vs-race-conditions-a-precise-distinction-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/data-races-vs-race-conditions-a-precise-distinction-3.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/data-races-vs-race-conditions-a-precise-distinction-4.png": {
+    "width": 1792,
+    "height": 1434
+  },
+  "/imgs/blogs/data-races-vs-race-conditions-a-precise-distinction-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/data-races-vs-race-conditions-a-precise-distinction-6.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/data-races-vs-race-conditions-a-precise-distinction-7.png": {
+    "width": 1792,
+    "height": 1434
+  },
+  "/imgs/blogs/data-races-vs-race-conditions-a-precise-distinction-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/dataframes-at-speed-pandas-pitfalls-polars-and-arrow-1.png": {
     "width": 1792,
     "height": 1260,
@@ -10596,6 +10629,39 @@
   "/imgs/blogs/dead-neurons-and-saturated-activations-8.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/deadlock-the-four-conditions-and-how-to-break-them-1.png": {
+    "width": 1792,
+    "height": 1322,
+    "cover": true
+  },
+  "/imgs/blogs/deadlock-the-four-conditions-and-how-to-break-them-2.png": {
+    "width": 1792,
+    "height": 1359
+  },
+  "/imgs/blogs/deadlock-the-four-conditions-and-how-to-break-them-3.png": {
+    "width": 1792,
+    "height": 1008
+  },
+  "/imgs/blogs/deadlock-the-four-conditions-and-how-to-break-them-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/deadlock-the-four-conditions-and-how-to-break-them-5.png": {
+    "width": 1792,
+    "height": 829
+  },
+  "/imgs/blogs/deadlock-the-four-conditions-and-how-to-break-them-6.png": {
+    "width": 1792,
+    "height": 1155
+  },
+  "/imgs/blogs/deadlock-the-four-conditions-and-how-to-break-them-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/deadlock-the-four-conditions-and-how-to-break-them-8.png": {
+    "width": 1792,
+    "height": 1231
   },
   "/imgs/blogs/deadlocks-livelocks-and-starvation-1.png": {
     "width": 1792,
@@ -14904,6 +14970,39 @@
   "/imgs/blogs/financial-ml-pipeline-purged-cv-quant-research-9.png": {
     "width": 1792,
     "height": 1178
+  },
+  "/imgs/blogs/finding-concurrency-bugs-race-detectors-and-stress-testing-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/finding-concurrency-bugs-race-detectors-and-stress-testing-2.png": {
+    "width": 1792,
+    "height": 1335
+  },
+  "/imgs/blogs/finding-concurrency-bugs-race-detectors-and-stress-testing-3.png": {
+    "width": 1792,
+    "height": 999
+  },
+  "/imgs/blogs/finding-concurrency-bugs-race-detectors-and-stress-testing-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/finding-concurrency-bugs-race-detectors-and-stress-testing-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/finding-concurrency-bugs-race-detectors-and-stress-testing-6.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/finding-concurrency-bugs-race-detectors-and-stress-testing-7.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/finding-concurrency-bugs-race-detectors-and-stress-testing-8.png": {
+    "width": 1792,
+    "height": 1258
   },
   "/imgs/blogs/fine-tuning-tool-calling-llms-when-how-1.png": {
     "width": 1792,
@@ -23000,6 +23099,39 @@
   "/imgs/blogs/liquidity-terms-lockups-gates-side-pockets-7.png": {
     "width": 1792,
     "height": 1045
+  },
+  "/imgs/blogs/livelock-starvation-and-priority-inversion-1.png": {
+    "width": 1792,
+    "height": 1370,
+    "cover": true
+  },
+  "/imgs/blogs/livelock-starvation-and-priority-inversion-2.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/livelock-starvation-and-priority-inversion-3.png": {
+    "width": 1792,
+    "height": 991
+  },
+  "/imgs/blogs/livelock-starvation-and-priority-inversion-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/livelock-starvation-and-priority-inversion-5.png": {
+    "width": 1792,
+    "height": 1434
+  },
+  "/imgs/blogs/livelock-starvation-and-priority-inversion-6.png": {
+    "width": 1600,
+    "height": 1445
+  },
+  "/imgs/blogs/livelock-starvation-and-priority-inversion-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/livelock-starvation-and-priority-inversion-8.png": {
+    "width": 1792,
+    "height": 1370
   },
   "/imgs/blogs/livestock-cattle-and-hogs-the-only-commodity-that-eats-1.png": {
     "width": 1792,
@@ -37348,6 +37480,39 @@
   "/imgs/blogs/the-2026-video-model-landscape-8.png": {
     "width": 1792,
     "height": 1194
+  },
+  "/imgs/blogs/the-aba-problem-toctou-and-torn-reads-1.png": {
+    "width": 1792,
+    "height": 968,
+    "cover": true
+  },
+  "/imgs/blogs/the-aba-problem-toctou-and-torn-reads-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-aba-problem-toctou-and-torn-reads-3.png": {
+    "width": 1792,
+    "height": 972
+  },
+  "/imgs/blogs/the-aba-problem-toctou-and-torn-reads-4.png": {
+    "width": 1792,
+    "height": 1417
+  },
+  "/imgs/blogs/the-aba-problem-toctou-and-torn-reads-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-aba-problem-toctou-and-torn-reads-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-aba-problem-toctou-and-torn-reads-7.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/the-aba-problem-toctou-and-torn-reads-8.png": {
+    "width": 1792,
+    "height": 1397
   },
   "/imgs/blogs/the-accuracy-latency-pareto-frontier-1.png": {
     "width": 1792,
