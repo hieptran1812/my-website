@@ -28,6 +28,35 @@
     "width": 1792,
     "height": 1059
   },
+  "/imgs/blogs/2008-and-the-failure-of-var-when-the-tail-ate-the-model-1.png": {
+    "width": 1792,
+    "height": 1054,
+    "cover": true
+  },
+  "/imgs/blogs/2008-and-the-failure-of-var-when-the-tail-ate-the-model-2.png": {
+    "width": 1646,
+    "height": 1013
+  },
+  "/imgs/blogs/2008-and-the-failure-of-var-when-the-tail-ate-the-model-3.png": {
+    "width": 1718,
+    "height": 1032
+  },
+  "/imgs/blogs/2008-and-the-failure-of-var-when-the-tail-ate-the-model-4.png": {
+    "width": 1720,
+    "height": 1013
+  },
+  "/imgs/blogs/2008-and-the-failure-of-var-when-the-tail-ate-the-model-5.png": {
+    "width": 1688,
+    "height": 1420
+  },
+  "/imgs/blogs/2008-and-the-failure-of-var-when-the-tail-ate-the-model-6.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/2008-and-the-failure-of-var-when-the-tail-ate-the-model-7.png": {
+    "width": 1602,
+    "height": 1013
+  },
   "/imgs/blogs/2008-financial-crisis-the-liquidity-crisis-and-policy-response-1.png": {
     "width": 1792,
     "height": 710,
@@ -784,6 +813,35 @@
   "/imgs/blogs/all-weather-and-risk-parity-owning-every-regime-7.png": {
     "width": 1792,
     "height": 1218
+  },
+  "/imgs/blogs/amaranth-and-archegos-concentration-leverage-and-the-single-trade-1.png": {
+    "width": 1792,
+    "height": 1241,
+    "cover": true
+  },
+  "/imgs/blogs/amaranth-and-archegos-concentration-leverage-and-the-single-trade-2.png": {
+    "width": 1730,
+    "height": 1013
+  },
+  "/imgs/blogs/amaranth-and-archegos-concentration-leverage-and-the-single-trade-3.png": {
+    "width": 1792,
+    "height": 1028
+  },
+  "/imgs/blogs/amaranth-and-archegos-concentration-leverage-and-the-single-trade-4.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/amaranth-and-archegos-concentration-leverage-and-the-single-trade-5.png": {
+    "width": 1792,
+    "height": 1183
+  },
+  "/imgs/blogs/amaranth-and-archegos-concentration-leverage-and-the-single-trade-6.png": {
+    "width": 1652,
+    "height": 1013
+  },
+  "/imgs/blogs/amaranth-and-archegos-concentration-leverage-and-the-single-trade-7.png": {
+    "width": 1792,
+    "height": 942
   },
   "/imgs/blogs/amms-vs-arbitrageurs-toxic-flow-and-loss-versus-rebalancing-1.png": {
     "width": 1792,
@@ -4139,6 +4197,35 @@
   "/imgs/blogs/building-your-options-trading-playbook-capstone-7.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/building-your-personal-risk-framework-the-survival-checklist-capstone-1.png": {
+    "width": 1792,
+    "height": 1209,
+    "cover": true
+  },
+  "/imgs/blogs/building-your-personal-risk-framework-the-survival-checklist-capstone-2.png": {
+    "width": 1682,
+    "height": 1013
+  },
+  "/imgs/blogs/building-your-personal-risk-framework-the-survival-checklist-capstone-3.png": {
+    "width": 1792,
+    "height": 1299
+  },
+  "/imgs/blogs/building-your-personal-risk-framework-the-survival-checklist-capstone-4.png": {
+    "width": 1792,
+    "height": 1028
+  },
+  "/imgs/blogs/building-your-personal-risk-framework-the-survival-checklist-capstone-5.png": {
+    "width": 1792,
+    "height": 1207
+  },
+  "/imgs/blogs/building-your-personal-risk-framework-the-survival-checklist-capstone-6.png": {
+    "width": 1792,
+    "height": 997
+  },
+  "/imgs/blogs/building-your-personal-risk-framework-the-survival-checklist-capstone-7.png": {
+    "width": 1765,
+    "height": 1013
   },
   "/imgs/blogs/building-your-trading-plan-capstone-1.png": {
     "width": 1792,
@@ -21803,6 +21890,35 @@
   "/imgs/blogs/ltcm-1998-when-genius-failed-7.png": {
     "width": 1792,
     "height": 702
+  },
+  "/imgs/blogs/ltcm-1998-when-the-smartest-guys-blew-up-on-leverage-and-correlation-1.png": {
+    "width": 1792,
+    "height": 1054,
+    "cover": true
+  },
+  "/imgs/blogs/ltcm-1998-when-the-smartest-guys-blew-up-on-leverage-and-correlation-2.png": {
+    "width": 1792,
+    "height": 1012
+  },
+  "/imgs/blogs/ltcm-1998-when-the-smartest-guys-blew-up-on-leverage-and-correlation-3.png": {
+    "width": 1646,
+    "height": 1013
+  },
+  "/imgs/blogs/ltcm-1998-when-the-smartest-guys-blew-up-on-leverage-and-correlation-4.png": {
+    "width": 1719,
+    "height": 1022
+  },
+  "/imgs/blogs/ltcm-1998-when-the-smartest-guys-blew-up-on-leverage-and-correlation-5.png": {
+    "width": 1691,
+    "height": 1013
+  },
+  "/imgs/blogs/ltcm-1998-when-the-smartest-guys-blew-up-on-leverage-and-correlation-6.png": {
+    "width": 1792,
+    "height": 1078
+  },
+  "/imgs/blogs/ltcm-1998-when-the-smartest-guys-blew-up-on-leverage-and-correlation-7.png": {
+    "width": 1764,
+    "height": 1013
   },
   "/imgs/blogs/ltx-video-deep-dive-1.png": {
     "width": 1792,
@@ -41870,6 +41986,35 @@
     "width": 1792,
     "height": 1198,
     "cover": true
+  },
+  "/imgs/blogs/volmageddon-2018-and-the-2024-yen-carry-unwind-when-the-trade-everyone-loved-broke-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/volmageddon-2018-and-the-2024-yen-carry-unwind-when-the-trade-everyone-loved-broke-2.png": {
+    "width": 1704,
+    "height": 1022
+  },
+  "/imgs/blogs/volmageddon-2018-and-the-2024-yen-carry-unwind-when-the-trade-everyone-loved-broke-3.png": {
+    "width": 1792,
+    "height": 1298
+  },
+  "/imgs/blogs/volmageddon-2018-and-the-2024-yen-carry-unwind-when-the-trade-everyone-loved-broke-4.png": {
+    "width": 1648,
+    "height": 960
+  },
+  "/imgs/blogs/volmageddon-2018-and-the-2024-yen-carry-unwind-when-the-trade-everyone-loved-broke-5.png": {
+    "width": 1630,
+    "height": 959
+  },
+  "/imgs/blogs/volmageddon-2018-and-the-2024-yen-carry-unwind-when-the-trade-everyone-loved-broke-6.png": {
+    "width": 1627,
+    "height": 1013
+  },
+  "/imgs/blogs/volmageddon-2018-and-the-2024-yen-carry-unwind-when-the-trade-everyone-loved-broke-7.png": {
+    "width": 1603,
+    "height": 1013
   },
   "/imgs/blogs/volume-tools-vwap-obv-profile-1.png": {
     "width": 1792,
