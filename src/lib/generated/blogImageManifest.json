@@ -15046,6 +15046,39 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/how-a-rule-becomes-a-price-expectations-drift-and-repricing-1.png": {
+    "width": 1792,
+    "height": 1080,
+    "cover": true
+  },
+  "/imgs/blogs/how-a-rule-becomes-a-price-expectations-drift-and-repricing-2.png": {
+    "width": 1792,
+    "height": 1140
+  },
+  "/imgs/blogs/how-a-rule-becomes-a-price-expectations-drift-and-repricing-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-a-rule-becomes-a-price-expectations-drift-and-repricing-4.png": {
+    "width": 1792,
+    "height": 923
+  },
+  "/imgs/blogs/how-a-rule-becomes-a-price-expectations-drift-and-repricing-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-a-rule-becomes-a-price-expectations-drift-and-repricing-6.png": {
+    "width": 1792,
+    "height": 883
+  },
+  "/imgs/blogs/how-a-rule-becomes-a-price-expectations-drift-and-repricing-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-a-rule-becomes-a-price-expectations-drift-and-repricing-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/how-a-vietnamese-investor-should-actually-hold-gold-ring-vs-bar-tax-and-rules-1.png": {
     "width": 1792,
     "height": 1316,
@@ -15335,6 +15368,39 @@
   "/imgs/blogs/how-hedge-funds-work-leverage-2-and-20-7.png": {
     "width": 1792,
     "height": 1218
+  },
+  "/imgs/blogs/how-law-moves-markets-the-transmission-chain-1.png": {
+    "width": 1792,
+    "height": 766,
+    "cover": true
+  },
+  "/imgs/blogs/how-law-moves-markets-the-transmission-chain-2.png": {
+    "width": 1792,
+    "height": 997
+  },
+  "/imgs/blogs/how-law-moves-markets-the-transmission-chain-3.png": {
+    "width": 1792,
+    "height": 883
+  },
+  "/imgs/blogs/how-law-moves-markets-the-transmission-chain-4.png": {
+    "width": 1792,
+    "height": 1351
+  },
+  "/imgs/blogs/how-law-moves-markets-the-transmission-chain-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/how-law-moves-markets-the-transmission-chain-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-law-moves-markets-the-transmission-chain-7.png": {
+    "width": 1666,
+    "height": 914
+  },
+  "/imgs/blogs/how-law-moves-markets-the-transmission-chain-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/how-monetary-policy-moves-bonds-duration-convexity-1.png": {
     "width": 1792,
@@ -19005,6 +19071,39 @@
   "/imgs/blogs/lmcache-kv-cache-layer-deep-dive-4.png": {
     "width": 1792,
     "height": 1070
+  },
+  "/imgs/blogs/lobbying-rulemaking-and-regulatory-capture-1.png": {
+    "width": 1792,
+    "height": 1224,
+    "cover": true
+  },
+  "/imgs/blogs/lobbying-rulemaking-and-regulatory-capture-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/lobbying-rulemaking-and-regulatory-capture-3.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/lobbying-rulemaking-and-regulatory-capture-4.png": {
+    "width": 1792,
+    "height": 1400
+  },
+  "/imgs/blogs/lobbying-rulemaking-and-regulatory-capture-5.png": {
+    "width": 1792,
+    "height": 1017
+  },
+  "/imgs/blogs/lobbying-rulemaking-and-regulatory-capture-6.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/lobbying-rulemaking-and-regulatory-capture-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/lobbying-rulemaking-and-regulatory-capture-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/logic-puzzles-deduction-quant-interviews-1.png": {
     "width": 1792,
@@ -25950,6 +26049,39 @@
   "/imgs/blogs/regression-ols-gls-regularized-math-for-quants-7.png": {
     "width": 1792,
     "height": 1370
+  },
+  "/imgs/blogs/regulatory-risk-as-an-asset-pricing-factor-1.png": {
+    "width": 1792,
+    "height": 739,
+    "cover": true
+  },
+  "/imgs/blogs/regulatory-risk-as-an-asset-pricing-factor-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/regulatory-risk-as-an-asset-pricing-factor-3.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/regulatory-risk-as-an-asset-pricing-factor-4.png": {
+    "width": 1792,
+    "height": 942
+  },
+  "/imgs/blogs/regulatory-risk-as-an-asset-pricing-factor-5.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/regulatory-risk-as-an-asset-pricing-factor-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/regulatory-risk-as-an-asset-pricing-factor-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/regulatory-risk-as-an-asset-pricing-factor-8.png": {
+    "width": 1780,
+    "height": 1292
   },
   "/imgs/blogs/reinforcement-learning-for-recommendation-1.png": {
     "width": 1792,
@@ -33539,6 +33671,39 @@
     "width": 1792,
     "height": 1197
   },
+  "/imgs/blogs/the-regulatory-calendar-trading-the-rulemaking-clock-1.png": {
+    "width": 1792,
+    "height": 909,
+    "cover": true
+  },
+  "/imgs/blogs/the-regulatory-calendar-trading-the-rulemaking-clock-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-regulatory-calendar-trading-the-rulemaking-clock-3.png": {
+    "width": 1792,
+    "height": 1367
+  },
+  "/imgs/blogs/the-regulatory-calendar-trading-the-rulemaking-clock-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-regulatory-calendar-trading-the-rulemaking-clock-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-regulatory-calendar-trading-the-rulemaking-clock-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-regulatory-calendar-trading-the-rulemaking-clock-7.png": {
+    "width": 1792,
+    "height": 1225
+  },
+  "/imgs/blogs/the-regulatory-calendar-trading-the-rulemaking-clock-8.png": {
+    "width": 1792,
+    "height": 899
+  },
   "/imgs/blogs/the-research-case-and-take-home-how-to-ace-it-1.png": {
     "width": 1792,
     "height": 1212,
@@ -37271,6 +37436,39 @@
   "/imgs/blogs/who-owns-gold-the-demand-map-jewelry-bars-etfs-central-banks-industry-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/who-writes-the-rules-legislatures-regulators-central-banks-courts-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/who-writes-the-rules-legislatures-regulators-central-banks-courts-2.png": {
+    "width": 1792,
+    "height": 1370
+  },
+  "/imgs/blogs/who-writes-the-rules-legislatures-regulators-central-banks-courts-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/who-writes-the-rules-legislatures-regulators-central-banks-courts-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/who-writes-the-rules-legislatures-regulators-central-banks-courts-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/who-writes-the-rules-legislatures-regulators-central-banks-courts-6.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/who-writes-the-rules-legislatures-regulators-central-banks-courts-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/who-writes-the-rules-legislatures-regulators-central-banks-courts-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/why-audio-generation-is-hard-1.png": {
     "width": 1792,
