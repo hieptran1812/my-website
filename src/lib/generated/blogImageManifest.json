@@ -14242,6 +14242,35 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/fractional-kelly-and-optimal-f-betting-less-to-sleep-at-night-1.png": {
+    "width": 1669,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/fractional-kelly-and-optimal-f-betting-less-to-sleep-at-night-2.png": {
+    "width": 1652,
+    "height": 914
+  },
+  "/imgs/blogs/fractional-kelly-and-optimal-f-betting-less-to-sleep-at-night-3.png": {
+    "width": 1614,
+    "height": 914
+  },
+  "/imgs/blogs/fractional-kelly-and-optimal-f-betting-less-to-sleep-at-night-4.png": {
+    "width": 1603,
+    "height": 914
+  },
+  "/imgs/blogs/fractional-kelly-and-optimal-f-betting-less-to-sleep-at-night-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/fractional-kelly-and-optimal-f-betting-less-to-sleep-at-night-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/fractional-kelly-and-optimal-f-betting-less-to-sleep-at-night-7.png": {
+    "width": 1670,
+    "height": 914
+  },
   "/imgs/blogs/framing-the-problem-rating-ranking-retrieval-1.png": {
     "width": 1792,
     "height": 1218,
@@ -20153,6 +20182,35 @@
   "/imgs/blogs/leverage-and-coverage-debt-that-compounds-vs-kills-7.png": {
     "width": 1792,
     "height": 1248
+  },
+  "/imgs/blogs/leverage-and-the-arithmetic-of-ruin-1.png": {
+    "width": 1602,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/leverage-and-the-arithmetic-of-ruin-2.png": {
+    "width": 1634,
+    "height": 1013
+  },
+  "/imgs/blogs/leverage-and-the-arithmetic-of-ruin-3.png": {
+    "width": 1692,
+    "height": 1013
+  },
+  "/imgs/blogs/leverage-and-the-arithmetic-of-ruin-4.png": {
+    "width": 1792,
+    "height": 1006
+  },
+  "/imgs/blogs/leverage-and-the-arithmetic-of-ruin-5.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/leverage-and-the-arithmetic-of-ruin-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/leverage-and-the-arithmetic-of-ruin-7.png": {
+    "width": 1691,
+    "height": 1013
   },
   "/imgs/blogs/leverage-and-the-mortgage-how-debt-amplifies-property-1.png": {
     "width": 1792,
@@ -28935,6 +28993,35 @@
     "width": 1792,
     "height": 1392
   },
+  "/imgs/blogs/risk-parity-sizing-equal-risk-not-equal-money-1.png": {
+    "width": 1602,
+    "height": 1022,
+    "cover": true
+  },
+  "/imgs/blogs/risk-parity-sizing-equal-risk-not-equal-money-2.png": {
+    "width": 1605,
+    "height": 1013
+  },
+  "/imgs/blogs/risk-parity-sizing-equal-risk-not-equal-money-3.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/risk-parity-sizing-equal-risk-not-equal-money-4.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/risk-parity-sizing-equal-risk-not-equal-money-5.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/risk-parity-sizing-equal-risk-not-equal-money-6.png": {
+    "width": 1674,
+    "height": 1031
+  },
+  "/imgs/blogs/risk-parity-sizing-equal-risk-not-equal-money-7.png": {
+    "width": 1602,
+    "height": 1013
+  },
   "/imgs/blogs/risk-reward-and-expectancy-in-practice-1.png": {
     "width": 1792,
     "height": 1087,
@@ -34529,6 +34616,35 @@
     "width": 1792,
     "height": 802
   },
+  "/imgs/blogs/the-gamblers-ruin-and-bet-sizing-the-math-of-staying-solvent-1.png": {
+    "width": 1691,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/the-gamblers-ruin-and-bet-sizing-the-math-of-staying-solvent-2.png": {
+    "width": 1642,
+    "height": 1013
+  },
+  "/imgs/blogs/the-gamblers-ruin-and-bet-sizing-the-math-of-staying-solvent-3.png": {
+    "width": 1654,
+    "height": 1013
+  },
+  "/imgs/blogs/the-gamblers-ruin-and-bet-sizing-the-math-of-staying-solvent-4.png": {
+    "width": 1622,
+    "height": 1013
+  },
+  "/imgs/blogs/the-gamblers-ruin-and-bet-sizing-the-math-of-staying-solvent-5.png": {
+    "width": 1792,
+    "height": 1006
+  },
+  "/imgs/blogs/the-gamblers-ruin-and-bet-sizing-the-math-of-staying-solvent-6.png": {
+    "width": 1761,
+    "height": 945
+  },
+  "/imgs/blogs/the-gamblers-ruin-and-bet-sizing-the-math-of-staying-solvent-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
   "/imgs/blogs/the-game-theoretic-trading-playbook-who-what-edge-sucker-level-1.png": {
     "width": 1792,
     "height": 1201,
@@ -35016,6 +35132,35 @@
   "/imgs/blogs/the-jobs-report-nfp-the-king-of-data-7.png": {
     "width": 1792,
     "height": 1168
+  },
+  "/imgs/blogs/the-kelly-criterion-how-much-to-bet-when-you-have-an-edge-1.png": {
+    "width": 1602,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/the-kelly-criterion-how-much-to-bet-when-you-have-an-edge-2.png": {
+    "width": 1715,
+    "height": 1032
+  },
+  "/imgs/blogs/the-kelly-criterion-how-much-to-bet-when-you-have-an-edge-3.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/the-kelly-criterion-how-much-to-bet-when-you-have-an-edge-4.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/the-kelly-criterion-how-much-to-bet-when-you-have-an-edge-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/the-kelly-criterion-how-much-to-bet-when-you-have-an-edge-6.png": {
+    "width": 1661,
+    "height": 1013
+  },
+  "/imgs/blogs/the-kelly-criterion-how-much-to-bet-when-you-have-an-edge-7.png": {
+    "width": 1639,
+    "height": 1013
   },
   "/imgs/blogs/the-keynesian-beauty-contest-and-level-k-thinking-1.png": {
     "width": 1792,
@@ -39840,6 +39985,35 @@
   "/imgs/blogs/volatility-surface-9.png": {
     "width": 1792,
     "height": 904
+  },
+  "/imgs/blogs/volatility-targeting-sizing-by-risk-not-by-dollars-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/volatility-targeting-sizing-by-risk-not-by-dollars-2.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/volatility-targeting-sizing-by-risk-not-by-dollars-3.png": {
+    "width": 1759,
+    "height": 1013
+  },
+  "/imgs/blogs/volatility-targeting-sizing-by-risk-not-by-dollars-4.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/volatility-targeting-sizing-by-risk-not-by-dollars-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/volatility-targeting-sizing-by-risk-not-by-dollars-6.png": {
+    "width": 1694,
+    "height": 1013
+  },
+  "/imgs/blogs/volatility-targeting-sizing-by-risk-not-by-dollars-7.png": {
+    "width": 1613,
+    "height": 1013
   },
   "/imgs/blogs/volume-tools-vwap-obv-profile-1.png": {
     "width": 1792,
