@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import dynamic from "next/dynamic";
+import { LANGUAGES } from "./highlights/translate";
+
+type TranslateStatus = "idle" | "loading" | "done" | "error";
 
 // Heavy: pulls in d3-force + the graph view. Code-split off the article
 // initial bundle, and only mount once the page has gone idle so the article
@@ -31,6 +34,16 @@ interface BlogGraphSidebarProps {
   onResumeSpeech?: () => void;
   onStopSpeech?: () => void;
   onSeekSpeech?: (percentage: number) => void;
+  // Full-article translation
+  translateLang?: string;
+  onTranslateLangChange?: (code: string) => void;
+  onTranslate?: (code: string) => void;
+  onRestoreOriginal?: () => void;
+  translateStatus?: TranslateStatus;
+  translateProgress?: number;
+  translatedLang?: string | null;
+  translatedLangLabel?: string | null;
+  translateError?: string | null;
   // Theme
   theme?: string;
 }
@@ -53,6 +66,16 @@ function BlogGraphSidebar({
   onResumeSpeech,
   onStopSpeech,
   onSeekSpeech,
+  // Full-article translation
+  translateLang = "vi",
+  onTranslateLangChange,
+  onTranslate,
+  onRestoreOriginal,
+  translateStatus = "idle",
+  translateProgress = 0,
+  translatedLang = null,
+  translatedLangLabel = null,
+  translateError = null,
   // Theme
   theme = "light",
 }: BlogGraphSidebarProps) {
@@ -174,6 +197,136 @@ function BlogGraphSidebar({
     [onSeekSpeech],
   );
 
+  const isTranslating = translateStatus === "loading";
+
+  // Shared "Translate Article" control, rendered in both the desktop panel and
+  // the mobile sheet. Translates the whole article in place into the chosen
+  // language while keeping all formatting/fonts, with a one-click revert.
+  const renderTranslateSection = (variant: "desktop" | "mobile") => {
+    const compact = variant === "desktop";
+    return (
+      <div>
+        <h4
+          className={compact ? "text-xs font-semibold mb-3" : "font-medium mb-3"}
+          style={{ color: "var(--text-primary)" }}
+        >
+          Translate Article
+        </h4>
+
+        <div className="flex flex-col gap-2">
+          <select
+            value={translateLang}
+            onChange={(e) => onTranslateLangChange?.(e.target.value)}
+            disabled={isTranslating}
+            className={`w-full rounded-lg px-2 ${
+              compact ? "py-2 text-xs" : "py-2.5 text-sm"
+            }`}
+            style={{
+              backgroundColor: "var(--surface)",
+              color: "var(--text-primary)",
+              border: "1px solid var(--border)",
+            }}
+            aria-label="Target language for translation"
+          >
+            {LANGUAGES.map((l) => (
+              <option key={l.code} value={l.code}>
+                {l.label} — {l.native}
+              </option>
+            ))}
+          </select>
+
+          <button
+            onClick={() => onTranslate?.(translateLang)}
+            disabled={isTranslating}
+            className={`w-full rounded-lg flex items-center justify-center gap-2 transition-all duration-200 ${
+              compact ? "px-3 py-2" : "py-3"
+            }`}
+            style={{
+              backgroundColor: "var(--accent)",
+              color: "white",
+              opacity: isTranslating ? 0.85 : 1,
+              cursor: isTranslating ? "default" : "pointer",
+            }}
+            aria-label="Translate article"
+          >
+            {isTranslating ? (
+              <span className={compact ? "text-xs font-medium" : "font-medium"}>
+                Translating… {translateProgress}%
+              </span>
+            ) : (
+              <>
+                <svg
+                  className={compact ? "w-4 h-4" : "w-5 h-5"}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+                  />
+                </svg>
+                <span className={compact ? "text-xs font-medium" : "font-medium"}>
+                  {translatedLang ? "Re-translate" : "Translate"}
+                </span>
+              </>
+            )}
+          </button>
+
+          {isTranslating && (
+            <div
+              className="w-full h-1.5 rounded-full overflow-hidden"
+              style={{ backgroundColor: "var(--border)" }}
+            >
+              <div
+                className="h-1.5 rounded-full transition-all duration-300"
+                style={{
+                  backgroundColor: "var(--accent)",
+                  width: `${translateProgress}%`,
+                }}
+              />
+            </div>
+          )}
+
+          {translatedLang && !isTranslating && (
+            <div className="flex items-center justify-between gap-2">
+              <span
+                className="text-xs"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Showing {translatedLangLabel}
+              </span>
+              <button
+                onClick={() => onRestoreOriginal?.()}
+                className="text-xs font-medium underline underline-offset-2"
+                style={{ color: "var(--accent)" }}
+                aria-label="Show original language"
+              >
+                Show original
+              </button>
+            </div>
+          )}
+
+          {translateError && (
+            <p
+              className="text-xs leading-snug"
+              style={{
+                color:
+                  translateStatus === "error"
+                    ? "#ef4444"
+                    : "var(--text-secondary)",
+              }}
+            >
+              {translateError}
+            </p>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       {/* Sidebar Widget - Combined Reading Options + Graph */}
@@ -294,6 +447,14 @@ function BlogGraphSidebar({
                       }`}
                     />
                   </button>
+                </div>
+
+                {/* ============ TRANSLATE ARTICLE SECTION ============ */}
+                <div
+                  className="border-t pt-3 mb-3"
+                  style={{ borderColor: "var(--border)" }}
+                >
+                  {renderTranslateSection("desktop")}
                 </div>
 
                 {/* ============ AUDIO READING SECTION ============ */}
@@ -684,6 +845,14 @@ function BlogGraphSidebar({
                         }`}
                       />
                     </button>
+                  </div>
+
+                  {/* Translate Article */}
+                  <div
+                    className="pt-4 border-t"
+                    style={{ borderColor: "var(--border)" }}
+                  >
+                    {renderTranslateSection("mobile")}
                   </div>
 
                   {/* Audio Reading */}

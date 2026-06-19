@@ -16,6 +16,19 @@ import type {
 import { formatDate } from "../../lib/dateUtils";
 import BlogGraphSidebar from "./BlogGraphSidebar";
 import BlogHighlighter from "./highlights/BlogHighlighter";
+import {
+  collectTranslatable,
+  translateArticleDom,
+  restoreOriginals,
+  type TextNodeEntry,
+} from "./highlights/articleTranslate";
+import {
+  loadTargetLang,
+  saveTargetLang,
+  languageLabel,
+} from "./highlights/translate";
+
+type TranslateStatus = "idle" | "loading" | "done" | "error";
 
 interface TocItem {
   id: string;
@@ -71,6 +84,19 @@ export default function BlogReader({
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [remainingTime, setRemainingTime] = useState(0);
+
+  // Full-article translation states
+  const [translateLang, setTranslateLang] = useState<string>("vi");
+  const [translateStatus, setTranslateStatus] =
+    useState<TranslateStatus>("idle");
+  const [translateProgress, setTranslateProgress] = useState(0);
+  const [translatedLang, setTranslatedLang] = useState<string | null>(null);
+  const [translateError, setTranslateError] = useState<string | null>(null);
+  // Source text nodes are collected exactly once (while still in the original
+  // language) and reused for every translate / restore so we never re-translate
+  // already-translated text.
+  const translateEntriesRef = useRef<TextNodeEntry[] | null>(null);
+  const translateAbortRef = useRef<AbortController | null>(null);
 
   // Add a state to track if the screen is small
 
@@ -278,6 +304,101 @@ export default function BlogReader({
     setTocItems(items);
   }, []);
 
+  // Restore the reader's last-used target language (session-scoped) once on the
+  // client, so the picker follows them across articles without a hydration
+  // mismatch (server always renders the default).
+  useEffect(() => {
+    setTranslateLang(loadTargetLang());
+  }, []);
+
+  // Translate the whole article into `lang`, in place. Headings change too, so
+  // we regenerate the TOC afterwards to keep it in sync.
+  const translateArticle = useCallback(
+    async (lang: string) => {
+      const article = articleRef.current;
+      if (!article) return;
+
+      // Audio playback walks the same text; stop it so the two don't fight.
+      if (speechReaderRef.current) {
+        speechReaderRef.current.destroy();
+        speechReaderRef.current = null;
+        setIsPlaying(false);
+        setIsPaused(false);
+        setProgress(0);
+        setDuration(0);
+        setRemainingTime(0);
+      }
+
+      // Cancel any in-flight translation before starting a new one.
+      translateAbortRef.current?.abort();
+      const controller = new AbortController();
+      translateAbortRef.current = controller;
+
+      if (!translateEntriesRef.current) {
+        translateEntriesRef.current = collectTranslatable(article);
+      }
+      const entries = translateEntriesRef.current;
+
+      saveTargetLang(lang);
+      setTranslateError(null);
+      setTranslateProgress(0);
+      setTranslateStatus("loading");
+
+      // Always translate FROM the original source text, even when switching
+      // languages on an already-translated article.
+      restoreOriginals(entries);
+
+      try {
+        const { failed, total } = await translateArticleDom(entries, lang, {
+          signal: controller.signal,
+          onProgress: (done, all) => {
+            setTranslateProgress(all ? Math.round((done / all) * 100) : 100);
+          },
+        });
+        if (controller.signal.aborted) return;
+        setTranslatedLang(lang);
+        setTranslateStatus("done");
+        if (failed > 0) {
+          setTranslateError(
+            `Translated, but ${failed} of ${total} section${
+              failed === 1 ? "" : "s"
+            } could not be reached. Try again to retry them.`,
+          );
+        }
+        // Refresh TOC labels to the translated headings.
+        generateToc();
+      } catch (err) {
+        if (
+          (err instanceof DOMException || err instanceof Error) &&
+          err.name === "AbortError"
+        ) {
+          return;
+        }
+        setTranslateStatus("error");
+        setTranslateError("Translation failed. Please try again.");
+      } finally {
+        if (translateAbortRef.current === controller) {
+          translateAbortRef.current = null;
+        }
+      }
+    },
+    [generateToc],
+  );
+
+  // Put the article back into its original language.
+  const restoreArticleLanguage = useCallback(() => {
+    translateAbortRef.current?.abort();
+    translateAbortRef.current = null;
+    if (translateEntriesRef.current) {
+      restoreOriginals(translateEntriesRef.current);
+    }
+    setTranslatedLang(null);
+    setTranslateStatus("idle");
+    setTranslateProgress(0);
+    setTranslateError(null);
+    generateToc();
+  }, [generateToc]);
+
   // Update active section based on scroll position - throttled with rAF
   useEffect(() => {
     if (tocItems.length === 0) return;
@@ -362,6 +483,9 @@ export default function BlogReader({
         speechReaderRef.current.destroy();
         speechReaderRef.current = null;
       }
+      // Abort any in-flight article translation.
+      translateAbortRef.current?.abort();
+      translateAbortRef.current = null;
     };
   }, []);
 
@@ -822,6 +946,18 @@ export default function BlogReader({
         onResumeSpeech={resumeSpeech}
         onStopSpeech={stopSpeech}
         onSeekSpeech={seekSpeech}
+        // Full-article translation
+        translateLang={translateLang}
+        onTranslateLangChange={setTranslateLang}
+        onTranslate={translateArticle}
+        onRestoreOriginal={restoreArticleLanguage}
+        translateStatus={translateStatus}
+        translateProgress={translateProgress}
+        translatedLang={translatedLang}
+        translatedLangLabel={
+          translatedLang ? languageLabel(translatedLang) : null
+        }
+        translateError={translateError}
         // Theme
         theme={theme}
       />
