@@ -11649,6 +11649,39 @@
     "height": 712,
     "cover": true
   },
+  "/imgs/blogs/designing-request-and-response-bodies-shape-and-naming-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/designing-request-and-response-bodies-shape-and-naming-2.png": {
+    "width": 1792,
+    "height": 1294
+  },
+  "/imgs/blogs/designing-request-and-response-bodies-shape-and-naming-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/designing-request-and-response-bodies-shape-and-naming-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/designing-request-and-response-bodies-shape-and-naming-5.png": {
+    "width": 1792,
+    "height": 1313
+  },
+  "/imgs/blogs/designing-request-and-response-bodies-shape-and-naming-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/designing-request-and-response-bodies-shape-and-naming-7.png": {
+    "width": 1792,
+    "height": 681
+  },
+  "/imgs/blogs/designing-request-and-response-bodies-shape-and-naming-8.png": {
+    "width": 1792,
+    "height": 1238
+  },
   "/imgs/blogs/detecting-an-exploit-in-progress-1.png": {
     "width": 1792,
     "height": 742,
@@ -13482,6 +13515,39 @@
     "width": 1792,
     "height": 1231
   },
+  "/imgs/blogs/error-design-a-machine-readable-human-friendly-contract-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/error-design-a-machine-readable-human-friendly-contract-2.png": {
+    "width": 1792,
+    "height": 1262
+  },
+  "/imgs/blogs/error-design-a-machine-readable-human-friendly-contract-3.png": {
+    "width": 1792,
+    "height": 1293
+  },
+  "/imgs/blogs/error-design-a-machine-readable-human-friendly-contract-4.png": {
+    "width": 1792,
+    "height": 522
+  },
+  "/imgs/blogs/error-design-a-machine-readable-human-friendly-contract-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/error-design-a-machine-readable-human-friendly-contract-6.png": {
+    "width": 1792,
+    "height": 1315
+  },
+  "/imgs/blogs/error-design-a-machine-readable-human-friendly-contract-7.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/error-design-a-machine-readable-human-friendly-contract-8.png": {
+    "width": 1792,
+    "height": 1365
+  },
   "/imgs/blogs/esg-and-disclosure-mandates-sfdr-the-sec-climate-rule-greenwashing-1.png": {
     "width": 1792,
     "height": 1210,
@@ -14727,6 +14793,39 @@
   "/imgs/blogs/field-guide-to-financial-institutions-7.png": {
     "width": 1792,
     "height": 976
+  },
+  "/imgs/blogs/filtering-sorting-and-sparse-fieldsets-without-reinventing-sql-1.png": {
+    "width": 1792,
+    "height": 671,
+    "cover": true
+  },
+  "/imgs/blogs/filtering-sorting-and-sparse-fieldsets-without-reinventing-sql-2.png": {
+    "width": 1792,
+    "height": 1370
+  },
+  "/imgs/blogs/filtering-sorting-and-sparse-fieldsets-without-reinventing-sql-3.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/filtering-sorting-and-sparse-fieldsets-without-reinventing-sql-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/filtering-sorting-and-sparse-fieldsets-without-reinventing-sql-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/filtering-sorting-and-sparse-fieldsets-without-reinventing-sql-6.png": {
+    "width": 1792,
+    "height": 1365
+  },
+  "/imgs/blogs/filtering-sorting-and-sparse-fieldsets-without-reinventing-sql-7.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/filtering-sorting-and-sparse-fieldsets-without-reinventing-sql-8.png": {
+    "width": 1792,
+    "height": 909
   },
   "/imgs/blogs/filtrations-no-lookahead-math-for-quants-1.png": {
     "width": 1792,
@@ -16294,6 +16393,72 @@
   "/imgs/blogs/fx-currencies-the-relative-value-layer-7.png": {
     "width": 1792,
     "height": 1289
+  },
+  "/imgs/blogs/fx-forwards-and-swaps-the-real-workhorses-of-the-market-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/fx-forwards-and-swaps-the-real-workhorses-of-the-market-2.png": {
+    "width": 1792,
+    "height": 876
+  },
+  "/imgs/blogs/fx-forwards-and-swaps-the-real-workhorses-of-the-market-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/fx-forwards-and-swaps-the-real-workhorses-of-the-market-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/fx-forwards-and-swaps-the-real-workhorses-of-the-market-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/fx-forwards-and-swaps-the-real-workhorses-of-the-market-6.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/fx-forwards-and-swaps-the-real-workhorses-of-the-market-7.png": {
+    "width": 1792,
+    "height": 1353
+  },
+  "/imgs/blogs/fx-forwards-and-swaps-the-real-workhorses-of-the-market-8.png": {
+    "width": 1619,
+    "height": 914
+  },
+  "/imgs/blogs/fx-options-and-the-volatility-smile-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/fx-options-and-the-volatility-smile-2.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/fx-options-and-the-volatility-smile-3.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/fx-options-and-the-volatility-smile-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/fx-options-and-the-volatility-smile-5.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/fx-options-and-the-volatility-smile-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/fx-options-and-the-volatility-smile-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/fx-options-and-the-volatility-smile-8.png": {
+    "width": 1792,
+    "height": 830
   },
   "/imgs/blogs/gamestop-2021-short-squeeze-1.png": {
     "width": 1792,
@@ -19565,6 +19730,39 @@
   "/imgs/blogs/hypothesize-and-falsify-not-stare-and-hope-8.png": {
     "width": 1792,
     "height": 1271
+  },
+  "/imgs/blogs/idempotency-keys-safe-retries-and-exactly-once-illusions-1.png": {
+    "width": 1792,
+    "height": 906,
+    "cover": true
+  },
+  "/imgs/blogs/idempotency-keys-safe-retries-and-exactly-once-illusions-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/idempotency-keys-safe-retries-and-exactly-once-illusions-3.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/idempotency-keys-safe-retries-and-exactly-once-illusions-4.png": {
+    "width": 1792,
+    "height": 1365
+  },
+  "/imgs/blogs/idempotency-keys-safe-retries-and-exactly-once-illusions-5.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/idempotency-keys-safe-retries-and-exactly-once-illusions-6.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/idempotency-keys-safe-retries-and-exactly-once-illusions-7.png": {
+    "width": 1792,
+    "height": 1384
+  },
+  "/imgs/blogs/idempotency-keys-safe-retries-and-exactly-once-illusions-8.png": {
+    "width": 1792,
+    "height": 1178
   },
   "/imgs/blogs/idiomatic-fast-python-comprehensions-generators-and-builtins-1.png": {
     "width": 1792,
@@ -23121,6 +23319,39 @@
     "width": 1792,
     "height": 1073
   },
+  "/imgs/blogs/long-running-operations-async-jobs-polling-and-callbacks-1.png": {
+    "width": 1792,
+    "height": 892,
+    "cover": true
+  },
+  "/imgs/blogs/long-running-operations-async-jobs-polling-and-callbacks-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/long-running-operations-async-jobs-polling-and-callbacks-3.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/long-running-operations-async-jobs-polling-and-callbacks-4.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/long-running-operations-async-jobs-polling-and-callbacks-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/long-running-operations-async-jobs-polling-and-callbacks-6.png": {
+    "width": 1792,
+    "height": 707
+  },
+  "/imgs/blogs/long-running-operations-async-jobs-polling-and-callbacks-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/long-running-operations-async-jobs-polling-and-callbacks-8.png": {
+    "width": 1792,
+    "height": 1347
+  },
   "/imgs/blogs/long-video-and-autoregressive-rollout-1.png": {
     "width": 1792,
     "height": 742,
@@ -26582,6 +26813,39 @@
     "width": 1792,
     "height": 828
   },
+  "/imgs/blogs/non-deliverable-forwards-trading-uninvestable-currencies-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/non-deliverable-forwards-trading-uninvestable-currencies-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/non-deliverable-forwards-trading-uninvestable-currencies-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/non-deliverable-forwards-trading-uninvestable-currencies-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/non-deliverable-forwards-trading-uninvestable-currencies-5.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/non-deliverable-forwards-trading-uninvestable-currencies-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/non-deliverable-forwards-trading-uninvestable-currencies-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/non-deliverable-forwards-trading-uninvestable-currencies-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/normalizing-flows-and-change-of-variables-1.png": {
     "width": 1792,
     "height": 674,
@@ -27875,6 +28139,39 @@
   "/imgs/blogs/owning-pnl-and-owning-research-the-accountability-ladder-7.png": {
     "width": 1792,
     "height": 1210
+  },
+  "/imgs/blogs/pagination-offset-cursor-and-keyset-tradeoffs-at-scale-1.png": {
+    "width": 1792,
+    "height": 993,
+    "cover": true
+  },
+  "/imgs/blogs/pagination-offset-cursor-and-keyset-tradeoffs-at-scale-2.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/pagination-offset-cursor-and-keyset-tradeoffs-at-scale-3.png": {
+    "width": 1792,
+    "height": 865
+  },
+  "/imgs/blogs/pagination-offset-cursor-and-keyset-tradeoffs-at-scale-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/pagination-offset-cursor-and-keyset-tradeoffs-at-scale-5.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/pagination-offset-cursor-and-keyset-tradeoffs-at-scale-6.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/pagination-offset-cursor-and-keyset-tradeoffs-at-scale-7.png": {
+    "width": 1792,
+    "height": 1350
+  },
+  "/imgs/blogs/pagination-offset-cursor-and-keyset-tradeoffs-at-scale-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/pairwise-and-bpr-loss-deep-dive-1.png": {
     "width": 1792,
@@ -32326,6 +32623,39 @@
     "width": 1602,
     "height": 1013
   },
+  "/imgs/blogs/risk-reversals-and-the-shape-of-fear-in-fx-1.png": {
+    "width": 1633,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/risk-reversals-and-the-shape-of-fear-in-fx-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/risk-reversals-and-the-shape-of-fear-in-fx-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/risk-reversals-and-the-shape-of-fear-in-fx-4.png": {
+    "width": 1792,
+    "height": 658
+  },
+  "/imgs/blogs/risk-reversals-and-the-shape-of-fear-in-fx-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/risk-reversals-and-the-shape-of-fear-in-fx-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/risk-reversals-and-the-shape-of-fear-in-fx-7.png": {
+    "width": 1672,
+    "height": 914
+  },
+  "/imgs/blogs/risk-reversals-and-the-shape-of-fear-in-fx-8.png": {
+    "width": 1792,
+    "height": 1297
+  },
   "/imgs/blogs/risk-reward-and-expectancy-in-practice-1.png": {
     "width": 1792,
     "height": 1087,
@@ -33919,6 +34249,39 @@
   "/imgs/blogs/serving-03-cost.png": {
     "width": 1215,
     "height": 720
+  },
+  "/imgs/blogs/settlement-risk-and-cls-how-fx-actually-clears-1.png": {
+    "width": 1792,
+    "height": 961,
+    "cover": true
+  },
+  "/imgs/blogs/settlement-risk-and-cls-how-fx-actually-clears-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/settlement-risk-and-cls-how-fx-actually-clears-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/settlement-risk-and-cls-how-fx-actually-clears-4.png": {
+    "width": 1604,
+    "height": 914
+  },
+  "/imgs/blogs/settlement-risk-and-cls-how-fx-actually-clears-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/settlement-risk-and-cls-how-fx-actually-clears-6.png": {
+    "width": 1636,
+    "height": 914
+  },
+  "/imgs/blogs/settlement-risk-and-cls-how-fx-actually-clears-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/settlement-risk-and-cls-how-fx-actually-clears-8.png": {
+    "width": 1604,
+    "height": 914
   },
   "/imgs/blogs/sglang-01-radix.png": {
     "width": 846,
@@ -37833,6 +38196,39 @@
   "/imgs/blogs/the-crisis-playbook-2008-and-2020-7.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/the-cross-currency-basis-when-covered-parity-breaks-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/the-cross-currency-basis-when-covered-parity-breaks-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-cross-currency-basis-when-covered-parity-breaks-3.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/the-cross-currency-basis-when-covered-parity-breaks-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-cross-currency-basis-when-covered-parity-breaks-5.png": {
+    "width": 1792,
+    "height": 1427
+  },
+  "/imgs/blogs/the-cross-currency-basis-when-covered-parity-breaks-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-cross-currency-basis-when-covered-parity-breaks-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-cross-currency-basis-when-covered-parity-breaks-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/the-crush-and-the-spread-soybeans-into-meal-and-oil-1.png": {
     "width": 1792,
