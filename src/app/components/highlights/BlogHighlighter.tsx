@@ -14,6 +14,13 @@ import {
   forEachSlice,
   rangeToOffsets,
 } from "./anchor";
+import {
+  LANGUAGES,
+  loadTargetLang,
+  saveTargetLang,
+  languageLabel,
+  translateText,
+} from "./translate";
 import "./highlights.css";
 
 interface Props {
@@ -35,6 +42,12 @@ interface PopoverState {
   y: number;
 }
 
+interface TranslateState {
+  x: number;
+  y: number;
+  text: string;
+}
+
 export default function BlogHighlighter({ slug, containerRef }: Props) {
   const [highlights, setHighlights] = useState<Highlight[]>([]);
   const [toolbar, setToolbar] = useState<ToolbarState | null>(null);
@@ -42,8 +55,28 @@ export default function BlogHighlighter({ slug, containerRef }: Props) {
   const [panelOpen, setPanelOpen] = useState(false);
   const [noteDraft, setNoteDraft] = useState("");
 
+  // Translate tool state
+  const [translate, setTranslate] = useState<TranslateState | null>(null);
+  const [targetLang, setTargetLang] = useState<string>("vi");
+  const [translation, setTranslation] = useState<string>("");
+  const [detectedLang, setDetectedLang] = useState<string>("");
+  const [translateStatus, setTranslateStatus] = useState<
+    "idle" | "loading" | "error"
+  >("idle");
+  const [translateError, setTranslateError] = useState<string>("");
+  const [copied, setCopied] = useState(false);
+
   const popoverRef = useRef<HTMLDivElement | null>(null);
   const toolbarRef = useRef<HTMLDivElement | null>(null);
+  const translateRef = useRef<HTMLDivElement | null>(null);
+  // Guards against out-of-order responses when the language is switched fast.
+  const translateReqId = useRef(0);
+  const translateAbort = useRef<AbortController | null>(null);
+
+  // Restore the session-saved target language on mount.
+  useEffect(() => {
+    setTargetLang(loadTargetLang());
+  }, []);
 
   // Load from storage when slug changes
   useEffect(() => {
@@ -126,7 +159,7 @@ export default function BlogHighlighter({ slug, containerRef }: Props) {
           setToolbar(null);
           return;
         }
-        const TOOLBAR_W = 200;
+        const TOOLBAR_W = 236;
         const x = Math.max(
           8,
           Math.min(
@@ -290,6 +323,102 @@ export default function BlogHighlighter({ slug, containerRef }: Props) {
     setTimeout(() => setPopover({ id, x, y }), 0);
   }, [toolbar, containerRef, slug]);
 
+  // Fetch a translation for the current selection into `lang`.
+  const runTranslate = useCallback(async (text: string, lang: string) => {
+    const reqId = ++translateReqId.current;
+    translateAbort.current?.abort();
+    const controller = new AbortController();
+    translateAbort.current = controller;
+    setTranslateStatus("loading");
+    setTranslation("");
+    setDetectedLang("");
+    setTranslateError("");
+    setCopied(false);
+    try {
+      const result = await translateText(text, lang, controller.signal);
+      if (reqId !== translateReqId.current) return; // a newer request superseded
+      setTranslation(result.translation);
+      setDetectedLang(result.detected);
+      setTranslateStatus("idle");
+    } catch (err) {
+      if (controller.signal.aborted || reqId !== translateReqId.current) return;
+      setTranslateError(
+        err instanceof Error ? err.message : "Translation failed.",
+      );
+      setTranslateStatus("error");
+    }
+  }, []);
+
+  // Open the translate popover from the selection toolbar.
+  const openTranslate = useCallback(() => {
+    if (!toolbar) return;
+    const text = toolbar.range.toString().replace(/\s+/g, " ").trim();
+    if (!text) {
+      setToolbar(null);
+      return;
+    }
+    const rect = toolbar.range.getBoundingClientRect();
+    const POP_W = 380;
+    const x = Math.max(
+      8,
+      Math.min(
+        window.innerWidth - POP_W - 8,
+        rect.left + rect.width / 2 - POP_W / 2,
+      ),
+    );
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const y = spaceBelow > 260 ? rect.bottom + 8 : Math.max(8, rect.top - 260);
+    setTranslate({ x, y, text });
+    setToolbar(null);
+    window.getSelection()?.removeAllRanges();
+    runTranslate(text, targetLang);
+  }, [toolbar, targetLang, runTranslate]);
+
+  // Switching language re-translates and persists the choice for the session.
+  const changeTargetLang = useCallback(
+    (lang: string) => {
+      setTargetLang(lang);
+      saveTargetLang(lang);
+      if (translate) runTranslate(translate.text, lang);
+    },
+    [translate, runTranslate],
+  );
+
+  const closeTranslate = useCallback(() => {
+    translateReqId.current++;
+    translateAbort.current?.abort();
+    setTranslate(null);
+  }, []);
+
+  const copyTranslation = useCallback(() => {
+    if (!translation) return;
+    navigator.clipboard?.writeText(translation).then(
+      () => {
+        setCopied(true);
+        window.setTimeout(() => setCopied(false), 1500);
+      },
+      () => {},
+    );
+  }, [translation]);
+
+  // Dismiss translate popover on outside click / Escape.
+  useEffect(() => {
+    if (!translate) return;
+    const onDown = (e: MouseEvent) => {
+      if (translateRef.current?.contains(e.target as Node)) return;
+      closeTranslate();
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeTranslate();
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [translate, closeTranslate]);
+
   const updateHighlight = useCallback(
     (id: string, patch: Partial<Highlight>) => {
       setHighlights((prev) =>
@@ -369,6 +498,18 @@ export default function BlogHighlighter({ slug, containerRef }: Props) {
               <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z" />
             </svg>
           </button>
+          <button
+            className="bh-iconbtn"
+            aria-label={`Translate to ${languageLabel(targetLang)}`}
+            title={`Translate to ${languageLabel(targetLang)}`}
+            onClick={openTranslate}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 5h7M9 3v2c0 4.4-2.7 8-6 9" />
+              <path d="M5 9c0 2.5 3.3 4.8 6 5.5" />
+              <path d="M14 19l3-7 3 7M14.7 17h4.6" />
+            </svg>
+          </button>
         </div>
       )}
 
@@ -431,6 +572,92 @@ export default function BlogHighlighter({ slug, containerRef }: Props) {
                 Save
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Translate popover */}
+      {translate && (
+        <div
+          ref={translateRef}
+          className="bh-popover bh-translate"
+          style={{ left: translate.x, top: translate.y }}
+          role="dialog"
+          aria-label="Translate selection"
+        >
+          <div className="bh-translate-head">
+            <div className="bh-translate-title">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 5h7M9 3v2c0 4.4-2.7 8-6 9" />
+                <path d="M5 9c0 2.5 3.3 4.8 6 5.5" />
+                <path d="M14 19l3-7 3 7M14.7 17h4.6" />
+              </svg>
+              <span>Translate</span>
+            </div>
+            <select
+              className="bh-translate-lang"
+              aria-label="Target language"
+              value={targetLang}
+              onChange={(e) => changeTargetLang(e.target.value)}
+            >
+              {LANGUAGES.map((l) => (
+                <option key={l.code} value={l.code}>
+                  {l.label} · {l.native}
+                </option>
+              ))}
+            </select>
+            <button
+              className="bh-iconbtn"
+              aria-label="Close"
+              title="Close"
+              onClick={closeTranslate}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+          </div>
+
+          <div className="bh-translate-source">{translate.text}</div>
+
+          <div className="bh-translate-result" aria-live="polite">
+            {translateStatus === "loading" && (
+              <div className="bh-translate-loading">
+                <span className="bh-spinner" aria-hidden="true" />
+                <span>Translating…</span>
+              </div>
+            )}
+            {translateStatus === "error" && (
+              <div className="bh-translate-errmsg">
+                {translateError || "Translation failed."}
+                <button
+                  className="bh-btn bh-btn-primary bh-translate-retry"
+                  onClick={() => runTranslate(translate.text, targetLang)}
+                >
+                  Retry
+                </button>
+              </div>
+            )}
+            {translateStatus === "idle" && translation && (
+              <p className="bh-translate-text">{translation}</p>
+            )}
+          </div>
+
+          <div className="bh-translate-foot">
+            <span className="bh-translate-detected">
+              {detectedLang
+                ? `Detected: ${languageLabel(detectedLang)}`
+                : "Powered by Google Translate"}
+            </span>
+            {translateStatus === "idle" && translation && (
+              <button
+                className="bh-btn"
+                onClick={copyTranslation}
+                aria-label="Copy translation"
+              >
+                {copied ? "Copied!" : "Copy"}
+              </button>
+            )}
           </div>
         </div>
       )}

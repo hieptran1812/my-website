@@ -175,6 +175,105 @@
   -webkit-box-orient: vertical;
 }
 
+/* Translate popover */
+.bh-translate {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.bh-translate-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bh-translate-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary, inherit);
+  white-space: nowrap;
+}
+.bh-translate-lang {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 8px;
+  font: inherit;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid var(--border, rgba(0, 0, 0, 0.15));
+  background: var(--surface, #fff);
+  color: var(--text-primary, inherit);
+  cursor: pointer;
+  outline: none;
+}
+.bh-translate-lang:focus {
+  border-color: var(--accent, #3b82f6);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+.bh-translate-source {
+  font-size: 12.5px;
+  color: var(--text-secondary, #666);
+  padding-left: 8px;
+  border-left: 3px solid var(--border, rgba(0, 0, 0, 0.2));
+  max-height: 4.2em;
+  overflow-y: auto;
+  line-height: 1.4;
+}
+.bh-translate-result {
+  min-height: 38px;
+}
+.bh-translate-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary, inherit);
+  max-height: 40vh;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.bh-translate-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary, #666);
+}
+.bh-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border, rgba(0, 0, 0, 0.18));
+  border-top-color: var(--accent, #3b82f6);
+  border-radius: 50%;
+  animation: bh-spin 0.7s linear infinite;
+}
+@keyframes bh-spin {
+  to { transform: rotate(360deg); }
+}
+.bh-translate-errmsg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: #dc2626;
+}
+.bh-translate-retry { align-self: flex-start; }
+.bh-translate-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+  padding-top: 8px;
+}
+.bh-translate-detected {
+  font-size: 11px;
+  color: var(--text-secondary, #888);
+}
+
 /* Floating toggle button for notes panel */
 .bh-fab {
   position: fixed;
