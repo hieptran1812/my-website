@@ -178,7 +178,7 @@ The deep point is that a credible backstop changes prices **in normal times, not
 
 The reason it works without much spending is the **announcement effect**. The Fed's most powerful tool is not its checkbook; it is its credibility. When it announces a backstop, sophisticated investors instantly reprice the tail risk, and *they* do the buying — chasing the spread tighter before the Fed has to. The Fed essentially conscripts the market to enforce the floor for it. Mario Draghi proved the limiting case in 2012 with three words and a never-used program; the Fed proved it in 2020 with \$14 billion of actual purchases doing the work of what looked like it would need hundreds of billions.
 
-This belief in a backstop is the credit cousin of the expectations channel — the idea that what the central bank promises about the future moves prices today as much as what it does. For the general version, see [the expectations channel: forward guidance and credibility](/blog/trading/policy-and-markets/the-expectations-channel-forward-guidance-and-credibility) and the macro-trading note on [forward guidance and the Fed put](/blog/trading/policy-and-markets/forward-guidance-and-the-fed-put).
+This belief in a backstop is the credit cousin of the expectations channel — the idea that what the central bank promises about the future moves prices today as much as what it does. For the general version, see [the expectations channel: forward guidance and credibility](/blog/trading/policy-and-markets/the-expectations-channel-forward-guidance-and-credibility) and the macro-trading note on [forward guidance and the Fed put](/blog/trading/event-trading/forward-guidance-and-the-fed-put).
 
 #### Worked example: the announcement effect — spreads compress before any purchase
 
@@ -291,7 +291,7 @@ Within this series:
 - [How policy sets the bond market: the yield curve](/blog/trading/policy-and-markets/how-policy-sets-the-bond-market-the-yield-curve) — the risk-free floor that every spread stacks on.
 - [The liquidity channel: QE, QT, and the everything bid](/blog/trading/policy-and-markets/the-liquidity-channel-qe-qt-and-the-everything-bid) — the balance-sheet lever that bids up credit.
 - [The expectations channel: forward guidance and credibility](/blog/trading/policy-and-markets/the-expectations-channel-forward-guidance-and-credibility) — why a promise reprices the asset before the action.
-- [Forward guidance and the Fed put](/blog/trading/policy-and-markets/forward-guidance-and-the-fed-put) — the credibility mechanism behind the backstop.
+- [Forward guidance and the Fed put](/blog/trading/event-trading/forward-guidance-and-the-fed-put) — the credibility mechanism behind the backstop.
 - [Tariffs and trade policy as a market force](/blog/trading/policy-and-markets/tariffs-and-trade-policy-as-a-market-force) — the 2025 shock that widened spreads.
 
 Elsewhere on the site:
