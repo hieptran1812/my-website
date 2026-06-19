@@ -11292,6 +11292,39 @@
     "width": 1792,
     "height": 1112
   },
+  "/imgs/blogs/designing-for-the-caller-developer-experience-as-a-goal-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/designing-for-the-caller-developer-experience-as-a-goal-2.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/designing-for-the-caller-developer-experience-as-a-goal-3.png": {
+    "width": 1792,
+    "height": 1435
+  },
+  "/imgs/blogs/designing-for-the-caller-developer-experience-as-a-goal-4.png": {
+    "width": 1792,
+    "height": 931
+  },
+  "/imgs/blogs/designing-for-the-caller-developer-experience-as-a-goal-5.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/designing-for-the-caller-developer-experience-as-a-goal-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/designing-for-the-caller-developer-experience-as-a-goal-7.png": {
+    "width": 1792,
+    "height": 899
+  },
+  "/imgs/blogs/designing-for-the-caller-developer-experience-as-a-goal-8.png": {
+    "width": 1792,
+    "height": 1417
+  },
   "/imgs/blogs/designing-long-running-agents-architecture-foundations-diagram.png": {
     "width": 1200,
     "height": 700,
@@ -18690,6 +18723,39 @@
   "/imgs/blogs/how-zhipu-measures-glm-benchmarks-5.png": {
     "width": 1792,
     "height": 1194
+  },
+  "/imgs/blogs/http-for-api-designers-methods-status-codes-headers-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/http-for-api-designers-methods-status-codes-headers-2.png": {
+    "width": 1792,
+    "height": 1412
+  },
+  "/imgs/blogs/http-for-api-designers-methods-status-codes-headers-3.png": {
+    "width": 1792,
+    "height": 882
+  },
+  "/imgs/blogs/http-for-api-designers-methods-status-codes-headers-4.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/http-for-api-designers-methods-status-codes-headers-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/http-for-api-designers-methods-status-codes-headers-6.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/http-for-api-designers-methods-status-codes-headers-7.png": {
+    "width": 1792,
+    "height": 664
+  },
+  "/imgs/blogs/http-for-api-designers-methods-status-codes-headers-8.png": {
+    "width": 1792,
+    "height": 1414
   },
   "/imgs/blogs/hunting-nans-and-infs-1.png": {
     "width": 1792,
@@ -30752,6 +30818,39 @@
     "width": 1792,
     "height": 1266
   },
+  "/imgs/blogs/resource-modeling-turning-a-domain-into-nouns-and-uris-1.png": {
+    "width": 1792,
+    "height": 1176,
+    "cover": true
+  },
+  "/imgs/blogs/resource-modeling-turning-a-domain-into-nouns-and-uris-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/resource-modeling-turning-a-domain-into-nouns-and-uris-3.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/resource-modeling-turning-a-domain-into-nouns-and-uris-4.png": {
+    "width": 1782,
+    "height": 1453
+  },
+  "/imgs/blogs/resource-modeling-turning-a-domain-into-nouns-and-uris-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/resource-modeling-turning-a-domain-into-nouns-and-uris-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/resource-modeling-turning-a-domain-into-nouns-and-uris-7.png": {
+    "width": 1792,
+    "height": 1423
+  },
+  "/imgs/blogs/resource-modeling-turning-a-domain-into-nouns-and-uris-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/retail-sector-vietnam-the-consumption-story-1.png": {
     "width": 1792,
     "height": 1379,
@@ -40029,6 +40128,39 @@
     "width": 1792,
     "height": 1209
   },
+  "/imgs/blogs/the-richardson-maturity-model-and-what-restful-means-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/the-richardson-maturity-model-and-what-restful-means-2.png": {
+    "width": 1790,
+    "height": 1453
+  },
+  "/imgs/blogs/the-richardson-maturity-model-and-what-restful-means-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-richardson-maturity-model-and-what-restful-means-4.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/the-richardson-maturity-model-and-what-restful-means-5.png": {
+    "width": 1792,
+    "height": 1322
+  },
+  "/imgs/blogs/the-richardson-maturity-model-and-what-restful-means-6.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/the-richardson-maturity-model-and-what-restful-means-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-richardson-maturity-model-and-what-restful-means-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/the-right-way-to-split-and-evaluate-1.png": {
     "width": 1792,
     "height": 1278,
@@ -44018,6 +44150,39 @@
   "/imgs/blogs/what-is-a-recommender-system-8.png": {
     "width": 1792,
     "height": 1207
+  },
+  "/imgs/blogs/what-is-an-api-the-contract-between-systems-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/what-is-an-api-the-contract-between-systems-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/what-is-an-api-the-contract-between-systems-3.png": {
+    "width": 1792,
+    "height": 1359
+  },
+  "/imgs/blogs/what-is-an-api-the-contract-between-systems-4.png": {
+    "width": 1792,
+    "height": 812
+  },
+  "/imgs/blogs/what-is-an-api-the-contract-between-systems-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/what-is-an-api-the-contract-between-systems-6.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/what-is-an-api-the-contract-between-systems-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/what-is-an-api-the-contract-between-systems-8.png": {
+    "width": 1792,
+    "height": 1266
   },
   "/imgs/blogs/what-is-an-option-the-right-not-the-obligation-1.png": {
     "width": 1792,
