@@ -115,6 +115,39 @@
     "width": 1792,
     "height": 1216
   },
+  "/imgs/blogs/2021-23-the-fastest-hiking-cycle-and-the-60-40-wreck-1.png": {
+    "width": 1792,
+    "height": 712,
+    "cover": true
+  },
+  "/imgs/blogs/2021-23-the-fastest-hiking-cycle-and-the-60-40-wreck-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/2021-23-the-fastest-hiking-cycle-and-the-60-40-wreck-3.png": {
+    "width": 1597,
+    "height": 914
+  },
+  "/imgs/blogs/2021-23-the-fastest-hiking-cycle-and-the-60-40-wreck-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/2021-23-the-fastest-hiking-cycle-and-the-60-40-wreck-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/2021-23-the-fastest-hiking-cycle-and-the-60-40-wreck-6.png": {
+    "width": 1612,
+    "height": 914
+  },
+  "/imgs/blogs/2021-23-the-fastest-hiking-cycle-and-the-60-40-wreck-7.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/2021-23-the-fastest-hiking-cycle-and-the-60-40-wreck-8.png": {
+    "width": 1596,
+    "height": 914
+  },
   "/imgs/blogs/a-day-in-the-life-quant-developer-and-low-latency-engineer-1.png": {
     "width": 1792,
     "height": 1211,
@@ -8573,6 +8606,39 @@
   "/imgs/blogs/covered-calls-and-the-wheel-selling-premium-on-stock-you-own-7.png": {
     "width": 1792,
     "height": 1170
+  },
+  "/imgs/blogs/covid-2020-infinite-qe-fiscal-bazooka-and-the-everything-rally-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/covid-2020-infinite-qe-fiscal-bazooka-and-the-everything-rally-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/covid-2020-infinite-qe-fiscal-bazooka-and-the-everything-rally-3.png": {
+    "width": 1621,
+    "height": 914
+  },
+  "/imgs/blogs/covid-2020-infinite-qe-fiscal-bazooka-and-the-everything-rally-4.png": {
+    "width": 1598,
+    "height": 914
+  },
+  "/imgs/blogs/covid-2020-infinite-qe-fiscal-bazooka-and-the-everything-rally-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/covid-2020-infinite-qe-fiscal-bazooka-and-the-everything-rally-6.png": {
+    "width": 1621,
+    "height": 914
+  },
+  "/imgs/blogs/covid-2020-infinite-qe-fiscal-bazooka-and-the-everything-rally-7.png": {
+    "width": 1597,
+    "height": 914
+  },
+  "/imgs/blogs/covid-2020-infinite-qe-fiscal-bazooka-and-the-everything-rally-8.png": {
+    "width": 1792,
+    "height": 1210
   },
   "/imgs/blogs/cpi-and-asset-prices-the-master-inflation-correlation-1.png": {
     "width": 1792,
@@ -34282,6 +34348,76 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/the-2022-uk-gilt-and-ldi-crisis-when-credibility-snapped-1.png": {
+    "width": 1792,
+    "height": 1199,
+    "cover": true
+  },
+  "/imgs/blogs/the-2022-uk-gilt-and-ldi-crisis-when-credibility-snapped-2.png": {
+    "width": 1792,
+    "height": 947
+  },
+  "/imgs/blogs/the-2022-uk-gilt-and-ldi-crisis-when-credibility-snapped-3.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/the-2022-uk-gilt-and-ldi-crisis-when-credibility-snapped-4.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/the-2022-uk-gilt-and-ldi-crisis-when-credibility-snapped-5.png": {
+    "width": 1649,
+    "height": 914
+  },
+  "/imgs/blogs/the-2022-uk-gilt-and-ldi-crisis-when-credibility-snapped-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2022-uk-gilt-and-ldi-crisis-when-credibility-snapped-7.png": {
+    "width": 1627,
+    "height": 914
+  },
+  "/imgs/blogs/the-2022-uk-gilt-and-ldi-crisis-when-credibility-snapped-8.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2025-tariff-shock-policy-uncertainty-reprices-markets-1.png": {
+    "width": 1792,
+    "height": 1165,
+    "cover": true
+  },
+  "/imgs/blogs/the-2025-tariff-shock-policy-uncertainty-reprices-markets-2.png": {
+    "width": 1792,
+    "height": 994
+  },
+  "/imgs/blogs/the-2025-tariff-shock-policy-uncertainty-reprices-markets-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2025-tariff-shock-policy-uncertainty-reprices-markets-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2025-tariff-shock-policy-uncertainty-reprices-markets-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2025-tariff-shock-policy-uncertainty-reprices-markets-6.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/the-2025-tariff-shock-policy-uncertainty-reprices-markets-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2025-tariff-shock-policy-uncertainty-reprices-markets-8.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2025-tariff-shock-policy-uncertainty-reprices-markets-9.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/the-2026-audio-model-landscape-1.png": {
     "width": 1792,
     "height": 1235,
@@ -41827,6 +41963,35 @@
     "height": 1278
   },
   "/imgs/blogs/war-and-markets-how-conflict-prices-into-assets-8.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/war-and-the-policy-response-how-conflict-reprices-assets-1.png": {
+    "width": 1792,
+    "height": 1163,
+    "cover": true
+  },
+  "/imgs/blogs/war-and-the-policy-response-how-conflict-reprices-assets-3.png": {
+    "width": 1792,
+    "height": 596
+  },
+  "/imgs/blogs/war-and-the-policy-response-how-conflict-reprices-assets-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/war-and-the-policy-response-how-conflict-reprices-assets-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/war-and-the-policy-response-how-conflict-reprices-assets-6.png": {
+    "width": 1600,
+    "height": 914
+  },
+  "/imgs/blogs/war-and-the-policy-response-how-conflict-reprices-assets-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/war-and-the-policy-response-how-conflict-reprices-assets-8.png": {
     "width": 1602,
     "height": 914
   },
