@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import dynamic from "next/dynamic";
-import { LANGUAGES } from "./highlights/translate";
+import LanguageSelect from "./highlights/LanguageSelect";
 
 type TranslateStatus = "idle" | "loading" | "done" | "error";
 
@@ -214,26 +214,12 @@ function BlogGraphSidebar({
         </h4>
 
         <div className="flex flex-col gap-2">
-          <select
+          <LanguageSelect
             value={translateLang}
-            onChange={(e) => onTranslateLangChange?.(e.target.value)}
+            onChange={(code) => onTranslateLangChange?.(code)}
             disabled={isTranslating}
-            className={`w-full rounded-lg px-2 ${
-              compact ? "py-2 text-xs" : "py-2.5 text-sm"
-            }`}
-            style={{
-              backgroundColor: "var(--surface)",
-              color: "var(--text-primary)",
-              border: "1px solid var(--border)",
-            }}
-            aria-label="Target language for translation"
-          >
-            {LANGUAGES.map((l) => (
-              <option key={l.code} value={l.code}>
-                {l.label} — {l.native}
-              </option>
-            ))}
-          </select>
+            compact={compact}
+          />
 
           <button
             onClick={() => onTranslate?.(translateLang)}

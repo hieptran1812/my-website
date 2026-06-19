@@ -9,25 +9,27 @@ export interface Language {
   label: string;
   /** Native/short name shown next to it. */
   native: string;
+  /** Flag emoji shown in front of the language in the picker. */
+  flag: string;
 }
 
 export const LANGUAGES: Language[] = [
-  { code: "vi", label: "Vietnamese", native: "Tiếng Việt" },
-  { code: "en", label: "English", native: "English" },
-  { code: "zh-CN", label: "Chinese (Simpl.)", native: "简体中文" },
-  { code: "zh-TW", label: "Chinese (Trad.)", native: "繁體中文" },
-  { code: "ja", label: "Japanese", native: "日本語" },
-  { code: "ko", label: "Korean", native: "한국어" },
-  { code: "fr", label: "French", native: "Français" },
-  { code: "de", label: "German", native: "Deutsch" },
-  { code: "es", label: "Spanish", native: "Español" },
-  { code: "pt", label: "Portuguese", native: "Português" },
-  { code: "it", label: "Italian", native: "Italiano" },
-  { code: "ru", label: "Russian", native: "Русский" },
-  { code: "hi", label: "Hindi", native: "हिन्दी" },
-  { code: "ar", label: "Arabic", native: "العربية" },
-  { code: "th", label: "Thai", native: "ไทย" },
-  { code: "id", label: "Indonesian", native: "Indonesia" },
+  { code: "vi", label: "Vietnamese", native: "Tiếng Việt", flag: "🇻🇳" },
+  { code: "en", label: "English", native: "English", flag: "🇬🇧" },
+  { code: "zh-CN", label: "Chinese (Simpl.)", native: "简体中文", flag: "🇨🇳" },
+  { code: "zh-TW", label: "Chinese (Trad.)", native: "繁體中文", flag: "🇹🇼" },
+  { code: "ja", label: "Japanese", native: "日本語", flag: "🇯🇵" },
+  { code: "ko", label: "Korean", native: "한국어", flag: "🇰🇷" },
+  { code: "fr", label: "French", native: "Français", flag: "🇫🇷" },
+  { code: "de", label: "German", native: "Deutsch", flag: "🇩🇪" },
+  { code: "es", label: "Spanish", native: "Español", flag: "🇪🇸" },
+  { code: "pt", label: "Portuguese", native: "Português", flag: "🇵🇹" },
+  { code: "it", label: "Italian", native: "Italiano", flag: "🇮🇹" },
+  { code: "ru", label: "Russian", native: "Русский", flag: "🇷🇺" },
+  { code: "hi", label: "Hindi", native: "हिन्दी", flag: "🇮🇳" },
+  { code: "ar", label: "Arabic", native: "العربية", flag: "🇸🇦" },
+  { code: "th", label: "Thai", native: "ไทย", flag: "🇹🇭" },
+  { code: "id", label: "Indonesian", native: "Indonesia", flag: "🇮🇩" },
 ];
 
 const DEFAULT_LANG = "vi";
