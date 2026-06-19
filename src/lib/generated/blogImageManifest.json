@@ -7063,6 +7063,39 @@
     "width": 1792,
     "height": 1201
   },
+  "/imgs/blogs/choosing-uris-collections-sub-resources-path-vs-query-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/choosing-uris-collections-sub-resources-path-vs-query-2.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/choosing-uris-collections-sub-resources-path-vs-query-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/choosing-uris-collections-sub-resources-path-vs-query-4.png": {
+    "width": 1792,
+    "height": 1351
+  },
+  "/imgs/blogs/choosing-uris-collections-sub-resources-path-vs-query-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/choosing-uris-collections-sub-resources-path-vs-query-6.png": {
+    "width": 1792,
+    "height": 848
+  },
+  "/imgs/blogs/choosing-uris-collections-sub-resources-path-vs-query-7.png": {
+    "width": 1792,
+    "height": 1347
+  },
+  "/imgs/blogs/choosing-uris-collections-sub-resources-path-vs-query-8.png": {
+    "width": 1792,
+    "height": 892
+  },
   "/imgs/blogs/choosing-your-strategy-the-operating-lens-1.png": {
     "width": 1792,
     "height": 1217,
@@ -8310,6 +8343,39 @@
   "/imgs/blogs/content-based-and-hybrid-recommenders-8.png": {
     "width": 1792,
     "height": 1218
+  },
+  "/imgs/blogs/content-negotiation-media-types-and-representations-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/content-negotiation-media-types-and-representations-2.png": {
+    "width": 1792,
+    "height": 895
+  },
+  "/imgs/blogs/content-negotiation-media-types-and-representations-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/content-negotiation-media-types-and-representations-4.png": {
+    "width": 1792,
+    "height": 1346
+  },
+  "/imgs/blogs/content-negotiation-media-types-and-representations-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/content-negotiation-media-types-and-representations-6.png": {
+    "width": 1792,
+    "height": 779
+  },
+  "/imgs/blogs/content-negotiation-media-types-and-representations-7.png": {
+    "width": 1792,
+    "height": 1335
+  },
+  "/imgs/blogs/content-negotiation-media-types-and-representations-8.png": {
+    "width": 1792,
+    "height": 1266
   },
   "/imgs/blogs/continuation-patterns-flags-pennants-1.png": {
     "width": 1792,
@@ -9890,6 +9956,39 @@
     "width": 1401,
     "height": 479,
     "cover": true
+  },
+  "/imgs/blogs/currency-crises-and-the-anatomy-of-a-speculative-attack-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/currency-crises-and-the-anatomy-of-a-speculative-attack-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/currency-crises-and-the-anatomy-of-a-speculative-attack-3.png": {
+    "width": 1792,
+    "height": 1110
+  },
+  "/imgs/blogs/currency-crises-and-the-anatomy-of-a-speculative-attack-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/currency-crises-and-the-anatomy-of-a-speculative-attack-5.png": {
+    "width": 1792,
+    "height": 1395
+  },
+  "/imgs/blogs/currency-crises-and-the-anatomy-of-a-speculative-attack-6.png": {
+    "width": 1792,
+    "height": 931
+  },
+  "/imgs/blogs/currency-crises-and-the-anatomy-of-a-speculative-attack-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/currency-crises-and-the-anatomy-of-a-speculative-attack-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/currency-policy-and-fx-intervention-1.png": {
     "width": 1792,
@@ -17463,6 +17562,39 @@
     "width": 1792,
     "height": 1173
   },
+  "/imgs/blogs/hateoas-in-the-real-world-hypermedia-links-and-when-to-skip-1.png": {
+    "width": 1792,
+    "height": 675,
+    "cover": true
+  },
+  "/imgs/blogs/hateoas-in-the-real-world-hypermedia-links-and-when-to-skip-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/hateoas-in-the-real-world-hypermedia-links-and-when-to-skip-3.png": {
+    "width": 1792,
+    "height": 1302
+  },
+  "/imgs/blogs/hateoas-in-the-real-world-hypermedia-links-and-when-to-skip-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/hateoas-in-the-real-world-hypermedia-links-and-when-to-skip-5.png": {
+    "width": 1792,
+    "height": 895
+  },
+  "/imgs/blogs/hateoas-in-the-real-world-hypermedia-links-and-when-to-skip-6.png": {
+    "width": 1792,
+    "height": 1153
+  },
+  "/imgs/blogs/hateoas-in-the-real-world-hypermedia-links-and-when-to-skip-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/hateoas-in-the-real-world-hypermedia-links-and-when-to-skip-8.png": {
+    "width": 1792,
+    "height": 1336
+  },
   "/imgs/blogs/head-and-shoulders-double-tops-1.png": {
     "width": 1792,
     "height": 1148,
@@ -17891,6 +18023,39 @@
   "/imgs/blogs/how-bonds-actually-trade-otc-dealers-and-treasury-market-structure-7.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/how-central-banks-intervene-in-the-currency-market-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/how-central-banks-intervene-in-the-currency-market-2.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/how-central-banks-intervene-in-the-currency-market-3.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/how-central-banks-intervene-in-the-currency-market-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-central-banks-intervene-in-the-currency-market-5.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/how-central-banks-intervene-in-the-currency-market-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-central-banks-intervene-in-the-currency-market-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-central-banks-intervene-in-the-currency-market-8.png": {
+    "width": 1792,
+    "height": 824
   },
   "/imgs/blogs/how-central-banks-use-bonds-qe-qt-and-the-plumbing-1.png": {
     "width": 1792,
@@ -24053,6 +24218,39 @@
     "width": 1792,
     "height": 1216
   },
+  "/imgs/blogs/methods-and-idempotency-get-post-put-patch-delete-1.png": {
+    "width": 1792,
+    "height": 1226,
+    "cover": true
+  },
+  "/imgs/blogs/methods-and-idempotency-get-post-put-patch-delete-2.png": {
+    "width": 1792,
+    "height": 900
+  },
+  "/imgs/blogs/methods-and-idempotency-get-post-put-patch-delete-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/methods-and-idempotency-get-post-put-patch-delete-4.png": {
+    "width": 1792,
+    "height": 914
+  },
+  "/imgs/blogs/methods-and-idempotency-get-post-put-patch-delete-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/methods-and-idempotency-get-post-put-patch-delete-6.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/methods-and-idempotency-get-post-put-patch-delete-7.png": {
+    "width": 1792,
+    "height": 899
+  },
+  "/imgs/blogs/methods-and-idempotency-get-post-put-patch-delete-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/metric-spaces-convergence-math-for-quants-1.png": {
     "width": 1792,
     "height": 1266,
@@ -27557,6 +27755,39 @@
   "/imgs/blogs/pce-the-feds-preferred-inflation-gauge-7.png": {
     "width": 1792,
     "height": 1108
+  },
+  "/imgs/blogs/pegs-bands-and-crawling-pegs-the-spectrum-of-fx-regimes-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/pegs-bands-and-crawling-pegs-the-spectrum-of-fx-regimes-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/pegs-bands-and-crawling-pegs-the-spectrum-of-fx-regimes-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/pegs-bands-and-crawling-pegs-the-spectrum-of-fx-regimes-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/pegs-bands-and-crawling-pegs-the-spectrum-of-fx-regimes-5.png": {
+    "width": 1792,
+    "height": 562
+  },
+  "/imgs/blogs/pegs-bands-and-crawling-pegs-the-spectrum-of-fx-regimes-6.png": {
+    "width": 1792,
+    "height": 1362
+  },
+  "/imgs/blogs/pegs-bands-and-crawling-pegs-the-spectrum-of-fx-regimes-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/pegs-bands-and-crawling-pegs-the-spectrum-of-fx-regimes-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/pension-funds-largest-pools-of-capital-1.png": {
     "width": 1792,
@@ -33946,6 +34177,39 @@
     "width": 1792,
     "height": 1218
   },
+  "/imgs/blogs/soros-and-black-wednesday-breaking-the-bank-of-england-1992-1.png": {
+    "width": 1792,
+    "height": 768,
+    "cover": true
+  },
+  "/imgs/blogs/soros-and-black-wednesday-breaking-the-bank-of-england-1992-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/soros-and-black-wednesday-breaking-the-bank-of-england-1992-3.png": {
+    "width": 1792,
+    "height": 1050
+  },
+  "/imgs/blogs/soros-and-black-wednesday-breaking-the-bank-of-england-1992-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/soros-and-black-wednesday-breaking-the-bank-of-england-1992-5.png": {
+    "width": 1792,
+    "height": 922
+  },
+  "/imgs/blogs/soros-and-black-wednesday-breaking-the-bank-of-england-1992-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/soros-and-black-wednesday-breaking-the-bank-of-england-1992-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/soros-and-black-wednesday-breaking-the-bank-of-england-1992-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/soros-bank-of-england-1992-black-wednesday-1.png": {
     "width": 1792,
     "height": 984,
@@ -34488,6 +34752,39 @@
   "/imgs/blogs/statistics-and-ml-for-alpha-research-the-researchers-toolkit-7.png": {
     "width": 1792,
     "height": 1210
+  },
+  "/imgs/blogs/status-codes-that-tell-the-truth-2xx-3xx-4xx-5xx-1.png": {
+    "width": 1792,
+    "height": 1209,
+    "cover": true
+  },
+  "/imgs/blogs/status-codes-that-tell-the-truth-2xx-3xx-4xx-5xx-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/status-codes-that-tell-the-truth-2xx-3xx-4xx-5xx-3.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/status-codes-that-tell-the-truth-2xx-3xx-4xx-5xx-4.png": {
+    "width": 1792,
+    "height": 1339
+  },
+  "/imgs/blogs/status-codes-that-tell-the-truth-2xx-3xx-4xx-5xx-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/status-codes-that-tell-the-truth-2xx-3xx-4xx-5xx-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/status-codes-that-tell-the-truth-2xx-3xx-4xx-5xx-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/status-codes-that-tell-the-truth-2xx-3xx-4xx-5xx-8.png": {
+    "width": 1792,
+    "height": 1415
   },
   "/imgs/blogs/staying-vs-switching-the-firm-hopping-math-1.png": {
     "width": 1792,
@@ -38762,6 +39059,39 @@
     "width": 1792,
     "height": 1209
   },
+  "/imgs/blogs/the-impossible-trinity-pick-two-of-three-1.png": {
+    "width": 1792,
+    "height": 1170,
+    "cover": true
+  },
+  "/imgs/blogs/the-impossible-trinity-pick-two-of-three-2.png": {
+    "width": 1606,
+    "height": 914
+  },
+  "/imgs/blogs/the-impossible-trinity-pick-two-of-three-3.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/the-impossible-trinity-pick-two-of-three-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/the-impossible-trinity-pick-two-of-three-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-impossible-trinity-pick-two-of-three-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/the-impossible-trinity-pick-two-of-three-7.png": {
+    "width": 1638,
+    "height": 914
+  },
+  "/imgs/blogs/the-impossible-trinity-pick-two-of-three-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/the-indicator-trap-1.png": {
     "width": 1792,
     "height": 1241,
@@ -41102,6 +41432,39 @@
   "/imgs/blogs/the-sjc-premium-why-vietnamese-gold-trades-far-above-the-world-price-7.png": {
     "width": 1792,
     "height": 1201
+  },
+  "/imgs/blogs/the-snb-2015-peg-break-when-a-central-bank-blinks-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/the-snb-2015-peg-break-when-a-central-bank-blinks-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/the-snb-2015-peg-break-when-a-central-bank-blinks-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-snb-2015-peg-break-when-a-central-bank-blinks-4.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/the-snb-2015-peg-break-when-a-central-bank-blinks-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-snb-2015-peg-break-when-a-central-bank-blinks-6.png": {
+    "width": 1663,
+    "height": 914
+  },
+  "/imgs/blogs/the-snb-2015-peg-break-when-a-central-bank-blinks-7.png": {
+    "width": 1792,
+    "height": 1196
+  },
+  "/imgs/blogs/the-snb-2015-peg-break-when-a-central-bank-blinks-8.png": {
+    "width": 1792,
+    "height": 1212
   },
   "/imgs/blogs/the-stock-bond-correlation-regime-1.png": {
     "width": 1792,
