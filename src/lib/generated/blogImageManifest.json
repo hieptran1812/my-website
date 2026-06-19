@@ -7919,6 +7919,39 @@
     "height": 1421,
     "cover": true
   },
+  "/imgs/blogs/condition-variables-monitors-and-waiting-correctly-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/condition-variables-monitors-and-waiting-correctly-2.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/condition-variables-monitors-and-waiting-correctly-3.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/condition-variables-monitors-and-waiting-correctly-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/condition-variables-monitors-and-waiting-correctly-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/condition-variables-monitors-and-waiting-correctly-6.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/condition-variables-monitors-and-waiting-correctly-7.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/condition-variables-monitors-and-waiting-correctly-8.png": {
+    "width": 1792,
+    "height": 1318
+  },
   "/imgs/blogs/conditional-expectation-projection-math-for-quants-1.png": {
     "width": 1792,
     "height": 1260,
@@ -17586,6 +17619,39 @@
     "width": 1792,
     "height": 1277
   },
+  "/imgs/blogs/how-a-lock-is-built-test-and-set-cas-and-spinlocks-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/how-a-lock-is-built-test-and-set-cas-and-spinlocks-2.png": {
+    "width": 1792,
+    "height": 1370
+  },
+  "/imgs/blogs/how-a-lock-is-built-test-and-set-cas-and-spinlocks-3.png": {
+    "width": 1792,
+    "height": 1008
+  },
+  "/imgs/blogs/how-a-lock-is-built-test-and-set-cas-and-spinlocks-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/how-a-lock-is-built-test-and-set-cas-and-spinlocks-5.png": {
+    "width": 1792,
+    "height": 1371
+  },
+  "/imgs/blogs/how-a-lock-is-built-test-and-set-cas-and-spinlocks-6.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/how-a-lock-is-built-test-and-set-cas-and-spinlocks-7.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/how-a-lock-is-built-test-and-set-cas-and-spinlocks-8.png": {
+    "width": 1792,
+    "height": 1370
+  },
   "/imgs/blogs/how-a-price-chart-is-born-1.png": {
     "width": 1792,
     "height": 879,
@@ -25483,6 +25549,39 @@
     "width": 1792,
     "height": 1274
   },
+  "/imgs/blogs/mutual-exclusion-mutexes-and-critical-sections-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/mutual-exclusion-mutexes-and-critical-sections-2.png": {
+    "width": 1792,
+    "height": 1003
+  },
+  "/imgs/blogs/mutual-exclusion-mutexes-and-critical-sections-3.png": {
+    "width": 1792,
+    "height": 1425
+  },
+  "/imgs/blogs/mutual-exclusion-mutexes-and-critical-sections-4.png": {
+    "width": 1792,
+    "height": 779
+  },
+  "/imgs/blogs/mutual-exclusion-mutexes-and-critical-sections-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/mutual-exclusion-mutexes-and-critical-sections-6.png": {
+    "width": 1792,
+    "height": 1439
+  },
+  "/imgs/blogs/mutual-exclusion-mutexes-and-critical-sections-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/mutual-exclusion-mutexes-and-critical-sections-8.png": {
+    "width": 1792,
+    "height": 1154
+  },
   "/imgs/blogs/n-m-sparsity-and-sparse-tensor-cores-1.png": {
     "width": 1792,
     "height": 1210,
@@ -29583,6 +29682,39 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/readers-writer-locks-and-lock-granularity-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/readers-writer-locks-and-lock-granularity-2.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/readers-writer-locks-and-lock-granularity-3.png": {
+    "width": 1792,
+    "height": 996
+  },
+  "/imgs/blogs/readers-writer-locks-and-lock-granularity-4.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/readers-writer-locks-and-lock-granularity-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/readers-writer-locks-and-lock-granularity-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/readers-writer-locks-and-lock-granularity-7.png": {
+    "width": 1792,
+    "height": 1028
+  },
+  "/imgs/blogs/readers-writer-locks-and-lock-granularity-8.png": {
+    "width": 1792,
+    "height": 1247
+  },
   "/imgs/blogs/reading-a-stack-trace-across-languages-1.png": {
     "width": 1792,
     "height": 1264,
@@ -33022,6 +33154,39 @@
   "/imgs/blogs/semantic-vs-acoustic-tokens-8.png": {
     "width": 1792,
     "height": 1266
+  },
+  "/imgs/blogs/semaphores-barriers-and-latches-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/semaphores-barriers-and-latches-2.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/semaphores-barriers-and-latches-3.png": {
+    "width": 1792,
+    "height": 1274
+  },
+  "/imgs/blogs/semaphores-barriers-and-latches-4.png": {
+    "width": 1792,
+    "height": 767
+  },
+  "/imgs/blogs/semaphores-barriers-and-latches-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/semaphores-barriers-and-latches-6.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/semaphores-barriers-and-latches-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/semaphores-barriers-and-latches-8.png": {
+    "width": 1792,
+    "height": 1264
   },
   "/imgs/blogs/seniority-recovery-and-the-capital-structure-1.png": {
     "width": 1792,
