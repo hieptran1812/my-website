@@ -7488,6 +7488,35 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/core-cpi-shelter-and-supercore-what-actually-correlates-1.png": {
+    "width": 1792,
+    "height": 958,
+    "cover": true
+  },
+  "/imgs/blogs/core-cpi-shelter-and-supercore-what-actually-correlates-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/core-cpi-shelter-and-supercore-what-actually-correlates-3.png": {
+    "width": 1792,
+    "height": 986
+  },
+  "/imgs/blogs/core-cpi-shelter-and-supercore-what-actually-correlates-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/core-cpi-shelter-and-supercore-what-actually-correlates-5.png": {
+    "width": 1603,
+    "height": 943
+  },
+  "/imgs/blogs/core-cpi-shelter-and-supercore-what-actually-correlates-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/core-cpi-shelter-and-supercore-what-actually-correlates-7.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/corporate-bonds-lending-to-companies-1.png": {
     "width": 1792,
     "height": 1221,
@@ -7830,6 +7859,35 @@
   "/imgs/blogs/covered-calls-and-the-wheel-selling-premium-on-stock-you-own-7.png": {
     "width": 1792,
     "height": 1170
+  },
+  "/imgs/blogs/cpi-and-asset-prices-the-master-inflation-correlation-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/cpi-and-asset-prices-the-master-inflation-correlation-2.png": {
+    "width": 1627,
+    "height": 934
+  },
+  "/imgs/blogs/cpi-and-asset-prices-the-master-inflation-correlation-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cpi-and-asset-prices-the-master-inflation-correlation-4.png": {
+    "width": 1792,
+    "height": 1389
+  },
+  "/imgs/blogs/cpi-and-asset-prices-the-master-inflation-correlation-5.png": {
+    "width": 1602,
+    "height": 938
+  },
+  "/imgs/blogs/cpi-and-asset-prices-the-master-inflation-correlation-6.png": {
+    "width": 1596,
+    "height": 535
+  },
+  "/imgs/blogs/cpi-and-asset-prices-the-master-inflation-correlation-7.png": {
+    "width": 1792,
+    "height": 1002
   },
   "/imgs/blogs/cpi-case-studies-the-prints-that-broke-the-tape-1.png": {
     "width": 1792,
@@ -16667,6 +16725,68 @@
     "width": 1792,
     "height": 1184
   },
+  "/imgs/blogs/inflation-and-gold-the-real-yield-story-1.png": {
+    "width": 1792,
+    "height": 902,
+    "cover": true
+  },
+  "/imgs/blogs/inflation-and-gold-the-real-yield-story-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/inflation-and-gold-the-real-yield-story-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/inflation-and-gold-the-real-yield-story-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/inflation-and-gold-the-real-yield-story-5.png": {
+    "width": 1792,
+    "height": 1318
+  },
+  "/imgs/blogs/inflation-and-gold-the-real-yield-story-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/inflation-and-gold-the-real-yield-story-7.png": {
+    "width": 1792,
+    "height": 746
+  },
+  "/imgs/blogs/inflation-and-stocks-the-correlation-that-flips-1.png": {
+    "width": 1792,
+    "height": 998,
+    "cover": true
+  },
+  "/imgs/blogs/inflation-and-stocks-the-correlation-that-flips-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/inflation-and-stocks-the-correlation-that-flips-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/inflation-and-stocks-the-correlation-that-flips-4.png": {
+    "width": 1792,
+    "height": 878
+  },
+  "/imgs/blogs/inflation-and-stocks-the-correlation-that-flips-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/inflation-and-stocks-the-correlation-that-flips-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/inflation-and-stocks-the-correlation-that-flips-7.png": {
+    "width": 1792,
+    "height": 1334
+  },
+  "/imgs/blogs/inflation-and-stocks-the-correlation-that-flips-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/inflation-and-the-fed-reaction-function-dot-plot-1.png": {
     "width": 1792,
     "height": 1077,
@@ -23611,6 +23731,35 @@
     "width": 1792,
     "height": 725
   },
+  "/imgs/blogs/pce-breakevens-and-the-forward-inflation-correlation-1.png": {
+    "width": 1792,
+    "height": 1169,
+    "cover": true
+  },
+  "/imgs/blogs/pce-breakevens-and-the-forward-inflation-correlation-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/pce-breakevens-and-the-forward-inflation-correlation-3.png": {
+    "width": 1650,
+    "height": 914
+  },
+  "/imgs/blogs/pce-breakevens-and-the-forward-inflation-correlation-4.png": {
+    "width": 1792,
+    "height": 933
+  },
+  "/imgs/blogs/pce-breakevens-and-the-forward-inflation-correlation-5.png": {
+    "width": 1619,
+    "height": 914
+  },
+  "/imgs/blogs/pce-breakevens-and-the-forward-inflation-correlation-6.png": {
+    "width": 1792,
+    "height": 1229
+  },
+  "/imgs/blogs/pce-breakevens-and-the-forward-inflation-correlation-7.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/pce-the-feds-preferred-inflation-gauge-1.png": {
     "width": 1792,
     "height": 1038,
@@ -24107,6 +24256,39 @@
   "/imgs/blogs/post-training-quantization-ptq-8.png": {
     "width": 1792,
     "height": 1160
+  },
+  "/imgs/blogs/ppi-the-upstream-inflation-correlation-1.png": {
+    "width": 1792,
+    "height": 766,
+    "cover": true
+  },
+  "/imgs/blogs/ppi-the-upstream-inflation-correlation-2.png": {
+    "width": 1626,
+    "height": 914
+  },
+  "/imgs/blogs/ppi-the-upstream-inflation-correlation-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/ppi-the-upstream-inflation-correlation-4.png": {
+    "width": 1631,
+    "height": 914
+  },
+  "/imgs/blogs/ppi-the-upstream-inflation-correlation-5.png": {
+    "width": 1602,
+    "height": 934
+  },
+  "/imgs/blogs/ppi-the-upstream-inflation-correlation-6.png": {
+    "width": 1792,
+    "height": 1370
+  },
+  "/imgs/blogs/ppi-the-upstream-inflation-correlation-7.png": {
+    "width": 1792,
+    "height": 847
+  },
+  "/imgs/blogs/ppi-the-upstream-inflation-correlation-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/ppi-the-upstream-signal-and-cpi-read-through-1.png": {
     "width": 1792,
