@@ -7004,6 +7004,43 @@
     "width": 1792,
     "height": 1235
   },
+  "/imgs/blogs/commodity-regulation-position-limits-and-the-cftc-1.png": {
+    "width": 1792,
+    "height": 1083,
+    "cover": true
+  },
+  "/imgs/blogs/commodity-regulation-position-limits-and-the-cftc-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/commodity-regulation-position-limits-and-the-cftc-3.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/commodity-regulation-position-limits-and-the-cftc-4.png": {
+    "width": 1792,
+    "height": 591
+  },
+  "/imgs/blogs/commodity-regulation-position-limits-and-the-cftc-5.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/commodity-regulation-position-limits-and-the-cftc-6.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/commodity-regulation-position-limits-and-the-cftc-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/commodity-regulation-position-limits-and-the-cftc-8.png": {
+    "width": 1588,
+    "height": 914
+  },
+  "/imgs/blogs/commodity-regulation-position-limits-and-the-cftc-9.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/commodity-trading-houses-glencore-vitol-trafigura-1.png": {
     "width": 1792,
     "height": 766,
@@ -8736,6 +8773,39 @@
     "width": 1792,
     "height": 1178
   },
+  "/imgs/blogs/crypto-regulation-securities-vs-commodities-and-the-turf-war-1.png": {
+    "width": 1792,
+    "height": 1184,
+    "cover": true
+  },
+  "/imgs/blogs/crypto-regulation-securities-vs-commodities-and-the-turf-war-2.png": {
+    "width": 1792,
+    "height": 694
+  },
+  "/imgs/blogs/crypto-regulation-securities-vs-commodities-and-the-turf-war-3.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/crypto-regulation-securities-vs-commodities-and-the-turf-war-4.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/crypto-regulation-securities-vs-commodities-and-the-turf-war-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/crypto-regulation-securities-vs-commodities-and-the-turf-war-6.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/crypto-regulation-securities-vs-commodities-and-the-turf-war-7.png": {
+    "width": 1792,
+    "height": 642
+  },
+  "/imgs/blogs/crypto-regulation-securities-vs-commodities-and-the-turf-war-8.png": {
+    "width": 1792,
+    "height": 1277
+  },
   "/imgs/blogs/crypto-vc-and-market-makers-1.png": {
     "width": 1792,
     "height": 876,
@@ -8979,6 +9049,39 @@
   "/imgs/blogs/cython-typed-python-that-compiles-to-c-8.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/data-and-privacy-law-gdpr-and-the-tech-business-model-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/data-and-privacy-law-gdpr-and-the-tech-business-model-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/data-and-privacy-law-gdpr-and-the-tech-business-model-3.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/data-and-privacy-law-gdpr-and-the-tech-business-model-4.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/data-and-privacy-law-gdpr-and-the-tech-business-model-5.png": {
+    "width": 1792,
+    "height": 1132
+  },
+  "/imgs/blogs/data-and-privacy-law-gdpr-and-the-tech-business-model-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/data-and-privacy-law-gdpr-and-the-tech-business-model-7.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/data-and-privacy-law-gdpr-and-the-tech-business-model-8.png": {
+    "width": 1792,
+    "height": 1184
   },
   "/imgs/blogs/data-constrained-scaling-laws-1.png": {
     "width": 1792,
@@ -11620,6 +11723,39 @@
     "width": 1792,
     "height": 1184
   },
+  "/imgs/blogs/energy-and-climate-regulation-carbon-pricing-and-the-ira-1.png": {
+    "width": 1792,
+    "height": 742,
+    "cover": true
+  },
+  "/imgs/blogs/energy-and-climate-regulation-carbon-pricing-and-the-ira-2.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/energy-and-climate-regulation-carbon-pricing-and-the-ira-3.png": {
+    "width": 1636,
+    "height": 914
+  },
+  "/imgs/blogs/energy-and-climate-regulation-carbon-pricing-and-the-ira-4.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/energy-and-climate-regulation-carbon-pricing-and-the-ira-5.png": {
+    "width": 1792,
+    "height": 1274
+  },
+  "/imgs/blogs/energy-and-climate-regulation-carbon-pricing-and-the-ira-6.png": {
+    "width": 1792,
+    "height": 990
+  },
+  "/imgs/blogs/energy-and-climate-regulation-carbon-pricing-and-the-ira-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/energy-and-climate-regulation-carbon-pricing-and-the-ira-8.png": {
+    "width": 1792,
+    "height": 878
+  },
   "/imgs/blogs/energy-geopolitics-opec-the-oil-weapon-and-the-european-gas-shock-1.png": {
     "width": 1792,
     "height": 1210,
@@ -11813,6 +11949,39 @@
   "/imgs/blogs/equities-stocks-owning-a-slice-of-growth-8.png": {
     "width": 1792,
     "height": 1208
+  },
+  "/imgs/blogs/esg-and-disclosure-mandates-sfdr-the-sec-climate-rule-greenwashing-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/esg-and-disclosure-mandates-sfdr-the-sec-climate-rule-greenwashing-2.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/esg-and-disclosure-mandates-sfdr-the-sec-climate-rule-greenwashing-3.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/esg-and-disclosure-mandates-sfdr-the-sec-climate-rule-greenwashing-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/esg-and-disclosure-mandates-sfdr-the-sec-climate-rule-greenwashing-5.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/esg-and-disclosure-mandates-sfdr-the-sec-climate-rule-greenwashing-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/esg-and-disclosure-mandates-sfdr-the-sec-climate-rule-greenwashing-7.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/esg-and-disclosure-mandates-sfdr-the-sec-climate-rule-greenwashing-8.png": {
+    "width": 1792,
+    "height": 1365
   },
   "/imgs/blogs/estimation-fermi-problems-quant-interviews-1.png": {
     "width": 1792,
@@ -24669,6 +24838,39 @@
     "width": 1792,
     "height": 1347
   },
+  "/imgs/blogs/pharma-regulation-fda-approvals-and-drug-pricing-1.png": {
+    "width": 1792,
+    "height": 1007,
+    "cover": true
+  },
+  "/imgs/blogs/pharma-regulation-fda-approvals-and-drug-pricing-2.png": {
+    "width": 1792,
+    "height": 1009
+  },
+  "/imgs/blogs/pharma-regulation-fda-approvals-and-drug-pricing-3.png": {
+    "width": 1792,
+    "height": 1379
+  },
+  "/imgs/blogs/pharma-regulation-fda-approvals-and-drug-pricing-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/pharma-regulation-fda-approvals-and-drug-pricing-5.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/pharma-regulation-fda-approvals-and-drug-pricing-6.png": {
+    "width": 951,
+    "height": 539
+  },
+  "/imgs/blogs/pharma-regulation-fda-approvals-and-drug-pricing-7.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/pharma-regulation-fda-approvals-and-drug-pricing-8.png": {
+    "width": 1792,
+    "height": 1009
+  },
   "/imgs/blogs/physical-gold-bars-coins-allocated-vs-unallocated-and-counterparty-risk-1.png": {
     "width": 1792,
     "height": 1238,
@@ -26828,6 +27030,39 @@
   "/imgs/blogs/reading-the-yield-curve-slope-inversion-recession-7.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/real-estate-and-housing-law-zoning-rent-control-and-the-gses-1.png": {
+    "width": 1792,
+    "height": 1427,
+    "cover": true
+  },
+  "/imgs/blogs/real-estate-and-housing-law-zoning-rent-control-and-the-gses-2.png": {
+    "width": 1792,
+    "height": 878
+  },
+  "/imgs/blogs/real-estate-and-housing-law-zoning-rent-control-and-the-gses-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/real-estate-and-housing-law-zoning-rent-control-and-the-gses-4.png": {
+    "width": 1792,
+    "height": 852
+  },
+  "/imgs/blogs/real-estate-and-housing-law-zoning-rent-control-and-the-gses-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/real-estate-and-housing-law-zoning-rent-control-and-the-gses-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/real-estate-and-housing-law-zoning-rent-control-and-the-gses-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/real-estate-and-housing-law-zoning-rent-control-and-the-gses-8.png": {
+    "width": 1790,
+    "height": 1453
   },
   "/imgs/blogs/real-estate-in-a-portfolio-1.png": {
     "width": 1792,
