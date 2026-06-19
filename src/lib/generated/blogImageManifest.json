@@ -9236,6 +9236,35 @@
     "width": 1792,
     "height": 1209
   },
+  "/imgs/blogs/cvar-expected-shortfall-and-asking-how-bad-is-bad-1.png": {
+    "width": 1602,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/cvar-expected-shortfall-and-asking-how-bad-is-bad-2.png": {
+    "width": 1692,
+    "height": 1013
+  },
+  "/imgs/blogs/cvar-expected-shortfall-and-asking-how-bad-is-bad-3.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/cvar-expected-shortfall-and-asking-how-bad-is-bad-4.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/cvar-expected-shortfall-and-asking-how-bad-is-bad-5.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/cvar-expected-shortfall-and-asking-how-bad-is-bad-6.png": {
+    "width": 1601,
+    "height": 1013
+  },
+  "/imgs/blogs/cvar-expected-shortfall-and-asking-how-bad-is-bad-7.png": {
+    "width": 1602,
+    "height": 1022
+  },
   "/imgs/blogs/cython-typed-python-that-compiles-to-c-1.png": {
     "width": 1792,
     "height": 1278,
@@ -11340,6 +11369,35 @@
     "width": 1792,
     "height": 406
   },
+  "/imgs/blogs/drawdown-and-the-underwater-curve-the-risk-you-actually-feel-1.png": {
+    "width": 1639,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/drawdown-and-the-underwater-curve-the-risk-you-actually-feel-2.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/drawdown-and-the-underwater-curve-the-risk-you-actually-feel-3.png": {
+    "width": 1648,
+    "height": 1015
+  },
+  "/imgs/blogs/drawdown-and-the-underwater-curve-the-risk-you-actually-feel-4.png": {
+    "width": 1618,
+    "height": 1013
+  },
+  "/imgs/blogs/drawdown-and-the-underwater-curve-the-risk-you-actually-feel-5.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/drawdown-and-the-underwater-curve-the-risk-you-actually-feel-6.png": {
+    "width": 1745,
+    "height": 1013
+  },
+  "/imgs/blogs/drawdown-and-the-underwater-curve-the-risk-you-actually-feel-7.png": {
+    "width": 1607,
+    "height": 1013
+  },
   "/imgs/blogs/dupont-framework-decomposing-roe-1.png": {
     "width": 1792,
     "height": 1217,
@@ -13112,6 +13170,35 @@
   "/imgs/blogs/faster-startup-imports-packaging-and-alternative-interpreters-8.png": {
     "width": 1792,
     "height": 1178
+  },
+  "/imgs/blogs/fat-tails-and-the-normal-distribution-trap-1.png": {
+    "width": 1602,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/fat-tails-and-the-normal-distribution-trap-2.png": {
+    "width": 1677,
+    "height": 1013
+  },
+  "/imgs/blogs/fat-tails-and-the-normal-distribution-trap-3.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/fat-tails-and-the-normal-distribution-trap-4.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/fat-tails-and-the-normal-distribution-trap-5.png": {
+    "width": 1672,
+    "height": 1013
+  },
+  "/imgs/blogs/fat-tails-and-the-normal-distribution-trap-6.png": {
+    "width": 1704,
+    "height": 1013
+  },
+  "/imgs/blogs/fat-tails-and-the-normal-distribution-trap-7.png": {
+    "width": 1743,
+    "height": 1013
   },
   "/imgs/blogs/fear-and-the-safe-haven-trade-how-gold-behaves-in-a-crisis-1.png": {
     "width": 1792,
@@ -30690,6 +30777,35 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/skew-kurtosis-and-the-higher-moments-the-shape-of-your-losses-1.png": {
+    "width": 1630,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/skew-kurtosis-and-the-higher-moments-the-shape-of-your-losses-2.png": {
+    "width": 1689,
+    "height": 1015
+  },
+  "/imgs/blogs/skew-kurtosis-and-the-higher-moments-the-shape-of-your-losses-3.png": {
+    "width": 1792,
+    "height": 1011
+  },
+  "/imgs/blogs/skew-kurtosis-and-the-higher-moments-the-shape-of-your-losses-4.png": {
+    "width": 1792,
+    "height": 1341
+  },
+  "/imgs/blogs/skew-kurtosis-and-the-higher-moments-the-shape-of-your-losses-5.png": {
+    "width": 1633,
+    "height": 1013
+  },
+  "/imgs/blogs/skew-kurtosis-and-the-higher-moments-the-shape-of-your-losses-6.png": {
+    "width": 1792,
+    "height": 935
+  },
+  "/imgs/blogs/skew-kurtosis-and-the-higher-moments-the-shape-of-your-losses-7.png": {
+    "width": 1703,
+    "height": 1013
+  },
   "/imgs/blogs/slime-rl-framework-deep-dive-1.png": {
     "width": 1792,
     "height": 1211,
@@ -38956,6 +39072,35 @@
     "width": 1792,
     "height": 1162
   },
+  "/imgs/blogs/value-at-risk-and-exactly-how-var-lies-1.png": {
+    "width": 1602,
+    "height": 1013,
+    "cover": true
+  },
+  "/imgs/blogs/value-at-risk-and-exactly-how-var-lies-2.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/value-at-risk-and-exactly-how-var-lies-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/value-at-risk-and-exactly-how-var-lies-4.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/value-at-risk-and-exactly-how-var-lies-5.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/value-at-risk-and-exactly-how-var-lies-6.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/value-at-risk-and-exactly-how-var-lies-7.png": {
+    "width": 1602,
+    "height": 1013
+  },
   "/imgs/blogs/valuing-the-hard-cases-banks-insurers-reits-cyclicals-1.png": {
     "width": 1792,
     "height": 1227,
@@ -39572,6 +39717,35 @@
   "/imgs/blogs/vn-inflation-sbv-and-the-domestic-asset-correlation-7.png": {
     "width": 1792,
     "height": 1386
+  },
+  "/imgs/blogs/volatility-and-why-it-is-not-risk-1.png": {
+    "width": 1792,
+    "height": 1241,
+    "cover": true
+  },
+  "/imgs/blogs/volatility-and-why-it-is-not-risk-2.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/volatility-and-why-it-is-not-risk-3.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/volatility-and-why-it-is-not-risk-4.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/volatility-and-why-it-is-not-risk-5.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/volatility-and-why-it-is-not-risk-6.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/volatility-and-why-it-is-not-risk-7.png": {
+    "width": 1792,
+    "height": 989
   },
   "/imgs/blogs/volatility-as-an-asset-owning-fear-1.png": {
     "width": 1602,
