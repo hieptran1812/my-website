@@ -127,7 +127,7 @@ H5 `building-an-fx-view-the-currency-trading-playbook-capstone` — The capstone
 - [x] Wave 1 — Track A (6) — Foundations
 - [x] Wave 2 — Track B (6) — What moves a currency
 - [x] Wave 3 — Track C (5) — The carry trade
-- [ ] Wave 4 — Track D (5) — The dollar system
+- [x] Wave 4 — Track D (5) — The dollar system
 - [ ] Wave 5 — Track E (6) — Central banks & intervention
 - [ ] Wave 6 — Track F (6) — Plumbing & instruments
 - [ ] Wave 7 — Track G (5) — Vietnam / EM-FX

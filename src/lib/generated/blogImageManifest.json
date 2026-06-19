@@ -13324,6 +13324,39 @@
     "width": 1792,
     "height": 1178
   },
+  "/imgs/blogs/eurodollars-and-the-offshore-dollar-system-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/eurodollars-and-the-offshore-dollar-system-2.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/eurodollars-and-the-offshore-dollar-system-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/eurodollars-and-the-offshore-dollar-system-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/eurodollars-and-the-offshore-dollar-system-5.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/eurodollars-and-the-offshore-dollar-system-6.png": {
+    "width": 1792,
+    "height": 1335
+  },
+  "/imgs/blogs/eurodollars-and-the-offshore-dollar-system-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/eurodollars-and-the-offshore-dollar-system-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/eval-01-taxonomy.png": {
     "width": 1792,
     "height": 169,
@@ -18757,6 +18790,39 @@
     "width": 1792,
     "height": 1414
   },
+  "/imgs/blogs/hunting-memory-leaks-and-bloat-1.png": {
+    "width": 1792,
+    "height": 1227,
+    "cover": true
+  },
+  "/imgs/blogs/hunting-memory-leaks-and-bloat-2.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/hunting-memory-leaks-and-bloat-3.png": {
+    "width": 1792,
+    "height": 1164
+  },
+  "/imgs/blogs/hunting-memory-leaks-and-bloat-4.png": {
+    "width": 1792,
+    "height": 692
+  },
+  "/imgs/blogs/hunting-memory-leaks-and-bloat-5.png": {
+    "width": 1792,
+    "height": 1245
+  },
+  "/imgs/blogs/hunting-memory-leaks-and-bloat-6.png": {
+    "width": 1792,
+    "height": 940
+  },
+  "/imgs/blogs/hunting-memory-leaks-and-bloat-7.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/hunting-memory-leaks-and-bloat-8.png": {
+    "width": 1792,
+    "height": 1209
+  },
   "/imgs/blogs/hunting-nans-and-infs-1.png": {
     "width": 1792,
     "height": 1162,
@@ -19925,6 +19991,39 @@
   "/imgs/blogs/insurance-sector-vietnam-float-yields-underwriting-7.png": {
     "width": 1792,
     "height": 1237
+  },
+  "/imgs/blogs/integer-overflow-and-floating-point-traps-1.png": {
+    "width": 1792,
+    "height": 1146,
+    "cover": true
+  },
+  "/imgs/blogs/integer-overflow-and-floating-point-traps-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/integer-overflow-and-floating-point-traps-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/integer-overflow-and-floating-point-traps-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/integer-overflow-and-floating-point-traps-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/integer-overflow-and-floating-point-traps-6.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/integer-overflow-and-floating-point-traps-7.png": {
+    "width": 1792,
+    "height": 1367
+  },
+  "/imgs/blogs/integer-overflow-and-floating-point-traps-8.png": {
+    "width": 1792,
+    "height": 917
   },
   "/imgs/blogs/intellectual-honesty-and-killing-your-own-ideas-1.png": {
     "width": 1792,
@@ -26094,6 +26193,39 @@
     "width": 1792,
     "height": 1134
   },
+  "/imgs/blogs/off-by-one-and-boundary-bugs-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/off-by-one-and-boundary-bugs-2.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/off-by-one-and-boundary-bugs-3.png": {
+    "width": 1792,
+    "height": 1341
+  },
+  "/imgs/blogs/off-by-one-and-boundary-bugs-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/off-by-one-and-boundary-bugs-5.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/off-by-one-and-boundary-bugs-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/off-by-one-and-boundary-bugs-7.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/off-by-one-and-boundary-bugs-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/offline-evaluation-metrics-recall-ndcg-map-mrr-1.png": {
     "width": 1792,
     "height": 1209,
@@ -30817,6 +30949,39 @@
   "/imgs/blogs/residual-vector-quantization-rvq-8.png": {
     "width": 1792,
     "height": 1266
+  },
+  "/imgs/blogs/resource-leaks-fds-sockets-and-connections-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/resource-leaks-fds-sockets-and-connections-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/resource-leaks-fds-sockets-and-connections-3.png": {
+    "width": 1792,
+    "height": 878
+  },
+  "/imgs/blogs/resource-leaks-fds-sockets-and-connections-4.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/resource-leaks-fds-sockets-and-connections-5.png": {
+    "width": 1792,
+    "height": 1313
+  },
+  "/imgs/blogs/resource-leaks-fds-sockets-and-connections-6.png": {
+    "width": 1792,
+    "height": 893
+  },
+  "/imgs/blogs/resource-leaks-fds-sockets-and-connections-7.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/resource-leaks-fds-sockets-and-connections-8.png": {
+    "width": 1792,
+    "height": 1155
   },
   "/imgs/blogs/resource-modeling-turning-a-domain-into-nouns-and-uris-1.png": {
     "width": 1792,
@@ -37029,6 +37194,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/the-dollar-as-a-wrecking-ball-for-emerging-markets-1.png": {
+    "width": 1792,
+    "height": 754,
+    "cover": true
+  },
+  "/imgs/blogs/the-dollar-as-a-wrecking-ball-for-emerging-markets-2.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/the-dollar-as-a-wrecking-ball-for-emerging-markets-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-as-a-wrecking-ball-for-emerging-markets-4.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/the-dollar-as-a-wrecking-ball-for-emerging-markets-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-as-a-wrecking-ball-for-emerging-markets-6.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/the-dollar-as-a-wrecking-ball-for-emerging-markets-7.png": {
+    "width": 1603,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-as-a-wrecking-ball-for-emerging-markets-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/the-dollar-cross-asset-gravity-1.png": {
     "width": 1792,
     "height": 1148,
@@ -37086,6 +37284,39 @@
   "/imgs/blogs/the-dollar-dxy-cross-asset-correlation-7.png": {
     "width": 1792,
     "height": 1305
+  },
+  "/imgs/blogs/the-dollar-smile-why-the-dollar-wins-in-boom-and-in-panic-1.png": {
+    "width": 1593,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/the-dollar-smile-why-the-dollar-wins-in-boom-and-in-panic-2.png": {
+    "width": 1792,
+    "height": 1428
+  },
+  "/imgs/blogs/the-dollar-smile-why-the-dollar-wins-in-boom-and-in-panic-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-smile-why-the-dollar-wins-in-boom-and-in-panic-4.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/the-dollar-smile-why-the-dollar-wins-in-boom-and-in-panic-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-smile-why-the-dollar-wins-in-boom-and-in-panic-6.png": {
+    "width": 1792,
+    "height": 878
+  },
+  "/imgs/blogs/the-dollar-smile-why-the-dollar-wins-in-boom-and-in-panic-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dollar-smile-why-the-dollar-wins-in-boom-and-in-panic-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/the-dollar-system-and-de-dollarization-1.png": {
     "width": 1792,
@@ -37148,6 +37379,39 @@
   "/imgs/blogs/the-dot-plot-and-sep-reading-the-path-7.png": {
     "width": 1792,
     "height": 880
+  },
+  "/imgs/blogs/the-dxy-and-the-dollars-special-role-in-the-world-1.png": {
+    "width": 1792,
+    "height": 1165,
+    "cover": true
+  },
+  "/imgs/blogs/the-dxy-and-the-dollars-special-role-in-the-world-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dxy-and-the-dollars-special-role-in-the-world-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dxy-and-the-dollars-special-role-in-the-world-4.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/the-dxy-and-the-dollars-special-role-in-the-world-5.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/the-dxy-and-the-dollars-special-role-in-the-world-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dxy-and-the-dollars-special-role-in-the-world-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-dxy-and-the-dollars-special-role-in-the-world-8.png": {
+    "width": 1792,
+    "height": 1199
   },
   "/imgs/blogs/the-edge-deployment-lifecycle-1.png": {
     "width": 1792,
@@ -37852,6 +38116,39 @@
   "/imgs/blogs/the-gil-explained-what-it-protects-and-what-it-costs-8.png": {
     "width": 1792,
     "height": 1154
+  },
+  "/imgs/blogs/the-global-dollar-shortage-and-central-bank-swap-lines-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/the-global-dollar-shortage-and-central-bank-swap-lines-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/the-global-dollar-shortage-and-central-bank-swap-lines-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-global-dollar-shortage-and-central-bank-swap-lines-4.png": {
+    "width": 1792,
+    "height": 1273
+  },
+  "/imgs/blogs/the-global-dollar-shortage-and-central-bank-swap-lines-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-global-dollar-shortage-and-central-bank-swap-lines-6.png": {
+    "width": 1792,
+    "height": 843
+  },
+  "/imgs/blogs/the-global-dollar-shortage-and-central-bank-swap-lines-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-global-dollar-shortage-and-central-bank-swap-lines-8.png": {
+    "width": 1792,
+    "height": 1250
   },
   "/imgs/blogs/the-global-economic-calendar-what-actually-moves-markets-1.png": {
     "width": 1792,
@@ -39328,6 +39625,39 @@
   "/imgs/blogs/the-no-yield-problem-how-a-metal-that-pays-nothing-can-be-worth-anything-7.png": {
     "width": 1701,
     "height": 914
+  },
+  "/imgs/blogs/the-null-the-undefined-and-the-empty-1.png": {
+    "width": 1792,
+    "height": 1237,
+    "cover": true
+  },
+  "/imgs/blogs/the-null-the-undefined-and-the-empty-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/the-null-the-undefined-and-the-empty-3.png": {
+    "width": 1792,
+    "height": 1196
+  },
+  "/imgs/blogs/the-null-the-undefined-and-the-empty-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/the-null-the-undefined-and-the-empty-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/the-null-the-undefined-and-the-empty-6.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/the-null-the-undefined-and-the-empty-7.png": {
+    "width": 1792,
+    "height": 925
+  },
+  "/imgs/blogs/the-null-the-undefined-and-the-empty-8.png": {
+    "width": 1792,
+    "height": 1165
   },
   "/imgs/blogs/the-offline-online-gap-and-why-your-metric-lied-1.png": {
     "width": 1792,
@@ -42838,6 +43168,39 @@
   "/imgs/blogs/usdvnd-dxy-and-the-rate-differential-correlation-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/use-after-free-and-memory-corruption-1.png": {
+    "width": 1792,
+    "height": 931,
+    "cover": true
+  },
+  "/imgs/blogs/use-after-free-and-memory-corruption-2.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/use-after-free-and-memory-corruption-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/use-after-free-and-memory-corruption-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/use-after-free-and-memory-corruption-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/use-after-free-and-memory-corruption-6.png": {
+    "width": 1792,
+    "height": 620
+  },
+  "/imgs/blogs/use-after-free-and-memory-corruption-7.png": {
+    "width": 1792,
+    "height": 1384
+  },
+  "/imgs/blogs/use-after-free-and-memory-corruption-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/using-options-to-shape-the-payoff-of-a-view-1.png": {
     "width": 1792,
