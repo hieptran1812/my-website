@@ -1470,6 +1470,35 @@
     "width": 1712,
     "height": 914
   },
+  "/imgs/blogs/asymmetry-and-the-art-of-the-high-conviction-bet-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/asymmetry-and-the-art-of-the-high-conviction-bet-2.png": {
+    "width": 1792,
+    "height": 1395
+  },
+  "/imgs/blogs/asymmetry-and-the-art-of-the-high-conviction-bet-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/asymmetry-and-the-art-of-the-high-conviction-bet-4.png": {
+    "width": 1591,
+    "height": 914
+  },
+  "/imgs/blogs/asymmetry-and-the-art-of-the-high-conviction-bet-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/asymmetry-and-the-art-of-the-high-conviction-bet-6.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/asymmetry-and-the-art-of-the-high-conviction-bet-7.png": {
+    "width": 1792,
+    "height": 1207
+  },
   "/imgs/blogs/async-in-practice-patterns-pitfalls-and-blocking-code-1.png": {
     "width": 1792,
     "height": 1277,
@@ -6780,6 +6809,35 @@
   "/imgs/blogs/choosing-right-llm-architecture-task-9.png": {
     "width": 1792,
     "height": 955
+  },
+  "/imgs/blogs/choosing-the-instrument-to-express-your-thesis-1.png": {
+    "width": 1792,
+    "height": 1148,
+    "cover": true
+  },
+  "/imgs/blogs/choosing-the-instrument-to-express-your-thesis-2.png": {
+    "width": 1792,
+    "height": 1340
+  },
+  "/imgs/blogs/choosing-the-instrument-to-express-your-thesis-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/choosing-the-instrument-to-express-your-thesis-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/choosing-the-instrument-to-express-your-thesis-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/choosing-the-instrument-to-express-your-thesis-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/choosing-the-instrument-to-express-your-thesis-7.png": {
+    "width": 1792,
+    "height": 1022
   },
   "/imgs/blogs/choosing-the-right-built-in-data-structure-list-dict-set-tuple-1.png": {
     "width": 1792,
@@ -14933,6 +14991,35 @@
     "width": 1792,
     "height": 1257
   },
+  "/imgs/blogs/from-conviction-to-size-the-bet-sizing-bridge-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/from-conviction-to-size-the-bet-sizing-bridge-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/from-conviction-to-size-the-bet-sizing-bridge-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/from-conviction-to-size-the-bet-sizing-bridge-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/from-conviction-to-size-the-bet-sizing-bridge-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/from-conviction-to-size-the-bet-sizing-bridge-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/from-conviction-to-size-the-bet-sizing-bridge-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/from-correlation-to-signal-building-a-macro-overlay-1.png": {
     "width": 1792,
     "height": 717,
@@ -17290,6 +17377,39 @@
   "/imgs/blogs/how-crypto-reacts-to-macro-news-7.png": {
     "width": 1792,
     "height": 809
+  },
+  "/imgs/blogs/how-global-policy-reaches-vietnam-the-fed-the-dollar-and-tariffs-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/how-global-policy-reaches-vietnam-the-fed-the-dollar-and-tariffs-2.png": {
+    "width": 1792,
+    "height": 1269
+  },
+  "/imgs/blogs/how-global-policy-reaches-vietnam-the-fed-the-dollar-and-tariffs-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-global-policy-reaches-vietnam-the-fed-the-dollar-and-tariffs-4.png": {
+    "width": 1603,
+    "height": 914
+  },
+  "/imgs/blogs/how-global-policy-reaches-vietnam-the-fed-the-dollar-and-tariffs-5.png": {
+    "width": 1792,
+    "height": 898
+  },
+  "/imgs/blogs/how-global-policy-reaches-vietnam-the-fed-the-dollar-and-tariffs-6.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/how-global-policy-reaches-vietnam-the-fed-the-dollar-and-tariffs-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-global-policy-reaches-vietnam-the-fed-the-dollar-and-tariffs-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/how-gold-is-priced-spot-the-london-fix-futures-and-the-troy-ounce-1.png": {
     "width": 1792,
@@ -22682,6 +22802,35 @@
   "/imgs/blogs/measuring-beta-to-data-surprises-an-event-study-in-python-7.png": {
     "width": 1619,
     "height": 914
+  },
+  "/imgs/blogs/measuring-conviction-how-sure-are-you-really-1.png": {
+    "width": 1792,
+    "height": 896,
+    "cover": true
+  },
+  "/imgs/blogs/measuring-conviction-how-sure-are-you-really-2.png": {
+    "width": 1792,
+    "height": 1207
+  },
+  "/imgs/blogs/measuring-conviction-how-sure-are-you-really-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/measuring-conviction-how-sure-are-you-really-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/measuring-conviction-how-sure-are-you-really-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/measuring-conviction-how-sure-are-you-really-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/measuring-conviction-how-sure-are-you-really-7.png": {
+    "width": 1792,
+    "height": 1079
   },
   "/imgs/blogs/media-sector-vietnam-small-sentiment-corner-1.png": {
     "width": 1792,
@@ -29390,6 +29539,35 @@
   "/imgs/blogs/relative-strength-reading-which-sector-leads-vn-index-7.png": {
     "width": 1792,
     "height": 710
+  },
+  "/imgs/blogs/relative-value-expressing-a-view-without-a-directional-bet-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/relative-value-expressing-a-view-without-a-directional-bet-2.png": {
+    "width": 1792,
+    "height": 879
+  },
+  "/imgs/blogs/relative-value-expressing-a-view-without-a-directional-bet-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/relative-value-expressing-a-view-without-a-directional-bet-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/relative-value-expressing-a-view-without-a-directional-bet-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/relative-value-expressing-a-view-without-a-directional-bet-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/relative-value-expressing-a-view-without-a-directional-bet-7.png": {
+    "width": 1792,
+    "height": 871
   },
   "/imgs/blogs/rent-vs-buy-the-real-math-1.png": {
     "width": 1792,
@@ -38162,6 +38340,39 @@
     "height": 715,
     "cover": true
   },
+  "/imgs/blogs/the-policy-to-asset-playbook-capstone-1.png": {
+    "width": 1792,
+    "height": 1031,
+    "cover": true
+  },
+  "/imgs/blogs/the-policy-to-asset-playbook-capstone-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-policy-to-asset-playbook-capstone-3.png": {
+    "width": 1792,
+    "height": 1079
+  },
+  "/imgs/blogs/the-policy-to-asset-playbook-capstone-4.png": {
+    "width": 1598,
+    "height": 1114
+  },
+  "/imgs/blogs/the-policy-to-asset-playbook-capstone-5.png": {
+    "width": 1792,
+    "height": 1150
+  },
+  "/imgs/blogs/the-policy-to-asset-playbook-capstone-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-policy-to-asset-playbook-capstone-7.png": {
+    "width": 1792,
+    "height": 905
+  },
+  "/imgs/blogs/the-policy-to-asset-playbook-capstone-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/the-price-of-insurance-and-the-taleb-universa-approach-to-tail-risk-1.png": {
     "width": 1602,
     "height": 1013,
@@ -38711,6 +38922,35 @@
   "/imgs/blogs/the-roofline-model-where-your-bottleneck-lives-8.png": {
     "width": 1792,
     "height": 991
+  },
+  "/imgs/blogs/the-sbv-toolkit-credit-quotas-rates-and-the-managed-dong-1.png": {
+    "width": 1792,
+    "height": 1184,
+    "cover": true
+  },
+  "/imgs/blogs/the-sbv-toolkit-credit-quotas-rates-and-the-managed-dong-2.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/the-sbv-toolkit-credit-quotas-rates-and-the-managed-dong-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-sbv-toolkit-credit-quotas-rates-and-the-managed-dong-4.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/the-sbv-toolkit-credit-quotas-rates-and-the-managed-dong-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-sbv-toolkit-credit-quotas-rates-and-the-managed-dong-6.png": {
+    "width": 1792,
+    "height": 820
+  },
+  "/imgs/blogs/the-sbv-toolkit-credit-quotas-rates-and-the-managed-dong-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/the-service-provider-stack-pb-admin-auditor-1.png": {
     "width": 1792,
@@ -41668,6 +41908,39 @@
     "width": 1792,
     "height": 736
   },
+  "/imgs/blogs/vietnam-policy-case-studies-2022-crackdown-to-2023-cuts-1.png": {
+    "width": 1792,
+    "height": 1165,
+    "cover": true
+  },
+  "/imgs/blogs/vietnam-policy-case-studies-2022-crackdown-to-2023-cuts-2.png": {
+    "width": 1792,
+    "height": 1003
+  },
+  "/imgs/blogs/vietnam-policy-case-studies-2022-crackdown-to-2023-cuts-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/vietnam-policy-case-studies-2022-crackdown-to-2023-cuts-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/vietnam-policy-case-studies-2022-crackdown-to-2023-cuts-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/vietnam-policy-case-studies-2022-crackdown-to-2023-cuts-6.png": {
+    "width": 1614,
+    "height": 914
+  },
+  "/imgs/blogs/vietnam-policy-case-studies-2022-crackdown-to-2023-cuts-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/vietnam-policy-case-studies-2022-crackdown-to-2023-cuts-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/vietnam-property-cycles-2007-2013-2022-1.png": {
     "width": 1792,
     "height": 1045,
@@ -42710,6 +42983,35 @@
   "/imgs/blogs/what-to-distill-response-feature-relation-8.png": {
     "width": 1792,
     "height": 1217
+  },
+  "/imgs/blogs/what-would-change-my-mind-defining-invalidation-upfront-1.png": {
+    "width": 1792,
+    "height": 639,
+    "cover": true
+  },
+  "/imgs/blogs/what-would-change-my-mind-defining-invalidation-upfront-2.png": {
+    "width": 1792,
+    "height": 1444
+  },
+  "/imgs/blogs/what-would-change-my-mind-defining-invalidation-upfront-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/what-would-change-my-mind-defining-invalidation-upfront-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/what-would-change-my-mind-defining-invalidation-upfront-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/what-would-change-my-mind-defining-invalidation-upfront-6.png": {
+    "width": 1792,
+    "height": 781
+  },
+  "/imgs/blogs/what-would-change-my-mind-defining-invalidation-upfront-7.png": {
+    "width": 1792,
+    "height": 801
   },
   "/imgs/blogs/whats-priced-in-the-question-behind-every-trade-1.png": {
     "width": 1792,
