@@ -6063,6 +6063,39 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/cfius-and-national-security-investment-screening-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/cfius-and-national-security-investment-screening-2.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/cfius-and-national-security-investment-screening-3.png": {
+    "width": 1792,
+    "height": 1005
+  },
+  "/imgs/blogs/cfius-and-national-security-investment-screening-4.png": {
+    "width": 1792,
+    "height": 1013
+  },
+  "/imgs/blogs/cfius-and-national-security-investment-screening-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/cfius-and-national-security-investment-screening-6.png": {
+    "width": 1792,
+    "height": 1360
+  },
+  "/imgs/blogs/cfius-and-national-security-investment-screening-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/cfius-and-national-security-investment-screening-8.png": {
+    "width": 1792,
+    "height": 1091
+  },
   "/imgs/blogs/chainlink-and-blockchain-oracles-1.png": {
     "width": 1792,
     "height": 1278,
@@ -12274,6 +12307,39 @@
   "/imgs/blogs/expected-value-techniques-quant-interviews-9.png": {
     "width": 1792,
     "height": 1026
+  },
+  "/imgs/blogs/export-controls-and-the-chip-war-1.png": {
+    "width": 1792,
+    "height": 1146,
+    "cover": true
+  },
+  "/imgs/blogs/export-controls-and-the-chip-war-2.png": {
+    "width": 1792,
+    "height": 748
+  },
+  "/imgs/blogs/export-controls-and-the-chip-war-3.png": {
+    "width": 1792,
+    "height": 1040
+  },
+  "/imgs/blogs/export-controls-and-the-chip-war-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/export-controls-and-the-chip-war-5.png": {
+    "width": 1792,
+    "height": 1313
+  },
+  "/imgs/blogs/export-controls-and-the-chip-war-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/export-controls-and-the-chip-war-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/export-controls-and-the-chip-war-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/factorization-machines-and-field-aware-fm-1.png": {
     "width": 1792,
@@ -28277,6 +28343,72 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/sanctions-evasion-enforcement-and-compliance-risk-1.png": {
+    "width": 1792,
+    "height": 746,
+    "cover": true
+  },
+  "/imgs/blogs/sanctions-evasion-enforcement-and-compliance-risk-2.png": {
+    "width": 1792,
+    "height": 1381
+  },
+  "/imgs/blogs/sanctions-evasion-enforcement-and-compliance-risk-3.png": {
+    "width": 1061,
+    "height": 519
+  },
+  "/imgs/blogs/sanctions-evasion-enforcement-and-compliance-risk-4.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/sanctions-evasion-enforcement-and-compliance-risk-5.png": {
+    "width": 1792,
+    "height": 807
+  },
+  "/imgs/blogs/sanctions-evasion-enforcement-and-compliance-risk-6.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/sanctions-evasion-enforcement-and-compliance-risk-7.png": {
+    "width": 1751,
+    "height": 910
+  },
+  "/imgs/blogs/sanctions-evasion-enforcement-and-compliance-risk-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/sanctions-law-ofac-the-sdn-list-and-secondary-sanctions-1.png": {
+    "width": 1792,
+    "height": 826,
+    "cover": true
+  },
+  "/imgs/blogs/sanctions-law-ofac-the-sdn-list-and-secondary-sanctions-2.png": {
+    "width": 1792,
+    "height": 667
+  },
+  "/imgs/blogs/sanctions-law-ofac-the-sdn-list-and-secondary-sanctions-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/sanctions-law-ofac-the-sdn-list-and-secondary-sanctions-4.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/sanctions-law-ofac-the-sdn-list-and-secondary-sanctions-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/sanctions-law-ofac-the-sdn-list-and-secondary-sanctions-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/sanctions-law-ofac-the-sdn-list-and-secondary-sanctions-7.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/sanctions-law-ofac-the-sdn-list-and-secondary-sanctions-8.png": {
+    "width": 1792,
+    "height": 1162
+  },
   "/imgs/blogs/sanctions-reserve-freezes-and-the-2022-turning-point-for-gold-1.png": {
     "width": 1792,
     "height": 813,
@@ -31391,6 +31523,76 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/the-2018-19-us-china-trade-war-1.png": {
+    "width": 1792,
+    "height": 888,
+    "cover": true
+  },
+  "/imgs/blogs/the-2018-19-us-china-trade-war-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2018-19-us-china-trade-war-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2018-19-us-china-trade-war-4.png": {
+    "width": 1792,
+    "height": 940
+  },
+  "/imgs/blogs/the-2018-19-us-china-trade-war-5.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/the-2018-19-us-china-trade-war-6.png": {
+    "width": 1792,
+    "height": 953
+  },
+  "/imgs/blogs/the-2018-19-us-china-trade-war-7.png": {
+    "width": 1792,
+    "height": 740
+  },
+  "/imgs/blogs/the-2018-19-us-china-trade-war-8.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2022-russia-sanctions-and-the-weaponization-of-finance-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/the-2022-russia-sanctions-and-the-weaponization-of-finance-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2022-russia-sanctions-and-the-weaponization-of-finance-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-2022-russia-sanctions-and-the-weaponization-of-finance-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2022-russia-sanctions-and-the-weaponization-of-finance-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-2022-russia-sanctions-and-the-weaponization-of-finance-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2022-russia-sanctions-and-the-weaponization-of-finance-7.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/the-2022-russia-sanctions-and-the-weaponization-of-finance-8.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2022-russia-sanctions-and-the-weaponization-of-finance-9.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/the-2026-audio-model-landscape-1.png": {
     "width": 1792,
     "height": 1235,
@@ -33405,6 +33607,39 @@
   "/imgs/blogs/the-learning-rate-is-almost-always-the-problem-8.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/the-legal-architecture-of-global-trade-1.png": {
+    "width": 1792,
+    "height": 848,
+    "cover": true
+  },
+  "/imgs/blogs/the-legal-architecture-of-global-trade-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-legal-architecture-of-global-trade-3.png": {
+    "width": 1792,
+    "height": 1353
+  },
+  "/imgs/blogs/the-legal-architecture-of-global-trade-4.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/the-legal-architecture-of-global-trade-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-legal-architecture-of-global-trade-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-legal-architecture-of-global-trade-7.png": {
+    "width": 1792,
+    "height": 972
+  },
+  "/imgs/blogs/the-legal-architecture-of-global-trade-8.png": {
+    "width": 1792,
+    "height": 1362
   },
   "/imgs/blogs/the-legal-mandate-of-a-central-bank-1.png": {
     "width": 1792,
