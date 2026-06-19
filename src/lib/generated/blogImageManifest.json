@@ -2328,6 +2328,11 @@
     "width": 1792,
     "height": 1418
   },
+  "/imgs/blogs/base-bull-and-bear-building-three-scenarios-1.png": {
+    "width": 1792,
+    "height": 1169,
+    "cover": true
+  },
   "/imgs/blogs/basel-iii-iv-bank-capital-rules-and-the-price-of-credit-1.png": {
     "width": 1792,
     "height": 955,
@@ -2390,6 +2395,11 @@
     "width": 1792,
     "height": 876
   },
+  "/imgs/blogs/behavioral-risk-tilt-doubling-down-and-the-disposition-effect-1.png": {
+    "width": 1792,
+    "height": 1314,
+    "cover": true
+  },
   "/imgs/blogs/benchmarking-python-correctly-timeit-pitfalls-and-statistics-1.png": {
     "width": 1792,
     "height": 902,
@@ -2422,6 +2432,11 @@
   "/imgs/blogs/benchmarking-python-correctly-timeit-pitfalls-and-statistics-8.png": {
     "width": 1792,
     "height": 1183
+  },
+  "/imgs/blogs/bernanke-qe-2008-14-the-birth-of-balance-sheet-policy-1.png": {
+    "width": 1792,
+    "height": 768,
+    "cover": true
   },
   "/imgs/blogs/best-org-in-huggingface-20251224151045.png": {
     "width": 1792,
@@ -6057,6 +6072,11 @@
   "/imgs/blogs/cash-treasury-and-counterparty-risk-7.png": {
     "width": 1792,
     "height": 1266
+  },
+  "/imgs/blogs/catalysts-and-timing-why-cheap-can-stay-cheap-for-years-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
   },
   "/imgs/blogs/catalysts-earnings-calls-and-guidance-1.png": {
     "width": 1792,
@@ -10247,6 +10267,35 @@
     "width": 1792,
     "height": 1245
   },
+  "/imgs/blogs/decision-trees-for-event-driven-views-1.png": {
+    "width": 1792,
+    "height": 960,
+    "cover": true
+  },
+  "/imgs/blogs/decision-trees-for-event-driven-views-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/decision-trees-for-event-driven-views-3.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/decision-trees-for-event-driven-views-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/decision-trees-for-event-driven-views-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/decision-trees-for-event-driven-views-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/decision-trees-for-event-driven-views-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250807133820.png": {
     "width": 1792,
     "height": 626,
@@ -11579,6 +11628,11 @@
   "/imgs/blogs/dpo-03-pipeline.png": {
     "width": 1792,
     "height": 406
+  },
+  "/imgs/blogs/draghi-2012-whatever-it-takes-and-the-spread-machine-1.png": {
+    "width": 1792,
+    "height": 820,
+    "cover": true
   },
   "/imgs/blogs/drawdown-and-the-underwater-curve-the-risk-you-actually-feel-1.png": {
     "width": 1639,
@@ -13216,6 +13270,35 @@
   "/imgs/blogs/expected-value-techniques-quant-interviews-9.png": {
     "width": 1792,
     "height": 1026
+  },
+  "/imgs/blogs/expected-value-the-only-math-a-view-really-needs-1.png": {
+    "width": 1792,
+    "height": 819,
+    "cover": true
+  },
+  "/imgs/blogs/expected-value-the-only-math-a-view-really-needs-2.png": {
+    "width": 1792,
+    "height": 1415
+  },
+  "/imgs/blogs/expected-value-the-only-math-a-view-really-needs-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/expected-value-the-only-math-a-view-really-needs-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/expected-value-the-only-math-a-view-really-needs-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/expected-value-the-only-math-a-view-really-needs-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/expected-value-the-only-math-a-view-really-needs-7.png": {
+    "width": 1792,
+    "height": 783
   },
   "/imgs/blogs/export-controls-and-the-chip-war-1.png": {
     "width": 1792,
@@ -19497,6 +19580,11 @@
   "/imgs/blogs/jane-street-playbook-culture-ocaml-and-the-trading-games-7.png": {
     "width": 1792,
     "height": 1277
+  },
+  "/imgs/blogs/japan-and-the-zero-bound-zirp-qe-and-ycc-1.png": {
+    "width": 1792,
+    "height": 1183,
+    "cover": true
   },
   "/imgs/blogs/jerome-powell-and-the-modern-fed-chair-1.png": {
     "width": 1792,
@@ -29630,6 +29718,35 @@
     "width": 1792,
     "height": 1237
   },
+  "/imgs/blogs/risk-limits-and-how-they-get-gamed-1.png": {
+    "width": 1792,
+    "height": 1384,
+    "cover": true
+  },
+  "/imgs/blogs/risk-limits-and-how-they-get-gamed-2.png": {
+    "width": 1792,
+    "height": 1031
+  },
+  "/imgs/blogs/risk-limits-and-how-they-get-gamed-3.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/risk-limits-and-how-they-get-gamed-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/risk-limits-and-how-they-get-gamed-5.png": {
+    "width": 1603,
+    "height": 1013
+  },
+  "/imgs/blogs/risk-limits-and-how-they-get-gamed-6.png": {
+    "width": 1639,
+    "height": 1015
+  },
+  "/imgs/blogs/risk-limits-and-how-they-get-gamed-7.png": {
+    "width": 1681,
+    "height": 1013
+  },
   "/imgs/blogs/risk-management-around-events-gaps-sizing-stops-1.png": {
     "width": 1792,
     "height": 1210,
@@ -32813,6 +32930,11 @@
   "/imgs/blogs/stress-testing-and-scenario-analysis-breaking-the-portfolio-on-purpose-7.png": {
     "width": 1779,
     "height": 1011
+  },
+  "/imgs/blogs/stress-testing-your-thesis-with-a-pre-mortem-1.png": {
+    "width": 1792,
+    "height": 1157,
+    "cover": true
   },
   "/imgs/blogs/structural-shifts-why-todays-correlations-arent-yesterdays-1.png": {
     "width": 1792,
@@ -37725,6 +37847,11 @@
     "width": 1792,
     "height": 1251
   },
+  "/imgs/blogs/the-plaza-accord-1985-engineering-a-weaker-dollar-1.png": {
+    "width": 1792,
+    "height": 715,
+    "cover": true
+  },
   "/imgs/blogs/the-price-of-insurance-and-the-taleb-universa-approach-to-tail-risk-1.png": {
     "width": 1602,
     "height": 1013,
@@ -38179,6 +38306,35 @@
   "/imgs/blogs/the-right-way-to-split-and-evaluate-8.png": {
     "width": 1792,
     "height": 1228
+  },
+  "/imgs/blogs/the-risk-manager-vs-the-trader-the-productive-conflict-1.png": {
+    "width": 1792,
+    "height": 1250,
+    "cover": true
+  },
+  "/imgs/blogs/the-risk-manager-vs-the-trader-the-productive-conflict-2.png": {
+    "width": 1603,
+    "height": 1013
+  },
+  "/imgs/blogs/the-risk-manager-vs-the-trader-the-productive-conflict-3.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/the-risk-manager-vs-the-trader-the-productive-conflict-4.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/the-risk-manager-vs-the-trader-the-productive-conflict-5.png": {
+    "width": 1602,
+    "height": 1013
+  },
+  "/imgs/blogs/the-risk-manager-vs-the-trader-the-productive-conflict-6.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/the-risk-manager-vs-the-trader-the-productive-conflict-7.png": {
+    "width": 1618,
+    "height": 1013
   },
   "/imgs/blogs/the-roofline-model-compute-bound-vs-memory-bound-1.png": {
     "width": 1792,
@@ -38983,6 +39139,35 @@
   "/imgs/blogs/theta-trading-the-clock-and-the-price-of-being-long-options-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/thinking-in-probabilities-not-predictions-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/thinking-in-probabilities-not-predictions-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/thinking-in-probabilities-not-predictions-3.png": {
+    "width": 1792,
+    "height": 858
+  },
+  "/imgs/blogs/thinking-in-probabilities-not-predictions-4.png": {
+    "width": 1624,
+    "height": 914
+  },
+  "/imgs/blogs/thinking-in-probabilities-not-predictions-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/thinking-in-probabilities-not-predictions-6.png": {
+    "width": 1792,
+    "height": 1002
+  },
+  "/imgs/blogs/thinking-in-probabilities-not-predictions-7.png": {
+    "width": 1792,
+    "height": 772
   },
   "/imgs/blogs/threading-done-right-io-bound-concurrency-and-its-limits-1.png": {
     "width": 1792,
@@ -41486,6 +41671,11 @@
   "/imgs/blogs/volatility-targeting-sizing-by-risk-not-by-dollars-7.png": {
     "width": 1613,
     "height": 1013
+  },
+  "/imgs/blogs/volcker-1979-82-how-20-percent-rates-repriced-everything-1.png": {
+    "width": 1792,
+    "height": 1198,
+    "cover": true
   },
   "/imgs/blogs/volume-tools-vwap-obv-profile-1.png": {
     "width": 1792,
