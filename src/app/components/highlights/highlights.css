@@ -220,6 +220,8 @@
   max-height: 4.2em;
   overflow-y: auto;
   line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 .bh-translate-result {
   min-height: 38px;

@@ -352,7 +352,15 @@ export default function BlogHighlighter({ slug, containerRef }: Props) {
   // Open the translate popover from the selection toolbar.
   const openTranslate = useCallback(() => {
     if (!toolbar) return;
-    const text = toolbar.range.toString().replace(/\s+/g, " ").trim();
+    // Collapse runs of spaces/tabs but PRESERVE line/paragraph breaks — Google
+    // translates with proper sentence boundaries and returns structured text,
+    // instead of one run-on blob. (.bh-translate-text renders with pre-wrap.)
+    const text = toolbar.range
+      .toString()
+      .replace(/[ \t]+/g, " ")
+      .replace(/[ \t]*\n[ \t]*/g, "\n")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
     if (!text) {
       setToolbar(null);
       return;
