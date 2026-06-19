@@ -1104,6 +1104,35 @@
     "width": 1792,
     "height": 1053
   },
+  "/imgs/blogs/antitrust-101-sherman-clayton-and-merger-review-1.png": {
+    "width": 1792,
+    "height": 1184,
+    "cover": true
+  },
+  "/imgs/blogs/antitrust-101-sherman-clayton-and-merger-review-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/antitrust-101-sherman-clayton-and-merger-review-3.png": {
+    "width": 1792,
+    "height": 1389
+  },
+  "/imgs/blogs/antitrust-101-sherman-clayton-and-merger-review-4.png": {
+    "width": 1792,
+    "height": 1341
+  },
+  "/imgs/blogs/antitrust-101-sherman-clayton-and-merger-review-5.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/antitrust-101-sherman-clayton-and-merger-review-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/antitrust-101-sherman-clayton-and-merger-review-7.png": {
+    "width": 1606,
+    "height": 914
+  },
   "/imgs/blogs/any-order-flexible-length-masked-diffusion-20260315213706.png": {
     "width": 1498,
     "height": 612,
@@ -2435,6 +2464,39 @@
   "/imgs/blogs/beyond-grpo-dapo-dr-grpo-gspo-9.png": {
     "width": 1792,
     "height": 979
+  },
+  "/imgs/blogs/big-tech-antitrust-the-new-brandeisians-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/big-tech-antitrust-the-new-brandeisians-2.png": {
+    "width": 1792,
+    "height": 1377
+  },
+  "/imgs/blogs/big-tech-antitrust-the-new-brandeisians-3.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/big-tech-antitrust-the-new-brandeisians-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/big-tech-antitrust-the-new-brandeisians-5.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/big-tech-antitrust-the-new-brandeisians-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/big-tech-antitrust-the-new-brandeisians-7.png": {
+    "width": 1792,
+    "height": 794
+  },
+  "/imgs/blogs/big-tech-antitrust-the-new-brandeisians-8.png": {
+    "width": 1792,
+    "height": 972
   },
   "/imgs/blogs/big-three-blackrock-vanguard-state-street-1.png": {
     "width": 1792,
@@ -7653,6 +7715,39 @@
   "/imgs/blogs/corporate-credit-investment-grade-high-yield-spreads-8.png": {
     "width": 1792,
     "height": 1450
+  },
+  "/imgs/blogs/corporate-governance-fiduciary-duty-and-shareholder-activism-1.png": {
+    "width": 1792,
+    "height": 1184,
+    "cover": true
+  },
+  "/imgs/blogs/corporate-governance-fiduciary-duty-and-shareholder-activism-2.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/corporate-governance-fiduciary-duty-and-shareholder-activism-3.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/corporate-governance-fiduciary-duty-and-shareholder-activism-4.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/corporate-governance-fiduciary-duty-and-shareholder-activism-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/corporate-governance-fiduciary-duty-and-shareholder-activism-6.png": {
+    "width": 1792,
+    "height": 781
+  },
+  "/imgs/blogs/corporate-governance-fiduciary-duty-and-shareholder-activism-7.png": {
+    "width": 1611,
+    "height": 914
+  },
+  "/imgs/blogs/corporate-governance-fiduciary-duty-and-shareholder-activism-8.png": {
+    "width": 1792,
+    "height": 1101
   },
   "/imgs/blogs/correlation-and-the-diversification-free-lunch-1.png": {
     "width": 1499,
@@ -13966,6 +14061,35 @@
     "width": 1792,
     "height": 1077
   },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-correlation-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-correlation-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-correlation-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-correlation-4.png": {
+    "width": 1679,
+    "height": 914
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-correlation-5.png": {
+    "width": 1625,
+    "height": 914
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-correlation-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/gdp-retail-sales-and-the-consumer-correlation-7.png": {
+    "width": 1792,
+    "height": 730
+  },
   "/imgs/blogs/generative-adversarial-networks-and-why-they-lost-1.png": {
     "width": 1792,
     "height": 691,
@@ -17614,6 +17738,35 @@
     "width": 1792,
     "height": 827
   },
+  "/imgs/blogs/ism-pmi-the-leading-correlation-with-cyclicals-1.png": {
+    "width": 1792,
+    "height": 913,
+    "cover": true
+  },
+  "/imgs/blogs/ism-pmi-the-leading-correlation-with-cyclicals-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/ism-pmi-the-leading-correlation-with-cyclicals-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/ism-pmi-the-leading-correlation-with-cyclicals-4.png": {
+    "width": 1627,
+    "height": 914
+  },
+  "/imgs/blogs/ism-pmi-the-leading-correlation-with-cyclicals-5.png": {
+    "width": 1792,
+    "height": 1336
+  },
+  "/imgs/blogs/ism-pmi-the-leading-correlation-with-cyclicals-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/ism-pmi-the-leading-correlation-with-cyclicals-7.png": {
+    "width": 1792,
+    "height": 1143
+  },
   "/imgs/blogs/ito-integral-itos-lemma-math-for-quants-1.png": {
     "width": 1792,
     "height": 1278,
@@ -20664,6 +20817,39 @@
     "width": 1792,
     "height": 1061
   },
+  "/imgs/blogs/merger-arbitrage-trading-regulatory-deal-risk-1.png": {
+    "width": 1792,
+    "height": 1213,
+    "cover": true
+  },
+  "/imgs/blogs/merger-arbitrage-trading-regulatory-deal-risk-2.png": {
+    "width": 1792,
+    "height": 1427
+  },
+  "/imgs/blogs/merger-arbitrage-trading-regulatory-deal-risk-3.png": {
+    "width": 1792,
+    "height": 968
+  },
+  "/imgs/blogs/merger-arbitrage-trading-regulatory-deal-risk-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/merger-arbitrage-trading-regulatory-deal-risk-5.png": {
+    "width": 1792,
+    "height": 1350
+  },
+  "/imgs/blogs/merger-arbitrage-trading-regulatory-deal-risk-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/merger-arbitrage-trading-regulatory-deal-risk-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/merger-arbitrage-trading-regulatory-deal-risk-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/mergers-and-acquisitions-value-created-or-destroyed-1.png": {
     "width": 1792,
     "height": 1241,
@@ -22564,6 +22750,35 @@
   "/imgs/blogs/neural-collaborative-filtering-and-its-critique-8.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/nfp-and-asset-prices-the-king-of-data-correlation-1.png": {
+    "width": 1792,
+    "height": 1110,
+    "cover": true
+  },
+  "/imgs/blogs/nfp-and-asset-prices-the-king-of-data-correlation-2.png": {
+    "width": 1602,
+    "height": 943
+  },
+  "/imgs/blogs/nfp-and-asset-prices-the-king-of-data-correlation-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/nfp-and-asset-prices-the-king-of-data-correlation-4.png": {
+    "width": 1689,
+    "height": 914
+  },
+  "/imgs/blogs/nfp-and-asset-prices-the-king-of-data-correlation-5.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/nfp-and-asset-prices-the-king-of-data-correlation-6.png": {
+    "width": 1636,
+    "height": 914
+  },
+  "/imgs/blogs/nfp-and-asset-prices-the-king-of-data-correlation-7.png": {
+    "width": 1792,
+    "height": 1210
   },
   "/imgs/blogs/noise-schedules-and-the-parameterization-zoo-1.png": {
     "width": 1792,
@@ -30726,6 +30941,39 @@
     "width": 1792,
     "height": 1178
   },
+  "/imgs/blogs/tax-law-as-a-market-force-1.png": {
+    "width": 1792,
+    "height": 912,
+    "cover": true
+  },
+  "/imgs/blogs/tax-law-as-a-market-force-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/tax-law-as-a-market-force-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/tax-law-as-a-market-force-4.png": {
+    "width": 1792,
+    "height": 664
+  },
+  "/imgs/blogs/tax-law-as-a-market-force-5.png": {
+    "width": 1792,
+    "height": 1005
+  },
+  "/imgs/blogs/tax-law-as-a-market-force-6.png": {
+    "width": 1792,
+    "height": 1037
+  },
+  "/imgs/blogs/tax-law-as-a-market-force-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/tax-law-as-a-market-force-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/taxing-rental-income-1.png": {
     "width": 1792,
     "height": 1221,
@@ -31109,6 +31357,39 @@
   "/imgs/blogs/the-1970s-bull-from-35-to-850-the-first-great-monetary-panic-7.png": {
     "width": 1792,
     "height": 1162
+  },
+  "/imgs/blogs/the-2017-tcja-and-the-repatriation-trade-1.png": {
+    "width": 1792,
+    "height": 1163,
+    "cover": true
+  },
+  "/imgs/blogs/the-2017-tcja-and-the-repatriation-trade-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2017-tcja-and-the-repatriation-trade-3.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/the-2017-tcja-and-the-repatriation-trade-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2017-tcja-and-the-repatriation-trade-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-2017-tcja-and-the-repatriation-trade-6.png": {
+    "width": 1792,
+    "height": 1370
+  },
+  "/imgs/blogs/the-2017-tcja-and-the-repatriation-trade-7.png": {
+    "width": 1792,
+    "height": 950
+  },
+  "/imgs/blogs/the-2017-tcja-and-the-repatriation-trade-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/the-2026-audio-model-landscape-1.png": {
     "width": 1792,
@@ -31539,6 +31820,35 @@
   "/imgs/blogs/the-business-cycle-and-the-investment-clock-8.png": {
     "width": 1792,
     "height": 1218
+  },
+  "/imgs/blogs/the-business-cycle-correlation-clock-1.png": {
+    "width": 1792,
+    "height": 1291,
+    "cover": true
+  },
+  "/imgs/blogs/the-business-cycle-correlation-clock-2.png": {
+    "width": 1603,
+    "height": 914
+  },
+  "/imgs/blogs/the-business-cycle-correlation-clock-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-business-cycle-correlation-clock-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-business-cycle-correlation-clock-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-business-cycle-correlation-clock-6.png": {
+    "width": 1792,
+    "height": 1348
+  },
+  "/imgs/blogs/the-business-cycle-correlation-clock-7.png": {
+    "width": 1792,
+    "height": 1334
   },
   "/imgs/blogs/the-business-cycle-four-phases-for-traders-1.png": {
     "width": 1792,
@@ -35115,6 +35425,35 @@
     "width": 1792,
     "height": 1210
   },
+  "/imgs/blogs/the-yield-curve-as-a-growth-signal-and-its-asset-correlation-1.png": {
+    "width": 1792,
+    "height": 1271,
+    "cover": true
+  },
+  "/imgs/blogs/the-yield-curve-as-a-growth-signal-and-its-asset-correlation-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-yield-curve-as-a-growth-signal-and-its-asset-correlation-3.png": {
+    "width": 1680,
+    "height": 914
+  },
+  "/imgs/blogs/the-yield-curve-as-a-growth-signal-and-its-asset-correlation-4.png": {
+    "width": 1792,
+    "height": 1219
+  },
+  "/imgs/blogs/the-yield-curve-as-a-growth-signal-and-its-asset-correlation-5.png": {
+    "width": 1602,
+    "height": 934
+  },
+  "/imgs/blogs/the-yield-curve-as-a-growth-signal-and-its-asset-correlation-6.png": {
+    "width": 1713,
+    "height": 914
+  },
+  "/imgs/blogs/the-yield-curve-as-a-growth-signal-and-its-asset-correlation-7.png": {
+    "width": 1792,
+    "height": 1148
+  },
   "/imgs/blogs/the-yield-curve-explained-the-most-important-chart-in-finance-1.png": {
     "width": 1792,
     "height": 1063,
@@ -36612,6 +36951,35 @@
   "/imgs/blogs/underwriting-a-property-deal-7.png": {
     "width": 1792,
     "height": 1210
+  },
+  "/imgs/blogs/unemployment-claims-and-the-recession-correlation-1.png": {
+    "width": 1792,
+    "height": 1184,
+    "cover": true
+  },
+  "/imgs/blogs/unemployment-claims-and-the-recession-correlation-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/unemployment-claims-and-the-recession-correlation-3.png": {
+    "width": 1792,
+    "height": 1302
+  },
+  "/imgs/blogs/unemployment-claims-and-the-recession-correlation-4.png": {
+    "width": 1659,
+    "height": 914
+  },
+  "/imgs/blogs/unemployment-claims-and-the-recession-correlation-5.png": {
+    "width": 1705,
+    "height": 914
+  },
+  "/imgs/blogs/unemployment-claims-and-the-recession-correlation-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/unemployment-claims-and-the-recession-correlation-7.png": {
+    "width": 1792,
+    "height": 1014
   },
   "/imgs/blogs/unit-economics-and-the-value-chain-1.png": {
     "width": 1792,
