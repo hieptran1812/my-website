@@ -11068,6 +11068,39 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/csp-channels-goroutines-and-the-select-statement-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/csp-channels-goroutines-and-the-select-statement-2.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/csp-channels-goroutines-and-the-select-statement-3.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/csp-channels-goroutines-and-the-select-statement-4.png": {
+    "width": 1792,
+    "height": 1428
+  },
+  "/imgs/blogs/csp-channels-goroutines-and-the-select-statement-5.png": {
+    "width": 1792,
+    "height": 1275
+  },
+  "/imgs/blogs/csp-channels-goroutines-and-the-select-statement-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/csp-channels-goroutines-and-the-select-statement-7.png": {
+    "width": 1792,
+    "height": 910
+  },
+  "/imgs/blogs/csp-channels-goroutines-and-the-select-statement-8.png": {
+    "width": 1792,
+    "height": 1353
+  },
   "/imgs/blogs/cuda-graph-1.png": {
     "width": 1792,
     "height": 1278,
@@ -11509,6 +11542,39 @@
   "/imgs/blogs/data-locality-and-zero-copy-memoryview-buffers-and-mmap-8.png": {
     "width": 1792,
     "height": 1201
+  },
+  "/imgs/blogs/data-parallelism-fork-join-and-work-stealing-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/data-parallelism-fork-join-and-work-stealing-2.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/data-parallelism-fork-join-and-work-stealing-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/data-parallelism-fork-join-and-work-stealing-4.png": {
+    "width": 1792,
+    "height": 1330
+  },
+  "/imgs/blogs/data-parallelism-fork-join-and-work-stealing-5.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/data-parallelism-fork-join-and-work-stealing-6.png": {
+    "width": 1792,
+    "height": 1193
+  },
+  "/imgs/blogs/data-parallelism-fork-join-and-work-stealing-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/data-parallelism-fork-join-and-work-stealing-8.png": {
+    "width": 1792,
+    "height": 1318
   },
   "/imgs/blogs/data-quality-scaling-laws-1.png": {
     "width": 1792,
@@ -26464,6 +26530,39 @@
     "width": 1792,
     "height": 917
   },
+  "/imgs/blogs/message-passing-vs-shared-memory-and-the-csp-philosophy-1.png": {
+    "width": 1792,
+    "height": 1434,
+    "cover": true
+  },
+  "/imgs/blogs/message-passing-vs-shared-memory-and-the-csp-philosophy-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/message-passing-vs-shared-memory-and-the-csp-philosophy-3.png": {
+    "width": 1792,
+    "height": 746
+  },
+  "/imgs/blogs/message-passing-vs-shared-memory-and-the-csp-philosophy-4.png": {
+    "width": 1792,
+    "height": 972
+  },
+  "/imgs/blogs/message-passing-vs-shared-memory-and-the-csp-philosophy-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/message-passing-vs-shared-memory-and-the-csp-philosophy-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/message-passing-vs-shared-memory-and-the-csp-philosophy-7.png": {
+    "width": 1792,
+    "height": 1370
+  },
+  "/imgs/blogs/message-passing-vs-shared-memory-and-the-csp-philosophy-8.png": {
+    "width": 1792,
+    "height": 1397
+  },
   "/imgs/blogs/metals-copper-silver-the-economys-pulse-1.png": {
     "width": 1792,
     "height": 1165,
@@ -37343,6 +37442,39 @@
     "width": 1792,
     "height": 954
   },
+  "/imgs/blogs/software-transactional-memory-and-optimistic-concurrency-1.png": {
+    "width": 1792,
+    "height": 1242,
+    "cover": true
+  },
+  "/imgs/blogs/software-transactional-memory-and-optimistic-concurrency-2.png": {
+    "width": 1792,
+    "height": 992
+  },
+  "/imgs/blogs/software-transactional-memory-and-optimistic-concurrency-3.png": {
+    "width": 1792,
+    "height": 1274
+  },
+  "/imgs/blogs/software-transactional-memory-and-optimistic-concurrency-4.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/software-transactional-memory-and-optimistic-concurrency-5.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/software-transactional-memory-and-optimistic-concurrency-6.png": {
+    "width": 1792,
+    "height": 1302
+  },
+  "/imgs/blogs/software-transactional-memory-and-optimistic-concurrency-7.png": {
+    "width": 1792,
+    "height": 1307
+  },
+  "/imgs/blogs/software-transactional-memory-and-optimistic-concurrency-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/sora-and-the-world-simulator-thesis-1.png": {
     "width": 1792,
     "height": 1237,
@@ -40093,6 +40225,39 @@
   "/imgs/blogs/the-accuracy-latency-pareto-frontier-8.png": {
     "width": 1792,
     "height": 1184
+  },
+  "/imgs/blogs/the-actor-model-mailboxes-isolation-and-supervision-1.png": {
+    "width": 1792,
+    "height": 795,
+    "cover": true
+  },
+  "/imgs/blogs/the-actor-model-mailboxes-isolation-and-supervision-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-actor-model-mailboxes-isolation-and-supervision-3.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/the-actor-model-mailboxes-isolation-and-supervision-4.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-actor-model-mailboxes-isolation-and-supervision-5.png": {
+    "width": 1792,
+    "height": 1335
+  },
+  "/imgs/blogs/the-actor-model-mailboxes-isolation-and-supervision-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-actor-model-mailboxes-isolation-and-supervision-7.png": {
+    "width": 1792,
+    "height": 1444
+  },
+  "/imgs/blogs/the-actor-model-mailboxes-isolation-and-supervision-8.png": {
+    "width": 1792,
+    "height": 1367
   },
   "/imgs/blogs/the-analysts-edge-playbook-the-complete-view-forming-process-1.png": {
     "width": 1792,
