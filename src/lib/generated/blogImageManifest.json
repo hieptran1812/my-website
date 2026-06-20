@@ -1353,6 +1353,72 @@
     "height": 612,
     "cover": true
   },
+  "/imgs/blogs/api-gateways-routing-auth-rate-limiting-and-the-bff-pattern-1.png": {
+    "width": 1792,
+    "height": 864,
+    "cover": true
+  },
+  "/imgs/blogs/api-gateways-routing-auth-rate-limiting-and-the-bff-pattern-2.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/api-gateways-routing-auth-rate-limiting-and-the-bff-pattern-3.png": {
+    "width": 1792,
+    "height": 1294
+  },
+  "/imgs/blogs/api-gateways-routing-auth-rate-limiting-and-the-bff-pattern-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/api-gateways-routing-auth-rate-limiting-and-the-bff-pattern-5.png": {
+    "width": 1792,
+    "height": 1028
+  },
+  "/imgs/blogs/api-gateways-routing-auth-rate-limiting-and-the-bff-pattern-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/api-gateways-routing-auth-rate-limiting-and-the-bff-pattern-7.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/api-gateways-routing-auth-rate-limiting-and-the-bff-pattern-8.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/api-performance-payload-size-compression-and-tail-latency-1.png": {
+    "width": 1792,
+    "height": 1237,
+    "cover": true
+  },
+  "/imgs/blogs/api-performance-payload-size-compression-and-tail-latency-2.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/api-performance-payload-size-compression-and-tail-latency-3.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/api-performance-payload-size-compression-and-tail-latency-4.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/api-performance-payload-size-compression-and-tail-latency-5.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/api-performance-payload-size-compression-and-tail-latency-6.png": {
+    "width": 1792,
+    "height": 917
+  },
+  "/imgs/blogs/api-performance-payload-size-compression-and-tail-latency-7.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/api-performance-payload-size-compression-and-tail-latency-8.png": {
+    "width": 1792,
+    "height": 1271
+  },
   "/imgs/blogs/approximate-nearest-neighbor-serving-faiss-hnsw-scann-1.png": {
     "width": 1792,
     "height": 1241,
@@ -1651,6 +1717,39 @@
   "/imgs/blogs/asymmetry-and-the-art-of-the-high-conviction-bet-7.png": {
     "width": 1792,
     "height": 1207
+  },
+  "/imgs/blogs/async-await-and-how-coroutines-actually-work-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/async-await-and-how-coroutines-actually-work-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/async-await-and-how-coroutines-actually-work-3.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/async-await-and-how-coroutines-actually-work-4.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/async-await-and-how-coroutines-actually-work-5.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/async-await-and-how-coroutines-actually-work-6.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/async-await-and-how-coroutines-actually-work-7.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/async-await-and-how-coroutines-actually-work-8.png": {
+    "width": 1792,
+    "height": 1199
   },
   "/imgs/blogs/async-in-practice-patterns-pitfalls-and-blocking-code-1.png": {
     "width": 1792,
@@ -3309,6 +3408,39 @@
   "/imgs/blogs/black-swans-vs-grey-rhinos-the-shocks-you-cant-and-can-see-coming-7.png": {
     "width": 1792,
     "height": 1136
+  },
+  "/imgs/blogs/blocking-vs-non-blocking-io-and-the-c10k-problem-1.png": {
+    "width": 1792,
+    "height": 1261,
+    "cover": true
+  },
+  "/imgs/blogs/blocking-vs-non-blocking-io-and-the-c10k-problem-2.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/blocking-vs-non-blocking-io-and-the-c10k-problem-3.png": {
+    "width": 1792,
+    "height": 1307
+  },
+  "/imgs/blogs/blocking-vs-non-blocking-io-and-the-c10k-problem-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/blocking-vs-non-blocking-io-and-the-c10k-problem-5.png": {
+    "width": 1792,
+    "height": 1428
+  },
+  "/imgs/blogs/blocking-vs-non-blocking-io-and-the-c10k-problem-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/blocking-vs-non-blocking-io-and-the-c10k-problem-7.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/blocking-vs-non-blocking-io-and-the-c10k-problem-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/bollinger-bands-and-volatility-1.png": {
     "width": 1792,
@@ -4971,6 +5103,39 @@
   "/imgs/blogs/caching-and-memoization-lru-cache-and-beyond-8.png": {
     "width": 1792,
     "height": 1201
+  },
+  "/imgs/blogs/caching-etags-cache-control-conditional-requests-invalidation-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/caching-etags-cache-control-conditional-requests-invalidation-2.png": {
+    "width": 1792,
+    "height": 1387
+  },
+  "/imgs/blogs/caching-etags-cache-control-conditional-requests-invalidation-3.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/caching-etags-cache-control-conditional-requests-invalidation-4.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/caching-etags-cache-control-conditional-requests-invalidation-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/caching-etags-cache-control-conditional-requests-invalidation-6.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/caching-etags-cache-control-conditional-requests-invalidation-7.png": {
+    "width": 1792,
+    "height": 1415
+  },
+  "/imgs/blogs/caching-etags-cache-control-conditional-requests-invalidation-8.png": {
+    "width": 1792,
+    "height": 1194
   },
   "/imgs/blogs/calendar-spreads-and-curve-trades-trading-the-shape-not-the-level-1.png": {
     "width": 1792,
@@ -17340,6 +17505,39 @@
     "width": 1792,
     "height": 1038
   },
+  "/imgs/blogs/function-coloring-and-bridging-sync-and-async-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/function-coloring-and-bridging-sync-and-async-2.png": {
+    "width": 1792,
+    "height": 1389
+  },
+  "/imgs/blogs/function-coloring-and-bridging-sync-and-async-3.png": {
+    "width": 1792,
+    "height": 999
+  },
+  "/imgs/blogs/function-coloring-and-bridging-sync-and-async-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/function-coloring-and-bridging-sync-and-async-5.png": {
+    "width": 1792,
+    "height": 1407
+  },
+  "/imgs/blogs/function-coloring-and-bridging-sync-and-async-6.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/function-coloring-and-bridging-sync-and-async-7.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/function-coloring-and-bridging-sync-and-async-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/funding-and-margin-spirals-when-your-lender-becomes-your-risk-1.png": {
     "width": 1792,
     "height": 1106,
@@ -17401,6 +17599,39 @@
   "/imgs/blogs/funding-currencies-vs-high-yielders-jpy-chf-and-the-rest-8.png": {
     "width": 1792,
     "height": 1212
+  },
+  "/imgs/blogs/futures-promises-and-composing-asynchronous-code-1.png": {
+    "width": 1792,
+    "height": 1271,
+    "cover": true
+  },
+  "/imgs/blogs/futures-promises-and-composing-asynchronous-code-2.png": {
+    "width": 1792,
+    "height": 1008
+  },
+  "/imgs/blogs/futures-promises-and-composing-asynchronous-code-3.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/futures-promises-and-composing-asynchronous-code-4.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/futures-promises-and-composing-asynchronous-code-5.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/futures-promises-and-composing-asynchronous-code-6.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/futures-promises-and-composing-asynchronous-code-7.png": {
+    "width": 1792,
+    "height": 1012
+  },
+  "/imgs/blogs/futures-promises-and-composing-asynchronous-code-8.png": {
+    "width": 1792,
+    "height": 1258
   },
   "/imgs/blogs/fx-as-a-factor-zoo-carry-value-momentum-and-dollar-1.png": {
     "width": 1792,
@@ -28550,6 +28781,39 @@
   "/imgs/blogs/object-detection-end-to-end-9.png": {
     "width": 1792,
     "height": 1291
+  },
+  "/imgs/blogs/observability-for-apis-logs-metrics-traces-and-slos-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/observability-for-apis-logs-metrics-traces-and-slos-2.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/observability-for-apis-logs-metrics-traces-and-slos-3.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/observability-for-apis-logs-metrics-traces-and-slos-4.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/observability-for-apis-logs-metrics-traces-and-slos-5.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/observability-for-apis-logs-metrics-traces-and-slos-6.png": {
+    "width": 1792,
+    "height": 911
+  },
+  "/imgs/blogs/observability-for-apis-logs-metrics-traces-and-slos-7.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/observability-for-apis-logs-metrics-traces-and-slos-8.png": {
+    "width": 1792,
+    "height": 1216
   },
   "/imgs/blogs/observability-for-debugging-prod-1.png": {
     "width": 1792,
@@ -41182,6 +41446,39 @@
   "/imgs/blogs/the-erm-crisis-of-1992-when-europes-currencies-broke-8.png": {
     "width": 1792,
     "height": 1278
+  },
+  "/imgs/blogs/the-event-loop-and-the-reactor-pattern-1.png": {
+    "width": 1792,
+    "height": 1035,
+    "cover": true
+  },
+  "/imgs/blogs/the-event-loop-and-the-reactor-pattern-2.png": {
+    "width": 1792,
+    "height": 968
+  },
+  "/imgs/blogs/the-event-loop-and-the-reactor-pattern-3.png": {
+    "width": 1792,
+    "height": 1370
+  },
+  "/imgs/blogs/the-event-loop-and-the-reactor-pattern-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-event-loop-and-the-reactor-pattern-5.png": {
+    "width": 1792,
+    "height": 1434
+  },
+  "/imgs/blogs/the-event-loop-and-the-reactor-pattern-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-event-loop-and-the-reactor-pattern-7.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/the-event-loop-and-the-reactor-pattern-8.png": {
+    "width": 1792,
+    "height": 1439
   },
   "/imgs/blogs/the-expectations-channel-forward-guidance-and-credibility-1.png": {
     "width": 1792,
