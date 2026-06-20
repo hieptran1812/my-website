@@ -6675,6 +6675,39 @@
     "width": 1792,
     "height": 928
   },
+  "/imgs/blogs/catching-the-one-in-a-million-bug-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/catching-the-one-in-a-million-bug-2.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/catching-the-one-in-a-million-bug-3.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/catching-the-one-in-a-million-bug-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/catching-the-one-in-a-million-bug-5.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/catching-the-one-in-a-million-bug-6.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/catching-the-one-in-a-million-bug-7.png": {
+    "width": 1792,
+    "height": 906
+  },
+  "/imgs/blogs/catching-the-one-in-a-million-bug-8.png": {
+    "width": 1792,
+    "height": 1212
+  },
   "/imgs/blogs/categorical-and-feature-bugs-1.png": {
     "width": 1792,
     "height": 1199,
@@ -10977,6 +11010,39 @@
     "width": 1792,
     "height": 1206
   },
+  "/imgs/blogs/debugging-across-service-boundaries-1.png": {
+    "width": 1792,
+    "height": 661,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-across-service-boundaries-2.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/debugging-across-service-boundaries-3.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/debugging-across-service-boundaries-4.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/debugging-across-service-boundaries-5.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/debugging-across-service-boundaries-6.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/debugging-across-service-boundaries-7.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/debugging-across-service-boundaries-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/debugging-asr-finetuning-1.png": {
     "width": 1792,
     "height": 1260,
@@ -11141,6 +11207,39 @@
   "/imgs/blogs/debugging-ddp-and-multi-gpu-8.png": {
     "width": 1792,
     "height": 1178
+  },
+  "/imgs/blogs/debugging-in-production-without-making-it-worse-1.png": {
+    "width": 1792,
+    "height": 876,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-in-production-without-making-it-worse-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/debugging-in-production-without-making-it-worse-3.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/debugging-in-production-without-making-it-worse-4.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/debugging-in-production-without-making-it-worse-5.png": {
+    "width": 1792,
+    "height": 895
+  },
+  "/imgs/blogs/debugging-in-production-without-making-it-worse-6.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/debugging-in-production-without-making-it-worse-7.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/debugging-in-production-without-making-it-worse-8.png": {
+    "width": 1792,
+    "height": 1297
   },
   "/imgs/blogs/debugging-lora-and-peft-1.png": {
     "width": 1792,
@@ -28867,6 +28966,39 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/performance-debugging-when-its-just-slow-1.png": {
+    "width": 1792,
+    "height": 895,
+    "cover": true
+  },
+  "/imgs/blogs/performance-debugging-when-its-just-slow-2.png": {
+    "width": 1792,
+    "height": 1258
+  },
+  "/imgs/blogs/performance-debugging-when-its-just-slow-3.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/performance-debugging-when-its-just-slow-4.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/performance-debugging-when-its-just-slow-5.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/performance-debugging-when-its-just-slow-6.png": {
+    "width": 1792,
+    "height": 1187
+  },
+  "/imgs/blogs/performance-debugging-when-its-just-slow-7.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/performance-debugging-when-its-just-slow-8.png": {
+    "width": 1792,
+    "height": 1277
+  },
   "/imgs/blogs/personal-household-goods-sector-vietnam-brands-pricing-power-1.png": {
     "width": 1792,
     "height": 1227,
@@ -31151,6 +31283,39 @@
   "/imgs/blogs/reading-a-bank-balance-sheet-assets-liabilities-and-equity-9.png": {
     "width": 1792,
     "height": 1241
+  },
+  "/imgs/blogs/reading-a-core-dump-post-mortem-analysis-1.png": {
+    "width": 1792,
+    "height": 1199,
+    "cover": true
+  },
+  "/imgs/blogs/reading-a-core-dump-post-mortem-analysis-2.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/reading-a-core-dump-post-mortem-analysis-3.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/reading-a-core-dump-post-mortem-analysis-4.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/reading-a-core-dump-post-mortem-analysis-5.png": {
+    "width": 1792,
+    "height": 921
+  },
+  "/imgs/blogs/reading-a-core-dump-post-mortem-analysis-6.png": {
+    "width": 1792,
+    "height": 1177
+  },
+  "/imgs/blogs/reading-a-core-dump-post-mortem-analysis-7.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/reading-a-core-dump-post-mortem-analysis-8.png": {
+    "width": 1792,
+    "height": 1209
   },
   "/imgs/blogs/reading-a-stack-trace-across-languages-1.png": {
     "width": 1792,
@@ -39923,6 +40088,39 @@
   "/imgs/blogs/the-fiscal-toolkit-spending-taxes-and-deficits-8.png": {
     "width": 1792,
     "height": 1395
+  },
+  "/imgs/blogs/the-flaky-test-find-it-fix-it-or-quarantine-it-1.png": {
+    "width": 1792,
+    "height": 1199,
+    "cover": true
+  },
+  "/imgs/blogs/the-flaky-test-find-it-fix-it-or-quarantine-it-2.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/the-flaky-test-find-it-fix-it-or-quarantine-it-3.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/the-flaky-test-find-it-fix-it-or-quarantine-it-4.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/the-flaky-test-find-it-fix-it-or-quarantine-it-5.png": {
+    "width": 1792,
+    "height": 1255
+  },
+  "/imgs/blogs/the-flaky-test-find-it-fix-it-or-quarantine-it-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/the-flaky-test-find-it-fix-it-or-quarantine-it-7.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/the-flaky-test-find-it-fix-it-or-quarantine-it-8.png": {
+    "width": 1792,
+    "height": 925
   },
   "/imgs/blogs/the-fomc-meeting-full-anatomy-1.png": {
     "width": 1792,
