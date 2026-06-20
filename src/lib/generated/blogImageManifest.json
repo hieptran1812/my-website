@@ -4298,6 +4298,39 @@
     "width": 1792,
     "height": 1184
   },
+  "/imgs/blogs/building-debuggable-systems-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/building-debuggable-systems-2.png": {
+    "width": 1792,
+    "height": 1355
+  },
+  "/imgs/blogs/building-debuggable-systems-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/building-debuggable-systems-4.png": {
+    "width": 1792,
+    "height": 1031
+  },
+  "/imgs/blogs/building-debuggable-systems-5.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/building-debuggable-systems-6.png": {
+    "width": 1792,
+    "height": 924
+  },
+  "/imgs/blogs/building-debuggable-systems-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/building-debuggable-systems-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/building-one-high-probability-setup-1.png": {
     "width": 1792,
     "height": 1176,
@@ -11542,6 +11575,39 @@
   "/imgs/blogs/debugging-segmentation-8.png": {
     "width": 1792,
     "height": 943
+  },
+  "/imgs/blogs/debugging-someone-elses-code-fast-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-someone-elses-code-fast-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/debugging-someone-elses-code-fast-3.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/debugging-someone-elses-code-fast-4.png": {
+    "width": 1792,
+    "height": 1333
+  },
+  "/imgs/blogs/debugging-someone-elses-code-fast-5.png": {
+    "width": 1792,
+    "height": 917
+  },
+  "/imgs/blogs/debugging-someone-elses-code-fast-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/debugging-someone-elses-code-fast-7.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/debugging-someone-elses-code-fast-8.png": {
+    "width": 1792,
+    "height": 1386
   },
   "/imgs/blogs/debugging-vision-transformer-finetuning-1.png": {
     "width": 1792,
@@ -33970,6 +34036,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/root-cause-analysis-and-the-five-whys-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/root-cause-analysis-and-the-five-whys-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/root-cause-analysis-and-the-five-whys-3.png": {
+    "width": 1792,
+    "height": 1426
+  },
+  "/imgs/blogs/root-cause-analysis-and-the-five-whys-4.png": {
+    "width": 1792,
+    "height": 1371
+  },
+  "/imgs/blogs/root-cause-analysis-and-the-five-whys-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/root-cause-analysis-and-the-five-whys-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/root-cause-analysis-and-the-five-whys-7.png": {
+    "width": 1792,
+    "height": 1398
+  },
+  "/imgs/blogs/root-cause-analysis-and-the-five-whys-8.png": {
+    "width": 1792,
+    "height": 1335
+  },
   "/imgs/blogs/rpc-vs-rest-when-a-procedure-beats-a-resource-1.png": {
     "width": 1792,
     "height": 1278,
@@ -34064,6 +34163,39 @@
   "/imgs/blogs/rubber-and-cassava-vietnams-quiet-export-commodities-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/rubber-duck-escalation-and-asking-well-1.png": {
+    "width": 1792,
+    "height": 686,
+    "cover": true
+  },
+  "/imgs/blogs/rubber-duck-escalation-and-asking-well-2.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/rubber-duck-escalation-and-asking-well-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/rubber-duck-escalation-and-asking-well-4.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/rubber-duck-escalation-and-asking-well-5.png": {
+    "width": 1792,
+    "height": 918
+  },
+  "/imgs/blogs/rubber-duck-escalation-and-asking-well-6.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/rubber-duck-escalation-and-asking-well-7.png": {
+    "width": 1792,
+    "height": 709
+  },
+  "/imgs/blogs/rubber-duck-escalation-and-asking-well-8.png": {
+    "width": 1792,
+    "height": 1250
   },
   "/imgs/blogs/rug-pull-and-honeypot-detection-1.png": {
     "width": 1792,
