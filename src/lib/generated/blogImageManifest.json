@@ -2291,6 +2291,39 @@
     "width": 1792,
     "height": 929
   },
+  "/imgs/blogs/backward-and-forward-compatibility-the-rules-of-safe-change-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/backward-and-forward-compatibility-the-rules-of-safe-change-2.png": {
+    "width": 1792,
+    "height": 1259
+  },
+  "/imgs/blogs/backward-and-forward-compatibility-the-rules-of-safe-change-3.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/backward-and-forward-compatibility-the-rules-of-safe-change-4.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/backward-and-forward-compatibility-the-rules-of-safe-change-5.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/backward-and-forward-compatibility-the-rules-of-safe-change-6.png": {
+    "width": 1792,
+    "height": 671
+  },
+  "/imgs/blogs/backward-and-forward-compatibility-the-rules-of-safe-change-7.png": {
+    "width": 1792,
+    "height": 1297
+  },
+  "/imgs/blogs/backward-and-forward-compatibility-the-rules-of-safe-change-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
   "/imgs/blogs/backwardation-as-a-structural-return-source-the-carry-of-commodities-1.png": {
     "width": 1792,
     "height": 1241,
@@ -8645,6 +8678,39 @@
   "/imgs/blogs/continuation-patterns-flags-pennants-8.png": {
     "width": 1792,
     "height": 975
+  },
+  "/imgs/blogs/contract-testing-consumer-driven-contracts-and-schema-diffs-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/contract-testing-consumer-driven-contracts-and-schema-diffs-2.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/contract-testing-consumer-driven-contracts-and-schema-diffs-3.png": {
+    "width": 1792,
+    "height": 1297
+  },
+  "/imgs/blogs/contract-testing-consumer-driven-contracts-and-schema-diffs-4.png": {
+    "width": 1792,
+    "height": 859
+  },
+  "/imgs/blogs/contract-testing-consumer-driven-contracts-and-schema-diffs-5.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/contract-testing-consumer-driven-contracts-and-schema-diffs-6.png": {
+    "width": 1792,
+    "height": 1280
+  },
+  "/imgs/blogs/contract-testing-consumer-driven-contracts-and-schema-diffs-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/contract-testing-consumer-driven-contracts-and-schema-diffs-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20250930005013.png": {
     "width": 759,
@@ -34076,6 +34142,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/schema-evolution-adding-removing-renaming-fields-safely-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/schema-evolution-adding-removing-renaming-fields-safely-2.png": {
+    "width": 1792,
+    "height": 1322
+  },
+  "/imgs/blogs/schema-evolution-adding-removing-renaming-fields-safely-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/schema-evolution-adding-removing-renaming-fields-safely-4.png": {
+    "width": 1792,
+    "height": 964
+  },
+  "/imgs/blogs/schema-evolution-adding-removing-renaming-fields-safely-5.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/schema-evolution-adding-removing-renaming-fields-safely-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/schema-evolution-adding-removing-renaming-fields-safely-7.png": {
+    "width": 1792,
+    "height": 1353
+  },
+  "/imgs/blogs/schema-evolution-adding-removing-renaming-fields-safely-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/score-based-models-and-the-sde-view-1.png": {
     "width": 1792,
     "height": 1194,
@@ -45779,6 +45878,39 @@
   "/imgs/blogs/verl-rlhf-library-deep-dive-4.png": {
     "width": 1792,
     "height": 1052
+  },
+  "/imgs/blogs/versioning-strategies-uri-header-media-type-and-not-versioning-1.png": {
+    "width": 1792,
+    "height": 1306,
+    "cover": true
+  },
+  "/imgs/blogs/versioning-strategies-uri-header-media-type-and-not-versioning-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/versioning-strategies-uri-header-media-type-and-not-versioning-3.png": {
+    "width": 1792,
+    "height": 1137
+  },
+  "/imgs/blogs/versioning-strategies-uri-header-media-type-and-not-versioning-4.png": {
+    "width": 1792,
+    "height": 924
+  },
+  "/imgs/blogs/versioning-strategies-uri-header-media-type-and-not-versioning-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/versioning-strategies-uri-header-media-type-and-not-versioning-6.png": {
+    "width": 1792,
+    "height": 921
+  },
+  "/imgs/blogs/versioning-strategies-uri-header-media-type-and-not-versioning-7.png": {
+    "width": 1792,
+    "height": 1415
+  },
+  "/imgs/blogs/versioning-strategies-uri-header-media-type-and-not-versioning-8.png": {
+    "width": 1792,
+    "height": 1162
   },
   "/imgs/blogs/vertical-spreads-debit-and-credit-defining-your-risk-1.png": {
     "width": 1602,
