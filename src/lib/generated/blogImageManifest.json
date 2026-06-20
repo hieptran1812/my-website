@@ -1689,6 +1689,39 @@
     "width": 1792,
     "height": 1178
   },
+  "/imgs/blogs/atomics-and-memory-orderings-from-relaxed-to-seq-cst-1.png": {
+    "width": 1792,
+    "height": 1235,
+    "cover": true
+  },
+  "/imgs/blogs/atomics-and-memory-orderings-from-relaxed-to-seq-cst-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/atomics-and-memory-orderings-from-relaxed-to-seq-cst-3.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/atomics-and-memory-orderings-from-relaxed-to-seq-cst-4.png": {
+    "width": 1792,
+    "height": 1268
+  },
+  "/imgs/blogs/atomics-and-memory-orderings-from-relaxed-to-seq-cst-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/atomics-and-memory-orderings-from-relaxed-to-seq-cst-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/atomics-and-memory-orderings-from-relaxed-to-seq-cst-7.png": {
+    "width": 1792,
+    "height": 1365
+  },
+  "/imgs/blogs/atomics-and-memory-orderings-from-relaxed-to-seq-cst-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/attention-and-masking-bugs-1.png": {
     "width": 1792,
     "height": 689,
@@ -4716,6 +4749,39 @@
     "width": 1792,
     "height": 1169
   },
+  "/imgs/blogs/cache-coherence-mesi-and-false-sharing-1.png": {
+    "width": 1792,
+    "height": 1250,
+    "cover": true
+  },
+  "/imgs/blogs/cache-coherence-mesi-and-false-sharing-2.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/cache-coherence-mesi-and-false-sharing-3.png": {
+    "width": 1792,
+    "height": 1313
+  },
+  "/imgs/blogs/cache-coherence-mesi-and-false-sharing-4.png": {
+    "width": 1792,
+    "height": 1004
+  },
+  "/imgs/blogs/cache-coherence-mesi-and-false-sharing-5.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/cache-coherence-mesi-and-false-sharing-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/cache-coherence-mesi-and-false-sharing-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/cache-coherence-mesi-and-false-sharing-8.png": {
+    "width": 1792,
+    "height": 1280
+  },
   "/imgs/blogs/caching-and-memoization-lru-cache-and-beyond-1.png": {
     "width": 1792,
     "height": 1278,
@@ -7278,6 +7344,39 @@
   "/imgs/blogs/cholesky-positive-definite-math-for-quants-7.png": {
     "width": 1792,
     "height": 1069
+  },
+  "/imgs/blogs/choosing-a-paradigm-rest-vs-grpc-vs-graphql-by-force-1.png": {
+    "width": 1792,
+    "height": 1343,
+    "cover": true
+  },
+  "/imgs/blogs/choosing-a-paradigm-rest-vs-grpc-vs-graphql-by-force-2.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/choosing-a-paradigm-rest-vs-grpc-vs-graphql-by-force-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/choosing-a-paradigm-rest-vs-grpc-vs-graphql-by-force-4.png": {
+    "width": 1792,
+    "height": 1427
+  },
+  "/imgs/blogs/choosing-a-paradigm-rest-vs-grpc-vs-graphql-by-force-5.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/choosing-a-paradigm-rest-vs-grpc-vs-graphql-by-force-6.png": {
+    "width": 1792,
+    "height": 1423
+  },
+  "/imgs/blogs/choosing-a-paradigm-rest-vs-grpc-vs-graphql-by-force-7.png": {
+    "width": 1792,
+    "height": 902
+  },
+  "/imgs/blogs/choosing-a-paradigm-rest-vs-grpc-vs-graphql-by-force-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/choosing-right-llm-architecture-task-1.png": {
     "width": 1792,
@@ -14448,6 +14547,39 @@
     "width": 1792,
     "height": 1184
   },
+  "/imgs/blogs/event-driven-and-async-apis-webhooks-pubsub-and-asyncapi-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/event-driven-and-async-apis-webhooks-pubsub-and-asyncapi-2.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/event-driven-and-async-apis-webhooks-pubsub-and-asyncapi-3.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/event-driven-and-async-apis-webhooks-pubsub-and-asyncapi-4.png": {
+    "width": 1792,
+    "height": 931
+  },
+  "/imgs/blogs/event-driven-and-async-apis-webhooks-pubsub-and-asyncapi-5.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/event-driven-and-async-apis-webhooks-pubsub-and-asyncapi-6.png": {
+    "width": 1792,
+    "height": 1363
+  },
+  "/imgs/blogs/event-driven-and-async-apis-webhooks-pubsub-and-asyncapi-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/event-driven-and-async-apis-webhooks-pubsub-and-asyncapi-8.png": {
+    "width": 1792,
+    "height": 1178
+  },
   "/imgs/blogs/event-driven-trading-capstone-a-full-cpi-day-walkthrough-1.png": {
     "width": 1792,
     "height": 983,
@@ -18409,6 +18541,39 @@
     "width": 635,
     "height": 791
   },
+  "/imgs/blogs/graphql-the-query-language-schema-and-the-n-plus-one-trap-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/graphql-the-query-language-schema-and-the-n-plus-one-trap-2.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/graphql-the-query-language-schema-and-the-n-plus-one-trap-3.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/graphql-the-query-language-schema-and-the-n-plus-one-trap-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/graphql-the-query-language-schema-and-the-n-plus-one-trap-5.png": {
+    "width": 1792,
+    "height": 1436
+  },
+  "/imgs/blogs/graphql-the-query-language-schema-and-the-n-plus-one-trap-6.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/graphql-the-query-language-schema-and-the-n-plus-one-trap-7.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/graphql-the-query-language-schema-and-the-n-plus-one-trap-8.png": {
+    "width": 1792,
+    "height": 1194
+  },
   "/imgs/blogs/growth-runways-and-tam-without-fooling-yourself-1.png": {
     "width": 1792,
     "height": 1090,
@@ -18437,6 +18602,39 @@
   "/imgs/blogs/growth-runways-and-tam-without-fooling-yourself-7.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/grpc-and-protocol-buffers-contracts-codegen-and-streaming-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/grpc-and-protocol-buffers-contracts-codegen-and-streaming-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/grpc-and-protocol-buffers-contracts-codegen-and-streaming-3.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/grpc-and-protocol-buffers-contracts-codegen-and-streaming-4.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/grpc-and-protocol-buffers-contracts-codegen-and-streaming-5.png": {
+    "width": 1792,
+    "height": 892
+  },
+  "/imgs/blogs/grpc-and-protocol-buffers-contracts-codegen-and-streaming-6.png": {
+    "width": 1792,
+    "height": 1304
+  },
+  "/imgs/blogs/grpc-and-protocol-buffers-contracts-codegen-and-streaming-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/grpc-and-protocol-buffers-contracts-codegen-and-streaming-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/grpo-01-landscape.png": {
     "width": 1449,
@@ -25070,6 +25268,39 @@
     "width": 1792,
     "height": 1208
   },
+  "/imgs/blogs/memory-barriers-acquire-release-and-fences-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/memory-barriers-acquire-release-and-fences-2.png": {
+    "width": 1792,
+    "height": 1395
+  },
+  "/imgs/blogs/memory-barriers-acquire-release-and-fences-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/memory-barriers-acquire-release-and-fences-4.png": {
+    "width": 1792,
+    "height": 991
+  },
+  "/imgs/blogs/memory-barriers-acquire-release-and-fences-5.png": {
+    "width": 1792,
+    "height": 1335
+  },
+  "/imgs/blogs/memory-barriers-acquire-release-and-fences-6.png": {
+    "width": 1792,
+    "height": 1336
+  },
+  "/imgs/blogs/memory-barriers-acquire-release-and-fences-7.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/memory-barriers-acquire-release-and-fences-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/memory-is-the-real-constraint-1.png": {
     "width": 1792,
     "height": 1260,
@@ -25102,6 +25333,39 @@
   "/imgs/blogs/memory-is-the-real-constraint-8.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/memory-models-sequential-consistency-and-happens-before-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/memory-models-sequential-consistency-and-happens-before-2.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/memory-models-sequential-consistency-and-happens-before-3.png": {
+    "width": 1792,
+    "height": 988
+  },
+  "/imgs/blogs/memory-models-sequential-consistency-and-happens-before-4.png": {
+    "width": 1792,
+    "height": 1377
+  },
+  "/imgs/blogs/memory-models-sequential-consistency-and-happens-before-5.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/memory-models-sequential-consistency-and-happens-before-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/memory-models-sequential-consistency-and-happens-before-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/memory-models-sequential-consistency-and-happens-before-8.png": {
+    "width": 1792,
+    "height": 1227
   },
   "/imgs/blogs/memory-optimization-zero-fsdp-activation-checkpointing-and-offload-1.png": {
     "width": 1792,
@@ -33706,6 +33970,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/rpc-vs-rest-when-a-procedure-beats-a-resource-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/rpc-vs-rest-when-a-procedure-beats-a-resource-2.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/rpc-vs-rest-when-a-procedure-beats-a-resource-3.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/rpc-vs-rest-when-a-procedure-beats-a-resource-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/rpc-vs-rest-when-a-procedure-beats-a-resource-5.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/rpc-vs-rest-when-a-procedure-beats-a-resource-6.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/rpc-vs-rest-when-a-procedure-beats-a-resource-7.png": {
+    "width": 1792,
+    "height": 1389
+  },
+  "/imgs/blogs/rpc-vs-rest-when-a-procedure-beats-a-resource-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/rsi-and-momentum-oscillators-1.png": {
     "width": 1792,
     "height": 1163,
@@ -36749,6 +37046,39 @@
   "/imgs/blogs/straddles-strangles-and-the-long-volatility-bet-7.png": {
     "width": 1792,
     "height": 789
+  },
+  "/imgs/blogs/streaming-apis-sse-websockets-and-server-streaming-1.png": {
+    "width": 1792,
+    "height": 1313,
+    "cover": true
+  },
+  "/imgs/blogs/streaming-apis-sse-websockets-and-server-streaming-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/streaming-apis-sse-websockets-and-server-streaming-3.png": {
+    "width": 1792,
+    "height": 902
+  },
+  "/imgs/blogs/streaming-apis-sse-websockets-and-server-streaming-4.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/streaming-apis-sse-websockets-and-server-streaming-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/streaming-apis-sse-websockets-and-server-streaming-6.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/streaming-apis-sse-websockets-and-server-streaming-7.png": {
+    "width": 1792,
+    "height": 906
+  },
+  "/imgs/blogs/streaming-apis-sse-websockets-and-server-streaming-8.png": {
+    "width": 1792,
+    "height": 702
   },
   "/imgs/blogs/streaming-vs-offline-mismatch-1.png": {
     "width": 1792,
@@ -48973,6 +49303,39 @@
   "/imgs/blogs/why-video-generation-is-hard-8.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/why-your-code-doesnt-run-in-order-compiler-and-cpu-reordering-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/why-your-code-doesnt-run-in-order-compiler-and-cpu-reordering-2.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/why-your-code-doesnt-run-in-order-compiler-and-cpu-reordering-3.png": {
+    "width": 1782,
+    "height": 1453
+  },
+  "/imgs/blogs/why-your-code-doesnt-run-in-order-compiler-and-cpu-reordering-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/why-your-code-doesnt-run-in-order-compiler-and-cpu-reordering-5.png": {
+    "width": 1792,
+    "height": 968
+  },
+  "/imgs/blogs/why-your-code-doesnt-run-in-order-compiler-and-cpu-reordering-6.png": {
+    "width": 1792,
+    "height": 1359
+  },
+  "/imgs/blogs/why-your-code-doesnt-run-in-order-compiler-and-cpu-reordering-7.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/why-your-code-doesnt-run-in-order-compiler-and-cpu-reordering-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/why-your-training-run-is-lying-to-you-1.png": {
     "width": 1792,
