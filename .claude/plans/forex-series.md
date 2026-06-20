@@ -131,4 +131,4 @@ H5 `building-an-fx-view-the-currency-trading-playbook-capstone` — The capstone
 - [x] Wave 5 — Track E (6) — Central banks & intervention
 - [x] Wave 6 — Track F (6) — Plumbing & instruments
 - [x] Wave 7 — Track G (5) — Vietnam / EM-FX
-- [ ] Wave 8 — Track H (5) — Crises & the playbook
+- [x] Wave 8 — Track H (5) — Crises & the playbook
