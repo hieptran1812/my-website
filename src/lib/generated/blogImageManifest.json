@@ -5383,6 +5383,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/capstone-the-debugging-playbook-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/capstone-the-debugging-playbook-2.png": {
+    "width": 1792,
+    "height": 1258
+  },
+  "/imgs/blogs/capstone-the-debugging-playbook-3.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/capstone-the-debugging-playbook-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/capstone-the-debugging-playbook-5.png": {
+    "width": 1792,
+    "height": 1214
+  },
+  "/imgs/blogs/capstone-the-debugging-playbook-6.png": {
+    "width": 1792,
+    "height": 939
+  },
+  "/imgs/blogs/capstone-the-debugging-playbook-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/capstone-the-debugging-playbook-8.png": {
+    "width": 1792,
+    "height": 1264
+  },
   "/imgs/blogs/carry-and-volatility-the-relationship-that-runs-the-trade-1.png": {
     "width": 1602,
     "height": 914,
@@ -6442,6 +6475,39 @@
     "width": 1792,
     "height": 961
   },
+  "/imgs/blogs/case-study-the-bug-that-only-happened-on-tuesdays-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-the-bug-that-only-happened-on-tuesdays-2.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/case-study-the-bug-that-only-happened-on-tuesdays-3.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/case-study-the-bug-that-only-happened-on-tuesdays-4.png": {
+    "width": 1792,
+    "height": 914
+  },
+  "/imgs/blogs/case-study-the-bug-that-only-happened-on-tuesdays-5.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/case-study-the-bug-that-only-happened-on-tuesdays-6.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/case-study-the-bug-that-only-happened-on-tuesdays-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/case-study-the-bug-that-only-happened-on-tuesdays-8.png": {
+    "width": 1792,
+    "height": 1205
+  },
   "/imgs/blogs/case-study-the-hunt-brothers-and-cornering-silver-1.png": {
     "width": 1792,
     "height": 1232,
@@ -6470,6 +6536,39 @@
   "/imgs/blogs/case-study-the-hunt-brothers-and-cornering-silver-7.png": {
     "width": 1754,
     "height": 916
+  },
+  "/imgs/blogs/case-study-the-leak-that-took-down-prod-1.png": {
+    "width": 1792,
+    "height": 980,
+    "cover": true
+  },
+  "/imgs/blogs/case-study-the-leak-that-took-down-prod-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/case-study-the-leak-that-took-down-prod-3.png": {
+    "width": 1792,
+    "height": 667
+  },
+  "/imgs/blogs/case-study-the-leak-that-took-down-prod-4.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/case-study-the-leak-that-took-down-prod-5.png": {
+    "width": 1792,
+    "height": 708
+  },
+  "/imgs/blogs/case-study-the-leak-that-took-down-prod-6.png": {
+    "width": 1792,
+    "height": 1375
+  },
+  "/imgs/blogs/case-study-the-leak-that-took-down-prod-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/case-study-the-leak-that-took-down-prod-8.png": {
+    "width": 1792,
+    "height": 1264
   },
   "/imgs/blogs/case-study-the-ronin-bridge-hack-1.png": {
     "width": 1792,
@@ -8046,6 +8145,39 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/collateral-security-and-loan-loss-provisioning-ifrs9-and-cecl-1.png": {
+    "width": 1792,
+    "height": 786,
+    "cover": true
+  },
+  "/imgs/blogs/collateral-security-and-loan-loss-provisioning-ifrs9-and-cecl-2.png": {
+    "width": 1140,
+    "height": 539
+  },
+  "/imgs/blogs/collateral-security-and-loan-loss-provisioning-ifrs9-and-cecl-3.png": {
+    "width": 1726,
+    "height": 539
+  },
+  "/imgs/blogs/collateral-security-and-loan-loss-provisioning-ifrs9-and-cecl-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/collateral-security-and-loan-loss-provisioning-ifrs9-and-cecl-5.png": {
+    "width": 1792,
+    "height": 1347
+  },
+  "/imgs/blogs/collateral-security-and-loan-loss-provisioning-ifrs9-and-cecl-6.png": {
+    "width": 1562,
+    "height": 559
+  },
+  "/imgs/blogs/collateral-security-and-loan-loss-provisioning-ifrs9-and-cecl-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/collateral-security-and-loan-loss-provisioning-ifrs9-and-cecl-8.png": {
+    "width": 1714,
+    "height": 539
+  },
   "/imgs/blogs/collective-communication-and-nccl-all-reduce-from-scratch-1.png": {
     "width": 1792,
     "height": 1371,
@@ -8911,6 +9043,39 @@
     "width": 1792,
     "height": 1247
   },
+  "/imgs/blogs/consumer-lending-mortgages-cards-auto-and-personal-loans-1.png": {
+    "width": 1792,
+    "height": 1353,
+    "cover": true
+  },
+  "/imgs/blogs/consumer-lending-mortgages-cards-auto-and-personal-loans-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/consumer-lending-mortgages-cards-auto-and-personal-loans-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/consumer-lending-mortgages-cards-auto-and-personal-loans-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/consumer-lending-mortgages-cards-auto-and-personal-loans-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/consumer-lending-mortgages-cards-auto-and-personal-loans-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/consumer-lending-mortgages-cards-auto-and-personal-loans-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/consumer-lending-mortgages-cards-auto-and-personal-loans-8.png": {
+    "width": 1792,
+    "height": 863
+  },
   "/imgs/blogs/contango-vs-backwardation-what-the-shape-of-the-curve-means-1.png": {
     "width": 1792,
     "height": 1231,
@@ -9388,6 +9553,43 @@
     "height": 1278
   },
   "/imgs/blogs/core-cpi-shelter-and-supercore-what-actually-correlates-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/corporate-and-commercial-lending-term-loans-revolvers-and-syndication-1.png": {
+    "width": 1792,
+    "height": 1146,
+    "cover": true
+  },
+  "/imgs/blogs/corporate-and-commercial-lending-term-loans-revolvers-and-syndication-2.png": {
+    "width": 1792,
+    "height": 1384
+  },
+  "/imgs/blogs/corporate-and-commercial-lending-term-loans-revolvers-and-syndication-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/corporate-and-commercial-lending-term-loans-revolvers-and-syndication-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/corporate-and-commercial-lending-term-loans-revolvers-and-syndication-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/corporate-and-commercial-lending-term-loans-revolvers-and-syndication-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/corporate-and-commercial-lending-term-loans-revolvers-and-syndication-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/corporate-and-commercial-lending-term-loans-revolvers-and-syndication-8.png": {
+    "width": 1789,
+    "height": 1453
+  },
+  "/imgs/blogs/corporate-and-commercial-lending-term-loans-revolvers-and-syndication-9.png": {
     "width": 1602,
     "height": 914
   },
@@ -10026,6 +10228,39 @@
   "/imgs/blogs/cpu-profiling-cprofile-and-finding-the-hot-path-8.png": {
     "width": 1792,
     "height": 1302
+  },
+  "/imgs/blogs/credit-analysis-the-five-cs-and-how-a-loan-gets-approved-1.png": {
+    "width": 1792,
+    "height": 1216,
+    "cover": true
+  },
+  "/imgs/blogs/credit-analysis-the-five-cs-and-how-a-loan-gets-approved-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/credit-analysis-the-five-cs-and-how-a-loan-gets-approved-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/credit-analysis-the-five-cs-and-how-a-loan-gets-approved-4.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/credit-analysis-the-five-cs-and-how-a-loan-gets-approved-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/credit-analysis-the-five-cs-and-how-a-loan-gets-approved-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/credit-analysis-the-five-cs-and-how-a-loan-gets-approved-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/credit-analysis-the-five-cs-and-how-a-loan-gets-approved-8.png": {
+    "width": 1603,
+    "height": 914
   },
   "/imgs/blogs/credit-and-developer-financing-1.png": {
     "width": 1792,
@@ -24208,6 +24443,39 @@
     "width": 1792,
     "height": 970
   },
+  "/imgs/blogs/loan-pricing-cost-of-funds-risk-premium-and-the-capital-charge-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/loan-pricing-cost-of-funds-risk-premium-and-the-capital-charge-2.png": {
+    "width": 1600,
+    "height": 914
+  },
+  "/imgs/blogs/loan-pricing-cost-of-funds-risk-premium-and-the-capital-charge-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/loan-pricing-cost-of-funds-risk-premium-and-the-capital-charge-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/loan-pricing-cost-of-funds-risk-premium-and-the-capital-charge-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/loan-pricing-cost-of-funds-risk-premium-and-the-capital-charge-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/loan-pricing-cost-of-funds-risk-premium-and-the-capital-charge-7.png": {
+    "width": 1792,
+    "height": 1351
+  },
+  "/imgs/blogs/loan-pricing-cost-of-funds-risk-premium-and-the-capital-charge-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/lobbying-rulemaking-and-regulatory-capture-1.png": {
     "width": 1792,
     "height": 1224,
@@ -28006,6 +28274,43 @@
   "/imgs/blogs/non-deliverable-forwards-trading-uninvestable-currencies-8.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/non-performing-loans-and-the-workout-process-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/non-performing-loans-and-the-workout-process-2.png": {
+    "width": 1792,
+    "height": 1418
+  },
+  "/imgs/blogs/non-performing-loans-and-the-workout-process-3.png": {
+    "width": 1356,
+    "height": 519
+  },
+  "/imgs/blogs/non-performing-loans-and-the-workout-process-4.png": {
+    "width": 1468,
+    "height": 519
+  },
+  "/imgs/blogs/non-performing-loans-and-the-workout-process-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/non-performing-loans-and-the-workout-process-6.png": {
+    "width": 1510,
+    "height": 519
+  },
+  "/imgs/blogs/non-performing-loans-and-the-workout-process-7.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/non-performing-loans-and-the-workout-process-8.png": {
+    "width": 1615,
+    "height": 519
+  },
+  "/imgs/blogs/non-performing-loans-and-the-workout-process-9.png": {
+    "width": 1792,
+    "height": 487
   },
   "/imgs/blogs/normalizing-flows-and-change-of-variables-1.png": {
     "width": 1792,
@@ -33435,6 +33740,43 @@
   "/imgs/blogs/resource-modeling-turning-a-domain-into-nouns-and-uris-8.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/retail-deposits-the-funding-base-and-why-cheap-money-is-the-franchise-1.png": {
+    "width": 1792,
+    "height": 1355,
+    "cover": true
+  },
+  "/imgs/blogs/retail-deposits-the-funding-base-and-why-cheap-money-is-the-franchise-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/retail-deposits-the-funding-base-and-why-cheap-money-is-the-franchise-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/retail-deposits-the-funding-base-and-why-cheap-money-is-the-franchise-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/retail-deposits-the-funding-base-and-why-cheap-money-is-the-franchise-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/retail-deposits-the-funding-base-and-why-cheap-money-is-the-franchise-6.png": {
+    "width": 1792,
+    "height": 916
+  },
+  "/imgs/blogs/retail-deposits-the-funding-base-and-why-cheap-money-is-the-franchise-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/retail-deposits-the-funding-base-and-why-cheap-money-is-the-franchise-8.png": {
+    "width": 1792,
+    "height": 1330
+  },
+  "/imgs/blogs/retail-deposits-the-funding-base-and-why-cheap-money-is-the-franchise-9.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/retail-sector-vietnam-the-consumption-story-1.png": {
     "width": 1792,
@@ -42245,6 +42587,39 @@
     "height": 1278
   },
   "/imgs/blogs/the-legal-mandate-of-a-central-bank-8.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-lending-business-how-a-bank-underwrites-a-loan-end-to-end-1.png": {
+    "width": 1792,
+    "height": 1200,
+    "cover": true
+  },
+  "/imgs/blogs/the-lending-business-how-a-bank-underwrites-a-loan-end-to-end-2.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/the-lending-business-how-a-bank-underwrites-a-loan-end-to-end-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-lending-business-how-a-bank-underwrites-a-loan-end-to-end-4.png": {
+    "width": 1615,
+    "height": 914
+  },
+  "/imgs/blogs/the-lending-business-how-a-bank-underwrites-a-loan-end-to-end-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-lending-business-how-a-bank-underwrites-a-loan-end-to-end-6.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/the-lending-business-how-a-bank-underwrites-a-loan-end-to-end-7.png": {
+    "width": 1792,
+    "height": 1288
+  },
+  "/imgs/blogs/the-lending-business-how-a-bank-underwrites-a-loan-end-to-end-8.png": {
     "width": 1602,
     "height": 914
   },
