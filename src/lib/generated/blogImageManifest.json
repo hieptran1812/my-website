@@ -2036,6 +2036,72 @@
     "width": 1792,
     "height": 1183
   },
+  "/imgs/blogs/authentication-api-keys-sessions-jwt-and-mtls-1.png": {
+    "width": 1792,
+    "height": 1209,
+    "cover": true
+  },
+  "/imgs/blogs/authentication-api-keys-sessions-jwt-and-mtls-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/authentication-api-keys-sessions-jwt-and-mtls-3.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/authentication-api-keys-sessions-jwt-and-mtls-4.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/authentication-api-keys-sessions-jwt-and-mtls-5.png": {
+    "width": 1792,
+    "height": 1275
+  },
+  "/imgs/blogs/authentication-api-keys-sessions-jwt-and-mtls-6.png": {
+    "width": 1792,
+    "height": 895
+  },
+  "/imgs/blogs/authentication-api-keys-sessions-jwt-and-mtls-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/authentication-api-keys-sessions-jwt-and-mtls-8.png": {
+    "width": 1792,
+    "height": 1164
+  },
+  "/imgs/blogs/authorization-scopes-roles-and-resource-level-permissions-1.png": {
+    "width": 1792,
+    "height": 829,
+    "cover": true
+  },
+  "/imgs/blogs/authorization-scopes-roles-and-resource-level-permissions-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/authorization-scopes-roles-and-resource-level-permissions-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/authorization-scopes-roles-and-resource-level-permissions-4.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/authorization-scopes-roles-and-resource-level-permissions-5.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/authorization-scopes-roles-and-resource-level-permissions-6.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/authorization-scopes-roles-and-resource-level-permissions-7.png": {
+    "width": 1792,
+    "height": 1360
+  },
+  "/imgs/blogs/authorization-scopes-roles-and-resource-level-permissions-8.png": {
+    "width": 1792,
+    "height": 795
+  },
   "/imgs/blogs/autocallables-1.png": {
     "width": 1792,
     "height": 888,
@@ -21438,6 +21504,39 @@
     "width": 1792,
     "height": 1237
   },
+  "/imgs/blogs/input-validation-output-encoding-and-the-owasp-api-top-10-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/input-validation-output-encoding-and-the-owasp-api-top-10-2.png": {
+    "width": 1792,
+    "height": 658
+  },
+  "/imgs/blogs/input-validation-output-encoding-and-the-owasp-api-top-10-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/input-validation-output-encoding-and-the-owasp-api-top-10-4.png": {
+    "width": 1792,
+    "height": 1359
+  },
+  "/imgs/blogs/input-validation-output-encoding-and-the-owasp-api-top-10-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/input-validation-output-encoding-and-the-owasp-api-top-10-6.png": {
+    "width": 1792,
+    "height": 1409
+  },
+  "/imgs/blogs/input-validation-output-encoding-and-the-owasp-api-top-10-7.png": {
+    "width": 1792,
+    "height": 919
+  },
+  "/imgs/blogs/input-validation-output-encoding-and-the-owasp-api-top-10-8.png": {
+    "width": 1792,
+    "height": 917
+  },
   "/imgs/blogs/inside-an-investment-bank-how-they-make-money-1.png": {
     "width": 1792,
     "height": 1152,
@@ -28073,6 +28172,39 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/oauth2-and-openid-connect-for-api-designers-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/oauth2-and-openid-connect-for-api-designers-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/oauth2-and-openid-connect-for-api-designers-3.png": {
+    "width": 1792,
+    "height": 902
+  },
+  "/imgs/blogs/oauth2-and-openid-connect-for-api-designers-4.png": {
+    "width": 1792,
+    "height": 1355
+  },
+  "/imgs/blogs/oauth2-and-openid-connect-for-api-designers-5.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/oauth2-and-openid-connect-for-api-designers-6.png": {
+    "width": 1792,
+    "height": 767
+  },
+  "/imgs/blogs/oauth2-and-openid-connect-for-api-designers-7.png": {
+    "width": 1792,
+    "height": 1341
+  },
+  "/imgs/blogs/oauth2-and-openid-connect-for-api-designers-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/object-detection-end-to-end-1.png": {
     "width": 1792,
     "height": 1211,
@@ -31672,6 +31804,39 @@
     "width": 1299,
     "height": 816,
     "cover": true
+  },
+  "/imgs/blogs/rate-limiting-quotas-and-abuse-protection-1.png": {
+    "width": 1792,
+    "height": 731,
+    "cover": true
+  },
+  "/imgs/blogs/rate-limiting-quotas-and-abuse-protection-2.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/rate-limiting-quotas-and-abuse-protection-3.png": {
+    "width": 1792,
+    "height": 925
+  },
+  "/imgs/blogs/rate-limiting-quotas-and-abuse-protection-4.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/rate-limiting-quotas-and-abuse-protection-5.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/rate-limiting-quotas-and-abuse-protection-6.png": {
+    "width": 1792,
+    "height": 1200
+  },
+  "/imgs/blogs/rate-limiting-quotas-and-abuse-protection-7.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/rate-limiting-quotas-and-abuse-protection-8.png": {
+    "width": 1792,
+    "height": 1169
   },
   "/imgs/blogs/ray-dalio-bridgewater-risk-parity-1.png": {
     "width": 1792,
