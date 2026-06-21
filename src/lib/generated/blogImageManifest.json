@@ -1697,6 +1697,11 @@
     "width": 1792,
     "height": 673
   },
+  "/imgs/blogs/asset-sensitivity-matrix-which-assets-move-in-which-crisis-1.png": {
+    "width": 2104,
+    "height": 1453,
+    "cover": true
+  },
   "/imgs/blogs/assignment-pin-risk-and-expiration-day-mechanics-1.png": {
     "width": 1602,
     "height": 914,
@@ -8930,6 +8935,39 @@
     "width": 1792,
     "height": 1197
   },
+  "/imgs/blogs/communicating-during-an-outage-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/communicating-during-an-outage-2.png": {
+    "width": 1792,
+    "height": 902
+  },
+  "/imgs/blogs/communicating-during-an-outage-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/communicating-during-an-outage-4.png": {
+    "width": 1792,
+    "height": 1280
+  },
+  "/imgs/blogs/communicating-during-an-outage-5.png": {
+    "width": 1792,
+    "height": 864
+  },
+  "/imgs/blogs/communicating-during-an-outage-6.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/communicating-during-an-outage-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/communicating-during-an-outage-8.png": {
+    "width": 1792,
+    "height": 1280
+  },
   "/imgs/blogs/communication-and-influence-writing-presenting-mentoring-1.png": {
     "width": 1792,
     "height": 1242,
@@ -13017,6 +13055,39 @@
     "width": 1024,
     "height": 535,
     "cover": true
+  },
+  "/imgs/blogs/designing-a-humane-on-call-1.png": {
+    "width": 1792,
+    "height": 1250,
+    "cover": true
+  },
+  "/imgs/blogs/designing-a-humane-on-call-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/designing-a-humane-on-call-3.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/designing-a-humane-on-call-4.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/designing-a-humane-on-call-5.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/designing-a-humane-on-call-6.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/designing-a-humane-on-call-7.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/designing-a-humane-on-call-8.png": {
+    "width": 1792,
+    "height": 907
   },
   "/imgs/blogs/designing-choosing-tokenizer-llm-1.png": {
     "width": 1792,
@@ -18479,6 +18550,11 @@
     "width": 1792,
     "height": 1218
   },
+  "/imgs/blogs/geopolitical-risk-premium-what-markets-price-in-1.png": {
+    "width": 3020,
+    "height": 1197,
+    "cover": true
+  },
   "/imgs/blogs/geopolitics-and-supply-shocks-when-the-physical-cannot-flow-1.png": {
     "width": 1792,
     "height": 1165,
@@ -21832,6 +21908,39 @@
     "width": 1792,
     "height": 845
   },
+  "/imgs/blogs/incident-command-staying-calm-under-fire-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/incident-command-staying-calm-under-fire-2.png": {
+    "width": 1792,
+    "height": 1355
+  },
+  "/imgs/blogs/incident-command-staying-calm-under-fire-3.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/incident-command-staying-calm-under-fire-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/incident-command-staying-calm-under-fire-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/incident-command-staying-calm-under-fire-6.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/incident-command-staying-calm-under-fire-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/incident-command-staying-calm-under-fire-8.png": {
+    "width": 1792,
+    "height": 1379
+  },
   "/imgs/blogs/income-affordability-and-the-price-to-income-ratio-1.png": {
     "width": 1792,
     "height": 1344,
@@ -24342,6 +24451,39 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/learning-from-incidents-at-scale-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/learning-from-incidents-at-scale-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/learning-from-incidents-at-scale-3.png": {
+    "width": 1792,
+    "height": 709
+  },
+  "/imgs/blogs/learning-from-incidents-at-scale-4.png": {
+    "width": 1792,
+    "height": 1238
+  },
+  "/imgs/blogs/learning-from-incidents-at-scale-5.png": {
+    "width": 1792,
+    "height": 929
+  },
+  "/imgs/blogs/learning-from-incidents-at-scale-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/learning-from-incidents-at-scale-7.png": {
+    "width": 1792,
+    "height": 1164
+  },
+  "/imgs/blogs/learning-from-incidents-at-scale-8.png": {
+    "width": 1792,
+    "height": 1257
+  },
   "/imgs/blogs/learning-to-rank-for-recommenders-1.png": {
     "width": 1792,
     "height": 1154,
@@ -26629,6 +26771,39 @@
     "width": 1792,
     "height": 1199
   },
+  "/imgs/blogs/memory-reclamation-hazard-pointers-epochs-and-rcu-1.png": {
+    "width": 1792,
+    "height": 976,
+    "cover": true
+  },
+  "/imgs/blogs/memory-reclamation-hazard-pointers-epochs-and-rcu-2.png": {
+    "width": 1792,
+    "height": 1370
+  },
+  "/imgs/blogs/memory-reclamation-hazard-pointers-epochs-and-rcu-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/memory-reclamation-hazard-pointers-epochs-and-rcu-4.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/memory-reclamation-hazard-pointers-epochs-and-rcu-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/memory-reclamation-hazard-pointers-epochs-and-rcu-6.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/memory-reclamation-hazard-pointers-epochs-and-rcu-7.png": {
+    "width": 1792,
+    "height": 1415
+  },
+  "/imgs/blogs/memory-reclamation-hazard-pointers-epochs-and-rcu-8.png": {
+    "width": 1792,
+    "height": 1439
+  },
   "/imgs/blogs/mental-math-and-estimation-as-a-trainable-skill-1.png": {
     "width": 1792,
     "height": 1055,
@@ -27378,6 +27553,39 @@
   "/imgs/blogs/minimax-speech-speaker-encoder-flow-vae-9.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/mitigate-first-diagnose-later-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/mitigate-first-diagnose-later-2.png": {
+    "width": 1792,
+    "height": 1360
+  },
+  "/imgs/blogs/mitigate-first-diagnose-later-3.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/mitigate-first-diagnose-later-4.png": {
+    "width": 1792,
+    "height": 765
+  },
+  "/imgs/blogs/mitigate-first-diagnose-later-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/mitigate-first-diagnose-later-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/mitigate-first-diagnose-later-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/mitigate-first-diagnose-later-8.png": {
+    "width": 1792,
+    "height": 1360
   },
   "/imgs/blogs/mixed-precision-and-sensitivity-analysis-1.png": {
     "width": 1792,
@@ -31071,6 +31279,35 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-1.webp": {
+    "width": 2053,
+    "height": 1452,
+    "cover": true
+  },
+  "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-2.webp": {
+    "width": 2133,
+    "height": 1440
+  },
+  "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-3.webp": {
+    "width": 2568,
+    "height": 1382
+  },
+  "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-4.webp": {
+    "width": 2228,
+    "height": 1448
+  },
+  "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-5.webp": {
+    "width": 2171,
+    "height": 1469
+  },
+  "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-6.webp": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-7.webp": {
+    "width": 2042,
+    "height": 1452
+  },
   "/imgs/blogs/polynomial-systems-grobner-math-for-quants-1.png": {
     "width": 1792,
     "height": 1199,
@@ -33177,6 +33414,35 @@
   "/imgs/blogs/reading-a-core-dump-post-mortem-analysis-8.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/reading-a-geopolitical-shock-spike-vs-regime-change-1.webp": {
+    "width": 2137,
+    "height": 1468,
+    "cover": true
+  },
+  "/imgs/blogs/reading-a-geopolitical-shock-spike-vs-regime-change-2.webp": {
+    "width": 2134,
+    "height": 1064
+  },
+  "/imgs/blogs/reading-a-geopolitical-shock-spike-vs-regime-change-3.webp": {
+    "width": 1606,
+    "height": 918
+  },
+  "/imgs/blogs/reading-a-geopolitical-shock-spike-vs-regime-change-4.webp": {
+    "width": 1606,
+    "height": 918
+  },
+  "/imgs/blogs/reading-a-geopolitical-shock-spike-vs-regime-change-5.webp": {
+    "width": 2578,
+    "height": 1421
+  },
+  "/imgs/blogs/reading-a-geopolitical-shock-spike-vs-regime-change-6.webp": {
+    "width": 2070,
+    "height": 1452
+  },
+  "/imgs/blogs/reading-a-geopolitical-shock-spike-vs-regime-change-7.webp": {
+    "width": 1606,
+    "height": 951
   },
   "/imgs/blogs/reading-a-stack-trace-across-languages-1.png": {
     "width": 1792,
@@ -35862,6 +36128,11 @@
   "/imgs/blogs/rust-for-python-pyo3-and-maturin-8.png": {
     "width": 1792,
     "height": 1184
+  },
+  "/imgs/blogs/safe-havens-flight-to-quality-and-the-dollar-in-a-crisis-1.png": {
+    "width": 2171,
+    "height": 1455,
+    "cover": true
   },
   "/imgs/blogs/safety-alignment-should-be-made-more-than-just-a-few-tokens-deep-20250924111337.png": {
     "width": 1314,
@@ -40717,6 +40988,39 @@
     "width": 1792,
     "height": 1170
   },
+  "/imgs/blogs/the-anatomy-of-an-incident-1.png": {
+    "width": 1792,
+    "height": 592,
+    "cover": true
+  },
+  "/imgs/blogs/the-anatomy-of-an-incident-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-anatomy-of-an-incident-3.png": {
+    "width": 1792,
+    "height": 1258
+  },
+  "/imgs/blogs/the-anatomy-of-an-incident-4.png": {
+    "width": 1792,
+    "height": 967
+  },
+  "/imgs/blogs/the-anatomy-of-an-incident-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/the-anatomy-of-an-incident-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-anatomy-of-an-incident-7.png": {
+    "width": 1792,
+    "height": 746
+  },
+  "/imgs/blogs/the-anatomy-of-an-incident-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/the-api-design-playbook-a-review-checklist-first-endpoint-to-v2-1.png": {
     "width": 1792,
     "height": 1264,
@@ -41047,6 +41351,39 @@
   "/imgs/blogs/the-biggest-market-on-earth-inside-the-interbank-fx-market-8.png": {
     "width": 1792,
     "height": 976
+  },
+  "/imgs/blogs/the-blameless-postmortem-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/the-blameless-postmortem-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/the-blameless-postmortem-3.png": {
+    "width": 1792,
+    "height": 991
+  },
+  "/imgs/blogs/the-blameless-postmortem-4.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/the-blameless-postmortem-5.png": {
+    "width": 1792,
+    "height": 1228
+  },
+  "/imgs/blogs/the-blameless-postmortem-6.png": {
+    "width": 1792,
+    "height": 1374
+  },
+  "/imgs/blogs/the-blameless-postmortem-7.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/the-blameless-postmortem-8.png": {
+    "width": 1792,
+    "height": 1347
   },
   "/imgs/blogs/the-bull-case-vs-the-bear-case-for-gold-over-the-next-decade-1.png": {
     "width": 1792,
@@ -45323,6 +45660,39 @@
   "/imgs/blogs/the-probability-and-statistics-you-must-own-7.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/the-progress-hierarchy-blocking-lock-free-and-wait-free-1.png": {
+    "width": 1792,
+    "height": 1163,
+    "cover": true
+  },
+  "/imgs/blogs/the-progress-hierarchy-blocking-lock-free-and-wait-free-2.png": {
+    "width": 1792,
+    "height": 1347
+  },
+  "/imgs/blogs/the-progress-hierarchy-blocking-lock-free-and-wait-free-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-progress-hierarchy-blocking-lock-free-and-wait-free-4.png": {
+    "width": 1792,
+    "height": 999
+  },
+  "/imgs/blogs/the-progress-hierarchy-blocking-lock-free-and-wait-free-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-progress-hierarchy-blocking-lock-free-and-wait-free-6.png": {
+    "width": 1792,
+    "height": 1359
+  },
+  "/imgs/blogs/the-progress-hierarchy-blocking-lock-free-and-wait-free-7.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/the-progress-hierarchy-blocking-lock-free-and-wait-free-8.png": {
+    "width": 1792,
+    "height": 1228
   },
   "/imgs/blogs/the-quant-curriculum-map-what-to-learn-in-what-order-1.png": {
     "width": 1792,
@@ -52133,5 +52503,15 @@
   "/imgs/blogs/zero-sum-positive-sum-and-the-house-where-trading-profits-come-from-7.png": {
     "width": 1616,
     "height": 914
+  },
+  "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-1.cover.webp": {
+    "width": 800,
+    "height": 450,
+    "cover": true
+  },
+  "/imgs/blogs/reading-a-geopolitical-shock-spike-vs-regime-change-1.cover.webp": {
+    "width": 800,
+    "height": 450,
+    "cover": true
   }
 }
