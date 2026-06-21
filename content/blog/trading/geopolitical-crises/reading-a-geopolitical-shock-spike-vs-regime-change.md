@@ -510,6 +510,5 @@ For the bond and credit dimension — sovereign spreads after sanctions, how geo
 
 For the on-chain perspective on sanctions evasion, crypto-as-parallel-financial-system in sanctioned states, and how SWIFT exclusions drive crypto adoption — the on-chain analysis series covers these dynamics: [On-Chain Analysis](/blog/trading/onchain/).
 
----
 
 *This post is part of the series "Geopolitical Crises and Markets: How Nations Move, How Markets React." All data is as of mid-2025. This is educational analysis, not investment advice. Historical regime-change and spike classifications are retrospective interpretations using the four-test framework — real-time application will always involve uncertainty.*

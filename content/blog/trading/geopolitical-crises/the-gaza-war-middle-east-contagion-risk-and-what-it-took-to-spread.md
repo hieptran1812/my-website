@@ -397,6 +397,5 @@ The Gaza war's most important market lesson is subtle: it is not about Israel, a
 
 The stone was dropped on October 7, 2023. The ripples that mattered most crossed 2,000 kilometers of ocean and hit the world's supply chains six weeks later.
 
----
 
 *This post is part of the "Geopolitical Crises and Markets" series, covering how political decisions by nations translate into financial market outcomes. Analytical frameworks are for educational purposes. All dollar figures cited are sourced from public market data, government publications, and academic research. No investment advice is implied or intended.*

@@ -510,6 +510,5 @@ This post is the opening framework for the series. The subsequent posts build on
 - **GPR Index methodology** — Caldara, D., and M. Iacoviello (2022), "Measuring Geopolitical Risk," American Economic Review, 112(4): 1194-1225. Available at matteoiacoviello.com/gpr.htm. The full dataset is publicly available and updated monthly.
 - **Geopolitical risk and equity premiums** — Hassan, T.A., Hollander, S., van Lent, L., and Tahoun, A. (2019), "Firm-Level Political Risk: Measurement and Effects," Quarterly Journal of Economics. Uses firm-level earnings call transcripts to measure geopolitical risk exposure at the company level — a more granular tool than the GPR Index.
 
----
 
 *This post is part of the series "Geopolitical Crises & Markets: How Nations Move, How Markets React." It is educational in intent and does not constitute investment advice. Past geopolitical market patterns do not guarantee future outcomes; every crisis has unique characteristics. Data sourced from: Caldara-Iacoviello GPR Index (matteoiacoviello.com), Bloomberg, MSCI, IEA, as of June 2026.*

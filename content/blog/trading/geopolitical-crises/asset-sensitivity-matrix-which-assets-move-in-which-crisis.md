@@ -24,7 +24,6 @@ The matrix above is the reference tool this post will build from the ground up. 
 
 ![The full 6x7 asset sensitivity matrix mapping crisis types to asset class responses](/imgs/blogs/asset-sensitivity-matrix-which-assets-move-in-which-crisis-1.png)
 
----
 
 ## Foundations: What Moves Asset Prices and Why
 
@@ -71,7 +70,6 @@ Every geopolitical event reaches asset markets through one or more of three chan
 
 ![War escalation transmits to asset prices through three distinct channels simultaneously](/imgs/blogs/asset-sensitivity-matrix-which-assets-move-in-which-crisis-3.png)
 
----
 
 ## The Six Crisis Types: Each Fires Different Channels
 
@@ -129,7 +127,6 @@ Pandemics and other sudden systemic shocks (a major financial institution collap
 
 This is why COVID-19 March 2020 produced oil prices crashing to near zero (demand destruction, not supply disruption) while gold first fell in the liquidity squeeze and then soared as central banks injected trillions. The initial gold sell-off — gold dropped about 5% in the first two weeks of the COVID crash — confused many investors. We will explain that "liquidity paradox" in the worked examples below.
 
----
 
 ## Reading the Matrix Row by Row
 
@@ -165,7 +162,6 @@ In sovereign debt crises, the local currency of the defaulting country collapses
 
 The COVID-19 gold pattern is the most educational: gold initially fell in March 2020 (liquidity crunch — everyone was selling everything for cash, including gold), then rallied +25% over the year as central banks printed unprecedented stimulus. That sequence — initial sell-off then multi-month rally — is the "liquidity paradox" that appears in every major panic.
 
----
 
 ## The Risk-Off vs. Supply-Shock Distinction in Practice
 
@@ -187,7 +183,6 @@ If yes to most of these: buy Treasuries and gold. Sell equities and EM FX. The d
 
 If yes to most of these: sell equities. Buy oil and commodity-linked assets. Buy gold. Be *cautious* on Treasuries — the inflation vs. safety dynamic makes them unpredictable. The dollar often strengthens on safety but may face inflation pressure long-term.
 
----
 
 ## Worked Examples: Four Crises Through the Matrix
 
@@ -215,7 +210,6 @@ The math for a practical position: if a portfolio had \$100,000 long Brent crude
 
 ![Brent crude and gold both rose after the Ukraine invasion, diverging from typical risk-off patterns](/imgs/blogs/asset-sensitivity-matrix-which-assets-move-in-which-crisis-5.png)
 
----
 
 #### Worked example:
 
@@ -235,7 +229,6 @@ Now compare this directly to the Russia-Ukraine oil move: Brent went *up* on war
 
 The full math on USD strengthening: the US imported roughly \$540 billion of goods from China in 2018. A 25% tariff on \$200 billion of that represents potentially \$50 billion less in annual import spending over time. Less import spending = fewer dollars leaving the US economy to pay for Chinese goods = mechanical dollar support. That \$50 billion annual effect works out to roughly \$4 billion per month, a meaningful flow relative to daily FX market turnover.
 
----
 
 #### Worked example:
 
@@ -261,7 +254,6 @@ For US Treasuries in COVID: the 10-year Treasury yield fell from 1.59% on Februa
 
 ![Multi-asset 7-day returns after Russia-Ukraine invasion show the three-channel pattern](/imgs/blogs/asset-sensitivity-matrix-which-assets-move-in-which-crisis-2.png)
 
----
 
 #### Worked example:
 
@@ -287,7 +279,6 @@ By one month later, the TRY had recovered to 2.94 — almost completely erasing 
 
 The size differential is instructive: **Turkey -5% in a day vs. global markets -0.4%**. The ratio is roughly 12.5:1 for a "local shock." For reference, in the Russia-Ukraine invasion, the gap was much smaller (Russia was -85% but European markets were also -10% to -15%) because Russia's commodity exports were genuinely global. The *local vs. global* multiplier depends on commodity and financial linkage, not on the severity of the political event.
 
----
 
 ## The Duration Dimension: Spikes vs. Repricing vs. Regime Change
 
@@ -317,7 +308,6 @@ Russia's energy relationship with Europe is a prime example. Before February 202
 
 Similarly, the US-China chip war that began in earnest in October 2022 (with export controls on advanced AI chips) created a structural repricing of the semiconductor supply chain. Companies like Nvidia lost 12% on the October 7, 2022 announcement day, but then gained +239% over calendar year 2023 as AI demand overwhelmed the China revenue loss. Investors who recognized the structural shift early — that the chip war would *accelerate* domestic semiconductor investment, not just restrict it — captured extraordinary returns.
 
----
 
 ## Second-Order Effects: Defense, Cybersecurity, Agriculture, Logistics
 
@@ -351,7 +341,6 @@ Wars, sanctions, and blockades redraw shipping routes — sometimes permanently.
 
 The investment logic: shipping companies benefit in the short run from rate spikes (their fixed cost base means incremental revenue is nearly pure profit). But if the disruption is long-lasting, shippers order more vessels, and the rate advantage erodes. Logistics traders position *early* in the spike and exit as new capacity is committed.
 
----
 
 ## Regional vs. Global Contagion: The Decision Tree
 
@@ -391,7 +380,6 @@ These averages blend across all crisis types, which is why the numbers are moder
 
 Note also: oil averages +3.1% even across *all* events, not just wars. This reflects a structural asymmetry in oil markets — any geopolitical uncertainty creates an immediate precautionary demand spike from traders who buy insurance against supply disruption. This "geopolitical insurance premium" in oil is fairly persistent: researchers estimate it adds roughly \$5-10/barrel to Brent's equilibrium price in periods of elevated geopolitical tension versus periods of calm.
 
----
 
 ## Common Misconceptions
 
@@ -415,7 +403,6 @@ A US-China trade war is *specifically negative* for China-integrated EM supply c
 
 The Russia-Ukraine invasion of 2022 was one of the largest geopolitical shocks in decades — yet the S&P 500 fell only about 5% from pre-invasion levels within the first month, and had recovered by May 2022. The market cared about commodity supply disruption and inflation, not about the political severity of the invasion. Meanwhile, a relatively minor event — the announcement of US tariffs on \$50 billion of Chinese goods in March 2018 — wiped 3% off the S&P 500 in a single day because markets had not priced it in. **Surprise size, not event size, drives the initial move.**
 
----
 
 ## How It Shows Up in Real Markets: The Playbook
 
@@ -496,7 +483,6 @@ Every geopolitical risk premium eventually unwinds. The Iran nuclear deal signed
 
 The signature of a geopolitical unwind: the GPR index falls, the VIX declines, gold gives back 30-50% of its crisis gain, and EM FX begins to recover. The sequence typically takes 30-90 days after the peak uncertainty. Trying to pick the exact top of the risk premium is less effective than waiting for the *VIX peak* confirmation (when VIX starts falling from a 30+ level, the de-escalation is confirmed) and then positioning for the unwind.
 
----
 
 ## Further Reading and Cross-Links
 
@@ -510,6 +496,5 @@ The sensitivity matrix is the *framework*; the deep mechanisms behind each cell 
 
 In the next post in this series, we will build the **geopolitical risk premium calculator** — how to quantify how much of a crisis is "already priced in" versus what would need to happen for prices to move further. That is the instrument every event-driven trader needs to avoid chasing headlines.
 
----
 
 *Data sources: Caldara-Iacoviello GPR Index (matteoiacoviello.com); Brent crude, wheat futures, and FX data via Reuters/Bloomberg; RUSSIA_UKRAINE_MARKET curated dataset; US tariff escalation data from PIIE; Turkey BIST-100 and TRY data via Bloomberg; COVID market impact data from S&P Global. All figures as of 2026-06-21.*

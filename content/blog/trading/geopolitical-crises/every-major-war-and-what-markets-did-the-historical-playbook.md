@@ -20,7 +20,6 @@ readTime: 42
 > - Ukraine 2022 was different from Crimea 2014 not because it was bigger militarily, but because it triggered the largest commodity supply disruption and sanctions package since the 1970s.
 > - The classification framework matters more than the headline: proxy war = almost no market impact; regional oil conflict = energy spike; major power war = regime change; nuclear-adjacent = maximum safe-haven flows.
 
----
 
 On the morning of August 2, 1990, Iraqi tanks crossed into Kuwait. By the time New York markets opened, oil had jumped from \$17 to \$21 a barrel — a 24% spike in 12 hours. Over the following 11 weeks, the S&P 500 fell 20%, oil surged to \$36, gold climbed 10%, and every financial television pundit was predicting a decade-long Middle East conflict that would reshape the global economy.
 
@@ -34,7 +33,6 @@ Understanding why some wars are "spike" events and others are "regime change" ev
 
 ![Major armed conflicts 1950-2024 color-coded by equity market outcome: green recovery, red repricing, amber ambiguous](/imgs/blogs/every-major-war-and-what-markets-did-the-historical-playbook-1.png)
 
----
 
 ## Foundations: How Wars Move Financial Markets
 
@@ -96,7 +94,6 @@ When fear strikes, investors move money from risky assets (equities, EM currenci
 
 In a properly functioning crisis, all five of these assets should appreciate simultaneously. When they diverge — when the dollar falls while gold rises, for example — it's a signal that the crisis involves US credibility or dollar system integrity, not just geopolitical risk.
 
----
 
 ## The Complete Dataset: 27 Conflicts and What Markets Did
 
@@ -149,7 +146,6 @@ Russia's military intervention in Georgia (August 8-12, 2008) is a useful data p
 **Ukraine full invasion — February 2022 (full analysis in Worked Example section)**
 The modern version of 1973: a major-power conflict triggering the largest commodity supply disruption and financial sanctions package in 50 years.
 
----
 
 ## The Statistical Pattern: Day-1 Overshoots and Day-30 Recovery
 
@@ -175,7 +171,6 @@ The critical caveat: **this only works in the 22 "spike" cases, not the 5 "regim
 
 This is why classification matters more than the trade itself. Getting the "spike vs regime change" call right on Day 3-5 is worth far more than the timing precision of Day 1 vs Day 30.
 
----
 
 ## The Oil War Premium Taxonomy
 
@@ -198,7 +193,6 @@ The Strait of Hormuz is the world's most critical chokepoint — 20-21 million b
 
 ![Brent crude 1970-2025 annotated with major conflict events — only 1973 and 2022 produced structural regime shifts](/imgs/blogs/every-major-war-and-what-markets-did-the-historical-playbook-5.png)
 
----
 
 ## The War Type Classification Framework
 
@@ -214,7 +208,6 @@ The single most useful thing you can learn from this historical dataset is that 
 
 **Major power wars / nuclear-adjacent conflicts** — conflicts directly involving or threatening the core interests of the US, China, Russia, or any nuclear state. Examples: Ukraine 2022 (Russia directly), Taiwan scenario (China directly), Korea 1950 (China intervened). Market impact: regime change territory. Equities -20% to -35%, maximum safe-haven flows, potential currency system disruption. These are the events that reshape global supply chains and alliances for decades.
 
----
 
 ## The Decision Tree: Classifying on Day One
 
@@ -239,7 +232,6 @@ Sanctions affect three financial channels: trade flows (export revenue), FX rese
 **Gate 5: Default — spike, not regime change**
 If you've passed Gates 1-4 without a "yes," historical base rates say you're in spike territory. The trade is: buy equities on Day 30 after confirming no new escalation to Gates 1-4; reduce gold and USD positions if the flight-to-safety positions have already run.
 
----
 
 ## Worked Examples: Five Trades in Depth
 
@@ -286,7 +278,6 @@ The math: A portfolio that shorted the Dow on October 11 (Dow at ~960), covered 
 
 **The enduring lesson:** The 1973 trade worked because it classified correctly on Day 5 as a genuine supply disruption with *no available offset* and *deliberate political motivation*. Every subsequent oil conflict has been measured against this benchmark.
 
----
 
 #### Worked example:
 
@@ -328,7 +319,6 @@ The oil trade was equally clear in retrospect: short oil in late January 1991 (o
 
 **The lesson:** "Buy when the war starts" sounds wrong but the data supports it — you're buying the resolution of uncertainty, not the war itself.
 
----
 
 #### Worked example:
 
@@ -369,7 +359,6 @@ By December 31, 2001, the S&P was down 13% for the *full year* — meaning that 
 
 This is the most important exception to the playbook: **geopolitical shocks in a macro bear market do not produce recovery rallies** because the recovery isn't about geopolitics — it's about the macro cycle, and that takes longer.
 
----
 
 #### Worked example:
 
@@ -405,7 +394,6 @@ The Sharpe ratio improvement from 0.28 to 0.55 is the most meaningful number: th
 
 The strategy doesn't make you rich. It makes you slightly better than average while protecting you from the tail events where you misclassified the spike.
 
----
 
 #### Worked example:
 
@@ -454,7 +442,6 @@ Full year 2022: European equities underperformed US by 20 percentage points.
 
 The classification test: Ukraine 2022 passes Gate 1 (major power directly involved), Gate 2 (major pipeline region), Gate 3 (confirmed supply disruption >5% — European gas cut by 50%), and Gate 4 (SWIFT + reserve freeze). All four gates triggered simultaneously. That's the definition of regime change.
 
----
 
 ## When War Is Bullish for Equities
 
@@ -494,7 +481,6 @@ The mechanism is simple: wars increase defense procurement budgets, and defense 
 
 The 2022 Ukraine conflict triggered what defense analysts called the "generational re-armament trade" in Europe: Germany's 100 billion euro Bundeswehr fund, NATO's 2% GDP pledge suddenly becoming real, and the entire European defense sector (Leonardo, Rheinmetall, BAE Systems, Thales) re-rating upward by 30-80% over 2022-2023. Rheinmetall, a German ammunition maker that was trading at 100 euros per share before February 2022, exceeded 600 euros per share by early 2024 — a 6× move driven entirely by the war-driven procurement cycle.
 
----
 
 ## The Safe-Haven Playbook by Conflict Type
 
@@ -522,7 +508,6 @@ Based on the historical dataset, here is the positioning framework by conflict c
 - Reduce overall equity exposure by 20-30%
 - The honest answer: if this actually goes nuclear, no portfolio construction protects you. The hedge is the position that performs best in the likely "nuclear signaling doesn't escalate" scenario (which is historically every time).
 
----
 
 ## The Geopolitical Conflict Taxonomy: Graph View
 
@@ -536,7 +521,6 @@ The Falklands War involved 3,000 casualties and ended in 74 days. Gaza 2023 had 
 
 By contrast, the Gulf War 1991 — which the US won decisively in 100 hours of ground combat and "only" 148 American deaths — was in Category 2 (oil spike) because it threatened the world's most critical oil infrastructure. The *threat* mattered more than the *outcome* for oil markets.
 
----
 
 ## Common Misconceptions About War and Markets
 
@@ -564,7 +548,6 @@ Vietnam lasted 10 years and the equity impact was driven by inflation, not the l
 
 True in 2022: European STOXX 600 underperformed S&P 500 by 20 percentage points because European companies had the direct energy dependency. But in the Balkans wars of the 1990s, European equities were relatively unaffected (no energy dependency, no sanctions on European trade flows). Geography matters only when it translates into financial channel exposure.
 
----
 
 ## How It Shows Up in Real Markets: The Playbook Applied to Future Scenarios
 
@@ -621,7 +604,6 @@ This is less a single event scenario and more a slow-moving risk that has been g
 
 A military incident in the South China Sea — a standoff over a reef, a collision between navies — would not itself be regime-changing (neither side wants escalation over uninhabited rocks). But it would be a catalyst to accelerate the already-occurring decoupling trade: short Chinese tech (especially semiconductor supply chain), long Vietnamese and Indian manufacturing, long US defense.
 
----
 
 ## Further Reading and Cross-Links
 

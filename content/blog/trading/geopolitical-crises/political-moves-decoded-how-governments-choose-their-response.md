@@ -200,7 +200,6 @@ The worked example for an investor: when you see a Section 301 investigation ann
 
 *The key number: Section 301 tariffs averaged 19.3% on Chinese goods through 2021-2023; IEEPA tariffs peaked at 145% in April 2025 before the 90-day pause to 30% — a 7.6x escalation that would have been impossible under Section 301 timelines.*
 
----
 
 #### Worked example:
 
@@ -228,7 +227,6 @@ The broader calculation: China exported about \$505 billion to the US in 2018 vs
 
 *The key number: China's \$34bn retaliation in trade-war terms was 6.7% of its US export exposure — carefully sized to hurt politically but not trigger a full economic rupture.*
 
----
 
 #### Worked example:
 
@@ -248,7 +246,6 @@ The break-even analysis the Treasury ran: at \$60/bbl, Russia's estimated fiscal
 
 *The key number: Russia's oil revenues in 2021 were \$117 billion; in 2022 (war year, pre-cap) they surged to \$218 billion on the oil price spike; in 2023 (post-cap enforcement) they fell to \$160 billion. The cap reduced revenues by roughly \$58 billion versus the 2022 peak — substantial, but far from the elimination a \$40 cap might have theoretically achieved (and failed to achieve in practice).*
 
----
 
 #### Worked example:
 

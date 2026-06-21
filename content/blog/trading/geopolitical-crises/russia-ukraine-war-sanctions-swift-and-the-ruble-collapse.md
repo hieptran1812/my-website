@@ -495,6 +495,5 @@ For deeper technical context:
 
 The Russia sanctions case will be studied in international law, economics, and political science for decades. It represents the largest peacetime test of whether financial warfare can substitute for (or complement) military force in constraining an aggressor. The verdict is complex: the sanctions imposed real costs and changed Russia's strategic calculus around some decisions, while failing to stop the war or achieve the most optimistic forecasts of economic collapse. That complexity is itself the lesson — and why every trader, investor, and policymaker operating in an increasingly fragmented global order needs to understand this architecture.
 
----
 
 *All data cited from public sources: RUSSIA_SANCTIONS_DATA, RUSSIA_UKRAINE_MARKET, OIL_CAP_URALS, and BRENT_CRUDE datasets sourced from Bloomberg, CBR, IEA, IMF, and Kyiv School of Economics reporting as of mid-2026. Economic warfare data from Silverado Policy Accelerator and CSIS Russia sanctions tracking. This post is educational analysis of market mechanisms, not financial advice.*
