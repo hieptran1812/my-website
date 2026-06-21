@@ -295,6 +295,18 @@ The 10% baseline tariff on all imports stayed in effect even after the pause. Ch
 
 Rising yields in this context reflect inflation fears and foreign selling, not optimism about growth. In a stagflationary scenario (high inflation + slow growth), yields can rise even as the economy deteriorates. The 1970s stagflation saw Treasury yields hitting double digits while economic growth was negative. The Liberation Day yield spike was not a green light; it was a warning signal of a particularly difficult macroeconomic scenario.
 
+### "Tariffs will raise enough revenue to close the deficit"
+
+At Liberation Day rates — a 10% baseline on all imports plus higher country-specific rates — the theoretical annual tariff revenue would be roughly \$400-\$500 billion per year, based on the roughly \$3.3 trillion in annual US imports. This sounds significant, but it misses two critical dynamics. First, higher tariffs reduce import volumes (that is partly the point), which directly reduces the revenue base. At a 50% tariff, US imports might fall 25-30%, meaning actual revenue is closer to \$300-\$350 billion. Second, tariff-driven economic slowdown reduces income tax revenues, capital gains revenues, and corporate tax revenues — potentially by more than the tariff revenue raised. The Congressional Budget Office's preliminary assessments of sustained Liberation Day tariffs estimated a net fiscal deterioration, not improvement, over a 10-year window.
+
+### "A weaker dollar helps US exporters enough to offset tariff damage"
+
+The dollar weakened after Liberation Day (DXY falling from 104.2 to ~99.5), which theoretically makes US exports more competitive by reducing their price in foreign currencies. This is true, but the math is dwarfed by the tariff impact. A 5% dollar depreciation makes US goods 5% cheaper for foreign buyers — helpful, but modest. A 125% Chinese retaliatory tariff on US agricultural goods makes those goods 125% more expensive for Chinese buyers — catastrophic for the specific US exporters affected. The currency effect is a rounding error relative to the tariff effect in the most exposed sectors.
+
+### "Supply chains will diversify quickly and the tariff pain is temporary"
+
+The most seductive misconception. Corporate executives naturally discuss supply chain diversification as soon as tariffs are announced, which creates a narrative of rapid adaptation. The reality: building a new factory requires identifying a location, negotiating with local government, constructing the building (12-18 months minimum), ordering specialized equipment (lead times of 12-24 months for precision manufacturing equipment), hiring and training workers (6-12 months to build a competent assembly workforce), and qualifying the new facility with customers (3-6 months of testing and audit). End-to-end: 3-5 years minimum for a greenfield facility, and that assumes no regulatory or permitting delays. During those years, the tariff cost is real and ongoing. The adaptation arrives years after the pain.
+
 ## How It Shows Up in Real Markets
 
 ### Case Study 1: Apple's Extraordinary Exposure
@@ -349,7 +361,7 @@ But this is just one year's issuance. The US has \$36+ trillion in total outstan
 
 Annual refinancing exposure ≈ \$8.5T × 0.50% = **\$42.5 billion per year more in interest**
 
-This is why bond market moves are not abstractions — they translate directly into federal budget constraints. A 50bps rise in yields makes the 2017 tax cut extension materially more expensive to sustain. The White House understands this math. The April 9 pause came after three days of rising yields, not three days of falling stocks.
+This is why bond market moves are not theoretical — they translate directly into federal budget constraints in dollar terms. A 50bps rise in yields makes the 2017 tax cut extension materially more expensive to sustain. The White House understands this math. The April 9 pause came after three days of rising yields, not three days of falling stocks.
 
 ### Case Study 3: Estimating the Tariff Put Strike Price
 
@@ -467,6 +479,24 @@ Tariffs in 2025 interact with several pre-existing macro conditions:
 3. **10-year Treasury yield vs. 2-year:** The yield curve shape tells you whether the market believes the Fed will fight tariff inflation (flat/inverted curve) or look through it (steepening curve). A sharply steepening curve (long yields rise more than short yields) signals inflation risk is the dominant concern.
 
 4. **Chinese rare earth export data:** Any movement toward actual rare earth export restrictions from China would be a severe supply shock for Western manufacturing. Monthly Chinese customs data on rare earth exports is the leading indicator.
+
+5. **US CPI goods components (monthly):** The "core goods" component of CPI is the most direct tariff impact channel. Watch for month-over-month jumps in apparel, furniture, electronics, and appliances — these categories have the highest China import intensity and will show tariff pass-through first, typically with a 2-4 month lag after tariffs take effect.
+
+6. **Corporate earnings guidance revisions:** Each quarterly earnings season, executives from import-heavy companies will either raise or lower earnings guidance based on tariff cost assumptions. A wave of guidance cuts (Apple, Walmart, Best Buy, Nike, Gap, etc.) is a leading indicator of broader earnings deterioration that has not yet shown up in consensus estimates.
+
+7. **Freight and logistics data (Freightos Baltic Index, US containerized freight rates):** Tariff announcements cause immediate shifts in freight patterns. A spike in rates on Vietnam-to-US routes signals importers switching destinations. A collapse in China-to-US rates signals order cancellations. Freight data leads economic data by 4-8 weeks.
+
+### Managing Risk in the Tariff Shock Regime
+
+The tariff shock regime introduces several sources of risk that do not exist in normal market conditions:
+
+**Policy reversal risk:** Positions built on tariff escalation can be unwound in minutes by a tweet or announcement. Keeping position sizes moderate and maintaining stop-losses is essential — the April 9 rally of 7.9% in 90 minutes can be completely ruinous if you are short into it.
+
+**Sequencing risk:** The escalation-pause cycle means the macro backdrop is constantly shifting. A position that is correct for the escalation phase (short China supply chain stocks) can lose money in the pause phase (relief rally) even if your long-run thesis is right. Managing through the cycle requires conviction on timing, not just direction.
+
+**Tail risk — unexpected escalation:** The April 2 Liberation Day announcement itself was a tail risk that most scenario analyses had not adequately priced. A single announcement moved markets 10% in 48 hours. Maintaining some optionality (through options rather than pure delta-one positions, or through reduced position sizing) protects against the next unexpected escalation.
+
+**Inflation-rate feedback loop risk:** If tariff-driven inflation forces the Fed to hike rather than cut in 2025-2026, the entire equity valuation framework shifts. A 25bp Fed hike that the market is not expecting can undo weeks of tariff-driven rally. This is the scenario where both the tariff put and the Fed put are simultaneously off the table — the most dangerous outcome for equity longs.
 
 ## Further Reading
 

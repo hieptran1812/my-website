@@ -31,7 +31,7 @@ To understand a trade war, you need to first understand the political economy th
 
 **The domestic political calculation** is the starting point for everything. When Donald Trump campaigned in 2016, the core trade promise was simple: the United States ran a \$375 billion goods trade deficit with China, and that deficit was destroying Rust Belt manufacturing jobs. This was not a nuanced argument about comparative advantage — it was a political coalition-building exercise. The voters who cared most about trade deficits were concentrated in Pennsylvania, Ohio, Michigan, and Wisconsin: the exact swing states that had flipped to Trump and needed to stay Republican in 2020.
 
-This political geography matters enormously for how far a trade war goes. A president willing to impose tariffs that hurt consumers everywhere but help workers in a handful of swing states has a very clear incentive structure. The tariff is, in essence, a transfer from consumers (who pay higher prices) to politically important workers (who get protected jobs). The economics are almost always negative-sum in aggregate; the politics can be positive-sum for the coalition that matters.
+This political geography matters enormously for how far a trade war goes. A president willing to impose tariffs that hurt consumers everywhere but help workers in a handful of swing states has a very clear incentive structure. The tariff is effectively a transfer from consumers (who pay higher prices) to politically important workers (who get protected jobs). The economics are almost always negative-sum in aggregate; the politics can be positive-sum for the coalition that matters.
 
 The IP grievance adds a second dimension. The USTR's 2018 Section 301 investigation found that China was engaged in "unreasonable and discriminatory" trade practices including: (1) forced technology transfer as a condition of market access, (2) licensing restrictions that benefit Chinese companies, (3) state-directed acquisition of US firms and assets for advanced technology, and (4) outright cyber theft of commercial secrets. The USTR's estimate of the annual cost to the US economy: between \$225 billion and \$600 billion per year. That is not a rounding error — it is the entire GDP of countries like Thailand or Egypt. Even if the estimate is overstated by a factor of three, the grievance is real and the political energy it generates is genuine.
 
@@ -258,7 +258,7 @@ The trade war playbook requires knowing your rung. Here is the signal map and th
 
 **Retaliation/counter-retaliation (Rungs 3-4):**
 - Signal: Target-country announces retaliatory tariff list. Second USTR tariff round.
-- Position: Add to safe-haven positions (gold, JPY, CHF). Reduce exposure to multinationals with bilateral revenue exposure. Consider long VIX if below 20. Short commodity futures in the retaliatory target (soybeans during China retaliation).
+- Position: Add to safe-haven positions (gold, JPY, CHF). Reduce exposure to multinationals with bilateral revenue exposure. Buy VIX calls if VIX is below 20. Short commodity futures in the retaliatory target (soybeans during China retaliation).
 - Invalidation: High-level bilateral meeting announced.
 
 **Sector weapons (Rung 5):**
@@ -308,6 +308,88 @@ To ground all of this in real market outcomes, here is what the 2018 US-China es
 **Sectors:** The clearest sectoral story was agriculture (big loser), Chinese tech (big loser, down 35%), and Vietnam/ASEAN manufacturers (big winner, with Vietnam FDI rising 35% in 2018 as companies accelerated supply chain diversification away from China).
 
 ![Section 301 investigation process from USTR filing through investigation and tariff imposition to legal challenge](/imgs/blogs/how-a-trade-war-starts-trigger-escalation-negotiation-7.png)
+
+## The Game Theory of Escalation Ladders
+
+A trade war is, at its core, a strategic game between two players who both expect to lose money and both keep escalating anyway. To an economist, this looks irrational. To a game theorist, it is the predictable equilibrium of a game where backing down carries costs that exceed the tariff bill itself. Understanding why both sides escalate even into mutual loss is the key to predicting how long a standoff lasts and where it breaks.
+
+**The commitment problem** is the foundation. A leader who threatens tariffs and then quietly withdraws them has revealed that the threat was a bluff. That revelation is expensive: it weakens every future threat the leader makes, not just the one that failed. So leaders deliberately make their threats hard to reverse — they tie tariffs to public legislation, frame them as matters of national security, and stake personal political capital on them. The harder a threat is to take back, the more credible it becomes. But credibility purchased through irreversibility is exactly what removes the off-ramp when both sides would prefer to de-escalate.
+
+**Domestic audience costs** convert this commitment problem into a one-way ratchet. When a president tells voters "China is cheating us and I will make them pay," the voters who believed that promise become a constituency that punishes retreat. The economist Robert Putnam called this the "two-level game": every international negotiation is simultaneously a negotiation with the domestic audience watching at home. A leader who concedes abroad pays a price at home, and that price can exceed the economic cost of holding the line. This is why the tariff itself is often the cheaper option than the climbdown.
+
+**Resolve signaling** is the third mechanism, and it explains the apparent madness most directly. Each round of escalation is a costly signal. By imposing a tariff that hurts your own consumers, you demonstrate to the other side that you are willing to bear pain — which makes your threat of even more pain credible. Cheap talk ("we are serious") is ignored; costly action ("we just taxed our own importers \$50 billion") is believed. The escalation is not a failure of communication. It is the communication.
+
+When you map a trade war onto the iterated prisoner's dilemma, the structure becomes clear. In a single-shot game, both sides defect (impose tariffs) because cooperation is unenforceable. But trade relationships are repeated games, which is what normally sustains cooperation through tit-for-tat. The trade war breaks because both sides start playing tit-for-tat from a defection — each retaliation is "justified" punishment for the other's last move, and neither can be the first to forgive without appearing weak to the domestic audience.
+
+#### Worked example:
+
+**The 2018 steel-tariff escalation game tree.**
+
+Consider the US-China interaction in mid-2018 as a sequential game. The US has imposed List 1 (\$34 billion at 25%). China must decide: retaliate on soybeans, or absorb the hit. Let's assign approximate payoffs in billions of dollars of net political-economic value, where negative numbers represent net loss.
+
+If China absorbs (does not retaliate): China loses the \$8.5 billion in tariff drag on its exporters but pays no further cost. China's payoff: −8.5. The US claims a clean win. US payoff: +2 (political win exceeds the consumer cost at this small scale).
+
+If China retaliates on soybeans (\$34 billion at 25%): China inflicts roughly \$8.5 billion of pain on US farmers in swing states, but its own livestock industry pays \$3 billion more for protein imports from Brazil. China's net payoff: −8.5 (tariff drag) − 3 (costlier soy) + 4 (resolve signal value, deterring future US escalation) = −7.5. The US now faces \$8.5 billion of farm-state pain. US payoff: +2 − 8.5 = −6.5.
+
+The Nash logic: China retaliates because −7.5 is better than the −8.5 of absorbing, *and* because the +4 resolve-signal term raises the expected cost to the US of escalating again. China's retaliation is not spite. It is a rational move to make the next US tariff more expensive to contemplate. The equilibrium only resolves when one side's domestic audience cost of continuing finally exceeds its audience cost of settling — which, as the rest of this post argues, is usually set by the election calendar, not the spreadsheet.
+
+## The Smoot-Hawley Precedent: The Master Case Study
+
+Every modern trade-war analyst eventually invokes Smoot-Hawley, usually as a warning. The 1930 Tariff Act — formally the Smoot-Hawley Tariff Act, named for Senator Reed Smoot and Representative Willis Hawley — remains the master case study of how a domestic political process produces a catastrophic international outcome. It is worth understanding precisely, because the lesson traders draw from it is often the wrong one.
+
+**What it was.** Smoot-Hawley raised US tariffs on more than 20,000 imported goods to some of the highest levels in American history, pushing the average tariff on dutiable imports to roughly 59%. It began as a narrow bill to protect struggling farmers, but the legislative process turned it into a textbook case of congressional capture. Once the bill was open, every industry lobby demanded protection for its own products, and logrolling — "I will vote for your tariff if you vote for mine" — ballooned the bill far beyond its original scope. More than 1,000 economists signed a petition begging President Hoover to veto it. He signed it anyway in June 1930.
+
+**The mechanism.** The damage came not from the US tariff in isolation but from the retaliation cascade. At least 25 countries imposed retaliatory tariffs. Canada, America's largest trading partner, retaliated first and hardest. The result was a coordinated collapse: global trade fell by roughly 66% between 1929 and 1934. US exports fell from \$5.2 billion to \$1.7 billion. The tariff did not cause the Great Depression — the Depression was already underway — but it converted a US downturn into a synchronized global trade implosion by triggering a beggar-thy-neighbor spiral in which every country tried to protect its own market and collectively shrank the whole.
+
+![Smoot-Hawley tariff spiral and global trade collapse 1929-1934](/imgs/blogs/how-a-trade-war-starts-trigger-escalation-negotiation-8.png)
+
+**Why markets do not react to a modern Smoot-Hawley the same way.** Three structural features of today's system buffer the shock that flattened trade in the 1930s. First, the US dollar is now the global reserve currency, which means a US trade shock pulls capital *into* dollar assets as a safe haven rather than triggering capital flight — the opposite of the 1930s dynamic. Second, the WTO exists, and even in its weakened state it provides a forum, a set of rules, and a default expectation that disputes are bounded rather than open-ended. Third, the dense web of bilateral and regional free-trade agreements gives trade flows alternative channels: when one corridor is taxed, goods reroute rather than stopping. A 2025 tariff shock causes a sharp repricing, but it does not produce a 66% collapse in global trade, because the system has more shock absorbers than it did in 1930.
+
+**The actual lesson for modern traders.** The naive lesson — "tariffs cause depressions, so sell everything" — is wrong and has cost people money in every trade-war episode since 2018. The real lesson from Smoot-Hawley is about *secondary retaliation*: the danger is not the first tariff or even the first retaliation, but the third-country chain reaction. Watch for countries that retaliate against the retaliating country, or that raise their own walls defensively to avoid being flooded by goods diverted from the primary dispute. The 2018-2019 episode stayed contained precisely because secondary retaliation did not materialize at scale. The signal that a modern dispute is turning into a Smoot-Hawley-style spiral is not the headline tariff number — it is the moment a fourth and fifth country start raising defensive barriers in response to diverted trade flows.
+
+## How Supply Chain Complexity Changes the Trade War Math
+
+Smoot-Hawley happened in a world of relatively simple trade: countries exported finished goods to each other. The modern trade war is fought across global value chains, where a single product crosses borders many times before final assembly. This changes the arithmetic of escalation in ways that the headline tariff numbers completely obscure.
+
+**A tariff on China is never only a tariff on China.** When the US taxes Chinese electronics, it is also taxing the South Korean memory chips, Japanese precision components, and German machine tools that were shipped *into* China to be assembled into the final good. The country of final assembly absorbs the tariff at the border, but the economic pain radiates back up the value chain to every upstream supplier. This is why a "bilateral" US-China tariff produces measurable equity weakness in Seoul, Tokyo, and Frankfurt within hours of the announcement.
+
+**The tariff multiplier effect.** Consider the iPhone, whose components are sourced from more than 40 countries. The display glass, the memory, the camera modules, the radio-frequency chips, the rare-earth magnets, and the precision casings come from a global supplier network — much of it concentrated in Taiwan, South Korea, and Japan — even though final assembly happens in China and the device is recorded as a "Chinese import" when it enters the US. A tariff on that import therefore propagates a fraction of its cost into Taiwanese foundries, Korean memory makers, and Japanese component suppliers. The headline says "tariff on China," but the incidence is spread across the entire East Asian electronics complex.
+
+**Why the US-China trade war stayed contained.** Deep bilateral supply-chain integration is a stabilizer, not just a vulnerability. Because so many US companies depended on Chinese assembly and so many Chinese factories depended on US-designed inputs and US end-markets, going "nuclear" — a full decoupling — would have inflicted immediate, visible, and politically unbearable damage on both sides simultaneously. The integration that made the trade war painful is the same integration that capped it. Mutual supply-chain exposure functions like mutually assured destruction: it deters the worst escalation precisely because both sides are wired into each other.
+
+**Identifying the next diversion beneficiary.** When a tariff wall goes up between two large economies, production does not vanish — it relocates to whichever third country offers the lowest-friction path to the same end-market. Vietnam and Mexico were the headline winners of the 2018-2025 era: Vietnam captured electronics and furniture assembly, Mexico captured autos and appliances under the proximity advantage of nearshoring. To identify the *next* beneficiary before the consensus does, screen for three features: an existing manufacturing base in the affected category, a free-trade agreement or favorable tariff status with the end-market, and infrastructure capable of scaling quickly. The country that scores on all three before flows arrive is where the FDI surge and the export boom show up first — and where the equity re-rating is largest.
+
+#### Worked example:
+
+**Decomposing the incidence of a \$200 billion tariff list.**
+
+Suppose the US imposes a 25% tariff on \$200 billion of imports recorded as "Chinese." The headline implies a \$50 billion annual cost falling on China. Trace where it actually lands by decomposing the import basket into its value-chain origin. Assume final assembly in China contributes 40% of the recorded value, with the remaining 60% sourced upstream: 20% from Taiwan and South Korea (chips, displays, memory), 15% from Japan (precision components), 10% from the US itself (design, software, branded IP), and 15% from other suppliers.
+
+Applying the 25% tariff to the \$200 billion base gives the \$50 billion headline. But the value-added incidence splits accordingly: roughly \$20 billion of pain traces to Chinese assembly margin, \$10 billion to Taiwanese and Korean suppliers, \$7.5 billion to Japanese suppliers, \$5 billion back onto US-origin content, and \$7.5 billion to the rest. In other words, less than half the "tariff on China" actually bites Chinese value-added, and a measurable \$5 billion boomerangs onto US firms whose own components were re-imported inside the finished good. This is the arithmetic behind the cross-market equity moves: a Seoul or Tokyo selloff on a US-China headline is not contagion, it is correct pricing of where the tariff incidence genuinely falls.
+
+## What a Trade War Looks Like from the Trading Floor
+
+Reading a trade war from a textbook is one thing. Trading one in real time, when every headline could be a genuine policy shift or a negotiating feint, is another. The professionals who made money in 2018-2019 were not the ones with the strongest views on trade policy. They were the ones with the best process for separating signal from noise.
+
+**The signal-to-noise problem.** During the peak of the trade war, market-moving statements arrived almost continuously: presidential tweets, official spokesperson comments, anonymous "sources familiar with the talks," and leaked draft texts. Most of it was noise — negotiating theater designed to move the other side, not to inform markets. A trader who reacted to every headline got chopped to pieces by the reversals. The discipline was to ask, for every statement: is this a *position* (rhetoric, reversible, aimed at the other negotiator) or a *commitment* (legally filed, hard to reverse, aimed at implementation)?
+
+**Watching the Federal Register, not the tweets.** The professionals' answer was to anchor on the bureaucratic paper trail rather than the political noise. A tariff is not real until the USTR files it in the Federal Register with an effective date. That filing is the commitment; everything before it is positioning. Traders who tracked USTR docket numbers, comment-period closing dates, and Federal Register publication schedules knew when a tariff was genuinely imminent versus when a tweet was just pressure. The Federal Register calendar was a more reliable trade-war clock than any cable-news chyron.
+
+**The Friday-evening rulemaking signal.** Tariff actions had a tell: announcements disproportionately dropped on Friday evenings, after US markets closed. Partly this was bureaucratic rhythm; partly it was a deliberate choice to give markets a weekend to absorb a shock rather than gap violently in live trading. For traders, the implication was concrete: carrying risk into a Friday close during an active escalation phase meant accepting gap risk over a weekend you could not hedge in real time. Many desks systematically reduced exposure into Friday closes during peak escalation for exactly this reason.
+
+**The announcement-day alpha and the reversal pattern.** The empirical regularity of the 2018-2019 episode was that tariff-announcement days produced sharp risk-off moves — the S&P routinely fell 1-3% on a genuine escalation headline — followed frequently by partial next-day reversals as the market reassessed whether the move was negotiating theater or real. The edge was not in predicting the announcement but in fading the *overreaction*: the initial spike in fear was often larger than the eventual realized impact, because the market priced the tail risk of full escalation that usually did not arrive.
+
+#### Worked example:
+
+**Sizing a VIX position around a tariff announcement.**
+
+Suppose it is early May 2019. The VIX sits at 13 — complacent. Federal Register chatter and the negotiating calendar suggest a meaningful tariff escalation is likely within two weeks, and history says escalation headlines spike the VIX into the low-to-mid 20s. You want to express this with a defined-risk volatility position rather than a directional equity short.
+
+You buy VIX call options. Say a VIX call struck near 18 costs \$1.20 per contract (each VIX option is \$100 per point of premium), so \$120 per contract. You allocate a risk budget of \$24,000, buying 200 contracts for \$24,000 total — and that \$24,000 is your maximum loss, fixed.
+
+The escalation hits: the List-3 tariff is raised to 25% and the VIX spikes from 13 to 23. Your 18-strike calls are now roughly \$5 in the money. Conservatively marking them at \$5.50 (intrinsic plus residual time value): 200 contracts × \$5.50 × \$100 = \$110,000. Against a \$24,000 cost, that is an \$86,000 gain — roughly 3.6x on risked capital.
+
+The discipline that makes this work is the same one the floor lived by: size it as a defined-risk option so the inevitable head-fake headlines cannot stop you out, anchor the timing to the Federal Register calendar rather than the tweets, and take the profit into the fear spike rather than waiting for the next-day reversal to give it back.
 
 ## Further Reading and Cross-Links
 

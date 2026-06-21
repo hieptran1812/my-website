@@ -25,7 +25,7 @@ By the close of trading that day, the S&P 500 had shrugged — it fell just 0.5%
 
 The 2018-19 US-China trade war is the first time a developed-market superpower attempted to use tariffs as a geopolitical weapon against another major economy while markets were deep, liquid, and globally integrated. The pricing signals were extraordinarily informative. Understanding what moved, how much, how fast, and which signals were reliable gives you the analytical toolkit for every trade war that follows.
 
-![All seven US-China tariff rounds from July 2018 to January 2020 with dollar values and retaliation dates](/imgs/blogs/the-2018-19-us-china-trade-war-1.png)
+![All seven US-China tariff rounds from July 2018 to January 2020 with dollar values and retaliation dates](/imgs/blogs/us-china-trade-war-2018-19-tariff-rounds-and-market-scorecards-1.png)
 
 ## Foundations: The Political Backdrop and the Structural Grievances
 
@@ -103,7 +103,7 @@ Hong Kong's Hang Seng Index fell 13.6% in 2018, reflecting both the China econom
 
 The RMB depreciation was the single most important analytical development of the trade war for FX traders. Understanding its mechanics is essential for correctly sizing any future trade-war currency position.
 
-![Average US tariff on Chinese imports bar chart from 3 percent pre-war baseline to 21 percent peak](/imgs/blogs/the-2018-19-us-china-trade-war-2.png)
+![Average US tariff on Chinese imports bar chart from 3 percent pre-war baseline to 21 percent peak](/imgs/blogs/us-china-trade-war-2018-19-tariff-rounds-and-market-scorecards-2.png)
 
 The PBOC manages the RMB through a "managed float" system — it sets a daily reference rate (the "fix") and allows the currency to trade within a 2% band around the fix. The fix itself is set with reference to the previous day's close, a basket of currencies, and a "counter-cyclical factor" that the PBOC can use to resist market moves it considers excessive.
 
@@ -111,7 +111,7 @@ In 2018, the PBOC let the fix drift systematically weaker. The counter-cyclical 
 
 The result: USD/CNH (the offshore RMB rate, which is more freely traded) moved from 6.25 in January 2018 to 6.97 in October 2018. That is an 11.5% RMB depreciation in 9 months — one of the largest managed currency moves by a major economy in modern history.
 
-![USD per CNH exchange rate 2018-2020 showing deliberate RMB depreciation during trade war period](/imgs/blogs/the-2018-19-us-china-trade-war-3.png)
+![USD per CNH exchange rate 2018-2020 showing deliberate RMB depreciation during trade war period](/imgs/blogs/us-china-trade-war-2018-19-tariff-rounds-and-market-scorecards-3.png)
 
 **Bonds — Flight to Safety.**
 
@@ -145,7 +145,7 @@ A 25% tariff on \$200 billion in Chinese goods imposes a direct cost of approxim
 
 RMB depreciation of 8% against the dollar means that Chinese exporters who earn their revenues in USD receive 8% more RMB for every dollar earned. On \$200 billion of goods, an 8% RMB depreciation = \$16 billion offset in RMB terms. The tariff's effective net cost to China: \$50 billion − \$16 billion = \$34 billion. The currency buffer reduced the tariff's impact by approximately 32%.
 
-![Market scorecard matrix showing winners and losers in equities FX bonds commodities by country](/imgs/blogs/the-2018-19-us-china-trade-war-4.png)
+![Market scorecard matrix showing winners and losers in equities FX bonds commodities by country](/imgs/blogs/us-china-trade-war-2018-19-tariff-rounds-and-market-scorecards-4.png)
 
 This is why the Trump administration's designation of China as a "currency manipulator" in August 2019 (when USD/CNH crossed 7.00 for the first time since 2008) was not merely rhetoric — it was economically accurate, even though the IMF's formal manipulation criteria were not strictly met. China was deliberately running a currency cushion against the tariff shock.
 
@@ -191,7 +191,7 @@ That \$10.8 billion annual revenue loss is why the government needed a \$28 bill
 
 The political targeting was precise. The states most dependent on soybean exports to China — Iowa, Illinois, Indiana, Minnesota — were all states where Republican Senate incumbents would face competitive re-elections in 2018 and 2020. By threatening their agricultural base, China was sending a direct political signal to Republican senators: pressure your president, or we take your farmers with us.
 
-![US soybean price 2017-2020 showing 23 percent price collapse after China imposed 25 percent tariff](/imgs/blogs/the-2018-19-us-china-trade-war-5.png)
+![US soybean price 2017-2020 showing 23 percent price collapse after China imposed 25 percent tariff](/imgs/blogs/us-china-trade-war-2018-19-tariff-rounds-and-market-scorecards-5.png)
 
 ## Phase One: The Paper Deal That Paused the War
 
@@ -220,7 +220,7 @@ The market added \$2.35 trillion in equity value for a deal that delivered appro
 
 This distinction matters because it explains why Phase One was so valuable despite being so limited: the market was not pricing the deal's content, it was pricing the absence of the alternative (continued escalation toward Scenario D — investment bans, financial sanctions, and technology decoupling).
 
-![Phase One deal structure from US tariff commitments through China purchase pledges to enforcement and reality](/imgs/blogs/the-2018-19-us-china-trade-war-6.png)
+![Phase One deal structure from US tariff commitments through China purchase pledges to enforcement and reality](/imgs/blogs/us-china-trade-war-2018-19-tariff-rounds-and-market-scorecards-6.png)
 
 ## The Sector Winners and Losers: A Full Map
 
@@ -258,7 +258,7 @@ Phase One included a specific commitment for China to purchase \$52 billion in U
 
 Perhaps the clearest and most reliable trade of the 2018-19 period was long US Treasuries. The 10-year yield fell from 3.23% (October 2018 peak) to 1.47% (September 2019 trough) — a 176 basis point decline that produced approximately a 15-17% total return on a 10-year Treasury over 11 months (duration-weighted). This was driven by (1) flight-to-safety demand, (2) Fed rate cuts, and (3) reduced inflation expectations as tariffs were priced as a one-time price level shock rather than a sustained inflationary impulse.
 
-![Trade war supply chain rerouting showing US export losses and Vietnam Mexico Brazil gains](/imgs/blogs/the-2018-19-us-china-trade-war-7.png)
+![Trade war supply chain rerouting showing US export losses and Vietnam Mexico Brazil gains](/imgs/blogs/us-china-trade-war-2018-19-tariff-rounds-and-market-scorecards-7.png)
 
 ## China's Retaliatory Targeting: The Political Economy of Retaliation
 
@@ -320,6 +320,97 @@ The 2018-19 trade war produced three reliable trading patterns that have been re
 **Pattern 3: Long Vietnam/ASEAN manufacturing ETFs on escalation, reduce on resolution.** The VN-Index fell 17% in 2018 on the initial trade war uncertainty, then outperformed significantly through 2019-2021 as the FDI surge and export growth repriced Vietnam's equity market from an emerging market discount to a "trade war winner" premium. The VanEck Vietnam ETF (VNM) and similar vehicles captured this repricing. The risk in 2025: Vietnam's surplus with the US has made it a secondary tariff target, meaning the "trade war winner" trade now carries its own tariff risk.
 
 **Forward application — Liberation Day 2025:** The April 2025 Liberation Day tariffs followed a compressed version of the 2018-19 playbook. IEEPA emergency authority (versus Section 301) made the escalation faster and less predictable. The DXY dollar index fell 5% in two weeks (unusual — normally tariff escalation strengthens the dollar as the US is seen as "winning"). The dollar weakness was a new signal: markets were pricing the tariffs as a structural competitiveness threat to the US itself (higher consumer prices, lower foreign investment in US assets) rather than as leverage on China. The 90-day pause negotiated in May 2025 (reducing tariffs to 30%) produced the same short-squeeze pattern as every prior de-escalation.
+
+## The Equity Market Forensics: Sector-by-Sector Scorecard
+
+The aggregate index numbers — S&P 500 down 6.2%, Shanghai Composite down 24.6% — conceal far more than they reveal. The trade war did not depress equities uniformly; it carved the market into clean winners and losers along a single axis: revenue exposure to the bilateral US-China goods trade. The sectors that sat directly in the tariff crossfire experienced drawdowns two to four times the index average, while domestically-oriented sectors barely registered the shock. Reading the forensics by sector is what separates a usable trade-war playbook from a vague "stocks went down" narrative.
+
+**US agriculture — the deepest, most concentrated wound.** The publicly-traded proxies for the soybean shock were the agricultural processors and equipment makers. Archer-Daniels-Midland (ADM) and Bunge, the two largest grain merchandisers, saw their shares fall 18% and 22% respectively from their 2018 highs as crush margins compressed and the China export channel collapsed. But the drawdown timeline is the instructive part: the agricultural complex did not bottom in 2018 — it ground lower through mid-2019 as each failed negotiation round (the May 2019 collapse most sharply) re-priced the probability that China would ever return as a buyer. Recovery did not begin in earnest until the December 2019 Phase One pre-announcement, and even then the recovery was incomplete: the soybean basis (US cash price relative to the Chicago futures benchmark) remained structurally depressed in the Gulf and Pacific Northwest export channels well into 2021, because the trade had been permanently re-routed to Brazil.
+
+**US industrials — the CapEx deferral channel.** Caterpillar and Deere were the cleanest industrial-sector read on trade-war stress, because their order books are a real-time proxy for global capital-expenditure confidence. Caterpillar fell from a January 2018 high near \$170 to roughly \$112 by December 2018 — a 34% peak-to-trough drawdown, more than five times the S&P decline. The mechanism was not direct tariff cost (though Caterpillar did flag roughly \$100-200 million in incremental tariff expense per quarter); it was the second-order effect of customers deferring equipment purchases amid uncertainty. When a mining company or a construction firm cannot forecast its input costs for the next two years, it postpones the new excavator order. Deere followed the same arc, falling approximately 27% peak-to-trough, with management explicitly citing "trade tensions" as the reason farmers were delaying equipment upgrades — a vicious circle, since the same farmers were the ones losing the soybean revenue that would have funded the purchase.
+
+**US technology — the bifurcation.** Technology was the single most analytically rich sector because it split cleanly into two cohorts. The first cohort — the China-revenue-exposed semiconductor names — was hammered. Qualcomm (QCOM), Micron (MU), and Skyworks Solutions (SWKS) derived 50-65% of their revenue from China (either direct sales or sales to Chinese OEMs assembling for global markets). These three fell 30-45% from their 2018 peaks. Micron, with approximately 57% China revenue exposure, was the textbook casualty. The second cohort — the domestically-monetized platform companies (the FANG complex: Facebook, Amazon, Netflix, Google) — was largely insulated, because their revenue came from advertising and subscriptions in markets China could not tariff. This bifurcation produced the single most reliable relative-value trade of the period.
+
+**China equities — the divergence and the sector map.** The CSI 300 (the large-cap mainland benchmark) fell roughly 25% in 2018 even as the MSCI World index was down only about 8.7%, a divergence of more than 16 percentage points — the widest China-vs-developed-world equity gap since 2008. Within the Shanghai Composite (SHCOMP), the sector breakdown was telling: export-manufacturing and technology-hardware sectors led the decline (down 35-50%), consumer-discretionary names tied to the slowing domestic economy fell 25-35%, while defensive sectors — utilities, consumer staples, and the state-owned banks — held up far better (down only 5-15%), because their cash flows were domestic and policy-supported.
+
+**The relative value trade.** The cleanest expression of the entire trade war thesis in equity space was: long US domestically-monetized tech growth, short China export-manufacturing and China-revenue semiconductors. This single pair captured the central asymmetry of the conflict — that the tariff shock fell hardest on the target (China's export base) and on the most China-dependent US suppliers, while sparing the US growth franchises whose moats were domestic.
+
+#### Worked example:
+
+**Sizing the relative-value pair — SOXX vs. CSI 300, 2018.**
+
+Position thesis: The semiconductor complex (China-revenue-heavy) underperforms Chinese large-caps' eventual policy-supported floor, but more cleanly, you want to express "US tech holds, China exporters break." For a clean illustration, consider the realized 2018 relative move between the iShares Semiconductor ETF (SOXX) and the CSI 300.
+
+In calendar 2018, SOXX fell approximately 9% while the CSI 300 fell approximately 25%. A trader who in January 2018 put on a market-neutral pair — long \$1,000,000 of a basket of domestically-monetized US tech and short \$1,000,000 of CSI 300 exposure (via futures or an A-shares ETF) — would have captured the spread.
+
+Long leg P&L (domestic US tech, roughly flat to +5% for the FANG-weighted basket): assume +2% = +\$20,000.
+
+Short leg P&L (short CSI 300, which fell 25%): +25% × \$1,000,000 = **+\$250,000**.
+
+Combined gross P&L on the \$1M-per-leg, \$2M-gross pair: \$20,000 + \$250,000 = **\$270,000**, a 13.5% return on gross exposure.
+
+Even the cruder version — long SOXX (−9%) against short CSI 300 (−25%) — nets +16% on the spread (−9% minus −25% = +16%), or **\$160,000** on a \$1M-per-leg basis. The relative-value framing matters because it strips out the directional "everything fell" beta and isolates the trade-war signal: the target's export base broke far harder than the initiator's growth franchises.
+
+## The Currency Dimension: PBOC's Rate Management Playbook
+
+The RMB was not a passive casualty of the trade war — it was an actively managed instrument of it, and the People's Bank of China (PBOC) ran a deliberate, legible playbook that an FX trader could read in real time. The earlier section quantified the depreciation offset; this section is about the mechanics of how the PBOC executed it and the specific signals that told you what the central bank was actually doing behind the managed float.
+
+**The CNH-CNY spread as a tension gauge.** China runs two distinct exchange rates for the same currency. The onshore rate (CNY) trades inside mainland China within a tightly controlled 2% band around the daily fix and is subject to capital controls. The offshore rate (CNH), traded freely in Hong Kong and Singapore, has no band and reflects unconstrained market sentiment. The spread between them — CNH minus CNY — is one of the purest real-time gauges of trade-war tension available. When CNH trades weaker (a higher USD/CNH number) than CNY, it means offshore market participants are betting on further depreciation faster than the PBOC's controlled onshore rate will allow. During the sharpest escalation weeks of 2018 and again in August 2019, the CNH-CNY spread blew out to several hundred pips of offshore weakness, signaling that the market wanted the currency lower than Beijing was officially letting it go.
+
+**The managed float and the fixing.** Each morning the PBOC publishes a central parity rate — the fix — and the onshore CNY may then trade up to 2% on either side of it. The fix is nominally set by reference to the prior day's close, a trade-weighted currency basket, and a discretionary "counter-cyclical factor." That counter-cyclical factor is the policy lever. By choosing where to set the fix relative to where the prior close and the basket would imply, the PBOC can lean against or with the market. Through 2018, the PBOC repeatedly set the fix weaker than the prior close implied, walking the currency down in a controlled glide that offset tariff pressure without triggering a disorderly capital-flight panic.
+
+**The 7.00 red line.** For a decade after the 2008 crisis, USD/CNY had never traded above 7.00 — the level had acquired totemic, almost psychological status as a line Beijing would defend. So when the fix was allowed to push CNY through 7.00 on August 5, 2019 — days after Trump threatened the List 4A tariffs — markets read it as a deliberate signal that the PBOC was now willing to weaponize the currency rather than defend the line. Global equities sold off sharply, the US Treasury formally designated China a currency manipulator within hours, and the move confirmed for traders that the 7.00 floor under the dollar was gone. The break was not an accident of market forces overwhelming the PBOC; it was a decision, telegraphed through a weaker-than-expected fix.
+
+**Reading the reserves.** The cleanest confirmation of whether the PBOC is intervening — spending dollars to support the RMB versus letting it slide — comes from the monthly foreign-exchange reserve figure. In the 2015-2016 devaluation scare, reserves fell by roughly a trillion dollars as the PBOC burned through them defending the currency. The tell in 2018-2019 was the opposite: reserves stayed remarkably stable, hovering around \$3.1 trillion. That stability was the signal. It meant the PBOC was not spending reserves to defend the RMB — it was content to let it weaken. A trader watching that reserve series knew the depreciation was sanctioned policy, not a fight the central bank was losing.
+
+![CNY/USD exchange rate 2018-2019 showing managed depreciation through tariff rounds](/imgs/blogs/us-china-trade-war-2018-19-tariff-rounds-and-market-scorecards-9.png)
+
+## The Phase One Deal: What It Did and Didn't Resolve
+
+The earlier section quantified the purchase shortfall and the market's valuation of the truce. This section is about the political economy — why a deal this hollow got signed at all, what it deliberately left untouched, and why it survived a change of administration nearly intact.
+
+**What China agreed to.** The headline commitment was \$200 billion in additional US goods and services purchases over 2020-2021, above the 2017 baseline, split across energy, manufacturing, agriculture, and services. In exchange, the US halved the List 4A tariff rate from 15% to 7.5% and agreed to refrain from new tariffs during the commitment window. Critically, the 25% tariffs on Lists 1 through 3 — covering roughly \$250 billion of Chinese goods — stayed fully in place.
+
+**What China actually bought.** Against the \$200 billion commitment, China purchased approximately \$170 billion over the two years — about 85% of target, and that 85% is generous accounting that leans on COVID-19 as the excuse for the 2020 shortfall. By the harder measure economists prefer — purchases relative to what China would have bought anyway at pre-war trend — Phase One delivered essentially zero net additional purchasing in some categories. The agricultural numbers came closest to target; the manufactured-goods and services categories fell furthest short.
+
+**What was deliberately not in Phase One.** The deal was silent on every structural issue that started the war. It did not require China to abandon or modify Made in China 2025. It contained no enforceable mechanism on industrial subsidies, no reform of the forced-technology-transfer regime, no enforcement teeth on intellectual-property theft beyond aspirational language, and no rollback of the state-directed investment restrictions that the original Section 301 investigation had catalogued. The deal addressed the symptom Beijing could most easily concede — the trade balance, fixable by buying more soybeans and LNG — while leaving every grievance the national-security establishment actually cared about completely intact.
+
+**The political economy of "good enough."** Both sides needed a deal, and both needed it before their respective political calendars turned hostile. Trump faced re-election in November 2020 and wanted a market-friendly, farmer-friendly win to campaign on; a continued escalation into 2020 risked an equity-market drawdown and farm-belt anger in exactly the swing states he needed. Xi faced a slowing domestic economy, mounting corporate-bond stress, and no desire to concede on the structural issues that touched national pride. A purchase-commitment deal was the unique solution that gave each leader what he needed: Trump got a signing ceremony and a tariff pause, Xi gave up nothing structural. "Good enough" was defined by the politics, not the economics.
+
+**The market reaction on signing day.** On January 15, 2020, the actual signing was an anticlimax precisely because the market had already priced the December pre-announcement. The S&P 500 rose roughly 0.7% on the day, the Shanghai Composite about 0.3%, and soybeans rallied approximately 4.8% in the surrounding window as agricultural buyers priced the purchase commitments. The muted equity move confirmed that the option value of de-escalation had been captured weeks earlier; signing day was the receipt, not the surprise.
+
+**Why Biden kept 90% of the tariffs.** The most telling verdict on Phase One came from the opposing party. The Biden administration, which had campaigned against Trump's trade approach, retained more than 90% of the tariff structure when it took office in 2021 — and in 2024 escalated further, raising tariffs on Chinese EVs to 100% and solar to 50%. The continuity revealed a bipartisan consensus: the China-hawk position had become structural in Washington, detached from any single administration. Tariffs were no longer a Trump policy; they were US policy.
+
+#### Worked example:
+
+**A soybean futures position around the Phase One announcement.**
+
+Setup: You are an agricultural macro trader in early December 2019. The December 13 pre-announcement that a Phase One deal is "agreed in principle" is the catalyst — the deal includes \$32 billion in agricultural purchase commitments, and soybeans are the marquee crop. You go long CBOT soybean futures ahead of the formal signing.
+
+Position: Long 50 CBOT soybean contracts. Each contract is 5,000 bushels. Entry on December 12, 2019, at approximately \$8.95 per bushel.
+
+Total notional: 50 × 5,000 × \$8.95 = **\$2,237,500**.
+
+By the January 15 signing window, soybeans had rallied to approximately \$9.40 per bushel on the purchase-commitment optimism — a move of \$0.45 per bushel.
+
+P&L: 50 contracts × 5,000 bushels × \$0.45 = **\$112,500** gross gain.
+
+Return on notional: \$112,500 / \$2,237,500 = **5.0%** over roughly five weeks.
+
+The cautionary footnote — and the reason this trade was a tactical rent, not a structural position: the purchase commitments were never fully delivered, Brazil retained the structural China soybean franchise, and the post-signing rally faded as the market recognized the gap between commitment and delivery. The lesson generalizes: trade the announcement, not the fundamentals, because in a trade-war deal the announcement and the fundamentals are frequently different things.
+
+## How to Read the Next Round: Signal Framework for 2025
+
+The 2018-19 episode supplied the template, but the 2025 escalation ran a faster, blunter version of it — which makes a forward-looking signal framework more valuable than a backward-looking scorecard.
+
+**The "Liberation Day" 2025 context.** In April 2025, the Trump 2.0 administration used emergency tariff authority (IEEPA) rather than the slower Section 301 process to impose a sweeping tariff regime. On China specifically, the escalation ran from a baseline near 10% up to a peak of 145% within weeks — a velocity of escalation that would have taken eighteen months under the 2018-19 legal machinery. A 90-day pause negotiated in May 2025 then walked the China rate back to roughly 30%. The compressed timeline is the key structural difference: the 2018-19 war gave markets months to price each rung; the 2025 version moved in days, compressing the volatility into sharper spikes.
+
+**The new escalation framework — tariffs as a negotiating chip.** The 2025 playbook treated tariff levels explicitly as bargaining positions rather than fixed policy. The 90-day pause became the signature de-escalation signal — a pause was the market's cue that a deal framework was being negotiated, functionally equivalent to the December 2019 "agreed in principle" moment. The trading implication: in the 2025 regime, the pause announcement (not the deal signing) is the catalyst to fade the safe-haven trade and re-risk, because the pause is when the option value of avoided escalation gets priced.
+
+**Which sectors face the next round.** The escalation has migrated up the technology stack from the 2018-19 industrial-and-consumer-goods focus toward the sectors that define strategic competition: semiconductors (advanced chips and the equipment to make them), electric vehicles, batteries and the critical-minerals supply chain that feeds them, and pharmaceuticals and active pharmaceutical ingredients (a supply-chain-security concern exposed during COVID). These four are where the next escalation rungs are most likely, because they sit at the intersection of the trade-balance grievance and the Made in China 2025 national-security grievance that Phase One never resolved.
+
+**The three signals to watch.** First, the USTR Section 301 review schedule — the statutory four-year review of existing tariffs, and any new Section 301 investigation launches, telegraph where the next tariff lists are being drafted. Second, the Commerce Department Entity List additions — when Chinese firms (particularly in semiconductors, AI, and surveillance) are added, it signals that the conflict is escalating from the trade lane into the technology-denial lane, which historically hits the targeted firms' equity far harder than a tariff does. Third, Treasury and CFIUS actions — new outbound-investment restrictions, inbound-investment screening, and the financial-sanctions toolkit (the Scenario D the market most fears) are the escalation rungs that would turn a trade war into a capital war. Watching these three calendars — USTR, Commerce Entity List, Treasury/CFIUS — gives you the leading edge on the next round before it reaches the tariff headline.
+
 
 ## Further Reading and Cross-Links
 
