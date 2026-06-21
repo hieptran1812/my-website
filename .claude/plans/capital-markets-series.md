@@ -116,8 +116,8 @@ CAP `the-capital-markets-machine-the-whole-system-end-to-end` — Capstone: walk
 Only link posts you are reasonably sure exist (siblings in this series, or the BUILD-ON pair above).
 
 ## Build state
-- [ ] Wave 1 (Track A, 6) — NOT STARTED
-- [ ] Wave 2 (Track B, 6)
+- [x] Wave 1 (Track A, 6) — SHIPPED+pushed main 2026-06-21 (commit 93116210)
+- [x] Wave 2 (Track B, 6) — SHIPPED+pushed main 2026-06-21
 - [ ] Wave 3 (Track C, 6)
 - [ ] Wave 4 (Track D, 5)
 - [ ] Wave 5 (Track E, 5)
