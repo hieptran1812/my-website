@@ -3077,6 +3077,39 @@
     "width": 1792,
     "height": 864
   },
+  "/imgs/blogs/basel-i-ii-iii-and-the-capital-rules-that-govern-every-bank-1.png": {
+    "width": 1792,
+    "height": 1200,
+    "cover": true
+  },
+  "/imgs/blogs/basel-i-ii-iii-and-the-capital-rules-that-govern-every-bank-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/basel-i-ii-iii-and-the-capital-rules-that-govern-every-bank-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/basel-i-ii-iii-and-the-capital-rules-that-govern-every-bank-4.png": {
+    "width": 1792,
+    "height": 983
+  },
+  "/imgs/blogs/basel-i-ii-iii-and-the-capital-rules-that-govern-every-bank-5.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/basel-i-ii-iii-and-the-capital-rules-that-govern-every-bank-6.png": {
+    "width": 1624,
+    "height": 914
+  },
+  "/imgs/blogs/basel-i-ii-iii-and-the-capital-rules-that-govern-every-bank-7.png": {
+    "width": 1792,
+    "height": 1189
+  },
+  "/imgs/blogs/basel-i-ii-iii-and-the-capital-rules-that-govern-every-bank-8.png": {
+    "width": 1792,
+    "height": 1199
+  },
   "/imgs/blogs/basel-iii-iv-bank-capital-rules-and-the-price-of-credit-1.png": {
     "width": 1792,
     "height": 955,
@@ -10824,6 +10857,39 @@
     "width": 1792,
     "height": 1266
   },
+  "/imgs/blogs/credit-risk-management-pd-lgd-ead-and-expected-loss-1.png": {
+    "width": 1792,
+    "height": 683,
+    "cover": true
+  },
+  "/imgs/blogs/credit-risk-management-pd-lgd-ead-and-expected-loss-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/credit-risk-management-pd-lgd-ead-and-expected-loss-3.png": {
+    "width": 1612,
+    "height": 914
+  },
+  "/imgs/blogs/credit-risk-management-pd-lgd-ead-and-expected-loss-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/credit-risk-management-pd-lgd-ead-and-expected-loss-5.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/credit-risk-management-pd-lgd-ead-and-expected-loss-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/credit-risk-management-pd-lgd-ead-and-expected-loss-7.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/credit-risk-management-pd-lgd-ead-and-expected-loss-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/credit-risk-the-chance-you-dont-get-paid-back-1.png": {
     "width": 1792,
     "height": 1212,
@@ -13059,6 +13125,39 @@
   "/imgs/blogs/deposit-insurance-lender-of-last-resort-and-the-anatomy-of-a-bank-run-8.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/deposit-insurance-the-lender-of-last-resort-and-moral-hazard-1.png": {
+    "width": 1792,
+    "height": 1261,
+    "cover": true
+  },
+  "/imgs/blogs/deposit-insurance-the-lender-of-last-resort-and-moral-hazard-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/deposit-insurance-the-lender-of-last-resort-and-moral-hazard-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/deposit-insurance-the-lender-of-last-resort-and-moral-hazard-4.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/deposit-insurance-the-lender-of-last-resort-and-moral-hazard-5.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/deposit-insurance-the-lender-of-last-resort-and-moral-hazard-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/deposit-insurance-the-lender-of-last-resort-and-moral-hazard-7.png": {
+    "width": 1792,
+    "height": 774
+  },
+  "/imgs/blogs/deposit-insurance-the-lender-of-last-resort-and-moral-hazard-8.png": {
+    "width": 1792,
+    "height": 1241
   },
   "/imgs/blogs/deprecation-and-sunset-retiring-an-api-humanely-1.png": {
     "width": 1792,
@@ -16577,6 +16676,11 @@
   "/imgs/blogs/field-guide-to-financial-institutions-7.png": {
     "width": 1792,
     "height": 976
+  },
+  "/imgs/blogs/fig1-proxy-network.png": {
+    "width": 2228,
+    "height": 1445,
+    "cover": true
   },
   "/imgs/blogs/filtering-sorting-and-sparse-fieldsets-without-reinventing-sql-1.png": {
     "width": 1792,
@@ -26378,6 +26482,39 @@
     "width": 1792,
     "height": 876
   },
+  "/imgs/blogs/market-risk-var-stressed-var-and-the-trading-limits-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/market-risk-var-stressed-var-and-the-trading-limits-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/market-risk-var-stressed-var-and-the-trading-limits-3.png": {
+    "width": 1605,
+    "height": 914
+  },
+  "/imgs/blogs/market-risk-var-stressed-var-and-the-trading-limits-4.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/market-risk-var-stressed-var-and-the-trading-limits-5.png": {
+    "width": 1601,
+    "height": 914
+  },
+  "/imgs/blogs/market-risk-var-stressed-var-and-the-trading-limits-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/market-risk-var-stressed-var-and-the-trading-limits-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/market-risk-var-stressed-var-and-the-trading-limits-8.png": {
+    "width": 1792,
+    "height": 1208
+  },
   "/imgs/blogs/market-structure-law-reg-nms-pfof-and-short-selling-rules-1.png": {
     "width": 1792,
     "height": 1151,
@@ -30416,6 +30553,39 @@
   "/imgs/blogs/operational-due-diligence-the-veto-7.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/operational-risk-fraud-cyber-and-the-loss-events-1.png": {
+    "width": 1792,
+    "height": 1227,
+    "cover": true
+  },
+  "/imgs/blogs/operational-risk-fraud-cyber-and-the-loss-events-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/operational-risk-fraud-cyber-and-the-loss-events-3.png": {
+    "width": 1624,
+    "height": 914
+  },
+  "/imgs/blogs/operational-risk-fraud-cyber-and-the-loss-events-4.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/operational-risk-fraud-cyber-and-the-loss-events-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/operational-risk-fraud-cyber-and-the-loss-events-6.png": {
+    "width": 1635,
+    "height": 914
+  },
+  "/imgs/blogs/operational-risk-fraud-cyber-and-the-loss-events-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/operational-risk-fraud-cyber-and-the-loss-events-8.png": {
+    "width": 1792,
+    "height": 1197
   },
   "/imgs/blogs/opt-inf-01-prefill-decode.png": {
     "width": 1615,
@@ -35795,6 +35965,39 @@
     "width": 1792,
     "height": 1126
   },
+  "/imgs/blogs/risk-weighted-assets-and-how-capital-ratios-really-work-1.png": {
+    "width": 1792,
+    "height": 878,
+    "cover": true
+  },
+  "/imgs/blogs/risk-weighted-assets-and-how-capital-ratios-really-work-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/risk-weighted-assets-and-how-capital-ratios-really-work-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/risk-weighted-assets-and-how-capital-ratios-really-work-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/risk-weighted-assets-and-how-capital-ratios-really-work-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/risk-weighted-assets-and-how-capital-ratios-really-work-6.png": {
+    "width": 1792,
+    "height": 1375
+  },
+  "/imgs/blogs/risk-weighted-assets-and-how-capital-ratios-really-work-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/risk-weighted-assets-and-how-capital-ratios-really-work-8.png": {
+    "width": 1792,
+    "height": 954
+  },
   "/imgs/blogs/robust-regularized-portfolios-math-for-quants-1.png": {
     "width": 1792,
     "height": 871,
@@ -39595,6 +39798,39 @@
     "width": 1779,
     "height": 1011
   },
+  "/imgs/blogs/stress-testing-ccar-the-supervisory-exam-and-living-wills-1.png": {
+    "width": 1792,
+    "height": 820,
+    "cover": true
+  },
+  "/imgs/blogs/stress-testing-ccar-the-supervisory-exam-and-living-wills-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/stress-testing-ccar-the-supervisory-exam-and-living-wills-3.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/stress-testing-ccar-the-supervisory-exam-and-living-wills-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/stress-testing-ccar-the-supervisory-exam-and-living-wills-5.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/stress-testing-ccar-the-supervisory-exam-and-living-wills-6.png": {
+    "width": 1792,
+    "height": 1219
+  },
+  "/imgs/blogs/stress-testing-ccar-the-supervisory-exam-and-living-wills-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/stress-testing-ccar-the-supervisory-exam-and-living-wills-8.png": {
+    "width": 1792,
+    "height": 853
+  },
   "/imgs/blogs/stress-testing-your-thesis-with-a-pre-mortem-1.png": {
     "width": 1792,
     "height": 1157,
@@ -40367,6 +40603,11 @@
   "/imgs/blogs/taiwan-semiconductors-and-the-most-important-supply-chain-on-earth-8.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-1.png": {
+    "width": 2154,
+    "height": 1440,
+    "cover": true
   },
   "/imgs/blogs/tariffs-and-trade-policy-as-a-market-force-1.png": {
     "width": 1792,
@@ -43720,6 +43961,43 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/the-four-risks-every-bank-runs-credit-market-liquidity-operational-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/the-four-risks-every-bank-runs-credit-market-liquidity-operational-2.png": {
+    "width": 1792,
+    "height": 867
+  },
+  "/imgs/blogs/the-four-risks-every-bank-runs-credit-market-liquidity-operational-3.png": {
+    "width": 1611,
+    "height": 914
+  },
+  "/imgs/blogs/the-four-risks-every-bank-runs-credit-market-liquidity-operational-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-four-risks-every-bank-runs-credit-market-liquidity-operational-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/the-four-risks-every-bank-runs-credit-market-liquidity-operational-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-four-risks-every-bank-runs-credit-market-liquidity-operational-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/the-four-risks-every-bank-runs-credit-market-liquidity-operational-8.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-four-risks-every-bank-runs-credit-market-liquidity-operational-9.png": {
+    "width": 1792,
+    "height": 1077
+  },
   "/imgs/blogs/the-four-types-of-firms-20251101024943.png": {
     "width": 1024,
     "height": 1024,
@@ -43873,6 +44151,34 @@
   "/imgs/blogs/the-game-theoretic-trading-playbook-who-what-edge-sucker-level-7.png": {
     "width": 1792,
     "height": 1210
+  },
+  "/imgs/blogs/the-gaza-war-middle-east-contagion-risk-and-what-it-took-to-spread-1.png": {
+    "width": 1792,
+    "height": 983
+  },
+  "/imgs/blogs/the-gaza-war-middle-east-contagion-risk-and-what-it-took-to-spread-2.png": {
+    "width": 1792,
+    "height": 1010
+  },
+  "/imgs/blogs/the-gaza-war-middle-east-contagion-risk-and-what-it-took-to-spread-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-gaza-war-middle-east-contagion-risk-and-what-it-took-to-spread-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-gaza-war-middle-east-contagion-risk-and-what-it-took-to-spread-5.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/the-gaza-war-middle-east-contagion-risk-and-what-it-took-to-spread-6.png": {
+    "width": 1792,
+    "height": 1009
+  },
+  "/imgs/blogs/the-gaza-war-middle-east-contagion-risk-and-what-it-took-to-spread-7.png": {
+    "width": 1792,
+    "height": 1162
   },
   "/imgs/blogs/the-gil-explained-what-it-protects-and-what-it-costs-1.png": {
     "width": 1792,
