@@ -9055,6 +9055,39 @@
     "width": 1792,
     "height": 1090
   },
+  "/imgs/blogs/compare-and-swap-and-building-lock-free-data-structures-1.png": {
+    "width": 1792,
+    "height": 999,
+    "cover": true
+  },
+  "/imgs/blogs/compare-and-swap-and-building-lock-free-data-structures-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/compare-and-swap-and-building-lock-free-data-structures-3.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/compare-and-swap-and-building-lock-free-data-structures-4.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/compare-and-swap-and-building-lock-free-data-structures-5.png": {
+    "width": 1792,
+    "height": 1377
+  },
+  "/imgs/blogs/compare-and-swap-and-building-lock-free-data-structures-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/compare-and-swap-and-building-lock-free-data-structures-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/compare-and-swap-and-building-lock-free-data-structures-8.png": {
+    "width": 1792,
+    "height": 1428
+  },
   "/imgs/blogs/concentration-and-position-limits-the-one-trade-that-can-end-you-1.png": {
     "width": 1621,
     "height": 1013,
@@ -15673,6 +15706,11 @@
   "/imgs/blogs/event-volatility-implied-vs-realized-and-the-vol-crush-7.png": {
     "width": 1792,
     "height": 746
+  },
+  "/imgs/blogs/every-major-war-and-what-markets-did-the-historical-playbook-1.png": {
+    "width": 2478,
+    "height": 1418,
+    "cover": true
   },
   "/imgs/blogs/every-market-is-an-auction-the-double-auction-of-the-order-book-1.png": {
     "width": 1792,
@@ -31279,6 +31317,11 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-1.cover.webp": {
+    "width": 800,
+    "height": 450,
+    "cover": true
+  },
   "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-1.webp": {
     "width": 2053,
     "height": 1452,
@@ -33414,6 +33457,11 @@
   "/imgs/blogs/reading-a-core-dump-post-mortem-analysis-8.png": {
     "width": 1792,
     "height": 1209
+  },
+  "/imgs/blogs/reading-a-geopolitical-shock-spike-vs-regime-change-1.cover.webp": {
+    "width": 800,
+    "height": 450,
+    "cover": true
   },
   "/imgs/blogs/reading-a-geopolitical-shock-spike-vs-regime-change-1.webp": {
     "width": 2137,
@@ -36095,6 +36143,98 @@
   "/imgs/blogs/running-on-a-cluster-slurm-multi-node-launch-and-data-pipelines-8.png": {
     "width": 1792,
     "height": 1351
+  },
+  "/imgs/blogs/russia-invades-ukraine-the-first-72-hours-in-markets-1.cover.webp": {
+    "width": 800,
+    "height": 450,
+    "cover": true
+  },
+  "/imgs/blogs/russia-invades-ukraine-the-first-72-hours-in-markets-1.png": {
+    "width": 1891,
+    "height": 989,
+    "cover": true
+  },
+  "/imgs/blogs/russia-invades-ukraine-the-first-72-hours-in-markets-1.webp": {
+    "width": 1891,
+    "height": 989,
+    "cover": true
+  },
+  "/imgs/blogs/russia-invades-ukraine-the-first-72-hours-in-markets-2.webp": {
+    "width": 2341,
+    "height": 1425
+  },
+  "/imgs/blogs/russia-invades-ukraine-the-first-72-hours-in-markets-3.webp": {
+    "width": 2588,
+    "height": 1418
+  },
+  "/imgs/blogs/russia-invades-ukraine-the-first-72-hours-in-markets-4.webp": {
+    "width": 2120,
+    "height": 1468
+  },
+  "/imgs/blogs/russia-invades-ukraine-the-first-72-hours-in-markets-5.webp": {
+    "width": 2520,
+    "height": 1122
+  },
+  "/imgs/blogs/russia-invades-ukraine-the-first-72-hours-in-markets-6.webp": {
+    "width": 1891,
+    "height": 991
+  },
+  "/imgs/blogs/russia-invades-ukraine-the-first-72-hours-in-markets-7.webp": {
+    "width": 2171,
+    "height": 1448
+  },
+  "/imgs/blogs/russia-ukraine-war-food-wheat-fertilizer-and-the-global-south-1.png": {
+    "width": 1879,
+    "height": 1443,
+    "cover": true
+  },
+  "/imgs/blogs/russia-ukraine-war-sanctions-swift-and-the-ruble-collapse-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/russia-ukraine-war-the-energy-shock-playbook-1.cover.webp": {
+    "width": 800,
+    "height": 450,
+    "cover": true
+  },
+  "/imgs/blogs/russia-ukraine-war-the-energy-shock-playbook-1.png": {
+    "width": 1669,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/russia-ukraine-war-the-energy-shock-playbook-1.webp": {
+    "width": 1669,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/russia-ukraine-war-the-energy-shock-playbook-2.webp": {
+    "width": 1799,
+    "height": 1013
+  },
+  "/imgs/blogs/russia-ukraine-war-the-energy-shock-playbook-3.webp": {
+    "width": 1784,
+    "height": 1013
+  },
+  "/imgs/blogs/russia-ukraine-war-the-energy-shock-playbook-4.webp": {
+    "width": 1660,
+    "height": 907
+  },
+  "/imgs/blogs/russia-ukraine-war-the-energy-shock-playbook-5.webp": {
+    "width": 2132,
+    "height": 1440
+  },
+  "/imgs/blogs/russia-ukraine-war-the-energy-shock-playbook-6.webp": {
+    "width": 2060,
+    "height": 1469
+  },
+  "/imgs/blogs/russia-ukraine-war-the-energy-shock-playbook-7.webp": {
+    "width": 2036,
+    "height": 1440
+  },
+  "/imgs/blogs/russia-ukraine-war-the-energy-shock-playbook-8.webp": {
+    "width": 2154,
+    "height": 1453
   },
   "/imgs/blogs/rust-for-python-pyo3-and-maturin-1.png": {
     "width": 1792,
@@ -52503,15 +52643,5 @@
   "/imgs/blogs/zero-sum-positive-sum-and-the-house-where-trading-profits-come-from-7.png": {
     "width": 1616,
     "height": 914
-  },
-  "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-1.cover.webp": {
-    "width": 800,
-    "height": 450,
-    "cover": true
-  },
-  "/imgs/blogs/reading-a-geopolitical-shock-spike-vs-regime-change-1.cover.webp": {
-    "width": 800,
-    "height": 450,
-    "cover": true
   }
 }
