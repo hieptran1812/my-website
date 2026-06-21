@@ -321,15 +321,15 @@ This is where translation fine-tuning gets genuinely interesting, and it is the 
 
 The default SFT objective. Maximize the likelihood of each gold token given the source and the gold prefix:
 
-$$\mathcal{L}_{\text{MLE}}(\theta) = -\sum_{t=1}^{|y|} \log p_\theta\!\left(y_t \mid y_{<t},\, x\right)$$
+$$\mathcal{L}_{\text{MLE}}(\theta) = -\sum_{t=1}^{|y|} \log p_\theta\!\left(y_t \mid y_{\lt t},\, x\right)$$
 
-where $x$ is the source, $y$ the reference translation, $y_t$ the $t$-th target token, and $y_{<t}$ the gold prefix. It is simple, stable, and parallelizable. Its defining weakness is **exposure bias**: at training time the model always conditions on the *gold* prefix $y_{<t}$, but at inference it conditions on its *own* (possibly wrong) prefix. Early mistakes compound. It also optimizes likelihood, which is only loosely correlated with translation quality — a model can assign high probability to a fluent-but-unfaithful output.
+where $x$ is the source, $y$ the reference translation, $y_t$ the $t$-th target token, and $y_{\lt t}$ the gold prefix. It is simple, stable, and parallelizable. Its defining weakness is **exposure bias**: at training time the model always conditions on the *gold* prefix $y_{\lt t}$, but at inference it conditions on its *own* (possibly wrong) prefix. Early mistakes compound. It also optimizes likelihood, which is only loosely correlated with translation quality — a model can assign high probability to a fluent-but-unfaithful output.
 
 ### Label smoothing
 
 A one-line change to MLE that meaningfully helps MT. Instead of a one-hot target, you spread a small mass $\epsilon$ uniformly over the vocabulary $V$:
 
-$$q'(k) = (1-\epsilon)\,\mathbb{1}[k = y_t] + \frac{\epsilon}{V}, \qquad \mathcal{L}_{\text{LS}} = -\sum_{k} q'(k)\,\log p_\theta(k \mid y_{<t}, x)$$
+$$q'(k) = (1-\epsilon)\,\mathbb{1}[k = y_t] + \frac{\epsilon}{V}, \qquad \mathcal{L}_{\text{LS}} = -\sum_{k} q'(k)\,\log p_\theta(k \mid y_{\lt t}, x)$$
 
 With $\epsilon \approx 0.1$, this prevents the model from becoming over-confident, which improves **calibration** — and calibration is exactly what you need downstream, because QE-reranking and confidence gating depend on the model's probabilities meaning something. The gotcha is the mirror image: too much smoothing makes the model under-confident and can soften the probability signal you want for reranking. The transformer MT literature has used $\epsilon = 0.1$ as a default since the original "Attention Is All You Need" recipe, and it still holds up.
 
