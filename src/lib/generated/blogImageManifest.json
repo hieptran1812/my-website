@@ -2712,6 +2712,39 @@
     "width": 1792,
     "height": 929
   },
+  "/imgs/blogs/backups-that-actually-restore-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/backups-that-actually-restore-2.png": {
+    "width": 1792,
+    "height": 902
+  },
+  "/imgs/blogs/backups-that-actually-restore-3.png": {
+    "width": 1792,
+    "height": 1346
+  },
+  "/imgs/blogs/backups-that-actually-restore-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/backups-that-actually-restore-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/backups-that-actually-restore-6.png": {
+    "width": 1792,
+    "height": 860
+  },
+  "/imgs/blogs/backups-that-actually-restore-7.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/backups-that-actually-restore-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/backward-and-forward-compatibility-the-rules-of-safe-change-1.png": {
     "width": 1792,
     "height": 1278,
@@ -8098,7 +8131,7 @@
   },
   "/imgs/blogs/chinas-retaliation-playbook-soy-boeing-rare-earths-tourism-6.png": {
     "width": 1792,
-    "height": 884
+    "height": 900
   },
   "/imgs/blogs/chinas-retaliation-playbook-soy-boeing-rare-earths-tourism-7.png": {
     "width": 1792,
@@ -13998,6 +14031,39 @@
   "/imgs/blogs/diffusion-transformers-with-representation-autoencoders-20251016145838.png": {
     "width": 1792,
     "height": 629
+  },
+  "/imgs/blogs/disaster-recovery-and-business-continuity-1.png": {
+    "width": 1792,
+    "height": 1277,
+    "cover": true
+  },
+  "/imgs/blogs/disaster-recovery-and-business-continuity-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/disaster-recovery-and-business-continuity-3.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/disaster-recovery-and-business-continuity-4.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/disaster-recovery-and-business-continuity-5.png": {
+    "width": 1792,
+    "height": 1012
+  },
+  "/imgs/blogs/disaster-recovery-and-business-continuity-6.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/disaster-recovery-and-business-continuity-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/disaster-recovery-and-business-continuity-8.png": {
+    "width": 1792,
+    "height": 1227
   },
   "/imgs/blogs/disclosure-and-accounting-law-sox-ifrs-vs-gaap-1.png": {
     "width": 1792,
@@ -26831,6 +26897,39 @@
     "width": 1792,
     "height": 988
   },
+  "/imgs/blogs/managing-third-party-and-dependency-risk-1.png": {
+    "width": 1792,
+    "height": 1165,
+    "cover": true
+  },
+  "/imgs/blogs/managing-third-party-and-dependency-risk-2.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/managing-third-party-and-dependency-risk-3.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/managing-third-party-and-dependency-risk-4.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/managing-third-party-and-dependency-risk-5.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/managing-third-party-and-dependency-risk-6.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/managing-third-party-and-dependency-risk-7.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/managing-third-party-and-dependency-risk-8.png": {
+    "width": 1792,
+    "height": 1221
+  },
   "/imgs/blogs/mapping-the-consensus-what-does-the-market-already-believe-1.png": {
     "width": 1792,
     "height": 955,
@@ -37189,6 +37288,39 @@
   "/imgs/blogs/running-on-a-cluster-slurm-multi-node-launch-and-data-pipelines-8.png": {
     "width": 1792,
     "height": 1351
+  },
+  "/imgs/blogs/running-stateful-systems-reliably-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/running-stateful-systems-reliably-2.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/running-stateful-systems-reliably-3.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/running-stateful-systems-reliably-4.png": {
+    "width": 1792,
+    "height": 899
+  },
+  "/imgs/blogs/running-stateful-systems-reliably-5.png": {
+    "width": 1792,
+    "height": 1415
+  },
+  "/imgs/blogs/running-stateful-systems-reliably-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/running-stateful-systems-reliably-7.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/running-stateful-systems-reliably-8.png": {
+    "width": 1792,
+    "height": 1217
   },
   "/imgs/blogs/russia-invades-ukraine-the-first-72-hours-in-markets-1.cover.webp": {
     "width": 800,
@@ -49689,7 +49821,7 @@
   },
   "/imgs/blogs/trade-war-winners-vietnam-mexico-india-and-the-rerouting-trade-1.png": {
     "width": 1792,
-    "height": 887,
+    "height": 900,
     "cover": true
   },
   "/imgs/blogs/trade-war-winners-vietnam-mexico-india-and-the-rerouting-trade-2.png": {
@@ -50889,7 +51021,7 @@
   },
   "/imgs/blogs/us-china-trade-war-2018-19-tariff-rounds-and-market-scorecards-6.png": {
     "width": 1792,
-    "height": 798
+    "height": 900
   },
   "/imgs/blogs/us-china-trade-war-2018-19-tariff-rounds-and-market-scorecards-7.png": {
     "width": 1792,
@@ -54456,7 +54588,7 @@
   },
   "/imgs/blogs/wto-dispute-settlement-why-markets-ignore-it-but-shouldnt-4.png": {
     "width": 1792,
-    "height": 742
+    "height": 900
   },
   "/imgs/blogs/wto-dispute-settlement-why-markets-ignore-it-but-shouldnt-5.png": {
     "width": 1602,
