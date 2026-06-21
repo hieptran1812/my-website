@@ -16677,11 +16677,6 @@
     "width": 1792,
     "height": 976
   },
-  "/imgs/blogs/fig1-proxy-network.png": {
-    "width": 2228,
-    "height": 1445,
-    "cover": true
-  },
   "/imgs/blogs/filtering-sorting-and-sparse-fieldsets-without-reinventing-sql-1.png": {
     "width": 1792,
     "height": 671,
@@ -29661,7 +29656,8 @@
   },
   "/imgs/blogs/north-korea-escalations-how-markets-price-a-non-event-1.png": {
     "width": 1792,
-    "height": 987
+    "height": 987,
+    "cover": true
   },
   "/imgs/blogs/north-korea-escalations-how-markets-price-a-non-event-2.png": {
     "width": 1602,
@@ -44154,7 +44150,8 @@
   },
   "/imgs/blogs/the-gaza-war-middle-east-contagion-risk-and-what-it-took-to-spread-1.png": {
     "width": 1792,
-    "height": 983
+    "height": 983,
+    "cover": true
   },
   "/imgs/blogs/the-gaza-war-middle-east-contagion-risk-and-what-it-took-to-spread-2.png": {
     "width": 1792,
@@ -53292,5 +53289,97 @@
   "/imgs/blogs/zero-sum-positive-sum-and-the-house-where-trading-profits-come-from-7.png": {
     "width": 1616,
     "height": 914
+  },
+  "/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-2.png": {
+    "width": 2120,
+    "height": 1441
+  },
+  "/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-3.png": {
+    "width": 2007,
+    "height": 1453
+  },
+  "/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-5.png": {
+    "width": 2668,
+    "height": 1418
+  },
+  "/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-6.png": {
+    "width": 2087,
+    "height": 1469
+  },
+  "/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/north-korea-escalations-how-markets-price-a-non-event-1.cover.png": {
+    "width": 800,
+    "height": 450,
+    "cover": true
+  },
+  "/imgs/blogs/the-gaza-war-middle-east-contagion-risk-and-what-it-took-to-spread-1.cover.png": {
+    "width": 800,
+    "height": 450,
+    "cover": true
+  },
+  "/imgs/blogs/iran-israel-nuclear-timeline-and-market-pricing-1.png": {
+    "width": 2133,
+    "height": 1441,
+    "cover": true
+  },
+  "/imgs/blogs/iran-israel-nuclear-timeline-and-market-pricing-2.png": {
+    "width": 2628,
+    "height": 1418
+  },
+  "/imgs/blogs/iran-israel-nuclear-timeline-and-market-pricing-3.png": {
+    "width": 2085,
+    "height": 1033
+  },
+  "/imgs/blogs/iran-israel-nuclear-timeline-and-market-pricing-4.png": {
+    "width": 2045,
+    "height": 992
+  },
+  "/imgs/blogs/iran-israel-nuclear-timeline-and-market-pricing-5.png": {
+    "width": 2025,
+    "height": 1452
+  },
+  "/imgs/blogs/iran-israel-nuclear-timeline-and-market-pricing-6.png": {
+    "width": 2137,
+    "height": 1441
+  },
+  "/imgs/blogs/iran-israel-nuclear-timeline-and-market-pricing-7.png": {
+    "width": 2154,
+    "height": 1469
+  },
+  "/imgs/blogs/iran-israel-shadow-war-drone-strikes-and-the-oil-risk-premium-1.png": {
+    "width": 2228,
+    "height": 1445,
+    "cover": true
+  },
+  "/imgs/blogs/iran-israel-shadow-war-drone-strikes-and-the-oil-risk-premium-2.png": {
+    "width": 1619,
+    "height": 914
+  },
+  "/imgs/blogs/iran-israel-shadow-war-drone-strikes-and-the-oil-risk-premium-3.png": {
+    "width": 2228,
+    "height": 1445
+  },
+  "/imgs/blogs/iran-israel-shadow-war-drone-strikes-and-the-oil-risk-premium-4.png": {
+    "width": 2538,
+    "height": 1418
+  },
+  "/imgs/blogs/iran-israel-shadow-war-drone-strikes-and-the-oil-risk-premium-5.png": {
+    "width": 1958,
+    "height": 1450
+  },
+  "/imgs/blogs/iran-israel-shadow-war-drone-strikes-and-the-oil-risk-premium-6.png": {
+    "width": 1628,
+    "height": 914
+  },
+  "/imgs/blogs/iran-israel-shadow-war-drone-strikes-and-the-oil-risk-premium-7.png": {
+    "width": 2154,
+    "height": 1469
   }
 }
