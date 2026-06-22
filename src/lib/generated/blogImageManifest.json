@@ -15000,6 +15000,11 @@
     "width": 1792,
     "height": 406
   },
+  "/imgs/blogs/draft-models-for-speculative-decoding-1.png": {
+    "width": 1992,
+    "height": 1452,
+    "cover": true
+  },
   "/imgs/blogs/draghi-2012-whatever-it-takes-and-the-spread-machine-1.png": {
     "width": 1792,
     "height": 820,
@@ -22348,6 +22353,43 @@
     "width": 1792,
     "height": 798
   },
+  "/imgs/blogs/how-to-read-a-banks-annual-report-the-analysts-checklist-1.png": {
+    "width": 1792,
+    "height": 1375,
+    "cover": true
+  },
+  "/imgs/blogs/how-to-read-a-banks-annual-report-the-analysts-checklist-2.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/how-to-read-a-banks-annual-report-the-analysts-checklist-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-to-read-a-banks-annual-report-the-analysts-checklist-4.png": {
+    "width": 1792,
+    "height": 807
+  },
+  "/imgs/blogs/how-to-read-a-banks-annual-report-the-analysts-checklist-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/how-to-read-a-banks-annual-report-the-analysts-checklist-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-to-read-a-banks-annual-report-the-analysts-checklist-7.png": {
+    "width": 1792,
+    "height": 1355
+  },
+  "/imgs/blogs/how-to-read-a-banks-annual-report-the-analysts-checklist-8.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-to-read-a-banks-annual-report-the-analysts-checklist-9.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-1.png": {
     "width": 1792,
     "height": 1162
@@ -27890,6 +27932,11 @@
   "/imgs/blogs/media-sector-vietnam-small-sentiment-corner-7.png": {
     "width": 1792,
     "height": 1208
+  },
+  "/imgs/blogs/medusa-multi-head-speculative-decoding-1.png": {
+    "width": 2228,
+    "height": 1448,
+    "cover": true
   },
   "/imgs/blogs/memory-barriers-acquire-release-and-fences-1.png": {
     "width": 1792,
@@ -40554,6 +40601,39 @@
     "width": 1792,
     "height": 1125
   },
+  "/imgs/blogs/spotting-the-next-bank-failure-the-early-warning-signs-1.png": {
+    "width": 1792,
+    "height": 1375,
+    "cover": true
+  },
+  "/imgs/blogs/spotting-the-next-bank-failure-the-early-warning-signs-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/spotting-the-next-bank-failure-the-early-warning-signs-3.png": {
+    "width": 1623,
+    "height": 914
+  },
+  "/imgs/blogs/spotting-the-next-bank-failure-the-early-warning-signs-4.png": {
+    "width": 1792,
+    "height": 896
+  },
+  "/imgs/blogs/spotting-the-next-bank-failure-the-early-warning-signs-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/spotting-the-next-bank-failure-the-early-warning-signs-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/spotting-the-next-bank-failure-the-early-warning-signs-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/spotting-the-next-bank-failure-the-early-warning-signs-8.png": {
+    "width": 1792,
+    "height": 1434
+  },
   "/imgs/blogs/spurious-correlation-and-the-traps-of-macro-data-1.png": {
     "width": 1792,
     "height": 1211,
@@ -43585,6 +43665,43 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/the-banking-playbook-everything-in-one-framework-capstone-1.png": {
+    "width": 1792,
+    "height": 746,
+    "cover": true
+  },
+  "/imgs/blogs/the-banking-playbook-everything-in-one-framework-capstone-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-banking-playbook-everything-in-one-framework-capstone-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-banking-playbook-everything-in-one-framework-capstone-4.png": {
+    "width": 1792,
+    "height": 673
+  },
+  "/imgs/blogs/the-banking-playbook-everything-in-one-framework-capstone-5.png": {
+    "width": 1790,
+    "height": 1453
+  },
+  "/imgs/blogs/the-banking-playbook-everything-in-one-framework-capstone-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-banking-playbook-everything-in-one-framework-capstone-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/the-banking-playbook-everything-in-one-framework-capstone-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-banking-playbook-everything-in-one-framework-capstone-9.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/the-bid-ask-spread-as-an-adverse-selection-game-glosten-milgrom-1.png": {
     "width": 1643,
     "height": 914,
@@ -44242,6 +44359,39 @@
     "width": 1792,
     "height": 1045
   },
+  "/imgs/blogs/the-credit-cycle-and-why-bank-earnings-are-pro-cyclical-1.png": {
+    "width": 1792,
+    "height": 982,
+    "cover": true
+  },
+  "/imgs/blogs/the-credit-cycle-and-why-bank-earnings-are-pro-cyclical-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-credit-cycle-and-why-bank-earnings-are-pro-cyclical-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-credit-cycle-and-why-bank-earnings-are-pro-cyclical-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-credit-cycle-and-why-bank-earnings-are-pro-cyclical-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-credit-cycle-and-why-bank-earnings-are-pro-cyclical-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-credit-cycle-and-why-bank-earnings-are-pro-cyclical-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-credit-cycle-and-why-bank-earnings-are-pro-cyclical-8.png": {
+    "width": 1792,
+    "height": 887
+  },
   "/imgs/blogs/the-crisis-playbook-2008-and-2020-1.png": {
     "width": 1792,
     "height": 1212,
@@ -44857,6 +45007,39 @@
   "/imgs/blogs/the-dxy-and-the-dollars-special-role-in-the-world-8.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/the-economics-of-a-bank-in-one-page-how-it-all-fits-together-1.png": {
+    "width": 1792,
+    "height": 818,
+    "cover": true
+  },
+  "/imgs/blogs/the-economics-of-a-bank-in-one-page-how-it-all-fits-together-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-economics-of-a-bank-in-one-page-how-it-all-fits-together-3.png": {
+    "width": 1792,
+    "height": 812
+  },
+  "/imgs/blogs/the-economics-of-a-bank-in-one-page-how-it-all-fits-together-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-economics-of-a-bank-in-one-page-how-it-all-fits-together-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/the-economics-of-a-bank-in-one-page-how-it-all-fits-together-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-economics-of-a-bank-in-one-page-how-it-all-fits-together-7.png": {
+    "width": 1792,
+    "height": 1258
+  },
+  "/imgs/blogs/the-economics-of-a-bank-in-one-page-how-it-all-fits-together-8.png": {
+    "width": 1792,
+    "height": 1212
   },
   "/imgs/blogs/the-edge-deployment-lifecycle-1.png": {
     "width": 1792,
@@ -51919,6 +52102,39 @@
   "/imgs/blogs/value-at-risk-and-exactly-how-var-lies-7.png": {
     "width": 1602,
     "height": 1013
+  },
+  "/imgs/blogs/valuing-a-bank-price-to-book-roe-and-the-warranted-multiple-1.png": {
+    "width": 1792,
+    "height": 1324,
+    "cover": true
+  },
+  "/imgs/blogs/valuing-a-bank-price-to-book-roe-and-the-warranted-multiple-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/valuing-a-bank-price-to-book-roe-and-the-warranted-multiple-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/valuing-a-bank-price-to-book-roe-and-the-warranted-multiple-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/valuing-a-bank-price-to-book-roe-and-the-warranted-multiple-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/valuing-a-bank-price-to-book-roe-and-the-warranted-multiple-6.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/valuing-a-bank-price-to-book-roe-and-the-warranted-multiple-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/valuing-a-bank-price-to-book-roe-and-the-warranted-multiple-8.png": {
+    "width": 1792,
+    "height": 905
   },
   "/imgs/blogs/valuing-the-hard-cases-banks-insurers-reits-cyclicals-1.png": {
     "width": 1792,
