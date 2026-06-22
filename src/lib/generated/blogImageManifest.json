@@ -5062,6 +5062,39 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/building-images-fast-and-securely-in-ci-1.png": {
+    "width": 1792,
+    "height": 1263,
+    "cover": true
+  },
+  "/imgs/blogs/building-images-fast-and-securely-in-ci-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/building-images-fast-and-securely-in-ci-3.png": {
+    "width": 1792,
+    "height": 943
+  },
+  "/imgs/blogs/building-images-fast-and-securely-in-ci-4.png": {
+    "width": 1792,
+    "height": 1330
+  },
+  "/imgs/blogs/building-images-fast-and-securely-in-ci-5.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/building-images-fast-and-securely-in-ci-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/building-images-fast-and-securely-in-ci-7.png": {
+    "width": 1792,
+    "height": 956
+  },
+  "/imgs/blogs/building-images-fast-and-securely-in-ci-8.png": {
+    "width": 1792,
+    "height": 1302
+  },
   "/imgs/blogs/building-one-high-probability-setup-1.png": {
     "width": 1792,
     "height": 1176,
@@ -10041,6 +10074,39 @@
   "/imgs/blogs/consumer-lending-mortgages-cards-auto-and-personal-loans-8.png": {
     "width": 1792,
     "height": 863
+  },
+  "/imgs/blogs/containers-from-first-principles-for-delivery-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/containers-from-first-principles-for-delivery-2.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/containers-from-first-principles-for-delivery-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/containers-from-first-principles-for-delivery-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/containers-from-first-principles-for-delivery-5.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/containers-from-first-principles-for-delivery-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/containers-from-first-principles-for-delivery-7.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/containers-from-first-principles-for-delivery-8.png": {
+    "width": 1792,
+    "height": 1313
   },
   "/imgs/blogs/contango-vs-backwardation-what-the-shape-of-the-curve-means-1.png": {
     "width": 1792,
@@ -23181,6 +23247,72 @@
   "/imgs/blogs/image-editing-with-diffusion-8.png": {
     "width": 1792,
     "height": 1169
+  },
+  "/imgs/blogs/image-registries-tagging-and-promotion-1.png": {
+    "width": 1792,
+    "height": 1110,
+    "cover": true
+  },
+  "/imgs/blogs/image-registries-tagging-and-promotion-2.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/image-registries-tagging-and-promotion-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/image-registries-tagging-and-promotion-4.png": {
+    "width": 1792,
+    "height": 928
+  },
+  "/imgs/blogs/image-registries-tagging-and-promotion-5.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/image-registries-tagging-and-promotion-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/image-registries-tagging-and-promotion-7.png": {
+    "width": 1792,
+    "height": 671
+  },
+  "/imgs/blogs/image-registries-tagging-and-promotion-8.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/image-security-scanning-and-a-minimal-attack-surface-1.png": {
+    "width": 1792,
+    "height": 1251,
+    "cover": true
+  },
+  "/imgs/blogs/image-security-scanning-and-a-minimal-attack-surface-2.png": {
+    "width": 1792,
+    "height": 1060
+  },
+  "/imgs/blogs/image-security-scanning-and-a-minimal-attack-surface-3.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/image-security-scanning-and-a-minimal-attack-surface-4.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/image-security-scanning-and-a-minimal-attack-surface-5.png": {
+    "width": 1792,
+    "height": 829
+  },
+  "/imgs/blogs/image-security-scanning-and-a-minimal-attack-surface-6.png": {
+    "width": 1792,
+    "height": 940
+  },
+  "/imgs/blogs/image-security-scanning-and-a-minimal-attack-surface-7.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/image-security-scanning-and-a-minimal-attack-surface-8.png": {
+    "width": 1792,
+    "height": 1227
   },
   "/imgs/blogs/image.png": {
     "width": 1792,
@@ -56571,6 +56703,39 @@
   "/imgs/blogs/worldvqa-6.png": {
     "width": 1792,
     "height": 1259
+  },
+  "/imgs/blogs/writing-a-production-dockerfile-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/writing-a-production-dockerfile-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/writing-a-production-dockerfile-3.png": {
+    "width": 1792,
+    "height": 1249
+  },
+  "/imgs/blogs/writing-a-production-dockerfile-4.png": {
+    "width": 1792,
+    "height": 1327
+  },
+  "/imgs/blogs/writing-a-production-dockerfile-5.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/writing-a-production-dockerfile-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/writing-a-production-dockerfile-7.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/writing-a-production-dockerfile-8.png": {
+    "width": 1792,
+    "height": 914
   },
   "/imgs/blogs/writing-market-commentary-that-actually-says-something-1.png": {
     "width": 1792,
