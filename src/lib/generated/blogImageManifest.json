@@ -17093,6 +17093,39 @@
     "width": 1792,
     "height": 783
   },
+  "/imgs/blogs/experience-replay-and-offline-data-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/experience-replay-and-offline-data-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/experience-replay-and-offline-data-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/experience-replay-and-offline-data-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/experience-replay-and-offline-data-5.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/experience-replay-and-offline-data-6.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/experience-replay-and-offline-data-7.png": {
+    "width": 1792,
+    "height": 946
+  },
+  "/imgs/blogs/experience-replay-and-offline-data-8.png": {
+    "width": 1792,
+    "height": 1201
+  },
   "/imgs/blogs/exploration-vs-exploitation-the-core-tension-1.png": {
     "width": 1792,
     "height": 1213,
@@ -19159,6 +19192,39 @@
   "/imgs/blogs/full-worked-case-study-analyzing-a-company-end-to-end-7.png": {
     "width": 1792,
     "height": 1038
+  },
+  "/imgs/blogs/function-approximation-why-tables-dont-scale-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/function-approximation-why-tables-dont-scale-2.png": {
+    "width": 1792,
+    "height": 1249
+  },
+  "/imgs/blogs/function-approximation-why-tables-dont-scale-3.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/function-approximation-why-tables-dont-scale-4.png": {
+    "width": 1792,
+    "height": 1003
+  },
+  "/imgs/blogs/function-approximation-why-tables-dont-scale-5.png": {
+    "width": 1792,
+    "height": 1286
+  },
+  "/imgs/blogs/function-approximation-why-tables-dont-scale-6.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/function-approximation-why-tables-dont-scale-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/function-approximation-why-tables-dont-scale-8.png": {
+    "width": 1792,
+    "height": 1196
   },
   "/imgs/blogs/function-coloring-and-bridging-sync-and-async-1.png": {
     "width": 1792,
@@ -26250,6 +26316,39 @@
     "width": 1792,
     "height": 1178
   },
+  "/imgs/blogs/linear-function-approximation-and-convergence-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/linear-function-approximation-and-convergence-2.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/linear-function-approximation-and-convergence-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/linear-function-approximation-and-convergence-4.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/linear-function-approximation-and-convergence-5.png": {
+    "width": 1792,
+    "height": 988
+  },
+  "/imgs/blogs/linear-function-approximation-and-convergence-6.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/linear-function-approximation-and-convergence-7.png": {
+    "width": 1792,
+    "height": 1155
+  },
+  "/imgs/blogs/linear-function-approximation-and-convergence-8.png": {
+    "width": 1792,
+    "height": 1211
+  },
   "/imgs/blogs/linear-regression-deep-quant-interviews-1.png": {
     "width": 1792,
     "height": 1162,
@@ -31027,6 +31126,39 @@
   "/imgs/blogs/neural-collaborative-filtering-and-its-critique-8.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/neural-networks-as-value-approximators-1.png": {
+    "width": 1792,
+    "height": 1035,
+    "cover": true
+  },
+  "/imgs/blogs/neural-networks-as-value-approximators-2.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/neural-networks-as-value-approximators-3.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/neural-networks-as-value-approximators-4.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/neural-networks-as-value-approximators-5.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/neural-networks-as-value-approximators-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/neural-networks-as-value-approximators-7.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/neural-networks-as-value-approximators-8.png": {
+    "width": 1792,
+    "height": 1192
   },
   "/imgs/blogs/nfp-and-asset-prices-the-king-of-data-correlation-1.png": {
     "width": 1792,
@@ -41849,6 +41981,39 @@
     "width": 1792,
     "height": 789
   },
+  "/imgs/blogs/streaming-and-sse-for-llms-1.png": {
+    "width": 1792,
+    "height": 895,
+    "cover": true
+  },
+  "/imgs/blogs/streaming-and-sse-for-llms-2.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/streaming-and-sse-for-llms-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/streaming-and-sse-for-llms-4.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/streaming-and-sse-for-llms-5.png": {
+    "width": 1792,
+    "height": 691
+  },
+  "/imgs/blogs/streaming-and-sse-for-llms-6.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/streaming-and-sse-for-llms-7.png": {
+    "width": 1792,
+    "height": 1196
+  },
+  "/imgs/blogs/streaming-and-sse-for-llms-8.png": {
+    "width": 1792,
+    "height": 1257
+  },
   "/imgs/blogs/streaming-apis-sse-websockets-and-server-streaming-1.png": {
     "width": 1792,
     "height": 1313,
@@ -43237,6 +43402,39 @@
   "/imgs/blogs/text-encoders-and-prompt-conditioning-8.png": {
     "width": 1792,
     "height": 988
+  },
+  "/imgs/blogs/text-generation-inference-deep-dive-1.png": {
+    "width": 1792,
+    "height": 1230,
+    "cover": true
+  },
+  "/imgs/blogs/text-generation-inference-deep-dive-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/text-generation-inference-deep-dive-3.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/text-generation-inference-deep-dive-4.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/text-generation-inference-deep-dive-5.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/text-generation-inference-deep-dive-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/text-generation-inference-deep-dive-7.png": {
+    "width": 1792,
+    "height": 1236
+  },
+  "/imgs/blogs/text-generation-inference-deep-dive-8.png": {
+    "width": 1792,
+    "height": 914
   },
   "/imgs/blogs/text-to-audio-and-sound-effects-1.png": {
     "width": 1792,
@@ -45286,6 +45484,39 @@
   "/imgs/blogs/the-data-and-features-of-recommenders-8.png": {
     "width": 1792,
     "height": 1381
+  },
+  "/imgs/blogs/the-deadly-triad-stability-in-deep-rl-1.png": {
+    "width": 1792,
+    "height": 1193,
+    "cover": true
+  },
+  "/imgs/blogs/the-deadly-triad-stability-in-deep-rl-2.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/the-deadly-triad-stability-in-deep-rl-3.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/the-deadly-triad-stability-in-deep-rl-4.png": {
+    "width": 1792,
+    "height": 1197
+  },
+  "/imgs/blogs/the-deadly-triad-stability-in-deep-rl-5.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/the-deadly-triad-stability-in-deep-rl-6.png": {
+    "width": 1792,
+    "height": 820
+  },
+  "/imgs/blogs/the-deadly-triad-stability-in-deep-rl-7.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/the-deadly-triad-stability-in-deep-rl-8.png": {
+    "width": 1792,
+    "height": 1155
   },
   "/imgs/blogs/the-debasement-bull-2001-to-2011-dot-com-gfc-and-qe-1.png": {
     "width": 1792,
