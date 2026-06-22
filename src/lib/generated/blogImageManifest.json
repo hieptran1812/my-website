@@ -13598,6 +13598,35 @@
     "width": 1176,
     "height": 188
   },
+  "/imgs/blogs/dedollarization-real-trend-or-geopolitical-theater-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/dedollarization-real-trend-or-geopolitical-theater-2.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/dedollarization-real-trend-or-geopolitical-theater-3.png": {
+    "width": 1792,
+    "height": 876
+  },
+  "/imgs/blogs/dedollarization-real-trend-or-geopolitical-theater-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/dedollarization-real-trend-or-geopolitical-theater-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/dedollarization-real-trend-or-geopolitical-theater-6.png": {
+    "width": 1792,
+    "height": 1011
+  },
+  "/imgs/blogs/dedollarization-real-trend-or-geopolitical-theater-7.png": {
+    "width": 1792,
+    "height": 743
+  },
   "/imgs/blogs/deepfm-and-automatic-feature-interactions-1.png": {
     "width": 1792,
     "height": 708,
@@ -22737,6 +22766,64 @@
     "width": 1792,
     "height": 1209
   },
+  "/imgs/blogs/how-sanctions-fail-and-what-that-means-for-asset-prices-1.png": {
+    "width": 1792,
+    "height": 683,
+    "cover": true
+  },
+  "/imgs/blogs/how-sanctions-fail-and-what-that-means-for-asset-prices-2.png": {
+    "width": 1792,
+    "height": 1255
+  },
+  "/imgs/blogs/how-sanctions-fail-and-what-that-means-for-asset-prices-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-sanctions-fail-and-what-that-means-for-asset-prices-4.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/how-sanctions-fail-and-what-that-means-for-asset-prices-5.png": {
+    "width": 1792,
+    "height": 1170
+  },
+  "/imgs/blogs/how-sanctions-fail-and-what-that-means-for-asset-prices-6.png": {
+    "width": 1792,
+    "height": 933
+  },
+  "/imgs/blogs/how-sanctions-fail-and-what-that-means-for-asset-prices-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/how-sanctions-work-primary-secondary-and-the-enforcement-gap-1.png": {
+    "width": 1792,
+    "height": 889,
+    "cover": true
+  },
+  "/imgs/blogs/how-sanctions-work-primary-secondary-and-the-enforcement-gap-2.png": {
+    "width": 1790,
+    "height": 1453
+  },
+  "/imgs/blogs/how-sanctions-work-primary-secondary-and-the-enforcement-gap-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/how-sanctions-work-primary-secondary-and-the-enforcement-gap-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/how-sanctions-work-primary-secondary-and-the-enforcement-gap-5.png": {
+    "width": 1792,
+    "height": 888
+  },
+  "/imgs/blogs/how-sanctions-work-primary-secondary-and-the-enforcement-gap-6.png": {
+    "width": 1792,
+    "height": 1016
+  },
+  "/imgs/blogs/how-sanctions-work-primary-secondary-and-the-enforcement-gap-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/how-stolen-funds-are-laundered-1.png": {
     "width": 1792,
     "height": 982,
@@ -23248,6 +23335,39 @@
     "width": 1792,
     "height": 1271
   },
+  "/imgs/blogs/iac-for-the-whole-stack-and-config-drift-1.png": {
+    "width": 1792,
+    "height": 1263,
+    "cover": true
+  },
+  "/imgs/blogs/iac-for-the-whole-stack-and-config-drift-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/iac-for-the-whole-stack-and-config-drift-3.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/iac-for-the-whole-stack-and-config-drift-4.png": {
+    "width": 1792,
+    "height": 1389
+  },
+  "/imgs/blogs/iac-for-the-whole-stack-and-config-drift-5.png": {
+    "width": 1792,
+    "height": 895
+  },
+  "/imgs/blogs/iac-for-the-whole-stack-and-config-drift-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/iac-for-the-whole-stack-and-config-drift-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/iac-for-the-whole-stack-and-config-drift-8.png": {
+    "width": 1792,
+    "height": 1260
+  },
   "/imgs/blogs/idempotency-keys-safe-retries-and-exactly-once-illusions-1.png": {
     "width": 1792,
     "height": 906,
@@ -23511,6 +23631,39 @@
   "/imgs/blogs/immunization-and-duration-matching-how-pensions-and-insurers-hedge-7.png": {
     "width": 1792,
     "height": 1285
+  },
+  "/imgs/blogs/immutable-infrastructure-and-golden-images-1.png": {
+    "width": 1792,
+    "height": 1221,
+    "cover": true
+  },
+  "/imgs/blogs/immutable-infrastructure-and-golden-images-2.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/immutable-infrastructure-and-golden-images-3.png": {
+    "width": 1792,
+    "height": 700
+  },
+  "/imgs/blogs/immutable-infrastructure-and-golden-images-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/immutable-infrastructure-and-golden-images-5.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/immutable-infrastructure-and-golden-images-6.png": {
+    "width": 1792,
+    "height": 988
+  },
+  "/imgs/blogs/immutable-infrastructure-and-golden-images-7.png": {
+    "width": 1792,
+    "height": 1164
+  },
+  "/imgs/blogs/immutable-infrastructure-and-golden-images-8.png": {
+    "width": 1792,
+    "height": 1213
   },
   "/imgs/blogs/implicit-feedback-models-als-and-bpr-1.png": {
     "width": 1792,
@@ -24119,6 +24272,39 @@
   "/imgs/blogs/information-technology-sector-vietnam-fpt-structural-growth-7.png": {
     "width": 1792,
     "height": 1200
+  },
+  "/imgs/blogs/infrastructure-as-code-from-clickops-to-declarative-1.png": {
+    "width": 1792,
+    "height": 1277,
+    "cover": true
+  },
+  "/imgs/blogs/infrastructure-as-code-from-clickops-to-declarative-2.png": {
+    "width": 1792,
+    "height": 1249
+  },
+  "/imgs/blogs/infrastructure-as-code-from-clickops-to-declarative-3.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/infrastructure-as-code-from-clickops-to-declarative-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/infrastructure-as-code-from-clickops-to-declarative-5.png": {
+    "width": 1792,
+    "height": 1258
+  },
+  "/imgs/blogs/infrastructure-as-code-from-clickops-to-declarative-6.png": {
+    "width": 1792,
+    "height": 909
+  },
+  "/imgs/blogs/infrastructure-as-code-from-clickops-to-declarative-7.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/infrastructure-as-code-from-clickops-to-declarative-8.png": {
+    "width": 1792,
+    "height": 1231
   },
   "/imgs/blogs/initialization-and-normalization-bugs-1.png": {
     "width": 1792,
@@ -24744,6 +24930,35 @@
   "/imgs/blogs/iran-israel-shadow-war-drone-strikes-and-the-oil-risk-premium-7.png": {
     "width": 2154,
     "height": 1469
+  },
+  "/imgs/blogs/iran-sanctions-40-years-of-adaptation-and-what-oil-markets-learned-1.png": {
+    "width": 1792,
+    "height": 972,
+    "cover": true
+  },
+  "/imgs/blogs/iran-sanctions-40-years-of-adaptation-and-what-oil-markets-learned-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/iran-sanctions-40-years-of-adaptation-and-what-oil-markets-learned-3.png": {
+    "width": 1792,
+    "height": 700
+  },
+  "/imgs/blogs/iran-sanctions-40-years-of-adaptation-and-what-oil-markets-learned-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/iran-sanctions-40-years-of-adaptation-and-what-oil-markets-learned-5.png": {
+    "width": 1792,
+    "height": 1320
+  },
+  "/imgs/blogs/iran-sanctions-40-years-of-adaptation-and-what-oil-markets-learned-6.png": {
+    "width": 1791,
+    "height": 914
+  },
+  "/imgs/blogs/iran-sanctions-40-years-of-adaptation-and-what-oil-markets-learned-7.png": {
+    "width": 1743,
+    "height": 1445
   },
   "/imgs/blogs/iron-condors-and-credit-spreads-selling-the-range-1.png": {
     "width": 1635,
@@ -27904,6 +28119,39 @@
   "/imgs/blogs/managing-a-trade-rolling-adjusting-and-when-to-just-take-the-loss-7.png": {
     "width": 1792,
     "height": 988
+  },
+  "/imgs/blogs/managing-terraform-safely-at-scale-1.png": {
+    "width": 1792,
+    "height": 686,
+    "cover": true
+  },
+  "/imgs/blogs/managing-terraform-safely-at-scale-2.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/managing-terraform-safely-at-scale-3.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/managing-terraform-safely-at-scale-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/managing-terraform-safely-at-scale-5.png": {
+    "width": 1792,
+    "height": 940
+  },
+  "/imgs/blogs/managing-terraform-safely-at-scale-6.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/managing-terraform-safely-at-scale-7.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/managing-terraform-safely-at-scale-8.png": {
+    "width": 1792,
+    "height": 1250
   },
   "/imgs/blogs/managing-third-party-and-dependency-risk-1.png": {
     "width": 1792,
@@ -39006,6 +39254,35 @@
     "width": 2171,
     "height": 1448
   },
+  "/imgs/blogs/russia-sanctions-anatomy-swift-reserves-oil-price-cap-1.png": {
+    "width": 1792,
+    "height": 932,
+    "cover": true
+  },
+  "/imgs/blogs/russia-sanctions-anatomy-swift-reserves-oil-price-cap-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/russia-sanctions-anatomy-swift-reserves-oil-price-cap-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/russia-sanctions-anatomy-swift-reserves-oil-price-cap-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/russia-sanctions-anatomy-swift-reserves-oil-price-cap-5.png": {
+    "width": 1792,
+    "height": 1331
+  },
+  "/imgs/blogs/russia-sanctions-anatomy-swift-reserves-oil-price-cap-6.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/russia-sanctions-anatomy-swift-reserves-oil-price-cap-7.png": {
+    "width": 1743,
+    "height": 1445
+  },
   "/imgs/blogs/russia-ukraine-war-food-wheat-fertilizer-and-the-global-south-1.png": {
     "width": 1879,
     "height": 1443,
@@ -39441,6 +39718,35 @@
   "/imgs/blogs/sana-and-efficient-high-res-synthesis-8.png": {
     "width": 1792,
     "height": 1278
+  },
+  "/imgs/blogs/sanctioned-commodity-markets-shadow-fleets-price-gaps-arbitrage-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/sanctioned-commodity-markets-shadow-fleets-price-gaps-arbitrage-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/sanctioned-commodity-markets-shadow-fleets-price-gaps-arbitrage-3.png": {
+    "width": 1792,
+    "height": 1302
+  },
+  "/imgs/blogs/sanctioned-commodity-markets-shadow-fleets-price-gaps-arbitrage-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/sanctioned-commodity-markets-shadow-fleets-price-gaps-arbitrage-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/sanctioned-commodity-markets-shadow-fleets-price-gaps-arbitrage-6.png": {
+    "width": 1792,
+    "height": 807
+  },
+  "/imgs/blogs/sanctioned-commodity-markets-shadow-fleets-price-gaps-arbitrage-7.png": {
+    "width": 1792,
+    "height": 942
   },
   "/imgs/blogs/sanctions-evasion-enforcement-and-compliance-risk-1.png": {
     "width": 1792,
@@ -43765,6 +44071,39 @@
   "/imgs/blogs/terra-luna-2022-collapse-7.png": {
     "width": 1792,
     "height": 1021
+  },
+  "/imgs/blogs/terraform-in-practice-state-modules-and-workspaces-1.png": {
+    "width": 1792,
+    "height": 661,
+    "cover": true
+  },
+  "/imgs/blogs/terraform-in-practice-state-modules-and-workspaces-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/terraform-in-practice-state-modules-and-workspaces-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/terraform-in-practice-state-modules-and-workspaces-4.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/terraform-in-practice-state-modules-and-workspaces-5.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/terraform-in-practice-state-modules-and-workspaces-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/terraform-in-practice-state-modules-and-workspaces-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/terraform-in-practice-state-modules-and-workspaces-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/test-time-compute-scaling-1.png": {
     "width": 1792,
@@ -51166,6 +51505,35 @@
   "/imgs/blogs/the-volatility-smile-and-skew-why-otm-puts-cost-more-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/the-weaponization-of-the-dollar-swift-as-a-strategic-tool-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/the-weaponization-of-the-dollar-swift-as-a-strategic-tool-2.png": {
+    "width": 1792,
+    "height": 650
+  },
+  "/imgs/blogs/the-weaponization-of-the-dollar-swift-as-a-strategic-tool-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-weaponization-of-the-dollar-swift-as-a-strategic-tool-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-weaponization-of-the-dollar-swift-as-a-strategic-tool-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-weaponization-of-the-dollar-swift-as-a-strategic-tool-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-weaponization-of-the-dollar-swift-as-a-strategic-tool-7.png": {
+    "width": 1792,
+    "height": 852
   },
   "/imgs/blogs/the-wells-fargo-fake-accounts-scandal-when-incentives-go-wrong-1.png": {
     "width": 1792,
