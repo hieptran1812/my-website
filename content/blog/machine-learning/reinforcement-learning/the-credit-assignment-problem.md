@@ -35,7 +35,6 @@ This is Track A post 6 — the last foundations post before we dive into specifi
 
 ![A sparse reward trajectory where an agent receives zero reward for 49 consecutive steps before a terminal reward of plus one at step 50, illustrating how difficult it is to identify which early action was responsible for the outcome](the-credit-assignment-problem-1.png)
 
----
 
 ## 1. The Problem in Precise Terms: Minsky's 1961 Framing
 
@@ -63,7 +62,6 @@ Consider three canonical examples:
 
 In all three cases, the **density of reward signal** is far below what is needed for efficient learning. A supervised learner on 1 million examples gets 1 million gradient signals. An RL agent on 1 million timesteps, with rewards arriving only at the end of 1,000-step episodes, gets only 1,000 gradient signals — each of which must somehow carry enough information to update a network with millions of parameters.
 
----
 
 ## 2. The Return $G_t$: A First Attempt at Credit
 
@@ -93,7 +91,6 @@ If $G_t$ has high variance, then the gradient estimate has high variance, and SG
 
 The credit assignment problem is not just about *which* time-step gets credit — it is about doing so with a signal that has low enough variance to actually move the parameters in a useful direction.
 
----
 
 ## 3. Eligibility Traces: A Memory of What Was Recently Visited
 
@@ -129,7 +126,6 @@ where $G_t^{(n)}$ is the $n$-step return (see Section 4). TD(λ) computes a geom
 
 In practice, $\lambda$ between 0.8 and 0.95 is often the sweet spot. Sutton and Barto report that on random walk experiments, $\lambda \approx 0.9$ consistently outperforms both extremes in terms of RMS error. The intuition: you want enough lookahead to get the credit right, but not so much lookahead that your gradient is dominated by noise from distant future steps.
 
----
 
 ## 4. The λ Spectrum: From TD(0) to Monte Carlo
 
@@ -222,7 +218,6 @@ $$\theta \leftarrow \theta + \alpha \, \delta_t \, \mathbf{e}_t$$
 
 This is the semi-gradient TD(λ) update. In practice, deep RL rarely uses parameter-level traces because maintaining a trace for every parameter of a neural network (potentially millions) is expensive and unstable. Instead, the modern approach is to use **n-step returns** or **GAE** (which we preview in Section 8), which achieve similar variance reduction without per-parameter memory.
 
----
 
 ## 5. The n-Step Return: Interpolation Without Memory Overhead
 
@@ -342,7 +337,6 @@ Suppose we run a DQN agent on CartPole-v1 for 50,000 timesteps, comparing $n = 1
 
 This matches the empirical finding in Sutton & Barto and in the original DQN ablations: $n$ in the range 3–10 typically outperforms both extremes. The exact optimal $n$ depends on episode length and reward density.
 
----
 
 ## 6. Reward Shaping: Engineering Dense Credit Without Changing the Optimal Policy
 
@@ -459,7 +453,6 @@ def train_cartpole(shaped: bool, total_timesteps: int = 50_000):
 # With shaping:    reaches avg return ~198 at 50k steps (10% faster convergence)
 ```
 
----
 
 ## 7. Hindsight Experience Replay: Manufacturing Credit from Failure
 
@@ -581,7 +574,6 @@ The FetchReach-v3 environment (robot arm reaching a target position in 3D space)
 
 These are the numbers reported in Andrychowicz et al. (2017) "Hindsight Experience Replay", NeurIPS 2017. The improvement is dramatic precisely because the task is sparse: HER essentially creates dense reward from nothing by reinterpreting failure as success at a different goal.
 
----
 
 ## 8. Structural Credit Assignment: How Gradients Flow Through Deep Networks
 
@@ -684,7 +676,6 @@ def apply_gradient_clipping(
 
 Without residual connections, the gradient norm at `input_proj` (the earliest layer) will be orders of magnitude smaller than at `output`. With residual connections, the gradient has a direct path through the skip connections that bypasses the attenuating layers. Combined with gradient clipping (which prevents the exploding-gradient failure mode), structural credit flows to all layers uniformly.
 
----
 
 ## 9. Credit Assignment in Deep RL: Why This Is the Root Cause of Variance
 
@@ -736,7 +727,6 @@ The default approach — assign the reward only at the final token, with $R_t = 
 
 This connects directly to the [debugging AI training post](/blog/machine-learning/debugging-training/diagnosing-reward-hacking-and-reward-misspecification) and the broader architecture of RLHF systems.
 
----
 
 ## 10. Putting It Together: A Practitioner's Credit Assignment Checklist
 
@@ -816,7 +806,6 @@ def diagnose_reward_density(env_name: str, n_episodes: int = 100) -> dict:
 | Very sparse (<1%) | Any | Reward shaping + HER | Φ = distance |
 | Goal-conditioned | Any | HER (always) | future strategy, k=4 |
 
----
 
 ## 11. Case Studies
 
@@ -851,7 +840,6 @@ Without GAE (using raw returns instead), RLHF training is unstable because the v
 
 A key diagnostic from the InstructGPT ablations: removing the KL penalty causes the policy to rapidly degenerate into reward hacking (producing responses that score high on the reward model but are meaningless to humans), because without the anchor, noisy credit signals from the sparse end-of-response reward drive the policy to exploit spurious correlations in the reward model.
 
----
 
 ## 12. Algorithm Comparison: Credit Assignment Methods at a Glance
 
@@ -867,7 +855,6 @@ A key diagnostic from the InstructGPT ablations: removing the KL penalty causes 
 
 ![Comparison matrix of five credit assignment methods across bias, variance, memory requirement, and best use case, showing how TD lambda and HER represent the practical frontier of the bias-variance tradeoff](the-credit-assignment-problem-7.png)
 
----
 
 ## 13. Deep Dive: Implementing GAE End-to-End
 
@@ -1044,7 +1031,6 @@ The problem is both temporal credit assignment (which of the 500 tokens caused t
 
 In mathematical terms, a PRM provides $R(s_t)$ for each step $t$ rather than only $R(s_T)$ at the terminal state. This converts the sparse-reward RLHF problem into a denser one, dramatically improving the efficiency of the policy gradient update. The work on OpenAI's process reward model for mathematical reasoning (Lightman et al., 2023, "Let's Verify Step by Step") showed that PRM-based RLHF substantially outperforms outcome-only reward on challenging math benchmarks — a direct empirical confirmation that credit assignment density matters for language model training.
 
----
 
 ## 14. The Reward Horizon Problem: How $\gamma$ Limits Long-Horizon Reasoning
 
@@ -1078,7 +1064,6 @@ This has deep implications:
 
 One practical trick when you are unsure: start with $\gamma = 0.99$ and check whether the agent's learned value function $V(s_0)$ (for the initial state) converges to a reasonable estimate of the true discounted return. If $V(s_0)$ is near zero even after millions of steps, your $\gamma$ is too small and the terminal reward is being discounted into invisibility.
 
----
 
 ## 15. Monte Carlo Tree Search as Credit Assignment by Planning
 
@@ -1094,7 +1079,6 @@ AlphaZero replaces the random rollout oracle with a learned value network, which
 
 The result: AlphaZero reaches superhuman performance at chess in 4 hours of self-play (approximately 44 million games), despite having no handcrafted evaluation function and learning entirely from the sparse win/loss terminal signal. This is credit assignment operating at massive scale.
 
----
 
 ## 16. Credit Assignment Failures and How to Detect Them
 
@@ -1163,7 +1147,6 @@ def her_novelty_check(
     return novel_count / max(T - 1, 1)
 ```
 
----
 
 ## 17. Credit Assignment in Finance and Trading RL
 
@@ -1256,7 +1239,6 @@ class PortfolioEnv(gym.Env):
 
 The Sharpe-normalized reward converts what would be a high-variance, sparse credit signal (raw PnL fluctuates enormously day-to-day) into a signal that has unit-level magnitude and is directly comparable across assets and time periods. Combined with potential-based shaping from the momentum signal, the agent receives a dense, informative credit signal at every step rather than only at position close.
 
----
 
 ## 18. When to Use This (and When Not To)
 
@@ -1296,7 +1278,6 @@ The Sharpe-normalized reward converts what would be a high-variance, sparse cred
 - Training loss improves but early-layer gradients are near zero
 - Use: residual connections, orthogonal initialization, LayerNorm, gradient clipping at max_norm=0.5
 
----
 
 ## Key Takeaways
 
@@ -1320,7 +1301,6 @@ The Sharpe-normalized reward converts what would be a high-variance, sparse cred
 
 10. **Measure reward density before choosing a strategy**: a diagnostic loop over 100 random episodes tells you whether you are in the sparse, moderate, or dense regime, and the right credit assignment technique follows directly.
 
----
 
 ## Further Reading
 

@@ -34,7 +34,6 @@ Figure 1 shows the core contrast we are about to unpack: the sharp single-arrow 
 
 ![Deterministic policy maps each state to one action with certainty while stochastic policy assigns probability mass across all actions enabling exploration](/imgs/blogs/policies-deterministic-vs-stochastic-1.png)
 
----
 
 ## 1. What is a policy?
 
@@ -66,7 +65,6 @@ Both definitions are complete behavioral specifications — they tell you exactl
 2. **Partial observability**: When the agent cannot see the full state (a POMDP — Partially Observable Markov Decision Process), two different underlying states may produce the same observation. A deterministic policy must commit to one action for that observation, which is wrong half the time. A stochastic policy can hedge by assigning probability to multiple actions, and in the limit achieves higher expected return. We will prove this in Section 6.
 3. **Gradient estimation**: Policy gradient algorithms optimize $J(\theta) = \mathbb{E}_{\pi_\theta}[\sum_t r_t]$ by differentiating through the policy. The score-function estimator $\nabla_\theta \log \pi_\theta(a \mid s)$ only works when $\pi_\theta$ is a smooth distribution. Deterministic policies require a different estimator — the Deterministic Policy Gradient (DPG) theorem (Silver et al. 2014, the DPG paper). We preview this in Section 8 and return to it in post E1.
 
----
 
 ## 2. Tabular policies: the exact baseline
 
@@ -101,7 +99,6 @@ print(f"Sampled action for state 0: {a}")
 
 This is why every serious RL system uses **parameterized policies** — functions $\pi_\theta(a \mid s)$ that share parameters $\theta$ across states. Let's build from the simplest to the most powerful.
 
----
 
 ## 3. Parameterized policies
 
@@ -279,7 +276,6 @@ You might wonder: why DiagGaussian instead of a full multivariate Gaussian $\mat
 
 For structured action spaces where correlations matter (e.g., humanoid whole-body control where hip and knee torques are strongly correlated), normalizing flows or structured covariance can help. But for most practical continuous control problems, DiagGaussian is the right default.
 
----
 
 ## 4. Why stochastic? Three compelling reasons
 
@@ -317,7 +313,6 @@ $$\nabla_\theta J(\theta) = \mathbb{E}_{\pi_\theta}\left[\nabla_\theta \log \pi_
 
 This gradient estimator — the **score function estimator** — requires that $\pi_\theta$ be a differentiable probability distribution. The term $\nabla_\theta \log \pi_\theta(a \mid s)$ is the **score** of the policy: it tells you how to adjust $\theta$ to make action $a$ more (or less) likely in state $s$. For a deterministic policy $\pi(s) = \text{argmax}_a$, this score is zero almost everywhere (the argmax has no smooth gradient). You need a *distribution* to get a useful gradient signal, which is why REINFORCE, A2C, PPO, and SAC all use stochastic policies.
 
----
 
 ## 5. Why deterministic? The existence theorem
 
@@ -353,7 +348,6 @@ The resulting mixed policy is technically stochastic (it assigns positive probab
 
 The interpolation also demonstrates the theorem in action: as $\varepsilon \to 0$, the $\varepsilon$-greedy policy approaches a deterministic policy, and by the existence theorem, this limit is fine — the optimal policy exists in deterministic form. The $\varepsilon > 0$ phase is purely for exploration during learning, not because stochasticity improves the *final* policy in a fully-observed MDP.
 
----
 
 ## 6. POMDP case: why stochastic is strictly better
 
@@ -397,7 +391,6 @@ Suppose the agent takes three steps. In step 1, it sees $o = \star$ and is in $s
 
 In this case, the stochastic policy performs the same because a single step resolves the hidden state. The real benefit shows up in *repeated* POMDP scenarios where the hidden state is persistent and the deterministic policy keeps repeating the wrong action without any mechanism to update. Stochastic policies, by varying their actions, generate more *diverse* observations that allow a Bayesian agent to narrow down the hidden state faster — this is exactly the exploration-exploitation tradeoff recast in the POMDP frame.
 
----
 
 ## 7. The policy improvement theorem: proof from scratch
 
@@ -447,7 +440,6 @@ The first equality holds because $\pi'$ is deterministic (all mass on argmax). T
 
 **When does improvement stop?** If $V^\pi(s) = \max_a Q^\pi(s, a)$ for all $s$, then the greedy policy reproduces $\pi$ and we have reached a fixed point. By the Bellman optimality equations, this fixed point is the optimal policy $\pi^*$ with $V^{\pi^*}(s) = V^*(s)$ for all $s$.
 
----
 
 ## 8. Policy iteration: putting it together
 
@@ -534,7 +526,6 @@ def policy_iteration(R, P, gamma=0.99):
     return policy, V, Q
 ```
 
----
 
 ## 9. GridWorld worked example: policy improvement step-by-step
 
@@ -673,7 +664,6 @@ The code confirms our hand-computed result: the policy converges in just 2 itera
 
 ![Policy iteration convergence from random policy through greedy improvements to optimal policy showing value function increases at each step](/imgs/blogs/policies-deterministic-vs-stochastic-5.png)
 
----
 
 ## 10. Deep RL: neural network as policy
 
@@ -847,7 +837,6 @@ for t in range(100):
 
 The critical discipline: **always reset the LSTM hidden state at episode boundaries** (`hidden = None` when `done = True`). Failing to do this leaks belief from one episode into the next, which corrupts training. This is also why recurrent policies require careful handling in replay buffers — you cannot sample arbitrary transitions without their LSTM context. Most implementations use **sequence replay**: store full episode segments in the buffer and always replay contiguous windows.
 
----
 
 ## 11. Policy comparison: deterministic vs stochastic in deep RL
 
@@ -911,7 +900,6 @@ print(f"Uniform policy entropy: {Categorical(logits=torch.zeros(2)).entropy().it
 
 This diagnostic is free to compute and should be in every RL training dashboard, alongside episode return and value function loss.
 
----
 
 ## 12. Case studies: where policy type determined success or failure
 
@@ -970,7 +958,6 @@ The pattern is clear: for discrete environments, DQN's implicit deterministic po
 
 One nuance worth noting: these benchmark numbers are not destiny. The performance gap between SAC and TD3 on HalfCheetah narrows significantly with careful TD3 tuning — exploration noise schedule, learning rate warmup, and replay buffer size all matter. The real advantage of SAC's stochastic policy is not just peak performance but **sample efficiency and robustness**: it reaches 80% of its final performance about 40% faster than TD3 in most continuous control benchmarks (approximate, based on SB3 Zoo evaluation curves), and it requires far less hyperparameter tuning to achieve that. For practitioners who need a reliable default for continuous control, SAC is the correct choice precisely because its stochastic policy handles exploration automatically through entropy maximization, eliminating the need to manually tune noise schedules that deterministic DDPG/TD3 policies depend on.
 
----
 
 ## 13. Practical implementation: Stable-Baselines3 policy selection
 
@@ -1029,7 +1016,6 @@ agent.learn(total_timesteps=100_000)
 | Policy updates | Every `n_steps` (PPO) or per replay step (SAC) | Delayed in TD3 (`policy_freq=2`) |
 | Convergence | More robust, lower peak | Higher peak if tuned, can be unstable |
 
----
 
 ## 14. Policy types across RL algorithms
 
@@ -1043,7 +1029,6 @@ Understanding the full landscape of how policy type interacts with on/off-policy
 
 **PPO is the workhorse for on-policy stochastic policies.** The clipped surrogate objective handles the instability that vanilla policy gradient (REINFORCE) suffers from. The entropy coefficient `ent_coef` controls how much exploration pressure remains throughout training — set it to zero and PPO collapses to near-deterministic once it finds a good policy; set it too high and it never commits.
 
----
 
 ## 15. Common pitfalls and debugging checklist
 
@@ -1112,7 +1097,6 @@ def ppo_update(policy, obs_batch, actions_batch, old_log_probs, returns, advanta
 
 The `old_log_probs.detach()` call is critical: old log-probabilities are constants in the PPO objective, not variables to differentiate through.
 
----
 
 ## 16. When to use which (and when to stick with simpler approaches)
 
@@ -1147,7 +1131,6 @@ Suppose you are building an RL agent for trade execution (posting limit orders t
 
 **What not to use:** DDPG or TD3 — deterministic execution strategies are trivially front-run. A deterministic agent that always posts 100 shares at 9:31 AM is immediately exploited.
 
----
 
 ## Key takeaways
 
@@ -1175,7 +1158,6 @@ Suppose you are building an RL agent for trade execution (posting limit orders t
 
 12. **At test time, you can usually switch a stochastic policy to deterministic mode**: take `argmax` of Categorical logits or `tanh(mean)` of Gaussian. This reduces variance and slightly improves average return, at the cost of exploration — acceptable once training is complete.
 
----
 
 ## Further reading
 

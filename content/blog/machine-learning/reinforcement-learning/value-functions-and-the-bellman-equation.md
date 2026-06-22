@@ -38,7 +38,6 @@ Figure 1 shows the fundamental structure we are building toward: a one-step back
 
 ![Backup diagram showing state s expanding over two actions and three next states with transition probabilities and rewards labeled at each edge](/imgs/blogs/value-functions-and-the-bellman-equation-1.png)
 
----
 
 ## 1. Return: the raw thing we want to predict
 
@@ -66,7 +65,6 @@ $$\rho^\pi = \lim_{T \to \infty} \frac{1}{T} \mathbb{E}\!\left[\sum_{t=0}^T R_t 
 
 The Bellman equations for the average-reward setting look slightly different — they subtract $\rho^\pi$ from each step — but the same contraction arguments apply. We will not use average-reward in this post, but it is the right formulation for applications like network scheduling, where the task never ends and discounting would introduce artificial preference for near-term queues.
 
----
 
 ## 2. The state-value function $V^\pi(s)$
 
@@ -84,7 +82,6 @@ Two boundary conditions are worth noting. For a **terminal state** $s_{\text{ter
 
 When you think about a concrete CartPole example: the balanced state near the center might have $V^\pi \approx 450$ with a well-trained policy and $\gamma = 0.99$ (an expected ~450 steps of survival). A state where the pole is already tilted at 15 degrees might have $V^\pi \approx 12$ — the agent can correct a little but is mostly doomed. The difference between these two numbers is what the policy exploits: always take the action that moves you from the 12-value state toward the 450-value state.
 
----
 
 ## 3. The action-value function $Q^\pi(s, a)$
 
@@ -104,7 +101,6 @@ Why do we need both V and Q? In model-based settings where we know the transitio
 
 Concretely, on CartPole-v1 with four continuous observations (cart position, cart velocity, pole angle, pole angular velocity), a discrete action space of size 2 (push left or push right), and a neural Q-network, the table of $Q(s, a)$ values is effectively infinite (continuous state space) and must be approximated by the network. But the Q-value structure remains: $Q(s, \text{left})$ vs. $Q(s, \text{right})$ at each observed state, and the greedy policy selects whichever is higher. The network generalizes across nearby states through shared weights, which is the entire reason deep Q-networks work on high-dimensional inputs.
 
----
 
 ## 4. The advantage function $A(s, a)$
 
@@ -131,7 +127,6 @@ $$L^{\text{CLIP}}(\theta) = \mathbb{E}_t\!\left[\min\!\left(r_t(\theta)\, \hat{A
 
 that $\hat{A}_t$ is an estimate of the advantage function. Without it, you would divide by nothing and get the raw return, which is an uncentered, high-variance signal that makes training fragile.
 
----
 
 ## 5. Deriving the Bellman expectation equation for $V^\pi$
 
@@ -173,7 +168,6 @@ $$\mathbf{V}^\pi = (I - \gamma \mathcal{P}^\pi)^{-1} \mathbf{r}^\pi$$
 
 For small MDPs, we can solve this linear system directly. For large MDPs, we iterate the Bellman equation, as we will see in the worked example.
 
----
 
 ## 6. Deriving the Bellman expectation equation for $Q^\pi$
 
@@ -206,7 +200,6 @@ $$Q^\pi(s, a) = \sum_{s'} P(s'|s,a)\!\left[R(s,a,s') + \gamma V^\pi(s')\right]$$
 
 In practice, model-free algorithms maintain Q-tables or Q-networks and update them using the pure-Q recursion, which requires no knowledge of $P$.
 
----
 
 ## 7. The Bellman optimality equations: finding the best policy
 
@@ -268,7 +261,6 @@ The figure below illustrates this geometrically.
 
 After $k$ applications, the distance to $V^*$ is at most $\gamma^k \|V_0 - V^*\|_\infty$. With $\gamma = 0.9$ and starting distance 10, after 100 sweeps the distance is at most $0.9^{100} \times 10 \approx 0.000027$. Convergence is guaranteed and exponentially fast.
 
----
 
 ## 8. Iterative policy evaluation
 
@@ -284,7 +276,6 @@ The timeline below shows the convergence on a three-state example over iteration
 
 Convergence is monotone when starting from $V_0 = 0$ with non-negative rewards: the estimates only increase toward their true values. For general reward functions, the estimates may oscillate slightly but still converge.
 
----
 
 ## 9. Comparing V, Q, and A: a reference table
 
@@ -303,7 +294,6 @@ Before moving to implementation, it helps to consolidate the three value functio
 
 The advantages column deserves emphasis. The advantage function has mean zero under the current policy, which means it is a **centered** signal. Centered signals have lower variance than uncentered ones. This is why PPO's advantage estimates converge faster than vanilla policy gradient using raw returns, and it is why Generalized Advantage Estimation (GAE) exists as an explicit technique to estimate $A$ with controlled bias-variance tradeoff.
 
----
 
 ## 10. Worked example: solving a 3-state GridWorld by hand
 
@@ -377,7 +367,6 @@ The optimal policy is $\pi^*(s_1) = a_R$, and $V^*(s_1) = 10.0$. This makes sens
 
 **Key insight:** Bellman optimality equations correctly balance immediate rewards against long-run returns, and the contraction proof tells us that iterating them will find this answer regardless of initialization.
 
----
 
 ## 11. NumPy implementation: tabular Bellman evaluation and policy extraction
 
@@ -548,7 +537,6 @@ def bellman_policy_eval_vectorized(
 
 This vectorized version processes all states in a single NumPy call, making it practical for MDPs with thousands of states.
 
----
 
 ## 12. The big picture: how Bellman equations unify all RL algorithms
 
@@ -569,7 +557,6 @@ This unifying view is not just aesthetically pleasing — it is practically usef
 
 From a production standpoint, the Bellman equation is also the lens through which we evaluate whether RL is the right tool at all. If your "environment" is actually a differentiable simulator, you can differentiate through it and use gradient-based planning instead of Bellman backups — no RL needed. If your state space is tiny (a few hundred states), solve the linear system directly and skip the iteration. If the Markov property is badly violated because the agent observes only partial state, the Bellman equation still holds for the underlying MDP, but your observations do not give you the Markov state, so your value function approximation will be systematically wrong. Understanding the Bellman equation's prerequisites — the Markov property, bounded rewards, correct $\gamma$ — tells you when the foundation is sound and when you need a different formulation.
 
----
 
 ## 13. Case studies: Bellman equations in famous systems
 
@@ -617,7 +604,6 @@ For reference, SB3's tabular/shallow RL baselines on standard Gymnasium environm
 
 These results are achievable by anyone running SB3 with default hyperparameters. They demonstrate that Bellman-based algorithms converge to good policies within a few million environment steps on the standard benchmark suite.
 
----
 
 ## 14. When to use the Bellman equations (and when not to)
 
@@ -660,7 +646,6 @@ The Bellman equation assumes the Markov property: the next state depends only on
 
 Specifically for financial and trading environments, the Markov property is often only approximately satisfied — price history, order book depth, and macro regime all affect future prices in ways that a single-step observation cannot capture. This is why RL for trading typically uses a feature vector that includes multiple lags of price and volume, effectively constructing a richer Markov state from the observable history. See the [game theory for markets series](/blog/trading/game-theory) for how strategic considerations further complicate the state representation in order-book environments. When the pseudo-Markov state is well-constructed, Bellman-based Q-learning can learn profitable intraday execution policies, but the quality of that state representation is at least as important as the choice of RL algorithm.
 
----
 
 ## 15. Implementation: Bellman-based Q-learning loop
 
@@ -748,7 +733,6 @@ Q[state, action] += alpha * td_error
 
 The single character difference — `Q[next_state].max()` vs `Q[next_state, next_action]` — distinguishes off-policy Q-learning (Bellman optimality) from on-policy SARSA (Bellman expectation). Q-learning converges to $Q^*$; SARSA converges to $Q^\pi$ for the epsilon-greedy policy.
 
----
 
 ## 16. The advantage function in actor-critic: a practical deep RL connection
 
@@ -848,7 +832,6 @@ def update_actor_critic(
 
 This actor-critic implementation is the skeleton underlying A2C, and with the addition of the PPO clipped surrogate (replacing `log_probs * advantages` with `min(r_t * A_t, clip(r_t, 1-eps, 1+eps) * A_t)`), it becomes PPO. Both algorithms depend critically on the Bellman expectation equation for the critic, and on the advantage function for the actor update.
 
----
 
 ## 17. Numerical stability and implementation pitfalls
 
@@ -895,7 +878,6 @@ td_target   = R + gamma * Q_target(s')[best_action]  # evaluate with target net
 
 Double DQN improves performance on Atari by approximately 10-15% median score across the 49-game benchmark, according to the original Double DQN paper.
 
----
 
 ## 18. Bootstrapping, bias, and the TD-MC spectrum
 
@@ -933,7 +915,6 @@ This spectrum — how much of the return comes from real rollout versus bootstra
 
 The contraction proof tells us that TD(0) converges despite its bias, as long as the step size $\alpha$ satisfies the Robbins-Monro conditions: $\sum_t \alpha_t = \infty$ and $\sum_t \alpha_t^2 < \infty$. In practice, using a fixed small $\alpha$ (like 0.001) combined with a large replay buffer achieves similar convergence properties.
 
----
 
 ## 19. The Bellman equation in continuous state and action spaces
 
@@ -959,7 +940,6 @@ $$V^\pi(s) = \mathbb{E}_{a \sim \pi}\!\left[Q^\pi(s, a) - \alpha \log \pi(a|s)\r
 
 where $\alpha$ is a temperature parameter. This **soft Bellman equation** has its own contraction proof and results in policies that are "maximum entropy" — they balance high return against high entropy (exploration and robustness). SAC with this modification achieves roughly 10,000 average return on HalfCheetah-v4 (approximately 3× better than PPO's ~3,000) in 1 million steps, making it the gold standard for continuous control.
 
----
 
 ## 20. Policy iteration: alternating between V and π
 
@@ -1041,7 +1021,6 @@ def policy_iteration(
 
 Policy iteration typically converges in 3–10 iterations for moderate MDPs, even when each evaluation step takes many Bellman sweeps. This is because the policy space is much smaller than the value space — you only need to identify the right action at each state, not pin down the exact value.
 
----
 
 ## 21. The linear algebra view: Bellman as a linear system
 
@@ -1084,7 +1063,6 @@ def exact_bellman_eval(
 
 For MDPs with up to a few thousand states, matrix inversion is practical (it costs $O(|\mathcal{S}|^3)$). For MDPs with millions of states — or continuous MDPs — we fall back to iterative methods. But the existence of this exact closed form proves the uniqueness of $V^\pi$, which in turn anchors the convergence proofs for all approximate methods.
 
----
 
 ## 22. From tabular to deep: what changes and what stays the same
 
@@ -1210,7 +1188,6 @@ Every line in `update()` maps directly back to the Bellman equation:
 
 The entire deep RL machinery exists to make this approximation stable at scale. Strip it away and what remains is the Bellman equation.
 
----
 
 ## 23. Function approximation and the deadly triad
 
@@ -1235,7 +1212,6 @@ Practical mitigations that have been found to work:
 
 The safest option for beginners is **on-policy methods** (PPO, A2C): they avoid the deadly triad by never using off-policy transitions, at the cost of lower sample efficiency. If sample efficiency matters, **SAC** is the best-understood off-policy method for continuous action spaces, with theoretical convergence guarantees for the soft Bellman equations.
 
----
 
 ## 24. Multi-step returns and eligibility traces
 
@@ -1288,7 +1264,6 @@ def td_lambda_eval(
 
 For $\lambda = 0$, this reduces to TD(0). For $\lambda = 1$ (with offline episode processing), it converges to MC. Values between 0.7 and 0.95 often perform best empirically.
 
----
 
 ## Key takeaways
 
@@ -1312,7 +1287,6 @@ For $\lambda = 0$, this reduces to TD(0). For $\lambda = 1$ (with offline episod
 
 10. **The effective horizon is $\approx 1/(1-\gamma)$** — use this to set $\gamma$ deliberately based on how far ahead you need the agent to plan.
 
----
 
 ## Further reading
 

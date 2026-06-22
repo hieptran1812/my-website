@@ -34,7 +34,6 @@ Figure 1 below shows the core MDP structure we will build up piece by piece: sta
 
 ![MDP state-action graph showing states S1, S2, S3 connected by actions a1 and a2 with transition probabilities 0.8 and 0.6 and reward labels](/imgs/blogs/markov-decision-processes-1.png)
 
----
 
 ## 1. Why we need a formal model before picking an algorithm
 
@@ -52,7 +51,6 @@ These three problems have completely different state spaces, action spaces, tran
 
 The MDP formalism was developed for operations research in the 1950s by Richard Bellman, who also gave us the Bellman equation. It entered reinforcement learning through the foundational work of Sutton and Barto and is now the universal interface between any sequential decision problem and any RL algorithm. If the problem cannot be cast as an MDP (or POMDP), standard RL algorithms do not apply.
 
----
 
 ## 2. The Markov property: what it means, when it holds, and when it fails
 
@@ -82,7 +80,6 @@ A simple empirical test: train a policy on your current state representation. Th
 
 A more rigorous test is to estimate the mutual information $I(S_{t+1}; S_{t-1} \mid S_t, A_t)$ from collected data. If this is significantly positive, the past carries information about the future beyond the present, violating the Markov property. Gaussian process regression can estimate this from off-policy data.
 
----
 
 ## 3. The MDP tuple: (S, A, P, R, γ)
 
@@ -203,7 +200,6 @@ The critical design choice is **dense vs sparse**, which we examine in detail in
 
 $\gamma \in [0, 1]$ controls how much the agent values future rewards relative to immediate ones. A reward $k$ steps in the future is worth $\gamma^k$ of its face value today. Section 6 derives why this is mathematically necessary for continuing tasks and desirable for episodic ones.
 
----
 
 ## 4. Transition dynamics in depth: stochastic and deterministic worlds
 
@@ -237,7 +233,6 @@ The transition dynamics are the hardest part of MDP specification to get right, 
 
 **Model-based RL** explicitly learns $\hat{P}(s' \mid s, a)$ from interaction data and then uses the learned model for planning. The advantage is dramatic sample efficiency when the model is accurate: Dreamer (Hafner et al., 2020) learns a latent-space world model and achieves on Atari what DQN achieves at 100M frames using only 200k environment interactions — a 500× improvement. The disadvantage is model bias: planning inside a wrong model optimises the wrong objective. World models (Ha and Schmidhuber, 2018; Dreamer, Hafner et al. 2020) learn a latent-space MDP. This requires fewer real-environment interactions at the cost of model prediction error — the "compounding error" problem: small per-step errors in $\hat{P}$ compound over long rollouts and produce overconfident policies that fail in the real environment. Ensuring your learned model is calibrated (uncertainty-aware) is the key challenge.
 
----
 
 ## 5. Reward functions: dense, sparse, shaped, and hacked
 
@@ -290,7 +285,6 @@ The fix is always the same: audit your reward function by watching what behaviou
 | Learned reward (RLHF) | Medium | High (reward model errors compound) | NLP alignment, preference learning |
 | Multi-objective (weighted sum) | Medium | High (weights are hyperparameters) | Problems with trade-offs |
 
----
 
 ## 6. Discount factor γ: three justifications and what it controls
 
@@ -325,7 +319,6 @@ Setting $\gamma$ too close to 1 on continuing tasks makes value estimation slow 
 - Never use $\gamma = 1$ for continuing tasks without also capping the episode length.
 - Pair high $\gamma$ with GAE $\lambda < 1$ to control the variance in advantage estimates.
 
----
 
 ## 7. The return: deriving the discounted sum and its recursive structure
 
@@ -368,7 +361,6 @@ With $\gamma = 0.9$: $G_0 = (1 - 0.9^{10}) / (1 - 0.9) = (1 - 0.3487) / 0.1 \app
 
 The same episode has a 47% higher return under $\gamma = 0.99$ vs $\gamma = 0.9$. This means the gradient signal is stronger (easier to tell the difference between a good trajectory and a bad one) under higher discount, but so is the variance in value estimates.
 
----
 
 ## 8. Episodes vs continuing tasks: formal definitions
 
@@ -396,7 +388,6 @@ Any episodic task can be converted to a continuing task by making terminal state
 
 The Gymnasium API reflects this: `terminated` signals a genuine episode end (terminal state reached), while `truncated` signals that the time limit was hit without reaching a true terminal state. Correct implementations treat truncated episodes differently in the return calculation — the return at truncation should be bootstrapped from the value estimate at the truncated state, not treated as a terminal return.
 
----
 
 ## 9. Worked examples: GridWorld and CartPole
 
@@ -569,7 +560,6 @@ print(f"PPO after 50k steps: mean_reward={mean_reward:.1f} +/- {std_reward:.1f}"
 
 The gap between random (G ≈ 9) and trained PPO (G ≈ 497) is entirely explained by the MDP formulation — the PPO agent learned to maximise $G_t = \sum_{k=0}^{T-t-1} 0.99^k \cdot 1$ by keeping the pole upright for as many steps as possible.
 
----
 
 ## 10. Value functions and the Bellman equation: the bridge from MDP to algorithms
 
@@ -640,7 +630,6 @@ This is a **greedy policy** with respect to $Q^*$. The beauty of the MDP formali
 
 For POMDPs, the optimal policy is generally stochastic and history-dependent (it conditions on the belief state, which encodes the full history).
 
----
 
 ## 11. POMDPs: when full observability fails
 
@@ -694,7 +683,6 @@ It fails when:
 
 **A practical heuristic**: augment the state with one or more previous observations. If this improves performance by more than a few percent, you are in a POMDP and should either augment further or switch to a recurrent policy.
 
----
 
 ## 11. Real-world MDP formulations
 
@@ -743,7 +731,6 @@ An execution agent that must buy $N$ shares of a stock within a 30-minute window
 
 This MDP formulation has been used in academic RL for optimal execution (see Nevmyvaka, Feng, Kearns 2006 — an early application of RL to market microstructure). The reward is the negative trading cost: a skilled agent times entries to minimise price impact, effectively buying at lower prices by spreading orders across time and exploiting transient liquidity.
 
----
 
 ## 12. Comparison of MDP-related formalisms
 
@@ -764,7 +751,6 @@ A common mistake: treating a POMDP as an MDP by using only the current observati
 
 Another common mistake: using a Markov game framework when the other agents are stationary and can be treated as environment dynamics. If opponents do not adapt (fixed AI opponents in classic Atari games), treat them as part of the environment dynamics $P$, not as additional agents. This simplification reduces the problem from exponential joint action space to a standard MDP.
 
----
 
 ## 13. Implementing a general MDP environment in Gymnasium
 
@@ -865,7 +851,6 @@ for action in [2, 1, 1, 2]:   # E, S, S, E
 print(f"Discounted return G0 = {G:.3f}")   # Expected: 4.58
 ```
 
----
 
 ## 14. Case studies: landmark MDPs in RL history
 
@@ -908,7 +893,6 @@ The InstructGPT paper (Ouyang et al., 2022) reformulated language model fine-tun
 
 The KL penalty is exactly potential-based reward shaping with $\Phi(s_t) = \log \pi_{ref}(y_t \mid x, y_{<t})$: it provides a per-token dense signal that prevents the policy from drifting far from the reference model distribution, preventing reward hacking. The InstructGPT models (1.3B, 6B, 175B parameters) were preferred over the untuned GPT-3 (175B) by human raters on 85%+ of test prompts — a significantly smaller model fine-tuned with RL beat a larger supervised baseline.
 
----
 
 ## 15. When to use MDPs (and when not to)
 
@@ -942,7 +926,6 @@ The KL penalty is exactly potential-based reward shaping with $\Phi(s_t) = \log 
 5. Policy performance oscillates without converging → the problem may be non-stationary (other agents adapting), requiring game-theoretic formulations. Fix: periodically freeze opponent policies (fictitious self-play) or use population-based training.
 6. Episodic training works but deploying the agent continuously fails → the episodic MDP assumption was violated; the environment has continuing dynamics. Fix: switch to a continuing-task formulation with average-reward objectives or test in an environment that does not reset between episodes.
 
----
 
 ## 16. Key takeaways
 
@@ -966,7 +949,6 @@ The KL penalty is exactly potential-based reward shaping with $\Phi(s_t) = \log 
 
 10. **The formalism you choose constrains the algorithms available.** MDP → VI, Q-learning, PPO, SAC. POMDP → PBVI, recurrent PPO. Multi-agent → MADDPG, QMIX. Know the formalism before selecting a library.
 
----
 
 ## 17. Further reading
 
@@ -978,6 +960,5 @@ The KL penalty is exactly potential-based reward shaping with $\Phi(s_t) = \log 
 - **Ouyang, L. et al.** (2022). "Training language models to follow instructions with human feedback." *NeurIPS* 2022. InstructGPT; demonstrates the MDP formulation for RLHF and the role of the KL regularisation term.
 - **Within this series**: See [What is Reinforcement Learning](/blog/machine-learning/reinforcement-learning/what-is-reinforcement-learning) for the big-picture agent-environment loop. The next post, [Dynamic Programming for RL](/blog/machine-learning/reinforcement-learning/dynamic-programming-for-rl), applies the MDP formalism to compute exact optimal policies via value iteration and policy iteration when the model $(S, A, P, R, \gamma)$ is fully known.
 
----
 
 *This is post A2 in the "Reinforcement Learning: From Rewards to Real Systems" series. The [previous post](/blog/machine-learning/reinforcement-learning/what-is-reinforcement-learning) introduced the RL problem and agent-environment loop. The [next post](/blog/machine-learning/reinforcement-learning/dynamic-programming-for-rl) uses the MDP formalism developed here to derive exact solution methods — value iteration and policy iteration — for the case where the model is fully known. Everything from Q-learning to PPO builds on the return and Bellman equation derived in this post.*

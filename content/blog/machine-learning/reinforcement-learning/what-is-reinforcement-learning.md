@@ -32,7 +32,6 @@ This is the central magic and the central difficulty of reinforcement learning: 
 
 ![The agent sends action a_t to the environment, which returns observation o_{t+1} and reward r_t; return G_t accumulates and feeds back to update the policy](/imgs/blogs/what-is-reinforcement-learning-1.png)
 
----
 
 ## The Reward Hypothesis: One Sentence That Explains Everything
 
@@ -48,7 +47,6 @@ The hypothesis is not proven. It is a bet — the same kind of bet that the "bit
 
 The practical corollary: **your job as an RL practitioner is to specify the right reward function**. Get that wrong — reward an agent for reaching a destination without penalising how long it takes, and it will go in circles forever — and no algorithm will save you. Get it right, and the algorithm does the rest. We will return to reward design throughout this series, because it is the single most common place practitioners fail in real systems.
 
----
 
 ## The Agent-Environment Loop: Formal Definition
 
@@ -76,7 +74,6 @@ $$J(\pi) = \mathbb{E}_{\pi} \left[ G_t \right] = \mathbb{E}_{\pi} \left[ \sum_{k
 
 Every RL algorithm is a different approach to finding $\pi^*$. Some approximate the expected return directly (value-based methods). Some directly optimise $J(\pi)$ by gradient ascent (policy gradient methods). Some learn a model of $P$ and plan through it (model-based methods). The taxonomy post (coming in Track B) will map these systematically; for now the key insight is that they all point at the same objective.
 
----
 
 ## How RL Differs From Supervised and Unsupervised Learning
 
@@ -92,7 +89,6 @@ It is tempting to think of RL as "supervised learning with a different loss" or 
 
 A useful cross-reference: when RL is applied to fine-tune language models from human preferences (RLHF), it sits at the intersection of all three paradigms. The model was pre-trained with self-supervised learning, fine-tuned with supervised learning on demonstrations, and then further refined with RL on a reward signal from human raters. We cover this in depth in Track I of this series.
 
----
 
 ## The Three Components of an RL Agent
 
@@ -137,7 +133,6 @@ Model-based RL (Track G) uses a model to improve sample efficiency dramatically.
 
 Most popular algorithms (DQN, PPO, SAC, TD3) are **model-free**: they learn the value function or policy directly from experience, without learning a model of the environment. This makes them more broadly applicable but less sample-efficient.
 
----
 
 ## The CartPole Hello World
 
@@ -228,7 +223,6 @@ $$G_{47} = \sum_{k=0}^{452} 0.99^k \times 1.0 = \frac{1 - 0.99^{453}}{1 - 0.99} 
 
 The dramatic difference between $G_{47} = 1.0$ (falling at step 48) and $G_{47} = 98.9$ (surviving to 500) is what creates the training signal. The Q-function learns to assign high Q-values to states and actions that precede long episodes and low Q-values to states near the stability boundary.
 
----
 
 ## What Makes RL Hard: Four Structural Challenges
 
@@ -270,7 +264,6 @@ The simplest exploration strategy is **$\varepsilon$-greedy**: with probability 
 
 More sophisticated exploration methods include **entropy bonuses** (add $-\beta \log \pi(a \mid s)$ to the reward to encourage the policy to remain uncertain), **UCB (Upper Confidence Bound)** from bandit theory, **curiosity-driven exploration** via prediction error on a forward model (Pathak et al., 2017), and **Random Network Distillation** (Burda et al., 2018). Track K of this series covers these in depth.
 
----
 
 ## A Taxonomy of RL Algorithms
 
@@ -323,7 +316,6 @@ The table below summarises the major algorithm families:
 | Dreamer v3 | Model-based | Off | Any | Sample efficiency | Data-scarce, pixel obs |
 | GRPO | Policy gradient | On | Discrete (LLM) | Reasoning fine-tuning | LLMs via RL |
 
----
 
 ## Before-After: What Training Actually Changes
 
@@ -405,7 +397,6 @@ print(f"  Q(s0, right) = {Q[0, 1]:.4f}  (should → 10.0)")
 # Output: Q(s0, left) ≈ 0.0, Q(s0, right) ≈ 9.9
 ```
 
----
 
 ## Case Studies: RL Milestones That Shaped the Field
 
@@ -443,7 +434,6 @@ RL has been applied to algorithmic trading since at least Moody & Saffell (1998)
 
 A representative result: a PPO agent trained on limit-order-book features for a single equity achieves approximately 1.8–2.3× the Sharpe ratio of a TWAP (time-weighted average price) baseline on out-of-sample data, after careful reward shaping (rewarding PnL net of transaction costs rather than raw PnL). The challenge in finance RL is non-stationarity: market regimes change, and a policy trained on 2019 data may not survive the 2020 COVID regime shift without continual adaptation. Track J of this series covers this in depth, including online learning and regime detection.
 
----
 
 ## When to Use RL (and When Not To)
 
@@ -465,7 +455,6 @@ The four challenges above should make you cautious. RL is the right tool in a su
 
 A concrete rule of thumb: if you can frame your problem as supervised learning (even with some label noise or approximate labels), do that first. RL should be a last resort for optimisation tasks with sequential structure, not a first-line tool.
 
----
 
 ## The Full Series Map
 
@@ -511,7 +500,6 @@ Curiosity-driven exploration, count-based methods, Random Network Distillation, 
 **Track L: Capstone — The RL Playbook (posts 69–71)**
 Debugging RL training (the single most practically useful track), putting it all together in a production deployment (sim-to-real for robotics, A/B testing for LLM alignment, live trading), and the final capstone that cross-links every post.
 
----
 
 ## Running Your First Full Training Loop
 
@@ -653,7 +641,6 @@ env.close()
 
 The critical components in this loop are the replay buffer (breaks temporal correlations), the target network (prevents moving-target instability in the Bellman update), and gradient clipping (prevents rare large gradients from destroying the Q-network's weights). Remove any one of these and training either diverges or converges much more slowly.
 
----
 
 ## Key Takeaways
 
@@ -677,7 +664,6 @@ The critical components in this loop are the replay buffer (breaks temporal corr
 
 10. **Start with the CartPole SB3 one-liner, then work backwards.** Understanding why each component of the training loop is necessary — target networks, clipping, entropy — is the fastest path to being able to debug real RL systems.
 
----
 
 ## Further Reading
 
@@ -690,7 +676,6 @@ The critical components in this loop are the replay buffer (breaks temporal corr
 - **Stable-Baselines3 documentation** — [stable-baselines3.readthedocs.io](https://stable-baselines3.readthedocs.io). The most widely used production-grade RL library. Every algorithm in this series has an SB3 implementation.
 - Within this series: the unified map post (`reinforcement-learning-a-unified-map`, Track B) and the capstone (`the-reinforcement-learning-playbook`, Track L) are the two posts to read first and last. Track C (tabular RL) and Track E (policy gradient) are the natural next steps from here.
 
----
 
 ## The Bellman Equations: The Mathematical Heart of RL
 
@@ -724,7 +709,6 @@ Why does Q-learning converge? The right-hand side of the Bellman optimality equa
 
 The TD error $\delta_t = r_{t+1} + \gamma V(s_{t+1}) - V(s_t)$ is the residual of the Bellman equation: it measures how far the current value function is from satisfying the self-consistency condition. When $\delta_t = 0$ for all $(s, a)$, the value function has converged. Every algorithm in this series — DQN, PPO, SAC, TD3 — uses some form of this error as its training signal.
 
----
 
 ## Policies in Depth: Deterministic, Stochastic, and Parameterised
 
@@ -821,7 +805,6 @@ $$J_{MaxEnt}(\pi) = \mathbb{E}_\pi \left[ \sum_t \gamma^t \left( r_t + \alpha H(
 
 The temperature parameter $\alpha$ controls the exploration-exploitation trade-off. High $\alpha$ encourages diverse behaviour; low $\alpha$ recovers standard RL. SAC automatically adjusts $\alpha$ to hit a target entropy, removing it as a manual hyperparameter. This is one of the reasons SAC is so practically useful: it self-tunes exploration.
 
----
 
 ## The Policy Gradient Theorem: Deriving the Update Rule
 
@@ -859,7 +842,6 @@ $$\hat{g}_{baseline} = \frac{1}{N} \sum_n \sum_t \nabla_\theta \log \pi_\theta(a
 
 Subtracting the baseline does not introduce bias (since $\mathbb{E}_{a \sim \pi}[\nabla_\theta \log \pi_\theta(a \mid s) \cdot b(s)] = 0$ by the log-derivative trick applied in reverse). The optimal baseline is the value function $V^\pi(s_t)$, giving the **advantage** $A_t = G_t - V^\pi(s_t)$ — the signal at the heart of every actor-critic algorithm.
 
----
 
 ## Gymnasium: The Standard Environment API
 
@@ -947,7 +929,6 @@ model.learn(total_timesteps=200_000)
 # but 8x faster in wall-clock time
 ```
 
----
 
 ## Reward Shaping: The Engineering That RL Papers Don't Show You
 
@@ -983,7 +964,6 @@ def rlhf_reward(prompt, response, reward_model, ref_model, kl_coef=0.02):
 
 The most common reward shaping mistake is **reward hacking**: the agent finds a behaviour that maximises the shaped reward without achieving the true goal. A cleaning robot rewarded for the number of trash items it removes may learn to scatter trash and re-collect it. A game-playing agent rewarded for a proxy metric may find ways to exploit the proxy rather than play the game. The KL penalty in RLHF (`kl_coef * kl_penalty` above) is explicitly a reward-shaping safeguard: it penalises the policy for moving too far from the supervised fine-tuned model, where most reward-hacking behaviours would take it.
 
----
 
 ## Hyperparameters and Debugging: What Goes Wrong and Why
 
@@ -1011,7 +991,6 @@ The table below shows the most impactful hyperparameters for PPO on CartPole-v1,
 
 The debugging companion series at `/blog/machine-learning/debugging-training/` covers systematic diagnostic procedures for training failures. When applied to RL specifically, the most valuable diagnostic is plotting the critic loss and the policy entropy simultaneously: if critic loss is not decreasing but policy entropy is, the policy is exploring but the value function is not learning (usually a Q-function expressivity problem); if policy entropy collapses while critic loss stays high, the policy has converged prematurely to a local optimum.
 
----
 
 ## The Connection to Optimal Control and Dynamic Programming
 
@@ -1063,7 +1042,6 @@ def value_iteration(P, R, gamma=0.99, tol=1e-6):
 
 Value iteration is exact, guaranteed to converge (the Bellman optimality operator is a $\gamma$-contraction), and runs in $O(|\mathcal{S}|^2 |\mathcal{A}|)$ per sweep. The catch: it requires knowing $P$ (the transition matrix) and $R$ (the reward matrix) in advance, and it scales cubically with the state space. For CartPole with continuous states, this is infeasible. For a 3×3 grid world, it is the exact right tool.
 
----
 
 ## Setting Up Your RL Development Environment
 
@@ -1103,7 +1081,6 @@ pip install "gymnasium[mujoco]"
 # MuJoCo is now free and open-source (no license key required since 2022)
 ```
 
----
 
 ## The Agent is Learning. What Comes Next.
 
