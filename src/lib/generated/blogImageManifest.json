@@ -1352,6 +1352,11 @@
     "width": 1792,
     "height": 1053
   },
+  "/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-1.png": {
+    "width": 2550,
+    "height": 1441,
+    "cover": true
+  },
   "/imgs/blogs/antitrust-101-sherman-clayton-and-merger-review-1.png": {
     "width": 1792,
     "height": 1184,
@@ -4260,6 +4265,39 @@
     "height": 921
   },
   "/imgs/blogs/brownian-motion-random-walk-math-for-quants-7.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/build-once-promote-everywhere-artifacts-and-versioning-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/build-once-promote-everywhere-artifacts-and-versioning-2.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/build-once-promote-everywhere-artifacts-and-versioning-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/build-once-promote-everywhere-artifacts-and-versioning-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/build-once-promote-everywhere-artifacts-and-versioning-5.png": {
+    "width": 1792,
+    "height": 1330
+  },
+  "/imgs/blogs/build-once-promote-everywhere-artifacts-and-versioning-6.png": {
+    "width": 1792,
+    "height": 935
+  },
+  "/imgs/blogs/build-once-promote-everywhere-artifacts-and-versioning-7.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/build-once-promote-everywhere-artifacts-and-versioning-8.png": {
     "width": 1792,
     "height": 1178
   },
@@ -10098,6 +10136,39 @@
   "/imgs/blogs/continuation-patterns-flags-pennants-8.png": {
     "width": 1792,
     "height": 975
+  },
+  "/imgs/blogs/continuous-integration-merge-early-merge-often-1.png": {
+    "width": 1792,
+    "height": 1241,
+    "cover": true
+  },
+  "/imgs/blogs/continuous-integration-merge-early-merge-often-2.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/continuous-integration-merge-early-merge-often-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/continuous-integration-merge-early-merge-often-4.png": {
+    "width": 1792,
+    "height": 1427
+  },
+  "/imgs/blogs/continuous-integration-merge-early-merge-often-5.png": {
+    "width": 1792,
+    "height": 932
+  },
+  "/imgs/blogs/continuous-integration-merge-early-merge-often-6.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/continuous-integration-merge-early-merge-often-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/continuous-integration-merge-early-merge-often-8.png": {
+    "width": 1792,
+    "height": 1164
   },
   "/imgs/blogs/contract-testing-consumer-driven-contracts-and-schema-diffs-1.png": {
     "width": 1792,
@@ -18563,6 +18634,39 @@
   "/imgs/blogs/freezing-recovery-and-chain-analytics-8.png": {
     "width": 1792,
     "height": 1257
+  },
+  "/imgs/blogs/from-commit-to-production-the-cicd-mental-model-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/from-commit-to-production-the-cicd-mental-model-2.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/from-commit-to-production-the-cicd-mental-model-3.png": {
+    "width": 1792,
+    "height": 1359
+  },
+  "/imgs/blogs/from-commit-to-production-the-cicd-mental-model-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/from-commit-to-production-the-cicd-mental-model-5.png": {
+    "width": 1792,
+    "height": 667
+  },
+  "/imgs/blogs/from-commit-to-production-the-cicd-mental-model-6.png": {
+    "width": 1792,
+    "height": 943
+  },
+  "/imgs/blogs/from-commit-to-production-the-cicd-mental-model-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/from-commit-to-production-the-cicd-mental-model-8.png": {
+    "width": 1792,
+    "height": 1154
   },
   "/imgs/blogs/from-conviction-to-size-the-bet-sizing-bridge-1.png": {
     "width": 1792,
@@ -32950,6 +33054,39 @@
     "width": 1792,
     "height": 1154
   },
+  "/imgs/blogs/pipeline-as-code-the-anatomy-of-a-pipeline-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/pipeline-as-code-the-anatomy-of-a-pipeline-2.png": {
+    "width": 1792,
+    "height": 1100
+  },
+  "/imgs/blogs/pipeline-as-code-the-anatomy-of-a-pipeline-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/pipeline-as-code-the-anatomy-of-a-pipeline-4.png": {
+    "width": 1792,
+    "height": 1370
+  },
+  "/imgs/blogs/pipeline-as-code-the-anatomy-of-a-pipeline-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/pipeline-as-code-the-anatomy-of-a-pipeline-6.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/pipeline-as-code-the-anatomy-of-a-pipeline-7.png": {
+    "width": 1792,
+    "height": 931
+  },
+  "/imgs/blogs/pipeline-as-code-the-anatomy-of-a-pipeline-8.png": {
+    "width": 1792,
+    "height": 1194
+  },
   "/imgs/blogs/platinum-and-palladium-the-autocatalyst-metals-1.png": {
     "width": 1792,
     "height": 915,
@@ -44028,6 +44165,39 @@
     "width": 1792,
     "height": 1347
   },
+  "/imgs/blogs/the-build-stage-reproducible-fast-and-cacheable-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/the-build-stage-reproducible-fast-and-cacheable-2.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/the-build-stage-reproducible-fast-and-cacheable-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-build-stage-reproducible-fast-and-cacheable-4.png": {
+    "width": 1792,
+    "height": 1307
+  },
+  "/imgs/blogs/the-build-stage-reproducible-fast-and-cacheable-5.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/the-build-stage-reproducible-fast-and-cacheable-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-build-stage-reproducible-fast-and-cacheable-7.png": {
+    "width": 1792,
+    "height": 931
+  },
+  "/imgs/blogs/the-build-stage-reproducible-fast-and-cacheable-8.png": {
+    "width": 1792,
+    "height": 1031
+  },
   "/imgs/blogs/the-bull-case-vs-the-bear-case-for-gold-over-the-next-decade-1.png": {
     "width": 1792,
     "height": 1145,
@@ -49688,6 +49858,39 @@
   "/imgs/blogs/the-term-structure-of-volatility-contango-backwardation-and-the-vix-curve-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/the-test-stage-fast-feedback-vs-confidence-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/the-test-stage-fast-feedback-vs-confidence-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-test-stage-fast-feedback-vs-confidence-3.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/the-test-stage-fast-feedback-vs-confidence-4.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-test-stage-fast-feedback-vs-confidence-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-test-stage-fast-feedback-vs-confidence-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-test-stage-fast-feedback-vs-confidence-7.png": {
+    "width": 1792,
+    "height": 924
+  },
+  "/imgs/blogs/the-test-stage-fast-feedback-vs-confidence-8.png": {
+    "width": 1792,
+    "height": 787
   },
   "/imgs/blogs/the-trade-idea-note-a-one-page-template-1.png": {
     "width": 1792,
