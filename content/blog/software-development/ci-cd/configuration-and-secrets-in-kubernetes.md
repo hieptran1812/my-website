@@ -551,7 +551,7 @@ gitleaks protect --staged --verbose
 #     hooks: [{ id: gitleaks }]
 ```
 
-The pre-commit hook stops the leak before it exists; the CI gate is the backstop for clones that skipped the hook. You want both, because the pre-commit hook is advisory (a developer can `--no-verify` past it) and the CI gate is mandatory (it fails the PR). For the version-control mechanics of pre-commit hooks and history rewriting, the [version control](/blog/software-development/version-control/) posts go deeper; here the point is that scanning is a *delivery* control — it belongs in the pipeline.
+The pre-commit hook stops the leak before it exists; the CI gate is the backstop for clones that skipped the hook. You want both, because the pre-commit hook is advisory (a developer can `--no-verify` past it) and the CI gate is mandatory (it fails the PR). For the version-control mechanics of pre-commit hooks and history rewriting, the [version-control field manual](/blog/software-development/version-control/git-like-a-pro-object-model-workflows-and-recovery) goes deeper; here the point is that scanning is a *delivery* control — it belongs in the pipeline.
 
 ### War story: when the secret was already public
 
