@@ -42,7 +42,6 @@ Understanding the stack in its full depth is what separates an ML engineer who c
 
 Let us build the map, layer by layer.
 
----
 
 ## Layer 1: The model artifact
 
@@ -198,7 +197,7 @@ llama-3-8b/
 
 The total uncompressed size is **~16 GB in BF16** (8 billion parameters × 2 bytes). We will derive this exactly in the GPU memory section.
 
----
+
 
 ## Layer 2: The inference runtime
 
@@ -286,7 +285,7 @@ $$t_{\text{load}} = \frac{4 \times 10^9 \text{ bytes}}{3.35 \times 10^{12} \text
 
 In FP8 (1 byte per param instead of 2), the same weight matrix loads in 0.6 ms. This is the *memory-bandwidth benefit of quantization for inference*: halving the dtype halves the load time. In the decode phase — where the GPU is nearly always memory-bandwidth-bound — this directly halves TPOT. See [quantization-for-inference-not-training](/blog/machine-learning/model-serving/quantization-for-inference-not-training) for a full treatment.
 
----
+
 
 ## Layer 3: The serving framework
 
@@ -476,7 +475,7 @@ batch_size=32
 max_batch_delay=100
 ```
 
----
+
 
 ## Layer 4: The API gateway and router
 
@@ -634,7 +633,7 @@ async def proxy_chat(
 
 Figure 2 shows exactly how a client request traverses every layer. The gateway adds roughly 0.5–2 ms of overhead for auth and rate-limit checks — negligible compared to the 12 ms TTFT of the model, but it becomes the bottleneck if you perform a synchronous database lookup for every request.
 
----
+
 
 ## Layer 5: Infrastructure and orchestration
 
@@ -879,7 +878,7 @@ tritonserver \
 
 Figure 3 is the coverage matrix. The critical insight: **Triton and vLLM both cover layers 2 and 3**, but they are not substitutes. Triton is general-purpose — it handles vision models, tabular models, and multi-model ensembles beautifully. vLLM is LLM-specific — it implements PagedAttention, prefix caching, and speculative decoding that Triton does not have. Choose Triton when you need a multi-model pipeline or non-LLM workloads; choose vLLM when you are serving LLMs at scale.
 
----
+
 
 ## Layer 6: Observability
 
@@ -1001,7 +1000,7 @@ Set alert rules for:
 
 The observability layer does not just catch incidents — it also provides the data for capacity planning. A weekly review of `max(vllm:gpu_cache_usage_perc)` and `max(vllm:num_requests_waiting)` tells you whether you need to provision another GPU before traffic grows, not after the first OOM at 3 AM.
 
----
+
 
 ## The GPU memory budget: A derived formula
 
@@ -1093,7 +1092,7 @@ Activations are small relative to weights and KV cache for typical serving batch
 
 Figure 4 shows the memory stack. The KV cache pool is the largest and most dynamic component — it grows with concurrency and sequence length, and it is the first thing you tune when you hit OOM.
 
----
+
 
 ## Architectural patterns: How layers compose
 
@@ -1191,7 +1190,7 @@ vLLM v0.5+ supports PD disaggregation via the `--preemption-mode` and experiment
 
 Figure 5 shows the before-after. The key cost of disaggregation is the NCCL P2P transfer between prefill and decode workers. For short sequences (< 256 tokens), this overhead is not worth it. For long contexts (> 2048 tokens), disaggregation is the right call.
 
----
+
 
 ## Framework selection: Which layer does each framework own?
 
@@ -1227,7 +1226,7 @@ Figure 6 is the decision tree. Work through it for your use case:
 - Stronger quantization support (GPTQ, AWQ, EETQ) out of the box.
 - Preferred over vLLM when you are already deep in the Hugging Face ecosystem.
 
----
+
 
 ## Worked examples
 
@@ -1308,7 +1307,7 @@ For reference, OpenAI's GPT-4o-mini output pricing is \$0.60 per 1M output token
 
 **Time to diagnosis with proper observability**: under 3 minutes. Without it: 45+ minutes of SSH and `nvidia-smi` guessing.
 
----
+
 
 ## Case studies and benchmarks
 
@@ -1380,7 +1379,7 @@ For non-LLM vision models, Triton with the TensorRT backend dominates:
 
 This is the canonical argument for using Triton + TRT for computer vision serving.
 
----
+
 
 ## When to use each pattern (and when not to)
 
@@ -1418,7 +1417,7 @@ This is the canonical argument for using Triton + TRT for computer vision servin
 
 **Do NOT use BentoML when**: you need high-throughput LLM serving with KV cache optimization, or you need enterprise-grade gateway features.
 
----
+
 
 ## The request lifecycle in full
 
@@ -1438,7 +1437,7 @@ Figure 7 is the timeline:
 
 Total wall time: ~12.8 seconds for a 512-token response. This is compute-bound on the decode side (25 ms/token × 512 = 12.8 s). At batch size 32 (32 concurrent requests all in the decode phase simultaneously), the GPU runs 32 tokens in parallel for the same per-token wall time, yielding 32× throughput = ~1,280 tokens/s total.
 
----
+
 
 ## Common failure modes, by layer
 
@@ -1455,7 +1454,7 @@ Figure 8 is the failure matrix. Memorize the column headings: Failure Mode → S
 - **Infrastructure**: a node being drained for maintenance or a pod being evicted due to resource pressure generates sudden 503 errors with no model-side log entries. Fix: set Pod Disruption Budgets (`maxUnavailable: 0` during low-traffic periods), use pod anti-affinity rules to spread replicas across nodes.
 - **Observability**: Prometheus scrapes fail silently when a ServiceMonitor selector does not match the pod labels. You see no metrics, no alerts fire, and when a real incident happens you are blind. Fix: test scrape connectivity in staging, add a meta-alert that fires if the `up` metric for vLLM goes to 0.
 
----
+
 
 ## Key takeaways
 
@@ -1479,7 +1478,7 @@ Figure 8 is the failure matrix. Memorize the column headings: Failure Mode → S
 
 10. Framework choice is a branching decision: LLM → vLLM or TGI; multi-model pipeline → Triton; general async Python → Ray Serve; quick path to production → BentoML.
 
----
+
 
 ## Further reading
 

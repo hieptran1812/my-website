@@ -34,7 +34,6 @@ This post is the definitive treatment of protocol choice for ML APIs. By the end
 
 Figure 1 shows the four protocols you will encounter in ML serving: REST/HTTP 1.1, gRPC/HTTP 2, Server-Sent Events, and WebSocket. The matrix lays out the decision surface clearly. REST wins on tooling and client simplicity — every language, every proxy, every debugging tool speaks REST natively. gRPC wins on per-request overhead and full streaming support, at the cost of a heavier toolchain. SSE wins for the specific pattern of server-to-client token streaming because it uses ordinary HTTP (no protocol upgrade, no binary encoding, no proxy configuration), reconnects automatically, and is natively supported in every browser via `EventSource`. WebSocket is the right tool only when you genuinely need true bidirectional real-time interaction — voice interfaces, live annotation tools, or interactive debugging sessions where the client pushes events while the server pushes tokens.
 
----
 
 ## 1. The protocol landscape for ML APIs
 
@@ -71,7 +70,7 @@ The right protocol also depends heavily on where your team is in the ML serving 
 
 This maturity progression is also why gRPC adoption in ML systems tends to be selective rather than wholesale: teams typically keep their external REST endpoints (for ecosystem compatibility) and add gRPC only for the internal microservice calls where the QPS or latency arithmetic actually justifies the toolchain overhead. The OpenAI-compatible REST+SSE standard has reinforced this pattern — it provides a well-specified external API surface that works with every client library, while leaving internal serving infrastructure free to use whatever protocol is most efficient.
 
----
+
 
 ## 2. REST/HTTP 1.1: anatomy, overhead, and appropriate use
 
@@ -220,7 +219,7 @@ async def chat_completions(
 
 REST is the right default protocol when your API is external-facing and needs to work from any client (browser, mobile, third-party integrations without protocol negotiation), when QPS is below approximately 300–500 requests per second on a single backend, when inference time is above 20ms (protocol overhead is under 1.5%), when you want maximum debuggability with curl and Postman, and when you need to implement the OpenAI-compatible `/v1/chat/completions` endpoint that client libraries already speak. The fact that you can debug it with `curl -X POST http://localhost:8000/v1/chat/completions -d '{"model":"llama-3-8b","messages":[{"role":"user","content":"hi"}]}'` and immediately see the problem is worth a lot of engineering hours when things go wrong at 3 AM.
 
----
+
 
 ## 3. gRPC: binary encoding, HTTP/2 multiplexing, and the right use cases
 
@@ -528,7 +527,7 @@ server = grpc.aio.server(
 #   grpc_server_msg_sent_total
 ```
 
----
+
 
 ## 4. Server-Sent Events: the right tool for LLM token streaming
 
@@ -841,7 +840,7 @@ async def main():
 asyncio.run(main())
 ```
 
----
+
 
 ## 5. WebSocket: bidirectional real-time ML interactions
 
@@ -955,7 +954,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
 The key capability that WebSocket adds here that SSE cannot support: when the client sends a `cancel` message while the model is mid-generation, the server can immediately abort the vLLM request and stop spending GPU compute. With SSE, the client can drop the connection, but the server has no way to know the client disconnected until the next write attempt fails. For interactive voice interfaces where the user frequently speaks over the model, this GPU compute savings is real.
 
----
+
 
 ## 6. Latency arithmetic: deriving when protocol overhead actually matters
 
@@ -1067,7 +1066,7 @@ However, this image is being sent as a single JPEG (typically 30–80KB for a 22
 
 **Revised verdict**: the image payload dominates wire size regardless of protocol. The 0.21ms per-request savings from gRPC translate to 252ms/s of recovered CPU at 1,200 RPS — worth having if you are CPU-bound on the gateway, not worth the `.proto` toolchain overhead if you are comfortably within CPU budget. Use REST with `Content-Type: multipart/form-data` for the image upload. Consider gRPC only if you hit CPU saturation on the gateway tier at peak load.
 
----
+
 
 ## 7. Binary tensor serialization for vision and embedding APIs
 
@@ -1125,7 +1124,7 @@ The practical recommendation for vision serving:
 - Internal microservice across a network hop: gRPC with raw `bytes` field — no base64 inflation
 - External-facing API (user uploads from browser): REST with multipart form upload; base64 is unavoidable but the latency is hidden behind network upload time
 
----
+
 
 ## 8. Authentication and security patterns by protocol
 
@@ -1210,7 +1209,7 @@ def create_mtls_channel(server_address: str, certs_dir: str) -> grpc.Channel:
 channel = create_mtls_channel("llm-backend:50051", "/etc/certs/client")
 ```
 
----
+
 
 ## 9. The OpenAI-compatible API standard
 
@@ -1276,7 +1275,7 @@ docker run --gpus all --shm-size 1g -p 8080:80 \
 
 Both expose `/v1/chat/completions` with identical streaming semantics. The vLLM server also exposes `/v1/completions`, `/v1/embeddings`, and `/v1/models` out of the box. TGI's full OpenAI compat layer has matured through the v2.x releases.
 
----
+
 
 ## 10. Benchmark: REST vs gRPC vs SSE on A100 40GB
 
@@ -1304,7 +1303,7 @@ The following benchmarks were collected with Llama-3-8B-Instruct on a single A10
 
 5. **WebSocket metrics are essentially identical to SSE** for this unidirectional streaming scenario. The 4ms difference (198ms SSE vs 194ms WebSocket) is within noise. The added complexity of WebSocket over SSE is not justified for unidirectional LLM chat streaming.
 
----
+
 
 ## 11. Observability differences across protocols
 
@@ -1402,7 +1401,7 @@ SSE introduces two production failure modes that pure REST never has:
 
 **Proxy response buffering**: already covered in Section 4, but worth repeating in the observability context. If your proxy is silently buffering SSE chunks, your application-level TTFT metrics will show fast numbers (the server emitted the first chunk at 200ms) while the user actually waits seconds for the first token. The nginx `$upstream_header_time` metric can expose this discrepancy: if it is 200ms but the client's first byte time is 4 seconds, buffering is happening.
 
----
+
 
 ## 12. Case studies and real-world benchmarks
 
@@ -1426,7 +1425,7 @@ The Anthropic Messages API (`/v1/messages`) follows the REST+SSE pattern identic
 
 HuggingFace's Text Generation Inference (TGI) exposes both a native REST+SSE API (`/generate_stream`) and an OpenAI-compatible endpoint (`/v1/chat/completions`). The TGI benchmarking documentation uses `locust` for load testing the HTTP endpoint. For Llama-2-7B at 256 concurrent users, TGI's documentation reports identical throughput within measurement noise for REST and gRPC endpoints — consistent with the model being the bottleneck, not the transport.
 
----
+
 
 ## 13. Protocol selection: when to use each (and when not to)
 
@@ -1484,7 +1483,7 @@ HuggingFace's Text Generation Inference (TGI) exposes both a native REST+SSE API
 - Your deployment environment uses HTTP-only load balancers or proxies that do not support WebSocket `Upgrade` headers
 - The session lifetime is short (< 5 requests) — the handshake overhead is not amortized
 
----
+
 
 ## 14. Key takeaways
 
@@ -1501,7 +1500,7 @@ HuggingFace's Text Generation Inference (TGI) exposes both a native REST+SSE API
 - Start with REST and SSE. Both are the lowest operational risk for a new production deployment — universally debuggable, no toolchain setup, works with every load balancer out of the box. Add gRPC selectively for internal hot paths only after profiling confirms that serialization CPU is a genuine bottleneck, not a theoretical one. The engineering cost of maintaining a `.proto` schema, generating stubs across languages, and training your team on gRPC-specific observability tooling is non-trivial — justify it with measured data, not performance intuition.
 - For multi-model serving pipelines (preprocessing → classification → postprocessing, or prefill worker → decode worker), the internal protocol between pipeline stages is a separate decision from the external client-facing protocol. It is common and correct to expose REST+SSE externally while using gRPC internally between Triton ensemble stages or between vLLM disaggregated prefill and decode workers.
 
----
+
 
 ## 15. Further reading
 

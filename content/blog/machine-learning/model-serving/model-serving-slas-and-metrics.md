@@ -1204,7 +1204,6 @@ spec:
   namespaceSelector:
     matchNames:
       - ml-serving
----
 # The corresponding Service must expose the metrics port
 apiVersion: v1
 kind: Service
@@ -1261,6 +1260,6 @@ With this ServiceMonitor, the Prometheus Operator automatically configures scrap
 - Google SRE Book, Chapter 6 "Monitoring Distributed Systems" — the four golden signals framework applied throughout this post; the definitive reference for the latency/traffic/errors/saturation taxonomy
 - Prometheus documentation: `histogram_quantile` function and histogram best practices — the reference for accurate percentile computation from histograms, including the interpolation assumptions that make bucket choice matter
 
----
+
 
 *This post is part of the [Model Deployment & Serving: From Notebook to Production](/blog/machine-learning/model-serving/what-is-model-serving) series. Next up: [Model packaging and formats: ONNX, TorchScript, GGUF, and TensorRT engine plans](/blog/machine-learning/model-serving/model-packaging-and-formats) — the layer beneath the server that determines what the runtime actually loads.*

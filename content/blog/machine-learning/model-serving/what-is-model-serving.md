@@ -36,7 +36,6 @@ This post establishes the conceptual foundation you need before touching any ser
 
 The SLO triangle above is the lens through which this entire series is written. Every technique in every post — continuous batching, PagedAttention, tensor parallelism, quantization, speculative decoding, autoscaling — is a trade on this triangle. Some techniques push one vertex without touching the others. Some improve two at the cost of complexity. A rare few reshape the triangle by changing the underlying hardware or architecture. Understanding the triangle is the prerequisite to understanding any individual technique.
 
----
 
 ## The serving vs training divide
 
@@ -60,7 +59,7 @@ A final, often-underappreciated asymmetry: the feedback loops are different. In 
 
 These three asymmetries — optimization target, stability requirements, and feedback loops — are why the serving skill set is genuinely distinct from the training skill set, and why understanding serving from first principles (rather than copying a deployment script) is the only way to be effective when things go wrong at 2 AM.
 
----
+
 
 ## The three axes: latency, throughput, and cost
 
@@ -239,7 +238,7 @@ if __name__ == "__main__":
 
 Run this against your Flask server and your vLLM server, change the `concurrency` parameter from 1 to 50, and you will see the SLO triangle in action: as concurrency increases, throughput grows up to a point, then latency starts rising as the queue builds. The exact shape of this curve — the throughput-latency Pareto frontier — is the empirical signature of your serving system's efficiency.
 
----
+
 
 ## Queuing theory and Little's Law
 
@@ -338,7 +337,7 @@ This blows up as $\rho \to 1$. In practice, you should target $\rho \leq 0.7–0
 
 For our 10 req/s workload, a server with $\mu = 60\text{ req/s}$ has $\rho = 10/60 = 0.167$ — very light load, excellent latency. A server with $\mu = 12\text{ req/s}$ has $\rho = 10/12 = 0.833$ — queue latency starting to dominate. A server with $\mu = 10\text{ req/s}$ or lower is unstable.
 
----
+
 
 ## GPU memory math: why it determines everything
 
@@ -425,7 +424,7 @@ The cumulative latency breakdown for a typical request (512 input tokens, 256 ou
 
 Notice that once streaming is active, users see the first token after 97ms and receive all tokens over the next 3.84 seconds — a very acceptable UX for a conversational application.
 
----
+
 
 ## Why "just wrap it in Flask" fails
 
@@ -509,7 +508,7 @@ Hardware: A100 80GB, Llama-3-8B-Instruct, 512-token input, 256-token maximum out
 
 That 22x throughput gap between Flask and vLLM is not a model architecture difference. It is entirely serving infrastructure. Same GPU, same model weights, same prompt, same output length. The only difference is how the serving system schedules work on the GPU.
 
----
+
 
 ## A production-grade alternative: the vLLM AsyncLLMEngine
 
@@ -605,7 +604,7 @@ The critical architectural difference is `AsyncLLMEngine`. It runs a continuous 
 
 We will cover the internals of this scheduler in full detail in [A4: Batching fundamentals](/blog/machine-learning/model-serving/batching-fundamentals-latency-throughput-tradeoff) and the PagedAttention memory manager in [C2: Continuous batching and PagedAttention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention).
 
----
+
 
 ## Online vs offline (batch) inference
 
@@ -684,7 +683,7 @@ print(f"Processed {len(results)} documents, "
 
 One practical nuance: the vLLM `LLM` class does not expose streaming — it returns when all requests in the batch are complete. For large batches (thousands of documents), use the AsyncLLMEngine even in batch mode so you can process results incrementally as they complete rather than waiting for the slowest request.
 
----
+
 
 ## What makes a serving system production-grade
 
@@ -768,7 +767,7 @@ spec:
 
 The 90-second scaleUp period is not arbitrary — it is the time required for a new pod to start, load the Llama-3-8B weights from a shared volume, allocate GPU memory, and pass its readiness probe. Scaling up faster than the pod can actually become ready creates a stampede of partially-ready pods that make the situation worse.
 
----
+
 
 ## Common failure modes in production
 
@@ -796,7 +795,7 @@ Prevention: schedule graceful restarts of inference server replicas every 24–4
 kubectl rollout restart deployment/vllm-deployment --namespace production
 ```
 
----
+
 
 ## Case studies from production systems
 
@@ -824,7 +823,7 @@ Mistral's engineering blog has documented their decision to use FP8 quantization
 
 The key lesson from all these case studies is consistent: the gap between naive and production serving is not incremental. It is a multiplicative stack of individually significant optimizations — continuous batching (3–5x), PagedAttention (2x), quantization (1.5–3x), FlashAttention (1.2–1.5x) — whose product can reach 20–50x improvement over a baseline Flask server on identical hardware. Each optimization is independently valuable; together they transform the economics of LLM deployment.
 
----
+
 
 #### Worked example: capacity planning for a chatbot backend at 20,000 DAU
 
@@ -857,7 +856,7 @@ python -m vllm.entrypoints.openai.api_server \
 
 **Step 5: Cost calculation.** Single A10G at \$1.01/hr × 24 hrs = \$24.24/day. For 20,000 users × 3 messages = 60,000 requests/day. At 256 output tokens average: 60,000 × 256 = 15.36M output tokens/day. Cost: \$24.24 ÷ 15.36M × 1M = **\$1.58 per 1M output tokens**. For context, comparable cloud API pricing ranges from \$8–\$15/1M tokens for similar-quality 8B models.
 
----
+
 
 #### Worked example: sizing for a sudden 10x traffic spike
 
@@ -871,7 +870,7 @@ Your chatbot is handling 3 req/s steadily. A product launch drives a sudden spik
 
 The lesson: for latency-sensitive services, autoscaling is not optional. Model servers have 60–90 second cold-start times, which means the autoscaler needs to act *before* the SLA is violated, not after it is already broken. This requires careful threshold tuning and headroom in your normal operating range.
 
----
+
 
 ## When to use which serving approach
 
@@ -898,7 +897,7 @@ The right serving framework depends on your model type, traffic profile, latency
 
 A quick reference test: if your model generates tokens autoregressively (any transformer decoder, any LLM), use vLLM or TGI. If your model runs a fixed number of forward passes per request (classification, embedding, detection), use Triton or TorchServe. If you need to combine multiple models in a pipeline, use Ray Serve or Triton ensemble. If you are just experimenting, use the simplest thing that works — you can always migrate.
 
----
+
 
 ## The full production deployment skeleton
 
@@ -980,7 +979,7 @@ spec:
         - key: nvidia.com/gpu
           operator: Exists
           effect: NoSchedule
----
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -999,7 +998,7 @@ The `readinessProbe` with `initialDelaySeconds: 60` is not conservative — it i
 
 One detail that surprises engineers coming from web service backgrounds: the `minReplicas: 1` in the HPA spec is not a preference — it is critical for LLM serving. Web services can scale to zero (no replicas) when idle and accept a multi-second cold start on the first request. An LLM server with a 45-second cold start is not acceptable for a user-facing product. Keep at least one warm replica running at all times for any latency-sensitive deployment, and budget the corresponding GPU cost (\$24–\$84/day for an A10G–A100 running continuously) as a fixed infrastructure cost of your service.
 
----
+
 
 ## The series map: from here to the full production system
 
@@ -1023,7 +1022,7 @@ What comes next, in rough dependency order:
 
 By the time you reach the capstone [model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook), you will have a complete decision framework that maps any combination of model size, traffic profile, latency budget, and cost constraint to a specific production architecture. The concepts in this post are the foundation everything else builds on.
 
----
+
 
 ## Key takeaways
 
@@ -1051,7 +1050,7 @@ By the time you reach the capstone [model serving playbook](/blog/machine-learni
 
 12. **First-principles reasoning beats cookbook deployment.** When p99 spikes without a traffic change, check KV cache pressure and queue depth. When GPU utilization falls gradually, check for memory fragmentation. When a pod fails readiness repeatedly, calibrate `initialDelaySeconds` to actual model loading time. Understanding the mechanics makes debugging tractable rather than guesswork.
 
----
+
 
 ## Further reading
 

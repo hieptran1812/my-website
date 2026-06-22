@@ -35,7 +35,6 @@ By the end you will have the quantitative tools to: (1) predict whether batching
 
 ![Throughput and latency vs batch size hockey-stick curves, showing throughput plateauing after GPU saturation while latency continues to rise](/imgs/blogs/batching-fundamentals-latency-throughput-tradeoff-1.png)
 
----
 
 ## 1. Why GPUs want large batches: the roofline model
 
@@ -124,7 +123,7 @@ For a decoder LLM during the decode phase, things are very different: each decod
 
 ![Memory-bound batch 1 versus compute-bound batch 64 arithmetic intensity comparison](/imgs/blogs/batching-fundamentals-latency-throughput-tradeoff-2.png)
 
----
+
 
 ## 2. Static batching: simple, predictable, and frustrating
 
@@ -291,7 +290,7 @@ def find_max_batch_size(
 
 For any online serving scenario with a p99 SLA, use dynamic batching instead.
 
----
+
 
 ## 3. Dynamic batching: the window trade-off
 
@@ -380,7 +379,7 @@ $W_3 = 92.6\,\text{ms}$ — converged.
 
 At what load does batching become valuable? When the arrival rate is high enough that the window fills meaningful batches. With a 5ms inference time, you want windows that accumulate ≥10 requests to see strong GPU utilization gains. That means $\lambda \times W \geq 10$, i.e., $\lambda \geq 10 / W$. With a 10ms window (for a 17ms p99 SLA): $\lambda \geq 1000$ req/s. At that point, batches are growing to 10+ and the GPU is genuinely being amortized.
 
----
+
 
 ## 4. Padding waste and sequence bucketing
 
@@ -547,7 +546,7 @@ class BucketBatcher:
         return fut.result(timeout=10.0)
 ```
 
----
+
 
 ## 5. Batching strategies: a full comparison
 
@@ -593,7 +592,7 @@ $$
 
 If your arrival rate exceeds 198 req/s on this configuration, the queue will grow without bound and latency will diverge. Scale horizontally (add replicas) before hitting this ceiling.
 
----
+
 
 ## 6. Continuous batching: why LLMs are different
 
@@ -659,7 +658,7 @@ With **continuous batching** and `max_num_seqs=4`:
 
 The throughput difference is exactly the waste factor: 2.1× more throughput on this workload (53% waste eliminated) from continuous batching alone. For workloads with more variable output lengths (which is typical for production chatbots), the waste factor under static batching grows, and the continuous batching advantage grows with it.
 
----
+
 
 ## 7. Triton dynamic batching configuration
 
@@ -824,7 +823,7 @@ async def generate_async(engine, prompt: str, request_id: str):
             return output.outputs[0].text
 ```
 
----
+
 
 ## 8. Benchmark results: throughput and latency at batch sizes 1–64
 
@@ -940,7 +939,7 @@ The throughput hockey stick (linear growth → plateau) happens when you hit the
 
 This means your **p99 SLA, not GPU saturation, is typically the binding constraint** for choosing `max_batch_size` in production. If your p99 SLA is 15ms, batch=16 (8.3ms p99) is safe but batch=32 (12ms p99) is getting close. Batch=64 (20ms p99) would breach a 15ms SLA.
 
----
+
 
 ## 9. BERT vs 7B LLM: why optimal batch size differs dramatically
 
@@ -1055,7 +1054,7 @@ The output confirms the constraint: at max context length (4096 tokens), only ~1
 
 **Recommendation**: `max_num_seqs=40`, `max_num_batched_tokens=8192`, `gpu_memory_utilization=0.90`.
 
----
+
 
 ## 10. The complete batching tuning workflow
 
@@ -1133,7 +1132,7 @@ print(compute_optimal_window(
 #    'expected_p99_ms': 89.6, 'max_batch_size_recommendation': 128}
 ```
 
----
+
 
 ## 11. Case studies and benchmarks from real systems
 
@@ -1182,7 +1181,7 @@ Text Generation Inference benchmarks on Mistral 7B, H100 80GB:
 
 The AWQ-quantized row shows that quantization (see the [quantization for LLM serving post](/blog/machine-learning/model-serving/quantization-for-llm-serving)) shifts the memory wall outward, allowing larger effective batch sizes with lower TTFT — a direct interaction between batching and memory optimization.
 
----
+
 
 ## 12. Advanced batching patterns: chunked prefill and request priority
 
@@ -1283,7 +1282,7 @@ An emerging pattern for decoder LLMs is **speculative batching**: instead of wai
 
 For most production deployments, this is handled within the serving framework (vLLM's speculative decoding feature, TGI's draft-model mode) rather than at the batching layer. See the [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) for the speculative decoding mechanics.
 
----
+
 
 ## 13. Multi-instance serving and horizontal scaling with batching
 
@@ -1364,7 +1363,7 @@ The practical horizontal-scaling recipe for Llama-2 7B:
 2. Scale to N replicas as traffic grows (each replica independent, no model sharding needed at 7B)
 3. HPA on `avg_kv_cache_utilization > 0.75` → scale before KV cache becomes the bottleneck
 
----
+
 
 ## 14. When NOT to batch
 
@@ -1384,7 +1383,7 @@ Batching has overhead: the window adds latency, the collating logic adds complex
 
 A useful empirical test: run your model with a single request, measure $T_{\text{inf}}(1)$. Then run with 8 requests in a batch, measure $T_{\text{inf}}(8)$. If $T_{\text{inf}}(8) < 2 \times T_{\text{inf}}(1)$ — meaning 8 requests finish in less than twice the time of 1 request — batching is profitable. If $T_{\text{inf}}(8) \approx 8 \times T_{\text{inf}}(1)$, each request is essentially executing serially and batching provides no benefit. This test takes two minutes to run and should be done before investing days in batching infrastructure.
 
----
+
 
 ## 15. Monitoring batching in production
 
@@ -1490,7 +1489,7 @@ A well-tuned batching configuration in steady state should show:
 
 If `num_requests_waiting` grows over time during sustained load, you have reached the throughput ceiling — add more GPU capacity. If `num_requests_waiting` oscillates between 0 and large values, you have bursty traffic that your batching configuration is not smoothing effectively; consider increasing `max_queue_delay_microseconds` or implementing request admission control upstream.
 
----
+
 
 ## 16. Batching trade-offs across hardware and quantization
 
@@ -1533,7 +1532,7 @@ For a practical serving recommendation when using AWQ 4-bit quantization on a 7B
 - TTFT for long prompts decreases (weight loading is faster), but TPOT improvement is modest at small batch sizes
 - The correct use of quantization at serving time is primarily to fit a larger model on a given GPU, not to increase batch size
 
----
+
 
 ## Key takeaways
 
@@ -1557,7 +1556,7 @@ For a practical serving recommendation when using AWQ 4-bit quantization on a 7B
 
 10. **Monitor three numbers in production**: average batch size (should be > 8 for meaningful gain), p99 queue wait time (should be < 80% of your SLA), and GPU utilization (should be > 70% at peak load). If any of these is out of range, re-run the tuning workflow.
 
----
+
 
 ## Further reading
 

@@ -34,7 +34,6 @@ This post maps every major model format — PyTorch checkpoints and SafeTensors,
 
 ![Format comparison matrix across portability, peak performance, hardware lock-in, quantization support, and load speed for six formats](/imgs/blogs/model-packaging-and-formats-1.png)
 
----
 
 ## 1. Why format is an architectural decision, not an implementation detail
 
@@ -64,7 +63,7 @@ $$\text{TRT FP8 max throughput} \approx \frac{1935 \times 2}{4.1} \approx 943 \t
 
 The factor of 2 appears because FP8 tensor cores on Hopper run at 2x the FLOP/s of FP16 tensor cores for the same memory bandwidth. The 3–8x throughput gains cited in benchmarks are not magic — they fall directly out of this equation.
 
----
+
 
 ## 2. PyTorch checkpoints: the research-to-production trap
 
@@ -135,7 +134,7 @@ The rule: **keep `.pt` checkpoints in a model registry as source-of-truth; never
 
 ![PyTorch checkpoint anatomy showing how pickle serialization compares to SafeTensors zero-copy memory-mapped replacement](/imgs/blogs/model-packaging-and-formats-2.png)
 
----
+
 
 ## 3. SafeTensors: the secure, fast replacement for pickle
 
@@ -225,7 +224,7 @@ vLLM, TGI, and `transformers` all read this manifest first, then load shards in 
 
 SafeTensors stores weights in their exact bit representation — no quantization, no precision change, no graph transformation. A model loaded from SafeTensors produces bit-identical outputs to the same model loaded via `torch.load`. It is a drop-in replacement for the serialization layer only. Any model that currently loads via `torch.load` can be converted to SafeTensors and served without any retraining, fine-tuning, or accuracy evaluation.
 
----
+
 
 ## 4. TorchScript: portable PyTorch without the Python interpreter
 
@@ -288,7 +287,7 @@ In practice, TorchScript typically yields a 10–20% throughput improvement over
 
 TorchScript has largely been superseded by `torch.compile` for optimization within Python environments, and by ONNX export for cross-runtime portability. The remaining use case where TorchScript is genuinely the right choice: embedding a model in a C++ application where Python is unavailable. TorchServe's C++ backend, robotics inference systems using LibTorch, and PyTorch Mobile (iOS/Android) all load TorchScript models. If you are deploying within Python, use `torch.compile` instead of TorchScript — it achieves similar or better performance without the scripting constraints.
 
----
+
 
 ## 5. ONNX: the universal interchange format
 
@@ -445,7 +444,7 @@ ONNX's standard operator set covers most of the operations in standard transform
 
 **When ONNX is not the right choice for LLMs.** For large-scale LLM serving, ONNX adds complexity without benefit. vLLM and TGI already load HuggingFace safetensors shards directly, implement their own memory-optimized kernels (PagedAttention, Flash Attention, continuous batching), and apply quantization natively. There is no ORT-based serving framework that competes with vLLM on GPU LLM serving performance. Use ONNX + ORT for non-LLM models and for cross-platform portability, not for LLM serving.
 
----
+
 
 ## 6. TensorRT: maximum NVIDIA performance at the cost of portability
 
@@ -581,7 +580,7 @@ with open("llama3-8b-int8.engine", "wb") as f:
 - **Long build times.** 5–15 minutes for models of 7–8B parameters. At model update frequency of once per week, that is 20–60 minutes of CI build time per engine per GPU type.
 - **Not useful for small models.** The kernel auto-tuning overhead pays off only when GEMM operations dominate runtime. For models under 100M parameters, TensorRT's build cost exceeds the performance benefit.
 
----
+
 
 ## 7. GGUF: self-contained portable quantized LLMs
 
@@ -698,7 +697,7 @@ curl http://localhost:8080/v1/completions \
 
 ![GGUF file self-contained layout: header magic, key-value metadata, tokenizer vocab, and k-quantized weight blocks](/imgs/blogs/model-packaging-and-formats-5.png)
 
----
+
 
 ## 8. SafeTensors vs pickle: the detailed performance case
 
@@ -741,7 +740,7 @@ with safe_open("llama3-8b.safetensors", framework="pt", device="cpu") as f:
 
 ![SafeTensors zero-copy mmap loading vs pickle deserialization showing 8x load time reduction for Llama-3-8B](/imgs/blogs/model-packaging-and-formats-6.png)
 
----
+
 
 ## 9. Quantitative benchmarks: Llama-3-8B across all formats on A100
 
@@ -779,7 +778,7 @@ $$\text{tok/s} \approx \frac{32 \cdot 1935 \times 10^9}{2 \cdot 8 \times 10^9} =
 
 Actual 1,950 tok/s is approximately 50% of theoretical, consistent with typical GPU utilization for batch=32 decode (other bottlenecks: KV cache reads, attention computation, kernel launch overhead). The ratio scales predictably across formats.
 
----
+
 
 ## 10. Model metadata and configuration files
 
@@ -840,7 +839,7 @@ vLLM reads this file to set generation defaults. If a request does not specify t
 
 The `tokenizer_config.json` is equally important. It specifies the tokenizer class (`"tokenizer_class": "PreTrainedTokenizerFast"`), the chat template (a Jinja2 template encoding `[INST]...[/INST]` or `<|begin_of_text|>...` patterns), and special tokens. An incorrect chat template causes all chat-format requests to be processed incorrectly — a common source of subtle production quality regressions.
 
----
+
 
 ## 11. Case studies from production
 
@@ -946,7 +945,7 @@ The serving cluster pulls from this registry at deploy time, selecting the compi
 
 This pattern — SafeTensors as the portable, evaluable source of truth, compiled artifacts as hardware-specific performance optimizations — scales from a single-engineer startup to a thousand-GPU fleet. The key discipline is that compiled artifacts are **never the source of truth**: they are built from SafeTensors, validated against SafeTensors, and thrown away when the hardware fleet changes.
 
----
+
 
 ## 12. Worked examples
 
@@ -1007,7 +1006,7 @@ class BertHandler(BaseHandler):
 
 **Cost of migration**: 4 engineer-hours (conversion script, test, deploy). No retraining, no accuracy change, bit-identical outputs verified.
 
----
+
 
 #### Worked example: choosing between GGUF and TensorRT for two different deployment contexts
 
@@ -1067,7 +1066,7 @@ python serve_trt.py \
 
 Expected performance: 6,800 tok/s at batch=32 on A100. At \$3/hr per A100, cost per million tokens is approximately \$0.12 vs \$0.44 for fp16 SafeTensors — a 3.7x cost reduction that justifies the build complexity at 10,000 QPS scale.
 
----
+
 
 ## 13. Format selection decision framework
 
@@ -1083,7 +1082,7 @@ The decision tree in the final figure maps these questions to format choices. It
 
 ![Format decision tree: three binary questions — GPU or CPU, NVIDIA or other, SLA under 100ms — narrow to a single format](/imgs/blogs/model-packaging-and-formats-8.png)
 
----
+
 
 ## 13.5 torch.compile: the in-Python optimization layer
 
@@ -1140,7 +1139,7 @@ The practical landscape of model format in 2025 is dominated by the HuggingFace 
 **Model card format declaration.** The `README.md` metadata section of a HuggingFace model repository uses a YAML front matter block to declare format-related properties that serving systems can programmatically read:
 
 ```yaml
----
+
 base_model: meta-llama/Meta-Llama-3-8B
 library_name: transformers
 pipeline_tag: text-generation
@@ -1149,14 +1148,14 @@ quantization_config:
   group_size: 128
   desc_act: false
   quant_type: gptq
----
+
 ```
 
 When vLLM's `--model` flag points at a Hub repository, it reads this metadata to auto-configure the quantization scheme. If the quantization type is `gptq`, vLLM automatically sets up the GPTQ dequantization kernel without any explicit flag. This is why `--quantization gptq` in vLLM is optional when pointing at a Hub-hosted GPTQ model — the format self-describes.
 
 **Flash Attention and SDPA integration.** Modern HuggingFace models default to PyTorch's `scaled_dot_product_attention` (SDPA) when available, which internally dispatches to Flash Attention 2, Memory-Efficient Attention, or the standard math implementation depending on hardware. This format-agnostic optimization is orthogonal to the checkpoint format: it activates automatically for safetensors, GPTQ, and AWQ loaded models alike. For GGUF-loaded models in llama.cpp, the attention implementation is entirely separate (GGML's own hand-written kernels).
 
----
+
 
 ## 14. When to use each format (and when not to)
 
@@ -1195,7 +1194,7 @@ Every format choice should be driven by measured data, not speculation. The reco
 3. **Optimize one format dimension at a time.** First try GPTQ or AWQ quantization within vLLM (no format change, just a quantized SafeTensors checkpoint) — this often delivers 1.5–2x throughput gain with minimal engineering cost. Only pursue TensorRT if quantized vLLM still does not meet your cost targets.
 4. **Measure before and after every format change.** Use the same benchmark harness, same hardware, same request distribution. Format changes introduce subtle behavioral differences (numerical precision, padding behavior, sequence length handling) that only show up at scale.
 
----
+
 
 ## 15. Key takeaways
 
@@ -1219,7 +1218,7 @@ Every format choice should be driven by measured data, not speculation. The reco
 
 10. **Start with SafeTensors + vLLM, optimize toward TRT only when needed.** Get to production with safetensors, measure p99 and cost, and only invest in TensorRT if the benchmarks justify the operational complexity. Most production services do not need TRT's peak performance.
 
----
+
 
 ## 16. Further reading
 
