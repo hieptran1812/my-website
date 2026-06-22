@@ -3367,6 +3367,39 @@
     "width": 1792,
     "height": 1183
   },
+  "/imgs/blogs/bentoml-and-mlserver-1.png": {
+    "width": 1792,
+    "height": 895,
+    "cover": true
+  },
+  "/imgs/blogs/bentoml-and-mlserver-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/bentoml-and-mlserver-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/bentoml-and-mlserver-4.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/bentoml-and-mlserver-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/bentoml-and-mlserver-6.png": {
+    "width": 1792,
+    "height": 754
+  },
+  "/imgs/blogs/bentoml-and-mlserver-7.png": {
+    "width": 1792,
+    "height": 1269
+  },
+  "/imgs/blogs/bentoml-and-mlserver-8.png": {
+    "width": 1792,
+    "height": 1250
+  },
   "/imgs/blogs/bernanke-qe-2008-14-the-birth-of-balance-sheet-policy-1.png": {
     "width": 1792,
     "height": 768,
@@ -8566,6 +8599,39 @@
   "/imgs/blogs/choosing-uris-collections-sub-resources-path-vs-query-8.png": {
     "width": 1792,
     "height": 892
+  },
+  "/imgs/blogs/choosing-your-serving-stack-1.png": {
+    "width": 1792,
+    "height": 1207,
+    "cover": true
+  },
+  "/imgs/blogs/choosing-your-serving-stack-2.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/choosing-your-serving-stack-3.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/choosing-your-serving-stack-4.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/choosing-your-serving-stack-5.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/choosing-your-serving-stack-6.png": {
+    "width": 1792,
+    "height": 996
+  },
+  "/imgs/blogs/choosing-your-serving-stack-7.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/choosing-your-serving-stack-8.png": {
+    "width": 1792,
+    "height": 1271
   },
   "/imgs/blogs/choosing-your-strategy-the-operating-lens-1.png": {
     "width": 1792,
@@ -31871,6 +31937,11 @@
     "width": 1792,
     "height": 1209
   },
+  "/imgs/blogs/onnx-runtime-for-serving-1.png": {
+    "width": 2137,
+    "height": 1454,
+    "cover": true
+  },
   "/imgs/blogs/opec-plus-and-the-supply-curve-the-cartel-that-sets-the-floor-1.png": {
     "width": 1792,
     "height": 1239,
@@ -35219,6 +35290,11 @@
   "/imgs/blogs/ray-dalio-bridgewater-risk-parity-7.png": {
     "width": 1792,
     "height": 1163
+  },
+  "/imgs/blogs/ray-serve-deep-dive-1.png": {
+    "width": 2259,
+    "height": 901,
+    "cover": true
   },
   "/imgs/blogs/readers-writer-locks-and-lock-granularity-1.png": {
     "width": 1792,
@@ -40838,6 +40914,11 @@
   "/imgs/blogs/speculative-decoding-9.png": {
     "width": 1792,
     "height": 1307
+  },
+  "/imgs/blogs/speculative-decoding-core-idea-draft-and-verify-1.png": {
+    "width": 2171,
+    "height": 1441,
+    "cover": true
   },
   "/imgs/blogs/speech-tokenizer-diagram.png": {
     "width": 1260,
@@ -50935,6 +51016,39 @@
     "width": 1792,
     "height": 944
   },
+  "/imgs/blogs/torchserve-deep-dive-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/torchserve-deep-dive-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/torchserve-deep-dive-3.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/torchserve-deep-dive-4.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/torchserve-deep-dive-5.png": {
+    "width": 1792,
+    "height": 917
+  },
+  "/imgs/blogs/torchserve-deep-dive-6.png": {
+    "width": 1792,
+    "height": 1285
+  },
+  "/imgs/blogs/torchserve-deep-dive-7.png": {
+    "width": 1792,
+    "height": 1003
+  },
+  "/imgs/blogs/torchserve-deep-dive-8.png": {
+    "width": 1792,
+    "height": 1247
+  },
   "/imgs/blogs/torchtitan-pytorch-native-pretraining-deep-dive-1.png": {
     "width": 1792,
     "height": 926,
@@ -51940,6 +52054,39 @@
   "/imgs/blogs/triple-barrier-meta-labeling-quant-research-9.png": {
     "width": 1792,
     "height": 1041
+  },
+  "/imgs/blogs/triton-inference-server-deep-dive-1.png": {
+    "width": 1792,
+    "height": 1218,
+    "cover": true
+  },
+  "/imgs/blogs/triton-inference-server-deep-dive-2.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/triton-inference-server-deep-dive-3.png": {
+    "width": 1792,
+    "height": 829
+  },
+  "/imgs/blogs/triton-inference-server-deep-dive-4.png": {
+    "width": 1792,
+    "height": 937
+  },
+  "/imgs/blogs/triton-inference-server-deep-dive-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/triton-inference-server-deep-dive-6.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/triton-inference-server-deep-dive-7.png": {
+    "width": 1792,
+    "height": 904
+  },
+  "/imgs/blogs/triton-inference-server-deep-dive-8.png": {
+    "width": 1792,
+    "height": 780
   },
   "/imgs/blogs/turboquant-kv-cache-quantization-deep-dive-1.png": {
     "width": 1792,
@@ -55435,6 +55582,11 @@
   "/imgs/blogs/why-i-started-blogging-20251008214336.png": {
     "width": 1024,
     "height": 1024,
+    "cover": true
+  },
+  "/imgs/blogs/why-llms-are-slow-autoregressive-bottleneck-1.png": {
+    "width": 2060,
+    "height": 1469,
     "cover": true
   },
   "/imgs/blogs/why-measure-theory-math-for-quants-1.png": {
