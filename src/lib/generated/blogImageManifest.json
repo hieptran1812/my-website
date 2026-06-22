@@ -9889,6 +9889,39 @@
     "width": 1792,
     "height": 1324
   },
+  "/imgs/blogs/configuration-and-secrets-in-kubernetes-1.png": {
+    "width": 1792,
+    "height": 1277,
+    "cover": true
+  },
+  "/imgs/blogs/configuration-and-secrets-in-kubernetes-2.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/configuration-and-secrets-in-kubernetes-3.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/configuration-and-secrets-in-kubernetes-4.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/configuration-and-secrets-in-kubernetes-5.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/configuration-and-secrets-in-kubernetes-6.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/configuration-and-secrets-in-kubernetes-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/configuration-and-secrets-in-kubernetes-8.png": {
+    "width": 1792,
+    "height": 1211
+  },
   "/imgs/blogs/confirmation-bias-and-the-thesis-you-fall-in-love-with-1.png": {
     "width": 1792,
     "height": 758,
@@ -21443,6 +21476,39 @@
     "width": 1792,
     "height": 1194
   },
+  "/imgs/blogs/helm-vs-kustomize-templating-your-manifests-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/helm-vs-kustomize-templating-your-manifests-2.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/helm-vs-kustomize-templating-your-manifests-3.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/helm-vs-kustomize-templating-your-manifests-4.png": {
+    "width": 1792,
+    "height": 1397
+  },
+  "/imgs/blogs/helm-vs-kustomize-templating-your-manifests-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/helm-vs-kustomize-templating-your-manifests-6.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/helm-vs-kustomize-templating-your-manifests-7.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/helm-vs-kustomize-templating-your-manifests-8.png": {
+    "width": 1792,
+    "height": 909
+  },
   "/imgs/blogs/hermes-agent-1.png": {
     "width": 1792,
     "height": 1206,
@@ -25730,6 +25796,39 @@
   "/imgs/blogs/knowledge-distillation-fundamentals-8.png": {
     "width": 1792,
     "height": 1187
+  },
+  "/imgs/blogs/kubernetes-for-delivery-the-objects-that-matter-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/kubernetes-for-delivery-the-objects-that-matter-2.png": {
+    "width": 1792,
+    "height": 1031
+  },
+  "/imgs/blogs/kubernetes-for-delivery-the-objects-that-matter-3.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/kubernetes-for-delivery-the-objects-that-matter-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/kubernetes-for-delivery-the-objects-that-matter-5.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/kubernetes-for-delivery-the-objects-that-matter-6.png": {
+    "width": 1792,
+    "height": 1347
+  },
+  "/imgs/blogs/kubernetes-for-delivery-the-objects-that-matter-7.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/kubernetes-for-delivery-the-objects-that-matter-8.png": {
+    "width": 1792,
+    "height": 1154
   },
   "/imgs/blogs/kv-cache-01-concept.png": {
     "width": 606,
@@ -30540,6 +30639,39 @@
     "width": 1076,
     "height": 876
   },
+  "/imgs/blogs/multi-environment-promotion-dev-staging-prod-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/multi-environment-promotion-dev-staging-prod-2.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/multi-environment-promotion-dev-staging-prod-3.png": {
+    "width": 1792,
+    "height": 1341
+  },
+  "/imgs/blogs/multi-environment-promotion-dev-staging-prod-4.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/multi-environment-promotion-dev-staging-prod-5.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/multi-environment-promotion-dev-staging-prod-6.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/multi-environment-promotion-dev-staging-prod-7.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/multi-environment-promotion-dev-staging-prod-8.png": {
+    "width": 1792,
+    "height": 984
+  },
   "/imgs/blogs/multi-lora-and-adapter-serving-1.png": {
     "width": 1792,
     "height": 1221,
@@ -34548,6 +34680,39 @@
     "width": 1792,
     "height": 1247
   },
+  "/imgs/blogs/progressive-delivery-in-the-pipeline-canary-and-blue-green-1.png": {
+    "width": 1792,
+    "height": 929,
+    "cover": true
+  },
+  "/imgs/blogs/progressive-delivery-in-the-pipeline-canary-and-blue-green-2.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/progressive-delivery-in-the-pipeline-canary-and-blue-green-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/progressive-delivery-in-the-pipeline-canary-and-blue-green-4.png": {
+    "width": 1792,
+    "height": 1339
+  },
+  "/imgs/blogs/progressive-delivery-in-the-pipeline-canary-and-blue-green-5.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/progressive-delivery-in-the-pipeline-canary-and-blue-green-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/progressive-delivery-in-the-pipeline-canary-and-blue-green-7.png": {
+    "width": 1792,
+    "height": 943
+  },
+  "/imgs/blogs/progressive-delivery-in-the-pipeline-canary-and-blue-green-8.png": {
+    "width": 1792,
+    "height": 1241
+  },
   "/imgs/blogs/property-and-land-holding-taxes-1.png": {
     "width": 1792,
     "height": 1271,
@@ -38385,6 +38550,39 @@
   "/imgs/blogs/rolling-correlation-regimes-and-change-point-detection-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/rolling-updates-and-zero-downtime-deploys-1.png": {
+    "width": 1792,
+    "height": 691,
+    "cover": true
+  },
+  "/imgs/blogs/rolling-updates-and-zero-downtime-deploys-2.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/rolling-updates-and-zero-downtime-deploys-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/rolling-updates-and-zero-downtime-deploys-4.png": {
+    "width": 1792,
+    "height": 917
+  },
+  "/imgs/blogs/rolling-updates-and-zero-downtime-deploys-5.png": {
+    "width": 1792,
+    "height": 1158
+  },
+  "/imgs/blogs/rolling-updates-and-zero-downtime-deploys-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/rolling-updates-and-zero-downtime-deploys-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/rolling-updates-and-zero-downtime-deploys-8.png": {
+    "width": 1792,
+    "height": 702
   },
   "/imgs/blogs/root-cause-analysis-and-the-five-whys-1.png": {
     "width": 1792,
