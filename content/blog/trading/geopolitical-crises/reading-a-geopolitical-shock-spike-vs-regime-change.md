@@ -25,7 +25,7 @@ On February 24, 2022, at 5:57 AM Moscow time, the first Russian missiles crossed
 
 The traders who got it right understood that the question was not about the size of the initial move — it was about whether the underlying physical reality of European energy markets had just changed permanently. Within 90 days, it became clear it had. Russian pipeline gas to Europe, which had been flowing at 155 billion cubic meters per year in 2021, would never recover. By 2024 it was down to 14 billion cubic meters — a 91% permanent structural collapse. The traders who treated the initial spike as a dip-buying opportunity in European energy got destroyed. The ones who recognized a regime change restructured their entire energy exposure.
 
-![Spike anatomy versus regime change anatomy with three price phases each](reading-a-geopolitical-shock-spike-vs-regime-change-1.png)
+![Spike anatomy versus regime change anatomy with three price phases each](reading-a-geopolitical-shock-spike-vs-regime-change-1.webp)
 
 Now contrast that with October 7, 2023. The Hamas attack on Israel was horrific. The geopolitical shock was genuine. Brent crude spiked 5% on the news. Every headline said "Middle East war" and every trader's initial instinct was to buy oil aggressively. But by the four-test framework I will walk you through in this post, the signals were clear within 48 hours: no Strait of Hormuz disruption, no new formal alliance, no sanctions legislation, no energy company changing its drilling plans. Brent faded from \$95 back to \$78 within eight weeks. The traders who bought the spike at \$95 thinking it was a regime change lost 18% in two months. The traders who recognized a spike sold into the fear.
 
@@ -65,7 +65,7 @@ The key insight is this: **the initial price move tells you about fear, not abou
 
 Here is the diagnostic framework. Apply all four tests simultaneously in the 48-72 hours after a major geopolitical shock fires.
 
-![Four diagnostic tests pipeline from supply through alliance policy capex to spike or regime change verdict](reading-a-geopolitical-shock-spike-vs-regime-change-2.png)
+![Four diagnostic tests pipeline from supply through alliance policy capex to spike or regime change verdict](reading-a-geopolitical-shock-spike-vs-regime-change-2.webp)
 
 ### Test 1: Supply Disruption Duration
 
@@ -144,7 +144,7 @@ The verdict is simple: count the tests that fired.
 
 The most dangerous period for positioning is not the initial shock — it is the fog of war window that follows.
 
-![Brent crude and TTF gas price paths from Ukraine 2022 through Gaza 2023 showing permanent vs spike repricing](reading-a-geopolitical-shock-spike-vs-regime-change-3.png)
+![Brent crude and TTF gas price paths from Ukraine 2022 through Gaza 2023 showing permanent vs spike repricing](reading-a-geopolitical-shock-spike-vs-regime-change-3.webp)
 
 In this window, two errors are equally costly:
 
@@ -194,7 +194,7 @@ One underappreciated tool available to geopolitical investors is the Geopolitica
 
 **For planned/telegraphed events, GPR rises weeks in advance. For genuine surprise events, GPR spikes on the day.**
 
-![GPR index pre-elevated before Ukraine 2022 versus flat before Gaza October 2023 attack showing surprise versus telegraphed events](reading-a-geopolitical-shock-spike-vs-regime-change-7.png)
+![GPR index pre-elevated before Ukraine 2022 versus flat before Gaza October 2023 attack showing surprise versus telegraphed events](reading-a-geopolitical-shock-spike-vs-regime-change-7.webp)
 
 Look at the Ukraine 2022 data. From October 2021 onwards, the GPR index was elevated — from its long-run average of around 100 to readings of 120-140 before the invasion, and then exploding to 345 in February 2022. This pre-elevation was the fingerprint of a telegraphed event: US intelligence agencies were publicly (if vaguely) warning about Russian troop buildups, satellite imagery was being published, diplomatic channels were clearly under stress.
 
@@ -208,7 +208,7 @@ If GPR spikes suddenly from baseline, the event was a surprise. Surprise events 
 
 Of the major geopolitical events since 2001, here is the retrospective classification using the four-test framework:
 
-![Timeline of major geopolitical shocks from 2001 to 2024 classified as spike partial regime or full regime change](reading-a-geopolitical-shock-spike-vs-regime-change-5.png)
+![Timeline of major geopolitical shocks from 2001 to 2024 classified as spike partial regime or full regime change](reading-a-geopolitical-shock-spike-vs-regime-change-5.webp)
 
 **Full regime changes (multiple asset classes permanently repriced)**:
 - 9/11 attacks (2001): US defense spending increased from ~3% of GDP to 4.7% — and never fully returned. A new global intelligence-sharing and counter-terrorism apparatus was built. Defense contractor stocks repriced permanently upward. Airport security, cyber infrastructure, surveillance technology — all permanently repriced. Time for equity markets to recover: 60 days. Time for defense sector repricing: permanent.
@@ -313,7 +313,7 @@ Now let us run the same framework on February 24, 2022.
 
 **Outcome**: The European energy market permanently repriced. Russian pipeline gas to Europe went from 155 bcm in 2021 to 85 bcm in 2022 (war year) to 27 bcm in 2023 to 14 bcm in 2024. TTF gas prices, which had been \$25 EUR/MWh before the pandemic, reached \$310 EUR/MWh in August 2022, and settled into a permanently higher range of \$34-46 EUR/MWh — higher than the 2015-2019 baseline of \$15-25 EUR/MWh and likely to remain so because the LNG-based supply mix (spot-priced, globally traded) structurally costs more than pipeline gas (long-term contract, Russia-subsidized).
 
-![Russia gas to Europe collapsing while EU LNG capacity doubles showing permanent structural energy regime change](reading-a-geopolitical-shock-spike-vs-regime-change-4.png)
+![Russia gas to Europe collapsing while EU LNG capacity doubles showing permanent structural energy regime change](reading-a-geopolitical-shock-spike-vs-regime-change-4.webp)
 
 The traders and portfolio managers who recognized the four-test signals within the first two weeks and restructured their European energy exposure accordingly captured the regime change. Those who treated every temporary price dip as a buying opportunity in Russian-linked assets (European gas utilities, Russian oil companies accessible through ADRs before they were suspended) were destroyed.
 
@@ -321,7 +321,7 @@ The traders and portfolio managers who recognized the four-test signals within t
 
 With the four tests understood, here is how to size positions in the specific fog-of-war window before the tests have resolved.
 
-![Fog of war positioning matrix with event types versus first 48 hour supply and alliance signals](reading-a-geopolitical-shock-spike-vs-regime-change-6.png)
+![Fog of war positioning matrix with event types versus first 48 hour supply and alliance signals](reading-a-geopolitical-shock-spike-vs-regime-change-6.webp)
 
 The matrix applies SIZE from 0 (do nothing) to 5 (full conviction) based on the combination of event type and the early signals that arrive in the first 24-48 hours, even before the full four tests can resolve.
 
