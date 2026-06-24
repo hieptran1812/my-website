@@ -41,10 +41,11 @@ const SKIP_CLASSES = [
 ];
 const SVG_NS = "http://www.w3.org/2000/svg";
 
-// Keep each request comfortably under the proxy's per-chunk size (4000) so the
-// server never re-chunks a batch — that keeps our "\n\n" segment boundaries
-// intact end to end (verified to survive Google's gtx endpoint across scripts).
-const MAX_BATCH = 3000;
+// For the server API: 3000 chars fits under the 4000-char proxy limit.
+// For the on-device model: 1200 chars ≈ 343 output tokens, which avoids
+// the truncation that occurs when MAX_NEW_TOKENS is too small relative to
+// the number of segments packed into one batch.
+const MAX_BATCH = 1200;
 // Blank line between segments: survives translation as a clean boundary and is
 // extremely unlikely to appear *inside* a single (whitespace-collapsed) node.
 const SEP = "\n\n";

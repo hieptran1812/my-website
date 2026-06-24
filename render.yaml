@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: hy-mt2-translate
+    runtime: node
+    # Build and run from the translate-server sub-directory
+    buildCommand: cd translate-server && npm install && npm run build
+    startCommand: cd translate-server && npm start
+    # Standard plan: 2 GB RAM.  The q4f16 model is ~1.37 GB on disk; runtime
+    # peak is roughly 1.8 GB (weights + onnxruntime activation buffers).
+    # Upgrade to Pro (4 GB) if you see OOM errors during inference.
+    plan: standard
+    healthCheckPath: /health
+    envVars:
+      # A random secret shared with the Vercel TRANSLATE_SERVER_KEY env var.
+      # Render will auto-generate a value; copy it into Vercel afterwards.
+      - key: TRANSLATE_API_KEY
+        generateValue: true
+      # Point the HF cache at the persistent disk so the 1.37 GB model is only
+      # downloaded once and survives restarts.
+      - key: HF_CACHE_DIR
+        value: /data/models
+      - key: PORT
+        value: 3001
+      - key: NODE_ENV
+        value: production
+    # 5 GB disk mounted at /data — holds the model cache (~1.5 GB after download)
+    disk:
+      name: model-cache
+      mountPath: /data
+      sizeGB: 5

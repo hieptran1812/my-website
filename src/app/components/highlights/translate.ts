@@ -1,7 +1,7 @@
 // Target-language picker for the in-article translate tool.
-// The chosen language is remembered for the lifetime of the browser session
-// (sessionStorage) so it follows the reader across articles but resets when
-// they close the tab — matching "saved while the user stays on the site".
+// Translation is performed server-side via /api/translate (Hy-MT2 on Render →
+// Gemini → Google Translate fallback chain). The browser no longer runs any
+// model — the Web Worker and all onnxruntime-web code have been removed.
 
 export interface Language {
   code: string;
@@ -65,13 +65,15 @@ export interface TranslateResult {
   target: string;
 }
 
-/** Calls the same-origin proxy (CSP allows only 'self' for connect-src). */
+/**
+ * Translate `text` into `target` via the /api/translate proxy.
+ * The proxy routes: Hy-MT2 on Render → Gemini → Google Translate.
+ */
 export async function translateText(
   text: string,
   target: string,
   signal?: AbortSignal,
 ): Promise<TranslateResult> {
-  // Trailing slash matches next.config `trailingSlash: true` (avoids a 308).
   const res = await fetch("/api/translate/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -84,7 +86,7 @@ export async function translateText(
       const data = await res.json();
       if (data?.error) message = data.error;
     } catch {
-      // non-JSON error body
+      // non-JSON body
     }
     throw new Error(message);
   }

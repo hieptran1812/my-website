@@ -4,6 +4,39 @@ export const runtime = "nodejs";
 
 // Hard cap so a stray request can't fan out into many upstream calls.
 const MAX_CHARS = 8000;
+
+// --- Render / Hy-MT2 (primary engine when configured) -----------------------
+// Set TRANSLATE_SERVER_URL to the Render service URL and TRANSLATE_SERVER_KEY
+// to the matching TRANSLATE_API_KEY secret.  When both are present, translation
+// goes through the on-server Hy-MT2 1.8B model (best quality, same model as
+// the browser worker but running via onnxruntime-node at native speed).
+// Falls through to Gemini → Google when the Render service is absent or errors.
+const RENDER_URL = process.env.TRANSLATE_SERVER_URL ?? "";
+const RENDER_KEY = process.env.TRANSLATE_SERVER_KEY ?? "";
+
+async function renderTranslate(
+  text: string,
+  target: string,
+): Promise<{ translation: string; detected: string } | null> {
+  if (!RENDER_URL) return null;
+  try {
+    const res = await fetch(`${RENDER_URL}/translate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(RENDER_KEY ? { Authorization: `Bearer ${RENDER_KEY}` } : {}),
+      },
+      body: JSON.stringify({ text, target }),
+      signal: AbortSignal.timeout(300_000), // 5 min — server CPU inference
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { translation?: string; detected?: string };
+    if (!data.translation) return null;
+    return { translation: data.translation, detected: data.detected ?? "auto" };
+  } catch {
+    return null;
+  }
+}
 // Google fallback POSTs the text in the request body, so we're bounded by the
 // upstream's per-request capacity, not URL length. Keep chunks large so a
 // typical selection translates in ONE request — full surrounding context is
@@ -367,12 +400,21 @@ export async function POST(request: NextRequest) {
 
   try {
     let result: TranslationResult;
-    try {
-      // Primary: Gemini (LLM-quality). Falls through to Google on any error.
-      result = await geminiTranslate(text, target);
-    } catch {
-      result = await googleTranslateAll(text, target, source);
+
+    // 1. Render / Hy-MT2 server (highest quality; on when TRANSLATE_SERVER_URL is set)
+    const renderResult = await renderTranslate(text, target);
+    if (renderResult) {
+      result = renderResult;
+    } else {
+      try {
+        // 2. Gemini (LLM-quality fallback)
+        result = await geminiTranslate(text, target);
+      } catch {
+        // 3. Google Translate (keyless last resort)
+        result = await googleTranslateAll(text, target, source);
+      }
     }
+
     cacheSet(key, result);
     return NextResponse.json({ ...result, target });
   } catch {

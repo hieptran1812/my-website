@@ -66,11 +66,17 @@
   position: fixed;
   z-index: 80;
   display: flex;
-  align-items: center;
-  gap: 6px;
+  flex-direction: column;
+  gap: 0;
   padding: 6px 8px;
   animation: bh-fade-in 0.12s ease-out;
 }
+.bh-toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .bh-swatch {
   width: 20px;
   height: 20px;
@@ -265,15 +271,25 @@
 .bh-translate-retry { align-self: flex-start; }
 .bh-translate-foot {
   display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+  padding-top: 8px;
+}
+.bh-translate-foot-row {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  border-top: 1px solid var(--border, rgba(0, 0, 0, 0.08));
-  padding-top: 8px;
 }
 .bh-translate-detected {
   font-size: 11px;
   color: var(--text-secondary, #888);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Floating toggle button for notes panel */

@@ -485,39 +485,41 @@ export default function BlogHighlighter({ slug, containerRef }: Props) {
           aria-label="Highlight colors"
           onMouseDown={(e) => e.preventDefault()}
         >
-          {COLORS.map((c) => (
+          <div className="bh-toolbar-row">
+            {COLORS.map((c) => (
+              <button
+                key={c}
+                className="bh-swatch"
+                data-color={c}
+                aria-label={`Highlight ${c}`}
+                onClick={() => addHighlight(c)}
+              />
+            ))}
+            <div className="bh-toolbar-sep" />
             <button
-              key={c}
-              className="bh-swatch"
-              data-color={c}
-              aria-label={`Highlight ${c}`}
-              onClick={() => addHighlight(c)}
-            />
-          ))}
-          <div className="bh-toolbar-sep" />
-          <button
-            className="bh-iconbtn"
-            aria-label="Add note"
-            title="Add note"
-            onClick={openNoteFromToolbar}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 20h9" />
-              <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z" />
-            </svg>
-          </button>
-          <button
-            className="bh-iconbtn"
-            aria-label={`Translate to ${languageLabel(targetLang)}`}
-            title={`Translate to ${languageLabel(targetLang)}`}
-            onClick={openTranslate}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 5h7M9 3v2c0 4.4-2.7 8-6 9" />
-              <path d="M5 9c0 2.5 3.3 4.8 6 5.5" />
-              <path d="M14 19l3-7 3 7M14.7 17h4.6" />
-            </svg>
-          </button>
+              className="bh-iconbtn"
+              aria-label="Add note"
+              title="Add note"
+              onClick={openNoteFromToolbar}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z" />
+              </svg>
+            </button>
+            <button
+              className="bh-iconbtn"
+              aria-label={`Translate to ${languageLabel(targetLang)}`}
+              title={`Translate to ${languageLabel(targetLang)}`}
+              onClick={openTranslate}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 5h7M9 3v2c0 4.4-2.7 8-6 9" />
+                <path d="M5 9c0 2.5 3.3 4.8 6 5.5" />
+                <path d="M14 19l3-7 3 7M14.7 17h4.6" />
+              </svg>
+            </button>
+          </div>
         </div>
       )}
 
@@ -652,20 +654,20 @@ export default function BlogHighlighter({ slug, containerRef }: Props) {
           </div>
 
           <div className="bh-translate-foot">
-            <span className="bh-translate-detected">
-              {detectedLang
-                ? `Detected: ${languageLabel(detectedLang)}`
-                : "Powered by Google Translate"}
-            </span>
-            {translateStatus === "idle" && translation && (
-              <button
-                className="bh-btn"
-                onClick={copyTranslation}
-                aria-label="Copy translation"
-              >
-                {copied ? "Copied!" : "Copy"}
-              </button>
-            )}
+            <div className="bh-translate-foot-row">
+              <span className="bh-translate-detected">
+                {detectedLang ? `Detected: ${languageLabel(detectedLang)}` : "Powered by Hy-MT2"}
+              </span>
+              {translateStatus === "idle" && translation && (
+                <button
+                  className="bh-btn"
+                  onClick={copyTranslation}
+                  aria-label="Copy translation"
+                >
+                  {copied ? "Copied!" : "Copy"}
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}

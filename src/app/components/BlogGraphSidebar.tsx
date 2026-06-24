@@ -237,7 +237,7 @@ function BlogGraphSidebar({
           >
             {isTranslating ? (
               <span className={compact ? "text-xs font-medium" : "font-medium"}>
-                Translating… {translateProgress}%
+                {translateProgress > 0 ? `Translating… ${translateProgress}%` : "Translating…"}
               </span>
             ) : (
               <>
