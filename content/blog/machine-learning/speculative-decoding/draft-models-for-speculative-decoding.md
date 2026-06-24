@@ -1612,7 +1612,6 @@ The 3.4× speedup on a 405B target is particularly striking because the naive ba
 
 The key lesson: speculative decoding scales well to very large targets precisely because $T_{\text{target}}$ is so large that even moderately expensive draft models comfortably satisfy the latency budget. Larger targets create *more* room for drafting, not less.
 
----
 
 The next post in this series covers **Medusa** — the approach that eliminates the two-model problem entirely by attaching $K$ parallel prediction heads to the target model itself, predicting tokens 1 through $K+1$ ahead simultaneously. If you have been frustrated by the tokenizer alignment constraint or the memory overhead of a separate draft model, Medusa solves both problems at once.
 

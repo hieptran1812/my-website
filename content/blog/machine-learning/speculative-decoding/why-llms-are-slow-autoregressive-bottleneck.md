@@ -960,7 +960,6 @@ The remaining seven posts will build from this foundation:
 
 For the complete inference optimization context, see [Efficient LLM inference techniques](/blog/machine-learning/large-language-model/efficient-llm-inference-techniques) and [Optimizing LLM inference](/blog/machine-learning/large-language-model/optimizing-llm-inference-complete-guide). The [vLLM serving guide](/blog/machine-learning/large-language-model/vllm-inference) and [SGLang inference guide](/blog/machine-learning/large-language-model/sglang-inference) cover the production serving layer that speculative decoding plugs into.
 
----
 
 ## Case Studies
 
@@ -1057,6 +1056,5 @@ The lesson: speculative decoding strategies span from zero-overhead n-gram looku
 
 The pattern is clear: small batch, structured/repetitive task, high acceptance rate → speculative decoding wins. Large batch, diverse task, low acceptance rate → use batching instead.
 
----
 
 Understanding the autoregressive bottleneck is the prerequisite for everything in speculative decoding. The next post in this series — [Speculative Decoding: Draft Fast, Verify in Parallel](/blog/machine-learning/speculative-decoding/speculative-decoding-core-idea-draft-and-verify) — takes this foundation and builds the core algorithm: how a cheap draft model proposes γ tokens, how the target model verifies them all in one pass, and why the expected speedup formula predicts when speculative decoding pays for itself.

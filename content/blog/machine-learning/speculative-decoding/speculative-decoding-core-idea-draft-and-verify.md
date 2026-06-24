@@ -903,7 +903,6 @@ Three threads worth pulling in subsequent posts:
 
 The core insight you should take from this post: the verify pass is cheap relative to what it gives you. One forward pass of the target model can check multiple positions simultaneously for approximately the same cost as checking one. Speculative decoding is the mechanism that manufactures the candidates those positions will be checked against, and modified rejection sampling is the mathematical guarantee that makes the whole system lossless.
 
----
 
 *Next in this series: [Token Acceptance in Speculative Decoding: Rejection Sampling Explained](/blog/machine-learning/speculative-decoding/speculative-decoding-token-acceptance-rejection-sampling) — the modified rejection sampling procedure in full, with proof and Python implementation.*
 
