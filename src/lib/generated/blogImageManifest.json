@@ -15717,6 +15717,11 @@
     "width": 1792,
     "height": 959
   },
+  "/imgs/blogs/eagle-speculative-decoding-feature-alignment-1.png": {
+    "width": 2230,
+    "height": 1441,
+    "cover": true
+  },
   "/imgs/blogs/early-buyer-and-insider-detection-1.png": {
     "width": 1792,
     "height": 1158,
@@ -40470,6 +40475,39 @@
     "width": 1792,
     "height": 1199
   },
+  "/imgs/blogs/sbom-and-dependency-management-1.png": {
+    "width": 1792,
+    "height": 1264,
+    "cover": true
+  },
+  "/imgs/blogs/sbom-and-dependency-management-2.png": {
+    "width": 1792,
+    "height": 691
+  },
+  "/imgs/blogs/sbom-and-dependency-management-3.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/sbom-and-dependency-management-4.png": {
+    "width": 1792,
+    "height": 1382
+  },
+  "/imgs/blogs/sbom-and-dependency-management-5.png": {
+    "width": 1792,
+    "height": 906
+  },
+  "/imgs/blogs/sbom-and-dependency-management-6.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/sbom-and-dependency-management-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/sbom-and-dependency-management-8.png": {
+    "width": 1792,
+    "height": 1271
+  },
   "/imgs/blogs/sbv-gold-policy-auctions-the-2024-intervention-and-anti-goldization-1.png": {
     "width": 1792,
     "height": 830,
@@ -40817,6 +40855,39 @@
     "width": 1792,
     "height": 1310
   },
+  "/imgs/blogs/secrets-management-in-the-pipeline-1.png": {
+    "width": 1792,
+    "height": 776,
+    "cover": true
+  },
+  "/imgs/blogs/secrets-management-in-the-pipeline-2.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/secrets-management-in-the-pipeline-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/secrets-management-in-the-pipeline-4.png": {
+    "width": 1792,
+    "height": 1275
+  },
+  "/imgs/blogs/secrets-management-in-the-pipeline-5.png": {
+    "width": 1792,
+    "height": 962
+  },
+  "/imgs/blogs/secrets-management-in-the-pipeline-6.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/secrets-management-in-the-pipeline-7.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/secrets-management-in-the-pipeline-8.png": {
+    "width": 1792,
+    "height": 1212
+  },
   "/imgs/blogs/sector-correlations-and-diversification-vietnam-1.png": {
     "width": 1792,
     "height": 1167,
@@ -40903,6 +40974,39 @@
   "/imgs/blogs/sector-rotation-through-the-cycle-7.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/securing-the-pipeline-itself-1.png": {
+    "width": 1792,
+    "height": 664,
+    "cover": true
+  },
+  "/imgs/blogs/securing-the-pipeline-itself-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/securing-the-pipeline-itself-3.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/securing-the-pipeline-itself-4.png": {
+    "width": 1792,
+    "height": 1297
+  },
+  "/imgs/blogs/securing-the-pipeline-itself-5.png": {
+    "width": 1792,
+    "height": 900
+  },
+  "/imgs/blogs/securing-the-pipeline-itself-6.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/securing-the-pipeline-itself-7.png": {
+    "width": 1792,
+    "height": 1141
+  },
+  "/imgs/blogs/securing-the-pipeline-itself-8.png": {
+    "width": 1792,
+    "height": 1221
   },
   "/imgs/blogs/securities-brokers-sector-vietnam-highest-beta-1.png": {
     "width": 1792,
@@ -41839,6 +41943,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/signing-and-provenance-with-sigstore-and-slsa-1.png": {
+    "width": 1792,
+    "height": 662,
+    "cover": true
+  },
+  "/imgs/blogs/signing-and-provenance-with-sigstore-and-slsa-2.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/signing-and-provenance-with-sigstore-and-slsa-3.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/signing-and-provenance-with-sigstore-and-slsa-4.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/signing-and-provenance-with-sigstore-and-slsa-5.png": {
+    "width": 1792,
+    "height": 929
+  },
+  "/imgs/blogs/signing-and-provenance-with-sigstore-and-slsa-6.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/signing-and-provenance-with-sigstore-and-slsa-7.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/signing-and-provenance-with-sigstore-and-slsa-8.png": {
+    "width": 1792,
+    "height": 1271
+  },
   "/imgs/blogs/silicon-valley-bank-2023-the-duration-trap-and-the-36-hour-digital-run-1.png": {
     "width": 1792,
     "height": 950,
@@ -42240,6 +42377,39 @@
     "width": 1792,
     "height": 954
   },
+  "/imgs/blogs/software-supply-chain-security-the-new-frontier-1.png": {
+    "width": 1792,
+    "height": 1120,
+    "cover": true
+  },
+  "/imgs/blogs/software-supply-chain-security-the-new-frontier-2.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/software-supply-chain-security-the-new-frontier-3.png": {
+    "width": 1792,
+    "height": 970
+  },
+  "/imgs/blogs/software-supply-chain-security-the-new-frontier-4.png": {
+    "width": 1792,
+    "height": 1245
+  },
+  "/imgs/blogs/software-supply-chain-security-the-new-frontier-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/software-supply-chain-security-the-new-frontier-6.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/software-supply-chain-security-the-new-frontier-7.png": {
+    "width": 1792,
+    "height": 1152
+  },
+  "/imgs/blogs/software-supply-chain-security-the-new-frontier-8.png": {
+    "width": 1792,
+    "height": 1212
+  },
   "/imgs/blogs/software-transactional-memory-and-optimistic-concurrency-1.png": {
     "width": 1792,
     "height": 1242,
@@ -42544,6 +42714,16 @@
   "/imgs/blogs/speculative-decoding-core-idea-draft-and-verify-1.png": {
     "width": 2171,
     "height": 1441,
+    "cover": true
+  },
+  "/imgs/blogs/speculative-decoding-in-production-1.png": {
+    "width": 2120,
+    "height": 1468,
+    "cover": true
+  },
+  "/imgs/blogs/speculative-decoding-token-acceptance-rejection-sampling-1.png": {
+    "width": 2070,
+    "height": 1468,
     "cover": true
   },
   "/imgs/blogs/speech-tokenizer-diagram.png": {
@@ -53792,6 +53972,11 @@
   "/imgs/blogs/tree-models-cross-sectional-prediction-quant-research-9.png": {
     "width": 1792,
     "height": 1158
+  },
+  "/imgs/blogs/tree-speculation-drafting-multiple-futures-1.png": {
+    "width": 2145,
+    "height": 1399,
+    "cover": true
   },
   "/imgs/blogs/trend-and-market-structure-1.png": {
     "width": 1792,
