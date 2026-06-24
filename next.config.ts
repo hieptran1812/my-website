@@ -27,9 +27,6 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   async headers() {
-    // HuggingFace hosts need to be reachable from the Web Worker that runs the
-    // Hy-MT2 translation model. The model weights and ONNX runtime WASM files
-    // are downloaded from HF CDN on first use and then cached in IndexedDB.
     const cspValue =
       "connect-src 'self' https://vitals.vercel-insights.com https://vercel-insights.com" +
         " https://cdn.jsdelivr.net;" +
@@ -80,7 +77,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  // Webpack configuration for Prisma + WASM (onnxruntime-web for Hy-MT2)
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.externals.push({
