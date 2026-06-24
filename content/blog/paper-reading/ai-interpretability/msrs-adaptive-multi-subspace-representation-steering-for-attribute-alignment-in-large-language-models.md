@@ -1,14 +1,22 @@
 ---
-title: "MSRS: Adaptive multi-subspace representation steering for attribute alignment in large language models"
-publishDate: "2025-09-01"
-category: "paper-reading"
-subcategory: "AI Interpretability"
-tags: ["model-interpretation", "activation-steering"]
-date: "2025-09-01"
-author: "Hiep Tran"
+title: >-
+  MSRS: Adaptive multi-subspace representation steering for attribute alignment
+  in large language models
+publishDate: '2025-09-01'
+category: paper-reading
+subcategory: AI Interpretability
+tags:
+  - model-interpretation
+  - activation-steering
+date: '2025-09-01'
+author: Hiep Tran
 featured: false
-image: "/imgs/blogs/msrs-adaptive-multi-subspace-representation-steering-for-attribute-alignment-in-large-language-models-20250901175838.png"
-excerpt: "This paper introduces MSRS (Multi-Subspace Representation Steering) to solve these challenges. The core motivation is to mitigate conflicts between different attribute controls while enabling multiple attributes..."
+image: >-
+  /imgs/blogs/msrs-adaptive-multi-subspace-representation-steering-for-attribute-alignment-in-large-language-models-20250901175838.png
+excerpt: >-
+  This paper introduces MSRS (Multi-Subspace Representation Steering) to solve
+  these challenges. The core motivation is to mitigate conflicts between
+  different attribute controls while enabling multiple attributes...
 ---
 
 ![](/imgs/blogs/msrs-adaptive-multi-subspace-representation-steering-for-attribute-alignment-in-large-language-models-20250901175838.png)
@@ -182,5 +190,6 @@ However, the method also comes with practical drawbacks. It significantly increa
 
 ## References
 
-1. [MSRS: ADAPTIVE MULTI-SUBSPACE REPRESENTATION STEERING FOR ATTRIBUTE ALIGNMENT IN LARGE LANGUAGE MODELS](https://arxiv.org/pdf/2508.10599)
-2. ChatGPT :)))
+1. [MSRS: Adaptive multi-subspace representation steering for attribute alignment in large language models (arXiv:2508.10599v3)](https://arxiv.org/abs/2508.10599v3)
+2. [MSRS: ADAPTIVE MULTI-SUBSPACE REPRESENTATION STEERING FOR ATTRIBUTE ALIGNMENT IN LARGE LANGUAGE MODELS](https://arxiv.org/pdf/2508.10599)
+3. ChatGPT :)))

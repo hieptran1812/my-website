@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc --noEmit:*)",
+      "Bash(tsc --noEmit:*)",
+      "Bash(git --no-pager diff:*)"
+    ]
+  }
+}

@@ -1,14 +1,21 @@
 ---
-title: "Subliminal Learning: Language Models Transmit Behavioral Traits via Hidden Signals in Data"
-publishDate: "2025-08-04"
-category: "paper-reading"
-subcategory: "AI Interpretability"
-tags: ["knowledge-distillation", "model-interpretation", "transfer-learning"]
-date: "2025-08-04"
-author: "Hiep Tran"
+title: >-
+  Subliminal Learning: Language Models Transmit Behavioral Traits via Hidden
+  Signals in Data
+publishDate: '2025-08-04'
+category: paper-reading
+subcategory: AI Interpretability
+tags:
+  - knowledge-distillation
+  - model-interpretation
+  - transfer-learning
+date: '2025-08-04'
+author: Hiep Tran
 featured: false
-image: "/imgs/blogs/image.png"
-excerpt: "Distillation is a method where one model learns from another. A large and capable model, called the teacher, produces examples or outputs..."
+image: /imgs/blogs/image.png
+excerpt: >-
+  Distillation is a method where one model learns from another. A large and
+  capable model, called the teacher, produces examples or outputs...
 ---
 
 ![alt text](/imgs/blogs/image.png)
@@ -278,4 +285,5 @@ If true, this opens up a new area of study: reverse-engineering the behavioral s
 
 ## References
 
-1. [SUBLIMINAL LEARNING: LANGUAGE MODELS TRANSMIT BEHAVIORAL TRAITS VIA HIDDEN SIGNALS IN DATA](https://arxiv.org/pdf/2507.14805)
+1. [Subliminal Learning: Language Models Transmit Behavioral Traits via Hidden Signals in Data (arXiv:2507.14805v1)](https://arxiv.org/abs/2507.14805v1)
+2. [SUBLIMINAL LEARNING: LANGUAGE MODELS TRANSMIT BEHAVIORAL TRAITS VIA HIDDEN SIGNALS IN DATA](https://arxiv.org/pdf/2507.14805)

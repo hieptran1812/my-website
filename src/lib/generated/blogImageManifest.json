@@ -1644,6 +1644,39 @@
     "height": 1382,
     "cover": true
   },
+  "/imgs/blogs/argo-cd-and-flux-in-practice-1.png": {
+    "width": 1792,
+    "height": 754,
+    "cover": true
+  },
+  "/imgs/blogs/argo-cd-and-flux-in-practice-2.png": {
+    "width": 1792,
+    "height": 1249
+  },
+  "/imgs/blogs/argo-cd-and-flux-in-practice-3.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/argo-cd-and-flux-in-practice-4.png": {
+    "width": 1792,
+    "height": 1286
+  },
+  "/imgs/blogs/argo-cd-and-flux-in-practice-5.png": {
+    "width": 1792,
+    "height": 921
+  },
+  "/imgs/blogs/argo-cd-and-flux-in-practice-6.png": {
+    "width": 1792,
+    "height": 1148
+  },
+  "/imgs/blogs/argo-cd-and-flux-in-practice-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/argo-cd-and-flux-in-practice-8.png": {
+    "width": 1792,
+    "height": 1201
+  },
   "/imgs/blogs/asian-financial-crisis-1997-1.png": {
     "width": 1792,
     "height": 968,
@@ -14693,6 +14726,39 @@
     "width": 1792,
     "height": 1174
   },
+  "/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-1.png": {
+    "width": 1792,
+    "height": 705,
+    "cover": true
+  },
+  "/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-2.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-3.png": {
+    "width": 1092,
+    "height": 618
+  },
+  "/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-4.png": {
+    "width": 1792,
+    "height": 826
+  },
+  "/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-5.png": {
+    "width": 1792,
+    "height": 1001
+  },
+  "/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-6.png": {
+    "width": 1008,
+    "height": 618
+  },
+  "/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-7.png": {
+    "width": 1792,
+    "height": 738
+  },
+  "/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-8.png": {
+    "width": 1262,
+    "height": 620
+  },
   "/imgs/blogs/discounting-cash-flows-how-a-bond-is-priced-1.png": {
     "width": 1792,
     "height": 1014,
@@ -20295,6 +20361,39 @@
   "/imgs/blogs/git-like-a-pro-7.png": {
     "width": 1792,
     "height": 888
+  },
+  "/imgs/blogs/gitops-git-as-the-source-of-truth-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/gitops-git-as-the-source-of-truth-2.png": {
+    "width": 1792,
+    "height": 725
+  },
+  "/imgs/blogs/gitops-git-as-the-source-of-truth-3.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/gitops-git-as-the-source-of-truth-4.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/gitops-git-as-the-source-of-truth-5.png": {
+    "width": 1792,
+    "height": 1269
+  },
+  "/imgs/blogs/gitops-git-as-the-source-of-truth-6.png": {
+    "width": 1792,
+    "height": 906
+  },
+  "/imgs/blogs/gitops-git-as-the-source-of-truth-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/gitops-git-as-the-source-of-truth-8.png": {
+    "width": 1792,
+    "height": 1212
   },
   "/imgs/blogs/glm-4-1v-thinking-multimodal-reasoning-rl-1.png": {
     "width": 1792,
@@ -35324,6 +35423,72 @@
     "width": 1792,
     "height": 1241
   },
+  "/imgs/blogs/progressive-delivery-meets-gitops-1.png": {
+    "width": 1792,
+    "height": 668,
+    "cover": true
+  },
+  "/imgs/blogs/progressive-delivery-meets-gitops-2.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/progressive-delivery-meets-gitops-3.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/progressive-delivery-meets-gitops-4.png": {
+    "width": 1792,
+    "height": 1281
+  },
+  "/imgs/blogs/progressive-delivery-meets-gitops-5.png": {
+    "width": 1792,
+    "height": 988
+  },
+  "/imgs/blogs/progressive-delivery-meets-gitops-6.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/progressive-delivery-meets-gitops-7.png": {
+    "width": 1792,
+    "height": 1160
+  },
+  "/imgs/blogs/progressive-delivery-meets-gitops-8.png": {
+    "width": 1792,
+    "height": 1250
+  },
+  "/imgs/blogs/promoting-releases-with-gitops-1.png": {
+    "width": 1792,
+    "height": 1249,
+    "cover": true
+  },
+  "/imgs/blogs/promoting-releases-with-gitops-2.png": {
+    "width": 1792,
+    "height": 700
+  },
+  "/imgs/blogs/promoting-releases-with-gitops-3.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/promoting-releases-with-gitops-4.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/promoting-releases-with-gitops-5.png": {
+    "width": 1792,
+    "height": 996
+  },
+  "/imgs/blogs/promoting-releases-with-gitops-6.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/promoting-releases-with-gitops-7.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/promoting-releases-with-gitops-8.png": {
+    "width": 1792,
+    "height": 1212
+  },
   "/imgs/blogs/property-and-land-holding-taxes-1.png": {
     "width": 1792,
     "height": 1271,
@@ -35531,6 +35696,39 @@
     "width": 1739,
     "height": 914,
     "cover": true
+  },
+  "/imgs/blogs/push-vs-pull-cd-and-who-holds-the-keys-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/push-vs-pull-cd-and-who-holds-the-keys-2.png": {
+    "width": 1792,
+    "height": 800
+  },
+  "/imgs/blogs/push-vs-pull-cd-and-who-holds-the-keys-3.png": {
+    "width": 1792,
+    "height": 1292
+  },
+  "/imgs/blogs/push-vs-pull-cd-and-who-holds-the-keys-4.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/push-vs-pull-cd-and-who-holds-the-keys-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/push-vs-pull-cd-and-who-holds-the-keys-6.png": {
+    "width": 1792,
+    "height": 929
+  },
+  "/imgs/blogs/push-vs-pull-cd-and-who-holds-the-keys-7.png": {
+    "width": 1792,
+    "height": 1147
+  },
+  "/imgs/blogs/push-vs-pull-cd-and-who-holds-the-keys-8.png": {
+    "width": 1792,
+    "height": 1250
   },
   "/imgs/blogs/put-call-parity-no-arbitrage-quant-interviews-1.png": {
     "width": 1792,
@@ -38888,6 +39086,39 @@
   "/imgs/blogs/risk-parity-sizing-equal-risk-not-equal-money-7.png": {
     "width": 1602,
     "height": 1013
+  },
+  "/imgs/blogs/risk-required-return-capm-beta-cost-capital-1.png": {
+    "width": 1792,
+    "height": 1145,
+    "cover": true
+  },
+  "/imgs/blogs/risk-required-return-capm-beta-cost-capital-2.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/risk-required-return-capm-beta-cost-capital-3.png": {
+    "width": 947,
+    "height": 618
+  },
+  "/imgs/blogs/risk-required-return-capm-beta-cost-capital-4.png": {
+    "width": 927,
+    "height": 618
+  },
+  "/imgs/blogs/risk-required-return-capm-beta-cost-capital-5.png": {
+    "width": 1792,
+    "height": 888
+  },
+  "/imgs/blogs/risk-required-return-capm-beta-cost-capital-6.png": {
+    "width": 1166,
+    "height": 618
+  },
+  "/imgs/blogs/risk-required-return-capm-beta-cost-capital-7.png": {
+    "width": 1792,
+    "height": 1047
+  },
+  "/imgs/blogs/risk-required-return-capm-beta-cost-capital-8.png": {
+    "width": 1332,
+    "height": 618
   },
   "/imgs/blogs/risk-reversals-and-the-shape-of-fear-in-fx-1.png": {
     "width": 1633,
@@ -52349,6 +52580,39 @@
     "width": 1792,
     "height": 1241
   },
+  "/imgs/blogs/time-value-of-money-engine-every-valuation-model-1.png": {
+    "width": 1792,
+    "height": 902,
+    "cover": true
+  },
+  "/imgs/blogs/time-value-of-money-engine-every-valuation-model-2.png": {
+    "width": 1792,
+    "height": 1243
+  },
+  "/imgs/blogs/time-value-of-money-engine-every-valuation-model-3.png": {
+    "width": 1269,
+    "height": 618
+  },
+  "/imgs/blogs/time-value-of-money-engine-every-valuation-model-4.png": {
+    "width": 1792,
+    "height": 726
+  },
+  "/imgs/blogs/time-value-of-money-engine-every-valuation-model-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/time-value-of-money-engine-every-valuation-model-6.png": {
+    "width": 963,
+    "height": 618
+  },
+  "/imgs/blogs/time-value-of-money-engine-every-valuation-model-7.png": {
+    "width": 1792,
+    "height": 666
+  },
+  "/imgs/blogs/time-value-of-money-engine-every-valuation-model-8.png": {
+    "width": 1108,
+    "height": 618
+  },
   "/imgs/blogs/timeouts-retries-and-backoff-done-right-1.png": {
     "width": 1792,
     "height": 752,
@@ -54343,6 +54607,39 @@
     "width": 1792,
     "height": 1162
   },
+  "/imgs/blogs/valuation-spectrum-absolute-relative-contingent-claims-1.png": {
+    "width": 1792,
+    "height": 1402,
+    "cover": true
+  },
+  "/imgs/blogs/valuation-spectrum-absolute-relative-contingent-claims-2.png": {
+    "width": 1792,
+    "height": 1178
+  },
+  "/imgs/blogs/valuation-spectrum-absolute-relative-contingent-claims-3.png": {
+    "width": 1792,
+    "height": 766
+  },
+  "/imgs/blogs/valuation-spectrum-absolute-relative-contingent-claims-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/valuation-spectrum-absolute-relative-contingent-claims-5.png": {
+    "width": 1700,
+    "height": 1440
+  },
+  "/imgs/blogs/valuation-spectrum-absolute-relative-contingent-claims-6.png": {
+    "width": 1117,
+    "height": 618
+  },
+  "/imgs/blogs/valuation-spectrum-absolute-relative-contingent-claims-7.png": {
+    "width": 993,
+    "height": 541
+  },
+  "/imgs/blogs/valuation-spectrum-absolute-relative-contingent-claims-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/value-at-risk-and-exactly-how-var-lies-1.png": {
     "width": 1602,
     "height": 1013,
@@ -56117,6 +56414,39 @@
     "width": 1792,
     "height": 835,
     "cover": true
+  },
+  "/imgs/blogs/what-is-value-philosophy-frameworks-asset-pricing-1.png": {
+    "width": 1600,
+    "height": 1600,
+    "cover": true
+  },
+  "/imgs/blogs/what-is-value-philosophy-frameworks-asset-pricing-2.png": {
+    "width": 1600,
+    "height": 1600
+  },
+  "/imgs/blogs/what-is-value-philosophy-frameworks-asset-pricing-3.png": {
+    "width": 1108,
+    "height": 618
+  },
+  "/imgs/blogs/what-is-value-philosophy-frameworks-asset-pricing-4.png": {
+    "width": 1600,
+    "height": 1600
+  },
+  "/imgs/blogs/what-is-value-philosophy-frameworks-asset-pricing-5.png": {
+    "width": 1018,
+    "height": 717
+  },
+  "/imgs/blogs/what-is-value-philosophy-frameworks-asset-pricing-6.png": {
+    "width": 1600,
+    "height": 1600
+  },
+  "/imgs/blogs/what-is-value-philosophy-frameworks-asset-pricing-7.png": {
+    "width": 1600,
+    "height": 1600
+  },
+  "/imgs/blogs/what-is-value-philosophy-frameworks-asset-pricing-8.png": {
+    "width": 1140,
+    "height": 618
   },
   "/imgs/blogs/what-is-x402-20251025210847.png": {
     "width": 1536,

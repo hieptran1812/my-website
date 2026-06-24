@@ -1,14 +1,22 @@
 ---
-title: "Decomposing Representation Space into Interpretable Subspaces with Unsupervised Learning"
-publishDate: "2025-09-01"
-category: "paper-reading"
-subcategory: "AI Interpretability"
-tags: ["model-interpretation", "unsupervised-learning"]
-date: "2025-09-01"
-author: "Hiep Tran"
+title: >-
+  Decomposing Representation Space into Interpretable Subspaces with
+  Unsupervised Learning
+publishDate: '2025-09-01'
+category: paper-reading
+subcategory: AI Interpretability
+tags:
+  - model-interpretation
+  - unsupervised-learning
+date: '2025-09-01'
+author: Hiep Tran
 featured: false
-image: "/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250807133820.png"
-excerpt: "This paper introduces a new, unsupervised method called Neighbor Distance Minimization (NDM). The idea is to divide the model’s internal representation space into smaller “subspaces”..."
+image: >-
+  /imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250807133820.png
+excerpt: >-
+  This paper introduces a new, unsupervised method called Neighbor Distance
+  Minimization (NDM). The idea is to divide the model’s internal representation
+  space into smaller “subspaces”...
 ---
 
 ![](/imgs/blogs/decomposing-representation-space-into-interpretable-subspaces-with-unsupervised-learning-20250807133820.png)
@@ -241,5 +249,6 @@ Finally, while the paper focuses on language models, the same approach could be 
 
 ## References
 
-1. [Decomposing Representation Space into Interpretable Subspaces with Unsupervised Learning](https://arxiv.org/pdf/2508.01916)
-2. [Superposition, Memorization, and Double Descent](https://transformer-circuits.pub/2023/toy-double-descent/index.html)
+1. [Decomposing Representation Space into Interpretable Subspaces with Unsupervised Learning (arXiv:2508.01916v1)](https://arxiv.org/abs/2508.01916v1)
+2. [Decomposing Representation Space into Interpretable Subspaces with Unsupervised Learning](https://arxiv.org/pdf/2508.01916)
+3. [Superposition, Memorization, and Double Descent](https://transformer-circuits.pub/2023/toy-double-descent/index.html)

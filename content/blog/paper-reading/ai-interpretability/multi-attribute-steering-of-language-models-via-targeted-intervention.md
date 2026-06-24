@@ -1,22 +1,26 @@
 ---
-title: "Multi-Attribute Steering of Language Models via Targeted Intervention"
-publishDate: "2026-01-07"
-category: "paper-reading"
-subcategory: "AI Interpretability"
+title: Multi-Attribute Steering of Language Models via Targeted Intervention
+publishDate: '2026-01-07'
+category: paper-reading
+subcategory: AI Interpretability
 tags:
-  [
-    "steering",
-    "language-models",
-    "interpretability",
-    "targeted-intervention",
-    "multi-attribute",
-    "acl-2025",
-  ]
-date: "2026-01-07"
-author: "Hiep Tran"
+  - steering
+  - multiple-steering
+  - language-models
+  - interpretability
+  - targeted-intervention
+  - multi-attribute
+  - acl-2025
+date: '2026-01-07'
+author: Hiep Tran
 featured: false
-image: "/imgs/blogs/multi-attribute-steering-of-language-models-via-targeted-intervention-20260107210248.png"
-excerpt: "MAT-STEER introduces a gating mechanism for selective token-level intervention, enabling LLMs to be steered across multiple attributes (truthfulness, toxicity, bias) without conflicts — outperforming fine-tuning methods with less than 20% training data."
+image: >-
+  /imgs/blogs/multi-attribute-steering-of-language-models-via-targeted-intervention-20260107210248.png
+excerpt: >-
+  MAT-STEER introduces a gating mechanism for selective token-level
+  intervention, enabling LLMs to be steered across multiple attributes
+  (truthfulness, toxicity, bias) without conflicts — outperforming fine-tuning
+  methods with less than 20% training data.
 ---
 
 ## Motivation
@@ -301,5 +305,5 @@ MAT-STEER is a parameter-efficient inference-time intervention method that dynam
 
 ## References
 
-1. [Multi-Attribute Steering of Language Models via Targeted Intervention (arXiv:2502.12446)](https://arxiv.org/abs/2502.12446)
+1. [Multi-Attribute Steering of Language Models via Targeted Intervention (arXiv:2502.12446v2)](https://arxiv.org/abs/2502.12446v2)
 2. [GitHub: MAT-Steer](https://github.com/duykhuongnguyen/MAT-Steer)

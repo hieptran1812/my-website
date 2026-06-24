@@ -1,14 +1,19 @@
 ---
-title: "Unveiling Concept Attribution in Diffusion Models (Method review)"
-publishDate: "2025-12-08"
-category: "paper-reading"
-subcategory: "AI Interpretability"
-tags: ["diffusion-model"]
-date: "2025-12-08"
-author: "Hiep Tran"
+title: Unveiling Concept Attribution in Diffusion Models (Method review)
+publishDate: '2025-12-08'
+category: paper-reading
+subcategory: AI Interpretability
+tags:
+  - diffusion-model
+date: '2025-12-08'
+author: Hiep Tran
 featured: false
-image: "/imgs/blogs/unveiling-concept-attribution-in-diffusion-models-20251208174653.png"
-excerpt: "This post summarizes a paper that makes diffusion models more interpretable by assigning an attribution score to individual model components, showing whether each component encourages or suppresses a given concept."
+image: >-
+  /imgs/blogs/unveiling-concept-attribution-in-diffusion-models-20251208174653.png
+excerpt: >-
+  This post summarizes a paper that makes diffusion models more interpretable by
+  assigning an attribution score to individual model components, showing whether
+  each component encourages or suppresses a given concept.
 ---
 
 ## TLDR

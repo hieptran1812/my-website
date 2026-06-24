@@ -1,14 +1,21 @@
 ---
-title: "Safety Alignment Should Be Made More Than Just a Few Tokens Deep"
-publishDate: "2025-09-24"
-category: "paper-reading"
-subcategory: "AI Interpretability"
-tags: ["model-interpretation", "model-alignment"]
-date: "2025-09-24"
-author: "Hiep Tran"
+title: Safety Alignment Should Be Made More Than Just a Few Tokens Deep
+publishDate: '2025-09-24'
+category: paper-reading
+subcategory: AI Interpretability
+tags:
+  - model-interpretation
+  - model-alignment
+  - alignment
+  - iclr-2025-oral
+date: '2025-09-24'
+author: Hiep Tran
 featured: false
-image: "/imgs/blogs/safety-alignment-should-be-made-more-than-just-a-few-tokens-deep-20251121005659.png"
-excerpt: "Current safety alignment is often shallow—it mainly affects the model’s behavior in the first few tokens of its output...."
+image: >-
+  /imgs/blogs/safety-alignment-should-be-made-more-than-just-a-few-tokens-deep-20251121005659.png
+excerpt: >-
+  Current safety alignment is often shallow—it mainly affects the model’s
+  behavior in the first few tokens of its output....
 ---
 
 ## Motivation
@@ -202,4 +209,5 @@ Some new ideas after reading this paper:
 
 ## References
 
-1. [SAFETY ALIGNMENT SHOULD BE MADE MORE THAN JUST A FEW TOKENS DEEP](https://openreview.net/pdf?id=6Mxhg9PtDE)
+1. [Safety Alignment Should Be Made More Than Just a Few Tokens Deep](https://openreview.net/forum?id=6Mxhg9PtDE)
+2. [Safety Alignment Should Be Made More Than Just a Few Tokens Deep (arXiv:2406.05946v1)](https://arxiv.org/abs/2406.05946v1)

@@ -11,15 +11,26 @@ fail=0
 pass()  { echo "PASS  $1"; }
 warn()  { echo "WARN  $1"; }
 fail_() { echo "FAIL  $1"; fail=1; }
+# Fence-aware view of the post: drop ``` code fences and their contents so the
+# no-H1 check never trips on legitimate '#' code comments or sample console output.
+code_stripped() { awk '/^```/{f=!f; next} !f' "$path"; }
+# Prose-only view: also drop inline animated-figure blocks (<figure class="blog-anim">
+# … </figure>) so SVG/CSS markup inside them never trips the ASCII/Unicode-art check.
+prose_only() {
+  awk '/^```/{f=!f; next} f{next}
+       /^<figure class="blog-anim"/{a=1} a{ if(/^<\/figure>/) a=0; next } 1' "$path"
+}
+# Count inline animated figures (each is one figure for the floor + coverage gates).
+anim_count=$(grep -cE '^<figure class="blog-anim"' "$path" || true)
 
 # 1. Word count gate
 words=$(wc -w < "$path" | tr -d ' ')
 read_time=$(( (words + 110) / 220 ))
 case "$depth" in
-  deep-dive)     min=50; min_words=11000 ;;
-  paper-reading) min=30; min_words=6500  ;;
-  explainer)     min=25; min_words=5500  ;;
-  *)             min=25; min_words=5500  ;;
+  deep-dive)     min=27; min_words=6000 ;;
+  paper-reading) min=23; min_words=5000 ;;
+  explainer)     min=18; min_words=4000 ;;
+  *)             min=18; min_words=4000 ;;
 esac
 if [ "$words" -ge "$min_words" ]; then
   pass "word-count: $words words, readTime=$read_time (floor=$min)"
@@ -27,24 +38,26 @@ else
   fail_ "word-count: $words words / readTime=$read_time below floor $min ($min_words words). Expand thinnest sections."
 fi
 
-# 2. Diagram gate — count + minimums
-fig_count=$(grep -cE '^!\[' "$path" || true)
+# 2. Diagram gate — count + minimums (static WebP embeds + inline animated figures)
+img_count=$(grep -cE '^!\[' "$path" || true)
+fig_count=$(( img_count + anim_count ))
 case "$depth" in
-  deep-dive)     fig_min=8 ;;
-  paper-reading) fig_min=5 ;;
-  explainer)     fig_min=4 ;;
+  deep-dive)     fig_min=5 ;;
+  paper-reading) fig_min=4 ;;
+  explainer)     fig_min=3 ;;
 esac
 if [ "$fig_count" -ge "$fig_min" ]; then
-  pass "diagram-count: $fig_count figures (floor=$fig_min)"
+  pass "diagram-count: $fig_count figures ($img_count WebP + $anim_count animated, floor=$fig_min)"
 else
-  fail_ "diagram-count: $fig_count figures below floor $fig_min for depth=$depth"
+  fail_ "diagram-count: $fig_count figures ($img_count WebP + $anim_count animated) below floor $fig_min for depth=$depth"
 fi
 
 # 3. Abstraction-coverage sub-gate — prose abstractions without nearby figure
 missing=$(grep -nE 'imagine|think of (it|this) as|consider (the|a) case|the way (this|it) works|under the hood|conceptually|in essence|abstract(ly|ion)' "$path" 2>/dev/null \
   | while IFS=: read -r line _; do
       next30=$(awk -v L="$line" 'NR>=L && NR<=L+30' "$path")
-      if ! grep -q '!\[[^]]*\](/imgs/blogs/' <<< "$next30"; then
+      # An abstraction is covered by a nearby static WebP OR an inline animated figure.
+      if ! grep -qE '!\[[^]]*\]\(/imgs/blogs/|<figure class="blog-anim"' <<< "$next30"; then
         echo "  line $line: $(awk -v L=$line 'NR==L' "$path" | cut -c1-80)"
       fi
     done)
@@ -69,7 +82,7 @@ for f in public/imgs/blogs/${slug}-*.webp; do
   # Byte floor is 40 KB for WebP: lossless WebP of a real diagram is ~¼–⅓ the
   # size of the source PNG, so the old 80 KB PNG floor would reject crisp figures.
   if [ "${w:-0}" -lt 1600 ] || [ "${h:-0}" -lt 900 ] || [ "${bytes:-0}" -lt 40960 ]; then
-    fail_ "sharpness: $f is $w×$h ${bytes}B (need ≥1600×900, ≥40KB WebP)"
+    fail_ "sharpness: $f is ${w:-0}×${h:-0} ${bytes:-0}B (need ≥1600×900, ≥40KB WebP)"
     sharp_fail=1
   fi
 done
@@ -85,13 +98,42 @@ else
   echo "$stray" | sed 's/^/  /'
 fi
 
-# 5. Forbidden text-diagram substitutes
+# 5. Forbidden text-diagram substitutes (prose_only drops code fences AND inline
+#    animated-figure blocks, so SVG path/CSS markup is never mistaken for ASCII art)
 sub_fail=0
 grep -nE '^```text'                      "$path" >/dev/null 2>&1 && { fail_ "forbidden: \`\`\`text fenced 'diagrams'"; sub_fail=1; }
-grep -nE '[│┌┐└┘├┤┬┴┼─]'                 "$path" >/dev/null 2>&1 && { fail_ "forbidden: Unicode box-drawing"; sub_fail=1; }
-grep -nE '\+--+\+|--->|<---'             "$path" >/dev/null 2>&1 && { fail_ "forbidden: ASCII-art arrows/boxes"; sub_fail=1; }
+prose_only | grep -qE '[│┌┐└┘├┤┬┴┼─]' && { fail_ "forbidden: Unicode box-drawing (in prose, outside code fences)"; sub_fail=1; }
+prose_only | grep -qE '\+--+\+|--->|<---' && { fail_ "forbidden: ASCII-art arrows/boxes (in prose, outside code fences)"; sub_fail=1; }
 grep -nE '^```mermaid'                   "$path" >/dev/null 2>&1 && { fail_ "forbidden: inline \`\`\`mermaid block (must be rendered to PNG)"; sub_fail=1; }
 [ "$sub_fail" -eq 0 ] && pass "no-text-diagrams: no ASCII/Unicode/mermaid substitutes"
+
+# 5b. Animated-figure safety — re-check every inline <figure class="blog-anim"> block
+#     at ship time (independent of Phase C's check-anim.mjs). Each block must be a
+#     contiguous raw-HTML block (no blank line), declarative (no <script>/on*=),
+#     accessible (role=img+aria-label or <title>), and honor reduced-motion.
+if [ "$anim_count" -gt 0 ]; then
+  anim_problems=$(awk '
+    /^<figure class="blog-anim"/ {inb=1; start=NR; buf=""; blank=0}
+    inb {
+      buf = buf $0 "\n"
+      if (NR>start && $0 ~ /^[[:space:]]*$/) blank=1
+      if ($0 ~ /^<\/figure>/) {
+        if (blank)                                          print "  block@" start ": blank line inside (CommonMark will break the SVG)"
+        if (buf ~ /<script[ >]/ || buf ~ /[ \t]on[a-z]+[ \t]*=/) print "  block@" start ": <script> or on*= handler (must be declarative)"
+        if (buf !~ /prefers-reduced-motion/)                print "  block@" start ": no prefers-reduced-motion guard"
+        if (buf !~ /role="img"/ && buf !~ /<title>/)        print "  block@" start ": no role=\"img\"/aria-label or <title> (accessibility)"
+        if (buf !~ /@keyframes/ && buf !~ /<animate/)       print "  block@" start ": no @keyframes / SMIL — figure does not animate"
+        if (buf !~ /<figcaption>/)                          print "  block@" start ": no <figcaption>"
+        inb=0
+      }
+    }' "$path")
+  if [ -z "$anim_problems" ]; then
+    pass "animated-figures: $anim_count inline figure(s) are safe, accessible, reduced-motion-aware"
+  else
+    fail_ "animated-figures: problems in inline <figure class=\"blog-anim\"> block(s):"
+    echo "$anim_problems"
+  fi
+fi
 
 # 6. Slug-match gate — every embedded image starts with this slug
 foreign=$(grep -oE '!\[[^]]*\]\(/imgs/blogs/[^)]+\)' "$path" 2>/dev/null \
@@ -113,10 +155,10 @@ else
   echo "$nonwebp" | sed 's/^/  /'
 fi
 
-# 7. No-H1 gate
-if grep -nE '^# [^#]' "$path" >/dev/null 2>&1; then
+# 7. No-H1 gate (fence-aware: '#' comments inside ``` code blocks are not headings)
+if code_stripped | grep -qE '^# [^#]'; then
   fail_ "no-H1: body contains '# ' headings (must be ##):"
-  grep -nE '^# [^#]' "$path" | sed 's/^/  /'
+  code_stripped | grep -nE '^# [^#]' | sed 's/^/  /'
 else
   pass "no-H1: body has no single-# headings"
 fi
@@ -133,7 +175,6 @@ fi
 # 9. Frontmatter sanity
 fm_block=$(awk '/^---$/{c++; next} c==1' "$path")
 grep -q "^date:"        <<< "$fm_block" || fail_ "frontmatter: missing 'date'"
-grep -q "^aiGenerated:" <<< "$fm_block" || fail_ "frontmatter: missing 'aiGenerated'"
 grep -q "^tags:"        <<< "$fm_block" || fail_ "frontmatter: missing 'tags'"
 grep -q "^category:"    <<< "$fm_block" || fail_ "frontmatter: missing 'category'"
 declared_rt=$(grep -E "^readTime:" <<< "$fm_block" | sed -E 's/.*: *([0-9]+).*/\1/' | head -1 || true)

@@ -1,14 +1,19 @@
 ---
-title: "One Token to Fool LLM-as-a-Judge (The idea)"
-publishDate: "2025-10-24"
-category: "paper-reading"
-subcategory: "AI Interpretability"
-tags: ["model-interpretation", "model-alignment"]
-date: "2025-10-24"
-author: "Hiep Tran"
+title: One Token to Fool LLM-as-a-Judge (The idea)
+publishDate: '2025-10-24'
+category: paper-reading
+subcategory: AI Interpretability
+tags:
+  - model-interpretation
+  - model-alignment
+date: '2025-10-24'
+author: Hiep Tran
 featured: false
-image: "/imgs/blogs/one-token-to-fool-llm-as-a-judge-20251024114249.png"
-excerpt: "The researchers discovered that LLM judges can be fooled by superficial cues, such as reasoning openers (“Solution:”, “Let’s think step by step”) or even non-word symbols (like “:”)..."
+image: /imgs/blogs/one-token-to-fool-llm-as-a-judge-20251024114249.png
+excerpt: >-
+  The researchers discovered that LLM judges can be fooled by superficial cues,
+  such as reasoning openers (“Solution:”, “Let’s think step by step”) or even
+  non-word symbols (like “:”)...
 ---
 
 ![](/imgs/blogs/one-token-to-fool-llm-as-a-judge-20251027100808.png)
