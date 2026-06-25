@@ -12773,6 +12773,39 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/database-migrations-in-the-delivery-pipeline-1.png": {
+    "width": 1792,
+    "height": 1201,
+    "cover": true
+  },
+  "/imgs/blogs/database-migrations-in-the-delivery-pipeline-2.png": {
+    "width": 1792,
+    "height": 1202
+  },
+  "/imgs/blogs/database-migrations-in-the-delivery-pipeline-3.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/database-migrations-in-the-delivery-pipeline-4.png": {
+    "width": 1792,
+    "height": 961
+  },
+  "/imgs/blogs/database-migrations-in-the-delivery-pipeline-5.png": {
+    "width": 1792,
+    "height": 1282
+  },
+  "/imgs/blogs/database-migrations-in-the-delivery-pipeline-6.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/database-migrations-in-the-delivery-pipeline-7.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/database-migrations-in-the-delivery-pipeline-8.png": {
+    "width": 1792,
+    "height": 1200
+  },
   "/imgs/blogs/dataframes-at-speed-pandas-pitfalls-polars-and-arrow-1.png": {
     "width": 1792,
     "height": 1260,
@@ -15483,6 +15516,39 @@
     "width": 1792,
     "height": 1266
   },
+  "/imgs/blogs/dora-metrics-measuring-delivery-performance-1.png": {
+    "width": 1792,
+    "height": 1165,
+    "cover": true
+  },
+  "/imgs/blogs/dora-metrics-measuring-delivery-performance-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/dora-metrics-measuring-delivery-performance-3.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/dora-metrics-measuring-delivery-performance-4.png": {
+    "width": 1792,
+    "height": 1220
+  },
+  "/imgs/blogs/dora-metrics-measuring-delivery-performance-5.png": {
+    "width": 1792,
+    "height": 923
+  },
+  "/imgs/blogs/dora-metrics-measuring-delivery-performance-6.png": {
+    "width": 1792,
+    "height": 940
+  },
+  "/imgs/blogs/dora-metrics-measuring-delivery-performance-7.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/dora-metrics-measuring-delivery-performance-8.png": {
+    "width": 1792,
+    "height": 1155
+  },
   "/imgs/blogs/dpo-01-rlhf-vs-dpo.png": {
     "width": 1120,
     "height": 700
@@ -17774,6 +17840,39 @@
   "/imgs/blogs/fear-and-the-safe-haven-trade-how-gold-behaves-in-a-crisis-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/feature-flags-decoupling-deploy-from-release-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/feature-flags-decoupling-deploy-from-release-2.png": {
+    "width": 1792,
+    "height": 1213
+  },
+  "/imgs/blogs/feature-flags-decoupling-deploy-from-release-3.png": {
+    "width": 1792,
+    "height": 1299
+  },
+  "/imgs/blogs/feature-flags-decoupling-deploy-from-release-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/feature-flags-decoupling-deploy-from-release-5.png": {
+    "width": 1792,
+    "height": 888
+  },
+  "/imgs/blogs/feature-flags-decoupling-deploy-from-release-6.png": {
+    "width": 1792,
+    "height": 940
+  },
+  "/imgs/blogs/feature-flags-decoupling-deploy-from-release-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/feature-flags-decoupling-deploy-from-release-8.png": {
+    "width": 1792,
+    "height": 1169
   },
   "/imgs/blogs/fed-speak-minutes-and-the-blackout-period-1.png": {
     "width": 1792,
@@ -34434,6 +34533,39 @@
     "width": 1792,
     "height": 1194
   },
+  "/imgs/blogs/pipeline-observability-and-the-flaky-pipeline-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/pipeline-observability-and-the-flaky-pipeline-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/pipeline-observability-and-the-flaky-pipeline-3.png": {
+    "width": 1792,
+    "height": 1279
+  },
+  "/imgs/blogs/pipeline-observability-and-the-flaky-pipeline-4.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/pipeline-observability-and-the-flaky-pipeline-5.png": {
+    "width": 1792,
+    "height": 936
+  },
+  "/imgs/blogs/pipeline-observability-and-the-flaky-pipeline-6.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/pipeline-observability-and-the-flaky-pipeline-7.png": {
+    "width": 1792,
+    "height": 1233
+  },
+  "/imgs/blogs/pipeline-observability-and-the-flaky-pipeline-8.png": {
+    "width": 1792,
+    "height": 1201
+  },
   "/imgs/blogs/platinum-and-palladium-the-autocatalyst-metals-1.png": {
     "width": 1792,
     "height": 915,
@@ -39372,6 +39504,39 @@
   "/imgs/blogs/roll-yield-and-why-long-only-commodity-etfs-bleed-7.png": {
     "width": 1792,
     "height": 962
+  },
+  "/imgs/blogs/rollbacks-and-recovering-a-bad-deploy-1.png": {
+    "width": 1792,
+    "height": 787,
+    "cover": true
+  },
+  "/imgs/blogs/rollbacks-and-recovering-a-bad-deploy-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/rollbacks-and-recovering-a-bad-deploy-3.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/rollbacks-and-recovering-a-bad-deploy-4.png": {
+    "width": 1792,
+    "height": 900
+  },
+  "/imgs/blogs/rollbacks-and-recovering-a-bad-deploy-5.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/rollbacks-and-recovering-a-bad-deploy-6.png": {
+    "width": 1792,
+    "height": 736
+  },
+  "/imgs/blogs/rollbacks-and-recovering-a-bad-deploy-7.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/rollbacks-and-recovering-a-bad-deploy-8.png": {
+    "width": 1792,
+    "height": 1212
   },
   "/imgs/blogs/rolling-correlation-and-why-the-window-matters-1.png": {
     "width": 1792,
