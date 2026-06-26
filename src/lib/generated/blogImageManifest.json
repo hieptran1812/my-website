@@ -4256,6 +4256,56 @@
     "width": 1792,
     "height": 1218
   },
+  "/imgs/blogs/brexit-the-complete-market-timeline-from-referendum-to-trade-deal-1.png": {
+    "width": 1792,
+    "height": 1011,
+    "cover": true
+  },
+  "/imgs/blogs/brexit-the-complete-market-timeline-from-referendum-to-trade-deal-2.png": {
+    "width": 1792,
+    "height": 1010
+  },
+  "/imgs/blogs/brexit-the-complete-market-timeline-from-referendum-to-trade-deal-3.png": {
+    "width": 1792,
+    "height": 820
+  },
+  "/imgs/blogs/brexit-the-complete-market-timeline-from-referendum-to-trade-deal-4.png": {
+    "width": 1792,
+    "height": 1010
+  },
+  "/imgs/blogs/brexit-the-complete-market-timeline-from-referendum-to-trade-deal-5.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/brexit-the-complete-market-timeline-from-referendum-to-trade-deal-6.png": {
+    "width": 1792,
+    "height": 1010
+  },
+  "/imgs/blogs/brexit-the-complete-market-timeline-from-referendum-to-trade-deal-7.png": {
+    "width": 1792,
+    "height": 924
+  },
+  "/imgs/blogs/brics-and-the-alternative-payment-system-gamble-1.png": {
+    "width": 1792,
+    "height": 807,
+    "cover": true
+  },
+  "/imgs/blogs/brics-and-the-alternative-payment-system-gamble-3.png": {
+    "width": 1792,
+    "height": 843
+  },
+  "/imgs/blogs/brics-and-the-alternative-payment-system-gamble-4.png": {
+    "width": 1792,
+    "height": 1275
+  },
+  "/imgs/blogs/brics-and-the-alternative-payment-system-gamble-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/brics-and-the-alternative-payment-system-gamble-7.png": {
+    "width": 1792,
+    "height": 731
+  },
   "/imgs/blogs/broken-neural-scaling-laws-1.png": {
     "width": 1792,
     "height": 1175,
@@ -6058,6 +6108,35 @@
   "/imgs/blogs/capital-controls-and-the-legal-limits-on-money-flows-8.png": {
     "width": 1792,
     "height": 1278
+  },
+  "/imgs/blogs/capital-controls-as-a-crisis-response-1.png": {
+    "width": 1792,
+    "height": 786,
+    "cover": true
+  },
+  "/imgs/blogs/capital-controls-as-a-crisis-response-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/capital-controls-as-a-crisis-response-3.png": {
+    "width": 1792,
+    "height": 1415
+  },
+  "/imgs/blogs/capital-controls-as-a-crisis-response-4.png": {
+    "width": 1792,
+    "height": 932
+  },
+  "/imgs/blogs/capital-controls-as-a-crisis-response-5.png": {
+    "width": 1792,
+    "height": 1427
+  },
+  "/imgs/blogs/capital-controls-as-a-crisis-response-6.png": {
+    "width": 1792,
+    "height": 766
+  },
+  "/imgs/blogs/capital-controls-as-a-crisis-response-7.png": {
+    "width": 1738,
+    "height": 843
   },
   "/imgs/blogs/capital-flows-and-the-dornbusch-overshoot-1.png": {
     "width": 1602,
@@ -9066,6 +9145,35 @@
     "width": 1792,
     "height": 872
   },
+  "/imgs/blogs/coalition-governments-policy-paralysis-and-credit-spreads-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/coalition-governments-policy-paralysis-and-credit-spreads-2.png": {
+    "width": 1792,
+    "height": 990
+  },
+  "/imgs/blogs/coalition-governments-policy-paralysis-and-credit-spreads-3.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/coalition-governments-policy-paralysis-and-credit-spreads-4.png": {
+    "width": 1792,
+    "height": 1335
+  },
+  "/imgs/blogs/coalition-governments-policy-paralysis-and-credit-spreads-5.png": {
+    "width": 1792,
+    "height": 819
+  },
+  "/imgs/blogs/coalition-governments-policy-paralysis-and-credit-spreads-6.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/coalition-governments-policy-paralysis-and-credit-spreads-7.png": {
+    "width": 1792,
+    "height": 818
+  },
   "/imgs/blogs/coding-interview-quant-data-structures-algorithms-1.png": {
     "width": 1737,
     "height": 1445,
@@ -9776,6 +9884,35 @@
   "/imgs/blogs/compare-and-swap-and-building-lock-free-data-structures-8.png": {
     "width": 1792,
     "height": 1428
+  },
+  "/imgs/blogs/competitive-devaluation-when-countries-race-to-the-bottom-1.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/competitive-devaluation-when-countries-race-to-the-bottom-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/competitive-devaluation-when-countries-race-to-the-bottom-3.png": {
+    "width": 1602,
+    "height": 908
+  },
+  "/imgs/blogs/competitive-devaluation-when-countries-race-to-the-bottom-4.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/competitive-devaluation-when-countries-race-to-the-bottom-5.png": {
+    "width": 1792,
+    "height": 1379
+  },
+  "/imgs/blogs/competitive-devaluation-when-countries-race-to-the-bottom-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/competitive-devaluation-when-countries-race-to-the-bottom-7.png": {
+    "width": 1792,
+    "height": 1384
   },
   "/imgs/blogs/concentration-and-position-limits-the-one-trade-that-can-end-you-1.png": {
     "width": 1621,
@@ -12904,6 +13041,39 @@
   "/imgs/blogs/dataframes-at-speed-pandas-pitfalls-polars-and-arrow-8.png": {
     "width": 1792,
     "height": 1158
+  },
+  "/imgs/blogs/dcf-practice-valuing-vcb-hoa-phat-apple-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/dcf-practice-valuing-vcb-hoa-phat-apple-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/dcf-practice-valuing-vcb-hoa-phat-apple-3.png": {
+    "width": 1489,
+    "height": 823
+  },
+  "/imgs/blogs/dcf-practice-valuing-vcb-hoa-phat-apple-4.png": {
+    "width": 1638,
+    "height": 823
+  },
+  "/imgs/blogs/dcf-practice-valuing-vcb-hoa-phat-apple-5.png": {
+    "width": 1489,
+    "height": 823
+  },
+  "/imgs/blogs/dcf-practice-valuing-vcb-hoa-phat-apple-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/dcf-practice-valuing-vcb-hoa-phat-apple-7.png": {
+    "width": 1789,
+    "height": 823
+  },
+  "/imgs/blogs/dcf-practice-valuing-vcb-hoa-phat-apple-8.png": {
+    "width": 1792,
+    "height": 696
   },
   "/imgs/blogs/dcn-and-explicit-feature-crossing-1.png": {
     "width": 1792,
@@ -16426,10 +16596,76 @@
     "width": 1792,
     "height": 1184
   },
+  "/imgs/blogs/emergent-behaviour-and-multi-agent-games-1.png": {
+    "width": 1792,
+    "height": 964,
+    "cover": true
+  },
+  "/imgs/blogs/emergent-behaviour-and-multi-agent-games-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/emergent-behaviour-and-multi-agent-games-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/emergent-behaviour-and-multi-agent-games-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/emergent-behaviour-and-multi-agent-games-5.png": {
+    "width": 1792,
+    "height": 1343
+  },
+  "/imgs/blogs/emergent-behaviour-and-multi-agent-games-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/emergent-behaviour-and-multi-agent-games-7.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/emergent-behaviour-and-multi-agent-games-8.png": {
+    "width": 1792,
+    "height": 715
+  },
   "/imgs/blogs/emerging-market-and-sovereign-debt-yield-with-country-risk-1.png": {
     "width": 1792,
     "height": 1241,
     "cover": true
+  },
+  "/imgs/blogs/emerging-market-currency-crises-triggered-by-geopolitics-1.png": {
+    "width": 1792,
+    "height": 1096,
+    "cover": true
+  },
+  "/imgs/blogs/emerging-market-currency-crises-triggered-by-geopolitics-2.png": {
+    "width": 1792,
+    "height": 740
+  },
+  "/imgs/blogs/emerging-market-currency-crises-triggered-by-geopolitics-3.png": {
+    "width": 1792,
+    "height": 740
+  },
+  "/imgs/blogs/emerging-market-currency-crises-triggered-by-geopolitics-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/emerging-market-currency-crises-triggered-by-geopolitics-5.png": {
+    "width": 1792,
+    "height": 740
+  },
+  "/imgs/blogs/emerging-market-currency-crises-triggered-by-geopolitics-6.png": {
+    "width": 1792,
+    "height": 1362
+  },
+  "/imgs/blogs/emerging-market-currency-crises-triggered-by-geopolitics-7.png": {
+    "width": 1792,
+    "height": 741
+  },
+  "/imgs/blogs/emerging-market-currency-crises-triggered-by-geopolitics-8.png": {
+    "width": 1792,
+    "height": 1192
   },
   "/imgs/blogs/emerging-market-political-risk-turkey-argentina-brazil-case-studies-1.png": {
     "width": 1784,
@@ -20076,6 +20312,35 @@
   "/imgs/blogs/fx-forwards-and-swaps-the-real-workhorses-of-the-market-8.png": {
     "width": 1619,
     "height": 914
+  },
+  "/imgs/blogs/fx-intervention-when-central-banks-fight-the-market-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/fx-intervention-when-central-banks-fight-the-market-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/fx-intervention-when-central-banks-fight-the-market-3.png": {
+    "width": 1792,
+    "height": 871
+  },
+  "/imgs/blogs/fx-intervention-when-central-banks-fight-the-market-4.png": {
+    "width": 1792,
+    "height": 1448
+  },
+  "/imgs/blogs/fx-intervention-when-central-banks-fight-the-market-5.png": {
+    "width": 1792,
+    "height": 888
+  },
+  "/imgs/blogs/fx-intervention-when-central-banks-fight-the-market-6.png": {
+    "width": 1792,
+    "height": 990
+  },
+  "/imgs/blogs/fx-intervention-when-central-banks-fight-the-market-7.png": {
+    "width": 1792,
+    "height": 886
   },
   "/imgs/blogs/fx-options-and-the-volatility-smile-1.png": {
     "width": 1602,
@@ -27993,6 +28258,39 @@
     "width": 1792,
     "height": 970
   },
+  "/imgs/blogs/lng-rerouting-how-europe-replaced-russian-gas-in-18-months-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/lng-rerouting-how-europe-replaced-russian-gas-in-18-months-2.png": {
+    "width": 1792,
+    "height": 888
+  },
+  "/imgs/blogs/lng-rerouting-how-europe-replaced-russian-gas-in-18-months-3.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/lng-rerouting-how-europe-replaced-russian-gas-in-18-months-4.png": {
+    "width": 1792,
+    "height": 997
+  },
+  "/imgs/blogs/lng-rerouting-how-europe-replaced-russian-gas-in-18-months-5.png": {
+    "width": 1792,
+    "height": 1320
+  },
+  "/imgs/blogs/lng-rerouting-how-europe-replaced-russian-gas-in-18-months-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/lng-rerouting-how-europe-replaced-russian-gas-in-18-months-7.png": {
+    "width": 1730,
+    "height": 1200
+  },
+  "/imgs/blogs/lng-rerouting-how-europe-replaced-russian-gas-in-18-months-8.png": {
+    "width": 1792,
+    "height": 1266
+  },
   "/imgs/blogs/loan-pricing-cost-of-funds-risk-premium-and-the-capital-charge-1.png": {
     "width": 1792,
     "height": 1264,
@@ -28594,6 +28892,39 @@
   "/imgs/blogs/macroprudential-and-regulatory-policy-8.png": {
     "width": 1792,
     "height": 1376
+  },
+  "/imgs/blogs/maddpg-centralised-training-decentralised-execution-1.png": {
+    "width": 1792,
+    "height": 1194,
+    "cover": true
+  },
+  "/imgs/blogs/maddpg-centralised-training-decentralised-execution-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/maddpg-centralised-training-decentralised-execution-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/maddpg-centralised-training-decentralised-execution-4.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/maddpg-centralised-training-decentralised-execution-5.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/maddpg-centralised-training-decentralised-execution-6.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/maddpg-centralised-training-decentralised-execution-7.png": {
+    "width": 1792,
+    "height": 968
+  },
+  "/imgs/blogs/maddpg-centralised-training-decentralised-execution-8.png": {
+    "width": 1792,
+    "height": 1201
   },
   "/imgs/blogs/madoff-ponzi-scheme-1.png": {
     "width": 1792,
@@ -29286,6 +29617,39 @@
   "/imgs/blogs/markov-decision-processes-8.png": {
     "width": 1792,
     "height": 1249
+  },
+  "/imgs/blogs/marl-applications-auctions-traffic-robotics-1.png": {
+    "width": 1792,
+    "height": 1258,
+    "cover": true
+  },
+  "/imgs/blogs/marl-applications-auctions-traffic-robotics-2.png": {
+    "width": 1792,
+    "height": 997
+  },
+  "/imgs/blogs/marl-applications-auctions-traffic-robotics-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/marl-applications-auctions-traffic-robotics-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/marl-applications-auctions-traffic-robotics-5.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/marl-applications-auctions-traffic-robotics-6.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/marl-applications-auctions-traffic-robotics-7.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/marl-applications-auctions-traffic-robotics-8.png": {
+    "width": 1792,
+    "height": 1194
   },
   "/imgs/blogs/martingales-risk-neutral-measure-math-for-quants-1.png": {
     "width": 1792,
@@ -31647,6 +32011,39 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/multi-agent-rl-fundamentals-1.png": {
+    "width": 1792,
+    "height": 852,
+    "cover": true
+  },
+  "/imgs/blogs/multi-agent-rl-fundamentals-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/multi-agent-rl-fundamentals-3.png": {
+    "width": 1792,
+    "height": 1268
+  },
+  "/imgs/blogs/multi-agent-rl-fundamentals-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/multi-agent-rl-fundamentals-5.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/multi-agent-rl-fundamentals-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/multi-agent-rl-fundamentals-7.png": {
+    "width": 1792,
+    "height": 964
+  },
+  "/imgs/blogs/multi-agent-rl-fundamentals-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/multi-attribute-steering-of-language-models-via-targeted-intervention-20260107210248.png": {
     "width": 1246,
     "height": 850,
@@ -32217,6 +32614,39 @@
     "width": 1514,
     "height": 697
   },
+  "/imgs/blogs/nash-equilibria-and-game-theory-for-marl-1.png": {
+    "width": 1792,
+    "height": 1371,
+    "cover": true
+  },
+  "/imgs/blogs/nash-equilibria-and-game-theory-for-marl-2.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/nash-equilibria-and-game-theory-for-marl-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/nash-equilibria-and-game-theory-for-marl-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/nash-equilibria-and-game-theory-for-marl-5.png": {
+    "width": 1792,
+    "height": 1003
+  },
+  "/imgs/blogs/nash-equilibria-and-game-theory-for-marl-6.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/nash-equilibria-and-game-theory-for-marl-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/nash-equilibria-and-game-theory-for-marl-8.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/nash-equilibrium-best-response-and-the-price-as-a-truce-1.png": {
     "width": 1792,
     "height": 1229,
@@ -32724,6 +33154,34 @@
   "/imgs/blogs/non-performing-loans-and-the-workout-process-9.png": {
     "width": 1792,
     "height": 487
+  },
+  "/imgs/blogs/nord-stream-sabotage-and-the-european-energy-repricing-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/nord-stream-sabotage-and-the-european-energy-repricing-3.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/nord-stream-sabotage-and-the-european-energy-repricing-4.png": {
+    "width": 1786,
+    "height": 881
+  },
+  "/imgs/blogs/nord-stream-sabotage-and-the-european-energy-repricing-5.png": {
+    "width": 1792,
+    "height": 869
+  },
+  "/imgs/blogs/nord-stream-sabotage-and-the-european-energy-repricing-6.png": {
+    "width": 1635,
+    "height": 880
+  },
+  "/imgs/blogs/nord-stream-sabotage-and-the-european-energy-repricing-7.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/nord-stream-sabotage-and-the-european-energy-repricing-8.png": {
+    "width": 1786,
+    "height": 881
   },
   "/imgs/blogs/normalizing-flows-and-change-of-variables-1.png": {
     "width": 1792,
@@ -33671,6 +34129,39 @@
   "/imgs/blogs/opec-plus-and-the-supply-curve-the-cartel-that-sets-the-floor-7.png": {
     "width": 1792,
     "height": 1212
+  },
+  "/imgs/blogs/opec-plus-as-a-political-actor-production-cuts-and-market-power-1.png": {
+    "width": 1602,
+    "height": 913,
+    "cover": true
+  },
+  "/imgs/blogs/opec-plus-as-a-political-actor-production-cuts-and-market-power-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/opec-plus-as-a-political-actor-production-cuts-and-market-power-3.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/opec-plus-as-a-political-actor-production-cuts-and-market-power-4.png": {
+    "width": 1600,
+    "height": 730
+  },
+  "/imgs/blogs/opec-plus-as-a-political-actor-production-cuts-and-market-power-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/opec-plus-as-a-political-actor-production-cuts-and-market-power-6.png": {
+    "width": 1792,
+    "height": 983
+  },
+  "/imgs/blogs/opec-plus-as-a-political-actor-production-cuts-and-market-power-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/opec-plus-as-a-political-actor-production-cuts-and-market-power-8.png": {
+    "width": 1602,
+    "height": 913
   },
   "/imgs/blogs/open-banking-apis-banking-as-a-service-and-embedded-finance-1.png": {
     "width": 1792,
@@ -37292,6 +37783,35 @@
     "width": 1299,
     "height": 816,
     "cover": true
+  },
+  "/imgs/blogs/rare-earths-and-critical-minerals-chinas-geopolitical-leverage-1.png": {
+    "width": 1792,
+    "height": 869,
+    "cover": true
+  },
+  "/imgs/blogs/rare-earths-and-critical-minerals-chinas-geopolitical-leverage-2.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/rare-earths-and-critical-minerals-chinas-geopolitical-leverage-3.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/rare-earths-and-critical-minerals-chinas-geopolitical-leverage-4.png": {
+    "width": 1792,
+    "height": 820
+  },
+  "/imgs/blogs/rare-earths-and-critical-minerals-chinas-geopolitical-leverage-5.png": {
+    "width": 1482,
+    "height": 880
+  },
+  "/imgs/blogs/rare-earths-and-critical-minerals-chinas-geopolitical-leverage-6.png": {
+    "width": 1485,
+    "height": 878
+  },
+  "/imgs/blogs/rare-earths-and-critical-minerals-chinas-geopolitical-leverage-7.png": {
+    "width": 1792,
+    "height": 1265
   },
   "/imgs/blogs/rate-limiting-quotas-and-abuse-protection-1.png": {
     "width": 1792,
@@ -45538,6 +46058,39 @@
     "width": 1792,
     "height": 836
   },
+  "/imgs/blogs/terminal-value-sensitivity-assumptions-dcf-1.png": {
+    "width": 1343,
+    "height": 897,
+    "cover": true
+  },
+  "/imgs/blogs/terminal-value-sensitivity-assumptions-dcf-2.png": {
+    "width": 1600,
+    "height": 1600
+  },
+  "/imgs/blogs/terminal-value-sensitivity-assumptions-dcf-3.png": {
+    "width": 1491,
+    "height": 970
+  },
+  "/imgs/blogs/terminal-value-sensitivity-assumptions-dcf-4.png": {
+    "width": 1600,
+    "height": 1600
+  },
+  "/imgs/blogs/terminal-value-sensitivity-assumptions-dcf-5.png": {
+    "width": 1492,
+    "height": 822
+  },
+  "/imgs/blogs/terminal-value-sensitivity-assumptions-dcf-6.png": {
+    "width": 1600,
+    "height": 1600
+  },
+  "/imgs/blogs/terminal-value-sensitivity-assumptions-dcf-7.png": {
+    "width": 1640,
+    "height": 970
+  },
+  "/imgs/blogs/terminal-value-sensitivity-assumptions-dcf-8.png": {
+    "width": 1600,
+    "height": 1600
+  },
   "/imgs/blogs/terminal-value-the-part-that-dominates-1.png": {
     "width": 1792,
     "height": 1158,
@@ -49532,6 +50085,35 @@
     "width": 1666,
     "height": 914
   },
+  "/imgs/blogs/the-green-energy-race-as-geopolitical-strategy-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/the-green-energy-race-as-geopolitical-strategy-2.png": {
+    "width": 1792,
+    "height": 1306
+  },
+  "/imgs/blogs/the-green-energy-race-as-geopolitical-strategy-3.png": {
+    "width": 1745,
+    "height": 847
+  },
+  "/imgs/blogs/the-green-energy-race-as-geopolitical-strategy-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-green-energy-race-as-geopolitical-strategy-5.png": {
+    "width": 1594,
+    "height": 847
+  },
+  "/imgs/blogs/the-green-energy-race-as-geopolitical-strategy-6.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/the-green-energy-race-as-geopolitical-strategy-7.png": {
+    "width": 1595,
+    "height": 847
+  },
   "/imgs/blogs/the-hft-latency-arms-race-a-prisoners-dilemma-at-light-speed-1.png": {
     "width": 1792,
     "height": 1200,
@@ -51217,6 +51799,35 @@
   "/imgs/blogs/the-oil-value-chain-from-wellhead-to-gas-pump-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/the-oil-weapon-when-energy-becomes-foreign-policy-1.png": {
+    "width": 1792,
+    "height": 1318,
+    "cover": true
+  },
+  "/imgs/blogs/the-oil-weapon-when-energy-becomes-foreign-policy-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-oil-weapon-when-energy-becomes-foreign-policy-3.png": {
+    "width": 1792,
+    "height": 1330
+  },
+  "/imgs/blogs/the-oil-weapon-when-energy-becomes-foreign-policy-5.png": {
+    "width": 1792,
+    "height": 1001
+  },
+  "/imgs/blogs/the-oil-weapon-when-energy-becomes-foreign-policy-6.png": {
+    "width": 1792,
+    "height": 1183
+  },
+  "/imgs/blogs/the-oil-weapon-when-energy-becomes-foreign-policy-7.png": {
+    "width": 1792,
+    "height": 1185
+  },
+  "/imgs/blogs/the-oil-weapon-when-energy-becomes-foreign-policy-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/the-onchain-tooling-landscape-1.png": {
     "width": 1792,
@@ -53228,6 +53839,27 @@
   "/imgs/blogs/the-winners-curse-in-ipos-treasury-auctions-and-mints-7.png": {
     "width": 1792,
     "height": 1210
+  },
+  "/imgs/blogs/the-yen-carry-trade-and-geopolitical-stress-events-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/the-yen-carry-trade-and-geopolitical-stress-events-3.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/the-yen-carry-trade-and-geopolitical-stress-events-4.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/the-yen-carry-trade-and-geopolitical-stress-events-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-yen-carry-trade-and-geopolitical-stress-events-7.png": {
+    "width": 1792,
+    "height": 786
   },
   "/imgs/blogs/the-yield-curve-as-a-growth-signal-and-its-asset-correlation-1.png": {
     "width": 1792,
@@ -56109,6 +56741,35 @@
     "width": 1792,
     "height": 1164
   },
+  "/imgs/blogs/vietnam-as-a-supply-chain-rerouting-destination-fdi-and-exports-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/vietnam-as-a-supply-chain-rerouting-destination-fdi-and-exports-2.png": {
+    "width": 1779,
+    "height": 880
+  },
+  "/imgs/blogs/vietnam-as-a-supply-chain-rerouting-destination-fdi-and-exports-3.png": {
+    "width": 1632,
+    "height": 730
+  },
+  "/imgs/blogs/vietnam-as-a-supply-chain-rerouting-destination-fdi-and-exports-4.png": {
+    "width": 1792,
+    "height": 1323
+  },
+  "/imgs/blogs/vietnam-as-a-supply-chain-rerouting-destination-fdi-and-exports-5.png": {
+    "width": 1792,
+    "height": 682
+  },
+  "/imgs/blogs/vietnam-as-a-supply-chain-rerouting-destination-fdi-and-exports-6.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/vietnam-as-a-supply-chain-rerouting-destination-fdi-and-exports-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/vietnam-events-sbv-vn-cpi-and-how-vn-index-reacts-1.png": {
     "width": 1792,
     "height": 1121,
@@ -56443,6 +57104,35 @@
   "/imgs/blogs/vietnams-regulatory-reform-and-upgrade-catalysts-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/vietnams-strategic-positioning-friend-to-all-enemy-to-none-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/vietnams-strategic-positioning-friend-to-all-enemy-to-none-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/vietnams-strategic-positioning-friend-to-all-enemy-to-none-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/vietnams-strategic-positioning-friend-to-all-enemy-to-none-4.png": {
+    "width": 1621,
+    "height": 914
+  },
+  "/imgs/blogs/vietnams-strategic-positioning-friend-to-all-enemy-to-none-5.png": {
+    "width": 1631,
+    "height": 914
+  },
+  "/imgs/blogs/vietnams-strategic-positioning-friend-to-all-enemy-to-none-6.png": {
+    "width": 1792,
+    "height": 1320
+  },
+  "/imgs/blogs/vietnams-strategic-positioning-friend-to-all-enemy-to-none-7.png": {
+    "width": 1792,
+    "height": 939
   },
   "/imgs/blogs/vllm-01-paged-attention.png": {
     "width": 1528,
