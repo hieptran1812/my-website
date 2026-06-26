@@ -10315,6 +10315,39 @@
     "width": 1792,
     "height": 1155
   },
+  "/imgs/blogs/constitutional-ai-and-rlaif-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/constitutional-ai-and-rlaif-2.png": {
+    "width": 1792,
+    "height": 658
+  },
+  "/imgs/blogs/constitutional-ai-and-rlaif-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/constitutional-ai-and-rlaif-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/constitutional-ai-and-rlaif-5.png": {
+    "width": 1792,
+    "height": 1290
+  },
+  "/imgs/blogs/constitutional-ai-and-rlaif-6.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/constitutional-ai-and-rlaif-7.png": {
+    "width": 1792,
+    "height": 739
+  },
+  "/imgs/blogs/constitutional-ai-and-rlaif-8.png": {
+    "width": 1792,
+    "height": 1211
+  },
   "/imgs/blogs/construction-materials-sector-vietnam-public-investment-1.png": {
     "width": 1792,
     "height": 820,
@@ -15863,6 +15896,39 @@
   "/imgs/blogs/dpo-03-pipeline.png": {
     "width": 1792,
     "height": 406
+  },
+  "/imgs/blogs/dpo-direct-preference-optimization-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/dpo-direct-preference-optimization-2.png": {
+    "width": 1792,
+    "height": 923
+  },
+  "/imgs/blogs/dpo-direct-preference-optimization-3.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/dpo-direct-preference-optimization-4.png": {
+    "width": 1792,
+    "height": 731
+  },
+  "/imgs/blogs/dpo-direct-preference-optimization-5.png": {
+    "width": 1792,
+    "height": 1369
+  },
+  "/imgs/blogs/dpo-direct-preference-optimization-6.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/dpo-direct-preference-optimization-7.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/dpo-direct-preference-optimization-8.png": {
+    "width": 1792,
+    "height": 1201
   },
   "/imgs/blogs/dqn-improvements-double-dueling-per-1.png": {
     "width": 1792,
@@ -22075,6 +22141,39 @@
   "/imgs/blogs/grpo-03-reward.png": {
     "width": 1270,
     "height": 306
+  },
+  "/imgs/blogs/grpo-group-relative-policy-optimization-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/grpo-group-relative-policy-optimization-2.png": {
+    "width": 1792,
+    "height": 1063
+  },
+  "/imgs/blogs/grpo-group-relative-policy-optimization-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/grpo-group-relative-policy-optimization-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/grpo-group-relative-policy-optimization-5.png": {
+    "width": 1792,
+    "height": 1295
+  },
+  "/imgs/blogs/grpo-group-relative-policy-optimization-6.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/grpo-group-relative-policy-optimization-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/grpo-group-relative-policy-optimization-8.png": {
+    "width": 1792,
+    "height": 1201
   },
   "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-1.png": {
     "width": 1792,
@@ -35996,6 +36095,39 @@
     "width": 1792,
     "height": 1137
   },
+  "/imgs/blogs/ppo-for-llm-fine-tuning-1.png": {
+    "width": 1792,
+    "height": 658,
+    "cover": true
+  },
+  "/imgs/blogs/ppo-for-llm-fine-tuning-2.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/ppo-for-llm-fine-tuning-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/ppo-for-llm-fine-tuning-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/ppo-for-llm-fine-tuning-5.png": {
+    "width": 1792,
+    "height": 1336
+  },
+  "/imgs/blogs/ppo-for-llm-fine-tuning-6.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/ppo-for-llm-fine-tuning-7.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/ppo-for-llm-fine-tuning-8.png": {
+    "width": 1792,
+    "height": 1163
+  },
   "/imgs/blogs/precedent-transactions-and-the-control-premium-1.png": {
     "width": 1792,
     "height": 1231,
@@ -39867,6 +39999,39 @@
     "width": 1792,
     "height": 1082
   },
+  "/imgs/blogs/reward-hacking-and-goodharts-law-1.png": {
+    "width": 1792,
+    "height": 802,
+    "cover": true
+  },
+  "/imgs/blogs/reward-hacking-and-goodharts-law-2.png": {
+    "width": 1792,
+    "height": 1261
+  },
+  "/imgs/blogs/reward-hacking-and-goodharts-law-3.png": {
+    "width": 1792,
+    "height": 1265
+  },
+  "/imgs/blogs/reward-hacking-and-goodharts-law-4.png": {
+    "width": 1792,
+    "height": 856
+  },
+  "/imgs/blogs/reward-hacking-and-goodharts-law-5.png": {
+    "width": 1792,
+    "height": 1235
+  },
+  "/imgs/blogs/reward-hacking-and-goodharts-law-6.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/reward-hacking-and-goodharts-law-7.png": {
+    "width": 1792,
+    "height": 686
+  },
+  "/imgs/blogs/reward-hacking-and-goodharts-law-8.png": {
+    "width": 1792,
+    "height": 1154
+  },
   "/imgs/blogs/reward-model-overoptimization-scaling-1.png": {
     "width": 1792,
     "height": 1256,
@@ -39899,6 +40064,39 @@
   "/imgs/blogs/reward-model-overoptimization-scaling-8.png": {
     "width": 1792,
     "height": 1165
+  },
+  "/imgs/blogs/reward-modeling-from-human-preferences-1.png": {
+    "width": 1792,
+    "height": 759,
+    "cover": true
+  },
+  "/imgs/blogs/reward-modeling-from-human-preferences-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/reward-modeling-from-human-preferences-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/reward-modeling-from-human-preferences-4.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/reward-modeling-from-human-preferences-5.png": {
+    "width": 1792,
+    "height": 1339
+  },
+  "/imgs/blogs/reward-modeling-from-human-preferences-6.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/reward-modeling-from-human-preferences-7.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/reward-modeling-from-human-preferences-8.png": {
+    "width": 1792,
+    "height": 1211
   },
   "/imgs/blogs/rho-dividends-and-the-second-order-greeks-vanna-volga-charm-1.png": {
     "width": 1792,
@@ -59532,6 +59730,39 @@
     "width": 1024,
     "height": 1024,
     "cover": true
+  },
+  "/imgs/blogs/why-language-models-need-rlhf-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/why-language-models-need-rlhf-2.png": {
+    "width": 1792,
+    "height": 1232
+  },
+  "/imgs/blogs/why-language-models-need-rlhf-3.png": {
+    "width": 1792,
+    "height": 815
+  },
+  "/imgs/blogs/why-language-models-need-rlhf-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/why-language-models-need-rlhf-5.png": {
+    "width": 1792,
+    "height": 1288
+  },
+  "/imgs/blogs/why-language-models-need-rlhf-6.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/why-language-models-need-rlhf-7.png": {
+    "width": 1792,
+    "height": 1187
+  },
+  "/imgs/blogs/why-language-models-need-rlhf-8.png": {
+    "width": 1792,
+    "height": 1422
   },
   "/imgs/blogs/why-llm-serving-is-different-1.png": {
     "width": 1792,
