@@ -15820,6 +15820,39 @@
     "width": 1792,
     "height": 1210
   },
+  "/imgs/blogs/dyna-q-and-planning-with-a-model-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/dyna-q-and-planning-with-a-model-2.png": {
+    "width": 1792,
+    "height": 1202
+  },
+  "/imgs/blogs/dyna-q-and-planning-with-a-model-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/dyna-q-and-planning-with-a-model-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/dyna-q-and-planning-with-a-model-5.png": {
+    "width": 1792,
+    "height": 1324
+  },
+  "/imgs/blogs/dyna-q-and-planning-with-a-model-6.png": {
+    "width": 1792,
+    "height": 928
+  },
+  "/imgs/blogs/dyna-q-and-planning-with-a-model-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/dyna-q-and-planning-with-a-model-8.png": {
+    "width": 1792,
+    "height": 1194
+  },
   "/imgs/blogs/dynamic-programming-for-rl-1.png": {
     "width": 1792,
     "height": 1263,
@@ -30741,6 +30774,72 @@
     "width": 1792,
     "height": 1012
   },
+  "/imgs/blogs/model-based-rl-learning-world-models-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/model-based-rl-learning-world-models-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/model-based-rl-learning-world-models-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/model-based-rl-learning-world-models-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/model-based-rl-learning-world-models-5.png": {
+    "width": 1792,
+    "height": 1369
+  },
+  "/imgs/blogs/model-based-rl-learning-world-models-6.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/model-based-rl-learning-world-models-7.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/model-based-rl-learning-world-models-8.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/model-based-vs-model-free-when-to-use-which-1.png": {
+    "width": 1792,
+    "height": 1297,
+    "cover": true
+  },
+  "/imgs/blogs/model-based-vs-model-free-when-to-use-which-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/model-based-vs-model-free-when-to-use-which-3.png": {
+    "width": 1792,
+    "height": 946
+  },
+  "/imgs/blogs/model-based-vs-model-free-when-to-use-which-4.png": {
+    "width": 1792,
+    "height": 1249
+  },
+  "/imgs/blogs/model-based-vs-model-free-when-to-use-which-5.png": {
+    "width": 1792,
+    "height": 943
+  },
+  "/imgs/blogs/model-based-vs-model-free-when-to-use-which-6.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/model-based-vs-model-free-when-to-use-which-7.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/model-based-vs-model-free-when-to-use-which-8.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/model-packaging-and-formats-1.png": {
     "width": 1792,
     "height": 1307,
@@ -31894,6 +31993,39 @@
   "/imgs/blogs/mutual-exclusion-mutexes-and-critical-sections-8.png": {
     "width": 1792,
     "height": 1154
+  },
+  "/imgs/blogs/muzero-mastering-games-without-rules-1.png": {
+    "width": 1792,
+    "height": 1027,
+    "cover": true
+  },
+  "/imgs/blogs/muzero-mastering-games-without-rules-2.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/muzero-mastering-games-without-rules-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/muzero-mastering-games-without-rules-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/muzero-mastering-games-without-rules-5.png": {
+    "width": 1792,
+    "height": 1343
+  },
+  "/imgs/blogs/muzero-mastering-games-without-rules-6.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/muzero-mastering-games-without-rules-7.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/muzero-mastering-games-without-rules-8.png": {
+    "width": 1792,
+    "height": 1021
   },
   "/imgs/blogs/n-m-sparsity-and-sparse-tensor-cores-1.png": {
     "width": 1792,
@@ -58819,6 +58951,39 @@
   "/imgs/blogs/working-capital-and-the-cash-conversion-cycle-7.png": {
     "width": 1792,
     "height": 1117
+  },
+  "/imgs/blogs/world-models-dreamer-planet-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/world-models-dreamer-planet-2.png": {
+    "width": 1792,
+    "height": 942
+  },
+  "/imgs/blogs/world-models-dreamer-planet-3.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/world-models-dreamer-planet-4.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/world-models-dreamer-planet-5.png": {
+    "width": 1792,
+    "height": 957
+  },
+  "/imgs/blogs/world-models-dreamer-planet-6.png": {
+    "width": 1792,
+    "height": 1255
+  },
+  "/imgs/blogs/world-models-dreamer-planet-7.png": {
+    "width": 1792,
+    "height": 1021
+  },
+  "/imgs/blogs/world-models-dreamer-planet-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/worldquant-and-the-alpha-factory-model-1.png": {
     "width": 1792,
