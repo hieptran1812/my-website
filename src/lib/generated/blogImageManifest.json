@@ -588,6 +588,39 @@
     "width": 1792,
     "height": 1169
   },
+  "/imgs/blogs/actor-critic-a2c-a3c-1.png": {
+    "width": 1792,
+    "height": 802,
+    "cover": true
+  },
+  "/imgs/blogs/actor-critic-a2c-a3c-2.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/actor-critic-a2c-a3c-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/actor-critic-a2c-a3c-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/actor-critic-a2c-a3c-5.png": {
+    "width": 1792,
+    "height": 1200
+  },
+  "/imgs/blogs/actor-critic-a2c-a3c-6.png": {
+    "width": 1792,
+    "height": 1368
+  },
+  "/imgs/blogs/actor-critic-a2c-a3c-7.png": {
+    "width": 1792,
+    "height": 939
+  },
+  "/imgs/blogs/actor-critic-a2c-a3c-8.png": {
+    "width": 1792,
+    "height": 1178
+  },
   "/imgs/blogs/adaptive-activation-steering-a-tuning-free-llm-truthfulness-improvement-method-20260204113417.png": {
     "width": 1004,
     "height": 487,
@@ -14534,6 +14567,39 @@
   "/imgs/blogs/detecting-wash-trading-7.png": {
     "width": 1792,
     "height": 1315
+  },
+  "/imgs/blogs/deterministic-policy-gradient-ddpg-td3-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/deterministic-policy-gradient-ddpg-td3-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/deterministic-policy-gradient-ddpg-td3-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/deterministic-policy-gradient-ddpg-td3-4.png": {
+    "width": 1792,
+    "height": 1363
+  },
+  "/imgs/blogs/deterministic-policy-gradient-ddpg-td3-5.png": {
+    "width": 1792,
+    "height": 852
+  },
+  "/imgs/blogs/deterministic-policy-gradient-ddpg-td3-6.png": {
+    "width": 1792,
+    "height": 928
+  },
+  "/imgs/blogs/deterministic-policy-gradient-ddpg-td3-7.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/deterministic-policy-gradient-ddpg-td3-8.png": {
+    "width": 1792,
+    "height": 931
   },
   "/imgs/blogs/dflash-1.png": {
     "width": 1792,
@@ -33151,6 +33217,39 @@
     "width": 1792,
     "height": 1217
   },
+  "/imgs/blogs/on-policy-vs-off-policy-a-practical-guide-1.png": {
+    "width": 1792,
+    "height": 1365,
+    "cover": true
+  },
+  "/imgs/blogs/on-policy-vs-off-policy-a-practical-guide-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/on-policy-vs-off-policy-a-practical-guide-3.png": {
+    "width": 1792,
+    "height": 787
+  },
+  "/imgs/blogs/on-policy-vs-off-policy-a-practical-guide-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/on-policy-vs-off-policy-a-practical-guide-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/on-policy-vs-off-policy-a-practical-guide-6.png": {
+    "width": 1792,
+    "height": 928
+  },
+  "/imgs/blogs/on-policy-vs-off-policy-a-practical-guide-7.png": {
+    "width": 1792,
+    "height": 795
+  },
+  "/imgs/blogs/on-policy-vs-off-policy-a-practical-guide-8.png": {
+    "width": 1792,
+    "height": 766
+  },
   "/imgs/blogs/onchain-alerts-and-monitoring-bots-1.png": {
     "width": 1792,
     "height": 843,
@@ -35815,6 +35914,39 @@
   "/imgs/blogs/prosody-emotion-and-expressive-speech-8.png": {
     "width": 1792,
     "height": 1331
+  },
+  "/imgs/blogs/proximal-policy-optimization-ppo-1.png": {
+    "width": 1792,
+    "height": 802,
+    "cover": true
+  },
+  "/imgs/blogs/proximal-policy-optimization-ppo-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/proximal-policy-optimization-ppo-3.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/proximal-policy-optimization-ppo-4.png": {
+    "width": 1792,
+    "height": 1377
+  },
+  "/imgs/blogs/proximal-policy-optimization-ppo-5.png": {
+    "width": 1792,
+    "height": 939
+  },
+  "/imgs/blogs/proximal-policy-optimization-ppo-6.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/proximal-policy-optimization-ppo-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/proximal-policy-optimization-ppo-8.png": {
+    "width": 1792,
+    "height": 856
   },
   "/imgs/blogs/pruning-fundamentals-1.png": {
     "width": 1792,
@@ -42644,6 +42776,39 @@
   "/imgs/blogs/smuggling-the-gray-market-and-the-gold-dollar-fx-triangle-in-vietnam-7.png": {
     "width": 1792,
     "height": 1136
+  },
+  "/imgs/blogs/soft-actor-critic-sac-1.png": {
+    "width": 1792,
+    "height": 1133,
+    "cover": true
+  },
+  "/imgs/blogs/soft-actor-critic-sac-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/soft-actor-critic-sac-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/soft-actor-critic-sac-4.png": {
+    "width": 1792,
+    "height": 1316
+  },
+  "/imgs/blogs/soft-actor-critic-sac-5.png": {
+    "width": 1792,
+    "height": 931
+  },
+  "/imgs/blogs/soft-actor-critic-sac-6.png": {
+    "width": 1792,
+    "height": 1427
+  },
+  "/imgs/blogs/soft-actor-critic-sac-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/soft-actor-critic-sac-8.png": {
+    "width": 1792,
+    "height": 939
   },
   "/imgs/blogs/softs-coffee-sugar-cocoa-and-cotton-the-tropical-markets-1.png": {
     "width": 1792,
@@ -51108,6 +51273,39 @@
     "height": 715,
     "cover": true
   },
+  "/imgs/blogs/the-policy-gradient-theorem-1.png": {
+    "width": 1792,
+    "height": 830,
+    "cover": true
+  },
+  "/imgs/blogs/the-policy-gradient-theorem-2.png": {
+    "width": 1792,
+    "height": 702
+  },
+  "/imgs/blogs/the-policy-gradient-theorem-3.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/the-policy-gradient-theorem-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-policy-gradient-theorem-5.png": {
+    "width": 1792,
+    "height": 917
+  },
+  "/imgs/blogs/the-policy-gradient-theorem-6.png": {
+    "width": 1792,
+    "height": 1268
+  },
+  "/imgs/blogs/the-policy-gradient-theorem-7.png": {
+    "width": 1792,
+    "height": 1173
+  },
+  "/imgs/blogs/the-policy-gradient-theorem-8.png": {
+    "width": 1792,
+    "height": 941
+  },
   "/imgs/blogs/the-policy-to-asset-playbook-capstone-1.png": {
     "width": 1792,
     "height": 1031,
@@ -54455,6 +54653,39 @@
   "/imgs/blogs/triton-inference-server-deep-dive-8.png": {
     "width": 1792,
     "height": 780
+  },
+  "/imgs/blogs/trust-region-policy-optimization-trpo-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/trust-region-policy-optimization-trpo-2.png": {
+    "width": 1792,
+    "height": 1427
+  },
+  "/imgs/blogs/trust-region-policy-optimization-trpo-3.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/trust-region-policy-optimization-trpo-4.png": {
+    "width": 1792,
+    "height": 1358
+  },
+  "/imgs/blogs/trust-region-policy-optimization-trpo-5.png": {
+    "width": 1792,
+    "height": 924
+  },
+  "/imgs/blogs/trust-region-policy-optimization-trpo-6.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/trust-region-policy-optimization-trpo-7.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/trust-region-policy-optimization-trpo-8.png": {
+    "width": 1792,
+    "height": 1210
   },
   "/imgs/blogs/turboquant-kv-cache-quantization-deep-dive-1.png": {
     "width": 1792,
