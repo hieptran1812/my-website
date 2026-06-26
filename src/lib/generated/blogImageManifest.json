@@ -16431,6 +16431,35 @@
     "height": 1241,
     "cover": true
   },
+  "/imgs/blogs/emerging-market-political-risk-turkey-argentina-brazil-case-studies-1.png": {
+    "width": 1784,
+    "height": 890,
+    "cover": true
+  },
+  "/imgs/blogs/emerging-market-political-risk-turkey-argentina-brazil-case-studies-2.png": {
+    "width": 1784,
+    "height": 810
+  },
+  "/imgs/blogs/emerging-market-political-risk-turkey-argentina-brazil-case-studies-3.png": {
+    "width": 1784,
+    "height": 807
+  },
+  "/imgs/blogs/emerging-market-political-risk-turkey-argentina-brazil-case-studies-4.png": {
+    "width": 1784,
+    "height": 813
+  },
+  "/imgs/blogs/emerging-market-political-risk-turkey-argentina-brazil-case-studies-5.png": {
+    "width": 1634,
+    "height": 732
+  },
+  "/imgs/blogs/emerging-market-political-risk-turkey-argentina-brazil-case-studies-6.png": {
+    "width": 1792,
+    "height": 755
+  },
+  "/imgs/blogs/emerging-market-political-risk-turkey-argentina-brazil-case-studies-7.png": {
+    "width": 1792,
+    "height": 778
+  },
   "/imgs/blogs/encodec-dac-and-the-modern-codec-1.png": {
     "width": 1792,
     "height": 538,
@@ -28813,6 +28842,39 @@
   "/imgs/blogs/mapping-the-consensus-what-does-the-market-already-believe-7.png": {
     "width": 1792,
     "height": 893
+  },
+  "/imgs/blogs/margin-and-the-default-waterfall-how-a-ccp-survives-a-blowup-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/margin-and-the-default-waterfall-how-a-ccp-survives-a-blowup-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/margin-and-the-default-waterfall-how-a-ccp-survives-a-blowup-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/margin-and-the-default-waterfall-how-a-ccp-survives-a-blowup-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/margin-and-the-default-waterfall-how-a-ccp-survives-a-blowup-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/margin-and-the-default-waterfall-how-a-ccp-survives-a-blowup-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/margin-and-the-default-waterfall-how-a-ccp-survives-a-blowup-7.png": {
+    "width": 1792,
+    "height": 1328
+  },
+  "/imgs/blogs/margin-and-the-default-waterfall-how-a-ccp-survives-a-blowup-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/marginal-and-component-var-where-the-risk-actually-lives-1.png": {
     "width": 1734,
@@ -41631,6 +41693,43 @@
     "width": 1632,
     "height": 914
   },
+  "/imgs/blogs/securities-lending-and-repo-the-financing-plumbing-1.png": {
+    "width": 1792,
+    "height": 1242,
+    "cover": true
+  },
+  "/imgs/blogs/securities-lending-and-repo-the-financing-plumbing-2.png": {
+    "width": 1792,
+    "height": 1304
+  },
+  "/imgs/blogs/securities-lending-and-repo-the-financing-plumbing-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/securities-lending-and-repo-the-financing-plumbing-4.png": {
+    "width": 1792,
+    "height": 807
+  },
+  "/imgs/blogs/securities-lending-and-repo-the-financing-plumbing-5.png": {
+    "width": 1342,
+    "height": 519
+  },
+  "/imgs/blogs/securities-lending-and-repo-the-financing-plumbing-6.png": {
+    "width": 1792,
+    "height": 1251
+  },
+  "/imgs/blogs/securities-lending-and-repo-the-financing-plumbing-7.png": {
+    "width": 1032,
+    "height": 568
+  },
+  "/imgs/blogs/securities-lending-and-repo-the-financing-plumbing-8.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/securities-lending-and-repo-the-financing-plumbing-9.png": {
+    "width": 1051,
+    "height": 519
+  },
   "/imgs/blogs/securitization-abs-and-turning-loans-into-bonds-1.png": {
     "width": 1792,
     "height": 1212,
@@ -42242,6 +42341,39 @@
   "/imgs/blogs/setting-slos-that-mean-something-8.png": {
     "width": 1792,
     "height": 886
+  },
+  "/imgs/blogs/settlement-and-custody-who-actually-holds-your-shares-1.png": {
+    "width": 1792,
+    "height": 1266,
+    "cover": true
+  },
+  "/imgs/blogs/settlement-and-custody-who-actually-holds-your-shares-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/settlement-and-custody-who-actually-holds-your-shares-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/settlement-and-custody-who-actually-holds-your-shares-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/settlement-and-custody-who-actually-holds-your-shares-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/settlement-and-custody-who-actually-holds-your-shares-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/settlement-and-custody-who-actually-holds-your-shares-7.png": {
+    "width": 1792,
+    "height": 1069
+  },
+  "/imgs/blogs/settlement-and-custody-who-actually-holds-your-shares-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/settlement-risk-and-cls-how-fx-actually-clears-1.png": {
     "width": 1792,
@@ -47151,6 +47283,39 @@
     "height": 914
   },
   "/imgs/blogs/the-central-bank-game-credibility-commitment-and-dont-fight-the-fed-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-clearinghouse-how-a-ccp-removes-counterparty-risk-1.png": {
+    "width": 1792,
+    "height": 878,
+    "cover": true
+  },
+  "/imgs/blogs/the-clearinghouse-how-a-ccp-removes-counterparty-risk-2.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/the-clearinghouse-how-a-ccp-removes-counterparty-risk-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-clearinghouse-how-a-ccp-removes-counterparty-risk-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-clearinghouse-how-a-ccp-removes-counterparty-risk-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-clearinghouse-how-a-ccp-removes-counterparty-risk-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/the-clearinghouse-how-a-ccp-removes-counterparty-risk-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/the-clearinghouse-how-a-ccp-removes-counterparty-risk-8.png": {
     "width": 1602,
     "height": 914
   },
@@ -56915,6 +57080,39 @@
   "/imgs/blogs/what-correlation-actually-measures-pearson-spearman-beta-7.png": {
     "width": 1792,
     "height": 830
+  },
+  "/imgs/blogs/what-happens-after-the-trade-the-post-trade-lifecycle-1.png": {
+    "width": 1792,
+    "height": 1034,
+    "cover": true
+  },
+  "/imgs/blogs/what-happens-after-the-trade-the-post-trade-lifecycle-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/what-happens-after-the-trade-the-post-trade-lifecycle-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/what-happens-after-the-trade-the-post-trade-lifecycle-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/what-happens-after-the-trade-the-post-trade-lifecycle-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/what-happens-after-the-trade-the-post-trade-lifecycle-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/what-happens-after-the-trade-the-post-trade-lifecycle-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/what-happens-after-the-trade-the-post-trade-lifecycle-8.png": {
+    "width": 1792,
+    "height": 795
   },
   "/imgs/blogs/what-is-a-capital-market-how-money-finds-its-best-use-1.png": {
     "width": 1792,
