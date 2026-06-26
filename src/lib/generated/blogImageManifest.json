@@ -6122,6 +6122,39 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/capstone-the-cicd-playbook-1.png": {
+    "width": 1792,
+    "height": 1218,
+    "cover": true
+  },
+  "/imgs/blogs/capstone-the-cicd-playbook-2.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/capstone-the-cicd-playbook-3.png": {
+    "width": 1792,
+    "height": 1293
+  },
+  "/imgs/blogs/capstone-the-cicd-playbook-4.png": {
+    "width": 1792,
+    "height": 878
+  },
+  "/imgs/blogs/capstone-the-cicd-playbook-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/capstone-the-cicd-playbook-6.png": {
+    "width": 1792,
+    "height": 1214
+  },
+  "/imgs/blogs/capstone-the-cicd-playbook-7.png": {
+    "width": 1792,
+    "height": 1311
+  },
+  "/imgs/blogs/capstone-the-cicd-playbook-8.png": {
+    "width": 1792,
+    "height": 1202
+  },
   "/imgs/blogs/capstone-the-debugging-playbook-1.png": {
     "width": 1792,
     "height": 1264,
@@ -31106,6 +31139,39 @@
     "width": 1792,
     "height": 1194
   },
+  "/imgs/blogs/monorepo-vs-polyrepo-and-scaling-the-pipeline-1.png": {
+    "width": 1792,
+    "height": 1193,
+    "cover": true
+  },
+  "/imgs/blogs/monorepo-vs-polyrepo-and-scaling-the-pipeline-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/monorepo-vs-polyrepo-and-scaling-the-pipeline-3.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/monorepo-vs-polyrepo-and-scaling-the-pipeline-4.png": {
+    "width": 1792,
+    "height": 1220
+  },
+  "/imgs/blogs/monorepo-vs-polyrepo-and-scaling-the-pipeline-5.png": {
+    "width": 1792,
+    "height": 1191
+  },
+  "/imgs/blogs/monorepo-vs-polyrepo-and-scaling-the-pipeline-6.png": {
+    "width": 1792,
+    "height": 948
+  },
+  "/imgs/blogs/monorepo-vs-polyrepo-and-scaling-the-pipeline-7.png": {
+    "width": 1792,
+    "height": 1242
+  },
+  "/imgs/blogs/monorepo-vs-polyrepo-and-scaling-the-pipeline-8.png": {
+    "width": 1792,
+    "height": 1151
+  },
   "/imgs/blogs/monte-carlo-methods-in-rl-1.png": {
     "width": 1792,
     "height": 1212,
@@ -34563,6 +34629,39 @@
     "height": 1233
   },
   "/imgs/blogs/pipeline-observability-and-the-flaky-pipeline-8.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/platform-engineering-and-the-internal-developer-platform-1.png": {
+    "width": 1792,
+    "height": 1165,
+    "cover": true
+  },
+  "/imgs/blogs/platform-engineering-and-the-internal-developer-platform-2.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/platform-engineering-and-the-internal-developer-platform-3.png": {
+    "width": 1792,
+    "height": 1228
+  },
+  "/imgs/blogs/platform-engineering-and-the-internal-developer-platform-4.png": {
+    "width": 1792,
+    "height": 1229
+  },
+  "/imgs/blogs/platform-engineering-and-the-internal-developer-platform-5.png": {
+    "width": 1792,
+    "height": 1165
+  },
+  "/imgs/blogs/platform-engineering-and-the-internal-developer-platform-6.png": {
+    "width": 1792,
+    "height": 895
+  },
+  "/imgs/blogs/platform-engineering-and-the-internal-developer-platform-7.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/platform-engineering-and-the-internal-developer-platform-8.png": {
     "width": 1792,
     "height": 1201
   },
@@ -39855,6 +39954,39 @@
   "/imgs/blogs/runbooks-that-survive-3am-8.png": {
     "width": 1792,
     "height": 1264
+  },
+  "/imgs/blogs/runners-caching-and-the-ci-cost-problem-1.png": {
+    "width": 1792,
+    "height": 1162,
+    "cover": true
+  },
+  "/imgs/blogs/runners-caching-and-the-ci-cost-problem-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/runners-caching-and-the-ci-cost-problem-3.png": {
+    "width": 1792,
+    "height": 1291
+  },
+  "/imgs/blogs/runners-caching-and-the-ci-cost-problem-4.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/runners-caching-and-the-ci-cost-problem-5.png": {
+    "width": 1792,
+    "height": 826
+  },
+  "/imgs/blogs/runners-caching-and-the-ci-cost-problem-6.png": {
+    "width": 1792,
+    "height": 928
+  },
+  "/imgs/blogs/runners-caching-and-the-ci-cost-problem-7.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/runners-caching-and-the-ci-cost-problem-8.png": {
+    "width": 1792,
+    "height": 1212
   },
   "/imgs/blogs/running-llms-locally-llama-cpp-and-gguf-1.png": {
     "width": 1792,
