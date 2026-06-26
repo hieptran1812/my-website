@@ -15543,6 +15543,39 @@
     "width": 1792,
     "height": 1018
   },
+  "/imgs/blogs/dividend-discount-model-gordon-growth-multi-stage-1.png": {
+    "width": 1792,
+    "height": 830,
+    "cover": true
+  },
+  "/imgs/blogs/dividend-discount-model-gordon-growth-multi-stage-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/dividend-discount-model-gordon-growth-multi-stage-3.png": {
+    "width": 958,
+    "height": 636
+  },
+  "/imgs/blogs/dividend-discount-model-gordon-growth-multi-stage-4.png": {
+    "width": 1792,
+    "height": 957
+  },
+  "/imgs/blogs/dividend-discount-model-gordon-growth-multi-stage-5.png": {
+    "width": 1093,
+    "height": 647
+  },
+  "/imgs/blogs/dividend-discount-model-gordon-growth-multi-stage-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/dividend-discount-model-gordon-growth-multi-stage-7.png": {
+    "width": 1093,
+    "height": 659
+  },
+  "/imgs/blogs/dividend-discount-model-gordon-growth-multi-stage-8.png": {
+    "width": 1792,
+    "height": 1210
+  },
   "/imgs/blogs/dividends-vs-buybacks-returning-cash-1.png": {
     "width": 1792,
     "height": 1278,
@@ -19560,6 +19593,39 @@
   "/imgs/blogs/free-cash-flow-fcff-vs-fcfe-7.png": {
     "width": 1792,
     "height": 1211
+  },
+  "/imgs/blogs/free-cash-flow-valuation-fcfe-fcff-dcf-framework-1.png": {
+    "width": 1792,
+    "height": 807,
+    "cover": true
+  },
+  "/imgs/blogs/free-cash-flow-valuation-fcfe-fcff-dcf-framework-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/free-cash-flow-valuation-fcfe-fcff-dcf-framework-3.png": {
+    "width": 786,
+    "height": 493
+  },
+  "/imgs/blogs/free-cash-flow-valuation-fcfe-fcff-dcf-framework-4.png": {
+    "width": 1792,
+    "height": 1015
+  },
+  "/imgs/blogs/free-cash-flow-valuation-fcfe-fcff-dcf-framework-5.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/free-cash-flow-valuation-fcfe-fcff-dcf-framework-6.png": {
+    "width": 893,
+    "height": 482
+  },
+  "/imgs/blogs/free-cash-flow-valuation-fcfe-fcff-dcf-framework-7.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/free-cash-flow-valuation-fcfe-fcff-dcf-framework-8.png": {
+    "width": 993,
+    "height": 590
   },
   "/imgs/blogs/free-threaded-python-and-subinterpreters-the-post-gil-future-1.png": {
     "width": 1792,
