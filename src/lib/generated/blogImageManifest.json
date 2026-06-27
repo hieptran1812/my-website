@@ -119,6 +119,39 @@
     "width": 1792,
     "height": 1266
   },
+  "/imgs/blogs/2008-when-the-securitization-machine-broke-case-study-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/2008-when-the-securitization-machine-broke-case-study-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/2008-when-the-securitization-machine-broke-case-study-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/2008-when-the-securitization-machine-broke-case-study-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/2008-when-the-securitization-machine-broke-case-study-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/2008-when-the-securitization-machine-broke-case-study-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/2008-when-the-securitization-machine-broke-case-study-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/2008-when-the-securitization-machine-broke-case-study-8.png": {
+    "width": 1792,
+    "height": 1359
+  },
   "/imgs/blogs/2015-to-2022-the-franc-the-yen-and-the-em-stress-cycle-1.png": {
     "width": 1580,
     "height": 914,
@@ -519,6 +552,39 @@
   "/imgs/blogs/ab-testing-recommenders-8.png": {
     "width": 1792,
     "height": 1218
+  },
+  "/imgs/blogs/abs-and-mbs-the-mortgage-and-consumer-credit-machine-1.png": {
+    "width": 1792,
+    "height": 1083,
+    "cover": true
+  },
+  "/imgs/blogs/abs-and-mbs-the-mortgage-and-consumer-credit-machine-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/abs-and-mbs-the-mortgage-and-consumer-credit-machine-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/abs-and-mbs-the-mortgage-and-consumer-credit-machine-4.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/abs-and-mbs-the-mortgage-and-consumer-credit-machine-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/abs-and-mbs-the-mortgage-and-consumer-credit-machine-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/abs-and-mbs-the-mortgage-and-consumer-credit-machine-7.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/abs-and-mbs-the-mortgage-and-consumer-credit-machine-8.png": {
+    "width": 1600,
+    "height": 914
   },
   "/imgs/blogs/accruals-vs-cash-why-earnings-are-an-opinion-1.png": {
     "width": 1792,
@@ -8117,6 +8183,39 @@
     "width": 1792,
     "height": 1199
   },
+  "/imgs/blogs/cdos-clos-and-the-tranching-of-tranches-1.png": {
+    "width": 1792,
+    "height": 1193,
+    "cover": true
+  },
+  "/imgs/blogs/cdos-clos-and-the-tranching-of-tranches-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/cdos-clos-and-the-tranching-of-tranches-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cdos-clos-and-the-tranching-of-tranches-4.png": {
+    "width": 1792,
+    "height": 779
+  },
+  "/imgs/blogs/cdos-clos-and-the-tranching-of-tranches-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cdos-clos-and-the-tranching-of-tranches-6.png": {
+    "width": 1792,
+    "height": 1042
+  },
+  "/imgs/blogs/cdos-clos-and-the-tranching-of-tranches-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/cdos-clos-and-the-tranching-of-tranches-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/central-bank-balance-sheet-net-liquidity-reserves-rrp-tga-1.png": {
     "width": 1792,
     "height": 1192,
@@ -11496,6 +11595,39 @@
   "/imgs/blogs/covariance-matrix-linear-algebra-math-for-quants-7.png": {
     "width": 1792,
     "height": 1082
+  },
+  "/imgs/blogs/covered-bonds-abcp-and-the-shadow-funding-chain-1.png": {
+    "width": 1792,
+    "height": 830,
+    "cover": true
+  },
+  "/imgs/blogs/covered-bonds-abcp-and-the-shadow-funding-chain-2.png": {
+    "width": 1792,
+    "height": 1271
+  },
+  "/imgs/blogs/covered-bonds-abcp-and-the-shadow-funding-chain-3.png": {
+    "width": 1792,
+    "height": 913
+  },
+  "/imgs/blogs/covered-bonds-abcp-and-the-shadow-funding-chain-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/covered-bonds-abcp-and-the-shadow-funding-chain-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/covered-bonds-abcp-and-the-shadow-funding-chain-6.png": {
+    "width": 1602,
+    "height": 944
+  },
+  "/imgs/blogs/covered-bonds-abcp-and-the-shadow-funding-chain-7.png": {
+    "width": 1621,
+    "height": 961
+  },
+  "/imgs/blogs/covered-bonds-abcp-and-the-shadow-funding-chain-8.png": {
+    "width": 1792,
+    "height": 954
   },
   "/imgs/blogs/covered-calls-and-the-wheel-selling-premium-on-stock-you-own-1.png": {
     "width": 1654,
@@ -42585,6 +42717,43 @@
   "/imgs/blogs/securitization-abs-and-turning-loans-into-bonds-7.png": {
     "width": 1792,
     "height": 1280
+  },
+  "/imgs/blogs/securitization-from-first-principles-turning-loans-into-bonds-1.png": {
+    "width": 1792,
+    "height": 1054,
+    "cover": true
+  },
+  "/imgs/blogs/securitization-from-first-principles-turning-loans-into-bonds-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/securitization-from-first-principles-turning-loans-into-bonds-3.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/securitization-from-first-principles-turning-loans-into-bonds-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/securitization-from-first-principles-turning-loans-into-bonds-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/securitization-from-first-principles-turning-loans-into-bonds-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/securitization-from-first-principles-turning-loans-into-bonds-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/securitization-from-first-principles-turning-loans-into-bonds-8.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/securitization-from-first-principles-turning-loans-into-bonds-9.png": {
+    "width": 1792,
+    "height": 830
   },
   "/imgs/blogs/securitization-how-banks-turn-loans-into-securities-1.png": {
     "width": 1792,

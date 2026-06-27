@@ -121,7 +121,7 @@ Only link posts you are reasonably sure exist (siblings in this series, or the B
 - [x] Wave 3 (Track C, 6) — SHIPPED+pushed main 2026-06-22
 - [x] Wave 4 (Track D, 5) — SHIPPED+pushed main 2026-06-27 (agents wrote partials before rate-limit; main session finished prose to clear the 6,000-word floor)
 - [x] Wave 5 (Track E, 5) — SHIPPED+pushed main 2026-06-27
-- [ ] Wave 6 (Track F, 5)
+- [x] Wave 6 (Track F, 5) — SHIPPED+pushed main 2026-06-27
 - [ ] Wave 7 (Track G, 4)
 - [ ] Wave 8 (Track H, 4 + capstone)
 Total: 42 posts.
