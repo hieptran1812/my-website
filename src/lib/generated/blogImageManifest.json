@@ -52779,7 +52779,8 @@
   },
   "/imgs/blogs/shared-state-and-coordination-1.png": {
     "width": 1792,
-    "height": 1315
+    "height": 1315,
+    "cover": true
   },
   "/imgs/blogs/shared-state-and-coordination-10.png": {
     "width": 1792,

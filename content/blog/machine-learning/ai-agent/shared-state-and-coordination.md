@@ -54,7 +54,7 @@ Understanding which coordination mechanism to use — and when you need none at 
 
 There are four fundamental patterns for how agents share state. Each makes a different trade-off between coupling, latency, and consistency.
 
-![Four state-sharing patterns showing message-passing, shared-memory, event-bus, and blackboard topologies](shared-state-and-coordination-1.png)
+![Four state-sharing patterns showing message-passing, shared-memory, event-bus, and blackboard topologies](/imgs/blogs/shared-state-and-coordination-1.png)
 
 ### Pattern 1: Message Passing (Point-to-Point)
 
@@ -110,7 +110,7 @@ A specialized form of shared memory where agents cooperatively annotate a shared
 
 Message passing is the oldest coordination primitive and the one most developers reach for first. In LLM-based systems it's often implemented as function calls between agents, or as structured prompts where Agent A passes context to Agent B's system prompt.
 
-![Message passing flow: Agent A formats message, sends to bus, Agent B receives, processes, returns ACK](shared-state-and-coordination-2.png)
+![Message passing flow: Agent A formats message, sends to bus, Agent B receives, processes, returns ACK](/imgs/blogs/shared-state-and-coordination-2.png)
 
 ### Message Schemas
 
@@ -219,7 +219,7 @@ This is why systems with more than 4–6 agents almost always graduate to a shar
 
 Shared memory solves the point-to-point coupling problem. Instead of agents knowing each other's addresses, they all know the address of the store. State flows through the store, not between agents directly.
 
-![Shared memory hierarchy: Agent-local memory, vector store, global KV store in a cache-miss chain](shared-state-and-coordination-3.png)
+![Shared memory hierarchy: Agent-local memory, vector store, global KV store in a cache-miss chain](/imgs/blogs/shared-state-and-coordination-3.png)
 
 ### The Memory Hierarchy
 
@@ -339,7 +339,7 @@ Vector stores are eventually consistent by design — indexing a new embedding t
 
 Conflict resolution is what happens when two agents try to update the same piece of shared state simultaneously. Every multi-agent system has to choose a strategy. There are four main options:
 
-![Conflict resolution strategies matrix: Last-Write-Wins, Merge, Lock, CRDT vs consistency, overhead, complexity, correctness](shared-state-and-coordination-4.png)
+![Conflict resolution strategies matrix: Last-Write-Wins, Merge, Lock, CRDT vs consistency, overhead, complexity, correctness](/imgs/blogs/shared-state-and-coordination-4.png)
 
 ### Last-Write-Wins (LWW)
 
@@ -547,7 +547,7 @@ With vector clocks, when Agent B reads Agent A's value (which carries Agent A's 
 
 Some state transitions need to be atomic — not just in the database sense, but in the logical sense. When an agent claims a task, marks it in-progress, executes it, and marks it complete, those four transitions should look atomic to observers. If another agent reads the state between "in-progress" and "complete", it should not make decisions based on that intermediate state.
 
-![Turn-taking via token ring: Agent 1 holds token, writes state, releases token, Agent 2 acquires token](shared-state-and-coordination-7.png)
+![Turn-taking via token ring: Agent 1 holds token, writes state, releases token, Agent 2 acquires token](/imgs/blogs/shared-state-and-coordination-7.png)
 
 ### Distributed Locks in Practice
 
@@ -637,7 +637,7 @@ async def pass_token(current_holder: str, next_holder: str, store) -> bool:
 
 Message passing and shared memory are both pull-based from the receiver's perspective: an agent decides to check for new messages or read the store. Event-driven coordination inverts this: when state changes, interested agents are notified.
 
-![Event-driven coordination timeline: Agent A emits event, event bus routes to subscribers B and C, both react concurrently](shared-state-and-coordination-6.png)
+![Event-driven coordination timeline: Agent A emits event, event bus routes to subscribers B and C, both react concurrently](/imgs/blogs/shared-state-and-coordination-6.png)
 
 ### Why Event-Driven?
 
@@ -805,7 +805,7 @@ The cost of global state is real: every global write is a coordination point. It
 
 Multi-agent systems fail in ways that are qualitatively different from single-agent systems. A bug might not manifest in any individual agent's logs — it lives in the interaction between agents over shared state.
 
-![Debugging coordination failure pipeline: observe inconsistent output, trace timeline, identify conflicting writes, replay, fix](shared-state-and-coordination-9.png)
+![Debugging coordination failure pipeline: observe inconsistent output, trace timeline, identify conflicting writes, replay, fix](/imgs/blogs/shared-state-and-coordination-9.png)
 
 ### The Coordination Log
 
@@ -1132,7 +1132,7 @@ async def assemble_document(doc_id: str, expected_sections: int, store) -> str:
 
 Coordination isn't free. Every shared state access, every lock acquisition, every event subscription adds latency and complexity. At some point, the coordination overhead exceeds the cost of the inconsistency you're trying to prevent.
 
-![Coordination overhead matrix: pattern vs agent count vs messages per step vs total overhead](shared-state-and-coordination-10.png)
+![Coordination overhead matrix: pattern vs agent count vs messages per step vs total overhead](/imgs/blogs/shared-state-and-coordination-10.png)
 
 ### Measuring Coordination Cost
 
