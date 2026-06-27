@@ -21289,7 +21289,8 @@
   },
   "/imgs/blogs/ev-multiples-evebitda-evsales-enterprise-value-valuation-1.png": {
     "width": 2087,
-    "height": 1455
+    "height": 1455,
+    "cover": true
   },
   "/imgs/blogs/ev-multiples-evebitda-evsales-enterprise-value-valuation-2.png": {
     "width": 2133,
@@ -29571,7 +29572,8 @@
   },
   "/imgs/blogs/implied-volatility-volatility-surface-options-pricing-1.png": {
     "width": 2420,
-    "height": 1107
+    "height": 1107,
+    "cover": true
   },
   "/imgs/blogs/implied-volatility-volatility-surface-options-pricing-2.png": {
     "width": 1445,
@@ -52378,6 +52380,46 @@
     "width": 1792,
     "height": 1278
   },
+  "/imgs/blogs/shared-state-and-coordination-1.png": {
+    "width": 1792,
+    "height": 1315
+  },
+  "/imgs/blogs/shared-state-and-coordination-10.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/shared-state-and-coordination-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/shared-state-and-coordination-3.png": {
+    "width": 1792,
+    "height": 1051
+  },
+  "/imgs/blogs/shared-state-and-coordination-4.png": {
+    "width": 1792,
+    "height": 1279
+  },
+  "/imgs/blogs/shared-state-and-coordination-5.png": {
+    "width": 1792,
+    "height": 1221
+  },
+  "/imgs/blogs/shared-state-and-coordination-6.png": {
+    "width": 1792,
+    "height": 991
+  },
+  "/imgs/blogs/shared-state-and-coordination-7.png": {
+    "width": 1792,
+    "height": 830
+  },
+  "/imgs/blogs/shared-state-and-coordination-8.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/shared-state-and-coordination-9.png": {
+    "width": 1792,
+    "height": 1198
+  },
   "/imgs/blogs/short-rate-models-vasicek-hull-white-1.png": {
     "width": 1792,
     "height": 888,
@@ -53852,7 +53894,8 @@
   },
   "/imgs/blogs/startup-valuation-venture-capital-pre-money-post-money-1.png": {
     "width": 2320,
-    "height": 1075
+    "height": 1075,
+    "cover": true
   },
   "/imgs/blogs/startup-valuation-venture-capital-pre-money-post-money-2.png": {
     "width": 2060,
