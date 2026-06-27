@@ -241,7 +241,7 @@ This validates that the gating function correctly identifies _which_ tokens need
 
 ### Impact on General LLM Capabilities
 
-![](/public/imgs/blogs/multi-attribute-steering-of-language-models-via-targeted-intervention-20260108002300.png)
+![](/imgs/blogs/multi-attribute-steering-of-language-models-via-targeted-intervention-20260108002300.png)
 
 A critical concern with steering methods is whether they degrade the model's general capabilities (e.g., fluency, coherence). The authors evaluate this on TruthfulQA using open-ended generation and measure **BLEU accuracy** (closeness to correct vs. incorrect references).
 

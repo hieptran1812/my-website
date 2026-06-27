@@ -821,6 +821,46 @@
     "width": 1792,
     "height": 652
   },
+  "/imgs/blogs/agent-as-tool-pattern-1.png": {
+    "width": 2228,
+    "height": 988
+  },
+  "/imgs/blogs/agent-as-tool-pattern-10.png": {
+    "width": 2548,
+    "height": 1340
+  },
+  "/imgs/blogs/agent-as-tool-pattern-2.png": {
+    "width": 2171,
+    "height": 1469
+  },
+  "/imgs/blogs/agent-as-tool-pattern-3.png": {
+    "width": 2132,
+    "height": 1441
+  },
+  "/imgs/blogs/agent-as-tool-pattern-4.png": {
+    "width": 2171,
+    "height": 1456
+  },
+  "/imgs/blogs/agent-as-tool-pattern-5.png": {
+    "width": 1882,
+    "height": 1450
+  },
+  "/imgs/blogs/agent-as-tool-pattern-6.png": {
+    "width": 2145,
+    "height": 1289
+  },
+  "/imgs/blogs/agent-as-tool-pattern-7.png": {
+    "width": 2720,
+    "height": 1135
+  },
+  "/imgs/blogs/agent-as-tool-pattern-8.png": {
+    "width": 2070,
+    "height": 1452
+  },
+  "/imgs/blogs/agent-as-tool-pattern-9.png": {
+    "width": 2620,
+    "height": 1137
+  },
   "/imgs/blogs/agent-loop-anatomy-1.png": {
     "width": 2667,
     "height": 1001
@@ -15965,6 +16005,46 @@
   "/imgs/blogs/debasement-debt-and-the-fiscal-story-gold-as-an-anti-currency-8.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/debate-and-critique-multi-agent-1.png": {
+    "width": 2132,
+    "height": 1440
+  },
+  "/imgs/blogs/debate-and-critique-multi-agent-10.png": {
+    "width": 2508,
+    "height": 1419
+  },
+  "/imgs/blogs/debate-and-critique-multi-agent-2.png": {
+    "width": 2640,
+    "height": 1173
+  },
+  "/imgs/blogs/debate-and-critique-multi-agent-3.png": {
+    "width": 2060,
+    "height": 1469
+  },
+  "/imgs/blogs/debate-and-critique-multi-agent-4.png": {
+    "width": 2228,
+    "height": 1448
+  },
+  "/imgs/blogs/debate-and-critique-multi-agent-5.png": {
+    "width": 1973,
+    "height": 1453
+  },
+  "/imgs/blogs/debate-and-critique-multi-agent-6.png": {
+    "width": 2508,
+    "height": 1419
+  },
+  "/imgs/blogs/debate-and-critique-multi-agent-7.png": {
+    "width": 2420,
+    "height": 1107
+  },
+  "/imgs/blogs/debate-and-critique-multi-agent-8.png": {
+    "width": 2000,
+    "height": 1453
+  },
+  "/imgs/blogs/debate-and-critique-multi-agent-9.png": {
+    "width": 2132,
+    "height": 1441
   },
   "/imgs/blogs/debt-vs-equity-the-two-ways-to-raise-capital-1.png": {
     "width": 1792,
@@ -38741,6 +38821,46 @@
     "width": 1792,
     "height": 1163
   },
+  "/imgs/blogs/multi-agent-topologies-1.png": {
+    "width": 2228,
+    "height": 1445
+  },
+  "/imgs/blogs/multi-agent-topologies-10.png": {
+    "width": 2578,
+    "height": 1357
+  },
+  "/imgs/blogs/multi-agent-topologies-2.png": {
+    "width": 2132,
+    "height": 1108
+  },
+  "/imgs/blogs/multi-agent-topologies-3.png": {
+    "width": 2228,
+    "height": 1484
+  },
+  "/imgs/blogs/multi-agent-topologies-4.png": {
+    "width": 2228,
+    "height": 1250
+  },
+  "/imgs/blogs/multi-agent-topologies-5.png": {
+    "width": 2162,
+    "height": 1399
+  },
+  "/imgs/blogs/multi-agent-topologies-6.png": {
+    "width": 2228,
+    "height": 1243
+  },
+  "/imgs/blogs/multi-agent-topologies-7.png": {
+    "width": 2753,
+    "height": 1451
+  },
+  "/imgs/blogs/multi-agent-topologies-8.png": {
+    "width": 2162,
+    "height": 1438
+  },
+  "/imgs/blogs/multi-agent-topologies-9.png": {
+    "width": 2986,
+    "height": 1451
+  },
   "/imgs/blogs/multi-asset-valuation-case-study-complete-guide-1.png": {
     "width": 1792,
     "height": 1211,
@@ -41777,6 +41897,46 @@
   "/imgs/blogs/optiver-and-imc-playbook-the-mental-math-gauntlet-7.png": {
     "width": 1792,
     "height": 1197
+  },
+  "/imgs/blogs/orchestration-frameworks-compared-1.png": {
+    "width": 2160,
+    "height": 1140
+  },
+  "/imgs/blogs/orchestration-frameworks-compared-10.png": {
+    "width": 2196,
+    "height": 1482
+  },
+  "/imgs/blogs/orchestration-frameworks-compared-2.png": {
+    "width": 2260,
+    "height": 1138
+  },
+  "/imgs/blogs/orchestration-frameworks-compared-3.png": {
+    "width": 2227,
+    "height": 1453
+  },
+  "/imgs/blogs/orchestration-frameworks-compared-4.png": {
+    "width": 2620,
+    "height": 1120
+  },
+  "/imgs/blogs/orchestration-frameworks-compared-5.png": {
+    "width": 2003,
+    "height": 1453
+  },
+  "/imgs/blogs/orchestration-frameworks-compared-6.png": {
+    "width": 2145,
+    "height": 1438
+  },
+  "/imgs/blogs/orchestration-frameworks-compared-7.png": {
+    "width": 2588,
+    "height": 1340
+  },
+  "/imgs/blogs/orchestration-frameworks-compared-8.png": {
+    "width": 1952,
+    "height": 1453
+  },
+  "/imgs/blogs/orchestration-frameworks-compared-9.png": {
+    "width": 2060,
+    "height": 1465
   },
   "/imgs/blogs/order-book-simulator-quant-research-1.png": {
     "width": 1792,
@@ -67863,6 +68023,30 @@
     "height": 1167,
     "cover": true
   },
+  "/imgs/blogs/valuing-vietcombank-vcb-pb-ddm-case-study-2.png": {
+    "width": 1173,
+    "height": 539
+  },
+  "/imgs/blogs/valuing-vietcombank-vcb-pb-ddm-case-study-3.png": {
+    "width": 1253,
+    "height": 519
+  },
+  "/imgs/blogs/valuing-vietcombank-vcb-pb-ddm-case-study-4.png": {
+    "width": 2087,
+    "height": 1468
+  },
+  "/imgs/blogs/valuing-vietcombank-vcb-pb-ddm-case-study-5.png": {
+    "width": 1146,
+    "height": 539
+  },
+  "/imgs/blogs/valuing-vietcombank-vcb-pb-ddm-case-study-6.png": {
+    "width": 1442,
+    "height": 578
+  },
+  "/imgs/blogs/valuing-vietcombank-vcb-pb-ddm-case-study-7.png": {
+    "width": 2196,
+    "height": 1483
+  },
   "/imgs/blogs/variant-perception-where-real-edge-comes-from-1.png": {
     "width": 1792,
     "height": 834,
@@ -68475,6 +68659,30 @@
     "width": 2060,
     "height": 1455,
     "cover": true
+  },
+  "/imgs/blogs/vietnam-stock-market-valuation-vnindex-pe-dynamics-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/vietnam-stock-market-valuation-vnindex-pe-dynamics-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/vietnam-stock-market-valuation-vnindex-pe-dynamics-4.png": {
+    "width": 2060,
+    "height": 1469
+  },
+  "/imgs/blogs/vietnam-stock-market-valuation-vnindex-pe-dynamics-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/vietnam-stock-market-valuation-vnindex-pe-dynamics-6.png": {
+    "width": 2608,
+    "height": 1288
+  },
+  "/imgs/blogs/vietnam-stock-market-valuation-vnindex-pe-dynamics-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/vietnamese-rice-and-the-export-ban-dynamics-of-asia-1.png": {
     "width": 1792,

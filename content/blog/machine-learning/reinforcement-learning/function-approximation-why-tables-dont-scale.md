@@ -32,7 +32,7 @@ This is the curse of dimensionality hitting RL head-on, and it is not a hardware
 
 This post is Track C, post 1: the conceptual bridge from the tabular world to the deep RL world. The figure below shows the complete picture — the RL loop where a function approximator has replaced the Q-table, feeding state features through a parameter vector to produce action values that drive policy decisions.
 
-![The RL agent-environment loop with a linear function approximator replacing the Q-table, showing state features flowing through theta to produce Q-values that drive the policy](//imgs/blogs/function-approximation-why-tables-dont-scale-1.png)
+![The RL agent-environment loop with a linear function approximator replacing the Q-table, showing state features flowing through theta to produce Q-values that drive the policy](/imgs/blogs/function-approximation-why-tables-dont-scale-1.png)
 
 By the end of this post you will understand: why Q-tables fail with exact memory calculations, how linear function approximation solves the memory problem, how to derive and implement the semi-gradient TD update from first principles, why three standard supervised-learning assumptions break completely in RL (with worked divergence examples), what bias approximation introduces and how to bound it, and when to stop at linear FA versus reaching for a neural network. We will implement two complete agents in NumPy and PyTorch, watch a CartPole agent cross 475 average return using only 30 parameters, and examine why the same conceptual machinery scales to Atari and language model alignment via RLHF. This post also shows when linear FA is the right production choice — not just an academic stepping stone — and how to diagnose the two distinct types of error that function approximation introduces.
 
@@ -81,7 +81,7 @@ The second critical property: the approximator generalizes. If $\theta$ is updat
 
 The price: approximation error. $\hat{V}(s;\theta)$ for the best possible $\theta$ might still differ from $V^\pi(s)$ because the function class is not rich enough to represent $V^\pi$ exactly. For linear approximators this error is often significant. For neural networks with enough capacity, it is negligible. The art of RL engineering is choosing an approximator whose capacity matches the complexity of the true value function.
 
-![Stack showing memory requirements from a 40-entry toy grid world table through increasing discretizations to the continuous case requiring infinite entries, illustrating exponential memory growth](//imgs/blogs/function-approximation-why-tables-dont-scale-2.png)
+![Stack showing memory requirements from a 40-entry toy grid world table through increasing discretizations to the continuous case requiring infinite entries, illustrating exponential memory growth](/imgs/blogs/function-approximation-why-tables-dont-scale-2.png)
 
 ## 3. Linear function approximation: the first working fix
 
@@ -157,7 +157,7 @@ $$\theta_{t+1} \leftarrow \theta_t + \alpha \delta_t \phi(s_t)$$
 
 Every coordinate of $\theta$ is updated in proportion to the feature's activation at the current state. Features that are zero at state $s_t$ are not updated (no information from this transition about that feature direction). This is the implicit generalization mechanism: update at state $s_t$ immediately changes predictions at all states with nonzero overlap in feature space.
 
-![Before-and-after comparison showing that the tabular Q-table requires one entry per state-action pair causing exponential memory growth, while the parametric function approximator uses a fixed parameter vector of dimension d with generalization to nearby states](//imgs/blogs/function-approximation-why-tables-dont-scale-3.png)
+![Before-and-after comparison showing that the tabular Q-table requires one entry per state-action pair causing exponential memory growth, while the parametric function approximator uses a fixed parameter vector of dimension d with generalization to nearby states](/imgs/blogs/function-approximation-why-tables-dont-scale-3.png)
 
 ## 5. The TD fixed point: convergence theory
 
@@ -207,7 +207,7 @@ For the CartPole polynomial basis, $|S|$ is infinite so this direct approach is 
 
 If you have shipped supervised learning systems, you have strong intuitions about training behavior: loss curves consistently decrease, gradients converge toward a fixed point, mini-batch SGD is stable. These intuitions break in RL with function approximation in three distinct, well-characterized ways. Understanding each failure mode is not academic — it directly explains why naive attempts to apply your deep learning muscle memory to RL produce systems that either oscillate wildly or diverge to catastrophic failure.
 
-![Graph showing three root causes of training instability in RL — non-stationary targets, correlated samples, and bootstrapping — each feeding into training instability, with the solution fixes shown at the bottom](//imgs/blogs/function-approximation-why-tables-dont-scale-7.png)
+![Graph showing three root causes of training instability in RL — non-stationary targets, correlated samples, and bootstrapping — each feeding into training instability, with the solution fixes shown at the bottom](/imgs/blogs/function-approximation-why-tables-dont-scale-7.png)
 
 **Failure Mode 1: Non-stationary targets**
 
@@ -453,7 +453,7 @@ This was achieved with **30 parameters** — $15 \times 2$ (two actions, 15 feat
 
 The TD error trace is a useful diagnostic. A monotonically decreasing mean absolute TD error suggests the approximation is getting more accurate. Stagnation or increase in TD error usually signals a feature design problem (the value function cannot be represented in the current basis) or a learning rate issue.
 
-![Timeline showing semi-gradient TD convergence through five phases from random initialization through early high TD error to slow approximation, near stability, and final convergence at return 487](//imgs/blogs/function-approximation-why-tables-dont-scale-4.png)
+![Timeline showing semi-gradient TD convergence through five phases from random initialization through early high TD error to slow approximation, near stability, and final convergence at return 487](/imgs/blogs/function-approximation-why-tables-dont-scale-4.png)
 
 #### Worked example: tracing a single update through the algebra
 
@@ -647,7 +647,7 @@ def train_dqn_cartpole(
 
 The figure below visualizes the seven-stage cycle of each semi-gradient TD update step.
 
-![Pipeline diagram showing the seven-step semi-gradient TD update cycle: observe state, compute value estimate, take action, observe reward and next state, compute TD target with stop-gradient, compute loss, and update theta](//imgs/blogs/function-approximation-why-tables-dont-scale-6.png)
+![Pipeline diagram showing the seven-step semi-gradient TD update cycle: observe state, compute value estimate, take action, observe reward and next state, compute TD target with stop-gradient, compute loss, and update theta](/imgs/blogs/function-approximation-why-tables-dont-scale-6.png)
 
 The two critical lines implementing semi-gradient:
 
@@ -692,7 +692,7 @@ The SB3 DQN is identical in principle to our handwritten version: semi-gradient 
 
 ## 10. FA method comparison
 
-![Matrix comparing tabular, linear, tile-coding, and neural function approximation across memory, generalization, convergence guarantees, and recommended use cases](//imgs/blogs/function-approximation-why-tables-dont-scale-5.png)
+![Matrix comparing tabular, linear, tile-coding, and neural function approximation across memory, generalization, convergence guarantees, and recommended use cases](/imgs/blogs/function-approximation-why-tables-dont-scale-5.png)
 
 The choice of approximator shapes everything downstream. Here is the full comparison with specific guidance for each regime:
 
@@ -898,7 +898,7 @@ The environment changes over time (non-stationary). For online adaptation where 
 
 You want end-to-end feature learning. Engineering features for a new domain is expensive expert work. When you have sufficient data and compute, neural FA that learns its own features from raw states is more practical than months of manual feature engineering.
 
-![Decision tree for selecting a function approximator starting from state space size, branching on whether good features exist, leading to tabular for small discrete spaces and to linear, tile coding, or neural approximators for larger spaces](//imgs/blogs/function-approximation-why-tables-dont-scale-8.png)
+![Decision tree for selecting a function approximator starting from state space size, branching on whether good features exist, leading to tabular for small discrete spaces and to linear, tile coding, or neural approximators for larger spaces](/imgs/blogs/function-approximation-why-tables-dont-scale-8.png)
 
 ## 14. Case studies
 
