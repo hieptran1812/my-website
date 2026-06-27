@@ -15226,6 +15226,39 @@
     "width": 1792,
     "height": 1174
   },
+  "/imgs/blogs/disclosure-the-prospectus-filings-and-insider-trading-1.png": {
+    "width": 1792,
+    "height": 859,
+    "cover": true
+  },
+  "/imgs/blogs/disclosure-the-prospectus-filings-and-insider-trading-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/disclosure-the-prospectus-filings-and-insider-trading-3.png": {
+    "width": 1792,
+    "height": 1365
+  },
+  "/imgs/blogs/disclosure-the-prospectus-filings-and-insider-trading-4.png": {
+    "width": 1598,
+    "height": 914
+  },
+  "/imgs/blogs/disclosure-the-prospectus-filings-and-insider-trading-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/disclosure-the-prospectus-filings-and-insider-trading-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/disclosure-the-prospectus-filings-and-insider-trading-7.png": {
+    "width": 1792,
+    "height": 476
+  },
+  "/imgs/blogs/disclosure-the-prospectus-filings-and-insider-trading-8.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-1.png": {
     "width": 1792,
     "height": 705,
@@ -21514,6 +21547,39 @@
   "/imgs/blogs/global-liquidity-the-worlds-money-tide-7.png": {
     "width": 1792,
     "height": 748
+  },
+  "/imgs/blogs/global-market-structure-reg-nms-mifid-and-cross-border-1.png": {
+    "width": 1792,
+    "height": 1436,
+    "cover": true
+  },
+  "/imgs/blogs/global-market-structure-reg-nms-mifid-and-cross-border-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/global-market-structure-reg-nms-mifid-and-cross-border-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/global-market-structure-reg-nms-mifid-and-cross-border-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/global-market-structure-reg-nms-mifid-and-cross-border-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/global-market-structure-reg-nms-mifid-and-cross-border-6.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/global-market-structure-reg-nms-mifid-and-cross-border-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/global-market-structure-reg-nms-mifid-and-cross-border-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/gold-and-inflation-the-hedge-that-works-by-the-decade-not-the-month-1.png": {
     "width": 1792,
@@ -29779,6 +29845,39 @@
   "/imgs/blogs/market-data-eda-biases-quant-research-9.png": {
     "width": 1792,
     "height": 1194
+  },
+  "/imgs/blogs/market-integrity-manipulation-spoofing-and-circuit-breakers-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/market-integrity-manipulation-spoofing-and-circuit-breakers-2.png": {
+    "width": 1792,
+    "height": 1428
+  },
+  "/imgs/blogs/market-integrity-manipulation-spoofing-and-circuit-breakers-3.png": {
+    "width": 1792,
+    "height": 953
+  },
+  "/imgs/blogs/market-integrity-manipulation-spoofing-and-circuit-breakers-4.png": {
+    "width": 1792,
+    "height": 1154
+  },
+  "/imgs/blogs/market-integrity-manipulation-spoofing-and-circuit-breakers-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/market-integrity-manipulation-spoofing-and-circuit-breakers-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/market-integrity-manipulation-spoofing-and-circuit-breakers-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/market-integrity-manipulation-spoofing-and-circuit-breakers-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/market-makers-and-high-frequency-trading-1.png": {
     "width": 1792,
@@ -60211,6 +60310,39 @@
     "width": 2060,
     "height": 1469,
     "cover": true
+  },
+  "/imgs/blogs/why-markets-are-regulated-disclosure-and-the-securities-acts-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/why-markets-are-regulated-disclosure-and-the-securities-acts-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/why-markets-are-regulated-disclosure-and-the-securities-acts-3.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/why-markets-are-regulated-disclosure-and-the-securities-acts-4.png": {
+    "width": 1792,
+    "height": 982
+  },
+  "/imgs/blogs/why-markets-are-regulated-disclosure-and-the-securities-acts-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/why-markets-are-regulated-disclosure-and-the-securities-acts-6.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/why-markets-are-regulated-disclosure-and-the-securities-acts-7.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/why-markets-are-regulated-disclosure-and-the-securities-acts-8.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/why-measure-theory-math-for-quants-1.png": {
     "width": 1792,
