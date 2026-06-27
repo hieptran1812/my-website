@@ -17253,6 +17253,11 @@
     "width": 1792,
     "height": 1210
   },
+  "/imgs/blogs/enterprise-value-vs-market-cap-implied-growth-rates-1.png": {
+    "width": 2620,
+    "height": 1137,
+    "cover": true
+  },
   "/imgs/blogs/equities-stocks-owning-a-slice-of-growth-1.png": {
     "width": 1792,
     "height": 1075,
@@ -28133,6 +28138,11 @@
     "width": 1792,
     "height": 1079
   },
+  "/imgs/blogs/leveraged-buyout-lbo-valuation-private-equity-1.png": {
+    "width": 2320,
+    "height": 1075,
+    "cover": true
+  },
   "/imgs/blogs/lightgbm-deep-dive-1.png": {
     "width": 1792,
     "height": 864,
@@ -29797,6 +29807,11 @@
     "width": 1694,
     "height": 1013
   },
+  "/imgs/blogs/market-capitalization-what-it-means-how-it-works-1.png": {
+    "width": 2133,
+    "height": 1131,
+    "cover": true
+  },
   "/imgs/blogs/market-data-eda-biases-quant-research-1.png": {
     "width": 1792,
     "height": 1134,
@@ -30811,6 +30826,11 @@
   "/imgs/blogs/merger-arbitrage-trading-regulatory-deal-risk-8.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/mergers-acquisitions-valuation-synergies-deal-pricing-1.png": {
+    "width": 2154,
+    "height": 1441,
+    "cover": true
   },
   "/imgs/blogs/mergers-and-acquisitions-value-created-or-destroyed-1.png": {
     "width": 1792,
@@ -39134,6 +39154,11 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/real-options-valuation-flexibility-strategic-investments-1.png": {
+    "width": 2104,
+    "height": 1468,
+    "cover": true
+  },
   "/imgs/blogs/real-time-streaming-and-full-duplex-speech-1.png": {
     "width": 1792,
     "height": 1247,
@@ -45913,6 +45938,11 @@
   "/imgs/blogs/subliminal-learning-language-models-transmit-behavioral-traits-via-hidden-signals-in-data-20250805155824.png": {
     "width": 1434,
     "height": 520
+  },
+  "/imgs/blogs/sum-of-parts-valuation-sotp-conglomerates-divisions-1.png": {
+    "width": 2132,
+    "height": 1440,
+    "cover": true
   },
   "/imgs/blogs/sum-of-the-parts-and-asset-based-valuation-1.png": {
     "width": 1792,
@@ -57281,6 +57311,11 @@
   "/imgs/blogs/valuing-a-bank-price-to-book-roe-and-the-warranted-multiple-8.png": {
     "width": 1792,
     "height": 905
+  },
+  "/imgs/blogs/valuing-private-companies-illiquidity-discount-methods-1.png": {
+    "width": 2060,
+    "height": 1469,
+    "cover": true
   },
   "/imgs/blogs/valuing-the-hard-cases-banks-insurers-reits-cyclicals-1.png": {
     "width": 1792,
