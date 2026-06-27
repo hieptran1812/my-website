@@ -19352,6 +19352,39 @@
     "width": 1734,
     "height": 1013
   },
+  "/imgs/blogs/diversity-generalization-domain-randomization-1.png": {
+    "width": 1792,
+    "height": 1212,
+    "cover": true
+  },
+  "/imgs/blogs/diversity-generalization-domain-randomization-2.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/diversity-generalization-domain-randomization-3.png": {
+    "width": 1792,
+    "height": 1206
+  },
+  "/imgs/blogs/diversity-generalization-domain-randomization-4.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/diversity-generalization-domain-randomization-5.png": {
+    "width": 1792,
+    "height": 1239
+  },
+  "/imgs/blogs/diversity-generalization-domain-randomization-6.png": {
+    "width": 1792,
+    "height": 976
+  },
+  "/imgs/blogs/diversity-generalization-domain-randomization-7.png": {
+    "width": 1792,
+    "height": 1192
+  },
+  "/imgs/blogs/diversity-generalization-domain-randomization-8.png": {
+    "width": 1792,
+    "height": 1209
+  },
   "/imgs/blogs/dividend-discount-model-and-shareholder-yield-1.png": {
     "width": 1792,
     "height": 1159,
@@ -20975,6 +21008,39 @@
     "width": 1792,
     "height": 1178
   },
+  "/imgs/blogs/ensemble-rl-epistemic-uncertainty-1.png": {
+    "width": 1792,
+    "height": 760,
+    "cover": true
+  },
+  "/imgs/blogs/ensemble-rl-epistemic-uncertainty-2.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/ensemble-rl-epistemic-uncertainty-3.png": {
+    "width": 1792,
+    "height": 1255
+  },
+  "/imgs/blogs/ensemble-rl-epistemic-uncertainty-4.png": {
+    "width": 1792,
+    "height": 1230
+  },
+  "/imgs/blogs/ensemble-rl-epistemic-uncertainty-5.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/ensemble-rl-epistemic-uncertainty-6.png": {
+    "width": 1792,
+    "height": 966
+  },
+  "/imgs/blogs/ensemble-rl-epistemic-uncertainty-7.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/ensemble-rl-epistemic-uncertainty-8.png": {
+    "width": 1792,
+    "height": 1209
+  },
   "/imgs/blogs/enterprise-value-to-per-share-the-bridge-1.png": {
     "width": 1792,
     "height": 1212,
@@ -22005,6 +22071,39 @@
   "/imgs/blogs/evolutionary-architecture-designing-for-change-9.png": {
     "width": 2132,
     "height": 1108
+  },
+  "/imgs/blogs/evolutionary-strategies-for-rl-1.png": {
+    "width": 1792,
+    "height": 1199,
+    "cover": true
+  },
+  "/imgs/blogs/evolutionary-strategies-for-rl-2.png": {
+    "width": 1792,
+    "height": 1190
+  },
+  "/imgs/blogs/evolutionary-strategies-for-rl-3.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/evolutionary-strategies-for-rl-4.png": {
+    "width": 1792,
+    "height": 1255
+  },
+  "/imgs/blogs/evolutionary-strategies-for-rl-5.png": {
+    "width": 1792,
+    "height": 995
+  },
+  "/imgs/blogs/evolutionary-strategies-for-rl-6.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/evolutionary-strategies-for-rl-7.png": {
+    "width": 1792,
+    "height": 1169
+  },
+  "/imgs/blogs/evolutionary-strategies-for-rl-8.png": {
+    "width": 1792,
+    "height": 1211
   },
   "/imgs/blogs/exactly-once-in-kafka-idempotent-producer-transactions-1.png": {
     "width": 2320,
@@ -30992,6 +31091,39 @@
   "/imgs/blogs/interest-rates-the-price-of-money-master-variable-7.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/intrinsic-motivation-curiosity-driven-rl-1.png": {
+    "width": 1792,
+    "height": 1199,
+    "cover": true
+  },
+  "/imgs/blogs/intrinsic-motivation-curiosity-driven-rl-2.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/intrinsic-motivation-curiosity-driven-rl-3.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/intrinsic-motivation-curiosity-driven-rl-4.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/intrinsic-motivation-curiosity-driven-rl-5.png": {
+    "width": 1792,
+    "height": 973
+  },
+  "/imgs/blogs/intrinsic-motivation-curiosity-driven-rl-6.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/intrinsic-motivation-curiosity-driven-rl-7.png": {
+    "width": 1792,
+    "height": 1203
+  },
+  "/imgs/blogs/intrinsic-motivation-curiosity-driven-rl-8.png": {
+    "width": 1792,
+    "height": 1209
   },
   "/imgs/blogs/investment-grade-vs-high-yield-the-great-divide-1.png": {
     "width": 1792,
@@ -44789,6 +44921,39 @@
     "width": 1792,
     "height": 1266
   },
+  "/imgs/blogs/quality-diversity-algorithms-map-elites-1.png": {
+    "width": 1792,
+    "height": 780,
+    "cover": true
+  },
+  "/imgs/blogs/quality-diversity-algorithms-map-elites-2.png": {
+    "width": 1792,
+    "height": 1199
+  },
+  "/imgs/blogs/quality-diversity-algorithms-map-elites-3.png": {
+    "width": 1792,
+    "height": 994
+  },
+  "/imgs/blogs/quality-diversity-algorithms-map-elites-4.png": {
+    "width": 1792,
+    "height": 1260
+  },
+  "/imgs/blogs/quality-diversity-algorithms-map-elites-5.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/quality-diversity-algorithms-map-elites-6.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/quality-diversity-algorithms-map-elites-7.png": {
+    "width": 1792,
+    "height": 1118
+  },
+  "/imgs/blogs/quality-diversity-algorithms-map-elites-8.png": {
+    "width": 1792,
+    "height": 1211
+  },
   "/imgs/blogs/quality-of-earnings-accruals-one-offs-red-flags-1.png": {
     "width": 1792,
     "height": 1278,
@@ -53043,6 +53208,39 @@
   "/imgs/blogs/skew-kurtosis-and-the-higher-moments-the-shape-of-your-losses-7.png": {
     "width": 1703,
     "height": 1013
+  },
+  "/imgs/blogs/skill-discovery-diayn-dads-aps-1.png": {
+    "width": 1792,
+    "height": 692,
+    "cover": true
+  },
+  "/imgs/blogs/skill-discovery-diayn-dads-aps-2.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/skill-discovery-diayn-dads-aps-3.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/skill-discovery-diayn-dads-aps-4.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/skill-discovery-diayn-dads-aps-5.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/skill-discovery-diayn-dads-aps-6.png": {
+    "width": 1792,
+    "height": 954
+  },
+  "/imgs/blogs/skill-discovery-diayn-dads-aps-7.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/skill-discovery-diayn-dads-aps-8.png": {
+    "width": 1792,
+    "height": 1211
   },
   "/imgs/blogs/sli-slo-sla-the-three-numbers-that-matter-1.png": {
     "width": 1792,
