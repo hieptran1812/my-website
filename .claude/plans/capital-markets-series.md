@@ -123,5 +123,5 @@ Only link posts you are reasonably sure exist (siblings in this series, or the B
 - [x] Wave 5 (Track E, 5) — SHIPPED+pushed main 2026-06-27
 - [x] Wave 6 (Track F, 5) — SHIPPED+pushed main 2026-06-27
 - [x] Wave 7 (Track G, 4) — SHIPPED+pushed main 2026-06-27
-- [ ] Wave 8 (Track H, 4 + capstone)
-Total: 42 posts.
+- [x] Wave 8 (Track H, 4 + capstone) — SHIPPED+pushed main 2026-06-27
+Total: 42 posts. SERIES COMPLETE — all 8 waves shipped to main.
