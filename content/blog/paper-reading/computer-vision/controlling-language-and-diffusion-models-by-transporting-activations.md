@@ -226,7 +226,7 @@ In that setup, $\lambda$ is unbounded and depends on the choice of $\beta$, whic
 
 ### Generalization of prior inference-time interventions work
 
-![](imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20251001150609.png)
+![](/imgs/blogs/controlling-language-and-diffusion-models-by-transporting-activations-20251001150609.png)
 
 Table above compares different inference-time intervention methods from the literature. The main point the authors make is that **all these methods can actually be seen as special cases of Linear-AcT**, because they are all just forms of linear transport.
 

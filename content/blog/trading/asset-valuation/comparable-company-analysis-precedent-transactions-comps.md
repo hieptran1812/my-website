@@ -27,7 +27,7 @@ That question is not answered by a DCF. It is answered by comparables. Trading c
 
 This post is a craftsperson's manual for building both analyses from scratch. We will construct a comps table, argue through peer selection methodology, decode which multiples belong in which industries, compute a control premium anatomy step by step, and assemble the result into a football field that a board will actually believe. Every number will be real-looking and traceable. By the end, you will know not just how to build the table but what it means when the table disagrees with your DCF.
 
-![Valuation triangle showing DCF, trading comps, and precedent transactions](comparable-company-analysis-precedent-transactions-comps-1.png)
+![Valuation triangle showing DCF, trading comps, and precedent transactions](/imgs/blogs/comparable-company-analysis-precedent-transactions-comps-1.png)
 
 ---
 
@@ -75,7 +75,7 @@ The starting point is every publicly traded company in roughly the same business
 
 **The final set: 6–12 companies.** More than 12 and you are diluting the peer quality to include businesses that are only tangentially comparable. Fewer than 6 and your median multiple is too sensitive to outliers. The ideal set is 8–10 genuinely comparable businesses where you can defend every inclusion.
 
-![Peer selection funnel from universe to final comp set](comparable-company-analysis-precedent-transactions-comps-2.png)
+![Peer selection funnel from universe to final comp set](/imgs/blogs/comparable-company-analysis-precedent-transactions-comps-2.png)
 
 ### Step 2: Gather and normalize the financials
 
@@ -167,7 +167,7 @@ Typical EV/EBITDA ranges by sector (2024 data, Damodaran):
 - Industrials: 8–12x
 - Energy (E&P, midstream): 5–9x
 
-![EV/EBITDA multiple ranges by sector](comparable-company-analysis-precedent-transactions-comps-5.png)
+![EV/EBITDA multiple ranges by sector](/imgs/blogs/comparable-company-analysis-precedent-transactions-comps-5.png)
 
 ### EV/Revenue — for high-growth or early-stage businesses
 
@@ -217,7 +217,7 @@ A target company's stock traded at \$45.00 per share on a "clean" unaffected bas
 
 Why does this matter? Because when you build a precedent transactions table to benchmark deal pricing, you must use the unaffected price as the denominator — otherwise, you are comparing apples to oranges, and your "average control premium" will be systematically understated.
 
-![Control premium anatomy from stock price to deal price](comparable-company-analysis-precedent-transactions-comps-4.png)
+![Control premium anatomy from stock price to deal price](/imgs/blogs/comparable-company-analysis-precedent-transactions-comps-4.png)
 
 ### Building the precedent transactions table
 
@@ -238,7 +238,7 @@ One of the most important analytical skills in comps work is understanding that 
 
 The relationship is predictable and testable: **higher EBITDA margins command higher multiples.** The intuition is that a high-margin business has more cash per dollar of revenue available for reinvestment or return to shareholders, making each dollar of revenue more valuable.
 
-![EV/EBITDA vs EBITDA margin scatter plot for tech peer group](comparable-company-analysis-precedent-transactions-comps-6.png)
+![EV/EBITDA vs EBITDA margin scatter plot for tech peer group](/imgs/blogs/comparable-company-analysis-precedent-transactions-comps-6.png)
 
 This scatter plot illustrates a well-established empirical pattern: in any sector, there is a roughly linear relationship between EBITDA margin and EV/EBITDA. The slope of the regression line — about 0.6x multiple per 1% improvement in margin, in a typical tech peer set — tells you how much the market rewards incremental profitability.
 
@@ -272,7 +272,7 @@ Each bar represents one method's implied per-share value range. The key methods 
 
 A vertical line marks the current stock price (for a fairness opinion) or the proposed deal price (for a board presentation on whether to accept an offer).
 
-![Football field valuation ranges by method](comparable-company-analysis-precedent-transactions-comps-3.png)
+![Football field valuation ranges by method](/imgs/blogs/comparable-company-analysis-precedent-transactions-comps-3.png)
 
 ### Reading the football field
 
@@ -302,7 +302,7 @@ The 20–40% control premium is one of the most cited statistics in M&A — but 
 
 The mathematical floor of the premium is zero (a distressed seller with no alternatives). The practical ceiling is around 60–70% before the deal's economics become difficult for the acquirer to justify to its own shareholders (the acquirer is destroying value for the deal to create value for the target's shareholders).
 
-![M&A control premium distribution histogram](comparable-company-analysis-precedent-transactions-comps-7.png)
+![M&A control premium distribution histogram](/imgs/blogs/comparable-company-analysis-precedent-transactions-comps-7.png)
 
 The empirical distribution is right-skewed: most deals cluster at 20–40%, with a long tail of expensive "strategic" acquisitions. The median is around 28–30%. The 25th percentile (cheap deals, often distressed sellers or friendly negotiations) is around 15–18%. The 75th percentile (competitive auctions, premium strategic assets) is around 40–48%.
 

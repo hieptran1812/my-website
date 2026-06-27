@@ -30,7 +30,7 @@ The P/E ratio, which works perfectly well for comparing two lightly leveraged gr
 
 This post is a deep dive into Enterprise Value multiples: what they measure, how they are constructed, when each variant belongs in your toolkit, and how to build the kind of comps table that bankers and buy-side analysts actually use. We start from the ground up — defining Enterprise Value — and work forward through each major multiple with real numbers, sector data, and explicit worked examples.
 
-![Enterprise Value components stacked diagram](figures/ev-multiples-evebitda-evsales-enterprise-value-valuation-1.png)
+![Enterprise Value components stacked diagram](/imgs/blogs/ev-multiples-evebitda-evsales-enterprise-value-valuation-1.png)
 
 ---
 
@@ -90,7 +90,7 @@ If Salesforce's LTM (last twelve months) EBITDA is approximately \$10.5 billion,
 
 EBITDA — Earnings Before Interest, Taxes, Depreciation, and Amortization — is a first approximation of the cash a business generates from its core operations before financing decisions and accounting conventions alter the picture.
 
-![Revenue to EBITDA income statement bridge](figures/ev-multiples-evebitda-evsales-enterprise-value-valuation-2.png)
+![Revenue to EBITDA income statement bridge](/imgs/blogs/ev-multiples-evebitda-evsales-enterprise-value-valuation-2.png)
 
 Adding back depreciation and amortization (D&A) removes a non-cash charge from net income. This matters because two otherwise identical businesses might report very different net income depending solely on their D&A policy — an asset-heavy industrial company carries large depreciation charges, while a software company with minimal fixed assets carries almost none.
 
@@ -135,7 +135,7 @@ Using Damodaran's January 2025 sector WACC estimates, and assuming a long-run ta
 
 The model is simplified — actual traded multiples embed expectations about margin improvement, capital return programs, and business quality — but the directional logic is powerful: utilities trade at higher EV/EBITDA than energy not because they are faster-growing but because their lower WACC (regulated, monopoly-like cash flows) means the market demands a lower return.
 
-![Implied EV/EBITDA by sector using WACC model](figures/ev-multiples-evebitda-evsales-enterprise-value-valuation-5.png)
+![Implied EV/EBITDA by sector using WACC model](/imgs/blogs/ev-multiples-evebitda-evsales-enterprise-value-valuation-5.png)
 
 ### LTM vs NTM EBITDA
 
@@ -196,7 +196,7 @@ In SaaS, the "Rule of 40" (revenue growth rate % + EBITDA margin % should exceed
 
 The Rule of 40 is a heuristic, not a law — but it captures the intuition that high EV/Sales multiples are only defensible if a company is either growing very fast or generating excellent margins (or both).
 
-![EV/Sales vs revenue growth scatter plot for selected companies](figures/ev-multiples-evebitda-evsales-enterprise-value-valuation-6.png)
+![EV/Sales vs revenue growth scatter plot for selected companies](/imgs/blogs/ev-multiples-evebitda-evsales-enterprise-value-valuation-6.png)
 
 #### Worked example:
 
@@ -337,7 +337,7 @@ A practical bridge: many practitioners use **EV/(EBITDA − Capex)** as a middle
 
 Looking at the S&P 500 aggregately, EV/EBITDA has historically been far less volatile than P/E — which is exactly what you would expect from a metric that strips out leverage effects and tax policy changes.
 
-![S&P 500 P/E vs EV/EBITDA over time 2010-2024](figures/ev-multiples-evebitda-evsales-enterprise-value-valuation-7.png)
+![S&P 500 P/E vs EV/EBITDA over time 2010-2024](/imgs/blogs/ev-multiples-evebitda-evsales-enterprise-value-valuation-7.png)
 
 During the 2020 COVID shock, P/E spiked to 38× because net income collapsed while share prices partially held (on recovery expectations). EV/EBITDA rose to only ~15× because EBITDA held better than net income and the market's EV calculation barely moved. This is the capital-structure-neutrality benefit in action — EV/EBITDA gave a cleaner read on the market's view of business-level earnings during the crisis.
 
@@ -347,7 +347,7 @@ During the 2020 COVID shock, P/E spiked to 38× because net income collapsed whi
 
 The comps table (trading comparables or "public comps") is the primary deliverable of relative valuation. Here is the practitioner's workflow:
 
-![Comps table from raw inputs to normalized output](figures/ev-multiples-evebitda-evsales-enterprise-value-valuation-4.png)
+![Comps table from raw inputs to normalized output](/imgs/blogs/ev-multiples-evebitda-evsales-enterprise-value-valuation-4.png)
 
 ### Step 1: Define the peer group
 
@@ -453,7 +453,7 @@ This illustrates why LBO buyers care intensely about EBITDA growth rates and why
 
 The decision matrix below maps company profiles to appropriate multiples.
 
-![EV multiple selection decision matrix by company profile](figures/ev-multiples-evebitda-evsales-enterprise-value-valuation-3.png)
+![EV multiple selection decision matrix by company profile](/imgs/blogs/ev-multiples-evebitda-evsales-enterprise-value-valuation-3.png)
 
 **High growth, pre-profit companies (SaaS, biotech clinical stage, D2C build-out)**: EV/Sales is the primary anchor. EV/Gross Profit if gross margins differ materially across peers.
 

@@ -27,7 +27,7 @@ In recent years, large vision-language models (LVLMs) have advanced significantl
 
 ## Research contributions
 
-![](../../../public/imgs/blogs/qwen2-vl-enhancing-vision-language-models-perception-of-the-world-at-any-resolution-20251023142432.png)
+![](/imgs/blogs/qwen2-vl-enhancing-vision-language-models-perception-of-the-world-at-any-resolution-20251023142432.png)
 
 To overcome these challenges, the paper introduces Qwen2-VL, a new family of large vision-language models that significantly enhances multimodal understanding and efficiency. The key innovations and contributions are as follows:
 

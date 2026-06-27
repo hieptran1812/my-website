@@ -28,7 +28,7 @@ This is the essence of implied volatility. While historical (realized) volatilit
 
 We will build on the mechanics of the [Black-Scholes model](/blog/trading/asset-valuation/black-scholes-model-greeks-options-valuation) and the [binomial options pricing framework](/blog/trading/asset-valuation/options-pricing-fundamentals-binomial-model) covered earlier in this series. If you have not read those posts yet, the BSM formula summary in the next section will orient you, but deeper intuition comes from that groundwork.
 
-![BSM inversion pipeline from option price to implied volatility](../../../public/images/blog/implied-volatility-volatility-surface-options-pricing/implied-volatility-volatility-surface-options-pricing-1.png)
+![BSM inversion pipeline from option price to implied volatility](/imgs/blogs/implied-volatility-volatility-surface-options-pricing-1.png)
 
 ---
 
@@ -153,7 +153,7 @@ Reality disagrees. Loudly.
 
 When you extract IV from all options on a given stock or index for a single expiry date and plot it against strike price (or moneyness = K/S), you almost never get a flat line. Instead, you get a curved shape. In equity index options, you get a pronounced downward slope called the **volatility skew** or (less formally) the **volatility smirk**: out-of-the-money puts trade at significantly higher IV than at-the-money or out-of-the-money calls. In FX options, you typically get a **volatility smile**: both OTM puts and OTM calls trade at elevated IV relative to ATM, producing a U-shaped or smile-shaped curve.
 
-![Volatility smile SPX equity skew vs USDJPY FX smile by moneyness](../../../public/images/blog/implied-volatility-volatility-surface-options-pricing/implied-volatility-volatility-surface-options-pricing-2.png)
+![Volatility smile SPX equity skew vs USDJPY FX smile by moneyness](/imgs/blogs/implied-volatility-volatility-surface-options-pricing-2.png)
 
 ### Why the skew exists in equity indices
 
@@ -178,7 +178,7 @@ A 25-delta put is a put option whose delta is about -0.25, which for an SPX 1-mo
 
 ### The three shapes
 
-![Three shapes of volatility curve smile skew smirk grid](../../../public/images/blog/implied-volatility-volatility-surface-options-pricing/implied-volatility-volatility-surface-options-pricing-3.png)
+![Three shapes of volatility curve smile skew smirk grid](/imgs/blogs/implied-volatility-volatility-surface-options-pricing-3.png)
 
 **Symmetric smile** (typical in FX): Both wings are elevated. This reflects that in currency markets, extreme moves can happen in either direction — a currency can collapse (crash) or squeeze violently (short cover, central bank intervention). USDJPY in 2022-2023 saw both historic weakness toward 151 yen per dollar AND sharp sudden reversals. Both tails have insurance value.
 
@@ -203,7 +203,7 @@ Think of the vol surface as a topographical map where:
 - The y-axis is time to expiry
 - The z-axis (height) is implied volatility
 
-![SPX volatility surface IV heatmap by strike and expiry](../../../public/images/blog/implied-volatility-volatility-surface-options-pricing/implied-volatility-volatility-surface-options-pricing-4.png)
+![SPX volatility surface IV heatmap by strike and expiry](/imgs/blogs/implied-volatility-volatility-surface-options-pricing-4.png)
 
 ### Reading the surface
 
@@ -227,7 +227,7 @@ The ATM vol term structure deserves a dedicated look because it carries distinct
 
 **Inverted (downward-sloping) term structure**: Short-dated vol > long-dated vol. This is the crisis signature. During March 2020, 1-week SPX vol reached 100%+ while 1-year vol peaked around 45%. The inversion signals: the market fears an acute near-term event that it believes will resolve (or at least normalize) over time. In other words, the market is saying "something terrible may happen in the next few weeks, but we expect vol to eventually mean-revert."
 
-![Vol term structure normal flat inverted regime comparison](../../../public/images/blog/implied-volatility-volatility-surface-options-pricing/implied-volatility-volatility-surface-options-pricing-8.png)
+![Vol term structure normal flat inverted regime comparison](/imgs/blogs/implied-volatility-volatility-surface-options-pricing-8.png)
 
 **Practical use of the term structure**: Calendar spread traders specifically trade the slope. If the term structure is deeply inverted (near-term vol historically elevated), a trader might sell a front-month ATM straddle and buy a back-month ATM straddle at the same strike — a "calendar spread." They are short near-term vol (which they expect to collapse as the crisis resolves) and long longer-term vol (which they believe will persist). The maximum profit occurs when near-term vol collapses faster than long-term vol.
 
@@ -272,7 +272,7 @@ The surface shifts and reshapes continuously as new information arrives. Key dyn
 
 The VIX index, published by CBOE since 1993, is the world's most-watched measure of market fear. Understanding what it actually measures — versus the common misconceptions — is essential.
 
-![VIX construction from SPX options model-free variance pipeline](../../../public/images/blog/implied-volatility-volatility-surface-options-pricing/implied-volatility-volatility-surface-options-pricing-5.png)
+![VIX construction from SPX options model-free variance pipeline](/imgs/blogs/implied-volatility-volatility-surface-options-pricing-5.png)
 
 ### What VIX is not
 
@@ -351,7 +351,7 @@ IVP of 80 means today's IV is higher than 80% of the past year's daily IV readin
 
 The two metrics tell you slightly different things: IVR is sensitive to outlier spikes (if IV hit 80% once last year, even a current IV of 35% could have a middling IVR), while IVP is more robust to outliers.
 
-![IV rank 52-week range current IV bar chart overpriced underpriced options](../../../public/images/blog/implied-volatility-volatility-surface-options-pricing/implied-volatility-volatility-surface-options-pricing-6.png)
+![IV rank 52-week range current IV bar chart overpriced underpriced options](/imgs/blogs/implied-volatility-volatility-surface-options-pricing-6.png)
 
 ### How traders use IV rank
 
@@ -450,7 +450,7 @@ Natural gas illustrates this most dramatically. Winter natural gas contracts (No
 
 This is the opposite of equity skew. The market is far more worried about a supply shock (cold snap + tight inventories = price spike to \$15-20/MMBtu) than about a demand collapse.
 
-![Cross-asset vol skew comparison equity negative vs commodity positive](../../../public/images/blog/implied-volatility-volatility-surface-options-pricing/implied-volatility-volatility-surface-options-pricing-9.png)
+![Cross-asset vol skew comparison equity negative vs commodity positive](/imgs/blogs/implied-volatility-volatility-surface-options-pricing-9.png)
 
 **Practical implication**: When trading options across asset classes, do not assume the equity-market intuition ("high put skew = normal") transfers. In commodity markets, buying calls can be the defensive, insurance-motivated trade. In FX, both wings can be elevated symmetrically. Always identify the dominant tail risk for the specific asset you are trading before inferring strategy from the vol surface shape.
 
@@ -479,7 +479,7 @@ This "reverse risk reversal" collects 95 - 48 = 47 vol points of net premium. It
 
 The volatility surface is not merely descriptive — practitioners read it the way a doctor reads an X-ray, extracting actionable intelligence.
 
-![Vol surface to strategy selection practitioner workflow pipeline](../../../public/images/blog/implied-volatility-volatility-surface-options-pricing/implied-volatility-volatility-surface-options-pricing-7.png)
+![Vol surface to strategy selection practitioner workflow pipeline](/imgs/blogs/implied-volatility-volatility-surface-options-pricing-7.png)
 
 ### Vol trading vs directional trading
 

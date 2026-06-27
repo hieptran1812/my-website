@@ -29,7 +29,7 @@ This story is not unusual. It illustrates the central tension in startup valuati
 
 This post is a valuation craftsperson's guide to how that number is actually derived. We will build every concept from first principles, work through explicit dollar examples at each step, and examine the real-market behavior that caused thousands of startups to raise at valuations that ultimately destroyed them.
 
-![VC investment journey pipeline diagram](startup-valuation-venture-capital-pre-money-post-money-1.png)
+![VC investment journey pipeline diagram](/imgs/blogs/startup-valuation-venture-capital-pre-money-post-money-1.png)
 
 ---
 
@@ -73,7 +73,7 @@ Investor Ownership % = New Investment / Post-Money Valuation
 
 This seems simple, but the implications compound across multiple rounds in ways that surprise founders who have not modeled them carefully.
 
-![Pre-money vs post-money ownership before-after diagram](startup-valuation-venture-capital-pre-money-post-money-2.png)
+![Pre-money vs post-money ownership before-after diagram](/imgs/blogs/startup-valuation-venture-capital-pre-money-post-money-2.png)
 
 #### Worked example:
 
@@ -111,7 +111,7 @@ The VC method is the dominant framework at Series A and beyond, and it is delibe
 
 The logic is as follows. A venture fund has limited partners who expect to generate returns of perhaps 20-25% per year compounded over the life of the fund. Given that most portfolio companies fail or return little, the winners must compensate — hence the requirement for each investment to return a large multiple. A typical Series A investor might target 10× their invested capital over a five-year hold period.
 
-![VC valuation method step-by-step stack diagram](startup-valuation-venture-capital-pre-money-post-money-4.png)
+![VC valuation method step-by-step stack diagram](/imgs/blogs/startup-valuation-venture-capital-pre-money-post-money-4.png)
 
 The four steps:
 
@@ -166,7 +166,7 @@ The VC builds this expected dilution into the post-money valuation calculation. 
 
 To understand why VCs behave the way they do — why they ask for 30× projections, why they push for aggressive growth over profitability — you need to understand the power law of venture returns.
 
-![Power law returns: investments vs return contribution bar chart](startup-valuation-venture-capital-pre-money-post-money-3.png)
+![Power law returns: investments vs return contribution bar chart](/imgs/blogs/startup-valuation-venture-capital-pre-money-post-money-3.png)
 
 The math is brutal and real. Across a typical venture portfolio:
 
@@ -265,7 +265,7 @@ The power of the scorecard method is that it forces explicit reasoning about eac
 
 Understanding how valuations compound across multiple funding rounds is essential for both founders managing dilution and investors modeling their return path.
 
-![Startup funding timeline from seed to IPO](startup-valuation-venture-capital-pre-money-post-money-6.png)
+![Startup funding timeline from seed to IPO](/imgs/blogs/startup-valuation-venture-capital-pre-money-post-money-6.png)
 
 Let us trace a realistic funding journey for a B2B SaaS company and see how the math compounds.
 
@@ -319,7 +319,7 @@ The model breaks down in a down round: where the company raises at a valuation l
 
 Private startup valuations do not exist in a vacuum. They are anchored to public market comparables — specifically, what public investors are willing to pay for similar businesses at the time of exit. When public multiples collapse, private valuations must eventually follow.
 
-![SaaS revenue multiples from 2020-2023 bar chart](startup-valuation-venture-capital-pre-money-post-money-5.png)
+![SaaS revenue multiples from 2020-2023 bar chart](/imgs/blogs/startup-valuation-venture-capital-pre-money-post-money-5.png)
 
 The 2020-2022 period saw extraordinary expansion in SaaS revenue multiples driven by several factors:
 
@@ -344,7 +344,7 @@ The practical takeaway for founders: **the exit multiple you assume in your VC m
 
 The headline valuation number is only part of the economic agreement. A sophisticated term sheet contains clauses that can fundamentally alter who captures value at exit — often dramatically in favor of investors.
 
-![Term sheet economics grid showing exit scenarios](startup-valuation-venture-capital-pre-money-post-money-7.png)
+![Term sheet economics grid showing exit scenarios](/imgs/blogs/startup-valuation-venture-capital-pre-money-post-money-7.png)
 
 ### Liquidation Preferences
 

@@ -33,7 +33,7 @@ By the end of this post you will understand the credit assignment problem precis
 
 This is Track A post 6 — the last foundations post before we dive into specific algorithms. Everything in Track B algorithms, Track C policy gradients, and Track E RLHF methods connects back to what we will build here.
 
-![A sparse reward trajectory where an agent receives zero reward for 49 consecutive steps before a terminal reward of plus one at step 50, illustrating how difficult it is to identify which early action was responsible for the outcome](the-credit-assignment-problem-1.png)
+![A sparse reward trajectory where an agent receives zero reward for 49 consecutive steps before a terminal reward of plus one at step 50, illustrating how difficult it is to identify which early action was responsible for the outcome](/imgs/blogs/the-credit-assignment-problem-1.png)
 
 
 ## 1. The Problem in Precise Terms: Minsky's 1961 Framing
@@ -108,7 +108,7 @@ $$V(s) \leftarrow V(s) + \alpha \, \delta_t \, e_t(s) \quad \text{for all } s$$
 
 This is the TD(λ) algorithm. The parameter $\lambda \in [0,1]$ is the trace decay rate: it controls how quickly the credit signal attenuates into the past. The combined $\gamma \lambda$ factor means that eligibility decays exponentially at rate $\gamma \lambda$ per step. If $\gamma = 0.99$ and $\lambda = 0.9$, the product is $0.891$, so a state visited $k$ steps ago has eligibility $(0.891)^k$.
 
-![The eligibility trace mechanism: states visited earlier have decaying trace weights, and when reward finally arrives the trace routes credit backward with each state receiving an update proportional to its eligibility](the-credit-assignment-problem-2.png)
+![The eligibility trace mechanism: states visited earlier have decaying trace weights, and when reward finally arrives the trace routes credit backward with each state receiving an update proportional to its eligibility](/imgs/blogs/the-credit-assignment-problem-2.png)
 
 ### Why λ Controls the Bias-Variance Tradeoff
 
@@ -196,7 +196,7 @@ Running this on FrozenLake-v1 with a random policy, you will see:
 - `lambda=0.9`: V(14) converges to about 0.42 — closer to the true value of approximately 0.45
 - `lambda=1.0`: V(14) converges to approximately 0.41 — unbiased but noisy, takes longer to stabilize
 
-![The lambda spectrum from TD zero at the bottom to Monte Carlo at the top, showing how bias decreases and variance increases as lambda increases, with TD lambda near 0.9 as the practical optimum](the-credit-assignment-problem-3.png)
+![The lambda spectrum from TD zero at the bottom to Monte Carlo at the top, showing how bias decreases and variance increases as lambda increases, with TD lambda near 0.9 as the practical optimum](/imgs/blogs/the-credit-assignment-problem-3.png)
 
 ### The Accumulating vs. Replacing Trace Distinction
 
@@ -236,7 +236,7 @@ The n-step return is unbiased relative to the true value only if $V(S_{t+n})$ is
 
 The optimal $n$ minimizes $\text{Bias}^2 + \text{Variance}$. Empirically across Atari, MuJoCo, and Gymnasium benchmarks, $n$ between 3 and 20 is typically optimal — close enough to the beginning of the episode that variance is manageable, but far enough that the bootstrap does not dominate the credit signal.
 
-![Comparison of n-step return estimates on a CartPole trajectory showing how variance decreases from 1-step to 3-step but then increases again at Monte Carlo, with the 3-step return achieving the best variance of 5.3](the-credit-assignment-problem-5.png)
+![Comparison of n-step return estimates on a CartPole trajectory showing how variance decreases from 1-step to 3-step but then increases again at Monte Carlo, with the 3-step return achieving the best variance of 5.3](/imgs/blogs/the-credit-assignment-problem-5.png)
 
 ### Implementation: n-Step Buffer
 
@@ -368,7 +368,7 @@ $$V'^\pi(s) = V^\pi(s) - \Phi(s)$$
 
 The shaped value function equals the original value function minus a constant (from the perspective of policy comparison). Since policy ranking only depends on differences in value — $\pi^* = \arg\max_\pi V^\pi(s)$ — and both $V'^\pi$ and $V^\pi$ are shifted by the same $\Phi(s)$, the optimal policy is unchanged.
 
-![Comparison of maze navigation with and without potential-based reward shaping, showing that the agent without shaping takes 500 steps on average while the shaped agent reaches the goal in 80 steps while both learn the same optimal policy](the-credit-assignment-problem-4.png)
+![Comparison of maze navigation with and without potential-based reward shaping, showing that the agent without shaping takes 500 steps on average while the shaped agent reaches the goal in 80 steps while both learn the same optimal policy](/imgs/blogs/the-credit-assignment-problem-4.png)
 
 ### Practical Potential Functions
 
@@ -477,7 +477,7 @@ Standard DDPG or SAC with this sparse reward almost never receives positive rewa
 5. **Store the relabeled trajectory** as additional positive-reward experiences.
 6. **Train** on a mix of original and relabeled trajectories.
 
-![The HER mechanism showing a failed trajectory being stored, then relabeled with the achieved goal to create a success sample, which is mixed into the replay buffer alongside original transitions to provide dense reward signal](the-credit-assignment-problem-6.png)
+![The HER mechanism showing a failed trajectory being stored, then relabeled with the achieved goal to create a success sample, which is mixed into the replay buffer alongside original transitions to provide dense reward signal](/imgs/blogs/the-credit-assignment-problem-6.png)
 
 ### Why HER Provides Dense Credit
 
@@ -594,7 +594,7 @@ At each layer boundary, the gradient can **vanish** (multiply by small numbers, 
 - The policy gradient includes a baseline-subtracted return, which can be large and noisy
 - The policy is updated online, so the input distribution to each layer shifts continuously
 
-![Comparison of gradient norms across layers without and with gradient flow fixes, showing that without residual connections and gradient clipping the early layers receive near-zero gradient norms of 0.0003 while proper fixes maintain healthy norms near 0.3 throughout](the-credit-assignment-problem-8.png)
+![Comparison of gradient norms across layers without and with gradient flow fixes, showing that without residual connections and gradient clipping the early layers receive near-zero gradient norms of 0.0003 while proper fixes maintain healthy norms near 0.3 throughout](/imgs/blogs/the-credit-assignment-problem-8.png)
 
 ### Diagnosing Structural Credit Assignment Failures
 
@@ -853,7 +853,7 @@ A key diagnostic from the InstructGPT ablations: removing the KL penalty causes 
 | Reward shaping | None (alters R) | Depends on Φ | O(1) | Very fast | When domain structure known |
 | HER | None (data aug) | Low | O(buffer) | Very fast | Sparse, goal-conditioned |
 
-![Comparison matrix of five credit assignment methods across bias, variance, memory requirement, and best use case, showing how TD lambda and HER represent the practical frontier of the bias-variance tradeoff](the-credit-assignment-problem-7.png)
+![Comparison matrix of five credit assignment methods across bias, variance, memory requirement, and best use case, showing how TD lambda and HER represent the practical frontier of the bias-variance tradeoff](/imgs/blogs/the-credit-assignment-problem-7.png)
 
 
 ## 13. Deep Dive: Implementing GAE End-to-End
