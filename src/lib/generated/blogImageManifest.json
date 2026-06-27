@@ -5106,6 +5106,10 @@
     "height": 807,
     "cover": true
   },
+  "/imgs/blogs/brics-and-the-alternative-payment-system-gamble-2.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/brics-and-the-alternative-payment-system-gamble-3.png": {
     "width": 1792,
     "height": 843
@@ -5113,6 +5117,10 @@
   "/imgs/blogs/brics-and-the-alternative-payment-system-gamble-4.png": {
     "width": 1792,
     "height": 1275
+  },
+  "/imgs/blogs/brics-and-the-alternative-payment-system-gamble-5.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/brics-and-the-alternative-payment-system-gamble-6.png": {
     "width": 1792,
@@ -16429,6 +16437,39 @@
     "width": 2458,
     "height": 1382
   },
+  "/imgs/blogs/debugging-rl-agents-common-failure-modes-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/debugging-rl-agents-common-failure-modes-2.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/debugging-rl-agents-common-failure-modes-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/debugging-rl-agents-common-failure-modes-4.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/debugging-rl-agents-common-failure-modes-5.png": {
+    "width": 1792,
+    "height": 1320
+  },
+  "/imgs/blogs/debugging-rl-agents-common-failure-modes-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/debugging-rl-agents-common-failure-modes-7.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/debugging-rl-agents-common-failure-modes-8.png": {
+    "width": 1792,
+    "height": 984
+  },
   "/imgs/blogs/debugging-rlhf-dpo-and-preference-tuning-1.png": {
     "width": 1792,
     "height": 1194,
@@ -20671,9 +20712,33 @@
     "height": 778
   },
   "/imgs/blogs/emerging-market-stock-valuation-country-risk-discount-rate-1.png": {
-    "width": 2220,
-    "height": 1060,
+    "width": 1792,
+    "height": 856,
     "cover": true
+  },
+  "/imgs/blogs/emerging-market-stock-valuation-country-risk-discount-rate-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/emerging-market-stock-valuation-country-risk-discount-rate-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/emerging-market-stock-valuation-country-risk-discount-rate-4.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/emerging-market-stock-valuation-country-risk-discount-rate-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/emerging-market-stock-valuation-country-risk-discount-rate-6.png": {
+    "width": 1792,
+    "height": 1082
+  },
+  "/imgs/blogs/emerging-market-stock-valuation-country-risk-discount-rate-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/encodec-dac-and-the-modern-codec-1.png": {
     "width": 1792,
@@ -28959,6 +29024,39 @@
   "/imgs/blogs/hunyuanimage-and-native-multimodal-generation-8.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/hyperparameter-tuning-for-rl-1.png": {
+    "width": 1792,
+    "height": 1381,
+    "cover": true
+  },
+  "/imgs/blogs/hyperparameter-tuning-for-rl-2.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/hyperparameter-tuning-for-rl-3.png": {
+    "width": 1792,
+    "height": 1194
+  },
+  "/imgs/blogs/hyperparameter-tuning-for-rl-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/hyperparameter-tuning-for-rl-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/hyperparameter-tuning-for-rl-6.png": {
+    "width": 1792,
+    "height": 1247
+  },
+  "/imgs/blogs/hyperparameter-tuning-for-rl-7.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/hyperparameter-tuning-for-rl-8.png": {
+    "width": 1792,
+    "height": 1163
   },
   "/imgs/blogs/hypothesis-testing-pvalues-math-for-quants-1.png": {
     "width": 1792,
@@ -53272,9 +53370,33 @@
     "height": 1266
   },
   "/imgs/blogs/sotp-valuation-vietnam-vingroup-case-study-1.png": {
-    "width": 2060,
-    "height": 1455,
+    "width": 1792,
+    "height": 1266,
     "cover": true
+  },
+  "/imgs/blogs/sotp-valuation-vietnam-vingroup-case-study-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/sotp-valuation-vietnam-vingroup-case-study-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/sotp-valuation-vietnam-vingroup-case-study-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/sotp-valuation-vietnam-vingroup-case-study-5.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/sotp-valuation-vietnam-vingroup-case-study-6.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/sotp-valuation-vietnam-vingroup-case-study-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/sovereign-debt-and-the-bond-vigilantes-1.png": {
     "width": 1792,
@@ -62003,6 +62125,10 @@
     "width": 1792,
     "height": 1330
   },
+  "/imgs/blogs/the-oil-weapon-when-energy-becomes-foreign-policy-4.png": {
+    "width": 1792,
+    "height": 942
+  },
   "/imgs/blogs/the-oil-weapon-when-energy-becomes-foreign-policy-5.png": {
     "width": 1792,
     "height": 1001
@@ -64204,6 +64330,10 @@
     "height": 1210,
     "cover": true
   },
+  "/imgs/blogs/the-yen-carry-trade-and-geopolitical-stress-events-2.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/the-yen-carry-trade-and-geopolitical-stress-events-3.png": {
     "width": 1792,
     "height": 830
@@ -64211,6 +64341,10 @@
   "/imgs/blogs/the-yen-carry-trade-and-geopolitical-stress-events-4.png": {
     "width": 1792,
     "height": 786
+  },
+  "/imgs/blogs/the-yen-carry-trade-and-geopolitical-stress-events-5.png": {
+    "width": 1694,
+    "height": 914
   },
   "/imgs/blogs/the-yen-carry-trade-and-geopolitical-stress-events-6.png": {
     "width": 1792,
