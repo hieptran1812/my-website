@@ -14160,6 +14160,39 @@
     "width": 1792,
     "height": 902
   },
+  "/imgs/blogs/deep-hedging-options-with-rl-1.png": {
+    "width": 1792,
+    "height": 807,
+    "cover": true
+  },
+  "/imgs/blogs/deep-hedging-options-with-rl-2.png": {
+    "width": 1792,
+    "height": 1241
+  },
+  "/imgs/blogs/deep-hedging-options-with-rl-3.png": {
+    "width": 1792,
+    "height": 1212
+  },
+  "/imgs/blogs/deep-hedging-options-with-rl-4.png": {
+    "width": 1792,
+    "height": 980
+  },
+  "/imgs/blogs/deep-hedging-options-with-rl-5.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/deep-hedging-options-with-rl-6.png": {
+    "width": 1792,
+    "height": 1267
+  },
+  "/imgs/blogs/deep-hedging-options-with-rl-7.png": {
+    "width": 1792,
+    "height": 1222
+  },
+  "/imgs/blogs/deep-hedging-options-with-rl-8.png": {
+    "width": 1792,
+    "height": 1169
+  },
   "/imgs/blogs/deep-q-networks-dqn-1.png": {
     "width": 1792,
     "height": 1208,
@@ -18932,6 +18965,39 @@
     "width": 1792,
     "height": 1178
   },
+  "/imgs/blogs/financial-rl-backtesting-and-pitfalls-1.png": {
+    "width": 1792,
+    "height": 787,
+    "cover": true
+  },
+  "/imgs/blogs/financial-rl-backtesting-and-pitfalls-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/financial-rl-backtesting-and-pitfalls-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/financial-rl-backtesting-and-pitfalls-4.png": {
+    "width": 1792,
+    "height": 1360
+  },
+  "/imgs/blogs/financial-rl-backtesting-and-pitfalls-5.png": {
+    "width": 1792,
+    "height": 984
+  },
+  "/imgs/blogs/financial-rl-backtesting-and-pitfalls-6.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/financial-rl-backtesting-and-pitfalls-7.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/financial-rl-backtesting-and-pitfalls-8.png": {
+    "width": 1792,
+    "height": 1178
+  },
   "/imgs/blogs/finding-concurrency-bugs-race-detectors-and-stress-testing-1.png": {
     "width": 1792,
     "height": 1278,
@@ -22612,6 +22678,39 @@
   "/imgs/blogs/grpo-vs-dpo-vs-ppo-decision-guide-9.png": {
     "width": 1792,
     "height": 1194
+  },
+  "/imgs/blogs/gym-trading-environments-and-backtesting-1.png": {
+    "width": 1792,
+    "height": 795,
+    "cover": true
+  },
+  "/imgs/blogs/gym-trading-environments-and-backtesting-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/gym-trading-environments-and-backtesting-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/gym-trading-environments-and-backtesting-4.png": {
+    "width": 1792,
+    "height": 987
+  },
+  "/imgs/blogs/gym-trading-environments-and-backtesting-5.png": {
+    "width": 1792,
+    "height": 1263
+  },
+  "/imgs/blogs/gym-trading-environments-and-backtesting-6.png": {
+    "width": 1792,
+    "height": 1311
+  },
+  "/imgs/blogs/gym-trading-environments-and-backtesting-7.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/gym-trading-environments-and-backtesting-8.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/hardware-aware-nas-1.png": {
     "width": 1792,
@@ -40628,6 +40727,39 @@
     "width": 1792,
     "height": 1211
   },
+  "/imgs/blogs/reward-shaping-for-financial-rl-1.png": {
+    "width": 1792,
+    "height": 1278,
+    "cover": true
+  },
+  "/imgs/blogs/reward-shaping-for-financial-rl-2.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/reward-shaping-for-financial-rl-3.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/reward-shaping-for-financial-rl-4.png": {
+    "width": 1792,
+    "height": 1310
+  },
+  "/imgs/blogs/reward-shaping-for-financial-rl-5.png": {
+    "width": 1792,
+    "height": 1218
+  },
+  "/imgs/blogs/reward-shaping-for-financial-rl-6.png": {
+    "width": 1792,
+    "height": 925
+  },
+  "/imgs/blogs/reward-shaping-for-financial-rl-7.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/reward-shaping-for-financial-rl-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
   "/imgs/blogs/rho-dividends-and-the-second-order-greeks-vanna-volga-charm-1.png": {
     "width": 1792,
     "height": 977,
@@ -41189,6 +41321,105 @@
   "/imgs/blogs/rl-for-algorithmic-trading-foundations-8.png": {
     "width": 1792,
     "height": 1278
+  },
+  "/imgs/blogs/rl-for-high-frequency-trading-1.png": {
+    "width": 1792,
+    "height": 489,
+    "cover": true
+  },
+  "/imgs/blogs/rl-for-high-frequency-trading-2.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/rl-for-high-frequency-trading-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/rl-for-high-frequency-trading-4.png": {
+    "width": 1792,
+    "height": 1264
+  },
+  "/imgs/blogs/rl-for-high-frequency-trading-5.png": {
+    "width": 1792,
+    "height": 1355
+  },
+  "/imgs/blogs/rl-for-high-frequency-trading-6.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/rl-for-high-frequency-trading-7.png": {
+    "width": 1792,
+    "height": 1201
+  },
+  "/imgs/blogs/rl-for-high-frequency-trading-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/rl-market-making-and-order-execution-1.png": {
+    "width": 1792,
+    "height": 1208,
+    "cover": true
+  },
+  "/imgs/blogs/rl-market-making-and-order-execution-2.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/rl-market-making-and-order-execution-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/rl-market-making-and-order-execution-4.png": {
+    "width": 1792,
+    "height": 1209
+  },
+  "/imgs/blogs/rl-market-making-and-order-execution-5.png": {
+    "width": 1792,
+    "height": 1255
+  },
+  "/imgs/blogs/rl-market-making-and-order-execution-6.png": {
+    "width": 1792,
+    "height": 925
+  },
+  "/imgs/blogs/rl-market-making-and-order-execution-7.png": {
+    "width": 1792,
+    "height": 876
+  },
+  "/imgs/blogs/rl-market-making-and-order-execution-8.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/rl-portfolio-optimization-1.png": {
+    "width": 1792,
+    "height": 820,
+    "cover": true
+  },
+  "/imgs/blogs/rl-portfolio-optimization-2.png": {
+    "width": 1792,
+    "height": 1277
+  },
+  "/imgs/blogs/rl-portfolio-optimization-3.png": {
+    "width": 1792,
+    "height": 1237
+  },
+  "/imgs/blogs/rl-portfolio-optimization-4.png": {
+    "width": 1792,
+    "height": 1248
+  },
+  "/imgs/blogs/rl-portfolio-optimization-5.png": {
+    "width": 1792,
+    "height": 1226
+  },
+  "/imgs/blogs/rl-portfolio-optimization-6.png": {
+    "width": 1792,
+    "height": 936
+  },
+  "/imgs/blogs/rl-portfolio-optimization-7.png": {
+    "width": 1792,
+    "height": 1217
+  },
+  "/imgs/blogs/rl-portfolio-optimization-8.png": {
+    "width": 1792,
+    "height": 1250
   },
   "/imgs/blogs/robust-regularized-portfolios-math-for-quants-1.png": {
     "width": 1792,
