@@ -2215,6 +2215,64 @@
     "width": 2133,
     "height": 1118
   },
+  "/imgs/blogs/arctic-sovereignty-russia-canada-and-the-melting-resource-race-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/arctic-sovereignty-russia-canada-and-the-melting-resource-race-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/arctic-sovereignty-russia-canada-and-the-melting-resource-race-3.png": {
+    "width": 1792,
+    "height": 967
+  },
+  "/imgs/blogs/arctic-sovereignty-russia-canada-and-the-melting-resource-race-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/arctic-sovereignty-russia-canada-and-the-melting-resource-race-5.png": {
+    "width": 1792,
+    "height": 881
+  },
+  "/imgs/blogs/arctic-sovereignty-russia-canada-and-the-melting-resource-race-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/arctic-sovereignty-russia-canada-and-the-melting-resource-race-7.png": {
+    "width": 1792,
+    "height": 1211
+  },
+  "/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-1.png": {
+    "width": 1792,
+    "height": 1025,
+    "cover": true
+  },
+  "/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-2.png": {
+    "width": 1404,
+    "height": 618
+  },
+  "/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-3.png": {
+    "width": 1404,
+    "height": 618
+  },
+  "/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-4.png": {
+    "width": 1792,
+    "height": 993
+  },
+  "/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-5.png": {
+    "width": 1792,
+    "height": 1013
+  },
+  "/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-6.png": {
+    "width": 1792,
+    "height": 1153
+  },
+  "/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-7.png": {
+    "width": 1293,
+    "height": 930
+  },
   "/imgs/blogs/argo-cd-and-flux-in-practice-1.png": {
     "width": 1792,
     "height": 754,
@@ -2283,6 +2341,11 @@
   "/imgs/blogs/articulating-tradeoffs-cap-pacelc-and-beyond-9.png": {
     "width": 1924,
     "height": 1453
+  },
+  "/imgs/blogs/asean-geopolitical-beta-which-countries-win-a-decoupled-world-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
   },
   "/imgs/blogs/asian-financial-crisis-1997-1.png": {
     "width": 1792,
@@ -5560,6 +5623,47 @@
     "width": 1792,
     "height": 983
   },
+  "/imgs/blogs/building-a-geopolitical-risk-monitor-data-indicators-signals-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/building-a-geopolitical-risk-monitor-data-indicators-signals-2.out.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/building-a-geopolitical-risk-monitor-data-indicators-signals-2.png": {
+    "width": 1600,
+    "height": 1600
+  },
+  "/imgs/blogs/building-a-geopolitical-risk-monitor-data-indicators-signals-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/building-a-geopolitical-risk-monitor-data-indicators-signals-4.out.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/building-a-geopolitical-risk-monitor-data-indicators-signals-4.png": {
+    "width": 1600,
+    "height": 1600
+  },
+  "/imgs/blogs/building-a-geopolitical-risk-monitor-data-indicators-signals-5.png": {
+    "width": 1682,
+    "height": 914
+  },
+  "/imgs/blogs/building-a-geopolitical-risk-monitor-data-indicators-signals-6.out.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/building-a-geopolitical-risk-monitor-data-indicators-signals-6.png": {
+    "width": 1600,
+    "height": 1600
+  },
+  "/imgs/blogs/building-a-geopolitical-risk-monitor-data-indicators-signals-7.png": {
+    "width": 1602,
+    "height": 914
+  },
   "/imgs/blogs/building-a-hedge-fund-the-founders-map-1.png": {
     "width": 1792,
     "height": 1210,
@@ -7568,6 +7672,35 @@
   "/imgs/blogs/capstone-the-sre-playbook-8.png": {
     "width": 1792,
     "height": 1264
+  },
+  "/imgs/blogs/carbon-border-adjustment-the-new-trade-weapon-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/carbon-border-adjustment-the-new-trade-weapon-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/carbon-border-adjustment-the-new-trade-weapon-3.png": {
+    "width": 1792,
+    "height": 1347
+  },
+  "/imgs/blogs/carbon-border-adjustment-the-new-trade-weapon-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/carbon-border-adjustment-the-new-trade-weapon-5.png": {
+    "width": 1792,
+    "height": 786
+  },
+  "/imgs/blogs/carbon-border-adjustment-the-new-trade-weapon-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/carbon-border-adjustment-the-new-trade-weapon-7.png": {
+    "width": 1792,
+    "height": 1341
   },
   "/imgs/blogs/carry-and-volatility-the-relationship-that-runs-the-trade-1.png": {
     "width": 1602,
@@ -9983,6 +10116,35 @@
   "/imgs/blogs/chinas-retaliation-playbook-soy-boeing-rare-earths-tourism-7.png": {
     "width": 1792,
     "height": 1274
+  },
+  "/imgs/blogs/chinas-tech-crackdown-2021-the-1-trillion-disappearing-act-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/chinas-tech-crackdown-2021-the-1-trillion-disappearing-act-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/chinas-tech-crackdown-2021-the-1-trillion-disappearing-act-3.png": {
+    "width": 1792,
+    "height": 822
+  },
+  "/imgs/blogs/chinas-tech-crackdown-2021-the-1-trillion-disappearing-act-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/chinas-tech-crackdown-2021-the-1-trillion-disappearing-act-5.png": {
+    "width": 1792,
+    "height": 1384
+  },
+  "/imgs/blogs/chinas-tech-crackdown-2021-the-1-trillion-disappearing-act-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/chinas-tech-crackdown-2021-the-1-trillion-disappearing-act-7.png": {
+    "width": 1792,
+    "height": 1162
   },
   "/imgs/blogs/chinchilla-compute-optimal-scaling-1.png": {
     "width": 1792,
@@ -13895,6 +14057,35 @@
     "width": 1792,
     "height": 1170
   },
+  "/imgs/blogs/covid-19-comparing-political-responses-and-market-outcomes-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/covid-19-comparing-political-responses-and-market-outcomes-2.png": {
+    "width": 1792,
+    "height": 1008
+  },
+  "/imgs/blogs/covid-19-comparing-political-responses-and-market-outcomes-3.png": {
+    "width": 1792,
+    "height": 1008
+  },
+  "/imgs/blogs/covid-19-comparing-political-responses-and-market-outcomes-4.png": {
+    "width": 1792,
+    "height": 1013
+  },
+  "/imgs/blogs/covid-19-comparing-political-responses-and-market-outcomes-5.png": {
+    "width": 1792,
+    "height": 1008
+  },
+  "/imgs/blogs/covid-19-comparing-political-responses-and-market-outcomes-6.png": {
+    "width": 1792,
+    "height": 885
+  },
+  "/imgs/blogs/covid-19-comparing-political-responses-and-market-outcomes-7.png": {
+    "width": 1792,
+    "height": 1008
+  },
   "/imgs/blogs/covid-2020-infinite-qe-fiscal-bazooka-and-the-everything-rally-1.png": {
     "width": 1792,
     "height": 1162,
@@ -15138,6 +15329,35 @@
   "/imgs/blogs/cvar-expected-shortfall-and-asking-how-bad-is-bad-7.png": {
     "width": 1602,
     "height": 1022
+  },
+  "/imgs/blogs/cyberattacks-as-market-events-solarwinds-colonial-pipeline-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/cyberattacks-as-market-events-solarwinds-colonial-pipeline-2.png": {
+    "width": 1782,
+    "height": 1035
+  },
+  "/imgs/blogs/cyberattacks-as-market-events-solarwinds-colonial-pipeline-3.png": {
+    "width": 1792,
+    "height": 972
+  },
+  "/imgs/blogs/cyberattacks-as-market-events-solarwinds-colonial-pipeline-4.png": {
+    "width": 1792,
+    "height": 957
+  },
+  "/imgs/blogs/cyberattacks-as-market-events-solarwinds-colonial-pipeline-5.png": {
+    "width": 1792,
+    "height": 1375
+  },
+  "/imgs/blogs/cyberattacks-as-market-events-solarwinds-colonial-pipeline-6.png": {
+    "width": 1792,
+    "height": 802
+  },
+  "/imgs/blogs/cyberattacks-as-market-events-solarwinds-colonial-pipeline-7.png": {
+    "width": 1792,
+    "height": 1278
   },
   "/imgs/blogs/cython-typed-python-that-compiles-to-c-1.png": {
     "width": 1792,
@@ -17552,6 +17772,35 @@
     "width": 1792,
     "height": 878
   },
+  "/imgs/blogs/democratic-backsliding-and-sovereign-spread-widening-1.png": {
+    "width": 1792,
+    "height": 1199,
+    "cover": true
+  },
+  "/imgs/blogs/democratic-backsliding-and-sovereign-spread-widening-2.png": {
+    "width": 1792,
+    "height": 817
+  },
+  "/imgs/blogs/democratic-backsliding-and-sovereign-spread-widening-3.png": {
+    "width": 1486,
+    "height": 1029
+  },
+  "/imgs/blogs/democratic-backsliding-and-sovereign-spread-widening-4.png": {
+    "width": 1792,
+    "height": 817
+  },
+  "/imgs/blogs/democratic-backsliding-and-sovereign-spread-widening-5.png": {
+    "width": 1792,
+    "height": 1245
+  },
+  "/imgs/blogs/democratic-backsliding-and-sovereign-spread-widening-6.png": {
+    "width": 1792,
+    "height": 793
+  },
+  "/imgs/blogs/democratic-backsliding-and-sovereign-spread-widening-7.png": {
+    "width": 1792,
+    "height": 781
+  },
   "/imgs/blogs/demographics-and-urbanization-the-demand-wave-1.png": {
     "width": 1792,
     "height": 1250,
@@ -18705,6 +18954,35 @@
   "/imgs/blogs/digital-banking-and-the-neobank-business-model-8.png": {
     "width": 1792,
     "height": 1208
+  },
+  "/imgs/blogs/digital-yuan-cbdc-as-geopolitical-strategy-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/digital-yuan-cbdc-as-geopolitical-strategy-2.png": {
+    "width": 1792,
+    "height": 888
+  },
+  "/imgs/blogs/digital-yuan-cbdc-as-geopolitical-strategy-3.png": {
+    "width": 1792,
+    "height": 1204
+  },
+  "/imgs/blogs/digital-yuan-cbdc-as-geopolitical-strategy-4.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/digital-yuan-cbdc-as-geopolitical-strategy-5.png": {
+    "width": 1792,
+    "height": 1114
+  },
+  "/imgs/blogs/digital-yuan-cbdc-as-geopolitical-strategy-6.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/digital-yuan-cbdc-as-geopolitical-strategy-7.png": {
+    "width": 1792,
+    "height": 888
   },
   "/imgs/blogs/disaster-recovery-and-business-continuity-1.png": {
     "width": 1792,
@@ -20797,7 +21075,7 @@
   },
   "/imgs/blogs/emerging-market-currency-crises-triggered-by-geopolitics-1.png": {
     "width": 1792,
-    "height": 1096,
+    "height": 755,
     "cover": true
   },
   "/imgs/blogs/emerging-market-currency-crises-triggered-by-geopolitics-2.png": {
@@ -20826,7 +21104,7 @@
   },
   "/imgs/blogs/emerging-market-currency-crises-triggered-by-geopolitics-8.png": {
     "width": 1792,
-    "height": 1192
+    "height": 1117
   },
   "/imgs/blogs/emerging-market-political-risk-turkey-argentina-brazil-case-studies-1.png": {
     "width": 1784,
@@ -25520,6 +25798,35 @@
     "width": 1792,
     "height": 1218
   },
+  "/imgs/blogs/geopolitical-crises-and-markets-the-complete-playbook-capstone-1.png": {
+    "width": 1792,
+    "height": 778,
+    "cover": true
+  },
+  "/imgs/blogs/geopolitical-crises-and-markets-the-complete-playbook-capstone-2.png": {
+    "width": 1792,
+    "height": 1216
+  },
+  "/imgs/blogs/geopolitical-crises-and-markets-the-complete-playbook-capstone-3.png": {
+    "width": 1792,
+    "height": 741
+  },
+  "/imgs/blogs/geopolitical-crises-and-markets-the-complete-playbook-capstone-4.png": {
+    "width": 1792,
+    "height": 1228
+  },
+  "/imgs/blogs/geopolitical-crises-and-markets-the-complete-playbook-capstone-5.png": {
+    "width": 1792,
+    "height": 812
+  },
+  "/imgs/blogs/geopolitical-crises-and-markets-the-complete-playbook-capstone-6.png": {
+    "width": 1792,
+    "height": 1266
+  },
+  "/imgs/blogs/geopolitical-crises-and-markets-the-complete-playbook-capstone-7.png": {
+    "width": 1792,
+    "height": 864
+  },
   "/imgs/blogs/geopolitical-risk-premium-what-markets-price-in-1.png": {
     "width": 3020,
     "height": 1197,
@@ -25548,6 +25855,35 @@
   "/imgs/blogs/geopolitical-risk-premium-what-markets-price-in-7.png": {
     "width": 2120,
     "height": 1454
+  },
+  "/imgs/blogs/geopolitical-trading-playbook-before-during-after-the-shock-1.png": {
+    "width": 1792,
+    "height": 957,
+    "cover": true
+  },
+  "/imgs/blogs/geopolitical-trading-playbook-before-during-after-the-shock-2.png": {
+    "width": 1773,
+    "height": 1029
+  },
+  "/imgs/blogs/geopolitical-trading-playbook-before-during-after-the-shock-3.png": {
+    "width": 1792,
+    "height": 1205
+  },
+  "/imgs/blogs/geopolitical-trading-playbook-before-during-after-the-shock-4.png": {
+    "width": 1792,
+    "height": 812
+  },
+  "/imgs/blogs/geopolitical-trading-playbook-before-during-after-the-shock-5.png": {
+    "width": 1792,
+    "height": 923
+  },
+  "/imgs/blogs/geopolitical-trading-playbook-before-during-after-the-shock-6.png": {
+    "width": 1792,
+    "height": 816
+  },
+  "/imgs/blogs/geopolitical-trading-playbook-before-during-after-the-shock-7.png": {
+    "width": 1792,
+    "height": 1210
   },
   "/imgs/blogs/geopolitics-and-supply-shocks-when-the-physical-cannot-flow-1.png": {
     "width": 1792,
@@ -26882,6 +27218,11 @@
   "/imgs/blogs/graphql-the-query-language-schema-and-the-n-plus-one-trap-8.png": {
     "width": 1792,
     "height": 1194
+  },
+  "/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-1.png": {
+    "width": 2133,
+    "height": 1305,
+    "cover": true
   },
   "/imgs/blogs/growth-runways-and-tam-without-fooling-yourself-1.png": {
     "width": 1792,
@@ -29084,6 +29425,11 @@
     "width": 1792,
     "height": 935
   },
+  "/imgs/blogs/how-us-china-tensions-move-the-vn-index-1.png": {
+    "width": 1602,
+    "height": 914,
+    "cover": true
+  },
   "/imgs/blogs/how-zhipu-measures-glm-benchmarks-1.png": {
     "width": 1792,
     "height": 1163,
@@ -29137,6 +29483,35 @@
   "/imgs/blogs/http-for-api-designers-methods-status-codes-headers-8.png": {
     "width": 1792,
     "height": 1414
+  },
+  "/imgs/blogs/huawei-blacklist-tiktok-ban-and-tech-nationalism-1.png": {
+    "width": 1792,
+    "height": 861,
+    "cover": true
+  },
+  "/imgs/blogs/huawei-blacklist-tiktok-ban-and-tech-nationalism-2.png": {
+    "width": 1596,
+    "height": 914
+  },
+  "/imgs/blogs/huawei-blacklist-tiktok-ban-and-tech-nationalism-3.png": {
+    "width": 1792,
+    "height": 843
+  },
+  "/imgs/blogs/huawei-blacklist-tiktok-ban-and-tech-nationalism-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/huawei-blacklist-tiktok-ban-and-tech-nationalism-5.png": {
+    "width": 1792,
+    "height": 1163
+  },
+  "/imgs/blogs/huawei-blacklist-tiktok-ban-and-tech-nationalism-6.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/huawei-blacklist-tiktok-ban-and-tech-nationalism-7.png": {
+    "width": 1792,
+    "height": 1407
   },
   "/imgs/blogs/hunting-memory-leaks-and-bloat-1.png": {
     "width": 1792,
@@ -31172,6 +31547,35 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/internet-shutdowns-capital-controls-and-em-market-access-risk-1.png": {
+    "width": 1792,
+    "height": 742,
+    "cover": true
+  },
+  "/imgs/blogs/internet-shutdowns-capital-controls-and-em-market-access-risk-2.png": {
+    "width": 1792,
+    "height": 893
+  },
+  "/imgs/blogs/internet-shutdowns-capital-controls-and-em-market-access-risk-3.png": {
+    "width": 1792,
+    "height": 892
+  },
+  "/imgs/blogs/internet-shutdowns-capital-controls-and-em-market-access-risk-4.png": {
+    "width": 1792,
+    "height": 1071
+  },
+  "/imgs/blogs/internet-shutdowns-capital-controls-and-em-market-access-risk-5.png": {
+    "width": 1792,
+    "height": 803
+  },
+  "/imgs/blogs/internet-shutdowns-capital-controls-and-em-market-access-risk-6.png": {
+    "width": 1792,
+    "height": 1252
+  },
+  "/imgs/blogs/internet-shutdowns-capital-controls-and-em-market-access-risk-7.png": {
+    "width": 1792,
+    "height": 893
+  },
   "/imgs/blogs/intrinsic-motivation-curiosity-driven-rl-1.png": {
     "width": 1792,
     "height": 1199,
@@ -31805,6 +32209,11 @@
   "/imgs/blogs/japan-and-the-zero-bound-zirp-qe-and-ycc-8.png": {
     "width": 1792,
     "height": 939
+  },
+  "/imgs/blogs/jcpoa-the-iran-nuclear-deal-oil-markets-and-geopolitical-chess-1.png": {
+    "width": 2220,
+    "height": 1060,
+    "cover": true
   },
   "/imgs/blogs/jerome-powell-and-the-modern-fed-chair-1.png": {
     "width": 1792,
@@ -33402,6 +33811,11 @@
     "width": 1792,
     "height": 1208
   },
+  "/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-1.png": {
+    "width": 2171,
+    "height": 1436,
+    "cover": true
+  },
   "/imgs/blogs/lebesgue-integration-math-for-quants-1.png": {
     "width": 1792,
     "height": 1260,
@@ -34588,6 +35002,34 @@
   "/imgs/blogs/lobbying-rulemaking-and-regulatory-capture-8.png": {
     "width": 1602,
     "height": 914
+  },
+  "/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-1.png": {
+    "width": 1792,
+    "height": 887
+  },
+  "/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-2.png": {
+    "width": 1780,
+    "height": 1031
+  },
+  "/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-3.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-4.png": {
+    "width": 1792,
+    "height": 955
+  },
+  "/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-5.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-6.png": {
+    "width": 1792,
+    "height": 1162
+  },
+  "/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-7.png": {
+    "width": 1792,
+    "height": 887
   },
   "/imgs/blogs/logging-as-a-debugging-instrument-1.png": {
     "width": 1792,
@@ -39671,6 +40113,35 @@
     "width": 1792,
     "height": 1212
   },
+  "/imgs/blogs/nafta-to-usmca-renegotiating-trade-rules-and-the-auto-peso-1.png": {
+    "width": 1792,
+    "height": 830,
+    "cover": true
+  },
+  "/imgs/blogs/nafta-to-usmca-renegotiating-trade-rules-and-the-auto-peso-2.png": {
+    "width": 1792,
+    "height": 1008
+  },
+  "/imgs/blogs/nafta-to-usmca-renegotiating-trade-rules-and-the-auto-peso-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/nafta-to-usmca-renegotiating-trade-rules-and-the-auto-peso-4.png": {
+    "width": 1792,
+    "height": 1257
+  },
+  "/imgs/blogs/nafta-to-usmca-renegotiating-trade-rules-and-the-auto-peso-5.png": {
+    "width": 1792,
+    "height": 1210
+  },
+  "/imgs/blogs/nafta-to-usmca-renegotiating-trade-rules-and-the-auto-peso-6.png": {
+    "width": 1792,
+    "height": 1008
+  },
+  "/imgs/blogs/nafta-to-usmca-renegotiating-trade-rules-and-the-auto-peso-7.png": {
+    "width": 1792,
+    "height": 972
+  },
   "/imgs/blogs/narrative-addiction-when-a-good-story-beats-the-data-1.png": {
     "width": 1792,
     "height": 1278,
@@ -39794,6 +40265,11 @@
   "/imgs/blogs/nash-equilibrium-best-response-and-the-price-as-a-truce-7.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/nato-credibility-and-article-5-doubt-as-a-defense-premium-1.png": {
+    "width": 1570,
+    "height": 886,
+    "cover": true
   },
   "/imgs/blogs/natural-gas-henry-hub-ttf-jkm-and-the-most-seasonal-market-1.png": {
     "width": 1792,
@@ -42422,6 +42898,11 @@
     "width": 1792,
     "height": 1261
   },
+  "/imgs/blogs/paris-agreement-us-in-us-out-us-in-climate-and-energy-markets-1.png": {
+    "width": 2133,
+    "height": 1037,
+    "cover": true
+  },
   "/imgs/blogs/partitioning-and-sharding-without-downtime-1.png": {
     "width": 2060,
     "height": 1455
@@ -43312,6 +43793,35 @@
     "width": 1792,
     "height": 1197
   },
+  "/imgs/blogs/political-assassination-and-market-reaction-soleimani-khashoggi-1.png": {
+    "width": 1792,
+    "height": 807,
+    "cover": true
+  },
+  "/imgs/blogs/political-assassination-and-market-reaction-soleimani-khashoggi-2.png": {
+    "width": 1792,
+    "height": 794
+  },
+  "/imgs/blogs/political-assassination-and-market-reaction-soleimani-khashoggi-3.png": {
+    "width": 1603,
+    "height": 916
+  },
+  "/imgs/blogs/political-assassination-and-market-reaction-soleimani-khashoggi-4.png": {
+    "width": 1792,
+    "height": 817
+  },
+  "/imgs/blogs/political-assassination-and-market-reaction-soleimani-khashoggi-5.png": {
+    "width": 1603,
+    "height": 915
+  },
+  "/imgs/blogs/political-assassination-and-market-reaction-soleimani-khashoggi-6.png": {
+    "width": 1792,
+    "height": 1208
+  },
+  "/imgs/blogs/political-assassination-and-market-reaction-soleimani-khashoggi-7.png": {
+    "width": 1785,
+    "height": 1331
+  },
   "/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-1.cover.webp": {
     "width": 800,
     "height": 450,
@@ -43631,6 +44141,35 @@
   "/imgs/blogs/positioning-and-the-pain-trade-7.png": {
     "width": 1792,
     "height": 816
+  },
+  "/imgs/blogs/post-pandemic-political-scars-inflation-supply-chains-fiscal-1.png": {
+    "width": 1792,
+    "height": 1009,
+    "cover": true
+  },
+  "/imgs/blogs/post-pandemic-political-scars-inflation-supply-chains-fiscal-2.png": {
+    "width": 1792,
+    "height": 1009
+  },
+  "/imgs/blogs/post-pandemic-political-scars-inflation-supply-chains-fiscal-3.png": {
+    "width": 1792,
+    "height": 1009
+  },
+  "/imgs/blogs/post-pandemic-political-scars-inflation-supply-chains-fiscal-4.png": {
+    "width": 1792,
+    "height": 1195
+  },
+  "/imgs/blogs/post-pandemic-political-scars-inflation-supply-chains-fiscal-5.png": {
+    "width": 1792,
+    "height": 971
+  },
+  "/imgs/blogs/post-pandemic-political-scars-inflation-supply-chains-fiscal-6.png": {
+    "width": 1792,
+    "height": 1312
+  },
+  "/imgs/blogs/post-pandemic-political-scars-inflation-supply-chains-fiscal-7.png": {
+    "width": 1792,
+    "height": 876
   },
   "/imgs/blogs/post-training-quantization-ptq-1.png": {
     "width": 1792,
@@ -46230,6 +46769,40 @@
   "/imgs/blogs/rare-earths-and-critical-minerals-chinas-geopolitical-leverage-7.png": {
     "width": 1792,
     "height": 1265
+  },
+  "/imgs/blogs/rare-earths-wars-1.png": {
+    "width": 1655,
+    "height": 914,
+    "cover": true
+  },
+  "/imgs/blogs/rare-earths-wars-china-controls-85-percent-and-the-supply-chain-bet-1.png": {
+    "width": 1792,
+    "height": 949,
+    "cover": true
+  },
+  "/imgs/blogs/rare-earths-wars-china-controls-85-percent-and-the-supply-chain-bet-2.png": {
+    "width": 1792,
+    "height": 820
+  },
+  "/imgs/blogs/rare-earths-wars-china-controls-85-percent-and-the-supply-chain-bet-3.png": {
+    "width": 1792,
+    "height": 878
+  },
+  "/imgs/blogs/rare-earths-wars-china-controls-85-percent-and-the-supply-chain-bet-4.png": {
+    "width": 1792,
+    "height": 986
+  },
+  "/imgs/blogs/rare-earths-wars-china-controls-85-percent-and-the-supply-chain-bet-5.png": {
+    "width": 1792,
+    "height": 1184
+  },
+  "/imgs/blogs/rare-earths-wars-china-controls-85-percent-and-the-supply-chain-bet-6.png": {
+    "width": 1792,
+    "height": 1302
+  },
+  "/imgs/blogs/rare-earths-wars-china-controls-85-percent-and-the-supply-chain-bet-7.png": {
+    "width": 1792,
+    "height": 850
   },
   "/imgs/blogs/rate-limiting-and-backpressure-1.png": {
     "width": 2000,
@@ -51055,6 +51628,11 @@
   "/imgs/blogs/sanctions-reserve-freezes-and-the-2022-turning-point-for-gold-7.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/sars-2003-vs-covid-2020-political-speed-and-market-v-shapes-1.png": {
+    "width": 2405,
+    "height": 1000,
+    "cover": true
   },
   "/imgs/blogs/sbom-and-dependency-management-1.png": {
     "width": 1792,
@@ -61066,6 +61644,35 @@
     "width": 1792,
     "height": 1209
   },
+  "/imgs/blogs/the-imf-playbook-what-countries-must-do-and-market-reactions-1.png": {
+    "width": 1792,
+    "height": 1199,
+    "cover": true
+  },
+  "/imgs/blogs/the-imf-playbook-what-countries-must-do-and-market-reactions-2.png": {
+    "width": 1792,
+    "height": 823
+  },
+  "/imgs/blogs/the-imf-playbook-what-countries-must-do-and-market-reactions-3.png": {
+    "width": 1792,
+    "height": 1227
+  },
+  "/imgs/blogs/the-imf-playbook-what-countries-must-do-and-market-reactions-4.png": {
+    "width": 1792,
+    "height": 817
+  },
+  "/imgs/blogs/the-imf-playbook-what-countries-must-do-and-market-reactions-5.png": {
+    "width": 1792,
+    "height": 1231
+  },
+  "/imgs/blogs/the-imf-playbook-what-countries-must-do-and-market-reactions-6.png": {
+    "width": 1792,
+    "height": 694
+  },
+  "/imgs/blogs/the-imf-playbook-what-countries-must-do-and-market-reactions-7.png": {
+    "width": 1792,
+    "height": 1265
+  },
   "/imgs/blogs/the-impossible-trinity-pick-two-of-three-1.png": {
     "width": 1792,
     "height": 1170,
@@ -63078,6 +63685,35 @@
     "width": 1602,
     "height": 914
   },
+  "/imgs/blogs/the-political-business-cycle-and-fiscal-timing-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/the-political-business-cycle-and-fiscal-timing-2.png": {
+    "width": 1725,
+    "height": 994
+  },
+  "/imgs/blogs/the-political-business-cycle-and-fiscal-timing-3.png": {
+    "width": 1792,
+    "height": 1278
+  },
+  "/imgs/blogs/the-political-business-cycle-and-fiscal-timing-4.png": {
+    "width": 1792,
+    "height": 791
+  },
+  "/imgs/blogs/the-political-business-cycle-and-fiscal-timing-5.png": {
+    "width": 1792,
+    "height": 1358
+  },
+  "/imgs/blogs/the-political-business-cycle-and-fiscal-timing-6.png": {
+    "width": 1641,
+    "height": 842
+  },
+  "/imgs/blogs/the-political-business-cycle-and-fiscal-timing-7.png": {
+    "width": 1792,
+    "height": 1162
+  },
   "/imgs/blogs/the-price-of-insurance-and-the-taleb-universa-approach-to-tail-risk-1.png": {
     "width": 1602,
     "height": 1013,
@@ -64137,6 +64773,35 @@
   "/imgs/blogs/the-snb-2015-peg-break-when-a-central-bank-blinks-8.png": {
     "width": 1792,
     "height": 1212
+  },
+  "/imgs/blogs/the-south-china-sea-dispute-and-vn-market-risk-premium-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/the-south-china-sea-dispute-and-vn-market-risk-premium-2.png": {
+    "width": 1792,
+    "height": 821
+  },
+  "/imgs/blogs/the-south-china-sea-dispute-and-vn-market-risk-premium-3.png": {
+    "width": 1792,
+    "height": 1272
+  },
+  "/imgs/blogs/the-south-china-sea-dispute-and-vn-market-risk-premium-4.png": {
+    "width": 1785,
+    "height": 882
+  },
+  "/imgs/blogs/the-south-china-sea-dispute-and-vn-market-risk-premium-5.png": {
+    "width": 1792,
+    "height": 1320
+  },
+  "/imgs/blogs/the-south-china-sea-dispute-and-vn-market-risk-premium-6.png": {
+    "width": 1792,
+    "height": 794
+  },
+  "/imgs/blogs/the-south-china-sea-dispute-and-vn-market-risk-premium-7.png": {
+    "width": 1792,
+    "height": 1266
   },
   "/imgs/blogs/the-stock-bond-correlation-regime-1.png": {
     "width": 1792,
@@ -65894,6 +66559,11 @@
     "width": 1792,
     "height": 1178
   },
+  "/imgs/blogs/tpp-withdrawal-and-the-asian-trade-architecture-shift-1.png": {
+    "width": 2460,
+    "height": 968,
+    "cover": true
+  },
   "/imgs/blogs/tracing-stolen-funds-step-by-step-1.png": {
     "width": 1792,
     "height": 1208,
@@ -66323,6 +66993,35 @@
   "/imgs/blogs/trading-the-nfp-release-cross-asset-playbook-7.png": {
     "width": 1792,
     "height": 778
+  },
+  "/imgs/blogs/trading-the-us-election-sectors-dollar-rate-expectations-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
+  "/imgs/blogs/trading-the-us-election-sectors-dollar-rate-expectations-2.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/trading-the-us-election-sectors-dollar-rate-expectations-3.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/trading-the-us-election-sectors-dollar-rate-expectations-4.png": {
+    "width": 1792,
+    "height": 959
+  },
+  "/imgs/blogs/trading-the-us-election-sectors-dollar-rate-expectations-5.png": {
+    "width": 1641,
+    "height": 914
+  },
+  "/imgs/blogs/trading-the-us-election-sectors-dollar-rate-expectations-6.png": {
+    "width": 1784,
+    "height": 1028
+  },
+  "/imgs/blogs/trading-the-us-election-sectors-dollar-rate-expectations-7.png": {
+    "width": 1602,
+    "height": 914
   },
   "/imgs/blogs/train-eval-mode-bugs-1.png": {
     "width": 1792,
@@ -67744,6 +68443,11 @@
   "/imgs/blogs/utilities-power-water-gas-sector-vietnam-defensive-cash-7.png": {
     "width": 1792,
     "height": 874
+  },
+  "/imgs/blogs/vaccine-nationalism-how-hoarding-supply-moved-em-markets-1.png": {
+    "width": 2358,
+    "height": 1326,
+    "cover": true
   },
   "/imgs/blogs/valuation-and-conflicts-governance-1.png": {
     "width": 1792,
@@ -69405,6 +70109,35 @@
   "/imgs/blogs/washington-mutual-and-the-2008-mortgage-bank-failures-8.png": {
     "width": 1792,
     "height": 1199
+  },
+  "/imgs/blogs/water-scarcity-as-a-geopolitical-risk-factor-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
+  },
+  "/imgs/blogs/water-scarcity-as-a-geopolitical-risk-factor-2.png": {
+    "width": 1593,
+    "height": 915
+  },
+  "/imgs/blogs/water-scarcity-as-a-geopolitical-risk-factor-3.png": {
+    "width": 1792,
+    "height": 670
+  },
+  "/imgs/blogs/water-scarcity-as-a-geopolitical-risk-factor-4.png": {
+    "width": 1602,
+    "height": 914
+  },
+  "/imgs/blogs/water-scarcity-as-a-geopolitical-risk-factor-5.png": {
+    "width": 1792,
+    "height": 920
+  },
+  "/imgs/blogs/water-scarcity-as-a-geopolitical-risk-factor-6.png": {
+    "width": 1697,
+    "height": 914
+  },
+  "/imgs/blogs/water-scarcity-as-a-geopolitical-risk-factor-7.png": {
+    "width": 1792,
+    "height": 885
   },
   "/imgs/blogs/weather-the-wasde-and-the-supply-shock-trading-the-report-1.png": {
     "width": 1792,
