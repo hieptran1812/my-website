@@ -20,7 +20,7 @@ The destruction was triggered not by a bank failure, not by an external shock, b
 
 What followed was not simply a financial story. It was a collision between the logic of sovereign debt markets, the institutional architecture of the eurozone, and the democratic politics of a country being asked to impose generational hardship on its citizens in exchange for loans they were not sure they could repay. The Greece crisis became the laboratory in which the world learned what a monetary union without a fiscal union actually means when something goes wrong.
 
-![Sovereign debt crisis transmission pipeline — Greece 2010–15](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-1.webp)
+![Sovereign debt crisis transmission pipeline — Greece 2010–15](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-1.png)
 
 ## Foundations: Sovereign Debt, Bond Yields, and Monetary Unions
 
@@ -40,7 +40,7 @@ The risk premium embedded in a sovereign yield is called the *spread* — the di
 
 **Contagion mechanics: how one country's crisis becomes another's.** The eurozone's architecture created an unusual contagion pathway. Banks across the eurozone had bought peripheral sovereign bonds on the assumption that eurozone membership was an implicit guarantee. When that assumption was tested, banks that had concentrated peripheral exposure — particularly French banks with large Greek holdings and Spanish banks with Italian exposure — faced mark-to-market losses on their bond portfolios. Regulators required higher capital ratios in response to the uncertainty, which caused banks to reduce lending, which slowed economic growth across the eurozone, which weakened fiscal revenues, which widened deficits — a classic cross-border negative feedback loop. Understanding this mechanism is why the ECB eventually decided that capping sovereign spreads was necessary for preserving the monetary transmission mechanism, which is within its mandate — a legal framing that enabled OMT without violating the no-monetary-financing prohibition.
 
-![Greece 10-year government bond yield 2009–2025](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-2.webp)
+![Greece 10-year government bond yield 2009–2025](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-2.png)
 
 ## The Political Moves
 
@@ -74,7 +74,7 @@ The face-value haircut of 53.5% was the headline number. But as we will examine 
 
 The PSI changed the composition of Greek debt decisively. Before the restructuring, roughly 60% of Greek debt was held by private investors — banks, hedge funds, insurance companies. After the PSI, that share collapsed as the official sector (Troika) held the bulk. This had a profound consequence for any future restructuring: the creditors were now governments and multilateral institutions, not anonymous bond markets. And governments have politics.
 
-![Greek crisis bailout timeline: three bailouts, one near-exit](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-3.webp)
+![Greek crisis bailout timeline: three bailouts, one near-exit](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-3.png)
 
 ## The Financial Channels
 
@@ -100,7 +100,7 @@ From 2010 to 2012, capital fled Greece, Portugal, Spain, and Italy toward German
 
 The TARGET2 data is published monthly and freely available. A trader watching the Bundesbank claims in late 2011 would have seen a clear signal: the interbank funding market had broken down. Greek, Spanish, and Italian banks could not raise wholesale funding and were relying entirely on ECB emergency liquidity. That signal preceded the political crisis by months.
 
-![TARGET2 imbalances: eurozone's hidden crisis gauge](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-4.webp)
+![TARGET2 imbalances: eurozone's hidden crisis gauge](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-4.png)
 
 ### Emergency Liquidity Assistance (ELA) and the Bank Hostage
 
@@ -209,7 +209,7 @@ The game theory outcome was nearly deterministic once you accepted these paramet
 
 On July 13, the third bailout — €86 billion over three years — was agreed. The conditions included: pension reforms, VAT increases to 23%, labor market liberalization, privatization of state assets, and the establishment of a €50 billion privatization fund. Tsipras flew home and told the Greek parliament he had fought hard but the gun was at the temple. He won the vote in parliament with opposition support, after 39 Syriza MPs voted against.
 
-![OXI referendum and Tsipras capitulation timeline](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-6.webp)
+![OXI referendum and Tsipras capitulation timeline](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-6.png)
 
 **The democratic legitimacy question** that the OXI paradox raised was profound and remains unresolved in EU political theory: what does it mean for a country to hold democratic elections inside a monetary union when the constraints of that union effectively determine economic policy? If a Greek voter chose Syriza's platform, and that platform was rendered impossible by ECB monetary decisions and Eurogroup political decisions, in what sense was Greece self-governing? This question energized both anti-EU movements across Europe and serious academic debate about the democratic deficit of eurozone institutions.
 
@@ -223,7 +223,7 @@ Official creditors do not participate in market restructurings in the same way p
 
 This means that a future Greek debt restructuring — if one were needed — would be predominantly a political negotiation between Greece and eurozone governments, not a financial negotiation between Greece and bond markets. The shift from private to official creditors transformed the nature of any future crisis. Markets priced this correctly: once the official sector absorbed most of the risk, Greek bonds became less about Greek fiscal fundamentals and more about ECB policy and eurozone political solidarity.
 
-![PSI haircut mechanics: what creditors actually lost](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-5.webp)
+![PSI haircut mechanics: what creditors actually lost](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-5.png)
 
 ## The Recovery Arc: 2015–2021
 
@@ -313,7 +313,7 @@ Suppose it is January 26, 2015 — the day after Syriza's victory. You are a mac
 
 All four legs of the trade were profitable by July 13, 2015 — the date of the third bailout agreement.
 
-![Greece 10Y yield recovery arc 2015–2025](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-7.webp)
+![Greece 10Y yield recovery arc 2015–2025](/imgs/blogs/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis-7.png)
 
 ## Common Misconceptions
 

@@ -26,7 +26,7 @@ That gap — between what a government has done and what it might do — is the 
 
 The diagram above is the mental model for this post.
 
-![Government policy toolkit matrix showing speed, reversibility, cost to sender, cost to target, and escalation risk for each tool type](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-1.webp)
+![Government policy toolkit matrix showing speed, reversibility, cost to sender, cost to target, and escalation risk for each tool type](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-1.png)
 
 Most investors learn to model economic channels: how a tariff raises input costs, how a sanction freezes trade. Fewer learn to model the political decision that determines which tool gets used in the first place. That is what this post is about. We are going to decode the decision calculus governments run before they issue any statement — because the choice of tool tells you far more about a crisis's trajectory than the tool's immediate impact.
 
@@ -70,7 +70,7 @@ This concept is central to decoding political signals. When a government chooses
 
 When a government faces a crisis, it does not simply pick the most effective tool. It runs a sequence of filters that narrow the option space down to what is actually *deployable* given the constraints of the moment. Understanding these filters is the core analytical skill.
 
-![How a government chooses its response: five-stage decision pipeline from crisis event to tool selected](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-2.webp)
+![How a government chooses its response: five-stage decision pipeline from crisis event to tool selected](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-2.png)
 
 ### Filter 1: Domestic Political Constraints
 
@@ -106,7 +106,7 @@ The fourth filter is positional: where on the escalation ladder should the respo
 
 Theorist Herman Kahn described this in his 1965 work on nuclear strategy, but the concept applies to any confrontation. A 10-rung ladder (running from diplomatic protest to nuclear threshold) is the standard framework. The insight is that each rung has a characteristic *de-escalation window* — the probability that rational actors use a response at that level to open a negotiated exit.
 
-![The escalation ladder: 10 rungs from diplomatic protest to nuclear threshold, with de-escalation windows](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-3.webp)
+![The escalation ladder: 10 rungs from diplomatic protest to nuclear threshold, with de-escalation windows](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-3.png)
 
 Below rung 5 (covert action / proxy conflict), de-escalation is always available because no direct military confrontation has occurred and no casualties have been attributed. Rungs 1-4 typically resolve within weeks to months. Historical data from the International Crisis Behavior dataset (1918-2023) suggests that approximately 78% of crises at rungs 1-4 de-escalate within 90 days.
 
@@ -144,7 +144,7 @@ The most important phrase to monitor is any *combination of specific sector name
 
 Different tools are optimal for different situations. The matrix below maps crisis type to the historically dominant government response and the typical market read that follows.
 
-![Crisis type vs optimal government tool matrix showing dominant tool, secondary tool, and typical market read](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-7.webp)
+![Crisis type vs optimal government tool matrix showing dominant tool, secondary tool, and typical market read](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-7.png)
 
 Three patterns stand out from this matrix:
 
@@ -158,7 +158,7 @@ Three patterns stand out from this matrix:
 
 The single most important distinction for market forecasting is whether a government response is *calibrated* (proportionate, targeted, leaves exit paths open) or a *maximum response* (uses all available leverage simultaneously, closes exit paths).
 
-![Before-after showing maximum response vs calibrated response asset price outcomes](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-5.webp)
+![Before-after showing maximum response vs calibrated response asset price outcomes](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-5.png)
 
 Maximum responses are extremely rare in modern geopolitics. The last unambiguous example was the Allied response to Germany and Japan in World War II — the explicit objective was unconditional surrender. In the current era, even full-spectrum sanctions on Russia in 2022 carved out energy exceptions initially, because the EU could not bear the economic cost of an immediate full cut.
 
@@ -207,7 +207,7 @@ The worked example for an investor: when you see a Section 301 investigation ann
 
 China's response to the July 2018 US Section 301 tariffs is one of the most analytically elegant examples of calibrated retaliation in modern trade war history.
 
-![China 2018 retaliation graph: soy, pork, and auto targets chosen for political sensitivity, Treasuries deliberately excluded](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-4.webp)
+![China 2018 retaliation graph: soy, pork, and auto targets chosen for political sensitivity, Treasuries deliberately excluded](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-4.png)
 
 The US had targeted Chinese goods with a 25% tariff on \$34 billion of List 1 items. China retaliated the same day with its own 25% tariff on \$34 billion of US goods. But the targeting was anything but symmetric.
 
@@ -273,7 +273,7 @@ Market implication: the probability distribution implied investors should have p
 
 Russia's weaponization of European gas supplies between 2021 and 2023 is the clearest modern example of a government deploying a tool on the escalation ladder in a carefully managed sequence rather than all at once.
 
-![Russia pipeline gas to Europe 2018-2025 showing gradual weaponization not immediate cutoff](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-6.webp)
+![Russia pipeline gas to Europe 2018-2025 showing gradual weaponization not immediate cutoff](/imgs/blogs/political-moves-decoded-how-governments-choose-their-response-6.png)
 
 From 2018 to 2019, Russia supplied approximately 198-201 bcm/year through its pipeline network to Europe. This was near-full capacity utilization and represented approximately 40% of Europe's total gas consumption.
 

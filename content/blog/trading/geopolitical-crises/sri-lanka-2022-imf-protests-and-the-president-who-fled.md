@@ -27,7 +27,7 @@ This wasn't a war. It wasn't a natural disaster. It was a sovereign debt crisis 
 
 For investors, the Sri Lanka crisis matters because it contains every mechanism of emerging market blow-ups in concentrated form: currency collapse, import compression, social unrest, sovereign default, geopolitical creditor complexity, and ultimately, IMF-mediated restructuring. Understanding the sequence, the signals, and the market pricing at each stage teaches you how to read the next one.
 
-![Sri Lanka 2022 crisis transmission: six steps from tourism collapse to IMF bailout](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-1.webp)
+![Sri Lanka 2022 crisis transmission: six steps from tourism collapse to IMF bailout](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-1.png)
 
 ## Foundations: What Every Term Means Before We Go Further
 
@@ -66,7 +66,7 @@ When a country cannot service its sovereign bonds, it may reach a **restructurin
 
 Most restructurings use a combination. The key metric is **NPV (net present value) reduction** — how much has the present value of all future payments been reduced, relative to the original terms? For Sri Lanka's November 2023 deal, the NPV reduction for SLSD holders was roughly 27-36% depending on assumptions, with bonds settling at approximately 45 cents on the dollar.
 
-![Sri Lanka's debt position: before the crisis vs. after the November 2023 IMF restructuring](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-4.webp)
+![Sri Lanka's debt position: before the crisis vs. after the November 2023 IMF restructuring](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-4.png)
 
 ### The Common Framework: The G20's Debt Restructuring Club
 
@@ -134,7 +134,7 @@ The political story is dramatic, but the financial mechanics are what you need t
 
 ### The Rupee Collapse: How Currency Pegs Become Currency Crises
 
-![Sri Lanka rupee depreciated from 200 to 360 per USD in 2022 before partially recovering to 300 by 2024](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-2.webp)
+![Sri Lanka rupee depreciated from 200 to 360 per USD in 2022 before partially recovering to 300 by 2024](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-2.png)
 
 Sri Lanka's central bank maintained an official exchange rate throughout 2021 and into early 2022, keeping the rupee at around 200-202 LKR/USD through direct intervention — selling dollars from reserves to support the peg. This intervention was unsustainable: every dollar sold to defend the peg was a dollar less in reserves to service external debt.
 
@@ -150,7 +150,7 @@ The currency collapse itself then became a secondary driver of the crisis:
 
 ### The FX Reserve Drain: The Slow Bleed and the Fast Fall
 
-![Sri Lanka FX reserves fell from 7.5 billion USD in 2019 to 1.6 billion in April 2022](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-3.webp)
+![Sri Lanka FX reserves fell from 7.5 billion USD in 2019 to 1.6 billion in April 2022](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-3.png)
 
 FX reserves are the most important real-time indicator in an emerging market sovereign crisis. Let's trace Sri Lanka's trajectory with precision.
 
@@ -192,7 +192,7 @@ This burn trajectory was visible in public Central Bank of Sri Lanka monthly dat
 
 ### The Debt Trap: How Hambantota Became a 99-Year Lease
 
-![China debt trap: from BRI loan to 99-year lease on Hambantota Port through debt-for-equity swap](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-5.webp)
+![China debt trap: from BRI loan to 99-year lease on Hambantota Port through debt-for-equity swap](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-5.png)
 
 The Hambantota Port is the canonical example of what critics call "debt trap diplomacy" — a pattern where Chinese loans for infrastructure projects in developing countries result in those countries ceding strategic assets when they can't repay.
 
@@ -224,7 +224,7 @@ At 6.3% compounded over a decade with inadequate revenue, the debt grew faster t
 
 ### The Sovereign Bond Collapse: From Near-Par to Distressed
 
-![SLSD sovereign bond price from 96 cents on dollar in 2020 to 10 cents in July 2022 then 45 cents after restructuring](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-6.webp)
+![SLSD sovereign bond price from 96 cents on dollar in 2020 to 10 cents in July 2022 then 45 cents after restructuring](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-6.png)
 
 Sri Lanka's dollar-denominated sovereign bonds tell the entire story of the crisis in price form:
 
@@ -318,7 +318,7 @@ The Sri Lanka crisis created several distinct tradeable opportunities and import
 
 ### The IMF Program Types and Market Reactions
 
-![IMF program types compared by duration conditions and sovereign spread impact](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-7.webp)
+![IMF program types compared by duration conditions and sovereign spread impact](/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-7.png)
 
 The announcement of an IMF program is one of the most reliable positive signals in emerging market sovereign debt. But the *type* of program matters enormously for the size and durability of the spread compression that follows.
 

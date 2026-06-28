@@ -23,7 +23,7 @@ On October 1, 2017, Spanish police were photographing ballot papers in polling s
 
 That is the fundamental insight this post unpacks: independence referendums are not just political theater — they are conditional credit events. They force markets to price a probability-weighted average of two futures, and the gap between those two futures is the independence risk premium.
 
-![IBEX 35 index and Spain-Germany sovereign spread through the Catalonia crisis Oct 2017](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-1.webp)
+![IBEX 35 index and Spain-Germany sovereign spread through the Catalonia crisis Oct 2017](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-1.png)
 
 ## Foundations: What Is Political Risk and How Does It Price into Markets
 
@@ -101,7 +101,7 @@ IRP = V(remain) - Market price
 
 Here P(leave) is the implied probability of secession from prediction markets or polls, V(remain) is the value under the status quo, and V(leave) is the value if secession occurs. The last term — [V(remain) - V(leave)] — is the severity discount: how much worse would the asset perform in a secession scenario?
 
-![Political shock transmission pipeline from referendum to equity repricing](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-4.webp)
+![Political shock transmission pipeline from referendum to equity repricing](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-4.png)
 
 For a Catalan bank in October 2017, this framework gives us a way to measure the premium. Let's build it out.
 
@@ -170,7 +170,7 @@ Each relocation removed one element of jurisdictional risk. For banks, the elimi
 
 The HQ relocation wave created a fascinating market dynamic: as each announcement came out, the specific stock partially recovered, while the IBEX broadly stabilized. The market was not wrong to sell the banks initially — the risk was real. It was correct to partially recover as the firms demonstrably mitigated it.
 
-![CaixaBank and Banco Sabadell stock performance versus IBEX 35 through the Catalonia crisis](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-2.webp)
+![CaixaBank and Banco Sabadell stock performance versus IBEX 35 through the Catalonia crisis](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-2.png)
 
 ### Channel 4 — Bond Market Repricing for Sub-National Debt
 
@@ -184,7 +184,7 @@ A systematic strategy: monitor the spread between sub-national bonds (Generalita
 
 The CaixaBank and Sabadell HQ relocations deserve more attention than they typically receive in retrospect, because they illustrate a precise mechanism through which political risk is arbitraged out of asset prices.
 
-![Before and after HQ relocation for Catalan banks — credit and legal risk eliminated](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-5.webp)
+![Before and after HQ relocation for Catalan banks — credit and legal risk eliminated](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-5.png)
 
 Before the relocation, a rational investor holding CaixaBank bonds or shares had to price the possibility that Catalan secession would place the bank in a jurisdictional no-man's-land: outside the Spanish deposit guarantee framework, potentially outside the ECB's emergency liquidity assistance program, and governed by regulations that did not yet exist.
 
@@ -219,7 +219,7 @@ The UK's devolved constitutional structure meant that an independent Scotland wo
 
 Because these implications were all channeled through the currency question, FX became the primary shock absorber. Bond markets were less affected — Gilts trade on UK-wide credit and inflation, and investors correctly assessed that the rUK (rest of UK) would remain a strong creditor regardless of Scotland's departure. Equities were largely flat because few UK-listed companies had Scotland-specific jurisdiction risk comparable to Catalonia's bank HQ situation.
 
-![GBP/USD through Scotland 2014 independence referendum showing poll shock and recovery](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-3.webp)
+![GBP/USD through Scotland 2014 independence referendum showing poll shock and recovery](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-3.png)
 
 The currency's primary risk-bearing role explains the asymmetric recovery: when the 55% No result came in, GBP bounced immediately and sharply — all of the uncertainty that had been priced into the exchange rate was released in one session.
 
@@ -320,13 +320,13 @@ Options markets price political uncertainty through implied volatility — the m
 
 After the result, implied volatility collapses rapidly — this is the "volatility crush" that makes long options expensive to hold through binary events. The asymmetric trade is to be short volatility (sell options) after a decisive No result, because the crush is sharp and predictable.
 
-![Comparison matrix of independence referendum risk premiums across three cases](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-6.webp)
+![Comparison matrix of independence referendum risk premiums across three cases](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-6.png)
 
 ### The Timeline Pattern
 
 The Catalonia crisis produced a near-perfect escalation timeline that illustrates the typical pattern:
 
-![Catalonia 2017 crisis event timeline with market reactions at each political escalation](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-7.webp)
+![Catalonia 2017 crisis event timeline with market reactions at each political escalation](/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-7.png)
 
 The pattern: political shock → immediate pricing → partial stabilization on corporate response (HQ moves, government reassurances) → re-escalation if political situation worsens → final resolution (direct rule, vote outcome, negotiated settlement) → rapid spread compression and equity recovery. Each phase is tradeable if you identify it early.
 

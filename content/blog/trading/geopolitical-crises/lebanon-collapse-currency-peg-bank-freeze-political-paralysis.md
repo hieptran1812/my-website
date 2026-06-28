@@ -21,7 +21,7 @@ By the first week of November 2019, Lebanese banks were quietly instructing bran
 
 What followed over the next four years was one of the most severe economic collapses in modern peacetime history. The World Bank, in a 2021 report, classified Lebanon's crisis as one of the worst economic depressions globally since the mid-19th century. This post reconstructs the mechanics of that collapse: the financial engineering that made it inevitable, the political architecture that made reform impossible, and the cascading shocks — including a catastrophic port explosion — that turned a financial crisis into a civilizational rupture.
 
-![Lebanon Ponzi Deposit Scheme Pipeline](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-1.webp)
+![Lebanon Ponzi Deposit Scheme Pipeline](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-1.png)
 
 ## Foundations: Currency Pegs, Ponzi Finance, and Political Debt
 
@@ -61,7 +61,7 @@ Lebanon held parliamentary elections in May 2022. The elections produced a fragm
 
 Electing a president in Lebanon requires a two-thirds quorum in the 128-seat parliament to begin the session, and an absolute majority (65 votes) for the first round, dropping to a simple majority in subsequent rounds. Any bloc that refused to attend the session could prevent the vote. Over the following 26 months, parliament met 12 times to elect a president. Each session failed — sometimes because Hezbollah and FPM stayed away, sometimes because the Christian blocs could not agree on a candidate, sometimes because external actors (Saudi Arabia, Iran, France) had competing preferences. Lebanon was without a president from October 31, 2022 until Joseph Aoun was elected in January 2025, a 26-month vacuum that left the country without anyone legally empowered to sign executive decrees, appoint ministers, or ratify international agreements.
 
-![Lebanon Political Structure: Confessional Power-Sharing](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-4.webp)
+![Lebanon Political Structure: Confessional Power-Sharing](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-4.png)
 
 ### IMF stalemate: why the deal never closed
 
@@ -83,7 +83,7 @@ The Banque du Liban's "financial engineering" operations — a term BdL Governor
 
 **The collapse trigger:** In 2019, multiple factors converged. The regional economy softened, depressing Gulf-based Lebanese remittances. The political risk premium on Lebanese assets widened following credit rating downgrades by Moody's (October 2018) and S&P (January 2019). Confidence-sensitive deposit inflows decelerated. BdL's gross reserves began declining from their \$45 billion peak. Commercial banks, sensing growing risk, began quietly reducing their exposure to BdL certificates of deposit — the exact opposite of the inflow BdL needed. Once the financial engineering machine required new deposits to pay old ones and new deposits were slowing, the arithmetic of collapse was locked in.
 
-![LBP/USD Devaluation: 22-Year Peg Destroyed in Four Years](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-2.webp)
+![LBP/USD Devaluation: 22-Year Peg Destroyed in Four Years](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-2.png)
 
 ### Lollars: the trapped money concept
 
@@ -107,7 +107,7 @@ Suppose BdL offers a Lebanese commercial bank a 16% annual USD return on a 1-yea
 
 How does BdL fund the \$6 million gap? It attracts another dollar deposit — say, \$106 million from a new round of financial engineering. The gross reserves increase by \$6 million even though BdL has become \$6 million poorer in net terms. This works indefinitely as long as new deposits keep arriving. But if new deposits slow — as happened in 2019 — BdL must pay \$16 million from existing reserves while receiving only \$10 million from the government, drawing down the reserve buffer by \$6 million per \$100 million of such operations. Across a portfolio of \$60–70 billion in such operations (the estimated scale by 2019), the annual reserve drain at this rate would be \$3.6–4.2 billion per year — consistent with the observed reserve decline from \$45 billion in 2018 to \$38 billion by mid-2019.
 
-![BdL Gross Foreign Reserve Depletion Timeline](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-3.webp)
+![BdL Gross Foreign Reserve Depletion Timeline](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-3.png)
 
 #### Worked example: What happened to a depositor's USD 50,000?
 
@@ -175,7 +175,7 @@ Prime Minister Hassan Diab's government — itself a technocratic caretaker inst
 
 The political vacuum during those 13 months meant Lebanon had no government capable of signing the IMF framework agreement. The \$11 billion in international reconstruction aid pledged at the CEDRE conference in 2018 and reaffirmed after the explosion was conditioned on governance reforms Lebanon never passed. The explosion thus had a compounding fiscal effect: it destroyed \$15 billion of economic capacity, eliminated any short-term path to reconstruction finance, and consumed whatever residual political energy might have gone toward an IMF deal.
 
-![Beirut Port Explosion: Fiscal and Economic Transmission](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-6.webp)
+![Beirut Port Explosion: Fiscal and Economic Transmission](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-6.png)
 
 #### Worked example: Port explosion fiscal shock ratio
 
@@ -214,7 +214,7 @@ President Michel Aoun's term expired on October 31, 2022. Lebanon subsequently h
 
 The presidential vacuum was not an anomaly or an accident. It was a predictable outcome of Lebanon's confessional political structure applied to a situation where the stakes of the presidency — control over the resolution of the banking crisis, IMF negotiations, post-Hezbollah political realignment — were so high that no major bloc would accept a candidate chosen by another.
 
-![Bank Freeze Before and After: What Happened to Your Deposit](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-5.webp)
+![Bank Freeze Before and After: What Happened to Your Deposit](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-5.png)
 
 ## Early Warning Signals: What You Could Have Seen
 
@@ -260,7 +260,7 @@ The irony: dollarization, which existed to protect depositors from LBP devaluati
 
 This dollarization trap is relevant for any analysis of other heavily dollarized emerging market banking systems — Ecuador, El Salvador, Panama (fully dollarized), or partially dollarized systems like Cambodia or Zimbabwe. Full dollarization (no domestic currency at all) eliminates devaluation risk but also eliminates the inflation escape valve. Lebanon had the worst of both worlds: a domestic currency that was pegged to the dollar (providing no automatic stabilizer) while the banking system was almost entirely dollarized (concentrating all currency risk in bank balance sheets rather than spreading it across the economy through gradual inflation).
 
-![Deposit Haircut Mechanics: Before and After the Freeze](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-7.webp)
+![Deposit Haircut Mechanics: Before and After the Freeze](/imgs/blogs/lebanon-collapse-currency-peg-bank-freeze-political-paralysis-7.png)
 
 #### Worked example: Lollar arbitrage and the two-tier market
 

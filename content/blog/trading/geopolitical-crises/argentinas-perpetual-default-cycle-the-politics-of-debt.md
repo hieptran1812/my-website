@@ -21,7 +21,7 @@ Within two weeks, four presidents had resigned. Crowds attacked banks with baseb
 
 Twenty-three years later, in November 2023, Javier Milei — a self-described "anarcho-capitalist" economist with a chainsaw as his campaign prop — won the Argentine presidency on a platform of abolishing the central bank and dollarizing the economy. On his first day in office, he devalued the peso by 54%. The EMBI spread (Argentina's sovereign debt risk premium over U.S. Treasuries) fell from 1,560 basis points at his election to 720 basis points a year later. The Merval stock index, measured in USD, more than doubled. Whether Milei's shock therapy has finally broken the cycle — or merely reset the countdown clock — is the question every investor in emerging markets is now pricing.
 
-![Argentina's Default Cycle Self-Reinforcing Loop](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-1.webp)
+![Argentina's Default Cycle Self-Reinforcing Loop](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-1.png)
 
 ## Foundations: Sovereign Debt, Currency Pegs, and Why Countries Default
 
@@ -200,7 +200,7 @@ The peso devaluation trajectory shifted to a managed "crawl" — a pre-announced
 
 Whether Milei's approach breaks the cycle permanently depends on whether Argentina can generate a structural fiscal surplus that doesn't require IMF support or new debt issuance — something no Argentine government has achieved since the late 1990s.
 
-![Argentina Merval Index USD-Adjusted](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-2.webp)
+![Argentina Merval Index USD-Adjusted](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-2.png)
 
 ## The Financial Channels
 
@@ -219,7 +219,7 @@ Default probability ≈ 20% ÷ (1 - 0.50) = **40% per year**
 
 This means markets priced a ~40% chance of another default in any given year when spreads were at 2,000 bps — a level Argentina held for most of 2020–2023.
 
-![Argentina EMBI Spread](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-3.webp)
+![Argentina EMBI Spread](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-3.png)
 
 #### Worked example:
 
@@ -245,7 +245,7 @@ The "peso-dollar trap" is the defining feature of Argentina's crisis cycle. It o
 
 **Pressure 4: Dollarization of savings.** Argentines have learned through repeated experience that peso savings evaporate. Estimates suggest Argentines hold \$200–400 billion in physical USD outside the banking system — more than total Argentine GDP. This creates a one-way valve: in normal times, some of this USD gradually enters the formal economy. In crisis, it all rushes to safety. No policy can easily reverse 80 years of demonstrated peso unreliability.
 
-![Argentina's Peso-Dollar Trap Mechanism](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-6.webp)
+![Argentina's Peso-Dollar Trap Mechanism](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-6.png)
 
 ### Vulture Fund Mechanics: Elliott Management and the NML Case
 
@@ -261,13 +261,13 @@ The legal architecture that made this possible:
 
 **RUFO clause complication**: Argentina's 2005 exchange bonds contained a "Rights Upon Future Offers" (RUFO) clause: if Argentina voluntarily offered holdouts better terms than exchange bondholders had received, exchange bondholders could claim the same better terms. This clause expired December 31, 2014. It was the primary reason Argentina's Kirchner government refused to settle with NML Capital even after losing in court — settlement before January 2015 could have triggered RUFO claims costing tens of billions of additional dollars.
 
-![Vulture Fund Holdout Mechanics](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-5.webp)
+![Vulture Fund Holdout Mechanics](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-5.png)
 
 The aftermath: the NML case prompted significant changes in sovereign bond documentation. Post-2014 bonds now typically include **collective action clauses (CACs)** that allow a supermajority of creditors (usually 75%) to bind all creditors to a restructuring. The International Capital Market Association (ICMA) updated its model bond covenants to close the pari passu loophole. Argentina's experience directly shaped the architecture of sovereign bond markets globally.
 
 ## Argentina's Default Timeline: 1989–2024
 
-![Argentina's Sovereign Default Timeline](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-4.webp)
+![Argentina's Sovereign Default Timeline](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-4.png)
 
 Argentina's nine defaults since independence follow a pattern: external shock or domestic political crisis triggers capital flight; the government imposes controls; controls increase the distortion; the distortion becomes unsustainable; the default or devaluation resolves the immediate crisis; recovery begins; the political coalition supporting fiscal discipline fractures; spending accelerates; and the next cycle begins.
 
@@ -408,7 +408,7 @@ This assumes no leverage and full buy-and-hold — in practice, most investors w
 
 Key question for future cycles: at what EMBI level and Merval USD-adjusted level does the next entry opportunity appear? The answer depends on whether Milei's reforms hold — if they do, Argentina may trade at a new, lower structural EMBI level. If they don't, the entry will come again.
 
-![Milei Shock Therapy: Merval Recovery and EMBI Compression](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-7.webp)
+![Milei Shock Therapy: Merval Recovery and EMBI Compression](/imgs/blogs/argentinas-perpetual-default-cycle-the-politics-of-debt-7.png)
 
 ### Trade 4: Peso Carry Positioning (Advanced)
 

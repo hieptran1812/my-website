@@ -28,7 +28,7 @@ Two years later, on the night of July 15–16, 2016, a faction of Turkey's milit
 
 The Turkish lira, which had traded at 2.88 to the dollar on July 14, 2016, would reach 8, then 18, then 25, then pass 37 by 2025. The coup failed militarily but succeeded in destroying what remained of Turkey's institutional independence. That distinction — between the *event* of a coup and its *institutional aftermath* — is the central insight this post builds from the ground up.
 
-![24-hour coup transmission chain from gunshots to asset prices](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-1.webp)
+![24-hour coup transmission chain from gunshots to asset prices](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-1.png)
 
 ## Foundations: What a coup is, and why markets care about it
 
@@ -144,7 +144,7 @@ Institutional bond investors in London and New York wake up to the news. The cou
 **Hours 8–24: Information triage**
 Now the critical signals emerge. What is the constitutional status of the new government? What is the international community saying? Has the business community endorsed, opposed, or stayed silent? These signals — more than the initial price move — determine whether day 2 is a recovery or a further selloff.
 
-![Thailand 2014 vs Turkey 2016: stabilizing vs destabilizing coup outcomes](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-2.webp)
+![Thailand 2014 vs Turkey 2016: stabilizing vs destabilizing coup outcomes](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-2.png)
 
 ## Case Study 1: Thailand 2014 — the stability premium
 
@@ -185,7 +185,7 @@ On the night of July 15, 2016, elements within the Turkish military — later at
 
 ### Market reaction — the overnight window
 
-![Turkish lira TRY/USD 2015-2025: 7-year destabilizing coup repricing](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-3.webp)
+![Turkish lira TRY/USD 2015-2025: 7-year destabilizing coup repricing](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-3.png)
 
 The immediate market reaction was severe: the Turkish lira fell 4.7% overnight (from 2.88 to 3.02 TRY/USD in NDF markets) before the domestic market opened. When the Istanbul Stock Exchange (BIST100) opened on Monday July 18 (markets were closed Monday as officials assessed damage), it fell 7.1%. Turkish Eurobond spreads widened approximately 80 bps.
 
@@ -237,7 +237,7 @@ On February 1, 2021, at 3 AM local time, the military detained Suu Kyi, Presiden
 
 ### Market reaction — extreme because of pre-existing vulnerability
 
-![Myanmar after Feb 2021 coup: GDP collapse and kyat freefall](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-5.webp)
+![Myanmar after Feb 2021 coup: GDP collapse and kyat freefall](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-5.png)
 
 Myanmar's financial markets were far less developed than Thailand's or Turkey's, which made the shock transmission more extreme:
 
@@ -270,7 +270,7 @@ The result: the kyat had no anchor. By 2024, it was trading around MMK 3,200 per
 
 ## The 48-hour classification framework
 
-![48-hour coup classification matrix: stabilizing vs destabilizing signals](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-4.webp)
+![48-hour coup classification matrix: stabilizing vs destabilizing signals](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-4.png)
 
 Based on the three case studies and a broader review of coup outcomes (Thailand 2006, Pakistan 1999, Ecuador 2000, Honduras 2009, Fiji 2006, Egypt 2013, Sudan 2019, Mali 2020, Guinea 2021), four signals reliably classify a coup within 48 hours:
 
@@ -308,7 +308,7 @@ Myanmar 2021: the entire Tatmadaw leadership acted together. But the civilian re
 
 ## The recovery timeline: patterns across history
 
-![Three coup case studies: asset repricing over 7 years](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-6.webp)
+![Three coup case studies: asset repricing over 7 years](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-6.png)
 
 Studying coup outcomes across the past 30 years reveals a consistent pattern:
 
@@ -330,7 +330,7 @@ Studying coup outcomes across the past 30 years reveals a consistent pattern:
 - GDP contraction of 5–20% in first year
 - No return to pre-coup asset levels
 
-![Coup recovery paths: Thailand recovers; Turkey and Myanmar do not](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-7.webp)
+![Coup recovery paths: Thailand recovers; Turkey and Myanmar do not](/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-7.png)
 
 ## The institutional quality index: tracking degradation in advance
 

@@ -27,7 +27,7 @@ Ağbal had been in the role for exactly 132 days. In that time, he had done some
 
 The reason, broadly understood, was that President Recep Tayyip Erdogan disagreed with him. Erdogan holds a sincere, publicly stated belief that high interest rates cause inflation rather than cure it — a position that contradicts the consensus of global monetary economics. This is not a secret or a surprise: Erdogan had stated this position many times, had fired Ağbal's two predecessors for the same reason, and would, after Ağbal, continue the experiment with a fourth governor who would cut rates from 19% to 8.5% while inflation soared to 85%. This post is about understanding exactly what happened, why it happened the way it did, and what it tells us about how to read and trade emerging-market assets when political risk attacks the most fundamental institutional variable of all: whether the central bank is actually independent.
 
-![The political-monetary-FX doom loop: how each actor reinforces the cycle](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-1.webp)
+![The political-monetary-FX doom loop: how each actor reinforces the cycle](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-1.png)
 
 The diagram above is the mental model for this entire post. Political pressure on a central bank, if it leads to governor firings and forced rate cuts, does not stop at monetary policy. It starts a feedback loop: rate cuts cause currency depreciation, which causes import prices to rise, which causes inflation, which causes more political pressure. Understanding each link in that chain — and why the chain was so hard to break — is the substance of the analysis that follows.
 
@@ -93,7 +93,7 @@ The "interest rate lobby" conspiracy theory — which Erdogan invoked to explain
 
 The clearest way to understand the Turkey episode is through the four central bank governors who shaped it. Each appointment and firing tells you something precise about the political-economic feedback loop.
 
-![Governor firing timeline 2019-2024: each firing sent an immediate FX shock](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-5.webp)
+![Governor firing timeline 2019-2024: each firing sent an immediate FX shock](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-5.png)
 
 ### Murat Çetinkaya: fired July 6, 2019
 
@@ -147,7 +147,7 @@ You hold on through the year, hoping for a recovery. By December 2021, the lira 
 
 The governor firings were the headline events, but the actual economic damage was transmitted through several specific financial channels. Understanding these channels is how you build the analytical framework for evaluating similar situations.
 
-![Turkey TRY per USD 2015-2025: the political event study](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-2.webp)
+![Turkey TRY per USD 2015-2025: the political event study](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-2.png)
 
 ### Channel 1: the carry trade reversal
 
@@ -177,7 +177,7 @@ This dollarization created a self-fulfilling feedback loop. When households buy 
 
 The CBRT also depleted its gross foreign exchange reserves via currency swap arrangements with state banks, effectively lending hard currency to stabilize the lira in the spot market. Net reserve positions (gross reserves minus forward commitments) fell to near zero or even negative at points, meaning the central bank had promised to deliver hard currency it didn't actually hold unencumbered. This reserve depletion further reduced the CBRT's credibility, since a central bank with no net reserves cannot credibly defend the currency against speculative pressure.
 
-![Turkey 10-year bond yield 2019-2025](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-3.webp)
+![Turkey 10-year bond yield 2019-2025](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-3.png)
 
 ### Channel 4: the bond market — yields as a real-time credibility gauge
 
@@ -223,7 +223,7 @@ This means credit is not just cheap — it is subsidized by inflation. Businesse
 
 The *uncovered interest rate parity* (UIP) condition in international finance predicts that if Turkey's interest rate is higher than the US rate by (say) 15 percentage points, the Turkish lira should depreciate by approximately 15% against the dollar over the same period, leaving the returns equalized for foreign investors. When Turkey cuts rates — reducing the interest differential — the UIP prediction says the lira *should* strengthen (or depreciate less). But the reality in Turkey was the opposite: cutting rates caused the lira to *depreciate faster*, because the rate cut destroyed confidence faster than the mechanical UIP effect could operate. Credibility effects dominate mechanical arbitrage in practice. This is not unusual — UIP is famously poor at predicting short-run exchange rates. But it illustrates that Erdogan's rate cuts were fighting against the fundamental forces that determine currency value.
 
-![CPI inflation vs policy rate 2020-2024: the widening negative real rate gap](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-6.webp)
+![CPI inflation vs policy rate 2020-2024: the widening negative real rate gap](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-6.png)
 
 ## The 2023 U-Turn: When Pragmatism Overrode Ideology
 
@@ -276,7 +276,7 @@ The overall depreciation from pre-U-turn to end-2024 was roughly 74% in cumulati
 
 The 10-year bond yield tells a complementary story. It rose from the artificially suppressed 9.1% of May 2023 to 40% by January 2024, then began falling as disinflation progress became credible — dropping to roughly 26.5% by June 2024 as inflation declined from 65% to around 40-42%. This yield compression — from 40% to 26.5% — is precisely the kind of capital gain that rewards investors who enter at the peak of the rate-hiking cycle.
 
-![Heterodox vs Orthodox Turkey: two policy regimes compared](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-4.webp)
+![Heterodox vs Orthodox Turkey: two policy regimes compared](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-4.png)
 
 #### Worked example: the post-U-turn bond trade
 
@@ -329,7 +329,7 @@ The consequences of central bank independence extend well beyond inflation contr
 
 **Wage-price spirals**: When workers expect high and accelerating inflation, they demand larger nominal wage increases. When businesses grant those increases, they raise prices to cover the higher labor costs. This creates a *wage-price spiral* that is very difficult to break without a recession-inducing rate hike. Turkey experienced exactly this: by 2023, minimum wage increases were running at 50%+ annually, which fed into services inflation and made disinflation slower and more painful.
 
-![Central bank credibility matrix: 5 dimensions, credible vs politicized](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-7.webp)
+![Central bank credibility matrix: 5 dimensions, credible vs politicized](/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-7.png)
 
 ## Common Misconceptions
 

@@ -23,7 +23,7 @@ On the night of October 18, 2019, Santiago de Chile's President Sebastian Pinera
 
 Civil unrest — mass street protests, strikes, and riots — is among the most difficult political risk events for financial markets to anticipate. Unlike elections (scheduled, polling-tracked, prediction-marketable) or referendums (announced months in advance), civil unrest erupts from accumulated social grievances that financial data does not directly measure. Yet its market impact is systematic enough to trade — once you understand the three-phase template.
 
-![Hang Seng Index through Hong Kong protest crisis 2019-2020 showing 25% decline](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-1.webp)
+![Hang Seng Index through Hong Kong protest crisis 2019-2020 showing 25% decline](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-1.png)
 
 ## Foundations: Capital Flight, Unrest, and the Mechanics of Market Panic
 
@@ -72,7 +72,7 @@ The capital flight numbers, while imprecise (capital flight is inherently hard t
 - Singapore's private banking assets under management grew by approximately SGD 50 billion in 2020, with a significant portion attributed to Hong Kong-origin capital.
 - Office vacancy in Hong Kong's central business district rose from approximately 2% in mid-2019 to over 10% by late 2021 as international firms reduced or eliminated their Hong Kong presence.
 
-![Capital flight from Hong Kong to Singapore: the before-after relocation template](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-5.webp)
+![Capital flight from Hong Kong to Singapore: the before-after relocation template](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-5.png)
 
 ### Template 2 — Chile October 2019: The Fast-Moving Emerging-Market Shock
 
@@ -88,7 +88,7 @@ The government's response was a state of emergency on October 18, a curfew in Sa
 
 The constitutional process that followed — ultimately producing a new proposed constitution rejected in a September 2022 plebiscite, and a second process also rejected in December 2023 — created prolonged political uncertainty that kept Chile's equity market and currency under a structural discount relative to peers for years.
 
-![Chile IPSA and peso through Oct 2019 unrest — circuit breaks and partial recovery](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-2.webp)
+![Chile IPSA and peso through Oct 2019 unrest — circuit breaks and partial recovery](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-2.png)
 
 ### Template 3 — France Gilets Jaunes Q4 2018: The Fastest Recovery
 
@@ -102,13 +102,13 @@ The CAC 40, which had already been declining from 5,490 in October partly on bro
 
 On December 4-5, Prime Minister Edouard Philippe announced the suspension of the fuel tax increase. On December 10, President Macron addressed the nation, announcing a minimum wage increase and tax exemptions for overtime, conceding to the core economic demands of the movement. The CAC bottomed on December 27 at approximately 4,730 and recovered to approximately 5,200 by end of January 2019 — a full recovery in roughly six weeks.
 
-![CAC 40 through Gilets Jaunes Q4 2018 — government concession triggers clean 2-month recovery](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-3.webp)
+![CAC 40 through Gilets Jaunes Q4 2018 — government concession triggers clean 2-month recovery](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-3.png)
 
 ## The Three-Phase Capital Flight Template
 
 Across all three cases, a consistent three-phase structure emerges. Understanding which phase you are in determines the appropriate trading posture.
 
-![Civil unrest capital flight transmission: three-phase model from shock to recovery](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-4.webp)
+![Civil unrest capital flight transmission: three-phase model from shock to recovery](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-4.png)
 
 ### Phase 1 — Local Volatility Spike (2-3 Weeks Before Worst Drawdown)
 
@@ -239,7 +239,7 @@ The earliest quantitative signals are in financial markets: local implied volati
 
 ## How It Shows Up in Real Markets: The Playbook
 
-![Comparative template: civil unrest in Hong Kong, Chile, and France across five dimensions](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-6.webp)
+![Comparative template: civil unrest in Hong Kong, Chile, and France across five dimensions](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-6.png)
 
 ### The Early Warning Dashboard
 
@@ -310,7 +310,7 @@ For financial markets, the NSL created a paradox:
 
 This is the financial market analog of a regime change: not a dramatic crash, but a permanent repricing of the city's role — from global financial hub with genuine autonomy to a regional financial hub under closer mainland oversight.
 
-![Hong Kong protest timeline 2019: six escalation phases and market reactions](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-7.webp)
+![Hong Kong protest timeline 2019: six escalation phases and market reactions](/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-7.png)
 
 #### Worked example:
 

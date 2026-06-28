@@ -29,7 +29,7 @@ Yet when the invasion actually launched on February 24, European equity futures 
 
 This article is about changing that. It is about moving from reactive positioning — "what just happened and what do I buy now?" — to anticipatory positioning: "we are on rung four, the next most probable move is a SWIFT restriction or reserve freeze, here is what that does to EUR/USD and sovereign spreads, and here is how I size before the announcement."
 
-![The seven-rung geopolitical escalation ladder from diplomatic protest to strategic military action](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-1.webp)
+![The seven-rung geopolitical escalation ladder from diplomatic protest to strategic military action](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-1.png)
 
 ## Foundations: What an escalation ladder is and why nations use it
 
@@ -81,7 +81,7 @@ Historical example: The April 13-14, 2024 direct Iranian drone and missile strik
 
 ## Each actor's toolkit: what the US, China, Russia, and OPEC have in their playbook
 
-![Actor toolkit matrix showing what each major power does at each escalation rung](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-2.webp)
+![Actor toolkit matrix showing what each major power does at each escalation rung](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-2.png)
 
 Each major actor has a constrained toolkit. The constraint comes from three sources: available instruments (you cannot implement OFAC sanctions if you are not the US), credibility capital (overusing a tool degrades its deterrent effect), and domestic political feasibility (a tool that destroys domestic jobs is politically expensive).
 
@@ -103,7 +103,7 @@ The October 2022 OPEC+ production cut — an explicit 2 mb/d reduction announced
 
 ## The tit-for-tat constraint: why retaliation is empirically predictable
 
-![Geopolitical retaliation timing: most retaliations fall within 30 days, trade disputes faster than sanctions](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-3.webp)
+![Geopolitical retaliation timing: most retaliations fall within 30 days, trade disputes faster than sanctions](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-3.png)
 
 One of the most useful empirical facts about geopolitical escalation is the tit-for-tat constraint: retaliatory moves tend to match the opponent's move in scale and arrive quickly. The chart above shows the distribution across historical trade and sanctions disputes. In trade disputes, roughly 70% of retaliatory moves land within 30 days. In sanctions disputes, the response is somewhat slower (bureaucratic preparation required), but still converges to 50% within 30 days.
 
@@ -143,7 +143,7 @@ Red-line identification matters because asset repricing is non-linear around thr
 
 *Next rung triggers:* (1) Enrichment to 90% purity, detected by IAEA. This is the "breakout" threshold — the step that directly precedes weaponization. Historical precedent: Brent crude rose approximately \$4-6/bbl on each IAEA report showing Iranian enrichment acceleration in 2021-22. (2) Expulsion of IAEA inspectors, removing monitoring capacity. (3) Iranian announcement of nuclear device assembly.
 
-![US-China chip war escalation scenarios showing three probability-weighted paths from current FDPR state](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-7.webp)
+![US-China chip war escalation scenarios showing three probability-weighted paths from current FDPR state](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-7.png)
 
 #### Worked example:
 
@@ -162,7 +162,7 @@ If any observable signal shifts Scenario A from 8% to 20% (say, a naval exercise
 
 ## Spike or regime change? The most expensive distinction in geopolitical trading
 
-![Spike versus regime change: two fundamentally different market responses to geopolitical shocks](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-4.webp)
+![Spike versus regime change: two fundamentally different market responses to geopolitical shocks](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-4.png)
 
 Every geopolitical shock produces one of two market outcomes: a spike or a regime change. Getting this distinction wrong is the single most costly mistake in geopolitical trading. A spike looks terrifying in real-time but reverses in days to weeks. A regime change feels like a spike initially but never fully recovers — the asset permanently reprices to a new equilibrium.
 
@@ -190,7 +190,7 @@ De-escalation is underappreciated as a trading signal. Most investors watch for 
 
 The key insight is that de-escalation follows its own predictable sequence.
 
-![The five-stage de-escalation signal sequence from back-channel contacts to public concession](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-5.webp)
+![The five-stage de-escalation signal sequence from back-channel contacts to public concession](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-5.png)
 
 **Stage 1: Back-channel contacts.** Before any public statement changes, diplomatic contacts activate through intermediaries — typically Switzerland, Qatar, Oman, Turkey, or the Vatican, depending on the parties. These are not publicly announced. The signal is usually indirect: a third-country foreign minister schedules a meeting with both parties in the same week, or a news agency in the neutral country reports "ongoing contacts." By the time Stage 1 is publicly visible, the process is usually already well advanced.
 
@@ -226,7 +226,7 @@ The reverse trade — buying Iranian-exposed assets at the Stage 1-2 transition 
 
 With the conceptual tools in place, we can describe the full investor workflow.
 
-![Expected 7-day asset price change per escalation rung for gold, oil, USD, and equities](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-6.webp)
+![Expected 7-day asset price change per escalation rung for gold, oil, USD, and equities](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-6.png)
 
 The chart above shows the expected 7-day asset price changes by escalation rung, derived from the series' curated event-study data (Caldara-Iacoviello GPR, IMF Working Paper on geopolitical risk and asset prices). Three observations worth internalizing:
 
@@ -246,7 +246,7 @@ Third, the EM equities and S&P 500 drawdowns at Rung 7 (-15% and -13% respective
 
 **Step 5: Size position and define invalidation.** Position size should be proportional to conviction probability times expected magnitude. Define in advance what observable event would invalidate your thesis — a specific observable de-escalation signal (ambassador return, talks announcement) that would cause you to exit.
 
-![Geopolitical position sizing matrix showing recommended allocation based on probability and expected move magnitude](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-8.webp)
+![Geopolitical position sizing matrix showing recommended allocation based on probability and expected move magnitude](/imgs/blogs/anticipating-the-next-move-escalation-ladders-in-geopolitical-crises-8.png)
 
 The matrix above provides a practical reference. The key takeaway: stay flat when the probability is low AND the expected move is small. Buy optionality (OTM calls or puts) when the probability is medium — you want asymmetric exposure without delta risk. Commit to a full position only when your signal count supports high probability AND the expected move is large enough to justify the carry cost of the hedge.
 

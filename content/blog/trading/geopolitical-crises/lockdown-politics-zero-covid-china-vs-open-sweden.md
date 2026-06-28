@@ -27,7 +27,7 @@ For a portfolio manager with exposure to Chinese equities, the question is not "
 
 This post is about learning to read that decision framework, pricing the tail outcomes, and understanding why two countries took radically different bets on pandemic policy — and why those bets produced radically different market outcomes.
 
-![CSI 300 vs MSCI World indexed to 100 Jan 2022, CSI 300 fell to 74 while MSCI World held at 80 in Oct 2022](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-1.webp)
+![CSI 300 vs MSCI World indexed to 100 Jan 2022, CSI 300 fell to 74 while MSCI World held at 80 in Oct 2022](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-1.png)
 
 ## Foundations: How Lockdown Policies Work as Market Variables
 
@@ -63,7 +63,7 @@ Allowing Omicron to circulate freely with a partially-vaccinated elderly populat
 
 Omicron changed this calculus completely. Its high transmissibility meant that outbreaks could not be contained before spreading across multiple districts. The zero-transmission target was no longer achievable except by maintaining essentially continuous, city-wide lockdowns whenever any community transmission was detected. This is what happened in Shanghai: what began as a rolling district-by-district closure escalated to a full citywide lockdown because the outbreak kept escaping containment.
 
-![China sector performance Q2 2022 peak lockdown: retail -11%, property -30%, GDP only 0.4% growth](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-4.webp)
+![China sector performance Q2 2022 peak lockdown: retail -11%, property -30%, GDP only 0.4% growth](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-4.png)
 
 By Q2 2022, the macroeconomic damage was undeniable. GDP growth came in at just 0.4% year-on-year — the worst quarterly performance since the immediate outbreak quarter of Q1 2020. Retail sales fell 11.1% year-on-year in April 2022. The property sector, already under pressure from the Evergrande crisis, saw sales plunge 30% year-on-year. Shanghai's port throughput — a bellwether for global supply chains — fell approximately 40% during the lockdown, creating backlogs that rippled through electronics and automotive supply chains worldwide.
 
@@ -117,7 +117,7 @@ The protests that followed were extraordinary by any standard. On November 25–
 
 The government's response was calibrated. Rather than a crackdown (which carried its own political costs and would have been internationally visible), authorities began quietly signaling a change. State media ran unusually critical coverage of zero-COVID's economic costs. A series of expert statements appeared endorsing the lesser severity of Omicron versus earlier variants. And on December 7, 2022, the National Health Commission released the "10 measures" — a document that, in a single press release, abolished mandatory mass testing, quarantine camps, the requirement to test negative before entering public venues, and virtually every other pillar of the zero-COVID enforcement architecture.
 
-![China zero-COVID pipeline of key events from Jan 2020 Wuhan lockdown to Dec 7 2022 abandonment](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-3.webp)
+![China zero-COVID pipeline of key events from Jan 2020 Wuhan lockdown to Dec 7 2022 abandonment](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-3.png)
 
 There was no transition period. No 30-day wind-down. No regional pilot. The policy that had locked 25 million people in their homes in April 2022 simply ceased to exist on December 7, 2022. The political reversal was total and immediate.
 
@@ -139,7 +139,7 @@ The China reopening trade of December 2022 to January 2023 is a masterclass in h
 
 4. **Consumer discretionary**: Companies selling goods and experiences that had been restricted during lockdown — restaurants, entertainment, luxury goods — all benefited from the initial reopening thesis.
 
-![China sectors before and after zero-COVID abandonment Dec 2022, casinos from GGR minus 91 percent to plus 40-60 stock rally](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-5.webp)
+![China sectors before and after zero-COVID abandonment Dec 2022, casinos from GGR minus 91 percent to plus 40-60 stock rally](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-5.png)
 
 **The second-order complication: what the reopening trade got wrong.** The initial rally was followed by a significant sobering. By mid-2023, the CSI 300 had fallen back to around 86 on our index — below the MSCI World's 105, and dramatically below where the reopening thesis had projected. Several structural problems that zero-COVID had masked or accelerated came back into view:
 
@@ -179,7 +179,7 @@ This was not simply ideological libertarianism. Sweden's constitution (Regerings
 
 For a finance perspective, the mortality question matters primarily insofar as it contextualizes the political sustainability of the model and its eventual market outcome. The Swedish approach was sustainable in the sense that it was not dramatically more lethal than alternatives, and it produced radically different economic outcomes.
 
-![OMXS30 vs STOXX 600 indexed Jan 2020, Sweden gained 12.9% in 2020 while Europe fell 4%, cumulative 37pp gap by end 2021](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-2.webp)
+![OMXS30 vs STOXX 600 indexed Jan 2020, Sweden gained 12.9% in 2020 while Europe fell 4%, cumulative 37pp gap by end 2021](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-2.png)
 
 **The market outcome: OMXS30 vs European STOXX 600.** The OMXS30 index of Sweden's 30 largest listed companies is dominated by large industrial exporters (Volvo, Atlas Copco, Ericsson), financial institutions (Swedbank, SEB), and pharmaceuticals. It is not a pure play on Swedish domestic consumption. Nevertheless, the contrast with European peers through 2020–2021 is striking:
 
@@ -242,7 +242,7 @@ This created a cross-asset effect in industrial metals. Copper, a sensitive indi
 
 **Swedish krona and interest rate dynamics.** Sweden's no-lockdown model allowed the Riksbank (Sweden's central bank) to maintain relatively accommodative monetary policy through 2020 without the same fiscal stimulus requirements as countries running extended lockdowns. The Swedish krona weakened against the dollar in early 2020 but recovered faster than many European currencies as the economic damage proved more contained.
 
-![Zero-COVID political decision tree: every branch from Xi maintaining policy to white paper protests to overnight abandonment produced clear market signals](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-6.webp)
+![Zero-COVID political decision tree: every branch from Xi maintaining policy to white paper protests to overnight abandonment produced clear market signals](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-6.png)
 
 ## Common Misconceptions
 
@@ -266,7 +266,7 @@ For practical investment application, pandemic policy as a market variable has s
 
 **Gaming revenue data (Macau).** Macau publishes monthly gaming revenue data (GGR) within days of each month ending. This data became the most accurate real-time indicator of zero-COVID's severity: when GGR was near zero, zero-COVID was tight; when GGR recovered, the policy had genuinely relaxed. Investors who tracked GGR monthly — rather than waiting for company earnings — had a 4–6 week information advantage over those reading quarterly reports.
 
-![Macau gross gaming revenue 2022-2023: collapsed to MOP 1-3 billion under zero-COVID, recovered to MOP 18-20 billion by mid-2023](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-7.webp)
+![Macau gross gaming revenue 2022-2023: collapsed to MOP 1-3 billion under zero-COVID, recovered to MOP 18-20 billion by mid-2023](/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-7.png)
 
 **Property transaction data.** Chinese real estate transaction data — sales volumes in major cities — is published weekly in some markets and monthly at the national level. The collapse during zero-COVID (and the subsequent slow recovery) provided a real-time read on the demand side of the property crisis that was overlapping with zero-COVID damage.
 

@@ -26,7 +26,7 @@ One hundred and fifteen days later, on February 24, 2022, Russia invaded. Brent 
 
 This post is about closing that gap. It teaches the discipline an intelligence analyst uses to read a country's intentions *before* it acts, translated into a framework an investor can actually run: six signal categories, a scoring system, and a threshold above which you change your portfolio. The figure below is the entire method in one picture.
 
-![Six signal categories feeding into a threat score from zero to ten which drives a portfolio adjustment decision](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-1.webp)
+![Six signal categories feeding into a threat score from zero to ten which drives a portfolio adjustment decision](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-1.png)
 
 Most investors react to headlines. The headline is the *last* signal, not the first — by the time a tank crosses a border or a tariff list is published, the move has already happened and the easy money is gone. The skill that separates a geopolitical analyst from a headline-reader is the ability to watch the *inputs* on the left side of that diagram, score them, and act while the rest of the market is still calling it noise.
 
@@ -77,7 +77,7 @@ Diplomatic language is deliberately coded. Every phrase carries a precise, conve
 
 The Russia-Ukraine timeline below shows how verbal signals interleaved with physical ones in the run-up to February 2022.
 
-![Timeline of Russia signals from November 2021 satellite imagery through the February 24 2022 invasion](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-2.webp)
+![Timeline of Russia signals from November 2021 satellite imagery through the February 24 2022 invasion](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-2.png)
 
 The single most powerful diplomatic signal is the **written demand**. Verbal complaints are cheap and deniable. A formal, written list of demands published for the world to see is a country putting its credibility on the line. In December 2021, Russia did exactly this: it published two draft treaties demanding that NATO roll back its presence in Eastern Europe and rule out Ukrainian membership — demands the alliance could not possibly accept. Analysts who understood the language recognized this immediately as a *pretext-builder*: an offer engineered to be refused, so that the refusal could later justify action.
 
@@ -168,7 +168,7 @@ What to watch:
 
 The chart below shows how, in the Russia-Ukraine case, the broad geopolitical-risk gauge and the count of active signals climbed in lockstep through the buildup — economic pre-positioning being one of the signals quietly firing alongside the visible military ones.
 
-![Line chart of the geopolitical risk index rising alongside the count of active signals from October 2021 to February 2022](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-5.webp)
+![Line chart of the geopolitical risk index rising alongside the count of active signals from October 2021 to February 2022](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-5.png)
 
 The analytical edge here is that economic pre-positioning is *self-interested and therefore honest*. A government can lie in a speech for free. Restructuring reserves, stockpiling commodities, and hedging currency exposure all cost real money and impose real opportunity costs. A state only pays those costs when it genuinely expects to need the protection. That makes economic pre-positioning one of the highest-quality signals in the framework — though also one of the slowest, since these moves unfold over months.
 
@@ -214,7 +214,7 @@ Suppose over six weeks Country D appoints a hawkish defense minister (known for 
 
 The sixth and final category is the one that ties the others together: state media. Before a government acts against another country, it almost always prepares its own population first — because a confrontation requires public support, or at least public acquiescence. That preparation is broadcast, and it follows a recognizable arc.
 
-![Pipeline of state media framing escalating from neutral coverage through concerns criticism enemy image to justified action](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-4.webp)
+![Pipeline of state media framing escalating from neutral coverage through concerns criticism enemy image to justified action](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-4.png)
 
 The escalation arc, which analysts call *enemy-image construction*, runs through stages:
 
@@ -242,7 +242,7 @@ The hostile share rose from 3 percent to 40 percent in five weeks — a 13-fold 
 
 We now have six categories, each scored 0 to 2. Summing them produces a **threat index from 0 to 10**. This is the dashboard that turns scattered observations into a single, actionable number — and the matrix below shows how different real events lit up different combinations of categories.
 
-![Matrix of six signal categories against four geopolitical events showing which signals fired strong weak or absent for each](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-3.webp)
+![Matrix of six signal categories against four geopolitical events showing which signals fired strong weak or absent for each](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-3.png)
 
 The scoring rubric, made explicit so it is repeatable:
 
@@ -297,7 +297,7 @@ Let us walk the full timeline as an analyst would have experienced it, to see th
 
 The lead-time point is the whole lesson. The chart below ranks ten real events by how many days passed between the *first* detectable signal and the market-moving action.
 
-![Horizontal bar chart of lead time in days from first signal to market reaction across ten geopolitical events](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-6.webp)
+![Horizontal bar chart of lead time in days from first signal to market reaction across ten geopolitical events](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-6.png)
 
 The lead times range from days (a sudden strike like the Soleimani killing, where the kinetic signal *is* the action) to over half a year (the US-China Section 301 process). The longer the legal and logistical runway an action requires, the more lead time the analyst gets. Wars and tariffs — the events with the longest preparation — are exactly the ones the framework catches earliest.
 
@@ -349,7 +349,7 @@ The framework's whole purpose is the trade. Here is how a high threat index expr
 
 The scatter below makes the core relationship concrete: the more signal categories that fired before an event, the larger the eventual market move tended to be.
 
-![Scatter chart of signals fired count against peak market impact percentage with bubble size showing magnitude across events](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-7.webp)
+![Scatter chart of signals fired count against peak market impact percentage with bubble size showing magnitude across events](/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-7.png)
 
 The relationship is not perfect — markets are noisy and sometimes a well-telegraphed event is already priced — but the tendency is clear and exploitable: events that lit up five or six categories (Russia's invasion, the Iran-Israel exchange) produced the largest moves, while events that lit up only two (a sudden strike with little warning) produced briefer, smaller dislocations. The threat index is, in effect, a forecast of *both* probability and magnitude.
 

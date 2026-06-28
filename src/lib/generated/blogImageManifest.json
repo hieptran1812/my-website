@@ -10671,6 +10671,11 @@
     "width": 1792,
     "height": 1206
   },
+  "/imgs/blogs/civil-unrest-and-capital-flight-hong-kong-chile-france-1.png": {
+    "width": 1792,
+    "height": 1210,
+    "cover": true
+  },
   "/imgs/blogs/class-imbalance-and-when-accuracy-lies-1.png": {
     "width": 1792,
     "height": 1221,
@@ -13916,6 +13921,11 @@
   "/imgs/blogs/counting-combinatorics-quant-interviews-9.png": {
     "width": 1792,
     "height": 1242
+  },
+  "/imgs/blogs/coups-and-market-crashes-thailand-turkey-myanmar-anatomy-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
   },
   "/imgs/blogs/covariance-correlation-pitfalls-quant-interviews-1.png": {
     "width": 1792,
@@ -22997,6 +23007,11 @@
     "width": 1792,
     "height": 1169
   },
+  "/imgs/blogs/failed-referendums-catalonia-scotland-the-political-risk-premium-1.png": {
+    "width": 1792,
+    "height": 878,
+    "cover": true
+  },
   "/imgs/blogs/failure-detection-gossip-and-phi-accrual-1.png": {
     "width": 2060,
     "height": 1469
@@ -29333,7 +29348,8 @@
   },
   "/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-1.png": {
     "width": 1792,
-    "height": 1162
+    "height": 1162,
+    "cover": true
   },
   "/imgs/blogs/how-to-read-a-countrys-political-signals-before-it-acts-2.png": {
     "width": 1792,
@@ -35005,7 +35021,8 @@
   },
   "/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-1.png": {
     "width": 1792,
-    "height": 887
+    "height": 887,
+    "cover": true
   },
   "/imgs/blogs/lockdown-politics-zero-covid-china-vs-open-sweden-2.png": {
     "width": 1780,
@@ -54999,6 +55016,11 @@
     "width": 1792,
     "height": 1169
   },
+  "/imgs/blogs/sri-lanka-2022-imf-protests-and-the-president-who-fled-1.png": {
+    "width": 2133,
+    "height": 1440,
+    "cover": true
+  },
   "/imgs/blogs/stablecoin-flows-the-dry-powder-metric-1.png": {
     "width": 1792,
     "height": 835,
@@ -67796,6 +67818,11 @@
   "/imgs/blogs/turboquant-kv-cache-quantization-deep-dive-9.png": {
     "width": 1792,
     "height": 1359
+  },
+  "/imgs/blogs/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks-1.png": {
+    "width": 1792,
+    "height": 1211,
+    "cover": true
   },
   "/imgs/blogs/turning-vague-asks-into-requirements-and-slos-1.png": {
     "width": 2162,

@@ -27,7 +27,7 @@ The gap between those two numbers — the 3.5% TSMC move versus the 0.5% S&P mov
 
 Whether that pricing is right — or whether it is a collective blind spot driven by wishful deterrence theory — is the central question of this post.
 
-![China pressure toolkit flowing through military, trade, and diplomatic channels to market impact](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-1.webp)
+![China pressure toolkit flowing through military, trade, and diplomatic channels to market impact](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-1.png)
 
 ## Foundations: Semiconductors, Foundries, and Why Geography Matters
 
@@ -63,7 +63,7 @@ The numbers as of 2024:
 
 This is not just market concentration — it is a *single point of failure* for the global technology supply chain. A six-month outage of TSMC's Taiwan facilities would not just hurt tech stocks. It would halt production of every Apple device, every Nvidia AI system, every AMD server processor, and every Qualcomm-powered smartphone globally. The downstream impact would cascade through automotive, medical equipment, defense systems, and industrial automation.
 
-![Global semiconductor supply chain showing TSMC as central hub with major tech firms as dependent customers](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-2.webp)
+![Global semiconductor supply chain showing TSMC as central hub with major tech firms as dependent customers](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-2.png)
 
 ### Why Taiwan?
 
@@ -152,7 +152,7 @@ South Korea presents a different dynamic. Samsung, the only meaningful competito
 
 Vietnam, positioned as a key beneficiary of supply-chain diversification away from China since 2018, faces a complex exposure in a Taiwan scenario. Vietnam has benefited enormously from electronics FDI — Samsung, LG, Intel, and dozens of others have built large facilities there. But a Taiwan crisis would disrupt the upstream chip supply that Vietnamese electronics assembly depends on, and would likely cause a broad emerging-market risk-off that hurts Vietnamese equities and currency. The VN-Index would likely fall 10-15% in a blockade scenario, despite Vietnam's longer-term supply-chain positioning story.
 
-![Advanced logic chip production by region in 2024 showing Taiwan's dominant 60% share](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-4.webp)
+![Advanced logic chip production by region in 2024 showing Taiwan's dominant 60% share](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-4.png)
 
 ## Market Reactions to Taiwan Signals: The Evidence
 
@@ -179,7 +179,7 @@ This event study teaches three things. First, the Taiwan geopolitical risk premi
 
 The chart below shows TSMC's ADR price from 2021 through 2024. TSMC peaked near \$140 in early 2022, fell dramatically through the year (driven partly by the broad tech selloff and semiconductor inventory correction, not just geopolitics), and then recovered strongly into 2024 as the AI chip demand surge drove TSMC's earnings higher.
 
-![TSMC ADR price 2021-2024 annotated with key geopolitical events and recovery pattern](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-7.webp)
+![TSMC ADR price 2021-2024 annotated with key geopolitical events and recovery pattern](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-7.png)
 
 The key observation: each geopolitical tension spike (Pelosi visit, exercises, US chip export controls) created a dip that was subsequently recovered. Investors who treated Taiwan tension events as buying opportunities in TSMC rather than permanent impairment signals were rewarded.
 
@@ -243,7 +243,7 @@ Market impact: Catastrophic. Global advanced chip supply falls 60-90% for 2-3 ye
 
 Probability: Most defense analysts assign full invasion 5-10% through 2030, rising to 15-20% if the China-Taiwan status quo breaks down significantly.
 
-![Taiwan conflict scenario matrix showing impact across TSMC output, chip supply, and market indices by severity](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-3.webp)
+![Taiwan conflict scenario matrix showing impact across TSMC output, chip supply, and market indices by severity](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-3.png)
 
 ## Worked Example: The TSMC Outage Scenario NPV
 
@@ -325,7 +325,7 @@ The TSMC Arizona facility is the most watched. Phase 1 (4nm process, 20,000 wafe
 
 The political narrative is "onshoring" — bringing chip manufacturing back to the US. The economic reality is more nuanced. These fabs are extraordinarily expensive to build and operate in the US context.
 
-![Key Taiwan semiconductor tension events from 2019 to 2024 on a timeline](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-5.webp)
+![Key Taiwan semiconductor tension events from 2019 to 2024 on a timeline](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-5.png)
 
 ## Worked Example: The CHIPS Act Insurance Premium
 
@@ -366,7 +366,7 @@ Against total TSMC Taiwan production of approximately 400,000 wafers per month (
 
 The diversification push is real, but its timeline and scope are often overstated in political rhetoric. Here is an honest assessment of where the supply chain was in 2020 and where it will realistically be in 2027.
 
-![Semiconductor supply chain comparison 2020 Taiwan-dominant versus 2027 post-CHIPS diversified](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-6.webp)
+![Semiconductor supply chain comparison 2020 Taiwan-dominant versus 2027 post-CHIPS diversified](/imgs/blogs/taiwan-strait-tensions-semiconductor-risk-and-supply-chain-repricing-6.png)
 
 The critical constraint is process leadership. Even with massive investment, no US or European fab will produce chips at 3nm or below before approximately 2027-2028 at the earliest (Intel's 18A node, which is competitive with TSMC's 3nm, has faced repeated delays). TSMC's next-generation 2nm and 1.4nm nodes will remain Taiwan-only through at least 2028.
 
