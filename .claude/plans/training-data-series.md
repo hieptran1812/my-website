@@ -1,0 +1,77 @@
+# Training Data — Blog Series Plan
+
+**Subcategory:** `machine-learning/training-data/`
+**Display label:** "Training Data"
+**Size:** 25 posts, 5 waves
+**Angle:** The full data lifecycle for training modern models — **collect → extract → clean → dedup → decontaminate → filter → select → mix → format → evaluate → flywheel** — taught as a *practitioner's playbook*. The universal pipeline is the spine (taught with LLM text as the canonical case), then each modality gets its **delta**: what changes for VLM, diffusion/T2I, ASR, and TTS. Heavy on **how you actually choose data and process data**, with **named case studies** (FineWeb, RefinedWeb, Dolma, LAION, DataComp, Whisper, phi, DoReMi…), **concrete scenarios**, and a **troubleshooting** section in every post.
+**Depth:** all `deep-dive` (featured: true). Each post: worked code, comparison tables, named incidents, a "what goes wrong & how you catch it" troubleshooting block, intuitive Excalidraw figures + 1–3 animated where motion carries meaning.
+**Voice:** principal-engineer, intuition-before-math, runnable code, opinionated defaults.
+**Language:** English only (verify gate enforces). User briefed in Vietnamese; posts ship in English.
+
+## Conventions (mirror Database-Scaling series, verified 2026-06-30)
+- Embed **`.webp` only**: `/imgs/blogs/<slug>-<n>.webp`. Render PNG in cache → `cwebp -lossless -m 6` → `public/imgs/blogs/`.
+- Each post: full blog-writer pipeline Phases B–F (skip Phase A intake — spec below). Verify gate `scripts/verify-post.sh <post.md> <slug> deep-dive`.
+- Per wave: commit **only that wave's** `.md` + `.webp` with explicit paths (never `git add -A`) → push to `main`. Run `npm run optimize-blog-images` first if covers/manifest needed.
+- Clean `.cache/blog-writer/<slug>/` after each green post.
+- Every post carries: ≥1 case study, ≥1 worked scenario, ≥1 troubleshooting block.
+
+## Cross-link targets (existing posts)
+**scaling-laws:** chinchilla-compute-optimal-scaling · data-constrained-scaling-laws · data-quality-scaling-laws · repeated-sampling-scaling-laws · transfer-finetuning-scaling-laws · reward-model-overoptimization-scaling
+**large-language-model:** bpe-tokenizer · designing-choosing-tokenizer-llm · distillation-in-llm · fine-tuning-llm-with-dpo · grpo-vs-dpo-vs-ppo-decision-guide · deepseek-prover-synthetic-data-rmaxts · nemotron-4-340b-synthetic-data-alignment · deepseek-coder-repo-packing-fim-continued-pretraining · training-llm-for-math · training-llm-adapt-new-language · pretraining-large-reasoning-models
+**training-techniques:** deepseekmath-data-pipeline-and-grpo-origin · sequence-packing-llm-fine-tuning · speeding-up-neural-network-training-4x-by-optimizing-cpu-to-gpu-data-transfer
+**debugging-training:** data-leakage-the-silent-killer · garbage-in-finding-label-noise · look-at-your-data-before-you-train · debugging-rlhf-dpo-and-preference-tuning · debugging-asr-finetuning · debugging-ctc-and-alignment · audio-input-bugs · cv-input-pipeline-bugs · augmentation-gone-wrong
+**audio-generation:** text-to-speech-from-tacotron-to-vits · neural-codec-language-model-tts-vall-e · zero-shot-voice-cloning-and-the-tts-frontier · audio-deepfakes-watermarking-and-voice-safety
+**signal-processing:** whisper-under-the-hood · cosyvoice-v1-v3-tokens-flow-matching-streaming · kokoro-82m · orpheus-tts-llm-speech-snac
+**image-generation:** latent-diffusion-and-stable-diffusion · text-encoders-and-prompt-conditioning · mmdit-and-the-modern-text-to-image-recipe · safety-watermarking-and-provenance · diffusion-from-first-principles
+**computer-vision:** vit-siglip-dino-explained · deepseek-ocr-optical-context-compression · deepseek-vl-vl2-dynamic-tiling-moe
+
+---
+
+## WAVE 1 — Foundations & getting the data in (5)
+1. **why-data-decides-the-model** — Data-centric AI: same architecture + better data → better model. Quality vs diversity vs quantity. The end-to-end lifecycle map (master diagram for the series). Case: FineWeb beating C4 at equal tokens; phi "textbooks." Troubleshooting: symptoms of a data problem masquerading as a model problem.
+2. **data-scaling-laws-and-budgets** — How much data do you need? Chinchilla compute-optimal token budgets, data-constrained scaling (repetition/epochs, the value of a repeated token), "are we running out of tokens?" Case: Llama's over-training past Chinchilla. Troubleshooting: under-/over-training signals, when to add data vs compute. (cross-link chinchilla-compute-optimal-scaling, data-constrained-scaling-laws)
+3. **measuring-data-quality** — You cannot curate what you cannot measure: proxy metrics, classifier scores, perplexity, and the gold standard — **ablation training** on a small model. The eval-driven curation feedback loop. Case: FineWeb's ablation-per-decision methodology. Troubleshooting: noisy small-scale ablations, proxy-metric/eval mismatch. (cross-link data-quality-scaling-laws)
+4. **sourcing-and-collecting-training-data** — The sourcing menu (web crawl, public datasets, licensed, product telemetry, human-generated, synthetic) with cost/quality/legal tradeoffs. Inside Common Crawl (WARC/WAT/WET), running your own crawler, politeness/robots. Case: how FineWeb/RefinedWeb source from CC. Troubleshooting: snapshot bias, crawl traps, dedup-at-crawl.
+5. **text-extraction-and-boilerplate-removal** — HTML→clean text: trafilatura vs resiliparse vs readability; removing nav/ads/boilerplate; the extraction quality cliff that silently caps everything downstream. Case: RefinedWeb's extraction choices. Troubleshooting: how bad extraction shows up 3 stages later, tables/code/math mangling.
+
+## WAVE 2 — The universal cleaning pipeline (5)
+6. **language-identification-and-heuristic-quality-filters** — fastText/CLD3 langid + per-language thresholds; the Gopher/C4/RefinedWeb heuristic stack (line-length, symbol ratios, stopwords, repetition). What each rule kills and why. Troubleshooting: over-filtering low-resource languages & code, langid errors on short/mixed text.
+7. **classifier-and-perplexity-based-quality-filtering** — Model-based quality: the FineWeb-Edu educational classifier, perplexity filtering against a reference LM, Ask-LLM scoring. When classifiers beat heuristics and how to train one cheaply. Case: FineWeb-Edu. Troubleshooting: classifier bias toward formal text, distribution shift, threshold calibration.
+8. **deduplication-at-scale** — The single highest-ROI step. Exact (hash) vs near-dup (MinHash + LSH, SimHash), suffix-array substring dedup, semantic dedup (SemDeDup). Choosing thresholds, fuzzy bands, and the memory/throughput engineering. Case: dedup's outsized effect in C4/RefinedWeb ablations. Troubleshooting: false-positive collapse, param sensitivity, cross-shard dedup at PB scale. **(animated: MinHash/LSH bucketing)**
+9. **decontamination-and-benchmark-leakage** — Why eval examples leaking into training inflates scores and breaks trust; n-gram/substring overlap detection, the canary approach, how big labs decontaminate. Case: leakage scandals & post-hoc detection. Troubleshooting: detecting contamination after training, the "decontam removed too much" failure.
+10. **pii-safety-and-toxicity-filtering** — PII detection (regex + NER + classifiers) and redact-vs-remove; NSFW/toxicity classifiers and blocklists; the precision/recall and over-filtering tradeoff; CSAM/legal obligations. Case: how PII redaction is done in big open corpora. Troubleshooting: over-redaction destroying signal, false positives, evasion.
+
+## WAVE 3 — Selecting, mixing & generating data (5)
+11. **data-selection-and-pruning** — Picking the best N% from an ocean: importance/importance-resampling (DSIR), classifier selection, influence/gradient methods, coreset selection (SemDeDup, SSL prototypes), and **pruning scaling laws** (beating the power law by dropping easy examples). Case: pruning beating Chinchilla. Troubleshooting: selection that overfits the proxy, diversity loss. **(animated: pruning easy-vs-hard distribution)**
+12. **data-mixing-domain-weighting-and-curriculum** — Domain proportions as a first-class hyperparameter: manual mixes vs **DoReMi** vs ablation-tuned weights; upsampling high-quality domains; curriculum & ordering; **annealing on high-quality data at the end** of pretraining. Case: DoReMi, Llama/Dolma mixes, the mid-training/anneal phase. Troubleshooting: a domain that helps in isolation but hurts in the mix.
+13. **synthetic-data-generation** — The new frontier: distillation, Self-Instruct, Evol-Instruct, textbook-quality generation (phi, Cosmopedia), rephrasing the web (WRAP), verifier-filtered generation. The **model-collapse / diversity-collapse** risk and how to avoid it. Case: phi, Nemotron-4 340B, DeepSeek-Prover. Troubleshooting: contamination via the teacher, mode collapse, distribution narrowing. (cross-link nemotron-4-340b-synthetic-data-alignment, deepseek-prover-synthetic-data-rmaxts, distillation-in-llm)
+14. **instruction-tuning-data** — Building SFT sets: Self-Instruct/Alpaca/FLAN/Tulu, the **LIMA "quality > quantity"** result, format/template hygiene, dedup & decontamination for SFT, mixing skills. Case: Tulu/FLAN recipes. Troubleshooting: format bias, eval gaming, capability regressions from a narrow mix. (cross-link sequence-packing-llm-fine-tuning)
+15. **preference-data-for-alignment** — RLHF/DPO pair collection: the rater problem & guideline design, inter-annotator agreement, **RLAIF / AI feedback**, on-policy vs off-policy pairs, length & sycophancy bias baked in by the data. Case: how preference sets are built; reward-model overoptimization. Troubleshooting: noisy/inconsistent labels, reward hacking traced to data. (cross-link fine-tuning-llm-with-dpo, debugging-rlhf-dpo-and-preference-tuning, reward-model-overoptimization-scaling)
+
+## WAVE 4 — Vision-language & image-generation data (5)
+16. **image-text-pairs-at-scale** — Harvesting alt-text pairs; LAION's construction; **CLIP-score filtering** and the noise problem; the scale-vs-quality dial. Case: LAION-400M/5B, CLIP-filter mechanics. Troubleshooting: alt-text garbage, CLIP-score blind spots, NSFW/duplication. (cross-link vit-siglip-dino-explained)
+17. **datacomp-and-data-filtering-networks** — When **filtering is the lever, not scale**: the DataComp benchmark, Data Filtering Networks (DFN), dedup + dedup-vs-eval, deduplication of image-text. Case: DataComp winners, DFN. Troubleshooting: filter that wins the benchmark but narrows coverage.
+18. **recaptioning-and-vlm-instruction-data** — Why model-generated captions beat alt-text (BLIP/LLaVA/CapsFusion); building visual-instruction & VQA data (LLaVA synthesis), grounding/region data, interleaved image-text (MMC4/OBELICS). Case: LLaVA, CapsFusion. Troubleshooting: caption hallucination, instruction-format overfit. (cross-link deepseek-vl-vl2-dynamic-tiling-moe)
+19. **ocr-chart-and-document-data** — Data for document/chart/figure understanding: synthetic document generation, OCR pairs, chart-to-table, the rendering pipeline. Case: document-AI data recipes. Troubleshooting: synthetic-vs-real gap, layout diversity. (cross-link deepseek-ocr-optical-context-compression)
+20. **data-for-text-to-image-diffusion** — What T2I training needs vs CLIP: **aesthetic scoring** (LAION-Aesthetics), resolution/aspect-ratio bucketing, **caption engineering** (the DALL·E 3 recaptioning thesis — long, prompt-aligned captions), dedup & **memorization/replication risk**, watermark/NSFW filtering. Case: SD/LAION-Aesthetics, DALL·E 3 recaption. Troubleshooting: memorization, caption↔prompt mismatch at inference. (cross-link latent-diffusion-and-stable-diffusion, text-encoders-and-prompt-conditioning, safety-watermarking-and-provenance)
+
+## WAVE 5 — Speech data + responsible data (5)
+21. **speech-data-for-asr** — Sources (LibriSpeech, Common Voice, GigaSpeech, YODAS) and read vs conversational vs in-the-wild; segmentation, **VAD & forced alignment** (MFA) to make utterance↔transcript pairs from long audio. Case: building an ASR corpus from audiobooks. Troubleshooting: misalignment, segment boundaries, speaker/condition imbalance. (cross-link debugging-ctc-and-alignment)
+22. **weak-supervision-and-low-resource-speech** — Whisper's 680k-hour **weakly-labeled** recipe; pseudo-labeling at scale; filtering machine transcripts (CER/agreement heuristics); multilingual & low-resource (MMS, speech-text mining), accent balance. Case: Whisper, MMS. Troubleshooting: hallucinated transcripts, alignment drift, label-noise feedback loops. (cross-link whisper-under-the-hood, debugging-asr-finetuning)
+23. **data-for-text-to-speech-cleaning-and-enhancement** — TTS is the opposite of ASR: it needs *clean, well-recorded, prosodic* audio. Studio vs found data; denoising, dereverberation, bandwidth, **loudness normalization**, silence trimming; the enhancement pipeline & its limits. Case: building a single-speaker TTS set. Troubleshooting: artifacts the model learns, SNR floors, clipping. (cross-link text-to-speech-from-tacotron-to-vits)
+24. **tts-transcription-normalization-and-speakers** — Accurate transcripts for TTS; **text normalization** (numbers/dates/abbrev/currency) and **G2P/phonemization**; speaker **diarization & segmentation** for multi-speaker/voice-cloning data; mining TTS-grade data from audiobooks/podcasts at scale. Case: large-scale found-data TTS. Troubleshooting: normalization mismatches, diarization errors, leakage across speakers. (cross-link zero-shot-voice-cloning-and-the-tts-frontier, cosyvoice-v1-v3-tokens-flow-matching-streaming)
+25. **legal-ethics-and-the-future-of-training-data** — Capstone: copyright & the lawsuits (NYT/Getty/authors), fair-use debate, opt-out (robots/ai.txt), licensed deals; PII/consent/GDPR & voice/biometric data; bias & representation from corpus composition; **datasheets/data cards & provenance (C2PA)**; data versioning/lineage recap; and the future — synthetic-data dominance, **model collapse**, data marketplaces. Ties the whole lifecycle back together. (cross-link audio-deepfakes-watermarking-and-voice-safety, safety-watermarking-and-provenance)
+
+---
+
+## Status
+- [x] Wave 1 (1–5) — Foundations & getting the data in — shipped 2026-06-30 (~39.2k words, 32 figs incl. 6 animated). Fixed LaTeX digit-span bug (`$2N$`→`${2N}$` in post 2; escaped `\$` cost tiers in post 4).
+- [ ] Wave 2 (6–10) — Universal cleaning pipeline
+- [ ] Wave 3 (11–15) — Selecting, mixing & generating
+- [ ] Wave 4 (16–20) — Vision-language & image-generation
+- [ ] Wave 5 (21–25) — Speech + responsible data
+
+## Notes
+- Infra (WebDataset/Parquet/MDS formats, streaming loaders, distributed processing, versioning) is **woven into** the relevant pipeline posts (sourcing→formats, dedup→distributed processing, selection→loaders) and recapped in the capstone — no standalone infra post, to keep the 25-budget on the user's emphasis (selection + processing + modalities).
+- LLM coverage is the heaviest: the entire universal pipeline (W1–W2) + selection/mixing/synthetic (W3) is taught with LLM text as the canonical case, plus 2 dedicated post-training posts (14–15).
+- Modalities each get ≥2 posts: VLM (16–19, four), diffusion/T2I (20 + caption/aesthetic content), ASR (21–22), TTS (23–24).
