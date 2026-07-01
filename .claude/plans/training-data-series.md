@@ -69,7 +69,7 @@
 - [x] Wave 2 (6–10) — Universal cleaning pipeline — shipped 2026-07-01 (~34k words, 38 figs incl. 6 animated). post08 dedup agent stalled hard through 3 nudges; lead wrote that draft directly from the agent's rendered figures + its real datasketch numbers (b=9,r=13, knee~0.844).
 - [x] Wave 3 (11–15) — Selecting, mixing & generating — shipped 2026-07-01 (~36.3k words, 38 figs incl. ~5 animated). All 5 agents completed (post11 finished on nudge).
 - [x] Wave 4 (16–20) — Vision-language & image-generation — shipped 2026-07-01 (~33.8k words, 37 figs incl. ~5 animated). All 5 agents completed cleanly.
-- [ ] Wave 5 (21–25) — Speech + responsible data
+- [x] Wave 5 (21–25) — Speech + responsible data — shipped 2026-07-01 (~34.2k words, 36 figs incl. ~5 animated). SERIES COMPLETE (25/25). post23 stalled between figure-validation and render; recovered on nudge.
 
 ## Notes
 - Infra (WebDataset/Parquet/MDS formats, streaming loaders, distributed processing, versioning) is **woven into** the relevant pipeline posts (sourcing→formats, dedup→distributed processing, selection→loaders) and recapped in the capstone — no standalone infra post, to keep the 25-budget on the user's emphasis (selection + processing + modalities).
