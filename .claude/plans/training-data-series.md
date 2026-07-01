@@ -66,7 +66,7 @@
 
 ## Status
 - [x] Wave 1 (1–5) — Foundations & getting the data in — shipped 2026-06-30 (~39.2k words, 32 figs incl. 6 animated). Fixed LaTeX digit-span bug (`$2N$`→`${2N}$` in post 2; escaped `\$` cost tiers in post 4).
-- [ ] Wave 2 (6–10) — Universal cleaning pipeline
+- [x] Wave 2 (6–10) — Universal cleaning pipeline — shipped 2026-07-01 (~34k words, 38 figs incl. 6 animated). post08 dedup agent stalled hard through 3 nudges; lead wrote that draft directly from the agent's rendered figures + its real datasketch numbers (b=9,r=13, knee~0.844).
 - [ ] Wave 3 (11–15) — Selecting, mixing & generating
 - [ ] Wave 4 (16–20) — Vision-language & image-generation
 - [ ] Wave 5 (21–25) — Speech + responsible data
