@@ -70,7 +70,7 @@ fi
 
 # 4. Sharpness sub-gate — every figure ships as .webp (lossless, cropped to bbox)
 sharp_fail=0
-for f in public/imgs/blogs/${slug}-*.webp; do
+for f in public/imgs/blogs/${slug}-[0-9]*.webp; do
   [ -e "$f" ] || continue
   if command -v sips >/dev/null 2>&1; then
     w=$(sips -g pixelWidth  "$f" 2>/dev/null | awk '/pixelWidth/  {print $2}')
@@ -89,8 +89,8 @@ done
 [ "$sharp_fail" -eq 0 ] && pass "sharpness: all WebP figures ≥ 1600×900, ≥ 40 KB"
 
 # 4b. Format gate — stray non-webp renders for this slug should not exist on disk
-stray=$(ls public/imgs/blogs/${slug}-*.png public/imgs/blogs/${slug}-*.jpg \
-           public/imgs/blogs/${slug}-*.jpeg public/imgs/blogs/${slug}-*.gif 2>/dev/null || true)
+stray=$(ls public/imgs/blogs/${slug}-[0-9]*.png public/imgs/blogs/${slug}-[0-9]*.jpg \
+           public/imgs/blogs/${slug}-[0-9]*.jpeg public/imgs/blogs/${slug}-[0-9]*.gif 2>/dev/null || true)
 if [ -z "$stray" ]; then
   pass "format: no leftover non-webp renders for slug=$slug"
 else
