@@ -19,7 +19,7 @@ category: "machine-learning"
 subcategory: "Model Serving"
 author: "Hiep Tran"
 featured: true
-readTime: 53
+readTime: 54
 image: "/imgs/blogs/roofline-analysis-for-llm-inference-1.webp"
 ---
 
