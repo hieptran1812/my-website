@@ -54,4 +54,8 @@ next-env.d.ts
 # live corpus walk when absent, so it never needs to be committed)
 /src/lib/generated/blogPostsIndex.json
 
+# generated at build time by scripts/buildRelatedGraph.ts (article page inlines
+# it; client falls back to /api/blog/graph when absent)
+/src/lib/generated/blogGraph.json
+
 *.log

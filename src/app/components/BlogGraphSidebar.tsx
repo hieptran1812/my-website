@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import dynamic from "next/dynamic";
 import LanguageSelect from "./highlights/LanguageSelect";
+import type { PrecomputedGraph } from "../../lib/blogGraphIndex";
 
 type TranslateStatus = "idle" | "loading" | "done" | "error";
 
@@ -16,6 +17,9 @@ const BlogGraphView = dynamic(() => import("./BlogGraphView"), {
 
 interface BlogGraphSidebarProps {
   currentSlug?: string;
+  /** Precomputed ego graph inlined by the server. When present, the graph
+   *  renders instantly with no client fetch. */
+  initialGraph?: PrecomputedGraph | null;
   tocPosition?: "center" | "top";
   sidebarBottomOffset?: number;
   /** When true, hide the sidebar (reader has scrolled past the article body). */
@@ -50,6 +54,7 @@ interface BlogGraphSidebarProps {
 
 function BlogGraphSidebar({
   currentSlug,
+  initialGraph = null,
   tocPosition = "center",
   sidebarBottomOffset = 0,
   hidden = false,
@@ -101,22 +106,29 @@ function BlogGraphSidebar({
   // in the fullscreen modal so the inline panel stays clutter-free.
   const [universeMode, setUniverseMode] = useState(false);
   /** Defer mounting the graph view until the page is idle so the article
-   *  body + cover images get the network/CPU first. */
+   *  body + cover images get the network/CPU first. With a precomputed graph
+   *  inlined there's no fetch to wait on, so we mount as soon as the page goes
+   *  idle (short fallback) and the graph paints already laid-out. */
   const [graphReady, setGraphReady] = useState(false);
   useEffect(() => {
+    // No inlined data → the view has to fetch; give the article a longer head
+    // start. Inlined data → mount promptly so the graph shows right away.
+    const fallbackMs = initialGraph ? 200 : 800;
     type IdleCb = () => void;
     interface IdleHost {
-      requestIdleCallback?: (cb: IdleCb) => number;
+      requestIdleCallback?: (cb: IdleCb, opts?: { timeout: number }) => number;
       cancelIdleCallback?: (h: number) => void;
     }
     const w = window as unknown as IdleHost;
     if (typeof w.requestIdleCallback === "function") {
-      const handle = w.requestIdleCallback(() => setGraphReady(true));
+      const handle = w.requestIdleCallback(() => setGraphReady(true), {
+        timeout: fallbackMs,
+      });
       return () => w.cancelIdleCallback?.(handle);
     }
-    const timer = setTimeout(() => setGraphReady(true), 800);
+    const timer = setTimeout(() => setGraphReady(true), fallbackMs);
     return () => clearTimeout(timer);
-  }, []);
+  }, [initialGraph]);
 
   // Save collapsed state to localStorage
   useEffect(() => {
@@ -660,6 +672,7 @@ function BlogGraphSidebar({
                     <BlogGraphView
                       key={graphKey}
                       currentSlug={currentSlug}
+                      initialGraph={initialGraph}
                       isExpanded={false}
                       height={280}
                       theme={theme}
@@ -692,6 +705,7 @@ function BlogGraphSidebar({
           >
             <BlogGraphView
               currentSlug={currentSlug}
+              initialGraph={initialGraph}
               isExpanded={true}
               onClose={() => setIsExpanded(false)}
               theme={theme}
@@ -950,6 +964,7 @@ function BlogGraphSidebar({
                     <BlogGraphView
                       key={`mobile-${graphKey}`}
                       currentSlug={currentSlug}
+                      initialGraph={initialGraph}
                       isExpanded={false}
                       height={350}
                       theme={theme}

@@ -4,6 +4,7 @@ import BlogReader from "../../components/BlogReader";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import { getArticle, getAllBlogSlugs } from "@/lib/getArticle";
 import { getRelatedPosts, getSeriesContext } from "@/lib/getRelatedPosts";
+import { getPrecomputedGraph } from "@/lib/blogGraphIndex";
 import RelatedPosts from "@/components/RelatedPosts";
 import SeriesModule from "@/components/SeriesModule";
 import CodeBlockEnhancer from "@/components/CodeBlockEnhancer";
@@ -118,6 +119,11 @@ export default async function BlogPostPage({
     getRelatedPosts(article.slug, [], "", "", 6),
   ]);
 
+  // Precomputed at build time (scripts/buildRelatedGraph.ts). Inlining it lets
+  // the graph sidebar render instantly — no client fetch, no O(N²) server pass.
+  // null in dev / when absent → the sidebar fetches /api/blog/graph as before.
+  const graphData = getPrecomputedGraph(article.slug);
+
   return (
     <>
       <BlogReader
@@ -129,6 +135,7 @@ export default async function BlogPostPage({
         author={article.author}
         postSlug={article.slug}
         collection={article.collection}
+        graphData={graphData}
         dangerouslySetInnerHTML={{ __html: article.content }}
         footer={
           <>

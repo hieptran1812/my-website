@@ -694,46 +694,76 @@ export async function getPopularPosts(limit = 6): Promise<RelatedPost[]> {
 // ─────────────── Personalized PageRank ───────────────
 
 /**
- * Power-iteration PPR over the composite-weighted adjacency. Starts random
- * walk at `seedSlug`; each step has probability α of restarting at the seed
- * and probability (1-α) of following an outgoing edge proportional to its
- * weight. Returns the stationary probability map.
+ * Row-normalised sparse transition matrix used by PPR. Built ONCE from the
+ * corpus adjacency and reused across every seed — the alternative (rebuilding it
+ * inside each `personalizedPageRank` call) re-scans the whole adjacency per seed,
+ * which is the dominant cost when precomputing all ~3k ego graphs at build time.
  */
-export function personalizedPageRank(
-  seedSlug: string,
-  idx: CorpusIndex,
-  alpha = 0.85,
-  iterations = 30,
-): Map<string, number> {
-  const slugs = Array.from(idx.bySlug.keys());
-  const n = slugs.length;
-  if (n === 0 || !idx.bySlug.has(seedSlug)) return new Map();
+export interface PprTransition {
+  slugs: string[];
+  slugToIdx: Map<string, number>;
+  /** rows[i] = list of [targetIdx, normalisedWeight] for node i. */
+  rows: Array<Array<[number, number]>>;
+}
 
+/**
+ * How many neighbours of each node feed the random walk. The composite adjacency
+ * is near-complete (same-category alone clears the edge threshold → avg degree in
+ * the thousands), but PPR with α=0.85 barely leaves the seed's immediate
+ * neighbourhood, so keeping each node's top-K strongest edges (series / reference
+ * / strong tag+cosine always rank first; only near-zero category edges are
+ * dropped) leaves the top-ranked candidates unchanged while cutting the walk cost
+ * by ~30×. Anything ≥ this K contributes negligible transition probability.
+ */
+const PPR_TOPK = 64;
+
+export function buildPprTransition(
+  idx: CorpusIndex,
+  topK = PPR_TOPK,
+): PprTransition {
+  const slugs = Array.from(idx.bySlug.keys());
   const slugToIdx = new Map<string, number>();
   slugs.forEach((s, i) => slugToIdx.set(s, i));
-  const seedIdx = slugToIdx.get(seedSlug)!;
 
-  // Pre-compute row-normalised outgoing weights for each node.
-  const rows: Array<Array<[number, number]>> = new Array(n);
-  for (let i = 0; i < n; i++) {
-    const slug = slugs[i];
-    const adj = idx.adjacency.get(slug);
+  const rows: Array<Array<[number, number]>> = new Array(slugs.length);
+  for (let i = 0; i < slugs.length; i++) {
+    const adj = idx.adjacency.get(slugs[i]);
     if (!adj || adj.size === 0) {
       rows[i] = [];
       continue;
     }
+    const entries = Array.from(adj); // [slug, edge]
+    if (entries.length > topK) {
+      entries.sort((a, b) => b[1].weight - a[1].weight);
+      entries.length = topK; // truncate to the top-K strongest
+    }
     let sum = 0;
-    for (const e of adj.values()) sum += e.weight;
+    for (const [, e] of entries) sum += e.weight;
     const row: Array<[number, number]> = [];
     if (sum > 0) {
-      for (const [t, e] of adj) {
-        row.push([slugToIdx.get(t)!, e.weight / sum]);
-      }
+      for (const [t, e] of entries) row.push([slugToIdx.get(t)!, e.weight / sum]);
     }
     rows[i] = row;
   }
+  return { slugs, slugToIdx, rows };
+}
 
-  // Initial: all probability on seed.
+/**
+ * Power-iteration PPR over a prebuilt transition. Starts the random walk at
+ * `seedSlug`; each step restarts at the seed with probability α, else follows an
+ * outgoing edge proportional to its (row-normalised) weight. Returns the
+ * stationary probability map.
+ */
+export function personalizedPageRankFast(
+  seedSlug: string,
+  tr: PprTransition,
+  alpha = 0.85,
+  iterations = 30,
+): Map<string, number> {
+  const n = tr.slugs.length;
+  const seedIdx = tr.slugToIdx.get(seedSlug);
+  if (n === 0 || seedIdx === undefined) return new Map();
+
   let p = new Float64Array(n);
   p[seedIdx] = 1;
 
@@ -743,7 +773,7 @@ export function personalizedPageRank(
     for (let i = 0; i < n; i++) {
       const pi = p[i];
       if (pi === 0) continue;
-      const row = rows[i];
+      const row = tr.rows[i];
       const flow = (1 - alpha) * pi;
       if (row.length === 0) {
         // Dangling node: send mass back to seed.
@@ -756,8 +786,28 @@ export function personalizedPageRank(
   }
 
   const out = new Map<string, number>();
-  for (let i = 0; i < n; i++) if (p[i] > 0) out.set(slugs[i], p[i]);
+  for (let i = 0; i < n; i++) if (p[i] > 0) out.set(tr.slugs[i], p[i]);
   return out;
+}
+
+/**
+ * Convenience wrapper: build the transition on the fly and run PPR. Kept for the
+ * runtime API fallback (one seed per request). The build-time precompute instead
+ * builds the transition once and calls `personalizedPageRankFast` per seed.
+ */
+export function personalizedPageRank(
+  seedSlug: string,
+  idx: CorpusIndex,
+  alpha = 0.85,
+  iterations = 30,
+): Map<string, number> {
+  if (!idx.bySlug.has(seedSlug)) return new Map();
+  return personalizedPageRankFast(
+    seedSlug,
+    buildPprTransition(idx),
+    alpha,
+    iterations,
+  );
 }
 
 /**

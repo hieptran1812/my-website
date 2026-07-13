@@ -15,6 +15,7 @@ import type {
 } from "../../components/utils/SpeechReader";
 import { formatDate } from "../../lib/dateUtils";
 import BlogGraphSidebar from "./BlogGraphSidebar";
+import type { PrecomputedGraph } from "../../lib/blogGraphIndex";
 import BlogHighlighter from "./highlights/BlogHighlighter";
 import {
   collectTranslatable,
@@ -48,6 +49,9 @@ interface BlogReaderProps {
   author?: string;
   postSlug?: string;
   collection?: string;
+  /** Precomputed ego graph inlined by the server (build time). When present the
+   *  graph sidebar renders instantly with no client fetch. */
+  graphData?: PrecomputedGraph | null;
   dangerouslySetInnerHTML?: { __html: string };
   /** Rendered inside the article column right after </article>. Used for
    *  series + related-reading so they share the column's width and inherit
@@ -65,6 +69,7 @@ export default function BlogReader({
   author,
   postSlug,
   collection,
+  graphData,
   dangerouslySetInnerHTML,
   footer,
 }: BlogReaderProps) {
@@ -930,6 +935,7 @@ export default function BlogReader({
       {/* Blog Graph Sidebar - Combined Reading Options + Related Articles Network */}
       <BlogGraphSidebar
         currentSlug={postSlug}
+        initialGraph={graphData}
         tocPosition={tocPosition}
         sidebarBottomOffset={sidebarBottomOffset}
         hidden={pastArticleBody}

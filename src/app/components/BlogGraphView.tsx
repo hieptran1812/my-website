@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { useRouter } from "next/navigation";
+import type { PrecomputedGraph } from "../../lib/blogGraphIndex";
 
 type DominantSignal = "series" | "reference" | "tags" | "similar" | "structural";
 
@@ -14,7 +15,11 @@ interface GraphNode extends d3.SimulationNodeDatum {
   subcategory: string;
   relevance: number;
   image?: string;
-  publishDate: string;
+  publishDate?: string;
+  /** Precomputed layout position (origin-centred), present when the graph was
+   *  inlined at build time. Lets the render seed a settled layout. */
+  seedX?: number;
+  seedY?: number;
 }
 
 interface GraphEdge extends d3.SimulationLinkDatum<GraphNode> {
@@ -36,6 +41,10 @@ interface GraphPayload {
 
 interface BlogGraphViewProps {
   currentSlug?: string;
+  /** Ego graph precomputed at build time and inlined by the server. When present
+   *  (and not universe mode), the view renders it immediately — no fetch, no
+   *  spinner — and seeds the simulation with its settled positions. */
+  initialGraph?: PrecomputedGraph | null;
   isExpanded?: boolean;
   onClose?: () => void;
   width?: number;
@@ -43,6 +52,38 @@ interface BlogGraphViewProps {
   theme?: string;
   /** Force universe (whole-corpus) mode regardless of slug. */
   universe?: boolean;
+}
+
+/** Adapt an inlined PrecomputedGraph into the view's payload shape. The stored
+ *  form is deduped for size: nodes carry no `id` (== slug) and edges reference
+ *  endpoints by node index — we rehydrate both here. Positions cross over as
+ *  seedX/seedY (kept separate from d3's live x/y so the simulation can offset
+ *  them to the container centre). */
+function adaptInitial(g: PrecomputedGraph): GraphPayload {
+  const nodes: GraphNode[] = g.nodes.map((n) => ({
+    id: n.slug,
+    slug: n.slug,
+    title: n.title,
+    category: n.category,
+    subcategory: n.subcategory,
+    relevance: n.relevance,
+    seedX: n.x,
+    seedY: n.y,
+  }));
+  return {
+    mode: g.mode,
+    currentNodeId: g.nodes[g.centre]?.slug,
+    palette: g.palette,
+    nodes,
+    edges: g.edges.map((e) => ({
+      source: nodes[e.source]?.slug ?? "",
+      target: nodes[e.target]?.slug ?? "",
+      weight: e.weight,
+      dominant: e.dominant,
+      evidence: e.evidence,
+      directed: e.directed,
+    })),
+  };
 }
 
 /**
@@ -71,6 +112,7 @@ function edgeColor(d: GraphEdge, isDark: boolean): string {
 
 export default function BlogGraphView({
   currentSlug,
+  initialGraph = null,
   isExpanded = false,
   onClose,
   width: propWidth,
@@ -80,17 +122,27 @@ export default function BlogGraphView({
 }: BlogGraphViewProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [payload, setPayload] = useState<GraphPayload | null>(null);
+  // Seed synchronously from inlined data (ego mode only) so the very first paint
+  // already has the graph — no fetch, no spinner.
+  const seeded = !universe && initialGraph ? adaptInitial(initialGraph) : null;
+  const [payload, setPayload] = useState<GraphPayload | null>(seeded);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [hoveredEdgeEvidence, setHoveredEdgeEvidence] = useState<string | null>(
     null,
   );
   const [dimensions, setDimensions] = useState({ width: 300, height: 400 });
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!seeded);
   const router = useRouter();
 
-  // ─── Fetch payload ───
+  // ─── Fetch payload (fallback) ───
+  // When an ego graph was inlined, skip the network entirely. We still fetch for
+  // universe mode and when nothing was precomputed (dev / missing index).
   useEffect(() => {
+    if (!universe && initialGraph) {
+      setPayload(adaptInitial(initialGraph));
+      setIsLoading(false);
+      return;
+    }
     let abort = false;
     const ctrl = new AbortController();
     setIsLoading(true);
@@ -114,7 +166,7 @@ export default function BlogGraphView({
       abort = true;
       ctrl.abort();
     };
-  }, [currentSlug, universe]);
+  }, [currentSlug, universe, initialGraph]);
 
   // ─── Resize observer ───
   useEffect(() => {
@@ -154,6 +206,21 @@ export default function BlogGraphView({
 
     const isDark = theme === "dark";
     const centreId = payload.currentNodeId;
+
+    // Seed from precomputed positions (inline view only). The build lays graphs
+    // out for the compact inline box; for the much larger fullscreen we let the
+    // sim re-expand from scratch. Positions are origin-centred → offset to the
+    // container centre so they line up with the pinned centre + forceCenter.
+    const hasSeeds =
+      !isExpanded &&
+      nodes.length > 0 &&
+      nodes.every((n) => typeof n.seedX === "number" && typeof n.seedY === "number");
+    if (hasSeeds) {
+      for (const n of nodes) {
+        n.x = (n.seedX as number) + width / 2;
+        n.y = (n.seedY as number) + height / 2;
+      }
+    }
 
     // Pin centre
     const centre = nodes.find((n) => n.id === centreId);
@@ -266,7 +333,10 @@ export default function BlogGraphView({
         "collision",
         d3.forceCollide<GraphNode>().radius((d) => sizeFor(d) + 4),
       )
-      .force("center", d3.forceCenter(width / 2, height / 2).strength(0.04));
+      .force("center", d3.forceCenter(width / 2, height / 2).strength(0.04))
+      // Seeded near the settled layout → start cool so it appears already-formed
+      // and only micro-settles instead of exploding out from the centre.
+      .alpha(hasSeeds ? 0.3 : 1);
 
     sim.on("tick", () => {
       linkSel
