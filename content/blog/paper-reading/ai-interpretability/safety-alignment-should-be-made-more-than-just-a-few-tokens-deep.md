@@ -37,7 +37,7 @@ Given the central role of alignment in ensuring LLM safety and the growing deplo
 - $\pi_{aligned}$: its aligned counterpart (e.g., Llama-2-7B-Chat, Gemma-7B-IT).
 - Given an input $x$, the output distribution is $\pi_\theta(\cdot|x)$, and sampling yields $y \sim \pi_\theta(\cdot|x)$.
 - $x_t, y_t$ denote the $t$-th tokens of sequences $x, y$.
-- $y_{<t}, y_{\leq t}$: subsequences up to the $(t-1)$-th or $t$-th token.
+- $y_{\lt t}, y_{\leq t}$: subsequences up to the $(t-1)$-th or $t$-th token.
 - $y_{>t}, y_{\geq t}$: subsequences after the $t$-th or $(t-1)$-th token.
 
 **Safety Evaluation and Metrics**

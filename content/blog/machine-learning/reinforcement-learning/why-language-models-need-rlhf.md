@@ -36,13 +36,13 @@ By the end you will be able to: derive why next-token prediction is the wrong ob
 Let us be precise about what a pretrained language model *is*, because the precision is what reveals the gap. A causal language model parameterized by $\theta$ defines a probability distribution over the next token given all previous tokens:
 
 $$
-p_\theta(x_t \mid x_{<t}) = \text{softmax}(f_\theta(x_{<t}))_{x_t}
+p_\theta(x_t \mid x_{\lt t}) = \text{softmax}(f_\theta(x_{\lt t}))_{x_t}
 $$
 
 Training maximizes the log-likelihood of a giant corpus $\mathcal{D}$ — call it "the internet" — under this model:
 
 $$
-\mathcal{L}_{\text{pretrain}}(\theta) = -\mathbb{E}_{x \sim \mathcal{D}} \left[ \sum_{t} \log p_\theta(x_t \mid x_{<t}) \right]
+\mathcal{L}_{\text{pretrain}}(\theta) = -\mathbb{E}_{x \sim \mathcal{D}} \left[ \sum_{t} \log p_\theta(x_t \mid x_{\lt t}) \right]
 $$
 
 This objective has a single, well-defined target: reproduce the conditional distribution of tokens in $\mathcal{D}$. As the model gets larger and the data gets bigger, $p_\theta$ converges toward the *true distribution of internet text* $p_{\text{data}}$. That is the whole game, and it is a spectacular achievement — it gives you grammar, world knowledge, arithmetic-ish reasoning, code, translation, and a representation of language rich enough to be steered. But notice what the target *is not*: it is not "produce the response a thoughtful, helpful person would give." It is "produce the response that is statistically most likely to appear next on the internet."
@@ -334,7 +334,7 @@ The `Anthropic/hh-rlhf` dataset — released alongside the helpful-and-harmless 
 
 Two practical details separate a reward model that works from one that quietly sabotages your RL run. **First, batch all completions for one prompt together.** InstructGPT made a specific and important choice here: rather than treating each of the $\binom{K}{2}$ comparisons from a $K$-way ranking as an independent training example (which would make completions from popular prompts dominate the gradient and badly overfit), they put all $K$ completions for a given prompt in the *same* batch and computed the loss over all $\binom{K}{2}$ pairs at once. This is both more compute-efficient (each completion is encoded once, not $K-1$ times) and more stable (it removes the overfitting from repeated completions). **Second, normalize the reward model's output before RL.** Because the Bradley-Terry loss is invariant to a per-prompt additive constant, the raw reward scale drifts arbitrarily during training. Before plugging the reward model into PPO, you typically shift and scale its outputs so that a reference set of completions has mean reward zero and unit-ish variance. Skipping this is a classic footgun: an un-normalized reward with a large offset makes the PPO advantage estimates explode and the value function impossible to fit.
 
-A subtle modeling point that trips up newcomers: the reward model and the value function (the PPO critic) are *different objects*, even though both produce scalars from text. The reward model $r_\phi(x,y)$ is a *frozen* judge of full-completion quality, trained on human preferences and never updated during RL. The value function $V_\psi(x, y_{<t})$ is a *trainable* component of the PPO actor-critic that estimates expected future reward from a partial state, updated every PPO step to reduce advantage variance. Conflating them — for instance, using the reward model as the critic — is a real bug I have seen ship: the reward model has no notion of *partial*-sequence value, so it cannot serve as the per-token baseline that policy-gradient methods need for variance reduction. Keep them mentally separate: the reward model is the environment's reward signal; the value head is the agent's internal estimate of how well it is doing.
+A subtle modeling point that trips up newcomers: the reward model and the value function (the PPO critic) are *different objects*, even though both produce scalars from text. The reward model $r_\phi(x,y)$ is a *frozen* judge of full-completion quality, trained on human preferences and never updated during RL. The value function $V_\psi(x, y_{\lt t})$ is a *trainable* component of the PPO actor-critic that estimates expected future reward from a partial state, updated every PPO step to reduce advantage variance. Conflating them — for instance, using the reward model as the critic — is a real bug I have seen ship: the reward model has no notion of *partial*-sequence value, so it cannot serve as the per-token baseline that policy-gradient methods need for variance reduction. Keep them mentally separate: the reward model is the environment's reward signal; the value head is the agent's internal estimate of how well it is doing.
 
 ## 9. From reward model to aligned policy: RLHF with PPO in TRL
 

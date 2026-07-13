@@ -46,7 +46,7 @@ Stage 1 is the part of the pipeline that looks the most like classical VLM pretr
 Next-token cross-entropy on the rendered text, conditioned on the image-prefix tokens:
 
 $$
-\mathcal{L}_{\text{S1}}(\theta) = -\mathbb{E}_{(x, y) \sim \mathcal{D}_{\text{pretrain}}}\left[\sum_{t=1}^{T} \log p_\theta(y_t \mid y_{<t}, \phi(x))\right]
+\mathcal{L}_{\text{S1}}(\theta) = -\mathbb{E}_{(x, y) \sim \mathcal{D}_{\text{pretrain}}}\left[\sum_{t=1}^{T} \log p_\theta(y_t \mid y_{\lt t}, \phi(x))\right]
 $$
 
 Here $\phi(x)$ is the visual prefix produced by CogViT + connector, $y$ is the rendered target sequence (Markdown for plain text, HTML-ish tags for tables, LaTeX for formulas), and $\theta$ ranges over the decoder plus the connector. The visual encoder is **frozen for the first ~5k steps**, then unfrozen with a 10× lower learning rate — a standard VLM trick that prevents the encoder from getting wrecked by the noisy early gradient.

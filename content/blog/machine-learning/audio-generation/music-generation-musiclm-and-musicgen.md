@@ -151,10 +151,10 @@ There are other interleaving patterns in the MusicGen paper, "partial delay" and
 With the layout fixed, the training objective is exactly the one you know from language modeling, applied per codebook. Let the delayed token sequence have columns $1 \ldots T$ where $T = S + K - 1$, and let $x_{k,t}$ be the token of codebook $k$ in column $t$. The model, conditioned on the T5 text encoding $c$ and on all earlier columns, predicts a distribution over each codebook's vocabulary. The loss is the sum of cross-entropies across codebooks and columns,
 
 $$
-\mathcal{L} = -\sum_{t=1}^{T} \sum_{k=1}^{K} \log p_\theta\!\left(x_{k,t} \mid x_{<t}, c\right),
+\mathcal{L} = -\sum_{t=1}^{T} \sum_{k=1}^{K} \log p_\theta\!\left(x_{k,t} \mid x_{\lt t}, c\right),
 $$
 
-where $x_{<t}$ is every token in columns strictly before $t$ (the causal mask enforces this). Each codebook gets its own output head and its own softmax over the $V = 2048$ codebook entries, but they share the transformer trunk. Three details make this work in practice and are worth knowing because they are where the subtle bugs live.
+where $x_{\lt t}$ is every token in columns strictly before $t$ (the causal mask enforces this). Each codebook gets its own output head and its own softmax over the $V = 2048$ codebook entries, but they share the transformer trunk. Three details make this work in practice and are worth knowing because they are where the subtle bugs live.
 
 First, the **padding tokens** that fill the delay gaps at the start (and the corresponding gaps at the end) are *masked out of the loss*. You do not want the model spending capacity predicting "pad," and you do not want pad predictions polluting the gradient. The loss above runs only over real token positions.
 

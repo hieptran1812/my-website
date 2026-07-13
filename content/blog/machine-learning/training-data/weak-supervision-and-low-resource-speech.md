@@ -200,7 +200,7 @@ You need a per-clip quality score that correlates with actual correctness. Two s
 
 1. **Model confidence.** For a sequence-to-sequence model, the natural score is the geometric mean of per-token probabilities — equivalently, the exponential of the average token log-probability:
 
-$$c(x) = \exp\!\left(\frac{1}{T}\sum_{t=1}^{T}\log p(y_t \mid y_{<t}, x)\right)$$
+$$c(x) = \exp\!\left(\frac{1}{T}\sum_{t=1}^{T}\log p(y_t \mid y_{\lt t}, x)\right)$$
 
 where $x$ is the audio, $y_t$ is the $t$-th predicted token, and $T$ is the transcript length. A value near 1 means the model was rarely surprised by its own output; a low value means it hedged. (Whisper exposes this as `avg_logprob` per segment.)
 

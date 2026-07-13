@@ -206,7 +206,7 @@ The matrix above lays out the six algorithms against the three knobs. Read a row
 Concretely, every method computes a gradient of the form:
 
 $$
-\nabla_\theta \mathcal{J}(\theta) = \mathbb{E}_{(q, o) \sim \mathcal{D}} \left[ \frac{1}{|o|} \sum_{t=1}^{|o|} GC(q, o, t) \cdot \nabla_\theta \log \pi_\theta(o_t \mid q, o_{<t}) \right]
+\nabla_\theta \mathcal{J}(\theta) = \mathbb{E}_{(q, o) \sim \mathcal{D}} \left[ \frac{1}{|o|} \sum_{t=1}^{|o|} GC(q, o, t) \cdot \nabla_\theta \log \pi_\theta(o_t \mid q, o_{\lt t}) \right]
 $$
 
 where $q$ is a query, $o$ is an output sampled from data source $\mathcal{D}$, $o_t$ is the token at position $t$, $\pi_\theta$ is the policy, and $GC(q, o, t)$ is the **gradient coefficient** — the one term that every algorithm computes differently. That is the whole template. Define the data source $\mathcal{D}$, define how $GC$ is computed, and you have specified an algorithm. The clipped surrogate, the KL term, the reference model — those are refinements layered on top of this skeleton, not different skeletons.

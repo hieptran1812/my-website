@@ -38,7 +38,7 @@ This is one of the six places a bug can hide in a training run — **data, optim
 
 To debug loss masking you have to know precisely what the loss function does with each token. Language models are trained with **next-token prediction**: at every position in the sequence, the model outputs a probability distribution over the vocabulary, and the loss measures how surprised the model was by the token that actually came next. The loss for a single sequence of length $T$ is the average negative log-likelihood:
 
-$$\mathcal{L} = -\frac{1}{T}\sum_{t=1}^{T} \log p_\theta(x_t \mid x_{<t})$$
+$$\mathcal{L} = -\frac{1}{T}\sum_{t=1}^{T} \log p_\theta(x_t \mid x_{\lt t})$$
 
 That sum runs over every position $t$. The crucial question for our bug is: *does every position contribute?* If you compute loss naively, yes — every token in the sequence, prompt and completion alike, adds a term to that sum and therefore a term to the gradient. That is the default behavior, and for **pretraining** it is exactly what you want: you are teaching the model to predict every token of a giant corpus, so every token earns its loss.
 
@@ -97,7 +97,7 @@ Two consequences fall out of this. First, the **numbers are not comparable** —
 
 It helps to see *why* the dilution is exactly proportional to the token fraction, because that proportionality is what lets you predict the effect before you run anything. The mean-reduced loss over a sequence with token set $S$ (the positions that are scored — for a masked run, just the completion) is
 
-$$\mathcal{L} = \frac{1}{|S|}\sum_{t \in S} \ell_t, \qquad \ell_t = -\log p_\theta(x_t \mid x_{<t})$$
+$$\mathcal{L} = \frac{1}{|S|}\sum_{t \in S} \ell_t, \qquad \ell_t = -\log p_\theta(x_t \mid x_{\lt t})$$
 
 By linearity of the gradient, the parameter update direction is the average of the per-token gradients:
 

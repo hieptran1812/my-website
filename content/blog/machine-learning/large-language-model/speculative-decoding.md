@@ -56,7 +56,7 @@ This is why the very same speculative decoding system that produces a 2.7× spee
 
 The diagram above is the mental model: **a small drafter proposes K tokens, the target model verifies all K of them in a single forward pass, and the system commits the longest accepted prefix**. The rest of this article is a tour of that diagram. Three pieces deserve naming up front:
 
-1. **The drafter** — any cheap distribution $q(x \mid x_{<i})$ over next tokens. It can be an entire smaller LLM (Llama-3.2-1B drafting for Llama-3.1-70B), a few extra heads on the target (Medusa, EAGLE), an n-gram lookup over the prompt, or a retrieval over a corpus. The only requirement is that you can sample from it cheaply — much cheaper than running the target.
+1. **The drafter** — any cheap distribution $q(x \mid x_{\lt i})$ over next tokens. It can be an entire smaller LLM (Llama-3.2-1B drafting for Llama-3.1-70B), a few extra heads on the target (Medusa, EAGLE), an n-gram lookup over the prompt, or a retrieval over a corpus. The only requirement is that you can sample from it cheaply — much cheaper than running the target.
 2. **The verification step** — one forward pass through the target model over the *entire drafted suffix*. Because the target is autoregressive, it produces a logit vector at every position simultaneously. With one extra all-batch pass you get $K$ candidate logits for the price of one decoding step.
 3. **Modified rejection sampling** — the per-position decision rule that decides which drafted tokens survive. It is constructed so that the surviving sequence is distributed exactly as the target would have sampled it, end to end. No quality regression. No "approximate" decoding.
 

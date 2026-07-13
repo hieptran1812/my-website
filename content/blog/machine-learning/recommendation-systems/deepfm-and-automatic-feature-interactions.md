@@ -113,7 +113,7 @@ Let me make the math rigorous, because two things deserve a derivation: the clos
 
 ### 3.1 The FM branch is O(kn), and that is what makes DeepFM cheap
 
-The naive order-2 sum $\sum_{i<j}\langle e_i, e_j\rangle x_i x_j$ is $O(k n^2)$ to evaluate, where $n$ is the number of features and $k$ the embedding dimension. On CTR data with millions of features that is a non-starter. The rescue is the same algebraic identity we derived in full in the [factorization machines post](/blog/machine-learning/recommendation-systems/factorization-machines-and-field-aware-fm), the squared-sum-minus-sum-of-squares trick:
+The naive order-2 sum $\sum_{i\lt j}\langle e_i, e_j\rangle x_i x_j$ is $O(k n^2)$ to evaluate, where $n$ is the number of features and $k$ the embedding dimension. On CTR data with millions of features that is a non-starter. The rescue is the same algebraic identity we derived in full in the [factorization machines post](/blog/machine-learning/recommendation-systems/factorization-machines-and-field-aware-fm), the squared-sum-minus-sum-of-squares trick:
 
 $$\sum_{i=1}^{n}\sum_{j=i+1}^{n} \langle e_i, e_j\rangle\, x_i x_j = \frac{1}{2}\sum_{f=1}^{k}\left[\left(\sum_{i=1}^{n} e_{i,f}\, x_i\right)^2 - \sum_{i=1}^{n} e_{i,f}^2\, x_i^2\right].$$
 

@@ -39,17 +39,17 @@ Start from the only thing we actually want: a model of the probability distribut
 The chain rule of probability gives us an *exact*, assumption-free way to break the joint distribution into a product of one-dimensional conditionals. Pick any ordering of the pixels (say raster order: row by row, left to right) and write
 
 $$
-p(x) = p(x_1, x_2, \ldots, x_N) = \prod_{i=1}^{N} p(x_i \mid x_1, \ldots, x_{i-1}) = \prod_{i=1}^{N} p(x_i \mid x_{<i}).
+p(x) = p(x_1, x_2, \ldots, x_N) = \prod_{i=1}^{N} p(x_i \mid x_1, \ldots, x_{i-1}) = \prod_{i=1}^{N} p(x_i \mid x_{\lt i}).
 $$
 
-This is not an approximation. It is the chain rule, and it holds for *any* ordering. Every term $p(x_i \mid x_{<i})$ is a distribution over a single pixel value given all the pixels that came before it. If each conditional is, say, a softmax over 256 possible intensity values, then we have decomposed an impossible 196,608-dimensional problem into 196,608 tractable 256-way classification problems. That is the entire autoregressive idea: **model the next thing given everything before it.**
+This is not an approximation. It is the chain rule, and it holds for *any* ordering. Every term $p(x_i \mid x_{\lt i})$ is a distribution over a single pixel value given all the pixels that came before it. If each conditional is, say, a softmax over 256 possible intensity values, then we have decomposed an impossible 196,608-dimensional problem into 196,608 tractable 256-way classification problems. That is the entire autoregressive idea: **model the next thing given everything before it.**
 
 ![A branching graph showing an image factored by the chain rule into conditional terms p of x1, p of x2 given x1, up to p of xN given x less than N, all feeding into a product that equals p of x with exact likelihood, and a caution node marking O of N sequential sampling cost](/imgs/blogs/autoregressive-image-models-2.png)
 
 The payoff is real and worth stating plainly, because it is exactly what diffusion does *not* give you. Because the model directly parameterizes each conditional, you can compute the **exact log-likelihood** of any image:
 
 $$
-\log p(x) = \sum_{i=1}^{N} \log p(x_i \mid x_{<i}).
+\log p(x) = \sum_{i=1}^{N} \log p(x_i \mid x_{\lt i}).
 $$
 
 There is no variational lower bound here, no ELBO gap as in a VAE, no intractable normalizing constant as in an energy-based model. You feed an image in, run one forward pass with the right masking, sum the log-probabilities of the actual pixel values, and you have $\log p(x)$ to the precision of your floating point. This is why AR models are the natural home of **density estimation** and why, historically, they reported the best test-set likelihoods (bits-per-dimension) on CIFAR-10 and ImageNet. If your downstream task cares about likelihood — anomaly detection, compression, calibrated uncertainty — AR is the family that gives it to you directly.
@@ -62,7 +62,7 @@ Take a tiny 32×32 RGB image, the size of CIFAR-10. That is $32 \times 32 \times
 
 ## PixelRNN and PixelCNN: making the conditionals causal
 
-The chain rule tells us *what* to compute; PixelRNN and PixelCNN (van den Oord et al., 2016) tell us *how* to compute all those conditionals efficiently with one network. The central engineering problem is **causality**: when the network predicts pixel $x_i$, it must see $x_{<i}$ but absolutely not $x_i$ or any later pixel, or it would be cheating — it would just copy the answer and learn nothing useful for generation.
+The chain rule tells us *what* to compute; PixelRNN and PixelCNN (van den Oord et al., 2016) tell us *how* to compute all those conditionals efficiently with one network. The central engineering problem is **causality**: when the network predicts pixel $x_i$, it must see $x_{\lt i}$ but absolutely not $x_i$ or any later pixel, or it would be cheating — it would just copy the answer and learn nothing useful for generation.
 
 PixelRNN solves this with recurrent connections (row LSTMs, diagonal BiLSTMs) that propagate information along the raster order, but it is slow to train because recurrence is sequential. PixelCNN solves it with a far more practical trick: **masked convolutions**. Take an ordinary convolution and zero out the weights in the kernel that correspond to the current pixel and all "future" pixels in raster order. Concretely, for a 3×3 kernel centered on the pixel being predicted, you keep the connections to the row above and to the pixels to the left in the current row, and you zero the center and everything to the right and below.
 
@@ -94,14 +94,14 @@ class MaskedConv2d(nn.Conv2d):
         return super().forward(x)
 ```
 
-The first convolutional layer uses a **type-A** mask (excludes the center pixel) because at that point the center *is* the pixel we are predicting — letting it through would be a one-line information leak that turns your impressive bits-per-dimension into a fraud. Every subsequent layer uses a **type-B** mask (includes the center) because by then the center activation is a learned feature computed only from $x_{<i}$, so it is safe to use. A whole class of "my likelihood is suspiciously good" bugs come from getting this one boolean wrong.
+The first convolutional layer uses a **type-A** mask (excludes the center pixel) because at that point the center *is* the pixel we are predicting — letting it through would be a one-line information leak that turns your impressive bits-per-dimension into a fraud. Every subsequent layer uses a **type-B** mask (includes the center) because by then the center activation is a learned feature computed only from $x_{\lt i}$, so it is safe to use. A whole class of "my likelihood is suspiciously good" bugs come from getting this one boolean wrong.
 
 The original PixelCNN had a real architectural wart called the **blind spot**: stacking masked convolutions creates a triangular receptive field that fails to cover some pixels that are legitimately in the past, so the model literally cannot condition on them. **Gated PixelCNN** fixed this by splitting the network into a *vertical stack* (everything in the rows above) and a *horizontal stack* (the pixels to the left in the current row), combining them so the receptive field finally covers the entire valid history without leaking the future. It also swapped the ReLU for a gated activation, $\tanh(W_f * x) \odot \sigma(W_g * x)$, borrowed from the LSTM gate, which gave a measurable likelihood bump.
 
 There is one more piece of the PixelCNN story that is pure science and worth a paragraph, because it is the first appearance of a tension that runs through the whole family: **how do you parameterize the per-pixel distribution?** The original PixelRNN used a 256-way softmax over the integer intensities $\{0, \ldots, 255\}$ — clean, but it wastes capacity, because it treats intensity 127 and 128 as completely unrelated categories when they are obviously adjacent. PixelCNN++ replaced it with a **discretized mixture of logistics**: the model outputs the parameters of a small mixture of logistic distributions over the *continuous* intensity, and the probability of a discrete pixel value $v$ is the mass the mixture assigns to the interval around it,
 
 $$
-p(v \mid x_{<i}) = \sum_{m=1}^{M} \pi_m \left[\, \sigma\!\left(\frac{v + 0.5 - \mu_m}{s_m}\right) - \sigma\!\left(\frac{v - 0.5 - \mu_m}{s_m}\right) \right],
+p(v \mid x_{\lt i}) = \sum_{m=1}^{M} \pi_m \left[\, \sigma\!\left(\frac{v + 0.5 - \mu_m}{s_m}\right) - \sigma\!\left(\frac{v - 0.5 - \mu_m}{s_m}\right) \right],
 $$
 
 where $\sigma$ is the logistic CDF, $\mu_m, s_m$ are the mixture means and scales, and $\pi_m$ the mixture weights, all predicted by the network. This costs a handful of parameters per pixel instead of 256 logits, exploits the ordinal structure of intensity, and converges faster. The choice echoes forward: it is exactly the "what distribution do we put on each element" question that token-AR answers with a categorical-over-codes, and that MAR answers with a per-token diffusion model. The factorization is fixed by the chain rule; the *per-element distribution* is a free design choice, and the history of AR image models is largely a history of better answers to it.
@@ -110,7 +110,7 @@ How well did this actually work? On CIFAR-10, Gated PixelCNN reached about **3.0
 
 ## Image GPT: pixels are just a sequence, so use a transformer
 
-The next move (Chen et al., OpenAI, 2020) was almost defiantly simple. Transformers had taken over language modeling by treating text as a sequence of tokens and learning $p(\text{token}_i \mid \text{token}_{<i})$ with masked self-attention. An image, after the chain rule, is *also* just a sequence of conditionals. So **iGPT** flattened an image into a 1D sequence of pixels in raster order and trained a GPT-2-style transformer on it, with exactly the same causal attention mask, the same next-token objective, no image-specific inductive bias at all.
+The next move (Chen et al., OpenAI, 2020) was almost defiantly simple. Transformers had taken over language modeling by treating text as a sequence of tokens and learning $p(\text{token}_i \mid \text{token}_{\lt i})$ with masked self-attention. An image, after the chain rule, is *also* just a sequence of conditionals. So **iGPT** flattened an image into a 1D sequence of pixels in raster order and trained a GPT-2-style transformer on it, with exactly the same causal attention mask, the same next-token objective, no image-specific inductive bias at all.
 
 The causality mechanism moves from masked convolutions to the transformer's **causal attention mask**: in the attention matrix, position $i$ is forbidden from attending to any position $j > i$. You implement it by adding $-\infty$ to the pre-softmax attention scores above the diagonal:
 
@@ -170,7 +170,7 @@ def vq_straight_through(z_e, codebook):
 
 The full VQ-VAE objective has three terms: the reconstruction loss $\lVert x - \text{decode}(z_q) \rVert$, a **codebook loss** $\lVert \text{sg}[z_e] - e \rVert^2$ that pulls codebook vectors toward the encoder outputs they get assigned to, and a **commitment loss** $\beta \lVert z_e - \text{sg}[e] \rVert^2$ that keeps the encoder from oscillating between codes, where $\text{sg}[\cdot]$ is the stop-gradient operator (PyTorch's `.detach()`). That commitment term, weighted by $\beta \approx 0.25$, is the difference between a codebook that trains stably and one where most codes go unused — the dreaded **codebook collapse** where the encoder learns to use only a handful of the $K$ entries.
 
-Now the two-stage recipe that defined a generation of models (DALL·E 1, VQGAN-Transformer, Parti, Muse): **Stage 1**, train the VQ-GAN autoencoder so you can losslessly-enough convert images to-and-from 256-token sequences. **Stage 2**, freeze the VQ-GAN, convert your whole image dataset to token sequences, and train a plain causal transformer to model $p(\text{token}_i \mid \text{token}_{<i})$ over those sequences — exactly iGPT, but now each token is a 16×16-pixel patch's worth of information instead of one pixel. DALL·E 1 (Ramesh et al., 2021) did precisely this, concatenating BPE text tokens in front of the image tokens so the transformer learned $p(\text{image tokens} \mid \text{text tokens})$ and you got text-to-image from a single autoregressive sequence. The text-tokenization half of that pipeline is the same byte-pair encoding we dissect in [the BPE tokenizer](/blog/machine-learning/large-language-model/bpe-tokenizer).
+Now the two-stage recipe that defined a generation of models (DALL·E 1, VQGAN-Transformer, Parti, Muse): **Stage 1**, train the VQ-GAN autoencoder so you can losslessly-enough convert images to-and-from 256-token sequences. **Stage 2**, freeze the VQ-GAN, convert your whole image dataset to token sequences, and train a plain causal transformer to model $p(\text{token}_i \mid \text{token}_{\lt i})$ over those sequences — exactly iGPT, but now each token is a 16×16-pixel patch's worth of information instead of one pixel. DALL·E 1 (Ramesh et al., 2021) did precisely this, concatenating BPE text tokens in front of the image tokens so the transformer learned $p(\text{image tokens} \mid \text{text tokens})$ and you got text-to-image from a single autoregressive sequence. The text-tokenization half of that pipeline is the same byte-pair encoding we dissect in [the BPE tokenizer](/blog/machine-learning/large-language-model/bpe-tokenizer).
 
 #### Worked example: how much did tokenization buy us?
 
@@ -225,7 +225,7 @@ Muse layered this on a frozen T5-XXL text encoder and a two-stage (low-res then 
 Here is the construction. A multi-scale VQ-GAN encodes an image into a *pyramid* of token maps: a 1×1 map, then 2×2, then 3×3, up through 16×16 (typically ~10 scales). The 1×1 map is the coarsest possible summary — one token for the whole image. Each subsequent scale adds the *residual* detail that the previous scales could not represent. The autoregressive factorization is now over **scales**, not tokens:
 
 $$
-p(r_1, r_2, \ldots, r_S) = \prod_{s=1}^{S} p(r_s \mid r_{<s}),
+p(r_1, r_2, \ldots, r_S) = \prod_{s=1}^{S} p(r_s \mid r_{\lt s}),
 $$
 
 where $r_s$ is the entire token map at scale $s$. The crucial difference: within a scale, *all tokens are predicted in parallel* (they only need to condition on the coarser scales, not on each other), so generating scale $s$ is a single forward pass. The sequential dependency is only across the ~10 scales.
@@ -238,7 +238,7 @@ $$
 r_s = \mathcal{Q}\!\left( \downarrow_s f_{s-1} \right), \qquad f_s = f_{s-1} - \uparrow_s \big( \text{lookup}(r_s) \big).
 $$
 
-Each scale therefore encodes only what the coarser scales could not represent — exactly the structure that lets the transformer treat "next scale" as "add the next level of detail." The decoder sums the upsampled quantized maps across all scales to reconstruct $f$, then the VQ decoder turns $f$ into pixels. This residual construction is why VAR's autoregression over scales is meaningful: $p(r_s \mid r_{<s})$ is genuinely "predict the residual detail at this resolution given the coarser image so far."
+Each scale therefore encodes only what the coarser scales could not represent — exactly the structure that lets the transformer treat "next scale" as "add the next level of detail." The decoder sums the upsampled quantized maps across all scales to reconstruct $f$, then the VQ decoder turns $f$ into pixels. This residual construction is why VAR's autoregression over scales is meaningful: $p(r_s \mid r_{\lt s})$ is genuinely "predict the residual detail at this resolution given the coarser image so far."
 
 The results justified the best-paper award. On ImageNet 256×256 class-conditional generation, VAR reported **FID 1.73** with a 2B-parameter model, beating the strong **DiT-XL/2** diffusion transformer (FID ~2.27) while being roughly **an order of magnitude faster to sample**. More striking than the single number was the **scaling law**: VAR exhibited a clean power-law relationship between model size and FID, $\text{FID} \propto N^{-\alpha}$, with a strong fit ($R^2$ near 0.99 in the paper) — the same kind of predictable, smooth scaling behavior that made large language models a sound engineering bet, now demonstrated for image generation. That scaling claim is arguably the most consequential part of the paper: it says you can buy better images with more compute *predictably*, which is exactly what you want before you spend a GPU budget.
 
@@ -269,11 +269,11 @@ The honest caveats: VAR still inherits the VQ quantization ceiling (its multi-sc
 
 If VAR fixed the *order* and *speed*, **MAR** (Li et al., 2024, "Autoregressive Image Generation without Vector Quantization") fixed the *fidelity ceiling* by attacking the assumption that nobody had questioned: that autoregressive image models need discrete tokens at all. The discreteness was always a means to an end — it let us use a categorical softmax and cross-entropy, the comfortable machinery of language modeling. But it costs you the quantization error, and it caps how good your reconstructions can be.
 
-MAR's insight: an autoregressive model is defined by the *factorization* $p(x) = \prod_i p(x_i \mid x_{<i})$, not by how each conditional $p(x_i \mid x_{<i})$ is parameterized. Token AR parameterizes it as a softmax over a codebook. But $x_i$ can just as well be a **continuous** vector (a continuous latent token from a *non*-quantized autoencoder), and the per-token conditional can be any distribution over $\mathbb{R}^d$. MAR models that continuous conditional with a **small diffusion model** — a tiny per-token denoising MLP that, conditioned on the transformer's output vector $z_i$ for position $i$, learns to sample the continuous token $x_i$. The transformer produces the *condition*; the little diffusion head turns that condition into a continuous token via a few denoising steps.
+MAR's insight: an autoregressive model is defined by the *factorization* $p(x) = \prod_i p(x_i \mid x_{\lt i})$, not by how each conditional $p(x_i \mid x_{\lt i})$ is parameterized. Token AR parameterizes it as a softmax over a codebook. But $x_i$ can just as well be a **continuous** vector (a continuous latent token from a *non*-quantized autoencoder), and the per-token conditional can be any distribution over $\mathbb{R}^d$. MAR models that continuous conditional with a **small diffusion model** — a tiny per-token denoising MLP that, conditioned on the transformer's output vector $z_i$ for position $i$, learns to sample the continuous token $x_i$. The transformer produces the *condition*; the little diffusion head turns that condition into a continuous token via a few denoising steps.
 
 ![A before-and-after comparison contrasting token autoregression using a VQ codebook with a softmax cross-entropy loss and a quantization-error fidelity cap, against continuous masked autoregression in MAR using no codebook, a tiny per-token diffusion head, and FID 1.55 on ImageNet with no quantization loss](/imgs/blogs/autoregressive-image-models-5.png)
 
-The training objective is a clean composition. The big transformer predicts a conditioning vector $z_i = f_\theta(x_{<i})$ for each position. The small diffusion head defines a loss on the *continuous* ground-truth token $x_i$:
+The training objective is a clean composition. The big transformer predicts a conditioning vector $z_i = f_\theta(x_{\lt i})$ for each position. The small diffusion head defines a loss on the *continuous* ground-truth token $x_i$:
 
 $$
 \mathcal{L}(z_i, x_i) = \mathbb{E}_{\varepsilon, t} \left[ \lVert \varepsilon - \varepsilon_\phi(x_i^t \mid t, z_i) \rVert^2 \right],
@@ -509,7 +509,7 @@ And here is the convergence, stated as plainly as I can. **MAR** is an autoregre
 I keep claiming AR's exact-likelihood property as a real advantage, so let me make it rigorous rather than asserted, because it is the one thing diffusion structurally cannot match. For a *discrete* token-AR model the likelihood is unambiguous: the model outputs, for each position, a categorical distribution over the $K$ codes, and the log-likelihood of a token sequence is just the sum of the log-probabilities of the true tokens,
 
 $$
-\log p(\mathbf{t}) = \sum_{i=1}^{L} \log p_\theta(t_i \mid t_{<i}),
+\log p(\mathbf{t}) = \sum_{i=1}^{L} \log p_\theta(t_i \mid t_{\lt i}),
 $$
 
 with no approximation anywhere — one masked forward pass gives you every conditional, you index the true token in each, and sum. Contrast this with diffusion, where the model only gives you a *lower bound* on $\log p(x)$ via the evidence lower bound (the ELBO), and computing a tight likelihood requires the probability-flow ODE and an expensive trace estimate. AR hands you the exact number for the price of one forward pass.
@@ -560,7 +560,7 @@ Decisive guidance, because every choice is a cost.
 
 ## Key takeaways
 
-- **The chain rule is exact, not an approximation.** $p(x) = \prod_i p(x_i \mid x_{<i})$ holds for any ordering and gives autoregressive models their two defining traits: exact likelihood (a structural win over diffusion's ELBO) and strictly sequential sampling (their historic curse).
+- **The chain rule is exact, not an approximation.** $p(x) = \prod_i p(x_i \mid x_{\lt i})$ holds for any ordering and gives autoregressive models their two defining traits: exact likelihood (a structural win over diffusion's ELBO) and strictly sequential sampling (their historic curse).
 - **Causality is the whole implementation challenge.** Masked convolutions (type-A first layer, type-B after) in PixelCNN, the lower-triangular attention mask in transformers — get the masking wrong and your likelihood is a fraud.
 - **Tokenization with VQ-VAE/VQ-GAN is the hinge.** Compressing a 256×256 image to ~256 discrete tokens (a 768× shorter sequence) is what made transformer-AR over images tractable and gave us DALL·E 1, Parti, and Muse. The straight-through estimator is how you backprop through the non-differentiable $\arg\min$.
 - **AR faded for three concrete reasons** — sequential sampling speed, the VQ fidelity ceiling, and raster order being a bad 2D inductive bias — and the comeback fixed each one specifically.

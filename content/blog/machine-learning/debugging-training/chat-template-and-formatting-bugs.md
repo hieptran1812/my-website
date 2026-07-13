@@ -53,7 +53,7 @@ What all four share is the defining feature of this bug class: **the training lo
 
 A causal language model is trained to minimize, over its training distribution $\mathcal{D}$ of token sequences $x = (x_1, \dots, x_T)$, the average negative log-likelihood of each token given its predecessors:
 
-$$\mathcal{L} = -\frac{1}{|\mathcal{M}|}\sum_{t \in \mathcal{M}} \log p_\theta(x_t \mid x_{<t})$$
+$$\mathcal{L} = -\frac{1}{|\mathcal{M}|}\sum_{t \in \mathcal{M}} \log p_\theta(x_t \mid x_{\lt t})$$
 
 where $\mathcal{M}$ is the set of positions that contribute to the loss (the unmasked positions — in instruction finetuning, typically the assistant-response tokens). The crucial observation is that $\mathcal{D}$ here is **the formatted training data**, in whatever format your pipeline produced. If your pipeline wraps every example as `User: {q}\nAssistant: {a}`, then the model is learning $p_\theta(\text{token} \mid \text{this exact layout})$. The loss measures fit to *that* distribution and nothing else.
 

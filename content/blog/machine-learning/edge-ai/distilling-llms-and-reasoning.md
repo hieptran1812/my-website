@@ -48,14 +48,14 @@ The temperature $T > 1$ flattens the distribution so the "dark knowledge" — th
 An autoregressive language model factorizes the probability of a sequence $y = (y_1, \dots, y_L)$ given a prompt $x$ as a product of per-token conditionals:
 
 $$
-p(y \mid x) = \prod_{t=1}^{L} p(y_t \mid y_{<t}, x)
+p(y \mid x) = \prod_{t=1}^{L} p(y_t \mid y_{\lt t}, x)
 $$
 
-Each factor $p(y_t \mid y_{<t}, x)$ is itself a categorical distribution over the vocabulary — typically 32k to 256k tokens. So at one level, an LLM *is* a sequence of classifiers, one per position, and the obvious move is to apply Hinton distillation at every position: match the teacher's next-token distribution at each step. That is **token-level (or word-level) KD**, and it is the first regime in Figure 1. It is real, it works, and it is the cheapest thing you can do — but it has two problems that the sequence structure creates and a classifier never has.
+Each factor $p(y_t \mid y_{\lt t}, x)$ is itself a categorical distribution over the vocabulary — typically 32k to 256k tokens. So at one level, an LLM *is* a sequence of classifiers, one per position, and the obvious move is to apply Hinton distillation at every position: match the teacher's next-token distribution at each step. That is **token-level (or word-level) KD**, and it is the first regime in Figure 1. It is real, it works, and it is the cheapest thing you can do — but it has two problems that the sequence structure creates and a classifier never has.
 
 The first problem is the **vocabulary explosion in the target**. The teacher's per-token distribution is a vector over the whole vocabulary. To match it exactly you need the teacher's full logits at every position of every training sequence — that is a 256k-dimensional float vector per token, which for a corpus of billions of tokens is an absurd amount of storage and bandwidth. In practice you either run the teacher live alongside the student (expensive: you pay a teacher forward pass per step) or you store only the top-$k$ teacher logits per token (a common compromise — top-50 or top-128 captures most of the mass and is 2000× smaller). Already the "just soft-label it" intuition needs an asterisk.
 
-The second problem is deeper and it is the one that motivates everything that follows: **exposure bias**, also called the train–test distribution mismatch. When you train token-level KD, at every position you feed the student the *ground-truth* (or teacher-generated) prefix $y_{<t}$ and ask it to predict $y_t$. This is "teacher forcing": the student never sees its own predictions during training, only the correct prefix. But at inference time the student generates autoregressively — it conditions on *its own* previous tokens, which contain errors. The moment the student makes one off-distribution token, the prefix it is now conditioning on is a prefix it was never trained on, and the errors compound. The student is trained on the distribution of teacher prefixes and tested on the distribution of its own prefixes, and those distributions drift apart over a long generation. A classifier never has this problem because there is no autoregression — the input is fixed. For a sequence model it is the central pathology, and the two regimes after token-KD in Figure 1 (sequence-KD and on-policy) are both attempts to close this gap.
+The second problem is deeper and it is the one that motivates everything that follows: **exposure bias**, also called the train–test distribution mismatch. When you train token-level KD, at every position you feed the student the *ground-truth* (or teacher-generated) prefix $y_{\lt t}$ and ask it to predict $y_t$. This is "teacher forcing": the student never sees its own predictions during training, only the correct prefix. But at inference time the student generates autoregressively — it conditions on *its own* previous tokens, which contain errors. The moment the student makes one off-distribution token, the prefix it is now conditioning on is a prefix it was never trained on, and the errors compound. The student is trained on the distribution of teacher prefixes and tested on the distribution of its own prefixes, and those distributions drift apart over a long generation. A classifier never has this problem because there is no autoregression — the input is fixed. For a sequence model it is the central pathology, and the two regimes after token-KD in Figure 1 (sequence-KD and on-policy) are both attempts to close this gap.
 
 ### What "transfer capability" actually means here
 
@@ -68,7 +68,7 @@ Let me make token-level KD concrete before tearing into its limits, because it i
 The token-KD loss is a per-position KL between teacher and student next-token distributions, summed over the sequence and usually mixed with the ordinary next-token cross-entropy against the ground-truth token:
 
 $$
-\mathcal{L}_{\text{tok-KD}} = \sum_{t=1}^{L} \Big[ (1 - \alpha)\, \underbrace{\mathrm{CE}\big(y_t,\, q(y_t \mid y_{<t}, x)\big)}_{\text{hard label}} \;+\; \alpha\, T^2\, \underbrace{\mathrm{KL}\big(p(\cdot \mid y_{<t}, x)\,\|\,q(\cdot \mid y_{<t}, x)\big)}_{\text{soft teacher}} \Big]
+\mathcal{L}_{\text{tok-KD}} = \sum_{t=1}^{L} \Big[ (1 - \alpha)\, \underbrace{\mathrm{CE}\big(y_t,\, q(y_t \mid y_{\lt t}, x)\big)}_{\text{hard label}} \;+\; \alpha\, T^2\, \underbrace{\mathrm{KL}\big(p(\cdot \mid y_{\lt t}, x)\,\|\,q(\cdot \mid y_{\lt t}, x)\big)}_{\text{soft teacher}} \Big]
 $$
 
 with $\alpha \in [0, 1]$ trading off the hard ground-truth signal against the soft teacher signal, and $T$ the distillation temperature. The KL here is the **forward KL**, $\mathrm{KL}(p \| q)$ — teacher first. That direction matters enormously and section 4 derives why; for now just note it is the direction Hinton used and the direction a naive port of classifier distillation gives you.
@@ -106,7 +106,7 @@ $$
 where $\mathcal{Y}$ is the set of *all* possible output sequences. The first term is a cross-entropy of the student against the teacher's full sequence distribution; the constant is the teacher's entropy, which does not depend on the student and drops out of the gradient. The problem is the sum over $\mathcal{Y}$: it is a sum over an exponentially large (for length $L$ and vocabulary $V$, it is $V^L$) set of sequences. You cannot compute it. Kim and Rush's move is to approximate $p(y \mid x)$ by a point mass at its mode $\hat{y} = \arg\max_y p(y \mid x)$:
 
 $$
-p(y \mid x) \approx \mathbb{1}[\,y = \hat{y}\,] \quad\Longrightarrow\quad \mathcal{L}_{\text{seq-KD}} \approx -\log q(\hat{y} \mid x) = -\sum_{t=1}^{L}\log q(\hat{y}_t \mid \hat{y}_{<t}, x)
+p(y \mid x) \approx \mathbb{1}[\,y = \hat{y}\,] \quad\Longrightarrow\quad \mathcal{L}_{\text{seq-KD}} \approx -\log q(\hat{y} \mid x) = -\sum_{t=1}^{L}\log q(\hat{y}_t \mid \hat{y}_{\lt t}, x)
 $$
 
 and the right-hand side is *exactly* ordinary next-token cross-entropy of the student on the teacher's single best sequence $\hat{y}$. That is the whole derivation: replace the intractable sum over all sequences with the one sequence carrying almost all the mass, and the sequence-level KL collapses to plain supervised fine-tuning on the teacher's greedy (or beam) output. The approximation is good precisely because, for a well-trained teacher, $p(\hat{y} \mid x)$ is large and the rest of $\mathcal{Y}$ is a thin tail — the point mass is not a crude hack, it is a justified concentration of the objective on the part of the distribution that matters at decode time. You can sharpen it by using beam search (a better mode estimate) or by keeping the top-$k$ teacher sequences instead of just the top one (a $k$-point approximation, which interpolates back toward the full distribution at $k$× the cost).
@@ -173,7 +173,7 @@ Two important members of this family:
 **MiniLLM (Gu et al., 2023)** minimizes reverse KL over student samples with a policy-gradient estimator. The gradient of reverse KL with respect to the student parameters $\theta$ has the form
 
 $$
-\nabla_\theta \mathrm{KL}(q_\theta \| p) = -\,\mathbb{E}_{y \sim q_\theta}\!\left[\sum_{t} \nabla_\theta \log q_\theta(y_t \mid y_{<t}, x)\cdot \Big(\log \tfrac{p(y_t \mid y_{<t},x)}{q_\theta(y_t \mid y_{<t},x)} - 1\Big)\right]
+\nabla_\theta \mathrm{KL}(q_\theta \| p) = -\,\mathbb{E}_{y \sim q_\theta}\!\left[\sum_{t} \nabla_\theta \log q_\theta(y_t \mid y_{\lt t}, x)\cdot \Big(\log \tfrac{p(y_t \mid y_{\lt t},x)}{q_\theta(y_t \mid y_{\lt t},x)} - 1\Big)\right]
 $$
 
 which is a REINFORCE-style estimator where the "reward" at each token is the teacher–student log-ratio. MiniLLM adds variance-reduction tricks (a length-normalization, a single-step regularization, and teacher-mixed sampling) because, like all policy-gradient methods, the naive estimator is high-variance. The payoff is a student trained directly to minimize the divergence in the direction that matches sampling.

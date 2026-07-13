@@ -1433,7 +1433,7 @@ The key idea: for each problem, generate a group of $G$ solutions, compute their
 $$\mathcal{L}_{\text{GRPO}} = -\mathbb{E}_{q \sim \mathcal{D}} \left[ \frac{1}{G} \sum_{i=1}^{G} \frac{1}{|o_i|} \sum_{t=1}^{|o_i|} \min\left( r_t(\theta) \hat{A}_i, \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) \hat{A}_i \right) - \beta \cdot D_{KL}(\pi_\theta \| \pi_{\text{ref}}) \right]$$
 
 Where:
-- $r_t(\theta) = \frac{\pi_\theta(o_{i,t} \mid q, o_{i,<t})}{\pi_{\text{old}}(o_{i,t} \mid q, o_{i,<t})}$ is the importance sampling ratio
+- $r_t(\theta) = \frac{\pi_\theta(o_{i,t} \mid q, o_{i,\lt t})}{\pi_{\text{old}}(o_{i,t} \mid q, o_{i,\lt t})}$ is the importance sampling ratio
 - $\hat{A}_i = \frac{r_i - \text{mean}(\mathbf{r})}{\text{std}(\mathbf{r})}$ is the **group-normalized advantage** (this is the key innovation)
 - $\epsilon$ is the clipping parameter
 - $\beta$ is the KL penalty coefficient

@@ -888,10 +888,10 @@ The InstructGPT paper (Ouyang et al., 2022) reformulated language model fine-tun
 - **State**: full conversation prefix (system prompt + user message + partial assistant response).
 - **Action**: next token to emit (vocabulary size ~50,000).
 - **P**: deterministic token append.
-- **R**: sparse — reward model scores the completed response $r_\phi(x, y)$. Plus a per-token KL penalty: $-\beta \log(\pi_\theta(y_t \mid x, y_{<t}) / \pi_{ref}(y_t \mid x, y_{<t}))$.
+- **R**: sparse — reward model scores the completed response $r_\phi(x, y)$. Plus a per-token KL penalty: $-\beta \log(\pi_\theta(y_t \mid x, y_{\lt t}) / \pi_{ref}(y_t \mid x, y_{\lt t}))$.
 - **$\gamma$**: 1.0 (response is a finite token sequence).
 
-The KL penalty is exactly potential-based reward shaping with $\Phi(s_t) = \log \pi_{ref}(y_t \mid x, y_{<t})$: it provides a per-token dense signal that prevents the policy from drifting far from the reference model distribution, preventing reward hacking. The InstructGPT models (1.3B, 6B, 175B parameters) were preferred over the untuned GPT-3 (175B) by human raters on 85%+ of test prompts — a significantly smaller model fine-tuned with RL beat a larger supervised baseline.
+The KL penalty is exactly potential-based reward shaping with $\Phi(s_t) = \log \pi_{ref}(y_t \mid x, y_{\lt t})$: it provides a per-token dense signal that prevents the policy from drifting far from the reference model distribution, preventing reward hacking. The InstructGPT models (1.3B, 6B, 175B parameters) were preferred over the untuned GPT-3 (175B) by human raters on 85%+ of test prompts — a significantly smaller model fine-tuned with RL beat a larger supervised baseline.
 
 
 ## 15. When to use MDPs (and when not to)

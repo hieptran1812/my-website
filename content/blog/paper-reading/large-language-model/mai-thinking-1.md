@@ -219,7 +219,7 @@ $$
 The per-token importance ratio between the current policy $\pi_\theta$ and the rollout policy $\pi_{\text{old}}$ is
 
 $$
-r_{i,t}(\theta) = \frac{\pi_\theta(y_{i,t}\mid q,\, y_{i,<t})}{\pi_{\text{old}}(y_{i,t}\mid q,\, y_{i,<t})},
+r_{i,t}(\theta) = \frac{\pi_\theta(y_{i,t}\mid q,\, y_{i,\lt t})}{\pi_{\text{old}}(y_{i,t}\mid q,\, y_{i,\lt t})},
 $$
 
 and the objective is the clipped, token-level surrogate (normalization is over *all* tokens in the global batch so every token counts equally regardless of response length):
@@ -249,7 +249,7 @@ $$
 At $k=0$ the bounds $1-\epsilon$ and $(1-\epsilon)^{-1}$ are multiplicative inverses — symmetric in log-ratio space. An integral controller then nudges $k$ after each step based on the gap between an importance-weighted entropy estimate $\hat H(\pi_\theta)$ and target $H^\star$:
 
 $$
-\hat H(\pi_\theta) = \frac{1}{|\mathcal{T}|}\sum_{(i,t)\in\mathcal{T}} -\log\pi_\theta(y_{i,t}\mid q, y_{i,<t})\cdot r_{i,t}(\theta),
+\hat H(\pi_\theta) = \frac{1}{|\mathcal{T}|}\sum_{(i,t)\in\mathcal{T}} -\log\pi_\theta(y_{i,t}\mid q, y_{i,\lt t})\cdot r_{i,t}(\theta),
 \qquad
 k \leftarrow \operatorname{clip}\!\Big(k + \delta\cdot\operatorname{sign}\big(H^\star - \hat H(\pi_\theta)\big),\ 0,\ k_{\max}\Big).
 $$

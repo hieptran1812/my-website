@@ -37,7 +37,7 @@ Before we can delete the critic we need to be precise about what the objects are
 
 A language model $\pi_\theta$ is a stochastic policy. The state is the prompt-so-far: the question $q$ concatenated with whatever tokens the model has already generated. The action at each step is the next token. The model emits a probability distribution over the vocabulary, you sample a token, append it, and repeat. A complete generated answer $o = (o_1, o_2, \dots, o_T)$ — a full chain of thought ending in a boxed answer — is a *trajectory*. Its probability under the policy factorizes the way autoregressive models always do:
 
-$$\pi_\theta(o \mid q) = \prod_{t=1}^{T} \pi_\theta(o_t \mid q, o_{<t})$$
+$$\pi_\theta(o \mid q) = \prod_{t=1}^{T} \pi_\theta(o_t \mid q, o_{\lt t})$$
 
 The environment is almost trivial. There are no dynamics to learn: appending a token deterministically produces the next state. The only interesting thing the environment does is hand out a reward, and in the reasoning setting it hands out *exactly one* reward, at the very end, after the model has emitted its final answer. For a math problem the reward is whether the boxed answer matches the ground truth: reward 1.0 if correct, 0.0 if wrong. This is what people mean when they call it an *outcome reward* — the signal is the outcome, not the process. There is no per-token reward, no shaping, no dense feedback. One question, one full answer, one bit of reward.
 
@@ -133,7 +133,7 @@ Let us name every piece.
 
 The **importance ratio** $\rho_{i,t}$ is the per-token ratio of the current policy to the policy that generated the samples:
 
-$$\rho_{i,t} = \frac{\pi_\theta(o_{i,t} \mid q, o_{i,<t})}{\pi_{\theta_{\text{old}}}(o_{i,t} \mid q, o_{i,<t})}$$
+$$\rho_{i,t} = \frac{\pi_\theta(o_{i,t} \mid q, o_{i,\lt t})}{\pi_{\theta_{\text{old}}}(o_{i,t} \mid q, o_{i,\lt t})}$$
 
 When you have just collected the samples and haven't updated yet, $\theta = \theta_{\text{old}}$ and every ratio is exactly 1. As you take gradient steps on the same batch, the ratios drift. The ratio is what lets GRPO, like PPO, squeeze multiple gradient updates out of one expensive round of generation — the most expensive thing in the whole loop.
 

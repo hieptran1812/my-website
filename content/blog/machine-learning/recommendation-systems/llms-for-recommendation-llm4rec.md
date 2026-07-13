@@ -176,7 +176,7 @@ Let us make the *why* rigorous, because "the LLM has popularity bias" is a folk 
 A causal language model defines a distribution over token sequences and factorizes it autoregressively. When we prompt it with a user's history and an instruction and read off an item, we are sampling from
 
 $$
-P(\text{item} \mid \text{history}, \text{instruction}) \;=\; \prod_{t=1}^{T} P\!\left(w_t \mid w_{<t},\, \text{history},\, \text{instruction}\right),
+P(\text{item} \mid \text{history}, \text{instruction}) \;=\; \prod_{t=1}^{T} P\!\left(w_t \mid w_{\lt t},\, \text{history},\, \text{instruction}\right),
 $$
 
 where $w_1, \dots, w_T$ are the tokens that spell the item (its title, its position number, or its semantic ID). The recommendation is whichever item maximizes — or the model samples from — this conditional probability. That single equation explains a lot. The model is not optimizing your ranking metric; it is optimizing next-token likelihood under its pretraining distribution, *conditioned* on your prompt. Everything good (world knowledge) and everything bad (popularity, position bias) flows from that distribution being a pretraining artifact, not a behavior model fit to your logs.

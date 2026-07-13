@@ -144,7 +144,7 @@ The single most common formatting bug is a mismatch between the string you train
 
 This is non-negotiable and easy to get wrong. During SFT you want the model to learn *to produce responses*, not to *predict the user's questions*. If you compute the loss over the entire sequence — instruction included — you waste capacity teaching the model to generate instructions, and you dilute the response signal. The objective you actually want is
 
-$$\mathcal{L} = -\sum_{t \,\in\, \text{response}} \log p_\theta(y_t \mid y_{<t}, x)$$
+$$\mathcal{L} = -\sum_{t \,\in\, \text{response}} \log p_\theta(y_t \mid y_{\lt t}, x)$$
 
 where $x$ is the rendered prompt and the sum runs only over response tokens. In practice you implement this by building a label tensor that masks the prompt span with the ignore-index (`-100` in PyTorch cross-entropy):
 

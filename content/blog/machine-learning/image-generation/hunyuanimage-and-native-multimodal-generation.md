@@ -91,13 +91,13 @@ Let a full multimodal sequence be a list of discrete tokens $x = (x_1, x_2, \dot
 
 $$p_\theta(x) = \prod_{t=1}^{T} p_\theta(x_t \mid x_1, \dots, x_{t-1}).$$
 
-There is no approximation here — this is the chain rule of probability, true for any joint distribution. The modeling choice is to parameterize each conditional $p_\theta(x_t \mid x_{<t})$ with one decoder-only transformer that reads the prefix $x_{<t}$ and outputs a softmax over $\mathcal{V}$. Training is the same maximum-likelihood objective an LLM uses — minimize the negative log-likelihood, i.e. the next-token cross-entropy:
+There is no approximation here — this is the chain rule of probability, true for any joint distribution. The modeling choice is to parameterize each conditional $p_\theta(x_t \mid x_{\lt t})$ with one decoder-only transformer that reads the prefix $x_{\lt t}$ and outputs a softmax over $\mathcal{V}$. Training is the same maximum-likelihood objective an LLM uses — minimize the negative log-likelihood, i.e. the next-token cross-entropy:
 
-$$\mathcal{L}(\theta) = -\,\mathbb{E}_{x \sim \mathcal{D}} \sum_{t=1}^{T} \log p_\theta(x_t \mid x_{<t}).$$
+$$\mathcal{L}(\theta) = -\,\mathbb{E}_{x \sim \mathcal{D}} \sum_{t=1}^{T} \log p_\theta(x_t \mid x_{\lt t}).$$
 
 The data $\mathcal{D}$ is a mix of pure text, image-caption pairs, and *interleaved* documents (text and images woven together, like a webpage). When the model is asked to generate an image, the prompt is a text prefix and the image is the suffix the model must predict, token by token.
 
-Here is the conceptual payoff that the math makes inevitable. Because $p_\theta(x_t \mid x_{<t})$ conditions on the *entire prefix*, every image token the model emits is conditioned on:
+Here is the conceptual payoff that the math makes inevitable. Because $p_\theta(x_t \mid x_{\lt t})$ conditions on the *entire prefix*, every image token the model emits is conditioned on:
 
 1. the text prompt,
 2. *any reasoning text the model itself generated* (it can write out a plan before drawing), and
@@ -115,7 +115,7 @@ where $c$ is the *frozen* conditioning embedding. Notice $c$ enters as a fixed i
 
 It is worth making the world-knowledge claim *provable* rather than asserted, because it is the crux of the whole post. Consider the joint distribution the native-AR model learns over a text prompt $c$ and an image token sequence $y = (y_1, \dots, y_M)$. The chain rule lets us write it as
 
-$$p_\theta(c, y) = \underbrace{p_\theta(c)}_{\text{a language model}} \cdot \underbrace{\prod_{m=1}^{M} p_\theta(y_m \mid c, y_{<m})}_{\text{an image model conditioned on text}}.$$
+$$p_\theta(c, y) = \underbrace{p_\theta(c)}_{\text{a language model}} \cdot \underbrace{\prod_{m=1}^{M} p_\theta(y_m \mid c, y_{\lt m})}_{\text{an image model conditioned on text}}.$$
 
 The single network $\theta$ is trained to maximize the likelihood of *both* factors at once — the same parameters are pushed to be a good language model *and* a good conditional image model. Gradient signal from the text factor literally shapes the weights that the image factor reuses. So when the model conditions an image token on the prompt, the representation it conditions on is the *same* representation that learned, from billions of text tokens, what a "1960s ad" or "Bhutan's flag" or "a marathon runner's pre-race meal" actually *is*.
 
@@ -123,7 +123,7 @@ A diffusion model factorizes differently and that difference is the ceiling. It 
 
 ### What does native-AR cost, exactly?
 
-The chain rule is a blessing for knowledge and a curse for speed. To generate $T$ image tokens you need $T$ sequential forward passes — each token waits for the previous one, because $x_t$ depends on $x_{<t}$. With KV-caching the per-step cost is roughly the cost of one transformer forward over the cached context, but you still pay $O(T)$ steps that *cannot be parallelized across token positions*.
+The chain rule is a blessing for knowledge and a curse for speed. To generate $T$ image tokens you need $T$ sequential forward passes — each token waits for the previous one, because $x_t$ depends on $x_{\lt t}$. With KV-caching the per-step cost is roughly the cost of one transformer forward over the cached context, but you still pay $O(T)$ steps that *cannot be parallelized across token positions*.
 
 Diffusion, by contrast, generates *all* spatial positions in parallel each step and needs only $N$ steps where $N$ is the number of denoising steps (20–50 for good samplers, or 1–4 after distillation — see [why diffusion is slow and how to fix it](/blog/machine-learning/image-generation/why-diffusion-is-slow-and-how-to-fix-it)). For a 1024px image an AR model might emit on the order of a few thousand image tokens; that is a few thousand sequential steps versus a few dozen parallel ones. This is the central latency tax of native-AR, and no amount of cleverness fully erases it (though speculative decoding, parallel/blockwise token prediction, and next-scale schemes like VAR chip at it).
 
@@ -571,7 +571,7 @@ The meta-rule: **native-AR is the tool when correctness matters more than speed;
 ## 13. Key takeaways
 
 - **HunyuanImage is two models, not one.** 2.1 is a fast diffusion MM-DiT with a high-compression VAE doing 2K; 3.0 is a ~80B MoE *native autoregressive* multimodal model. Don't conflate them.
-- **Native-AR is the chain rule over a shared text+image vocabulary.** One decoder-only transformer factorizes $p(x) = \prod_t p(x_t \mid x_{<t})$ over a vocabulary that includes both BPE text ids and quantized image ids, trained with plain next-token cross-entropy.
+- **Native-AR is the chain rule over a shared text+image vocabulary.** One decoder-only transformer factorizes $p(x) = \prod_t p(x_t \mid x_{\lt t})$ over a vocabulary that includes both BPE text ids and quantized image ids, trained with plain next-token cross-entropy.
 - **World knowledge comes from sharing weights with language.** Because the same network that answers text questions also draws, the model carries genuine facts and reasoning into generation — and can write a *plan in text* that conditions the image tokens. A diffusion model conditioned on a frozen encoder structurally cannot do this.
 - **The tokenizer sets the ceiling.** A VAE-plus-quantizer maps pixels to codebook ids; the model only ever predicts ids and detokenizes at the end. Compression cuts sequential steps; quantization caps reconstructable detail.
 - **MoE buys capacity, not speed.** Top-$k$ routing gives an 80B-total model the per-token compute of a few-billion dense model — more knowledge capacity — but the *full* weights stay resident (multi-GPU) and image decoding is still $O(T)$ sequential.

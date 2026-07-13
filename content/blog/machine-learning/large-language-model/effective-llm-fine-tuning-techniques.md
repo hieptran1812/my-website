@@ -192,7 +192,7 @@ During training, we mask the loss on system and user tokens and only compute cro
 **The SFT loss:**
 
 $$
-\mathcal{L}_{\text{SFT}} = -\frac{1}{|y|} \sum_{t=1}^{|y|} \log P_\theta(y_t \mid x, y_{<t})
+\mathcal{L}_{\text{SFT}} = -\frac{1}{|y|} \sum_{t=1}^{|y|} \log P_\theta(y_t \mid x, y_{\lt t})
 $$
 
 Where $x$ is the prompt, $y$ is the assistant response, and the loss averages over response tokens only.

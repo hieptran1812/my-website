@@ -88,7 +88,7 @@ CISPO's fix is to never mask a token. Instead of clipping the ratio inside a min
 The objective is:
 
 $$
-J_{\text{CISPO}}(\theta) = \mathbb{E}\!\left[\frac{1}{\sum_i |o_i|} \sum_i \sum_t \text{sg}\big(\hat{r}_{i,t}(\theta)\big)\, \hat{A}_{i,t}\, \log \pi_\theta(o_{i,t} \mid q, o_{i,<t})\right]
+J_{\text{CISPO}}(\theta) = \mathbb{E}\!\left[\frac{1}{\sum_i |o_i|} \sum_i \sum_t \text{sg}\big(\hat{r}_{i,t}(\theta)\big)\, \hat{A}_{i,t}\, \log \pi_\theta(o_{i,t} \mid q, o_{i,\lt t})\right]
 $$
 
 Reading the three factors in the figure left to right: $\text{sg}(\hat{r}_{i,t})$ is the **stop-gradient clipped importance weight**, where $\hat{r}_{i,t} = \text{clip}(r_{i,t}, 1-\varepsilon_{\text{low}}, 1+\varepsilon_{\text{high}})$; $\hat{A}_{i,t}$ is the **group-normalized advantage** (GRPO-style, the reward minus the group mean over the group standard deviation); and $\log \pi_\theta(o_{i,t})$ is the **log-probability that carries the gradient**. Because the weight is wrapped in a stop-gradient, the only term the gradient flows through is the log-probability — and it flows for *every* token, regardless of how far its importance ratio strayed. Nothing is masked. In clean PyTorch:

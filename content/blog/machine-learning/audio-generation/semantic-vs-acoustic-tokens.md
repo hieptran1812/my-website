@@ -143,13 +143,13 @@ This is the science block, the part where the *why* becomes provable rather than
 Write the full acoustic token sequence as $A$ and the semantic token sequence as $S$. A flat acoustic language model directly factorizes and learns
 
 $$
-p(A) = \prod_{t} p(a_t \mid a_{<t}).
+p(A) = \prod_{t} p(a_t \mid a_{\lt t}).
 $$
 
 The hierarchical model instead learns a *factorized* joint over both streams,
 
 $$
-p(S, A) = p(S)\, p(A \mid S) = \underbrace{\prod_i p(s_i \mid s_{<i})}_{\text{semantic LM}} \cdot \underbrace{\prod_t p(a_t \mid a_{<t}, S)}_{\text{acoustic LM}},
+p(S, A) = p(S)\, p(A \mid S) = \underbrace{\prod_i p(s_i \mid s_{\lt i})}_{\text{semantic LM}} \cdot \underbrace{\prod_t p(a_t \mid a_{\lt t}, S)}_{\text{acoustic LM}},
 $$
 
 and at generation time it samples $S \sim p(S)$ and then $A \sim p(A \mid S)$. To see why this helps, look at the second factor, the conditional $p(A \mid S)$. *Given the semantic tokens*, the acoustic model no longer has to invent the content; the content is fixed by $S$. Its only job is to render that content acoustically, which is a far more local, lower-entropy problem. The long-range dependencies that were so hard to learn in the flat $p(A)$ have been *moved into* $S$, and $S$ is modeled by a dedicated network on a short, content-pure sequence where those dependencies are the dominant signal rather than a faint one.

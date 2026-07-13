@@ -168,7 +168,7 @@ PPO and GRPO clip the token-level importance-sampling ratio $r_{i,t}(\theta) = \
 CISPO's fix is to never mask a token. Instead it clips the importance weight, applies a **stop-gradient** to it so it becomes a pure scalar coefficient, and multiplies it against the log-probability of every token:
 
 $$
-J_{\text{CISPO}}(\theta) = \mathbb{E}\!\left[\frac{1}{\sum_i |o_i|} \sum_i \sum_t \text{sg}\big(\hat{r}_{i,t}(\theta)\big)\, \hat{A}_{i,t}\, \log \pi_\theta(o_{i,t} \mid q, o_{i,<t})\right]
+J_{\text{CISPO}}(\theta) = \mathbb{E}\!\left[\frac{1}{\sum_i |o_i|} \sum_i \sum_t \text{sg}\big(\hat{r}_{i,t}(\theta)\big)\, \hat{A}_{i,t}\, \log \pi_\theta(o_{i,t} \mid q, o_{i,\lt t})\right]
 $$
 
 where $\text{sg}(\cdot)$ is stop-gradient, $\hat{r}_{i,t} = \text{clip}(r_{i,t}, 1-\varepsilon_{\text{low}}, 1+\varepsilon_{\text{high}})$ is the clipped IS weight, and $\hat{A}_{i,t}$ is the GRPO-style group-normalized advantage. Because the clipped weight is stop-gradiented, the gradient *always* flows through $\log \pi_\theta$ for every token — nothing is masked. In a clean PyTorch shape:

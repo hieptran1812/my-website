@@ -253,7 +253,7 @@ Pricing approaches:
 - **Monte Carlo with full dynamics.** Multi-dimensional MC simulating each underlying with calibrated correlations. The standard approach for serious pricing.
 - **PDE.** For 2-3 underlyings, alternating-direction-implicit (ADI) PDE schemes. Beyond 3, MC dominates.
 
-Correlation is the central modelling parameter. *Implied correlation* is derived by inverting the relationship between basket vol and component vols: $\sigma_B^2 = \sum_i w_i^2 \sigma_i^2 + 2 \sum_{i<j} w_i w_j \sigma_i \sigma_j \rho_{ij}$. Senior basket-traders watch implied correlation as the daily-quoted observable; rho_implied around 0.5-0.7 for SPX components is typical.
+Correlation is the central modelling parameter. *Implied correlation* is derived by inverting the relationship between basket vol and component vols: $\sigma_B^2 = \sum_i w_i^2 \sigma_i^2 + 2 \sum_{i\lt j} w_i w_j \sigma_i \sigma_j \rho_{ij}$. Senior basket-traders watch implied correlation as the daily-quoted observable; rho_implied around 0.5-0.7 for SPX components is typical.
 
 *Correlation skew*: implied correlation differs across baskets and across strikes. Out-of-the-money put baskets have higher implied correlation (correlations spike in stress); ATM correlation is the standard reference.
 

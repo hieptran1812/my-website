@@ -53,7 +53,7 @@ Then the policy is updated with a clipped, length-normalized policy-gradient obj
 
 $$\mathcal{L}_{\text{GRPO}}(\theta) = -\frac{1}{G}\sum_{i=1}^{G}\frac{1}{|o_i|}\sum_{t=1}^{|o_i|}\min\Big(r_{i,t}\hat{A}_i,\ \text{clip}(r_{i,t}, 1-\epsilon, 1+\epsilon)\hat{A}_i\Big) + \beta\, D_{\text{KL}}$$
 
-where $r_{i,t} = \frac{\pi_\theta(o_{i,t} \mid q, o_{i,<t})}{\pi_{\theta_{\text{old}}}(o_{i,t} \mid q, o_{i,<t})}$ is the per-token importance ratio, $|o_i|$ is the length of response $i$ in tokens, $\epsilon$ is the clip range, and $\beta$ scales the KL term against a reference policy.
+where $r_{i,t} = \frac{\pi_\theta(o_{i,t} \mid q, o_{i,\lt t})}{\pi_{\theta_{\text{old}}}(o_{i,t} \mid q, o_{i,\lt t})}$ is the per-token importance ratio, $|o_i|$ is the length of response $i$ in tokens, $\epsilon$ is the clip range, and $\beta$ scales the KL term against a reference policy.
 
 Look at where the biases live. The $\frac{1}{|o_i|}$ is **length normalization** — it divides each response's loss by its token count. The $\text{std}(\cdot)$ in the denominator of $\hat{A}_i$ is **difficulty normalization**. The $\frac{1}{G}\sum_i \frac{1}{|o_i|}\sum_t$ structure is the **loss aggregation** — a mean over responses of a mean over tokens. The $r_{i,t}$ is the **token-level importance ratio**. And the implicit "sum over all $G$ responses, for every prompt" is the **sampling** policy. Four of those five terms turned out to be subtly wrong, and the rest of this post is about fixing them one at a time.
 

@@ -139,11 +139,11 @@ There is also a quietly important choice about **what counts as a positive**. Wi
 
 Let me make the training objective precise, because the "only the response carries loss" rule falls out of it directly. An autoregressive language model defines a probability over a token sequence by the chain rule:
 
-$$p_\theta(y_1, \dots, y_T) = \prod_{t=1}^{T} p_\theta(y_t \mid y_{<t}).$$
+$$p_\theta(y_1, \dots, y_T) = \prod_{t=1}^{T} p_\theta(y_t \mid y_{\lt t}).$$
 
 Supervised finetuning minimizes the negative log-likelihood of the *target* tokens given the *prompt* tokens. If we split the full sequence into a prompt $x = (x_1, \dots, x_m)$ and a response $y = (y_1, \dots, y_n)$, the loss for one example is
 
-$$\mathcal{L}(\theta) = -\sum_{t=1}^{n} \log p_\theta\!\left(y_t \mid x, y_{<t}\right).$$
+$$\mathcal{L}(\theta) = -\sum_{t=1}^{n} \log p_\theta\!\left(y_t \mid x, y_{\lt t}\right).$$
 
 Notice the sum runs over the response tokens only. The prompt tokens $x$ appear in the *conditioning* of every term but never as a *prediction target*. That is exactly what the label mask implements: by setting the labels of the prompt positions to `-100`, the cross-entropy at those positions contributes zero to the gradient. The model still attends to the prompt (it is in the context), it just is not graded on reproducing it. For a next-item rec model with semantic IDs, $y$ is the short code sequence of the target item, so the loss is simply the cross-entropy of generating that item's codes given the user's history — the collaborative signal, expressed as a sequence-generation likelihood.
 
