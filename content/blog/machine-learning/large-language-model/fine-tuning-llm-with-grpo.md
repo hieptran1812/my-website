@@ -138,7 +138,7 @@ $$\mathcal{L}_{\text{GRPO}}(\theta) = -\frac{1}{G} \sum_{i=1}^{G} \frac{1}{|o_i|
 
 Let me unpack every piece:
 
-**The probability ratio** $\rho_{i,t} = \frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{\text{old}}}(o_{i,t} | q, o_{i,<t})}$ measures how much the policy has changed since generating the outputs. If $\rho > 1$, the current policy assigns higher probability to this token than the old policy did. If $\rho < 1$, lower probability.
+**The probability ratio** $\rho_{i,t} = \frac{\pi_\theta(o_{i,t} | q, o_{i,\lt t})}{\pi_{\theta_{\text{old}}}(o_{i,t} | q, o_{i,\lt t})}$ measures how much the policy has changed since generating the outputs. If $\rho > 1$, the current policy assigns higher probability to this token than the old policy did. If $\rho < 1$, lower probability.
 
 **The clipping** $\text{clip}(\rho_{i,t}, 1-\varepsilon, 1+\varepsilon)$ prevents the policy from changing too much in a single update. This is inherited from PPO and is crucial for stability. Typically $\varepsilon = 0.2$, meaning the probability ratio is clipped to $[0.8, 1.2]$.
 
@@ -152,7 +152,7 @@ Let me unpack every piece:
 
 GRPO uses a per-token KL divergence penalty:
 
-$$D_{\text{KL}}^{(i,t)} = \frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\text{ref}}(o_{i,t} | q, o_{i,<t})} - \log \frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\text{ref}}(o_{i,t} | q, o_{i,<t})} - 1$$
+$$D_{\text{KL}}^{(i,t)} = \frac{\pi_\theta(o_{i,t} | q, o_{i,\lt t})}{\pi_{\text{ref}}(o_{i,t} | q, o_{i,\lt t})} - \log \frac{\pi_\theta(o_{i,t} | q, o_{i,\lt t})}{\pi_{\text{ref}}(o_{i,t} | q, o_{i,\lt t})} - 1$$
 
 This is the *reversed* KL divergence (also known as the Schulman approximation). Let's understand why this specific form is used instead of the standard KL:
 
@@ -2184,7 +2184,7 @@ Three fundamental reasons:
 
 ### Q: Explain the clipping mechanism in GRPO. Why is it necessary?
 
-The clipping is inherited from PPO and prevents destructively large policy updates. The probability ratio $\rho_{i,t} = \pi_\theta(o_{i,t}|q, o_{i,<t}) / \pi_{\theta_\text{old}}(o_{i,t}|q, o_{i,<t})$ measures how much the policy has changed since generating the outputs.
+The clipping is inherited from PPO and prevents destructively large policy updates. The probability ratio $\rho_{i,t} = \pi_\theta(o_{i,t}|q, o_{i,\lt t}) / \pi_{\theta_\text{old}}(o_{i,t}|q, o_{i,\lt t})$ measures how much the policy has changed since generating the outputs.
 
 The clipped objective is:
 
