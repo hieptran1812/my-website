@@ -165,7 +165,7 @@ The weighting term $\sigma(\hat{r}_\theta(y_l) - \hat{r}_\theta(y_w))$ is crucia
 
 In implementation, $\log \pi_\theta(y|x)$ is computed as the sum of per-token log-probabilities:
 
-$$\log \pi_\theta(y|x) = \sum_{t=1}^{T} \log \pi_\theta(y_t | x, y_{<t})$$
+$$\log \pi_\theta(y|x) = \sum_{t=1}^{T} \log \pi_\theta(y_t \mid x, y_{\lt t})$$
 
 This is just the standard autoregressive language model log-likelihood. The DPO trainer computes this for both the chosen and rejected responses, for both the policy and reference models — giving four forward passes per training example.
 
