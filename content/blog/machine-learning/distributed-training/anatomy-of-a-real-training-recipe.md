@@ -20,7 +20,7 @@ category: "machine-learning"
 subcategory: "Distributed Training"
 author: "Hiep Tran"
 featured: true
-readTime: 34
+readTime: 41
 ---
 
 Someone hands you a config file. It is ninety lines of YAML with no comments, it trained a good 6.7-billion-parameter model last quarter, and your job is to adapt it — bigger context, a new data mix, a different cluster. You open it and there it is: `micro_batch_size: 2`, `lr: 3.0e-4`, `betas: [0.9, 0.95]`, `warmup_steps: 2000`, `sharding: FULL_SHARD`, `grad_clip: 1.0`. Every one of those numbers was chosen by someone who got paged when it was wrong. Change the wrong one and the loss NaNs at step one, or the run OOMs before the first optimizer step, or — the cruelest failure — it trains perfectly and quietly wastes a third of a 64-GPU reservation for three weeks.
@@ -524,6 +524,8 @@ The meta-rule, which is the spine of the whole series: **every knob is a cost, s
 - **A recipe is a stack, not a pile.** Seven layers — launch, parallelism, batch, optimizer, schedule, precision, checkpoint — and each one fixes the budget for the ones below it. Read it top-down as a chain of consequences.
 - **The global batch is a product you compute, not a knob you set:** micro-batch × grad-accum × data-parallel degree, times sequence length for tokens. The three factors are interchangeable for convergence but cost memory, wall-clock, and GPUs respectively.
 - **The optimizer state, not the weights, is the memory wall.** AdamW's fp32 state is 12Ψ — 80 GB for a 6.7B model, more than weights and gradients combined. FSDP exists to shard exactly that bar.
+- **The device mesh has two axes because the cluster has two wires.** Keep the heavy, frequent all-gather on fast NVLink inside a node; let only the once-per-step gradient all-reduce cross the slow InfiniBand link between nodes. That split is why `HYBRID_SHARD` scales when `FULL_SHARD` stalls on a weak interconnect.
+- **The data mix is a first-class decision hiding in one line.** `train_data` points at a fixed ratio of web, code, books, and math; no optimizer setting recovers a bad mix. Pre-tokenize it, and never tokenize on the fly with 64 GPUs waiting.
 - **bf16 over fp16, always, for pretraining.** Same exponent as fp32 means no overflow and no loss scaler; the recipe needs neither. Keep the optimizer state in fp32.
 - **Grad clip 1.0 and warmup 2000 are not optional.** Clipping caps the damage of any single bad batch; warmup protects the first steps from cold-Adam blowup. Turn either off and the run NaNs or explodes eventually — not maybe, eventually.
 - **The schedule length is derived, not chosen:** `total_steps = token_budget / tokens_per_step`. Change the batch and forget to recompute it, and cosine decays over the wrong horizon and the model finishes under-trained.
