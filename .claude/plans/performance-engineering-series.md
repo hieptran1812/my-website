@@ -95,7 +95,7 @@ Plus 2–3 sibling links where ideas compose (profiler ↔ roofline ↔ CUDA gra
 | Wave | Track | Slugs | Status |
 |---|---|---|---|
 | 1 | A | 1–5 | ✅ shipped 2026-07-15 (~37.5k words, 35 figs; all gates pass, all 35 figures C2-clean). Agents hit account rate-limit but completed deliverables to disk first (salvage pattern); rendered+verified+committed in main session. |
-| 2 | B | 6–10 | ⏳ pending |
+| 2 | B | 6–10 | ✅ shipped 2026-07-15 (~44.9k words, 35 figs; all gates pass, all 35 C2-clean). Agents finished cleanly (rate-limit reset). One figure (profiler fig3) recast graph→diamond after linear-flow reject. |
 | 3 | C | 11–15 | ⏳ pending |
 | 4 | D | 16–20 | ⏳ pending |
 | 5 | E | 21–25 | ⏳ pending |
