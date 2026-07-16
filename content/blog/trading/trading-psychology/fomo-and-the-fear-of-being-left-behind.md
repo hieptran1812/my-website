@@ -135,7 +135,7 @@ Look at what happened to the *same idea*. Waiting: 333 shares, 3-to-1, $3,000 of
 
 The truly ruinous version of the chase is the one where conviction rises with price. You buy the runner at $118, but now you *believe* — the feed is euphoric, the story is irresistible — so you skip the stop, because stops are for people who do not have conviction. The parabola does what parabolas do and round-trips to $100.
 
-On a $10,000 position bought at $118, a fall to $100 is a 15.3% loss: −$1,527. If it is a genuine blow-off of the kind we will see in the case studies — down 50% to 80% from the top — that same $10,000 becomes $5,000 or $2,000. The patient trader who bought the base at $100, meanwhile, is flat to green through the entire round-trip and never had a bad night.
+On a $10,000 position bought at $118, a fall back to $100 is a drop of about 15% — roughly −$1,525. If it is a genuine blow-off of the kind we will see in the case studies — down 50% to 80% from the top — that same $10,000 becomes $5,000 or $2,000. The patient trader who bought the base at $100, meanwhile, is flat to green through the entire round-trip and never had a bad night.
 
 **The takeaway:** the worst FOMO trades are the ones you feel most confident about, because conviction peaks at the same place the price does — the top.
 
@@ -174,9 +174,9 @@ You watched the runner go from $100 to $118 without you — up 18%. Your brain b
 Now price the two ways forward on that same missed runner. Suppose your edge is real and, on average, one clean setup a week returns your planned 3-to-1: risk $1,000, make $3,000.
 
 - **The disciplined path.** You let the runner go (cost: $0). Two hours later a prime setup forms on your watchlist and you take it at proper size, and it works: **+$3,000.**
-- **The FOMO path.** You chase the runner at $118 with a $10,000 position and no real stop; it round-trips to $100: **−$1,527** (from the earlier example).
+- **The FOMO path.** You chase the runner at $118 with a $10,000 position and no real stop; it round-trips to $100: **−$1,525** (from the earlier example).
 
-The gap between the two paths, *on the same missed trade*, is $3,000 − (−$1,527) = **$4,527** — and every dollar of that swing was determined not by the runner you missed but by what you did in the next five minutes. The missed trade was worth nothing either way. The chase is what cost money.
+The gap between the two paths, *on the same missed trade*, is $3,000 − (−$1,525) = **$4,525** — and every dollar of that swing was determined not by the runner you missed but by what you did in the next five minutes. The missed trade was worth nothing either way. The chase is what cost money.
 
 **The takeaway:** you are never choosing between "catch this move" and "miss this move." You are choosing between "wait for a good trade" and "take a bad one," and the missed move is a red herring in that choice.
 
