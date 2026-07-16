@@ -22,7 +22,7 @@ category: "trading"
 subcategory: "Trading Psychology"
 author: "Hiep Tran"
 featured: true
-readTime: 44
+readTime: 38
 ---
 
 > [!important]
@@ -109,6 +109,22 @@ Think of the feeling of certainty as a gauge with four inputs wired into it, non
 This is why you cannot introspect your way to calibration. Feeling more sure does not make you more right; it usually just means one of those four dials got turned up. The gauge is not broken — it is working exactly as designed, reporting fluency and vividness and recency. It was simply never designed to report probability, and no amount of staring at it harder will change what it measures.
 
 > The feeling of certainty is not evidence about the world. It is evidence about how your memory happened to retrieve the idea.
+
+### The proof that your confidence lies
+
+You do not have to take this on faith — psychologists have measured it, repeatedly, with a demonstration you can run on yourself. In the classic version, from Marc Alpert and Howard Raiffa (1982), people are asked to give a range for some unknown quantity — the length of a river, the number of eggs produced in a country in a year — wide enough that they are "98% sure" the true answer falls inside it. If everyone were honest, the true value would land outside the range only 2% of the time. Instead it lands outside roughly 40% of the time: their supposedly 98% ranges behaved like 60% ranges. The intervals were far too narrow, which is overconfidence in its purest form — an inability to make "I don't know" wide enough.
+
+The finance-flavored version is even more pointed. J. Edward Russo and Paul Schoemaker gave more than 1,000 managers a ten-question quiz — dates, distances, financial figures — and asked for ranges they were "90% confident" contained each answer (Russo & Schoemaker, *Decision Traps*, 1989). A well-calibrated person should miss about one of ten. Most managers missed four to seven — a "surprise rate" of 40% to 70% where it should have been 10% — and fewer than 1% got nine or ten right. These were smart, senior, numerate people. Their confidence was not tracking their knowledge; it was tracking the feeling.
+
+This matters for traders because a price forecast is exactly one of those intervals. "The stock will be between 95 and 115 by Friday, and I'm 90% sure" is a 90% confidence range, and if you are like the managers in the study, it is far too narrow — the real 90% range might be 85 to 125. A too-narrow range is not a harmless quirk; it is the input that makes you set stops too tight, size too big, and get "surprised" by moves that were never actually surprising.
+
+#### Worked example: the range that was never 90%
+
+Suppose you forecast that a stock, trading at $100, will close between $95 and $115 in a month, and you state 90% confidence in that range — a $20-wide window. You size a position as if a move outside that window is a 1-in-10 event. Over the next year you make 20 such forecasts. If you were calibrated, the price should land outside your stated range about 2 times out of 20.
+
+Instead, it lands outside 8 times — a 40% surprise rate, right in line with the research. Each of those 8 "surprises" hit a position sized for a 10% tail, so each one hurt roughly four times more than you had budgeted for. Your ranges were never 90% ranges; they were 60% ranges wearing a 90% label, and the eight tail events were the invoice. Had you widened each range to an honest $85 to $125, most of the same eight moves would have stayed inside, your stops would have survived the noise, and your sizing would have matched the real odds.
+
+The intuition: overconfidence is not only an inflated point estimate — it is a range that is too narrow, and a range that is too narrow turns ordinary volatility into a stream of "surprises" you keep paying for.
 
 ### What it looks like at the screen
 
@@ -212,6 +228,18 @@ The matrix above sorts four kinds of forecaster by the one variable that predict
 **Pundits** are the control group, and they fail. In Tetlock's earlier 20-year study, published as *Expert Political Judgment* (2005), 284 experts made over 82,000 forecasts — and the average expert was, in his famous phrase, "roughly as accurate as a dart-throwing chimpanzee." Worse, the most confident, most famous experts — the "hedgehogs" who explain everything through one big idea — were the *least* accurate, and the more certain they sounded on television, the worse their record. They never got scored, so they never got calibrated; the reward for a pundit is confidence, not accuracy, and confidence is exactly what they optimized.
 
 **The typical trader** sits in the pundit's chair without realizing it. No log, no scored probabilities, no receipt — just a vivid memory of the good calls and a merciful fog over the bad ones. The confidence gauge runs free because nothing ever pushes back on it. The entire difference between this row and the weather-forecaster row is a habit, and the habit is a calibration log.
+
+## Why the market is the worst place to be miscalibrated
+
+If scored, timely feedback is what builds calibration, then markets are almost engineered to prevent it. Three features of trading conspire to keep the confidence gauge uncorrected — which is exactly why the discipline has to be imposed by hand rather than absorbed from experience.
+
+**The feedback is slow and noisy.** The weather forecaster learns tomorrow whether "70% rain" was honest, and learns it cleanly, because a day either has rain or it does not. A trader might wait weeks for a thesis to resolve, and even then the outcome is contaminated by luck. A great decision can lose and a terrible one can win, so any single result teaches you almost nothing about whether your probability was right. Where the forecaster gets one clean data point a day, the trader gets one noisy data point a month — and noise drowns the signal you are trying to learn from. This is why you cannot calibrate from memory: the signal is too faint to hear without writing every call down and aggregating over dozens of them.
+
+**The scoring is self-serving.** When a trade wins, you file it under skill; when it loses, you file it under bad luck, a bad headline, a rigged tape. This is the self-attribution bias, and it is calibration poison, because it means every outcome — win *or* lose — gets read as confirmation that your process was sound. Wins prove you are good; losses prove the market was unfair. A gauge that reads all feedback as vindication never moves. The calibration log defeats this by fixing the probability in writing *before* the outcome, so your after-the-fact story cannot quietly rewrite what you actually believed. (This is the same machinery as [hindsight bias and the story you tell yourself later](/blog/trading/trading-psychology/hindsight-bias-and-the-story-you-tell-yourself-later).)
+
+**The stakes amplify the error.** In a psychology quiz, overconfidence costs you a wrong answer. In a market, it costs you money, and it does so through sizing — the more sure you feel, the bigger you bet, so your miscalibration is largest exactly where your position is largest. The overconfident trader is not making small errors on small bets and large errors on large bets at random; they are systematically most wrong on the trades they have sized biggest, because the same feeling that inflated the confidence also inflated the size. Leverage does not just multiply your returns; it multiplies your calibration error.
+
+Put those three together and the outlook is bleak: delayed, noisy feedback that you interpret in your own favor, attached to bets that get bigger as your confidence gets less reliable. No wonder the untracked trader ends up in the pundit's chair. The market will never spontaneously calibrate you the way the sky calibrates a meteorologist — the feedback is too slow, too noisy, and too flattering. You have to build the scoring loop yourself, which is the entire point of the drill that follows.
 
 ## The drill: the calibration log
 
