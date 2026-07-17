@@ -20,7 +20,7 @@ category: "trading"
 subcategory: "Trading Psychology"
 author: "Hiep Tran"
 featured: true
-readTime: 46
+readTime: 39
 ---
 
 > [!important]
@@ -161,10 +161,10 @@ A bank's risk desk models each client on the exposure *it* can see. To Credit Su
 
 #### Worked example: six "safe" slices, one lethal whole
 
-Say six banks each extend Archegos \$1,500,000,000 of exposure to the same basket of stocks, each requiring 15\% margin, and each judging \$1.5bn a comfortable relationship.
+Say six banks each extend Archegos \$2,000,000,000 of exposure to the same basket of stocks, each requiring 15\% margin, and each judging \$2bn a comfortable relationship.
 
-- Each bank sees \$1.5bn and stress-tests a 20\% drop: a \$300,000,000 loss — painful, but survivable for a large bank.
-- The true position is 6 × \$1.5bn = \$9,000,000,000 concentrated in the *same* names. Scale each slice up toward the roughly \$27bn-per-broker average behind Archegos's real ~\$160bn, and the identical arithmetic runs at the size that actually broke the banks.
+- Each bank sees \$2bn and stress-tests a 20\% drop: a \$400,000,000 loss — painful, but survivable for a large bank.
+- The true position is 6 × \$2bn = \$12,000,000,000 concentrated in the *same* names. Scale each slice up toward the roughly \$27bn-per-broker average behind Archegos's real ~\$160bn, and the identical arithmetic runs at the size that actually broke the banks.
 - When the drop comes, all six banks call for margin *at the same moment*, on the *same* falling stocks, and all six try to sell the *same* names into the same shrinking pool of buyers. The slices that looked independent turn out to be perfectly correlated — because they were always one trade.
 
 The lesson: risk that is individually acceptable to each lender can be collectively fatal, and the party best placed to see the whole — the borrower — is the one with the least incentive to reveal it.
@@ -269,6 +269,8 @@ Case studies can make a blowup feel like something that happens to other, obviou
 
 **Leverage feels like room, not like debt.** Because it is embedded in swaps and spread across counterparties, your borrowing never shows up as a scary number in one place. You experience it as *capacity* — the ability to put on the next great trade — rather than as an obligation that will be called at the worst possible moment. The first time it feels like debt is the morning the calls come in, all at once, and there is no cash to meet them.
 
+**You argue with the risk report instead of obeying it.** When the weekly risk summary flashes a warning, your instinct is no longer to reduce the position but to explain the warning away — the model is too crude, the correlation assumption is stale, the scenario is implausible, the desk that built it does not understand your names the way you do. You have begun arguing with the smoke detector instead of checking for fire. The moment risk management becomes something you rationalize rather than something you obey, it has already stopped protecting you — and you will not notice, because being talked out of a warning feels exactly like being right.
+
 None of these feelings is stupidity. Each one is a reasonable response to a genuine winning streak. That is exactly why they are dangerous: the psychology of a blowup does not feel like recklessness from the inside. It feels like being good at your job.
 
 ## Common misconceptions
@@ -280,6 +282,8 @@ None of these feelings is stupidity. Each one is a reasonable response to a genu
 **"Diversification would only have lowered his returns."** Diversification does dampen returns in the good years — that is precisely what makes concentration tempting. But the correct comparison is not "concentrated returns vs diversified returns in a good year." It is "concentrated returns that occasionally go to zero vs diversified returns that survive." A strategy that produces spectacular numbers and then a total loss has a long-run return of negative 100\%. Surviving is not a drag on compounding; it is the precondition for it.
 
 **"The banks were just victims of a rogue client."** The banks chose to extend enormous leverage to a single client on concentrated positions, competed with each other to do so for the fees, and — per Credit Suisse's own later report — failed to force Hwang to post adequate collateral or to grasp the concentration they were financing. The client hid the aggregate, yes. But each bank could see its own slice was dangerously large and lent anyway. Greed for prime-brokerage fees was its own failed brake.
+
+**"The post-Archegos reforms fixed this."** Regulators did propose more disclosure for large swap positions and family offices after 2021, and some rules tightened. But a family office managing only its principal's money still faces lighter oversight than a fund with outside investors, and swap exposure is still harder for anyone to aggregate than plain share ownership. The structural blind spots that let Archegos hide are narrower than they were — not closed. Treat any confident claim that "the system won't allow it again" as the same overconfidence this whole post is about, moved up one level to the regulators.
 
 **"This was a black swan — unforeseeable."** It was not. Everything about the mechanism was known. The margin-call death spiral is textbook. The wipeout arithmetic is a single division. The concentration was visible to each lender in its own book. What was hidden was only the *sum*, and the sum was hidden by choice, not by nature. The event was not unforeseeable; it was un-*aggregated*.
 
@@ -316,6 +320,12 @@ Archegos rhymes with earlier disasters, which is why the pattern is worth memori
 ### 5. The family-office loophole, still open
 
 Archegos prompted regulators to propose more disclosure for large swap positions and family offices, and some rules tightened. But the structural fact remains: a family office managing only its principal's wealth still operates with fewer external checks than a fund managing outsiders' money, and swap-based exposure is still harder to aggregate than share ownership. The conditions that let Archegos hide are institutional, not personal. Which means the defense has to be personal — a discipline you impose on yourself, because the system will not reliably impose it for you.
+
+### 6. The bubble Archegos inflated in its own names
+
+The reflexive loop deserves its own entry, because it shows how a concentrated buyer distorts the very prices it is betting on. Through late 2020 and early 2021, Archegos's relentless swap buying was a large part of the demand in names like ViacomCBS and Discovery. That buying pushed the prices up; the higher prices enlarged Archegos's collateral, which supported more swaps, which bought more stock, which pushed the prices higher still. ViacomCBS roughly tripled in the first months of 2021 — from around \$36 toward nearly \$100 by March 22 — a move far larger than any change in the company's fundamentals, inflated in part by one hidden, price-insensitive buyer.
+
+The trap in being the marginal buyer of your own position is that you cannot tell how much of the price is *you*. Archegos's book looked more valuable, and its collateral looked healthier, precisely because Archegos kept buying — a mirror reflecting its own demand back as apparent conviction. When ViacomCBS issued new shares into that thin, propped-up demand and the price cracked, the mirror shattered and the loop ran backward at the same speed it had run forward. The lesson generalizes past this one fund: a concentrated buyer large enough to move a price is exposed not just to the stock, but to their own footprint in it — and that footprint disappears the instant they need to sell, which is exactly when they need it most.
 
 ## The drill: a concentration-and-secrecy protocol
 
