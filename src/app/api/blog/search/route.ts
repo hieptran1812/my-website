@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { loadAllPosts, type BlogIndexEntry } from "@/lib/blogIndex";
+import {
+  parseQuery,
+  scoreNormalized,
+  normalizeFields,
+  type NormalizedFields,
+} from "@/lib/searchScore";
 
 interface SearchHit {
   slug: string;
@@ -14,7 +20,9 @@ interface SearchHit {
 const SNIPPET_RADIUS = 90;
 
 interface PreparedDoc extends BlogIndexEntry {
-  haystack: string;
+  /** Normalized title/tags/content, scored with strict title ≫ tags ≫ body tiers. */
+  fields: NormalizedFields;
+  /** Cleaned (markdown-stripped) body, used only to render the result snippet. */
   body: string;
 }
 
@@ -32,15 +40,13 @@ function prepare(corpus: BlogIndexEntry[]): PreparedDoc[] {
       .replace(/[*_`>~]/g, " ")
       .replace(/\s+/g, " ")
       .trim();
-    const haystack = [
-      entry.title,
-      entry.excerpt,
-      entry.tags.join(" "),
+    const fields = normalizeFields({
+      title: entry.title,
+      tags: entry.tags,
+      excerpt: entry.excerpt,
       body,
-    ]
-      .join("  ")
-      .toLowerCase();
-    return { ...entry, haystack, body };
+    });
+    return { ...entry, fields, body };
   });
   preparedCache = out;
   preparedFor = corpus;
@@ -85,19 +91,6 @@ function buildSnippet(body: string, query: string): string {
   return html;
 }
 
-function scoreDoc(doc: PreparedDoc, tokens: string[]): number {
-  let score = 0;
-  const titleLower = doc.title.toLowerCase();
-  for (const t of tokens) {
-    if (!t) continue;
-    if (titleLower.includes(t)) score += 6;
-    if (doc.tags.some((x) => x.toLowerCase().includes(t))) score += 3;
-    const matches = doc.haystack.split(t).length - 1;
-    score += Math.min(matches, 8);
-  }
-  return score;
-}
-
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const q = (searchParams.get("q") || "").trim();
@@ -106,16 +99,16 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ hits: [] });
   }
 
-  const tokens = q
-    .toLowerCase()
-    .split(/\s+/)
-    .filter((t) => t.length >= 2);
+  const query = parseQuery(q);
+  if (query.tokens.length === 0) {
+    return NextResponse.json({ hits: [] });
+  }
 
   const corpus = await loadAllPosts();
   const docs = prepare(corpus);
   const hits: SearchHit[] = [];
   for (const doc of docs) {
-    const score = scoreDoc(doc, tokens);
+    const score = scoreNormalized(doc.fields, query);
     if (score <= 0) continue;
     hits.push({
       slug: doc.slug,
@@ -127,7 +120,12 @@ export async function GET(request: NextRequest) {
       score,
     });
   }
-  hits.sort((a, b) => b.score - a.score);
+  // Strict tiers already encode title ≫ tags ≫ content; on a tie, newer first.
+  hits.sort((a, b) =>
+    b.score !== a.score
+      ? b.score - a.score
+      : (b.publishDate || "").localeCompare(a.publishDate || ""),
+  );
   return NextResponse.json(
     { hits: hits.slice(0, limit) },
     {
