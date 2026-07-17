@@ -263,7 +263,7 @@ None of this is investment advice; it is a description of a cognitive mechanism 
 - Daniel Kahneman, *Thinking, Fast and Slow* (Farrar, Straus and Giroux, 2011) — WYSIATI and the coherence-not-correctness result (see chapters on the associative machine and overconfidence).
 - Amos Tversky and Daniel Kahneman, "Extensional versus intuitive reasoning: The conjunction fallacy in probability judgment," *Psychological Review* (1983) — the Linda problem; roughly 85% commit the conjunction fallacy.
 - Daniel Kahneman and Amos Tversky, "On the psychology of prediction," *Psychological Review* (1973) — base-rate neglect and the representativeness heuristic.
-- Frank Rozenblit and Frank Keil, "The misunderstood limits of folk science: an illusion of explanatory depth," *Cognitive Science* (2002) — why a coherent story feels like understanding.
+- Leonid Rozenblit and Frank Keil, "The misunderstood limits of folk science: an illusion of explanatory depth," *Cognitive Science* (2002) — why a coherent story feels like understanding.
 - Robert J. Shiller, "Narrative Economics," American Economic Association presidential address (2017) and *Narrative Economics* (Princeton University Press, 2019) — how stories spread through markets like epidemics.
 - Carmen Reinhart and Kenneth Rogoff, *This Time Is Different: Eight Centuries of Financial Folly* (Princeton University Press, 2009) — the phrase that precedes every bubble.
 - John Carreyrou, *Bad Blood: Secrets and Lies in a Silicon Valley Startup* (Knopf, 2018), and the original *Wall Street Journal* reporting (from October 2015) — the Theranos narrative and its collapse.
