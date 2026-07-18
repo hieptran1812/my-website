@@ -3,12 +3,12 @@ title: "Options Pricing Fundamentals: Intrinsic Value, Time Value, and the Binom
 date: "2026-06-27"
 publishDate: "2026-06-27"
 description: "A ground-up explanation of how options are priced — from the intuition of intrinsic and time value, through put-call parity, to the full binomial model derivation and its convergence to Black-Scholes."
-tags: ["options", "options-pricing", "binomial-model", "derivatives", "valuation", "intrinsic-value", "time-value", "put-call-parity", "black-scholes", "risk-neutral-pricing", "asset-valuation"]
+tags: ["options", "options-pricing", "binomial-model", "derivatives", "valuation", "intrinsic-value", "time-value", "put-call-parity", "black-scholes", "risk-neutral-pricing", "model-calibration", "asset-valuation"]
 category: "trading"
 subcategory: "Finance"
 author: "Hiep Tran"
 featured: true
-readTime: 48
+readTime: 51
 ---
 
 > [!important]
@@ -391,6 +391,75 @@ Check: Exercise at t=0 gives max(\$106 − \$100, 0) = \$6. Since \$6.69 > \$6, 
 **American put = \$6.69 vs European put = \$5.60 — a difference of \$1.09.** This delta exists entirely because the American option can exploit early exercise optimality.
 
 ![Two-period binomial tree comparing American and European put option values](/imgs/blogs/options-pricing-fundamentals-binomial-model-4.png)
+
+---
+
+## Calibrating the Tree: How to Choose u, d, and q
+
+Every worked example so far handed you the tree's parameters — u = 1.2 and d = 0.9 in the one-period model, or u = e^{σ√h} in the multi-period one. But where does u = e^{σ√h} actually come from, and is it the only valid choice? This is the **calibration** question: how do you set the up-move, the down-move, and the probability so the discrete tree faithfully mimics the real stock's volatility? Get this wrong and every price the tree produces is wrong, no matter how many steps you use.
+
+### The one degree of freedom
+
+A one-step tree has three knobs: the up-factor u, the down-factor d, and the risk-neutral probability q. To make the discrete tree behave like the continuous lognormal stock that Black-Scholes assumes, you require its log-return over each small step Δt to have the *same mean and the same variance* as the real process. That is two equations:
+
+```
+Mean (risk-neutral):   q·ln(u) + (1−q)·ln(d) = (r − σ²/2)·Δt
+Variance:              q(1−q)·[ln(u) − ln(d)]² = σ²·Δt
+```
+
+Two equations, three unknowns. There is **one degree of freedom left over** — and that is the whole story. Every "binomial scheme" you will ever meet is just a different way of spending that one free choice. They all match the same mean and variance, so they all converge to the same Black-Scholes price; they differ only in the extra convention they impose.
+
+### Scheme 1 — Cox-Ross-Rubinstein: symmetric jumps
+
+The **Cox-Ross-Rubinstein (CRR, 1979)** scheme spends the freedom on a symmetry condition: it forces u·d = 1, so an up-move followed by a down-move lands you exactly back where you started and the tree stays centred on S₀. Solving the two moment equations under u·d = 1 gives the formulas you have already been using:
+
+```
+u = e^{σ√Δt}      d = e^{−σ√Δt} = 1/u      q = (e^{rΔt} − d) / (u − d)
+```
+
+This is the default in most textbooks — it is exactly the u = e^{σ√h} tree you built in the multi-period section, and the one the convergence analysis below relies on. Its virtue is a clean, recombining, symmetric lattice; its quirk is that the probability q drifts away from ½ as the step grows.
+
+### Scheme 2 — Jarrow-Rudd: a fair coin
+
+The **Jarrow-Rudd (JR, 1983)** scheme spends the freedom the opposite way: it fixes the probability at q = ½ — a fair coin — and pushes all the drift into the size of the jumps:
+
+```
+u = e^{(r − σ²/2)Δt + σ√Δt}      d = e^{(r − σ²/2)Δt − σ√Δt}      q = ½
+```
+
+The intuition is appealing: the coin is fair, and the entire economic story — the drift, the volatility — lives in how far the price jumps up versus down. Because the (r − σ²/2)Δt term bakes the risk-neutral drift straight into u and d, q = ½ *is* the risk-neutral probability here, not the real-world one. The trade-off: u·d = e^{(2r − σ²)Δt} ≠ 1, so the tree is no longer centred on S₀ — it tilts slightly with the drift. It still recombines (up-then-down equals down-then-up), so the lattice stays efficient.
+
+### Scheme 3 — Tian and the third moment
+
+CRR and JR both match only the first two moments (mean and variance) and spend the leftover freedom on an *arbitrary* convention — u·d = 1 or q = ½. **Tian's (1993)** scheme spends it on something meaningful instead: it matches the **third moment** (the skewness) of the lognormal distribution as well. With three moment equations and three unknowns, u, d, and q are pinned down uniquely, with no arbitrary convention left over. Writing v = e^{σ²Δt} and M = e^{rΔt}, Tian's parameters solve a small quadratic in v (the closed form is in Tian's original paper); the payoff is noticeably smoother, faster convergence, because the tree now agrees with the true distribution to one order higher. Don Chance's (2008) synthesis paper folds CRR, JR, Tian, and their cousins into a single family, all differing only in how they spend that one degree of freedom.
+
+### Which scheme should you use?
+
+Here is the reassuring part: for a plain European option priced with a fine tree (N = 200 or more), **all three schemes give the same answer** — they must, because they all match the mean and variance and therefore converge to the same Black-Scholes price. The choice barely moves the number.
+
+| Scheme | Free choice spent on | Probability q | Centred on S₀? |
+|---|---|---|---|
+| Cox-Ross-Rubinstein | symmetry, u·d = 1 | (e^{rΔt} − d)/(u − d) | yes |
+| Jarrow-Rudd | fair coin, q = ½ | ½ | no (tilts with drift) |
+| Tian | third-moment match | pinned by moments | no |
+
+The choice starts to matter in three places: **speed of convergence** (Tian and its relatives reach a given accuracy in fewer steps); **the stability of the Greeks** — delta and gamma read off the tree are far noisier than the price itself, and the scheme affects how noisy; and **barrier and other exotic options**, where whether a tree node lands exactly on the barrier level can swing the price. There is also a subtler issue lurking: the raw CRR price does not converge *smoothly* as you add steps — it oscillates, overshooting on odd step counts and undershooting on even ones (the "sawtooth"), which is one reason practitioners reach for the smarter schemes or for smoothing techniques. That numerical-accuracy story is a rabbit hole of its own; the point here is simply that the choice of u, d, and q is a real modelling decision, not a formula handed down from on high. All of these schemes are the discrete image of the same [geometric Brownian motion](/blog/trading/math-for-quants/sdes-gbm-ou-cir-math-for-quants) that Black-Scholes assumes — which is exactly why they share a limit.
+
+#### Worked example: CRR versus Jarrow-Rudd, same option
+
+Take the running example — S = K = \$100, r = 5%, σ = 25%, T = 1 year — and price the call at a single step (N = 1) under both schemes.
+
+**CRR:** u = e^{0.25} = 1.2840, d = 1/u = 0.7788, and q = (e^{0.05} − 0.7788)/(1.2840 − 0.7788) = (1.0513 − 0.7788)/0.5052 = 0.5393. The up-node pays max(\$128.40 − \$100, 0) = \$28.40, the down-node pays \$0:
+```
+C_CRR = (0.5393 × $28.40) / e^{0.05} = $15.32 / 1.0513 ≈ $14.57
+```
+
+**Jarrow-Rudd:** u = e^{0.01875 + 0.25} = 1.3083, d = e^{0.01875 − 0.25} = 0.7935, q = ½. The up-node pays max(\$130.83 − \$100, 0) = \$30.83:
+```
+C_JR = (0.5 × $30.83) / e^{0.05} = $15.42 / 1.0513 ≈ $14.66
+```
+
+At a single step the two schemes disagree — \$14.57 versus \$14.66 — and both sit well above the true Black-Scholes value of about \$12.34 (which the convergence section below derives in full). But add steps and they march in lockstep toward that same \$12.34: by N = 200 the difference between CRR and JR is smaller than a penny. Different discretizations, one destination. That is calibration in a nutshell: many ways to draw the tree, all tuned to the same σ, all converging to the same price.
 
 ---
 

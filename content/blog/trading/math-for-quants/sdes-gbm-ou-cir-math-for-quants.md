@@ -2,12 +2,12 @@
 title: "Stochastic differential equations: GBM, OU, and CIR"
 date: "2026-06-15"
 description: "A beginner-friendly, build-from-zero guide to stochastic differential equations, the Euler-Maruyama simulation scheme, and the three SDEs every quant uses: geometric Brownian motion for prices, Ornstein-Uhlenbeck for mean-reverting spreads, and Cox-Ingersoll-Ross for positive interest rates."
-tags: ["stochastic-differential-equations", "gbm", "ornstein-uhlenbeck", "cox-ingersoll-ross", "euler-maruyama", "mean-reversion", "black-scholes", "short-rates", "monte-carlo", "quant-finance", "math-for-quants"]
+tags: ["stochastic-differential-equations", "gbm", "ornstein-uhlenbeck", "cox-ingersoll-ross", "euler-maruyama", "mean-reversion", "black-scholes", "short-rates", "monte-carlo", "parameter-estimation", "volatility-estimation", "quant-finance", "math-for-quants"]
 category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: true
-readTime: 42
+readTime: 45
 ---
 
 > [!important]
@@ -74,7 +74,7 @@ Why care as a practitioner? Two reasons. First, it tells you the model is well-p
 
 An SDE is a statement about infinitesimal steps. A computer cannot take infinitesimal steps. So we approximate: chop time into many small-but-finite steps of length $\Delta t$, and at each step apply the drift-plus-diffusion rule with the infinitesimals replaced by finite quantities. This is the **Euler-Maruyama scheme**, the workhorse of every Monte Carlo simulation in quant finance, and it is just one line.
 
-Take the master SDE $dX = a(X,t)\,dt + b(X,t)\,dW$. Pick a step size $\Delta t$ (say one trading day, $1/252$ of a year). At step $n$, with current value $X_n$, the next value is
+Take the master SDE $dX = a(X,t)\,dt + b(X,t)\,dW$. Pick a step size $\Delta t$ (say one trading day, ${1/252}$ of a year). At step $n$, with current value $X_n$, the next value is
 
 $$X_{n+1} = X_n + a(X_n, t_n)\,\Delta t + b(X_n, t_n)\,\sqrt{\Delta t}\,Z_n,$$
 
@@ -180,6 +180,76 @@ The `- 0.5 * sigma**2` is the volatility drag, hard-coded into the drift of the 
 
 The timeline above traces one realized GBM path day by day, the kind the code prints out. It starts at exactly \$100.00. Day 1 catches an up shock to \$100.83; day 2 a down shock pulls it to \$99.71; by day 20 the drift and a run of luck have it at \$102.40; a day-40 pullback to \$101.10 reminds you the noise never sleeps; and by day 60 it ends at \$106.20. That is a clean +6.2% over a quarter, but read the wiggle, not just the endpoints: on a daily basis the random kicks dwarf the drift, exactly as our hand calculation predicted, and the upward tilt only becomes visible because we let 60 of those days accumulate. Run a different random seed and the endpoint could just as easily be \$94 — the *drift* is a tendency, not a promise.
 
+### Estimating GBM from data — and testing whether it fits
+
+Every formula so far took $\mu$ and $\sigma$ as *given*. On a real desk you do the reverse: you have a price history and you have to **estimate** them — and, just as importantly, check whether GBM is even the right model before you trust a single number it produces.
+
+**Reading $\mu$ and $\sigma$ off a price history.** Take a series of daily closes and compute the **log returns** $r_t = \ln(S_t / S_{t-1})$. The closed-form solution tells you exactly what these are: over one step $\Delta t$, the log return is normal with mean $(\mu - \tfrac12\sigma^2)\Delta t$ and variance $\sigma^2 \Delta t$. So the sample mean and sample standard deviation of the daily log returns hand you the two parameters — but mind the correction:
+
+$$\hat\sigma = s_{\text{daily}}\sqrt{252}, \qquad \hat\mu = m_{\text{daily}}\times 252 + \tfrac12\hat\sigma^2.$$
+
+Here $m_{\text{daily}}$ and $s_{\text{daily}}$ are the mean and standard deviation of the daily log returns, and 252 is the number of trading days in a year (so $\Delta t = 1/252$). The $\sqrt{252}$ is the volatility-scales-with-the-square-root-of-time rule. The subtle term is the $+\tfrac12\hat\sigma^2$: the drift you read *directly* off the log returns is the volatility-dragged growth $\mu - \tfrac12\sigma^2$, not $\mu$ itself. To recover the true drift you must add the half-variance back. Forget it and you will under-report $\mu$ by exactly the drag we spent a whole section on.
+
+```python
+def estimate_gbm(prices, periods_per_year=252):
+    log_ret = np.diff(np.log(prices))           # r_t = ln(S_t / S_{t-1})
+    m, s = log_ret.mean(), log_ret.std(ddof=1)
+    sigma = s * np.sqrt(periods_per_year)        # annualized volatility
+    mu = m * periods_per_year + 0.5 * sigma**2   # add the half-variance drag back
+    return mu, sigma
+```
+
+**The assumption you just made.** Fitting GBM is not free: it *asserts* that the log returns are independent draws from a single normal distribution — same mean, same variance, no memory. That is a strong, testable claim, and on real equities it is wrong in two specific ways. Prices have **fat tails** (crashes and melt-ups happen far more often than a normal allows) and **volatility clustering** (calm days follow calm days, wild days follow wild days — so the variance is not constant and the draws are not independent). Before you price anything off $\hat\mu$ and $\hat\sigma$, it is worth measuring how badly the normal assumption holds.
+
+**The Jarque-Bera test.** The cleanest one-number check on normality looks at the third and fourth moments — the skewness $S$ and the kurtosis $K$ of the log returns (see [expectation, variance, and higher moments](/blog/trading/math-for-quants/expectation-variance-moments-math-for-quants) for what these measure). A normal distribution has skewness 0 and kurtosis exactly 3. The **Jarque-Bera** statistic bundles both deviations into one:
+
+$$JB = \frac{n}{6}\left(S^2 + \frac{(K-3)^2}{4}\right).$$
+
+Under the null hypothesis that the returns are normal, $JB$ follows a chi-squared distribution with two degrees of freedom, whose 95% critical value is about 5.99. Real daily equity returns routinely produce $JB$ in the *hundreds* — a decisive rejection.
+
+#### Worked example: Jarque-Bera on two years of a stock
+
+Two years of daily closes give you about $n = 504$ log returns. Suppose they come out with a slight negative skew $S = -0.4$ (down-days a touch sharper than up-days) and an excess kurtosis $K - 3 = 4$ (fat tails). Then
+
+$$JB = \frac{504}{6}\left((-0.4)^2 + \frac{4^2}{4}\right) = 84\,(0.16 + 4.0) = 84 \times 4.16 \approx 349.$$
+
+Compare 349 to the critical value of 5.99: the normal assumption is rejected overwhelmingly (the p-value is far below any threshold you would use). The message is not "throw GBM away" — it is "know what you are trusting." GBM's *center* is a fine description; its *tails* are dangerously optimistic. That gap is exactly what the post on [jump-diffusion and stochastic volatility](/blog/trading/math-for-quants/jump-diffusion-stochastic-volatility-math-for-quants) exists to fix, and it is why risk desks lean on [extreme value theory](/blog/trading/math-for-quants/tail-risk-extreme-value-theory-math-for-quants) rather than the Gaussian tail when they size for a crash.
+
+```python
+from scipy import stats
+
+def normality_report(prices):
+    r = np.diff(np.log(prices))
+    jb, p = stats.jarque_bera(r)
+    return {"skew": stats.skew(r), "excess_kurtosis": stats.kurtosis(r),
+            "jarque_bera": jb, "p_value": p}   # p far below 0.05 -> not normal
+```
+
+**Probability cones: what the fitted model actually predicts.** Once you have $\hat\mu$ and $\hat\sigma$, the closed-form solution gives you the *entire distribution* of the price at any future horizon $t$, not just a point forecast. Because $\ln S_t$ is normal with mean $\ln S_0 + (\mu - \tfrac12\sigma^2)t$ and variance $\sigma^2 t$, the $\alpha$-quantile of the price is
+
+$$S_t^{(\alpha)} = S_0 \exp\!\left[\left(\mu - \tfrac12\sigma^2\right)t + \sigma\sqrt{t}\,z_\alpha\right],$$
+
+where $z_\alpha$ is the standard-normal quantile ($z_{0.05} = -1.645$, $z_{0.50} = 0$, $z_{0.95} = +1.645$). Sweep $t$ from today to the horizon, plot the 5th, 50th, and 95th percentiles, and you get a **probability cone** — a fan that opens up like $\sqrt{t}$, the visual signature of diffusion. The median line climbs at the *dragged* rate $\mu - \tfrac12\sigma^2$; the mean climbs faster at $\mu$; the gap between them is the volatility drag made visible.
+
+#### Worked example: a one-year cone
+
+Take $S_0 = \$100$, $\hat\mu = 10\%$, $\hat\sigma = 30\%$, and $T = 1$ year. The dragged growth is $\mu - \tfrac12\sigma^2 = 0.10 - 0.045 = 0.055$, and $\sigma\sqrt{T} = 0.30$.
+
+- **Median (P50):** $100\,e^{0.055} = \$105.65$.
+- **Upper (P95):** $100\,e^{0.055 + 0.30\times 1.645} = 100\,e^{0.5485} = \$173.07$.
+- **Lower (P5):** $100\,e^{0.055 - 0.30\times 1.645} = 100\,e^{-0.4385} = \$64.50$.
+
+So the model's 90% one-year range is roughly \$64.50 to \$173.07 — strikingly wide, which is the honest price of 30% volatility. Notice the median, \$105.65, sits *below* the mean, $100\,e^{0.10} = \$110.52$: the same half-variance drag, now showing up as the difference between the typical outcome and the average outcome.
+
+```python
+def probability_cone(s0, mu, sigma, T, steps=252, quantiles=(0.05, 0.5, 0.95)):
+    t = np.linspace(0, T, steps + 1)[1:]                 # horizons, skipping t = 0
+    drift, spread = (mu - 0.5 * sigma**2) * t, sigma * np.sqrt(t)
+    return {q: s0 * np.exp(drift + spread * stats.norm.ppf(q)) for q in quantiles}
+```
+
+**One caveat, in the spirit of the last section.** This cone is only as honest as the GBM assumption underneath it — and the Jarque-Bera test just told you that assumption understates the tails. The true 5th percentile of a real stock is *lower* than the lognormal cone says, and large moves cluster in time rather than arriving independently. Read the cone as the disciplined GBM baseline, then remember its edges are the optimistic version of reality. That is precisely why the next models up the ladder replace the constant $\sigma$ with a jumping, wandering one.
+
 ## The Ornstein-Uhlenbeck process: mean reversion
 
 GBM wanders off. Some quantities do not — they keep getting pulled back to a level. The price *gap* between two near-identical stocks, the deviation of an interest rate from its long-run average, a volatility index hovering around a typical value: these mean-revert. The SDE that captures this is the **Ornstein-Uhlenbeck process** (OU):
@@ -264,7 +334,7 @@ The drift is identical to OU: $\theta(\mu - r)$, the same homing spring. The onl
 
 ### Why $\sqrt{r}$ keeps rates positive
 
-Watch what happens to the random kick as the rate $r$ falls toward zero. The diffusion coefficient is $\sigma\sqrt{r}$. When $r = 0.04$ (a 4% rate), the kick scales with $\sqrt{0.04} = 0.20$. When $r$ drops to $0.01$ (1%), the kick scales with $\sqrt{0.01} = 0.10$ — half as violent. When $r$ approaches $0.0001$, the kick scales with $0.01$ — almost nothing. **The closer the rate gets to zero, the smaller the random shocks become, until at exactly zero there is no random kick at all.** Meanwhile the drift, $\theta(\mu - 0) = \theta\mu > 0$, is firmly positive and pushes the rate back up. So zero is a place the process can approach but where the noise switches off and the drift shoves it back. The square root is a self-tightening floor.
+Watch what happens to the random kick as the rate $r$ falls toward zero. The diffusion coefficient is $\sigma\sqrt{r}$. When $r = 0.04$ (a 4% rate), the kick scales with $\sqrt{0.04} = 0.20$. When $r$ drops to ${0.01}$ (1%), the kick scales with $\sqrt{0.01} = 0.10$ — half as violent. When $r$ approaches ${0.0001}$, the kick scales with ${0.01}$ — almost nothing. **The closer the rate gets to zero, the smaller the random shocks become, until at exactly zero there is no random kick at all.** Meanwhile the drift, $\theta(\mu - 0) = \theta\mu > 0$, is firmly positive and pushes the rate back up. So zero is a place the process can approach but where the noise switches off and the drift shoves it back. The square root is a self-tightening floor.
 
 ![Before-after showing how a constant kick can go negative while a square-root kick stays positive](/imgs/blogs/sdes-gbm-ou-cir-math-for-quants-6.png)
 
