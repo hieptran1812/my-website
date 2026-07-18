@@ -2,262 +2,339 @@
 title: "Recency, Availability, and the Tyranny of the Last Trade"
 date: "2026-07-15"
 publishDate: "2026-07-15"
-description: "Your brain judges the odds of the future by how easily the recent past comes to mind, and it lets the result of your last trade size your next one. Here is the science of availability and recency, the dollar cost of both, and the exact drill that breaks the spell."
-tags: ["trading-psychology", "recency-bias", "availability-heuristic", "behavioral-finance", "position-sizing", "revenge-trading", "base-rates", "extrapolation", "risk-management", "decision-making"]
+description: "Why the most recent thing that happened to you dominates your judgment far beyond what it deserves — how the availability heuristic and recency bias inflate probabilities, and how the outcome of your last trade quietly sets the size and aggression of your next one."
+tags: ["trading-psychology", "recency-bias", "availability-heuristic", "behavioral-finance", "revenge-trading", "position-sizing", "base-rate-neglect", "house-money-effect", "extrapolation", "kahneman", "tversky", "risk-management"]
 category: "trading"
 subcategory: "Trading Psychology"
 author: "Hiep Tran"
 featured: true
-readTime: 32
+readTime: 39
 ---
 
 > [!important]
-> **TL;DR** — Your brain estimates how likely something is by how easily an example comes to mind, and nothing comes to mind more easily than what just happened. That single shortcut makes you extrapolate the last trend to infinity, over-insure right after a crash, and let your previous trade set the size of your next one.
+> **TL;DR** — Your mind judges how likely something is by how easily an example comes to mind, and nothing comes to mind more easily than what just happened. That single wiring fault is why the last trade runs your account.
 >
-> - **Availability** (Tversky & Kahneman, 1973): we judge probability by ease of recall, so vivid and recent events feel far more likely than their true frequency. **Recency** is the special case of overweighting the single latest data point.
-> - **The tyranny of the last trade:** letting the outcome of trade N set the size and aggression of trade N+1 — revenge-sizing after a loss, freezing after a loss, or pressing recklessly after a win. The setup did not change; only your memory did.
-> - Recency is expensive in three specific ways: it makes you buy protection at the top of a volatility spike, it makes you extrapolate at exactly the wrong moment, and it lets one doubling-down streak vaporize a genuinely winning edge.
-> - **The number to remember:** in March 2009 the S&P 500 closed at its bear-market low of 676.53; by February 2020 it closed at 3,386.15, roughly five times higher. The traders who "learned their lesson" from 2008 and stayed out are the clearest picture of recency turned into a decade-long mistake.
-> - **The drill:** replace "what just happened?" with "what is the long-run frequency?" (the base-rate anchor), and run a fixed reset ritual between trades so trade N+1 inherits none of trade N's emotion or P&L.
+> - The **availability heuristic** (Tversky & Kahneman, 1973) means you estimate probability by ease of recall, so vivid and recent events loom far larger than their true frequency. **Recency bias** is the special case where the newest data point gets a vote it never earned.
+> - In markets this shows up as extrapolating a trend to infinity, over-insuring right after a crash you just lived through, "it always bounces" after three bounces — and the **tyranny of the last trade**: letting the previous trade's result set your next size (revenge-sizing after a loss, going gun-shy after a loss, reckless size after a win).
+> - The single most expensive habit is sizing off the last result. In a worked example, a trader with a real +\$10,000-a-year edge gives back roughly **\$7,500 of it** — about **three-quarters** — purely to the revenge trades their losses talk them into, without changing a single one of their good trades.
+> - The cost is measurable at the market level too: the fund investors who chased what just worked earned about **1.1 percentage points a year less** than the very funds they owned over the decade to 2023 (Morningstar, *Mind the Gap 2024*).
+> - The one number to remember: **three**. Three observations is a mood, not a probability — and the fix is to replace "what just happened?" with "what is the long-run base rate?", plus a fixed reset ritual so trade N+1 never inherits trade N's emotion.
 
-On the morning of January 17, 1995, a magnitude-6.9 earthquake struck Kobe, Japan. Half a world of financial consequences flowed from it, but one man felt it more than most: a 28-year-old trader named Nick Leeson, sitting on a pile of hidden bets that the Nikkei would hold steady. It did not hold steady. And here is the part that matters for us — Leeson did not cut. He did what the last several months of small recoveries had taught him to do. He doubled. Every time the position lost, he bet larger that it would come back, because in his recent experience it always had. Six weeks later [Barings Bank](https://www.britannica.com/event/bankruptcy-of-Barings-Bank), the oldest merchant bank in Britain, was insolvent, buried under roughly £827 million (about US\$1.4 billion) of losses hidden in an account numbered 88888.
+Here is a question you already know the answer to, even if you have never put it into words. Two traders take the *exact same* setup — same chart, same signal, same risk-reward, same time of day. One of them bets three times his normal size and the other barely bets at all. What is the difference between them?
 
-Leeson is an extreme, criminal case. But the engine that drove him is the most ordinary thing in the world, and it is almost certainly running in your head right now while you trade. It is the tendency to let the most recent, most vivid thing you experienced dictate what you believe will happen next and how hard you should bet on it. Psychologists call the general version the *availability heuristic*; traders feel the sharpest version of it as what I call the tyranny of the last trade. The grid below is the mental model for this whole piece: one closed trade, two possible futures, and a single fork that decides which one you get.
+Not the setup. The setup is identical. The only difference is what happened on their *previous* trade. One just lost and is desperate to win it back; the other just lost and is now afraid to pull the trigger. The market in front of them is the same. The trade they take is completely different. And over a year, those two accounts diverge by a fortune.
 
-![Two paths lead out of every closed trade: a red path where you react to the result and your edge leaks away, and a green path where you reset first and it compounds; the fork is whether you reset before re-entering.](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-1.webp)
+That is the tyranny of the last trade, and it is a specific, well-documented failure of the human mind. Your brain did not evolve to weigh independent probabilities. It evolved to react to whatever is most *vivid* and most *recent*, because for most of human history the vivid and recent thing was the one about to eat you. In a savanna that logic keeps you alive. In a market — an environment engineered to be probabilistic, adversarial, and specifically hostile to the obvious — that same logic quietly empties your account.
 
-Read it top to bottom. The moment a trade closes, the profit or loss is a fact — it is in the account, it is over. What happens next is entirely inside your head. On the red path, you let the outcome set your mood, the mood distorts your sense of the odds, the distorted odds corrupt the size of your next bet, and a perfectly good system slowly leaks money through sizing noise. On the green path, you run a short reset, re-anchor on the long-run frequency, size the next trade exactly as the system says, and the edge compounds. The amber box in the middle is the whole secret: the setup you are about to trade is identical either way. The only thing that changed between the two futures is your memory of the last one. Let us build the tools to stay on the green path, starting from zero.
+This post is about the two cognitive glitches behind it: the **availability heuristic** and its close cousin **recency bias**. We will build both from zero, watch the science, and then trace exactly how they distort the one decision that determines whether you survive as a trader — how big to bet, and in which direction. The diagram below is the whole machine in one picture.
 
-## Foundations: the building blocks of a brain that overweights the last thing it saw
+![How the last trade hijacks the next one: a recent outcome, amplified by availability and recency, re-prices the odds you act on and distorts your next bet](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-1.webp)
 
-You need no finance or psychology background for this section. We are going to define, from scratch, the three ideas that make recency so dangerous: the mental shortcut that swaps ease-of-recall for real probability, the special case where the newest data point drowns out everything before it, and the specific way both of those reach into your position size. This is where the science lives.
+Read it left to right. A single recent outcome — your last trade — enters your mind. Two glitches immediately amplify it: **availability** makes it vivid and easy to recall, and **recency** hands the newest data point outsized weight. Together they cause you to ignore the *base rate* (the long-run frequency) and silently re-price the odds. That distorted probability then feeds the one decision that matters: the size and direction of your next trade. And depending on whether the last trade won or lost, that decision comes out as one of three predictable mistakes — revenge-sizing, timidity, or reckless house-money aggression. The rest of this article is a tour of that diagram, with the dollars attached at every step.
 
-### A "base rate" is the long-run frequency, and it is what you should be estimating
+This is educational, not financial advice. The goal is to show you the mechanism precisely enough that you can catch it firing in your own decisions.
 
-Start with the single most useful word in this article: *base rate*. A base rate is simply the long-run frequency of something — how often it actually happens across a large number of trials. The base rate of a fair coin landing heads is 50%. The base rate of a single-session drop of 5% or more in a major stock index is tiny: far below one percent of all trading days, a handful of occurrences per decade. The base rate of your favorite setup working is whatever your journal or your backtest says it is across hundreds of instances, not across the last three.
+## Foundations: how a recent event becomes a probability
 
-Every question that matters in trading is secretly a base-rate question. "Will this bounce?" means "what fraction of times, historically, has this kind of setup bounced?" "Is a crash coming?" means "how often, per year, do crashes of this size occur?" The correct, boring, profitable answer is almost always a number you could look up. The problem is that your brain refuses to look it up. It reaches for something faster instead.
+You need no psychology or finance background for this. Three ideas, built one at a time.
 
-### The availability heuristic: judging odds by what springs to mind
+### What a heuristic is, and why your brain uses one for probability
 
-In 1973, Amos Tversky and Daniel Kahneman published a paper with a deceptively plain title, ["Availability: A heuristic for judging frequency and probability."](https://www.sciencedirect.com/science/article/abs/pii/0010028573900339) Their claim was that when people are asked how likely or how frequent something is, they do not compute a base rate. Instead they run a shortcut: they ask themselves how easily they can bring examples to mind, and they read "easy to recall" as "common" and "hard to recall" as "rare."
+A *heuristic* is a mental shortcut — a rule of thumb your mind uses to answer a hard question fast by secretly swapping it for an easier one. The hard question is "how likely is this?" That is genuinely difficult; real probability requires you to know the long-run frequency of an event across many trials, which you almost never have. So your brain substitutes an easier question it *can* answer instantly: "how easily can I think of an example?"
 
-Their most famous demonstration was almost silly in its simplicity. They asked people whether more English words begin with the letter K or have K as their third letter. Most people said words *starting* with K are more common — because it is easy to summon king, kite, kitchen, and hard to summon words like acknowledge or ask where the K hides in the third slot. In reality, across the letters they tested, there are roughly three times as many words with the letter in the third position. The mind confused "easy to retrieve" with "more numerous," and it was wrong by a factor of three.
+That substitution is the **availability heuristic**. You judge the frequency or probability of something by how readily instances of it *come to mind*. If examples are easy to retrieve, you rate the thing as common or likely. If they are hard to retrieve, you rate it as rare or unlikely.
 
-The picture below is that shortcut, laid out as the five-step assembly line your brain actually runs.
+Most of the time this works, because in a stable natural environment things that actually happen a lot *are* easier to recall — recall frequency tracks real frequency. The problem is that ease of recall is contaminated by other factors that have nothing to do with true frequency: how **vivid** the event was, how **emotional** it was, how **recent** it was, and how much **coverage** it got. A single plane crash on the news makes flying feel dangerous even though it is astonishingly safe, because the crash is vivid, emotional, recent, and everywhere. Your mind confuses "easy to picture" with "likely to happen." That confusion is the bug.
 
-![The availability heuristic in five steps: a vivid event is encoded strongly, retrieved easily, and its ease of recall is read as high frequency, so a single recent crash gets sized and hedged as if it were imminent.](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-2.webp)
+> A heuristic is not stupidity. It is a shortcut that used to track reality, running in an environment built to break the link between what is easy to recall and what is actually true.
 
-A vivid event — say, a day you watched your screen bleed 5% — gets encoded hard because emotion tags memories for keeping. Because it is encoded hard, it comes back instantly the next time you ask "how likely is a crash?" Because it comes back instantly, your brain reads it as frequent. And because it feels frequent, you size and hedge as though it is about to happen again. Every arrow in that chain is a substitution of "how does this feel to recall?" for "how often does this actually occur?" Nowhere in the chain does anyone consult the base rate.
+### Recency bias: the newest data point gets a vote it never earned
 
-### Recency: the special case where the newest point shouts loudest
+**Recency bias** is availability's most reliable trigger. Of all the things that make an event easy to recall, *recency* is the strongest and the most constant. The last thing that happened is, almost by definition, the easiest thing to remember. So it gets weighted far more heavily than its evidentiary value deserves.
 
-Recency bias is availability aimed at time. Of all the things that are easy to recall, the easiest is the thing that happened most recently. So the single most recent observation gets a vote out of all proportion to what it deserves. Psychologists first pinned this down with the *serial position effect* — Bennet Murdock's 1962 experiments showed that when people memorize a list, they remember the last few items far better than the middle (the "recency" portion of the curve). The last thing in is the first thing out.
+This is not just folk wisdom — it is one of the oldest findings in memory research. When people are shown a list and asked to recall it, they remember the *most recent* items best; psychologists call it the **recency effect**, part of the serial-position curve first mapped by Hermann Ebbinghaus in the 1880s and formalized in free-recall experiments by Bennet Murdock in 1962. The newest item sits on top of the mental stack. In a memory test that is harmless. In a probability estimate it is poison, because it means your sense of "what's likely" is dominated by "what just happened" — a sample of one, standing in for a distribution you should be estimating from hundreds of observations.
 
-For a trader, the observation that just landed is the last trade, the last tick, the last three sessions. The chart below shows what recency does to the weight you place on a sequence of observations.
+### The base rate: the number that actually pays you
 
-![A bar chart of the weight the mind assigns to ten past observations: nearly flat and small for the older bars but towering for the most recent, versus a dashed base-rate line that would give every observation an equal vote.](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-3.webp)
+The antidote to both glitches has a name: the **base rate**. The base rate of an event is its long-run frequency — how often it actually happens across a large number of trials. If a trading setup wins 42 times out of every 100 over a thousand historical instances, then 42% is the base rate. It is the honest probability. It is also, crucially, *boring* — a base rate is a cold number from a spreadsheet, with no vividness, no emotion, and no recency to make it leap to mind. That is exactly why your brain ignores it in favor of the last three trades, which are on fire with salience.
 
-The honest way to weigh ten equally relevant observations is the dashed line: each gets one-tenth of the vote, the base rate. What recency actually does is the red bar on the right: the "now" observation towers over everything before it, often carrying several times the weight of the older data, while observations from a month ago are quietly discarded. You are not looking at the distribution of outcomes; you are looking at the last outcome with a magnifying glass.
+The single most important skill this whole article is building toward is the reflex to ask, in the moment: *"What is the long-run base rate here — not what just happened?"* The picture below is that fork in the road.
 
-### The tyranny of the last trade: when recency sets your position size
+![Base rate versus the last three trades: three wins in a row feel like near-certainty, but the long-run win rate is the number that actually pays you](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-2.webp)
 
-Now we arrive at the specific way this reaches into your P&L. It is one thing to misjudge a probability. It is another, more expensive thing, to let the outcome of your previous trade decide the *size* of your next one. This is the tyranny of the last trade, and it takes three forms depending on how the last trade felt.
+On the left is the recency lens: three wins in a row *feel* like near-certainty — call it 85% — so you size up, press, and add on the streak, and then you are blindsided by the loss that was always coming. On the right is the base-rate anchor: the long-run win rate is 42%, so you size by the rule instead of the streak, and the losses arrive on schedule with no surprise. Same trader, same market, two completely different relationships with reality. Let's put numbers on that gap.
 
-![A three-by-three grid: after a loss you feel angry (revenge, oversize) or shaken (timid, undersize); after a win you feel euphoric (house money, oversize); and in every case the disciplined move in the green column is the same fixed 1% risk, unchanged.](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-4.webp)
+#### Worked example: three wins is a mood, not a probability
 
-After a loss, you are either angry, which makes you want to size up and win it back right now, or you are shaken, which makes you size down and skip the very next setup even when it is an A+. After a win, you are euphoric, playing with "house money," and you press the next bet harder than the plan allows. Notice the green column: whatever the last trade did, the correct move is identical — risk the same fixed fraction your system prescribes. Every distorted urge points away from that column. The tyranny is that the outcome of a trade that is *already over* is allowed to reach forward and change a trade whose odds it has nothing to do with.
+Suppose you trade a breakout system. Over a thousand historical trades it wins **42%** of the time, and its winners make **+2R** (twice what you risk) while its losers cost **−1R**. Its edge is real but modest:
 
-#### Worked example: the felt-probability tax
+```
+Expected value per trade
+= 0.42 × (+2R) + 0.58 × (−1R)
+= 0.84R − 0.58R
+= +0.26R
+```
 
-Suppose you run a \$50,000 account. Yesterday the market fell 5% and you watched it happen in real time. Today your gut says another big down day is maybe 30% likely, so you buy one-month index puts as a hedge for \$600. The trouble is the base rate: single-session drops of 5% or more happen on far below 1% of trading days. Your gut's 30% is off by more than an order of magnitude.
+Positive expectancy — a good system. Now you hit a hot patch: three winners in a row. Availability goes to work. Those three wins are vivid, recent, and emotionally charged, so when you ask "how likely is the next one?" your mind retrieves them instantly and answers *85%*. Watch what that does to your bet size.
 
-If you let that feeling ride and re-buy the hedge every month the fear is loud, that is \$600 twelve times, or \$7,200 a year. On a \$50,000 account, \$7,200 is a 14.4% annual drag — paid to insure against an event whose real per-session odds are a fraction of one percent. You may still want *some* tail hedge; that is a legitimate strategy. But sizing it off yesterday's screen instead of the base rate turns prudent insurance into a recurring tax on your returns.
+A rational bettor sizes by the *Kelly criterion*, which for a payoff of 2-to-1 says to risk a fraction `f = (p × 3 − 1) / 2` of capital, where `p` is the win probability. At the true base rate:
 
-The one-sentence intuition: recency does not just feel bad, it quietly bills you every month you let it price your fear.
+```
+True (p = 0.42):     f = (0.42 × 3 − 1) / 2 = 0.13  → 13% of capital
+Perceived (p = 0.85): f = (0.85 × 3 − 1) / 2 = 0.775 → 77.5% of capital
+```
 
-## 1. Availability in the wild: why the vivid crowds out the true
+The recency-inflated probability tells you to bet nearly **six times** as much as the truth justifies — 77.5% of your account instead of 13% (and most pros bet *half*-Kelly or less, so the honest number is smaller still). You are not sizing to your edge. You are sizing to your mood. The intuition to keep: **three observations is a feeling, not a frequency — and the account is bet with the frequency, whether you use the real one or the imaginary one.**
 
-The reason availability is so hard to beat is that it is usually *useful*. In the world our brains evolved for, things that were easy to recall really were more common and more dangerous — the watering hole where a friend was taken by a crocodile genuinely was riskier. Ease of recall was a decent proxy for frequency when your data came from a small, personally-experienced sample. Markets break that proxy in two ways at once: the sample you personally experience is minuscule compared to the true distribution, and the media hands you vivid examples that have nothing to do with base rates.
+## 1. The availability heuristic: you judge odds by what comes to mind
 
-Think about what is *available* to a trader after a crash. The memory is fresh, emotional, and rehearsed — you have told the story of that Tuesday to three people. Every financial news outlet is running crash retrospectives. Your feed is full of people who "called it." The base rate of another crash next month has not moved at all, but its availability has gone through the roof, so your felt probability of it soars. The reverse is just as damaging: after a long calm stretch, crashes become hard to recall, availability collapses, and your felt probability of danger sinks to zero right when leverage and complacency are highest. Availability makes you most afraid after the fall and least afraid before it — precisely backwards.
+Now that the foundation is laid, let's go deeper on each glitch, because understanding the *mechanism* is what lets you interrupt it.
 
-This is also why disasters are systematically mispriced right after they occur. Immediately following a plane crash, people drive instead of fly and die on the roads at higher rates; immediately following a market crash, people hoard cash and hedges and miss the recovery. The vividness of the last event overwrites the statistics of the long run. A trader's entire edge, in a sense, is the discipline to keep consulting the statistics while everyone else is consulting their most recent nightmare.
+Amos Tversky and Daniel Kahneman named and tested the availability heuristic in a 1973 paper in *Cognitive Psychology* titled ["Availability: A Heuristic for Judging Frequency and Probability."](https://www.sciencedirect.com/science/article/abs/pii/0010028573900339) Their experiments are elegant. In one, they asked people whether the English language has more words that *start* with the letter K or more words with K in the *third* position. Most people said more words start with K. The truth is the opposite — there are roughly three times as many words with K in the third position. But words starting with K (*kite, king, kitchen*) are far easier to *retrieve* than words with K third (*ache, make, like*), because we index memory by first letters. Ease of recall masqueraded as frequency, and everyone got it backwards.
 
-## 2. Recency and extrapolation: drawing the trend line to infinity
+That is the whole bug in miniature, and it has a direct trading translation. You do not have access to the true frequency of "this setup works" or "the market crashes this month." What you have is a memory, and your memory is *not* a representative sample — it is a highlight reel weighted toward the vivid, the emotional, and the recent. When you ask yourself "is this a good trade?", you are really answering "can I easily recall this working?" And you can *always* easily recall the last time it worked, especially if the last time was five minutes ago.
 
-The most profitable-looking and most dangerous face of recency is *extrapolation* — taking the recent trend and mentally extending it forward forever. If the last several months went up, the future goes up; if the last several months went down, the future goes down. Extrapolation feels like pattern recognition. Often it is just recency in a nicer suit.
+### Vividness beats frequency
 
-We are not guessing about this. In 2014, Robin Greenwood and Andrei Shleifer published ["Expectations of Returns and Expected Returns"](https://academic.oup.com/rfs/article-abstract/27/3/714/1580705) in the *Review of Financial Studies*. They gathered six independent measures of investor expectations of future stock returns — surveys of individuals, newsletters, CFOs, and more — spanning 1963 to 2011. The finding was stark and consistent across all six: investor expectations of future returns are strongly *positively* correlated with past returns and with the current level of the market. People are most optimistic after prices have already risen and most pessimistic after they have already fallen.
+The features that make an event easy to recall are exactly the features that have nothing to do with its probability:
 
-Here is the sting. Those same expectations are *negatively* correlated with the returns the market actually goes on to deliver. In plain English: the moments when the crowd is most sure the good times will continue are, on average, the moments just before they do not. Extrapolation is not merely unreliable; it is systematically anti-correlated with reality at the extremes. The recency-driven investor buys the most exposure at the top of the feeling and the least at the bottom.
+- **Vividness.** A trade that ripped +5R in ten minutes is burned into memory; the forty quiet trades that ground out +0.3R each have evaporated. So your mind's sample of "what this strategy does" is dominated by the outlier, and you over-expect fireworks.
+- **Emotion.** The trade that hurt — the one where you watched an open profit turn into a loss — is tagged with pain, and pain is a powerful retrieval cue. You will over-estimate how often that specific disaster happens, and over-hedge against it.
+- **Recency.** Covered above, and the most reliable of all. Whatever happened last is on top of the stack.
+- **Coverage.** If everyone on your feed is talking about the same event, it is *maximally* available regardless of its true odds. (We will get to availability cascades in section 4 — that is this same bug operating on a whole crowd at once.)
 
-#### Worked example: the base rate versus the last three observations
+None of these four correlates with the actual base rate. All four hijack your probability estimate. And notice that a *disciplined trading journal* is, among other things, a machine for defeating exactly this — it replaces your vivid, recency-weighted highlight reel with a complete, un-editorialized sample of every trade, so the base rate is retrievable as a number instead of a feeling.
 
-Suppose you trade a pullback-to-support setup that "always bounces." It has bounced the last three times you watched it, and that streak is screaming at you to load up. Now go to the boring number. Your journal has 200 instances of this exact setup. It bounced 116 times and failed 84 times — a 58% bounce rate. When it bounces, you make about \$400. When it fails, it fails hard, and you lose about \$1,200.
+### What it costs
 
-Compute the expected value per instance. A 58% chance of +\$400 contributes +\$232. A 42% chance of -\$1,200 contributes -\$504. Net expected value: \$232 minus \$504 equals -\$272 per instance. The setup that "always bounces" is, across 200 real instances, a losing trade — it bleeds \$272 every time you take it, on average. The last three bounces made it feel like a near-certainty; the base rate reveals a negative-expectancy trap where the rare failures are large enough to swamp the frequent small wins.
+The cost of availability in trading is a systematically *miscalibrated* sense of probability that leans, every single time, toward whatever is easiest to picture. You over-weight the tail you just witnessed and under-weight the boring middle where most outcomes actually live. Concretely, it makes you buy insurance after the disaster (when it is dear) instead of before (when it is cheap); it makes you chase the setup that just paid off spectacularly; and it makes you abandon a sound plan the moment its normal, expected losing streak makes losing *available*. Every one of those is the same bug, and every one of them has a price tag we will attach as we go.
 
-The one-sentence intuition: three bounces is a story, 200 instances is a number, and only the number pays.
+## 2. Recency bias: the last data point runs the show
 
-## 3. The tyranny of the last trade, mechanism by mechanism
+Recency bias deserves its own section because it is the version of availability you will meet most often at the screen, and because it produces a specific, expensive trading pathology: **extrapolation**.
 
-We defined the three faces of last-trade tyranny in the foundations. Now let us look at the machinery under each, because each has a named psychological driver you can learn to catch.
+### Extrapolation: drawing the recent trend to infinity
 
-**Revenge after a loss** runs on *loss aversion*. In their 1979 work on prospect theory, Kahneman and Tversky found that losses hurt roughly twice as much as equivalent gains feel good — the pain-to-pleasure ratio is about two to one. A \$1,000 loss does not feel like the mirror image of a \$1,000 gain; it feels like roughly a \$2,000 gain's worth of pain. That asymmetry creates an overwhelming urge to erase the loss immediately, and the fastest apparent route is to bet bigger on the next thing. This is Leeson's engine, and it is a martingale — a doubling strategy that mathematically guarantees ruin if the streak runs long enough, which streaks always eventually do.
+The clean intuition first. Your mind is a pattern-completion engine. Show it three points trending up and it does not think "small sample, wide error bars." It thinks *line*, and it extends that line into the future as if the trend were a law of physics. This is recency bias wearing its market costume: you take the most recent stretch of returns and quietly assume it will continue.
 
-**Timidity after a loss** is the same loss aversion pointed inward. Having just felt the pain, you shrink from the very next opportunity to feel it again, so you skip the setup or size it down to nothing. The cruelty here is subtle: a real edge earns its money on a minority of large winners, and if you systematically shrink your size right after a loss, you will be smallest exactly when the next big winner arrives, because winners are not scheduled around your losses.
+The evidence that investors actually do this is not anecdotal. In a 2014 paper in the *Review of Financial Studies*, ["Expectations of Returns and Expected Returns,"](https://academic.oup.com/rfs/article-abstract/27/3/714/1580705) Robin Greenwood and Andrei Shleifer gathered six independent surveys of investor return expectations spanning 1963 to 2011. They found something damning: investor expectations are strongly, positively correlated with *past* returns and with the *current* level of the market — and *negatively* correlated with future returns as predicted by any sensible model. In plain English: people expect the most future return precisely when the market has already run up and is, by every objective measure, priciest and most likely to disappoint. They extrapolate the recent past straight off a cliff. Expectations are highest at the top and lowest at the bottom — the exact inverse of what a rational forecaster would do.
 
-**Pressing after a win** runs on the *house money effect*, documented by Richard Thaler and Eric Johnson in 1990. After a win, people treat the profit as "the casino's money" rather than their own, and take wilder risks with it than they ever would with their starting capital. The win also produces a jolt of overconfidence — you feel like you have figured the market out — and the two combine into a fat, unplanned bet placed at the moment your judgment is most compromised.
+That is recency bias measured across millions of investors and half a century. It is why bull markets end in euphoria and bear markets end in despair: at every turning point, the crowd's forecast is just the recent past, extrapolated.
 
-There is a fourth, quieter cousin worth naming: the *disposition effect*, identified by Hersh Shefrin and Meir Statman in 1985 and confirmed in retail brokerage data. It is the tendency to sell winners too early and hold losers too long — to "take the sure gain" and "give the loser a chance to come back." It is recency and loss aversion braided together, and it is the single most common way ordinary investors turn a portfolio of decent picks into a portfolio of their worst ones.
+### The two faces of "it's due": gambler's fallacy and hot hand
 
-#### Worked example: same setup, three sizes
+Recency bias is sneaky because it produces two *opposite* errors depending on which story your mind tells about the streak, and both are wrong for the same reason.
 
-Suppose your account is \$100,000 and your system risks 1% per trade — \$1,000 at your defined stop. Trade N just lost. The next signal that fires is an A+ setup identical to dozens you have traded before; its odds have nothing to do with the trade that just closed. Watch how the last result tries to resize it.
+The **hot-hand** reading says the streak will *continue*: "it's on a run, get on it." You extrapolate — three green candles mean a fourth. The **gambler's-fallacy** reading says the streak will *reverse*: "it's been red five times, it's due for green." You anti-extrapolate. These feel like sophisticated, opposite intuitions, but they share a single root error: both treat a short run of *independent-ish* outcomes as if it carried information about the next one. Recency bias supplies the raw material — a vivid recent streak — and your mood decides whether to bet on continuation or reversal. Neither is grounded in the base rate. The market does not know or care what its last five candles did, any more than a coin remembers its last five flips.
 
-- **Revenge:** you risk \$3,000 (3%) to "make it back fast." If this one also loses — and independent setups do lose back-to-back all the time — you are down \$4,000 across the two trades instead of \$2,000. You doubled your drawdown to soothe a feeling.
-- **Timidity:** you risk \$300 (0.3%) because you are gun-shy. If this is the +3R winner your edge depends on, you make \$900 instead of \$3,000. You shrank the exact trade your system needs to be full-sized.
-- **Discipline:** you risk \$1,000, unchanged. The setup's expected value is whatever it always was, and you collect your fair share of it.
+### What it costs: the whipsaw of regime flips
 
-The one-sentence intuition: the market did not remember your last trade, so do not let your position size remember it either.
+The most expensive form of recency bias is not one bad trade — it is repeatedly *firing your own system* at the worst possible moment because its recent results are ugly.
 
-## 4. Same edge, opposite outcomes: how sizing noise kills a winner
+#### Worked example: the cost of recency-driven regime flips
 
-Here is the fact that should frighten a systematic trader most: you can have a genuinely positive edge and still go broke, purely from letting recency drive your size. The edge lives in the odds of each trade; the ruin lives in the sizing rule laid over the top of them. Get the sizing rule wrong and it does not matter how good the signals are.
+Suppose you run a trend-following system with a genuine long-run edge. Trend systems, by their nature, lose money in choppy, range-bound markets and make it back in spades when a trend finally runs. That is the deal you signed up for. Now you hit a normal chop patch and take three trend trades in a row that lose. Recency goes to work: those three losses are vivid and recent, "trend following is broken" becomes maximally available, and you switch to a mean-reversion system.
 
-![Two equity curves from the same 20 signals and the same 55% edge: the base-rate sizer with constant 1% risk compounds steadily upward, while the recency sizer who doubles after losses climbs briefly then falls off a cliff when one losing streak arrives.](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-5.webp)
+Here is the cruelty. You switched *because* the market was choppy — but choppy is exactly when a trend is about to be born, and the moment you abandon trend-following is often the moment its regime returns. Meanwhile your new mean-reversion system gets switched *on* right as the market starts trending, which is exactly when mean-reversion bleeds. You have arranged to always be running the wrong system for the current regime. Suppose each flip costs you roughly **1.5R** in whipsaw — you take the worst, most out-of-regime trades of the new mode before you give up on it — and recency makes you flip **six times a year**:
 
-Both traders in that picture take the identical twenty signals with the identical edge. The green trader risks a constant 1% and rides the edge to a steadily higher account. The red trader sizes off the last result — doubling after a loss to get it back, halving after a win out of timidity — and for a while it even looks clever, because the doubling recovers small losing runs and the account drifts up with the crowd. Then one ordinary losing streak arrives, the doubling turns a survivable dip into a cliff, and the account that started even with the winner ends at a fraction of it.
+```
+6 flips × 1.5R per flip = 9R per year bled
+```
 
-#### Worked example: the doubling cliff
+At \$100 of risk per R, that is **\$900 a year** paid, not to the market, but to your own head — and it is *on top of* the returns you forfeited by never letting either edge play out through a full cycle. The intuition: **recency makes you sell your system at the bottom of its own equity curve, right as its bad luck is about to mean-revert.** The discipline is to judge a system by its base-rate track record across hundreds of trades, never by its last three.
 
-Take the representative run drawn above, where the disciplined account ends near \$118,000 and the recency account ends near \$42,000, and let us isolate exactly where the cliff comes from. The killer is a single losing streak. In twenty trades at a 55% win rate, a run of four straight losses is not rare — it shows up more often than most traders expect. Now apply the doubling rule to that run, starting from a \$1,000 base risk:
+## 3. The tyranny of the last trade
 
-- Loss 1: risk \$1,000, down \$1,000.
-- Loss 2: double to \$2,000, down \$3,000 total.
-- Loss 3: double to \$4,000, down \$7,000 total.
-- Loss 4: double to \$8,000, down \$15,000 total.
+Now we reach the heart of it — the place where availability and recency stop distorting your *forecast* and start distorting your *bet*. This is the single most destructive expression of recency bias in trading, because it attacks position sizing, and position sizing is where accounts actually live and die.
 
-Four losses under the doubling rule cost \$15,000. The same four losses at constant 1% risk cost \$4,000. The doubling trader lost nearly four times as much from the identical streak, and did it while holding a positive edge. The edge was earning pennies per trade; the doubling was risking the whole jar on every recovery attempt.
+The core claim is simple and, once you see it, impossible to unsee: **the outcome of your previous trade sets the size and aggression of your next one, even though the two trades are statistically unrelated.** Your last trade has zero bearing on the expected value of your next setup. But it has *enormous* bearing on how you *feel*, and how you feel is what actually sizes the bet. The next figure catalogs the whole pathology.
 
-The one-sentence intuition: a real edge plus a doubling rule is a time bomb, because the edge earns slowly while the doubling bets the account on never having a normal losing streak.
+![What the last outcome does to your next trade: a prior win or loss quietly re-sizes the bet through the house-money and break-even effects, while only a deliberate reset keeps size tied to the rule](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-4.webp)
 
-## 5. Buying insurance at the worst possible price
+Read the rows. **After a loss**, you do one of two things, both bad: you *revenge-size* — bet 3× to win it back fast — or you go *gun-shy* — bet 0.3× because the loss made losing vivid and you flinch. Either way you over-trade to manage a feeling, and one loss metastasizes into five. **After a win**, you treat the profit as "the market's money" and bet 2–3× — the *house-money effect* — pressing, adding, and chasing until you give the whole win back. Only the bottom row, **detached**, keeps size tied to the plan instead of the mood, and it is the only row where your edge survives intact. The two named effects in that middle column are real findings, and they are worth understanding precisely.
 
-One of the cleanest and most costly signatures of recency shows up in how traders buy protection. The price of downside insurance — the premium on put options, summarized market-wide by the VIX volatility index — is not constant. It is cheap when markets are calm and nobody wants it, and it explodes to its most expensive exactly after a crash, when recency has convinced everyone that another one is imminent.
+### The house-money effect and the break-even effect
 
-![A timeline of the cost of protection through a crash: the VIX is a flat, cheap line in the calm, spikes above 80 at the panic, then decays; the annotations mark that insurance is cheapest when unwanted and most expensive right after the risk it hedges has largely passed.](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-6.webp)
+In 1990, Richard Thaler and Eric Johnson published ["Gambling with the House Money and Trying to Break Even: The Effects of Prior Outcomes on Risky Choice"](https://www.jstor.org/stable/2632458) in *Management Science*. Using real-money experiments, they documented two systematic ways that a prior outcome corrupts the next decision — the exact opposite of how a rational agent should behave. A rational agent treats each decision on its own merits and ignores sunk history; every dollar is just a dollar. Real people do not.
 
-The two record highs on that chart are real. The VIX closed at 80.86 on November 20, 2008, and then set an all-time closing record of 82.69 on March 16, 2020 ([Cboe VIX all-time highs](https://www.macroption.com/vix-all-time-high/)). Both peaks came *after* the market had already fallen hard — the protection was at its most expensive precisely when much of the damage it insures against was already done. In the calm before, when the VIX sat in the mid-teens and protection was cheap, almost nobody wanted it, because no recent crash was available to make the danger feel real.
+The **house-money effect**: after a *gain*, people become more risk-seeking. Winnings feel different from principal — they feel like the casino's money, or the market's money, house money — so people gamble with them recklessly in a way they never would with money they had earned and saved. The **break-even effect**: after a *loss*, people become risk-seeking in a specific way — they find any bet that offers a chance to get back to *even* irresistibly attractive, even a terrible bet, because the psychological line that matters is the break-even point, not expected value.
 
-#### Worked example: the same hedge at VIX 15 and VIX 80
+Map those onto trading and you have named the whole disease. House money is why a great morning turns into a blown afternoon: the win loosened your grip on risk. Break-even is the engine of revenge trading: after a loss you will take a wildly oversized, low-quality trade purely because it offers a fast path back to flat. Both are the last trade tyrannizing the next.
 
-Suppose two traders each want about three months of downside protection on a \$100,000 portfolio, bought with index puts. Option premiums scale with implied volatility, so the price of the very same protection moves with the VIX.
+There is a sibling effect worth naming because it is the *reason* the last loss is so vivid in the first place. Kahneman and Tversky's later work put a number on it: a loss feels about **2.25 times** as intense as an equivalent gain ([Tversky & Kahneman, 1992](https://link.springer.com/article/10.1007/BF00122574)). That asymmetry — *loss aversion* — is why the trade that hurt is the most available memory you own, and why it exerts more pull on your next decision than any winner ever could. It is also, per Terrance Odean's classic 1998 study ["Are Investors Reluctant to Realize Their Losses?"](https://onlinelibrary.wiley.com/doi/abs/10.1111/0022-1082.00072), why investors are 1.5-to-2 times more likely to sell a winner than a loser — the *disposition effect*, loss aversion and the break-even instinct working together.
 
-- **Trader Calm** buys when the VIX is around 15. The premium runs on the order of \$1,500 for the quarter.
-- **Trader Scared** waits until after the crash, when the VIX is around 80. The same protection now costs on the order of \$8,000 — roughly five times as much, because implied volatility, and therefore option premium, is roughly five times higher.
+### Watch the sizing swing
 
-Same insurance, roughly 5x the price, and Trader Scared is buying it after most of the move it protects against has already happened. Trader Scared is not managing risk; Trader Scared is paying a premium for the feeling of having done something, at the exact moment the feeling is most expensive.
+Before the dollars, watch the pathology in motion. Here is a single high-quality setup — the same A+ signal — that a trader takes four times, sized entirely by the previous result.
 
-The one-sentence intuition: fear is the most expensive time to buy the very thing that fear is selling.
+![The same A-plus setup sized wildly differently depending only on the prior trade's result, turning a break-even sequence into a −5.1R loss](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-3.webp)
 
-## 6. Availability cascades: when the whole market overweights the last thing
+Trade 1 is sized normally at 1.0× and loses −1.0R — pure bad luck, the cost of doing business. But now the last trade is a loss, so Trade 2 gets revenge-sized to 3.0× and, when it also loses, costs −3.0R. Now shaken, the trader goes gun-shy on Trade 3, sizes it at 0.3×, and although the setup runs a full 3R, the timid size captures only +0.9R — leaving 2R of a winner on the table. Then, feeling better, Trade 4 gets house-money-sized to 2.0× and loses −2.0R. Tally: **−5.1R**. Had every trade been sized identically at a constant 1.0×, the same four setups would have netted **0.0R** — a break-even stretch. The entire −5.1R loss was manufactured by letting the last result set the next size. Let's make that concrete with two effects you can actually feel in your account.
 
-So far this has been about the individual. But recency does not stay in one skull — it spreads, and when it spreads it becomes a market force. In 1999, Timur Kuran and Cass Sunstein described the mechanism in ["Availability Cascades and Risk Regulation"](https://chicagounbound.uchicago.edu/journal_articles/8308/). An availability cascade is a self-reinforcing loop: an expressed perception (say, "a crash is coming") triggers a chain reaction in which the perception becomes more plausible simply because it is being repeated, which makes more people repeat it, which makes it more available still.
+#### Worked example: the house-money leak
 
-Two forces drive the cascade. The first is informational — you take other people's apparent beliefs as evidence, so if everyone is talking about the crash, you conclude they must know something. The second is reputational — you go along with the prevailing view to avoid looking foolish or out of step. Social feeds and financial media are availability-cascade machines by design: they amplify whatever just happened, because whatever just happened is what generates clicks and engagement. The last event is not merely available in your own memory; it is being broadcast back at you from every screen, manufacturing an artificial base rate out of pure repetition.
+You start the day with \$10,000 and your normal risk per trade is 1% of the account — \$100. You have a good morning and you are now up \$1,000, sitting at \$11,000. The house-money effect kicks in: this \$1,000 feels like the market's money, not yours, so you decide to "swing bigger with the house's chips." Your next trade, a perfectly ordinary setup, gets sized at 3× normal — \$300 of risk. It is a normal loser, −1R, so you lose \$300. You are now at \$10,700.
 
-For a trader, this is why sentiment reaches its extremes exactly when it is least useful. The cascade tops out when the last move has been repeated so many times that no other future seems possible — which, per Greenwood and Shleifer, is roughly when the future is about to be different. Recognizing a cascade for what it is — availability wearing the costume of consensus — is one of the most valuable skills a trader can build, because it lets you fade the crowd at precisely the moments the crowd is most confidently wrong.
+That loss stings, and now the break-even effect takes the wheel: you want your \$11,000 back, *now*. So you revenge-size the next trade, again at 3× (\$300), and you are half on tilt, so it is not even an A+ setup. It loses. You are at \$10,400.
+
+Add it up. You built a genuine +\$1,000 morning and, with two oversized emotional trades, you ended at +\$400. You gave back **60% of a winning day** — not because your edge failed, but because the win made you reckless and the subsequent loss made you desperate. The intuition: **the win did not hand you a bigger edge, only a bigger appetite; sizing off the last result is how a green day bleeds back to flat.**
+
+#### Worked example: the recency tax over a full year
+
+The house-money leak is a bad day. Here is the bad *year*, and it is the number in the TL;DR. Consider two traders running the *identical* system with a real edge.
+
+Your base system wins **50%** of the time, makes **+2R** on winners and loses **−1R** on losers, for an expected value of **+0.5R** per trade. You take about **200 trades a year** at \$100 per R. Your edge, taken cleanly, is worth:
+
+```
+200 trades × 0.5R × $100 = +100R = +$10,000 per year
+```
+
+That is Trader A — the disciplined one. Now Trader B is *you*, running the same system, but with one recency habit: after each losing trade, you take one extra "revenge" trade to win it back. You lose about 100 times a year (50% of 200), so that is roughly **100 revenge trades**. These are taken on tilt, at 3× size, and — this is the part the research on post-loss trading supports — they carry a *degraded* edge because you enter badly when you are emotional; say they win only **30%** of the time. Each revenge trade's expected value, in your normal R units:
+
+```
+Per revenge trade: (0.30 × +1.5R) − (0.70 × −1R) sized at 3×
+= (0.45R − 0.70R) × 3
+= −0.25R × 3
+= −0.75R
+100 revenge trades × −0.75R × $100 = −75R = −$7,500 per year
+```
+
+Your +\$10,000 edge becomes **+\$2,500**. Recency-driven revenge sizing taxed away **\$7,500 — three-quarters of your annual edge — without changing a single one of your good trades.** The picture below is those two equity curves side by side.
+
+![Two traders with one identical edge over a year: constant sizing compounds the account while sizing off the last result bleeds three-quarters of the edge away](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-5.webp)
+
+Same 100 trades, same edge, same market. The blue line — plan-only, constant sizing — compounds smoothly and roughly doubles the account, ending about +\$10,000. The red line — the same trades plus the revenge trades your losses talk you into — climbs, then gives it back in jagged lurches, ending at just +\$2,500. The intuition to tattoo somewhere: **the leak is not in your system. It is in the extra trades your last result talks you into taking.**
+
+### When it breaks
+
+The tyranny of the last trade is at its most dangerous precisely when your results have been most *extreme*, in either direction — because that is when the last trade is most vivid and its pull is strongest. A brutal loss maximizes the break-even urge; a euphoric win maximizes the house-money urge. So the sizing distortion is largest exactly when the emotional stakes, and usually the market conditions, are also largest. The tool that severs it is not willpower — it is a mechanical reset, which we build in the drill section.
+
+## 4. Availability cascades: when the whole market is recency-biased at once
+
+So far this has been about *your* mind. But every other participant has the same wiring, and when millions of availability-biased brains are wired together through media and social feeds, the individual glitch becomes a market force.
+
+The mechanism has a name. In a 1999 *Stanford Law Review* article, ["Availability Cascades and Risk Regulation,"](https://www.jstor.org/stable/1229439) Timur Kuran and Cass Sunstein described an **availability cascade**: a self-reinforcing process in which a perception, once expressed, becomes more and more plausible simply through its rising presence in public discourse. The more people talk about a risk, the more available it becomes; the more available it becomes, the more people believe it and talk about it; and so on, until a possibly-minor event is collectively perceived as a near-certainty. The figure traces the loop.
+
+![The availability cascade in a market panic: a single vivid event, echoed through the feed, inflates the crowd's sense of how likely it is until everyone repositions at once](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-7.webp)
+
+One vivid event — a crash, a short squeeze, a bank run — spawns a few loud posts and headlines. Kuran and Sunstein identified two engines that take it from there. The **informational cascade**: you infer, reasonably, that if everyone is worried they must know something, so you copy the belief. The **reputational cascade**: you echo the prevailing view to fit in, because being the calm contrarian is socially costly when everyone else is scared. Both engines push the *perceived* odds of the event far above its base rate. The crowd then repositions all at once — everyone buys puts, everyone dumps risk — which moves prices, which generates more coverage, which feeds the next cycle. The event's *availability* has manufactured a probability estimate detached from any base rate.
+
+For a trader this matters in two ways. First, it explains why markets over-react to whatever just happened — the availability cascade is recency bias with a megaphone, and it systematically over-prices whatever risk is currently vivid. Second, it is a warning about your *own* information diet: if your feed is saturated with one narrative, that narrative is *maximally available* to you regardless of its truth, and your probability estimates are being set by an algorithm optimizing for engagement, not accuracy. The most recency-biased instrument you own is the one in your pocket refreshing the feed.
 
 ## What it looks like at the screen
 
-Theory is easy to nod along to and hard to catch in the act. So here is what recency and last-trade tyranny actually feel like in real time, in the first person, so you can recognize the tells while they are happening rather than in the post-mortem.
+Theory is cheap. Here is how recency and the tyranny of the last trade actually *feel* in real time, so you can catch them firing. Learn these tells the way you would learn the smell of something burning.
 
-You take a loss, and before the ticket even clears you feel your hand reaching to size up the next entry — not because the next setup is better, but because you want the red number gone *now*. That is revenge, and the giveaway is that your finger moved before your analysis did.
+**After a loss**, the tells are physical before they are mental. Your jaw tightens. You lean in toward the screen. The number of the loss — the exact dollar figure — is stuck in your head like a song, and you find yourself doing math: "one good trade and I'm back." Your cursor is already hovering over the size box, and it wants to go up. You stop waiting for your setup and start *hunting* for any trade, because being in a trade feels like doing something about the loss. If you catch yourself thinking "I just need to get it back," that is the break-even effect talking in a complete sentence, and it is the single most expensive thought in trading. The opposite tell is just as real: after a loss that shook you, the next A+ setup appears and you *flinch* — your hand won't click, you talk yourself out of it, you size it tiny "just to be safe," and then you watch it run without you. Same bias, opposite symptom.
 
-You take a loss and the opposite happens: the next A+ setup prints, clean and obvious, and you sit on your hands. You "want to see it confirm." You are not being patient; you are flinching, and the tell is that you would have taken this exact setup without hesitation two trades ago.
+**After a win**, the tells are looser and warmer, which is what makes them dangerous. You feel sharp, lucky, *right*. The plan starts to feel like training wheels. You take a trade you would normally skip because "I'm reading the market well today." You add to a winner past your rule, or you widen a stop "because it'll come back." The specific thought to watch for is any version of "I'm playing with the house's money now" — the moment you mentally re-label your profits as free chips, your risk discipline is already gone.
 
-You catch yourself refreshing the chart of the one thing that just moved hard, over and over, while eight other instruments sit ignored. Your attention has been captured by availability — the mover is vivid, so it feels important, so it eats your focus even when the opportunity is elsewhere.
+**Any time you're extrapolating**, the tell is a sentence with the word *always* or *never* in it: "it always bounces at this level" (after it bounced twice), "this thing never stops going up," "the market always dumps into the close lately." Every one of those is a base rate of three or four observations wearing the costume of a law. And **when the feed is loud** — when your whole timeline is one story — notice the *urgency*: the feeling that you must act *right now* on the thing everyone is talking about. That urgency is the availability cascade reaching through the glass. The base rate has never once required you to act in the next thirty seconds.
 
-A phrase forms in your head, fully assembled, with total confidence: *"it always bounces here,"* or *"this thing only goes up,"* or *"we're definitely gapping down tomorrow."* Any sentence with "always," "never," or "definitely" built from the last few sessions is recency talking. The base rate never speaks in absolutes.
-
-You widen a stop because the last trade would have worked if you had "just given it room," or you tighten one because the last trade gave back an open profit. You are re-fighting the last war, adjusting this trade's risk to what would have fixed the previous trade — a trade that is over and shares no P&L with this one.
-
-And the biggest one: you glance at your daily P&L and feel it reach for the mouse. Green, and you feel entitled to a bigger swing. Red, and you feel you owe the account a comeback. The moment your account balance is an input to your next position size, the tyranny of the last trade has you, and the number on the screen is trading you instead of the other way around.
+The common thread in every tell is a collapse of your time horizon. Recency shrinks your world to the last few minutes, and a trader operating on a five-minute memory cannot execute a plan built on a thousand-trade edge. Naming the tell out loud — literally saying "that's the break-even effect" or "that's house money" — is half the cure, because it hands the decision back from your fast, emotional System 1 to your slow, deliberate System 2, a handoff we explore in [the cognitive-bias map for traders](/blog/trading/trading-psychology/the-cognitive-bias-map-for-traders).
 
 ## Common misconceptions
 
-**"Weighting recent data more heavily is just being adaptive."** Adaptivity is a principled update — you change your estimate by a defensible amount when new evidence arrives, in proportion to how much that evidence should move a base rate built from many observations. Recency is the opposite: it lets a single new data point, n equals one, overwrite a distribution built from hundreds. Real adaptation nudges the base rate; recency throws it away.
+**"Recency bias just means I remember recent things better — that's not a big deal."** Remembering recent things better is harmless; the damage is that you *act* on that memory as if it were a probability. The bias is not in your memory, it is in the silent substitution of "what I recall easily" for "what is actually likely," and then betting real money on the substitute. That substitution is invisible from the inside — it feels exactly like sound judgment — which is precisely why it is dangerous.
 
-**"After three losses in a row, I'm due for a win."** This is the gambler's fallacy — the belief that independent events owe you a correction. If your trades are independent, three losses tell you nothing about the fourth. Its identical twin is the hot-hand version: "I've won three, I'm on fire, press it." Both take a recent streak and invent a trend from randomness. Gilovich, Vallone, and Tversky's 1985 study of basketball shooting showed how readily people see "hot hands" in what is statistically just noise.
+**"I'm a disciplined person, so this doesn't apply to me."** Availability and recency are not failures of discipline or intelligence; they are features of the same fast, automatic system that lets you catch a ball or read a face. They run *underneath* your conscious mind and finish their work before your deliberate reasoning wakes up. Kahneman and Tversky demonstrated these effects in statistics professors who *taught* probability. You cannot out-discipline a reflex; you can only build a process that interrupts it, which is the entire point of the drill below.
 
-**"Buying protection after a scare is responsible risk management."** Timing is everything, and this timing is backwards. You are buying insurance at the top of the price spike, after the risk it hedges has largely already materialized. Responsible risk management buys protection when it is cheap and unwanted — which, by construction, is exactly when no recent event makes it feel necessary.
+**"Sizing up after a win / down after a loss is just good risk management."** It sounds like it, but check the direction. Legitimate risk management sizes to the *edge and the account* — you might scale a fixed fraction of current equity, which naturally grows bets after wins and shrinks them after losses *in proportion to the account*, not in proportion to your mood. The tyranny of the last trade is different: it changes your bet by 2× or 3× based on the emotional residue of one outcome, which has no bearing on the next trade's expected value. The tell is the *magnitude*: a rule-based system nudges size a few percent; recency swings it by multiples.
 
-**"The trend is my friend, so extrapolating it is the smart move."** Trends are real and trend-following can work, but naive extrapolation is not trend-following; it is assuming the trend is permanent. Greenwood and Shleifer showed that crowd expectations built by extrapolation are highest right before returns are lowest. Following a trend with a plan for the turn is a strategy; extrapolating it to infinity is recency with a chart.
+**"If a setup just worked three times, that's evidence it's working now."** Only if three is a statistically meaningful sample, and it never is. Three outcomes of a process with a 42% base rate is entirely consistent with the base rate — streaks of three are common in any random-ish sequence. Treating three recent wins as an *update* to your probability estimate is exactly the error; the honest update from three observations against a thousand-trade base rate is nearly zero. The streak feels like information because it is available, not because it is informative.
 
-**"One revenge trade won't hurt me."** It only takes one, if it lands on the wrong streak. The doubling worked example showed a single four-loss run turning a \$4,000 drawdown into \$15,000. Nick Leeson also thought each doubling would be the one that worked. The problem with betting the account on never having a normal losing streak is that normal losing streaks are, by definition, normal.
-
-**"If I feel it this strongly, it must be likely."** The strength of a feeling tracks the vividness and recency of the memory behind it, not the probability of the event. A crash you lived through last week feels far more likely than one you read about in a table, even if the table says they happen at the same rate. Availability is precisely the error of reading emotional intensity as statistical frequency.
+**"After a crash I should obviously be more defensive."** This is the most expensive misconception because it feels the most responsible. The instinct to insure is strongest right after the disaster — when the disaster is maximally available — which is also, reliably, when insurance is most expensive. Buying protection after the crash is buying the vivid memory at the top of its price. The time to be defensive was before, when it was cheap and no one wanted it. We quantify this next.
 
 ## How it shows up in real markets
 
-### 1. The permabears who sat out the recovery
+These are named, dated episodes where availability and recency moved real money. The mechanism from this post is doing the work in every one.
 
-The clearest monument to recency in a generation is the cohort of investors who, having been scarred by 2008, stayed defensive through the entire recovery that followed. The scale of what they missed is a matter of record. The S&P 500 closed at its bear-market low of 676.53 on March 9, 2009 (it had touched an intraday 666.79 on March 6), down about 57% from its October 2007 peak of 1,565.15 ([S&P 500 closing milestones](https://en.wikipedia.org/wiki/Closing_milestones_of_the_S%26P_500)). From that low it climbed, with interruptions, to a closing high of 3,386.15 on February 19, 2020 — roughly five times the low, over about eleven years. The 2008 crash was so vivid and so available that for many it overwrote the base rate that markets recover, and the availability of the last disaster cost them the entire next expansion. Being right about the crash and wrong about everything after it is recency in its purest form.
+### 1. Depression babies: a generation sized by its worst memory
 
-### 2. The volatility spike nobody could buy cheaply
+The cleanest real-world proof that recent experience overweights probability comes from Ulrike Malmendier and Stefan Nagel's 2011 *Quarterly Journal of Economics* paper, ["Depression Babies: Do Macroeconomic Experiences Affect Risk Taking?"](https://academic.oup.com/qje/article/126/1/373/1901343). Using the U.S. Survey of Consumer Finances from 1960 to 2007, they showed that people who had *lived through* low stock-market returns were, for decades afterward, less willing to take financial risk, less likely to own stocks, and more pessimistic about future returns — even controlling for their actual wealth. The generation that came of age in the Great Depression under-invested in equities for the rest of their lives. Their probability estimate for "stocks do well" was permanently marked down by a vivid, formative experience — availability operating on the timescale of a lifetime. It is the same bug as revenge-sizing after a single loss, just slowed down to fifty years.
 
-The put-buying panics of 2008 and 2020 are the market pricing recency in real time. Demand for downside protection surged to its maximum after the declines were largely over, driving the VIX to its two highest closes on record — 80.86 on November 20, 2008, and 82.69 on March 16, 2020. Tail-hedging strategies that had been quietly, cheaply in place before the fall paid off enormously; the crowd that rushed in afterward bought the same protection at five to six times the calm-market price. The lesson repeats every cycle: the insurance is cheap exactly when the recent past makes it feel unnecessary, and dear exactly when the recent past makes it feel essential.
+### 2. The post-2008 permabears who missed the recovery
 
-### 3. Extrapolation at the top
+On **9 March 2009**, the S&P 500 closed at **676.53**, its bear-market low, after an intraday bottom of **666.79** on 6 March — a drawdown of roughly **57%** from the October 2007 peak, the worst since the 1930s (S&P Dow Jones Indices). The crash was maximally vivid, and it minted a cohort of investors and commentators who extrapolated it forward: the financial system was broken, another leg down was inevitable, cash was king. Recency told them the recent past — collapse — was the future. In fact 9 March 2009 was the bottom, and the market began one of the longest bull runs in history. The permabears who sat out did not lack information; they had *too much* of one very available, very recent, very emotional data point, and they let it set their probability estimate for a decade. Extrapolating the crash cost more than the crash itself.
 
-The Greenwood-Shleifer finding is not a mere theory; it has a body count of famous tops. Near the dot-com peak in early 2000 and again near the 2007 high, surveyed investor optimism about future returns reached extremes — right before two of the worst drawdowns in modern history. The crowd extrapolated the boom, grew most confident at the moment of maximum danger, and was most exposed when the turn came. Recency at a top does not feel like a bias; it feels like obvious common sense that the thing that has been working will keep working.
+### 3. The tail-hedge bid that peaks at the worst possible price
 
-### 4. Nick Leeson and the death of Barings
+Here is availability with a receipt. The cost of portfolio insurance is measured by implied volatility, tracked by the VIX index. In calm markets the VIX sits in the low-to-mid teens; in January 2020 it traded around **13**. Then COVID hit, and on **16 March 2020** the VIX *closed* at **82.69** — its highest close on record, edging past the roughly **80.7–80.9** peak of the 2008 crisis (Cboe). The chart below is the shape of every crisis.
 
-Return to where we started. Leeson's account 88888 was a machine for exactly the tyranny of the last trade: every loss triggered a larger bet that it would come back, because his recent experience of small recoveries had taught him that doubling worked. The Kobe earthquake of January 1995 sent the Nikkei through the floor while he was doubling into it, and the losses reached roughly £827 million — twice the bank's available capital. Barings, founded in 1762, was declared insolvent on February 26, 1995. One trader, one doubling rule, one refusal to let a losing streak be a losing streak, and a 233-year-old institution was gone. The tyranny of the last trade does not usually cost you a bank. But it is the same mechanism, scaled down to your account, running every day.
+![The insurance you buy after the crash: tail-hedge demand peaks exactly when protection is most expensive, so recency-driven insurance is bought at the top](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-8.webp)
+
+Protection was cheap in January, when no one wanted it, and roughly six times more expensive at the March peak, when everyone rushed to buy it — because the crash was now maximally available and the urge to insure was overwhelming. The crowd reliably buys the most protection at the moment it is most overpriced, and then watches that protection decay as fear fades and volatility normalizes. Let's price it.
+
+#### Worked example: buying volatility at the top
+
+A quick, standard approximation: the price of an at-the-money option is roughly `0.4 × S × σ × √T`, where `S` is the price, `σ` is annual implied volatility, and `T` is time to expiry in years. Take a one-month at-the-money put on a \$100 index.
+
+```
+Calm (σ = 13%):   price ≈ 0.4 × 100 × 0.13 × √(1/12) ≈ 0.4 × 100 × 0.13 × 0.289 ≈ $1.50
+Panic (σ = 82.69%): price ≈ 0.4 × 100 × 0.8269 × 0.289 ≈ $9.56
+```
+
+The identical protection costs about **\$1.50** when the VIX is 13 and about **\$9.56** when the VIX is 82.69 — roughly **6.4× more**, tracking the ratio of the volatilities (82.69 / 13 ≈ 6.4). (Real puts are usually out-of-the-money and the numbers shift, but the direction and rough magnitude hold: you pay several times more for the same insurance after the crash.) The intuition: **the recency-driven urge to insure peaks exactly when insurance is most overpriced, so panic-hedging systematically buys high.**
+
+### 4. The behavior gap: recency measured in your own returns
+
+You do not need a crisis to pay the recency tax — the average investor pays it every year by chasing what recently worked. Morningstar's annual ["Mind the Gap" study](https://www.morningstar.com/lp/mind-the-gap) measures the difference between the returns funds *report* and the returns investors *actually earn* after their buy and sell timing. In the 2024 edition, over the ten years ending December 2023, the average dollar in U.S. funds earned about **6.3%** a year while the funds themselves returned about **7.3%** — a gap of roughly **1.1 percentage points** annually, attributed to mistimed purchases and sales. Investors buy after a fund has run up (recent returns are high and available) and sell after it falls (recent losses are vivid), systematically arriving late and leaving late. (The magnitude is debated — some researchers argue Morningstar's method overstates it — but the *direction*, that timing driven by recent performance costs money, is robust across studies.) That gap is recency bias, priced, in the returns of ordinary people.
+
+### 5. Extrapolation at the top: the survey that inverts
+
+Recall Greenwood and Shleifer's finding that expectations are highest exactly when future returns are lowest. You can watch this in real time near every major top: sentiment surveys and inflow data show the crowd most bullish and most invested precisely when the market is most extended. The dot-com peak of early 2000 and the meme-stock froth of early 2021 are textbook cases — retail participation, bullish expectations, and prices all peaked together, then reversed. The crowd was not forecasting; it was extrapolating the recent run, which is what recency bias always does at a turning point. The lesson for a trader is uncomfortable: when your own conviction feels strongest *because of how well things have been going*, that feeling is a contrarian indicator, not a confirmation.
 
 ## The drill: the base-rate anchor and the between-trades reset
 
-Naming a bias does not cure it. Recency is not a knowledge problem — you can know all of this cold and still feel your hand reach to size up after a loss. It is a habit problem, and it yields only to a habit. Here is the protocol, in two parts.
+You cannot delete availability and recency; they are hardware. But you can build two mechanical habits that interrupt them before they touch your size box. This is the actionable core of the whole post.
 
-**Part one: the base-rate anchor.** Before every trade, and especially when a setup feels like a certainty, force one question to the front: *what is the long-run frequency here?* Not "what just happened," not "what does this feel like" — what does the base rate say across many instances? Concretely:
+### Drill 1: the base-rate anchor
 
-- Keep the number where you can see it. For each setup you trade, write its historical win rate and its average win and average loss at the top of your notes, from your journal or a backtest of at least a few dozen instances. When "it always bounces" shows up, you are looking at "58%, +\$400 / -\$1,200" instead.
-- Ask "N of how many?" When a recent event is driving your conviction, say out loud how many observations it is built on. "The last three bounced" becomes "three out of the two hundred I have on record." Spoken that way, the streak shrinks back to its real size.
-- Pre-commit your size. Decide the position size from the system *before* you enter, based on the setup's base rate and your fixed risk fraction, and treat it as locked. A size chosen before the trade cannot be edited by the trade before it.
+The base-rate anchor is a single question you ask *before every trade*, out loud or on paper: **"What is the long-run frequency here — not what just happened?"** It works by forcing a handoff from your fast, recency-driven intuition to your slow, deliberate reasoning, and by putting the boring, un-vivid base rate back in front of your eyes where the streak has been sitting.
 
-**Part two: the between-trades reset.** The tyranny of the last trade lives in the seconds between closing one position and opening the next. Put a ritual in that gap so the emotional and P&L residue of trade N cannot leak into trade N+1.
+Make it concrete and non-negotiable:
 
-![The between-trades reset as a five-step pipeline: close the trade, log the outcome and look away, do a 60-second physical reset, ask the base rate, then size from the system regardless of what the last trade did.](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-7.webp)
+- **Keep the base rate retrievable.** The only defense against a vivid memory is a written number. Maintain a journal that shows, for each setup you trade, its win rate and average R across your *entire* history — not the last week. When recency whispers "85%," you glance at the column that says 42% and the spell breaks. The journal is a base-rate machine; that is its real job.
+- **Ask the question at the size box, every time.** Before you set position size, say the sentence: "long-run this wins 42% at +2R; size to that, not to the streak." If your answer references the last three trades, you have caught the bias red-handed.
+- **Judge systems by base rates, never by recent runs.** A strategy with a positive edge *will* have losing streaks of five, six, seven — that is arithmetic, not brokenness. Decide in advance how many trades constitute a fair sample (hundreds, not tens) and refuse to fire a system before then.
 
-Run the five steps in order, every time. Close the trade and accept that the P&L is now a fact in the past. Log the outcome in your journal, then deliberately stop staring at the number. Do a genuine physical reset — stand up, breathe, sixty seconds off the screen — because the urge to revenge-trade rides on a physiological arousal state that fades if you let it. Ask the base-rate question about the next setup. Then size from the system, risking your fixed fraction whatever trade N just did, so that trade N+1 inherits nothing from trade N but the capital in the account.
+### Drill 2: the between-trades reset ritual
 
-If you want a single sentence to tape to your monitor, make it this one, and read it after every close:
+The base-rate anchor fixes your *forecast*. The reset ritual fixes the *carryover* — it stops trade N's emotion from setting trade N+1's size. It is a fixed, physical sequence you run in the sixty-to-ninety seconds *between* closing one trade and sizing the next. The point is to insert a hard boundary so the last result cannot leak forward.
 
-> The last trade is over. Its outcome is not evidence about the next one. Size from the base rate, not from the memory.
+![The between-trades reset ritual: a fixed sequence severs the emotional and P&L carryover so trade N+1 starts from the rules, not the last result](/imgs/blogs/recency-availability-and-the-tyranny-of-the-last-trade-6.webp)
 
-That is the whole discipline. It will not make the urges disappear — you will still feel the reach for a bigger size after a loss and the itch to press after a win. It just puts a fixed, boring procedure between the urge and the order, and over hundreds of trades that procedure is worth more than any signal.
+Run the sequence in the figure every single time, especially when you least want to:
+
+1. **Close and log the trade.** Record the result as a number and a note. Writing it down converts a hot feeling into a cold data point and files it where the base rate lives.
+2. **90-second physiological reset.** Stand up. Take your hands off the keyboard. Breathe out slowly a few times — a long exhale is the fastest way to pull your nervous system out of fight-or-flight. You cannot make a base-rate decision while your body is in a threat state.
+3. **Name the residue.** Say what you are carrying: "that was tilt," or "that was euphoria," or "that was clean." Naming the emotion is what hands the wheel from System 1 back to System 2 — you cannot manage a feeling you have not named.
+4. **Re-read the plan and the base rate.** Look at your written rules and the setup's long-run stats. Re-anchor on the boring truth before the next vivid thing arrives.
+5. **Size trade N+1 from the rules, not the P&L.** Your size is a function of your account and your edge, full stop. It is *not* a function of whether the last trade won or lost. If those two ever disagree, the rule wins.
+
+The ritual feels absurd when you are winning and impossible when you are tilting — which is exactly when it is doing its most valuable work. The between-trades boundary is the single highest-leverage habit for defeating the tyranny of the last trade, because it attacks the transmission mechanism directly: it makes trade N+1 start from zero.
+
+A useful companion mantra, borrowed from separating decisions from outcomes: judge the *process*, not the last result. A well-sized trade that lost was still well-sized; a reckless trade that won was still reckless. We build that idea out fully in [process versus outcome and the trap of resulting](/blog/trading/trading-psychology/process-versus-outcome-and-the-trap-of-resulting), and it pairs naturally with the four emotions that drive the carryover in the first place, covered in [fear, greed, hope, and regret](/blog/trading/trading-psychology/fear-greed-hope-and-regret-the-four-emotions).
 
 ## When this matters to you
 
-You do not have to be a professional trading a seven-figure book for this to touch your money. Recency runs your 401(k) contributions when you pull back from stocks after a scary quarter and pile in after a great year. It runs your decision to buy travel insurance the week after a friend's flight was cancelled and skip it the rest of the year. It runs the urge to chase whatever asset just tripled and to swear off whatever just halved. Anywhere you are estimating how likely something is, your brain is quietly substituting how easily you can remember it — and the last thing that happened is always the easiest to remember.
+If you trade, this is not a theoretical worry — it is probably the largest, most fixable leak in your P&L, because it does not require you to be wrong about the market at all. You can have a genuine edge, read every chart correctly, and still bleed three-quarters of your returns to the way your last trade sets your next size. That is the cruel efficiency of the tyranny of the last trade: it taxes good traders specifically, because good traders have an edge worth taxing.
 
-The fix is not to become a robot who ignores new information. Genuinely new evidence *should* update your view. The fix is to update by the right amount: to weigh the last observation as one vote among the base rate's many, rather than as the only vote that counts. Ask "what is the long-run frequency?" before "what just happened?" Put a reset between your trades. And when a feeling of certainty arrives built entirely from the recent past, treat that certainty itself as the signal to slow down.
+And it reaches past the screen. The availability heuristic is why you over-insure against the disaster you just watched on the news and under-prepare for the boring risks that actually get people; it is why your sense of how the economy is doing tracks the last headline more than the last decade; it is why you'll pay up for the fund that just had a great year. In every case the fix is the same reflex: catch yourself estimating a probability from a vivid, recent memory, and go looking for the base rate instead. Ask "how often does this actually happen, across everything I know — not just what's easiest to picture right now?"
 
-This is educational, not individualized advice — your situation, risk tolerance, and strategy are yours to decide. But the underlying skill transfers everywhere: the trader who can keep consulting the base rate while the crowd consults its most recent nightmare is holding the one edge that never stops working. For more on why grading yourself by outcomes reinforces exactly these mistakes, see [process versus outcome and the trap of resulting](/blog/trading/trading-psychology/process-versus-outcome-and-the-trap-of-resulting); for the emotions that power the revenge-and-timidity cycle, see [fear, greed, hope, and regret](/blog/trading/trading-psychology/fear-greed-hope-and-regret-the-four-emotions); and for where recency sits among the other traps, see [the cognitive bias map for traders](/blog/trading/trading-psychology/the-cognitive-bias-map-for-traders).
+You will never stop the fast system from firing. The last trade will always feel like it matters more than it does; the recent trend will always look like a law; the crash you lived through will always feel due to repeat. The whole game is to build the boundary — the anchor and the reset — that lets your slow, deliberate, base-rate-respecting self make the actual bet. Three observations is a mood. The base rate is the number that pays you. Trade the base rate.
 
 ## Sources & further reading
 
-- Amos Tversky and Daniel Kahneman, ["Availability: A heuristic for judging frequency and probability,"](https://www.sciencedirect.com/science/article/abs/pii/0010028573900339) *Cognitive Psychology* 5(2), 1973 — the founding paper on the availability heuristic.
-- Daniel Kahneman and Amos Tversky, "Prospect Theory: An Analysis of Decision under Risk," *Econometrica* 47(2), 1979 — loss aversion and the roughly two-to-one pain-to-pleasure ratio.
-- Bennet B. Murdock, "The serial position effect of free recall," *Journal of Experimental Psychology* 64(5), 1962 — the recency effect in memory.
-- Richard Thaler and Eric Johnson, "Gambling with the House Money and Trying to Break Even," *Management Science* 36(6), 1990 — the house-money effect.
-- Hersh Shefrin and Meir Statman, "The Disposition to Sell Winners Too Early and Ride Losers Too Long," *Journal of Finance* 40(3), 1985 — the disposition effect.
-- Thomas Gilovich, Robert Vallone, and Amos Tversky, "The Hot Hand in Basketball," *Cognitive Psychology* 17(3), 1985 — seeing streaks in randomness.
-- Robin Greenwood and Andrei Shleifer, ["Expectations of Returns and Expected Returns,"](https://academic.oup.com/rfs/article-abstract/27/3/714/1580705) *Review of Financial Studies* 27(3), 2014 — extrapolative expectations and their negative correlation with future returns.
-- Timur Kuran and Cass Sunstein, ["Availability Cascades and Risk Regulation,"](https://chicagounbound.uchicago.edu/journal_articles/8308/) *Stanford Law Review* 51(4), 1999 — how recency spreads socially.
-- ["Closing milestones of the S&P 500,"](https://en.wikipedia.org/wiki/Closing_milestones_of_the_S%26P_500) Wikipedia — the 676.53 low (March 9, 2009) and 3,386.15 high (February 19, 2020).
-- ["VIX all-time highs,"](https://www.macroption.com/vix-all-time-high/) Macroption — the record closes of 80.86 (November 20, 2008) and 82.69 (March 16, 2020).
-- ["Bankruptcy of Barings Bank,"](https://www.britannica.com/event/bankruptcy-of-Barings-Bank) Britannica — Nick Leeson, account 88888, and the roughly £827 million collapse.
+- Tversky, A. & Kahneman, D. (1973). ["Availability: A Heuristic for Judging Frequency and Probability."](https://www.sciencedirect.com/science/article/abs/pii/0010028573900339) *Cognitive Psychology* 5(2), 207–232. — The founding paper on the availability heuristic.
+- Tversky, A. & Kahneman, D. (1992). ["Advances in Prospect Theory: Cumulative Representation of Uncertainty."](https://link.springer.com/article/10.1007/BF00122574) *Journal of Risk and Uncertainty* 5, 297–323. — Source of the loss-aversion coefficient (λ ≈ 2.25).
+- Thaler, R. H. & Johnson, E. J. (1990). ["Gambling with the House Money and Trying to Break Even: The Effects of Prior Outcomes on Risky Choice."](https://www.jstor.org/stable/2632458) *Management Science* 36(6), 643–660. — The house-money and break-even effects.
+- Odean, T. (1998). ["Are Investors Reluctant to Realize Their Losses?"](https://onlinelibrary.wiley.com/doi/abs/10.1111/0022-1082.00072) *Journal of Finance* 53(5), 1775–1798. — The disposition effect in real brokerage data.
+- Greenwood, R. & Shleifer, A. (2014). ["Expectations of Returns and Expected Returns."](https://academic.oup.com/rfs/article-abstract/27/3/714/1580705) *Review of Financial Studies* 27(3), 714–746. — Investor expectations are extrapolative and inversely related to future returns.
+- Kuran, T. & Sunstein, C. R. (1999). ["Availability Cascades and Risk Regulation."](https://www.jstor.org/stable/1229439) *Stanford Law Review* 51(4), 683–768. — How availability self-reinforces through a crowd.
+- Malmendier, U. & Nagel, S. (2011). ["Depression Babies: Do Macroeconomic Experiences Affect Risk Taking?"](https://academic.oup.com/qje/article/126/1/373/1901343) *Quarterly Journal of Economics* 126(1), 373–416. — Formative experiences reshape risk-taking for life.
+- Barber, B. M. & Odean, T. (2000). ["Trading Is Hazardous to Your Wealth."](https://onlinelibrary.wiley.com/doi/abs/10.1111/0022-1082.00226) *Journal of Finance* 55(2), 773–806. — The most active traders earned 11.4% vs the market's 17.9% a year.
+- Morningstar (2024). ["Mind the Gap 2024: A Report on Investor Returns in the US."](https://www.morningstar.com/lp/mind-the-gap) — The ~1.1-point annual gap from mistimed flows (2014–2023).
+- Cboe, [VIX historical data](https://www.cboe.com/tradable_products/vix/) — The 82.69 record close of 16 March 2020 and the 2008 peak near 80.7–80.9.
+- S&P Dow Jones Indices — S&P 500 closing low of 676.53 on 9 March 2009 (intraday 666.79 on 6 March 2009).
+- Related on this blog: [the cognitive-bias map for traders](/blog/trading/trading-psychology/the-cognitive-bias-map-for-traders), [process versus outcome and the trap of resulting](/blog/trading/trading-psychology/process-versus-outcome-and-the-trap-of-resulting), and [fear, greed, hope, and regret](/blog/trading/trading-psychology/fear-greed-hope-and-regret-the-four-emotions).
