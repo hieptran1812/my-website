@@ -20,7 +20,7 @@ category: "machine-learning"
 subcategory: "Inference Engineering"
 author: "Hiep Tran"
 featured: true
-readTime: 55
+readTime: 57
 ---
 
 There is a class of bug that only appears in production, only for some users, and only in the middle of a sentence. A support ticket arrives with a screenshot: the assistant's reply reads fine for two paragraphs and then, right where a currency symbol should be, there are three black diamonds with question marks in them. Nobody can reproduce it locally. The evaluation suite is green. The model is fine. The kernels are fine. The bug is in eleven lines of Python that call `tokenizer.decode()` once per generated token and concatenate the results.
@@ -85,7 +85,7 @@ In practice, the marker-based chat templates rescue you: because every block sta
 
 Stage 1 is the interesting one. The tokenizer scans the input for the *literal text* of every special token before it does anything else. If a user types the eight characters `<|eot_id|>` into your chat box, and you pass that string to an encoder with special-token parsing enabled, the tokenizer will happily emit the end-of-turn id. From the model's point of view, the user's turn ended right there — and whatever the user typed *after* it appears to the model to be a new turn, possibly with a `<|start_header_id|>system<|end_header_id|>` header that the user also typed.
 
-That is prompt injection with no cleverness required. It does not need a jailbreak prompt or a role-play framing; it needs the user to type ten ASCII characters that your encoder treats as a control instruction. The figure above shows exactly where the fork is: the marker scan runs before the merge table, and both branches land in the same id stream, so the model cannot distinguish a marker you wrote from one a user typed.
+That is prompt injection with no cleverness required. It does not need a jailbreak prompt or a role-play framing; it needs the user to type ten ASCII characters that your encoder treats as a control instruction. The figure above shows exactly where the fork is. The marker scan runs before the merge table; a matched marker either injects a turn boundary or gets escaped back into ordinary text, and a single encode flag decides which. Both outcomes land in the same id stream, where the model has no way to tell a marker a user typed from one your template wrote.
 
 The fix has two halves, and you need both:
 
@@ -507,6 +507,8 @@ class IncrementalDetokenizer:
 
 The `_drain` loop is the whole idea, and it is worth reading twice. A UTF-8 code point is at most four bytes, so an incomplete sequence at the end of the buffer is at most three bytes long. Trying cuts at `n`, `n-1`, `n-2`, `n-3` therefore finds the longest decodable prefix in at most four attempts, regardless of buffer size. **This is O(1) per token, not O(n).** No allocation proportional to output length, no re-decode, no GIL storm at concurrency.
 
+The fallback below the loop is not decoration. If none of the four cuts decodes, the problem is not an incomplete *tail* but an invalid *head*: a stray `0xff`, or a continuation byte with nothing before it. That happens when a byte table is built wrong, when a model emits a byte token that cannot start a sequence, or when a request is resumed from a truncated state. Without the fallback, the buffer never drains and the stream silently stops producing text while the engine keeps burning GPU on it — a hang, not a crash, which is far worse to diagnose. Dropping one byte and retrying costs one replacement character and keeps the stream alive.
+
 `flush()` exists because a generation can end mid-character: the model hit `max_tokens` in the middle of a three-byte sequence, or the user disconnected. At that point you have bytes that will never be completed, and holding them forever would truncate the response. `errors="replace"` is the honest ending — the character genuinely was cut off — and it is exactly one replacement character rather than three.
 
 Using it in the decode loop is three lines:
@@ -596,7 +598,14 @@ class StopChecker:
                       else self.pending[:i]
                 self.pending = ""
                 return out, True
-        if self.hold and len(self.pending) > self.hold:
+        if self.hold == 0:
+            # No stops, or only 1-char stops: nothing to hold back.
+            # This branch is NOT optional -- s[:-0] is the empty string
+            # in Python, so falling into the slice below would swallow
+            # the entire stream.
+            out, self.pending = self.pending, ""
+            return out, False
+        if len(self.pending) > self.hold:
             out, self.pending = self.pending[:-self.hold], self.pending[-self.hold:]
             return out, False
         return "", False
@@ -639,6 +648,7 @@ The two components compose in exactly one order:
 ```python
 detok = IncrementalDetokenizer(byte_table, skip_ids=special_ids)
 stopper = StopChecker(req.stop)
+stopped = False
 for tid in engine.step_stream(req):
     if tid in eos_ids:
         break
@@ -647,11 +657,21 @@ for tid in engine.step_stream(req):
         yield text
     if stopped:
         break
-else:
-    yield stopper.flush() + detok.flush()
+if not stopped:
+    # End of stream. Bytes still in the detokenizer belong BEFORE the
+    # characters the stopper is holding, so flush in that order --
+    # and route the tail through the stopper, because the stop string
+    # may complete on the very last byte.
+    tail, stopped = stopper.push(detok.flush())
+    if tail:
+        yield tail
+    if not stopped:
+        yield stopper.flush()
 ```
 
-Detokenize first, because stop strings are defined over *characters*, not tokens or bytes. Trying to match stop strings against token ids is a category error that fails the moment the tokenizer splits the string differently than you expected — which is the entire problem. And note the flush ordering at the end: `stopper.flush()` before `detok.flush()` would be wrong (the detokenizer's remaining bytes belong *before* nothing, since the stopper's pending text came from earlier pushes) — as written, the stopper's held characters go out first, then any final bytes. In practice you should route the detokenizer flush through the stopper too; the version above is simplified for readability, and the test in the next section pins the real behavior.
+Detokenize first, because stop strings are defined over *characters*, not tokens or bytes. Trying to match stop strings against token ids is a category error that fails the moment the tokenizer splits the string differently than you expected — which is the entire problem.
+
+The flush ordering at the end is not cosmetic either. The detokenizer's held bytes were produced *before* the characters sitting in the stopper's `pending`, so `detok.flush()` must go through `stopper.push()` rather than being concatenated after `stopper.flush()`. Get that backwards and the last few characters of every truncated response come out in the wrong order — a bug that only shows up on generations that hit `max_tokens` mid-character, which is exactly the traffic nobody tests.
 
 ## 6. Testing the boundary: the cases that actually break
 
@@ -741,6 +761,12 @@ def test_no_stops_means_no_holdback():
     s = StopChecker([])
     text, stopped = s.push("stream me")
     assert text == "stream me" and not stopped
+
+def test_single_char_stop_holds_nothing():
+    # hold == 0 here. Guards the s[:-0] trap.
+    s = StopChecker(["#"])
+    assert s.push("abc") == ("abc", False)
+    assert s.push("d#e") == ("d", True)
 
 def test_near_miss_is_eventually_released():
     s = StopChecker(["\n\nHuman:"])
