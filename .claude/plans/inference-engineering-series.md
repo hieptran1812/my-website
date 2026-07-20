@@ -159,7 +159,7 @@ Plus 2–3 sibling links where ideas compose (cache ↔ scheduler ↔ kernel ↔
 |---|---|---|---|
 | 1 | A | 1–5 | ✅ shipped 2026-07-20 (commit 30a3c738; ~55k words, 35 webp + 7 animated figs; all gates pass; all 5 agents finished cleanly, no salvage needed; honesty-rule grep clean). |
 | 2 | B | 6–10 | ✅ shipped 2026-07-20 (commit 9bf435d6; ~54.8k words, 35 webp + 7 animated figs; all gates pass; 66 vllm.ai citations — first wave using the grounding digest). First dispatch died instantly on a session limit (5 writers right after 6 research agents) with zero partial output; a single probe agent confirmed capacity had returned before re-dispatching the rest. |
-| 3 | C | 11–15 | ⏳ pending |
+| 3 | C | 11–15 | ✅ shipped 2026-07-20 (commit 9364a0d9; ~56.7k words, 35 webp + 5 animated figs; all gates pass; 50 vllm.ai citations). All 5 agents finished cleanly. |
 | 4 | D | 16–21 | ⏳ pending |
 | 5 | E (CUDA) | 22–28 | ⏳ pending |
 | 6 | F | 29–33 | ⏳ pending |
