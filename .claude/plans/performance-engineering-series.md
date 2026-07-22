@@ -98,7 +98,7 @@ Plus 2–3 sibling links where ideas compose (profiler ↔ roofline ↔ CUDA gra
 | 2 | B | 6–10 | ✅ shipped 2026-07-15 (~44.9k words, 35 figs; all gates pass, all 35 C2-clean). Agents finished cleanly (rate-limit reset). One figure (profiler fig3) recast graph→diamond after linear-flow reject. |
 | 3 | C | 11–15 | ✅ shipped 2026-07-16 (~45.5k words, 35 figs incl. 2 ANIMATED: launch-queue-draining + capture→replay; all gates + C2 + check-anim + anim-source-review clean). Agents finished cleanly. Fixed 1 graph→diamond earlier-style + req/s glyph-clip in 2 before-afters (→ rps). |
 | 4 | D | 16–20 | ✅ shipped 2026-07-18 (~38k words, 35 figs incl. 1 ANIMATED fusion fig; all gates + C2 + check-anim clean). Rate-limit hit ALL agents twice; salvaged: 2 posts complete from disk, 1 prose-only agent + 1 figures-only agent recovered, then 2 posts (inductor-cpu, reduce-overhead) authored SOLO in main session incl. hand-authored DSL + heavy word-count expansion to clear 6k floor. |
-| 5 | E | 21–25 | ⏳ pending |
+| 5 | E | 21–25 | ✅ shipped 2026-07-22 (~45.5k words, 35 figs incl. 2 ANIMATED: memory-fragmentation + serialized→overlapped-copy; all gates + C2 + check-anim + anim-source-review clean). Agents finished cleanly (no rate limit). Resolves forward-links the-cuda-caching-allocator + bandwidth-bound-and-fusion. Covers PyTorch Channels-Last + SDPA tutorials. |
 | 6 | F | 26–30 | ⏳ pending |
 | 7 | G | 31–36 | ⏳ pending |
 | 8 | H | 37–40 | ⏳ pending |
