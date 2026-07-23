@@ -162,7 +162,7 @@ Plus 2–3 sibling links where ideas compose (cache ↔ scheduler ↔ kernel ↔
 | 3 | C | 11–15 | ✅ shipped 2026-07-20 (commit 9364a0d9; ~56.7k words, 35 webp + 5 animated figs; all gates pass; 50 vllm.ai citations). All 5 agents finished cleanly. |
 | 4 | D | 16–21 | ✅ shipped 2026-07-21 (commit a51577c8; ~72.1k words, 42 webp + 8 animated figs; all gates pass). All 6 agents clean. Post-17 agent web-verified that vLLM's bitwise post does NOT name Thinking Machines → cited separately (+ SGLang as a third source); 3 out-of-digest citations spot-checked verbatim. |
 | 5 | E (CUDA) | 22–28 | ✅ shipped 2026-07-22 (commit d932cf9f; ~60k words, 42 webp + 7 animated figs; all gates pass). SALVAGE: session-limit killed all 7 agents mid-wrap-up but every .md was complete on disk — rendered the 5 with DSL, re-authored DSL for 2 via narrow-scope agents (prose preserved), fixed 3 small gate misses (text-fence→table, 2 abstraction trigger-words, 1 linear-graph→stack). |
-| 6 | F | 29–33 | ⏳ pending |
+| 6 | F | 29–33 | ✅ shipped 2026-07-23 (commit 4b433039; ~46.9k words, 35 webp + 6 animated figs; all gates pass; 49 vllm.ai cites). Cleanest wave — no session limit, all 5 landed 9.2–9.9k words (AIM-high held). |
 | 7 | G | 34–39 | ⏳ pending |
 | 8 | K (hybrid attn+SSM) | 59–65 | ⏳ pending |
 | 9 | H (experiments) | 40–45 | ⏳ pending |
