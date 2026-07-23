@@ -163,7 +163,7 @@ Plus 2–3 sibling links where ideas compose (cache ↔ scheduler ↔ kernel ↔
 | 4 | D | 16–21 | ✅ shipped 2026-07-21 (commit a51577c8; ~72.1k words, 42 webp + 8 animated figs; all gates pass). All 6 agents clean. Post-17 agent web-verified that vLLM's bitwise post does NOT name Thinking Machines → cited separately (+ SGLang as a third source); 3 out-of-digest citations spot-checked verbatim. |
 | 5 | E (CUDA) | 22–28 | ✅ shipped 2026-07-22 (commit d932cf9f; ~60k words, 42 webp + 7 animated figs; all gates pass). SALVAGE: session-limit killed all 7 agents mid-wrap-up but every .md was complete on disk — rendered the 5 with DSL, re-authored DSL for 2 via narrow-scope agents (prose preserved), fixed 3 small gate misses (text-fence→table, 2 abstraction trigger-words, 1 linear-graph→stack). |
 | 6 | F | 29–33 | ✅ shipped 2026-07-23 (commit 4b433039; ~46.9k words, 35 webp + 6 animated figs; all gates pass; 49 vllm.ai cites). Cleanest wave — no session limit, all 5 landed 9.2–9.9k words (AIM-high held). |
-| 7 | G | 34–39 | ⏳ pending |
+| 7 | G | 34–39 | ✅ shipped 2026-07-23 (commit bd0943d0; ~55.6k words, 42 webp + 6 animated figs; all gates pass; 71 vllm.ai cites). SALVAGE: transient 'connection closed mid-response' killed 5/6 agents mid-run (DSL written, no prose) — narrow-agents rewrote markdown to match; fixed 3 broken DSL from dead agents (tree 2-root, 2 graph edge-crossings). GOTCHA: verify-post sharpness passes vacuously at 0 webp — must confirm render produced webp (no LAYOUT FAIL) before trusting RESULT. |
 | 8 | K (hybrid attn+SSM) | 59–65 | ⏳ pending |
 | 9 | H (experiments) | 40–45 | ⏳ pending |
 | 10 | I | 46–51 | ⏳ pending |
