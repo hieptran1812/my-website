@@ -370,11 +370,10 @@ const AwardsCarousel = ({
 
       {/* Awards Content */}
       <div
-        className="p-4 sm:p-8 rounded-2xl border transition-all duration-300 relative overflow-hidden"
+        className="p-4 sm:p-8 rounded-2xl border transition-all duration-300 relative overflow-hidden min-h-[480px] sm:min-h-[400px]"
         style={{
           backgroundColor: "var(--card-bg)",
           borderColor: "var(--card-border)",
-          minHeight: "400px", // Set a minimum height to prevent layout shifts
           boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
           transform: "translate3d(0, 0, 0)",
           willChange: "auto",
@@ -410,52 +409,54 @@ const AwardsCarousel = ({
           >
             <ScrollReveal animation="fade-up" delay={150} duration={600}>
               <h3
-                className="text-2xl font-semibold mb-6 flex items-center"
+                className="text-xl sm:text-2xl font-semibold mb-6 flex items-center"
                 style={{ color: "var(--text-primary)" }}
               >
-                <span className="mr-3 text-2xl">{category.icon}</span>
+                <span className="mr-3 text-xl sm:text-2xl">{category.icon}</span>
                 {category.name}
               </h3>
 
-              <div className="space-y-4 overflow-y-auto max-h-[300px] pr-2 pb-12 styled-scrollbar">
+              <div className="space-y-3 sm:space-y-4 overflow-y-auto max-h-[320px] sm:max-h-[300px] pr-2 pb-12 styled-scrollbar">
                 {awards[category.id] &&
                   awards[category.id].map((award, index) => (
                     <div
                       key={index}
-                      className="flex items-start p-4 rounded-lg hover:bg-opacity-50 transition-all duration-300 hover:shadow-md transform hover:scale-[1.01]"
+                      className="flex items-start gap-4 p-4 rounded-xl border transition-all duration-300 hover:shadow-md"
                       style={{
                         backgroundColor: "var(--surface)",
-                        borderLeft: "3px solid var(--accent)",
+                        borderColor: "var(--card-border)",
                       }}
                     >
-                      <div className="text-3xl mr-4 flex-shrink-0 transform transition-all duration-300 hover:scale-110 hover:rotate-12">
+                      <div
+                        className="w-11 h-11 rounded-lg flex items-center justify-center text-xl flex-shrink-0"
+                        style={{ backgroundColor: "var(--surface-accent)" }}
+                      >
                         {award.icon}
                       </div>
-                      <div>
-                        <h4
-                          className="text-lg font-semibold"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          {award.achievement} - {award.title}
-                        </h4>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between gap-3">
+                          <h4
+                            className="text-base font-semibold leading-snug"
+                            style={{ color: "var(--text-primary)" }}
+                          >
+                            {award.achievement} - {award.title}
+                          </h4>
+                          <span
+                            className="text-xs font-medium px-2 py-0.5 rounded-md flex-shrink-0 mt-0.5"
+                            style={{
+                              backgroundColor: "var(--surface-accent)",
+                              color: "var(--accent)",
+                            }}
+                          >
+                            {award.year}
+                          </span>
+                        </div>
                         <p
                           className="text-sm mt-1"
                           style={{ color: "var(--text-secondary)" }}
                         >
                           {award.organizer}
                         </p>
-                        <div className="mt-2">
-                          <span
-                            className="text-xs px-2 py-1 rounded-full transition-all duration-300 hover:scale-105"
-                            style={{
-                              backgroundColor: "var(--surface-accent)",
-                              color: "var(--accent)",
-                              boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-                            }}
-                          >
-                            {award.year}
-                          </span>
-                        </div>
                       </div>
                     </div>
                   ))}
@@ -529,7 +530,7 @@ const AwardsCarousel = ({
 export default function About() {
   return (
     <div
-      className="flex flex-col min-h-screen transition-colors duration-300"
+      className="flex flex-col min-h-screen overflow-x-clip transition-colors duration-300"
       style={{
         backgroundColor: "var(--background)",
         color: "var(--text-primary)",
@@ -640,7 +641,7 @@ export default function About() {
           <div className="mb-20">
             <ScrollReveal animation="fade-up" duration={700}>
               <h2
-                className="text-4xl font-bold text-center mb-4"
+                className="text-3xl sm:text-4xl font-bold text-center mb-4"
                 style={{ color: "var(--text-primary)" }}
               >
                 What I Do
@@ -664,7 +665,7 @@ export default function About() {
                   duration={800}
                 >
                   <div
-                    className="group p-8 rounded-2xl border transition-all duration-300 hover:scale-105 hover:shadow-xl h-full"
+                    className="group p-5 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-105 hover:shadow-xl h-full"
                     style={{
                       backgroundColor: "var(--card-bg)",
                       borderColor: "var(--card-border)",
@@ -708,7 +709,7 @@ export default function About() {
           <div className="mb-20">
             <ScrollReveal animation="fade-up" duration={700}>
               <h2
-                className="text-4xl font-bold text-center mb-4"
+                className="text-3xl sm:text-4xl font-bold text-center mb-4"
                 style={{ color: "var(--text-primary)" }}
               >
                 Professional Experience
@@ -741,7 +742,7 @@ export default function About() {
                     )}
 
                     <div
-                      className="relative p-8 rounded-2xl border transform hover:shadow-lg hover:scale-[1.01] transition-all duration-300"
+                      className="relative p-5 sm:p-8 rounded-2xl border transform hover:shadow-lg hover:scale-[1.01] transition-all duration-300"
                       style={{
                         backgroundColor: "var(--card-bg)",
                         borderColor: "var(--card-border)",
@@ -878,7 +879,7 @@ export default function About() {
           <div className="mb-20">
             <ScrollReveal animation="fade-up" duration={700}>
               <h2
-                className="text-4xl font-bold text-center mb-4"
+                className="text-3xl sm:text-4xl font-bold text-center mb-4"
                 style={{ color: "var(--text-primary)" }}
               >
                 Honors & Awards
@@ -902,7 +903,7 @@ export default function About() {
           <div className="mb-20">
             <ScrollReveal animation="fade-up" duration={700}>
               <h2
-                className="text-4xl font-bold text-center mb-4"
+                className="text-3xl sm:text-4xl font-bold text-center mb-4"
                 style={{ color: "var(--text-primary)" }}
               >
                 Education & Academic Background
@@ -926,7 +927,7 @@ export default function About() {
                   duration={800}
                 >
                   <div
-                    className="p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
+                    className="p-5 sm:p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
                     style={{
                       backgroundColor: "var(--card-bg)",
                       borderColor: "var(--card-border)",
@@ -1007,7 +1008,7 @@ export default function About() {
           <div className="mb-20">
             <ScrollReveal animation="fade-up" duration={700}>
               <h2
-                className="text-4xl font-bold text-center mb-12"
+                className="text-3xl sm:text-4xl font-bold text-center mb-12"
                 style={{ color: "var(--text-primary)" }}
               >
                 Research Interests & Focus Areas
@@ -1015,7 +1016,7 @@ export default function About() {
             </ScrollReveal>
             <ScrollReveal animation="blur-in" delay={150} duration={900}>
               <div
-                className="max-w-5xl mx-auto p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
+                className="max-w-5xl mx-auto p-5 sm:p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
                 style={{
                   backgroundColor: "var(--card-bg)",
                   borderColor: "var(--card-border)",
@@ -1193,7 +1194,7 @@ export default function About() {
           {/* Contact CTA */}
           <ScrollReveal animation="fade-up" duration={800}>
             <div
-              className="p-10 rounded-2xl border text-center hover:shadow-lg transition-all duration-300"
+              className="p-6 sm:p-10 rounded-2xl border text-center hover:shadow-lg transition-all duration-300"
               style={{
                 backgroundColor: "var(--card-bg)",
                 borderColor: "var(--card-border)",
