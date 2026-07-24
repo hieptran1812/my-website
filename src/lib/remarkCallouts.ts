@@ -12,7 +12,7 @@
  *     <div class="callout-body"><p>Body text…</p></div>
  *   </div>
  *
- * Supported types: note, tip, important, warning, caution, info, success, error.
+ * Supported types: note, tip, important, warning, caution, info, success, error, tldr.
  */
 
 import type { Plugin } from "unified";
@@ -27,6 +27,7 @@ const KNOWN_TYPES = new Set([
   "info",
   "success",
   "error",
+  "tldr",
 ]);
 
 const TITLE_LABEL: Record<string, string> = {
@@ -38,6 +39,7 @@ const TITLE_LABEL: Record<string, string> = {
   info: "Info",
   success: "Success",
   error: "Error",
+  tldr: "TL;DR",
 };
 
 interface HtmlNode {

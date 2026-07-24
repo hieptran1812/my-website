@@ -1305,6 +1305,7 @@ a:focus {
 .blog-content .callout-important { border-left-color: #a855f7; background-color: rgba(168, 85, 247, 0.06); }
 .blog-content .callout-warning { border-left-color: #f59e0b; background-color: rgba(245, 158, 11, 0.06); }
 .blog-content .callout-caution { border-left-color: #ef4444; background-color: rgba(239, 68, 68, 0.06); }
+.blog-content .callout-tldr { border-left-color: #06b6d4; background-color: rgba(6, 182, 212, 0.06); }
 
 .blog-content .callout-title {
   display: flex;
@@ -1322,6 +1323,7 @@ a:focus {
 .blog-content .callout-important .callout-title { color: #a855f7; }
 .blog-content .callout-warning .callout-title { color: #f59e0b; }
 .blog-content .callout-caution .callout-title { color: #ef4444; }
+.blog-content .callout-tldr .callout-title { color: #06b6d4; }
 
 .blog-content .callout-icon {
   width: 1rem;
