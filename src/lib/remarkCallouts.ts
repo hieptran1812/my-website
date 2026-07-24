@@ -47,6 +47,14 @@ interface HtmlNode {
   value: string;
 }
 
+/** Titles come straight from the markdown source and land in raw HTML. */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 const remarkCallouts: Plugin<[], Root> = () => {
   return (tree) => {
     if (!tree || !Array.isArray(tree.children)) return;
@@ -64,14 +72,27 @@ const remarkCallouts: Plugin<[], Root> = () => {
       if (!firstChild || firstChild.type !== "text") continue;
 
       const textNode = firstChild as Text;
-      const match = /^\[!([A-Za-z]+)\]\s*\n?/.exec(textNode.value);
+      // Group 2 is any text left on the marker's own line — Obsidian treats it
+      // as a custom title, so `> [!tldr] TL;DR` must not repeat "TL;DR" in the body.
+      const match = /^\[!([A-Za-z]+)\][^\S\n]*([^\n]*)(?:\n|$)/.exec(
+        textNode.value,
+      );
       if (!match) continue;
 
       const kind = match[1].toLowerCase();
       if (!KNOWN_TYPES.has(kind)) continue;
 
-      // Strip the marker from the first text node (keep any text on the same line as title-extension).
-      const remainder = textNode.value.slice(match[0].length);
+      // Only lift the same-line text into the title when the whole marker line
+      // lives inside this text node — otherwise inline markup after it (say
+      // `> [!note] see **this**`) would be orphaned in the body.
+      const lineEndedHere =
+        match[0].endsWith("\n") || para.children.length === 1;
+      const customTitle = lineEndedHere ? match[2].trim() : "";
+
+      // Strip the marker — plus its same-line title, when we took it — from the
+      // first text node.
+      const consumed = customTitle ? match[0].length : match[0].indexOf("]") + 1;
+      const remainder = textNode.value.slice(consumed).replace(/^[^\S\n]*\n?/, "");
       if (remainder.length === 0) {
         para.children.shift();
       } else {
@@ -82,7 +103,7 @@ const remarkCallouts: Plugin<[], Root> = () => {
         bq.children.shift();
       }
 
-      const label = TITLE_LABEL[kind] ?? kind;
+      const label = escapeHtml(customTitle || TITLE_LABEL[kind] || kind);
       const openHtml: HtmlNode = {
         type: "html",
         value: `<div class="callout callout-${kind}"><div class="callout-title"><span class="callout-icon" aria-hidden="true"></span>${label}</div><div class="callout-body">`,
