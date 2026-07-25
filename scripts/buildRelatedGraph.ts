@@ -16,14 +16,28 @@
  * entry for its slug (see src/lib/blogGraphIndex.ts), so the graph renders
  * instantly — no fetch, no server compute, no spinner.
  *
+ * The per-slug half (PPR + MMR + force layout) is embarrassingly parallel and
+ * used to run on a single core while the other nine sat idle — it was ~74% of
+ * total `npm run build` wall clock. It is now sharded across child processes:
+ * each child rebuilds the corpus index (the O(N²) adjacency is only ~12s and
+ * cannot be cheaply serialised — the adjacency is near-complete), handles every
+ * n-th slug, and writes its own part file. The parent concatenates the parts as
+ * raw strings, so the merge never re-parses the ~36 MB payload.
+ *
  * Resilient by design: any failure writes an empty index and exits 0 so a build
- * never breaks — the client falls back to the /api/blog/graph route.
+ * never breaks — the client falls back to the /api/blog/graph route. A failed
+ * shard also degrades to the single-process path rather than shipping a partial
+ * graph.
  *
  * Usage: tsx scripts/buildRelatedGraph.ts
+ *   GRAPH_WORKERS=1  force the single-process path (debugging)
+ *   GRAPH_WORKERS=N  override the auto-detected shard count
  */
 
 import fs from "fs";
+import os from "os";
 import path from "path";
+import { fork } from "child_process";
 import {
   forceSimulation,
   forceLink,
@@ -178,25 +192,57 @@ function writeIndex(map: Record<string, StoredGraph>): void {
   fs.writeFileSync(OUT_PATH, JSON.stringify(map));
 }
 
-async function main() {
-  console.log("🕸️  Precomputing related-articles ego graphs…");
-  const t0 = Date.now();
-  const idx = await getIndex();
-  const slugs = Array.from(idx.bySlug.keys());
-  console.log(
-    `   corpus index ready: ${slugs.length} posts, adjacency built in ${(
-      (Date.now() - t0) /
-      1000
-    ).toFixed(1)}s`,
-  );
+// ─────────────── Sharding ───────────────
 
-  // Build the row-normalised transition ONCE and reuse it for every seed.
+const partPath = (shard: number): string => `${OUT_PATH}.part${shard}`;
+
+/**
+ * How many shards to run.
+ *
+ * Speedup saturates fast and then REVERSES, because every child pays the same
+ * fixed cost — rebuilding the corpus index, which reads ~150 MB of markdown and
+ * materialises a near-complete adjacency (~0.6 GB resident). Past ~4 shards the
+ * duplicated index work and the memory/IO contention it causes cost more than
+ * the extra parallelism buys. Measured on a 10-core / 16 GB laptop, 3.3k posts:
+ *
+ *   shards:  1      2       3        4       6       8
+ *   wall:    145s   103s    64-88s   75s     97s     92s
+ *
+ * Hence the hard cap of 4 rather than one-per-core. The ~2 GB-per-shard
+ * allowance additionally keeps a smaller CI builder (4 cores / 8 GB) at 3.
+ * Override with GRAPH_WORKERS if a particular machine profiles differently.
+ */
+const MAX_SHARDS = 4;
+
+function shardCount(): number {
+  const override = Number(process.env.GRAPH_WORKERS);
+  if (Number.isFinite(override) && override >= 1) return Math.floor(override);
+  const byCpu = Math.max(1, os.cpus().length - 1);
+  const byMem = Math.max(1, Math.floor(os.totalmem() / (2 * 1024 ** 3)));
+  return Math.min(byCpu, byMem, MAX_SHARDS);
+}
+
+interface ShardResult {
+  map: Record<string, StoredGraph>;
+  done: number;
+  skipped: number;
+}
+
+/**
+ * Compute every `count`-th ego graph starting at `shard`. Builds its own corpus
+ * index — cheap relative to the per-slug work it unlocks (~12s of index for
+ * ~180s/shards of PPR + MMR + layout).
+ */
+async function computeShard(shard: number, count: number): Promise<ShardResult> {
+  const idx = await getIndex();
   const transition = buildPprTransition(idx);
+  const slugs = Array.from(idx.bySlug.keys());
 
   const map: Record<string, StoredGraph> = {};
   let done = 0;
   let skipped = 0;
-  for (const slug of slugs) {
+  for (let i = shard; i < slugs.length; i += count) {
+    const slug = slugs[i];
     const ego = buildEgoGraph(slug, idx, transition);
     if (!ego || ego.nodes.length <= 1) {
       skipped++;
@@ -204,10 +250,131 @@ async function main() {
     }
     map[slug] = toStored(ego);
     done++;
-    if (done % 500 === 0) console.log(`   …${done}/${slugs.length}`);
+  }
+  return { map, done, skipped };
+}
+
+/** Child-process entry: compute one shard and write it as its own JSON file. */
+async function runAsShard(shard: number, count: number): Promise<void> {
+  const { map, done, skipped } = await computeShard(shard, count);
+  fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
+  fs.writeFileSync(partPath(shard), JSON.stringify(map));
+  process.send?.({ shard, done, skipped });
+}
+
+/**
+ * Concatenate the shard files into the final index without re-parsing them.
+ * Each part is a complete JSON object, so stripping the outer braces and joining
+ * with commas rebuilds the whole map as a string — the keys are slugs and the
+ * shards are disjoint, so no dedup is needed.
+ */
+function mergeParts(count: number): number {
+  const bodies: string[] = [];
+  for (let i = 0; i < count; i++) {
+    const raw = fs.readFileSync(partPath(i), "utf8").trim();
+    const body = raw.slice(1, -1); // drop the enclosing { }
+    if (body.length > 0) bodies.push(body);
+  }
+  fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
+  fs.writeFileSync(OUT_PATH, `{${bodies.join(",")}}`);
+  for (let i = 0; i < count; i++) {
+    try {
+      fs.unlinkSync(partPath(i));
+    } catch {
+      /* ignore */
+    }
+  }
+  return bodies.length;
+}
+
+/** Run `count` shards as child processes. `ok` is false if any shard failed. */
+function runShardedChildren(
+  count: number,
+): Promise<{ ok: boolean; done: number; skipped: number }> {
+  return new Promise((resolve) => {
+    let finished = 0;
+    let failed = false;
+    let done = 0;
+    let skipped = 0;
+
+    for (let shard = 0; shard < count; shard++) {
+      const child = fork(__filename, [], {
+        env: { ...process.env, GRAPH_SHARD: `${shard}:${count}` },
+        stdio: ["ignore", "inherit", "inherit", "ipc"],
+      });
+      child.on("message", (msg: { done?: number; skipped?: number }) => {
+        done += msg.done ?? 0;
+        skipped += msg.skipped ?? 0;
+      });
+      child.on("error", () => {
+        failed = true;
+      });
+      child.on("exit", (code) => {
+        if (code !== 0) {
+          failed = true;
+          console.error(`   ⚠️  shard ${shard} exited with code ${code}`);
+        } else {
+          console.log(`   …shard ${shard + 1}/${count} done`);
+        }
+        if (++finished === count) resolve({ ok: !failed, done, skipped });
+      });
+    }
+  });
+}
+
+async function main() {
+  // ── Child mode ──
+  const shardSpec = process.env.GRAPH_SHARD;
+  if (shardSpec) {
+    const [shard, count] = shardSpec.split(":").map(Number);
+    await runAsShard(shard, count);
+    return;
   }
 
-  writeIndex(map);
+  // ── Parent mode ──
+  const t0 = Date.now();
+  const shards = shardCount();
+  console.log(
+    `🕸️  Precomputing related-articles ego graphs (${shards} shard${
+      shards === 1 ? "" : "s"
+    })…`,
+  );
+
+  let done = 0;
+  let skipped = 0;
+  let wroteViaShards = false;
+
+  if (shards > 1) {
+    const res = await runShardedChildren(shards);
+    if (res.ok) {
+      const written = mergeParts(shards);
+      if (written === 0) throw new Error("all shards produced empty output");
+      done = res.done;
+      skipped = res.skipped;
+      wroteViaShards = true;
+    } else {
+      console.error(
+        "   ⚠️  a shard failed — falling back to the single-process path",
+      );
+      for (let i = 0; i < shards; i++) {
+        try {
+          fs.unlinkSync(partPath(i));
+        } catch {
+          /* ignore */
+        }
+      }
+    }
+  }
+
+  // Single-process path: chosen explicitly (GRAPH_WORKERS=1) or as the fallback
+  // after a shard failure.
+  if (!wroteViaShards) {
+    const res = await computeShard(0, 1);
+    writeIndex(res.map);
+    done = res.done;
+    skipped = res.skipped;
+  }
+
   const bytes = fs.statSync(OUT_PATH).size;
   console.log(
     `✅ Wrote ${done} ego graphs (${skipped} skipped) → ${path.relative(
