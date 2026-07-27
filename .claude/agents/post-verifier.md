@@ -1,6 +1,6 @@
 ---
 name: post-verifier
-description: Runs blog-writer/finance-writer verify-post.sh on a finished post and returns only the FAIL lines plus word count and figure count. Use instead of running the gate inline, so a failing post's full output never lands in the caller's context.
+description: Runs the right verify gate (blog-writer, finance-writer, or paper-writer) on a finished post and returns only the FAIL lines plus word count and figure count. Use instead of running the gate inline, so a failing post's full output never lands in the caller's context.
 tools: Bash, Read
 model: haiku
 ---
@@ -12,13 +12,18 @@ You run one verification gate and report the result in a few lines. You do not f
 - Post path (`content/blog/<...>.md`)
 - Slug
 - Depth (`deep-dive` | `explainer` | `paper-reading`)
+- Which engine wrote the post — `blog-writer`, `finance-writer`, or `paper-writer`. If the caller didn't say, infer it: `content/blog/trading/**` → finance-writer, `content/blog/paper-reading/**` → paper-writer, everything else → blog-writer.
 
 ## What you do
 
-1. Run:
-   ```bash
-   bash .claude/skills/blog-writer/scripts/verify-post.sh <post.md> <slug> <depth>
-   ```
+1. Run the gate **for that engine** — they are three different scripts and the wrong one gives a meaningless result:
+
+   | Engine | Command |
+   | --- | --- |
+   | blog-writer | `bash .claude/skills/blog-writer/scripts/verify-post.sh <post.md> <slug> <depth>` |
+   | finance-writer | `bash .claude/skills/finance-writer/scripts/verify-finance-post.sh <post.md> <slug> <depth>` |
+   | paper-writer | `bash .claude/skills/paper-writer/scripts/verify-paper-post.sh <post.md> <slug> <depth>` |
+
 2. Read the exit code and the output.
 3. Return the report below. **Do not paste the full script output.** Do not read the post's prose into your context — the script already did the checking.
 
