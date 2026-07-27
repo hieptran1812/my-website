@@ -26,8 +26,21 @@ This skill is intentionally split. Read each reference at the start of the phase
 | `references/animated-figures.md`                   | Phase C — **only if** Phase B marked any abstraction `animated`                    |
 | `references/voice-cheatsheet.md`                   | Phase D (before writing prose)                                                     |
 | `templates/{deep-dive,explainer,paper-reading}.md` | Phase B (skeleton for the chosen depth)                                            |
+| `references/token-discipline.md`                   | Before dispatching a **series wave** (which stages to delegate, which model tier)  |
 
 Phase E gates run via `scripts/verify-post.sh` — no need to inline bash.
+
+## Delegation map
+
+Three subagents own the bulky phases. Their whole purpose is that scene JSON, render logs, rendered images, and post prose stay in a context that dies instead of one you pay to re-read on every turn. Use them for any post drafted inside a series wave or a session that has already done other work.
+
+| Subagent          | Owns                                  | Model  | Returns                          |
+| ----------------- | ------------------------------------- | ------ | -------------------------------- |
+| `figure-author`   | Phase C (author → validate → render → WebP) | Sonnet | One-screen WebP manifest         |
+| `figure-reviewer` | Phase C2, one instance **per figure** | Sonnet | One verdict line                 |
+| `post-verifier`   | Phase E gate run                      | Haiku  | Pass line, or the FAIL list      |
+
+Phases A/B (outline, abstraction inventory) and D (the prose) stay with you on Opus — that is where the post's quality is decided. See `references/token-discipline.md` for the measurements behind this split.
 
 ## Frontmatter contract
 
@@ -76,6 +89,8 @@ Ask via `AskUserQuestion` only what's missing:
 
 ### Phase C — Diagrams (parallel, headless)
 
+**Delegate this whole phase to the `figure-author` subagent** whenever you are drafting inside a longer-lived session (a series wave, or any session that has already done other work). Hand it the slug and the Phase B abstraction inventory; it returns a one-screen manifest of shipped WebPs. Scene JSON, validator errors, and render logs are the bulk of Phase C's token cost and none of it is worth carrying for the rest of the session. Run the steps below inline only for a one-off post in a fresh session.
+
 1. **Read `references/diagram-authoring.md`.** Diagrams must be **diverse** (vary the figure kind per the plan — see §Diversity), **accurate** (every node/edge/number traces to the prose), and have **no meaningless empty space** (content fills the cropped frame).
 2. For each planned figure: author element JSON → `.cache/blog-writer/<slug>/<slug>-<i>.in.json`.
 3. Validate + normalize each: `node scripts/author-scene.mjs <in.json> <scene.json>`. The validator enforces fonts, palette, containment, no-overlap, density, claim length, caption presence, snap grid, **and anti-dead-space (no blank quadrant/band)**. Read its error messages — they name the rule and offending element. Do not bypass.
@@ -99,7 +114,11 @@ Do NOT use the `mcp__excalidraw__*` MCP tools in this phase — they target the 
 `author-scene.mjs` and `verify-post.sh` check geometry and structure, but they cannot _see_ the rendered pixels — a figure can pass every mechanical rule and still be a tangle of arrows, lopsided, half-empty, or off-topic. **This gate looks at the actual image.** Run it _before_ Phase D so a bad figure is re-authored before any prose is built around it.
 
 1. **Read `references/diagram-authoring.md §Visual self-review`** for how to judge each criterion.
-2. **Open every `public/imgs/blogs/<slug>-*.webp` with `Read`** (it renders WebP) and write a one-line verdict per figure — `PASS`, or `FAIL: <criterion> — <what's wrong>`:
+2. **Dispatch one `figure-reviewer` subagent per figure — always, at every figure count.** Send them in a single message so they run concurrently; each receives one WebP path plus that figure's `_claim` / `_caption` / section anchor, opens the image itself, and returns exactly one verdict line.
+
+   **Do not open the WebPs with `Read` in this session.** A rendered figure costs ~2k tokens on the way in and is then re-billed as cached context on *every* subsequent turn of this session — across a post that is tens of thousands of wasted tokens, and across a series it is the single largest avoidable cost in the pipeline (measured: 134M cache-read tokens spent re-reading images that had already been judged). The subagent looks at the pixels in its own throwaway context and hands you back one line. Same gate, same rubric, ~1% of the cost.
+
+   You collect the verdict lines:
 
    ```
    fig 1 (pipeline): PASS
@@ -117,9 +136,9 @@ Do NOT use the `mcp__excalidraw__*` MCP tools in this phase — they target the 
 
 4. Set-level (review all figures together, once): 7. **Diversity** — no single figure kind is > ~½ the set; no two adjacent figures share a layout skeleton. If they do, recast one (see §Diversity).
 
-**Decision rule:** any `FAIL` → re-author that figure (back to Phase C step 2: fix the `.in.json`, re-validate, re-render, re-convert), then re-review. Never "fix" a bad figure by editing the prose. Advance to Phase D **only when every figure is a clean PASS.**
+**Decision rule:** any `FAIL` → re-author that figure (back to Phase C step 2: fix the `.dsl.json`/`.in.json`, re-validate, re-render, re-convert), then re-review by dispatching a fresh `figure-reviewer` for that figure only. Never "fix" a bad figure by editing the prose. Advance to Phase D **only when every figure is a clean PASS.**
 
-For a large post (≥ 8 figures) you may dispatch parallel reviewer subagents — one per figure, each opening its WebP with `Read` and returning the verdict line — then act on the FAILs. Same gate, only the fan-out differs.
+The reviewer's `FAIL` text names what to change in the scene input, so you can hand it straight to `figure-author` (or fix it inline) without ever loading the image yourself.
 
 **Animated figures** can't be judged by a still `Read` — it shows one frozen frame, not the motion. Review the **source** instead (see `animated-figures.md §Self-review`): does the `0%` state *and* the `100%` state each map to something true in the prose, and is the *change between them* exactly what the caption claims? Does it loop cleanly, and does the `prefers-reduced-motion` branch freeze on a meaningful frame? Their static start/end frames still pass the rubric above (faithful, balanced, no dead space, text renders, squint). For real confidence, run `npm run dev` and watch each loop once.
 
@@ -138,6 +157,8 @@ Run:
 ```bash
 bash .claude/skills/blog-writer/scripts/verify-post.sh <post.md> <slug> <depth>
 ```
+
+In a series wave, dispatch the **`post-verifier`** subagent instead of running this inline — it returns the pass line or the FAIL list and nothing else, keeping a failing post's full gate output out of the orchestrating session.
 
 `<depth>` is one of `deep-dive`, `explainer`, `paper-reading`. The script checks: word-count floor, diagram-count floor (static WebP embeds **+** inline animated figures), abstraction coverage (a WebP **or** a `blog-anim` figure within 30 lines of every prose abstraction), WebP sharpness, webp-only embeds (no `.png`/`.jpg`/`.gif`) + no leftover non-webp render artifacts, forbidden text-diagram substitutes (animated-figure blocks are excluded from the ASCII/Unicode scan), **animated-figure safety** (each `blog-anim` block is contiguous/no-blank-line, declarative with no `<script>`/`on*=`, accessible, and reduced-motion-aware), slug-match on every image, no-H1-in-body, English-only, frontmatter sanity.
 

@@ -129,7 +129,9 @@ If any redrawn figure was tagged `animated` in Phase B, follow blog-writer Phase
 
 ### Phase C3 — Visual self-review (vision gate, mandatory)
 
-`Read` **every** figure — extracted and redrawn — and write a one-line verdict (`PASS` / `FAIL: <what's wrong>`) before any prose is built around it.
+Gate **every** figure — extracted and redrawn — before any prose is built around it. **Dispatch one `figure-reviewer` subagent per figure, at every figure count**, in a single message so they run concurrently; each returns one verdict line (`PASS` / `FAIL: <what's wrong>`). Tell each one whether its figure is *extracted* (it then judges the crop) or *redrawn* (full Phase C2 rubric).
+
+**Do not `Read` the figures in this session** — an image costs ~2k tokens on the way in and is re-billed as cached context on every later turn. See `../blog-writer/references/token-discipline.md`.
 
 - **Extracted originals** — judge the *crop*, not the design (you didn't draw it): tight to the figure, caption excluded, nothing clipped, nothing foreign bleeding in, legible at the shipped size. A FAIL means re-extract with a better box/DPI (back to Phase C1), never edit the prose.
 - **Redrawn diagrams** — the full blog-writer Phase C2 rubric (read `../blog-writer/references/diagram-authoring.md §Visual self-review`): faithful, arrows legible, balanced, no dead space, text renders, squint test; and set-level diversity.
@@ -212,4 +214,4 @@ If two areas fit or none fits cleanly, `AskUserQuestion` with the top 2–3 cand
 
 ## Parallel execution
 
-Figure extraction (C1), redrawn-diagram rendering (C2), and per-figure visual review (C3) all parallelize. Extraction renders each page once and crops N figures from it; redrawn diagrams render as independent puppeteer subprocesses. For a figure-heavy paper (≥ 8 figures), dispatch parallel reviewer subagents in Phase C3 — one per figure, each opening its WebP with `Read` and returning the verdict line.
+Figure extraction (C1), redrawn-diagram rendering (C2), and per-figure visual review (C3) all parallelize. Extraction renders each page once and crops N figures from it; redrawn diagrams render as independent puppeteer subprocesses. Phase C3 always fans out to one `figure-reviewer` subagent per figure — that is both the parallelism and the reason the images never enter this session's context.

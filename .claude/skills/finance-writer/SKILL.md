@@ -124,13 +124,19 @@ Do NOT use the `mcp__excalidraw__*` MCP tools here — they target the live canv
 
 ### Phase C2 — Visual self-review (vision gate, mandatory)
 
-The validator checks geometry; it cannot *see* the pixels. Before writing prose, **open every `public/imgs/blogs/<slug>-*.webp` with `Read`** and write a one-line verdict per figure (`PASS`, or `FAIL: <criterion> — <what's wrong>`). Use the full rubric in `../blog-writer/references/diagram-authoring.md §Visual self-review`. Finance-specific additions to that rubric:
+The validator checks geometry; it cannot *see* the pixels. Before writing prose, **dispatch one `figure-reviewer` subagent per figure — always, at every figure count** — in a single message so they run concurrently. Each gets one WebP path plus that figure's claim/caption/anchor and returns one verdict line (`PASS`, or `FAIL: <criterion> — <what's wrong>`); pass it the finance additions below along with the base rubric.
+
+**Do not `Read` the WebPs in this session.** An image costs ~2k tokens on the way in and is then re-billed as cached context on every later turn — across a 40-post series that is the single largest avoidable cost in the pipeline. See `../blog-writer/references/token-discipline.md`.
+
+The reviewers use the full rubric in `../blog-writer/references/diagram-authoring.md §Visual self-review`. Finance-specific additions to that rubric:
 
 - **Sign convention is unambiguous** — inflows/gains are green and outflows/losses are red *consistently* across every figure; a reader never has to guess whether an arrow means "money in" or "money out".
 - **Axes are labeled with units** — any chart (payoff, yield curve, growth, distribution) labels both axes with what they measure and the unit (\$, %, years), and marks the reference points the prose names (strike, breakeven, par, spot).
 - **Numbers match the worked example** — if a figure illustrates a worked example, its numbers are the *same* numbers the prose computes. No invented figures for visual balance.
 
-Any `FAIL` → re-author that figure (fix `.in.json`, re-validate, re-render, re-convert), then re-review. Never "fix" a bad figure by editing the prose. Advance only when every figure is a clean PASS. For ≥ 8 figures you may dispatch parallel reviewer subagents (one per figure).
+Any `FAIL` → re-author that figure (fix `.in.json`, re-validate, re-render, re-convert), then re-review with a fresh `figure-reviewer` for that figure only. Never "fix" a bad figure by editing the prose. Advance only when every figure is a clean PASS.
+
+In a series wave, also delegate Phase C to `figure-author` (Sonnet) and the Phase E gate to `post-verifier` (Haiku); keep the outline and the prose on Opus. Rationale and measurements: `../blog-writer/references/token-discipline.md`.
 
 ### Phase D — Draft
 
