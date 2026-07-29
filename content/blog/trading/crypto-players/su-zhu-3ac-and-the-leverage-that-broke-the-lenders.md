@@ -382,7 +382,7 @@ Of all the positions on the left column of that first figure, one deserves its o
 
 When you stake ether to help secure the Ethereum network, your ether is locked. A **liquid staking token** solves the inconvenience: you deposit ether with a staking protocol and receive a token — stETH being the largest — that represents your staked position and can be traded freely. You get the staking yield *and* something tradeable.
 
-Now the crucial structural fact. In June 2022, that token could not be redeemed for the underlying ether. Not by anyone, at any price, for any reason. Withdrawals from the Ethereum staking contract simply did not exist yet; the ability to withdraw staked ether arrived with the Shanghai/Capella upgrade in April 2023, roughly ten months later.
+Now the crucial structural fact. In June 2022, that token could not be redeemed for the underlying ether. Not by anyone, at any price, for any reason. Withdrawals from the Ethereum staking contract simply did not exist yet; the ability to withdraw staked ether arrived only with the Shanghai/Capella upgrade in 2023, the better part of a year later.
 
 So stETH had exactly the property we met in Part 1 with the trust shares: **a one-way valve**. You could always create it by staking; you could not redeem it. Its price was therefore set entirely by whoever was willing to buy it on the secondary market — and the arbitrage that would normally pin it to ether, buying the discounted token and redeeming it for the real thing, was structurally impossible.
 
@@ -594,7 +594,7 @@ This is the single most useful calculation in this post, because it works on any
 
 Interest rates decompose into two parts: what you can earn essentially risk-free, and the extra you demand for the chance of not being repaid. That second part is the **credit spread**, and it is not a bonus. It is the market's price for the probability that you lose your money.
 
-Take an advertised yield of 9%, and suppose the risk-free rate is 2% — short-dated government bills were in the low single digits during this period, and the exact figure does not change the shape of the answer. The credit spread is then **7 percentage points**.
+Both numbers here are illustrative. Take an advertised yield of 9%, and suppose the risk-free rate is 2% — short-dated government bills were in the low single digits during this period, and the exact figure does not change the shape of the answer. The credit spread is then **7 percentage points**.
 
 Now invert it. In a fair market, the spread compensates for expected loss, so:
 
@@ -670,6 +670,7 @@ For the market-wide narrative of how the 2022 contagion spread, see [Three Arrow
 - **Singapore court committal proceedings against Su Zhu** — a contempt matter concerning non-cooperation with the liquidators. Note again that this is distinct from the BVI insolvency proceeding and is not a fraud finding.
 - **Monetary Authority of Singapore**, media releases concerning Three Arrows Capital Pte Ltd (the reprimand) and the subsequent prohibition orders against the founders. MAS publishes these at `mas.gov.sg/news`.
 - **US Chapter 11 dockets** for the lenders that failed in 2022–23 — Voyager Digital, Celsius Network, BlockFi and Genesis Global Capital. First-day declarations are the most useful single document in each case, and the dockets are hosted publicly by the claims agents (Stretto for Voyager and Celsius; Kroll for BlockFi and Genesis).
+- **Ethereum protocol upgrade documentation** — for the Shanghai/Capella upgrade that first enabled withdrawals of staked ether, establishing that stETH could not be redeemed for ether during the June 2022 episode described in Part 3.
 - **SEC EDGAR** — for the structure of the Grayscale Bitcoin Trust described in Part 1 (creation by private placement at net asset value, the Rule 144 holding period applying to privately placed shares, and the absence of a redemption program), the trust's own registration statements and periodic reports are authoritative, as are any Schedule 13G filings disclosing large holders.
 
 **Context and reporting**
