@@ -300,7 +300,7 @@ Here is the nastiest version, and it is why sample count and distribution intera
 Everyone reaches for **perplexity** first, because it is cheap, it needs no labels, and it produces one number. Perplexity is the exponentiated average negative log-likelihood the model assigns to a held-out corpus:
 
 $$
-\text{ppl} = \exp\!\left(\frac{1}{N} \sum_{i=1}^{N} \text{NLL}_i\right), \qquad \text{NLL}_i = -\log p(x_i \mid x_{<i})
+\text{ppl} = \exp\!\left(\frac{1}{N} \sum_{i=1}^{N} \text{NLL}_i\right), \qquad \text{NLL}_i = -\log p(x_i \mid x_{\lt i})
 $$
 
 Lower is better; it measures, on average, how surprised the model is by the next token. The word doing all the damage in that sentence is **average**. Perplexity averages the surprise over *every* token in the corpus, and a quantization error that corrupts a *few critical tokens* barely moves an average taken over tens of thousands of them. Let me make that precise, because the arithmetic is the lesson.
@@ -354,7 +354,7 @@ Which tokens are the pivotal ones? The ones a single-token flip destroys: a **di
 Before we get there, one cheap metric sits between perplexity and full task evals and is worth knowing: the **per-token KL divergence** between the fp16 and quantized model's output distributions, on the *same* forced context. Perplexity asks "how surprised is the quantized model by the ground-truth token"; KL asks "how far did the quantized model's *whole distribution* drift from the fp16 model's, token by token." The difference matters because KL exposes the *maximum* per-token drift, not just the average, and it needs no labels:
 
 $$
-\text{KL}_i = \sum_{v} p^{\text{fp16}}(v \mid x_{<i}) \, \log \frac{p^{\text{fp16}}(v \mid x_{<i})}{p^{\text{quant}}(v \mid x_{<i})}
+\text{KL}_i = \sum_{v} p^{\text{fp16}}(v \mid x_{\lt i}) \, \log \frac{p^{\text{fp16}}(v \mid x_{\lt i})}{p^{\text{quant}}(v \mid x_{\lt i})}
 $$
 
 Track the *tail* of the per-token KL — the 99th percentile and the max — not the mean. A quantization that leaves the mean KL near zero but produces a fat tail of high-KL tokens is precisely the "corrupts one token in five hundred" failure, and the KL tail flags it while perplexity smooths it away. This is the same batch-invariance and numerical-drift concern that [the sampling-numerics post](/blog/machine-learning/inference-engineering/sampling-numerics-determinism-and-batch-invariance) treats for a different cause. KL is not a substitute for a task eval — it tells you the distribution moved, not whether the *answer* is now wrong — but it is a cheap, label-free early-warning signal you can compute on any text, and a fat KL tail is a strong hint to go run the expensive task battery.

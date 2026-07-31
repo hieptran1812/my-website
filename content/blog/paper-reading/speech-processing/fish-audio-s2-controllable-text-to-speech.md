@@ -213,16 +213,16 @@ The Fast AR shares one embedding table across codebook layers. RoPE positions en
 The naive factorization treats each pair $(t,k)$ as one long sequence:
 
 $$
-P\!\left(q_{1:T}^{(0:N-1)}\mid x\right)=\prod_{t=1}^{T}\prod_{k=0}^{N-1}P\!\left(q_t^{(k)}\mid x,q_{<t}^{(0:N-1)},q_t^{(<k)}\right).
+P\!\left(q_{1:T}^{(0:N-1)}\mid x\right)=\prod_{t=1}^{T}\prod_{k=0}^{N-1}P\!\left(q_t^{(k)}\mid x,q_{\lt t}^{(0:N-1)},q_t^{(\lt k)}\right).
 $$
 
 Dual-AR groups the factorization into a temporal model and a depth model:
 
 $$
-P\!\left(q_{1:T}^{(0:N-1)}\mid x\right)=\prod_{t=1}^{T}\left[P\!\left(q_t^{(0)}\mid x,q_{<t}^{(0:N-1)}\right)\prod_{k=1}^{N-1}P\!\left(q_t^{(k)}\mid h_t^{slow},q_t^{(<k)}\right)\right].
+P\!\left(q_{1:T}^{(0:N-1)}\mid x\right)=\prod_{t=1}^{T}\left[P\!\left(q_t^{(0)}\mid x,q_{\lt t}^{(0:N-1)}\right)\prod_{k=1}^{N-1}P\!\left(q_t^{(k)}\mid h_t^{slow},q_t^{(\lt k)}\right)\right].
 $$
 
-Here $x$ denotes text, system instructions, and reference-audio context; $T$ is the number of audio frames; $N=10$ is the codebook count; $q_t^{(<k)}$ denotes acoustic tokens already generated at timestep $t$; and $h_t^{slow}$ is the Slow-AR hidden state. The first product is long but semantically meaningful. The second is short and local.
+Here $x$ denotes text, system instructions, and reference-audio context; $T$ is the number of audio frames; $N=10$ is the codebook count; $q_t^{(\lt k)}$ denotes acoustic tokens already generated at timestep $t$; and $h_t^{slow}$ is the Slow-AR hidden state. The first product is long but semantically meaningful. The second is short and local.
 
 #### Worked micro-example
 
@@ -387,8 +387,6 @@ $$
 
 The key design property is not that the two functions are perfect. It is that the policy is trained on examples selected and described by measurements related to the measurements used to optimize it.
 
-![Figure 3 from Fish Audio Team (2026): data filtering and rich transcription before model training](/imgs/blogs/fish-audio-s2-controllable-text-to-speech-fig3.webp)
-
 #### Worked example
 
 Suppose three candidate clips contain the same sentence. Clip A has clean audio but misses `[laugh]`. Clip B includes the laugh at the right position but has background music. Clip C includes the laugh and is clean but changes the speaker’s timbre. A transcript reward favors B and C; a quality reward favors A and C; a similarity reward favors A and B. Reusing multiple evaluators makes C the likely winner rather than allowing any one defect to dominate.
@@ -414,16 +412,16 @@ The reference audio is prepended to the system prompt rather than appended to th
 For the Slow AR, the report defines:
 
 $$
-\mathcal{L}_{slow}=-\sum_{t=0}^{T-1}m_t\lambda_t\log P(x_t\mid x_{<t}).
+\mathcal{L}_{slow}=-\sum_{t=0}^{T-1}m_t\lambda_t\log P(x_t\mid x_{\lt t}).
 $$
 
-Here $x_t$ is the target token, $x_{<t}$ is the previous context, $m_t\in\{0,1\}$ is the reference mask, and $\lambda_t$ is a position weight. Reference prompt and reference-audio positions have $m_t=0$; supervised target positions have $m_t=1$.
+Here $x_t$ is the target token, $x_{\lt t}$ is the previous context, $m_t\in\{0,1\}$ is the reference mask, and $\lambda_t$ is a position weight. Reference prompt and reference-audio positions have $m_t=0$; supervised target positions have $m_t=1$.
 
 The Fast AR loss is:
 
 $$
 \mathcal{L}_{fast}=-\frac{1}{\sum_{k=1}^{N-1}w^{(k)}}
-\sum_{k=0}^{N-1}w^{(k)}\log P\!\left(q_t^{(k)}\mid h_t^{slow},q_t^{(<k)}\right).
+\sum_{k=0}^{N-1}w^{(k)}\log P\!\left(q_t^{(k)}\mid h_t^{slow},q_t^{(\lt k)}\right).
 $$
 
 The weight $w^{(k)}$ controls the importance of codebook $k$. During pre-training, the report uses uniform weights and includes semantic-token prediction as an auxiliary task. During SFT, semantic-token prediction is removed from the Fast AR and later codebooks receive progressively decayed weights, concentrating capacity on perceptually important coarse acoustic layers.
@@ -484,13 +482,13 @@ $$
 The Slow AR policy loss is described as:
 
 $$
-\mathcal{L}_{slow}^{RL}=-\frac{1}{|T|}\sum_{t=1}^{|T|}A_i\log\pi_\theta(x_t\mid x_{<t})+\beta D_{KL}^{(t)}.
+\mathcal{L}_{slow}^{RL}=-\frac{1}{|T|}\sum_{t=1}^{|T|}A_i\log\pi_\theta(x_t\mid x_{\lt t})+\beta D_{KL}^{(t)}.
 $$
 
 The Fast AR follows the same pattern over acoustic tokens:
 
 $$
-\mathcal{L}_{fast}^{RL}=-\frac{1}{C^{(k)}}\sum_{t,k}A_i\log\pi_\theta^{FA}\!\left(q_t^{(k)}\mid q_t^{(<k)}\right)+\beta D_{KL}^{(t,k)}.
+\mathcal{L}_{fast}^{RL}=-\frac{1}{C^{(k)}}\sum_{t,k}A_i\log\pi_\theta^{FA}\!\left(q_t^{(k)}\mid q_t^{(\lt k)}\right)+\beta D_{KL}^{(t,k)}.
 $$
 
 Here $\pi_\theta$ is the trainable policy, $\pi^{FA}_\theta$ is the Fast AR policy, $C^{(k)}$ is the codebook size used for normalization in the paper’s notation, and $\beta$ controls the KL penalty. The total objective is:
@@ -549,6 +547,10 @@ The ASR-based reward uses per-token confidence and stronger penalties for incorr
 The authors also decouple scoring asynchronously and cache generated waveforms. For KL computation, a full reference model need not remain in GPU memory: a LoRA backup is kept in CPU memory and swapped in for gradient-free reference-policy passes. They use rsLoRA with rank 16 and $\alpha=64$, updating only MLP layers.
 
 ![Redrawn diagram: semantic, acoustic, and speaker rewards are combined before policy updates](/imgs/blogs/fish-audio-s2-controllable-text-to-speech-4.webp)
+
+The report shows the combined reward moving under this objective. Mean reward climbs from roughly 2.15 to about 2.42 over some 280 RL steps, with most of the gain arriving in the first hundred, after which the curve drifts slowly and noisily upward.
+
+![Figure 5 from Fish Audio Team (2026): training reward curves during RL-based post-training](/imgs/blogs/fish-audio-s2-controllable-text-to-speech-fig5.webp)
 
 #### Worked example
 

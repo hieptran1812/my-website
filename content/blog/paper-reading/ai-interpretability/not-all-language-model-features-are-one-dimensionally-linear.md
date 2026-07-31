@@ -103,7 +103,7 @@ The two coordinates then have zero mutual information. A mixture is represented 
 
 $$
 p(a,b)=w\,p(a)\,\delta(b)+(1-w)\,p_{\mathrm{rest}}(a,b),
-\qquad 0<w<1.
+\qquad 0\lt w\lt 1.
 $$
 
 The paper writes the second term with the same symbol $p(a,b)$ for the remaining joint distribution; $p_{\mathrm{rest}}$ above makes that overloaded notation explicit. The important operational fact is that one component lives on a lower-dimensional axis and the component's coordinates do not co-occur.
@@ -210,7 +210,7 @@ $$
 \operatorname{DL}(X_{i,l})=\arg\min_{E,D}\sum_{x\in X_{i,l}}\left\|x-D\operatorname{ReLU}(Ex)\right\|_2^2+\lambda\left\|\operatorname{ReLU}(Ex)\right\|_0.
 $$
 
-The first term asks for accurate reconstruction. The second penalizes the number of active dictionary elements. In practice the non-differentiable $L_0$ term is relaxed to an $L_p$ penalty with $0<p\leq 1$. The $m$ columns of $D$ are dictionary elements in the model's $d$-dimensional residual space.
+The first term asks for accurate reconstruction. The second penalizes the number of active dictionary elements. In practice the non-differentiable $L_0$ term is relaxed to an $L_p$ penalty with $0\lt p\leq 1$. The $m$ columns of $D$ are dictionary elements in the model's $d$-dimensional residual space.
 
 The search procedure is:
 

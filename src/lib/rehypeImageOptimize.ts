@@ -53,7 +53,10 @@ export default function rehypeImageOptimize() {
           isFirstImage = false;
           if (node.properties.fetchpriority === undefined)
             node.properties.fetchpriority = "high";
-        } else if (node.properties.loading === undefined) {
+        } else if (entry && node.properties.loading === undefined) {
+          // Only lazy-load when we reserved a box above. A lazy <img> with no
+          // dimensions collapses to 0x0, so it never nears the viewport and the
+          // browser never fetches it — the image is invisible, not just late.
           node.properties.loading = "lazy";
         }
 

@@ -32,9 +32,18 @@ const dims = manifest as Record<string, BlogImageEntry>;
 
 const RASTER_EXT_RE = /\.(png|jpe?g)$/i;
 
-/** Manifest entry for an original image path, or undefined if not converted. */
+/**
+ * Manifest entry for an image path, or undefined if not converted.
+ *
+ * Entries are keyed by the *original* raster path, but newer posts embed the
+ * converted `.webp` directly. Those refs must still resolve, otherwise
+ * rehypeImageOptimize emits `loading="lazy"` with no width/height, the <img>
+ * collapses to 0x0, never intersects the viewport, and never loads at all.
+ */
 export function imageDims(src: string): BlogImageEntry | undefined {
-  return dims[src];
+  const direct = dims[src];
+  if (direct) return direct;
+  return src.endsWith(".webp") ? dims[src.replace(/\.webp$/, ".png")] : undefined;
 }
 
 /**
