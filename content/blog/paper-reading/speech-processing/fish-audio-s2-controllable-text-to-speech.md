@@ -70,30 +70,30 @@ Fish Audio S2 uses a DAC-inspired tokenizer operating at 44.1 kHz. It is modifie
 At each audio frame $t$, the tokenizer emits $N=10$ discrete indices:
 
 - $q_t^{(0)}$ is the semantic codebook token.
-- $q_t^{(1)},ldots,q_t^{(9)}$ encode progressively finer acoustic detail.
+- $q_t^{(1)},\ldots,q_t^{(9)}$ encode progressively finer acoustic detail.
 
 The decoder receives all ten tokens and reconstructs waveform samples. The paper replaces the original DAC decoder with an EVA-GAN-style generator for parameter efficiency and synthesis quality.
 
 #### The math
 
-Let $z_t$ be the continuous encoder representation at frame $t$, with $z_tinmathbb{R}^{d}$. Let $e_k(c)$ be the embedding vector for codebook $k$ and code index $c$. RVQ produces a sequence of residuals. At the first level:
+Let $z_t$ be the continuous encoder representation at frame $t$, with $z_t\in\mathbb{R}^{d}$. Let $e_k(c)$ be the embedding vector for codebook $k$ and code index $c$. RVQ produces a sequence of residuals. At the first level:
 
 $$
-q_t^{(0)}=argmin_{cin{1,ldots,C_0}}left|z_t-e_0(c)ight|_2^2,qquad
-r_t^{(1)}=z_t-e_0!left(q_t^{(0)}ight).
+q_t^{(0)}=\arg\min_{c\in\{1,\ldots,C_0\}}\left\|z_t-e_0(c)\right\|_2^2,\qquad
+r_t^{(1)}=z_t-e_0\!\left(q_t^{(0)}\right).
 $$
 
 Here $C_0$ is the size of the first codebook, $q_t^{(0)}$ is its selected index, and $r_t^{(1)}$ is the residual passed to the next codebook. For codebook $k$:
 
 $$
-q_t^{(k)}=argmin_{cin{1,ldots,C_k}}left|r_t^{(k)}-e_k(c)ight|_2^2,qquad
-r_t^{(k+1)}=r_t^{(k)}-e_k!left(q_t^{(k)}ight).
+q_t^{(k)}=\arg\min_{c\in\{1,\ldots,C_k\}}\left\|r_t^{(k)}-e_k(c)\right\|_2^2,\qquad
+r_t^{(k+1)}=r_t^{(k)}-e_k\!\left(q_t^{(k)}\right).
 $$
 
 The reconstructed latent is the sum of the selected embeddings:
 
 $$
-\hat z_t=sum_{k=0}^{N-1}e_k!left(q_t^{(k)}ight).
+\hat z_t=\sum_{k=0}^{N-1}e_k\!\left(q_t^{(k)}\right).
 $$
 
 The exact production tokenizer contains adversarial training and three discriminators: multi-period, multi-resolution, and multi-scale STFT discriminators. These encourage periodic structure, spectral consistency, high-frequency detail, and phase coherence.
@@ -153,23 +153,23 @@ Standard convolutions are replaced with masked causal convolutions. Transformer 
 
 #### The math
 
-Let $h_t^{(0)}$ be the quantized representation associated with the first codebook, and let $s_t$ be the frozen target activation from w2v-BERT at the same or aligned frame. Let $g_phi$ be the auxiliary semantic head. A simple semantic distillation objective is:
+Let $h_t^{(0)}$ be the quantized representation associated with the first codebook, and let $s_t$ be the frozen target activation from w2v-BERT at the same or aligned frame. Let $g_\phi$ be the auxiliary semantic head. A simple semantic distillation objective is:
 
 $$
-\mathcal{L}_{sem}=rac{1}{T}sum_{t=1}^{T}left|g_phi!left(h_t^{(0)}ight)-s_tight|_2^2.
+\mathcal{L}_{\mathrm{sem}}=\frac{1}{T}\sum_{t=1}^{T}\left\|g_\phi\!\left(h_t^{(0)}\right)-s_t\right\|_2^2.
 $$
 
 The actual tokenizer also uses a composite GAN reconstruction objective. The conceptual total can be written as:
 
 $$
-\mathcal{L}_{tokenizer}=\mathcal{L}_{reconstruction}+\lambda_{GAN}\mathcal{L}_{GAN}+\lambda_{sem}\mathcal{L}_{sem},
+\mathcal{L}_{\mathrm{tokenizer}}=\mathcal{L}_{\mathrm{reconstruction}}+\lambda_{\mathrm{GAN}}\mathcal{L}_{\mathrm{GAN}}+\lambda_{\mathrm{sem}}\mathcal{L}_{\mathrm{sem}},
 $$
 
 where the reconstruction term preserves the waveform, the adversarial term improves perceptual realism, and the semantic term makes the first codebook useful to the downstream language model. The paper does not provide every scalar coefficient in the technical report, so we should treat this decomposition as an explanatory abstraction rather than a reproduction recipe.
 
 #### Worked example
 
-Consider two candidate first-codebook representations for the same phoneme. Candidate A reconstructs a clean waveform but maps to a vector far from w2v-BERT’s target. Candidate B has a tiny high-frequency reconstruction error but its representation is close to the target activation. With $lambda_{sem}>0$, training can prefer B because the downstream Slow AR can more reliably associate it with the phonetic content.
+Consider two candidate first-codebook representations for the same phoneme. Candidate A reconstructs a clean waveform but maps to a vector far from w2v-BERT’s target. Candidate B has a tiny high-frequency reconstruction error but its representation is close to the target activation. With $\lambda_{\mathrm{sem}}>0$, training can prefer B because the downstream Slow AR can more reliably associate it with the phonetic content.
 
 ```python
 import torch
@@ -213,14 +213,13 @@ The Fast AR shares one embedding table across codebook layers. RoPE positions en
 The naive factorization treats each pair $(t,k)$ as one long sequence:
 
 $$
-P(q_{1:T}^{(0:N-1)}mid x)=prod_{t=1}^{T}prod_{k=0}^{N-1}P!left(q_t^{(k)}mid x,q_{<t}^{(0:N-1)},q_t^{(<k)}ight).
+P\!\left(q_{1:T}^{(0:N-1)}\mid x\right)=\prod_{t=1}^{T}\prod_{k=0}^{N-1}P\!\left(q_t^{(k)}\mid x,q_{<t}^{(0:N-1)},q_t^{(<k)}\right).
 $$
 
 Dual-AR groups the factorization into a temporal model and a depth model:
 
 $$
-P(q_{1:T}^{(0:N-1)}mid x)=prod_{t=1}^{T}P\!left(q_t^{(0)}mid x,q_{<t}^{(0:N-1)}ight)
-\prod_{k=1}^{N-1}P\!left(q_t^{(k)}mid h_t^{slow},q_t^{(<k)}ight).
+P\!\left(q_{1:T}^{(0:N-1)}\mid x\right)=\prod_{t=1}^{T}\left[P\!\left(q_t^{(0)}\mid x,q_{<t}^{(0:N-1)}\right)\prod_{k=1}^{N-1}P\!\left(q_t^{(k)}\mid h_t^{slow},q_t^{(<k)}\right)\right].
 $$
 
 Here $x$ denotes text, system instructions, and reference-audio context; $T$ is the number of audio frames; $N=10$ is the codebook count; $q_t^{(<k)}$ denotes acoustic tokens already generated at timestep $t$; and $h_t^{slow}$ is the Slow-AR hidden state. The first product is long but semantically meaningful. The second is short and local.
@@ -270,7 +269,7 @@ After timestep $t$ is complete, the Slow AR must decide what comes next. If it r
 
 #### Intuition: a production report with two summaries
 
-Each frame produces a semantic summary and a detailed acoustic report. Before the next decision, we add all reports into one vector. The semantic token is represented twice: once through the language model’s normal token embedding and once through the codebook embedding. They are related but independently learned views.
+Each frame produces a semantic summary and a detailed acoustic report. Before the next decision, we add all reports into one vector. The semantic token is represented twice: once through the language model’s normal token embedding and once through the dedicated codebook embedding. They are related but independently learned views.
 
 #### Mechanism
 
@@ -283,10 +282,10 @@ Every codebook index $q_t^{(k)}$ passes through a dedicated embedding table $E^{
 The paper defines:
 
 $$
-x_{t+1}=e_t^{LM}+sum_{k=0}^{N-1}E^{(k)}\!left[q_t^{(k)}\right],qquad N=10.
+x_{t+1}=e_t^{LM}+\sum_{k=0}^{N-1}E^{(k)}\!\left[q_t^{(k)}\right],\qquad N=10.
 $$
 
-Here $e_t^{LM}inmathbb{R}^{d_{slow}}$ is the ordinary Slow-AR token embedding, and each $E^{(k)}$ maps a discrete codebook index to $mathbb{R}^{d_{slow}}$. The sum is therefore well-defined in the same hidden space. The fact that $q_t^{(0)}$ appears in both $e_t^{LM}$ and $E^{(0)}[q_t^{(0)}]$ is intentional: one embedding is optimized as a language token representation, the other as a codec representation.
+Here $e_t^{LM}\in\mathbb{R}^{d_{slow}}$ is the ordinary Slow-AR token embedding, and each $E^{(k)}$ maps a discrete codebook index to $\mathbb{R}^{d_{slow}}$. The sum is therefore well-defined in the same hidden space. The fact that $q_t^{(0)}$ appears in both $e_t^{LM}$ and $E^{(0)}[q_t^{(0)}]$ is intentional: one embedding is optimized as a language token representation, the other as a codec representation.
 
 #### Worked example
 
@@ -380,10 +379,10 @@ $$
 \mathcal{D}_{clean}=\left\{(a,C(a))\;\middle|\;Q(a)\geq\tau_Q\right\}.
 $$
 
-Here $	au_Q$ is a filtering threshold. For a generated waveform $\tilde a$, the same functions produce reward components:
+Here $\tau_Q$ is a filtering threshold. For a generated waveform $\tilde a$, the same functions produce reward components:
 
 $$
-R_{Pref}(\tilde a)=Q(\tilde a),qquad R_{STT}(\tilde a)=\operatorname{match}\big(C(\tilde a),\text{requested text/tags}\big).
+R_{\mathrm{Pref}}(\tilde a)=Q(\tilde a),\qquad R_{\mathrm{STT}}(\tilde a)=\operatorname{match}\!\left(C(\tilde a),\text{requested text/tags}\right).
 $$
 
 The key design property is not that the two functions are perfect. It is that the policy is trained on examples selected and described by measurements related to the measurements used to optimize it.
@@ -418,13 +417,13 @@ $$
 \mathcal{L}_{slow}=-\sum_{t=0}^{T-1}m_t\lambda_t\log P(x_t\mid x_{<t}).
 $$
 
-Here $x_t$ is the target token, $x_{<t}$ is the previous context, $m_tin\{0,1\}$ is the reference mask, and $lambda_t$ is a position weight. Reference prompt and reference-audio positions have $m_t=0$; supervised target positions have $m_t=1$.
+Here $x_t$ is the target token, $x_{<t}$ is the previous context, $m_t\in\{0,1\}$ is the reference mask, and $\lambda_t$ is a position weight. Reference prompt and reference-audio positions have $m_t=0$; supervised target positions have $m_t=1$.
 
 The Fast AR loss is:
 
 $$
 \mathcal{L}_{fast}=-\frac{1}{\sum_{k=1}^{N-1}w^{(k)}}
-\sum_{k=0}^{N-1}w^{(k)}log P\left(q_t^{(k)}\mid h_t^{slow},q_t^{(<k)}\right).
+\sum_{k=0}^{N-1}w^{(k)}\log P\!\left(q_t^{(k)}\mid h_t^{slow},q_t^{(<k)}\right).
 $$
 
 The weight $w^{(k)}$ controls the importance of codebook $k$. During pre-training, the report uses uniform weights and includes semantic-token prediction as an auxiliary task. During SFT, semantic-token prediction is removed from the Fast AR and later codebooks receive progressively decayed weights, concentrating capacity on perceptually important coarse acoustic layers.
@@ -476,7 +475,7 @@ The report follows Dr.GRPO in removing division by intra-group standard deviatio
 
 #### The math
 
-For candidates $y_1,ldots,y_G$ with rewards $R_1,ldots,R_G$:
+For candidates $y_1,\ldots,y_G$ with rewards $R_1,\ldots,R_G$:
 
 $$
 \bar R=\frac{1}{G}\sum_{j=1}^{G}R_j,qquad A_i=R_i-\bar R.
@@ -491,10 +490,10 @@ $$
 The Fast AR follows the same pattern over acoustic tokens:
 
 $$
-\mathcal{L}_{fast}^{RL}=-\frac{1}{C^{(k)}}\sum_{t,k}A_i\log\pi_\theta^{FA}\left(q_t^{(k)}\mid q_t^{(<k)}ight)+\beta D_{KL}^{(t,k)}.
+\mathcal{L}_{fast}^{RL}=-\frac{1}{C^{(k)}}\sum_{t,k}A_i\log\pi_\theta^{FA}\!\left(q_t^{(k)}\mid q_t^{(<k)}\right)+\beta D_{KL}^{(t,k)}.
 $$
 
-Here $pi_\theta$ is the trainable policy, $pi^{FA}_\theta$ is the Fast AR policy, $C^{(k)}$ is the codebook size used for normalization in the paper’s notation, and $eta$ controls the KL penalty. The total objective is:
+Here $\pi_\theta$ is the trainable policy, $\pi^{FA}_\theta$ is the Fast AR policy, $C^{(k)}$ is the codebook size used for normalization in the paper’s notation, and $\beta$ controls the KL penalty. The total objective is:
 
 $$
 \mathcal{L}_{RL}=\mathcal{L}_{slow}^{RL}+\gamma\mathcal{L}_{fast}^{RL}.
@@ -545,9 +544,9 @@ $$
 R_{total}=\lambda_{STT}R_{STT}+\lambda_{Pref}R_{Pref}+\lambda_{SIM}R_{SIM}.
 $$
 
-The ASR-based reward uses per-token confidence and stronger penalties for incorrect speaker IDs or missed vocal instructions. The preference reward comes from the speech-quality model. The similarity reward compares voiceprint features using cosine similarity. The weights $lambda_{STT}$, $lambda_{Pref}$, and $lambda_{SIM}$ define the operating point.
+The ASR-based reward uses per-token confidence and stronger penalties for incorrect speaker IDs or missed vocal instructions. The preference reward comes from the speech-quality model. The similarity reward compares voiceprint features using cosine similarity. The weights $\lambda_{STT}$, $\lambda_{Pref}$, and $\lambda_{SIM}$ define the operating point.
 
-The authors also decouple scoring asynchronously and cache generated waveforms. For KL computation, a full reference model need not remain in GPU memory: a LoRA backup is kept in CPU memory and swapped in for gradient-free reference-policy passes. They use rsLoRA with rank 16 and $alpha=64$, updating only MLP layers.
+The authors also decouple scoring asynchronously and cache generated waveforms. For KL computation, a full reference model need not remain in GPU memory: a LoRA backup is kept in CPU memory and swapped in for gradient-free reference-policy passes. They use rsLoRA with rank 16 and $\alpha=64$, updating only MLP layers.
 
 ![Redrawn diagram: semantic, acoustic, and speaker rewards are combined before policy updates](/imgs/blogs/fish-audio-s2-controllable-text-to-speech-4.webp)
 

@@ -54,7 +54,7 @@ This connects directly to [the origins of linear representations in language mod
 
 The paper makes three main contributions.
 
-1. It generalizes the definition of a language-model feature from a scalar-valued function to a function $f$ mapping inputs into $mathbb{R}^{d_f}$. It then defines reducibility using statistical structure, rather than relying on whether a human thinks a plot looks curved.
+1. It generalizes the definition of a language-model feature from a scalar-valued function to a function $f$ mapping inputs into $\mathbb{R}^{d_f}$. It then defines reducibility using statistical structure, rather than relying on whether a human thinks a plot looks curved.
 2. It proposes a multi-dimensional superposition hypothesis. Hidden states are sums of sparse, low-dimensional, irreducible features whose subspaces are approximately orthogonal.
 3. It builds a scalable discovery procedure around sparse autoencoders, finds circular clusters in GPT-2 and Mistral 7B, and then uses activation interventions to show that Mistral 7B and Llama 3 8B use circles for calendar computation.
 
@@ -76,7 +76,7 @@ An irreducible feature is the harder case. No rotation of the suitcase produces 
 
 ### Mechanism
 
-The paper defines a feature $f$ as a function from some subset of the input space into $mathbb{R}^{d_f}$. For the practical experiments, $d_f=2$ is the important case. The inputs induce a probability distribution over the points $f(t)$.
+The paper defines a feature $f$ as a function from some subset of the input space into $\mathbb{R}^{d_f}$. For the practical experiments, $d_f=2$ is the important case. The inputs induce a probability distribution over the points $f(t)$.
 
 The authors allow an orthonormal rotation $R$ and a translation $c$. After transforming the feature, they split its coordinates into two blocks $a$ and $b$:
 
@@ -102,10 +102,11 @@ $$
 The two coordinates then have zero mutual information. A mixture is represented schematically as:
 
 $$
-p(a,b)=w p(a)\delta(b)+(1-w)p(a,b), \qquad 0<w<1.
+p(a,b)=w\,p(a)\,\delta(b)+(1-w)\,p_{\mathrm{rest}}(a,b),
+\qquad 0<w<1.
 $$
 
-The notation is slightly overloaded in the paper's compact expression: the second term denotes the remaining joint distribution. The important operational fact is that one component lives near a lower-dimensional axis and the component's coordinates do not co-occur.
+The paper writes the second term with the same symbol $p(a,b)$ for the remaining joint distribution; $p_{\mathrm{rest}}$ above makes that overloaded notation explicit. The important operational fact is that one component lives on a lower-dimensional axis and the component's coordinates do not co-occur.
 
 The definition is exact but data are finite and noisy. So the authors introduce softened indices. The separability index is the minimum mutual information over all possible rotations and splits:
 
@@ -115,13 +116,15 @@ $$
 
 Here $I(a;b)$ is mutual information in bits between the transformed coordinate blocks. A small $S(f)$ means that some rotation makes the parts nearly independent. A large $S(f)$ means that every tested rotation retains dependence.
 
-The $epsilon$-mixture index searches for a hyperplane whose dot products are close to zero for as many active points as possible:
+The $\epsilon$-mixture index searches for a hyperplane whose normalized dot products are close to zero for as many active points as possible:
 
 $$
-M_\epsilon(f)=\max_{v,c}\Pr_{t\in T}\left[\left|v\cdot f(t)+c\right|<\epsilon\right].
+M_\epsilon(f)=\max_{\substack{v\in\mathbb{R}^{d_f},\\c\in\mathbb{R}}}
+\Pr_{t\in T}\!\left[\left|v\cdot f(t)+c\right|
+<\epsilon\sqrt{\mathbb{E}_{t\in T}\!\left[(v\cdot f(t)+c)^2\right]}\right].
 $$
 
-The vector $v\in\mathbb{R}^{d_f}$ chooses a direction, $c\in\mathbb{R}$ translates the band, and $epsilon$ controls its thickness. The paper normalizes the comparison by the second moment of the projection. A large $M_\epsilon$ means that many points can be squeezed into a near-zero band, which is evidence for a mixture-like lower-dimensional component. A small value is evidence against that explanation.
+The vector $v\in\mathbb{R}^{d_f}$ chooses a direction, $c\in\mathbb{R}$ translates the band, and $\epsilon$ controls its relative thickness. The square-root second moment in the inequality is the paper's normalization. A large $M_\epsilon$ means that many points can be squeezed into a near-zero band, which is evidence for a mixture-like lower-dimensional component. A small value is evidence against that explanation.
 
 Notice the asymmetry: low $S$ and high $M_\epsilon$ suggest reducibility; high $S$ and low $M_\epsilon$ suggest irreducibility. Neither index alone proves a causal representation.
 
@@ -131,7 +134,7 @@ Figure 2 is useful because it shows the tests as optimization problems rather th
 
 ### Worked micro-example
 
-Consider two candidate point clouds in $mathbb{R}^2$.
+Consider two candidate point clouds in $\mathbb{R}^2$.
 
 For the first, sample $a$ and $b$ independently from ${-1,+1}$ and form points $(a,b)$. The four corners are equally likely. The coordinates are independent, so $I(a;b)=0$ in the original rotation. The cloud is separable even though it occupies two dimensions.
 
@@ -159,7 +162,7 @@ The distinction matters for interpretation. If we split the apartment into indiv
 
 ### Mechanism and math
 
-The paper defines two matrices $A_1\in\mathbb{R}^{d\times d_1}$ and $A_2\in\mathbb{R}^{d\times d_2}$ as $\\delta$-orthogonal when every unit vector in the column space of $A_1$ has inner product at most $\\delta$ in magnitude with every unit vector in the column space of $A_2$.
+The paper defines two matrices $A_1\in\mathbb{R}^{d\times d_1}$ and $A_2\in\mathbb{R}^{d\times d_2}$ as $\delta$-orthogonal when every unit vector in the column space of $A_1$ has inner product at most $\delta$ in magnitude with every unit vector in the column space of $A_2$.
 
 The updated hypothesis writes the hidden state as:
 
@@ -167,7 +170,7 @@ $$
 x_{i,l}(t)=\sum_j V_j f_j(t),
 $$
 
-where $x_{i,l}(t)\in\mathbb{R}^d$ is the hidden state at token position $i$ and layer $l$, $f_j(t)\in\mathbb{R}^{d_{f_j}}$ is a sparse low-dimensional feature, and $V_j\in\mathbb{R}^{d\times d_{f_j}}$ maps that feature's internal coordinates into the residual stream. The matrices $V_j$ are pairwise $\\delta$-orthogonal, and each feature is zero outside the inputs on which it is active.
+where $x_{i,l}(t)\in\mathbb{R}^d$ is the hidden state at token position $i$ and layer $l$, $f_j(t)\in\mathbb{R}^{d_{f_j}}$ is a sparse low-dimensional feature, and $V_j\in\mathbb{R}^{d\times d_{f_j}}$ maps that feature's internal coordinates into the residual stream. The matrices $V_j$ are pairwise $\delta$-orthogonal, and each feature is zero outside the inputs on which it is active.
 
 The scalar hypothesis is recovered when every $d_{f_j}=1$ and $V_j$ is just a vector $v_j$. The new hypothesis is therefore a strict extension: it includes lines but also planes, circles, and other low-dimensional manifolds.
 
@@ -260,7 +263,7 @@ Let's do some day of the week math. Two days from Monday is
 Let's do some calendar math. Four months from January is
 ```
 
-For weekdays, $alpha$ is the starting day, $eta$ is the duration, and $gamma$ is the target day. The authors enumerate seven starting days and seven durations, for 49 prompts. For months they enumerate 12 starting months and 12 durations, for 144 prompts. The underlying operation is:
+For weekdays, $\alpha$ is the starting day, $\beta$ is the duration, and $\gamma$ is the target day. The authors enumerate seven starting days and seven durations, for 49 prompts. For months they enumerate 12 starting months and 12 durations, for 144 prompts. The underlying operation is:
 
 $$
 \alpha+\beta\equiv\gamma\pmod m,
@@ -274,7 +277,7 @@ The models also perform poorly on plain prompts such as “5 + 3 (mod 7)”. The
 
 ### Evidence for a task-specific circle
 
-The authors collect hidden states at the $alpha$ token across prompts and inspect PCA projections at different layers. The top two varying components form circular arrangements in Mistral and Llama. Figure 4 in the paper shows examples: the labels are not arranged in a random semantic cloud but around the periodic order of the calendar.
+The authors collect hidden states at the $\alpha$ token across prompts and inspect PCA projections at different layers. The top two varying components form circular arrangements in Mistral and Llama. Figure 4 in the paper shows examples: the labels are not arranged in a random semantic cloud but around the periodic order of the calendar.
 
 The subtle point is that PCA is being used as a visualization and probe substrate, not as proof. PCA finds directions of maximum variance. If a circle is embedded in a larger cone, the first component can represent intensity or radius, while the second and third reveal angular structure. The paper therefore checks many components and layers, and later uses a causal intervention to test whether the angular subspace is sufficient.
 
@@ -315,16 +318,16 @@ The matrix $W$ compresses the model state from $d$ dimensions to $k$ PCA coordin
 
 ### Step 2: intervene and average-ablate
 
-Suppose the original prompt has $alpha_j$ but we want to intervene with $alpha_{j'}$. The authors do not copy the whole clean hidden state from a second run. They only use the clean label $alpha_{j'}$ to construct the target point on the circle.
+Suppose the original prompt has $\alpha_j$ but we want to intervene with $\alpha_{j'}$. The authors do not copy the whole clean hidden state from a second run. They only use the clean label $\alpha_{j'}$ to construct the target point on the circle.
 
-Let $\bar{x}_{i,l}$ be the average hidden state over prompts and $P^+$ be the pseudoinverse of $P$. The intervention is:
+Let $\bar{x}_{i,l}$ be the average hidden state over prompts and $P^+$ be the pseudoinverse of $P$. To keep dimensions explicit, the intervention is:
 
 $$
 x^{*j}_{i,l}=\bar{x}_{i,l}+W_{i,l}^{\mathsf T}P^+
-\left(\operatorname{circle}(\alpha_{j'})-\bar{x}_{i,l}\right).
+\left(\operatorname{circle}(\alpha_{j'})-P W_{i,l}\bar{x}_{i,l}\right).
 $$
 
-The first term gives a neutral background. The transpose of $W$ lifts the intervention back into the model's $d$-dimensional space. The pseudoinverse maps the desired two-dimensional circle point into the probe coordinates. Everything outside the selected circular subspace is replaced by the average, which prevents a backup circuit in the original activation from overriding the manipulation.
+The first term gives a neutral background. The projection $P W_{i,l}\bar{x}_{i,l}$ puts that background in the probe's two-dimensional coordinate system; this subtraction is required for the dimensions to match. The transpose of $W$ lifts the intervention back into the model's $d$-dimensional space, and the pseudoinverse maps the desired circle point into probe coordinates. The paper prints this step in a compact form that omits this intermediate projection; the expanded form above is the dimensionally consistent reading. Everything outside the selected circular subspace is replaced by the average, which prevents a backup circuit in the original activation from overriding the manipulation.
 
 ![Figure 5 from Engels et al. (2025): circular probe training and intervention](/imgs/blogs/not-all-language-model-features-are-one-dimensionally-linear-fig5.webp)
 
@@ -334,7 +337,7 @@ The original Figure 5 makes the two stages explicit. First, the probe learns the
 
 ### Worked micro-example
 
-For a seven-day task, assign Monday $alpha=0$, Tuesday $alpha=1$, and so on. Monday maps to $(1,0)$. Wednesday maps to:
+For a seven-day task, assign Monday $\alpha=0$, Tuesday $\alpha=1$, and so on. Monday maps to $(1,0)$. Wednesday maps to:
 
 $$
 \operatorname{circle}(2)=\left(\cos(4\pi/7),\sin(4\pi/7)\right).
@@ -346,7 +349,7 @@ The important counterfactual is not “replace Monday's complete hidden state by
 
 ### Baselines and metric
 
-The authors compare circular patching with three baselines: patch the whole layer from a clean run, patch the first five PCA dimensions from a clean run, and average-ablate the entire layer. They measure average logit difference between the original correct token $gamma_j$ and the target token $gamma_{j'}$ across all pairwise interventions. There are $49\times6$ weekday comparisons and $144\times11$ month comparisons.
+The authors compare circular patching with three baselines: patch the whole layer from a clean run, patch the first five PCA dimensions from a clean run, and average-ablate the entire layer. They measure average logit difference between the original correct token $\gamma_j$ and the target token $\gamma_{j'}$ across all pairwise interventions. There are $49\times6$ weekday comparisons and $144\times11$ month comparisons.
 
 The circular intervention often approaches the effect of patching the entire layer and outperforms patching the top five PCA components. That is a strong result for a two-dimensional explanation: a narrow subspace reproduces much of the causal effect of a much larger object.
 
@@ -354,7 +357,7 @@ The circular intervention often approaches the effect of patching the entire lay
 
 The intervention works when the downstream circuit reads the angle in a reasonably stable coordinate system. It fails if the representation is distributed across many unrelated dimensions, if the probe is overfit to a prompt distribution, or if backup circuits reconstruct the answer from information left untouched. The average ablation reduces the last problem but also changes the model state substantially, so the intervention is not a perfectly natural counterfactual.
 
-The authors find that interventions are strongest in early layers and drop after layers 15–17, where other experiments suggest $alpha$ has been copied to the final token. This is a useful reminder that a feature can be causally important at one location and irrelevant at another even when its label remains decodable.
+The authors find that interventions are strongest in early layers and drop after layers 15–17, where other experiments suggest $\alpha$ has been copied to the final token. This is a useful reminder that a feature can be causally important at one location and irrelevant at another even when its label remains decodable.
 
 ## Off-distribution intervention: is the angle really the variable?
 
@@ -374,7 +377,7 @@ $$
 x^{*j}_{i,l}=\bar{x}_{i,l}+W_{i,l}^{\mathsf T}P^+
 \left(
 \begin{bmatrix}r\cos\theta\\r\sin\theta\end{bmatrix}
--\bar{x}_{i,l}
+-P W_{i,l}\bar{x}_{i,l}
 \right).
 $$
 
@@ -457,7 +460,7 @@ For the causal experiments, Figure 6 compares five interventions: no-op, patch t
 
 ![Figure 6 from Engels et al. (2025): intervention effects across layers](/imgs/blogs/not-all-language-model-features-are-one-dimensionally-linear-fig6.webp)
 
-What is load-bearing in this setup? The task prompts use familiar calendar language, the models have enough capability to solve most month problems, and the analysis chooses token positions and layers where $alpha$ is linearly decodable. The results may not transfer to arbitrary abstract modular arithmetic, to models with different tokenization, or to features whose manifold dimension is higher than two. The authors train Mistral SAEs only on layers 8, 16, and 24, while GPT-2 uses available SAEs across layers, so the discovery coverage is not uniform.
+What is load-bearing in this setup? The task prompts use familiar calendar language, the models have enough capability to solve most month problems, and the analysis chooses token positions and layers where $\alpha$ is linearly decodable. The results may not transfer to arbitrary abstract modular arithmetic, to models with different tokenization, or to features whose manifold dimension is higher than two. The authors train Mistral SAEs only on layers 8, 16, and 24, while GPT-2 uses available SAEs across layers, so the discovery coverage is not uniform.
 
 The rankings also depend on examining approximately 1,000 clusters and selecting interpretable examples. The paper reports the ranking statistic, but the positive story naturally emphasizes the circles that humans can name. A complete automated evaluation would need a way to assess all candidate manifolds, including those with no obvious English label.
 
@@ -477,7 +480,7 @@ Finally, the SAE-plane transfer result is a subtle contribution. A feature that 
 
 The definition of irreducibility is statistical rather than intervention-based. A distribution can be irreducible under the proposed tests and still be irrelevant to the model's computation. Conversely, a computational variable may look reducible because the model uses only part of it on the observed prompt distribution.
 
-The $epsilon$-mixture index is a heuristic softened definition. Its value depends on the band width, normalization, optimizer, and sampling distribution. The separability index depends on how mutual information is estimated and how rotations are searched. The paper is transparent about these limitations, but the numerical scores should not be treated as universal units of feature dimensionality.
+The $\epsilon$-mixture index is a heuristic softened definition. Its value depends on the band width, normalization, optimizer, and sampling distribution. The separability index depends on how mutual information is estimated and how rotations are searched. The paper is transparent about these limitations, but the numerical scores should not be treated as universal units of feature dimensionality.
 
 There is also a dimensionality bottleneck. The main empirical test examines two-dimensional PCA projections. A four-dimensional irreducible feature could project into many misleading two-dimensional slices: some would look separable, some would look circular, and the average could hide the structure. The paper's claim is strongest for the discovered two-dimensional circles, not for all multi-dimensional representations.
 
