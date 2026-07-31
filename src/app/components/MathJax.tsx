@@ -54,7 +54,7 @@ export default function MathJax({
 
         // Process display math ($$...$$)
         processedContent = processedContent.replace(
-          /\$\$([^$]*(?:\$(?!\$)[^$]*)*)\$\$/g,
+          /\$\$([\s\S]*?)\$\$/g,
           (match, latex) => {
             hasChanges = true;
             try {
