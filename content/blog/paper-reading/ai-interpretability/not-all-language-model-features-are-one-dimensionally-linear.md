@@ -7,7 +7,7 @@ category: "paper-reading"
 subcategory: "AI Interpretability"
 author: "Hiep Tran"
 featured: true
-readTime: 31
+readTime: 32
 paper:
   title: "Not All Language Model Features Are One-Dimensionally Linear"
   authors: "Joshua Engels et al."
