@@ -124,11 +124,15 @@ Do NOT use the `mcp__excalidraw__*` MCP tools here — they target the live canv
 
 ### Phase C2 — Visual self-review (vision gate, mandatory)
 
-The validator checks geometry; it cannot *see* the pixels. Before writing prose, **dispatch one `figure-reviewer` subagent per figure — always, at every figure count** — in a single message so they run concurrently. Each gets one WebP path plus that figure's claim/caption/anchor and returns one verdict line (`PASS`, or `FAIL: <criterion> — <what's wrong>`); pass it the finance additions below along with the base rubric.
+The validator checks geometry; it cannot *see* the pixels.
 
-**Do not `Read` the WebPs in this session.** An image costs ~2k tokens on the way in and is then re-billed as cached context on every later turn — across a 40-post series that is the single largest avoidable cost in the pipeline. See `../blog-writer/references/token-discipline.md`.
+**Default: this gate runs inside `figure-author`, not here.** Delegate Phase C and C2 together in one dispatch — it authors, renders, gates through `figure-reviewer`, fixes failures, re-gates, and returns only when every figure passes. Pass it the finance additions below so its reviewers apply them. Read its manifest and move to Phase D.
 
-The reviewers use the full rubric in `../blog-writer/references/diagram-authoring.md §Visual self-review`. Finance-specific additions to that rubric:
+Why: your context grows roughly linearly with turn count, so cost grows with its **square** (`Σ ≈ N²·g/2`). On crypto-players W5/W6 the drafting agents ran ~279 turns to 339k context, and the author→render→gate→fix→re-gate loop was the biggest turn sink. Running it in here puts every iteration into the longest-lived context in the pipeline.
+
+Inline path (one-off post only): dispatch one `figure-reviewer` per figure, all in a single message, each returning one verdict line. **Never `Read` a WebP** — measured on W5/W6, drafting agents still read 106 images inline despite this rule; each one is re-billed on every later turn.
+
+Reviewers use the full rubric in `../blog-writer/references/diagram-authoring.md §Visual self-review`. Finance-specific additions:
 
 - **Sign convention is unambiguous** — inflows/gains are green and outflows/losses are red *consistently* across every figure; a reader never has to guess whether an arrow means "money in" or "money out".
 - **Axes are labeled with units** — any chart (payoff, yield curve, growth, distribution) labels both axes with what they measure and the unit (\$, %, years), and marks the reference points the prose names (strike, breakeven, par, spot).

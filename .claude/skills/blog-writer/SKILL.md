@@ -36,9 +36,11 @@ Three subagents own the bulky phases. Their whole purpose is that scene JSON, re
 
 | Subagent          | Owns                                  | Model  | Returns                          |
 | ----------------- | ------------------------------------- | ------ | -------------------------------- |
-| `figure-author`   | Phase C (author → validate → render → WebP) | Sonnet | One-screen WebP manifest         |
-| `figure-reviewer` | Phase C2, one instance **per figure** | Sonnet | One verdict line                 |
+| `figure-author`   | Phase C **and C2** — author → render → gate → fix → re-gate, to convergence | Sonnet | One manifest of passed WebPs |
+| `figure-reviewer` | One figure's visual verdict (spawned by `figure-author`, or by you on the inline path) | Sonnet | One verdict line |
 | `post-verifier`   | Phase E gate run                      | Haiku  | Pass line, or the FAIL list      |
+
+**Turns are the multiplier, not bytes.** Your context grows roughly linearly with turn count, so `Σ context ≈ N² · g / 2` — cost scales with the *square* of how many turns you take. That is why the figure fix-loop belongs entirely inside `figure-author`: it converts ~120 of your turns into 1. Halving your turns quarters your cost.
 
 Phases A/B (outline, abstraction inventory) and D (the prose) stay with you on Opus — that is where the post's quality is decided. See `references/token-discipline.md` for the measurements behind this split.
 
@@ -89,7 +91,11 @@ Ask via `AskUserQuestion` only what's missing:
 
 ### Phase C — Diagrams (parallel, headless)
 
-**Delegate this whole phase to the `figure-author` subagent** whenever you are drafting inside a longer-lived session (a series wave, or any session that has already done other work). Hand it the slug and the Phase B abstraction inventory; it returns a one-screen manifest of shipped WebPs. Scene JSON, validator errors, and render logs are the bulk of Phase C's token cost and none of it is worth carrying for the rest of the session. Run the steps below inline only for a one-off post in a fresh session.
+**Default: delegate Phase C *and* Phase C2 to the `figure-author` subagent in a single dispatch.** Hand it the slug and the Phase B abstraction inventory; it authors, renders, gates every figure through `figure-reviewer`, fixes what fails, re-gates, and returns one manifest of shipped-and-passed WebPs. You spend one turn.
+
+This is the highest-value delegation in the skill, and the reason is arithmetic. Your context grows roughly linearly with your turn count, so your cost grows with the **square** of it: `Σ context ≈ N² · g / 2`. Measured on crypto-players W5/W6, drafting agents ran ~279 turns and reached 339k context, and the author→render→gate→**fix**→re-gate loop was the biggest turn sink — every iteration landing in the longest-lived context in the pipeline. Halving a drafting agent's turns quarters its cost.
+
+Run the steps below inline **only** for a genuinely one-off post in a fresh session. Inside a series wave, never.
 
 1. **Read `references/diagram-authoring.md`.** Diagrams must be **diverse** (vary the figure kind per the plan — see §Diversity), **accurate** (every node/edge/number traces to the prose), and have **no meaningless empty space** (content fills the cropped frame).
 2. For each planned figure: author element JSON → `.cache/blog-writer/<slug>/<slug>-<i>.in.json`.
@@ -114,9 +120,13 @@ Do NOT use the `mcp__excalidraw__*` MCP tools in this phase — they target the 
 `author-scene.mjs` and `verify-post.sh` check geometry and structure, but they cannot _see_ the rendered pixels — a figure can pass every mechanical rule and still be a tangle of arrows, lopsided, half-empty, or off-topic. **This gate looks at the actual image.** Run it _before_ Phase D so a bad figure is re-authored before any prose is built around it.
 
 1. **Read `references/diagram-authoring.md §Visual self-review`** for how to judge each criterion.
+**If you delegated Phase C to `figure-author`, this gate has already run** — it owns the loop and only returns when every figure is a clean PASS. Read its manifest, act on anything under `BLOCKED:`, and go to Phase D. Do not re-gate.
+
+The steps below are the inline path, for a one-off post you are rendering yourself.
+
 2. **Dispatch one `figure-reviewer` subagent per figure — always, at every figure count.** Send them in a single message so they run concurrently; each receives one WebP path plus that figure's `_claim` / `_caption` / section anchor, opens the image itself, and returns exactly one verdict line.
 
-   **Do not open the WebPs with `Read` in this session.** A rendered figure costs ~2k tokens on the way in and is then re-billed as cached context on *every* subsequent turn of this session — across a post that is tens of thousands of wasted tokens, and across a series it is the single largest avoidable cost in the pipeline (measured: 134M cache-read tokens spent re-reading images that had already been judged). The subagent looks at the pixels in its own throwaway context and hands you back one line. Same gate, same rubric, ~1% of the cost.
+   **Never open a WebP with `Read`.** Not here, not in Phase E, not "just to check one". A rendered figure costs ~2k tokens on the way in and is then re-billed on *every* subsequent turn of this context. Measured on W5/W6, drafting agents still read 106 images inline despite this rule. The subagent looks at the pixels in its own throwaway context and hands you back one line — same gate, same rubric, ~1% of the cost.
 
    You collect the verdict lines:
 
