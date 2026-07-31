@@ -2,17 +2,17 @@
 title: "MEV: The Invisible Tax on Every Trade"
 date: "2026-07-31"
 publishDate: "2026-07-31"
-description: "How public transaction ordering lets searchers, builders, and validators extract value from on-chain trades—and the practical defenses that reduce the toll."
+description: "How public transaction ordering lets searchers, builders, and validators extract value from on-chain trades, plus the practical defenses that reduce the toll."
 tags: ["crypto", "mev", "ethereum", "defi", "mempool", "sandwich-attacks", "arbitrage", "liquidations", "market-structure", "retail-defense"]
 category: "trading"
 subcategory: "Crypto Players"
 author: "Hiep Tran"
 featured: true
-readTime: 31
+readTime: 32
 ---
 
 > [!important]
-> **TL;DR** — MEV is the value created or captured by choosing which transactions enter a block, and in what order. Sometimes that ordering repairs a broken market; sometimes it quietly worsens your fill.
+> **TL;DR:** MEV is the value created or captured by choosing which transactions enter a block, and in what order. Sometimes that ordering repairs a broken market; sometimes it quietly worsens your fill.
 >
 > - A public-mempool swap advertises its size, route, and slippage boundary before execution. Searchers can react, builders can order, and a proposer can sell the block-space decision.
 > - Sandwiches are the clearest retail harm: a searcher buys before your swap, lets your buying move the pool, then sells after it. Slippage tolerance is the ceiling on the damage, not a promise of a fair fill.
@@ -21,7 +21,7 @@ readTime: 31
 > - The practical defense is layered: use a sensible slippage limit, prefer private/protected order flow, and use batch auctions or intent/RFQ systems when the trade is large or price-sensitive.
 > - All arithmetic in this post is illustrative unless a source and an as-of date are stated. The named criminal case is discussed as an indictment and allegation, not as a conviction.
 
-If you have ever swapped tokens on a decentralized exchange and wondered why the quoted output was better than the final output—or why a trade failed even though the market had not visibly moved—the answer may be hiding in the ordering of transactions around yours.
+If you have ever swapped tokens on a decentralized exchange and wondered why the quoted output was better than the final output, or why a trade failed even though the market had not visibly moved, the answer may be hiding in the ordering of transactions around yours.
 
 The front end shows you a quote. The chain settles a sequence. Between those two moments, another participant may observe your signed instruction, simulate its effect, submit related transactions, and pay for a preferred position in the sequence. That participant is not necessarily stealing your tokens. More often, it is collecting a small difference between the price you expected and the state it helped create.
 
@@ -37,7 +37,7 @@ This is the Wave 7 post about the player who sits beneath every other player. Ve
 
 A blockchain is a replicated database. It stores balances and contract state, and many computers agree on the next valid update. A transaction is a signed instruction to make such an update: transfer ETH, call a lending contract, or exchange one token for another.
 
-Your wallet creates and signs the instruction. An RPC endpoint—remote procedure call—is the service that carries it to a node. The node checks the signature and basic validity, then gossips the transaction to peers. Before inclusion, the transaction is pending. The set of pending transactions visible to a node is its mempool.
+Your wallet creates and signs the instruction. An RPC endpoint, short for remote procedure call, is the service that carries it to a node. The node checks the signature and basic validity, then gossips the transaction to peers. Before inclusion, the transaction is pending. The set of pending transactions visible to a node is its mempool.
 
 ![Traditional broker orders are private before execution; a public-mempool swap is visible before it fills](/imgs/blogs/mev-the-invisible-tax-on-every-trade-2.webp)
 
@@ -55,7 +55,7 @@ Ethereum’s own PBS overview, updated June 24, 2026, describes the design as se
 
 Gas measures the computational work a transaction asks the chain to perform. The fee attached to that work is an economic signal. In a crowded block, a transaction that pays a larger priority fee can be more attractive to include quickly. But gas price is only one ordering input. A builder may prefer a bundle with a direct payment, an arbitrage profit, or a liquidation reward even if the individual transactions are not the highest-fee transactions in the public pool.
 
-This is why “front-running” is an imperfect umbrella. A searcher may submit a higher-fee transaction to win an earlier position in a public fee auction. A builder may receive a private bundle containing a complete sequence. A proposer may select the candidate with the highest bid. The economic objective is similar—obtain a profitable ordering—but the mechanism and the parties differ.
+This is why “front-running” is an imperfect umbrella. A searcher may submit a higher-fee transaction to win an earlier position in a public fee auction. A builder may receive a private bundle containing a complete sequence. A proposer may select the candidate with the highest bid. The economic objective is similar: obtain a profitable ordering, but the mechanism and the parties differ.
 
 ### What MEV means
 
@@ -124,17 +124,17 @@ The risk is not only moral or legal language. It is arithmetic. Automated market
 
 ### Constant-product math
 
-Consider a pool with reserves (x) ETH and (y) USDC. A constant-product market maker keeps (x y = k), ignoring the small fee for the first intuition. If a trader adds (Delta y) USDC, the pool’s new ETH reserve is approximately (k/(y+Delta y)), so the trader receives:
+Consider a pool with reserves $x$ ETH and $y$ USDC. A constant-product market maker keeps $xy = k$, ignoring the small fee for the first intuition. If a trader adds $\Delta y$ USDC, the pool’s new ETH reserve is approximately $k/(y+\Delta y)$, so the trader receives:
 
-\[
+$$
 \Delta x = x - \frac{k}{y + \Delta y}.
-\]
+$$
 
-With a fee, only (0.997\Delta y) enters a pool charging 0.30%, so the exact Uniswap-v2-style formula is:
+With a fee, only $0.997\Delta y$ enters a pool charging 0.30%, so the exact Uniswap-v2-style formula is:
 
-\[
+$$
 \Delta x = \frac{x(0.997\Delta y)}{y + 0.997\Delta y}.
-\]
+$$
 
 The formula does not say that every swap is attackable. It says that size changes price. A sandwich is profitable only if the price movement created by the victim is large enough to cover the attacker’s fees, gas, competition, and payment to the builder.
 
@@ -142,37 +142,37 @@ The formula does not say that every swap is attackable. It says that size change
 
 Assume an ETH/USDC pool starts with 1,000 ETH and 3,000,000 USDC. The spot price is therefore $3,000 per ETH. A victim wants to swap $50,000 USDC for ETH and sets a 1.0% minimum-output tolerance. The 0.30% pool fee applies to each swap. Every dollar here is illustrative.
 
-**Step 1 — the victim without a sandwich.** The fee-adjusted input is (50,000\times0.997=49,850). The victim receives:
+**Step 1: the victim without a sandwich.** The fee-adjusted input is $50{,}000\times0.997=49{,}850$. The victim receives:
 
-\[
+$$
 \frac{1,000\times49,850}{3,000,000+49,850}=16.616\text{ ETH, approximately}.
-\]
+$$
 
 The average execution price is about $3,009.10 per ETH, already above the $3,000 spot because the trade moves the curve and pays the fee.
 
-**Step 2 — the searcher buys first.** Suppose the searcher puts $10,000 USDC into the pool. Its fee-adjusted input is $9,970, and it receives:
+**Step 2: the searcher buys first.** Suppose the searcher puts $10,000 USDC into the pool. Its fee-adjusted input is $9,970, and it receives:
 
-\[
+$$
 \frac{1,000\times9,970}{3,000,000+9,970}=3.312\text{ ETH, approximately}.
-\]
+$$
 
 The pool now holds approximately 996.688 ETH and 3,009,970 USDC.
 
-**Step 3 — the victim trades in the changed state.** The victim’s $49,850 effective input now produces approximately:
+**Step 3: the victim trades in the changed state.** The victim’s $49,850 effective input now produces approximately:
 
-\[
+$$
 \frac{996.688\times49,850}{3,009,970+49,850}=16.235\text{ ETH}.
-\]
+$$
 
 The victim receives about 0.381 ETH less than in the no-sandwich path. At the initial $3,000 reference price, that is about $1,143 of gross output difference. It is not all attacker profit: the pool charged fees, the searcher paid gas, and the searcher must unwind.
 
-**Step 4 — the searcher sells after the victim.** After the victim, the pool contains approximately 980.453 ETH and 3,059,820 USDC. The searcher sells its 3.312 ETH back. The fee-adjusted ETH input is (3.312\times0.997=3.302) ETH. The constant-product output is approximately:
+**Step 4: the searcher sells after the victim.** After the victim, the pool contains approximately 980.453 ETH and 3,059,820 USDC. The searcher sells its 3.312 ETH back. The fee-adjusted ETH input is $3.312\times0.997=3.302$ ETH. The constant-product output is approximately:
 
-\[
+$$
 3,059,820 - \frac{k}{980.453+3.302} \approx 10,834\text{ USDC},
-\]
+$$
 
-where (k) is the post-victim reserve product. The searcher spent $10,000 and receives roughly $10,834, for gross revenue around $834 before gas and builder payment. If the combined gas and payment are $900, the sequence loses about $66 and should not be submitted. This is why the attacker’s gross opportunity and net profit are different numbers.
+where $k$ is the post-victim reserve product. The searcher spent $10,000 and receives roughly $10,834, for gross revenue around $834 before gas and builder payment. If the combined gas and payment are $900, the sequence loses about $66 and should not be submitted. This is why the attacker’s gross opportunity and net profit are different numbers.
 
 The victim’s quoted minimum output is the boundary that determines whether the sandwich can fit. A tighter limit may make the victim revert. It does not make the public transaction private, and it does not guarantee that the victim receives the no-sandwich output.
 
@@ -196,12 +196,12 @@ A backrun is a transaction deliberately placed after a known transaction because
 
 Suppose a token trades at $100.00 on Venue A and $100.80 on Venue B. An arbitrageur buys 1,000 tokens on A and sells 1,000 on B.
 
-1. Gross purchase cost on A: (1,000\times100.00=\$100,000).
-2. Gross sale proceeds on B: (1,000\times100.80=\$100,800).
+1. Gross purchase cost on A: $1{,}000\times100.00=\$100{,}000$.
+2. Gross sale proceeds on B: $1{,}000\times100.80=\$100{,}800$.
 3. Gross spread: $800.
-4. Assume A and B together charge 0.20% of notional: (0.002\times200,800=\$401.60).
+4. Assume A and B together charge 0.20% of notional: $0.002\times200{,}800=\$401.60$.
 5. Assume gas and builder payment total $180.
-6. Net illustrative profit: (800-401.60-180=\$218.40).
+6. Net illustrative profit: $800-401.60-180=\$218.40$.
 
 The arbitrageur earns $218.40, but the market receives a service: the next buyer sees a smaller cross-venue discrepancy. If the arbitrageur must pay $700 for priority, the trade becomes unprofitable and disappears. Competition compresses the opportunity.
 
@@ -227,7 +227,7 @@ The bonus is an MEV opportunity because the right to liquidate is time-sensitive
 
 ### Worked example: liquidation bonus (illustrative)
 
-Assume a borrower owes 10,000 USDC and has ETH collateral. The protocol permits liquidation when the position breaches its threshold and pays a 5% liquidation bonus on the debt repaid. A keeper repays the full 10,000 USDC and receives collateral worth (10,000\times1.05=\$10,500) at the protocol’s execution price.
+Assume a borrower owes 10,000 USDC and has ETH collateral. The protocol permits liquidation when the position breaches its threshold and pays a 5% liquidation bonus on the debt repaid. A keeper repays the full 10,000 USDC and receives collateral worth $10{,}000\times1.05=\$10{,}500$ at the protocol’s execution price.
 
 1. Keeper advances: $10,000 USDC.
 2. Collateral received: $10,500 market value, illustratively.
@@ -260,7 +260,7 @@ Suppose three candidate bundles all fit in the next block:
 | B | $900 | $700 | $40 | $620 |
 | C | $1,300 | $800 | $100 | $650 |
 
-The builder compares its own residual after the proposer bid and costs. A leaves (650-50-500=\$100). B leaves (700-40-620=\$40). C leaves (800-100-650=\$50). A builder maximizing its own margin chooses A, while a builder maximizing the proposer’s bid chooses C. Real builders optimize a more complicated objective involving reliability, block fullness, and relationships. The example shows why “highest opportunity” and “highest proposer payment” are not the same.
+The builder compares its own residual after the proposer bid and costs. A leaves $650-50-500=\$100$. B leaves $700-40-620=\$40$. C leaves $800-100-650=\$50$. A builder maximizing its own margin chooses A, while a builder maximizing the proposer’s bid chooses C. Real builders optimize a more complicated objective involving reliability, block fullness, and relationships. The example shows why “highest opportunity” and “highest proposer payment” are not the same.
 
 **Intuition:** ordering is a multi-stage auction; the visible gas price is only one bid in a chain of bids.
 
@@ -298,7 +298,7 @@ Three cautions matter.
 
 First, an indictment is an allegation, not evidence of guilt beyond a reasonable doubt and not a conviction. Second, the case illustrates a category of ordering abuse; it does not prove that ordinary arbitrage or every private bundle is criminal. Third, this post is frozen as of July 31, 2026 and makes no claim about a final judgment. Readers should consult the federal docket for later procedural developments.
 
-The case also shows why “MEV” is too broad to be a legal conclusion. Searchers routinely submit bundles that depend on ordering. Builders routinely select among bundles. The alleged conduct, if proven, concerns deception and manipulation of another system’s assumptions—not the mere existence of a profit-seeking transaction sequence.
+The case also shows why “MEV” is too broad to be a legal conclusion. Searchers routinely submit bundles that depend on ordering. Builders routinely select among bundles. The alleged conduct, if proven, concerns deception and manipulation of another system’s assumptions, not the mere existence of a profit-seeking transaction sequence.
 
 ## How it shows up in price
 
@@ -363,7 +363,7 @@ The cost is latency and design complexity. A batch can miss a rapidly moving pri
 
 ### 4. RFQ and intent-based execution
 
-An intent is a signed statement of desired outcome rather than a fully specified public transaction sequence. “Sell up to this amount for at least this amount before expiry” gives a filler or solver room to find liquidity. An RFQ—request for quote—asks designated counterparties to compete on a price.
+An intent is a signed statement of desired outcome rather than a fully specified public transaction sequence. “Sell up to this amount for at least this amount before expiry” gives a filler or solver room to find liquidity. An RFQ, short for request for quote, asks designated counterparties to compete on a price.
 
 Intent systems move the auction earlier. Instead of showing every observer a transaction that will hit a particular pool, the user shows a set of constraints and lets fillers compete to satisfy them. The filler can earn a spread, but it competes on the user’s outcome.
 
@@ -384,9 +384,9 @@ Ask four questions before approving a route:
 
 Suppose a $25,000 swap has a quoted expected output of $25,000 in the destination asset. The public route has a 0.30% pool fee and an illustrative expected MEV loss of 0.40%, while the protected route charges a 0.10% routing fee and has a 0.15% probability of missing the intended block. These probabilities are invented for arithmetic, not measurements.
 
-Public expected friction: (0.30\%+0.40\%=0.70\%), or (\$175).
+Public expected friction: $0.30\%+0.40\%=0.70\%$, or $\$175$.
 
-Protected expected fee: (0.10\%\times\$25,000=\$25). If a missed block costs an illustrative $120 in adverse movement and the miss probability is 0.15%, expected miss cost is (0.0015\times120=\$0.18). Total expected protected friction is about $25.18.
+Protected expected fee: $0.10\%\times\$25{,}000=\$25$. If a missed block costs an illustrative $120 in adverse movement and the miss probability is 0.15%, expected miss cost is $0.0015\times120=\$0.18$. Total expected protected friction is about $25.18.
 
 The protected route looks better in this toy model, but the conclusion depends entirely on the assumed MEV loss, miss cost, chain, endpoint, and route. The useful calculation is to compare expected outcomes, not to treat “private” as a magic adjective.
 
