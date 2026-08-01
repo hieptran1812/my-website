@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Trading Psychology"
 author: "Hiep Tran"
 featured: true
-readTime: 38
+readTime: 39
 ---
 
 > [!important]
@@ -311,6 +311,18 @@ If you trade with real money, this is not an academic curiosity; it is quietly s
 The good news is that the fix is cheap and entirely in your control. You do not need to be smarter, calmer, or more experienced — the 1975 experiments showed that none of those help. You need a timestamp and a number, written before the outcome, and the discipline to read them honestly afterward. Start with a single index card, or a single line in a spreadsheet, per trade: *the date, the setup, the probability, the invalidation.* That is the whole defense. Everything else in this article is just the argument for why that one-minute habit is worth more than any indicator you will ever add.
 
 The next time you catch yourself saying "I knew that would happen," treat it not as a fact about your skill but as a sensor going off — the sound of your memory being edited in real time. Then go check what you actually wrote down. If you wrote nothing down, you have just learned the most important thing about your own track record: you cannot trust your memory of it. Fix that, and you have fixed the one bias that was standing between your trades and your ability to learn from them.
+
+## Hindsight-resistant review language
+
+An honest review uses three timestamps: what was known before entry, what changed while the position was open, and what is known only after exit. Mixing these timestamps creates a false sense of inevitability. A price chart drawn after the fact is especially dangerous because it turns a noisy path into a smooth visual story and hides all the paths that did not occur.
+
+Use language that preserves uncertainty. Write “I assigned a 40% probability to the thesis and expected these two invalidation signals,” not “the setup was obviously going to work.” Write “the trade lost despite following the rule,” not “the trade was stupid because it lost.” This vocabulary is not cosmetic: it protects the data that future calibration depends on.
+
+#### Worked example: the same outcome, different process
+
+Imagine two hypothetical trades both lose $500. Trader A entered with a written catalyst, a $500 maximum loss, and a 45% forecast probability. The catalyst failed and the exit rule was followed. Trader B entered after a social-media spike, had no invalidation level, doubled the position after the first loss, and finally exited at the same $500 loss. The account records are identical at the end. The learning value is not. A post-mortem that scores only dollars will punish A and accidentally reward B if B later gets lucky.
+
+The review should therefore score the decision at the time it was made, then separately record the outcome. That separation is the simplest defense against the sentence “I knew it all along.”
 
 ## Sources & further reading
 

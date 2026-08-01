@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Trading Psychology"
 author: "Hiep Tran"
 featured: true
-readTime: 38
+readTime: 39
 ---
 
 > [!important]
@@ -271,6 +271,14 @@ If you hold any position for more than a day, this bias has your money. It matte
 Picture your next portfolio review done the anchored way and then the clean way. Anchored: you scan the P&L column, feel good about the greens, avoid the reds, sell a winner or two "to lock in gains," and quietly leave the losers alone to "come back." Clean: you cover the P&L, and for each holding you write today's fair value first, then ask whether you would buy it fresh at today's price. The greens and reds vanish; what is left is a list of positions you would buy again and a list you would not. The first list you keep, the second you trim — and for the first time the shape of your portfolio reflects what you believe about the future instead of the accident of what you paid in the past. Same holdings, same prices, completely different decisions — which is the whole lesson of this article, run on your own account.
 
 A closing note on what this is and isn't. This is an explanation of a decision-making bias and a process for managing it — it is educational, not individualized investment advice, and nothing here says whether any particular stock is worth buying or selling. Every position that can make money can lose it, and no drill changes that. What the drill changes is *why* you hold what you hold: whether your reasons live in the future, where returns come from, or in the past, where your anchor lives. The market has no memory of your entry. The sooner your decisions stop having one either, the sooner your cost basis stops lying to you.
+
+## A compact anchor audit
+
+For every open position, write the current price, your independent estimate of value, the strongest contrary evidence, and the best alternative use of the capital. Only then reveal the entry price. If the recommendation changes after the entry price appears, you have measured the anchor rather than merely being told that anchoring exists. Repeat the exercise at a fixed cadence so that the result is not contaminated by a single dramatic market day.
+
+## The anchor audit in practice
+
+Run the exercise on both a winner and a loser. Symmetry matters: otherwise the investor may merely replace an entry-price anchor with a new rule that sells every gain too early. The goal is not to ignore history; it is to stop history from becoming the unexplained veto on a forward-looking decision.
 
 ## Sources & further reading
 
