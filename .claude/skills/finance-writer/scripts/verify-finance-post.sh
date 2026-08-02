@@ -190,6 +190,30 @@ else
   echo "$nonwebp" | sed 's/^/  /'
 fi
 
+# ── 11b. Distinct-figures gate ───────────────────────────────────────────────
+# A caption that points at an image already used earlier in the post is almost
+# always a figure the pipeline never rendered: the drafter wrote more captions
+# than scenes and aimed the surplus at whatever file existed. The reader then
+# sees the same picture under a caption describing something else.
+dup_embeds=$(grep -oE '!\[[^]]*\]\(/imgs/blogs/[^)]+\)' "$path" 2>/dev/null \
+             | sed -E 's|.*\((/imgs/blogs/[^)]+)\)|\1|' | sort | uniq -d || true)
+if [ -z "$dup_embeds" ]; then
+  pass "distinct-figures: every embed references a different image"
+else
+  fail_ "distinct-figures: image embedded more than once (author the missing figure or drop the caption):"
+  echo "$dup_embeds" | sed 's/^/  /'
+fi
+
+# Renders on disk that no caption points at — the other half of the same bug.
+orphan=$(comm -23 \
+  <(ls public/imgs/blogs/${slug}-*.webp 2>/dev/null | sed 's|^public||' | grep -v '\.cover\.webp$' | sort) \
+  <(grep -oE '!\[[^]]*\]\(/imgs/blogs/[^)]+\)' "$path" 2>/dev/null \
+    | sed -E 's|.*\((/imgs/blogs/[^)]+)\)|\1|' | sort -u) || true)
+if [ -n "$orphan" ]; then
+  warn "orphan-renders: rendered for this slug but never embedded:"
+  echo "$orphan" | sed 's/^/  /'
+fi
+
 # ── 12. No-H1 gate ───────────────────────────────────────────────────────────
 if grep -nE '^# [^#]' "$path" >/dev/null 2>&1; then
   fail_ "no-H1: body contains '# ' headings (must be ##):"

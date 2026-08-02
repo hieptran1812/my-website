@@ -488,7 +488,7 @@ For each position under review, write down the following before looking at the r
 
 The table does not eliminate uncertainty. It makes the uncertainty comparable across winners and losers. That symmetry is the practical opposite of the disposition effect.
 
-![A position audit compares forward value, thesis change, alternatives, size, and invalidation instead of treating cost basis as the conclusion](/imgs/blogs/loss-aversion-disposition-effect-5-graph.webp)
+![A five-row audit matrix pairs each question—value today, what changed, next-best use, position size, invalidation—with the shallow cost-basis-only answer it replaces](/imgs/blogs/loss-aversion-disposition-effect-8-matrix.webp)
 
 ## 10. How it shows up in real markets
 

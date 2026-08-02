@@ -263,7 +263,7 @@ Both statements can be true at the same time. The first establishes the start-of
 
 This is why a high-water mark can be a dangerous benchmark for personal decisions. It is useful for describing drawdown, but it should not silently become a promise that the portfolio must return to a particular number.
 
-![Absolute wealth and reference-dependent value produce different interpretations of the same $1,000 change](/imgs/blogs/prospect-theory-behavioral-finance-2-before-after.webp)
+![Swapping the reference point from the start-of-year balance to the high-water mark turns the same account into a $2,000 gain or a $3,000 shortfall](/imgs/blogs/prospect-theory-behavioral-finance-8-reference-shift.webp)
 
 ### Narrow framing versus broad framing
 
@@ -382,11 +382,7 @@ Source: [Barber and Odean, “Trading Is Hazardous to Your Wealth”](https://on
 
 The prose so far has been deliberately intuitive. Now we can write down a compact version of the model, with one warning: the following equation is an explanatory abstraction of the canonical prospect-theory structure. It is not a claim that every investor uses the same estimated parameters.
 
-![The prospect-theory model adds a reference point, a curved value function, and decision weights to the expected-utility benchmark](/imgs/blogs/prospect-theory-behavioral-finance-3-matrix.webp)
-
-The matrix above is the navigation map for the formal model: reference point, value transformation, probability transformation, and the resulting choice.
-
-![Reference points and value curvature are the two distinct transformations before a risky choice](/imgs/blogs/prospect-theory-behavioral-finance-4-tree.webp)
+![Outcomes pass through the value function v(x) and probabilities pass through the weighting function pi(p) before the two combine into one decision value](/imgs/blogs/prospect-theory-behavioral-finance-9-transform.webp)
 
 For an outcome $x$ relative to a reference point, a common value-function abstraction is
 
@@ -400,7 +396,7 @@ $$
 
 where $\alpha$ controls curvature for gains, $\beta$ controls curvature for losses, and $\lambda$ captures the relative weight placed on losses. The key restrictions are usually $0 < \alpha \le 1$, $0 < \beta \le 1$, and $\lambda > 1$. The restrictions describe diminishing sensitivity and a steeper loss side; they do not tell us that one exact value of $\lambda$ applies to all decisions.
 
-![The value function changes slope around the reference point and treats gains and losses differently](/imgs/blogs/prospect-theory-behavioral-finance-2-before-after.webp)
+![The S-shaped value function: concave and flattening over gains, steeper and convex over losses, with a sharp kink at the reference point](/imgs/blogs/prospect-theory-behavioral-finance-10-value-curve.webp)
 
 For a small set of outcomes, a prospect-value abstraction is
 
@@ -410,7 +406,7 @@ $$
 
 where $p_i$ is the objective probability of outcome $x_i$ and $\pi(p_i)$ is its decision weight. The function $\pi$ represents the psychological transformation of probability. It is not the same as saying that the person believes the event occurs with probability $\pi(p_i)$ in a statistical sense.
 
-![Probability weights and value transformations are separate stages in a prospect evaluation](/imgs/blogs/prospect-theory-behavioral-finance-6-graph.webp)
+![The probability weighting function pi(p): an inverse-S curve that overweights small probabilities and underweights medium-to-large probabilities relative to the 45-degree identity line](/imgs/blogs/prospect-theory-behavioral-finance-11-weight-curve.webp)
 
 ### Why the reference point belongs inside the equation
 
@@ -442,11 +438,9 @@ Rather than asking whether your loss-aversion coefficient is 2 or 2.25, test how
 
 This table is more useful than pretending to know a psychological parameter to two decimal places. The purpose of behavioral analysis is often to locate fragile decisions, not to produce a false point estimate of emotion.
 
-![A risky choice branches through probability weights before subjective value is compared](/imgs/blogs/prospect-theory-behavioral-finance-6-graph.webp)
-
 #### Worked example: a two-outcome prospect value, clearly labeled as an abstraction
 
-![A two-outcome prospect is evaluated by combining weighted gains and weighted losses](/imgs/blogs/prospect-theory-behavioral-finance-1-pipeline.webp)
+![The illustrative gamble's prospect value sums a positive weighted gain leg and a larger negative weighted loss leg](/imgs/blogs/prospect-theory-behavioral-finance-12-combine.webp)
 
 Consider a hypothetical gamble with a $100 gain and a $50 loss, each with probability 50%. To illustrate the structure, assume $\alpha = \beta = 0.88$, $\lambda = 2.25$, and no probability weighting, so $\pi(0.5) = 0.5$. These numbers are illustrative parameters for arithmetic, not an empirical estimate for you.
 

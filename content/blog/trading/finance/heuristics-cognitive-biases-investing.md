@@ -107,7 +107,7 @@ The first question tests anchoring. The second tests availability and representa
 
 The intuition is that a low price, a vivid story, and a familiar pattern are clues—not valuation conclusions.
 
-![A first-pass heuristic should be separated from the evidence needed for a valuation decision](/imgs/blogs/heuristics-cognitive-biases-investing-2-matrix.webp)
+![Three heuristic clues about the $120 high, turnaround headlines, and a familiar pattern converge with the valuation evidence question on a single decision gate that forks into acting or holding off](/imgs/blogs/heuristics-cognitive-biases-investing-8-graph.webp)
 
 ## 2. Representativeness and the story that looks like the answer
 
@@ -121,7 +121,7 @@ An investor can correctly identify that a business resembles a growth company an
 
 A **conjunction** is the joint occurrence of two events. The probability of two events happening together cannot be higher than the probability of either event alone. Yet a detailed story can feel more likely than a broad description because it is easier to imagine.
 
-![A detailed investment story can branch into several conditions, making the joint outcome less likely than each single condition](/imgs/blogs/heuristics-cognitive-biases-investing-6-tree.webp)
+![A detailed investment story branches into four cumulative conditions with shrinking joint probability, contrasted against the single condition taken alone at the highest probability](/imgs/blogs/heuristics-cognitive-biases-investing-9-tree.webp)
 
 Imagine two forecasts:
 
