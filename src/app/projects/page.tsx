@@ -9,15 +9,23 @@ import ScrollReveal, { CounterReveal } from "@/components/ScrollReveal";
 // Define fallback for statusColors
 const statusColors: Record<string, React.CSSProperties> = {
   Completed: { backgroundColor: "rgba(16, 185, 129, 0.8)", color: "#fff" },
+  Production: { backgroundColor: "rgba(16, 185, 129, 0.9)", color: "#fff" },
   "In Progress": { backgroundColor: "rgba(245, 158, 11, 0.8)", color: "#fff" },
+  "Active Development": {
+    backgroundColor: "rgba(245, 158, 11, 0.9)",
+    color: "#fff",
+  },
   Planned: { backgroundColor: "rgba(99, 102, 241, 0.8)", color: "#fff" },
+  "No Development": {
+    backgroundColor: "rgba(107, 114, 128, 0.85)",
+    color: "#fff",
+  },
   "": { backgroundColor: "rgba(209, 213, 219, 0.8)", color: "#111" },
 };
 
 const projectCategories = [
   "All",
   "Machine Learning",
-  "Web Development",
   "Data Science",
   "Open Source",
   "Research",
