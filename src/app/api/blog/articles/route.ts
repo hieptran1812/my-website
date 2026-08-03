@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 import { loadAllPosts } from "../../../../lib/blogIndex";
+import { isPaywalledFile } from "../../../../lib/paywall";
 
 export interface Article {
   id: string;
@@ -155,7 +156,11 @@ function buildAllArticles(corpus: Corpus): Article[] {
       entry.content,
     );
     article.id = entry.slug.replace(/\//g, "-");
-    article.content = entry.content;
+    // Raw markdown for open posts only. This route predates the paywall and
+    // still ships whole bodies (see src/lib/blog.ts — the site itself no longer
+    // calls it); without this guard it is a one-request dump of every gated
+    // trading post. Keyed on the indexed file path, which is ground truth.
+    article.content = isPaywalledFile(entry.filePath) ? "" : entry.content;
     return article;
   });
 

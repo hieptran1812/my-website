@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { PAYWALL_SUBSCRIBE_URL } from "@/lib/paywall";
+import { PAYWALL_SUBSCRIBE_URL } from "@/lib/paywallConfig";
 import "./styles/PaywallGate.css";
 
 interface PaywallGateProps {

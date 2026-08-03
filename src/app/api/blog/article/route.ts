@@ -12,7 +12,10 @@ import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 import { protectMathBlocks, restoreMathBlocks } from "../../../../lib/markdown";
 import { derivePostLocation } from "../../../../lib/postPath";
 import remarkCallouts from "../../../../lib/remarkCallouts";
-import { applyPaywall, PAYWALL_SUBSCRIBE_URL } from "../../../../lib/paywall";
+import {
+  applyPaywallToFile,
+  PAYWALL_SUBSCRIBE_URL,
+} from "../../../../lib/paywall";
 
 export async function GET(request: NextRequest) {
   try {
@@ -97,10 +100,11 @@ export async function GET(request: NextRequest) {
     );
 
     // Same gate as the rendered page — otherwise this route hands back the
-    // full body of a paywalled trading post to anyone who calls it.
-    const { html: gatedContent, paywalled } = applyPaywall(
-      slug,
-      category,
+    // full body of a paywalled trading post to anyone who calls it. Keyed on
+    // the resolved path, since `?slug=` is not path-normalised and
+    // `findArticleFile()` follows `..` segments.
+    const { html: gatedContent, paywalled } = applyPaywallToFile(
+      articlePath,
       htmlContent,
     );
 

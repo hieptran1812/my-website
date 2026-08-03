@@ -5,17 +5,29 @@
  * article HTML down to its opening blocks and only that prefix is ever sent to
  * the browser. There is no hidden-then-CSS-blurred body to un-hide from
  * devtools, and no API route that will hand back the rest (see the guards in
- * `/api/blog/[slug]` and `/api/blog/article`).
+ * `/api/blog/[slug]`, `/api/blog/article` and `/api/blog/articles`).
+ *
+ * **Gate on the resolved file path, not the requested slug.** A slug arrives
+ * from the URL and can be spelled more than one way for the same file:
+ * `findArticleFile()` walks `..` segments, so
+ * `?slug=paper-reading/../trading/x` resolves to a trading post while the
+ * string does not start with `trading/`. Page routes happen to be safe because
+ * HTTP path normalisation collapses `../` before Next sees it, but API query
+ * params are never normalised. `isPaywalledFile()` asks the filesystem where
+ * the post actually lives, which no amount of slug spelling can change.
  */
 
-/** Where the "keep reading" button points. */
-export const PAYWALL_SUBSCRIBE_URL = "https://halleytech.substack.com/";
+import path from "path";
 
-/** Slug prefixes whose posts are gated. */
+export { PAYWALL_SUBSCRIBE_URL } from "./paywallConfig";
+
+/** Corpus-relative directories whose posts are gated. */
 const PAYWALLED_PREFIXES = ["trading/"];
 
 /** Frontmatter categories whose posts are gated, for posts filed elsewhere. */
 const PAYWALLED_CATEGORIES = new Set(["trading"]);
+
+const BLOG_ROOT = path.join(process.cwd(), "content", "blog");
 
 /** Top-level blocks kept before the gate closes. */
 const PREVIEW_MAX_PARAGRAPHS = 3;
@@ -33,13 +45,39 @@ const PREVIEW_MIN_PARAGRAPHS = 2;
 const PREVIEW_MAX_CHARS = 6000;
 const PREVIEW_CHAR_CAP_AFTER_PARAGRAPHS = 2;
 
+/** Escape hatch for reading gated posts in full locally. */
+function paywallDisabled(): boolean {
+  return process.env.DISABLE_PAYWALL === "1";
+}
+
 /**
- * Is this post behind the paywall? Checks the slug prefix first (every trading
- * post lives under `content/blog/trading/`) and falls back to the frontmatter
- * category. Set `DISABLE_PAYWALL=1` to preview posts in full locally.
+ * Ground truth: does this file live under a gated directory of the corpus?
+ * `absPath` is the path `findArticleFile()` actually resolved, so `..` games in
+ * the requested slug cannot change the answer.
+ *
+ * Fails closed — a path that resolves outside the blog root is not something
+ * this site should be rendering, so it is treated as gated rather than open.
+ */
+export function isPaywalledFile(absPath: string, blogRoot = BLOG_ROOT): boolean {
+  if (paywallDisabled()) return false;
+
+  const rel = path
+    .relative(path.resolve(blogRoot), path.resolve(absPath))
+    .split(path.sep)
+    .join("/")
+    .toLowerCase();
+
+  if (rel.startsWith("../") || rel === ".." || path.isAbsolute(rel)) return true;
+
+  return PAYWALLED_PREFIXES.some((prefix) => rel.startsWith(prefix));
+}
+
+/**
+ * Slug/category fallback, for callers that never resolved a path. Weaker than
+ * `isPaywalledFile()` — prefer that whenever the file path is in hand.
  */
 export function isPaywalledPost(slug: string, category?: string): boolean {
-  if (process.env.DISABLE_PAYWALL === "1") return false;
+  if (paywallDisabled()) return false;
 
   const normalized = (slug || "").replace(/^\/+/, "").toLowerCase();
   if (PAYWALLED_PREFIXES.some((prefix) => normalized.startsWith(prefix))) {
@@ -254,9 +292,28 @@ export function buildPreviewHtml(html: string): PaywallSplit {
   };
 }
 
+/** Cut `html` down to its preview. Shared tail of the two helpers below. */
+function gate(html: string): { html: string; paywalled: boolean } {
+  const { preview, truncated } = buildPreviewHtml(html);
+  if (!truncated) return { html, paywalled: false };
+  return { html: preview, paywalled: true };
+}
+
 /**
- * One-shot helper for a rendered article: returns the HTML to render plus
- * whether the gate should be drawn under it.
+ * Preferred entry point: gate a rendered article by where its source file
+ * lives. Immune to `..` segments and frontmatter that omits `category`.
+ */
+export function applyPaywallToFile(
+  absPath: string,
+  html: string,
+): { html: string; paywalled: boolean } {
+  if (!isPaywalledFile(absPath)) return { html, paywalled: false };
+  return gate(html);
+}
+
+/**
+ * Slug/category variant, for callers with no file path. Prefer
+ * `applyPaywallToFile()`.
  */
 export function applyPaywall(
   slug: string,
@@ -264,9 +321,5 @@ export function applyPaywall(
   html: string,
 ): { html: string; paywalled: boolean } {
   if (!isPaywalledPost(slug, category)) return { html, paywalled: false };
-
-  const { preview, truncated } = buildPreviewHtml(html);
-  if (!truncated) return { html, paywalled: false };
-
-  return { html: preview, paywalled: true };
+  return gate(html);
 }

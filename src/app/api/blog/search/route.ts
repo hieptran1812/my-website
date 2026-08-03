@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { loadAllPosts, type BlogIndexEntry } from "@/lib/blogIndex";
+import { isPaywalledFile } from "@/lib/paywall";
 import {
   parseQuery,
   scoreNormalized,
@@ -51,6 +52,12 @@ function prepare(corpus: BlogIndexEntry[]): PreparedDoc[] {
   preparedCache = out;
   preparedFor = corpus;
   return out;
+}
+
+/** Query-independent snippet: the same text no matter what was searched. */
+function fixedSnippet(text: string): string {
+  const clean = text.replace(/\s+/g, " ").trim();
+  return escapeHtml(clean.slice(0, 180)) + (clean.length > 180 ? "…" : "");
 }
 
 function escapeHtml(s: string): string {
@@ -116,7 +123,14 @@ export async function GET(request: NextRequest) {
       category: doc.category,
       subcategory: doc.subcategory,
       publishDate: doc.publishDate,
-      snippet: buildSnippet(doc.body, q),
+      // A match-anchored snippet is a movable window into the body: query the
+      // tail of one window to reveal the next, and a determined caller walks a
+      // gated post out ~180 chars at a time. For paywalled posts the snippet is
+      // the fixed excerpt instead, so the query cannot steer it. Ranking still
+      // uses the full body — only what is echoed back is pinned.
+      snippet: isPaywalledFile(doc.filePath)
+        ? fixedSnippet(doc.excerpt || doc.body)
+        : buildSnippet(doc.body, q),
       score,
     });
   }

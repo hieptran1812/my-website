@@ -12,6 +12,7 @@ import { protectMathBlocks, restoreMathBlocks } from "./markdown";
 import remarkCallouts from "./remarkCallouts";
 import rehypeImageOptimize from "./rehypeImageOptimize";
 import { resolvePostCover } from "./getRelatedPosts";
+import { applyPaywallToFile } from "./paywall";
 
 export interface ArticleData {
   title: string;
@@ -25,6 +26,8 @@ export interface ArticleData {
   collection?: string;
   excerpt?: string;
   image?: string;
+  /** True when `content` is only the teaser — see src/lib/paywall.ts. */
+  paywalled: boolean;
 }
 
 const blogDir = path.join(process.cwd(), "content", "blog");
@@ -74,7 +77,17 @@ async function getArticleImpl(slug: string): Promise<ArticleData | null> {
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(protectedContent);
 
-  const htmlContent = restoreMathBlocks(processedContent.toString(), mathBlocks);
+  const renderedHtml = restoreMathBlocks(
+    processedContent.toString(),
+    mathBlocks,
+  );
+
+  // Gate on the resolved path, not the requested slug: `articlePath` is where
+  // the post actually lives, so `..` segments in the slug cannot open it.
+  const { html: htmlContent, paywalled } = applyPaywallToFile(
+    articlePath,
+    renderedHtml,
+  );
 
   let category = metadata.category;
   if (!category && slugParts.length > 1) {
@@ -99,6 +112,7 @@ async function getArticleImpl(slug: string): Promise<ArticleData | null> {
     collection: metadata.collection,
     excerpt: metadata.excerpt || metadata.description || "",
     image: resolvePostCover(metadata, markdownContent),
+    paywalled,
   };
 }
 

@@ -9,7 +9,6 @@ import RelatedPosts from "@/components/RelatedPosts";
 import SeriesModule from "@/components/SeriesModule";
 import CodeBlockEnhancer from "@/components/CodeBlockEnhancer";
 import { getPostCoverUrl } from "@/lib/getPostCover";
-import { applyPaywall } from "@/lib/paywall";
 
 const SITE_URL = "https://halleyverse.dev";
 
@@ -125,15 +124,6 @@ export default async function BlogPostPage({
   // null in dev / when absent → the sidebar fetches /api/blog/graph as before.
   const graphData = getPrecomputedGraph(article.slug);
 
-  // Trading posts ship only their opening blocks; the rest lives on Substack.
-  // The cut happens here, on the server, so the withheld body is never in the
-  // HTML the browser receives.
-  const { html: bodyHtml, paywalled } = applyPaywall(
-    article.slug,
-    article.category,
-    article.content,
-  );
-
   return (
     <>
       <BlogReader
@@ -146,8 +136,8 @@ export default async function BlogPostPage({
         postSlug={article.slug}
         collection={article.collection}
         graphData={graphData}
-        dangerouslySetInnerHTML={{ __html: bodyHtml }}
-        paywalled={paywalled}
+        dangerouslySetInnerHTML={{ __html: article.content }}
+        paywalled={article.paywalled}
         footer={
           <>
             <SeriesModule ctx={series} />
