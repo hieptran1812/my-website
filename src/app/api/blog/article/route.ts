@@ -12,6 +12,7 @@ import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 import { protectMathBlocks, restoreMathBlocks } from "../../../../lib/markdown";
 import { derivePostLocation } from "../../../../lib/postPath";
 import remarkCallouts from "../../../../lib/remarkCallouts";
+import { applyPaywall, PAYWALL_SUBSCRIBE_URL } from "../../../../lib/paywall";
 
 export async function GET(request: NextRequest) {
   try {
@@ -95,11 +96,19 @@ export async function GET(request: NextRequest) {
       category || "General",
     );
 
+    // Same gate as the rendered page — otherwise this route hands back the
+    // full body of a paywalled trading post to anyone who calls it.
+    const { html: gatedContent, paywalled } = applyPaywall(
+      slug,
+      category,
+      htmlContent,
+    );
+
     const article: Article = {
       id: slug,
       title: metadata.title || "Untitled",
       excerpt: metadata.excerpt || metadata.description || "",
-      content: htmlContent,
+      content: gatedContent,
       author: metadata.author || "",
       date:
         metadata.publishDate ||
@@ -119,7 +128,11 @@ export async function GET(request: NextRequest) {
       collection: metadata.collection,
     };
 
-    return NextResponse.json({ article }, {
+    return NextResponse.json({
+      article,
+      paywalled,
+      paywallUrl: paywalled ? PAYWALL_SUBSCRIBE_URL : undefined,
+    }, {
       headers: {
         "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=60",
       },

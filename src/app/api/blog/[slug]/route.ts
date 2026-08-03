@@ -9,6 +9,7 @@ import { calculateReadTimeWithTags } from "../../../../lib/readTimeCalculator";
 import { protectMathBlocks, restoreMathBlocks } from "../../../../lib/markdown";
 import { derivePostLocation } from "../../../../lib/postPath";
 import remarkCallouts from "../../../../lib/remarkCallouts";
+import { applyPaywall, PAYWALL_SUBSCRIBE_URL } from "../../../../lib/paywall";
 
 export async function GET(
   request: NextRequest,
@@ -86,6 +87,14 @@ export async function GET(
 
     const htmlContent = restoreMathBlocks(processedContent.toString(), mathBlocks);
 
+    // Same gate as the rendered page — otherwise this route hands back the
+    // full body of a paywalled trading post to anyone who calls it.
+    const { html: gatedContent, paywalled } = applyPaywall(
+      slug,
+      resolvedCategory,
+      htmlContent,
+    );
+
     const post = {
       slug,
       title: data.title || "Untitled",
@@ -96,7 +105,9 @@ export async function GET(
       tags: data.tags || [],
       image: data.image || "/images/default-blog.jpg",
       excerpt: data.excerpt || data.description || "No excerpt available",
-      content: htmlContent,
+      content: gatedContent,
+      paywalled,
+      paywallUrl: paywalled ? PAYWALL_SUBSCRIBE_URL : undefined,
     };
 
     return NextResponse.json(post);

@@ -17,6 +17,7 @@ import { formatDate } from "../../lib/dateUtils";
 import BlogGraphSidebar from "./BlogGraphSidebar";
 import type { PrecomputedGraph } from "../../lib/blogGraphIndex";
 import BlogHighlighter from "./highlights/BlogHighlighter";
+import PaywallGate from "../../components/PaywallGate";
 import {
   collectTranslatable,
   translateArticleDom,
@@ -53,6 +54,9 @@ interface BlogReaderProps {
    *  graph sidebar renders instantly with no client fetch. */
   graphData?: PrecomputedGraph | null;
   dangerouslySetInnerHTML?: { __html: string };
+  /** True when the server shipped only a preview — draws the Substack gate
+   *  between the article body and the footer. */
+  paywalled?: boolean;
   /** Rendered inside the article column right after </article>. Used for
    *  series + related-reading so they share the column's width and inherit
    *  the reading-mode CSS variables. */
@@ -71,6 +75,7 @@ export default function BlogReader({
   collection,
   graphData,
   dangerouslySetInnerHTML,
+  paywalled = false,
   footer,
 }: BlogReaderProps) {
   const { theme, isReadingMode, toggleReadingMode } = useTheme();
@@ -283,6 +288,10 @@ export default function BlogReader({
     const items: TocItem[] = [];
 
     headings.forEach((heading, index) => {
+      // The paywall CTA is a heading for screen readers, not a section of the
+      // post — keep it out of the table of contents.
+      if (heading.closest(".paywall-card")) return;
+
       const level = parseInt(heading.tagName.charAt(1));
       let id = heading.id;
 
@@ -1115,6 +1124,7 @@ export default function BlogReader({
                 )}
               </MathJax>
             </article>
+            {paywalled ? <PaywallGate title={title} /> : null}
             {footer ? <div className="article-footer">{footer}</div> : null}
           </div>
         </div>
