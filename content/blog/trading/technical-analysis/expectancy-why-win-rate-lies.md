@@ -40,7 +40,7 @@ This post is the answer, and it is the honest spine that the rest of this series
 
 ![Expectancy combines win rate and loss rate with the average win and the average loss into one signed number; win percent feeds only one of two branches, while expectancy multiplies each branch by its payoff and subtracts the loss leg.](/imgs/blogs/expectancy-why-win-rate-lies-1.png)
 
-The diagram above is the mental model for the whole post. One trade splits into two branches -- a win with probability $p$ and a loss with probability $1-p$. Win rate is *only the split*. Expectancy weighs each branch by what it actually pays, adds the win leg, subtracts the loss leg, and collapses the whole thing into one signed number: positive means the strategy grows your account, zero means it goes nowhere, negative means it bleeds. Everything that follows -- R-multiples, the breakeven win rate, the two-system comparison, the variance and the risk of ruin -- is just this picture, made precise.
+The diagram above is the mental model for the whole post. One trade splits into two branches -- a win with probability $p$ and a loss with probability ${1-p}$. Win rate is *only the split*. Expectancy weighs each branch by what it actually pays, adds the win leg, subtracts the loss leg, and collapses the whole thing into one signed number: positive means the strategy grows your account, zero means it goes nowhere, negative means it bleeds. Everything that follows -- R-multiples, the breakeven win rate, the two-system comparison, the variance and the risk of ruin -- is just this picture, made precise.
 
 A note before we start: this is educational. It explains the mechanics and the math of a trading edge so you can read any strategy's claims honestly. It is not advice to trade anything, and it is certainly not advice to trade more. Every method that can make money can lose it, and we will be specific about how.
 
@@ -52,7 +52,7 @@ Before we can talk about expectancy we need a precise, shared vocabulary for a s
 
 A **trade** is one round trip: you enter a position (buy or sell), and later you exit. The trade's **outcome** is simply your exit value minus your entry value, in dollars, after costs. If you bought a stock at \$100 and sold it at \$103, your outcome is +\$3 per share. If you sold at \$98, it is -\$2 per share. A **win** is any trade that ends positive; a **loss** is any trade that ends negative. (A trade that ends exactly flat is a *scratch*; it is rare and we will fold it into "loss" or ignore it.)
 
-The **win rate**, written $p$, is the fraction of your trades that are wins. If 40 of your last 100 trades were wins, your win rate is $p = 0.40$, or 40%. The **loss rate** is $1 - p$ -- the rest. That is the entire content of "win rate." Notice what it does *not* contain: it says nothing about *how big* the wins or losses were. A 40% win rate is consistent with making a fortune and with going broke, and the rest of this post is about which.
+The **win rate**, written $p$, is the fraction of your trades that are wins. If 40 of your last 100 trades were wins, your win rate is $p = 0.40$, or 40%. The **loss rate** is ${1 - p}$ -- the rest. That is the entire content of "win rate." Notice what it does *not* contain: it says nothing about *how big* the wins or losses were. A 40% win rate is consistent with making a fortune and with going broke, and the rest of this post is about which.
 
 ### Average win and average loss
 
@@ -87,7 +87,7 @@ We are now going to derive expectancy from scratch. It is one line of arithmetic
 
 ### Deriving it from a single trade
 
-Think about what one trade is *worth to you on average*, before you know whether it will win or lose. With probability $p$ it wins, paying your average win. With probability $1-p$ it loses, costing your average loss. The average outcome -- the **expected value** of one trade, where *expected value* means the probability-weighted average over all the ways it can turn out -- is:
+Think about what one trade is *worth to you on average*, before you know whether it will win or lose. With probability $p$ it wins, paying your average win. With probability ${1-p}$ it loses, costing your average loss. The average outcome -- the **expected value** of one trade, where *expected value* means the probability-weighted average over all the ways it can turn out -- is:
 
 $$E = p \times (\text{avg win}) - (1-p) \times (\text{avg loss})$$
 
@@ -101,7 +101,7 @@ R-multiples make this even cleaner. Adopt our standing assumption: losers are $-
 
 $$E[R] = p \cdot W - (1-p) \cdot 1 = p\,W - (1 - p)$$
 
-Read the symbols out loud: $p$ is the win rate, $W$ is the average size of a winner in R, and $1-p$ is the loss rate (each losing $1$R). The whole formula says: *the R you win on average from your wins, minus the R you lose on average from your losses.* The answer comes out in **R per trade**, a pure number you can compare across any strategy on Earth.
+Read the symbols out loud: $p$ is the win rate, $W$ is the average size of a winner in R, and ${1-p}$ is the loss rate (each losing $1$R). The whole formula says: *the R you win on average from your wins, minus the R you lose on average from your losses.* The answer comes out in **R per trade**, a pure number you can compare across any strategy on Earth.
 
 A concrete reading: suppose $E[R] = +0.3$. That means **every trade you take is worth, on average, three-tenths of your risk unit.** It does not mean every trade makes 0.3R -- most individual trades will be a clean $-1$R or a clean $+2$R or whatever. It means that if you average over many trades, you net +0.3R apiece. Over 100 trades at +0.3R each you would expect roughly **+30R** of accumulated profit. If you risked \$200 (1R = \$200) on each trade, that is about +\$6,000 over those 100 trades -- on average, with a lot of wiggle around it. A "+0.3R per trade" edge is, by trading standards, very good. Many professional strategies live between +0.1R and +0.4R per trade and make a great living off the difference, simply by taking the trade thousands of times.
 
@@ -232,7 +232,7 @@ The figure shows the funnel. Take a true win rate of 55% -- a real, tradeable ed
 
 ### How many trades to distinguish a 55% edge from a coin
 
-We can make "distinguish from a coin" precise with a **t-statistic** -- the number of standard errors between your observed result and the no-edge baseline. To claim a real edge, you want your win rate to sit a couple of standard errors above 50%. The gap you are trying to detect is $0.55 - 0.50 = 0.05$. The standard error at sample size $n$ (using $p \approx 0.5$, so $p(1-p) \approx 0.25$) is $\sqrt{0.25/n} = \frac{0.5}{\sqrt{n}}$. You need:
+We can make "distinguish from a coin" precise with a **t-statistic** -- the number of standard errors between your observed result and the no-edge baseline. To claim a real edge, you want your win rate to sit a couple of standard errors above 50%. The gap you are trying to detect is ${0.55 - 0.50 = 0.05}$. The standard error at sample size $n$ (using $p \approx 0.5$, so $p(1-p) \approx 0.25$) is $\sqrt{0.25/n} = \frac{0.5}{\sqrt{n}}$. You need:
 
 $$\frac{0.05}{\,0.5/\sqrt{n}\,} = \frac{0.05\,\sqrt{n}}{0.5} = 0.1\sqrt{n} \geq 2 \quad\Longrightarrow\quad \sqrt{n} \geq 20 \quad\Longrightarrow\quad n \geq 400.$$
 
@@ -258,11 +258,11 @@ Positive expectancy says you make money *on average over many trades*. It does n
 
 ### Losing streaks are normal, not a malfunction
 
-A strategy that wins 40% of the time loses 60% of the time, and independent losses string together more often than intuition expects. The probability of $k$ losses in a row, when each loss has probability $1-p$, is:
+A strategy that wins 40% of the time loses 60% of the time, and independent losses string together more often than intuition expects. The probability of $k$ losses in a row, when each loss has probability ${1-p}$, is:
 
 $$P(k \text{ losses in a row}) = (1-p)^k.$$
 
-For our 40%-win System A ($1-p = 0.60$): the chance of 5 straight losses on any given starting trade is $0.60^5 \approx 0.078$, about 1 in 13. Over a few hundred trades, a run of 5, 6, even 8 consecutive losses is not just possible -- it is *expected to happen*. That is a stretch of -5R to -8R with no relief, inside a system whose long-run expectancy is firmly positive. Nothing has broken. The edge is intact. You are simply living through the variance, and if you panic and quit at the bottom of the streak you convert a winning system into a realized loss.
+For our 40%-win System A (${1-p = 0.60}$): the chance of 5 straight losses on any given starting trade is $0.60^5 \approx 0.078$, about 1 in 13. Over a few hundred trades, a run of 5, 6, even 8 consecutive losses is not just possible -- it is *expected to happen*. That is a stretch of -5R to -8R with no relief, inside a system whose long-run expectancy is firmly positive. Nothing has broken. The edge is intact. You are simply living through the variance, and if you panic and quit at the bottom of the streak you convert a winning system into a realized loss.
 
 ### The path matters: same total, different drawdown
 

@@ -221,7 +221,7 @@ Consider two traders working the same market for a year, seeing the same breakou
 
 $$E_{\text{impulsive}} = 0.30 \times (+2R) + 0.70 \times (-1R) = 0.60R - 0.70R = -0.10R$$
 
-Here $E$ is expectancy in R per trade, $0.30$ is the win rate, $+2R$ the average win, $0.70$ the loss rate, and $-1R$ the average loss. Negative. Over 100 trades in the year, the impulsive trader bleeds about **−10R** — a slow, steady erosion, death by a thousand chases, even though every individual loss was a disciplined −1R.
+Here $E$ is expectancy in R per trade, ${0.30}$ is the win rate, $+2R$ the average win, ${0.70}$ the loss rate, and $-1R$ the average loss. Negative. Over 100 trades in the year, the impulsive trader bleeds about **−10R** — a slow, steady erosion, death by a thousand chases, even though every individual loss was a disciplined −1R.
 
 The **selective** trader takes only breaks that close beyond the level *and* retest-and-hold. That filter cuts the number of trades sharply — perhaps 40 trades in the year instead of 100 — but it raises both the win rate and the payoff. Winning about **45%** of the time, with winners running **+3R** (a tighter entry on the retest catches more of the move) and losers still capped at **−1R**:
 

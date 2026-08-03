@@ -76,7 +76,7 @@ The formula for expectancy is:
 
 $$E = (W \times R_{\text{win}}) - (L \times R_{\text{loss}})$$
 
-where $W$ is the win rate (the fraction of trades that win), $R_{\text{win}}$ is the average win in R-multiples, $L = 1 - W$ is the loss rate, and $R_{\text{loss}}$ is the average loss in R-multiples (usually 1R, since you exit losers at your stop). A positive $E$ means a positive-expectancy edge: over many trades, you make money. We covered the full machinery -- the breakeven win rate $1/(1+R)$, why a 40% system can beat a 70% one, risk of ruin -- in [the expectancy post](/blog/trading/technical-analysis/expectancy-why-win-rate-lies). Here the one thing to hold onto is this: **expectancy is a property of the process, and it only reveals itself over a sample.** A single trade can never confirm or deny it.
+where $W$ is the win rate (the fraction of trades that win), $R_{\text{win}}$ is the average win in R-multiples, $L = 1 - W$ is the loss rate, and $R_{\text{loss}}$ is the average loss in R-multiples (usually 1R, since you exit losers at your stop). A positive $E$ means a positive-expectancy edge: over many trades, you make money. We covered the full machinery -- the breakeven win rate ${1/(1+R)}$, why a 40% system can beat a 70% one, risk of ruin -- in [the expectancy post](/blog/trading/technical-analysis/expectancy-why-win-rate-lies). Here the one thing to hold onto is this: **expectancy is a property of the process, and it only reveals itself over a sample.** A single trade can never confirm or deny it.
 
 With that foundation in place, let's go read the trade.
 

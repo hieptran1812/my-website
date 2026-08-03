@@ -132,7 +132,7 @@ We have the optimistic case: independent factors multiply. Now the trap. The mos
 
 ### What the redundant trader imagines
 
-Suppose you have RSI oversold, stochastic oversold, and Williams %R oversold, and you treat each as an independent 60% factor. The naive multiplication of *failure* probabilities goes: the chance all three are wrong is $0.40 \times 0.40 \times 0.40 = 0.064$, so the chance at least one is right -- and the trade works -- is $1 - 0.064 = 0.936$, about **94%**. The trader feels enormous confidence. Five things, or three things, "all line up," and 94% is nearly a sure thing.
+Suppose you have RSI oversold, stochastic oversold, and Williams %R oversold, and you treat each as an independent 60% factor. The naive multiplication of *failure* probabilities goes: the chance all three are wrong is $0.40 \times 0.40 \times 0.40 = 0.064$, so the chance at least one is right -- and the trade works -- is ${1 - 0.064 = 0.936}$, about **94%**. The trader feels enormous confidence. Five things, or three things, "all line up," and 94% is nearly a sure thing.
 
 It is a fantasy, and the reason is that the three oscillators are not independent. They are all computed from the same recent closing prices. RSI, stochastic, and Williams %R correlate around **0.9** with each other -- when one is oversold, the others are oversold almost by construction. The naive calculation multiplied three numbers that are really one number. It is the probability equivalent of weighing yourself three times on the same scale and adding the readings.
 

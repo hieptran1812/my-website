@@ -260,11 +260,11 @@ Suppose the closing prices climb steadily: **\$100, \$101, \$103, \$105, \$106, 
 
 Now the **MACD line** is fast minus slow at each bar:
 
-- Bar 2: $100.50 - 100.29 = +0.21$
-- Bar 3: $101.75 - 101.06 = +0.69$
-- Bar 4: $103.38 - 102.19 = +1.19$
-- Bar 5: $104.69 - 103.28 = +1.41$
-- Bar 6: $106.34 - 104.63 = +1.71$
+- Bar 2: ${100.50 - 100.29 = +0.21}$
+- Bar 3: ${101.75 - 101.06 = +0.69}$
+- Bar 4: ${103.38 - 102.19 = +1.19}$
+- Bar 5: ${104.69 - 103.28 = +1.41}$
+- Bar 6: ${106.34 - 104.63 = +1.71}$
 
 The MACD line is positive and rising the whole way -- exactly what you want to see in a clean uptrend, because the fast average is pulling steadily ahead of the slow one.
 
@@ -278,10 +278,10 @@ Now the **signal line**, a 2-period EMA of the MACD line ($k = 0.667$), seeded a
 
 And the **histogram**, MACD minus signal:
 
-- Bar 3: $0.69 - 0.53 = +0.16$
-- Bar 4: $1.19 - 0.97 = +0.22$
-- Bar 5: $1.41 - 1.26 = +0.15$
-- Bar 6: $1.71 - 1.56 = +0.15$
+- Bar 3: ${0.69 - 0.53 = +0.16}$
+- Bar 4: ${1.19 - 0.97 = +0.22}$
+- Bar 5: ${1.41 - 1.26 = +0.15}$
+- Bar 6: ${1.71 - 1.56 = +0.15}$
 
 Look closely at the histogram: it grew from +0.16 to +0.22, then *shrank* to +0.15. Price was still rising into bar 6 (\$106 to \$108), and the MACD line was still rising, but the histogram already peaked at bar 4 and started fading. That is the histogram doing its job -- flagging that the *acceleration* of the move had topped out before price did. **The one-sentence intuition: every MACD value is plain arithmetic on the closing prices, and the histogram tops out before the line and before price because it measures acceleration, not level.**
 

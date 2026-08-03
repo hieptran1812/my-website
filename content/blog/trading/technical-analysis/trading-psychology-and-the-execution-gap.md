@@ -56,7 +56,7 @@ The **win rate**, written $p$, is the fraction of your trades that are wins. The
 
 $$E[R] = p \cdot W - (1-p) \cdot 1 = p\,W - (1-p)$$
 
-where $p$ is the win rate, $W$ is the average size of a winner in R, and $1-p$ is the loss rate. If $E[R]$ is positive, the system makes money on average; if it is negative, the system bleeds, no matter how often it wins. That single sign -- positive or negative -- is what "having an edge" means. (If this is new, the full derivation, the breakeven win rate $\frac{1}{1+R}$, and why a 40% system can beat a 70% one are in [what win rate really means and why it lies](/blog/trading/technical-analysis/expectancy-why-win-rate-lies); this post assumes that math and asks the next question: why don't traders *get* it?)
+where $p$ is the win rate, $W$ is the average size of a winner in R, and ${1-p}$ is the loss rate. If $E[R]$ is positive, the system makes money on average; if it is negative, the system bleeds, no matter how often it wins. That single sign -- positive or negative -- is what "having an edge" means. (If this is new, the full derivation, the breakeven win rate $\frac{1}{1+R}$, and why a 40% system can beat a 70% one are in [what win rate really means and why it lies](/blog/trading/technical-analysis/expectancy-why-win-rate-lies); this post assumes that math and asks the next question: why don't traders *get* it?)
 
 ### Expectancy is a per-trade wage, not a per-trade promise
 
