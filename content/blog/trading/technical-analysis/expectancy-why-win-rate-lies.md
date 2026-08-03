@@ -29,7 +29,7 @@ readTime: 39
 > **TL;DR** -- win rate is the most over-marketed and least useful single number in trading. The number that actually decides whether a strategy makes money is **expectancy**: how much you make *on average per trade*, counting wins and losses together.
 >
 > - Measure trades in **R-multiples**: 1R is the money you put at risk on the trade (entry minus stop). A win that makes twice your risk is **+2R**; a full stop-out is **-1R**. Now every trade speaks the same units regardless of position size.
-> - **Expectancy** is $E = p \times \text{avg win} - (1-p) \times \text{avg loss}$. In R-multiples with $-1$R losers, it is $E[R] = p \cdot W - (1-p)$. Positive means the system makes money; negative means it bleeds, no matter how often it wins.
+> - **Expectancy** is $E = p \times \text{avg win} - (1-p) \times \text{avg loss}$. In R-multiples with ${-1R}$ losers, it is $E[R] = p \cdot W - (1-p)$. Positive means the system makes money; negative means it bleeds, no matter how often it wins.
 > - The **breakeven win rate** for a reward-to-risk ratio $R$ is $\frac{1}{1+R}$. At 2-to-1 you only need to be right **33%** of the time; at 1-to-1 you need **50%**; at a tight 1-to-2 you need **67%**.
 > - A **40% win rate** with +2.5R winners (E = +0.40R) crushes a **70% win rate** with +0.5R winners (E ~ +0.05R gross, negative after costs). High win rate sells; expectancy pays.
 > - Even a positive edge has **variance**. The standard error of a win rate is about $\sqrt{p(1-p)/n}$, so a 30-trade track record tells you almost nothing -- and you must size positions to survive the drawdowns (**risk of ruin**) before the edge can compound.
@@ -73,7 +73,7 @@ Now we measure every outcome as a multiple of that risk:
 - A full **stop-out** -- price hits your stop and you exit for the planned loss -- is **-1R**. (Price fell to \$95, you lost your \$5, which is -1R by definition.)
 - A trade you exit early for half the planned loss is **-0.5R**; a trade that blows past your stop in a gap and costs you \$7 is **-1.4R**.
 
-The beauty is that R-multiples are *position-size-independent*. Whether you traded 100 shares or 10,000, a trade that hit its 2R target is +2R. This lets us compare a tiny scalp and a huge swing trade on one ruler, and -- crucially -- it lets us reason about a strategy's edge without ever mentioning dollars. Throughout the post we will assume, unless we say otherwise, that **losers are -1R** (you take your planned loss and no more) and **winners are some positive multiple $+W$R** (a trade that makes $W$ times your risk).
+The beauty is that R-multiples are *position-size-independent*. Whether you traded 100 shares or 10,000, a trade that hit its 2R target is +2R. This lets us compare a tiny scalp and a huge swing trade on one ruler, and -- crucially -- it lets us reason about a strategy's edge without ever mentioning dollars. Throughout the post we will assume, unless we say otherwise, that **losers are -1R** (you take your planned loss and no more) and **winners are some positive multiple ${+WR}$** (a trade that makes $W$ times your risk).
 
 ### The equity curve
 
@@ -97,13 +97,13 @@ If $E$ is positive, the strategy makes money on average -- every trade is, in ex
 
 ### Expectancy in R-multiples
 
-R-multiples make this even cleaner. Adopt our standing assumption: losers are $-1$R and winners are $+W$R, where $W$ is the average reward-to-risk of your winners. Then "avg loss" is just 1 (one R), and "avg win" is $W$ (R), and expectancy in R is:
+R-multiples make this even cleaner. Adopt our standing assumption: losers are ${-1R}$ and winners are ${+WR}$, where $W$ is the average reward-to-risk of your winners. Then "avg loss" is just 1 (one R), and "avg win" is $W$ (R), and expectancy in R is:
 
 $$E[R] = p \cdot W - (1-p) \cdot 1 = p\,W - (1 - p)$$
 
-Read the symbols out loud: $p$ is the win rate, $W$ is the average size of a winner in R, and ${1-p}$ is the loss rate (each losing $1$R). The whole formula says: *the R you win on average from your wins, minus the R you lose on average from your losses.* The answer comes out in **R per trade**, a pure number you can compare across any strategy on Earth.
+Read the symbols out loud: $p$ is the win rate, $W$ is the average size of a winner in R, and ${1-p}$ is the loss rate (each losing ${1R}$). The whole formula says: *the R you win on average from your wins, minus the R you lose on average from your losses.* The answer comes out in **R per trade**, a pure number you can compare across any strategy on Earth.
 
-A concrete reading: suppose $E[R] = +0.3$. That means **every trade you take is worth, on average, three-tenths of your risk unit.** It does not mean every trade makes 0.3R -- most individual trades will be a clean $-1$R or a clean $+2$R or whatever. It means that if you average over many trades, you net +0.3R apiece. Over 100 trades at +0.3R each you would expect roughly **+30R** of accumulated profit. If you risked \$200 (1R = \$200) on each trade, that is about +\$6,000 over those 100 trades -- on average, with a lot of wiggle around it. A "+0.3R per trade" edge is, by trading standards, very good. Many professional strategies live between +0.1R and +0.4R per trade and make a great living off the difference, simply by taking the trade thousands of times.
+A concrete reading: suppose $E[R] = +0.3$. That means **every trade you take is worth, on average, three-tenths of your risk unit.** It does not mean every trade makes 0.3R -- most individual trades will be a clean ${-1R}$ or a clean ${+2R}$ or whatever. It means that if you average over many trades, you net +0.3R apiece. Over 100 trades at +0.3R each you would expect roughly **+30R** of accumulated profit. If you risked \$200 (1R = \$200) on each trade, that is about +\$6,000 over those 100 trades -- on average, with a lot of wiggle around it. A "+0.3R per trade" edge is, by trading standards, very good. Many professional strategies live between +0.1R and +0.4R per trade and make a great living off the difference, simply by taking the trade thousands of times.
 
 #### Worked example: what +0.3R buys you over 100 trades
 
@@ -121,7 +121,7 @@ We can now answer a question that demolishes most win-rate marketing: *given a r
 
 ### Deriving 1/(1+R)
 
-Set expectancy to zero and solve for the win rate. With winners at $+W$R and losers at $-1$R (and we will write the reward-to-risk ratio as $R = W$, the size of a winner relative to a loser), breakeven means:
+Set expectancy to zero and solve for the win rate. With winners at ${+WR}$ and losers at ${-1R}$ (and we will write the reward-to-risk ratio as $R = W$, the size of a winner relative to a loser), breakeven means:
 
 $$p \cdot R - (1 - p) \cdot 1 = 0.$$
 
@@ -270,7 +270,7 @@ Here is a fact that surprises almost everyone. Two strategies can produce the **
 
 ![Two orderings of the same ten R-multiples reach the same plus 2R total, but the favorable order never falls more than 2R while the losses-first order sinks to minus 6R before recovering, so the path, not just the total, decides survival.](/imgs/blogs/expectancy-why-win-rate-lies-8.png)
 
-The figure takes ten trades -- four winners of +2R and six losers of -1R -- which sum to $4 \times 2 - 6 \times 1 = +2$R no matter how you arrange them. The green path interleaves them favorably and never draws down more than 2R; it is a calm ride to +2R. The amber path front-loads all six losses, plunging to **-6R** before the winners arrive and haul it back to the same +2R finish. Identical trades, identical total, but the amber path puts you 6R underwater -- a 6R drawdown that, if 1R is 2% of your account, is a stomach-churning 12% loss before you recover. Same expectancy, wildly different experience, and the amber path is the one that makes people quit at the worst possible moment.
+The figure takes ten trades -- four winners of +2R and six losers of -1R -- which sum to $4 \times 2 - 6 \times 1 = +2R$ no matter how you arrange them. The green path interleaves them favorably and never draws down more than 2R; it is a calm ride to +2R. The amber path front-loads all six losses, plunging to **-6R** before the winners arrive and haul it back to the same +2R finish. Identical trades, identical total, but the amber path puts you 6R underwater -- a 6R drawdown that, if 1R is 2% of your account, is a stomach-churning 12% loss before you recover. Same expectancy, wildly different experience, and the amber path is the one that makes people quit at the worst possible moment.
 
 #### Worked example: hand-simulating a ten-trade equity curve
 
@@ -350,7 +350,7 @@ The distribution figure below is worth keeping in your head as the picture of a 
 
 ![A profitable trend-follower's R-multiples are right-skewed: many minus 1R full stops paid for by a handful of winners running to plus 3R and beyond, so the strategy makes money despite losing most of its trades.](/imgs/blogs/expectancy-why-win-rate-lies-5.png)
 
-This figure is what a winning low-win-rate strategy actually looks like under the hood: a tall red bar of -1R full stops -- most of the trades -- and a long green tail of winners stretching out to +3R, +6R, and a single home run beyond. There are 24 losers of -1R and 16 winners that average about +2.5R, so the win rate is 40% and the expectancy works out to $0.40 \times 2.5 - 0.60 \times 1.0 = +0.40$R per trade -- a profitable system that nonetheless *loses the majority of its trades*, because the green tail is heavy enough to pay for the red bar many times over. If your mental image of a "good system" is a high win rate and a smooth line, replace it with this picture: frequent small losses, rare large wins, and a positive number at the bottom of the page.
+This figure is what a winning low-win-rate strategy actually looks like under the hood: a tall red bar of -1R full stops -- most of the trades -- and a long green tail of winners stretching out to +3R, +6R, and a single home run beyond. There are 24 losers of -1R and 16 winners that average about +2.5R, so the win rate is 40% and the expectancy works out to $0.40 \times 2.5 - 0.60 \times 1.0 = +0.40R$ per trade -- a profitable system that nonetheless *loses the majority of its trades*, because the green tail is heavy enough to pay for the red bar many times over. If your mental image of a "good system" is a high win rate and a smooth line, replace it with this picture: frequent small losses, rare large wins, and a positive number at the bottom of the page.
 
 And here is the comparison that should stay with you longest -- two equity curves from the same forty trades, one for each system we studied.
 

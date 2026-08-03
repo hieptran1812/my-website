@@ -261,7 +261,7 @@ A natural objection: "If the trade can lose, how is it 'high probability'? And h
 
 #### Worked example: the setup's expectancy
 
-We have a win rate $p = 0.45$, winners of $+4$R, and losers of $-1$R. Expectancy in R-multiples is the win leg minus the loss leg:
+We have a win rate $p = 0.45$, winners of ${+4R}$, and losers of ${-1R}$. Expectancy in R-multiples is the win leg minus the loss leg:
 
 $$
 E[R] = p \times W - (1-p) \times L = (0.45 \times 4) - (0.55 \times 1)

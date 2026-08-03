@@ -70,7 +70,7 @@ Now we measure every outcome as a multiple of that risk:
 - A trade that makes exactly what you risked is **+1R**. (Stop at \$97, 1R = \$3; sell at \$103, you made \$3, that's +1R.)
 - Our target at \$109 is +\$9, which is three times the \$3 risk: **+3R**.
 
-Throughout, we assume -- unless we say otherwise -- that **losers are -1R** (you take your planned loss and no more) and **winners are some positive multiple $+W$R**.
+Throughout, we assume -- unless we say otherwise -- that **losers are -1R** (you take your planned loss and no more) and **winners are some positive multiple ${+WR}$**.
 
 ### Reward-to-risk: the ratio the target sets
 
@@ -82,11 +82,11 @@ In our example, $R = \frac{109 - 100}{100 - 97} = \frac{9}{3} = 3$. A **3-to-1**
 
 ### Expectancy: the only number that decides
 
-The **win rate**, written $p$, is the fraction of your trades that win. The **expectancy** is what one trade is worth to you *on average*, before you know whether it wins or loses. With winners of $+W$R and losers of $-1$R:
+The **win rate**, written $p$, is the fraction of your trades that win. The **expectancy** is what one trade is worth to you *on average*, before you know whether it wins or loses. With winners of ${+WR}$ and losers of ${-1R}$:
 
 $$E[R] = p \cdot W - (1 - p)$$
 
-That single line is the spine of everything. If $E[R] > 0$, the system makes money over many trades; if $E[R] = 0$, it goes nowhere; if $E[R] < 0$, it bleeds, no matter how often it wins. A worked instance: at $p = 0.40$ and $W = 3$ (our 3-to-1 trade), $E[R] = 0.40 \times 3 - 0.60 = 1.20 - 0.60 = +0.60$R per trade. The system wins **less than half the time** and still earns six-tenths of a risk-unit on every trade, on average. That is a strong, survivable edge, and it is the kind of result the rest of this post is about engineering.
+That single line is the spine of everything. If $E[R] > 0$, the system makes money over many trades; if $E[R] = 0$, it goes nowhere; if $E[R] < 0$, it bleeds, no matter how often it wins. A worked instance: at $p = 0.40$ and $W = 3$ (our 3-to-1 trade), $E[R] = 0.40 \times 3 - 0.60 = 1.20 - 0.60 = +0.60R$ per trade. The system wins **less than half the time** and still earns six-tenths of a risk-unit on every trade, on average. That is a strong, survivable edge, and it is the kind of result the rest of this post is about engineering.
 
 ### The breakeven win rate
 
@@ -100,7 +100,7 @@ At 1-to-1 you need 50%. At 2-to-1, only 33%. At 3-to-1, just 25%. At 4-to-1, a m
 
 Everything in this post is written for a **long** (you buy, hoping price rises), because one direction is easier to follow. It all **mirrors** for a **short** (you sell-to-open, hoping price falls): the stop sits *above* entry (the idea is wrong if price rises through the level), the target sits *below*, 1R is stop-minus-entry, and the reward-to-risk and expectancy formulas are identical. Wherever you read "below" for a long stop, read "above" for a short, and the geometry is the same object reflected.
 
-One more honesty item the foundations need: **costs**. Every trade pays the *spread* (the gap between the price you can buy at and the price you can sell at) and usually a commission. These costs are paid on *every* trade, win or lose, and they shave the expectancy directly. A useful way to fold them in is to subtract a fixed cost in R from the raw expectancy: if your round-trip cost is about 0.1R (a tenth of your risk per trade), then a raw +0.60R edge is really **+0.50R after costs**. Costs hit *low-reward-to-risk, high-frequency* strategies hardest -- a scalper running 1-to-1 at 60% wins has a raw edge of $0.60 \times 1 - 0.40 = +0.20$R, and a 0.1R cost eats *half* of it -- which is one more reason the right point on the tradeoff curve depends on your instrument and your broker, not on a forum rule. We'll mostly quote pre-cost expectancy for clarity, but never forget the haircut.
+One more honesty item the foundations need: **costs**. Every trade pays the *spread* (the gap between the price you can buy at and the price you can sell at) and usually a commission. These costs are paid on *every* trade, win or lose, and they shave the expectancy directly. A useful way to fold them in is to subtract a fixed cost in R from the raw expectancy: if your round-trip cost is about 0.1R (a tenth of your risk per trade), then a raw +0.60R edge is really **+0.50R after costs**. Costs hit *low-reward-to-risk, high-frequency* strategies hardest -- a scalper running 1-to-1 at 60% wins has a raw edge of $0.60 \times 1 - 0.40 = +0.20R$, and a 0.1R cost eats *half* of it -- which is one more reason the right point on the tradeoff curve depends on your instrument and your broker, not on a forum rule. We'll mostly quote pre-cost expectancy for clarity, but never forget the haircut.
 
 With those six things -- entry, stop, target, 1R, reward-to-risk, expectancy -- plus the cost haircut, we have everything we need. Now we design.
 
@@ -171,8 +171,8 @@ Take one setup and design it two ways. Same chart, same entry. In **version A** 
 
 Compute the expectancy of each with $E[R] = p \cdot W - (1-p)$:
 
-- **Version A (tight, 4:1, 35% wins):** $E[R] = 0.35 \times 4 - 0.65 \times 1 = 1.40 - 0.65 = +0.75$R per trade.
-- **Version B (wide, 2:1, 55% wins):** $E[R] = 0.55 \times 2 - 0.45 \times 1 = 1.10 - 0.45 = +0.65$R per trade.
+- **Version A (tight, 4:1, 35% wins):** $E[R] = 0.35 \times 4 - 0.65 \times 1 = 1.40 - 0.65 = +0.75R$ per trade.
+- **Version B (wide, 2:1, 55% wins):** $E[R] = 0.55 \times 2 - 0.45 \times 1 = 1.10 - 0.45 = +0.65R$ per trade.
 
 Both are positive -- both are real edges. The tight 4:1 wins by a hair: **+0.75R versus +0.65R**, about \$75 versus \$65 on every \$100 risked, roughly +75R versus +65R over a hundred trades. The lesson is not "tight is better" -- it's *very* close, and on a different instrument with a different noise profile the wide version could easily win. The lesson is that **you compare the two by computing the expectancy of each**, not by preferring the higher win rate (which would pick B, the wider one) or the higher ratio (which would pick A). The one-sentence intuition: *you optimize the whole object -- stop and target together -- against expectancy, and the winner is often not obvious until you do the arithmetic.*
 
@@ -182,8 +182,8 @@ Now make the structure-versus-arbitrary point exact. Same trade idea: buy the su
 
 ![A wick down to ninety-seven dollars twenty cents takes out an arbitrary stop at ninety-eight but stays inside a structure stop below the swing at ninety-seven, which survives and rides the trade to the target.](/imgs/blogs/risk-reward-and-expectancy-in-practice-3.png)
 
-- **Arbitrary stop at \$98** ("I'll risk \$2"). 1R = \$2, so the target at \$109 is +\$9 / \$2 = **4.5-to-1**. Looks great on paper. But \$98 sits *inside the noise band*: the swing low is \$97, and a normal wick down to \$97.20 -- shown on the figure as the tall amber wick on bar 5 -- punches straight through \$98 and stops you out. The idea was fine (the level held; price went on to \$109) but your stop didn't. Suppose this noise-clipping happens often enough that your real win rate at this stop is only **28%**. Then $E[R] = 0.28 \times 4.5 - 0.72 = 1.26 - 0.72 = +0.54$R. Positive, but mediocre, and most of your losses are *undeserved*.
-- **Structure stop at \$97** (just below the swing low, with a buffer). 1R = \$3, so the target is +\$9 / \$3 = **3-to-1** -- a lower ratio. But \$97 is *below* the noise band; the wick to \$97.20 doesn't reach it, so you stay in the winning trade. Your win rate at this stop is **45%**, because you've stopped eating noise-stops. Then $E[R] = 0.45 \times 3 - 0.55 = 1.35 - 0.55 = +0.80$R.
+- **Arbitrary stop at \$98** ("I'll risk \$2"). 1R = \$2, so the target at \$109 is +\$9 / \$2 = **4.5-to-1**. Looks great on paper. But \$98 sits *inside the noise band*: the swing low is \$97, and a normal wick down to \$97.20 -- shown on the figure as the tall amber wick on bar 5 -- punches straight through \$98 and stops you out. The idea was fine (the level held; price went on to \$109) but your stop didn't. Suppose this noise-clipping happens often enough that your real win rate at this stop is only **28%**. Then $E[R] = 0.28 \times 4.5 - 0.72 = 1.26 - 0.72 = +0.54R$. Positive, but mediocre, and most of your losses are *undeserved*.
+- **Structure stop at \$97** (just below the swing low, with a buffer). 1R = \$3, so the target is +\$9 / \$3 = **3-to-1** -- a lower ratio. But \$97 is *below* the noise band; the wick to \$97.20 doesn't reach it, so you stay in the winning trade. Your win rate at this stop is **45%**, because you've stopped eating noise-stops. Then $E[R] = 0.45 \times 3 - 0.55 = 1.35 - 0.55 = +0.80R$.
 
 The structure stop has the *lower* reward-to-risk (3:1 versus 4.5:1) and the *higher* expectancy (+0.80R versus +0.54R), entirely because it doesn't die to noise. The one-sentence intuition: *a worse-looking ratio with a structurally sound stop beats a better-looking ratio that gets clipped, because the win rate the structure buys you more than pays for the reward-to-risk it costs.*
 
@@ -220,7 +220,7 @@ Make the "everything falls out of structure" claim concrete. Suppose you're look
 3. **1R falls out:** entry minus stop = \$50.00 - \$48.10 = **\$1.90**. You did not choose this number; the chart chose it.
 4. **Structure for the target:** the next resistance overhead -- the prior swing high the last leg topped at -- is **\$56.00**.
 5. **Reward-to-risk falls out:** (56.00 - 50.00) / 1.90 = 6.00 / 1.90 ≈ **3.16-to-1**, call it 3-to-1.
-6. **Expectancy check:** at the ~42% win rate you've recorded for this setup, $E[R] = 0.42 \times 3.16 - 0.58 = 1.33 - 0.58 = +0.75$R. Positive -- it's a go.
+6. **Expectancy check:** at the ~42% win rate you've recorded for this setup, $E[R] = 0.42 \times 3.16 - 0.58 = 1.33 - 0.58 = +0.75R$. Positive -- it's a go.
 
 Notice that at no point did you *pick* a reward-to-risk or a 1R; you read them off the structure and then *checked* whether the resulting expectancy was positive. The one-sentence intuition: *you don't design a trade to hit a target reward-to-risk; you read the reward-to-risk the chart offers and accept or reject the trade on its expectancy.*
 

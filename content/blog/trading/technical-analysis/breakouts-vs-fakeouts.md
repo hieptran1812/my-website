@@ -279,7 +279,7 @@ Now flip it to see the knife's edge. Suppose you got sloppy and let your average
 
 $$E = (0.45 \times 3) - (0.55 \times 1.5) = 1.35 - 0.825 = 0.525\ \text{R per trade}$$
 
-Still positive — but you just gave away a third of your edge by failing to hold your loss to exactly 1R. And if your losers averaged 3R (no stops, riding fakeouts down) while winners stayed at 3R, your expectancy would be $(0.45 \times 3) - (0.55 \times 3) = -0.30$R — a *losing* strategy, from the *same entries*, purely because you stopped controlling the size of your losses. The edge does not live in the entries; it lives in the structure.
+Still positive — but you just gave away a third of your edge by failing to hold your loss to exactly 1R. And if your losers averaged 3R (no stops, riding fakeouts down) while winners stayed at 3R, your expectancy would be $(0.45 \times 3) - (0.55 \times 3) = -0.30R$ — a *losing* strategy, from the *same entries*, purely because you stopped controlling the size of your losses. The edge does not live in the entries; it lives in the structure.
 
 *Intuition: a breakout strategy that fails 55% of the time is still a money-maker if every failure costs exactly 1R and every success runs to 3R — and it flips to a loser the moment you let your losses run. Selectivity picks the trades; structure keeps the edge.*
 

@@ -266,7 +266,7 @@ The reward-to-risk on this trade is **3-to-1**: you are risking \$2.50 to make \
 
 ### From hit rate to expectancy
 
-A high hit rate is only worth something if you convert it into money, and the bridge is **expectancy** -- the average R you make per trade, counting wins and losses together. We built expectancy from scratch in [why win rate lies](/blog/trading/technical-analysis/expectancy-why-win-rate-lies); here we just plug confluence into it. The formula, with $-1$R losers and a reward-to-risk of $W$ (so winners pay $+W$R):
+A high hit rate is only worth something if you convert it into money, and the bridge is **expectancy** -- the average R you make per trade, counting wins and losses together. We built expectancy from scratch in [why win rate lies](/blog/trading/technical-analysis/expectancy-why-win-rate-lies); here we just plug confluence into it. The formula, with ${-1R}$ losers and a reward-to-risk of $W$ (so winners pay ${+WR}$):
 
 $$E[R] = p \cdot W - (1-p) \cdot 1.$$
 

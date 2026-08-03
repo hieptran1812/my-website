@@ -216,9 +216,9 @@ Step 2 -- **average win.** All 13 winners are +2R, so average win W = **+2.0R**.
 
 Step 3 -- **average loss.** There are 17 losers: 14 at -1R and 3 at -0.5R. Total loss = 14(1) + 3(0.5) = 15.5R over 17 trades, so average loss L = 15.5/17 = **0.91R**.
 
-Step 4 -- **expectancy.** $E = 0.43 \times 2.0 - 0.57 \times 0.91 = 0.87 - 0.52 = $ **+0.35R**. Over 30 trades that is 30 x 0.35 = +10.5R, which matches the equity curve's endpoint, and at \$100 per R it is +\$1,050.
+Step 4 -- **expectancy.** $E = 0.43 \times 2.0 - 0.57 \times 0.91 = 0.87 - 0.52$ = **+0.35R**. Over 30 trades that is 30 x 0.35 = +10.5R, which matches the equity curve's endpoint, and at \$100 per R it is +\$1,050.
 
-Step 5 -- **is 30 trades enough?** Standard error $\approx 1.4 / \sqrt{30} = 1.4 / 5.48 = 0.256$R. The 95% band is $\pm 1.96 \times 0.256 = \pm 0.50$R, so the true expectancy is somewhere in roughly [-0.15R, +0.85R]. **The band includes zero, so 30 trades is not enough to prove the edge.** It is enough to say "promising, keep going and keep logging." You would need on the order of 300 trades before the band clears zero. The one-sentence intuition: *your own journal gives you the exact number, and the same journal tells you not to trust that number yet.*
+Step 5 -- **is 30 trades enough?** Standard error $\approx 1.4 / \sqrt{30} = 1.4 / 5.48 = 0.256R$. The 95% band is $\pm 1.96 \times 0.256 = \pm 0.50R$, so the true expectancy is somewhere in roughly [-0.15R, +0.85R]. **The band includes zero, so 30 trades is not enough to prove the edge.** It is enough to say "promising, keep going and keep logging." You would need on the order of 300 trades before the band clears zero. The one-sentence intuition: *your own journal gives you the exact number, and the same journal tells you not to trust that number yet.*
 
 ### Separating setup-quality from execution-quality
 
