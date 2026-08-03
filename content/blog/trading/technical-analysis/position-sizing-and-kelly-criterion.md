@@ -181,7 +181,7 @@ Kelly maximizes something better: the **expected logarithm of wealth**, which is
 
 ### The formula, built up intuitively
 
-For a simple bet — you wager a fraction $f$ of your bankroll, win with probability $p$ at odds of $b$-to-1 (a \$1 bet returns \$$b$ of profit on a win), and lose your wager with probability $q = 1 - p$ — the Kelly fraction is:
+For a simple bet — you wager a fraction $f$ of your bankroll, win with probability $p$ at odds of $b$-to-1 (a \$1 bet returns $b$ dollars of profit on a win), and lose your wager with probability $q = 1 - p$ — the Kelly fraction is:
 
 $$f^* = \frac{bp - q}{b} = p - \frac{q}{b} = p - \frac{1-p}{b}.$$
 
