@@ -105,8 +105,6 @@ The forensic question is not “can revenue exist before cash?” It can. The qu
 
 **Intuition:** a sale can be an accounting event before it is a cash event, but a durable business must eventually make the two meet.
 
-![The three-statement bridge: a $100 illustrative sale creates revenue and receivables first, then cash only if the customer actually pays.](/imgs/blogs/round-tripping-and-fabricated-revenue-2.webp)
-
 ## 1. How fabricated revenue gets onto the page
 
 The easiest way to understand manipulation is to follow the journal entry. A **journal entry** is the debit-and-credit record that posts an event into the ledger. Debits and credits are not “good” and “bad”; they are the two-sided bookkeeping mechanism that keeps the accounting equation balanced.
@@ -350,6 +348,8 @@ $$
 $$
 
 This is an explanatory abstraction, not a claim that every filing uses exactly these lines. The symbols mean: **A/R** is accounts receivable; **credit revenue** is revenue not paid at the point of sale; **customer cash** is cash collected from customers; **credits and write-offs** reduce what the company expects to collect.
+
+![The three-statement bridge: a $100 illustrative sale creates revenue and receivables first, then cash only if the customer actually pays.](/imgs/blogs/round-tripping-and-fabricated-revenue-2.webp)
 
 ![A cash-conversion timeline shows revenue first, receivables next, and customer cash later; returns and write-offs reveal whether the bridge ever completes.](/imgs/blogs/round-tripping-and-fabricated-revenue-8.webp)
 
