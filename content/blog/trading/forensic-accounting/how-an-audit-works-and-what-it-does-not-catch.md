@@ -37,7 +37,7 @@ The picture to keep in mind is a funnel. Management makes claims about the busin
 
 An income statement claims that revenue was earned and costs belong to a period. A balance sheet claims that assets exist, belong to the company, and are worth the reported amounts, while liabilities are complete. A cash-flow statement claims that cash movements are classified and reconciled. Notes claim that important risks and accounting policies have been disclosed.
 
-Auditors call these claims assertions. Common assertions include existence, completeness, rights and obligations, valuation, accuracy, cutoff, classification, and presentation. If a company reports $10 million of inventory, existence asks whether the goods are actually there; rights asks whether the company owns them; valuation asks whether obsolete goods are overstated; cutoff asks whether purchases were recorded in the right period.
+Auditors call these claims assertions. Common assertions include existence, completeness, rights and obligations, valuation, accuracy, cutoff, classification, and presentation. If a company reports \$10 million of inventory, existence asks whether the goods are actually there; rights asks whether the company owns them; valuation asks whether obsolete goods are overstated; cutoff asks whether purchases were recorded in the right period.
 
 The same balance can be exposed to several different risks. A warehouse count can support existence but tell you little about whether inventory is saleable. A supplier invoice can support a purchase but not prove that a return was not agreed privately. Forensic analysis begins by separating the assertion from the document offered as proof.
 
@@ -57,14 +57,14 @@ That wording matters. An auditor is not promising that every dollar was inspecte
 
 #### Worked example: one assertion, several procedures
 
-Suppose a fictional retailer reports $1,000,000 of year-end receivables. The audit team identifies existence and valuation as the main risks.
+Suppose a fictional retailer reports \$1,000,000 of year-end receivables. The audit team identifies existence and valuation as the main risks.
 
-1. It sends confirmations to customers representing $400,000 of the balance.
-2. It inspects cash receipts after year-end for another $350,000.
+1. It sends confirmations to customers representing \$400,000 of the balance.
+2. It inspects cash receipts after year-end for another \$350,000.
 3. It tests invoices and shipping documents for selected accounts.
 4. It reviews the aging schedule and evaluates the allowance for doubtful accounts.
 
-If confirmations and later cash receipts support $750,000, that does not mechanically prove the remaining $250,000. The team must consider how the untested balance was selected, whether exceptions cluster, and whether the allowance is adequate. The intuition is simple: an audit builds a case from overlapping evidence; it does not stamp every line item individually.
+If confirmations and later cash receipts support \$750,000, that does not mechanically prove the remaining \$250,000. The team must consider how the untested balance was selected, whether exceptions cluster, and whether the allowance is adequate. The intuition is simple: an audit builds a case from overlapping evidence; it does not stamp every line item individually.
 
 ![Audit evidence answers different assertions and leaves different residual risks](/imgs/blogs/how-an-audit-works-and-what-it-does-not-catch-2.webp)
 
@@ -106,10 +106,10 @@ The verbs in an audit program are clues to the strength of the evidence. Inspect
 
 #### Worked example: why “the bank confirmed it” is not enough
 
-Imagine a company reports $500,000 cash and $2,000,000 of debt. The auditor confirms the bank balance and receives a response agreeing to $500,000. That supports the existence of cash at the confirmation date. It does not by itself answer:
+Imagine a company reports \$500,000 cash and \$2,000,000 of debt. The auditor confirms the bank balance and receives a response agreeing to \$500,000. That supports the existence of cash at the confirmation date. It does not by itself answer:
 
-- whether $300,000 of restricted cash was incorrectly presented as freely available;
-- whether a $2,000,000 borrowing is due within twelve months;
+- whether \$300,000 of restricted cash was incorrectly presented as freely available;
+- whether a \$2,000,000 borrowing is due within twelve months;
 - whether an undisclosed guarantee exists; or
 - whether cash was temporarily moved into the account just before year-end.
 
@@ -131,17 +131,17 @@ An error can be small in dollars and still matter because it turns a loss into i
 
 ### Materiality is about statements taken as a whole—and aggregation
 
-Suppose five unrelated accounts each contain a $20,000 overstatement. Individually, each may sit below a hypothetical $100,000 planning threshold. Together they overstate assets by $100,000. Now suppose the five entries all boost earnings just enough to hit a bonus threshold. Their qualitative significance changes even before the arithmetic is aggregated.
+Suppose five unrelated accounts each contain a \$20,000 overstatement. Individually, each may sit below a hypothetical \$100,000 planning threshold. Together they overstate assets by \$100,000. Now suppose the five entries all boost earnings just enough to hit a bonus threshold. Their qualitative significance changes even before the arithmetic is aggregated.
 
 #### Worked example: the rounding error that changes the story
 
 Assume a fictional company has:
 
-- reported profit of $100,000;
-- a hypothetical overall materiality of $25,000; and
-- an unrecorded $20,000 legal expense.
+- reported profit of \$100,000;
+- a hypothetical overall materiality of \$25,000; and
+- an unrecorded \$20,000 legal expense.
 
-Numerically, $20,000 is below $25,000. But if recording it changes profit from $100,000 to $80,000, flips a performance bonus from payable to not payable, or reveals that management described the litigation as immaterial, the auditor cannot dismiss it by comparing two numbers. The amount is illustrative; the principle is the point: materiality is a decision threshold with context, not a free-error allowance.
+Numerically, \$20,000 is below \$25,000. But if recording it changes profit from \$100,000 to \$80,000, flips a performance bonus from payable to not payable, or reveals that management described the litigation as immaterial, the auditor cannot dismiss it by comparing two numbers. The amount is illustrative; the principle is the point: materiality is a decision threshold with context, not a free-error allowance.
 
 ![Materiality combines quantitative thresholds, aggregation, and qualitative context](/imgs/blogs/how-an-audit-works-and-what-it-does-not-catch-4.webp)
 
@@ -159,7 +159,7 @@ Auditors often target high-value or unusual items and sample the remainder. This
 
 #### Worked example: a population with clustered fraud
 
-Suppose a fictional company has 1,000 sales invoices, each for $1,000, and management has fabricated 10 invoices. A simple random sample of 50 invoices has a nonzero chance of finding none. If the 10 fabricated invoices are all posted on the last day of the period and the auditor tests the largest items but none is unusually large, the selection may miss them even though the year-end cutoff risk is high.
+Suppose a fictional company has 1,000 sales invoices, each for \$1,000, and management has fabricated 10 invoices. A simple random sample of 50 invoices has a nonzero chance of finding none. If the 10 fabricated invoices are all posted on the last day of the period and the auditor tests the largest items but none is unusually large, the selection may miss them even though the year-end cutoff risk is high.
 
 The arithmetic is illustrative, not a claim about an actual audit probability. Its intuition is real: a sample can be statistically respectable and still miss a pattern that the population design does not expose.
 
@@ -195,7 +195,7 @@ The hierarchy matters. An emphasis paragraph is not a qualification. A critical 
 
 #### Worked example: translating an opinion into a decision boundary
 
-Suppose an auditor cannot verify a $200,000 foreign affiliate investment in a fictional company. If overall materiality is $100,000 and the possible effect is limited to that investment, a qualified opinion might be appropriate. If the missing evidence affects many balances and the possible effects are pervasive, a disclaimer may be appropriate. If the evidence shows the company overstated several major assets and liabilities, an adverse opinion may be appropriate.
+Suppose an auditor cannot verify a \$200,000 foreign affiliate investment in a fictional company. If overall materiality is \$100,000 and the possible effect is limited to that investment, a qualified opinion might be appropriate. If the missing evidence affects many balances and the possible effects are pervasive, a disclaimer may be appropriate. If the evidence shows the company overstated several major assets and liabilities, an adverse opinion may be appropriate.
 
 These are simplified teaching cases. The key is to separate two axes: how large the problem is, and how widely it infects the statements. The opinion follows the combination, not the emotion of the discovery.
 
@@ -215,7 +215,7 @@ A company can have fairly presented statements and still fail after the report d
 
 #### Worked example: solvent but unable to pay
 
-Imagine a fictional manufacturer with $1,000,000 of assets and $700,000 of liabilities, so equity is $300,000. On paper it is solvent. But $400,000 of debt is due in 30 days, while only $50,000 of cash is available and receivables will be collected over 90 days. Unless refinancing is probable and supportable, liquidity—not the balance-sheet equation—is the immediate risk.
+Imagine a fictional manufacturer with \$1,000,000 of assets and \$700,000 of liabilities, so equity is \$300,000. On paper it is solvent. But \$400,000 of debt is due in 30 days, while only \$50,000 of cash is available and receivables will be collected over 90 days. Unless refinancing is probable and supportable, liquidity—not the balance-sheet equation—is the immediate risk.
 
 The intuition is that solvency is a stock concept and liquidity is a timing problem. Audits examine both, but a clean historical statement cannot manufacture cash that arrives later.
 
@@ -253,7 +253,7 @@ An audit seeks sufficient appropriate evidence to support an opinion on the stat
 
 #### Worked example: a real invoice with a false economic story
 
-Suppose a fictional company ships $100,000 of product to a distributor on December 30. The invoice, shipping record, and customer confirmation are all real. A secret side agreement says the distributor may return every unit after year-end for a full refund if it cannot resell them. If the side agreement is hidden, the auditor may see genuine documents supporting a transaction whose economic substance is different.
+Suppose a fictional company ships \$100,000 of product to a distributor on December 30. The invoice, shipping record, and customer confirmation are all real. A secret side agreement says the distributor may return every unit after year-end for a full refund if it cannot resell them. If the side agreement is hidden, the auditor may see genuine documents supporting a transaction whose economic substance is different.
 
 The forensic response is to ask what the documents do not say: return rights, acceptance terms, payment history, repurchase obligations, and who benefits if the sale is recorded now.
 
@@ -304,12 +304,12 @@ For each red flag, record the claim, the evidence supporting it, the evidence th
 
 #### Worked example: a four-line forensic screen
 
-Suppose a fictional company reports revenue of $10,000,000, receivables of $4,000,000, operating cash flow of negative $500,000, and a year-end sales spike of $2,000,000. None of those numbers alone proves manipulation.
+Suppose a fictional company reports revenue of \$10,000,000, receivables of \$4,000,000, operating cash flow of negative \$500,000, and a year-end sales spike of \$2,000,000. None of those numbers alone proves manipulation.
 
-1. Compute receivables as a share of revenue: $4,000,000 divided by $10,000,000 equals 40%.
+1. Compute receivables as a share of revenue: \$4,000,000 divided by \$10,000,000 equals 40%.
 2. Compare the year-end spike with shipping dates, return rates, and cash collection.
 3. Confirm customer terms, including acceptance and return rights.
-4. Trace the $2,000,000 to subsequent cash and credit notes.
+4. Trace the \$2,000,000 to subsequent cash and credit notes.
 
 If the company explains the result with a new contract model, test that model. If cash arrives and returns are normal, the red flag may be growth timing. If customers deny the terms or the balance is repeatedly rolled forward, the risk escalates.
 
@@ -342,9 +342,9 @@ Ask whether the exception was investigated, whether an alternative procedure was
 
 #### Worked example: the same exception with two different meanings
 
-Suppose a fictional auditor selects 30 purchase invoices and finds one without a matching purchase order. The amount is $5,000, and the company provides a manager email approving the purchase after the fact.
+Suppose a fictional auditor selects 30 purchase invoices and finds one without a matching purchase order. The amount is \$5,000, and the company provides a manager email approving the purchase after the fact.
 
-In the first interpretation, the purchase-order system was unavailable for one day, the goods arrived, the supplier was independent, the amount was paid normally, and the exception is isolated. In the second, the invoice is one of 12 exceptions, all posted during the final week, all approved by the same executive, and all paid to a newly formed supplier. The same $5,000 exception is now a clue about completeness, related parties, and management override.
+In the first interpretation, the purchase-order system was unavailable for one day, the goods arrived, the supplier was independent, the amount was paid normally, and the exception is isolated. In the second, the invoice is one of 12 exceptions, all posted during the final week, all approved by the same executive, and all paid to a newly formed supplier. The same \$5,000 exception is now a clue about completeness, related parties, and management override.
 
 The intuition is that forensic significance comes from relationships among exceptions, not from staring at one document in isolation.
 
@@ -358,15 +358,15 @@ The distinction prevents a common mistake. If controls are weak, the response ma
 
 #### Worked example: changing the response to the risk
 
-Assume a fictional company has $3,000,000 of inventory. The product is perishable, demand is falling, and the warehouse manager also approves write-offs. The inherent valuation risk and control risk are high.
+Assume a fictional company has \$3,000,000 of inventory. The product is perishable, demand is falling, and the warehouse manager also approves write-offs. The inherent valuation risk and control risk are high.
 
-An auditor who only observes the count may obtain good evidence about quantities but weak evidence about saleability. A stronger response combines observation, aging analysis, subsequent sales, price testing, write-off history, and review of who approved adjustments. If later sales average $80 per unit while the books carry units at $100, the valuation question becomes concrete. The numbers are illustrative; the lesson is to choose evidence that can actually falsify the reported amount.
+An auditor who only observes the count may obtain good evidence about quantities but weak evidence about saleability. A stronger response combines observation, aging analysis, subsequent sales, price testing, write-off history, and review of who approved adjustments. If later sales average \$80 per unit while the books carry units at \$100, the valuation question becomes concrete. The numbers are illustrative; the lesson is to choose evidence that can actually falsify the reported amount.
 
 ## 11. Journal entries, estimates, and unusual transactions
 
 Forensic accountants pay close attention to manual journal entries, estimates, and significant unusual transactions because these are where ordinary processes meet judgment. An entry's preparer, date, account, amount, description, and approval are useful filters, not proof of legitimacy. Search criteria may include late postings, senior users, rarely used accounts, round amounts, quick reversals, and entries that move income without an obvious operational event.
 
-The danger of a checklist is that manipulators can learn it. If everyone tests December 31 entries, a scheme can post on December 29 and reverse on January 2. If round amounts are tested, the amount can be $99,870 instead of $100,000. Filters remain useful, but they need economic understanding and population-wide analysis.
+The danger of a checklist is that manipulators can learn it. If everyone tests December 31 entries, a scheme can post on December 29 and reverse on January 2. If round amounts are tested, the amount can be \$99,870 instead of \$100,000. Filters remain useful, but they need economic understanding and population-wide analysis.
 
 Estimates deserve the same discipline. A red flag is not a single optimistic assumption; it is a pattern in which assumptions consistently improve reported performance, contrary evidence is excluded, or the model changes without a business explanation. Recalculate independently, separate observable inputs from management assumptions, compare prior forecasts with actual outcomes, and ask whether errors were symmetric or always favorable.
 
@@ -431,9 +431,9 @@ Then list the observation that would distinguish the explanations. This is the s
 
 #### Worked example: one anomaly, three tests
 
-Suppose a fictional company reports revenue growth of $2,000,000 but only $200,000 of additional cash. The gap does not establish fraud. It creates three tests:
+Suppose a fictional company reports revenue growth of \$2,000,000 but only \$200,000 of additional cash. The gap does not establish fraud. It creates three tests:
 
-1. Compare the $2,000,000 with the increase in receivables and contract assets.
+1. Compare the \$2,000,000 with the increase in receivables and contract assets.
 2. Trace the largest balances to cash collected after year-end.
 3. Read customer terms for acceptance, return, cancellation, and repurchase rights.
 
@@ -461,7 +461,7 @@ The audit may provide leads, workpaper trails, and evidence about what was commu
 
 #### Worked example: two users, one clean opinion
 
-Imagine a fictional company with a clean opinion but $600,000 of debt due in 45 days and a customer representing 60% of expected cash collections. A shareholder may focus on the customer relationship and margin. A lender may focus on refinancing and collateral. A supplier may shorten payment terms. None of those reactions contradicts the audit opinion because each user is asking a different question about the future.
+Imagine a fictional company with a clean opinion but \$600,000 of debt due in 45 days and a customer representing 60% of expected cash collections. A shareholder may focus on the customer relationship and margin. A lender may focus on refinancing and collateral. A supplier may shorten payment terms. None of those reactions contradicts the audit opinion because each user is asking a different question about the future.
 
 The intuition is that assurance is task-specific. A report can be useful and limited at the same time.
 

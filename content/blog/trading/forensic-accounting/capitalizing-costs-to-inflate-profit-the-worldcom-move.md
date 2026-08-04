@@ -15,10 +15,10 @@ readTime: 40
 > **TL;DR** — Capitalizing a cost does not make it disappear; it changes the timing and the statement on which it first appears.
 >
 > - Expensing a cost lowers this period's operating profit. Capitalizing it records an asset first and moves the cost into depreciation or amortization later.
-> - The mechanical boost is dollar-for-dollar in the current period: move $100 from expense to an asset and current pre-tax income rises by $100, before later amortization.
+> - The mechanical boost is dollar-for-dollar in the current period: move \$100 from expense to an asset and current pre-tax income rises by \$100, before later amortization.
 > - Legitimate capitalization requires an identifiable future benefit and a defensible rule for measuring and amortizing it. Ordinary network capacity, advertising, training, research, and maintenance do not become assets because management wants a better quarter.
 > - The software and R&D boundary is a real gray zone, but it is not a blank cheque. Under US GAAP, the project stage and intended use matter.
-> - In the SEC's WorldCom complaint, improper entries reduced reported line costs by approximately $3.8 billion across the first quarter of 2001 through the first quarter of 2002; the complaint says the entries increased capital-asset accounts instead.
+> - In the SEC's WorldCom complaint, improper entries reduced reported line costs by approximately \$3.8 billion across the first quarter of 2001 through the first quarter of 2002; the complaint says the entries increased capital-asset accounts instead.
 
 The most dangerous accounting trick is often not a fake customer or a forged bank statement. It is a real invoice put in the wrong place.
 
@@ -76,7 +76,7 @@ Matching is not permission to postpone every unpleasant cost. It works only when
 
 A **journal entry** is the debit-and-credit record of a transaction. A debit is an entry on the left side of a ledger account; a credit is an entry on the right. The labels are not synonyms for good and bad. Their effect depends on the account.
 
-Suppose a company pays $100 for routine maintenance.
+Suppose a company pays \$100 for routine maintenance.
 
 ```journal
 Correct expense entry
@@ -92,7 +92,7 @@ Dr Capitalized asset          $100
     Cr Cash                         $100
 ```
 
-The second entry leaves current expense $100 lower. Pre-tax income is therefore $100 higher than it would have been. The balance sheet carries an asset that may not meet the definition of an asset. That is the whole current-period profit boost in two lines.
+The second entry leaves current expense \$100 lower. Pre-tax income is therefore \$100 higher than it would have been. The balance sheet carries an asset that may not meet the definition of an asset. That is the whole current-period profit boost in two lines.
 
 ![Before-and-after journal entries for expensing versus unsupported capitalization](/imgs/blogs/capitalizing-costs-to-inflate-profit-the-worldcom-move-2.webp)
 
@@ -100,7 +100,7 @@ The difference is not that one entry is more sophisticated. It is that one makes
 
 #### Worked example: one invoice, two income statements
 
-Imagine a small carrier with $1,000 of revenue and $700 of other legitimate expenses. It also pays $100 for a month of purchased network capacity. The numbers are illustrative.
+Imagine a small carrier with \$1,000 of revenue and \$700 of other legitimate expenses. It also pays \$100 for a month of purchased network capacity. The numbers are illustrative.
 
 Under the correct treatment:
 
@@ -111,7 +111,7 @@ Network capacity expense                       (100)
 Operating profit                               $200
 ```
 
-If the $100 is moved to a capital-asset account, the current-period statement becomes:
+If the \$100 is moved to a capital-asset account, the current-period statement becomes:
 
 ```journal
 Revenue                                      $1,000
@@ -121,19 +121,19 @@ Operating profit                               $300
 Capitalized asset on balance sheet             $100
 ```
 
-The reported profit increase is $300 − $200 = $100. Cash is still $1,000 − $700 − $100 = $200 before any other cash items. No customer paid an extra dollar. The asset is a promise that a future benefit exists.
+The reported profit increase is \$300 − \$200 = \$100. Cash is still \$1,000 − \$700 − \$100 = \$200 before any other cash items. No customer paid an extra dollar. The asset is a promise that a future benefit exists.
 
 **Intuition:** capitalization can move a cost out of today's profit without moving the cash payment or improving the business.
 
 #### Worked example: the reversal arrives later
 
-Continue the same illustrative example. Suppose management amortizes the $100 asset evenly over 4 periods, so each period carries $25 of amortization.
+Continue the same illustrative example. Suppose management amortizes the \$100 asset evenly over 4 periods, so each period carries \$25 of amortization.
 
-In period 1, the improper treatment shows $300 of operating profit before amortization; after the $25 amortization, it shows $275. The correct treatment showed $200. The temporary profit lift is therefore $75, not $100, if the asset is amortized immediately.
+In period 1, the improper treatment shows \$300 of operating profit before amortization; after the \$25 amortization, it shows \$275. The correct treatment showed \$200. The temporary profit lift is therefore \$75, not \$100, if the asset is amortized immediately.
 
-Across periods 1 through 4, the capitalized cost produces $25 + $25 + $25 + $25 = $100 of amortization. The total four-period expense is eventually the same as the correctly expensed $100, assuming the asset is never impaired and the useful life is not changed.
+Across periods 1 through 4, the capitalized cost produces \$25 + \$25 + \$25 + \$25 = \$100 of amortization. The total four-period expense is eventually the same as the correctly expensed \$100, assuming the asset is never impaired and the useful life is not changed.
 
-But the timing matters. A company facing a covenant test, bonus threshold, or earnings forecast in period 1 may value the $75 lift today more than the $25 charges in each later period. That incentive is why the roll-forward matters more than a single income statement.
+But the timing matters. A company facing a covenant test, bonus threshold, or earnings forecast in period 1 may value the \$75 lift today more than the \$25 charges in each later period. That incentive is why the roll-forward matters more than a single income statement.
 
 **Intuition:** capitalization is a timing lever; the longer the claimed useful life, the larger the current boost and the slower the later drag.
 
@@ -143,13 +143,13 @@ The cleanest way to investigate capitalization is to trace one dollar through al
 
 ### Income statement: expense disappears, profit rises
 
-The **income statement** reports revenue, expenses, and profit over a period. If a $100 cost is capitalized instead of expensed, current operating expenses fall by $100. If no immediate amortization offsets it, operating profit and pre-tax income rise by $100.
+The **income statement** reports revenue, expenses, and profit over a period. If a \$100 cost is capitalized instead of expensed, current operating expenses fall by \$100. If no immediate amortization offsets it, operating profit and pre-tax income rise by \$100.
 
 That is a mechanical result, not a judgment. It does not tell us whether the accounting is correct. It tells us what the entry was designed to do.
 
 ### Balance sheet: assets rise, equity follows profit
 
-The **balance sheet** reports assets, liabilities, and equity at a point in time. The $100 capitalization entry increases assets by $100 and leaves cash $100 lower. If the asset is recorded instead of an expense, retained earnings are also $100 higher through the income statement, so the balance still balances.
+The **balance sheet** reports assets, liabilities, and equity at a point in time. The \$100 capitalization entry increases assets by \$100 and leaves cash \$100 lower. If the asset is recorded instead of an expense, retained earnings are also \$100 higher through the income statement, so the balance still balances.
 
 The red flag is not “assets rose.” Healthy companies invest. The red flag is an asset balance that rises faster than the underlying productive capacity, or one that is not supported by project records, useful-life evidence, or future cash-generating ability.
 
@@ -165,7 +165,7 @@ The reconciliation from net income to operating cash flow can therefore look dec
 
 #### Worked example: profit up, operating cash flow up, total cash unchanged
 
-Use the same illustrative $100 payment. Before the payment, assume cash is $500, operating cash flow is $250, and investing cash flow is negative $50.
+Use the same illustrative \$100 payment. Before the payment, assume cash is \$500, operating cash flow is \$250, and investing cash flow is negative \$50.
 
 Correct expense treatment:
 
@@ -185,13 +185,13 @@ Investing cash flow                        $(150)  ($(50) − $100)
 Net change in cash                          $100
 ```
 
-Total cash and the $100 net change are identical. The operating cash-flow headline is $100 higher, while investing cash flow is $100 lower. A reader who looks only at operating cash flow can mistake classification for stronger cash generation.
+Total cash and the \$100 net change are identical. The operating cash-flow headline is \$100 higher, while investing cash flow is \$100 lower. A reader who looks only at operating cash flow can mistake classification for stronger cash generation.
 
 **Intuition:** capitalization can polish both profit and operating cash flow while leaving the bank account exactly where it was.
 
 ### Ratios: the optical changes investors notice
 
-The **operating margin** is operating profit divided by revenue. In the first illustrative statement, correct operating margin is $200 ÷ $1,000 = 20%. After unsupported capitalization, it is $300 ÷ $1,000 = 30%.
+The **operating margin** is operating profit divided by revenue. In the first illustrative statement, correct operating margin is \$200 ÷ \$1,000 = 20%. After unsupported capitalization, it is \$300 ÷ \$1,000 = 30%.
 
 **EBITDA** means earnings before interest, taxes, depreciation, and amortization. It is a profit measure before financing costs, tax, and non-cash depreciation/amortization. Capitalizing a current operating cost can lift EBITDA if the cost never enters current operating expense. Later amortization may not reduce EBITDA at all, because amortization is excluded from the metric. This is one reason EBITDA can be especially vulnerable to cost classification.
 
@@ -220,21 +220,21 @@ The audit trail should connect the invoice to the asset register, the asset regi
 
 #### Worked example: repair or improvement?
 
-Suppose a factory pays an illustrative $120 for a repair that returns a machine to its previous operating condition. The repair does not extend useful life or increase capacity. The defensible entry is:
+Suppose a factory pays an illustrative \$120 for a repair that returns a machine to its previous operating condition. The repair does not extend useful life or increase capacity. The defensible entry is:
 
 ```journal
 Dr Repairs expense              $120
     Cr Cash                           $120
 ```
 
-Now suppose a separate $120 project adds a new production module that increases output and is expected to be used for 3 years. A simplified capitalization entry is:
+Now suppose a separate \$120 project adds a new production module that increases output and is expected to be used for 3 years. A simplified capitalization entry is:
 
 ```journal
 Dr Equipment asset               $120
     Cr Cash                           $120
 ```
 
-With straight-line depreciation and no residual value, the later periodic depreciation is $120 ÷ 3 = $40 per year. The first project reduces current profit by $120; the second initially defers the cost and later recognizes $40 per year. The difference is the documented future service capacity, not the invoice's size.
+With straight-line depreciation and no residual value, the later periodic depreciation is \$120 ÷ 3 = \$40 per year. The first project reduces current profit by \$120; the second initially defers the cost and later recognizes \$40 per year. The difference is the documented future service capacity, not the invoice's size.
 
 **Intuition:** the accounting follows the new resource or service potential, not management's preferred label for the invoice.
 
@@ -276,15 +276,15 @@ Do not collapse internal-use and external-use software into one rule. “We are 
 
 **Research and development**, or R&D, is spending to discover knowledge, design products, solve technical uncertainty, or develop new processes. R&D often creates future value in an economic sense. That does not automatically mean the accounting standards permit an asset today.
 
-This distinction is uncomfortable but important: economic investment and accounting capitalization are not identical. A company may spend $10 million on brilliant research and still record $10 million of R&D expense. Conversely, qualifying software-development costs may be capitalized even though the project later fails. The accounting rule is a recognition rule, not a score for scientific importance.
+This distinction is uncomfortable but important: economic investment and accounting capitalization are not identical. A company may spend \$10 million on brilliant research and still record \$10 million of R&D expense. Conversely, qualifying software-development costs may be capitalized even though the project later fails. The accounting rule is a recognition rule, not a score for scientific importance.
 
-#### Worked example: the same $300 engineering payroll across three buckets
+#### Worked example: the same \$300 engineering payroll across three buckets
 
-Imagine an illustrative internal software program with $300 of engineering payroll in one month:
+Imagine an illustrative internal software program with \$300 of engineering payroll in one month:
 
-* $100 is spent evaluating vendors and deciding whether to build.
-* $150 is spent coding a defined application feature during the application-development stage.
-* $50 is spent training users and migrating old data.
+* \$100 is spent evaluating vendors and deciding whether to build.
+* \$150 is spent coding a defined application feature during the application-development stage.
+* \$50 is spent training users and migrating old data.
 
 Using the simplified US GAAP map, the entry pattern is:
 
@@ -295,7 +295,7 @@ Dr Training/data-conversion expense    $50
     Cr Cash or payroll payable               $300
 ```
 
-Current expense is $150, not $300. The asset is $150. If the completed feature is amortized over 3 years, the later annual amortization is $50, assuming straight-line amortization and no impairment. The treatment is not “capitalize engineering”; it is “capitalize the eligible work performed in the eligible stage.”
+Current expense is \$150, not \$300. The asset is \$150. If the completed feature is amortized over 3 years, the later annual amortization is \$50, assuming straight-line amortization and no impairment. The treatment is not “capitalize engineering”; it is “capitalize the eligible work performed in the eligible stage.”
 
 **Intuition:** a department name cannot turn research, training, or operations into a software asset; the project record has to do that work.
 
@@ -320,19 +320,19 @@ WorldCom is the named case because it makes the mechanism visible in a real comp
 
 WorldCom was a telecommunications company whose **line costs** were amounts paid to other carriers for access to network capacity. Those costs were a major operating expense. They were not a machine, a fiber route controlled by WorldCom, or a software product created by the company. The SEC alleged that, from at least the third quarter of 2000 through the first quarter of 2002, senior management directed entries that concealed the true extent of line costs.
 
-The SEC's June 26, 2002 complaint says officers and employees made entries that effectively erased approximately $941 million from line-cost expense for the fourth quarter of 2001 and correspondingly increased capital-asset accounts. The complaint also says improper line-cost entries were made from the third quarter of 2000 through the first quarter of 2002.
+The SEC's June 26, 2002 complaint says officers and employees made entries that effectively erased approximately \$941 million from line-cost expense for the fourth quarter of 2001 and correspondingly increased capital-asset accounts. The complaint also says improper line-cost entries were made from the third quarter of 2000 through the first quarter of 2002.
 
-The SEC's later exhibit describes the total improper reduction in reported line costs as approximately $3.8 billion from the first quarter of 2001 through the first quarter of 2002, principally by capitalizing about $3.5 billion of line costs. Those are enforcement allegations and reported findings in the cited SEC materials; this post does not treat every allegation as an independent court finding.
+The SEC's later exhibit describes the total improper reduction in reported line costs as approximately \$3.8 billion from the first quarter of 2001 through the first quarter of 2002, principally by capitalizing about \$3.5 billion of line costs. Those are enforcement allegations and reported findings in the cited SEC materials; this post does not treat every allegation as an independent court finding.
 
 ![WorldCom timeline from line-cost pressure to capitalization entries and restatement](/imgs/blogs/capitalizing-costs-to-inflate-profit-the-worldcom-move-5.webp)
 
 ### The statement lines the SEC compared
 
-The SEC's earlier complaint provides a compact before-and-after comparison for 2001. WorldCom's 2001 Form 10-K reported line costs of $14.739 billion and income before income taxes and minority interests of $2.393 billion. The complaint says the true line costs were approximately $17.794 billion and the company suffered a loss of approximately $662 million.
+The SEC's earlier complaint provides a compact before-and-after comparison for 2001. WorldCom's 2001 Form 10-K reported line costs of \$14.739 billion and income before income taxes and minority interests of \$2.393 billion. The complaint says the true line costs were approximately \$17.794 billion and the company suffered a loss of approximately \$662 million.
 
-The difference in line costs is $17.794 billion − $14.739 billion = approximately $3.055 billion. The difference between reported pre-tax income of $2.393 billion and an approximately $662 million loss is approximately $3.055 billion. The statement-line arithmetic lines up.
+The difference in line costs is \$17.794 billion − \$14.739 billion = approximately \$3.055 billion. The difference between reported pre-tax income of \$2.393 billion and an approximately \$662 million loss is approximately \$3.055 billion. The statement-line arithmetic lines up.
 
-For the first quarter of 2002, the same SEC complaint says WorldCom reported line costs of $3.479 billion and pre-tax income of $240 million. It says the true line costs were approximately $4.276 billion and the company suffered a loss of approximately $557 million. The line-cost difference is approximately $797 million, and the pre-tax swing is $240 million − (−$557 million) = approximately $797 million.
+For the first quarter of 2002, the same SEC complaint says WorldCom reported line costs of \$3.479 billion and pre-tax income of \$240 million. It says the true line costs were approximately \$4.276 billion and the company suffered a loss of approximately \$557 million. The line-cost difference is approximately \$797 million, and the pre-tax swing is \$240 million − (−\$557 million) = approximately \$797 million.
 
 Those are not hypothetical examples. They are dated, attributed figures from the SEC complaint. They show exactly how a cost reclassification can turn a reported profit into a reported loss without requiring fictitious revenue.
 
@@ -354,7 +354,7 @@ Less approximate line-cost correction              (3.055bn)
 Reconstructed result                                $(0.662bn)
 ```
 
-The subtraction produces an approximately $662 million loss, matching the SEC complaint's description. The figure is a statement-line bridge, not a claim that every dollar of the company's entire accounting was corrected by this one line; it isolates the line-cost comparison described by the SEC.
+The subtraction produces an approximately \$662 million loss, matching the SEC complaint's description. The figure is a statement-line bridge, not a claim that every dollar of the company's entire accounting was corrected by this one line; it isolates the line-cost comparison described by the SEC.
 
 **Intuition:** when the expense reduction and the profit overstatement are the same dollars, the fraud can be understood as a classification bridge before it is understood as a story about personalities.
 
@@ -368,7 +368,7 @@ Approximate true Q1 2002 line costs              $4.276bn
 Approximate correction                            $0.797bn
 ```
 
-The reported pre-tax income was $240 million. Subtracting the approximate $797 million correction gives $240 million − $797 million = approximately a $557 million loss. The line-cost correction therefore explains the entire reported-to-approximate pre-tax swing in the complaint's comparison.
+The reported pre-tax income was \$240 million. Subtracting the approximate \$797 million correction gives \$240 million − \$797 million = approximately a \$557 million loss. The line-cost correction therefore explains the entire reported-to-approximate pre-tax swing in the complaint's comparison.
 
 The lesson is not that every company with rising CapEx is WorldCom. The lesson is that a forensic analyst can ask whether the asset additions and the profit change are connected by the same dollars.
 
@@ -376,9 +376,9 @@ The lesson is not that every company with rising CapEx is WorldCom. The lesson i
 
 #### Worked example: why the quarter's percentage matters
 
-The SEC exhibit says that $818 million of line costs were improperly capitalized in the first quarter of 2002 and that this allowed WorldCom to report pre-tax income of $240 million instead of a $578 million pre-tax loss in that particular exhibit's comparison. The numbers are close in scale to the complaint's approximately $797 million bridge, but the documents use different comparisons and rounding; do not silently merge them.
+The SEC exhibit says that \$818 million of line costs were improperly capitalized in the first quarter of 2002 and that this allowed WorldCom to report pre-tax income of \$240 million instead of a \$578 million pre-tax loss in that particular exhibit's comparison. The numbers are close in scale to the complaint's approximately \$797 million bridge, but the documents use different comparisons and rounding; do not silently merge them.
 
-Using the exhibit's figures, the pre-tax swing is $240 million − (−$578 million) = $818 million. The exhibit therefore ties the specific $818 million capitalization amount to the reported pre-tax result. The nearby complaint uses approximately $797 million for the line-cost difference and approximately a $557 million loss. A careful reader preserves the source distinction rather than manufacturing a single false-precision number.
+Using the exhibit's figures, the pre-tax swing is \$240 million − (−\$578 million) = \$818 million. The exhibit therefore ties the specific \$818 million capitalization amount to the reported pre-tax result. The nearby complaint uses approximately \$797 million for the line-cost difference and approximately a \$557 million loss. A careful reader preserves the source distinction rather than manufacturing a single false-precision number.
 
 **Intuition:** source documents can describe related periods with different rounding or scopes; reconcile the method before reconciling the headline.
 
@@ -456,10 +456,10 @@ Suppose an illustrative company reports:
 
 | Period | Revenue | Capital additions | Depreciation/amortization | Operating cash flow |
 | --- | ---: | ---: | ---: | ---: |
-| Year 1 | $1,000 | $100 | $80 | $180 |
-| Year 2 | $1,100 | $220 | $85 | $260 |
+| Year 1 | \$1,000 | \$100 | \$80 | \$180 |
+| Year 2 | \$1,100 | \$220 | \$85 | \$260 |
 
-Revenue grows 10%, while additions grow 120% from $100 to $220. Depreciation grows only $5, from $80 to $85. That is not evidence of wrongdoing; Year 2 could contain a genuine new data center or platform. It is a prompt to ask what $120 of incremental additions bought and when it will enter service.
+Revenue grows 10%, while additions grow 120% from \$100 to \$220. Depreciation grows only \$5, from \$80 to \$85. That is not evidence of wrongdoing; Year 2 could contain a genuine new data center or platform. It is a prompt to ask what \$120 of incremental additions bought and when it will enter service.
 
 If the physical business has no new capacity, the claim becomes harder to defend. If the project records show a platform released late in Year 2, the depreciation lag may be reasonable. A screen narrows the question; it does not answer it.
 
@@ -467,9 +467,9 @@ If the physical business has no new capacity, the claim becomes harder to defend
 
 #### Worked example: useful life changes the earnings profile
 
-Assume an illustrative $600 software asset with no residual value. Under a 3-year life, straight-line amortization is $600 ÷ 3 = $200 per year. Under a 6-year life, it is $600 ÷ 6 = $100 per year.
+Assume an illustrative \$600 software asset with no residual value. Under a 3-year life, straight-line amortization is \$600 ÷ 3 = \$200 per year. Under a 6-year life, it is \$600 ÷ 6 = \$100 per year.
 
-In the first year, the longer life increases reported pre-tax income by $100 relative to the shorter-life policy. Over the full life, both policies recognize $600 if the asset remains useful for the full period. But the 6-year policy also carries more asset value after Year 3, when the 3-year policy would be fully amortized.
+In the first year, the longer life increases reported pre-tax income by \$100 relative to the shorter-life policy. Over the full life, both policies recognize \$600 if the asset remains useful for the full period. But the 6-year policy also carries more asset value after Year 3, when the 3-year policy would be fully amortized.
 
 The evidence must come from expected use, obsolescence, contract terms, release cadence, and historical replacement cycles. “The asset still exists” is not enough; an obsolete codebase can exist physically while no longer producing benefits.
 
@@ -548,7 +548,7 @@ FASB's 2025 update announcement notes that current GAAP requires capitalization 
 
 ### A capital-heavy manufacturer: the physical corroboration test
 
-For a manufacturer, capitalized equipment should leave physical traces: installed machinery, commissioning records, production output, maintenance contracts, and depreciation. A company that reports $600 of illustrative equipment additions but no new capacity, no commissioning, and no increase in depreciation has an evidence gap.
+For a manufacturer, capitalized equipment should leave physical traces: installed machinery, commissioning records, production output, maintenance contracts, and depreciation. A company that reports \$600 of illustrative equipment additions but no new capacity, no commissioning, and no increase in depreciation has an evidence gap.
 
 The market implication is subtle. Early capitalization can make margins look weak if the asset is immediately depreciated, or strong if it is parked in construction-in-progress. The analyst should follow the asset into service, not infer quality from one year's margin.
 
@@ -556,7 +556,7 @@ The market implication is subtle. Early capitalization can make margins look wea
 
 Cloud arrangements can contain implementation activities and ongoing service fees. The service contract itself does not turn every invoice into an owned software asset. The reader must identify what the company controls, what functionality was created, and what costs are recurring access or support.
 
-This is why “technology spend” is a poor single line for comparison. Two companies can spend the same $300 illustrative amount while one buys a controlled internal tool and the other buys a year of hosted access. Their economics and accounting can differ without either company being dishonest.
+This is why “technology spend” is a poor single line for comparison. Two companies can spend the same \$300 illustrative amount while one buys a controlled internal tool and the other buys a year of hosted access. Their economics and accounting can differ without either company being dishonest.
 
 ### R&D-heavy biotech: economic investment without a balance-sheet asset
 
@@ -578,9 +578,9 @@ Finally, build the counterfactual. What would operating profit, operating margin
 
 #### Worked example: the counterfactual earnings bridge
 
-Suppose an illustrative company reports revenue of $2,000, operating profit of $300, and $120 of costs capitalized during the year. Assume the analyst's evidence suggests all $120 should have been expensed and that no current amortization was recorded.
+Suppose an illustrative company reports revenue of \$2,000, operating profit of \$300, and \$120 of costs capitalized during the year. Assume the analyst's evidence suggests all \$120 should have been expensed and that no current amortization was recorded.
 
-Reported operating margin is $300 ÷ $2,000 = 15%. The analytical correction is:
+Reported operating margin is \$300 ÷ \$2,000 = 15%. The analytical correction is:
 
 ```journal
 Reported operating profit                    $300
@@ -589,7 +589,7 @@ Adjusted operating profit                    $180
 Adjusted operating margin                    9%
 ```
 
-The $120 is not automatically a fraud loss. It is the amount that would move into current expense if the evidence says the costs were consumed now. The analyst should separately consider taxes, any legitimate future asset, and whether the entries were already corrected.
+The \$120 is not automatically a fraud loss. It is the amount that would move into current expense if the evidence says the costs were consumed now. The analyst should separately consider taxes, any legitimate future asset, and whether the entries were already corrected.
 
 **Intuition:** the counterfactual turns a vague concern about “aggressive accounting” into a measurable question about margin and asset quality.
 
@@ -621,7 +621,7 @@ An impairment test is not a license to wait until failure is undeniable. Product
 
 #### Worked example: the abandoned project
 
-Assume an illustrative $240 software asset was capitalized over two years. The company expected a three-year useful life, so it records $80 of annual amortization. At the start of Year 3, a replacement platform makes the old software unusable, and no residual value is expected.
+Assume an illustrative \$240 software asset was capitalized over two years. The company expected a three-year useful life, so it records \$80 of annual amortization. At the start of Year 3, a replacement platform makes the old software unusable, and no residual value is expected.
 
 Before considering impairment, the carrying amount after two years is:
 
@@ -632,14 +632,14 @@ Less Year 2 amortization                     (80)
 Carrying amount at start of Year 3           $80
 ```
 
-If the old platform has no future benefit, the remaining $80 should not stay on the balance sheet. A simplified entry is:
+If the old platform has no future benefit, the remaining \$80 should not stay on the balance sheet. A simplified entry is:
 
 ```journal
 Dr Impairment loss                            $80
     Cr Software asset                             $80
 ```
 
-The failure is not that the company ever had software. The question is whether the evidence justified the remaining $80 after the replacement decision. Delaying the write-down would preserve current profit but make the balance sheet less truthful.
+The failure is not that the company ever had software. The question is whether the evidence justified the remaining \$80 after the replacement decision. Delaying the write-down would preserve current profit but make the balance sheet less truthful.
 
 **Intuition:** impairment is the accounting test that asks whether yesterday's asset still exists economically today.
 
@@ -647,7 +647,7 @@ The failure is not that the company ever had software. The question is whether t
 
 Capitalization pressure is strongest when a small change moves a company across a threshold: a debt covenant, a bonus target, a forecast range, or a public earnings expectation. The size of the entry can be less important than the size of the resulting decision.
 
-For a company with $100 million of pre-tax profit, a questionable $10 million capitalization is 10% of reported pre-tax profit. For a company with $1 billion of profit, the same $10 million is 1%. Materiality is therefore both quantitative and qualitative. A smaller entry can matter if it changes a loss into a profit or prevents a covenant breach.
+For a company with \$100 million of pre-tax profit, a questionable \$10 million capitalization is 10% of reported pre-tax profit. For a company with \$1 billion of profit, the same \$10 million is 1%. Materiality is therefore both quantitative and qualitative. A smaller entry can matter if it changes a loss into a profit or prevents a covenant breach.
 
 The analyst should read the incentive documents and timing: was the entry posted in the last days of a quarter, did it reverse early in the next period, and did the same project receive a different treatment after the target was met? Reversals are not automatically improper, but they are highly testable.
 
@@ -669,7 +669,7 @@ That timing can complicate the profit bridge, but it does not make unsupported c
 
 #### Worked example: before-tax and after-tax presentation
 
-Suppose an illustrative $100 cost is improperly capitalized and the relevant tax rate is assumed to be 25% solely for this arithmetic example. The current pre-tax profit lift is $100. The current tax expense may rise by $25 if the book-tax rules treat the lift as taxable income, leaving a net-income lift of $75. If tax treatment differs, a deferred tax item may arise instead.
+Suppose an illustrative \$100 cost is improperly capitalized and the relevant tax rate is assumed to be 25% solely for this arithmetic example. The current pre-tax profit lift is \$100. The current tax expense may rise by \$25 if the book-tax rules treat the lift as taxable income, leaving a net-income lift of \$75. If tax treatment differs, a deferred tax item may arise instead.
 
 The forensic correction should begin with the pre-tax statement line because that is the mechanical operating issue. Only after the book-tax difference is verified should an analyst convert the bridge to net income. A neat after-tax number built on an unverified tax assumption is false precision.
 
@@ -700,9 +700,9 @@ No one document settles the question. A defensible balance-sheet asset is a chai
 
 ## Sources & further reading
 
-- [SEC v. WorldCom, Inc. complaint](https://www.sec.gov/litigation/complaints/comp17829.htm), filed June 26, 2002. Primary enforcement complaint describing the line-cost entries, including the approximately $941 million fourth-quarter 2001 entry.
+- [SEC v. WorldCom, Inc. complaint](https://www.sec.gov/litigation/complaints/comp17829.htm), filed June 26, 2002. Primary enforcement complaint describing the line-cost entries, including the approximately \$941 million fourth-quarter 2001 entry.
 - [SEC v. WorldCom, Inc. complaint](https://www.sec.gov/litigation/complaints/complr17588.htm), dated 2002. Primary complaint containing the reported and approximate true line-cost and pre-tax statement lines for 2001 and Q1 2002.
-- [SEC exhibit describing WorldCom's accounting](https://www.sec.gov/Archives/edgar/data/723527/000093176303001862/dex991.htm), filed 2003. Exhibit describing approximately $3.8 billion of reported line-cost reductions and the $818 million Q1 2002 capitalization comparison.
+- [SEC exhibit describing WorldCom's accounting](https://www.sec.gov/Archives/edgar/data/723527/000093176303001862/dex991.htm), filed 2003. Exhibit describing approximately \$3.8 billion of reported line-cost reductions and the \$818 million Q1 2002 capitalization comparison.
 - [FASB: targeted improvements to internal-use software guidance](https://fasb.org/news-and-meetings/in-the-news/fasb-issues-standard-that-makes-targeted-improvements-to-internal-use-software-guidance-423046), September 18, 2025. Official overview of current US GAAP project-stage treatment and the ASU 2025-06 update.
 - [IRS: software and ASC 350-40 FAQ](https://www.irs.gov/businesses/corporations/faqs-irc-41-qres-and-asc-730-lbi-directive-2017), accessed August 4, 2026. Official summary of internal-use software characteristics and the distinction between ASC 350-40 and R&D guidance.
 - [FASB ASU 2025-06 PDF](https://asc.fasb.org/layoutComponents/getPdf?fileName=ASU+2025-06.pdf&isSitesBucket=true), 2025. Official standard update and background discussion for internal-use software accounting.

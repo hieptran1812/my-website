@@ -18,7 +18,7 @@ readTime: 39
 > - Bill-and-hold can be legitimate, but only when the customer—not the seller—has a substantive reason to delay delivery and the seller has genuinely completed its performance.
 > - Premature recognition and percentage-of-completion abuse turn incomplete work into completed revenue. The accounting entry can look ordinary while the contract economics are not.
 > - The best forensic clue is a bridge: revenue up without cash, receivables or contract assets up faster than sales, returns and credits appearing later, or next-quarter sales going missing.
-> - In the SEC's Sunbeam proceeding, the agency reported that improper 1997 practices included $14 million of second-quarter bill-and-hold sales and $29 million of fourth-quarter bill-and-hold sales; Sunbeam later restated 1997 income from $189 million to about $93 million.
+> - In the SEC's Sunbeam proceeding, the agency reported that improper 1997 practices included \$14 million of second-quarter bill-and-hold sales and \$29 million of fourth-quarter bill-and-hold sales; Sunbeam later restated 1997 income from \$189 million to about \$93 million.
 
 Imagine a sales manager who is two days short of a quarterly target. A retailer will take 1,000 blenders eventually, but only 400 fit in its warehouse this month. The manager offers a discount, invoices all 1,000, promises to store the remaining 600, and tells the finance team that the quarter is saved.
 
@@ -75,23 +75,23 @@ Dr Accounts receivable       $100
     Cr Revenue                         $100
 ```
 
-If the goods cost $60, the seller also records:
+If the goods cost \$60, the seller also records:
 
 ```ledger
 Dr Cost of goods sold          $60
     Cr Inventory                         $60
 ```
 
-The $40 difference is gross profit. A fraudulent or premature sale can use perfectly normal entries. The forensic question is whether the entry describes a completed economic exchange at the reporting date.
+The \$40 difference is gross profit. A fraudulent or premature sale can use perfectly normal entries. The forensic question is whether the entry describes a completed economic exchange at the reporting date.
 
 #### Worked example: the ordinary credit sale
 
-Suppose a company ships and the customer accepts 10 machines at an illustrative $100 each. The invoice is $1,000, and the machines cost $600 in total.
+Suppose a company ships and the customer accepts 10 machines at an illustrative \$100 each. The invoice is \$1,000, and the machines cost \$600 in total.
 
-1. Revenue is $1,000: `10 × $100`.
-2. Accounts receivable rises by $1,000 because the customer has not paid.
-3. Inventory falls by $600.
-4. Cost of goods sold rises by $600.
+1. Revenue is \$1,000: `10 × $100`.
+2. Accounts receivable rises by \$1,000 because the customer has not paid.
+3. Inventory falls by \$600.
+4. Cost of goods sold rises by \$600.
 5. Gross profit is `$1,000 − $600 = $400`, or a 40% gross margin.
 
 The journal entries are:
@@ -122,22 +122,22 @@ But the next quarter is not free. The distributor now has excess stock. It may s
 
 #### Worked example: a distributor order that borrows from next quarter
 
-Assume an illustrative manufacturer normally sells 400 units in September and 400 in October. Each unit invoices at $100 and costs $60. On September 29, management offers a distributor a 10% rebate and a 90-day payment term if it accepts 1,000 units.
+Assume an illustrative manufacturer normally sells 400 units in September and 400 in October. Each unit invoices at \$100 and costs \$60. On September 29, management offers a distributor a 10% rebate and a 90-day payment term if it accepts 1,000 units.
 
-If the arrangement is a genuine sale with no substantive return right and the customer has accepted control, September revenue could be $100,000. Gross profit before the rebate would be `$100,000 − $60,000 = $40,000`. The 10% rebate is $10,000, so expected net revenue is $90,000 and expected gross profit is `$90,000 − $60,000 = $30,000`.
+If the arrangement is a genuine sale with no substantive return right and the customer has accepted control, September revenue could be \$100,000. Gross profit before the rebate would be `$100,000 − $60,000 = $40,000`. The 10% rebate is \$10,000, so expected net revenue is \$90,000 and expected gross profit is `$90,000 − $60,000 = $30,000`.
 
-But suppose the distributor only has demand for the normal 400 units and returns 600 in October. The seller has pulled 600 units of future volume into September: $60,000 of gross invoice value, $36,000 of cost, and—before the return estimate—$24,000 of apparent gross profit. The 90-day term also means September cash is zero.
+But suppose the distributor only has demand for the normal 400 units and returns 600 in October. The seller has pulled 600 units of future volume into September: \$60,000 of gross invoice value, \$36,000 of cost, and—before the return estimate—\$24,000 of apparent gross profit. The 90-day term also means September cash is zero.
 
-The right forensic schedule is not “September sales = $100,000.” It is:
+The right forensic schedule is not “September sales = \$100,000.” It is:
 
 | September line | Illustrative amount |
 | --- | ---: |
-| Invoice value | $100,000 |
-| Expected rebate | $(10,000) |
-| Expected returns on 600 units | $(60,000) |
-| Revenue that reflects expected retained sales | $30,000 |
+| Invoice value | \$100,000 |
+| Expected rebate | \$(10,000) |
+| Expected returns on 600 units | \$(60,000) |
+| Revenue that reflects expected retained sales | \$30,000 |
 
-The exact accounting depends on the contract and reporting framework, but the commercial test is clear: a $100,000 invoice is not $100,000 of durable demand. The intuition is that channel stuffing inflates the current period by making the distributor warehouse carry tomorrow’s unsold inventory.
+The exact accounting depends on the contract and reporting framework, but the commercial test is clear: a \$100,000 invoice is not \$100,000 of durable demand. The intuition is that channel stuffing inflates the current period by making the distributor warehouse carry tomorrow’s unsold inventory.
 
 ### Tells in the data room
 
@@ -163,11 +163,11 @@ That is why “the customer was billed” and “the title passed” are weak an
 
 #### Worked example: legitimate storage versus hidden consignment
 
-Use illustrative numbers. A customer orders 100 seasonal heaters at $200 each, pays 30% upfront, and asks the seller to store the finished, individually tagged units until November 1 because its warehouse is being rebuilt. The customer cannot cancel, the seller cannot substitute the heaters, and the customer bears loss risk after the agreed transfer date.
+Use illustrative numbers. A customer orders 100 seasonal heaters at \$200 each, pays 30% upfront, and asks the seller to store the finished, individually tagged units until November 1 because its warehouse is being rebuilt. The customer cannot cancel, the seller cannot substitute the heaters, and the customer bears loss risk after the agreed transfer date.
 
-The invoice is $20,000. The upfront cash is `$20,000 × 30% = $6,000`; the remaining receivable is $14,000. If the arrangement meets the applicable recognition criteria, the seller may recognize the appropriate revenue when control transfers, while the storage service may be a separate obligation if one exists.
+The invoice is \$20,000. The upfront cash is `$20,000 × 30% = $6,000`; the remaining receivable is \$14,000. If the arrangement meets the applicable recognition criteria, the seller may recognize the appropriate revenue when control transfers, while the storage service may be a separate obligation if one exists.
 
-Now change one fact: the customer may return any unsold heaters, the seller pays storage and insurance, and the seller can redirect the units to another buyer. The same $20,000 invoice now resembles a consignment or a contingent sale. The seller has not convincingly transferred the risk of ownership.
+Now change one fact: the customer may return any unsold heaters, the seller pays storage and insurance, and the seller can redirect the units to another buyer. The same \$20,000 invoice now resembles a consignment or a contingent sale. The seller has not convincingly transferred the risk of ownership.
 
 Possible simplified entries for the first, completed-sale fact pattern are:
 
@@ -180,7 +180,7 @@ Dr Cost of goods sold          $12,000
     Cr Inventory                         $12,000
 ```
 
-For the second pattern, the safer commercial conclusion is to keep the goods in inventory and record the $6,000 as a contract liability or deposit until the recognition conditions are met. The exact account names depend on the framework and contract. The intuition is that “bill” describes paperwork; “hold” describes custody. Neither proves transfer of control.
+For the second pattern, the safer commercial conclusion is to keep the goods in inventory and record the \$6,000 as a contract liability or deposit until the recognition conditions are met. The exact account names depend on the framework and contract. The intuition is that “bill” describes paperwork; “hold” describes custody. Neither proves transfer of control.
 
 ### What to inspect
 
@@ -198,7 +198,7 @@ The danger is that the main contract in the contract-management system can look 
 
 #### Worked example: acceptance is the missing event
 
-Suppose a software vendor sells an illustrative $120,000 implementation package. The customer pays $30,000 upfront. The contract says the customer must accept the configured system after a user-acceptance test scheduled for October 15. On September 30, the system is installed but the test has not occurred.
+Suppose a software vendor sells an illustrative \$120,000 implementation package. The customer pays \$30,000 upfront. The contract says the customer must accept the configured system after a user-acceptance test scheduled for October 15. On September 30, the system is installed but the test has not occurred.
 
 If the vendor prematurely records all revenue, it might post:
 
@@ -215,7 +215,7 @@ Dr Cash                         $30,000
     Cr Contract liability                 $30,000
 ```
 
-The remaining $90,000 is not a receivable merely because the vendor expects to bill it someday. After successful acceptance, the revenue entry can reflect the performance completed under the contract. The exact allocation may include separate implementation and support obligations.
+The remaining \$90,000 is not a receivable merely because the vendor expects to bill it someday. After successful acceptance, the revenue entry can reflect the performance completed under the contract. The exact allocation may include separate implementation and support obligations.
 
 The forensic bridge is the difference between “installed” and “accepted.” Search the customer’s test results, unresolved defects, acceptance certificate, and post-period invoices. The intuition is that an invoice can be legally issued before the customer has received the promised economic benefit.
 
@@ -241,13 +241,13 @@ The abuse is not “using estimates.” Every long project uses estimates. The a
 
 #### Worked example: the estimate that moves profit into today
 
-Consider an illustrative fixed-price contract worth $1,000,000. At September 30, the contractor has incurred $300,000 of costs. The original estimate of total cost is $600,000.
+Consider an illustrative fixed-price contract worth \$1,000,000. At September 30, the contractor has incurred \$300,000 of costs. The original estimate of total cost is \$600,000.
 
 Under a cost-to-cost approach, estimated completion is `$300,000 / $600,000 = 50%`. Cumulative revenue is `50% × $1,000,000 = $500,000`. Cumulative gross profit is `$500,000 − $300,000 = $200,000`, assuming no prior recognized amounts.
 
-Now suppose an overlooked design problem means total cost will really be $800,000. Completion is `$300,000 / $800,000 = 37.5%`. Cumulative revenue should be `$1,000,000 × 37.5% = $375,000`, and cumulative gross profit should be `$375,000 − $300,000 = $75,000`.
+Now suppose an overlooked design problem means total cost will really be \$800,000. Completion is `$300,000 / $800,000 = 37.5%`. Cumulative revenue should be `$1,000,000 × 37.5% = $375,000`, and cumulative gross profit should be `$375,000 − $300,000 = $75,000`.
 
-The difference is $125,000 of revenue and $125,000 of apparent profit pulled forward by the understated cost estimate. A realistic investigation would also test whether the $200,000 of remaining cost is supported by supplier quotes, labor schedules, approved change orders, and defect logs.
+The difference is \$125,000 of revenue and \$125,000 of apparent profit pulled forward by the understated cost estimate. A realistic investigation would also test whether the \$200,000 of remaining cost is supported by supplier quotes, labor schedules, approved change orders, and defect logs.
 
 The simplified journal entry for the 50% estimate might be:
 
@@ -276,18 +276,18 @@ An explanatory abstraction—not a formula stated by a particular accounting sta
 
 $$\text{reported revenue}_t = \text{economic sales earned}_t + \text{sales pulled from future periods}_t - \text{sales deferred to future periods}_t$$
 
-Here $t$ is the reporting period. The abstraction helps us see why a company can report growth without creating growth. If $10 million of revenue is pulled from next quarter into this quarter, the current quarter gains $10 million while next quarter starts with a hole of roughly $10 million before normal growth.
+Here $t$ is the reporting period. The abstraction helps us see why a company can report growth without creating growth. If \$10 million of revenue is pulled from next quarter into this quarter, the current quarter gains \$10 million while next quarter starts with a hole of roughly \$10 million before normal growth.
 
 #### Worked example: the next-quarter hole
 
-Assume illustrative underlying demand is $80 million per quarter. In Q3, management accelerates $10 million of Q4 shipments. Reported Q3 revenue becomes $90 million; reported Q4 begins with only $70 million of the underlying demand left.
+Assume illustrative underlying demand is \$80 million per quarter. In Q3, management accelerates \$10 million of Q4 shipments. Reported Q3 revenue becomes \$90 million; reported Q4 begins with only \$70 million of the underlying demand left.
 
 | Period | Underlying demand | Timing shift | Reported revenue |
 | --- | ---: | ---: | ---: |
-| Q3 | $80m | +$10m | $90m |
-| Q4 | $80m | −$10m | $70m |
+| Q3 | \$80m | +\$10m | \$90m |
+| Q4 | \$80m | −\$10m | \$70m |
 
-Q3 growth looks like 12.5% versus a hypothetical $80 million baseline: `$90m / $80m − 1 = 12.5%`. Q4 looks like a 12.5% decline: `$70m / $80m − 1 = -12.5%`. The company has not created a dollar of lifetime demand; it has changed the calendar.
+Q3 growth looks like 12.5% versus a hypothetical \$80 million baseline: `$90m / $80m − 1 = 12.5%`. Q4 looks like a 12.5% decline: `$70m / $80m − 1 = -12.5%`. The company has not created a dollar of lifetime demand; it has changed the calendar.
 
 If the acceleration required a 10% concession, Q3 net revenue is only `$10m × (1 − 10%) = $9m` for the shifted portion. That is why a growth headline can coexist with weaker unit economics. The intuition is that pulling sales forward is a loan from the next quarter, and the interest is usually a discount, a return, or a lost customer relationship.
 
@@ -317,18 +317,18 @@ For each selected sale, document: the enforceable commitment, the promised good 
 
 Subsequent events are powerful. Search the next 30, 60, and 90 days for cash, credit memos, returns, price protection, replacement shipments, write-offs, and customer complaints. A return is not automatically evidence that the original sale was improper, but a concentrated wave of returns from quarter-end deals is a fact pattern that needs a revised estimate or a corrected recognition date.
 
-#### Worked example: an investigator’s $1 million sample
+#### Worked example: an investigator’s \$1 million sample
 
-Suppose an illustrative sample contains 100 quarter-end invoices totaling $1,000,000. The investigator finds:
+Suppose an illustrative sample contains 100 quarter-end invoices totaling \$1,000,000. The investigator finds:
 
-- $600,000 shipped in the last three days of the quarter;
-- $200,000 with payment terms extended from 30 to 90 days;
-- $150,000 returned in the next 45 days;
-- $100,000 with a side email promising a rebate not in the contract.
+- \$600,000 shipped in the last three days of the quarter;
+- \$200,000 with payment terms extended from 30 to 90 days;
+- \$150,000 returned in the next 45 days;
+- \$100,000 with a side email promising a rebate not in the contract.
 
-These amounts overlap; do not add them mechanically. The right next step is to trace each invoice to the contract and customer confirmation, then quantify the population-level exposure. If the $150,000 returns are a subset of the $600,000 late shipments, the return rate for that late-shipment subset is `$150,000 / $600,000 = 25%`. That is a sample signal, not a conclusion about the whole company.
+These amounts overlap; do not add them mechanically. The right next step is to trace each invoice to the contract and customer confirmation, then quantify the population-level exposure. If the \$150,000 returns are a subset of the \$600,000 late shipments, the return rate for that late-shipment subset is `$150,000 / $600,000 = 25%`. That is a sample signal, not a conclusion about the whole company.
 
-The journal-entry review should identify whether the original $1,000,000 entry included estimated returns and rebates. The intuition is that forensic accounting is an evidence chain: unusual shipment, unusual term, subsequent reversal, and missing disclosure become persuasive together.
+The journal-entry review should identify whether the original \$1,000,000 entry included estimated returns and rebates. The intuition is that forensic accounting is an evidence chain: unusual shipment, unusual term, subsequent reversal, and missing disclosure become persuasive together.
 
 ### Step 5: reconcile operational data to the statements
 
@@ -348,7 +348,7 @@ Ratios are screening tools. They narrow the population; they do not establish in
 
 #### Worked example: days sales outstanding without false precision
 
-Assume illustrative quarter revenue is $12 million, ending accounts receivable is $6 million, and the quarter has 90 days. A simple ending-balance screen gives `$6m / $12m × 90 = 45 days`. If the prior quarter was $10 million revenue and $4 million receivables, the comparable screen is `$4m / $10m × 90 = 36 days`.
+Assume illustrative quarter revenue is \$12 million, ending accounts receivable is \$6 million, and the quarter has 90 days. A simple ending-balance screen gives `$6m / $12m × 90 = 45 days`. If the prior quarter was \$10 million revenue and \$4 million receivables, the comparable screen is `$4m / $10m × 90 = 36 days`.
 
 The screen rose by 9 days. That could reflect real growth, a new customer mix, or a deliberate extension of terms. It does not prove manipulation. The investigator should compare invoice terms, cash collected after quarter-end, customer concentration, and the aging buckets. A ratio is a smoke alarm, not a fire report.
 
@@ -358,13 +358,13 @@ Sunbeam Corporation was a U.S. maker of household appliances and outdoor product
 
 ### The setup and the 1997 pressure
 
-According to the SEC, Sunbeam management used several techniques to create the appearance of a successful restructuring. The proceeding reported that the company created $35 million in improper restructuring and other reserves at the end of 1996 and reversed them into income in 1997. That reserve issue is separate from revenue recognition, but it explains the pressure context: management was trying to present improving earnings while the underlying business was deteriorating.
+According to the SEC, Sunbeam management used several techniques to create the appearance of a successful restructuring. The proceeding reported that the company created \$35 million in improper restructuring and other reserves at the end of 1996 and reversed them into income in 1997. That reserve issue is separate from revenue recognition, but it explains the pressure context: management was trying to present improving earnings while the underlying business was deteriorating.
 
-The SEC reported that Sunbeam booked $1.5 million of revenue and $400,000 of income from a purported barbecue-grill sale at the end of March 1997. The wholesaler held the merchandise without accepting the risks of ownership, could return all of it, and Sunbeam paid shipping and storage. The grills were returned in the third quarter, according to the proceeding.
+The SEC reported that Sunbeam booked \$1.5 million of revenue and \$400,000 of income from a purported barbecue-grill sale at the end of March 1997. The wholesaler held the merchandise without accepting the risks of ownership, could return all of it, and Sunbeam paid shipping and storage. The grills were returned in the third quarter, according to the proceeding.
 
 #### Worked example: reconstructing the reported Q1 grill entry
 
-The following is a reconstruction from the SEC’s reported $1.5 million revenue and $400,000 income figures, not Sunbeam’s full journal. If the purported sale was booked, a simplified entry would have looked like:
+The following is a reconstruction from the SEC’s reported \$1.5 million revenue and \$400,000 income figures, not Sunbeam’s full journal. If the purported sale was booked, a simplified entry would have looked like:
 
 ```ledger
 Dr Accounts receivable / cash     $1,500,000
@@ -376,21 +376,21 @@ Dr Cost of goods sold             $1,100,000
 
 The implied gross profit is `$1,500,000 − $1,100,000 = $400,000`, matching the SEC’s reported income amount for that transaction. The precise cost accounts and cash/receivable split are not supplied by the enforcement page, so this is clearly labeled as a simplified reconstruction.
 
-The forensic correction is not “reverse $1.5 million because the goods were physically held.” It is “test whether the wholesaler accepted the risks, had a real obligation, and requested the arrangement.” The intuition is that an entry can be arithmetically balanced and economically empty.
+The forensic correction is not “reverse \$1.5 million because the goods were physically held.” It is “test whether the wholesaler accepted the risks, had a real obligation, and requested the arrangement.” The intuition is that an entry can be arithmetically balanced and economically empty.
 
 ### The bill-and-hold program
 
-The SEC proceeding said Sunbeam began using improper bill-and-hold sales in the second quarter of 1997. Customers were offered financial incentives to place purchase orders before they needed the goods; Sunbeam held the product, paid storage, shipment, and insurance, and customers often retained return rights. The SEC reported $14 million of second-quarter sales revenue and more than $6 million of income from bill-and-hold sales.
+The SEC proceeding said Sunbeam began using improper bill-and-hold sales in the second quarter of 1997. Customers were offered financial incentives to place purchase orders before they needed the goods; Sunbeam held the product, paid storage, shipment, and insurance, and customers often retained return rights. The SEC reported \$14 million of second-quarter sales revenue and more than \$6 million of income from bill-and-hold sales.
 
-The same proceeding reported that fourth-quarter bill-and-hold sales contributed $29 million in sales and $4.5 million in income. It also said Sunbeam’s 1997 filing disclosed bill-and-hold sales of approximately 3% of consolidated revenues, while the SEC alleged that these sales had contributed approximately 10% of fourth-quarter sales revenue and had pulled sales from 1998 into 1997.
+The same proceeding reported that fourth-quarter bill-and-hold sales contributed \$29 million in sales and \$4.5 million in income. It also said Sunbeam’s 1997 filing disclosed bill-and-hold sales of approximately 3% of consolidated revenues, while the SEC alleged that these sales had contributed approximately 10% of fourth-quarter sales revenue and had pulled sales from 1998 into 1997.
 
 Those percentages answer different questions. Three percent was presented as a share of full-year consolidated revenue; approximately 10% referred to the fourth quarter. A forensic reader must keep the denominator and period attached to every percentage.
 
-#### Worked example: the $29 million fourth-quarter shift
+#### Worked example: the \$29 million fourth-quarter shift
 
-Take the SEC-reported fourth-quarter bill-and-hold sales of $29 million and income of $4.5 million. The implied income margin is `$4.5m / $29m ≈ 15.5%`. That is a derived ratio from the SEC’s two reported amounts, not an independent company-wide margin.
+Take the SEC-reported fourth-quarter bill-and-hold sales of \$29 million and income of \$4.5 million. The implied income margin is `$4.5m / $29m ≈ 15.5%`. That is a derived ratio from the SEC’s two reported amounts, not an independent company-wide margin.
 
-If those sales would otherwise have occurred in 1998, the 1997 statement received $29 million of revenue and $4.5 million of income early. The 1998 statement then faced the reverse effect, before considering normal growth, returns, or other changes. A simplified entry showing the timing would be:
+If those sales would otherwise have occurred in 1998, the 1997 statement received \$29 million of revenue and \$4.5 million of income early. The 1998 statement then faced the reverse effect, before considering normal growth, returns, or other changes. A simplified entry showing the timing would be:
 
 ```ledger
 Dr Accounts receivable / cash     $29,000,000
@@ -400,13 +400,13 @@ Dr Cost of goods sold             $24,500,000
     Cr Inventory                             $24,500,000
 ```
 
-The $24.5 million cost is a reconstruction calculated as `$29m − $4.5m`; it is not a reported Sunbeam cost line. The intuition is that a large late-period entry can be profitable and still be a timing loan that makes the next year weaker.
+The \$24.5 million cost is a reconstruction calculated as `$29m − $4.5m`; it is not a reported Sunbeam cost line. The intuition is that a large late-period entry can be profitable and still be a timing loan that makes the next year weaker.
 
 ### The broader channel-stuffing allegations
 
-The SEC said Sunbeam’s December 1997 distributor program offered discounts, favorable payment terms, guaranteed mark-ups, and rights to return or exchange unsold product. The proceeding said at least $62 million of Sunbeam’s reported $189 million of 1997 income did not comply with GAAP requirements, and that the company’s 1997 reported income was materially misstated. Those are enforcement allegations and findings described by the SEC proceeding; they are not a license to infer fraud from one discount or one return.
+The SEC said Sunbeam’s December 1997 distributor program offered discounts, favorable payment terms, guaranteed mark-ups, and rights to return or exchange unsold product. The proceeding said at least \$62 million of Sunbeam’s reported \$189 million of 1997 income did not comply with GAAP requirements, and that the company’s 1997 reported income was materially misstated. Those are enforcement allegations and findings described by the SEC proceeding; they are not a license to infer fraud from one discount or one return.
 
-In November 1998, the SEC account said Sunbeam issued substantially restated financial statements for the six quarters from the fourth quarter of 1996 through the first quarter of 1998. For 1997, the proceeding reported that Sunbeam’s restated income was $93 million, approximately one half of the previously reported amount of $189 million. The stock price, according to the same SEC page, declined from approximately $52 in early March 1998 to approximately $7 after the restated financial statements.
+In November 1998, the SEC account said Sunbeam issued substantially restated financial statements for the six quarters from the fourth quarter of 1996 through the first quarter of 1998. For 1997, the proceeding reported that Sunbeam’s restated income was \$93 million, approximately one half of the previously reported amount of \$189 million. The stock price, according to the same SEC page, declined from approximately \$52 in early March 1998 to approximately \$7 after the restated financial statements.
 
 #### Worked example: the restatement bridge
 
@@ -414,12 +414,12 @@ The SEC-reported bridge is:
 
 | 1997 income measure | Amount |
 | --- | ---: |
-| Previously reported income | $189m |
-| Restated income | $93m |
-| Difference | $96m |
+| Previously reported income | \$189m |
+| Restated income | \$93m |
+| Difference | \$96m |
 | Restated as a share of previously reported | `$93m / $189m ≈ 49.2%` |
 
-The $96 million difference is the arithmetic gap between the two reported figures; it should not be described as a single revenue-recognition error because the SEC described multiple practices, including reserves, guaranteed sales, bill-and-hold sales, and other accelerated sales. The intuition is that restatement size is an outcome measure, not a shortcut to assigning every dollar to one scheme.
+The \$96 million difference is the arithmetic gap between the two reported figures; it should not be described as a single revenue-recognition error because the SEC described multiple practices, including reserves, guaranteed sales, bill-and-hold sales, and other accelerated sales. The intuition is that restatement size is an outcome measure, not a shortcut to assigning every dollar to one scheme.
 
 ### What the Sunbeam case teaches
 
@@ -470,17 +470,17 @@ The aim is triangulation. Three independent systems that tell the same story are
 
 #### Worked example: turning one suspicious invoice into a test plan
 
-Suppose invoice 8472 is an illustrative $250,000 sale dated September 30. The general ledger says debit accounts receivable and credit revenue. The warehouse log says 500 units remained in a seller-controlled location. A customer email dated October 3 says, “We will take the units only if our retail campaign works.” A credit memo dated October 20 reverses $75,000.
+Suppose invoice 8472 is an illustrative \$250,000 sale dated September 30. The general ledger says debit accounts receivable and credit revenue. The warehouse log says 500 units remained in a seller-controlled location. A customer email dated October 3 says, “We will take the units only if our retail campaign works.” A credit memo dated October 20 reverses \$75,000.
 
 The test plan is:
 
 1. Confirm whether the October 3 email reflects a pre-existing term or a new negotiation.
 2. Identify the 500 units and test whether they were complete, segregated, and unavailable for substitution on September 30.
 3. Inspect the contract’s return and cancellation clauses.
-4. Reconcile the $75,000 credit to the returned quantity, price, and any rebate.
+4. Reconcile the \$75,000 credit to the returned quantity, price, and any rebate.
 5. Search other invoices for the same customer, salesperson, product, and period-end pattern.
 
-The $75,000 credit is 30% of the invoice: `$75,000 / $250,000 = 30%`. That arithmetic helps prioritize the customer, but it does not tell us whether the correct September revenue was $175,000, zero, or $250,000. The contract and transfer evidence answer that question. The intuition is that forensic accounting converts a red flag into a reproducible population test.
+The \$75,000 credit is 30% of the invoice: `$75,000 / $250,000 = 30%`. That arithmetic helps prioritize the customer, but it does not tell us whether the correct September revenue was \$175,000, zero, or \$250,000. The contract and transfer evidence answer that question. The intuition is that forensic accounting converts a red flag into a reproducible population test.
 
 ### Controls that reduce the opportunity
 
@@ -506,7 +506,7 @@ These questions do not replace a filing review or an audit. They do prevent a re
 
 *Materiality* means that an omission or misstatement could reasonably influence the decisions of a financial-statement user. It is not a universal percentage, and it is not only about the effect on net income. A small revenue error can matter if it turns a loss into a profit, lets management meet a covenant, supports a debt offering, or changes a trend that investors were watching.
 
-For example, an illustrative $2 million timing error may be immaterial to a company with $2 billion of stable revenue, but material if it is the difference between $1 million of reported profit and a $1 million loss. Qualitative context matters too: a transaction involving the chief executive, a related party, or a concealed side letter may deserve attention even when the amount is not large in isolation.
+For example, an illustrative \$2 million timing error may be immaterial to a company with \$2 billion of stable revenue, but material if it is the difference between \$1 million of reported profit and a \$1 million loss. Qualitative context matters too: a transaction involving the chief executive, a related party, or a concealed side letter may deserve attention even when the amount is not large in isolation.
 
 Forensic teams should report both the amount and the decision context. Quantify the revenue, gross-profit, receivable, inventory, and cash effects separately. Then explain whether the entry affected a target, a covenant, a forecast, or a recurring trend. Do not hide behind a net-income percentage that makes a strategically important misstatement look small.
 
@@ -570,7 +570,7 @@ The second scenario is enterprise software. A contract may contain a license, im
 
 ### A construction company with optimistic change orders
 
-The third scenario is a builder whose margin rises as projects become more complex. The key evidence is not a single percentage-complete figure. It is the project cost ledger, subcontractor commitments, approved change orders, claims correspondence, unpriced work, and expected-loss review. Recalculate the completion percentage using independent evidence. If a $1 million project’s cost-to-date is $300,000, changing expected total cost from $600,000 to $800,000 changes the illustrative completion percentage from 50% to 37.5%; that is an accounting sensitivity worth investigating.
+The third scenario is a builder whose margin rises as projects become more complex. The key evidence is not a single percentage-complete figure. It is the project cost ledger, subcontractor commitments, approved change orders, claims correspondence, unpriced work, and expected-loss review. Recalculate the completion percentage using independent evidence. If a \$1 million project’s cost-to-date is \$300,000, changing expected total cost from \$600,000 to \$800,000 changes the illustrative completion percentage from 50% to 37.5%; that is an accounting sensitivity worth investigating.
 
 ### A distressed issuer approaching a refinancing
 

@@ -17,7 +17,7 @@ readTime: 28
 > - A reserve is not cash in a bank account. It is usually a debit to expense and a credit to a liability or contra-asset account.
 > - The same journal-entry shape can be honest, conservative, merely aggressive, or fraudulent. The evidence, timing, disclosure, and intent matter.
 > - A release normally increases current-period profit without producing current-period cash. The forensic question is: what future obligation disappeared, and where is the evidence?
-> - In the SEC's May 15, 2001 Sunbeam order, the Commission found at least **$35 million** of improper restructuring and other reserves created at year-end 1996, and said at least **$62 million** of reported 1997 income of **$189 million** came from accounting fraud. Those are dated enforcement findings, not a universal benchmark.
+> - In the SEC's May 15, 2001 Sunbeam order, the Commission found at least **\$35 million** of improper restructuring and other reserves created at year-end 1996, and said at least **\$62 million** of reported 1997 income of **\$189 million** came from accounting fraud. Those are dated enforcement findings, not a universal benchmark.
 > - The practical screen is a bridge: trace the reserve from opening balance, additions, use, releases, and closing balance to the related expense, liability, cash payments, and later outcomes.
 
 Imagine two companies with the same weak operating year. Company A reports the loss honestly and begins the next year with no unexplained accounting cushion. Company B reports an even larger loss, buries a generous restructuring estimate inside it, then releases part of that estimate when investors are ready for a turnaround story. Company B can show a prettier next year without selling another product or collecting another dollar.
@@ -38,7 +38,7 @@ The green path is not automatically virtuous: a release can be proper if the ori
 
 An **expense** is a cost recognized in the income statement for the period in which the business consumed a resource or became obligated for a loss. It is not synonymous with cash paid. A company can recognize a warranty expense before it pays a repair shop, or pay a supplier before the related inventory becomes an expense.
 
-The **income statement** measures revenue, expenses, and profit over a period. **Net income** is the residual after recognized expenses are subtracted from recognized revenue. If an expense rises by $10 million and nothing else changes, pretax income falls by $10 million.
+The **income statement** measures revenue, expenses, and profit over a period. **Net income** is the residual after recognized expenses are subtracted from recognized revenue. If an expense rises by \$10 million and nothing else changes, pretax income falls by \$10 million.
 
 ### What is a reserve?
 
@@ -60,29 +60,29 @@ The word “set aside” can mislead beginners. The company may not have moved c
 
 A **journal entry** is the debit-and-credit record of an accounting event. Every entry has at least two sides, and total debits equal total credits. A debit is not automatically bad and a credit is not automatically good; their effect depends on the account.
 
-For a simplified $10 million warranty estimate, the entry is:
+For a simplified \$10 million warranty estimate, the entry is:
 
 | Account | Debit | Credit |
 | --- | ---: | ---: |
-| Warranty expense | $10.0M | — |
-| Warranty liability | — | $10.0M |
+| Warranty expense | \$10.0M | — |
+| Warranty liability | — | \$10.0M |
 
-Expense rises and pretax income falls. The liability rises. Cash does not move. When the company later pays $7 million of claims:
+Expense rises and pretax income falls. The liability rises. Cash does not move. When the company later pays \$7 million of claims:
 
 | Account | Debit | Credit |
 | --- | ---: | ---: |
-| Warranty liability | $7.0M | — |
-| Cash | — | $7.0M |
+| Warranty liability | \$7.0M | — |
+| Cash | — | \$7.0M |
 
 The payment uses the liability; it is not a second warranty expense if the original estimate was properly recorded. This separation—expense when the obligation is recognized, cash when it is settled—is why a reserve can affect profit before cash.
 
 #### Worked example: one reserve, two periods, illustrative numbers
 
-Suppose a manufacturer sells products in Year 1 and estimates $10.0 million of warranty claims. The numbers in this walkthrough are illustrative, not a company’s reported figures.
+Suppose a manufacturer sells products in Year 1 and estimates \$10.0 million of warranty claims. The numbers in this walkthrough are illustrative, not a company’s reported figures.
 
-1. **Year 1 estimate:** debit warranty expense $10.0M; credit warranty liability $10.0M. Pretax income falls by $10.0M, and cash is unchanged.
-2. **Year 2 settlement:** actual claims are $7.0M. Debit warranty liability $7.0M; credit cash $7.0M. Year 2 cash falls by $7.0M, but Year 2 expense is $0 for those claims.
-3. **Year 2 revision:** the remaining $3.0M is no longer expected to be needed. Debit warranty liability $3.0M; credit warranty expense $3.0M. Year 2 pretax income rises by $3.0M, with no Year 2 cash inflow.
+1. **Year 1 estimate:** debit warranty expense \$10.0M; credit warranty liability \$10.0M. Pretax income falls by \$10.0M, and cash is unchanged.
+2. **Year 2 settlement:** actual claims are \$7.0M. Debit warranty liability \$7.0M; credit cash \$7.0M. Year 2 cash falls by \$7.0M, but Year 2 expense is \$0 for those claims.
+3. **Year 2 revision:** the remaining \$3.0M is no longer expected to be needed. Debit warranty liability \$3.0M; credit warranty expense \$3.0M. Year 2 pretax income rises by \$3.0M, with no Year 2 cash inflow.
 
 The intuition: a reserve moves the timing of an estimated cost, while the later release moves the estimate back; only the evidence tells you whether that timing was faithful or engineered.
 
@@ -94,25 +94,25 @@ The big bath is therefore not “any large loss.” It is a pattern in which a l
 
 ## 1. The earnings dial: how a reserve changes reported profit
 
-The simplest way to see the dial is to hold cash and operations constant. If a company records an extra $5 million of expense today, reported pretax profit falls by $5 million today. If it later releases that unsupported excess, reported pretax profit rises by $5 million later. Across both periods, the manipulation shifts the path of profit rather than creating economic value.
+The simplest way to see the dial is to hold cash and operations constant. If a company records an extra \$5 million of expense today, reported pretax profit falls by \$5 million today. If it later releases that unsupported excess, reported pretax profit rises by \$5 million later. Across both periods, the manipulation shifts the path of profit rather than creating economic value.
 
-![The earnings dial: the same illustrative $5 million reserve creates a lower current-period profit and, if later released without evidence, a higher future profit; the cash line moves only when claims are paid.](/imgs/blogs/cookie-jar-reserves-and-big-bath-accounting-2.webp)
+![The earnings dial: the same illustrative \$5 million reserve creates a lower current-period profit and, if later released without evidence, a higher future profit; the cash line moves only when claims are paid.](/imgs/blogs/cookie-jar-reserves-and-big-bath-accounting-2.webp)
 
 The dollar is not “hidden cash.” It is an accounting balance. A real obligation can consume it. A valid change in estimate can remove it. The forensic red flag is a balance that behaves like management’s earnings target rather than like the obligation it is meant to measure.
 
 #### Worked example: the same operating business with and without an excess reserve
 
-Suppose Northstar earns $20.0 million of operating profit before a restructuring estimate in Year 1. Management expects $4.0 million of severance and contract-exit costs, and the evidence supports that estimate. To make the contrast visible, suppose it records $8.0 million instead. The extra $4.0 million is illustrative excess.
+Suppose Northstar earns \$20.0 million of operating profit before a restructuring estimate in Year 1. Management expects \$4.0 million of severance and contract-exit costs, and the evidence supports that estimate. To make the contrast visible, suppose it records \$8.0 million instead. The extra \$4.0 million is illustrative excess.
 
 | Year 1 statement line | Supported estimate | Excess estimate |
 | --- | ---: | ---: |
-| Operating profit before restructuring | $20.0M | $20.0M |
-| Restructuring expense | $(4.0)M | $(8.0)M |
-| Reported operating profit | $16.0M | $12.0M |
+| Operating profit before restructuring | \$20.0M | \$20.0M |
+| Restructuring expense | \$(4.0)M | \$(8.0)M |
+| Reported operating profit | \$16.0M | \$12.0M |
 
-The Year 1 entry under the excess case is debit restructuring expense $8.0M and credit restructuring liability $8.0M. Assume the company pays exactly $4.0M in Year 2 and has evidence that the remaining $4.0M is not needed. It debits the liability $4.0M and credits restructuring expense $4.0M.
+The Year 1 entry under the excess case is debit restructuring expense \$8.0M and credit restructuring liability \$8.0M. Assume the company pays exactly \$4.0M in Year 2 and has evidence that the remaining \$4.0M is not needed. It debits the liability \$4.0M and credits restructuring expense \$4.0M.
 
-If Year 2 operating profit before the release is $16.0M, the release makes reported operating profit $20.0M. No customer paid for that $4.0M in Year 2. The apparent improvement is the reversal of a prior estimate.
+If Year 2 operating profit before the release is \$16.0M, the release makes reported operating profit \$20.0M. No customer paid for that \$4.0M in Year 2. The apparent improvement is the reversal of a prior estimate.
 
 The intuition: the reserve can act like an earnings dial because the expense is recognized in one period and the release can be recognized in another.
 
@@ -141,15 +141,15 @@ Assume a company reports the following simplified restructuring reserve movement
 
 | Movement | Amount |
 | --- | ---: |
-| Opening reserve | $12.0M |
-| Additions for new obligations | $3.0M |
-| Cash payments and other uses | $(8.0)M |
-| Release of no-longer-needed estimate | $(4.0)M |
-| Closing reserve | $3.0M |
+| Opening reserve | \$12.0M |
+| Additions for new obligations | \$3.0M |
+| Cash payments and other uses | \$(8.0)M |
+| Release of no-longer-needed estimate | \$(4.0)M |
+| Closing reserve | \$3.0M |
 
-The arithmetic is $12.0M + $3.0M − $8.0M − $4.0M = $3.0M. The $8.0M use should connect to invoices, payroll records, settlement documents, or other evidence of the obligation. The $4.0M release should connect to a revised cost forecast, completed contracts, or another observable fact.
+The arithmetic is \$12.0M + \$3.0M − \$8.0M − \$4.0M = \$3.0M. The \$8.0M use should connect to invoices, payroll records, settlement documents, or other evidence of the obligation. The \$4.0M release should connect to a revised cost forecast, completed contracts, or another observable fact.
 
-If the note instead says the reserve fell from $12.0M to $3.0M but does not explain whether the $9.0M reduction was paid or released, the gap is not proof of fraud. It is an unresolved evidence request. That is the correct forensic conclusion.
+If the note instead says the reserve fell from \$12.0M to \$3.0M but does not explain whether the \$9.0M reduction was paid or released, the gap is not proof of fraud. It is an unresolved evidence request. That is the correct forensic conclusion.
 
 The intuition: a reserve balance becomes informative only when its additions, uses, and releases are separated and matched to the underlying events.
 
@@ -177,17 +177,17 @@ The statement-line bridge is where an analyst can test the explanation without p
 
 #### Worked example: translating a release into statement lines, illustrative numbers
 
-Suppose a company releases $2.0 million of an old returns reserve. Before the release, the quarter’s income statement contains:
+Suppose a company releases \$2.0 million of an old returns reserve. Before the release, the quarter’s income statement contains:
 
 | Line | Before release |
 | --- | ---: |
-| Revenue | $50.0M |
-| Operating expenses, including returns expense | $(42.0)M |
-| Operating income | $8.0M |
+| Revenue | \$50.0M |
+| Operating expenses, including returns expense | \$(42.0)M |
+| Operating income | \$8.0M |
 
-The simplified release entry is debit returns liability $2.0M and credit returns expense $2.0M. After the entry, operating expenses are $40.0M and operating income is $10.0M. Revenue is unchanged. Current-period cash is unchanged.
+The simplified release entry is debit returns liability \$2.0M and credit returns expense \$2.0M. After the entry, operating expenses are \$40.0M and operating income is \$10.0M. Revenue is unchanged. Current-period cash is unchanged.
 
-On the indirect cash flow statement, net income begins $2.0M higher, but the non-cash reserve release is subtracted in the operating reconciliation. If everything else is constant, operating cash flow does not rise by $2.0M. That is the statement-line bridge: income moves, cash does not.
+On the indirect cash flow statement, net income begins \$2.0M higher, but the non-cash reserve release is subtracted in the operating reconciliation. If everything else is constant, operating cash flow does not rise by \$2.0M. That is the statement-line bridge: income moves, cash does not.
 
 The intuition: a reserve release can improve an income-statement margin while leaving revenue and current-period cash untouched.
 
@@ -209,13 +209,13 @@ The words **reported**, **alleged**, and **found** matter. A regulator’s settl
 
 #### Worked example: a red-flag dashboard, illustrative numbers
 
-Consider two companies that each release $6.0 million of a prior reserve in a quarter with reported operating income of $30.0 million.
+Consider two companies that each release \$6.0 million of a prior reserve in a quarter with reported operating income of \$30.0 million.
 
-**Company Clear:** the reserve note says it related to a closed facility; $5.5 million of the original $8.0 million estimate was paid over two years; the facility closure is documented; the remaining $2.5 million release follows final invoices. The release is still non-recurring, but the evidence supports a change in estimate.
+**Company Clear:** the reserve note says it related to a closed facility; \$5.5 million of the original \$8.0 million estimate was paid over two years; the facility closure is documented; the remaining \$2.5 million release follows final invoices. The release is still non-recurring, but the evidence supports a change in estimate.
 
-**Company Cloud:** the reserve was created as a round $12.0 million “restructuring cushion”; the release is recorded in the final week of the quarter; there is no related cash payment history; the release is described only as “cost discipline”; and the company beats its internal operating-income threshold by $6.0 million.
+**Company Cloud:** the reserve was created as a round \$12.0 million “restructuring cushion”; the release is recorded in the final week of the quarter; there is no related cash payment history; the release is described only as “cost discipline”; and the company beats its internal operating-income threshold by \$6.0 million.
 
-The $6.0 million is the same size in both cases. The evidence is not. Company Clear deserves a normalization adjustment for recurring analysis, not an accusation. Company Cloud deserves a request for the reserve roll-forward, entry-level support, approval trail, and subsequent cash outcomes.
+The \$6.0 million is the same size in both cases. The evidence is not. Company Clear deserves a normalization adjustment for recurring analysis, not an accusation. Company Cloud deserves a request for the reserve roll-forward, entry-level support, approval trail, and subsequent cash outcomes.
 
 The intuition: the amount of a release is a starting point; the evidence around the release determines its forensic meaning.
 
@@ -238,14 +238,14 @@ Suppose a company reports the following year-over-year changes:
 
 | Evidence | Year 1 | Year 2 | Change |
 | --- | ---: | ---: | ---: |
-| Operating income | $30.0M | $38.0M | +$8.0M |
-| Restructuring expense | $(10.0)M | $(2.0)M | +$8.0M |
-| Operating cash flow | $22.0M | $23.0M | +$1.0M |
-| Restructuring liability | $12.0M | $4.0M | −$8.0M |
+| Operating income | \$30.0M | \$38.0M | +\$8.0M |
+| Restructuring expense | \$(10.0)M | \$(2.0)M | +\$8.0M |
+| Operating cash flow | \$22.0M | \$23.0M | +\$1.0M |
+| Restructuring liability | \$12.0M | \$4.0M | −\$8.0M |
 
-The numbers suggest that the entire $8.0M operating-income improvement could be explained by lower restructuring expense, while operating cash flow rose only $1.0M. The liability fell by the same $8.0M, so the next question is whether that fall was $8.0M of payments, $8.0M of release, or a combination.
+The numbers suggest that the entire \$8.0M operating-income improvement could be explained by lower restructuring expense, while operating cash flow rose only \$1.0M. The liability fell by the same \$8.0M, so the next question is whether that fall was \$8.0M of payments, \$8.0M of release, or a combination.
 
-If the note shows $6.0M of cash uses and a $2.0M release, the release is a $2.0M non-cash income benefit. If the note shows $1.0M of cash uses and a $7.0M release, the earnings story is much more dependent on estimate reversal. Neither is automatically improper; both are materially different from “operations improved by $8.0M.”
+If the note shows \$6.0M of cash uses and a \$2.0M release, the release is a \$2.0M non-cash income benefit. If the note shows \$1.0M of cash uses and a \$7.0M release, the earnings story is much more dependent on estimate reversal. Neither is automatically improper; both are materially different from “operations improved by \$8.0M.”
 
 The intuition: always decompose a reserve decline into cash uses and estimate releases before calling it cost control.
 
@@ -253,26 +253,26 @@ The intuition: always decompose a reserve decline into cash uses and estimate re
 
 Sunbeam Corporation is a useful case because the SEC’s public [administrative order dated May 15, 2001](https://www.sec.gov/enforcement-litigation/administrative-proceedings/33-7976) describes both the reserve mechanics and the later results. The facts below are reported findings in that order; where a separate SEC complaint is described, I use “alleged.” All dollar amounts in this case section are historical, dated SEC figures, and all “approximately” and “at least” qualifiers are retained.
 
-The SEC order says Sunbeam’s senior management created the appearance of a successful restructuring from the last quarter of 1996 through June 1998. It found that Sunbeam created at least **$35 million** in improper restructuring and other “cookie jar” reserves at year-end 1996 and reversed them into income in 1997. It also stated that at least **$62 million** of Sunbeam’s reported **$189 million** of 1997 income came from accounting fraud. These figures describe the SEC’s findings for the periods identified; they are not a general estimate of how much reserve manipulation occurs in public companies.
+The SEC order says Sunbeam’s senior management created the appearance of a successful restructuring from the last quarter of 1996 through June 1998. It found that Sunbeam created at least **\$35 million** in improper restructuring and other “cookie jar” reserves at year-end 1996 and reversed them into income in 1997. It also stated that at least **\$62 million** of Sunbeam’s reported **\$189 million** of 1997 income came from accounting fraud. These figures describe the SEC’s findings for the periods identified; they are not a general estimate of how much reserve manipulation occurs in public companies.
 
-The order describes a **$337.6 million** total restructuring charge at year-end 1996. Within it, the SEC identified **$18.7 million** of restructuring costs that management knew, or was reckless in not knowing, did not conform to GAAP because they benefited future activities. It also described a **$12 million** environmental litigation reserve that overstated probable liability by at least **$6 million**. The order separately described a **$21.8 million** cooperative-advertising reserve that was set without a reasonableness test.
+The order describes a **\$337.6 million** total restructuring charge at year-end 1996. Within it, the SEC identified **\$18.7 million** of restructuring costs that management knew, or was reckless in not knowing, did not conform to GAAP because they benefited future activities. It also described a **\$12 million** environmental litigation reserve that overstated probable liability by at least **\$6 million**. The order separately described a **\$21.8 million** cooperative-advertising reserve that was set without a reasonableness test.
 
-In the first quarter of 1997, the SEC said Sunbeam used **$4.3 million** of non-GAAP restructuring reserves to reduce current-period expenses, improving income by approximately **13%**. In the second quarter, it said Sunbeam offset **$8.2 million** of costs against the reserves and that the excess cooperative-advertising reserve contributed **$5.8 million** to income. The order also described improper sales practices, including bill-and-hold arrangements. Those practices matter because the reserve release was not the only dial being turned.
+In the first quarter of 1997, the SEC said Sunbeam used **\$4.3 million** of non-GAAP restructuring reserves to reduce current-period expenses, improving income by approximately **13%**. In the second quarter, it said Sunbeam offset **\$8.2 million** of costs against the reserves and that the excess cooperative-advertising reserve contributed **\$5.8 million** to income. The order also described improper sales practices, including bill-and-hold arrangements. Those practices matter because the reserve release was not the only dial being turned.
 
-By late 1997, the apparent turnaround had a financing and acquisition story attached to it. The SEC order says Sunbeam needed to raise **$700 million** through a zero-coupon bond offering and arrange a **$1.7 billion** revolving credit line to complete acquisitions. That context does not prove intent by itself; it explains why reported results mattered.
+By late 1997, the apparent turnaround had a financing and acquisition story attached to it. The SEC order says Sunbeam needed to raise **\$700 million** through a zero-coupon bond offering and arrange a **\$1.7 billion** revolving credit line to complete acquisitions. That context does not prove intent by itself; it explains why reported results mattered.
 
-The story unraveled in 1998. The SEC order says Sunbeam announced in June 1998 that prior financial statements should not be relied upon, and that in November 1998 it issued substantially restated financial statements for six quarters from the fourth quarter of 1996 through the first quarter of 1998. For 1997, reported income became approximately **$93 million**, about half the amount previously reported. The SEC later said Sunbeam’s stock price fell from approximately **$52** in early March 1998 to approximately **$7** after the restated statements. These are historical prices reported in the SEC order, not current market data.
+The story unraveled in 1998. The SEC order says Sunbeam announced in June 1998 that prior financial statements should not be relied upon, and that in November 1998 it issued substantially restated financial statements for six quarters from the fourth quarter of 1996 through the first quarter of 1998. For 1997, reported income became approximately **\$93 million**, about half the amount previously reported. The SEC later said Sunbeam’s stock price fell from approximately **\$52** in early March 1998 to approximately **\$7** after the restated statements. These are historical prices reported in the SEC order, not current market data.
 
-![Sunbeam timeline: a $337.6 million 1996 restructuring charge, at least $35 million of improper reserves, reserve releases and other practices in 1997, the June 1998 reliability warning, and the November 1998 restatement to approximately $93 million of income.](/imgs/blogs/cookie-jar-reserves-and-big-bath-accounting-7.webp)
+![Sunbeam timeline: a \$337.6 million 1996 restructuring charge, at least \$35 million of improper reserves, reserve releases and other practices in 1997, the June 1998 reliability warning, and the November 1998 restatement to approximately \$93 million of income.](/imgs/blogs/cookie-jar-reserves-and-big-bath-accounting-7.webp)
 
 #### Worked example: reading Sunbeam’s reserve bridge from the SEC order
 
 This walkthrough uses the SEC’s dated findings, not a reconstructed general ledger.
 
-1. **Year-end 1996:** total restructuring charge reported by the SEC: $337.6M. The order says at least $35.0M of restructuring and other reserves were improper.
-2. **1997 reserve use:** the order says $4.3M of non-GAAP reserves reduced first-quarter expenses and $8.2M of costs were offset in the second quarter. These amounts are separate period examples in the order; do not add them to the $35.0M as if they were a complete roll-forward.
-3. **1997 income:** the order says reported income was $189M and at least $62M came from accounting fraud. The $62M is about 32.8% of $189M, calculated as $62M divided by $189M; the SEC’s phrasing and rounding control the underlying figures.
-4. **Restatement:** the order says 1997 income was later reported at approximately $93M. The reduction from $189M to $93M is approximately $96M, but the difference is not identical to the SEC’s $62M finding because the restatement covered multiple practices and the figures use different reporting bases.
+1. **Year-end 1996:** total restructuring charge reported by the SEC: \$337.6M. The order says at least \$35.0M of restructuring and other reserves were improper.
+2. **1997 reserve use:** the order says \$4.3M of non-GAAP reserves reduced first-quarter expenses and \$8.2M of costs were offset in the second quarter. These amounts are separate period examples in the order; do not add them to the \$35.0M as if they were a complete roll-forward.
+3. **1997 income:** the order says reported income was \$189M and at least \$62M came from accounting fraud. The \$62M is about 32.8% of \$189M, calculated as \$62M divided by \$189M; the SEC’s phrasing and rounding control the underlying figures.
+4. **Restatement:** the order says 1997 income was later reported at approximately \$93M. The reduction from \$189M to \$93M is approximately \$96M, but the difference is not identical to the SEC’s \$62M finding because the restatement covered multiple practices and the figures use different reporting bases.
 
 The intuition: a case study is strongest when each number keeps its source, period, and definition instead of being forced into a false one-to-one reconciliation.
 
@@ -288,7 +288,7 @@ This distinction matters in litigation. A company may describe a lawsuit in a fo
 
 Some allowances sit next to an asset rather than appearing as a free-standing liability. The allowance for credit losses reduces accounts receivable; a returns allowance can reduce revenue or create a refund liability; an inventory obsolescence allowance reduces inventory. The income effect may be the same—expense rises or revenue falls—but the balance-sheet location changes the forensic test.
 
-For example, if receivables rise by $30 million while the allowance rate falls from 4% to 2%, the reported allowance may fall even though the exposure is larger. That is not proof of manipulation. It is a reason to examine customer ageing, write-offs, collections after year-end, and the company’s stated loss model. A reserve ratio can look better simply because the customer mix improved; it can also look better because management changed the assumption.
+For example, if receivables rise by \$30 million while the allowance rate falls from 4% to 2%, the reported allowance may fall even though the exposure is larger. That is not proof of manipulation. It is a reason to examine customer ageing, write-offs, collections after year-end, and the company’s stated loss model. A reserve ratio can look better simply because the customer mix improved; it can also look better because management changed the assumption.
 
 ### Tax effects can blur the headline
 
@@ -304,11 +304,11 @@ Suppose a company has the following receivables:
 
 | | Year 1 | Year 2 |
 | --- | ---: | ---: |
-| Accounts receivable | $100.0M | $150.0M |
+| Accounts receivable | \$100.0M | \$150.0M |
 | Allowance rate | 4.0% | 2.0% |
-| Allowance balance | $4.0M | $3.0M |
+| Allowance balance | \$4.0M | \$3.0M |
 
-The allowance falls by $1.0M even though receivables rise by $50.0M. If the customer base genuinely became safer, the lower rate may be reasonable. If overdue balances increased, the lower rate may understate expected losses. A forensic reader should request the ageing table and subsequent write-offs rather than declaring the rate change fraudulent.
+The allowance falls by \$1.0M even though receivables rise by \$50.0M. If the customer base genuinely became safer, the lower rate may be reasonable. If overdue balances increased, the lower rate may understate expected losses. A forensic reader should request the ageing table and subsequent write-offs rather than declaring the rate change fraudulent.
 
 The intuition: a percentage can improve while the underlying exposure worsens, so read the denominator and the later cash outcome.
 
@@ -324,15 +324,15 @@ Use three separate columns:
 | Normalized | What would repeatable profit look like if the release did not recur? |
 | Exposure | What liabilities, payments, or restatement risks remain? |
 
-If reported operating income is $38.0M and a $2.0M release helped it, a simple normalized figure is $36.0M before tax. But if the reserve was understated by $5.0M, the exposure column may need a $5.0M stress. One adjustment removes the benefit from the income forecast; it does not establish that the balance sheet is safe.
+If reported operating income is \$38.0M and a \$2.0M release helped it, a simple normalized figure is \$36.0M before tax. But if the reserve was understated by \$5.0M, the exposure column may need a \$5.0M stress. One adjustment removes the benefit from the income forecast; it does not establish that the balance sheet is safe.
 
 #### Worked example: reported, normalized, and exposed profit, illustrative numbers
 
-Suppose a company reports $38.0M of operating income after a $2.0M reserve release. The release has no current cash inflow, and the related obligation is not fully resolved.
+Suppose a company reports \$38.0M of operating income after a \$2.0M reserve release. The release has no current cash inflow, and the related obligation is not fully resolved.
 
-1. **Reported operating income:** $38.0M.
-2. **Remove the finite benefit:** $38.0M − $2.0M = $36.0M normalized operating income.
-3. **Stress the unresolved obligation:** if later evidence suggests $5.0M of additional cash cost, that $5.0M belongs in an exposure analysis. Do not subtract it from normalized operating income a second time unless the accounting model explicitly treats it as a current-period adjustment.
+1. **Reported operating income:** \$38.0M.
+2. **Remove the finite benefit:** \$38.0M − \$2.0M = \$36.0M normalized operating income.
+3. **Stress the unresolved obligation:** if later evidence suggests \$5.0M of additional cash cost, that \$5.0M belongs in an exposure analysis. Do not subtract it from normalized operating income a second time unless the accounting model explicitly treats it as a current-period adjustment.
 
 The intuition: normalized earnings answers “what repeats?” while exposure analysis answers “what could still go wrong?”
 

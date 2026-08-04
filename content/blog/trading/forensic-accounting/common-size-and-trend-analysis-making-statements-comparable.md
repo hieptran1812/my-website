@@ -17,9 +17,9 @@ readTime: 28
 > - Divide every income-statement line by revenue; divide every balance-sheet line by total assets or revenue, and label the denominator.
 > - A falling gross margin, receivables rising faster than sales, or an expense line that disappears from the presentation is a signal to investigate, not proof of fraud.
 > - Trend analysis starts a selected base year at 100; the useful comparison is the gap between lines, not a round index by itself.
-> - In Apple’s fiscal 2024 Form 10-K, net sales were $391,035 million and accounts receivable were $33,410 million; the same filing lets us compute a 2024 receivables-to-sales ratio of about 8.5%.
+> - In Apple’s fiscal 2024 Form 10-K, net sales were \$391,035 million and accounts receivable were \$33,410 million; the same filing lets us compute a 2024 receivables-to-sales ratio of about 8.5%.
 
-Financial statements are designed to report a business in its own units: dollars, euros, shares, tonnes, or whatever the company uses. That is useful for judging scale. It is awkward for comparison. A $10 million increase means something very different for a $50 million company than for a $50 billion company. Even within one company, inflation, acquisitions, divestitures, and growth can make a raw-dollar chart look more dramatic than the underlying economics.
+Financial statements are designed to report a business in its own units: dollars, euros, shares, tonnes, or whatever the company uses. That is useful for judging scale. It is awkward for comparison. A \$10 million increase means something very different for a \$50 million company than for a \$50 billion company. Even within one company, inflation, acquisitions, divestitures, and growth can make a raw-dollar chart look more dramatic than the underlying economics.
 
 Common-size analysis and trend analysis are two small transformations that make the first pass more honest. Common-size analysis turns a statement into percentages of a base. Trend analysis turns a starting period into an index of 100 and expresses later periods relative to it. Neither technique proves that management manipulated a number. Both help you decide which footnote, estimate, customer, contract, or journal entry deserves your attention.
 
@@ -83,13 +83,13 @@ The first entry increases both revenue and receivables. The second converts the 
 
 #### Worked example: a one-year income statement
 
-Suppose a fictional retailer reports revenue of $100, cost of revenue of $60, operating expenses of $25, and net income of $11. These are illustrative numbers chosen to show the arithmetic, not a claim about a real company.
+Suppose a fictional retailer reports revenue of \$100, cost of revenue of \$60, operating expenses of \$25, and net income of \$11. These are illustrative numbers chosen to show the arithmetic, not a claim about a real company.
 
-1. Revenue is the base: $100 / $100 = 100%.
-2. Cost of revenue is $60 / $100 = 60%.
-3. Gross profit is $100 − $60 = $40, so gross margin is $40 / $100 = 40%.
-4. Operating expenses are $25 / $100 = 25%.
-5. Net margin is $11 / $100 = 11%.
+1. Revenue is the base: \$100 / \$100 = 100%.
+2. Cost of revenue is \$60 / \$100 = 60%.
+3. Gross profit is \$100 − \$60 = \$40, so gross margin is \$40 / \$100 = 40%.
+4. Operating expenses are \$25 / \$100 = 25%.
+5. Net margin is \$11 / \$100 = 11%.
 
 The compressed common-size statement is therefore: revenue 100%, cost 60%, gross profit 40%, operating expenses 25%, and net income 11%. The intuition is that the statement now describes the economics of one sales dollar rather than the size of the retailer.
 
@@ -97,9 +97,9 @@ The compressed common-size statement is therefore: revenue 100%, cost 60%, gross
 
 Raw dollars answer “how many dollars?” Common-size percentages answer “how many cents of each sales dollar?” That second question is often more useful when a company is growing.
 
-Imagine two periods with revenue of $100 and $120. Cost of revenue rises from $60 to $78. In dollars, sales increased by $20 and cost increased by $18. The company still grew gross profit from $40 to $42. A superficial read might say: sales and gross profit are both higher.
+Imagine two periods with revenue of \$100 and \$120. Cost of revenue rises from \$60 to \$78. In dollars, sales increased by \$20 and cost increased by \$18. The company still grew gross profit from \$40 to \$42. A superficial read might say: sales and gross profit are both higher.
 
-The common-size view says cost moved from 60% of sales to 65% of sales. Gross margin moved from 40% to 35%. Gross profit increased by $2, but the business kept only 35 cents of each new sales dollar as gross profit, compared with 40 cents before. If operating expenses stay at $25 in both periods, net income could fall even while revenue grows.
+The common-size view says cost moved from 60% of sales to 65% of sales. Gross margin moved from 40% to 35%. Gross profit increased by \$2, but the business kept only 35 cents of each new sales dollar as gross profit, compared with 40 cents before. If operating expenses stay at \$25 in both periods, net income could fall even while revenue grows.
 
 ![Same growth, different economics](/imgs/blogs/common-size-and-trend-analysis-making-statements-comparable-2.webp)
 
@@ -107,13 +107,13 @@ The causes can be mundane: a greater share of low-margin products, a temporary f
 
 #### Worked example: decomposing margin movement
 
-Use the same fictional numbers: period one revenue $100, cost $60; period two revenue $120, cost $78.
+Use the same fictional numbers: period one revenue \$100, cost \$60; period two revenue \$120, cost \$78.
 
-1. Period-one gross margin: ($100 − $60) / $100 = 40%.
-2. Period-two gross margin: ($120 − $78) / $120 = 35%.
-3. Gross profit change: ($120 − $78) − ($100 − $60) = $42 − $40 = $2.
-4. Revenue growth: ($120 − $100) / $100 = 20%.
-5. Gross-profit growth: ($42 − $40) / $40 = 5%.
+1. Period-one gross margin: (\$100 − \$60) / \$100 = 40%.
+2. Period-two gross margin: (\$120 − \$78) / \$120 = 35%.
+3. Gross profit change: (\$120 − \$78) − (\$100 − \$60) = \$42 − \$40 = \$2.
+4. Revenue growth: (\$120 − \$100) / \$100 = 20%.
+5. Gross-profit growth: (\$42 − \$40) / \$40 = 5%.
 
 Revenue grew 20% while gross profit grew only 5%. That spread is the economic content hidden inside the raw totals. The intuition is that growth in sales is not the same thing as growth in profit capacity.
 
@@ -149,12 +149,12 @@ The valuable pattern is relative movement. Suppose a company’s sales index mov
 
 #### Worked example: computing a trend index
 
-Suppose illustrative revenue is $80 in the base year and $100 three years later. Receivables are $8 in the base year and $18 later.
+Suppose illustrative revenue is \$80 in the base year and \$100 three years later. Receivables are \$8 in the base year and \$18 later.
 
-1. Revenue trend index: $100 / $80 × 100 = 125.
-2. Receivables trend index: $18 / $8 × 100 = 225.
-3. Revenue growth from the base: ($100 − $80) / $80 = 25%.
-4. Receivables growth from the base: ($18 − $8) / $8 = 125%.
+1. Revenue trend index: \$100 / \$80 × 100 = 125.
+2. Receivables trend index: \$18 / \$8 × 100 = 225.
+3. Revenue growth from the base: (\$100 − \$80) / \$80 = 25%.
+4. Receivables growth from the base: (\$18 − \$8) / \$8 = 125%.
 
 Receivables did not merely grow “more.” They grew five times as fast in percentage terms: 125% versus 25%. The intuition is that a trend index makes a small but economically important base line visible.
 
@@ -168,7 +168,7 @@ Never compare indexes without checking units. If one year is in thousands and an
 
 The two views are strongest as a pair. A line can grow quickly but become less important as a share of revenue. Or it can grow slowly in dollars but consume a larger share of a shrinking revenue base.
 
-For example, illustrative revenue may rise from $100 to $120 while advertising expense rises from $10 to $15. The expense trend index is 150. Its common-size percentage is 10% in the first period and 12.5% in the second. Both views say the expense is becoming more prominent. If revenue instead falls from $100 to $80 while advertising stays at $10, the expense trend index is 100 but its common-size percentage rises from 10% to 12.5%. A flat dollar line can still become a margin problem.
+For example, illustrative revenue may rise from \$100 to \$120 while advertising expense rises from \$10 to \$15. The expense trend index is 150. Its common-size percentage is 10% in the first period and 12.5% in the second. Both views say the expense is becoming more prominent. If revenue instead falls from \$100 to \$80 while advertising stays at \$10, the expense trend index is 100 but its common-size percentage rises from 10% to 12.5%. A flat dollar line can still become a margin problem.
 
 ## 3. Balance-sheet common-size analysis: follow the asset mix
 
@@ -180,16 +180,16 @@ The same approach applies to liabilities and equity. Debt as a percentage of tot
 
 #### Worked example: receivables intensity
 
-Suppose an illustrative company reports revenue of $200 and $240 in two years. Receivables are $20 and $36.
+Suppose an illustrative company reports revenue of \$200 and \$240 in two years. Receivables are \$20 and \$36.
 
-1. Year-one receivables-to-sales ratio: $20 / $200 = 10%.
-2. Year-two ratio: $36 / $240 = 15%.
-3. Revenue growth: ($240 − $200) / $200 = 20%.
-4. Receivables growth: ($36 − $20) / $20 = 80%.
+1. Year-one receivables-to-sales ratio: \$20 / \$200 = 10%.
+2. Year-two ratio: \$36 / \$240 = 15%.
+3. Revenue growth: (\$240 − \$200) / \$200 = 20%.
+4. Receivables growth: (\$36 − \$20) / \$20 = 80%.
 
 Receivables rose four times as fast as revenue in percentage terms, and the receivables-to-sales ratio increased five percentage points. The intuition is that the company may be financing more of its sales through customers, so reported growth is demanding more cash support.
 
-This ratio is not days sales outstanding. A rough DSO calculation uses average receivables divided by revenue multiplied by the number of days in the period. If average receivables were $28 on revenue of $240, a 365-day illustrative DSO would be $28 / $240 × 365 ≈ 42.6 days. Use average, not just ending, receivables when seasonality matters. State whether you used 365 or 360 days, and do not compare a quarter’s ending balance with a full year’s revenue without adjusting the basis.
+This ratio is not days sales outstanding. A rough DSO calculation uses average receivables divided by revenue multiplied by the number of days in the period. If average receivables were \$28 on revenue of \$240, a 365-day illustrative DSO would be \$28 / \$240 × 365 ≈ 42.6 days. Use average, not just ending, receivables when seasonality matters. State whether you used 365 or 360 days, and do not compare a quarter’s ending balance with a full year’s revenue without adjusting the basis.
 
 ### The working-capital bridge
 
@@ -203,9 +203,9 @@ If receivables-to-sales rises, branch the investigation. Ask whether customers a
 
 #### Worked example: a cash-conversion warning
 
-Suppose illustrative net income is $30 and operating cash flow is $12. The cash-conversion ratio is $12 / $30 = 40%. That is not automatically bad: a company may have made a large inventory build for a launch, paid a prior-year payable, or recognized a non-cash gain. But it is a prompt to reconcile.
+Suppose illustrative net income is \$30 and operating cash flow is \$12. The cash-conversion ratio is \$12 / \$30 = 40%. That is not automatically bad: a company may have made a large inventory build for a launch, paid a prior-year payable, or recognized a non-cash gain. But it is a prompt to reconcile.
 
-Assume the bridge shows a $14 increase in receivables, a $6 increase in inventory, and a $5 increase in payables. The combined working-capital effect is approximately −$14 − $6 + $5 = −$15 before considering other adjustments. A $30 accounting profit and $12 operating cash flow are now less mysterious, but the analyst still has to ask whether the receivables are collectible and whether the inventory will sell.
+Assume the bridge shows a \$14 increase in receivables, a \$6 increase in inventory, and a \$5 increase in payables. The combined working-capital effect is approximately −\$14 − \$6 + \$5 = −\$15 before considering other adjustments. A \$30 accounting profit and \$12 operating cash flow are now less mysterious, but the analyst still has to ask whether the receivables are collectible and whether the inventory will sell.
 
 The intuition is that earnings quality is a reconciliation problem, not a single ratio threshold.
 
@@ -272,7 +272,7 @@ The practical fix is to increase the frequency of the comparison. Use quarterly 
 
 #### Worked example: ending balance versus average balance
 
-Suppose an illustrative company has beginning receivables of $20, ending receivables of $40, and annual revenue of $240. The ending-balance ratio is $40 / $240 = 16.7%. Average receivables are ($20 + $40) / $2 = $30, so the average-balance ratio is $30 / $240 = 12.5%. Both are valid descriptions of different questions. The first asks how much was outstanding at the reporting date; the second approximates the amount tied up during the year. The intuition is that a point-in-time ratio and a period-average ratio should not be treated as interchangeable.
+Suppose an illustrative company has beginning receivables of \$20, ending receivables of \$40, and annual revenue of \$240. The ending-balance ratio is \$40 / \$240 = 16.7%. Average receivables are (\$20 + \$40) / \$2 = \$30, so the average-balance ratio is \$30 / \$240 = 12.5%. Both are valid descriptions of different questions. The first asks how much was outstanding at the reporting date; the second approximates the amount tied up during the year. The intuition is that a point-in-time ratio and a period-average ratio should not be treated as interchangeable.
 
 ### Acquisitions and divestitures break naive trends
 
@@ -327,36 +327,36 @@ The analyst’s job is to make the explanation testable. Ask for the next docume
 
 ## 6. Named case study: Apple’s fiscal 2024 filing
 
-Apple Inc. is a useful named case because its 2024 Form 10-K presents three years of consolidated statements and clear units. The figures below are reported in millions of U.S. dollars and come from Apple’s SEC filing for the fiscal year ended September 28, 2024. Apple reported net sales of $391,035 million in 2024, $383,285 million in 2023, and $394,328 million in 2022. The filing reported gross margin of $180,683 million, $169,148 million, and $170,782 million, respectively; research and development expense of $31,370 million, $29,915 million, and $26,251 million; and net income of $93,736 million, $96,995 million, and $99,803 million. These are company-reported figures, not estimates. [Apple’s 2024 Form 10-K](https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm)
+Apple Inc. is a useful named case because its 2024 Form 10-K presents three years of consolidated statements and clear units. The figures below are reported in millions of U.S. dollars and come from Apple’s SEC filing for the fiscal year ended September 28, 2024. Apple reported net sales of \$391,035 million in 2024, \$383,285 million in 2023, and \$394,328 million in 2022. The filing reported gross margin of \$180,683 million, \$169,148 million, and \$170,782 million, respectively; research and development expense of \$31,370 million, \$29,915 million, and \$26,251 million; and net income of \$93,736 million, \$96,995 million, and \$99,803 million. These are company-reported figures, not estimates. [Apple’s 2024 Form 10-K](https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm)
 
 #### Worked example: Apple’s common-size income statement
 
 Compute the following from the reported lines.
 
-1. 2024 gross margin: $180,683 / $391,035 ≈ 46.2%.
-2. 2023 gross margin: $169,148 / $383,285 ≈ 44.1%.
-3. 2022 gross margin: $170,782 / $394,328 ≈ 43.3%.
-4. 2024 net margin: $93,736 / $391,035 ≈ 24.0%.
-5. 2023 net margin: $96,995 / $383,285 ≈ 25.3%.
-6. 2022 net margin: $99,803 / $394,328 ≈ 25.3%.
+1. 2024 gross margin: \$180,683 / \$391,035 ≈ 46.2%.
+2. 2023 gross margin: \$169,148 / \$383,285 ≈ 44.1%.
+3. 2022 gross margin: \$170,782 / \$394,328 ≈ 43.3%.
+4. 2024 net margin: \$93,736 / \$391,035 ≈ 24.0%.
+5. 2023 net margin: \$96,995 / \$383,285 ≈ 25.3%.
+6. 2022 net margin: \$99,803 / \$394,328 ≈ 25.3%.
 
 The common-size read is specific: reported gross margin dollars rose from 2023 to 2024 and the gross-margin percentage also improved, while net income and net margin fell from 2023. That combination tells an analyst to look below gross profit: operating expenses, other income or expense, tax, share count, and the company’s explanations. It does not support the claim that Apple’s overall profitability improved merely because gross margin improved.
 
-Research and development was $31,370 million in 2024, which is about 8.0% of net sales; it was about 7.8% in 2023 and about 6.7% in 2022. The line grew in dollars and consumed a larger share of sales. That is not inherently negative: a company may be investing in products or services. It is exactly the kind of drift the common-size view makes legible.
+Research and development was \$31,370 million in 2024, which is about 8.0% of net sales; it was about 7.8% in 2023 and about 6.7% in 2022. The line grew in dollars and consumed a larger share of sales. That is not inherently negative: a company may be investing in products or services. It is exactly the kind of drift the common-size view makes legible.
 
 The case also shows why a first pass is not a verdict. Apple’s business mix, product cycle, services mix, foreign exchange, and capital-allocation choices affect these ratios. A ratio screen should lead to the filing’s product and services disclosures, expense descriptions, and cash-flow statement.
 
 #### Worked example: Apple’s receivables-to-sales ratio
 
-Apple reported accounts receivable, net of $33,410 million at September 28, 2024, $29,508 million at September 30, 2023, and $28,184 million at September 24, 2022. Dividing by the corresponding annual net sales gives:
+Apple reported accounts receivable, net of \$33,410 million at September 28, 2024, \$29,508 million at September 30, 2023, and \$28,184 million at September 24, 2022. Dividing by the corresponding annual net sales gives:
 
-1. 2024: $33,410 / $391,035 ≈ 8.5%.
-2. 2023: $29,508 / $383,285 ≈ 7.7%.
-3. 2022: $28,184 / $394,328 ≈ 7.1%.
+1. 2024: \$33,410 / \$391,035 ≈ 8.5%.
+2. 2023: \$29,508 / \$383,285 ≈ 7.7%.
+3. 2022: \$28,184 / \$394,328 ≈ 7.1%.
 
 The ending receivables-to-sales ratio increased across these three fiscal year-ends. That is a signal to examine payment timing, customer and distributor terms, seasonality, allowance disclosures, and operating cash flow. It is not evidence that Apple’s revenue was fabricated. A ratio based on an ending balance can be distorted by the fiscal-year date, so an analyst would improve the test with average receivables and quarterly data.
 
-The filing also reports total assets of $364,980 million at the 2024 year-end, which provides the denominator for an asset-mix view. Accounts receivable were about 9.2% of total assets ($33,410 / $364,980). The choice of denominator changes the question: 8.5% describes receivables relative to annual sales; 9.2% describes receivables inside the year-end asset pool.
+The filing also reports total assets of \$364,980 million at the 2024 year-end, which provides the denominator for an asset-mix view. Accounts receivable were about 9.2% of total assets (\$33,410 / \$364,980). The choice of denominator changes the question: 8.5% describes receivables relative to annual sales; 9.2% describes receivables inside the year-end asset pool.
 
 ## 6. What the ratios cannot tell you
 
@@ -366,7 +366,7 @@ The same movement can have multiple causes. Receivables can rise because a large
 
 ### Percentages can hide scale
 
-A tiny line can double from $1 to $2 and still be immaterial. A large line can move from 10% to 11% and add a substantial cost. Always pair the percentage-point movement with dollar movement and the materiality of the line.
+A tiny line can double from \$1 to \$2 and still be immaterial. A large line can move from 10% to 11% and add a substantial cost. Always pair the percentage-point movement with dollar movement and the materiality of the line.
 
 ### Trend indexes can be unstable
 
@@ -384,7 +384,7 @@ Adjusted expenses and adjusted margins may be useful, but they are not the same 
 
 ### Apple: gross-margin improvement alongside lower net income
 
-Apple’s fiscal 2024 filing illustrates why analysts need both common-size and raw-dollar views. The SEC filing reported net sales of $391,035 million, gross margin of $180,683 million, and net income of $93,736 million for the year ended September 28, 2024. The prior-year figures were $383,285 million, $169,148 million, and $96,995 million. Gross margin therefore improved as a share of sales from roughly 44.1% to 46.2%, while net margin declined from roughly 25.3% to 24.0%. [SEC filing, fiscal 2024](https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm)
+Apple’s fiscal 2024 filing illustrates why analysts need both common-size and raw-dollar views. The SEC filing reported net sales of \$391,035 million, gross margin of \$180,683 million, and net income of \$93,736 million for the year ended September 28, 2024. The prior-year figures were \$383,285 million, \$169,148 million, and \$96,995 million. Gross margin therefore improved as a share of sales from roughly 44.1% to 46.2%, while net margin declined from roughly 25.3% to 24.0%. [SEC filing, fiscal 2024](https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm)
 
 The useful lesson is not a simplistic “Apple got better” or “Apple got worse.” Different layers moved in different directions. An analyst would reconcile the change through operating expenses, other income, taxes, and share count, then read the company’s segment and product disclosures. A gross-margin trend can be real and still fail to translate into higher net income. In a market, that distinction matters because investors price future earnings and cash flows, not one attractive ratio.
 
@@ -396,13 +396,13 @@ The common-size lesson is a disappearing or shrinking expense line. The forensic
 
 ### A fictional distributor: sales grow, cash does not
 
-Consider an illustrative distributor with sales of $200 and $240, receivables of $20 and $36, and operating cash flow that falls from $28 to $12. The sales trend index is 120; receivables are at 180; the receivables-to-sales ratio rises from 10% to 15%. No one number proves a problem, but all three views point to the same working-capital question.
+Consider an illustrative distributor with sales of \$200 and \$240, receivables of \$20 and \$36, and operating cash flow that falls from \$28 to \$12. The sales trend index is 120; receivables are at 180; the receivables-to-sales ratio rises from 10% to 15%. No one number proves a problem, but all three views point to the same working-capital question.
 
 The analyst would request an aging report, inspect cash received after year-end, compare credit terms, review returns and credit memos, and test large invoices around the reporting date. If subsequent cash is strong and the growth is concentrated in customers with longer contractual terms, the explanation may be ordinary. If the aging deteriorates and credit memos follow year-end, the risk is higher. The evidence changes the conclusion.
 
 ### A fictional software company: disappearing implementation expense
 
-Suppose a software company reports revenue of $100 and implementation expense of $12 in year one. In year two, revenue is $130 and the expense line is absent, while deferred contract costs and capitalized assets rise. A common-size screen shows the expense moving from 12% to zero, but that is not the end of the analysis.
+Suppose a software company reports revenue of \$100 and implementation expense of \$12 in year one. In year two, revenue is \$130 and the expense line is absent, while deferred contract costs and capitalized assets rise. A common-size screen shows the expense moving from 12% to zero, but that is not the end of the analysis.
 
 The analyst should locate the accounting policy, ask whether implementation work creates a controlled resource or merely helps fulfill a contract, and reconcile amortization. A legitimate capitalization policy can shift expense over time. An aggressive policy can defer a current cost without sufficient future benefit. The important point is to connect presentation drift to the entry that created it.
 

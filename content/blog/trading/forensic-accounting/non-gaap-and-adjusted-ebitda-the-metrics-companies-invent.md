@@ -17,7 +17,7 @@ readTime: 39
 > - GAAP net income is the standardized bottom line after operating costs, interest, taxes, depreciation and amortization. EBITDA starts from that bottom line and removes four items; adjusted EBITDA then adds a company-specific layer of judgment.
 > - A legitimate adjustment is narrow, clearly defined, material, and genuinely unusual. A recurring payroll bill, ordinary rent, routine stock compensation, or the cost of opening the next location is not made “free” by being labelled one-time.
 > - The fastest forensic test is repetition: if the same category appears every year, it is part of the business model even when each individual invoice is different.
-> - WeWork’s 2018 filing reported a **$1.927 billion net loss** and **$467.125 million Community Adjusted EBITDA** for the same year. Both figures were in the filing; the gap was the story.
+> - WeWork’s 2018 filing reported a **\$1.927 billion net loss** and **\$467.125 million Community Adjusted EBITDA** for the same year. Both figures were in the filing; the gap was the story.
 > - The number to remember: adjusted EBITDA is a bridge. Read every plank between GAAP and the adjusted destination, then ask which planks require cash, recur, or belong to the business’s normal capacity.
 
 Why can a company report a loss of almost two billion dollars and a profit of almost half a billion dollars in the same year? The answer is not necessarily fraud. It is that “profit” has several definitions, and the further a metric travels from a standardized accounting statement, the more the author chooses what to remove.
@@ -50,7 +50,7 @@ $$\text{EBITDA} = \text{Net income} + \text{Interest} + \text{Income tax} + \tex
 
 Interest is removed to compare businesses with different debt choices. Tax is removed to compare businesses with different jurisdictions or tax attributes. Depreciation and amortization are removed because they allocate the cost of a long-lived asset across periods rather than recording a new cash payment in every period.
 
-That last explanation needs care. Depreciation is non-cash *in the current period*, but it represents the consumption of an asset. If a delivery van cost $100,000 and lasts five years, the company cannot avoid eventually replacing it merely because the annual depreciation entry has no cash line. EBITDA therefore says “before this allocation,” not “cash available to spend.” The SEC describes EBITDA as a non-GAAP measure and requires a reconciliation to the most directly comparable GAAP measure when it is publicly disclosed. See the [SEC’s Regulation G guidance](https://www.sec.gov/rules-regulations/staff-guidance/corporation-finance-interpretations/non-gaap-financial-measures).
+That last explanation needs care. Depreciation is non-cash *in the current period*, but it represents the consumption of an asset. If a delivery van cost \$100,000 and lasts five years, the company cannot avoid eventually replacing it merely because the annual depreciation entry has no cash line. EBITDA therefore says “before this allocation,” not “cash available to spend.” The SEC describes EBITDA as a non-GAAP measure and requires a reconciliation to the most directly comparable GAAP measure when it is publicly disclosed. See the [SEC’s Regulation G guidance](https://www.sec.gov/rules-regulations/staff-guidance/corporation-finance-interpretations/non-gaap-financial-measures).
 
 ### Adjusted EBITDA is a company-defined second layer
 
@@ -70,7 +70,7 @@ The word *adjusted* is therefore incomplete until the footnote supplies the noun
 
 When a company presents adjusted EBITDA, look for a table that starts at net income or loss and walks to the adjusted figure. The table should name every adjustment, explain it, and show the arithmetic. The SEC’s rules require a quantitative reconciliation for historical non-GAAP measures and prohibit presentations that are misleading or give undue prominence to the non-GAAP number. The [SEC’s 2003 release on Regulation G](https://www.sec.gov/rules-regulations/2003/03/conditions-use-non-gaap-financial-measures) is the original rulemaking source.
 
-The reconciliation is more useful than the headline because it exposes the distance between the standardized number and the management number. A $50 million adjustment may be harmless in a $10 billion business and decisive in a $100 million business. A non-cash charge may still measure a resource consumed. A charge called “one-time” may be the tenth version of the same annual event.
+The reconciliation is more useful than the headline because it exposes the distance between the standardized number and the management number. A \$50 million adjustment may be harmless in a \$10 billion business and decisive in a \$100 million business. A non-cash charge may still measure a resource consumed. A charge called “one-time” may be the tenth version of the same annual event.
 
 #### Worked example: the shortest honest bridge
 
@@ -78,18 +78,18 @@ Suppose Harbor Lantern Coffee Co. reports the following hypothetical annual stat
 
 | Statement line | Amount |
 | --- | ---: |
-| Revenue | $100.0 |
-| Operating expenses including D&A | $(92.0) |
-| Operating income | $8.0 |
-| Interest expense | $(2.0) |
-| Income tax | $(1.2) |
-| GAAP net income | $4.8 |
+| Revenue | \$100.0 |
+| Operating expenses including D&A | \$(92.0) |
+| Operating income | \$8.0 |
+| Interest expense | \$(2.0) |
+| Income tax | \$(1.2) |
+| GAAP net income | \$4.8 |
 
-Within the $92.0 million of operating expenses is $3.0 million of depreciation and amortization. EBITDA is therefore $4.8M + $2.0M + $1.2M + $3.0M = **$11.0M**.
+Within the \$92.0 million of operating expenses is \$3.0 million of depreciation and amortization. EBITDA is therefore \$4.8M + \$2.0M + \$1.2M + \$3.0M = **\$11.0M**.
 
-Management also reports $0.5M of clearly identified acquisition-adviser fees for a transaction that closed this year. Adjusted EBITDA is $11.0M + $0.5M = **$11.5M**.
+Management also reports \$0.5M of clearly identified acquisition-adviser fees for a transaction that closed this year. Adjusted EBITDA is \$11.0M + \$0.5M = **\$11.5M**.
 
-The adjustment does not say Harbor Lantern generated $11.5M of cash. It says one narrow cost is excluded from a performance lens. The cash flow statement still shows the adviser being paid, and the acquisition may create future integration costs.
+The adjustment does not say Harbor Lantern generated \$11.5M of cash. It says one narrow cost is excluded from a performance lens. The cash flow statement still shows the adviser being paid, and the acquisition may create future integration costs.
 
 **Intuition:** the farther right the bridge goes, the more important it is to inspect each labelled plank rather than admire the final total.
 
@@ -129,17 +129,17 @@ Every proposed adjustment should be tested along three axes:
 
 The same item can pass one test and fail another. Depreciation may fail the cash-this-period test but pass the comparability test. Stock compensation may be useful to exclude when comparing cash operating margins, but still fail the shareholder-economics test. A restructuring payment may be both cash and nonrecurring; it can be excluded from a normalized period while remaining relevant to liquidity.
 
-#### Worked example: the same $6.0M adjustment under three lenses
+#### Worked example: the same \$6.0M adjustment under three lenses
 
-Imagine a hypothetical delivery company reports $20.0M of EBITDA. It also has:
+Imagine a hypothetical delivery company reports \$20.0M of EBITDA. It also has:
 
-1. $2.0M of stock-based compensation;
-2. $1.0M of a one-time legal settlement from a discontinued product; and
-3. $3.0M of annual driver hiring and training costs.
+1. \$2.0M of stock-based compensation;
+2. \$1.0M of a one-time legal settlement from a discontinued product; and
+3. \$3.0M of annual driver hiring and training costs.
 
-An “all adjustments” presentation would produce $26.0M: $20.0M + $2.0M + $1.0M + $3.0M. But the capacity test rejects the hiring and training cost: drivers are required to deliver the product. A cautious normalized operating view might be $23.0M, excluding stock compensation and the discontinued-product settlement while retaining driver costs. A cash-preservation view might retain the legal payment too, because $1.0M actually left the bank this year, yielding $22.0M.
+An “all adjustments” presentation would produce \$26.0M: \$20.0M + \$2.0M + \$1.0M + \$3.0M. But the capacity test rejects the hiring and training cost: drivers are required to deliver the product. A cautious normalized operating view might be \$23.0M, excluding stock compensation and the discontinued-product settlement while retaining driver costs. A cash-preservation view might retain the legal payment too, because \$1.0M actually left the bank this year, yielding \$22.0M.
 
-None of these is the one true answer. The error would be showing $26.0M without explaining the different economic questions.
+None of these is the one true answer. The error would be showing \$26.0M without explaining the different economic questions.
 
 **Intuition:** normalization is not a hunt for the largest number of add-backs; it is a choice of measurement purpose followed by consistent exclusions.
 
@@ -155,13 +155,13 @@ Companies often re-label recurring costs in one of five ways:
 - **Transformation:** technology, brand or “efficiency” programs that become permanent operating work.
 - **Other:** a residual bucket that grows when named categories become embarrassing.
 
-The forensic reader builds a five-year schedule by category, not by the company’s chosen adjective. If “one-time” costs are $4M, $9M, $6M, $11M and $8M, the line is not one-time in any economically meaningful sense. The exact annual values in that illustration are hypothetical; the method is not.
+The forensic reader builds a five-year schedule by category, not by the company’s chosen adjective. If “one-time” costs are \$4M, \$9M, \$6M, \$11M and \$8M, the line is not one-time in any economically meaningful sense. The exact annual values in that illustration are hypothetical; the method is not.
 
 ![A recurrence test that rolls annual “one-time” adjustments into a five-year pattern and routes repeated costs back into normal earnings.](/imgs/blogs/non-gaap-and-adjusted-ebitda-the-metrics-companies-invent-3.webp)
 
 ### Journals reveal what the label hides
 
-Forensic accounting is not only reading the earnings release. It is asking what entry the adjustment represents. Consider a hypothetical $10.0M facility closure:
+Forensic accounting is not only reading the earnings release. It is asking what entry the adjustment represents. Consider a hypothetical \$10.0M facility closure:
 
 ```journal
 Dr Restructuring expense                 $10.0M
@@ -169,7 +169,7 @@ Dr Restructuring expense                 $10.0M
     Cr Lease termination liability                    $4.0M
 ```
 
-The entry is a real cost. If the facility is genuinely closed and no similar program is expected, excluding it from a *post-closure* run-rate analysis may be reasonable. But the $6.0M cash payment belongs in liquidity analysis, and the $4.0M lease liability belongs on the balance sheet until settled. The adjusted EBITDA table does not erase either.
+The entry is a real cost. If the facility is genuinely closed and no similar program is expected, excluding it from a *post-closure* run-rate analysis may be reasonable. But the \$6.0M cash payment belongs in liquidity analysis, and the \$4.0M lease liability belongs on the balance sheet until settled. The adjusted EBITDA table does not erase either.
 
 Now consider a hypothetical annual transformation program:
 
@@ -186,11 +186,11 @@ SEC staff guidance discusses the prohibition on adjusting a performance measure 
 
 #### Worked example: recurring restructuring changes the valuation question
 
-Suppose a hypothetical company has $30.0M of reported EBITDA and excludes $5.0M of “restructuring” each year. Its revenue is $150.0M.
+Suppose a hypothetical company has \$30.0M of reported EBITDA and excludes \$5.0M of “restructuring” each year. Its revenue is \$150.0M.
 
-Reported EBITDA margin is $30.0M / $150.0M = **20.0%**. Adjusted EBITDA margin is $(30.0M + $5.0M) / $150.0M = **23.33%**.
+Reported EBITDA margin is \$30.0M / \$150.0M = **20.0%**. Adjusted EBITDA margin is \$(30.0M + \$5.0M) / \$150.0M = **23.33%**.
 
-If the charge happens once, a reader may reasonably model a 23.33% steady-state margin after the program ends. If it happens every year, a repeatable margin is 20.0% unless there is concrete evidence that the next program will stop. On a hypothetical 10× EBITDA multiple, the difference is $50.0M of headline enterprise value: $5.0M × 10. That is not a prediction or a market statistic; it is the arithmetic consequence of trusting or rejecting the add-back.
+If the charge happens once, a reader may reasonably model a 23.33% steady-state margin after the program ends. If it happens every year, a repeatable margin is 20.0% unless there is concrete evidence that the next program will stop. On a hypothetical 10× EBITDA multiple, the difference is \$50.0M of headline enterprise value: \$5.0M × 10. That is not a prediction or a market statistic; it is the arithmetic consequence of trusting or rejecting the add-back.
 
 **Intuition:** recurring “one-offs” do not improve normalized earnings; they reveal the recurring cost of keeping the business in its chosen shape.
 
@@ -200,15 +200,15 @@ WeWork is a useful case because the company’s own filing lets us see both the 
 
 ### The 2018 starting point
 
-In its 2019 registration statement, WeWork Companies Inc. reported revenue of **$1.821751 billion** for the year ended 31 December 2018, a **net loss of $1.927419 billion**, and a **net loss attributable to WeWork Companies Inc. of $1.610792 billion**. The same filing’s key performance table reported **Adjusted EBITDA of negative $665.653 million** and **Community Adjusted EBITDA of $467.125 million**. The figures are from the [SEC-hosted filing](https://www.sec.gov/Archives/edgar/data/1533523/000162827919000125/filename1.htm); the filing’s tables present dollar amounts in thousands.
+In its 2019 registration statement, WeWork Companies Inc. reported revenue of **\$1.821751 billion** for the year ended 31 December 2018, a **net loss of \$1.927419 billion**, and a **net loss attributable to WeWork Companies Inc. of \$1.610792 billion**. The same filing’s key performance table reported **Adjusted EBITDA of negative \$665.653 million** and **Community Adjusted EBITDA of \$467.125 million**. The figures are from the [SEC-hosted filing](https://www.sec.gov/Archives/edgar/data/1533523/000162827919000125/filename1.htm); the filing’s tables present dollar amounts in thousands.
 
 The contrast is not a rounding difference. The filing reported Community Adjusted EBITDA margin of **27.5%** for 2018, compared with an Adjusted EBITDA margin of **negative 36.5%**. Community Adjusted EBITDA was not GAAP net income and was not ordinary EBITDA. It was a further operating lens focused on the economics WeWork associated with its locations and community-level activity.
 
-![WeWork’s 2018 filing figures: revenue $1.821751B, net loss $(1.927419)B, adjusted EBITDA $(665.653)M, and Community Adjusted EBITDA $467.125M.](/imgs/blogs/non-gaap-and-adjusted-ebitda-the-metrics-companies-invent-4.webp)
+![WeWork’s 2018 filing figures: revenue \$1.821751B, net loss \$(1.927419)B, adjusted EBITDA \$(665.653)M, and Community Adjusted EBITDA \$467.125M.](/imgs/blogs/non-gaap-and-adjusted-ebitda-the-metrics-companies-invent-4.webp)
 
 ### Reconstructing the bridge
 
-The filing’s reconciliation gives the reader the right order of operations: begin with net loss, add back the conventional EBITDA categories, then add the company-specific adjustments that lead to Adjusted EBITDA and Community Adjusted EBITDA. The most important conceptual point is that Community Adjusted EBITDA was not a claim that WeWork had $467.125M of free cash. It was a claim about a selected layer of the business after excluding costs management associated with corporate, growth and community-level operations.
+The filing’s reconciliation gives the reader the right order of operations: begin with net loss, add back the conventional EBITDA categories, then add the company-specific adjustments that lead to Adjusted EBITDA and Community Adjusted EBITDA. The most important conceptual point is that Community Adjusted EBITDA was not a claim that WeWork had \$467.125M of free cash. It was a claim about a selected layer of the business after excluding costs management associated with corporate, growth and community-level operations.
 
 The filing also reported that in 2018 WeWork had **401,000 memberships**, **466,000 desks**, and **425 facilities**. Those operational numbers help explain the appeal of a location-level lens: the company was expanding a physical network and wanted readers to see what established sites might produce. But expansion is not free. Lease commitments, build-outs, staff, utilities, marketing and corporate support are not optional simply because a site’s local contribution is positive.
 
@@ -222,11 +222,11 @@ The historical context makes the distinction material. WeWork’s 2018 filing wa
 
 #### Worked example: reading WeWork without changing its figures
 
-Use only the filing’s headline amounts, in millions, rounded here for readability: revenue **$1,821.751M**, net loss **$(1,927.419)M**, Adjusted EBITDA **$(665.653)M**, and Community Adjusted EBITDA **$467.125M**.
+Use only the filing’s headline amounts, in millions, rounded here for readability: revenue **\$1,821.751M**, net loss **\$(1,927.419)M**, Adjusted EBITDA **\$(665.653)M**, and Community Adjusted EBITDA **\$467.125M**.
 
-1. Net loss margin = $(1,927.419)M / $1,821.751M = **negative 105.8%** approximately.
-2. Adjusted EBITDA margin = $(665.653)M / $1,821.751M = **negative 36.5%**, matching the filing’s reported margin.
-3. Community Adjusted EBITDA margin = $467.125M / $1,821.751M = **25.64%** using the rounded headline revenue, while the filing reports **27.5%** based on the relevant revenue denominator used in its KPI presentation. This is a useful warning: do not recompute a company’s custom margin from a nearby but different revenue line and silently call it identical.
+1. Net loss margin = \$(1,927.419)M / \$1,821.751M = **negative 105.8%** approximately.
+2. Adjusted EBITDA margin = \$(665.653)M / \$1,821.751M = **negative 36.5%**, matching the filing’s reported margin.
+3. Community Adjusted EBITDA margin = \$467.125M / \$1,821.751M = **25.64%** using the rounded headline revenue, while the filing reports **27.5%** based on the relevant revenue denominator used in its KPI presentation. This is a useful warning: do not recompute a company’s custom margin from a nearby but different revenue line and silently call it identical.
 
 The analysis survives the denominator issue: the filing’s own Community Adjusted EBITDA is positive while its consolidated GAAP net loss and Adjusted EBITDA are negative. The metric answers a narrower question.
 
@@ -250,17 +250,17 @@ This is an analytical bridge, not a formula claimed by every company. The symbol
 
 The bridge is intentionally conservative. If adjusted EBITDA adds back stock compensation, the cash bridge must separately ask what dilution or repurchase is required. If it adds back rent, the bridge must include the lease payment. If it adds back pre-opening costs, the bridge must include the cost of future growth.
 
-#### Worked example: $25.0M of adjusted EBITDA is not $25.0M of cash
+#### Worked example: \$25.0M of adjusted EBITDA is not \$25.0M of cash
 
-Suppose a hypothetical company reports $25.0M of adjusted EBITDA. During the year:
+Suppose a hypothetical company reports \$25.0M of adjusted EBITDA. During the year:
 
-- receivables and inventory absorb $4.0M of cash;
-- cash taxes are $2.0M;
-- cash interest is $3.0M;
-- capital expenditure is $8.0M; and
-- a previously excluded restructuring program pays $2.0M.
+- receivables and inventory absorb \$4.0M of cash;
+- cash taxes are \$2.0M;
+- cash interest is \$3.0M;
+- capital expenditure is \$8.0M; and
+- a previously excluded restructuring program pays \$2.0M.
 
-The illustrative cash bridge is $25.0M − $4.0M − $2.0M − $3.0M − $8.0M − $2.0M = **$6.0M**. The company can truthfully report $25.0M of adjusted EBITDA and still have only $6.0M left before dividends, debt repayment or acquisitions.
+The illustrative cash bridge is \$25.0M − \$4.0M − \$2.0M − \$3.0M − \$8.0M − \$2.0M = **\$6.0M**. The company can truthfully report \$25.0M of adjusted EBITDA and still have only \$6.0M left before dividends, debt repayment or acquisitions.
 
 **Intuition:** EBITDA is a starting altitude, not a bank balance.
 
@@ -284,11 +284,11 @@ This ratio is an analytical abstraction, not a GAAP metric. It makes the size of
 
 #### Worked example: same label, different economics
 
-Imagine two hypothetical subscription companies, both with $200.0M of revenue and $20.0M of reported EBITDA.
+Imagine two hypothetical subscription companies, both with \$200.0M of revenue and \$20.0M of reported EBITDA.
 
-Company A adds back $2.0M of one-time acquisition fees and $1.0M of a settled legal case. Its adjusted EBITDA is **$23.0M**, and its adjustment burden is $3.0M / $200.0M = **1.5%** of revenue.
+Company A adds back \$2.0M of one-time acquisition fees and \$1.0M of a settled legal case. Its adjusted EBITDA is **\$23.0M**, and its adjustment burden is \$3.0M / \$200.0M = **1.5%** of revenue.
 
-Company B adds back $8.0M of stock compensation, $5.0M of recurring annual transformation work and $3.0M of “temporary” customer migration costs. Its adjusted EBITDA is **$36.0M**, and its adjustment burden is $16.0M / $200.0M = **8.0%** of revenue.
+Company B adds back \$8.0M of stock compensation, \$5.0M of recurring annual transformation work and \$3.0M of “temporary” customer migration costs. Its adjusted EBITDA is **\$36.0M**, and its adjustment burden is \$16.0M / \$200.0M = **8.0%** of revenue.
 
 A screen that ranks by adjusted EBITDA margin sees 18.0% for Company B versus 11.5% for Company A. A forensic table shows the difference is mostly the definition, not necessarily the underlying business.
 
@@ -317,11 +317,11 @@ Look for five signals.
 
 ### The denominator stays stable while exclusions grow
 
-If revenue grows from $100M to $130M but adjustments grow from $3M to $12M, the adjusted margin may look stable only because exclusions are absorbing the operating costs of growth. Ask whether the business is becoming more efficient or merely more adjusted.
+If revenue grows from \$100M to \$130M but adjustments grow from \$3M to \$12M, the adjusted margin may look stable only because exclusions are absorbing the operating costs of growth. Ask whether the business is becoming more efficient or merely more adjusted.
 
 ### “Other” becomes material
 
-An “other” line of $0.2M is a nuisance. An “other” line of $8.0M is a missing explanation. Request the schedule. Companies often use “other” for individually small items that collectively reveal a recurring pattern.
+An “other” line of \$0.2M is a nuisance. An “other” line of \$8.0M is a missing explanation. Request the schedule. Companies often use “other” for individually small items that collectively reveal a recurring pattern.
 
 ### The reconciliation changes without a restatement
 
@@ -343,13 +343,13 @@ Suppose a hypothetical company reports the following “one-time” adjustments:
 
 | Year | Restructuring | Integration | Other |
 | --- | ---: | ---: | ---: |
-| 2022 | $4.0M | $0.0M | $1.0M |
-| 2023 | $3.0M | $2.0M | $1.0M |
-| 2024 | $5.0M | $0.0M | $2.0M |
-| 2025 | $4.0M | $3.0M | $2.0M |
-| 2026 | $6.0M | $0.0M | $3.0M |
+| 2022 | \$4.0M | \$0.0M | \$1.0M |
+| 2023 | \$3.0M | \$2.0M | \$1.0M |
+| 2024 | \$5.0M | \$0.0M | \$2.0M |
+| 2025 | \$4.0M | \$3.0M | \$2.0M |
+| 2026 | \$6.0M | \$0.0M | \$3.0M |
 
-The five-year total is $22.0M restructuring, $5.0M integration and $9.0M other, or **$36.0M** of exclusions. The pattern does not prove abuse. It does prove that “one-time” is not an adequate summary. A normalized model should at least retain an expected recurring amount and separately model the cash timing.
+The five-year total is \$22.0M restructuring, \$5.0M integration and \$9.0M other, or **\$36.0M** of exclusions. The pattern does not prove abuse. It does prove that “one-time” is not an adequate summary. A normalized model should at least retain an expected recurring amount and separately model the cash timing.
 
 **Intuition:** the ledger turns adjectives into a time series, and time series are much harder to charm.
 
@@ -383,7 +383,7 @@ The largest number may simply have the broadest exclusions. Compare GAAP margins
 
 ### WeWork’s 2018 filing: a location lens versus a consolidated company
 
-WeWork’s 2019 SEC registration statement is the named case study for this post because the filing places the numbers beside each other. For 2018 it reported $1.821751 billion of revenue, a $1.927419 billion net loss, negative $665.653 million of Adjusted EBITDA and positive $467.125 million of Community Adjusted EBITDA. It also reported 401,000 memberships and 425 facilities at year end. These are dated figures from the filing, not current operating statistics.
+WeWork’s 2019 SEC registration statement is the named case study for this post because the filing places the numbers beside each other. For 2018 it reported \$1.821751 billion of revenue, a \$1.927419 billion net loss, negative \$665.653 million of Adjusted EBITDA and positive \$467.125 million of Community Adjusted EBITDA. It also reported 401,000 memberships and 425 facilities at year end. These are dated figures from the filing, not current operating statistics.
 
 The analytical lesson is not that every location was unprofitable. A location-level contribution can be a useful management statistic. The lesson is that the metric’s scope must remain visible. Costs excluded because they occur at the building, community or corporate level still have to be funded by the consolidated company. When the company carries long-term property commitments, a local contribution margin cannot stand in for solvency.
 
@@ -437,14 +437,14 @@ Then write down the consolidation perimeter. Does the adjusted metric include al
 
 Do not copy “strategic initiatives” into your model as if it were a natural kind. Translate it into the underlying transaction: severance, consultant invoices, lease termination, software implementation, marketing campaign, litigation settlement or acquisition fee. Each has a different recurrence and cash profile.
 
-The journal entry is a useful mental model even when the filing does not disclose the entry. For a $3.0M consultant bill that has been paid:
+The journal entry is a useful mental model even when the filing does not disclose the entry. For a \$3.0M consultant bill that has been paid:
 
 ```journal
 Dr Operating expense                      $3.0M
     Cr Cash                                           $3.0M
 ```
 
-An adjusted EBITDA table may put the $3.0M back. The bank account does not. For a $3.0M impairment:
+An adjusted EBITDA table may put the \$3.0M back. The bank account does not. For a \$3.0M impairment:
 
 ```journal
 Dr Impairment expense                     $3.0M
@@ -484,14 +484,14 @@ If you are writing an investment memo, show reported earnings and a normalized v
 
 #### Worked example: a complete analyst schedule
 
-Suppose a hypothetical manufacturer reports $12.0M of net income. Interest is $4.0M, tax is $3.0M, D&A is $5.0M, stock compensation is $2.0M, a genuine plant-fire loss is $1.0M, annual maintenance shutdown is $2.0M and acquisition fees are $1.0M.
+Suppose a hypothetical manufacturer reports \$12.0M of net income. Interest is \$4.0M, tax is \$3.0M, D&A is \$5.0M, stock compensation is \$2.0M, a genuine plant-fire loss is \$1.0M, annual maintenance shutdown is \$2.0M and acquisition fees are \$1.0M.
 
-1. EBITDA = $12.0M + $4.0M + $3.0M + $5.0M = **$24.0M**.
-2. Management adjusted EBITDA, if it adds every listed item, is $24.0M + $2.0M + $1.0M + $2.0M + $1.0M = **$30.0M**.
-3. A cautious analyst may exclude the fire loss and acquisition fee but retain stock compensation and maintenance shutdown: $24.0M + $1.0M + $1.0M = **$26.0M**.
+1. EBITDA = \$12.0M + \$4.0M + \$3.0M + \$5.0M = **\$24.0M**.
+2. Management adjusted EBITDA, if it adds every listed item, is \$24.0M + \$2.0M + \$1.0M + \$2.0M + \$1.0M = **\$30.0M**.
+3. A cautious analyst may exclude the fire loss and acquisition fee but retain stock compensation and maintenance shutdown: \$24.0M + \$1.0M + \$1.0M = **\$26.0M**.
 4. A cash operating view might retain the fire payment and acquisition fee as well, depending on when paid, while separately disclosing that stock compensation is non-cash but dilutive.
 
-The schedule does not accuse management of lying. It makes the decision visible. If the manufacturer has a plant fire every year, the $1.0M moves back into normal earnings. If the maintenance shutdown is the only annual period in which equipment can be serviced, it is a core cost even though the factory is temporarily idle.
+The schedule does not accuse management of lying. It makes the decision visible. If the manufacturer has a plant fire every year, the \$1.0M moves back into normal earnings. If the maintenance shutdown is the only annual period in which equipment can be serviced, it is a core cost even though the factory is temporarily idle.
 
 **Intuition:** the analyst’s job is not to discover a magic adjusted number; it is to show which economic question each number answers.
 
@@ -556,9 +556,9 @@ Finally, ask what the metric would be if no adjustments were allowed. That count
 
 ### The difference between a bridge and a forecast
 
-An adjusted EBITDA reconciliation describes the past period. A forecast applies assumptions to the future. Confusing the two creates another form of metric abuse. A company may remove $5.0M of current restructuring expense and then forecast that the saving will appear next year. That forecast is a hypothesis. It needs evidence about headcount, rent, vendors and revenue, not just the historical add-back.
+An adjusted EBITDA reconciliation describes the past period. A forecast applies assumptions to the future. Confusing the two creates another form of metric abuse. A company may remove \$5.0M of current restructuring expense and then forecast that the saving will appear next year. That forecast is a hypothesis. It needs evidence about headcount, rent, vendors and revenue, not just the historical add-back.
 
-The same distinction applies to synergies. If an acquisition is expected to save $4.0M next year, the historical reconciliation cannot simply add the $4.0M to this year’s EBITDA unless the saving was actually achieved in the period or the measure is explicitly pro forma. Otherwise the table combines a historical result with a future promise. A reader can model the promise separately, with a probability and a timing assumption, while retaining the reported result.
+The same distinction applies to synergies. If an acquisition is expected to save \$4.0M next year, the historical reconciliation cannot simply add the \$4.0M to this year’s EBITDA unless the saving was actually achieved in the period or the measure is explicitly pro forma. Otherwise the table combines a historical result with a future promise. A reader can model the promise separately, with a probability and a timing assumption, while retaining the reported result.
 
 This is particularly important in a downturn. When revenue falls, management may call layoffs, site closures and renegotiation costs “one-time” while the company is repeatedly shrinking. The costs may be unusual in the sense that they are not part of a healthy steady state, but they are still the cash cost of the current strategy. A normalized model can show a hypothetical post-restructuring business, but a liquidity model must show whether the company survives long enough to reach it.
 

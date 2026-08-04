@@ -17,12 +17,12 @@ readTime: 37
 > - A real sale transfers control of something valuable to an independent customer who has both the ability and intention to pay. A paper sale can create the journal entry without creating that economic event.
 > - The simplest forensic test is a three-way tie-out: revenue on the income statement, receivables and contract assets on the balance sheet, and cash collected on the cash-flow statement.
 > - In a round trip, two parties pre-arrange offsetting purchases and sales. Gross revenue and expenses can inflate while profit and cash barely move.
-> - The SEC said Reliant Resources reported $36.5 billion of 2001 gross revenue, including more than $3.8 billion from round-trip trades; the trades overstated both revenue and expenses.
+> - The SEC said Reliant Resources reported \$36.5 billion of 2001 gross revenue, including more than \$3.8 billion from round-trip trades; the trades overstated both revenue and expenses.
 > - Enron and Luckin show two different versions of the same warning: a transaction can look busy in a ledger while the underlying customer demand is absent or misrepresented.
 
-Imagine a café tells you it sold 100 coffees. The cash register says 100 coffees, the inventory system says 100 cups left the storeroom, and the income statement says $100 of sales. That is a coherent story.
+Imagine a café tells you it sold 100 coffees. The cash register says 100 coffees, the inventory system says 100 cups left the storeroom, and the income statement says \$100 of sales. That is a coherent story.
 
-Now imagine the café's owner buys $100 of coffee from a friend, and the friend immediately buys $100 of coffee from the owner's café. Each business can show a sale. Neither has found a new end customer. If the café records only its outward leg, revenue appears. If both parties record their legs gross, the market looks much larger than it is.
+Now imagine the café's owner buys \$100 of coffee from a friend, and the friend immediately buys \$100 of coffee from the owner's café. Each business can show a sale. Neither has found a new end customer. If the café records only its outward leg, revenue appears. If both parties record their legs gross, the market looks much larger than it is.
 
 This is the core forensic question: **what changed outside the accounting system?** Did a new customer receive a useful product? Did cash arrive from that customer? Did inventory leave the company for a reason that makes commercial sense? Or did two ledgers simply agree to tell the same flattering story?
 
@@ -78,23 +78,23 @@ A **related party** is a person or entity connected to the company through contr
 
 A **phantom customer** is a customer recorded in the sales system that is fictitious, inactive, misidentified, or used to disguise the true party to a transaction. The customer can be a paper entity, a friendly intermediary, or a real business whose name was used without a real order.
 
-### Worked example: the $100 sale with no cash
+### Worked example: the \$100 sale with no cash
 
-This is illustrative arithmetic, not a claim about a real company. Suppose a company ships a product and invoices a customer for $100. It records:
+This is illustrative arithmetic, not a claim about a real company. Suppose a company ships a product and invoices a customer for \$100. It records:
 
 ```journal
 Dr Accounts receivable       $100
     Cr Revenue                         $100
 ```
 
-Revenue rises by $100. A/R rises by $100. Cash is still $0. If the product cost $60, the company also records:
+Revenue rises by \$100. A/R rises by \$100. Cash is still \$0. If the product cost \$60, the company also records:
 
 ```journal
 Dr Cost of goods sold         $60
     Cr Inventory                         $60
 ```
 
-Reported gross profit is $100 − $60 = $40. But no cash has arrived. If the customer pays later, the collection entry is:
+Reported gross profit is \$100 − \$60 = \$40. But no cash has arrived. If the customer pays later, the collection entry is:
 
 ```journal
 Dr Cash                       $100
@@ -122,20 +122,20 @@ Four patterns recur:
 
 ### Worked example: the journal entry that inflates the top line
 
-Assume a fictional company wants to show $100 of extra revenue at year end. It creates an invoice to “North Star Trading,” a related entity, and records:
+Assume a fictional company wants to show \$100 of extra revenue at year end. It creates an invoice to “North Star Trading,” a related entity, and records:
 
 ```journal
 Dr Accounts receivable       $100
     Cr Revenue                         $100
 ```
 
-No cash moves. No inventory moves. The income statement shows $100 more revenue and, if no cost is recorded, $100 more profit. The balance sheet shows $100 more A/R. The cash-flow statement starts with higher net income, then subtracts the $100 increase in A/R in operating cash flow. Cash from operations is therefore unchanged by the entry.
+No cash moves. No inventory moves. The income statement shows \$100 more revenue and, if no cost is recorded, \$100 more profit. The balance sheet shows \$100 more A/R. The cash-flow statement starts with higher net income, then subtracts the \$100 increase in A/R in operating cash flow. Cash from operations is therefore unchanged by the entry.
 
 That is why a revenue-only test is weak. The income statement looks better, while the cash-flow statement quietly says, “this profit is still owed to us.” If the receivable later gets written off, the profit reverses through bad-debt expense.
 
 **Intuition:** the debit and credit can balance perfectly while the business event they purport to represent never happened.
 
-![Before-and-after journal entries show how an unsupported $100 invoice raises revenue and receivables while operating cash remains unchanged.](/imgs/blogs/round-tripping-and-fabricated-revenue-3.webp)
+![Before-and-after journal entries show how an unsupported \$100 invoice raises revenue and receivables while operating cash remains unchanged.](/imgs/blogs/round-tripping-and-fabricated-revenue-3.webp)
 
 ### The evidence trail a genuine customer leaves
 
@@ -147,11 +147,11 @@ Forensic accountants therefore confirm more than the invoice. They may send posi
 
 Round-tripping is especially confusing because it can involve real contracts, real invoices, and sometimes real cash. The problem is not that a transaction is literally imaginary. The problem is that the two legs are economically pre-arranged and cancel each other.
 
-Consider two energy traders, A and B. A agrees to sell 1,000 units to B for $1,000,000. At the same time, B agrees to sell the same 1,000 units back to A for $1,000,000. Neither intends delivery. If A records both a sale and a purchase, gross revenue and cost of goods sold each rise by $1,000,000. Gross profit is unchanged. If B does the same, both businesses look busier even though no new end demand appeared.
+Consider two energy traders, A and B. A agrees to sell 1,000 units to B for \$1,000,000. At the same time, B agrees to sell the same 1,000 units back to A for \$1,000,000. Neither intends delivery. If A records both a sale and a purchase, gross revenue and cost of goods sold each rise by \$1,000,000. Gross profit is unchanged. If B does the same, both businesses look busier even though no new end demand appeared.
 
-The SEC described a similar economic pattern in its CMS Energy order: pre-arranged purchases and sales of the same volume at the same price, with no delivery contemplated and neither party making a profit. The order said CMS overstated revenue and expenses by $1.0 billion, or 10% of revenue, in 2000 and by $4.2 billion, or 36% of revenue, in the first three quarters of 2001. The SEC said the trades did not affect net earnings, but they distorted reported revenue and trading volume.
+The SEC described a similar economic pattern in its CMS Energy order: pre-arranged purchases and sales of the same volume at the same price, with no delivery contemplated and neither party making a profit. The order said CMS overstated revenue and expenses by \$1.0 billion, or 10% of revenue, in 2000 and by \$4.2 billion, or 36% of revenue, in the first three quarters of 2001. The SEC said the trades did not affect net earnings, but they distorted reported revenue and trading volume.
 
-### Worked example: a $1,000,000 round trip
+### Worked example: a \$1,000,000 round trip
 
 These figures are illustrative. Company A buys and sells the same notional amount under a pre-arranged offsetting trade:
 
@@ -163,13 +163,13 @@ Purchase leg:   Dr Cost of goods sold       $1,000,000
                     Cr Accounts payable                $1,000,000
 ```
 
-Reported revenue increases by $1,000,000. Reported COGS increases by $1,000,000. Gross profit changes by $0. If both receivable and payable settle for the same amount, the company may see cash inflow and cash outflow that cancel. The headline “revenue grew by $1,000,000” is technically compatible with the ledger, but it says almost nothing about new customers or profitable demand.
+Reported revenue increases by \$1,000,000. Reported COGS increases by \$1,000,000. Gross profit changes by \$0. If both receivable and payable settle for the same amount, the company may see cash inflow and cash outflow that cancel. The headline “revenue grew by \$1,000,000” is technically compatible with the ledger, but it says almost nothing about new customers or profitable demand.
 
-Now add a 1% fee paid to an intermediary. The company pays $10,000 to make the loop happen. It has created $1,000,000 of gross activity at a real economic cost of $10,000. That cost is the clue: the company paid to rent the appearance of scale.
+Now add a 1% fee paid to an intermediary. The company pays \$10,000 to make the loop happen. It has created \$1,000,000 of gross activity at a real economic cost of \$10,000. That cost is the clue: the company paid to rent the appearance of scale.
 
 **Intuition:** gross revenue can be huge when the business is only passing the same economic value back and forth.
 
-![A round trip pairs a $1,000,000 sale with an equal offsetting purchase; revenue and COGS rise together while net economic demand remains zero.](/imgs/blogs/round-tripping-and-fabricated-revenue-4.webp)
+![A round trip pairs a \$1,000,000 sale with an equal offsetting purchase; revenue and COGS rise together while net economic demand remains zero.](/imgs/blogs/round-tripping-and-fabricated-revenue-4.webp)
 
 ### Gross versus net presentation
 
@@ -196,14 +196,14 @@ Imagine a hypothetical distributor with two years of activity:
 
 | Illustrative amount | Year 1 | Year 2 |
 | --- | ---: | ---: |
-| Revenue | $100 | $160 |
-| Cash collected from customers | $95 | $98 |
-| Ending A/R | $20 | $82 |
-| Returns and credits after year end | $2 | $25 |
+| Revenue | \$100 | \$160 |
+| Cash collected from customers | \$95 | \$98 |
+| Ending A/R | \$20 | \$82 |
+| Returns and credits after year end | \$2 | \$25 |
 
-Revenue grew $60, or 60%. Customer cash grew only $3. A/R grew $62, and later credits jumped from $2 to $25. None of those facts proves fraud. A new enterprise customer could have negotiated 90-day terms, or the company could have acquired a receivables portfolio. But the growth story now needs an explanation, not applause.
+Revenue grew \$60, or 60%. Customer cash grew only \$3. A/R grew \$62, and later credits jumped from \$2 to \$25. None of those facts proves fraud. A new enterprise customer could have negotiated 90-day terms, or the company could have acquired a receivables portfolio. But the growth story now needs an explanation, not applause.
 
-If Year 2 net income was $20 and operating cash flow was negative $5, the company might still be investing in growth. If it claims the growth is driven by thousands of cash-paying consumers, the figures conflict with that story. The next steps are customer-level aging, subsequent receipts, shipment evidence, credit notes, and related-party disclosures.
+If Year 2 net income was \$20 and operating cash flow was negative \$5, the company might still be investing in growth. If it claims the growth is driven by thousands of cash-paying consumers, the figures conflict with that story. The next steps are customer-level aging, subsequent receipts, shipment evidence, credit notes, and related-party disclosures.
 
 **Intuition:** when reported sales sprint ahead of customer cash, the unpaid balance is not a footnote; it is the central object of the investigation.
 
@@ -227,7 +227,7 @@ Related-party disclosure rules require companies to describe material transactio
 
 ### Worked example: the distributor that is really the seller's wallet
 
-Suppose a fictional company sells $500 of inventory to an affiliate for $500 on 31 December. The affiliate has no employees, no warehouse, and no external customers. The seller records revenue and A/R. The affiliate records inventory and A/P. Two weeks later, the seller lends the affiliate $500 so it can pay the invoice:
+Suppose a fictional company sells \$500 of inventory to an affiliate for \$500 on 31 December. The affiliate has no employees, no warehouse, and no external customers. The seller records revenue and A/R. The affiliate records inventory and A/P. Two weeks later, the seller lends the affiliate \$500 so it can pay the invoice:
 
 ```journal
 Seller:     Dr Note receivable from affiliate    $500
@@ -301,7 +301,7 @@ Next, stratify transactions. Sample ordinary small customers and large unusual c
 
 ### Worked example: a risk-based sample
 
-Assume a fictional quarter has 10,000 invoices totaling $10 million. Nine thousand nine hundred invoices are ordinary and total $8 million. One hundred invoices are period-end transactions totaling $2 million, or 20% of revenue.
+Assume a fictional quarter has 10,000 invoices totaling \$10 million. Nine thousand nine hundred invoices are ordinary and total \$8 million. One hundred invoices are period-end transactions totaling \$2 million, or 20% of revenue.
 
 A purely random sample of 20 invoices might miss the 100 unusual items. A risk-based design tests the period-end population, the largest invoices, all related-party invoices, and a smaller sample of ordinary transactions. If 10 of the 100 period-end invoices are returned or unpaid while ordinary invoices behave normally, the issue is not “the whole ledger is fake.” It is a concentrated control or recognition problem.
 
@@ -317,7 +317,7 @@ Use alternative procedures: inspect bank receipts, independent shipping records,
 
 Enron is a named historical case, not a template for accusing every complex company. The facts below are framed as allegations and findings in SEC enforcement materials, not as a claim that every transaction in the company operated the same way.
 
-In a 2002 SEC release concerning former CFO Andrew Fastow, the Commission alleged that two transactions involving Nigerian energy barges and a Cuiabá power plant were sham sales or “asset-parking” arrangements. For the Nigerian barges, the SEC alleged that Enron recorded approximately $12 million of earnings in 1999 even though risk did not truly pass and a later take-out was arranged. In a separate SEC case concerning Merrill Lynch, the Commission alleged that an energy transaction helped Enron report $50 million of income to reach a year-end earnings target in 1999. The SEC's description said Merrill paid or received fees in arrangements designed to be effectively risk-free.
+In a 2002 SEC release concerning former CFO Andrew Fastow, the Commission alleged that two transactions involving Nigerian energy barges and a Cuiabá power plant were sham sales or “asset-parking” arrangements. For the Nigerian barges, the SEC alleged that Enron recorded approximately \$12 million of earnings in 1999 even though risk did not truly pass and a later take-out was arranged. In a separate SEC case concerning Merrill Lynch, the Commission alleged that an energy transaction helped Enron report \$50 million of income to reach a year-end earnings target in 1999. The SEC's description said Merrill paid or received fees in arrangements designed to be effectively risk-free.
 
 The lesson is not simply “Enron used related parties.” It is more precise: a sale can be a financing arrangement in disguise when the seller promises to repurchase, guarantees the buyer's return, or retains the meaningful risks and rewards. The balance sheet may show an asset sale, while the economics still look like a loan.
 
@@ -327,9 +327,9 @@ The red flags were structural: side agreements, a motivated intermediary, a repo
 
 ## 8. Cautious preview: Luckin Coffee and fabricated retail sales
 
-Luckin belongs in this article because the SEC's 2020 litigation release described a different but related revenue problem: alleged fabricated retail sales using related parties and false records. The SEC said that from at least April 2019 through January 2020, Luckin intentionally fabricated more than $300 million in retail sales through three purchasing schemes. It also said employees allegedly inflated expenses by more than $190 million, created a fake operations database, and altered accounting and bank records.
+Luckin belongs in this article because the SEC's 2020 litigation release described a different but related revenue problem: alleged fabricated retail sales using related parties and false records. The SEC said that from at least April 2019 through January 2020, Luckin intentionally fabricated more than \$300 million in retail sales through three purchasing schemes. It also said employees allegedly inflated expenses by more than \$190 million, created a fake operations database, and altered accounting and bank records.
 
-The SEC release said reported revenue was allegedly overstated by approximately 28% for the period ended 30 June 2019 and 45% for the period ended 30 September 2019. It also said Luckin raised more than $864 million from debt and equity investors during the period of the alleged misconduct and agreed to pay a $180 million penalty in December 2020, without admitting or denying the allegations.
+The SEC release said reported revenue was allegedly overstated by approximately 28% for the period ended 30 June 2019 and 45% for the period ended 30 September 2019. It also said Luckin raised more than \$864 million from debt and equity investors during the period of the alleged misconduct and agreed to pay a \$180 million penalty in December 2020, without admitting or denying the allegations.
 
 Luckin's special committee announced on 1 July 2020 that its internal investigation had substantially completed. The company's release said the investigation reviewed more than 550,000 documents from more than 60 custodians, interviewed more than 60 witnesses, and found 2019 net revenue inflated by approximately RMB 2.12 billion. Those are reported findings from the company's disclosure and SEC enforcement record; they should not be casually generalized to other companies or countries.
 
@@ -349,7 +349,7 @@ $$
 
 This is an explanatory abstraction, not a claim that every filing uses exactly these lines. The symbols mean: **A/R** is accounts receivable; **credit revenue** is revenue not paid at the point of sale; **customer cash** is cash collected from customers; **credits and write-offs** reduce what the company expects to collect.
 
-![The three-statement bridge: a $100 illustrative sale creates revenue and receivables first, then cash only if the customer actually pays.](/imgs/blogs/round-tripping-and-fabricated-revenue-2.webp)
+![The three-statement bridge: a \$100 illustrative sale creates revenue and receivables first, then cash only if the customer actually pays.](/imgs/blogs/round-tripping-and-fabricated-revenue-2.webp)
 
 ![A cash-conversion timeline shows revenue first, receivables next, and customer cash later; returns and write-offs reveal whether the bridge ever completes.](/imgs/blogs/round-tripping-and-fabricated-revenue-8.webp)
 
@@ -373,13 +373,13 @@ Use a hypothetical software company with the following illustrative facts:
 
 | Line | Year 1 | Year 2 |
 | --- | ---: | ---: |
-| Revenue | $100 | $150 |
-| Customer cash | $96 | $100 |
-| A/R | $18 | $64 |
-| Deferred revenue | $30 | $20 |
-| Credits after year end | $1 | $12 |
+| Revenue | \$100 | \$150 |
+| Customer cash | \$96 | \$100 |
+| A/R | \$18 | \$64 |
+| Deferred revenue | \$30 | \$20 |
+| Credits after year end | \$1 | \$12 |
 
-Revenue grew $50. Customer cash grew only $4. A/R grew $46, while deferred revenue fell $10 and post-period credits rose $11. One explanation is a major shift from annual prepayment to monthly invoicing; another is aggressive recognition. The numbers do not choose the explanation by themselves. They tell the investigator to inspect contract terms, customer concentration, delivery logs, and the timing of credit notes.
+Revenue grew \$50. Customer cash grew only \$4. A/R grew \$46, while deferred revenue fell \$10 and post-period credits rose \$11. One explanation is a major shift from annual prepayment to monthly invoicing; another is aggressive recognition. The numbers do not choose the explanation by themselves. They tell the investigator to inspect contract terms, customer concentration, delivery logs, and the timing of credit notes.
 
 **Intuition:** a bridge turns “sales grew” into a set of testable claims about invoices, cash, obligations, inventory, and reversals.
 
@@ -409,7 +409,7 @@ Do not use the word “fraud” merely because cash conversion is weak. Use more
 
 ### Worked example: the same number, three possible explanations
 
-Suppose a company records $1,000 of revenue on 30 December and receives $0 by 31 December. That fact has at least three plausible explanations:
+Suppose a company records \$1,000 of revenue on 30 December and receives \$0 by 31 December. That fact has at least three plausible explanations:
 
 1. **Ordinary credit:** an independent customer received the product under documented 60-day terms and pays in February.
 2. **Aggressive timing:** the customer had not accepted the product by 31 December, but management recorded revenue early.
@@ -441,7 +441,7 @@ Look for entries with round amounts, vague descriptions, late timestamps, manual
 
 ### Worked example: a target-driven quarter
 
-Imagine an illustrative bonus plan that pays $10,000 if quarterly revenue reaches $1,000,000. Before the close, the ledger shows $980,000. Management records a $25,000 invoice to a related distributor and a $10,000 invoice to a customer whose goods remain in the seller's warehouse. The reported total becomes $1,015,000 and the target is reached.
+Imagine an illustrative bonus plan that pays \$10,000 if quarterly revenue reaches \$1,000,000. Before the close, the ledger shows \$980,000. Management records a \$25,000 invoice to a related distributor and a \$10,000 invoice to a customer whose goods remain in the seller's warehouse. The reported total becomes \$1,015,000 and the target is reached.
 
 The investigation does not start with the bonus payment. It traces the two invoices: ownership, delivery, acceptance, financing, returns, and the next-quarter reversal. If the distributor was funded by the seller and the goods were not controlled by the customer, the accounting treatment may not represent two genuine sales. The incentive explains why these particular entries deserve attention; it does not replace evidence.
 
@@ -463,12 +463,12 @@ The point of this sequence is to keep the analysis grounded. Revenue recognition
 
 ### Worked example: turning a filing into questions
 
-Assume a hypothetical filing says revenue grew from $200 to $300, A/R from $40 to $130, customer cash from $190 to $205, and returns from $3 to $20. Rather than writing “the company may be fraudulent,” write a test plan:
+Assume a hypothetical filing says revenue grew from \$200 to \$300, A/R from \$40 to \$130, customer cash from \$190 to \$205, and returns from \$3 to \$20. Rather than writing “the company may be fraudulent,” write a test plan:
 
-- obtain the $90 increase in A/R by customer and invoice age;
-- identify the customers behind the $100 of period-end revenue;
-- test whether the $20 of returns relates to those invoices;
-- trace $205 of customer cash to payer names and bank accounts;
+- obtain the \$90 increase in A/R by customer and invoice age;
+- identify the customers behind the \$100 of period-end revenue;
+- test whether the \$20 of returns relates to those invoices;
+- trace \$205 of customer cash to payer names and bank accounts;
 - inspect related-party and financing disclosures;
 - compare shipped, accepted, and returned units.
 
@@ -502,25 +502,25 @@ One invoice can be an error. The stronger signal is a pattern across timing, cus
 
 ### Reliant Resources: gross scale as a misleading signal
 
-In an SEC administrative proceeding concerning Reliant Resources, the Commission said the company's 2001 annual report reported $36.5 billion of gross revenue, with more than $3.8 billion resulting from round-trip trades. The SEC also said the trades inflated revenue and expenses by 17.7% in 1999, 5.3% in 2000, and 10.6% in 2001, and that Reliant published inflated trading volumes. These figures come from the SEC's account of the amended annual report and enforcement findings.
+In an SEC administrative proceeding concerning Reliant Resources, the Commission said the company's 2001 annual report reported \$36.5 billion of gross revenue, with more than \$3.8 billion resulting from round-trip trades. The SEC also said the trades inflated revenue and expenses by 17.7% in 1999, 5.3% in 2000, and 10.6% in 2001, and that Reliant published inflated trading volumes. These figures come from the SEC's account of the amended annual report and enforcement findings.
 
 The practical lesson is to ask what “revenue” measures in a trading business. A power marketer can have legitimate gross flows, but a pre-arranged same-volume, same-price exchange with no delivery is not equivalent to finding a new customer or taking market risk. Revenue growth should be read alongside net trading revenue, realized margin, counterparty concentration, and delivery evidence.
 
 ### CMS Energy: a volume story that did not change earnings
 
-The SEC's 2003 order concerning CMS Energy described round-trip energy transactions in 2000 and 2001. It said the transactions overstated revenue and expenses by $5.2 billion over the relevant period: $1.0 billion, or 10% of revenue, in 2000 and $4.2 billion, or 36% of revenue, for the first three quarters of 2001. The SEC said the activity also overstated reported energy-trading volume by 78% in 2000 and 72% in 2001, while not affecting net earnings.
+The SEC's 2003 order concerning CMS Energy described round-trip energy transactions in 2000 and 2001. It said the transactions overstated revenue and expenses by \$5.2 billion over the relevant period: \$1.0 billion, or 10% of revenue, in 2000 and \$4.2 billion, or 36% of revenue, for the first three quarters of 2001. The SEC said the activity also overstated reported energy-trading volume by 78% in 2000 and 72% in 2001, while not affecting net earnings.
 
 This is a useful caution for beginners. “No change in net income” does not mean “no accounting problem.” Investors use revenue and volume to infer scale, market position, and future earnings power. A business can mislead through the numerator and denominator of a growth story even when the final profit line is unchanged.
 
 ### Enron: when a sale behaves like a loan
 
-The SEC's 2002 materials about Enron and its intermediaries alleged that the Nigerian barge transaction generated approximately $12 million of 1999 earnings even though the risk of ownership did not genuinely leave Enron. The SEC's 2003 complaint concerning Merrill Lynch alleged a separate sham energy transaction that enabled Enron to report $50 million of income in 1999 and described a $17 million fee paid for participation in an essentially risk-free arrangement.
+The SEC's 2002 materials about Enron and its intermediaries alleged that the Nigerian barge transaction generated approximately \$12 million of 1999 earnings even though the risk of ownership did not genuinely leave Enron. The SEC's 2003 complaint concerning Merrill Lynch alleged a separate sham energy transaction that enabled Enron to report \$50 million of income in 1999 and described a \$17 million fee paid for participation in an essentially risk-free arrangement.
 
 These allegations show why side agreements matter. A sale with a guaranteed repurchase, a fixed return to the buyer, or a promise to remove the buyer's exposure may be financing in economic substance. The accounting label “sale” cannot erase the retained risk.
 
 ### Luckin Coffee: operational data and related-party schemes
 
-The SEC's December 2020 litigation release alleged more than $300 million of fabricated retail sales from April 2019 through January 2020, more than $190 million of inflated expenses, and altered accounting and bank records. It also described alleged revenue overstatements of approximately 28% and 45% for two 2019 reporting periods and a $180 million settlement penalty.
+The SEC's December 2020 litigation release alleged more than \$300 million of fabricated retail sales from April 2019 through January 2020, more than \$190 million of inflated expenses, and altered accounting and bank records. It also described alleged revenue overstatements of approximately 28% and 45% for two 2019 reporting periods and a \$180 million settlement penalty.
 
 The lesson is to triangulate reported sales against the system that should have produced them. Retail revenue should have a relationship with orders, stores, payments, coupons, delivery records, customer accounts, and inventory. When a company allegedly fabricates both operational records and financial records, a single confirmation or a single database extract is not enough.
 
@@ -538,11 +538,11 @@ The calm forensic habit is simple: **follow the value, not the label**. A revenu
 
 ## Sources & further reading
 
-- [SEC: Reliant Resources and Reliant Energy administrative proceeding](https://www.sec.gov/enforcement-litigation/administrative-proceedings/33-8232), including the $36.5 billion 2001 gross-revenue figure and over $3.8 billion of round-trip trades.
-- [SEC: CMS Energy Corp. and Terry Woolley order](https://www.sec.gov/enforcement-litigation/administrative-proceedings/33-8403), describing the $1.0 billion 2000 and $4.2 billion first-three-quarters-2001 round-trip overstatements.
-- [SEC: Andrew Fastow enforcement release](https://www.sec.gov/news/press/2002-143.htm), dated 2 October 2002, describing the alleged $12 million Nigerian barges sham sale and related Enron transactions.
-- [SEC: Merrill Lynch and Enron complaint](https://www.sec.gov/litigation/complaints/comp18038.htm), dated 12 February 2003, describing the alleged $50 million 1999 energy-trade income and $12 million barge transaction.
-- [SEC: Luckin Coffee litigation release](https://www.sec.gov/enforcement-litigation/litigation-releases/lr-24987), dated 16 December 2020, describing the alleged fabricated sales, inflated expenses, revenue overstatements, and $180 million penalty.
+- [SEC: Reliant Resources and Reliant Energy administrative proceeding](https://www.sec.gov/enforcement-litigation/administrative-proceedings/33-8232), including the \$36.5 billion 2001 gross-revenue figure and over \$3.8 billion of round-trip trades.
+- [SEC: CMS Energy Corp. and Terry Woolley order](https://www.sec.gov/enforcement-litigation/administrative-proceedings/33-8403), describing the \$1.0 billion 2000 and \$4.2 billion first-three-quarters-2001 round-trip overstatements.
+- [SEC: Andrew Fastow enforcement release](https://www.sec.gov/news/press/2002-143.htm), dated 2 October 2002, describing the alleged \$12 million Nigerian barges sham sale and related Enron transactions.
+- [SEC: Merrill Lynch and Enron complaint](https://www.sec.gov/litigation/complaints/comp18038.htm), dated 12 February 2003, describing the alleged \$50 million 1999 energy-trade income and \$12 million barge transaction.
+- [SEC: Luckin Coffee litigation release](https://www.sec.gov/enforcement-litigation/litigation-releases/lr-24987), dated 16 December 2020, describing the alleged fabricated sales, inflated expenses, revenue overstatements, and \$180 million penalty.
 - [Luckin Coffee special committee investigation release](https://www.sec.gov/Archives/edgar/data/1767582/000110465920079446/a20-23914_1ex99d1.htm), dated 1 July 2020, reporting the internal investigation's document review, interviews, and approximately RMB 2.12 billion 2019 net-revenue inflation finding.
 - [Reading the income statement and the quality of earnings](/blog/trading/forensic-accounting/reading-the-income-statement-and-the-quality-of-earnings) for the lines that fabricated revenue tries to inflate.
 - [Reading the cash-flow statement: why cash beats net income](/blog/trading/forensic-accounting/reading-the-cash-flow-statement-why-cash-beats-net-income) for the operating-cash bridge.

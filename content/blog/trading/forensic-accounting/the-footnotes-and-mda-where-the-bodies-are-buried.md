@@ -44,7 +44,7 @@ Think of a restaurant menu. The face statements are the prices and totals. The f
 
 #### Worked example: the same profit, different evidence
 
-Suppose two companies each report $100 of revenue, $60 of cost of sales, and $40 of operating profit. Company A collected $95 from customers and carries $5 of ordinary receivables. Company B collected $20, carries $80 of receivables, and says in its note that one customer represents most of the balance.
+Suppose two companies each report \$100 of revenue, \$60 of cost of sales, and \$40 of operating profit. Company A collected \$95 from customers and carries \$5 of ordinary receivables. Company B collected \$20, carries \$80 of receivables, and says in its note that one customer represents most of the balance.
 
 The face income statements are identical:
 
@@ -54,7 +54,7 @@ Cost of sales                   (60)
 Operating profit                 $40
 ```
 
-The economic evidence is not identical. Company B's reported profit depends on converting a promise to pay into cash. That may be perfectly legitimate, but it creates a different question: who owes the $80, and what happened after year-end? The footnote changes the next test from “is profit positive?” to “is the customer independent, solvent, and paying?”
+The economic evidence is not identical. Company B's reported profit depends on converting a promise to pay into cash. That may be perfectly legitimate, but it creates a different question: who owes the \$80, and what happened after year-end? The footnote changes the next test from “is profit positive?” to “is the customer independent, solvent, and paying?”
 
 The intuition: a face-statement total is an address, not a complete description of what is stored there.
 
@@ -70,7 +70,7 @@ The distinction matters because the earnings pattern differs. A policy change ca
 
 #### Worked example: policy change versus cash
 
-Imagine a software company that sells a $120 annual contract paid upfront. Under a hypothetical old policy, it recognizes the whole $120 at signing. Under a hypothetical revised policy, it recognizes $10 per month as service is delivered. The customer still pays $120 on day one.
+Imagine a software company that sells a \$120 annual contract paid upfront. Under a hypothetical old policy, it recognizes the whole \$120 at signing. Under a hypothetical revised policy, it recognizes \$10 per month as service is delivered. The customer still pays \$120 on day one.
 
 ```
 Cash received at signing                         $120
@@ -106,14 +106,14 @@ Do not treat the table as a scoring model. It is a way to prevent the prose from
 
 #### Worked example: turning “margin expansion” into a test
 
-Suppose revenue rises from $200 to $240 and operating profit rises from $20 to $36. The reported operating margin changes from:
+Suppose revenue rises from \$200 to \$240 and operating profit rises from \$20 to \$36. The reported operating margin changes from:
 
 ```
 Old margin = $20 / $200 = 10%
 New margin = $36 / $240 = 15%
 ```
 
-That is a five-percentage-point improvement. Now suppose the note says $8 of the new profit came from a one-time gain on selling equipment. Continuing operating profit is $28, not $36:
+That is a five-percentage-point improvement. Now suppose the note says \$8 of the new profit came from a one-time gain on selling equipment. Continuing operating profit is \$28, not \$36:
 
 ```
 Continuing operating margin = $28 / $240 = 11.67% (rounded)
@@ -142,7 +142,7 @@ Ask four questions:
 
 #### Worked example: a reclassification that changes the story
 
-Suppose a company reports $50 of operating expense and $10 of “other expense.” It later reclassifies $8 from operating expense to other expense. Total expense remains $60, but operating profit improves by $8.
+Suppose a company reports \$50 of operating expense and \$10 of “other expense.” It later reclassifies \$8 from operating expense to other expense. Total expense remains \$60, but operating profit improves by \$8.
 
 ```
 Before: operating expense $50; other expense $10; total $60
@@ -165,14 +165,14 @@ Read the estimate note alongside MD&A. If MD&A calls demand “stable” while t
 
 #### Worked example: impairment sensitivity without pretending to value a company
 
-Suppose an illustrative asset has a carrying amount of $100. Management's base case estimates future cash flows whose present value is $108, so no impairment is recorded. A downside case reduces the present value to $92.
+Suppose an illustrative asset has a carrying amount of \$100. Management's base case estimates future cash flows whose present value is \$108, so no impairment is recorded. A downside case reduces the present value to \$92.
 
 ```
 Base headroom   = $108 - $100 = $8
 Downside shortfall = $100 - $92 = $8 impairment
 ```
 
-The $8 is not a forecast of what will happen. It demonstrates why the note's assumptions matter: the same asset can appear fully supported under one scenario and require a write-down under another. The investigative question is whether the downside case is inconsistent with other disclosures—capacity closures, customer losses, falling segment revenue, or debt refinancing pressure.
+The \$8 is not a forecast of what will happen. It demonstrates why the note's assumptions matter: the same asset can appear fully supported under one scenario and require a write-down under another. The investigative question is whether the downside case is inconsistent with other disclosures—capacity closures, customer losses, falling segment revenue, or debt refinancing pressure.
 
 The intuition: a “no impairment” conclusion is not the same as a low-risk asset; it may mean only that the base case has a little headroom.
 
@@ -186,7 +186,7 @@ Watch for changes in segment composition. A segment may be renamed, combined, di
 
 #### Worked example: acquisition-led growth
 
-Imagine a company with two segments. In year one, Core revenue is $180 and NewCo revenue is $20, for total revenue of $200. In year two, Core revenue is still $180 while NewCo revenue is $80, for total revenue of $260.
+Imagine a company with two segments. In year one, Core revenue is \$180 and NewCo revenue is \$20, for total revenue of \$200. In year two, Core revenue is still \$180 while NewCo revenue is \$80, for total revenue of \$260.
 
 ```
 Consolidated growth = ($260 - $200) / $200 = 30%
@@ -200,7 +200,7 @@ The intuition: always decompose group growth into old business, acquired busines
 
 #### Worked example: profit without cash in a segment
 
-Suppose a segment reports $30 of profit. Its receivables increase by $22, inventory increases by $10, and payables increase by $5. Ignoring other working-capital items, the cash effect is:
+Suppose a segment reports \$30 of profit. Its receivables increase by \$22, inventory increases by \$10, and payables increase by \$5. Ignoring other working-capital items, the cash effect is:
 
 ```
 Profit                                   +$30
@@ -210,7 +210,7 @@ Payables increase                         +5
 Approximate operating cash from these   +$3
 ```
 
-The segment did not necessarily “fake” $30 of profit. It earned accounting revenue while cash was tied up in customers and stock. But a reader should not value the segment as though $30 immediately arrived as cash. The note and MD&A should explain whether the working-capital build is a seasonal investment, a deliberate growth choice, or evidence of weak collection.
+The segment did not necessarily “fake” \$30 of profit. It earned accounting revenue while cash was tied up in customers and stock. But a reader should not value the segment as though \$30 immediately arrived as cash. The note and MD&A should explain whether the working-capital build is a seasonal investment, a deliberate growth choice, or evidence of weak collection.
 
 ![Segment analysis decomposes consolidated performance into core, acquired, and corporate components, then reconnects segment profit to working-capital cash demands.](/imgs/blogs/the-footnotes-and-mda-where-the-bodies-are-buried-5.webp)
 
@@ -231,7 +231,7 @@ Pay attention to “amounts due from” and “amounts due to.” A company can 
 
 #### Worked example: revenue concentration plus a related-party receivable
 
-Suppose reported revenue is $100. A related-party customer accounts for $30, and $24 of that amount remains receivable at year-end. An unrelated customer produces $70 of revenue and leaves $7 receivable.
+Suppose reported revenue is \$100. A related-party customer accounts for \$30, and \$24 of that amount remains receivable at year-end. An unrelated customer produces \$70 of revenue and leaves \$7 receivable.
 
 ```
 Related-party revenue concentration = $30 / $100 = 30%
@@ -261,7 +261,7 @@ Look for language that changes over time: “not reasonably possible,” “reas
 
 #### Worked example: a range is not a number you can ignore
 
-Suppose a company discloses a lawsuit with a possible loss between $10 and $40, but says no provision is recorded because loss is not probable. The face balance sheet does not show the $10 or $40. A conservative reader can still show the exposure as a scenario:
+Suppose a company discloses a lawsuit with a possible loss between \$10 and \$40, but says no provision is recorded because loss is not probable. The face balance sheet does not show the \$10 or \$40. A conservative reader can still show the exposure as a scenario:
 
 ```
 Reported equity before scenario             $200
@@ -289,7 +289,7 @@ Read the subsequent-events note last among the core notes, but do not treat it a
 
 #### Worked example: the customer who fails after year-end
 
-Suppose a company reports $50 of receivables at year-end. In the following month, a customer owing $8 enters bankruptcy. Assume, purely illustratively, that the bankruptcy reflects financial difficulty already present at year-end and that no recovery is expected.
+Suppose a company reports \$50 of receivables at year-end. In the following month, a customer owing \$8 enters bankruptcy. Assume, purely illustratively, that the bankruptcy reflects financial difficulty already present at year-end and that no recovery is expected.
 
 ```
 Reported receivables                     $50
@@ -304,7 +304,7 @@ The intuition: subsequent events do not automatically rewrite the old period, bu
 
 #### Worked example: refinancing after the reporting date
 
-Imagine a company has $30 of cash, $20 of current payables, and $25 of debt due soon after year-end. It announces a $40 refinancing after the reporting date.
+Imagine a company has \$30 of cash, \$20 of current payables, and \$25 of debt due soon after year-end. It announces a \$40 refinancing after the reporting date.
 
 ```
 Cash before refinancing                    $30
@@ -313,7 +313,7 @@ Immediate shortfall before new funding     $15
 New refinancing announced                  $40
 ```
 
-The announcement may reduce going-concern risk, but it does not mean the company had $40 of cash at the year-end date. Check the terms, conditions, collateral, interest cost, maturity, and whether the refinancing is committed or merely expected. Management's MD&A should distinguish liquidity on the reporting date from funding obtained later.
+The announcement may reduce going-concern risk, but it does not mean the company had \$40 of cash at the year-end date. Check the terms, conditions, collateral, interest cost, maturity, and whether the refinancing is committed or merely expected. Management's MD&A should distinguish liquidity on the reporting date from funding obtained later.
 
 ## 7. MD&A: read the verbs, then rebuild the bridge
 
@@ -325,7 +325,7 @@ Then mark evasive verbs: “may,” “could,” “we believe,” “we expect,
 
 #### Worked example: rebuilding an MD&A bridge
 
-Suppose MD&A says operating profit rose from $25 to $34. It attributes $6 to volume, $5 to price, and $2 to cost savings, while saying currency reduced profit by $4.
+Suppose MD&A says operating profit rose from \$25 to \$34. It attributes \$6 to volume, \$5 to price, and \$2 to cost savings, while saying currency reduced profit by \$4.
 
 ```
 Starting operating profit                $25
@@ -350,7 +350,7 @@ Look for: negative operating cash flow, recurring reliance on asset sales, suppl
 
 #### Worked example: positive earnings, negative operating cash
 
-Suppose net income is $18. Depreciation is $6, receivables rise by $20, inventory rises by $8, and payables rise by $4.
+Suppose net income is \$18. Depreciation is \$6, receivables rise by \$20, inventory rises by \$8, and payables rise by \$4.
 
 ```
 Net income                               $18
@@ -361,7 +361,7 @@ Payables increase                          +4
 Illustrative operating cash                $0
 ```
 
-The company can be profitable and cash-neutral in this simplified example. If it also spends $12 on equipment and pays $5 of debt, it needs $17 of external or beginning cash to fund those uses. A statement that emphasizes earnings but barely discusses this funding need is not necessarily false, but it is not a complete liquidity discussion.
+The company can be profitable and cash-neutral in this simplified example. If it also spends \$12 on equipment and pays \$5 of debt, it needs \$17 of external or beginning cash to fund those uses. A statement that emphasizes earnings but barely discusses this funding need is not necessarily false, but it is not a complete liquidity discussion.
 
 The intuition: earnings answer “what did accounting recognize?” Liquidity answers “what must be funded before the next cash arrives?”
 
@@ -428,7 +428,7 @@ If management says it sold more on credit, revenue rises and receivables usually
 
 #### Worked example: find the missing other side
 
-Suppose management says a $15 cost was “avoided” because a supplier gave the company a concession. There are several possible accounting paths:
+Suppose management says a \$15 cost was “avoided” because a supplier gave the company a concession. There are several possible accounting paths:
 
 ```
 Cash paid less than expected       Cash outflow falls by $15
@@ -447,7 +447,7 @@ But a roll-forward is not independent verification. It is internally consistent 
 
 #### Worked example: asset additions and cash
 
-Imagine property and equipment opens at $90, receives $25 of additions, records $10 of depreciation, and closes at $105.
+Imagine property and equipment opens at \$90, receives \$25 of additions, records \$10 of depreciation, and closes at \$105.
 
 ```
 Opening property and equipment       $90
@@ -456,7 +456,7 @@ Depreciation                          (10)
 Closing property and equipment       $105
 ```
 
-The roll-forward works. Now suppose the cash-flow statement shows only $5 of capital expenditure. The $20 difference may reflect non-cash acquisitions, finance leases, foreign-exchange movements, construction accruals, or a classification difference. It is not proof of an error. It is a bridge that must be explained. Read the lease note, additions table, debt note, and investing cash flow before drawing a conclusion.
+The roll-forward works. Now suppose the cash-flow statement shows only \$5 of capital expenditure. The \$20 difference may reflect non-cash acquisitions, finance leases, foreign-exchange movements, construction accruals, or a classification difference. It is not proof of an error. It is a bridge that must be explained. Read the lease note, additions table, debt note, and investing cash flow before drawing a conclusion.
 
 The intuition: the most useful forensic question is often “what is the other side of this movement?”
 
@@ -468,7 +468,7 @@ Create a two-column bridge: reported result on the left, each adjustment in the 
 
 #### Worked example: adjusted profit that is mostly adjustments
 
-Suppose reported operating profit is $12. Management adds back a $5 restructuring charge, a $4 acquisition expense, and a $3 stock-based compensation expense.
+Suppose reported operating profit is \$12. Management adds back a \$5 restructuring charge, a \$4 acquisition expense, and a \$3 stock-based compensation expense.
 
 ```
 Reported operating profit              $12
@@ -479,7 +479,7 @@ Adjusted operating profit              $24
 Adjustments as share of adjusted       12 / 24 = 50%
 ```
 
-The 50% is arithmetic for this hypothetical example. It does not mean adjusted profit is invalid. It means the reader should ask whether the business can produce $24 without repeatedly paying costs management excludes. Compare the adjustment list over several years, check cash paid for restructuring, and inspect the acquisition note for integration costs. The reported and adjusted measures answer different questions; neither should silently replace the other.
+The 50% is arithmetic for this hypothetical example. It does not mean adjusted profit is invalid. It means the reader should ask whether the business can produce \$24 without repeatedly paying costs management excludes. Compare the adjustment list over several years, check cash paid for restructuring, and inspect the acquisition note for integration costs. The reported and adjusted measures answer different questions; neither should silently replace the other.
 
 ### “Other” lines deserve a decomposition request
 
@@ -489,14 +489,14 @@ Track the bucket's size and composition over time. The first year a line becomes
 
 #### Worked example: an “other” bucket with two economic meanings
 
-Suppose “other assets” is $30. The note says $18 is prepaid insurance and $12 is a tax receivable.
+Suppose “other assets” is \$30. The note says \$18 is prepaid insurance and \$12 is a tax receivable.
 
 ```
 Prepaid insurance                 $18 / $30 = 60%
 Tax receivable                    $12 / $30 = 40%
 ```
 
-Insurance prepayments unwind as coverage is consumed. A tax receivable depends on filing position, jurisdiction, audit, and collection timing. Treating the entire $30 as one liquid asset would be a category error. The note turns a seemingly simple number into two separate questions.
+Insurance prepayments unwind as coverage is consumed. A tax receivable depends on filing position, jurisdiction, audit, and collection timing. Treating the entire \$30 as one liquid asset would be a category error. The note turns a seemingly simple number into two separate questions.
 
 The intuition: aggregation is a compression algorithm; the note tells you which information was compressed away.
 
@@ -508,13 +508,13 @@ When prior periods are recast, retain both the originally reported and restated 
 
 #### Worked example: a twelve-month year is not always comparable
 
-Imagine a company reports a ten-month transition period followed by a twelve-month year. Revenue in the transition period is $100 and revenue in the following period is $120.
+Imagine a company reports a ten-month transition period followed by a twelve-month year. Revenue in the transition period is \$100 and revenue in the following period is \$120.
 
 ```
 Naive comparison = ($120 - $100) / $100 = 20%
 ```
 
-The 20% is not a valid annual growth rate if the first period covers fewer months. A simple monthly run-rate illustration would be $100 / 10 = $10 per month versus $120 / 12 = $10 per month, suggesting no change under that crude assumption. Seasonality, acquisitions, and closures make the actual comparison more complex, but the issue is visible immediately: verify the period before calculating growth.
+The 20% is not a valid annual growth rate if the first period covers fewer months. A simple monthly run-rate illustration would be \$100 / 10 = \$10 per month versus \$120 / 12 = \$10 per month, suggesting no change under that crude assumption. Seasonality, acquisitions, and closures make the actual comparison more complex, but the issue is visible immediately: verify the period before calculating growth.
 
 The intuition: before asking whether the line grew, ask whether the two lines measure the same amount of time and the same perimeter.
 
@@ -552,7 +552,7 @@ One more habit makes the sheet useful across a series of reports: freeze your de
 
 For example, a company can say cash increased while the cash-flow statement shows cash and cash equivalents falling if management is using a broader liquidity definition that includes an undrawn facility. A company can say net debt fell while total debt rose if it acquired cash or changed the treatment of leases. Neither statement should be accepted or rejected from the headline alone. Put the definition beside the number, then ask whether the definition is the one a lender, supplier, or shareholder would actually face.
 
-Also preserve the report's rounding. If the filing reports amounts in millions, do not manufacture exact dollars by multiplying the displayed number. A displayed “$1,245 million” may represent a rounded amount; your analysis should say “about $1.245 billion” or retain the filing's units. Precision is not the same as accuracy. False precision makes a small reconciliation error look like a discovery when it may be rounding.
+Also preserve the report's rounding. If the filing reports amounts in millions, do not manufacture exact dollars by multiplying the displayed number. A displayed “\$1,245 million” may represent a rounded amount; your analysis should say “about \$1.245 billion” or retain the filing's units. Precision is not the same as accuracy. False precision makes a small reconciliation error look like a discovery when it may be rounding.
 
 Finally, save the page or filing date for every conclusion. Annual reports can be amended, later filings can restate prior periods, and a subsequent event can change the evidence. A dated note that says “the report disclosed a possible loss range, as issued on the filing date” is more defensible than an undated statement that the company “has” a liability. Forensic accounting is document analysis; document analysis needs version control.
 

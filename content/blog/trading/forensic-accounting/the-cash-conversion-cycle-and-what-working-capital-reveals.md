@@ -258,7 +258,7 @@ The reconciliation should be explicit:
 - Start with the payable change and compare it with purchases, cash paid to suppliers, supplier-finance disclosures, and accrued liabilities.
 - Reconcile the net movement to the operating-working-capital section of the cash-flow statement.
 
-The sign convention matters. A $1.0 million increase in receivables is usually a $1.0 million use of cash, while a $1.0 million increase in payables is usually a $1.0 million source of cash. The ratio formula and the cash-flow statement describe the same economics from different directions.
+The sign convention matters. A \$1.0 million increase in receivables is usually a \$1.0 million use of cash, while a \$1.0 million increase in payables is usually a \$1.0 million source of cash. The ratio formula and the cash-flow statement describe the same economics from different directions.
 
 ### Revenue recognition creates a receivable before cash
 
