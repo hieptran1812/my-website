@@ -12,6 +12,7 @@ import { getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
 import SubcategoryFilter from "@/components/SubcategoryFilter";
 import BlogSearchBar from "@/components/BlogSearchBar";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
+import { useSubcategoryFilter } from "@/components/hooks/useSubcategoryFilter";
 
 const ACRONYMS = new Set([
   "ai",
@@ -45,7 +46,6 @@ function formatSubcategoryName(slug: string): string {
 }
 
 export default function PaperReadingBlogPage() {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -107,6 +107,13 @@ export default function PaperReadingBlogPage() {
       ...subcategoryCategories,
     ];
   }, [allArticles]);
+
+  // Selection lives in the URL (`?subcategory=nlp,rag`) so a filtered view can
+  // be shared, refreshed and stepped back out of.
+  const {
+    selectedSlugs: selectedCategories,
+    setSelectedSlugs: setSelectedCategories,
+  } = useSubcategoryFilter(categories);
 
   const { searchTerm, setSearchTerm, filteredArticles } = useArticleSearch(
     allArticles,

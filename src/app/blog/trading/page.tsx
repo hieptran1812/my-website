@@ -12,6 +12,7 @@ import { getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
 import SubcategoryFilter from "@/components/SubcategoryFilter";
 import BlogSearchBar from "@/components/BlogSearchBar";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
+import { useSubcategoryFilter } from "@/components/hooks/useSubcategoryFilter";
 
 // Format a slug like "quantitative-analysis" into a display name "Quantitative
 // Analysis". Acronyms in `ACRONYMS` are uppercased intact.
@@ -29,7 +30,6 @@ function formatSubcategoryName(slug: string): string {
 }
 
 export default function TradingBlogPage() {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -83,6 +83,13 @@ export default function TradingBlogPage() {
       ...subtopicCategories,
     ];
   }, [allArticles]);
+
+  // Selection lives in the URL (`?subcategory=nlp,rag`) so a filtered view can
+  // be shared, refreshed and stepped back out of.
+  const {
+    selectedSlugs: selectedCategories,
+    setSelectedSlugs: setSelectedCategories,
+  } = useSubcategoryFilter(categories);
 
   const { searchTerm, setSearchTerm, filteredArticles } = useArticleSearch(
     allArticles,
