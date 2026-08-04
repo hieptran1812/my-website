@@ -45,9 +45,22 @@ const PREVIEW_MIN_PARAGRAPHS = 2;
 const PREVIEW_MAX_CHARS = 6000;
 const PREVIEW_CHAR_CAP_AFTER_PARAGRAPHS = 2;
 
-/** Escape hatch for reading gated posts in full locally. */
+/**
+ * Is the gate switched off for this process?
+ *
+ * `next dev` runs ungated by default: the gate exists to send readers to
+ * Substack, and locally it only hides the post being written from its author.
+ * Production is never opened implicitly — only an explicit `DISABLE_PAYWALL=1`
+ * does that — and `next build` / `next start` set `NODE_ENV=production`, so a
+ * local production run behaves exactly like the deployed site.
+ *
+ * Set `DISABLE_PAYWALL=0` to exercise the real teaser in dev.
+ */
 function paywallDisabled(): boolean {
-  return process.env.DISABLE_PAYWALL === "1";
+  const flag = process.env.DISABLE_PAYWALL?.trim().toLowerCase();
+  if (flag === "1" || flag === "true") return true;
+  if (flag === "0" || flag === "false") return false;
+  return process.env.NODE_ENV === "development";
 }
 
 /**
