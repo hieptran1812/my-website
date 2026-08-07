@@ -117,7 +117,7 @@ $$V_{\text{cheat}} = T + \delta P + \delta^2 P + \dots = T + \frac{\delta P}{1 -
 
 Cooperation is sustainable — the dealer prefers to keep behaving — exactly when $V_{\text{behave}} \geq V_{\text{cheat}}$. Solving that inequality gives a clean threshold on the discount factor:
 
-$$\delta \geq \delta^\* = \frac{T - R}{T - P}$$
+$$\delta \geq \delta^\ast = \frac{T - R}{T - P}$$
 
 This δ\* is *the* number of the whole subject. Below it, the future is discounted too steeply for the threat to bite, and even repeated players cheat. Above it, the future is worth enough that honesty is the equilibrium, with no contract required.
 
