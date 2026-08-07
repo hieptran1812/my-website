@@ -672,4 +672,4 @@ Be decisive here, because the wrong default wastes weeks.
 - Sutton & Barto, "Reinforcement Learning: An Introduction" (2nd ed., 2018) — chapters 13 (policy gradient) and 6 (TD learning) for the foundations.
 - Schulman, Wolski, Dhariwal, Radford, Klimov, "Proximal Policy Optimization Algorithms" (2017) — the natural next step after A2C.
 - Stable-Baselines3 documentation, the `A2C` and `PPO` API references and the RL Zoo tuned hyperparameters — for reproducible baselines.
-- Within this series: start from the taxonomy in [a unified map of reinforcement learning](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map), and bring it all together in [the reinforcement learning playbook](/blog/machine-learning/reinforcement-learning/the-reinforcement-learning-playbook).
+- Within this series: start from the taxonomy in [a unified map of reinforcement learning](/blog/machine-learning?subcategory=reinforcement-learning), and bring it all together in [the reinforcement learning playbook](/blog/machine-learning/reinforcement-learning/the-reinforcement-learning-playbook).

@@ -145,7 +145,7 @@ That is the Amdahl ceiling for this fix. It tells us two useful things. One: CUD
 
 ## A worked before-and-after: 30% to 85% real work
 
-Time to run the loop end to end on named hardware — a single **A100 80GB SXM** (about 312 dense bf16 TFLOP/s of compute and 2.0 TB/s of HBM2e bandwidth, per NVIDIA's datasheet) serving a vision-plus-small-transformer model at batch size 8. This is the compressed version of the full case study in [the service at 30 percent GPU util](/blog/machine-learning/performance-engineering/the-service-at-30-percent-gpu-util); here it is the worked proof of the loop.
+Time to run the loop end to end on named hardware — a single **A100 80GB SXM** (about 312 dense bf16 TFLOP/s of compute and 2.0 TB/s of HBM2e bandwidth, per NVIDIA's datasheet) serving a vision-plus-small-transformer model at batch size 8. This is the compressed version of the full case study in [the service at 30 percent GPU util](/blog/machine-learning?subcategory=performance-engineering); here it is the worked proof of the loop.
 
 **Step 1 and 2 — profile and read the trace.** We reach for `torch.profiler`, the workhorse of the whole series and the subject of [profiling PyTorch with torch.profiler](/blog/machine-learning/performance-engineering/profiling-pytorch-with-torch-profiler). The wait/warmup/active schedule is essential: you skip the first noisy steps, warm up the caches and cuDNN autotuner, then capture a few clean steps.
 
@@ -347,7 +347,7 @@ Read it top to bottom. The symptom is "low requests per second, and yet the GPU 
 - **GPU busy but SMs under-filled** — a bad kernel, low occupancy. The GPU runs your kernel but leaves most of itself idle. Fix: fuse, tune the launch configuration, and confirm with `ncu`.
 - **GPU busy and SMs full but stalled on memory** — memory-bound, at the bandwidth wall. The SMs are occupied but waiting on HBM. Fix: fuse elementwise chains and use FlashAttention to stop moving bytes you do not need.
 
-The tree is deliberately narrow because the profiler makes it narrow. You are never choosing among all four wastes at once; you are answering one binary question per level — "are there gaps?", then "are the SMs full?", then "is it compute or memory?" — and each answer eliminates whole branches. That is why the loop is fast in practice even though the space of possible fixes is enormous. The full, resolved version of this tree — every symptom, every tool, every fix — is [the performance engineering playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook), the capstone that ties the entire series together. This post plants the tree; the capstone grows every branch.
+The tree is deliberately narrow because the profiler makes it narrow. You are never choosing among all four wastes at once; you are answering one binary question per level — "are there gaps?", then "are the SMs full?", then "is it compute or memory?" — and each answer eliminates whole branches. That is why the loop is fast in practice even though the space of possible fixes is enormous. The full, resolved version of this tree — every symptom, every tool, every fix — is [the performance engineering playbook](/blog/machine-learning?subcategory=performance-engineering), the capstone that ties the entire series together. This post plants the tree; the capstone grows every branch.
 
 ## Three numbers, one truth: util vs occupancy vs MFU
 
@@ -409,7 +409,7 @@ The honest north star is this: **an optimization you cannot measure did not happ
 
 ## Further reading
 
-- [The performance engineering playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the capstone: the full symptom-to-fix decision tree and the checklist that ties this series together.
+- [The performance engineering playbook](/blog/machine-learning?subcategory=performance-engineering) — the capstone: the full symptom-to-fix decision tree and the checklist that ties this series together.
 - [Metrics that actually matter](/blog/machine-learning/performance-engineering/metrics-that-actually-matter) — util vs occupancy vs SM efficiency vs MFU, and which to trust, in full.
 - [The kernel launch overhead problem](/blog/machine-learning/performance-engineering/the-kernel-launch-overhead-problem) and [cuda-graphs in pytorch](/blog/machine-learning/performance-engineering/cuda-graphs-in-pytorch) — the mechanism and the fix for Waste 1.
 - [Profiling GPU workloads: finding the real bottleneck](/blog/machine-learning/high-performance-computing/profiling-gpu-workloads-finding-the-real-bottleneck) and [the roofline model](/blog/machine-learning/high-performance-computing/the-roofline-model-compute-bound-vs-memory-bound) — the HPC-series companions on GPU internals and the memory wall.

@@ -416,7 +416,7 @@ Convert to a full-precision GGUF, build an imatrix from representative text, qua
 
 ### The second-order gotcha: perplexity is not the only metric
 
-A trap in low-bit quantization is to optimize perplexity and ship. Perplexity is an average over next-token predictions on generic text, and it is *weakly* correlated with the things users actually notice: instruction following, code correctness, long-context retrieval, refusing to hallucinate. A quant can hold perplexity while losing the ability to track a variable across 8000 tokens, because the rare, high-stakes tokens that long reasoning depends on are exactly the ones an aggressive quant rounds away. When you go below `Q4_K_M`, measure the task you care about, not just the proxy — the [conversational evaluation beyond perplexity](/blog/machine-learning/large-language-model/evaluating-conversational-llms-beyond-perplexity) post is the right companion here.
+A trap in low-bit quantization is to optimize perplexity and ship. Perplexity is an average over next-token predictions on generic text, and it is *weakly* correlated with the things users actually notice: instruction following, code correctness, long-context retrieval, refusing to hallucinate. A quant can hold perplexity while losing the ability to track a variable across 8000 tokens, because the rare, high-stakes tokens that long reasoning depends on are exactly the ones an aggressive quant rounds away. When you go below `Q4_K_M`, measure the task you care about, not just the proxy — the [conversational evaluation beyond perplexity](/blog/machine-learning?subcategory=large-language-model) post is the right companion here.
 
 ## Tracing one Q4_K weight, by hand
 

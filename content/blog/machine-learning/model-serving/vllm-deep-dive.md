@@ -1243,4 +1243,4 @@ Note: `max-model-len=4096` is sufficient for this pipeline (800 input + 300 outp
 - [Why LLM serving is different from classical model serving](/blog/machine-learning/model-serving/why-llm-serving-is-different) — C1 post; memory wall, autoregressive bottleneck, and the motivation for PagedAttention.
 - [Quantization for LLM serving](/blog/machine-learning/model-serving/quantization-for-llm-serving) — C6 post; GPTQ vs AWQ vs FP8 accuracy-throughput trade-offs, calibration datasets, quantization artifacts.
 - [Speculative decoding in production](/blog/machine-learning/model-serving/speculative-decoding-in-production) — E5 post; dedicated deep-dive on draft model selection, acceptance rate measurement, and production deployment patterns.
-- [The model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook) — series capstone; the complete decision tree from model to production.
+- [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — series capstone; the complete decision tree from model to production.

@@ -703,7 +703,7 @@ After ten years of shipping LightGBM models, the habits I find myself repeating 
 
 The library has been remarkably stable since the 3.x line. The 4.x release tightened defaults (the `feature_pre_filter` warnings, the consolidated CUDA backend, deterministic mode) without breaking the core API. If you are still on 2.x, upgrade — there are real correctness improvements in distributed mode and the categorical handling that justify the migration cost. If you are on 3.x, you can ship for years without touching the dependency. That kind of stability is rare in ML tooling, and it is one of the more underrated reasons LightGBM is a good production choice. Reach for it knowing the algorithm, knowing the parameters, and knowing the failure modes — and you will be ahead of the median tabular practitioner.
 
-For more on the foundations underneath this article, see the [gradient-boosted-trees explainer](/blog/machine-learning/traditional-machine-learning/gradient-boosted-trees) and the [Kaggle solutions retrospective](/blog/machine-learning/kaggle-solution). For benchmarking methodology that scales to GPU workloads, see [LLM GPU benchmarking](/blog/machine-learning/mlops/llm-gpu-benchmark) — the discipline transfers.
+For more on the foundations underneath this article, see the [gradient-boosted-trees explainer](/blog/machine-learning/traditional-machine-learning/gradient-boosted-trees) and the [Kaggle solutions retrospective](/blog/machine-learning). For benchmarking methodology that scales to GPU workloads, see [LLM GPU benchmarking](/blog/machine-learning/mlops/llm-gpu-benchmark) — the discipline transfers.
 
 ## Appendix A: Inference performance
 

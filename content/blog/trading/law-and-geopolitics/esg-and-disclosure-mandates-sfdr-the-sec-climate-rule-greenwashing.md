@@ -129,7 +129,7 @@ Two legal doctrines made this argument bite harder than it would have a decade a
 
 #### Worked example: pricing the probability the rule ever bites
 
-Treat the rule as a binary regulatory event, the way a merger-arb desk treats a deal (see [trading regulatory deal risk](/blog/trading/hedge-funds/merger-arbitrage-trading-regulatory-deal-risk)). Suppose a compliance-software vendor's revenue depends on the SEC rule taking effect — \$80 million of annual recurring revenue is contracted to help companies comply, but only *if* the rule survives litigation and goes live.
+Treat the rule as a binary regulatory event, the way a merger-arb desk treats a deal (see [trading regulatory deal risk](/blog/trading/law-and-geopolitics/merger-arbitrage-trading-regulatory-deal-risk)). Suppose a compliance-software vendor's revenue depends on the SEC rule taking effect — \$80 million of annual recurring revenue is contracted to help companies comply, but only *if* the rule survives litigation and goes live.
 
 Assign rough probabilities to the legal outcomes (illustrative, to show the method):
 
@@ -324,6 +324,6 @@ The meta-lesson, and the reason this post sits in a law-and-geopolitics series r
 
 **Cross-asset and mechanism:**
 
-- [Corporate finance and equity-research playbook](/blog/trading/equity-research/the-equity-research-playbook) — how a cost-of-capital tilt feeds into valuation.
-- [Merger arbitrage: trading regulatory deal risk](/blog/trading/hedge-funds/merger-arbitrage-trading-regulatory-deal-risk) — pricing a binary regulatory outcome, the same method used here for the litigated SEC rule.
+- [Corporate finance and equity-research playbook](/blog/trading?subcategory=equity-research) — how a cost-of-capital tilt feeds into valuation.
+- [Merger arbitrage: trading regulatory deal risk](/blog/trading/law-and-geopolitics/merger-arbitrage-trading-regulatory-deal-risk) — pricing a binary regulatory outcome, the same method used here for the litigated SEC rule.
 - [MiFID II and the EU market-structure regime](/blog/trading/law-and-geopolitics/mifid-ii-and-the-eu-market-structure-regime) — EU-versus-US regulatory divergence as a tradeable theme.

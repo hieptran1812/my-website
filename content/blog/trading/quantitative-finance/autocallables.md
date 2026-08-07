@@ -32,9 +32,9 @@ The autocallable is the largest single exotic product family in the world, with 
 
 The diagram above is the mental model. The product is a worst-of basket of typically three underlyings (an Asian index, a European index, and a US index, for example). At periodic fixings (quarterly, semi-annually), the worst-of is checked against an *autocall barrier* — typically 100% of the initial level. If the worst-of equals or exceeds the barrier, the note redeems early at par plus accumulated coupons. If not, the note continues. A separate, lower *knock-in barrier* (typically 60-70% of initial) determines whether principal is protected at expiry: if the worst-of ever crosses the knock-in level during the life, the holder takes a loss equal to the worst-of's final decline. The product packages a digital coupon stream, an early-termination option, and a knock-in put on the worst performer into a single yield-bearing instrument.
 
-This article is the deep dive on autocallables for a senior quant or staff-level engineer. It covers the payoff mechanics in detail, the four resolution scenarios, the Greek profile, pricing under stochastic local volatility, calibration to forward smile, hedging via static replication and dynamic delta, the Korean retail market that drove the product to scale, and a long catalog of named failure modes. The companion articles are [Exotic Derivatives](/blog/trading/quantitative-finance/exotics/exotic-derivatives) (the broader family) and [Cliquets](/blog/trading/quantitative-finance/exotics/cliquets) (the related forward-strike-reset product).
+This article is the deep dive on autocallables for a senior quant or staff-level engineer. It covers the payoff mechanics in detail, the four resolution scenarios, the Greek profile, pricing under stochastic local volatility, calibration to forward smile, hedging via static replication and dynamic delta, the Korean retail market that drove the product to scale, and a long catalog of named failure modes. The companion articles are [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives) (the broader family) and [Cliquets](/blog/trading/quantitative-finance/cliquets) (the related forward-strike-reset product).
 
-For foundational concepts: [Volatility Surface](/blog/trading/quantitative-finance/derivatives/volatility-surface) for the surface engineering autocallables sit on; [Black-Scholes](/blog/trading/quantitative-finance/derivatives/black-scholes) for the underlying pricing framework; [Derivatives Pricing](/blog/trading/quantitative-finance/derivatives/derivatives-pricing) for replication and risk-neutral measures.
+For foundational concepts: [Volatility Surface](/blog/trading/quantitative-finance/volatility-surface) for the surface engineering autocallables sit on; [Black-Scholes](/blog/trading/quantitative-finance/black-scholes) for the underlying pricing framework; [Derivatives Pricing](/blog/trading/quantitative-finance/derivatives-pricing) for replication and risk-neutral measures.
 
 ## 1. Why autocallables exist
 
@@ -889,7 +889,7 @@ A senior autocallable quant operates fluently across the full pricing-hedging-li
 
 For engineers entering the field: master one autocallable variant deeply (start with worst-of-3 100/60 5-year). Understand its pricing under SLV, its Greek profile, its hedging strategy, its lifecycle. Then expand to variants. The career rewards depth before breadth.
 
-The remaining article in this series — [Cliquets](/blog/trading/quantitative-finance/exotics/cliquets) — covers the related forward-strike-reset structures.
+The remaining article in this series — [Cliquets](/blog/trading/quantitative-finance/cliquets) — covers the related forward-strike-reset structures.
 
 A final reflection: autocallables sit at the intersection of mathematical elegance, retail distribution, and macro risk transfer. They have created and destroyed enormous wealth across multiple regions over the past 15 years. The senior practitioner navigates this terrain with technical depth, operational discipline, and respect for the social consequences of large-scale distribution. The Korean 2022 experience reminds the industry that mass-market exotic distribution carries responsibilities beyond pure pricing.
 
@@ -1067,6 +1067,6 @@ Autocallables are the largest single exotic product family by retail notional. T
 
 A senior autocallable structurer operates fluently across math, engineering, business, and operations. The career rewards depth and durability. The reward is intellectual richness, real-world impact, and the satisfaction of contributing to one of the most consequential corners of modern financial engineering.
 
-The remaining article in this series — [Cliquets](/blog/trading/quantitative-finance/exotics/cliquets) — covers the related forward-strike-reset structure that shares many concepts with autocallables but has its own distinct dynamics.
+The remaining article in this series — [Cliquets](/blog/trading/quantitative-finance/cliquets) — covers the related forward-strike-reset structure that shares many concepts with autocallables but has its own distinct dynamics.
 
 Senior autocallable practitioners across regions share common practices: daily calibration discipline, layered hedging, operational excellence, and respect for the social consequences of mass-market distribution. These practices distinguish lasting careers from short-lived ones. They also distinguish lasting institutional desks from those that have come and gone over the past 15 years.

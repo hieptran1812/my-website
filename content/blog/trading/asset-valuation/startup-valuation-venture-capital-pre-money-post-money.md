@@ -566,9 +566,9 @@ The concepts in this post connect to a broader valuation framework that spans pu
 - [Mergers and Acquisitions: Valuation, Synergies, and Deal Pricing](/blog/trading/asset-valuation/mergers-acquisitions-valuation-synergies-deal-pricing) — how acquirers determine what to pay for a startup, which is ultimately the exit value that drives the VC method
 
 **Foundational finance:**
-- The discount rate mechanics underlying all valuation are covered in [WACC: Weighted Average Cost of Capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital)
-- Understanding why interest rate changes compress multiples: [Interest Rates, Bonds, and Stocks Relationship](/blog/trading/macro-trading/interest-rates-bonds-stocks-relationship)
-- Expected value and probability distributions that underpin power-law return analysis: [Expected Value and Probability Distributions](/blog/trading/math-for-quants/expected-value-probability-distributions)
+- The discount rate mechanics underlying all valuation are covered in [WACC: Weighted Average Cost of Capital](/blog/trading?subcategory=equity-research)
+- Understanding why interest rate changes compress multiples: [Interest Rates, Bonds, and Stocks Relationship](/blog/trading?subcategory=macro-trading)
+- Expected value and probability distributions that underpin power-law return analysis: [Expected Value and Probability Distributions](/blog/trading?subcategory=math-for-quants)
 
 ---
 

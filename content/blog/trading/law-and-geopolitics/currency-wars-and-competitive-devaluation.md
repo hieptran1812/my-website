@@ -275,5 +275,5 @@ The deeper point, true across this whole series, is that a currency is the price
 - [SBV monetary and banking law: credit quotas and the dong](/blog/trading/law-and-geopolitics/sbv-monetary-and-banking-law-credit-quotas-and-the-dong) — the managed dong band, gold-import rules, and how Vietnam's legal toolkit drives the rate.
 - [How the Fed sets interest rates](/blog/trading/finance/how-the-fed-sets-interest-rates) — the deepest currency lever, and the engine of the rate differentials that drive the carry trade.
 - [Quantitative easing explained: printing money](/blog/trading/finance/quantitative-easing-explained-printing-money) — why easy money is devaluation by another name when viewed from across the border.
-- [Macro trading: reading policy and liquidity](/blog/trading/macro-trading) — how monetary-policy paths and global liquidity transmit into currencies and risk assets.
-- [Cross-asset playbook: correlations and regimes](/blog/trading/cross-asset) — how a currency shock propagates into equities, bonds, and commodities, and how to position across them.
+- [Macro trading: reading policy and liquidity](/blog/trading?subcategory=macro-trading) — how monetary-policy paths and global liquidity transmit into currencies and risk assets.
+- [Cross-asset playbook: correlations and regimes](/blog/trading?subcategory=cross-asset) — how a currency shock propagates into equities, bonds, and commodities, and how to position across them.

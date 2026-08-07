@@ -1442,5 +1442,5 @@ This checklist has prevented more 3 AM pages than any other single artifact in T
 - [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — series introduction covering the SLO triangle and the full serving stack, with framework comparisons.
 - [TorchServe deep dive](/blog/machine-learning/model-serving/torchserve-deep-dive) — companion post on TorchServe's single-model strengths versus Triton's multi-model architecture.
 - [ONNX Runtime for serving](/blog/machine-learning/model-serving/onnx-runtime-for-serving) — deep dive on ORT execution providers, session options, and optimization graph transforms.
-- [The model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook) — series capstone: full decision tree from trained model to production deployment, summarizing when each framework wins.
+- [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — series capstone: full decision tree from trained model to production deployment, summarizing when each framework wins.
 - [Choosing your serving stack](/blog/machine-learning/model-serving/choosing-your-serving-stack) — decision matrix post: Triton vs Ray Serve vs TorchServe vs vLLM, with workload-specific recommendations and migration paths between frameworks.

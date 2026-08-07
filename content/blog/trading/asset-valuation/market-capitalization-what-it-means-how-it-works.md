@@ -608,7 +608,7 @@ This post covers the mechanics of market cap. Several adjacent topics deepen the
 - [Price-to-Earnings Ratio: P/E Valuation for Stocks](/blog/trading/asset-valuation/price-to-earnings-ratio-pe-valuation-stocks) — the most common market-cap-derived relative valuation multiple.
 
 **From the equity research series:**
-- [Market Capitalization Explained](/blog/trading/equity-research/market-capitalization-explained) — the analyst workflow perspective, including how portfolio managers segment by market cap and construct cap-tier allocations.
+- [Market Capitalization Explained](/blog/trading?subcategory=equity-research) — the analyst workflow perspective, including how portfolio managers segment by market cap and construct cap-tier allocations.
 
 **Key external reading:**
 - FTSE Russell's methodology for Russell index construction (published annually, June reconstitution calendar) — definitive guide to how cap tiers determine index membership.

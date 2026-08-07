@@ -663,7 +663,7 @@ The valuation spectrum connects to every other piece of valuation theory in this
 - [Discount Rates in Practice: WACC, Cost of Equity, and Unlevered Beta](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta) — the mechanics of computing the denominator in a DCF
 
 **Sibling series:**
-- [Discounted Cash Flow: The Complete Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide) — a deep operational walkthrough of building a DCF model from scratch, in the equity research series
+- [Discounted Cash Flow: The Complete Guide](/blog/trading?subcategory=equity-research) — a deep operational walkthrough of building a DCF model from scratch, in the equity research series
 
 **External depth:**
 - Damodaran, Aswath. *Investment Valuation*. 3rd ed. Wiley, 2012. — The definitive textbook on valuation; Damodaran's website (damodaran.com) maintains free datasets of sector multiples, betas, and risk premiums.

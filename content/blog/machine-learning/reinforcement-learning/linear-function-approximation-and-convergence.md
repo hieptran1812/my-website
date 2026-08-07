@@ -33,7 +33,7 @@ This post is about understanding that theorem from the ground up, then implement
 ![Tile coding passes a 4-dimensional continuous state through three offset tilings to produce a 192-dimensional sparse binary feature vector, which is then combined linearly to produce a scalar value estimate](
 /imgs/blogs/linear-function-approximation-and-convergence-1.png)
 
-This is Track C, post 2 of the Reinforcement Learning series. If you have not yet read the foundations of value function learning and the Bellman equations, see [Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) first. The series capstone [The Reinforcement Learning Playbook](/blog/machine-learning/reinforcement-learning/the-reinforcement-learning-playbook) will tie together everything covered here.
+This is Track C, post 2 of the Reinforcement Learning series. If you have not yet read the foundations of value function learning and the Bellman equations, see [Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning) first. The series capstone [The Reinforcement Learning Playbook](/blog/machine-learning/reinforcement-learning/the-reinforcement-learning-playbook) will tie together everything covered here.
 
 ## Why Tabular Methods Break at Scale
 
@@ -961,7 +961,7 @@ Tile coding with 8 tilings wins convincingly on convergence speed. Fourier order
 
 ### Trading Agent with Linear FA
 
-A momentum trading agent for S&P 500 futures uses 8 features (10-day return, 20-day return, realized volatility 10d, realized volatility 20d, RSI 14, volume ratio, order flow imbalance, VIX level). Tile coding with 4 tilings of 4 tiles per dimension (hash-compressed to 4,096 features per tiling) lets the agent distinguish "high-momentum, low-vol" from "high-momentum, high-vol" regimes. After 180 days of on-policy experience, the TD critic stabilizes and the linear actor achieves a Sharpe ratio of approximately 1.4 on out-of-sample data, versus 0.8 for a fixed momentum rule. The on-policy training requirement was satisfied by simulating live trading with the current policy rather than replaying historical data. See [Macro-Trading: How Policy Regimes Drive Rates and FX](/blog/trading/macro-trading/how-central-banks-move-markets-via-interest-rate-cycles) for regime context. For debugging convergence issues in this kind of agent, see [Debugging AI Training: Gradient Diagnosis](/blog/machine-learning/debugging-training/gradient-diagnosis-and-debugging-deep-rl-training).
+A momentum trading agent for S&P 500 futures uses 8 features (10-day return, 20-day return, realized volatility 10d, realized volatility 20d, RSI 14, volume ratio, order flow imbalance, VIX level). Tile coding with 4 tilings of 4 tiles per dimension (hash-compressed to 4,096 features per tiling) lets the agent distinguish "high-momentum, low-vol" from "high-momentum, high-vol" regimes. After 180 days of on-policy experience, the TD critic stabilizes and the linear actor achieves a Sharpe ratio of approximately 1.4 on out-of-sample data, versus 0.8 for a fixed momentum rule. The on-policy training requirement was satisfied by simulating live trading with the current policy rather than replaying historical data. See [Macro-Trading: How Policy Regimes Drive Rates and FX](/blog/trading?subcategory=macro-trading) for regime context. For debugging convergence issues in this kind of agent, see [Debugging AI Training: Gradient Diagnosis](/blog/machine-learning?subcategory=debugging-training).
 
 ### Convergence Theory in Practice: AlphaGo's Linear Baselines
 
@@ -1059,8 +1059,8 @@ This is just adding a weight decay term $-\alpha_t \lambda \theta_t$ to the stan
 
 - **Konidaris, G., Osentoski, S., and Thomas, P.S. (2011).** "Value Function Approximation in Reinforcement Learning Using the Fourier Basis." *AAAI 2011*. Empirical comparison of Fourier vs tile coding.
 
-- **[Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map)** — series taxonomy: where linear FA fits in the broader RL algorithm landscape.
+- **[Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning)** — series taxonomy: where linear FA fits in the broader RL algorithm landscape.
 
 - **[The Reinforcement Learning Playbook](/blog/machine-learning/reinforcement-learning/the-reinforcement-learning-playbook)** — series capstone tying together value learning, policy optimization, and function approximation.
 
-- **[Neural Network Function Approximation and the Deadly Triad](/blog/machine-learning/reinforcement-learning/neural-network-function-approximation-deadly-triad)** — Track C post 3, extending these convergence ideas to DQN, target networks, and deep RL stabilization.
+- **[Neural Network Function Approximation and the Deadly Triad](/blog/machine-learning?subcategory=reinforcement-learning)** — Track C post 3, extending these convergence ideas to DQN, target networks, and deep RL stabilization.

@@ -50,7 +50,7 @@ Both dimensions matter, but they manifest differently. Temporal credit assignmen
 
 ### Why Delayed Rewards Make Everything Harder
 
-The formal setup, reviewed from the [Markov Decision Process post](/blog/machine-learning/reinforcement-learning/markov-decision-processes-states-actions-and-rewards): at each time $t$, an agent in state $S_t$ takes action $A_t$, transitions to $S_{t+1}$, and receives reward $R_{t+1}$. Most MDPs of real interest have **sparse rewards**: the agent can act for hundreds or thousands of steps without receiving any informative signal, and then a single terminal reward arrives.
+The formal setup, reviewed from the [Markov Decision Process post](/blog/machine-learning/reinforcement-learning/markov-decision-processes): at each time $t$, an agent in state $S_t$ takes action $A_t$, transitions to $S_{t+1}$, and receives reward $R_{t+1}$. Most MDPs of real interest have **sparse rewards**: the agent can act for hundreds or thousands of steps without receiving any informative signal, and then a single terminal reward arrives.
 
 Consider three canonical examples:
 
@@ -725,7 +725,7 @@ The default approach — assign the reward only at the final token, with $R_t = 
 2. A KL penalty relative to the reference model is essential — without it, the policy drifts into reward-hacking degenerate responses because the credit signal is too noisy to distinguish legitimate quality improvements from spurious ones.
 3. Per-token rewards (when a process reward model, or PRM, provides step-by-step quality scores) dramatically improve credit assignment and training efficiency. This is the motivation behind math-focused RLHF methods (like those used in training reasoning models) where intermediate steps are scored individually.
 
-This connects directly to the [debugging AI training post](/blog/machine-learning/debugging-training/diagnosing-reward-hacking-and-reward-misspecification) and the broader architecture of RLHF systems.
+This connects directly to the [debugging AI training post](/blog/machine-learning/debugging-training/the-training-debugging-playbook) and the broader architecture of RLHF systems.
 
 
 ## 10. Putting It Together: A Practitioner's Credit Assignment Checklist
@@ -1310,7 +1310,7 @@ The Sharpe-normalized reward converts what would be a high-variance, sparse cred
 - Andrychowicz et al. (2017). "Hindsight Experience Replay." *NeurIPS 2017* — HER; the paper that made sparse-reward robotics tractable.
 - Schulman et al. (2015). "High-Dimensional Continuous Control Using Generalized Advantage Estimation." *ICLR 2016* — GAE; the bridge from credit assignment to modern actor-critic.
 - Hessel et al. (2018). "Rainbow: Combining Improvements in Deep Reinforcement Learning." *AAAI 2018* — ablation study confirming n-step returns as one of the most important DQN improvements.
-- [RL Unified Map: every algorithm in one taxonomy](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) — the series overview; every credit assignment concept connects to the algorithm map.
+- [RL Unified Map: every algorithm in one taxonomy](/blog/machine-learning?subcategory=reinforcement-learning) — the series overview; every credit assignment concept connects to the algorithm map.
 - [Temporal Difference Learning: TD(0) and SARSA](/blog/machine-learning/reinforcement-learning/temporal-difference-learning-td0-and-sarsa) — Track B3; builds directly on the one-step TD foundation established here.
 - [N-Step Returns and TD(λ) in Practice](/blog/machine-learning/reinforcement-learning/n-step-returns-and-td-lambda) — Track B5; implementation deep-dive for everything previewed in Sections 4 and 5.
 - [Proximal Policy Optimization (PPO)](/blog/machine-learning/reinforcement-learning/proximal-policy-optimization-ppo) — Track E4; the production algorithm that wraps credit assignment (GAE) inside a stable policy update.

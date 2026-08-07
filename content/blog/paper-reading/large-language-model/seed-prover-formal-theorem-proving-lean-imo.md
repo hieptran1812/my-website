@@ -84,7 +84,7 @@ Those are not incremental numbers. PutnamBench going from ~49 solved to ~580 sol
 
 There are two dominant paradigms in neural theorem proving, and Seed-Prover's central design choice is to reject the more popular one.
 
-**Stepwise / subgoal proving** (the AlphaProof and DeepSeek-Prover-V2 lineage) treats a proof as a search over a tree of tactic states. You have a goal; you ask the model for one tactic (or one subgoal); the proof assistant applies it and returns a new goal; you recurse. DeepSeek-Prover-V2 formalized this beautifully — it uses a large model to do *natural-language* subgoal decomposition, then a smaller prover to close each subgoal, then RL to stitch them. (I wrote about that mechanism in detail in the [DeepSeek-Prover-V2 deep-dive](/blog/paper-reading/large-language-model/deepseek-prover-v2-advancing-formal-mathematical-reasoning-via-reinforcement-learning-for-subgoal-decomposition).) The appeal is obvious: every node is independently checkable, and the search is structured.
+**Stepwise / subgoal proving** (the AlphaProof and DeepSeek-Prover-V2 lineage) treats a proof as a search over a tree of tactic states. You have a goal; you ask the model for one tactic (or one subgoal); the proof assistant applies it and returns a new goal; you recurse. DeepSeek-Prover-V2 formalized this beautifully — it uses a large model to do *natural-language* subgoal decomposition, then a smaller prover to close each subgoal, then RL to stitch them. (I wrote about that mechanism in detail in the [DeepSeek-Prover-V2 deep-dive](/blog/paper-reading?subcategory=large-language-model).) The appeal is obvious: every node is independently checkable, and the search is structured.
 
 The cost is also real. When you decompose into subgoals and prove them one at a time, the model loses the *global narrative* of the proof. A reasoning model's superpower — the long chain of thought where it notices "this looks like a telescoping sum, so let me set up the partial fractions, which means I should prove the denominator never vanishes" — gets shredded into independent fragments. Each fragment is solved by a model that no longer sees the forest.
 
@@ -644,7 +644,7 @@ The throughline: Seed-Prover is the first system where "the model proved it" and
 - Seed-Prover paper: arXiv:2507.23726, "Seed-Prover: Deep and Broad Reasoning for Automated Theorem Proving."
 - Seed-Prover 1.5 paper: arXiv:2512.17260, "Mastering Undergraduate-Level Theorem Proving via Learning from Experience."
 - ByteDance Seed blog and the [Seed-Prover GitHub repo](https://github.com/ByteDance-Seed/Seed-Prover).
-- [DeepSeek-Prover-V2 deep-dive](/blog/paper-reading/large-language-model/deepseek-prover-v2-advancing-formal-mathematical-reasoning-via-reinforcement-learning-for-subgoal-decomposition) — the subgoal-decomposition paradigm Seed-Prover argues against.
+- [DeepSeek-Prover-V2 deep-dive](/blog/paper-reading?subcategory=large-language-model) — the subgoal-decomposition paradigm Seed-Prover argues against.
 - [DeepSeek-R1: RL for reasoning](/blog/paper-reading/large-language-model/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning) — the broader reasoning-RL context.
 - [Seed1.5-Thinking and VAPO](/blog/paper-reading/large-language-model/seed1-5-thinking-rl-reasoning-vapo-dapo) — the base model and RL machinery Seed-Prover inherits.
 - [The ByteDance Seed model universe](/blog/machine-learning/large-language-model/bytedance-seed-model-universe-by-use-case) — where Seed-Prover sits in the broader family.

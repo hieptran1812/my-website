@@ -32,7 +32,7 @@ The diagram above is the mental model. Inputs to a short-rate model are today's 
 
 This article is the deep dive on short-rate models for a senior quant or staff-level engineer. It covers Vasicek (the simplest mean-reverting model), Hull-White (the curve-fitting workhorse), Black-Karasinski (log-normal positive-rate variant), CIR (square-root diffusion), and the LIBOR market model (forward-rate-based alternative). It works through calibration, lattice / PDE / Monte Carlo pricing engines, swaption pricing via Jamshidian decomposition, callable bond pricing, multi-factor extensions, production architecture, and a long catalog of named failure modes.
 
-The companion articles are [Yield Curve Modeling](/blog/trading/quantitative-finance/fixed-income/yield-curve-modeling) (the curve layer beneath this), [Bond Pricing](/blog/trading/quantitative-finance/fixed-income/bond-pricing) (vanilla bond pricing), and [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income/fixed-income-analytics) (analytics on top).
+The companion articles are [Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling) (the curve layer beneath this), [Bond Pricing](/blog/trading/quantitative-finance/bond-pricing) (vanilla bond pricing), and [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics) (analytics on top).
 
 ## 1. Why short-rate models exist
 
@@ -48,7 +48,7 @@ But many real products have payoffs that depend on what the curve does *between 
 
 For all of these, the curve gives the initial condition but does not specify how rates evolve. We need an *SDE* — a stochastic differential equation for $r_t$ — that says how $r$ moves over time. The model's job is to provide a calibrated, arbitrage-free, computationally tractable SDE.
 
-The senior engineer's mental shortcut: *if the payoff depends on the rate path, you need a short-rate model*. If it depends only on terminal rates, the curve plus the forward measure suffice (we covered this in [the Black-Scholes post](/blog/trading/quantitative-finance/derivatives/black-scholes#9-the-black-scholes-family-black-76-garman-kohlhagen-margrabe-bachelier) when discussing Black-76).
+The senior engineer's mental shortcut: *if the payoff depends on the rate path, you need a short-rate model*. If it depends only on terminal rates, the curve plus the forward measure suffice (we covered this in [the Black-Scholes post](/blog/trading/quantitative-finance/black-scholes) when discussing Black-76).
 
 A second observation: short-rate models are *the simplest dynamic models in finance*. They have one state variable (the short rate). The mathematics is well-understood, the calibration is tractable, the pricing is fast. This simplicity is why they remain dominant despite the existence of more sophisticated alternatives (LIBOR market model, HJM framework). For most rate-derivative pricing, a short-rate model is enough.
 
@@ -307,7 +307,7 @@ with terminal condition $P(T, T) = 1$. This is a 1-D linear parabolic PDE.
 
 The same PDE governs bond *options*: the option's value function $V(t, r)$ satisfies the equation with terminal condition equal to the option payoff. For European bond options, the closed-form solution is the Jamshidian decomposition. For American/Bermudan, finite-difference solving the PDE with the early-exercise constraint gives the price.
 
-A senior quant recognises the Hull-White PDE as structurally analogous to the Black-Scholes PDE we covered in [the Black-Scholes post](/blog/trading/quantitative-finance/derivatives/black-scholes#2-pde-derivation-replication-forces-the-heat-equation). Both reduce to the heat equation under appropriate substitutions; both have closed-form solutions for terminal-payoff vanilla options; both require numerical methods for path-dependent or early-exercise products.
+A senior quant recognises the Hull-White PDE as structurally analogous to the Black-Scholes PDE we covered in [the Black-Scholes post](/blog/trading/quantitative-finance/black-scholes). Both reduce to the heat equation under appropriate substitutions; both have closed-form solutions for terminal-payoff vanilla options; both require numerical methods for path-dependent or early-exercise products.
 
 ### 5.2 The forward-curve calibration math
 
@@ -1045,7 +1045,7 @@ Short-rate models are the dynamic layer above the yield curve. Hull-White, with 
 
 A senior rates quant operates fluently in the model-calibration-pricing pipeline. The math is well-understood; the engineering — calibration discipline, multi-factor extensions, regime-shift handling — is the daily craft.
 
-The remaining articles in this series — [Exotic Derivatives](/blog/trading/quantitative-finance/exotics/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/exotics/autocallables), and [Cliquets](/blog/trading/quantitative-finance/exotics/cliquets) — go deeper on specific product categories built on these rate models.
+The remaining articles in this series — [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on specific product categories built on these rate models.
 
 Rate models are the foundation under a multi-trillion-dollar interest-rate-derivatives market. Doing it well — calibrated, multi-factor where needed, regime-aware, audited — is the silent competence that powers every rate-sensitive product. The reward is a clear-headed view of one of the most quantitatively rigorous corners of finance.
 

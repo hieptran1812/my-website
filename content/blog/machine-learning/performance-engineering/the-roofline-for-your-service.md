@@ -367,5 +367,5 @@ The meta-rule: the roofline tells you *which resource* bounds you, and it is aut
 - [Bandwidth-Bound and Fusion](/blog/machine-learning/performance-engineering/bandwidth-bound-and-fusion) — the fix menu for the left side of the ridge: fusion, layout, and precision.
 - [The Kernel-Launch-Overhead Problem](/blog/machine-learning/performance-engineering/the-kernel-launch-overhead-problem) — what to do when the roofline says "neither roof": the host-bound signature and CUDA graphs.
 - [Why Your AI Service Wastes CPU and GPU](/blog/machine-learning/performance-engineering/why-your-ai-service-wastes-cpu-and-gpu) — the series intro and the four-wastes frame.
-- [The Performance Engineering Playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the capstone decision tree that ties the roofline into the full symptom → tool → fix flow.
+- [The Performance Engineering Playbook](/blog/machine-learning?subcategory=performance-engineering) — the capstone decision tree that ties the roofline into the full symptom → tool → fix flow.
 - NVIDIA Nsight Compute documentation — the "GPU Speed Of Light Roofline Chart" and Memory Workload Analysis sections, for pulling achieved intensity from hardware counters.

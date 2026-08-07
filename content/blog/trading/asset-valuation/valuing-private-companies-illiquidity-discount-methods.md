@@ -506,7 +506,7 @@ For the equity risk premium data underlying the Damodaran ERP estimates used her
 [Discount Rates in Practice: WACC, Cost of Equity, and Unlevered Beta](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta)
 
 For Black-Scholes option pricing methodology (used in the put-option DLOM approach):
-[Black-Scholes Model and Options Pricing](/blog/trading/options-volatility/black-scholes-model-options-pricing)
+[Black-Scholes Model and Options Pricing](/blog/trading?subcategory=options-volatility)
 
 ---
 

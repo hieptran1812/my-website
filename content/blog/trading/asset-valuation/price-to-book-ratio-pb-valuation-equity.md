@@ -532,7 +532,7 @@ Reality: Goodwill inflates book value, making P/B look lower and the company app
 
 ### Misconception 5: "Book value growth = value creation"
 
-Reality: Book value grows when earnings are retained (not distributed). But if those retained earnings earn below the cost of equity, growing book value destroys value. A company can double its book value over 10 years while losing shareholder wealth in real terms if ROE is chronically below ke. Value creation requires ROE > ke, not just book value growth. This is the central insight of the [ROE analysis post](/blog/trading/equity-research/return-on-equity-roe-analysis).
+Reality: Book value grows when earnings are retained (not distributed). But if those retained earnings earn below the cost of equity, growing book value destroys value. A company can double its book value over 10 years while losing shareholder wealth in real terms if ROE is chronically below ke. Value creation requires ROE > ke, not just book value growth. This is the central insight of the [ROE analysis post](/blog/trading?subcategory=equity-research).
 
 ---
 
@@ -715,7 +715,7 @@ The P/B framework sits at the intersection of accounting, corporate finance, and
 - [EV/EBITDA and Enterprise Value Multiples](/blog/trading/asset-valuation/ev-multiples-evebitda-evsales-enterprise-value-valuation) — when capital structure differences make EV multiples more appropriate than equity multiples like P/B.
 
 **From the equity research series:**
-- [Return on Equity (ROE) Deep Dive](/blog/trading/equity-research/return-on-equity-roe-analysis) — the DuPont decomposition of ROE and how to assess its sustainability. ROE is the central driver of fair P/B; you cannot use the Gordon formula well without understanding where ROE comes from and whether it is durable.
+- [Return on Equity (ROE) Deep Dive](/blog/trading?subcategory=equity-research) — the DuPont decomposition of ROE and how to assess its sustainability. ROE is the central driver of fair P/B; you cannot use the Gordon formula well without understanding where ROE comes from and whether it is durable.
 
 **Methodological reference:**
 - Aswath Damodaran, *Investment Valuation* (3rd edition) — Chapter 19 covers relative valuation with P/B in detail; Chapter 13 has the full Gordon Growth derivation.

@@ -648,9 +648,9 @@ Running these confirms every example in this post, and extending them to more co
 Time Value of Money is the foundation. The rest of the Asset Valuation series builds directly on it:
 
 - **[What Is Value? Philosophy, Frameworks, and Asset Pricing](/blog/trading/asset-valuation/what-is-value-philosophy-frameworks-asset-pricing)** — the first post in this series covers why assets have value at all and the different schools of thought (intrinsic value, relative value, market-clearing price)
-- **[Discounted Cash Flow: The Complete Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide)** — takes the TVM framework from this post and applies it to a full company valuation, with terminal value, WACC, and sensitivity tables
-- **[Bond Pricing, Yield, and Duration: Complete Guide](/blog/trading/fixed-income/bond-pricing-yield-duration-complete-guide)** — dives deep into how TVM applies to fixed-income instruments, including duration (the sensitivity of price to yield) and convexity
-- **[The Yield Curve Explained](/blog/trading/quantitative-finance/yield-curve-explained)** — the yield curve is a market-derived set of discount rates for different time horizons; understanding TVM is prerequisite to understanding why the yield curve matters
+- **[Discounted Cash Flow: The Complete Guide](/blog/trading?subcategory=equity-research)** — takes the TVM framework from this post and applies it to a full company valuation, with terminal value, WACC, and sensitivity tables
+- **[Bond Pricing, Yield, and Duration: Complete Guide](/blog/trading/quantitative-finance/bond-pricing)** — dives deep into how TVM applies to fixed-income instruments, including duration (the sensitivity of price to yield) and convexity
+- **[The Yield Curve Explained](/blog/trading/quantitative-finance/yield-curve-modeling)** — the yield curve is a market-derived set of discount rates for different time horizons; understanding TVM is prerequisite to understanding why the yield curve matters
 
 For deeper quantitative treatment:
 
@@ -686,4 +686,4 @@ Here is a compact reference table of every formula introduced in this post, with
 
 Every valuation tool in professional finance — the DCF model, bond pricing, mortgage amortization, option pricing models, real estate cap rates, dividend discount models — reduces to one or more rows of this table. Master these nine formulas and you have the mathematical foundation for the entire discipline.
 
-The journey from here leads naturally to two questions that this post deliberately deferred: (1) how do you forecast the cash flows `CF` that go into these formulas? and (2) how exactly do you derive the discount rate `r` for different types of investments? Both are rich topics with their own post-length treatments — see the [DCF guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide) for the former and [WACC](/blog/trading/equity-research/wacc-weighted-average-cost-capital) for the latter. But the TVM mechanics you've built here are the prerequisite for both — and for every other quantitative tool in the valuation toolkit.
+The journey from here leads naturally to two questions that this post deliberately deferred: (1) how do you forecast the cash flows `CF` that go into these formulas? and (2) how exactly do you derive the discount rate `r` for different types of investments? Both are rich topics with their own post-length treatments — see the [DCF guide](/blog/trading?subcategory=equity-research) for the former and [WACC](/blog/trading?subcategory=equity-research) for the latter. But the TVM mechanics you've built here are the prerequisite for both — and for every other quantitative tool in the valuation toolkit.

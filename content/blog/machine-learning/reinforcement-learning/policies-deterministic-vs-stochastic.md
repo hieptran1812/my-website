@@ -37,7 +37,7 @@ Figure 1 shows the core contrast we are about to unpack: the sharp single-arrow 
 
 ## 1. What is a policy?
 
-Before we can argue about whether a policy should be deterministic or stochastic, we need to be exact about what a policy *is*. In the RL loop you saw in post A1 ([Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map)), an agent observes a state $s \in \mathcal{S}$, chooses an action $a \in \mathcal{A}$, receives a reward $r$, and transitions to a new state $s'$. The **policy** is the function that maps state to action — it is the complete behavioral specification of the agent. Everything else in RL (value functions, Q-functions, critics, replay buffers) exists to help you find a *good* policy.
+Before we can argue about whether a policy should be deterministic or stochastic, we need to be exact about what a policy *is*. In the RL loop you saw in post A1 ([Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning)), an agent observes a state $s \in \mathcal{S}$, chooses an action $a \in \mathcal{A}$, receives a reward $r$, and transitions to a new state $s'$. The **policy** is the function that maps state to action — it is the complete behavioral specification of the agent. Everything else in RL (value functions, Q-functions, critics, replay buffers) exists to help you find a *good* policy.
 
 ### 1.1 Stochastic policy
 
@@ -1167,7 +1167,7 @@ Suppose you are building an RL agent for trade execution (posting limit orders t
 - **Schulman et al., "Proximal Policy Optimization Algorithms" (arXiv 2017)** — PPO, the most widely used stochastic on-policy algorithm in practice, from RLHF to robotics.
 - **Singh et al., "Learning Without State Estimation in POMDPs" (ICML 1994)** — Formal treatment of when stochastic policies are strictly better in partially observable settings.
 - **Within this series:**
-  - Post A1: [Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) — the full RL taxonomy; MDPs, value functions, and the agent–environment loop.
-  - Post A2: [Markov Decision Processes from First Principles](/blog/machine-learning/reinforcement-learning/markov-decision-processes-from-first-principles) — the MDP formalism underlying all policy theory.
-  - Post A3: [Value Functions and Bellman Equations](/blog/machine-learning/reinforcement-learning/value-functions-and-bellman-equations) — $V^\pi$ and $Q^\pi$ derivation; the building blocks for policy improvement.
+  - Post A1: [Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning) — the full RL taxonomy; MDPs, value functions, and the agent–environment loop.
+  - Post A2: [Markov Decision Processes from First Principles](/blog/machine-learning/reinforcement-learning/markov-decision-processes) — the MDP formalism underlying all policy theory.
+  - Post A3: [Value Functions and Bellman Equations](/blog/machine-learning/reinforcement-learning/value-functions-and-the-bellman-equation) — $V^\pi$ and $Q^\pi$ derivation; the building blocks for policy improvement.
   - Post E1: [The Policy Gradient Theorem](/blog/machine-learning/reinforcement-learning/the-policy-gradient-theorem) — the full derivation of $\nabla_\theta J(\theta)$ and why stochastic policies are required; score function vs reparameterization estimators.

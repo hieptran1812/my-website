@@ -239,7 +239,7 @@ Strip away the narrative and four concrete market signatures recur whenever the 
 
 There is a fifth signature that is easy to overlook because it is an *absence*: the goods that were never listed barely moved. Companies whose import basket sat outside the tariff lists — services firms, domestic-demand businesses, importers of unlisted categories — traded through the whole episode with little trade-war beta. This is the practical payoff of the HTS-code structure from the foundations: the trade war was *attributable*, so you could build a long-short book that was long the no-exposure names and short the high-exposure names and harvest the dispersion without taking an index-level directional view. The dispersion *between* winners and losers was often a cleaner, higher-Sharpe trade than the direction *of* the index — a recurring truth about policy shocks that redistribute rather than uniformly tax.
 
-These four signatures generalize. They are the same reaction map you see whenever a trade-policy shock hits — which is exactly why this case study is in a series about reading rules, and why we cross-reference the broader [event-trading mechanics](/blog/trading/event-trading) for the headline-reaction toolkit and the [macro-trading framework](/blog/trading/macro-trading) for how a policy shock transmits through liquidity and the dollar.
+These four signatures generalize. They are the same reaction map you see whenever a trade-policy shock hits — which is exactly why this case study is in a series about reading rules, and why we cross-reference the broader [event-trading mechanics](/blog/trading?subcategory=event-trading) for the headline-reaction toolkit and the [macro-trading framework](/blog/trading?subcategory=macro-trading) for how a policy shock transmits through liquidity and the dollar.
 
 #### Worked example: sizing the May 2019 escalation as an event trade
 
@@ -282,5 +282,5 @@ Within this series:
 
 Cross-asset and mechanism context:
 
-- [Macro trading](/blog/trading/macro-trading) — how a policy/liquidity shock transmits through the dollar, rates, and global flows.
-- [Event trading](/blog/trading/event-trading) — the headline-reaction toolkit for trading discrete, dated catalysts like tariff lists and negotiation rounds.
+- [Macro trading](/blog/trading?subcategory=macro-trading) — how a policy/liquidity shock transmits through the dollar, rates, and global flows.
+- [Event trading](/blog/trading?subcategory=event-trading) — the headline-reaction toolkit for trading discrete, dated catalysts like tariff lists and negotiation rounds.

@@ -326,7 +326,7 @@ The senior heuristic, stated plainly:
 
 The one rule that prevents the most pain: **never rebase commits other people have based work on.** Rebasing rewrites commit SHAs; if a teammate has your old commits in their branch and you rebase, their next pull turns into a mess of duplicated commits and conflicts. Rebase is for *your* branch before it is shared. Once it is shared, merge.
 
-There is a deeper reason seniors prefer linear history, and it is not aesthetics. A linear history makes three high-value tools work well: `git bisect` (binary-search the commit that introduced a bug), `git revert` (cleanly undo one change), and `git log --first-parent` (read `main` as one decision per line). Merge bubbles degrade all three. The discipline of section 5 (clean commits) and this section (linear integration) exists to keep those tools sharp — see the same argument applied to keeping a *codebase* clean in the [design patterns guide](/blog/software-development/system-design/design-patterns-guide).
+There is a deeper reason seniors prefer linear history, and it is not aesthetics. A linear history makes three high-value tools work well: `git bisect` (binary-search the commit that introduced a bug), `git revert` (cleanly undo one change), and `git log --first-parent` (read `main` as one decision per line). Merge bubbles degrade all three. The discipline of section 5 (clean commits) and this section (linear integration) exists to keep those tools sharp — see the same argument applied to keeping a *codebase* clean in the [design patterns guide](/blog/software-development?subcategory=system-design).
 
 ### 6.1 The config that removes the most common mistake
 
@@ -1046,7 +1046,7 @@ The thread running through all of it is the same: **make irreversible mistakes i
 ## 14. Further reading
 
 - [Git Like a Pro: the object model, daily workflows, and recovering from disaster](/blog/software-development/version-control/git-like-a-pro-object-model-workflows-and-recovery) — the internals companion to this article: the content-addressed object store, the three trees, signed commits, performance at scale, and the object-level mechanics that make every recovery in this playbook work.
-- [Design patterns guide](/blog/software-development/system-design/design-patterns-guide) — the same discipline that keeps a commit history clean keeps a codebase clean; the parallels between linear history and well-factored code run deep.
+- [Design patterns guide](/blog/software-development?subcategory=system-design) — the same discipline that keeps a commit history clean keeps a codebase clean; the parallels between linear history and well-factored code run deep.
 - **Pro Git** (Chacon & Straub), the free official book — chapters 2, 3, and 7 cover branching, rebasing, and the tools (`bisect`, `rerere`, `filter-branch`) referenced here in full depth.
 - `git help <command>` and `git help -g` — the built-in manuals are excellent; `git help everyday` in particular is a curated set of the workflows a working engineer actually needs.
 

@@ -240,7 +240,7 @@ def fp8_gemm(A_bf16, W_bf16):                               # A: [M, K], W: [K, 
     return out.to(torch.bfloat16)                           # dequantize the result
 ```
 
-In the real implementation this loop is fused into a single kernel so the "promote to FP32" step doesn't actually round-trip through global memory — the DeepGEMM library DeepSeek open-sourced does exactly this, hitting north of 1,300 FP8 TFLOPS on Hopper with about 300 lines of JIT-compiled CUDA. The dequant overhead, in other words, is real but small, and it's amortized by the kernel doing it in registers. We cover DeepGEMM and the rest of the open-infra kernels in the [next post in this series](/blog/machine-learning/mlops/).
+In the real implementation this loop is fused into a single kernel so the "promote to FP32" step doesn't actually round-trip through global memory — the DeepGEMM library DeepSeek open-sourced does exactly this, hitting north of 1,300 FP8 TFLOPS on Hopper with about 300 lines of JIT-compiled CUDA. The dequant overhead, in other words, is real but small, and it's amortized by the kernel doing it in registers. We cover DeepGEMM and the rest of the open-infra kernels in the [next post in this series](/blog/machine-learning?subcategory=mlops).
 
 ### Online scaling, not delayed scaling
 
@@ -297,7 +297,7 @@ It's tempting to treat FP8, MTP, and balancing as independent optimizations. The
 - **MoE routing collapse** (a few hot experts, the rest dead) is prevented by loss-free balancing — *without* the quality tax that an auxiliary loss would impose, which matters more at 256 experts than at 8.
 - **FP8 loss drift** is prevented by fine-grained scaling and FP32 accumulation — and it has to be, because at 671B params the GEMMs are where the FLOPs and the bandwidth go; you can't afford to run them in BF16 and still hit the cost target.
 - **Decode bandwidth blowup** is prevented by MLA's compressed KV cache (see the [MLA post](/blog/machine-learning/large-language-model/kv-cache)) and by MTP's speculative drafting — together they make a 671B model servable.
-- **Pipeline bubbles** that would waste the cluster are prevented by DualPipe's bidirectional schedule and the warp-specialized all-to-all (the subject of the [open-infra post](/blog/machine-learning/mlops/) in this series).
+- **Pipeline bubbles** that would waste the cluster are prevented by DualPipe's bidirectional schedule and the warp-specialized all-to-all (the subject of the [open-infra post](/blog/machine-learning?subcategory=mlops) in this series).
 
 A word on DualPipe, since it's the system-side counterpart to everything above. A pipeline-parallel run splits the model across stages and feeds micro-batches through; the gap between stages finishing and the next micro-batch arriving is the "bubble," and it's pure waste. DualPipe feeds micro-batches from *both ends of the pipeline simultaneously* and overlaps each chunk's computation with the all-to-all communication of its neighbor, shrinking the bubble to near zero — at the cost of keeping a second copy of the parameters at the pipeline ends. On a comms-throttled H800 cluster, that trade (more memory for less waiting) is exactly the right one, and it's only affordable because MLA and FP8 freed up the memory to spend. Notably, DeepSeek avoids tensor parallelism entirely, because TP's all-reduce traffic would be murder on the throttled interconnect — another instance of the hardware shaping the design.
 

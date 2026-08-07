@@ -213,7 +213,7 @@ The result was a global volatility shock. Japan's Nikkei 225 fell over 12% in a 
 
 August 2024 is a clean case study in how the two layers divide labor. The market-wide breaker is a blunt, rare instrument; it did not fire. The single-stock LULD bands are the fine-grained, common layer; they fired many times, pausing individual names for the 5-minute auction reset while the broad index, though down, never breached the −7% line. Most "halts" you will ever see in your trading life are single-stock LULD pauses, not market-wide breakers.
 
-This is also a textbook example of how a *foreign* policy decision transmits into US market structure — the kind of cross-border shock we map in the [event-trading playbook for central-bank surprises](/blog/trading/event-trading/trading-central-bank-rate-decisions) and the regime analysis in the [cross-asset correlations guide](/blog/trading/cross-asset/correlation-regimes-and-diversification).
+This is also a textbook example of how a *foreign* policy decision transmits into US market structure — the kind of cross-border shock we map in the [event-trading playbook for central-bank surprises](/blog/trading?subcategory=event-trading) and the regime analysis in the [cross-asset correlations guide](/blog/trading?subcategory=cross-asset).
 
 ## How liquidity vanishes near a band: the magnet debate
 
@@ -289,11 +289,11 @@ When a stock or the market reopens after a halt, the first prices come out of an
 
 ### 3. Treat a halt as gap risk, not protection
 
-As the worked example showed, being caught long into a Level 1 halt freezes you while the news keeps coming. If you carry a position into a high-risk event (a Fed decision, a major data release, a geopolitical flashpoint), size it so that an unfillable gap of 10% does not break you. The halt will not save you; only your *position size and hedges* will. This is why pre-event hedging — buying puts or reducing exposure *before* the catalyst — matters more than any intraday stop. The mechanics of pre-positioning for known events are in the [event-trading guide to scheduled catalysts](/blog/trading/event-trading/trading-scheduled-economic-data-releases).
+As the worked example showed, being caught long into a Level 1 halt freezes you while the news keeps coming. If you carry a position into a high-risk event (a Fed decision, a major data release, a geopolitical flashpoint), size it so that an unfillable gap of 10% does not break you. The halt will not save you; only your *position size and hedges* will. This is why pre-event hedging — buying puts or reducing exposure *before* the catalyst — matters more than any intraday stop. The mechanics of pre-positioning for known events are in the [event-trading guide to scheduled catalysts](/blog/trading?subcategory=event-trading).
 
 ### 4. Watch the VIX as the margin-spiral signal
 
-The clearest early-warning indicator of the reflexive loop is **realized and implied volatility**, summarized by the VIX. When the VIX gaps from the low teens to the 30s or 40s in a session, you are watching the input that drives clearinghouse VaR models — and therefore the margin calls that force selling. A fast VIX spike means: (a) margin calls are coming, (b) forced sellers will hit the tape over the next day or two regardless of value, and (c) liquidity will stay thin near every band. A VIX of 30+ is the signal to reduce gross exposure and stop providing liquidity into the move, not to "buy the dip" on the first green candle. For the broader volatility-as-a-tradeable-object toolkit, see the [volatility and the VIX deep dive](/blog/trading/quantitative-finance/volatility-vix-and-the-fear-gauge).
+The clearest early-warning indicator of the reflexive loop is **realized and implied volatility**, summarized by the VIX. When the VIX gaps from the low teens to the 30s or 40s in a session, you are watching the input that drives clearinghouse VaR models — and therefore the margin calls that force selling. A fast VIX spike means: (a) margin calls are coming, (b) forced sellers will hit the tape over the next day or two regardless of value, and (c) liquidity will stay thin near every band. A VIX of 30+ is the signal to reduce gross exposure and stop providing liquidity into the move, not to "buy the dip" on the first green candle. For the broader volatility-as-a-tradeable-object toolkit, see the [volatility and the VIX deep dive](/blog/trading?subcategory=quantitative-finance).
 
 ### 5. Know the exact levels before the open
 
@@ -321,7 +321,7 @@ The deepest point is the one the series keeps returning to: a rule is not a foot
 
 **Cross-links out (the mechanisms, not re-derived here):**
 
-- [Trading central-bank rate decisions](/blog/trading/event-trading/trading-central-bank-rate-decisions) and [trading scheduled economic data releases](/blog/trading/event-trading/trading-scheduled-economic-data-releases) — how to position before the catalysts that trigger the gaps and halts.
-- [Correlation regimes and diversification](/blog/trading/cross-asset/correlation-regimes-and-diversification) — why a yen-carry unwind or a vol spike makes everything fall together.
+- [Trading central-bank rate decisions](/blog/trading?subcategory=event-trading) and [trading scheduled economic data releases](/blog/trading?subcategory=event-trading) — how to position before the catalysts that trigger the gaps and halts.
+- [Correlation regimes and diversification](/blog/trading?subcategory=cross-asset) — why a yen-carry unwind or a vol spike makes everything fall together.
 - [How the Fed sets interest rates](/blog/trading/finance/how-the-fed-sets-interest-rates) and [shadow banking and the repo market](/blog/trading/finance/shadow-banking-and-the-repo-market) — the lender-of-last-resort plumbing that backstops the clearing system when the margin spiral runs.
-- [Volatility, the VIX, and the fear gauge](/blog/trading/quantitative-finance/volatility-vix-and-the-fear-gauge) — the volatility toolkit behind the margin-spiral signal in the playbook.
+- [Volatility, the VIX, and the fear gauge](/blog/trading?subcategory=quantitative-finance) — the volatility toolkit behind the margin-spiral signal in the playbook.

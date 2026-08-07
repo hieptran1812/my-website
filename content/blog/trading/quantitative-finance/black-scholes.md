@@ -33,7 +33,7 @@ The Black-Scholes formula is the most consequential equation in modern finance a
 
 The diagram above is the mental model. Black-Scholes takes five inputs (spot, strike, time, rate, volatility) and produces a price plus a complete set of Greeks. Every input except sigma is observable in the market; sigma — the volatility — is the *one* parameter the market disagrees about, and the market expresses that disagreement through option prices. Inverting the formula gives the *implied volatility*, which is the trader's universal language. When two desks across the world quote the same option, they almost certainly quote it as a vol number, not a dollar number, because the dollar number depends on spot and the vol number does not.
 
-This article is the deep dive on Black-Scholes for a senior quant or staff-level engineer. It works through the PDE derivation, the closed-form formula and what each piece means, the analytic Greeks, implied-vol inversion, the seven assumptions and how each fails in real markets, the Black-76 / Garman-Kohlhagen / Margrabe / Bachelier family of variants, numerical pitfalls in production code, vectorised implementation, calibration, and a long catalog of named failure modes. The companion articles are [Derivatives Pricing](/blog/trading/quantitative-finance/derivatives/derivatives-pricing) (which covers replication and risk-neutral measures abstractly) and [Options Theory](/blog/trading/quantitative-finance/derivatives/options-theory) (which covers payoffs, parity, strategies, and Greeks at a more conceptual level). Black-Scholes is the concrete instance the rest of the industry calibrates against.
+This article is the deep dive on Black-Scholes for a senior quant or staff-level engineer. It works through the PDE derivation, the closed-form formula and what each piece means, the analytic Greeks, implied-vol inversion, the seven assumptions and how each fails in real markets, the Black-76 / Garman-Kohlhagen / Margrabe / Bachelier family of variants, numerical pitfalls in production code, vectorised implementation, calibration, and a long catalog of named failure modes. The companion articles are [Derivatives Pricing](/blog/trading/quantitative-finance/derivatives-pricing) (which covers replication and risk-neutral measures abstractly) and [Options Theory](/blog/trading/quantitative-finance/options-theory) (which covers payoffs, parity, strategies, and Greeks at a more conceptual level). Black-Scholes is the concrete instance the rest of the industry calibrates against.
 
 ## 1. Why Black-Scholes is wrong but indispensable
 
@@ -95,7 +95,7 @@ $$
 
 Two observations a senior quant should drill into a junior:
 
-1. **The drift $\mu$ is gone.** The replication argument annihilated it. The PDE contains $r$ (and $q$), but no real-world drift. This is the same fact we saw in the binomial argument in [the derivatives pricing post](/blog/trading/quantitative-finance/derivatives/derivatives-pricing#2-the-one-period-binomial-where-every-pricing-instinct-comes-from), now in continuous time.
+1. **The drift $\mu$ is gone.** The replication argument annihilated it. The PDE contains $r$ (and $q$), but no real-world drift. This is the same fact we saw in the binomial argument in [the derivatives pricing post](/blog/trading/quantitative-finance/derivatives-pricing), now in continuous time.
 2. **The PDE is the same for every payoff; only the boundary condition differs.** A European call has terminal condition $V(T, S) = \max(S - K, 0)$; a put has $V(T, S) = \max(K - S, 0)$; a digital call has $V(T, S) = \mathbf{1}_{S > K}$. The PDE is identical; the payoff enters only through the boundary. This is what makes finite-difference PDE methods so useful in production: one engine, every payoff.
 
 ## 3. From PDE to heat equation
@@ -154,7 +154,7 @@ $N(\cdot)$ is the standard normal cumulative distribution. The put is given by p
 
 ![The closed-form formula, piece by piece](/imgs/blogs/black-scholes-4.png)
 
-Each piece has a clean interpretation. $N(d_2)$ is the risk-neutral probability the call ends in the money, that is, $\mathbb{P}^Q(S_T > K)$ under the standard money-market measure. $N(d_1)$ is the same probability under the *stock measure* — the measure where the stock is the numéraire. The two probabilities differ because they live under different measures; the difference is the *quanto* correction (we covered numéraire change in [the derivatives pricing post](/blog/trading/quantitative-finance/derivatives/derivatives-pricing#5-the-risk-neutral-measure-and-girsanov)).
+Each piece has a clean interpretation. $N(d_2)$ is the risk-neutral probability the call ends in the money, that is, $\mathbb{P}^Q(S_T > K)$ under the standard money-market measure. $N(d_1)$ is the same probability under the *stock measure* — the measure where the stock is the numéraire. The two probabilities differ because they live under different measures; the difference is the *quanto* correction (we covered numéraire change in [the derivatives pricing post](/blog/trading/quantitative-finance/derivatives-pricing)).
 
 The formula's structural elegance: it decomposes into two pieces, each of which is a probability-weighted cashflow under a different measure. The first piece $S e^{-qT} N(d_1)$ is the expected value of *receiving a share* in the in-the-money state (under the stock measure). The second piece $K e^{-rT} N(d_2)$ is the expected value of *paying the strike* in the in-the-money state (under the money-market measure). The call's price is the net.
 
@@ -290,7 +290,7 @@ Knowing the *shape* of each Greek as a function of spot and time is what separat
 
 **Delta as a function of $S$** is a smooth sigmoid: 0 deep OTM, 0.5 ATM, 1 deep ITM. The slope of the sigmoid is exactly gamma. As $T$ shrinks, the sigmoid steepens; in the limit $T \to 0$, delta becomes a step function at the strike (this is what creates pin risk).
 
-**Gamma as a function of $S$** is a Gaussian-like bump centred near the strike (slightly below the strike for finite $T$ because of the asymmetry in $\ln(S/K)$). Its peak height scales as $1 / (S \sigma \sqrt{T})$, so as $T \to 0$, gamma at the strike diverges. This is the *gamma cliff* we covered in [the options theory post](/blog/trading/quantitative-finance/derivatives/options-theory#11-pin-risk-the-gamma-cliff-at-expiry).
+**Gamma as a function of $S$** is a Gaussian-like bump centred near the strike (slightly below the strike for finite $T$ because of the asymmetry in $\ln(S/K)$). Its peak height scales as $1 / (S \sigma \sqrt{T})$, so as $T \to 0$, gamma at the strike diverges. This is the *gamma cliff* we covered in [the options theory post](/blog/trading/quantitative-finance/options-theory).
 
 **Vega as a function of $S$** is also a Gaussian-like bump, but its height scales as $S \sqrt{T}$. As $T \to 0$, vega vanishes; as $T \to \infty$, vega grows. This is why long-dated options are dominated by vega risk and short-dated options are dominated by gamma risk.
 
@@ -373,7 +373,7 @@ This is exact in the limit $S = K$ and $r = q = 0$. It's a fine seed for Newton 
 
 **Jäckel (2015) "Let's be rational"** is a numerically robust algorithm that achieves machine-precision implied vol in a fixed small number of iterations *for every input that admits a finite implied vol*. It uses asymptotic expansions for extreme moneyness and a custom quartic-convergence iteration in the middle. The Jäckel algorithm is the modern gold standard; OpenBLAS-style implementations are a few hundred lines of C.
 
-**Cornell-Reilly volatility smile inversion** is a structural approach: rather than inverting each option separately, fit a parameterised smile (SVI, SABR) directly to the option prices. This regularises across strikes and produces a smooth, arbitrage-free surface. We'll cover this in [the volatility surface post](/blog/trading/quantitative-finance/derivatives/volatility-surface).
+**Cornell-Reilly volatility smile inversion** is a structural approach: rather than inverting each option separately, fit a parameterised smile (SVI, SABR) directly to the option prices. This regularises across strikes and produces a smooth, arbitrage-free surface. We'll cover this in [the volatility surface post](/blog/trading/quantitative-finance/volatility-surface).
 
 The lesson for production: implied vol inversion is an art the textbooks rarely cover well. Newton-Raphson works for ATM and modest moneyness; for the wings, use Jäckel or smile-fitting. A production library that uses naive Newton everywhere will produce occasional NaN or wildly inaccurate vols on deep-OTM short-dated options, with downstream consequences for risk attribution and hedging.
 
@@ -395,9 +395,9 @@ Black-Scholes derives the option price from a clean set of assumptions. Each ass
 
 A senior quant should be able to give a precise picture of how each failure shows up in trading P&L:
 
-**Discrete trading and gap risk.** The Black-Scholes derivation assumes you can rebalance the hedge continuously. In practice, you rebalance once per day or on a threshold trigger. Between rebalances, the underlying can move. The gap-risk P&L is approximately $\tfrac{1}{2} \Gamma (\Delta S)^2 - \tfrac{1}{2} \Gamma \sigma^2 S^2 \Delta t$ — gamma harvest minus theta cost. If realised vol exceeds implied, gamma harvests more than theta costs and the long-options book wins; if not, it loses. This is the same calculation as in [the options theory post](/blog/trading/quantitative-finance/derivatives/options-theory#5-the-greek-family) but here viewed as a Black-Scholes residual.
+**Discrete trading and gap risk.** The Black-Scholes derivation assumes you can rebalance the hedge continuously. In practice, you rebalance once per day or on a threshold trigger. Between rebalances, the underlying can move. The gap-risk P&L is approximately $\tfrac{1}{2} \Gamma (\Delta S)^2 - \tfrac{1}{2} \Gamma \sigma^2 S^2 \Delta t$ — gamma harvest minus theta cost. If realised vol exceeds implied, gamma harvests more than theta costs and the long-options book wins; if not, it loses. This is the same calculation as in [the options theory post](/blog/trading/quantitative-finance/options-theory) but here viewed as a Black-Scholes residual.
 
-**Smile and skew.** A flat-vol Black-Scholes prices OTM puts and OTM calls at the same vol; the market doesn't. The market charges more vol for OTM puts (equity skew) because crash insurance is in demand. A trader who quotes flat-vol BS is mispricing wings systematically; the smile is the market's correction. We covered this in [the options theory smile section](/blog/trading/quantitative-finance/derivatives/options-theory#10-smile-skew-and-term-structure).
+**Smile and skew.** A flat-vol Black-Scholes prices OTM puts and OTM calls at the same vol; the market doesn't. The market charges more vol for OTM puts (equity skew) because crash insurance is in demand. A trader who quotes flat-vol BS is mispricing wings systematically; the smile is the market's correction. We covered this in [the options theory smile section](/blog/trading/quantitative-finance/options-theory).
 
 **Fat tails and jumps.** Black-Scholes assumes log-returns are normally distributed. Real log-returns have kurtosis 3-15 (vs Gaussian's 3) and occasional jump-sized moves. Jump-diffusion models (Merton 1976, Kou 2002) add a Poisson process to the SDE; they price the wings better but introduce new parameters that need calibration.
 
@@ -419,7 +419,7 @@ A taxonomy of where each assumption fails worst, with operational examples:
 
 **No transaction costs.** The Hodges-Neuberger and Whalley-Wilmott extensions give an *optimal no-trade region* around the Black-Scholes delta. Inside the region, do nothing; outside, hedge to the boundary. The optimal width depends on transaction costs, gamma, and risk aversion. Most production hedging algorithms use such a band rather than rebalancing to BS-delta exactly.
 
-**No dividends.** Modern BS implementations support both continuous yield $q$ and a discrete dividend schedule. The ex-dividend treatment of American calls (we covered this in [the options theory post](/blog/trading/quantitative-finance/derivatives/options-theory#8-american-vs-european-exercise)) is a separate engineering layer.
+**No dividends.** Modern BS implementations support both continuous yield $q$ and a discrete dividend schedule. The ex-dividend treatment of American calls (we covered this in [the options theory post](/blog/trading/quantitative-finance/options-theory)) is a separate engineering layer.
 
 **No early exercise.** American options live in a different framework; BS is the European limit only.
 
@@ -611,7 +611,7 @@ The Black-Scholes lesson: *implied vol can stay irrationally high longer than yo
 
 ### 15.2 The Volkswagen 2008 squeeze
 
-We covered this in [the options theory case studies](/blog/trading/quantitative-finance/derivatives/options-theory#13-2-volkswagen-2008-short-squeeze). The Black-Scholes-specific lesson: when the underlying float collapses, the model's continuous-trading assumption fails catastrophically. Implied vols spiked from 30% to 1000+%; the BS formula remained mathematically sound but no longer corresponded to anything like a realisable hedge. Several dealers had to mark-to-myth (use stale BS prices because no live market price existed) for hours.
+We covered this in [the options theory case studies](/blog/trading/quantitative-finance/options-theory). The Black-Scholes-specific lesson: when the underlying float collapses, the model's continuous-trading assumption fails catastrophically. Implied vols spiked from 30% to 1000+%; the BS formula remained mathematically sound but no longer corresponded to anything like a realisable hedge. Several dealers had to mark-to-myth (use stale BS prices because no live market price existed) for hours.
 
 ### 15.3 SPX flash crash, May 2010
 
@@ -627,11 +627,11 @@ After 2002, the swaption-market standard model shifted from Black-76 (with a sin
 
 ### 15.6 Negative oil futures, April 2020
 
-We covered this in [the derivatives pricing case studies](/blog/trading/quantitative-finance/derivatives/derivatives-pricing#11-5-negative-oil-futures-april-2020). The BS-specific point: pricing systems with `assert S > 0` baked in returned NaN or crashed on the negative-price feed; the institutions that had Bachelier (normal-vol) implementations sitting idle could switch over in hours. The cost of having a Bachelier implementation in production *before you need it* is small; the cost of writing one *during* a crisis is large.
+We covered this in [the derivatives pricing case studies](/blog/trading/quantitative-finance/derivatives-pricing). The BS-specific point: pricing systems with `assert S > 0` baked in returned NaN or crashed on the negative-price feed; the institutions that had Bachelier (normal-vol) implementations sitting idle could switch over in hours. The cost of having a Bachelier implementation in production *before you need it* is small; the cost of writing one *during* a crisis is large.
 
 ### 15.7 The 2008 OIS-LIBOR discount-curve change
 
-Post-Lehman, the swap-pricing standard moved from LIBOR-discounting to OIS-discounting. Black-Scholes-style closed-form pricers for caps and swaptions had to be retrofitted to use the right discount curve per cashflow. Several banks discovered that their BS implementations had hardcoded a single discount curve; the retrofit was a year-long project. The lesson: every BS-style pricer must accept the discount curve as data, not as a hardcoded global. We covered this in detail in [the derivatives pricing case studies](/blog/trading/quantitative-finance/derivatives/derivatives-pricing#11-4-lehman-default-and-the-ois-libor-discount-curve-war).
+Post-Lehman, the swap-pricing standard moved from LIBOR-discounting to OIS-discounting. Black-Scholes-style closed-form pricers for caps and swaptions had to be retrofitted to use the right discount curve per cashflow. Several banks discovered that their BS implementations had hardcoded a single discount curve; the retrofit was a year-long project. The lesson: every BS-style pricer must accept the discount curve as data, not as a hardcoded global. We covered this in detail in [the derivatives pricing case studies](/blog/trading/quantitative-finance/derivatives-pricing).
 
 ### 15.8 The 2018 leveraged ETN cohort
 
@@ -750,7 +750,7 @@ Theta is $V_t$ (time derivative), Gamma is $V_{SS}$. For an at-the-money option 
 Consequences:
 
 1. **A long-gamma position is structurally short-theta.** The premium you pay for gamma is exactly compensating the writer for theta. In an unbiased world, this is a wash.
-2. **The realised P&L of a delta-hedged book equals the gamma-times-realised-variance minus theta-times-time, integrated.** Equivalently, the P&L is $\tfrac{1}{2} \Gamma S^2 (\sigma_R^2 - \sigma_I^2) \Delta t$ per period, where $\sigma_R$ is realised vol and $\sigma_I$ is implied. We covered this in [the options theory post](/blog/trading/quantitative-finance/derivatives/options-theory#5-the-greek-family). The PDE makes it precise.
+2. **The realised P&L of a delta-hedged book equals the gamma-times-realised-variance minus theta-times-time, integrated.** Equivalently, the P&L is $\tfrac{1}{2} \Gamma S^2 (\sigma_R^2 - \sigma_I^2) \Delta t$ per period, where $\sigma_R$ is realised vol and $\sigma_I$ is implied. We covered this in [the options theory post](/blog/trading/quantitative-finance/options-theory). The PDE makes it precise.
 3. **Gamma-scalping is the daily expression of this identity.** Long gamma, rebalance frequently, harvest the difference between realised and implied. Every retail-level "gamma scalping" strategy is implementing this identity.
 
 The PDE is therefore not just a derivation tool; it's the equation of motion of the option's value. A senior trader should be able to read the PDE and immediately understand which Greek dominates which time horizon.
@@ -811,4 +811,4 @@ An additional way to summarise the formula's role: Black-Scholes is the *Newtoni
 
 A senior quant's relationship with Black-Scholes is mature: the formula is a tool, not a faith. Its assumptions are pedagogically simple but operationally violated; its Greeks are clean but model-naive; its corner cases must be explicitly handled. The reward for engaging deeply with the model is the ability to read every options quote in the world and have a precise mental model of what it means.
 
-The remaining articles in this series — [Volatility Surface](/blog/trading/quantitative-finance/derivatives/volatility-surface), [Bond Pricing](/blog/trading/quantitative-finance/fixed-income/bond-pricing), [Yield Curve Modeling](/blog/trading/quantitative-finance/fixed-income/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/rates-models/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotics/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/exotics/autocallables), and [Cliquets](/blog/trading/quantitative-finance/exotics/cliquets) — go deeper on the modelling that lives on top of Black-Scholes.
+The remaining articles in this series — [Volatility Surface](/blog/trading/quantitative-finance/volatility-surface), [Bond Pricing](/blog/trading/quantitative-finance/bond-pricing), [Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on the modelling that lives on top of Black-Scholes.

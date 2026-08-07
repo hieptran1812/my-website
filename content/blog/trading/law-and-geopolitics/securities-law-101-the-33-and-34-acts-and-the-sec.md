@@ -302,5 +302,5 @@ The deepest version of this skill is to stop seeing filings as compliance docume
 - [Crypto regulation: securities vs commodities and the turf war](/blog/trading/law-and-geopolitics/crypto-regulation-securities-vs-commodities-and-the-turf-war) — the Howey test applied to tokens, and what happens when "is it a security?" is genuinely unsettled.
 - [Market-structure law: Reg NMS, PFOF, and short-selling rules](/blog/trading/law-and-geopolitics/market-structure-law-reg-nms-pfof-and-short-selling-rules) — the 1934 Act's other job: the plumbing of how trades actually clear and how short interest is disclosed.
 - [How law moves markets: the transmission chain](/blog/trading/law-and-geopolitics/how-law-moves-markets-the-transmission-chain) — the series spine that places the disclosure regime in the full law-to-price pipeline.
-- [Equity research](/blog/trading/equity-research) — how to turn the numbers a filing discloses into a valuation.
-- [Event trading](/blog/trading/event-trading) — the reaction mechanics of trading scheduled and surprise information events.
+- [Equity research](/blog/trading?subcategory=equity-research) — how to turn the numbers a filing discloses into a valuation.
+- [Event trading](/blog/trading?subcategory=event-trading) — the reaction mechanics of trading scheduled and surprise information events.

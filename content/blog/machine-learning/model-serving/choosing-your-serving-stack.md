@@ -214,7 +214,7 @@ vLLM's PagedAttention partitions KV cache into fixed-size blocks that are alloca
 
 The exception: if you are deeply embedded in the HuggingFace ecosystem and need native `transformers` model support, TGI (Text Generation Inference) is the alternative. TGI integrates FlashAttention-2, tensor parallelism via `--num-shard`, and per-token streaming out of the box. Its architecture is similar to vLLM's continuous batching model. For pure HuggingFace-hosted models, TGI is the tighter integration.
 
-**Sub-question: single adapter or many LoRA adapters?** If you need to serve one base model with hundreds of task-specific LoRA adapters without reloading weights for each adapter, vLLM's multi-LoRA support (or S-LoRA patterns) is the right architecture. This is covered in detail in the [multi-LoRA and adapter serving](/blog/machine-learning/model-serving/the-model-serving-playbook) post in this series.
+**Sub-question: single adapter or many LoRA adapters?** If you need to serve one base model with hundreds of task-specific LoRA adapters without reloading weights for each adapter, vLLM's multi-LoRA support (or S-LoRA patterns) is the right architecture. This is covered in detail in the [multi-LoRA and adapter serving](/blog/machine-learning/model-serving/multi-lora-and-adapter-serving) post in this series.
 
 ### Question 2: Do you have a GPU-optimized CV pipeline needing TensorRT?
 
@@ -1039,4 +1039,4 @@ Finally, resist the temptation to build your own serving framework from scratch 
 - [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — series introduction, the SLO triangle, and the latency/throughput/cost framework that underpins all framework choices.
 - [Triton Inference Server deep dive](/blog/machine-learning/model-serving/triton-inference-server-deep-dive) — detailed coverage of `config.pbtxt`, ensemble pipelines, and dynamic batching configuration.
 - [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) — chunked prefill, prefix caching, and speculative decoding internals that explain vLLM's throughput advantage.
-- [The model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook) — series capstone: full decision tree from model type to production architecture, including the multi-framework patterns introduced in this post.
+- [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — series capstone: full decision tree from model type to production architecture, including the multi-framework patterns introduced in this post.

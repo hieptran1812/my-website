@@ -271,7 +271,7 @@ At this point 18,800 is what we might call "net income if nothing non-cash had h
 
 **Cash from operations: 13,800.**
 
-Two summary numbers fall out immediately. The **cash conversion ratio** — CFO divided by net income — is 13,800 / 12,000 = **1.15**. And **accruals**, defined as net income minus CFO, are 12,000 − 13,800 = **−1,800**. Negative accruals mean cash outran profit, which is the conservative direction; that relationship is the entire basis of the [accruals ratio and the accruals anomaly](/blog/trading/forensic-accounting/the-accruals-ratio-and-the-accruals-anomaly).
+Two summary numbers fall out immediately. The **cash conversion ratio** — CFO divided by net income — is 13,800 / 12,000 = **1.15**. And **accruals**, defined as net income minus CFO, are 12,000 − 13,800 = **−1,800**. Negative accruals mean cash outran profit, which is the conservative direction; that relationship is the entire basis of the [accruals ratio and the accruals anomaly](/blog/trading?subcategory=forensic-accounting).
 
 Notice what the walk revealed that the headline never would. Northwind's non-cash add-backs contributed 6,800 — more than half of net income. Its working capital *consumed* 5,000. Both facts matter, and neither is visible from the income statement. **The intuition: the indirect method is a confession, laid out in order — the add-backs tell you how much of profit was bookkeeping, and the working-capital lines tell you how much of the business's growth had to be financed out of pocket.**
 

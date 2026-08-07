@@ -418,7 +418,7 @@ Build the simplest agent that could work. Make it work well. Add complexity only
 
 Related articles:
 - [Effective Context Engineering for AI Agents](/blog/machine-learning/ai-agent/effective-context-engineering-for-ai-agents)
-- [How to Build Effective Agents](/blog/machine-learning/ai-agent/how-to-build-effective-agents)
+- [How to Build Effective Agents](/blog/machine-learning?subcategory=ai-agent)
 - [Eval Agents](/blog/machine-learning/ai-agent/eval-agents)
 - [Advanced Tool Use](/blog/machine-learning/ai-agent/advance-tool-use)
 - [Model Context Protocol](/blog/machine-learning/ai-agent/model-context-protocol)

@@ -208,4 +208,4 @@ Do not reach for it when your shapes vary unboundedly (you will get recompile-an
 - [CUDA graphs gotchas and debugging](/blog/machine-learning/performance-engineering/cuda-graphs-gotchas-and-debugging) — the capture constraints reduce-overhead inherits, and the allclose gate for catching silent corruption.
 - [CUDA graphs in a serving loop](/blog/machine-learning/performance-engineering/cuda-graphs-in-a-serving-loop) — the shape-bucketing that makes reduce-overhead viable on variable traffic.
 - [Profiling compiled code](/blog/machine-learning/performance-engineering/profiling-compiled-code) — reading the fused kernels and the graph-replay node in the trace, and the compile-time break-even.
-- [The performance engineering playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the capstone decision tree tying every tool and fix together.
+- [The performance engineering playbook](/blog/machine-learning?subcategory=performance-engineering) — the capstone decision tree tying every tool and fix together.

@@ -846,7 +846,7 @@ EP can be more efficient than TP for MoE models because:
 
 For Mixtral-8×22B (8 active experts out of 64 total) on 8 GPUs with EP=8: each GPU holds 8 experts, all token dispatch happens intra-node via NVLink, and the effective FFN compute is distributed 8-way. The vLLM `--enable-expert-parallel` flag enables EP for MoE models.
 
-The [DeepSeek inference optimization post](/blog/machine-learning/model-serving/deepseek-inference-optimization) in Track H covers EP in depth for production-scale MoE serving.
+The [DeepSeek inference optimization post](/blog/machine-learning?subcategory=model-serving) in Track H covers EP in depth for production-scale MoE serving.
 
 | Parallelism type | Split dimension | Communication | Best for |
 |---|---|---|---|
@@ -1161,4 +1161,4 @@ These ten principles distill the post into actionable engineering rules:
 - **[Continuous batching and PagedAttention deep dive](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention)** — the next post in this series: vLLM scheduler internals, KV block manager implementation, and preemption policy details.
 - **[vLLM deep dive: chunked prefill, prefix caching, speculative decoding](/blog/machine-learning/model-serving/vllm-deep-dive)** — advanced vLLM production configuration covering the features that matter most at scale.
 - **[What is model serving: the SLO triangle](/blog/machine-learning/model-serving/what-is-model-serving)** — the series foundation post: latency, throughput, and cost as the three corners of the serving trade-off space.
-- **[The model serving playbook (capstone)](/blog/machine-learning/model-serving/the-model-serving-playbook)** — the complete decision tree from notebook prototype to production architecture, tying all series posts together.
+- **[The model serving playbook (capstone)](/blog/machine-learning/model-serving/what-is-model-serving)** — the complete decision tree from notebook prototype to production architecture, tying all series posts together.

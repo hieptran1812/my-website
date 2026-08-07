@@ -34,7 +34,7 @@ The diagram above is the mental model. Inputs are positions, prices, curves, spr
 
 This article is the deep dive on fixed-income analytics for a senior quant or staff-level engineer. It covers DV01 aggregation, key-rate DV01s, spread DV01s, OAS analytics for embedded-option bonds, scenario stress testing, VaR (historical, parametric, Monte Carlo), P&L attribution, carry and roll-down, factor models (PCA and macroeconomic), liquidity analytics, capital and regulatory analytics, production architecture, and a long catalog of named analytics failures.
 
-The companion articles are [Bond Pricing](/blog/trading/quantitative-finance/fixed-income/bond-pricing) (which covers the pricing layer) and [Yield Curve Modeling](/blog/trading/quantitative-finance/fixed-income/yield-curve-modeling) (which covers the curve infrastructure). Both are necessary inputs to the analytics described here.
+The companion articles are [Bond Pricing](/blog/trading/quantitative-finance/bond-pricing) (which covers the pricing layer) and [Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling) (which covers the curve infrastructure). Both are necessary inputs to the analytics described here.
 
 ## 1. Why analytics is its own discipline
 
@@ -519,7 +519,7 @@ Beyond simple aggregations, factor models reduce many position-level exposures t
 
 ![Factor models: PCA and macroeconomic factors](/imgs/blogs/fixed-income-analytics-10.png)
 
-**PCA factors** (we covered the math in [the yield curve modeling post](/blog/trading/quantitative-finance/fixed-income/yield-curve-modeling#13-curve-risk-pca-decomposition)):
+**PCA factors** (we covered the math in [the yield curve modeling post](/blog/trading/quantitative-finance/yield-curve-modeling)):
 
 - PC1 (level): 70-80% of curve variance.
 - PC2 (slope): 10-15%.
@@ -767,7 +767,7 @@ A US pension fund's analytics service incorrectly classified a portfolio of A-ra
 
 ### 15.8 SVB 2023 HTM portfolio
 
-We covered this in [Bond Pricing](/blog/trading/quantitative-finance/fixed-income/bond-pricing#15-8-svb-and-the-held-to-maturity-treasury-portfolio-march-2023). For analytics: SVB's risk system surely knew the HTM portfolio was deeply underwater on mark-to-market; the analytics layer should have surfaced this gap. The accounting convention hid the loss; the analytics layer's job is to make the inconvenient truth visible regardless of accounting. Apparently the gap was not surfaced clearly enough to senior management.
+We covered this in [Bond Pricing](/blog/trading/quantitative-finance/bond-pricing). For analytics: SVB's risk system surely knew the HTM portfolio was deeply underwater on mark-to-market; the analytics layer should have surfaced this gap. The accounting convention hid the loss; the analytics layer's job is to make the inconvenient truth visible regardless of accounting. Apparently the gap was not surfaced clearly enough to senior management.
 
 ### 15.9 The 2022 LDI pension crisis
 
@@ -1124,7 +1124,7 @@ A senior architect at a multi-entity firm spends meaningful time on this. The co
 
 A senior fixed-income analytics quant operates fluently in three roles: as an engineer (building the system), as a data architect (designing the cube), and as a quant (interpreting the numbers). The combination is rare and valuable.
 
-The remaining articles in this series — [Short-Rate Models](/blog/trading/quantitative-finance/rates-models/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotics/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/exotics/autocallables), and [Cliquets](/blog/trading/quantitative-finance/exotics/cliquets) — go deeper on specific product categories.
+The remaining articles in this series — [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on specific product categories.
 
 ### 20.3a Real-time analytics: the next frontier
 

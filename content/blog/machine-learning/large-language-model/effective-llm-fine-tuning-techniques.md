@@ -361,7 +361,7 @@ That judgment is what this guide tries to give you. Pick one technique, run one 
 
 - [Fine-Tuning LLMs with DPO: A Practical Guide](/blog/machine-learning/large-language-model/fine-tuning-llm-with-dpo)
 - [Fine-Tuning LLMs with GRPO](/blog/machine-learning/large-language-model/fine-tuning-llm-with-grpo)
-- [LLM Training Playbook](/blog/machine-learning/large-language-model/llm-training-playbook)
+- [LLM Training Playbook](/blog/machine-learning?subcategory=large-language-model)
 - *LoRA: Low-Rank Adaptation of Large Language Models* (Hu et al., 2021)
 - *QLoRA: Efficient Finetuning of Quantized LLMs* (Dettmers et al., 2023)
 - *DoRA: Weight-Decomposed Low-Rank Adaptation* (Liu et al., 2024)

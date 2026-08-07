@@ -516,7 +516,7 @@ The only genuine trap is *over-controlling in a way that hides the thing you car
 ## Further reading
 
 - [Why your AI service wastes CPU and GPU](/blog/machine-learning/performance-engineering/why-your-ai-service-wastes-cpu-and-gpu) — the series intro and the four-wastes / profile-hypothesize-fix-measure loop this benchmark serves.
-- [The performance engineering playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the capstone decision tree that ties every fix in the series back to a measured symptom.
+- [The performance engineering playbook](/blog/machine-learning?subcategory=performance-engineering) — the capstone decision tree that ties every fix in the series back to a measured symptom.
 - [The mental model of a GPU service](/blog/machine-learning/performance-engineering/the-mental-model-of-a-gpu-service) — host enqueues, device drains: the async model that makes the timing rules here inevitable.
 - [Metrics that actually matter](/blog/machine-learning/performance-engineering/metrics-that-actually-matter) — util vs occupancy, p50 vs p99, allocated vs reserved, and which numbers lie.
 - [Profiling PyTorch with torch.profiler](/blog/machine-learning/performance-engineering/profiling-pytorch-with-torch-profiler) — once your timer is honest, the profiler explains *where* the time goes.

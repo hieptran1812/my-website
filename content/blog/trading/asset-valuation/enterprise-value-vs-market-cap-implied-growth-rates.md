@@ -635,7 +635,7 @@ One of the most lever-pulling inputs in any implied growth calculation is the te
 
 Finally, for the building block of where market cap comes from and what share counts to use (diluted vs basic, the role of options and RSUs in inflating share count), see [Market Capitalization: What It Means and How It Works](/blog/trading/asset-valuation/market-capitalization-what-it-means-how-it-works).
 
-The discount rate used in any reverse DCF calculation — the WACC — is itself a substantial topic. For the full derivation of WACC components (cost of equity via CAPM, cost of debt, capital structure weights), the [WACC explainer in the equity-research series](/blog/trading/equity-research/wacc-weighted-average-cost-capital) covers this from zero and is required reading before fine-tuning any implied growth calculation.
+The discount rate used in any reverse DCF calculation — the WACC — is itself a substantial topic. For the full derivation of WACC components (cost of equity via CAPM, cost of debt, capital structure weights), the [WACC explainer in the equity-research series](/blog/trading?subcategory=equity-research) covers this from zero and is required reading before fine-tuning any implied growth calculation.
 
 ---
 

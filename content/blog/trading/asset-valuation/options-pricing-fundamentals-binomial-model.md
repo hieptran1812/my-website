@@ -812,11 +812,11 @@ This post builds the foundation for understanding contingent-claim valuation as 
 
 ### Trading and strategy layer
 
-The mechanics of calls, puts, and strategies built from them — spreads, straddles, condors — are covered in [Options Trading Basics: Calls, Puts, and Core Strategies](/blog/trading/options-volatility/options-trading-basics-calls-puts-strategies). The full Black-Scholes derivation and the Greeks live in the [Black-Scholes Model](/blog/trading/options-volatility/black-scholes-model-options-pricing).
+The mechanics of calls, puts, and strategies built from them — spreads, straddles, condors — are covered in [Options Trading Basics: Calls, Puts, and Core Strategies](/blog/trading?subcategory=options-volatility). The full Black-Scholes derivation and the Greeks live in the [Black-Scholes Model](/blog/trading/quantitative-finance/black-scholes).
 
 ### Mathematical foundations
 
-The expected value and probability tools underlying risk-neutral pricing are developed from scratch in [Expected Value and Probability Distributions](/blog/trading/math-for-quants/expected-value-probability-distributions). Itô's lemma — the stochastic calculus tool that takes the binomial limit to continuous time — appears in the quantitative finance track.
+The expected value and probability tools underlying risk-neutral pricing are developed from scratch in [Expected Value and Probability Distributions](/blog/trading?subcategory=math-for-quants). Itô's lemma — the stochastic calculus tool that takes the binomial limit to continuous time — appears in the quantitative finance track.
 
 ---
 

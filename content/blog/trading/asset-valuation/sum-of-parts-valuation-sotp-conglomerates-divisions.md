@@ -503,9 +503,9 @@ The SOTP method sits at the intersection of three core valuation disciplines. Bu
 
 - **[Comparable Company Analysis and Precedent Transactions](/blog/trading/asset-valuation/comparable-company-analysis-precedent-transactions-comps)** — The full comps methodology: how to screen the peer universe, compute multiples, handle outliers, and build the quartile range that feeds your SOTP multiple selection.
 
-- **[SOTP Valuation in Equity Research Practice](/blog/trading/equity-research/sum-of-parts-valuation-sotp)** — Equity research perspective on how analysts format and present SOTP models in initiation reports, target price setting, and recommendation letters. Practical templates for the sell-side deliverable format.
+- **[SOTP Valuation in Equity Research Practice](/blog/trading/asset-valuation/sum-of-parts-valuation-sotp-conglomerates-divisions)** — Equity research perspective on how analysts format and present SOTP models in initiation reports, target price setting, and recommendation letters. Practical templates for the sell-side deliverable format.
 
-- **[WACC: Weighted Average Cost of Capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital)** — The discount rate that implicitly underpins every EV multiple. When you switch from SOTP-via-multiples to SOTP-via-segment-DCF, WACC is the analytical input you are solving for.
+- **[WACC: Weighted Average Cost of Capital](/blog/trading?subcategory=equity-research)** — The discount rate that implicitly underpins every EV multiple. When you switch from SOTP-via-multiples to SOTP-via-segment-DCF, WACC is the analytical input you are solving for.
 
 ---
 
@@ -534,7 +534,7 @@ Most SOTP models apply a comparable company multiple to each segment's EBITDA. T
 **How to run a segment-level DCF:**
 Treat each segment as a standalone company. Project the segment's unlevered free cash flow (EBIT × (1 − tax rate) + D&A − capex − change in working capital) for five to ten years. Compute a segment-specific WACC using the sector beta from Damodaran's data (or from the comparable pure-play company set, relevered to the appropriate capital structure). Discount the cash flows and add a terminal value. The result is the segment enterprise value — exactly what goes into the SOTP sum.
 
-The discipline is the same as a full-company DCF; you just run it once per segment instead of once for the consolidated entity. See the WACC mechanics at [Weighted Average Cost of Capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital).
+The discipline is the same as a full-company DCF; you just run it once per segment instead of once for the consolidated entity. See the WACC mechanics at [Weighted Average Cost of Capital](/blog/trading?subcategory=equity-research).
 
 **Blending the two approaches:** Many sell-side analysts use DCF for segments where they have high conviction in the forecast (e.g., a regulated utility with known rate cases) and multiples for segments with shorter forecast visibility. This hybrid approach is entirely defensible and often more intellectually honest than pretending you have equal conviction across all divisions.
 

@@ -216,7 +216,7 @@ The macro footprints were enormous. The **dollar fell about 10.7% in the first h
 
 ![Dual-axis chart of the US Dollar Index falling while gold rises through 2025 as a market verdict on policy credibility](/imgs/blogs/who-actually-sets-policy-fed-treasury-and-congress-8.png)
 
-The chart is the thesis in two lines. The dollar (blue) fell hard through the first half of 2025; gold (amber) ran the other way. When markets doubt the institutions — when a tariff might be illegal, when the Fed might be pressured — they sell the *currency* of those institutions and buy the asset that no institution can print. The lever was the Executive's; the *check* was the courts; and the channel was the currency and the monetary hedge. We connect gold's behavior to policy in detail in the [gold](/blog/trading/gold) track; here it's the cleanest credibility barometer there is.
+The chart is the thesis in two lines. The dollar (blue) fell hard through the first half of 2025; gold (amber) ran the other way. When markets doubt the institutions — when a tariff might be illegal, when the Fed might be pressured — they sell the *currency* of those institutions and buy the asset that no institution can print. The lever was the Executive's; the *check* was the courts; and the channel was the currency and the monetary hedge. We connect gold's behavior to policy in detail in the [gold](/blog/trading?subcategory=gold) track; here it's the cleanest credibility barometer there is.
 
 ### Case 3 — Fed independence under pressure: Volcker (1979-82) and 2018-19
 

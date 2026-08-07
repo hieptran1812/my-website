@@ -407,6 +407,6 @@ The right answer depends entirely on which side of the "do I control pretraining
 - [DeepSeek-V3 training recipe: FP8, MTP, and loss-free balancing](/blog/machine-learning/large-language-model/deepseek-v3-fp8-mtp-loss-free-balancing) — the MoE + FP8 + MTP foundation both NSA and DSA sit on.
 - The MLA deep-dive (Multi-head Latent Attention) — the compressed-KV attention that DSA is layered over and that makes its token-level selection affordable.
 - [KV cache: a complete guide](/blog/machine-learning/large-language-model/kv-cache) and [KV cache optimization and management](/blog/machine-learning/large-language-model/kv-cache-optimization-and-management) — the memory mechanics that sparse attention is ultimately optimizing.
-- [DeepSeek-V3.2 paper reading](/blog/paper-reading/large-language-model/deepseek-v3-2) — a focused walk-through of the V3.2 report itself, complementary to this technique-contrast angle.
+- [DeepSeek-V3.2 paper reading](/blog/paper-reading?subcategory=large-language-model) — a focused walk-through of the V3.2 report itself, complementary to this technique-contrast angle.
 - Native Sparse Attention, arXiv 2502.11089 (February 2025) — the NSA paper, including the Triton kernel and the 64K speedup measurements.
 - DeepSeek-V3.2, arXiv 2512.02556 (December 2025) — the DSA paper, including the lightning indexer and the two-stage continued-training recipe.

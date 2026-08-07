@@ -564,7 +564,7 @@ The \$3 stock move was the dominant driver, but the implied vol compression cost
 
 ### Vega hedging across the vol surface
 
-A sophisticated options portfolio will be exposed to changes in the *shape* of the implied volatility surface — not just the level. A bank's options desk might be long Vega at the 3-month maturity but short Vega at 6 months. To hedge this, they trade options at different maturities. Managing Vega across the surface requires understanding not just BSM but the dynamics of the vol surface — topics covered in depth in the [options-volatility series](/blog/trading/options-volatility/black-scholes-model-options-pricing).
+A sophisticated options portfolio will be exposed to changes in the *shape* of the implied volatility surface — not just the level. A bank's options desk might be long Vega at the 3-month maturity but short Vega at 6 months. To hedge this, they trade options at different maturities. Managing Vega across the surface requires understanding not just BSM but the dynamics of the vol surface — topics covered in depth in the [options-volatility series](/blog/trading?subcategory=options-volatility).
 
 ### Practical delta-hedging example: a market maker's day
 
@@ -787,7 +787,7 @@ Every one of these models reduces to BSM in limiting cases and is quoted in BSM-
 - [Real Options Valuation: Flexibility and Strategic Investments](/blog/trading/asset-valuation/real-options-valuation-flexibility-strategic-investments) — applying BSM's no-arbitrage machinery to corporate investment decisions
 
 **Options and volatility:**
-- [Black-Scholes Model: Options Pricing (options-volatility series)](/blog/trading/options-volatility/black-scholes-model-options-pricing) — the companion post in our practitioner options series, covering the vol surface, stochastic vol models, and advanced Greeks management in depth
+- [Black-Scholes Model: Options Pricing (options-volatility series)](/blog/trading?subcategory=options-volatility) — the companion post in our practitioner options series, covering the vol surface, stochastic vol models, and advanced Greeks management in depth
 
 **Key primary sources:**
 - Black, F. and Scholes, M. (1973). "The Pricing of Options and Corporate Liabilities." *Journal of Political Economy*, 81(3), 637–654. The original paper.

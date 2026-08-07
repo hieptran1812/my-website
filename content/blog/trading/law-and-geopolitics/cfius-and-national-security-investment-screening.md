@@ -345,4 +345,4 @@ The meta-lesson ties back to the spine of this whole series: a rule changes the 
 - [Supply-chain geopolitics: reshoring, friendshoring, and critical minerals](/blog/trading/law-and-geopolitics/supply-chain-geopolitics-reshoring-friendshoring-and-critical-minerals) — where national-security logic reshapes whole sectors.
 - [How law moves markets: the transmission chain](/blog/trading/law-and-geopolitics/how-law-moves-markets-the-transmission-chain) — the spine: rule → policy → flows → price → the trade.
 - [The law, policy, and geopolitics playbook](/blog/trading/law-and-geopolitics/the-law-policy-and-geopolitics-playbook) — the capstone synthesis that pulls every veto point together.
-- For the fund-level view of deal-risk and event positioning, see the [hedge-funds](/blog/trading/hedge-funds) and [cross-asset](/blog/trading/cross-asset) series.
+- For the fund-level view of deal-risk and event positioning, see the [hedge-funds](/blog/trading?subcategory=hedge-funds) and [cross-asset](/blog/trading?subcategory=cross-asset) series.

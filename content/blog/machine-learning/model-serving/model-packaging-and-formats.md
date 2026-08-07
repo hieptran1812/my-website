@@ -1229,6 +1229,6 @@ Every format choice should be driven by measured data, not speculation. The reco
 - [HuggingFace Optimum — ONNX export for LLMs](https://huggingface.co/docs/optimum/exporters/onnx/overview) — HuggingFace, 2024. The correct toolchain for exporting transformer models to ONNX with KV cache.
 - [vLLM: Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180) — Kwon et al., 2023. The PagedAttention paper; explains why vLLM's safetensors loading is architecturally inseparable from its memory manager.
 - [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — series intro; the SLO triangle and the serving vs training distinction.
-- [The model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook) — series capstone; full decision tree from model to production.
+- [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — series capstone; full decision tree from model to production.
 - [Model serving SLAs and metrics](/blog/machine-learning/model-serving/model-serving-slas-and-metrics) — how to measure the load-time, TPOT, and throughput gains quantified here.
 - [Quantization for LLM serving](/blog/machine-learning/model-serving/quantization-for-llm-serving) — Track C6; GPTQ, AWQ, FP8, and SmoothQuant in depth for LLMs.

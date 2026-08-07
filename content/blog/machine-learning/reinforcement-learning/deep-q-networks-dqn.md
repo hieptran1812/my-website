@@ -32,11 +32,11 @@ By the end of this post you will understand the mathematical reason Q-learning c
 
 ![DQN architecture showing pixel input flowing through three convolutional layers into a fully-connected layer that outputs Q-values for all actions simultaneously](/imgs/blogs/deep-q-networks-dqn-1.png)
 
-Before we dive in, a note on prerequisites. DQN builds on Q-learning, which is a temporal-difference (TD) method for estimating the optimal state-action value function $Q^*(s, a)$. If you are not familiar with the Markov Decision Process (MDP) formalism, the Bellman equation, or what a Q-function represents, spend 20 minutes with the [Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) post first — it sets up the vocabulary and conceptual framework that every post in this series assumes.
+Before we dive in, a note on prerequisites. DQN builds on Q-learning, which is a temporal-difference (TD) method for estimating the optimal state-action value function $Q^*(s, a)$. If you are not familiar with the Markov Decision Process (MDP) formalism, the Bellman equation, or what a Q-function represents, spend 20 minutes with the [Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning) post first — it sets up the vocabulary and conceptual framework that every post in this series assumes.
 
 The central problem DQN solves can be stated simply: how do you apply Q-learning — which provably converges in the tabular case — to environments with high-dimensional continuous state spaces like raw pixel frames? The tabular case breaks immediately because you cannot maintain a separate Q-value for each pixel configuration (the state space of an 84×84 grayscale image has $256^{7056}$ distinct states — more atoms than in the observable universe). You need a function approximator. And function approximation breaks Q-learning in ways that took the field years to understand and fix.
 
-This post is part of the [Reinforcement Learning: From Rewards to Real Systems](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) series. If you want the full landscape of RL before diving in here, start there. If you want to see where DQN sits in the value-based family and how it relates to policy gradient methods, the unified map is your entry point.
+This post is part of the [Reinforcement Learning: From Rewards to Real Systems](/blog/machine-learning?subcategory=reinforcement-learning) series. If you want the full landscape of RL before diving in here, start there. If you want to see where DQN sits in the value-based family and how it relates to policy gradient methods, the unified map is your entry point.
 
 ## The Problem: Why Q-Learning and Neural Networks Don't Mix Naively
 
@@ -1087,6 +1087,6 @@ Collecting these from systematic hyperparameter sensitivity analysis across mult
 - Achiam et al., "Towards Characterizing Divergence in Deep Q-Learning," arXiv 2019. A careful empirical analysis of when and why DQN diverges, beyond the original paper's empirical stability claims.
 
 Within this series:
-- [Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) — where DQN sits in the broader RL taxonomy.
+- [Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning) — where DQN sits in the broader RL taxonomy.
 - [The Reinforcement Learning Playbook](/blog/machine-learning/reinforcement-learning/the-reinforcement-learning-playbook) — the capstone distilling every series lesson into a decision guide.
 - For debugging training instabilities that DQN is prone to, see the [Debugging AI Training series](/blog/machine-learning/debugging-training/the-training-debugging-playbook) for systematic diagnosis playbooks.

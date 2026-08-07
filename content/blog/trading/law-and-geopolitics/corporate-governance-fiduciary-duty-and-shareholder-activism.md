@@ -268,7 +268,7 @@ A subtle version of the same pattern is the **controlled-company squeeze-out**, 
 
 ### The Vietnam parallel: state control and the equitization discount
 
-The same control-versus-value arithmetic shows up far from Delaware. In Vietnam, a large share of listed companies are partly **state-owned enterprises** in the middle of **equitization** — the gradual sale of state stakes to the public. A company where the state retains a controlling block carries its own governance discount: minority shareholders cannot force a strategy change, capital allocation answers to policy as much as to returns, and the free float is thin. The *catalyst* that lifts that discount is a **state divestment** — the announcement that the government will sell down its stake, which both adds tradable supply and removes the control overhang. It is the emerging-market cousin of the founder-controlled re-rating, governed by Vietnamese law and the State Securities Commission rather than the Delaware Chancery, but the pricing logic is identical: read who controls the firm and on what terms, and you can size the value the control structure traps. (We take up the Vietnamese machinery — the SSC, foreign-ownership limits, and the equitization program — in the series' [Vietnam stocks track](/blog/trading/vietnam-stocks).)
+The same control-versus-value arithmetic shows up far from Delaware. In Vietnam, a large share of listed companies are partly **state-owned enterprises** in the middle of **equitization** — the gradual sale of state stakes to the public. A company where the state retains a controlling block carries its own governance discount: minority shareholders cannot force a strategy change, capital allocation answers to policy as much as to returns, and the free float is thin. The *catalyst* that lifts that discount is a **state divestment** — the announcement that the government will sell down its stake, which both adds tradable supply and removes the control overhang. It is the emerging-market cousin of the founder-controlled re-rating, governed by Vietnamese law and the State Securities Commission rather than the Delaware Chancery, but the pricing logic is identical: read who controls the firm and on what terms, and you can size the value the control structure traps. (We take up the Vietnamese machinery — the SSC, foreign-ownership limits, and the equitization program — in the series' [Vietnam stocks track](/blog/trading?subcategory=vietnam-stocks).)
 
 ## How to trade it: the governance playbook
 
@@ -276,7 +276,7 @@ Everything above resolves into a repeatable process: find value trapped by a con
 
 ### Step 1 — Screen for the governance discount plus a catalyst
 
-Start with the two ingredients of a value trap: a *discount* and a *catalyst*. Screen for companies trading cheap to their sector or to a sum-of-the-parts estimate — low EV/EBITDA versus pure-play peers, a conglomerate whose segments would re-rate apart, a balance sheet bloated with idle cash. Then look for a **catalyst** that could release it: an activist already on the register (read the 13D filings), a founder near retirement, a sunset clause approaching, a pending de-staggering vote, or pressure from index inclusion rules. A discount with no catalyst is a value trap that stays a trap; a discount *with* a credible catalyst is the setup. Cross-reference the valuation work from the [equity research series](/blog/trading/equity-research) — the governance lens tells you *why* the cheap stock is cheap and what would fix it.
+Start with the two ingredients of a value trap: a *discount* and a *catalyst*. Screen for companies trading cheap to their sector or to a sum-of-the-parts estimate — low EV/EBITDA versus pure-play peers, a conglomerate whose segments would re-rate apart, a balance sheet bloated with idle cash. Then look for a **catalyst** that could release it: an activist already on the register (read the 13D filings), a founder near retirement, a sunset clause approaching, a pending de-staggering vote, or pressure from index inclusion rules. A discount with no catalyst is a value trap that stays a trap; a discount *with* a credible catalyst is the setup. Cross-reference the valuation work from the [equity research series](/blog/trading?subcategory=equity-research) — the governance lens tells you *why* the cheap stock is cheap and what would fix it.
 
 ### Step 2 — Value the unlock
 
@@ -307,7 +307,7 @@ How you express the view depends on the catalyst's certainty:
 
 - **Pre-catalyst accumulation**: if you spot the discount before the activist, buy the equity and wait — but size for the possibility the catalyst never comes, because an entrenched board can outlast you.
 - **Riding a 13D**: buy after a credible activist files, accepting you have given up the announcement pop in exchange for confirmation that a campaign is live.
-- **Event-driven**: once a sale process or proxy fight is underway, the trade narrows toward merger-arb mechanics — the spread becomes a bet on the *probability of completion* (see the [hedge-funds series](/blog/trading/hedge-funds) on event-driven and activist strategies).
+- **Event-driven**: once a sale process or proxy fight is underway, the trade narrows toward merger-arb mechanics — the spread becomes a bet on the *probability of completion* (see the [hedge-funds series](/blog/trading?subcategory=hedge-funds) on event-driven and activist strategies).
 
 Size to the *feasibility-adjusted* unlock, not the headline unlock. A \$25-per-share trapped value with a 30% chance of release is worth roughly \$7.50 of expected value — position to that, not to the \$25.
 
@@ -333,7 +333,7 @@ Within this series:
 
 Cross-links out:
 
-- [The equity research playbook](/blog/trading/equity-research) — the valuation toolkit (sum-of-the-parts, multiples, DCF) you use to size a governance unlock.
-- [The hedge fund founder's playbook](/blog/trading/hedge-funds) — how event-driven and activist funds actually run these campaigns and size the risk.
+- [The equity research playbook](/blog/trading?subcategory=equity-research) — the valuation toolkit (sum-of-the-parts, multiples, DCF) you use to size a governance unlock.
+- [The hedge fund founder's playbook](/blog/trading?subcategory=hedge-funds) — how event-driven and activist funds actually run these campaigns and size the risk.
 - [The 2017 TCJA and the repatriation trade](/blog/trading/law-and-geopolitics/the-2017-tcja-and-the-repatriation-trade) — how a tax law unleashed the record buyback wave that is the lever activists push.
 - [How the Fed sets interest rates](/blog/trading/finance/how-the-fed-sets-interest-rates) — the cost-of-capital channel that turns activism and takeovers on and off with the rate cycle.

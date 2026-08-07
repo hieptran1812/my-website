@@ -1323,7 +1323,7 @@ groups:
           summary: "Abort rate {{ $value | humanizePercentage }} — check for client disconnect storms"
 ```
 
-A high abort rate (>5%) indicates clients are disconnecting before generation completes — a signal that either TTFT is too high (clients gave up waiting) or the application has a client-side bug in disconnect handling. High TPOT usually indicates GPU memory pressure from too many concurrent KV caches — the signal to scale out or reduce `max_model_len`. For a complete observability setup, see [observability for model servers](/blog/machine-learning/model-serving/the-model-serving-playbook).
+A high abort rate (>5%) indicates clients are disconnecting before generation completes — a signal that either TTFT is too high (clients gave up waiting) or the application has a client-side bug in disconnect handling. High TPOT usually indicates GPU memory pressure from too many concurrent KV caches — the signal to scale out or reduce `max_model_len`. For a complete observability setup, see [observability for model servers](/blog/machine-learning/model-serving/what-is-model-serving).
 
 ### 11.2 Streaming and the SLO triangle
 
@@ -1731,4 +1731,4 @@ To close out this section, here are the five most common streaming implementatio
 - **Series: [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving)** — the foundation: latency/throughput/cost SLO triangle.
 - **Series: [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive)** — chunked prefill, prefix caching, speculative decoding: the engine that drives the streaming generator.
 - **Series: [Text Generation Inference deep dive](/blog/machine-learning/model-serving/text-generation-inference-deep-dive)** — TGI's token streaming implementation and Flash Attention integration.
-- **Series: [The model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook)** — capstone: complete decision tree from notebook to production.
+- **Series: [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving)** — capstone: complete decision tree from notebook to production.

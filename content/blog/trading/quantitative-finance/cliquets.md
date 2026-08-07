@@ -33,9 +33,9 @@ The diagram above is the mental model. A cliquet is a series of forward-start op
 
 This article is the deep dive on cliquets for a senior quant or staff-level engineer. It covers the basic payoff, local versus global caps and floors, the Greek profile (short forward vol, long volga, delta-light), the 2008 cliquet collapse and its enduring consequences, pricing under stochastic local volatility, calibration to forward smile, hedging via forward-start straddles plus volga hedges, the major variants (navigator, mountain, max, min, lookback), production architecture, lifecycle management, and a long catalog of named failure modes.
 
-The companion articles are [Exotic Derivatives](/blog/trading/quantitative-finance/exotics/exotic-derivatives) for the broader family and [Autocallables](/blog/trading/quantitative-finance/exotics/autocallables) for the related mass-distribution structure.
+The companion articles are [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives) for the broader family and [Autocallables](/blog/trading/quantitative-finance/autocallables) for the related mass-distribution structure.
 
-For foundational concepts: [Volatility Surface](/blog/trading/quantitative-finance/derivatives/volatility-surface) for the surface engineering cliquets sit on; [Black-Scholes](/blog/trading/quantitative-finance/derivatives/black-scholes) for the closed-form options framework; [Derivatives Pricing](/blog/trading/quantitative-finance/derivatives/derivatives-pricing) for replication and risk-neutral measures.
+For foundational concepts: [Volatility Surface](/blog/trading/quantitative-finance/volatility-surface) for the surface engineering cliquets sit on; [Black-Scholes](/blog/trading/quantitative-finance/black-scholes) for the closed-form options framework; [Derivatives Pricing](/blog/trading/quantitative-finance/derivatives-pricing) for replication and risk-neutral measures.
 
 ## 1. Why cliquets exist
 
@@ -248,7 +248,7 @@ The regulatory framework consolidated through MIFID II in Europe and similar fra
 
 ## 6. Pricing under SLV
 
-Production cliquet pricing requires stochastic local volatility for the reasons discussed in §1: forward-smile preservation. We covered the SLV construction in [the volatility surface post](/blog/trading/quantitative-finance/derivatives/volatility-surface#8-1-the-leverage-function-in-slv); here we focus on the application to cliquets.
+Production cliquet pricing requires stochastic local volatility for the reasons discussed in §1: forward-smile preservation. We covered the SLV construction in [the volatility surface post](/blog/trading/quantitative-finance/volatility-surface); here we focus on the application to cliquets.
 
 ![Pricing under SLV: why local vol alone is insufficient](/imgs/blogs/cliquets-6.png)
 
@@ -862,7 +862,7 @@ Cliquets are the forward-vol-sensitive product at the heart of institutional str
 
 A senior cliquet quant operates fluently across SLV calibration, forward-start hedging, vol-of-vol risk management, and lifecycle operations. The discipline rewards depth and respect for the institutional memory of past failures.
 
-This article concludes the 11-post quantitative-finance series. The companions — [Derivatives Pricing](/blog/trading/quantitative-finance/derivatives/derivatives-pricing), [Options Theory](/blog/trading/quantitative-finance/derivatives/options-theory), [Black-Scholes](/blog/trading/quantitative-finance/derivatives/black-scholes), [Volatility Surface](/blog/trading/quantitative-finance/derivatives/volatility-surface), [Bond Pricing](/blog/trading/quantitative-finance/fixed-income/bond-pricing), [Yield Curve Modeling](/blog/trading/quantitative-finance/fixed-income/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/rates-models/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotics/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/exotics/autocallables) — together cover the foundational building blocks of modern quantitative finance.
+This article concludes the 11-post quantitative-finance series. The companions — [Derivatives Pricing](/blog/trading/quantitative-finance/derivatives-pricing), [Options Theory](/blog/trading/quantitative-finance/options-theory), [Black-Scholes](/blog/trading/quantitative-finance/black-scholes), [Volatility Surface](/blog/trading/quantitative-finance/volatility-surface), [Bond Pricing](/blog/trading/quantitative-finance/bond-pricing), [Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables) — together cover the foundational building blocks of modern quantitative finance.
 
 For engineers entering the field: master one product family deeply (start with vanilla options or vanilla bonds), then expand. Each layer compounds; senior practitioners with 10+ years of accumulated expertise are rare and valuable. The field rewards depth, durability, and respect for institutional memory.
 

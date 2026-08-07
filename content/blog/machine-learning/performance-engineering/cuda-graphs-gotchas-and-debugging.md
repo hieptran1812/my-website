@@ -524,6 +524,6 @@ The last row is the one I want to leave you on. The single most common way CUDA 
 - [The CUDA caching allocator](/blog/machine-learning/performance-engineering/the-cuda-caching-allocator) — allocated versus reserved, fragmentation, and the `expandable_segments` interaction foreshadowed above.
 - [The kernel launch overhead problem](/blog/machine-learning/performance-engineering/the-kernel-launch-overhead-problem) — why host overhead is the bottleneck graphs remove, and how to measure it.
 - [Why your AI service wastes CPU and GPU](/blog/machine-learning/performance-engineering/why-your-ai-service-wastes-cpu-and-gpu) — the four wastes and the profile-to-fix loop this post specializes.
-- [The performance engineering playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the capstone decision tree tying every fix in the series together.
+- [The performance engineering playbook](/blog/machine-learning?subcategory=performance-engineering) — the capstone decision tree tying every fix in the series together.
 - [Kernel fusion, CUDA graphs, and torch.compile for serving](/blog/machine-learning/model-serving/kernel-fusion-cuda-graphs-torch-compile) — how graphs compose with compilation in a production serving stack.
 - PyTorch docs — the CUDA Graphs section of the CUDA semantics guide and the `torch.cuda.graph` / `make_graphed_callables` reference, plus the "Accelerating PyTorch with CUDA Graphs" engineering blog for the constraints and reported speedups cited above.

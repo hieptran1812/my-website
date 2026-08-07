@@ -31,9 +31,9 @@ A vanilla European option is a hockey stick at expiry. An exotic option is anyth
 
 The diagram above is the mental model. An exotic is built from the same primitives as vanillas — payoffs, underlyings, models — but glued together with conditions, accumulators, worst-of/best-of operators, or path-dependent triggers. The pricing engine combines a model (GBM, Heston, SLV, multi-asset), a numerical method (Monte Carlo, PDE, lattice, sometimes closed form), and a payoff specification expressed declaratively in a DSL. The engine produces price plus a richer set of Greeks than vanillas need: vega-bucket, correlation, vol-of-vol, vanna, forward-vol.
 
-This article is the deep dive on exotic derivatives for a senior quant or staff-level engineer. It covers the major exotic families (barriers, Asians, lookbacks, baskets, quanto/composite, variance), the pricing engines (Monte Carlo, PDE, lattice, hybrid), stochastic local volatility as the production model for equity exotics, the extended Greek family for exotics, calibration and model risk, hedging via static replication plus dynamic delta plus model reserves, production architecture, and a long catalog of named failure modes. The companion articles — [Autocallables](/blog/trading/quantitative-finance/exotics/autocallables) and [Cliquets](/blog/trading/quantitative-finance/exotics/cliquets) — go deeper on two specific high-volume exotic families that warrant their own treatment.
+This article is the deep dive on exotic derivatives for a senior quant or staff-level engineer. It covers the major exotic families (barriers, Asians, lookbacks, baskets, quanto/composite, variance), the pricing engines (Monte Carlo, PDE, lattice, hybrid), stochastic local volatility as the production model for equity exotics, the extended Greek family for exotics, calibration and model risk, hedging via static replication plus dynamic delta plus model reserves, production architecture, and a long catalog of named failure modes. The companion articles — [Autocallables](/blog/trading/quantitative-finance/autocallables) and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on two specific high-volume exotic families that warrant their own treatment.
 
-The companions for foundational concepts: [Derivatives Pricing](/blog/trading/quantitative-finance/derivatives/derivatives-pricing) for replication and risk-neutral measures, [Black-Scholes](/blog/trading/quantitative-finance/derivatives/black-scholes) for the formula, [Volatility Surface](/blog/trading/quantitative-finance/derivatives/volatility-surface) for the surface engineering that exotics build on, [Short-Rate Models](/blog/trading/quantitative-finance/rates-models/short-rate-models-vasicek-hull-white) for the rate dynamics that price callable structures.
+The companions for foundational concepts: [Derivatives Pricing](/blog/trading/quantitative-finance/derivatives-pricing) for replication and risk-neutral measures, [Black-Scholes](/blog/trading/quantitative-finance/black-scholes) for the formula, [Volatility Surface](/blog/trading/quantitative-finance/volatility-surface) for the surface engineering that exotics build on, [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white) for the rate dynamics that price callable structures.
 
 ## 1. What makes an option exotic
 
@@ -243,7 +243,7 @@ Three main types:
 
 **Linear basket.** Payoff $\max(B - K, 0)$ where $B = \sum_i w_i S_i$. The basket value is a weighted sum. Used for index-style products (basket of ten stocks), geographic baskets (multi-country index), thematic baskets (clean energy basket).
 
-**Worst-of.** Payoff $\max(\min_i S_i - K, 0)$. The client bets on the worst-performing underlying. Short correlation: when correlations rise, the worst is closer to the average and the option is less sensitive to individual stocks. Used in autocallables (we cover this in [the autocallables post](/blog/trading/quantitative-finance/exotics/autocallables)).
+**Worst-of.** Payoff $\max(\min_i S_i - K, 0)$. The client bets on the worst-performing underlying. Short correlation: when correlations rise, the worst is closer to the average and the option is less sensitive to individual stocks. Used in autocallables (we cover this in [the autocallables post](/blog/trading/quantitative-finance/autocallables)).
 
 **Best-of.** Payoff $\max(\max_i S_i - K, 0)$. Client bets on the best. Long correlation: rare in retail (because best-of is structurally pricier) but appears in some structured notes.
 
@@ -295,7 +295,7 @@ Pricing a worst-of-3-stocks autocallable requires:
 
 The product is sold to retail clients who like the high coupon (5-12% per year typical); the dealer takes the structuring spread (50-150 bp upfront) plus the volga / vega risks.
 
-We cover autocallables in detail in [their own post](/blog/trading/quantitative-finance/exotics/autocallables).
+We cover autocallables in detail in [their own post](/blog/trading/quantitative-finance/autocallables).
 
 ### 5.2 Implied correlation and dispersion trades
 
@@ -330,7 +330,7 @@ Numerical approaches:
 
 A subtlety: which volatility to use? FX vol from G10 surfaces; equity vol from index surfaces. The correlation $\rho_{S, FX}$ is typically estimated from history (3-month rolling); production systems use both implied correlation (from quanto market quotes if available) and historical as cross-checks.
 
-For long-dated cross-currency exotics, the cross-currency basis curve also matters (we covered this in [the yield curve modeling post](/blog/trading/quantitative-finance/fixed-income/yield-curve-modeling#9-multi-currency-basis-curves)). Pricing must use the basis-adjusted forward.
+For long-dated cross-currency exotics, the cross-currency basis curve also matters (we covered this in [the yield curve modeling post](/blog/trading/quantitative-finance/yield-curve-modeling)). Pricing must use the basis-adjusted forward.
 
 ## 7. Variance and volatility derivatives
 
@@ -344,7 +344,7 @@ $$
 K_{\text{var}}^2 = \frac{2}{T} \int_0^F \frac{P(K)}{K^2} dK + \frac{2}{T} \int_F^\infty \frac{C(K)}{K^2} dK.
 $$
 
-We covered this in [the volatility surface post](/blog/trading/quantitative-finance/derivatives/volatility-surface#10-1-the-vix-as-a-tradable-surface-aggregate). Variance swaps are model-free given the surface; the static replication is one of the most beautiful results in finance.
+We covered this in [the volatility surface post](/blog/trading/quantitative-finance/volatility-surface). Variance swaps are model-free given the surface; the static replication is one of the most beautiful results in finance.
 
 **Volatility swap.** Payoff: $N \cdot (\text{RV} - K_{\text{vol}})$. The convexity adjustment between vol and variance: $K_{\text{vol}} \approx \sqrt{K_{\text{var}}^2 - \text{vol-of-vol}^2 / 4}$. Volatility swaps are harder to replicate because of the square root; the convexity adjustment is a model-dependent quantity.
 
@@ -352,7 +352,7 @@ We covered this in [the volatility surface post](/blog/trading/quantitative-fina
 
 **VIX options and futures.** Listed derivatives on the VIX index. VIX options have their own implied vol surface (vol-of-vol); senior vol traders watch VVIX (vol of VIX) as the second-order surface.
 
-The variance risk premium (VRP) — the persistent excess of implied over realised — is the structural source of return for vol sellers. We covered the dynamics in [the volatility surface post's VRP section](/blog/trading/quantitative-finance/derivatives/volatility-surface#10-the-variance-risk-premium). Variance derivatives are the cleanest instruments for VRP harvest; they have linear payoff in variance vs the quadratic payoff of options.
+The variance risk premium (VRP) — the persistent excess of implied over realised — is the structural source of return for vol sellers. We covered the dynamics in [the volatility surface post's VRP section](/blog/trading/quantitative-finance/volatility-surface). Variance derivatives are the cleanest instruments for VRP harvest; they have linear payoff in variance vs the quadratic payoff of options.
 
 ### 7.1 The variance risk premium harvest
 
@@ -385,7 +385,7 @@ Pricing VIX options requires modelling VIX dynamics directly, not just SPX dynam
 
 ## 8. Stochastic local volatility
 
-For pricing equity exotics, stochastic local volatility (SLV) has become the production default. We covered the construction in [the volatility surface post](/blog/trading/quantitative-finance/derivatives/volatility-surface#8-1-the-leverage-function-in-slv); here we focus on the application to exotics.
+For pricing equity exotics, stochastic local volatility (SLV) has become the production default. We covered the construction in [the volatility surface post](/blog/trading/quantitative-finance/volatility-surface); here we focus on the application to exotics.
 
 ![Stochastic local volatility: the workhorse for exotic equity pricing](/imgs/blogs/exotic-derivatives-8.png)
 
@@ -406,7 +406,7 @@ Computational cost: SLV is 5-10× more expensive than pure local-vol, primarily 
 
 The mixing parameter (relative weight of stochastic vs local components) is calibrated to a benchmark exotic — typically a forward-start straddle or a cliquet quote. Different banks have different mixing conventions; the choice affects exotic pricing materially.
 
-For autocallables, cliquets, and most equity exotics post-2010, SLV is the production default. We'll see this in detail in [the autocallables post](/blog/trading/quantitative-finance/exotics/autocallables).
+For autocallables, cliquets, and most equity exotics post-2010, SLV is the production default. We'll see this in detail in [the autocallables post](/blog/trading/quantitative-finance/autocallables).
 
 ## 9. Greeks for exotics
 
@@ -591,9 +591,9 @@ A taxonomy of the major exotic families:
 
 **Variance / vol.** Variance swap, vol swap, VIX options. §7.
 
-**Cliquets.** Periodic strike resets with local / global floors. Covered in [the cliquets post](/blog/trading/quantitative-finance/exotics/cliquets).
+**Cliquets.** Periodic strike resets with local / global floors. Covered in [the cliquets post](/blog/trading/quantitative-finance/cliquets).
 
-**Autocallables.** Early-termination structured notes with worst-of triggers. Covered in [the autocallables post](/blog/trading/quantitative-finance/exotics/autocallables).
+**Autocallables.** Early-termination structured notes with worst-of triggers. Covered in [the autocallables post](/blog/trading/quantitative-finance/autocallables).
 
 **Hybrids.** Equity-rate, equity-credit, FX-rate combinations. Specialised pricing.
 
@@ -604,7 +604,7 @@ Each family is its own deep specialty. Senior structuring quants typically own o
 Hybrid products combine multiple asset classes in one payoff. Examples:
 
 - **Equity-linked notes (ELN)**: bond + equity option. The bond floor protects principal; the option provides upside.
-- **Convertible bonds**: bond + equity option (we covered in [Bond Pricing](/blog/trading/quantitative-finance/fixed-income/bond-pricing)).
+- **Convertible bonds**: bond + equity option (we covered in [Bond Pricing](/blog/trading/quantitative-finance/bond-pricing)).
 - **Inflation-linked equity notes**: equity + real-rate exposure.
 - **Equity-credit hybrids**: option whose payoff depends on both stock and CDS.
 - **FX-rate hybrids**: cross-currency swap + embedded FX optionality.
@@ -876,7 +876,7 @@ Several trends shape the next decade:
 
 **Cross-asset coherent SLV.** Joint dynamics across rates, credit, equity, FX in one model. Production deployment beginning at major banks.
 
-**Autocallable next-gen.** New autocall variants (delayed coupons, conditional triggers) with bespoke pricing. Specifics in [the autocallables post](/blog/trading/quantitative-finance/exotics/autocallables).
+**Autocallable next-gen.** New autocall variants (delayed coupons, conditional triggers) with bespoke pricing. Specifics in [the autocallables post](/blog/trading/quantitative-finance/autocallables).
 
 A senior exotic quant in 2026 will likely work on at least two of these frontiers.
 
@@ -935,7 +935,7 @@ Exotic derivatives are where vanilla pricing meets bespoke engineering. The taxo
 
 The math is well-understood for most exotic families; the operational discipline is what distinguishes strong desks from weak ones. Daily calibration, daily hedging, daily reserve review, daily reconciliation against external sources, daily attribution of P&L to model parameters — these are the routines that protect the firm.
 
-The remaining articles in this series — [Autocallables](/blog/trading/quantitative-finance/exotics/autocallables) and [Cliquets](/blog/trading/quantitative-finance/exotics/cliquets) — go deeper on two specific exotic families that warrant detailed treatment.
+The remaining articles in this series — [Autocallables](/blog/trading/quantitative-finance/autocallables) and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on two specific exotic families that warrant detailed treatment.
 
 Exotics are the high-margin but high-risk corner of derivatives trading. Doing them well — accurate pricing, effective hedging, conservative reserves, transparent audit — is the silent competence that powers structured-products desks at scale. The reward is intellectual depth, durable career value, and the satisfaction of building infrastructure for products that solve real client problems.
 

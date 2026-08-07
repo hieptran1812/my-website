@@ -426,7 +426,7 @@ The through-line: in all three, the headline dashboard metric (`nvidia-smi` util
 
 **Do not reach for `nsys` when** you already know the wall is one specific kernel and you need to know *why that kernel* is slow — that is `ncu`, and `nsys` will only frustrate you by showing the kernel without explaining it. Do not reach for it when the hot path is clearly Python-side business logic (JSON serialization, tokenization in pure Python, a slow feature transform) — `py-spy` gives you a flame graph of the Python stack far faster than reading a system timeline. Do not reach for it to compare two model architectures' operator costs — `torch.profiler`'s `key_averages()` table is the direct answer. And do not chase a p99 tail with `nsys` before you have confirmed the tail is a *stall* and not simply *load*: if p99 is bad because the service is at capacity, the fix is more capacity or better batching, not a timeline read.
 
-The one-line rule: **`nsys` is the map; `ncu`, `torch.profiler`, and `py-spy` are the microscopes.** Reach for the map when you do not know where you are, and for a microscope only once the map has pointed at a spot. The full symptom-to-tool routing is collected in the [capstone playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook).
+The one-line rule: **`nsys` is the map; `ncu`, `torch.profiler`, and `py-spy` are the microscopes.** Reach for the map when you do not know where you are, and for a microscope only once the map has pointed at a spot. The full symptom-to-tool routing is collected in the [capstone playbook](/blog/machine-learning?subcategory=performance-engineering).
 
 ## Key takeaways
 
@@ -450,4 +450,4 @@ The one-line rule: **`nsys` is the map; `ncu`, `torch.profiler`, and `py-spy` ar
 - [Profiling PyTorch with torch.profiler](/blog/machine-learning/performance-engineering/profiling-pytorch-with-torch-profiler) — the PyTorch-scoped profiler that is the first rung of the ladder.
 - [Nsight Compute kernel deep-dive](/blog/machine-learning/performance-engineering/nsight-compute-kernel-deep-dive) — the microscope for when `nsys` names one kernel as the wall.
 - [NVTX and semantic profiling traces](/blog/machine-learning/performance-engineering/nvtx-and-semantic-profiling-traces) — deeper NVTX: custom domains, CUDA-graph annotations, traces that survive compile.
-- [Why your AI service wastes CPU and GPU](/blog/machine-learning/performance-engineering/why-your-ai-service-wastes-cpu-and-gpu) and [the performance-engineering playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the series intro and the capstone decision tree.
+- [Why your AI service wastes CPU and GPU](/blog/machine-learning/performance-engineering/why-your-ai-service-wastes-cpu-and-gpu) and [the performance-engineering playbook](/blog/machine-learning?subcategory=performance-engineering) — the series intro and the capstone decision tree.

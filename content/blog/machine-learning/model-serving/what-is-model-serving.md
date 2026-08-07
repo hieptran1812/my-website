@@ -729,7 +729,7 @@ vllm:gpu_cache_usage_perc
 rate(vllm:request_success_total[1m])
 ```
 
-**Model versioning and rollout.** A production system can deploy a new model version alongside the current one, route a fraction of traffic to it (canary deployment), compare metrics between the versions, and roll forward or roll back without downtime. This is covered in detail in [G2: CI/CD for model deployments](/blog/machine-learning/model-serving/cicd-for-model-deployments).
+**Model versioning and rollout.** A production system can deploy a new model version alongside the current one, route a fraction of traffic to it (canary deployment), compare metrics between the versions, and roll forward or roll back without downtime. This is covered in detail in [G2: CI/CD for model deployments](/blog/machine-learning?subcategory=model-serving).
 
 **Autoscaling.** As traffic increases, the system should automatically add GPU replicas; as traffic decreases, it should scale down to avoid paying for idle GPUs. In Kubernetes, this uses the Horizontal Pod Autoscaler with custom metrics. A minimal autoscaling configuration:
 
@@ -1018,9 +1018,9 @@ What comes next, in rough dependency order:
 
 **[C2: Continuous batching and PagedAttention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention)** — Opens up the vLLM scheduler and PagedAttention block manager in detail. Explains the KV cache fragmentation problem and the virtual-memory solution. Shows how to tune the scheduler for different SLO profiles.
 
-**[D4: Autoscaling model servers](/blog/machine-learning/model-serving/autoscaling-model-servers)** — Covers HPA with custom metrics, KEDA ScaledObjects, scale-to-zero patterns, and the specific challenge of autoscaling LLM servers with long cold-start times.
+**[D4: Autoscaling model servers](/blog/machine-learning?subcategory=model-serving)** — Covers HPA with custom metrics, KEDA ScaledObjects, scale-to-zero patterns, and the specific challenge of autoscaling LLM servers with long cold-start times.
 
-By the time you reach the capstone [model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook), you will have a complete decision framework that maps any combination of model size, traffic profile, latency budget, and cost constraint to a specific production architecture. The concepts in this post are the foundation everything else builds on.
+By the time you reach the capstone [model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving), you will have a complete decision framework that maps any combination of model size, traffic profile, latency budget, and cost constraint to a specific production architecture. The concepts in this post are the foundation everything else builds on.
 
 
 
@@ -1066,4 +1066,4 @@ By the time you reach the capstone [model serving playbook](/blog/machine-learni
 
 - **NVIDIA Triton Inference Server documentation** — Model repository layout, dynamic batching configuration, ensemble pipelines, Prometheus metrics: [docs.nvidia.com/deeplearning/triton-inference-server](https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/)
 
-- **Within this series:** [A2: The model serving stack](/blog/machine-learning/model-serving/the-model-serving-stack) maps every component from packaging to infrastructure; [A4: Batching fundamentals](/blog/machine-learning/model-serving/batching-fundamentals-latency-throughput-tradeoff) derives the batching algorithms from first principles; [C2: Continuous batching and PagedAttention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention) covers vLLM internals in full detail; [A5: Model serving SLAs and metrics](/blog/machine-learning/model-serving/model-serving-slas-and-metrics) explains how to instrument and alert on TTFT, TPOT, and queue depth; [the model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook) is the capstone reference synthesizing the complete decision framework.
+- **Within this series:** [A2: The model serving stack](/blog/machine-learning/model-serving/the-model-serving-stack) maps every component from packaging to infrastructure; [A4: Batching fundamentals](/blog/machine-learning/model-serving/batching-fundamentals-latency-throughput-tradeoff) derives the batching algorithms from first principles; [C2: Continuous batching and PagedAttention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention) covers vLLM internals in full detail; [A5: Model serving SLAs and metrics](/blog/machine-learning/model-serving/model-serving-slas-and-metrics) explains how to instrument and alert on TTFT, TPOT, and queue depth; [the model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) is the capstone reference synthesizing the complete decision framework.

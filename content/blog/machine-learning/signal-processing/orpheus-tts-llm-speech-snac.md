@@ -35,7 +35,7 @@ If you come from a Tacotron/FastSpeech/VITS background, almost every instinct yo
 | TTS models are small (5–30M params) | Bigger is wasteful for speech | A 3B-parameter LLM backbone is the *point* — it brings language understanding |
 | Latency is dominated by the vocoder | Optimize the GAN | Latency is dominated by LLM decode throughput; the codec is ~5 ms |
 
-The single most important row is the second one. **The entire design hinges on the idea that you can represent a waveform as a short sequence of integers that a language model can predict with a softmax.** That representation is the neural audio codec, and Orpheus uses [SNAC](https://github.com/hubertsiuzdak/snac). Before we can talk about the transformer at all, we have to talk about how sound becomes tokens — and that is where most of the subtlety lives. If you want the broader landscape of how speech becomes discrete tokens, our [speech tokenizers deep dive](/blog/machine-learning/signal-processing/speech-tokenizers-encodec-soundstream-mimi) covers EnCodec, SoundStream, and Mimi; SNAC is a close cousin with one extra trick.
+The single most important row is the second one. **The entire design hinges on the idea that you can represent a waveform as a short sequence of integers that a language model can predict with a softmax.** That representation is the neural audio codec, and Orpheus uses [SNAC](https://github.com/hubertsiuzdak/snac). Before we can talk about the transformer at all, we have to talk about how sound becomes tokens — and that is where most of the subtlety lives. If you want the broader landscape of how speech becomes discrete tokens, our [speech tokenizers deep dive](/blog/machine-learning?subcategory=signal-processing) covers EnCodec, SoundStream, and Mimi; SNAC is a close cousin with one extra trick.
 
 > A neural codec is to an audio LLM what BPE is to a text LLM: it is the unglamorous component that decides what the model can possibly say.
 
@@ -211,7 +211,7 @@ Orpheus is released as a *pair* of model types, and understanding the split is e
 - A **pretrained** base model, trained on **100k+ hours of English speech** plus text data, with a sequence length of **8192 tokens**. This model is a general audio continuation engine — excellent for zero-shot cloning, not tied to any single speaker.
 - A **finetuned production** model, optimized for everyday TTS with a stable set of named voices (`tara`, `leah`, `jess`, `leo`, `dan`, `mia`, `zac`, `zoe`) and reliable emotion-tag behavior.
 
-There is also a multilingual family of pretrained/finetuned pairs covering several languages, and a roadmap of smaller backbones (1B, 400M, 150M) for edge deployment — the same idea our [low-latency edge TTS post](/blog/machine-learning/signal-processing/low-latency-tts-edge-devices) is about.
+There is also a multilingual family of pretrained/finetuned pairs covering several languages, and a roadmap of smaller backbones (1B, 400M, 150M) for edge deployment — the same idea our [low-latency edge TTS post](/blog/machine-learning?subcategory=signal-processing) is about.
 
 ![Pretrain vs finetune sequence format](/imgs/blogs/orpheus-tts-llm-speech-snac-6.png)
 
@@ -320,7 +320,7 @@ Walk it left to right:
 4. **First SNAC decode** (~5 ms): the convolutional decoder is tiny and fast. The codec is essentially never your bottleneck.
 5. **First PCM byte to client** (~100–200 ms total): plus whatever your transport adds. Sending the WAV header *before* the first audio (so the client can start its decoder immediately) is a cheap trick worth doing.
 
-The headline insight: **the codec is ~5 ms; everything else is the LLM and the window policy.** If you want lower latency, you tune prefill (input streaming), the first-window size, and your serving stack — not SNAC. This is the inverse of classical TTS, where the vocoder was often the long pole. Our general treatment of this trade lives in [Real-Time TTS: First-Audio-Byte Latency](/blog/machine-learning/signal-processing/real-time-tts-first-audio-byte-latency); Orpheus is a clean instance of those principles.
+The headline insight: **the codec is ~5 ms; everything else is the LLM and the window policy.** If you want lower latency, you tune prefill (input streaming), the first-window size, and your serving stack — not SNAC. This is the inverse of classical TTS, where the vocoder was often the long pole. Our general treatment of this trade lives in [Real-Time TTS: First-Audio-Byte Latency](/blog/machine-learning?subcategory=signal-processing); Orpheus is a clean instance of those principles.
 
 ### Second-order optimization: latency is bimodal under load
 
@@ -535,8 +535,8 @@ It helps to place Orpheus on the map of modern open TTS. The systems differ less
 | System | Backbone | Audio representation | Cloning | Streaming | Expressivity | Footprint |
 |---|---|---|---|---|---|---|
 | Orpheus | Llama-3B LLM | SNAC discrete tokens | Zero-shot, in-context | Native, ~100–200 ms | Inline emotion tags, strong prosody | Heavy (3B; fp8 fits 24 GB) |
-| [VITS / VITS2](/blog/machine-learning/signal-processing/vits-vits2-end-to-end-tts) | Conditional VAE + flow | Continuous latent | Limited (speaker id) | Possible, non-trivial | Decent, no tag control | Light (tens of M) |
-| [FastSpeech2](/blog/machine-learning/signal-processing/fastspeech2-vs-tacotron2) + vocoder | Non-autoregressive | Mel-spectrogram | Via speaker embedding | Fast, chunkable | Flat without extra conditioning | Very light |
+| [VITS / VITS2](/blog/machine-learning?subcategory=signal-processing) | Conditional VAE + flow | Continuous latent | Limited (speaker id) | Possible, non-trivial | Decent, no tag control | Light (tens of M) |
+| [FastSpeech2](/blog/machine-learning?subcategory=signal-processing) + vocoder | Non-autoregressive | Mel-spectrogram | Via speaker embedding | Fast, chunkable | Flat without extra conditioning | Very light |
 | XTTS-style | GPT-style LM | Discrete codec tokens | Zero-shot from clip | Yes | Good | Medium |
 | Bark-style | GPT-style LM | EnCodec tokens | Preset voices | Limited | Very expressive, less controllable | Medium-heavy |
 
@@ -587,7 +587,7 @@ Two failure modes hide from the standard metrics. First, emotion tags: WER does 
 
 ### Skip Orpheus when…
 
-- You need **sub-50 ms latency on a tiny CPU/edge device** — a 3B autoregressive model is heavy; a small non-autoregressive model like [FastSpeech2](/blog/machine-learning/signal-processing/fastspeech2-vs-tacotron2) or a compact [VITS](/blog/machine-learning/signal-processing/vits-vits2-end-to-end-tts) will win on raw footprint (though the promised 150M/400M Orpheus variants may change this).
+- You need **sub-50 ms latency on a tiny CPU/edge device** — a 3B autoregressive model is heavy; a small non-autoregressive model like [FastSpeech2](/blog/machine-learning?subcategory=signal-processing) or a compact [VITS](/blog/machine-learning?subcategory=signal-processing) will win on raw footprint (though the promised 150M/400M Orpheus variants may change this).
 - You need **deterministic, identical output** every run for a regulated or contractual reason — autoregressive sampling is inherently variable, and even greedy decoding is brittle for audio.
 - Your domain is **far outside the training distribution** (heavy code-switching, singing, non-speech audio) and you cannot finetune — the language-model prior that helps on normal speech does not transfer for free.
 - You are **GPU-constrained to the point** that you cannot fit even an fp8 3B model plus codec, and a 30M-parameter classical model would do.
@@ -599,7 +599,7 @@ The honest summary: Orpheus is the right tool when *expressiveness, cloning, and
 
 - [Orpheus-TTS repository](https://github.com/canopyai/Orpheus-TTS) — the source, model cards, and finetuning notebooks.
 - [SNAC: Multi-Scale Neural Audio Codec](https://github.com/hubertsiuzdak/snac) and the [SNAC paper](https://arxiv.org/abs/2410.14411) — the codec that makes the whole thing possible.
-- [Speech Tokenizers: EnCodec, SoundStream, Mimi](/blog/machine-learning/signal-processing/speech-tokenizers-encodec-soundstream-mimi) — the family SNAC belongs to.
-- [Real-Time TTS: First-Audio-Byte Latency](/blog/machine-learning/signal-processing/real-time-tts-first-audio-byte-latency) — the latency principles Orpheus instantiates.
-- [VITS and VITS2: End-to-End TTS](/blog/machine-learning/signal-processing/vits-vits2-end-to-end-tts) — the strong non-LLM baseline to compare against.
+- [Speech Tokenizers: EnCodec, SoundStream, Mimi](/blog/machine-learning?subcategory=signal-processing) — the family SNAC belongs to.
+- [Real-Time TTS: First-Audio-Byte Latency](/blog/machine-learning?subcategory=signal-processing) — the latency principles Orpheus instantiates.
+- [VITS and VITS2: End-to-End TTS](/blog/machine-learning?subcategory=signal-processing) — the strong non-LLM baseline to compare against.
 - [HiFi-GAN](/blog/machine-learning/signal-processing/hifi-gan) — the GAN-vocoder world Orpheus replaces with a frozen codec decoder.

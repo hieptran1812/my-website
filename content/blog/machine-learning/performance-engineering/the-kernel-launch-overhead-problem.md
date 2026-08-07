@@ -474,5 +474,5 @@ The launch-overhead diagnosis is cheap — one profiler table — but the fixes 
 - [CUDA graphs from first principles](/blog/machine-learning/performance-engineering/cuda-graphs-from-first-principles) — the next post: capture versus replay, and how a recorded graph eliminates per-launch cost.
 - [CUDA graphs in PyTorch](/blog/machine-learning/performance-engineering/cuda-graphs-in-pytorch) — wiring `torch.cuda.graph` and `make_graphed_callables` into a real forward pass.
 - [Kernel fusion, CUDA graphs, and torch.compile](/blog/machine-learning/model-serving/kernel-fusion-cuda-graphs-torch-compile) — the serving-side view of the same fixes, applied to LLM inference.
-- [The performance engineering playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the capstone decision tree: symptom to profiler to cause to fix.
+- [The performance engineering playbook](/blog/machine-learning?subcategory=performance-engineering) — the capstone decision tree: symptom to profiler to cause to fix.
 - PyTorch docs: the `torch.compile` tutorial and the `mode="reduce-overhead"` reference; the `torch.profiler` recipe; NVIDIA's CUDA C++ Programming Guide section on streams and the CUDA Graphs documentation.

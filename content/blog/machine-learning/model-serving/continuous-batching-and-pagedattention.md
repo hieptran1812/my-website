@@ -1281,4 +1281,4 @@ The relationship between parameters and the SLO triangle:
 - [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) — the next post in Track C: speculative decoding, multi-LoRA serving, and advanced chunked prefill tuning in vLLM.
 - [KV cache optimization](/blog/machine-learning/model-serving/kv-cache-optimization) — prefix caching eviction policies, multi-level KV cache, and memory pressure management.
 - [Batching fundamentals: latency-throughput tradeoff](/blog/machine-learning/model-serving/batching-fundamentals-latency-throughput-tradeoff) — the queuing theory and Little's Law foundation for understanding all batching strategies.
-- [The model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook) — the series capstone with the complete decision tree from model to production.
+- [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — the series capstone with the complete decision tree from model to production.

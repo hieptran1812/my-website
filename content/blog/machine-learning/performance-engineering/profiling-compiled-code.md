@@ -436,6 +436,6 @@ A few results from the primary sources, framed honestly and with the caveat that
 - [Compile plus CUDA graphs: reduce-overhead](/blog/machine-learning/performance-engineering/compile-plus-cuda-graphs-reduce-overhead) — how `mode="reduce-overhead"` composes Inductor with CUDA graphs, and the graph-replay node you see in the trace.
 - [Profiling PyTorch with torch.profiler](/blog/machine-learning/performance-engineering/profiling-pytorch-with-torch-profiler) — the schedule, `key_averages()`, and Chrome-trace export used throughout this post.
 - [Reading a Chrome trace](/blog/machine-learning/performance-engineering/reading-a-chrome-trace) — the timeline lanes and how to spot the compiled-region spans and launch collapse visually.
-- [The performance engineering playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the capstone decision tree tying every tool and fix together.
+- [The performance engineering playbook](/blog/machine-learning?subcategory=performance-engineering) — the capstone decision tree tying every tool and fix together.
 - [Kernel fusion, CUDA graphs, and torch.compile in serving](/blog/machine-learning/model-serving/kernel-fusion-cuda-graphs-torch-compile) — how these same techniques land inside a production serving stack.
 - PyTorch documentation: the `torch.compile` tutorial, the Inductor / TorchDynamo deep-dive docs, the `torch.profiler` recipe, and the CUDA Graphs integration notes — the primary sources for the APIs, flags, and reported speedups cited above.

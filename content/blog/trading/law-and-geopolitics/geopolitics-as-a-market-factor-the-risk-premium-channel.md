@@ -386,7 +386,7 @@ Full Kelly here is absurd (>100% of capital) because the edge looks large relati
 Sized exposure = min(0.125 × 1.54, 0.20) = min(0.19, 0.20) = 19% of capital
 ```
 
-On a \$3,000,000 book, that's a ~\$570,000 position in the fade. If it recovers (+7%), you make ~\$40,000; if you're wrong (−12%), you lose ~\$68,000 — survivable, and you live to apply the base rate again. Put plainly: the fade has a real, repeatable edge, but the edge is *small and the wrong-tail is fat*, so you harvest it with humble size and a hard cap, never with conviction-sized bets. (For the deeper position-sizing framework, see [hedge-fund risk and merger-arb sizing](/blog/trading/hedge-funds).)
+On a \$3,000,000 book, that's a ~\$570,000 position in the fade. If it recovers (+7%), you make ~\$40,000; if you're wrong (−12%), you lose ~\$68,000 — survivable, and you live to apply the base rate again. Put plainly: the fade has a real, repeatable edge, but the edge is *small and the wrong-tail is fat*, so you harvest it with humble size and a hard cap, never with conviction-sized bets. (For the deeper position-sizing framework, see [hedge-fund risk and merger-arb sizing](/blog/trading?subcategory=hedge-funds).)
 
 ### Step 5 — Know what invalidates the view
 

@@ -745,7 +745,7 @@ Finally, keep a failure corpus. Include the shortest prompt that caused OOM, the
 
 * [What inference engineering is](/blog/machine-learning/inference-engineering/what-inference-engineering-is) — the series frame from weights to product.
 * [The inference engineering playbook](/blog/machine-learning/inference-engineering/the-inference-engineering-playbook) — the later capstone comparison.
-* [Paged KV cache: implementing blocks and a block table](/blog/machine-learning/inference-engineering/paged-kv-cache-implementing-blocks-and-the-block-table) — the cache structure used by the budget.
+* [Paged KV cache: implementing blocks and a block table](/blog/machine-learning/inference-engineering/paged-kv-cache-implementing-blocks-and-a-block-table) — the cache structure used by the budget.
 * [The scheduler as a policy problem](/blog/machine-learning/inference-engineering/the-scheduler-as-a-policy-problem) — admission and goodput consequences.
 * [Grouped GEMM for MoE kernels](https://vllm.ai/blog/2025-05-13-moe-optimizations) — a vLLM contrast for expert execution and grouping.
 * [Qwen3-30B-A3B model card](https://huggingface.co/Qwen/Qwen3-30B-A3B) and [gpt-oss-20b model card](https://huggingface.co/openai/gpt-oss-20b) — the source of truth for the model facts used here.

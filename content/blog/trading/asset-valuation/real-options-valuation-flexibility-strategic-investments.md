@@ -52,7 +52,7 @@ This asymmetry is the whole point: *unlimited upside, limited downside*. You par
 
 A **put option** is the mirror: the right to *sell* at K. It pays off when the asset price falls below K. If you own a stock and buy a put on it, you've bought insurance — your downside is capped at K.
 
-Five inputs drive an option's value, captured by the Black-Scholes formula (covered in depth in [the BSM post](/blog/trading/options-volatility/black-scholes-model-options-pricing)):
+Five inputs drive an option's value, captured by the Black-Scholes formula (covered in depth in [the BSM post](/blog/trading?subcategory=options-volatility)):
 
 | Input | Symbol | What it measures |
 |---|---|---|
@@ -599,11 +599,11 @@ Real options sit at the intersection of corporate finance and derivatives pricin
 - [The Valuation Spectrum: Absolute, Relative, and Contingent Claims](/blog/trading/asset-valuation/valuation-spectrum-absolute-relative-contingent-claims) — where real options (contingent claims valuation) fits in the broader toolkit
 
 **On the options mathematics:**
-- [Black-Scholes Model: Options Pricing from First Principles](/blog/trading/options-volatility/black-scholes-model-options-pricing) — the formula used to compute real option values, with full derivation and intuition
+- [Black-Scholes Model: Options Pricing from First Principles](/blog/trading?subcategory=options-volatility) — the formula used to compute real option values, with full derivation and intuition
 
 **Foundational concepts:**
-- [WACC: Weighted Average Cost of Capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital) — the discount rate used in static NPV; sector WACC is also a proxy for project uncertainty
-- [Expected Value and Probability Distributions](/blog/trading/math-for-quants/expected-value-probability-distributions) — the probability-weighting that underlies decision trees
+- [WACC: Weighted Average Cost of Capital](/blog/trading?subcategory=equity-research) — the discount rate used in static NPV; sector WACC is also a proxy for project uncertainty
+- [Expected Value and Probability Distributions](/blog/trading?subcategory=math-for-quants) — the probability-weighting that underlies decision trees
 
 ## Sources & Further Reading
 

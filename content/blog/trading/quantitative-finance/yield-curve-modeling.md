@@ -33,7 +33,7 @@ The diagram above is the mental model. Inputs are liquid market quotes — overn
 
 This article is the deep dive on yield curve modeling for a senior quant or staff-level engineer. It covers the multi-curve framework that replaced single-curve pricing post-2008, bootstrapping from market quotes, parametric fitting (Nelson-Siegel-Svensson), spline-based fitting, the relationship between zero rates / par rates / forward rates, multi-currency basis curves, the SOFR transition, real curves for inflation-linked products, validation, production architecture, and a long catalog of named failure modes.
 
-The companion articles are [Bond Pricing](/blog/trading/quantitative-finance/fixed-income/bond-pricing) (curve consumption from the bond side), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income/fixed-income-analytics) (portfolio-level analytics), and [Short-Rate Models](/blog/trading/quantitative-finance/rates-models/short-rate-models-vasicek-hull-white) (dynamics on top of curves).
+The companion articles are [Bond Pricing](/blog/trading/quantitative-finance/bond-pricing) (curve consumption from the bond side), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics) (portfolio-level analytics), and [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white) (dynamics on top of curves).
 
 ## 1. Why curves are not estimated, they are calibrated
 
@@ -1011,7 +1011,7 @@ where $\theta(t)$ is calibrated such that the model reproduces the initial forwa
 
 This *bootstrapping* of $\theta(t)$ is conceptually similar to bootstrapping the curve itself: at each time step, $\theta$ is set to make the model's expected path match the initial forward. The result is a model that perfectly matches the curve at time 0 and evolves consistently afterward.
 
-Pricing engines for callable bonds, swaptions, and Bermudan options sit on top of this short-rate-model + curve-calibration foundation. We'll cover the dynamics in [the Short-Rate Models post](/blog/trading/quantitative-finance/rates-models/short-rate-models-vasicek-hull-white).
+Pricing engines for callable bonds, swaptions, and Bermudan options sit on top of this short-rate-model + curve-calibration foundation. We'll cover the dynamics in [the Short-Rate Models post](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white).
 
 A senior fixed-income engineer ensures that the curve service publishes initial forward rates in a format directly consumable by short-rate models. The two layers must be consistent.
 
@@ -1143,4 +1143,4 @@ A senior fixed-income quant's view of curve work: it is the closest thing financ
 
 A final practical note for engineers entering the field: spend time with the daily curve. Print it out, plot it on paper if you have to, examine the shape, ask why the 7y is above the 10y today, why the 30y forward is below the 5y forward, why the OIS-SOFR basis spiked last quarter-end. The curve is a daily window into the global rates market. Reading it fluently is the senior fixed-income quant's superpower.
 
-The remaining articles in this series — [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/rates-models/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotics/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/exotics/autocallables), and [Cliquets](/blog/trading/quantitative-finance/exotics/cliquets) — go deeper on each layer that lives on top of the curve.
+The remaining articles in this series — [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on each layer that lives on top of the curve.

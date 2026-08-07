@@ -263,4 +263,4 @@ The deeper point ties back to where we started. Trillions of dollars sit in vehi
 - [How law moves markets: the transmission chain](/blog/trading/law-and-geopolitics/how-law-moves-markets-the-transmission-chain) — the series spine: rule change → policy → macro flows → prices → the trade.
 - [Shadow banking and the repo market](/blog/trading/finance/shadow-banking-and-the-repo-market) — a deeper look at repo, the largest piece of the shadow-bank plumbing.
 - [How the Fed sets interest rates](/blog/trading/finance/how-the-fed-sets-interest-rates) — the administered rates (including the ON RRP floor) that drive cash between deposits and money funds.
-- [Macro trading](/blog/trading/macro-trading) — using liquidity and policy signals like money-fund flows and the ON RRP balance to position across assets.
+- [Macro trading](/blog/trading?subcategory=macro-trading) — using liquidity and policy signals like money-fund flows and the ON RRP balance to position across assets.

@@ -1326,6 +1326,6 @@ For Atari games with maximum scores in the thousands, scale accordingly.
   function approximation and the deadly triad in depth. Free at incompleteideas.net.
 - Hessel, M., et al. "Rainbow: Combining Improvements in Deep Reinforcement Learning." *AAAI*, 2018.
   Combines six DQN extensions into a single agent achieving 223% human-level Atari performance.
-- For the broader RL landscape and where this post fits in the series: [Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map)
-- For the linear function approximation post that precedes this one in Track C: [Linear Function Approximation in RL](/blog/machine-learning/reinforcement-learning/linear-function-approximation-in-reinforcement-learning)
+- For the broader RL landscape and where this post fits in the series: [Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning)
+- For the linear function approximation post that precedes this one in Track C: [Linear Function Approximation in RL](/blog/machine-learning/reinforcement-learning/linear-function-approximation-and-convergence)
 - For debugging instability in deep learning training more broadly: [Debugging AI Training and Finetuning](/blog/machine-learning/debugging-training/the-training-debugging-playbook)

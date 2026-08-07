@@ -33,7 +33,7 @@ By the end of this post you will understand what problem each of the six improve
 
 ![Rainbow's seven-layer component stack from base DQN to the full Rainbow agent](/imgs/blogs/rainbow-dqn-combining-six-improvements-1.png)
 
-This post is part of the [Reinforcement Learning: From Rewards to Real Systems](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) series. If you have not yet read the DQN deep-dive (Track D post 1) or the Double/Dueling/PER overview (Track D post 2), the background in those posts will make this one cleaner to follow — but the material below is self-contained.
+This post is part of the [Reinforcement Learning: From Rewards to Real Systems](/blog/machine-learning?subcategory=reinforcement-learning) series. If you have not yet read the DQN deep-dive (Track D post 1) or the Double/Dueling/PER overview (Track D post 2), the background in those posts will make this one cleaner to follow — but the material below is self-contained.
 
 ## 1. The problems DQN leaves on the table
 
@@ -775,7 +775,7 @@ Figure 7 shows the decision tree. Here is the reasoning behind each branch.
 **Switch to policy gradient (PPO, SAC, TD3) when:**
 - The action space is continuous: Rainbow does not directly handle continuous actions. You would need to discretise the action space (coarse bins), which loses precision and explodes the action count combinatorially across dimensions.
 - On-policy guarantees matter: Rainbow is off-policy; the replay buffer can contain transitions from much older policies. For environments where the reward function or dynamics drift over time, on-policy methods may be more stable.
-- You are doing RLHF or language-model fine-tuning: the standard toolchain (TRL's `PPOTrainer`, GRPO variants) is built around policy gradients. See the [RLHF and preference learning](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) posts for the alignment-specific discussion.
+- You are doing RLHF or language-model fine-tuning: the standard toolchain (TRL's `PPOTrainer`, GRPO variants) is built around policy gradients. See the [RLHF and preference learning](/blog/machine-learning?subcategory=reinforcement-learning) posts for the alignment-specific discussion.
 
 ### Hyperparameter sensitivity
 
@@ -830,5 +830,5 @@ These are the rules worth memorising from this post:
 - Bellemare, M. G., Dabney, W., and Munos, R. "A Distributional Perspective on Reinforcement Learning." ICML 2017. The C51 paper.
 - Fortunato, M. et al. "Noisy Networks for Exploration." ICLR 2018. NoisyNets.
 - Castro, P. S. et al. "Dopamine: A Research Framework for Deep Reinforcement Learning." 2018. Reproducibility benchmark for Rainbow and variants; codebase at github.com/google/dopamine.
-- [Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) — series taxonomy and the full agent-environment loop.
+- [Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning) — series taxonomy and the full agent-environment loop.
 - [The Reinforcement Learning Playbook](/blog/machine-learning/reinforcement-learning/the-reinforcement-learning-playbook) — capstone post synthesising all series tracks with deployment-ready decision trees.

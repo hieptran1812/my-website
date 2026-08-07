@@ -523,7 +523,7 @@ sglang serve \
   --expert-cache-size 96
 ```
 
-The numbers I have seen on this: 1.6–2.4× cost reduction at the same SLA, depending on workload. The win is bigger on long-context workloads (where prefill cost is large in absolute terms) and on multi-tenant deployments (where decode batches consolidate across tenants). See [SGLang's serving techniques](/blog/machine-learning/mlops/the-techniques-using-in-sglang) for the broader disaggregation pattern.
+The numbers I have seen on this: 1.6–2.4× cost reduction at the same SLA, depending on workload. The win is bigger on long-context workloads (where prefill cost is large in absolute terms) and on multi-tenant deployments (where decode batches consolidate across tenants). See [SGLang's serving techniques](/blog/machine-learning?subcategory=mlops) for the broader disaggregation pattern.
 
 ## 17. Case studies from production
 

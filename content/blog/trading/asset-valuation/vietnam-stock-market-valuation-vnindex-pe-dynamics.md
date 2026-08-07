@@ -284,5 +284,5 @@ Vietnamese equity valuation is not a different discipline; it is the same discip
 - [Risk and required return: CAPM, beta, and the cost of capital](/blog/trading/asset-valuation/risk-required-return-capm-beta-cost-capital) — the foundation for the CRP-adjusted discount rate used throughout this post.
 - [The price-to-earnings ratio: valuing stocks on earnings](/blog/trading/asset-valuation/price-to-earnings-ratio-pe-valuation-stocks) — the core multiple, read as an earnings yield.
 - [The price-to-book ratio: valuing equity on net worth](/blog/trading/asset-valuation/price-to-book-ratio-pb-valuation-equity) — the right tool for the bank-heavy VN-Index core.
-- [WACC: the weighted average cost of capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital) — how the cost of equity feeds a full discount rate.
-- [Interest rates, bonds, and stocks: how they move together](/blog/trading/macro-trading/interest-rates-bonds-stocks-relationship) — the rate environment that drives the discount rate and the margin cycle.
+- [WACC: the weighted average cost of capital](/blog/trading?subcategory=equity-research) — how the cost of equity feeds a full discount rate.
+- [Interest rates, bonds, and stocks: how they move together](/blog/trading?subcategory=macro-trading) — the rate environment that drives the discount rate and the margin cycle.

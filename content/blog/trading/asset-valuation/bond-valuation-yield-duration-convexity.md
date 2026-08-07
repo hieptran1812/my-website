@@ -788,7 +788,7 @@ The lesson is not unique to banks: any fixed-income investor who ignores duratio
 
 In practice, bonds of different maturities are priced against each other via the **yield curve** — the graph of yield against maturity. A normal yield curve slopes upward (longer maturities yield more). When the curve inverts (short-term rates exceed long-term rates), it often signals a recession — investors are willing to accept lower long-term yields because they expect rates to fall as the economy slows.
 
-Relative-value traders compare individual bond yields against the yield curve to identify mispriced securities. If a 7-year bond yields more than the curve implies (given interpolation between the 5-year and 10-year), it might be "cheap" relative to its maturity peers and represent a buying opportunity. This is the domain of yield curve analysis covered in depth at [the yield curve explained](/blog/trading/quantitative-finance/yield-curve-explained).
+Relative-value traders compare individual bond yields against the yield curve to identify mispriced securities. If a 7-year bond yields more than the curve implies (given interpolation between the 5-year and 10-year), it might be "cheap" relative to its maturity peers and represent a buying opportunity. This is the domain of yield curve analysis covered in depth at [the yield curve explained](/blog/trading/quantitative-finance/yield-curve-modeling).
 
 #### Worked example: riding the yield curve
 
@@ -853,13 +853,13 @@ The discount rate used for bonds (the yield) is a specific instance of the requi
 
 To see where bonds fit in the landscape of valuation methods across asset classes — absolute vs. relative vs. contingent claims — read [the valuation spectrum: absolute, relative, and contingent claims](/blog/trading/asset-valuation/valuation-spectrum-absolute-relative-contingent-claims).
 
-For a deeper technical treatment of bond pricing math, yield curve construction (bootstrapping, Nelson-Siegel), short-rate models (Vasicek, CIR, Hull-White), and OAS analysis for MBS, see the companion series at [bond pricing and yield to maturity](/blog/trading/fixed-income/bond-pricing-yield-to-maturity).
+For a deeper technical treatment of bond pricing math, yield curve construction (bootstrapping, Nelson-Siegel), short-rate models (Vasicek, CIR, Hull-White), and OAS analysis for MBS, see the companion series at [bond pricing and yield to maturity](/blog/trading/quantitative-finance/bond-pricing).
 
-For the macro context — how the Federal Reserve's actions translate into bond yields and ultimately into asset prices across all markets — see [interest rates, bonds, and stocks: the relationship](/blog/trading/macro-trading/interest-rates-bonds-stocks-relationship).
+For the macro context — how the Federal Reserve's actions translate into bond yields and ultimately into asset prices across all markets — see [interest rates, bonds, and stocks: the relationship](/blog/trading?subcategory=macro-trading).
 
 For readers wanting to understand how bond duration interacts with equity valuation — specifically why rising rates punish long-duration growth stocks — the connection is direct: a growth company's earnings are heavily back-weighted (most value arrives many years out), giving it a "long duration" analogous to a zero-coupon bond. When the discount rate rises, both long-dated bonds and long-duration growth stocks fall. This parallel is explored in [equity valuation and the discount rate](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta).
 
-The yield curve's slope — normal, flat, or inverted — is one of the most reliable economic indicators historically available. For the full framework connecting curve shape to recession signals, Fed policy, and cross-asset implications, see [the yield curve explained](/blog/trading/quantitative-finance/yield-curve-explained) and [reading the bond market for macro signals](/blog/trading/macro-trading/interest-rates-bonds-stocks-relationship).
+The yield curve's slope — normal, flat, or inverted — is one of the most reliable economic indicators historically available. For the full framework connecting curve shape to recession signals, Fed policy, and cross-asset implications, see [the yield curve explained](/blog/trading/quantitative-finance/yield-curve-modeling) and [reading the bond market for macro signals](/blog/trading?subcategory=macro-trading).
 
 ---
 

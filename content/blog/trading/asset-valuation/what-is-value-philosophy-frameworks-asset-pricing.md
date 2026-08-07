@@ -90,7 +90,7 @@ Where:
 - $r$ = discount rate (the required return, reflecting risk)
 - $TV$ = terminal value (usually a perpetuity: $CF_{N+1} / (r - g)$, where $g$ is the long-run growth rate)
 
-The discount rate $r$ is not arbitrary — it is the return you *require* to take on the risk of this particular asset. A riskier asset requires a higher return, which means the same cash flow is worth less when discounted at a higher rate. This is why two companies with identical cash flows but different risk profiles will have different intrinsic values. For a deep dive into discount rates and how they are computed, see [WACC and the cost of capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital).
+The discount rate $r$ is not arbitrary — it is the return you *require* to take on the risk of this particular asset. A riskier asset requires a higher return, which means the same cash flow is worth less when discounted at a higher rate. This is why two companies with identical cash flows but different risk profiles will have different intrinsic values. For a deep dive into discount rates and how they are computed, see [WACC and the cost of capital](/blog/trading?subcategory=equity-research).
 
 ### What the intrinsic value framework requires
 
@@ -402,7 +402,7 @@ Over the 2000-2024 period, the risk-return relationship across major asset class
 
 What does this tell us about valuation? The equity risk premium — the extra return of stocks over cash, roughly 8.9 percentage points over this period — is the market's collective answer to the question "how much must I be paid to accept the uncertainty of corporate earnings?" When you build a DCF model and choose a discount rate, you are implicitly making a claim about this premium. If the market's implied risk premium is currently very low (stocks are priced as if they will definitely earn high returns), either the market is right and this time is different, or stocks are overpriced.
 
-This is why intrinsic-value analysis and relative-value analysis must be supplemented with a view on the macro environment — interest rates, growth expectations, and risk appetite. The connection runs directly through the discount rate. For more on this relationship, see [Interest rates, bonds, and stocks](/blog/trading/macro-trading/interest-rates-bonds-stocks-relationship).
+This is why intrinsic-value analysis and relative-value analysis must be supplemented with a view on the macro environment — interest rates, growth expectations, and risk appetite. The connection runs directly through the discount rate. For more on this relationship, see [Interest rates, bonds, and stocks](/blog/trading?subcategory=macro-trading).
 
 ---
 
@@ -590,7 +590,7 @@ This is exactly what happened in 2022. The US Federal Reserve raised the federal
 
 The VN-Index experienced an even more severe version of the same dynamic. As global risk appetite collapsed and foreign investors withdrew capital from emerging markets, required returns on Vietnamese equities rose sharply. The VN-Index P/E fell from roughly 17-18× in early 2022 to 11.2× by year-end — a 35% compression in the multiple, driving the index down roughly 33% despite Vietnam's GDP continuing to grow at 8%.
 
-For more on this mechanism — how central bank policy flows through to asset prices via the discount rate — see [How the Fed Sets Interest Rates](/blog/trading/finance/how-the-fed-sets-interest-rates) and the broader treatment of macro-asset interactions in [Interest Rates, Bonds, and Stocks](/blog/trading/macro-trading/interest-rates-bonds-stocks-relationship).
+For more on this mechanism — how central bank policy flows through to asset prices via the discount rate — see [How the Fed Sets Interest Rates](/blog/trading/finance/how-the-fed-sets-interest-rates) and the broader treatment of macro-asset interactions in [Interest Rates, Bonds, and Stocks](/blog/trading?subcategory=macro-trading).
 
 The key takeaway: valuation frameworks do not operate in a macro vacuum. The discount rate is the bridge between the micro (a specific company's cash flows) and the macro (global interest rates, risk appetite, inflation expectations). An intrinsic-value analyst who ignores macro is like an architect who ignores soil conditions — the structure might be perfectly designed, but it can still sink.
 
@@ -616,13 +616,13 @@ The goal is not to be right every time — valuation estimates are, by definitio
 
 The three frameworks introduced here are each the subject of entire sub-disciplines of finance. As you proceed through this series, each will be developed into its full methodological depth:
 
-**On intrinsic value and DCF:** The complete mechanics of building a multi-period DCF, choosing terminal growth rates, and stress-testing assumptions are covered in the equity-research series. Start with [Discounted Cash Flow: A Complete Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide). The discount rate — the hinge of the entire intrinsic-value framework — is covered in the WACC article in the same series.
+**On intrinsic value and DCF:** The complete mechanics of building a multi-period DCF, choosing terminal growth rates, and stress-testing assumptions are covered in the equity-research series. Start with [Discounted Cash Flow: A Complete Guide](/blog/trading?subcategory=equity-research). The discount rate — the hinge of the entire intrinsic-value framework — is covered in the WACC article in the same series.
 
-**On discount rates and interest rates:** The intrinsic-value framework is deeply connected to the macro environment because the discount rate moves with interest rates. The relationship between interest rates, bonds, and stock valuations is explored in [Interest Rates, Bonds, and Stocks](/blog/trading/macro-trading/interest-rates-bonds-stocks-relationship). For a deep dive into how central bank policy sets the floor for discount rates, see [How the Fed Sets Interest Rates](/blog/trading/finance/how-the-fed-sets-interest-rates).
+**On discount rates and interest rates:** The intrinsic-value framework is deeply connected to the macro environment because the discount rate moves with interest rates. The relationship between interest rates, bonds, and stock valuations is explored in [Interest Rates, Bonds, and Stocks](/blog/trading?subcategory=macro-trading). For a deep dive into how central bank policy sets the floor for discount rates, see [How the Fed Sets Interest Rates](/blog/trading/finance/how-the-fed-sets-interest-rates).
 
 **On relative value and market multiples:** The next posts in this series build the full toolkit of equity multiples — P/E, EV/EBITDA, P/S, P/B — from first principles, with sector-by-sector application and worked examples from both US and Vietnamese markets.
 
-**On technical analysis (market-value end of the spectrum):** For context on what the pure price-based methods do and do not tell you, see [What Is Technical Analysis](/blog/trading/technical-analysis/what-is-technical-analysis). Understanding where technical analysis sits on the valuation spectrum clarifies both its strengths and its limitations.
+**On technical analysis (market-value end of the spectrum):** For context on what the pure price-based methods do and do not tell you, see [What Is Technical Analysis](/blog/trading/technical-analysis/what-technical-analysis-really-is). Understanding where technical analysis sits on the valuation spectrum clarifies both its strengths and its limitations.
 
 The rest of this series uses the frameworks built here as the foundation for every method. Every DCF model we build, every multiple we compute, every option we price answers, implicitly or explicitly, the question we started with: what does it mean for this price to be right?
 

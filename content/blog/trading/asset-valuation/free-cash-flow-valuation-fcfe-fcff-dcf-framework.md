@@ -722,7 +722,7 @@ The [time value of money](/blog/trading/asset-valuation/time-value-of-money-engi
 
 The [discount rate](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta) — WACC for FCFF or Ke for FCFE — is where the most judgment enters the model. The referenced post covers how to estimate WACC from capital structure and the cost of each component, how to unlever beta for comparables analysis, and the common pitfalls (using book-value weights, ignoring the tax shield).
 
-For a practitioner-level DCF walk-through applied to a specific sector, the [equity research DCF guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide) extends these mechanics to a full financial model context.
+For a practitioner-level DCF walk-through applied to a specific sector, the [equity research DCF guide](/blog/trading?subcategory=equity-research) extends these mechanics to a full financial model context.
 
 ---
 
@@ -731,7 +731,7 @@ For a practitioner-level DCF walk-through applied to a specific sector, the [equ
 - [The Valuation Spectrum: Absolute, Relative, and Contingent Claims](/blog/trading/asset-valuation/valuation-spectrum-absolute-relative-contingent-claims) — where DCF sits in the broader toolkit and when to prefer each method
 - [Time Value of Money: The Engine Behind Every Valuation Model](/blog/trading/asset-valuation/time-value-of-money-engine-every-valuation-model) — the mathematical backbone of discounting, compounding, and NPV
 - [Discount Rates in Practice: WACC, Cost of Equity, and Unlevered Beta](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta) — how to estimate the denominator in every DCF formula
-- [Discounted Cash Flow: The Complete Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide) — practitioner-level DCF applied within a full equity research workflow
+- [Discounted Cash Flow: The Complete Guide](/blog/trading?subcategory=equity-research) — practitioner-level DCF applied within a full equity research workflow
 
 ---
 

@@ -597,7 +597,7 @@ The P/E ratio is most powerful when combined with the broader toolkit:
 
 - **[The Valuation Spectrum: Absolute, Relative, and Contingent Claims](/blog/trading/asset-valuation/valuation-spectrum-absolute-relative-contingent-claims)** — situates P/E within the full map of valuation methods and explains when to use relative vs. absolute approaches.
 - **[Risk, Required Return, CAPM and Beta](/blog/trading/asset-valuation/risk-required-return-capm-beta-cost-capital)** — the `ke` in the Gordon Growth P/E formula comes directly from CAPM; understanding how to compute required return is essential for deriving a defensible "fair" multiple.
-- **[Relative Valuation Multiples and Comps](/blog/trading/equity-research/relative-valuation-multiples-comps)** — P/E sits within a broader family of multiples including EV/EBITDA, P/B, EV/Sales, and P/FFO; this post covers how to run a full comparable companies analysis.
+- **[Relative Valuation Multiples and Comps](/blog/trading?subcategory=equity-research)** — P/E sits within a broader family of multiples including EV/EBITDA, P/B, EV/Sales, and P/FFO; this post covers how to run a full comparable companies analysis.
 - **[Discount Rates in Practice: WACC, Cost of Equity, and Unlevered Beta](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta)** — for companies where debt complicates the equity cost calculation, understanding WACC is a prerequisite for applying the Gordon Growth P/E anchor correctly.
 
 ### Integrating P/E with the DCF: the bridge between relative and absolute methods

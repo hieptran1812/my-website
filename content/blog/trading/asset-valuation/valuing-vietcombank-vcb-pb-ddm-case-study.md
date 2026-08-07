@@ -277,6 +277,6 @@ Value Vietcombank well and you can value any bank: estimate the cost of equity h
 
 - [Price-to-book ratio: valuing equity on net worth](/blog/trading/asset-valuation/price-to-book-ratio-pb-valuation-equity) — the general P/B framework this case study specializes to banks.
 - [Discount rates in practice: WACC, cost of equity, unlevered beta](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta) — how to build the cost-of-equity input that drives every number here.
-- [The dividend discount model for equity valuation](/blog/trading/asset-valuation/dividend-discount-model-ddm-equity-valuation) — the multi-stage DDM machinery used in the VCB worked example.
+- [The dividend discount model for equity valuation](/blog/trading?subcategory=asset-valuation) — the multi-stage DDM machinery used in the VCB worked example.
 - [Vietnam stock market valuation: VN-Index P/E dynamics](/blog/trading/asset-valuation/vietnam-stock-market-valuation-vnindex-pe-dynamics) — the market context and country-risk backdrop for the cost-of-equity inputs.
-- [Bank stock analysis with financial ratios](/blog/trading/equity-research/bank-stock-analysis-financial-ratios) — the analyst workflow and ratio toolkit that complements this valuation method.
+- [Bank stock analysis with financial ratios](/blog/trading?subcategory=equity-research) — the analyst workflow and ratio toolkit that complements this valuation method.

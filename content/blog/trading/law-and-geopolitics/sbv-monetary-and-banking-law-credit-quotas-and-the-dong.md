@@ -232,7 +232,7 @@ A Vietnamese household buying one ounce of SJC gold pays **\$450 more** than the
 premium cost = $50,000 × 0.17 ÷ 1.17 = $7,265
 ```
 
-About **\$7,300** lost to the premium on a \$50,000 conversion. The lesson: the gold-import monopoly is a hidden levy on Vietnamese savers, and the size of the premium is a real-time thermometer of how much they distrust the dong — which is exactly why the SBV watches it as a monetary signal. For how gold behaves as a global safe-haven asset, see [why gold is the ultimate safe-haven asset](/blog/trading/gold/why-gold-is-the-ultimate-safe-haven-asset).
+About **\$7,300** lost to the premium on a \$50,000 conversion. The lesson: the gold-import monopoly is a hidden levy on Vietnamese savers, and the size of the premium is a real-time thermometer of how much they distrust the dong — which is exactly why the SBV watches it as a monetary signal. For how gold behaves as a global safe-haven asset, see [why gold is the ultimate safe-haven asset](/blog/trading?subcategory=gold).
 
 ## The political economy of who gets room
 
@@ -282,7 +282,7 @@ A third is the **dong band-widening of October 2022** — a pure legal-lever mov
 
 A fourth case is the **2024 gold reform**, a clean demonstration that the SJC premium is a legal artifact, not a market one. Through early 2024 the premium blew out toward record levels — at times the equivalent of \$500-600 an ounce over world gold — as households piled into gold amid currency-depreciation worries. Rather than let the premium signal worsening dong distrust, the SBV intervened with the only tools that work on a legally created scarcity: it ran direct gold-sale auctions to flood domestic supply, began selling gold through the state commercial banks at managed prices, and the government signaled it would amend Decree 24 to end the SJC single-brand monopoly. The premium narrowed sharply in response — not because world arbitrage finally broke through, but because the SBV chose to loosen the legal chokehold. For a trader, the episode confirmed the rule: the premium converges when, and only when, the SBV decides to relax the monopoly, so trading the premium is trading a policy forecast, not a market mean-reversion.
 
-For how these Vietnamese cycles connect to the broader regional and frontier-market context — sectors, flows, and the upgrade path — the equity side is covered across the [Vietnam stock market playbook](/blog/trading/vietnam-stocks/vietnam-stock-market-playbook), and the foundational SBV-and-dong mechanics from the finance angle are in [Vietnam monetary policy: the State Bank, the dong, and the credit ceiling](/blog/trading/finance/vietnam-monetary-policy-state-bank-dong-credit-ceiling).
+For how these Vietnamese cycles connect to the broader regional and frontier-market context — sectors, flows, and the upgrade path — the equity side is covered across the [Vietnam stock market playbook](/blog/trading?subcategory=vietnam-stocks), and the foundational SBV-and-dong mechanics from the finance angle are in [Vietnam monetary policy: the State Bank, the dong, and the credit ceiling](/blog/trading/finance/vietnam-monetary-policy-state-bank-dong-credit-ceiling).
 
 ## The playbook: how to trade the SBV's legal levers
 
@@ -329,5 +329,5 @@ The throughline of the whole series applies cleanly here: a legal lever — a qu
 - [How law moves markets: the transmission chain](/blog/trading/law-and-geopolitics/how-law-moves-markets-the-transmission-chain) — the spine of this series: rule change to expectations to price.
 - [Vietnam monetary policy: the State Bank, the dong, and the credit ceiling](/blog/trading/finance/vietnam-monetary-policy-state-bank-dong-credit-ceiling) — the SBV-and-dong mechanics from the finance-fundamentals angle.
 - [How the Fed sets interest rates](/blog/trading/finance/how-the-fed-sets-interest-rates) — the price-based central-bank model Vietnam bolts a quantity cap on top of.
-- [Vietnam stock market playbook](/blog/trading/vietnam-stocks/vietnam-stock-market-playbook) — sectors, flows, and how the credit-and-currency cycle shows up in VN equities.
-- [Why gold is the ultimate safe-haven asset](/blog/trading/gold/why-gold-is-the-ultimate-safe-haven-asset) — the global gold context behind the SJC premium.
+- [Vietnam stock market playbook](/blog/trading?subcategory=vietnam-stocks) — sectors, flows, and how the credit-and-currency cycle shows up in VN equities.
+- [Why gold is the ultimate safe-haven asset](/blog/trading?subcategory=gold) — the global gold context behind the SJC premium.

@@ -49,7 +49,7 @@ Before we touch a single component, internalize the mismatch between how people 
 
 Offline models optimize a single number: quality per clip. Live models optimize a *distribution over wall-clock time*: every chunk must be good enough **and** ready on time, or the illusion of a live instrument collapses. A model that produces gorgeous music at a real-time factor of 0.9 is, for this purpose, broken — it falls behind and the audio buffer drains to silence.
 
-This is the same shift that separates a batch renderer from a game engine. A film renderer can spend an hour on a frame; a game engine has 16 milliseconds, no exceptions, or it drops the frame and you see it. Magenta RealTime is the game engine of music generation, and like a game engine, its cleverness is mostly about *budgeting* — of tokens, of context, of quantizer depth — to hit a hard deadline. If you have read about [first-audio-byte latency in real-time TTS](/blog/machine-learning/signal-processing/real-time-tts-first-audio-byte-latency), the instincts transfer directly: the enemy is the deadline, and every design choice buys or spends time against it.
+This is the same shift that separates a batch renderer from a game engine. A film renderer can spend an hour on a frame; a game engine has 16 milliseconds, no exceptions, or it drops the frame and you see it. Magenta RealTime is the game engine of music generation, and like a game engine, its cleverness is mostly about *budgeting* — of tokens, of context, of quantizer depth — to hit a hard deadline. If you have read about [first-audio-byte latency in real-time TTS](/blog/machine-learning?subcategory=signal-processing), the instincts transfer directly: the enemy is the deadline, and every design choice buys or spends time against it.
 
 > A live model is not a faster offline model. It is a model that has accepted a deadline as a first-class loss term.
 
@@ -59,7 +59,7 @@ We will go layer by layer, bottom-up: the codec that defines what a "token" even
 
 **Senior rule of thumb: in a codec-LM stack, the codec decides the model's vocabulary and frame rate before the model designer makes a single choice.** Everything the language model can say is constrained by what the codec can represent and how many tokens per second it costs. So start there.
 
-SpectroStream is Magenta's high-fidelity neural audio codec — the successor to SoundStream, and a cousin of the residual-vector-quantization (RVQ) codecs you have met if you read about [EnCodec, SoundStream, and Mimi](/blog/machine-learning/signal-processing/speech-tokenizers-encodec-soundstream-mimi). Like all of them, it is an encoder–quantizer–decoder sandwich: an encoder maps audio to a sequence of latent frames, a stack of vector quantizers turns each frame into discrete codes, and a decoder reconstructs the waveform from those codes. The discrete codes are what the language model predicts. No codec, no tokens; no tokens, no LM.
+SpectroStream is Magenta's high-fidelity neural audio codec — the successor to SoundStream, and a cousin of the residual-vector-quantization (RVQ) codecs you have met if you read about [EnCodec, SoundStream, and Mimi](/blog/machine-learning?subcategory=signal-processing). Like all of them, it is an encoder–quantizer–decoder sandwich: an encoder maps audio to a sequence of latent frames, a stack of vector quantizers turns each frame into discrete codes, and a decoder reconstructs the waveform from those codes. The discrete codes are what the language model predicts. No codec, no tokens; no tokens, no LM.
 
 What makes SpectroStream worth its own section is three numbers and one structural choice.
 
@@ -125,7 +125,7 @@ Now look at the other half of the budget: context. The model conditions on the p
 
 So the prior chunks do **not** enter at 16 levels. They enter at the **coarse first-4** levels only. Five chunks of context at 4 levels is $5 \times 50 \times 4 = 1000$ tokens instead of 4000 — a 4× reduction on the conditioning side, mirroring the 4× reduction on the generation side. The history that conditions the next chunk is a low-resolution sketch of what just played: enough to keep the groove, the key, and the instrumentation coherent, cheap enough to carry ten seconds of it without blowing the attention budget. MusicCoCa-style conditioning, separately, uses the first 6 RVQ levels at inference.
 
-This is a recurring pattern in real-time generative systems and worth naming: **resolution is a currency, and you spend it where the ear notices.** Full 64-level detail at decode, where it is cheap and perceptually huge. Sixteen levels for generation, where each level is an autoregressive tax. Four levels for context, where you only need the gist. If you have tuned [streaming ASR pipelines](/blog/machine-learning/signal-processing/streaming-asr-production-pipeline), this is the same chunk-and-context bookkeeping, pointed at synthesis instead of recognition.
+This is a recurring pattern in real-time generative systems and worth naming: **resolution is a currency, and you spend it where the ear notices.** Full 64-level detail at decode, where it is cheap and perceptually huge. Sixteen levels for generation, where each level is an autoregressive tax. Four levels for context, where you only need the gist. If you have tuned [streaming ASR pipelines](/blog/machine-learning?subcategory=signal-processing), this is the same chunk-and-context bookkeeping, pointed at synthesis instead of recognition.
 
 ### A worked number: the slack
 
@@ -542,6 +542,6 @@ The deeper lesson generalizes past music. Magenta RealTime is a clean case study
 
 - [*Live Music Models*](https://arxiv.org/abs/2508.04651) — the Lyria Team paper (arXiv:2508.04651) that introduces the live-music-model formulation and Magenta RealTime.
 - [magenta/magenta-realtime](https://github.com/magenta/magenta-realtime) — the open-source repository, model weights, and Colab demo. Note the project has since shipped **MRT2**, a successor with `small` (230M) and `base` (2.4B) variants, JAX and MLX backends, and on-device Apple Silicon inference.
-- [Speech tokenizers: EnCodec, SoundStream, and Mimi](/blog/machine-learning/signal-processing/speech-tokenizers-encodec-soundstream-mimi) — the RVQ codec lineage SpectroStream extends, with the residual-quantization math in depth.
+- [Speech tokenizers: EnCodec, SoundStream, and Mimi](/blog/machine-learning?subcategory=signal-processing) — the RVQ codec lineage SpectroStream extends, with the residual-quantization math in depth.
 - [Orpheus TTS over the SNAC codec](/blog/machine-learning/signal-processing/orpheus-tts-llm-speech-snac) — the same LLM-over-codec, temporal-versus-depth decoding pattern applied to speech.
-- [Real-time TTS: chasing first-audio-byte latency](/blog/machine-learning/signal-processing/real-time-tts-first-audio-byte-latency) — the streaming-latency mindset that governs every live generative audio system.
+- [Real-time TTS: chasing first-audio-byte latency](/blog/machine-learning?subcategory=signal-processing) — the streaming-latency mindset that governs every live generative audio system.

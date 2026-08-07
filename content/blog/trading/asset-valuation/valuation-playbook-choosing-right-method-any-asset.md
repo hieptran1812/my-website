@@ -82,7 +82,7 @@ Read the matrix as a lookup table. The green cell in each row is the method you 
 
 ### Profitable, mature company → DCF, cross-checked with multiples
 
-This is the textbook case and the one every other case is measured against. A company with stable margins, predictable growth, and positive free cash flow is the natural home of the [discounted cash flow](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide) method. You project free cash flow for five to ten years, discount it at the [weighted average cost of capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital), add a terminal value, and you have an enterprise value. Subtract net debt and you have equity value per share.
+This is the textbook case and the one every other case is measured against. A company with stable margins, predictable growth, and positive free cash flow is the natural home of the [discounted cash flow](/blog/trading?subcategory=equity-research) method. You project free cash flow for five to ten years, discount it at the [weighted average cost of capital](/blog/trading?subcategory=equity-research), add a terminal value, and you have an enterprise value. Subtract net debt and you have equity value per share.
 
 But you never stop there. You cross-check against a relative method: the company's P/E versus its peers, and its EV/EBITDA versus the sector. If your DCF says the stock is worth \$95 and it trades at a P/E that implies \$92 on peer multiples, you have two independent methods agreeing — high confidence. If they disagree wildly, that is information, not noise, and we will dissect exactly that case below.
 
@@ -257,7 +257,7 @@ That 2022 re-pricing deserves its own figure, because it is the deepest point in
 
 ![Fair value falling as the discount rate rises from 8 to 15 percent](/imgs/blogs/valuation-playbook-choosing-right-method-any-asset-7.png)
 
-The curve uses the simplest possible model — a stock paying a \$4 dividend growing at 3% — and shows fair value as the discount rate climbs from 8% to 15%. At 8%, the Gordon model gives 4 / (0.08 − 0.03) = \$80. At 15%, it gives 4 / (0.15 − 0.03) = \$33.33. The *same cash flows* are worth less than half as much, purely because money got more expensive. This is why 2022 hammered growth stocks: their value sits far in the future, and distant cash flows are the most sensitive to the discount rate. The whole relationship between [interest rates, bonds, and stocks](/blog/trading/macro-trading/interest-rates-bonds-stocks-relationship) flows from this single curve. If you remember one thing from this entire series, remember that valuation is, before anything else, a bet on the discount rate.
+The curve uses the simplest possible model — a stock paying a \$4 dividend growing at 3% — and shows fair value as the discount rate climbs from 8% to 15%. At 8%, the Gordon model gives 4 / (0.08 − 0.03) = \$80. At 15%, it gives 4 / (0.15 − 0.03) = \$33.33. The *same cash flows* are worth less than half as much, purely because money got more expensive. This is why 2022 hammered growth stocks: their value sits far in the future, and distant cash flows are the most sensitive to the discount rate. The whole relationship between [interest rates, bonds, and stocks](/blog/trading?subcategory=macro-trading) flows from this single curve. If you remember one thing from this entire series, remember that valuation is, before anything else, a bet on the discount rate.
 
 #### Worked example: an emerging-market re-rating through the country risk premium
 
@@ -307,5 +307,5 @@ This post synthesizes the whole series. To go deeper on any branch:
 - [The Black-Scholes Model and the Greeks](/blog/trading/asset-valuation/black-scholes-model-greeks-options-valuation) — pricing contingent claims.
 - [Bond Valuation: Yield, Duration, and Convexity](/blog/trading/asset-valuation/bond-valuation-yield-duration-convexity) — the same present-value engine, applied to fixed income.
 - [Emerging-Market Stock Valuation and the Country Risk Premium](/blog/trading/asset-valuation/emerging-market-stock-valuation-country-risk-discount-rate) — adjusting for sovereign and currency risk.
-- [Discounted Cash Flow: The Complete Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide) — the primary intrinsic method, step by step.
-- [How Interest Rates Connect Bonds and Stocks](/blog/trading/macro-trading/interest-rates-bonds-stocks-relationship) — why the discount rate moves every asset at once.
+- [Discounted Cash Flow: The Complete Guide](/blog/trading?subcategory=equity-research) — the primary intrinsic method, step by step.
+- [How Interest Rates Connect Bonds and Stocks](/blog/trading?subcategory=macro-trading) — why the discount rate moves every asset at once.

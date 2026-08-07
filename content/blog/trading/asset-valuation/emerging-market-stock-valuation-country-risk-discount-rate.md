@@ -93,7 +93,7 @@ Multiply: CRP = 3.2% × 1.7 ≈ **5.4%**, which we round to 5.5%. That is the ex
 
 The intuition: the bond market already prices Vietnam's credit risk at 3.2%, and because Vietnamese stocks move about 1.7 times as much as Vietnamese bonds, the equity version of that risk is 1.7 times larger.
 
-For deeper background on currency-and-country risk in the macro context, see [currency risk in emerging markets](/blog/trading/macro-trading/currency-risk-emerging-markets).
+For deeper background on currency-and-country risk in the macro context, see [currency risk in emerging markets](/blog/trading?subcategory=macro-trading).
 
 ## Three ways to put country risk into CAPM
 
@@ -395,4 +395,4 @@ The thread through all the cases is that emerging-market valuation rewards disci
 - [Discount rates in practice: WACC, cost of equity, unlevered beta](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta) — the unlever/relever mechanics used in the beta example.
 - [The valuation spectrum: absolute, relative, contingent claims](/blog/trading/asset-valuation/valuation-spectrum-absolute-relative-contingent-claims) — where DCF, multiples, and option-style scenario valuation fit together.
 - [Vietnam stock market valuation: VN-Index P/E dynamics](/blog/trading/asset-valuation/vietnam-stock-market-valuation-vnindex-pe-dynamics) — the market-level Vietnam case.
-- [Currency risk in emerging markets](/blog/trading/macro-trading/currency-risk-emerging-markets) — the macro view of the currency adjustment.
+- [Currency risk in emerging markets](/blog/trading?subcategory=macro-trading) — the macro view of the currency adjustment.

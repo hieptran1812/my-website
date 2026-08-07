@@ -392,7 +392,7 @@ The last piece: when you change the batch size, you must change the learning rat
 
 ![A grid contrasting the linear and square-root learning-rate scaling rules across a base batch and a four-times-larger batch, with the rescaled target rates in each cell](/imgs/blogs/the-learning-rate-is-almost-always-the-problem-8.png)
 
-In practice: when you change the batch size, **rescale the LR with the linear rule as your aggressive target and the sqrt rule as your safe target, then verify with a short run or an LR-range test.** Do not keep the old rate — it will be too small for a bigger batch (crawl) or, if you also raised it carelessly, too big (spike). For the deeper theory of how the optimal rate and batch size co-vary, the scaling-laws literature is the place to go; see the [scaling-laws posts](/blog/machine-learning/scaling-laws) for the LR–batch-size relationship at scale.
+In practice: when you change the batch size, **rescale the LR with the linear rule as your aggressive target and the sqrt rule as your safe target, then verify with a short run or an LR-range test.** Do not keep the old rate — it will be too small for a bigger batch (crawl) or, if you also raised it carelessly, too big (spike). For the deeper theory of how the optimal rate and batch size co-vary, the scaling-laws literature is the place to go; see the [scaling-laws posts](/blog/machine-learning?subcategory=scaling-laws) for the LR–batch-size relationship at scale.
 
 #### Worked example: the batch-size change that diverged
 

@@ -1099,4 +1099,4 @@ The three most common production issues with quantized LLM serving:
 - [Series intro: What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — the SLO triangle and production fundamentals that contextualize every optimization.
 - [Continuous batching and PagedAttention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention) — the scheduling layer that quantization frees memory for, and where the 4× compounding gains come from.
 - [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) — chunked prefill, prefix caching, and speculative decoding that compose with quantization for further throughput gains.
-- [The model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook) — the full decision tree from model to production.
+- [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — the full decision tree from model to production.

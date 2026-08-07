@@ -686,4 +686,4 @@ ONNX is not magic and it is not a trap. It is a precise, two-part system — a v
 - [Quantization in LLMs](/blog/machine-learning/large-language-model/quantization-in-llm) — the precision-and-calibration story in depth, applicable directly to ONNX static quantization.
 - [Optimizing LLM inference: a complete guide](/blog/machine-learning/large-language-model/optimizing-llm-inference-complete-guide) — continuous batching and the serving-architecture wins ONNX Runtime alone does not provide.
 - [INT8 / FP16 / INT4 edge tradeoffs](/blog/machine-learning/mlops/quantization-int8-fp16-int4-edge-tradeoffs) — choosing a precision for the edge targets where ONNX Runtime shines.
-- [Deploying LLMs on Jetson AGX Orin](/blog/machine-learning/mlops/deploying-llms-on-jetson-agx-orin) — a concrete edge deployment where the ONNX Runtime story applies end to end.
+- [Deploying LLMs on Jetson AGX Orin](/blog/machine-learning?subcategory=mlops) — a concrete edge deployment where the ONNX Runtime story applies end to end.

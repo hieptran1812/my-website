@@ -1567,4 +1567,4 @@ For a practical serving recommendation when using AWQ 4-bit quantization on a 7B
 - [vLLM engine arguments reference](https://docs.vllm.ai/en/latest/models/engine_args.html) — Full documentation for `max_num_seqs`, `max_num_batched_tokens`, `gpu_memory_utilization`, and related parameters.
 - [What is model serving: the SLO triangle](/blog/machine-learning/model-serving/what-is-model-serving) — Series introduction; defines the latency/throughput/cost triangle that batching navigates.
 - [Continuous batching and PagedAttention: how vLLM serves 24× more requests](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention) — Track C deep-dive into the vLLM scheduler, iteration-level scheduling, and KV cache block management.
-- [The model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook) — Series capstone; full decision tree from model to production including batching strategy selection.
+- [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — Series capstone; full decision tree from model to production including batching strategy selection.

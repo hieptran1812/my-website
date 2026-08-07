@@ -1396,4 +1396,4 @@ When upgrading ORT: export a fresh copy of the model with the new version, run y
 - Series context — start here: [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — the SLO triangle and why latency/throughput/cost are always in tension.
 - Related serving runtimes: [Triton Inference Server deep-dive](/blog/machine-learning/model-serving/triton-inference-server-deep-dive) — ensemble pipelines, dynamic batching, and multi-model serving that ORT alone cannot provide.
 - Choosing a serving stack: [Choosing your serving stack](/blog/machine-learning/model-serving/choosing-your-serving-stack) — the full decision matrix of Triton vs Ray Serve vs TorchServe vs vLLM, with ORT as a runtime component.
-- For quantization theory: [Quantization for inference](/blog/machine-learning/model-serving/quantization-for-inference-not-training) — PTQ vs QAT, INT8/FP8/INT4 tradeoffs, and the accuracy math behind reduced-precision arithmetic.
+- For quantization theory: [Quantization for inference](/blog/machine-learning?subcategory=model-serving) — PTQ vs QAT, INT8/FP8/INT4 tradeoffs, and the accuracy math behind reduced-precision arithmetic.

@@ -397,6 +397,6 @@ Fusion is one of the highest-leverage optimizations in the book when it applies 
 - [The Nsight Compute Kernel Deep Dive](/blog/machine-learning/performance-engineering/nsight-compute-kernel-deep-dive) — reading the Speed-of-Light section, memory throughput, and warp-stall reasons for the two counters this post relies on.
 - [What torch.compile Actually Does](/blog/machine-learning/performance-engineering/what-torch-compile-actually-does) — the Dynamo/Inductor stack that performs elementwise and norm fusion for free.
 - [Why Your AI Service Wastes CPU and GPU](/blog/machine-learning/performance-engineering/why-your-ai-service-wastes-cpu-and-gpu) — the series intro and the four-wastes frame that names the bandwidth wall.
-- [The Performance Engineering Playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the capstone decision tree that routes a symptom to a profiler to a fix.
+- [The Performance Engineering Playbook](/blog/machine-learning?subcategory=performance-engineering) — the capstone decision tree that routes a symptom to a profiler to a fix.
 - FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness (Dao et al., 2022), [arxiv.org/abs/2205.14135](https://arxiv.org/abs/2205.14135) — the primary source for the traffic bound and the online-softmax formulation.
 - PyTorch, "Scaled Dot Product Attention" tutorial and the `torch.nn.functional.scaled_dot_product_attention` / `torch.nn.attention.sdpa_kernel` documentation — the API, the backends, and how to select among them.

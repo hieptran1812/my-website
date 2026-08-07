@@ -44,7 +44,7 @@ The pipeline begins at the developer's workstation, not at the CI server. The di
 
 The foundational post [From Commit to Production: The CI/CD Mental Model](/blog/software-development/ci-cd/from-commit-to-production-the-cicd-mental-model) establishes the system-level view that makes the rest of the pipeline legible. It defines what CI and CD actually mean, why the distinction between "build gate" and "deploy gate" matters, and what "trunk-based development" means in practice for a real team.
 
-[Trunk-Based Development and Branch Strategies](/blog/software-development/ci-cd/trunk-based-development-and-branch-strategies) goes deeper on the branching question. Trunk-based development is the most consistent predictor of high deploy frequency in the DORA research because it forces small batch sizes and eliminates the "merge party" problem that makes branching strategies expensive. The post covers feature flags as the mechanism that decouples feature readiness from code integration — a discipline that shows up again in [Feature Flags: Decoupling Deploy from Release](/blog/software-development/ci-cd/feature-flags-decoupling-deploy-from-release).
+[Trunk-Based Development and Branch Strategies](/blog/software-development?subcategory=ci-cd) goes deeper on the branching question. Trunk-based development is the most consistent predictor of high deploy frequency in the DORA research because it forces small batch sizes and eliminates the "merge party" problem that makes branching strategies expensive. The post covers feature flags as the mechanism that decouples feature readiness from code integration — a discipline that shows up again in [Feature Flags: Decoupling Deploy from Release](/blog/software-development/ci-cd/feature-flags-decoupling-deploy-from-release).
 
 The version control foundation also connects to [Monorepo vs. Polyrepo and Scaling the Pipeline](/blog/software-development/ci-cd/monorepo-vs-polyrepo-and-scaling-the-pipeline), which covers the architectural choice that determines how CI scales as a codebase grows. Monorepos require affected-target build graphs; polyrepos require service-level pipeline coordination. Neither is universally correct, but the choice has downstream consequences for every other stage of the pipeline.
 
@@ -52,7 +52,7 @@ The version control foundation also connects to [Monorepo vs. Polyrepo and Scali
 
 The build stage transforms source code into a reproducible artifact. The three properties that matter most for the build stage are: **speed** (a slow build is a slow feedback loop), **reproducibility** (the same source should always produce the same artifact), and **isolation** (the build should not depend on anything that is not explicitly declared).
 
-[What Makes a Great CI Pipeline](/blog/software-development/ci-cd/what-makes-a-great-ci-pipeline) is the core post for this stage. It covers the structural properties of a pipeline — parallelism, caching, step ordering, fail-fast gates — and the metrics to use to diagnose a slow or flaky pipeline. The distinction between "fast feedback" (the sub-5-minute unit test loop) and "full gate" (the 20-minute integration test suite) is critical for pipeline design.
+[What Makes a Great CI Pipeline](/blog/software-development?subcategory=ci-cd) is the core post for this stage. It covers the structural properties of a pipeline — parallelism, caching, step ordering, fail-fast gates — and the metrics to use to diagnose a slow or flaky pipeline. The distinction between "fast feedback" (the sub-5-minute unit test loop) and "full gate" (the 20-minute integration test suite) is critical for pipeline design.
 
 [CI for Containers: Building and Scanning Images](/blog/software-development/ci-cd/building-images-fast-and-securely-in-ci) covers the specific mechanics of building Docker images in CI: multi-stage Dockerfiles, layer caching, BuildKit, and the integration of vulnerability scanning into the build stage itself. Building the image and scanning the image are two steps in the same pipeline stage — not two separate workflows.
 
@@ -62,7 +62,7 @@ The build stage transforms source code into a reproducible artifact. The three p
 
 Testing in CI is not the same as testing in development. The pipeline must run tests at three different speeds and with three different scopes: fast unit tests on every commit, integration tests on every PR merge, and end-to-end or smoke tests against a deployed environment. These are not three stages of one test suite — they are three different programs serving three different purposes.
 
-[Testing in CI: Fast Feedback Without False Confidence](/blog/software-development/ci-cd/testing-in-ci-fast-feedback-without-false-confidence) is the definitive post on this stage. It covers the test pyramid, the difference between a test that gives false confidence and one that gives real confidence, and the discipline of keeping the unit test suite honest. A unit test that mocks everything is not a unit test — it is documentation of what you intended. An integration test that actually exercises the DB schema is the gate you want in CI.
+[Testing in CI: Fast Feedback Without False Confidence](/blog/software-development?subcategory=ci-cd) is the definitive post on this stage. It covers the test pyramid, the difference between a test that gives false confidence and one that gives real confidence, and the discipline of keeping the unit test suite honest. A unit test that mocks everything is not a unit test — it is documentation of what you intended. An integration test that actually exercises the DB schema is the gate you want in CI.
 
 The testing stage is where pipeline reliability becomes critical. [Pipeline Observability and the Flaky Pipeline](/blog/software-development/ci-cd/pipeline-observability-and-the-flaky-pipeline) covers how to identify and eliminate flaky tests, which are the single biggest cause of developer trust erosion in CI. A pipeline that fails 15 percent of the time for non-deterministic reasons trains developers to ignore failures — which is the worst possible outcome.
 
@@ -88,9 +88,9 @@ The package stage signs, annotates, and promotes the artifact from "build output
 
 The deploy stage takes a verified artifact from the registry and makes it serve traffic. The key insight is that "deploy" and "release" are not the same event. Deployment puts new code in production. Release exposes that code to users. The separation is what makes progressive delivery possible.
 
-[Kubernetes Deployment Strategies](/blog/software-development/ci-cd/kubernetes-deployment-strategies) covers the three core deployment patterns — rolling update, blue-green, and canary — and when to choose each. Rolling updates are the default and work well for most cases. Blue-green provides zero-downtime capability at the cost of double the resource footprint. Canary is the highest-fidelity risk-reduction mechanism but requires traffic-splitting infrastructure.
+[Kubernetes Deployment Strategies](/blog/software-development?subcategory=ci-cd) covers the three core deployment patterns — rolling update, blue-green, and canary — and when to choose each. Rolling updates are the default and work well for most cases. Blue-green provides zero-downtime capability at the cost of double the resource footprint. Canary is the highest-fidelity risk-reduction mechanism but requires traffic-splitting infrastructure.
 
-[Health Checks, Readiness, and Zero-Downtime Deploys](/blog/software-development/ci-cd/health-checks-readiness-and-zero-downtime-deploys) covers the Kubernetes primitives that make rolling updates safe: readiness probes, liveness probes, pod disruption budgets, and preStop hooks. A deployment that does not configure readiness probes correctly will route traffic to pods that are not ready to serve it — which is indistinguishable from a bad deploy from the user's perspective.
+[Health Checks, Readiness, and Zero-Downtime Deploys](/blog/software-development?subcategory=ci-cd) covers the Kubernetes primitives that make rolling updates safe: readiness probes, liveness probes, pod disruption budgets, and preStop hooks. A deployment that does not configure readiness probes correctly will route traffic to pods that are not ready to serve it — which is indistinguishable from a bad deploy from the user's perspective.
 
 [Progressive Delivery Meets GitOps](/blog/software-development/ci-cd/progressive-delivery-meets-gitops) is the synthesis post for advanced deployment. It combines the GitOps reconcile loop with progressive delivery tooling — Argo Rollouts, Flagger — to produce automated canary analysis. The automated analysis observes error rates, latency distributions, and custom business metrics on the canary cohort and either promotes or aborts the rollout without human intervention. This is the mechanism that drives change-failure rates below 2 percent.
 
@@ -328,7 +328,7 @@ Every team starts somewhere. The delivery maturity model gives you a precise loc
 
 **Next investment:** Get a CI pipeline running on every PR. Any CI pipeline. GitHub Actions, GitLab CI, CircleCI — the specific tool is not important. What matters is that every PR triggers an automated build and runs the existing test suite. This single investment breaks the doom loop by starting to differentiate "the build works" from "the deploy works."
 
-Read first: [From Commit to Production: The CI/CD Mental Model](/blog/software-development/ci-cd/from-commit-to-production-the-cicd-mental-model), then [What Makes a Great CI Pipeline](/blog/software-development/ci-cd/what-makes-a-great-ci-pipeline).
+Read first: [From Commit to Production: The CI/CD Mental Model](/blog/software-development/ci-cd/from-commit-to-production-the-cicd-mental-model), then [What Makes a Great CI Pipeline](/blog/software-development?subcategory=ci-cd).
 
 ### Level 2: Repeatable
 
@@ -344,7 +344,7 @@ Read first: [From Commit to Production: The CI/CD Mental Model](/blog/software-d
 
 **Next investment:** Add automated deployment to staging. Make the CD pipeline continuous: every merge to main deploys to staging automatically. Add smoke tests against the staging deployment. This investment shifts the confidence question from "is this build good?" to "does this build work in an environment that resembles production?"
 
-Read next: [CI for Containers: Building and Scanning Images](/blog/software-development/ci-cd/building-images-fast-and-securely-in-ci), [Artifact Registries and Promotion Strategies](/blog/software-development/ci-cd/image-registries-tagging-and-promotion), [Packaging Your Application for Kubernetes](/blog/software-development/ci-cd/packaging-your-application-for-kubernetes).
+Read next: [CI for Containers: Building and Scanning Images](/blog/software-development/ci-cd/building-images-fast-and-securely-in-ci), [Artifact Registries and Promotion Strategies](/blog/software-development/ci-cd/image-registries-tagging-and-promotion), [Packaging Your Application for Kubernetes](/blog/software-development?subcategory=ci-cd).
 
 ### Level 3: Defined
 
@@ -396,7 +396,7 @@ This is a reconstructed account of a real progression, anonymized. A seven-engin
 
 The team's first sprint was dedicated entirely to CI infrastructure. They chose GitHub Actions because the codebase was already on GitHub. By the end of week one, every PR triggered an automated build and ran the 340-unit-test suite. By the end of week two, the Dockerfile was refactored to multi-stage with BuildKit caching, cutting image build time from 18 minutes to 4 minutes on a cache hit. By the end of month one, the team had moved the deploy procedure out of a Google Doc and into a shell script that any engineer could run.
 
-The posts that guided Q1: [From Commit to Production: The CI/CD Mental Model](/blog/software-development/ci-cd/from-commit-to-production-the-cicd-mental-model) for the conceptual model, [What Makes a Great CI Pipeline](/blog/software-development/ci-cd/what-makes-a-great-ci-pipeline) for the pipeline structure, and [CI for Containers: Building and Scanning Images](/blog/software-development/ci-cd/building-images-fast-and-securely-in-ci) for the Docker mechanics.
+The posts that guided Q1: [From Commit to Production: The CI/CD Mental Model](/blog/software-development/ci-cd/from-commit-to-production-the-cicd-mental-model) for the conceptual model, [What Makes a Great CI Pipeline](/blog/software-development?subcategory=ci-cd) for the pipeline structure, and [CI for Containers: Building and Scanning Images](/blog/software-development/ci-cd/building-images-fast-and-securely-in-ci) for the Docker mechanics.
 
 By the end of Q1, the team was deploying weekly. CFR dropped from 28 percent to 14 percent — not from better code, but from smaller batch sizes enabled by more frequent deployable builds. MTTR improved to 4 hours because the deploy procedure was documented and repeatable.
 
@@ -406,7 +406,7 @@ In Q2, the team automated the staging deployment. Every merge to main now trigge
 
 They also added Prometheus instrumentation and built a simple Grafana dashboard tracking the four DORA metrics. The act of measuring forced some honest conversations: the DORA data showed that lead time was 9 days on average, 7 of which were "waiting for staging deploy approval" — a manual Slack message that a senior engineer had to acknowledge before the staging deploy ran. Removing that manual gate dropped lead time to 2 days in a single sprint.
 
-The posts that guided Q2: [GitOps: Git as the Source of Truth](/blog/software-development/ci-cd/gitops-git-as-the-source-of-truth), [Argo CD and Flux in Practice](/blog/software-development/ci-cd/argo-cd-and-flux-in-practice), [DORA Metrics: Measuring Delivery Performance](/blog/software-development/ci-cd/dora-metrics-measuring-delivery-performance), and [Testing in CI: Fast Feedback Without False Confidence](/blog/software-development/ci-cd/testing-in-ci-fast-feedback-without-false-confidence).
+The posts that guided Q2: [GitOps: Git as the Source of Truth](/blog/software-development/ci-cd/gitops-git-as-the-source-of-truth), [Argo CD and Flux in Practice](/blog/software-development/ci-cd/argo-cd-and-flux-in-practice), [DORA Metrics: Measuring Delivery Performance](/blog/software-development/ci-cd/dora-metrics-measuring-delivery-performance), and [Testing in CI: Fast Feedback Without False Confidence](/blog/software-development?subcategory=ci-cd).
 
 By the end of Q2, the team was deploying daily. CFR held at 12 percent — still above the Level 3 target, but the next quarter would address that directly.
 
@@ -418,7 +418,7 @@ The first three weeks were spent tuning the thresholds — too tight, and the an
 
 CFR dropped from 12 percent to 4 percent in Q3. The two bad deploys that the canary analysis caught would both have been incidents under the old regime. Under the new regime, they were automated rollbacks that no user noticed. MTTR improved to 22 minutes — the automated rollback time plus the time for error budget to recover.
 
-The posts that guided Q3: [Kubernetes Deployment Strategies](/blog/software-development/ci-cd/kubernetes-deployment-strategies), [Progressive Delivery Meets GitOps](/blog/software-development/ci-cd/progressive-delivery-meets-gitops), and [Rollbacks and Recovering a Bad Deploy](/blog/software-development/ci-cd/rollbacks-and-recovering-a-bad-deploy).
+The posts that guided Q3: [Kubernetes Deployment Strategies](/blog/software-development?subcategory=ci-cd), [Progressive Delivery Meets GitOps](/blog/software-development/ci-cd/progressive-delivery-meets-gitops), and [Rollbacks and Recovering a Bad Deploy](/blog/software-development/ci-cd/rollbacks-and-recovering-a-bad-deploy).
 
 **Q4 — Supply Chain and Scale (Month 10–12): Closing the security and performance gaps**
 
@@ -453,10 +453,10 @@ DORA metrics are not just measurement — they are the compass for investment de
 
 The primary driver of deployment frequency is batch size. Small batches are deployable more often. The investments that reduce batch size are:
 
-- Trunk-based development: eliminates long-lived branches that batch work → see [Trunk-Based Development and Branch Strategies](/blog/software-development/ci-cd/trunk-based-development-and-branch-strategies)
+- Trunk-based development: eliminates long-lived branches that batch work → see [Trunk-Based Development and Branch Strategies](/blog/software-development?subcategory=ci-cd)
 - Feature flags: allow incomplete features to be merged without being released → see [Feature Flags: Decoupling Deploy from Release](/blog/software-development/ci-cd/feature-flags-decoupling-deploy-from-release)
 - Automated staging deployment: removes the manual step that makes deploying to staging feel like work → see [GitOps: Git as the Source of Truth](/blog/software-development/ci-cd/gitops-git-as-the-source-of-truth)
-- CI pipeline speed: fast feedback encourages small commits → see [What Makes a Great CI Pipeline](/blog/software-development/ci-cd/what-makes-a-great-ci-pipeline)
+- CI pipeline speed: fast feedback encourages small commits → see [What Makes a Great CI Pipeline](/blog/software-development?subcategory=ci-cd)
 
 **Before/after numbers for deployment frequency investments:** A team moving from a 12-minute CI build to a 3-minute CI build (BuildKit caching + runner parallelism) typically sees deploy frequency increase 2–3x within a single sprint — not because they changed their working habits but because the reduced wait time eliminated the incentive to batch commits. A team adopting trunk-based development from a GitFlow model typically increases deploy frequency 4–8x within the first quarter, because the elimination of long-lived branches removes the merge coordination overhead that made frequent deploys impractical. Combined, these two investments have moved teams from deploying weekly to deploying 5–10 times per day, a 35–70x improvement in deploy frequency with no change to application architecture.
 
@@ -475,7 +475,7 @@ Lead time measures the elapsed time from "code committed" to "code in production
 
 CFR measures how often a change causes a production incident. The investments that reduce CFR are:
 
-- Canary rollouts: reduce blast radius when a bad change reaches production → see [Kubernetes Deployment Strategies](/blog/software-development/ci-cd/kubernetes-deployment-strategies)
+- Canary rollouts: reduce blast radius when a bad change reaches production → see [Kubernetes Deployment Strategies](/blog/software-development?subcategory=ci-cd)
 - Automated canary analysis: catch bad changes before they reach full traffic → see [Progressive Delivery Meets GitOps](/blog/software-development/ci-cd/progressive-delivery-meets-gitops)
 - Database migration safety: prevent schema changes from breaking running services → see [Database Migrations in the Delivery Pipeline](/blog/software-development/ci-cd/database-migrations-in-the-delivery-pipeline)
 - Security scanning: prevent known-vulnerable images from reaching production → see [CI for Containers: Building and Scanning Images](/blog/software-development/ci-cd/building-images-fast-and-securely-in-ci)
@@ -544,9 +544,9 @@ You have one or two engineers and a single application. Your deployment is proba
 Read in this order:
 
 1. [From Commit to Production: The CI/CD Mental Model](/blog/software-development/ci-cd/from-commit-to-production-the-cicd-mental-model) — understand the full system before touching a single tool. This post prevents the most common mistake: investing in CI before understanding the pipeline as a whole.
-2. [What Makes a Great CI Pipeline](/blog/software-development/ci-cd/what-makes-a-great-ci-pipeline) — build the CI foundation correctly. The structural decisions here (parallel stages, cache keys, fail-fast gates) are much easier to get right at the start than to retrofit later.
+2. [What Makes a Great CI Pipeline](/blog/software-development?subcategory=ci-cd) — build the CI foundation correctly. The structural decisions here (parallel stages, cache keys, fail-fast gates) are much easier to get right at the start than to retrofit later.
 3. [CI for Containers: Building and Scanning Images](/blog/software-development/ci-cd/building-images-fast-and-securely-in-ci) — containerize from day one. Starting with a multi-stage Dockerfile and BuildKit caching prevents a painful migration from a "works on my machine" build to a reproducible one.
-4. [Trunk-Based Development and Branch Strategies](/blog/software-development/ci-cd/trunk-based-development-and-branch-strategies) — establish good commit discipline early. Solo teams often develop bad batching habits that become structural problems when the team grows.
+4. [Trunk-Based Development and Branch Strategies](/blog/software-development?subcategory=ci-cd) — establish good commit discipline early. Solo teams often develop bad batching habits that become structural problems when the team grows.
 5. [DORA Metrics: Measuring Delivery Performance](/blog/software-development/ci-cd/dora-metrics-measuring-delivery-performance) — start measuring before you have a reason to optimize. Getting DORA instrumentation in place early means you will have baseline data when you need to justify pipeline investments later.
 
 These five posts get you from Level 1 to Level 2 in under a month. The remaining posts are valuable, but these five cover the 80 percent that matters most at the solo/startup stage.
@@ -557,11 +557,11 @@ You have 5–15 engineers and a single application. CI probably exists but may b
 
 Read in this order:
 
-1. [Trunk-Based Development and Branch Strategies](/blog/software-development/ci-cd/trunk-based-development-and-branch-strategies) — the source of batch-size problems. Most monolith teams with a high CFR are using a branching strategy that creates large batches. This is the diagnosis post.
-2. [Testing in CI: Fast Feedback Without False Confidence](/blog/software-development/ci-cd/testing-in-ci-fast-feedback-without-false-confidence) — fix the flaky test problem before fixing the deploy problem. A flaky CI pipeline trains developers to ignore failures, which nullifies every other pipeline investment.
-3. [Packaging Your Application for Kubernetes](/blog/software-development/ci-cd/packaging-your-application-for-kubernetes) — standardize the artifact before automating the deploy. Many monolith teams have CI but have not standardized on a container and Kubernetes manifest format, which makes CD automation brittle.
+1. [Trunk-Based Development and Branch Strategies](/blog/software-development?subcategory=ci-cd) — the source of batch-size problems. Most monolith teams with a high CFR are using a branching strategy that creates large batches. This is the diagnosis post.
+2. [Testing in CI: Fast Feedback Without False Confidence](/blog/software-development?subcategory=ci-cd) — fix the flaky test problem before fixing the deploy problem. A flaky CI pipeline trains developers to ignore failures, which nullifies every other pipeline investment.
+3. [Packaging Your Application for Kubernetes](/blog/software-development?subcategory=ci-cd) — standardize the artifact before automating the deploy. Many monolith teams have CI but have not standardized on a container and Kubernetes manifest format, which makes CD automation brittle.
 4. [GitOps: Git as the Source of Truth](/blog/software-development/ci-cd/gitops-git-as-the-source-of-truth) — establish the GitOps model before automating production deploys. This is the architectural foundation that makes automated promotion safe.
-5. [Kubernetes Deployment Strategies](/blog/software-development/ci-cd/kubernetes-deployment-strategies) — implement safe rolling and canary deploys. The post walks through the Argo Rollouts configuration that reduces CFR by catching bad deploys before they reach full traffic.
+5. [Kubernetes Deployment Strategies](/blog/software-development?subcategory=ci-cd) — implement safe rolling and canary deploys. The post walks through the Argo Rollouts configuration that reduces CFR by catching bad deploys before they reach full traffic.
 6. [DORA Metrics: Measuring Delivery Performance](/blog/software-development/ci-cd/dora-metrics-measuring-delivery-performance) — start measuring before optimizing. This post explains how to instrument DORA metrics correctly and what numbers to target.
 7. [Progressive Delivery Meets GitOps](/blog/software-development/ci-cd/progressive-delivery-meets-gitops) — close the automation loop on production promotion. This is the investment that moves a monolith team from daily to multiple-times-daily deployment.
 
@@ -580,7 +580,7 @@ Read in this order:
 5. [Rollbacks and Recovering a Bad Deploy](/blog/software-development/ci-cd/rollbacks-and-recovering-a-bad-deploy) — the recovery protocol for multi-service incidents. Service mesh rollbacks are more complex than monolith rollbacks because a database schema migration in one service may affect dependent services.
 6. [Software Supply Chain Security: The New Frontier](/blog/software-development/ci-cd/software-supply-chain-security-the-new-frontier) — supply chain risk at scale. At 20 services, the attack surface is 20 times larger. A shared base image with a known CVE affects every service simultaneously.
 7. [Secrets Management in the Pipeline](/blog/software-development/ci-cd/secrets-management-in-the-pipeline) — shared secrets infrastructure for multiple services. The external-secrets-operator pattern for Kubernetes-native secrets injection scales across services in a way that per-service secrets management does not.
-8. [Helm Charts in Practice](/blog/software-development/ci-cd/helm-charts-in-practice) — service packaging for GitOps. Shared Helm library charts for cross-cutting concerns (health checks, resource limits, image pull policies) keep per-service configurations DRY across a large service fleet.
+8. [Helm Charts in Practice](/blog/software-development?subcategory=ci-cd) — service packaging for GitOps. Shared Helm library charts for cross-cutting concerns (health checks, resource limits, image pull policies) keep per-service configurations DRY across a large service fleet.
 9. [Signing and Provenance with Sigstore and SLSA](/blog/software-development/ci-cd/signing-and-provenance-with-sigstore-and-slsa) — artifact attestation at scale. At 20+ services with 20+ independent build pipelines, per-image signing enforced via admission policy is the only scalable mechanism for ensuring that every image in the cluster came from a trusted build.
 10. [Database Migrations in the Delivery Pipeline](/blog/software-development/ci-cd/database-migrations-in-the-delivery-pipeline) — the most underestimated risk in a microservices fleet. Each service typically owns its own database, which means 20 services have 20 independent migration pipelines. Getting expand-contract patterns right across all of them is the discipline that prevents data-layer incidents.
 
@@ -615,29 +615,29 @@ The six posts that establish the commit-to-artifact pipeline. Read these first i
 
 1. [From Commit to Production: The CI/CD Mental Model](/blog/software-development/ci-cd/from-commit-to-production-the-cicd-mental-model) — The system-level view: what CI and CD mean, the gates model, and why speed and safety are complements not trade-offs.
 
-2. [Trunk-Based Development and Branch Strategies](/blog/software-development/ci-cd/trunk-based-development-and-branch-strategies) — Branching patterns, feature flags as the integration mechanism, and the evidence base for trunk-based development's effect on deploy frequency.
+2. [Trunk-Based Development and Branch Strategies](/blog/software-development?subcategory=ci-cd) — Branching patterns, feature flags as the integration mechanism, and the evidence base for trunk-based development's effect on deploy frequency.
 
-3. [What Makes a Great CI Pipeline](/blog/software-development/ci-cd/what-makes-a-great-ci-pipeline) — Pipeline structural properties: step ordering, parallelism, caching, fail-fast gates, and the metrics to diagnose a slow or unreliable pipeline.
+3. [What Makes a Great CI Pipeline](/blog/software-development?subcategory=ci-cd) — Pipeline structural properties: step ordering, parallelism, caching, fail-fast gates, and the metrics to diagnose a slow or unreliable pipeline.
 
 4. [CI for Containers: Building and Scanning Images](/blog/software-development/ci-cd/building-images-fast-and-securely-in-ci) — Multi-stage Dockerfiles, BuildKit caching, image vulnerability scanning integrated into the build stage.
 
 5. [Artifact Registries and Promotion Strategies](/blog/software-development/ci-cd/image-registries-tagging-and-promotion) — Registry selection and configuration, tagging conventions, artifact promotion gates between dev, staging, and production registries.
 
-6. [Testing in CI: Fast Feedback Without False Confidence](/blog/software-development/ci-cd/testing-in-ci-fast-feedback-without-false-confidence) — The test pyramid in CI, the difference between tests that give real confidence and tests that give false confidence, and the discipline of honest integration testing.
+6. [Testing in CI: Fast Feedback Without False Confidence](/blog/software-development?subcategory=ci-cd) — The test pyramid in CI, the difference between tests that give real confidence and tests that give false confidence, and the discipline of honest integration testing.
 
 ### Track B: Containers and Kubernetes
 
 The five posts that cover packaging and deploying applications on Kubernetes.
 
-7. [Packaging Your Application for Kubernetes](/blog/software-development/ci-cd/packaging-your-application-for-kubernetes) — Deployment manifests, resource requests/limits, ConfigMaps, Secrets, and the structural properties of a Kubernetes-ready application package.
+7. [Packaging Your Application for Kubernetes](/blog/software-development?subcategory=ci-cd) — Deployment manifests, resource requests/limits, ConfigMaps, Secrets, and the structural properties of a Kubernetes-ready application package.
 
-8. [Helm Charts in Practice](/blog/software-development/ci-cd/helm-charts-in-practice) — Chart structure, values hierarchies, chart testing, and the operational patterns for managing Helm releases across environments.
+8. [Helm Charts in Practice](/blog/software-development?subcategory=ci-cd) — Chart structure, values hierarchies, chart testing, and the operational patterns for managing Helm releases across environments.
 
-9. [Kustomize Overlays and Environment Promotion](/blog/software-development/ci-cd/kustomize-overlays-and-environment-promotion) — Kustomize base/overlay model, environment promotion patterns, and the choice between Helm and Kustomize for different team structures.
+9. [Kustomize Overlays and Environment Promotion](/blog/software-development?subcategory=ci-cd) — Kustomize base/overlay model, environment promotion patterns, and the choice between Helm and Kustomize for different team structures.
 
-10. [Kubernetes Deployment Strategies](/blog/software-development/ci-cd/kubernetes-deployment-strategies) — Rolling updates, blue-green deployments, canary deployments, and Argo Rollouts as the progressive delivery engine.
+10. [Kubernetes Deployment Strategies](/blog/software-development?subcategory=ci-cd) — Rolling updates, blue-green deployments, canary deployments, and Argo Rollouts as the progressive delivery engine.
 
-11. [Health Checks, Readiness, and Zero-Downtime Deploys](/blog/software-development/ci-cd/health-checks-readiness-and-zero-downtime-deploys) — Readiness and liveness probes, pod disruption budgets, preStop hooks, and the configuration required to make rolling updates truly zero-downtime.
+11. [Health Checks, Readiness, and Zero-Downtime Deploys](/blog/software-development?subcategory=ci-cd) — Readiness and liveness probes, pod disruption budgets, preStop hooks, and the configuration required to make rolling updates truly zero-downtime.
 
 ### Track C: GitOps and Progressive Delivery
 

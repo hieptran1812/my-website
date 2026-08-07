@@ -1094,7 +1094,7 @@ This connection suggests that all the lessons learned from offline RL transfer d
 - IQL's advantage-weighted BC is directly analogous to DPO (Direct Preference Optimization), which fine-tunes by weighting behavioral cloning by the preference ratio
 - The offline-to-online pipeline (offline pre-train → online fine-tune) maps to RLHF followed by online RLHF with real user feedback
 
-For a deeper treatment of how these methods connect, see the RLHF and alignment posts linked from the [reinforcement-learning unified map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) and the [debugging AI training series](/blog/machine-learning/debugging-training/the-training-debugging-playbook) for how OOD issues manifest in LLM fine-tuning.
+For a deeper treatment of how these methods connect, see the RLHF and alignment posts linked from the [reinforcement-learning unified map](/blog/machine-learning?subcategory=reinforcement-learning) and the [debugging AI training series](/blog/machine-learning/debugging-training/the-training-debugging-playbook) for how OOD issues manifest in LLM fine-tuning.
 
 ### Practical Debugging: Detecting OOD Overestimation During Training
 
@@ -1330,7 +1330,7 @@ Looking forward, several frontiers are active:
 
 **Decision Transformers (Chen et al. 2022):** Frames offline RL as sequence modeling — given a target return, predict the action that achieves it. Avoids Q-functions entirely. Competitive on D4RL but struggles with credit assignment over long horizons.
 
-**Conservative offline RL for LLMs:** The connection to RLHF is direct. Fine-tuning a language model on a fixed dataset of (prompt, response, reward) triples is exactly offline RL. CQL-like penalties on the policy logits correspond to the KL divergence term in RLHF — preventing the policy from generating OOD tokens that were never rewarded. See the [reinforcement-learning unified map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) for the full connection.
+**Conservative offline RL for LLMs:** The connection to RLHF is direct. Fine-tuning a language model on a fixed dataset of (prompt, response, reward) triples is exactly offline RL. CQL-like penalties on the policy logits correspond to the KL divergence term in RLHF — preventing the policy from generating OOD tokens that were never rewarded. See the [reinforcement-learning unified map](/blog/machine-learning?subcategory=reinforcement-learning) for the full connection.
 
 **Uncertainty-based offline RL:** Methods like MOPO (Yu et al. 2020) and COMBO (Yu et al. 2021) use a learned environment model to estimate uncertainty in OOD regions, using that uncertainty as a penalty rather than conservatism on the Q-function directly.
 
@@ -1348,7 +1348,7 @@ Looking forward, several frontiers are active:
 - The deployment distribution is far from the data distribution — no offline method can extrapolate safely to truly novel state-action pairs
 - You need sample efficiency guarantees — offline RL has no convergence guarantees in general; CQL's lower bound is a guarantee on conservatism, not on finding the optimal policy
 
-The cross-links to other posts in this series will help position offline RL in the broader landscape. If you are coming from model-free Q-learning, see the [DQN deep dive](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) for the online counterpart. For RLHF connections, the alignment and RLHF posts cover how the offline RL intuitions about distributional shift apply to language model fine-tuning.
+The cross-links to other posts in this series will help position offline RL in the broader landscape. If you are coming from model-free Q-learning, see the [DQN deep dive](/blog/machine-learning?subcategory=reinforcement-learning) for the online counterpart. For RLHF connections, the alignment and RLHF posts cover how the offline RL intuitions about distributional shift apply to language model fine-tuning.
 
 ## 16. Connecting to the Broader RL Landscape
 
@@ -1362,7 +1362,7 @@ Offline RL does not live in isolation. It connects to several other important ar
 
 **Safe RL:** The conservatism guarantee from CQL is closely related to safety constraints in RL. A CQL policy that underestimates Q-values for OOD actions is implicitly constrained to stay near the data distribution — which, if the data was collected safely, means the policy is also likely to behave safely. This is why offline RL is attractive for safety-critical applications: it inherits safety properties of the behavior policy.
 
-Understanding where offline RL fits in the full landscape — and when to use model-based approaches, online RL, or imitation learning instead — is the subject of the [reinforcement-learning unified map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) post, which provides the taxonomy for the whole series.
+Understanding where offline RL fits in the full landscape — and when to use model-based approaches, online RL, or imitation learning instead — is the subject of the [reinforcement-learning unified map](/blog/machine-learning?subcategory=reinforcement-learning) post, which provides the taxonomy for the whole series.
 
 ## 15. Key Takeaways
 
@@ -1396,5 +1396,5 @@ Understanding where offline RL fits in the full landscape — and when to use mo
 - **Levine, Kumar, Tucker, Fu (2020).** "Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems." arXiv 2020. The definitive survey paper — start here if you want to go deeper into the theory.
 - **Yu, Thomas, Yu, Ermon, Zou, Levine, Finn, Ma (2020).** "MOPO: Model-Based Offline Policy Optimization." NeurIPS 2020. Model-based approach using ensemble uncertainty as a penalty — a compelling alternative to Q-conservatism.
 - **Ziegler, Stiennon, Wu, Brown, Radford, Amodei, Christiano, Irving (2019).** "Fine-Tuning Language Models from Human Preferences." arXiv 2019. The original RLHF paper, which implicitly uses offline RL principles.
-- [Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) — taxonomy and cross-links for the full RL series, including the relationship between offline RL, RLHF, and model-based methods.
+- [Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning) — taxonomy and cross-links for the full RL series, including the relationship between offline RL, RLHF, and model-based methods.
 - [The Reinforcement Learning Playbook](/blog/machine-learning/reinforcement-learning/the-reinforcement-learning-playbook) — capstone applying all methods across real-world domains including robotics, games, and language model alignment.

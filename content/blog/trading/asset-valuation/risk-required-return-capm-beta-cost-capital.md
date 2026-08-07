@@ -236,7 +236,7 @@ CAPM's most important real-world application is as an input to discounted cash f
 
 The *cost of equity* — what investors require to hold the stock — is almost always computed using CAPM. So when an analyst plugs a 10.07% cost of equity into Apple's DCF model, they are saying: "Apple's shareholders require at least 10.07% per year, and that's the rate I'll use to discount their future cash flows."
 
-A higher beta → higher cost of equity → higher WACC → lower present value of future cash flows → lower valuation. This is the mechanical chain that connects risk to price. See [WACC: The Weighted Average Cost of Capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital) for a deeper treatment of how the cost of equity is combined with the cost of debt.
+A higher beta → higher cost of equity → higher WACC → lower present value of future cash flows → lower valuation. This is the mechanical chain that connects risk to price. See [WACC: The Weighted Average Cost of Capital](/blog/trading?subcategory=equity-research) for a deeper treatment of how the cost of equity is combined with the cost of debt.
 
 ---
 
@@ -388,7 +388,7 @@ $$E(R_i) = R_f + \beta_i \times ERP + s_i \times SMB + h_i \times HML$$
 
 This model explains more of the cross-sectional variation in stock returns than CAPM alone. Later extensions added momentum (the tendency of recent winners to keep winning), profitability, and investment factors.
 
-For most valuation work, practitioners still use CAPM for cost of equity estimation. Fama-French is more common in academic research and factor-investing contexts. See [Expected Value and Probability Distributions](/blog/trading/math-for-quants/expected-value-probability-distributions) for the statistical underpinnings of multi-factor models.
+For most valuation work, practitioners still use CAPM for cost of equity estimation. Fama-French is more common in academic research and factor-investing contexts. See [Expected Value and Probability Distributions](/blog/trading?subcategory=math-for-quants) for the statistical underpinnings of multi-factor models.
 
 ### Why Practitioners Keep Using CAPM
 
@@ -547,7 +547,7 @@ When practitioners use CAPM in a real valuation, the steps are clear and sequent
 
 5. **Compute the cost of equity**: \$K_e = R_f + \beta \times ERP + CRP\$
 
-6. **Combine with cost of debt** to get WACC. See [WACC: The Weighted Average Cost of Capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital) for the full construction.
+6. **Combine with cost of debt** to get WACC. See [WACC: The Weighted Average Cost of Capital](/blog/trading?subcategory=equity-research) for the full construction.
 
 The cost of equity you compute here is the discount rate that goes into every DCF you run. It is not a number you set once and forget — it should be reviewed any time the risk-free rate moves materially (a 100 bps change in Treasury yields changes your cost of equity by 100 bps), any time the company's capital structure changes (re-levering raises beta), or any time comparable company betas shift (industry conditions change what counts as "normal" risk for this business). Good valuation practice treats the cost of equity as a living estimate, not a static plug. It connects directly to the [time value of money framework](/blog/trading/asset-valuation/time-value-of-money-engine-every-valuation-model) — a higher required return means future cash flows are discounted more aggressively, producing a lower valuation today.
 
@@ -559,8 +559,8 @@ This post is part of the **Asset Valuation** series. If you came here having alr
 
 - [What Is Value? Philosophy, Frameworks, and Asset Pricing](/blog/trading/asset-valuation/what-is-value-philosophy-frameworks-asset-pricing) — the series foundation, explaining why intrinsic value exists and how markets price assets
 - [Time Value of Money: The Engine Behind Every Valuation Model](/blog/trading/asset-valuation/time-value-of-money-engine-every-valuation-model) — the mechanics of discounting that make the required return matter
-- [WACC: The Weighted Average Cost of Capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital) — how the cost of equity (from CAPM) is combined with the cost of debt to build the full discount rate
-- [Expected Value and Probability Distributions](/blog/trading/math-for-quants/expected-value-probability-distributions) — the mathematical underpinnings of expected returns and risk measurement
+- [WACC: The Weighted Average Cost of Capital](/blog/trading?subcategory=equity-research) — how the cost of equity (from CAPM) is combined with the cost of debt to build the full discount rate
+- [Expected Value and Probability Distributions](/blog/trading?subcategory=math-for-quants) — the mathematical underpinnings of expected returns and risk measurement
 
 For practitioners working in Vietnamese markets, Damodaran's annual update to country risk premiums (available at his NYU website) is indispensable for keeping your CAPM inputs current. Vietnam's CRP changes year to year as its sovereign credit rating evolves and its market integration with global capital deepens.
 

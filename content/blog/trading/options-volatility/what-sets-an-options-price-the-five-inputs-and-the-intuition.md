@@ -267,7 +267,7 @@ In words: the call price minus the put price must equal the spot price minus the
 - Left side: `C − P = 4.49 − 3.49 = ` **\$1.00**
 - Right side: `S − K·e^(−rT) = 100 − 100 × e^(−0.04 × 0.25) = 100 − 99.00 = ` **\$1.00**
 
-They match — \$1.00 = \$1.00 (to the penny, \$0.995 before rounding). **The intuition: a call minus a put is, in payoff terms, just owning the stock with the purchase deferred to expiry — so it must be worth the stock today minus the discounted cost of that deferred purchase. The \$1.00 gap is purely the carry on the strike.** This relationship is *model-free*: it doesn't care whether Black-Scholes is right; it holds by pure arbitrage. (The full proof — how you'd construct a risk-free profit if it *didn't* hold — is in [the put-call parity post](/blog/trading/quantitative-finance/put-call-parity-no-arbitrage).)
+They match — \$1.00 = \$1.00 (to the penny, \$0.995 before rounding). **The intuition: a call minus a put is, in payoff terms, just owning the stock with the purchase deferred to expiry — so it must be worth the stock today minus the discounted cost of that deferred purchase. The \$1.00 gap is purely the carry on the strike.** This relationship is *model-free*: it doesn't care whether Black-Scholes is right; it holds by pure arbitrage. (The full proof — how you'd construct a risk-free profit if it *didn't* hold — is in [the put-call parity post](/blog/trading/quantitative-finance/put-call-parity-no-arbitrage-quant-interviews).)
 
 And the relationship doesn't just hold at the money — it holds at *every* strike, which is a strong consistency check on any pricer. Here's `C − P` plotted against `S − K·e^(−rT)` across a ladder of strikes; every point lands exactly on the 45-degree line:
 
@@ -339,7 +339,7 @@ You came here to build intuition; here's how to *use* it. This is the checklist 
 
 - [Black-Scholes, derived](/blog/trading/quantitative-finance/black-scholes) — where the pricing formula we used all post actually comes from, and why it has the shape it does.
 - [Option pricing fundamentals](/blog/trading/quantitative-finance/options-theory) — the theory layer beneath this intuition layer.
-- [Put-call parity and no-arbitrage](/blog/trading/quantitative-finance/put-call-parity-no-arbitrage) — the full proof of the `C − P = S − K·e^(−rT)` relationship we verified.
+- [Put-call parity and no-arbitrage](/blog/trading/quantitative-finance/put-call-parity-no-arbitrage-quant-interviews) — the full proof of the `C − P = S − K·e^(−rT)` relationship we verified.
 - [The volatility surface](/blog/trading/quantitative-finance/volatility-surface) — why "one volatility number" is really a surface that varies by strike and expiry.
 - [Event volatility: implied vs realized and the vol crush](/blog/trading/event-trading/event-volatility-implied-vs-realized-and-the-vol-crush) — the IV-vs-RV theme made concrete around earnings.
 - [The expected move: pricing event risk with options](/blog/trading/event-trading/the-expected-move-pricing-event-risk-with-options) — how the volatility input encodes the market's expected move.

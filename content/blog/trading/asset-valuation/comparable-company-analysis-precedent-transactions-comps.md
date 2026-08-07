@@ -443,9 +443,9 @@ For the intrinsic anchor that comps should be reconciled against, [DCF practice:
 
 [Price-to-earnings ratio: P/E valuation](/blog/trading/asset-valuation/price-to-earnings-ratio-pe-valuation-stocks) covers the P/E multiple in depth, including the decomposition of the P/E into a growth expectations formula and the Gordon-Growth anchoring that makes P/E interpretable.
 
-For the equity research practitioner workflow in which comps fit (alongside credit analysis, management meetings, and channel checks), [comparable company analysis in equity research](/blog/trading/equity-research/comparable-company-analysis-comps) covers the workflow context.
+For the equity research practitioner workflow in which comps fit (alongside credit analysis, management meetings, and channel checks), [comparable company analysis in equity research](/blog/trading/asset-valuation/comparable-company-analysis-precedent-transactions-comps) covers the workflow context.
 
-**On the discount rate underpinning all multiples:** Every EV/EBITDA multiple embeds an implicit WACC. When the Fed raises rates, WACCs rise, and multiples compress — mechanically, not mysteriously. Understanding [WACC and cost of capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital) is the prerequisite for understanding why sector multiples contracted 30–40% from 2021 to 2023 as rates rose.
+**On the discount rate underpinning all multiples:** Every EV/EBITDA multiple embeds an implicit WACC. When the Fed raises rates, WACCs rise, and multiples compress — mechanically, not mysteriously. Understanding [WACC and cost of capital](/blog/trading?subcategory=equity-research) is the prerequisite for understanding why sector multiples contracted 30–40% from 2021 to 2023 as rates rose.
 
 ---
 

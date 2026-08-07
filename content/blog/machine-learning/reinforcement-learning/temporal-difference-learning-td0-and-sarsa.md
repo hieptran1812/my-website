@@ -38,7 +38,7 @@ Figure 1 below shows where TD sits in the three-way comparison with Monte Carlo 
 
 ![Three-way comparison of TD, MC, and DP showing their online, bootstrap, and model properties as a vertical stack](/imgs/blogs/temporal-difference-learning-td0-and-sarsa-1.png)
 
-Cross-links: this post builds directly on [Markov Decision Processes and the Bellman Equation](/blog/machine-learning/reinforcement-learning/markov-decision-processes-and-the-bellman-equation) (A3) and [Monte Carlo Methods in Reinforcement Learning](/blog/machine-learning/reinforcement-learning/monte-carlo-methods-reinforcement-learning) (B2). The next post in this track — [Q-Learning and Off-Policy TD Control](/blog/machine-learning/reinforcement-learning/q-learning-off-policy-td-control) (B4) — extends the off-policy variant and adds function approximation. Also see post A6 for the broader RL taxonomy that places all these methods in context. Companion reading on debugging misbehaving critics is at [Debugging AI Training](/blog/machine-learning/debugging-training/debugging-rl-critics-and-reward-signal).
+Cross-links: this post builds directly on [Markov Decision Processes and the Bellman Equation](/blog/machine-learning/reinforcement-learning/markov-decision-processes) (A3) and [Monte Carlo Methods in Reinforcement Learning](/blog/machine-learning/reinforcement-learning/monte-carlo-methods-in-rl) (B2). The next post in this track — [Q-Learning and Off-Policy TD Control](/blog/machine-learning/reinforcement-learning/q-learning-off-policy-td-control) (B4) — extends the off-policy variant and adds function approximation. Also see post A6 for the broader RL taxonomy that places all these methods in context. Companion reading on debugging misbehaving critics is at [Debugging AI Training](/blog/machine-learning/debugging-training/the-training-debugging-playbook).
 
 
 ## 1. The Core Insight: Why Wait?
@@ -204,7 +204,7 @@ It is worth pausing on the model-free property of TD because it is often mis-sta
 
 Compare this to model-based RL, where you first learn a model $\hat{p}(s', r \mid s, a)$ from data and then plan using that model (e.g., using value iteration on the learned model). Model-based methods are more sample-efficient when the model is accurate, but they incur model error — biases introduced by the learned dynamics. TD is model-free because it plans directly with real experience, sidestepping the model-learning step entirely.
 
-In production systems, this tradeoff matters. For a physical robot where each training step might cause wear-and-tear or risk, model-based RL makes sense: learn a simulator, plan inside it cheaply, then verify. For a software agent (a game AI, a recommendation system, an LLM RLHF loop) where interaction is cheap, model-free TD is simpler and avoids model bias. See the [reinforcement learning taxonomy post](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) for the full decision framework.
+In production systems, this tradeoff matters. For a physical robot where each training step might cause wear-and-tear or risk, model-based RL makes sense: learn a simulator, plan inside it cheaply, then verify. For a software agent (a game AI, a recommendation system, an LLM RLHF loop) where interaction is cheap, model-free TD is simpler and avoids model bias. See the [reinforcement learning taxonomy post](/blog/machine-learning?subcategory=reinforcement-learning) for the full decision framework.
 
 ### Unified view: the Bellman residual
 
@@ -1015,7 +1015,7 @@ The reinforcement learning from human feedback pipeline used in InstructGPT (Ouy
 
 $$V_\phi(s_t) \leftarrow V_\phi(s_t) + \alpha_V \left[ r_t + \gamma V_\phi(s_{t+1}) - V_\phi(s_t) \right]$$
 
-The same TD(0) update, now with a transformer as the value function approximator. The TD error signal flows back through the critic to stabilize the actor's policy gradient estimate. Every post about RLHF is secretly a story about TD learning scaled up — see [the debugging training series](/blog/machine-learning/debugging-training/debugging-rlhf-reward-hacking-kl-drift) for what happens when the TD critic misfits.
+The same TD(0) update, now with a transformer as the value function approximator. The TD error signal flows back through the critic to stabilize the actor's policy gradient estimate. Every post about RLHF is secretly a story about TD learning scaled up — see [the debugging training series](/blog/machine-learning?subcategory=debugging-training) for what happens when the TD critic misfits.
 
 In the RLHF context, the "state" is the token sequence generated so far, the "action" is the next token, and the "reward" is a learned score from the reward model (plus a KL penalty to the reference policy). The TD(0) critic in PPO-RLHF must handle a state space of size $|V|^{L}$ where $|V|$ is vocabulary size and $L$ is sequence length — obviously tabular methods fail, but the TD update rule itself is unchanged. This is why understanding tabular TD matters even in the age of large language models: the learning principle is universal, only the function approximator changes.
 
@@ -1222,10 +1222,10 @@ The advantage tells the actor: "this action led to a better (or worse) outcome t
 
 - **Schultz, W., Dayan, P., & Montague, P. R. (1997). A neural substrate of prediction and reward. Science, 275(5306), 1593–1599.** The landmark paper establishing that dopaminergic neuron firing patterns match TD error.
 
-- **Within-series: [Markov Decision Processes and the Bellman Equation](/blog/machine-learning/reinforcement-learning/markov-decision-processes-and-the-bellman-equation)** — the mathematical foundation this post builds on.
+- **Within-series: [Markov Decision Processes and the Bellman Equation](/blog/machine-learning/reinforcement-learning/markov-decision-processes)** — the mathematical foundation this post builds on.
 
-- **Within-series: [Monte Carlo Methods in Reinforcement Learning](/blog/machine-learning/reinforcement-learning/monte-carlo-methods-reinforcement-learning)** — the MC baseline that TD outperforms on sample efficiency.
+- **Within-series: [Monte Carlo Methods in Reinforcement Learning](/blog/machine-learning/reinforcement-learning/monte-carlo-methods-in-rl)** — the MC baseline that TD outperforms on sample efficiency.
 
 - **Within-series: [Q-Learning and Off-Policy TD Control](/blog/machine-learning/reinforcement-learning/q-learning-off-policy-td-control)** — the next post extending Q-learning to deep networks and experience replay.
 
-- **Within-series: [Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map)** — the series taxonomy locating TD methods in the broader RL landscape.
+- **Within-series: [Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning)** — the series taxonomy locating TD methods in the broader RL landscape.

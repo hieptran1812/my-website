@@ -716,7 +716,7 @@ The real estate income approach is fundamentally the same DCF framework applied 
 
 - **[Discount Rates in Practice: WACC, Cost of Equity, and Unlevered Beta](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta)** — the discount rate used in real estate DCF is derived from the same CAPM machinery; the Real Estate WACC (~7.8%, Damodaran 2025) and how it feeds into required returns.
 
-- **[How to Value Real Estate Investment](/blog/trading/real-estate/how-to-value-real-estate-investment)** — a practical companion post in the real estate series focusing on investment property analysis from the investor's workflow perspective.
+- **[How to Value Real Estate Investment](/blog/trading?subcategory=real-estate)** — a practical companion post in the real estate series focusing on investment property analysis from the investor's workflow perspective.
 
 ### Suggested reading progression
 

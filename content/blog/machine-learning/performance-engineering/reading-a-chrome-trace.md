@@ -470,5 +470,5 @@ The rule of thumb: **the Chrome trace is for the gap between kernels; Nsight Com
 - [Nsight Systems for AI services](/blog/machine-learning/performance-engineering/nsight-systems-for-ai-services) — the same three-shapes eye applied to a system-wide timeline across CPU, GPU, and copies.
 - [Profiling LLM serving with Nsight](/blog/machine-learning/model-serving/profiling-llm-serving-with-nsight) — a real LLM server read on the timeline, end to end.
 - [Why your AI service wastes CPU and GPU](/blog/machine-learning/performance-engineering/why-your-ai-service-wastes-cpu-and-gpu) — the series intro: the four wastes and the profile → hypothesize → fix → measure loop.
-- [The performance-engineering playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the capstone decision tree: symptom → which profiler → likely cause → fix.
+- [The performance-engineering playbook](/blog/machine-learning?subcategory=performance-engineering) — the capstone decision tree: symptom → which profiler → likely cause → fix.
 - The PyTorch Profiler tutorial, the PyTorch CUDA Graphs documentation, the `torch.compile` / Inductor docs, and the Perfetto UI documentation — the primary sources for the tools and APIs used above.

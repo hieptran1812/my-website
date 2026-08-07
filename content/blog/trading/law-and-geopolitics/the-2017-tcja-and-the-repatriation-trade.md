@@ -340,5 +340,5 @@ The TCJA is the cleanest case study this series has because every link in the ch
 - [Tax law as a market force](/blog/trading/law-and-geopolitics/tax-law-as-a-market-force) — the general framework this case study instantiates: how the whole tax code steers capital.
 - [How a rule becomes a price: expectations, drift and repricing](/blog/trading/law-and-geopolitics/how-a-rule-becomes-a-price-expectations-drift-and-repricing) — why the move ran ahead of the December 2017 passage and faded on confirmation.
 - [How law moves markets: the transmission chain](/blog/trading/law-and-geopolitics/how-law-moves-markets-the-transmission-chain) — the spine of the series: law to policy to flows to prices to the trade.
-- [Equity research](/blog/trading/equity-research) — for the valuation mechanics behind capitalizing a one-time earnings level shift versus organic growth.
-- [Macro trading](/blog/trading/macro-trading) — for the fiscal-deficit and liquidity channels that a tax cut feeds into, and the policy backdrop around the sunset cliff.
+- [Equity research](/blog/trading?subcategory=equity-research) — for the valuation mechanics behind capitalizing a one-time earnings level shift versus organic growth.
+- [Macro trading](/blog/trading?subcategory=macro-trading) — for the fiscal-deficit and liquidity channels that a tax cut feeds into, and the policy backdrop around the sunset cliff.

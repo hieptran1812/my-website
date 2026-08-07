@@ -487,7 +487,7 @@ The WACC rows in your sensitivity table come from [Discount Rates in Practice: W
 
 The Gordon Growth Model in terminal value is the exact same formula used in the [Dividend Discount Model](/blog/trading/asset-valuation/dividend-discount-model-gordon-growth-multi-stage). If a company returns all its earnings as dividends (rather than retaining for growth), both models converge — which is a useful internal consistency check.
 
-For a practitioner's full-stack DCF walkthrough — from building the income statement to presenting the final valuation range in an investment banking context — see the companion post in the equity research series: [Discounted Cash Flow: The Complete Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide).
+For a practitioner's full-stack DCF walkthrough — from building the income statement to presenting the final valuation range in an investment banking context — see the companion post in the equity research series: [Discounted Cash Flow: The Complete Guide](/blog/trading?subcategory=equity-research).
 
 ### The one habit that separates good analysts from average ones
 

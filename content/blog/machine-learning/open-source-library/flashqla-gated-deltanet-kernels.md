@@ -633,7 +633,7 @@ FlashQLA is a sharp, specialized tool. It is the right one when your situation m
 
 **Skip FlashQLA when:**
 
-- Your model uses **standard softmax attention** (or MLA, sliding-window, NSA/DSA sparse attention) — FlashQLA computes the gated delta rule and nothing else; for those, see [FlashMLA and the DeepSeek open-infra kernels](/blog/machine-learning/open-source-library/deepseek-open-infra-deepep-deepgemm-flashmla) or [trainable sparse attention](/blog/machine-learning/large-language-model/trainable-sparse-attention-nsa-vs-dsa).
+- Your model uses **standard softmax attention** (or MLA, sliding-window, NSA/DSA sparse attention) — FlashQLA computes the gated delta rule and nothing else; for those, see [FlashMLA and the DeepSeek open-infra kernels](/blog/machine-learning/mlops/deepseek-open-infra-deepep-deepgemm-flashmla) or [trainable sparse attention](/blog/machine-learning/large-language-model/trainable-sparse-attention-nsa-vs-dsa).
 - You are on **Ampere or older** (SM80) — the warp-specialization and TMA the kernel is built on do not exist there; use the FLA Triton kernel instead.
 - You are **decoding one token at a time** — the recurrence is already cheap at decode; FlashQLA optimizes the *chunked prefill/training* path, not single-step decode.
 - You have **plenty of heads per GPU** (TP1, many heads) — you are already SM-saturated, so the context-parallelism win shrinks toward zero and the migration may not be worth it.

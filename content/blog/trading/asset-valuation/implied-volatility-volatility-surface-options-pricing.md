@@ -495,7 +495,7 @@ Most retail traders think of options as directional bets: buy a call if you thin
 
 ### The connection to the options series
 
-This framework connects directly to the trading strategies covered in the [options volatility series](/blog/trading/options-volatility/implied-volatility-vix-explained), which goes deeper into the practitioner mechanics of trading vol. The asset valuation post here focuses on the pricing-science foundation.
+This framework connects directly to the trading strategies covered in the [options volatility series](/blog/trading?subcategory=options-volatility), which goes deeper into the practitioner mechanics of trading vol. The asset valuation post here focuses on the pricing-science foundation.
 
 #### Worked example:
 
@@ -672,13 +672,13 @@ This post is part of the **Asset Valuation** series. The posts that provide esse
 
 The companion series on trading vol mechanics:
 
-- [Implied Volatility and VIX Explained](/blog/trading/options-volatility/implied-volatility-vix-explained) — The practitioner's perspective on trading IV: term structure strategies, skew trades, vol regime identification, and gamma/theta management.
+- [Implied Volatility and VIX Explained](/blog/trading?subcategory=options-volatility) — The practitioner's perspective on trading IV: term structure strategies, skew trades, vol regime identification, and gamma/theta management.
 
 For macro context on how vol regimes connect to the broader economic cycle:
 
-- [The Fed and Rate Policy](/blog/trading/macro-trading/federal-reserve-rate-policy-trading-implications) — Understanding how rate hike cycles like 2022 create sustained vol regimes distinct from one-off crash events.
+- [The Fed and Rate Policy](/blog/trading?subcategory=macro-trading) — Understanding how rate hike cycles like 2022 create sustained vol regimes distinct from one-off crash events.
 
-- [Cross-Asset Correlations in Crises](/blog/trading/cross-asset/cross-asset-correlations-crises-contagion) — Why the 2022 bond-equity correlation break and the 2020 cross-asset synchronization matter for vol hedging.
+- [Cross-Asset Correlations in Crises](/blog/trading?subcategory=cross-asset) — Why the 2022 bond-equity correlation break and the 2020 cross-asset synchronization matter for vol hedging.
 
 ### Key concepts to deepen
 

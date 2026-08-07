@@ -229,7 +229,7 @@ Post-war price:  USD 5.75 EPS x 18.0  = USD 103.50
 Total re-rating: (103.50 - 75.00) / 75.00 = +38.0%
 ```
 
-The stock is up **38%**, and you can decompose it: earnings growth (5.75/5.00 = +15%) and multiple expansion (18/15 = +20%) compound to roughly +38%. The intuition: the most powerful re-ratings happen when a geopolitical shift raises *both* how much a company will earn *and* how confident the market is that the earnings will keep coming — multiple expansion on top of earnings growth is what turns a good year into a structural re-rating. (For how to decompose price moves into earnings vs. multiple, see [valuation and the building blocks of equity research](/blog/trading/equity-research/discounted-cash-flow-dcf-valuation-from-first-principles).)
+The stock is up **38%**, and you can decompose it: earnings growth (5.75/5.00 = +15%) and multiple expansion (18/15 = +20%) compound to roughly +38%. The intuition: the most powerful re-ratings happen when a geopolitical shift raises *both* how much a company will earn *and* how confident the market is that the earnings will keep coming — multiple expansion on top of earnings growth is what turns a good year into a structural re-rating. (For how to decompose price moves into earnings vs. multiple, see [valuation and the building blocks of equity research](/blog/trading?subcategory=equity-research).)
 
 ## Common misconceptions
 

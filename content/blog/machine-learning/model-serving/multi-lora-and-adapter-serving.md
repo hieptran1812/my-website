@@ -941,7 +941,7 @@ However, some enterprise customers have contractual or regulatory requirements t
 
 In these cases, options include:
 - Dedicated GPU instances per customer (maximum isolation, maximum cost)
-- MIG (Multi-Instance GPU) partitioning — each customer gets a hardware-isolated GPU partition with dedicated compute engines and memory (see [GPU scheduling and MIG](/blog/machine-learning/model-serving/gpu-scheduling-and-mig))
+- MIG (Multi-Instance GPU) partitioning — each customer gets a hardware-isolated GPU partition with dedicated compute engines and memory (see [GPU scheduling and MIG](/blog/machine-learning/model-serving/gpu-scheduling-mig-and-autoscaling))
 - Confidential computing instances with GPU attestation (available on select cloud providers)
 
 ### Very high adapter rank (rank 128+) with full weight coverage
@@ -1355,4 +1355,4 @@ One H100 per replica × 2 replicas = 2 H100s. This matches the estimate from the
 - **Series sibling: Continuous batching and PagedAttention** — [/blog/machine-learning/model-serving/continuous-batching-and-pagedattention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention) — the KV cache paging and scheduling primitives that multi-LoRA extends.
 - **Series sibling: Quantization for LLM serving** — [/blog/machine-learning/model-serving/quantization-for-llm-serving](/blog/machine-learning/model-serving/quantization-for-llm-serving) — reducing base model size with GPTQ/AWQ/FP8, composable with multi-LoRA to fit larger models alongside adapter caches.
 - **Series intro** — [/blog/machine-learning/model-serving/what-is-model-serving](/blog/machine-learning/model-serving/what-is-model-serving) — the latency/throughput/cost SLO triangle that frames every trade-off in this series.
-- **Series capstone** — [/blog/machine-learning/model-serving/the-model-serving-playbook](/blog/machine-learning/model-serving/the-model-serving-playbook) — full decision tree from model checkpoint to production serving architecture.
+- **Series capstone** — [/blog/machine-learning/model-serving/the-model-serving-playbook](/blog/machine-learning/model-serving/what-is-model-serving) — full decision tree from model checkpoint to production serving architecture.

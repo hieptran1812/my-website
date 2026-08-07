@@ -1425,7 +1425,7 @@ This HPA scales out when the average p99 queue latency across all pods exceeds 1
 - [TorchServe GitHub repository](https://github.com/pytorch/serve) — source code, issue tracker, and example handlers for ResNet, BERT, and custom models
 - [TorchServe official documentation](https://pytorch.org/serve/) — comprehensive reference for all configuration options and APIs
 - [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — fundamentals of production ML inference systems, the serving stack, and when serving infrastructure matters
-- [Dynamic batching deep dive](/blog/machine-learning/model-serving/dynamic-batching-deep-dive) — detailed analysis of batching strategies, continuous batching, and the mathematics of latency-throughput optimization
+- [Dynamic batching deep dive](/blog/machine-learning?subcategory=model-serving) — detailed analysis of batching strategies, continuous batching, and the mathematics of latency-throughput optimization
 - [Triton Inference Server deep dive](/blog/machine-learning/model-serving/triton-inference-server-deep-dive) — NVIDIA's serving framework, TensorRT backend integration, and when Triton outperforms TorchServe
 - [Choosing your serving stack](/blog/machine-learning/model-serving/choosing-your-serving-stack) — decision framework for selecting between TorchServe, Triton, vLLM, and Ray Serve based on model type, scale, and latency requirements
-- [The model serving playbook](/blog/machine-learning/model-serving/the-model-serving-playbook) — complete operational guide covering deployment, scaling, monitoring, and incident response for ML serving systems
+- [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — complete operational guide covering deployment, scaling, monitoring, and incident response for ML serving systems

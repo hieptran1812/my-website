@@ -120,7 +120,7 @@ Here is the part that surprises buyers: beneath the surface, the frontier models
 So if the recipe converged, **where does one model actually beat another?** Four places, none of which is the backbone:
 
 - **Data.** The composition, scale, captioning quality, and aesthetic curation of the training set. Better, denser, more accurately-captioned data is the largest single lever on prompt adherence and aesthetics, and it is the least visible from the outside. The frontier models' advantages are *mostly data and compute*, not a secret architecture.
-- **Compute.** More training compute on the same recipe buys lower loss and better everything, the way the [scaling laws](/blog/machine-learning/scaling-laws/) literature would predict. The biggest closed models are simply trained on more compute than open labs can match.
+- **Compute.** More training compute on the same recipe buys lower loss and better everything, the way the [scaling laws](/blog/machine-learning?subcategory=scaling-laws) literature would predict. The biggest closed models are simply trained on more compute than open labs can match.
 - **Editing & multimodality.** Whether the model can take an image *as input* and edit it conversationally — a capability that comes from the native-multimodal architecture and a *lot* of editing/instruction data, not from the diffusion backbone.
 - **World-knowledge.** Which rides on the text encoder's scale and the training data's breadth — again, data and the language-model side, not the image backbone.
 

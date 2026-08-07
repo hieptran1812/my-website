@@ -448,7 +448,7 @@ Not necessarily. The DDM is only as good as its inputs. If your Ke estimate is t
 
 ### Misconception 5: "DDM is an outdated method — analysts prefer DCF"
 
-The Discounted Cash Flow (DCF) model and the DDM are close cousins. When you discount free cash flow to equity (FCFE) instead of dividends, and assume the firm's financing choices do not destroy value, the two models converge to the same estimate. The DDM is *especially* appropriate when FCFE is hard to estimate (as in banking). See [Discounted Cash Flow: The Complete DCF Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide) for the full DCF treatment.
+The Discounted Cash Flow (DCF) model and the DDM are close cousins. When you discount free cash flow to equity (FCFE) instead of dividends, and assume the firm's financing choices do not destroy value, the two models converge to the same estimate. The DDM is *especially* appropriate when FCFE is hard to estimate (as in banking). See [Discounted Cash Flow: The Complete DCF Guide](/blog/trading?subcategory=equity-research) for the full DCF treatment.
 
 ### Misconception 6: "A low dividend yield means the stock is expensive"
 
@@ -667,7 +667,7 @@ The DDM sits within a family of absolute valuation methods. To understand it dee
 
 - **[The Valuation Spectrum: Absolute, Relative, and Contingent Claims](/blog/trading/asset-valuation/valuation-spectrum-absolute-relative-contingent-claims)** — how to know when DDM is appropriate versus when relative valuation or contingent-claims models are more suitable.
 
-- **[Discounted Cash Flow: The Complete DCF Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide)** — the broader cousin of DDM, applicable when companies do not pay dividends or when you want to value the enterprise independently of financing choices.
+- **[Discounted Cash Flow: The Complete DCF Guide](/blog/trading?subcategory=equity-research)** — the broader cousin of DDM, applicable when companies do not pay dividends or when you want to value the enterprise independently of financing choices.
 
 ---
 

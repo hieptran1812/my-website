@@ -333,7 +333,7 @@ In practice, an investment banker or a buy-side analyst building a complete deal
 
 **Step 1: Standalone target valuation.** Before you can assess whether the deal price is justified, you need a clean view of what the target is worth on its own. This requires two approaches run in parallel:
 
-- *DCF analysis*: project the target's free cash flows over a 5–10 year explicit period, then compute a terminal value (usually using the Gordon Growth Model or an exit multiple). Discount at the target's standalone WACC — not the acquirer's, because this step is purely about the target's intrinsic value absent the combination. See [DCF Complete Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide) for the mechanics.
+- *DCF analysis*: project the target's free cash flows over a 5–10 year explicit period, then compute a terminal value (usually using the Gordon Growth Model or an exit multiple). Discount at the target's standalone WACC — not the acquirer's, because this step is purely about the target's intrinsic value absent the combination. See [DCF Complete Guide](/blog/trading?subcategory=equity-research) for the mechanics.
 
 - *Comparable company and precedent transaction analysis*: triangulate the standalone value using market multiples. What EV/EBITDA do similar public companies trade at? What premiums were paid in comparable precedent deals? [Comparable Company Analysis and Precedent Transactions](/blog/trading/asset-valuation/comparable-company-analysis-precedent-transactions-comps) covers this methodology in depth.
 
@@ -496,8 +496,8 @@ M&A valuation sits at the intersection of several other valuation disciplines co
 - [Sum-of-Parts Valuation](/blog/trading/asset-valuation/sum-of-parts-valuation-sotp-conglomerates-divisions) — relevant when the acquirer plans to divest divisions of the target post-close; SOTP valuation determines which parts to keep and which to sell
 
 **The underlying valuation mechanics:**
-- [DCF Complete Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide) — M&A synergy valuation is fundamentally DCF analysis; the NPV of synergies is a DCF computation
-- [WACC: Weighted Average Cost of Capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital) — the discount rate used in synergy valuation and standalone target DCF; deals often blend the acquirer's and target's WACC based on the combined capital structure
+- [DCF Complete Guide](/blog/trading?subcategory=equity-research) — M&A synergy valuation is fundamentally DCF analysis; the NPV of synergies is a DCF computation
+- [WACC: Weighted Average Cost of Capital](/blog/trading?subcategory=equity-research) — the discount rate used in synergy valuation and standalone target DCF; deals often blend the acquirer's and target's WACC based on the combined capital structure
 
 ## Sources & Further Reading
 

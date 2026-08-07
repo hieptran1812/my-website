@@ -35,7 +35,7 @@ The diagram above is the mental model. A bond is a deterministic schedule of cas
 
 This article is the deep dive on bond pricing for a senior quant or staff-level engineer. It covers the discounted-cashflow framework, the yield-to-maturity quote convention, clean-vs-dirty price and day-count conventions, the duration / convexity / DV01 risk hierarchy, spreads (Z-spread, OAS) for credit and embedded options, the major bond classes (Treasuries, corporates, munis, MBS, sovereigns, high-yield), embedded options (callable, puttable, convertible), repo as the funding mechanism, bond futures and the cheapest-to-deliver, production architecture, and a long catalog of named bond-pricing failures.
 
-The companion articles are [Yield Curve Modeling](/blog/trading/quantitative-finance/fixed-income/yield-curve-modeling) (which goes deeper on curve construction itself) and [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income/fixed-income-analytics) (which covers portfolio-level analytics). [Short-Rate Models](/blog/trading/quantitative-finance/rates-models/short-rate-models-vasicek-hull-white) covers the dynamics that price callable bonds and rate options.
+The companion articles are [Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling) (which goes deeper on curve construction itself) and [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics) (which covers portfolio-level analytics). [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white) covers the dynamics that price callable bonds and rate options.
 
 ### 0.0 Bonds vs other fixed-income instruments
 
@@ -49,7 +49,7 @@ Before diving in, a quick taxonomy of "fixed income" — bonds are one of severa
 - **Mortgage-backed securities (MBS).** Securitised mortgage pools. Discussed in §10.
 - **Collateralised loan obligations (CLO).** Tranched ABS. Pricing requires a tranche cashflow waterfall model.
 - **Inflation-linked bonds (TIPS).** Indexed to CPI; require a real curve plus inflation expectations.
-- **Structured notes.** Hybrid bond + embedded derivative. Pricing in [the exotic derivatives post](/blog/trading/quantitative-finance/exotics/exotic-derivatives) and [autocallables post](/blog/trading/quantitative-finance/exotics/autocallables).
+- **Structured notes.** Hybrid bond + embedded derivative. Pricing in [the exotic derivatives post](/blog/trading/quantitative-finance/exotic-derivatives) and [autocallables post](/blog/trading/quantitative-finance/autocallables).
 
 The pricing framework is similar across all of these — discount cashflows under the appropriate curve — but the cashflow modelling and curve selection differ. Senior fixed-income quants are typically deep specialists in one or two of these families.
 
@@ -363,7 +363,7 @@ Negative convexity arises in:
 - **Mortgage-backed securities (MBS).** Mortgages have prepayment options; falling rates cause refinancing waves and prepayment, while rising rates extend duration. MBS exhibit dramatic negative convexity.
 - **Some auto-callable structured notes.** The autocall feature caps gains in favourable scenarios.
 
-Negative convexity is the canonical risk in MBS trading; senior MBS quants spend their careers modelling prepayment behaviour and managing the resulting convexity exposure. We'll return to this in the [Exotic Derivatives post](/blog/trading/quantitative-finance/exotics/exotic-derivatives) and [Autocallables post](/blog/trading/quantitative-finance/exotics/autocallables).
+Negative convexity is the canonical risk in MBS trading; senior MBS quants spend their careers modelling prepayment behaviour and managing the resulting convexity exposure. We'll return to this in the [Exotic Derivatives post](/blog/trading/quantitative-finance/exotic-derivatives) and [Autocallables post](/blog/trading/quantitative-finance/autocallables).
 
 ## 7. DV01 and key-rate DV01s
 
@@ -501,7 +501,7 @@ Pricing engines for embedded options:
 - **Convertible.** Two-factor model: short-rate × equity SDE. PDE or Monte Carlo.
 - **MBS prepayment.** Reduced-form intensity model with a prepayment rate that depends on rate level, seasoning, refinancing burnout, and macro factors. OAS Monte Carlo.
 
-Embedded-option pricing is its own engineering layer. We'll cover the rates models in the [Short-Rate Models post](/blog/trading/quantitative-finance/rates-models/short-rate-models-vasicek-hull-white).
+Embedded-option pricing is its own engineering layer. We'll cover the rates models in the [Short-Rate Models post](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white).
 
 ### 10.1 The MBS prepayment model in depth
 
@@ -696,7 +696,7 @@ On 17 September 2019, the SOFR rate spiked from ~2.2% to 5.25% intraday before t
 
 ### 15.8 SVB and the held-to-maturity Treasury portfolio (March 2023)
 
-We covered this in [the derivatives pricing case study](/blog/trading/quantitative-finance/derivatives/derivatives-pricing#11-8-svb-march-2023-held-to-maturity-bonds-mark-to-model-vs-mark-to-market). For bond pricing specifically, the lesson: the *accounting* convention can hide mark-to-market losses, but the loss is real. Risk systems must report mark-to-market regardless of accounting choice; the gap between book and market value is itself a first-class risk metric.
+We covered this in [the derivatives pricing case study](/blog/trading/quantitative-finance/derivatives-pricing). For bond pricing specifically, the lesson: the *accounting* convention can hide mark-to-market losses, but the loss is real. Risk systems must report mark-to-market regardless of accounting choice; the gap between book and market value is itself a first-class risk metric.
 
 ### 15.9 The 2022-2024 rate hike cycle
 
@@ -952,7 +952,7 @@ A subtle observation about pricing maturity: the field is so well-developed that
 
 A senior fixed-income quant operates fluently in two languages: YTM (the trader's language) and curve (the engineer's language). They can price a bond by hand, decompose its risk into key-rate DV01s, identify its funding cost, and recognise when a regime shift will break their pricing assumptions.
 
-The remaining articles in this series — [Yield Curve Modeling](/blog/trading/quantitative-finance/fixed-income/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/rates-models/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotics/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/exotics/autocallables), and [Cliquets](/blog/trading/quantitative-finance/exotics/cliquets) — go deeper on each layer.
+The remaining articles in this series — [Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on each layer.
 
 The fixed-income world is large, conservative, and detail-oriented. Mastering it requires patience for conventions and respect for the curve. The reward is a clear-headed view of one of the largest financial markets in the world.
 

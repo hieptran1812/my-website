@@ -827,7 +827,7 @@ This is the correct use of EV/EBITDA for individual investors: not to conclude "
 
 ## Further Reading & Cross-Links
 
-This post is part of the [Asset Valuation series](/blog/trading/asset-valuation), which builds a complete toolkit for pricing any financial asset from first principles.
+This post is part of the [Asset Valuation series](/blog/trading?subcategory=asset-valuation), which builds a complete toolkit for pricing any financial asset from first principles.
 
 **Within this series:**
 - [The Valuation Spectrum: Absolute, Relative, and Contingent Claims](/blog/trading/asset-valuation/valuation-spectrum-absolute-relative-contingent-claims) — situates EV multiples within the broader valuation ecosystem
@@ -835,8 +835,8 @@ This post is part of the [Asset Valuation series](/blog/trading/asset-valuation)
 - [Free Cash Flow Valuation: FCFE, FCFF, and DCF Framework](/blog/trading/asset-valuation/free-cash-flow-valuation-fcfe-fcff-dcf-framework) — the DCF foundation that EV multiples implicitly approximate
 
 **Related series:**
-- [WACC and Weighted Average Cost of Capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital) — the denominator in every EV multiple model
-- [Discounted Cash Flow: The Complete Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide) — how EV multiples connect to intrinsic value
+- [WACC and Weighted Average Cost of Capital](/blog/trading?subcategory=equity-research) — the denominator in every EV multiple model
+- [Discounted Cash Flow: The Complete Guide](/blog/trading?subcategory=equity-research) — how EV multiples connect to intrinsic value
 
 ---
 

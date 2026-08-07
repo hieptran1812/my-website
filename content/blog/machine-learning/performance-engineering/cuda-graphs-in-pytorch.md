@@ -544,4 +544,4 @@ Graphs are a sharp tool with a real cost, and the discipline is knowing when the
 - [CUDA graphs in a serving loop](/blog/machine-learning/performance-engineering/cuda-graphs-in-a-serving-loop) — bucketing, per-shape graphs, and combining graphs with continuous batching in a real service.
 - [Compile plus CUDA graphs: reduce-overhead](/blog/machine-learning/performance-engineering/compile-plus-cuda-graphs-reduce-overhead) — how `torch.compile` composes fusion with graphing, and the dynamic-shape pitfalls.
 - [Profiling PyTorch with torch.profiler](/blog/machine-learning/performance-engineering/profiling-pytorch-with-torch-profiler) — how to read the footer that tells you whether graphing will even help.
-- [The performance engineering playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the capstone decision tree: symptom to tool to cause to fix, with CUDA graphs as the launch-bound answer.
+- [The performance engineering playbook](/blog/machine-learning?subcategory=performance-engineering) — the capstone decision tree: symptom to tool to cause to fix, with CUDA graphs as the launch-bound answer.

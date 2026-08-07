@@ -452,7 +452,7 @@ Every metric is a tool with a blast radius. Here's the decisive version.
 - [The roofline for your service](/blog/machine-learning/performance-engineering/the-roofline-for-your-service) — compute-bound vs memory-bound, and why occupancy alone can't tell you which.
 - [Nsight Compute kernel deep-dive](/blog/machine-learning/performance-engineering/nsight-compute-kernel-deep-dive) — where you actually read achieved occupancy and the limiter that names the resource to cut.
 - [The CUDA caching allocator](/blog/machine-learning/performance-engineering/the-cuda-caching-allocator) — allocated vs reserved, fragmentation, and the OOM-at-60% mechanism in full.
-- [The performance engineering playbook](/blog/machine-learning/performance-engineering/the-performance-engineering-playbook) — the capstone decision tree tying every metric and fix in the series together.
+- [The performance engineering playbook](/blog/machine-learning?subcategory=performance-engineering) — the capstone decision tree tying every metric and fix in the series together.
 - [Inside the GPU: SMs, warps, and the SIMT model](/blog/machine-learning/high-performance-computing/inside-the-gpu-sms-warps-and-the-simt-execution-model) — the architecture behind occupancy.
 - [LLM GPU benchmark](/blog/machine-learning/mlops/llm-gpu-benchmark) — throughput, latency, and MFU compared across named GPU types.
 - [PyTorch Profiler tutorial](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html) and the [NVIDIA DCGM profiling fields reference](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html) — the primary sources for the tools above.

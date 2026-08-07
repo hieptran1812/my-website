@@ -603,4 +603,4 @@ The **results** tell the sim-to-real story in miniature. On the simulated INTC b
 - Haarnoja et al., "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning" (2018) — the SAC algorithm.
 - Mnih et al., "Human-level control through deep reinforcement learning" (Nature, 2015) — the DQN algorithm adapted here for discrete quoting.
 - Sutton and Barto, "Reinforcement Learning: An Introduction" (2nd ed., 2018) — the foundations of every concept in this post.
-- Within this series: the [unified map of RL](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) for where these algorithms sit, and the capstone [reinforcement learning playbook](/blog/machine-learning/reinforcement-learning/the-reinforcement-learning-playbook) for choosing among them in practice.
+- Within this series: the [unified map of RL](/blog/machine-learning?subcategory=reinforcement-learning) for where these algorithms sit, and the capstone [reinforcement learning playbook](/blog/machine-learning/reinforcement-learning/the-reinforcement-learning-playbook) for choosing among them in practice.

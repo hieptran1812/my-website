@@ -54,7 +54,7 @@ A **market maker (MM)** is a firm that continuously quotes both a price at which
 
 A **key opinion leader (KOL)** is the crypto industry's term for an influencer with a distribution channel  -  a large following on X, a YouTube channel, a Telegram group, a newsletter. Some are paid in cash, some in tokens, some in early allocations at a discount, and some are not paid at all. The commercial structures behind this are covered in detail in [influencers, KOLs and the narrative-for-hire machine](/blog/trading/crypto-players/influencers-kols-and-the-narrative-for-hire-machine).
 
-A **token foundation** or **treasury** is the entity that holds the project's own unissued tokens and cash reserves, and that funds grants, liquidity incentives and marketing. Functionally it behaves like a small central bank with a marketing department attached  -  see [token foundations and treasuries](/blog/trading/crypto-players/token-foundations-and-the-on-chain-central-banks) for the mechanics of how those balance sheets actually work.
+A **token foundation** or **treasury** is the entity that holds the project's own unissued tokens and cash reserves, and that funds grants, liquidity incentives and marketing. Functionally it behaves like a small central bank with a marketing department attached  -  see [token foundations and treasuries](/blog/trading/crypto-players/token-foundations-and-treasuries-the-on-chain-central-banks) for the mechanics of how those balance sheets actually work.
 
 ### The five numbers that govern everything below
 

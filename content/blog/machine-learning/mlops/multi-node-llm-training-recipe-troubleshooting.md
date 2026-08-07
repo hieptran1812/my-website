@@ -722,8 +722,8 @@ The third thing, and the closing point: every multi-node training job is one tea
 
 ## Further reading
 
-- [Torch Titan](/blog/machine-learning/mlops/torch-titan) — the modern reference implementation for FSDPv2 + PP + DCP in one place.
-- [Speeding up training 4× by optimizing CPU→GPU data transfer](/blog/machine-learning/mlops/speeding-up-neural-network-training-4x-by-optimizing-cpu-to-gpu-data-transfer) — the single-host prerequisite to multi-node throughput.
+- [Torch Titan](/blog/machine-learning/training-techniques/torch-titan) — the modern reference implementation for FSDPv2 + PP + DCP in one place.
+- [Speeding up training 4× by optimizing CPU→GPU data transfer](/blog/machine-learning/training-techniques/speeding-up-neural-network-training-4x-by-optimizing-cpu-to-gpu-data-transfer) — the single-host prerequisite to multi-node throughput.
 - [Smol training playbook](/blog/machine-learning/smol-training-playbook) — small-scale companion with the same instincts at lower cost.
 - [CUDA graph](/blog/machine-learning/deep-learning/cuda-graph) — for kernel-launch overhead context that becomes load-bearing once you are comm-bound.
 - *Megatron-LM* paper (Shoeybi et al., 2019) — the canonical reference for tensor parallelism math.

@@ -336,5 +336,5 @@ Within this series:
 
 Cross-links out, for the mechanisms this post builds on:
 
-- [Equity Research: How to Value a Company](/blog/trading/equity-research/how-to-value-a-company) — the analyst's work itself, which the coverage-gap alpha trade requires you to do yourself when the sell side has walked away.
-- [Hedge Funds: Generating Alpha from Market Inefficiencies](/blog/trading/hedge-funds/generating-alpha-from-market-inefficiencies) — the broader discipline of harvesting structural mispricings, of which the under-covered small cap is one of the most durable examples.
+- [Equity Research: How to Value a Company](/blog/trading?subcategory=equity-research) — the analyst's work itself, which the coverage-gap alpha trade requires you to do yourself when the sell side has walked away.
+- [Hedge Funds: Generating Alpha from Market Inefficiencies](/blog/trading?subcategory=hedge-funds) — the broader discipline of harvesting structural mispricings, of which the under-covered small cap is one of the most durable examples.

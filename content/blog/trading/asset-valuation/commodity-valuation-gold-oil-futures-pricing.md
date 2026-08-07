@@ -342,7 +342,7 @@ The commodity valuation framework sits at the intersection of several deeper top
 - [Real Options Valuation: How to Price Flexibility and Strategic Investments](/blog/trading/asset-valuation/real-options-valuation-flexibility-strategic-investments) — Junior miners and exploration companies derive most of their value from options on undeveloped deposits — the right to mine if prices rise. Real options valuation captures this in ways that standard DCF cannot.
 
 **Cross-series:**
-- [Gold: Price Drivers and Analysis](/blog/trading/gold/gold-price-drivers-analysis) — For a deeper dive into the macroeconomic, geopolitical, and structural drivers of the gold price itself (beyond the valuation mechanics covered here), this post in the gold series provides comprehensive empirical analysis.
+- [Gold: Price Drivers and Analysis](/blog/trading?subcategory=gold) — For a deeper dive into the macroeconomic, geopolitical, and structural drivers of the gold price itself (beyond the valuation mechanics covered here), this post in the gold series provides comprehensive empirical analysis.
 
 **For further study:**
 - John Hull's *Options, Futures, and Other Derivatives* (Chapters 3 and 5) — the canonical textbook derivation of cost-of-carry, futures pricing, and hedging mechanics. Hull's treatment is rigorous and complete; the framework here is faithful to his approach.

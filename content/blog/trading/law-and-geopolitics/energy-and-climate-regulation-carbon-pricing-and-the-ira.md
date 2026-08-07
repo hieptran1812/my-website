@@ -351,5 +351,5 @@ The discipline is the same one that runs through this whole series: a rule chang
 - [Regulatory risk as an asset-pricing factor](/blog/trading/law-and-geopolitics/regulatory-risk-as-an-asset-pricing-factor) — why a pending rule discounts a price in advance, the framework behind the stranded-asset discount.
 - [How law moves markets: the transmission chain](/blog/trading/law-and-geopolitics/how-law-moves-markets-the-transmission-chain) — the series spine: rule → policy → macro → price → the trade.
 - [Energy geopolitics, OPEC, and the European gas shock](/blog/trading/law-and-geopolitics/energy-geopolitics-opec-the-oil-weapon-and-the-european-gas-shock) — the energy-security half of the 2022 European cost shock.
-- [Cross-asset playbook](/blog/trading/cross-asset) — how a sector-rotation theme like the energy transition expresses across asset classes.
-- [Macro trading](/blog/trading/macro-trading) — the policy-and-liquidity transmission that sets the rate backdrop for capital-intensive clean-energy valuations.
+- [Cross-asset playbook](/blog/trading?subcategory=cross-asset) — how a sector-rotation theme like the energy transition expresses across asset classes.
+- [Macro trading](/blog/trading?subcategory=macro-trading) — the policy-and-liquidity transmission that sets the rate backdrop for capital-intensive clean-energy valuations.

@@ -26,7 +26,7 @@ image: "/imgs/blogs/q-learning-off-policy-td-control-1.png"
 
 There is a four-letter algorithm that started the modern deep RL revolution. It does not require a model of the environment. It does not need to follow the same policy it is learning about. It has a clean convergence proof, a well-characterized failure mode, and an elegant fix to that failure mode. The moment you swap its lookup table for a convolutional neural network you get DQN — the architecture that first played 49 Atari games at human level in 2015.
 
-That algorithm is Q-learning. The full name is a bit longer: it is an off-policy temporal-difference control method, meaning it learns the value of the optimal policy while following a different, exploratory policy. The key mechanism is a single symbolic substitution in the TD update that you have already seen in [Temporal-Difference Learning: TD(0), SARSA, and Bootstrapping](/blog/machine-learning/reinforcement-learning/temporal-difference-learning-td0-sarsa-bootstrapping): instead of using the value of the action your behavior policy actually chose at the next state, you take the maximum over all possible next-state actions. One `max` operation, three letters, and the entire mathematical structure of the algorithm changes.
+That algorithm is Q-learning. The full name is a bit longer: it is an off-policy temporal-difference control method, meaning it learns the value of the optimal policy while following a different, exploratory policy. The key mechanism is a single symbolic substitution in the TD update that you have already seen in [Temporal-Difference Learning: TD(0), SARSA, and Bootstrapping](/blog/machine-learning/reinforcement-learning/temporal-difference-learning-td0-and-sarsa): instead of using the value of the action your behavior policy actually chose at the next state, you take the maximum over all possible next-state actions. One `max` operation, three letters, and the entire mathematical structure of the algorithm changes.
 
 This post derives that change completely, proves why it makes Q-learning off-policy, and shows you the exact cost of that design choice — a systematic positive bias in value estimates called the max-bias problem. Then it presents Double Q-learning, which decouples action selection from action evaluation to eliminate the bias at zero extra computation cost. Finally, it traces the structural boundary between tabular Q-learning and deep Q-learning: why table Q converges but neural Q diverges unless you add two specific engineering tricks, and what those tricks actually do to the mathematics.
 
@@ -34,7 +34,7 @@ By the end you will be able to implement tabular Q-learning from scratch on Froz
 
 ![Q-learning replaces the on-policy sampled next action with a greedy max, making the algorithm off-policy without needing importance sampling corrections](/imgs/blogs/q-learning-off-policy-td-control-1.png)
 
-This post builds directly on [Temporal-Difference Learning: TD(0), SARSA, and Bootstrapping](/blog/machine-learning/reinforcement-learning/temporal-difference-learning-td0-sarsa-bootstrapping) (B3) and the MDP formalism in [Markov Decision Processes: The Mathematics of Sequential Decisions](/blog/machine-learning/reinforcement-learning/markov-decision-processes-the-mathematics-of-sequential-decisions) (B1). The full series map is at [Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map). The neural network extension of everything you learn here lives in [Deep Q-Networks: DQN, Double DQN, and Dueling Architectures](/blog/machine-learning/reinforcement-learning/deep-q-networks-dqn) (D1).
+This post builds directly on [Temporal-Difference Learning: TD(0), SARSA, and Bootstrapping](/blog/machine-learning/reinforcement-learning/temporal-difference-learning-td0-and-sarsa) (B3) and the MDP formalism in [Markov Decision Processes: The Mathematics of Sequential Decisions](/blog/machine-learning/reinforcement-learning/markov-decision-processes) (B1). The full series map is at [Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning). The neural network extension of everything you learn here lives in [Deep Q-Networks: DQN, Double DQN, and Dueling Architectures](/blog/machine-learning/reinforcement-learning/deep-q-networks-dqn) (D1).
 
 ## 1. The goal: learning the optimal action-value function
 
@@ -766,7 +766,7 @@ The $-\gamma \nabla_\theta Q_\theta(s', a^*)$ term is the "double descent" term 
 
 ## 14. Q-learning and the broader RL landscape
 
-Before the case studies, it is worth situating Q-learning precisely within the taxonomy of reinforcement learning algorithms. The [Reinforcement Learning: A Unified Map](/blog/machine-learning/reinforcement-learning/reinforcement-learning-a-unified-map) covers this in detail, but the Q-learning-specific perspective is important to nail down.
+Before the case studies, it is worth situating Q-learning precisely within the taxonomy of reinforcement learning algorithms. The [Reinforcement Learning: A Unified Map](/blog/machine-learning?subcategory=reinforcement-learning) covers this in detail, but the Q-learning-specific perspective is important to nail down.
 
 Q-learning belongs to the family of **value-based, model-free, off-policy** RL algorithms. Each of these three dimensions has specific implications:
 
@@ -1055,7 +1055,7 @@ This estimate is a lower bound. Real environments have non-uniform state visitat
 - **van Hasselt, H., Guez, A., and Silver, D. (2016)**: "Deep Reinforcement Learning with Double Q-learning." *AAAI 2016*. Double DQN on 49 Atari games, with direct Q-value overestimation measurements.
 - **Mnih, V. et al. (2015)**: "Human-level control through deep reinforcement learning." *Nature*, 518: 529–533. The DQN breakthrough with Atari results.
 - **Baird, L. (1995)**: "Residual algorithms: Reinforcement learning with function approximation." *ICML 1995*. The 7-state counterexample proving the deadly triad can cause divergence.
-- Within this series: [Temporal-Difference Learning: TD(0), SARSA, and Bootstrapping](/blog/machine-learning/reinforcement-learning/temporal-difference-learning-td0-sarsa-bootstrapping) (B3); [Deep Q-Networks: DQN, Double DQN, and Dueling Architectures](/blog/machine-learning/reinforcement-learning/deep-q-networks-dqn) (D1).
+- Within this series: [Temporal-Difference Learning: TD(0), SARSA, and Bootstrapping](/blog/machine-learning/reinforcement-learning/temporal-difference-learning-td0-and-sarsa) (B3); [Deep Q-Networks: DQN, Double DQN, and Dueling Architectures](/blog/machine-learning/reinforcement-learning/deep-q-networks-dqn) (D1).
 
 ## 19. Key takeaways
 

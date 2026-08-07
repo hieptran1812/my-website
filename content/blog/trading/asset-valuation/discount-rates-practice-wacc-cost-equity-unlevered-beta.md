@@ -564,9 +564,9 @@ For the foundational math behind why cash flows are discounted at all, see [Time
 
 For the underlying theory of beta and the equity risk premium, see [Risk and Required Return: CAPM, Beta, and the Cost of Capital](/blog/trading/asset-valuation/risk-required-return-capm-beta-cost-capital). It goes deeper on what beta measures, why the market portfolio is the right benchmark, and the theoretical foundations of CAPM.
 
-For a complete end-to-end worked DCF model that uses WACC as the discount rate, see [Discounted Cash Flow: The Complete Guide](/blog/trading/equity-research/discounted-cash-flow-dcf-complete-guide). It shows how WACC flows through to enterprise value, equity value, and implied share price.
+For a complete end-to-end worked DCF model that uses WACC as the discount rate, see [Discounted Cash Flow: The Complete Guide](/blog/trading?subcategory=equity-research). It shows how WACC flows through to enterprise value, equity value, and implied share price.
 
-For the WACC computation specifically in the context of equity research financial modeling, see [WACC: Weighted Average Cost of Capital](/blog/trading/equity-research/wacc-weighted-average-cost-capital). It includes Bloomberg-adjusted beta calculations and sector-specific adjustments.
+For the WACC computation specifically in the context of equity research financial modeling, see [WACC: Weighted Average Cost of Capital](/blog/trading?subcategory=equity-research). It includes Bloomberg-adjusted beta calculations and sector-specific adjustments.
 
 ---
 
