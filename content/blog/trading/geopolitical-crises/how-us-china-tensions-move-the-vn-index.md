@@ -485,9 +485,9 @@ The Vietnam geopolitical beta story is part of a larger ASEAN decoupling picture
 
 For the South China Sea dimension — how territorial disputes create a separate "SCS discount" in Vietnamese equities that compounds with or offsets the China+1 premium — see [The South China Sea Dispute and Vietnam Market Risk Premium](/blog/trading/geopolitical-crises/the-south-china-sea-dispute-and-vn-market-risk-premium).
 
-For the macro framework of how sanctions and trade restrictions transmit to currencies and capital flows in emerging markets broadly, see the series on [Macro for Traders](/blog/trading/macro-trading/).
+For the macro framework of how sanctions and trade restrictions transmit to currencies and capital flows in emerging markets broadly, see the series on [Macro for Traders](/blog/trading?subcategory=macro-trading).
 
-For how to build a geopolitical event-driven trade from entry through exit — position sizing, stop-loss placement, catalyst calendars — see the [Trading the News](/blog/trading/event-trading/) series.
+For how to build a geopolitical event-driven trade from entry through exit — position sizing, stop-loss placement, catalyst calendars — see the [Trading the News](/blog/trading?subcategory=event-trading) series.
 
 ## Cross-Asset Context: How Vietnam Fits into the Broader EM Geopolitical Trade
 

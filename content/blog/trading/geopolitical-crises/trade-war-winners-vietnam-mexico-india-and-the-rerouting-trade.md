@@ -664,12 +664,12 @@ The parallel is imperfect but instructive. Indonesia in 2024 looks like a *slowe
 
 The trade war and supply chain rerouting story connects to several other market dynamics covered in depth elsewhere on this site:
 
-- [Geopolitical crises and currency markets](/blog/trading/forex/) — the FX dimension of supply chain shifts, including how SBV manages the dong and how MXN responds to nearshoring news flow
-- [Event trading: how markets react to trade announcements](/blog/trading/event-trading/) — the tactical playbook for trading tariff announcement days, including Liberation Day reaction analysis
-- [The macro-trading framework](/blog/trading/macro-trading/) — how FDI-driven GDP acceleration translates into central bank policy, yield curves, and equity multiples in emerging markets
-- [Vietnam equities: the sector playbook](/blog/trading/vietnam-stocks/) — deep dive into VN-Index composition, sector weights, and which Vietnamese sectors benefit most from manufacturing FDI
-- [Equity research for emerging markets](/blog/trading/equity-research/) — how to apply DCF and comparable analysis to Vietnamese and Mexican companies in beneficiary sectors
-- [Cross-asset playbook](/blog/trading/cross-asset/) — the multi-asset framework for trading geopolitical supply chain themes across equities, FX, rates, and commodities simultaneously
+- [Geopolitical crises and currency markets](/blog/trading?subcategory=forex) — the FX dimension of supply chain shifts, including how SBV manages the dong and how MXN responds to nearshoring news flow
+- [Event trading: how markets react to trade announcements](/blog/trading?subcategory=event-trading) — the tactical playbook for trading tariff announcement days, including Liberation Day reaction analysis
+- [The macro-trading framework](/blog/trading?subcategory=macro-trading) — how FDI-driven GDP acceleration translates into central bank policy, yield curves, and equity multiples in emerging markets
+- [Vietnam equities: the sector playbook](/blog/trading?subcategory=vietnam-stocks) — deep dive into VN-Index composition, sector weights, and which Vietnamese sectors benefit most from manufacturing FDI
+- [Equity research for emerging markets](/blog/trading?subcategory=equity-research) — how to apply DCF and comparable analysis to Vietnamese and Mexican companies in beneficiary sectors
+- [Cross-asset playbook](/blog/trading?subcategory=cross-asset) — the multi-asset framework for trading geopolitical supply chain themes across equities, FX, rates, and commodities simultaneously
 
 
 The supply chain rerouting thesis is one of the most reliable and investable themes to emerge from modern trade policy. It is not complicated: tariffs change relative prices, manufacturing follows cost, and FDI leads the data. Vietnam accumulated \$25 billion in FDI in 2024. Mexico's Monterrey industrial corridor has a 12-month industrial park waitlist. India is assembling iPhones.

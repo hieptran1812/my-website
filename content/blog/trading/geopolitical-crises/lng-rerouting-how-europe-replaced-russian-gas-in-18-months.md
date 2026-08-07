@@ -260,9 +260,9 @@ The LNG rerouting is a case study in how geopolitical events flow through energy
 
 - The Russia-Ukraine war's broader market impact — Brent crude, wheat, the ruble collapse, and gold safe-haven flows — is covered in the Russia-Ukraine conflict market impact post in this series.
 - The financial mechanism of sanctions and how they create chokepoints in commodity trade is covered in the sanctions and financial weapons post.
-- For the macro-level transmission from energy price shocks to inflation, central bank response, and currency markets, see the relevant posts in [trading/macro-trading](/blog/trading/macro-trading/).
-- For the fixed income side — European sovereign spreads, ECB response to energy-driven inflation — see [trading/fixed-income](/blog/trading/fixed-income/).
-- For a systematic look at how commodity supply shocks create cross-asset ripples, see the commodity supply disruption posts in [trading/cross-asset](/blog/trading/cross-asset/).
-- For the gold safe-haven behavior during the 2022 energy crisis, see [trading/gold](/blog/trading/gold/).
+- For the macro-level transmission from energy price shocks to inflation, central bank response, and currency markets, see the relevant posts in [trading/macro-trading](/blog/trading?subcategory=macro-trading).
+- For the fixed income side — European sovereign spreads, ECB response to energy-driven inflation — see [trading/fixed-income](/blog/trading?subcategory=fixed-income).
+- For a systematic look at how commodity supply shocks create cross-asset ripples, see the commodity supply disruption posts in [trading/cross-asset](/blog/trading?subcategory=cross-asset).
+- For the gold safe-haven behavior during the 2022 energy crisis, see [trading/gold](/blog/trading?subcategory=gold).
 
 The LNG pivot also reshaped energy geopolitics in ways that will play out for decades: the US became a structural LNG exporter to Europe, Qatar locked in multi-decade supply agreements at favorable prices, and Germany moved from opposing LNG infrastructure to being the fastest-growing LNG importer in the world. These structural shifts — and the trading opportunities they continue to create — make the 2022 energy crisis one of the most consequential market restructuring events of the modern era.

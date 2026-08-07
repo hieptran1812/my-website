@@ -233,16 +233,16 @@ The bamboo diplomacy thesis translates into a specific set of tradeable signals 
 
 ## Further reading and cross-links
 
-The mechanics of FDI flows and supply chain reconfiguration are explored in the macro-trading lens at [trading/macro-trading](/blog/trading/macro-trading), which covers the capital flows channel from geopolitical events to currency and equity markets.
+The mechanics of FDI flows and supply chain reconfiguration are explored in the macro-trading lens at [trading/macro-trading](/blog/trading?subcategory=macro-trading), which covers the capital flows channel from geopolitical events to currency and equity markets.
 
-For the broader framework of how trade wars create winners and losers across asset classes, see the event-trading analysis at [trading/event-trading](/blog/trading/event-trading), which includes event-study data on the 2018-2019 tariff escalation and its market impact across US, Chinese, and third-country equities.
+For the broader framework of how trade wars create winners and losers across asset classes, see the event-trading analysis at [trading/event-trading](/blog/trading?subcategory=event-trading), which includes event-study data on the 2018-2019 tariff escalation and its market impact across US, Chinese, and third-country equities.
 
-The currency dimension of Vietnam's position — the VND's managed peg, the State Bank of Vietnam's reserve management, and the FX implications of a \$111B trade surplus with the US — is covered in the FX series at [trading/forex](/blog/trading/forex).
+The currency dimension of Vietnam's position — the VND's managed peg, the State Bank of Vietnam's reserve management, and the FX implications of a \$111B trade surplus with the US — is covered in the FX series at [trading/forex](/blog/trading?subcategory=forex).
 
-South China Sea territorial disputes and their legal framework sit at the intersection of international law and market risk — the geopolitical law series at [trading/law-and-geopolitics](/blog/trading/law-and-geopolitics) covers the UNCLOS framework and the 2016 arbitration ruling that Vietnam relies on for its maritime claims.
+South China Sea territorial disputes and their legal framework sit at the intersection of international law and market risk — the geopolitical law series at [trading/law-and-geopolitics](/blog/trading?subcategory=law-and-geopolitics) covers the UNCLOS framework and the 2016 arbitration ruling that Vietnam relies on for its maritime claims.
 
 For the broader ASEAN context — Vietnam's neighbors (Thailand, Indonesia, Philippines) and how the bloc as a whole is navigating US-China competition — the regional analysis is in the geopolitical-crises series under the ASEAN track.
 
-Finally, for investors seeking to understand the Vietnamese equity market structure (sector composition, foreign ownership rules, settlement mechanics, and the MSCI upgrade roadmap), the capital-markets series at [trading/capital-markets](/blog/trading/capital-markets) covers frontier-to-emerging market transitions in detail.
+Finally, for investors seeking to understand the Vietnamese equity market structure (sector composition, foreign ownership rules, settlement mechanics, and the MSCI upgrade roadmap), the capital-markets series at [trading/capital-markets](/blog/trading?subcategory=capital-markets) covers frontier-to-emerging market transitions in detail.
 
 Vietnam's bamboo diplomacy is not a clever trick that can be indefinitely sustained. It is a genuine strategic achievement that reflects deep historical experience, sophisticated diplomatic execution, and the specific coincidence of the US-China rivalry with Vietnam's manufacturing-readiness inflection point. The market premium it has generated is real. So are the structural limits that will eventually compress it. The practitioner's job is to hold both facts simultaneously — and to know which one is binding at any given moment.

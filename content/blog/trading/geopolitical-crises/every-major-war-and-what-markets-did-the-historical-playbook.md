@@ -614,11 +614,11 @@ The framework developed here — spike vs regime change classification, the oil 
 - [Geopolitical Risk Premium: What Markets Price In](/blog/trading/geopolitical-crises/geopolitical-risk-premium-what-markets-price-in) explains the GPR Index and how to read the ex-ante risk premium before events materialize
 
 **For the commodity mechanics:**
-- [Oil Geopolitics and the Macro Trade](/blog/trading/macro-trading/oil-geopolitics-and-the-macro-trade) — how oil price shocks transmit to the broader economy
-- [Safe-Haven Flows: Gold in Crisis](/blog/trading/gold/safe-haven-flows-gold-in-crisis) — gold's specific behavior in geopolitical vs. financial crises
+- [Oil Geopolitics and the Macro Trade](/blog/trading/macro-trading/commodities-as-macro-signals-oil-copper-gold) — how oil price shocks transmit to the broader economy
+- [Safe-Haven Flows: Gold in Crisis](/blog/trading/gold/fear-and-the-safe-haven-trade-how-gold-behaves-in-a-crisis) — gold's specific behavior in geopolitical vs. financial crises
 
 **For the cross-asset positioning:**
-- [Correlation Regimes: When Safe Havens Work and When They Don't](/blog/trading/macro-correlations/correlation-regimes-when-safe-havens-work) — the statistical case for flight-to-safety assets
-- [Event-Driven Trading: How Markets React to Geopolitical Shocks](/blog/trading/event-trading/how-markets-react-to-geopolitical-shocks) — the event-study methodology in detail
+- [Correlation Regimes: When Safe Havens Work and When They Don't](/blog/trading/macro-correlations/correlation-during-crises-when-diversification-fails) — the statistical case for flight-to-safety assets
+- [Event-Driven Trading: How Markets React to Geopolitical Shocks](/blog/trading/geopolitical-crises/geopolitical-trading-playbook-before-during-after-the-shock) — the event-study methodology in detail
 
 The historical playbook of 27 conflicts since 1945 tells a consistent story: wars disrupt, but they almost never permanently destroy aggregate global wealth. The exceptions — 1973, Vietnam's inflation, Ukraine 2022 — all share the same characteristic: they didn't just move troops, they moved commodity supply systems and monetary architecture. That is the real danger threshold. Everything else is noise waiting to resolve.

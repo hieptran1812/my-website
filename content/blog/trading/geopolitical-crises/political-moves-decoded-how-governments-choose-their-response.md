@@ -417,7 +417,7 @@ The framework in this post gives you three practical tools:
 
 **3. A rung map.** Always identify the current escalation rung and ask what the path to the next rung requires. If the next rung requires resources, alliances, or domestic tolerance that are not currently available, you are pricing the tail risk too high.
 
-For deeper context on the economic channels that political moves activate, see the macro transmission mechanics in [macro-trading fundamentals](/blog/trading/macro-trading), the specific role of currency and FX in geopolitical crises in [FX fundamentals and policy](/blog/trading/forex), and the financial instrument mechanics of sovereign sanctions in [fixed-income essentials](/blog/trading/fixed-income).
+For deeper context on the economic channels that political moves activate, see the macro transmission mechanics in [macro-trading fundamentals](/blog/trading?subcategory=macro-trading), the specific role of currency and FX in geopolitical crises in [FX fundamentals and policy](/blog/trading?subcategory=forex), and the financial instrument mechanics of sovereign sanctions in [fixed-income essentials](/blog/trading?subcategory=fixed-income).
 
 ## Further Reading and Cross-Links
 

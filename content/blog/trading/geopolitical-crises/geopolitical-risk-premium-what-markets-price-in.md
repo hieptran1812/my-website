@@ -502,11 +502,11 @@ Given everything above, here is how a thoughtful investor applies the geopolitic
 
 This post is the opening framework for the series. The subsequent posts build on this foundation by examining specific cases in detail:
 
-- **Ukraine 2022** — A full deep-dive on the energy regime change: which exact assets moved, why, by how much, and what the long-run market implications were. See [Macro Trading: Central Banks and Energy Markets](/blog/trading/macro-trading/) for the macroeconomic transmission.
-- **Sanctions mechanics** — How financial sanctions work, which channels they activate, why they are always structural. See [Fixed Income: Sovereign Spreads](/blog/trading/fixed-income/) for the bond market implications.
-- **Trade Wars and Tariffs** — The US-China tariff escalation from 3.1% to 145%, the supply chain restructuring, and the Vietnam/Mexico beneficiary trade. See [Macro Correlations: Trade Policy and FX](/blog/trading/macro-correlations/) for the FX transmission.
-- **Geopolitical Risk and Gold** — Why gold rises in some geopolitical crises and not others; the historical record is more nuanced than "gold always goes up." See [Gold: From First Principles](/blog/trading/gold/) for the complete gold framework.
-- **Event Trading** — Specific strategies for trading around geopolitical events using the three-phase framework. See [Trading the News: How Markets React to Geopolitical Events](/blog/trading/event-trading/) for the tactical layer.
+- **Ukraine 2022** — A full deep-dive on the energy regime change: which exact assets moved, why, by how much, and what the long-run market implications were. See [Macro Trading: Central Banks and Energy Markets](/blog/trading?subcategory=macro-trading) for the macroeconomic transmission.
+- **Sanctions mechanics** — How financial sanctions work, which channels they activate, why they are always structural. See [Fixed Income: Sovereign Spreads](/blog/trading?subcategory=fixed-income) for the bond market implications.
+- **Trade Wars and Tariffs** — The US-China tariff escalation from 3.1% to 145%, the supply chain restructuring, and the Vietnam/Mexico beneficiary trade. See [Macro Correlations: Trade Policy and FX](/blog/trading?subcategory=macro-correlations) for the FX transmission.
+- **Geopolitical Risk and Gold** — Why gold rises in some geopolitical crises and not others; the historical record is more nuanced than "gold always goes up." See [Gold: From First Principles](/blog/trading?subcategory=gold) for the complete gold framework.
+- **Event Trading** — Specific strategies for trading around geopolitical events using the three-phase framework. See [Trading the News: How Markets React to Geopolitical Events](/blog/trading?subcategory=event-trading) for the tactical layer.
 - **GPR Index methodology** — Caldara, D., and M. Iacoviello (2022), "Measuring Geopolitical Risk," American Economic Review, 112(4): 1194-1225. Available at matteoiacoviello.com/gpr.htm. The full dataset is publicly available and updated monthly.
 - **Geopolitical risk and equity premiums** — Hassan, T.A., Hollander, S., van Lent, L., and Tahoun, A. (2019), "Firm-Level Political Risk: Measurement and Effects," Quarterly Journal of Economics. Uses firm-level earnings call transcripts to measure geopolitical risk exposure at the company level — a more granular tool than the GPR Index.
 

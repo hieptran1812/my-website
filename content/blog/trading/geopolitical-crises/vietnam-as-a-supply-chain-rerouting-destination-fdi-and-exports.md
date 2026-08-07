@@ -197,12 +197,12 @@ Vietnam's FDI win is real, but it is not guaranteed to persist. Three structural
 
 The supply chain rerouting story intersects with several other analytical frameworks covered in this series:
 
-For the tariff mechanics and trade war escalation dynamics, see the [US-China trade war series](/trading/geopolitical-crises/) for a detailed breakdown of how tariff lists were constructed, which goods were targeted, and how the escalation ladder played out from 2018 to 2025.
+For the tariff mechanics and trade war escalation dynamics, see the [US-China trade war series](/blog/trading?subcategory=geopolitical-crises) for a detailed breakdown of how tariff lists were constructed, which goods were targeted, and how the escalation ladder played out from 2018 to 2025.
 
-For the broader ASEAN capital flow picture — how Vietnam competes with Indonesia, Thailand, and the Philippines for manufacturing FDI — see our [macro trading series](/trading/macro-trading/) coverage of emerging market capital flows and the "China plus one" manufacturing thesis.
+For the broader ASEAN capital flow picture — how Vietnam competes with Indonesia, Thailand, and the Philippines for manufacturing FDI — see our [macro trading series](/blog/trading?subcategory=macro-trading) coverage of emerging market capital flows and the "China plus one" manufacturing thesis.
 
-For the FX dimension — how the Vietnamese dong managed to stay relatively stable during the FDI surge (the State Bank of Vietnam intervenes actively) — see the [FX and currency series](/trading/forex/) posts on managed exchange rate regimes in ASEAN.
+For the FX dimension — how the Vietnamese dong managed to stay relatively stable during the FDI surge (the State Bank of Vietnam intervenes actively) — see the [FX and currency series](/blog/trading?subcategory=forex) posts on managed exchange rate regimes in ASEAN.
 
-For the equity market mechanics — how foreign ownership limits, room limits, and the upgrade from frontier to emerging market status affect VN-Index accessibility for international investors — see the [equity research series](/trading/equity-research/) on frontier market investing.
+For the equity market mechanics — how foreign ownership limits, room limits, and the upgrade from frontier to emerging market status affect VN-Index accessibility for international investors — see the [equity research series](/blog/trading?subcategory=equity-research) on frontier market investing.
 
 Vietnam's supply chain rerouting story is ultimately a case study in how geopolitical shocks create durable structural shifts in where the world makes things — and how a practitioner can position in the intersection of political decision-making, capital flows, and equity valuation. The country that wins a trade war's redirected FDI is not random: it is the country with the best combination of cost, logistics, political stability, and strategic positioning. Vietnam won that competition for electronics manufacturing, and the numbers — \$25B in annual FDI, \$115B in electronics exports, 50% of Samsung's global phone output — make that verdict unambiguous. The investor's job is to buy it at the right price, size the tail risks honestly, and know which market regime they are operating in.

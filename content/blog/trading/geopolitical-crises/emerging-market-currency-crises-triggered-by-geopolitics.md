@@ -298,14 +298,14 @@ A complete EM geopolitical trade framework requires three discipline rules:
 
 ## Further Reading and Cross-Links
 
-For the macro transmission mechanisms that link geopolitical shocks to central bank responses, see the [macro trading](/blog/trading/macro-trading/) series — particularly the posts on central bank reaction functions and interest rate differentials.
+For the macro transmission mechanisms that link geopolitical shocks to central bank responses, see the [macro trading](/blog/trading?subcategory=macro-trading) series — particularly the posts on central bank reaction functions and interest rate differentials.
 
-For the specific mechanics of carry trades, FX forwards, and NDF pricing, see the [forex trading](/blog/trading/forex/) series — the posts on forward rate parity and carry trade sizing are directly applicable.
+For the specific mechanics of carry trades, FX forwards, and NDF pricing, see the [forex trading](/blog/trading?subcategory=forex) series — the posts on forward rate parity and carry trade sizing are directly applicable.
 
-For an understanding of sovereign credit markets and how CDS spreads reflect political risk, see the [fixed income](/blog/trading/fixed-income/) series on credit spreads and the [capital markets](/blog/trading/capital-markets/) posts on EM bond mechanics.
+For an understanding of sovereign credit markets and how CDS spreads reflect political risk, see the [fixed income](/blog/trading?subcategory=fixed-income) series on credit spreads and the [capital markets](/blog/trading?subcategory=capital-markets) posts on EM bond mechanics.
 
-For event-specific market reactions — how specific announcements move specific assets — see the [event trading](/blog/trading/event-trading/) series on FOMC reactions and macro surprise trades.
+For event-specific market reactions — how specific announcements move specific assets — see the [event trading](/blog/trading?subcategory=event-trading) series on FOMC reactions and macro surprise trades.
 
-For Vietnam-specific market context, including the VND managed float mechanics and SBV policy framework, see the [Vietnam stocks](/blog/trading/vietnam-stocks/) sector playbook.
+For Vietnam-specific market context, including the VND managed float mechanics and SBV policy framework, see the [Vietnam stocks](/blog/trading?subcategory=vietnam-stocks) sector playbook.
 
-The fundamental framework for understanding political actors' decision calculus — why Erdogan chose the course he did, why the ANC tolerated Zuma's institutional damage — is covered in the [geopolitical crises](/blog/trading/geopolitical-crises/) series overview post on how nations make decisions under pressure.
+The fundamental framework for understanding political actors' decision calculus — why Erdogan chose the course he did, why the ANC tolerated Zuma's institutional damage — is covered in the [geopolitical crises](/blog/trading?subcategory=geopolitical-crises) series overview post on how nations make decisions under pressure.

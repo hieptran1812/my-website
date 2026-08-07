@@ -487,11 +487,11 @@ If you want to understand the broader context of geopolitical financial shocks, 
 
 For deeper technical context:
 
-- **Macro transmission of sanctions** — the [macro-trading series](/blog/trading/macro-trading/) covers how changes in currency regimes and trade flows transmit into inflation, growth, and monetary policy.
+- **Macro transmission of sanctions** — the [macro-trading series](/blog/trading?subcategory=macro-trading) covers how changes in currency regimes and trade flows transmit into inflation, growth, and monetary policy.
 
-- **FX mechanics** — the [forex series](/blog/trading/forex/) explains in depth how currency controls work, how they distort exchange rates, and the historical cases (Argentina, Turkey, Zimbabwe) where capital controls have been used and eventually failed.
+- **FX mechanics** — the [forex series](/blog/trading?subcategory=forex) explains in depth how currency controls work, how they distort exchange rates, and the historical cases (Argentina, Turkey, Zimbabwe) where capital controls have been used and eventually failed.
 
-- **Fixed-income implications** — the [fixed-income series](/blog/trading/fixed-income/) covers how sovereign debt markets respond to sanction-induced credit risk, including how Russia's bond defaults in 2022 were handled when Western custodians couldn't process coupon payments.
+- **Fixed-income implications** — the [fixed-income series](/blog/trading?subcategory=fixed-income) covers how sovereign debt markets respond to sanction-induced credit risk, including how Russia's bond defaults in 2022 were handled when Western custodians couldn't process coupon payments.
 
 The Russia sanctions case will be studied in international law, economics, and political science for decades. It represents the largest peacetime test of whether financial warfare can substitute for (or complement) military force in constraining an aggressor. The verdict is complex: the sanctions imposed real costs and changed Russia's strategic calculus around some decisions, while failing to stop the war or achieve the most optimistic forecasts of economic collapse. That complexity is itself the lesson — and why every trader, investor, and policymaker operating in an increasingly fragmented global order needs to understand this architecture.
 

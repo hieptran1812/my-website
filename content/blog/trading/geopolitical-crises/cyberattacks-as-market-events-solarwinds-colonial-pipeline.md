@@ -375,8 +375,8 @@ The cyber-market relationship sits at the intersection of several disciplines co
 
 - For understanding how the US and China are constructing competing technology ecosystems, see [Huawei, TikTok, and Tech Nationalism](/blog/trading/geopolitical-crises/huawei-blacklist-tiktok-ban-and-tech-nationalism) — the next post in this track
 - For the broader pattern of how geopolitical events move markets systematically, see [Geopolitical Risk Premium: What Markets Price In](/blog/trading/geopolitical-crises/geopolitical-risk-premium-what-markets-price-in)
-- For how sanctions — often the policy response to cyberattacks — work as financial instruments, see the [law-and-geopolitics](/blog/trading/law-and-geopolitics) series
-- For macro transmission of security spending on government budgets, see [trading/macro-trading](/blog/trading/macro-trading)
+- For how sanctions — often the policy response to cyberattacks — work as financial instruments, see the [law-and-geopolitics](/blog/trading?subcategory=law-and-geopolitics) series
+- For macro transmission of security spending on government budgets, see [trading/macro-trading](/blog/trading?subcategory=macro-trading)
 
 ## Sources and Further Reading
 

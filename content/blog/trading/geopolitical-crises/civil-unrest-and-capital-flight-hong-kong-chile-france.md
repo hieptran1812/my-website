@@ -355,4 +355,4 @@ By mid-2022, Sun Hung Kai traded at approximately HKD 90 — a much deeper disco
 [Failed referendums: Catalonia, Scotland, and the political risk premium](/blog/trading/geopolitical-crises/failed-referendums-catalonia-scotland-the-political-risk-premium)
 
 **For election-driven unrest and asset moves:**
-[Trading around elections: currency and equity playbook](/blog/trading/geopolitical-crises/trading-around-elections-currency-and-equity-playbook)
+[Trading around elections: currency and equity playbook](/blog/trading/geopolitical-crises/trading-the-us-election-sectors-dollar-rate-expectations)

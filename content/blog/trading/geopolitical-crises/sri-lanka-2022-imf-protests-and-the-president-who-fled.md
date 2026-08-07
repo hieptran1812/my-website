@@ -440,9 +440,9 @@ The Sri Lanka crisis sits at the intersection of several broader phenomena that 
 
 **Argentina's Perpetual Default Cycle:** Sri Lanka is unusual in that it was a *first-time* defaulter — the country had never previously failed to pay its international bonds. Argentina, by contrast, has defaulted eight times. The comparison between a country default-naive and a country default-habituated is instructive for understanding creditor behavior and recovery dynamics. See [Argentina's Perpetual Default Cycle: The Politics of Debt](/blog/trading/geopolitical-crises/argentinas-perpetual-default-cycle-the-politics-of-debt).
 
-**Sovereign Bond Credit Risk Fundamentals:** The mechanics of how sovereign bonds are priced, how credit default swaps work on sovereign names, and how rating agencies assess sovereign creditworthiness are covered in [Sovereign Bonds and Credit Risk](/blog/trading/fixed-income/sovereign-bonds-and-credit-risk).
+**Sovereign Bond Credit Risk Fundamentals:** The mechanics of how sovereign bonds are priced, how credit default swaps work on sovereign names, and how rating agencies assess sovereign creditworthiness are covered in [Sovereign Bonds and Credit Risk](/blog/trading/fixed-income/emerging-market-and-sovereign-debt-yield-with-country-risk).
 
-**Emerging Market Forex Strategy:** The currency mechanics in Sri Lanka — peg defense, reserve burn, forced float, and the aftermath — are a specific instance of the general EM currency crisis playbook. See our forex series for more on [how EM currencies behave around sovereign stress](/blog/trading/forex/).
+**Emerging Market Forex Strategy:** The currency mechanics in Sri Lanka — peg defense, reserve burn, forced float, and the aftermath — are a specific instance of the general EM currency crisis playbook. See our forex series for more on [how EM currencies behave around sovereign stress](/blog/trading?subcategory=forex).
 
 ### A Note on the External Debt / Export Ratio as a Signal System
 

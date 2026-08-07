@@ -346,9 +346,9 @@ The Vietnam-specific analysis — including the detailed 2018–19 trade war cas
 
 The South China Sea geopolitical risk that creates a separate "SCS discount" in Vietnamese and regional equities (distinct from the China+1 premium) is covered in [The South China Sea Dispute and Vietnam Market Risk Premium](/blog/trading/geopolitical-crises/the-south-china-sea-dispute-and-vn-market-risk-premium).
 
-For the macro transmission mechanics — how FDI → FX → credit cycle → equity re-rating works at the country level — see the [Macro for Traders](/blog/trading/macro-trading/) series.
+For the macro transmission mechanics — how FDI → FX → credit cycle → equity re-rating works at the country level — see the [Macro for Traders](/blog/trading?subcategory=macro-trading) series.
 
-For ASEAN currency exposure management in the context of EM equity investing, see the [FX/Currency](/blog/trading/forex/) series.
+For ASEAN currency exposure management in the context of EM equity investing, see the [FX/Currency](/blog/trading?subcategory=forex) series.
 
 ## Sources and Further Reading
 

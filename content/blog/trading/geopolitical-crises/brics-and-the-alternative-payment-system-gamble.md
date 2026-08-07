@@ -308,13 +308,13 @@ The de-dollarization story intersects with several other frameworks covered in t
 
 **Sanctions mechanics and legal structure:** The specific legal architecture of SWIFT exclusion, asset freezes, and secondary sanctions — including how they are implemented and challenged — is covered in the law-and-geopolitics track.
 
-**Currency war mechanics:** The transmission from reserve diversification to exchange rate moves, FX intervention, and carry trade dynamics is developed in depth in the [forex section](/blog/trading/forex/), including the specific mechanics of how dollar weakness shows up in EM currencies.
+**Currency war mechanics:** The transmission from reserve diversification to exchange rate moves, FX intervention, and carry trade dynamics is developed in depth in the [forex section](/blog/trading?subcategory=forex), including the specific mechanics of how dollar weakness shows up in EM currencies.
 
-**Gold as a safe haven:** The mechanics of gold's behavior in geopolitical stress — what drives the initial spike, what drives the reversal, and how to distinguish a lasting bid from a fear spike — is covered in the [gold series](/blog/trading/gold/).
+**Gold as a safe haven:** The mechanics of gold's behavior in geopolitical stress — what drives the initial spike, what drives the reversal, and how to distinguish a lasting bid from a fear spike — is covered in the [gold series](/blog/trading?subcategory=gold).
 
-**Macro transmission:** How reserve currency shifts affect monetary policy transmission, the Taylor Rule, and inflation expectations is covered in the [macro-trading section](/blog/trading/macro-trading/).
+**Macro transmission:** How reserve currency shifts affect monetary policy transmission, the Taylor Rule, and inflation expectations is covered in the [macro-trading section](/blog/trading?subcategory=macro-trading).
 
-**Fixed income mechanics:** The specific mechanics of Treasury market functioning — who the buyers are, how duration risk is priced, what happens to yield curves in a demand shock — is in the [fixed-income series](/blog/trading/fixed-income/).
+**Fixed income mechanics:** The specific mechanics of Treasury market functioning — who the buyers are, how duration risk is priced, what happens to yield curves in a demand shock — is in the [fixed-income series](/blog/trading?subcategory=fixed-income).
 
 **US-China tech war as accelerant:** The semiconductor export controls that are driving China's infrastructure-building urgency are covered in the cyber and tech nationalism track of this series.
 

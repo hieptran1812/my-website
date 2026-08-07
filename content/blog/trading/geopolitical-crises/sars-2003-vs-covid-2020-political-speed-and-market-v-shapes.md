@@ -493,10 +493,10 @@ The single most important indicator to track in any crisis-driven market selloff
 
 The dynamics of SARS and COVID connect to several other posts in this series:
 
-- For the general framework of how geopolitical and biological crises affect asset classes, see the [introduction to geopolitical risk in markets](/blog/trading/geopolitical-crises/geopolitical-risk-introduction-framework-for-investors).
-- For the 2008 financial crisis as a comparison case for policy-driven recovery timelines, see [GFC 2008: the anatomy of a credit crisis](/blog/trading/geopolitical-crises/gfc-2008-anatomy-credit-crisis-market-impact).
-- For how central bank policy generally affects equity valuations, see [monetary policy and equity markets](/blog/trading/geopolitical-crises/central-bank-policy-equity-market-transmission-mechanism).
-- For oil market dynamics during crises — which the SARS/COVID comparison illustrates sharply — see [oil price shocks and asset markets](/blog/trading/geopolitical-crises/oil-price-shocks-geopolitical-crises-asset-market-impact).
+- For the general framework of how geopolitical and biological crises affect asset classes, see the [introduction to geopolitical risk in markets](/blog/trading/geopolitical-crises/geopolitical-risk-premium-what-markets-price-in).
+- For the 2008 financial crisis as a comparison case for policy-driven recovery timelines, see [GFC 2008: the anatomy of a credit crisis](/blog/trading/cross-asset/case-study-2008-global-financial-crisis).
+- For how central bank policy generally affects equity valuations, see [monetary policy and equity markets](/blog/trading/macro-trading/qe-vs-qt-how-balance-sheet-policy-moves-markets).
+- For oil market dynamics during crises — which the SARS/COVID comparison illustrates sharply — see [oil price shocks and asset markets](/blog/trading/geopolitical-crises/the-oil-weapon-when-energy-becomes-foreign-policy).
 
 ## Sources and Further Reading
 

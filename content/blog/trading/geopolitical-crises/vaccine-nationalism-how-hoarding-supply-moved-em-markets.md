@@ -355,11 +355,11 @@ The 2021 vaccine gap is not purely history. It is a template for how structural 
 
 The vaccine nationalism episode does not stand alone in the geopolitical risk literature. Several adjacent themes illuminate different dimensions of what happened in 2021.
 
-For the broader framework of how geopolitical supply shocks transmit to financial markets, see the treatment in the post on [Russia's Ukraine invasion and commodity markets](/blog/trading/geopolitical-crises/russia-ukraine-war-commodity-supply-shocks-and-market-repricing) — which examines how a geopolitically-driven supply shock in energy created comparable DM/EM divergences in 2022, particularly affecting energy-importing EM economies.
+For the broader framework of how geopolitical supply shocks transmit to financial markets, see the treatment in the post on [Russia's Ukraine invasion and commodity markets](/blog/trading/geopolitical-crises/russia-ukraine-war-the-energy-shock-playbook) — which examines how a geopolitically-driven supply shock in energy created comparable DM/EM divergences in 2022, particularly affecting energy-importing EM economies.
 
-For the sovereign spread mechanics that underpinned the vaccine gap trade, the analysis of [EM sovereign debt dynamics and the original sin problem](/blog/trading/geopolitical-crises/em-sovereign-debt-original-sin-and-the-dollar-trap) provides the credit framework.
+For the sovereign spread mechanics that underpinned the vaccine gap trade, the analysis of [EM sovereign debt dynamics and the original sin problem](/blog/trading/macro-trading/sovereign-debt-and-the-bond-vigilantes) provides the credit framework.
 
-For understanding how COVAX fits into the broader history of multilateral institutions in economic crises — and why institutions with clear mandates but insufficient resources consistently underperform — the post on [IMF conditionality and EM crises](/blog/trading/geopolitical-crises/imf-conditionality-structural-adjustment-and-em-crises) offers the institutional context.
+For understanding how COVAX fits into the broader history of multilateral institutions in economic crises — and why institutions with clear mandates but insufficient resources consistently underperform — the post on [IMF conditionality and EM crises](/blog/trading/geopolitical-crises/the-imf-playbook-what-countries-must-do-and-market-reactions) offers the institutional context.
 
 ## Sources and Further Reading
 

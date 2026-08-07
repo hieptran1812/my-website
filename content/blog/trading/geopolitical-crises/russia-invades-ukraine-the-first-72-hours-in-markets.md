@@ -452,7 +452,7 @@ For the four specific diagnostic tests that tell you in real time whether you ar
 
 For the systematic map of which asset classes respond to which types of geopolitical shocks — including the Ukraine template compared to trade wars, energy embargoes, and financial crises — see [Asset Sensitivity Matrix: Which Assets Move in Which Crisis](/blog/trading/geopolitical-crises/asset-sensitivity-matrix-which-assets-move-in-which-crisis).
 
-For the mechanics of how oil prices respond to supply disruptions more broadly, including the OPEC+ cut decisions that followed the Ukraine shock, see the [energy geopolitics series](/blog/trading/geopolitical-crises/energy-geopolitics-opec-power-oil-and-the-global-economy) in this series.
+For the mechanics of how oil prices respond to supply disruptions more broadly, including the OPEC+ cut decisions that followed the Ukraine shock, see the [energy geopolitics series](/blog/trading/law-and-geopolitics/energy-geopolitics-opec-the-oil-weapon-and-the-european-gas-shock) in this series.
 
 
 *This post is part of the "Geopolitical Crises & Markets" series. All data is sourced from public records as of June 2026 and is for educational purposes only. Nothing here constitutes financial advice or a recommendation to buy or sell any security.*

@@ -620,10 +620,10 @@ The framework from this post — sub-national spread as leading indicator, HQ ex
 - Caldara-Iacoviello Geopolitical Risk Index: matteoiacoviello.com/gpr.htm
 
 **For deeper mechanics on FX political risk:**
-[Trading around elections and political shocks](/blog/trading/geopolitical-crises/trading-around-elections-currency-and-equity-playbook)
+[Trading around elections and political shocks](/blog/trading/geopolitical-crises/trading-the-us-election-sectors-dollar-rate-expectations)
 
 **For sovereign spread mechanics and bond pricing:**
-[Understanding sovereign spreads and credit risk](/blog/trading/fixed-income/sovereign-spreads-credit-risk-primer)
+[Understanding sovereign spreads and credit risk](/blog/trading/fixed-income/emerging-market-and-sovereign-debt-yield-with-country-risk)
 
 **For the general framework of geopolitical events and markets:**
-[How geopolitical events move markets: the transmission framework](/blog/trading/geopolitical-crises/how-geopolitical-events-move-markets)
+[How geopolitical events move markets: the transmission framework](/blog/trading/geopolitical-crises/asset-sensitivity-matrix-which-assets-move-in-which-crisis)

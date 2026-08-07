@@ -510,17 +510,17 @@ Markets barely reacted to the trash balloon or drone incidents — KOSPI moved l
 
 The mechanics explored in this post connect to several other series:
 
-**Macro transmission of geopolitical events** → the [Macro for Traders](/blog/trading/macro-trading/) series explores how geopolitical shocks transmit through interest rates, FX reserves, and capital flows — the same channels that drive the safe-haven bid mechanics we described above.
+**Macro transmission of geopolitical events** → the [Macro for Traders](/blog/trading?subcategory=macro-trading) series explores how geopolitical shocks transmit through interest rates, FX reserves, and capital flows — the same channels that drive the safe-haven bid mechanics we described above.
 
-**VIX and volatility trading** → [Options and Volatility](/blog/trading/options-volatility/) provides the technical mechanics for the VIX call and KOSPI puts trades described in this post's worked examples, including the precise construction of protective puts and the Greeks dynamics during rapid VIX moves.
+**VIX and volatility trading** → [Options and Volatility](/blog/trading?subcategory=options-volatility) provides the technical mechanics for the VIX call and KOSPI puts trades described in this post's worked examples, including the precise construction of protective puts and the Greeks dynamics during rapid VIX moves.
 
-**Korean equity fundamentals** → [Equity Research Playbook](/blog/trading/equity-research/) covers the P/E multiple decomposition methodology used in the Korea discount calculation, and the framework for separating governance discounts from geopolitical risk premia in emerging market equities.
+**Korean equity fundamentals** → [Equity Research Playbook](/blog/trading?subcategory=equity-research) covers the P/E multiple decomposition methodology used in the Korea discount calculation, and the framework for separating governance discounts from geopolitical risk premia in emerging market equities.
 
-**FX crisis mechanics** → [Trading Currencies, From Carry to Crisis](/blog/trading/forex/) addresses KRW crisis dynamics, emerging market FX carry trades, and how currency reserves function as shock absorbers during geopolitical events.
+**FX crisis mechanics** → [Trading Currencies, From Carry to Crisis](/blog/trading?subcategory=forex) addresses KRW crisis dynamics, emerging market FX carry trades, and how currency reserves function as shock absorbers during geopolitical events.
 
-**Event-driven trading** → [Trading the News](/blog/trading/event-trading/) provides the broader event-reaction study framework that underpins the classification matrix and 72-hour rule discussed in the playbook section of this post.
+**Event-driven trading** → [Trading the News](/blog/trading?subcategory=event-trading) provides the broader event-reaction study framework that underpins the classification matrix and 72-hour rule discussed in the playbook section of this post.
 
-**Game theory of deterrence** → [Game Theory for Markets](/blog/trading/game-theory/) covers the Nash equilibrium analysis of deterrence games in depth, including the formal model of the Korean peninsula standoff and why the equilibrium has persisted for 70 years.
+**Game theory of deterrence** → [Game Theory for Markets](/blog/trading?subcategory=game-theory) covers the Nash equilibrium analysis of deterrence games in depth, including the formal model of the Korean peninsula standoff and why the equilibrium has persisted for 70 years.
 
 
 ## Conclusion: Pricing What You Know, Insuring What You Don't
@@ -538,4 +538,4 @@ Markets have priced North Korea's nuclear arsenal as an insurance policy that Ki
 The signals to watch for regime change in market pricing are specific: a genuine miniaturization breakthrough that extends NK's nuclear strike credibility to US cities beyond any reasonable doubt, a leadership succession crisis that introduces genuine uncertainty about nuclear command authority, or — most dangerously — a South Korean political shift toward preemptive military action that NK misreads as an existential threat requiring a first-strike response. None of those conditions are present today. But each is worth one line in your geopolitical risk dashboard. The \$480 billion Korea discount is either the world's most persistent mispricing or the world's most accurate actuarial assessment of a frozen conflict. Understanding which requires watching the game board, not just the missile counts.
 
 
-*This post is part of the [Geopolitical Crises and Markets](/blog/trading/geopolitical-crises/) series. Related deep-dives: [How Sanctions Work and What They Actually Cost Markets](/blog/trading/geopolitical-crises/), [The Taiwan Strait: How Markets Price the Unthinkable](/blog/trading/geopolitical-crises/).*
+*This post is part of the [Geopolitical Crises and Markets](/blog/trading?subcategory=geopolitical-crises) series. Related deep-dives: [How Sanctions Work and What They Actually Cost Markets](/blog/trading?subcategory=geopolitical-crises), [The Taiwan Strait: How Markets Price the Unthinkable](/blog/trading?subcategory=geopolitical-crises).*

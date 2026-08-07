@@ -555,13 +555,13 @@ This mechanism — aid suspension + FDI collapse = reserve depletion = currency 
 
 ## Further reading and cross-links
 
-For the legal framework of sanctions that often follow destabilizing coups, see the series on [sanctions mechanics](/blog/trading/law-and-geopolitics/).
+For the legal framework of sanctions that often follow destabilizing coups, see the series on [sanctions mechanics](/blog/trading?subcategory=law-and-geopolitics).
 
-For how currency crises compound political instability through balance-of-payments pressure, see the [forex crisis mechanics](/blog/trading/forex/) posts.
+For how currency crises compound political instability through balance-of-payments pressure, see the [forex crisis mechanics](/blog/trading?subcategory=forex) posts.
 
-For the broader framework of safe-haven flows during political shocks, see [safe havens and geopolitical events](/blog/trading/geopolitical-crises/safe-haven-assets-flight-to-quality-geopolitical-shocks).
+For the broader framework of safe-haven flows during political shocks, see [safe havens and geopolitical events](/blog/trading/geopolitical-crises/safe-havens-flight-to-quality-and-the-dollar-in-a-crisis).
 
-For macro-level thinking on how political risk flows through to growth and rate expectations, see the [macro for traders](/blog/trading/macro-trading/) series.
+For macro-level thinking on how political risk flows through to growth and rate expectations, see the [macro for traders](/blog/trading?subcategory=macro-trading) series.
 
 ## Sources and further reading
 

@@ -557,10 +557,10 @@ The interesting insight: the breakeven at 2.1% implies markets believe the Fed w
 
 The dynamics described in this post connect to other major geopolitical crises posts in this series:
 
-- [Geopolitical Risk Premia and Safe Havens](/blog/trading/geopolitical-crises/geopolitical-risk-premia-safe-haven-assets) — how risk assets reprice in crisis periods and which assets benefit
-- [The Russia-Ukraine War: Energy Shock, Sanctions, and Market Repricing](/blog/trading/geopolitical-crises/russia-ukraine-war-energy-commodities-markets) — the specific supply-chain and energy shocks that accelerated industrial policy
-- [Trade Wars and Tariffs: How Economic Nationalism Reprices Global Supply Chains](/blog/trading/geopolitical-crises/us-china-trade-war-tariffs-supply-chains) — the broader deglobalization trend within which the IRA and CHIPS Act sit
-- [Sovereign Debt Crises: When Government Borrowing Becomes a Market Crisis](/blog/trading/geopolitical-crises/sovereign-debt-crises-argentina-greece-lessons) — the deeper history of fiscal credibility crises and what they have in common
+- [Geopolitical Risk Premia and Safe Havens](/blog/trading/geopolitical-crises/geopolitical-risk-premium-what-markets-price-in) — how risk assets reprice in crisis periods and which assets benefit
+- [The Russia-Ukraine War: Energy Shock, Sanctions, and Market Repricing](/blog/trading/geopolitical-crises/russia-ukraine-war-the-energy-shock-playbook) — the specific supply-chain and energy shocks that accelerated industrial policy
+- [Trade Wars and Tariffs: How Economic Nationalism Reprices Global Supply Chains](/blog/trading/geopolitical-crises/how-a-trade-war-starts-trigger-escalation-negotiation) — the broader deglobalization trend within which the IRA and CHIPS Act sit
+- [Sovereign Debt Crises: When Government Borrowing Becomes a Market Crisis](/blog/trading/geopolitical-crises/greece-2010-15-when-sovereign-debt-becomes-a-political-crisis) — the deeper history of fiscal credibility crises and what they have in common
 
 ## Sources and Further Reading
 

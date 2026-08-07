@@ -561,11 +561,11 @@ For a geopolitical tail hedge like the Brent calls, limit the premium cost to **
 
 The Iran-Israel conflict intersects with several other themes covered in this series:
 
-- **Oil market mechanics and OPEC+ dynamics**: For the underlying supply-demand framework, see the macro-trading series on [energy markets and the oil price cycle](/blog/trading/macro-trading/energy-markets-oil-price-cycle-what-moves-crude).
+- **Oil market mechanics and OPEC+ dynamics**: For the underlying supply-demand framework, see the macro-trading series on [energy markets and the oil price cycle](/blog/trading/macro-trading/commodities-as-macro-signals-oil-copper-gold).
 - **Sanctions as economic weapons**: The mechanics of how sanctions work and why they sometimes fail are covered in the geopolitical series.
-- **Gold as a geopolitical hedge**: Gold's historical reaction to Middle East conflicts and how to size a geopolitical gold position are covered in the [gold series](/blog/trading/gold/gold-as-a-geopolitical-hedge-war-sanctions-and-safe-haven-flows).
-- **The Strait of Hormuz in context**: For the broader picture of how energy infrastructure shapes geopolitics, see [energy geopolitics and pipeline politics](/blog/trading/macro-trading/energy-geopolitics-pipelines-sanctions-and-the-new-oil-order).
-- **FX implications of Middle East conflict**: The Gulf petrostate currencies, the impact of oil shocks on EM FX, and the "petrodollar recycling" dynamic are covered in the [FX series on currency and commodities](/blog/trading/forex/commodity-currencies-oil-gold-and-the-petrodollar-cycle).
+- **Gold as a geopolitical hedge**: Gold's historical reaction to Middle East conflicts and how to size a geopolitical gold position are covered in the [gold series](/blog/trading?subcategory=gold).
+- **The Strait of Hormuz in context**: For the broader picture of how energy infrastructure shapes geopolitics, see [energy geopolitics and pipeline politics](/blog/trading/law-and-geopolitics/energy-geopolitics-opec-the-oil-weapon-and-the-european-gas-shock).
+- **FX implications of Middle East conflict**: The Gulf petrostate currencies, the impact of oil shocks on EM FX, and the "petrodollar recycling" dynamic are covered in the [FX series on currency and commodities](/blog/trading?subcategory=forex).
 
 This post has focused on the direct Iran-Israel axis. Future posts in this series will examine the broader Gulf dynamics, the Saudi-Iran regional rivalry, and the implications of any Israeli-Saudi normalization for the regional balance of power and its market consequences.
 

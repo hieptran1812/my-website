@@ -398,8 +398,8 @@ For more on how geopolitical shocks create permanent vs. temporary market regime
 - [Geopolitical Risk Premium: What Markets Price In](/blog/trading/geopolitical-crises/geopolitical-risk-premium-what-markets-price-in) — how political risk gets embedded in asset prices
 
 **Cross-asset deep-dives:**
-- [How Central Banks Move Markets](/blog/trading/macro-trading/) — the ECB hiking cycle and its transmission across European asset classes
-- [The Bond Market, From the Ground Up](/blog/trading/fixed-income/) — understanding Bund duration and why rate hikes devastated European fixed income
-- [Trading the News: Event Reactions](/blog/trading/event-trading/) — how to position around macro announcements in the context of ongoing geopolitical stress
+- [How Central Banks Move Markets](/blog/trading?subcategory=macro-trading) — the ECB hiking cycle and its transmission across European asset classes
+- [The Bond Market, From the Ground Up](/blog/trading?subcategory=fixed-income) — understanding Bund duration and why rate hikes devastated European fixed income
+- [Trading the News: Event Reactions](/blog/trading?subcategory=event-trading) — how to position around macro announcements in the context of ongoing geopolitical stress
 
 **Data sources used in this post:** ICE/EEX TTF Settlement Data; Gas Infrastructure Europe (GIE); Bruegel European Energy Database; IEA Gas Market Report 2023; GIIGNL Annual LNG Report 2024; Reuters Refinitiv Brent Crude; Destatis German CPI; ECB Statistical Data Warehouse.

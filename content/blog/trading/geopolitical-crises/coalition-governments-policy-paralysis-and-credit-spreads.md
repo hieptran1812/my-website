@@ -298,13 +298,13 @@ The sovereign spread is the primary financial channel, but coalition uncertainty
 
 ## Further reading and cross-links
 
-For the mechanical details of how sovereign credit works — duration, convexity, yield curve construction — see the [fixed income](/blog/trading/fixed-income) series, particularly the posts on sovereign credit risk and yield curve mechanics.
+For the mechanical details of how sovereign credit works — duration, convexity, yield curve construction — see the [fixed income](/blog/trading?subcategory=fixed-income) series, particularly the posts on sovereign credit risk and yield curve mechanics.
 
-For the macro transmission of fiscal policy uncertainty into growth and inflation outcomes — the "policy channel" that underlies the spread move — see the [macro trading](/blog/trading/macro-trading) series, particularly the posts on fiscal multipliers and debt sustainability analysis.
+For the macro transmission of fiscal policy uncertainty into growth and inflation outcomes — the "policy channel" that underlies the spread move — see the [macro trading](/blog/trading?subcategory=macro-trading) series, particularly the posts on fiscal multipliers and debt sustainability analysis.
 
-For the quantitative tools used to measure political uncertainty — EPU index construction, event study methodology, and panel regressions of EPU on spreads — the [quantitative finance](/blog/trading/quantitative-finance) series covers the time-series econometrics framework.
+For the quantitative tools used to measure political uncertainty — EPU index construction, event study methodology, and panel regressions of EPU on spreads — the [quantitative finance](/blog/trading?subcategory=quantitative-finance) series covers the time-series econometrics framework.
 
-For historical context on how debt crises have resolved or failed to resolve — including the Greek restructuring, the Argentinian defaults, and the Turkish lira crises — see the [geopolitical crises](/blog/trading/geopolitical-crises) series posts on debt crises and financial contagion.
+For historical context on how debt crises have resolved or failed to resolve — including the Greek restructuring, the Argentinian defaults, and the Turkish lira crises — see the [geopolitical crises](/blog/trading?subcategory=geopolitical-crises) series posts on debt crises and financial contagion.
 
 The Caldara-Iacoviello Geopolitical Risk Index (GPR) provides a complementary political risk signal to the Baker-Bloom-Davis EPU index, focusing on war, terrorism, and geopolitical confrontation rather than policy uncertainty. During coalition crises, the EPU index is the more relevant measure; during war-related political shocks, the GPR is more directly applicable.
 

@@ -349,16 +349,16 @@ Exit triggers: IMF program announcement, central bank governor credibly committe
 
 Currency wars sit at the intersection of several mechanisms covered in depth across this site:
 
-For the mechanics of how exchange rates move and how to trade FX: [Trading Currencies, From Carry to Crisis](/blog/trading/forex/)
+For the mechanics of how exchange rates move and how to trade FX: [Trading Currencies, From Carry to Crisis](/blog/trading?subcategory=forex)
 
-For how central bank rate decisions transmit to currency values: [Macro for Traders](/blog/trading/macro-trading/)
+For how central bank rate decisions transmit to currency values: [Macro for Traders](/blog/trading?subcategory=macro-trading)
 
-For how FX crises become sovereign debt crises: [The Bond Market, From the Ground Up](/blog/trading/fixed-income/)
+For how FX crises become sovereign debt crises: [The Bond Market, From the Ground Up](/blog/trading?subcategory=fixed-income)
 
-For the role of gold as a reserve asset and geopolitical hedge: [Gold, From First Principles to the Vault](/blog/trading/gold/)
+For the role of gold as a reserve asset and geopolitical hedge: [Gold, From First Principles to the Vault](/blog/trading?subcategory=gold)
 
-For how to read event-driven FX moves in real time: [Trading the News](/blog/trading/event-trading/)
+For how to read event-driven FX moves in real time: [Trading the News](/blog/trading?subcategory=event-trading)
 
-For the IMF and World Bank as geopolitical actors in currency crises: [Capital Markets: How Money Finds Its Best Use](/blog/trading/capital-markets/)
+For the IMF and World Bank as geopolitical actors in currency crises: [Capital Markets: How Money Finds Its Best Use](/blog/trading?subcategory=capital-markets)
 
 Currency wars are rarely self-contained events. They are symptoms of deeper tensions — over trade competitiveness, over reserve currency status, over the domestic political pressures that force governments to prioritize short-term growth over monetary credibility. The practitioner who can read those upstream tensions is in a position to detect the currency war before it arrives in the headlines — and to position accordingly rather than react after the damage is done.

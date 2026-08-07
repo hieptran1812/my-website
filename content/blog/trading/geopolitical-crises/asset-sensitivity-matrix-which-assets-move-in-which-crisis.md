@@ -488,11 +488,11 @@ The signature of a geopolitical unwind: the GPR index falls, the VIX declines, g
 
 The sensitivity matrix is the *framework*; the deep mechanisms behind each cell are covered in dedicated series:
 
-- **Energy geopolitics and oil markets**: the [macro-trading series on commodity cycles](/blog/trading/macro-trading) covers how OPEC+ decisions interact with supply-shock events.
-- **EM currency crises in depth**: the [forex series on carry trade and crisis](/blog/trading/forex) explains the mechanics behind EM FX devaluation during risk-off events.
-- **Gold's safe-haven mechanics**: the [gold series](/blog/trading/gold) builds the full model of gold's real interest rate sensitivity and currency-debasement driver.
-- **Bond behavior in crisis**: the [fixed-income series](/blog/trading/fixed-income) explains duration, convexity, and the inflation-vs-safety dynamic in detail.
-- **Reading event reactions in real time**: the [event-trading series](/blog/trading/event-trading) maps specific calendar events (FOMC, CPI, NFP) to the same asset-reaction framework.
+- **Energy geopolitics and oil markets**: the [macro-trading series on commodity cycles](/blog/trading?subcategory=macro-trading) covers how OPEC+ decisions interact with supply-shock events.
+- **EM currency crises in depth**: the [forex series on carry trade and crisis](/blog/trading?subcategory=forex) explains the mechanics behind EM FX devaluation during risk-off events.
+- **Gold's safe-haven mechanics**: the [gold series](/blog/trading?subcategory=gold) builds the full model of gold's real interest rate sensitivity and currency-debasement driver.
+- **Bond behavior in crisis**: the [fixed-income series](/blog/trading?subcategory=fixed-income) explains duration, convexity, and the inflation-vs-safety dynamic in detail.
+- **Reading event reactions in real time**: the [event-trading series](/blog/trading?subcategory=event-trading) maps specific calendar events (FOMC, CPI, NFP) to the same asset-reaction framework.
 
 In the next post in this series, we will build the **geopolitical risk premium calculator** — how to quantify how much of a crisis is "already priced in" versus what would need to happen for prices to move further. That is the instrument every event-driven trader needs to avoid chasing headlines.
 

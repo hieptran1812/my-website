@@ -502,13 +502,13 @@ The geopolitical shock framework applies across every asset class covered in thi
 
 For understanding how oil prices, gas prices, and energy infrastructure respond to supply disruptions — and how to model commodity risk premiums — the foundational mechanics are covered in the macro-trading and fixed-income sections of this site.
 
-For the currency dimension of geopolitical shocks — why the ruble collapsed, how EM currencies respond to sanctions, and the safe-haven mechanics of USD, JPY, CHF, and gold — the FX series covers these in depth at [Trading Currencies, From Carry to Crisis](/blog/trading/forex/).
+For the currency dimension of geopolitical shocks — why the ruble collapsed, how EM currencies respond to sanctions, and the safe-haven mechanics of USD, JPY, CHF, and gold — the FX series covers these in depth at [Trading Currencies, From Carry to Crisis](/blog/trading?subcategory=forex).
 
-For the equity market dimension — sector rotation after geopolitical shocks, defense vs energy vs tech — the cross-asset playbook and equity research series provide the valuation tools: [Cross-Asset Playbook](/blog/trading/cross-asset/) and [Equity Research Playbook](/blog/trading/equity-research/).
+For the equity market dimension — sector rotation after geopolitical shocks, defense vs energy vs tech — the cross-asset playbook and equity research series provide the valuation tools: [Cross-Asset Playbook](/blog/trading?subcategory=cross-asset) and [Equity Research Playbook](/blog/trading?subcategory=equity-research).
 
-For the bond and credit dimension — sovereign spreads after sanctions, how geopolitical risks price into EM bond spreads, and the EMBI analytics — the fixed-income series is the reference: [The Bond Market, From the Ground Up](/blog/trading/fixed-income/).
+For the bond and credit dimension — sovereign spreads after sanctions, how geopolitical risks price into EM bond spreads, and the EMBI analytics — the fixed-income series is the reference: [The Bond Market, From the Ground Up](/blog/trading?subcategory=fixed-income).
 
-For the on-chain perspective on sanctions evasion, crypto-as-parallel-financial-system in sanctioned states, and how SWIFT exclusions drive crypto adoption — the on-chain analysis series covers these dynamics: [On-Chain Analysis](/blog/trading/onchain/).
+For the on-chain perspective on sanctions evasion, crypto-as-parallel-financial-system in sanctioned states, and how SWIFT exclusions drive crypto adoption — the on-chain analysis series covers these dynamics: [On-Chain Analysis](/blog/trading?subcategory=onchain).
 
 
 *This post is part of the series "Geopolitical Crises and Markets: How Nations Move, How Markets React." All data is as of mid-2025. This is educational analysis, not investment advice. Historical regime-change and spike classifications are retrospective interpretations using the four-test framework — real-time application will always involve uncertainty.*

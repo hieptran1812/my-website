@@ -349,15 +349,15 @@ The NAFTA-to-USMCA transition generated several durable lessons that apply to an
 **Geopolitical crisis posts in this series:**
 - [The TPP Withdrawal and the Asian Trade Architecture Shift](/blog/trading/geopolitical-crises/tpp-withdrawal-and-the-asian-trade-architecture-shift) — the other major Trump trade withdrawal; how Asia reacted
 - [Turkey's Unorthodox Rate Policy](/blog/trading/geopolitical-crises/turkeys-unorthodox-rate-policy-when-politics-overrides-central-banks) — another EM currency driven by political decisions rather than fundamentals
-- [1998: Russia, LTCM, and the FX Tremor That Shook the World](/blog/trading/geopolitical-crises/1998-russia-ltcm-and-the-fx-tremor-that-shook-the-world) — how political risk turns into cascading financial crisis
+- [1998: Russia, LTCM, and the FX Tremor That Shook the World](/blog/trading/forex/1998-russia-ltcm-and-the-fx-tremor-that-shook-the-world) — how political risk turns into cascading financial crisis
 
 **FX and trading mechanics:**
-- [Carry Trades and the Risk-Off Unwind](/blog/trading/forex) — the macro framework for EM carry trades that NAFTA risk disrupted
-- [Reading FX Volatility Surfaces](/blog/trading/options-volatility) — how to extract market-implied probabilities from options pricing
+- [Carry Trades and the Risk-Off Unwind](/blog/trading?subcategory=forex) — the macro framework for EM carry trades that NAFTA risk disrupted
+- [Reading FX Volatility Surfaces](/blog/trading?subcategory=options-volatility) — how to extract market-implied probabilities from options pricing
 
 **Policy and markets:**
-- [How Trade Policy Moves Markets](/blog/trading/policy-and-markets) — the systematic framework for pricing policy risk across assets
-- [Supply Chain Finance: When Manufacturing Risk Becomes Credit Risk](/blog/trading/finance) — how supply chain disruptions from content rules translate into balance sheet risk for parts manufacturers
+- [How Trade Policy Moves Markets](/blog/trading?subcategory=policy-and-markets) — the systematic framework for pricing policy risk across assets
+- [Supply Chain Finance: When Manufacturing Risk Becomes Credit Risk](/blog/trading?subcategory=finance) — how supply chain disruptions from content rules translate into balance sheet risk for parts manufacturers
 
 **Primary sources:**
 - USTR USMCA text (Chapter 4, Rules of Origin): ustr.gov/trade-agreements/free-trade-agreements/united-states-mexico-canada-agreement
