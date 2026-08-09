@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Forensic Accounting"
 author: "Hiep Tran"
 featured: true
-readTime: 58
+readTime: 59
 ---
 
 > [!important]
@@ -181,7 +181,7 @@ If the cost of SBC ultimately settles in the share count, then the share count i
 
 **Diluted shares outstanding** counts the shares that exist *plus* the shares that would exist if everyone holding a claim on future shares — option holders, RSU holders, convertible bondholders — converted those claims today. It is the pessimistic count, and it is the one that matters, because those claims will in fact be exercised if the company does well.
 
-The gap between them is the size of the outstanding promises. In Alphabet's fiscal 2024, basic weighted-average shares were 12,319 million and diluted were 12,447 million — a gap of 128 million shares, about 1.0%.
+The gap between them is the size of the outstanding promises. In Alphabet's fiscal 2024, per its Form 10-K for the year ended 31 December 2024, basic weighted-average shares were 12,319 million and diluted were 12,447 million — a gap of 128 million shares, about 1.0%.
 
 Two further complications:
 
@@ -290,7 +290,7 @@ Every step of that is legal and disclosed. The net effect is still a cash bonus 
 
 ![A comparison table of Alphabet, Salesforce and Snowflake showing buyback dollars, diluted share counts, net change, cost per net share retired, and SBC as a percentage of revenue](/imgs/blogs/stock-based-compensation-buybacks-and-eps-optics-5.webp)
 
-The table above puts three companies side by side, all figures from their Forms 10-K. The spread is the point: the same activity — "we are buying back stock" — produces wildly different results depending on how much stock is going out the other door.
+The table above puts three companies side by side, all figures from their Forms 10-K. To keep the three comparable it uses **diluted weighted-average** share counts throughout, which is why Alphabet's cost per net share retired reads \$226 there rather than the \$249 computed from point-in-time counts a few paragraphs ago — same company, same year, same \$62.0 billion, two different denominators. Either is honest; mixing them is not. The spread is the point: the same activity — "we are buying back stock" — produces wildly different results depending on how much stock is going out the other door.
 
 #### Worked example: Salesforce — \$32.0 billion for 41 million shares
 
@@ -640,7 +640,7 @@ The rest of the story confirms the reading. With repurchases switched off and re
 
 ### The aggregate: a record year that moved few share counts
 
-The market-wide version is the same pattern at scale. In 2024 the S&P 500 spent a record \$942.5 billion on buybacks, up 18.5% from \$795.2 billion in 2023, and in the fourth quarter of that year only 11.9% of index members had reduced their EPS share count by as much as 4% year over year. Nearly a trillion dollars of repurchases, and roughly nine companies in ten did not achieve a share-count reduction that would register as more than noise in a valuation model.
+The market-wide version is the same pattern at scale. On S&P Dow Jones Indices' figures (press release of 19 March 2025), in 2024 the S&P 500 spent a record \$942.5 billion on buybacks, up 18.5% from \$795.2 billion in 2023, and in the fourth quarter of that year only 11.9% of index members had reduced their EPS share count by as much as 4% year over year. Nearly a trillion dollars of repurchases, and roughly nine companies in ten did not achieve a share-count reduction that would register as more than noise in a valuation model.
 
 That single juxtaposition is the argument of this article, aggregated: the money is real, the share reduction mostly is not, and the difference is compensation.
 
