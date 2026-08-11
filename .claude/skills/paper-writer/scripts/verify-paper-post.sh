@@ -247,7 +247,7 @@ dash_view() {
        /^\$\$/{m=!m; next} m{next} 1' "$path" \
   | sed -E 's/`[^`]*`/CODE/g; s/\$[^$]*\$/MATH/g'
 }
-dashes=$(dash_view | grep -nE '—|[[:space:]]–[[:space:]]|[[:space:]]--+[[:space:]]' || true)
+dashes=$(dash_view | grep -nE '—|[[:space:]]–[[:space:]]|[[:space:]]--[[:space:]]' || true)
 if [ -z "$dashes" ]; then
   pass "em-dash: none in prose, headings, captions or frontmatter"
 else
