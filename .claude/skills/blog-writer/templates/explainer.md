@@ -4,16 +4,16 @@ Mirrors `kv-cache.md`. Target: 8–15 min read, 2–4k words, 1–2 diagrams, no
 
 ## Section list
 
-1. **Hook (`## Introduction`)** — open with a phenomenon the reader has noticed (e.g. "If you've ever used ChatGPT…"), then surface the hidden mechanism. End the intro with: "Let's build up the intuition step by step."
+1. **Hook (`## Introduction`)**: open with a phenomenon the reader has noticed (e.g. "If you've ever used ChatGPT…"), then surface the hidden mechanism. End the intro with: "Let's build up the intuition step by step."
 2. **Embed the primary diagram** right after the hook paragraph.
-3. **`## Prerequisites: How <thing> Works`** — 1–3 sub-sections covering the minimum background. Always include:
+3. **`## Prerequisites: How <thing> Works`**: 1–3 sub-sections covering the minimum background. Always include:
    - A concrete analogy (library, restaurant, city map). Set in a fenced code block as ASCII or as a plain prose paragraph.
    - The minimal math, with every symbol defined.
-4. **`## The <problem>: Why We Need <thing>`** — show the pain without the optimization. Include a worked numerical example.
-5. **`## How <thing> Works`** — the core explanation. Walk through one full step-by-step example with small numbers (e.g. 4-token sequence, 2-dim vectors).
-6. **`## Memory / Cost / Trade-offs`** — quantify. Tables of "without X vs with X" for typical model sizes.
-7. **`## Optimizations and Variants`** — 3–6 named techniques (e.g. MQA, GQA, MLA, paged-attention). One paragraph + one comparison row each.
-8. **`## Summary`** — 5–8 bullets. The last bullet should be the single most important takeaway.
+4. **`## The <problem>: Why We Need <thing>`**: show the pain without the optimization. Include a worked numerical example.
+5. **`## How <thing> Works`**: the core explanation. Walk through one full step-by-step example with small numbers (e.g. 4-token sequence, 2-dim vectors).
+6. **`## Memory / Cost / Trade-offs`**: quantify. Tables of "without X vs with X" for typical model sizes.
+7. **`## Optimizations and Variants`**: 3–6 named techniques (e.g. MQA, GQA, MLA, paged-attention). One paragraph + one comparison row each.
+8. **`## Summary`**: 5–8 bullets. The last bullet should be the single most important takeaway.
 
 ## Diagram plan defaults
 

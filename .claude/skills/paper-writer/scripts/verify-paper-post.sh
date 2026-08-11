@@ -236,6 +236,31 @@ else
   warn "critique: no 'what would change my mind' line — add one to the Critique section"
 fi
 
+# Em-dash gate (house rule: no em dash ships)
+# Banned in prose: '—', a *spaced* en dash ' – ' (the same mark in disguise), and
+# ' -- '. An *unspaced* en dash is a range (2018–2022) and is fine. Code, math and
+# animated-figure SVG are exempt. Frontmatter is NOT stripped: title and
+# description ship too.
+dash_view() {
+  awk '/^```/{f=!f; next} f{next}
+       /^<figure class="blog-anim"/{a=1} a{ if(/^<\/figure>/) a=0; next }
+       /^\$\$/{m=!m; next} m{next} 1' "$path" \
+  | sed -E 's/`[^`]*`/CODE/g; s/\$[^$]*\$/MATH/g'
+}
+dashes=$(dash_view | grep -nE '—|[[:space:]]–[[:space:]]|[[:space:]]--+[[:space:]]' || true)
+if [ -z "$dashes" ]; then
+  pass "em-dash: none in prose, headings, captions or frontmatter"
+else
+  n=$(echo "$dashes" | wc -l | tr -d ' ')
+  fail_ "em-dash: $n line(s) carry a banned dash — repair by shape, do not blanket-comma"
+  echo "$dashes" | head -10 | cut -c1-120 | sed 's/^/  /'
+  [ "$n" -gt 10 ] && echo "  ... and $((n - 10)) more"
+  echo "  period between two independent clauses; colon when the second half explains the first;"
+  echo "  paired commas around an aside. See ../blog-writer/references/voice-cheatsheet.md §Punctuation."
+  echo "  If the dash sits inside a VERBATIM quote from the paper, do not silently edit the quote:"
+  echo "  paraphrase it in your own words instead, or quote a shorter span that omits the dash."
+fi
+
 echo ""
 if [ "$fail" -eq 0 ]; then
   echo "RESULT: all gates passed (words=$words, readTime=$read_time, figures=$fig_count: $extracted_embeds extracted + $redrawn_embeds redrawn)"

@@ -140,23 +140,24 @@ Reviewers use the full rubric in `../blog-writer/references/diagram-authoring.md
 
 Any `FAIL` → re-author that figure (fix `.in.json`, re-validate, re-render, re-convert), then re-review with a fresh `figure-reviewer` for that figure only. Never "fix" a bad figure by editing the prose. Advance only when every figure is a clean PASS.
 
-In a series wave, also delegate Phase C to `figure-author` (Sonnet) and the Phase E gate to `post-verifier` (Haiku); keep the outline and the prose on Opus. Rationale and measurements: `../blog-writer/references/token-discipline.md`.
+In a series wave, also delegate Phase C to `figure-author` and the Phase E gate to `post-verifier`. **Every agent in this pipeline runs Opus 5** — the agent definitions pin it, so never pass a `model` override at dispatch. What is tiered is reasoning effort (`figure-author: medium`, `figure-reviewer`/`post-verifier`: `low`); the outline and the prose stay with you at the session's own effort. Rationale and measurements: `../blog-writer/references/token-discipline.md`.
 
 ### Phase D — Draft
 
 1. **Read `references/finance-voice.md`.**
 2. Write the full markdown via `Write` to the resolved target path. Frontmatter exactly per contract; today's date.
+   - **No em dashes, anywhere.** Body, headings, image alt text, TL;DR box, and the frontmatter `title`/`description`. A *spaced* ` – ` is the same mark in disguise and is banned too; an *unspaced* `–` is a range (`2018–2022`, `$3.6B–$4.1B`) and is fine. Write the repaired punctuation as you draft: period between two independent clauses, colon when the second half explains the first, paired commas around an aside. Phase E fails the post otherwise. Full rule: `../blog-writer/references/voice-cheatsheet.md §Punctuation`.
 3. **First thing in the body: the TL;DR callout box.**
    ```markdown
    > [!important]
-   > **TL;DR** — <one-sentence thesis>.
+   > **TL;DR:** <one-sentence thesis>.
    >
    > - <key takeaway 1>
    > - <key takeaway 2>
    > - <key takeaway 3>
    > - <the one number / fact a reader should remember>
    ```
-   (`tldr`/`summary` are not supported callout types on this site — `important` renders the prominent box; the bold `**TL;DR**` lead names it.)
+   (`tldr`/`summary` are not supported callout types on this site; `important` renders the prominent box, and the bold `**TL;DR:**` lead names it. Note the colon: the house rule bans em dashes, and this box is the first line of every post, so it is the most-copied place to get it wrong.)
 4. Then the hook, then the **mental-model figure** referenced in the intro, then the **Foundations** section (define everything from zero), then the deep sections, then **Common misconceptions**, then **How it shows up in real markets** (case studies / worked scenarios), then **When this matters / further reading**. No generic "Conclusion".
 5. Embed each WebP immediately under the heading it illustrates: `![alt](/imgs/blogs/<slug>-<n>.webp)`. Every image is `.webp` — no `.png`/`.jpg`/`.svg`. The first figure is referenced in the intro.
 6. Each worked example is a clearly marked walkthrough with explicit numbers (a `#### Worked example:` sub-heading or a numbered step list), and ends with the single sentence of intuition it teaches.
@@ -183,7 +184,7 @@ Do not advance to Phase E with any claim left in an unverified state, any relati
 bash .claude/skills/finance-writer/scripts/verify-finance-post.sh <post.md> <slug> <depth>
 ```
 
-`<depth>` ∈ `deep-dive` | `explainer` | `concept`. The script checks everything blog-writer checks (word-count floor, diagram-count floor, abstraction coverage, WebP sharpness, webp-only embeds + no stray non-webp artifacts, forbidden text-diagram substitutes, slug-match, no-H1, English-only, frontmatter sanity) **plus four finance gates**:
+`<depth>` ∈ `deep-dive` | `explainer` | `concept`. The script checks everything blog-writer checks (word-count floor, diagram-count floor, abstraction coverage, WebP sharpness, webp-only embeds + no stray non-webp artifacts, forbidden text-diagram substitutes, slug-match, no-H1, English-only, frontmatter sanity, **no em dashes**) **plus four finance gates**:
 
 - **TL;DR-at-top** — a `[!important]`/`[!note]`/`[!info]` callout or a `**TL;DR**` blockquote within the first ~25 body lines.
 - **Foundations section** — a heading matching the basics (`foundation|fundamentals|basics|first principles|primer|how .* works|background|the building blocks`) before the deep sections.

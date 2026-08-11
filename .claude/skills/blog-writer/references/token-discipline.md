@@ -17,6 +17,8 @@ Aggregated from 71 orchestrator transcripts of this repo (`.claude/scripts/token
 
 Cache read is billed at 0.1× input and cache write at 1.25–2×, so at Opus 5 rates ($5 in / $25 out per MTok) that mix is roughly **$1.3k cache-read + $0.9–1.5k cache-write + $0.8k output**. The orchestrator — which writes almost no prose — outspends the drafting it supervises.
 
+Since every agent in the pipeline now runs Opus 5 (rule 3), that rate card applies end to end: there is no cheaper tier absorbing the mechanical stages, so the shape of this table *is* the bill.
+
 **The governing identity:**
 
 ```
@@ -35,6 +37,10 @@ A session that spans 12 days and 997 turns re-bills its earliest turns a thousan
 
 This single change moves the median context from ~148k toward ~60k. It is worth more than every other item on this page combined.
 
+**Split on the drafts-on-disk boundary, not on "the wave is finished."** A wave is two jobs, and only the first is drafting. Once every post's `.md` exists, the remaining work — figure gating, fix cycles, verify, commit — needs none of the drafting transcript. Close and restart, carrying only the slug list and the outstanding failure list.
+
+Waiting for the wave to *finish* means never splitting, because the second job is exactly the one that blows up: crypto-players W5 ran **427 turns over ~30h in one session** and landed at p50 252k / p90 383k — ~1.7× worse than the 148k baseline *with rules 2–4 being followed*. Rework (a usage-limit reset mid-wave, agents clobbering each other, 70–90% of figures failing the visual gate) all lands in the second job. Assume it will, and give it a fresh context.
+
 ### 2. Nothing large enters the orchestrator — only verdicts
 
 The orchestrator's job is dispatch, gate, commit. It does not need to *see* the artifacts.
@@ -50,19 +56,33 @@ Measured: 484 images read into orchestrator sessions accounted for **134 M cache
 
 The rule is not "avoid subagents to save tokens." It is the opposite: **subagent context is disposable, orchestrator context is not.** Push every bulky read down into something that dies.
 
-### 3. Tier the model to the stage, not the post
+#### Two leaks this table doesn't cover
 
-Quality lives almost entirely in Phase B (outline) and Phase D (prose). Those stay on Opus. The mechanical stages do not need it, and Sonnet 5 is ~40% of Opus's rate while Haiku 4.5 is ~20%.
+**Verdict *count* is a cost, even though each verdict is tiny.** "One `figure-reviewer` per figure" is right when the *drafting agent* gates its own post — that context dies. It is wrong when the **orchestrator** gates a whole wave: 60+ figures means 60 dispatches, 60 completion notifications and a relay message per failure, all in the context that survives. Same tokens per verdict, ~10× the turns, and turns are the multiplier in `Σ context`.
 
-| Stage | Model | Why |
-| --- | --- | --- |
-| Phase A/B — intake, research, outline, abstraction inventory | **Opus** | Sets the thesis, the figure plan, and the case studies. Every downstream quality ceiling is set here. |
-| Phase C — DSL authoring, render, WebP (`figure-author`) | **Sonnet** | Schema-driven and validator-checked. The engine enforces layout; the model just fills the shape. |
-| Phase C2 — visual gate (`figure-reviewer`) | **Sonnet** | Vision + a fixed 6-point rubric returning one line. |
-| Phase D — the prose | **Opus** | This *is* the product. Never downgrade. |
-| Phase E — verify gate (`post-verifier`) | **Haiku** | Runs a bash script and formats the output. |
+> When gating more than one post, dispatch **one aggregator subagent per post**. It fans out the per-figure `figure-reviewer` calls itself and returns a single list: `fig N: PASS` / `fig N: FAIL — <what to change>`. Review quality is identical — each figure still gets its own fresh-context reviewer and the same rubric — only the collection moves down a level.
 
-This is where "fewer tokens, same quality" actually comes from: you are not writing less or thinking less, you are paying Opus rates only for the two stages that determine whether the post is good.
+**Bulk can arrive unbidden.** Rule 2 forbids *reading* large things; it does not stop the harness *pushing* them. A subagent that spawns its own research subagents delivers each child's full return value into the orchestrator as a task notification. In W5 that was 8 dense fact-ledger tables nobody asked the orchestrator to see, then re-billed for the rest of the session. When you dispatch an agent that will itself fan out, tell it explicitly: *summarise your children's findings; do not pass their raw returns upward.*
+
+### 3. One model — Opus 5 everywhere. Tier the *effort*, not the model
+
+**Every stage of this pipeline runs Opus 5.** No Sonnet, no Haiku, in any agent. The three subagent definitions pin it explicitly (`model: opus` in `.claude/agents/*.md`) rather than inheriting, so a 1M-context orchestrator session does not drag short-lived children into the long-context premium tier.
+
+The reason is that the cheap-tier saving was being paid back in *turns*, which is the term that costs quadratically. A figure author that mis-reads the DSL schema fails the visual gate; every failure is another author → render → gate cycle. W5 measured **70–90% of figures failing the visual gate**, and each of those is a round trip that a per-token rate card does not show. A gate model that mis-judges is worse in both directions: a wrong PASS ships a broken figure, a wrong FAIL buys a re-author nobody needed. Single-model removes model quality as a variable in the loop that dominates the bill.
+
+What replaces model tiering is **reasoning effort**, set per agent in the same frontmatter. Effort is a per-turn multiplier on thinking tokens only — it does not touch the `Σ context` term at all, so it is safe to spend where judgment is real and safe to drop where the work is a checklist.
+
+| Stage | Model | Effort | Why |
+| --- | --- | --- | --- |
+| Phase A/B — intake, research, outline, abstraction inventory | Opus 5 | session default | Sets the thesis, the figure plan, and the case studies. Every downstream quality ceiling is set here. |
+| Phase C — DSL authoring, render, WebP (`figure-author`) | Opus 5 | `medium` | Schema-driven and validator-checked, but it also owns the fix loop — enough effort to converge in one pass is cheaper than a second pass at `low`. |
+| Phase C2 — visual gate (`figure-reviewer`) | Opus 5 | `low` | One image against a fixed 6-point rubric, one line out. Judgment is in the rubric, not the model's deliberation. |
+| Phase D — the prose | Opus 5 | session default | This *is* the product. Never downgrade. |
+| Phase E — verify gate (`post-verifier`) | Opus 5 | `low` | Runs a bash script and reports the FAIL lines. |
+
+The two one-line agents also carry a `maxTurns` cap (`figure-reviewer: 6`, `post-verifier: 25`). Neither has any legitimate reason to loop; the cap is a backstop against the one failure mode — a stuck agent burning turns — that costs more than everything else on this page.
+
+With a single model, rules 1, 2 and 4 are no longer *most* of the saving, they are **all** of it. Hold them tighter than before.
 
 ### 4. Read the wave, not the plan
 
@@ -72,9 +92,10 @@ Series plans run to 42 KB. Grep or `offset`/`limit` the wave you are running. Sa
 
 - [ ] Fresh session (previous wave committed, pushed, and closed)
 - [ ] Only this wave's plan section in context — not the whole plan file
-- [ ] Figure work delegated to `figure-author` (Sonnet)
-- [ ] Every figure gated by a `figure-reviewer` (Sonnet), one per figure, dispatched concurrently
-- [ ] Verification delegated to `post-verifier` (Haiku)
+- [ ] Figure work delegated to `figure-author` (Opus 5, `medium` effort)
+- [ ] Every figure gated by a `figure-reviewer` (Opus 5, `low` effort), one per figure, dispatched concurrently
+- [ ] Verification delegated to `post-verifier` (Opus 5, `low` effort)
+- [ ] No `model:` override passed at dispatch — the agent definitions already pin Opus 5
 - [ ] No `Read` of any `.webp` in this session
 - [ ] No `Read` of a finished post's full prose in this session
 - [ ] `.cache/blog-writer/<slug>/` cleared per Phase F once each post is green

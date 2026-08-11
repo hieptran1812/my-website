@@ -142,6 +142,7 @@ Advance to Phase D only when every figure is a clean PASS.
 
 1. **Read `../blog-writer/references/voice-cheatsheet.md` and re-read `references/technique-explanation.md`.**
 2. Write the full markdown via `Write` to the resolved target path. Frontmatter exactly per contract (including the `paper:` block); today's date.
+   - **No em dashes, anywhere.** Body, headings, figure credits and alt text, and the frontmatter `title`/`description`. A *spaced* ` – ` is banned too; an *unspaced* `–` is a range (`2018–2022`) and is fine. Repair by shape as you draft: period between two independent clauses, colon when the second half explains the first, paired commas around an aside. Phase E fails the post otherwise. Full rule: `../blog-writer/references/voice-cheatsheet.md §Punctuation`. **If a dash sits inside a verbatim quote from the paper, do not silently edit the quote** — paraphrase it in your own words, or quote a shorter span that omits the dash.
 3. **Open with the TL;DR box** — a `> [!tldr]` blockquote: what the paper claims, why it matters, the most surprising result, where it fails.
 4. **Apply the explanation ladder to every technique** (from `technique-explanation.md`): problem it solves → intuition/analogy → mechanism step-by-step → the math (define every symbol on first use, annotate tensor shapes) → a worked micro-example (tiny numbers or pseudocode) → why it works / when it fails. Math in `$...$` / `$$...$$`; brace-wrap any inline math starting with a digit as `${...}$`.
 5. **Embed the paper's own figures where the method is introduced**, credited: `![Figure 1 from Vaswani et al. (2017): the Transformer](/imgs/blogs/<slug>-fig1.webp)`. Embed redrawn diagrams under the section they clarify: `![alt](/imgs/blogs/<slug>-2.webp)`. Every embed is `.webp`. Paste any animated `<figure class="blog-anim">` block verbatim (no blank lines inside, `<figure` at column 0).
@@ -156,7 +157,7 @@ Advance to Phase D only when every figure is a clean PASS.
 bash .claude/skills/paper-writer/scripts/verify-paper-post.sh <post.md> <slug>
 ```
 
-The script checks everything blog-writer's gate does — word-count floor (≥ 6,500), figure-count floor (≥ 6), abstraction coverage, webp-only embeds, no stray non-webp renders, no ASCII/Unicode/mermaid diagram substitutes, slug-match, no-H1-in-body, English-only, frontmatter sanity — split into two sharpness tiers (**extracted** `-fig<n>` ≥ 900 px long-side / ≥ 20 KB; **redrawn** `-<n>` ≥ 1600×900 / ≥ 40 KB) — **plus paper-specific gates**:
+The script checks everything blog-writer's gate does — word-count floor (≥ 6,500), figure-count floor (≥ 6), abstraction coverage, webp-only embeds, no stray non-webp renders, no ASCII/Unicode/mermaid diagram substitutes, slug-match, no-H1-in-body, English-only, frontmatter sanity, **no em dashes** — split into two sharpness tiers (**extracted** `-fig<n>` ≥ 900 px long-side / ≥ 20 KB; **redrawn** `-<n>` ≥ 1600×900 / ≥ 40 KB) — **plus paper-specific gates**:
 
 - **TL;DR** callout near the top.
 - **≥ 2 extracted originals** (`-fig<n>.webp`) and **≥ 2 redrawn diagrams** (`-<n>.webp`) embedded.

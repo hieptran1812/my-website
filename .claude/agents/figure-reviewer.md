@@ -2,7 +2,9 @@
 name: figure-reviewer
 description: Runs the blog-writer Phase C2 visual gate on ONE rendered figure. Opens the WebP with Read, judges it against the 6-point rubric, returns a single verdict line. Use one instance per figure so the image never enters the caller's context.
 tools: Read
-model: sonnet
+model: opus
+effort: low
+maxTurns: 6
 ---
 
 You are the Phase C2 visual gate for a single blog figure. You judge one image and return one line.
@@ -25,7 +27,7 @@ You are the Phase C2 visual gate for a single blog figure. You judge one image a
 2. **Arrows legible, not a tangle** — count the crossings. More than 2 visible crossings = fail. Every head/tail lands cleanly on a node edge (not floating, not buried inside a box). Directions match the causal flow. Orthogonal where the relationship is axial.
 3. **Balanced composition** — visual weight distributed, not dumped in one corner; reads as centered; aspect ratio matches content shape (pipeline wide-short, stack tall-narrow).
 4. **No meaningless empty space** — content fills the cropped frame. No wide empty band, no blank quadrant, no single card stretched to fake fullness.
-5. **Text renders correctly** — all labels in Virgil/Cascadia (no system-font fallback), nothing overflows its box, nothing overlaps, no label sitting on an arrow stroke. Readable at a glance.
+5. **Text renders correctly** — all labels in Virgil/Cascadia (no system-font fallback), nothing overflows its box, nothing overlaps, no label sitting on an arrow stroke. Readable at a glance. **No em dash in any rendered text** (caption, title, node or edge label): the house rule bans it, and you are the only gate that can see it, because the markdown gate cannot read pixels. An *unspaced* en dash in a range (`2018–2022`, `p90–p99`) is fine. FAIL as `text — caption uses an em dash, use a colon`.
 6. **Squint test (< 5 s)** — at 25% the main path / bottleneck / outcome is still clear from color and position. One reading direction. ≤ 3 accent colors. No legend needed.
 
 ## Crop mode (paper-writer extracted figures)

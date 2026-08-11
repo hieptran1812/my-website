@@ -51,19 +51,25 @@ Two leaks the table misses:
 - **Verdict count costs turns.** One `figure-reviewer` per figure is right inside a drafting agent, wrong for an orchestrator gating a whole wave — 60 figures becomes 60 dispatches + 60 notifications + a relay per failure. Gate a wave through **one aggregator subagent per post** that fans out the reviewers itself and returns a single PASS/FAIL list. Same reviewers, same rubric, same quality — one turn instead of ten.
 - **Bulk arrives unbidden.** A subagent that spawns its own children pushes each child's full return into the orchestrator as a task notification. Tell any agent that will fan out: *summarise your children's findings; never pass their raw returns upward.*
 
-### 3. Tier the model to the stage
+### 3. One model — Opus 5 everywhere; tier the *effort*, not the model
 
-Quality is decided in the outline and the prose. Everything else is mechanical and validator-checked.
+**No Sonnet, no Haiku, in any stage.** The three subagent definitions pin `model: opus` explicitly rather than inheriting, so a 1M-context orchestrator does not pull short-lived children into the long-context premium tier. Never pass a `model` override at dispatch.
 
-| Stage | Model |
-| --- | --- |
-| Phase A/B — intake, research, outline, abstraction inventory | **Opus** |
-| Phase C — figures (`figure-author`) | Sonnet |
-| Phase C2 — visual gate (`figure-reviewer`) | Sonnet |
-| Phase D — the prose | **Opus** |
-| Phase E — verify gate (`post-verifier`) | Haiku |
+The cheap tiers were paying themselves back in **turns**, which is the quadratic term: a figure that fails the visual gate is another author → render → gate cycle, and W5 measured 70–90% of figures failing. A mis-judging gate is worse in both directions — a wrong PASS ships a broken figure, a wrong FAIL buys a re-author nobody needed.
 
-This is what makes the saving free rather than a tradeoff: you pay Opus rates only for the two stages that decide whether the post is good.
+What replaces model tiering is **reasoning effort** (`effort:` in `.claude/agents/*.md`). It multiplies thinking tokens per turn and adds nothing to `Σ context`, so spend it where judgment is real and drop it where the work is a checklist:
+
+| Stage | Model | Effort |
+| --- | --- | --- |
+| Phase A/B — intake, research, outline, abstraction inventory | Opus 5 | session default |
+| Phase C — figures (`figure-author`) | Opus 5 | `medium` — owns the fix loop; converging in one pass beats a second pass at `low` |
+| Phase C2 — visual gate (`figure-reviewer`) | Opus 5 | `low` — one image, fixed 6-point rubric, one line out |
+| Phase D — the prose | Opus 5 | session default |
+| Phase E — verify gate (`post-verifier`) | Opus 5 | `low` — runs a script, reports the FAIL lines |
+
+The two one-line agents also carry a `maxTurns` cap (`figure-reviewer: 6`, `post-verifier: 25`) — neither has any reason to loop, and a stuck agent burning turns costs more than everything else here.
+
+With a single model, rules 1, 2 and 4 are no longer *most* of the saving — they are **all** of it. Hold them tighter.
 
 ### 4. Re-measure after each wave
 

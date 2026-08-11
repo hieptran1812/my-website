@@ -26,7 +26,7 @@ This skill is intentionally split. Read each reference at the start of the phase
 | `references/animated-figures.md`                   | Phase C — **only if** Phase B marked any abstraction `animated`                    |
 | `references/voice-cheatsheet.md`                   | Phase D (before writing prose)                                                     |
 | `templates/{deep-dive,explainer,paper-reading}.md` | Phase B (skeleton for the chosen depth)                                            |
-| `references/token-discipline.md`                   | Before dispatching a **series wave** (which stages to delegate, which model tier)  |
+| `references/token-discipline.md`                   | Before dispatching a **series wave** (which stages to delegate, which effort tier) |
 
 Phase E gates run via `scripts/verify-post.sh` — no need to inline bash.
 
@@ -34,15 +34,17 @@ Phase E gates run via `scripts/verify-post.sh` — no need to inline bash.
 
 Three subagents own the bulky phases. Their whole purpose is that scene JSON, render logs, rendered images, and post prose stay in a context that dies instead of one you pay to re-read on every turn. Use them for any post drafted inside a series wave or a session that has already done other work.
 
-| Subagent          | Owns                                  | Model  | Returns                          |
-| ----------------- | ------------------------------------- | ------ | -------------------------------- |
-| `figure-author`   | Phase C **and C2** — author → render → gate → fix → re-gate, to convergence | Sonnet | One manifest of passed WebPs |
-| `figure-reviewer` | One figure's visual verdict (spawned by `figure-author`, or by you on the inline path) | Sonnet | One verdict line |
-| `post-verifier`   | Phase E gate run                      | Haiku  | Pass line, or the FAIL list      |
+| Subagent          | Owns                                  | Model / effort | Returns                   |
+| ----------------- | ------------------------------------- | -------------- | ------------------------- |
+| `figure-author`   | Phase C **and C2** — author → render → gate → fix → re-gate, to convergence | Opus 5 · `medium` | One manifest of passed WebPs |
+| `figure-reviewer` | One figure's visual verdict (spawned by `figure-author`, or by you on the inline path) | Opus 5 · `low` | One verdict line |
+| `post-verifier`   | Phase E gate run                      | Opus 5 · `low` | Pass line, or the FAIL list |
+
+**Every stage runs Opus 5.** The agent definitions pin it; never pass a `model` override at dispatch, and never route a stage to a smaller model to save tokens — that trades a per-token rate for extra fix cycles, and cycles are turns. What is tiered is *reasoning effort*, which costs thinking tokens per turn and nothing in context.
 
 **Turns are the multiplier, not bytes.** Your context grows roughly linearly with turn count, so `Σ context ≈ N² · g / 2` — cost scales with the *square* of how many turns you take. That is why the figure fix-loop belongs entirely inside `figure-author`: it converts ~120 of your turns into 1. Halving your turns quarters your cost.
 
-Phases A/B (outline, abstraction inventory) and D (the prose) stay with you on Opus — that is where the post's quality is decided. See `references/token-discipline.md` for the measurements behind this split.
+Phases A/B (outline, abstraction inventory) and D (the prose) stay with you, at whatever effort the session is running — that is where the post's quality is decided. See `references/token-discipline.md` for the measurements behind this split.
 
 ## Frontmatter contract
 
@@ -156,6 +158,7 @@ The reviewer's `FAIL` text names what to change in the scene input, so you can h
 
 1. **Read `references/voice-cheatsheet.md`.**
 2. Write the full markdown via `Write` to the resolved target path. Frontmatter exactly per contract; today's date.
+   - **No em dashes, anywhere.** Body, headings, image alt text, and the frontmatter `title`/`description`. A *spaced* ` – ` is the same mark in disguise and is banned too; an *unspaced* `–` is a range (`2018–2022`) and is fine. Write the repaired punctuation as you draft: period between two independent clauses, colon when the second half explains the first, paired commas around an aside. Phase E fails the post otherwise, and finding it at the gate means editing 12,000 words instead of writing them right once. Full rule: `references/voice-cheatsheet.md §Punctuation`.
 3. Embed each WebP immediately under the section heading it illustrates: `![alt](/imgs/blogs/<slug>-<n>.webp)`. Every embedded image must be `.webp` — no `.png`/`.jpg`/`.svg`. The first figure is referenced in the intro paragraph.
    - **Animated figures**: paste the validated `<figure class="blog-anim">…</figure>` block from `.cache/blog-writer/<slug>/<slug>-anim-<i>.fig.html` **verbatim** under its heading — not as `![]()`. Keep it one contiguous block with **no blank lines inside** and `<figure` at column 0 (a blank line makes CommonMark shatter the SVG into escaped text). A blank line *before* the opening `<figure` and *after* the closing `</figure>` is required, as for any block.
 4. Add cross-links inline using relative paths: `[KV cache](/blog/machine-learning/large-language-model/kv-cache)` (drop the `content/` prefix and `.md` extension).
@@ -170,7 +173,7 @@ bash .claude/skills/blog-writer/scripts/verify-post.sh <post.md> <slug> <depth>
 
 In a series wave, dispatch the **`post-verifier`** subagent instead of running this inline — it returns the pass line or the FAIL list and nothing else, keeping a failing post's full gate output out of the orchestrating session.
 
-`<depth>` is one of `deep-dive`, `explainer`, `paper-reading`. The script checks: word-count floor, diagram-count floor (static WebP embeds **+** inline animated figures), abstraction coverage (a WebP **or** a `blog-anim` figure within 30 lines of every prose abstraction), WebP sharpness, webp-only embeds (no `.png`/`.jpg`/`.gif`) + no leftover non-webp render artifacts, forbidden text-diagram substitutes (animated-figure blocks are excluded from the ASCII/Unicode scan), **animated-figure safety** (each `blog-anim` block is contiguous/no-blank-line, declarative with no `<script>`/`on*=`, accessible, and reduced-motion-aware), slug-match on every image, no-H1-in-body, English-only, frontmatter sanity.
+`<depth>` is one of `deep-dive`, `explainer`, `paper-reading`. The script checks: word-count floor, diagram-count floor (static WebP embeds **+** inline animated figures), abstraction coverage (a WebP **or** a `blog-anim` figure within 30 lines of every prose abstraction), WebP sharpness, webp-only embeds (no `.png`/`.jpg`/`.gif`) + no leftover non-webp render artifacts, forbidden text-diagram substitutes (animated-figure blocks are excluded from the ASCII/Unicode scan), **animated-figure safety** (each `blog-anim` block is contiguous/no-blank-line, declarative with no `<script>`/`on*=`, accessible, and reduced-motion-aware), slug-match on every image, no-H1-in-body, English-only, frontmatter sanity, **no em dashes** (`—`, spaced ` – `, or ` -- ` in prose, headings, captions or frontmatter; code and math exempt, unspaced range en dashes allowed).
 
 Any FAIL means re-enter the named phase and fix. The fix for missing figures is _always_ to add the figure, never to delete the prose.
 

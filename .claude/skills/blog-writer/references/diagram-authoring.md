@@ -304,6 +304,7 @@ Read its error messages — they name the rule and the offending element. Don't 
 - `fontFamily ∈ {1, 3}` on every text element
 - Palette compliance (only the 6 hex values)
 - `_claim` ≥ 8 words; `_caption` present and non-restating
+- **No em dash in any text that renders into the figure** (`_caption`, titles, node and edge labels), and none in the markdown alt text either. Use a colon when the second half explains the first, a comma for an aside. An *unspaced* en dash is a range (`2018–2022`, `p90–p99`) and is fine. This one is on you to catch: the verify gate reads the markdown, so a dash baked into the WebP is **pixels** and ships silently past it.
 - Information density ≥ 6 unique non-stopword tokens
 - Free-floating text declared width ≥ rendered width
 - 20-px snap grid
