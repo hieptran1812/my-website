@@ -301,7 +301,7 @@ But 20 million shares is a real quantity. If the stock's average daily volume is
 
 **Step 4. The lender sells another 15 million shares at VND 12,000**, recovering VND 180 bn, reducing the loan to VND 520 bn. Remaining collateral: 65 million × VND 12,000 = VND 780 bn. Coverage: 780 / 520 = **1.5x**. Back at the threshold, with nothing left over, and another 15 million shares now sitting in the market's memory as supply that appeared from nowhere.
 
-The founder started with a VND 4,000 bn stake and a VND 1,000 bn loan, a 25% loan-to-value on the whole holding, which sounds conservative. Two moves later, 35 million shares are gone, the price is down 40%, and the position is still at the threshold.
+The founder started with a VND 4,000 bn stake and a VND 1,000 bn loan, a 25% loan-to-value on the whole holding, which sounds conservative. Two moves later, 35 million shares are gone, the price is down 40%, and the position is still at the threshold. Nothing in the mechanism stops there: the chart above carries the price on down through VND 9,500, because each forced sale supplies the selling pressure that triggers the next one.
 
 **The intuition:** a pledged stake is a short option on the founder's own stock, written to a counterparty with no reason to be patient. Once the price falls through the trigger, the lender's selling and the price decline feed each other, and the daily price limit that was supposed to protect the market prevents the position from clearing.
 
