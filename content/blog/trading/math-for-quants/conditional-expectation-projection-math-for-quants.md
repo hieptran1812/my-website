@@ -155,7 +155,7 @@ The inner $E[X\mid\mathcal{F}]$ is your best forecast given partial information;
 
 If the information $\mathcal{F}$ tells you *nothing* about $X$ -- they are independent -- then conditioning is useless and the forecast reverts to the plain mean: $E[X\mid\mathcal{F}] = E[X]$. In words: information that does not move the needle drops out. This is the formal version of "that data point is uncorrelated with my target, so it cannot help me forecast" -- a test every signal researcher runs constantly. (The careful statement of conditioning and independence lives in [joint, conditional probability and independence](/blog/trading/math-for-quants/joint-conditional-independence-math-for-quants) and in the interview-style primer on [conditional probability and Bayes](/blog/trading/quantitative-finance/conditional-probability-bayes-quant-interviews).)
 
-![Matrix of the four conditioning rules: linearity, take out what is known, the tower property, and independence, with what each lets you do.](/imgs/blogs/conditional-expectation-projection-math-for-quants-4.png)
+![Matrix of the four conditioning rules: linearity, take out what is known, the tower property, and independence, with what each lets you do.](/imgs/blogs/conditional-expectation-projection-math-for-quants-4.webp)
 
 The matrix above is the cheat sheet a desk actually uses. Four rules -- linearity, take-out-known, tower, independence -- and one sentence each on what they let you do to a nested expectation. Almost every simplification in pricing is one of these four applied in turn until the only thing left under the expectation is genuinely unknown.
 

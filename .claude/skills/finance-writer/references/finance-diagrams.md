@@ -70,6 +70,16 @@ Types of an instrument or class of players: kinds of bonds, the layers of market
 
 ## Authoring notes specific to finance figures
 
+### Finance rendered-layout rule
+
+Finance figures must spend their visual area proving the claim. A blank region is not neutral when it makes a payoff, distribution, cash-flow path, or risk comparison harder to read.
+
+- Put the title and thesis caption in the header, then begin the actual figure in the upper body band. Do not leave the nodes or chart anchored at the bottom.
+- Keep internal blank bands below 20% of the figure height unless the band represents a labeled time interval, price interval, or probability region.
+- For a process figure, use equal-height cards and equal stride. For an XY chart, let axes, shaded regions, ticks, and annotations occupy the frame. For a matrix, fill both dimensions with labeled cells.
+- If a figure's claim is simple enough to occupy only a small corner, choose a smaller composition or add the missing causal structure. Never stretch a single container to fake density.
+- Review the final WebP at normal reading size and at a 25% squint. If the reader sees mostly white before seeing the claim, the figure fails.
+
 - **Hand-authored XY charts (payoff, yield curve, distribution)** are where finance differs most from blog-writer's box-and-arrow defaults. Build them dense (shaded regions + axes + ticks + reference lines + annotations) so they pass the occupancy check, and label both axes with units. A bare two-line payoff on a blank frame *will* fail the dead-space rule — that failure means "add the shaded regions and labels", not "stretch the lines".
 - **Every number on a figure must appear in the surrounding ±200 lines of prose.** Don't invent a coupon, a strike, or a rate for visual balance.
 - **Caption is a thesis, not a label.** Bad: "Bond cash-flow diagram." Good: "A bond is just a stream of fixed inflows whose present value moves opposite to rates."
@@ -94,3 +104,11 @@ For each abstract concept the post introduces, emit one bullet with:
 - **Sketch**: which boxes / lines / arrows / labels / numbers appear
 
 Figure count = abstraction count. Vary the kinds.
+
+## Project layout memory
+
+- Matrix figures use a dedicated label column plus equal-width content columns. Keep every row on the same y stride and every cell on the same height.
+- Do not let a matrix cell expand to the full canvas merely because the label is short. Size the grid to its content, center it, and let the renderer crop the outer margin.
+- Keep title and caption near the top, then start the grid immediately below the column headers. Avoid a large blank band between the header and first row.
+- For tree figures, use a compact root with content-sized child cards. Connect root edges directly to child cards; never use a focus binding that leaves a connector starting in empty space.
+- Before shipping, inspect the rendered WebP, not only the scene JSON. Check that text is legible at normal reading size and that every arrow terminates on the intended node.

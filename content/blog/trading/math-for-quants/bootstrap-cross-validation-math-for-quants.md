@@ -305,7 +305,7 @@ This is exactly the **multiple testing** problem in disguise. If you try enough 
 
 If you need to *both* select hyperparameters *and* report an unbiased out-of-sample score, a single cross-validation loop is not enough, because the same data would be used to pick the model and to grade it. **Nested cross-validation** uses two loops. The **inner loop** runs cross-validation on the training portion to choose the best hyperparameters. The **outer loop** then evaluates that chosen model on a test fold it never saw during tuning. The hyperparameter search and the performance estimate happen on disjoint data, so the reported number is honest. In finance, both loops must be purged and embargoed; nesting does not exempt you from the leakage rules.
 
-![Matrix comparing IID bootstrap, block bootstrap, k fold CV, and purged CV by what each is best for and its main weakness](/imgs/blogs/bootstrap-cross-validation-math-for-quants-5.png)
+![Matrix comparing IID bootstrap, block bootstrap, k fold CV, and purged CV by what each is best for and its main weakness](/imgs/blogs/bootstrap-cross-validation-math-for-quants-5.webp)
 
 The matrix above is the field guide for which resampling tool to reach for. The IID bootstrap is best when your samples are genuinely independent and its weakness is that it ignores autocorrelation. The block bootstrap is built for time series and its weakness is that you must guess the block length. Plain k-fold suits generic, row-independent machine learning and leaks the moment labels overlap. Purged CV is the one built for financial labels and its only real cost is that purging and embargoing throw away some data. Pick the tool that matches the structure of your data, not the one that gives the prettiest number.
 

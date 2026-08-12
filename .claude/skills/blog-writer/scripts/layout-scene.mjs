@@ -286,12 +286,15 @@ function layoutPipeline(dsl) {
   const bodyH = CANVAS_H - top - BODY_BOTTOM_MARGIN
   const n = nodes.length
 
-  const rowsCount = n <= 5 ? 1 : 2
+  // 2 rows once a single row would force narrow columns that then trip the
+  // pillar-ratio cap (H ≤ 1.7×W) and produce a too-wide, too-flat figure —
+  // wrapping earlier gives each card a wider column and real second-row
+  // vertical mass instead of stretching a thin single row.
+  const rowsCount = n <= 4 ? 1 : 2
   const perRow = Math.ceil(n / rowsCount)
   const labels = nodes.map((nd) => wrapLabel(nd.label))
 
   const PIPE_GAP = 150
-  const V_GAP = 150
   const nodeW = Math.max(...labels.map((l) => containerWidthFor(l)))
   const stride = nodeW + PIPE_GAP
   const rowW = stride * perRow - PIPE_GAP
@@ -299,20 +302,36 @@ function layoutPipeline(dsl) {
   const scale = targetRowW / rowW
   const W = Math.round(nodeW * scale)
   const S = Math.round(stride * scale)
-  // Card height fills the row's vertical share of the body band, capped so a
-  // card never gets taller than 1.5× its width (which would read as a pillar).
-  let H = Math.round(((bodyH - V_GAP * (rowsCount - 1)) / rowsCount) * 0.9)
-  H = Math.min(H, Math.round(W * 1.5))
 
   const maxLine = Math.max(
     ...labels.map((l) => Math.max(...l.split('\n').map((x) => x.length))),
   )
-  const labelFont = Math.max(24, Math.min(48, Math.floor((W - 56) / (maxLine * 0.6))))
+  const baseFont = Math.max(24, Math.min(40, Math.floor((W - 56) / (maxLine * 0.6))))
+  const maxLines = Math.max(...labels.map((l) => l.split('\n').length))
   const pipeEdgeFont = 30
+
+  // Card height is content-driven (line count at baseFont), never a fixed
+  // fraction of the body band — a canvas-derived height stretches short
+  // labels into mostly-empty boxes. Grow modestly toward a healthy fraction
+  // of the body band (capped ratio) so the row still reads as a deliberate
+  // composition; the growth is applied to BOTH box and font together via
+  // fitLabel below, so any extra height becomes bigger legible text, not
+  // blank padding.
+  const naturalH = Math.ceil((maxLines * baseFont * 1.25 + 56) / 20) * 20
+  let V_GAP = 90
+  const naturalBlockH = rowsCount * naturalH + V_GAP * (rowsCount - 1)
+  const targetBlockH = Math.max(naturalBlockH, bodyH * 0.65)
+  const growth = Math.min(targetBlockH / naturalBlockH, 4)
+  let H = Math.round(naturalH * growth)
+  H = Math.min(H, Math.round(W * 1.7)) // still cap the pillar ratio
+  V_GAP = Math.round(V_GAP * growth)
 
   const rowStartX = Math.round((CANVAS_W - (S * perRow - (S - W))) / 2)
   const blockH = rowsCount * H + V_GAP * (rowsCount - 1)
-  const blockTop = top + Math.round((bodyH - blockH) / 2)
+  // Sit immediately below the caption (per the y ∈ [180,220] body-row rule)
+  // rather than centering in the body band, which is what produced the dead
+  // band between caption and the node row.
+  const blockTop = top
 
   // Physical placement for logical node index i (serpentine).
   function posOf(i) {
@@ -345,7 +364,7 @@ function layoutPipeline(dsl) {
       height: H,
       backgroundColor: paletteFor(nd.kind),
       strokeWidth: 2,
-      label: { text: labels[i], fontSize: labelFont, fontFamily: 1 },
+      label: fitLabel(nodes[i].label, W, H, { minFont: 22, maxFont: 40 }),
     })
   }
 
@@ -525,6 +544,17 @@ function layoutBeforeAfter(dsl) {
   return els
 }
 
+// Estimate how many lines `text` wraps to inside a box of `boxW` at
+// `fontSize`/`family` — used to size matrix/grid rows from content instead
+// of dividing the canvas evenly across however many rows exist.
+function estimateLines(text, boxW, fontSize, family = 1) {
+  const factor = family === 3 ? 0.62 : 0.6
+  const maxChars = Math.max(4, Math.floor((boxW - 48) / (fontSize * factor)))
+  const words = String(text ?? '').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean)
+  if (!words.length) return 1
+  return wrapToChars(words, maxChars).split('\n').length
+}
+
 // ── Engine: matrix ─────────────────────────────────────────────────────────
 function layoutMatrix(dsl) {
   const rows = dsl.rows || []
@@ -540,7 +570,22 @@ function layoutMatrix(dsl) {
   // grid). The data grid then fills the remaining body height.
   const HEADER_ROW_H = 72
   const cellW = Math.floor((CANVAS_W * 0.85) / (cols.length + 1))
-  const cellH = Math.floor((CANVAS_H - top - 100 - HEADER_ROW_H) / rows.length)
+  // Row height is content-driven: size to the tallest cell/row-label at a
+  // reference font, then grow modestly (capped ratio) toward a healthy
+  // fraction of the body band — never divide the canvas evenly across
+  // whatever row count happens to exist, which is what stretched short
+  // cells into mostly-empty boxes.
+  const REF_FONT = 24
+  const rowLabelLines = rows.map((r) => estimateLines(r, cellW, REF_FONT, 3))
+  const cellLines = cells.map((row) =>
+    (row || []).map((c) => estimateLines(c.label || '', cellW - 6, REF_FONT, 1)),
+  )
+  const maxLinesAny = Math.max(1, ...rowLabelLines, ...cellLines.flat())
+  const naturalCellH = Math.ceil((maxLinesAny * REF_FONT * 1.25 + 40) / 20) * 20
+  const bodyAvail = CANVAS_H - top - 100 - HEADER_ROW_H
+  const targetGridH = Math.max(naturalCellH * rows.length, bodyAvail * 0.72)
+  const growth = Math.min(targetGridH / (naturalCellH * rows.length), 3)
+  const cellH = Math.round(naturalCellH * growth)
   const startX = Math.round((CANVAS_W - cellW * (cols.length + 1)) / 2)
   const gridTop = top + HEADER_ROW_H
 
@@ -560,20 +605,22 @@ function layoutMatrix(dsl) {
       textAlign: 'center',
     })
   }
-  // Row headers + cells
+  // Row headers + cells. The row-header column gets its own bordered/shaded
+  // box (matching the data cells' cellW×cellH), not bare floating text —
+  // otherwise the label column reads as loose captions beside cards rather
+  // than as one matrix.
   for (let i = 0; i < rows.length; i++) {
     const rowText = rows[i]
     els.push({
       id: `row${i}`,
-      type: 'text',
-      x: startX + Math.round((cellW - estTextWidth(rowText, BODY_FONT, 3)) / 2),
-      y: gridTop + i * cellH + Math.round((cellH - estTextHeight(rowText, BODY_FONT)) / 2),
-      width: estTextWidth(rowText, BODY_FONT, 3),
-      height: estTextHeight(rowText, BODY_FONT),
-      text: rowText,
-      fontSize: BODY_FONT,
-      fontFamily: 3,
-      textAlign: 'center',
+      type: 'rectangle',
+      x: startX,
+      y: gridTop + i * cellH,
+      width: cellW - 6,
+      height: cellH - 6,
+      backgroundColor: '#e9ecef',
+      strokeWidth: 2,
+      label: fitLabel(rowText, cellW - 6, cellH - 6, { fontFamily: 3 }),
     })
     const row = cells[i] || []
     for (let j = 0; j < cols.length; j++) {
@@ -1286,6 +1333,19 @@ function layoutTimeline(dsl) {
     strokeWidth: 3,
     points: [[0, 0], [bodyW, 0]],
   })
+  // Direction cue runs in the clear band above the axis, avoiding event dots.
+  els.push({
+    id: 'direction',
+    type: 'arrow',
+    unbound: true,
+    endArrowhead: 'arrow',
+    x: startX,
+    y: axisY - 40,
+    width: bodyW,
+    height: 0,
+    strokeWidth: 2,
+    points: [[0, 0], [bodyW, 0]],
+  })
 
   const stride = bodyW / (events.length - 1)
   const positions = new Map()
@@ -1390,7 +1450,16 @@ function layoutGrid(dsl) {
   const bodyW = Math.round(CANVAS_W * 0.92)
   const startX = Math.round((CANVAS_W - bodyW) / 2)
   const cellW = Math.floor(bodyW / gridCols)
-  const cellH = Math.floor(bodyH / gridRows)
+  // Row height is content-driven (line count at a reference font), grown
+  // modestly toward a healthy fraction of the body band — dividing the
+  // canvas evenly by row count regardless of content is what left a whole
+  // row sized to its tallest neighbour's label while padding shorter ones.
+  const REF_FONT = 24
+  const nodeLines = nodes.map((n) => estimateLines(n.label, cellW * (n.colspan || 1), REF_FONT, 1))
+  const naturalCellH = Math.ceil((Math.max(1, ...nodeLines) * REF_FONT * 1.25 + 40) / 20) * 20
+  const targetGridH = Math.max(naturalCellH * gridRows, bodyH * 0.5)
+  const growth = Math.min(targetGridH / (naturalCellH * gridRows), 3)
+  const cellH = Math.round(naturalCellH * growth)
   const cellPad = 16
 
   const els = headerElements(dsl.title, dsl.caption)

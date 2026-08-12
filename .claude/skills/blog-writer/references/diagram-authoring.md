@@ -156,6 +156,21 @@ The validator (`author-scene.mjs`, rule 8) samples a grid over the content bbox 
 
 These floors are deliberately low: a well-built airy DAG spreads nodes + connectors across all four quadrants and clears them easily. If they fire, the layout is genuinely under-filled — add internal structure or tighten it; do not pad. The design *target* is each quadrant ≥ 30% filled, not the bare 3% floor.
 
+### Rendered-layout dead-space hard gate
+
+The validator checks element geometry, but a figure can still render with a large blank band when the title and caption sit at the top while the body layout is pushed toward the bottom. Treat this as a hard failure.
+
+Before accepting a rendered figure:
+
+- The first body element must begin within the first 18% of the rendered body height after the caption. Never place the body at the bottom of a tall canvas.
+- The vertical gap between the caption baseline and the nearest body element must be smaller than 0.35 times the body height.
+- No horizontal or vertical blank band may occupy more than 20% of the internal figure height or width unless the whitespace is an intentional axis or timeline interval labeled in the figure.
+- Each 2×2 quadrant must contain meaningful visual structure. A title alone does not count as occupancy. Arrows, nodes, labels, axes, and annotations count.
+- Do not solve dead space by stretching one short card, adding decorative rectangles, or padding the exported bitmap. Rebalance the scene: move the body upward, increase the number of meaningful nodes, use a shorter canvas, or choose a layout engine whose aspect ratio matches the concept.
+- For pipelines, use a wide-and-short body with equal-height nodes. For matrices and trees, use the full vertical body band. For timelines and charts, label the empty interval so it carries semantic meaning.
+
+The visual reviewer must record `PASS` only after checking the rendered pixels, not just the scene JSON. A figure that passes the mechanical validator but fails this rendered-layout gate must be re-authored.
+
 ### Diversity across the post (mandatory)
 
 Eight near-identical box-and-arrow pipelines is a worse post than four pipelines + two stacks + a matrix + a timeline, even though both clear the count floor. Vary the figure *kind* to match each abstraction's actual shape:

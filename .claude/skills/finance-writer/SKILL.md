@@ -137,6 +137,7 @@ Reviewers use the full rubric in `../blog-writer/references/diagram-authoring.md
 - **Sign convention is unambiguous** — inflows/gains are green and outflows/losses are red *consistently* across every figure; a reader never has to guess whether an arrow means "money in" or "money out".
 - **Axes are labeled with units** — any chart (payoff, yield curve, growth, distribution) labels both axes with what they measure and the unit (\$, %, years), and marks the reference points the prose names (strike, breakeven, par, spot).
 - **Numbers match the worked example** — if a figure illustrates a worked example, its numbers are the *same* numbers the prose computes. No invented figures for visual balance.
+- **Rendered layout has no meaningless whitespace** — title and caption do not sit far above a body stranded at the bottom; internal blank bands stay below 20% unless they encode a labeled interval; a mechanical validator pass is insufficient without a pixel review.
 
 Any `FAIL` → re-author that figure (fix `.in.json`, re-validate, re-render, re-convert), then re-review with a fresh `figure-reviewer` for that figure only. Never "fix" a bad figure by editing the prose. Advance only when every figure is a clean PASS.
 
