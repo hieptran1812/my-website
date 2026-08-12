@@ -95,6 +95,10 @@ def main() -> int:
         try:
             with open(item["markdown"], encoding="utf-8") as handle:
                 markdown = handle.read()
+            # The generated Substack Markdown escapes currency signs for the
+            # site's Markdown renderer. python-substack treats that escape as
+            # literal text, so remove it before parsing the API body.
+            markdown = markdown.replace(r"\$", "$")
             post = Post(item.get("title") or slug, item.get("subtitle") or "", user_id)
             post.from_markdown(markdown, api=api)
             draft = post.get_draft()
