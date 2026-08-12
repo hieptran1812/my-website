@@ -21,11 +21,58 @@ Output: one JSON object per line.
 
 import json
 import os
+import re
 import sys
 import time
+from pathlib import Path
 
+from PIL import Image
 from substack import Api
 from substack.post import Post
+
+
+IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
+
+
+def repair_image_attrs(draft_body, markdown):
+    """Preserve each local image's aspect ratio and alt text.
+
+    python-substack's captioned_image() defaults every image to 1456×819,
+    which distorts non-16:9 figures in the Substack editor. Keep the editor's
+    2x content width, but derive height from the actual local image dimensions.
+    """
+    images = IMAGE_RE.findall(markdown)
+    image_index = 0
+
+    def visit(node):
+        nonlocal image_index
+        if isinstance(node, dict):
+            if node.get("type") == "image2":
+                if image_index >= len(images):
+                    return
+                alt, source = images[image_index]
+                attrs = node.setdefault("attrs", {})
+                attrs["alt"] = alt or None
+                source_path = Path(source)
+                if source_path.exists():
+                    with Image.open(source_path) as image:
+                        source_width, source_height = image.size
+                    display_width = 1456
+                    display_height = max(
+                        1, round(display_width * source_height / source_width)
+                    )
+                    attrs["width"] = display_width
+                    attrs["height"] = display_height
+                    attrs["resizeWidth"] = 728
+                image_index += 1
+            for value in node.values():
+                visit(value)
+        elif isinstance(node, list):
+            for value in node:
+                visit(value)
+
+    visit(draft_body)
+    return draft_body
 
 
 def main() -> int:
@@ -50,7 +97,10 @@ def main() -> int:
                 markdown = handle.read()
             post = Post(item.get("title") or slug, item.get("subtitle") or "", user_id)
             post.from_markdown(markdown, api=api)
-            body = post.get_draft()["draft_body"]
+            draft = post.get_draft()
+            body = json.loads(draft["draft_body"])
+            body = repair_image_attrs(body, markdown)
+            body = json.dumps(body)
             api.put_draft(draft_id, draft_body=body)
             print(json.dumps({"slug": slug, "id": draft_id, "ok": True,
                               "bytes": len(body)}), flush=True)
