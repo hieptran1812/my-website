@@ -110,7 +110,7 @@
   - **Accepted defect:** forensic-ratios fig 5's bars fill ~70% of frame width with wide gutters. Reviewer confirms data/labels/colours/reading-order all correct. Cosmetic; shipped.
   - New reusable bugs recorded in memory: **bound text keeps its own `y`** (moving a container orphans its label, rendering an empty box); **half-bound text renders invisible**; **literal `$` must be escaped `\$`** (~140 in one draft would have desynced the math parser); **`timeout` does not exist on macOS** and mimics a render failure; **WebFetch of sec.gov returns 403** — use `WebSearch` with `allowed_domains: ["sec.gov"]`.
 
-## Next: Wave 8 — Case Studies II + Emerging Markets (6 posts, not 5)
+## DONE: Wave 8 shipped 2026-08-12 — series complete at 40/40 (was: Next)
 Start a **fresh session** — and for this one, **restart the app rather than `/clear`**: the WebSearch and
 subagent caps are per-CLI-process, and Wave 7 exhausted the search budget mid-wave with five drafters each
 spawning a research child. Carry forward only this plan path and the wave number.
@@ -205,3 +205,59 @@ going-concern window is one year beyond the **financial-statement date**, a diff
 one year after **issuance**.
 
 **Wave 6 dispatch note (2026-08-09):** all five agents were dispatched, then four died within ~15 min on transient network errors (`SSL certificate verification failed`, `Connection closed mid-response`) during the same window that took GitHub offline. **Nothing reached disk** — no `.md`, no WebPs, one stray cache file. They were resumed in place via `SendMessage` rather than re-dispatched, with instructions to re-check disk state first, since orphaned `figure-author` children of the dead parents were still running and a second figure pass would clobber. If a wave dies this way again: resume, do not re-dispatch, and always have the resumed agent inventory the disk before authoring figures.
+
+- **2026-08-12** — **WAVE 8 COMPLETE (6/6). SERIES COMPLETE, 40/40.** Commits `744d9d5a` (Luckin
+  11,853w/9 figs + Steinhoff 14,692w/8), `461ea9bc` (Luckin final renders), `3b066c25` (Satyam+Toshiba
+  14,086w/10), `d7d26590` (Lehman Repo 105 12,536w/8), `e41c67eb`+`4d1f50c5` (short-sellers' playbook
+  13,626w/9), `a5368493` (Vietnam/FLC capstone 14,018w/10). **54 WebPs, ~80,800 words.**
+  Wave 8 carried six posts: the five planned plus post 32 deferred from Wave 7.
+
+  - **Two session-limit hits inside ~15 minutes killed all six drafters and every child, twice.**
+    Resuming via `SendMessage` recovered everything both times; nothing was re-dispatched and no research
+    was paid for twice. Surviving-on-disk state after hit one: 4 drafts, 29 WebPs. The rule holds and is
+    now proven three waves running.
+  - **The visual gate had never run on 9 short-sellers figures.** Its figure-author died right after
+    "all nine clear the sharpness floor, dispatching the visual gate". The sharpness floor is a **byte-size
+    check, not a visual review**: re-gating found **3 of 9 failing** (orphaned edge labels, empty band above
+    bars, payoff line running off-axis). One had a real content bug, figure 5's purchases arrow pointing
+    *into* the issuer while its label read "out". **A figure that only cleared the byte floor is ungated.**
+  - **I reported a dollar-escaping defect that did not exist**, on two posts, and retracted it before either
+    agent acted. My grep was not fence-aware: all 18 satyam and 12 of 13 steinhoff `$[0-9]` hits were
+    **inside code fences** where `$` is literal, and the one outside was correct display math with escaped
+    `\$`. Escaping them would have rendered visible backslashes. **Fence-aware scan:**
+    `awk '/^```/{f=!f;next}{l=$0;gsub(/\\\$/,"",l); if(l~/\$[0-9]/) print (f?"fenced":"BARE"), NR}'`
+  - **I committed twice while a drafting/figure agent was still working** (Luckin, then short-sellers), each
+    needing a follow-up commit. Wave 6 recorded this exact lesson and I repeated it. **A green post-verifier
+    does not mean the agent has stopped.** Check `ListAgents` for running children *and* compare file mtimes
+    against now before staging. Banking work early against limit hits is still right; the precondition is an
+    idle agent, not a green gate.
+  - **Small batches beat one big figure pass.** Vietnam lost two entire sessions to figure-authors that read
+    `layout-scene.mjs`/`author-scene.mjs` end to end and never reached the renderer. Re-dispatched as
+    batches of 2-3 with the validator findings handed to them, all 10 landed. **Author, run the validator,
+    react** rather than studying the engines first.
+  - **New reusable renderer findings:** validator rule 3 skips `arrow` but **not** `line`, and rule 3c checks
+    arrows against rectangles, so **a curve cannot cross a shaded rectangular region** (band = closed 5-point
+    `line` polygon with `fillStyle:"solid"`, curve = `arrow`, axes = zero-width `line`; in-band text needs a
+    cutout or must sit outside the bbox). `author-scene.mjs` **does not read the `raw.elements` wrapper**
+    (reports 0% coverage / 0 tokens) so `raw` DSL must go through `layout-scene.mjs`. The `grid` engine caps
+    row growth at `bodyH*0.5`, so a 7-row grid with 2-line cells fails containment. `raw` bound labels are
+    never auto-wrapped. Body font floor is 22.
+  - **`abstraction-coverage` fired on 2 of 6 posts.** Correct fix is to ground the passage in the post's own
+    arithmetic, not to drag a figure away from the argument it illustrates. Short-sellers closed it by adding
+    the two-division extrapolation (20 counted in an hour at a 12-hour branch implies ~240/day against a
+    filing's implied 150) to the "go stand somewhere and count" paragraph, which improved the post.
+  - **Every post shipped with a stale `readTime`** (declared 48-61 against recomputed 57-67). Worth setting
+    from the verifier's recompute as a standing final step.
+  - **Fact-check outcomes.** WebSearch hit its 200/process cap early and every alternative engine was
+    captcha-walled; `WebFetch`/`curl` carried the wave. Unverifiable claims were **dropped, not softened**:
+    the Citron/Andrew Left enforcement matter is absent from the short-sellers post entirely; Steinhoff ships
+    an explicit "claims deliberately left out" section (FY2016 revenue/profit, goodwill share, delisting
+    dates, settlement pot) after web.archive.org 429'd. Steinhoff's "on 5 December 2017 the board announced"
+    was **caught as unsourced before shipping** and reframed to the Mail & Guardian's 6 December report with
+    a note on the unsettled date. Lehman states the Examiner's **colourable claims** finding rather than
+    implying adjudicated fraud, and figure 7 marks a data gap "not tabulated" instead of interpolating.
+    Vietnam keeps FTSE **announced and confirmed, not yet effective** (first tranche 21 Sep 2026, full
+    inclusion Sep 2027), MSCI still Frontier, and separates the 5 Aug 2024 first-instance verdict from the
+    26 Jun 2025 appellate judgment.
+  - Em-dash gate: **0 across all six posts**, the first wave written entirely under the no-em-dash house rule.
+    Sourcing WARN (63-122 lines/post) remains the accepted series-wide pattern for illustrative arithmetic.
