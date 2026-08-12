@@ -113,7 +113,7 @@ That decomposition is the whole forensic method of this post. If revenue grows, 
 
 Luckin opened its first store in October 2017. By the time it listed on Nasdaq on 17 May 2019, less than two years later, it had 2,370 stores across 28 Chinese cities and, on its own account, more than 16.8 million transacting customers. The IPO priced at US\$17 per ADS and raised roughly US\$600 million, valuing the company at about US\$3.9 billion. The SEC's complaint records that Luckin described itself as China's "second largest and fastest-growing coffee network" and stated an intention to become the largest, measured by store count, by the end of 2019.
 
-For context on the base it was growing from: Luckin's total revenue for the whole of 2018 was US\$125 million.
+For context on the base it was growing from: the SEC's complaint records that in the IPO prospectus Luckin disclosed total revenues of US\$125 million for the whole of 2018, which is the RMB 840.7 million that appears in the restated accounts later in this post.
 
 Then came the quarters that were later restated.
 
