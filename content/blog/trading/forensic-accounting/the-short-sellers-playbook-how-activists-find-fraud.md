@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Finance"
 author: "Hiep Tran"
 featured: true
-readTime: 61
+readTime: 62
 depth: "deep-dive"
 ---
 
@@ -617,6 +617,12 @@ Run the interest test from stage five on the real numbers.
 ### The afternoon: count something
 
 Go to one store, one branch, one site. Spend an hour. Count transactions, or cars, or people in the office, or trucks at the gate. One observation is not a sample and cannot prove anything about the company. What it can do is convert a number on a page into something you have seen with your own eyes, and that changes how you read the next annual report more than any ratio will.
+
+Then run the two divisions from the ground-truthing stage on what you counted, which takes five minutes and is the whole method in miniature. Say you count 20 transactions in an hour at a branch that is open 12 hours. That extrapolates to roughly 240 a day, before you adjust for the fact that you almost certainly picked a quiet hour. Now go back to the filing and compute what the accounts require, exactly as the earlier figure lays it out: revenue divided by the store count, divided by 365, divided by the average ticket.
+
+Three outcomes, and only one of them is interesting. If the filing implies 150 items a day and your hour implies 240, the company is being conservative and you can put the question down. If the two land near each other, the reported number survived contact with the physical world, which is the most reassuring thing you will learn all month. If the filing implies 247 and your hour implies 160, you have not found fraud, and you should not say that you have. What you have found is the one question worth putting to the company in writing, with a number attached to it.
+
+One hour, one branch, and two divisions. That is the entire ground-truthing stage of a professional short thesis, run at the scale of a Saturday afternoon, and it is available to anyone willing to stand somewhere and count.
 
 ### What to do with the answer
 
