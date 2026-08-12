@@ -24,6 +24,7 @@ export interface ArticleData {
   author: string;
   slug: string;
   collection?: string;
+  substackUrl?: string;
   excerpt?: string;
   image?: string;
   /** True when `content` is only the teaser — see src/lib/paywall.ts. */
@@ -110,6 +111,12 @@ async function getArticleImpl(slug: string): Promise<ArticleData | null> {
     author: metadata.author || "",
     slug,
     collection: metadata.collection,
+    substackUrl:
+      typeof metadata.substackUrl === "string"
+        ? metadata.substackUrl.trim() || undefined
+        : typeof metadata.substack === "string"
+          ? metadata.substack.trim() || undefined
+          : undefined,
     excerpt: metadata.excerpt || metadata.description || "",
     image: resolvePostCover(metadata, markdownContent),
     paywalled,

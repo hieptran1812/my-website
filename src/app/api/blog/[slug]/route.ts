@@ -109,6 +109,12 @@ export async function GET(
       tags: data.tags || [],
       image: data.image || "/images/default-blog.jpg",
       excerpt: data.excerpt || data.description || "No excerpt available",
+      substackUrl:
+        typeof data.substackUrl === "string"
+          ? data.substackUrl.trim() || undefined
+          : typeof data.substack === "string"
+            ? data.substack.trim() || undefined
+            : undefined,
       content: gatedContent,
       paywalled,
       paywallUrl: paywalled ? PAYWALL_SUBSCRIBE_URL : undefined,

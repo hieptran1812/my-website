@@ -18,6 +18,7 @@ export interface Article {
   author?: string;
   image?: string;
   collection?: string;
+  substackUrl?: string;
 }
 
 export interface BlogPost {
@@ -60,6 +61,7 @@ interface LitePost {
   tags?: string[];
   image?: string;
   collection?: string;
+  substackUrl?: string;
   featured?: boolean;
 }
 
@@ -90,6 +92,7 @@ function litePostToArticle(p: LitePost): Article {
     author: p.author,
     image: p.image,
     collection: p.collection,
+    substackUrl: p.substackUrl,
   };
 }
 

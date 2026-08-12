@@ -20,6 +20,7 @@ export interface BlogPost {
   image: string;
   excerpt: string;
   collection?: string;
+  substackUrl?: string;
   featured: boolean;
 }
 
@@ -43,6 +44,7 @@ function toBlogPost(p: BlogPostLite): BlogPost {
     image: p.image || "",
     excerpt: p.excerpt,
     collection: p.collection,
+    substackUrl: p.substackUrl,
     featured: p.featured,
   };
 }

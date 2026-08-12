@@ -51,6 +51,7 @@ export interface BlogIndexEntry {
   publishDate: string;
   tags: string[];
   collection?: string;
+  substackUrl?: string;
   image?: string;
   featured: boolean;
   /** Raw markdown body (post-frontmatter). Reused for read-time, search, etc. */
@@ -88,6 +89,11 @@ function readEntry(absPath: string): BlogIndexEntry | null {
     const tags = Array.isArray(data.tags)
       ? data.tags.map((t) => String(t))
       : [];
+    const substackUrl = isString(data.substackUrl)
+      ? data.substackUrl.trim() || undefined
+      : isString(data.substack)
+        ? data.substack.trim() || undefined
+        : undefined;
 
     return {
       slug,
@@ -108,6 +114,7 @@ function readEntry(absPath: string): BlogIndexEntry | null {
           : "",
       tags,
       collection: isString(data.collection) ? data.collection : undefined,
+      substackUrl,
       image: resolvePostCover(data, parsed.content),
       featured: data.featured === true,
       content: parsed.content,

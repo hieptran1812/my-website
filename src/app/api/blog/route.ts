@@ -13,6 +13,7 @@ interface BlogPostMetadata {
   image: string;
   excerpt: string;
   collection?: string;
+  substackUrl?: string;
   seo?: {
     type: string;
     datePublished: string;
@@ -81,6 +82,7 @@ export async function GET(request: Request) {
           (typeof entry.frontmatter.subcategory === "string"
             ? entry.frontmatter.subcategory
             : undefined),
+        substackUrl: entry.substackUrl,
         seo: {
           type: "BlogPosting",
           datePublished: entry.publishDate || "2024-01-01",

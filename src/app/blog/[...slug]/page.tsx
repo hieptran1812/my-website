@@ -135,6 +135,7 @@ export default async function BlogPostPage({
         author={article.author}
         postSlug={article.slug}
         collection={article.collection}
+        substackUrl={article.substackUrl}
         graphData={graphData}
         dangerouslySetInnerHTML={{ __html: article.content }}
         paywalled={article.paywalled}

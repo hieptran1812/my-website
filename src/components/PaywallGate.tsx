@@ -7,6 +7,8 @@ import "./styles/PaywallGate.css";
 interface PaywallGateProps {
   /** Post title, woven into the copy when available. */
   title?: string;
+  /** Exact Substack post URL, when this article has already been published. */
+  substackUrl?: string;
 }
 
 /**
@@ -16,7 +18,10 @@ interface PaywallGateProps {
  * The withheld body never reaches the browser — the server already cut it
  * (`src/lib/paywall.ts`). This component is purely the visible half.
  */
-export default function PaywallGate({ title }: PaywallGateProps) {
+export default function PaywallGate({ title, substackUrl }: PaywallGateProps) {
+  const destination = substackUrl?.trim() || PAYWALL_SUBSCRIBE_URL;
+  const isPublished = Boolean(substackUrl?.trim());
+
   return (
     <div className="paywall-gate" data-testid="paywall-gate">
       <div className="paywall-fade" aria-hidden="true" />
@@ -51,11 +56,13 @@ export default function PaywallGate({ title }: PaywallGateProps) {
 
         <a
           className="paywall-button"
-          href={PAYWALL_SUBSCRIBE_URL}
+          href={destination}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Read the full post on Substack
+          {isPublished
+            ? "Read the full post on Substack"
+            : "Publish soon on Substack"}
           <svg
             width="18"
             height="18"
@@ -75,7 +82,7 @@ export default function PaywallGate({ title }: PaywallGateProps) {
         <p className="paywall-note">
           Already a subscriber?{" "}
           <a
-            href={PAYWALL_SUBSCRIBE_URL}
+            href={destination}
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -20,6 +20,7 @@ export interface Article {
   slug: string;
   image?: string;
   collection?: string;
+  substackUrl?: string;
 }
 
 function convertToArticle(
@@ -133,6 +134,12 @@ function convertToArticle(
     slug, // Original slug remains for URL purposes
     image: metadata.image || "/blog-placeholder.jpg", // Add image handling
     collection: metadata.collection,
+    substackUrl:
+      typeof metadata.substackUrl === "string"
+        ? metadata.substackUrl.trim() || undefined
+        : typeof metadata.substack === "string"
+          ? metadata.substack.trim() || undefined
+          : undefined,
   };
 }
 

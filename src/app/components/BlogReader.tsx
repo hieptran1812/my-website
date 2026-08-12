@@ -50,6 +50,7 @@ interface BlogReaderProps {
   author?: string;
   postSlug?: string;
   collection?: string;
+  substackUrl?: string;
   /** Precomputed ego graph inlined by the server (build time). When present the
    *  graph sidebar renders instantly with no client fetch. */
   graphData?: PrecomputedGraph | null;
@@ -73,6 +74,7 @@ export default function BlogReader({
   author,
   postSlug,
   collection,
+  substackUrl,
   graphData,
   dangerouslySetInnerHTML,
   paywalled = false,
@@ -1124,7 +1126,9 @@ export default function BlogReader({
                 )}
               </MathJax>
             </article>
-            {paywalled ? <PaywallGate title={title} /> : null}
+            {paywalled ? (
+              <PaywallGate title={title} substackUrl={substackUrl} />
+            ) : null}
             {footer ? <div className="article-footer">{footer}</div> : null}
           </div>
         </div>

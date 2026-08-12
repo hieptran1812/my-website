@@ -12,6 +12,7 @@ export interface PostMeta {
   publishDate: string;
   tags: string[];
   collection?: string;
+  substackUrl?: string;
 }
 
 const blogDir = path.join(process.cwd(), "content", "blog");
@@ -43,5 +44,11 @@ export function getPostMeta(slug: string): PostMeta | null {
       "",
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     collection: typeof data.collection === "string" ? data.collection : undefined,
+    substackUrl:
+      typeof data.substackUrl === "string"
+        ? data.substackUrl.trim() || undefined
+        : typeof data.substack === "string"
+          ? data.substack.trim() || undefined
+          : undefined,
   };
 }

@@ -11,6 +11,7 @@ import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import { getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
 import SubcategoryFilter from "@/components/SubcategoryFilter";
 import BlogSearchBar from "@/components/BlogSearchBar";
+import SubstackLink from "@/components/SubstackLink";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 import { useSubcategoryFilter } from "@/components/hooks/useSubcategoryFilter";
 
@@ -214,17 +215,18 @@ export default function TradingBlogPage() {
                   </h2>
 
                   {/* Featured Article - Two Column Layout (60/40) */}
-                  <Link
-                    href={`/blog/${featuredArticle.slug}`}
-                    className="block"
-                  >
-                    <div
-                      className="mb-12 rounded-2xl border overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
-                      style={{
-                        backgroundColor: "var(--card-bg)",
-                        borderColor: "var(--card-border)",
-                      }}
+                  <div className="mb-12">
+                    <Link
+                      href={`/blog/${featuredArticle.slug}`}
+                      className="block"
                     >
+                      <div
+                        className="rounded-2xl border overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
+                        style={{
+                          backgroundColor: "var(--card-bg)",
+                          borderColor: "var(--card-border)",
+                        }}
+                      >
                       <div className="grid md:grid-cols-5 gap-0">
                         {/* Left: Featured Image (60%) */}
                         <div className="md:col-span-3 relative w-full aspect-[672/366]">
@@ -309,25 +311,30 @@ export default function TradingBlogPage() {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
+                      </div>
+                    </Link>
+                    <SubstackLink
+                      substackUrl={featuredArticle.substackUrl}
+                      className="mt-4"
+                    />
+                  </div>
 
                   {/* Four Column Grid of Recent Articles */}
                   {recentArticles.length > 0 && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                       {recentArticles.map((article) => (
-                        <Link
-                          key={article.id}
-                          href={`/blog/${article.slug}`}
-                          className="block"
-                        >
-                          <div
-                            className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
-                            style={{
-                              backgroundColor: "var(--card-bg)",
-                              borderColor: "var(--card-border)",
-                            }}
+                        <div key={article.id}>
+                          <Link
+                            href={`/blog/${article.slug}`}
+                            className="block"
                           >
+                            <div
+                              className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
+                              style={{
+                                backgroundColor: "var(--card-bg)",
+                                borderColor: "var(--card-border)",
+                              }}
+                            >
                             <div className="relative h-32 overflow-hidden">
                               <Image
                                 {...getCardImageProps(article)}
@@ -377,8 +384,13 @@ export default function TradingBlogPage() {
                                 <span>{article.readTime}</span>
                               </div>
                             </div>
-                          </div>
-                        </Link>
+                            </div>
+                          </Link>
+                          <SubstackLink
+                            substackUrl={article.substackUrl}
+                            className="mt-3"
+                          />
+                        </div>
                       ))}
                     </div>
                   )}
@@ -423,18 +435,18 @@ export default function TradingBlogPage() {
                 {filteredArticles.length > 0 ? (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {displayedArticles.map((article) => (
-                      <Link
-                        key={article.id}
-                        href={`/blog/${article.slug}`}
-                        className="block"
-                      >
-                        <div
-                          className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
-                          style={{
-                            backgroundColor: "var(--card-bg)",
-                            borderColor: "var(--card-border)",
-                          }}
+                      <div key={article.id}>
+                        <Link
+                          href={`/blog/${article.slug}`}
+                          className="block"
                         >
+                          <div
+                            className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
+                            style={{
+                              backgroundColor: "var(--card-bg)",
+                              borderColor: "var(--card-border)",
+                            }}
+                          >
                           <div className="relative h-48 overflow-hidden">
                             <Image
                               {...getCardImageProps(article)}
@@ -484,8 +496,13 @@ export default function TradingBlogPage() {
                               <span>{article.readTime}</span>
                             </div>
                           </div>
-                        </div>
-                      </Link>
+                          </div>
+                        </Link>
+                        <SubstackLink
+                          substackUrl={article.substackUrl}
+                          className="mt-3"
+                        />
+                      </div>
                     ))}
                   </div>
                 ) : (

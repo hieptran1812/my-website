@@ -44,6 +44,7 @@ interface BlogPostLite {
   tags: string[];
   image?: string;
   collection?: string;
+  substackUrl?: string;
   featured: boolean;
 }
 
@@ -102,6 +103,7 @@ async function main() {
       tags: entry.tags,
       image: entry.image || undefined,
       collection: entry.collection,
+      substackUrl: entry.substackUrl,
       featured: entry.featured,
     };
   });

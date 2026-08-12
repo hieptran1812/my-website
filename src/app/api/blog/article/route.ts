@@ -130,6 +130,12 @@ export async function GET(request: NextRequest) {
       featured: metadata.featured || false,
       slug,
       collection: metadata.collection,
+      substackUrl:
+        typeof metadata.substackUrl === "string"
+          ? metadata.substackUrl.trim() || undefined
+          : typeof metadata.substack === "string"
+            ? metadata.substack.trim() || undefined
+            : undefined,
     };
 
     return NextResponse.json({
