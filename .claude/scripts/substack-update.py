@@ -28,10 +28,129 @@ from pathlib import Path
 
 from PIL import Image
 from substack import Api
-from substack.post import Post
+from substack.post import Post, parse_inline
 
 
 IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
+BULLET_RE = re.compile(r"^[-*]\s+")
+
+
+def text_node(token):
+    """Turn one python-substack inline token into a valid ProseMirror text node."""
+    node = {"type": "text", "text": token["content"]}
+    if token.get("marks"):
+        node["marks"] = token["marks"]
+    return node
+
+
+def repair_inline_nodes(node):
+    """Give every inline token the node shape ProseMirror requires.
+
+    python-substack renders bullet-list text straight from parse_inline, so the
+    items land as {"content": "…", "marks": […]} — no `type`, and the text under
+    `content` rather than `text`. Substack's editor cannot read that, so the
+    whole list shows up empty. Paragraphs go through Post.text() and are fine;
+    this rewrites the ones that don't.
+    """
+    if isinstance(node, dict):
+        if "type" not in node and isinstance(node.get("content"), str):
+            text, marks = node["content"], node.get("marks")
+            node.clear()
+            node["type"] = "text"
+            node["text"] = text
+            if marks:
+                node["marks"] = marks
+        for value in node.values():
+            repair_inline_nodes(value)
+    elif isinstance(node, list):
+        for value in node:
+            repair_inline_nodes(value)
+    return node
+
+
+def blockquote_runs(markdown):
+    """Every contiguous run of `>` lines in the source, quote markers stripped."""
+    runs, current = [], None
+    for line in markdown.split("\n"):
+        if line.startswith(">"):
+            if current is None:
+                current = []
+            current.append(line[1:].lstrip(" ") if line != ">" else "")
+        elif current is not None:
+            runs.append(current)
+            current = None
+    if current is not None:
+        runs.append(current)
+    return runs
+
+
+def build_blockquote(lines):
+    """Rebuild one blockquote: paragraphs keep their marks, `-` lines become a list."""
+    content, bullets = [], []
+
+    def flush_bullets():
+        if not bullets:
+            return
+        content.append({
+            "type": "bullet_list",
+            "content": [
+                {"type": "list_item",
+                 "content": [{"type": "paragraph", "content": nodes}]}
+                for nodes in bullets
+            ],
+        })
+        bullets.clear()
+
+    for line in lines:
+        if not line.strip():
+            flush_bullets()
+            continue
+        if BULLET_RE.match(line):
+            tokens = parse_inline(BULLET_RE.sub("", line))
+            if tokens:
+                bullets.append([text_node(t) for t in tokens])
+            continue
+        flush_bullets()
+        tokens = parse_inline(line)
+        if tokens:
+            content.append({"type": "paragraph",
+                            "content": [text_node(t) for t in tokens]})
+    flush_bullets()
+
+    node = {"type": "blockquote"}
+    if content:
+        node["content"] = content
+    return node
+
+
+def repair_blockquotes(draft_body, markdown):
+    """Restore what python-substack drops inside a blockquote.
+
+    Its quote branch keeps the text but throws away every mark, and leaves the
+    `- ` of a quoted bullet sitting in the prose as a literal dash. The TL;DR
+    box is a blockquote, so that is the most-read part of the post. Rebuilding
+    each quote from the source Markdown puts the bold lead-ins and the bullet
+    list back.
+    """
+    rebuilt = [build_blockquote(lines) for lines in blockquote_runs(markdown)]
+    index = 0
+
+    def visit(node):
+        nonlocal index
+        if isinstance(node, dict):
+            for value in node.values():
+                visit(value)
+        elif isinstance(node, list):
+            for position, value in enumerate(node):
+                if isinstance(value, dict) and value.get("type") == "blockquote":
+                    if index < len(rebuilt):
+                        node[position] = rebuilt[index]
+                    index += 1
+                    continue
+                visit(value)
+
+    visit(draft_body)
+    return draft_body
 
 
 def repair_image_attrs(draft_body, markdown):
@@ -97,12 +216,16 @@ def main() -> int:
                 markdown = handle.read()
             # The generated Substack Markdown escapes currency signs for the
             # site's Markdown renderer. python-substack treats that escape as
-            # literal text, so remove it before parsing the API body.
-            markdown = markdown.replace(r"\$", "$")
+            # literal text, so remove it before parsing the API body. A source
+            # that already wrote `\$` comes out of the exporter as `\\$`, so
+            # strip the whole run rather than a single backslash.
+            markdown = re.sub(r"\\+\$", "$", markdown)
             post = Post(item.get("title") or slug, item.get("subtitle") or "", user_id)
             post.from_markdown(markdown, api=api)
             draft = post.get_draft()
             body = json.loads(draft["draft_body"])
+            body = repair_inline_nodes(body)
+            body = repair_blockquotes(body, markdown)
             body = repair_image_attrs(body, markdown)
             body = json.dumps(body)
             api.put_draft(draft_id, draft_body=body)
