@@ -9,6 +9,7 @@ subcategory: "Technical Analysis"
 author: "Hiep Tran"
 featured: true
 readTime: 43
+substackUrl: "https://halleytech.substack.com/p/head-and-shoulders-double-tops"
 ---
 
 > [!important]

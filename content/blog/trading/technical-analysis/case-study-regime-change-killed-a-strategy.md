@@ -23,6 +23,7 @@ subcategory: "Technical Analysis"
 author: "Hiep Tran"
 featured: true
 readTime: 51
+substackUrl: "https://halleytech.substack.com/p/case-study-regime-change-killed-a-strategy"
 ---
 
 > [!important]

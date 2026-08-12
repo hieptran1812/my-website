@@ -23,6 +23,7 @@ subcategory: "Technical Analysis"
 author: "Hiep Tran"
 featured: true
 readTime: 39
+substackUrl: "https://halleytech.substack.com/p/expectancy-why-win-rate-lies"
 ---
 
 > [!important]

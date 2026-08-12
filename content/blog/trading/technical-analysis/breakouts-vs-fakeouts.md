@@ -9,6 +9,7 @@ subcategory: "Technical Analysis"
 author: "Hiep Tran"
 featured: true
 readTime: 50
+substackUrl: "https://halleytech.substack.com/p/breakouts-vs-fakeouts"
 ---
 
 > [!important]

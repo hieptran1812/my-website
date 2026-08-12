@@ -9,6 +9,7 @@ subcategory: "Game Theory"
 author: "Hiep Tran"
 featured: true
 readTime: 40
+substackUrl: "https://halleytech.substack.com/p/who-is-on-the-other-side-of-your-trade"
 ---
 
 > [!important]

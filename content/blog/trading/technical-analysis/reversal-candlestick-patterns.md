@@ -9,6 +9,7 @@ subcategory: "Technical Analysis"
 author: "Hiep Tran"
 featured: true
 readTime: 41
+substackUrl: "https://halleytech.substack.com/p/reversal-candlestick-patterns"
 ---
 
 > [!important]

@@ -23,6 +23,7 @@ subcategory: "Technical Analysis"
 author: "Hiep Tran"
 featured: true
 readTime: 40
+substackUrl: "https://halleytech.substack.com/p/the-indicator-trap"
 ---
 
 > [!important]

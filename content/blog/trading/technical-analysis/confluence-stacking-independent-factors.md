@@ -23,6 +23,7 @@ subcategory: "Technical Analysis"
 author: "Hiep Tran"
 featured: true
 readTime: 42
+substackUrl: "https://halleytech.substack.com/p/confluence-stacking-independent-factors"
 ---
 
 > [!important]

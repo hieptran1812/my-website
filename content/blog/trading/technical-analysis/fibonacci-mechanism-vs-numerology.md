@@ -9,6 +9,7 @@ subcategory: "Technical Analysis"
 author: "Hiep Tran"
 featured: true
 readTime: 39
+substackUrl: "https://halleytech.substack.com/p/fibonacci-mechanism-vs-numerology"
 ---
 
 > [!important]

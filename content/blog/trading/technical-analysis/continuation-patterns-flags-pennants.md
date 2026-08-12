@@ -9,6 +9,7 @@ subcategory: "Technical Analysis"
 author: "Hiep Tran"
 featured: true
 readTime: 48
+substackUrl: "https://halleytech.substack.com/p/continuation-patterns-flags-pennants"
 ---
 
 > [!important]
