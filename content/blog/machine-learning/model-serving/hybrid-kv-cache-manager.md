@@ -528,4 +528,4 @@ The through-line of every case study and every decision above is a single shift 
 - [KV cache optimization: managing the memory that caps LLM serving](/blog/machine-learning/model-serving/kv-cache-optimization) — the byte-level KV equation and the levers this design builds on.
 - [Prefix caching and RadixAttention](/blog/machine-learning/model-serving/prefix-caching-and-radixattention) — the prefix-cache machinery the per-type hit rules extend.
 - [Continuous batching and PagedAttention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention) — the block-allocator foundation the shared pool sits on.
-- [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) — where the KV cache manager fits in the larger engine.
+- [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) — where the KV cache manager fits in the larger engine.

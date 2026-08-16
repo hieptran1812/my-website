@@ -17,7 +17,7 @@ tags:
     "ray-serve",
   ]
 category: "machine-learning"
-subcategory: "Model Serving"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 56
@@ -1486,4 +1486,4 @@ Figure 8 is the failure matrix. Memorize the column headings: Failure Mode → S
 - **Triton Inference Server documentation**: [docs.nvidia.com/deeplearning/triton-inference-server](https://docs.nvidia.com/deeplearning/triton-inference-server). Comprehensive reference for model repository layout, backends, and dynamic batching configuration.
 - **Ray Serve documentation**: [docs.ray.io/en/latest/serve](https://docs.ray.io/en/latest/serve). Official guide to deployments, autoscaling, and DeploymentHandle composition.
 - **FlashAttention-2**: Dao et al., "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning," ICLR 2024. Explains the IO-aware attention algorithm that underpins vLLM and TGI throughput.
-- **Within this series**: [what-is-model-serving](/blog/machine-learning/model-serving/what-is-model-serving) introduces the SLO triangle that this post builds on; [batching-fundamentals-latency-throughput-tradeoff](/blog/machine-learning/model-serving/batching-fundamentals-latency-throughput-tradeoff) goes deep on the batching algorithms at layer 3; [vllm-deep-dive](/blog/machine-learning/model-serving/vllm-deep-dive) dissects the PagedAttention scheduler in detail; [the-model-serving-playbook](/blog/machine-learning/model-serving/what-is-model-serving) provides the full decision tree from model to production.
+- **Within this series**: [what-is-model-serving](/blog/machine-learning/model-serving/what-is-model-serving) introduces the SLO triangle that this post builds on; [batching-fundamentals-latency-throughput-tradeoff](/blog/machine-learning/model-serving/batching-fundamentals-latency-throughput-tradeoff) goes deep on the batching algorithms at layer 3; [vllm-deep-dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) dissects the PagedAttention scheduler in detail; [the-model-serving-playbook](/blog/machine-learning/model-serving/what-is-model-serving) provides the full decision tree from model to production.

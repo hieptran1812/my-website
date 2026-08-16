@@ -221,7 +221,7 @@ NVIDIA reports roughly a **1.2× speedup over naive looping with the batched-GEM
 
 ### How to choose
 
-The decision rule is short. If you are doing inference and want zero fuss, use cuBLAS grouped or whatever your serving engine ([vLLM](/blog/machine-learning/model-serving/vllm-distributed-architecture-anatomy), SGLang) already wires up. If you are training an MoE at scale with many experts, you are on the CUTLASS path via your framework, and the thing to tune is the permutation fusion around it, not the GEMM. If you are chasing peak on H100/H200, need a schedule the libraries do not offer, or are prototyping FP8/MXFP4 support ahead of the libraries, fork the Triton kernel. And if you are just trying to understand the machine — read the Triton kernel regardless, because it is the only one whose source explains itself.
+The decision rule is short. If you are doing inference and want zero fuss, use cuBLAS grouped or whatever your serving engine ([vLLM](/blog/machine-learning/inference-frameworks/vllm-distributed-architecture-anatomy), SGLang) already wires up. If you are training an MoE at scale with many experts, you are on the CUTLASS path via your framework, and the thing to tune is the permutation fusion around it, not the GEMM. If you are chasing peak on H100/H200, need a schedule the libraries do not offer, or are prototyping FP8/MXFP4 support ahead of the libraries, fork the Triton kernel. And if you are just trying to understand the machine — read the Triton kernel regardless, because it is the only one whose source explains itself.
 
 ## 5. Inside the Triton persistent kernel
 

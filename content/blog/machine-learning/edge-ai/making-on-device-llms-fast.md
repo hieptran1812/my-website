@@ -23,7 +23,7 @@ readTime: 54
 image: "/imgs/blogs/making-on-device-llms-fast-1.png"
 ---
 
-You did the hard part already. You picked a 7B model, quantized it to a 4-bit GGUF, and got it running locally on your laptop with `llama.cpp` (if you haven't, start with [running LLMs locally with llama.cpp and GGUF](/blog/machine-learning/edge-ai/running-llms-locally-llama-cpp-and-gguf)). The first reply comes back at a respectable 18 tokens per second. You demo it to a teammate, they're impressed, everyone moves on.
+You did the hard part already. You picked a 7B model, quantized it to a 4-bit GGUF, and got it running locally on your laptop with `llama.cpp` (if you haven't, start with [running LLMs locally with llama.cpp and GGUF](/blog/machine-learning/inference-frameworks/running-llms-locally-llama-cpp-and-gguf)). The first reply comes back at a respectable 18 tokens per second. You demo it to a teammate, they're impressed, everyone moves on.
 
 Then a real user shows up. They paste in a 6,000-token document and ask three follow-up questions. By the third question, the first token takes almost a full second to appear, the tokens-per-second has sagged, and your activity monitor shows memory creeping up turn after turn. Push it harder — a 30k-token codebase, a long multi-turn debugging session — and the process gets OOM-killed. The model that "ran fine" yesterday is now slow and fragile in exactly the situation people actually use it: a long, stateful conversation.
 
@@ -307,7 +307,7 @@ One more server-side technique to name so you can place it correctly. **Continuo
 
 ## Doing it for real in llama.cpp
 
-Enough theory. Here's how to measure and enable each of these on a laptop with `llama.cpp`, which is the workhorse runtime for on-device LLMs and exposes every knob we've discussed. (Build and basic usage are covered in [running LLMs locally with llama.cpp and GGUF](/blog/machine-learning/edge-ai/running-llms-locally-llama-cpp-and-gguf).)
+Enough theory. Here's how to measure and enable each of these on a laptop with `llama.cpp`, which is the workhorse runtime for on-device LLMs and exposes every knob we've discussed. (Build and basic usage are covered in [running LLMs locally with llama.cpp and GGUF](/blog/machine-learning/inference-frameworks/running-llms-locally-llama-cpp-and-gguf).)
 
 ### Step 1: measure the KV-cache so you know your wall
 
@@ -607,5 +607,5 @@ When *not* to bother: if your conversations are always short (a few hundred toke
 - Cai, Li, Geng, et al., "Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads" (2024) — draft-model-free speculation via extra heads.
 - Liu, Yuan, Jin, et al., "KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache" (2024) — how low you can push KV-cache bits and why keys vs. values differ.
 - `llama.cpp` documentation — `--cache-type-k/v`, `-md`/`--draft-max` (speculative), `--prompt-cache`, and the server's prefix caching.
-- Within this series: [a taxonomy of model compression](/blog/machine-learning/edge-ai/a-taxonomy-of-model-compression), [the roofline model: where your bottleneck lives](/blog/machine-learning/edge-ai/the-roofline-model-where-your-bottleneck-lives), [LLM quantization II: activations, SmoothQuant, and the KV-cache](/blog/machine-learning/edge-ai/llm-quantization-activations-smoothquant-kv-cache), [small language models by design](/blog/machine-learning/edge-ai/small-language-models-by-design), [running LLMs locally with llama.cpp and GGUF](/blog/machine-learning/edge-ai/running-llms-locally-llama-cpp-and-gguf), and the capstone [the edge optimization playbook](/blog/machine-learning/edge-ai/the-edge-optimization-playbook).
+- Within this series: [a taxonomy of model compression](/blog/machine-learning/edge-ai/a-taxonomy-of-model-compression), [the roofline model: where your bottleneck lives](/blog/machine-learning/edge-ai/the-roofline-model-where-your-bottleneck-lives), [LLM quantization II: activations, SmoothQuant, and the KV-cache](/blog/machine-learning/edge-ai/llm-quantization-activations-smoothquant-kv-cache), [small language models by design](/blog/machine-learning/edge-ai/small-language-models-by-design), [running LLMs locally with llama.cpp and GGUF](/blog/machine-learning/inference-frameworks/running-llms-locally-llama-cpp-and-gguf), and the capstone [the edge optimization playbook](/blog/machine-learning/edge-ai/the-edge-optimization-playbook).
 - Going deeper on the cache itself: [KV-cache optimization and management](/blog/machine-learning/large-language-model/kv-cache-optimization-and-management).

@@ -17,7 +17,7 @@ tags:
   - mixture-of-experts
   - nvfp4
 category: "machine-learning"
-subcategory: "Open Source Library"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 image: "/imgs/blogs/tokenspeed-580-tps-qwen3-5-hybrid-mamba-blackwell-1.webp"
@@ -32,7 +32,7 @@ That distinction is the whole story. Batch-size-one throughput is the cruelest b
 
 The diagram above is the mental model for the rest of this article: the record is not one trick, it is four stacked layers of stall-removal, each attacking a different part of the decode step, sitting on top of a Blackwell-plus-NVFP4 substrate. From the bottom up — hybrid GDN/Mamba state management that makes the agentic prefix essentially free; multi-stream overlap that hides the shared-expert compute behind the routed-expert GEMM; kernel fusion that collapses five HBM round-trips into one register-resident kernel; and an async-CPU layer that captures the entire decode loop into a CUDA graph and replaces every device-to-host scalar read with an on-device sentinel. Pull out any one layer and the number drops. This is a teardown of all four, plus the benchmark methodology that produced the headline, written for engineers who serve these models for a living.
 
-A word on provenance before we trust any of it. TokenSpeed is an early-preview, MIT-licensed engine from the **LightSeek Foundation**, built with collaborators including the Alibaba Tongyi team (who train Qwen), NVIDIA DevTech, and the Mooncake team. The numbers come from the vendor's own blog and an EvalScope harness, on hardware most of us cannot rent yet. Treat them as a credible engineering report from people who run these models in anger, not as an independently reproduced benchmark. The *techniques*, which is what we care about, are the durable part — every one of them is a transferable lesson about serving hybrid-attention MoE models on Blackwell, and they will outlive this particular leaderboard entry. (For the engine's broader four-layer architecture and its MLA kernels on the DeepSeek-shaped models, see the companion piece, [TokenSpeed: inside a speed-of-light inference engine](/blog/machine-learning/open-source-library/tokenspeed-agentic-inference-engine); this post is specifically about the Qwen3.5 hybrid path and the 580 tok/s run.)
+A word on provenance before we trust any of it. TokenSpeed is an early-preview, MIT-licensed engine from the **LightSeek Foundation**, built with collaborators including the Alibaba Tongyi team (who train Qwen), NVIDIA DevTech, and the Mooncake team. The numbers come from the vendor's own blog and an EvalScope harness, on hardware most of us cannot rent yet. Treat them as a credible engineering report from people who run these models in anger, not as an independently reproduced benchmark. The *techniques*, which is what we care about, are the durable part — every one of them is a transferable lesson about serving hybrid-attention MoE models on Blackwell, and they will outlive this particular leaderboard entry. (For the engine's broader four-layer architecture and its MLA kernels on the DeepSeek-shaped models, see the companion piece, [TokenSpeed: inside a speed-of-light inference engine](/blog/machine-learning/inference-frameworks/tokenspeed-agentic-inference-engine); this post is specifically about the Qwen3.5 hybrid path and the 580 tok/s run.)
 
 ## 1. The workload: why batch size one is the hard number
 
@@ -530,7 +530,7 @@ The deeper takeaway outlasts any leaderboard. The agentic workload broke the ass
 
 ## Further reading
 
-- [TokenSpeed: inside a speed-of-light inference engine for agentic workloads](/blog/machine-learning/open-source-library/tokenspeed-agentic-inference-engine) — the engine's four-layer architecture and its MLA kernel path.
+- [TokenSpeed: inside a speed-of-light inference engine for agentic workloads](/blog/machine-learning/inference-frameworks/tokenspeed-agentic-inference-engine) — the engine's four-layer architecture and its MLA kernel path.
 - [Nemotron-H: hybrid Mamba-Transformer](/blog/machine-learning/large-language-model/nemotron-h-hybrid-mamba-transformer) — why linear-attention recurrent state behaves so differently from a KV cache.
 - [KV cache optimization and management](/blog/machine-learning/large-language-model/kv-cache-optimization-and-management) — the paged-KV mechanics the prefix cache builds on.
 - [Optimizing MoE training and inference](/blog/machine-learning/large-language-model/optimizing-moe-training-and-inference) — shared vs routed experts and why their overlap is free at batch one.

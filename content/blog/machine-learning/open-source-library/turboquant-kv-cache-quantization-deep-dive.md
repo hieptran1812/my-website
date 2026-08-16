@@ -37,7 +37,7 @@ This is why the naive port of weight-quantization tricks fails. Per-tensor scale
 
 > The senior rule of thumb: weight quantization is a fitting problem; KV quantization is a *streaming estimation* problem. If your method needs to see the data twice, it does not belong in the KV path.
 
-If you want the broader context on why the KV cache dominates long-context serving, the [KV cache deep dive](/blog/machine-learning/large-language-model/kv-cache) on this blog covers the data structure itself, and the [LMCache layer deep dive](/blog/machine-learning/open-source-library/lmcache-kv-cache-layer-deep-dive) covers the orthogonal trick of *reusing* KV across requests. TurboQuant is the third axis: making each cached entry physically smaller.
+If you want the broader context on why the KV cache dominates long-context serving, the [KV cache deep dive](/blog/machine-learning/large-language-model/kv-cache) on this blog covers the data structure itself, and the [LMCache layer deep dive](/blog/machine-learning/inference-frameworks/lmcache-kv-cache-layer-deep-dive) covers the orthogonal trick of *reusing* KV across requests. TurboQuant is the third axis: making each cached entry physically smaller.
 
 ## The mental model, in three sentences
 
@@ -388,7 +388,7 @@ The honest competitive caveat: for models you fully control and can calibrate, a
 
 **Senior rule of thumb: a compression algorithm with no serving integration is a research artifact; the integration is where the wins or the disappointments actually happen.**
 
-The algorithm is half the repo. The other half is making it run inside [vLLM](/blog/machine-learning/large-language-model/vllm-inference) without forking the engine. TurboQuant does this by **monkey-patching** the attention backend — `integration/vllm.py` intercepts the points where vLLM writes and reads KV — rather than maintaining a hard fork of vLLM internals. The repo targets specific versions (PyTorch 2.10, vLLM 0.18.0, CUDA 12.8) precisely because monkey-patching is version-fragile; the patched functions must match the engine's current signatures.
+The algorithm is half the repo. The other half is making it run inside [vLLM](/blog/machine-learning/inference-frameworks/vllm-inference) without forking the engine. TurboQuant does this by **monkey-patching** the attention backend — `integration/vllm.py` intercepts the points where vLLM writes and reads KV — rather than maintaining a hard fork of vLLM internals. The repo targets specific versions (PyTorch 2.10, vLLM 0.18.0, CUDA 12.8) precisely because monkey-patching is version-fragile; the patched functions must match the engine's current signatures.
 
 ![vLLM integration lifecycle: prefill writes a normal cache, TurboQuant compresses it, then frees the baseline before decode](/imgs/blogs/turboquant-kv-cache-quantization-deep-dive-8.png)
 
@@ -578,6 +578,6 @@ A sane rollout sequence: enable `key_bits=3, value_bits=4, group_size=64, free_a
 - **The paper:** [TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate](https://arxiv.org/abs/2504.19874) (Zandieh, Daliri, Hadian, Mirrokni, ICLR 2026) — the theory behind the rotation, the distortion bounds, and the unbiased inner-product estimator.
 - **The repo:** [0xSero/turboquant](https://github.com/0xSero/turboquant) — implementation, pre-generated codebooks, Triton kernels, vLLM integration, and the self-auditing test suite.
 - [KV cache, end to end](/blog/machine-learning/large-language-model/kv-cache) — the data structure TurboQuant compresses.
-- [LMCache KV cache layer deep dive](/blog/machine-learning/open-source-library/lmcache-kv-cache-layer-deep-dive) — the orthogonal trick of *reusing* KV across requests; pairs well with compressing it.
+- [LMCache KV cache layer deep dive](/blog/machine-learning/inference-frameworks/lmcache-kv-cache-layer-deep-dive) — the orthogonal trick of *reusing* KV across requests; pairs well with compressing it.
 - [Quantization in LLMs](/blog/machine-learning/large-language-model/quantization-in-llm) and [INT8/FP16/INT4 edge tradeoffs](/blog/machine-learning/mlops/quantization-int8-fp16-int4-edge-tradeoffs) — the general quantization background that TurboQuant's value path builds on.
-- [vLLM inference](/blog/machine-learning/large-language-model/vllm-inference) — the serving engine TurboQuant monkey-patches.
+- [vLLM inference](/blog/machine-learning/inference-frameworks/vllm-inference) — the serving engine TurboQuant monkey-patches.

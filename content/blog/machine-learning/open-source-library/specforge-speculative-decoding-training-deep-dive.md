@@ -1075,5 +1075,5 @@ That is the part worth copying even if you never train a draft model.
 - [DFlash](https://arxiv.org/abs/2602.06036), [Domino](https://arxiv.org/abs/2605.29707), [DSpark](https://arxiv.org/abs/2607.05147) — the block-diffusion lineage; [D-PACE](https://arxiv.org/abs/2605.18810) and [LK loss](https://arxiv.org/abs/2602.23881) for the objectives
 - [Speculative Decoding in Production](/blog/machine-learning/model-serving/speculative-decoding-in-production) — the serving-side companion to this post, including the batch-size tradeoff
 - [Prefix Caching and RadixAttention](/blog/machine-learning/model-serving/prefix-caching-and-radixattention) — background for the radix-cache capture hazard
-- [Attention Backends Deep Dive](/blog/machine-learning/model-serving/attention-backends-deep-dive-flashattention-flashinfer) — FlashAttention and FlexAttention context for the TTT mask
+- [Attention Backends Deep Dive](/blog/machine-learning/inference-frameworks/attention-backends-deep-dive-flashattention-flashinfer) — FlashAttention and FlexAttention context for the TTT mask
 - [slime: an SGLang-native RL framework](/blog/machine-learning/open-source-library/slime-rl-framework-deep-dive) — a sibling project with the same disaggregated philosophy

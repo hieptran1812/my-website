@@ -17,7 +17,7 @@ tags:
     "rag",
   ]
 category: "machine-learning"
-subcategory: "Model Serving"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 49
@@ -36,7 +36,7 @@ The diagram below is the mental model: an HTTP Proxy on port 8000 receives your 
 
 By the end of this post you will be able to: declare and compose Ray Serve deployments from scratch; wire multi-model pipelines with `DeploymentHandle`; configure the autoscaler's queue-depth controller with the right delay parameters; accelerate throughput with `@serve.batch`; allocate fractional GPU resources for high-density deployments; respond to replica crashes with proper health-check and restart configuration; and read the Prometheus metrics that expose Serve's internal state. We will build our intuition against a running RAG pipeline example that grows from a single deployment into a full seven-stage serving graph.
 
-This post is part of the [Model Deployment and Serving series](/blog/machine-learning/model-serving/what-is-model-serving). If you are new to the SLO triangle (latency, throughput, cost) or the basics of batching and queueing theory, read the [batching fundamentals post](/blog/machine-learning/model-serving/batching-fundamentals-latency-throughput-tradeoff) first. The concepts there — Little's Law, batch formation latency budgets, max-batch-size tuning — all apply directly to `@serve.batch` configuration. If your use case is primarily LLM serving without pipeline composition, the [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) is more directly applicable.
+This post is part of the [Model Deployment and Serving series](/blog/machine-learning/model-serving/what-is-model-serving). If you are new to the SLO triangle (latency, throughput, cost) or the basics of batching and queueing theory, read the [batching fundamentals post](/blog/machine-learning/model-serving/batching-fundamentals-latency-throughput-tradeoff) first. The concepts there — Little's Law, batch formation latency budgets, max-batch-size tuning — all apply directly to `@serve.batch` configuration. If your use case is primarily LLM serving without pipeline composition, the [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) is more directly applicable.
 
 ## 1. The Ray execution model: actors, tasks, and the object store
 
@@ -1536,9 +1536,9 @@ The VQA system runs the CPU-bound image preprocessing on 4 cheap replicas, CLIP 
 ## Further reading
 
 - [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — the SLO triangle (latency, throughput, cost) that motivates every design decision in this post
-- [Triton Inference Server deep dive](/blog/machine-learning/model-serving/triton-inference-server-deep-dive) — when maximum GPU throughput from a single model is the priority; Triton's ensemble pipelines as the alternative to Serve for C++-friendly workloads
+- [Triton Inference Server deep dive](/blog/machine-learning/inference-frameworks/triton-inference-server-deep-dive) — when maximum GPU throughput from a single model is the priority; Triton's ensemble pipelines as the alternative to Serve for C++-friendly workloads
 - [Batching fundamentals: latency-throughput tradeoffs](/blog/machine-learning/model-serving/batching-fundamentals-latency-throughput-tradeoff) — Little's Law and the queuing theory behind why batching works; how to derive the optimal `max_batch_size` for your SLA
-- [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) — PagedAttention, continuous batching, prefix caching, and speculative decoding; the right engine to wrap inside a Ray Serve deployment for LLM workloads
+- [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) — PagedAttention, continuous batching, prefix caching, and speculative decoding; the right engine to wrap inside a Ray Serve deployment for LLM workloads
 - [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — the series capstone: a full decision tree from model type to production serving stack, with Ray Serve's position in the landscape
 - Ray Serve official documentation at `docs.ray.io/en/latest/serve/` — comprehensive reference for all autoscaling config parameters, deployment options, and advanced features including gRPC support and multi-application namespacing
 - "Ray: A Distributed Framework for Emerging AI Applications" (Moritz et al., OSDI 2018) — the foundational paper describing the actor model and object store that Ray Serve builds on

@@ -196,7 +196,7 @@ Effective batch size stays high throughout. GPU utilization goes from ~20-40% (s
 
 **Implementations:** vLLM pioneered this pattern. TGI, SGLang, TensorRT-LLM, Triton — they all have it. If you're running LLMs in production with anything else, you're leaving massive throughput on the table.
 
-See the [vLLM Inference](/blog/machine-learning/large-language-model/vllm-inference) and [SGLang Inference](/blog/machine-learning/large-language-model/sglang-inference) articles for hands-on guides.
+See the [vLLM Inference](/blog/machine-learning/inference-frameworks/vllm-inference) and [SGLang Inference](/blog/machine-learning/inference-frameworks/sglang-inference) articles for hands-on guides.
 
 ## Part 5: PagedAttention — Virtual Memory for the KV Cache
 
@@ -324,8 +324,8 @@ Deep dives on specific topics:
 - [KV Cache in LLMs: A Complete Guide](/blog/machine-learning/large-language-model/kv-cache)
 - [Quantization in LLMs](/blog/machine-learning/large-language-model/quantization-in-llm)
 - [Speculative Decoding: A Complete Guide](/blog/machine-learning/large-language-model/speculative-decoding)
-- [vLLM Inference Guide](/blog/machine-learning/large-language-model/vllm-inference)
-- [SGLang Inference Guide](/blog/machine-learning/large-language-model/sglang-inference)
+- [vLLM Inference Guide](/blog/machine-learning/inference-frameworks/vllm-inference)
+- [SGLang Inference Guide](/blog/machine-learning/inference-frameworks/sglang-inference)
 
 Foundational papers:
 - *FlashAttention* (Dao et al., 2022) and *FlashAttention-2/3* follow-ups

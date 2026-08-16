@@ -451,7 +451,7 @@ spec:
             limits: { nvidia.com/gpu: "8" }
 ```
 
-Read the three fields that carry the design. `size: 2` says each replica is a two-pod group (leader + one worker) and therefore spans two nodes — a TP8 × PP2 engine. `replicas: 2` says run two such groups, giving you two independent replicas behind a service for high availability and DP throughput. And `RecreateGroupOnPodRestart` is the fault-tolerance keystone: if any pod in a group dies, LWS tears down and recreates the *entire* group, because a half-alive NCCL communicator is worse than a cleanly restarted one. LWS also injects `LWS_LEADER_ADDRESS` into every worker so the Ray join address is discovered automatically, and it gang-schedules the group so you never end up with a leader running and a worker stuck `Pending` for want of a GPU. Front the two replicas with a standard `Service`, and route across them with a length- or load-aware balancer as covered in the control-plane sibling post on [LLM control planes](/blog/machine-learning/model-serving/llm-control-planes-aibrix-kserve).
+Read the three fields that carry the design. `size: 2` says each replica is a two-pod group (leader + one worker) and therefore spans two nodes — a TP8 × PP2 engine. `replicas: 2` says run two such groups, giving you two independent replicas behind a service for high availability and DP throughput. And `RecreateGroupOnPodRestart` is the fault-tolerance keystone: if any pod in a group dies, LWS tears down and recreates the *entire* group, because a half-alive NCCL communicator is worse than a cleanly restarted one. LWS also injects `LWS_LEADER_ADDRESS` into every worker so the Ray join address is discovered automatically, and it gang-schedules the group so you never end up with a leader running and a worker stuck `Pending` for want of a GPU. Front the two replicas with a standard `Service`, and route across them with a length- or load-aware balancer as covered in the control-plane sibling post on [LLM control planes](/blog/machine-learning/inference-frameworks/llm-control-planes-aibrix-kserve).
 
 ## 8. Fault tolerance: when a node dies mid-serve
 
@@ -679,7 +679,7 @@ Multi-node serving is powerful and expensive, and the most important skill is kn
 - [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — the SLO triangle and the serving-vs-training distinction this whole series builds on.
 - [Tensor, pipeline, and expert parallelism for serving](/blog/machine-learning/model-serving/tensor-pipeline-expert-parallelism-for-serving) — the mechanics of each parallelism axis, taken as given here.
 - [Prefill-decode disaggregation](/blog/machine-learning/model-serving/prefill-decode-disaggregation) — why prefill and decode run on different node counts, as in the DeepSeek case study.
-- [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) — the engine internals, `EngineArgs`, and single-node parallelism that multi-node builds on.
+- [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) — the engine internals, `EngineArgs`, and single-node parallelism that multi-node builds on.
 - [3D parallelism](/blog/machine-learning/distributed-training/3d-parallelism) — how TP, PP, and DP compose onto a device mesh, from the training side.
 - DeepSeek-AI, "DeepSeek-V3 Technical Report" (2024) — §3.4 and §5 document the prefill/decode node counts, EP320 decode, and MLA KV cache.
 - Dubey et al., "The Llama 3 Herd of Models" (Meta, 2024) — the 405B architecture and precision options.

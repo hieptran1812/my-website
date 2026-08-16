@@ -5,7 +5,7 @@ publishDate: "2026-05-17"
 description: "A practitioner's deep dive into what a .onnx file actually contains, how ONNX Runtime compiles and partitions it, why exports silently break, and where ONNX wins or loses against TensorRT and vLLM."
 tags: ["onnx", "onnx-runtime", "inference", "model-deployment", "quantization", "execution-providers", "tensorrt", "pytorch", "mlops", "llm-serving"]
 category: "machine-learning"
-subcategory: "MLOps"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 50

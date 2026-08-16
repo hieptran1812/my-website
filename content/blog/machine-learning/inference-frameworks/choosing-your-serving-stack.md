@@ -19,7 +19,7 @@ tags:
     "decision-framework",
   ]
 category: "machine-learning"
-subcategory: "Model Serving"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 55
@@ -30,7 +30,7 @@ Six months into a production serving rollout, a team I know found themselves mai
 
 The problem was not bad engineering. It was a framework selection process that happened one model at a time, without a coherent decision framework. Each stack was the right choice for the context in which it was added. But the contexts never got reconciled into a unified serving architecture.
 
-This post is the capstone of Track B in the Model Deployment and Serving series. If you have read [TorchServe](/blog/machine-learning/model-serving/torchserve-deep-dive), [Triton IS](/blog/machine-learning/model-serving/triton-inference-server-deep-dive), [ONNX Runtime](/blog/machine-learning/model-serving/onnx-runtime-for-serving), [Ray Serve](/blog/machine-learning/model-serving/ray-serve-deep-dive), and [BentoML](/blog/machine-learning/model-serving/bentoml-and-mlserver) — you know what each framework does. What you need now is a method for choosing between them before you commit infrastructure, before you write config, before you train your on-call rotation on a new alerting surface. By the end of this post you will have a scoring matrix, a decision tree, a quantitative benchmark table, and concrete migration paths. You will also know the hidden costs that every framework buries in its documentation footnotes.
+This post is the capstone of Track B in the Model Deployment and Serving series. If you have read [TorchServe](/blog/machine-learning/inference-frameworks/torchserve-deep-dive), [Triton IS](/blog/machine-learning/inference-frameworks/triton-inference-server-deep-dive), [ONNX Runtime](/blog/machine-learning/inference-frameworks/onnx-runtime-for-serving), [Ray Serve](/blog/machine-learning/inference-frameworks/ray-serve-deep-dive), and [BentoML](/blog/machine-learning/inference-frameworks/bentoml-and-mlserver) — you know what each framework does. What you need now is a method for choosing between them before you commit infrastructure, before you write config, before you train your on-call rotation on a new alerting surface. By the end of this post you will have a scoring matrix, a decision tree, a quantitative benchmark table, and concrete migration paths. You will also know the hidden costs that every framework buries in its documentation footnotes.
 
 The SLO triangle — latency, throughput, cost — is the organizing principle for every choice in this post. Each framework is a set of bets on where to trade on that triangle. Making the choice consciously means quantifying those bets before you commit.
 
@@ -1037,6 +1037,6 @@ Finally, resist the temptation to build your own serving framework from scratch 
 - **TorchServe documentation**: `pytorch.org/serve/`. Handler API reference, management API, metrics configuration, and the `.mar` archive format.
 - **Little's Law and Queueing Theory for Engineers**: Cooper (1981), "Introduction to Queueing Theory." The mathematical foundation for the SLO-aware capacity planning models in this post.
 - [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — series introduction, the SLO triangle, and the latency/throughput/cost framework that underpins all framework choices.
-- [Triton Inference Server deep dive](/blog/machine-learning/model-serving/triton-inference-server-deep-dive) — detailed coverage of `config.pbtxt`, ensemble pipelines, and dynamic batching configuration.
-- [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) — chunked prefill, prefix caching, and speculative decoding internals that explain vLLM's throughput advantage.
+- [Triton Inference Server deep dive](/blog/machine-learning/inference-frameworks/triton-inference-server-deep-dive) — detailed coverage of `config.pbtxt`, ensemble pipelines, and dynamic batching configuration.
+- [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) — chunked prefill, prefix caching, and speculative decoding internals that explain vLLM's throughput advantage.
 - [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — series capstone: full decision tree from model type to production architecture, including the multi-framework patterns introduced in this post.

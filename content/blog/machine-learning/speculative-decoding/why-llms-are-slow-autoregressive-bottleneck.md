@@ -958,7 +958,7 @@ The remaining seven posts will build from this foundation:
 - Post 7 covers tree speculation for maximizing tokens-per-verify-pass
 - Post 8 covers production deployment in vLLM and SGLang with real benchmark numbers
 
-For the complete inference optimization context, see [Efficient LLM inference techniques](/blog/machine-learning/large-language-model/efficient-llm-inference-techniques) and [Optimizing LLM inference](/blog/machine-learning/large-language-model/optimizing-llm-inference-complete-guide). The [vLLM serving guide](/blog/machine-learning/large-language-model/vllm-inference) and [SGLang inference guide](/blog/machine-learning/large-language-model/sglang-inference) cover the production serving layer that speculative decoding plugs into.
+For the complete inference optimization context, see [Efficient LLM inference techniques](/blog/machine-learning/large-language-model/efficient-llm-inference-techniques) and [Optimizing LLM inference](/blog/machine-learning/large-language-model/optimizing-llm-inference-complete-guide). The [vLLM serving guide](/blog/machine-learning/inference-frameworks/vllm-inference) and [SGLang inference guide](/blog/machine-learning/inference-frameworks/sglang-inference) cover the production serving layer that speculative decoding plugs into.
 
 
 ## Case Studies

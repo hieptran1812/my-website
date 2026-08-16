@@ -19,7 +19,7 @@ tags:
     "llm-serving",
   ]
 category: "machine-learning"
-subcategory: "Model Serving"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 52
@@ -32,7 +32,7 @@ vLLM scales across nodes beautifully. What does not scale is stretching a single
 
 ![Two 8-GPU nodes forming one 16-GPU vLLM engine, with tensor-parallel shards inside each node on NVLink and a single pipeline stage boundary crossing between nodes](/imgs/blogs/running-vllm-distributed-in-production-1.webp)
 
-This post is the hands-on companion to the architecture write-up. Where the [vLLM distributed architecture anatomy](/blog/machine-learning/model-serving/vllm-distributed-architecture-anatomy) explains what the executor, the workers, and the coordinator *are*, this one is about *running the thing*: which parallelism to pick and why, the exact `vllm serve` flags for one node and for many, both ways of standing up a multi-node cluster (a Ray cluster and vLLM's native data-parallel launcher), the container flags that keep NCCL from deadlocking, a Kubernetes `LeaderWorkerSet` that launches a multi-node replica as one logical unit, and a verification routine that tells you the engine is actually healthy rather than merely running. Every technique lands back on the serving SLO triangle — **latency ↔ throughput ↔ cost** — because every parallelism knob is a trade on that triangle. By the end you will be able to look at a model size and a hardware inventory and write down the `TP × PP × DP` layout that fits, respects the NVLink boundary, and hits your SLO, then launch and verify it from a cold cluster.
+This post is the hands-on companion to the architecture write-up. Where the [vLLM distributed architecture anatomy](/blog/machine-learning/inference-frameworks/vllm-distributed-architecture-anatomy) explains what the executor, the workers, and the coordinator *are*, this one is about *running the thing*: which parallelism to pick and why, the exact `vllm serve` flags for one node and for many, both ways of standing up a multi-node cluster (a Ray cluster and vLLM's native data-parallel launcher), the container flags that keep NCCL from deadlocking, a Kubernetes `LeaderWorkerSet` that launches a multi-node replica as one logical unit, and a verification routine that tells you the engine is actually healthy rather than merely running. Every technique lands back on the serving SLO triangle — **latency ↔ throughput ↔ cost** — because every parallelism knob is a trade on that triangle. By the end you will be able to look at a model size and a hardware inventory and write down the `TP × PP × DP` layout that fits, respects the NVLink boundary, and hits your SLO, then launch and verify it from a cold cluster.
 
 ## 1. The three axes, and where each one is allowed to live
 
@@ -150,7 +150,7 @@ A few things are happening here that are worth understanding rather than copying
 
 **`--gpu-memory-utilization` pins the KV pool.** vLLM computes how much HBM is left after weights and CUDA overhead, multiplies by $\gamma$, and pre-allocates that as the paged KV cache. Setting it too high (0.97, 0.98) leaves no room for the transient spikes of long-context prefill and gets you a mid-traffic OOM; too low wastes cache. 0.90 is a sane starting point; tune down if you see OOM under prefill-heavy load.
 
-**Prefix caching and chunked prefill are nearly free wins.** Prefix caching reuses the KV of shared prompt prefixes (system prompts, few-shot examples) across requests; chunked prefill interleaves prefill chunks with decode steps so a long prompt does not stall everyone else's token generation. Both are toggles, both help almost every workload, and they are covered in depth in the [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive).
+**Prefix caching and chunked prefill are nearly free wins.** Prefix caching reuses the KV of shared prompt prefixes (system prompts, few-shot examples) across requests; chunked prefill interleaves prefill chunks with decode steps so a long prompt does not stall everyone else's token generation. Both are toggles, both help almost every workload, and they are covered in depth in the [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive).
 
 The whole deployment, from the HTTP entry point down to the silicon, is the same six layers regardless of scale. Only the orchestration layer — the thing that spawns and connects the worker processes — changes as you go from one node to many.
 
@@ -379,7 +379,7 @@ The symptoms map to causes with surprising reliability, so keep this table near 
 | Worker cannot reach coordinator | RPC port blocked or wrong `--data-parallel-address` | open `--data-parallel-rpc-port`; verify the fabric IP |
 | One rank OOMs, others fine | uneven layer split or a rank missing its KV pool | check even GPU memory; verify NIC/HBM on the heavy rank |
 
-For the systematic version of diagnosing these hangs — reading the NCCL logs, isolating the bad NIC, catching a firewall drop on the RPC port — see the sibling runbook on [debugging vLLM distributed serving](/blog/machine-learning/model-serving/debugging-vllm-distributed-serving).
+For the systematic version of diagnosing these hangs — reading the NCCL logs, isolating the bad NIC, catching a firewall drop on the RPC port — see the sibling runbook on [debugging vLLM distributed serving](/blog/machine-learning/inference-frameworks/debugging-vllm-distributed-serving).
 
 ## 9. Containerizing for reproducibility
 
@@ -664,6 +664,6 @@ The rules that survive contact with production, in one place:
 - vLLM documentation, "Distributed Inference and Serving" — the canonical reference for `--tensor-parallel-size`, `--pipeline-parallel-size`, the Ray `run_cluster.sh` pattern, and the container flags.
 - Ray documentation, "Ray Clusters" — how `ray start --head` / `--address` form the pool vLLM places workers into.
 - LeaderWorkerSet (`sigs.k8s.io/lws`) — the Kubernetes API for multi-pod, single-replica workloads like a multi-node inference engine.
-- [vLLM distributed architecture anatomy](/blog/machine-learning/model-serving/vllm-distributed-architecture-anatomy) — the companion post on what the executor, workers, and coordinator are and how a request flows through them.
+- [vLLM distributed architecture anatomy](/blog/machine-learning/inference-frameworks/vllm-distributed-architecture-anatomy) — the companion post on what the executor, workers, and coordinator are and how a request flows through them.
 - [Tensor, pipeline, and expert parallelism for serving](/blog/machine-learning/model-serving/tensor-pipeline-expert-parallelism-for-serving) — the first-principles derivation of the all-reduce tax, the pipeline bubble, and the layout math.
-- [Debugging vLLM distributed serving](/blog/machine-learning/model-serving/debugging-vllm-distributed-serving) — the runbook for when bring-up hangs: reading NCCL logs, isolating the bad NIC, catching firewall drops.
+- [Debugging vLLM distributed serving](/blog/machine-learning/inference-frameworks/debugging-vllm-distributed-serving) — the runbook for when bring-up hangs: reading NCCL logs, isolating the bad NIC, catching firewall drops.

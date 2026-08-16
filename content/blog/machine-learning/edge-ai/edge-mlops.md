@@ -518,7 +518,7 @@ $$
 
 a **10× reduction** to ~98 GB of fleet egress. The manifest in Pillar 2 advertised a 38,912-byte delta against build 411 — same order of magnitude, the difference being how much of the network the optimization recipe actually perturbed. A pruning change that drops whole channels moves *more* bytes than a light fine-tune, so the delta size is itself a useful signal about how aggressive a recipe change was.
 
-For a [large on-device LLM](/blog/machine-learning/edge-ai/running-llms-locally-llama-cpp-and-gguf) the stakes are different by orders of magnitude. A 4 GB GGUF artifact over 4 million devices is 16 PB of egress at full ship — completely infeasible. Here deltas are not an optimization, they are the *only* way to update at all, and you design the recipe so that updates touch as few weight blocks as possible (e.g. ship a LoRA-style adapter delta rather than re-quantizing the whole base). The size math is what forces that architectural decision.
+For a [large on-device LLM](/blog/machine-learning/inference-frameworks/running-llms-locally-llama-cpp-and-gguf) the stakes are different by orders of magnitude. A 4 GB GGUF artifact over 4 million devices is 16 PB of egress at full ship — completely infeasible. Here deltas are not an optimization, they are the *only* way to update at all, and you design the recipe so that updates touch as few weight blocks as possible (e.g. ship a LoRA-style adapter delta rather than re-quantizing the whole base). The size math is what forces that architectural decision.
 
 #### Worked example: a staged rollout catches a regression at 10%
 

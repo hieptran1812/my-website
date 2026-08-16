@@ -555,7 +555,7 @@ Use this protocol when you are comparing engine commits, scheduler policies, mod
 
 Do not use a full open-loop sweep to answer a one-kernel correctness question. Use a synchronized microbenchmark and a reference output. Do not use a closed-loop number to size a public endpoint. Do not quote a reader-expected range as a result. Do not lock clocks without permission on shared infrastructure. Do not add more decimals than the experiment supports.
 
-For production comparison, use vLLM as a benchmark target or contrast, not as documentation to copy. A mature engine has scheduling, paged cache management, tokenizer paths, streaming, and observability that a small `nanoserve` adapter may not. The question is where the gap comes from. The [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) is a useful external comparison; the [inference engineering playbook](/blog/machine-learning/inference-engineering/the-inference-engineering-playbook) will later assemble the honest gap table.
+For production comparison, use vLLM as a benchmark target or contrast, not as documentation to copy. A mature engine has scheduling, paged cache management, tokenizer paths, streaming, and observability that a small `nanoserve` adapter may not. The question is where the gap comes from. The [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) is a useful external comparison; the [inference engineering playbook](/blog/machine-learning/inference-engineering/the-inference-engineering-playbook) will later assemble the honest gap table.
 
 ## 12. The runbook for a trustworthy sweep
 

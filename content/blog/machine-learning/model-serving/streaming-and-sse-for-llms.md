@@ -34,7 +34,7 @@ Figure 1 shows the complete streaming request lifecycle — from the HTTP POST a
 
 ![Streaming request lifecycle from prefill to rendered token](/imgs/blogs/streaming-and-sse-for-llms-1.png)
 
-By the end of this post you will be able to build a production-grade LLM streaming endpoint, handle every failure mode from client disconnects to backpressure stalls, and make the architecture decision between SSE and gRPC for your use case. This post is part of the [Model Deployment and Serving series](/blog/machine-learning/model-serving/what-is-model-serving). It builds on the [continuous batching and PagedAttention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention) post (which explains why vLLM's scheduler generates tokens the way it does) and the [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) (which covers prefix caching, chunked prefill, and the async engine internals we call here). If you are evaluating whether to stream at all for your use case, start with [model serving SLAs and metrics](/blog/machine-learning/model-serving/model-serving-slas-and-metrics), which defines TTFT and TPOT in the context of your SLO design.
+By the end of this post you will be able to build a production-grade LLM streaming endpoint, handle every failure mode from client disconnects to backpressure stalls, and make the architecture decision between SSE and gRPC for your use case. This post is part of the [Model Deployment and Serving series](/blog/machine-learning/model-serving/what-is-model-serving). It builds on the [continuous batching and PagedAttention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention) post (which explains why vLLM's scheduler generates tokens the way it does) and the [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) (which covers prefix caching, chunked prefill, and the async engine internals we call here). If you are evaluating whether to stream at all for your use case, start with [model serving SLAs and metrics](/blog/machine-learning/model-serving/model-serving-slas-and-metrics), which defines TTFT and TPOT in the context of your SLO design.
 
 
 
@@ -1149,7 +1149,7 @@ async function sendMessage(userText) {
 }
 ```
 
-On the server side, if you are using vLLM with continuous batching, each multi-turn turn is a new generation request with the full serialized context. The KV cache from previous turns is not reused by default (unless you enable prefix caching). With [prefix caching](/blog/machine-learning/model-serving/vllm-deep-dive) enabled in vLLM, repeated context prefixes (system prompt + conversation history) are cached, dramatically reducing TTFT for later turns in a long conversation.
+On the server side, if you are using vLLM with continuous batching, each multi-turn turn is a new generation request with the full serialized context. The KV cache from previous turns is not reused by default (unless you enable prefix caching). With [prefix caching](/blog/machine-learning/inference-frameworks/vllm-deep-dive) enabled in vLLM, repeated context prefixes (system prompt + conversation history) are cached, dramatically reducing TTFT for later turns in a long conversation.
 
 #### Worked example: multi-turn context growth and TTFT impact
 
@@ -1159,7 +1159,7 @@ Suppose a system prompt is 200 tokens and each user/assistant turn averages 150 
 - Without prefix caching on H100 SXM5: TTFT ≈ $1{,}700 \times 0.22$ ms $\approx 374$ ms
 - With prefix caching (all but last turn cached): TTFT ≈ $(150) \times 0.22$ ms $\approx 33$ ms + cache lookup
 
-The 11× TTFT reduction from prefix caching makes multi-turn conversations feel qualitatively more responsive by the 5th–10th turn. Without it, TTFT grows linearly with conversation length, eventually crossing the 1-second threshold that feels "slow" to users. See [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) for prefix caching configuration details.
+The 11× TTFT reduction from prefix caching makes multi-turn conversations feel qualitatively more responsive by the 5th–10th turn. Without it, TTFT grows linearly with conversation length, eventually crossing the 1-second threshold that feels "slow" to users. See [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) for prefix caching configuration details.
 
 ### 10.1 Server-side session state for multi-turn streaming
 
@@ -1729,6 +1729,6 @@ To close out this section, here are the five most common streaming implementatio
 - [MDN Web Docs: Server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) — authoritative SSE protocol reference including `Last-Event-ID` reconnect behavior.
 - [gRPC Python Async API](https://grpc.github.io/grpc/python/grpc_asyncio.html) — server streaming servicer patterns.
 - **Series: [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving)** — the foundation: latency/throughput/cost SLO triangle.
-- **Series: [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive)** — chunked prefill, prefix caching, speculative decoding: the engine that drives the streaming generator.
-- **Series: [Text Generation Inference deep dive](/blog/machine-learning/model-serving/text-generation-inference-deep-dive)** — TGI's token streaming implementation and Flash Attention integration.
+- **Series: [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive)** — chunked prefill, prefix caching, speculative decoding: the engine that drives the streaming generator.
+- **Series: [Text Generation Inference deep dive](/blog/machine-learning/inference-frameworks/text-generation-inference-deep-dive)** — TGI's token streaming implementation and Flash Attention integration.
 - **Series: [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving)** — capstone: complete decision tree from notebook to production.

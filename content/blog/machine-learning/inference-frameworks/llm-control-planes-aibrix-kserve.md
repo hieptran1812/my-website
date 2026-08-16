@@ -17,7 +17,7 @@ tags:
     "kubernetes",
   ]
 category: "machine-learning"
-subcategory: "Model Serving"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 53
@@ -400,7 +400,7 @@ Here is the same comparison in prose-table form, with a bit more detail than the
 | Governance | vLLM project | CNCF incubating | Red Hat + partners | NVIDIA |
 | Best when | Want it all, LLM-only | Mixed model portfolio | Standards-based assembly | Frontier multi-node scale |
 
-A useful way to hold these in your head: KServe is the *platform* (serves everything, LLMs included), llm-d is the *standards-based assembly* of LLM primitives, AIBrix is the *opinionated LLM-first platform*, and Dynamo is the *disaggregation engine*. They overlap and increasingly interoperate — Dynamo's NIXL shows up inside llm-d, and KServe drives llm-d — because they all sit on the same foundation (vLLM engines, Kubernetes, the Gateway API) and converge on the same signals (KV locality, queue depth, adapters). Choosing among them is less "which is best" and more "which center of gravity matches my problem," which is the same lens the [choosing your serving stack](/blog/machine-learning/model-serving/choosing-your-serving-stack) post applies to the engine layer.
+A useful way to hold these in your head: KServe is the *platform* (serves everything, LLMs included), llm-d is the *standards-based assembly* of LLM primitives, AIBrix is the *opinionated LLM-first platform*, and Dynamo is the *disaggregation engine*. They overlap and increasingly interoperate — Dynamo's NIXL shows up inside llm-d, and KServe drives llm-d — because they all sit on the same foundation (vLLM engines, Kubernetes, the Gateway API) and converge on the same signals (KV locality, queue depth, adapters). Choosing among them is less "which is best" and more "which center of gravity matches my problem," which is the same lens the [choosing your serving stack](/blog/machine-learning/inference-frameworks/choosing-your-serving-stack) post applies to the engine layer.
 
 ### A KServe InferenceService, end to end
 
@@ -731,4 +731,4 @@ A pragmatic adoption path: start with least-request routing (cheapest, biggest v
 - **llm-d** — the project site (`llm-d.ai`) and Red Hat's "Kubernetes-native distributed inferencing" articles on KV-cache-aware routing and disaggregated prefill/decode.
 - **NVIDIA Dynamo** — the NVIDIA technical blog "Introducing NVIDIA Dynamo" and the Dynamo 1.0 production writeup, covering the Smart Router, SLO Planner, KV Block Manager, and NIXL.
 - **Mitzenmacher, M.**, *The Power of Two Choices in Randomized Load Balancing* (1996/2001) and **Azar, Broder, Karlin, Upfal**, *Balanced Allocations* (1994) — the queuing theory behind why load-aware routing beats round-robin.
-- Within this series: [what is model serving](/blog/machine-learning/model-serving/what-is-model-serving), [prefix caching and RadixAttention](/blog/machine-learning/model-serving/prefix-caching-and-radixattention), [multi-LoRA and adapter serving](/blog/machine-learning/model-serving/multi-lora-and-adapter-serving), [GPU scheduling, MIG, and autoscaling](/blog/machine-learning/model-serving/gpu-scheduling-mig-and-autoscaling), and [choosing your serving stack](/blog/machine-learning/model-serving/choosing-your-serving-stack).
+- Within this series: [what is model serving](/blog/machine-learning/model-serving/what-is-model-serving), [prefix caching and RadixAttention](/blog/machine-learning/model-serving/prefix-caching-and-radixattention), [multi-LoRA and adapter serving](/blog/machine-learning/model-serving/multi-lora-and-adapter-serving), [GPU scheduling, MIG, and autoscaling](/blog/machine-learning/model-serving/gpu-scheduling-mig-and-autoscaling), and [choosing your serving stack](/blog/machine-learning/inference-frameworks/choosing-your-serving-stack).

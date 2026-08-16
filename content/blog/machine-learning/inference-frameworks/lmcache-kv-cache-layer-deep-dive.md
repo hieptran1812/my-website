@@ -18,7 +18,7 @@ tags:
     "open-source-library",
   ]
 category: "machine-learning"
-subcategory: "Open Source Library"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 51

@@ -17,7 +17,7 @@ tags:
     "deep-learning",
   ]
 category: "machine-learning"
-subcategory: "Model Serving"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 50
@@ -1352,7 +1352,7 @@ The cost-per-inference is identical — you are just running both on one GPU ins
 **Triton loses when**:
 
 - You are serving LLMs above approximately 20 concurrent requests. PagedAttention, continuous batching, and per-request KV cache memory management are not natively supported in Triton's scheduler. The vLLM backend is experimental and bypasses Triton's scheduler entirely for LLM workloads. Use vLLM or TGI directly. See [continuous batching and PagedAttention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention) for the full explanation.
-- You have a single simple model that will never share a GPU with others. TorchServe ([TorchServe deep dive](/blog/machine-learning/model-serving/torchserve-deep-dive)) is simpler to configure, has a cleaner model archive format, and a management API that supports dynamic loading without protobuf configs.
+- You have a single simple model that will never share a GPU with others. TorchServe ([TorchServe deep dive](/blog/machine-learning/inference-frameworks/torchserve-deep-dive)) is simpler to configure, has a cleaner model archive format, and a management API that supports dynamic loading without protobuf configs.
 - Your team is Python-only and has no appetite for protobuf configs and `config.pbtxt` debugging. Misconfigured tensor shapes in `config.pbtxt` cause cryptic CUDA errors at runtime that are hard to diagnose without experience.
 - You need dynamic input shapes at high throughput — variable-length sequences of widely varying lengths, variable-resolution images. Triton supports dynamic shapes via TRT optimization profiles and ONNX symbolic dims, but performance degrades compared to fixed shapes, and the configuration complexity is substantial.
 - You are deploying to CPU-only environments or edge hardware. Triton's GPU-focused design makes it heavier than needed for CPU serving; ONNX Runtime standalone or OpenVINO Model Server are better fits.
@@ -1440,7 +1440,7 @@ This checklist has prevented more 3 AM pages than any other single artifact in T
 - **NVIDIA TensorRT documentation**: [https://docs.nvidia.com/deeplearning/tensorrt/](https://docs.nvidia.com/deeplearning/tensorrt/) — TRT builder API, INT8 calibration workflow, engine optimization reference, and the `trtexec` flag reference.
 - **MLPerf Inference benchmark results**: [https://mlcommons.org/en/inference-edge-21/](https://mlcommons.org/en/inference-edge-21/) — published throughput and latency numbers for ResNet, BERT, and other models across GPU hardware tiers under MLPerf's standardized benchmark methodology.
 - [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — series introduction covering the SLO triangle and the full serving stack, with framework comparisons.
-- [TorchServe deep dive](/blog/machine-learning/model-serving/torchserve-deep-dive) — companion post on TorchServe's single-model strengths versus Triton's multi-model architecture.
-- [ONNX Runtime for serving](/blog/machine-learning/model-serving/onnx-runtime-for-serving) — deep dive on ORT execution providers, session options, and optimization graph transforms.
+- [TorchServe deep dive](/blog/machine-learning/inference-frameworks/torchserve-deep-dive) — companion post on TorchServe's single-model strengths versus Triton's multi-model architecture.
+- [ONNX Runtime for serving](/blog/machine-learning/inference-frameworks/onnx-runtime-for-serving) — deep dive on ORT execution providers, session options, and optimization graph transforms.
 - [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — series capstone: full decision tree from trained model to production deployment, summarizing when each framework wins.
-- [Choosing your serving stack](/blog/machine-learning/model-serving/choosing-your-serving-stack) — decision matrix post: Triton vs Ray Serve vs TorchServe vs vLLM, with workload-specific recommendations and migration paths between frameworks.
+- [Choosing your serving stack](/blog/machine-learning/inference-frameworks/choosing-your-serving-stack) — decision matrix post: Triton vs Ray Serve vs TorchServe vs vLLM, with workload-specific recommendations and migration paths between frameworks.

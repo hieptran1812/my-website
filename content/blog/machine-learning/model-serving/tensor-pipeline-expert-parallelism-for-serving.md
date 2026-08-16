@@ -478,7 +478,7 @@ text-generation-launcher \
     --port 8080
 ```
 
-TGI's `--num-shard` is tensor parallelism only; for models that exceed a node you combine TGI shards with an external router doing data-parallel load balancing, or reach for a framework with native pipeline parallelism. The deeper TGI internals — flash attention, continuous batching, token streaming — are covered in [the TGI deep dive](/blog/machine-learning/model-serving/text-generation-inference-deep-dive).
+TGI's `--num-shard` is tensor parallelism only; for models that exceed a node you combine TGI shards with an external router doing data-parallel load balancing, or reach for a framework with native pipeline parallelism. The deeper TGI internals — flash attention, continuous batching, token streaming — are covered in [the TGI deep dive](/blog/machine-learning/inference-frameworks/text-generation-inference-deep-dive).
 
 For a model that is tight even when sharded, TGI combines `--num-shard` with a quantization flag so the per-shard weights shrink further:
 

@@ -172,7 +172,7 @@ class DenseMoE(nn.Module):
         return out
 ```
 
-The `for e in range(num_experts)` loop is the shape of every MoE kernel: it is a **grouped GEMM**, a batch of matmuls where each expert's matmul has a different, data-dependent number of rows. On one GPU the cost of this layer is proportional to the *total* tokens times $k$ (each token does $k$ experts' worth of FFN), not to the number of experts — that is the FLOP saving, made concrete. The [grouped-GEMM MoE kernel post](/blog/machine-learning/model-serving/vllm-deep-dive) in the model-serving series goes deeper on how a real kernel fuses that loop; here the loop is the reference we will check the parallel version against.
+The `for e in range(num_experts)` loop is the shape of every MoE kernel: it is a **grouped GEMM**, a batch of matmuls where each expert's matmul has a different, data-dependent number of rows. On one GPU the cost of this layer is proportional to the *total* tokens times $k$ (each token does $k$ experts' worth of FFN), not to the number of experts — that is the FLOP saving, made concrete. The [grouped-GEMM MoE kernel post](/blog/machine-learning/inference-frameworks/vllm-deep-dive) in the model-serving series goes deeper on how a real kernel fuses that loop; here the loop is the reference we will check the parallel version against.
 
 ---
 

@@ -930,6 +930,6 @@ The next post in this series takes a step back from EAGLE's specific architectur
 Cross-links for deeper reading:
 - [KV cache mechanics](/blog/machine-learning/large-language-model/kv-cache) — prerequisite to understanding tree-attention overhead and the KV block extensions needed for speculative positions
 - [Efficient LLM inference techniques](/blog/machine-learning/large-language-model/efficient-llm-inference-techniques) — how EAGLE fits into the broader inference optimization landscape alongside quantization and batching
-- [vLLM serving architecture](/blog/machine-learning/large-language-model/vllm-inference) — EAGLE's integration with continuous batching and paged KV management in vLLM ≥ 0.4
-- [SGLang inference](/blog/machine-learning/large-language-model/sglang-inference) — EAGLE + RadixAttention prefix caching and the combined latency model
+- [vLLM serving architecture](/blog/machine-learning/inference-frameworks/vllm-inference) — EAGLE's integration with continuous batching and paged KV management in vLLM ≥ 0.4
+- [SGLang inference](/blog/machine-learning/inference-frameworks/sglang-inference) — EAGLE + RadixAttention prefix caching and the combined latency model
 - [Optimizing LLM inference: complete guide](/blog/machine-learning/large-language-model/optimizing-llm-inference-complete-guide) — where EAGLE fits in the full optimization stack alongside quantization, tensor parallelism, and Flash Attention

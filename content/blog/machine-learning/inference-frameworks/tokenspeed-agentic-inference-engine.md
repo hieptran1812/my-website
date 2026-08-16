@@ -3,7 +3,7 @@ title: "TokenSpeed: Inside a Speed-of-Light Inference Engine for Agentic Workloa
 publishDate: "2026-06-13"
 date: "2026-06-13"
 category: "machine-learning"
-subcategory: "Open Source Library"
+subcategory: "Inference Frameworks"
 tags:
   - tokenspeed
   - llm-inference
@@ -251,7 +251,7 @@ It is worth noticing what is in that API list beyond attention, because it tells
 
 ### Second-order effect: portability is a fallback, not a tax
 
-The thing to appreciate is the *ordering*. A lot of "portable" frameworks pay a permanent performance tax to run everywhere — they target the lowest common denominator and never beat a hand-tuned vendor kernel. TokenSpeed inverts this: portability (Triton) is the **fallback** that guarantees coverage, while the **fast path is always a specialized kernel** (CuteDSL, Gluon, or a vendor wrap) when one exists for your silicon and shape. You get vLLM-level "it just runs" usability from the Triton floor and TensorRT-LLM-level speed from the specialized ceiling, selected automatically. The cost is a larger kernel matrix to maintain and test — which is exactly why the PyTorch reference implementations and the `@register_kernel` selection harness exist. For a comparison point on how a fully vendor-specific compiler approaches the same problem, see the deep dive on [TensorRT as an end-to-end inference compiler](/blog/machine-learning/mlops/tensorrt-end-to-end-inference-compiler).
+The thing to appreciate is the *ordering*. A lot of "portable" frameworks pay a permanent performance tax to run everywhere — they target the lowest common denominator and never beat a hand-tuned vendor kernel. TokenSpeed inverts this: portability (Triton) is the **fallback** that guarantees coverage, while the **fast path is always a specialized kernel** (CuteDSL, Gluon, or a vendor wrap) when one exists for your silicon and shape. You get vLLM-level "it just runs" usability from the Triton floor and TensorRT-LLM-level speed from the specialized ceiling, selected automatically. The cost is a larger kernel matrix to maintain and test — which is exactly why the PyTorch reference implementations and the `@register_kernel` selection harness exist. For a comparison point on how a fully vendor-specific compiler approaches the same problem, see the deep dive on [TensorRT as an end-to-end inference compiler](/blog/machine-learning/inference-frameworks/tensorrt-end-to-end-inference-compiler).
 
 ## 5. The MLA kernels: where "speed-of-light" has to cash out
 
@@ -582,6 +582,6 @@ The meta-lesson, and the reason TokenSpeed is worth studying even if you never d
 - [TokenSpeed on GitHub](https://github.com/lightseekorg/tokenspeed) — the engine, the `tokenspeed-kernel` library, and the `tokenspeed-mla` kernels.
 - [Multi-head Latent Attention](/blog/machine-learning/large-language-model/multi-head-latent-attention-mla) — the attention mechanism the MLA kernels implement.
 - [DeepSeek's open infra: DeepEP, DeepGEMM, FlashMLA](/blog/machine-learning/mlops/deepseek-open-infra-deepep-deepgemm-flashmla) — the sibling kernel stack TokenSpeed's MLA path is racing against.
-- [TensorRT as an end-to-end inference compiler](/blog/machine-learning/mlops/tensorrt-end-to-end-inference-compiler) — the vendor-specific baseline TokenSpeed benchmarks itself against.
+- [TensorRT as an end-to-end inference compiler](/blog/machine-learning/inference-frameworks/tensorrt-end-to-end-inference-compiler) — the vendor-specific baseline TokenSpeed benchmarks itself against.
 - [Optimizing LLM inference: a complete guide](/blog/machine-learning/large-language-model/optimizing-llm-inference-complete-guide) — the broader set of techniques this engine composes.
 - [Choosing a GPU for LLM serving](/blog/machine-learning/large-language-model/choosing-gpu-for-llm-serving-cost-throughput-latency) — the cost/throughput/latency framing behind the TPM-vs-TPS objective.

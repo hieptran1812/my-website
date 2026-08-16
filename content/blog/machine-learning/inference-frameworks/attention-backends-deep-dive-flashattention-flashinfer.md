@@ -17,7 +17,7 @@ tags:
     "ml-infrastructure",
   ]
 category: "machine-learning"
-subcategory: "Model Serving"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 56

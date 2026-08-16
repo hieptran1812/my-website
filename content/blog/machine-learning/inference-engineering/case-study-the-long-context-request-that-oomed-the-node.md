@@ -552,7 +552,7 @@ Build this policy into `nanoserve` when the service has mixed prompt lengths, in
 
 Use a simpler path when there is one fixed prompt shape, one request at a time, or a batch job that can tolerate a process restart. Even then, keep the model context check and a basic byte estimate. A toy benchmark that never admits concurrent work does not need a full fairness scheduler.
 
-Use vLLM or another mature engine when you need production-grade paged attention, prefix caching, multi-GPU scheduling, speculative decoding, or years of kernel and allocator compatibility. The [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) is the right comparison point. `nanoserve` is a learning artifact and a place to make the reservation contract obvious; it is not a claim that a small Python scheduler should replace a mature serving stack.
+Use vLLM or another mature engine when you need production-grade paged attention, prefix caching, multi-GPU scheduling, speculative decoding, or years of kernel and allocator compatibility. The [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) is the right comparison point. `nanoserve` is a learning artifact and a place to make the reservation contract obvious; it is not a claim that a small Python scheduler should replace a mature serving stack.
 
 Do not use truncation as a silent OOM workaround. Do not turn a 429 into an infinite client retry loop. Do not set the activation reserve to zero because the first small prompt succeeded. Do not report only GPU utilization: a node can be busy recomputing evicted KV blocks while goodput collapses.
 

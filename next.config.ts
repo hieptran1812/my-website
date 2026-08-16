@@ -29,6 +29,144 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
+  // The inference-engine / serving-framework posts were consolidated out of
+  // model-serving, edge-ai, mlops, large-language-model, ai-agent and
+  // open-source-library into content/blog/machine-learning/inference-frameworks/.
+  // The slug is the folder path, so every old URL needs a permanent redirect.
+  async redirects() {
+    return [
+      {
+        source: "/blog/machine-learning/large-language-model/vllm-inference",
+        destination: "/blog/machine-learning/inference-frameworks/vllm-inference",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/large-language-model/sglang-inference",
+        destination: "/blog/machine-learning/inference-frameworks/sglang-inference",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/ai-agent/mini-sglang",
+        destination: "/blog/machine-learning/inference-frameworks/mini-sglang",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/vllm-deep-dive",
+        destination: "/blog/machine-learning/inference-frameworks/vllm-deep-dive",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/vllm-distributed-architecture-anatomy",
+        destination: "/blog/machine-learning/inference-frameworks/vllm-distributed-architecture-anatomy",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/debugging-vllm-distributed-serving",
+        destination: "/blog/machine-learning/inference-frameworks/debugging-vllm-distributed-serving",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/running-vllm-distributed-in-production",
+        destination: "/blog/machine-learning/inference-frameworks/running-vllm-distributed-in-production",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/text-generation-inference-deep-dive",
+        destination: "/blog/machine-learning/inference-frameworks/text-generation-inference-deep-dive",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/triton-inference-server-deep-dive",
+        destination: "/blog/machine-learning/inference-frameworks/triton-inference-server-deep-dive",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/torchserve-deep-dive",
+        destination: "/blog/machine-learning/inference-frameworks/torchserve-deep-dive",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/ray-serve-deep-dive",
+        destination: "/blog/machine-learning/inference-frameworks/ray-serve-deep-dive",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/onnx-runtime-for-serving",
+        destination: "/blog/machine-learning/inference-frameworks/onnx-runtime-for-serving",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/bentoml-and-mlserver",
+        destination: "/blog/machine-learning/inference-frameworks/bentoml-and-mlserver",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/llm-control-planes-aibrix-kserve",
+        destination: "/blog/machine-learning/inference-frameworks/llm-control-planes-aibrix-kserve",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/choosing-your-serving-stack",
+        destination: "/blog/machine-learning/inference-frameworks/choosing-your-serving-stack",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/attention-backends-deep-dive-flashattention-flashinfer",
+        destination: "/blog/machine-learning/inference-frameworks/attention-backends-deep-dive-flashattention-flashinfer",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/model-serving/the-model-serving-stack",
+        destination: "/blog/machine-learning/inference-frameworks/the-model-serving-stack",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/mlops/tensorrt-end-to-end-inference-compiler",
+        destination: "/blog/machine-learning/inference-frameworks/tensorrt-end-to-end-inference-compiler",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/mlops/onnx-deep-dive-format-runtime-serving",
+        destination: "/blog/machine-learning/inference-frameworks/onnx-deep-dive-format-runtime-serving",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/edge-ai/running-llms-locally-llama-cpp-and-gguf",
+        destination: "/blog/machine-learning/inference-frameworks/running-llms-locally-llama-cpp-and-gguf",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/edge-ai/inference-runtimes-compared",
+        destination: "/blog/machine-learning/inference-frameworks/inference-runtimes-compared",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/edge-ai/tensorrt-and-gpu-edge-inference-on-jetson",
+        destination: "/blog/machine-learning/inference-frameworks/tensorrt-and-gpu-edge-inference-on-jetson",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/open-source-library/lmcache-kv-cache-layer-deep-dive",
+        destination: "/blog/machine-learning/inference-frameworks/lmcache-kv-cache-layer-deep-dive",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/open-source-library/tokenspeed-agentic-inference-engine",
+        destination: "/blog/machine-learning/inference-frameworks/tokenspeed-agentic-inference-engine",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/open-source-library/tokenspeed-580-tps-qwen3-5-hybrid-mamba-blackwell",
+        destination: "/blog/machine-learning/inference-frameworks/tokenspeed-580-tps-qwen3-5-hybrid-mamba-blackwell",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/edge-ai/running-llms-locally-mlc-and-mobile-stacks",
+        destination: "/blog/machine-learning/inference-frameworks/running-llms-locally-mlc-and-mobile-stacks",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     const cspValue =
       "connect-src 'self' https://vitals.vercel-insights.com https://vercel-insights.com" +

@@ -1280,7 +1280,7 @@ Priority queuing is particularly valuable when you have a mix of interactive (us
 
 An emerging pattern for decoder LLMs is **speculative batching**: instead of waiting for token demand to fill a batch, the server "speculatively" generates draft tokens for idle sequences using a small draft model, then verifies the drafts with the main model when a real request arrives. This trades wasted draft-generation compute during idle periods for lower latency when requests arrive.
 
-For most production deployments, this is handled within the serving framework (vLLM's speculative decoding feature, TGI's draft-model mode) rather than at the batching layer. See the [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) for the speculative decoding mechanics.
+For most production deployments, this is handled within the serving framework (vLLM's speculative decoding feature, TGI's draft-model mode) rather than at the batching layer. See the [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) for the speculative decoding mechanics.
 
 
 

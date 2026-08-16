@@ -507,7 +507,7 @@ Prefill is FLOP-bound: it is processing thousands of tokens at once, the per-exp
 
 Decode is bandwidth-bound: each step processes 1–8 tokens, the per-expert GEMMs are tiny, and the dominant cost is fetching the expert weights from HBM (or, with offloading, from CPU). EP and replicated experts both help; the right choice depends on the cache hit rate.
 
-Disaggregation lets you tune each pool independently. Prefill nodes run with TP=4, EP=4 (small, since prefill batches are big), no offload, on H100 SXM. Decode nodes run with EP=8, replicated experts for the top-25% most-routed, expert offloading for the rest, on either H100 or PCIe-tier hardware. The transfer between them is the KV cache; with [LMCache](/blog/machine-learning/open-source-library/lmcache-kv-cache-layer-deep-dive)-style cross-node KV transfer, this is bandwidth-bounded by IB and contributes a few hundred microseconds of TTFT, which is fine for almost any workload.
+Disaggregation lets you tune each pool independently. Prefill nodes run with TP=4, EP=4 (small, since prefill batches are big), no offload, on H100 SXM. Decode nodes run with EP=8, replicated experts for the top-25% most-routed, expert offloading for the rest, on either H100 or PCIe-tier hardware. The transfer between them is the KV cache; with [LMCache](/blog/machine-learning/inference-frameworks/lmcache-kv-cache-layer-deep-dive)-style cross-node KV transfer, this is bandwidth-bounded by IB and contributes a few hundred microseconds of TTFT, which is fine for almost any workload.
 
 ```bash
 ## Prefill pool config

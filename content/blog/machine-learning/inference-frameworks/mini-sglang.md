@@ -2,7 +2,7 @@
 title: "Mini-SGLang"
 publishDate: "2026-03-15"
 category: "machine-learning"
-subcategory: "AI Agent"
+subcategory: "Inference Frameworks"
 tags:
   - ai-agent
   - llm-serving

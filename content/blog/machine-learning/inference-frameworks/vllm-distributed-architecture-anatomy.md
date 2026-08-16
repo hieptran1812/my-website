@@ -18,7 +18,7 @@ tags:
     "ray",
   ]
 category: "machine-learning"
-subcategory: "Model Serving"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 52
@@ -115,7 +115,7 @@ Here is the V0-versus-V1 trade laid out as a table, because the differences comp
 | Reported throughput | Baseline | Up to ~1.7x higher on some models (vLLM V1 alpha) |
 | Failure surface | One process crashes → everything dies together | A worker can hang while others wait — needs cross-process debugging |
 
-The last two rows are the real trade. V1 buys throughput and clean scaling; it pays with a genuinely distributed failure surface. That is the whole reason the anatomy is worth learning: the throughput win is automatic, but the debugging tax is only cheap if you understand the process layout. If you want the operational side of that tax in depth, the sibling post on [debugging vLLM distributed serving](/blog/machine-learning/model-serving/debugging-vllm-distributed-serving) walks through the log patterns of a hung collective.
+The last two rows are the real trade. V1 buys throughput and clean scaling; it pays with a genuinely distributed failure surface. That is the whole reason the anatomy is worth learning: the throughput win is automatic, but the debugging tax is only cheap if you understand the process layout. If you want the operational side of that tax in depth, the sibling post on [debugging vLLM distributed serving](/blog/machine-learning/inference-frameworks/debugging-vllm-distributed-serving) walks through the log patterns of a hung collective.
 
 ## 3. Two planes: control over ZMQ, data over NCCL
 
@@ -313,7 +313,7 @@ async def main():
 asyncio.run(main())
 ```
 
-If you want the full tour of `EngineArgs`, prefix caching, and quantization on top of this skeleton, the [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) post is the companion; this post is about the distributed skeleton those features hang on.
+If you want the full tour of `EngineArgs`, prefix caching, and quantization on top of this skeleton, the [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) post is the companion; this post is about the distributed skeleton those features hang on.
 
 #### Worked example: a TP=4 forward pass and its overhead
 
@@ -395,7 +395,7 @@ A **startup that hangs before serving any request**: phase one of the worker boo
 
 An **OOM during startup, not under load**: phase three, the profiling pass, with `gpu_memory_utilization` set too high — or an imbalance where one rank has less free VRAM and the profiling batch does not fit. Lower the utilization, or find the process squatting on the crowded GPU.
 
-Notice the pattern: in every case, naming the layer and plane cuts the search space before you read a single detailed log line. That is the entire practical value of learning the anatomy, and it is why the sibling operational posts — [running vLLM distributed in production](/blog/machine-learning/model-serving/running-vllm-distributed-in-production) and [debugging vLLM distributed serving](/blog/machine-learning/model-serving/debugging-vllm-distributed-serving) — assume this map and build runbooks on top of it.
+Notice the pattern: in every case, naming the layer and plane cuts the search space before you read a single detailed log line. That is the entire practical value of learning the anatomy, and it is why the sibling operational posts — [running vLLM distributed in production](/blog/machine-learning/inference-frameworks/running-vllm-distributed-in-production) and [debugging vLLM distributed serving](/blog/machine-learning/inference-frameworks/debugging-vllm-distributed-serving) — assume this map and build runbooks on top of it.
 
 ## 9. Case studies and benchmarks
 
@@ -446,8 +446,8 @@ One more honest caveat on cost: the multiprocess design is not free even when it
 - **["Anatomy of vLLM"](https://vllm.ai/blog/2025-09-05-anatomy-of-vllm)** — the vLLM team's own walkthrough of the request path, the `DPLBAsyncMPClient` load-balancing score, `EngineCoreProc`'s three threads, and the `MultiProcExecutor` broadcast/gather. The primary source for every class name in this post.
 - **[vLLM V1 engine design and alpha announcement](https://docs.vllm.ai/)** — the rationale for the multiprocess rewrite, the V0→V1 throughput deltas, and the `VLLM_USE_V1` / `VLLM_ENABLE_V1_MULTIPROCESSING` switches.
 - **"Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism"** (Shoeybi, Patwary, Puri, LeGresley, Casper, Catanzaro, 2019) — the origin of the tensor-parallel sharding, and the two-all-reduces-per-block cost that the data plane pays at serving time.
-- **[vLLM deep dive: architecture, APIs, and production operations](/blog/machine-learning/model-serving/vllm-deep-dive)** — `EngineArgs`, prefix caching, chunked prefill, speculative decoding, and quantization on top of the distributed skeleton in this post.
+- **[vLLM deep dive: architecture, APIs, and production operations](/blog/machine-learning/inference-frameworks/vllm-deep-dive)** — `EngineArgs`, prefix caching, chunked prefill, speculative decoding, and quantization on top of the distributed skeleton in this post.
 - **[Continuous batching and PagedAttention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention)** — what `engine_core.step()` actually decides on each iteration of the busy loop.
 - **[Tensor, pipeline, and expert parallelism for serving](/blog/machine-learning/model-serving/tensor-pipeline-expert-parallelism-for-serving)** — when each parallelism strategy earns its collective overhead, and how they compose.
 - **[Multi-node LLM serving for 100B+ models](/blog/machine-learning/model-serving/multi-node-llm-serving-100b-plus)** — TP-within-node, PP-across-node, and the Ray executor backend in practice.
-- **[Running vLLM distributed in production](/blog/machine-learning/model-serving/running-vllm-distributed-in-production)** and **[Debugging vLLM distributed serving](/blog/machine-learning/model-serving/debugging-vllm-distributed-serving)** — the operational and failure-mode companions that build runbooks on this anatomy.
+- **[Running vLLM distributed in production](/blog/machine-learning/inference-frameworks/running-vllm-distributed-in-production)** and **[Debugging vLLM distributed serving](/blog/machine-learning/inference-frameworks/debugging-vllm-distributed-serving)** — the operational and failure-mode companions that build runbooks on this anatomy.

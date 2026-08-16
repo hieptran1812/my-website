@@ -692,7 +692,7 @@ The only numbers this post asks you to obtain locally are from the supplied scri
 
 Build this adapter when you need a stable client contract over an engine you are actively writing, when cancellation changes GPU economics, or when you need to test protocol behavior without a GPU. The API is also worth separating when several frontends share one scheduler: chat, batch jobs, and an internal evaluation runner can all feed the same `EngineRequest`.
 
-Do not write an OpenAI-compatible server just to avoid choosing an existing one. If the requirement is production traffic, broad model coverage, multi-GPU execution, mature prefix caching, or hardened observability, use vLLM, SGLang, TGI, or a managed provider and put your product-specific policy in a gateway. The [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) is a better benchmark target than a homegrown route.
+Do not write an OpenAI-compatible server just to avoid choosing an existing one. If the requirement is production traffic, broad model coverage, multi-GPU execution, mature prefix caching, or hardened observability, use vLLM, SGLang, TGI, or a managed provider and put your product-specific policy in a gateway. The [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) is a better benchmark target than a homegrown route.
 
 The compatibility promise should be narrow and honest. “Works with this SDK” means request validation, response fields, streaming delimiters, errors, and usage semantics have tests. It does not mean every proprietary parameter, tool event, multimodal input, or background job is silently accepted. Unsupported fields should fail with a useful 400 response.
 

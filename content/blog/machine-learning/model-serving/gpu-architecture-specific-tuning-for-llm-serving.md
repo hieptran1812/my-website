@@ -587,7 +587,7 @@ if __name__ == "__main__":
     print(f"# detected/selected: {g}\n{pick(g)}")
 ```
 
-This is the section-1 decision procedure turned into code. It reads the GPU, applies the precision floor, computes the shard count from capacity, picks TP-vs-PP-vs-replicate from the interconnect, and derives `--max-num-seqs` from the KV budget. Wire it into your deployment pipeline and the launch command becomes a pure function of the node it lands on — which is the only way to make a fleet that spans H100, A100, and spot-pool GPUs behave correctly without a human in the loop. It composes naturally with an inference control plane; see [LLM control planes with AIBrix and KServe](/blog/machine-learning/model-serving/llm-control-planes-aibrix-kserve) for routing heterogeneous GPU pools.
+This is the section-1 decision procedure turned into code. It reads the GPU, applies the precision floor, computes the shard count from capacity, picks TP-vs-PP-vs-replicate from the interconnect, and derives `--max-num-seqs` from the KV budget. Wire it into your deployment pipeline and the launch command becomes a pure function of the node it lands on — which is the only way to make a fleet that spans H100, A100, and spot-pool GPUs behave correctly without a human in the loop. It composes naturally with an inference control plane; see [LLM control planes with AIBrix and KServe](/blog/machine-learning/inference-frameworks/llm-control-planes-aibrix-kserve) for routing heterogeneous GPU pools.
 
 ## Case studies and benchmarks
 

@@ -29,7 +29,7 @@ The diagram below is the mental model for this post: a router is also a residenc
 
 ![A router fans requests toward a hot base model, adapter pool, cold model store, and finite GPU budget](/imgs/blogs/serving-many-models-on-few-gpus-lora-swapping-and-cold-starts-1.webp)
 
-We will extend `nanoserve` with a small placement layer that makes those choices explicit. The code is intentionally plain Python and PyTorch: a model registry, an adapter-aware batch key, an asynchronous residency manager, a cascade decision, and admission control. It is not a replacement for vLLM. It is a compact engine component you can run, profile, and compare against the production systems described in the [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive).
+We will extend `nanoserve` with a small placement layer that makes those choices explicit. The code is intentionally plain Python and PyTorch: a model registry, an adapter-aware batch key, an asynchronous residency manager, a cascade decision, and admission control. It is not a replacement for vLLM. It is a compact engine component you can run, profile, and compare against the production systems described in the [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive).
 
 By the end, you should be able to answer five operational questions before shipping a new fine-tune:
 

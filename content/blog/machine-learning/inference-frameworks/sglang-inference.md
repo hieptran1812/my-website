@@ -2,7 +2,7 @@
 title: "SGLang: A Complete Guide to Fast LLM Inference"
 publishDate: "2026-04-17"
 category: "machine-learning"
-subcategory: "Large Language Model"
+subcategory: "Inference Frameworks"
 tags:
   [
     "llm",

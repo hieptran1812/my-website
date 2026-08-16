@@ -18,8 +18,8 @@ tags:
     "fp8",
     "kv-cache",
   ]
-category: "mlops"
-subcategory: "Model Serving"
+category: "machine-learning"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 50
@@ -362,7 +362,7 @@ The first and most important thing that scheduler does is **in-flight batching**
 
 Consider static batching first, on the left of the figure. You collect 8 requests, run them as a batch, and decode token by token. But generation lengths differ — request 3 emits its end-of-sequence token after 40 tokens while request 7 runs to 400. Under static batching, request 3's slot in the batch sits *idle* for 360 steps because the batch cannot retire until the slowest member finishes. With realistic length distributions, static batching leaves 50–70% of the GPU's decode capacity unused.
 
-In-flight batching, on the right, fixes this at the scheduler level. The scheduler operates per *iteration* (per token step), not per batch. After every decode step it checks: has any sequence finished? If so, evict it and admit a waiting request into the freed slot — even though the other sequences in the batch are mid-generation. The batch is no longer a fixed cohort that starts and ends together; it is a rolling set of slots, continuously refilled. The result is 2–4× higher throughput at the same per-token latency, which is why every serious LLM serving stack — TensorRT-LLM, vLLM, [SGLang](/blog/machine-learning/large-language-model/sglang-inference) — implements some version of it.
+In-flight batching, on the right, fixes this at the scheduler level. The scheduler operates per *iteration* (per token step), not per batch. After every decode step it checks: has any sequence finished? If so, evict it and admit a waiting request into the freed slot — even though the other sequences in the batch are mid-generation. The batch is no longer a fixed cohort that starts and ends together; it is a rolling set of slots, continuously refilled. The result is 2–4× higher throughput at the same per-token latency, which is why every serious LLM serving stack — TensorRT-LLM, vLLM, [SGLang](/blog/machine-learning/inference-frameworks/sglang-inference) — implements some version of it.
 
 There is a subtlety that makes in-flight batching possible: **prefill and decode are different shapes**. Prefill processes the whole prompt (a long sequence, compute-bound, FLOPs-heavy); decode processes one token (sequence length 1, memory-bandwidth-bound, dominated by reading the KV cache and weights). The scheduler interleaves them — admitting a new request means running its prefill, then folding it into the ongoing decode batch. TensorRT-LLM exposes policies for how aggressively to interleave (`max_num_tokens`, chunked prefill) so a long prompt's prefill does not stall every other request's decode.
 

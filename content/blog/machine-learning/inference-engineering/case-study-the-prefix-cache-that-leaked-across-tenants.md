@@ -554,7 +554,7 @@ Use per-organization sharing when the organization owns the prompt corpus and me
 
 Use per-request isolation when the data has a strict lifetime, when deletion must be immediate, or when a request mixes public instructions with private records and the implementation cannot place a reliable barrier between them. It is expensive, but its behavior is easy to explain and test.
 
-Do not build a custom security-sensitive cache merely to recover a few percent of throughput. [vLLM's deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) and its current prefix-cache documentation are better starting points for a production engine. Build the `nanoserve` version to understand the boundary, to test a novel policy, or to integrate a workload where you can own the full threat model.
+Do not build a custom security-sensitive cache merely to recover a few percent of throughput. [vLLM's deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) and its current prefix-cache documentation are better starting points for a production engine. Build the `nanoserve` version to understand the boundary, to test a novel policy, or to integrate a workload where you can own the full threat model.
 
 ## Key takeaways
 

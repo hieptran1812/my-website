@@ -17,7 +17,7 @@ tags:
     "efficient-ml",
   ]
 category: "machine-learning"
-subcategory: "Edge AI"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 54
@@ -143,7 +143,7 @@ The honest summary of TFLite: it is the most mature, most widely shipped mobile 
 
 ## ONNX Runtime: execution providers and graph partitioning, done generically
 
-ONNX Runtime (ORT) takes the same delegate idea and generalizes it into the cleanest version of the model. ONNX (Open Neural Network Exchange) is a framework-neutral graph format — you export from PyTorch with `torch.onnx.export` or from TensorFlow with `tf2onnx`, and you get a `.onnx` file that ORT can run. The deep dive [ONNX deep dive: format, runtime, serving](/blog/machine-learning/mlops/onnx-deep-dive-format-runtime-serving) covers the format itself; here we care about how ORT *runs* it.
+ONNX Runtime (ORT) takes the same delegate idea and generalizes it into the cleanest version of the model. ONNX (Open Neural Network Exchange) is a framework-neutral graph format — you export from PyTorch with `torch.onnx.export` or from TensorFlow with `tf2onnx`, and you get a `.onnx` file that ORT can run. The deep dive [ONNX deep dive: format, runtime, serving](/blog/machine-learning/inference-frameworks/onnx-deep-dive-format-runtime-serving) covers the format itself; here we care about how ORT *runs* it.
 
 ORT's accelerators are called **execution providers (EPs)**. The list is long and it is the broadest in the business:
 
@@ -622,4 +622,4 @@ The thread through all of it: choose the runtime your target's *native* path pre
 - **Core ML Tools and the ANE guidance** — `coremltools` conversion and `coremltools.optimize` (palettization, quantization), plus Apple's "Deploying Transformers on the Apple Neural Engine" writeup on keeping ops resident on the ANE.
 - **Android NNAPI deprecation notice** — the Android developer docs marking NNAPI deprecated as of API 35 and pointing to vendor delegates.
 - Within this series: [the edge hardware landscape](/blog/machine-learning/edge-ai/the-edge-hardware-landscape) for the silicon the runtimes target, [the edge deployment lifecycle](/blog/machine-learning/edge-ai/the-edge-deployment-lifecycle) for the conversion steps before this, [a taxonomy of model compression](/blog/machine-learning/edge-ai/a-taxonomy-of-model-compression) for the four-lever frame, [the metrics that actually matter on device](/blog/machine-learning/edge-ai/the-metrics-that-actually-matter-on-device) for honest measurement, and the capstone [the edge optimization playbook](/blog/machine-learning/edge-ai/the-edge-optimization-playbook).
-- For the broader ONNX format and server-side serving picture, [ONNX deep dive: format, runtime, serving](/blog/machine-learning/mlops/onnx-deep-dive-format-runtime-serving).
+- For the broader ONNX format and server-side serving picture, [ONNX deep dive: format, runtime, serving](/blog/machine-learning/inference-frameworks/onnx-deep-dive-format-runtime-serving).

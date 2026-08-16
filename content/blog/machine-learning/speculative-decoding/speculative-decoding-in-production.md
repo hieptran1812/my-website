@@ -73,7 +73,7 @@ You are break-even at best, and in practice slightly negative due to scheduling 
 
 ## How vLLM implements speculative decoding
 
-[vLLM](/blog/machine-learning/large-language-model/vllm-inference) added speculative decoding support in version 0.4.0 as a first-class feature, with EAGLE-1/2 integration landing in 0.5.x. Understanding its architecture tells you where the performance comes from and where the failure modes hide.
+[vLLM](/blog/machine-learning/inference-frameworks/vllm-inference) added speculative decoding support in version 0.4.0 as a first-class feature, with EAGLE-1/2 integration landing in 0.5.x. Understanding its architecture tells you where the performance comes from and where the failure modes hide.
 
 ### Draft worker and target worker separation
 
@@ -261,7 +261,7 @@ A production alert threshold of α < 0.65 is a reasonable floor. Below that, the
 
 ## SGLang's approach: RadixAttention meets EAGLE
 
-[SGLang](/blog/machine-learning/large-language-model/sglang-inference) takes a different architectural angle. Its killer feature, **RadixAttention**, caches KV activations for shared prompt prefixes across requests in a trie (prefix tree) structure. When a new request shares a common prefix with a cached request, SGLang skips recomputing attention for the shared tokens entirely — they are loaded from the cache as pre-computed KV pairs.
+[SGLang](/blog/machine-learning/inference-frameworks/sglang-inference) takes a different architectural angle. Its killer feature, **RadixAttention**, caches KV activations for shared prompt prefixes across requests in a trie (prefix tree) structure. When a new request shares a common prefix with a cached request, SGLang skips recomputing attention for the shared tokens entirely — they are loaded from the cache as pre-computed KV pairs.
 
 This is the same idea as [KV cache](/blog/machine-learning/large-language-model/kv-cache) reuse at the request level, but applied across requests — a "cross-request KV cache" that benefits workloads where many users share a common system prompt, template, or document prefix.
 
@@ -1157,7 +1157,7 @@ The full theoretical foundation for each of these decisions lives in the precedi
 - [EAGLE: feature-level speculative decoding](/blog/machine-learning/speculative-decoding/eagle-speculative-decoding-feature-alignment)
 - [Tree speculation: drafting multiple futures](/blog/machine-learning/speculative-decoding/tree-speculation-drafting-multiple-futures)
 
-For the serving-stack perspective beyond spec decode, see [vLLM serving](/blog/machine-learning/large-language-model/vllm-inference), [SGLang inference](/blog/machine-learning/large-language-model/sglang-inference), [efficient LLM inference techniques](/blog/machine-learning/large-language-model/efficient-llm-inference-techniques), and the [speculative decoding production playbook](/blog/machine-learning/large-language-model/speculative-decoding).
+For the serving-stack perspective beyond spec decode, see [vLLM serving](/blog/machine-learning/inference-frameworks/vllm-inference), [SGLang inference](/blog/machine-learning/inference-frameworks/sglang-inference), [efficient LLM inference techniques](/blog/machine-learning/large-language-model/efficient-llm-inference-techniques), and the [speculative decoding production playbook](/blog/machine-learning/large-language-model/speculative-decoding).
 
 The one-line summary: **if you are latency-sensitive, your batch size is below 8, and your task acceptance rate exceeds 0.72, enable EAGLE-2 with $\gamma = 4$ in vLLM or SGLang today.** The theory says it should work. The benchmarks confirm it does. The engineering work is three config lines and one afternoon of offline validation.
 

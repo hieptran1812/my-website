@@ -636,7 +636,7 @@ Every one of these is cheap to prevent and expensive to discover late. The lifec
 The full seven-stage, gated, monitored pipeline is the right default for anything that *ships to devices you don't control at scale*. But it's a cost, and there are cases where less is right:
 
 - **A one-off internal demo on your own laptop?** Skip the optimize and compile stages — just export and run. You control the device and the duty cycle; the latency tax doesn't matter.
-- **A model behind a server API, not on-device?** This is a different lifecycle (the [TensorRT/ONNX serving path](/blog/machine-learning/mlops/tensorrt-end-to-end-inference-compiler)), where you have a GPU and can batch, so the edge constraints (SRAM, NPU op support, cold-start, thermal) mostly don't apply. Don't pay the edge tax for a server workload.
+- **A model behind a server API, not on-device?** This is a different lifecycle (the [TensorRT/ONNX serving path](/blog/machine-learning/inference-frameworks/tensorrt-end-to-end-inference-compiler)), where you have a GPU and can batch, so the edge constraints (SRAM, NPU op support, cold-start, thermal) mostly don't apply. Don't pay the edge tax for a server workload.
 - **A research prototype you'll throw away?** The convert stage is wasted effort until you've decided to ship.
 
 Conversely, the moment a model is destined for *phones, embedded boxes, or microcontrollers in the field*, every stage earns its keep, and skipping any of them is borrowing against a future incident. The decision rule: the more you don't control the device and the higher the inference volume, the more of the lifecycle you must run.
@@ -656,7 +656,7 @@ Conversely, the moment a model is destined for *phones, embedded boxes, or micro
 
 ## Further reading
 
-- **ONNX & ONNX Runtime** — the exchange-format spec and the runtime's quantization tooling (`quantize_static`, `CalibrationDataReader`, execution providers). Start with the ONNX Runtime quantization docs and the ONNX operator/opset reference. See also our [ONNX deep dive on format, runtime, and serving](/blog/machine-learning/mlops/onnx-deep-dive-format-runtime-serving).
+- **ONNX & ONNX Runtime** — the exchange-format spec and the runtime's quantization tooling (`quantize_static`, `CalibrationDataReader`, execution providers). Start with the ONNX Runtime quantization docs and the ONNX operator/opset reference. See also our [ONNX deep dive on format, runtime, and serving](/blog/machine-learning/inference-frameworks/onnx-deep-dive-format-runtime-serving).
 - **TensorFlow Lite / LiteRT** — the `TFLiteConverter`, `representative_dataset` calibration, full-int8 conversion, and the `benchmark_model` tool with per-op profiling and the NNAPI/GPU delegates.
 - **ExecuTorch** — PyTorch's `torch.export`-based on-device runtime; the canonical modern path for PyTorch → edge, with the exported-graph IR at its center.
 - **llama.cpp** — the README and `convert_hf_to_gguf.py` / `llama-quantize` tooling, the GGUF format, and the k-quant types (Q4_K_M and friends) for running LLMs on laptops and phones.

@@ -409,7 +409,7 @@ The throughput picture at batch size 1 is also nuanced. Speculative decoding doe
 
 ## Code: the complete speculative decoding loop
 
-Here is a clean reference implementation of draft, verify, accept/reject, and bonus token sampling in PyTorch. This code is for understanding the algorithm — production serving systems like [vLLM serving](/blog/machine-learning/large-language-model/vllm-inference) add batch management, incremental KV cache updates, async scheduling, and CUDA graphs on top.
+Here is a clean reference implementation of draft, verify, accept/reject, and bonus token sampling in PyTorch. This code is for understanding the algorithm — production serving systems like [vLLM serving](/blog/machine-learning/inference-frameworks/vllm-inference) add batch management, incremental KV cache updates, async scheduling, and CUDA graphs on top.
 
 ```python
 ## speculative_decoding.py
@@ -831,7 +831,7 @@ A legal tech company processes contract summaries with LLaMA 2 70B. Typical inpu
 
 The speedup degrades at long contexts because the verify pass gets more expensive while the baseline stays fixed at its own (also higher) cost. The solution was context-adaptive $\gamma$: use $\gamma=3$ for context lengths above 12K. The reduced draft length lowers the verify pass's attention overhead while maintaining positive speedup.
 
-They also used the [SGLang inference](/blog/machine-learning/large-language-model/sglang-inference) engine with RadixAttention prefix caching. Contracts that share a common boilerplate header (about 800 tokens) saw that prefix served from cache, reducing effective context length for the attention computation. Combined, the optimizations held speedup above 1.5× across their entire document distribution.
+They also used the [SGLang inference](/blog/machine-learning/inference-frameworks/sglang-inference) engine with RadixAttention prefix caching. Contracts that share a common boilerplate header (about 800 tokens) saw that prefix served from cache, reducing effective context length for the attention computation. Combined, the optimizations held speedup above 1.5× across their entire document distribution.
 
 ### Case study 4: Batch throughput workload — when spec decoding hurts
 

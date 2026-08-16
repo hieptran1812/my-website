@@ -17,7 +17,7 @@ tags:
     "ml-infrastructure",
   ]
 category: "machine-learning"
-subcategory: "Model Serving"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 50
@@ -623,7 +623,7 @@ model_int8 = ORTModelForSequenceClassification.from_pretrained(
 )
 ```
 
-`ORTModelForCausalLM` wraps decoder-only models (GPT-2, Phi, Gemma) for ORT inference. A critical caveat: ORT does not implement continuous batching or PagedAttention, so `ORTModelForCausalLM` is appropriate only for batch decoding with pre-known sequence lengths, not for streaming chat serving. Use [vLLM](/blog/machine-learning/model-serving/vllm-deep-dive) or TGI for that.
+`ORTModelForCausalLM` wraps decoder-only models (GPT-2, Phi, Gemma) for ORT inference. A critical caveat: ORT does not implement continuous batching or PagedAttention, so `ORTModelForCausalLM` is appropriate only for batch decoding with pre-known sequence lengths, not for streaming chat serving. Use [vLLM](/blog/machine-learning/inference-frameworks/vllm-deep-dive) or TGI for that.
 
 `AutoQuantizationConfig.avx512_vnni` generates a quantization configuration tuned for x86 CPUs with AVX-512 VNNI support (Cascade Lake, Ice Lake, and later). If your CPU does not support AVX-512, use `AutoQuantizationConfig.avx2` instead — running a VNNI-tuned INT8 model on a non-VNNI CPU can be *slower* than FP32 because the fallback INT8 path is not vectorized.
 
@@ -1297,7 +1297,7 @@ The performance ceiling for CoreML EP on M3 MacBook Pro (base model):
 
 6. **Export with opset 17 and `dynamic_axes` for both batch and sequence dimensions.** Never export a fixed-shape model for production unless your serving traffic is genuinely fixed-shape. Opset 17 unlocks `LayerNormalization` fusion that saves 8–15% latency versus opset 12.
 
-7. **ORT loses badly on LLM serving.** No continuous batching, no PagedAttention, no KV cache sharing. Use [vLLM](/blog/machine-learning/model-serving/vllm-deep-dive) or TGI for autoregressive decoding. ORT is for encoders and rerankers — the models that run once per request, not once per token.
+7. **ORT loses badly on LLM serving.** No continuous batching, no PagedAttention, no KV cache sharing. Use [vLLM](/blog/machine-learning/inference-frameworks/vllm-deep-dive) or TGI for autoregressive decoding. ORT is for encoders and rerankers — the models that run once per request, not once per token.
 
 8. **TRT EP beats CUDA EP on fixed-shape GPU workloads by 20–40%.** Build the TRT engine cache once at deployment time, not at request time. The cache is GPU-arch-specific — invalidate it on hardware upgrade, and store it in a persistent volume.
 
@@ -1394,6 +1394,6 @@ When upgrading ORT: export a fresh copy of the model with the new version, run y
 - **"ONNX Runtime: Cross-Platform, High Performance ML Inferencing"** — Jiang et al., Microsoft (2021). The original system paper describing ORT's architecture, EP plugin system, and graph optimization passes.
 - **Intel Neural Compressor**: [intel.github.io/neural-compressor](https://intel.github.io/neural-compressor) — alternative INT8 quantization pipeline with PTQ and QAT support, integrates with ORT.
 - Series context — start here: [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — the SLO triangle and why latency/throughput/cost are always in tension.
-- Related serving runtimes: [Triton Inference Server deep-dive](/blog/machine-learning/model-serving/triton-inference-server-deep-dive) — ensemble pipelines, dynamic batching, and multi-model serving that ORT alone cannot provide.
-- Choosing a serving stack: [Choosing your serving stack](/blog/machine-learning/model-serving/choosing-your-serving-stack) — the full decision matrix of Triton vs Ray Serve vs TorchServe vs vLLM, with ORT as a runtime component.
+- Related serving runtimes: [Triton Inference Server deep-dive](/blog/machine-learning/inference-frameworks/triton-inference-server-deep-dive) — ensemble pipelines, dynamic batching, and multi-model serving that ORT alone cannot provide.
+- Choosing a serving stack: [Choosing your serving stack](/blog/machine-learning/inference-frameworks/choosing-your-serving-stack) — the full decision matrix of Triton vs Ray Serve vs TorchServe vs vLLM, with ORT as a runtime component.
 - For quantization theory: [Quantization for inference](/blog/machine-learning?subcategory=model-serving) — PTQ vs QAT, INT8/FP8/INT4 tradeoffs, and the accuracy math behind reduced-precision arithmetic.

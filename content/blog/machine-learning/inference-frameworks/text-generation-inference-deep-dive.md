@@ -17,7 +17,7 @@ tags:
     "llm-serving",
   ]
 category: "machine-learning"
-subcategory: "Model Serving"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 55
@@ -1064,7 +1064,7 @@ This is the KV memory for a single sequence at max length. The total KV pool at 
 ## Further reading
 
 - [Continuous batching fundamentals](/blog/machine-learning/model-serving/batching-fundamentals-latency-throughput-tradeoff) — the queueing theory and Little's Law foundation for understanding TGI's batch scheduler
-- [vLLM deep dive](/blog/machine-learning/model-serving/vllm-deep-dive) — PagedAttention internals, prefix caching, and how vLLM differs from TGI's memory management
+- [vLLM deep dive](/blog/machine-learning/inference-frameworks/vllm-deep-dive) — PagedAttention internals, prefix caching, and how vLLM differs from TGI's memory management
 - [Continuous batching and PagedAttention](/blog/machine-learning/model-serving/continuous-batching-and-pagedattention) — deeper comparison of TGI's and vLLM's respective batching implementations
 - [Quantization for LLM serving](/blog/machine-learning/model-serving/quantization-for-llm-serving) — GPTQ, AWQ, and FP8 quantization schemes in full detail, including accuracy-throughput benchmarks
 - [Streaming and SSE for LLMs](/blog/machine-learning/model-serving/streaming-and-sse-for-llms) — full deep-dive on SSE framing, backpressure, and WebSocket trade-offs for token streaming

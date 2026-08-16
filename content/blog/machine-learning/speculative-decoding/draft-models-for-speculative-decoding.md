@@ -458,7 +458,7 @@ if __name__ == "__main__":
     print(result)
 ```
 
-The implementation above is pedagogically complete but not maximally optimized — in particular, the verify phase does not reuse KV cache, which a production implementation would. The [vLLM serving](/blog/machine-learning/large-language-model/vllm-inference) implementation handles this with a draft worker that maintains its own KV buffer and passes draft tokens to the target worker asynchronously.
+The implementation above is pedagogically complete but not maximally optimized — in particular, the verify phase does not reuse KV cache, which a production implementation would. The [vLLM serving](/blog/machine-learning/inference-frameworks/vllm-inference) implementation handles this with a draft worker that maintains its own KV buffer and passes draft tokens to the target worker asynchronously.
 
 ## N-gram drafters
 
@@ -1615,4 +1615,4 @@ The key lesson: speculative decoding scales well to very large targets precisely
 
 The next post in this series covers **Medusa** — the approach that eliminates the two-model problem entirely by attaching $K$ parallel prediction heads to the target model itself, predicting tokens 1 through $K+1$ ahead simultaneously. If you have been frustrated by the tokenizer alignment constraint or the memory overhead of a separate draft model, Medusa solves both problems at once.
 
-For deeper background on why all of this matters — why the autoregressive bottleneck exists in the first place — see [Why LLMs generate text slowly](/blog/machine-learning/speculative-decoding/why-llms-are-slow-autoregressive-bottleneck). For the math behind the acceptance mechanism, see [Token acceptance and rejection sampling](/blog/machine-learning/speculative-decoding/speculative-decoding-token-acceptance-rejection-sampling). For the production serving layer that orchestrates draft and verify workers, see the [vLLM serving guide](/blog/machine-learning/large-language-model/vllm-inference) and the [complete speculative decoding production playbook](/blog/machine-learning/large-language-model/speculative-decoding).
+For deeper background on why all of this matters — why the autoregressive bottleneck exists in the first place — see [Why LLMs generate text slowly](/blog/machine-learning/speculative-decoding/why-llms-are-slow-autoregressive-bottleneck). For the math behind the acceptance mechanism, see [Token acceptance and rejection sampling](/blog/machine-learning/speculative-decoding/speculative-decoding-token-acceptance-rejection-sampling). For the production serving layer that orchestrates draft and verify workers, see the [vLLM serving guide](/blog/machine-learning/inference-frameworks/vllm-inference) and the [complete speculative decoding production playbook](/blog/machine-learning/large-language-model/speculative-decoding).

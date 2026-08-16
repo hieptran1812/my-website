@@ -18,7 +18,7 @@ tags:
     "model-packaging",
   ]
 category: "machine-learning"
-subcategory: "Model Serving"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 55
@@ -380,7 +380,7 @@ For our example: `64 / 1.8ms = 35,556 items/s` = 556 req/s if all batches are fu
 
 ### Comparing BentoML adaptive batching to Triton dynamic batching
 
-The [Triton Inference Server](/blog/machine-learning/model-serving/triton-inference-server-deep-dive) implements dynamic batching in the model configuration `config.pbtxt` with `dynamic_batching { preferred_batch_size: [4, 8, 16, 32] max_queue_delay_microseconds: 5000 }`. The semantics are similar: collect requests until a preferred batch size is hit or a timeout fires. The key differences are:
+The [Triton Inference Server](/blog/machine-learning/inference-frameworks/triton-inference-server-deep-dive) implements dynamic batching in the model configuration `config.pbtxt` with `dynamic_batching { preferred_batch_size: [4, 8, 16, 32] max_queue_delay_microseconds: 5000 }`. The semantics are similar: collect requests until a preferred batch size is hit or a timeout fires. The key differences are:
 
 - Triton's batching operates at the inference engine layer (before the Python interpreter), so it can achieve sub-millisecond batching overhead. BentoML's batching operates in Python, adding 1–3ms of overhead from the GIL and Python list operations.
 - Triton supports multiple preferred batch sizes and fills the largest batch that can be served within the delay budget. BentoML fires at `max_batch_size` or `max_latency_ms`, whichever comes first — simpler, but less adaptive.
@@ -1446,7 +1446,7 @@ This gives the new team a local development copy of the model with full BentoML 
 - [MLServer documentation](https://mlserver.readthedocs.io) — Covers built-in runtimes, custom runtime development, and V2 protocol reference. The "Runtimes" section documents every `implementation` value and its expected model format.
 - [Open Inference Protocol specification](https://kserve.github.io/website/latest/modelserving/v1beta1/serving_runtime/) — The formal CNCF specification for the V2 HTTP/REST and gRPC inference protocols. Essential reading before writing a custom V2-compatible server.
 - [KServe InferenceService documentation](https://kserve.github.io/website/latest/modelserving/v1beta1/serving_runtime/) — Official KServe docs for the `InferenceService` CRD, storage URIs, autoscaling configuration, and canary rollout patterns.
-- [Triton Inference Server deep dive](/blog/machine-learning/model-serving/triton-inference-server-deep-dive) — The previous post in this series covers Triton's V2 implementation, dynamic batching, and ensemble pipelines in depth. Triton's batching subsystem is the production standard against which BentoML's adaptive batching should be compared for GPU workloads.
-- [Ray Serve deep dive](/blog/machine-learning/model-serving/ray-serve-deep-dive) — Ray Serve's deployment model and autoscaling patterns. Useful for understanding where Ray Serve fits relative to BentoML for Python-native serving.
+- [Triton Inference Server deep dive](/blog/machine-learning/inference-frameworks/triton-inference-server-deep-dive) — The previous post in this series covers Triton's V2 implementation, dynamic batching, and ensemble pipelines in depth. Triton's batching subsystem is the production standard against which BentoML's adaptive batching should be compared for GPU workloads.
+- [Ray Serve deep dive](/blog/machine-learning/inference-frameworks/ray-serve-deep-dive) — Ray Serve's deployment model and autoscaling patterns. Useful for understanding where Ray Serve fits relative to BentoML for Python-native serving.
 - [What is model serving](/blog/machine-learning/model-serving/what-is-model-serving) — The series introduction: the SLO triangle, Little's Law, and why the serving layer is a distinct engineering discipline from model training.
 - [The model serving playbook](/blog/machine-learning/model-serving/what-is-model-serving) — The series capstone: a complete decision tree from model type and team context to recommended serving stack.

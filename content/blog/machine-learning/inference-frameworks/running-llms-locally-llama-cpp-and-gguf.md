@@ -16,7 +16,7 @@ tags:
     "on-device",
   ]
 category: "machine-learning"
-subcategory: "Edge AI"
+subcategory: "Inference Frameworks"
 author: "Hiep Tran"
 featured: true
 readTime: 54
@@ -501,8 +501,8 @@ The through-line across all three failures: **identify which term in the budget 
 
 **Reach for something else when:**
 
-- **Mobile (iOS/Android).** `llama.cpp` runs on phones but isn't the most efficient path to a phone's NPU. **MLC-LLM** compiles models through TVM down to mobile GPUs and NPUs and ships a clean mobile runtime; that's the subject of the companion post [running LLMs locally with MLC and mobile stacks](/blog/machine-learning/edge-ai/running-llms-locally-mlc-and-mobile-stacks). Apple's **Core ML** and **MLX** are also strong on Apple devices when you want ANE/NPU acceleration.
-- **High-throughput multi-user serving.** If you're serving many concurrent users on a server GPU, **vLLM** (with PagedAttention and continuous batching) or **TensorRT-LLM** will crush `llama.cpp` on aggregate throughput, because they're built to amortize weight reads across large dynamic batches. `llama.cpp`'s `--parallel` works but isn't in the same league for fleet serving. (For the GPU-serving side of edge, see [TensorRT and GPU edge inference on Jetson](/blog/machine-learning/edge-ai/tensorrt-and-gpu-edge-inference-on-jetson).)
+- **Mobile (iOS/Android).** `llama.cpp` runs on phones but isn't the most efficient path to a phone's NPU. **MLC-LLM** compiles models through TVM down to mobile GPUs and NPUs and ships a clean mobile runtime; that's the subject of the companion post [running LLMs locally with MLC and mobile stacks](/blog/machine-learning/inference-frameworks/running-llms-locally-mlc-and-mobile-stacks). Apple's **Core ML** and **MLX** are also strong on Apple devices when you want ANE/NPU acceleration.
+- **High-throughput multi-user serving.** If you're serving many concurrent users on a server GPU, **vLLM** (with PagedAttention and continuous batching) or **TensorRT-LLM** will crush `llama.cpp` on aggregate throughput, because they're built to amortize weight reads across large dynamic batches. `llama.cpp`'s `--parallel` works but isn't in the same league for fleet serving. (For the GPU-serving side of edge, see [TensorRT and GPU edge inference on Jetson](/blog/machine-learning/inference-frameworks/tensorrt-and-gpu-edge-inference-on-jetson).)
 - **Microcontrollers and tiny MCUs.** Way out of scope — that's TFLite-Micro / CMSIS-NN territory, kilobytes of SRAM, not gigabytes.
 
 ### The model-size-vs-RAM sizing rule
@@ -542,4 +542,4 @@ Let me poke at the edges, because that's where the real engineering lives:
 - **The k-quant discussion** — the original `llama.cpp` GitHub discussions/PRs introducing the K-quants (`Q4_K`, `Q5_K`, `Q6_K`) and the super-block structure, plus the later IQ (importance-matrix) quants; the best primary source for *why* the bit allocation is what it is.
 - **Dettmers et al., "QLoRA: Efficient Finetuning of Quantized LLMs" (2023)** — for the **NF4** 4-bit format as a contrast to the k-quants: an information-theoretically-motivated normal-float quantization, used by `bitsandbytes`, that solves the same 4-bit problem from a different angle.
 - **Frantar et al., "GPTQ" (2022)** and **Lin et al., "AWQ" (2023)** — error-aware weight-only quantization that informs the imatrix idea; walked through in [the weight-only quantization post](/blog/machine-learning/edge-ai/llm-quantization-weight-only-gptq-awq).
-- **Within this series:** [the model-compression taxonomy](/blog/machine-learning/edge-ai/a-taxonomy-of-model-compression) for the four-lever frame, [the roofline model](/blog/machine-learning/edge-ai/the-roofline-model-where-your-bottleneck-lives) for the memory-bound derivation, [making on-device LLMs fast](/blog/machine-learning/edge-ai/making-on-device-llms-fast) for end-to-end latency tuning, the companion [MLC and mobile stacks](/blog/machine-learning/edge-ai/running-llms-locally-mlc-and-mobile-stacks) post, and the capstone [edge optimization playbook](/blog/machine-learning/edge-ai/the-edge-optimization-playbook) that ties every lever together.
+- **Within this series:** [the model-compression taxonomy](/blog/machine-learning/edge-ai/a-taxonomy-of-model-compression) for the four-lever frame, [the roofline model](/blog/machine-learning/edge-ai/the-roofline-model-where-your-bottleneck-lives) for the memory-bound derivation, [making on-device LLMs fast](/blog/machine-learning/edge-ai/making-on-device-llms-fast) for end-to-end latency tuning, the companion [MLC and mobile stacks](/blog/machine-learning/inference-frameworks/running-llms-locally-mlc-and-mobile-stacks) post, and the capstone [edge optimization playbook](/blog/machine-learning/edge-ai/the-edge-optimization-playbook) that ties every lever together.
