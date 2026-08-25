@@ -4,13 +4,14 @@
    interpolates through black in Safari and leaves a grey band). */
 
 .paywall-gate {
-  --paywall-bg: 255, 255, 255;
+  /* the page canvas as it renders: --page-canvas under the grain */
+  --paywall-bg: 244, 244, 244;
   position: relative;
   margin-top: -1rem;
 }
 
 .dark .paywall-gate {
-  --paywall-bg: 1, 22, 39;
+  --paywall-bg: 7, 27, 43;
 }
 
 /* Sits over the tail of the preview so the last paragraph dissolves. */

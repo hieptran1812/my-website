@@ -810,7 +810,7 @@ export default function BlogReader({
           onClick={() => setShowToc(!showToc)}
           className="fixed left-4 top-20 z-40 xl:hidden w-10 h-10 rounded-full shadow-lg border transition-all duration-300 flex items-center justify-center"
           style={{
-            backgroundColor: showToc ? "var(--accent)" : "var(--background)",
+            backgroundColor: showToc ? "var(--accent)" : "var(--card-bg)",
             borderColor: "var(--border)",
             color: showToc ? "white" : "var(--text-secondary)",
           }}
@@ -850,7 +850,7 @@ export default function BlogReader({
           <div
             className="absolute bottom-0 left-0 right-0 rounded-t-2xl shadow-2xl max-h-[70vh] overflow-hidden flex flex-col"
             style={{
-              backgroundColor: "var(--background)",
+              backgroundColor: "var(--card-bg)",
               animation: "slideUp 0.3s ease-out",
             }}
           >
@@ -936,7 +936,7 @@ export default function BlogReader({
             {/* Safe area padding for iOS */}
             <div
               className="h-6"
-              style={{ backgroundColor: "var(--background)" }}
+              style={{ backgroundColor: "var(--card-bg)" }}
             />
           </div>
 

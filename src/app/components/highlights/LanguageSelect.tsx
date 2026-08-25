@@ -155,7 +155,7 @@ export default function LanguageSelect({
           className="mt-2 rounded-lg shadow-lg overflow-hidden"
           style={{
             border: "1px solid var(--border)",
-            backgroundColor: "var(--background)",
+            backgroundColor: "var(--card-bg)",
           }}
         >
           <div

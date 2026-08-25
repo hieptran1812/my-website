@@ -354,7 +354,7 @@ function BlogGraphSidebar({
             isCollapsed ? "p-2" : ""
           }`}
           style={{
-            backgroundColor: "var(--background)",
+            backgroundColor: "var(--card-bg)",
             borderColor: "var(--border)",
             transition: "all 400ms cubic-bezier(0.4, 0, 0.2, 1)",
             maxHeight: "calc(100vh - 120px)",
@@ -779,7 +779,7 @@ function BlogGraphSidebar({
           <div
             className="absolute bottom-0 left-0 right-0 rounded-t-2xl shadow-2xl max-h-[85vh] overflow-hidden flex flex-col"
             style={{
-              backgroundColor: "var(--background)",
+              backgroundColor: "var(--card-bg)",
               animation: "slideUp 0.3s ease-out",
             }}
           >

@@ -532,7 +532,7 @@ export default function About() {
     <div
       className="flex flex-col min-h-screen overflow-x-clip transition-colors duration-300"
       style={{
-        backgroundColor: "var(--background)",
+        backgroundColor: "transparent",
         color: "var(--text-primary)",
       }}
     >
@@ -564,7 +564,7 @@ export default function About() {
                   className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center text-lg border-2"
                   style={{
                     backgroundColor: "var(--accent)",
-                    borderColor: "var(--background)",
+                    borderColor: "var(--card-bg)",
                     color: "white",
                   }}
                 >

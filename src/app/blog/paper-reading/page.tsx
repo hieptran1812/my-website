@@ -188,7 +188,7 @@ export default function PaperReadingBlogPage() {
       <div
         className="flex flex-col min-h-screen transition-colors duration-300"
         style={{
-          backgroundColor: "var(--background)",
+          backgroundColor: "transparent",
           color: "var(--text-primary)",
         }}
       >

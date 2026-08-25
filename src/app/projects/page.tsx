@@ -75,7 +75,7 @@ function ProjectsContent() {
     <div
       className="flex flex-col min-h-screen transition-colors duration-300"
       style={{
-        backgroundColor: "var(--background)",
+        backgroundColor: "transparent",
         color: "var(--text-primary)",
       }}
     >
@@ -911,7 +911,7 @@ export default function ProjectsPage() {
       fallback={
         <div
           className="flex flex-col min-h-screen items-center justify-center"
-          style={{ backgroundColor: "var(--background)" }}
+          style={{ backgroundColor: "transparent" }}
         >
           <div
             className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2"

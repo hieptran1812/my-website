@@ -13,7 +13,7 @@ export default function ContactPage() {
     <div
       className="flex flex-col min-h-screen will-change-auto"
       style={{
-        backgroundColor: "var(--background)",
+        backgroundColor: "transparent",
         color: "var(--text-primary)",
       }}
     >

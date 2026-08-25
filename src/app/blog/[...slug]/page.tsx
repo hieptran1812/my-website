@@ -80,7 +80,7 @@ export default async function BlogPostPage({
         <div
           className="flex flex-col min-h-screen items-center justify-center transition-colors duration-300"
           style={{
-            backgroundColor: "var(--background)",
+            backgroundColor: "transparent",
             color: "var(--text-primary)",
           }}
         >

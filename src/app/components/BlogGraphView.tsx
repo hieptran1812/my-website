@@ -412,7 +412,7 @@ export default function BlogGraphView({
         <div
           className="absolute pointer-events-none rounded-md border px-2.5 py-1.5 text-xs"
           style={{
-            background: "var(--background)",
+            background: "var(--card-bg)",
             borderColor: "var(--border)",
             color: "var(--text-primary)",
             top: 8,
@@ -436,7 +436,7 @@ export default function BlogGraphView({
         <div
           className="absolute pointer-events-none rounded-md border px-2.5 py-1 text-[11px]"
           style={{
-            background: "var(--background)",
+            background: "var(--card-bg)",
             borderColor: "var(--border)",
             color: "var(--text-secondary)",
             bottom: 8,

@@ -111,17 +111,10 @@ export default function HeroSection() {
       aria-label="Hero section with introduction and main call-to-action"
       role="banner"
     >
-      {/* Enhanced Particle Background - GPU accelerated */}
-      <div
-        className="absolute inset-0 -z-30 overflow-hidden"
-        aria-hidden="true"
-        style={{
-          background:
-            theme === "dark"
-              ? "linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 50%, rgba(15, 23, 42, 0.95) 100%)"
-              : "linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.9) 50%, rgba(248, 250, 252, 0.95) 100%)",
-        }}
-      >
+      {/* Enhanced Particle Background - GPU accelerated.
+          No fill of its own: the hero sits on the page canvas like the
+          rest of the site, so the grain runs straight through it. */}
+      <div className="absolute inset-0 -z-30 overflow-hidden" aria-hidden="true">
         {/* Optimized floating particles - reduced on mobile, disabled for reduced motion */}
         {!prefersReducedMotion &&
           particles.map((particle) => (
@@ -148,27 +141,6 @@ export default function HeroSection() {
               }}
             />
           ))}
-      </div>
-
-      {/* Modern Grid Background Pattern */}
-      <div className="absolute inset-0 -z-20">
-        <div
-          className="absolute inset-0 bg-[size:32px_32px] opacity-20"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, ${
-                theme === "dark"
-                  ? "rgba(99, 102, 241, 0.1)"
-                  : "rgba(59, 130, 246, 0.08)"
-              } 1px, transparent 1px), 
-              linear-gradient(to bottom, ${
-                theme === "dark"
-                  ? "rgba(99, 102, 241, 0.1)"
-                  : "rgba(59, 130, 246, 0.08)"
-              } 1px, transparent 1px)
-            `,
-          }}
-        ></div>
       </div>
 
       {/* Enhanced Background Effects - GPU accelerated */}

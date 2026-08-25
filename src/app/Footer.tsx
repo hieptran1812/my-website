@@ -146,7 +146,8 @@ export default function Footer() {
         role="contentinfo"
         aria-label="Site footer"
         style={{
-          backgroundColor: "var(--background)",
+          // transparent so the page canvas and its grain carry through
+          backgroundColor: "transparent",
           borderColor: "var(--border)",
         }}
       >
@@ -411,7 +412,7 @@ export default function Footer() {
                   placeholder="your@email.com"
                   className="w-full sm:w-48 px-3 py-2 rounded-lg border text-sm transition-colors duration-200 focus:outline-none focus:ring-2"
                   style={{
-                    backgroundColor: "var(--background)",
+                    backgroundColor: "var(--card-bg)",
                     borderColor: "var(--border)",
                     color: "var(--text-primary)",
                   }}

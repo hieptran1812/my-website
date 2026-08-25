@@ -159,7 +159,7 @@ export default function SubcategoryFilter({
             <div
               className="flex items-center gap-2 px-3 py-2 rounded-lg"
               style={{
-                backgroundColor: "var(--background)",
+                backgroundColor: "var(--card-bg)",
                 border: "1px solid var(--border)",
               }}
             >

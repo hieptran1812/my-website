@@ -187,7 +187,7 @@ export default function CollectionPage({
   return (
     <div
       className="min-h-screen"
-      style={{ backgroundColor: "var(--background)" }}
+      style={{ backgroundColor: "transparent" }}
     >
       {/* Hero Section */}
       <section className="py-16 px-6">

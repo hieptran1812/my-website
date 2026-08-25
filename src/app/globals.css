@@ -12,7 +12,12 @@ html {
 /* Light mode: Clean Modern Theme with Sky Blue Accents */
 :root,
 .light {
-  --background: #ffffff;
+  /* Page canvas: --page-canvas is the flat colour *under* the grain,
+     --background is the tone the canvas actually renders as. */
+  --page-canvas: #ffffff;
+  --grain-opacity: 0.088;
+  --background: #f4f4f4;
+  --nav-scrolled-bg: rgba(244, 244, 244, 0.85);
   --foreground: #1a202c;
   --surface: #ffffff;
   --surface-secondary: #f7fafc;
@@ -46,7 +51,10 @@ html {
 
 /* Dark mode: Night Owl Theme */
 .dark {
-  --background: #011627;
+  --page-canvas: #011627;
+  --grain-opacity: 0.05;
+  --background: #071b2b;
+  --nav-scrolled-bg: rgba(7, 27, 43, 0.85);
   --foreground: #d6deeb;
   --surface: #011627;
   --surface-secondary: #010e1a;
@@ -78,22 +86,43 @@ html {
     color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Apply background color to body and html in dark mode */
-.dark {
-  background-color: var(--background);
-  color: var(--text-primary);
+/* ── Page canvas ──────────────────────────────────────────────────
+   One flat tone across the whole document, covered by a fine grain
+   that repeats on a fixed layer behind every bit of content. Sections
+   below opt out of painting their own full-bleed fill so this canvas
+   is what the page reads as. */
+html {
+  background-color: var(--page-canvas);
 }
 
-.dark body {
-  background-color: var(--background);
+.dark {
   color: var(--text-primary);
 }
 
 body {
-  background-color: var(--background);
+  background-color: transparent;
   color: var(--text-primary);
   transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("/textures/grain.png");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  opacity: var(--grain-opacity);
+}
+
+/* The grain is decoration; it has no business in a printout. */
+@media print {
+  body::before {
+    display: none;
+  }
 }
 
 html {
@@ -118,17 +147,13 @@ html {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
 }
 
-/* Section background colors with harmonious transitions */
-section.bg-white {
-  background-color: var(--background);
-}
-
-section.bg-slate-50 {
-  background-color: var(--surface);
-}
-
+/* Sections ride on the page canvas rather than tinting themselves.
+   Cards and panels inside them still carry their own surface colour,
+   which is what gives the page its depth. */
+section.bg-white,
+section.bg-slate-50,
 section.bg-sky-50 {
-  background-color: var(--surface-accent);
+  background-color: transparent;
 }
 
 /* Enhanced section styling for better visual hierarchy */
@@ -195,53 +220,14 @@ section.animate-in {
   animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* Section transition classes for smooth color changes */
-.section-primary {
-  background: linear-gradient(
-    135deg,
-    var(--background) 0%,
-    var(--surface-accent) 50%,
-    var(--surface) 100%
-  );
-}
-
-.section-secondary {
-  background: linear-gradient(
-    135deg,
-    var(--surface) 0%,
-    var(--surface-secondary) 50%,
-    var(--surface-accent) 100%
-  );
-}
-
-.section-accent {
-  background: linear-gradient(
-    135deg,
-    var(--surface-secondary) 0%,
-    var(--surface-accent) 30%,
-    var(--background) 100%
-  );
-}
-
-/* Improved background system for smooth transitions */
-section:not([class*="section-"]):not([style*="background"]):nth-child(even) {
-  background: linear-gradient(
-    135deg,
-    var(--surface) 0%,
-    var(--surface-secondary) 100%
-  );
-}
-
-section:not([class*="section-"]):not([style*="background"]):nth-child(odd) {
-  background: linear-gradient(
-    135deg,
-    var(--background) 0%,
-    var(--surface-accent) 100%
-  );
-}
-
-/* Opt-out: sections explicitly tagged section-flat keep the page background
-   so any cards inside read against the same theme colour. */
+/* The old alternating gradients tinted whole sections to separate them.
+   The canvas separates them now, so these stay transparent and the
+   grain runs unbroken from the header to the footer. */
+.section-primary,
+.section-secondary,
+.section-accent,
+section:not([class*="section-"]):not([style*="background"]):nth-child(even),
+section:not([class*="section-"]):not([style*="background"]):nth-child(odd),
 section.section-flat {
   background: transparent;
 }
@@ -263,27 +249,7 @@ section.section-flat {
 
 /* Smooth section transitions - remove hard borders */
 section + section {
-  /* No more hard borders - using smooth gradients instead */
   position: relative;
-}
-
-/* Subtle gradient overlays for smooth transitions between sections */
-section + section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--border) 20%,
-    var(--border) 80%,
-    transparent 100%
-  );
-  opacity: 0.3;
-  z-index: 1;
 }
 
 /* Enhanced card styling with white/sky blue and night owl themes */
@@ -301,38 +267,18 @@ section + section::before {
   background-color: var(--surface);
 }
 
-/* Enhanced section separation and layout */
+/* Enhanced section separation and layout.
+   The divider lines that used to sit here belonged to the alternating
+   tinted-section system. On one continuous canvas they read as stray
+   glowing lines across the surface, so spacing does the separating now. */
 section:not(:first-child) {
   position: relative;
 }
 
-section:not(:first-child):before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--border) 20%,
-    var(--accent) 50%,
-    var(--border) 80%,
-    transparent 100%
-  );
-  opacity: 0.3;
-  animation: section-separator-glow 4s ease-in-out infinite;
-}
-
-/* Alternate section backgrounds for better visual separation */
-section:nth-child(odd) {
-  background-color: var(--background);
-}
-
+/* Alternating section fills would cut the canvas into bands. */
+section:nth-child(odd),
 section:nth-child(even) {
-  background-color: var(--surface-secondary);
+  background-color: transparent;
 }
 
 /* Enhanced spacing between sections */
@@ -671,7 +617,7 @@ section {
 
 /* Typography and base styles */
 body {
-  background: var(--background);
+  /* background stays transparent so the page canvas shows through */
   color: var(--foreground);
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, sans-serif;
@@ -1201,11 +1147,23 @@ a:focus {
 }
 
 .blog-content img {
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   max-width: 100%;
   height: auto;
+  width: auto;
+  max-height: min(78vh, 920px);
+}
+
+.math-for-quants-article .blog-content p:has(> img:only-child) {
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.math-for-quants-article .blog-content p:has(> img:only-child) img {
+  margin: 0 auto;
+  object-fit: contain;
 }
 
 .blog-content figure {
@@ -1395,7 +1353,7 @@ a:focus {
 }
 .cmdk-dialog {
   width: min(640px, calc(100vw - 2rem));
-  background: var(--background);
+  background: var(--card-bg);
   color: var(--text-primary);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
@@ -1707,7 +1665,7 @@ a:focus {
   font-weight: 400;
   line-height: 1.55;
   color: var(--text-primary);
-  background: var(--background);
+  background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.32);
@@ -1790,7 +1748,7 @@ a:focus {
 .related-card-image {
   position: relative;
   width: 100%;
-  background: var(--background);
+  background: var(--card-bg);
   overflow: hidden;
 }
 .related-img {
@@ -2339,6 +2297,12 @@ a:focus {
 /* Override body background in reading mode */
 .reading-mode body {
   background-color: transparent !important;
+}
+
+/* Reading mode paints its own eye-comfort colour and wants it exact,
+   so the canvas grain steps aside there. */
+.reading-mode body::before {
+  display: none;
 }
 
 /* Reading mode text color overrides */
@@ -3238,18 +3202,21 @@ a:focus {
   -webkit-backdrop-filter: blur(20px);
 }
 
+/* At the top of the page there is nothing behind the bar to frost, and
+   blurring there would smooth the grain into a visible band. So the
+   unscrolled bar sits flush on the canvas and only frosts once content
+   is actually passing under it. */
 .navbar-glass {
-  background: var(--background) / 80;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border) / 50;
+  background: transparent;
+  border: 1px solid transparent;
 }
 
 .navbar-glass-scrolled {
-  background: var(--background) / 95;
+  background: var(--nav-scrolled-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
+  border: 1px solid transparent;
+  border-bottom-color: var(--border);
 }
 
 /* Typography improvements for navigation */

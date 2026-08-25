@@ -271,19 +271,18 @@ export default function Navigation() {
           : "navbar-glass border-b border-opacity-30"
       }`}
       style={{
-        borderColor: "var(--border)",
+        // Unscrolled there is nothing behind the bar to frost, and blurring
+        // anyway would smooth the canvas grain into a visible band across the
+        // top of the page. Fill, blur and shadow all wait for the scroll.
+        borderColor: isScrolled ? "var(--border)" : "transparent",
         backgroundColor: isScrolled
-          ? "var(--background)/98"
-          : "var(--background)/85",
-        backdropFilter: isScrolled
-          ? "blur(24px) saturate(180%)"
-          : "blur(16px) saturate(150%)",
-        WebkitBackdropFilter: isScrolled
-          ? "blur(24px) saturate(180%)"
-          : "blur(16px) saturate(150%)",
+          ? "var(--nav-scrolled-bg)"
+          : "transparent",
+        backdropFilter: isScrolled ? "blur(24px) saturate(180%)" : "none",
+        WebkitBackdropFilter: isScrolled ? "blur(24px) saturate(180%)" : "none",
         boxShadow: isScrolled
           ? "0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08)"
-          : "0 2px 8px rgba(0,0,0,0.04)",
+          : "none",
       }}
       role="navigation"
       aria-label="Main navigation"
@@ -447,7 +446,7 @@ export default function Navigation() {
                     <div
                       className="navbar-dropdown absolute top-full right-0 mt-3 w-64 py-3 rounded-2xl shadow-2xl border backdrop-blur-xl"
                       style={{
-                        backgroundColor: "var(--background)",
+                        backgroundColor: "var(--card-bg)",
                         borderColor: "var(--border)",
                         boxShadow:
                           "0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--border)",
@@ -632,7 +631,7 @@ export default function Navigation() {
           isMobileMenuOpen ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"
         }`}
         style={{
-          backgroundColor: "var(--background)/98",
+          backgroundColor: "var(--card-bg)",
           backdropFilter: "blur(20px)",
           borderTop: isMobileMenuOpen ? "1px solid var(--border)" : "none",
         }}

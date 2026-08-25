@@ -12,7 +12,7 @@ export default async function NotFound() {
     <main
       className="min-h-screen flex flex-col items-center px-4 sm:px-6 lg:px-8 pt-24 pb-16"
       style={{
-        backgroundColor: "var(--background)",
+        backgroundColor: "transparent",
         color: "var(--text-primary)",
       }}
     >
