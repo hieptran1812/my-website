@@ -74,6 +74,10 @@
  *   --delay <sec>        pause between drafts (default 30) — Substack rate-limits
  *   --cooldown <sec>     wait after a 429 before the next post (default 900)
  *   --max-rate-limits <n>  give up the run after this many 429s (default 8)
+ *   --no-tags            create the drafts without tags. Each tag is its own
+ *                        API call after the draft exists — on a long run they
+ *                        are what trips the rate limit, and `--covers` fills
+ *                        them in afterwards at a gentler pace.
  *   --no-slug            let Substack derive the slug from the title
  *   --covers             second pass over the pushed drafts to attach cover
  *                        images (the CLI has no cover support); takes no post
@@ -123,6 +127,7 @@ function parseArgs(argv) {
     checkImages: true,
     verifyMath: true,
     delay: 30,        // seconds between drafts
+    tags: true,       // one API call per tag; --no-tags defers them to --covers
     cooldown: 900,    // wait after a 429 before trying the next post
     maxRateLimits: 8, // consecutive-ish 429s before giving up on the run
     audit: false,
@@ -160,6 +165,7 @@ function parseArgs(argv) {
       case "--link-batch": opts.linkBatch = true; break;
       case "--force-push": opts.forcePush = true; break;
       case "--delay": opts.delay = Number(next()); break;
+      case "--no-tags": opts.tags = false; break;
       case "--cooldown": opts.cooldown = Number(next()); break;
       case "--max-rate-limits": opts.maxRateLimits = Number(next()); break;
       case "--draft":
@@ -287,6 +293,7 @@ const SYMBOLS = {
   perp: "⊥", parallel: "∥", angle: "∠", degree: "°", circ: "∘", bullet: "•",
   ldots: "…", dots: "…", cdots: "⋯", vdots: "⋮", prime: "′",
   langle: "⟨", rangle: "⟩", lvert: "|", rvert: "|", lVert: "‖", rVert: "‖",
+  mid: "∣", nmid: "∤", vert: "|", Vert: "‖",
   lceil: "⌈", rceil: "⌉", lfloor: "⌊", rfloor: "⌋",
   quad: " ", qquad: "  ", oplus: "⊕", otimes: "⊗", odot: "⊙",
   hbar: "ℏ", ell: "ℓ", Re: "ℜ", Im: "ℑ", aleph: "ℵ", surd: "√",
@@ -1011,14 +1018,23 @@ async function loadArchive(opts) {
   }
 
   const posts = [];
+  const seen = new Set();
   try {
-    for (let offset = 0; offset < 2000; offset += 50) {
+    // The archive endpoint returns a short first page — fewer rows than `limit`
+    // even though more posts follow — so a page shorter than the limit is not
+    // the end of the archive. Walk it in overlapping windows and stop only on a
+    // genuinely empty page, deduping by slug.
+    for (let offset = 0; offset < 4000; offset += 20) {
       const url = `${opts.substack}/api/v1/archive?sort=new&limit=50&offset=${offset}`;
       const res = await fetch(url, { signal: AbortSignal.timeout(20_000) });
       if (!res.ok) throw new Error(`${res.status} from ${url}`);
       const page = await res.json();
-      posts.push(...page.map((p) => ({ slug: p.slug, title: p.title, url: p.canonical_url })));
-      if (page.length < 50) break;
+      if (page.length === 0) break;
+      for (const p of page) {
+        if (!p.slug || seen.has(p.slug)) continue;
+        seen.add(p.slug);
+        posts.push({ slug: p.slug, title: p.title, url: p.canonical_url });
+      }
     }
   } catch (e) {
     return { error: String(e.message ?? e), byTitle: new Map(), bySlug: new Map(), size: 0 };
@@ -1197,7 +1213,9 @@ function createDraft(mdFile, slug, fm, opts) {
   if (fm.description) args.push("--subtitle", trimSubtitle(fm.description));
   // Every frontmatter tag, not a sample — the library adds them one API call
   // each after the draft exists, so the create response reports what stuck.
-  const tags = (fm.tags ?? []).map((t) => String(t).trim()).filter(Boolean);
+  const tags = opts.tags === false
+    ? []
+    : (fm.tags ?? []).map((t) => String(t).trim()).filter(Boolean);
   for (const tag of tags) args.push("--tag", tag);
 
   try {
@@ -1264,8 +1282,10 @@ async function setCovers(opts) {
       else missing.push(slug);
     }
     // A draft whose tag loop was cut short by a rate limit gets the whole set
-    // re-applied; Substack ignores the ones it already has.
-    if (rec.tagsIncomplete) {
+    // re-applied; Substack ignores the ones it already has. Tags cost one call
+    // each and are what exhausts the quota on a long run — `--no-tags` here
+    // limits the pass to covers, which are the part a reader actually sees.
+    if (rec.tagsIncomplete && opts.tags !== false) {
       const file = slugIndex().get(slug);
       if (file) item.tags = (matter(fs.readFileSync(file, "utf8")).data.tags ?? []).map(String);
     }
@@ -1602,7 +1622,13 @@ async function main() {
       const r = createDraft(mdFile, slug, fm, opts);
       paced = true;
       if (r.ok) {
-        ledger[slug] = { id: r.id, tags: r.tagsAdded, at: new Date().toISOString() };
+        // --no-tags leaves the draft complete but untagged, which is the same
+        // state a cut-short tag loop leaves behind — mark it so `--covers`
+        // applies the full set on the repair pass.
+        ledger[slug] = {
+          id: r.id, tags: r.tagsAdded, at: new Date().toISOString(),
+          ...(opts.tags === false ? { tagsIncomplete: true } : {}),
+        };
         saveLedger(ledger);
         if (!verified) {
           verified = true;
