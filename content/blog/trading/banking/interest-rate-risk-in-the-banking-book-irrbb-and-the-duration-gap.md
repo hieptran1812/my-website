@@ -74,7 +74,7 @@ The first-order estimate of the change in net interest income is just the gap ti
 
 $$\Delta \text{NII} \approx \text{Gap} \times \Delta r \times t$$
 
-where $\Delta\text{NII}$ is the change in net interest income, $\text{Gap}$ is the repricing gap (signed), $\Delta r$ is the rate change, and $t$ is the fraction of a year the gap is in effect. Over a full year ($t = 1$):
+where $\Delta \text{NII}$ is the change in net interest income, $\text{Gap}$ is the repricing gap (signed), $\Delta r$ is the rate change, and $t$ is the fraction of a year the gap is in effect. Over a full year ($t = 1$):
 
 $$\Delta \text{NII} \approx (-\$10\text{bn}) \times 2\% \times 1 = -\$200 \text{ million}$$
 

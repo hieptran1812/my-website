@@ -118,7 +118,7 @@ Start with a bank that has book value $B$ and earns a steady ROE on it. Each yea
 
 $$g = \text{ROE} \times b$$
 
-This is the **sustainable growth rate** — a bank can only grow its book value by plowing back profits, and it grows faster the more it retains and the higher its ROE. The payout ratio is $1 - b$, so dividends per year start at $D_1 = \text{ROE} \times B \times (1 - b)$.
+This is the **sustainable growth rate** — a bank can only grow its book value by plowing back profits, and it grows faster the more it retains and the higher its ROE. The payout ratio is ${1 - b}$, so dividends per year start at $D_1 = \text{ROE} \times B \times (1 - b)$.
 
 A share of stock is worth the present value of all the dividends it will ever pay, discounted at the cost of equity. For a dividend stream growing forever at rate $g$, the **Gordon growth** formula gives the value:
 

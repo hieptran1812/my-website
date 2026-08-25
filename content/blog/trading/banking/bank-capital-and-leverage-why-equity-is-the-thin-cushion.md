@@ -107,7 +107,7 @@ Equity has gone from \$10bn to \$5bn. A 5% loss on assets caused a 50% loss of e
 
 ### The same fragility, viewed as a fall in asset value
 
-That worked example used a loss expressed as a percentage of assets. There is an even cleaner way to see the danger: ask how far the assets have to fall in value to erase *all* the equity. The answer is beautifully simple. If equity is a fraction $1/L$ of the balance sheet (where $L$ is leverage), then a fall of $1/L$ in asset value wipes out the entire equity cushion.
+That worked example used a loss expressed as a percentage of assets. There is an even cleaner way to see the danger: ask how far the assets have to fall in value to erase *all* the equity. The answer is beautifully simple. If equity is a fraction ${1/L}$ of the balance sheet (where $L$ is leverage), then a fall of ${1/L}$ in asset value wipes out the entire equity cushion.
 
 $$\text{Asset fall that wipes equity} = \frac{1}{\text{Leverage}}$$
 

@@ -61,7 +61,7 @@ The pound had been forced into the ERM at a rate that suited German reunificatio
 
 #### Worked example: the misalignment gap in numbers
 
-Take a currency pegged at 25 per dollar — the baht's old level. Suppose over five years the country runs 6% inflation versus 2% in the US, a 4% gap each year. Compounded over five years, domestic prices rise about 34% while US prices rise about 10%. Roughly speaking, the currency has become about \$22\%\$ "too expensive" in real terms at the fixed rate (`1.34 / 1.10 - 1 ≈ 0.218`).
+Take a currency pegged at 25 per dollar — the baht's old level. Suppose over five years the country runs 6% inflation versus 2% in the US, a 4% gap each year. Compounded over five years, domestic prices rise about 34% while US prices rise about 10%. Roughly speaking, the currency has become about 22% "too expensive" in real terms at the fixed rate (`1.34 / 1.10 - 1 ≈ 0.218`).
 
 A trader looks at that and thinks: the fair value of this currency is something like 30 per dollar, maybe worse, but the central bank is still selling dollars at 25. If the peg breaks and the currency falls to 30, that is a 20% move (`25/30 - 1 ≈ -0.167` in dollar terms, or a +20% rise in the price of a dollar). The misalignment *is* the size of the prize. The bigger the gap between the peg and fair value, the larger the payoff waiting for whoever bets on the snap.
 
