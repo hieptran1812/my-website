@@ -49,7 +49,7 @@ Buy next      83.20 per bbl
 Roll gain      1.80 per bbl  =  1.80 / 85.00  =  +2.12% on the position
 ```
 
-That \+2.12% is earned on *one* roll. If the curve held its shape and you rolled roughly once a month, the carry would compound through the year. A crude approximation: 12 rolls of \+2.12% compounds to about \((1.0212)^{12}-1 \approx +28.6\%\) before any change in spot — and even a gentler, more realistic schedule that decays as you roll into the flatter part of the curve still lands in the **\+10% to \+15% a year** range that steep oil backwardation has historically delivered. The intuition: in backwardation, doing nothing but maintaining your position pays you, and over a year that "nothing" can be worth more than most people make from being right about the price.
+That \+2.12% is earned on *one* roll. If the curve held its shape and you rolled roughly once a month, the carry would compound through the year. A crude approximation: 12 rolls of \+2.12% compounds to about $(1.0212)^{12}-1 \approx +28.6\%$ before any change in spot — and even a gentler, more realistic schedule that decays as you roll into the flatter part of the curve still lands in the **\+10% to \+15% a year** range that steep oil backwardation has historically delivered. The intuition: in backwardation, doing nothing but maintaining your position pays you, and over a year that "nothing" can be worth more than most people make from being right about the price.
 
 ### The total-return decomposition: three pieces, and the one that compounds
 
@@ -76,7 +76,7 @@ Collateral return  + 5%
 Total return       +24%  (approx, before compounding interactions)
 ```
 
-Now flip the curve: same 8% spot rise, but the commodity is in contango paying a \-11% roll. Total return is \(8 - 11 + 5 = +2\%\) — the *same* correct call on the price level, a 22-percentage-point worse outcome, entirely from the sign of one term. The intuition: you can be right about the price and still earn almost nothing if you are on the wrong side of the roll, and right about the price and earn a fortune if you are on the right side — the carry is the term that decides which.
+Now flip the curve: same 8% spot rise, but the commodity is in contango paying a \-11% roll. Total return is $8 - 11 + 5 = +2\%$ — the *same* correct call on the price level, a 22-percentage-point worse outcome, entirely from the sign of one term. The intuition: you can be right about the price and still earn almost nothing if you are on the wrong side of the roll, and right about the price and earn a fortune if you are on the right side — the carry is the term that decides which.
 
 That last point deserves its own picture, because the magnitude is the whole reason anyone bothers.
 
@@ -188,13 +188,13 @@ The decision graph shows the shape of the bet. Backwardation says the market is 
 
 ### Measuring the slope: how you actually read the carry signal
 
-To harvest carry you need to *measure* it, and there is a standard, model-free way to turn a curve into a single carry number. Take the front contract price \(F_1\) and a deferred contract price \(F_2\) that is \(n\) months further out, and compute the annualized slope:
+To harvest carry you need to *measure* it, and there is a standard, model-free way to turn a curve into a single carry number. Take the front contract price $F_1$ and a deferred contract price $F_2$ that is $n$ months further out, and compute the annualized slope:
 
 ```
 Annualized roll signal  =  (F1 - F2) / F2  x  (12 / n)
 ```
 
-For our backwardated crude, with \(F_1 = 85.00\) (prompt) and \(F_2 = 83.20\) (two months out, so \(n = 2\)):
+For our backwardated crude, with $F_1 = 85.00$ (prompt) and $F_2 = 83.20$ (two months out, so $n = 2$):
 
 ```
 (85.00 - 83.20) / 83.20  =  0.0216  per 2 months

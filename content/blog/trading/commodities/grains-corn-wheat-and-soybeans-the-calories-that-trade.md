@@ -144,7 +144,7 @@ For wheat, add a third growing pole: the **Black Sea** (Russia, Ukraine, Kazakhs
 
 Look at the three grains together over the last fifteen years and the structure of the market jumps out: long stretches of low, range-bound prices punctuated by violent spikes, and the spikes line up across all three grains because they share acres, weather, and macro forces.
 
-![Line chart of corn, wheat, and soybean annual average prices from 2008 to 2024 with the 2012 drought and 2022 war marked](/imgs/blogs/grains-corn-wheat-and-soybeans-the-calories-that-trade-2.png)
+![Line chart of corn, wheat, and soybean annual average prices from 2005 to 2025 with the 2012 drought and 2022 war marked](/imgs/blogs/grains-corn-wheat-and-soybeans-the-calories-that-trade-2.png)
 
 Two episodes stand out, and both are the same lesson told twice: a regional supply shock, meeting inelastic global demand, becomes a global price event.
 

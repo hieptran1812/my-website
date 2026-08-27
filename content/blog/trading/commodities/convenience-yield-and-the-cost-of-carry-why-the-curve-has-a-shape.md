@@ -188,7 +188,7 @@ Suppose the one-year future were trading *above* full carry — say spot is \$80
 
 A year later, the trader delivers the stored barrel against the future, collects \$92, repays the \$80 loan plus \$4 interest, and has paid \$3 storage — net cash in: `92 − 80 − 4 − 3 = \$5`, with *no exposure to the price of oil*. Every step was locked at the start. That \$5 is a risk-free profit, and the moment it exists, traders pile in: they *buy spot* (pushing S up) and *sell the future* (pushing F down) until the gap closes and the future sits back at \$87, full carry. So the futures price *cannot* sustainably exceed spot-plus-carry — the arbitrage is the ceiling.
 
-![The cash and carry arbitrage that enforces the curve: buy spot, store, sell forward, lock the spread](/imgs/blogs/convenience-yield-and-the-cost-of-carry-why-the-curve-has-a-shape-5.png)
+![The cash and carry arbitrage that enforces the curve: buy spot, store, sell forward, lock the spread](/imgs/blogs/convenience-yield-and-the-cost-of-carry-why-the-curve-has-a-shape-7.png)
 
 That explains the *ceiling*. What about the *floor*? Why can't the future trade *below* full carry without an arbitrage forcing it back up? Here is the beautiful asymmetry that *is* the convenience yield. The reverse arbitrage — sell the physical short today, invest the proceeds, buy it back forward cheaply — requires you to *borrow the physical commodity* to sell it. But you usually cannot borrow a barrel of oil or a tonne of copper the way you can borrow a share of stock. And even if you owned the barrel and sold it, you would give up the *convenience* of having it on hand. So the reverse trade is blocked or costly, and the future is *free* to trade below full carry by the amount of the convenience yield. **The convenience yield is precisely the measure of how far below full carry the curve can fall before the (impossible) reverse arbitrage would kick in.** It is the gap the arbitrage cannot close — which is exactly why it carries information the carry costs do not.
 
@@ -208,7 +208,7 @@ In the **middle** sits crude oil. Storable, yes — in tanks, in salt caverns, o
 
 Further along, **natural gas** is hard and expensive to store (it must be compressed or kept in specialized underground reservoirs and salt domes, and it has sharp seasonal demand), so its curve shows huge, predictable *seasonal* humps — high winter prices, low summer prices — that no simple flat carry can describe. And at the far end sit the goods you essentially **cannot store at all**: **electricity** (which must be consumed the instant it is generated — there is no economic way to warehouse a megawatt-hour at grid scale), and many **perishable agricultural goods** (you cannot carry this year's lettuce into next year). For these, the cost-of-carry model *breaks down completely*: there is no physical inventory to buy, store, and sell forward, so there is no arbitrage to enforce a relationship between today's price and a forward price. The "forward" price of electricity is a forecast of supply and demand at that future hour, not spot-plus-carry — which is why power prices can be \$30 one hour and \$3,000 the next with no contradiction.
 
-![Where commodities sit on the storability spectrum from easy to store metals to non storable electricity](/imgs/blogs/convenience-yield-and-the-cost-of-carry-why-the-curve-has-a-shape-6.png)
+![Where commodities sit on the storability spectrum from easy to store metals to non storable electricity](/imgs/blogs/convenience-yield-and-the-cost-of-carry-why-the-curve-has-a-shape-5.png)
 
 This spectrum is the practical takeaway of the whole model. Before you even glance at a commodity's curve, you can predict its *temperament* from how storable it is:
 
@@ -229,7 +229,7 @@ It helps to *see* the three forces as a budget. Take the illustrative contango c
 
 Flip to a tight, backwardated market and the same budget looks completely different. Carry still wants to push the spread *up* by its \$5 or so, but the convenience yield is now so large — \$10, \$12 — that it overwhelms the carry and drags the net spread *negative*. The barrel a year out trades *below* the prompt barrel because the prompt barrel is the one everybody needs.
 
-![Decomposing the futures spread into financing storage and convenience yield contributions](/imgs/blogs/convenience-yield-and-the-cost-of-carry-why-the-curve-has-a-shape-7.png)
+![Decomposing the futures spread into financing storage and convenience yield contributions](/imgs/blogs/convenience-yield-and-the-cost-of-carry-why-the-curve-has-a-shape-6.png)
 
 This decomposition is exactly what a desk does when it asks "is this curve cheap or rich?" It estimates the financing leg (it knows the interest rate), estimates the storage leg (it knows tank rents), and whatever is *left over* in the observed spread is the market's implied convenience yield. If that residual looks too high relative to what the trader believes about inventories, the curve is "too backwardated" and there may be a trade; if it looks too low (or negative), the curve is "too contango'd." The cost-of-carry model is not just an explanation — it is the scaffolding for an entire style of relative-value trading on the *shape* of the curve, which we develop in the calendar-spread and roll-yield posts.
 
