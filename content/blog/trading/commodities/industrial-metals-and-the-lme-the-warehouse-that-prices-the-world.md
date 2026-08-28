@@ -48,7 +48,7 @@ It helps to meet the complex as a family, because each member has a different jo
 
 Lay their prices side by side over twenty-five years and the family resemblance is obvious: they boom together when the world builds and bust together when it stops.
 
-![LME copper and aluminium annual average price 2000 to 2025 on a dual axis](/imgs/blogs/industrial-metals-and-the-lme-the-warehouse-that-prices-the-world-2.png)
+![LME copper (2000 to 2025) and aluminium (2016 to 2024) annual average prices on a dual axis](/imgs/blogs/industrial-metals-and-the-lme-the-warehouse-that-prices-the-world-2.png)
 
 The chart plots the two giants of the complex — copper and aluminium — on one timeline. Both surged through the **2000s China supercycle**, when a continent's worth of construction and grid-building pulled metal out of the ground faster than miners could supply it; copper ran from under \$2,000/tonne to nearly \$9,000 by 2011. Both then slid through the **2011–2016 China slowdown**. Both spiked again in **2021–2022** — copper on the electrification bid, aluminium with an extra kick from Europe's power crisis (the energy-cost story). And copper went on to a fresh **record near \$11,100/tonne in May 2024**. The synchrony is the point: these are six different metals with six different end-uses, yet they move as a *complex* because they share one master driver — the global industrial cycle. That shared heartbeat is what makes them tradable as a group and what separates them, as a class, from monetary gold. (For the allocator's version of this same contrast, see [metals, copper and silver, the economy's pulse](/blog/trading/cross-asset/metals-copper-silver-the-economys-pulse).)
 
