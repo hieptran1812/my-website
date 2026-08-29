@@ -111,9 +111,7 @@ There's a close cousin of shrinkage that desks reach for constantly: the **facto
 
 Why does this help? Because a factor model has *far fewer numbers to estimate*. Modeling 500 stocks with, say, 10 factors means you estimate $500\times10 = 5{,}000$ sensitivities plus 500 specific variances — about 5,500 numbers — instead of the $500\times501/2 \approx 125{,}000$ entries of the full covariance matrix. Fewer numbers means each is estimated more reliably, which means the resulting $\Sigma$ is *automatically* well-conditioned: it has no spurious near-zero eigenvalues for the optimizer to blow up, because the factor structure forbids them. This is the same medicine as shrinkage — trade flexibility for stability — delivered through a financial model instead of a statistical blend. In practice, commercial risk systems (Barra, Axioma) are factor models at heart, and many shops shrink a factor covariance *toward* a target, stacking both defenses.
 
-![Pipeline from raw noisy estimates through shrinkage and weight penalties into stable portfolio weights](/imgs/blogs/robust-regularized-portfolios-math-for-quants-1.png)
-
-That pipeline (shown again because it's the spine of everything) now reads more richly: the "shrink the estimates" box is doing exactly the Ledoit-Wolf blend, lifting the floor under the eigenvalues so the optimizer downstream behaves. Let's measure how much it's worth in dollars.
+The pipeline from the top of the post now reads more richly: the "shrink the estimates" box is doing exactly the Ledoit-Wolf blend, lifting the floor under the eigenvalues so the optimizer downstream behaves. Let's measure how much it's worth in dollars.
 
 #### Worked example: shrunk $\Sigma$ cuts out-of-sample volatility on a \$10,000,000 book
 

@@ -187,7 +187,7 @@ The **trading** argument: a derivatives trader calls $f_{xx}$ the **gamma** of a
 
 The **dollar** argument is the next worked example, and it is the one that makes the term stop being abstract.
 
-![Stack of the three deterministic terms and one random term that make up Ito's lemma](/imgs/blogs/ito-integral-itos-lemma-math-for-quants-3.png)
+![Revisiting the stack of the three deterministic terms and one random term that make up Ito's lemma](/imgs/blogs/ito-integral-itos-lemma-math-for-quants-3.png)
 
 The figure above is the same decomposition as before, and it is worth returning to here: the convexity term sits in the deterministic $dt$ bucket. That means it accrues *every instant the market is open*, rain or shine, regardless of direction — it is not a bet on up or down, it is a bet on *movement*. A long-gamma position earns the convexity term as a steady drip of value out of realized volatility; a short-gamma position pays it. The term is best read as the rent on convexity, charged continuously by the clock.
 
@@ -268,7 +268,7 @@ We chose the left endpoint and got the Ito integral. The other natural choice is
 
 So why does finance overwhelmingly use Ito, swallowing the extra term? Because the midpoint rule samples the integrand using information from the *end* of the step — it peeks at the move before committing the position. That is fine for a physical system with no causality constraint, but it is forbidden for a trader: you cannot set your share count using a price you have not yet seen. Only the left-endpoint Ito integral represents an implementable, non-anticipating strategy, and only it is a martingale. The two integrals are related by a clean conversion — Stratonovich equals Ito plus half the cross-variation — so nothing is lost; they are two dialects for the same content, and finance speaks Ito because finance has an arrow of time.
 
-![Before and after comparison of the left endpoint Ito integral and the midpoint Stratonovich integral](/imgs/blogs/ito-integral-itos-lemma-math-for-quants-6.png)
+![Revisiting the before and after comparison of the left endpoint Ito integral and the midpoint Stratonovich integral](/imgs/blogs/ito-integral-itos-lemma-math-for-quants-6.png)
 
 The figure above (the same contrast we met earlier) earns a second look here: the left column is the non-anticipating, martingale, trade-able Ito choice; the right is the peeking, ordinary-chain-rule, not-a-martingale Stratonovich choice. The choice is not aesthetic — it encodes whether your model is allowed to see the future.
 

@@ -111,8 +111,6 @@ If the random draw is $Z = 0$ (the median path), $S_T = 100 \times e^{0.0075} \a
 
 Now we earn the equation. The genius of Fischer Black, Myron Scholes, and Robert Merton in 1973 was to notice that you can *cancel the randomness* of an option by holding the right number of shares against it, and that once the randomness is gone, no-arbitrage pins down the price. Let us walk it slowly.
 
-![Pipeline showing sell an option, buy delta shares, apply Ito's lemma, randomness cancels, earn the risk-free rate, Black-Scholes PDE](/imgs/blogs/feynman-kac-black-scholes-pde-math-for-quants-2.png)
-
 The way this works, step by step: suppose you **sell** one call option for its market price $V$ and you want to protect yourself from the stock moving. The option's value rises when the stock rises (you are short it, so that hurts you), so you offset by **buying** some shares of the stock. How many? You buy exactly $V_S$ shares — the option's delta, the rate at which its value changes per \$1 of stock. This is the *delta hedge*. Your portfolio is: short one option, long $V_S$ shares. Its value is
 
 $$ \Pi = -V + V_S \cdot S. $$
@@ -298,8 +296,6 @@ Suppose you price our \$4.62 call by Monte Carlo and you want the answer accurat
 $$ N = \Big(\frac{s}{\text{SE}}\Big)^2 = \Big(\frac{7}{0.01}\Big)^2 = 700^2 = 490{,}000 \approx \text{half a million paths.} $$
 
 To tighten the error tenfold to \$0.001, you would need a *hundred times* more paths — 49 million. **The intuition: Monte Carlo accuracy is brutally expensive at the margin, which is exactly why, for a single-underlying European option, nobody simulates — they use the closed form or a grid.** Monte Carlo earns its keep only when the alternatives are impossible.
-
-![Tree of pricing approaches splitting into the expectation route and the PDE route with their concrete methods](/imgs/blogs/feynman-kac-black-scholes-pde-math-for-quants-5.png)
 
 The same tree from earlier is the decision aid: you walk down the expectation branch when the payoff is path-dependent or high-dimensional, and down the PDE branch when it is low-dimensional or has early exercise — knowing the leaves agree on price.
 

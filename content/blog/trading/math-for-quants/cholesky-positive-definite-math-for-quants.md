@@ -130,9 +130,7 @@ Now to the star of the post. The **Cholesky factorization** takes a positive-def
 
 $$\Sigma = L L^\top.$$
 
-"Lower-triangular" means every entry *above* the diagonal is zero — the non-zero numbers form a triangle in the bottom-left. The transpose $L^\top$ flips $L$ across its diagonal, so it is upper-triangular. The matrix below shows the target $\Sigma$ we factor by hand next; remember it, because $L$ for this matrix is what we compute first.
-
-![A two by two matrix with ones on the diagonal and zero point six on both off-diagonal cells, the same correlation matrix to be factored.](/imgs/blogs/cholesky-positive-definite-math-for-quants-2.png)
+"Lower-triangular" means every entry *above* the diagonal is zero — the non-zero numbers form a triangle in the bottom-left. The transpose $L^\top$ flips $L$ across its diagonal, so it is upper-triangular. The 2×2 correlation matrix shown earlier is the target $\Sigma$ we factor by hand next; $L$ for that matrix is what we compute first.
 
 Why call $L$ the "square root" of $\Sigma$? Because for an ordinary positive number $a$, its square root $\ell$ satisfies $a = \ell \cdot \ell$. The Cholesky factor does the matrix version of exactly this: $\Sigma = L \cdot L^\top$. It is *a* square root, not *the* square root (there are others, like the symmetric matrix square root from the eigenvalue decomposition), but it is the one that is cheapest to compute and the most convenient for simulation, because triangular matrices are easy to multiply by and easy to solve with.
 
@@ -203,7 +201,7 @@ $$L \, I \, L^\top = L L^\top = \Sigma.$$
 
 That is the whole magic. Because we *chose* $L$ to satisfy $LL^\top = \Sigma$, the transformed vector $x$ comes out with covariance exactly $\Sigma$ and mean exactly $\mu$. The figure below traces it end to end: independent draws $z$ on the left, the factorization in the middle, the multiply, and correlated returns $x$ on the right — it is the same mental-model pipeline from the top of the post, now earned.
 
-![A pipeline showing independent draws z feeding the factorization Sigma equals L L transpose, then x equals mu plus L z, producing correlated returns x.](/imgs/blogs/cholesky-positive-definite-math-for-quants-1.png)
+![The same pipeline as at the top of the post, revisited: independent draws z feed the factorization Sigma equals L L transpose, then x equals mu plus L z produces correlated returns x.](/imgs/blogs/cholesky-positive-definite-math-for-quants-1.png)
 
 The reason it has to be a *triangular* factor and not just any square root is partly convenience and partly tradition: the lower-triangular form means $x_1$ depends only on $z_1$, $x_2$ depends on $z_1$ and $z_2$, and so on — a clean recursive structure that is fast to evaluate and that gives a tidy "first asset is the driver, later assets add their own twists" interpretation. But any matrix $M$ with $MM^\top = \Sigma$ would correlate the draws correctly; Cholesky is simply the cheapest such $M$.
 

@@ -380,9 +380,7 @@ print("closed form     :", np.round(w_star, 4))
 
 All three routes converge to the same unconstrained weights $(0.513,\, 1.026)$ we found by hand. Notice three habits worth keeping. We never form $\Sigma^{-1}$ explicitly — `np.linalg.solve` solves the system $Hw = g$ directly, which is faster and more numerically stable than inverting (the same reason you do not compute $1/a$ to divide a single number you only use once). We check the gradient norm to decide when to stop. And the Newton step is literally one line, because for a quadratic the curvature is all you need. This sixty-second script is, in miniature, what a multi-million-dollar portfolio system does under the hood.
 
-![Stack of optimizer iterations descending toward the minimum](/imgs/blogs/matrix-calculus-optimization-math-for-quants-2.png)
-
-The stack of iterations above is the loop unrolled: each layer is one pass of "compute the gradient, take a step," each one lower than the last, until the bottom. Whether the steps are the cautious ones of gradient descent or the single leap of Newton's method, the picture — and the math — is the same descent toward the flat spot where the gradient dies.
+That loop, unrolled, is just a stack of iterations: each pass is one round of "compute the gradient, take a step," each landing lower than the last, until the bottom. Whether the steps are the cautious ones of gradient descent or the single leap of Newton's method, the picture — and the math — is the same descent toward the flat spot where the gradient dies.
 
 ## Common misconceptions
 

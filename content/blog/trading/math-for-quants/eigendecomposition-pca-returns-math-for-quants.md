@@ -119,8 +119,6 @@ A determinant of a $2 \times 2$ matrix $\begin{pmatrix} a & b \\ c & d \end{pmat
 
 There is a faster route for the $2 \times 2$ case that interviewers reward, and it generalizes to a useful sanity check. The two eigenvalues of any matrix satisfy two tiny relationships: their **sum equals the trace** ($\lambda_1 + \lambda_2 = a + d$) and their **product equals the determinant** ($\lambda_1 \lambda_2 = ad - bc$). So before grinding through the characteristic polynomial, you already know two facts about the answer. For a covariance matrix this is more than a trick: the trace is the total variance of the system and the determinant measures how "non-degenerate" the matrix is. A determinant near zero is a warning that one eigenvalue is near zero — a nearly riskless direction — which simultaneously means the matrix is nearly impossible to invert, the precise condition that wrecks portfolio optimizers later in the post. When you see a tiny determinant, your first thought should be "one of my risk directions has almost no variance, and dividing by it will explode."
 
-![A correlated return cloud being rotated so its long and short axes become the new coordinate axes](/imgs/blogs/eigendecomposition-pca-returns-math-for-quants-1.png)
-
 Picture the rotation again: the long axis of the return cloud is the eigenvector with the *large* eigenvalue (most variance), and the short axis is the eigenvector with the *small* eigenvalue (least variance). The two axes meet at a right angle — they are orthogonal — which is the geometric face of "uncorrelated." That orthogonality is not a coincidence; it is guaranteed by the symmetry of $\Sigma$, and it is the reason PCA gives you genuinely independent risk dials rather than just a different tangle.
 
 #### Worked example: solving a 2×2 covariance matrix by hand
@@ -279,7 +277,7 @@ Now we put the pieces together into the move that makes PCA a *trading* tool, no
 
 The mechanism is a **projection**. Given the leading eigenvector $v_1$ (unit length), any portfolio's exposure to PC1 is the dot product of its weights with $v_1$. To make a portfolio *market-neutral*, you adjust its weights so that this dot product is zero — geometrically, you project the weight vector onto the subspace orthogonal to $v_1$. The residual portfolio has, by construction, zero loading on the market factor, so its variance no longer includes the giant $\lambda_1$ term. What is left is the sum of the *smaller* eigenvalues' contributions — the residual risk.
 
-![Five correlated stocks on the left collapsing into a market factor, a sector factor, and a residual on the right](/imgs/blogs/eigendecomposition-pca-returns-math-for-quants-4.png)
+![The earlier decomposition again, read as a hedge: five correlated stocks on the left collapsing into a market factor, a sector factor, and a residual on the right](/imgs/blogs/eigendecomposition-pca-returns-math-for-quants-4.png)
 
 Reading the before-and-after above through the trading lens: you start with five names whose risk is dominated by the market factor (PC1). You remove that factor — hedge it out with an offsetting position in the first eigenportfolio, or simply tilt weights orthogonal to $v_1$ — and what remains is the sector factor and the residuals, the part that is *yours*. The residual is where stat-arb lives, because the common market move that swamps everything has been stripped away. The dollar arithmetic makes the payoff concrete.
 
