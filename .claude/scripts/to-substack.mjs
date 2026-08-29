@@ -647,7 +647,7 @@ function convert(file, opts, manifest) {
     if (fm.description) fm.description = smartDashes(fm.description);
   }
   const stats = {
-    images: [], animations: [], tables: 0, mathImageUrls: [],
+    images: [], animations: [], tables: 0, mathImageUrls: [], mathFiles: [],
     internalLinks: 0, linkedToSubstack: 0, needsPublishing: new Map(), deadLinks: new Set(),
     tableSources: [], tableImages: [],
     mathUnicode: 0, mathImages: 0, mathDisplayRaw: 0,
@@ -867,9 +867,17 @@ function convert(file, opts, manifest) {
     // *inside* the formula stays escaped. That asymmetry is what lets the
     // re-push step tell a math delimiter from a currency sign: prose currency
     // arrives as `\$` and is unescaped to plain text, a bare `$` opens math.
-    // dollarmath rejects a space next to an inline delimiter, so `$x = $`
-    // would ship as source. Trim before delimiting.
+    // Display math is handed over bare: python-substack turns a `$$` fence into
+    // `latex_block`, which Substack renders as real maths.
     if (display) return `$$\n${tex}\n$$`;
+    // Inline is the opposite: a bare `$…$` becomes an inline `latex` node, and
+    // this publication cannot render one — the whole post's `body_html` comes
+    // back empty. So an inline formula that survives to here ships **escaped**,
+    // as literal source the reader can at least read. Every other option was
+    // measured and is worse: an inline image node (external or staged on disk)
+    // is dropped outright, and a `$$` block opened mid-sentence breaks the
+    // paragraph. Unicode, decided earlier, is the good path; this is the
+    // honest fallback for what Unicode cannot state faithfully.
     const inline = tex.trim();
     // A span with no LaTeX in it is just a number the site wrapped so it would
     // render in math type — `$80$`, `$0.5 + 0.5 = 1$`. dollarmath is configured
@@ -877,7 +885,7 @@ function convert(file, opts, manifest) {
     // literal `$` in the prose, and the next real formula pairs with one of
     // them and swallows the sentence between. Ship it as the text it is.
     if (!/[\\{}^_]/.test(inline)) return inline;
-    return `$${inline}$`;
+    return `\\$${inline}\\$`;
   });
   markdown = markdown.replace(tokRe("IMG"), (_, i) => {
     const img = images[Number(i)];
@@ -1612,6 +1620,17 @@ async function main() {
           await renderTable(stats.tableSources[t.index], t.file);
         }
         console.log(`  ${stats.tableImages.length} table(s) rendered as images (Substack has no table node)`);
+      }
+      if (stats.mathFiles.length) {
+        fs.mkdirSync(path.join(opts.out, "math"), { recursive: true });
+        let got = 0;
+        for (const mf of stats.mathFiles) {
+          const res = await fetch(mf.url);
+          if (!res.ok) { console.log(`  \x1b[31mmath image ${res.status}\x1b[0m ${mf.url.slice(0, 80)}`); continue; }
+          fs.writeFileSync(mf.file, Buffer.from(await res.arrayBuffer()));
+          got++;
+        }
+        console.log(`  ${got}/${stats.mathFiles.length} formula(s) staged as images (Unicode could not state them faithfully)`);
       }
     }
 
