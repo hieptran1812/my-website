@@ -276,7 +276,14 @@ def main() -> int:
             draft = post.get_draft()
             body = json.loads(draft["draft_body"])
             body = repair_inline_nodes(body)
-            body = repair_blockquotes(body, markdown)
+            # `repair_blockquotes` is deliberately NOT called any more. It
+            # rebuilt each quote from the raw Markdown, which was right when
+            # python-substack's quote branch dropped every mark — but the pinned
+            # install keeps marks *and* math inside a blockquote, so rebuilding
+            # now destroys the `latex` nodes in the TL;DR box and hands the
+            # reader `$\sigma_t^2 = \omega + \alpha$` as plain text. Verified
+            # against the API: a quoted bullet round-trips with its strong/em/
+            # code marks and its formula intact.
             body = repair_image_attrs(body, markdown)
             body = json.dumps(body)
             api.put_draft(draft_id, draft_body=body)

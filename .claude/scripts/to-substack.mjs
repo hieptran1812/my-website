@@ -681,7 +681,11 @@ function convert(file, opts, manifest) {
   // 3. Text-level rewrites (safe now that code and math are out of the way).
   md = convertCallouts(md);
   const images = [];
-  md = md.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, alt, src) => {
+  // The alt text often carries maths like `E[X] = 1.4`, so it must be allowed
+  // one level of nested brackets. A plain `[^\]]*` stops at the first `]`,
+  // the embed then fails to match, and the raw `/imgs/...png` ref ships to
+  // Substack as an image src that was never uploaded.
+  md = md.replace(/!\[((?:[^\][]|\[[^\][]*\])*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, alt, src) => {
     const url = imageUrl(src, opts.site, manifest);
     stats.images.push(url);
     // The draft path uploads the file itself, so keep the local path too — and
@@ -887,16 +891,19 @@ function convert(file, opts, manifest) {
   });
   if (!opts.deepHeadings) markdown = markdown.replace(/^#{4,6} +(.*)$/gm, "**$1**");
 
-  // Guard: any bare `$` left outside a `$$` block is a formula waiting to be
-  // mis-parsed into a node the editor can't open. Count it and say so.
+  // Guard: a bare `$` that is not one end of a matched pair is a formula
+  // waiting to be mis-parsed. When inline math ships raw, most bare dollars are
+  // legitimate delimiters, so pair them off first and count only the remainder;
+  // counting every bare `$` would hold back every post with inline math.
   // Code spans are exempt — a `$` in one is inert, and escaping it would show
-  // the backslash. Everything else must be escaped or inside a `$$` block.
+  // the backslash.
   stats.strayDollars = markdown
     .replace(/```[\s\S]*?```/g, " ")
     .replace(/(`+)(?:(?!\1)[\s\S])+?\1/g, " ")
     .split("\n")
-    .filter((line) => line !== "$$")
+    .filter((line) => line.trim() !== "$$")
     .join("\n")
+    .replace(/(?<![\\$])\$(?:[^$\n\\]|\\.)+?(?<![\\$])\$/g, " ")   // matched inline pairs
     .match(/(?<![\\$])\$(?!\$)/g)?.length ?? 0;
 
   // A surviving placeholder means a mask/restore pair went wrong — never ship it.
@@ -1704,13 +1711,18 @@ async function main() {
           verified = true;
           const v = verifyDraft(r.id, opts);
           if (!v) console.log(`  \x1b[33mcould not read the draft back to verify it\x1b[0m`);
-          else if (v.inlineLatex || v.unuploaded) {
-            console.log(`  \x1b[31mthe draft is not usable\x1b[0m — ${v.inlineLatex} inline latex node(s), ${v.unuploaded}/${v.images} image(s) not uploaded`);
+          else if (v.unuploaded) {
+            console.log(`  \x1b[31mthe draft is not usable\x1b[0m — ${v.unuploaded} of ${v.images} image(s) never uploaded, so their local path is the src`);
             console.log(`  stopping before this repeats across the batch; draft ${r.id} needs deleting`);
             aborted = true;
             break;
           } else {
-            console.log(`  verified: ${v.nodes} nodes, ${v.images} images uploaded, no inline latex ✓`);
+            // An inline `latex` node used to mean the converter had mangled the
+            // formula, back when python-substack had no Markdown parser. The
+            // pinned install renders it as real inline math, so it is now the
+            // desired outcome rather than a defect — report it, don't abort.
+            const math = v.inlineLatex ? `, ${v.inlineLatex} inline math node(s)` : "";
+            console.log(`  verified: ${v.nodes} nodes, ${v.images} images uploaded${math} ✓`);
           }
         }
       } else if (isRateLimit(r.error)) {
