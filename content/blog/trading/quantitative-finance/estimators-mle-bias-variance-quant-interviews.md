@@ -259,8 +259,8 @@ The first moment is just the mean: $\mathbb{E}[X] = \mu$. The second moment is t
 
 Suppose you observe a batch of daily returns whose sample mean is $1.0\%$ and whose sample mean-of-squares is $4.0$ (in percent-squared). Match moments:
 
-- **First moment:** $\hat{\mu} = $ sample mean $= 1.0\%$.
-- **Second moment:** $\hat{\mu}^2 + \hat{\sigma}^2 = $ sample mean-of-squares $= 4.0$, so $\hat{\sigma}^2 = 4.0 - (1.0)^2 = 3.0$ (percent-squared), giving $\hat{\sigma} = \sqrt{3.0} = 1.73\%$.
+- **First moment:** $\hat{\mu} =$ sample mean $= 1.0\%$.
+- **Second moment:** $\hat{\mu}^2 + \hat{\sigma}^2 =$ sample mean-of-squares $= 4.0$, so $\hat{\sigma}^2 = 4.0 - (1.0)^2 = 3.0$ (percent-squared), giving $\hat{\sigma} = \sqrt{3.0} = 1.73\%$.
 
 For the Normal distribution the method of moments gives the *same* answers as maximum likelihood — the sample mean and the (÷ n) sample variance. That coincidence is special to the Normal. Where the two methods diverge, the MLE is usually more efficient (lower variance), but the method of moments is a lifesaver when the likelihood has no closed form, and it is a great first move in an interview when you are asked to "estimate the parameters" of an unfamiliar distribution: write down its mean and variance in terms of the parameters, match to the data, solve.
 

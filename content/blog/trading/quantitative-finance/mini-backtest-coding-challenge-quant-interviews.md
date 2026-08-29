@@ -152,9 +152,9 @@ The intuition: a missing date is innocent if the market was closed and a defect 
 
 Returns are where the first subtle scoring happens, because there are two definitions and they are not interchangeable.
 
-A **simple return** (also called arithmetic return) is the fractional change: `r = P_t / P_{t-1} - 1`. If the price goes \$100 to \$110, the simple return is `110/100 - 1 = 0.10`, or +10%.
+A **simple return** (also called arithmetic return) is the fractional change: $r = P_t / P_{t-1} - 1$. If the price goes \$100 to \$110, the simple return is `110/100 - 1 = 0.10`, or +10%.
 
-A **log return** (continuously-compounded return) is the natural logarithm of the price ratio: `r = ln(P_t / P_{t-1})`. For the same move, `ln(110/100) = 0.0953`, or +9.53%.
+A **log return** (continuously-compounded return) is the natural logarithm of the price ratio: $r = ln(P_t / P_{t-1})$. For the same move, `ln(110/100) = 0.0953`, or +9.53%.
 
 For small moves the two are nearly identical, but they have one crucial difference: **log returns add across time, simple returns do not.**
 

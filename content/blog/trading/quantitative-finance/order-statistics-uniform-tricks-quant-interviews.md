@@ -113,7 +113,7 @@ Where does a Uniform(0,1) draw land *on average*? By symmetry the average — th
 
 $$ E[U] = \int_0^1 x \cdot f(x)\,dx = \int_0^1 x \cdot 1\,dx = \left[\tfrac{x^2}{2}\right]_0^1 = \tfrac{1}{2}. $$
 
-Each symbol: `x` is the value, `f(x) = 1` is the density, and the integral sums value-weighted-by-density across the range. To measure the *spread*, the **variance** (the average squared distance from the mean) is `E[U²] − (E[U])²`. We have `E[U²] = \int_0^1 x^2\,dx = 1/3`, so the variance is `1/3 − 1/4 = 1/12 ≈ 0.083`. The **standard deviation** (the square root, in the same units as the variable) is `√(1/12) ≈ 0.289`.
+Each symbol: `x` is the value, `f(x) = 1` is the density, and the integral sums value-weighted-by-density across the range. To measure the *spread*, the **variance** (the average squared distance from the mean) is `E[U²] − (E[U])²`. We have $E[U²] = \int_0^1 x^2\,dx = 1/3$, so the variance is `1/3 − 1/4 = 1/12 ≈ 0.083`. The **standard deviation** (the square root, in the same units as the variable) is `√(1/12) ≈ 0.289`.
 
 **The intuition:** a single Uniform(0,1) draw averages `1/2` and typically sits about `0.29` away from the middle — it really does roam across the whole interval. Hold onto `E[U] = 1/2` and `Var(U) = 1/12`; they show up as building blocks everywhere.
 
@@ -165,7 +165,7 @@ The minimum `m = X₍₁₎` is the maximum's mirror image. "The minimum is *abo
 
 $$ P(m > x) = (1-x)^n, \qquad F_m(x) = P(m \le x) = 1 - (1-x)^n. $$
 
-Differentiating gives density `f_m(x) = n(1-x)^{n-1}`, and the expected value (by the same integral, or by the symmetry that the min of uniforms is `1` minus the max of uniforms) is:
+Differentiating gives density $f_m(x) = n(1-x)^{n-1}$, and the expected value (by the same integral, or by the symmetry that the min of uniforms is `1` minus the max of uniforms) is:
 
 $$ E[\,\text{min of } n \text{ Uniform}(0,1)\,] = \frac{1}{n+1}. $$
 
@@ -294,7 +294,7 @@ The probability is that area divided by the whole square:
 
 $$ P(\text{meet}) = \frac{1575}{3600} = \frac{7}{16} = 0.4375. $$
 
-So with a 15-minute patience in a 60-minute window, the friends meet about 44% of the time. A neat generalization worth knowing for follow-ups: if the window is `T` and each waits `w`, the meeting probability is `1 − \left(\frac{T - w}{T}\right)^2`. Plugging `T = 60`, `w = 15` gives `1 − (45/60)² = 1 − (3/4)² = 1 − 9/16 = 7/16`. The interviewer's natural follow-up is "what if they each wait 20 minutes?" — and now you just change `w`: `1 − (40/60)² = 1 − (2/3)² = 1 − 4/9 = 5/9 ≈ 0.556`.
+So with a 15-minute patience in a 60-minute window, the friends meet about 44% of the time. A neat generalization worth knowing for follow-ups: if the window is `T` and each waits `w`, the meeting probability is $1 − \left(\frac{T - w}{T}\right)^2$. Plugging `T = 60`, `w = 15` gives `1 − (45/60)² = 1 − (3/4)² = 1 − 9/16 = 7/16`. The interviewer's natural follow-up is "what if they each wait 20 minutes?" — and now you just change `w`: `1 − (40/60)² = 1 − (2/3)² = 1 − 4/9 = 5/9 ≈ 0.556`.
 
 **The intuition:** "they meet" is a fat diagonal band in the square of arrival times; its area, as a fraction of the whole, is the probability. The waiting time controls the band's width, and the answer is one minus the squared fraction of unused window.
 
@@ -304,7 +304,7 @@ The last tool is the **exponential distribution**, the natural model for *waitin
 
 $$ f(t) = \lambda e^{-\lambda t}, \qquad F(t) = P(T \le t) = 1 - e^{-\lambda t}, \qquad t \ge 0, $$
 
-where `T` is the waiting time and `λ` is how many events you expect per unit time. The **survival function** `P(T > t) = e^{-\lambda t}` — the probability you are *still waiting* after time `t` — is the piece we will use most. The expected wait is `E[T] = 1/λ`: if events arrive at rate 3 per hour, you wait `1/3` of an hour, or 20 minutes, on average.
+where `T` is the waiting time and `λ` is how many events you expect per unit time. The **survival function** $P(T > t) = e^{-\lambda t}$ — the probability you are *still waiting* after time `t` — is the piece we will use most. The expected wait is `E[T] = 1/λ`: if events arrive at rate 3 per hour, you wait `1/3` of an hour, or 20 minutes, on average.
 
 ### Memorylessness: the past leaves no trace
 
@@ -493,7 +493,7 @@ These are not just brain-teasers; the same structures recur in real quantitative
 
 **Default timing and credit.** In credit modeling, the time-to-default of a firm is often modeled with an exponential (constant *hazard rate*) or a generalization. For a basket of names, "which defaults first, and when" is the min-of-exponentials race again; the first-to-default basket swap is priced directly off the combined hazard rate and the per-name winning probabilities. The short-rate and intensity models used for this connect to the dynamics covered in [short-rate models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white) and the broader pricing machinery in [derivatives pricing](/blog/trading/quantitative-finance/derivatives-pricing).
 
-**Monte Carlo and the inverse-CDF trick.** Every Monte Carlo pricer in production starts by generating Uniform(0,1) draws and *transforming* them into the distribution it needs. The recipe — **inverse transform sampling** — is pure order-of-operations on the CDF: if `U` is Uniform(0,1), then `X = F⁻¹(U)` has CDF `F`. To make an exponential with rate `λ`, you compute `X = −\ln(1 − U)/λ`; to make any distribution, you invert its CDF. This is *why* the uniform is the mother distribution and why interviews fixate on it: control the uniform and you control everything downstream. The same simulation engines feed the [volatility surface](/blog/trading/quantitative-finance/volatility-surface) calibrations and exotic payoffs.
+**Monte Carlo and the inverse-CDF trick.** Every Monte Carlo pricer in production starts by generating Uniform(0,1) draws and *transforming* them into the distribution it needs. The recipe — **inverse transform sampling** — is pure order-of-operations on the CDF: if `U` is Uniform(0,1), then `X = F⁻¹(U)` has CDF `F`. To make an exponential with rate `λ`, you compute $X = −\ln(1 − U)/λ$; to make any distribution, you invert its CDF. This is *why* the uniform is the mother distribution and why interviews fixate on it: control the uniform and you control everything downstream. The same simulation engines feed the [volatility surface](/blog/trading/quantitative-finance/volatility-surface) calibrations and exotic payoffs.
 
 **Reservoir sampling and "pick a random item from a stream."** A classic systems-meets-probability question — "you see records one at a time and can't store them all; how do you keep a uniformly random one?" — is solved by keeping the current item with probability `1/k` at step `k`. The correctness proof is an order-statistics / uniform argument: every item ends up equally likely to survive. Trading systems that need a uniform sample of fills or messages for monitoring use exactly this.
 

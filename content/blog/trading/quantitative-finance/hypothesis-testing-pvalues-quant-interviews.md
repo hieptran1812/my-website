@@ -236,7 +236,7 @@ The left curve is the null (no edge); the right curve is the world where the edg
 
 #### Worked example: the power to detect a \$5/day edge
 
-Your strategy, if real, makes $\mu = 5 per day. Daily noise is $\sigma = 50. You will run a one-sided 5% test on $n = 400$ days. **Roughly what is your power to detect this edge?**
+Your strategy, if real, makes $\mu = 5$ per day. Daily noise is $\sigma = 50$. You will run a one-sided 5% test on $n = 400$ days. **Roughly what is your power to detect this edge?**
 
 Step 1 — standard error: $\text{SE} = \dfrac{\sigma}{\sqrt{n}} = \dfrac{50}{\sqrt{400}} = \dfrac{50}{20} = 2.5$.
 

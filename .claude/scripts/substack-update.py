@@ -114,33 +114,25 @@ def blockquote_runs(markdown):
 
 
 def unescape_dollars_outside_math(markdown):
-    """Strip the site's `\\$` escape, but never inside a math region.
+    """Leave the site's `\\$` escape exactly where it is.
 
-    The exporter escapes currency signs for the site's Markdown renderer, and
-    python-substack reads that escape as literal text, so it has to come off.
-    But inside `$$...$$`, `\\$` is *correct LaTeX* for a literal dollar, and
-    unescaping it leaves a bare `$` in the middle of the block. dollarmath then
-    mis-terminates the block and the whole formula ships as visible source --
-    which is exactly how the banking and MACD posts broke.
+    This used to strip the escape, because the *old* python-substack had no
+    Markdown parser and would print `\\$` at the reader. The pinned install
+    parses with markdown-it, where `\\$` is a normal CommonMark escape that
+    renders as a plain dollar sign — so stripping it is not only unnecessary,
+    it is actively harmful once inline math ships as raw `$…$`:
 
-    So: unescape outside math, leave math regions byte-for-byte alone.
+        You hold a $100 stock ... ($\\approx 252$)
+
+    dollarmath opens a span at the currency `$` and closes it at the opening
+    delimiter of the real formula, swallowing the sentence in between. Keeping
+    the escape keeps the two apart: `\\$` can never be a delimiter, a bare `$`
+    always is. Verified against the API: `\\$100` arrives as the text "$100"
+    and `$\\approx 252$` as a latex node.
+
+    Kept as a named no-op so the call site still documents the decision.
     """
-    out, fenced = [], False
-    for line in markdown.split("\n"):
-        if line.strip() == "$$":
-            fenced = not fenced
-            out.append(line)
-            continue
-        if fenced:
-            out.append(line)
-            continue
-        # Protect single-line `$$...$$` spans, then unescape what is left.
-        parts = re.split(r"(\$\$.*?\$\$)", line)
-        out.append("".join(
-            part if part.startswith("$$") else re.sub(r"\\+\$", "$", part)
-            for part in parts
-        ))
-    return "\n".join(out)
+    return markdown
 
 
 def build_blockquote(lines):

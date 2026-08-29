@@ -125,7 +125,7 @@ Let `r_i` = the probability of eventual ruin (hitting $0 before $N) when you cur
 
 ![Condition on the very first move: the unknown at state i equals p times the unknown at i+1 plus q times the unknown at i-1](/imgs/blogs/markov-chains-hitting-times-quant-interviews-6.png)
 
-From `$i`, with probability `p` you win and move to `$(i+1)`, from which your ruin probability is `r_{i+1}`; with probability `q` you lose and move to `$(i−1)`, from which your ruin probability is `r_{i−1}`. So
+From `$i`, with probability `p` you win and move to `$(i+1)`, from which your ruin probability is $r_{i+1}$; with probability `q` you lose and move to `$(i−1)`, from which your ruin probability is $r_{i−1}$. So
 
 $$ r_i = p \cdot r_{i+1} + q \cdot r_{i-1}, \qquad i = 1, 2, \dots, N-1, $$
 
@@ -133,7 +133,7 @@ with the **boundary conditions** `r_0 = 1` (already broke — certain ruin) and 
 
 ### Solving the fair game (p = 1/2)
 
-When `p = q = 1/2`, the recursion becomes `r_i = ½ r_{i+1} + ½ r_{i−1}`, which rearranges to
+When `p = q = 1/2`, the recursion becomes $r_i = ½ r_{i+1} + ½ r_{i−1}$, which rearranges to
 
 $$ r_{i+1} - r_i = r_i - r_{i-1}. $$
 
@@ -183,7 +183,7 @@ $$ D_i = 1 + p \cdot D_{i+1} + q \cdot D_{i-1}, \qquad D_0 = D_N = 0. $$
 
 The crucial difference from the ruin recursion is that **`+1`**: every step counts, so the equation for an *expected count* always carries a `1` for the step you just took. Forgetting it is the single most common mistake on these problems.
 
-![Condition on the very first move: the unknown at state i equals p times the unknown at i+1 plus q times the unknown at i-1](/imgs/blogs/markov-chains-hitting-times-quant-interviews-6.png)
+![The same first-step decomposition again, now read as the expected-count recursion: the unknown at state i equals p times the unknown at i+1 plus q times the unknown at i-1, plus one for the step just taken](/imgs/blogs/markov-chains-hitting-times-quant-interviews-6.png)
 
 The same first-step picture applies — the bottom equation in that figure is exactly this expected-count recursion, with the telltale `+1`.
 
@@ -213,7 +213,7 @@ For `p ≠ q`, the duration has a less pretty but still mechanical formula:
 
 $$ D_i = \frac{i}{q - p} - \frac{N}{q - p} \cdot \frac{1 - (q/p)^i}{1 - (q/p)^N}. $$
 
-For our `p = 0.6`, `N = 10`, `i = 5` example, plugging in gives `D_5 ≈ 19.2` bets — shorter than the fair game's 25, because the drift now actively herds you toward the $10 wall instead of letting you dawdle in the middle. You do not need to memorize this formula for an interview; you need to be able to *set up the recursion* `D_i = 1 + pD_{i+1} + qD_{i−1}` and solve the small system by hand for whatever specific `N` they give you.
+For our `p = 0.6`, `N = 10`, `i = 5` example, plugging in gives `D_5 ≈ 19.2` bets — shorter than the fair game's 25, because the drift now actively herds you toward the $10 wall instead of letting you dawdle in the middle. You do not need to memorize this formula for an interview; you need to be able to *set up the recursion* $D_i = 1 + pD_{i+1} + qD_{i−1}$ and solve the small system by hand for whatever specific `N` they give you.
 
 ## Absorbing chains and the fundamental matrix
 
@@ -240,14 +240,14 @@ Here is the payoff. Define the **fundamental matrix**
 
 $$ \boxed{\,N = (I - Q)^{-1}\,}. $$
 
-The entry `N_{ij}` is the **expected number of times the chain visits transient state `j`, starting from transient state `i`, before being absorbed.** (Where does this come from? `N = I + Q + Q² + Q³ + …`, the sum of "you're there at step 0, step 1, step 2…" — a matrix geometric series that sums to `(I − Q)⁻¹`. That series is exactly counting expected visits.)
+The entry $N_{ij}$ is the **expected number of times the chain visits transient state `j`, starting from transient state `i`, before being absorbed.** (Where does this come from? `N = I + Q + Q² + Q³ + …`, the sum of "you're there at step 0, step 1, step 2…" — a matrix geometric series that sums to `(I − Q)⁻¹`. That series is exactly counting expected visits.)
 
 ![N = (I - Q) inverse counts expected visits to each transient state; multiplying N by an all-ones vector gives expected steps to absorption](/imgs/blogs/markov-chains-hitting-times-quant-interviews-8.png)
 
 From this one inverse, two quantities you actually want fall right out, shown in the figure:
 
 - **Expected steps to absorption:** `t = N · 1` (where `1` is a column of all ones). Summing row `i` of `N` adds up the expected visits to *every* transient state, which is the total expected number of steps before you get absorbed starting from `i`.
-- **Absorption probabilities:** `B = N · R`. The entry `B_{ij}` is the probability of being absorbed in absorbing state `j`, starting from transient state `i`. (Intuitively: expected visits to each transient state, times the probability of exiting from each to absorber `j`.)
+- **Absorption probabilities:** `B = N · R`. The entry $B_{ij}$ is the probability of being absorbed in absorbing state `j`, starting from transient state `i`. (Intuitively: expected visits to each transient state, times the probability of exiting from each to absorber `j`.)
 
 #### Worked example: a 3-state absorbing chain by hand
 
@@ -258,7 +258,7 @@ Q = \begin{pmatrix} 0 & \tfrac12 \\ \tfrac12 & 0 \end{pmatrix}\ \ (\text{rows } 
 R = \begin{pmatrix} \tfrac12 & 0 \\ 0 & \tfrac12 \end{pmatrix}\ \ (\text{cols } \$0,\$3).
 $$
 
-Then `I − Q = \begin{pmatrix} 1 & -½ \\ -½ & 1 \end{pmatrix}`, whose determinant is `1 − ¼ = ¾`, so
+Then $I − Q = \begin{pmatrix} 1 & -½ \\ -½ & 1 \end{pmatrix}$, whose determinant is `1 − ¼ = ¾`, so
 
 $$
 N = (I-Q)^{-1} = \frac{1}{3/4}\begin{pmatrix} 1 & \tfrac12 \\ \tfrac12 & 1 \end{pmatrix} = \frac{4}{3}\begin{pmatrix} 1 & \tfrac12 \\ \tfrac12 & 1 \end{pmatrix} = \begin{pmatrix} \tfrac43 & \tfrac23 \\ \tfrac23 & \tfrac43 \end{pmatrix}.
@@ -273,7 +273,7 @@ The phrase **hitting time** is the formal name for "how many steps until I first
 Let `h_i` = expected number of steps to first hit some target set `T`, starting from state `i`. The recipe is always:
 
 1. **`h_i = 0` for every state already in the target `T`.** (You're there; zero steps.)
-2. For every other state, **first-step analysis with a `+1`:** `h_i = 1 + Σ_j P_{ij} h_j`, summing over the states `j` you can move to.
+2. For every other state, **first-step analysis with a `+1`:** $h_i = 1 + Σ_j P_{ij} h_j$, summing over the states `j` you can move to.
 
 That is a linear system in the unknown `h_i`'s — one equation per non-target state. Solve it. For "probability of hitting A before B" the recipe is identical but **without the `+1`** and with boundaries `h_A = 1`, `h_B = 0` (you're tracking a probability, not a count, so reaching the target adds nothing per step).
 
@@ -335,7 +335,7 @@ In `E₀`: flip H (prob ½) → go to `S₁`; flip T (prob ½) → stay in `S₀
 
 **Solve.** From the first equation, `½E₀ = 1 + ½E₁`, so `E₀ = 2 + E₁`. Substitute into the second: `E₁ = 1 + ½E₀ = 1 + ½(2 + E₁) = 2 + ½E₁`, giving `½E₁ = 2`, so `E₁ = 4` and `E₀ = 6`.
 
-**Answer: 6 flips.** The naive "1/(1/4) = 4" is wrong because the events "HH starting at flip 1," "HH starting at flip 2," etc., *overlap* — a stray tail resets your progress, and that resetting cost is exactly the extra 2 flips. The clean cross-check: for a fair coin, the expected wait for a *self-overlapping* pattern of length `k` like HH is `2^{k} + 2^{k-1} + … `; for HH that is `2² + 2¹ = 6`. For three-in-a-row HHH it is `2³ + 2² + 2¹ = 14`.
+**Answer: 6 flips.** The naive "1/(1/4) = 4" is wrong because the events "HH starting at flip 1," "HH starting at flip 2," etc., *overlap* — a stray tail resets your progress, and that resetting cost is exactly the extra 2 flips. The clean cross-check: for a fair coin, the expected wait for a *self-overlapping* pattern of length `k` like HH is $2^{k} + 2^{k-1} + …$; for HH that is `2² + 2¹ = 6`. For three-in-a-row HHH it is `2³ + 2² + 2¹ = 14`.
 
 ### Problem 2 — When the pattern overlaps: HT vs HH
 
@@ -355,7 +355,7 @@ The asymmetry is in `E₁`: once you have an H, a T finishes you (→ 0), but **
 
 **Solve.** From `E₁`: `½E₁ = 1`, so `E₁ = 2`. From `E₀`: `½E₀ = 1 + ½E₁ = 1 + 1 = 2`, so `E₀ = 4`.
 
-**Answer: 4 flips for HT, versus 6 for HH.** The deep takeaway interviewers want: **patterns that cannot overlap themselves (HT) are reached faster than patterns that can (HH).** When you fail to complete HH, you waste the H you had; when you fail to complete HT, the failing flip is another H that *keeps you in business*. As a final flex, the overlap-aware formula (Conway's leading-numbers / correlation method) gives **HTH = 10**: states `S₀ → H → HT → HTH`, where an H out of `HT` jumps you forward to `HTH` (done) but the overlap means a failed attempt can leave you in state `H` rather than `S₀`. Set up `E_{HT} = 1 + ½·0 + ½E_0`, `E_H = 1 + ½E_H + ½E_{HT}`, `E_0 = 1 + ½E_H + ½E_0`, and grind: `E_{HT}=6, E_H=8, E_0=10`.
+**Answer: 4 flips for HT, versus 6 for HH.** The deep takeaway interviewers want: **patterns that cannot overlap themselves (HT) are reached faster than patterns that can (HH).** When you fail to complete HH, you waste the H you had; when you fail to complete HT, the failing flip is another H that *keeps you in business*. As a final flex, the overlap-aware formula (Conway's leading-numbers / correlation method) gives **HTH = 10**: states `S₀ → H → HT → HTH`, where an H out of `HT` jumps you forward to `HTH` (done) but the overlap means a failed attempt can leave you in state `H` rather than `S₀`. Set up $E_{HT} = 1 + ½·0 + ½E_0$, $E_H = 1 + ½E_H + ½E_{HT}$, `E_0 = 1 + ½E_H + ½E_0`, and grind: $E_{HT}=6, E_H=8, E_0=10$.
 
 ### Problem 3 — Gambler's ruin with an edge
 
@@ -363,7 +363,7 @@ The asymmetry is in `E₁`: once you have an H, a T finishes you (→ 0), but **
 
 **Recognize it instantly** as biased gambler's ruin: `i = 20`, `N = 40`, `p = 0.55`, `q = 0.45`. The odds ratio is `s = q/p = 0.45/0.55 = 9/11 ≈ 0.8182`.
 
-**Apply the formula** `P(\text{reach } N) = \frac{1 - s^i}{1 - s^N}`:
+**Apply the formula** $P(\text{reach } N) = \frac{1 - s^i}{1 - s^N}$:
 
 $$ s^{20} = (0.8182)^{20} \approx 0.0188, \qquad s^{40} = (0.8182)^{40} \approx 0.000352. $$
 
@@ -417,7 +417,7 @@ $$ h_C = \tfrac{10}{3} + \tfrac{40}{3} = \tfrac{50}{3} \approx 16.67 \text{ days
 
 **Answer: about 16.7 days from Calm** (and ~13.3 from Normal). The sanity checks are quick and worth narrating out loud: `h_C > h_N`, as it must be — Calm is one structural step *further* from Stressed than Normal — and both are comfortably larger than the naive `1/0.2 = 5` you'd get by pretending each day were an independent 20% shot at stress. That naive number is wrong for the same reason the coin problem's "4" was wrong: the only door into Stressed is *through Normal*, and most days you are either sitting in Calm or being knocked back to it, so the true wait is roughly three times longer. The transferable lesson: **for a multi-state hitting time, mark the target as the zero-boundary, write one `value = 1 + Σ (transition prob)·(neighbor value)` equation per remaining state, and solve the small linear system — the shape of the graph never changes the recipe.**
 
-*Deeper mechanics — the same answer from the fundamental matrix.* If you want to show the interviewer the general machinery rather than ad-hoc algebra, this is exactly the `t = N·1` recipe from the absorbing-chain section. The transient block (rows and columns Calm, Normal) is `Q = \begin{pmatrix} 0.7 & 0.3 \\ 0.5 & 0.3 \end{pmatrix}`, so `I − Q = \begin{pmatrix} 0.3 & -0.3 \\ -0.5 & 0.7 \end{pmatrix}` with determinant `(0.3)(0.7) − (−0.3)(−0.5) = 0.21 − 0.15 = 0.06`. Inverting a 2×2 (swap the diagonal, negate the off-diagonal, divide by the determinant) gives the fundamental matrix `N = (I−Q)^{-1} = \frac{1}{0.06}\begin{pmatrix} 0.7 & 0.3 \\ 0.5 & 0.3 \end{pmatrix}`. Summing the Calm row of expected visits, `(0.7 + 0.3)/0.06 = 1/0.06 = 50/3 ≈ 16.67`, reproduces `h_C` exactly; the Normal row gives `(0.5 + 0.3)/0.06 = 0.8/0.06 = 40/3 ≈ 13.33`. Two routes, one answer — which is the entire moral of the absorbing-chain section made concrete on a regime model.
+*Deeper mechanics — the same answer from the fundamental matrix.* If you want to show the interviewer the general machinery rather than ad-hoc algebra, this is exactly the `t = N·1` recipe from the absorbing-chain section. The transient block (rows and columns Calm, Normal) is $Q = \begin{pmatrix} 0.7 & 0.3 \\ 0.5 & 0.3 \end{pmatrix}$, so $I − Q = \begin{pmatrix} 0.3 & -0.3 \\ -0.5 & 0.7 \end{pmatrix}$ with determinant `(0.3)(0.7) − (−0.3)(−0.5) = 0.21 − 0.15 = 0.06`. Inverting a 2×2 (swap the diagonal, negate the off-diagonal, divide by the determinant) gives the fundamental matrix $N = (I−Q)^{-1} = \frac{1}{0.06}\begin{pmatrix} 0.7 & 0.3 \\ 0.5 & 0.3 \end{pmatrix}$. Summing the Calm row of expected visits, `(0.7 + 0.3)/0.06 = 1/0.06 = 50/3 ≈ 16.67`, reproduces `h_C` exactly; the Normal row gives `(0.5 + 0.3)/0.06 = 0.8/0.06 = 40/3 ≈ 13.33`. Two routes, one answer — which is the entire moral of the absorbing-chain section made concrete on a regime model.
 
 ### Problem 6 — Double-or-broke with an edge (ruin *and* duration together)
 
@@ -427,7 +427,7 @@ This is the full gambler's-ruin package — **probability and duration in one br
 
 $$ s = \frac{q}{p} = \frac{0.45}{0.55} = \frac{9}{11} \approx 0.8182. $$
 
-**Ruin probability.** Plug into `r_i = \dfrac{s^i - s^N}{1 - s^N}`. The two powers we need are `s⁵ = (9/11)⁵ ≈ 0.3666` and `s¹⁰ ≈ 0.1344`, so
+**Ruin probability.** Plug into $r_i = \dfrac{s^i - s^N}{1 - s^N}$. The two powers we need are `s⁵ = (9/11)⁵ ≈ 0.3666` and `s¹⁰ ≈ 0.1344`, so
 
 $$ r_5 = \frac{s^5 - s^{10}}{1 - s^{10}} = \frac{0.3666 - 0.1344}{1 - 0.1344} = \frac{0.2322}{0.8656} \approx 0.268. $$
 
@@ -437,11 +437,11 @@ So she busts about **27%** of the time and reaches $10 about **73%** of the time
 
 $$ D_i = \frac{i}{q-p} - \frac{N}{q-p}\cdot\frac{1 - s^i}{1 - s^N}. $$
 
-Here `q − p = 0.45 − 0.55 = −0.10`, and the success factor is `\frac{1-s^5}{1-s^{10}} = \frac{0.6334}{0.8656} ≈ 0.7317`. So
+Here `q − p = 0.45 − 0.55 = −0.10`, and the success factor is $\frac{1-s^5}{1-s^{10}} = \frac{0.6334}{0.8656} ≈ 0.7317$. So
 
 $$ D_5 = \frac{5}{-0.10} - \frac{10}{-0.10}\cdot 0.7317 = -50 - (-100)(0.7317) = -50 + 73.17 \approx 23.2 \text{ bets}. $$
 
-(The two negative signs cancel — a classic place to drop a sign under pressure, so it's worth saying "minus times minus is plus" out loud.) **Answer: ruin probability ≈ 0.27, expected session length ≈ 23.2 bets.** Now the cross-check that proves you understand the structure: the *fair* version's duration is the clean `D_5 = i(N−i) = 5·5 = 25` bets. The edge shortens the expected session only slightly — from 25 to ~23 — because a 55/45 drift is gentle; it nudges her toward the $10 wall a touch faster but does not herd her there. (Contrast the steeper `p = 0.6` example earlier, which cut a comparable game down to ~19 bets.) The transferable lesson: **ruin probability and duration come from the *same* recursion with different boundary bookkeeping — `r_i = p\,r_{i+1} + q\,r_{i-1}` carries no `+1`, while `D_i = 1 + p\,D_{i+1} + q\,D_{i-1}` does — and the fair-game answers `i/N` and `i(N−i)` are always there as a free sanity rail for the biased numbers.**
+(The two negative signs cancel — a classic place to drop a sign under pressure, so it's worth saying "minus times minus is plus" out loud.) **Answer: ruin probability ≈ 0.27, expected session length ≈ 23.2 bets.** Now the cross-check that proves you understand the structure: the *fair* version's duration is the clean `D_5 = i(N−i) = 5·5 = 25` bets. The edge shortens the expected session only slightly — from 25 to ~23 — because a 55/45 drift is gentle; it nudges her toward the $10 wall a touch faster but does not herd her there. (Contrast the steeper `p = 0.6` example earlier, which cut a comparable game down to ~19 bets.) The transferable lesson: **ruin probability and duration come from the *same* recursion with different boundary bookkeeping — $r_i = p\,r_{i+1} + q\,r_{i-1}$ carries no `+1`, while $D_i = 1 + p\,D_{i+1} + q\,D_{i-1}$ does — and the fair-game answers `i/N` and `i(N−i)` are always there as a free sanity rail for the biased numbers.**
 
 ### A note on what they're really testing
 

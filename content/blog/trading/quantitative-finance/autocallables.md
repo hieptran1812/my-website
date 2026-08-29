@@ -249,7 +249,7 @@ The operator $W(t) = \min_j (S_j(t) / S_j(0))$ has several important properties:
 
 **1. Monotone in spot.** As any single $S_j$ falls, $W$ either stays the same or falls. As any $S_j$ rises, $W$ either stays the same or rises. Continuous in spot.
 
-**2. Joint correlation matters.** With low correlation, the worst-of is consistently the *lowest* of the basket, so its expected value is much below the average. With high correlation, the worst-of stays close to the basket average. The expected value of $W$ as a function of correlation: $\mathbb{E}[W] \approx $ average × $f(\rho)$ where $f$ decreases as $\rho$ decreases.
+**2. Joint correlation matters.** With low correlation, the worst-of is consistently the *lowest* of the basket, so its expected value is much below the average. With high correlation, the worst-of stays close to the basket average. The expected value of $W$ as a function of correlation: $\mathbb{E}[W] \approx$ average × $f(\rho)$ where $f$ decreases as $\rho$ decreases.
 
 **3. Distribution becomes more skewed with low correlation.** For 3-name worst-of with $\rho = 0.5$, the distribution is approximately lognormal; with $\rho = 0.0$, the distribution has heavy left tail.
 

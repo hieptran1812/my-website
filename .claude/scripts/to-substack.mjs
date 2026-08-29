@@ -254,18 +254,21 @@ function maskMath(md) {
     return tok("MATH", store.length - 1);
   };
   let out = md.replace(/\$\$([\s\S]*?)\$\$/g, (_, tex) => stash(tex.trim(), true));
-  out = out.replace(
-    /(?<![\\$])\$(?!\s)(?:(?=\d)(?=[^$\n]*[\\{}^_])|(?=\D))((?:[^$\n\\]|\\.)+?)(?<!\s)\$(?![A-Za-z0-9])/g,
-    (_, tex) => stash(tex, false),
-  );
-  // That rule deliberately skips digit-only spans so it can't eat currency,
-  // which leaves `$0$` rendering as literal dollars on the site. Here the
-  // dollars would read as a typo, so unwrap the unambiguous bare numbers —
-  // still `\$`-escaped currency is excluded by the lookbehind.
+  // Bare numbers first. `$80$` is a value the author wanted in math type, but
+  // the general rule below skips digit-only spans so it cannot eat currency —
+  // which leaves both of its dollars loose. The next real formula then pairs
+  // with the trailing one and swallows the sentence between ("…to above $80$,
+  // its highest level since 2008. …the leverage effect ($\rho < 0$)" collapsed
+  // into a single span). Consuming them here removes the ambiguity entirely.
   // Letter-free, digit-led, and the closing `$` may not be followed by a word
   // character — the same guard the site's rule uses to stay off "$5 and $10".
+  // `\$`-escaped currency is excluded by the lookbehind.
   out = out.replace(
     /(?<![\\$\w])\$(\d|\d[\d\s.,()+\-*/=<>%]{0,40}[\d)%])\$(?![\w$])/g,
+    (_, tex) => stash(tex, false),
+  );
+  out = out.replace(
+    /(?<![\\$])\$(?!\s)(?:(?=\d)(?=[^$\n]*[\\{}^_])|(?=\D))((?:[^$\n\\]|\\.)+?)(?<!\s)\$(?![A-Za-z0-9])/g,
     (_, tex) => stash(tex, false),
   );
   return { md: out, store };
@@ -535,6 +538,43 @@ function texSymbols(tex, display = false) {
   }
   const body = mathml.replace(/<annotation[\s\S]*?<\/annotation>/g, "");
   return canonicalSymbols(decodeEntities(body.replace(/<[^>]+>/g, "")));
+}
+
+
+/** Put every `$$` fence on its own block, preserving list-item indentation. */
+function blockifyDisplayMath(md) {
+  const lines = md.split("\n");
+  const out = [];
+  let fenced = false;
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const isFence = line.trim() === "$$";
+    if (isFence && !fenced) {
+      // Opening fence: find the indent the block must carry to stay in place.
+      let indent = "";
+      for (let k = out.length - 1; k >= 0; k--) {
+        if (out[k].trim() === "") break;
+        const m = out[k].match(/^(\s*)(?:\d+[.)]|[-*+])\s+/);
+        indent = m ? " ".repeat(m[0].length) : (out[k].match(/^\s*/)[0] || "");
+        break;
+      }
+      if (out.length && out[out.length - 1].trim() !== "") out.push("");
+      out.push(indent + "$$");
+      // Body, then the closing fence, all at the same indent.
+      let j = i + 1;
+      for (; j < lines.length && lines[j].trim() !== "$$"; j++) out.push(indent + lines[j].trim());
+      out.push(indent + "$$");
+      // Anything that continued the paragraph must keep the indent too.
+      if (j + 1 < lines.length && lines[j + 1].trim() !== "") {
+        out.push("");
+        lines[j + 1] = indent + lines[j + 1].trim();
+      }
+      i = j;
+      continue;
+    }
+    out.push(line);
+  }
+  return out.join("\n");
 }
 
 /* ─────────────────────── math → image ─────────────────────── */
@@ -815,9 +855,25 @@ function convert(file, opts, manifest) {
     // and it lands after the escaping pass — so escape it here too.
     if (resolved?.kind === "text") return resolved.value.replace(/\$/g, "\\$");
     if (resolved?.kind === "image") return `![](${mathImage(tex, opts, true).match(/src="([^"]+)"/)[1]})`;
-    // Only display math is handed over as LaTeX — a block becomes `latex_block`,
-    // which the editor does understand. Inline stays literal for the same reason.
-    return display ? `$$\n${tex}\n$$` : `\\$${tex}\\$`;
+    // Both kinds are handed over as LaTeX: python-substack's dollarmath turns a
+    // block into `latex_block` and an inline span into a `latex` node, so the
+    // reader gets real typeset math rather than an approximation.
+    //
+    // The inline delimiters are deliberately left **unescaped** while any `\$`
+    // *inside* the formula stays escaped. That asymmetry is what lets the
+    // re-push step tell a math delimiter from a currency sign: prose currency
+    // arrives as `\$` and is unescaped to plain text, a bare `$` opens math.
+    // dollarmath rejects a space next to an inline delimiter, so `$x = $`
+    // would ship as source. Trim before delimiting.
+    if (display) return `$$\n${tex}\n$$`;
+    const inline = tex.trim();
+    // A span with no LaTeX in it is just a number the site wrapped so it would
+    // render in math type — `$80$`, `$0.5 + 0.5 = 1$`. dollarmath is configured
+    // to ignore a digit-led span, so re-delimiting it here would leave two
+    // literal `$` in the prose, and the next real formula pairs with one of
+    // them and swallows the sentence between. Ship it as the text it is.
+    if (!/[\\{}^_]/.test(inline)) return inline;
+    return `$${inline}$`;
   });
   markdown = markdown.replace(tokRe("IMG"), (_, i) => {
     const img = images[Number(i)];
@@ -860,6 +916,15 @@ function convert(file, opts, manifest) {
       .replace(/\/+/g, "/").replace(":/", "://");
     html += `\n<hr />\n<p><em>Originally published at <a href="${url}">${url}</a>.</em></p>\n`;
   }
+
+  // A `$$` fence only becomes `latex_block` when it starts its own block. When
+  // the source wrote display math jammed against the prose (common inside list
+  // items), Markdown folds the fence into the paragraph as `$$ … $$` and
+  // dollarmath — which is configured to reject a space after the delimiter —
+  // leaves the whole formula as visible source. Give every fence the blank line
+  // it needs, indented to the enclosing list marker so the item keeps its
+  // numbering.
+  markdown = blockifyDisplayMath(markdown);
 
   return { slug, fm, html: html.trim(), markdown: markdown.trim(), stats };
 }

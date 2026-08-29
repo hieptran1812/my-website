@@ -49,7 +49,7 @@ Start with the raw random ingredient. **Brownian motion** (also called a *Wiener
 
 1. **It starts at zero**: `B_0 = 0`.
 2. **Independent increments**: the move from time `s` to time `t` does not depend on anything that happened before `s`. The market has no memory in this idealization.
-3. **Gaussian increments**: the move over an interval of length `h` is Normal with mean 0 and variance `h`. In symbols, `B_{t+h} - B_t ~ Normal(0, h)`. The key fact buried here: variance grows *linearly* in time, so the standard deviation — the typical size of the move — grows like the *square root* of time. Over four times as long, the random move is only twice as big.
+3. **Gaussian increments**: the move over an interval of length `h` is Normal with mean 0 and variance `h`. In symbols, $B_{t+h} - B_t ~ Normal(0, h)$. The key fact buried here: variance grows *linearly* in time, so the standard deviation — the typical size of the move — grows like the *square root* of time. Over four times as long, the random move is only twice as big.
 4. **Continuous paths**: it never jumps. The price wiggles, but it does not teleport.
 
 That square-root-of-time scaling is the single most important fact about randomness in finance. A *basis point* is one hundredth of a percent (0.01%); when a desk says daily vol is 1% and annualizes it by multiplying by the square root of 252 trading days to get about 16%, that `sqrt(252)` is exactly property 3 in action. We will lean on it constantly.
@@ -95,7 +95,7 @@ The figure shows what GBM looks like when you simulate it many times from \$100.
 
 We want a closed-form expression for `S_t`, not just the differential `dS`. The trick is to work with the *log* of the price, `Y = ln S`, because the log turns the multiplicative dynamics into additive ones. But we cannot use the ordinary chain rule. In ordinary calculus, if `Y = ln S` then `dY = dS / S`. In stochastic calculus there is a correction term, because `(dS)^2` is not negligible — remember `(dB)^2` behaves like `dt`.
 
-**Itô's lemma** is the stochastic chain rule. For a function `f(S)` of a process driven by `dS = a \, dt + b \, dB`, it says
+**Itô's lemma** is the stochastic chain rule. For a function `f(S)` of a process driven by $dS = a \, dt + b \, dB$, it says
 
 $$df = \left( f' a + \tfrac{1}{2} f'' b^2 \right) dt + f' b \, dB$$
 
@@ -121,19 +121,19 @@ From the boxed solution we can read off everything. Since `B_t ~ Normal(0, t)`, 
 
 $$\mathbb{E}[S_t] = S_0 \, e^{\mu t}, \qquad \operatorname{Var}[S_t] = S_0^2 \, e^{2\mu t}\left( e^{\sigma^2 t} - 1 \right)$$
 
-Notice the beautiful cancellation in the mean: the `- ½ sigma²` in the exponent of the solution is *exactly* undone when you take the expectation, because `E[e^{sigma B_t}] = e^{½ sigma² t}`. So the **expected price grows at the full drift `mu`**, even though every individual log-path only drifts at `mu - ½ sigma²`. The median, by contrast, follows the typical path: `median(S_t) = S_0 e^{(mu - ½ sigma²) t}`, which is *below* the mean. The mean is pulled up by the fat right tail — those few paths that triple drag the average above the median. This mean-versus-median gap is the lognormal skew, and it is the single most fertile source of GBM interview questions.
+Notice the beautiful cancellation in the mean: the `- ½ sigma²` in the exponent of the solution is *exactly* undone when you take the expectation, because $E[e^{sigma B_t}] = e^{½ sigma² t}$. So the **expected price grows at the full drift `mu`**, even though every individual log-path only drifts at `mu - ½ sigma²`. The median, by contrast, follows the typical path: $median(S_t) = S_0 e^{(mu - ½ sigma²) t}$, which is *below* the mean. The mean is pulled up by the fat right tail — those few paths that triple drag the average above the median. This mean-versus-median gap is the lognormal skew, and it is the single most fertile source of GBM interview questions.
 
 #### Worked example: the mean and variance of a \$100 GBM stock
 
 You hold a stock at `S_0 = \$100` with expected return `mu = 8%` per year, volatility `sigma = 20%` per year, over horizon `T = 1` year. Compute the expected price, the variance, the standard deviation, and the median.
 
-Expected price: `E[S_T] = 100 * e^{0.08 * 1} = 100 * 1.0833 = \$108.33`.
+Expected price: $E[S_T] = 100 * e^{0.08 * 1} = 100 * 1.0833 = \$108.33$.
 
-Variance: `Var[S_T] = 100² * e^{2 * 0.08} * (e^{0.20² * 1} - 1) = 10000 * e^{0.16} * (e^{0.04} - 1)`. Now `e^{0.16} = 1.1735` and `e^{0.04} - 1 = 0.0408`, so `Var = 10000 * 1.1735 * 0.0408 = \$479` (in squared dollars).
+Variance: $Var[S_T] = 100² * e^{2 * 0.08} * (e^{0.20² * 1} - 1) = 10000 * e^{0.16} * (e^{0.04} - 1)$. Now $e^{0.16} = 1.1735$ and $e^{0.04} - 1 = 0.0408$, so `Var = 10000 * 1.1735 * 0.0408 = \$479` (in squared dollars).
 
 Standard deviation: `sqrt(479) = \$21.9`. So a one-standard-deviation band around the stock is roughly `\$108 ± \$22`.
 
-Median: `100 * e^{(0.08 - 0.5 * 0.04) * 1} = 100 * e^{0.06} = \$106.18`.
+Median: $100 * e^{(0.08 - 0.5 * 0.04) * 1} = 100 * e^{0.06} = \$106.18$.
 
 ![The moments of a $100 GBM stock at one year: the expected price grows at the full drift while the median grows at the smaller drift minus half the variance.](/imgs/blogs/stochastic-differential-equations-gbm-ou-quant-interviews-9.png)
 
@@ -143,8 +143,8 @@ There it is, the answer to the opening interview question, laid out in the figur
 
 Same stock (`S_0 = \$100`, `mu = 8%`, `sigma = 20%`, `T = 1`). Where will the price be with 95% probability? Because `ln S_T` is Normal with mean `ln(100) + (0.08 - 0.02) = ln(100) + 0.06` and standard deviation `sigma sqrt(T) = 0.20`, a 95% interval for `ln S_T` is the mean plus or minus `1.96 * 0.20 = 0.392`. Exponentiate the endpoints:
 
-Lower: `100 * e^{0.06 - 0.392} = 100 * e^{-0.332} = \$71.75`.
-Upper: `100 * e^{0.06 + 0.392} = 100 * e^{0.452} = \$157.15`.
+Lower: $100 * e^{0.06 - 0.392} = 100 * e^{-0.332} = \$71.75$.
+Upper: $100 * e^{0.06 + 0.392} = 100 * e^{0.452} = \$157.15$.
 
 So with 95% confidence the stock lands in `[\$71.75, \$157.15]` after one year. Notice the asymmetry around the \$106 median: the upside (`+\$51`) is bigger than the downside (`-\$34`). That asymmetry is the lognormal skew showing up directly in a confidence interval, and it is why naive symmetric "value at risk" estimates that pretend prices are Normal understate the upside and overstate the crash probability.
 
@@ -170,17 +170,17 @@ The point of showing this is not the code; it is that GBM has a *closed form*, s
 
 ### A deeper look at the lognormal moments
 
-It is worth understanding where the GBM moment formulas come from, because the derivation is itself a common interview ask and the trick generalizes. The whole thing rests on one fact about the Normal distribution: if `Y ~ Normal(a, b²)`, then the expectation of `e^Y` is `e^{a + ½ b²}`. This is the **moment generating function** of the Normal, and it is the single formula that powers every lognormal computation. Memorize it.
+It is worth understanding where the GBM moment formulas come from, because the derivation is itself a common interview ask and the trick generalizes. The whole thing rests on one fact about the Normal distribution: if `Y ~ Normal(a, b²)`, then the expectation of `e^Y` is $e^{a + ½ b²}$. This is the **moment generating function** of the Normal, and it is the single formula that powers every lognormal computation. Memorize it.
 
 Apply it to `S_t = S_0 e^Y` where `Y = (mu - ½ sigma²) t + sigma B_t` has mean `a = (mu - ½ sigma²) t` and variance `b² = sigma² t`. Then
 
 $$\mathbb{E}[S_t] = S_0\,\mathbb{E}[e^Y] = S_0\,e^{a + \frac{1}{2}b^2} = S_0\,e^{(\mu - \frac{1}{2}\sigma^2)t + \frac{1}{2}\sigma^2 t} = S_0\,e^{\mu t}$$
 
-Watch the cancellation in the exponent: the `- ½ sigma² t` from the solution and the `+ ½ sigma² t` from the moment generating function annihilate, leaving the clean `mu t`. That is *why* the expected price grows at the full drift even though the typical path does not — the upside skew of the lognormal exactly compensates for the volatility drag, in expectation. For the variance, you compute `E[S_t²]` the same way (it uses `2 sigma B_t`, so it picks up `e^{2 sigma² t}`) and subtract the squared mean:
+Watch the cancellation in the exponent: the `- ½ sigma² t` from the solution and the `+ ½ sigma² t` from the moment generating function annihilate, leaving the clean `mu t`. That is *why* the expected price grows at the full drift even though the typical path does not — the upside skew of the lognormal exactly compensates for the volatility drag, in expectation. For the variance, you compute `E[S_t²]` the same way (it uses `2 sigma B_t`, so it picks up $e^{2 sigma² t}$) and subtract the squared mean:
 
 $$\mathbb{E}[S_t^2] = S_0^2\,e^{(2\mu - \sigma^2)t + 2\sigma^2 t} = S_0^2\,e^{2\mu t + \sigma^2 t}, \qquad \operatorname{Var}[S_t] = S_0^2 e^{2\mu t}\!\left(e^{\sigma^2 t} - 1\right)$$
 
-The factor `(e^{sigma² t} - 1)` is the entire contribution of volatility to the variance; when `sigma = 0` it is zero and the price is deterministic. For small `sigma² t`, that factor is approximately `sigma² t` (the first term of the exponential series), so the standard deviation of the price is roughly `S_0 e^{mu t} sigma sqrt(t)` — proportional to volatility and to the square root of time, exactly the scaling we keep meeting. This approximation is how a trader does a quick mental risk estimate without a calculator: "vol is 20%, horizon is a year, so the one-sigma move on a \$108 expected price is about `108 * 0.20 = \$21.7`," which lands within a few cents of the exact \$21.9. The approximation is excellent whenever `sigma sqrt(t)` is small and degrades only for very high vol or very long horizons, where the lognormal skew makes the standard deviation a poor summary of the risk anyway.
+The factor $(e^{sigma² t} - 1)$ is the entire contribution of volatility to the variance; when `sigma = 0` it is zero and the price is deterministic. For small `sigma² t`, that factor is approximately `sigma² t` (the first term of the exponential series), so the standard deviation of the price is roughly $S_0 e^{mu t} sigma sqrt(t)$ — proportional to volatility and to the square root of time, exactly the scaling we keep meeting. This approximation is how a trader does a quick mental risk estimate without a calculator: "vol is 20%, horizon is a year, so the one-sigma move on a \$108 expected price is about `108 * 0.20 = \$21.7`," which lands within a few cents of the exact \$21.9. The approximation is excellent whenever `sigma sqrt(t)` is small and degrades only for very high vol or very long horizons, where the lognormal skew makes the standard deviation a poor summary of the risk anyway.
 
 ## Ornstein-Uhlenbeck: the model for things that revert
 
@@ -196,11 +196,11 @@ The figure shows four OU paths starting from different places — two above the 
 
 ### Solving the OU SDE
 
-The OU equation also has a closed-form solution, and the trick to find it is a classic: multiply through by an *integrating factor* `e^{theta t}` to make the left side a perfect derivative. Doing so (this is a standard exercise; you should be able to state the result even if you do not derive it under pressure) gives
+The OU equation also has a closed-form solution, and the trick to find it is a classic: multiply through by an *integrating factor* $e^{theta t}$ to make the left side a perfect derivative. Doing so (this is a standard exercise; you should be able to state the result even if you do not derive it under pressure) gives
 
 $$X_t = m + (X_0 - m)\,e^{-\theta t} + \sigma \int_0^t e^{-\theta(t-s)}\,dB_s$$
 
-Three pieces, each with a clean meaning. `m` is the home level. `(X_0 - m) e^{-theta t}` is the **deterministic decay of the starting gap**: whatever distance you began from the mean shrinks exponentially at rate `theta`. The integral term is the accumulated random noise, but weighted so that *recent* shocks count more than old ones (the `e^{-theta(t-s)}` factor down-weights shocks from the distant past). From this solution we read the conditional moments:
+Three pieces, each with a clean meaning. `m` is the home level. $(X_0 - m) e^{-theta t}$ is the **deterministic decay of the starting gap**: whatever distance you began from the mean shrinks exponentially at rate `theta`. The integral term is the accumulated random noise, but weighted so that *recent* shocks count more than old ones (the $e^{-theta(t-s)}$ factor down-weights shocks from the distant past). From this solution we read the conditional moments:
 
 $$\mathbb{E}[X_t \mid X_0] = m + (X_0 - m)\,e^{-\theta t}, \qquad \operatorname{Var}[X_t \mid X_0] = \frac{\sigma^2}{2\theta}\left(1 - e^{-2\theta t}\right)$$
 
@@ -208,7 +208,7 @@ The expected value decays from `X_0` toward `m`; the variance grows from 0 and *
 
 ### Half-life: how fast does it revert?
 
-The number a trader actually quotes is not `theta` itself but the **half-life** of mean reversion: the time it takes for the expected gap to the mean to shrink by half. From the expected-value formula, the gap is `(X_0 - m) e^{-theta t}`; it halves when `e^{-theta t} = ½`, i.e. when
+The number a trader actually quotes is not `theta` itself but the **half-life** of mean reversion: the time it takes for the expected gap to the mean to shrink by half. From the expected-value formula, the gap is $(X_0 - m) e^{-theta t}$; it halves when $e^{-theta t} = ½$, i.e. when
 
 $$t_{1/2} = \frac{\ln 2}{\theta}$$
 
@@ -222,13 +222,13 @@ The figure makes the exponential decay concrete: starting from a \$20 gap with `
 
 A statistical-arbitrage desk fits an OU process to the price spread between two oil majors and estimates `theta = 2.0` per year. What is the half-life, and how much of a dislocation reverts in three months?
 
-Half-life: `t_{1/2} = ln 2 / theta = 0.6931 / 2.0 = 0.3466 years`, about 4.2 months or roughly 87 trading days.
+Half-life: $t_{1/2} = ln 2 / theta = 0.6931 / 2.0 = 0.3466 years$, about 4.2 months or roughly 87 trading days.
 
-Fraction reverting in three months (`t = 0.25` years): the gap decays by the factor `e^{-theta t} = e^{-2.0 * 0.25} = e^{-0.5} = 0.6065`. So after three months `60.65%` of the original gap remains, meaning about `39.35%` has reverted. That is a useful sanity check: a quarter-year is a bit under one half-life, so a little under half the dislocation should be gone, and `39%` is indeed a little under `50%`. The intuition: a `theta` of 2 is a moderately fast reverter — quick enough to trade, slow enough that you will hold the position for weeks, not minutes.
+Fraction reverting in three months (`t = 0.25` years): the gap decays by the factor $e^{-theta t} = e^{-2.0 * 0.25} = e^{-0.5} = 0.6065$. So after three months `60.65%` of the original gap remains, meaning about `39.35%` has reverted. That is a useful sanity check: a quarter-year is a bit under one half-life, so a little under half the dislocation should be gone, and `39%` is indeed a little under `50%`. The intuition: a `theta` of 2 is a moderately fast reverter — quick enough to trade, slow enough that you will hold the position for weeks, not minutes.
 
 ### The stationary distribution
 
-Run an OU process long enough and it *forgets where it started*: the `e^{-theta t}` decay wipes out the influence of `X_0`. What is left is a stable, unchanging distribution — the **stationary distribution**. Taking `t` to infinity in the conditional moments, the starting gap vanishes and the variance saturates, leaving
+Run an OU process long enough and it *forgets where it started*: the $e^{-theta t}$ decay wipes out the influence of `X_0`. What is left is a stable, unchanging distribution — the **stationary distribution**. Taking `t` to infinity in the conditional moments, the starting gap vanishes and the variance saturates, leaving
 
 $$X_\infty \sim \operatorname{Normal}\!\left( m, \ \frac{\sigma^2}{2\theta} \right)$$
 
@@ -240,13 +240,13 @@ The figure shows that long-run bell: symmetric (Normal, not skewed), centred at 
 
 ### OU is just AR(1) in continuous time
 
-Here is a connection that earns nods in interviews and unifies a lot of what you already know from statistics. If you sample an OU process at evenly-spaced times `dt` apart, the resulting sequence is *exactly* a first-order autoregressive process — the **AR(1)** model from time-series econometrics. Recall AR(1): `x_{n+1} = c + phi * x_n + epsilon_n`, where `phi` is the autoregressive coefficient (between -1 and 1 for stability) and `epsilon` is independent noise. Match it to the OU conditional mean `E[X_{t+dt} | X_t] = m + (X_t - m) e^{-theta dt}`, and you can read the dictionary straight off:
+Here is a connection that earns nods in interviews and unifies a lot of what you already know from statistics. If you sample an OU process at evenly-spaced times `dt` apart, the resulting sequence is *exactly* a first-order autoregressive process — the **AR(1)** model from time-series econometrics. Recall AR(1): $x_{n+1} = c + phi * x_n + epsilon_n$, where `phi` is the autoregressive coefficient (between -1 and 1 for stability) and `epsilon` is independent noise. Match it to the OU conditional mean $E[X_{t+dt} | X_t] = m + (X_t - m) e^{-theta dt}$, and you can read the dictionary straight off:
 
-- The AR(1) persistence `phi = e^{-theta dt}`. Fast reversion (big `theta`) means small `phi` — each step forgets the last one quickly.
+- The AR(1) persistence $phi = e^{-theta dt}$. Fast reversion (big `theta`) means small `phi` — each step forgets the last one quickly.
 - The AR(1) intercept `c = m(1 - phi)`, so the unconditional mean is `c / (1 - phi) = m`, the OU long-run mean.
-- The noise variance is the OU conditional variance `sigma² (1 - e^{-2 theta dt}) / (2 theta)`.
+- The noise variance is the OU conditional variance $sigma² (1 - e^{-2 theta dt}) / (2 theta)$.
 
-This matters in practice because it tells you *how to estimate OU parameters from data*: you do not need fancy continuous-time machinery, you just run an ordinary least-squares regression of `X_{t+dt}` on `X_t`. The regression slope is `phi`, from which `theta = -ln(phi) / dt`, and the half-life follows immediately as `ln 2 / theta`. A stat-arb researcher fitting a spread does exactly this — an OLS regression and three lines of arithmetic — to get the half-life and entry band. The deeper lesson the interviewer is checking: **continuous-time mean reversion and discrete-time autoregression are the same phenomenon viewed at two resolutions**, and a persistence coefficient `phi` near 1 is the same warning sign as a reversion speed `theta` near 0 — a process so slow to revert it is barely distinguishable from a random walk.
+This matters in practice because it tells you *how to estimate OU parameters from data*: you do not need fancy continuous-time machinery, you just run an ordinary least-squares regression of $X_{t+dt}$ on `X_t`. The regression slope is `phi`, from which `theta = -ln(phi) / dt`, and the half-life follows immediately as `ln 2 / theta`. A stat-arb researcher fitting a spread does exactly this — an OLS regression and three lines of arithmetic — to get the half-life and entry band. The deeper lesson the interviewer is checking: **continuous-time mean reversion and discrete-time autoregression are the same phenomenon viewed at two resolutions**, and a persistence coefficient `phi` near 1 is the same warning sign as a reversion speed `theta` near 0 — a process so slow to revert it is barely distinguishable from a random walk.
 
 ## Simulating SDEs with the Euler-Maruyama scheme
 
@@ -293,7 +293,7 @@ Drift contribution: `mu * S * dt = 0.10 * 100 * 0.01 = \$0.10`.
 
 Shock contribution: `sigma * S * sqrt(dt) * Z = 0.20 * 100 * sqrt(0.01) * 0.5 = 0.20 * 100 * 0.10 * 0.5 = \$1.00`.
 
-Next price: `S_{new} = 100 + 0.10 + 1.00 = \$101.10`.
+Next price: $S_{new} = 100 + 0.10 + 1.00 = \$101.10$.
 
 The intuition this teaches: notice how the random shock (\$1.00) dwarfs the drift (\$0.10) over a short step. Over tiny horizons, *volatility dominates* — the drift is invisible noise. It is only over long horizons that the steady drift accumulates enough to matter, because drift grows like `t` while the random spread grows only like `sqrt(t)`. This is why you cannot detect a stock's expected return from a few days of data, no matter how clever your statistics.
 
@@ -351,11 +351,11 @@ The shaded green tail in the figure is exactly this probability: the chunk of th
 
 *"You trade a pair whose dollar spread is an OU process with mean `m = \$0`, reversion speed `theta = 2.5` per year, and `sigma = \$5` per year. Today the spread is `\$8` rich. If you put on the trade, how many dollars do you expect to make over the next year, and what is the half-life?"*
 
-The expected spread at horizon `t` is `m + (X_0 - m) e^{-theta t} = 0 + 8 * e^{-2.5 t}`. Over one year, `t = 1`: `8 * e^{-2.5} = 8 * 0.0821 = \$0.66`. So you expect the spread to fall from \$8 to about \$0.66, an expected reversion of `8 - 0.66 = \$7.34` per unit. If you are short one unit of the spread (betting it narrows), your expected gain is about `\$7.34`. The half-life is `ln 2 / theta = 0.6931 / 2.5 = 0.277 years`, about 3.3 months — so half the \$8 dislocation should be gone in roughly a quarter.
+The expected spread at horizon `t` is $m + (X_0 - m) e^{-theta t} = 0 + 8 * e^{-2.5 t}$. Over one year, `t = 1`: $8 * e^{-2.5} = 8 * 0.0821 = \$0.66$. So you expect the spread to fall from \$8 to about \$0.66, an expected reversion of `8 - 0.66 = \$7.34` per unit. If you are short one unit of the spread (betting it narrows), your expected gain is about `\$7.34`. The half-life is `ln 2 / theta = 0.6931 / 2.5 = 0.277 years`, about 3.3 months — so half the \$8 dislocation should be gone in roughly a quarter.
 
 ![Sizing the expected reversion of a mean-reverting pair spread: an eight-dollar dislocation is expected to close most of the gap over one year, an expected gain near seven dollars.](/imgs/blogs/stochastic-differential-equations-gbm-ou-quant-interviews-11.png)
 
-The figure tracks the expected spread decaying from `+\$8` today (red dot, the dislocation) through `+\$4` at one half-life (green dot) down toward the \$0 mean, with the green arrow marking the roughly `\$7` you expect to harvest. The lesson: **the expected profit of a mean-reverting trade is the current gap times one minus the decay factor** — here `8 * (1 - e^{-2.5}) = \$7.34`. The follow-up an interviewer adds is risk: the stationary standard deviation is `sigma / sqrt(2 theta) = 5 / sqrt(5) = \$2.24`, so an \$8 dislocation is `8 / 2.24 = 3.6` standard deviations wide — a genuine, rare opportunity, not noise. This connects directly to the [Kelly criterion](/blog/trading/quantitative-finance/kelly-criterion-sequential-betting-quant-interviews) for sizing the bet given that edge and variance.
+The figure tracks the expected spread decaying from `+\$8` today (red dot, the dislocation) through `+\$4` at one half-life (green dot) down toward the \$0 mean, with the green arrow marking the roughly `\$7` you expect to harvest. The lesson: **the expected profit of a mean-reverting trade is the current gap times one minus the decay factor** — here $8 * (1 - e^{-2.5}) = \$7.34$. The follow-up an interviewer adds is risk: the stationary standard deviation is `sigma / sqrt(2 theta) = 5 / sqrt(5) = \$2.24`, so an \$8 dislocation is `8 / 2.24 = 3.6` standard deviations wide — a genuine, rare opportunity, not noise. This connects directly to the [Kelly criterion](/blog/trading/quantitative-finance/kelly-criterion-sequential-betting-quant-interviews) for sizing the bet given that edge and variance.
 
 #### Worked example: the variance ratio that distinguishes the models
 
@@ -379,10 +379,10 @@ Because the drift is zero and `sigma` is constant, `X_t = X_0 + sigma B_t`, and 
 
 *"Two stocks both start at \$100 and both have expected return `mu = 10%`. Stock A has `sigma = 10%`, stock B has `sigma = 40%`. After 10 years, which has the higher expected value, and which is more likely to have made you money?"*
 
-This is the volatility-drag question dressed up over a long horizon, and it splits cleanly into two answers. The *expected* value depends only on `mu`: `E[S_10] = 100 * e^{0.10 * 10} = 100 * e^1 = \$271.83` for *both* stocks. They have identical expected values, because the mean grows at `mu` regardless of `sigma`. But the *median* — the outcome you are more likely to actually experience — grows at `mu - ½ sigma²`:
+This is the volatility-drag question dressed up over a long horizon, and it splits cleanly into two answers. The *expected* value depends only on `mu`: $E[S_10] = 100 * e^{0.10 * 10} = 100 * e^1 = \$271.83$ for *both* stocks. They have identical expected values, because the mean grows at `mu` regardless of `sigma`. But the *median* — the outcome you are more likely to actually experience — grows at `mu - ½ sigma²`:
 
-Stock A median: `100 * e^{(0.10 - 0.005) * 10} = 100 * e^{0.95} = \$258.57`.
-Stock B median: `100 * e^{(0.10 - 0.08) * 10} = 100 * e^{0.20} = \$122.14`.
+Stock A median: $100 * e^{(0.10 - 0.005) * 10} = 100 * e^{0.95} = \$258.57$.
+Stock B median: $100 * e^{(0.10 - 0.08) * 10} = 100 * e^{0.20} = \$122.14$.
 
 So while both stocks *average* \$271.83, the typical outcome for the calm stock A is \$259, but for the wild stock B it is only \$122 — barely above where it started. Stock B's enormous expected value is carried by a tiny number of explosive paths; the median investor in stock B does far worse than the median investor in stock A, despite identical expected returns. The lesson: **over long horizons, volatility silently transfers value from the median to the mean.** Two investments can have the same advertised expected return while one reliably builds wealth and the other mostly disappoints. This is the single most important fact for anyone choosing between a steady and a lottery-like strategy, and it is why the geometric (compounding) return, not the arithmetic mean, is the honest yardstick.
 

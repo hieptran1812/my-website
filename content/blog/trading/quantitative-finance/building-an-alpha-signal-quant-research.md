@@ -90,11 +90,11 @@ The timeline shows the three windows you must keep straight: the **formation win
 
 #### Worked example: building a 12-minus-1-month momentum signal and ranking a cross-section
 
-Suppose it is the start of month `t = 0`, and we have eight stocks, labeled AAA through HHH. For each we know the price twelve months ago (`P_{-12}`), the price one month ago (`P_{-1}`), and today's price (`P_0`). The 12-minus-1 momentum is the return from `P_{-12}` to `P_{-1}`:
+Suppose it is the start of month `t = 0`, and we have eight stocks, labeled AAA through HHH. For each we know the price twelve months ago ($P_{-12}$), the price one month ago ($P_{-1}$), and today's price (`P_0`). The 12-minus-1 momentum is the return from $P_{-12}$ to $P_{-1}$:
 
 $$ \text{mom}_i = \frac{P_{-1}^{(i)}}{P_{-12}^{(i)}} - 1 $$
 
-Here `P_{-1}` is the price one month ago, `P_{-12}` is the price twelve months ago, and `i` indexes the stock. Let us compute it for the eight names:
+Here $P_{-1}$ is the price one month ago, $P_{-12}$ is the price twelve months ago, and `i` indexes the stock. Let us compute it for the eight names:
 
 | Stock | $P_{-12}$ | $P_{-1}$ | Momentum = $P_{-1}/P_{-12} - 1$ |
 |---|---|---|---|
@@ -156,7 +156,7 @@ A subtle but vital point: the book value you use must be one that was *publicly 
 
 The economic idea, and the near-opposite of momentum: *over very short horizons -- days to a few weeks -- stocks that fell tend to bounce, and stocks that jumped tend to give some back.* The story is liquidity and overreaction: a stock that dropped hard last week often did so because a big seller pushed the price below fair value, and it recovers as the pressure clears.
 
-The formula is just the *negative* of the recent short-horizon return. If `r_{5d}` is the stock's return over the last five trading days, the reversal signal is:
+The formula is just the *negative* of the recent short-horizon return. If $r_{5d}$ is the stock's return over the last five trading days, the reversal signal is:
 
 $$ \text{rev}_i = -\,r_{5d}^{(i)} $$
 
@@ -236,7 +236,7 @@ A signal is *sector-neutral* if, within every sector, the longs and shorts rough
 
 $$ \tilde{s}_i = s_i - \bar{s}_{\,\text{sector}(i)} $$
 
-Here `s_i` is the raw signal for stock `i`, and `\bar{s}_{sector(i)}` is the average signal across all names in `i`'s sector. After this subtraction, every sector's average signal is exactly 0, so the signal can no longer express a view on whole sectors -- only on names *within* a sector relative to their peers.
+Here `s_i` is the raw signal for stock `i`, and $\bar{s}_{sector(i)}$ is the average signal across all names in `i`'s sector. After this subtraction, every sector's average signal is exactly 0, so the signal can no longer express a view on whole sectors -- only on names *within* a sector relative to their peers.
 
 ![A raw value signal loads heavily long energy and short tech; subtracting each sector's mean leaves only within-sector value, so the bet is on cheap names, not on a sector.](/imgs/blogs/building-an-alpha-signal-quant-research-5.png)
 

@@ -110,7 +110,7 @@ One last foundation, and it is the bridge to parity. A **forward contract** is a
 What is the fair forward price for delivery of a non-dividend stock in $T$ years? Here is the no-arbitrage argument in full, because it is the template for every argument in this article. Suppose you want to own a share at time $T$. You have two ways to guarantee that:
 
 1. **Enter a forward now** at price $F$, pay nothing today, and pay $F$ at time $T$ to receive the share.
-2. **Buy the share today** for $S$, borrowing the \$$S$ at the risk-free rate $r$. At time $T$ you owe $S e^{rT}$ on the loan and you hold the share.
+2. **Buy the share today** for $S$, borrowing the $\$S$ at the risk-free rate $r$. At time $T$ you owe $S e^{rT}$ on the loan and you hold the share.
 
 Both routes leave you holding exactly one share at time $T$. Route 1 costs you $F$ at time $T$; route 2 costs you $S e^{rT}$ at time $T$. Since the *outcome is identical*, the *cost must be identical*, or someone is leaving free money on the table. Therefore:
 
@@ -232,7 +232,7 @@ A call gives you the right to buy a share for $K$. The most that right could eve
 
 $$C \le S.$$
 
-The arbitrage if it were violated: suppose a call traded for $C > S$. You would **sell the call** for $C$ and **buy the stock** for $S$, banking $C - S > 0$ today. If the call is ever exercised against you, you already own the share to deliver — you hand it over and keep the \$$K$ strike on top. You can never lose. A price $C > S$ is therefore impossible.
+The arbitrage if it were violated: suppose a call traded for $C > S$. You would **sell the call** for $C$ and **buy the stock** for $S$, banking $C - S > 0$ today. If the call is ever exercised against you, you already own the share to deliver — you hand it over and keep the $\$K$ strike on top. You can never lose. A price $C > S$ is therefore impossible.
 
 ### The lower bound: a call is worth at least its discounted intrinsic value
 
@@ -254,7 +254,7 @@ The figure plots call value against stock price, both in dollars on the same sca
 
 ### The put's bounds
 
-The put has mirror bounds, derivable the same two ways. A put can be worth at most its strike, and in fact at most the *discounted* strike for a European put (the most you can ever collect is \$$K$ at expiry, worth $K e^{-rT}$ today):
+The put has mirror bounds, derivable the same two ways. A put can be worth at most its strike, and in fact at most the *discounted* strike for a European put (the most you can ever collect is $\$K$ at expiry, worth $K e^{-rT}$ today):
 
 $$P \le K e^{-rT}.$$
 
@@ -333,7 +333,7 @@ Suppose you are tempted to exercise early when the stock is at $S$. Exercising m
 
 $$C \ge S - K e^{-rT} > S - K.$$
 
-The call is worth *strictly more* than the $S - K$ you would capture by exercising. Selling it always beats exercising it. You give up two things when you exercise early: the **interest** on the strike (you pay \$$K$ now instead of at expiry, forfeiting the time value of that money) and the **downside protection** (after exercising you own the share outright, exposed to a crash; while you held the call your loss was capped at the premium). Both are positive, so early exercise is strictly worse.
+The call is worth *strictly more* than the $S - K$ you would capture by exercising. Selling it always beats exercising it. You give up two things when you exercise early: the **interest** on the strike (you pay $\$K$ now instead of at expiry, forfeiting the time value of that money) and the **downside protection** (after exercising you own the share outright, exposed to a crash; while you held the call your loss was capped at the premium). Both are positive, so early exercise is strictly worse.
 
 ![Exercising an American call early forfeits the strike interest and downside protection, so selling the call always dominates exercise](/imgs/blogs/put-call-parity-no-arbitrage-quant-interviews-8.png)
 

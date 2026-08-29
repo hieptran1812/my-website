@@ -549,7 +549,7 @@ The LIBOR market model (LMM, Brace-Gatarek-Musiela 1997) takes a fundamentally d
 
 ![LIBOR market model: forward rates as the primary objects](/imgs/blogs/short-rate-models-vasicek-hull-white-11.png)
 
-The setup: discretise the time axis into periods $[T_0, T_1, ..., T_N]$. For each $i$, define $F_i(t) = $ forward rate from $T_i$ to $T_{i+1}$ as observed at time $t$.
+The setup: discretise the time axis into periods $[T_0, T_1, ..., T_N]$. For each $i$, define $F_i(t)$ as the forward rate from $T_i$ to $T_{i+1}$ as observed at time $t$.
 
 Under the $T_{i+1}$-forward measure, $F_i(t)$ is a *martingale*:
 
