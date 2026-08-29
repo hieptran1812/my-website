@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
 """Rewrite the body of existing Substack drafts from fresh Markdown.
 
+RUN THIS UNDER THE uv TOOL'S PYTHON, NOT bare `python3`:
+
+    /Users/hieptran1812/.local/share/uv/tools/python-substack/bin/python \
+        .claude/scripts/substack-update.py < input.json
+
+The default `python3` here is 3.9 (micromamba) and carries an OLD python-substack
+with no `mdrender.py` and no dollarmath support. Its `from_markdown` turns a
+`$$...$$` block into three literal paragraphs -- `$$`, the LaTeX source, `$$` --
+so every display formula ships as visible source. The uv install (3.12) has the
+dollarmath plugin and emits a real `latex_block`. The guard below refuses to run
+under the wrong one rather than silently shipping broken math.
+
 Used when a draft is already in place — with its id, tags and cover — but the
 body needs regenerating. Deleting and recreating would lose all of that and burn
 a slug, so this converts the Markdown the same way `drafts create` does and PUTs
@@ -29,6 +41,23 @@ from pathlib import Path
 from PIL import Image
 from substack import Api
 from substack.post import Post, parse_inline
+
+
+def _require_math_capable_substack():
+    """Refuse to run under an install whose from_markdown cannot do `$$`."""
+    try:
+        import substack.mdrender  # noqa: F401
+    except ImportError:
+        sys.exit(
+            "substack-update: this python's python-substack has no mdrender "
+            "(no dollarmath), so every $$...$$ would ship as literal source.\n"
+            "Re-run with the uv tool python:\n"
+            "  /Users/hieptran1812/.local/share/uv/tools/python-substack/bin/python "
+            f"{Path(__file__).name} < input.json"
+        )
+
+
+_require_math_capable_substack()
 
 
 IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
@@ -82,6 +111,36 @@ def blockquote_runs(markdown):
     if current is not None:
         runs.append(current)
     return runs
+
+
+def unescape_dollars_outside_math(markdown):
+    """Strip the site's `\\$` escape, but never inside a math region.
+
+    The exporter escapes currency signs for the site's Markdown renderer, and
+    python-substack reads that escape as literal text, so it has to come off.
+    But inside `$$...$$`, `\\$` is *correct LaTeX* for a literal dollar, and
+    unescaping it leaves a bare `$` in the middle of the block. dollarmath then
+    mis-terminates the block and the whole formula ships as visible source --
+    which is exactly how the banking and MACD posts broke.
+
+    So: unescape outside math, leave math regions byte-for-byte alone.
+    """
+    out, fenced = [], False
+    for line in markdown.split("\n"):
+        if line.strip() == "$$":
+            fenced = not fenced
+            out.append(line)
+            continue
+        if fenced:
+            out.append(line)
+            continue
+        # Protect single-line `$$...$$` spans, then unescape what is left.
+        parts = re.split(r"(\$\$.*?\$\$)", line)
+        out.append("".join(
+            part if part.startswith("$$") else re.sub(r"\\+\$", "$", part)
+            for part in parts
+        ))
+    return "\n".join(out)
 
 
 def build_blockquote(lines):
@@ -219,7 +278,7 @@ def main() -> int:
             # literal text, so remove it before parsing the API body. A source
             # that already wrote `\$` comes out of the exporter as `\\$`, so
             # strip the whole run rather than a single backslash.
-            markdown = re.sub(r"\\+\$", "$", markdown)
+            markdown = unescape_dollars_outside_math(markdown)
             post = Post(item.get("title") or slug, item.get("subtitle") or "", user_id)
             post.from_markdown(markdown, api=api)
             draft = post.get_draft()

@@ -129,9 +129,11 @@ A company has a \$100 million revolving credit facility. The terms are:
 In a quiet quarter, the company draws **\$40 million** and leaves \$60 million undrawn. Over that quarter (a quarter of a year):
 
 Interest on the drawn \$40 million:
+
 $$\$40{,}000{,}000 \times 7.0\% \times \tfrac{1}{4} = \$700{,}000$$
 
 Commitment fee on the undrawn \$60 million:
+
 $$\$60{,}000{,}000 \times 0.375\% \times \tfrac{1}{4} = \$56{,}250$$
 
 Total cost for the quarter: **\$756,250**. Now suppose the company draws the full \$100 million for the next quarter and pays no commitment fee (nothing is undrawn):

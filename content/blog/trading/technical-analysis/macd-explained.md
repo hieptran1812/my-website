@@ -23,6 +23,7 @@ subcategory: "Technical Analysis"
 author: "Hiep Tran"
 featured: true
 readTime: 39
+substackUrl: "https://halleytech.substack.com/p/macd-explained"
 ---
 
 > [!important]
@@ -81,16 +82,22 @@ One honest caveat on the seeding: because the EMA technically reaches back forev
 Now we can state MACD completely. It is three computations, in order:
 
 1. **The MACD line** is the fast EMA minus the slow EMA:
-$$\text{MACD} = \text{EMA}_{12} - \text{EMA}_{26}$$
-This single number measures *how far apart the two averages are*. When the fast average is above the slow one, the MACD line is positive; when the fast is below the slow, it is negative; when they touch, it is exactly zero. The name "convergence divergence" is literally describing the two EMAs converging toward and diverging away from each other.
+
+   $$\text{MACD} = \text{EMA}_{12} - \text{EMA}_{26}$$
+
+   This single number measures *how far apart the two averages are*. When the fast average is above the slow one, the MACD line is positive; when the fast is below the slow, it is negative; when they touch, it is exactly zero. The name "convergence divergence" is literally describing the two EMAs converging toward and diverging away from each other.
 
 2. **The signal line** is a 9-period EMA of the MACD line itself:
-$$\text{signal} = \text{EMA}_9(\text{MACD})$$
-Read that carefully: we take the MACD line -- which is already an average-minus-an-average -- and smooth it *again*. The signal line is therefore an average of an average of an average. It lags the MACD line on purpose, so that the two can cross.
+
+   $$\text{signal} = \text{EMA}_9(\text{MACD})$$
+
+   Read that carefully: we take the MACD line -- which is already an average-minus-an-average -- and smooth it *again*. The signal line is therefore an average of an average of an average. It lags the MACD line on purpose, so that the two can cross.
 
 3. **The histogram** is the gap between the MACD line and its signal line, drawn as vertical bars:
-$$\text{histogram} = \text{MACD} - \text{signal}$$
-When the MACD line is above its signal, the bar is positive (drawn green, above the zero line); when below, the bar is negative (drawn red, below zero). The histogram is the *visual* of the gap between the two lines.
+
+   $$\text{histogram} = \text{MACD} - \text{signal}$$
+
+   When the MACD line is above its signal, the bar is positive (drawn green, above the zero line); when below, the bar is negative (drawn red, below zero). The histogram is the *visual* of the gap between the two lines.
 
 All three live in a panel **below** the price chart, sharing a horizontal **zero line**. That zero line is meaningful: the MACD line crossing it means the two EMAs themselves crossed.
 
