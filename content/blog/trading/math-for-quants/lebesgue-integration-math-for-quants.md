@@ -245,7 +245,7 @@ Here $\liminf$ is the "limit of the smallest tail values". In plain terms, Fatou
 
 ### A concrete cautionary tale: when the swap fails
 
-To feel why the conditions matter, consider a sequence where the swap *fails*. Suppose payoff $X_n$ pays \$$n$ with probability $1/n$ and \$0 otherwise. Then $E[X_n] = n \times (1/n) = \$1$ for every $n$, so $\lim E[X_n] = \$1$. But as $n \to \infty$, the probability of the big payout, $1/n$, shrinks to 0 — so the *limiting* payoff $X$ is \$0 with probability 1, giving $E[X] = \$0$. The two sides disagree: \$1 on the left, \$0 on the right. The expected value "escaped to infinity" because there was no fixed integrable cap (the payouts grew without bound). This is exactly the failure DCT rules out by demanding the dominating function $g$. The lesson: a model that quietly assumes "average converges to mean" can be silently wrong when the payoff's tail grows faster than its probability shrinks — and that is not a hypothetical, it is the shape of every fat-tailed blow-up.
+To feel why the conditions matter, consider a sequence where the swap *fails*. Suppose payoff $X_n$ pays $\$n$ with probability $1/n$ and \$0 otherwise. Then $E[X_n] = n \times (1/n) = \$1$ for every $n$, so $\lim E[X_n] = \$1$. But as $n \to \infty$, the probability of the big payout, $1/n$, shrinks to 0 — so the *limiting* payoff $X$ is \$0 with probability 1, giving $E[X] = \$0$. The two sides disagree: \$1 on the left, \$0 on the right. The expected value "escaped to infinity" because there was no fixed integrable cap (the payouts grew without bound). This is exactly the failure DCT rules out by demanding the dominating function $g$. The lesson: a model that quietly assumes "average converges to mean" can be silently wrong when the payoff's tail grows faster than its probability shrinks — and that is not a hypothetical, it is the shape of every fat-tailed blow-up.
 
 ## 5. Dominated convergence: the license to Monte Carlo
 
@@ -299,7 +299,7 @@ The before-and-after figure contrasts the two worlds. On the left, an integrable
 
 #### Worked example: the St. Petersburg paradox, a bet with infinite expected value
 
-The **St. Petersburg game**, posed in 1713, works like this. A fair coin is flipped until it first lands heads. If the first heads is on flip $k$, you win \$$2^k$. So heads on flip 1 pays \$2, heads on flip 2 pays \$4, flip 3 pays \$8, and so on, doubling each time. The probability of first-heads-on-flip-$k$ is $(1/2)^k$. What is the expected payout?
+The **St. Petersburg game**, posed in 1713, works like this. A fair coin is flipped until it first lands heads. If the first heads is on flip $k$, you win $\$2^k$. So heads on flip 1 pays \$2, heads on flip 2 pays \$4, flip 3 pays \$8, and so on, doubling each time. The probability of first-heads-on-flip-$k$ is $(1/2)^k$. What is the expected payout?
 
 $$
 E[X] = \sum_{k=1}^{\infty} 2^k \times \left(\frac{1}{2}\right)^k = \sum_{k=1}^{\infty} 1 = 1 + 1 + 1 + \dots = \infty.

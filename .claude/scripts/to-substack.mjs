@@ -521,10 +521,15 @@ const decodeEntities = (s) =>
     .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ");
 
 /** Ground-truth symbols for a formula, or null when the LaTeX itself is invalid. */
-function texSymbols(tex) {
+function texSymbols(tex, display = false) {
   let mathml;
   try {
-    mathml = katex.renderToString(tex, { output: "mathml", throwOnError: true, strict: false });
+    // `displayMode` is not cosmetic here: `\tag` is a parse error outside a
+    // display equation, so checking a `$$…$$` formula in inline mode reports it
+    // as broken and ships it as raw source. Validate it the way it will render.
+    mathml = katex.renderToString(tex, {
+      output: "mathml", displayMode: display, throwOnError: true, strict: false,
+    });
   } catch {
     return null;
   }
@@ -728,7 +733,7 @@ function convert(file, opts, manifest) {
       // Whatever is decided here is recorded on the entry so the Markdown
       // emitter below reaches the same verdict instead of re-deciding.
       const entry = math.store[Number(i)];
-      const truth = opts.verifyMath ? texSymbols(tex) : undefined;
+      const truth = opts.verifyMath ? texSymbols(tex, display) : undefined;
       if (truth === null) {
         stats.mathInvalid.push(raw);
         entry.resolved = { kind: "raw" };
