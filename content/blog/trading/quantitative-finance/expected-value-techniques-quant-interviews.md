@@ -186,7 +186,7 @@ The trick is to **condition on the very first step**. Write $E$ for the unknown 
 
 ![First-step analysis as a recursion tree: from the start you spend one step, then with probability p you reach the goal and with probability 1-p you return to a start-like state whose expected remaining steps is the same E -- one equation you solve for E.](/imgs/blogs/expected-value-techniques-quant-interviews-7.png)
 
-The recursion tree shows the logic. You always pay 1 for the first step. With probability $p$ you reach the goal (0 more steps). With probability $1-p$ you bounce back to a start-like state, from which you again expect $E$ steps. So
+The recursion tree shows the logic. You always pay 1 for the first step. With probability $p$ you reach the goal (0 more steps). With probability ${1-p}$ you bounce back to a start-like state, from which you again expect $E$ steps. So
 
 $$E = 1 + p\cdot 0 + (1-p)\cdot E.$$
 
@@ -317,7 +317,7 @@ The chart shows the probability that all birthdays remain distinct as people ent
 
 *You break a stick of length 1 at a uniformly random point. What is the expected length of the **longer** of the two pieces?*
 
-**Technique: direct expectation with a symmetry shortcut.** Let the break point be $U$, uniform on $[0, 1]$. The two pieces have lengths $U$ and $1 - U$. The longer piece is $\max(U, 1-U)$.
+**Technique: direct expectation with a symmetry shortcut.** Let the break point be $U$, uniform on $[0, 1]$. The two pieces have lengths $U$ and ${1 - U}$. The longer piece is $\max(U, 1-U)$.
 
 By symmetry, the longer piece is at least $\tfrac{1}{2}$ (one piece always gets the majority), and the break point's *distance from the middle*, $|U - \tfrac{1}{2}|$, is uniform on $[0, \tfrac{1}{2}]$ with average $\tfrac{1}{4}$. The longer piece equals $\tfrac{1}{2} + |U - \tfrac{1}{2}|$, so
 

@@ -187,7 +187,7 @@ The single die averages **3.499** against the exact 3.5; the two-dice sum averag
 
 #### Worked example: estimate a probability of ruin
 
-The *gambler's ruin* is a staple. You start with \$5. You repeatedly bet \$1 on a coin flip — win \$1 with probability $p$, lose \$1 with probability $1-p$. You stop when you hit \$10 (you win) or \$0 (you are ruined). What is the probability of ruin?
+The *gambler's ruin* is a staple. You start with \$5. You repeatedly bet \$1 on a coin flip — win \$1 with probability $p$, lose \$1 with probability ${1-p}$. You stop when you hit \$10 (you win) or \$0 (you are ruined). What is the probability of ruin?
 
 For a *fair* game ($p = 0.5$) there is a clean closed form: the probability of being ruined before reaching the target $N$ from a start of $i$ is $(N-i)/N$. From \$5 toward \$10 that is $(10-5)/10 = 0.5$ — perfectly symmetric, as you would hope for a fair coin. For an *unfair* game the formula is $P(\text{ruin}) = \frac{r^{N} - r^{i}}{r^{N} - 1}$ where $r = (1-p)/p$. With a slightly hostile coin $p = 0.48$ (so $r = 0.52/0.48 \approx 1.083$), that evaluates to **0.5987** — a tiny edge against you balloons into a 60% chance of ruin. Now simulate and confirm:
 

@@ -481,7 +481,7 @@ Naive Black-Scholes implementations break on real edge cases. Production code gu
 
 **Computing $N$ and $\phi$.** The standard erfc-based implementation gives 12-digit accuracy; faster approximations (Abramowitz and Stegun 26.2.16, the Beasley-Springer-Moro inverse) trade ~1 ulp accuracy for 3-5x speedup. Quant libraries that need to evaluate millions of options per second use the approximations.
 
-**Floating-point accumulation.** Computing $\ln(S/K)$ for $S \approx K$ via $\ln(S) - \ln(K)$ loses precision; use `log1p(S/K - 1)` instead. Computing $e^{-rT}$ for tiny $rT$ via $1 - rT$ loses precision; use `expm1(-rT) + 1`. The IEEE 754 corners matter at scale.
+**Floating-point accumulation.** Computing $\ln(S/K)$ for $S \approx K$ via $\ln(S) - \ln(K)$ loses precision; use `log1p(S/K - 1)` instead. Computing $e^{-rT}$ for tiny $rT$ via ${1 - rT}$ loses precision; use `expm1(-rT) + 1`. The IEEE 754 corners matter at scale.
 
 A production-quality Black-Scholes pricer is several hundred lines of carefully guarded code; the eight-line classroom version is a teaching aid, not a deployment.
 

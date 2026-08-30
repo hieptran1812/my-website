@@ -103,7 +103,7 @@ The contrast above is the whole theorem in a picture, and it is worth sitting wi
 
 #### Worked example: iterating to a fixed point
 
-Take the concrete map $T(x) = 0.5x + 1$. It is a contraction with factor $q = 0.5$, because $\lvert T(x) - T(y) \rvert = 0.5\,\lvert x - y \rvert$ -- it halves every gap. Its fixed point solves $x = 0.5x + 1$, i.e. $0.5x = 1$, so $x^\ast = 2$. Now iterate from a deliberately bad start, $x_0 = 10$:
+Take the concrete map $T(x) = 0.5x + 1$. It is a contraction with factor $q = 0.5$, because $\lvert T(x) - T(y) \rvert = 0.5\,\lvert x - y \rvert$ -- it halves every gap. Its fixed point solves $x = 0.5x + 1$, i.e. ${0.5x = 1}$, so $x^\ast = 2$. Now iterate from a deliberately bad start, $x_0 = 10$:
 
 - $x_1 = 0.5 \times 10 + 1 = 6.0$. Error from 2 is 4.0.
 - $x_2 = 0.5 \times 6 + 1 = 4.0$. Error 2.0.

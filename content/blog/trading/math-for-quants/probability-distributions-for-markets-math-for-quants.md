@@ -276,7 +276,7 @@ The one discipline that separates good fitting from dangerous fitting is the **t
 
 ### The intuition before the formula
 
-The simplest random variable in all of finance is a single bet that either wins or loses. Did the trade make money: yes or no? That is a **Bernoulli** trial, one event with two outcomes, "success" with probability $p$ and "failure" with probability $1-p$. A trader's **hit rate** (the fraction of trades that are profitable) is exactly the $p$ of a Bernoulli.
+The simplest random variable in all of finance is a single bet that either wins or loses. Did the trade make money: yes or no? That is a **Bernoulli** trial, one event with two outcomes, "success" with probability $p$ and "failure" with probability ${1-p}$. A trader's **hit rate** (the fraction of trades that are profitable) is exactly the $p$ of a Bernoulli.
 
 Stack many independent Bernoulli trials together and count the successes, and you get the **binomial** distribution: out of $n$ trades, how many won? The everyday analogy is flipping a biased coin $n$ times and counting heads.
 

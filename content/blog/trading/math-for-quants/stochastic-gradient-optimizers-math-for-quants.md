@@ -105,7 +105,7 @@ We have the one-line update; now let us understand what makes it work, when it s
 
 ### Convergence on a convex bowl
 
-On a convex cost — portfolio variance, OLS regression, ridge regression, logistic regression — gradient descent with a small enough learning rate is *guaranteed* to converge to the global minimum. There is even a clean rule for how small "small enough" is: for a quadratic bowl whose steepest curvature is $L$ (the largest eigenvalue of the Hessian, the matrix of second derivatives), any learning rate below $2/L$ converges, and the sweet spot is around $1/L$.
+On a convex cost — portfolio variance, OLS regression, ridge regression, logistic regression — gradient descent with a small enough learning rate is *guaranteed* to converge to the global minimum. There is even a clean rule for how small "small enough" is: for a quadratic bowl whose steepest curvature is $L$ (the largest eigenvalue of the Hessian, the matrix of second derivatives), any learning rate below ${2/L}$ converges, and the sweet spot is around ${1/L}$.
 
 The speed depends on the *shape* of the bowl. A perfectly round bowl converges in essentially one step. A long, thin, taco-shaped valley is brutal: the gradient mostly points across the valley, not down its length, so you zig-zag slowly toward the far end. The ratio of the widest to the narrowest curvature is called the **condition number**, and a high condition number means slow, zig-zaggy convergence. This is why quants *precondition* or *standardize* their features before fitting — scaling each feature to similar size rounds out the bowl and speeds everything up. We covered the regression side of this in [OLS, GLS, and regularized regression](/blog/trading/math-for-quants/regression-ols-gls-regularized-math-for-quants).
 
@@ -259,11 +259,11 @@ The before-and-after above is the warning every quant should internalize. Both p
 
 #### Worked example: learning rate too big versus too small, and the dollar cost
 
-You are fitting a small risk model whose job is to estimate the 1-day 99% **Value-at-Risk (VaR)** of a \$100 million portfolio — the loss you expect to exceed only 1 day in 100. The cost surface is a simple bowl whose steepest curvature is $L = 4$. The convergence rule says any learning rate below $2/L = 0.5$ is stable, and the sweet spot is around $1/L = 0.25$. The true converged VaR is **\$1.2 million**.
+You are fitting a small risk model whose job is to estimate the 1-day 99% **Value-at-Risk (VaR)** of a \$100 million portfolio — the loss you expect to exceed only 1 day in 100. The cost surface is a simple bowl whose steepest curvature is $L = 4$. The convergence rule says any learning rate below ${2/L = 0.5}$ is stable, and the sweet spot is around ${1/L = 0.25}$. The true converged VaR is **\$1.2 million**.
 
 **Too small ($\eta = 0.0025$, i.e. 100× too small).** Each step shrinks the remaining error by only about $\eta \times L = 1\%$. To get within 0.1% of the true VaR you need roughly $\ln(0.001)/\ln(0.99) \approx 690$ steps. If the model re-fits each step on a chunk of data taking 0.2 seconds, that is 690 × 0.2 = **138 seconds** — and if you only let it run for 30 seconds (150 steps) before the market open, you stop at about 78% of the way there. The model reports a VaR of around **\$0.94 million** instead of \$1.2 million — it *understates* risk by \$260,000, and you size your positions as if you can lose less than you really can. The error here is silent: the loss was still falling, everything *looked* fine, you just ran out of time.
 
-**Too big ($\eta = 1.0$, i.e. 4× too large, above the $2/L = 0.5$ stability limit).** Now each step *amplifies* the error by a factor of $|1 - \eta L| = |1 - 4| = 3$. Start with an error of \$0.5 million in the VaR estimate:
+**Too big ($\eta = 1.0$, i.e. 4× too large, above the ${2/L = 0.5}$ stability limit).** Now each step *amplifies* the error by a factor of $|1 - \eta L| = |1 - 4| = 3$. Start with an error of \$0.5 million in the VaR estimate:
 
 - Step 1 error: \$0.5M × 3 = \$1.5M.
 - Step 2: \$4.5M. Step 3: \$13.5M. Step 4: \$40.5M. Step 5: \$121.5M.

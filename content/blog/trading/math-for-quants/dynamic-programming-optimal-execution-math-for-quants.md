@@ -130,7 +130,7 @@ $$ V_2(x) = \min_{0 \le n \le x} \big[\, n^2 + (x - n)^2 \,\big]. $$
 
 Take the derivative with respect to $n$ and set it to zero: $2n - 2(x - n) = 0 \Rightarrow n = x/2$. Selling *half* now is optimal. The cost is $V_2(x) = (x/2)^2 + (x/2)^2 = x^2/2$. So splitting the remaining position evenly across the last two periods halves the cost of dumping it all at once. Intuition check: convex cost punishes lumpiness, so you smooth it out.
 
-**Step 1 (now).** You hold all **9 units**. You sell $n$ now (cost $n^2$) and carry $9 - n$ into period 2, which will then cost $V_2(9 - n) = (9 - n)^2 / 2$. So
+**Step 1 (now).** You hold all **9 units**. You sell $n$ now (cost $n^2$) and carry ${9 - n}$ into period 2, which will then cost $V_2(9 - n) = (9 - n)^2 / 2$. So
 
 $$ V_1(9) = \min_{0 \le n \le 9} \Big[\, n^2 + \tfrac{(9 - n)^2}{2} \,\Big]. $$
 

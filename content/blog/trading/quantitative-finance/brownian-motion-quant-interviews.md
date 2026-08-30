@@ -285,7 +285,7 @@ These are the kinds of problems a quant researcher interview actually puts in fr
 
 #### Worked example: problem 1 — is B(t)³ − 3tB(t) a martingale?
 
-**Problem.** We showed $B_t^3$ is not a martingale. Show that $Y_t = B_t^3 - 3 t B_t$ *is* a martingale, and explain where the $3t$ comes from.
+**Problem.** We showed $B_t^3$ is not a martingale. Show that $Y_t = B_t^3 - 3 t B_t$ *is* a martingale, and explain where the ${3t}$ comes from.
 
 **Solution.** Compute $\mathbb{E}[B_t^3 \mid \mathcal{F}_s]$ with $B_t = B_s + I$, $I = B_t - B_s$ independent of the past, $\mathbb{E}[I] = 0$, $\mathbb{E}[I^2] = t - s$, $\mathbb{E}[I^3] = 0$:
 
@@ -295,7 +295,7 @@ Now the other term: $\mathbb{E}[3 t B_t \mid \mathcal{F}_s] = 3t\, \mathbb{E}[B_
 
 $$\mathbb{E}[B_t^3 - 3 t B_t \mid \mathcal{F}_s] = B_s^3 + 3 B_s (t - s) - 3 t B_s = B_s^3 - 3 s B_s = Y_s.$$
 
-It checks. **$Y_t = B_t^3 - 3 t B_t$ is a martingale.** The $3t$ is precisely the drift that Ito's formula generates: applying $\mathrm{d}f = f'\,\mathrm{d}B + \tfrac12 f''\,\mathrm{d}t$ to $f(x) = x^3$ gives a $\tfrac12 (6 B_t)\,\mathrm{d}t = 3 B_t\,\mathrm{d}t$ drift, which integrates to $3 \int_0^t B_u\,\mathrm{d}u$ — and the clean fix $-3tB_t$ removes the corresponding deterministic part. The pattern (these are the *Hermite polynomials* of Brownian motion) is: $B_t$, $B_t^2 - t$, $B_t^3 - 3tB_t$, each is a martingale.
+It checks. **$Y_t = B_t^3 - 3 t B_t$ is a martingale.** The ${3t}$ is precisely the drift that Ito's formula generates: applying $\mathrm{d}f = f'\,\mathrm{d}B + \tfrac12 f''\,\mathrm{d}t$ to $f(x) = x^3$ gives a $\tfrac12 (6 B_t)\,\mathrm{d}t = 3 B_t\,\mathrm{d}t$ drift, which integrates to $3 \int_0^t B_u\,\mathrm{d}u$ — and the clean fix $-3tB_t$ removes the corresponding deterministic part. The pattern (these are the *Hermite polynomials* of Brownian motion) is: $B_t$, $B_t^2 - t$, $B_t^3 - 3tB_t$, each is a martingale.
 
 #### Worked example: problem 2 — probability a \$100 stock touches \$110 before \$90
 

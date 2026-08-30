@@ -315,7 +315,7 @@ The information improves your expected payoff from **\$2** to **\$6**, a gain of
 
 > *"We play a game. We each secretly pick Left or Right. The payoff to me (you pay me) is: if we both pick Left, you pay me \$3; both Right, you pay me \$1; if we mismatch, I pay you \$2. What's your optimal strategy, and what's the game worth?"*
 
-**Solution.** This is a zero-sum game; let us find your (the Column player's) mixing probabilities so that the opponent (Row) is indifferent between Left and Right, which is what makes you unexploitable. Let $q$ be your probability of playing Left, so $1-q$ is your probability of Right. The payoffs *to the opponent* (positive = you pay them) are: both Left $+3$, both Right $+1$, mismatch $-2$.
+**Solution.** This is a zero-sum game; let us find your (the Column player's) mixing probabilities so that the opponent (Row) is indifferent between Left and Right, which is what makes you unexploitable. Let $q$ be your probability of playing Left, so ${1-q}$ is your probability of Right. The payoffs *to the opponent* (positive = you pay them) are: both Left $+3$, both Right $+1$, mismatch $-2$.
 
 Opponent's expected payoff if **they** play Left:
 $$E_{\text{Row=Left}} = q(+3) + (1-q)(-2) = 3q - 2 + 2q = 5q - 2.$$

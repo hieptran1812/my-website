@@ -35,7 +35,7 @@ Before any of the quant material, we need a shared vocabulary. I will assume you
 
 A *polynomial* is an expression you can build from numbers and unknowns using only three operations: **addition, subtraction, and multiplication**. That is the whole definition. No division by an unknown, no square roots of an unknown, no sines or logarithms. Just add, subtract, multiply.
 
-So $3x + 2$ is a polynomial. So is $x^2 - 5x + 6$ (the $x^2$ is just $x$ times $x$). So is $xy - 1$, which multiplies two different unknowns together. But $1/x$ is not a polynomial (it divides by an unknown), and $\sqrt{x}$ is not (a square root is not built from add/subtract/multiply).
+So ${3x + 2}$ is a polynomial. So is $x^2 - 5x + 6$ (the $x^2$ is just $x$ times $x$). So is $xy - 1$, which multiplies two different unknowns together. But ${1/x}$ is not a polynomial (it divides by an unknown), and $\sqrt{x}$ is not (a square root is not built from add/subtract/multiply).
 
 The *degree* of a polynomial is the highest total power of the unknowns in any single term. In $x^2 - 5x + 6$, the degree is 2 (from the $x^2$). In $xy - 1$, the degree is also 2, because the term $xy$ uses one power of $x$ and one of $y$, totaling 2. A *linear* polynomial has degree 1 — those are the straight-line equations from algebra class, and they are the *only* ones ordinary linear algebra knows how to handle. The instant a term like $xy$ or $x^2$ shows up, we have left linear algebra behind.
 
@@ -62,7 +62,7 @@ For a quant, the variety is the *answer*: it is the set of model parameters that
 
 Here is the dividing line that motivates everything. If every equation is *linear* (degree 1), you can solve the system with **Gaussian elimination** — the systematic row-reduction you may have seen, where you subtract multiples of one equation from another to eliminate variables until you reach a triangular form you can read off. Gaussian elimination is wonderful: it always terminates, it tells you exactly how many solutions there are, and it is fast.
 
-But Gaussian elimination only works because linear equations have a rigid structure: every variable appears to the first power and never multiplies another. The moment you have $xy = 6$, subtracting one equation from another does not eliminate anything cleanly, because the *products* of variables get in the way. Concretely: with two linear equations like $2x + 3y = 12$ and $x + y = 5$, you can subtract twice the second from the first and the $x$ vanishes — $3y - 2y = 12 - 10$, so $y = 2$, done. Try the same trick on $x + y = 5$ and $xy = 6$: there is no number you can multiply the first equation by and subtract to make the product $xy$ disappear, because $xy$ is a *different kind of term* from $x$ and $y$. Subtraction of multiples — the only move Gaussian elimination has — is powerless against it.
+But Gaussian elimination only works because linear equations have a rigid structure: every variable appears to the first power and never multiplies another. The moment you have $xy = 6$, subtracting one equation from another does not eliminate anything cleanly, because the *products* of variables get in the way. Concretely: with two linear equations like ${2x + 3y = 12}$ and $x + y = 5$, you can subtract twice the second from the first and the $x$ vanishes — ${3y - 2y = 12 - 10}$, so $y = 2$, done. Try the same trick on $x + y = 5$ and $xy = 6$: there is no number you can multiply the first equation by and subtract to make the product $xy$ disappear, because $xy$ is a *different kind of term* from $x$ and $y$. Subtraction of multiples — the only move Gaussian elimination has — is powerless against it.
 
 We need a generalization that is allowed to multiply equations by *other variables*, not just numbers, so that a product like $xy$ can be matched and cancelled. That generalization is the **Gröbner basis**, and the algorithm that computes it (Buchberger's) is the polynomial cousin of row reduction: same idea of cancelling leading terms by subtraction, but now you are allowed to multiply by monomials, which is exactly the extra power needed to reach the products.
 
@@ -84,7 +84,7 @@ To understand a Gröbner basis you first need one idea that sounds abstract but 
 
 ### Consequences of equations
 
-Suppose you know $x + y = 5$ and $xy = 6$. What *else* must be true? Well, $2(x+y) = 10$ is true (multiply the first equation by 2). And $(x+y) - (xy) = 5 - 6 = -1$, so $x + y - xy = -1$. And you can multiply the first equation by $x$ to get $x^2 + xy = 5x$. Every one of these is a *logical consequence* of the original two equations — anything that solves the originals automatically solves these too.
+Suppose you know $x + y = 5$ and $xy = 6$. What *else* must be true? Well, ${2(x+y) = 10}$ is true (multiply the first equation by 2). And $(x+y) - (xy) = 5 - 6 = -1$, so $x + y - xy = -1$. And you can multiply the first equation by $x$ to get $x^2 + xy = 5x$. Every one of these is a *logical consequence* of the original two equations — anything that solves the originals automatically solves these too.
 
 The collection of *all* such consequences — every polynomial you can build by multiplying your equations by other polynomials and adding the results — is called the **ideal generated by** your polynomials. Think of the original equations as ingredients and the ideal as every dish you can cook from them using polynomial recipes.
 
@@ -159,10 +159,10 @@ $$
 1 \cdot p + 0 \cdot q = 0.55 \quad\Longrightarrow\quad p = 0.55
 $$
 
-This first version is *too easy* — it is linear, so it is not really a polynomial system yet. Let's add the wrinkle that makes it polynomial, which is what happens the instant the *payoffs themselves* depend on the unknowns. Suppose instead you are fitting a tiny *implied tree* where the up-move size $u$ is *also* unknown, and you have two option prices to match. Say the stock today is \$100, the down-move takes it to \$90 (known), but the up-move takes it to $100u$ for an unknown multiplier $u$, with up-probability $p$. You observe two prices:
+This first version is *too easy* — it is linear, so it is not really a polynomial system yet. Let's add the wrinkle that makes it polynomial, which is what happens the instant the *payoffs themselves* depend on the unknowns. Suppose instead you are fitting a tiny *implied tree* where the up-move size $u$ is *also* unknown, and you have two option prices to match. Say the stock today is \$100, the down-move takes it to \$90 (known), but the up-move takes it to ${100u}$ for an unknown multiplier $u$, with up-probability $p$. You observe two prices:
 
 - A forward-like contract paying the stock itself trades so that the expected stock price is \$103: $\;100u\cdot p + 90\cdot(1-p) = 103.$
-- A call struck at \$100 (paying $\max(\text{stock} - 100, 0)$, which is $100u - 100$ in the up state and \$0 in the down state) trades at \$6: $\;(100u - 100)\,p = 6.$
+- A call struck at \$100 (paying $\max(\text{stock} - 100, 0)$, which is ${100u - 100}$ in the up state and \$0 in the down state) trades at \$6: $\;(100u - 100)\,p = 6.$
 
 Now we genuinely have a polynomial system, because the term $100u\cdot p$ *multiplies two unknowns*. Write it cleanly with $x = u$ and $y = p$:
 
@@ -173,13 +173,13 @@ $$
 \end{cases}
 $$
 
-Expand the first: $100xy + 90 - 90y = 103$, so $100xy - 90y = 13$. Expand the second: $100xy - 100y = 6$. Now **subtract** the second from the first — and watch the cross-term $100xy$ cancel, exactly the move Gaussian elimination cannot make but elimination *can*, because we are subtracting whole equations engineered so the leading product cancels:
+Expand the first: ${100xy + 90 - 90y = 103}$, so ${100xy - 90y = 13}$. Expand the second: ${100xy - 100y = 6}$. Now **subtract** the second from the first — and watch the cross-term ${100xy}$ cancel, exactly the move Gaussian elimination cannot make but elimination *can*, because we are subtracting whole equations engineered so the leading product cancels:
 
 $$
 (100xy - 90y) - (100xy - 100y) = 13 - 6 \;\Longrightarrow\; 10y = 7 \;\Longrightarrow\; y = 0.7.
 $$
 
-We have eliminated $x$ and reduced the system to a single equation in $y$ alone — that is the elimination ideal in miniature. The up-probability is $p = 0.70$. Substitute back into $100xy - 100y = 6$: $\;70x - 70 = 6$, so $70x = 76$ and $x = u = 76/70 \approx 1.0857$. The up-state stock price is $100u \approx \$108.57$.
+We have eliminated $x$ and reduced the system to a single equation in $y$ alone — that is the elimination ideal in miniature. The up-probability is $p = 0.70$. Substitute back into ${100xy - 100y = 6}$: $\;70x - 70 = 6$, so ${70x = 76}$ and $x = u = 76/70 \approx 1.0857$. The up-state stock price is $100u \approx \$108.57$.
 
 **The intuition:** even this hand calculation *is* a Gröbner-basis computation in disguise — we picked an ordering (eliminate $x$ first), formed a combination that cancels the leading cross-term, and reduced to a triangular form we could read off. The whole machinery of Buchberger's algorithm is just this, done systematically for systems too big to eyeball.
 
@@ -193,7 +193,7 @@ The *moments* of a distribution — its mean, variance, skewness — are built f
 
 #### Worked example: match a target mean and variance
 
-Suppose you want to model a stock's daily return as a *mixture* of two simple scenarios — a "calm" day and a "stressed" day — and you want the mixture to reproduce a target mean and variance you measured. To keep it a clean two-unknown polynomial system, fix the structure: with probability $w$ the return is drawn with mean $+m$, and with probability $1-w$ it is drawn with mean $-m$ (a symmetric two-bump model), and within each bump the variance is a fixed \$0 for now so all the variance comes from the two means. The unknowns are the weight $w$ and the bump size $m$ (in percent).
+Suppose you want to model a stock's daily return as a *mixture* of two simple scenarios — a "calm" day and a "stressed" day — and you want the mixture to reproduce a target mean and variance you measured. To keep it a clean two-unknown polynomial system, fix the structure: with probability $w$ the return is drawn with mean $+m$, and with probability ${1-w}$ it is drawn with mean $-m$ (a symmetric two-bump model), and within each bump the variance is a fixed \$0 for now so all the variance comes from the two means. The unknowns are the weight $w$ and the bump size $m$ (in percent).
 
 Target statistics from the data: mean return $= 0.1\%$ and variance $= 4$ (so a standard deviation of \$2\%, i.e. a typical daily move of about 2%).
 
@@ -215,11 +215,11 @@ $$
 m^2 - 0.01 = 4 \;\Longrightarrow\; m^2 = 4.01. \tag{2}
 $$
 
-Equation (2) is already a single-variable polynomial — the elimination has happened for free because variance only involved $m$. Solve it: $m = \sqrt{4.01} \approx 2.0025$ (we take the positive root because $m$ is a magnitude; the negative root just relabels the bumps). Substitute into (1): $2.0025(2w - 1) = 0.1$, so $2w - 1 = 0.04994$, giving $w \approx 0.525$.
+Equation (2) is already a single-variable polynomial — the elimination has happened for free because variance only involved $m$. Solve it: $m = \sqrt{4.01} \approx 2.0025$ (we take the positive root because $m$ is a magnitude; the negative root just relabels the bumps). Substitute into (1): ${2.0025(2w - 1) = 0.1}$, so ${2w - 1 = 0.04994}$, giving $w \approx 0.525$.
 
 So the fitted model is: a 52.5% chance of a $+2.00\%$ day and a 47.5% chance of a $-2.00\%$ day. Sanity-check the mean: $0.525(2.0025) + 0.475(-2.0025) = 2.0025(0.05) = 0.10$. The mean is \$0.10\% per day on a \$100 position, i.e. **about \$0.10 of expected drift per day per \$100 invested**, with a 2% daily swing — exactly the targets.
 
-Now walk the *realistic wrinkle*, because the toy version hid the degree explosion. Suppose each bump is not a spike but has its own variance $v$, and you also want to match a target *third* moment (skewness) to capture that crashes are sharper than rallies. The mean equation stays $m(2w-1) = 0.1$. The variance becomes $m^2 + v - 0.01 = 4$ (the bump means contribute $m^2$, the within-bump spread contributes $v$). The third central moment introduces terms like $m^3(2w-1)$ and $3mv(2w-1)$ — now you have three equations of degree up to 3 in three unknowns $w, m, v$. By Bézout's bookkeeping that is up to $1 \times 2 \times 3 = 6$ candidate solutions, and the cross-terms $m^3 w$ and $mvw$ are exactly the products that defeat hand elimination. This is the threshold: at two moments you solve it on a napkin; at three you reach for SymPy's `groebner`, which eliminates $w$ and $v$ to leave a single polynomial in $m$ whose real roots in the valid range you then read off — and it tells you, for free, *how many* valid fits exist. If two different $(w, m, v)$ triples both reproduce your three target moments, your model is *unidentified* on those moments, and the algebra is what reveals it.
+Now walk the *realistic wrinkle*, because the toy version hid the degree explosion. Suppose each bump is not a spike but has its own variance $v$, and you also want to match a target *third* moment (skewness) to capture that crashes are sharper than rallies. The mean equation stays $m(2w-1) = 0.1$. The variance becomes $m^2 + v - 0.01 = 4$ (the bump means contribute $m^2$, the within-bump spread contributes $v$). The third central moment introduces terms like $m^3(2w-1)$ and ${3mv(2w-1)}$ — now you have three equations of degree up to 3 in three unknowns $w, m, v$. By Bézout's bookkeeping that is up to $1 \times 2 \times 3 = 6$ candidate solutions, and the cross-terms $m^3 w$ and $mvw$ are exactly the products that defeat hand elimination. This is the threshold: at two moments you solve it on a napkin; at three you reach for SymPy's `groebner`, which eliminates $w$ and $v$ to leave a single polynomial in $m$ whose real roots in the valid range you then read off — and it tells you, for free, *how many* valid fits exist. If two different $(w, m, v)$ triples both reproduce your three target moments, your model is *unidentified* on those moments, and the algebra is what reveals it.
 
 **The intuition:** moment matching turns "find a distribution with these statistics" into "solve this polynomial system," and the higher the moments you match (skew, kurtosis), the higher the polynomial degree — which is precisely when the easy elimination above stops working by hand and a Gröbner basis becomes the systematic tool that still finds *all* the parameter sets that fit.
 
@@ -237,7 +237,7 @@ The figure above is the recipe in one column: every market price you must match 
 
 #### Worked example: a recombining tree's risk-neutral probabilities
 
-Consider a two-step *recombining* binomial tree. "Recombining" means an up-then-down move lands at the same node as a down-then-up move, which is what keeps trees computationally small. The stock starts at \$100. Each step it multiplies by $u$ (up) or $d$ (down). After two steps the three possible prices are $100u^2$, $100ud$, and $100d^2$. Let the per-step risk-neutral up-probability be $q$ (so down is $1-q$), and take a zero interest rate.
+Consider a two-step *recombining* binomial tree. "Recombining" means an up-then-down move lands at the same node as a down-then-up move, which is what keeps trees computationally small. The stock starts at \$100. Each step it multiplies by $u$ (up) or $d$ (down). After two steps the three possible prices are $100u^2$, ${100ud}$, and $100d^2$. Let the per-step risk-neutral up-probability be $q$ (so down is ${1-q}$), and take a zero interest rate.
 
 The **no-arbitrage / martingale** condition says each step the expected price equals today's price (zero rate). For the first step: $\,100(uq + d(1-q)) = 100$, i.e.
 
@@ -248,7 +248,7 @@ $$
 Now suppose the tree is being *calibrated*: you do not know $u$ and $d$, and you have two market quotes to match.
 
 - The stock's two-step expected price must equal \$100 (the martingale condition again, applied across two steps), which for a recombining tree reduces to ($\star$) holding each step — one equation: $uq + d(1-q) = 1$.
-- A two-step at-the-money call struck at \$100 trades at \$4. Its payoff is $\max(\text{price} - 100, 0)$: it pays $100u^2 - 100$ at the top node (probability $q^2$), pays $100ud - 100$ at the middle node *only if* that exceeds 100, and \$0 at the bottom. To keep numbers clean, suppose $u d = 1$ exactly (a common symmetric choice — up and down moves are reciprocals — so the middle node returns precisely to \$100 and its call payoff is \$0). Then the call only pays at the top: $\,(100u^2 - 100)\,q^2 = 4.$
+- A two-step at-the-money call struck at \$100 trades at \$4. Its payoff is $\max(\text{price} - 100, 0)$: it pays $100u^2 - 100$ at the top node (probability $q^2$), pays ${100ud - 100}$ at the middle node *only if* that exceeds 100, and \$0 at the bottom. To keep numbers clean, suppose $u d = 1$ exactly (a common symmetric choice — up and down moves are reciprocals — so the middle node returns precisely to \$100 and its call payoff is \$0). Then the call only pays at the top: $\,(100u^2 - 100)\,q^2 = 4.$
 
 With $d = 1/u$, equation ($\star$) becomes $uq + (1-q)/u = 1$. Multiply through by $u$: $\,u^2 q + (1-q) = u$, i.e.
 
@@ -262,7 +262,7 @@ $$
 (100u^2 - 100)\,q^2 = 4 \;\Longrightarrow\; u^2 - 1 = \frac{4}{100\,q^2} = \frac{0.04}{q^2}. \tag{B}
 $$
 
-This is a genuine polynomial system in $u$ and $q$ (degree 2 in $u$, and the $q^2$ in (B) makes it nonlinear in $q$ too). Let's solve it by elimination — exactly what a lex Gröbner basis automates. From (A), treat it as a quadratic in $u$: $\,u = \dfrac{1 \pm \sqrt{1 - 4q(1-q)}}{2q}$. Note $1 - 4q(1-q) = (1-2q)^2$, so $\sqrt{\;} = |1 - 2q|$. Taking $q < 0.5$ so $1 - 2q > 0$, the two roots are $u = \dfrac{1 + (1-2q)}{2q} = \dfrac{1-q}{q}$ or $u = \dfrac{1 - (1-2q)}{2q} = 1$. The root $u = 1$ is degenerate (no movement), so the financially meaningful one is
+This is a genuine polynomial system in $u$ and $q$ (degree 2 in $u$, and the $q^2$ in (B) makes it nonlinear in $q$ too). Let's solve it by elimination — exactly what a lex Gröbner basis automates. From (A), treat it as a quadratic in $u$: $\,u = \dfrac{1 \pm \sqrt{1 - 4q(1-q)}}{2q}$. Note $1 - 4q(1-q) = (1-2q)^2$, so $\sqrt{\;} = |1 - 2q|$. Taking $q < 0.5$ so ${1 - 2q > 0}$, the two roots are $u = \dfrac{1 + (1-2q)}{2q} = \dfrac{1-q}{q}$ or $u = \dfrac{1 - (1-2q)}{2q} = 1$. The root $u = 1$ is degenerate (no movement), so the financially meaningful one is
 
 $$
 u = \frac{1 - q}{q}. \tag{A'}

@@ -123,7 +123,7 @@ The periodogram at frequency $f_k$ is
 
 $$I(f_k) = \frac{1}{N}\, |X_k|^2 = \frac{1}{N}\left| \sum_{n=0}^{N-1} x_n \, e^{-2\pi i k n / N} \right|^2.$$
 
-The $1/N$ just normalizes for sample size. $I(f_k)$ is your estimate of how much variance the data spends on the cycle of frequency $f_k$. Sum the periodogram across all frequencies and you recover the total variance of the series -- that is *Parseval's theorem*, and it is the precise sense in which the spectrum is a budget: it partitions the series' variance across cycle lengths, and the pieces add up to the whole.
+The ${1/N}$ just normalizes for sample size. $I(f_k)$ is your estimate of how much variance the data spends on the cycle of frequency $f_k$. Sum the periodogram across all frequencies and you recover the total variance of the series -- that is *Parseval's theorem*, and it is the precise sense in which the spectrum is a budget: it partitions the series' variance across cycle lengths, and the pieces add up to the whole.
 
 The practical use is direct: a *tall, isolated* periodogram value at some frequency is a candidate cycle. Translate its frequency to a period, check that the period makes economic sense (a daily, weekly, or monthly rhythm has a plausible cause; a 37.4-bar rhythm probably does not), and you have a hypothesis to test.
 

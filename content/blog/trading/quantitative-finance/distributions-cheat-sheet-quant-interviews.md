@@ -29,10 +29,10 @@ readTime: 41
 > - **The whole subject is a recognition reflex.** "Trades until your first fill" is Geometric. "Orders per second at the exchange" is Poisson. "Total P&L over a thousand trades" is Normal, by the Central Limit Theorem. Learn the *mechanism* behind each, and the right distribution announces itself.
 > - **The eight workhorses split cleanly.** Discrete counting: Bernoulli, Binomial, Geometric, Negative binomial, Poisson. Continuous timing and magnitude: Uniform, Exponential, Normal, Lognormal.
 > - **Two limit theorems glue the map together.** The *Poisson limit* says many rare chances ($n$ large, $p$ small, $np$ fixed) turn a Binomial into a Poisson. The *Central Limit Theorem* says the sum of many independent things is Normal, whatever they individually look like.
-> - **The one number to remember:** the mean wait for a first success with probability $p$ is $1/p$. If your order fills 25% of the time, you expect **4 attempts** before a fill. Almost every waiting-time question reduces to this.
+> - **The one number to remember:** the mean wait for a first success with probability $p$ is ${1/p}$. If your order fills 25% of the time, you expect **4 attempts** before a fill. Almost every waiting-time question reduces to this.
 > - **Where the model breaks matters as much as where it holds.** Real market returns have *fat tails*: a "6-sigma" day should be a once-in-500-million-year event under the Normal, yet markets deliver them every few years. Knowing this is the difference between a junior answer and a desk-ready one.
 
-Here is the kind of question that gets asked in the first ten minutes of a quant interview, and it sounds deceptively casual. "You're sending orders into a market and each one has a 25% chance of getting filled. How many orders do you expect to send before you get your first fill?" The candidate who freezes and tries to write out an infinite sum is already behind. The candidate who says "that's geometric, so $1/p$, four orders" and then *explains why* is the one who gets to the next round.
+Here is the kind of question that gets asked in the first ten minutes of a quant interview, and it sounds deceptively casual. "You're sending orders into a market and each one has a 25% chance of getting filled. How many orders do you expect to send before you get your first fill?" The candidate who freezes and tries to write out an infinite sum is already behind. The candidate who says "that's geometric, so ${1/p}$, four orders" and then *explains why* is the one who gets to the next round.
 
 That is the entire game. Interviewers at the firms that ask these questions — Jane Street, Two Sigma, Citadel, DE Shaw, Optiver, SIG, Jump, Hudson River Trading — are not testing whether you memorized a probability textbook. They are testing whether you can map a messy real-world situation onto the right mathematical object *fast*, and then reason cleanly inside it. Trading is exactly this skill applied at speed: a situation arrives (an order book shifts, a number prints, a counterparty does something strange), and you have to instantly know what kind of randomness you are looking at and what it implies for a price.
 
@@ -93,7 +93,7 @@ With those four ideas — random variable, pmf/pdf, CDF, mean/variance — we ca
 
 ### Bernoulli: the atom of all randomness
 
-The **Bernoulli distribution** is the simplest random variable there is: a single yes/no trial. It takes value $1$ ("success") with probability $p$ and value $0$ ("failure") with probability $1 - p$. One coin flip. One order that either fills or doesn't. One trade that's either a winner or a loser. That's it.
+The **Bernoulli distribution** is the simplest random variable there is: a single yes/no trial. It takes value $1$ ("success") with probability $p$ and value $0$ ("failure") with probability ${1 - p}$. One coin flip. One order that either fills or doesn't. One trade that's either a winner or a loser. That's it.
 
 Its summaries are clean. The mean is $E[X] = p$ (a success worth $1$ happens a fraction $p$ of the time). The variance is $p(1-p)$, which is largest at $p = 0.5$ — a fair coin is the most unpredictable, and a near-certain event ($p$ near $0$ or $1$) has almost no variance. Every other discrete distribution in this article is, at heart, a pile of Bernoulli trials assembled in some way. It is the atom.
 
@@ -133,7 +133,7 @@ read as "the first $k - 1$ trials all failed (probability $(1-p)^{k-1}$) and the
 
 ![Geometric decay: each extra failed trial multiplies the probability by the same factor, so the bars decay geometrically, with mean 1/p](/imgs/blogs/distributions-cheat-sheet-quant-interviews-4.png)
 
-The one fact to burn into memory is the mean: $E[N] = 1/p$. If something succeeds a fraction $p$ of the time, you wait $1/p$ attempts on average for the first one. A $25\%$ fill rate means $4$ attempts on average; a $10\%$ rate means $10$. The figure shows $p = 0.25$, where the bars decay by a factor of $0.75$ each step and the mean sits at $4$ trials. The Geometric is also the *only discrete* distribution that is **memoryless**: having already failed $20$ times tells you nothing — your remaining wait is still a fresh Geometric with mean $1/p$. (We'll meet its continuous twin, the Exponential, shortly.)
+The one fact to burn into memory is the mean: $E[N] = 1/p$. If something succeeds a fraction $p$ of the time, you wait ${1/p}$ attempts on average for the first one. A $25\%$ fill rate means $4$ attempts on average; a $10\%$ rate means $10$. The figure shows $p = 0.25$, where the bars decay by a factor of $0.75$ each step and the mean sits at $4$ trials. The Geometric is also the *only discrete* distribution that is **memoryless**: having already failed $20$ times tells you nothing — your remaining wait is still a fresh Geometric with mean ${1/p}$. (We'll meet its continuous twin, the Exponential, shortly.)
 
 #### Worked example: expected number of trades until your first fill
 
@@ -143,11 +143,11 @@ The number of looks until the first fill is $N \sim \text{Geometric}(0.2)$, so t
 
 $$E[N] = \frac{1}{p} = \frac{1}{0.2} = 5 \text{ looks}.$$
 
-For "still unfilled after $10$ looks," use the complement trick. Being unfilled after $10$ looks means all $10$ failed, and each fails with probability $1 - p = 0.8$:
+For "still unfilled after $10$ looks," use the complement trick. Being unfilled after $10$ looks means all $10$ failed, and each fails with probability ${1 - p = 0.8}$:
 
 $$P(N > 10) = (0.8)^{10} \approx 0.107.$$
 
-So about a $10.7\%$ chance you're still waiting after ten looks. If each fill is worth $\$30$ of edge to you, then over a long session your expected edge per resting order is just $\$30$ (you eventually fill with probability $1$), but the *timing* is geometric — sometimes instant, sometimes a long wait, with the average at $5$ looks. The intuition: **waiting for the first success is Geometric, the mean wait is $1/p$, and "still waiting after $k$" is just $(1-p)^k$.**
+So about a $10.7\%$ chance you're still waiting after ten looks. If each fill is worth $\$30$ of edge to you, then over a long session your expected edge per resting order is just $\$30$ (you eventually fill with probability $1$), but the *timing* is geometric — sometimes instant, sometimes a long wait, with the average at $5$ looks. The intuition: **waiting for the first success is Geometric, the mean wait is ${1/p}$, and "still waiting after $k$" is just $(1-p)^k$.**
 
 ### Negative binomial: trials until the r-th success
 
@@ -211,9 +211,9 @@ Interviewers use the uniform as a building block. "You pick a random point unifo
 
 #### Worked example: expected longer piece of a broken stick
 
-You have a stick of length $1$. You pick a point $U$ uniformly at random along it (so $U \sim \text{Uniform}(0,1)$) and snap it there, giving two pieces of length $U$ and $1 - U$. What is the expected length of the *longer* piece?
+You have a stick of length $1$. You pick a point $U$ uniformly at random along it (so $U \sim \text{Uniform}(0,1)$) and snap it there, giving two pieces of length $U$ and ${1 - U}$. What is the expected length of the *longer* piece?
 
-The longer piece has length $\max(U, 1-U)$. By symmetry, whichever side the break lands on, the longer piece is always at least $0.5$. When the break is at position $U < 0.5$ the longer piece is $1 - U$; when $U > 0.5$ it is $U$. Averaging over the uniform break point, the expected longer piece works out to
+The longer piece has length $\max(U, 1-U)$. By symmetry, whichever side the break lands on, the longer piece is always at least $0.5$. When the break is at position $U < 0.5$ the longer piece is ${1 - U}$; when $U > 0.5$ it is $U$. Averaging over the uniform break point, the expected longer piece works out to
 
 $$E[\max(U, 1-U)] = \tfrac{3}{4} = 0.75.$$
 
@@ -318,7 +318,7 @@ Here is the same map in a table you can drill until it's automatic:
 | ------------------------------------------------------- | ---------------------- | ---------------------------------------------- |
 | One yes/no trial                                        | Bernoulli($p$)         | mean $p$, variance $p(1-p)$                     |
 | Successes in $n$ fixed independent trials               | Binomial($n,p$)        | mean $np$, variance $np(1-p)$                   |
-| Trials until the *first* success                        | Geometric($p$)         | mean $1/p$, memoryless                          |
+| Trials until the *first* success                        | Geometric($p$)         | mean ${1/p}$, memoryless                          |
 | Trials until the *$r$-th* success                       | Negative binomial      | mean $r/p$ (it's $r$ stacked Geometrics)        |
 | Count of rare events in a fixed window                  | Poisson($\lambda$)     | mean $=$ variance $= \lambda$                   |
 | Every value on a range equally likely                   | Uniform($a,b$)         | mean $\frac{a+b}{2}$, variance $\frac{(b-a)^2}{12}$ |
@@ -336,7 +336,7 @@ Now we put it all together the way an interview actually feels: a prompt, a mome
 
 "I flip a fair coin repeatedly. What's the expected number of flips to get my first heads? And the probability it takes more than $3$ flips?"
 
-Recognition: "first success" → Geometric, with $p = 0.5$. The expected number of flips is $1/p = 1/0.5 = 2$ flips. For more than $3$ flips, all three must be tails: $P(N > 3) = (1-p)^3 = (0.5)^3 = 0.125$, a $12.5\%$ chance. Narrate the recognition step explicitly — "this is geometric because we're waiting for the first success" — because the interviewer is grading your *labeling*, not just your arithmetic.
+Recognition: "first success" → Geometric, with $p = 0.5$. The expected number of flips is ${1/p = 1/0.5 = 2}$ flips. For more than $3$ flips, all three must be tails: $P(N > 3) = (1-p)^3 = (0.5)^3 = 0.125$, a $12.5\%$ chance. Narrate the recognition step explicitly — "this is geometric because we're waiting for the first success" — because the interviewer is grading your *labeling*, not just your arithmetic.
 
 #### Worked example: at least one defect
 
@@ -348,7 +348,7 @@ Recognition: counting rare events ($p$ small) over many trials ($n = 200$) → r
 
 "Your resting order fills on each look with probability $p = 0.2$, looks independent. What's the expected number of looks until your *second* fill?"
 
-Recognition: "trials until the $r$-th success" → Negative binomial with $r = 2$, $p = 0.2$. It's two stacked Geometrics, so the expected total is $r/p = 2/0.2 = 10$ looks. The clean way to say it: "the first fill takes $1/p = 5$ looks on average, the second fill takes another $5$ on average, so $10$ total — independent waiting times just add." That additivity narration is what the interviewer wants to hear; it shows you understand *why* rather than reciting a formula.
+Recognition: "trials until the $r$-th success" → Negative binomial with $r = 2$, $p = 0.2$. It's two stacked Geometrics, so the expected total is $r/p = 2/0.2 = 10$ looks. The clean way to say it: "the first fill takes ${1/p = 5}$ looks on average, the second fill takes another $5$ on average, so $10$ total — independent waiting times just add." That additivity narration is what the interviewer wants to hear; it shows you understand *why* rather than reciting a formula.
 
 #### Worked example: the memoryless elevator
 
@@ -378,7 +378,7 @@ Recognition: independent Poisson streams *superpose* into a single Poisson whose
 
 **"Binomial and Poisson are different models you pick between."** They're the same phenomenon at different scales. The Poisson *is* the Binomial in the limit of many rare trials. If you find yourself with a Binomial where $n$ is large and $p$ is small, switching to the Poisson with $\lambda = np$ isn't an approximation you're settling for — it's the natural description, and it replaces an ugly factorial with a clean exponential.
 
-**"Real market returns are Normally distributed."** This is the assumption that has blown up more trading firms than any other, and a sharp interviewer wants to hear you flag it. Returns are *approximately* Normal in the body but have dramatically **fatter tails**: extreme moves happen far more often than the bell predicts. Treating tail risk as Gaussian is how you end up with a position that "can't lose more than $X$" right up until the day it loses $5X$.
+**"Real market returns are Normally distributed."** This is the assumption that has blown up more trading firms than any other, and a sharp interviewer wants to hear you flag it. Returns are *approximately* Normal in the body but have dramatically **fatter tails**: extreme moves happen far more often than the bell predicts. Treating tail risk as Gaussian is how you end up with a position that "can't lose more than $X$" right up until the day it loses ${5X}$.
 
 **"Variance and standard deviation both just add up over independent trades."** Only the *variance* adds. If you run $n$ independent trades each with standard deviation $\sigma$, the total variance is $n\sigma^2$, so the total *standard deviation* is $\sqrt{n}\,\sigma$ — not $n\sigma$. Forgetting the square root is one of the most common quantitative slips in an interview, and it inverts the whole point of diversification: it is *because* spread grows only as $\sqrt{n}$ while the mean grows as $n$ that piling up independent trades makes a small edge into a near-certain profit. Quote the $\sqrt{n}$ and you signal you understand risk; quote a linear $n$ and you've just claimed that doubling your trade count doubles your risk, which is exactly backwards.
 
@@ -406,6 +406,6 @@ The figure overlays a Normal (blue dashed) against a fat-tailed distribution (re
 
 If you are preparing for quant interviews, the highest-leverage thing you can do with this article is to stop memorizing formulas and start drilling *recognition*. Take any probability prompt — from a problem set, a mock interview, a forum — and before computing anything, say out loud which distribution it is and why. "Waiting for the first success, so Geometric." "Rare events over a window, so Poisson." "Sum of many independent things, so Normal." Once the label is automatic, the computation is the easy part, and the narration is what gets you hired.
 
-The mechanism stories are what make recognition fast, so internalize them in this compressed form: Bernoulli is one trial; Binomial is $n$ trials counted; Geometric is the wait for the first success ($1/p$); Negative binomial is the wait for the $r$-th ($r/p$); Poisson is rare events counted over a window ($\lambda$); Uniform is "no information beyond the range"; Exponential is the memoryless wait between Poisson events ($1/\lambda$); Normal is what sums become; Lognormal is what products become. Two theorems tie it off: many rare chances make a Poisson, and many independent pieces make a Normal.
+The mechanism stories are what make recognition fast, so internalize them in this compressed form: Bernoulli is one trial; Binomial is $n$ trials counted; Geometric is the wait for the first success (${1/p}$); Negative binomial is the wait for the $r$-th ($r/p$); Poisson is rare events counted over a window ($\lambda$); Uniform is "no information beyond the range"; Exponential is the memoryless wait between Poisson events ($1/\lambda$); Normal is what sums become; Lognormal is what products become. Two theorems tie it off: many rare chances make a Poisson, and many independent pieces make a Normal.
 
 From here, the natural next steps deepen specific branches of this map. The waiting-time and order-statistics genre opens up in [order statistics and uniform tricks](/blog/trading/quantitative-finance/order-statistics-uniform-tricks-quant-interviews); the information-updating side — how a new data point shifts a probability — is the subject of [conditional probability and Bayes for quant interviews](/blog/trading/quantitative-finance/conditional-probability-bayes-quant-interviews); the betting-and-sizing question of what to *do* once you have an edge is [the Kelly criterion](/blog/trading/quantitative-finance/kelly-criterion-sequential-betting-quant-interviews); and the lognormal-price assumption you met here is the foundation that [Black-Scholes](/blog/trading/quantitative-finance/black-scholes) builds an entire pricing theory on. Each one reuses the eight workhorses and two theorems from this article — which is exactly the point. The map is small. The fluency is everything.

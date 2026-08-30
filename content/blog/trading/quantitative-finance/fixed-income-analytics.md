@@ -328,7 +328,7 @@ Beyond first-order risk metrics (DV01, KR-DV01), books are stress-tested against
 - **Credit blowout +200 bp**. All credit spreads widen.
 - **Cross-currency basis +50 bp**. XCY basis widens.
 - **Repo spike +200 bp**. Funding rates jump.
-- **Combined**: +200 bp parallel + $100 bp$ credit blowout + 50% liquidity reduction.
+- **Combined**: +200 bp parallel + ${100 bp}$ credit blowout + 50% liquidity reduction.
 
 **Reverse scenarios.** Find the market move that would produce a target loss:
 
@@ -503,7 +503,7 @@ $$
 \text{Carry} = (\text{coupon yield} - \text{repo rate}) / 365 \cdot \text{notional}.
 $$
 
-For a 5% coupon bond financed at 4.5% repo, daily carry on $1B notional is $(5\% - 4.5\%) / 365 \times 10^9 \approx \$1{,}370$. That's $\sim \$500K$ per year per $1B in financed-position carry.
+For a 5% coupon bond financed at 4.5% repo, daily carry on \$1B notional is $(5\% - 4.5\%) / 365 \times 10^9 \approx \$1{,}370$. That's $\sim \$500K$ per year per $1B in financed-position carry.
 
 **Roll-down per day**: as a bond ages by one day, it moves down the yield curve. If the curve is upward-sloping, the bond's yield falls slightly, and the price rises. The roll-down per day on a 5y bond on an upward-sloping curve might be $\sim 0.1$ bp/day in yield terms, contributing perhaps $\$8K$ per day on $1B notional.
 

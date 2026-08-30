@@ -294,7 +294,7 @@ To see the continuous theorem as the limit of something countable, let's run the
 
 $$q = \frac{e^{r} - d}{u - d} = \frac{e^{0.02} - 0.90}{1.10 - 0.90} = \frac{1.0202 - 0.90}{0.20} = \frac{0.1202}{0.20} = 0.601.$$
 
-So $q\approx 0.60$ up, 0.40 down each period — independent of the real-world probability, which might be 70/30. After two periods there are three terminal prices: up-up gives $\$100\times1.10\times1.10 = \$121$, up-down or down-up gives $\$100\times1.10\times0.90 = \$99$, and down-down gives $\$100\times0.90\times0.90 = \$81$. Their risk-neutral probabilities multiply across periods: $q^2 = 0.361$ for \$121, $2q(1-q)=0.480$ for \$99, and $(1-q)^2 = 0.159$ for \$81.
+So $q\approx 0.60$ up, 0.40 down each period — independent of the real-world probability, which might be 70/30. After two periods there are three terminal prices: up-up gives $\$100\times1.10\times1.10 = \$121$, up-down or down-up gives $\$100\times1.10\times0.90 = \$99$, and down-down gives $\$100\times0.90\times0.90 = \$81$. Their risk-neutral probabilities multiply across periods: $q^2 = 0.361$ for \$121, ${2q(1-q)=0.480}$ for \$99, and $(1-q)^2 = 0.159$ for \$81.
 
 Check the martingale: the discounted expected terminal price should be \$100.
 

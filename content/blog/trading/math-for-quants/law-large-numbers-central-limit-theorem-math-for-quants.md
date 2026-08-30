@@ -95,7 +95,7 @@ Picture the difference between a small and a large sample, as the figure above c
 
 ### Why an edge needs many trades to show up
 
-This is the single most important practical lesson in the whole field, so let us make it concrete. Suppose a strategy has a true edge of \$50 per trade and a volatility of \$150 per trade — exactly our example from the Foundations. After $n$ trades your *total* profit has an expected value of $50n$ and a typical swing (we will derive this precisely in a moment) of about $150\sqrt n$. The edge grows in proportion to $n$; the noise grows only in proportion to $\sqrt n$. That difference in growth rates is everything.
+This is the single most important practical lesson in the whole field, so let us make it concrete. Suppose a strategy has a true edge of \$50 per trade and a volatility of \$150 per trade — exactly our example from the Foundations. After $n$ trades your *total* profit has an expected value of ${50n}$ and a typical swing (we will derive this precisely in a moment) of about $150\sqrt n$. The edge grows in proportion to $n$; the noise grows only in proportion to $\sqrt n$. That difference in growth rates is everything.
 
 After 1 trade: expected \$50, noise \$150. The noise dwarfs the edge.
 After 100 trades: expected \$5,000, noise \$1,500. The edge now leads.

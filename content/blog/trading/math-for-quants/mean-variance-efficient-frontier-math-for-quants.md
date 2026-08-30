@@ -127,13 +127,13 @@ A portfolio *on* the frontier is "efficient" because you cannot do better: you c
 
 ### Tracing the two-asset frontier
 
-For two assets the frontier is easy to draw by hand: just sweep the weight $w$ in asset A from 0 to 1 (with $1-w$ in B) and plot the resulting $(\sigma_p, \mu_p)$ pairs. The expected return moves linearly from B's return to A's. The volatility, though, traces a *curve* that bows to the left — the lower the correlation, the more it bows, and the more diversification you capture.
+For two assets the frontier is easy to draw by hand: just sweep the weight $w$ in asset A from 0 to 1 (with ${1-w}$ in B) and plot the resulting $(\sigma_p, \mu_p)$ pairs. The expected return moves linearly from B's return to A's. The volatility, though, traces a *curve* that bows to the left — the lower the correlation, the more it bows, and the more diversification you capture.
 
 #### Worked example: tracing a two-asset frontier and finding the minimum-variance mix
 
 Take two assets with a bit more personality. Asset A is a stock: expected return 10%, volatility 25%. Asset B is a bond: expected return 4%, volatility 10%. Their correlation is $\rho = 0.2$ — stocks and bonds are usually only mildly related. We have \$100,000 to allocate.
 
-Let $w$ be the fraction in the stock, $1-w$ in the bond. The portfolio expected return is
+Let $w$ be the fraction in the stock, ${1-w}$ in the bond. The portfolio expected return is
 
 $$ \mu_p = w \times 10\% + (1-w) \times 4\% = 4\% + 6\% \, w. $$
 
@@ -282,7 +282,7 @@ Its expected return is $\mu_T = 0.65 \times 10\% + 0.35 \times 5\% = 8.25\%$. It
 
 $$ S = \frac{8.25\% - 4\%}{17.3\%} = \frac{4.25\%}{17.3\%} \approx 0.246. $$
 
-Now the allocation. You manage a \$1,000,000 book and you want a portfolio with 12% volatility — somewhat less risky than the tangency portfolio's 17.3%. Because cash has zero volatility, mixing fraction $a$ into the tangency portfolio and $1-a$ into cash gives portfolio volatility $a \times 17.3\%$. Set that to 12%:
+Now the allocation. You manage a \$1,000,000 book and you want a portfolio with 12% volatility — somewhat less risky than the tangency portfolio's 17.3%. Because cash has zero volatility, mixing fraction $a$ into the tangency portfolio and ${1-a}$ into cash gives portfolio volatility $a \times 17.3\%$. Set that to 12%:
 
 $$ a = \frac{12\%}{17.3\%} \approx 0.69. $$
 

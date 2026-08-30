@@ -277,13 +277,13 @@ For applications that need exact fit to market quotes plus smoothness, cubic spl
 The setup:
 
 - **Knots** at the maturities of input instruments: 1M, 3M, 6M, 1y, 2y, 3y, 5y, 7y, 10y, 15y, 20y, 30y, 50y.
-- **Cubic polynomial** between each pair of consecutive knots. Each polynomial has 4 coefficients; with $N$ knots, there are $4(N-1)$ coefficients.
+- **Cubic polynomial** between each pair of consecutive knots. Each polynomial has 4 coefficients; with $N$ knots, there are ${4(N-1)}$ coefficients.
 - **Constraints**:
   - Match market quotes at knots ($N$ equations).
-  - $C^0, C^1, C^2$ continuity at interior knots ($3(N-2)$ equations).
+  - $C^0, C^1, C^2$ continuity at interior knots (${3(N-2)}$ equations).
   - Boundary conditions at endpoints (2 equations: natural splines have $f''(t_0) = f''(t_N) = 0$; clamped splines specify slopes).
 
-Total: $N + 3(N-2) + 2 = 4N - 4 = 4(N-1)$ equations matching $4(N-1)$ coefficients. The system is exactly determined and solvable in linear time.
+Total: $N + 3(N-2) + 2 = 4N - 4 = 4(N-1)$ equations matching ${4(N-1)}$ coefficients. The system is exactly determined and solvable in linear time.
 
 Variants in production:
 

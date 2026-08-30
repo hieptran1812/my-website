@@ -73,7 +73,7 @@ The whole game is this: the supremum (the ceiling) nearly always exists; the max
 
 Let us make this concrete with the friendliest possible problem, the one where everything works.
 
-You have two assets. Asset A has an expected annual return of 12%; asset B has an expected annual return of 6%. You will put a fraction $w$ of your \$1,000 into A and the remaining $1-w$ into B. The rules: you must be fully invested (weights sum to 100%, automatic here), and you cannot short or use leverage, so $w$ runs from 0 to 1, endpoints included. The feasible set is the closed interval $[0, 1]$ — closed because it includes both 0 and 1, bounded because it sits between 0 and 1.
+You have two assets. Asset A has an expected annual return of 12%; asset B has an expected annual return of 6%. You will put a fraction $w$ of your \$1,000 into A and the remaining ${1-w}$ into B. The rules: you must be fully invested (weights sum to 100%, automatic here), and you cannot short or use leverage, so $w$ runs from 0 to 1, endpoints included. The feasible set is the closed interval $[0, 1]$ — closed because it includes both 0 and 1, bounded because it sits between 0 and 1.
 
 The objective is the portfolio's expected return:
 

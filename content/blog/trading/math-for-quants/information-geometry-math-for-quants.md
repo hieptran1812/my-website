@@ -103,7 +103,7 @@ The diagonal entries are the information each knob carries on its own; the off-d
 
 #### Worked example: Fisher information of a Bernoulli hit-rate and the Cramér–Rao floor
 
-This is the example every quant should be able to do cold, because hit rate — the fraction of your trades that win — is the most basic edge statistic there is. Model each trade as a coin flip: it wins with probability $p$ and loses with probability $1-p$. The log-likelihood of a single trade with outcome $x$ (where $x = 1$ for a win, $0$ for a loss) is $\ell(p) = x\log p + (1-x)\log(1-p)$. The score is $s(p) = x/p - (1-x)/(1-p)$. Its variance — the Fisher information per trade — works out to a clean and famous formula:
+This is the example every quant should be able to do cold, because hit rate — the fraction of your trades that win — is the most basic edge statistic there is. Model each trade as a coin flip: it wins with probability $p$ and loses with probability ${1-p}$. The log-likelihood of a single trade with outcome $x$ (where $x = 1$ for a win, $0$ for a loss) is $\ell(p) = x\log p + (1-x)\log(1-p)$. The score is $s(p) = x/p - (1-x)/(1-p)$. Its variance — the Fisher information per trade — works out to a clean and famous formula:
 
 $$ I(p) = \frac{1}{p(1-p)}. $$
 
@@ -266,7 +266,7 @@ The matrix above turns the rule into a table you can carry around. Two models th
 
 ### Why this is the same fact as the Cramér–Rao bound
 
-This is not a new principle — it is the Cramér–Rao bound wearing different clothes. Cramér–Rao said the variance of the best estimate is $1/(n I)$, so its standard error is $1/\sqrt{n I}$. Two models are distinguishable when their parameter gap exceeds a couple of standard errors, i.e. when $d\theta \gtrsim c/\sqrt{nI}$, which rearranges to $n \gtrsim c^2/(I\,d\theta^2) = c^2/d^2$ since $d = \sqrt{I}\,d\theta$ is the Fisher distance. The bound on how *precisely* you can estimate and the rule for how much data you need to *distinguish* are the same statement read two ways. Geometry just gave us a single picture — distance on a manifold — that contains both.
+This is not a new principle — it is the Cramér–Rao bound wearing different clothes. Cramér–Rao said the variance of the best estimate is ${1/(n I)}$, so its standard error is $1/\sqrt{n I}$. Two models are distinguishable when their parameter gap exceeds a couple of standard errors, i.e. when $d\theta \gtrsim c/\sqrt{nI}$, which rearranges to $n \gtrsim c^2/(I\,d\theta^2) = c^2/d^2$ since $d = \sqrt{I}\,d\theta$ is the Fisher distance. The bound on how *precisely* you can estimate and the rule for how much data you need to *distinguish* are the same statement read two ways. Geometry just gave us a single picture — distance on a manifold — that contains both.
 
 #### Worked example: how many days to tell two close return models apart
 

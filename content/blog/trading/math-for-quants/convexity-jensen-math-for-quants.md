@@ -51,7 +51,7 @@ The test is one line:
 
 $$ f''(x) > 0 \text{ everywhere} \implies f \text{ is convex}; \qquad f''(x) < 0 \text{ everywhere} \implies f \text{ is concave}. $$
 
-Why does this work? A positive second derivative means the slope is *increasing* — the curve is steepening as you move right, which is exactly what bending upward into a bowl looks like. A negative second derivative means the slope is *decreasing* — the curve is leveling off and rolling over, which is what an arch looks like. For $f(x) = x^2$, the first derivative is $2x$ and the second is $2$, a positive constant, so $x^2$ is convex everywhere — matching the picture. For $f(x) = \ln(x)$ (the natural logarithm, the function that turns multiplication into addition and underpins all compounding math), the second derivative is $-1/x^2$, always negative, so the logarithm is concave everywhere. Hold on to that fact about the logarithm; it is the seed of half this article.
+Why does this work? A positive second derivative means the slope is *increasing* — the curve is steepening as you move right, which is exactly what bending upward into a bowl looks like. A negative second derivative means the slope is *decreasing* — the curve is leveling off and rolling over, which is what an arch looks like. For $f(x) = x^2$, the first derivative is ${2x}$ and the second is $2$, a positive constant, so $x^2$ is convex everywhere — matching the picture. For $f(x) = \ln(x)$ (the natural logarithm, the function that turns multiplication into addition and underpins all compounding math), the second derivative is $-1/x^2$, always negative, so the logarithm is concave everywhere. Hold on to that fact about the logarithm; it is the seed of half this article.
 
 #### Worked example: checking the curvature of a payoff
 
@@ -259,7 +259,7 @@ The matrix figure above contrasts the two curvatures property by property, and t
 
 #### Worked example: minimum-variance portfolio has one answer
 
-Suppose you hold two assets and want the mix that minimizes risk. Asset A has 20% volatility, asset B has 30% volatility, and they are uncorrelated. Put fraction $w$ in A and $1 - w$ in B. The portfolio variance is a convex function of $w$:
+Suppose you hold two assets and want the mix that minimizes risk. Asset A has 20% volatility, asset B has 30% volatility, and they are uncorrelated. Put fraction $w$ in A and ${1 - w}$ in B. The portfolio variance is a convex function of $w$:
 
 $$ \sigma_p^2(w) = w^2 (0.20)^2 + (1-w)^2 (0.30)^2 = 0.04\,w^2 + 0.09\,(1-w)^2. $$
 

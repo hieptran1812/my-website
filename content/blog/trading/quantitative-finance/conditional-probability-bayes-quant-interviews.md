@@ -227,7 +227,7 @@ This is not a medical curiosity. It is everywhere a desk hunts for rare events:
 
 Real reasoning rarely stops at one piece of evidence. You see one signal, then another, then another. The beautiful thing about Bayes is that **yesterday's posterior is today's prior** — you can update incrementally, folding in evidence one piece at a time, and (for independent evidence) the order doesn't matter.
 
-The cleanest way to do sequential updating by hand is the **odds form** of Bayes. Instead of probabilities, work with **odds** — the ratio of "yes" to "no." A probability of $p$ corresponds to odds of $p : (1-p)$. A 1% probability is odds of $1 : 99$. A 50% probability is odds of $1 : 1$ ("even odds"). The conversion back: if odds are $a : b$, the probability is $a/(a+b)$.
+The cleanest way to do sequential updating by hand is the **odds form** of Bayes. Instead of probabilities, work with **odds** — the ratio of "yes" to "no." A probability of $p$ corresponds to odds of $p : (1-p)$. A 1% probability is odds of ${1 : 99}$. A 50% probability is odds of ${1 : 1}$ ("even odds"). The conversion back: if odds are $a : b$, the probability is $a/(a+b)$.
 
 In odds form, Bayes' theorem becomes a clean multiplication:
 
@@ -347,7 +347,7 @@ $$P(A \mid \text{gold}) = \frac{P(\text{gold} \mid A)P(A)}{P(\text{gold})} = \fr
 
 A gold coin makes Bag A **three times** as likely as Bag B (posterior 3/4 vs 1/4). The tree above traces each path: the four leaves are 3/8, 1/8, 1/8, 3/8, and we restrict to the two "gold" leaves (3/8 and 1/8), whose ratio is 3:1.
 
-**The odds-form shortcut** (the answer in one line, which impresses): prior odds for A are $1:1$; the likelihood ratio of "gold" is $(3/4)/(1/4) = 3$; posterior odds $= 1 \times 3 = 3:1$, so $P(A) = 3/4$. **Follow-up they'll ask:** "you draw a *second* coin from the same bag, also gold — now what?" If drawing without replacement, the likelihoods change (Bag A now has 2 gold of 3 left, Bag B has 0 gold of 3 left) — so a second gold makes Bag A *certain*. If you (sloppily) assume with replacement, the LR multiplies again to $3 \times 3 = 9$, giving odds $9:1$, $P(A) = 0.9$. Stating your replacement assumption *out loud* is the mark of a careful candidate.
+**The odds-form shortcut** (the answer in one line, which impresses): prior odds for A are ${1:1}$; the likelihood ratio of "gold" is $(3/4)/(1/4) = 3$; posterior odds $= 1 \times 3 = 3:1$, so $P(A) = 3/4$. **Follow-up they'll ask:** "you draw a *second* coin from the same bag, also gold — now what?" If drawing without replacement, the likelihoods change (Bag A now has 2 gold of 3 left, Bag B has 0 gold of 3 left) — so a second gold makes Bag A *certain*. If you (sloppily) assume with replacement, the LR multiplies again to $3 \times 3 = 9$, giving odds ${9:1}$, $P(A) = 0.9$. Stating your replacement assumption *out loud* is the mark of a careful candidate.
 
 ### Problem 4 — The boy-girl / false-positive hybrid (a desk-flavored one)
 
@@ -365,7 +365,7 @@ So one fire takes you from a 20% prior to a **66.7%** posterior. Notice it's *no
 
 **Second fire** (assume conditionally independent given the day type). Use the odds form. The likelihood ratio of a fire is $\text{LR} = 0.80/0.10 = 8$.
 
-- Prior odds: $0.20 : 0.80 = 1 : 4$.
+- Prior odds: ${0.20 : 0.80 = 1 : 4}$.
 - After one fire: $(1 : 4) \times 8 = 8 : 4 = 2 : 1$, i.e. $P = 2/3$ — matching the grind above.
 - After two fires: $(2 : 1) \times 8 = 16 : 1$, i.e. $P = 16/17 \approx 94.1\%$.
 
@@ -423,7 +423,7 @@ $$\text{LR}_{\text{up}} = \frac{P(\text{reads up} \mid \text{up regime})}{P(\tex
 
 Each "up" reading multiplies your *odds* of being in an up regime by 1.75. Note this is a fairly weak signal — an LR of 1.75 is nowhere near the LR of 99 that the disease test enjoyed — which is precisely why a single reading won't move you far.
 
-**Step 2 — the prior odds.** A 50/50 belief is $0.5 : 0.5 = 1 : 1$, even odds.
+**Step 2 — the prior odds.** A 50/50 belief is ${0.5 : 0.5 = 1 : 1}$, even odds.
 
 **Step 3 — update on the first reading.** Posterior odds = prior odds × likelihood ratio:
 
@@ -431,7 +431,7 @@ $$(1 : 1) \times \tfrac{7}{4} = \tfrac{7}{4} : 1 = 7 : 4$$
 
 Convert back to a probability: $P(\text{up} \mid \text{one "up"}) = \dfrac{7}{7+4} = \dfrac{7}{11} \approx 63.6\%$. One reading nudges you from 50% to about 64% — real but modest, because the signal is weak.
 
-**Step 4 — update on the second reading.** Yesterday's posterior ($7 : 4$) becomes today's prior, and we multiply by the same likelihood ratio again (legitimate *only* because the two readings are conditionally independent given the regime):
+**Step 4 — update on the second reading.** Yesterday's posterior (${7 : 4}$) becomes today's prior, and we multiply by the same likelihood ratio again (legitimate *only* because the two readings are conditionally independent given the regime):
 
 $$(7 : 4) \times \tfrac{7}{4} = \tfrac{49}{16} : 1 = 49 : 16$$
 

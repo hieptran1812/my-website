@@ -479,7 +479,7 @@ A practical tip for engineers building such a library: separate the *payoff* (wh
 
 ### 13.1 The 2020 oil futures negative-price expiry
 
-On 20 April 2020, the May WTI crude oil futures contract settled at $-\$37.63$. We discussed the pricing-model issues in [the derivatives pricing post's case study](/blog/trading/quantitative-finance/derivatives-pricing). For options theory, the relevant lesson is on options *on* WTI futures: the vol-surface model assumed log-normal returns, so all OTM puts deep below zero were modelled as having near-zero probability. When the underlying went negative, those puts went from worth-cents to worth-dollars overnight, and the dealers who were short them took losses. Several mid-sized commodity dealers had losses of $20-50M$ each. The cleanup involved switching all WTI-options pricing to Bachelier (normal-vol) overnight, a multi-week project for some firms.
+On 20 April 2020, the May WTI crude oil futures contract settled at $-\$37.63$. We discussed the pricing-model issues in [the derivatives pricing post's case study](/blog/trading/quantitative-finance/derivatives-pricing). For options theory, the relevant lesson is on options *on* WTI futures: the vol-surface model assumed log-normal returns, so all OTM puts deep below zero were modelled as having near-zero probability. When the underlying went negative, those puts went from worth-cents to worth-dollars overnight, and the dealers who were short them took losses. Several mid-sized commodity dealers had losses of ${20-50M}$ each. The cleanup involved switching all WTI-options pricing to Bachelier (normal-vol) overnight, a multi-week project for some firms.
 
 ### 13.2 Volkswagen 2008 short squeeze
 

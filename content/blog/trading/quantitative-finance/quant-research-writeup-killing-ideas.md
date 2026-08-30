@@ -258,13 +258,13 @@ $$\text{Net}(K) = \underbrace{4\% \times K}_{\text{gross}} - \underbrace{0.5\% \
 
 Let us compute net dollars at several sizes:
 
-- **$25M:** gross $= 4\% \times 25 = \$1.0\text{M}$; impact $= 0.5\% \times 1 \times 25 = \$0.125\text{M}$; **net $= \$0.875\text{M}$.**
-- **$50M:** gross $= \$2.0\text{M}$; impact $= 0.5\% \times 2 \times 50 = \$0.5\text{M}$; **net $= \$1.5\text{M}$.**
-- **$75M:** gross $= \$3.0\text{M}$; impact $= 0.5\% \times 3 \times 75 = \$1.125\text{M}$; **net $= \$1.875\text{M}$.**
-- **$100M:** gross $= \$4.0\text{M}$; impact $= 0.5\% \times 4 \times 100 = \$2.0\text{M}$; **net $= \$2.0\text{M}$.**
-- **$125M:** gross $= \$5.0\text{M}$; impact $= 0.5\% \times 5 \times 125 = \$3.125\text{M}$; **net $= \$1.875\text{M}$.**
+- **\$25M:** gross $= 4\% \times 25 = \$1.0\text{M}$; impact $= 0.5\% \times 1 \times 25 = \$0.125\text{M}$; **net $= \$0.875\text{M}$.**
+- **\$50M:** gross $= \$2.0\text{M}$; impact $= 0.5\% \times 2 \times 50 = \$0.5\text{M}$; **net $= \$1.5\text{M}$.**
+- **\$75M:** gross $= \$3.0\text{M}$; impact $= 0.5\% \times 3 \times 75 = \$1.125\text{M}$; **net $= \$1.875\text{M}$.**
+- **\$100M:** gross $= \$4.0\text{M}$; impact $= 0.5\% \times 4 \times 100 = \$2.0\text{M}$; **net $= \$2.0\text{M}$.**
+- **\$125M:** gross $= \$5.0\text{M}$; impact $= 0.5\% \times 5 \times 125 = \$3.125\text{M}$; **net $= \$1.875\text{M}$.**
 
-Net dollars rise to a peak around $100M (net $2.0M/yr) and then *fall* — at $125M you make less than at $100M. To find the exact peak, set the derivative of $\text{Net}(K)$ to zero: $0.04 - 2 \times \frac{0.005}{25} K = 0$, giving $K = 0.04 \times \frac{25}{0.01} = \$100\text{M}$. **Go/no-go: deploy up to ~$100M; do not exceed it.** Below $100M, every extra dollar adds net profit; above it, every extra dollar destroys it. The one-sentence intuition: **capacity is where the net-dollar curve peaks, and trading past it makes you poorer, not richer.**
+Net dollars rise to a peak around \$100M (net \$2.0M/yr) and then *fall* — at \$125M you make less than at \$100M. To find the exact peak, set the derivative of $\text{Net}(K)$ to zero: $0.04 - 2 \times \frac{0.005}{25} K = 0$, giving $K = 0.04 \times \frac{25}{0.01} = \$100\text{M}$. **Go/no-go: deploy up to ~$100M; do not exceed it.** Below $100M, every extra dollar adds net profit; above it, every extra dollar destroys it. The one-sentence intuition: **capacity is where the net-dollar curve peaks, and trading past it makes you poorer, not richer.**
 
 #### Worked example: the marginal contribution to a $100,000,000 book
 

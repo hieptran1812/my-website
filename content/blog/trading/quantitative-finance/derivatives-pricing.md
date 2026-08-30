@@ -54,7 +54,7 @@ The mental model — *price equals manufacturing cost of the replicating hedge* 
 
 ## 2. The one-period binomial: where every pricing instinct comes from
 
-The cleanest place to see replication work is the simplest possible model: one period, two states. The stock starts at $S_0$. After one period it is either $S_u = u S_0$ (up) or $S_d = d S_0$ (down). There is a risk-free bond paying $1+r$ per period. The option pays $C_u$ in the up state and $C_d$ in the down state. We want to price the option today.
+The cleanest place to see replication work is the simplest possible model: one period, two states. The stock starts at $S_0$. After one period it is either $S_u = u S_0$ (up) or $S_d = d S_0$ (down). There is a risk-free bond paying ${1+r}$ per period. The option pays $C_u$ in the up state and $C_d$ in the down state. We want to price the option today.
 
 ![One-period binomial: where every pricing instinct comes from](/imgs/blogs/derivatives-pricing-2.png)
 
@@ -85,7 +85,7 @@ The probability $q$ is called the *risk-neutral probability* (or the *equivalent
 Three observations a senior quant should drill into a junior:
 
 1. **$q$ is not a real probability**. It is a pricing artefact derived from the absence of arbitrage. Confusing $q$ with the desk's view on direction is a categorical error and leads juniors to "discover" that the market has mispriced an option whenever their forecast disagrees with the implied $q$. It hasn't.
-2. **$q$ exists if and only if there is no arbitrage**. If $u > 1+r > d$ fails — say, $1+r > u$ — then the bond strictly dominates the stock and there is a free lunch. The formula gives $q$ outside $[0, 1]$, which signals the inconsistency. This is a baby version of the First Fundamental Theorem of Asset Pricing, which we'll meet next.
+2. **$q$ exists if and only if there is no arbitrage**. If $u > 1+r > d$ fails — say, ${1+r > u}$ — then the bond strictly dominates the stock and there is a free lunch. The formula gives $q$ outside $[0, 1]$, which signals the inconsistency. This is a baby version of the First Fundamental Theorem of Asset Pricing, which we'll meet next.
 3. **The hedge depends on the model, not on any real probability**. $\Delta$ is computed from $C_u, C_d, S_u, S_d$ — all model quantities. If the model is wrong (real states are not just up/down by $u$ and $d$), the hedge will not perfectly replicate, and the residual P&L is the model error.
 
 A few lines of Python to make it concrete:

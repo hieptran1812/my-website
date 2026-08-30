@@ -213,7 +213,7 @@ The figure shows the log-likelihood for the win-rate problem. Each value of $p$ 
 
 #### Worked example: deriving the MLE for a Bernoulli win-rate
 
-Let us derive that peak rather than assert it. Each trade is Bernoulli$(p)$: it wins (value 1) with probability $p$, loses (value 0) with probability $1 - p$. With $X = 30$ wins out of $n = 50$ independent trades, the probability of the exact observed sequence is $p^{X}(1-p)^{n-X}$, so the likelihood is
+Let us derive that peak rather than assert it. Each trade is Bernoulli$(p)$: it wins (value 1) with probability $p$, loses (value 0) with probability ${1 - p}$. With $X = 30$ wins out of $n = 50$ independent trades, the probability of the exact observed sequence is $p^{X}(1-p)^{n-X}$, so the likelihood is
 
 $$L(p) = p^{X}(1-p)^{n-X} = p^{30}(1-p)^{20}.$$
 

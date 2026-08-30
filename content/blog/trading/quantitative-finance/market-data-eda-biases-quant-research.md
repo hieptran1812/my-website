@@ -109,9 +109,9 @@ You buy one share on January 1 for **$100.00**. Here is everything that happens 
 
 Now compute the return two ways.
 
-The **naive price return** off the raw close: you "bought at $100" and the final *raw* close per share is $58. That looks like $(58 - 100)/100 = -42\%$. That is nonsense — it has not accounted for the split, which artificially halved the price.
+The **naive price return** off the raw close: you "bought at \$100" and the final *raw* close per share is \$58. That looks like $(58 - 100)/100 = -42\%$. That is nonsense — it has not accounted for the split, which artificially halved the price.
 
-The **correct total return**: your ending wealth is the $116 from selling the two shares *plus* the $2 dividend you banked in March = **$118**. You started with $100. So your total return is $(118 - 100)/100 = +18\%$.
+The **correct total return**: your ending wealth is the \$116 from selling the two shares *plus* the \$2 dividend you banked in March = **\$118**. You started with \$100. So your total return is $(118 - 100)/100 = +18\%$.
 
 The lesson in one sentence: **the raw price series is not a return series — you must adjust for every split and dividend before a single percentage means anything.**
 
@@ -188,9 +188,9 @@ The chart above shows the idea. The solid line is the **raw close** — it jumps
 
 #### Worked example: building the adjustment factor
 
-Take a stock that closes at **$50** the day before a 2-for-1 split, then **$25** the day after (the split halved it). Without adjustment, the day's return looks like $(25 - 50)/50 = -50\%$ — a fake crash. To fix it, you multiply every price *before* the split by the **split factor** $1/2 = 0.5$. Now the pre-split $50 becomes an adjusted $25, and the day's adjusted return is $(25 - 25)/25 = 0\%$ — correct, because nothing actually happened to your wealth.
+Take a stock that closes at **\$50** the day before a 2-for-1 split, then **\$25** the day after (the split halved it). Without adjustment, the day's return looks like $(25 - 50)/50 = -50\%$ — a fake crash. To fix it, you multiply every price *before* the split by the **split factor** $1/2 = 0.5$. Now the pre-split \$50 becomes an adjusted \$25, and the day's adjusted return is $(25 - 25)/25 = 0\%$ — correct, because nothing actually happened to your wealth.
 
-Dividends work the same way but with a smaller factor. If a $25 stock pays a $0.50 dividend, the **dividend adjustment factor** for prices before the ex-date is $1 - D/P = 1 - 0.50/25 = 0.98$. You multiply all earlier prices by 0.98, which lifts the *returns* on dividend days by the right amount so that the adjusted series captures total return. Vendors usually ship a single **cumulative adjustment factor** per day that folds in every split and dividend up to the present; the **adjusted close** is just the raw close times that factor.
+Dividends work the same way but with a smaller factor. If a \$25 stock pays a \$0.50 dividend, the **dividend adjustment factor** for prices before the ex-date is ${1 - D/P = 1 - 0.50/25 = 0.98}$. You multiply all earlier prices by 0.98, which lifts the *returns* on dividend days by the right amount so that the adjusted series captures total return. Vendors usually ship a single **cumulative adjustment factor** per day that folds in every split and dividend up to the present; the **adjusted close** is just the raw close times that factor.
 
 ```python
   # Total daily return from adjusted close handles splits AND dividends at once.

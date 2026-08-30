@@ -136,7 +136,7 @@ Events combine using set operations that map directly onto logic:
 
 - **$A$ and $B$ both happen:** intersection $A \cap B$, with probability $P(A \cap B)$.
 - **$A$ or $B$ happens:** union $A \cup B$, with probability $P(A) + P(B) - P(A \cap B)$.
-- **$A$ does not happen:** complement $A^c$, with probability $1 - P(A)$.
+- **$A$ does not happen:** complement $A^c$, with probability ${1 - P(A)}$.
 - **$A$ but not $B$ happens:** difference $A \setminus B$, with probability $P(A) - P(A \cap B)$.
 
 That table is the entire grammar of combining events. Notice the subtraction in the *or* row: if you just added $P(A) + P(B)$ you would double-count the region where both happen, so you subtract it back out once. This is the **inclusion-exclusion principle**, and forgetting it is one of the most common probability errors, in interviews and in production risk code alike.

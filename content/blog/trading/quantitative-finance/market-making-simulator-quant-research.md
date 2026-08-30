@@ -159,7 +159,7 @@ How wide must your spread be to break even against that 25%-informed flow? Let t
 
 $$0.75 \times h + 0.25 \times (h - \$0.50) = 0.$$
 
-Simplify: $0.75h + 0.25h - 0.125 = 0$, so $h - 0.125 = 0$, giving $h = \$0.125$. You need a half-spread of **\$0.125** (a full spread of \$0.25) just to break even when a quarter of your flow is informed and the informed move is \$0.50. The more toxic the flow, or the bigger the informed move, the wider you must quote. This is the core tension of the business: **quote tight and fill often but bleed to the informed; quote wide and stay safe but barely fill at all.**
+Simplify: ${0.75h + 0.25h - 0.125 = 0}$, so $h - 0.125 = 0$, giving $h = \$0.125$. You need a half-spread of **\$0.125** (a full spread of \$0.25) just to break even when a quarter of your flow is informed and the informed move is \$0.50. The more toxic the flow, or the bigger the informed move, the wider you must quote. This is the core tension of the business: **quote tight and fill often but bleed to the informed; quote wide and stay safe but barely fill at all.**
 
 ## The Avellaneda-Stoikov reservation price and optimal spread
 
@@ -330,7 +330,7 @@ Let $h$ be the half-spread. On a noise fill (70% of flow) you earn $+h$. On an i
 
 $$0.70 \times h + 0.30 \times (h - 0.20) = 0.$$
 
-That is $0.70h + 0.30h - 0.06 = 0$, so $h - 0.06 = 0$, giving $h = \$0.06$. You need a half-spread of **\$0.06** (a \$0.12 full spread) to break even. If you only quote \$0.04 half-spread, your expected P&L per fill is $0.70 \times 0.04 + 0.30 \times (0.04 - 0.20) = 0.028 - 0.048 = -\$0.02$ -- you lose two cents a share, and more volume just loses faster. The insight interviewers want: **against informed flow, quoting tighter and trading more is not "scaling up an edge", it is scaling up a loss.**
+That is ${0.70h + 0.30h - 0.06 = 0}$, so $h - 0.06 = 0$, giving $h = \$0.06$. You need a half-spread of **\$0.06** (a \$0.12 full spread) to break even. If you only quote \$0.04 half-spread, your expected P&L per fill is $0.70 \times 0.04 + 0.30 \times (0.04 - 0.20) = 0.028 - 0.048 = -\$0.02$ -- you lose two cents a share, and more volume just loses faster. The insight interviewers want: **against informed flow, quoting tighter and trading more is not "scaling up an edge", it is scaling up a loss.**
 
 #### Worked example: the reservation-price shift
 

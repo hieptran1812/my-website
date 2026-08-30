@@ -106,7 +106,7 @@ More carefully: the increment $\Delta B$ is a random variable with mean $0$ and 
 
 #### Worked example: confirming $(dB)^2 = dt$ numerically
 
-Let us make this concrete with numbers. Take the interval $[0, 1]$, so the total time is $t = 1$. Chop it into $n$ equal sub-intervals, each of length $1/n$. Over each piece, the Brownian increment $\Delta B_i$ is normal with variance $1/n$.
+Let us make this concrete with numbers. Take the interval $[0, 1]$, so the total time is $t = 1$. Chop it into $n$ equal sub-intervals, each of length ${1/n}$. Over each piece, the Brownian increment $\Delta B_i$ is normal with variance ${1/n}$.
 
 Now form the **realized quadratic variation** — the running total of squared increments:
 
@@ -114,7 +114,7 @@ $$
 Q_n = \sum_{i=1}^{n} (\Delta B_i)^2.
 $$
 
-What is the expectation? Each $(\Delta B_i)^2$ has expected value $1/n$, and there are $n$ of them, so
+What is the expectation? Each $(\Delta B_i)^2$ has expected value ${1/n}$, and there are $n$ of them, so
 
 $$
 \mathbb{E}[Q_n] = n \cdot \tfrac{1}{n} = 1 = t.
@@ -424,9 +424,9 @@ $$
 $$
 Check the expectation against this closed form: $\mathbb{E}\!\left[\tfrac{1}{2}(B_t^2 - t)\right] = \tfrac{1}{2}(t - t) = 0$. Consistent. And the variance? By Ito isometry, $\text{Var}(I_t) = \mathbb{E}\!\left[\int_0^t B_s^2\,ds\right] = \int_0^t \mathbb{E}[B_s^2]\,ds = \int_0^t s\,ds = \tfrac{1}{2}t^2$. **Interview summary: an Ito integral against $dB$ is automatically mean-zero; to get a closed form, find a function whose Ito expansion produces your integrand — here $B^2$ — and rearrange.** Notice the difference from a normal integral $\int_0^t B_s\,ds$: that ordinary (Riemann) integral is *not* mean-zero in the Ito sense and behaves differently — distinguishing the two is a classic trap.
 
-#### Worked example: Problem 4 — The drift of $1/S$ under GBM
+#### Worked example: Problem 4 — The drift of ${1/S}$ under GBM
 
-**Setup.** "A stock follows GBM with drift $\mu$ and volatility $\sigma$. What process does the inverse price $1/S$ follow, and what is its drift?" This tests whether you can apply Ito to a function with strong curvature and reason about why the drift moves the way it does.
+**Setup.** "A stock follows GBM with drift $\mu$ and volatility $\sigma$. What process does the inverse price ${1/S}$ follow, and what is its drift?" This tests whether you can apply Ito to a function with strong curvature and reason about why the drift moves the way it does.
 
 **Solve.** Let $f(S) = S^{-1}$, so $f'(S) = -S^{-2}$ and $f''(S) = 2 S^{-3}$. Using $dS = \mu S\,dt + \sigma S\,dB$ and $(dS)^2 = \sigma^2 S^2\,dt$:
 $$
@@ -436,7 +436,7 @@ Simplify each piece: the first gives $-\tfrac{\mu}{S}\,dt - \tfrac{\sigma}{S}\,d
 $$
 d\!\left(\frac{1}{S}\right) = \frac{1}{S}\Big[(-\mu + \sigma^2)\,dt - \sigma\,dB\Big] = (\,\sigma^2 - \mu\,)\,\frac{1}{S}\,dt - \sigma\,\frac{1}{S}\,dB.
 $$
-So $Y = 1/S$ is itself a geometric Brownian motion, with drift $\sigma^2 - \mu$ and volatility $-\sigma$ (the sign just flips the Brownian driver). **The instructive part: the drift of $1/S$ is *not* simply $-\mu$ — the convexity of $1/S$ adds a positive $+\sigma^2$ correction.** This is why, for instance, the expected value of an inverse exchange rate is not the inverse of the expected exchange rate; the wedge is a pure Ito effect, and forgetting it is the source of the famous "Siegel's paradox" in FX. An interviewer who asks this is checking that you do not blindly negate the drift.
+So $Y = 1/S$ is itself a geometric Brownian motion, with drift $\sigma^2 - \mu$ and volatility $-\sigma$ (the sign just flips the Brownian driver). **The instructive part: the drift of ${1/S}$ is *not* simply $-\mu$ — the convexity of ${1/S}$ adds a positive $+\sigma^2$ correction.** This is why, for instance, the expected value of an inverse exchange rate is not the inverse of the expected exchange rate; the wedge is a pure Ito effect, and forgetting it is the source of the famous "Siegel's paradox" in FX. An interviewer who asks this is checking that you do not blindly negate the drift.
 
 #### Worked example: Problem 5 — Build the Black-Scholes PDE on the spot
 
@@ -478,7 +478,7 @@ $$
 \boxed{\;d(S^n) = S^n\left[\Big(n\mu + \tfrac{1}{2} n(n-1)\sigma^2\Big)dt + n\sigma\,dB\right]\;}
 $$
 
-So $S^n$ is *also* a geometric Brownian motion, with drift $n\mu + \tfrac{1}{2} n(n-1)\sigma^2$ and volatility $n\sigma$. **Read off the consequences.** Set $n = 2$: the drift of $S^2$ is $2\mu + \sigma^2$, so $\mathbb{E}[S_t^2] = S_0^2\,e^{(2\mu + \sigma^2)t}$ — exactly the second moment of a lognormal. Set $n = -1$: the drift is $-\mu + \sigma^2 = \sigma^2 - \mu$, matching Problem 4. The convexity adjustment $\tfrac{1}{2} n(n-1)\sigma^2$ is positive whenever $n > 1$ or $n < 0$ (convex regions) and negative for $0 < n < 1$ (concave, like $\sqrt{S}$ at $n = \tfrac{1}{2}$). **Interview summary: one formula, parameterized by $n$, reproduces every power-of-the-stock question — and the sign of the convexity term flips exactly where $f$ changes between convex and concave.**
+So $S^n$ is *also* a geometric Brownian motion, with drift $n\mu + \tfrac{1}{2} n(n-1)\sigma^2$ and volatility $n\sigma$. **Read off the consequences.** Set $n = 2$: the drift of $S^2$ is $2\mu + \sigma^2$, so $\mathbb{E}[S_t^2] = S_0^2\,e^{(2\mu + \sigma^2)t}$ — exactly the second moment of a lognormal. Set $n = -1$: the drift is $-\mu + \sigma^2 = \sigma^2 - \mu$, matching Problem 4. The convexity adjustment $\tfrac{1}{2} n(n-1)\sigma^2$ is positive whenever $n > 1$ or $n < 0$ (convex regions) and negative for ${0 < n < 1}$ (concave, like $\sqrt{S}$ at $n = \tfrac{1}{2}$). **Interview summary: one formula, parameterized by $n$, reproduces every power-of-the-stock question — and the sign of the convexity term flips exactly where $f$ changes between convex and concave.**
 
 #### Worked example: Problem 7 — Two correlated assets and the product rule
 
@@ -509,7 +509,7 @@ These are the errors that get candidates rejected, and the beliefs that, once co
 
 **"$dB \cdot dt$ might matter too."** It does not. The cross term $dB\,dt$ is order $\sqrt{dt}\cdot dt = (dt)^{3/2}$, which vanishes faster than $dt$. Only $dB \cdot dB = dt$ survives the multiplication table. A candidate who keeps $dB\,dt$ terms is over-applying the lesson and signalling they memorized rather than understood.
 
-**"Ito's lemma always adds a $+\tfrac{1}{2}\sigma^2$ drift."** The sign and presence depend on the curvature $f''$. For $\log S$ ($f'' < 0$) the correction is *negative*. For $e^{B}$ or $1/S$ ($f'' > 0$) it is *positive*. For a *linear* function or any process with $f_{XX} = 0$ (like the OU integrating-factor step), there is *no* correction at all. Always compute $f''$; never assume the sign.
+**"Ito's lemma always adds a $+\tfrac{1}{2}\sigma^2$ drift."** The sign and presence depend on the curvature $f''$. For $\log S$ ($f'' < 0$) the correction is *negative*. For $e^{B}$ or ${1/S}$ ($f'' > 0$) it is *positive*. For a *linear* function or any process with $f_{XX} = 0$ (like the OU integrating-factor step), there is *no* correction at all. Always compute $f''$; never assume the sign.
 
 **"The expected stock price grows at the corrected rate $\mu - \tfrac{1}{2}\sigma^2$."** No — the *median* (log) path grows at $\mu - \tfrac{1}{2}\sigma^2$, but the *mean* price $\mathbb{E}[S_t]$ grows at the full $\mu$, because $\mathbb{E}[S_t] = S_0 e^{\mu t}$. The lognormal distribution's right skew pulls the average above the median. Confusing mean and median here is a classic interview slip — and a real source of money lost when people project median paths as if they were expectations, or vice versa.
 
@@ -537,7 +537,7 @@ Ito's lemma is not a museum piece. It is the daily working tool behind several d
 
 If you are preparing for a quant researcher or derivatives role, Ito's lemma is non-negotiable: it appears in nearly every stochastic-calculus interview, and it underpins the pricing and risk math you will use on the job. The good news is that, despite its fearsome reputation, the entire toolkit reduces to a handful of moves you can practice until they are automatic.
 
-The drill that makes it stick: take a process $dX = a\,dt + b\,dB$ and a function $f$, write down $f'$ and $f''$, compute $(dX)^2 = b^2\,dt$ via the multiplication table, and assemble $df = [a f' + \tfrac{1}{2} b^2 f''] dt + b f'\,dB$. Do it for $f = X^2$, $X^3$, $e^X$, $\log X$, $1/X$, and $\sqrt{X}$ until the $\tfrac{1}{2} f''$ correction is reflexive. Then layer in time-dependence and the product rule. Five functions and three multiplication-table entries cover the overwhelming majority of what gets asked.
+The drill that makes it stick: take a process $dX = a\,dt + b\,dB$ and a function $f$, write down $f'$ and $f''$, compute $(dX)^2 = b^2\,dt$ via the multiplication table, and assemble $df = [a f' + \tfrac{1}{2} b^2 f''] dt + b f'\,dB$. Do it for $f = X^2$, $X^3$, $e^X$, $\log X$, ${1/X}$, and $\sqrt{X}$ until the $\tfrac{1}{2} f''$ correction is reflexive. Then layer in time-dependence and the product rule. Five functions and three multiplication-table entries cover the overwhelming majority of what gets asked.
 
 From here, the natural next steps build directly on this foundation. The [Black-Scholes deep dive](/blog/trading/quantitative-finance/black-scholes) takes the PDE we derived in Problem 5 and solves it for the option price. The piece on [derivatives pricing](/blog/trading/quantitative-finance/derivatives-pricing) develops the risk-neutral measure that the exponential martingale of Problem 1 seeds. The [short-rate models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white) article applies the Ornstein-Uhlenbeck solution from Problem 2 to interest rates. And if you want to shore up the probability foundations that Brownian motion rests on, the [distributions cheat sheet](/blog/trading/quantitative-finance/distributions-cheat-sheet-quant-interviews) covers the normal and lognormal distributions that appear throughout.
 
