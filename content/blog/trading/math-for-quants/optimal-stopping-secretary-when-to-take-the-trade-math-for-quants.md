@@ -36,33 +36,29 @@ The figure above is the mental model for the simplest version. Every stopping ru
 
 You need four ingredients, and every one of them changes the answer.
 
-**Sequential arrival.** Offers, candidates, prices or quotes arrive one at a time. You do not get to see them all laid out and pick the best, which is what makes this hard.
+**Sequential arrival.** Offers arrive one at a time, and you never see them all laid out. That is what makes this hard.
 
-**A decision at each arrival.** When something arrives you either accept it and the game ends, or you reject it and move on. There is no "let me think about it".
+**A decision at each arrival.** You accept and the game ends, or you reject and move on. There is no "let me think about it".
 
-**No recall.** A rejected offer is gone. In markets this is close to literally true: a dealer's quote is live for seconds, and going back an hour later to say "actually I'll take that 4 bps" gets you a worse price, because the dealer now knows you have been shopping.
+**No recall.** A rejected offer is gone. In markets that is close to literally true: a dealer's quote is live for seconds, and coming back an hour later to take that 4 bps gets you a worse price, because the dealer now knows you have been shopping.
 
-**A deadline.** The sequence has a known length, or a known end time. Without one there is no urgency and the whole problem dissolves.
+**A deadline.** The sequence has a known length or a known end time. Without one there is no urgency and the problem dissolves.
 
-The other thing that matters, and the thing most people skip, is **what you can observe**. In one version you learn only *ranks*: whether this offer is the best you have seen so far, and nothing more. In another you see the actual number and you know the distribution it was drawn from. These are different problems with different answers, and confusing them is the single most common mistake.
+The thing most people skip is **what you can observe**. In one version you learn only *ranks*: whether this offer is the best you have seen so far, and nothing else. In another you see the actual number and know the distribution it came from. Those are different problems with different answers, and confusing them is the single most common mistake.
 
-Two more terms before we start. **Mid** is the midpoint between the best bid and the best offer, the closest thing to a fair price at that instant, and execution cost is quoted as distance from it. A **reservation price** is the worst price at which you are willing to deal right now; anything worse, you refuse. Everything below is about computing that number honestly instead of guessing it.
+Two terms before we start. **Mid** is the midpoint between the best bid and the best offer, the closest thing to a fair price at that instant, and execution cost is quoted as distance from it. A **reservation price** is the worst price at which you are willing to deal right now. Everything below is about computing that number instead of guessing it.
 
 ### The everyday version: house hunting
 
-Strip out the finance and this is apartment hunting in a tight market. You view flats one at a time. Good ones go the same day, so if you pass, it is gone. You have six weeks. You have no idea what the price distribution looks like on day one, so early viewings are worth almost nothing as decisions and almost everything as education.
-
-Everyone who has done this has felt both failure modes. You take the third flat because you are tired, and then see two better ones in week five. Or you hold out for something perfect and end the six weeks signing for whatever is left. The maths below says exactly how long to look, and it says the answer is roughly the same whether you have twenty viewings or two hundred.
+Strip out the finance and this is apartment hunting in a tight market. You view flats one at a time, good ones go the same day, and you have six weeks. Early viewings are worth almost nothing as decisions and almost everything as education, because you do not yet know what the distribution looks like. Everyone who has done this has felt both failure modes: taking the third flat out of fatigue and then seeing two better ones in week five, or holding out for perfect and signing for whatever is left. The maths below says exactly how long to look, and the answer is roughly the same whether you have twenty viewings or two hundred.
 
 ## The secretary problem, from zero
 
-Here is the canonical statement. There are $n$ candidates. They arrive in a uniformly random order, so no position is more likely than any other to hold the best one. You interview them one at a time. After each interview you can rank that candidate against everyone you have already seen, but you learn nothing about their absolute quality and nothing about those still to come. You must hire or reject on the spot, with no recall. You win only if you hire the single best of all $n$.
+Here is the canonical statement. There are $n$ candidates arriving in a uniformly random order, so no position is more likely than any other to hold the best one. After each interview you can rank that candidate against everyone you have already seen, but you learn nothing about absolute quality and nothing about those still to come. You hire or reject on the spot, with no recall, and you win only if you hire the single best of all $n$.
 
-The name is an accident of history. Ferguson's 1989 survey traces it to Martin Gardner's Mathematical Games column of February 1960, where it was posed as the "game of googol": slips of paper with arbitrary numbers written on them, turned over one at a time, stop when you think you have the largest.
+The name is an accident of history. Ferguson's 1989 survey traces the problem to Martin Gardner's Mathematical Games column of February 1960, where it was posed as the "game of googol": slips of paper with arbitrary numbers written on them, turned over one at a time, stop when you think you have the largest.
 
-The first thing to notice is that the rank-only restriction is doing enormous work. If you could see values, you could say "that is a great number, I'll take it". Seeing only ranks means the only signal you ever get is binary: this one is a record, or it is not.
-
-That forces the shape of the answer. Any sensible rule must be: **reject the first ${r-1}$ candidates no matter what, then accept the first candidate who beats all of them.** The first phase is pure sampling, used only to build a benchmark. The only free parameter is where to cut.
+The rank-only restriction is doing enormous work. If you could see values, you could say "that is a great number, I'll take it". Seeing only ranks means the sole signal you ever get is binary: this one is a record, or it is not. That forces the shape of the answer. Any sensible rule must be **reject the first ${r-1}$ candidates no matter what, then accept the first candidate who beats all of them.** The first phase is pure sampling, used only to build a benchmark, and the only free parameter is where to cut.
 
 ### Deriving the 1/e rule
 
@@ -94,9 +90,9 @@ The win rate is also remarkably stable in $n$. With 10 candidates the optimum is
 
 #### Worked example 1: the 1/e rule on 100 counterparties for a \$50m block
 
-You have \$50m of a bond to sell. One bp of price on \$50m is \$5,000. Suppose 100 counterparties will show you a bid over the session, each somewhere between 2 and 12 bps below mid, and you can only tell whether a bid is the best you have seen, not how good it is in absolute terms.
+You have \$50m of a bond to sell, so one bp of price is \$5,000. Suppose 100 counterparties will show you a bid over the session, each somewhere between 2 and 12 bps below mid, and you can only tell whether a bid is the best you have seen, not how good it is absolutely.
 
-The prize is real. The expected best of 100 draws spread evenly over that band sits at about 2.1 bps, roughly \$10,500 of cost. An average bid is 7.0 bps, or \$35,000. So the gap between hitting the best bid of the day and hitting a typical one is about \$24,500 on this single block.
+The prize is real. The expected best of 100 draws spread evenly over that band sits at about 2.1 bps, roughly \$10,500 of cost, against \$35,000 for an average bid at 7.0 bps. The gap between the best bid of the day and a typical one is about \$24,500 on this single block.
 
 The rule: reject the first 37 bids, remember the best of them, then hit the first bid that beats it. Evaluating the formula at ${r = 38}$:
 
@@ -106,13 +102,13 @@ $$
 
 So 37.1%, against 1% for closing your eyes and hitting the first bid. That is a 37-fold improvement from a rule you can state in one sentence.
 
-Now the honest part, which is also the part interviews probe. The rule fires only if some bid after position 37 beats the best of the first 37. That fails exactly when the overall best bid was inside the reject window, which happens with probability 37/100. **So 37% of the time this rule accepts nothing at all and dumps you on bid number 100**, a random draw worth \$35,000 in expectation. You win 37.1% of the time and you get forced 37% of the time, and those two numbers being nearly equal is not a coincidence, it is the same cutoff seen from both sides.
+Now the honest part, which is the part interviews probe. The rule fires only if some bid after position 37 beats the best of the first 37, and that fails exactly when the overall best bid sat inside the reject window, with probability 37/100. **So 37% of the time this rule accepts nothing at all and dumps you on bid number 100**, a random draw worth \$35,000 in expectation. You win 37.1% of the time and get forced 37% of the time. Those two numbers being nearly equal is not a coincidence, it is the same cutoff seen from both sides.
 
-*The intuition: the 1/e rule maximises the probability of the very best outcome, and it pays for that with a large chance of the worst one. If what you care about is expected money rather than a trophy, this is the wrong objective function.*
+*The intuition: the 1/e rule maximises the probability of the very best outcome and pays for that with a large chance of the worst one. If you care about expected money rather than a trophy, it is the wrong objective function.*
 
 ## The variant that matches trading
 
-On a desk you almost never face the rank-only problem. You see the actual price. You have traded this bond a thousand times and you know roughly how wide the quotes come. That extra information changes the structure of the answer, not just its parameters.
+On a desk you almost never face the rank-only problem. You see the actual price, and you have traded this bond enough to know roughly how wide the quotes come. That extra information changes the structure of the answer, not just its parameters.
 
 ![Comparison table of rank-only versus full-information stopping showing what you observe, the optimal rule, the chance of the best at large n of 36.8 percent versus 58.0 percent, and what each objective optimises](/imgs/blogs/optimal-stopping-secretary-when-to-take-the-trade-math-for-quants-3.webp)
 

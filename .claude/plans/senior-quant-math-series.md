@@ -243,7 +243,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 21 | finite-difference-pde-pricing | W6 | TODO |
 | 22 | convex-duality-shadow-prices | W7 | TODO |
 | 23 | optimal-transport-wasserstein | W8 | TODO |
-| 24 | optimal-stopping-secretary-when-to-take-the-trade | W2 | **SHIPPED** 4,706 words |
+| 24 | optimal-stopping-secretary-when-to-take-the-trade | W2 | **SHIPPED** 4,639 words |
 | 25 | order-book-imbalance-short-horizon-prediction | W2 | **SHIPPED** 4,172 words |
 | 26 | combining-weak-alphas | W2 | **SHIPPED** 4,396 words |
 | 27 | factor-risk-model-build | W9 | TODO |
