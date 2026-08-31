@@ -220,10 +220,10 @@ never `git add -A`. Pull --rebase --autostash before every push.
 
 | # | slug | wave | status |
 |---|------|------|--------|
-| 1 | random-matrix-theory-covariance-cleaning | W1 | TODO |
+| 1 | random-matrix-theory-covariance-cleaning | W1 | **SHIPPED** f43eaba4 |
 | 2 | shrinkage-stein-paradox | W2 | TODO |
-| 3 | concentration-inequalities-sample-complexity | W1 | TODO |
-| 4 | causal-inference-alpha-research | W1 | TODO |
+| 3 | concentration-inequalities-sample-complexity | W1 | **SHIPPED** f43eaba4 |
+| 4 | causal-inference-alpha-research | W1 | **SHIPPED** f43eaba4 |
 | 5 | instrumental-variables-natural-experiments | W2 | TODO |
 | 6 | event-studies-diff-in-diff-synthetic-control | W2 | TODO |
 | 7 | mcmc-metropolis-gibbs | W3 | TODO |
@@ -243,9 +243,9 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 21 | finite-difference-pde-pricing | W6 | TODO |
 | 22 | convex-duality-shadow-prices | W7 | TODO |
 | 23 | optimal-transport-wasserstein | W8 | TODO |
-| 24 | optimal-stopping-secretary-when-to-take-the-trade | W2 | TODO |
-| 25 | order-book-imbalance-short-horizon-prediction | W2 | TODO |
-| 26 | combining-weak-alphas | W2 | TODO |
+| 24 | optimal-stopping-secretary-when-to-take-the-trade | W2 | IN PROGRESS: 4 figures rendered, prose not started |
+| 25 | order-book-imbalance-short-horizon-prediction | W2 | IN PROGRESS: 5 figures rendered + 5 scenes cached, prose not started |
+| 26 | combining-weak-alphas | W2 | **SHIPPED** (5,341 words, trim to band pending) |
 | 27 | factor-risk-model-build | W9 | TODO |
 | 28 | pnl-attribution | W9 | TODO |
 | 29 | live-vs-backtest-divergence | W9 | TODO |
