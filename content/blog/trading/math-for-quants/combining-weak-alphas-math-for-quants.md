@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 18
+readTime: 20
 ---
 
 > [!important]
@@ -24,7 +24,7 @@ readTime: 18
 
 A researcher brings eleven new alphas to a meeting. Each is weak but real: an information coefficient around 0.02 to 0.03, statistically alive, economically sensible. The portfolio manager asks the only question that matters, which is not "are these signals any good" but "what do these add to the signals we already have". Those are wildly different questions, and the gap between them is the subject of this post.
 
-*101 Formulaic Alphas* (Kakushadze, 2016) is a catalogue of one-line expressions, most with ICs that would embarrass a single-signal researcher, and the implicit promise is that quantity compounds into quality. It does, but only along a curve that flattens fast. The size of the library is not the edge. The independence inside it is.
+*101 Formulaic Alphas* (Kakushadze, 2016) catalogues one-line expressions, most with ICs that would embarrass a single-signal researcher, and its implicit promise is that quantity compounds into quality. It does, but along a curve that flattens fast. The size of the library is not the edge. The independence inside it is.
 
 The figure below is the mental model: the multiplier that stacking n equally weighted signals applies to a single signal's IC, at four levels of average pairwise correlation. Only the fantasy case, rho = 0, keeps climbing.
 
@@ -54,16 +54,15 @@ IR is the *information ratio*, annualised active return divided by annualised ac
 
 Every dollar figure below refers to one hypothetical book:
 
-- **\$200m** of capital, market-neutral, run at a **10% annualised target volatility**, so one standard deviation of annual P&L is \$20m.
-- **500 names**, rebalanced **weekly**.
-- Effective breadth of **600 independent bets per year**, derived rather than assumed in the breadth section.
+- **\$200m** of capital, market-neutral, at a **10% annualised target volatility**, so one standard deviation of annual P&L is \$20m.
+- **500 names**, rebalanced **weekly**, with an effective breadth of **600 independent bets per year**, derived rather than assumed in the breadth section.
 - Each signal has an IC of **0.03** unless stated otherwise.
 
-One consequence is worth memorising, because it is the exchange rate that turns statistics into money: on this book, **one point of information ratio is \$20m a year**. Everything that follows is about how many hundredths of an IR point a marginal signal is really worth.
+One consequence is worth memorising, because it is the exchange rate that turns statistics into money: **one point of information ratio is \$20m a year**. Everything that follows is about how many hundredths of an IR point a marginal signal is really worth.
 
 ## The arithmetic of stacking
 
-Take n signals, each standardised to unit cross-sectional variance, each with IC c, each pair correlated at rho, equally weighted. The combined signal's covariance with forward returns is the average of the individual covariances, so the numerator does not grow at all. Only the denominator changes: averaging n correlated variables gives a variance of ${[1 + (n-1)\rho]/n}$ rather than ${1/n}$, and the IC is a correlation, so it is the ratio:
+Take n signals, each standardised to unit variance, each with IC c, each pair correlated at rho, equally weighted. Their combined covariance with forward returns is the average of the individual covariances, so the numerator does not grow at all. Only the denominator changes: averaging n correlated variables gives a variance of ${[1 + (n-1)\rho]/n}$ rather than ${1/n}$, and the IC is a correlation, so it is the ratio:
 
 $$
 \mathrm{IC}_n = c \cdot \frac{\sqrt{n}}{\sqrt{1 + (n-1)\rho}}
@@ -115,7 +114,7 @@ Same book, all signals at IC 0.03, average pairwise correlation 0.3:
 | 100 | 1.80 | 0.0541 | 1.33 | \$26.5m | \$0.3m |
 | infinite | 1.83 | 0.0548 | 1.34 | \$26.8m | \$0.3m |
 
-The first nine additional signals bought \$9.5m a year. The next forty bought \$2.1m. The next fifty bought \$298,000, which will not cover the salary of the person who built them. The entire remaining infinity beyond the hundredth is worth another \$300,000.
+The first nine additional signals bought \$9.5m a year. The next forty bought \$2.1m. The next fifty bought \$298,000, which will not cover the salary of the person who built them, and the entire remaining infinity beyond the hundredth is worth another \$300,000.
 
 In effective-breadth terms, 100 signals at rho = 0.3 give ${n_{\text{eff}} = 100/30.7 = 3.26}$ independent bets against a hard ceiling of 3.33. Fifty signals already gave 3.18. **Doubling the library from 50 to 100 bought 0.08 of one independent signal.** Past the knee you are not building a book, you are decorating one.
 
@@ -139,11 +138,9 @@ At phi = 0.7 and T = 52 weeks that is 9.2 effective periods a year, not 52. A sl
 
 Naive count: 500 names × 52 weekly rebalances = 26,000 bets a year, so ${\sqrt{26{,}000} = 161}$. Multiply by IC 0.03 and the fundamental law promises an IR of 4.8, worth \$97m a year on a \$200m book. No fund on earth runs a 4.8 IR, which should be the first clue.
 
-Honest count: strip the market and sector factors and the residual cross-section behaves like roughly 65 independent names. Apply weekly autocorrelation of 0.7 and 52 rebalances become 9.2 effective periods. Effective breadth is 65 × 9.2 = 600, so ${\sqrt{600} = 24.5}$.
+Honest count: strip the market and sector factors and the residual cross-section behaves like roughly 65 independent names, while weekly autocorrelation of 0.7 turns 52 rebalances into 9.2 effective periods. Effective breadth is 65 × 9.2 = 600, so ${\sqrt{600} = 24.5}$, and IR = 0.03 × 24.5 = **0.73**, worth **\$14.7m**. The naive breadth overstated the information ratio by a factor of 6.6.
 
-IR = 0.03 × 24.5 = **0.73**, worth **\$14.7m**. The naive breadth overstated the information ratio by a factor of 6.6.
-
-One further leak matters. Clarke, de Silva and Thorley (*Financial Analysts Journal*, 2002) noted that even with the right IC and breadth you do not get to hold the portfolio the signal implies: long-only constraints, position limits, sector caps and turnover budgets all stand between forecast and position. Their *transfer coefficient* is the correlation between the positions you wanted and the ones you hold:
+One further leak matters. Clarke, de Silva and Thorley (*Financial Analysts Journal*, 2002) noted that even with the right IC and breadth, long-only constraints, position limits, sector caps and turnover budgets stand between forecast and position. Their *transfer coefficient* is the correlation between the positions you wanted and the ones you hold:
 
 $$
 \mathrm{IR} \approx \mathrm{TC} \cdot \mathrm{IC} \cdot \sqrt{\mathrm{BR}}
@@ -167,7 +164,6 @@ That is a mean-variance portfolio with signals in place of assets, and it inheri
 | IC weight | proportional to each IC | signals close to uncorrelated | assumes away the correlation structure entirely |
 | Covariance-aware | proportional to Σ inverse times the IC vector | long history, few signals, stable correlations | inverts a matrix that is mostly estimation noise |
 | Cluster then equal weight | equal within theme, equal across themes | many signals in obvious families | needs the clustering to be right |
-| Shrunk covariance | as above, with Σ pulled toward a target | the realistic middle | one more hyperparameter to overfit |
 
 ### The hurdle a new signal has to clear
 
@@ -177,15 +173,15 @@ $$
 c_B > \rho \cdot c_A
 $$
 
-It generalises: a candidate earns a positive weight in an existing book only if its IC exceeds its correlation with the book times the book's combined IC. Below the hurdle its optimal weight is *negative*. It still contributes, but as a hedge that strips noise out of the book, not as a source of return.
+It generalises: a candidate earns a positive weight only if its IC exceeds its correlation with the book times the book's combined IC. Below the hurdle its optimal weight is *negative*. It still contributes, but as a hedge that strips noise out of the book, not as a source of return.
 
-The hurdle rises as the book improves, which is the cruel part. Our 100-signal book has a combined IC of 0.0541, so a candidate with IC 0.03 needs a correlation with the book below 0.03 / 0.0541 = 0.554. A typical new signal correlating 0.3 with each existing member correlates 0.54 with their average. It clears the hurdle by about two percent.
+The hurdle rises as the book improves, which is the cruel part. Our 100-signal book has a combined IC of 0.0541, so a candidate with IC 0.03 needs a correlation with the book below 0.03 / 0.0541 = 0.554. A typical new signal correlating 0.3 with each existing member correlates 0.54 with their average. It clears by about two percent.
 
 ![Two bars comparing signal A at IC 0.05 with signal B at IC 0.03, showing 49% of B's variance already contained in A, above a rule box giving the hurdle test and the resulting negative optimal weight of minus 0.21.](/imgs/blogs/combining-weak-alphas-math-for-quants-2.webp)
 
 #### Worked example 4: the \$3.2m you lose by blending
 
-Signal A has IC 0.05, signal B has IC 0.03, and they correlate at 0.7. Same book, so combined IC × 490 gives gross alpha in millions of dollars. Check the hurdle first: 0.70 × 0.05 = 0.035, and B's 0.030 is below it. B fails.
+Signal A has IC 0.05, signal B has IC 0.03, and they correlate at 0.7. Same book, so combined IC × 490 gives gross alpha in millions. Check the hurdle first: 0.70 × 0.05 = 0.035, and B's 0.030 is below it. B fails.
 
 | Weighting | Weights (A, B) | Combined IC | Gross alpha |
 | --- | --- | --- | --- |
@@ -196,35 +192,35 @@ Signal A has IC 0.05, signal B has IC 0.03, and they correlate at 0.7. Same book
 
 Both naive blends are **worse than simply not using signal B at all**. Equal weighting costs \$3.2m a year against running A alone; IC weighting costs \$2.0m. Only the covariance-aware solution beats A, by \$240,000, on the strength of a correlation estimate that is nowhere near that accurate.
 
-Push on that. If the true correlation is 0.6 rather than the 0.7 you estimated, B is exactly redundant, since 0.6 × 0.05 = 0.03 is precisely B's IC, and the true optimal weight on B is zero. Your mis-estimated weights of (1.21, -0.21) then deliver an IC of 0.0494 against the 0.0500 available from A alone. A 0.1 error in one correlation flipped the sophisticated answer from a small winner into a small loser. At high correlation the blend is worth so little that estimation error swamps the prize.
+Push on that. If the true correlation is 0.6 rather than the 0.7 you estimated, B is exactly redundant, since 0.6 × 0.05 = 0.03 is precisely B's IC, and its true optimal weight is zero. Weights of (1.21, -0.21) then deliver an IC of 0.0494 against the 0.0500 from A alone: a 0.1 error in one correlation flips the sophisticated answer from a small winner into a small loser. At high correlation the blend is worth so little that estimation error swamps the prize.
 
 ### Why the covariance is mostly noise
 
-Covariance-aware weights require inverting an ${n \times n}$ correlation matrix estimated from the same panel that produced the ICs, and that matrix is far less trustworthy than it looks. [Random matrix theory and covariance cleaning](/blog/trading/math-for-quants/random-matrix-theory-covariance-cleaning-math-for-quants) establishes the sharp version: with n signals and T observations, even a true identity correlation matrix produces sample eigenvalues smeared across the Marchenko-Pastur interval. At 100 signals and 1,000 daily observations that interval runs from 0.47 to 1.73, so the smallest sample eigenvalue is 0.47 when the truth is 1.0, and inversion divides by it. Pure sampling noise gets amplified twofold and handed a portfolio weight.
+Covariance-aware weights require inverting an ${n \times n}$ correlation matrix estimated from the same panel that produced the ICs. [Random matrix theory and covariance cleaning](/blog/trading/math-for-quants/random-matrix-theory-covariance-cleaning-math-for-quants) establishes why it cannot be trusted: even a true identity matrix produces sample eigenvalues smeared across the Marchenko-Pastur interval, which at 100 signals and 1,000 daily observations runs from 0.47 to 1.73. The smallest is 0.47 when the truth is 1.0, and inversion divides by it, so sampling noise is amplified twofold and handed a portfolio weight.
 
-The empirical verdict is equally blunt. DeMiguel, Garlappi and Uppal (*Review of Financial Studies*, 2009) tested fourteen optimising strategies against naive equal weighting across seven datasets and found none consistently better on Sharpe ratio, certainty equivalent or turnover. Their calibration is the number to carry into an interview: a 25-asset problem needs roughly **3,000 months** of data before sample-based mean-variance reliably beats equal weighting, and a 50-asset problem roughly **6,000 months**. Five hundred years of monthly data. You have twenty.
+The empirical verdict matches. DeMiguel, Garlappi and Uppal (*Review of Financial Studies*, 2009) tested fourteen optimising strategies against naive equal weighting across seven datasets and found none consistently better on Sharpe ratio, certainty equivalent or turnover. Their calibration is the number to carry into an interview: a 25-asset problem needs roughly **3,000 months** of data before sample-based mean-variance reliably beats equal weighting, and a 50-asset problem roughly **6,000 months**. Five hundred years of monthly data. You have twenty.
 
-The resolution is to know where you sit on the ${n/T}$ axis. With 5 signals and 10 years of daily data, optimise. With 100 signals and 4 years, shrink hard or cluster the signals into five or six themes, equal-weight within each and equal-weight across. The clustered version encodes the only part of the correlation structure you can actually estimate, the block structure, and discards the part you cannot, the individual off-diagonal entries.
+So know where you sit on the ${n/T}$ axis. With 5 signals and 10 years of daily data, optimise. With 100 signals and 4 years, cluster into five or six themes and equal-weight within each and across, which encodes the only part of the correlation structure you can estimate and discards the part you cannot.
 
 ## Naive stacking double-counts, and there are only two fixes
 
 Adding correlated signals does not add information, it adds emphasis. Names where two overlapping signals agree get double weight, and the combination quietly becomes a proxy for whatever the two share.
 
-**Fix one: orthogonalise.** Regress the new signal on the existing book and keep the residual, which is uncorrelated with the book by construction. The mechanics are in the [alpha signal pipeline](/blog/trading/quantitative-finance/building-an-alpha-signal-quant-research) post. The catch is that the regression coefficients are estimated, so the residual carries the regression's error on top of the signal's own noise. Residualising a weak signal against 100 correlated regressors can leave almost pure noise with a plausible name. Orthogonalise against a few themes, not against every signal.
+**Fix one: orthogonalise.** Regress the new signal on the existing book and keep the residual, uncorrelated with the book by construction; the mechanics are in the [alpha signal pipeline](/blog/trading/quantitative-finance/building-an-alpha-signal-quant-research) post. The catch is that the regression coefficients are estimated, so the residual carries the regression's error on top of the signal's own noise. Residualising a weak signal against 100 correlated regressors can leave almost pure noise with a plausible name, so orthogonalise against a few themes, not every signal.
 
-**Fix two: accept the shrinkage.** Equal-weight, and accept a combined IC of ${\sqrt{n}/\sqrt{1+(n-1)\rho}}$ rather than ${\sqrt{n}}$. You have not solved the double-counting, you have priced it. Given the estimation error above, this is the right answer more often than the profession likes to admit.
+**Fix two: accept the shrinkage.** Equal-weight, and accept ${\sqrt{n}/\sqrt{1+(n-1)\rho}}$ rather than ${\sqrt{n}}$. You have not solved the double-counting, you have priced it, and given the estimation error above that is the right answer more often than the profession likes to admit.
 
-What is never a fix is throwing the signals at a machine-learning model and hoping it sorts out the redundancy. A model fitted on the same panel inherits the same problem, with more parameters and a better story. The relevant defence is the multiple-testing discipline in [overfitting, purged cross-validation and the deflated Sharpe ratio](/blog/trading/quantitative-finance/overfitting-purged-cv-deflated-sharpe-quant-research).
+Never a fix: throwing the signals at a machine-learning model and hoping it sorts out the redundancy. A model fitted on the same panel inherits the same problem, with more parameters and a better story. The defence is the multiple-testing discipline in [overfitting, purged cross-validation and the deflated Sharpe ratio](/blog/trading/quantitative-finance/overfitting-purged-cv-deflated-sharpe-quant-research).
 
 ## Turnover and cost: what actually kills a good combination
 
-Everything so far has been gross. Gross alpha saturates along the curve above; trading cost does not, because each additional signal disagrees with the current book about something and the disagreement gets traded. Cost grows roughly linearly in the number of signals while gross alpha grows like a flattening square root, and a linear cost against a saturating benefit has exactly one shape: it rises, rolls over, and declines.
+Everything so far has been gross. Gross alpha saturates; cost does not, because each additional signal disagrees with the current book about something and the disagreement gets traded. Cost grows roughly linearly in the number of signals while gross alpha grows like a flattening square root, and a linear cost against a saturating benefit has exactly one shape: it rises, rolls over, and declines.
 
 ![Chart of gross alpha, trading cost and net alpha in millions of dollars per year against the number of signals, with net alpha peaking near 25 signals and declining thereafter.](/imgs/blogs/combining-weak-alphas-math-for-quants-4.webp)
 
 #### Worked example 5: net alpha peaks at 25 signals, not 100
 
-Assume each signal past the first adds 20 percentage points of annual two-way turnover, and that all-in cost, meaning spread plus market impact plus fees, runs 10 basis points of every dollar traded. On the \$200m book that is \$40,000 of extra cost per signal per year. Combined with the gross curve from worked example 2:
+Assume each signal past the first adds 20 percentage points of annual two-way turnover, and that all-in cost, meaning spread plus market impact plus fees, runs 10 basis points of every dollar traded: \$40,000 of extra cost per signal per year on the \$200m book. Combined with the gross curve from worked example 2:
 
 | Signals | Gross alpha | Trading cost | Net alpha |
 | --- | --- | --- | --- |
@@ -234,46 +230,46 @@ Assume each signal past the first adds 20 percentage points of annual two-way tu
 | 50 | \$26.2m | \$2.2m | \$24.1m |
 | 100 | \$26.5m | \$4.2m | \$22.4m |
 
-Net alpha peaks near 25 signals. The 100-signal book, which cost four times the research effort, delivers **\$2.1m a year less** than the 25-signal book.
+Net alpha peaks near 25 signals. The 100-signal book, four times the research effort, delivers **\$2.1m a year less**.
 
 The marginal view is starker. The eleventh signal adds \$211,000 of gross alpha against \$40,000 of cost, so it is worth about \$171,000 a year and is an easy yes. The twenty-sixth adds \$42,000 against the same \$40,000 and is a coin flip. The hundredth adds about \$3,400 against \$40,000 and **loses roughly \$37,000 a year**. The question is never "is this signal good" but "does it clear its own trading bill on top of what the book already knows".
 
-Two mitigations matter. Netting helps, since signals that disagree partly cancel before any order is sent, so the linear cost assumption is pessimistic for a well-implemented book. And cost-aware combination, where the optimiser is handed the trading cost and allowed to shade weights toward slower signals, pushes the peak to the right. Neither changes the shape.
+Two mitigations move the peak without changing the shape: netting, since signals that disagree partly cancel before any order is sent, and cost-aware combination, where the optimiser is handed the trading cost and shades weights toward slower signals.
 
 ## Common misconceptions
 
-**"More signals is always better."** Only if they are independent and free to trade, and neither holds. The gross curve saturates at ${1/\sqrt{\rho}}$ and the net curve turns down. On the book above, going from 25 signals to 100 destroys \$2.1m a year.
+**"More signals is always better."** Only if they are independent and free to trade, and neither holds. The gross curve saturates at ${1/\sqrt{\rho}}$ and the net curve turns down: on the book above, going from 25 signals to 100 destroys \$2.1m a year.
 
 **"IC weighting is optimal."** It is optimal exactly when the signal correlation matrix is the identity. The moment signals are correlated the optimum is ${\Sigma^{-1}\mathbf{c}}$, not **c**, and the two can disagree about the *sign* of a weight. In worked example 4, IC weighting put 38% on a signal whose optimal weight was negative.
 
-**"Breadth is the number of stocks."** Breadth is the number of independent forecasts per year. Five hundred names and 52 rebalances gave 26,000 raw bets and 600 real ones in worked example 3, a 6.6-times overstatement of the information ratio. A candidate who computes breadth as names times periods, without deducting factor structure and signal autocorrelation, is telling you they have never had to defend an IR to a risk committee.
+**"Breadth is the number of stocks."** Breadth is the number of independent forecasts per year. Five hundred names and 52 rebalances gave 26,000 raw bets and 600 real ones in worked example 3. Anyone who computes breadth as names times periods, without deducting factor structure and signal autocorrelation, has never had to defend an IR to a risk committee.
 
 ## In the interview room and on the desk
 
-The question arrives in one of two shapes. WorldQuant tends to ask it directly: *"You have 100 alphas. How do you combine them?"* Citadel tends to embed it: *"Your book runs 40 signals and the PM wants to add 15 more from a new team. How do you decide?"*
+The question arrives in one of two shapes. WorldQuant asks it directly: *"You have 100 alphas. How do you combine them?"* Citadel embeds it: *"Your book runs 40 signals and the PM wants to add 15 more from a new team. How do you decide?"*
 
-The weak answer is a list of weighting schemes. Equal weight, IC weight, inverse-variance, mean-variance, maybe a gradient-boosted model. It is a list of things you have heard of, and it answers a question nobody asked.
+The weak answer is a list of weighting schemes. Equal weight, IC weight, inverse-variance, mean-variance, maybe a gradient-boosted model. It answers a question nobody asked.
 
-The strong answer starts one level earlier, with the correlation structure, in this order:
+The strong answer starts one level earlier, with the correlation structure:
 
-1. **Ask what the correlations are**, before proposing any scheme. State the arithmetic: combined IC scales like ${\sqrt{n}/\sqrt{1+(n-1)\rho}}$ with a ceiling at ${1/\sqrt{\rho}}$, so the answer depends almost entirely on one number you have not been told yet.
+1. **Ask what the correlations are**, before proposing any scheme. Combined IC scales like ${\sqrt{n}/\sqrt{1+(n-1)\rho}}$ with a ceiling at ${1/\sqrt{\rho}}$, so the answer depends almost entirely on a number you have not been told yet.
 2. **Give the saturation numbers.** At rho = 0.3, ten signals capture 90% of the ceiling and 100 signals contain 3.3 effective independent bets. That sentence does more than any weighting scheme you could name.
-3. **Then talk weights**, tying the choice to ${n/T}$. With 100 signals and a few years of data you cannot estimate a 100-by-100 correlation matrix, so cluster into themes, equal-weight within, shrink across. Cite DeMiguel, Garlappi and Uppal if the interviewer pushes.
+3. **Then talk weights**, tying the choice to ${n/T}$. With 100 signals and a few years of data you cannot estimate a 100-by-100 correlation matrix, so cluster into themes, equal-weight within, shrink across. Cite DeMiguel, Garlappi and Uppal if pushed.
 4. **Finish on cost.** Marginal gross alpha per signal against marginal trading cost per signal, and note that the net curve peaks well before the gross curve flattens.
 
-The trap is proposing full covariance optimisation on 100 signals without noting that the covariance came out of the same data as the ICs and is mostly noise. It reads as rigour and it is the exact error random matrix theory exists to name. A candidate who says "I would invert the signal covariance" and stops has failed; one who says "I would want to, but with 100 signals and four years of data the smallest eigenvalues are sampling artefacts, so I would shrink toward a block structure" has passed.
+The trap is proposing full covariance optimisation on 100 signals without noting that the covariance came out of the same data as the ICs and is mostly noise. It reads as rigour and it is the exact error random matrix theory exists to name. "I would invert the signal covariance" fails; "I would want to, but with 100 signals and four years of data the smallest eigenvalues are sampling artefacts, so I would shrink toward a block structure" passes.
 
-The second trap is the follow-up: *"Your new signal has an IC of 0.02 and correlates 0.6 with the book. Do you take it?"* Compute the hurdle out loud. If the book's combined IC is 0.05, the hurdle is 0.6 × 0.05 = 0.03, the signal is below it, and the honest answer is that it belongs in the book with a negative weight as a hedge, or not at all.
+The second trap is the follow-up: *"Your new signal has an IC of 0.02 and correlates 0.6 with the book. Do you take it?"* Compute the hurdle out loud. If the book's combined IC is 0.05, the hurdle is 0.6 × 0.05 = 0.03, the signal is below it, and the honest answer is that it belongs with a negative weight as a hedge, or not at all.
 
-WorldQuant weights this most heavily, since industrialised alpha production is the firm's entire operating model, and Citadel's multi-strategy portfolio-construction seats weight it nearly as much. Two Sigma approaches it from the estimation-error side and will ask about the covariance before the weights.
+WorldQuant weights this most heavily, since industrialised alpha production is its entire operating model, and Citadel's multi-strategy portfolio-construction seats nearly as much. Two Sigma comes at it from the estimation-error side and asks about the covariance before the weights.
 
 ## Where this sits and what to read next
 
-A signal library has a capacity, that capacity is roughly ${1/\rho}$ independent bets, and most research effort at most funds goes into filling a library whose capacity was reached years ago. The lever with real leverage is not the count of signals. It is rho: new data, new horizons, new universes, anything that lowers the average correlation of the next signal to the existing book. Halving rho from 0.3 to 0.15 raises the ceiling from 1.83 to 2.58, worth about \$11m a year on the standard book. No amount of stacking does that.
+A signal library has a capacity of roughly ${1/\rho}$ independent bets, and most research effort at most funds goes into filling a library whose capacity was reached years ago. The lever with real leverage is not the count of signals. It is rho: new data, new horizons, new universes, anything that lowers the average correlation of the next signal to the existing book. Halving rho from 0.3 to 0.15 raises the ceiling from 1.83 to 2.58, worth about \$11m a year on the standard book. No amount of stacking does that.
 
-For the covariance machinery underneath the weights, start with [the covariance matrix through linear algebra](/blog/trading/math-for-quants/covariance-matrix-linear-algebra-math-for-quants). For whether the ICs you are combining are real at all, [overfitting, purged cross-validation and the deflated Sharpe ratio](/blog/trading/quantitative-finance/overfitting-purged-cv-deflated-sharpe-quant-research). For why a sample correlation from a short panel is biased in a direction that flatters your combination, [estimators, bias, variance and consistency](/blog/trading/math-for-quants/estimators-bias-variance-consistency-math-for-quants).
+From here: [the covariance matrix through linear algebra](/blog/trading/math-for-quants/covariance-matrix-linear-algebra-math-for-quants) for the machinery underneath the weights, and [estimators, bias, variance and consistency](/blog/trading/math-for-quants/estimators-bias-variance-consistency-math-for-quants) for why a sample correlation from a short panel is biased in a direction that flatters your combination.
 
-This is educational material about mechanism, not investment advice, and every dollar figure above comes from the stated hypothetical book rather than any live portfolio.
+This is educational material about mechanism, not investment advice, and every dollar figure above comes from the stated hypothetical book, not a live portfolio.
 
 ## Sources and further reading
 
