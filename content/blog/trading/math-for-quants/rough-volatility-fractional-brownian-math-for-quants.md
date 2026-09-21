@@ -75,7 +75,7 @@ Add a 25-day reading of 0.220 and you get two more estimates for free: 0.142 fro
 
 Now force $H = 0.5$ and see what breaks. Anchored at 0.140 over one day, a diffusion demands $0.140 \times \sqrt{5} = 0.313$ over five days. The data shows 0.175, which is $0.175 / 0.313 = 55.9\%$ of it. Volatility moves barely half as much over a week as independence requires.
 
-Run it the other way and the sign flips. Over two hours, a quarter of a trading day, a diffusion permits $0.140 \times 0.5 = 0.070$, while the measured exponent gives $0.140 \times 0.25^{0.14} = 0.115$. That is $0.115 / 0.070 = 1.64$ times as much movement as the diffusion allows. **Rough volatility is not "more volatile volatility". It is volatility that is too active intraday and too self-cancelling over weeks**, which is exactly what negatively correlated increments produce.
+Run it the other way and the sign flips. Over two hours, a quarter of a trading day, a diffusion permits $0.140 \times 0.5 = 0.070$, while the measured exponent gives $0.140 \times 0.25^{0.14} = 0.115$. That is ${0.115 / 0.070 = 1.64}$ times as much movement as the diffusion allows. **Rough volatility is not "more volatile volatility". It is volatility that is too active intraday and too self-cancelling over weeks**, which is exactly what negatively correlated increments produce.
 
 Both errors cost money in opposite directions. Take a desk short \$3m of vega per volatility point with the index at 20 volatility. Scaling the one-day number to five days the diffusion way gives an expected adverse move to $20 \times e^{0.313} = 27.35$, or 7.35 points, a \$22,050,000 risk budget. The measured scaling gives $20 \times e^{0.175} = 23.82$, or 3.82 points and \$11,460,000. The desk is carrying nearly twice the capital it needs for its weekly risk. Intraday the same desk is short: two hours of the diffusion's 0.070 implies a move to 21.45, or 1.45 points and \$4,350,000, while 0.115 implies 22.44, or 2.44 points and \$7,320,000. **One wrong exponent overstates the week and understates the afternoon.**
 
@@ -117,7 +117,7 @@ Fukasawa (2017) supplied the missing piece. A volatility driven by fractional Br
 
 $$\psi(\tau) \;\propto\; \tau^{\,H - 1/2} \qquad \text{as } \tau \to 0 .$$
 
-At $H = 0.5$ the exponent is zero and you recover the diffusion's flat short end, which is a good sign that the formula is right. At $H = 0.14$ the exponent is $-0.36$ and the skew blows up as maturity shrinks. Independently, the observed SPX at-the-money skew term structure is well described by a power law with exponent near $-0.4$, and Fukasawa (2021) proved the implication runs the other way too: in a viable market, a power-law short-dated skew *requires* rough volatility. The empirical roughness of realised volatility and the empirical shape of the front-month smile are the same fact seen twice.
+At $H = 0.5$ the exponent is zero and you recover the diffusion's flat short end, which is a good sign that the formula is right. At $H = 0.14$ the exponent is $-0.36$ and the skew blows up as maturity shrinks. Independently, the SPX at-the-money skew is known to obey a power law in maturity (Fukasawa 2017), with the fitted exponent close to $-0.4$, and Fukasawa (2021) proved the implication runs the other way too: in a viable market, a power-law short-dated skew *requires* rough volatility. The empirical roughness of realised volatility and the empirical shape of the front-month smile are the same fact seen twice.
 
 #### Worked example 2: what the flat short end costs on 2,000 puts
 
