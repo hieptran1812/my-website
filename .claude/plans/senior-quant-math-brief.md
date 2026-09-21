@@ -65,6 +65,21 @@ self-consistent.
 
 Do this whenever the post's central claim *is* a formula.
 
+**Two methods cannot adjudicate each other. Calibrate both against a case whose
+answer is already known first.** The numerical-SDE post priced Heston two ways and
+they disagreed by nearly a full point. On the Heston case alone that is a
+disagreement with no way to assign blame, and the tempting read is "this one looks
+more standard, go with it". Feeding both a Black-Scholes characteristic function
+first is what turned the disagreement into a verdict: one route reproduced the
+analytic price to 4.4e-11 and the other did not, so the other was broken. It costs
+about ten lines and it is the difference between a tie-break and a guess.
+
+When you find the broken implementation, **replace it with a different derivation
+rather than debugging it**. A repaired version of your own method is not an
+independent check. That post swapped Lewis for Carr-Madan and left the Lewis bug
+unexplained, which is the honest and cheaper outcome: the report says the
+implementation was wrong without claiming to know why.
+
 ### Re-grep before you act on a line-level claim
 
 Any claim about a specific line, from the orchestrator or from a checker, is a
