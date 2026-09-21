@@ -8,29 +8,29 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 23
+readTime: 22
 ---
 
 > [!important]
 > **TL;DR:** A pricing PDE solved on a grid marches backward from the payoff and fills in the option value at every spot and every date in a single pass. Monte Carlo gives you one number at one spot. The price of that generality is that the obvious scheme is only conditionally stable, and it breaks without telling you.
 >
-> - The **explicit** scheme is stable only when $\lambda = \sigma^2 \Delta t / \Delta x^2 \le 1$. Refining the space grid forces a **quadratically** smaller time step, so halving $\Delta x$ costs eight times the work.
-> - Violating it raises no error. At $\lambda = 1.010$ the grid returns \$4.688861 against a true \$4.614997: wrong by \$73,864 on a million options, and still shaped like an option price.
-> - **Crank-Nicolson is unconditionally stable, which is not the same as unconditionally accurate.** On a plain vanilla call it can return a gamma of $-1.547$ when the true gamma is $+0.039288$. A long call cannot have negative gamma.
-> - The fix is **Rannacher start-up**: replace the first two Crank-Nicolson steps with four implicit half-steps. That one change takes the gamma error from $-4038\%$ to $+0.039\%$.
+> - The **explicit** scheme is stable only when $\lambda = \sigma^2 \Delta t / \Delta x^2 \le 1$, so refining the space grid forces a **quadratically** smaller time step: halving $\Delta x$ costs eight times the work.
+> - Violating it raises no error. At $\lambda = 1.010$ the grid returns \$4.688861 against a true \$4.614997, wrong by \$73,864 on a million options and still shaped like an option price.
+> - **Unconditionally stable is not unconditionally accurate.** On a plain vanilla call Crank-Nicolson can return a gamma of $-1.547$ when the truth is $+0.039288$, and a long call cannot have negative gamma.
+> - The fix is **Rannacher start-up**: replace the first two Crank-Nicolson steps with four implicit half-steps, which takes that gamma error from $-4038\%$ to $+0.039\%$.
 > - The number to remember: grid gamma is accurate to 0.007% while a compute-matched Monte Carlo is uncertain by 1.21%. On a million-option book that is 3 shares of hedge error against 474.
 
 ## The number a simulation will not give you
 
-You are short a million three-month call options and the stock has just moved. Before you can hedge you need to know three things: what the book is worth, how many shares to hold against it, and how fast that share count changes as the stock keeps moving. Price, delta, gamma.
+You are short a million three-month call options and the stock has just moved. Before you can hedge you need three things: what the book is worth, how many shares to hold against it, and how fast that share count changes as the stock keeps moving. Price, delta, gamma.
 
-Monte Carlo answers the first question well and the other two badly. It gives you a price at the spot you simulated from, with an error bar. Want delta? Bump the spot and simulate again. Want gamma? Bump twice more, difference three noisy numbers, and watch the noise get divided by the square of a small bump.
+Monte Carlo answers the first well and the other two badly. It gives a price at the spot you simulated from, with an error bar. Want delta? Bump the spot and simulate again. Want gamma? Bump twice more, difference three noisy numbers, and watch the noise get divided by the square of a small bump.
 
-A partial differential equation solver has the opposite shape. It does not compute a price at a point. It computes the entire function: option value at every stock price on a range and every date between now and expiry. Delta and gamma are then differences between numbers already sitting next to each other in memory.
+A PDE solver has the opposite shape. It does not compute a price at a point, it computes the entire function: option value at every stock price on a range and every date between now and expiry. Delta and gamma are then differences between numbers already sitting next to each other in memory.
 
 ![Two panels. On the left, Monte Carlo fans a handful of simulated paths from one spot to a payoff at maturity and returns one price with a standard error. On the right, a grid over stock price and time to maturity is filled in from the payoff along the top edge, with price, delta and gamma available at every node from a single solve](/imgs/blogs/finite-difference-pde-pricing-math-for-quants-1.webp)
 
-That figure is the trade in one image. Simulation answers one question at one point. A grid answers every question on the whole domain.
+That figure is the trade in one image: simulation answers one question at one point, a grid answers every question on the whole domain.
 
 The catch is that the most natural way to fill that grid is only **conditionally stable**. Push the time step past a threshold and it does not warn you, throw, or return an infinity. It returns numbers. Plausible ones, for a while.
 
@@ -56,9 +56,7 @@ Every worked number below uses the same instrument: a European call, spot and st
 
 ## Three schemes, and the one thing that separates them
 
-Everything in the difference formulas above concerns the space direction. The scheme is the choice about **time**: when you evaluate the right-hand side, do you use the level you already know, the level you are solving for, or both?
-
-Write $\mathcal{L}V$ for the whole spatial right-hand side. The three answers, with what each costs:
+Those difference formulas concern the space direction only. The scheme is the choice about **time**: when you evaluate the right-hand side, do you use the level you already know, the level you are solving for, or both? Writing $\mathcal{L}V$ for the spatial right-hand side, the three answers and what each costs:
 
 | Scheme | Update rule | Accuracy | Cost per step | Stable when |
 | --- | --- | --- | --- | --- |
@@ -66,7 +64,7 @@ Write $\mathcal{L}V$ for the whole spatial right-hand side. The three answers, w
 | Implicit | $(V^{n+1} - V^n)/\Delta t = \mathcal{L}V^{n+1}$ | $O(\Delta t) + O(\Delta x^2)$ | one tridiagonal solve | always |
 | Crank-Nicolson | $(V^{n+1} - V^n)/\Delta t = \tfrac12(\mathcal{L}V^{n+1} + \mathcal{L}V^{n})$ | $O(\Delta t^2) + O(\Delta x^2)$ | one tridiagonal solve | always |
 
-Explicit is a formula: every unknown sits alone on the left, so you evaluate and move on. The other two are systems, because $\mathcal{L}V^{n+1}$ couples each unknown to its neighbours. Since $\mathcal{L}$ reaches only one node either side that system is **tridiagonal**, and the Thomas algorithm solves it in one forward sweep and one back substitution, a handful of operations per node.
+Explicit is a formula: every unknown sits alone on the left, so you evaluate and move on. The other two are systems, because $\mathcal{L}V^{n+1}$ couples each unknown to its neighbours. Since $\mathcal{L}$ reaches only one node either side that system is **tridiagonal**, which the Thomas algorithm solves in one forward sweep and one back substitution.
 
 ![Three finite difference stencils side by side. Explicit computes one unknown at the earlier time level from three known values at the later level. Implicit ties three unknowns at the earlier level to one known value. Crank-Nicolson connects three unknowns and three knowns, averaging the two. Each carries its accuracy order, its cost per step and its stability condition](/imgs/blogs/finite-difference-pde-pricing-math-for-quants-2.webp)
 
@@ -176,9 +174,7 @@ That is the real danger of this scheme. It does not fail where you are looking.
 
 ## Boundary conditions, and where to cut the domain
 
-A grid needs edges, and a real stock price has no upper bound, so you truncate. Both decisions are modelling, not bookkeeping.
-
-At the edges you impose what you know. For a call, value goes to zero as $S \to 0$, and far above the strike the option is worth the discounted forward, $V \approx S - Ke^{-r\tau}$. Those are exact asymptotics, so the only error is applying them at a finite distance rather than at infinity.
+A grid needs edges, and a real stock price has no upper bound, so you truncate. Both decisions are modelling, not bookkeeping. At the edges you impose what you know: for a call, value goes to zero as $S \to 0$, and far above the strike the option is worth the discounted forward, $V \approx S - Ke^{-r\tau}$. Those are exact asymptotics, so the only error is applying them at a finite distance rather than at infinity.
 
 How far is far enough? Hold $\Delta x$ at 0.01 and widen the domain, measuring against the closed form. The natural scale is $\sigma\sqrt{T} = 0.10$, one standard deviation of the log return.
 
@@ -192,9 +188,7 @@ How far is far enough? Hold $\Delta x$ at 0.01 and widen the domain, measuring a
 | 0.30 | 3.0 | \$74.08 to \$134.99 | \$4.610081 | \$0 |
 | 1.00 | 10.0 | \$36.79 to \$271.83 | \$4.610081 | \$0 |
 
-The truncation cost column is the price difference from the widest domain, on a million options. Past three standard deviations it is zero to six decimals: the extra 140 nodes between three and ten buy nothing at all. Below two it becomes the dominant error in the whole calculation, and at one standard deviation the boundary condition is effectively pricing the option for you.
-
-The residual \$4,916 gap between \$4.610081 and the closed-form \$4.614997 is not truncation. It is the $\Delta x^2$ space error, and only a finer mesh shrinks it.
+The truncation cost column is the price difference from the widest domain, on a million options. Past three standard deviations it is zero to six decimals: the extra 140 nodes between three and ten buy nothing at all. Below two it becomes the dominant error in the calculation, and at one standard deviation the boundary condition is effectively pricing the option for you. The residual \$4,916 gap between \$4.610081 and the closed-form \$4.614997 is not truncation but the $\Delta x^2$ space error, which only a finer mesh shrinks.
 
 ## Greeks for free, which is the actual argument
 
@@ -236,9 +230,9 @@ Switch the constraint back on and the grid gives \$3.4796 per option, against \$
 
 ## The honest limit
 
-The curse of dimensionality ends this method, and it ends it abruptly. With $N$ nodes per dimension, a $d$-factor model needs $N^d$ of them. At $N = 200$: one factor is 200 nodes, two is 40,000, three is 8,000,000, four is 1.6 billion before you have taken a single time step.
+The curse of dimensionality ends this method abruptly. With $N$ nodes per dimension a $d$-factor model needs $N^d$ of them, so at $N = 200$: one factor is 200 nodes, two is 40,000, three is 8,000,000, four is 1.6 billion before a single time step.
 
-One or two factors is comfortable, which covers most equity and rate exotics. Three is painful and needs specialist splitting methods. Beyond that the grid is finished and Monte Carlo takes over, because simulation error depends on the number of paths and not the number of dimensions. The two methods are not rivals. They own different parts of the problem.
+One or two factors is comfortable and covers most equity and rate exotics. Three is painful and needs specialist splitting methods. Beyond that Monte Carlo takes over, because simulation error depends on the number of paths and not the number of dimensions. The two methods are not rivals. They own different parts of the problem.
 
 ## Common misconceptions
 
@@ -247,8 +241,6 @@ One or two factors is comfortable, which covers most equity and rate exotics. Th
 **"Crank-Nicolson is unconditionally accurate."** It is unconditionally *stable*. The gap between those two claims is worked example 2 and the gamma table: a scheme that never blows up, returning a negative gamma on a long call. Stability says errors do not grow. It does not say they are small.
 
 **"Finite differences are obsolete now that we have Monte Carlo."** Simulation is the only option past three factors and the wrong tool below that. For a single-factor American or barrier product a grid is faster, handles early exercise exactly, and returns the Greeks for free.
-
-**"A finer grid is always a better grid."** Refining $\Delta x$ forces a quadratically smaller $\Delta t$ under the explicit scheme, and makes Crank-Nicolson ring harder under any time step. Refinement has to be done in both directions at once.
 
 ## Sources and further reading
 
