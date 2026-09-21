@@ -8,7 +8,7 @@ category: "machine-learning"
 subcategory: "Learn from Kaggle"
 author: "Hiep Tran"
 featured: true
-readTime: 91
+readTime: 93
 ---
 
 In April 2025 the AI Mathematical Olympiad Progress Prize 2 closed with a result that should bother anyone who thinks model quality is the whole game. Sixteen teams published write-ups. Twelve of them ran the exact same model: a 4-bit quantized `DeepSeek-R1-Distill-Qwen-14B`, in several cases the identical checkpoint uploaded by the same community member. Their private scores ranged from 24 out of 50 to 29 out of 50. The team that won ran a model it trained itself and scored 34.
@@ -59,6 +59,8 @@ Here is the private leaderboard collapsed into score bands, compiled by a compet
 | 21 | 802 |
 | 20 | 1240 |
 
+![Bar chart of the best rank achieved at each private leaderboard score from 34 down to 20 on a log scale, where one point moves rank 460 to 276](/imgs/blogs/aimo-progress-prize-2-published-solutions-2.webp)
+
 One extra problem, out of fifty, is the difference between rank 276 and rank 460. Two extra problems near the medal boundary move you from 158th to 56th. At the top the cliff is even steeper: the gap between first and second was three problems, and the gap between second and third was one.
 
 ![Final private leaderboard score against rank on a logarithmic axis, with the medal cutoffs marked](/imgs/blogs/aimo-progress-prize-2-published-solutions-fig16.webp)
@@ -81,6 +83,8 @@ The consequence shows up brutally in the public-to-private shakeup:
 | farsail | 29 | 28 | 11 |
 | ippeiogawa | 28 | 27 | 17 |
 | Optimistix | 20 | 24 | 24 |
+
+![Dumbbell chart pairing each published solution's public and private score, showing ranks 3, 4 and 7 gaining five or six points while the public leader dropped three](/imgs/blogs/aimo-progress-prize-2-published-solutions-3.webp)
 
 The team that led the public leaderboard with 34 finished second. Third and fourth place both gained five points going from public to private. Seventh place gained six, from 23 to 29, on a submission its author describes as a "just give it a try" attempt built in a week, and titled his write-up "7th place solution (pure luck)".
 
@@ -107,6 +111,8 @@ Fifth place made this concrete. He profiled which pairs of batch size and maximu
 *Figure from the [5th place write-up](https://www.kaggle.com/competitions/ai-mathematical-olympiad-progress-prize-2/discussion/574262). Majority vote accuracy on AIME 2025, averaged over 10,000 simulated runs, against the paired batch size and sequence length settings in the table above. Both the bf16 and the AWQ model peak around batch size 10 with a 13,300 token cap, and both fall away at either extreme.*
 
 Read that row as an iso-cost curve. You can have five samples of 20,000 tokens each, or sixteen samples of 10,200 tokens each, and both finish on time. His simulations put the optimum at (10, 13300) or (9, 13800), and he shipped (9, 13500). The interior optimum is the point. Neither extreme wins: too few samples and voting has nothing to work with, too short a budget and half your samples never produce an answer.
+
+![Downward sloping curve of batch size five to sixteen against max sequence length twenty thousand down to ten thousand two hundred, every pair finishing fifty questions in about four and a half hours](/imgs/blogs/aimo-progress-prize-2-published-solutions-4.webp)
 
 Every technique in the rest of this article is a lever on one of the four terms:
 
@@ -679,6 +685,8 @@ imagination-research measured 4-bit weights with 8-bit KV cutting time per outpu
 | f8a16 (fp8) | 310 | 1h 40m | 83.3 | 68.7 |
 | f8a16 + ReDrafter | 554 | 1h | 81.3 | 71.3 |
 
+![Paired bar charts comparing decode speed on four L4 GPUs, from 210 to 554 tokens per second, against AIME24 and AIME25 accuracy for bf16, int8, int4 and fp8](/imgs/blogs/aimo-progress-prize-2-published-solutions-9.webp)
+
 Accuracy is maj@12 of the merged model, averaged over five runs. Read the int4 row carefully: it is the fastest weight-only option by a wide margin and it loses ten points on AIME24. Int8 is free. FP8 is free and slightly better than bf16, which is within noise but certainly not a regression. The reason most of the field ran int4 AWQ anyway is that they were on vLLM or lmdeploy without a working FP8 path, and 4-bit was the available lever.
 
 ## 11. Layer 3: the inference engine
@@ -790,6 +798,8 @@ But voting leaves a lot on the table. NemoSkills' numbers on Comp-Math-24-25 mak
 | Merged (0.3 CoT + 0.7 TIR) | 69.1 | 81.3 | 12.2 |
 
 `pass@16` means at least one of the sixteen samples was correct. `maj@16` means the mode was correct. The 12-to-13-point gap is the set of problems the model *solved* and then *voted away*, because the correct trace was outnumbered. That gap is the entire motivation for section 17.
+
+![Stacked horizontal bars showing majority at 16 accuracy for chain of thought, tool integrated reasoning and their merge, with an amber band marking 12 to 13 points of unrecovered headroom](/imgs/blogs/aimo-progress-prize-2-published-solutions-11.webp)
 
 Sample counts across the field:
 
@@ -914,6 +924,8 @@ So the algorithm:
 
 *Figure from the [3rd place write-up](https://www.kaggle.com/competitions/ai-mathematical-olympiad-progress-prize-2/discussion/573314). Each stage is marked with its 4,096 token budget. Branches that have already produced an answer, shown green, drop out and feed the majority vote directly. Seven of the remaining branches are duplicated onward and one is dropped. The 8,192 token checkpoint and the 70 percent threshold are described in his text rather than drawn here.*
 
+![Flow diagram of a branching decode that runs five branches to 4096 tokens, duplicates them to ten, checks for a 70 percent majority at 8192, then duplicates seven to fourteen](/imgs/blogs/aimo-progress-prize-2-published-solutions-14.webp)
+
 With `enable_prefix_caching=True`, duplicating a branch costs nothing for the shared prefix. You get 14 solutions of up to 12K tokens for roughly the compute of far fewer independent ones, in about 6 to 7 minutes. He is candid about the flaw: the solutions remain somewhat correlated because of the shared prefix, partially offset by varying prompts across branches. Public 25, private 30, third place, no fine-tuning.
 
 ## 15. Layer 7: spending the clock
@@ -958,6 +970,8 @@ Fast-Math-R1 measured this exactly, and it is the most useful single table in th
 
 Look at the second row. Local majority accuracy went **up**, from 0.675 to 0.725, and the public leaderboard went **down**, from 25 to 23. Their diagnosis: SFT introduced reasoning redundancy, so more samples failed to reach a conclusion within the time limit. At a 16,384 budget the SFT model averaged 10,396 tokens against the base model's 9,684, and the "answers collected" column fell from 16.8 to 15.7. Fewer completed samples means a weaker vote.
 
+![Training trajectory plotting average generation length against majority at 32 accuracy, where SFT adds 712 tokens and five accuracy points and GRPO cuts 3579 tokens back off](/imgs/blogs/aimo-progress-prize-2-published-solutions-15.webp)
+
 Their fix was GRPO with a three-part reward:
 
 1. **Format reward** matching `r"^.*?oxed{(.*?)}.*?</think>.*?$"`, because generation is stopped at `</think>` at submission time, so the boxed answer must appear before it.
@@ -995,6 +1009,8 @@ NemoSkills had a problem. Their CoT model was fast but less accurate. Their TIR 
 | 0.3 CoT + 0.7 TIR | **69.1** | **81.3** | 12489 | 0.85 |
 
 The merged model beats both parents on accuracy while sitting much closer to the CoT model on length, and it calls code less than a third as often. It has not lost the ability to use tools. It has learned to use them only when they help, which is exactly what the merge weight is controlling.
+
+![Four panels tracking accuracy, pass rate, generation length and code calls as the merge weight moves from the chain of thought checkpoint to the tool integrated one](/imgs/blogs/aimo-progress-prize-2-published-solutions-16.webp)
 
 Two other teams used weight averaging differently. **JK Piece** called linear weight ensembling "what really stood out" in his solution, averaging checkpoints from across his distillation run: `0.1*ckpt-20 + 0.1*ckpt-180 + 0.1*ckpt-260 + 0.1*ckpt-280 + 0.1*ckpt-360 + 0.1*ckpt-640 + 0.1*ckpt-1840 + 0.1*ckpt-2300 + 0.2*last`. Notably, mergekit's slerp and sce methods on the same checkpoints dropped his score to 20. **NemoSkills** also used weight averaging across training stages for the SFT model itself.
 
