@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 18
+readTime: 19
 ---
 
 > [!important]
@@ -54,7 +54,7 @@ where $m(x)$ is the prior mean at index $x$ and $k(x, x')$ the covariance betwee
 
 Two terms before we go further. **Par swap rate** is the fixed rate that makes a new swap worth zero at inception, the natural quantity to interpolate along a curve. **DV01** is the dollar change in a position's value per basis point move in rates, which is how a desk turns a rate uncertainty into a money uncertainty.
 
-This is [Bayesian inference](/blog/trading/math-for-quants/bayesian-inference-traders-math-for-quants) with an infinite-dimensional parameter, and it is [the Kalman filter](/blog/trading/math-for-quants/kalman-filter-state-space-math-for-quants) run all at once over an index set rather than sequentially in time.
+This is [Bayesian inference](/blog/trading/math-for-quants/bayesian-inference-traders-math-for-quants) with an infinite-dimensional parameter, and [the Kalman filter](/blog/trading/math-for-quants/kalman-filter-state-space-math-for-quants) run all at once over an index set rather than sequentially in time. It is also the lucky corner of the Bayesian toolkit: where [hierarchical models](/blog/trading/math-for-quants/hierarchical-bayes-pooling-math-for-quants) need a pooling argument and awkward posteriors need [MCMC](/blog/trading/math-for-quants/mcmc-metropolis-gibbs-math-for-quants), a GP conditions in closed form and needs no sampler at all.
 
 ## The kernel is the model
 
@@ -130,9 +130,7 @@ The caveat, and interviewers reach for it: this holds for a **fixed** kernel. In
 
 ## Why the width is the product
 
-Every model extrapolates. Almost none of them tell you they are doing it.
-
-Fit a cubic spline through six quoted tenors, ask for the 30-year, and you get a number as crisp as the 10-year someone actually traded. Fit a Nelson-Siegel or Svensson curve and you get the same crispness plus the hazard that a three-factor form will bend the front end to accommodate the back. Neither object can say "I am guessing here".
+Every model extrapolates. Almost none of them tell you they are doing it. Fit a cubic spline through six quoted tenors, ask for the 30-year, and you get a number as crisp as the 10-year someone actually traded. Fit a Nelson-Siegel or Svensson curve and you get the same crispness plus the hazard that a three-factor form will bend the front end to accommodate the back. Neither object can say "I am guessing here".
 
 A GP does. Past the last observation the posterior mean decays toward the prior at the rate the kernel dictates and the variance climbs back toward $\sigma_f^2$. In that first figure the band at 15 years is plus or minus 71 bp at two standard deviations against plus or minus 4 bp at the 10-year quote: the model telling you, in your own units, that it has left the region where it knows anything.
 
@@ -142,7 +140,7 @@ That is worth more than a better fit. A wrong number with a wide band gets sized
 
 Both formulas need $(K + \sigma_n^2 I)^{-1}$. In practice you never invert it, you take a [Cholesky factorisation](/blog/trading/math-for-quants/cholesky-positive-definite-math-for-quants) and solve two triangular systems, but the leading term is the same: $O(n^3)$ time and $O(n^2)$ memory. At $n = 1{,}000$ that is instant. At $n = 10{,}000$ it is a few seconds and 800 MB. At $n = 10^6$ it is not a computation, it is a research program.
 
-The standard responses trade exactness for scale. **Inducing-point** methods summarise $n$ observations with $m \ll n$ pseudo-inputs at a cost of $O(nm^2)$, the variational treatment giving a bound you can optimise rather than a heuristic. **Structured kernels** exploit grid or Kronecker structure for near-linear cost when inputs are laid out regularly, which a strike-by-expiry vol grid nearly is. **Local GPs** fit a separate small process per neighbourhood. All three cost you something, usually some of the calibrated variance that was the reason you came. For curve and surface work you rarely need them, because the number of genuinely liquid quotes on any curve is in the dozens.
+The standard responses trade exactness for scale. **Inducing-point** methods summarise $n$ observations with $m \ll n$ pseudo-inputs at $O(nm^2)$, the variational treatment giving a bound you can optimise rather than a heuristic; **structured kernels** exploit grid or Kronecker structure for near-linear cost when inputs are laid out regularly, which a strike-by-expiry vol grid nearly is; **local GPs** fit a separate small process per neighbourhood. All three cost you some of the calibrated variance that was the reason you came, and for curve and surface work you rarely need them, because the liquid quotes on any curve number in the dozens.
 
 ## Where this earns its place in a quant workflow
 
@@ -154,7 +152,7 @@ Illustrative arithmetic on assumed inputs. Listed expiries give 95%-strike impli
 
 Running the same two steps, the posterior at four months is **17.87% with a standard deviation of 0.265 vol points**. That mean is almost exactly what linear interpolation gives, 17.867%, which is the point: the mean was never the contribution.
 
-Convert the width to money. With a notional $S$ of \$50m, $T = 1/3$ and $\sigma = 17.87\%$, the 95% strike puts $d_1 = 0.549$, so $\varphi(d_1) = 0.343$ and vega is $S\sqrt{T}\varphi(d_1)/100$, or **\$99,060 per vol point**. One standard deviation of interpolation uncertainty is therefore **\$26,280**.
+Convert the width to money. With a notional $S$ of \$50m, $T = 1/3$ and $\sigma = 17.87\%$, the 95% strike puts $d_1 = 0.549$, so $\varphi(d_1) = 0.343$ and vega is $S\sqrt{T}\varphi(d_1)/100$, or **\$99,060 per vol point**. One standard deviation of interpolation uncertainty is therefore **\$26,250**.
 
 Compare that to the desk's normal quoting spread of 0.25 vol points, which is **\$24,770**. The model's own uncertainty about the four-month vol is *larger than the entire spread you planned to charge*. Quote the off-cycle date at your listed-tenor spread and you are not earning a spread, you are taking an unpriced position in your own ignorance. The GP's answer is to widen to around 0.5 vol points, or to go and get a four-month quote, which would cut the standard deviation to 0.13 and the exposure to about \$12,900.
 
@@ -188,8 +186,6 @@ Then the honesty check the same machine hands you free. The posterior difference
 **"The kernel is a hyperparameter detail."** The kernel *is* the model, in the sense that the likelihood is the model in a parametric setting. It fixes smoothness, differentiability, periodicity and how fast information decays with distance. Swapping an RBF for a Matern 3/2 on the same data changes the answer more than swapping optimisers ever will. Defend your kernel choice; do not inherit it as a default.
 
 **"Wide error bars mean the model is bad."** Usually they mean it is honest. A band that widens where you have no observations correctly reports a real state of ignorance. The bad case is the opposite: narrow bands everywhere, which normally means a length-scale fitted too long or an observation noise fitted too small, and a model that will be confidently wrong on its first extrapolation. If a GP shows a 71 bp band at the 30-year point, the fault is your quote coverage, not the mathematics.
-
-**"Bayesian methods need a lot of data."** The opposite: small data is where the prior earns its keep, which is also the argument behind [hierarchical pooling](/blog/trading/math-for-quants/hierarchical-bayes-pooling-math-for-quants) and, where no closed form exists, behind [MCMC](/blog/trading/math-for-quants/mcmc-metropolis-gibbs-math-for-quants). A GP is the lucky case needing no sampler at all.
 
 ## Sources and further reading
 
