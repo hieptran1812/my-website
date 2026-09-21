@@ -50,15 +50,27 @@ prose and recompute it at the precision you printed. Carry unrounded intermediat
 and round only at the end. If a figure and the prose disagree, work out which one
 is wrong before assuming it is the figure.
 
-### Verify a closed form against an independent derivation
+### Verify a closed form against an *independently derived* closed form
 
 When the post derives a pricing formula, checking your own algebra can only catch a
-wrong arithmetic step, never a wrong formula. Price the same instrument a second way
-and compare. The local-time post checked its method-of-images down-and-out against
-the full Reiner-Rubinstein formula and they agreed to 13 decimals, which is what
-makes the derivation trustworthy rather than merely self-consistent.
+wrong arithmetic step, never a wrong formula. Re-deriving your own result by hand
+reproduces your own mistake, so that is not a check. Price the same instrument by a
+**different derivation** and compare.
+
+The local-time post checked its method-of-images down-and-out against the eight-term
+Reiner-Rubinstein formula: they agree to 13 decimals only if the image weight
+`(S/H)^(1-2r/sigma^2)` is right, which is the one place a barrier post can be
+confidently wrong. That is what makes the derivation trustworthy rather than merely
+self-consistent.
 
 Do this whenever the post's central claim *is* a formula.
+
+### Re-grep before you act on a line-level claim
+
+Any claim about a specific line, from the orchestrator or from a checker, is a
+hypothesis about a file that may have changed since it was measured. Re-grep the
+line before touching anything. It costs one tool call and it turns a rewrite into a
+no-op when the claim is already stale, which in wave 5 it was four times out of four.
 
 ### The audit is reader-reproducibility, not truth
 
