@@ -236,10 +236,10 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 11 | regime-switching-hidden-markov | W4 | TODO |
 | 12 | levy-processes-jumps | W4 | TODO |
 | 13 | rough-volatility-fractional-brownian | W4 | TODO |
-| 14 | stopping-times-optional-stopping | W5 | IN PROGRESS: Phase C done (5 webp + 17 cache files on disk), prose not started |
+| 14 | stopping-times-optional-stopping | W5 | **SHIPPED** 4,188 words |
 | 15 | martingale-representation-hedging | W5 | TODO |
 | 16 | change-of-numeraire | W5 | **SHIPPED** 4,209 words |
-| 17 | fokker-planck-kolmogorov-forward | W5 | IN PROGRESS: 2 cache files only, no figures rendered |
+| 17 | fokker-planck-kolmogorov-forward | W5 | **SHIPPED** 4,192 words |
 | 18 | local-time-barriers-reflection | W5 | TODO |
 | 19 | monte-carlo-variance-reduction | W6 | TODO |
 | 20 | numerical-sdes-euler-milstein | W6 | TODO |
