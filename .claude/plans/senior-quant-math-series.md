@@ -240,7 +240,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 15 | martingale-representation-hedging | W5 | **SHIPPED** 4,132 words |
 | 16 | change-of-numeraire | W5 | **SHIPPED** 4,057 words |
 | 17 | fokker-planck-kolmogorov-forward | W5 | **SHIPPED** 4,093 words |
-| 18 | local-time-barriers-reflection | W5 | TODO |
+| 18 | local-time-barriers-reflection | W5 | **SHIPPED** 4,885 words |
 | 19 | monte-carlo-variance-reduction | W6 | TODO |
 | 20 | numerical-sdes-euler-milstein | W6 | TODO |
 | 21 | finite-difference-pde-pricing | W6 | TODO |
