@@ -34,7 +34,7 @@ That figure is the whole post. The left panel is one answer, the middle the othe
 
 Write $\theta_i$ for the quantity you care about, the true long-run Sharpe of strategy $i$, the number it would converge to given infinite data. Write $y_i$ for what you observe, the Sharpe measured over the record you have. Conflating the two is the original sin of the sorted spreadsheet.
 
-**Complete pooling** says every group shares one parameter, $\theta_1 = \dots = \theta_k = \mu$, estimated once from all the data and handed to everybody. Maximally stable, because every observation goes into estimating one thing, and biased for any group that genuinely differs.
+**Complete pooling** says every group shares one parameter, $\theta_1 = \dots = \theta_k = \mu$, estimated once from all the data and handed to everybody. Maximally stable, because every observation estimates one thing, and biased for any group that genuinely differs.
 
 **No pooling** says each group gets its own parameter with no relationship to the others, $\hat\theta_i = y_i$. Unbiased, and for short records catastrophically noisy.
 
@@ -58,7 +58,7 @@ $$
 
 $\sigma_i$ is the standard error of strategy $i$'s measured Sharpe, known from the length of its record. $\tau$ is the standard deviation of true Sharpes across strategies, which you must estimate. These are the two sources of spread in the spreadsheet: $\sigma_i^2$ is **within-group** variation, the noise in one measurement, and $\tau^2$ is **between-group** variation, real differences in skill.
 
-Because both lines are normal the posterior is closed form, and the posterior mean of $\theta_i$ is a precision-weighted average of what this group said and what the population said. In the form that matters:
+Because both lines are normal the posterior is closed form, and the posterior mean of $\theta_i$ is a precision-weighted average of what this group said and what the population said:
 
 $$
 \tilde\theta_i = y_i + B_i\,(\mu - y_i), \qquad B_i = \frac{\sigma_i^2}{\sigma_i^2 + \tau^2}
@@ -70,7 +70,7 @@ Read the limits off that formula and the three positions collapse into one. If $
 
 ## Where the shrinkage factor comes from
 
-You need $\sigma_i$. For a Sharpe estimated over $T$ years the standard error is approximately ${1/\sqrt{T}}$. Lo (2002) gives the exact expression, which adds a correction depending on the Sharpe itself and the sampling frequency, small enough on daily data to ignore in a first pass. So $\sigma_i^2 = 1/T_i$: one year of record gives a standard error of a full 1.0 of Sharpe, four years gives 0.5, sixteen years gives 0.25. A strategy with one year of data and a measured Sharpe of 2.4 therefore has a one-standard-error band running from 1.4 to 3.4.
+You need $\sigma_i$. For a Sharpe estimated over $T$ years the standard error is approximately ${1/\sqrt{T}}$. Lo (2002) gives the exact expression, which adds a correction depending on the Sharpe and the sampling frequency, small enough on daily data to ignore in a first pass. So $\sigma_i^2 = 1/T_i$: one year of record gives a standard error of a full 1.0 of Sharpe, four years gives 0.5, sixteen years gives 0.25. A strategy with one year of data and a measured Sharpe of 2.4 therefore carries a one-standard-error band from 1.4 to 3.4.
 
 Substitute $\sigma_i^2 = 1/T_i$ into the shrinkage factor and something clean appears:
 
@@ -86,9 +86,9 @@ That is why "borrowing strength" is the right phrase. The other strategies are l
 
 ## This is James-Stein with the shrinkage estimated
 
-If $\tilde\theta_i = y_i + B(\mu - y_i)$ looks familiar, it should. It is the shape of the [James-Stein estimator](/blog/trading/math-for-quants/shrinkage-stein-paradox-math-for-quants), which dominates the sample mean in three or more dimensions by pulling every coordinate toward a common target.
+If $\tilde\theta_i = y_i + B(\mu - y_i)$ looks familiar, it should: it is the shape of the [James-Stein estimator](/blog/trading/math-for-quants/shrinkage-stein-paradox-math-for-quants), which dominates the sample mean in three or more dimensions by pulling every coordinate toward a common target.
 
-The difference is where the shrinkage comes from. James-Stein hands you a formula for the constant, derived to minimise total squared error under a known noise variance and a target you pick in advance. The hierarchy instead writes down the population that would produce such shrinkage and estimates its mean and spread from the same data; the James-Stein constant is what that gives you when the answer is forced to be identical for every coordinate.
+The difference is where the shrinkage comes from. James-Stein hands you a formula for the constant, derived to minimise total squared error under a known noise variance and a target picked in advance. The hierarchy instead writes down the population that would produce such shrinkage and estimates its mean and spread from the same data; the James-Stein constant is what that gives you when the answer is forced to be identical for every coordinate.
 
 So the hierarchy is the more honest version of one trade, still buying a large variance reduction with a little bias but no longer asserting how much to buy. It also gives you what one global constant cannot, a *different* factor per group, so eight years of record is not pulled as hard as eight months. Where records differ wildly in length, that is the whole game.
 
@@ -136,7 +136,7 @@ One refinement, so it is not a hidden fudge: the proper hierarchical estimate of
 
 #### Worked example: who wins the \$500m ranking
 
-Sort the raw column and A wins with 2.40, half a Sharpe clear. Sort the shrunk column and B wins with 1.58 against A's 1.55.
+Sort the raw column and A wins with 2.40, half a Sharpe clear. Sort the shrunk column and B wins, 1.58 against A's 1.55.
 
 ![Slope chart from raw Sharpe to shrunk Sharpe, A falling steeply 2.40 to 1.55 and B gently 1.90 to 1.58 so B ends above A, dashed population mean reference](/imgs/blogs/hierarchical-bayes-pooling-math-for-quants-3.webp)
 
@@ -144,7 +144,7 @@ Nothing about B improved. B had three years of record against A's one, so B kept
 
 This is not a quirk of these five numbers, it is the normal case, and the reason is a sampling fact rather than a Bayesian one: the maximum of a set of noisy estimates is biased upward, and the noisiest estimate has the fattest upper tail, so a raw ranking is won disproportionately by whoever has the least data. Suppose all five truly had a Sharpe of 1.34 and differed only in record length. Posting 2.40 puts A just ${(2.40 - 1.34)/1.0 = 1.06}$ standard errors out, which happens 14.5% of the time, better than one year in seven. E would need to be 3.0 standard errors out, which happens 0.14% of the time, about one year in seven hundred. The short record is more than a hundred times likelier to produce that headline by luck alone.
 
-A ranking that does not correct for this does not rank skill. It ranks skill times noise, and noise wins whenever the records are short.
+A ranking that does not correct for this does not rank skill. It ranks skill times noise, and noise wins when the records are short.
 
 ## Worked example 3: what it costs in dollars
 
@@ -182,11 +182,11 @@ One warning if you fit this yourself. Hierarchical posteriors have a nasty geome
 
 The hierarchy buys its variance reduction by asserting the groups are exchangeable draws from one distribution. When that is wrong the cost lands on the extremes, which is where a genuinely exceptional strategy lives.
 
-Suppose one sleeve really does have a true Sharpe of 3.0, in a population estimated at $\mu = 1.34$ with $\tau = 0.50$. That is 3.3 population standard deviations out, which a normal population says essentially cannot happen. With one year of record it is shrunk to $3.0 - 0.80 \times 1.66 = 1.67$, so the model takes a genuine outlier and reports it as slightly above average. No amount of data on the *other* strategies fixes this, because the other strategies created the problem.
+Suppose one sleeve really does have a true Sharpe of 3.0, in a population estimated at $\mu = 1.34$ with $\tau = 0.50$. That is 3.3 population standard deviations out, which a normal says essentially cannot happen. With one year of record it is shrunk to $3.0 - 0.80 \times 1.66 = 1.67$, so the model takes a genuine outlier and reports it as slightly above average. No amount of data on the *other* strategies fixes this, because they created the problem.
 
-**Stratify before you pool.** Exchangeability is a judgement, not a statistic. A crypto market maker and a bond relative-value desk are not plausibly draws from one population. Split into groups that belong together and run a hierarchy inside each.
+**Stratify before you pool.** Exchangeability is a judgement, not a statistic. A crypto market maker and a bond relative-value desk are not plausibly draws from one population, so split into groups that belong together and run a hierarchy inside each.
 
-**Give the population fat tails.** Replace $\theta_i \sim N(\mu, \tau^2)$ with a $t$ distribution on few degrees of freedom, or a two-component mixture. A heavy-tailed population assigns real prior mass to outliers, so an extreme group is shrunk far less. This costs conjugacy and puts you on MCMC.
+**Give the population fat tails.** Replace $\theta_i \sim N(\mu, \tau^2)$ with a $t$ distribution on few degrees of freedom, or a two-component mixture. A heavy-tailed population assigns real prior mass to outliers, so an extreme group shrinks far less. This costs conjugacy and puts you on MCMC.
 
 **Put the structure in the mean.** Instead of one $\mu$, model $\mu_i = \beta' x_i$ with covariates: strategy type, asset class, capacity, holding period. Each strategy is then shrunk toward what similar strategies do rather than toward the firm-wide average, which is more accurate and far easier to defend in a meeting. This is hierarchical regression, and it is where most of the practical value sits.
 
@@ -213,7 +213,7 @@ On a desk the model fits anywhere you have many short records of the same kind o
 ## Sources and further reading
 
 - Efron, B. and Morris, C. (1975). "Data Analysis Using Stein's Estimator and Its Generalizations." *JASA* 70(350), 311 to 319.
-- Efron, B. and Morris, C. (1977). "Stein's Paradox in Statistics." *Scientific American* 236(5), 119 to 127. The readable version, including Clemente.
+- Efron, B. and Morris, C. (1977). "Stein's Paradox in Statistics." *Scientific American* 236(5), 119 to 127.
 - Gelman, A., Carlin, J., Stern, H., Dunson, D., Vehtari, A. and Rubin, D. (2013). *Bayesian Data Analysis*, 3rd edition, chapter 5.
 - Gelman, A. and Hill, J. (2007). *Data Analysis Using Regression and Multilevel/Hierarchical Models*.
 - Gelman, A. (2006). "Prior Distributions for Variance Parameters in Hierarchical Models." *Bayesian Analysis* 1(3), 515 to 534.
@@ -221,7 +221,7 @@ On a desk the model fits anywhere you have many short records of the same kind o
 - Lo, A. (2002). "The Statistics of Sharpe Ratios." *Financial Analysts Journal* 58(4), 36 to 52.
 - Hodges, J. and Sargent, D. (2001). "Counting Degrees of Freedom in Hierarchical and Other Richly-Parameterised Models." *Biometrika* 88(2), 367 to 379.
 - Betancourt, M. and Girolami, M. (2015). "Hamiltonian Monte Carlo for Hierarchical Models." arXiv:1312.0906.
-- Harvey, C., Liu, Y. and Zhu, H. (2016). "... and the Cross-Section of Expected Returns." *Review of Financial Studies* 29(1), 5 to 68.
+- Harvey, C., Liu, Y. and Zhu, H. (2016). "... and the Cross-Section of Expected Returns." *RFS* 29(1), 5 to 68. Why the top of a raw ranking is mostly selection.
 
 The five-strategy book, its Sharpes, its record lengths and every dollar figure derived from them are illustrative arithmetic on assumed inputs. Empirical results attributed to published work are the ones those papers report.
 

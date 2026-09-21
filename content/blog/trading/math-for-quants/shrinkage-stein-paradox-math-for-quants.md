@@ -151,6 +151,8 @@ The absolute changes add to **\$51.2m**, so half the book moves. Asset E is the 
 
 *The lesson: a change in the third decimal place of an expected return is a change in the seventh figure of a position.*
 
+Estimating ${\tau^2}$ from the cross-section like this is empirical Bayes, one step short of writing the hierarchy down and estimating it jointly with everything else. That fuller version, where the shrinkage factor falls out of the model rather than being computed on the side, is [hierarchical Bayes](/blog/trading/math-for-quants/hierarchical-bayes-pooling-math-for-quants).
+
 ## The trade you are actually making
 
 Risk splits into squared bias plus variance. The sample mean sets the bias to zero and accepts whatever variance follows, and at ${T = 60}$ that variance is enormous. Take a fixed intensity $w$ toward a fixed target $t$, so ${\hat\theta_i = (1-w)X_i + w\,t_i}$:
