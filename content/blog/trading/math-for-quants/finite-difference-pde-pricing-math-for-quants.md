@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 19
+readTime: 23
 ---
 
 > [!important]
@@ -32,49 +32,45 @@ A partial differential equation solver has the opposite shape. It does not compu
 
 That figure is the trade in one image. Simulation answers one question at one point. A grid answers every question on the whole domain.
 
-The catch, and the reason this post exists, is that the most natural way to fill in that grid is only **conditionally stable**. Push the time step past a threshold and it does not warn you, throw, or return an infinity. It returns numbers. Plausible ones, for a while.
+The catch is that the most natural way to fill that grid is only **conditionally stable**. Push the time step past a threshold and it does not warn you, throw, or return an infinity. It returns numbers. Plausible ones, for a while.
 
 ## Foundations: the PDE, and what a grid does to it
 
-The pricing equation is the Black-Scholes PDE. Its derivation from a delta-hedging argument is worked through in [Feynman-Kac and the Black-Scholes PDE](/blog/trading/math-for-quants/feynman-kac-black-scholes-pde-math-for-quants), and the companion equation for how the probability density itself evolves is in [the Kolmogorov forward equation](/blog/trading/math-for-quants/fokker-planck-kolmogorov-forward-math-for-quants). Here it is, taken as given:
+The pricing equation is the Black-Scholes PDE, derived from the delta-hedging argument in [Feynman-Kac and the Black-Scholes PDE](/blog/trading/math-for-quants/feynman-kac-black-scholes-pde-math-for-quants) and paired with [the Kolmogorov forward equation](/blog/trading/math-for-quants/fokker-planck-kolmogorov-forward-math-for-quants) for the density's own evolution. Taken as given:
 
 $$\frac{\partial V}{\partial t} + \tfrac12 \sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + rS \frac{\partial V}{\partial S} - rV = 0$$
 
-with $V$ the option value, $S$ the stock price, $r$ the risk-free rate and $\sigma$ the volatility. The payoff at expiry is not part of the equation. It is the **terminal condition**, the thing you march away from.
-
-Two changes of variable make it tractable. Write $\tau = T - t$ for time to maturity, so the solve runs forward in $\tau$ from the payoff. Then write $x = \ln S$, which turns the $S^2$ and $S$ coefficients into constants:
+The payoff at expiry is not part of the equation. It is the **terminal condition**, the thing you march away from. Two changes of variable make it tractable: $\tau = T - t$ so the solve runs forward from the payoff, and $x = \ln S$, which turns the $S^2$ and $S$ coefficients into constants.
 
 $$\frac{\partial V}{\partial \tau} = \tfrac12 \sigma^2 \frac{\partial^2 V}{\partial x^2} + \left(r - \tfrac12\sigma^2\right)\frac{\partial V}{\partial x} - rV$$
 
-That is a diffusion equation with a drift term and a decay term, and it is the whole model.
+That is diffusion plus drift plus decay, and it is the whole model.
 
-A **grid** replaces both continuous variables with a finite mesh: nodes spaced $\Delta x$ apart along the log-price axis, and $M$ steps of size $\Delta t = T/M$ along time. Write $V_j^n$ for the value at node $j$ and time level $n$, then replace each derivative with a difference between neighbours:
+A **grid** replaces both continuous variables with a finite mesh: nodes spaced $\Delta x$ apart along the log-price axis, and $M$ steps of size $\Delta t = T/M$ along time. Write $V_j^n$ for the value at node $j$ and level $n$, then replace each derivative with a difference between neighbours:
 
 $$\frac{\partial V}{\partial x} \approx \frac{V_{j+1} - V_{j-1}}{2\Delta x}, \qquad \frac{\partial^2 V}{\partial x^2} \approx \frac{V_{j+1} - 2V_j + V_{j-1}}{\Delta x^2}$$
 
-Both are exact up to an error of order $\Delta x^2$, as adding the Taylor expansions of $V_{j+1}$ and $V_{j-1}$ confirms: the odd terms cancel. Substituting them turns one equation in calculus into a large system in arithmetic, and the solve is a march from the payoff at $\tau = 0$ out to $\tau = T$.
+Both are exact to order $\Delta x^2$: add the Taylor expansions of $V_{j+1}$ and $V_{j-1}$ and the odd terms cancel. That turns one equation in calculus into a large system in arithmetic, marched from the payoff at $\tau = 0$ out to $\tau = T$.
 
-Every worked number below uses the same instrument: a European call, spot and strike both at \$100, $r = 5\%$, $\sigma = 20\%$, three months to expiry. The Black-Scholes closed form prices it at \$4.614997. The log-price domain runs one unit either side of $\ln 100$, so $S$ spans \$36.788 to \$271.828, cut into 200 intervals of $\Delta x = 0.01$. All dollar figures are illustrative arithmetic on those assumed inputs.
+Every worked number below uses the same instrument: a European call, spot and strike both at \$100, $r = 5\%$, $\sigma = 20\%$, three months to expiry, which the Black-Scholes closed form prices at \$4.614997. The log-price domain runs one unit either side of $\ln 100$, so $S$ spans \$36.788 to \$271.828, cut into 200 intervals of $\Delta x = 0.01$. All dollar figures are illustrative arithmetic on those assumed inputs.
 
 ## Three schemes, and the one thing that separates them
 
 Everything in the difference formulas above concerns the space direction. The scheme is the choice about **time**: when you evaluate the right-hand side, do you use the level you already know, the level you are solving for, or both?
 
-Write $\mathcal{L}V$ for the whole spatial right-hand side. The three answers are:
+Write $\mathcal{L}V$ for the whole spatial right-hand side. The three answers, with what each costs:
 
-$$\text{explicit:} \quad \frac{V^{n+1} - V^n}{\Delta t} = \mathcal{L}V^n$$
+| Scheme | Update rule | Accuracy | Cost per step | Stable when |
+| --- | --- | --- | --- | --- |
+| Explicit | $(V^{n+1} - V^n)/\Delta t = \mathcal{L}V^n$ | $O(\Delta t) + O(\Delta x^2)$ | one multiply per node | $\sigma^2 \Delta t/\Delta x^2 \le 1$ |
+| Implicit | $(V^{n+1} - V^n)/\Delta t = \mathcal{L}V^{n+1}$ | $O(\Delta t) + O(\Delta x^2)$ | one tridiagonal solve | always |
+| Crank-Nicolson | $(V^{n+1} - V^n)/\Delta t = \tfrac12(\mathcal{L}V^{n+1} + \mathcal{L}V^{n})$ | $O(\Delta t^2) + O(\Delta x^2)$ | one tridiagonal solve | always |
 
-$$\text{implicit:} \quad \frac{V^{n+1} - V^n}{\Delta t} = \mathcal{L}V^{n+1}$$
-
-$$\text{Crank-Nicolson:} \quad \frac{V^{n+1} - V^n}{\Delta t} = \tfrac12\left(\mathcal{L}V^{n+1} + \mathcal{L}V^{n}\right)$$
-
-The explicit scheme is a formula: every unknown sits alone on the left, so you evaluate and move on. The other two are systems, because $\mathcal{L}V^{n+1}$ couples each unknown to its two neighbours. Since $\mathcal{L}$ only ever reaches one node either side, that system is **tridiagonal**, and a tridiagonal solve costs the same order of arithmetic as the explicit update, roughly a handful of operations per node. The Thomas algorithm does it in one forward sweep and one back substitution.
+Explicit is a formula: every unknown sits alone on the left, so you evaluate and move on. The other two are systems, because $\mathcal{L}V^{n+1}$ couples each unknown to its neighbours. Since $\mathcal{L}$ reaches only one node either side that system is **tridiagonal**, and the Thomas algorithm solves it in one forward sweep and one back substitution, a handful of operations per node.
 
 ![Three finite difference stencils side by side. Explicit computes one unknown at the earlier time level from three known values at the later level. Implicit ties three unknowns at the earlier level to one known value. Crank-Nicolson connects three unknowns and three knowns, averaging the two. Each carries its accuracy order, its cost per step and its stability condition](/imgs/blogs/finite-difference-pde-pricing-math-for-quants-2.webp)
 
-So the cost per step is comparable across all three, and the accuracy is not. Explicit and implicit are first order in time. Crank-Nicolson averages them, the leading time errors cancel, and it is second order. If cost per step were the only consideration, Crank-Nicolson would win outright and there would be nothing more to say.
-
-There is more to say, and it is the next section.
+Cost per step is comparable across all three; accuracy is not. Crank-Nicolson averages the other two, the leading time errors cancel, and it is second order. If cost per step were the only consideration it would win outright and there would be nothing more to say. The last column is why there is.
 
 ## Stability is the load-bearing idea
 
@@ -107,11 +103,9 @@ Take the desk position: short 1,000,000 of these calls, which the closed form va
 | 95 | 1.053 | \$147.083217 | +\$142,468,220 |
 | 90 | 1.111 | -\$775,462.215640 | nonsense |
 
-Read the middle of that table slowly, because it is the point of the post. At 110 steps the grid is off by \$311 on a \$4.6m book, a rounding error. Take away eleven time steps, an 11% coarser march, and the answer becomes \$4.688861: still a perfectly plausible price for a three-month at-the-money call, nothing about it visibly wrong, and wrong by \$73,864.
+Read the middle of that table slowly, because it is the point of the post. At 110 steps the grid is off by \$311 on a \$4.6m book, a rounding error. Take away eleven time steps, an 11% coarser march, and the answer becomes \$4.688861: still a perfectly plausible price for a three-month at-the-money call, nothing about it visibly wrong, and wrong by \$73,864. Two steps coarser again and the grid says \$8.116760, the right *kind* of number, roughly what this option would fetch at 35% volatility, and wrong by \$3.5m. Only at $M = 95$ is the output obviously absurd.
 
-Two steps coarser again and the grid says \$8.116760, which is the right *kind* of number, roughly what this option would fetch at 35% volatility, and it is wrong by \$3.5m. Only at $M = 95$ does the output become obviously absurd, and by $M = 90$ the grid holds alternating values near plus and minus \$775,000 at adjacent nodes a dollar apart in spot.
-
-The growth rates are exactly what the amplification factor predicts. At $\lambda = 1.010$ the sawtooth is multiplied by 1.0202 each step, and 1.0202 raised to the 99th power is 7.2, so a small initial ripple grows sevenfold: enough to shift the price, not enough to look insane. At $\lambda = 1.111$ the factor is 1.2222, and 1.2222 raised to the 90th is about $7 \times 10^7$. At $\lambda = 0.909$ the same mode is multiplied by 0.8182 each step, which over 110 steps is $2.6 \times 10^{-10}$, so the ripple is annihilated before it can do anything.
+The growth rates are exactly what the amplification factor predicts. At $\lambda = 1.010$ the sawtooth is multiplied by 1.0202 each step, and 1.0202 raised to the 99th power is 7.2: a small ripple grows sevenfold, enough to shift the price, not enough to look insane. At $\lambda = 1.111$ the factor is 1.2222, and 1.2222 raised to the 90th is about $7 \times 10^7$. At $\lambda = 0.909$ it is 0.8182, which over 110 steps is $2.6 \times 10^{-10}$, so the ripple is annihilated.
 
 ![Two panels showing the same explicit grid at two time step counts. At 110 steps and a stability ratio of 0.909 the option value curve is smooth and monotone. At 90 steps and a ratio of 1.111 the same grid holds a violent sawtooth alternating between roughly plus and minus \$775,000 at adjacent nodes](/imgs/blogs/finite-difference-pde-pricing-math-for-quants-3.webp)
 
@@ -119,7 +113,7 @@ The instability is seeded by the payoff itself. A call payoff has a kink at the 
 
 ## Crank-Nicolson, and the failure mode nobody quotes
 
-Both implicit schemes escape this entirely. For the implicit update the amplification factor is $G = 1/(1 + 2\alpha \sin^2(k\Delta x/2))$ with $\alpha = \lambda/2$, which is positive and below 1 for every mode and every step size. For Crank-Nicolson it is
+Both implicit schemes escape this. For the implicit update the amplification factor is $G = 1/(1 + 2\alpha \sin^2(k\Delta x/2))$ with $\alpha = \lambda/2$, positive and below 1 for every mode and every step size. For Crank-Nicolson it is
 
 $$G = \frac{1 - 2\alpha \sin^2(k\Delta x/2)}{1 + 2\alpha \sin^2(k\Delta x/2)}$$
 
@@ -145,13 +139,13 @@ Here is the price profile Crank-Nicolson returns around the strike, against the 
 | \$100.200 | 0.4559 | 0.5312 | 0.5312 |
 | \$100.401 | 0.5549 | 0.5390 | 0.5390 |
 
-At the money the Crank-Nicolson price is 0.5235 against a true 0.5233, an error of \$2,000 on the \$10m ticket. You would ship that. But the node one tick below reads 0.5908 where the truth is 0.5154, an error of \$754,000, and the node one tick above reads 0.4559 where the truth is 0.5312. The price is not rising with spot. It is zig-zagging.
+At the money Crank-Nicolson gives 0.5235 against a true 0.5233, an error of \$2,000 on the \$10m ticket. You would ship that. But the node one tick below reads 0.5908 where the truth is 0.5154, an error of \$754,000, and the node one tick above reads 0.4559 where the truth is 0.5312. The price is not rising with spot. It is zig-zagging.
 
 Now hedge it. Delta is the slope through the two neighbouring nodes:
 
 $$\Delta = \frac{1}{S}\cdot\frac{V_{j+1} - V_{j-1}}{2 \Delta x} = \frac{1}{100}\cdot\frac{0.4559 - 0.5908}{0.004} = -0.337$$
 
-The true delta of this digital is $+0.039288$. The grid says sell 3,370,000 shares. The truth says buy 392,880 shares. That is a hedge wrong by 3,762,880 shares, roughly \$376m of the wrong-way position, from a scheme whose at-the-money *price* was within \$2,000.
+The true delta of this digital is $+0.039288$, which at the money coincides with the vanilla call's gamma below because $S\varphi(d_1) = Ke^{-r\tau}\varphi(d_2)$. The grid says sell 3,370,000 shares. The truth says buy 392,880 shares. That is a hedge wrong by 3,762,880 shares, roughly \$376m of the wrong-way position, from a scheme whose at-the-money *price* was within \$2,000.
 
 #### The fix: Rannacher start-up
 
@@ -163,7 +157,7 @@ The Rannacher column above is the same solver with that one change. Every entry 
 
 ![A chart of digital option value against spot from \$98.8 to \$101.2 with the strike at \$100. The Crank-Nicolson series zig-zags violently node to node, peaking at 0.5908 just below the strike and dropping to 0.4559 just above it, while the Rannacher series rises in a clean straight line through the true values](/imgs/blogs/finite-difference-pde-pricing-math-for-quants-4.webp)
 
-This is not only a digital problem. A vanilla call's kink is milder than a jump, but it is still non-smooth, and the same ringing shows up in its **gamma**, which is the second difference and therefore the most sensitive thing on the grid. On the vanilla call at $\Delta x = 0.002$:
+This is not only a digital problem. A vanilla call's kink is milder than a jump but still non-smooth, and the same ringing shows up in its **gamma**, the second difference and so the most sensitive thing on the grid. On the vanilla call at $\Delta x = 0.002$:
 
 | Steps $M$ | $\alpha$ | Price | Delta | Gamma | Gamma error |
 | --- | --- | --- | --- | --- | --- |
@@ -184,7 +178,7 @@ That is the real danger of this scheme. It does not fail where you are looking.
 
 A grid needs edges, and a real stock price has no upper bound, so you truncate. Both decisions are modelling, not bookkeeping.
 
-At the edges you impose what you know. For a call, value goes to zero as $S \to 0$, and far above the strike the option is worth the discounted forward, $V \approx S - Ke^{-r\tau}$. Those are exact asymptotics, so the only error is that you applied them at a finite distance rather than at infinity.
+At the edges you impose what you know. For a call, value goes to zero as $S \to 0$, and far above the strike the option is worth the discounted forward, $V \approx S - Ke^{-r\tau}$. Those are exact asymptotics, so the only error is applying them at a finite distance rather than at infinity.
 
 How far is far enough? Hold $\Delta x$ at 0.01 and widen the domain, measuring against the closed form. The natural scale is $\sigma\sqrt{T} = 0.10$, one standard deviation of the log return.
 
@@ -198,9 +192,9 @@ How far is far enough? Hold $\Delta x$ at 0.01 and widen the domain, measuring a
 | 0.30 | 3.0 | \$74.08 to \$134.99 | \$4.610081 | \$0 |
 | 1.00 | 10.0 | \$36.79 to \$271.83 | \$4.610081 | \$0 |
 
-The truncation cost column is the price difference from the widest domain, on a million options. Past three standard deviations it is zero to six decimals: the extra 140 nodes between three and ten standard deviations buy nothing at all. Below two it becomes the dominant error in the whole calculation, and at one standard deviation the boundary condition is effectively pricing the option for you.
+The truncation cost column is the price difference from the widest domain, on a million options. Past three standard deviations it is zero to six decimals: the extra 140 nodes between three and ten buy nothing at all. Below two it becomes the dominant error in the whole calculation, and at one standard deviation the boundary condition is effectively pricing the option for you.
 
-The residual \$4,916 gap between \$4.610081 and the closed-form \$4.614997 is not truncation. It is the $\Delta x^2$ space error, and it shrinks only by refining the mesh.
+The residual \$4,916 gap between \$4.610081 and the closed-form \$4.614997 is not truncation. It is the $\Delta x^2$ space error, and only a finer mesh shrinks it.
 
 ## Greeks for free, which is the actual argument
 
@@ -232,45 +226,41 @@ An American option can be exercised at any time, so its value can never sit belo
 
 $$V_j^{n+1} \leftarrow \max\left(V_j^{n+1},\ \text{payoff}(S_j)\right)$$
 
-Each node already carries the continuation value, what the option is worth if you hold one more step, so comparing it with the payoff *is* the exercise decision, taken everywhere at once, and the early-exercise boundary is where the two meet. The theory behind that comparison is [optimal stopping](/blog/trading/math-for-quants/optimal-stopping-secretary-when-to-take-the-trade-math-for-quants), and the backward induction is the same as in [dynamic programming for optimal execution](/blog/trading/math-for-quants/dynamic-programming-optimal-execution-math-for-quants).
-
-Simulation finds this genuinely hard, because a forward-simulated path does not know its own continuation value. Recovering it needs a regression across paths, which is Longstaff-Schwartz and a considerably larger piece of machinery.
+Each node already carries the continuation value, so comparing it with the payoff *is* the exercise decision, taken everywhere at once, and the early-exercise boundary is where the two meet. The theory is in [optimal stopping](/blog/trading/math-for-quants/optimal-stopping-secretary-when-to-take-the-trade-math-for-quants) and the backward induction in [dynamic programming for optimal execution](/blog/trading/math-for-quants/dynamic-programming-optimal-execution-math-for-quants). Simulation finds this hard, because a forward path does not know its own continuation value; recovering it needs a regression across paths, which is Longstaff-Schwartz and a much larger piece of machinery.
 
 #### Worked example 4: an American put, checked two ways
 
-Same instrument, a put this time, strike \$100. Before trusting the American number, verify the solver on the problem that has a closed form: switch the exercise constraint off and the same grid returns \$3.372764 for the European put against the Black-Scholes value of \$3.372777, agreeing to five significant figures. **That check is against the analytic formula, not against a finer grid**, which is the only version of it that catches a wrong scheme rather than a slow one.
+Same instrument, a put this time, strike \$100. Before trusting the American number, verify the solver on the problem that has a closed form: switch the exercise constraint off and the same grid returns \$3.372764 for the European put against the Black-Scholes value of \$3.372777, agreeing to five significant figures. **That check is against the analytic formula, not against a finer grid.** Checking one approximation against a better approximation only proves the two converge to the same place, never that the place is right.
 
-Switch the constraint back on and the grid gives \$3.4796 per option. An independent method, a 40,000-step binomial tree, gives \$3.4798. Two different discretisations of two different formulations agreeing to \$0.0002 is evidence in a way that refining either one alone would not be.
-
-On 1,000,000 puts: European \$3,372,800, American \$3,479,600, so the right to exercise early is worth \$106,800. The grid also hands back the boundary: today it is optimal to exercise below about \$86.94 and to hold above it.
+Switch the constraint back on and the grid gives \$3.4796 per option, against \$3.4798 from a 40,000-step binomial tree. Two different discretisations of two different formulations agreeing to \$0.0002 is evidence in a way that refining either alone would not be. On 1,000,000 puts: European \$3,372,800, American \$3,479,600, so the right to exercise early is worth \$106,800. The grid also hands back the boundary: today it is optimal to exercise below about \$86.94 and to hold above it.
 
 ## The honest limit
 
 The curse of dimensionality ends this method, and it ends it abruptly. With $N$ nodes per dimension, a $d$-factor model needs $N^d$ of them. At $N = 200$: one factor is 200 nodes, two is 40,000, three is 8,000,000, four is 1.6 billion before you have taken a single time step.
 
-One or two factors is comfortable, which covers most equity and rate exotics. Three is painful and needs specialist splitting methods. Beyond that the grid is finished and Monte Carlo takes over, because simulation error depends on the number of paths and not on the number of dimensions. The two methods are not rivals. They own different parts of the problem.
+One or two factors is comfortable, which covers most equity and rate exotics. Three is painful and needs specialist splitting methods. Beyond that the grid is finished and Monte Carlo takes over, because simulation error depends on the number of paths and not the number of dimensions. The two methods are not rivals. They own different parts of the problem.
 
 ## Common misconceptions
 
-**"Implicit is always better than explicit."** Implicit is unconditionally stable, which is worth a great deal, but both are first order in time and implicit is *more* diffusive. In the table above, plain implicit at 110 steps gave \$4.605542 against explicit's \$4.614686 at the same step count: the stable scheme was the less accurate one. Explicit is also trivial to code, trivial to parallelise, and fine when $\Delta x$ is coarse. What you must never do is run it without checking $\lambda$.
+**"Implicit is always better than explicit."** Implicit is unconditionally stable, which is worth a great deal, but both are first order in time and implicit is *more* diffusive. Plain implicit at 110 steps gives \$4.605542 against explicit's \$4.614686 at the same step count: the stable scheme was the less accurate one. Explicit is also trivial to code and to parallelise, and fine when $\Delta x$ is coarse. What you must never do is run it without checking $\lambda$.
 
-**"Crank-Nicolson is unconditionally accurate."** It is unconditionally *stable*. Those are different claims, and the gap between them is worked example 2 and the gamma table: a scheme that never blows up, returning a negative gamma on a long call. Stability is a statement that errors do not grow. It is not a statement that they are small.
+**"Crank-Nicolson is unconditionally accurate."** It is unconditionally *stable*. The gap between those two claims is worked example 2 and the gamma table: a scheme that never blows up, returning a negative gamma on a long call. Stability says errors do not grow. It does not say they are small.
 
-**"Finite differences are obsolete now that we have Monte Carlo."** Simulation is the only option past three factors, and it is the wrong tool below that. For a single-factor American or barrier product a grid is faster, gives exact early-exercise handling, and returns the Greeks for free, which is the number a desk actually trades on.
+**"Finite differences are obsolete now that we have Monte Carlo."** Simulation is the only option past three factors and the wrong tool below that. For a single-factor American or barrier product a grid is faster, handles early exercise exactly, and returns the Greeks for free.
 
-**"A finer grid is always a better grid."** Refining $\Delta x$ forces a quadratically smaller $\Delta t$ under the explicit scheme, and makes Crank-Nicolson ring harder under any time step. Refinement has to be done in both directions at once, with the scheme's stability and damping behaviour in mind.
+**"A finer grid is always a better grid."** Refining $\Delta x$ forces a quadratically smaller $\Delta t$ under the explicit scheme, and makes Crank-Nicolson ring harder under any time step. Refinement has to be done in both directions at once.
 
 ## Sources and further reading
 
-- Paul Wilmott, Sam Howison and Jeff Dewynne, *The Mathematics of Financial Derivatives: A Student Introduction*, Cambridge University Press, 1995. The standard derivation of the pricing PDE and its finite-difference treatment.
-- Daniel J. Duffy, *Finite Difference Methods in Financial Engineering: A Partial Differential Equation Approach*, Wiley, 2006. Book-length treatment, including the case against naive Crank-Nicolson.
+- Paul Wilmott, Sam Howison and Jeff Dewynne, *The Mathematics of Financial Derivatives: A Student Introduction*, Cambridge University Press, 1995. The standard derivation and its finite-difference treatment.
+- Daniel J. Duffy, *Finite Difference Methods in Financial Engineering*, Wiley, 2006. Book-length, including the case against naive Crank-Nicolson.
 - Rolf Rannacher, "Finite element solution of diffusion problems with irregular data", *Numerische Mathematik* 43, 309-327, 1984. The start-up procedure.
-- Michael Giles and Rebecca Carter, "Convergence analysis of Crank-Nicolson and Rannacher time-marching", *Journal of Computational Finance* 9(4), 2006. Why two steps of implicit Euler restore the convergence order.
+- Michael Giles and Rebecca Carter, "Convergence analysis of Crank-Nicolson and Rannacher time-marching", *Journal of Computational Finance* 9(4), 2006.
 - Michael Brennan and Eduardo Schwartz, "The Valuation of American Put Options", *Journal of Finance* 32(2), 449-462, 1977. The paper that put American options on a grid.
 - Richard Courant, Kurt Friedrichs and Hans Lewy, "Über die partiellen Differenzengleichungen der mathematischen Physik", *Mathematische Annalen* 100, 32-74, 1928. The stability condition.
 - Domingo Tavella and Curt Randall, *Pricing Financial Instruments: The Finite Difference Method*, Wiley, 2000.
 
-All dollar figures in this post are illustrative arithmetic computed on the stated assumed inputs, not market observations.
+All dollar figures here are illustrative arithmetic on the stated assumed inputs, not market observations.
 
 ## In the interview room and on the desk
 

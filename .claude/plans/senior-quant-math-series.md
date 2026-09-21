@@ -243,7 +243,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 18 | local-time-barriers-reflection | W5 | **SHIPPED** 4,675 words |
 | 19 | monte-carlo-variance-reduction | W7 | **SHIPPED** 4,080 words |
 | 20 | numerical-sdes-euler-milstein | W6 | TODO |
-| 21 | finite-difference-pde-pricing | W7 | **SHIPPED** 5,158 words |
+| 21 | finite-difference-pde-pricing | W7 | **SHIPPED** 5,071 words |
 | 22 | convex-duality-shadow-prices | W7 | TODO |
 | 23 | optimal-transport-wasserstein | W8 | TODO |
 | 24 | optimal-stopping-secretary-when-to-take-the-trade | W2 | **SHIPPED** 4,354 words |
