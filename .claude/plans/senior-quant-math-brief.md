@@ -158,6 +158,23 @@ These four have cost the corpus hundreds of fixes. They are not style choices.
    dropped by the site renderer and the reader sees literal dollar signs. Write
    `${1/n}$`. Any span whose content begins with a digit and contains no
    `\`, `{`, `}`, `^` or `_` must be brace-wrapped.
+
+   Find them with a scan that applies the exemption itself, not with a bare grep;
+   a grep returns hits the exemption then clears, which is how a clean post gets
+   reported as having sixteen defects:
+
+   ```python
+   import re
+   body = open(PATH).read().split('---', 2)[2]
+   out, infence = [], False
+   for l in body.split('\n'):
+       if re.match(r'^\s*```', l): infence = not infence; out.append(''); continue
+       out.append('' if infence else l)
+   nf = '\n'.join(out)
+   bad = [m.group(0) for m in
+          re.finditer(r'(?<![\\$\w])\$(\d(?:[^$\n\\]|\\.){0,80}?)\$(?![\w$])', nf)
+          if not re.search(r'[\\{}^_]', m.group(1))]
+   ```
 2. **Escape currency everywhere, including image alt text**: `\$50m`, `\$100k`,
    never a bare `$50m`. A bare currency dollar pairs with the next real formula's
    delimiter and swallows the sentence between them. Alt text is the easy one to
