@@ -23,11 +23,11 @@ readTime: 21
 
 ## The measurement that broke the models
 
-Two traders argue about a one-week index put. One prices it off a Heston model calibrated to the three-month surface, gets a number, and cannot understand why the market keeps paying more. The other stops modelling and looks at the data.
+Two traders argue about a one-week index put. One prices it off a Heston model calibrated to the three-month surface and cannot understand why the market keeps paying more. The other stops modelling and looks at the data.
 
-This is not a small discrepancy at the edge of a surface. It is the most persistent failure of the entire stochastic volatility programme: models built by serious people over three decades, from [Heston's square-root variance process](/blog/trading/math-for-quants/jump-diffusion-stochastic-volatility-math-for-quants) onward, cannot produce a short-dated smile as steep as the one the market quotes.
+That gap is the most persistent failure of the whole stochastic volatility programme: [Heston's square-root variance process](/blog/trading/math-for-quants/jump-diffusion-stochastic-volatility-math-for-quants) and its successors cannot produce a short-dated smile as steep as the one the market quotes.
 
-The resolution came from measurement rather than modelling. Every one of those models writes volatility as a diffusion, and a diffusion is a particular kind of path: its moves scale with the square root of the lag. That is not a modelling choice anyone examined, it is what you get for free when you drive a process with Brownian motion. So Gatheral, Jaisson and Rosenbaum asked the empirical question nobody had asked with high-frequency data: **does realised volatility actually scale that way?** It does not. The exponent governing the scaling, the Hurst exponent, comes out near 0.1 instead of 0.5, on essentially every liquid asset they looked at.
+The resolution came from measurement rather than modelling. Every one of those models writes volatility as a diffusion, and a diffusion's moves scale with the square root of the lag. That is not a choice anyone examined, it is what you get for free when you drive a process with Brownian motion. So Gatheral, Jaisson and Rosenbaum asked the empirical question nobody had asked with high-frequency data: **does realised volatility actually scale that way?** It does not. The exponent governing the scaling, the Hurst exponent, comes out near 0.1 instead of 0.5, on essentially every liquid asset they looked at.
 
 That exponent is the whole post, so start with what it is.
 
@@ -37,9 +37,9 @@ One dial, three settings. The middle column is what every classical model assume
 
 ## Foundations: what you need first
 
-**Realised volatility** is volatility you measure rather than imply. Take a day's worth of five-minute returns, square them, add them up, annualise the total: that is the realised variance for the day, and its square root is realised volatility. It comes from prices alone, with no option and no model. A long history of daily values gives you a **time series of volatility itself**, which is the object whose path regularity we are about to measure.
+**Realised volatility** is volatility you measure rather than imply. Take a day's worth of five-minute returns, square them, add them up, annualise: that is realised variance, and its square root is realised volatility. A long history of daily values gives you a **time series of volatility itself**, which is the object whose path regularity we are about to measure.
 
-**Brownian motion** $W_t$ ([built from scratch here](/blog/trading/math-for-quants/brownian-motion-random-walk-math-for-quants)) has independent Gaussian increments with $\mathrm{Var}(W_{t+\Delta} - W_t) = \Delta$, so the standard deviation scales as $\sqrt{\Delta}$. That square root is the signature of independence, and anything a Brownian motion drives inherits it.
+**Brownian motion** $W_t$ ([built from scratch here](/blog/trading/math-for-quants/brownian-motion-random-walk-math-for-quants)) has independent Gaussian increments with $\mathrm{Var}(W_{t+\Delta} - W_t) = \Delta$, so its moves scale as $\sqrt{\Delta}$. That square root is the signature of independence, and anything a Brownian motion drives inherits it.
 
 **The Hurst exponent** generalises exactly that. Suppose a process has stationary increments whose typical size scales as a power of the lag:
 
@@ -57,7 +57,7 @@ If you have met $H$ before it was probably applied to **prices**, in a rescaled-
 
 ## Measuring the exponent: the scaling of increments
 
-Because $H$ is defined by how increment size scales with lag, you estimate it by measuring increment size at several lags and reading off the slope. Take logs of the relation above:
+Because $H$ is defined by how increment size scales with lag, you estimate it at several lags and read off the slope. Take logs of the relation above:
 
 $$\log \mathbb{E}\big|X_{t+\Delta} - X_t\big| \;=\; \log K \;+\; H\log \Delta .$$
 
@@ -69,7 +69,7 @@ The increment sizes below are illustrative inputs chosen to be consistent with t
 
 $$H \;=\; \frac{\log(0.175 / 0.140)}{\log 5} \;=\; \frac{\log 1.25}{1.6094} \;=\; 0.139 .$$
 
-Add a 25-day reading of 0.220 and you get two more estimates for free: 0.142 from five days to 25 days, and 0.140 from one day to 25 days. Three overlapping windows agreeing to the third decimal is what "stable across scales" means in practice, and it is why the finding survived scrutiny.
+Add a 25-day reading of 0.220 and two more estimates come free: 0.142 from five days to 25 days, 0.140 from one day to 25 days. Three overlapping windows agreeing to the third decimal is what "stable across scales" means, and it is why the finding survived scrutiny.
 
 ![Table of mean absolute change in log volatility at lags of two hours, one day, five days and twenty-five days, showing measured values of 0.115, 0.140, 0.175 and 0.220 against the values a Hurst exponent of one half demands, 0.070, 0.140, 0.313 and 0.700, with implied exponents of 0.139 and 0.142, and a callout that five-day moves are 55.9 percent of what a diffusion needs while two-hour moves are 1.64 times as large](/imgs/blogs/rough-volatility-fractional-brownian-math-for-quants-2.webp)
 
@@ -93,25 +93,25 @@ Then comes the bill, and this is why the field is technically hard rather than m
 
 For $H \neq \tfrac{1}{2}$, fractional Brownian motion is **not a semimartingale** (Rogers 1997). A semimartingale decomposes into a local martingale plus a finite-variation part, and it is precisely the class for which the Ito integral is defined. Lose that and the whole toolkit goes at once: no [Ito's lemma](/blog/trading/math-for-quants/ito-integral-itos-lemma-math-for-quants) for the volatility driver, no quadratic variation to work with (for $H \lt \tfrac{1}{2}$ it is infinite rather than equal to $t$), no [Feynman-Kac route to a pricing PDE](/blog/trading/math-for-quants/feynman-kac-black-scholes-pde-math-for-quants).
 
-You also lose the Markov property, which hurts more in practice than the missing calculus. In [Heston](/blog/trading/math-for-quants/jump-diffusion-stochastic-volatility-math-for-quants) today's variance is a sufficient statistic: hand the model the current level and it prices everything. Under a fractional driver the covariance depends on $t$ and $s$ separately, so the **entire history** conditions the future. There is no finite state to carry, which is why simulation is expensive and calibration slow.
+You also lose the Markov property, which hurts more in practice than the missing calculus. In [Heston](/blog/trading/math-for-quants/jump-diffusion-stochastic-volatility-math-for-quants) today's variance is a sufficient statistic. Under a fractional driver the covariance depends on $t$ and $s$ separately, so the **entire history** conditions the future. There is no finite state to carry, which is why simulation is expensive and calibration slow.
 
-What you do **not** lose is arbitrage-freeness, and the reason matters. The fractional process drives the *volatility*; the asset price is still $\mathrm{d}S_t = \sqrt{v_t}\,S_t\,\mathrm{d}Z_t$ with $Z$ an ordinary Brownian motion. The price remains a semimartingale, [risk-neutral pricing](/blog/trading/math-for-quants/martingales-risk-neutral-measure-math-for-quants) survives intact, and Rogers's arbitrage result does not bite.
+What you do **not** lose is arbitrage-freeness. The fractional process drives the *volatility*; the asset price is still $\mathrm{d}S_t = \sqrt{v_t}\,S_t\,\mathrm{d}Z_t$ with $Z$ an ordinary Brownian motion. The price remains a semimartingale, [risk-neutral pricing](/blog/trading/math-for-quants/martingales-risk-neutral-measure-math-for-quants) survives intact, and Rogers's arbitrage result does not bite.
 
 ## What the empirical result actually says
 
 Gatheral, Jaisson and Rosenbaum applied this estimator to the Oxford-Man Institute realized library and concluded, in the paper's own words, that "log-volatility behaves essentially as a fractional Brownian motion with Hurst exponent $H$ of order 0.1, at any reasonable time scale". The headline numbers are $H = 0.142$ for the S&P 500 and $H = 0.139$ for the NASDAQ. They named the model **RFSV**, rough fractional stochastic volatility, the "rough" flagging $H \lt \tfrac{1}{2}$ against the earlier fractional literature, which had assumed $H \gt \tfrac{1}{2}$ to capture long memory.
 
-The robustness is the striking part. Mouti (2026) extends the exercise across a much wider universe and reports class-median estimates of 0.07 to 0.10 for rates, FX, agriculture, energy and metals, 0.13 for single stocks and 0.20 for equity indices. Different asset classes, different microstructures, different decades, and the exponent stays far below 0.5 everywhere. Use the published numbers; do not substitute an estimate of your own without doing the work.
+The robustness is the striking part. Mouti (2026) extends the exercise across a much wider universe and reports class-median estimates of 0.07 to 0.10 for rates, FX, agriculture, energy and metals, 0.13 for single stocks and 0.20 for equity indices. Different asset classes, different microstructures, and the exponent stays far below 0.5 everywhere. Use the published numbers; do not substitute an estimate of your own without doing the work.
 
 ## Why the classical models miss the short end
 
-Here is where the measurement pays for itself. Define the **at-the-money skew** as the sensitivity of implied volatility to log-strike at the money,
+Here is where the measurement pays for itself. Define the **at-the-money skew** as the sensitivity of implied volatility to log-strike at the money:
 
 $$\psi(\tau) \;=\; \left|\frac{\partial \sigma_{\mathrm{BS}}(k,\tau)}{\partial k}\right|_{k=0},$$
 
-where $k = \log(K/F)$. It is the steepness of the [volatility smile](/blog/trading/options-volatility/the-volatility-smile-and-skew-why-otm-puts-cost-more) at a given maturity $\tau$, and its behaviour as $\tau \to 0$ is the cleanest test a volatility model faces.
+where $k = \log(K/F)$. It is the steepness of the [volatility smile](/blog/trading/options-volatility/the-volatility-smile-and-skew-why-otm-puts-cost-more) at maturity $\tau$, and its behaviour as $\tau \to 0$ is the cleanest test a volatility model faces.
 
-For **any** diffusive stochastic volatility model, Heston included, the short-maturity at-the-money skew converges to a finite constant as $\tau \to 0$ (Alos, Leon and Vives 2007). The reason is structural: over a vanishing horizon a diffusive variance cannot move far enough to bend the smile, so the skew saturates. Market skew does not saturate, it keeps steepening all the way into the front expiry.
+For **any** diffusive stochastic volatility model, Heston included, that skew converges to a finite constant as $\tau \to 0$ (Alos, Leon and Vives 2007). The reason is structural: over a vanishing horizon a diffusive variance cannot move far enough to bend the smile, so the skew saturates. Market skew does not saturate, it keeps steepening into the front expiry.
 
 Fukasawa (2017) supplied the missing piece. A volatility driven by fractional Brownian motion with exponent $H$ generates
 
@@ -142,7 +142,7 @@ Bayer, Friz and Gatheral (2016) turned the measurement into a pricing model. Rat
 
 $$v_u \;=\; \xi_0(u)\,\exp\!\left(\eta\,\widetilde{W}^H_u \;-\; \tfrac{1}{2}\eta^2 u^{2H}\right),$$
 
-with the asset driven by $\mathrm{d}S_t = \sqrt{v_t}\,S_t\,\mathrm{d}Z_t$ and correlation $\rho$ between $\widetilde{W}^H$ and $Z$. Read the pieces: $\xi_0(u)$ is today's forward variance curve, taken as a market input rather than fitted; the exponential keeps variance positive; the $-\tfrac{1}{2}\eta^2 u^{2H}$ term is the compensator that makes the expectation match $\xi_0(u)$ exactly, so the model matches the variance term structure by construction.
+with the asset driven by $\mathrm{d}S_t = \sqrt{v_t}\,S_t\,\mathrm{d}Z_t$ and correlation $\rho$ between $\widetilde{W}^H$ and $Z$. The structure is the point: $\xi_0(u)$ is today's forward variance curve, a market input rather than a fitted parameter, and the $-\tfrac{1}{2}\eta^2 u^{2H}$ compensator makes the expectation match it exactly, so the variance term structure is matched by construction.
 
 That leaves **three parameters**: $H$ for roughness, $\eta$ for volatility of volatility, $\rho$ for the spot-volatility correlation. Their reported SPX fit was $H = 0.05$, $\eta = 2.3$, $\rho = -0.9$, and it fits the whole surface including the shortest-dated smile, with fewer parameters than the conventional models it beats. Note that the fitted $H$ is smaller than the 0.142 estimated from realised volatility. The two are not required to agree, and that gap is a loose end the literature has not closed.
 
@@ -180,8 +180,6 @@ The same crash, the same position, the same hedging. The entire \$6,084,000 diff
 **"$H \lt 0.5$ means prices are predictable."** This is the most expensive confusion in the topic. The Hurst exponent here is measured on the **volatility** process, not on returns. Anti-persistence in volatility says a volatility spike tends to be partly reversed; it says nothing about the direction of the underlying. Returns in these models are driven by an ordinary Brownian motion and remain a martingale under the pricing measure. If you find $H \lt 0.5$ on *prices* you have found something else entirely, and it is usually microstructure.
 
 **"This is settled, and the old models are wrong."** Neither half holds. Cont and Das (2024) and Rogers (2019) give serious reasons the time-series estimate may be an artefact of measuring volatility with noise. And Heston is not "wrong", it is a model whose short-maturity skew saturates, which is a known and quantified limitation you can price around. Its three-month and one-year surfaces remain perfectly serviceable.
-
-**"A smaller $H$ is just faster mean reversion, or just jumps."** Both look similar over a limited range of lags: fast mean reversion also flattens long-horizon scaling, and jumps also steepen the front month. That similarity is precisely Rogers's argument, and it is why a single-scale estimate proves nothing. What distinguishes roughness is that one exponent holds across scales from hours to months, and that the same exponent predicts the smile, which is what the three agreeing estimates in worked example 1 illustrate.
 
 ## Summary
 
