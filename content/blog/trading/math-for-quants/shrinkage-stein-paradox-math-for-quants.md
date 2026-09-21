@@ -22,7 +22,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 18
+readTime: 21
 ---
 
 > [!important]
@@ -63,11 +63,11 @@ Score an estimate with a **loss function**, here total squared error ${L(\theta,
 
 $$R(\theta, X) \;=\; p\,\sigma^2 \qquad \text{for every } \theta .$$
 
-A flat line. Its risk does not depend on where the truth is, which is the mark of an estimator that treats all of parameter space alike.
+A flat line: its risk does not depend on where the truth is, which is the mark of an estimator that treats all of parameter space alike.
 
-Now the two definitions. Estimator $\delta_1$ **dominates** $\delta_2$ if ${R(\theta,\delta_1) \le R(\theta,\delta_2)}$ for every $\theta$, strictly somewhere. An estimator is **admissible** if nothing dominates it. Admissibility is a low bar: it does not say an estimator is good, only that no single alternative beats it everywhere at once.
+Now the two definitions. Estimator $\delta_1$ **dominates** $\delta_2$ if ${R(\theta,\delta_1) \le R(\theta,\delta_2)}$ for every $\theta$, strictly somewhere, and an estimator is **admissible** if nothing dominates it. Admissibility is a low bar: it does not say an estimator is good, only that no single alternative beats it everywhere at once.
 
-The sample mean fails even that bar. Stein (1956) proved that for ${p \ge 3}$ the sample mean of a multivariate normal is **inadmissible** under squared error loss. For ${p = 1}$ and ${p = 2}$ it is admissible and everything you were taught holds. At ${p = 3}$ it stops holding, and no continuity argument warns you.
+The sample mean fails even that bar. Stein (1956) proved that for ${p \ge 3}$ the sample mean of a multivariate normal is **inadmissible** under squared error loss. For ${p = 1}$ and ${p = 2}$ it is admissible and everything you were taught holds. At ${p = 3}$ it stops, and no continuity argument warns you.
 
 ![The James-Stein risk curve sits strictly under the sample mean's flat risk line at every true mean, which is what it means to say the sample mean is dominated](/imgs/blogs/shrinkage-stein-paradox-math-for-quants-2.webp)
 
@@ -79,7 +79,7 @@ James and Stein (1961) wrote down the estimator that does it. For ${X \sim N(\th
 
 $$\hat{\theta}^{\,\mathrm{JS}} \;=\; \left( 1 \;-\; \frac{(p-2)\,\sigma^2}{\lVert X \rVert^2} \right) X .$$
 
-Every piece earns its place. The numerator ${(p-2)\sigma^2}$ grows with dimension, so the more quantities you estimate jointly the harder you pull. The denominator is the squared length of the observed vector, so when the estimates are large relative to their noise you pull less. The risk is exactly
+Every piece earns its place. The numerator ${(p-2)\sigma^2}$ grows with dimension, so the more quantities you estimate jointly the harder you pull; the denominator is the squared length of the observed vector, so when the estimates are large relative to their noise you pull less. The risk is exactly
 
 $$R(\theta, \hat\theta^{\,\mathrm{JS}}) \;=\; p\sigma^2 \;-\; (p-2)^2 \sigma^4 \,\mathbb{E}\!\left[ \frac{1}{\lVert X \rVert^2} \right] ,$$
 
@@ -143,7 +143,7 @@ In money: a \$10m position in asset A carried an expected profit of \$2.40m a ye
 
 Estimates matter only through the positions they produce. Assume the assets are uncorrelated, purely so the arithmetic stays visible, which makes ${\Sigma^{-1}}$ diagonal and the mean-variance weights proportional to ${\mu_i / \sigma_i^2}$, normalised to sum to one. Real correlations make the effect larger, not smaller, because ${\Sigma^{-1}}$ amplifies exactly the directions you measured worst, as [post 1 on random matrix theory](/blog/trading/math-for-quants/random-matrix-theory-covariance-cleaning-math-for-quants) shows.
 
-On raw means, ${2.00/81 = 0.0247}$, ${1.40/16 = 0.0875}$, ${0.90/36 = 0.0250}$, ${0.40/9 = 0.0444}$ and ${-0.20/49 = -0.0041}$ sum to 0.1776. Divide through, repeat with the shrunk means, and scale both to \$100m:
+On raw means, ${2.00/81 = 0.0247}$, ${1.40/16 = 0.0875}$, ${0.90/36 = 0.0250}$, ${0.40/9 = 0.0444}$ and ${-0.20/49 = -0.0041}$ sum to 0.1776. Divide through, repeat with the shrunk means, and scale to \$100m:
 
 | Asset | Raw position | Shrunk position | Change |
 | --- | --- | --- | --- |
@@ -201,9 +201,9 @@ $$R \;=\; 0.04 \times 0.1875 \;+\; 0.64 \times 0.7150 \;=\; 0.4651 ,$$
 
 ![With the true premia clustered near 0.36 percent a month, shrinking toward their cross-sectional mean cuts the error 3.7x while shrinking toward zero makes it 2.5x worse](/imgs/blogs/shrinkage-stein-paradox-math-for-quants-4.webp)
 
-In money: the root-mean-square error per premium is ${\sqrt{0.1875/5} = 0.194\%}$ a month raw, 0.100% shrunk to the mean and 0.305% shrunk to zero, annualising to 2.3%, 1.2% and 3.7%. On a \$100m book split into five \$20m sleeves, that is **\$464k, \$241k and \$732k** a year of misstated expected return per sleeve. Picking the wrong centre costs **\$491k a year per sleeve**, on the same estimator, the same intensity and the same data.
+In money: the root-mean-square error per premium is ${\sqrt{0.1875/5} = 0.194\%}$ a month raw, 0.100% shrunk to the mean and 0.305% shrunk to zero, annualising to 2.3%, 1.2% and 3.7%. On a \$100m book split into five \$20m sleeves, that is **\$464k, \$241k and \$732k** a year of misstated expected return per sleeve. The wrong centre costs **\$491k a year per sleeve**, on the same estimator, intensity and data.
 
-Note why the wrong target bites here and would not have in example 1: with 20 years the estimates are good enough that bias dominates. Shrinkage's protection comes from your data being bad, and it fades exactly as the data improves.
+Note why the wrong target bites here and would not have in example 1: with 20 years the estimates are good enough that bias dominates. Shrinkage's protection comes from your data being bad, and fades as the data improves.
 
 *The lesson: shrinkage intensity is a statistics question and shrinkage target is an economics question, and only one of them can be estimated from the returns.*
 
@@ -223,13 +223,13 @@ $$\delta^\ast \;=\; \frac{1}{T}\cdot\frac{\pi - \rho}{\gamma} ,$$
 
 clipped to ${[0,1]}$, where $\pi$ sums the asymptotic variances of the sample covariance entries, $\rho$ their asymptotic covariances with the target, and $\gamma$ measures how wrong the target is. All three are estimable from the same data, so there is no held-out set and no cross-validation loop. Note the ${1/T}$: as history grows the sample matrix earns its keep and the shrinkage recedes.
 
-Why the sample covariance needs help at all is [post 1](/blog/trading/math-for-quants/random-matrix-theory-covariance-cleaning-math-for-quants), which shows that for realistic numbers of assets and observations most of the eigenvalue spectrum is indistinguishable from noise. The relationship, plainly: **linear shrinkage moves every eigenvalue toward their common mean, while eigenvalue clipping moves only the ones random matrix theory gives you grounds to distrust.** Shrinkage needs no threshold and degrades gracefully; clipping leaves alone the market factor you were most confident about. The families are compared in [robust and regularised portfolios](/blog/trading/math-for-quants/robust-regularized-portfolios-math-for-quants).
+Why the sample covariance needs help at all is [post 1](/blog/trading/math-for-quants/random-matrix-theory-covariance-cleaning-math-for-quants), which shows that most of its eigenvalue spectrum is indistinguishable from noise. The relationship, plainly: **linear shrinkage moves every eigenvalue toward their common mean, while eigenvalue clipping moves only the ones random matrix theory gives you grounds to distrust.** Shrinkage needs no threshold; clipping leaves alone the market factor you were most confident about. Both families are compared in [robust and regularised portfolios](/blog/trading/math-for-quants/robust-regularized-portfolios-math-for-quants).
 
 ## Why expected returns are the input that most needs this
 
 Shrinkage helps the covariance matrix. It *rescues* the mean vector, for a reason with nothing to do with estimator design.
 
-The standard error of an estimated mean over a calendar span of $Y$ years is ${\sigma_{\text{ann}}/\sqrt{Y}}$, whether you sample daily, monthly or annually, because per-observation volatility and observation count scale together and cancel. Sampling more finely tells you nothing about the mean. Merton (1980) made the point precisely: the expected return cannot be estimated more accurately by observing more frequently, whereas the variance can, since realised volatility genuinely improves with high-frequency data.
+The standard error of an estimated mean over a calendar span of $Y$ years is ${\sigma_{\text{ann}}/\sqrt{Y}}$, whether you sample daily, monthly or annually, because per-observation volatility and observation count scale together and cancel. Merton (1980) made the point precisely: the expected return cannot be estimated more accurately by observing more frequently, whereas the variance can, since realised volatility genuinely improves with high-frequency data.
 
 The arithmetic is brutal. At 20% annual volatility, five years gives a standard error on the mean of ${20/\sqrt{5} = 8.9}$ percentage points, and getting that to one point takes **400 years**. Equivalently, the $t$-statistic on a strategy's mean is ${\text{Sharpe} \times \sqrt{Y}}$, so a genuine Sharpe of 0.5 needs 16 years of live returns to clear ${t = 2}$. That calculation sits behind [concentration inequalities and sample complexity](/blog/trading/math-for-quants/concentration-inequalities-sample-complexity-math-for-quants), and it does not improve.
 
@@ -243,7 +243,7 @@ Meanwhile the optimiser cares about means more than anything. Chopra and Ziemba 
 
 **"Shrink everything toward zero."** Worked example 3 is the counterexample with a number on it. Zero is legitimate only when zero is a plausible common level, true of residual alphas and long-short spreads and false of asset returns.
 
-**"Stein's paradox means the sample mean is bad for each asset."** The guarantee is on the *total* squared error across the $p$ coordinates. For any individual coordinate the shrunk estimate can be, and often is, further from the truth than the raw one. If your loss is genuinely "get this one asset right and I do not care about the others," James-Stein has nothing for you. Portfolio construction is a joint problem, which is precisely why it does.
+**"Stein's paradox means the sample mean is bad for each asset."** The guarantee is on the *total* across the $p$ coordinates; for any individual asset the shrunk estimate can be further from the truth than the raw one. If your loss is "get this one name right and I do not care about the others," James-Stein has nothing for you. Portfolio construction is a joint problem, which is precisely why it does.
 
 ## How it shows up in real markets
 
@@ -251,9 +251,9 @@ Meanwhile the optimiser cares about means more than anything. Chopra and Ziemba 
 
 **Where it entered finance.** Jorion (1986) built a Bayes-Stein estimator shrinking sample means toward the expected return of the global minimum-variance portfolio, and showed it improved out-of-sample performance against raw historical means. Ledoit and Wolf (2003) ran the covariance version on NYSE and AMEX stocks from 1972 to 1995 and produced portfolios with significantly lower out-of-sample variance than the sample covariance matrix or multi-factor alternatives.
 
-**The limiting case people actually use.** The equal-weighted portfolio is shrinkage at ${w = 1}$: an infinitely strong prior that every asset has the same expected return. DeMiguel, Garlappi and Uppal (2009) found naive ${1/N}$ allocation beat sample-based mean-variance optimisation out of sample across a range of datasets. That is often read as an argument against optimisation. It is better read as a measurement of how bad raw sample means are, and as the reason partial shrinkage is the interesting region.
+**The limiting case people actually use.** The equal-weighted portfolio is shrinkage at ${w = 1}$: an infinitely strong prior that every asset has the same expected return. DeMiguel, Garlappi and Uppal (2009) found naive ${1/N}$ allocation beat sample-based mean-variance optimisation out of sample across a range of datasets. That is often read as an argument against optimisation; it is better read as a measurement of how bad raw sample means are, and as the reason partial shrinkage is the interesting region.
 
-**On a desk today.** Serious portfolio-construction stacks shrink their return forecasts, usually toward a factor model rather than a scalar; risk models shrink or clip covariance matrices before inverting them; and forecast blending, which averages signals with weights set by their reliability, is the same estimator in different clothes. So is the update step of [the Kalman filter](/blog/trading/math-for-quants/kalman-filter-state-space-math-for-quants), which is precision-weighted shrinkage of a new observation toward a prior.
+**On a desk today.** Serious portfolio-construction stacks shrink return forecasts toward a factor model, and risk models shrink or clip covariance matrices before inverting them. So does the update step of [the Kalman filter](/blog/trading/math-for-quants/kalman-filter-state-space-math-for-quants), which is precision-weighted shrinkage of a new observation toward a prior.
 
 ## In the interview room and on the desk
 
@@ -262,12 +262,12 @@ The question usually arrives as: *"You have five years of returns for 500 stocks
 A strong answer runs in this order.
 
 1. **Give the standard error before the estimate.** On 60 monthly observations at 20% annual volatility, the standard error of each stock's mean is roughly 9 percentage points a year. You are being asked to rank 500 numbers whose error bars are wider than any plausible spread between them.
-2. **Say that frequency does not help.** Daily data multiplies your observations by 21 and does nothing for the mean, because the standard error over a fixed calendar span is invariant to sampling frequency. It does sharpen the covariance matrix. Naming that asymmetry separates a candidate who has thought about this from one who has read about it.
+2. **Say that frequency does not help.** Daily data multiplies your observations by 21 and does nothing for the mean, because the standard error over a fixed calendar span is invariant to sampling frequency. It does sharpen the covariance matrix, and naming that asymmetry is what separates a candidate who has thought about this from one who has read about it.
 3. **Reach for shrinkage, and name the target.** Pull each estimate toward a factor model or the cross-sectional mean, with intensity set by the ratio of sampling noise to genuine cross-sectional dispersion. Cite James-Stein for the theory and Ledoit-Wolf for the matrix, but lead with the target, because the target is where the judgement is.
 4. **Say what the optimiser then does with it.** Chopra and Ziemba's roughly 11-to-1 sensitivity of means over variances, and the fact that ${\Sigma^{-1}}$ amplifies exactly the directions you measured worst.
 5. **Offer the honest fallback.** Below some level of confidence the right answer is to stop estimating means per stock: equal-weight within buckets, or impose the factor structure and forecast only factor premia. Knowing when not to use your own numbers is a senior answer.
 
-The trap is optimising on raw sample means and presenting the resulting frontier as though it meant something. It will look beautiful, because the optimiser has taken every noise-inflated estimate at face value and built the portfolio that would have been superb in the sample you fitted it to. Produce that chart without a word about estimation error and you have demonstrated the exact failure the question was designed to find. The second trap is reciting "James-Stein" as a formula with no dimension condition and no target choice, which reads as memorisation.
+The trap is optimising on raw sample means and presenting the resulting frontier as though it meant something. It will look beautiful, because the optimiser took every noise-inflated estimate at face value and built the portfolio that would have been superb in the sample you fitted it to. Produce that chart without a word about estimation error and you have demonstrated the exact failure the question was designed to find. The second trap is reciting "James-Stein" with no dimension condition and no target choice, which reads as memorisation.
 
 **Two Sigma** and **Citadel** weight this most heavily, in research and portfolio-construction interviews alike, and it comes up in any seat where someone owns the expected-return vector that goes into an optimiser.
 
