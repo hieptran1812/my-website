@@ -49,13 +49,13 @@ A **Poisson process** is the counting process whose intensity is a constant ${\l
 - The process is **memoryless**. Having waited two seconds for the next trade tells you nothing about how much longer you will wait.
 - Variance equals mean. If you expect 4,800 trades in ten minutes, the standard deviation is ${\sqrt{4800} = 69.3}$ trades.
 
-That last line is the one to hold on to, because it is the line that breaks. The ratio of variance to mean is called the **Fano factor**, and for a Poisson process it is exactly 1, always. The whole of this post is a story about what happens when that number is 16 instead.
+That last line is the one that breaks. The ratio of variance to mean is called the **Fano factor**, and for a Poisson process it is exactly 1, always. This post is the story of what happens when it is 16 instead.
 
 ### The empirical fact Poisson gets wrong
 
 Take a day of trades in a liquid name and split it into one-second bins. Poisson predicts a Poisson histogram of counts. What you actually get is far more zero-bins and far more very-large bins than Poisson allows, with a thin middle. The gaps are also wrong: the distribution of inter-trade times has a much heavier tail than the exponential, because the quiet stretches between clusters are far longer than a constant-rate model can produce.
 
-None of this is subtle or marginal. It is the first thing you see, and it is the reason nobody who trades at the second scale uses a Poisson process for arrivals. It is the same empirical world that [order book imbalance](/blog/trading/math-for-quants/order-book-imbalance-short-horizon-prediction-math-for-quants) lives in: the microstructure is full of short-horizon structure, and a model that assumes independence throws all of it away. For the wider family of distributions markets actually need, see [the probability distributions that markets actually use](/blog/trading/math-for-quants/probability-distributions-for-markets-math-for-quants).
+None of this is subtle. It is the first thing you see, and it is why nobody trading at the second scale models arrivals as Poisson. It is the same empirical world [order book imbalance](/blog/trading/math-for-quants/order-book-imbalance-short-horizon-prediction-math-for-quants) lives in: microstructure is full of short-horizon structure, and assuming independence throws all of it away. For the wider family of distributions markets need, see [the probability distributions that markets actually use](/blog/trading/math-for-quants/probability-distributions-for-markets-math-for-quants).
 
 ## Conditional intensity: the object that actually matters
 
@@ -113,9 +113,9 @@ That figure's right panel is a number we have not derived yet. It comes next.
 
 ## The branching interpretation
 
-The equation above is honest but opaque. The branching picture is the one that makes everything obvious.
+That equation is honest but opaque. The branching picture makes everything obvious.
 
-Read the Hawkes process as a population. Events of the first kind, **immigrants**, arrive at the constant rate ${\mu}$ for exogenous reasons: a news print, a fund rebalancing, an index event. Every event, immigrant or not, then independently produces **offspring** according to a Poisson process with rate ${\phi(s)}$ at lag ${s}$. Offspring produce offspring. The observed tape is every generation piled on top of each other, with no label saying which is which.
+Read the Hawkes process as a population. **Immigrants** arrive at the constant rate ${\mu}$ for exogenous reasons: a news print, a fund rebalancing, an index event. Every event, immigrant or not, then independently produces **offspring** by a Poisson process with rate ${\phi(s)}$ at lag ${s}$. Offspring produce offspring. The observed tape is every generation piled together, with no label saying which is which.
 
 The expected number of direct offspring per event is the integral of the kernel:
 
@@ -173,9 +173,9 @@ So when your fit comes back at 0.9, the honest reading is narrow. It says: *give
 
 ## Variance: why clustering is an inventory problem
 
-The mean is not where clustering hurts. A Hawkes process and a Poisson process with ${\lambda = \Lambda}$ have identical expected counts by construction. The difference is all in the second moment.
+Clustering does not hurt in the mean. A Hawkes process and a Poisson process with ${\lambda = \Lambda}$ have identical expected counts by construction. The difference is all in the second moment.
 
-Use the branching decomposition. Over a long window ${T}$, the count is a compound Poisson sum: ${\text{Poisson}(\mu T)}$ immigrants, each carrying an independent cluster of random size ${S}$. For a branching process with Poisson offspring of mean ${n}$, the total progeny has ${\mathbb{E}[S] = 1/(1-n)}$ and ${\mathbb{E}[S^2] = 1/(1-n)^3}$. Compound Poisson gives ${\mathrm{Var}(N) = \mu T\, \mathbb{E}[S^2]}$, so
+Use the branching decomposition. Over a long window ${T}$ the count is a compound Poisson sum: ${\text{Poisson}(\mu T)}$ immigrants, each carrying an independent cluster of random size ${S}$. For Poisson offspring of mean ${n}$, the total progeny has ${\mathbb{E}[S] = 1/(1-n)}$ and ${\mathbb{E}[S^2] = 1/(1-n)^3}$. Compound Poisson gives ${\mathrm{Var}(N) = \mu T\, \mathbb{E}[S^2]}$, so
 
 $$
 \frac{\mathrm{Var}\big(N(T)\big)}{\mathbb{E}\big[N(T)\big]} \;\longrightarrow\; \frac{1}{(1-n)^2}
@@ -265,13 +265,13 @@ Three traps, in order of how often they bite:
 2. **Edge effects.** Events before ${t = 0}$ are unobserved but still exciting the process inside your window. A model that ignores them attributes their excitation to ${\mu}$, biasing ${n}$ down. Discard a burn-in period longer than several kernel half-lives.
 3. **A non-constant baseline looks like excitation.** Intraday volume has a U-shape. Fit a constant ${\mu}$ across a session and the model explains the open-and-close hump as self-excitation, inflating ${n}$. Fit ${\mu(t)}$, or fit within a window short enough that the baseline is flat.
 
-Diagnostics are the part people skip. The **random time change** says that if your model is right, the transformed times ${\Lambda(t_i) = \int_0^{t_i} \lambda(u)\, du}$ form a unit-rate Poisson process. Plot those residual gaps against an exponential. If the fit is bad, that plot shows it long before the likelihood ratio does.
+Diagnostics are the part people skip. The **random time change** says that if the model is right, the transformed times ${\Lambda(t_i) = \int_0^{t_i} \lambda(u)\, du}$ form a unit-rate Poisson process. Plot those residual gaps against an exponential; a bad fit shows up there long before the likelihood ratio notices.
 
 ## Common misconceptions
 
 **"Hawkes is just a fancy Poisson."** Only in the mean. Every interval statistic differs: the Fano factor is 16 rather than 1 at ${n = 0.75}$, the inter-arrival distribution has a fat tail rather than an exponential one, and the count autocovariance is positive at every lag rather than zero. If you only ever look at average volume, the two models are indistinguishable and you have thrown away the reason to use either.
 
-**"A high branching ratio means the market is unstable."** No. Stationarity holds for every ${n \lt 1}$, and ${n = 0.9}$ describes a perfectly well-behaved stationary process, just a very clustered one. What a high ${n}$ does mean is that the *conditional* tail is much fatter than the unconditional one, so your risk numbers are wrong in a specific direction. The quantity that feels like instability is the cascade decay rate ${\beta(1 - n)}$: as ${n \to 1}$ the clusters get longer and you need a much larger sample to measure anything. That is an estimation problem, not a stability one. Related tail machinery lives in [tail risk and extreme value theory](/blog/trading/math-for-quants/tail-risk-extreme-value-theory-math-for-quants).
+**"A high branching ratio means the market is unstable."** No. Stationarity holds for every ${n \lt 1}$, and ${n = 0.9}$ describes a perfectly well-behaved process, just a very clustered one. What it does mean is that the *conditional* tail is much fatter than the unconditional one, so your risk numbers are wrong in a specific direction. The thing that feels like instability is the cascade decay rate ${\beta(1 - n)}$: as ${n \to 1}$ clusters get longer and you need far more data to measure anything. That is an estimation problem, not a stability one. Related tail machinery lives in [tail risk and extreme value theory](/blog/trading/math-for-quants/tail-risk-extreme-value-theory-math-for-quants).
 
 **"Clustering is the same thing as autocorrelation in returns."** These are different objects and they can be independent. Clustering lives in the *arrival times*; return autocorrelation lives in the *signed price changes*. Symmetric cross-excitation, ${a = 0.35}$ and ${c = 0.40}$, gives a heavily clustered tape with an imbalance that is slightly less variable than Poisson. Trades gust, direction does not persist, and returns can be near-uncorrelated the whole time. Confusing the two is how a clustering result gets mis-sold as a forecasting result.
 

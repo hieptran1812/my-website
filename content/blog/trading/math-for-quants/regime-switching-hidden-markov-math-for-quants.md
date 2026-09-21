@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 19
+readTime: 21
 ---
 
 > [!important]
@@ -34,7 +34,7 @@ That figure is the mental model for the whole post. The top lane is what arrives
 
 Three pieces, defined from zero.
 
-**A state** is which regime the market is in today. Call it $S_t$, taking one of K values. In this post K is 2: state 1 is *calm*, state 2 is *stressed*. The state is not a number you can look up. It is not realised volatility, and it is not a VIX level. It is a label on the underlying process, and nobody publishes it.
+**A state** is which regime the market is in today. Call it $S_t$, taking one of K values. In this post K is 2: state 1 is *calm*, state 2 is *stressed*. The state is not a number you can look up. It is not realised volatility and it is not a VIX level. It is a label on the underlying process, and nobody publishes it.
 
 **A Markov chain** governs how the state moves. The Markov property says tomorrow's state depends on today's state and nothing earlier. The chain is summarised by a **transition matrix** $P$, whose entry $p_{jk}$ is the probability of moving from state $j$ to state $k$. Rows sum to 1.
 
@@ -52,9 +52,9 @@ with returns in percent per day. The calm regime drifts up 0.05% a day at 0.80% 
 
 ![A two-node state graph: CALM and STRESSED, each carrying its emission distribution and annualised volatility, joined by self-loops of 0.99 and 0.95 and cross arrows of 0.01 and 0.05](/imgs/blogs/regime-switching-hidden-markov-math-for-quants-2.webp)
 
-Two quantities fall straight out of $P$ and are worth computing before anything else.
+Two quantities fall straight out of $P$ and are worth computing first.
 
-The **stationary distribution** is the long-run share of days in each state, found by solving $\pi P = \pi$. For a two-state chain it has a closed form: ${\pi_1 = (1-p_{22}) / [(1-p_{11}) + (1-p_{22})]}$. Here that is ${0.05 / (0.01 + 0.05) = 5/6 = 83.3\%}$ calm and ${1/6 = 16.7\%}$ stressed.
+The **stationary distribution** is the long-run share of days in each state, found by solving $\pi P = \pi$. A two-state chain has a closed form, ${\pi_1 = (1-p_{22}) / [(1-p_{11}) + (1-p_{22})]}$, giving ${0.05 / (0.01 + 0.05) = 5/6 = 83.3\%}$ calm and ${1/6 = 16.7\%}$ stressed.
 
 The **expected spell length** in state $k$ is ${1/(1-p_{kk})}$, because leaving is a geometric coin flip each day. Calm spells run 100 days on average, stressed spells 20. Mixing two regimes in those proportions produces an unconditional volatility near 17% annualised and fat tails no single normal can. That is the same stylised fact [ARCH and GARCH](/blog/trading/math-for-quants/arch-garch-volatility-math-for-quants) capture with a smoothly evolving variance. Regime switching is the discrete alternative: not a variance that drifts, but a variance that jumps between two settings.
 
@@ -140,15 +140,15 @@ With the same ten-year path, compare models by BIC, which is $-2 \log L + p \log
 
 Going from two states to four buys 6.56 log-likelihood points for 16 extra parameters. BIC is right to reject it, but the interesting part is *what the extra states actually are*.
 
-The third state the K of 3 fit invents has mean +3.34%, standard deviation 0.4565%, and self-persistence 0.0446. Read that back: a "regime" that lasts one day, fires almost never, and has almost no variance. It is not a regime. It is a tight cluster wrapped around one outlier day, and it is the visible edge of a real pathology. A Gaussian mixture likelihood is unbounded: park a component on a single observation and shrink its variance toward zero and the likelihood goes to infinity. Every fit you have ever run was saved by a variance floor or by luck.
+The third state the K of 3 fit invents has mean +3.34%, standard deviation 0.4565%, and self-persistence 0.0446. Read that back: a "regime" that lasts one day, fires almost never, and has almost no variance. It is a tight cluster wrapped around one outlier day, and it is the visible edge of a real pathology. A Gaussian mixture likelihood is unbounded: park a component on a single observation, shrink its variance toward zero, and the likelihood goes to infinity. Every fit you have run was saved by a variance floor or by luck.
 
-The K of 4 fit is worse in a different way. Three of its four states have self-persistence below 0.63, meaning an expected life under three days. A state that does not persist is not a regime, it is a shape the optimiser used to absorb noise, and it will be a different shape on next year's data.
+The K of 4 fit fails differently. Three of its four states have self-persistence below 0.63, an expected life under three days. A state that does not persist is not a regime. It is a shape the optimiser used to absorb noise, and it will be a different shape on next year's data.
 
-Two states survive this because volatility regimes really do have two economically distinct settings, and because two states need only 7 parameters, which 2,520 observations can support. Three can be defensible when you have a genuine third mechanism in mind, such as a crisis state distinct from an ordinary drawdown, and you should specify it in advance rather than let BIC find it.
+Two states survive because volatility regimes really do have two economically distinct settings, and because 7 parameters is what 2,520 observations can support. Three is defensible when you have a genuine third mechanism in mind, such as a crisis state distinct from an ordinary drawdown, and you should specify it in advance rather than let BIC find it.
 
 ## Worked example 2: how late is late, and what it costs
 
-This is the honest core. Simulate 4,000,000 days from the model, which contains 33,259 stressed spells with a mean length of 19.997 days, run the filter, and measure how long after each true switch the filtered stress probability first crosses 50%.
+This is the honest core. Simulate 4,000,000 days from the model, containing 33,259 stressed spells of mean length 19.997 days, run the filter, and measure how long after each true switch the filtered stress probability first crosses 50%.
 
 | statistic | value |
 | --- | --- |
@@ -244,6 +244,6 @@ The question usually arrives as "how would you tell whether the market has chang
 
 **Then name the three algorithms and which one is tradeable.** Forward gives the likelihood and the filtered probability. Forward-backward gives smoothed probabilities using the whole sample. Viterbi gives the single most likely path, also using the whole sample. Only the filtered probability is adapted to your information set.
 
-**The trap is presenting a backtest built on smoothed probabilities.** It is the single most common way this model is abused, and it is usually accidental, because fitting by Baum-Welch produces smoothed probabilities as a by-product and they are the ones sitting in the notebook. A good interviewer will ask how the regime path in your backtest was computed, and the correct answer is a separate filtering pass with no data past the trade date. If you can add that a smoothed backtest can beat an oracle that knows the true state, and explain why that proves look-ahead rather than skill, you have answered the question better than it was asked.
+**The trap is presenting a backtest built on smoothed probabilities.** It is usually accidental, because Baum-Welch produces smoothed probabilities as a by-product and those are the ones sitting in the notebook. A good interviewer asks how the regime path in your backtest was computed, and the correct answer is a separate filtering pass with no data past the trade date. If you can add that a smoothed backtest can beat an oracle knowing the true state, and explain why that proves look-ahead rather than skill, you have answered better than you were asked.
 
-Say what a two-state model can and cannot support, and why you would not reach for four. **Two Sigma** and **Citadel** weight this in research rounds as a look-ahead discipline question more than a modelling one. Any **macro or multi-strategy** seat weights it as a risk-overlay question, where the follow-up is always "and what does it cost you to be late?"
+Close on why you would not reach for four states. **Two Sigma** and **Citadel** weight this in research rounds as a look-ahead discipline question more than a modelling one. Any **macro or multi-strategy** seat weights it as a risk-overlay question, where the follow-up is always "and what does it cost you to be late?"
