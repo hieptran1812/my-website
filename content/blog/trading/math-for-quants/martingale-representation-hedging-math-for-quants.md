@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 20
+readTime: 19
 ---
 
 > [!important]
@@ -22,17 +22,17 @@ readTime: 20
 
 ## Two answers to the same question
 
-Ask a candidate why delta hedging works and you will get one of two answers.
+Ask a candidate why delta hedging works and you get one of two answers.
 
 The first is the recipe. Black-Scholes gives you a price, you differentiate it with respect to the stock, and the derivative tells you how many shares to hold. It is correct, it is what most desks type into a risk system, and it explains nothing. Differentiate *why*? And what do you do for a claim with no closed-form price, or one whose payoff depends on the whole path, so there is no function of today's stock price to differentiate at all?
 
-The second answer starts at a theorem about martingales that appears to have nothing to do with options, and arrives at the same number with an explanation attached. That is the martingale representation theorem, and it is the reason replication works.
+The second starts at a theorem about martingales that appears to have nothing to do with options, and arrives at the same number with an explanation attached. That is the martingale representation theorem, and it is the reason replication works.
 
 ![Two columns comparing the recipe answer to why delta hedging works against the theorem answer, with the recipe ending at a dead end when there is no formula and the theorem ending at replication being forced](/imgs/blogs/martingale-representation-hedging-math-for-quants-1.webp)
 
-The figure above lays the two chains side by side. The recipe tells you what to hold. The theorem tells you why nothing else could have worked, and that difference is the whole post.
+The figure above lays the two chains side by side. The recipe tells you what to hold; the theorem tells you why nothing else could have worked, and that difference is the whole post.
 
-A note on the numbers below: every dollar figure here is illustrative arithmetic on assumed inputs, chosen so a reader can check it, not a quoted market price. The sources at the end are for the mathematics.
+Every dollar figure below is illustrative arithmetic on assumed inputs, chosen so a reader can check it, not a quoted market price. The sources at the end are for the mathematics.
 
 ## Foundations: the building blocks
 
@@ -182,7 +182,7 @@ Reality then applies two further taxes. You cannot trade continuously, and you p
 
 #### Worked example 3: the \$50m book, rebalanced N times
 
-You are short a three-month at-the-money call on 500,000 shares of a \$100 stock, a \$50,000,000 notional, at 25% volatility with the rate at zero. The Black-Scholes premium is \$4.98 per share, or \$2,491,767.
+You are short a three-month at-the-money call on 500,000 shares of a \$100 stock, a \$50,000,000 notional, at 25% volatility with the rate at zero. The Black-Scholes premium is \$4.983534 per share, \$4.98 to the cent, or \$2,491,767 on the position.
 
 Over one rebalancing interval a delta-hedged option earns its gamma and pays its theta, and the two cancel only on average. The leftover per step is $\tfrac{1}{2} \Gamma S^2 \sigma^2 \Delta t (Z^2 - 1)$ for a standard normal $Z$, with mean zero and standard deviation $\tfrac{\sqrt{2}}{2}\Gamma S^2 \sigma^2 \Delta t$. Treating gamma as frozen and the steps as independent, $N$ of them accumulate to
 
@@ -216,8 +216,6 @@ Read the last two rows together. Going from daily to sixteen times a day takes t
 
 **"Stochastic volatility just adds a parameter."** It adds a dimension to the filtration. One extra Brownian motion means one extra integrand, and the stock gives you no instrument to attach it to. You do not fix that by calibrating harder, you fix it by trading a second instrument that spans the new factor. Calibration only picks which measure inside the family you are using, and that is a choice dressed as a fit.
 
-**"The hedge ratio is the derivative of the price."** Only when a price function of today's stock price exists. Asians, lookbacks and barriers have unique integrands and nothing to differentiate, because their value depends on the path and not the current level alone. The integrand is the general object; the partial derivative is the Markovian shortcut.
-
 ## Sources and further reading
 
 - Steven E. Shreve, *Stochastic Calculus for Finance II: Continuous-Time Models* (Springer, 2004), Chapter 5, Section 5.3 for the martingale representation theorem and Section 5.4 for the multidimensional version and the link to completeness. The most readable statement aimed at finance.
@@ -237,8 +235,8 @@ The weak answer differentiates the Black-Scholes formula. It is not wrong, and i
 
 The strong answer runs in order. One: under the risk-neutral measure the discounted price of any claim is a martingale, by construction rather than assumption, since it is a conditional expectation of a fixed random variable. Two: the filtration is generated by a single Brownian motion, so the martingale representation theorem applies and produces an integrand. Three: the integrand is unique, and dividing it by the stock's diffusion coefficient gives the number of shares. Four: uniqueness is why the claim has a price at all, because two integrands would mean two perfect hedges at two different costs. Five, if they want it: when the claim is Markovian the integrand collapses to the partial derivative, so the recipe answer is a corollary rather than a rival.
 
-The trap is treating completeness as an afterthought. Candidates mention it as a regularity condition and move on, which is backwards, because it is the load-bearing assumption. If you cannot say what breaks without it, you have recited the theorem rather than understood it. The recovery is concrete: name a second risk factor, stochastic volatility or a jump, observe that the representation now needs a second integrand with no instrument behind it, and note that the arbitrage-free price becomes an interval whose width you can compute. Saying "the super-replicating hedge costs this much, the cheapest sub-replicating one costs that much, and the price is anywhere between" separates the candidate who has read Shreve from the one who has used it.
+The trap is treating completeness as an afterthought. Candidates mention it as a regularity condition and move on, which is backwards: it is the load-bearing assumption, and if you cannot say what breaks without it you have recited the theorem rather than understood it. The recovery is concrete. Name a second risk factor, stochastic volatility or a jump, observe that the representation now needs a second integrand with no instrument behind it, and note that the arbitrage-free price becomes an interval whose width you can compute. Quoting the super-replicating cost, the sub-replicating cost and the band between separates the candidate who has read Shreve from the one who has used it.
 
-A second trap is claiming the theorem hands you the hedge. It hands you existence. Say so, mention Clark-Ocone as the constructive version, and note that you would still price with a PDE or a simulation.
+A second trap is claiming the theorem hands you the hedge. It hands you existence. Say so, mention Clark-Ocone as the constructive version, and note you would still price with a PDE or a simulation.
 
-Jane Street, Citadel Securities and Optiver weight this heavily for options seats, and any desk quoting exotics will push on the incompleteness follow-up, because it is where a trader's judgment starts and the textbook stops.
+Jane Street, Citadel Securities and Optiver weight this heavily for options seats, and any desk quoting exotics pushes on the incompleteness follow-up, because it is where a trader's judgment starts and the textbook stops.
