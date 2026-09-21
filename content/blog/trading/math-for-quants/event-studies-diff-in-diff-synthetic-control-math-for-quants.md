@@ -25,7 +25,7 @@ A regulator changes a tick size. A company pre-announces guidance. An index prov
 
 The tempting answer is to look. The stock was up 4.05% over the three days around the announcement, so the announcement was worth 4.05%. On a \$20m position that is \$810,000, and the story writes itself.
 
-It is the wrong answer, and not by a small amount. Some of that 4.05% was the market moving, some the stock's normal sensitivity to it, some a sector rotation with nothing to do with the company. The event study strips all of that out and leaves only the part the event can be held responsible for. The diagram below is the mental model: four windows on a calendar, one used to learn what normal looks like, one used to measure the departure from it.
+It is the wrong answer, and not by a small amount. Some of that 4.05% was the market moving, some the stock's normal sensitivity to it, some a sector rotation with nothing to do with the company. The event study strips that out and leaves only the part the event can be held responsible for. The diagram below is the mental model: four windows on a calendar, one used to learn what normal looks like, one to measure the departure from it.
 
 ![A trading-day timeline with four bands: an estimation window from day -280 to -31 where the normal-return model is fitted, a buffer gap to day -2, a highlighted event window from -1 to +1 where abnormal returns are measured, and a post-event window to day +20 for drift checks.](/imgs/blogs/event-studies-diff-in-diff-synthetic-control-math-for-quants-1.webp)
 
@@ -35,7 +35,7 @@ This post builds the design from zero, then shows the three places it fails: the
 
 A **return** is the percentage change in price over a period: a stock closing at \$100 and then \$103.10 had a daily return of ${3.10\%}$. An **event** is a dated piece of news, and **day 0** is the day the market could first have traded on it, which is not always the day the press release is dated. A release at 6pm is a day-0 event for the following session.
 
-The **estimation window** is a stretch of history used to learn how the stock normally behaves, commonly 250 trading days ending well before the event. The **event window** is the short span over which the effect is measured, often ${[-1, +1]}$ days. The **gap** between them keeps leakage and pre-announcement drift out of the fit, and a **post-event window** checks for persistence or reversal without entering the headline number.
+The **estimation window** is a stretch of history used to learn how the stock normally behaves, commonly 250 trading days ending well before the event. The **event window** is the short span over which the effect is measured, often ${[-1, +1]}$ days. The **gap** between them keeps leakage and pre-announcement drift out of the fit; a **post-event window** checks for persistence or reversal without entering the headline number.
 
 The **normal return** is what the stock would have returned that day had the event not happened. You cannot observe it, so you model it: ${E[R_{i,t} \mid X_t]}$, the expected return of stock ${i}$ on day ${t}$ given the conditioning information ${X_t}$ the model uses, typically that day's market return. The **abnormal return** is the residual:
 
@@ -61,13 +61,13 @@ $$
 R_{i,t} = \alpha_i + \beta_i R_{m,t} + \varepsilon_{i,t}
 $$
 
-Here ${\beta_i}$ is the stock's sensitivity to the market and ${\alpha_i}$ its average drift once the market is accounted for; the residual is the abnormal return. [OLS, GLS and regularized regression](/blog/trading/math-for-quants/regression-ols-gls-regularized-math-for-quants) covers the fitting machinery. **A factor model** adds more systematic exposures: size, value, momentum, sector. It removes more, a virtue when your event sample is tilted toward a factor and a hazard when the factor is itself downstream of the event.
+Here ${\beta_i}$ is the stock's sensitivity to the market and ${\alpha_i}$ its average drift once the market is accounted for; the residual is the abnormal return. [OLS, GLS and regularized regression](/blog/trading/math-for-quants/regression-ols-gls-regularized-math-for-quants) covers the fitting machinery. **A factor model** adds exposures to size, value, momentum or sector. It removes more, a virtue when your event sample is tilted toward a factor and a hazard when the factor is itself downstream of the event.
 
 These are not four routes to the same place.
 
 ![Four normal-return models applied to the same day-0 stock return of plus 3.10 percent against a market return of minus 0.30 percent. Mean-adjusted yields an abnormal return of plus 3.05 percent, market-adjusted plus 3.40, the market model plus 3.44, and a three-factor model plus 4.25, a spread of 1.20 percentage points.](/imgs/blogs/event-studies-diff-in-diff-synthetic-control-math-for-quants-2.webp)
 
-Same observed day, four defensible models, answers spanning 120 basis points. If your headline effect is 3.5% and the model choice moves it by 1.2 percentage points, the model choice *is* the finding. Pick it before you look at the event window, write down why, and report the alternatives in a robustness table. Picking it afterwards, once you can see which choice gives the cleaner result, is how a specification search gets laundered into a result.
+Same observed day, four defensible models, answers spanning 120 basis points. If your headline effect is 3.5% and the model choice moves it by 1.2 percentage points, the model choice *is* the finding. Pick it before you look at the event window, write down why, and report the alternatives in a robustness table. Picking it afterwards, once you can see which gives the cleaner result, is how a specification search gets laundered into a result.
 
 #### Worked example 1: one announcement, \$20m on the line
 
@@ -95,7 +95,7 @@ You hold \$20m of a single stock into a scheduled announcement.
 
 ### Event-induced variance
 
-The market model estimates the residual standard deviation on a window containing no event, then applies it to a day the world learned something. Announcement days are more volatile than ordinary days, which is the whole reason anyone trades them, so a quiet-period sigma puts too small a number in the denominator.
+The market model estimates the residual standard deviation on a window containing no event, then applies it to a day the world learned something. Announcement days are more volatile than ordinary days, which is why anyone trades them, so a quiet-period sigma puts too small a number in the denominator.
 
 Suppose the day-0 residual standard deviation in the example above is three times the estimation-window value, ${3.30\%}$ rather than ${1.10\%}$. The three-day standard error becomes
 
@@ -192,7 +192,7 @@ $$
 \hat Y_{1t}(0) = \sum_{j=2}^{J+1} w_j Y_{jt}, \qquad w_j \ge 0, \qquad \sum_j w_j = 1
 $$
 
-The weights are chosen to track the treated unit as closely as possible over the *pre-treatment* period, on the outcome and on a set of predictors. The constraints are what make it honest: non-negativity and summing to one keep the counterfactual inside the convex hull of the donors, so you interpolate between real units rather than extrapolate to a fictional one. Sparse weights also make it legible, since you can name the three or four units that constitute it and argue about whether they belong.
+The weights are chosen to track the treated unit as closely as possible over the *pre-treatment* period, on the outcome and on a set of predictors. The constraints are what make it honest: non-negativity and summing to one keep the counterfactual inside the convex hull of the donors, so you interpolate between real units rather than extrapolate to a fictional one. Sparse weights also make it legible, since you can name the three or four units in it and argue about whether they belong.
 
 ![A treated unit and a dashed synthetic control track each other before a vertical treatment line and diverge after it, with the shaded gap labelled as the estimated effect. An inset shows donor weights of 0.42, 0.31, 0.18 and 0.09 summing to one; another shows the real treated path standing outside a bundle of grey placebo paths.](/imgs/blogs/event-studies-diff-in-diff-synthetic-control-math-for-quants-6.webp)
 
@@ -208,11 +208,11 @@ There is no statistical trick that unbundles a bundle. What you can do:
 
 - **Shrink the window to isolate the component.** If guidance is in the 8am call and the print was at 6am the previous evening, an intraday window around each timestamp separates them. High-frequency identification around policy announcements is this idea taken seriously.
 - **Use cross-sectional variation in one component.** If all firms got the earnings surprise but only some changed guidance, the difference between those groups identifies the guidance effect: a diff-in-diff nested inside the event study. A comparison event carrying only one component, such as an index addition without a rebalance, does the same.
-- **Report the bundle honestly.** A correctly labelled bundle is a useful number. A bundle labelled as one of its components is a false one.
+- **Report the bundle honestly.** A correctly labelled bundle is a useful number; one labelled as a single component is a false one.
 
 ## Common misconceptions
 
-**"A significant CAR proves the event caused the move."** It proves the stock moved more than your normal-return model expected, over a window you chose. The causal content comes from the claim that nothing else systematic hit that name in that window, and that is an argument about the world, not an output of the regression. A confounded event produces a beautifully significant CAR.
+**"A significant CAR proves the event caused the move."** It proves the stock moved more than your normal-return model expected, over a window you chose. The causal content comes from the claim that nothing else systematic hit that name in that window, an argument about the world rather than an output of the regression. A confounded event produces a beautifully significant CAR.
 
 **"Longer windows give more power."** They give more contamination. Extending from three days to sixty multiplies the noise by roughly ${\sqrt{20}}$ while adding no signal if the market is reasonably efficient, and sweeps in every unrelated thing that happened over three months. Long-horizon abnormal returns also become acutely sensitive to the normal-return model, because a small error in ${\hat\alpha}$ compounds. Short windows are the strength of the method, not a limitation of it.
 
@@ -234,9 +234,9 @@ The weak answer jumps to the number: a three-day CAR, a t-statistic, and stop. I
 
 The strong answer goes in this order. State what day 0 is and why, including when the market could first trade on the information. Choose the normal-return model out loud and justify it: a market model if the event sample is not tilted, a factor model if it is concentrated in small caps or one sector, and say you will report both. Tie the event window to information arrival rather than to significance. Then, before being asked, raise the two statistical problems: event-induced variance, handled with a standardized cross-sectional test, and cross-sectional correlation if the events cluster, handled with a Kolari-Pynnonen correction, a calendar-time portfolio or a permutation test. Finish by naming the identification threat: what else happened in that window, and whether diff-in-diff or synthetic control takes care of it.
 
-The follow-up is almost always about clustering, because it is the fastest way to find out whether you have run one of these yourself. Expect *"your 200 events are 200 banks in one quarter. What is your sample size?"* Being able to write ${N / (1 + (N-1)\bar\rho)}$ on the whiteboard and give the number for a plausible ${\bar\rho}$ ends the question.
+The follow-up is almost always about clustering, the fastest way to find out whether you have run one of these yourself. Expect *"your 200 events are 200 banks in one quarter. What is your sample size?"* Writing ${N / (1 + (N-1)\bar\rho)}$ on the whiteboard and giving the number for a plausible ${\bar\rho}$ ends the question.
 
-The trap that makes a candidate look rigorous while being wrong is quoting a t-statistic on overlapping events that assumes independence. It arrives with full statistical formality, it has a p-value, and it is meaningless. Its cousin is extending the window until the result becomes significant, then reporting only that window.
+The trap that makes a candidate look rigorous while being wrong is quoting a t-statistic on overlapping events that assumes independence. It arrives with full statistical formality, it has a p-value, and it is meaningless. Its cousin is extending the window until the result turns significant, then reporting only that window.
 
 Two Sigma and Citadel weight this heavily, since both run research organisations where an empirical claim has to survive a hostile read. So does any seat where you defend a number to somebody who loses money if it is wrong.
 

@@ -227,8 +227,8 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 2 | shrinkage-stein-paradox | W3 | **SHIPPED** 5,121 words |
 | 3 | concentration-inequalities-sample-complexity | W1 | **SHIPPED** f43eaba4 |
 | 4 | causal-inference-alpha-research | W1 | **SHIPPED** f43eaba4 |
-| 5 | instrumental-variables-natural-experiments | W3 | **SHIPPED** 4,968 words |
-| 6 | event-studies-diff-in-diff-synthetic-control | W3 | **SHIPPED** 4,463 words |
+| 5 | instrumental-variables-natural-experiments | W3 | **SHIPPED** 4,314 words |
+| 6 | event-studies-diff-in-diff-synthetic-control | W3 | **SHIPPED** 4,437 words |
 | 7 | mcmc-metropolis-gibbs | W3 | TODO |
 | 8 | hierarchical-bayes-pooling | W3 | TODO |
 | 9 | gaussian-processes-kernels | W3 | TODO |
