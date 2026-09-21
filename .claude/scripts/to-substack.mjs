@@ -426,10 +426,10 @@ function texToUnicode(tex, depth = 0, lenient = false) {
     if (inner === null) return "\\FAIL";
     return /^[\w.]+$/.test(inner) ? `√${inner}` : `√(${inner})`;
   });
-  s = mapCommand(s, ["hat"], 1, (_, a) => `${sub(a) ?? "\\FAIL"}\u0302`);
+  s = mapCommand(s, ["hat", "widehat"], 1, (_, a) => `${sub(a) ?? "\\FAIL"}\u0302`);
   s = mapCommand(s, ["bar", "overline"], 1, (_, a) => `${sub(a) ?? "\\FAIL"}\u0304`);
   s = mapCommand(s, ["vec"], 1, (_, a) => `${sub(a) ?? "\\FAIL"}\u20D7`);
-  s = mapCommand(s, ["tilde"], 1, (_, a) => `${sub(a) ?? "\\FAIL"}\u0303`);
+  s = mapCommand(s, ["tilde", "widetilde"], 1, (_, a) => `${sub(a) ?? "\\FAIL"}\u0303`);
 
   // Escaped literals and named symbols.
   s = s.replace(/\\([%$&#_{}])/g, "$1");
@@ -438,6 +438,14 @@ function texToUnicode(tex, depth = 0, lenient = false) {
     if (FUNCS.includes(name)) return name + " ";
     return m;
   });
+
+  // KaTeX's MathML puts the subscript before the superscript regardless of how the
+  // source was written, while this converter emits them in source order. So `X^a_b`
+  // produced "Xab" against KaTeX's "Xba" and every such formula was judged unfaithful
+  // and shipped as raw LaTeX. Normalise to KaTeX's order first; `X^a_b` and `X_b^a`
+  // are the same formula, so this changes nothing but the comparison.
+  s = s.replace(/\^(\{[^{}]*\}|\\[A-Za-z]+|[^\s{}^_])\s*_(\{[^{}]*\}|\\[A-Za-z]+|[^\s{}^_])/g,
+    (_, sup, sb) => `_${sb}^${sup}`);
 
   // Scripts, after the commands they might attach to are resolved.
   const scripts = (input, marker, table) => {
