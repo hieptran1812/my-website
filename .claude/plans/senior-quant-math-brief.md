@@ -50,6 +50,36 @@ prose and recompute it at the precision you printed. Carry unrounded intermediat
 and round only at the end. If a figure and the prose disagree, work out which one
 is wrong before assuming it is the figure.
 
+### The audit is reader-reproducibility, not truth
+
+This is the framing that matters, and it took three waves to find. An audit that
+compares your computed values against each other passes while the page is still
+wrong, because the page carries a **rounded input beside a result computed from the
+unrounded one**. Both numbers are correct. The row is not.
+
+    printed   0.3551 x 5,000,000 = $1,775,701
+    from page 0.3551 x 5,000,000 = $1,775,500   (the 1,775,701 needs p = 0.3551402)
+
+Its cousin bites whenever two figures are differenced or ratioed: two correctly
+rounded numbers on the page do not differ by the printed difference, because
+rounded(A) minus rounded(B) is not rounded(A minus B). A reader who subtracts the
+two numbers in front of them gets a third number.
+
+So recompute **using only the numbers printed on the page**, at the precision
+printed. One wave-5 post had already audited 45 values against `erfc` and `Fraction`
+and still shipped eight bad rows; re-running the same post under the printed-string
+rule found all eight.
+
+When a row does not reproduce, fix it by **naming the unrounded value in the text**,
+not by degrading the money to match the rounded input. In that post the headline
+ratio was 2.12 from the true values and would have become 2.13 the other way.
+
+**Check the figures before rewriting prose.** If a figure displays one of the
+disputed numbers, changing the prose freely desyncs figure and text, which is worse
+than the defect you are fixing. Read the `.scene.json` in the cache as text; never
+open the WebP. If the cache is already cleared, say so and escalate rather than
+guessing.
+
 ### Assert against exact fractions, not floats, and round half-up
 
 Eye-checking cannot find the worst version of this defect, because every row looks
