@@ -34,7 +34,7 @@ That figure is the whole post. The left panel is one answer, the middle the othe
 
 Write $\theta_i$ for the quantity you care about, the true long-run Sharpe of strategy $i$, the number it would converge to given infinite data. Write $y_i$ for what you observe, the Sharpe measured over the record you have. Conflating the two is the original sin of the sorted spreadsheet.
 
-**Complete pooling** says every group shares one parameter, $\theta_1 = \dots = \theta_k = \mu$, estimated once from all the data and handed to everybody. Maximally stable, because every observation estimates one thing, and biased for any group that genuinely differs.
+**Complete pooling** says every group shares one parameter, $\theta_1 = \cdots = \theta_k = \mu$, estimated once from all the data and handed to everybody. Maximally stable, because every observation estimates one thing, and biased for any group that genuinely differs.
 
 **No pooling** says each group gets its own parameter with no relationship to the others, $\hat\theta_i = y_i$. Unbiased, and for short records catastrophically noisy.
 

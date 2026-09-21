@@ -58,7 +58,7 @@ $$V_0 = \frac{0.500 \times \$20 + 0.500 \times \$0}{1.05} = \frac{\$10}{1.05} = 
 
 On 10,000 shares, \$95,238.10.
 
-**Yardstick two, the stock.** Now quote everything in shares. The Radon-Nikodym weight is the ratio of how the two numeraires grew, so in the up state it is ${(120/100)/1.05 = 8/7}$ and in the down state ${(90/100)/1.05 = 6/7}$. The stock-measure probabilities are therefore $q^S_u = 0.5 \times 8/7 = 4/7$ and $q^S_d = 0.5 \times 6/7 = 3/7$, which sum to 1 as they must. The call's payoff **in shares** is ${20/120 = 1/6}$ up and 0 down:
+**Yardstick two, the stock.** Now quote everything in shares. The Radon-Nikodym weight is the ratio of how the two numeraires grew, so in the up state it is ${(120/100)/1.05 = 8/7}$ and in the down state ${(90/100)/1.05 = 6/7}$. The stock-measure probabilities are therefore $q_u = 0.5 \times 8/7 = 4/7$ and $q_d = 0.5 \times 6/7 = 3/7$, which sum to 1 as they must. The call's payoff **in shares** is ${20/120 = 1/6}$ up and 0 down:
 
 $$\frac{V_0}{S_0} = \frac{4}{7}\cdot\frac{1}{6} + \frac{3}{7}\cdot 0 = \frac{2}{21}, \qquad V_0 = \$100 \times \frac{2}{21} = \$9.523810$$
 
@@ -116,7 +116,10 @@ $$D_u = \frac{1}{1.04 \times 1.06} = \frac{625}{689} = 0.907112, \qquad D_d = \f
 
 $$V_0 = \tfrac{1}{2}\cdot\tfrac{625}{689}\cdot\$2{,}000{,}000 + \tfrac{1}{2}\cdot\tfrac{625}{663}\cdot\$0 = \frac{\$625{,}000{,}000}{689} = \$907{,}111.76$$
 
-**Under the forward measure**, first get today's two-year zero: $P(0,2) = \mathbb{E}^Q[D_2] = \tfrac{1}{2}\big(\tfrac{625}{689} + \tfrac{625}{663}\big) = \tfrac{2500}{2703} = 0.924898$. The change-of-measure density is the ratio of numeraires, which in the up state is $\tfrac{625}{689} \div \tfrac{2500}{2703} = \tfrac{51}{52}$ exactly. So the forward-measure probabilities are $\tfrac{1}{2}\cdot\tfrac{51}{52} = \tfrac{51}{104} = 0.490385$ up and $\tfrac{53}{104} = 0.509615$ down, which makes $\mathbb{E}^{Q^2}[X] = \tfrac{51}{104} \times \$2{,}000{,}000 = \$980{,}769.23$. Then:
+**Under the forward measure**, first get today's two-year zero:
+
+$$P(0,2) = \mathbb{E}^Q[D_2] = \tfrac{1}{2}\big(\tfrac{625}{689} + \tfrac{625}{663}\big) = \tfrac{2500}{2703} = 0.924898.$$
+ The change-of-measure density is the ratio of numeraires, which in the up state is $\tfrac{625}{689} \div \tfrac{2500}{2703} = \tfrac{51}{52}$ exactly. So the forward-measure probabilities are $\tfrac{1}{2}\cdot\tfrac{51}{52} = \tfrac{51}{104} = 0.490385$ up and $\tfrac{53}{104} = 0.509615$ down, which makes $\mathbb{E}^{Q^2}[X] = \tfrac{51}{104} \times \$2{,}000{,}000 = \$980{,}769.23$. Then:
 
 $$V_0 = P(0,2)\,\mathbb{E}^{Q^2}[X] = \tfrac{2500}{2703} \times \$980{,}769.23 = \$907{,}111.76$$
 

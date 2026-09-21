@@ -79,7 +79,7 @@ The numerator grows with dimension, so the more quantities you estimate jointly 
 
 $$R(\theta, \hat\theta^{\,\mathrm{JS}}) \;=\; p\sigma^2 \;-\; (p-2)^2 \sigma^4 \,\mathbb{E}\!\left[ \frac{1}{\lVert X \rVert^2} \right] ,$$
 
-and the subtracted term is strictly positive for every $\theta$, which *is* the domination result. At ${\theta = 0}$, ${\lVert X\rVert^2/\sigma^2}$ is chi-square with $p$ degrees of freedom and ${\mathbb{E}[1/\chi^2_p] = 1/(p-2)}$, so the risk collapses to $2\sigma^2$. Not per coordinate: $2\sigma^2$ in total, whatever $p$ is. On 50 means the sample mean carries $50\sigma^2$ and James-Stein carries $2\sigma^2$, a **25x** cut.
+and the subtracted term is strictly positive for every $\theta$, which *is* the domination result. At ${\theta = 0}$, ${\lVert X\rVert^2/\sigma^2}$ is chi-square with $p$ degrees of freedom and the expected value of ${1/\chi^2}$ on $p$ degrees of freedom is ${1/(p-2)}$, so the risk collapses to $2\sigma^2$. Not per coordinate: $2\sigma^2$ in total, whatever $p$ is. On 50 means the sample mean carries $50\sigma^2$ and James-Stein carries $2\sigma^2$, a **25x** cut.
 
 Two amendments. Shrinking toward the **grand mean** $\bar{X}$ rather than zero is usually what you want, and costs a degree of freedom:
 
