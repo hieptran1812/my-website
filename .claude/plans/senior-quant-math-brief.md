@@ -135,6 +135,21 @@ decimal and carrying results to three places. It made every row an exact identit
   dollar figures is expected; state once in the text that they are illustrative
   arithmetic on assumed inputs and move on.
 
+### The honest null result is usually the cheaper half, and often the better one
+
+When you compute the headline number, compute the case where the technique does
+*not* help as well. It costs almost nothing once the machinery is built, and it is
+what makes a reader trust the rest of the post.
+
+The Monte Carlo post found that antithetic variates on a deep out-of-the-money call
+buy a 1% variance reduction, a rounding error. The agent computed it only to have a
+second data point and it became the most useful sentence in the section. The finite
+difference post found Crank-Nicolson returning a negative gamma on a long call while
+the price was right to a quarter of a cent, which is a sharper argument than the
+failure the brief had predicted.
+
+So: state where the method breaks, with a number, not just where it works.
+
 ## Maths rendering rules for this repo
 
 These four have cost the corpus hundreds of fixes. They are not style choices.
