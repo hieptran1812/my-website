@@ -230,8 +230,8 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 5 | instrumental-variables-natural-experiments | W3 | **SHIPPED** 4,314 words |
 | 6 | event-studies-diff-in-diff-synthetic-control | W3 | **SHIPPED** 4,437 words |
 | 7 | mcmc-metropolis-gibbs | W4 | **SHIPPED** 4,614 words |
-| 8 | hierarchical-bayes-pooling | W4 | **SHIPPED** 4,142 words |
-| 9 | gaussian-processes-kernels | W4 | **SHIPPED** 4,520 words |
+| 8 | hierarchical-bayes-pooling | W4 | **SHIPPED** 3,985 words |
+| 9 | gaussian-processes-kernels | W4 | **SHIPPED** 4,312 words |
 | 10 | hawkes-point-processes-order-flow | W4 | TODO |
 | 11 | regime-switching-hidden-markov | W4 | TODO |
 | 12 | levy-processes-jumps | W4 | TODO |
@@ -246,8 +246,8 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 21 | finite-difference-pde-pricing | W6 | TODO |
 | 22 | convex-duality-shadow-prices | W7 | TODO |
 | 23 | optimal-transport-wasserstein | W8 | TODO |
-| 24 | optimal-stopping-secretary-when-to-take-the-trade | W2 | **SHIPPED** 4,639 words |
-| 25 | order-book-imbalance-short-horizon-prediction | W2 | **SHIPPED** 4,172 words |
+| 24 | optimal-stopping-secretary-when-to-take-the-trade | W2 | **SHIPPED** 4,354 words |
+| 25 | order-book-imbalance-short-horizon-prediction | W2 | **SHIPPED** 4,026 words |
 | 26 | combining-weak-alphas | W2 | **SHIPPED** 4,396 words |
 | 27 | factor-risk-model-build | W9 | TODO |
 | 28 | pnl-attribution | W9 | TODO |

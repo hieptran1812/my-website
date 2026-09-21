@@ -14,43 +14,33 @@ readTime: 21
 > [!important]
 > **TL;DR:** Some decisions are not valuation problems, they are stopping problems. The question is not what an offer is worth but whether it beats the option to keep looking, and that option has a price you can compute.
 >
-> - In the classic secretary problem you see only ranks, cannot go back, and want the single best. The answer is: reject the first 1/e of the sequence, then take the first record. It wins **37.1%** of the time on 100 candidates, and that barely moves with the length of the sequence.
-> - Change one assumption, that you can see the actual values and know the distribution they come from, and the rule stops being a proportion and becomes a **reservation price that falls as the deadline approaches**. The best-choice win rate jumps from 36.8% to about **58.0%**.
+> - In the classic secretary problem you see only ranks, cannot go back, and want the single best. Reject the first 1/e of the sequence, then take the first record. It wins **37.1%** of the time on 100 candidates, and that barely moves with the length of the sequence.
+> - Change one assumption, that you can see the values and know the distribution they come from, and the rule stops being a proportion and becomes a **reservation price that falls as the deadline approaches**. The best-choice win rate jumps from 36.8% to about **58.0%**.
 > - On a \$5m fill with 20 quotes to come, the reservation price starts at 2.84 bps below mid and decays to 7.00 bps by the second-last quote. Following it costs \$1,401 against \$3,500 for taking the first quote you see.
-> - Stopping too early is usually the more expensive mistake. On that book it costs \$599 a trade against \$244 for stopping too late, roughly two and a half times as much.
+> - Stopping too early is usually the more expensive mistake: \$599 a trade on that book against \$244 for stopping too late.
 > - None of this creates edge in a fair game. That is a different theorem, and it goes the other way.
 
 ## The offer in front of you, or the one you hope for
 
 A trader has \$50m of a corporate bond to move before the close. A counterparty comes back at 4 basis points below mid. A *basis point*, or bp, is one hundredth of a percent, so 4 bps on \$50m is \$20,000 of cost. Is that a good print?
 
-You cannot answer that by valuing the bond. The bond is worth what it is worth. The real question is whether 4 bps beats the distribution of what will arrive over the next four hours, given that shopping the block harder leaks information and that at 4pm you have to be done. That is not a valuation problem. It is a **stopping problem**: offers arrive one at a time, you can take one or pass, passing is usually irreversible, and there is a deadline.
-
-Stopping problems are everywhere on a desk and almost nowhere in an introductory finance course. They also have exact answers, which is why they show up in quant interviews so often. The rest of this post derives two of those answers and shows what the gap between them is worth in money.
+You cannot answer that by valuing the bond. The bond is worth what it is worth. The real question is whether 4 bps beats the distribution of what will arrive over the next four hours, given that shopping the block harder leaks information and that at 4pm you have to be done. That is not a valuation problem. It is a **stopping problem**: offers arrive one at a time, you take one or pass, passing is irreversible, and there is a deadline. Stopping problems are everywhere on a desk and almost nowhere in an introductory finance course, and they have exact answers, which is why they show up in interviews so often.
 
 ![Timeline of 100 arriving quotes split into a look phase covering quotes 1 to 37 where nothing is accepted and a leap phase covering quotes 38 to 100 where the first record is taken, with the two outcomes labelled 37.1 percent win and 37 percent forced](/imgs/blogs/optimal-stopping-secretary-when-to-take-the-trade-math-for-quants-1.webp)
 
-The figure above is the mental model for the simplest version. Every stopping rule of this family splits the sequence into a phase where you only learn and a phase where you can commit, and the entire art is deciding where to put the line.
+The figure above is the mental model. Every rule in this family splits the sequence into a phase where you only learn and a phase where you can commit, and the whole art is deciding where to put the line.
 
 ## Foundations: what makes a decision a stopping problem
 
-You need four ingredients, and every one of them changes the answer.
+Four ingredients, and every one of them changes the answer. **Sequential arrival**: offers come one at a time and you never see them all laid out. **A decision at each arrival**: you accept and the game ends, or you reject and move on, with no "let me think about it". **No recall**: a rejected offer is gone, which in markets is close to literally true, because a dealer's quote is live for seconds and coming back an hour later to take that 4 bps gets you a worse price now that the dealer knows you have been shopping. **A deadline**: without one there is no urgency and the problem dissolves.
 
-**Sequential arrival.** Offers arrive one at a time, and you never see them all laid out. That is what makes this hard.
-
-**A decision at each arrival.** You accept and the game ends, or you reject and move on. There is no "let me think about it".
-
-**No recall.** A rejected offer is gone. In markets that is close to literally true: a dealer's quote is live for seconds, and coming back an hour later to take that 4 bps gets you a worse price, because the dealer now knows you have been shopping.
-
-**A deadline.** The sequence has a known length or a known end time. Without one there is no urgency and the problem dissolves.
-
-The thing most people skip is **what you can observe**. In one version you learn only *ranks*: whether this offer is the best you have seen so far, and nothing else. In another you see the actual number and know the distribution it came from. Those are different problems with different answers, and confusing them is the single most common mistake.
+The ingredient most people skip is **what you can observe**. In one version you learn only *ranks*: whether this offer is the best you have seen so far, and nothing else. In another you see the actual number and know the distribution it came from. Those are different problems with different answers, and confusing them is the single most common mistake.
 
 Two terms before we start. **Mid** is the midpoint between the best bid and the best offer, the closest thing to a fair price at that instant, and execution cost is quoted as distance from it. A **reservation price** is the worst price at which you are willing to deal right now. Everything below is about computing that number instead of guessing it.
 
 ### The everyday version: house hunting
 
-Strip out the finance and this is apartment hunting in a tight market. You view flats one at a time, good ones go the same day, and you have six weeks. Early viewings are worth almost nothing as decisions and almost everything as education, because you do not yet know what the distribution looks like. Everyone who has done this has felt both failure modes: taking the third flat out of fatigue and then seeing two better ones in week five, or holding out for perfect and signing for whatever is left. The maths below says exactly how long to look, and the answer is roughly the same whether you have twenty viewings or two hundred.
+Strip out the finance and this is apartment hunting in a tight market. You view flats one at a time, good ones go the same day, and you have six weeks. Early viewings are worth almost nothing as decisions and almost everything as education. Everyone who has done it has felt both failure modes: taking the third flat out of fatigue and then seeing two better ones in week five, or holding out for perfect and signing for whatever is left. The maths below says exactly how long to look.
 
 ## The secretary problem, from zero
 
@@ -84,9 +74,7 @@ That coincidence is the memorable part. **You reject 1/e of the sequence and you
 
 ![Curve of the probability of landing the single best of 100 quotes against how many quotes are rejected first, peaking at 37.1 percent when 37 are rejected, with a broad flat region from 30 to 45 and a horizontal line marking the 36.8 percent large-n limit](/imgs/blogs/optimal-stopping-secretary-when-to-take-the-trade-math-for-quants-2.webp)
 
-Two things in that curve matter more than the peak. First, the peak is **broad**: reject anywhere between 30 and 45 of 100 and you stay above 36%, so the rule is forgiving of a bad estimate of the sequence length. Second, it is steep on the left. Rejecting only 10 first drops you to 23.5%, and taking the first quote outright gives you 1%. Under-sampling is punished much harder than over-sampling.
-
-The win rate is also remarkably stable in $n$. With 10 candidates the optimum is 39.9%, with 20 it is 38.4%, with 100 it is 37.1%, and with 1,000 it is 36.8%. It approaches 1/e from above and it gets there fast, which is why the rule is usually quoted as a single number.
+Two things in that curve matter more than the peak. First, the peak is **broad**: reject anywhere between 30 and 45 of 100 and you stay above 36%, so the rule forgives a bad estimate of the sequence length. Second, it is steep on the left. Rejecting only 10 first drops you to 23.5%, and taking the first quote outright gives you 1%, so under-sampling is punished far harder than over-sampling. The win rate is also stable in $n$: 39.9% with 10 candidates, 38.4% with 20, 37.1% with 100, 36.8% with 1,000. It approaches 1/e from above and gets there fast, which is why the rule is quoted as a single number.
 
 #### Worked example 1: the 1/e rule on 100 counterparties for a \$50m block
 
@@ -112,29 +100,27 @@ On a desk you almost never face the rank-only problem. You see the actual price,
 
 ![Comparison table of rank-only versus full-information stopping showing what you observe, the optimal rule, the chance of the best at large n of 36.8 percent versus 58.0 percent, and what each objective optimises](/imgs/blogs/optimal-stopping-secretary-when-to-take-the-trade-math-for-quants-3.webp)
 
-With values visible and the distribution known, the optimal rule is no longer "reject a fixed proportion". It is a **threshold**: accept anything above a cutoff, where the cutoff depends on how many chances remain. Gilbert and Mosteller worked this case out in 1966. Even keeping the demanding best-or-nothing objective, the win rate rises from 36.8% to a limit of about 58.0%, because you can now recognise an excellent draw immediately instead of waiting for something to prove itself by being a record.
+With values visible and the distribution known, the optimal rule is no longer "reject a fixed proportion". It is a **threshold**: accept anything above a cutoff that depends on how many chances remain. Gilbert and Mosteller worked this case out in 1966. Even keeping the demanding best-or-nothing objective, the win rate rises from 36.8% to a limit of about 58.0%, because you can now recognise an excellent draw immediately instead of waiting for it to prove itself by being a record.
 
-The deeper change is that once values are visible you can switch to the objective a trader actually has, which is the expected quality of the fill rather than the probability of the single best. That objective has a clean recursive answer.
+The deeper change is that once values are visible you can switch to the objective a trader actually has: the expected quality of the fill, in money, rather than the probability of the single best. That objective has a clean recursive answer.
 
 ## The trading version: a reservation price that decays
 
-Let $V_t$ be the value of playing optimally with $t$ chances still remaining, measured in the same units as the offers. When the last offer arrives you have no choice, so $V_1 = E[X]$, the mean of the distribution. With $t$ chances left you face a draw $X$ and can either take it or fall back on optimal play with $t-1$ remaining, which is worth $V_{t-1}$. So
+Let $V_t$ be the value of playing optimally with $t$ chances still remaining, in the same units as the offers. At the last offer you have no choice, so $V_1 = E[X]$, the mean of the distribution. With $t$ chances left you face a draw $X$ and can either take it or fall back on optimal play with $t-1$ remaining, worth $V_{t-1}$. So
 
 $$
 V_t = E\left[\max\left(X,\, V_{t-1}\right)\right]
 $$
 
-That single line is the whole method. It is the same backward induction that drives [optimal execution schedules](/blog/trading/math-for-quants/dynamic-programming-optimal-execution-math-for-quants), applied to a stop-or-continue decision instead of a how-much-to-trade decision.
+That single line is the whole method, the same backward induction that drives [optimal execution schedules](/blog/trading/math-for-quants/dynamic-programming-optimal-execution-math-for-quants), applied to a stop-or-continue decision instead of a how-much-to-trade decision.
 
-Read the recursion and the trading rule falls out: **accept the current offer if it beats $V_{t-1}$, refuse otherwise.** So $V_{t-1}$ *is* the reservation price. It is not a preference or a limit somebody set, it is the market value of the option to keep looking, and it is computable.
-
-Because $V_t$ increases with $t$ (more chances can never be worth less), the reservation price falls as the deadline approaches. Early in the day you can afford to be fussy, because refusing costs you almost nothing. At the last quote you take whatever arrives.
+Read it and the trading rule falls out: **accept the current offer if it beats $V_{t-1}$, refuse otherwise.** So $V_{t-1}$ *is* the reservation price. It is not a preference or a limit somebody set, it is the market value of the option to keep looking, and it is computable. Because $V_t$ increases with $t$, that option is worth less every time a chance is used up, so the reservation price falls as the deadline approaches. Early in the day you can afford to be fussy. At the last quote you take whatever arrives.
 
 ![Line chart of the reservation price on a five million dollar sale, rising from 2.84 basis points with 20 quotes to come to 7.00 basis points with 2 to come and 12 basis points at the last quote, annotated with dollar equivalents](/imgs/blogs/optimal-stopping-secretary-when-to-take-the-trade-math-for-quants-4.webp)
 
 #### Worked example 2: the reservation price on a \$5m sale with 20 quotes
 
-Take a concrete, deliberately simple book. You need to sell \$5m of something. Over the day 20 quotes will arrive, each independently spread evenly between 2 and 12 bps below mid. No recall, and you must be flat by the close. One bp on \$5m is \$500, so the band runs from \$1,000 to \$6,000 of cost.
+A deliberately simple book. You need to sell \$5m of something, 20 quotes will arrive over the day, each independently spread evenly between 2 and 12 bps below mid, no recall, flat by the close. One bp on \$5m is \$500, so the band runs from \$1,000 to \$6,000 of cost.
 
 Rescale to a quality score $X$ between 0 and 1, where the cost in bps is ${12 - 10X}$. For a uniform draw and a threshold $c$, a short integral gives $E[\max(X, c)] = c^2 + (1 - c^2)/2$, so the recursion collapses to
 
@@ -155,17 +141,17 @@ Now read off the reservation price, remembering that with $t$ quotes to come you
 
 With 20 quotes ahead you refuse anything worse than 2.84 bps, and refusing is cheap because 19 more chances are coming. Halfway through the day the same book should be hitting 3.50 bps without hesitation. With two quotes left the bar has collapsed to the unconditional mean, because the alternative to accepting is a coin flip on the last quote.
 
-The value of the whole day is $V_{20} = 0.9199$, which is 2.80 bps, or **\$1,401 of expected cost**. Compare that against accepting the first quote that shows up, which costs the mean 7.00 bps, or \$3,500.
+The value of the whole day is $V_{20} = 0.9199$, which is 2.80 bps, or **\$1,401 of expected cost**, against 7.00 bps or \$3,500 for accepting the first quote that shows up.
 
-*The intuition: the reservation price is the value of the option to keep looking, and options with less time left are worth less. Any execution rule with a fixed limit price is implicitly claiming that option value does not decay, which is false by construction.*
+*The intuition: the reservation price is the value of the option to keep looking, and options with less time left are worth less. Any rule with a fixed limit price implicitly claims that option value does not decay, which is false by construction.*
 
 ## What stopping too early and too late actually costs
 
-Traders rarely follow a decaying threshold. They follow a fixed limit, and the interesting question is what that habit costs. Both directions of error are expensive, and they are not symmetric.
+Traders rarely follow a decaying threshold. They follow a fixed limit. Both directions of error are expensive, and they are not symmetric.
 
 #### Worked example 3: four policies on the same \$5m book
 
-Same book: \$5m, 20 quotes, uniform between 2 and 12 bps, forced fill at the close. Four rules.
+Same book: \$5m, 20 quotes, uniform between 2 and 12 bps, forced fill at the close.
 
 | Policy | What it does | Expected cost | On \$5m | Extra versus optimal |
 | --- | --- | --- | --- | --- |
@@ -174,41 +160,37 @@ Same book: \$5m, 20 quotes, uniform between 2 and 12 bps, forced fill at the clo
 | Stop too early | Flat limit: hit anything at 6.00 bps or better | 4.00 bps | \$2,000 | \$599 |
 | No rule at all | Hit the first quote that arrives | 7.00 bps | \$3,500 | \$2,099 |
 
-The arithmetic behind the two middle rows is worth seeing. Holding out for 2.84 bps all day, a quote clears that bar 8.36% of the time, so over the 19 quotes before the last one you fail to fill 19.0% of the time and get dumped on a random last quote at 7.00 bps. The other 81.0% of the time you fill at an average of 2.42 bps. That blends to 3.29 bps, or \$1,645. Subtract the \$1,401 baseline and holding out costs \$244 a trade.
+The arithmetic behind the two middle rows is worth seeing. A quote clears the 2.84 bps bar 8.36% of the time, so across the 19 quotes before the last one you fail to fill 19.0% of the time and get dumped on a random last quote at 7.00 bps. The other 81.0% of the time you fill at an average of 2.42 bps. That blends to 3.29 bps, or \$1,645, so holding out costs \$244 a trade over the \$1,401 baseline. The flat 6.00 bps limit fills almost immediately, at an average of 4.00 bps once you condition on clearing the bar. That is \$2,000, and \$2,000 minus \$1,401 is \$599 a trade.
 
-The flat 6.00 bps limit fills almost immediately, at an average of 4.00 bps once you condition on clearing the bar. That is \$2,000, and \$2,000 minus \$1,401 is \$599 a trade.
-
-So **stopping too early costs about two and a half times what stopping too late costs on this book**, and both are dwarfed by having no rule at all. Scale it up: a desk doing 250 of these blocks a year gives up roughly \$149,750 to the flat 6 bps habit and roughly \$61,000 to stubbornness. Neither number appears in any P&L line, because the counterfactual is invisible. That is precisely why it persists.
+So **stopping too early costs about two and a half times what stopping too late costs on this book**, and both are dwarfed by having no rule at all. A desk doing 250 of these blocks a year gives up roughly \$149,750 to the flat 6 bps habit and roughly \$61,000 to stubbornness. Neither number appears on any P&L line, because the counterfactual is invisible, which is precisely why the habit survives.
 
 *The intuition: the cost of a wrong stopping rule is a slow leak, not a blowup, and slow leaks survive because nothing on a risk report is shaped like them.*
 
 ### Where the model breaks on a real desk
 
-The uniform, independent, known-distribution setup above is a teaching device, and three of its assumptions fail in ways that matter.
+Three assumptions in that setup fail in ways that matter.
 
-**Quotes are not independent of your own behaviour.** Shopping a block to 20 counterparties leaks the direction and size of your interest. The twentieth quote is worse than the first partly because the market now knows you are a seller. In the model, waiting is free; in reality, waiting has a cost that grows with how many people you have asked. That pushes the whole reservation-price schedule down.
+**Quotes are not independent of your own behaviour.** Shopping a block to 20 counterparties leaks the direction and size of your interest, so the twentieth quote is worse than the first partly because the market now knows you are a seller. In the model waiting is free. In reality its cost grows with how many people you have asked, which pushes the whole schedule down.
 
-**The distribution moves.** The band you calibrated on last month's quotes is not this afternoon's, especially around a data release. A threshold rule built on a stale distribution is a confident, precise, wrong number, which is the topic of [estimation error and why it bites](/blog/trading/math-for-quants/estimators-bias-variance-consistency-math-for-quants).
+**The distribution moves.** The band calibrated on last month's quotes is not this afternoon's, especially around a data release. A threshold built on a stale distribution is a confident, precise, wrong number, which is the subject of [estimation error and why it bites](/blog/trading/math-for-quants/estimators-bias-variance-consistency-math-for-quants).
 
-**The deadline is not the clock.** The threshold depends on *chances remaining*, not on time remaining. If liquidity dries up at 2pm and no more quotes are coming, your deadline effectively arrived early and your reservation price should have collapsed with it. Desks that hard-code the schedule to the clock get this backwards on exactly the days it costs the most.
+**The deadline is not the clock.** The threshold depends on *chances remaining*, not time remaining. If liquidity dries up at 2pm, your deadline arrived early and your reservation price should have collapsed with it.
 
 ## Why "quit while you are ahead" is not a stopping rule
 
-Everything above extracts value because the offers genuinely differ and you are selecting among them. A **martingale**, a process whose expected next value equals its current value, offers nothing to select: every future price is, in expectation, today's price. Doob's optional stopping theorem makes this precise, and under its conditions the expected value at any stopping time equals the starting value. No rule built only on information available at the time can turn a fair game into a profitable one. The reason "quit while you are ahead" feels like it works is the classic counterexample: in a symmetric random walk, "stop the first time you are up \$1" succeeds with probability 1, which looks like a violation. It is not, because that stopping time has infinite expected duration and unbounded interim loss, so the theorem's hypotheses simply do not hold. On a desk the unbounded interim loss has a name, which is your risk limit, and it binds long before the strategy pays. The measure-theoretic machinery behind this, filtrations and adapted processes and stopping times, is developed in [martingales and the risk-neutral measure](/blog/trading/math-for-quants/martingales-risk-neutral-measure-math-for-quants) and [filtrations and no look-ahead](/blog/trading/math-for-quants/filtrations-no-lookahead-math-for-quants). The short version to carry around: optimal stopping is about choosing well among unequal offers, optional stopping says you cannot choose your way out of a fair game, and they are near-opposite statements with confusingly similar names.
+Everything above extracts value because the offers genuinely differ and you are selecting among them. A **martingale**, a process whose expected next value equals its current value, offers nothing to select: every future price is, in expectation, today's price. Doob's optional stopping theorem makes this precise, and under its conditions the expected value at any stopping time equals the starting value, so no rule built only on information available at the time can turn a fair game into a profitable one. The reason "quit while you are ahead" feels like it works is the classic counterexample: in a symmetric random walk, "stop the first time you are up \$1" succeeds with probability 1, which looks like a violation. It is not, because that stopping time has infinite expected duration and unbounded interim loss, so the theorem's hypotheses do not hold. On a desk the unbounded interim loss has a name, your risk limit, and it binds long before the strategy pays. The machinery behind this, filtrations and adapted processes and stopping times, is developed in [martingales and the risk-neutral measure](/blog/trading/math-for-quants/martingales-risk-neutral-measure-math-for-quants) and [filtrations and no look-ahead](/blog/trading/math-for-quants/filtrations-no-lookahead-math-for-quants). The short version: optimal stopping is about choosing well among unequal offers, optional stopping says you cannot choose your way out of a fair game, and they are near-opposite statements with confusingly similar names.
 
 ## Common misconceptions
 
-**"The 1/e rule is the answer to every stopping problem."** It answers exactly one: ranks only, no recall, no information about the distribution, and the objective of landing the single best. Relax any one of those four and the answer changes shape. Values visible turns a proportion rule into a threshold rule. Recall allowed makes the problem trivial. A different objective, like expected value, changes it again. Quoting 37% for a problem where you can see the numbers is the most common way to look rigorous while being wrong.
+**"The 1/e rule is the answer to every stopping problem."** It answers exactly one: ranks only, no recall, no information about the distribution, and the objective of landing the single best. Relax any of those four and the answer changes shape. Visible values turn a proportion rule into a threshold rule, recall makes the problem trivial, and a different objective changes it again. Quoting 37% for a problem where you can see the numbers is the most common way to look rigorous while being wrong.
 
-**"Waiting longer is always better."** The option to keep looking is worth $V_{t-1}$, and that value falls to the unconditional mean as the deadline closes. Holding the opening threshold all day cost \$244 per \$5m block above, or about \$61,000 a year over 250 blocks. Patience is a position, and it decays.
+**"Waiting longer is always better."** The option to keep looking is worth $V_{t-1}$, and that falls to the unconditional mean as the deadline closes. Holding the opening threshold all day cost \$244 per \$5m block above, about \$61,000 a year over 250 blocks. Patience is a position, and it decays.
 
-**"This is the optional stopping theorem."** No. Optimal stopping is about selection among genuinely different offers, and it creates value. Optional stopping says that in a fair game there is nothing to select, and no stopping rule can manufacture an edge. Same word, opposite direction.
+**"This is the optional stopping theorem."** No. Optimal stopping is selection among genuinely different offers, and it creates value. Optional stopping says that in a fair game there is nothing to select. Same word, opposite direction.
 
-**"The secretary rule maximises the price you get."** It maximises the probability of the single best and is indifferent to how bad the failures are. In worked example 1 it left you on the last bid 37% of the time, at an expected \$35,000 on a \$50m block. Objectives are not interchangeable, and choosing one is a modelling decision you should make out loud.
+**"The secretary rule maximises the price you get."** It maximises the probability of the single best and is indifferent to how bad the failures are. In worked example 1 it left you on the last bid 37% of the time, at an expected \$35,000 on a \$50m block. Choosing an objective is a modelling decision, and it should be made out loud.
 
-**"No recall is a technicality."** It is the entire problem. If you could go back to any earlier quote, the optimal rule would be to watch all 100 and then take the best, winning 100% of the time. Everything interesting here comes from irreversibility.
-
-**"Threshold rules are the same as limit orders."** A limit order is a fixed threshold. The optimal rule is a threshold that moves with the number of chances remaining. If you use the first as an implementation of the second, you are systematically too fussy early and too generous late, which is a specific and measurable cost, not a rounding error.
+**"No recall is a technicality."** It is the entire problem. If you could go back to any earlier quote, the optimal rule would be to watch all 100 and take the best, winning every time. Everything interesting here comes from irreversibility.
 
 ## In the interview room and on the desk
 

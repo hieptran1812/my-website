@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 19
+readTime: 18
 ---
 
 > [!important]
@@ -86,11 +86,9 @@ That is why "borrowing strength" is the right phrase. The other strategies are l
 
 ## This is James-Stein with the shrinkage estimated
 
-If $\tilde\theta_i = y_i + B(\mu - y_i)$ looks familiar, it should: it is the shape of the [James-Stein estimator](/blog/trading/math-for-quants/shrinkage-stein-paradox-math-for-quants), which dominates the sample mean in three or more dimensions by pulling every coordinate toward a common target.
+If $\tilde\theta_i = y_i + B(\mu - y_i)$ looks familiar, it should: it is the [James-Stein estimator](/blog/trading/math-for-quants/shrinkage-stein-paradox-math-for-quants), which that post derives. Hierarchical pooling *is* that estimator with the shrinkage factor estimated from the data rather than plugged in.
 
-The difference is where the shrinkage comes from. James-Stein hands you a formula for the constant, derived to minimise total squared error under a known noise variance and a target picked in advance. The hierarchy instead writes down the population that would produce such shrinkage and estimates its mean and spread from the same data; the James-Stein constant is what that gives you when the answer is forced to be identical for every coordinate.
-
-So the hierarchy is the more honest version of one trade, still buying a large variance reduction with a little bias but no longer asserting how much to buy. It also gives you what one global constant cannot, a *different* factor per group, so eight years of record is not pulled as hard as eight months. Where records differ wildly in length, that is the whole game.
+That is the whole difference, and it buys two things. You stop having to assert how much to shrink, because the population you fit implies it. And you get a *different* factor per group, so eight years of record is not pulled as hard as eight months, which a single global constant cannot express and an allocation committee needs.
 
 Estimating $\mu$ and $\tau$ from the data and then treating them as known is **empirical Bayes**: a short cut that understates uncertainty, and what Efron and Morris used on the example that made the idea famous.
 
@@ -120,13 +118,15 @@ Of the total 0.632 of spread in the spreadsheet, 0.382 is noise, about 60%; only
 
 **Step 3, shrink**, with $B_i = 4/(4 + T_i)$:
 
-| Strategy | $B_i$ | $\tilde\theta_i = y_i + B_i(1.34 - y_i)$ |
+| Strategy | $B_i = 4/(4 + T_i)$ | $\tilde\theta_i = y_i + B_i(1.34 - y_i)$ |
 | --- | --- | --- |
-| A, 1 year | 0.80 | $2.40 - 0.80 \times 1.06 = 1.55$ |
-| B, 3 years | 0.57 | $1.90 - 0.57 \times 0.56 = 1.58$ |
-| C, 5 years | 0.44 | $1.15 + 0.44 \times 0.19 = 1.23$ |
-| D, 4 years | 0.50 | $0.75 + 0.50 \times 0.59 = 1.05$ |
-| E, 8 years | 0.33 | $0.50 + 0.33 \times 0.84 = 0.78$ |
+| A, 1 year | $\tfrac{4}{5} = 0.80$ | $2.40 - \tfrac{4}{5}(1.06) = 1.552$ |
+| B, 3 years | $\tfrac{4}{7} = 0.571$ | $1.90 - \tfrac{4}{7}(0.56) = 1.580$ |
+| C, 5 years | $\tfrac{4}{9} = 0.444$ | $1.15 + \tfrac{4}{9}(0.19) = 1.234$ |
+| D, 4 years | $\tfrac{1}{2} = 0.500$ | $0.75 + \tfrac{1}{2}(0.59) = 1.045$ |
+| E, 8 years | $\tfrac{1}{3} = 0.333$ | $0.50 + \tfrac{1}{3}(0.84) = 0.780$ |
+
+Those shrunk values are exact, and the figures round them to two places.
 
 The raw column spans 1.90 of Sharpe, the shrunk column 0.80. Most of the apparent dispersion was never there.
 
@@ -172,11 +172,7 @@ That prices the error *conditional on* the pooled estimates being the better for
 
 The normal-normal model above is **conjugate**: the posterior belongs to the same family as the prior, so you can write the answer down, which is why every number here came out of two lines of arithmetic. Conjugacy survives a few variations, such as a beta population over hit rates or a gamma population over event intensities.
 
-It stops as soon as you want anything real. A $t$ population instead of a normal, a prior on $\tau$ instead of a point estimate, non-normal returns, correlated strategies, or hyperparameters depending on covariates, and the integral over the population parameters has no closed form. That is when you reach for [MCMC](/blog/trading/math-for-quants/mcmc-metropolis-gibbs-math-for-quants) and draw samples from the joint posterior over all the $\theta_i$ and $\mu$ and $\tau$ at once instead of trying to integrate.
-
-Full Bayes matters most where empirical Bayes is weakest. Plugging in $\hat\tau$ as if it were known ignores the uncertainty in it, and with five groups that uncertainty is enormous. A sampler propagates it, so the credible intervals widen honestly.
-
-One warning if you fit this yourself. Hierarchical posteriors have a nasty geometry near $\tau = 0$, where the $\theta_i$ collapse toward $\mu$ and leave a funnel that Gibbs and vanilla Hamiltonian Monte Carlo both traverse badly. The fix is the **non-centred parameterisation**, writing $\theta_i = \mu + \tau z_i$ with $z_i \sim N(0,1)$ and sampling the $z_i$. Betancourt and Girolami (2015) is the reference; divergences here are almost always this.
+It stops as soon as you want anything real: a $t$ population, a prior on $\tau$ instead of a point estimate, correlated strategies, or hyperparameters depending on covariates. The integral then has no closed form and you reach for [MCMC](/blog/trading/math-for-quants/mcmc-metropolis-gibbs-math-for-quants), which also carries the uncertainty in $\hat\tau$ that empirical Bayes throws away. One warning: near $\tau = 0$ the posterior is a funnel that Gibbs and vanilla Hamiltonian Monte Carlo traverse badly, and the fix is the **non-centred parameterisation**, $\theta_i = \mu + \tau z_i$ with $z_i \sim N(0,1)$ (Betancourt and Girolami, 2015).
 
 ## The failure mode: when the population does not fit
 

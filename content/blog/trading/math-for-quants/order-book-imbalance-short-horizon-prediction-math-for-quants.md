@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 19
+readTime: 18
 ---
 
 > [!important]
@@ -25,7 +25,7 @@ Open any stock's order book and you will see two stacks of resting orders. Buyer
 
 Suppose the best buyers are offering to take 12,000 shares and the best sellers are offering only 3,000. Nothing has traded yet. No news has come out. And yet, over the next few seconds, the price is more likely to go up than down.
 
-That asymmetry has a name, **order book imbalance**, and it is about as close to a free lunch as microstructure gets. It is stable across stocks, across venues, across decades. It survives every robustness check anyone has thrown at it. It is also, for almost everyone reading this, completely untradeable. Understanding why both of those things are true at once is the entire point of this post.
+That asymmetry has a name, **order book imbalance**, and it is about as close to a free lunch as microstructure gets. It is stable across stocks, venues and decades, and it survives every robustness check thrown at it. It is also, for almost everyone reading this, completely untradeable. Understanding why both things are true at once is the entire point of this post.
 
 ![A two-sided depth ladder showing 3,000 shares resting at the best ask of 50.02 and 12,000 at the best bid of 50.00, with the imbalance computed as plus 0.60 and the three-level version as plus 0.07](/imgs/blogs/order-book-imbalance-short-horizon-prediction-math-for-quants-1.webp)
 
@@ -33,13 +33,13 @@ The figure above is the mental model. Two stacks, one number that summarises the
 
 ## Foundations: the book, the touch, and the queue
 
-You need four ideas before any of this makes sense. If you already know what a limit order book is, skim to the next section, but do read the part about queues.
+You need three ideas before any of this makes sense. If you already know what a limit order book is, skim to the next section, but do read the part about queues.
 
 ### The limit order book
 
-Most modern exchanges run a **continuous double auction**. Anyone can post a *limit order*: a promise to buy up to N shares at no more than some price, or to sell at no less. Those promises sit in a public list, sorted by price, until they are filled or cancelled. That list is the **limit order book**.
+Most modern exchanges run a **continuous double auction**. Anyone can post a *limit order*: a promise to buy up to N shares at no more than some price, or to sell at no less. Those promises sit in a public list, sorted by price, until filled or cancelled. That list is the **limit order book**.
 
-The other order type is a *market order*, which says "fill me now at whatever price is available". A market order does not join the book. It walks into the book and consumes resting limit orders until it is filled. Every trade is one side crossing into the other's resting size. If you want the mechanics in full, with code, see [the order book simulator post](/blog/trading/quantitative-finance/order-book-simulator-quant-research).
+The other order type is a *market order*: fill me now at whatever price is available. It does not join the book, it walks into the book and consumes resting limit orders. Every trade is one side crossing into the other's resting size. For the mechanics in full, with code, see [the order book simulator post](/blog/trading/quantitative-finance/order-book-simulator-quant-research).
 
 ### The touch, the spread and the mid
 
@@ -49,13 +49,9 @@ Say the best bid is \$50.00 and the best ask is \$50.02. The gap between them is
 
 ### The queue
 
-Behind each of those two prices sits a pile of orders, and that pile has an order. Exchanges almost always allocate fills by **price-time priority**: at a given price, the order that arrived first gets filled first. So if 12,000 shares are resting at \$50.00 and you add 1,000 more, you are behind all 12,000. A seller has to hit through the entire queue ahead of you before you trade.
+Behind each of those two prices sits a pile of orders, and that pile has an order. Exchanges almost always allocate fills by **price-time priority**: at a given price, whoever arrived first is filled first. If 12,000 shares rest at \$50.00 and you add 1,000 more, you are behind all 12,000, and a seller must hit through the entire queue ahead of you before you trade.
 
-**Queue position is the asset.** That single fact drives everything that follows.
-
-### Resting size
-
-Finally, **resting size** is just how many shares are sitting at a given price level. It is the raw material of the signal: at any instant, the book tells you exactly how many shares are waiting on each side.
+**Queue position is the asset.** That single fact drives everything that follows. The **resting size** at each price, meaning how many shares are waiting there, is the raw material of the signal.
 
 ## Defining imbalance
 
@@ -73,7 +69,7 @@ $$
 I_K \;=\; \frac{\sum_{k=1}^{K} w_k \left(Q_b^{(k)} - Q_a^{(k)}\right)}{\sum_{k=1}^{K} w_k \left(Q_b^{(k)} + Q_a^{(k)}\right)}
 $$
 
-You would expect more data to help. It mostly does not, and the reason is structural rather than statistical. Only the touch is mechanically binding: the price cannot move until a touch queue is exhausted or a new order appears inside the spread, so only touch size sits on the causal path. Orders three levels deep are cheap to post and free to cancel, they carry far less commitment, and they can be withdrawn faster than anyone can trade against them. Depth away from the touch describes intent. Depth at the touch describes obligation.
+You would expect more data to help. It mostly does not, and the reason is structural rather than statistical. Only the touch is mechanically binding: the price cannot move until a touch queue is exhausted or a new order appears inside the spread. Orders three levels deep are cheap to post, free to cancel, and can be withdrawn faster than anyone can trade against them. Depth away from the touch describes intent. Depth at the touch describes obligation.
 
 #### Worked example 1: reading one book
 
@@ -107,21 +103,19 @@ Candidates in interviews usually name one of these two mechanisms. The complete 
 
 The mid-price moves when a touch queue empties out, or when someone posts inside the spread. Consider our book. To clear the ask, the market needs to absorb 3,000 shares. To clear the bid it needs 12,000. If buy and sell pressure arrive at roughly similar rates, the thin side simply runs out first, far more often than not. When the ask clears, the best ask steps up to \$50.03 and the mid rises with it.
 
-This is a race between two depleting queues, and the shorter queue wins more often. It requires no information, no view, no informed trader. It is arithmetic about arrival times. Cont, Stoikov and Talreja formalised exactly this as a stochastic queueing model of the book, and Lipton, Pesavento and Sotiropoulos worked out the probability of the next price move as a function of quote imbalance in the same spirit.
+This is a race between two depleting queues, and the shorter one wins more often. It needs no information and no informed trader, only arithmetic about arrival times. Cont, Stoikov and Talreja formalised this as a stochastic queueing model of the book, and Lipton, Pesavento and Sotiropoulos derived the probability of the next price move as a function of quote imbalance.
 
 ### Where liquidity chose to sit
 
 The second channel is that the book's shape is not exogenous. It is a record of choices.
 
-If participants broadly expect the price to rise, sellers become reluctant to post at \$50.02 and start cancelling; buyers become eager and pile into \$50.00. The thin ask is not an accident of arrival times. It is a vote. Under this reading, imbalance is a real-time poll of who wants to transact and at what price, and the fact that it predicts is unsurprising.
+If participants broadly expect the price to rise, sellers become reluctant to post at \$50.02 and start cancelling, while buyers pile into \$50.00. The thin ask is not an accident of arrival times. It is a vote, which makes imbalance a real-time poll of who wants to transact and at what price.
 
-The two channels are entangled and cannot be cleanly separated in data. They also push the same way, which is precisely why the effect is so robust. A purely mechanical effect could be arbitraged away by anyone willing to post on the thin side. A purely informational one would vanish once the information was public. Because both are running, imbalance keeps predicting even though every serious participant knows about it.
+The two channels are entangled and cannot be cleanly separated in data. They also push the same way, which is precisely why the effect is so robust. A purely mechanical effect could be arbitraged away by anyone willing to post on the thin side; a purely informational one would vanish once the information was public. Because both run at once, imbalance keeps predicting even though every serious participant knows about it.
 
 ## The micro-price, and why the spread eats it
 
-Here is the piece that turns "the price will probably go up" into a number you can act on.
-
-If imbalance tells you the ask is likelier to break than the bid, then fair value is not the mid. It is somewhere between mid and ask. The natural first estimator is a **size-weighted mid**, where each price gets the *opposite* side's size as its weight:
+Here is the piece that turns "the price will probably go up" into a number you can act on. If imbalance says the ask is likelier to break than the bid, fair value is not the mid; it sits somewhere between mid and ask. The natural first estimator is a **size-weighted mid**, where each price gets the *opposite* side's size as its weight:
 
 $$
 P_w \;=\; \frac{Q_a P_b + Q_b P_a}{Q_a + Q_b}
@@ -155,11 +149,11 @@ You were right, and you lost \$140. To break even you would need the mid to move
 
 ## How fast the edge dies
 
-The second reason this is not a strategy is that the prediction is about *the next mid move*, not about a drift you can sit in. The book refreshes continuously. Queues refill, cancels arrive, the imbalance that pointed up thirty seconds ago has been replaced several times over.
+The second reason this is not a strategy is that the prediction is about *the next mid move*, not a drift you can sit in. The book refreshes continuously: queues refill, cancels arrive, and the imbalance that pointed up thirty seconds ago has been replaced several times over.
 
 ![A chart with holding horizon in seconds on the x-axis and cents per share on the y-axis, showing the noise curve rising from 0.65 to 5.06 cents while the signal curve falls from 0.6 to 0.1 cents, both far below the 2 cent round-trip cost line](/imgs/blogs/order-book-imbalance-short-horizon-prediction-math-for-quants-4.webp)
 
-Two things happen as the horizon stretches, and they work against you independently. The signal decays, because the state that generated it is gone. And the noise grows with the square root of time, because that is what diffusion does, a point developed at length in [the post on the central limit theorem](/blog/trading/math-for-quants/law-large-numbers-central-limit-theorem-math-for-quants). The ratio of the two collapses from both ends at once.
+Two things happen as the horizon stretches, and they work against you independently. The signal decays because the state that generated it is gone, and the noise grows with the square root of time because that is what diffusion does, a point developed in [the post on the central limit theorem](/blog/trading/math-for-quants/law-large-numbers-central-limit-theorem-math-for-quants). The ratio collapses from both ends at once.
 
 #### Worked example 3: the horizon test, in dollars per round trip
 
@@ -187,9 +181,9 @@ So the signal belongs to whoever posts rather than crosses. Now comes the part c
 
 You are a market maker resting a bid at \$50.00. When do you actually get filled?
 
-When the book is bid-heavy, you are behind 12,000 shares. Sellers have to chew through all of them before reaching you, so you rarely fill, and the price rises without you. When the book is ask-heavy, the bid queue is short, sellers reach you quickly, and you fill. But an ask-heavy book is precisely the state in which imbalance says the price is about to fall.
+When the book is bid-heavy you sit behind 12,000 shares, sellers rarely chew through all of them, and the price rises without you. When the book is ask-heavy the bid queue is short, sellers reach you quickly, and you fill. But an ask-heavy book is precisely the state in which imbalance says the price is about to fall.
 
-Your fills are therefore not a random sample of book states. They concentrate in the states where the signal points against you. **Conditional on being filled, the imbalance leans the wrong way**, and that conditional expectation is exactly the adverse selection cost. This is the queue-based cousin of the classic Glosten-Milgrom picture developed in [the market making simulator post](/blog/trading/quantitative-finance/market-making-simulator-quant-research): the price you get is informative about the trade you just did.
+Your fills are therefore not a random sample of book states. They concentrate where the signal points against you. **Conditional on being filled, the imbalance leans the wrong way**, and that conditional expectation is the adverse selection cost. This is the queue-based cousin of the Glosten-Milgrom picture developed in [the market making simulator post](/blog/trading/quantitative-finance/market-making-simulator-quant-research): the price you get is informative about the trade you just did.
 
 #### Worked example 4: a maker quoting \$10m of notional
 
@@ -229,35 +223,35 @@ The last row is the whole business in one line. At $I = -1$ nothing is left on t
 
 ## Common misconceptions
 
-**"A high R-squared means a profitable strategy."** Order flow imbalance explains short-horizon price changes well, and Cont, Kukanov and Stoikov document a linear relation between order flow imbalance and price changes with a slope inversely proportional to depth. Explaining a move is not capturing it. Costs live entirely outside the regression.
+**"A high R-squared means a profitable strategy."** Cont, Kukanov and Stoikov document a linear relation between order flow imbalance and price changes, with a slope inversely proportional to depth. Explaining a move is not capturing it. Costs live entirely outside the regression.
 
 **"Imbalance is a leading indicator, so it predicts the next hour."** It predicts the next queue depletion. The state variable is refreshed constantly, and correlation with returns falls away over seconds to tens of seconds. Quoting an unqualified number without a horizon is the single most common error in this topic.
 
-**"Big size on the bid means real buyers."** Resting size is free to cancel and can be withdrawn in microseconds. The touch imbalance predicts anyway because it is the queue that is mechanically binding, but treating deep-book size as a commitment is how people get spoofed.
+**"Big size on the bid means real buyers."** Resting size is free to cancel and can be withdrawn in microseconds. Touch imbalance predicts anyway because that queue is mechanically binding, but treating deep-book size as a commitment is how people get spoofed.
 
-**"If everyone knows it, it should be arbitraged away."** It cannot be, because the mechanical channel is not an inefficiency. Somebody has to be at the front of the thin queue. Being paid for that position is the compensation for adverse selection, not an anomaly.
+**"If everyone knows it, it should be arbitraged away."** The mechanical channel is not an inefficiency. Somebody has to be at the front of the thin queue, and being paid for that position is compensation for adverse selection, not an anomaly.
 
-**"I can use it to time my retail order."** Directionally it might shave a fraction of a cent. Against a 2 cent spread and a several-second decay, that is inside the noise on any order you can actually place.
+**"I can use it to time my retail order."** Against a 2 cent spread and a several-second decay, a fraction of a cent of timing edge is inside the noise on any order you can actually place.
 
 ## Sources and further reading
 
-- Rama Cont, Arseniy Kukanov and Sasha Stoikov, "The Price Impact of Order Book Events", *Journal of Financial Econometrics* 12(1), 2014, 47-88. [Journal](https://academic.oup.com/jfec/article-abstract/12/1/47/816163) and [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1712822). Establishes the linear relation between order flow imbalance and price changes across fifty US stocks, with a slope inversely proportional to market depth, robust across stocks and time scales.
+- Rama Cont, Arseniy Kukanov and Sasha Stoikov, "The Price Impact of Order Book Events", *Journal of Financial Econometrics* 12(1), 2014, 47-88. [Journal](https://academic.oup.com/jfec/article-abstract/12/1/47/816163) and [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1712822). Establishes a linear relation between order flow imbalance and price changes across fifty US stocks, with a slope inversely proportional to market depth.
 - Martin Gould, Mason Porter, Stacy Williams, Mark McDonald, Daniel Fenn and Sam Howison, "Limit Order Books", *Quantitative Finance* 13(11), 2013, 1709-1742. [arXiv:1012.0349](https://arxiv.org/abs/1012.0349). The standard survey of empirical regularities and models of the book.
 - Alexander Lipton, Umberto Pesavento and Michael Sotiropoulos, "Trade arrival dynamics and quote imbalance in a limit order book", 2013. [arXiv:1312.0514](https://arxiv.org/abs/1312.0514). Derives the probability of the next price move as a function of quote imbalance, and reports imbalance as a strong predictor of average mid-price movement.
 - Sasha Stoikov, "The micro-price: a high-frequency estimator of future prices", *Quantitative Finance* 18(12), 2018. [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2970694). The martingale-corrected refinement of the weighted mid.
 
-On measuring decay in your own data, see [evaluating alpha signals](/blog/trading/quantitative-finance/evaluating-alpha-signals-ic-sharpe-turnover-quant-research), which covers information coefficients by horizon and the turnover cost of fast signals.
+To measure decay in your own data, see [evaluating alpha signals](/blog/trading/quantitative-finance/evaluating-alpha-signals-ic-sharpe-turnover-quant-research) on information coefficients by horizon and the turnover cost of fast signals.
 
-One honesty note on the numbers above. The qualitative empirical claims, that imbalance predicts short-horizon mid moves and that order flow imbalance relates linearly to price change with a depth-dependent slope, come from the sources listed. Everything with a dollar sign on it, including the 0.6 cent displacement, the assumed decay path and the conditional imbalance at fill, is illustrative arithmetic on assumed inputs, computed on a hypothetical \$50 stock. No coefficient, R-squared or decay half-life in this post is presented as measured.
+One honesty note. The qualitative empirical claims, that imbalance predicts short-horizon mid moves and that order flow imbalance relates linearly to price change with a depth-dependent slope, come from the sources listed above; everything carrying a dollar sign, including the assumed decay path and the conditional imbalance at fill, is illustrative arithmetic on assumed inputs computed on a hypothetical \$50 stock, and no coefficient, R-squared or decay half-life here is presented as measured.
 
 ## In the interview room and on the desk
 
 Jump and Citadel Securities weight this material heavily, and some version of it turns up in every market-making round. The question is usually open: *what would you use to predict the next tick?*
 
-A weak answer names momentum, or a moving average, or something with a lag measured in minutes. A merely acceptable answer says "order book imbalance" and stops. A strong answer does three things in sequence, and the sequence is the signal the interviewer is reading.
+A weak answer names momentum or a moving average, something with a lag measured in minutes. An acceptable answer says "order book imbalance" and stops. A strong answer does three things in sequence, and the sequence is what the interviewer is reading.
 
-First, name it and define it precisely: touch imbalance, $(Q_b - Q_a)/(Q_b + Q_a)$, computed at the top of book. Second, state the horizon before you are asked. "It predicts the next mid move on a horizon of seconds for a liquid name" is a completely different answer from "it predicts returns", and only one of them sounds like someone who has looked at data. Third, and this is the step that separates candidates, raise adverse selection yourself. Say out loud that the same number pricing the move also prices your fill, that your resting bid fills disproportionately when imbalance is negative, and that a maker therefore uses imbalance to skew quotes rather than to take positions.
+First, name it and define it precisely: touch imbalance, $(Q_b - Q_a)/(Q_b + Q_a)$, at the top of book. Second, state the horizon before you are asked. "It predicts the next mid move on a horizon of seconds for a liquid name" is a completely different answer from "it predicts returns", and only one of them sounds like someone who has looked at data. Third, and this is the step that separates candidates, raise adverse selection yourself: the same number pricing the move also prices your fill, your resting bid fills disproportionately when imbalance is negative, and a maker therefore uses imbalance to skew quotes rather than to take positions.
 
 The trap is presenting it as tradeable alpha. If you say you would buy when imbalance is positive, the next question is what you pay to do that, and the arithmetic in worked example 2 answers it: half a spread of maximum displacement against a full spread of round-trip cost. Whoever is on the other side of your resting order is reading the same number off the same feed, and they were reading it before you crossed.
 
-On the desk, the practical use is narrower than the theory suggests and more valuable. Imbalance goes into fair-value estimation, into quote skew, into the decision to cancel and re-post, and into execution: a child order routed with the imbalance rather than against it saves fractions of a cent, which on institutional volume is real money. It does not go into a signal book as alpha. If you are building one, [the alpha signal construction post](/blog/trading/quantitative-finance/building-an-alpha-signal-quant-research) is the better starting point, and treat imbalance as a cost model input rather than a return forecast.
+On the desk, the practical use is narrower than the theory suggests and more valuable. Imbalance goes into fair-value estimation, quote skew, the decision to cancel and re-post, and execution: a child order routed with the imbalance rather than against it saves fractions of a cent, which on institutional volume is real money. It does not go into a signal book as alpha. If you are building one, [the alpha signal construction post](/blog/trading/quantitative-finance/building-an-alpha-signal-quant-research) is the better starting point, and imbalance belongs there as a cost model input, not a return forecast.
