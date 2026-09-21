@@ -241,7 +241,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 16 | change-of-numeraire | W5 | **SHIPPED** 4,057 words |
 | 17 | fokker-planck-kolmogorov-forward | W5 | **SHIPPED** 4,093 words |
 | 18 | local-time-barriers-reflection | W5 | **SHIPPED** 4,675 words |
-| 19 | monte-carlo-variance-reduction | W7 | **SHIPPED** 4,232 words |
+| 19 | monte-carlo-variance-reduction | W7 | **SHIPPED** 4,080 words |
 | 20 | numerical-sdes-euler-milstein | W6 | TODO |
 | 21 | finite-difference-pde-pricing | W7 | **SHIPPED** 5,158 words |
 | 22 | convex-duality-shadow-prices | W7 | TODO |

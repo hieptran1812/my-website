@@ -8,14 +8,14 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 20
+readTime: 19
 ---
 
 > [!important]
 > **TL;DR:** A Monte Carlo price is a sample mean, so its error falls only as one over the square root of the path count. Buying accuracy with hardware is the most expensive way to get it.
 >
-> - **The square-root law.** Halving the error bar costs four times the paths. Getting one more decimal digit costs a hundred times the paths. On a \$22.7m block of at-the-money calls, one million paths leaves a standard error of \$35,798.
-> - **Antithetic variates** pair every draw with its mirror. They help only when the payoff is monotone in the shock. On that same call they cut the variance 1.672-fold. On a payoff that is even in the shock they are exactly twice as expensive for nothing.
+> - **The square-root law.** Halving the error bar costs four times the paths; one more decimal digit costs a hundred times. On a \$22.7m block of at-the-money calls, one million paths leaves a standard error of \$35,798.
+> - **Antithetic variates** pair every draw with its mirror, and help only when the payoff is monotone in the shock. On that same call they cut the variance 1.672-fold. On an even payoff they are exactly twice as expensive for nothing.
 > - **Control variates** subtract an error you can measure. The optimal coefficient is a regression slope, and the leftover variance is ${1-\rho^2}$. A geometric-average Asian controls an arithmetic one at ${\rho = 0.999137}$, which is a **580-fold** variance cut: an error bar of \$64,150 on a \$42.4m program becomes \$2,665.
 > - **Importance sampling** moves the sampler to where the payoff lives and reweights. On a deep out-of-the-money call it cuts variance 76-fold. Push the shift too far and the weights explode: at six standard deviations it is 7.9 times *worse* than doing nothing.
 > - **Report the estimate, the standard error and the path count.** A Monte Carlo price quoted without an error bar is not a price, it is a rumour with decimals.
@@ -30,7 +30,7 @@ The dollar figures throughout are illustrative arithmetic on assumed inputs, sta
 
 ## The foundations: what a Monte Carlo price actually is
 
-A derivative pays some amount that depends on the path of the underlying. Under the risk-neutral measure its price today is the discounted expected payoff. Monte Carlo replaces that expectation with an average over simulated paths.
+A derivative pays an amount that depends on the path of the underlying, and under the risk-neutral measure its price today is the discounted expected payoff. Monte Carlo replaces that expectation with an average over simulated paths.
 
 Write ${Y_i = e^{-rT} f(S^{(i)})}$ for the discounted payoff along the ${i}$-th simulated path. The estimator is the sample mean:
 
@@ -40,7 +40,7 @@ $$
 
 Two facts follow, and they are the only two facts in this entire subject.
 
-**It is unbiased.** The expected value of the sample mean is the expected value of one draw, which is the price. No amount of simulation error makes it systematically too high or too low. That is why Monte Carlo is trusted at all, and it is a consequence of the [law of large numbers](/blog/trading/math-for-quants/law-large-numbers-central-limit-theorem-math-for-quants).
+**It is unbiased.** The expected value of the sample mean is the expected value of one draw, which is the price, so no amount of simulation error makes it systematically too high or too low. That is why Monte Carlo is trusted at all, and it is the [law of large numbers](/blog/trading/math-for-quants/law-large-numbers-central-limit-theorem-math-for-quants) at work.
 
 **Its standard error is ${\sigma_Y/\sqrt{n}}$**, where ${\sigma_Y}$ is the standard deviation of a *single* path's discounted payoff, not of the price. The central limit theorem makes the estimator approximately normal around the true price with that standard deviation, which is what lets you put a confidence interval on it.
 
@@ -54,13 +54,13 @@ $$
 11.3485 \times 2{,}000{,}000 = \$22{,}697{,}000 .
 $$
 
-What is the standard deviation of a single path's payoff? For a European call it has a closed form, because the second moment of the payoff can be written down directly:
+The standard deviation of a single path's payoff has a closed form here, because the second moment can be written down directly:
 
 $$
 E\!\left[\left((S_T-K)^{+}\right)^{2}\right] = S_0^2 e^{(2r+\sigma^2)T} N(d_1+\sigma\sqrt{T}) - 2KS_0 e^{rT} N(d_1) + K^2 N(d_2).
 $$
 
-With ${d_1 = 0.245}$ and ${d_2 = -0.005}$, discounting and subtracting the squared mean gives ${\sigma_Y = 17.899}$. Note that the standard deviation of one path's payoff is **larger than the price itself**, by a factor of 1.58. That is normal for options and it is the reason naive Monte Carlo is so slow.
+With ${d_1 = 0.245}$ and ${d_2 = -0.005}$, discounting and subtracting the squared mean gives ${\sigma_Y = 17.899}$: **larger than the price itself**, by a factor of 1.58. That is normal for options and it is why naive Monte Carlo is so slow.
 
 Now price the error bar:
 
@@ -72,13 +72,13 @@ Now price the error bar:
 | 4,000,000 | \$0.0089495 | \$17,899 |
 | 100,000,000 | \$0.0017899 | \$3,580 |
 
-At one million paths the quote is \$22,697,000 plus or minus \$35,798 at one standard error, so a two-standard-error band spans ${4 \times 35{,}798 = \$143{,}192}$. That is wider than the edge on most block trades. Halving it took four million paths. Getting the error down to \$3,580 took one hundred million.
+At one million paths the quote is \$22,697,000 plus or minus \$35,798 at one standard error, so a two-standard-error band spans ${4 \times 35{,}798 = \$143{,}192}$. That is wider than the edge on most block trades, and halving it took four million paths.
 
 The lesson is not that Monte Carlo is bad. It is that ${n}$ is the expensive lever and ${\sigma_Y}$ is the cheap one. Every technique below attacks ${\sigma_Y}$.
 
 ## Antithetic variates: pair every path with its mirror
 
-The simplest idea in the subject. Every Gaussian shock ${Z}$ has an equally likely mirror ${-Z}$. So instead of ${n}$ independent draws, take ${n/2}$ draws and use each one twice, once as itself and once negated. Average each mirrored pair before averaging across pairs.
+The simplest idea in the subject. Every Gaussian shock ${Z}$ has an equally likely mirror ${-Z}$, so instead of ${n}$ independent draws, take ${n/2}$ and use each twice, once as itself and once negated, averaging each mirrored pair before averaging across pairs.
 
 The variance of one pair average is
 
@@ -86,7 +86,7 @@ $$
 \mathrm{Var}\!\left(\frac{h(Z)+h(-Z)}{2}\right) = \frac{\mathrm{Var}(h) + \mathrm{Cov}\big(h(Z),\,h(-Z)\big)}{2},
 $$
 
-while two *independent* draws give ${\mathrm{Var}(h)/2}$. Comparing the two lines gives the exact condition, and it is worth memorising because interviewers ask for it:
+while two *independent* draws give ${\mathrm{Var}(h)/2}$. Comparing them gives the exact condition, worth memorising because interviewers ask for it:
 
 **Antithetic variates help if and only if ${\mathrm{Cov}(h(Z), h(-Z)) \lt 0}$.** That is guaranteed when ${h}$ is monotone, because ${h(Z)}$ and ${h(-Z)}$ are then oppositely ordered. It is guaranteed for nothing else.
 
@@ -150,7 +150,7 @@ $$
 G = \$8.024703 .
 $$
 
-**Verifying that number independently.** Re-deriving my own algebra would only reproduce my own mistake, so the closed form was priced by two further routes that share none of the steps above: direct numerical quadrature of ${E[(e^{X}-K)^{+}]}$ against the normal density, and the plain Black-Scholes formula applied to an underlying with volatility 0.18400 and a cost of carry of 0.0196354 chosen so that the forward matches. All three agree to fourteen significant figures at 8.0247032233069. The control's known mean is therefore not merely self-consistent, it is right.
+**Verifying that number independently.** Re-deriving my own algebra would only reproduce my own mistake, so the closed form was priced by two further routes sharing none of the steps above: direct numerical quadrature of ${E[(e^{X}-K)^{+}]}$ against the normal density, and plain Black-Scholes on an underlying with volatility 0.18400 and a cost of carry of 0.0196354 chosen to match the forward. All three agree to fourteen significant figures at 8.0247032233069. The control's known mean is not merely self-consistent, it is right.
 
 Now simulate. One million paths, twelve monthly steps, NumPy's default generator seeded at 0:
 
@@ -169,11 +169,11 @@ $$
 
 The plain estimator's error bar on that number is ${0.012830 \times 5{,}000{,}000 = \$64{,}150}$. The controlled estimator's is ${0.000533 \times 5{,}000{,}000 = \$2{,}665}$. Same paths, same runtime, same machine. To reach \$2,665 by brute force you would need ${580 \times 1{,}000{,}000 = 580{,}000{,}000}$ paths. Read the other way: ${1{,}000{,}000 / 580 = 1{,}724}$ controlled paths already match a million plain ones.
 
-And the error bar was not decoration. The plain run priced the block at ${8.4555 \times 5{,}000{,}000 = \$42{,}277{,}500}$, which is \$98,500 below the controlled figure, or 1.5 of its own standard errors. A 40-million-path run combining antithetics and the control puts the converged price at \$8.4743, within two standard errors of the controlled estimate and nowhere near the plain one.
+And the error bar was not decoration. The plain run priced the block at ${8.4555 \times 5{,}000{,}000 = \$42{,}277{,}500}$, \$98,500 below the controlled figure, or 1.5 of its own standard errors. A 40-million-path run combining antithetics and the control puts the converged price at \$8.4743, within two standard errors of the controlled estimate and nowhere near the plain one.
 
 ![Scatter of arithmetic against geometric Asian payoffs hugging a fitted line, with the exactly known control mean marked](/imgs/blogs/monte-carlo-variance-reduction-math-for-quants-3.webp)
 
-One practical note. Even the lazy choice ${b = 1}$, simply subtracting the control's error with no regression at all, gives a standard error of \$0.000801, a 16-fold improvement. Estimating ${b^{\ast}}$ from the same paths that produce the estimate introduces a small bias of order ${1/n}$; at a million paths it is far below the standard error, but on a short run use a pilot batch to fit ${b^{\ast}}$ and a fresh batch to price.
+Even the lazy choice ${b = 1}$, subtracting the control's error with no regression at all, gives a standard error of \$0.000801, a 16-fold improvement. Note that estimating ${b^{\ast}}$ from the same paths that produce the estimate introduces a bias of order ${1/n}$; at a million paths that is far below the standard error, but on a short run fit ${b^{\ast}}$ on a pilot batch and price on a fresh one.
 
 ## Importance sampling: make the rare event common
 
@@ -197,9 +197,9 @@ $$
 
 Three months, spot \$100, strike \$150, volatility 40%, rate 4%. Black-Scholes prices it at \$0.21900, and the probability of finishing in the money is ${N(d_2) = 1.889\%}$. The payoff is positive only when the shock exceeds ${-d_2 = 2.0773}$.
 
-The naive estimator's path standard deviation is 2.2045, which is **10.1 times the price itself**. At one million paths the standard error per option is ${2.2045/1{,}000 = \$0.0022045}$, or 1.01% of the price. On a block of 5,000,000 options, worth ${0.21900 \times 5{,}000{,}000 = \$1{,}095{,}000}$, that is an error bar of \$11,023. A million paths and the third digit of a one-million-dollar position is still noise.
+The naive estimator's path standard deviation is 2.2045, **10.1 times the price itself**. At one million paths the standard error per option is ${2.2045/1{,}000 = \$0.0022045}$, or 1.01% of the price. On a block of 5,000,000 options, worth ${0.21900 \times 5{,}000{,}000 = \$1{,}095{,}000}$, that is an error bar of \$11,023: a million paths, and the third digit of a million-dollar position is still noise.
 
-Now shift the sampler to sit on the strike, ${\mu = 2.0773}$, so that roughly half the draws land in the money instead of one in fifty-three. The path standard deviation falls to 0.25289. The standard error becomes ${0.25289/1{,}000 = \$0.00025289}$ per option, which is \$1,264 on the block and 0.115% of the price. The variance ratio is
+Now shift the sampler onto the strike, ${\mu = 2.0773}$, so roughly half the draws land in the money instead of one in fifty-three. The path standard deviation falls to 0.25289, so the standard error is ${0.25289/1{,}000 = \$0.00025289}$ per option, \$1,264 on the block and 0.115% of the price. The variance ratio is
 
 $$
 (2.2045/0.25289)^2 = 76 .
@@ -207,11 +207,11 @@ $$
 
 To match that with brute force you would need 76,000,000 paths. The true optimal shift, found by minimising the variance numerically, is ${\mu = 2.648}$ and delivers a factor of 107, so aiming at the strike captures 76 of the available 107. That is the usual pattern.
 
-**Where it blows up.** The second moment under the shifted measure is ${E_P[h^2 L]}$, and ${L}$ carries the factor ${e^{\mu^2/2}}$, which grows without limit in ${\mu}$. Push the shift too far and a handful of enormous weights dominate the average. At ${\mu = 6}$ the path standard deviation is 6.209, a variance ratio of 0.126: **7.9 times worse than plain Monte Carlo**, from the technique that was supposed to help. The estimator is still unbiased, which makes it worse rather than better, because the failure is invisible in the mean and shows up only as an error bar that refuses to shrink. Monitor the largest likelihood ratio and the effective sample size. If one path carries a tenth of the total weight, the number on your screen is one path's opinion.
+**Where it blows up.** The second moment under the shifted measure is ${E_P[h^2 L]}$, and ${L}$ carries the factor ${e^{\mu^2/2}}$, which grows without limit in ${\mu}$. Push the shift too far and a handful of enormous weights dominate the average. At ${\mu = 6}$ the path standard deviation is 6.209, a variance ratio of 0.126: **7.9 times worse than plain Monte Carlo**, from the technique meant to help. The estimator is still unbiased, which makes it worse rather than better, because the failure is invisible in the mean and shows up only as an error bar that refuses to shrink. Monitor the largest likelihood ratio and the effective sample size: if one path carries a tenth of the total weight, the number on your screen is one path's opinion.
 
 ## Stratification: force the sample to cover the space
 
-Random sampling clumps, and over a million draws the clumping averages out only because you paid for it. Stratification removes it by construction: split the standard normal into ${k}$ equiprobable bins and draw one point from each. The variance left is the *within-bin* variance, which discards everything the bins already account for.
+Random sampling clumps, and over a million draws that clumping averages out only because you paid for it. Stratification removes it by construction: split the standard normal into ${k}$ equiprobable bins and draw one point from each. The variance left is the *within-bin* variance.
 
 On the call from worked example 1 this is exact and dramatic. Ten strata cut the variance from 320.37 to 31.17, a factor of 10.3. One hundred strata cut it to 2.711, a factor of 118.
 
@@ -234,7 +234,7 @@ Measured on the Asian option above, comparing scrambled Sobol against pseudorand
 
 At twelve monitoring dates Sobol converges at roughly ${n^{-0.70}}$, against the theoretical ${n^{-0.5}}$ for random points, and 1,024 Sobol points do the work of about 90,000 random ones. Move to daily monitoring and the advantage does not vanish, but it shrinks by a factor of four to six in path-equivalent terms. That is the honest statement: quasi-Monte Carlo survives high nominal dimension only when effective dimension stays low, and how low it stays depends on how you construct the path.
 
-One structural point that catches people out. A raw Sobol sequence is deterministic, so a quasi-Monte Carlo estimate has **no standard error at all**. You cannot put an error bar on it. Randomised quasi-Monte Carlo, with digital scrambling or random shifts, restores unbiasedness and lets you treat the independent randomisations as your sample. Always scramble.
+One structural point catches people out. A raw Sobol sequence is deterministic, so a quasi-Monte Carlo estimate has **no standard error at all**. Randomised quasi-Monte Carlo, with digital scrambling or random shifts, restores unbiasedness and lets you treat the independent randomisations as your sample. Always scramble.
 
 ## How to report a Monte Carlo number
 
@@ -243,7 +243,7 @@ One structural point that catches people out. A raw Sobol sequence is determinis
 A Monte Carlo price is three numbers, never one:
 
 1. **The estimate.**
-2. **The standard error**, and therefore the number of digits that survive it. If the standard error is \$0.013 there is no meaning in the fourth decimal.
+2. **The standard error**, and therefore how many digits survive it. If the standard error is \$0.013 the fourth decimal means nothing.
 3. **The path count**, plus the seed and the number of time steps. Without these nobody can reproduce you, including you next month.
 
 One warning belongs on the same line. The standard error measures *sampling* error only. It says nothing about discretisation bias, model error, or whether the payoff was coded correctly. A tight error bar around the wrong number is the most dangerous output a pricing library can produce, which is the argument for reaching for a PDE where one exists: see [Fokker-Planck and the forward equation](/blog/trading/math-for-quants/fokker-planck-kolmogorov-forward-math-for-quants) for when one solve beats a million paths. For the code-level mechanics, see [Monte Carlo and simulation coding for quant interviews](/blog/trading/quantitative-finance/monte-carlo-simulation-coding-quant-interviews).
@@ -258,18 +258,18 @@ One warning belongs on the same line. The standard error measures *sampling* err
 
 ## Sources and further reading
 
-- Paul Glasserman, *Monte Carlo Methods in Financial Engineering*, Springer, 2004. Chapter 4 covers variance reduction, chapter 5 quasi-Monte Carlo. The standard reference for everything above.
-- Phelim Boyle, Mark Broadie and Paul Glasserman, "Monte Carlo methods for security pricing", *Journal of Economic Dynamics and Control* 21 (1997), 1267-1321. The survey that fixed the vocabulary of this field.
+- Paul Glasserman, *Monte Carlo Methods in Financial Engineering*, Springer, 2004. Chapter 4 covers variance reduction, chapter 5 quasi-Monte Carlo. The standard reference here.
+- Phelim Boyle, Mark Broadie and Paul Glasserman, "Monte Carlo methods for security pricing", *Journal of Economic Dynamics and Control* 21 (1997), 1267-1321. The survey that fixed this field's vocabulary.
 - A. G. Z. Kemna and A. C. F. Vorst, "A pricing method for options based on average asset values", *Journal of Banking and Finance* 14 (1990), 113-129. The geometric-average closed form and its use as a control.
-- Russel Caflisch, William Morokoff and Art Owen, "Valuation of mortgage-backed securities using Brownian bridges to reduce effective dimension", *Journal of Computational Finance* 1 (1997), 27-46. Where effective dimension was named and measured.
+- Russel Caflisch, William Morokoff and Art Owen, "Valuation of mortgage-backed securities using Brownian bridges to reduce effective dimension", *Journal of Computational Finance* 1 (1997), 27-46. Where effective dimension was named.
 - Art Owen, "Scrambled net variance for integrals of smooth functions", *Annals of Statistics* 25 (1997), 1541-1562. Why scrambling restores an error bar.
 
 ## In the interview room and on the desk
 
-The question is almost never phrased as a mathematics question. It arrives as **"your Monte Carlo price is too slow, what do you do?"**, sometimes with the softer opening "how would you speed up a pricer?". The weak answer is more machines, more cores, a GPU. It is weak not because it is wrong but because it buys accuracy at the square-root rate, which the interviewer knows and is waiting for you to say.
+The question is rarely phrased as mathematics. It arrives as **"your Monte Carlo price is too slow, what do you do?"**, sometimes softened to "how would you speed up a pricer?". The weak answer is more machines, more cores, a GPU. It is weak not because it is wrong but because it buys accuracy at the square-root rate, which the interviewer knows and is waiting for you to say.
 
-A strong answer asks a question first: **what does the payoff look like?** That is the whole discriminator, and the order runs like this. Is the payoff monotone in the shock? Then antithetics are free, worth roughly 1.7x on a vanilla, and you take them. Is there a related instrument with a closed form that moves with the payoff? Then a control variate is the big one, and you quote the mechanism, that ${b^{\ast}}$ is a regression slope and the leftover variance is ${1-\rho^2}$, so a correlation of 0.999 is a 500-fold cut rather than a marginal one. Is the payoff concentrated in a rare region, a deep out-of-the-money option, a credit tail, a barrier rarely touched? Then importance sampling, with the caveat volunteered rather than extracted: shift too far and the likelihood ratio develops heavy tails and the estimator gets worse while still looking unbiased. Only then, if the dimension is low or the effective dimension is, mention scrambled Sobol.
+A strong answer asks a question first: **what does the payoff look like?** That is the whole discriminator, and the order runs like this. Is the payoff monotone in the shock? Then antithetics are free, worth roughly 1.7x on a vanilla, and you take them. Is there a related instrument with a closed form that moves with the payoff? Then a control variate is the big one, and you quote the mechanism: ${b^{\ast}}$ is a regression slope and the leftover variance is ${1-\rho^2}$, so a correlation of 0.999 is a 500-fold cut, not a marginal one. Is the payoff concentrated in a rare region, a deep out-of-the-money option, a credit tail, a barrier rarely touched? Then importance sampling, with the caveat volunteered rather than extracted: shift too far and the likelihood ratio develops heavy tails and the estimator gets worse while still looking unbiased. Only then, and only if the effective dimension is low, mention scrambled Sobol.
 
-The follow-up is usually the Asian option, because it is the cleanest case in the subject: the geometric average has a closed form, the arithmetic one does not, and the two are correlated above 0.999. If you can say why the geometric one is tractable, that a product of lognormals is lognormal while a sum is not, you have shown the thing they are testing.
+The follow-up is usually the Asian option, the cleanest case in the subject: the geometric average has a closed form, the arithmetic one does not, and the two correlate above 0.999. If you can say why the geometric one is tractable, that a product of lognormals is lognormal while a sum is not, you have shown the thing they are testing.
 
-The trap is quoting a price without a standard error. A candidate who says "the Monte Carlo gives 8.4555" has already failed, and adding decimals makes it worse. The right sentence is "8.475, standard error 0.013 at a million paths, so three digits". The same trap runs in the other direction: quoting a variance reduction factor without saying what it was measured on. Jane Street, Citadel and every derivatives pricing seat weight this heavily, because it is one of the few interview topics that maps directly onto something the desk does every single day.
+The trap is quoting a price without a standard error. A candidate who says "the Monte Carlo gives 8.4555" has already failed, and adding decimals makes it worse. The right sentence is "8.475, standard error 0.013 at a million paths, so three digits". The trap runs the other way too: quoting a variance reduction factor without saying what it was measured on. Jane Street, Citadel and every derivatives pricing seat weight this heavily, because it maps directly onto something the desk does every day.
