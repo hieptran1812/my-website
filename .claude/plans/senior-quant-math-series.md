@@ -239,7 +239,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 14 | stopping-times-optional-stopping | W5 | **SHIPPED** 4,076 words |
 | 15 | martingale-representation-hedging | W5 | TODO |
 | 16 | change-of-numeraire | W5 | **SHIPPED** 4,057 words |
-| 17 | fokker-planck-kolmogorov-forward | W5 | **SHIPPED** 4,061 words |
+| 17 | fokker-planck-kolmogorov-forward | W5 | **SHIPPED** 4,093 words |
 | 18 | local-time-barriers-reflection | W5 | TODO |
 | 19 | monte-carlo-variance-reduction | W6 | TODO |
 | 20 | numerical-sdes-euler-milstein | W6 | TODO |

@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 18
+readTime: 19
 ---
 
 > [!important]
@@ -17,8 +17,8 @@ readTime: 18
 > - The **backward** equation runs over the *starting* point and answers "what is the expected payoff if I start here?". The **forward** equation runs over the *ending* point and answers "where does the probability mass end up?". Confusing the two is the most common error on this topic.
 > - The forward equation is a **conservation law**: with the probability current $J = \mu p - \tfrac12 \partial_x(\sigma^2 p)$ it reads $\partial_t p = -\partial_x J$. Drift transports mass, diffusion spreads it.
 > - Set the time derivative and the current to zero and the **stationary density** falls out in one line. For a mean-reverting spread it is Gaussian with standard deviation $\sigma/\sqrt{2\theta}$: at $\theta = 8$ per year and $\sigma = 40$ bps, exactly 10 bps.
-> - **Boundary conditions carry the modelling.** On a \$5m one-touch at a \$120 barrier, using the terminal density instead of the absorbing-barrier solution prices it at \$835,688 rather than \$1,775,701, an error of \$940,012.
-> - The number to remember: on that same trade a 100,000-path daily-step Monte Carlo carries a standard error of \$7,567 and a discretisation **bias of \$136,599**. The bias is 18 times the noise, and more paths do nothing about it.
+> - **Boundary conditions carry the modelling.** On a \$5m one-touch at a \$120 barrier, using the terminal density instead of the absorbing-barrier solution prices it at \$835,690 rather than \$1,775,700, an error of \$940,010.
+> - The number to remember: on that same trade a 100,000-path daily-step Monte Carlo carries a standard error of \$7,567 and a discretisation **bias of \$136,600**. The bias is 18 times the noise, and more paths do nothing about it.
 
 ## The question one path cannot answer
 
@@ -113,7 +113,7 @@ A relative-value desk is long a spread that mean-reverts with $\theta = 8$ per y
 1. **Stationary standard deviation.** $\sigma/\sqrt{2\theta} = 40/\sqrt{16} = 40/4 = 10$ bps exactly.
 2. **Is the stationary answer legitimate yet?** The half-life is $\ln 2 / \theta = 0.0866$ years, or 21.8 trading days. After three half-lives the memory of the starting point has decayed by exactly 0.125 and the standard deviation has reached 0.992 of its stationary value, so from about 65.5 trading days after entry the stationary density is the right description.
 3. **The tail.** The stop sits at $(80-50)/10 = 3.00$ standard deviations. The Gaussian tail beyond three standard deviations is 0.135%, which is about one day in 741, or 0.34 days in a 252-day year.
-4. **The sizing number.** The 99th percentile of the stationary density is $50 + 2.326 \times 10 = 73.3$ bps. That is an adverse move of 23.26 bps, which at \$40,000 per bp costs \$930,539. A full run to the 80 bps stop costs 30 bps, or \$1.20m.
+4. **The sizing number.** The 99th percentile of the stationary density sits 2.326348 standard deviations above the mean, at 73.3 bps. One standard deviation is 10 bps, which at \$40,000 per bp is \$400,000, so the one-percent-day move costs \$930,539. A full run to the 80 bps stop costs 30 bps, or \$1.20m.
 
 The desk's mandate is a \$1m one-percent-day loss limit, and \$930,539 fits it with \$69,461 to spare. Double the position and the same 23.26 bp move costs \$1,861,078, which does not.
 
@@ -141,9 +141,9 @@ A stock trades at \$100. A client wants a one-touch that pays \$5m if the stock 
 2. **First term.** $(b - \nu T)/(\sigma\sqrt{T}) = 0.9655$, and $1 - \Phi(0.9655) = 0.1671$.
 3. **Image term.** Because $\nu = -\sigma^2/2$ exactly, the image factor $e^{2\nu b/\sigma^2}$ collapses to $e^{-b} = 100/120 = 5/6 = 0.8333$. The second argument is $(-b - \nu T)/(\sigma\sqrt{T}) = -0.7534$, and $\Phi(-0.7534) = 0.2256$, so the term is $0.8333 \times 0.2256 = 0.1880$.
 4. **Touch probability.** ${0.1671 + 0.1880 = 0.3551}$, so 35.5%.
-5. **The money.** The one-touch is worth $0.3551 \times 5{,}000{,}000$, or \$1,775,701.
+5. **The money.** Carry the unrounded probability, 0.355140, rather than the 0.3551 displayed above: the one-touch is worth 0.355140 times \$5,000,000, or \$1,775,700.
 
-Now price it the lazy way, using only the terminal density and asking whether the stock *ends* above \$120. That is the first term on its own, 16.7%, worth \$835,688. The gap is \$940,012, and the correct answer is 2.12 times the lazy one.
+Now price it the lazy way, using only the terminal density and asking whether the stock *ends* above \$120. That is the first term on its own, 0.167138 unrounded, worth \$835,690. The gap is the image term, 0.188002, or \$940,010, and the correct answer is 2.12 times the lazy one.
 
 That gap is the entire content of the absorbing boundary condition. The terminal density counts paths that finish above the barrier. The absorbing solution also counts every path that poked through \$120 in month two and came back. On a barrier product those paths are most of the value.
 
@@ -155,14 +155,14 @@ The natural objection is that nobody needs a PDE for this, because Monte Carlo i
 
 The payoff is an indicator, so each simulated path returns 0 or 1 and the estimator is a sample proportion with $p = 0.3551$.
 
-1. **Sampling noise.** $p(1-p) = 0.2290$. At 100,000 paths the standard error is $\sqrt{0.2290/100{,}000} = 0.001513$, which on \$5m of notional is \$7,567. A 95% interval is \$14,831 wide either side.
-2. **What it takes to tighten it.** Standard error falls with the square root of the path count, so ten times tighter costs a hundred times the paths. Pinning the price to one basis point of notional, a \$500 standard error, needs 22,901,563 paths.
+1. **Sampling noise.** $p(1-p) = 0.229016$. At 100,000 paths the standard error is $\sqrt{0.229016/100{,}000} = 0.0015133$, which on \$5m of notional is \$7,567. A 95% interval is 1.96 times \$7,567, or \$14,831, wide either side.
+2. **What it takes to tighten it.** Standard error falls with the square root of the path count, so ten times tighter costs a hundred times the paths. Pinning the price to one basis point of notional, a \$500 standard error, needs 22.9 million paths.
 3. **The part that is not noise.** With daily steps you check the barrier once a day, so you miss every excursion that pokes above \$120 and comes back between two closes. The Broadie, Glasserman and Kou continuity correction says a discretely monitored barrier behaves like a continuous one shifted by $\exp(0.5826\,\sigma\sqrt{\Delta t})$. With 126 daily steps over six months, $\Delta t = 0.003968$ and the exponent is 0.01101, so the simulation is really pricing a barrier at \$121.33.
-4. **Re-price at the effective barrier.** The same closed form at \$121.33 gives a touch probability of 32.8% rather than 35.5%. On \$5m that is a **bias of \$136,599**.
+4. **Re-price at the effective barrier.** The same closed form at \$121.33 gives a touch probability of 0.327820 rather than 0.355140, a shortfall of 0.027320. On \$5m that is a **bias of \$136,600**.
 
-So the daily-step Monte Carlo converges, with beautiful tight error bars, to a number that is \$136,599 wrong. The bias is 18.1 times the standard error, which means the error bars are not merely useless here, they are actively misleading: they invite you to believe a number they have no opinion about.
+So the daily-step Monte Carlo converges, with beautiful tight error bars, to a number that is \$136,600 wrong. The bias is 18.1 times the standard error, which means the error bars are not merely useless here, they are actively misleading: they invite you to believe a number they have no opinion about.
 
-More paths do not help, because the bias does not depend on the path count. Shrinking the time step does help, but only like $\sqrt{\Delta t}$: pushing the bias below the sampling noise takes roughly 41,064 steps instead of 126, which at 100,000 paths is 4.11 billion time steps. The PDE with an absorbing boundary gives the exact answer on a grid a laptop solves in under a second.
+More paths do not help, because the bias does not depend on the path count. Shrinking the time step does help, but only like $\sqrt{\Delta t}$: pushing the bias below the sampling noise takes roughly 41,000 steps instead of 126, which at 100,000 paths is about 4.1 billion time steps. The PDE with an absorbing boundary gives the exact answer on a grid a laptop solves in under a second.
 
 In sizing terms this is the difference between knowing your edge and guessing it. A desk that marks twenty such trades off the daily-step simulation is carrying \$2.73m of mismarked value, all of it in the same direction, and none of it visible in the reported confidence intervals.
 
