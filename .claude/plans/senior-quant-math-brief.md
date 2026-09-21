@@ -50,6 +50,28 @@ prose and recompute it at the precision you printed. Carry unrounded intermediat
 and round only at the end. If a figure and the prose disagree, work out which one
 is wrong before assuming it is the figure.
 
+### Assert against exact fractions, not floats, and round half-up
+
+Eye-checking cannot find the worst version of this defect, because every row looks
+individually plausible. Wave 4 shipped a shrinkage table whose printed equalities
+were built from **rounded** factors while the reported results came from the
+**exact** ones: `0.75 + 0.50 x 0.59 = 1.05` is really 1.045, and all five rows
+shared the flaw because `B` was displayed at 2 dp while the arithmetic carried
+4/5, 4/7, 4/9, 1/2 and 1/3.
+
+So write the check as assertions, not as a reading pass:
+
+- compute with `fractions.Fraction`, never floats, so `4/9` stays `4/9`
+- round **half-up** explicitly; Python's default banker's rounding hides ties like
+  1.045 exactly where this defect lives
+- assert the *printed* string against the computed value at the precision printed
+- if a table displays a rounded intermediate, either print the exact fraction
+  beside it or carry the result to enough places that the row is a true identity
+
+The fix that worked was printing each `B` as its exact fraction next to the
+decimal and carrying results to three places. It made every row an exact identity
+*and* reinforced the closed form derived above it.
+
 ## Two gate quirks that cost a pass each
 
 - **Do not write "the picture above".** The abstraction-coverage gate matches
