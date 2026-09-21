@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 18
+readTime: 19
 ---
 
 > [!important]
@@ -22,11 +22,11 @@ readTime: 18
 
 ## The betting system that survives every backtest
 
-Someone will eventually show you a strategy that has never had a losing month. It is not fraud and the backtest is not lying. It goes like this: risk a small amount, and if it loses, risk twice as much, and keep doubling until a win recovers everything plus the original stake. Every sequence terminates in a win, every terminated sequence is profitable, and the equity curve is a staircase going up and to the right.
+Someone will eventually show you a strategy that has never had a losing month. It is not fraud and the backtest is not lying. Risk a small amount; if it loses, risk twice as much, and keep doubling until a win recovers everything plus the original stake. Every sequence terminates in a win, every terminated sequence is profitable, and the equity curve is a staircase going up and to the right.
 
 The strategy is a martingale in the gambler's sense, it is playing a game with zero edge, and the reason it appears to manufacture money out of nothing is not subtle once you see it. What is subtle is saying precisely *which* assumption it is breaking, because "it will blow up eventually" is a feeling rather than an argument, and a good interviewer will keep pushing until you name the hypothesis.
 
-That naming is what the optional stopping theorem is for. It is the formal statement that a fair game stopped at a legal moment is still a fair game, and its value to a trader is almost entirely in the fine print. The theorem's hypotheses are a catalogue of the ways a strategy can pretend to have an edge, and once you have read them as a catalogue, you can take almost any "system" and point at the exact line where the money is coming from.
+That naming is what the optional stopping theorem is for. It says a fair game stopped at a legal moment is still a fair game, and its value to a trader is almost entirely in the fine print. Read the hypotheses as a catalogue of the ways a strategy can pretend to have an edge, and you can point at the exact line in almost any system where the money is supposedly coming from.
 
 A companion post, [optimal stopping and the secretary problem](/blog/trading/math-for-quants/optimal-stopping-secretary-when-to-take-the-trade-math-for-quants), works the decision problem: given that you may stop, when should you? This post is the other half. It asks what stopping is allowed to mean, and what stopping can and cannot do to an expectation.
 
@@ -36,15 +36,15 @@ Three objects, built from zero.
 
 **A filtration is what you know by time ${t}$.** Write $\mathcal{F}_t$ for the set of questions you can answer at time $t$. At the close on day 12 of a month, $\mathcal{F}_{12}$ contains "did the stock trade below \$45 in the first twelve days?" because you watched it, and "what is my current P&L?" because you can read it off the book. It does not contain "is day 12 the month's high?" because that depends on days 13 through 25. The collection $\mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \dots$ is growing, because information accumulates and is never unlearned. That growing family is the filtration. The full treatment, including what goes wrong in a backtest when a rule quietly consults the wrong $\mathcal{F}_t$, is in [filtrations, adapted processes, and no look-ahead](/blog/trading/math-for-quants/filtrations-no-lookahead-math-for-quants).
 
-**A martingale is a process with no expected drift given what you know.** Formally $E[X_{n+1} \mid \mathcal{F}_n] = X_n$: your best forecast of tomorrow's value, given everything you have seen, is today's value. A running total of fair coin flips is the canonical example, since the next flip adds ${+\$1}$ or ${-\$1}$ with equal probability and contributes nothing in expectation. The conditional expectation doing the work here is a projection onto your information, which is developed in [conditional expectation as projection](/blog/trading/math-for-quants/conditional-expectation-projection-math-for-quants), and the reason discounted asset prices are martingales under a particular measure is in [martingales and the risk-neutral measure](/blog/trading/math-for-quants/martingales-risk-neutral-measure-math-for-quants). For this post the two-line version is enough: a martingale is a fair game, and "fair" is a statement about conditional expectations, not about symmetry of the payouts.
+**A martingale is a process with no expected drift given what you know.** Formally $E[X_{n+1} \mid \mathcal{F}_n] = X_n$: your best forecast of tomorrow's value, given everything you have seen, is today's value. A running total of fair coin flips is the canonical example, since the next flip adds ${+\$1}$ or ${-\$1}$ with equal probability and contributes nothing in expectation. The conditional expectation doing the work is a projection onto your information, developed in [conditional expectation as projection](/blog/trading/math-for-quants/conditional-expectation-projection-math-for-quants), and the reason discounted asset prices are martingales under a particular measure is in [martingales and the risk-neutral measure](/blog/trading/math-for-quants/martingales-risk-neutral-measure-math-for-quants). Here the two-line version suffices: a martingale is a fair game, and "fair" is a statement about conditional expectations, not about symmetry of the payouts.
 
 **A stopping time is a rule whose trigger you can evaluate without seeing the future.** A random time $\tau$ is a stopping time if, for every $t$, the event $\{\tau \le t\}$ belongs to $\mathcal{F}_t$. In plain language: at every moment, you can say whether you have already stopped, using only what you have seen. You are allowed to not know when you will stop. You are not allowed to need tomorrow's data to know whether you stopped today.
 
 ![Annotated price path with a vertical line at day 12, the region to the right greyed out as not yet observed, and two rule cards contrasting a valid 45 dollar trigger with an invalid sell at the month's high](/imgs/blogs/stopping-times-optional-stopping-math-for-quants-1.webp)
 
-That figure is the whole definition in one picture. The rule "$\tau$ = first day the price closes at or below \$45" settles from the observed half alone: on each of days 1 through 12 you look at the close, compare it to the trigger level of \$45, and you know. The rule "$\tau$ = the day the month prints its high" cannot be settled without the grey band, because declaring day 19 the high requires knowing that days 20 through 25 print lower. The second rule is describable after the fact and executable never.
+That figure is the whole definition in one picture. The rule "$\tau$ = first day the price closes at or below \$45" settles from the observed half alone: on each of days 1 through 12 you compare the close to the trigger level of \$45, and you know. The rule "$\tau$ = the day the month prints its high" cannot be settled without the grey band, because declaring day 19 the high requires knowing that days 20 through 25 print lower. It is describable after the fact and executable never.
 
-The useful corollary is that most real exit rules pass. A stop-loss, a take-profit, a time-based exit, a trailing stop that ratchets on the highest price *so far*, a margin call, a barrier-option knock-in: all stopping times, all decidable at the instant they fire. This matters because it means the optional stopping theorem is not some exotic constraint that real strategies dodge. It applies to nearly everything a desk actually does.
+The useful corollary is that most real exit rules pass. A stop-loss, a take-profit, a time-based exit, a trailing stop that ratchets on the highest price *so far*, a margin call, a barrier-option knock-in: all stopping times, all decidable at the instant they fire. So the theorem is not an exotic constraint that real strategies dodge. It applies to nearly everything a desk does.
 
 ## The theorem, and why it is really a statement about limits
 
@@ -78,7 +78,7 @@ That is the sentence worth carrying out of this post: **optional stopping is not
 
 Read that figure as a catalogue of failure modes rather than a list of hypotheses. Condition (a) requires that you are out by a fixed deadline no matter what, which kills "hold until it comes back", because the wait is unbounded. Condition (b) requires that your equity path never leaves a fixed band, which kills any rule that survives its drawdown only with unlimited capital. Condition (c) requires a capped bet size alongside a finite expected exit, which kills the doubling ladder: its expected number of bets is 2, comfortably finite, but the bets themselves double without limit.
 
-Note that a strategy needs only **one** condition to hold for the conclusion to bite. That asymmetry is what makes the theorem so unforgiving in practice. To escape it you have to break all three at once, and since any real trader has both a finite bankroll and a finite career, conditions (a) and (b) are imposed on you whether you consent or not.
+A strategy needs only **one** condition to hold for the conclusion to bite, so to escape the theorem you have to break all three at once. Since any real trader has both a finite bankroll and a finite career, conditions (a) and (b) are imposed on you whether you consent or not.
 
 ## Worked example 1: gambler's ruin, with the expectation check
 
@@ -102,15 +102,15 @@ $$
 
 Sixty trades, \$1.5m of notional risked, to arrive at an expected outcome identical to doing nothing.
 
-It is worth seeing what a real edge does to those numbers, because the contrast is the honest version of the lesson. If each trade wins with probability 0.51 instead of 0.50, an expected value of \$500 a trade, the process is no longer a martingale and optional stopping no longer forces the answer. The standard biased-walk formula with $q/p = {49/51}$ gives a probability of reaching the target of 69.7% rather than 62.5%. A one percentage point edge per trade moved the outcome by more than seven points, and no stopping rule anywhere in this post did anything comparable. **Edge comes from the game, never from the exit.**
+Now see what a real edge does to those numbers. If each trade wins with probability 0.51 instead of 0.50, an expected value of \$500 a trade, the process is no longer a martingale and optional stopping no longer forces the answer. The standard biased-walk formula with $q/p = {49/51}$ gives a probability of reaching the target of 69.7% rather than 62.5%. One percentage point of edge per trade moved the outcome by more than seven points, and no stopping rule anywhere in this post did anything comparable. **Edge comes from the game, never from the exit.**
 
 ## Worked example 2: the doubling ladder, priced to the cent
 
-Now the strategy from the opening. A \$255,000 bankroll, a base bet of \$1,000, and the rule: on a loss, double; on a win, stop and start over. Bets go \$1,000, \$2,000, \$4,000, \$8,000, \$16,000, \$32,000, \$64,000, \$128,000, and those eight sum to exactly \$255,000, so the bankroll funds precisely eight attempts.
+Now the strategy from the opening. A \$255,000 bankroll, a base bet of \$1,000, and the rule: on a loss, double; on a win, stop and start over. The bets go \$1,000, \$2,000, \$4,000, \$8,000, \$16,000, \$32,000, \$64,000, \$128,000, summing to exactly \$255,000, so the bankroll funds precisely eight attempts.
 
 ![Ladder of eight doubling bets from 1k to 128k dollars with a bracket for the 255,000 dollar bankroll and two terminal outcome boxes](/imgs/blogs/stopping-times-optional-stopping-math-for-quants-4.webp)
 
-Any single win, at any rung, nets ${+\$1{,}000}$: the winning bet returns double the losses beneath it plus the base stake. Eight consecutive losses exhaust the bankroll for a loss of \$255,000. On fair coin flips those probabilities are
+Any single win, at any rung, nets ${+\$1{,}000}$, because the winning bet returns double the losses beneath it plus the base stake. Eight consecutive losses exhaust the bankroll. On fair coin flips the probabilities are
 
 $$
 P(\text{win}) = 1 - \tfrac{1}{2^8} = \frac{255}{256} = 99.61\%, \qquad P(\text{ruin}) = \frac{1}{256} = 0.39\%
@@ -128,7 +128,7 @@ Now name the violated condition, which is the part that separates a good answer 
 
 In the **idealised** version, where you keep doubling forever until a win, the arithmetic changes: you win \$1,000 with probability 1, and $E[X_\tau] = \$1{,}000 \neq 0$. The theorem is not violated, its hypotheses simply fail. Which one? Not (a), since $\tau$ is unbounded. Not (b), since the equity path is unbounded below. And here is the trap: $\tau$ is geometric with mean 2, so $E[\tau] = 2$ is finite, and a candidate who has half-remembered condition (c) will announce that it applies. It does not, because (c) is a conjunction and the increments are not bounded: the $n$-th bet is $\$1{,}000 \times 2^{n-1}$, which exceeds any $K$ you propose. The doubling system is the textbook example of finite expected time paired with unbounded increments, and that is the entire reason it looks like free money on paper.
 
-The dollar version of "unbounded increments" is that the expected worst drawdown before the winning flip is infinite. The loss immediately before a win on rung $k$ is $\$1{,}000 \times (2^{k-1} - 1)$, arriving with probability $2^{-k}$, and summing that series diverges. Any finite bankroll truncates the sum, and the truncation is exactly where the expectation snaps back to zero.
+The dollar version of "unbounded increments" is that the expected worst drawdown before the winning flip is infinite: the loss immediately before a win on rung $k$ is $\$1{,}000 \times (2^{k-1} - 1)$, arriving with probability $2^{-k}$, and that series diverges. Any finite bankroll truncates it, and the truncation is exactly where the expectation snaps back to zero.
 
 ## Worked example 3: a stop-loss changes the variance and not the mean
 
@@ -139,7 +139,7 @@ The trading translation. A desk runs a \$50m position whose daily P&L is ${+\$1m
 
 ![Two column comparison of hold to day 25 against stopping out at minus five million, showing identical expected P&L and different standard deviations](/imgs/blogs/stopping-times-optional-stopping-math-for-quants-5.webp)
 
-The expected month-end P&L is \$0.00m under both rules. Not approximately, not on average over enough months. Identically, by theorem. The stop-loss truncates the left tail, and it pays for that truncation with foregone recoveries, and the two amounts are equal because the theorem says they are. You can see the mechanism directly: once the stop fires at ${-\$5m}$, the remaining days are still a fair walk, so the expected month-end P&L of the paths that stopped out is also exactly ${-\$5m}$. Nothing was saved and nothing was lost.
+The expected month-end P&L is \$0.00m under both rules. Not approximately, not on average over enough months. Identically, by theorem. The stop truncates the left tail and pays for that truncation with foregone recoveries, and the two amounts are equal because the theorem says they are. The mechanism is visible directly: once the stop fires at ${-\$5m}$, the remaining days are still a fair walk, so the expected month-end P&L of the paths that stopped out is also exactly ${-\$5m}$.
 
 What does change is everything else. Enumerating all ${2^{25}}$ paths exactly:
 
@@ -160,9 +160,9 @@ The identity in the last two points is the elegant part. Variance fell from 25.0
 
 ## How it shows up on the desk
 
-Risk limits are the institutional enforcement of conditions (a) and (b). A daily loss limit, a position cap, a drawdown trigger that flattens the book: each converts an unbounded process into a bounded one so that the theorem's conclusion is guaranteed rather than hoped for. A firm that imposes them is not claiming its traders have no edge. It is refusing to let anyone's P&L depend on a hypothesis that finite capital cannot support.
+Risk limits are the institutional enforcement of conditions (a) and (b). A daily loss limit, a position cap, a drawdown trigger that flattens the book: each converts an unbounded process into a bounded one, so the theorem's conclusion is guaranteed rather than hoped for. A firm that imposes them is not claiming its traders have no edge. It is refusing to let anyone's P&L rest on a hypothesis that finite capital cannot support.
 
-The most common live symptom is a backtest that has never taken a large loss. That is usually not skill. It is a strategy that averages down, or holds through drawdowns without a stop, or sizes up after losses, all of which are the doubling ladder in different clothing. Such a strategy converts a distribution with occasional moderate losses into one with frequent small gains and a rare catastrophic loss, and because the catastrophic branch is rare, a few years of history may simply not contain it. Compute the loss on the branch you have not seen, and compare it to the capital. If the two are comparable, the backtest is measuring luck about a sample, not an edge. Funding is the same story from the other side: a position you must exit on a margin call is one whose stopping time is set by your lender, not by you.
+The most common live symptom is a backtest that has never taken a large loss. That is usually not skill. It is a strategy that averages down, or holds through drawdowns without a stop, or sizes up after losses, all of which are the doubling ladder in different clothing. Each converts a distribution with occasional moderate losses into one with frequent small gains and a rare catastrophic loss, and a few years of history may simply not contain the rare branch. Compute the loss on the branch you have not seen and compare it to the capital. If the two are comparable, the backtest is measuring luck about a sample, not an edge. Funding is the same story from the other side: a position you must exit on a margin call has a stopping time set by your lender, not by you.
 
 ## Sources and further reading
 
