@@ -62,7 +62,7 @@ provided **any one** of the following holds:
 - **(b) $X$ is bounded**: there is a $K$ with $|X_n| \le K$ for all $n$, and $\tau \lt \infty$ almost surely.
 - **(c) $E[\tau] \lt \infty$ and the increments are bounded**: there is a $K$ with $|X_n - X_{n-1}| \le K$ for all $n$.
 
-Now the part that most treatments bury, and which makes the three conditions stop feeling arbitrary. The stopping is not the hard part. For **any** stopping time at all, with no conditions whatsoever, the *stopped process* $X^\tau_n := X_{\tau \wedge n}$ is itself a martingale. The reason is mechanical: stopping is the trading strategy "hold one unit until $\tau$, then hold zero", the indicator $\mathbf{1}_{\{\tau \ge n\}}$ is known at time $n-1$ because $\{\tau \le n-1\}$ is in $\mathcal{F}_{n-1}$, and a martingale bet on with a previsible position is still a martingale. So
+Now the part that most treatments bury, and which makes the three conditions stop feeling arbitrary. The stopping is not the hard part. For **any** stopping time at all, with no conditions whatsoever, the *stopped process* $X_{\tau \wedge n}$ is itself a martingale. The reason is mechanical: stopping is the trading strategy "hold one unit until $\tau$, then hold zero", the indicator $\mathbf{1}_{\{\tau \ge n\}}$ is known at time $n-1$ because $\{\tau \le n-1\}$ is in $\mathcal{F}_{n-1}$, and a martingale bet on with a previsible position is still a martingale. So
 
 $$
 E[X_{\tau \wedge n}] = E[X_0] \quad \text{for every finite } n

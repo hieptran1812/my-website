@@ -102,7 +102,9 @@ $$d\tilde{S}_t = \sigma \tilde{S}_t \, dW^Q_t,$$
 
 and a self-financing portfolio holding $\Delta_t$ shares has discounted value moving as
 
-$$d\tilde{X}_t = \Delta_t \, d\tilde{S}_t = \Delta_t \sigma \tilde{S}_t \, dW^Q_t.$$ Match that against the representation and read off
+$$d\tilde{X}_t = \Delta_t \, d\tilde{S}_t = \Delta_t \sigma \tilde{S}_t \, dW^Q_t.$$
+
+Match that against the representation and read off
 
 $$
 \Delta_t = \frac{H_t}{\sigma \tilde{S}_t}.
