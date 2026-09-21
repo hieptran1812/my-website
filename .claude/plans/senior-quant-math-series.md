@@ -234,7 +234,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 9 | gaussian-processes-kernels | W4 | **SHIPPED** 4,213 words |
 | 10 | hawkes-point-processes-order-flow | W6 | **SHIPPED** 4,856 words |
 | 11 | regime-switching-hidden-markov | W6 | **SHIPPED** 4,518 words |
-| 12 | levy-processes-jumps | W6 | **SHIPPED** 4,634 words |
+| 12 | levy-processes-jumps | W6 | **SHIPPED** 4,283 words |
 | 13 | rough-volatility-fractional-brownian | W6 | **SHIPPED** 4,237 words |
 | 14 | stopping-times-optional-stopping | W5 | **SHIPPED** 4,076 words |
 | 15 | martingale-representation-hedging | W5 | **SHIPPED** 4,132 words |
