@@ -10,9 +10,15 @@ its full pipeline: Phase A intake, B outline, C figures (delegate to
 `figure-author`; never render or Read a WebP yourself), D draft, D2 fact-check,
 E verify gate, F cache cleanup.
 
-Depth tier is **explainer**. Target band **3,600-4,000 words of body**. Two posts
-in wave 2 overshot and needed a whole extra compression pass; aim inside the band
-the first time.
+Depth tier is **explainer**. Target band **3,600-4,000 words of body**.
+
+The band is a discipline on prose, not a ceiling over required content. Aim inside
+it on the first draft, because every post so far has needed a compression pass it
+should not have needed. But if the only remaining cut is a mandated element - a
+worked example, a misconception the brief named, a section the reader needs - then
+stop and say so rather than dropping it. Waves 2 and 3 shipped at 4,396 to 5,121
+for exactly that reason. Report the count and the reason; the call is the
+orchestrator's, not yours.
 
 ## The worked-examples gate bites every post in this series
 
@@ -27,6 +33,33 @@ size and carry the arithmetic through to money: state a \$500m portfolio, a \$50
 position, a \$100k per-trade risk, and show what the maths does to that number. It
 satisfies the gate *and* makes the point land harder, because a reader feels
 "\$18m in one name" in a way they never feel "weight 0.36".
+
+## Check your own arithmetic; the gate cannot
+
+The verify gate counts examples, measures figures and catches em dashes. It does
+**not** recompute your numbers. Wave 3 shipped two t-statistics that did not
+reproduce, and a sweep of the already-published posts found two more.
+
+Every defect was the same shape: **a denominator rounded one step early, then
+carried**. `65 x 9.2` was written as 600 rather than 598, and the downstream
+`sqrt(600) x 0.03 = 0.735` then failed to round to the 0.73 the post printed,
+while the true 598 gives 0.7335 and does.
+
+So before you declare a post done, take every stated division and product in the
+prose and recompute it at the precision you printed. Carry unrounded intermediates
+and round only at the end. If a figure and the prose disagree, work out which one
+is wrong before assuming it is the figure.
+
+## Two gate quirks that cost a pass each
+
+- **Do not write "the picture above".** The abstraction-coverage gate matches
+  `picture (a|this)` with no word boundary, so "picture ab-ove" trips it, and its
+  search window only looks *forward*, so a figure sitting immediately above cannot
+  clear it. Write "that figure" instead.
+- A `## Sources and further reading` section clears the sourcing gate to a WARN,
+  never a FAIL, at this depth. The WARN listing your illustrative worked-example
+  dollar figures is expected; state once in the text that they are illustrative
+  arithmetic on assumed inputs and move on.
 
 ## Maths rendering rules for this repo
 
