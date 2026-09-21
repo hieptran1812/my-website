@@ -235,7 +235,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 10 | hawkes-point-processes-order-flow | W4 | TODO |
 | 11 | regime-switching-hidden-markov | W4 | TODO |
 | 12 | levy-processes-jumps | W4 | TODO |
-| 13 | rough-volatility-fractional-brownian | W6 | **SHIPPED** 4,767 words |
+| 13 | rough-volatility-fractional-brownian | W6 | **SHIPPED** 4,535 words |
 | 14 | stopping-times-optional-stopping | W5 | **SHIPPED** 4,076 words |
 | 15 | martingale-representation-hedging | W5 | **SHIPPED** 4,132 words |
 | 16 | change-of-numeraire | W5 | **SHIPPED** 4,057 words |
