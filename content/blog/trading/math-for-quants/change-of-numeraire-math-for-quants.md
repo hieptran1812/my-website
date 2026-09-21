@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 19
+readTime: 18
 ---
 
 > [!important]
@@ -24,7 +24,7 @@ readTime: 19
 
 Most people meet the risk-neutral measure as a revelation and then never question it again. There is a real world with probability $P$, there is a pricing world with probability $Q$, you discount at the risk-free rate and take an expectation under $Q$, and that is pricing. It works, so nobody asks the follow-up question: why *that* measure?
 
-The answer is deflating in the best possible way. $Q$ is not a law of nature. It is the bookkeeping you get when you decide to quote every price in units of a money-market account. Quote them in units of a two-year zero-coupon bond, or of the stock itself, and you get a completely different set of probabilities. Every one of them is as legitimate as $Q$. And some of them turn a pricing problem that needs a two-dimensional numerical integral into a formula you can write on a napkin.
+The answer is deflating. $Q$ is not a law of nature. It is the bookkeeping you get when you decide to quote every price in units of a money-market account. Quote them in units of a two-year zero-coupon bond, or of the stock itself, and you get a completely different set of probabilities. Every one of them is as legitimate as $Q$. And some of them turn a pricing problem that needs a two-dimensional numerical integral into a formula you can write on a napkin.
 
 That freedom is the single most labour-saving idea in derivatives pricing. It also looks like sleight of hand the first time you see it, because the probabilities visibly change and the answer visibly does not. The figure below is that whole tension in one image: the same call, priced twice, under two different sets of probabilities, landing on the same number.
 
@@ -134,7 +134,7 @@ Notice what the naive calculation got wrong. It did not use the wrong formula. $
 
 Some payoffs tell you which numeraire to use. The clearest is Margrabe's 1978 exchange option: the right, at time $T$, to give up asset 2 and receive asset 1, worth $\max(S_1(T) - S_2(T), 0)$.
 
-Priced under the money-market measure this is genuinely unpleasant. Two correlated lognormals, a two-dimensional integral over a region bounded by a diagonal, and an interest rate threaded through both drifts. Priced with **asset 2 as the numeraire** it is three lines. Divide the payoff by $S_2(T)$:
+Priced under the money-market measure this is unpleasant: two correlated lognormals, a two-dimensional integral over a region bounded by a diagonal, and an interest rate threaded through both drifts. Priced with **asset 2 as the numeraire** it is three lines. Divide the payoff by $S_2(T)$:
 
 $$\frac{\max(S_1(T) - S_2(T), 0)}{S_2(T)} = \max\!\left(\frac{S_1(T)}{S_2(T)} - 1, 0\right)$$
 
@@ -172,7 +172,7 @@ Two places where a desk meets this daily.
 
 A **quanto** pays in your currency off a foreign underlying, converted at a fixed rate agreed today rather than the market rate at maturity. That fixed conversion breaks the usual hedge, and the repair is a drift term.
 
-The derivation is two lines of numeraire change. Let $X_t$ be the exchange rate quoted as domestic per unit of foreign. The foreign money-market account, valued domestically, is $X_t B^f_t$, so the density between the two currencies' risk-neutral measures is $\left(X_0/X_T\right)e^{(r_d-r_f)T}$: the exchange rate itself is the Radon-Nikodym derivative. Girsanov then shifts the Brownian motion driving the foreign asset by the FX volatility, and the drift of the foreign asset under the *domestic* measure comes out as
+The derivation is two lines of numeraire change. Let $X_t$ be the exchange rate quoted as domestic per unit of foreign. The foreign money-market account, valued domestically, is $X_t B^f_t$, so the density between the two currencies' risk-neutral measures is $\left(X_0/X_T\right)e^{(r_d-r_f)T}$: the exchange rate itself is the Radon-Nikodym derivative. Girsanov then shifts the Brownian motion driving the foreign asset, and its drift under the *domestic* measure comes out as
 
 $$\mu_S = r_f - q - \rho\,\sigma_S\,\sigma_X$$
 
@@ -207,7 +207,7 @@ The annuity is a positive portfolio of zero-coupon bonds, so it is an admissible
 
 **"Changing numeraire changes the price."** Three separate computations in this post gave \$907,111.76 for the same caplet, and two gave \$9.523810 for the same call. Invariance is a theorem, proved in general by Geman, El Karoui and Rochet, not a numerical coincidence. What changes is which term you have to remember and which one is absorbed into the probabilities.
 
-**"The forward measure is a bond-market technicality."** It is needed the moment the discount factor is random *and* correlated with the payoff. That is every rate option, every credit product where default and rates co-move, every convexity-adjusted payment date, and increasingly every equity option collateralised in a currency whose rate co-moves with the underlying. The caplet above is a toy, and it still produced a 1.96% error.
+**"The forward measure is a bond-market technicality."** It is needed the moment the discount factor is random *and* correlated with the payoff. That is every rate option, every credit product where default and rates co-move, every convexity-adjusted payment date, and increasingly every equity option collateralised in a currency whose rate co-moves with the underlying. The caplet above is a toy and still produced a 1.96% error.
 
 **"Margrabe needs a correlation model layered on top of Black-Scholes."** It needs one number. Correlation enters only through $\sigma^2 = \sigma_1^2 + \sigma_2^2 - 2\rho\sigma_1\sigma_2$, and once you have that scalar the pricing is a single univariate call. The modelling difficulty in exchange options is estimating $\rho$, not pricing given it.
 
@@ -216,7 +216,7 @@ The annuity is a positive portfolio of zero-coupon bonds, so it is an admissible
 - H. Geman, N. El Karoui and J.-C. Rochet, "Changes of Numeraire, Changes of Probability Measure and Option Pricing," *Journal of Applied Probability* 32(2), 1995, pp. 443 to 458. The general theorem, including the admissibility conditions on a numeraire.
 - W. Margrabe, "The Value of an Option to Exchange One Asset for Another," *Journal of Finance* 33(1), 1978, pp. 177 to 186. The original exchange-option paper.
 - F. Jamshidian, "An Exact Bond Option Formula," *Journal of Finance* 44(1), 1989, pp. 205 to 209. The decomposition that makes bond options tractable under the forward measure.
-- D. Brigo and F. Mercurio, *Interest Rate Models: Theory and Practice*, 2nd edition, Springer, 2006. Chapter 2 on change of numeraire, and the appendices on the quanto adjustment and the swap market model.
+- D. Brigo and F. Mercurio, *Interest Rate Models: Theory and Practice*, 2nd edition, Springer, 2006. Chapter 2 on change of numeraire, plus the quanto and swap-market-model appendices.
 - J. Hull, *Options, Futures, and Other Derivatives*. The quanto chapter derives the drift correction used in worked example 4.
 - On this site: [martingales and the risk-neutral measure](/blog/trading/math-for-quants/martingales-risk-neutral-measure-math-for-quants), [Girsanov's theorem](/blog/trading/math-for-quants/girsanov-change-of-measure-math-for-quants), [Radon-Nikodym derivatives](/blog/trading/math-for-quants/radon-nikodym-densities-math-for-quants), [Feynman-Kac and the Black-Scholes PDE](/blog/trading/math-for-quants/feynman-kac-black-scholes-pde-math-for-quants), and the [Black-Scholes deep dive](/blog/trading/quantitative-finance/black-scholes) for the Margrabe and Garman-Kohlhagen variants.
 

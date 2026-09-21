@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 19
+readTime: 18
 ---
 
 > [!important]
@@ -157,7 +157,7 @@ The payoff is an indicator, so each simulated path returns 0 or 1 and the estima
 
 1. **Sampling noise.** $p(1-p) = 0.2290$. At 100,000 paths the standard error is $\sqrt{0.2290/100{,}000} = 0.001513$, which on \$5m of notional is \$7,567. A 95% interval is \$14,831 wide either side.
 2. **What it takes to tighten it.** Standard error falls with the square root of the path count, so ten times tighter costs a hundred times the paths. Pinning the price to one basis point of notional, a \$500 standard error, needs 22,901,563 paths.
-3. **The part that is not noise.** Simulate with daily steps and you only check the barrier once a day, so you miss every excursion that pokes above \$120 and comes back between two closes. The Broadie, Glasserman and Kou continuity correction says a discretely monitored barrier behaves like a continuous one shifted by $\exp(0.5826\,\sigma\sqrt{\Delta t})$. With 126 daily steps over six months, $\Delta t = 0.003968$ and the exponent is 0.01101, so the simulation is really pricing a barrier at \$121.33.
+3. **The part that is not noise.** With daily steps you check the barrier once a day, so you miss every excursion that pokes above \$120 and comes back between two closes. The Broadie, Glasserman and Kou continuity correction says a discretely monitored barrier behaves like a continuous one shifted by $\exp(0.5826\,\sigma\sqrt{\Delta t})$. With 126 daily steps over six months, $\Delta t = 0.003968$ and the exponent is 0.01101, so the simulation is really pricing a barrier at \$121.33.
 4. **Re-price at the effective barrier.** The same closed form at \$121.33 gives a touch probability of 32.8% rather than 35.5%. On \$5m that is a **bias of \$136,599**.
 
 So the daily-step Monte Carlo converges, with beautiful tight error bars, to a number that is \$136,599 wrong. The bias is 18.1 times the standard error, which means the error bars are not merely useless here, they are actively misleading: they invite you to believe a number they have no opinion about.
@@ -180,7 +180,7 @@ The limit is dimension. Grid-based PDE work is comfortable in one or two state v
 
 **"Forward and backward are the same equation written twice."** They are not. The unknowns are different objects, they run over different variables, and their data sit at opposite ends of time. What is true is that the forward operator is the formal adjoint of the backward generator, which is a precise relationship and not an equality. The practical tell is where the coefficients sit: outside the derivatives in the backward equation, inside them in the forward equation. That distinction is invisible when $\mu$ and $\sigma$ are constants, which is why people who learned on constant-coefficient examples get it wrong on their first state-dependent model.
 
-**"Fokker-Planck is a physics thing."** Dupire's local volatility formula is a forward-equation result. Breeden and Litzenberger reading the risk-neutral density off the curvature of call prices in strike is reading the solution of the forward equation. Structural default models are absorbing-boundary problems. Any mean-reversion trade that has ever been sized off a long-run standard deviation used $\sigma/\sqrt{2\theta}$, which is a stationary Fokker-Planck solution whether or not anyone said so.
+**"Fokker-Planck is a physics thing."** Dupire's local volatility formula is a forward-equation result. Breeden and Litzenberger reading the risk-neutral density off the curvature of call prices in strike is reading the solution of the forward equation. Structural default models are absorbing-boundary problems. Any mean-reversion trade sized off a long-run standard deviation used $\sigma/\sqrt{2\theta}$, a stationary Fokker-Planck solution whether or not anyone said so.
 
 **"Monte Carlo is always easier."** It is easier to *write*. In one or two dimensions it is slower, less accurate and, for barrier payoffs, systematically biased in a way its own error bars conceal. The honest rule is that Monte Carlo wins on dimension and on payoff complexity, and loses on everything else.
 
@@ -192,7 +192,7 @@ Then answer in order. Write the SDE. Say that the density obeys the Kolmogorov f
 
 Three things make a candidate look strong here. Knowing the stationary standard deviation is $\sigma/\sqrt{2\theta}$ without deriving it. Distinguishing occupancy from first passage without being prompted. And volunteering the discretisation bias in barrier simulation, because it shows you have actually been wrong about this once.
 
-The trap is the forward and backward mix-up, and it is the single most common error on this topic. A candidate who says "I would solve the Fokker-Planck equation backwards from the payoff" has just merged the two equations, and an interviewer who is paying attention will follow up by making the volatility state-dependent and asking where the coefficients go. The other trap is writing the forward equation with $\mu$ and $\sigma^2$ outside the derivatives. Both are recoverable if you catch them yourself.
+The trap is the forward and backward mix-up, and it is the single most common error on this topic. A candidate who says "I would solve the Fokker-Planck equation backwards from the payoff" has just merged the two equations, and a sharp interviewer will follow up by making the volatility state-dependent and asking where the coefficients go. The other trap is writing the forward equation with $\mu$ and $\sigma^2$ outside the derivatives.
 
 Two Sigma probes this hardest, in line with its preference for candidates who reason about distributions rather than point estimates. Citadel's multi-strategy and rates seats care about the stationary and first-passage results, because that is how spread trades get sized. Any exotics or rates desk expects the Dupire connection and the barrier discretisation bias as working knowledge.
 
