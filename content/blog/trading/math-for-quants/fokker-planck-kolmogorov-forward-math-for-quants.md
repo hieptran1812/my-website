@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 20
+readTime: 19
 ---
 
 > [!important]
@@ -32,13 +32,13 @@ The Kolmogorov forward equation is that object written down directly. It is a pa
 
 ![Two panels contrasting the SDE view, which follows one path at a time and needs one hundred thousand simulations per question, with the Fokker-Planck view, which moves the whole density and answers every question from a single PDE solve](/imgs/blogs/fokker-planck-kolmogorov-forward-math-for-quants-1.webp)
 
-That figure is the argument of the whole article in one image. On the left, the SDE follows a single realisation, and any probability has to be assembled by simulating many paths and counting. On the right, the forward equation moves the density itself, and any probability is an integral of the answer. Same model, two questions.
+That figure is the whole argument in one image. On the left, the SDE follows a single realisation, and any probability has to be assembled by simulating many paths and counting. On the right, the forward equation moves the density itself, and any probability is an integral of the answer. Same model, two questions.
 
 ## Foundations: what a density is, and what an SDE is not
 
-A **probability density** $p(x)$ is a function whose area over an interval is the probability of landing in that interval. The chance of sitting between $a$ and $b$ is $\int_a^b p(x)\,dx$, and the total area is one because the quantity has to be somewhere.
+A **probability density** $p(x)$ is a function whose area over an interval is the probability of landing in that interval: the chance of sitting between $a$ and $b$ is $\int_a^b p(x)\,dx$, and the total area is one because the quantity has to be somewhere.
 
-A **transition density** adds time and a starting point. Write $p(y, t \mid x_0, 0)$ for the density of being at $y$ after time $t$, given that you started at $x_0$. At $t = 0$ all the mass sits on $x_0$: the density is a spike. As time passes the spike spreads out and drifts. The forward equation is the rule for how that spreading happens.
+A **transition density** adds time and a starting point. Write $p(y, t \mid x_0, 0)$ for the density of being at $y$ after time $t$ given that you started at $x_0$. At $t = 0$ all the mass sits on $x_0$, a spike; as time passes it spreads and drifts. The forward equation is the rule for that spreading.
 
 A **stochastic differential equation** describes the same model from the opposite end. In the general one-dimensional form,
 

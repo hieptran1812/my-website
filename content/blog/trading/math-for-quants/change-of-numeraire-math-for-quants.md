@@ -24,19 +24,17 @@ readTime: 19
 
 Most people meet the risk-neutral measure as a revelation and then never question it again. There is a real world with probability $P$, there is a pricing world with probability $Q$, you discount at the risk-free rate and take an expectation under $Q$, and that is pricing. It works, so nobody asks the follow-up question: why *that* measure?
 
-The answer is deflating in the best possible way. $Q$ is not a law of nature. It is the bookkeeping you get when you decide to quote every price in units of a money-market account. Decide instead to quote prices in units of a two-year zero-coupon bond, or in units of the stock itself, and you get a completely different set of probabilities. Every one of them is as legitimate as $Q$. And some of them turn a pricing problem that needs a two-dimensional numerical integral into a formula you can write on a napkin.
+The answer is deflating in the best possible way. $Q$ is not a law of nature. It is the bookkeeping you get when you decide to quote every price in units of a money-market account. Quote them in units of a two-year zero-coupon bond, or of the stock itself, and you get a completely different set of probabilities. Every one of them is as legitimate as $Q$. And some of them turn a pricing problem that needs a two-dimensional numerical integral into a formula you can write on a napkin.
 
 That freedom is the single most labour-saving idea in derivatives pricing. It also looks like sleight of hand the first time you see it, because the probabilities visibly change and the answer visibly does not. The figure below is that whole tension in one image: the same call, priced twice, under two different sets of probabilities, landing on the same number.
 
 ![Two side by side lanes pricing the same call on a two state stock, the left lane using the money market account as numeraire with probabilities 0.500 and 0.500, the right lane using the stock as numeraire with probabilities four sevenths and three sevenths, both arriving at ninety five thousand two hundred thirty eight dollars and ten cents](/imgs/blogs/change-of-numeraire-math-for-quants-1.webp)
 
-Once you see what is invariant and what is not, the trick stops being magic and becomes a tool you reach for before you start computing, not after you get stuck.
-
 ## Foundations: what a numeraire actually is
 
 A **numeraire** is the thing you measure wealth in. That is the entire definition, and it is older than finance: when you say a car costs 3,000 hours of work, hours are your numeraire.
 
-In pricing, the numeraire has to be a **traded asset with a strictly positive price**. Traded, because you have to be able to hold it and divide by it without introducing an arbitrage. Strictly positive, because you are going to divide by it and the answer must never blow up or flip sign. A money-market account qualifies. A zero-coupon bond qualifies. A share of a non-defaultable stock qualifies. A futures contract does not, because it is worth zero at inception. A swap does not, for the same reason.
+In pricing, the numeraire has to be a **traded asset with a strictly positive price**. Traded, so you can hold it and divide by it without introducing an arbitrage. Strictly positive, because you are going to divide by it and the answer must never blow up or flip sign. A money-market account, a zero-coupon bond and a share of a non-defaultable stock all qualify. A futures contract does not, because it is worth zero at inception, and neither does a swap.
 
 ### The rule that makes a numeraire useful
 
@@ -44,7 +42,7 @@ Fix a numeraire $N_t$. Then there exists a probability measure $Q^N$, called the
 
 $$\frac{V_t}{N_t} = \mathbb{E}^{Q^N}_t\!\left[\frac{V_T}{N_T}\right]$$
 
-Read the left side as "the price of the thing today, quoted in numeraire units," and the right side as "what you expect it to be worth in numeraire units later." A martingale is a process whose best forecast of tomorrow is today, which is covered from zero in [martingales and the risk-neutral measure](/blog/trading/math-for-quants/martingales-risk-neutral-measure-math-for-quants).
+Read the left side as the price today quoted in numeraire units, and the right side as what you expect it to be worth in numeraire units later. A martingale is a process whose best forecast of tomorrow is today, covered from zero in [martingales and the risk-neutral measure](/blog/trading/math-for-quants/martingales-risk-neutral-measure-math-for-quants).
 
 Take $N_t = B_t$, the money-market account. Then $V_t/B_t$ is the discounted price, $Q^B$ is what everybody calls the risk-neutral measure $Q$, and the equation above is the familiar $V_0 = \mathbb{E}^Q[V_T/B_T]$. There is nothing else in it. "Discounting" was always just "quoting in money-market units," and the risk-neutral measure was always just the measure that makes that particular quotation a martingale.
 
@@ -76,21 +74,21 @@ $$\left.\frac{dQ^N}{dQ^M}\right|_T = \frac{N_T/N_0}{M_T/M_0}$$
 
 That is it. The [Radon-Nikodym derivative](/blog/trading/math-for-quants/radon-nikodym-densities-math-for-quants), which in the abstract is a per-outcome reweighting, is here just the ratio of how much each yardstick grew along that path. In worked example 1, $N$ was the stock and $M$ the money-market account, and the density was ${(S_T/S_0)/1.05}$, which is exactly the ${8/7}$ and ${6/7}$ you saw.
 
-In continuous time this density is an exponential martingale, and feeding it through **Girsanov's theorem** tells you what happens to the Brownian motion driving your model: it picks up a drift equal to the volatility of the numeraire ratio. Nothing about the volatility changes, only the drift. The full derivation, with the market price of risk and why $\mu$ disappears from an option price, is in [Girsanov's theorem and the change of measure](/blog/trading/math-for-quants/girsanov-change-of-measure-math-for-quants), and it is worth having read before you trust the shortcuts below.
+In continuous time this density is an exponential martingale, and feeding it through **Girsanov's theorem** tells you what happens to the Brownian motion driving your model: it picks up a drift equal to the volatility of the numeraire ratio. Nothing about the volatility changes, only the drift. The full derivation, with the market price of risk and why $\mu$ disappears from an option price, is in [Girsanov's theorem and the change of measure](/blog/trading/math-for-quants/girsanov-change-of-measure-math-for-quants).
 
 ### Why the price is invariant while the measure is not
 
-This is the part that makes people uneasy, so it is worth being blunt about it. Two things are going on at once, and only one of them is real.
+Two things are going on at once, and only one of them is real.
 
-The **price** is a number the market will pay. It is invariant by construction, because $V_t/N_t$ being a $Q^N$-martingale for every numeraire $N$ is a theorem about the same underlying no-arbitrage structure, not a new assumption per numeraire. Geman, El Karoui and Rochet proved the general statement in 1995: numeraire and measure move together, in lockstep, and their product leaves the price alone.
+The **price** is a number the market will pay, and it is invariant by construction: $V_t/N_t$ being a $Q^N$-martingale for every $N$ is a theorem about one no-arbitrage structure, not a new assumption per numeraire. Geman, El Karoui and Rochet proved the general statement in 1995. Numeraire and measure move in lockstep, and their product leaves the price alone.
 
 The **measure** is bookkeeping. A $Q$-probability is not a forecast of anything. It is a price of a digital payoff divided by a discount factor, and when you change the discount factor you change the probability. Asking "what is the true probability" of a state is like asking whether a distance is truly 1.6 or truly 1.0 without saying kilometres or miles.
 
-That is also why the trick is *safe*. You cannot break a price by picking the wrong numeraire, only make the algebra harder than it needed to be. The choice is a convenience, and the worst outcome of a bad choice is work.
+That is also why the trick is *safe*: a bad choice of numeraire cannot break a price, it can only make the algebra longer than it needed to be.
 
 ![A four row comparison matrix listing the money market account, the zero coupon bond, the annuity and the asset itself, with the measure each induces, what becomes a martingale under it, and which products it makes easy](/imgs/blogs/change-of-numeraire-math-for-quants-2.webp)
 
-Three of those rows are the workhorses. The money-market account gives the risk-neutral measure and prices vanilla equity and FX options. A zero-coupon bond maturing at $T$ gives the $T$-forward measure and prices anything where the discount factor is itself random. An asset gives the share measure and prices anything whose payoff compares two assets. The annuity row is the swaption special case, and it appears at the end.
+The first three rows are the workhorses: cash for vanillas, a bond maturing at $T$ when the discount factor is itself random, an asset when the payoff compares two assets. The annuity row is the swaption special case, and it comes at the end.
 
 ## The forward measure, where the trick pays rent
 
@@ -98,13 +96,13 @@ Here is the problem the forward measure solves. The general pricing formula is a
 
 $$\mathbb{E}^Q[D_T X] = \mathbb{E}^Q[D_T]\,\mathbb{E}^Q[X] + \operatorname{Cov}^Q(D_T, X)$$
 
-For an equity option this rarely matters, because rates and the stock are close to independent over a short horizon and the covariance term is small. For anything whose payoff is *driven by rates*, the covariance term is not small. It is structural, and it always has the same sign: a rate option pays most in exactly the states where rates are high, which are exactly the states where the discount factor is low.
+For an equity option this rarely matters: rates and the stock are close to independent over a short horizon, so the covariance is small. For a payoff *driven by rates* it is structural, and it always has the same sign, because a rate option pays most in exactly the states where rates are high and the discount factor is therefore low.
 
 Switching to the $T$-forward measure $Q^T$, whose numeraire is the zero-coupon bond $P(t,T)$, makes that term vanish into the probabilities. Since $P(T,T) = 1$, the numeraire at maturity is a constant and the pricing formula collapses to:
 
 $$V_0 = \mathbb{E}^{Q}\!\left[D_T X\right] = P(0,T)\,\mathbb{E}^{Q^T}\!\left[X\right]$$
 
-A clean product of today's discount factor and one expectation, with no covariance correction left to forget. The forward measure also earns its name: under $Q^T$, the $T$-forward price of any asset is a martingale, so forward rates and forward prices are their own expectations.
+A clean product of today's discount factor and one expectation, with no correction left to forget. The measure also earns its name: under $Q^T$ the $T$-forward price of any asset is a martingale, so forward prices are their own expectations.
 
 #### Worked example 2: a caplet on \$100m, and the term the shortcut drops
 
@@ -201,7 +199,7 @@ A payer swaption on a swap with fixed-leg dates $T_1,\dots,T_n$ pays $A_T\max(R_
 
 $$R_t = \frac{P(t,T_0) - P(t,T_n)}{A_t}, \qquad A_t = \sum_{i=1}^{n}\tau_i\,P(t,T_i)$$
 
-The annuity is a positive portfolio of zero-coupon bonds, so it is an admissible numeraire, and $R_t$ is a ratio of traded assets to it, so $R_t$ is a martingale under $Q^A$. Divide the payoff by $A_T$ and you are left with $\max(R_T - K, 0)$, a plain call on a martingale. The price is $A_0$ times the Black formula on the swap rate. That, and nothing deeper, is why the swaption market quotes a **Black volatility on the swap rate** instead of a volatility on bond prices: the annuity measure is the one where that quoting convention is exactly right. Brigo and Mercurio build the whole LIBOR and swap market model family on this observation, and the short-rate models that feed it are surveyed in [short-rate models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white).
+The annuity is a positive portfolio of zero-coupon bonds, so it is an admissible numeraire, and $R_t$ is a ratio of traded assets to it, so $R_t$ is a martingale under $Q^A$. Divide the payoff by $A_T$ and you are left with $\max(R_T - K, 0)$, a plain call on a martingale. The price is $A_0$ times the Black formula on the swap rate. That, and nothing deeper, is why the swaption market quotes a **Black volatility on the swap rate** rather than a volatility on bond prices. Brigo and Mercurio build the LIBOR and swap market model family on this observation, and the short-rate models that feed it are surveyed in [short-rate models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white).
 
 ## Common misconceptions
 
@@ -221,8 +219,6 @@ The annuity is a positive portfolio of zero-coupon bonds, so it is an admissible
 - D. Brigo and F. Mercurio, *Interest Rate Models: Theory and Practice*, 2nd edition, Springer, 2006. Chapter 2 on change of numeraire, and the appendices on the quanto adjustment and the swap market model.
 - J. Hull, *Options, Futures, and Other Derivatives*. The quanto chapter derives the drift correction used in worked example 4.
 - On this site: [martingales and the risk-neutral measure](/blog/trading/math-for-quants/martingales-risk-neutral-measure-math-for-quants), [Girsanov's theorem](/blog/trading/math-for-quants/girsanov-change-of-measure-math-for-quants), [Radon-Nikodym derivatives](/blog/trading/math-for-quants/radon-nikodym-densities-math-for-quants), [Feynman-Kac and the Black-Scholes PDE](/blog/trading/math-for-quants/feynman-kac-black-scholes-pde-math-for-quants), and the [Black-Scholes deep dive](/blog/trading/quantitative-finance/black-scholes) for the Margrabe and Garman-Kohlhagen variants.
-
-All dollar figures in the worked examples are illustrative arithmetic on assumed inputs, not market quotes.
 
 ## In the interview room and on the desk
 
