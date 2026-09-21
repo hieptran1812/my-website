@@ -138,7 +138,7 @@ At phi = 0.7 and T = 52 weeks that is 9.2 effective periods a year, not 52. A sl
 
 Naive count: 500 names × 52 weekly rebalances = 26,000 bets a year, so ${\sqrt{26{,}000} = 161}$. Multiply by IC 0.03 and the fundamental law promises an IR of 4.8, worth \$97m a year on a \$200m book. No fund on earth runs a 4.8 IR, which should be the first clue.
 
-Honest count: strip the market and sector factors and the residual cross-section behaves like roughly 65 independent names, while weekly autocorrelation of 0.7 turns 52 rebalances into 9.2 effective periods. Effective breadth is 65 × 9.2 = 600, so ${\sqrt{600} = 24.5}$, and IR = 0.03 × 24.5 = **0.73**, worth **\$14.7m**. The naive breadth overstated the information ratio by a factor of 6.6.
+Honest count: strip the market and sector factors and the residual cross-section behaves like roughly 65 independent names, while weekly autocorrelation of 0.7 turns 52 rebalances into 9.2 effective periods. Effective breadth is 65 × 9.2 = 598, so ${\sqrt{598} = 24.45}$, and IR = 0.03 × 24.45 = **0.73**, worth **\$14.7m**. The naive breadth overstated the information ratio by a factor of 6.6.
 
 One further leak matters. Clarke, de Silva and Thorley (*Financial Analysts Journal*, 2002) noted that even with the right IC and breadth, long-only constraints, position limits, sector caps and turnover budgets stand between forecast and position. Their *transfer coefficient* is the correlation between the positions you wanted and the ones you hold:
 
@@ -175,7 +175,7 @@ $$
 
 It generalises: a candidate earns a positive weight only if its IC exceeds its correlation with the book times the book's combined IC. Below the hurdle its optimal weight is *negative*. It still contributes, but as a hedge that strips noise out of the book, not as a source of return.
 
-The hurdle rises as the book improves, which is the cruel part. Our 100-signal book has a combined IC of 0.0541, so a candidate with IC 0.03 needs a correlation with the book below 0.03 / 0.0541 = 0.554. A typical new signal correlating 0.3 with each existing member correlates 0.54 with their average. It clears by about two percent.
+The hurdle rises as the book improves, which is the cruel part. Our 100-signal book has a combined IC of 0.0541, so a candidate with IC 0.03 needs a correlation with the book below 0.03 / 0.0541 = 0.555. A typical new signal correlating 0.3 with each existing member correlates 0.54 with their average. It clears by about two percent.
 
 ![Two bars comparing signal A at IC 0.05 with signal B at IC 0.03, showing 49% of B's variance already contained in A, above a rule box giving the hurdle test and the resulting negative optimal weight of minus 0.21.](/imgs/blogs/combining-weak-alphas-math-for-quants-2.webp)
 

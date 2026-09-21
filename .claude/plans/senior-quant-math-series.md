@@ -224,11 +224,11 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | # | slug | wave | status |
 |---|------|------|--------|
 | 1 | random-matrix-theory-covariance-cleaning | W1 | **SHIPPED** f43eaba4 |
-| 2 | shrinkage-stein-paradox | W2 | TODO |
+| 2 | shrinkage-stein-paradox | W3 | **SHIPPED** 5,121 words |
 | 3 | concentration-inequalities-sample-complexity | W1 | **SHIPPED** f43eaba4 |
 | 4 | causal-inference-alpha-research | W1 | **SHIPPED** f43eaba4 |
-| 5 | instrumental-variables-natural-experiments | W2 | TODO |
-| 6 | event-studies-diff-in-diff-synthetic-control | W2 | TODO |
+| 5 | instrumental-variables-natural-experiments | W3 | **SHIPPED** 4,968 words |
+| 6 | event-studies-diff-in-diff-synthetic-control | W3 | **SHIPPED** 4,538 words |
 | 7 | mcmc-metropolis-gibbs | W3 | TODO |
 | 8 | hierarchical-bayes-pooling | W3 | TODO |
 | 9 | gaussian-processes-kernels | W3 | TODO |
