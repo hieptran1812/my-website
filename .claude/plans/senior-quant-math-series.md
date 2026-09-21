@@ -1,5 +1,8 @@
 # Senior Quant Math: the gap-filling series
 
+**Drafting brief for every agent in this series: `.claude/plans/senior-quant-math-brief.md`**
+
+
 **Why this series exists.** A 101-post audit of `trading/math-for-quants` and
 `trading/quantitative-finance` found the eight core pillars already covered:
 measure theory, stochastic calculus, inference, linear algebra, optimization,
