@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 23
+readTime: 21
 ---
 
 > [!important]
@@ -20,43 +20,33 @@ readTime: 23
 > - **Metropolis-Hastings** accepts with probability $\min(1, r)$, where $r$ is a ratio of two unnormalised densities, so the constant cancels. **Gibbs** is the case where every conditional can be drawn exactly, and then $r = 1$ always.
 > - The number to remember: a chain stuck in one mode of a bimodal posterior reported a Sharpe of 1.50 instead of 0.60, which sized \$250m instead of \$100m and put \$16.2m of expected P&L into an annual plan that will not arrive.
 
-Write down a model, any model, and Bayes' theorem hands you the posterior in one line: prior times likelihood, divided by a constant that makes the whole thing integrate to one. The line is short, it is correct, and for most models worth building it is useless, because that constant is an integral over every value every parameter could take, and nobody can do it.
-
-That is not a fussy theoretical complaint. It is why a working quant reaches for a sampler the moment a model stops being a textbook example: a hierarchical model of alpha decay across fifty tickers, a regime-switching model of a spread, a fat-tailed likelihood on daily P&L. Every one has a posterior you can write and cannot integrate.
+Write down a model, any model, and Bayes' theorem hands you the posterior in one line: prior times likelihood, divided by a constant that makes the whole thing integrate to one. The line is short, it is correct, and for most models worth building it is useless, because that constant is an integral over every value every parameter could take, and nobody can do it. That is why a working quant reaches for a sampler the moment a model stops being a textbook example.
 
 Markov chain Monte Carlo is the way out, and the idea is simple enough to derive at a whiteboard. Instead of computing the posterior, build a random walk that wanders the parameter space, arrange it so the walk spends time in each region in proportion to that region's posterior probability, and read the answer off the walk's own history. The integral never appears. What is hard is not *using* a sampler, it is *trusting* one: knowing whether what came back is the posterior, or a confident-looking summary of a walk that got stuck. On a desk that gap is priced in dollars.
 
 ![Two panels contrasting the Bayes normalising constant as an integral costing 10 to the 20 evaluations or 3,170 years, against an MCMC chain of six states wandering a posterior density with a histogram of visit times beneath it](/imgs/blogs/mcmc-metropolis-gibbs-math-for-quants-1.webp)
 
-That figure is the whole post in one image: on the left, what Bayes asks for and what it costs; on the right, a chain of states that visits high-density regions often and low-density regions rarely, with a histogram of where it spent its time converging to the posterior itself. The rest is the machinery that makes the right panel true rather than hopeful.
+That figure is the whole post in one image: on the left, what Bayes asks for and what it costs; on the right, a chain of states that visits high-density regions often and low-density regions rarely, with a histogram of where it spent its time converging to the posterior itself.
 
 ## Foundations: the constant you cannot compute, and the chain that dodges it
 
-### The posterior and its awkward denominator
-
-This post assumes you know what a prior, a likelihood and a posterior are. If any of those is new, [Bayesian inference for traders](/blog/trading/math-for-quants/bayesian-inference-traders-math-for-quants) builds all three from zero with conjugate updating and credible intervals, and this post picks up where its conjugate shortcuts run out.
-
-For a parameter vector $\theta$ and data $y$:
+[Bayesian inference for traders](/blog/trading/math-for-quants/bayesian-inference-traders-math-for-quants) establishes what a prior, a likelihood and a posterior are, and how conjugate pairs let you update in closed form. This post starts where those shortcuts run out. For a parameter vector $\theta$ and data $y$:
 
 $$ p(\theta \mid y) = \frac{p(y \mid \theta)\, p(\theta)}{p(y)}, \qquad p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta. $$
 
-The numerator is easy: given a specific $\theta$ you evaluate the prior density and the likelihood and multiply, usually in microseconds. The denominator $p(y)$, the marginal likelihood, is a single number that does not depend on $\theta$ at all. Its only job is to rescale the numerator into a proper distribution. And it is an integral over the entire parameter space.
+The numerator you can evaluate in microseconds. The denominator $p(y)$ only rescales it into a proper distribution, but it is an integral over the entire parameter space.
 
-Put a number on the difficulty. Lay a grid over the space: ${m}$ points along each of ${d}$ axes, evaluate the numerator at every point, add them up. That costs $m^d$ evaluations. Ten parameters at a hundred points per axis is ${10^{20}}$ evaluations, and at a billion per second that is ${10^{11}}$ seconds, about 3,170 years. Ten parameters is a small model: a hierarchical model with one alpha per name across fifty names has more than five times that. No cleverer quadrature rescues it, because anything that tries to *cover* the space costs exponentially in the dimension. What is needed is a method that does not try to cover.
+Put a number on the difficulty. Lay a grid over that space: ${m}$ points along each of ${d}$ axes, evaluate the numerator at every point, add them up. That costs $m^d$ evaluations. Ten parameters at a hundred points per axis is ${10^{20}}$ evaluations, and at a billion per second that is ${10^{11}}$ seconds, about 3,170 years. Ten parameters is a small model: a hierarchical model with one alpha per name across fifty names has more than five times that. No cleverer quadrature rescues it, because anything that tries to *cover* the space costs exponentially in the dimension. What is needed is a method that does not try to cover.
 
-### What a Markov chain is, and what "stationary" means
-
-A Markov chain is a sequence $\theta_0, \theta_1, \theta_2, \ldots$ in which the distribution of the next state depends only on the current one, encoded in a transition kernel $P(x \to y)$: the density of landing at $y$ given that you are at $x$. A distribution $\pi$ is **stationary** for $P$ if drawing the current state from $\pi$ means the next state is also distributed as $\pi$:
+A Markov chain is a sequence $\theta_0, \theta_1, \theta_2, \ldots$ in which the distribution of the next state depends only on the current one, encoded in a transition kernel $P(x \to y)$. A distribution $\pi$ is **stationary** for $P$ if drawing the current state from $\pi$ leaves the next state distributed as $\pi$ too:
 
 $$ \int \pi(x)\, P(x \to y)\, dx \;=\; \pi(y) \qquad \text{for every } y. $$
 
-Concretely: imagine a million walkers scattered across the space according to $\pi$, and let each take one step under $P$. Every walker has moved, but the *map* of where they are is unchanged. That is what it means for $\pi$ to be the shape the chain holds.
-
-The entire design goal of MCMC is a $P$ whose stationary distribution is the posterior you could not normalise. Given one, run a chain until it forgets its start and the path average converges to the posterior average:
+Concretely: imagine a million walkers scattered across the space according to $\pi$, and let each take one step under $P$. Every walker has moved, but the *map* of where they are is unchanged. That is what it means for $\pi$ to be the shape the chain holds, and the entire design goal of MCMC is a $P$ whose stationary distribution is the posterior you could not normalise. Given one, run the chain until it forgets its start and the path average converges to the posterior average:
 
 $$ \frac{1}{N}\sum_{t=1}^{N} f(\theta_t) \;\longrightarrow\; \mathbb{E}_{\pi}\!\left[f(\theta)\right]. $$
 
-That is a [law of large numbers](/blog/trading/math-for-quants/law-large-numbers-central-limit-theorem-math-for-quants) for dependent draws. Two conditions make it true: the chain must reach every region (irreducible) and must not cycle deterministically (aperiodic). It is also asymptotic, so the finite run you did may not be there yet. Every diagnostic below is about one of those two.
+That is a [law of large numbers](/blog/trading/math-for-quants/law-large-numbers-central-limit-theorem-math-for-quants) for dependent draws. It needs the chain to reach every region and not to cycle deterministically, and it is asymptotic, so the finite run you did may not be there yet. Every diagnostic below is about one of those two.
 
 ## Detailed balance: the reason any of this works
 
@@ -64,9 +54,7 @@ You cannot build $P$ from the stationarity equation directly. It is an integral 
 
 $$ \pi(x)\, P(x \to y) \;=\; \pi(y)\, P(y \to x). $$
 
-Read it as an accounting identity for probability flow: in the long run the mass flowing from $x$ to $y$ each step exactly equals the mass flowing back. Such a chain is called reversible, because a film of it run backwards has the same statistics.
-
-Detailed balance is **sufficient** for stationarity, and that is the whole point. The proof is three lines:
+Read it as an accounting identity for probability flow: in the long run the mass flowing from $x$ to $y$ each step exactly equals the mass flowing back. Detailed balance is **sufficient** for stationarity, and that is the whole point. The proof is three lines:
 
 $$ \int \pi(x) P(x \to y)\, dx \;=\; \int \pi(y) P(y \to x)\, dx \;=\; \pi(y) \int P(y \to x)\, dx \;=\; \pi(y). $$
 
@@ -74,7 +62,7 @@ The first equality substitutes detailed balance inside the integral, the second 
 
 ![Two states A and B with opposing arcs labelled with the probability flows pi of A times P of A to B and pi of B times P of B to A joined by an equals sign, above a three line proof that detailed balance implies stationarity](/imgs/blogs/mcmc-metropolis-gibbs-math-for-quants-2.webp)
 
-The difference in kind that figure makes visible is why this is load-bearing rather than an algebraic convenience. Stationarity is a **global** condition, a statement about the whole space balancing at once. Detailed balance is **local**, a statement about one pair of states at a time, and local conditions are things an algorithm can enforce one proposed move at a time, with no knowledge of the rest of the space and no normalising constant. It is sufficient, not necessary: chains can hold a distribution without being reversible, and some modern samplers give up reversibility to explore faster. But Metropolis-Hastings and Gibbs, the two you will be asked about, are both built on it.
+The difference in kind that figure makes visible is why this is load-bearing rather than an algebraic convenience. Stationarity is a **global** condition, a statement about the whole space balancing at once. Detailed balance is **local**, a statement about one pair of states at a time, and local conditions are things an algorithm can enforce one proposed move at a time, with no knowledge of the rest of the space and no normalising constant. It is sufficient, not necessary: some modern samplers give up reversibility to explore faster. But Metropolis-Hastings and Gibbs, the two you will be asked about, are both built on it.
 
 ## Metropolis-Hastings: propose, compare, accept or reject
 
@@ -115,23 +103,21 @@ Use a symmetric random-walk proposal, so $r = \tilde\pi(\theta')/\tilde\pi(\thet
 
 Two things in that figure deserve a second look. The rejected step is **still a draw**: the chain records 1.30 twice, and that repetition is not waste, it is how a high-density region earns extra weight in the time average. And nowhere in those eight numbers did a normalising constant appear.
 
-This model is conjugate, deliberately, so the sampler can be checked. The posterior precision is ${1 + 1 = 2}$, giving a Normal posterior with mean ${(0 \times 1 + 1.5 \times 1)/2 = 0.75}$ and standard deviation ${1/\sqrt{2} = 0.707}$. A long run returns 0.75. Four steps return a running mean of ${(0.50 + 1.30 + 1.30 + 0.85)/4 = 0.99}$, which is the honest lesson: four steps demonstrate mechanics, they are not a posterior.
+This model is conjugate, deliberately, so the sampler can be checked. The posterior precision is ${1 + 1 = 2}$, giving a Normal posterior with mean ${(0 \times 1 + 1.5 \times 1)/2 = 0.75}$ and standard deviation ${1/\sqrt{2} = 0.707}$. A long run returns 0.75; four steps return a running mean of ${(0.50 + 1.30 + 1.30 + 0.85)/4 = 0.99}$, which is the honest lesson: four steps demonstrate mechanics, they are not a posterior.
 
 The money: 0.75 bps a day on \$500m is \$37,500 a day, and 189 bps over 252 trading days, so \$9.45m a year. The raw sample mean of 1.5 bps would have booked \$18.9m. The prior halved the number before a sampler was involved at all, and the sampler's job is to deliver that same halving in models where you cannot do it in your head. These dollar figures are illustrative arithmetic on assumed inputs.
 
 ## Gibbs sampling: when every conditional is one you can draw from
 
-Sometimes the joint posterior is hopeless while every *conditional* is a distribution you already know how to sample. Gibbs sampling exploits that: cycle through the coordinates and replace each one, in turn, by an exact draw from its full conditional given the current value of all the others. For $\theta = (\theta_1, \ldots, \theta_d)$, one sweep draws $\theta_1$ from $p(\theta_1 \mid \theta_2, \ldots, \theta_d, y)$, then $\theta_2$ from $p(\theta_2 \mid \theta_1, \theta_3, \ldots, y)$ using the $\theta_1$ just drawn, and so on. Always condition on the most recent value of everything else.
+Sometimes the joint posterior is hopeless while every *conditional* is a distribution you already know how to sample. Gibbs exploits that: cycle through the coordinates, replacing each in turn by an exact draw from its full conditional, always conditioning on the most recent value of everything else.
 
 There is no accept-or-reject step, and the reason makes Gibbs a special case rather than a separate algorithm. Treat the update of coordinate $i$ as a Metropolis-Hastings proposal: propose $y$ with $y_{-i} = x_{-i}$ and $y_i$ drawn from $\pi(\cdot \mid x_{-i})$. Then $q(y \mid x) = \pi(y_i \mid x_{-i})$, and the reverse proposal is $q(x \mid y) = \pi(x_i \mid x_{-i})$ because the conditioning set is unchanged. Factor the joint as conditional times marginal and everything cancels:
 
 $$ r = \frac{\pi(y)\,\pi(x_i \mid x_{-i})}{\pi(x)\,\pi(y_i \mid x_{-i})} = \frac{\pi(y_i \mid x_{-i})\,\pi(x_{-i})\,\pi(x_i \mid x_{-i})}{\pi(x_i \mid x_{-i})\,\pi(x_{-i})\,\pi(y_i \mid x_{-i})} = 1. $$
 
-Every proposal is accepted, because it was drawn from exactly the distribution the target wants for that coordinate. Geman and Geman (1984) introduced the method for image restoration, and statistics adopted it wholesale in the early 1990s.
+Every proposal is accepted, because it was drawn from exactly the distribution the target wants for that coordinate (Geman and Geman, 1984). The cost is that Gibbs moves one axis at a time, so strongly correlated parameters make it crawl up a narrow diagonal ridge in tiny axis-aligned steps: a perfect acceptance rate of 1 and dreadful mixing at the same time.
 
-It is not a free lunch. Gibbs moves one axis at a time, so two strongly correlated parameters make it crawl up a narrow diagonal ridge in tiny axis-aligned steps: a posterior correlation of 0.99 can mean thousands of sweeps to cross what one diagonal move would cover, with a perfect acceptance rate of 1 and dreadful mixing. It is the same geometry that slows first-order methods in [stochastic gradient optimisation](/blog/trading/math-for-quants/stochastic-gradient-optimizers-math-for-quants), and the same fix applies: reparameterise so the ridge is not diagonal.
-
-#### Worked example 2: two Gibbs sweeps on a two-parameter P&L model
+#### Worked example 2: a Gibbs sweep on a two-parameter P&L model
 
 A sleeve of the same \$500m book has 100 days of daily P&L in thousands of dollars, and two unknowns: the true mean daily P&L $\mu$ and the true daily variance $\sigma^2$. The sample mean is ${\bar y = 12.0}$, so \$12k a day, and the sum of squared deviations about it is ${S = 2{,}227{,}500}$, which is ${99 \times 150^2}$, a sample standard deviation of \$150k a day. With a flat prior on $\mu$ and a prior on $\sigma^2$ proportional to ${1/\sigma^2}$, both conditionals are standard, which is the whole reason Gibbs applies:
 
@@ -141,7 +127,7 @@ Start at ${\sigma^2 = 22{,}500}$, that is $\sigma = 150$.
 
 **Sweep 1.** Draw $\mu$ from Normal with mean 12.0 and variance ${22{,}500/100 = 225}$, a standard deviation of 15.0; the standard normal draw comes back at ${-0.40}$, giving ${\mu = 12.0 - 6.0 = 6.0}$. Now draw $\sigma^2$ conditional on that $\mu$: the scale is ${[2{,}227{,}500 + 100 \times (12.0 - 6.0)^2]/2 = 1{,}115{,}550}$ with shape 50, whose mean is ${1{,}115{,}550/49 = 22{,}766}$, and the draw returns ${21{,}904}$, that is $\sigma = 148.0$.
 
-**Sweep 2** repeats with the new $\sigma^2$: $\mu$ comes from Normal with mean 12.0 and variance ${21{,}904/100 = 219.04}$, and a draw of ${+0.20}$ standard deviations gives ${\mu = 12.0 + 2.96 = 14.96}$; the scale for $\sigma^2$ becomes ${[2{,}227{,}500 + 876]/2 = 1{,}114{,}188}$ and the draw returns ${23{,}104}$, that is $\sigma = 152.0$. Every draw was kept: no ratio, no uniform, no rejection.
+**Sweep 2** repeats with that new $\sigma^2$: $\mu$ now comes from Normal with mean 12.0 and variance ${21{,}904/100 = 219.04}$, and a draw of ${+0.20}$ standard deviations gives ${\mu = 12.0 + 2.96 = 14.96}$; the scale for $\sigma^2$ becomes ${[2{,}227{,}500 + 876]/2 = 1{,}114{,}188}$ and the draw returns ${23{,}104}$, that is $\sigma = 152.0$. Every draw was kept: no ratio, no uniform, no rejection.
 
 Run 4,000 sweeps and the $\mu$ draws centre on \$12.0k a day with a standard deviation near \$15k, so a 95% credible interval runs from ${12.0 - 29.4 = -17.4}$ to ${12.0 + 29.4 = 41.4}$ thousand dollars a day. Annualised over 252 days: a central estimate of \$3.02m, with the interval running from a loss of \$4.38m to a gain of \$10.43m. A hundred days on a strategy this volatile cannot tell you whether it makes money, and the posterior says so in a way a point estimate never does.
 
@@ -149,25 +135,25 @@ Run 4,000 sweeps and the $\mu$ draws centre on \$12.0k a day with a standard dev
 
 ![Matrix of four MCMC diagnostics, trace plot, burn-in, effective sample size and R-hat, each with a healthy column in green, a broken column in red, and what the break costs](/imgs/blogs/mcmc-metropolis-gibbs-math-for-quants-4.webp)
 
-A sampler always returns a pile of numbers, and that pile always has a mean and a standard deviation whether or not it is the posterior. The diagnostics in that figure are the only thing standing between "the sampler returned 1.50" and "the posterior mean is 1.50". Each answers a different question, and a chain can pass three and fail the fourth.
+A sampler always returns a pile of numbers, and that pile always has a mean whether or not it is the posterior. The diagnostics in that figure are the only thing standing between "the sampler returned 1.50" and "the posterior mean is 1.50". Each answers a different question, and a chain can pass three and fail the fourth.
 
-**Burn-in.** The chain starts wherever you put it, and theory only promises convergence eventually. The draws made on the way in come from the wrong distribution and drag the average toward the starting value, so discard them: run 20,000 and throw away the first 5,000. *Broken looks like* a trace still trending where you cut. A chain launched at 1.5 that is passing 0.9 and still falling when burn-in ends has contaminated everything you kept.
+**Burn-in.** The chain starts where you put it and theory only promises convergence eventually, so the draws made on the way in come from the wrong distribution and drag the average toward the starting value. Run 20,000 and discard the first 5,000. *Broken looks like* a trace still trending where you cut.
 
-**Autocorrelation and effective sample size.** A random-walk sampler moves a small step at a time, so $\theta_{t+1}$ looks a lot like $\theta_t$. The effective sample size is how many independent draws the correlated chain is actually worth:
+**Effective sample size.** Consecutive draws are correlated, so 20,000 of them are not worth 20,000 observations:
 
 $$ \mathrm{ESS} = \frac{N}{1 + 2\sum_{k=1}^{\infty} \rho_k}, $$
 
-where $\rho_k$ is the lag-$k$ autocorrelation, the same quantity used on [a return series](/blog/trading/math-for-quants/stationarity-autocorrelation-math-for-quants). For a chain whose autocorrelation decays geometrically from a lag-1 value of 0.95, the sum is ${0.95/(1 - 0.95) = 19}$, the denominator is 39, and ${\mathrm{ESS} = 20{,}000/39 \approx 513}$: you paid for 20,000 draws and you own 513. *Broken looks like* autocorrelation still above 0.5 at lag 50. The cost is precision, through the Monte Carlo standard error, the posterior standard deviation divided by $\sqrt{\mathrm{ESS}}$. With a posterior standard deviation of 0.18 on an annualised Sharpe, an ESS of 513 gives ${0.18/22.65 = 0.008}$, negligible; an ESS of 12 gives ${0.18/3.464 = 0.052}$, and under a sizing rule of \$20m of volatility budget per unit of Sharpe that is over \$1m of risk allocation swinging on Monte Carlo noise alone.
+with $\rho_k$ the lag-$k$ autocorrelation, the same quantity used on [a return series](/blog/trading/math-for-quants/stationarity-autocorrelation-math-for-quants). Geometric decay from a lag-1 value of 0.95 gives a sum of ${0.95/(1 - 0.95) = 19}$, a denominator of 39, and ${\mathrm{ESS} = 20{,}000/39 \approx 513}$: you paid for 20,000 draws and you own 513. *Broken looks like* autocorrelation still above 0.5 at lag 50. The cost is precision, through the Monte Carlo standard error, the posterior standard deviation over $\sqrt{\mathrm{ESS}}$. On an annualised Sharpe with posterior standard deviation 0.18, an ESS of 513 gives ${0.18/22.65 = 0.008}$, while an ESS of 12 gives ${0.18/3.464 = 0.052}$. Under a sizing rule of \$20m of volatility budget per unit of Sharpe, that second number is over \$1m of risk allocation moving on Monte Carlo noise alone.
 
-**R-hat.** Run several chains from deliberately dispersed starts, then compare the variance *between* chains to the variance *within* each chain. If every chain found the same distribution the two agree and the statistic sits near 1. Gelman and Rubin (1992) introduced it; modern practice follows Vehtari and co-authors (2021) in using a rank-normalised version and a threshold of 1.01, much tighter than the 1.1 in older textbooks. *Broken looks like* 1.4, or 2.41. A single chain has no R-hat at all, which is why "I ran one very long chain" is not a convergence argument.
+**R-hat.** Run several chains from deliberately dispersed starts and compare the variance between chains to the variance within them; agreement puts the statistic near 1. The modern threshold is 1.01 (Vehtari and co-authors, 2021, refining Gelman and Rubin, 1992), not the 1.1 of older textbooks. *Broken looks like* 1.4, or 2.41. One chain has no R-hat at all, which is why "I ran one very long chain" is not a convergence argument.
 
-**Trace plots.** Plot each chain against iteration number. Healthy is a fuzzy horizontal band, every chain on top of every other, no trend: the shape people call a caterpillar. Three failures are visible instantly and invisible in a summary table. A trend that has not flattened means burn-in was too short. Long flat plateaus mean the proposal steps are too wide and nearly everything is being rejected. And chains sitting at different levels that never cross means the posterior has more than one mode.
+**Trace plots.** Healthy is a fuzzy horizontal band, every chain on top of every other, no trend: the shape people call a caterpillar. Three failures are visible instantly and invisible in a summary table. A trend that has not flattened means burn-in was too short. Long flat plateaus mean the proposal steps are too wide and nearly everything is being rejected. Chains sitting at different levels that never cross mean the posterior has more than one mode.
 
 ## Why a chain that converged can still be wrong
 
-Every diagnostic above answers some version of "have these chains settled down". None answers "have these chains seen everything". A posterior with two well-separated modes, sampled by a chain whose steps are much smaller than the valley between them, will settle down beautifully inside one mode and stay there for the age of the universe. Its trace is a perfect caterpillar, its autocorrelation decays fine, its ESS is large. It is describing a third of the posterior and reporting it as the whole thing.
+Every diagnostic above answers some version of "have these chains settled down". None answers "have these chains seen everything". A posterior with two well-separated modes, sampled by a chain whose steps are smaller than the valley between them, settles inside one mode and stays there for the age of the universe: perfect caterpillar, fine autocorrelation, large ESS, and a third of the posterior reported as the whole thing.
 
-Multimodal posteriors are not exotic in finance. Any model with a discrete latent state produces them: a regime-switching model has one mode for "we are in the high-edge regime" and another for "we are not". So does any model in which a parameter can explain the data two genuinely different ways. R-hat is the one diagnostic with a chance of catching it, and only if the starts are dispersed enough that different chains land in different modes. Start four chains from the same optimiser output and they will agree with each other, in the same wrong place, and R-hat will read 1.00.
+Multimodal posteriors are not exotic in finance. Any model with a discrete latent state produces them, a regime-switching model most obviously. R-hat is the only diagnostic with a chance of catching it, and only if the starts are dispersed enough that different chains land in different modes. Start four chains from the same optimiser output and they agree with each other, in the same wrong place, and R-hat reads 1.00.
 
 ![Bimodal posterior over annualised Sharpe with a mode at 0.12 weighted 65 percent and a mode at 1.50 weighted 35 percent, a dashed line at the true mean of 0.60, one chain confined to the upper mode, and sizing callouts of 250 million dollars versus 100 million dollars deployed](/imgs/blogs/mcmc-metropolis-gibbs-math-for-quants-5.webp)
 
@@ -192,11 +178,11 @@ Same data, same model, same afternoon, and the \$150m difference is entirely an 
 
 ## Common misconceptions
 
-**"More samples always fixes it."** More samples fixes Monte Carlo error, the noise from a finite run of a chain that is exploring properly. It does nothing for a chain that is not exploring. Run 1 above, at 20 million draws, returns 1.50 with a tighter interval around it: more confident, equally wrong. The remedy for a stuck chain is never a longer run. It is dispersed starts, a tempered or mode-jumping sampler, or a reparameterisation that flattens the valley.
+**"More samples always fixes it."** More samples fixes Monte Carlo error, the noise from a finite run of a chain that is exploring properly. It does nothing for a chain that is not exploring. Run 1 above, at 20 million draws, returns 1.50 with a tighter interval around it: more confident, equally wrong. The remedy for a stuck chain is never a longer run. It is dispersed starts, a mode-jumping sampler, or a reparameterisation that flattens the valley.
 
-**"A high acceptance rate means the sampler is working."** Backwards. A 95% acceptance rate means almost every proposal is taken, which means the proposals are barely moving, which means consecutive draws are nearly identical and the ESS is tiny. A rate near zero is the opposite failure, steps so large that almost everything lands somewhere implausible. For a random-walk Metropolis sampler the optimum is about 0.234 in high dimensions and about 0.44 in one dimension (Roberts, Gelman and Gilks, 1997). Both 0.95 and 0.02 are broken, and the 0.95 chain gives the smoother-looking trace, which makes it the more dangerous.
+**"A high acceptance rate is good."** Backwards. A 95% acceptance rate means almost every proposal is taken, which means the proposals are barely moving, which means consecutive draws are nearly identical and the ESS is tiny. A rate near zero is the opposite failure, steps so large that almost everything lands somewhere implausible. For a random-walk Metropolis sampler the optimum is about 0.234 in high dimensions and about 0.44 in one dimension (Roberts, Gelman and Gilks, 1997). Both 0.95 and 0.02 are broken, and the 0.95 chain gives the smoother-looking trace, which makes it the more dangerous.
 
-**"MCMC gives you independent draws from the posterior."** It gives you a *dependent* sequence whose long-run time average matches posterior expectations. Quoting percentiles of the draws as a credible interval is fine. Computing a standard error on the posterior mean by dividing by $\sqrt{20{,}000}$ instead of $\sqrt{\mathrm{ESS}}$ understates it by a factor of ${\sqrt{39} \approx 6.2}$ in the example above. For the same reason, thinning the chain does not buy independence: it reduces storage and throws away information, so keep every draw and quote the ESS.
+**"MCMC gives you independent draws."** It gives you a *dependent* sequence whose long-run time average matches posterior expectations. Quoting percentiles of the draws as a credible interval is fine. Computing a standard error on the posterior mean by dividing by $\sqrt{20{,}000}$ instead of $\sqrt{\mathrm{ESS}}$ understates it by a factor of ${\sqrt{39} \approx 6.2}$ in the example above.
 
 ## Sources and further reading
 
@@ -206,7 +192,6 @@ Same data, same model, same afternoon, and the \$150m difference is entirely an 
 - Gelman, A. and Rubin, D. B. (1992), "Inference from Iterative Simulation Using Multiple Sequences", *Statistical Science* 7(4), 457-472.
 - Roberts, G. O., Gelman, A. and Gilks, W. R. (1997), "Weak convergence and optimal scaling of random walk Metropolis algorithms", *Annals of Applied Probability* 7(1), 110-120.
 - Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A. and Rubin, D. B. (2013), *Bayesian Data Analysis*, 3rd edition, CRC Press. Chapters 11 and 12 are the reference treatment of everything here.
-- Hoffman, M. D. and Gelman, A. (2014), "The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo", *Journal of Machine Learning Research* 15, 1593-1623.
 - Vehtari, A., Gelman, A., Simpson, D., Carpenter, B. and Bürkner, P.-C. (2021), "Rank-normalization, folding, and localization: An improved R-hat for assessing convergence of MCMC", *Bayesian Analysis* 16(2), 667-718.
 
 Every dollar figure in the worked examples is illustrative arithmetic on assumed inputs, not a measured result.
@@ -215,7 +200,7 @@ Every dollar figure in the worked examples is illustrative arithmetic on assumed
 
 The question is usually "how would you fit this model?", and it arrives attached to something deliberately non-conjugate: a hierarchical alpha model across a sector, a regime-switching spread, a likelihood with fat tails. Saying "MCMC" is the easy half, and everyone says it.
 
-The strong answer goes in this order. Start with why the posterior is intractable and name the culprit: the normalising constant is an integral over the whole parameter space, and any method that tries to cover that space costs exponentially in the dimension. Then say what MCMC substitutes for it, a Markov chain whose stationary distribution is the target and a time average along its path. If pushed on why that works, give detailed balance and the one-line reason Metropolis-Hastings needs only an unnormalised density, that the constant cancels in the ratio. Then, without waiting to be asked, say how you would know it worked: several chains from dispersed starts, R-hat under 1.01, effective sample size in the thousands rather than the hundreds, overlapping trace plots, an acceptance rate nowhere near 0 or 1. Finish with what you would do if it had not worked, and make the first item a reparameterisation rather than more iterations, because a funnel or a near-perfect posterior correlation is a geometry problem that compute does not solve.
+The strong answer goes in this order. Name the culprit: the normalising constant is an integral over the whole parameter space, and any method that tries to cover that space costs exponentially in the dimension. Say what MCMC substitutes for it, a Markov chain whose stationary distribution is the target and a time average along its path. If pushed on why that works, give detailed balance and the one-line reason Metropolis-Hastings needs only an unnormalised density, that the constant cancels in the ratio. Then, without waiting to be asked, say how you would know it worked: several chains from dispersed starts, R-hat under 1.01, effective sample size in the thousands rather than the hundreds, overlapping trace plots, an acceptance rate nowhere near 0 or 1. Finish with what you would do if it had not, and make the first item a reparameterisation rather than more iterations, because a funnel or a near-perfect posterior correlation is a geometry problem that compute does not solve.
 
 The trap is quoting a posterior mean with nothing behind it. It looks rigorous, it has decimal places, it came out of a real library. A candidate who says "the posterior mean Sharpe is 1.5" and cannot say how many chains were run, what R-hat was, or what the effective sample size was has told the interviewer they treat a sampler as an oracle. The follow-up that exposes it is always some version of "and what if the posterior were bimodal?", because the honest answer is that every within-chain diagnostic would still have looked clean and the position would still have been more than twice the size it should have been.
 
