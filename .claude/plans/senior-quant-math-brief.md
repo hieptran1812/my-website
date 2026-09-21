@@ -50,6 +50,16 @@ prose and recompute it at the precision you printed. Carry unrounded intermediat
 and round only at the end. If a figure and the prose disagree, work out which one
 is wrong before assuming it is the figure.
 
+### Verify a closed form against an independent derivation
+
+When the post derives a pricing formula, checking your own algebra can only catch a
+wrong arithmetic step, never a wrong formula. Price the same instrument a second way
+and compare. The local-time post checked its method-of-images down-and-out against
+the full Reiner-Rubinstein formula and they agreed to 13 decimals, which is what
+makes the derivation trustworthy rather than merely self-consistent.
+
+Do this whenever the post's central claim *is* a formula.
+
 ### The audit is reader-reproducibility, not truth
 
 This is the framing that matters, and it took three waves to find. An audit that
