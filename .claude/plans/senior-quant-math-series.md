@@ -231,7 +231,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 6 | event-studies-diff-in-diff-synthetic-control | W3 | **SHIPPED** 4,437 words |
 | 7 | mcmc-metropolis-gibbs | W4 | **SHIPPED** 4,614 words |
 | 8 | hierarchical-bayes-pooling | W4 | **SHIPPED** 3,985 words |
-| 9 | gaussian-processes-kernels | W4 | **SHIPPED** 4,277 words |
+| 9 | gaussian-processes-kernels | W4 | **SHIPPED** 4,233 words |
 | 10 | hawkes-point-processes-order-flow | W4 | TODO |
 | 11 | regime-switching-hidden-markov | W4 | TODO |
 | 12 | levy-processes-jumps | W4 | TODO |

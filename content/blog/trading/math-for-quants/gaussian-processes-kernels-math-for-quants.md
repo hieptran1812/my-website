@@ -42,13 +42,13 @@ $$
 
 Two things there do all the work for the rest of this post. The conditional mean moves away from the prior mean in proportion to the covariance, and the conditional variance **shrinks by an amount that has no $u$ in it**. The data moves the centre. It does not move the width.
 
-Now generalise twice. First, take $n+1$ variables instead of two, stack the observed ones into a vector $\mathbf{y}$ and keep one unknown $f_{\ast}$ aside: the same identity holds with matrices in place of scalars, which is bookkeeping rather than new mathematics. Second, and this is the step people find strange even though it is the smaller one, index those variables not by ${1, 2, \ldots, n}$ but by a continuous $x$: a tenor, a strike, a lookback window in days. A **Gaussian process** is a collection of random variables, one per index, such that *any finite subset of them is jointly multivariate normal*. That is the entire definition:
+Now generalise twice. First, take $n+1$ variables instead of two, stack the observed ones into a vector $\mathbf{y}$ and keep one unknown $f_{\ast}$ aside: the same identity holds with matrices for scalars, which is bookkeeping, not new mathematics. Second, and this is the step people find strange even though it is the smaller one, index those variables by a continuous $x$ rather than by ${1, 2, \ldots, n}$: a tenor, a strike, a lookback window in days. A **Gaussian process** is a collection of random variables, one per index, such that *any finite subset is jointly multivariate normal*. That is the entire definition:
 
 $$
 f(\cdot) \sim \mathcal{GP}\big(m(\cdot),\, k(\cdot,\cdot)\big)
 $$
 
-where $m(x)$ is the prior mean at index $x$ and $k(x, x')$ is the covariance between $f(x)$ and $f(x')$. Because every finite subset is a multivariate normal, and because you only ever need finitely many points, that two-variable conditioning formula is the exact and complete inference rule. There is no approximation anywhere in this post until the section on cost.
+where $m(x)$ is the prior mean at index $x$ and $k(x, x')$ the covariance between $f(x)$ and $f(x')$. Since every finite subset is multivariate normal and you only ever need finitely many points, that two-variable conditioning formula is the exact and complete inference rule. Nothing in this post is an approximation until the section on cost.
 
 ![Left panel showing a tilted bivariate normal ellipse over axes f of x one and f of x two with a vertical observation line and a narrowed conditional density on the second axis, right panel showing three sampled function paths through one observed point fanning apart with distance, connected by the statement that the same conditioning formula applies once the index set is continuous](/imgs/blogs/gaussian-processes-kernels-math-for-quants-2.webp)
 
@@ -114,9 +114,9 @@ Illustrative arithmetic on assumed inputs. RBF kernel, $\sigma_f = 40$ bp, $\ell
 
 5. **Predictive variance.** $\mathbf{k}_{\ast}^\top (K + \sigma_n^2 I)^{-1}\mathbf{k}_{\ast} = 1115.29$, so $\sigma_{\ast}^2 = 1600 - 1115.29 = 484.71$ bp² and $\sigma_{\ast} = 22.02$ bp.
 
-A straight line between the two quotes gives 4.0625%. The GP gives 4.0400%, pulled 2.25 bp toward the prior mean because a 4-year length-scale across an 8-year gap means neither quote has much to say about the middle. That pull is the same [shrinkage](/blog/trading/math-for-quants/shrinkage-stein-paradox-math-for-quants) logic you meet in covariance estimation, arriving here through the kernel rather than through a Stein argument.
+A straight line between the two quotes gives 4.0625%. The GP gives 4.0400%, pulled 2.25 bp toward the prior because a 4-year length-scale across an 8-year gap leaves neither quote much to say about the middle. That is the same [shrinkage](/blog/trading/math-for-quants/shrinkage-stein-paradox-math-for-quants) logic you meet in covariance estimation, arriving through the kernel rather than a Stein argument.
 
-Now the money. A five-year par swap carries roughly \$445 of DV01 per \$1m of notional, so a \$250m position has about **\$111,250 per basis point**. One standard deviation of 22.02 bp is therefore **\$2,449,000 of mark uncertainty** on a position whose price looked like a fact. Get one real 5y quote with 2 bp of bid-ask and the posterior standard deviation there collapses to 1.99 bp, worth **\$222,000**. That single phone call is worth **\$2.23m of removed uncertainty**, and the GP told you to make it before anyone answered.
+Now the money. A five-year par swap carries roughly \$445 of DV01 per \$1m of notional, so a \$250m position runs about **\$111,250 per basis point**. One standard deviation of 22.02 bp is **\$2,449,000 of mark uncertainty** on a position whose price looked like a fact. Get one real 5y quote with 2 bp of bid-ask and the posterior standard deviation there collapses to 1.99 bp, worth **\$222,000**. That single phone call removes **\$2.23m of uncertainty**, and the GP told you to make it before anyone answered.
 
 ### The variance ignores your data, and that is the useful part
 
@@ -124,9 +124,9 @@ People find step 5 unsettling, so it is worth dwelling on. Take the same two ten
 
 ![Two panels with identical tenors and kernel, the left fitted to an upward sloping pair of quotes giving a five-year mean of four point zero four percent, the right fitted to an inverted pair giving four point one three percent, both carrying an identical twenty two point zero two basis point standard deviation at five years](/imgs/blogs/gaussian-processes-kernels-math-for-quants-4.webp)
 
-This is not a quirk, it is a design tool. Because the width depends only on the *design* of your observations, you can compute tomorrow's uncertainty today and decide where to spend a market maker's patience. Which tenor should you go and get quoted? The one that shrinks the band most where your book actually has risk. That calculation needs no data at all.
+This is not a quirk, it is a design tool. Because the width depends only on the *design* of your observations, you can compute tomorrow's uncertainty today and decide where to spend a market maker's patience. Which tenor should you go and get quoted? The one that shrinks the band most where your book has risk, a calculation needing no data at all.
 
-The caveat, and interviewers reach for it: this holds for a **fixed** kernel. In practice you fit $\sigma_f$, $\ell$ and $\sigma_n$ by maximising the marginal likelihood, and that fit does depend on $\mathbf{y}$. So the variance is data-independent conditional on the hyperparameters and not unconditionally. Say that sentence out loud before someone says it to you.
+The caveat, and interviewers reach for it: this holds for a **fixed** kernel. In practice you fit $\sigma_f$, $\ell$ and $\sigma_n$ by maximising the marginal likelihood, and that fit does depend on $\mathbf{y}$. The variance is data-independent conditional on the hyperparameters, not unconditionally. Say that before someone says it to you.
 
 ## Why the width is the product
 
@@ -152,11 +152,11 @@ Be clear about what a GP is not. It is not a return-prediction engine. Cross-sec
 
 Illustrative arithmetic on assumed inputs. Listed expiries give 95%-strike implied vols of 18.10% at three months and 17.40% at six months. A client wants a four-month, 95%-strike option on \$50m of notional. Matern 3/2 kernel, $\sigma_f = 1.5$ vol points, $\ell = 6$ months, quote noise $\sigma_n = 0.15$ vol points, prior mean 18.0%.
 
-Running the same two steps as before, the posterior at four months is **17.87% with a standard deviation of 0.265 vol points**. The mean is almost exactly what linear interpolation gives, 17.867%, which is the point: the mean was never the contribution.
+Running the same two steps, the posterior at four months is **17.87% with a standard deviation of 0.265 vol points**. That mean is almost exactly what linear interpolation gives, 17.867%, which is the point: the mean was never the contribution.
 
 Convert the width to money. With a notional $S$ of \$50m, $T = 1/3$ and $\sigma = 17.87\%$, the 95% strike puts $d_1 = 0.549$, so $\varphi(d_1) = 0.343$ and vega is $S\sqrt{T}\varphi(d_1)/100$, or **\$99,060 per vol point**. One standard deviation of interpolation uncertainty is therefore **\$26,280**.
 
-Now compare that to the desk's normal quoting spread of 0.25 vol points, which is **\$24,770**. The model's own uncertainty about the four-month vol is *larger than the entire spread you were planning to charge*. Quote the off-cycle date at your listed-tenor spread and you are not earning a spread, you are taking an unpriced position in your own ignorance. The GP's answer is either widen to around 0.5 vol points, or go and get a four-month quote, which would cut the standard deviation to 0.13 and the exposure to about \$12,900.
+Compare that to the desk's normal quoting spread of 0.25 vol points, which is **\$24,770**. The model's own uncertainty about the four-month vol is *larger than the entire spread you planned to charge*. Quote the off-cycle date at your listed-tenor spread and you are not earning a spread, you are taking an unpriced position in your own ignorance. The GP's answer is to widen to around 0.5 vol points, or to go and get a four-month quote, which would cut the standard deviation to 0.13 and the exposure to about \$12,900.
 
 #### Worked example 3: Bayesian optimisation of a backtest parameter on a \$200m book
 
@@ -193,11 +193,11 @@ Then the honesty check the same machine hands you free. The posterior difference
 
 ## Sources and further reading
 
-- Carl Rasmussen and Christopher Williams, *Gaussian Processes for Machine Learning*, MIT Press, 2006. Free at [gaussianprocess.org/gpml](https://gaussianprocess.org/gpml/). Chapter 2 derives the predictive equations above, chapter 4 catalogues kernels, chapter 5 covers marginal-likelihood fitting, chapter 8 the large-$n$ approximations.
+- Carl Rasmussen and Christopher Williams, *Gaussian Processes for Machine Learning*, MIT Press, 2006, free at [gaussianprocess.org/gpml](https://gaussianprocess.org/gpml/). Chapter 2 derives the predictive equations above, chapter 4 catalogues kernels, chapter 5 covers marginal-likelihood fitting, chapter 8 the large-$n$ approximations.
 - David MacKay, "Introduction to Gaussian Processes" (1998), and chapter 45 of *Information Theory, Inference, and Learning Algorithms*, Cambridge University Press, 2003, free at [inference.org.uk/mackay/itila](https://www.inference.org.uk/mackay/itila/). The clearest short route from linear models to GPs.
-- Jasper Snoek, Hugo Larochelle and Ryan Adams, "Practical Bayesian Optimization of Machine Learning Algorithms", NeurIPS 2012, [arXiv:1206.2944](https://arxiv.org/abs/1206.2944), and Donald Jones, Matthias Schonlau and William Welch, "Efficient Global Optimization of Expensive Black-Box Functions", *Journal of Global Optimization* 13, 1998, for the original expected-improvement treatment.
-- Joaquin Quiñonero-Candela and Carl Rasmussen, "A Unifying View of Sparse Approximate Gaussian Process Regression", *JMLR* 6, 2005, and Michalis Titsias, "Variational Learning of Inducing Variables in Sparse Gaussian Processes", AISTATS 2009, for the inducing-point methods above.
-- Charles Nelson and Andrew Siegel, "Parsimonious Modeling of Yield Curves", *Journal of Business* 60, 1987, and Lars Svensson, "Estimating and Interpreting Forward Interest Rates", NBER working paper 4871, 1994, the parametric curve-fitting incumbents a GP is an alternative to.
+- Jasper Snoek, Hugo Larochelle and Ryan Adams, "Practical Bayesian Optimization of Machine Learning Algorithms", NeurIPS 2012, [arXiv:1206.2944](https://arxiv.org/abs/1206.2944), and Donald Jones, Matthias Schonlau and William Welch, "Efficient Global Optimization of Expensive Black-Box Functions", *Journal of Global Optimization* 13, 1998, for expected improvement.
+- Joaquin Quiñonero-Candela and Carl Rasmussen, "A Unifying View of Sparse Approximate Gaussian Process Regression", *JMLR* 6, 2005, and Michalis Titsias, "Variational Learning of Inducing Variables in Sparse Gaussian Processes", AISTATS 2009, for the inducing-point methods.
+- Charles Nelson and Andrew Siegel, "Parsimonious Modeling of Yield Curves", *Journal of Business* 60, 1987, and Lars Svensson, "Estimating and Interpreting Forward Interest Rates", NBER working paper 4871, 1994, the parametric incumbents a GP replaces.
 
 The dollar walkthroughs above are illustrative arithmetic on assumed inputs, not quoted market levels.
 
