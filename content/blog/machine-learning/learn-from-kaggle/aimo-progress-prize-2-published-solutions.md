@@ -924,9 +924,9 @@ So the algorithm:
 
 *Figure from the [3rd place write-up](https://www.kaggle.com/competitions/ai-mathematical-olympiad-progress-prize-2/discussion/573314). Each stage is marked with its 4,096 token budget. Branches that have already produced an answer, shown green, drop out and feed the majority vote directly. Seven of the remaining branches are duplicated onward and one is dropped. The 8,192 token checkpoint and the 70 percent threshold are described in his text rather than drawn here.*
 
-![Flow diagram of a branching decode that runs five branches to 4096 tokens, duplicates them to ten, checks for a 70 percent majority at 8192, then duplicates seven to fourteen](/imgs/blogs/aimo-progress-prize-2-published-solutions-14.webp)
-
 With `enable_prefix_caching=True`, duplicating a branch costs nothing for the shared prefix. You get 14 solutions of up to 12K tokens for roughly the compute of far fewer independent ones, in about 6 to 7 minutes. He is candid about the flaw: the solutions remain somewhat correlated because of the shared prefix, partially offset by varying prompts across branches. Public 25, private 30, third place, no fine-tuning.
+
+![Flow diagram of a branching decode that runs five branches to 4096 tokens, duplicates them to ten, checks for a 70 percent majority at 8192, then duplicates seven to fourteen](/imgs/blogs/aimo-progress-prize-2-published-solutions-14.webp)
 
 ## 15. Layer 7: spending the clock
 
