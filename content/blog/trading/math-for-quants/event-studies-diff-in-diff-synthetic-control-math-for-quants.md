@@ -7,7 +7,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 22
+readTime: 20
 ---
 
 > [!important]
@@ -37,7 +37,7 @@ A **return** is the percentage change in price over a period: a stock closing at
 
 The **estimation window** is a stretch of history used to learn how the stock normally behaves, commonly 250 trading days ending well before the event. The **event window** is the short span over which the effect is measured, often ${[-1, +1]}$ days. The **gap** between them keeps leakage and pre-announcement drift out of the fit, and a **post-event window** checks for persistence or reversal without entering the headline number.
 
-The **normal return** is what the stock would have returned that day had the event not happened. You cannot observe it, so you model it: ${E[R_{i,t} \mid X_t]}$, the expected return of stock ${i}$ on day ${t}$ given whatever conditioning information ${X_t}$ the model uses, typically that day's market return. The **abnormal return** is the residual:
+The **normal return** is what the stock would have returned that day had the event not happened. You cannot observe it, so you model it: ${E[R_{i,t} \mid X_t]}$, the expected return of stock ${i}$ on day ${t}$ given the conditioning information ${X_t}$ the model uses, typically that day's market return. The **abnormal return** is the residual:
 
 $$
 AR_{i,t} = R_{i,t} - E[R_{i,t} \mid X_t]
@@ -51,11 +51,11 @@ $$
 CAR_i(t_1, t_2) = \sum_{t=t_1}^{t_2} AR_{i,t}
 $$
 
-Sum, not compound: over three days the difference is a rounding error, and summing is what makes the variance arithmetic below tractable. Across many events, the **cumulative average abnormal return** (CAAR) averages those CARs. That average is the number a research note quotes, and the number the statistics section below is about.
+Sum, not compound: over three days the difference is a rounding error, and summing is what makes the variance arithmetic below tractable. Across many events, the **cumulative average abnormal return** (CAAR) averages those CARs. That average is the number a research note quotes, and what the statistics section below is about.
 
 ## Why the normal-return model decides the answer
 
-Four models dominate, in increasing order of how much they remove. **Mean-adjusted returns** use the stock's own estimation-window average and ignore the market. **Market-adjusted returns** use the market return itself, the market model with the sensitivity forced to 1. **The market model** is an ordinary least squares regression fitted on the estimation window:
+Four models dominate, in increasing order of how much they remove. **Mean-adjusted returns** use the stock's own estimation-window average. **Market-adjusted returns** use the market return itself, the market model with the sensitivity forced to 1. **The market model** is an ordinary least squares regression fitted on the estimation window:
 
 $$
 R_{i,t} = \alpha_i + \beta_i R_{m,t} + \varepsilon_{i,t}
@@ -75,7 +75,7 @@ You hold \$20m of a single stock into a scheduled announcement.
 
 **Step 1, fit the model.** Estimation window ${[-280, -31]}$, 250 trading days. OLS of the stock's daily return on the market's gives ${\hat\alpha = 0.02\%}$ per day, ${\hat\beta = 1.20}$, and a residual standard deviation of ${\hat\sigma = 1.10\%}$ per day. That last number is the one people forget to record, and the one that decides significance.
 
-**Step 2, compute normal and abnormal returns on the event window ${[-1, +1]}$.**
+**Step 2, compute normal and abnormal returns on ${[-1, +1]}$.**
 
 | Day | Stock return | Market return | Normal return | Abnormal return |
 | --- | --- | --- | --- | --- |
@@ -109,7 +109,7 @@ The standard fix is the **standardized cross-sectional test** of Boehmer, Musume
 
 ### Cross-sectional correlation when events cluster
 
-This one is larger and less often handled. The naive standard error on a cross-sectional mean assumes the observations are independent. When 40 companies announce in the same week they are not: they share the same market, the same macro surprise, the same sector rotation, so their abnormal returns are correlated.
+This one is larger and less often handled. A naive standard error on a cross-sectional mean assumes independent observations. When 40 companies announce in the same week they share the same market, the same macro surprise, the same sector rotation, so their abnormal returns are correlated.
 
 For ${N}$ events with equal variance ${\sigma^2}$ and average pairwise correlation ${\bar\rho}$, the variance of the mean is
 
@@ -153,7 +153,7 @@ $$
 
 The second difference is doing the work: it absorbs anything that hit both groups equally, which a simple before-and-after comparison cannot.
 
-**Parallel trends**, stated precisely, is this: *in the absence of treatment*, the treated group's average outcome would have changed by the same amount as the control group's. Formally, writing ${Y(0)}$ for the untreated potential outcome,
+**Parallel trends**, stated precisely: *in the absence of treatment*, the treated group's average outcome would have changed by the same amount as the control group's. Writing ${Y(0)}$ for the untreated potential outcome,
 
 $$
 E\bigl[Y_{T,\text{post}}(0) - Y_{T,\text{pre}}(0)\bigr] = E\bigl[Y_{C,\text{post}}(0) - Y_{C,\text{pre}}(0)\bigr]
@@ -163,7 +163,7 @@ Read the left-hand side carefully. It is about the treated group in the post per
 
 #### Worked example 3: a tick-size change on fifty stocks
 
-A venue widens the minimum price increment on 25 stocks. You match 25 similar stocks left alone. The outcome is the average quoted spread in basis points, where a **basis point** is one hundredth of a percent.
+A venue widens the minimum price increment on 25 stocks, and you match 25 similar stocks left alone. The outcome is the average quoted spread in basis points, a **basis point** being one hundredth of a percent.
 
 | Group | Pre | Post | Change |
 | --- | --- | --- | --- |
@@ -178,15 +178,15 @@ The naive before-and-after answer is ${+3.5}$ bps. The diff-in-diff estimate is 
 
 ![Average quoted spread in basis points against period. Left: treated rises 8.0 to 11.5, control 7.0 to 9.0, and a dashed counterfactual parallel to the control ends at 10.0, giving a difference-in-differences estimate of plus 1.5 basis points against a naive plus 3.5. Right: an honest counterfactual of 11.0 leaves a true effect of plus 0.5 and a bias of plus 1.0 basis points.](/imgs/blogs/event-studies-diff-in-diff-synthetic-control-math-for-quants-5.webp)
 
-**What a pre-trend test can and cannot tell you.** Plotting several pre-periods and checking that the groups moved together is standard and worth doing, and a visible divergence before treatment is strong evidence against the design. The reverse does not hold. Parallel pre-trends are consistent with a post-period divergence caused by anything that started when the treatment did, and the tests are often underpowered, so a flat pre-period may only mean you could not detect a slope.
+**What a pre-trend test can and cannot tell you.** Plotting several pre-periods and checking that the groups moved together is worth doing, and a visible divergence before treatment is strong evidence against the design. The reverse does not hold. Parallel pre-trends are consistent with a post-period divergence caused by anything that started when the treatment did, and the tests are often underpowered, so a flat pre-period may only mean you could not detect a slope.
 
-Two further traps. Bertrand, Duflo and Mullainathan (2004) showed that serial correlation wrecks conventional diff-in-diff standard errors: with about 20 years of data, their placebo laws, which by construction did nothing, produced an effect significant at the 5% level in up to 45% of cases. Cluster at the unit level, or aggregate the pre and post periods into two points; serial correlation is the default in financial series, not the exception ([stationarity and autocorrelation](/blog/trading/math-for-quants/stationarity-autocorrelation-math-for-quants)). Second, under staggered treatment timing the two-way fixed effects regression everyone reaches for averages comparisons that can use already-treated units as controls, with weights not guaranteed to be positive. Goodman-Bacon (2021) decomposes it; Callaway and Sant'Anna (2021) repair it.
+Two further traps. Bertrand, Duflo and Mullainathan (2004) showed that serial correlation wrecks conventional diff-in-diff standard errors: with about 20 years of data, their placebo laws, which by construction did nothing, produced an effect significant at the 5% level in up to 45% of cases. Cluster at the unit level, or aggregate the pre and post periods into two points ([stationarity and autocorrelation](/blog/trading/math-for-quants/stationarity-autocorrelation-math-for-quants)). Second, under staggered timing the two-way fixed effects regression everyone reaches for averages comparisons that can use already-treated units as controls, with weights not guaranteed to be positive. Goodman-Bacon (2021) decomposes it; Callaway and Sant'Anna (2021) repair it.
 
 ## Synthetic control: when there is no clean control
 
-Sometimes there is exactly one treated unit and no comparable untreated one. One country changes a capital-controls regime, one exchange changes its fee schedule, and no other unit looks like it.
+Sometimes there is exactly one treated unit and no comparable untreated one: one country changes a capital-controls regime, one exchange changes its fee schedule, and no other unit looks like it.
 
-The synthetic control method builds a control out of a weighted blend of the untreated units, the **donor pool**. Writing ${Y_{1t}}$ for the treated unit and ${Y_{jt}}$ for donor ${j}$, the synthetic counterfactual is
+The synthetic control method builds a control out of a weighted blend of the untreated units, the **donor pool**. Writing ${Y_{1t}}$ for the treated unit and ${Y_{jt}}$ for donor ${j}$, the counterfactual is
 
 $$
 \hat Y_{1t}(0) = \sum_{j=2}^{J+1} w_j Y_{jt}, \qquad w_j \ge 0, \qquad \sum_j w_j = 1
@@ -198,11 +198,11 @@ The weights are chosen to track the treated unit as closely as possible over the
 
 The canonical application is Abadie, Diamond and Hainmueller (2010): a synthetic California built from 38 donor states to estimate the effect of Proposition 99 on cigarette consumption, finding annual per-capita sales about 26 packs lower by 2000 than the counterfactual.
 
-**The honest limits.** With one treated unit there is no cross-section to take a standard error over, so inference is by **permutation**: re-run the procedure pretending each donor was treated, collect the placebo gaps, and ask where the real gap sits among them. With 38 donors the smallest one-sided p-value available is ${1/39}$, a floor on how significant the design can ever be. A poor pre-treatment fit invalidates the whole thing, since the method's only claim is that a unit matching for years beforehand would have kept matching. And any donor hit by the same event, or by a shock of its own, poisons the counterfactual. Abadie (2021) is the practitioner's guide.
+**The honest limits.** With one treated unit there is no cross-section to take a standard error over, so inference is by **permutation**: re-run the procedure pretending each donor was treated, collect the placebo gaps, and ask where the real gap sits among them. With 38 donors the smallest one-sided p-value available is ${1/39}$, a floor on how significant the design can ever be. A poor pre-treatment fit invalidates it entirely, since the method's only claim is that a unit matching for years beforehand would have kept matching. And any donor hit by the same event poisons the counterfactual. Abadie (2021) is the practitioner's guide.
 
 ## When the event is bundled
 
-The design assumes the event is one thing. Often it is several. An earnings release arrives with forward guidance, sometimes a buyback in the same statement. An index addition is announced days before the rebalance trade, so the announcement effect and the mechanical demand effect live in different windows. A central bank changes a rate and publishes a statement whose tone moves the curve more than the rate did.
+The design assumes the event is one thing. Often it is several. An earnings release arrives with forward guidance, sometimes a buyback in the same statement. An index addition is announced days before the rebalance trade, so the announcement effect and the mechanical demand effect live in different windows. A central bank changes a rate and publishes a statement whose tone moves the curve more than the rate.
 
 There is no statistical trick that unbundles a bundle. What you can do:
 
@@ -223,8 +223,8 @@ There is no statistical trick that unbundles a bundle. What you can do:
 1. Is day 0 the first day the market could trade on it, and was the normal-return model chosen before the event window was examined?
 2. Does the estimation window exclude the event and any leakage, and is the event window justified by information arrival rather than by which length gave a t-statistic above 2?
 3. Do the events overlap in calendar time? If so, what is ${\bar\rho}$ and the effective sample size, and is the variance allowed to rise on the event day?
-4. For a diff-in-diff: pre-trends plotted, errors clustered at the unit level, timing checked for staggering. For a synthetic control: good pre-treatment fit, sparse defensible weights, an uncontaminated donor pool.
-5. Is the event bundled? If so, is it labelled as a bundle?
+4. For a diff-in-diff: pre-trends plotted, errors clustered, timing checked for staggering. For a synthetic control: good pre-treatment fit, sparse weights, an uncontaminated donor pool.
+5. Is the event bundled, and is it labelled as one?
 
 ## In the interview room and on the desk
 
