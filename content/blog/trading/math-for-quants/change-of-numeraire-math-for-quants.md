@@ -110,25 +110,25 @@ A clean product of today's discount factor and one expectation, with no covarian
 
 A caplet on \$100m notional, strike 4.00%, on the one-year rate fixed at year 1 and paid at year 2. Today's one-year rate is 4.00% and is known. At year 1 the new one-year rate is 6.00% or 2.00%, each with $Q$-probability 0.500.
 
-The payoff at year 2 is \$100m times the excess over 4.00%, so \$2,000,000 in the up state and \$0 in the down state. The discount factor from today to year 2 is path-dependent:
+The payoff at year 2 is \$100m times the excess over 4.00%, so \$2,000,000 in the up state and \$0 in the down state. The discount factor from today to year 2 is path-dependent. Keep it as an exact fraction, because every identity below is exact and rounding one step early breaks all of them:
 
-$$D_u = \frac{1}{1.04 \times 1.06} = 0.907112, \qquad D_d = \frac{1}{1.04 \times 1.02} = 0.942685$$
+$$D_u = \frac{1}{1.04 \times 1.06} = \frac{625}{689} = 0.907112, \qquad D_d = \frac{1}{1.04 \times 1.02} = \frac{625}{663} = 0.942685$$
 
 **Under the money-market measure**, price the product directly:
 
-$$V_0 = 0.500 \times 0.907112 \times \$2{,}000{,}000 + 0.500 \times 0.942685 \times \$0 = \$907{,}111.76$$
+$$V_0 = \tfrac{1}{2}\cdot\tfrac{625}{689}\cdot\$2{,}000{,}000 + \tfrac{1}{2}\cdot\tfrac{625}{663}\cdot\$0 = \frac{\$625{,}000{,}000}{689} = \$907{,}111.76$$
 
-**Under the forward measure**, first get today's two-year zero: $P(0,2) = \mathbb{E}^Q[D_2] = 0.500(0.907112 + 0.942685) = 0.924898$. The change-of-measure density is the ratio of numeraires, which in the up state is ${0.907112/0.924898 = 51/52}$ exactly. So the forward-measure probabilities are ${0.500 \times 51/52 = 51/104 = 0.490385}$ up and ${53/104 = 0.509615}$ down. Then:
+**Under the forward measure**, first get today's two-year zero: $P(0,2) = \mathbb{E}^Q[D_2] = \tfrac{1}{2}\big(\tfrac{625}{689} + \tfrac{625}{663}\big) = \tfrac{2500}{2703} = 0.924898$. The change-of-measure density is the ratio of numeraires, which in the up state is $\tfrac{625}{689} \div \tfrac{2500}{2703} = \tfrac{51}{52}$ exactly. So the forward-measure probabilities are $\tfrac{1}{2}\cdot\tfrac{51}{52} = \tfrac{51}{104} = 0.490385$ up and $\tfrac{53}{104} = 0.509615$ down, which makes $\mathbb{E}^{Q^2}[X] = \tfrac{51}{104} \times \$2{,}000{,}000 = \$980{,}769.23$. Then:
 
-$$V_0 = P(0,2)\,\mathbb{E}^{Q^2}[X] = 0.924898 \times \$980{,}769.23 = \$907{,}111.76$$
+$$V_0 = P(0,2)\,\mathbb{E}^{Q^2}[X] = \tfrac{2500}{2703} \times \$980{,}769.23 = \$907{,}111.76$$
 
 Same price, to the cent, from visibly different probabilities.
 
-**The naive calculation** is the one a careful person does by accident: discount the expected payoff at today's curve. That is $0.924898 \times \$1{,}000{,}000 = \$924{,}898.26$. It is high by exactly a factor of ${52/51}$, which is 1.96%, or about \$17,787 of air on this one contract.
+**The naive calculation** is the one a careful person does by accident: discount the expected payoff at today's curve. That is $\tfrac{2500}{2703} \times \$1{,}000{,}000 = \$924{,}898.26$. It is high by exactly a factor of $\tfrac{52}{51}$, which is 1.96%, or about \$17,787 of air on this one contract.
 
 ![A two state fan for the caplet showing the up state discount factor of 0.907112 with a two million dollar payoff and the down state discount factor of 0.942685 with a zero payoff, feeding three result boxes: the money market measure and the forward measure both at nine hundred seven thousand one hundred eleven dollars and seventy six cents in green, and the naive shortcut at nine hundred twenty four thousand eight hundred ninety eight dollars and twenty six cents in red](/imgs/blogs/change-of-numeraire-math-for-quants-3.webp)
 
-Notice what the naive calculation got wrong. It did not use the wrong formula. `P(0,T)` times an expected payoff is exactly the right shape. It used the right formula under the **wrong measure**, and the entire error is the covariance it therefore dropped. Here that covariance is exactly $-\$17{,}786.51$, and you can see where it comes from: under $Q$ the expected one-year rate at year 1 is 4.0000%, while under $Q^2$ it is ${(51/104)(6\%) + (53/104)(2\%) = 3.9615\%}$, which is precisely today's forward rate. The 3.85 basis point gap between them is the whole correction.
+Notice what the naive calculation got wrong. It did not use the wrong formula. $P(0,T)$ times an expected payoff is exactly the right shape. It used the right formula under the **wrong measure**, and the entire error is the covariance it therefore dropped. Here that covariance is exactly $-\$17{,}786.51$, and you can see where it comes from: under $Q$ the expected one-year rate at year 1 is 4.0000%, while under $Q^2$ it is $\tfrac{51}{104}(6\%) + \tfrac{53}{104}(2\%) = \tfrac{103}{2600} = 3.9615\%$, which is precisely today's forward rate. The 3.85 basis point gap between them is the whole correction.
 
 *The lesson: the forward measure does not change the price, it changes where the covariance term is stored, from a correction you have to remember into probabilities you cannot forget.*
 
@@ -156,11 +156,11 @@ $$\sigma^2 = 0.25^2 + 0.18^2 - 2(0.65)(0.25)(0.18) = 0.0625 + 0.0324 - 0.0585 = 
 
 so $\sigma = 19.08\%$. The two levels are equal so the log term is zero, and $d_1 = \sigma/2 = 0.095394$, $d_2 = -0.095394$. Then $N(d_1) = 0.537999$ and $N(d_2) = 0.462001$, giving
 
-$$V_0 = 100 \times (0.537999 - 0.462001) = \$7.5998 \text{ per unit}$$
+$$V_0 = 100 \times (0.537999 - 0.462001) = \$7.599805 \text{ per unit}$$
 
-On 500,000 units that is **\$3,799,903**, or 7.60% of the \$50m sleeve. As a check, a one-year at-the-money Black-Scholes call on a \$100 stock at 19.08% vol with $r=0$ prices at \$7.5998 to eight digits, which is the collapse working.
+On 500,000 units that is **\$3,799,903**, or 7.60% of the \$50m sleeve. As a check, a one-year at-the-money Black-Scholes call on a \$100 underlying at that same spread volatility with $r=0$ returns \$7.599805 as well, matching to twelve digits, which is the collapse working.
 
-Now move correlation to 0.90 and nothing else. The spread variance falls to ${0.0625 + 0.0324 - 0.0810 = 0.0139}$, so $\sigma = 11.79\%$, and the option is worth \$4.7007 per unit, or **\$2,350,369**. The same trade, the same vols, the same notional, and **\$1,449,534 less** because the two sleeves now move together.
+Now move correlation to 0.90 and nothing else. The spread variance falls to ${0.0625 + 0.0324 - 0.0810 = 0.0139}$, so $\sigma = 11.79\%$, and the option is worth \$4.700737 per unit, or **\$2,350,369**. The same trade, the same vols, the same notional, and **\$1,449,534 less** because the two sleeves now move together.
 
 ![Line chart of the exchange option value in millions of dollars against the correlation between the two assets, falling from six point one two million at zero correlation through three point eight zero million at correlation zero point six five to one point four zero million at correlation one](/imgs/blogs/change-of-numeraire-math-for-quants-4.webp)
 

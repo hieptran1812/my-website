@@ -15,8 +15,8 @@ readTime: 20
 > **TL;DR:** A stochastic differential equation describes one path. The Kolmogorov forward equation, which physicists call Fokker-Planck, describes the density of where all the paths are. Almost every risk question is a question about the density, and reaching for Monte Carlo to answer it is usually the slow road.
 >
 > - The **backward** equation runs over the *starting* point and answers "what is the expected payoff if I start here?". The **forward** equation runs over the *ending* point and answers "where does the probability mass end up?". Confusing the two is the most common error on this topic.
-> - The forward equation is a **conservation law**. Write the probability current $J = \mu p - \tfrac12 \partial_x(\sigma^2 p)$ and it reads $\partial_t p = -\partial_x J$: drift transports mass, diffusion spreads it, nothing is created or destroyed.
-> - Set the time derivative to zero and the current to zero, and the **stationary density** falls out in one line. For a mean-reverting spread it is Gaussian with standard deviation $\sigma/\sqrt{2\theta}$, which at $\theta = 8$ per year and $\sigma = 40$ bps is exactly 10 bps.
+> - The forward equation is a **conservation law**: with the probability current $J = \mu p - \tfrac12 \partial_x(\sigma^2 p)$ it reads $\partial_t p = -\partial_x J$. Drift transports mass, diffusion spreads it.
+> - Set the time derivative and the current to zero and the **stationary density** falls out in one line. For a mean-reverting spread it is Gaussian with standard deviation $\sigma/\sqrt{2\theta}$: at $\theta = 8$ per year and $\sigma = 40$ bps, exactly 10 bps.
 > - **Boundary conditions carry the modelling.** On a \$5m one-touch at a \$120 barrier, using the terminal density instead of the absorbing-barrier solution prices it at \$835,688 rather than \$1,775,701, an error of \$940,012.
 > - The number to remember: on that same trade a 100,000-path daily-step Monte Carlo carries a standard error of \$7,567 and a discretisation **bias of \$136,599**. The bias is 18 times the noise, and more paths do nothing about it.
 
@@ -26,7 +26,7 @@ A risk manager asks three things before lunch. How often does this spread sit ou
 
 Every one of those is a question about a **density**: about where probability mass sits, not about where any particular path went. And yet the standard reflex is to answer them with paths. Write down the stochastic differential equation, simulate a hundred thousand of them, count.
 
-That works, and for a complicated enough book it is the only thing that works. But notice what it costs. You started with an equation that describes the model exactly, discarded it, generated a hundred thousand noisy samples from it, and used the samples to rebuild, approximately and with error bars, an object the equation already contained.
+That works, and for a complicated enough book it is the only thing that works. But notice what it costs. You had an equation that describes the model exactly, discarded it, and used a hundred thousand noisy samples to rebuild, approximately and with error bars, an object the equation already contained.
 
 The Kolmogorov forward equation is that object written down directly. It is a partial differential equation whose unknown is the probability density itself. Solve it once and you hold every probability, every moment and every quantile at the same time, with no sampling error at all.
 
@@ -46,7 +46,7 @@ $$dX_t = \mu(X_t, t)\,dt + \sigma(X_t, t)\,dW_t$$
 
 the $dt$ term is the **drift**, the average direction of motion, and the $dW$ term is the **diffusion**, a random kick whose size is $\sigma$. If either of those is unfamiliar, the mechanics are built from zero in [stochastic differential equations: GBM, OU and CIR](/blog/trading/math-for-quants/sdes-gbm-ou-cir-math-for-quants), and the calculus that makes the $dW$ term behave is in [the Ito integral and Ito's lemma](/blog/trading/math-for-quants/ito-integral-itos-lemma-math-for-quants).
 
-The distinction that matters here is small and easy to slide past. The SDE is a statement about **one path**. It says how this particular realisation moves over the next instant, given where it is now. It says nothing directly about the crowd. To get from the path to the crowd you either simulate many paths, or you find the equation the crowd obeys. The second option exists, and it is the Kolmogorov forward equation.
+The distinction that matters is small and easy to slide past. The SDE is a statement about **one path**: how this realisation moves over the next instant, given where it is now. It says nothing directly about the crowd. To get from path to crowd you either simulate many of them, or you find the equation the crowd obeys. The second option exists, and it is the Kolmogorov forward equation.
 
 ## Two equations, two questions
 
@@ -70,7 +70,7 @@ The comparison in that figure is worth memorising row by row, because it is exac
 
 ## Why the forward equation looks the way it does
 
-You do not need the full derivation to read the equation, and the structure is more useful than the proof. Probability is a conserved quantity: it is not created or destroyed, it only flows. Any conserved quantity obeys a continuity equation of the form "the rate of change of the amount here equals the net flow in".
+You do not need the full derivation to read the equation, and the structure is more useful than the proof. Probability is conserved: it is not created or destroyed, it only flows. Any conserved quantity obeys a continuity equation, "the rate of change of the amount here equals the net flow in".
 
 Define the **probability current**
 
@@ -86,7 +86,7 @@ That figure is the equation in words. Take a thin slice between $x$ and $x + dx$
 
 The current has two pieces and they do different jobs. The **drift term** $\mu p$ carries mass bodily: wherever there is mass and a drift, the mass moves in the direction of the drift, like a current in a river. The **diffusion term** $-\tfrac12\partial_x(\sigma^2 p)$ carries mass down its own gradient, from where the density is high towards where it is low. That is Fick's law, the same thing that makes ink spread in water.
 
-Once the equation is written this way it becomes readable. Steepening the density anywhere creates a diffusive current that flattens it. Mean reversion creates a drift current pointing inward. And the two currents fight, which is what makes the next section work.
+Once written this way the equation becomes readable. Steepening the density anywhere creates a diffusive current that flattens it; mean reversion creates a drift current pointing inward. The two currents fight, which is what makes the next section work.
 
 ## The stationary distribution, in one line
 
@@ -111,23 +111,23 @@ which is a Gaussian centred at $m$ with variance $\sigma^2/(2\theta)$. The stati
 A relative-value desk is long a spread that mean-reverts with $\theta = 8$ per year and a volatility of 40 bps per square-root year, around a long-run level of 50 bps. The position makes or loses \$40,000 per basis point, and the risk mandate stops the trade out at 80 bps. All the inputs here are assumed, and the arithmetic below is illustrative work on those assumptions, not a market observation.
 
 1. **Stationary standard deviation.** $\sigma/\sqrt{2\theta} = 40/\sqrt{16} = 40/4 = 10$ bps exactly.
-2. **Is the stationary answer even legitimate yet?** The half-life is $\ln 2 / \theta = 0.0866$ years, or 21.8 trading days. After three half-lives the memory of the starting point has decayed by a factor of exactly 0.125, and the spread's standard deviation has reached 0.992 of its stationary value. So from about 65.5 trading days after entry, the stationary density is the right description.
+2. **Is the stationary answer legitimate yet?** The half-life is $\ln 2 / \theta = 0.0866$ years, or 21.8 trading days. After three half-lives the memory of the starting point has decayed by exactly 0.125 and the standard deviation has reached 0.992 of its stationary value, so from about 65.5 trading days after entry the stationary density is the right description.
 3. **The tail.** The stop sits at $(80-50)/10 = 3.00$ standard deviations. The Gaussian tail beyond three standard deviations is 0.135%, which is about one day in 741, or 0.34 days in a 252-day year.
 4. **The sizing number.** The 99th percentile of the stationary density is $50 + 2.326 \times 10 = 73.3$ bps. That is an adverse move of 23.26 bps, which at \$40,000 per bp costs \$930,539. A full run to the 80 bps stop costs 30 bps, or \$1.20m.
 
 The desk's mandate is a \$1m one-percent-day loss limit, and \$930,539 fits it with \$69,461 to spare. Double the position and the same 23.26 bp move costs \$1,861,078, which does not.
 
-One honest caveat, and it is the reason the next section exists. The 0.135% above is the fraction of *time* the spread spends beyond 80 bps in the long run. It is not the probability of *touching* 80 bps over some horizon, which is larger, sometimes much larger. Occupancy and first passage are different questions, and the forward equation answers the second one only once you tell it what happens at the barrier.
+One caveat, and it is why the next section exists. The 0.135% is the fraction of *time* the spread spends beyond 80 bps in the long run, not the probability of *touching* 80 bps over some horizon, which is larger. Occupancy and first passage are different questions, and the forward equation answers the second only once you tell it what happens at the barrier.
 
 ## Boundary conditions are where the modelling lives
 
 The forward equation on its own does not pin down a unique solution. You have to say what happens at the edges of the state space, and that choice is not a technicality. It is the model.
 
-**Absorbing.** Mass that reaches the boundary leaves and never returns. The condition is $p(b,t) = 0$ at the barrier. Total mass inside then decays over time, and what it decays to is the survival probability. This is a knock-out barrier, a default threshold, a margin call that liquidates the position, a fund that hits its drawdown trigger and is shut.
+**Absorbing.** Mass that reaches the boundary leaves and never returns. The condition is $p(b,t) = 0$ at the barrier. Total mass inside then decays over time, and what it decays to is the survival probability. This is a knock-out barrier, a default threshold, a margin call that liquidates the position.
 
 **Reflecting.** Mass that reaches the boundary bounces back. The condition is $J(b,t) = 0$: no current crosses. Total mass is conserved. This is a hard position limit, a currency band a central bank defends, an inventory cap a market maker will not breach.
 
-The same process with the same parameters gives completely different answers under the two, and choosing the wrong one is a modelling error that no amount of numerical care will rescue.
+The same process with the same parameters gives completely different answers under the two, and choosing wrong is a modelling error no amount of numerical care will rescue.
 
 For constant coefficients and a flat barrier, the absorbing solution has a closed form through the **method of images**. Take the free density, subtract a mirror copy centred at the reflection of the starting point through the barrier, and the difference vanishes at the barrier by construction. The mass that remains is the survival probability, and one minus it is the first-passage probability. That construction gives the result below, where $\Phi$ is the standard normal distribution function:
 
@@ -141,7 +141,7 @@ A stock trades at \$100. A client wants a one-touch that pays \$5m if the stock 
 2. **First term.** $(b - \nu T)/(\sigma\sqrt{T}) = 0.9655$, and $1 - \Phi(0.9655) = 0.1671$.
 3. **Image term.** Because $\nu = -\sigma^2/2$ exactly, the image factor $e^{2\nu b/\sigma^2}$ collapses to $e^{-b} = 100/120 = 5/6 = 0.8333$. The second argument is $(-b - \nu T)/(\sigma\sqrt{T}) = -0.7534$, and $\Phi(-0.7534) = 0.2256$, so the term is $0.8333 \times 0.2256 = 0.1880$.
 4. **Touch probability.** ${0.1671 + 0.1880 = 0.3551}$, so 35.5%.
-5. **The money.** The one-touch is worth $0.3551 \times \$5{,}000{,}000 = \$1{,}775{,}701$.
+5. **The money.** The one-touch is worth $0.3551 \times 5{,}000{,}000$, or \$1,775,701.
 
 Now price it the lazy way, using only the terminal density and asking whether the stock *ends* above \$120. That is the first term on its own, 16.7%, worth \$835,688. The gap is \$940,012, and the correct answer is 2.12 times the lazy one.
 
@@ -168,17 +168,17 @@ In sizing terms this is the difference between knowing your edge and guessing it
 
 ## Where the forward equation earns its place
 
-**Local volatility calibration.** The Dupire equation, the one that extracts a local volatility function from a surface of option prices, is the Kolmogorov forward equation in disguise. Options of every strike and maturity on the same underlying are prices of the *same* terminal density, so one forward solve in strike and maturity does what a separate backward solve per option would have to repeat thousands of times. The mechanics, the smoothing that a second derivative in strike demands, and the limits of local vol are covered in [the volatility surface](/blog/trading/quantitative-finance/volatility-surface).
+**Local volatility calibration.** The Dupire equation, which extracts a local volatility function from a surface of option prices, is the forward equation in disguise. Options of every strike and maturity on one underlying are prices of the *same* terminal density, so a single forward solve does what a backward solve per option would repeat thousands of times. The mechanics and the limits of local vol are in [the volatility surface](/blog/trading/quantitative-finance/volatility-surface).
 
-**First passage and default.** Anything phrased as "does it touch this level before that date" is an absorbing-boundary problem: structural credit models, knock-outs, drawdown triggers, covenant breaches, stop-outs. The reflection principle handles the flat-barrier constant-coefficient case; everything else is a numerical forward solve.
+**First passage and default.** Anything phrased as "does it touch this level before that date" is an absorbing-boundary problem: structural credit models, knock-outs, drawdown triggers, stop-outs. The reflection principle handles the flat-barrier constant-coefficient case; everything else is a numerical forward solve.
 
-**The whole distribution from one solve.** This is the quiet advantage. Monte Carlo gives you one number per question, each with its own error bar. The forward equation gives you $p$, and every probability, moment, quantile and expected shortfall is then an integral of the same object. Ask a new question and you integrate again, for free.
+**The whole distribution from one solve.** This is the quiet advantage. Monte Carlo gives one number per question, each with its own error bar. The forward equation gives you $p$, and every probability, moment, quantile and expected shortfall is an integral of the same object. Ask a new question and integrate again, for free.
 
-The limit is dimension. Grid-based PDE work is comfortable in one or two state variables, tolerable in three, and hopeless beyond that, which is where Monte Carlo becomes the only option. That crossover, not a general preference, is what should decide the method.
+The limit is dimension. Grid-based PDE work is comfortable in one or two state variables, tolerable in three and hopeless beyond, which is where Monte Carlo becomes the only option. That crossover, not a general preference, should decide the method.
 
 ## Common misconceptions
 
-**"Forward and backward are the same equation written twice."** They are not. The unknowns are different objects, they run over different variables, and their data sit at opposite ends of time. What is true is that the forward operator is the formal adjoint of the backward generator, which is a precise relationship and not an equality. The practical tell is where the coefficients sit: outside the derivatives in the backward equation, inside them in the forward equation. That distinction is invisible when $\mu$ and $\sigma$ are constants, which is exactly why people who learned on constant-coefficient examples get it wrong on the first state-dependent model they meet.
+**"Forward and backward are the same equation written twice."** They are not. The unknowns are different objects, they run over different variables, and their data sit at opposite ends of time. What is true is that the forward operator is the formal adjoint of the backward generator, which is a precise relationship and not an equality. The practical tell is where the coefficients sit: outside the derivatives in the backward equation, inside them in the forward equation. That distinction is invisible when $\mu$ and $\sigma$ are constants, which is why people who learned on constant-coefficient examples get it wrong on their first state-dependent model.
 
 **"Fokker-Planck is a physics thing."** Dupire's local volatility formula is a forward-equation result. Breeden and Litzenberger reading the risk-neutral density off the curvature of call prices in strike is reading the solution of the forward equation. Structural default models are absorbing-boundary problems. Any mean-reversion trade that has ever been sized off a long-run standard deviation used $\sigma/\sqrt{2\theta}$, which is a stationary Fokker-Planck solution whether or not anyone said so.
 
@@ -186,7 +186,7 @@ The limit is dimension. Grid-based PDE work is comfortable in one or two state v
 
 ## In the interview room and on the desk
 
-The question usually arrives as something plain. "How would you compute the probability that this spread breaches 80 basis points?" The weak answer starts simulating. The strong answer asks one clarifying question first, because "breaches" is ambiguous: do you mean the fraction of time it sits beyond 80, or the probability it touches 80 at some point before a date? Those are different calculations and different equations.
+The question usually arrives as something plain. "How would you compute the probability that this spread breaches 80 basis points?" The weak answer starts simulating. The strong answer asks one clarifying question first, because "breaches" is ambiguous: do you mean the fraction of time it sits beyond 80, or the probability it touches 80 before a date? Those are different calculations and different equations.
 
 Then answer in order. Write the SDE. Say that the density obeys the Kolmogorov forward equation. For the occupancy question, set the time derivative to zero, set the probability current to zero, and integrate the drift over the diffusion to get the stationary density, which for an Ornstein-Uhlenbeck spread is Gaussian with standard deviation $\sigma/\sqrt{2\theta}$. Read the tail off that. For the touching question, put an absorbing boundary at the level, note that the method of images gives a closed form when the coefficients are constant, and quote the first-passage formula. Finish with the dimension caveat: in one state variable this is a PDE solve on a laptop, and Monte Carlo would be the slow way to a noisier answer.
 
@@ -194,7 +194,7 @@ Three things make a candidate look strong here. Knowing the stationary standard 
 
 The trap is the forward and backward mix-up, and it is the single most common error on this topic. A candidate who says "I would solve the Fokker-Planck equation backwards from the payoff" has just merged the two equations, and an interviewer who is paying attention will follow up by making the volatility state-dependent and asking where the coefficients go. The other trap is writing the forward equation with $\mu$ and $\sigma^2$ outside the derivatives. Both are recoverable if you catch them yourself.
 
-Two Sigma probes this hardest, as part of its general preference for candidates who reason about distributions rather than point estimates. Citadel's multi-strategy and rates seats care about the stationary and first-passage results because they are how spread trades get sized. Any exotics desk, at Citadel Securities, Jane Street or a bank, will expect the Dupire connection and the barrier discretisation bias as working knowledge rather than trivia.
+Two Sigma probes this hardest, in line with its preference for candidates who reason about distributions rather than point estimates. Citadel's multi-strategy and rates seats care about the stationary and first-passage results, because that is how spread trades get sized. Any exotics or rates desk expects the Dupire connection and the barrier discretisation bias as working knowledge.
 
 ## Sources and further reading
 
