@@ -158,6 +158,25 @@ Also: no `\*` (undefined in KaTeX, use `\ast`), and no raw `<` followed by a let
 inside math (use `\lt `), which the HTML parser eats along with the closing
 delimiter.
 
+## A display fence must sit alone on its line
+
+A `$$` block must have its own line at each end, with a blank line either side:
+
+    ...satisfies
+
+    $$d\tilde{S}_t = \sigma \tilde{S}_t \, dW^Q_t,$$
+
+    and a self-financing portfolio...
+
+Leave the closing `$$` on the same line as the next sentence and CommonMark folds
+the block back into the paragraph. It then ships to Substack as plain text rather
+than as a rendered formula, **with no warning from any gate**: the verify script
+passes, the draft looks fine, and the only symptom is the published post's byte
+count dropping. Three already-rendering equations were lost this way in one edit.
+
+Inside a numbered list, indent the block to the list marker width so the item keeps
+its numbering.
+
 ## House rules
 
 - **No em dashes.** None, anywhere, including spaced ` - ` and ` -- ` variants. The
