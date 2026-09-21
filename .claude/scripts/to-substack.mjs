@@ -286,6 +286,11 @@ const SYMBOLS = {
   times: "×", cdot: "·", div: "÷", pm: "±", mp: "∓", ast: "∗", star: "⋆",
   approx: "≈", sim: "∼", simeq: "≃", cong: "≅", equiv: "≡", propto: "∝",
   neq: "≠", ne: "≠", leq: "≤", le: "≤", geq: "≥", ge: "≥", ll: "≪", gg: "≫",
+  // `\lt` and `\gt` are this repo's defensive spelling of < and > inside math:
+  // a raw `<` followed by a letter is parsed as an HTML tag and eats the closing
+  // delimiter. They were missing here, so every formula using them fell back to
+  // raw LaTeX source on Substack. `\wedge` is the usual min in stopping-time work.
+  lt: "<", gt: ">", wedge: "∧", vee: "∨",
   infty: "∞", partial: "∂", nabla: "∇", sum: "∑", prod: "∏", int: "∫",
   in: "∈", notin: "∉", subset: "⊂", subseteq: "⊆", supset: "⊃",
   cup: "∪", cap: "∩", emptyset: "∅", varnothing: "∅",
@@ -304,6 +309,14 @@ const SYMBOLS = {
   leftrightarrows: "⇄", rightleftarrows: "⇄", implies: "⇒", iff: "⇔",
 };
 const BLACKBOARD = { E: "𝔼", R: "ℝ", N: "ℕ", Z: "ℤ", Q: "ℚ", C: "ℂ", P: "ℙ", 1: "𝟙" };
+// `\mathcal{F}` for a filtration is everywhere in the stochastic-calculus posts.
+// It used to fall into the strip-the-command list, which turned it into a plain F,
+// and the KaTeX faithfulness check then rejected the Unicode and shipped raw source.
+const SCRIPT = { A: "\u{1D49C}", B: "\u212C", C: "\u{1D49E}", D: "\u{1D49F}", E: "\u2130",
+  F: "\u2131", G: "\u{1D4A2}", H: "\u210B", I: "\u2110", J: "\u{1D4A5}", K: "\u{1D4A6}",
+  L: "\u2112", M: "\u2133", N: "\u{1D4A9}", O: "\u{1D4AA}", P: "\u{1D4AB}", Q: "\u{1D4AC}",
+  R: "\u211B", S: "\u{1D4AE}", T: "\u{1D4AF}", U: "\u{1D4B0}", V: "\u{1D4B1}",
+  W: "\u{1D4B2}", X: "\u{1D4B3}", Y: "\u{1D4B4}", Z: "\u{1D4B5}" };
 const FUNCS = ["log", "ln", "exp", "min", "max", "sin", "cos", "tan", "det",
   "dim", "gcd", "lim", "sup", "inf", "arg", "argmax", "argmin", "mod", "bmod"];
 const SUP = { ...chars("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹"), ...chars("+-=()", "⁺⁻⁼⁽⁾"),
@@ -388,15 +401,20 @@ function texToUnicode(tex, depth = 0, lenient = false) {
   let s = tex.trim();
   if (!s) return "";
 
-  s = s.replace(/\\(?:left|right|displaystyle|limits|nonumber|,|;|:|!|\s)/g, (m) =>
+  // `\\right` is a prefix of `\\rightarrow`, so without the boundary this stripped
+  // the `\\right` and left a bare `arrow`, failing every formula using `\\rightarrow`
+  // or `\\leftarrow`. The word commands need a non-letter after them; the spacing
+  // escapes do not, since none of them is a prefix of a longer command.
+  s = s.replace(/\\(?:left|right|displaystyle|limits|nonumber)(?![A-Za-z])|\\(?:,|;|:|!|\s)/g, (m) =>
     m === "\\," || m === "\\;" || m === "\\:" || m === "\\ " ? " " : "");
 
   // Structural commands, innermost first.
   s = mapCommand(s, ["text", "textrm", "textbf", "textit", "mathrm", "mathbf",
-    "mathit", "mathsf", "mathtt", "mathcal", "mathscr", "boldsymbol",
+    "mathit", "mathsf", "mathtt", "boldsymbol",
     "operatorname", "bm"], 1, (_, a) => a);
   const sub = (a) => texToUnicode(a, depth + 1, lenient);
   s = mapCommand(s, ["mathbb"], 1, (_, a) => BLACKBOARD[a] ?? a);
+  s = mapCommand(s, ["mathcal", "mathscr"], 1, (_, a) => SCRIPT[a] ?? a);
   s = mapCommand(s, ["frac", "dfrac", "tfrac"], 2, (_, a, b) => {
     const [n, d] = [sub(a), sub(b)];
     if (n === null || d === null) return "\\FAIL";
@@ -483,6 +501,10 @@ const OP_CANON = {
   "⋅": "·", "∗": "*", "∼": "~", "′": "'", "⁄": "/",
   "≦": "≤", "≧": "≥", "ϵ": "ε", "ϑ": "θ", "ϕ": "φ", "ϖ": "π", "ϱ": "ρ", "ς": "σ",
   "𝑥": "x", "ℓ": "l",
+  // KaTeX picks the ellipsis by context: `\dots` alone renders as …, but between
+  // relations it renders as ⋯. Both say the same thing, so treat them as one
+  // symbol rather than failing the formula over which one KaTeX chose.
+  "⋯": "…", "⋮": "…", "⋱": "…",
 };
 /**
  * Structural glyphs either side may add for grouping, plus the spacing accents
@@ -507,9 +529,22 @@ function invert(table) {
  * the combining solidus is kept: without it a negated relation would canonicalise
  * to its positive form and could slip through unnoticed.
  */
+// KaTeX writes an accent as a SPACING glyph after the letter (`x~`, `x^`, `xˉ`),
+// while texToUnicode emits the COMBINING mark (U+0303 and friends). Dropping the
+// combining marks made `\tilde\pi` canonicalise to a bare pi and never match
+// KaTeX's `pi~`, so every accented symbol shipped as raw LaTeX source. Map the
+// combining marks onto KaTeX's own spacing glyphs instead of deleting them: that
+// fixes the comparison without weakening it, since an accent still has to be
+// present on both sides for the two to be judged equal.
+const ACCENT_CANON = {
+  "\u0303": "~", "\u0302": "^", "\u0304": "\u02c9", "\u0307": "\u02d9",
+  "\u20d7": "\u20d7", "\u0305": "\u203e",
+};
+
 function canonicalSymbols(s) {
   let out = "";
   for (const ch of String(s).normalize("NFKD")) {
+    if (ch in ACCENT_CANON) { out += ACCENT_CANON[ch]; continue; }
     if (/[\u0300-\u0336\u0339-\u036f\u20d0-\u20ff]/.test(ch)) continue;
     const base = SUP_BACK[ch] ?? SUB_BACK[ch] ?? OP_CANON[ch] ?? ch;
     out += base;
