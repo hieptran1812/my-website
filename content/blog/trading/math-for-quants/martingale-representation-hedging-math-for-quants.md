@@ -127,9 +127,9 @@ Every gain there comes from the exact fraction, not the four-decimal display, so
 
 Now walk the account. You start with \$1,868,750 of premium and buy $\tfrac{21}{40} \times 250{,}000 = 131{,}250$ shares at \$100, costing \$13,125,000, so you borrow \$11,256,250.
 
-- After leg 1 the account holds \$1,868,750 plus \$1,312,500, which is \$3,181,250. The option at that node is worth \$12.725 a share, and on 250,000 shares that is \$3,181,250.
-- After leg 2 it holds \$3,181,250 minus \$2,068,750, which is \$1,112,500. The option is worth \$4.45 a share, or \$1,112,500.
-- After leg 3 it holds \$1,112,500 plus \$1,112,500, which is \$2,225,000. You owe \$8.90 a share on 250,000 shares, which is \$2,225,000.
+- After leg 1: \$1,868,750 plus \$1,312,500 is \$3,181,250, and the option there is worth \$12.725 a share, or \$3,181,250.
+- After leg 2: \$3,181,250 minus \$2,068,750 is \$1,112,500, and the option is worth \$4.45 a share, or \$1,112,500.
+- After leg 3: \$1,112,500 plus \$1,112,500 is \$2,225,000, and you owe \$8.90 a share, or \$2,225,000.
 
 Total hedge P&L was +\$356,250, which added to the premium is exactly the payoff, on every one of the eight paths and not only this one.
 
@@ -161,16 +161,16 @@ Risk-neutral measures must make the stock a fair game: $110q_1 + 90q_2 + 70q_3 =
 
 Two desks, two hedges:
 
-- **Desk A hedges the diffusion.** Across the two ordinary states the payoff is zero and zero, so the hedge ratio is zero and the portfolio costs **\$0**. It replicates perfectly unless the gap happens, and if it does the desk owes \$20 a share on 500,000 shares, which is \$10,000,000, with nothing set aside.
-- **Desk B super-replicates.** Short half a share and hold \$55 of cash per share: that portfolio is worth \$0 at \$110, \$10 at \$90, and \$20 at \$70, so it covers the payoff in every state. It costs \$55 minus half of \$100, which is \$5 a share, or **\$2,500,000**.
+- **Desk A hedges the diffusion.** Across the two ordinary states the payoff is zero and zero, so the hedge ratio is zero and the portfolio costs **\$0**. It replicates perfectly unless the gap happens, and then the desk owes \$20 a share on 500,000 shares, \$10,000,000, with nothing set aside.
+- **Desk B super-replicates.** Short half a share and hold \$55 of cash per share: worth \$0 at \$110, \$10 at \$90, \$20 at \$70, so it covers the payoff in every state. It costs \$55 minus half of \$100, which is \$5 a share, or **\$2,500,000**.
 
 ![Two panels comparing a spanned market with two states and one Brownian motion against an unspanned market with a third jump state, showing the delta hedge that costs nothing and loses ten million against the super replicating hedge that costs two and a half million](/imgs/blogs/martingale-representation-hedging-math-for-quants-4.webp)
 
-That diagram puts the two cases side by side. On the left, two states and one source of randomness, one hedge, one price. On the right, a third state the stock does not reach, and the arbitrage-free band runs the full \$0 to \$2,500,000. That \$2,500,000 gap on a \$50,000,000 book is not a rounding error or a calibration detail. It is the price of the claim being undetermined.
+That diagram puts the two cases side by side. On the left, two states and one source of randomness, one hedge, one price. On the right, a third state the stock does not reach, and the arbitrage-free band runs the full \$0 to \$2,500,000. That gap on a \$50,000,000 book is not a rounding error or a calibration detail. It is the price of the claim being undetermined.
 
 **The intuition:** incompleteness does not make the hedge worse. It makes the hedge a *choice*, and once it is a choice the price is an opinion, defensible anywhere inside the band.
 
-Real desks close the gap by trading a second instrument, usually a listed option, which spans the second Brownian motion and restores completeness. That is why a stochastic-volatility book is hedged with options and not only with stock, and why a calibrated vol-of-vol parameter is really a statement about which measure in the family you have chosen.
+Real desks close the gap by trading a second instrument, usually a listed option, which spans the second Brownian motion and restores completeness. That is why a stochastic-volatility book is hedged with options and not only stock, and why a calibrated vol-of-vol parameter is really a statement about which measure in the family you chose.
 
 ## The honest limit: existence is not computability
 
@@ -190,7 +190,7 @@ $$
 \text{sd of total hedging error} \;\approx\; \frac{\Gamma S^2 \sigma^2 T}{\sqrt{2N}}.
 $$
 
-At the money here, gamma is 0.03185311 per share per dollar, so $\Gamma S^2 \sigma^2 T$ is 4.977048 per share, or \$2,488,524 across the 500,000 share position. Those extra decimals are not decoration: round gamma to six places and the position figure lands eight dollars away. Assume as well that each rebalance turns over roughly 5% of the notional, \$2,500,000, at a one-basis-point half-spread, so \$250 a go.
+At the money here, gamma is 0.03185311 per share per dollar, so $\Gamma S^2 \sigma^2 T$ is 4.977048 per share, or \$2,488,524 across the 500,000 share position. Those extra decimals are not decoration: round gamma to six places and the position figure lands eight dollars away. Assume too that each rebalance turns over roughly 5% of the notional, \$2,500,000, at a one-basis-point half-spread, so \$250 a go.
 
 | Rebalances $N$ | Hedging error, 1 sd | As % of premium | Spread paid |
 | --- | --- | --- | --- |
@@ -204,9 +204,9 @@ At the money here, gamma is 0.03185311 per share per dollar, so $\Gamma S^2 \sig
 
 The chart above is the trade in one image. Error falls as ${1/\sqrt{N}}$ and cost rises as $N$, so the two lines have to cross.
 
-Read the last two rows together. Going from daily to sixteen times a day removes \$166,271 of standard deviation, taking \$221,695 down to \$55,424, and costs \$236,250 of certain spread, taking \$15,750 up to \$252,000. You have spent \$236,250 for sure to remove \$166,271 of maybe. Quadrupling the rebalance count halves the error, every time, which is exactly why the last few basis points of replication error are never worth buying.
+Read the last two rows together. Going from daily to sixteen times a day takes the error from \$221,695 down to \$55,424, removing \$166,271 of standard deviation, and takes the spread bill from \$15,750 up to \$252,000, a certain \$236,250. You spend \$236,250 for sure to remove \$166,271 of maybe. Quadrupling the rebalance count halves the error every time, which is why the last few basis points of replication error are never worth buying.
 
-**The intuition:** the theorem says a perfect hedge exists in continuous time with no costs. Every dollar of the gap between that and your P&L is what continuity and free trading would have been worth.
+**The intuition:** the theorem promises a perfect hedge in continuous time with no costs. Every dollar of gap between that and your P&L is what continuity and free trading would have been worth.
 
 ## Common misconceptions
 

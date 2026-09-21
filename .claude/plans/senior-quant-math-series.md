@@ -237,7 +237,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 12 | levy-processes-jumps | W4 | TODO |
 | 13 | rough-volatility-fractional-brownian | W4 | TODO |
 | 14 | stopping-times-optional-stopping | W5 | **SHIPPED** 4,076 words |
-| 15 | martingale-representation-hedging | W5 | **SHIPPED** 4,372 words |
+| 15 | martingale-representation-hedging | W5 | **SHIPPED** 4,300 words |
 | 16 | change-of-numeraire | W5 | **SHIPPED** 4,057 words |
 | 17 | fokker-planck-kolmogorov-forward | W5 | **SHIPPED** 4,093 words |
 | 18 | local-time-barriers-reflection | W5 | TODO |
