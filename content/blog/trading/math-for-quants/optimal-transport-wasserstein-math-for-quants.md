@@ -72,7 +72,11 @@ $$W_p(P,Q) = \left(\inf_{\pi \in \Pi(P,Q)} \int |x-y|^p \, d\pi(x,y)\right)^{1/p
 
 The outer root restores the units, so $W_p$ is measured in the same units as $x$ for every $p$. It is a genuine metric on distributions with finite $p$-th moment.
 
-The exponent decides how a long move is priced against many short ones. $W_1$ charges mass times distance, so moving one unit five steps costs the same as moving five units one step. $W_2$ charges the square, so it is the choice when a big relocation should be penalised disproportionately, and it is the exponent with the richest geometry. As $p$ rises the distance rises too, since $W_1 \le W_2 \le \dots \le W_\infty$, and at the limit $W_\infty$ reports only the single largest move the plan is forced to make.
+The exponent decides how a long move is priced against many short ones. $W_1$ charges mass times distance, so moving one unit five steps costs the same as moving five units one step. $W_2$ charges the square, so it is the choice when a big relocation should be penalised disproportionately, and it is the exponent with the richest geometry. As $p$ rises the distance rises too:
+
+$$W_1 \le W_2 \le \dots \le W_\infty$$
+
+and at the limit $W_\infty$ reports only the single largest move the plan is forced to make.
 
 For the four-outcome pair in the next section the three read 25 bps, 27.4 bps and 40 bps. Most desk work uses $W_1$, because mass times distance is what a P&L gap actually is.
 
@@ -194,7 +198,11 @@ A fund runs \$500m across three sleeves, with risk aversion $\lambda = 10$ and, 
 | Carry | 4.0% | 10% |
 | Value | 2.0% | 8% |
 
-Maximising $w^\top\mu - \varepsilon\|w\|_1 - \tfrac{\lambda}{2}w^\top\Sigma w$ over long positions gives a closed form that is worth memorising:
+Maximising
+
+$$w^\top\mu - \varepsilon\|w\|_1 - \tfrac{\lambda}{2}w^\top\Sigma w$$
+
+over long positions gives a closed form that is worth memorising:
 
 $$w_i = \frac{\max(\mu_i - \varepsilon,\; 0)}{\lambda \sigma_i^2}.$$
 
