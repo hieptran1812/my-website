@@ -46,9 +46,9 @@ One conversion to carry: a **basis point** is one hundredth of a percent, 0.01%.
 
 ## Pillar one: conceptual soundness, which catches most of it
 
-Before any test, the reviewer asks the researcher to state the mechanism in one sentence. Not the method. The mechanism. Why should this number predict that number?
+Before any test, the reviewer asks the researcher to state the mechanism in one sentence. Not the method, the mechanism: why should this number predict that number?
 
-"Gradient boosting on 180 features" is a method. "Stocks whose short interest rises while their borrow cost stays flat are being shorted by people who are not paying up for urgency, and that is slower, better informed selling" is a mechanism. The first cannot be wrong, because it does not claim anything. The second can be wrong in three specific places, and now you know where to look.
+"Gradient boosting on 180 features" is a method. "Stocks whose short interest rises while their borrow cost stays flat are being shorted by people not paying up for urgency, and that is slower, better informed selling" is a mechanism. The first cannot be wrong, because it does not claim anything. The second can be wrong in three specific places, and now you know where to look.
 
 Most models that fail fail here, visibly. The tell is usually one of four things. The mechanism requires an economic agent who does not exist. It is real but the data cannot see it, so the model fits a proxy with its own unrelated dynamics. It was real in the sample and has been arbitraged since. Or it is stated so loosely it would have explained the opposite result equally well, which is the one that gets through, because it is unfalsifiable rather than false.
 
@@ -79,11 +79,13 @@ The book is \$500m at 8% annualised volatility, so one unit of Sharpe ratio is w
 
 So the simple model delivers ${1.24 / 1.31 = 94.7\%}$ of the candidate's Sharpe. The gross uplift is ${(1.31 - 1.24) \times \$40\text{m} = \$2.800\text{m}}$ a year.
 
-Now charge the complexity for what it consumes. The candidate's forecasts are noisier name by name, so it trades more: 68% of the book one way each month against the benchmark's 45%, which annualises to 8.16 turns against 5.4. That is ${(8.16 - 5.4) \times \$500\text{m} = \$1.380\text{bn}}$ of extra one-way notional a year. At an all-in one-way cost of 11.0 bps, that is ${\$1{,}380\text{m} \times 0.0011 = \$1.518\text{m}}$.
+Now charge the complexity for what it consumes. The candidate's forecasts are noisier name by name, so it trades more: 68% of the book one way each month against the benchmark's 45%, which annualises to 8.16 turns against 5.4. That is ${(8.16 - 5.4) \times \$500\text{m} = \$1.380\text{bn}}$ of extra one-way notional a year, and at an all-in one-way cost of 11.0 bps, ${\$1{,}380\text{m} \times 0.0011 = \$1.518\text{m}}$.
 
-Then charge it for upkeep: the feature pipeline, the vendor data the three-factor model does not need, and roughly 1.5 fully loaded researcher-years to keep it alive. Call it \$900k.
+Then charge it for upkeep: the feature pipeline, the vendor data the three-factor model does not need, and roughly 1.5 fully loaded researcher-years. Call it \$900k.
 
-$$\$2.800\text{m} - \$1.518\text{m} - \$0.900\text{m} = \$0.382\text{m}$$
+In millions of dollars a year:
+
+$$2.800 - 1.518 - 0.900 = 0.382$$
 
 ![Waterfall showing a \$2.800m gross uplift reduced by \$1.518m of extra trading and \$0.900m of model upkeep to \$0.382m net, with the t-statistic on the difference at 0.32](/imgs/blogs/model-validation-governance-math-for-quants-2.webp)
 
@@ -129,19 +131,19 @@ $$\frac{2.766}{\sqrt{3}} = 1.60$$
 
 An in-sample Sharpe of **1.60 is what you expect from pure noise** after 200 tries on three years of data. The researcher reported 1.8. The standard error of a Sharpe estimate is roughly ${\sqrt{(1 + \mathrm{SR}^2/2)/T}}$, which at ${\mathrm{SR} = 1.8}$ over three years is **0.93**. So 1.8 sits about a fifth of a standard error above the level noise alone would have produced.
 
-Be fair about the objection: the 200 configurations are not independent, so the effective ${N}$ is smaller. Grant an aggressive discount and call it 50 independent tries. The bracketed term falls to 2.276 and the ceiling to ${2.276/\sqrt{3} = 1.31}$. Still within one standard error of the reported number.
+Be fair about the objection: the 200 configurations are not independent, so the effective ${N}$ is smaller. Grant an aggressive discount and call it 50 independent tries. The bracketed term falls to 2.276 and the ceiling to ${2.276/\sqrt{3} = 1.31}$, still within one standard error of the reported number.
 
-Two things follow, and the second is the useful one. First, the reported Sharpe is not evidence at the strength it appears to have, which is what the **deflated Sharpe ratio** formalises by discounting the observed statistic for the number of trials, the skew and the kurtosis. Second, you can run the formula backwards: to justify a Sharpe threshold of 1.0 after 200 trials you need ${2.766^2 = 7.65}$ years of backtest. That is a **minimum backtest length**, and it is a number the reviewer can hand the researcher before the next project starts rather than after.
+Two things follow, and the second is the useful one. The reported Sharpe is not evidence at the strength it appears to have, which is what the **deflated Sharpe ratio** formalises by discounting the observed statistic for the number of trials, the skew and the kurtosis. And you can run the formula backwards: to justify a Sharpe threshold of 1.0 after 200 trials you need ${2.766^2 = 7.65}$ years of backtest. That **minimum backtest length** is a number the reviewer can hand the researcher before the next project starts rather than after.
 
 The intuition: a backtest is not a measurement of a strategy, it is the maximum of a search, and the maximum of a search has a distribution even when nothing works.
 
 ## Sensitivity: which input actually owns the model risk
 
-Sensitivity analysis is often run as a decoration, moving each input by an arbitrary 10% and tabulating the result. That tells you about the function, not about the model risk. The right perturbation is **one standard error of that input's own estimate**, because that is the amount by which the input actually might be wrong. Then rank the output moves. The top of that ranking is where the model risk lives, and it is usually not where the effort went.
+Sensitivity analysis is often run as decoration, moving each input by an arbitrary 10% and tabulating the result. That tells you about the function, not about the model risk. The right perturbation is **one standard error of that input's own estimate**, because that is the amount by which the input actually might be wrong. Then rank the output moves. The top of that ranking is where the model risk lives, and it is usually not where the effort went.
 
 #### Worked example 3: ranking the inputs on the same \$500m book
 
-The decision the model supports is whether to allocate, so the output is expected annual net P&L. Central case: gross alpha of ${1.2 \times 8\% = 9.6\%}$ on \$500m, which is **\$48.0m**, less **\$2.97m** of trading cost (5.4 turns of \$500m at 11.0 bps) and **\$1.375m** of stock borrow (\$250m short at 55 bps), for ${\$48.0\text{m} - \$2.97\text{m} - \$1.375\text{m} = \$43.655\text{m}}$.
+The decision is whether to allocate, so the output is expected annual net P&L. Central case: gross alpha of ${1.2 \times 8\% = 9.6\%}$ on \$500m, which is **\$48.0m**, less **\$2.97m** of trading cost (5.4 turns of \$500m at 11.0 bps) and **\$1.375m** of stock borrow (\$250m short at 55 bps), for ${\$48.0\text{m} - \$2.97\text{m} - \$1.375\text{m} = \$43.655\text{m}}$.
 
 Now perturb each input by one standard error of its own estimate.
 
@@ -155,17 +157,19 @@ Now perturb each input by one standard error of its own estimate.
 
 The alpha input moves the answer **29 times** further than the next one (${\$18.9\text{m} / \$0.65\text{m} = 29.0}$). Carry it through and the plausible range of the decision is
 
-$$\$48.0\text{m} \times (1 \pm 0.395) - \$4.345\text{m} \;\Rightarrow\; \$24.7\text{m} \ \text{to} \ \$62.6\text{m}$$
+In millions of dollars a year:
+
+$$48.0 \times (1 \pm 0.395) - 4.345 \;\Rightarrow\; 24.7 \ \text{to} \ 62.6$$
 
 a **2.53-fold spread** on the same book, driven entirely by an estimate the model treats as an input.
 
-Here is the part the reviewer writes down. The desk spent the previous quarter refining the impact model. That work was worth, at the absolute limit of its own uncertainty, \$650k of resolution. The alpha forecast, whose error bar is \$18.9m wide, arrived as a given. The finding is not that the impact model is wrong. It is that the entire decision is a bet on an information coefficient with a 39.5% standard error, and it should therefore be sized so it survives the bottom of that range.
+Here is the part the reviewer writes down. The desk spent the previous quarter refining the impact model. That work was worth, at the absolute limit of its own uncertainty, \$650k of resolution. The alpha forecast, whose error bar is \$18.9m wide, arrived as a given. The finding is not that the impact model is wrong. It is that the whole decision is a bet on an information coefficient with a 39.5% standard error, and should be sized so it survives the bottom of that range.
 
-The intuition: sensitivity does not tell you whether the model is right. It tells you which number, if it is wrong, costs you the most, and that is where the review time belongs.
+The intuition: sensitivity does not tell you whether the model is right. It tells you which number, if wrong, costs the most, and that is where the review time belongs.
 
 ## Limitations and use restrictions: validated **for what**
 
-A validated model is validated for a stated use, on a stated input range, under stated conditions. The commonest expensive failure in the whole discipline is a model that is entirely correct being used outside the regime it was tested on. Nothing is broken. Nobody notices. The number is simply wrong in a direction that costs money.
+A validated model is validated for a stated use, on a stated input range, under stated conditions. The commonest expensive failure in the discipline is an entirely correct model used outside the regime it was tested on. Nothing is broken, nobody notices, and the number is simply wrong in a direction that costs money.
 
 #### Worked example 4: an impact model outside its calibration range
 
@@ -173,21 +177,21 @@ A market-impact model estimates the cost of executing an order as
 
 $$\mathcal{C} = c\,\sigma\sqrt{Q/V}$$
 
-with ${c}$ a fitted constant, ${\sigma}$ the daily volatility of the stock, ${Q}$ the order size and ${V}$ the average daily volume. Take ${c = 0.5}$ and ${\sigma = 2.0\%}$, and note the model document's calibration range: parent orders of **0.5% to 3% of average daily volume**, which is what the desk's fill history contained.
+with ${c}$ a fitted constant, ${\sigma}$ the stock's daily volatility, ${Q}$ the order size and ${V}$ the average daily volume. Take ${c = 0.5}$ and ${\sigma = 2.0\%}$, and note the document's calibration range: parent orders of **0.5% to 3% of average daily volume**, which is what the desk's fill history contained.
 
 At the top of that range, 3% of ADV, the model says ${0.5 \times 2.0\% \times \sqrt{0.03} = 17.32}$ bps. That number is trustworthy, because it sits inside the data that produced it.
 
-A new strategy trades **12% of ADV** in its least liquid decile. Four times the participation. The square root says cost rises by ${\sqrt{4} = 2}$, so ${17.32 \times 2 = 34.64}$ bps.
+A new strategy trades **12% of ADV** in its least liquid decile. Four times the participation, so the square root says cost rises by ${\sqrt{4} = 2}$: ${17.32 \times 2 = 34.64}$ bps.
 
-But nothing in the fill history supports the square root out there, and the published estimates do not either: Almgren and co-authors measured an exponent nearer 0.6 than 0.5 on US equities, and the whole literature is fitted on ordinary participation rates. The honest alternative is that above roughly 5% of ADV, where you are a visible fraction of the day's flow, cost moves closer to **linear in participation**. Anchored on the same trustworthy 3% point, linear gives ${17.32 \times 4 = 69.28}$ bps.
+But nothing in the fill history supports the square root out there, and the published estimates do not either. Almgren and co-authors measured an exponent nearer 0.6 than 0.5 on US equities, and the literature is fitted on ordinary participation rates. The honest alternative is that above roughly 5% of ADV, where you are a visible fraction of the day's flow, cost moves closer to **linear in participation**. Anchored on the same trustworthy 3% point, linear gives ${17.32 \times 4 = 69.28}$ bps.
 
 $$69.28\ \text{bps} - 34.64\ \text{bps} = 34.64\ \text{bps}$$
 
 ![XY chart of execution cost against participation, showing the square-root extrapolation reaching 34.64 bps at 12% of ADV while a linear arm anchored at the calibrated 3% point reaches 69.28 bps, a 34.64 bps gap worth \$6.24m a year](/imgs/blogs/model-validation-governance-math-for-quants-4.webp)
 
-On a \$1.8bn annual program in that bucket, the gap is ${0.003464 \times \$1{,}800\text{m} = \$6.24\text{m}}$ a year of cost the plan never budgeted. And it is invisible in every backtest, because the backtest used the model.
+On a \$1.8bn annual program in that bucket, the gap is ${0.003464 \times \$1{,}800\text{m} = \$6.24\text{m}}$ a year of cost the plan never budgeted. It is invisible in every backtest, because the backtest used the model.
 
-The finding is not "the impact model is wrong". That figure makes the point: inside the shaded calibration range the model is fine, and rewriting it would be wasted work. The finding is **"there is no control that prevents this model from pricing an order outside the range it was fitted on"**, severity high, remediation a hard bound in the optimiser plus an alert when participation exceeds 5%. That is a two-day fix worth \$6.24m a year, and it is the kind of thing only an independent reviewer ever finds, because the researcher has no reason to look at the edge of their own calibration set.
+The finding is not "the impact model is wrong". That figure makes the point: inside the calibrated range the model is fine, and rewriting it would be wasted work. The finding is **"there is no control preventing this model from pricing an order outside the range it was fitted on"**, severity high, remediation a hard bound in the optimiser plus an alert when participation exceeds 5%. A two-day fix worth \$6.24m a year, and the kind of thing only an independent reviewer finds, because the researcher has no reason to look at the edge of their own calibration set.
 
 ## The governance layer, without the cynicism
 
@@ -217,13 +221,13 @@ SR 11-7 is the standard framing for this in the US, and the Bank of England's SS
 
 ## Sources and further reading
 
-- Board of Governors of the Federal Reserve System, **SR 11-7, "Guidance on Model Risk Management"**, 4 April 2011, issued jointly with OCC Bulletin 2011-12. The source of the three-pillar framing, "effective challenge", and the information-input / processing / reporting decomposition.
-- Prudential Regulation Authority (Bank of England), **SS1/23, "Model risk management principles for banks"**, May 2023. The more recent counterpart, with an explicit tiering and findings-management section.
+- Board of Governors of the Federal Reserve System, **SR 11-7, "Guidance on Model Risk Management"**, 4 April 2011, issued jointly with OCC Bulletin 2011-12. Source of the three-pillar framing, "effective challenge", and the input / processing / reporting decomposition.
+- Prudential Regulation Authority (Bank of England), **SS1/23, "Model risk management principles for banks"**, May 2023. The more recent counterpart, with explicit tiering and findings management.
 - D. H. Bailey, J. M. Borwein, M. Lopez de Prado and Q. J. Zhu, **"Pseudo-Mathematics and Financial Charlatanism: The Effects of Backtest Overfitting on Out-of-Sample Performance"**, Notices of the AMS 61(5), 458-471, 2014. The expected-maximum-Sharpe result and minimum backtest length.
 - D. H. Bailey and M. Lopez de Prado, **"The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting, and Non-Normality"**, Journal of Portfolio Management 40(5), 94-107, 2014.
-- M. Lopez de Prado, **Advances in Financial Machine Learning**, Wiley, 2018, chapters 11 and 12 on backtesting and backtest statistics.
+- M. Lopez de Prado, **Advances in Financial Machine Learning**, Wiley, 2018, chapters 11 and 12.
 - V. K. Chopra and W. T. Ziemba, **"The Effect of Errors in Means, Variances, and Covariances on Optimal Portfolio Choice"**, Journal of Portfolio Management 19(2), 6-11, 1993. Why the expected-return vector dominates the sensitivity ranking.
-- R. Almgren, C. Thum, E. Hauptmann and H. Li, **"Direct Estimation of Equity Market Impact"**, Risk, July 2005. The measured impact exponent, and the participation ranges the estimates were fitted on.
+- R. Almgren, C. Thum, E. Hauptmann and H. Li, **"Direct Estimation of Equity Market Impact"**, Risk, July 2005. The measured impact exponent and the participation ranges it was fitted on.
 
 The dollar figures in the worked examples are illustrative arithmetic on assumed inputs, sized to be realistic for a liquid equity market-neutral book. They are not measurements of any real strategy.
 
@@ -231,10 +235,10 @@ The dollar figures in the worked examples are illustrative arithmetic on assumed
 
 The question arrives as "how would you validate this model?", usually attached to a one-paragraph description of something a researcher on the desk built. It is asked at Citadel and Two Sigma, at every bank-affiliated seat, and it is the entire job in any model-risk function.
 
-The weak answer lists tests. Backtest, cross-validation, sensitivity, stress. It sounds thorough and it is empty, because a list has no ordering and therefore no judgment in it, and the interviewer cannot tell whether you would find anything.
+The weak answer lists tests. Backtest, cross-validation, sensitivity, stress. It sounds thorough and it is empty: a list has no ordering and therefore no judgment in it, and the interviewer cannot tell whether you would find anything.
 
-The strong answer starts one step earlier, with the adversarial question: **what would have to be true for this model to be wrong, and has anyone checked?** Then it moves in a specific order. State the mechanism in one sentence, because most failures are visible there and never reach the maths. Rebuild the headline number from the specification rather than the repository, because a shared bug reproduces perfectly. Then, before anything sophisticated, **run the simple benchmark**: if three factors do 94.7% of what 180 features do, the complexity has to earn the remaining sliver against its own trading and upkeep costs, and it often does not. Only then outcomes analysis, with the number of configurations searched treated as an input to how much the reported Sharpe is worth. Then sensitivity, perturbing each input by its own standard error so the ranking means something. And finish where the money actually is: what is this model approved for, and what stops it being used outside that.
+The strong answer starts one step earlier, with the adversarial question: **what would have to be true for this model to be wrong, and has anyone checked?** Then it moves in order. State the mechanism in one sentence, because most failures are visible there and never reach the maths. Rebuild the headline number from the specification rather than the repository, because a shared bug reproduces perfectly. Then, before anything sophisticated, **run the simple benchmark**: if three factors do 94.7% of what 180 features do, the complexity has to earn the remaining sliver against its own trading and upkeep costs, and it often does not. Only then outcomes analysis, with the number of configurations searched treated as an input to what the reported Sharpe is worth. Then sensitivity, perturbing each input by its own standard error so the ranking means something. And finish where the money is: what is this model approved for, and what stops it being used outside that.
 
-Two things separate a senior answer. The first is being willing to deliver a null result: "these two models cannot be distinguished on three years of data, here is the t-statistic, here is what would be needed". The second is that a senior expects to be on both sides of this, defending their own models on Tuesday and reviewing someone else's on Thursday, so the tone is never prosecutorial. The finding is about the model, and the useful finding is usually a missing control rather than a wrong equation.
+Two things separate a senior answer. One is willingness to deliver a null result: "these two models cannot be distinguished on three years of data, here is the t-statistic, here is what would be needed". The other is that a senior expects to be on both sides of this, defending their own models on Tuesday and reviewing someone else's on Thursday, so the tone is never prosecutorial. The useful finding is usually a missing control, not a wrong equation.
 
-The trap makes a candidate look rigorous while being wrong: treating validation as reproduction. Cloning the repo, re-running the pipeline, confirming the Sharpe, and reporting agreement to four decimals is a lot of visible work that tests nothing the researcher had not already tested. Say out loud that you would not do it, and say why.
+The trap that makes a candidate look rigorous while being wrong is treating validation as reproduction. Cloning the repo, re-running the pipeline, and reporting agreement to four decimals is a lot of visible work that tests nothing the researcher had not already tested. Say out loud that you would not do it, and say why.

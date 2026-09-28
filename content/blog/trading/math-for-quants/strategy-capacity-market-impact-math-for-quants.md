@@ -128,11 +128,11 @@ Now the central calculation.
 
 Let $A$ be the capital in the strategy and $g$ its gross alpha per year, assumed constant in $A$. Gross dollars are ${gA}$: a straight line.
 
-Suppose the strategy trades $N$ names and turns its book over $T$ times a year, rebalancing $T$ times, so each rebalance trades the whole book once across $N$ names. Each name therefore takes a trade of size ${q = A/N}$, into a name of dollar ADV $V_\$$. The number of trades a year is ${M = NT}$ and the annual dollar volume traded is ${D = TA}$.
+Suppose the strategy trades $N$ names and turns its book over $T$ times a year, rebalancing $T$ times, so each rebalance trades the whole book once across $N$ names. Each name therefore takes a trade of size ${q = A/N}$, into a name of dollar ADV $V_D$. The number of trades a year is ${M = NT}$ and the annual dollar volume traded is ${D = TA}$.
 
 Cost per dollar traded is the square-root law, so annual impact cost in dollars is
 
-$$C(A) \;=\; T A \cdot Y \sigma \sqrt{\frac{A}{N V_\$}} \;=\; k\,A^{3/2}, \qquad k \;=\; \frac{T Y \sigma}{\sqrt{N V_\$}}.$$
+$$C(A) \;=\; T A \cdot Y \sigma \sqrt{\frac{A}{N V_D}} \;=\; k\,A^{3/2}, \qquad k \;=\; \frac{T Y \sigma}{\sqrt{N V_D}}.$$
 
 That single line is the post. **Gross scales as $A$, cost scales as $A^{3/2}$.** Net dollars are
 
@@ -142,7 +142,7 @@ which is concave, zero at the origin, and zero again at a positive $A$. So it ha
 
 Take the first-order condition:
 
-$$\Pi'(A) \;=\; g - \tfrac{3}{2} k A^{1/2} \;=\; 0 \quad\Longrightarrow\quad A^{\ast} \;=\; \frac{4g^2}{9k^2} \;=\; \frac{4 g^2 N V_\$}{9 T^2 Y^2 \sigma^2}.$$
+$$\Pi'(A) \;=\; g - \tfrac{3}{2} k A^{1/2} \;=\; 0 \quad\Longrightarrow\quad A^{\ast} \;=\; \frac{4g^2}{9k^2} \;=\; \frac{4 g^2 N V_D}{9 T^2 Y^2 \sigma^2}.$$
 
 And the break-even size, where net alpha reaches zero, is where ${gA = kA^{3/2}}$:
 
@@ -156,13 +156,15 @@ Two consequences fall out immediately and neither depends on a single estimated 
 
 #### Worked example 2: the capacity of a \$4%-alpha equity strategy
 
-Assumed inputs: gross alpha ${g = 4.0\%}$ a year, gross volatility 4.0% so gross Sharpe is 1.0, a universe of ${N = 500}$ names with median dollar ADV ${V_\$ = \$50\text{m}}$, daily volatility ${\sigma = 2.0\%}$, monthly rebalancing so ${T = 12}$, and ${Y = 0.5}$.
+Assumed inputs: gross alpha ${g = 4.0\%}$ a year, gross volatility 4.0% so gross Sharpe is 1.0, a universe of ${N = 500}$ names with median dollar ADV ${V_D = \$50\text{m}}$, daily volatility ${\sigma = 2.0\%}$, monthly rebalancing so ${T = 12}$, and ${Y = 0.5}$.
 
 $$k \;=\; \frac{12 \times 0.5 \times 0.02}{\sqrt{500 \times 50{,}000{,}000}} \;=\; \frac{0.12}{158{,}113.883} \;=\; 7.58947 \times 10^{-7}.$$
 
 Then
 
-$$A_0 \;=\; \frac{0.04^2}{k^2} \;=\; \frac{0.0016}{5.76 \times 10^{-13}} \;=\; \$2{,}777{,}777{,}778, \qquad A^{\ast} \;=\; \tfrac{4}{9} A_0 \;=\; \$1{,}234{,}567{,}901.$$
+In dollars:
+
+$$A_0 \;=\; \frac{0.04^2}{k^2} \;=\; \frac{0.0016}{5.76 \times 10^{-13}} \;=\; 2{,}777{,}777{,}778, \qquad A^{\ast} \;=\; \tfrac{4}{9} A_0 \;=\; 1{,}234{,}567{,}901.$$
 
 So this strategy makes the most money at about **\$1.23bn** and makes nothing at all at **\$2.78bn**.
 
@@ -192,7 +194,7 @@ That asymmetry is the practical argument for erring small, and it is the sentenc
 
 Look again at the closed form:
 
-$$A^{\ast} \;=\; \frac{4 g^2 N V_\$}{9 T^2 Y^2 \sigma^2}.$$
+$$A^{\ast} \;=\; \frac{4 g^2 N V_D}{9 T^2 Y^2 \sigma^2}.$$
 
 Capacity is **quadratic in gross alpha**, **linear in how much liquidity the universe carries**, and **inverse quadratic in turnover**. That last one is the term people leave out of the answer, and it is the largest one in the expression.
 
@@ -204,7 +206,9 @@ The reason is not mysterious. A strategy's edge is an annual number. If it turns
 
 Take the strategy from example 2 and change nothing except how often it rebalances. Gross alpha stays 4.0%, gross volatility stays 4.0%, gross Sharpe stays 1.0, and the universe is identical. Only $T$ moves, from 12 to 52.
 
-$$A^{\ast}(12) \;=\; \$1{,}234{,}567{,}901, \qquad A^{\ast}(52) \;=\; \frac{4 \times 0.0016 \times 500 \times 5\times10^{7}}{9 \times 52^2 \times 0.25 \times 0.0004} \;=\; \$65{,}746{,}220.$$
+In dollars:
+
+$$A^{\ast}(12) \;=\; 1{,}234{,}567{,}901, \qquad A^{\ast}(52) \;=\; \frac{4 \times 0.0016 \times 500 \times 5\times10^{7}}{9 \times 52^2 \times 0.25 \times 0.0004} \;=\; 65{,}746{,}220.$$
 
 The ratio is ${(52/12)^2 = 18.78}$, and the check at the weekly speed reproduces: each rebalance trades ${\$65{,}746{,}220/500 = \$131{,}492}$ per name, which is 0.263% of ADV, costing ${0.5 \times 0.02 \times \sqrt{0.002630} = 5.13}$ bps per trade. Fifty-two of those a year is 2.667% of assets, the same two thirds of gross alpha as before, as it must be at the optimum.
 
@@ -218,7 +222,7 @@ One caveat a good interviewer will push on. Holding gross alpha fixed while rais
 
 Two strategies trading the same name at the same time in the same direction do not each pay their own impact. The market sees the sum of their flow.
 
-If each would trade $q$ in a shared name, the combined order is ${2q}$, costing ${2q \cdot Y\sigma\sqrt{2q/V_\$}}$, which is ${2^{3/2} = 2.83}$ times what one of them would pay alone, against ${2\times}$ if they were independent. Let $\phi$ be the fraction of each strategy's names the other also trades. The pair's impact cost relative to the sum of standalone costs is
+If each would trade $q$ in a shared name, the combined order is ${2q}$, costing ${2q \cdot Y\sigma\sqrt{2q/V_D}}$, which is ${2^{3/2} = 2.83}$ times what one of them would pay alone, against ${2\times}$ if they were independent. Let $\phi$ be the fraction of each strategy's names the other also trades. The pair's impact cost relative to the sum of standalone costs is
 
 $$R(\phi) \;=\; \frac{\phi \cdot 2^{3/2} + 2(1-\phi)}{2} \;=\; 1 + \phi(\sqrt{2}-1).$$
 
