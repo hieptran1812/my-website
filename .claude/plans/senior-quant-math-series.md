@@ -244,14 +244,14 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 19 | monte-carlo-variance-reduction | W7 | **SHIPPED** 4,080 words |
 | 20 | numerical-sdes-euler-milstein | W7 | **SHIPPED** 4,081 words |
 | 21 | finite-difference-pde-pricing | W7 | **SHIPPED** 4,934 words |
-| 22 | convex-duality-shadow-prices | W7 | TODO |
-| 23 | optimal-transport-wasserstein | W8 | TODO |
+| 22 | convex-duality-shadow-prices | W8 | **SHIPPED** 4,308 words |
+| 23 | optimal-transport-wasserstein | W8 | **SHIPPED** 5,250 words |
 | 24 | optimal-stopping-secretary-when-to-take-the-trade | W2 | **SHIPPED** 4,354 words |
 | 25 | order-book-imbalance-short-horizon-prediction | W2 | **SHIPPED** 4,026 words |
 | 26 | combining-weak-alphas | W2 | **SHIPPED** 4,396 words |
-| 27 | factor-risk-model-build | W9 | TODO |
-| 28 | pnl-attribution | W9 | TODO |
-| 29 | live-vs-backtest-divergence | W9 | TODO |
+| 27 | factor-risk-model-build | W9 | **SHIPPED** 4,617 words |
+| 28 | pnl-attribution | W9 | **SHIPPED** 4,242 words |
+| 29 | live-vs-backtest-divergence | W9 | **SHIPPED** 4,343 words |
 | 30 | alpha-lifecycle-decay-retirement | W10 | TODO |
 | 31 | strategy-capacity-market-impact | W10 | TODO |
 | 32 | model-validation-governance | W10 | TODO |
