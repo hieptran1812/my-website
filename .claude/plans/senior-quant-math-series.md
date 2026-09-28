@@ -224,7 +224,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | # | slug | wave | status |
 |---|------|------|--------|
 | 1 | random-matrix-theory-covariance-cleaning | W1 | **SHIPPED** f43eaba4 |
-| 2 | shrinkage-stein-paradox | W3 | **SHIPPED** 4,139 words |
+| 2 | shrinkage-stein-paradox | W3 | **SHIPPED** 4,148 words |
 | 3 | concentration-inequalities-sample-complexity | W1 | **SHIPPED** f43eaba4 |
 | 4 | causal-inference-alpha-research | W1 | **SHIPPED** f43eaba4 |
 | 5 | instrumental-variables-natural-experiments | W3 | **SHIPPED** 4,314 words |
@@ -236,7 +236,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 11 | regime-switching-hidden-markov | W6 | **SHIPPED** 4,150 words |
 | 12 | levy-processes-jumps | W6 | **SHIPPED** 4,283 words |
 | 13 | rough-volatility-fractional-brownian | W6 | **SHIPPED** 4,237 words |
-| 14 | stopping-times-optional-stopping | W5 | **SHIPPED** 4,076 words |
+| 14 | stopping-times-optional-stopping | W5 | **SHIPPED** 4,074 words |
 | 15 | martingale-representation-hedging | W5 | **SHIPPED** 4,132 words |
 | 16 | change-of-numeraire | W5 | **SHIPPED** 4,057 words |
 | 17 | fokker-planck-kolmogorov-forward | W5 | **SHIPPED** 4,093 words |
