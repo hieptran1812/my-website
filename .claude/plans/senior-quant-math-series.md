@@ -245,7 +245,7 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 20 | numerical-sdes-euler-milstein | W7 | **SHIPPED** 4,081 words |
 | 21 | finite-difference-pde-pricing | W7 | **SHIPPED** 4,934 words |
 | 22 | convex-duality-shadow-prices | W8 | **SHIPPED** 4,308 words |
-| 23 | optimal-transport-wasserstein | W8 | **SHIPPED** 5,249 words |
+| 23 | optimal-transport-wasserstein | W8 | **SHIPPED** 5,253 words |
 | 24 | optimal-stopping-secretary-when-to-take-the-trade | W2 | **SHIPPED** 4,354 words |
 | 25 | order-book-imbalance-short-horizon-prediction | W2 | **SHIPPED** 4,026 words |
 | 26 | combining-weak-alphas | W2 | **SHIPPED** 4,396 words |

@@ -182,7 +182,7 @@ Two readings matter. At $\eta = 0.2$ the reported number is 32.9 bps against a t
 
 The application that has actually changed practice is **distributionally robust optimisation**. Rather than optimising against your estimated return distribution $\hat{P}$, you optimise against the worst distribution within a Wasserstein ball of radius $\varepsilon$ around it. The ball is the honest statement that $\hat{P}$ came from a finite sample and the truth is somewhere nearby.
 
-Mohajerin Esfahani and Kuhn (2018) proved the result that makes this tractable: for a loss that is Lipschitz in the returns, the worst case over the ball equals the empirical expectation plus $\varepsilon$ times the Lipschitz constant. For a linear loss $-w^\top R$ with ground metric $\|\cdot\|_\infty$ on returns, the Lipschitz constant is $\|w\|_1$, so
+Mohajerin Esfahani and Kuhn (2018) proved the result that makes this tractable: for a loss that is Lipschitz in the returns, the worst case over the ball equals the empirical expectation plus $\varepsilon$ times the Lipschitz constant. For a linear loss $-w^\top R$ under the max-norm on returns, the Lipschitz constant is the sum of the absolute weights, so
 
 $$\sup_{Q \in \mathcal{B}_\varepsilon(\hat{P})} \mathbb{E}_Q\!\left[-w^\top R\right] = -w^\top \bar{R} + \varepsilon \|w\|_1.$$
 
