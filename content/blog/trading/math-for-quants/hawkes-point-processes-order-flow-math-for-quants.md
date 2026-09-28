@@ -8,7 +8,7 @@ category: "trading"
 subcategory: "Quantitative Finance"
 author: "Hiep Tran"
 featured: false
-readTime: 18
+readTime: 22
 ---
 
 > [!important]
@@ -53,7 +53,7 @@ That last line is the one that breaks. The ratio of variance to mean is called t
 
 ### The empirical fact Poisson gets wrong
 
-Take a day of trades in a liquid name and split it into one-second bins. Poisson predicts a Poisson histogram of counts. What you actually get is far more zero-bins and far more very-large bins than Poisson allows, with a thin middle. The gaps are also wrong: the distribution of inter-trade times has a much heavier tail than the exponential, because the quiet stretches between clusters are far longer than a constant-rate model can produce.
+Take a day of trades in a liquid name and bin them by the second. Poisson predicts a Poisson histogram. What you get has far more empty bins and far more very large bins, with a thin middle. The gaps are wrong too: inter-trade times have a much heavier tail than the exponential, because the quiet stretches between clusters run far longer than a constant-rate model can produce.
 
 None of this is subtle. It is the first thing you see, and it is why nobody trading at the second scale models arrivals as Poisson. It is the same empirical world [order book imbalance](/blog/trading/math-for-quants/order-book-imbalance-short-horizon-prediction-math-for-quants) lives in: microstructure is full of short-horizon structure, and assuming independence throws all of it away. For the wider family of distributions markets need, see [the probability distributions that markets actually use](/blog/trading/math-for-quants/probability-distributions-for-markets-math-for-quants).
 
@@ -77,7 +77,7 @@ $$
 \lambda(t) = \mu + \sum_{t_i \lt t} \phi(t - t_i)
 $$
 
-${\mu > 0}$ is the **baseline** or immigration rate, the rate of events that arrive for reasons outside the model. ${\phi}$ is the **kernel**, a non-negative function that says how much a past event lifts the present rate, and how that lift fades. The sum runs over every trade that has already printed.
+${\mu > 0}$ is the **baseline**, the rate of events arriving for reasons outside the model. ${\phi}$ is the **kernel**, a non-negative function saying how much a past event lifts the present rate and how fast that lift fades. The sum runs over every trade already printed.
 
 Take the **exponential kernel**, ${\phi(s) = \alpha e^{-\beta s}}$. It is the one you can actually compute with, for a reason we will get to when we fit the thing. Two parameters: ${\alpha}$ is the size of the jump in intensity that a trade causes, and ${\beta}$ is how fast it decays. The half-life of one trade's influence is ${\ln 2 / \beta}$.
 
@@ -269,7 +269,7 @@ Diagnostics are the part people skip. The **random time change** says that if th
 
 ## Common misconceptions
 
-**"Hawkes is just a fancy Poisson."** Only in the mean. Every interval statistic differs: the Fano factor is 16 rather than 1 at ${n = 0.75}$, the inter-arrival distribution has a fat tail rather than an exponential one, and the count autocovariance is positive at every lag rather than zero. If you only ever look at average volume, the two models are indistinguishable and you have thrown away the reason to use either.
+**"Hawkes is just a fancy Poisson."** Only in the mean. Every interval statistic differs: the Fano factor is 16 rather than 1 at ${n = 0.75}$, the inter-arrival distribution has a fat tail rather than an exponential one, and the count autocovariance is positive at every lag rather than zero. Look only at average volume and the two are indistinguishable, which means you have thrown away the reason to use either.
 
 **"A high branching ratio means the market is unstable."** No. Stationarity holds for every ${n \lt 1}$, and ${n = 0.9}$ describes a perfectly well-behaved process, just a very clustered one. What it does mean is that the *conditional* tail is much fatter than the unconditional one, so your risk numbers are wrong in a specific direction. The thing that feels like instability is the cascade decay rate ${\beta(1 - n)}$: as ${n \to 1}$ clusters get longer and you need far more data to measure anything. That is an estimation problem, not a stability one. Related tail machinery lives in [tail risk and extreme value theory](/blog/trading/math-for-quants/tail-risk-extreme-value-theory-math-for-quants).
 

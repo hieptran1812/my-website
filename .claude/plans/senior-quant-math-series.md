@@ -232,8 +232,8 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 7 | mcmc-metropolis-gibbs | W4 | **SHIPPED** 4,614 words |
 | 8 | hierarchical-bayes-pooling | W4 | **SHIPPED** 3,985 words |
 | 9 | gaussian-processes-kernels | W4 | **SHIPPED** 4,213 words |
-| 10 | hawkes-point-processes-order-flow | W6 | **SHIPPED** 4,856 words |
-| 11 | regime-switching-hidden-markov | W6 | **SHIPPED** 4,518 words |
+| 10 | hawkes-point-processes-order-flow | W6 | **SHIPPED** 4,841 words |
+| 11 | regime-switching-hidden-markov | W6 | **SHIPPED** 4,150 words |
 | 12 | levy-processes-jumps | W6 | **SHIPPED** 4,283 words |
 | 13 | rough-volatility-fractional-brownian | W6 | **SHIPPED** 4,237 words |
 | 14 | stopping-times-optional-stopping | W5 | **SHIPPED** 4,076 words |
