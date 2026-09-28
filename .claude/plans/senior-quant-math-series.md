@@ -254,5 +254,5 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 29 | live-vs-backtest-divergence | W9 | **SHIPPED** 4,343 words |
 | 30 | alpha-lifecycle-decay-retirement | W10 | TODO |
 | 31 | strategy-capacity-market-impact | W10 | TODO |
-| 32 | model-validation-governance | W10 | TODO |
+| 32 | model-validation-governance | W10 | **SHIPPED** 4,700 words |
 | 33 | risk-budgeting-drawdown-control | W10 | TODO |
