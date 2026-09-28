@@ -255,4 +255,4 @@ never `git add -A`. Pull --rebase --autostash before every push.
 | 30 | alpha-lifecycle-decay-retirement | W10 | TODO |
 | 31 | strategy-capacity-market-impact | W10 | **SHIPPED** 5,405 words |
 | 32 | model-validation-governance | W10 | **SHIPPED** 4,700 words |
-| 33 | risk-budgeting-drawdown-control | W10 | TODO |
+| 33 | risk-budgeting-drawdown-control | W10 | **SHIPPED** 5,040 words |
