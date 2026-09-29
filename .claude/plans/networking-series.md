@@ -195,7 +195,7 @@ Drafting agents: **verify each one against its public source before using it**, 
 
 ### Progress checklist
 
-- [x] Wave 0: infrastructure kit, render helper, and four recurring figure primitives. COMPLETE 2026-09-29: four author-scene and render gates passed, four visual reviews passed, 0 post WebPs by design.
+- [x] Wave 0: infrastructure kit, render helper, and four recurring figure primitives. COMPLETE 2026-09-29 in `f360ab43`: four author-scene and render gates passed, four visual reviews passed, 0 post WebPs by design.
 - [ ] Wave 1: Track A, the mental model and fundamentals, posts 1 to 6
 - [ ] Wave 2: Track B, TCP properly, posts 7 to 12
 - [ ] Wave 3: Track C, names, discovery, and the control plane, posts 13 to 18
