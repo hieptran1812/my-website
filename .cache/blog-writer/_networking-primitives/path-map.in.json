@@ -1,0 +1,29 @@
+{
+  "title": "Where this mechanism enters the path",
+  "_claim": "Before L7 termination, hops use network and transport fields; afterward, route and header fields become visible.",
+  "_caption": "TLS stays opaque through L4; the L7 proxy terminates it and exposes route and header fields downstream.",
+  "elements": [
+    {"type":"text","id":"title","x":620,"y":60,"width":1160,"height":40,"text":"Where this mechanism enters the path","fontSize":32,"fontFamily":1},
+    {"type":"text","id":"caption","x":300,"y":120,"width":1800,"height":40,"text":"TLS stays opaque through L4; the L7 proxy terminates it and exposes route and header fields downstream.","fontSize":28,"fontFamily":1},
+    {"type":"text","id":"pre-label","x":620,"y":220,"width":520,"height":40,"text":"pre-TLS: IP, port, 5-tuple","fontSize":22,"fontFamily":3},
+    {"type":"text","id":"post-label","x":1480,"y":220,"width":680,"height":40,"text":"post-TLS: route + headers visible","fontSize":22,"fontFamily":3},
+    {"type":"line","id":"tls-boundary","x":1210,"y":200,"width":0,"height":620,"points":[[0,0],[0,620]],"strokeWidth":3,"strokeStyle":"dashed","strokeColor":"#a5d8ff"},
+    {"type":"text","id":"boundary-label","x":1120,"y":840,"width":360,"height":40,"text":"TLS termination boundary","fontSize":22,"fontFamily":3},
+    {"type":"rectangle","id":"client","x":80,"y":300,"width":220,"height":400,"backgroundColor":"#e9ecef","strokeWidth":2,"label":"client\n:53144"},
+    {"type":"rectangle","id":"resolver","x":370,"y":300,"width":220,"height":400,"backgroundColor":"#d0bfff","strokeWidth":2,"label":"resolver\nTTL 30 s"},
+    {"type":"rectangle","id":"edge","x":660,"y":300,"width":220,"height":400,"backgroundColor":"#e9ecef","strokeWidth":2,"label":"edge\npre-TLS\nIP + port"},
+    {"type":"rectangle","id":"l4","x":950,"y":300,"width":220,"height":400,"backgroundColor":"#e9ecef","strokeWidth":2,"label":"L4 LB\npre-TLS\n5-tuple"},
+    {"type":"rectangle","id":"l7","x":1240,"y":300,"width":220,"height":400,"backgroundColor":"#a5d8ff","strokeWidth":3,"label":"L7 proxy\nTLS\ntermination\nroute +\nheaders"},
+    {"type":"rectangle","id":"sidecar","x":1530,"y":300,"width":220,"height":400,"backgroundColor":"#e9ecef","strokeWidth":2,"label":"sidecar\npost-TLS\nservice hop"},
+    {"type":"rectangle","id":"app","x":1820,"y":300,"width":220,"height":400,"backgroundColor":"#e9ecef","strokeWidth":2,"label":"app\npost-TLS\nHTTP handler"},
+    {"type":"rectangle","id":"backend","x":2110,"y":300,"width":220,"height":400,"backgroundColor":"#d0bfff","strokeWidth":2,"label":"backend\npost-TLS\nstate store"},
+    {"type":"arrow","id":"e1","x":308,"y":500,"width":54,"height":0,"points":[[0,0],[54,0]],"startBinding":{"elementId":"client","focus":0,"gap":8},"endBinding":{"elementId":"resolver","focus":0,"gap":8},"endArrowhead":"arrow","strokeWidth":2},
+    {"type":"arrow","id":"e2","x":598,"y":500,"width":54,"height":0,"points":[[0,0],[54,0]],"startBinding":{"elementId":"resolver","focus":0,"gap":8},"endBinding":{"elementId":"edge","focus":0,"gap":8},"endArrowhead":"arrow","strokeWidth":2},
+    {"type":"arrow","id":"e3","x":888,"y":500,"width":54,"height":0,"points":[[0,0],[54,0]],"startBinding":{"elementId":"edge","focus":0,"gap":8},"endBinding":{"elementId":"l4","focus":0,"gap":8},"endArrowhead":"arrow","strokeWidth":2},
+    {"type":"arrow","id":"e4","x":1178,"y":500,"width":54,"height":0,"points":[[0,0],[54,0]],"startBinding":{"elementId":"l4","focus":0,"gap":8},"endBinding":{"elementId":"l7","focus":0,"gap":8},"endArrowhead":"arrow","strokeWidth":2},
+    {"type":"arrow","id":"e5","x":1468,"y":500,"width":54,"height":0,"points":[[0,0],[54,0]],"startBinding":{"elementId":"l7","focus":0,"gap":8},"endBinding":{"elementId":"sidecar","focus":0,"gap":8},"endArrowhead":"arrow","strokeWidth":2},
+    {"type":"arrow","id":"e6","x":1758,"y":500,"width":54,"height":0,"points":[[0,0],[54,0]],"startBinding":{"elementId":"sidecar","focus":0,"gap":8},"endBinding":{"elementId":"app","focus":0,"gap":8},"endArrowhead":"arrow","strokeWidth":2},
+    {"type":"arrow","id":"e7","x":2048,"y":500,"width":54,"height":0,"points":[[0,0],[54,0]],"startBinding":{"elementId":"app","focus":0,"gap":8},"endBinding":{"elementId":"backend","focus":0,"gap":8},"endArrowhead":"arrow","strokeWidth":2}
+  ],
+  "export": {"padding":48,"minWidth":1600,"minHeight":900}
+}
