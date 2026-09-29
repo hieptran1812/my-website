@@ -197,7 +197,7 @@ Drafting agents: **verify each one against its public source before using it**, 
 
 - [x] Wave 0: infrastructure kit, render helper, and four recurring figure primitives. COMPLETE 2026-09-29 in `f360ab43`: four author-scene and render gates passed, four visual reviews passed, 0 post WebPs by design.
 - [x] Wave 1: Track A, the mental model and fundamentals, posts 1 to 6. COMPLETE 2026-09-29 in `f31ffa02`: 6 posts, 36 WebPs, 6 inline animations; all static visual reviews and post gates passed. Live browser playback was unavailable for the routing and latency animations, whose source, reduced-motion behavior, structural validation, and production rendering passed.
-- [ ] Wave 2: Track B, TCP properly, posts 7 to 12
+- [x] Wave 2: Track B, TCP properly, posts 7 to 12. COMPLETE 2026-09-29 in `ab4a213c`: 6 posts, 36 WebPs, 6 inline animations; all static visual reviews and post gates passed.
 - [ ] Wave 3: Track C, names, discovery, and the control plane, posts 13 to 18
 - [ ] Wave 4: Track D, trust on the wire, posts 19 to 24
 - [ ] Wave 5: Track E, the application protocols, posts 25 to 30
