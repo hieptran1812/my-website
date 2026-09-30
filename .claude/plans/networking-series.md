@@ -200,7 +200,7 @@ Drafting agents: **verify each one against its public source before using it**, 
 - [x] Wave 2: Track B, TCP properly, posts 7 to 12. COMPLETE 2026-09-29 in `ab4a213c`: 6 posts, 36 WebPs, 6 inline animations; all static visual reviews and post gates passed.
 - [x] Wave 3: Track C, names, discovery, and the control plane, posts 13 to 18. COMPLETE 2026-09-29 in `f69121f6`: 6 posts, 36 WebPs, 6 inline animations; all static visual reviews and post gates passed. Live browser playback was unavailable for some animations; their source, reduced-motion behavior, structural validation, and production rendering passed.
 - [x] Wave 4: Track D, trust on the wire, posts 19 to 24. COMPLETE 2026-09-30 in `5b540cbd`: 6 posts, 36 WebPs, 6 inline animations; all static visual reviews and post gates passed. Certificate-chain figure 7 and TLS-termination figure 2 required figure salvage before passing review.
-- [ ] Wave 5: Track E, the application protocols, posts 25 to 30
+- [x] Wave 5: Track E, the application protocols, posts 25 to 30. COMPLETE 2026-09-30 in `47b616fd`: 6 posts, 36 WebPs, 6 inline animations; all static visual reviews and post gates passed. Live browser playback was unavailable for some animations; their source, reduced-motion behavior, structural validation, and production rendering passed.
 - [ ] Wave 6: Track F, the path, proxies, and the edge, posts 31 to 36
 - [ ] Wave 7: Track G, networking inside the systems you run, posts 37 to 42
 - [ ] Wave 8: Track H, diagnosis, design, and the senior mental model, posts 43 to 48
