@@ -12,7 +12,7 @@ readTime: 40
 ---
 
 > [!important]
-> **TL;DR** — Silicon Valley Bank held tens of billions in "safe" long-dated bonds whose value collapsed when interest rates rose, and when its concentrated, uninsured, hyper-connected depositors all ran at the same time, the bank failed in roughly two days.
+> **TL;DR**: Silicon Valley Bank held tens of billions in "safe" long-dated bonds whose value collapsed when interest rates rose, and when its concentrated, uninsured, hyper-connected depositors all ran at the same time, the bank failed in roughly two days.
 >
 > - On March 8, 2023 SVB disclosed a ~\$1.8 billion loss on bond sales and a capital raise; depositors requested ~\$42 billion of withdrawals in a single day - about a quarter of all deposits.
 > - The core mechanism was duration risk hidden by accounting: SVB's bonds were marked at face value under "held-to-maturity" rules, so a ~\$15 billion unrealized loss stayed invisible until a deposit run forced the bank to sell and make the loss real.

@@ -12,7 +12,7 @@ readTime: 50
 ---
 
 > [!important]
-> **TL;DR** — To break the entrenched double-digit inflation of the 1970s, Fed chair Paul Volcker pushed interest rates to nearly 20 percent and accepted a brutal recession, proving that a central bank's credibility matters more than any single rate move.
+> **TL;DR**: To break the entrenched double-digit inflation of the 1970s, Fed chair Paul Volcker pushed interest rates to nearly 20 percent and accepted a brutal recession, proving that a central bank's credibility matters more than any single rate move.
 >
 > - Inflation is a sustained rise in the general price level; once people *expect* it to keep rising, their behavior makes it self-fulfilling, and that expectation is the hardest part to break.
 > - By 1980 US inflation had reached roughly 14 percent after a decade of oil shocks, loose policy, and the end of the gold standard.

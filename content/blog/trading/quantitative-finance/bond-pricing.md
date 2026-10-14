@@ -27,11 +27,11 @@ featured: true
 readTime: 50
 ---
 
-A bond is the simplest derivative instrument in the world. It pays a known stream of cashflows on known dates. There is no payoff function, no expectation, no model uncertainty about *what* will happen at expiry. The only uncertainty is about the discount rate that converts those future cashflows into a present-value price — and that discount rate is the yield curve. *Bonds are model-light, curve-heavy*: the math of pricing is trivial, the engineering of the curve is everything. Senior fixed-income quants spend their careers thinking about curves, not about bonds.
+A bond is the simplest derivative instrument in the world. It pays a known stream of cashflows on known dates. There is no payoff function, no expectation, no model uncertainty about *what* will happen at expiry. The only uncertainty is about the discount rate that converts those future cashflows into a present-value price, and that discount rate is the yield curve. *Bonds are model-light, curve-heavy*: the math of pricing is trivial, the engineering of the curve is everything. Senior fixed-income quants spend their careers thinking about curves, not about bonds.
 
 ![Bond pricing: discounting cashflows is the whole game](/imgs/blogs/bond-pricing-1.png)
 
-The diagram above is the mental model. A bond is a deterministic schedule of cashflows. Pricing is summation under discount. The price the desk shows is the discounted sum of those cashflows under the appropriate curve, plus or minus accrued interest, plus or minus an embedded-option adjustment. Everything else in fixed-income — yield to maturity, duration, convexity, spread, key-rate DV01s, repo, futures, OAS — is a tweak on or a derivative of that one calculation.
+The diagram above is the mental model. A bond is a deterministic schedule of cashflows. Pricing is summation under discount. The price the desk shows is the discounted sum of those cashflows under the appropriate curve, plus or minus accrued interest, plus or minus an embedded-option adjustment. Everything else in fixed-income (yield to maturity, duration, convexity, spread, key-rate DV01s, repo, futures, OAS) is a tweak on or a derivative of that one calculation.
 
 This article is the deep dive on bond pricing for a senior quant or staff-level engineer. It covers the discounted-cashflow framework, the yield-to-maturity quote convention, clean-vs-dirty price and day-count conventions, the duration / convexity / DV01 risk hierarchy, spreads (Z-spread, OAS) for credit and embedded options, the major bond classes (Treasuries, corporates, munis, MBS, sovereigns, high-yield), embedded options (callable, puttable, convertible), repo as the funding mechanism, bond futures and the cheapest-to-deliver, production architecture, and a long catalog of named bond-pricing failures.
 
@@ -39,7 +39,7 @@ The companion articles are [Yield Curve Modeling](/blog/trading/quantitative-fin
 
 ### 0.0 Bonds vs other fixed-income instruments
 
-Before diving in, a quick taxonomy of "fixed income" — bonds are one of several closely-related instrument families:
+Before diving in, a quick taxonomy of "fixed income", bonds are one of several closely-related instrument families:
 
 - **Bonds.** Debt securities with fixed cashflow schedules. The focus of this article.
 - **Loans.** Bilateral or syndicated debt; less standardised; pricing similar but often without an active secondary market.
@@ -51,7 +51,7 @@ Before diving in, a quick taxonomy of "fixed income" — bonds are one of severa
 - **Inflation-linked bonds (TIPS).** Indexed to CPI; require a real curve plus inflation expectations.
 - **Structured notes.** Hybrid bond + embedded derivative. Pricing in [the exotic derivatives post](/blog/trading/quantitative-finance/exotic-derivatives) and [autocallables post](/blog/trading/quantitative-finance/autocallables).
 
-The pricing framework is similar across all of these — discount cashflows under the appropriate curve — but the cashflow modelling and curve selection differ. Senior fixed-income quants are typically deep specialists in one or two of these families.
+The pricing framework is similar across all of these, discount cashflows under the appropriate curve, but the cashflow modelling and curve selection differ. Senior fixed-income quants are typically deep specialists in one or two of these families.
 
 ### 0.1 The size and shape of the global bond market
 
@@ -67,14 +67,14 @@ A few size-shape facts that frame fixed-income engineering:
 - **High-yield corporate**: $1.5T; active-trader market; higher volatility.
 - **Emerging-market sovereign**: $2T+; FX risk, restructuring history.
 
-The bond infrastructure spans more notional than any other asset class. Senior fixed-income quants know they are the silent majority of finance — most of the dollars run through their systems.
+The bond infrastructure spans more notional than any other asset class. Senior fixed-income quants know they are the silent majority of finance: most of the dollars run through their systems.
 
 ## 1. Why bonds are different from options
 
 The first move in any fixed-income engineering conversation is to internalise that bonds are *not* like options. Option pricing is dominated by uncertainty in the underlying; bond pricing is dominated by uncertainty in the discount rate. The pricing engineering is therefore inverted:
 
-- For options, you take the underlying as given and search for a model of its dynamics that gives the right price. Black-Scholes, Heston, SABR, local-vol — every effort goes into modelling the underlying.
-- For bonds, you take the cashflow as given and search for the right discount curve. Bootstrapping, Nelson-Siegel-Svensson, splines, multi-curve OIS-LIBOR — every effort goes into modelling the curve.
+- For options, you take the underlying as given and search for a model of its dynamics that gives the right price. Black-Scholes, Heston, SABR, local-vol: every effort goes into modelling the underlying.
+- For bonds, you take the cashflow as given and search for the right discount curve. Bootstrapping, Nelson-Siegel-Svensson, splines, multi-curve OIS-LIBOR: every effort goes into modelling the curve.
 
 The implication for a quant team: the curve infrastructure is *the* infrastructure of fixed income. A bond pricing system without a robust curve service is useless; a curve service that publishes coherent, arbitrage-free curves can price most fixed-income products with a thin pricing layer on top.
 
@@ -184,7 +184,7 @@ The Newton-Raphson converges in 4-6 iterations for typical inputs. Production li
 
 ### 3.1 Yield-to-call and yield-to-worst
 
-For callable bonds, the analyst computes yield-to-call (YTC) — the YTM under the assumption the bond is called at each call date — and reports the *yield-to-worst* (YTW), which is the minimum across YTM and all YTCs. YTW is the conservative yield estimate: it assumes the issuer exercises the option in the way most disadvantageous to the bondholder.
+For callable bonds, the analyst computes yield-to-call (YTC) (the YTM under the assumption the bond is called at each call date) and reports the *yield-to-worst* (YTW), which is the minimum across YTM and all YTCs. YTW is the conservative yield estimate: it assumes the issuer exercises the option in the way most disadvantageous to the bondholder.
 
 A 5-year corporate bond callable at $102 in years 2, 3, 4 might have:
 - YTM (held to maturity): 5.20%
@@ -217,7 +217,7 @@ def convert_yield_compounding(y_in, m_in, m_out):
 
 ## 4. Clean vs dirty price
 
-Bond prices are quoted *clean* — without accrued interest. Settlement uses the *dirty* price — including accrued interest. The convention is operationally important and frequently confused.
+Bond prices are quoted *clean*: without accrued interest. Settlement uses the *dirty* price, including accrued interest. The convention is operationally important and frequently confused.
 
 ![Clean vs dirty price: the accrued-interest convention](/imgs/blogs/bond-pricing-4.png)
 
@@ -451,7 +451,7 @@ $$
 \text{Carry} = (\text{coupon yield} - \text{repo rate}) / 365 \cdot \text{notional}.
 $$
 
-For a 4% coupon bond financed at 5% repo, daily carry is negative — the bond loses money on funding alone. For a 5% coupon bond financed at 4% repo, daily carry is positive 1bp per day, or ~3.65% annual. Levered carry trades amplify this by 5-10x.
+For a 4% coupon bond financed at 5% repo, daily carry is negative: the bond loses money on funding alone. For a 5% coupon bond financed at 4% repo, daily carry is positive 1bp per day, or ~3.65% annual. Levered carry trades amplify this by 5-10x.
 
 Senior fixed-income traders build their books with a target carry plus convexity profile, then manage hedges around that. Pure carry is exposed to spread blowouts; pure convexity costs theta-equivalent in opportunity cost. The combination is the trade.
 
@@ -542,7 +542,7 @@ Convertibles are a niche product (~$300B outstanding globally) but a high-margin
 
 ## 11. Repo: how bonds are funded
 
-A bond inventory has to be financed. The standard mechanism is *repo* — a sell-and-repurchase agreement.
+A bond inventory has to be financed. The standard mechanism is *repo*: a sell-and-repurchase agreement.
 
 ![Repo: how bonds are funded](/imgs/blogs/bond-pricing-11.png)
 
@@ -573,7 +573,7 @@ Bond futures contracts are exchange-traded; they trade the cheapest-to-deliver b
 
 The contract specifies a basket of deliverable bonds (e.g., "any 6-10 year US Treasury"). At expiry, the seller chooses which bond to deliver. The buyer pays a price that is the futures price times a *conversion factor* (a fixed coefficient for each deliverable).
 
-The cheapest-to-deliver (CTD) is the bond with the highest *implied repo rate* — the rate at which buying the bond and delivering it via the future breaks even:
+The cheapest-to-deliver (CTD) is the bond with the highest *implied repo rate*, the rate at which buying the bond and delivering it via the future breaks even:
 
 $$
 \text{Implied repo} = \frac{F \cdot CF + \text{coupons received} - P_0}{(P_0 - \text{accrued}) \cdot t} \cdot 360.
@@ -700,7 +700,7 @@ We covered this in [the derivatives pricing case study](/blog/trading/quantitati
 
 ### 15.9 The 2022-2024 rate hike cycle
 
-The Fed raised rates from 0.25% to 5.5% over 2022-2024. The Bloomberg Aggregate Bond Index lost 13% in 2022 alone — the worst calendar year for fixed income on record. Long-duration bond positions took 30-40% mark-to-market losses. The lesson: duration risk is asymmetric and large; long-end exposures must be sized for hike-cycle scenarios that can persist for years.
+The Fed raised rates from 0.25% to 5.5% over 2022-2024. The Bloomberg Aggregate Bond Index lost 13% in 2022 alone: the worst calendar year for fixed income on record. Long-duration bond positions took 30-40% mark-to-market losses. The lesson: duration risk is asymmetric and large; long-end exposures must be sized for hike-cycle scenarios that can persist for years.
 
 ### 15.10 The 2024 GBP gilt crisis (Truss mini-budget aftermath)
 
@@ -830,9 +830,9 @@ A subtle and important issue in modern fixed-income pricing: the *seller* and th
 
 A traditional dealer, financing inventory at the dealer's repo rate, discounts the bond's cashflows under that repo curve. A pension fund, holding the bond unfunded against assets, discounts under a different curve (maybe LIBOR or the pension's actuarial discount rate). A central bank, holding the bond as policy infrastructure, discounts under no curve at all.
 
-The bond's price the *market* shows is consistent with one of these — typically the dealer's repo-discounted price. Other holders may value the same bond differently. This is why we see persistent demand from "natural buyers" (pension funds, insurance companies) at prices the dealer wouldn't touch: they value the bond at a different rate.
+The bond's price the *market* shows is consistent with one of these, typically the dealer's repo-discounted price. Other holders may value the same bond differently. This is why we see persistent demand from "natural buyers" (pension funds, insurance companies) at prices the dealer wouldn't touch: they value the bond at a different rate.
 
-For pricing-system engineering: every consumer of pricing data should be aware of which discount curve was used. A pension-fund-owned bond marked at dealer-curve prices is a different number from the pension's economic value. Senior architects sometimes publish *both* — a market price (dealer-curve-consistent) and a holder-economic-value (under the holder's funding) — to make this distinction explicit.
+For pricing-system engineering: every consumer of pricing data should be aware of which discount curve was used. A pension-fund-owned bond marked at dealer-curve prices is a different number from the pension's economic value. Senior architects sometimes publish *both*, a market price (dealer-curve-consistent) and a holder-economic-value (under the holder's funding), to make this distinction explicit.
 
 ### 18.2 Common bond-pricing bugs and how to spot them
 
@@ -893,7 +893,7 @@ A typical sell-side fixed-income desk runs P&L driven by:
 - **Bid-ask spreads.** ~1-5 bp on Treasuries, 10-50 bp on corporates, larger on illiquid issues. With $100B daily volume, even 1 bp average spread generates $10M/day. Annualised: $2.5B/year.
 - **Inventory funding.** Dealer holds bonds at repo. Carry on inventory: coupon yield - repo rate. Net carry can be positive or negative; depends on curve shape and funding cost.
 - **Mark-to-market.** Daily mark of the inventory at the published curve. Drives daily P&L volatility.
-- **Customer financing.** Repo book — lending out cash against collateral. Earns the haircut spread.
+- **Customer financing.** Repo book: lending out cash against collateral. Earns the haircut spread.
 - **Structuring.** Customised structured notes earn 50-200+ bp spreads. Higher margin but lower volume.
 
 Total: a major sell-side fixed-income desk generates $500M-$2B annual gross revenue, with operating costs of $200M-$500M (mostly compensation), generating $300M-$1.5B in net contribution. The pricing infrastructure investment of $50M-$100M annually is small relative to the business.
@@ -948,11 +948,11 @@ The 2022-2024 hike cycle was a master class in this dynamic. The Fed's communica
 
 Bond pricing is the simplest non-trivial pricing problem in finance: discount the cashflows. The complexity comes from the curve (which is a research and engineering problem of its own), the conventions (day-count, schedule), the embedded options (which require their own pricing models), the funding (repo), and the risk decomposition (duration, convexity, DV01, key-rate DV01s).
 
-A subtle observation about pricing maturity: the field is so well-developed that vanilla bond pricing is essentially a solved problem. The remaining frontier is in the *interfaces* — how does pricing connect to risk, capital, regulation, accounting, audit? Modern engineering investment goes into these interfaces rather than into the math. A new pricing library is unlikely to differ from a 2010 library on price; it will differ on auditability, scaling, multi-currency support, regulatory compliance, and integration with the rest of the firm. Junior quants attracted to elegant math sometimes find this disappointing; senior engineers find it liberating, because it means the value-creation is now in engineering rather than in clever formulas.
+A subtle observation about pricing maturity: the field is so well-developed that vanilla bond pricing is essentially a solved problem. The remaining frontier is in the *interfaces*: how does pricing connect to risk, capital, regulation, accounting, audit? Modern engineering investment goes into these interfaces rather than into the math. A new pricing library is unlikely to differ from a 2010 library on price; it will differ on auditability, scaling, multi-currency support, regulatory compliance, and integration with the rest of the firm. Junior quants attracted to elegant math sometimes find this disappointing; senior engineers find it liberating, because it means the value-creation is now in engineering rather than in clever formulas.
 
 A senior fixed-income quant operates fluently in two languages: YTM (the trader's language) and curve (the engineer's language). They can price a bond by hand, decompose its risk into key-rate DV01s, identify its funding cost, and recognise when a regime shift will break their pricing assumptions.
 
-The remaining articles in this series — [Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on each layer.
+The remaining articles in this series ([Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets)) go deeper on each layer.
 
 The fixed-income world is large, conservative, and detail-oriented. Mastering it requires patience for conventions and respect for the curve. The reward is a clear-headed view of one of the largest financial markets in the world.
 
@@ -997,7 +997,7 @@ These reports are produced daily by the risk service and consumed by traders, po
 
 After 50+ pages of bond pricing, a final summary of the craft:
 
-The pricing math is simple — sum the discounted cashflows. The engineering complexity is in the curve, the conventions, the embedded options, the funding, the auditing, and the integration with the rest of the firm. Each of these layers has its own depth.
+The pricing math is simple: sum the discounted cashflows. The engineering complexity is in the curve, the conventions, the embedded options, the funding, the auditing, and the integration with the rest of the firm. Each of these layers has its own depth.
 
 A senior fixed-income quant develops three layered skills:
 
@@ -1014,8 +1014,8 @@ If you are starting your career as a fixed-income quant or engineer:
 1. **Learn day-count conventions cold.** Spend a week understanding ACT/ACT, ACT/360, 30/360, ACT/365 in detail. Build a small library that handles them all and verify against authoritative sources (the SIFMA standard).
 2. **Build a curve from scratch once.** Bootstrap a real Treasury curve from market quotes. Understand every step. The understanding pays back for years.
 3. **Price a callable bond by hand once.** Use a small lattice and walk through the backward induction. Watch how the call constraint binds and unbinds with rate scenarios.
-4. **Spend time on a trading desk.** A week of shadowing traders teaches more about how curves move than a year of textbooks. The intraday rhythm, the macro narratives, the customer flows — all of it informs the engineering.
+4. **Spend time on a trading desk.** A week of shadowing traders teaches more about how curves move than a year of textbooks. The intraday rhythm, the macro narratives, the customer flows: all of it informs the engineering.
 5. **Read the SIFMA conventions document.** The industry's standard reference for US bond conventions. Boring but indispensable.
 6. **Subscribe to one good fixed-income newsletter.** Reuters, Bloomberg, or specialised research. A daily window into how traders think about the markets.
 
-The journey from junior to senior fixed-income engineer is a decade of learning conventions, regimes, and engineering patterns. The reward is being one of the silent majority of finance — the people who price the largest market in the world correctly, day after day, conventionally and reliably. There is dignity and craft in that role.
+The journey from junior to senior fixed-income engineer is a decade of learning conventions, regimes, and engineering patterns. The reward is being one of the silent majority of finance: the people who price the largest market in the world correctly, day after day, conventionally and reliably. There is dignity and craft in that role.

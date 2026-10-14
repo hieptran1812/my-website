@@ -12,18 +12,18 @@ readTime: 42
 ---
 
 > [!important]
-> **TL;DR** — Relative valuation anchors a company's price to what the market is already paying for similar businesses, providing a fast, market-tested cross-check against a DCF.
+> **TL;DR**: Relative valuation anchors a company's price to what the market is already paying for similar businesses, providing a fast, market-tested cross-check against a DCF.
 >
 > - A comps table selects 6–12 truly comparable public peers, computes normalized multiples (EV/EBITDA, P/E, EV/Revenue), and applies those to the target's financials.
-> - Precedent transactions use the same framework but on completed M&A deals — they include a control premium of 20–40% above the unaffected trading price.
+> - Precedent transactions use the same framework but on completed M&A deals: they include a control premium of 20–40% above the unaffected trading price.
 > - A football field chart overlays all valuation methods (comps, precedent transactions, DCF, 52-week trading range) to show where the consensus range lies.
-> - The number to memorize: if comps say \$50 and precedent transactions say \$65, the implied control premium is 30% — right in the middle of the historical norm.
+> - The number to memorize: if comps say \$50 and precedent transactions say \$65, the implied control premium is 30%, right in the middle of the historical norm.
 
 ---
 
-It is June 2024. You are advising a mid-cap industrial software company on a potential sale. Your DCF model — built with meticulous free cash flow projections and a carefully calibrated WACC — spits out an intrinsic value of \$58 per share. The CEO nods politely. Then she asks the question that actually matters: "But what would someone pay for us right now?"
+It is June 2024. You are advising a mid-cap industrial software company on a potential sale. Your DCF model, built with meticulous free cash flow projections and a carefully calibrated WACC, spits out an intrinsic value of \$58 per share. The CEO nods politely. Then she asks the question that actually matters: "But what would someone pay for us right now?"
 
-That question is not answered by a DCF. It is answered by comparables. Trading comps tell you what the market is paying for similar businesses today, priced into current stock prices and observable every morning. Precedent transactions tell you what acquirers have historically paid when they needed control — the right to set strategy, fire the board, and capture synergies that the target cannot capture on its own. The spread between these two numbers is one of the most reliable data points in finance, and it has a name: the control premium.
+That question is not answered by a DCF. It is answered by comparables. Trading comps tell you what the market is paying for similar businesses today, priced into current stock prices and observable every morning. Precedent transactions tell you what acquirers have historically paid when they needed control: the right to set strategy, fire the board, and capture synergies that the target cannot capture on its own. The spread between these two numbers is one of the most reliable data points in finance, and it has a name: the control premium.
 
 This post is a craftsperson's manual for building both analyses from scratch. We will construct a comps table, argue through peer selection methodology, decode which multiples belong in which industries, compute a control premium anatomy step by step, and assemble the result into a football field that a board will actually believe. Every number will be real-looking and traceable. By the end, you will know not just how to build the table but what it means when the table disagrees with your DCF.
 
@@ -33,33 +33,33 @@ This post is a craftsperson's manual for building both analyses from scratch. We
 
 ## Foundations: What Relative Valuation Actually Does
 
-To understand why comparables work, you need to understand what they are assuming — and what they are not.
+To understand why comparables work, you need to understand what they are assuming, and what they are not.
 
 A DCF asks: *given this company's future cash flows, what is the present value?* It is forward-looking, assumption-heavy, and entirely internal. Change your terminal growth rate by 50 basis points and the value swings by 10–20%. That sensitivity is a feature (it forces you to articulate your assumptions) but also a vulnerability (a motivated analyst can justify almost any number by tweaking two inputs).
 
-Relative valuation takes a different approach. It asks: *given what the market is paying for similar businesses, what should this one be worth?* The underlying logic is the Law of One Price — two assets with identical cash flow profiles should trade at identical prices. If they do not, arbitrage (or M&A) closes the gap.
+Relative valuation takes a different approach. It asks: *given what the market is paying for similar businesses, what should this one be worth?* The underlying logic is the Law of One Price: two assets with identical cash flow profiles should trade at identical prices. If they do not, arbitrage (or M&A) closes the gap.
 
-This is the same logic used in real estate. Before your realtor tells you what your house is worth, she runs "comps" — recent sales of similar properties on your street. She is not building a DCF of your future rental income; she is anchoring to observed market transactions. Investment bankers are doing precisely the same thing, with more Excel.
+This is the same logic used in real estate. Before your realtor tells you what your house is worth, she runs "comps": recent sales of similar properties on your street. She is not building a DCF of your future rental income; she is anchoring to observed market transactions. Investment bankers are doing precisely the same thing, with more Excel.
 
 ### The two flavors of relative valuation
 
-**Trading comparables (public comps)** look at currently listed, publicly traded companies in the same business. You are using stock market prices, which reflect the collective judgment of millions of investors, as your benchmark. The multiples derived here represent *minority interest, liquid market prices* — the price of buying a small piece of an ongoing business.
+**Trading comparables (public comps)** look at currently listed, publicly traded companies in the same business. You are using stock market prices, which reflect the collective judgment of millions of investors, as your benchmark. The multiples derived here represent *minority interest, liquid market prices*: the price of buying a small piece of an ongoing business.
 
-**Precedent transactions (deal comps)** look at completed M&A deals involving similar businesses. You are using actual takeover prices, which reflect what an acquirer was willing to pay to own and control the entire company. These prices include a control premium — the extra amount an acquirer pays for the right to redirect the company's strategy, realize synergies, and integrate operations.
+**Precedent transactions (deal comps)** look at completed M&A deals involving similar businesses. You are using actual takeover prices, which reflect what an acquirer was willing to pay to own and control the entire company. These prices include a control premium: the extra amount an acquirer pays for the right to redirect the company's strategy, realize synergies, and integrate operations.
 
 Both are necessary. Neither alone is sufficient.
 
 ### Why you always need the DCF too
 
-A DCF is the only tool that forces you to articulate *why* a business has the value it does. Comps tell you the market's price; they do not tell you whether that price is right. In 1999, comps for internet companies were stratospheric — and using those comps to value more internet companies was circular insanity. A DCF would have forced the analyst to ask: "What free cash flow growth rate is embedded in this 50x EV/Revenue multiple? Is that realistic?"
+A DCF is the only tool that forces you to articulate *why* a business has the value it does. Comps tell you the market's price; they do not tell you whether that price is right. In 1999, comps for internet companies were stratospheric, and using those comps to value more internet companies was circular insanity. A DCF would have forced the analyst to ask: "What free cash flow growth rate is embedded in this 50x EV/Revenue multiple? Is that realistic?"
 
-The correct approach — the one that survives board scrutiny — is triangulation. Run the DCF. Run the comps. Run the precedent transactions. Build the football field. If all three point to \$45–65, you have a defensible range. If the DCF says \$35 and the comps say \$70, you have a story to tell about why — perhaps the market is pricing in an acquisition bid, or your DCF is too conservative on margins. Divergence is information. See [DCF practice: valuing VCB, Hoa Phat, and Apple](/blog/trading/asset-valuation/dcf-practice-valuing-vcb-hoa-phat-apple) for a detailed walk-through of building the intrinsic value anchor.
+The correct approach, the one that survives board scrutiny, is triangulation. Run the DCF. Run the comps. Run the precedent transactions. Build the football field. If all three point to \$45–65, you have a defensible range. If the DCF says \$35 and the comps say \$70, you have a story to tell about why: perhaps the market is pricing in an acquisition bid, or your DCF is too conservative on margins. Divergence is information. See [DCF practice: valuing VCB, Hoa Phat, and Apple](/blog/trading/asset-valuation/dcf-practice-valuing-vcb-hoa-phat-apple) for a detailed walk-through of building the intrinsic value anchor.
 
 ---
 
 ## Building the Comps Table: Step by Step
 
-A comps table is deceptively simple in structure. The rows are your selected peer companies. The columns are the normalized financial multiples. The skill — the part that separates a good analyst from a mediocre one — is in the row selection and the normalization.
+A comps table is deceptively simple in structure. The rows are your selected peer companies. The columns are the normalized financial multiples. The skill, the part that separates a good analyst from a mediocre one, is in the row selection and the normalization.
 
 ### Step 1: Define the peer universe
 
@@ -69,7 +69,7 @@ The starting point is every publicly traded company in roughly the same business
 
 **Revenue and market cap screen.** A company with \$20 billion in revenue does not compare to one with \$200 million. Investors price them differently: the large-cap commands a premium for liquidity, scale, and lower operational risk; the small-cap trades at a discount for the inverse reasons. As a rule of thumb, stay within 0.3x to 3x of your target's revenue. If your target has \$800 million in revenue, a reasonable screen is \$250 million to \$2.5 billion.
 
-**Margin and growth profile.** A company growing at 25% annually with 35% EBITDA margins does not compare to one growing at 3% with 12% margins, even if both sell software. Investors price growth and profitability differently — explicitly so in frameworks like EV/Revenue, which is essentially capitalizing the growth optionality. Screen for peers within ±15 percentage points of your target's EBITDA margin and ±10 percentage points of revenue growth rate.
+**Margin and growth profile.** A company growing at 25% annually with 35% EBITDA margins does not compare to one growing at 3% with 12% margins, even if both sell software. Investors price growth and profitability differently: explicitly so in frameworks like EV/Revenue, which is essentially capitalizing the growth optionality. Screen for peers within ±15 percentage points of your target's EBITDA margin and ±10 percentage points of revenue growth rate.
 
 **Geography.** US-listed companies command different multiples than comparable businesses listed in Europe or Asia, driven by differences in investor base, liquidity, accounting standards, and country risk premium. For a US target, the core comp set should be US-listed; you can add international ADRs as a supplementary reference.
 
@@ -122,7 +122,7 @@ Raw reported financials are contaminated with one-time items that have nothing t
 - Restructuring charges (layoff costs, facility closures)
 - Transaction costs (M&A advisory fees, legal fees)
 - Impairment charges (goodwill write-downs, asset impairments)
-- Stock-based compensation (SBC) — *this is controversial; some analysts add it back, others do not. The cleaner approach for cross-company comparisons is to add it back to get to "cash EBITDA," then note the SBC intensity separately*
+- Stock-based compensation (SBC): *this is controversial; some analysts add it back, others do not. The cleaner approach for cross-company comparisons is to add it back to get to "cash EBITDA," then note the SBC intensity separately*
 - Legal settlements, regulatory fines (if genuinely one-time)
 - Gains/losses on asset sales
 
@@ -144,7 +144,7 @@ Continuing with PEER3: suppose the LTM income statement includes \$42 million in
 
 **Adjusted EV/EBITDA** = \$4,856M ÷ \$328M = **14.8x** (vs. reported 18.1x)
 
-This matters enormously. A 3.3x difference in the multiple applied to your target's \$200M EBITDA swings the implied enterprise value by \$660 million. Sloppy normalization is not a minor error — it is the difference between a deal that happens and one that does not.
+This matters enormously. A 3.3x difference in the multiple applied to your target's \$200M EBITDA swings the implied enterprise value by \$660 million. Sloppy normalization is not a minor error: it is the difference between a deal that happens and one that does not.
 
 ---
 
@@ -152,7 +152,7 @@ This matters enormously. A 3.3x difference in the multiple applied to your targe
 
 Not all multiples are created equal. The appropriate multiple depends on the business model and where the earnings "show up" most cleanly in the income statement.
 
-### EV/EBITDA — the workhorse
+### EV/EBITDA: the workhorse
 
 EV/EBITDA is the most widely used multiple in M&A for good reason. It is capital-structure-neutral (EV accounts for debt; EBITDA is pre-interest), it strips out depreciation differences (which vary with accounting policies), and it is positive for most mature businesses, unlike net income for high-growth companies.
 
@@ -169,29 +169,29 @@ Typical EV/EBITDA ranges by sector (2024 data, Damodaran):
 
 ![EV/EBITDA multiple ranges by sector](/imgs/blogs/comparable-company-analysis-precedent-transactions-comps-5.png)
 
-### EV/Revenue — for high-growth or early-stage businesses
+### EV/Revenue: for high-growth or early-stage businesses
 
 When a company is unprofitable or early in its investment cycle, EBITDA is negative or trivially small. Revenue multiples serve as a proxy. The multiple implicitly embeds assumptions about the eventual margin the business will achieve.
 
-**Interpretation:** A company trading at 8x EV/Revenue with a long-run EBITDA margin trajectory of 25% is effectively trading at 32x LTM EBITDA margin-adjusted — which implies either very high growth expectations or a premium for strategic value. Decompose it explicitly: EV/Revenue = (EV/EBITDA) × (EBITDA margin).
+**Interpretation:** A company trading at 8x EV/Revenue with a long-run EBITDA margin trajectory of 25% is effectively trading at 32x LTM EBITDA margin-adjusted, which implies either very high growth expectations or a premium for strategic value. Decompose it explicitly: EV/Revenue = (EV/EBITDA) × (EBITDA margin).
 
-**For the post-2020 SaaS market:** EV/Revenue multiples for high-growth SaaS companies ranged from 8x to 40x at the peak (2021), compressing to 3–10x by 2023 as rates rose. This compression — driven by higher discount rates — illustrates exactly why relative valuation is a snapshot of a market moment, not a permanent truth.
+**For the post-2020 SaaS market:** EV/Revenue multiples for high-growth SaaS companies ranged from 8x to 40x at the peak (2021), compressing to 3–10x by 2023 as rates rose. This compression, driven by higher discount rates, illustrates exactly why relative valuation is a snapshot of a market moment, not a permanent truth.
 
-### P/E — for financial institutions and mature businesses
+### P/E: for financial institutions and mature businesses
 
 Price-to-earnings is appropriate when a business's earnings are the cleanest representation of value generation. For banks, EV/EBITDA is meaningless (interest expense is revenue, not a cost to be added back). Banks trade on P/E, P/Book (price-to-book value), and P/TBV (price-to-tangible book value).
 
 For mature industrial or consumer companies with stable earnings, P/E is an intuitive supplement to EV/EBITDA. When the S&P 500 traded at 27.6x trailing P/E at end of 2024 (per our dataset), that was the market-wide anchor for earnings-based valuation.
 
-### EV/EBIT — when capex intensity matters
+### EV/EBIT, when capex intensity matters
 
-EV/EBIT is useful when companies in the same peer set have meaningfully different depreciation levels — for instance, one company owns its manufacturing facilities and the other leases them. EBIT is after depreciation (a real economic cost when assets must be replaced) but before interest. It splits the difference between EBITDA (too forgiving of capex-intensive businesses) and net income (contaminated by capital structure).
+EV/EBIT is useful when companies in the same peer set have meaningfully different depreciation levels: for instance, one company owns its manufacturing facilities and the other leases them. EBIT is after depreciation (a real economic cost when assets must be replaced) but before interest. It splits the difference between EBITDA (too forgiving of capex-intensive businesses) and net income (contaminated by capital structure).
 
 ---
 
 ## Precedent Transactions: The Deal Price Layer
 
-Trading comps tell you what the market thinks the company is worth as a going-concern minority stake. Precedent transactions tell you what buyers were willing to pay to *own* the entire business — to have control.
+Trading comps tell you what the market thinks the company is worth as a going-concern minority stake. Precedent transactions tell you what buyers were willing to pay to *own* the entire business: to have control.
 
 ### Why deal prices are higher than trading prices
 
@@ -205,17 +205,17 @@ Empirically, across thousands of US public company M&A deals from 2010 to 2023, 
 
 The word "unaffected" is doing critical work in that definition. You do NOT measure the premium against the pre-announcement price on the day before the deal is announced. Why? Because deals leak. Analyst chatter, SEC investigations of unusual options activity, and information flow mean the stock price often already reflects partial probability of a bid in the weeks leading up to an announcement.
 
-The standard practice: use the **30-day or 60-day unaffected price** — the average or closing price 30 to 60 days before any rumor hit the market. Bankers sometimes use the 52-week trading range low as the anchor for distressed sellers.
+The standard practice: use the **30-day or 60-day unaffected price**, the average or closing price 30 to 60 days before any rumor hit the market. Bankers sometimes use the 52-week trading range low as the anchor for distressed sellers.
 
 #### Worked example: Computing the control premium anatomy
 
-A target company's stock traded at \$45.00 per share on a "clean" unaffected basis 45 days before rumors surfaced. On the day rumors hit the press, the stock jumped to \$50.85 (a 13% move — the "leak premium"). Three weeks later, the acquirer announced a definitive agreement at \$60.75 per share.
+A target company's stock traded at \$45.00 per share on a "clean" unaffected basis 45 days before rumors surfaced. On the day rumors hit the press, the stock jumped to \$50.85 (a 13% move: the "leak premium"). Three weeks later, the acquirer announced a definitive agreement at \$60.75 per share.
 
-**Control premium over unaffected:** (\$60.75 − \$45.00) ÷ \$45.00 = **34.9%** — solidly in the normal 20–40% range.
+**Control premium over unaffected:** (\$60.75 − \$45.00) ÷ \$45.00 = **34.9%**, solidly in the normal 20–40% range.
 
-**Premium over "day before announcement" price (wrong metric):** (\$60.75 − \$50.85) ÷ \$50.85 = 19.5% — this understates the true economic premium because the leak has already been priced.
+**Premium over "day before announcement" price (wrong metric):** (\$60.75 − \$50.85) ÷ \$50.85 = 19.5%, this understates the true economic premium because the leak has already been priced.
 
-Why does this matter? Because when you build a precedent transactions table to benchmark deal pricing, you must use the unaffected price as the denominator — otherwise, you are comparing apples to oranges, and your "average control premium" will be systematically understated.
+Why does this matter? Because when you build a precedent transactions table to benchmark deal pricing, you must use the unaffected price as the denominator: otherwise, you are comparing apples to oranges, and your "average control premium" will be systematically understated.
 
 ![Control premium anatomy from stock price to deal price](/imgs/blogs/comparable-company-analysis-precedent-transactions-comps-4.png)
 
@@ -224,7 +224,7 @@ Why does this matter? Because when you build a precedent transactions table to b
 The structure mirrors the trading comps table, with two key differences:
 
 1. **The transaction EV is based on the deal price paid, not the current trading price.** For public targets, this is the per-share offer price times fully diluted shares plus assumed net debt. For private targets, you rely on disclosed deal terms.
-2. **You include "NTM" multiples based on the consensus estimates at the time of announcement**, not current consensus. Financial conditions change — a deal struck in 2019 at a 12x EV/EBITDA multiple was priced relative to 2019 interest rates, not 2024 ones.
+2. **You include "NTM" multiples based on the consensus estimates at the time of announcement**, not current consensus. Financial conditions change: a deal struck in 2019 at a 12x EV/EBITDA multiple was priced relative to 2019 interest rates, not 2024 ones.
 
 For the financial model in practice, you screen deal databases (Bloomberg, FactSet, Refinitiv) for transactions in your sector over the past 5–10 years, select 8–15 comparable deals based on: target industry, target size (within 0.2x–5x of your target), deal structure (all-cash vs. stock), and whether synergies were explicitly disclosed.
 
@@ -234,13 +234,13 @@ You then compute the multiple paid on LTM and NTM EBITDA at the time of announce
 
 ## The EV/EBITDA vs. Margin Relationship: Why Comps Must Be Earned
 
-One of the most important analytical skills in comps work is understanding that a multiple is not a fixed property of a company's industry — it is a function of the company's profitability and growth profile. Two software companies in the same GICS sub-industry can trade at 12x and 26x EV/EBITDA for entirely rational reasons.
+One of the most important analytical skills in comps work is understanding that a multiple is not a fixed property of a company's industry: it is a function of the company's profitability and growth profile. Two software companies in the same GICS sub-industry can trade at 12x and 26x EV/EBITDA for entirely rational reasons.
 
 The relationship is predictable and testable: **higher EBITDA margins command higher multiples.** The intuition is that a high-margin business has more cash per dollar of revenue available for reinvestment or return to shareholders, making each dollar of revenue more valuable.
 
 ![EV/EBITDA vs EBITDA margin scatter plot for tech peer group](/imgs/blogs/comparable-company-analysis-precedent-transactions-comps-6.png)
 
-This scatter plot illustrates a well-established empirical pattern: in any sector, there is a roughly linear relationship between EBITDA margin and EV/EBITDA. The slope of the regression line — about 0.6x multiple per 1% improvement in margin, in a typical tech peer set — tells you how much the market rewards incremental profitability.
+This scatter plot illustrates a well-established empirical pattern: in any sector, there is a roughly linear relationship between EBITDA margin and EV/EBITDA. The slope of the regression line (about 0.6x multiple per 1% improvement in margin, in a typical tech peer set) tells you how much the market rewards incremental profitability.
 
 The practical implication: when you apply a median EV/EBITDA from your comps set to your target, you should check whether your target's margin is at, above, or below the peer median. If your target is at the 75th percentile of margins but you are applying the median multiple, your valuation will be conservative. If your target is at the 25th percentile of margins, you should not expect to trade at the median multiple without a margin improvement story.
 
@@ -254,7 +254,7 @@ Your target has an EBITDA margin of 28%. The peer median margin is 20%, and the 
 
 **Regression-adjusted implied EV:** \$200M × 18.4x = \$3,680M
 
-The adjustment adds \$880 million to the enterprise value — a 31% increase. This is not a minor footnote. In a real deal, this is the argument the sell-side banker makes to justify the higher valuation: "Our client trades in line with high-margin peers, not at the sector average."
+The adjustment adds \$880 million to the enterprise value: a 31% increase. This is not a minor footnote. In a real deal, this is the argument the sell-side banker makes to justify the higher valuation: "Our client trades in line with high-margin peers, not at the sector average."
 
 ---
 
@@ -264,7 +264,7 @@ A football field chart is the standard way to present the output of a multi-meth
 
 Each bar represents one method's implied per-share value range. The key methods shown:
 
-- **52-week trading range**: The stock's actual trading range over the past year — a market anchor, not a valuation method per se, but useful context.
+- **52-week trading range**: The stock's actual trading range over the past year, a market anchor, not a valuation method per se, but useful context.
 - **DCF (bear/base/bull)**: The intrinsic value range under your three scenarios.
 - **Trading comps EV/EBITDA**: The range from applying the 25th to 75th percentile peer multiple.
 - **Trading comps P/E** (or EV/Revenue for growth companies): A second multiple-based method.
@@ -282,7 +282,7 @@ A vertical line marks the current stock price (for a fairness opinion) or the pr
 - The DCF uses conservative inputs (verify against the market-implied growth rate: what WACC and terminal growth rate produce the comps-implied price?)
 - The market is pricing in acquisition speculation (comps are inflated by deal rumors)
 - Synergies are unusually high for this particular target (justifying the premium transaction price)
-- The target is a "strategic jewel" — there are only a few companies in the world that could absorb it, and the scarcity premium is real
+- The target is a "strategic jewel": there are only a few companies in the world that could absorb it, and the scarcity premium is real
 
 **Never present the football field without a narrative.** The visual shows a range; your job is to explain which parts of that range are most relevant and why the current or proposed price is fair, full, or insufficient.
 
@@ -290,7 +290,7 @@ A vertical line marks the current stock price (for a fairness opinion) or the pr
 
 ## The Control Premium in Depth: Why 20–40%?
 
-The 20–40% control premium is one of the most cited statistics in M&A — but most people who cite it do not understand what drives it. It is not arbitrary. It has a structure.
+The 20–40% control premium is one of the most cited statistics in M&A, but most people who cite it do not understand what drives it. It is not arbitrary. It has a structure.
 
 ### The three components of the deal premium
 
@@ -298,7 +298,7 @@ The 20–40% control premium is one of the most cited statistics in M&A — but 
 
 **Component 2: Operational synergies.** These are the cost-saving and revenue-enhancing benefits of combining two businesses. Cost synergies (eliminating duplicative headquarters, shared procurement, technology rationalization) are typically more certain and faster to realize. Revenue synergies (cross-selling, new market entry) are less certain and take longer. A typical corporate M&A deal budgets 5–15% of target revenue in synergies, which translates to material enterprise value when capitalized at the combined entity's WACC.
 
-**Component 3: The competitive auction premium.** When multiple bidders compete — in a formal or informal process — the winning bid must exceed all other offers. Competitive processes reliably drive prices 8–15% above the first offer price. This is not irrational; it is the result of bidder asymmetries in synergy realization and strategic value.
+**Component 3: The competitive auction premium.** When multiple bidders compete, in a formal or informal process, the winning bid must exceed all other offers. Competitive processes reliably drive prices 8–15% above the first offer price. This is not irrational; it is the result of bidder asymmetries in synergy realization and strategic value.
 
 The mathematical floor of the premium is zero (a distressed seller with no alternatives). The practical ceiling is around 60–70% before the deal's economics become difficult for the acquirer to justify to its own shareholders (the acquirer is destroying value for the deal to create value for the target's shareholders).
 
@@ -308,7 +308,7 @@ The empirical distribution is right-skewed: most deals cluster at 20–40%, with
 
 #### Worked example: Decomposing a \$1.2 billion deal premium
 
-A technology services company is acquired at \$68 per share, against an unaffected price of \$50 per share — a 36% premium. Total deal value: \$3.4 billion (50 million fully diluted shares × \$68). Unaffected equity value: \$2.5 billion.
+A technology services company is acquired at \$68 per share, against an unaffected price of \$50 per share: a 36% premium. Total deal value: \$3.4 billion (50 million fully diluted shares × \$68). Unaffected equity value: \$2.5 billion.
 
 **Total premium paid:** \$900 million
 
@@ -323,13 +323,13 @@ This decomposition, while approximate, is exactly what an acquirer's fairness op
 
 ## When Comps and DCF Disagree: What It Means
 
-The most analytically valuable moment in a valuation exercise is when your methods disagree. Agreement is easy — it confirms your assumptions. Disagreement forces you to think.
+The most analytically valuable moment in a valuation exercise is when your methods disagree. Agreement is easy: it confirms your assumptions. Disagreement forces you to think.
 
 ### The market-implied DCF check
 
 Here is the most powerful diagnostic: take the comps-implied enterprise value and work backward through your DCF to find the implied assumptions.
 
-If comps say EV = \$2,800M and your DCF (with a 10% WACC and 3% terminal growth) says EV = \$1,900M, the question is: what WACC, terminal growth, or margin assumption produces \$2,800M? Solve for it. You might find that a 2% terminal growth rate and 9% WACC gives you \$2,800M — which means the market is pricing in 1% more terminal growth and 1% lower cost of capital than you used. Is that reasonable? Maybe — if rates have been falling and the company's growth is genuinely durable.
+If comps say EV = \$2,800M and your DCF (with a 10% WACC and 3% terminal growth) says EV = \$1,900M, the question is: what WACC, terminal growth, or margin assumption produces \$2,800M? Solve for it. You might find that a 2% terminal growth rate and 9% WACC gives you \$2,800M, which means the market is pricing in 1% more terminal growth and 1% lower cost of capital than you used. Is that reasonable? Maybe, if rates have been falling and the company's growth is genuinely durable.
 
 Or you might find that to reconcile the two, the company would need a 40% EBITDA margin in perpetuity versus your modeled 25%. That is a 50-year business case for a company currently at 20% margins. A serious analyst would question that.
 
@@ -339,7 +339,7 @@ Or you might find that to reconcile the two, the company would need a 40% EBITDA
 
 **DCF lower than comps:** Your model is too conservative, or the market is pricing in an M&A premium (the stock is trading up because smart money thinks it will be acquired), or the sector is in a bubble.
 
-**Precedent transactions higher than comps:** This is the normal case — deal prices include control premium. If the gap is larger than 40%, investigate whether the precedent transactions you selected involved unusually large synergies or were struck during a different rate environment.
+**Precedent transactions higher than comps:** This is the normal case, deal prices include control premium. If the gap is larger than 40%, investigate whether the precedent transactions you selected involved unusually large synergies or were struck during a different rate environment.
 
 **Precedent transactions lower than comps:** Unusual, but can happen if the industry's public market multiple has expanded rapidly (2020–2021 tech) while deal multiples lagged. Acquirers were unwilling to pay comps-level prices.
 
@@ -349,19 +349,19 @@ Or you might find that to reconcile the two, the company would need a 40% EBITDA
 
 ### Misconception 1: "The median multiple is the right multiple for every company"
 
-Wrong. The median multiple represents the median *quality* company. A company at the 70th percentile of EBITDA margin, revenue growth, and ROIC should trade at the 70th percentile of EV/EBITDA multiples — which might be 30–40% above the median. Mechanically applying the median ignores the most important thing comps teach you: the cross-sectional relationship between fundamentals and multiples.
+Wrong. The median multiple represents the median *quality* company. A company at the 70th percentile of EBITDA margin, revenue growth, and ROIC should trade at the 70th percentile of EV/EBITDA multiples, which might be 30–40% above the median. Mechanically applying the median ignores the most important thing comps teach you: the cross-sectional relationship between fundamentals and multiples.
 
-### Misconception 2: "Precedent transactions are stale — use only trading comps"
+### Misconception 2: "Precedent transactions are stale, use only trading comps"
 
 This misunderstands what each tool is for. Precedent transactions answer a different question: what would an acquirer pay? If the purpose of your analysis is to advise a board on whether to accept a buyout offer, precedent transactions are more relevant than current trading comps. The "staleness" concern is addressed by excluding deals more than 5–7 years old and adjusting for the market cycle (the rate environment in 2015 versus 2022 changes multiples materially).
 
-### Misconception 3: "EV/EBITDA is universal — use it for every industry"
+### Misconception 3: "EV/EBITDA is universal, use it for every industry"
 
 Financial companies (banks, insurance, asset managers) are priced on P/E or P/Book because interest expense is a revenue item, not a cost. Real estate companies are priced on FFO multiples (Funds From Operations), not EBITDA. Commodity companies (oil producers, miners) are often priced on EV/2P reserves or EV/production. Always verify that the multiple you are using is standard for the industry in question. For more on [EV multiples construction](/blog/trading/asset-valuation/ev-multiples-evebitda-evsales-enterprise-value-valuation), see that dedicated post.
 
 ### Misconception 4: "A higher premium means the acquirer overpaid"
 
-Not necessarily. The correct test is whether the acquirer's synergies exceed the premium paid. If a strategic buyer pays 35% over the unaffected price and the synergy value is 50% of the target's unaffected enterprise value, the acquirer has created value for their shareholders even at the premium price. Value destruction occurs when the premium exceeds achievable synergies — which happens, but not as often as deal critics suggest.
+Not necessarily. The correct test is whether the acquirer's synergies exceed the premium paid. If a strategic buyer pays 35% over the unaffected price and the synergy value is 50% of the target's unaffected enterprise value, the acquirer has created value for their shareholders even at the premium price. Value destruction occurs when the premium exceeds achievable synergies, which happens, but not as often as deal critics suggest.
 
 ### Misconception 5: "You can use any 10 comparable companies you find"
 
@@ -373,9 +373,9 @@ The quality and defensibility of your comps set is entirely determined by how we
 
 ### Microsoft's acquisition of Activision Blizzard (2022)
 
-In January 2022, Microsoft announced a deal to acquire Activision Blizzard at \$95 per share — a 45% premium over Activision's unaffected 30-day trading price of approximately \$65. Enterprise value: roughly \$68.7 billion.
+In January 2022, Microsoft announced a deal to acquire Activision Blizzard at \$95 per share: a 45% premium over Activision's unaffected 30-day trading price of approximately \$65. Enterprise value: roughly \$68.7 billion.
 
-How did the comps look? Activision's pre-announcement EV/EBITDA was around 18–20x on forward estimates. The deal was struck at roughly 26–28x forward EBITDA — a multiple consistent with the precedent transactions in gaming M&A, including EA's acquisitions and Take-Two's acquisition of Zynga (also announced in early 2022 at a 64% premium).
+How did the comps look? Activision's pre-announcement EV/EBITDA was around 18–20x on forward estimates. The deal was struck at roughly 26–28x forward EBITDA: a multiple consistent with the precedent transactions in gaming M&A, including EA's acquisitions and Take-Two's acquisition of Zynga (also announced in early 2022 at a 64% premium).
 
 The football field for a banker advising Activision at the time would have shown:
 - Trading comps EV/EBITDA: \$55–70 per share
@@ -386,11 +386,11 @@ At \$95, Microsoft paid at the top of the precedent transactions range and above
 
 ### Facebook/Meta's acquisition of WhatsApp (2014)
 
-Meta paid \$19 billion for WhatsApp, which had essentially zero revenue and \$10.2 million in trailing revenue — making EV/Revenue equal to approximately 1,863x. Trading comps? There were none. The acquisition was priced entirely on strategic value (eliminating a competitive threat, acquiring 450 million users), with no traditional multiple justification. This illustrates the limits of relative valuation: when there are no true comparables, the method fails, and you are back to a DCF-of-optionality framework.
+Meta paid \$19 billion for WhatsApp, which had essentially zero revenue and \$10.2 million in trailing revenue: making EV/Revenue equal to approximately 1,863x. Trading comps? There were none. The acquisition was priced entirely on strategic value (eliminating a competitive threat, acquiring 450 million users), with no traditional multiple justification. This illustrates the limits of relative valuation: when there are no true comparables, the method fails, and you are back to a DCF-of-optionality framework.
 
 ### VN-Index M&A: Techcombank / HDBank sector
 
-In Vietnam's banking sector, M&A control premiums have historically been lower (15–25%) than the US median, for structural reasons: concentrated ownership, regulatory constraints on foreign acquirers (foreign ownership cap of 30%), and thinner public float reduce competitive auction dynamics. This is why the sector-specific and geography-specific calibration of the control premium matters — the US empirical distribution does not translate directly to every market. For [P/E valuation mechanics](/blog/trading/asset-valuation/price-to-earnings-ratio-pe-valuation-stocks) in market-context, see that post in this series.
+In Vietnam's banking sector, M&A control premiums have historically been lower (15–25%) than the US median, for structural reasons: concentrated ownership, regulatory constraints on foreign acquirers (foreign ownership cap of 30%), and thinner public float reduce competitive auction dynamics. This is why the sector-specific and geography-specific calibration of the control premium matters: the US empirical distribution does not translate directly to every market. For [P/E valuation mechanics](/blog/trading/asset-valuation/price-to-earnings-ratio-pe-valuation-stocks) in market-context, see that post in this series.
 
 ---
 
@@ -437,7 +437,7 @@ Notice the disconnect: EV/EBITDA implies \$42–51, while P/E implies \$62–78.
 
 ## Further Reading and Cross-Links
 
-The comps methodology sits at the heart of how [EV multiples are constructed and decomposed](/blog/trading/asset-valuation/ev-multiples-evebitda-evsales-enterprise-value-valuation) — that post goes deeper on enterprise value mechanics and the bridge between equity value and EV that underpins every multiple in this table.
+The comps methodology sits at the heart of how [EV multiples are constructed and decomposed](/blog/trading/asset-valuation/ev-multiples-evebitda-evsales-enterprise-value-valuation), that post goes deeper on enterprise value mechanics and the bridge between equity value and EV that underpins every multiple in this table.
 
 For the intrinsic anchor that comps should be reconciled against, [DCF practice: valuing VCB, Hoa Phat, and Apple](/blog/trading/asset-valuation/dcf-practice-valuing-vcb-hoa-phat-apple) walks through full DCF builds in real-world settings.
 
@@ -445,7 +445,7 @@ For the intrinsic anchor that comps should be reconciled against, [DCF practice:
 
 For the equity research practitioner workflow in which comps fit (alongside credit analysis, management meetings, and channel checks), [comparable company analysis in equity research](/blog/trading/asset-valuation/comparable-company-analysis-precedent-transactions-comps) covers the workflow context.
 
-**On the discount rate underpinning all multiples:** Every EV/EBITDA multiple embeds an implicit WACC. When the Fed raises rates, WACCs rise, and multiples compress — mechanically, not mysteriously. Understanding [WACC and cost of capital](/blog/trading?subcategory=equity-research) is the prerequisite for understanding why sector multiples contracted 30–40% from 2021 to 2023 as rates rose.
+**On the discount rate underpinning all multiples:** Every EV/EBITDA multiple embeds an implicit WACC. When the Fed raises rates, WACCs rise, and multiples compress: mechanically, not mysteriously. Understanding [WACC and cost of capital](/blog/trading?subcategory=equity-research) is the prerequisite for understanding why sector multiples contracted 30–40% from 2021 to 2023 as rates rose.
 
 ---
 
@@ -460,7 +460,7 @@ When you sit down to build a comps analysis, run through this sequence:
 5. **Look at the cross-sectional relationship.** Build the EV/EBITDA vs. margin scatter. Understand where your target sits.
 6. **Run precedent transactions separately.** Select 8–15 deals from the past 5–7 years. Use unaffected prices for premium calculation.
 7. **Build the football field.** Overlay DCF, comps (multiple methods), and precedent transactions.
-8. **Explain the divergences.** The analytical value is not in the ranges — it is in the story of why they agree or disagree.
+8. **Explain the divergences.** The analytical value is not in the ranges: it is in the story of why they agree or disagree.
 9. **Triangulate to a point estimate.** Boards make decisions, not ranges. Weight the methods by their reliability for this specific situation.
 
-Relative valuation is the market's verdict. Treat it with respect — and equal doses of critical judgment.
+Relative valuation is the market's verdict. Treat it with respect, and equal doses of critical judgment.

@@ -29,7 +29,7 @@ A yield curve is a function that maps maturity to a discount factor. Every fixed
 
 ![The yield curve: the most important object in fixed income](/imgs/blogs/yield-curve-modeling-1.png)
 
-The diagram above is the mental model. Inputs are liquid market quotes — overnight rates, deposits, futures, FRAs, par swap rates, and basis spreads. The curve is a strictly decreasing, smooth, arbitrage-free function calibrated to those quotes. Outputs are discount factors at any maturity, zero rates, par rates, forward rates, and risk metrics (DV01, key-rate DV01, twist exposure). The curve is the canonical market-data object that every pricing engine consumes.
+The diagram above is the mental model. Inputs are liquid market quotes: overnight rates, deposits, futures, FRAs, par swap rates, and basis spreads. The curve is a strictly decreasing, smooth, arbitrage-free function calibrated to those quotes. Outputs are discount factors at any maturity, zero rates, par rates, forward rates, and risk metrics (DV01, key-rate DV01, twist exposure). The curve is the canonical market-data object that every pricing engine consumes.
 
 This article is the deep dive on yield curve modeling for a senior quant or staff-level engineer. It covers the multi-curve framework that replaced single-curve pricing post-2008, bootstrapping from market quotes, parametric fitting (Nelson-Siegel-Svensson), spline-based fitting, the relationship between zero rates / par rates / forward rates, multi-currency basis curves, the SOFR transition, real curves for inflation-linked products, validation, production architecture, and a long catalog of named failure modes.
 
@@ -50,7 +50,7 @@ A curve constructed by estimating a smooth function on yesterday's yields is *no
 
 Senior quants are precise about this distinction. A junior who says "we fit the yield curve to the data" is using imprecise language; the senior asks "calibrated to what instruments, with what bootstrap order, under what discount-curve choice." The questions reveal the rigorous engineering.
 
-This calibration mindset has architectural consequences. A curve service publishes the curve along with the *calibration set* — the list of instruments and quotes that fed it. Consumers can verify that the published curve reproduces those quotes; if not, the curve is broken. The calibration set is the "audit trail" of the curve.
+This calibration mindset has architectural consequences. A curve service publishes the curve along with the *calibration set*: the list of instruments and quotes that fed it. Consumers can verify that the published curve reproduces those quotes; if not, the curve is broken. The calibration set is the "audit trail" of the curve.
 
 ### 1.1 The historical evolution of curve construction
 
@@ -136,7 +136,7 @@ def price_swap_multi_curve(
     return pv_float - pv_fixed  # PV from receive-fixed perspective
 ```
 
-The function takes two curves — discount and forward — both as inputs. A single-curve implementation would conflate them; the multi-curve implementation separates them.
+The function takes two curves, discount and forward, both as inputs. A single-curve implementation would conflate them; the multi-curve implementation separates them.
 
 ## 3. Bootstrap: building from short to long
 
@@ -219,7 +219,7 @@ When two instruments give conflicting information, the conflict signals either a
 
 ## 4. Nelson-Siegel-Svensson
 
-For applications that need a smooth, parametric curve with few parameters — central-bank publications, regulatory reporting, academic research — Nelson-Siegel-Svensson (NSS) is the standard. The functional form:
+For applications that need a smooth, parametric curve with few parameters (central-bank publications, regulatory reporting, academic research) Nelson-Siegel-Svensson (NSS) is the standard. The functional form:
 
 $$
 r(t) = \beta_0 + \beta_1 \frac{1 - e^{-t/\tau_1}}{t/\tau_1} + \beta_2 \left(\frac{1 - e^{-t/\tau_1}}{t/\tau_1} - e^{-t/\tau_1}\right) + \beta_3 \left(\frac{1 - e^{-t/\tau_2}}{t/\tau_2} - e^{-t/\tau_2}\right).
@@ -407,7 +407,7 @@ A foundational debate: are forward rates *predictions* of future short rates, or
 
 The pure expectations hypothesis (Fisher 1896) says forward rates equal expected future short rates: $f(t_1, t_2) = \mathbb{E}[r(t_1, t_2)]$. Under this hypothesis, a long-dated yield is just the average of expected short rates.
 
-Empirically, the pure expectations hypothesis is rejected. Forward rates are persistently above realised future short rates. The difference is the *term premium* — the compensation investors demand for bearing duration risk.
+Empirically, the pure expectations hypothesis is rejected. Forward rates are persistently above realised future short rates. The difference is the *term premium*: the compensation investors demand for bearing duration risk.
 
 Term premium decomposition (Joslin-Singleton-Zhu 2011, Adrian-Crump-Moench 2013) is an active research area. The Federal Reserve publishes daily estimates of term premium in the SF Fed's data products. As of 2024-2026, the 10-year term premium fluctuates between -50 bp and +100 bp depending on regime.
 
@@ -1054,7 +1054,7 @@ Politically weak curve teams produce curves that nobody trusts; their products r
 
 The yield curve is the foundational object of fixed income. A junior fixed-income engineer learns the math (bootstrap, splines, NSS); a senior one learns the engineering (multi-curve framework, validation, audit, stability monitoring); a principal quant integrates the curve service into the entire fixed-income business.
 
-The math is largely solved. The engineering is the daily craft. Doing it well — accurate, auditable, stable across regimes — is the silent competence that powers trillions of dollars of fixed-income business.
+The math is largely solved. The engineering is the daily craft. Doing it well (accurate, auditable, stable across regimes) is the silent competence that powers trillions of dollars of fixed-income business.
 
 #### 20.8 Connecting curves to derivatives pricing: a concrete map
 
@@ -1115,7 +1115,7 @@ Post-2008, regulators play a more direct role in curve methodology than before. 
 
 **Basel III leverage ratio.** Total notional matters as much as risk-weighted exposure. Bank curve teams must support attribution of total notional across the curve infrastructure.
 
-A senior curve architect at a regulated bank spends a meaningful fraction of time on regulatory compliance — perhaps 20-30% — vs pure quantitative work. The unsexy compliance investment is mandatory; banks that under-invest face regulatory enforcement actions.
+A senior curve architect at a regulated bank spends a meaningful fraction of time on regulatory compliance, perhaps 20-30%, vs pure quantitative work. The unsexy compliance investment is mandatory; banks that under-invest face regulatory enforcement actions.
 
 ### 21.1 Curve infrastructure as competitive moat
 
@@ -1131,16 +1131,16 @@ For this reason, top-tier curve teams at JPMorgan, Goldman Sachs, Citi, and Morg
 
 For a fintech or hedge fund considering the build-vs-buy question: if your business model depends on tighter pricing than competitors, build. If you are a price-taker (e.g., a pension fund executing trades through dealers), buy is fine.
 
-A few final reflections worth holding in mind. Yield curves are *the most observed and the most studied* construct in finance, with literally hundreds of academic papers per year. Yet despite that scrutiny, curve construction at major banks remains a craft as much as a science. The math is in textbooks; the wisdom — what to do when a quote is stale, when to switch parameterisations, when to escalate to a human — is in the senior engineers' heads.
+A few final reflections worth holding in mind. Yield curves are *the most observed and the most studied* construct in finance, with literally hundreds of academic papers per year. Yet despite that scrutiny, curve construction at major banks remains a craft as much as a science. The math is in textbooks; the wisdom (what to do when a quote is stale, when to switch parameterisations, when to escalate to a human) is in the senior engineers' heads.
 
 This wisdom takes time to acquire. A junior quant learns to bootstrap a curve in a week; understanding when the bootstrap is misleading takes a year. Recognising regime shifts before they show up in P&L takes 5+ years. The career arc of a curve engineer is one of accumulating intuition that compounds over time.
 
-Curves are also a *humble* discipline. The math is not glamorous. The output is a single deterministic function. Senior curve engineers are the silent professionals — their work is invisible when correct and obvious when wrong. They are the foundation that lets the trading floor function.
+Curves are also a *humble* discipline. The math is not glamorous. The output is a single deterministic function. Senior curve engineers are the silent professionals: their work is invisible when correct and obvious when wrong. They are the foundation that lets the trading floor function.
 
 I have come to think of the curve service as the *cardiovascular system* of a fixed-income firm: invisible in good health, immediately critical when stressed. Investing in curve infrastructure is investing in the firm's resilience to market regimes that have not yet happened. The 2008 multi-curve retrofit was an emergency response; the 2023 SOFR transition was somewhat planned; the next regime shift will demand its own retrofit. A firm with mature curve engineering will adapt; one without will struggle.
 
-A senior fixed-income quant's view of curve work: it is the closest thing finance has to plumbing. The pipes carry pressure; when they leak, everyone notices. When they work, nobody thinks about them. The job of the senior engineer is to keep the pipes flowing through every regime — through hike cycles, hike pauses, QE, QT, currency unions, currency unions breaking up, and whatever comes next. The reward is the quiet competence of having built infrastructure that everyone else takes for granted.
+A senior fixed-income quant's view of curve work: it is the closest thing finance has to plumbing. The pipes carry pressure; when they leak, everyone notices. When they work, nobody thinks about them. The job of the senior engineer is to keep the pipes flowing through every regime: through hike cycles, hike pauses, QE, QT, currency unions, currency unions breaking up, and whatever comes next. The reward is the quiet competence of having built infrastructure that everyone else takes for granted.
 
 A final practical note for engineers entering the field: spend time with the daily curve. Print it out, plot it on paper if you have to, examine the shape, ask why the 7y is above the 10y today, why the 30y forward is below the 5y forward, why the OIS-SOFR basis spiked last quarter-end. The curve is a daily window into the global rates market. Reading it fluently is the senior fixed-income quant's superpower.
 
-The remaining articles in this series — [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on each layer that lives on top of the curve.
+The remaining articles in this series ([Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets)) go deeper on each layer that lives on top of the curve.

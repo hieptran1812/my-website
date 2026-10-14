@@ -12,7 +12,7 @@ readTime: 44
 ---
 
 > [!important]
-> **TL;DR** — The bond market is bigger than the stock market and sets the cost of credit for almost everyone, so the firm that is the biggest, best-informed buyer in it becomes powerful; PIMCO, under Bill Gross, was that firm.
+> **TL;DR**: The bond market is bigger than the stock market and sets the cost of credit for almost everyone, so the firm that is the biggest, best-informed buyer in it becomes powerful; PIMCO, under Bill Gross, was that firm.
 >
 > - A bond is just a tradable loan: you lend a fixed amount, collect fixed interest, and get your money back at the end. Its price and its yield always move in opposite directions.
 > - The global bond market is roughly \$130 trillion, larger than the roughly \$110 trillion of all the world's stocks combined (both figures approximate, around 2024).

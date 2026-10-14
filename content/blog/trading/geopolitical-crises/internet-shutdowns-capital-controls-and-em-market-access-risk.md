@@ -11,17 +11,17 @@ featured: true
 readTime: 43
 ---
 
-> **TL;DR** — Internet shutdowns are not just a human-rights story. They are a market-access shock that reprices FX in parallel markets within 48 hours. Iran's November 2019 fuel-protest blackout (5 days, 38 million users cut) pushed the dollar black-market premium +15% against the official rate almost overnight. Myanmar's 2021 coup halted its stock exchange for 90 days and collapsed the kyat from 1,330 to 2,600 per dollar on the street (-49%). Russia's Sovereign Internet Law, signed in 2019, gave the Kremlin the infrastructure to isolate RuNet from the global internet — and in February 2022 Moscow paired that network kill-switch with mandatory 80% FX export conversion, a ban on foreign security purchases, and a \$10,000 cash withdrawal cap. The institutional solution — and the only liquid instrument that survives all four layers of access risk — is the Non-Deliverable Forward (NDF), an offshore USD-settled contract that circumvents every layer of government control. This post explains the mechanism, the math, and the playbook.
+> **TL;DR**: Internet shutdowns are not just a human-rights story. They are a market-access shock that reprices FX in parallel markets within 48 hours. Iran's November 2019 fuel-protest blackout (5 days, 38 million users cut) pushed the dollar black-market premium +15% against the official rate almost overnight. Myanmar's 2021 coup halted its stock exchange for 90 days and collapsed the kyat from 1,330 to 2,600 per dollar on the street (-49%). Russia's Sovereign Internet Law, signed in 2019, gave the Kremlin the infrastructure to isolate RuNet from the global internet, and in February 2022 Moscow paired that network kill-switch with mandatory 80% FX export conversion, a ban on foreign security purchases, and a \$10,000 cash withdrawal cap. The institutional solution (and the only liquid instrument that survives all four layers of access risk) is the Non-Deliverable Forward (NDF), an offshore USD-settled contract that circumvents every layer of government control. This post explains the mechanism, the math, and the playbook.
 
 ## Foundations: How Market Access Becomes a Geopolitical Weapon
 
-Markets are information systems. Prices work because buyers and sellers can communicate: submit orders, receive confirmations, transfer ownership, and move cash across borders. Every one of those steps requires infrastructure — telecommunications, banking rails, legal enforceability of contracts — and every one of those layers can be cut by a sovereign government.
+Markets are information systems. Prices work because buyers and sellers can communicate: submit orders, receive confirmations, transfer ownership, and move cash across borders. Every one of those steps requires infrastructure (telecommunications, banking rails, legal enforceability of contracts) and every one of those layers can be cut by a sovereign government.
 
-This is not a theoretical risk. It is a documented, repeatable event with measurable market consequences. The Access Now KeepItOn coalition tracked 187 internet shutdowns globally in 2022, a record high. The countries most active in deploying network blackouts — India (84 shutdowns in 2022, mostly in Kashmir), Iran, Russia, Ethiopia, Cuba, and Myanmar — share a common feature: they also have active currency controls or capital account restrictions. That overlap is not coincidental. Internet shutdowns and capital controls are complements in the authoritarian toolkit. You shut the information channel at the same time you lock the money channel, because if citizens can still see the dollar rate on a foreign server, they will route around your official fiction.
+This is not a theoretical risk. It is a documented, repeatable event with measurable market consequences. The Access Now KeepItOn coalition tracked 187 internet shutdowns globally in 2022, a record high. The countries most active in deploying network blackouts (India (84 shutdowns in 2022, mostly in Kashmir), Iran, Russia, Ethiopia, Cuba, and Myanmar) share a common feature: they also have active currency controls or capital account restrictions. That overlap is not coincidental. Internet shutdowns and capital controls are complements in the authoritarian toolkit. You shut the information channel at the same time you lock the money channel, because if citizens can still see the dollar rate on a foreign server, they will route around your official fiction.
 
 ![Shutdown-to-Market Transmission Chain showing political trigger through NDF spread spike](/imgs/blogs/internet-shutdowns-capital-controls-and-em-market-access-risk-1.png)
 
-The figure above shows the full transmission chain. A political trigger — a protest, a coup, a war — leads within hours to an internet cut. Within one to two days, capital flight signals emerge in informal money markets: hawala networks, border cash exchanges, black-market currency desks. These informal pricing signals produce the FX black-market premium, which itself feeds into the NDF market as offshore participants price in the access risk. Finally, over a period of weeks, index providers like MSCI and FTSE Russell assess whether the country's market meets their access criteria — and can downgrade or remove it entirely.
+The figure above shows the full transmission chain. A political trigger (a protest, a coup, a war) leads within hours to an internet cut. Within one to two days, capital flight signals emerge in informal money markets: hawala networks, border cash exchanges, black-market currency desks. These informal pricing signals produce the FX black-market premium, which itself feeds into the NDF market as offshore participants price in the access risk. Finally, over a period of weeks, index providers like MSCI and FTSE Russell assess whether the country's market meets their access criteria, and can downgrade or remove it entirely.
 
 Understanding this chain is the foundation. Once you see the sequence, you can anticipate where the dislocations will appear, which instruments will price the risk, and how to position.
 
@@ -29,13 +29,13 @@ Understanding this chain is the foundation. Once you see the sequence, you can a
 
 A capital control is a legal restriction on the movement of money across a country's borders. Controls exist on a spectrum from mild (reporting requirements above a threshold) to severe (mandatory conversion of export earnings, bans on buying foreign securities, closure of foreign-currency bank accounts). Most EM countries have some form of capital control on the books even during peaceful periods; what changes during a crisis is how tightly those controls are enforced and how many new restrictions are layered on.
 
-Controls serve two purposes from the government's perspective. First, they slow the depletion of foreign-exchange reserves — if citizens cannot legally buy dollars, the central bank does not have to sell them to maintain the peg. Second, they prevent the domestic price level from instantly adjusting to reflect the government's true creditworthiness. A country with 200% inflation and a fixed official exchange rate can sustain that fiction so long as no one is allowed to trade at the market-clearing rate. Internet shutdowns reinforce this by making it harder for citizens to see what the real rate is.
+Controls serve two purposes from the government's perspective. First, they slow the depletion of foreign-exchange reserves, if citizens cannot legally buy dollars, the central bank does not have to sell them to maintain the peg. Second, they prevent the domestic price level from instantly adjusting to reflect the government's true creditworthiness. A country with 200% inflation and a fixed official exchange rate can sustain that fiction so long as no one is allowed to trade at the market-clearing rate. Internet shutdowns reinforce this by making it harder for citizens to see what the real rate is.
 
 ### What Is a Non-Deliverable Forward?
 
-An NDF is an offshore FX forward contract settled in a hard currency (overwhelmingly USD) rather than the restricted local currency. You agree today on a forward rate — say, CNY 7.40 per USD in 90 days. At maturity, whoever was wrong pays the winner the net USD difference. No renminbi ever changes hands. No onshore bank account, no PBOC approval, no capital control restriction applies.
+An NDF is an offshore FX forward contract settled in a hard currency (overwhelmingly USD) rather than the restricted local currency. You agree today on a forward rate: say, CNY 7.40 per USD in 90 days. At maturity, whoever was wrong pays the winner the net USD difference. No renminbi ever changes hands. No onshore bank account, no PBOC approval, no capital control restriction applies.
 
-The BIS Triennial Survey 2022 put the daily global NDF market at approximately \$250 billion in notional, with the most actively traded currencies being INR, BRL, IDR, KRW, TWD, and CNY. For currencies under severe access risk — the rial, the kyat, the ruble during sanctions — the NDF is frequently the only liquid price-discovery mechanism available to international participants.
+The BIS Triennial Survey 2022 put the daily global NDF market at approximately \$250 billion in notional, with the most actively traded currencies being INR, BRL, IDR, KRW, TWD, and CNY. For currencies under severe access risk (the rial, the kyat, the ruble during sanctions) the NDF is frequently the only liquid price-discovery mechanism available to international participants.
 
 The spread between the NDF-implied rate and the official onshore rate is what traders call the **political VPN premium**: the market's price for access risk. When Iran goes dark, that spread explodes. When Myanmar's coup began, the NDF (to the extent one existed for the kyat) would have reflected the black-market rate rather than the central bank's fiction. The premium is not irrational; it is an accurate measure of the real cost of inaccessibility.
 
@@ -45,9 +45,9 @@ To understand how market access weaponization works in practice, it is worth exa
 
 ### Iran: The Most Practiced Shutdown Operator
 
-Iran has shut down the internet more frequently, and more precisely, than any other state with a significant domestic financial market. The most instructive event is November 2019. On November 15, the government announced a sudden 50-300% increase in fuel prices, triggering nationwide protests within hours. Within 24 hours, the authorities deployed what became known as SIAM — the Iranian System for Managing and Controlling the Internet — to execute a near-complete national blackout. For five days, roughly 38 million users were cut from the global internet. Domestic intranet services (banks, government services) remained operational on the national network, but access to global markets, currency information, foreign news, and VPN services was effectively blocked.
+Iran has shut down the internet more frequently, and more precisely, than any other state with a significant domestic financial market. The most instructive event is November 2019. On November 15, the government announced a sudden 50-300% increase in fuel prices, triggering nationwide protests within hours. Within 24 hours, the authorities deployed what became known as SIAM, the Iranian System for Managing and Controlling the Internet, to execute a near-complete national blackout. For five days, roughly 38 million users were cut from the global internet. Domestic intranet services (banks, government services) remained operational on the national network, but access to global markets, currency information, foreign news, and VPN services was effectively blocked.
 
-The financial response was immediate. Iran's currency, the rial, had been in multi-year decline since 2018 US sanctions reimposition, with the official rate increasingly divergent from the parallel market. During the 48 hours after the shutdown, the dollar black-market rate jumped approximately 15% against the official rate. The mechanism is straightforward: when information channels are cut, citizens who want to convert savings to hard currency cannot compare prices, cannot reach informal currency dealers via encrypted messaging, and cannot see where the rate is. The resulting panic — buy dollars at any price before prices become truly unknowable — produced the spike. VPN traffic, measured by Cloudflare, surged over 3,000% as citizens attempted to circumvent the shutdown.
+The financial response was immediate. Iran's currency, the rial, had been in multi-year decline since 2018 US sanctions reimposition, with the official rate increasingly divergent from the parallel market. During the 48 hours after the shutdown, the dollar black-market rate jumped approximately 15% against the official rate. The mechanism is straightforward: when information channels are cut, citizens who want to convert savings to hard currency cannot compare prices, cannot reach informal currency dealers via encrypted messaging, and cannot see where the rate is. The resulting panic, buy dollars at any price before prices become truly unknowable, produced the spike. VPN traffic, measured by Cloudflare, surged over 3,000% as citizens attempted to circumvent the shutdown.
 
 Iran has repeated this pattern in subsequent protest cycles (September 2022, Mahsa Amini protests), each time pairing network shutdown with attempts to freeze informal currency market pricing. The pattern is now sufficiently established that institutional traders watching Iran monitor Netblocks (a real-time internet shutdown tracker) as a leading indicator for the parallel-rate move.
 
@@ -55,15 +55,15 @@ Iran has repeated this pattern in subsequent protest cycles (September 2022, Mah
 
 Russia's approach is architecturally distinct from Iran's. Rather than deploying emergency kill switches ad hoc, Russia built the legal and technical infrastructure for network isolation in advance. The Sovereign Internet Law (Federal Law No. 90-FZ), signed by President Putin on May 1, 2019, required all Russian ISPs to install deep packet inspection (DPI) hardware at internet exchange points, reroute all traffic through state-controlled exchanges, and demonstrate the ability to isolate the Russian network (RuNet) from the global internet entirely.
 
-Russia conducted a series of public isolation tests in 2019 and 2021, simulating what a fully segmented RuNet would look like. The stated justification was cybersecurity — protecting Russian infrastructure from a hypothetical Western cyberattack that severed Russia from global internet routing. The more accurate interpretation is that it gave Roskomnadzor (the state media and telecom regulator) an on/off switch for Russian participation in global information markets.
+Russia conducted a series of public isolation tests in 2019 and 2021, simulating what a fully segmented RuNet would look like. The stated justification was cybersecurity: protecting Russian infrastructure from a hypothetical Western cyberattack that severed Russia from global internet routing. The more accurate interpretation is that it gave Roskomnadzor (the state media and telecom regulator) an on/off switch for Russian participation in global information markets.
 
-When Russia invaded Ukraine on February 24, 2022, the RuNet infrastructure was not used to create a full blackout — Russia's population of 144 million was too internet-dependent for a complete cut to be politically manageable internally. Instead, the authorities used DPI-based selective blocking. Twitter was slowed to unusability (throttled, not blocked) within days of the invasion. Instagram was fully blocked within two weeks, with over 150,000 blocking orders issued by Roskomnadzor in 2022 alone. International financial data terminals were progressively restricted.
+When Russia invaded Ukraine on February 24, 2022, the RuNet infrastructure was not used to create a full blackout: Russia's population of 144 million was too internet-dependent for a complete cut to be politically manageable internally. Instead, the authorities used DPI-based selective blocking. Twitter was slowed to unusability (throttled, not blocked) within days of the invasion. Instagram was fully blocked within two weeks, with over 150,000 blocking orders issued by Roskomnadzor in 2022 alone. International financial data terminals were progressively restricted.
 
-What made Russia unique was the combination of network restriction with the most comprehensive set of hard capital controls deployed by a G20 country in the modern era. On February 28, 2022, Russia announced: mandatory conversion of 80% of foreign currency export earnings within three days; a ban on Russian residents transferring foreign currency abroad; a prohibition on foreign investors selling Russian securities (later moderated); a cap of \$10,000 on cash withdrawals from foreign-currency accounts; and suspension of short sales in equities. The ruble fell from 79.3 per dollar before the invasion to a peak of approximately 116 per dollar in early March 2022 — a 47% devaluation. By May 2022, the mandatory export conversion rule and oil revenue windfall had pushed the ruble back to approximately 67 per dollar, making it one of the fastest large-currency recoveries on record. The recovery was not a market phenomenon; it was the result of forced dollar supply from exporters.
+What made Russia unique was the combination of network restriction with the most comprehensive set of hard capital controls deployed by a G20 country in the modern era. On February 28, 2022, Russia announced: mandatory conversion of 80% of foreign currency export earnings within three days; a ban on Russian residents transferring foreign currency abroad; a prohibition on foreign investors selling Russian securities (later moderated); a cap of \$10,000 on cash withdrawals from foreign-currency accounts; and suspension of short sales in equities. The ruble fell from 79.3 per dollar before the invasion to a peak of approximately 116 per dollar in early March 2022: a 47% devaluation. By May 2022, the mandatory export conversion rule and oil revenue windfall had pushed the ruble back to approximately 67 per dollar, making it one of the fastest large-currency recoveries on record. The recovery was not a market phenomenon; it was the result of forced dollar supply from exporters.
 
 ![USD/TRY exchange rate 2015-2025 with capital control events annotated](/imgs/blogs/internet-shutdowns-capital-controls-and-em-market-access-risk-2.png)
 
-The Turkish lira chart illustrates a different but related phenomenon: what happens when a country with significant capital account openness repeatedly cycles through currency crises. The 2018 peak of 7.24 TRY/USD, the 2021 collapse to 18.0, and the 2023 post-election jump to 25.4 each represent moments where the gap between the central bank's desired rate and the market-clearing rate became too large to sustain without intervention. Turkey is not a shutdown country — it is an access-control country, using reserve depletion and swap lines rather than network cuts. The pattern of instability driven by the tension between official and market rates is identical.
+The Turkish lira chart illustrates a different but related phenomenon: what happens when a country with significant capital account openness repeatedly cycles through currency crises. The 2018 peak of 7.24 TRY/USD, the 2021 collapse to 18.0, and the 2023 post-election jump to 25.4 each represent moments where the gap between the central bank's desired rate and the market-clearing rate became too large to sustain without intervention. Turkey is not a shutdown country: it is an access-control country, using reserve depletion and swap lines rather than network cuts. The pattern of instability driven by the tension between official and market rates is identical.
 
 ### Myanmar: The Coup as Full Market-Access Event
 
@@ -71,15 +71,15 @@ Myanmar's military coup of February 1, 2021 is the clearest modern example of a 
 
 The Yangon Stock Exchange (YSX), Myanmar's three-year-old stock market, halted trading on February 1 and did not resume for 90 days. At the time of the halt, there were only a handful of listed companies with limited daily volume, but the symbolism was total: the only formal capital market in the country was closed.
 
-The kyat, which had traded at approximately 1,330 per dollar in the days before the coup, rapidly devalued. The official Central Bank of Myanmar rate moved to approximately 1,800 per dollar over the following year — a 26% official devaluation. But the informal/black market rate reached 2,600 per dollar, representing a 49% devaluation from pre-coup levels and a 44% premium over the official rate at the same time. Foreign direct investment in Myanmar fell 60% in 2021. GDP contracted approximately 18%.
+The kyat, which had traded at approximately 1,330 per dollar in the days before the coup, rapidly devalued. The official Central Bank of Myanmar rate moved to approximately 1,800 per dollar over the following year: a 26% official devaluation. But the informal/black market rate reached 2,600 per dollar, representing a 49% devaluation from pre-coup levels and a 44% premium over the official rate at the same time. Foreign direct investment in Myanmar fell 60% in 2021. GDP contracted approximately 18%.
 
 ![Major internet shutdown events 2019-2023 with FX impact markers](/imgs/blogs/internet-shutdowns-capital-controls-and-em-market-access-risk-3.png)
 
 ### Ethiopia: The Invisible Shutdown
 
-Ethiopia's Tigray conflict produced one of the longest and most complete internet shutdowns of the modern era: over 16 months of near-total communications blackout in the Tigray region, beginning in November 2020. The financial consequences for Ethiopia were less immediately legible in traded markets — the birr is not widely traded offshore, and Ethiopia does not have a significant capital market. But the broad dynamics were visible: informal dollar markets in Addis Ababa widened their spread against the official rate during the conflict period, the International Monetary Fund repeatedly flagged Ethiopia's parallel-market premium as a macroeconomic concern, and foreign-currency reserves fell to critically low levels as the war disrupted export revenues and informal capital flight accelerated.
+Ethiopia's Tigray conflict produced one of the longest and most complete internet shutdowns of the modern era: over 16 months of near-total communications blackout in the Tigray region, beginning in November 2020. The financial consequences for Ethiopia were less immediately legible in traded markets: the birr is not widely traded offshore, and Ethiopia does not have a significant capital market. But the broad dynamics were visible: informal dollar markets in Addis Ababa widened their spread against the official rate during the conflict period, the International Monetary Fund repeatedly flagged Ethiopia's parallel-market premium as a macroeconomic concern, and foreign-currency reserves fell to critically low levels as the war disrupted export revenues and informal capital flight accelerated.
 
-The Ethiopia case illustrates a crucial point about internet shutdowns and market access risk: the magnitude of the financial impact depends heavily on whether the affected country is already integrated into global capital markets. A country with no NDF market, no foreign-equity investors, and no offshore bond market can sustain a shutdown with less immediate global financial reaction — but that does not mean there are no financial consequences. It means those consequences are expressed domestically (hyperinflation, parallel-market premiums, collapse of formal credit) rather than in offshore instruments.
+The Ethiopia case illustrates a crucial point about internet shutdowns and market access risk: the magnitude of the financial impact depends heavily on whether the affected country is already integrated into global capital markets. A country with no NDF market, no foreign-equity investors, and no offshore bond market can sustain a shutdown with less immediate global financial reaction, but that does not mean there are no financial consequences. It means those consequences are expressed domestically (hyperinflation, parallel-market premiums, collapse of formal credit) rather than in offshore instruments.
 
 ## The Financial Channels
 
@@ -102,9 +102,9 @@ The historical data is consistent: every multi-day shutdown in a country with pr
 
 ### Channel 2: NDF Market Re-pricing
 
-For countries with active NDF markets, the offshore price-discovery mechanism is the first place where institutional investors express access-risk repricing. The NDF does not require any onshore market access, onshore bank account, or government permission. Two counterparties — typically banks or funds in London, Singapore, or New York — agree on a forward rate settled in USD. The only inputs required are a public reference rate (usually a central bank fixing) and counterparty credit.
+For countries with active NDF markets, the offshore price-discovery mechanism is the first place where institutional investors express access-risk repricing. The NDF does not require any onshore market access, onshore bank account, or government permission. Two counterparties (typically banks or funds in London, Singapore, or New York) agree on a forward rate settled in USD. The only inputs required are a public reference rate (usually a central bank fixing) and counterparty credit.
 
-When market access risk rises — due to a coup, sanctions announcement, or shutdown signal — NDF traders reprice the forward rate to reflect:
+When market access risk rises (due to a coup, sanctions announcement, or shutdown signal) NDF traders reprice the forward rate to reflect:
 - The probability that the official fixing rate will be moved by government decree
 - The cost of capital tied up in a position that cannot be unwound onshore
 - A liquidity premium for the reduced number of counterparties willing to take the other side
@@ -114,23 +114,23 @@ For Iranian rial NDFs during periods of heightened sanctions and shutdown risk, 
 
 ### Channel 3: Equity Market Halt and Index Exclusion
 
-When a country's stock exchange closes — as Myanmar's YSX did for 90 days — or when a government restricts foreign investors from selling their existing equity positions (as Russia did briefly in February 2022), index providers face a choice: keep the country in the index at its most recent prices (creating a fictional valuation) or remove it.
+When a country's stock exchange closes, as Myanmar's YSX did for 90 days, or when a government restricts foreign investors from selling their existing equity positions (as Russia did briefly in February 2022), index providers face a choice: keep the country in the index at its most recent prices (creating a fictional valuation) or remove it.
 
-MSCI moved with exceptional speed on Russia. On March 2, 2022, MSCI announced a consultation to remove Russia from all MSCI indices. By March 9, Russia's weight in the MSCI Emerging Markets Index — which had stood at approximately 3.2% in January 2022, representing roughly \$150 billion in tracking capital — was set to zero. The removal became effective March 9, 2022, eight days after the announcement.
+MSCI moved with exceptional speed on Russia. On March 2, 2022, MSCI announced a consultation to remove Russia from all MSCI indices. By March 9, Russia's weight in the MSCI Emerging Markets Index (which had stood at approximately 3.2% in January 2022, representing roughly \$150 billion in tracking capital) was set to zero. The removal became effective March 9, 2022, eight days after the announcement.
 
-The market impact was concentrated in passive ETFs and index funds tracking MSCI EM. The forced selling — estimated at \$1-3 billion across the largest passive vehicles — had to happen into a market where Russia's own exchanges were restricting foreign selling. The resolution for most passive managers was to write their Russia holdings to zero rather than attempt to sell at a market-clearing price that did not exist.
+The market impact was concentrated in passive ETFs and index funds tracking MSCI EM. The forced selling, estimated at \$1-3 billion across the largest passive vehicles, had to happen into a market where Russia's own exchanges were restricting foreign selling. The resolution for most passive managers was to write their Russia holdings to zero rather than attempt to sell at a market-clearing price that did not exist.
 
 ### Channel 4: Banking and Payment Rail Disconnection
 
-The fourth channel — SWIFT disconnection — represents the deepest layer of access denial. When Russia was partially disconnected from SWIFT in March 2022, the impact on RUB-denominated transactions was immediate: Russian banks could not send or receive international wire transfers through the standard messaging system. Oil and gas trades had to be restructured through alternative payment systems. Coupon payments on Russian Eurobonds became legally and operationally uncertain, triggering credit events on CDS contracts.
+The fourth channel, SWIFT disconnection, represents the deepest layer of access denial. When Russia was partially disconnected from SWIFT in March 2022, the impact on RUB-denominated transactions was immediate: Russian banks could not send or receive international wire transfers through the standard messaging system. Oil and gas trades had to be restructured through alternative payment systems. Coupon payments on Russian Eurobonds became legally and operationally uncertain, triggering credit events on CDS contracts.
 
-The \$300 billion in Russian central bank reserves frozen by Western governments (the largest sovereign reserve freeze in history) was the most aggressive expression of this channel. Those reserves — held in EUR, USD, GBP, and JPY at foreign central banks — became inaccessible to the Russian government, eliminating their primary tool for FX market intervention.
+The \$300 billion in Russian central bank reserves frozen by Western governments (the largest sovereign reserve freeze in history) was the most aggressive expression of this channel. Those reserves (held in EUR, USD, GBP, and JPY at foreign central banks) became inaccessible to the Russian government, eliminating their primary tool for FX market intervention.
 
 ## Worked Examples with Full Market Math
 
 ### Worked Example: Myanmar Kyat Arbitrage
 
-On January 31, 2021 — the day before the coup — the Myanmar kyat traded at 1,330 per USD at the official Central Bank of Myanmar rate. One week after the coup, the informal market was pricing the kyat at approximately 1,600 per USD. By mid-2021, informal markets reached 2,600 per USD.
+On January 31, 2021, the day before the coup, the Myanmar kyat traded at 1,330 per USD at the official Central Bank of Myanmar rate. One week after the coup, the informal market was pricing the kyat at approximately 1,600 per USD. By mid-2021, informal markets reached 2,600 per USD.
 
 **Computing the arbitrage spread at peak:**
 
@@ -164,7 +164,7 @@ Official spot: IRR 42,000 per USD (illustrative 2023 official rate)
 NDF-implied forward: reflecting a 400% annualized depreciation
 90-day NDF forward rate = 42,000 × (1 + 4.00 × 90/365) = 42,000 × (1 + 0.986) = 42,000 × 1.986 ≈ **83,400 IRR/USD**
 
-This means the market expects the rial to weaken from 42,000 to 83,400 against the dollar over 90 days — nearly doubling in local currency terms.
+This means the market expects the rial to weaken from 42,000 to 83,400 against the dollar over 90 days: nearly doubling in local currency terms.
 
 **Step 2: Compute the hedge cost**
 
@@ -176,15 +176,15 @@ On a quarterly basis, that is \$10,000,000 per quarter just to maintain the hedg
 
 **Step 3: Break-even analysis**
 
-The hedge is break-even if the rial depreciates by exactly 400% annualized — i.e., if the spot rate at NDF maturity equals the NDF forward price. If the coupon on the Iranian bonds (in USD equivalent, at the official rate) is less than 400% per year, the hedged position is net negative return. If the bond yield (in USD terms) is, say, 12% per year, then:
+The hedge is break-even if the rial depreciates by exactly 400% annualized: i.e., if the spot rate at NDF maturity equals the NDF forward price. If the coupon on the Iranian bonds (in USD equivalent, at the official rate) is less than 400% per year, the hedged position is net negative return. If the bond yield (in USD terms) is, say, 12% per year, then:
 
 Net hedged return = 12% − 400% = **−388% per year**
 
-The fund is massively underwater on a hedged basis. The only rational reason to hold hedged Iranian bonds in this scenario is if you believe the NDF premium overestimates future depreciation — i.e., you are implicitly taking a long position on the rial's stabilization. That is a political risk bet, not a fixed-income trade.
+The fund is massively underwater on a hedged basis. The only rational reason to hold hedged Iranian bonds in this scenario is if you believe the NDF premium overestimates future depreciation: i.e., you are implicitly taking a long position on the rial's stabilization. That is a political risk bet, not a fixed-income trade.
 
 **The practical implication:** Most institutional funds do not hedge Iranian bonds because the hedge cost exceeds the yield by an order of magnitude. The position either has to be unhedged (pure currency risk), or the fund writes it down to near-zero and holds it as an OTC illiquid position marked to recovery value.
 
-#### Worked example: Russia MSCI Removal — Forced Passive Selling
+#### Worked example: Russia MSCI Removal, Forced Passive Selling
 
 Russia's MSCI EM weight was approximately 3.2% in January 2022. The MSCI Emerging Markets Index at that time tracked roughly \$2.0 trillion in assets (across ETFs, mutual funds, and institutional mandates with EM as benchmark). Russia's weight therefore represented approximately:
 
@@ -196,7 +196,7 @@ This is the theoretical maximum forced sale if all passive managers simultaneous
 - Some passive managers chose to write Russia holdings to zero (marking as illiquid) rather than attempting to sell into a market with restricted foreign selling
 - The Moscow Exchange's suspension of foreign selling limited how much could actually be transacted
 
-MSCI announced the removal on March 2, 2022, effective March 9. Eight days. During that window, the Moscow Exchange restricted trading and limited foreign investor selling. Most large passive ETF managers (BlackRock, Vanguard, State Street) disclosed in subsequent filings that they had marked Russian equities at zero rather than selling — effectively taking a total loss on their tracker positions.
+MSCI announced the removal on March 2, 2022, effective March 9. Eight days. During that window, the Moscow Exchange restricted trading and limited foreign investor selling. Most large passive ETF managers (BlackRock, Vanguard, State Street) disclosed in subsequent filings that they had marked Russian equities at zero rather than selling: effectively taking a total loss on their tracker positions.
 
 **The forced selling math for ETFs:**
 
@@ -204,11 +204,11 @@ iShares MSCI Emerging Markets ETF (EEM) had approximately \$28 billion in AUM in
 
 0.032 × \$28,000,000,000 = **\$896 million** in Russian equities in EEM alone
 
-With selling restricted by Moscow Exchange rules and most Russian ADRs (American Depositary Receipts, the US-traded version of Russian stocks) suspended by NYSE and NASDAQ, the practical outcome was that EEM's Russia position was written to zero. Shareholders bore the loss directly — the ETF's NAV fell by approximately 3% purely from the Russia write-down, independent of any price movement in other EM holdings.
+With selling restricted by Moscow Exchange rules and most Russian ADRs (American Depositary Receipts, the US-traded version of Russian stocks) suspended by NYSE and NASDAQ, the practical outcome was that EEM's Russia position was written to zero. Shareholders bore the loss directly: the ETF's NAV fell by approximately 3% purely from the Russia write-down, independent of any price movement in other EM holdings.
 
 **The lesson for index-weight risk:**
 
-Any country that represents more than 1% of a major EM index creates significant forced-selling risk for passive vehicles if it is removed. The removal does not have to be preceded by a shutdown or sanctions; it can come from a MSCI market access review triggered by capital controls alone (as happened when MSCI put Pakistan on its watch list in 2022 for liquidity restrictions). The time between announcement and effective date — typically 5-30 days — is the window for trading.
+Any country that represents more than 1% of a major EM index creates significant forced-selling risk for passive vehicles if it is removed. The removal does not have to be preceded by a shutdown or sanctions; it can come from a MSCI market access review triggered by capital controls alone (as happened when MSCI put Pakistan on its watch list in 2022 for liquidity restrictions). The time between announcement and effective date, typically 5-30 days, is the window for trading.
 
 ![NDF mechanics before and after hedging an inaccessible onshore position](/imgs/blogs/internet-shutdowns-capital-controls-and-em-market-access-risk-5.png)
 
@@ -242,7 +242,7 @@ Across these three cases, a 2-7 day internet shutdown in a country with existing
 
 **Critical caveat on causality:**
 
-The shutdown is not causing the underlying economic deterioration — it is a symptom of the same political instability that is causing it. The shutdown happens because the government fears protests; the currency moves because the government is acting in ways that spook dollar demand. Disentangling the pure shutdown effect from the political-regime-change effect is difficult. The practical implication for traders is the same regardless of causality: when you see a multi-day shutdown activate in a country with capital controls, the parallel-rate move is likely in progress.
+The shutdown is not causing the underlying economic deterioration: it is a symptom of the same political instability that is causing it. The shutdown happens because the government fears protests; the currency moves because the government is acting in ways that spook dollar demand. Disentangling the pure shutdown effect from the political-regime-change effect is difficult. The practical implication for traders is the same regardless of causality: when you see a multi-day shutdown activate in a country with capital controls, the parallel-rate move is likely in progress.
 
 ## How the NDF Market Functions as the Institutional Solution
 
@@ -250,15 +250,15 @@ The shutdown is not causing the underlying economic deterioration — it is a sy
 
 The layered stack in the figure above is the key mental model for understanding why NDFs exist and why they are the institutional hedge of last resort. A government can cut access at any of the first four layers:
 
-**Layer 1 — Onshore Exchange:** Close the stock exchange (Myanmar 90 days), halt FX trading (Russia partial), suspend specific securities. This requires regulatory action.
+**Layer 1 (Onshore Exchange):** Close the stock exchange (Myanmar 90 days), halt FX trading (Russia partial), suspend specific securities. This requires regulatory action.
 
-**Layer 2 — Capital Controls:** Restrict cross-border money flows, mandate export earnings conversion, prohibit foreign security purchases. This requires legal authority.
+**Layer 2 (Capital Controls):** Restrict cross-border money flows, mandate export earnings conversion, prohibit foreign security purchases. This requires legal authority.
 
-**Layer 3 — Internet and Information:** Deploy DPI-based blocking (Russia's Roskomnadzor), activate a kill switch (Iran's SIAM), throttle mobile internet (Myanmar). This requires technical infrastructure and is increasingly common.
+**Layer 3 (Internet and Information):** Deploy DPI-based blocking (Russia's Roskomnadzor), activate a kill switch (Iran's SIAM), throttle mobile internet (Myanmar). This requires technical infrastructure and is increasingly common.
 
-**Layer 4 — External Sanctions and Reserve Freeze:** This is applied by foreign governments, not the country itself. SWIFT disconnection, central bank reserve freeze, asset sanctions on banks. This requires multilateral political coordination.
+**Layer 4 (External Sanctions and Reserve Freeze):** This is applied by foreign governments, not the country itself. SWIFT disconnection, central bank reserve freeze, asset sanctions on banks. This requires multilateral political coordination.
 
-The NDF exists entirely outside all four layers. It is a bilateral OTC contract between two offshore counterparties, settled in USD through the standard correspondent-banking system, with no requirement for any connection to the country's domestic financial infrastructure. The only onshore input is a reference rate — typically a published central bank fixing rate or a polling composite. Even if that reference rate becomes fictional (because the government is maintaining a false peg), NDF counterparties can agree to use an alternative reference or simply close positions out at market-clearing prices.
+The NDF exists entirely outside all four layers. It is a bilateral OTC contract between two offshore counterparties, settled in USD through the standard correspondent-banking system, with no requirement for any connection to the country's domestic financial infrastructure. The only onshore input is a reference rate, typically a published central bank fixing rate or a polling composite. Even if that reference rate becomes fictional (because the government is maintaining a false peg), NDF counterparties can agree to use an alternative reference or simply close positions out at market-clearing prices.
 
 ### NDF Market Structure in Practice
 
@@ -270,11 +270,11 @@ The largest NDF markets by daily notional (BIS 2022 data):
 - Indonesian Rupiah (IDR): ~\$20B/day
 - Taiwanese Dollar (TWD): ~\$18B/day
 
-For currencies under severe access risk — the Iranian rial, the Myanmar kyat — there is no liquid NDF market. The very illiquidity and state fragility that creates the access risk also prevents the development of an offshore hedging market. Investors in those currencies are either making a political bet on stabilization, or they are constrained by mandate to hold them and must accept the unhedged risk.
+For currencies under severe access risk (the Iranian rial, the Myanmar kyat) there is no liquid NDF market. The very illiquidity and state fragility that creates the access risk also prevents the development of an offshore hedging market. Investors in those currencies are either making a political bet on stabilization, or they are constrained by mandate to hold them and must accept the unhedged risk.
 
 For mid-sized EM currencies (the Nigerian naira, the Pakistani rupee, the Egyptian pound), there are offshore NDF markets but with wide bid-ask spreads and limited depth. These markets function better as risk indicators than as practical hedging tools for large positions.
 
-For major EM currencies (INR, BRL, KRW, CNY), the NDF market is deep enough to hedge significant positions. The political VPN premium in these currencies — the spread between NDF-implied and onshore spot — is typically tight (0.1-0.3%) in normal times and widens to 0.5-2.0% during acute political stress events.
+For major EM currencies (INR, BRL, KRW, CNY), the NDF market is deep enough to hedge significant positions. The political VPN premium in these currencies, the spread between NDF-implied and onshore spot, is typically tight (0.1-0.3%) in normal times and widens to 0.5-2.0% during acute political stress events.
 
 ### The Mechanics of NDF Settlement
 
@@ -284,7 +284,7 @@ When an NDF matures, the settlement is straightforward:
 2. Calculate the net USD difference. If the forward rate was 7.40 CNY/USD and the fixing came in at 7.50 CNY/USD (weaker renminbi), the renminbi seller receives the difference (they were right about depreciation).
 3. Wire the USD difference through the standard correspondent banking system.
 
-No renminbi crosses a border. No Chinese bank account is needed. The trade is entirely offshore. This is what makes the NDF mechanism robust to all four layers of access control. The only scenario where an NDF cannot settle is if the fixing reference becomes completely unreliable — as might happen if a country suspended its central bank operations entirely. Even then, ISDA documentation provides fallback procedures.
+No renminbi crosses a border. No Chinese bank account is needed. The trade is entirely offshore. This is what makes the NDF mechanism robust to all four layers of access control. The only scenario where an NDF cannot settle is if the fixing reference becomes completely unreliable, as might happen if a country suspended its central bank operations entirely. Even then, ISDA documentation provides fallback procedures.
 
 ## Common Misconceptions
 
@@ -294,11 +294,11 @@ Reality: Professional institutional investors rely on internet connectivity for 
 
 **Misconception 2: "Capital controls prevent currency depreciation"**
 
-Reality: Capital controls slow the speed of depreciation by preventing immediate mass conversion. They do not prevent depreciation if the underlying fundamentals — current account deficits, monetary expansion, foreign debt burden — are negative. Turkey's recurring lira crises demonstrate this: controls slow the move, but the longer the controls suppress the price, the larger the repricing shock when controls are eventually relaxed. Russia's 2022 experience is the extreme example: mandatory 80% export conversion produced a temporary ruble recovery, but by 2024 the ruble had depreciated well beyond its pre-war level as the underlying fiscal pressures accumulated.
+Reality: Capital controls slow the speed of depreciation by preventing immediate mass conversion. They do not prevent depreciation if the underlying fundamentals (current account deficits, monetary expansion, foreign debt burden) are negative. Turkey's recurring lira crises demonstrate this: controls slow the move, but the longer the controls suppress the price, the larger the repricing shock when controls are eventually relaxed. Russia's 2022 experience is the extreme example: mandatory 80% export conversion produced a temporary ruble recovery, but by 2024 the ruble had depreciated well beyond its pre-war level as the underlying fiscal pressures accumulated.
 
 **Misconception 3: "MSCI removal happens slowly"**
 
-Reality: Russia's removal from MSCI EM took eight days from announcement to effective date. MSCI has demonstrated a willingness to move extremely rapidly when market access is materially and immediately impaired. The criteria are market access (can foreign investors trade and repatriate?), liquidity, and custody/clearing safety. When all three fail simultaneously — as they did in Russia's case — MSCI acts within days. Investors should not assume months of warning.
+Reality: Russia's removal from MSCI EM took eight days from announcement to effective date. MSCI has demonstrated a willingness to move extremely rapidly when market access is materially and immediately impaired. The criteria are market access (can foreign investors trade and repatriate?), liquidity, and custody/clearing safety. When all three fail simultaneously, as they did in Russia's case, MSCI acts within days. Investors should not assume months of warning.
 
 **Misconception 4: "NDF markets always have enough liquidity to hedge"**
 
@@ -306,7 +306,7 @@ Reality: NDF liquidity is highly concentrated in a few major currencies. For sma
 
 **Misconception 5: "Shutdowns only affect countries with weak institutions"**
 
-Reality: India executed 84 internet shutdowns in 2022, the most of any country globally, predominantly in Jammu and Kashmir. India is a G20 economy with one of the world's largest stock markets, a deep INR NDF market, and MSCI EM membership at ~16% weight. The Kashmiri shutdowns are regional and have not materially impacted the national market, but they demonstrate that the tool is not reserved for authoritarian basket cases. Democracies use shutdowns too — the legal frameworks for them exist in India under the Indian Telegraph Act, and courts have been slow to restrict their use. If India were ever to deploy a shutdown that covered a major financial center, the INR NDF market would respond immediately.
+Reality: India executed 84 internet shutdowns in 2022, the most of any country globally, predominantly in Jammu and Kashmir. India is a G20 economy with one of the world's largest stock markets, a deep INR NDF market, and MSCI EM membership at ~16% weight. The Kashmiri shutdowns are regional and have not materially impacted the national market, but they demonstrate that the tool is not reserved for authoritarian basket cases. Democracies use shutdowns too: the legal frameworks for them exist in India under the Indian Telegraph Act, and courts have been slow to restrict their use. If India were ever to deploy a shutdown that covered a major financial center, the INR NDF market would respond immediately.
 
 ## How It Shows Up in Real Markets
 
@@ -314,7 +314,7 @@ The practical signals an EM portfolio manager should monitor:
 
 **Signal 1: Netblocks / AccessNow real-time shutdown alerts**
 
-Netblocks publishes real-time internet disruption data. A confirmed multi-day shutdown announcement in a country with pre-existing capital controls should immediately trigger a review of that country's currency exposure. The expected move — 15-25% parallel-rate depreciation within 5 days — may not be fully accessible via traded instruments, but the signal should inform position sizing and option buying.
+Netblocks publishes real-time internet disruption data. A confirmed multi-day shutdown announcement in a country with pre-existing capital controls should immediately trigger a review of that country's currency exposure. The expected move, 15-25% parallel-rate depreciation within 5 days, may not be fully accessible via traded instruments, but the signal should inform position sizing and option buying.
 
 **Signal 2: NDF implied rate widening**
 
@@ -326,13 +326,13 @@ Sovereign CDS spreads incorporate both credit risk and access risk. When Russia'
 
 **Signal 4: Roskomnadzor / regulatory announcements**
 
-For Russia specifically, the pipeline of regulatory actions — blocking orders, DPI installation requirements, new ISP licensing rules — is the leading indicator for the next round of market-access restrictions. For Iran, the status of JCPOA negotiations and US sanctions policy is the primary driver. For Myanmar, the military council's periodic crackdowns correlate with shutdown waves. Each country has a specific set of leading indicators that precede the market move.
+For Russia specifically, the pipeline of regulatory actions (blocking orders, DPI installation requirements, new ISP licensing rules) is the leading indicator for the next round of market-access restrictions. For Iran, the status of JCPOA negotiations and US sanctions policy is the primary driver. For Myanmar, the military council's periodic crackdowns correlate with shutdown waves. Each country has a specific set of leading indicators that precede the market move.
 
 **Signal 5: MSCI market access review announcement**
 
-MSCI publishes its annual market classification review results each June, with a consultation period from February. Countries placed on the "watch list" for potential downgrade appear in the February consultation document. Historically, there is a tradeable spread compression between the announcement of a review and the actual downgrade decision — passive vehicles begin reducing exposure in anticipation, creating temporary liquidity windows.
+MSCI publishes its annual market classification review results each June, with a consultation period from February. Countries placed on the "watch list" for potential downgrade appear in the February consultation document. Historically, there is a tradeable spread compression between the announcement of a review and the actual downgrade decision: passive vehicles begin reducing exposure in anticipation, creating temporary liquidity windows.
 
-## How to Trade It — The Playbook
+## How to Trade It: The Playbook
 
 The core insight from the foregoing analysis is that internet shutdowns and capital controls create identifiable, bounded events with predictable market consequences. The playbook has four components.
 
@@ -345,7 +345,7 @@ For countries with active NDF markets and elevated political risk (India-Kashmir
 - If the event materializes (shutdown, controls, sanctions announcement), the NDF rate will spike against spot as access risk reprices
 - If the event does not materialize, roll the position or close at a small loss (the premium cost)
 
-The cost of carry for this trade — the premium built into the NDF above spot — is the explicit price of the option. For major EM currencies in normal conditions, this might be 0.1-0.3% per quarter. That is the explicit cost of protection.
+The cost of carry for this trade, the premium built into the NDF above spot, is the explicit price of the option. For major EM currencies in normal conditions, this might be 0.1-0.3% per quarter. That is the explicit cost of protection.
 
 **Component 2: Buy put options on EM ETFs with country-specific exposure**
 
@@ -355,7 +355,7 @@ The limitation: most country ETFs are broadly diversified, so the put options wi
 
 **Component 3: Short sovereign CDS on countries with active shutdown infrastructure**
 
-For institutional investors with CDS access, sovereign CDS represents the cleanest expression of access risk for countries where the debt is held by foreigners. A country that shuts down its internet and imposes capital controls is also more likely to default on — or restructure — its external obligations. Buying protection via CDS is often cheaper before the event materializes than after.
+For institutional investors with CDS access, sovereign CDS represents the cleanest expression of access risk for countries where the debt is held by foreigners. A country that shuts down its internet and imposes capital controls is also more likely to default on, or restructure, its external obligations. Buying protection via CDS is often cheaper before the event materializes than after.
 
 **Component 4: Monitor the MSCI weight calendar**
 
@@ -366,7 +366,7 @@ If a country is placed on the MSCI review watch list, the forced-selling dynamic
 - June classification decision: if downgrade confirmed, fresh forced selling from passive vehicles in the 5-30 days between announcement and effective date
 - Effective date: passive vehicles complete rebalance, creating potential reversal opportunity if the downgrade was fully priced
 
-This is not a unique insight — the pattern is well-known enough that there are dedicated hedge fund strategies around index-inclusion/exclusion events. But it is worth noting that the access-risk version of this trade (where the removal is driven by shutdown/sanctions/capital controls rather than a pure liquidity reclassification) tends to be more violent and faster-moving than the typical index event.
+This is not a unique insight: the pattern is well-known enough that there are dedicated hedge fund strategies around index-inclusion/exclusion events. But it is worth noting that the access-risk version of this trade (where the removal is driven by shutdown/sanctions/capital controls rather than a pure liquidity reclassification) tends to be more violent and faster-moving than the typical index event.
 
 ## Further Reading and Cross-links
 
@@ -379,19 +379,19 @@ The Access Now KeepItOn coalition publishes annual reports tracking every docume
 The BIS Triennial Survey is the definitive source for NDF market size and structure, updated every three years. The IMF publishes annual reports on capital account restrictions through its Annual Report on Exchange Arrangements and Exchange Restrictions (AREAER). For NDF settlement mechanics and documentation, ISDA's standard documentation for FX derivatives is the legal reference.
 
 **On MSCI market access criteria:**
-MSCI publishes detailed descriptions of its market accessibility criteria — including minimum requirements for foreign ownership limits, capital flow restrictions, and operational framework — in its annual Global Market Accessibility Review. Russia's 2022 removal decision document is a useful case study in how extreme access events trigger rapid reclassification.
+MSCI publishes detailed descriptions of its market accessibility criteria (including minimum requirements for foreign ownership limits, capital flow restrictions, and operational framework) in its annual Global Market Accessibility Review. Russia's 2022 removal decision document is a useful case study in how extreme access events trigger rapid reclassification.
 
 **On Russia RuNet and sovereign internet laws:**
 Access Now and Freedom House both publish detailed country-level reports on network sovereignty laws. Freedom House's Freedom on the Net report includes annual country scores and specific discussion of sovereign internet infrastructure.
 
 **On Turkish lira capital controls and historical parallels:**
-The Central Bank of the Republic of Turkey publishes historical exchange rate data and policy documents. For historical parallels — Argentina's corralito (2001-2002), Malaysia's ringgit peg (1998) — Barry Eichengreen's work on capital controls and currency crises provides the academic framework.
+The Central Bank of the Republic of Turkey publishes historical exchange rate data and policy documents. For historical parallels (Argentina's corralito (2001-2002), Malaysia's ringgit peg (1998)) Barry Eichengreen's work on capital controls and currency crises provides the academic framework.
 
 **Cross-links within this series:**
 - Russia's SWIFT exclusion and the broader sanctions architecture are covered in the companion post on financial warfare and sanctions design.
 - The Myanmar YSX halt and broader frontier markets fragility connects to the post on frontier market liquidity and the risks of thin-market investing.
 - The NDF premium framework connects to the fixed income series post on emerging market bond risk premia and political risk decomposition.
 
-The central lesson of this post — that market access is not binary but layered, and that the NDF market exists precisely because no other instrument survives all four layers of access denial — is both a technical insight and a geopolitical one. The countries most likely to deploy internet shutdowns are also the countries most likely to impose capital controls, and both behaviors tend to cluster around moments of political instability. Building a monitoring framework that watches for the leading indicators — network disruption signals, NDF spread widening, CDS spikes, MSCI review events — gives a risk-aware EM investor a genuine edge in a world where the next shutdown is more likely than the last.
+The central lesson of this post (that market access is not binary but layered, and that the NDF market exists precisely because no other instrument survives all four layers of access denial) is both a technical insight and a geopolitical one. The countries most likely to deploy internet shutdowns are also the countries most likely to impose capital controls, and both behaviors tend to cluster around moments of political instability. Building a monitoring framework that watches for the leading indicators (network disruption signals, NDF spread widening, CDS spikes, MSCI review events) gives a risk-aware EM investor a genuine edge in a world where the next shutdown is more likely than the last.
 
-The "political VPN premium" is real, it is measurable, and it is tradeable. The question is whether you have the infrastructure — analytical, operational, and hedging — to act on it before the market has fully repriced the access risk event that just switched on.
+The "political VPN premium" is real, it is measurable, and it is tradeable. The question is whether you have the infrastructure (analytical, operational, and hedging) to act on it before the market has fully repriced the access risk event that just switched on.

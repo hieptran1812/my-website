@@ -12,20 +12,20 @@ readTime: 42
 ---
 
 > [!important]
-> **TL;DR** — WACC is the blended rate you earn on a dollar of capital, combining equity and after-tax debt costs by market-value weights; it is the single most consequential input in any DCF model.
+> **TL;DR**: WACC is the blended rate you earn on a dollar of capital, combining equity and after-tax debt costs by market-value weights; it is the single most consequential input in any DCF model.
 >
 > - Cost of equity = risk-free rate + beta × equity risk premium (CAPM); beta is estimated from market regressions.
 > - Cost of debt = your borrowing spread over Treasuries, multiplied by (1 − tax rate) to capture the interest tax shield.
 > - Capital structure weights must use market values, not book values.
 > - Unlevered beta strips out leverage so you can compare pure business risk across companies with different debt loads, then relever at a target structure.
 
-Two analysts sit down to value the same mid-cap technology company. They agree on every future free cash flow — five years of \$200 million, then a terminal value. One analyst uses an 8% discount rate. The other uses 12%. When they present their numbers, the first analyst says the company is worth \$2.1 billion. The second says it is worth \$1.2 billion — almost 43% less. Every single number in their models is identical except one: the discount rate.
+Two analysts sit down to value the same mid-cap technology company. They agree on every future free cash flow: five years of \$200 million, then a terminal value. One analyst uses an 8% discount rate. The other uses 12%. When they present their numbers, the first analyst says the company is worth \$2.1 billion. The second says it is worth \$1.2 billion: almost 43% less. Every single number in their models is identical except one: the discount rate.
 
 This is not a fringe scenario. It is the central tension in every DCF model ever built, and it is why sophisticated investors spend as much time scrutinizing the discount rate as they do the revenue forecasts. A forecast that is wrong by 10% moves the value by 10%. A discount rate that is wrong by 4 percentage points can move the value by 40% or more, because discounting is nonlinear and the effect compounds across every single future year.
 
-The discount rate used in a standard enterprise-value DCF is called the **Weighted Average Cost of Capital**, or *WACC* — pronounced exactly as it looks, rhyming with "whack." WACC answers one simple question: what rate of return do we need to earn on this business to satisfy both the shareholders and the bondholders who funded it? Build that rate correctly, and the valuation is grounded. Get it wrong — by using a book-value weight, by forgetting the tax shield, by borrowing a competitor's beta without adjusting for leverage — and you will produce a number that looks precise but is quietly, fatally wrong.
+The discount rate used in a standard enterprise-value DCF is called the **Weighted Average Cost of Capital**, or *WACC*: pronounced exactly as it looks, rhyming with "whack." WACC answers one simple question: what rate of return do we need to earn on this business to satisfy both the shareholders and the bondholders who funded it? Build that rate correctly, and the valuation is grounded. Get it wrong (by using a book-value weight, by forgetting the tax shield, by borrowing a competitor's beta without adjusting for leverage) and you will produce a number that looks precise but is quietly, fatally wrong.
 
-This post is the engineering manual for building WACC from scratch. We will compute cost of equity using CAPM, compute after-tax cost of debt, choose the right capital structure weights, assemble the WACC formula, and then tackle the trickier topic of unlevered and relevered beta — the adjustment that lets you compare companies with completely different debt loads. Real data throughout.
+This post is the engineering manual for building WACC from scratch. We will compute cost of equity using CAPM, compute after-tax cost of debt, choose the right capital structure weights, assemble the WACC formula, and then tackle the trickier topic of unlevered and relevered beta: the adjustment that lets you compare companies with completely different debt loads. Real data throughout.
 
 ![WACC formula diagram showing equity and debt components combining into a single hurdle rate](/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-1.png)
 
@@ -33,11 +33,11 @@ This post is the engineering manual for building WACC from scratch. We will comp
 
 Before we build WACC, we need to be precise about what a discount rate does and why it must reflect the company's specific funding structure.
 
-### The time value of money — brief recap
+### The time value of money: brief recap
 
 If I offer you \$1,000 today or \$1,000 in five years, you want it today. A dollar now is worth more than a dollar later because you can invest it in the meantime. The *discount rate* is the rate at which we convert future money into present money. A dollar arriving in year *t* at discount rate *r* is worth \$1 / (1+r)^t today. The higher *r* is, the less future cash flows are worth right now.
 
-This is not just a mathematical convention. It reflects real opportunity cost: the return you could earn by investing in something else. If you could put money in a safe government bond earning 4.5%, then any project you undertake had better earn more than 4.5% — otherwise you are leaving money on the table.
+This is not just a mathematical convention. It reflects real opportunity cost: the return you could earn by investing in something else. If you could put money in a safe government bond earning 4.5%, then any project you undertake had better earn more than 4.5%: otherwise you are leaving money on the table.
 
 For a business that is funded by both shareholders and bondholders, the relevant opportunity cost is not just what shareholders expect, nor just what bondholders demand. It is a blend of both, weighted by how much of the business each group has funded.
 
@@ -56,15 +56,15 @@ WACC = (600/1000) × 11% + (400/1000) × 5% × (1 - tax rate)
 
 Every investment decision the company makes gets measured against this 8.18% hurdle. A project returning 11% creates value; one returning 6% destroys it.
 
-There is one wrinkle in the debt term: the (1 − tax rate) factor. Interest payments are *tax-deductible* — the company gets a government subsidy for using debt. A company borrowing at 5% and paying a 21% corporate tax rate effectively pays only 5% × 0.79 = 3.95% after the tax benefit is accounted for. This is the *interest tax shield*, and it is real, material, and non-negotiable to include.
+There is one wrinkle in the debt term: the (1 − tax rate) factor. Interest payments are *tax-deductible*: the company gets a government subsidy for using debt. A company borrowing at 5% and paying a 21% corporate tax rate effectively pays only 5% × 0.79 = 3.95% after the tax benefit is accounted for. This is the *interest tax shield*, and it is real, material, and non-negotiable to include.
 
 ## Cost of Equity: What Shareholders Demand
 
-Shareholders bear the most risk in a company's capital structure. If the business fails, bondholders get paid first in liquidation, and equity holders get whatever is left — which is often nothing. In exchange for that residual risk, shareholders demand a higher return than bondholders. The question is: how much higher?
+Shareholders bear the most risk in a company's capital structure. If the business fails, bondholders get paid first in liquidation, and equity holders get whatever is left, which is often nothing. In exchange for that residual risk, shareholders demand a higher return than bondholders. The question is: how much higher?
 
 ### The Capital Asset Pricing Model
 
-The industry-standard answer is the Capital Asset Pricing Model, or CAPM (pronounced "cap-em"). The logic is elegant: investors can eliminate *company-specific* risk for free by diversifying across many stocks — holding a portfolio. The only risk they cannot diversify away is *market risk*, the systematic movement of all stocks together during recessions, wars, and financial crises. Since they bear this market risk, they demand compensation for it.
+The industry-standard answer is the Capital Asset Pricing Model, or CAPM (pronounced "cap-em"). The logic is elegant: investors can eliminate *company-specific* risk for free by diversifying across many stocks, holding a portfolio. The only risk they cannot diversify away is *market risk*, the systematic movement of all stocks together during recessions, wars, and financial crises. Since they bear this market risk, they demand compensation for it.
 
 CAPM says the required return on equity is:
 
@@ -75,9 +75,9 @@ Ke = Rf + β × ERP
 Where:
 
 - **Ke** = cost of equity (the return shareholders demand)
-- **Rf** = the *risk-free rate* — typically the current yield on a 10-year US Treasury bond. As of year-end 2024, the 10-year yield was 4.57%
-- **β** (beta) = how much the stock moves relative to the market. A beta of 1.0 means the stock moves in lockstep with the S&P 500. A beta of 1.5 means it amplifies market moves by 50% — it goes up 15% when the market goes up 10%, and falls 15% when the market falls 10%. A beta of 0.5 means it is half as volatile as the market
-- **ERP** = the *equity risk premium* — the extra return investors demand for holding stocks instead of risk-free bonds. Damodaran estimates the implied ERP at 4.60% as of January 2025
+- **Rf** = the *risk-free rate*, typically the current yield on a 10-year US Treasury bond. As of year-end 2024, the 10-year yield was 4.57%
+- **β** (beta) = how much the stock moves relative to the market. A beta of 1.0 means the stock moves in lockstep with the S&P 500. A beta of 1.5 means it amplifies market moves by 50%: it goes up 15% when the market goes up 10%, and falls 15% when the market falls 10%. A beta of 0.5 means it is half as volatile as the market
+- **ERP** = the *equity risk premium*: the extra return investors demand for holding stocks instead of risk-free bonds. Damodaran estimates the implied ERP at 4.60% as of January 2025
 
 So for a technology company with beta = 1.3, the cost of equity at end-2024 would be:
 
@@ -87,11 +87,11 @@ Ke = 4.57% + 1.3 × 4.60%
    = 10.55%
 ```
 
-That 10.55% is what shareholders expect to earn — on average, over time — to be compensated for the risk they bear.
+That 10.55% is what shareholders expect to earn (on average, over time) to be compensated for the risk they bear.
 
 ### Where beta comes from
 
-Beta is estimated empirically: take 3–5 years of monthly returns for the stock and the market index (usually the S&P 500 for US companies), run a regression, and read off the slope coefficient. The slope *is* beta — it is literally the slope of the line relating stock returns to market returns.
+Beta is estimated empirically: take 3–5 years of monthly returns for the stock and the market index (usually the S&P 500 for US companies), run a regression, and read off the slope coefficient. The slope *is* beta: it is literally the slope of the line relating stock returns to market returns.
 
 In practice, most analysts use published beta estimates from financial data providers (Bloomberg, FactSet, or Damodaran's free datasets) rather than running the regression themselves.
 
@@ -101,11 +101,11 @@ Some real-world betas from the data (as of December 2024): NVDA = 1.68, AAPL = 1
 
 The ERP is contested. There are three common approaches:
 
-1. **Historical ERP** — average excess return of stocks over bonds over long history. Damodaran's 1928–2024 arithmetic average ERP is 8.36%; geometric average is 6.15%. The arithmetic average is appropriate for single-period discounting; geometric for multi-period. Most practitioners use something between 5% and 7%.
+1. **Historical ERP**: average excess return of stocks over bonds over long history. Damodaran's 1928–2024 arithmetic average ERP is 8.36%; geometric average is 6.15%. The arithmetic average is appropriate for single-period discounting; geometric for multi-period. Most practitioners use something between 5% and 7%.
 
-2. **Implied ERP** — work backwards from current market prices. If you know the current stock prices and expected dividends/earnings, you can solve for the discount rate the market is implicitly using. Damodaran's January 2025 implied ERP estimate is 4.60% — lower than historical, reflecting elevated stock prices.
+2. **Implied ERP**: work backwards from current market prices. If you know the current stock prices and expected dividends/earnings, you can solve for the discount rate the market is implicitly using. Damodaran's January 2025 implied ERP estimate is 4.60%: lower than historical, reflecting elevated stock prices.
 
-3. **Survey ERP** — ask CFOs or investment professionals what premium they use. Average survey responses tend to cluster around 4.5%–6%.
+3. **Survey ERP**: ask CFOs or investment professionals what premium they use. Average survey responses tend to cluster around 4.5%–6%.
 
 For most corporate finance work, a *reasonable* ERP is somewhere in the 4.5%–6% range. This matters enormously: a 1 percentage point difference in ERP moves the cost of equity by 1 × beta percentage points, which for a high-beta stock can shift valuation by 10%–20%.
 
@@ -117,9 +117,9 @@ The cost of debt is simpler to estimate than the cost of equity, but it contains
 
 The pre-tax cost of debt is simply the interest rate the company pays on its borrowings. The two main approaches:
 
-**Market yield approach** — if the company has publicly traded bonds, look at the current yield-to-maturity on those bonds. That is the market's assessment of what the company needs to pay to borrow. This is the most accurate approach.
+**Market yield approach**, if the company has publicly traded bonds, look at the current yield-to-maturity on those bonds. That is the market's assessment of what the company needs to pay to borrow. This is the most accurate approach.
 
-**Credit-rating approach** — if there are no traded bonds, estimate the cost from the company's credit rating. A AAA-rated company pays roughly the risk-free rate plus a 0.5%–1.0% spread. A BBB company (investment-grade bottom) pays roughly risk-free plus 1.5%–2.5%. A BB company (high yield) pays risk-free plus 3%–5% or more.
+**Credit-rating approach**, if there are no traded bonds, estimate the cost from the company's credit rating. A AAA-rated company pays roughly the risk-free rate plus a 0.5%–1.0% spread. A BBB company (investment-grade bottom) pays roughly risk-free plus 1.5%–2.5%. A BB company (high yield) pays risk-free plus 3%–5% or more.
 
 For our worked example below, we use a BBB-rated company with a 5% pre-tax cost of debt (at end-2024 rates: 4.57% risk-free + ~0.43% spread, approximately).
 
@@ -137,14 +137,14 @@ For a company with a 21% US corporate tax rate and a 5% pre-tax borrowing rate:
 Kd_after-tax = 5% × (1 - 0.21) = 5% × 0.79 = 3.95%
 ```
 
-The government takes 21% of every dollar of interest income away from the company — but the company gets to deduct that interest from its taxable income, saving 21 cents for every dollar of interest paid. The net cost of borrowing is therefore only 3.95%, not 5%.
+The government takes 21% of every dollar of interest income away from the company, but the company gets to deduct that interest from its taxable income, saving 21 cents for every dollar of interest paid. The net cost of borrowing is therefore only 3.95%, not 5%.
 
 ![Cost of debt: from credit spread plus risk-free rate to after-tax cost via tax shield](/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-4.png)
 
 This matters for cross-country comparisons. A Vietnamese company may face a 20% corporate tax rate, while a UK company faces 25%. Both borrow at the same pre-tax rate, but their after-tax costs of debt differ because the government's subsidy differs.
 
 #### Worked example:
-A company has a 10-year bond outstanding trading at a yield of 6.2%. Corporate tax rate is 25%. Pre-tax cost of debt is 6.2% (the market yield). After-tax cost of debt = 6.2% × (1 - 0.25) = 6.2% × 0.75 = **4.65%**. This is the rate that enters the WACC formula — the actual cost to the company after accounting for the tax deduction on interest. The government is paying 1.55 percentage points of the interest bill on your behalf.
+A company has a 10-year bond outstanding trading at a yield of 6.2%. Corporate tax rate is 25%. Pre-tax cost of debt is 6.2% (the market yield). After-tax cost of debt = 6.2% × (1 - 0.25) = 6.2% × 0.75 = **4.65%**. This is the rate that enters the WACC formula: the actual cost to the company after accounting for the tax deduction on interest. The government is paying 1.55 percentage points of the interest bill on your behalf.
 
 ## Capital Structure Weights: Market Value, Not Book Value
 
@@ -152,11 +152,11 @@ WACC uses the proportions of equity and debt to weight the two costs. But the qu
 
 ### Why market values
 
-A company's equity has two values: the *book value* recorded on the balance sheet (the accounting historical cost of equity), and the *market value* — what the shares actually trade for in the stock market. These can differ enormously. A tech company that IPO'd 20 years ago may have \$500M of book equity but a market cap of \$8 billion. A mature industrial company might have \$2B of book equity but trade at only \$1.5B.
+A company's equity has two values: the *book value* recorded on the balance sheet (the accounting historical cost of equity), and the *market value*, what the shares actually trade for in the stock market. These can differ enormously. A tech company that IPO'd 20 years ago may have \$500M of book equity but a market cap of \$8 billion. A mature industrial company might have \$2B of book equity but trade at only \$1.5B.
 
-The right choice is *market value*, for one fundamental reason: WACC is supposed to reflect what investors actually require today, given current prices and expectations. Investors price equity based on future cash flows, not on the accounting history. Using book value would give you a discount rate based on what the company raised from investors decades ago — which is irrelevant to the present.
+The right choice is *market value*, for one fundamental reason: WACC is supposed to reflect what investors actually require today, given current prices and expectations. Investors price equity based on future cash flows, not on the accounting history. Using book value would give you a discount rate based on what the company raised from investors decades ago, which is irrelevant to the present.
 
-For debt, use the *market value of debt* — the present value of all future interest and principal payments at current market yields. For a company with plain-vanilla bonds outstanding, this is close to the face value unless rates have moved significantly. For practical purposes, analysts often use book value of debt as an approximation when market prices are not available, with the caveat that this is an approximation.
+For debt, use the *market value of debt*: the present value of all future interest and principal payments at current market yields. For a company with plain-vanilla bonds outstanding, this is close to the face value unless rates have moved significantly. For practical purposes, analysts often use book value of debt as an approximation when market prices are not available, with the caveat that this is an approximation.
 
 ### The formula
 
@@ -205,25 +205,25 @@ A technology company has the following characteristics:
 - Pre-tax cost of debt: 5.0% (BBB-rated, 5-yr maturity)
 - Corporate tax rate: 21%
 
-Step 1 — Cost of equity:
+Step 1 (Cost of equity):
 ```
 Ke = 4.57% + 1.30 × 4.60%
    = 4.57% + 5.98%
    = 10.55%
 ```
 
-Step 2 — After-tax cost of debt:
+Step 2 (After-tax cost of debt):
 ```
 Kd_at = 5.0% × (1 - 0.21) = 5.0% × 0.79 = 3.95%
 ```
 
-Step 3 — Capital structure weights:
+Step 3 (Capital structure weights):
 ```
 We = 800/1,000 = 0.80 (80%)
 Wd = 200/1,000 = 0.20 (20%)
 ```
 
-Step 4 — WACC:
+Step 4 (WACC):
 ```
 WACC = 0.80 × 10.55%  +  0.20 × 3.95%
      = 8.44%           +  0.79%
@@ -234,23 +234,23 @@ This 9.23% is the hurdle rate. Any investment the company makes must return more
 
 ## Sector WACC Differences: Why They Exist
 
-WACCs vary enormously across industries. A regulated electric utility in the US might have a WACC of 6% — 7%. A high-growth technology company often has a WACC above 10%. What drives these differences?
+WACCs vary enormously across industries. A regulated electric utility in the US might have a WACC of 6%: 7%. A high-growth technology company often has a WACC above 10%. What drives these differences?
 
 Three factors matter:
 
-**1. Business risk (asset beta)** — how cyclical and uncertain are the cash flows? Utilities have near-guaranteed revenues from regulated monopolies. Technology companies have cash flows that depend on product cycles, competitive dynamics, and rapidly evolving markets. Higher uncertainty → higher beta → higher cost of equity → higher WACC.
+**1. Business risk (asset beta)**: how cyclical and uncertain are the cash flows? Utilities have near-guaranteed revenues from regulated monopolies. Technology companies have cash flows that depend on product cycles, competitive dynamics, and rapidly evolving markets. Higher uncertainty → higher beta → higher cost of equity → higher WACC.
 
-**2. Capital structure** — how much debt does the industry carry? Utilities, with their stable cash flows, can sustain heavy debt loads (often 50%–70% of total capital). That debt, at low after-tax rates, drags down WACC compared to tech companies that typically carry little debt. More debt at low cost → lower WACC (to a point).
+**2. Capital structure**: how much debt does the industry carry? Utilities, with their stable cash flows, can sustain heavy debt loads (often 50%–70% of total capital). That debt, at low after-tax rates, drags down WACC compared to tech companies that typically carry little debt. More debt at low cost → lower WACC (to a point).
 
-**3. Tax rate** — industries with higher effective tax rates get bigger tax shields, reducing WACC. In practice, effective tax rates vary based on tax credits, international structures, and deferred taxes.
+**3. Tax rate**: industries with higher effective tax rates get bigger tax shields, reducing WACC. In practice, effective tax rates vary based on tax credits, international structures, and deferred taxes.
 
 ![Sector WACC comparison horizontal bar chart showing Technology and Financials above 9%, Utilities below 7%](/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-3.png)
 
-From Damodaran's January 2025 data: Technology sectors average around 10.2% WACC, Utilities average 6.2%. The 4 percentage point gap has a large effect on relative valuations — at the same earnings level, a Utility is worth substantially more than a Tech company in raw discounted cash flow terms.
+From Damodaran's January 2025 data: Technology sectors average around 10.2% WACC, Utilities average 6.2%. The 4 percentage point gap has a large effect on relative valuations: at the same earnings level, a Utility is worth substantially more than a Tech company in raw discounted cash flow terms.
 
 ## Unlevered Beta: Removing the Effect of Financial Leverage
 
-Here is the problem with comparing betas across companies: a company with a lot of debt is riskier to shareholders than an identical company with no debt — even if the underlying *business* is identical. This is because debt creates *financial leverage*. When the business has a good year, equity holders get amplified returns because debt holders' claim is fixed. When the business has a bad year, equity holders bear the amplified downside.
+Here is the problem with comparing betas across companies: a company with a lot of debt is riskier to shareholders than an identical company with no debt, even if the underlying *business* is identical. This is because debt creates *financial leverage*. When the business has a good year, equity holders get amplified returns because debt holders' claim is fixed. When the business has a bad year, equity holders bear the amplified downside.
 
 This means the *observed* beta of a stock is not a pure measure of business risk. It is business risk *plus* financial risk. To compare the intrinsic business risk of two companies in the same industry but with different debt levels, we need to remove the financial leverage effect. The process of removing leverage from beta is called **unlevering**. Applying leverage back at a different level is called **relevering**.
 
@@ -264,7 +264,7 @@ The most widely used formula for unlevering beta is the *Hamada equation* (named
 
 Where:
 - βL = levered beta (the beta you observe from market data)
-- βU = unlevered beta (the asset beta — pure business risk)
+- βU = unlevered beta (the asset beta: pure business risk)
 - T = corporate tax rate
 - D/E = debt-to-equity ratio (market values)
 
@@ -282,11 +282,11 @@ This is elegant: you unlever to get the business's true beta, then lever back up
 
 Three common scenarios:
 
-1. **Comparable company analysis** — when building a WACC for a private company, you look at public comparable companies in the same industry. But those comparables have different debt levels than your target. You unlever all the comparables' betas, take an average (the *industry asset beta*), then relever at the target company's capital structure.
+1. **Comparable company analysis**, when building a WACC for a private company, you look at public comparable companies in the same industry. But those comparables have different debt levels than your target. You unlever all the comparables' betas, take an average (the *industry asset beta*), then relever at the target company's capital structure.
 
-2. **LBO or leveraged recapitalization** — a company is planning to take on significant new debt (a leveraged buyout, for example). You need to know what the equity beta will be under the new, more levered capital structure. Relever at the new D/E.
+2. **LBO or leveraged recapitalization**: a company is planning to take on significant new debt (a leveraged buyout, for example). You need to know what the equity beta will be under the new, more levered capital structure. Relever at the new D/E.
 
-3. **Cross-industry beta comparison** — you want to understand whether a company's business risk is high or low, separate from its financing decisions. Unlevered betas let you do this cleanly.
+3. **Cross-industry beta comparison**: you want to understand whether a company's business risk is high or low, separate from its financing decisions. Unlevered betas let you do this cleanly.
 
 #### Worked example:
 You are valuing a manufacturing company. The closest public comparable has:
@@ -303,7 +303,7 @@ You are valuing a manufacturing company. The closest public comparable has:
    = 1.004
 ```
 
-The asset beta is 1.004 — quite close to 1.0. The observed beta of 1.40 was substantially inflated by financial leverage.
+The asset beta is 1.004: quite close to 1.0. The observed beta of 1.40 was substantially inflated by financial leverage.
 
 **Step 2: Relever at the target company's capital structure.**
 The target company plans to run a D/E of 1.00 (equal debt and equity, i.e., 50%/50% split).
@@ -315,11 +315,11 @@ The target company plans to run a D/E of 1.00 (equal debt and equity, i.e., 50%/
        = 1.797  ≈ 1.80
 ```
 
-Higher leverage nearly doubles the equity beta from 1.40 to 1.80. The underlying business risk is the same — βU = 1.004 in both cases — but the shareholders in the more levered company bear much more risk because they are sitting atop a larger pile of fixed debt obligations. This higher beta feeds directly into a higher cost of equity and a higher WACC.
+Higher leverage nearly doubles the equity beta from 1.40 to 1.80. The underlying business risk is the same, βU = 1.004 in both cases, but the shareholders in the more levered company bear much more risk because they are sitting atop a larger pile of fixed debt obligations. This higher beta feeds directly into a higher cost of equity and a higher WACC.
 
 ## How Capital Structure Affects WACC
 
-In theory, there is an optimal capital structure — a mix of debt and equity that minimizes WACC and therefore maximizes enterprise value. The classic corporate finance argument (Modigliani-Miller with taxes) says that some debt is good because of the tax shield, but too much debt raises the probability of financial distress, which offsets the tax benefit.
+In theory, there is an optimal capital structure: a mix of debt and equity that minimizes WACC and therefore maximizes enterprise value. The classic corporate finance argument (Modigliani-Miller with taxes) says that some debt is good because of the tax shield, but too much debt raises the probability of financial distress, which offsets the tax benefit.
 
 In the simplified version (ignoring distress), WACC simply decreases as you add cheap after-tax debt, as long as the equity cost holds steady:
 
@@ -352,11 +352,11 @@ The NPV of a cash flow stream is hypersensitive to the discount rate, especially
 | 15% | \$900M approx |
 | 20% | \$660M approx |
 
-A 4 percentage point increase in the discount rate (from 8% to 12%) cuts enterprise value by roughly 27%. A 10-point increase (from 5% to 15%) cuts it by more than half. This is why the opening example — two analysts, same cash flows, 8% vs 12% discount rate — can produce a 43% gap in enterprise value.
+A 4 percentage point increase in the discount rate (from 8% to 12%) cuts enterprise value by roughly 27%. A 10-point increase (from 5% to 15%) cuts it by more than half. This is why the opening example (two analysts, same cash flows, 8% vs 12% discount rate) can produce a 43% gap in enterprise value.
 
 ![NPV vs discount rate chart showing NPV declining as rate increases, with IRR marked where NPV crosses zero](/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-8.png)
 
-The *Internal Rate of Return* (IRR) is the discount rate at which NPV = 0 — the "breakeven" rate. If WACC is below the IRR, the NPV is positive and the project creates value. If WACC is above the IRR, NPV is negative and the project destroys value.
+The *Internal Rate of Return* (IRR) is the discount rate at which NPV = 0: the "breakeven" rate. If WACC is below the IRR, the NPV is positive and the project creates value. If WACC is above the IRR, NPV is negative and the project destroys value.
 
 ![WACC versus project IRR decision flowchart showing accept when IRR exceeds WACC and reject otherwise](/imgs/blogs/discount-rates-practice-wacc-cost-equity-unlevered-beta-7.png)
 
@@ -373,7 +373,7 @@ Where CRP is the sovereign credit spread (the additional yield that Vietnam's go
 For Vietnam, the country risk premium is typically estimated at 2%–3.5%, depending on the year and methodology. Adding this to the CAPM gives a meaningfully higher cost of equity for Vietnamese companies.
 
 #### Worked example:
-Two identical steel manufacturers — one listed in the US, one listed on the Ho Chi Minh Stock Exchange. Same FCFs: \$50M, \$60M, \$70M, \$80M, \$90M per year for 5 years, then a terminal value of \$1,000M.
+Two identical steel manufacturers: one listed in the US, one listed on the Ho Chi Minh Stock Exchange. Same FCFs: \$50M, \$60M, \$70M, \$80M, \$90M per year for 5 years, then a terminal value of \$1,000M.
 
 **US company WACC:**
 ```
@@ -397,27 +397,27 @@ Now apply both discount rates to the same cash flows:
 At WACC = 8%: Enterprise value ≈ \$908M
 At WACC = 10%: Enterprise value ≈ \$787M
 
-That is roughly a 13% difference — and both companies have identical underlying cash flows and identical business risk. The entire gap is explained by the country risk premium embedded in the Vietnamese company's WACC. For a real company with \$2B–\$3B of cash flows, this difference compounds to hundreds of millions of dollars in implied value.
+That is roughly a 13% difference, and both companies have identical underlying cash flows and identical business risk. The entire gap is explained by the country risk premium embedded in the Vietnamese company's WACC. For a real company with \$2B–\$3B of cash flows, this difference compounds to hundreds of millions of dollars in implied value.
 
 The VN-Index beta for a large Vietnamese steel company like Hoa Phat Group (HPG.HM) is approximately 1.15 (as of December 2024), giving a cost of equity around 12%–13% in a representative WACC calculation.
 
 ## Common Misconceptions
 
-**"Book value equity gives a more conservative WACC."** It does not give a *conservative* WACC — it gives a *wrong* one. If a company's book equity is \$300M but its market cap is \$2 billion, using book value dramatically overstates the debt weight and understates the equity weight. The resulting WACC is not conservative; it is simply miscalibrated. Always use market values.
+**"Book value equity gives a more conservative WACC."** It does not give a *conservative* WACC: it gives a *wrong* one. If a company's book equity is \$300M but its market cap is \$2 billion, using book value dramatically overstates the debt weight and understates the equity weight. The resulting WACC is not conservative; it is simply miscalibrated. Always use market values.
 
 **"Beta is a reliable, stable measure of risk."** Beta estimated from a regression of 5-year monthly returns is notoriously noisy. It changes significantly depending on the time period, index used, and return frequency chosen. A single company's beta estimate often has a 95% confidence interval of ±0.4 or more. This is why analysts use *industry average* unlevered betas, which average out the estimation noise, and then relever for the target company's own capital structure.
 
-**"WACC should reflect the financing of the specific project, not the company."** If a company issues new debt to fund a project, the "cost of capital for that project" is not just the cost of debt — it is the overall WACC. Why? Because the total capital structure of the firm backs all its projects jointly. A company that borrows heavily for project A implicitly increases the leverage risk borne by shareholders on projects B, C, and D. The appropriate discount rate for a typical project is the firm's WACC, not the marginal cost of the specific financing.
+**"WACC should reflect the financing of the specific project, not the company."** If a company issues new debt to fund a project, the "cost of capital for that project" is not just the cost of debt: it is the overall WACC. Why? Because the total capital structure of the firm backs all its projects jointly. A company that borrows heavily for project A implicitly increases the leverage risk borne by shareholders on projects B, C, and D. The appropriate discount rate for a typical project is the firm's WACC, not the marginal cost of the specific financing.
 
-**"Higher WACC always means a worse company."** Higher WACC reflects higher risk, which may be entirely appropriate. A venture-stage biotech company might have a WACC of 18%–20% — not because it is poorly run, but because it has genuinely uncertain cash flows, no debt capacity, and high beta. If its projects return 25%, the high WACC is fine. What matters is the *spread* between return on invested capital and WACC, not WACC in isolation.
+**"Higher WACC always means a worse company."** Higher WACC reflects higher risk, which may be entirely appropriate. A venture-stage biotech company might have a WACC of 18%–20%, not because it is poorly run, but because it has genuinely uncertain cash flows, no debt capacity, and high beta. If its projects return 25%, the high WACC is fine. What matters is the *spread* between return on invested capital and WACC, not WACC in isolation.
 
 **"The ERP is a constant you can look up."** The equity risk premium is a matter of judgment, varies by method, changes over time, and differs across markets. Using different ERP estimates can shift Ke by 100–200 basis points and WACC by 80–120 basis points. The Damodaran implied ERP of 4.60% (Jan 2025) is at the lower end of historical estimates; some practitioners use 5.5% or 6% for conservatism. The choice should be disclosed and defended, not buried in a footnote.
 
-**"Debt is always cheaper than equity."** After-tax cost of debt is lower than cost of equity in normal conditions — but this does not mean a company should maximize debt. The *cost of equity rises as debt increases* (because of higher financial leverage risk), and the *cost of debt also rises* (because lenders see more default risk). Beyond an optimal leverage ratio, the blended WACC starts rising, not falling. The cheapest dollar of debt does not imply infinite debt is free.
+**"Debt is always cheaper than equity."** After-tax cost of debt is lower than cost of equity in normal conditions, but this does not mean a company should maximize debt. The *cost of equity rises as debt increases* (because of higher financial leverage risk), and the *cost of debt also rises* (because lenders see more default risk). Beyond an optimal leverage ratio, the blended WACC starts rising, not falling. The cheapest dollar of debt does not imply infinite debt is free.
 
-**"Using book value weights only makes the model more stable."** Some analysts argue that book-value weights are less volatile than market-value weights, which fluctuate daily. This logic sounds reasonable but leads to serious errors. Suppose a company carries \$500M of book equity and \$500M of debt on its balance sheet — a 50/50 split by book value. If the stock has appreciated and the market cap is now \$3 billion, the true market-value weight of equity is 86% and debt is only 14%. A WACC built on book-value weights would apply the full debt tax shield to a much larger notional debt fraction than actually exists, dramatically understating the true WACC. The error is not random noise — it is systematic and directional. Book-value weighting almost always overstates the debt fraction for high-growth companies, producing WACCs that are too low and valuations that are too high. The Federal Reserve Bulletin (2023) found that book-to-market ratios for large-cap US technology firms averaged 0.09 — meaning book equity was only 9% of market equity. A WACC computation using book weights for such a firm would be off by an order of magnitude.
+**"Using book value weights only makes the model more stable."** Some analysts argue that book-value weights are less volatile than market-value weights, which fluctuate daily. This logic sounds reasonable but leads to serious errors. Suppose a company carries \$500M of book equity and \$500M of debt on its balance sheet: a 50/50 split by book value. If the stock has appreciated and the market cap is now \$3 billion, the true market-value weight of equity is 86% and debt is only 14%. A WACC built on book-value weights would apply the full debt tax shield to a much larger notional debt fraction than actually exists, dramatically understating the true WACC. The error is not random noise: it is systematic and directional. Book-value weighting almost always overstates the debt fraction for high-growth companies, producing WACCs that are too low and valuations that are too high. The Federal Reserve Bulletin (2023) found that book-to-market ratios for large-cap US technology firms averaged 0.09: meaning book equity was only 9% of market equity. A WACC computation using book weights for such a firm would be off by an order of magnitude.
 
-**"The tax shield on debt doesn't matter much for the final WACC."** Analysts new to DCF sometimes question whether the (1 − T) adjustment on debt makes a real difference. The numbers say otherwise. Consider a company with \$1 billion of debt at a 6% pre-tax rate and a 25% corporate tax rate. The pre-tax interest bill is \$60M per year. The after-tax interest cost is \$60M × 0.75 = \$45M — a \$15M annual tax saving. Present-value that tax shield at the cost of debt and you have \$45M / 0.06 ≈ \$250M of firm value attributable purely to the tax shield on existing debt. Omitting the tax adjustment in the WACC formula is equivalent to leaving \$250M of value on the table in this example, or equivalently, using a discount rate that is 45 basis points too high (0.30 × 6% vs. 0.30 × 4.5%, on a 30% debt weight). In sectors that carry heavy debt — utilities, infrastructure, real estate — the tax shield is worth 8%–12% of total enterprise value. It is never immaterial.
+**"The tax shield on debt doesn't matter much for the final WACC."** Analysts new to DCF sometimes question whether the (1 − T) adjustment on debt makes a real difference. The numbers say otherwise. Consider a company with \$1 billion of debt at a 6% pre-tax rate and a 25% corporate tax rate. The pre-tax interest bill is \$60M per year. The after-tax interest cost is \$60M × 0.75 = \$45M: a \$15M annual tax saving. Present-value that tax shield at the cost of debt and you have \$45M / 0.06 ≈ \$250M of firm value attributable purely to the tax shield on existing debt. Omitting the tax adjustment in the WACC formula is equivalent to leaving \$250M of value on the table in this example, or equivalently, using a discount rate that is 45 basis points too high (0.30 × 6% vs. 0.30 × 4.5%, on a 30% debt weight). In sectors that carry heavy debt (utilities, infrastructure, real estate) the tax shield is worth 8%–12% of total enterprise value. It is never immaterial.
 
 ## How It Shows Up in Real Markets
 
@@ -427,11 +427,11 @@ Masan Group (MSN.HM) is one of Vietnam's largest conglomerates, with businesses 
 
 All figures below are representative estimates built from publicly available data as of December 2024.
 
-**Step 1 — Risk-free rate and ERP.** Vietnam does not have a liquid long-duration Treasury market, so we anchor the risk-free rate on the 10-year US Treasury (4.57% end-2024) and add a country risk premium for Vietnam. Using Damodaran's sovereign credit default swap spread methodology, Vietnam's CRP is approximately 2.1% in late 2024, reflecting its BB+ equivalent sovereign rating.
+**Step 1: Risk-free rate and ERP.** Vietnam does not have a liquid long-duration Treasury market, so we anchor the risk-free rate on the 10-year US Treasury (4.57% end-2024) and add a country risk premium for Vietnam. Using Damodaran's sovereign credit default swap spread methodology, Vietnam's CRP is approximately 2.1% in late 2024, reflecting its BB+ equivalent sovereign rating.
 
-**Step 2 — Beta.** Masan's 5-year monthly beta against the VN-Index is approximately 1.10. Since we are building a USD-denominated WACC using the US ERP, we retain the levered beta of 1.10 as a measure of relative sensitivity.
+**Step 2: Beta.** Masan's 5-year monthly beta against the VN-Index is approximately 1.10. Since we are building a USD-denominated WACC using the US ERP, we retain the levered beta of 1.10 as a measure of relative sensitivity.
 
-**Step 3 — Cost of equity:**
+**Step 3 (Cost of equity):**
 ```
 Ke = Rf  +  β × ERP_US  +  CRP
    = 4.57%  +  1.10 × 4.60%  +  2.1%
@@ -439,12 +439,12 @@ Ke = Rf  +  β × ERP_US  +  CRP
    = 11.73%
 ```
 
-**Step 4 — Cost of debt.** Masan has issued USD-denominated bonds and carries VND bank facilities. A blended pre-tax borrowing cost of approximately 7.5% is reasonable given its corporate credit profile (Vietnamese industrial conglomerate, moderate leverage). The Vietnamese standard corporate income tax rate is 20%.
+**Step 4: Cost of debt.** Masan has issued USD-denominated bonds and carries VND bank facilities. A blended pre-tax borrowing cost of approximately 7.5% is reasonable given its corporate credit profile (Vietnamese industrial conglomerate, moderate leverage). The Vietnamese standard corporate income tax rate is 20%.
 ```
 Kd_at = 7.5% × (1 - 0.20) = 7.5% × 0.80 = 6.0%
 ```
 
-**Step 5 — Capital structure weights.** As of year-end 2024 estimates:
+**Step 5: Capital structure weights.** As of year-end 2024 estimates:
 - Market cap: approximately VND 100,000 billion (\$3.95 billion USD at 25,300 VND/USD)
 - Net debt: approximately VND 50,000 billion (\$1.98 billion USD), based on consolidated interest-bearing liabilities less cash
 - Total capital: \$3.95B + \$1.98B = \$5.93B
@@ -454,20 +454,20 @@ We = 3.95 / 5.93 = 66.6%  ≈ 67%
 Wd = 1.98 / 5.93 = 33.4%  ≈ 33%
 ```
 
-**Step 6 — WACC:**
+**Step 6 (WACC):**
 ```
 WACC_MSN = 0.67 × 11.73%  +  0.33 × 6.0%
          = 7.86%           +  1.98%
          = 9.84%  ≈ 9.8%
 ```
 
-For comparison, a US consumer staples conglomerate of comparable size and diversification might carry a WACC of 7.0%–7.5%. Masan's WACC is roughly 2.5 percentage points higher, almost entirely explained by the country risk premium. At a terminal FCF of \$400M and a terminal growth rate of 4%, the denominator of the Gordon Growth Model is (9.8% − 4%) = 5.8% for Masan versus (7.2% − 3%) = 4.2% for the US peer. That 160 basis point denominator difference implies the US peer's terminal value is 38% higher per dollar of FCF — a structural valuation discount that Vietnamese conglomerates must grow their earnings faster to overcome.
+For comparison, a US consumer staples conglomerate of comparable size and diversification might carry a WACC of 7.0%–7.5%. Masan's WACC is roughly 2.5 percentage points higher, almost entirely explained by the country risk premium. At a terminal FCF of \$400M and a terminal growth rate of 4%, the denominator of the Gordon Growth Model is (9.8% − 4%) = 5.8% for Masan versus (7.2% − 3%) = 4.2% for the US peer. That 160 basis point denominator difference implies the US peer's terminal value is 38% higher per dollar of FCF: a structural valuation discount that Vietnamese conglomerates must grow their earnings faster to overcome.
 
-This exercise is instructive because it isolates the country risk premium as a distinct, quantifiable source of valuation difference — one that changes as Vietnam's sovereign credit profile improves, which is why Vietnam's MSCI upgrade trajectory (from Frontier to Emerging) is directly relevant to WACC inputs and asset valuations across the VN-Index.
+This exercise is instructive because it isolates the country risk premium as a distinct, quantifiable source of valuation difference: one that changes as Vietnam's sovereign credit profile improves, which is why Vietnam's MSCI upgrade trajectory (from Frontier to Emerging) is directly relevant to WACC inputs and asset valuations across the VN-Index.
 
 #### Worked example: WACC for a regulated utility
 
-Utilities occupy the opposite end of the risk spectrum from technology companies or emerging-market conglomerates. A regulated electric or water utility earns revenues under a government-approved rate-setting mechanism, meaning its cash flows are quasi-contractual: the regulator allows it to earn a specific return on its invested capital regardless of volume. This regulatory structure compresses beta, dramatically reduces cash flow uncertainty, and enables very high debt loads — all of which push WACC to its structural floor.
+Utilities occupy the opposite end of the risk spectrum from technology companies or emerging-market conglomerates. A regulated electric or water utility earns revenues under a government-approved rate-setting mechanism, meaning its cash flows are quasi-contractual: the regulator allows it to earn a specific return on its invested capital regardless of volume. This regulatory structure compresses beta, dramatically reduces cash flow uncertainty, and enables very high debt loads: all of which push WACC to its structural floor.
 
 Consider a regulated US electric utility with the following characteristics:
 - Beta: 0.65 (below the market average of 1.0, reflecting stable regulated revenues)
@@ -498,11 +498,11 @@ WACC = 0.70 × 7.5%  +  0.30 × 3.55%
 
 This 6.32% WACC is nearly 3 percentage points below the technology company example earlier in this post (9.23%). The difference is almost entirely explained by two factors: a much lower beta (0.65 vs. 1.30), which reduces the cost of equity by roughly 3 percentage points, and a lower pre-tax borrowing rate for high-grade utility debt.
 
-Why does the low beta matter so much? Because under CAPM, every unit of beta adds ERP percentage points to the cost of equity. The difference between a tech beta of 1.30 and a utility beta of 0.65 is 0.65 units — at a 4.6% ERP, that is 2.99 percentage points of cost of equity difference. At 70% equity weight, that translates to a 2.1 percentage point reduction in WACC from the beta effect alone.
+Why does the low beta matter so much? Because under CAPM, every unit of beta adds ERP percentage points to the cost of equity. The difference between a tech beta of 1.30 and a utility beta of 0.65 is 0.65 units: at a 4.6% ERP, that is 2.99 percentage points of cost of equity difference. At 70% equity weight, that translates to a 2.1 percentage point reduction in WACC from the beta effect alone.
 
-The practical consequence is large. A utility generating \$500M of annual FCF with a 2% terminal growth rate has a terminal value denominator (WACC − g) of (6.32% − 2%) = 4.32%. A tech company with identical FCF but a 9.23% WACC faces a denominator of (9.23% − 2%) = 7.23%. The utility's terminal value is 7.23 / 4.32 = 1.67 times higher per dollar of FCF — 67% more valuable in DCF terms — despite being the less exciting business. This is why regulated utilities often trade at high EV/EBITDA multiples relative to earnings growth: their low WACC inflates the present value of their predictable, stable cash flows far above what the headline growth rate would suggest.
+The practical consequence is large. A utility generating \$500M of annual FCF with a 2% terminal growth rate has a terminal value denominator (WACC − g) of (6.32% − 2%) = 4.32%. A tech company with identical FCF but a 9.23% WACC faces a denominator of (9.23% − 2%) = 7.23%. The utility's terminal value is 7.23 / 4.32 = 1.67 times higher per dollar of FCF, 67% more valuable in DCF terms, despite being the less exciting business. This is why regulated utilities often trade at high EV/EBITDA multiples relative to earnings growth: their low WACC inflates the present value of their predictable, stable cash flows far above what the headline growth rate would suggest.
 
-The insight generalizes: WACC is not a measure of how exciting a business is. It is a measure of how *certain* its cash flows are. A boring, predictable business with a low WACC can be worth far more than a high-growth, uncertain one — purely as a function of the discount rate math. Investors in regulated utilities are not making a mistake by paying premium multiples; they are correctly applying a lower discount rate to highly certain cash flows.
+The insight generalizes: WACC is not a measure of how exciting a business is. It is a measure of how *certain* its cash flows are. A boring, predictable business with a low WACC can be worth far more than a high-growth, uncertain one: purely as a function of the discount rate math. Investors in regulated utilities are not making a mistake by paying premium multiples; they are correctly applying a lower discount rate to highly certain cash flows.
 
 ### The enterprise value calculation
 
@@ -527,17 +527,17 @@ Professional DCF models always include a sensitivity table showing how enterpris
 - Rows: WACC from (base − 1%) to (base + 1%), in 0.5% increments
 - Columns: terminal growth rate from 1.5% to 4.0%, in 0.5% increments
 
-From the data, a company with FCF of \$100M/year, 5-year explicit period, WACC = 10%, terminal growth = 2% has an NPV of approximately \$1,082M. Push WACC to 8% (same growth) and NPV jumps to \$1,312M — a 21% increase. This is the DCF sensitivity built into the dataset.
+From the data, a company with FCF of \$100M/year, 5-year explicit period, WACC = 10%, terminal growth = 2% has an NPV of approximately \$1,082M. Push WACC to 8% (same growth) and NPV jumps to \$1,312M: a 21% increase. This is the DCF sensitivity built into the dataset.
 
 ### The terminal value problem
 
-More than 60%–75% of most enterprise values lie in the terminal value — the value beyond the explicit forecast period. The terminal value is almost always calculated using either the Gordon Growth Model:
+More than 60%–75% of most enterprise values lie in the terminal value: the value beyond the explicit forecast period. The terminal value is almost always calculated using either the Gordon Growth Model:
 
 ```
 TV = FCF_n × (1+g) / (WACC - g)
 ```
 
-Or an exit multiple (EV/EBITDA at the terminal year). The denominator of the Gordon model, (WACC − g), is wildly sensitive to both inputs. If WACC = 10% and g = 3%, the denominator is 7%. If WACC = 8% and g = 3%, the denominator is 5% — and the terminal value is 40% higher, even though the numerator (cash flows) is identical.
+Or an exit multiple (EV/EBITDA at the terminal year). The denominator of the Gordon model, (WACC − g), is wildly sensitive to both inputs. If WACC = 10% and g = 3%, the denominator is 7%. If WACC = 8% and g = 3%, the denominator is 5%, and the terminal value is 40% higher, even though the numerator (cash flows) is identical.
 
 This is where many valuation mistakes compound: a modestly optimistic WACC combined with a modestly optimistic terminal growth rate can dramatically inflate the enterprise value. A modestly pessimistic combination can make a fundamentally sound business look unattractive. Triangulating with comparable multiples and scenario analysis is essential.
 
@@ -558,7 +558,7 @@ Done correctly, this takes roughly 30 minutes for a public company with traded b
 
 ## Further Reading and Cross-Links
 
-The discount rate does not exist in isolation — it connects to every other valuation concept in this series.
+The discount rate does not exist in isolation: it connects to every other valuation concept in this series.
 
 For the foundational math behind why cash flows are discounted at all, see [Time Value of Money: The Engine Behind Every Valuation Model](/blog/trading/asset-valuation/time-value-of-money-engine-every-valuation-model). That post establishes the present value mechanics that WACC plugs into.
 

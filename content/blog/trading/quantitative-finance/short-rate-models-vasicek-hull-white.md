@@ -46,7 +46,7 @@ But many real products have payoffs that depend on what the curve does *between 
 - **Range accrual note.** Coupons accrue on days the short rate is in a range; the accrual depends on the path.
 - **Cap/floor.** A cap pays $\max(L_T - K, 0)$ on each fixing date $T$, where $L_T$ is the LIBOR/SOFR at fixing. Each caplet is an option on a forward rate.
 
-For all of these, the curve gives the initial condition but does not specify how rates evolve. We need an *SDE* — a stochastic differential equation for $r_t$ — that says how $r$ moves over time. The model's job is to provide a calibrated, arbitrage-free, computationally tractable SDE.
+For all of these, the curve gives the initial condition but does not specify how rates evolve. We need an *SDE*, a stochastic differential equation for $r_t$, that says how $r$ moves over time. The model's job is to provide a calibrated, arbitrage-free, computationally tractable SDE.
 
 The senior engineer's mental shortcut: *if the payoff depends on the rate path, you need a short-rate model*. If it depends only on terminal rates, the curve plus the forward measure suffice (we covered this in [the Black-Scholes post](/blog/trading/quantitative-finance/black-scholes) when discussing Black-76).
 
@@ -64,7 +64,7 @@ with three constant parameters: $a$ (mean-reversion speed), $\theta$ (long-run m
 
 ![Vasicek: the simplest mean-reverting short-rate model](/imgs/blogs/short-rate-models-vasicek-hull-white-2.png)
 
-The SDE is *Ornstein-Uhlenbeck* — the same process that describes a damped harmonic oscillator with thermal noise. The rate is pulled back toward $\theta$ at speed $a$; volatility shocks knock it away. Long-run, the rate is stationary with mean $\theta$ and variance $\sigma^2 / (2a)$.
+The SDE is *Ornstein-Uhlenbeck*: the same process that describes a damped harmonic oscillator with thermal noise. The rate is pulled back toward $\theta$ at speed $a$; volatility shocks knock it away. Long-run, the rate is stationary with mean $\theta$ and variance $\sigma^2 / (2a)$.
 
 Distribution at time $t$, given $r_0$:
 
@@ -88,7 +88,7 @@ $$
 
 with closed-form $A$ and $B$ in terms of $(a, \theta, \sigma)$. Pricing a vanilla bond is $O(1)$.
 
-The big limitation of Vasicek: with three constant parameters, the model can match three points on the curve but not the entire curve. Calibrating to fit today's full curve requires a time-dependent generalisation — Hull-White.
+The big limitation of Vasicek: with three constant parameters, the model can match three points on the curve but not the entire curve. Calibrating to fit today's full curve requires a time-dependent generalisation: Hull-White.
 
 ```python
 import numpy as np
@@ -133,7 +133,7 @@ $$
 
 where $f(0, t)$ is the instantaneous forward rate at time $t$ as observed today.
 
-The two remaining parameters $(a, \sigma)$ are calibrated to market vol instruments — typically caps or swaptions. The calibration is two-stage:
+The two remaining parameters $(a, \sigma)$ are calibrated to market vol instruments, typically caps or swaptions. The calibration is two-stage:
 
 1. **Stage 1 (curve fit).** Given any $(a, \sigma)$, choose $\theta(t)$ via the closed form to fit the curve exactly.
 2. **Stage 2 (vol fit).** Optimise over $(a, \sigma)$ to minimise pricing error on cap or swaption volatilities.
@@ -196,7 +196,7 @@ Why does mean reversion matter? Two reasons.
 
 **Term-structure slope.** A short rate that *doesn't* mean-revert has unbounded variance over long horizons. The yield curve becomes structurally upward-sloping with steep convexity. Real curves don't look like that; the term-structure flattening at long horizons is the hallmark of mean reversion.
 
-**Cap/swaption volatility shape.** Caps and swaptions across tenors show a characteristic "hump" — vol rising from short to ATM tenor, then declining. Mean reversion produces this hump naturally. Without mean reversion, vol would grow unbounded with tenor, contradicting market quotes.
+**Cap/swaption volatility shape.** Caps and swaptions across tenors show a characteristic "hump": vol rising from short to ATM tenor, then declining. Mean reversion produces this hump naturally. Without mean reversion, vol would grow unbounded with tenor, contradicting market quotes.
 
 The mean-reversion speed $a$ is therefore a *structural* parameter calibrated to the term-structure shape. Typical values: $a \in [0.01, 0.1]$, corresponding to half-life of 7-70 years. Different currencies have different typical $a$:
 
@@ -293,7 +293,7 @@ For callable / puttable / Bermudan: the closed form gives the un-called value; t
 4. **Apply call/put constraint** at exercise dates: $V = \max(V_{\text{continue}}, V_{\text{exercise}})$.
 5. **Read off** the value at $t = 0$ corresponding to the current short rate.
 
-The pricing is $O(N_t \times N_r)$ where $N_t$ is the number of time steps and $N_r$ the number of rate states. For a 30-year callable bond with daily steps and 100 rate states, this is ~750K operations — milliseconds on modern hardware.
+The pricing is $O(N_t \times N_r)$ where $N_t$ is the number of time steps and $N_r$ the number of rate states. For a 30-year callable bond with daily steps and 100 rate states, this is ~750K operations: milliseconds on modern hardware.
 
 ### 5.1 Connection to the Black-Scholes PDE
 
@@ -429,7 +429,7 @@ $$
 V_{\text{cap}} = \sum_i V_{\text{caplet}}(0; T_i, T_{i+1}, K).
 $$
 
-Each caplet has $O(1)$ closed-form pricing; cap is $O(N)$. For a 5-year cap with quarterly fixings, that's 20 caplets — milliseconds total.
+Each caplet has $O(1)$ closed-form pricing; cap is $O(N)$. For a 5-year cap with quarterly fixings, that's 20 caplets: milliseconds total.
 
 Caps and swaptions are both standard calibration instruments for Hull-White. Caps are simpler (one tenor at a time); swaptions cover the full $(M \times N)$ surface. Most banks calibrate to swaptions because that matches their swaption book directly.
 
@@ -563,7 +563,7 @@ $$
 \frac{dF_i(t)}{F_i(t)} = \mu_i(F, t) \, dt + \sigma_i(t) \, dW_i.
 $$
 
-The drift $\mu_i$ depends on the volatilities $\sigma_j$ and forward rates $F_j$ for $j > i$ — it captures the difference between the $T_{i+1}$-forward measure and the chosen common measure.
+The drift $\mu_i$ depends on the volatilities $\sigma_j$ and forward rates $F_j$ for $j > i$: it captures the difference between the $T_{i+1}$-forward measure and the chosen common measure.
 
 Advantages of LMM:
 
@@ -622,7 +622,7 @@ A production-quality Hull-White lattice prices a callable bond in 5-50 ms depend
 
 ### 12.2 Lattice vs PDE: when each wins
 
-Lattice (trinomial tree) and PDE (finite difference) are mathematically related — both discretise the same continuous-time problem. Choosing between them:
+Lattice (trinomial tree) and PDE (finite difference) are mathematically related: both discretise the same continuous-time problem. Choosing between them:
 
 **Lattice wins when:**
 - The product has discrete exercise dates (Bermudan).
@@ -1043,13 +1043,13 @@ Calibration: rates parameters from caps/swaptions; equity parameters from equity
 
 Short-rate models are the dynamic layer above the yield curve. Hull-White, with its closed-form curve fit and tractable lattice / PDE / MC pricing, is the workhorse of rates derivatives. Vasicek, Black-Karasinski, CIR, and LMM each have their niches.
 
-A senior rates quant operates fluently in the model-calibration-pricing pipeline. The math is well-understood; the engineering — calibration discipline, multi-factor extensions, regime-shift handling — is the daily craft.
+A senior rates quant operates fluently in the model-calibration-pricing pipeline. The math is well-understood; the engineering (calibration discipline, multi-factor extensions, regime-shift handling) is the daily craft.
 
-The remaining articles in this series — [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on specific product categories built on these rate models.
+The remaining articles in this series ([Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets)) go deeper on specific product categories built on these rate models.
 
-Rate models are the foundation under a multi-trillion-dollar interest-rate-derivatives market. Doing it well — calibrated, multi-factor where needed, regime-aware, audited — is the silent competence that powers every rate-sensitive product. The reward is a clear-headed view of one of the most quantitatively rigorous corners of finance.
+Rate models are the foundation under a multi-trillion-dollar interest-rate-derivatives market. Doing it well (calibrated, multi-factor where needed, regime-aware, audited) is the silent competence that powers every rate-sensitive product. The reward is a clear-headed view of one of the most quantitatively rigorous corners of finance.
 
-A final reflection: rate models sit at the intersection of pure mathematics (stochastic calculus, PDEs) and operational engineering (calibration pipelines, validation gates, audit trails). The dual demands — mathematical correctness and operational robustness — are what make the discipline rewarding for those who can bridge both. Senior rates quants are valued because they can move fluently between the textbook proof and the production audit.
+A final reflection: rate models sit at the intersection of pure mathematics (stochastic calculus, PDEs) and operational engineering (calibration pipelines, validation gates, audit trails). The dual demands, mathematical correctness and operational robustness, are what make the discipline rewarding for those who can bridge both. Senior rates quants are valued because they can move fluently between the textbook proof and the production audit.
 
 The discipline is also conservative in a productive way. Hull-White from 1990 is still the workhorse 35 years later because its assumptions are clear, its calibration is tractable, and its limitations are well-understood. Replacing it would require not just a better model but a better operational infrastructure for that model. Senior practitioners often choose Hull-White over more sophisticated alternatives because the operational reliability matters more than the marginal modelling improvement.
 
@@ -1112,7 +1112,7 @@ A few research and production directions where ML is augmenting traditional rate
 
 **Hybrid models.** Use Hull-White for the structural dynamics + ML correction for residuals. Combines interpretability of classical models with flexibility of ML.
 
-These approaches are still maturing in production. Senior rates quants who can deploy ML responsibly — with proper validation, audit trails, and arbitrage checks — are increasingly valuable.
+These approaches are still maturing in production. Senior rates quants who can deploy ML responsibly (with proper validation, audit trails, and arbitrage checks) are increasingly valuable.
 
 ### 20.4 Alternative-rate / SOFR-only models
 
@@ -1153,7 +1153,7 @@ A subtle architectural point: the choice of rate model has implications for cros
 
 A senior cross-asset architect ensures rate-model consistency across all asset classes. Inconsistencies (e.g., one Hull-White calibration for rates desk, another for structured products) produce cross-asset arbitrages internal to the firm.
 
-A senior rates quant builds infrastructure that will outlive them at the firm. Hull-White implementations from 1995 are still running in production; every quant who works on them inherits the architectural decisions of their predecessors. Building well, documenting clearly, designing for evolution — these are the responsibilities of the senior practitioner. The reward is the satisfaction of having contributed to infrastructure that prices trillions of dollars of risk, day after day, for decades.
+A senior rates quant builds infrastructure that will outlive them at the firm. Hull-White implementations from 1995 are still running in production; every quant who works on them inherits the architectural decisions of their predecessors. Building well, documenting clearly, designing for evolution: these are the responsibilities of the senior practitioner. The reward is the satisfaction of having contributed to infrastructure that prices trillions of dollars of risk, day after day, for decades.
 
 A final philosophical reflection: the success of Hull-White and other short-rate models is in their *boundedness*. They make specific simplifying assumptions (Gaussian, mean-reverting, single factor) and work within those limits. They are not "the truth" about rate dynamics; they are *engineering compromises* that work well enough for most products. Senior practitioners are comfortable with this boundedness. They know the model has limits; they know what those limits are; they avoid using the model outside those limits.
 
@@ -1192,11 +1192,11 @@ A senior rates quant knows where each tool fits and switches between them as pro
 
 After 50 pages of short-rate modelling, a final reflection on the discipline. Rate models are a 50-year-old field; they have been refined, productionised, audited, and stress-tested across multiple market regimes. The math is beautiful (stochastic calculus, PDEs, Monte Carlo); the engineering is demanding (calibration discipline, multi-curve frameworks, real-time pipelines); the operational reality is unforgiving (one wrong calibration produces a million-dollar mispricing).
 
-The senior practitioner who navigates all three layers — math, engineering, operations — produces work that is durable. Hull-White implementations from the 1990s still run in production banks today. The infrastructure outlives the people who built it. The intellectual investment compounds across decades.
+The senior practitioner who navigates all three layers (math, engineering, operations) produces work that is durable. Hull-White implementations from the 1990s still run in production banks today. The infrastructure outlives the people who built it. The intellectual investment compounds across decades.
 
 This is what rate modelling offers: a discipline where mathematical rigour, engineering craft, and operational discipline meet to power a multi-trillion-dollar market. The rewards for those who master it are intellectual depth, durable career value, and the satisfaction of contributing to infrastructure that prices risk every day for the global financial system.
 
-For engineers entering 2026: the field is mature but still evolving. SOFR-native models, ML-augmented calibration, real-time pipelines, cross-asset coherence — each is an active frontier. A senior quant in this decade will work on at least one or two of these frontiers. The discipline rewards the patient, careful, and rigorous; it punishes the careless.
+For engineers entering 2026: the field is mature but still evolving. SOFR-native models, ML-augmented calibration, real-time pipelines, cross-asset coherence: each is an active frontier. A senior quant in this decade will work on at least one or two of these frontiers. The discipline rewards the patient, careful, and rigorous; it punishes the careless.
 
 Welcome to rate modelling. Master Hull-White first; then explore. The career is long, the math is deep, and the work matters.
 
@@ -1214,7 +1214,7 @@ For engineers diving deeper into the discipline:
 - Brace, Gatarek, Musiela (1997): "The Market Model of Interest Rate Dynamics"
 
 **Textbooks:**
-- Brigo & Mercurio (2006): "Interest Rate Models — Theory and Practice"
+- Brigo & Mercurio (2006): "Interest Rate Models, Theory and Practice"
 - Andersen & Piterbarg (2010): "Interest Rate Modeling" (3 volumes)
 - Hull (2017): "Options, Futures, and Other Derivatives" (textbook treatment)
 

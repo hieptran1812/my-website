@@ -12,20 +12,20 @@ readTime: 45
 ---
 
 > [!important]
-> **TL;DR** — When a company teeters on the edge of default, the entire valuation playbook flips: equity becomes a lottery ticket, debt becomes the new equity, and recovery rate analysis replaces earnings forecasting.
+> **TL;DR**, When a company teeters on the edge of default, the entire valuation playbook flips: equity becomes a lottery ticket, debt becomes the new equity, and recovery rate analysis replaces earnings forecasting.
 >
 > - Credit spread = corporate yield minus the risk-free rate; it prices in the market's estimate of default probability times loss-given-default.
-> - The Merton model shows that equity is literally a call option on firm assets, with the face value of debt as the strike — when assets fall below debt, equity goes to zero.
+> - The Merton model shows that equity is literally a call option on firm assets, with the face value of debt as the strike, when assets fall below debt, equity goes to zero.
 > - Distressed investors buy senior debt at 40-60 cents on the dollar and target 70-90 cents in recovery through restructuring, targeting 15-25% IRR.
 > - Recovery rates depend critically on seniority: senior secured lenders recover ~70¢, senior unsecured ~38¢, subordinated ~18¢ (Moody's Ultimate Recovery Database, as of 2023).
-> - The "fulcrum security" is the layer in the capital stack where enterprise value tips from full recovery to partial — whoever holds it controls the restructuring outcome.
-> - A CDS (credit default swap) is priced as default probability times loss-given-default — the same math as the credit spread, but in swap form.
+> - The "fulcrum security" is the layer in the capital stack where enterprise value tips from full recovery to partial: whoever holds it controls the restructuring outcome.
+> - A CDS (credit default swap) is priced as default probability times loss-given-default: the same math as the credit spread, but in swap form.
 
-In the autumn of 2008, Lehman Brothers' bonds were trading at 12 cents on the dollar. Meanwhile, the equity had already gone to zero. Any investor still holding Lehman stock faced a near-total wipeout. But investors who had purchased Lehman's senior unsecured bonds at those distressed prices? They ultimately recovered roughly 21 cents on the dollar — not much, but 75% more than zero.
+In the autumn of 2008, Lehman Brothers' bonds were trading at 12 cents on the dollar. Meanwhile, the equity had already gone to zero. Any investor still holding Lehman stock faced a near-total wipeout. But investors who had purchased Lehman's senior unsecured bonds at those distressed prices? They ultimately recovered roughly 21 cents on the dollar, not much, but 75% more than zero.
 
 This story captures everything essential about credit and distressed debt valuation: the same company, the same moment in time, but radically different values depending on *where you sit in the capital structure*. The equity investor lost everything. The senior bondholder lost most of it. A sophisticated distressed investor who bought the bonds at 10 cents and recovered 21 cents earned a 110% return on that trade.
 
-How do you analyze these situations? How do you price a bond for credit risk? How do you value a company that is actively going bankrupt? How do you decide which layer of debt is the most attractive bet? These are the questions this post answers — from first principles, with real numbers.
+How do you analyze these situations? How do you price a bond for credit risk? How do you value a company that is actively going bankrupt? How do you decide which layer of debt is the most attractive bet? These are the questions this post answers: from first principles, with real numbers.
 
 ![Capital structure seniority stack showing recovery rates by layer](/imgs/blogs/credit-distressed-debt-valuation-recovery-rates-1.png)
 
@@ -36,10 +36,10 @@ Before we can value distressed debt, we need to understand what makes any debt r
 ### The two promises a bond makes
 
 When a company borrows money by issuing a bond, it makes two promises to the lender:
-1. **Pay interest** (the "coupon") at regular intervals — say, 6% per year on a \$1,000 bond = \$60/year.
-2. **Repay the principal** (the face value = \$1,000) at maturity — say, in 10 years.
+1. **Pay interest** (the "coupon") at regular intervals: say, 6% per year on a \$1,000 bond = \$60/year.
+2. **Repay the principal** (the face value = \$1,000) at maturity: say, in 10 years.
 
-A US Treasury bond makes these same two promises, but backed by the full faith and credit of the United States government. The government can print money; it virtually never defaults. So the Treasury yield is treated as the **risk-free rate** — the baseline return you earn for locking up money for a given period, with essentially no default risk.
+A US Treasury bond makes these same two promises, but backed by the full faith and credit of the United States government. The government can print money; it virtually never defaults. So the Treasury yield is treated as the **risk-free rate**: the baseline return you earn for locking up money for a given period, with essentially no default risk.
 
 A corporate bond makes the same promises, but the company can go bankrupt and fail to pay. You are taking additional risk. You need to be compensated for that risk. The compensation comes in the form of a higher yield.
 
@@ -67,7 +67,7 @@ Expected Loss = Probability of Default (PD) × Loss Given Default (LGD)
 If the market thinks there's a 3% chance this company defaults each year, and if it defaults you lose 60% of your money (LGD = 60%), then:
 - Expected loss = 3% × 60% = 1.80% per year = 180 bps/year
 
-**2. Unexpected loss (volatility risk premium):** Even if expected losses average 180 bps, the actual default either happens or it doesn't — you get 0% loss or 60% loss. That binary outcome adds risk beyond the expected value. Investors demand compensation for bearing this volatility.
+**2. Unexpected loss (volatility risk premium):** Even if expected losses average 180 bps, the actual default either happens or it doesn't, you get 0% loss or 60% loss. That binary outcome adds risk beyond the expected value. Investors demand compensation for bearing this volatility.
 
 **3. Liquidity risk premium:** Corporate bonds are harder to trade than Treasuries. In a crisis, you might not find a buyer at a fair price. Illiquidity deserves compensation.
 
@@ -84,7 +84,7 @@ These two terms are mirror images:
 - **Recovery Rate (RR):** What fraction of the face value you get back if default occurs. Example: 40% recovery rate = you recover 40 cents on the dollar.
 - **Loss Given Default (LGD):** How much you lose. LGD = 1 − RR. A 40% recovery means LGD = 60%.
 
-Recovery rate is *not* uniform — it depends critically on where in the capital structure your claim sits. We'll explore this in depth below.
+Recovery rate is *not* uniform: it depends critically on where in the capital structure your claim sits. We'll explore this in depth below.
 
 ### Investment grade vs high yield
 
@@ -92,7 +92,7 @@ The bond market divides issuers into two broad buckets based on credit quality:
 
 - **Investment grade (IG):** Rated BBB-/Baa3 or above by S&P/Fitch/Moody's. These companies have relatively low default risk. IG spreads typically run 50–200 bps over Treasuries. The US IG corporate market is approximately \$10 trillion in size (as of 2024).
 
-- **High yield (HY):** Rated BB+/Ba1 or below — also called "junk bonds." Higher default risk, spreads typically 300–700+ bps over Treasuries. The US HY market is approximately \$1.4 trillion (as of 2024).
+- **High yield (HY):** Rated BB+/Ba1 or below, also called "junk bonds." Higher default risk, spreads typically 300–700+ bps over Treasuries. The US HY market is approximately \$1.4 trillion (as of 2024).
 
 When a company falls from IG to HY, it is called a "fallen angel." The downgrade often triggers forced selling from IG-only mandated funds, creating dislocations that distressed investors exploit.
 
@@ -152,13 +152,13 @@ Cumulative PD over 5 years ≈ 30.1%
 
 ### Spread widening and tightening
 
-Credit spreads are not static — they move with the economic cycle and market sentiment:
+Credit spreads are not static. They move with the economic cycle and market sentiment:
 
 - **Spread tightening** (spreads narrow): Investors are optimistic about default risk. This usually happens in boom periods when companies generate strong free cash flow and can easily service debt. HY spreads hit as low as ~275 bps in 2021 (FRED data).
 
 - **Spread widening** (spreads widen): Investors fear default. In recessions or financial crises, spreads blow out. HY spreads hit ~750 bps in early 2020 (COVID shock) and peaked around 2,000 bps in December 2008 (financial crisis).
 
-The chart above shows how dramatically spreads moved from 2010 to 2024. Notice how IG spreads (blue) are much tighter and less volatile than HY spreads (red) — reflecting the dramatically different default risk profiles.
+The chart above shows how dramatically spreads moved from 2010 to 2024. Notice how IG spreads (blue) are much tighter and less volatile than HY spreads (red): reflecting the dramatically different default risk profiles.
 
 ---
 
@@ -179,7 +179,7 @@ What happens at maturity?
 - Equity holders pay off the debt (\$D\$) and keep the rest: **Equity = \$V_T − D\$**
 - Debt holders get their full \$D\$ back.
 
-**If \$V_T < D\$ (firm value less than debt — default):**
+**If \$V_T < D\$ (firm value less than debt, default):**
 - Equity holders walk away (limited liability). **Equity = \$0\$**
 - Debt holders get whatever the firm is worth: **Debt = \$V_T\$** (less than face value)
 
@@ -205,7 +205,7 @@ This is equivalent to:
 Debt = D × e^(-rT) − max(D − V, 0)
 ```
 
-Which is: risk-free bond value minus a put option on firm assets. The debt holder has lent money (the risk-free bond component) but written a put option — they bear the downside if firm value falls below the face value of debt.
+Which is: risk-free bond value minus a put option on firm assets. The debt holder has lent money (the risk-free bond component) but written a put option: they bear the downside if firm value falls below the face value of debt.
 
 ![Merton model pipeline showing equity as call option on firm assets](/imgs/blogs/credit-distressed-debt-valuation-recovery-rates-3.png)
 
@@ -284,7 +284,7 @@ Credit Spread = 4.84% − 4.57% = 0.27% = 27 bps
 
 **Intuition:** With leverage only 50% and asset volatility 30%, the default probability is low (the firm would need to lose more than half its value), so the spread is modest (27 bps). This company is IG-quality.
 
-#### Worked example: Merton model — leverage sensitivity table
+#### Worked example: Merton model, leverage sensitivity table
 
 Now what happens when leverage rises to 80% (debt = \$800\$)?
 
@@ -296,7 +296,7 @@ d2 = 1.046 − 0.30 = 0.746
 N(d2) = N(0.746) ≈ 0.772
 ```
 
-At 80% leverage the implied spread jumps dramatically — now in HY territory, often 300–400 bps depending on volatility assumptions.
+At 80% leverage the implied spread jumps dramatically: now in HY territory, often 300–400 bps depending on volatility assumptions.
 
 To make this sensitivity concrete, here is how the implied credit spread changes across leverage ratios (D/V) and asset volatility levels, keeping \$V = \$1,000\$ and \$r = 4.57%\$, \$T = 1\$ year:
 
@@ -309,17 +309,17 @@ To make this sensitivity concrete, here is how the implied credit spread changes
 | 75% (\$D=\$750\$) | 35% | 0.79 | 0.785 | ~325 bps | B |
 | 85% (\$D=\$850\$) | 40% | 0.21 | 0.583 | ~680 bps | CCC |
 
-**Key insight:** The Merton model quantifies what practitioners know intuitively — higher leverage + higher asset volatility = wider credit spread = more expensive borrowing. A seemingly modest increase in leverage from 50% to 85% combined with higher asset volatility takes the spread from 27 bps (IG comfort zone) to 680 bps (CCC distress territory) — a non-linear explosion driven by the optionality embedded in equity.
+**Key insight:** The Merton model quantifies what practitioners know intuitively, higher leverage + higher asset volatility = wider credit spread = more expensive borrowing. A seemingly modest increase in leverage from 50% to 85% combined with higher asset volatility takes the spread from 27 bps (IG comfort zone) to 680 bps (CCC distress territory): a non-linear explosion driven by the optionality embedded in equity.
 
 ![Merton model: equity and debt value as a function of firm asset value](/imgs/blogs/credit-distressed-debt-valuation-recovery-rates-6.png)
 
-The chart above makes this concrete. When firm asset value \$V\$ far exceeds the debt face value \$D = \$500\$, equity behaves like the full residual claim (the green line tracks \$V − 500\$). But as \$V\$ approaches \$D\$ from above, equity's value is *higher* than a naive linear calculation (green vs dashed red) — because of the optionality. Equity holders can't lose more than zero, but they keep all the upside above \$D\$.
+The chart above makes this concrete. When firm asset value \$V\$ far exceeds the debt face value \$D = \$500\$, equity behaves like the full residual claim (the green line tracks \$V − 500\$). But as \$V\$ approaches \$D\$ from above, equity's value is *higher* than a naive linear calculation (green vs dashed red), because of the optionality. Equity holders can't lose more than zero, but they keep all the upside above \$D\$.
 
 ---
 
 ## Distressed Debt Investing: Buying at 40 Cents
 
-When a company gets into serious financial trouble, its bonds trade at a steep discount to face value. A \$1,000 face-value bond might trade at \$400 — "40 cents on the dollar." This is the domain of distressed debt investors: specialists who buy claims in companies in or near bankruptcy and profit from the restructuring process.
+When a company gets into serious financial trouble, its bonds trade at a steep discount to face value. A \$1,000 face-value bond might trade at \$400: "40 cents on the dollar." This is the domain of distressed debt investors: specialists who buy claims in companies in or near bankruptcy and profit from the restructuring process.
 
 ### Why bonds trade at distressed prices
 
@@ -368,7 +368,7 @@ If the fund buys the senior unsecured at 38 cents thinking they can argue for a 
 - Unless the fund can negotiate a higher EV or provide new money to get paid
 - The unsecured position is **out of the money** in this EV scenario
 
-**Key insight:** Distressed investing is all about the waterfall — the sequential order in which creditors get paid. The return depends entirely on where enterprise value intersects the capital structure.
+**Key insight:** Distressed investing is all about the waterfall, the sequential order in which creditors get paid. The return depends entirely on where enterprise value intersects the capital structure.
 
 ---
 
@@ -434,18 +434,18 @@ Annual premium = 240 bps × $10M = $240,000/year
 - Premium payments stop
 - Seller pays: \$10M × (1 − 40%) = **\$6,000,000** to the protection buyer
 
-**Key insight:** The CDS spread is essentially the same math as the credit spread — it prices default probability times loss severity. The difference is that a CDS is a pure credit derivative (you don't need to own the bond to buy protection), making it more liquid and flexible.
+**Key insight:** The CDS spread is essentially the same math as the credit spread, it prices default probability times loss severity. The difference is that a CDS is a pure credit derivative (you don't need to own the bond to buy protection), making it more liquid and flexible.
 
 ### CDS spread vs bond credit spread: the "basis"
 
-In theory, the CDS spread and the bond credit spread should be identical — both price the same default risk on the same reference entity. In practice, they often differ. The difference is called the **CDS-bond basis**:
+In theory, the CDS spread and the bond credit spread should be identical: both price the same default risk on the same reference entity. In practice, they often differ. The difference is called the **CDS-bond basis**:
 
 ```
 Basis = CDS Spread − Bond Credit Spread
 ```
 
 **Positive basis** (CDS spread > bond spread): CDS protection is expensive relative to the bond. This can happen when:
-- Demand for protection outstrips supply (everyone wants insurance at once — as happened in 2008)
+- Demand for protection outstrips supply (everyone wants insurance at once, as happened in 2008)
 - There is a "cheapest-to-deliver" option in physical settlement that makes CDS more valuable than the bond
 
 **Negative basis** (CDS spread < bond spread): The bond is cheap relative to CDS. This can indicate:
@@ -460,16 +460,16 @@ A telecom company has:
 
 **Basis = 280 − 350 = −70 bps (negative basis)**
 
-The bond yields 70 bps *more* than it should relative to CDS — it's cheaper in the cash market than the derivatives market implies.
+The bond yields 70 bps *more* than it should relative to CDS: it's cheaper in the cash market than the derivatives market implies.
 
 **The negative basis trade:**
 1. Buy the bond (earn 350 bps over Treasuries)
 2. Buy CDS protection on the same issuer (pay 280 bps)
 3. **Net carry = 350 − 280 = 70 bps per year**
 
-If no credit event occurs, you earn 70 bps annually risk-free (ignoring funding costs and counterparty risk). If a credit event occurs, the bond loss is covered by the CDS payout. The trade is theoretically riskless — a form of capital structure arbitrage.
+If no credit event occurs, you earn 70 bps annually risk-free (ignoring funding costs and counterparty risk). If a credit event occurs, the bond loss is covered by the CDS payout. The trade is theoretically riskless: a form of capital structure arbitrage.
 
-Basis trades require careful execution: funding the bond purchase (repo rate, haircuts) and collateral for the CDS must be accounted for. After 2008, many basis traders who had built large negative basis books suffered severe losses when funding dried up and repo haircuts spiked — even though the eventual credit outcome was fine. The lesson: **carry trades funded with leverage can be destroyed by funding liquidity crises even when the credit thesis is right.**
+Basis trades require careful execution: funding the bond purchase (repo rate, haircuts) and collateral for the CDS must be accounted for. After 2008, many basis traders who had built large negative basis books suffered severe losses when funding dried up and repo haircuts spiked, even though the eventual credit outcome was fine. The lesson: **carry trades funded with leverage can be destroyed by funding liquidity crises even when the credit thesis is right.**
 
 ### Why CDS markets matter for valuation
 
@@ -478,7 +478,7 @@ CDS markets are often *more liquid* than cash bond markets. Investors watch CDS 
 2. Hedge bond portfolios against credit risk.
 3. Speculate on credit deterioration or improvement.
 
-When a company's CDS spreads surge (e.g., from 100 bps to 800 bps), it signals the market sees sharply higher default risk — often a leading indicator before rating agencies downgrade.
+When a company's CDS spreads surge (e.g., from 100 bps to 800 bps), it signals the market sees sharply higher default risk, often a leading indicator before rating agencies downgrade.
 
 ---
 
@@ -534,7 +534,7 @@ Claims (in order of seniority):
 - Preferred equity: \$0M (nothing left)
 - Common equity: \$0M
 
-**Key insight:** The liquidation waterfall is brutally sequential. Once a layer is exhausted, all lower layers get nothing. The senior secured "fulcrum" here was the unsecured layer — they didn't get wiped out but didn't recover in full.
+**Key insight:** The liquidation waterfall is brutally sequential. Once a layer is exhausted, all lower layers get nothing. The senior secured "fulcrum" here was the unsecured layer: they didn't get wiped out but didn't recover in full.
 
 ### Going-concern value
 
@@ -552,7 +552,7 @@ The key question in bankruptcy: is going-concern value higher or lower than liqu
 
 ## Recovery Rates by Seniority: The Hierarchy of Claims
 
-Recovery rates in bankruptcy are not uniform. They depend almost entirely on where you sit in the **capital structure hierarchy** — the legal pecking order for who gets paid first.
+Recovery rates in bankruptcy are not uniform. They depend almost entirely on where you sit in the **capital structure hierarchy**: the legal pecking order for who gets paid first.
 
 ### The seniority ladder
 
@@ -572,7 +572,7 @@ The capital structure typically has five or more layers:
 - Moody's mean recovery: **~38¢**; range 20–60¢. This is where most IG corporate bonds sit.
 
 **4. Senior Subordinated / Mezzanine Debt**
-- Contractually subordinated to senior debt — only paid after senior claims satisfied.
+- Contractually subordinated to senior debt, only paid after senior claims satisfied.
 - Moody's mean recovery: **~25¢**; range 10–45¢.
 
 **5. Subordinated Debt / Junior Notes**
@@ -580,12 +580,12 @@ The capital structure typically has five or more layers:
 - Moody's mean recovery: **~18¢**; range 5–35¢.
 
 **6. Equity (Preferred and Common)**
-- The residual — gets paid only after *all* debt is satisfied.
+- The residual: gets paid only after *all* debt is satisfied.
 - In most corporate bankruptcies, equity recovers zero. Preferred: 0–15¢; Common: essentially zero.
 
 ![Recovery rates by debt seniority: Moody's data](/imgs/blogs/credit-distressed-debt-valuation-recovery-rates-4.png)
 
-The chart makes this visual: there is a dramatic recovery rate gradient from top to bottom of the capital structure. This is why distressed investors focus intensely on seniority — it's the primary determinant of how much you get back.
+The chart makes this visual: there is a dramatic recovery rate gradient from top to bottom of the capital structure. This is why distressed investors focus intensely on seniority: it's the primary determinant of how much you get back.
 
 ### What drives recovery rate variation within a seniority class?
 
@@ -609,7 +609,7 @@ The fulcrum security is the tranche of debt (or equity) where:
 - The fulcrum tranche itself receives **partial recovery** (enterprise value runs out partway through this layer).
 - Creditors *below* the fulcrum receive **zero** (no value left for them).
 
-The fulcrum security effectively *becomes the new equity* in the restructured company. If a reorganization plan converts debt to equity (standard in Chapter 11), the fulcrum holders are the ones who receive the new common shares — they become the new owners.
+The fulcrum security effectively *becomes the new equity* in the restructured company. If a reorganization plan converts debt to equity (standard in Chapter 11), the fulcrum holders are the ones who receive the new common shares: they become the new owners.
 
 ### Why the fulcrum matters
 
@@ -646,13 +646,13 @@ A manufacturing company files Chapter 11. Capital structure and enterprise value
 - Preferred equity: **Zero**
 - Common equity: **Zero** (wiped out)
 
-**Fulcrum security: The senior unsecured notes.** They are the layer where enterprise value runs out. They receive 87.5 cents on the dollar — not full recovery, but not zero. In a debt-to-equity exchange, these noteholders would receive *new common equity* in the reorganized company.
+**Fulcrum security: The senior unsecured notes.** They are the layer where enterprise value runs out. They receive 87.5 cents on the dollar, not full recovery, but not zero. In a debt-to-equity exchange, these noteholders would receive *new common equity* in the reorganized company.
 
 If enterprise value turns out to be \$800M instead (which distressed investors will argue for):
 - Revolver: Paid (\$700M remaining)
 - Term loan: Paid (\$400M remaining)
-- Senior unsecured: **Fully paid — \$400M of \$400M = 100¢**
-- Subordinated notes: **\$0M → partial recovery (0¢)** — the fulcrum shifts down to subordinated!
+- Senior unsecured: **Fully paid, \$400M of \$400M = 100¢**
+- Subordinated notes: **\$0M → partial recovery (0¢)**, the fulcrum shifts down to subordinated!
 
 **Key insight:** The fulcrum security is *highly sensitive* to small changes in enterprise value estimates. A \$50M change in EV can shift the fulcrum from one tranche to another, completely changing who controls the restructuring and who recovers anything.
 
@@ -672,41 +672,41 @@ Continuing the manufacturing company example above, a distressed fund is decidin
 | \$1,000M (optimistic) | paid | paid | **100¢** + sub notes get 25¢ | 100¢ | **+67%** |
 
 **What this tells the investor:**
-- At EV ≥ \$750M, the 60-cent entry earns 46–67% — compelling for a 12–18 month restructuring (25–40% annualized IRR).
+- At EV ≥ \$750M, the 60-cent entry earns 46–67%: compelling for a 12–18 month restructuring (25–40% annualized IRR).
 - At EV = \$600M, the position loses money (recovered 50¢ < 60¢ paid).
-- The **break-even EV** is \$500M (revolver) + \$300M (TL) + 60% × \$400M (unsecured face at 60 cents) = \$500M + \$300M + \$240M = **\$1,040M total claims before unsecured** — no, the actual break-even is simpler: the unsecured needs to recover at least 60¢ × \$400M = \$240M, which requires EV above \$100M (revolver) + \$300M (TL) + \$240M = **\$640M.**
+- The **break-even EV** is \$500M (revolver) + \$300M (TL) + 60% × \$400M (unsecured face at 60 cents) = \$500M + \$300M + \$240M = **\$1,040M total claims before unsecured**, no, the actual break-even is simpler: the unsecured needs to recover at least 60¢ × \$400M = \$240M, which requires EV above \$100M (revolver) + \$300M (TL) + \$240M = **\$640M.**
 
-The fund's due diligence centers on whether \$640M is a reasonable floor for the going-concern EV. If they model \$700–800M as the likely range with bear case at \$600M, the position has positive expected value at 60¢ entry — but carries meaningful downside risk in the bear scenario.
+The fund's due diligence centers on whether \$640M is a reasonable floor for the going-concern EV. If they model \$700–800M as the likely range with bear case at \$600M, the position has positive expected value at 60¢ entry, but carries meaningful downside risk in the bear scenario.
 
 ---
 
 ## Common Misconceptions
 
-### Misconception 1: "Senior secured debt is always safe — it always recovers close to par"
+### Misconception 1: "Senior secured debt is always safe, it always recovers close to par"
 
-Reality: senior secured debt *does* recover better than junior claims, but "safe" is too strong a word. Moody's data shows first-lien secured average recovery of ~70¢, but the *range* is 55¢ to 90¢ — meaning a significant fraction of first-lien holders lose 30–45% of their investment. The wide range reflects collateral quality, industry, and total leverage.
+Reality: senior secured debt *does* recover better than junior claims, but "safe" is too strong a word. Moody's data shows first-lien secured average recovery of ~70¢, but the *range* is 55¢ to 90¢: meaning a significant fraction of first-lien holders lose 30–45% of their investment. The wide range reflects collateral quality, industry, and total leverage.
 
-The clearest counter-example is a **collateral collapse**. If a company borrows \$500M backed by a retail real-estate portfolio worth \$600M, the first-lien lenders feel safe. But if the retail collapse drives that real estate down to \$350M, the first-lien holders recover only \$350M / \$500M = **70 cents** — not par. In energy company bankruptcies during 2015–2016 (low oil prices), first-lien lenders on exploration assets routinely recovered 60–75¢ because the oil in the ground lost half its value.
+The clearest counter-example is a **collateral collapse**. If a company borrows \$500M backed by a retail real-estate portfolio worth \$600M, the first-lien lenders feel safe. But if the retail collapse drives that real estate down to \$350M, the first-lien holders recover only \$350M / \$500M = **70 cents**, not par. In energy company bankruptcies during 2015–2016 (low oil prices), first-lien lenders on exploration assets routinely recovered 60–75¢ because the oil in the ground lost half its value.
 
 **The lesson:** Senior secured is relatively safer, not absolutely safe. When analyzing distressed credit, always estimate the *range* of collateral values, not just the point estimate.
 
-### Misconception 2: "CDS is just insurance — identical to buying a put on a bond"
+### Misconception 2: "CDS is just insurance, identical to buying a put on a bond"
 
 A CDS is often called "credit insurance," but the analogy breaks down in important ways:
 
 | Feature | CDS | Traditional Insurance |
 |---|---|---|
-| Insurable interest | **Not required** — you can buy protection on a bond you don't own | Required — you must own the insured asset |
-| Counterparty risk | Yes — protection seller can default | Insurance company regulated solvency |
+| Insurable interest | **Not required**: you can buy protection on a bond you don't own | Required: you must own the insured asset |
+| Counterparty risk | Yes: protection seller can default | Insurance company regulated solvency |
 | Settlement | Cash or physical delivery of bonds | Cash payment only |
 | Standardization | ISDA-standardized, liquid | Bespoke terms |
 | Deliverable bonds | Can deliver *any* bond in the cheapest-to-deliver basket | N/A |
 
-The most important difference: **you don't need to own the bond to buy CDS protection.** This means CDS can be used to speculate on credit deterioration. In 2007–2008, hedge funds bought billions of notional CDS protection on mortgage-backed securities they did *not* own — the "The Big Short" trade. The notional CDS outstanding on some reference entities far exceeded the actual bonds outstanding, which created significant concerns about systemic concentration of credit risk.
+The most important difference: **you don't need to own the bond to buy CDS protection.** This means CDS can be used to speculate on credit deterioration. In 2007–2008, hedge funds bought billions of notional CDS protection on mortgage-backed securities they did *not* own: the "The Big Short" trade. The notional CDS outstanding on some reference entities far exceeded the actual bonds outstanding, which created significant concerns about systemic concentration of credit risk.
 
-The "cheapest-to-deliver" option in physical settlement also matters: when a credit event occurs and settlement is physical, the protection buyer delivers the cheapest available bond in the reference entity's debt — often a deeply discounted, illiquid bond that is worth less than the average recovery. This option has value for the protection buyer and must be incorporated into proper CDS pricing.
+The "cheapest-to-deliver" option in physical settlement also matters: when a credit event occurs and settlement is physical, the protection buyer delivers the cheapest available bond in the reference entity's debt, often a deeply discounted, illiquid bond that is worth less than the average recovery. This option has value for the protection buyer and must be incorporated into proper CDS pricing.
 
-### Misconception 3: "High-yield bonds are not real investments — just speculative gambling"
+### Misconception 3: "High-yield bonds are not real investments, just speculative gambling"
 
 This conflates credit quality with investment merit. High-yield bonds are a legitimate and large (\$1.4 trillion) asset class with a long history of positive risk-adjusted returns. The ICE BofA US High Yield Index returned approximately 5–7% annually over the 2010–2024 period (factoring in defaults), with Sharpe ratios comparable to equities. Professional investors explicitly target HY credit as a core allocation. "Junk" is a colloquial term from the 1970s; "high yield" is now the standard market terminology because it better describes the return profile.
 
@@ -714,15 +714,15 @@ This conflates credit quality with investment merit. High-yield bonds are a legi
 
 ### Misconception 4: "In bankruptcy, equity always goes to zero"
 
-Usually yes, but not always. In cases where enterprise value significantly exceeds total liabilities, equity can recover value — this happens in "asset-rich, cash-poor" bankruptcies where the company simply needed liquidity relief, not debt reduction. Hertz (2020) is a famous example: it emerged from bankruptcy in 2021, and the original shareholders — initially thought to be wiped out — received meaningful value because the used-car market surge dramatically increased the enterprise value of Hertz's fleet. Existing shareholders received warrants and some cash in the plan, worth hundreds of millions.
+Usually yes, but not always. In cases where enterprise value significantly exceeds total liabilities, equity can recover value: this happens in "asset-rich, cash-poor" bankruptcies where the company simply needed liquidity relief, not debt reduction. Hertz (2020) is a famous example: it emerged from bankruptcy in 2021, and the original shareholders, initially thought to be wiped out, received meaningful value because the used-car market surge dramatically increased the enterprise value of Hertz's fleet. Existing shareholders received warrants and some cash in the plan, worth hundreds of millions.
 
 ### Misconception 5: "The credit spread directly tells you the default probability"
 
-The spread overstates default probability because it also includes the risk premium (compensation for volatility of default outcomes) and a liquidity premium. Historically, investment-grade bonds have significantly lower realized default rates than the credit spread alone would imply. Academics and practitioners call this the "credit spread puzzle" — spreads are systematically wider than pure expected-loss models predict. The excess is compensation for systematic risk (credit defaults cluster in recessions) and illiquidity.
+The spread overstates default probability because it also includes the risk premium (compensation for volatility of default outcomes) and a liquidity premium. Historically, investment-grade bonds have significantly lower realized default rates than the credit spread alone would imply. Academics and practitioners call this the "credit spread puzzle": spreads are systematically wider than pure expected-loss models predict. The excess is compensation for systematic risk (credit defaults cluster in recessions) and illiquidity.
 
-### Misconception 6: "Recovery rate is fixed at 40% — I've heard that everywhere"
+### Misconception 6: "Recovery rate is fixed at 40%, I've heard that everywhere"
 
-The "40% recovery" is a commonly cited average, but it masks enormous variation. Moody's data (as of 2023) shows that recovery rates range from ~10¢ for junior subordinated debt to ~90¢ for first-lien secured with quality collateral. The 40% figure is most representative for senior unsecured bonds, which happen to be the most common type analyzed. For specific distressed situations, actual recovery depends on: (a) seniority, (b) collateral, (c) industry, and (d) enterprise value at emergence — not a fixed assumption.
+The "40% recovery" is a commonly cited average, but it masks enormous variation. Moody's data (as of 2023) shows that recovery rates range from ~10¢ for junior subordinated debt to ~90¢ for first-lien secured with quality collateral. The 40% figure is most representative for senior unsecured bonds, which happen to be the most common type analyzed. For specific distressed situations, actual recovery depends on: (a) seniority, (b) collateral, (c) industry, and (d) enterprise value at emergence, not a fixed assumption.
 
 ### Misconception 7: "Buying bonds at 40 cents guarantees profit"
 
@@ -738,12 +738,12 @@ Distressed investing requires deep credit analysis, restructuring expertise, and
 
 ## How It Shows Up in Real Markets
 
-### Case study 1: General Motors (2009) — When \$27 billion of unsecured bonds recovered 10 cents
+### Case study 1: General Motors (2009), When \$27 billion of unsecured bonds recovered 10 cents
 
 GM's June 2009 Chapter 11 bankruptcy was the fourth-largest in US history and provides one of the cleanest real-world illustrations of how the waterfall works under political pressure.
 
 **The capital structure at filing:**
-- US government and Canadian government: DIP (debtor-in-possession) financing of ~\$30 billion (priming lien — paid first)
+- US government and Canadian government: DIP (debtor-in-possession) financing of ~\$30 billion (priming lien, paid first)
 - Secured bank debt: ~\$6.9 billion
 - Unsecured bonds held by public investors: ~\$27 billion face value, trading at **15–20 cents on the dollar** before filing
 - UAW retiree medical trust (VEBA): ~\$20.4 billion claim
@@ -751,7 +751,7 @@ GM's June 2009 Chapter 11 bankruptcy was the fourth-largest in US history and pr
 
 **The contested enterprise value:**
 
-The US government (as the DIP lender and de facto senior creditor) pushed for a "363 sale" — selling GM's best assets to a new "New GM" entity within 40 days, leaving the old liabilities behind. This is enormously faster than a normal reorganization but gives creditors less time to negotiate.
+The US government (as the DIP lender and de facto senior creditor) pushed for a "363 sale": selling GM's best assets to a new "New GM" entity within 40 days, leaving the old liabilities behind. This is enormously faster than a normal reorganization but gives creditors less time to negotiate.
 
 The going-concern value of "New GM" was estimated at \$50–70 billion. The distribution looked like:
 - Government/DIP claims: satisfied through equity stake in New GM
@@ -761,9 +761,9 @@ The going-concern value of "New GM" was estimated at \$50–70 billion. The dist
 
 **What did the unsecured bondholders actually recover?**
 
-New GM went public in November 2010 at a \$33 billion market cap (partial IPO). The 10% stake received by bondholders was worth approximately \$3.3 billion at IPO — against a \$27 billion face value = **~12 cents recovered on a nominal basis**, approximately in line with the pre-bankruptcy trading price of 15–20 cents.
+New GM went public in November 2010 at a \$33 billion market cap (partial IPO). The 10% stake received by bondholders was worth approximately \$3.3 billion at IPO: against a \$27 billion face value = **~12 cents recovered on a nominal basis**, approximately in line with the pre-bankruptcy trading price of 15–20 cents.
 
-**The controversy:** Unsecured bondholders argued (loudly) that the UAW VEBA received preferential treatment — getting a higher effective recovery than the bonds, despite being at the same seniority level legally. This became a landmark debate about "out-of-court" pressure distorting the absolute priority rule. The courts ultimately approved the plan, and bondholders who bought at 15 cents recovered approximately 12 cents in equity — a small loss on the distressed entry price, but far below what they'd recover in a purely legal priority waterfall.
+**The controversy:** Unsecured bondholders argued (loudly) that the UAW VEBA received preferential treatment, getting a higher effective recovery than the bonds, despite being at the same seniority level legally. This became a landmark debate about "out-of-court" pressure distorting the absolute priority rule. The courts ultimately approved the plan, and bondholders who bought at 15 cents recovered approximately 12 cents in equity: a small loss on the distressed entry price, but far below what they'd recover in a purely legal priority waterfall.
 
 #### Worked example: GM unsecured bond recovery math
 
@@ -777,17 +777,17 @@ Plus warrants worth approximately \$0.8M at IPO price.
 
 **Total recovery: \$13M on a \$17M investment = 76% of invested capital = a loss of 24%.**
 
-But the fund sold the New GM equity at \$38/share in 2011 (post-lockup expiry), when the total stake was worth ~\$15M. Final result: roughly break-even on the distressed purchase — not the intended 15–20% IRR.
+But the fund sold the New GM equity at \$38/share in 2011 (post-lockup expiry), when the total stake was worth ~\$15M. Final result: roughly break-even on the distressed purchase, not the intended 15–20% IRR.
 
 **Lesson:** Even buying bonds at distressed levels is no guarantee when political dynamics distort the legal waterfall. Distressed investing in government-involved bankruptcies carries extra risks that don't appear in a pure legal analysis.
 
-### Case study 2: Sri Lanka Sovereign Default (2022) — Applying credit spread logic to sovereigns
+### Case study 2: Sri Lanka Sovereign Default (2022), Applying credit spread logic to sovereigns
 
 In April 2022, Sri Lanka became the first Asia-Pacific country to default on its sovereign debt since Pakistan in 1999. Sri Lanka had \$12.55 billion of international sovereign bonds outstanding when it suspended external debt payments.
 
 **The credit spread warning signs:**
 
-In January 2021, Sri Lanka's international bonds maturing in 2025 (the "SLB 2025") were trading at yields of approximately 8.5%, against a US Treasury rate of 1.0% — implying a credit spread of ~750 bps. That was already deep into distressed territory for a sovereign bond.
+In January 2021, Sri Lanka's international bonds maturing in 2025 (the "SLB 2025") were trading at yields of approximately 8.5%, against a US Treasury rate of 1.0%: implying a credit spread of ~750 bps. That was already deep into distressed territory for a sovereign bond.
 
 By January 2022, the spread had blown out to 1,850 bps (yield ~20.5%, UST ~1.6%). The spread implied:
 ```
@@ -797,7 +797,7 @@ Using a typical sovereign LGD of ~50% (sovereigns tend to restructure rather tha
 ```
 PD = 18.5% / 50% = 37% annual default probability
 ```
-Over 3 years: cumulative PD ≈ 1 − (1−0.37)³ = **75%** — the market was almost certain of default.
+Over 3 years: cumulative PD ≈ 1 − (1−0.37)³ = **75%**, the market was almost certain of default.
 
 **The restructuring math:**
 
@@ -808,17 +808,17 @@ Sri Lanka's bondholders ultimately agreed to restructuring terms in 2024. The he
 
 The net present value loss to bondholders at a 12% discount rate (reflecting ongoing country risk) was approximately **45–55 cents on the dollar** compared to the original contractual cash flows.
 
-Investors who bought SLB 2025 at 30 cents in August 2022 (near the trough) received new bonds worth approximately 45 cents in NPV terms in the 2024 restructuring — a **50% gain in 2 years**, or roughly 22% annualized IRR.
+Investors who bought SLB 2025 at 30 cents in August 2022 (near the trough) received new bonds worth approximately 45 cents in NPV terms in the 2024 restructuring: a **50% gain in 2 years**, or roughly 22% annualized IRR.
 
-**The sovereign vs corporate difference:** Sovereigns cannot be liquidated (you can't foreclose on a country). The entire recovery comes from negotiation and the country's willingness to repay. IMF involvement (Sri Lanka received a \$3 billion program) is critical — the IMF's "comparability of treatment" requirement means the sovereign must negotiate with bondholders at least as favorably as with bilateral lenders (China, Japan), providing a floor for the restructuring.
+**The sovereign vs corporate difference:** Sovereigns cannot be liquidated (you can't foreclose on a country). The entire recovery comes from negotiation and the country's willingness to repay. IMF involvement (Sri Lanka received a \$3 billion program) is critical: the IMF's "comparability of treatment" requirement means the sovereign must negotiate with bondholders at least as favorably as with bilateral lenders (China, Japan), providing a floor for the restructuring.
 
-### Case study 3: Evergrande (2021–2024) — When the "too big to fail" assumption fails
+### Case study 3: Evergrande (2021–2024), When the "too big to fail" assumption fails
 
 China Evergrande Group, once the world's most indebted property developer with \$300+ billion in total liabilities, began missing bond payments in September 2021. Its offshore dollar bonds (totaling ~\$19 billion) are one of the largest distressed situations in history.
 
 **The CDS and spread dynamics:**
 
-By September 2021, Evergrande's 5-year CDS spread had blown out from ~300 bps in early 2021 to over 6,000 bps — implying near-certain default (6,000 bps spread / 60% LGD = implied 100% annual PD). For context:
+By September 2021, Evergrande's 5-year CDS spread had blown out from ~300 bps in early 2021 to over 6,000 bps: implying near-certain default (6,000 bps spread / 60% LGD = implied 100% annual PD). For context:
 - 6,000 bps CDS spread = \$6 million annual premium to protect \$100 million of notional for 5 years
 - Most protection sellers disappeared from the market; the CDS became illiquid
 
@@ -826,16 +826,16 @@ By September 2021, Evergrande's 5-year CDS spread had blown out from ~300 bps in
 
 Unlike a US corporate Chapter 11, China's restructuring framework is different:
 - Onshore creditors (domestic banks, suppliers, homebuyers) sit in a separately regulated Chinese legal framework
-- Offshore dollar bondholders are structurally subordinated — they hold claims on offshore subsidiaries, which in turn hold claims on the onshore operating entities
+- Offshore dollar bondholders are structurally subordinated: they hold claims on offshore subsidiaries, which in turn hold claims on the onshore operating entities
 - The Chinese government's priority was homebuyer protection (completing ~1.2 million presold apartments) over offshore bondholder recovery
 
 **The recovery outcome:**
 
-As of early 2024, Evergrande had filed for Chapter 15 protection in the US and bankruptcy in Hong Kong. Offshore dollar bondholders received a restructuring proposal offering new bonds equivalent to roughly **20–25 cents on the dollar** — consistent with the bonds' trading prices at the time (20–30 cents). The restructuring collapsed when Evergrande's chairman was placed under investigation in September 2023, and as of mid-2024 the situation remained unresolved.
+As of early 2024, Evergrande had filed for Chapter 15 protection in the US and bankruptcy in Hong Kong. Offshore dollar bondholders received a restructuring proposal offering new bonds equivalent to roughly **20–25 cents on the dollar**: consistent with the bonds' trading prices at the time (20–30 cents). The restructuring collapsed when Evergrande's chairman was placed under investigation in September 2023, and as of mid-2024 the situation remained unresolved.
 
 **The key valuation lesson:** When investing in emerging-market corporate bonds, the legal framework for enforcing priority differs dramatically from US/European bankruptcy law. Offshore bondholders in Chinese SOE-adjacent companies lack the recourse to court-enforced priority that US creditors rely on. The credit spread must include a "jurisdiction risk" premium that is absent from straightforward US corporate credit analysis.
 
-#### Worked example: Evergrande offshore bond — the basis trade
+#### Worked example: Evergrande offshore bond, the basis trade
 
 In February 2021, Evergrande's 8.25% bonds due 2022 traded at 78 cents, yielding approximately 25% to maturity (vs UST 1Y at 0.1%). The spread was ~2,490 bps.
 
@@ -850,19 +850,9 @@ A distressed fund that bought at 78 cents in Feb 2021 and sold at 25 cents in Fe
 ```
 Loss = (25 − 78) / 78 = −68% in 12 months
 ```
-This catastrophic result illustrates that distressed bonds can get *much more distressed* before restructuring — the timing risk of distressed investing in opaque, politically driven situations can overwhelm even a correct directional thesis on recovery.
+This catastrophic result illustrates that distressed bonds can get *much more distressed* before restructuring: the timing risk of distressed investing in opaque, politically driven situations can overwhelm even a correct directional thesis on recovery.
 
-### Case study 4: Caesars Entertainment (2015) — The battle over the fulcrum
-
-Caesars Entertainment filed for Chapter 11 in January 2015 with approximately \$18 billion of consolidated debt. The capital structure included:
-- **First-lien bank debt and bonds:** ~\$7.7 billion
-- **Second-lien bonds:** ~\$5.2 billion
-- **Senior unsecured bonds:** ~\$5.5 billion
-- **Subordinated bonds:** ~\$3.7 billion (at the operating subsidiary level)
-
-The central dispute: what was Caesars' enterprise value? The company argued around \$10–11 billion. Senior creditors argued \$12–13 billion. The difference of \$1–2 billion determined whether the second-lien bonds received meaningful recovery or zero — making the second-lien the contested fulcrum security.
-
-Distressed investors including Elliott Management and Paul Singer's firm bought second-lien bonds at prices implying zero recovery (pennies on the dollar) and then fought hard for a higher EV estimate. After two years of litigation and negotiation, Caesars emerged from bankruptcy in 2017 with a plan that gave second-lien holders equity in the new company — validating the higher EV argument. The distressed buyers made 2–5× their investment over roughly 3 years.
+### Case study 4: Caesars Entertainment (2015), The battle over the fulcrum
 
 Caesars Entertainment filed for Chapter 11 in January 2015 with approximately \$18 billion of consolidated debt. The capital structure included:
 - **First-lien bank debt and bonds:** ~\$7.7 billion
@@ -870,26 +860,36 @@ Caesars Entertainment filed for Chapter 11 in January 2015 with approximately \$
 - **Senior unsecured bonds:** ~\$5.5 billion
 - **Subordinated bonds:** ~\$3.7 billion (at the operating subsidiary level)
 
-The central dispute: what was Caesars' enterprise value? The company argued around \$10–11 billion. Senior creditors argued \$12–13 billion. The difference of \$1–2 billion determined whether the second-lien bonds received meaningful recovery or zero — making the second-lien the contested fulcrum security.
+The central dispute: what was Caesars' enterprise value? The company argued around \$10–11 billion. Senior creditors argued \$12–13 billion. The difference of \$1–2 billion determined whether the second-lien bonds received meaningful recovery or zero: making the second-lien the contested fulcrum security.
 
-Distressed investors including Elliott Management and Paul Singer's firm bought second-lien bonds at prices implying zero recovery (pennies on the dollar) and then fought hard for a higher EV estimate. After two years of litigation and negotiation, Caesars emerged from bankruptcy in 2017 with a plan that gave second-lien holders equity in the new company — validating the higher EV argument. The distressed buyers made 2–5× their investment over roughly 3 years.
+Distressed investors including Elliott Management and Paul Singer's firm bought second-lien bonds at prices implying zero recovery (pennies on the dollar) and then fought hard for a higher EV estimate. After two years of litigation and negotiation, Caesars emerged from bankruptcy in 2017 with a plan that gave second-lien holders equity in the new company: validating the higher EV argument. The distressed buyers made 2–5× their investment over roughly 3 years.
 
-### Case study 2: Hertz (2020) — When equity survives bankruptcy
+Caesars Entertainment filed for Chapter 11 in January 2015 with approximately \$18 billion of consolidated debt. The capital structure included:
+- **First-lien bank debt and bonds:** ~\$7.7 billion
+- **Second-lien bonds:** ~\$5.2 billion
+- **Senior unsecured bonds:** ~\$5.5 billion
+- **Subordinated bonds:** ~\$3.7 billion (at the operating subsidiary level)
 
-When Hertz filed Chapter 11 in May 2020, the equity was essentially worthless — the company had \$19 billion of debt against a fleet that was falling in value (early COVID panic). Retail investors bought Hertz stock at \$0.40–\$0.80 purely as a lottery ticket.
+The central dispute: what was Caesars' enterprise value? The company argued around \$10–11 billion. Senior creditors argued \$12–13 billion. The difference of \$1–2 billion determined whether the second-lien bonds received meaningful recovery or zero: making the second-lien the contested fulcrum security.
 
-But Hertz's key assets were its cars, and by late 2020 the used-car market exploded due to supply chain disruptions and surging consumer demand. The fleet's value recovered dramatically. By the time Hertz emerged from bankruptcy in 2021, the enterprise value was large enough that even original equity holders received something — warrants and a small cash recovery.
+Distressed investors including Elliott Management and Paul Singer's firm bought second-lien bonds at prices implying zero recovery (pennies on the dollar) and then fought hard for a higher EV estimate. After two years of litigation and negotiation, Caesars emerged from bankruptcy in 2017 with a plan that gave second-lien holders equity in the new company: validating the higher EV argument. The distressed buyers made 2–5× their investment over roughly 3 years.
+
+### Case study 2: Hertz (2020), When equity survives bankruptcy
+
+When Hertz filed Chapter 11 in May 2020, the equity was essentially worthless: the company had \$19 billion of debt against a fleet that was falling in value (early COVID panic). Retail investors bought Hertz stock at \$0.40–\$0.80 purely as a lottery ticket.
+
+But Hertz's key assets were its cars, and by late 2020 the used-car market exploded due to supply chain disruptions and surging consumer demand. The fleet's value recovered dramatically. By the time Hertz emerged from bankruptcy in 2021, the enterprise value was large enough that even original equity holders received something: warrants and a small cash recovery.
 
 This is the exception, not the rule. But it illustrates a crucial valuation lesson: **the right EV estimate is the one that reflects the business's future cash flows, not its current distressed state.** EV estimates in bankruptcy can shift dramatically with changed circumstances.
 
 ### Case study 3: Using UST yields as the spread anchor (2022)
 
-The surge in UST 10-year yields from 1.52% (end-2021) to 3.88% (end-2022) — an increase of 236 bps — created a fascinating dynamic. Because credit spreads are measured *over* Treasuries, the absolute yields on corporate bonds rose even more than Treasuries:
+The surge in UST 10-year yields from 1.52% (end-2021) to 3.88% (end-2022), an increase of 236 bps, created a fascinating dynamic. Because credit spreads are measured *over* Treasuries, the absolute yields on corporate bonds rose even more than Treasuries:
 
-- **IG corporate bond yields:** Rose from ~2.3% (Jan 2022) to ~5.7% (Dec 2022) — a 340 bps increase. The extra 104 bps came from spread widening (IG spreads went from ~90 bps to ~150 bps).
-- **HY corporate bond yields:** Rose from ~4.3% to ~8.5% — a 420 bps increase.
+- **IG corporate bond yields:** Rose from ~2.3% (Jan 2022) to ~5.7% (Dec 2022), a 340 bps increase. The extra 104 bps came from spread widening (IG spreads went from ~90 bps to ~150 bps).
+- **HY corporate bond yields:** Rose from ~4.3% to ~8.5%, a 420 bps increase.
 
-For an investor who bought IG bonds in January 2022 at a 2.3% yield and had to mark-to-market in December 2022 at 5.7%, the price loss was enormous (higher yield = lower price). A 10-year IG bond lost roughly 15–20% of its market value in 2022 — comparable to equity losses.
+For an investor who bought IG bonds in January 2022 at a 2.3% yield and had to mark-to-market in December 2022 at 5.7%, the price loss was enormous (higher yield = lower price). A 10-year IG bond lost roughly 15–20% of its market value in 2022: comparable to equity losses.
 
 This illustrates that even "safe" investment-grade bonds carry significant interest rate risk (duration) in addition to credit risk. The credit spread portion of the yield loss was smaller; the rate-driven portion was the dominant factor. For our cross-link on this dynamic, see the [bond valuation post on yield, duration, and convexity](/blog/trading/asset-valuation/bond-valuation-yield-duration-convexity) and the discussion of WACC and discount rates in [discount rates in practice](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta).
 
@@ -897,29 +897,29 @@ This illustrates that even "safe" investment-grade bonds carry significant inter
 
 Distressed debt sits at the intersection of two other valuation frameworks covered in this series:
 
-**LBO connection:** A leveraged buyout firm essentially creates the preconditions for distress — high leverage, interest burden. When an LBO goes wrong (revenues miss, rates rise), the debt trades at distressed prices and the original equity is wiped out. Distressed investors and LBO sponsors sometimes find themselves negotiating the same restructuring. See [LBO valuation](/blog/trading/asset-valuation/leveraged-buyout-lbo-valuation-private-equity) for how these capital structures are built.
+**LBO connection:** A leveraged buyout firm essentially creates the preconditions for distress, high leverage, interest burden. When an LBO goes wrong (revenues miss, rates rise), the debt trades at distressed prices and the original equity is wiped out. Distressed investors and LBO sponsors sometimes find themselves negotiating the same restructuring. See [LBO valuation](/blog/trading/asset-valuation/leveraged-buyout-lbo-valuation-private-equity) for how these capital structures are built.
 
-**Real options connection:** The Merton model is, at its core, an options model applied to the balance sheet. The same framework — option value, volatility, time — drives both equity value in distress and real options embedded in strategic investments. A company's ability to delay a default (by refinancing, asset sales) is itself a real option with value. See [real options valuation](/blog/trading/asset-valuation/real-options-valuation-flexibility-strategic-investments) for the broader framework.
+**Real options connection:** The Merton model is, at its core, an options model applied to the balance sheet. The same framework (option value, volatility, time) drives both equity value in distress and real options embedded in strategic investments. A company's ability to delay a default (by refinancing, asset sales) is itself a real option with value. See [real options valuation](/blog/trading/asset-valuation/real-options-valuation-flexibility-strategic-investments) for the broader framework.
 
 ---
 
 ## Further Reading and Cross-Links
 
 **Within this series:**
-- [Bond Valuation: Yield, Duration, and Convexity](/blog/trading/asset-valuation/bond-valuation-yield-duration-convexity) — the mechanics of bond pricing and interest rate risk that underpin credit spread analysis.
-- [Discount Rates in Practice: WACC, Cost of Equity, and Unlevered Beta](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta) — how the risk-free rate and equity risk premium combine to set discount rates; directly relevant to going-concern DCF in bankruptcy.
-- [LBO Valuation: Private Equity's Leverage Playbook](/blog/trading/asset-valuation/leveraged-buyout-lbo-valuation-private-equity) — the capital structure engineering that creates distressed situations.
-- [Real Options Valuation: Flexibility and Strategic Investments](/blog/trading/asset-valuation/real-options-valuation-flexibility-strategic-investments) — the option-theoretic framework that the Merton model draws on.
+- [Bond Valuation: Yield, Duration, and Convexity](/blog/trading/asset-valuation/bond-valuation-yield-duration-convexity), the mechanics of bond pricing and interest rate risk that underpin credit spread analysis.
+- [Discount Rates in Practice: WACC, Cost of Equity, and Unlevered Beta](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta), how the risk-free rate and equity risk premium combine to set discount rates; directly relevant to going-concern DCF in bankruptcy.
+- [LBO Valuation: Private Equity's Leverage Playbook](/blog/trading/asset-valuation/leveraged-buyout-lbo-valuation-private-equity), the capital structure engineering that creates distressed situations.
+- [Real Options Valuation: Flexibility and Strategic Investments](/blog/trading/asset-valuation/real-options-valuation-flexibility-strategic-investments), the option-theoretic framework that the Merton model draws on.
 
 **Academic and practitioner resources:**
-- Merton, R.C. (1974). "On the Pricing of Corporate Debt: The Risk Structure of Interest Rates." *Journal of Finance*, 29(2), 449–470. — The original structural model paper.
-- Moody's Investors Service, "Annual Default Study: Corporate Default and Recovery Rates, 1920–2023" — The primary source for recovery rate data by seniority.
-- Altman, E.I. (1968). "Financial Ratios, Discriminant Analysis and the Prediction of Corporate Bankruptcy." *Journal of Finance*, 23(4), 589–609. — The original Z-Score model for predicting distress.
-- Roe, M.J. & Skeel, D.A. (2010). "Assessing the Chrysler Bankruptcy." *Michigan Law Review*, 108(5), 727–772. — A real-world case study in distressed valuation and reorganization.
+- Merton, R.C. (1974). "On the Pricing of Corporate Debt: The Risk Structure of Interest Rates." *Journal of Finance*, 29(2), 449–470.: The original structural model paper.
+- Moody's Investors Service, "Annual Default Study: Corporate Default and Recovery Rates, 1920–2023", The primary source for recovery rate data by seniority.
+- Altman, E.I. (1968). "Financial Ratios, Discriminant Analysis and the Prediction of Corporate Bankruptcy." *Journal of Finance*, 23(4), 589–609.: The original Z-Score model for predicting distress.
+- Roe, M.J. & Skeel, D.A. (2010). "Assessing the Chrysler Bankruptcy." *Michigan Law Review*, 108(5), 727–772.: A real-world case study in distressed valuation and reorganization.
 
 **Market data:**
-- FRED (Federal Reserve Bank of St. Louis): BAMLC0A0CM (IG spreads), BAMLH0A0HYM2 (HY spreads), H.15 (UST yields) — Free, updated daily.
-- Moody's Ultimate Recovery Database — subscription, the gold standard for recovery statistics.
+- FRED (Federal Reserve Bank of St. Louis): BAMLC0A0CM (IG spreads), BAMLH0A0HYM2 (HY spreads), H.15 (UST yields), Free, updated daily.
+- Moody's Ultimate Recovery Database: subscription, the gold standard for recovery statistics.
 - Distressed debt screeners: Bloomberg DRSK function, Reorg Research for restructuring intelligence.
 
 ---
@@ -930,6 +930,6 @@ Distressed debt sits at the intersection of two other valuation frameworks cover
 - ICE BofA US Corporate Index Option-Adjusted Spread (BAMLC0A0CM). FRED, Federal Reserve Bank of St. Louis. As of December 31, 2024.
 - ICE BofA US High Yield Index Option-Adjusted Spread (BAMLH0A0HYM2). FRED, Federal Reserve Bank of St. Louis. As of December 31, 2024.
 - Moody's Investors Service. "Annual Default Study: Corporate Default and Recovery Rates, 1920–2023." January 2024. (Recovery rate statistics by seniority class from Ultimate Recovery Database.)
-- Damodaran, A. "Equity Risk Premiums (ERP): Determinants, Estimation and Implications — The 2025 Edition." Stern School of Business, NYU. January 2025.
+- Damodaran, A. "Equity Risk Premiums (ERP): Determinants, Estimation and Implications, The 2025 Edition." Stern School of Business, NYU. January 2025.
 - Merton, R.C. (1974). "On the Pricing of Corporate Debt: The Risk Structure of Interest Rates." *Journal of Finance*, 29(2), 449–470.
 - SIFMA. "US Corporate Bonds Statistics." sifma.org. As of Q4 2024. (US IG market size ~\$10 trillion, HY ~\$1.4 trillion.)

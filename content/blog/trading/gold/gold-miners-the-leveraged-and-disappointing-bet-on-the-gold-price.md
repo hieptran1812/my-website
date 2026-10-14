@@ -12,7 +12,7 @@ readTime: 40
 ---
 
 > [!important]
-> **TL;DR** — A gold miner is a leveraged bet on the gold price, because its costs are roughly fixed, so a modest rise in gold can multiply its profit; in theory miners should beat bullion in a bull market, but in practice they have chronically disappointed.
+> **TL;DR**: A gold miner is a leveraged bet on the gold price, because its costs are roughly fixed, so a modest rise in gold can multiply its profit; in theory miners should beat bullion in a bull market, but in practice they have chronically disappointed.
 >
 > - The lever is simple arithmetic: gold price minus cost equals margin. With cost fixed, a 20% rise in the gold price can turn a \$200 margin into a \$500 margin, a +150% jump. The same arithmetic runs in reverse: a 20% fall can wipe the margin out entirely.
 > - From the 2011 top to the 2015 bottom, gold fell about 45% while the major gold-miner index fell about 80%. The leverage works brutally in both directions, and that asymmetry is the whole story.
@@ -241,8 +241,8 @@ Here is the insight to leave with. The gold-miner trade is a perfect illustratio
 
 ## Further reading & cross-links
 
-- [The supply side: mine production, AISC, and the myth of peak gold](/blog/trading/gold/the-supply-side-mine-production-aisc-and-the-myth-of-peak-gold) — the deep dive on the cost curve and AISC floor that this post's leverage math sits on top of.
-- [Where gold comes from: mining, refining, recycling, and the above-ground stock](/blog/trading/gold/where-gold-comes-from-mining-refining-recycling-and-the-above-ground-stock) — what miners actually do, and why mine supply barely moves the price.
-- [Gold ETFs and the GLD machine: how paper gold tracks the metal](/blog/trading/gold/gold-etfs-and-the-gld-machine-how-paper-gold-tracks-the-metal) — the metal-tracking alternative to owning miners, and how it works.
-- [Gold's job in a portfolio: sizing, rebalancing, and the permanent portfolio](/blog/trading/gold/golds-job-in-a-portfolio-sizing-rebalancing-and-the-permanent-portfolio) — why most gold exposure belongs in the metal, not the miners.
-- [Real interest rates: the master variable behind the gold price](/blog/trading/gold/real-interest-rates-the-master-variable-behind-the-gold-price) — the driver behind the bull markets in which miners are supposed to shine.
+- [The supply side: mine production, AISC, and the myth of peak gold](/blog/trading/gold/the-supply-side-mine-production-aisc-and-the-myth-of-peak-gold), the deep dive on the cost curve and AISC floor that this post's leverage math sits on top of.
+- [Where gold comes from: mining, refining, recycling, and the above-ground stock](/blog/trading/gold/where-gold-comes-from-mining-refining-recycling-and-the-above-ground-stock), what miners actually do, and why mine supply barely moves the price.
+- [Gold ETFs and the GLD machine: how paper gold tracks the metal](/blog/trading/gold/gold-etfs-and-the-gld-machine-how-paper-gold-tracks-the-metal), the metal-tracking alternative to owning miners, and how it works.
+- [Gold's job in a portfolio: sizing, rebalancing, and the permanent portfolio](/blog/trading/gold/golds-job-in-a-portfolio-sizing-rebalancing-and-the-permanent-portfolio), why most gold exposure belongs in the metal, not the miners.
+- [Real interest rates: the master variable behind the gold price](/blog/trading/gold/real-interest-rates-the-master-variable-behind-the-gold-price), the driver behind the bull markets in which miners are supposed to shine.

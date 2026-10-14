@@ -2,7 +2,7 @@
 title: "Building a Geopolitical Risk Monitor: Data, Indicators, and Signals"
 date: "2026-06-28"
 publishDate: "2026-06-28"
-description: "A practitioner's guide to assembling a real-time geopolitical risk dashboard — from the GPR Index to VIX term structure to satellite data — with portfolio signals."
+description: "A practitioner's guide to assembling a real-time geopolitical risk dashboard, from the GPR Index to VIX term structure to satellite data, with portfolio signals."
 tags: ["geopolitical-risk", "risk-monitoring", "gpr-index", "vix", "signals", "portfolio-management", "data", "quantitative", "geopolitics"]
 category: "trading"
 subcategory: "Geopolitical Crises"
@@ -12,16 +12,16 @@ readTime: 44
 ---
 
 > [!important]
-> **TL;DR — The five things you need to monitor geopolitical risk in real time:**
-> 1. **GPR Index** (Caldara-Iacoviello) — the academic benchmark; monthly, slow, but low noise. A reading above 200 signals elevated regime risk.
-> 2. **VIX term structure** — when spot VIX trades above 3-month futures (backwardation), markets are pricing panic, not just uncertainty. This is fast and actionable.
-> 3. **Credit spreads** — EM sovereign (EMBI+) and HY (CDX HY) widening confirms the narrative. False geo signals rarely move spreads.
-> 4. **Brent crude** — a geopolitical premium embeds in oil within hours of any Middle East escalation. Track it as a real-time confirming signal.
-> 5. **Cross-asset alignment** — no single signal is reliable alone. Only when GPR + VIX backwardation + oil premium + gold move together should you change portfolio positioning.
+> **TL;DR, The five things you need to monitor geopolitical risk in real time:**
+> 1. **GPR Index** (Caldara-Iacoviello): the academic benchmark; monthly, slow, but low noise. A reading above 200 signals elevated regime risk.
+> 2. **VIX term structure**, when spot VIX trades above 3-month futures (backwardation), markets are pricing panic, not just uncertainty. This is fast and actionable.
+> 3. **Credit spreads**: EM sovereign (EMBI+) and HY (CDX HY) widening confirms the narrative. False geo signals rarely move spreads.
+> 4. **Brent crude**: a geopolitical premium embeds in oil within hours of any Middle East escalation. Track it as a real-time confirming signal.
+> 5. **Cross-asset alignment**: no single signal is reliable alone. Only when GPR + VIX backwardation + oil premium + gold move together should you change portfolio positioning.
 
-It's 2:14 pm on a September afternoon in 2024. Markets are drifting sideways, the S&P 500 is down a negligible 0.2%, and most of the trading desk is focused on the upcoming CPI print. Then, in the span of three minutes, three alerts fire simultaneously on a practitioner's risk dashboard. First, the GDELT conflict-intensity feed for Iran-Israel shows a 40% spike in the 24-hour moving average — a level not seen since the April exchange. Second, the VIX term-structure monitor triggers: front-month VIX futures are trading 3.2 points above the 3-month contract, a sharp inversion indicating panic buying of near-term protection. Third, Brent crude breaks through \$91 per barrel on a thin bid, carrying the distinctive fingerprint of geopolitical supply-risk rather than demand.
+It's 2:14 pm on a September afternoon in 2024. Markets are drifting sideways, the S&P 500 is down a negligible 0.2%, and most of the trading desk is focused on the upcoming CPI print. Then, in the span of three minutes, three alerts fire simultaneously on a practitioner's risk dashboard. First, the GDELT conflict-intensity feed for Iran-Israel shows a 40% spike in the 24-hour moving average: a level not seen since the April exchange. Second, the VIX term-structure monitor triggers: front-month VIX futures are trading 3.2 points above the 3-month contract, a sharp inversion indicating panic buying of near-term protection. Third, Brent crude breaks through \$91 per barrel on a thin bid, carrying the distinctive fingerprint of geopolitical supply-risk rather than demand.
 
-A trader watching all three signals simultaneously does something that most of their colleagues do not: they trim the EM equity allocation by 8%, buy a small gold position, and roll their VIX exposure from 3-month to 1-month futures. Fifteen minutes later, the broad market sells off 1.4% as news of a direct Israeli strike on Iranian military infrastructure hits the wires. They've protected the book. Not by predicting geopolitical outcomes — which is impossible — but by systematically monitoring the signals that markets use to price risk.
+A trader watching all three signals simultaneously does something that most of their colleagues do not: they trim the EM equity allocation by 8%, buy a small gold position, and roll their VIX exposure from 3-month to 1-month futures. Fifteen minutes later, the broad market sells off 1.4% as news of a direct Israeli strike on Iranian military infrastructure hits the wires. They've protected the book. Not by predicting geopolitical outcomes (which is impossible) but by systematically monitoring the signals that markets use to price risk.
 
 This post is a practitioner's blueprint for building exactly that kind of real-time geopolitical risk monitor. We'll work through every layer of the system, from the raw data sources at the bottom to the portfolio response rules at the top. We'll build a composite risk score from first principles, walk through four fully worked numerical examples, and address the common misconceptions that cause most implementations to fail before they're even tested.
 
@@ -31,13 +31,13 @@ The goal is not perfect prediction. The goal is systematic early warning.
 
 Before building a monitoring system, it is worth being precise about what we are actually trying to measure. "Geopolitical risk" is one of those terms that everyone uses and almost no one defines. The result is a lot of dashboards that track the wrong things, produce false signals constantly, and get abandoned within six months because they generate more noise than insight.
 
-**Political risk versus market risk.** Political risk is the probability that a political action — a war, a sanctions regime, a coup, a contested election, a diplomatic breakdown — will affect the economic environment in ways that alter asset valuations. Market risk is the probability that asset prices move adversely, for any reason. These are not the same thing. A country can have high political risk (frequent coups, authoritarian instability) with low *market* risk if the financial system is underdeveloped enough that there isn't much market to react. Conversely, the S&P 500 carries almost no political risk by traditional measures but can be profoundly affected by geopolitical shocks that originate halfway around the world.
+**Political risk versus market risk.** Political risk is the probability that a political action (a war, a sanctions regime, a coup, a contested election, a diplomatic breakdown) will affect the economic environment in ways that alter asset valuations. Market risk is the probability that asset prices move adversely, for any reason. These are not the same thing. A country can have high political risk (frequent coups, authoritarian instability) with low *market* risk if the financial system is underdeveloped enough that there isn't much market to react. Conversely, the S&P 500 carries almost no political risk by traditional measures but can be profoundly affected by geopolitical shocks that originate halfway around the world.
 
-For portfolio managers, the operative question is narrower: **which political events produce large, rapid, and sustained dislocations in the assets I hold?** That question filters out a lot of noise. Most geopolitical events — even quite dramatic ones by historical standards — produce short-lived blips in asset prices. The 7/7 London bombing, a devastating terrorist attack, moved VIX by 8% and markets recovered in three days. The Paris attacks of November 2015 moved VIX by a mere 6%. These events were catastrophic in human terms. In market terms, they were noise.
+For portfolio managers, the operative question is narrower: **which political events produce large, rapid, and sustained dislocations in the assets I hold?** That question filters out a lot of noise. Most geopolitical events, even quite dramatic ones by historical standards, produce short-lived blips in asset prices. The 7/7 London bombing, a devastating terrorist attack, moved VIX by 8% and markets recovered in three days. The Paris attacks of November 2015 moved VIX by a mere 6%. These events were catastrophic in human terms. In market terms, they were noise.
 
 What actually matters for markets is a much smaller category: events that either (a) directly threaten a major commodity supply chain (oil, gas, grain), (b) create meaningful uncertainty about the global trade architecture, (c) force a recalibration of sovereign credit risk, or (d) trigger genuine uncertainty about the behavior of a nuclear-armed state. This is a much shorter list than most "geopolitical risk" frameworks acknowledge.
 
-**The quantification problem.** The deep challenge with geopolitical risk is that it is fundamentally qualitative. A war is not a data point with a clean probability distribution. Whether a given conflict escalates, de-escalates, or produces a durable settlement depends on the internal politics of multiple states, the personality of individual leaders, the domestic economic pressures on each side, and a cascade of contingent events that cannot be modeled with any reliability. This means that any quantitative geopolitical risk index is, at best, a well-constructed proxy — not a measurement of the underlying reality.
+**The quantification problem.** The deep challenge with geopolitical risk is that it is fundamentally qualitative. A war is not a data point with a clean probability distribution. Whether a given conflict escalates, de-escalates, or produces a durable settlement depends on the internal politics of multiple states, the personality of individual leaders, the domestic economic pressures on each side, and a cascade of contingent events that cannot be modeled with any reliability. This means that any quantitative geopolitical risk index is, at best, a well-constructed proxy, not a measurement of the underlying reality.
 
 The correct epistemic posture is to treat geopolitical risk indicators the same way you treat economic leading indicators: useful for identifying inflection points and directional shifts, not useful for point prediction. You don't use the yield curve to predict the exact date of a recession. You use it to understand the current probability regime you're operating in and adjust positioning accordingly.
 
@@ -45,11 +45,11 @@ The correct epistemic posture is to treat geopolitical risk indicators the same 
 
 A well-designed monitoring system addresses all three failure modes by design. It uses a tiered alert structure that distinguishes between monitoring-level concern (Yellow), action-warranted concern (Orange), and portfolio-restructuring emergency (Red). It requires multiple confirming signals before escalating. And it is calibrated carefully against historical events to ensure its threshold levels produce an acceptable false-positive rate.
 
-**Episodic shocks versus structural shifts.** Not all geopolitical risk is the same. An episodic shock — a terrorist attack, a one-off military strike — is typically short-duration. Markets price in an immediate risk premium, and if the event doesn't cascade into something larger, that premium dissipates within days or weeks. A structural shift — a new Cold War, a permanent realignment of energy trade flows, a durable sanctions regime — embeds into asset prices for years. The Russia-Ukraine war initially looked like an episodic shock. Within months it was clear it was a structural shift, and the full repricing of European energy security took 18 months to complete.
+**Episodic shocks versus structural shifts.** Not all geopolitical risk is the same. An episodic shock (a terrorist attack, a one-off military strike) is typically short-duration. Markets price in an immediate risk premium, and if the event doesn't cascade into something larger, that premium dissipates within days or weeks. A structural shift (a new Cold War, a permanent realignment of energy trade flows, a durable sanctions regime) embeds into asset prices for years. The Russia-Ukraine war initially looked like an episodic shock. Within months it was clear it was a structural shift, and the full repricing of European energy security took 18 months to complete.
 
 The monitoring system you build needs to track both. Episodic shocks require fast signals (VIX term structure, oil price, EM FX). Structural shifts require slower, more persistent signals (GPR trend, EMBI spread levels, trade flow data).
 
-**How markets price political risk.** Markets price geopolitical risk through four main mechanisms: (a) **risk premiums** embedded in assets with direct exposure (energy companies, EM sovereign debt, defense contractors); (b) **option skew** — out-of-the-money puts become more expensive when tail risk is elevated, creating measurable skew in equity and FX options markets; (c) **credit spreads** — both EM sovereign and corporate spreads widen to compensate lenders for political default risk; and (d) **safe haven flows** into gold, USD, JPY, CHF, and US Treasuries, which push up prices of these assets as capital exits perceived-risky ones.
+**How markets price political risk.** Markets price geopolitical risk through four main mechanisms: (a) **risk premiums** embedded in assets with direct exposure (energy companies, EM sovereign debt, defense contractors); (b) **option skew** (out-of-the-money puts become more expensive when tail risk is elevated, creating measurable skew in equity and FX options markets; (c) **credit spreads**) both EM sovereign and corporate spreads widen to compensate lenders for political default risk; and (d) **safe haven flows** into gold, USD, JPY, CHF, and US Treasuries, which push up prices of these assets as capital exits perceived-risky ones.
 
 Understanding these mechanisms is what makes the signals in the layers below interpretable. When you see VIX backwardation, you are seeing the options market pricing panic into near-term contracts. When you see EMBI+ spreads widening, you are seeing credit markets demanding more compensation for sovereign political risk. Each signal is a measurement of one of these pricing mechanisms.
 
@@ -57,23 +57,23 @@ Understanding these mechanisms is what makes the signals in the layers below int
 
 ## Layer 1: Raw Signal Sources
 
-The bottom layer of any geopolitical risk monitor is the raw signal — unprocessed data streams that capture real-world events before they have been analyzed, summarized, or consensus-priced by the market. The key property of Layer 1 data is speed: these feeds often lead market prices by minutes to hours.
+The bottom layer of any geopolitical risk monitor is the raw signal: unprocessed data streams that capture real-world events before they have been analyzed, summarized, or consensus-priced by the market. The key property of Layer 1 data is speed: these feeds often lead market prices by minutes to hours.
 
 ### GDELT: The Global Database of Events, Language, and Tone
 
-GDELT is the most powerful free resource available for geopolitical event monitoring. Updated every 15 minutes, it processes virtually all online news in over 100 languages and structures it according to the CAMEO (Conflict and Mediation Event Observations) taxonomy — a standardized coding scheme that categorizes news events into political, military, economic, and social categories with granular subcategories.
+GDELT is the most powerful free resource available for geopolitical event monitoring. Updated every 15 minutes, it processes virtually all online news in over 100 languages and structures it according to the CAMEO (Conflict and Mediation Event Observations) taxonomy: a standardized coding scheme that categorizes news events into political, military, economic, and social categories with granular subcategories.
 
 For geopolitical risk monitoring, the most useful GDELT outputs are: (a) **conflict intensity scores** by country pair and actor, which measure the volume and severity of conflictual events; (b) **GDELT Tone**, a sentiment measure derived from the language of news articles, which captures the emotional register of news coverage; and (c) **event counts by CAMEO code**, which allow you to track specific types of events (military action, sanctions, diplomatic protests) separately.
 
 GDELT data is available through Google BigQuery with a free tier that is more than sufficient for most portfolio monitoring purposes. A simple daily query averaging conflict-intensity scores for regions of interest, compared against a rolling 30-day baseline, gives you a fast early-warning indicator that costs nothing beyond the time to set it up.
 
-The limitation of GDELT is that it measures news coverage, not events. Coverage is noisy — a major conflict in a poorly-covered region may produce less GDELT signal than a minor incident in a region with heavy media attention. Calibrate your GDELT signals by region, not globally, to account for this coverage bias.
+The limitation of GDELT is that it measures news coverage, not events. Coverage is noisy: a major conflict in a poorly-covered region may produce less GDELT signal than a minor incident in a region with heavy media attention. Calibrate your GDELT signals by region, not globally, to account for this coverage bias.
 
 ### ACLED: Armed Conflict Location and Event Data
 
 ACLED provides geocoded, event-level data on political violence and protests worldwide. Unlike GDELT, which is derived from news text, ACLED is curated by a team of researchers who review source material and code each event with precise location, actor, and type information. This makes ACLED slower (typically a 24-72 hour lag from event to coding) but more accurate and less noisy.
 
-ACLED is particularly useful for tracking the geographic evolution of armed conflicts — the spread of fighting zones, the entry of new actor groups, changes in event type (protests → riots → armed confrontations). For a macro portfolio manager, ACLED is more useful for understanding structural escalation dynamics than for real-time trading signals.
+ACLED is particularly useful for tracking the geographic evolution of armed conflicts: the spread of fighting zones, the entry of new actor groups, changes in event type (protests → riots → armed confrontations). For a macro portfolio manager, ACLED is more useful for understanding structural escalation dynamics than for real-time trading signals.
 
 ACLED provides a free API for researchers. Commercial access through Bloomberg or Refinitiv provides additional filtering and analytics.
 
@@ -81,7 +81,7 @@ ACLED provides a free API for researchers. Commercial access through Bloomberg o
 
 The democratization of commercial satellite imagery has created a new class of geopolitical signal that was previously available only to government intelligence agencies. Companies like Planet Labs provide daily imagery of the entire Earth's surface at 3-5 meter resolution. Sentinel-2 (European Space Agency) provides 10-meter resolution imagery on a 5-day revisit cycle for free.
 
-For macro trading, the most useful satellite applications include: **troop and military equipment monitoring** (visible buildups near borders are observable days to weeks before diplomatic statements); **supply chain disruption detection** (port congestion, factory activity changes, shipping lane closures); **commodity production monitoring** (crop condition assessment via NDVI vegetation indices, oil storage levels via shadow measurement on floating-roof tanks); and **sanctions evasion detection** (dark-ship movements, STS — ship-to-ship — transfers of sanctioned oil at sea).
+For macro trading, the most useful satellite applications include: **troop and military equipment monitoring** (visible buildups near borders are observable days to weeks before diplomatic statements); **supply chain disruption detection** (port congestion, factory activity changes, shipping lane closures); **commodity production monitoring** (crop condition assessment via NDVI vegetation indices, oil storage levels via shadow measurement on floating-roof tanks); and **sanctions evasion detection** (dark-ship movements, STS, ship-to-ship, transfers of sanctioned oil at sea).
 
 You do not need a dedicated satellite intelligence team to use this data. Commercial providers including Planet Labs, Maxar, and Satellogic offer direct API access. SpaceKnow and Ursa Space provide pre-processed analytics products. Bloomberg and Refinitiv integrate several of these signals into their data terminal offerings.
 
@@ -89,7 +89,7 @@ You do not need a dedicated satellite intelligence team to use this data. Commer
 
 Twitter/X, Telegram, and Reddit host active open-source intelligence (OSINT) communities that often surface geolocated conflict videos and event reports hours before major media outlets. During the early hours of the Ukraine invasion in February 2022, geolocated footage of Russian military columns was circulating in OSINT Telegram channels hours before official statements from any government.
 
-The signal quality of social media varies enormously. The highest signal-to-noise sources are dedicated OSINT accounts operated by experienced analysts (Bellingcat, various anonymous defense analysts) rather than general news feeds. The key limitation is that social media monitoring requires significant human judgment to separate confirmed from unconfirmed reports — it cannot be fully automated in the way that GDELT can.
+The signal quality of social media varies enormously. The highest signal-to-noise sources are dedicated OSINT accounts operated by experienced analysts (Bellingcat, various anonymous defense analysts) rather than general news feeds. The key limitation is that social media monitoring requires significant human judgment to separate confirmed from unconfirmed reports: it cannot be fully automated in the way that GDELT can.
 
 For systematic monitoring, building a curated list of 20-30 high-quality OSINT accounts by region and tracking their posting frequency as a leading indicator of escalation has proven effective in practice. A sudden spike in posting from previously quiet accounts covering a specific region is itself a signal worth noting.
 
@@ -97,27 +97,27 @@ For systematic monitoring, building a curated list of 20-30 high-quality OSINT a
 
 Both Bloomberg Terminal and Refinitiv Eikon provide real-time news sentiment scores derived from NLP analysis of wire headlines and articles. Bloomberg's news analytics scores articles on a scale from -1 (maximally negative) to +1 (maximally positive) for individual securities, sectors, and countries.
 
-The most useful application for geopolitical risk monitoring is tracking country-level sentiment scores — particularly the sentiment score for countries with significant positions in your portfolio. A sharp, sustained decline in country-level news sentiment, especially when it is driven by security and conflict categories rather than economic categories, is a reliable leading indicator of increased geopolitical risk premium in that country's assets.
+The most useful application for geopolitical risk monitoring is tracking country-level sentiment scores: particularly the sentiment score for countries with significant positions in your portfolio. A sharp, sustained decline in country-level news sentiment, especially when it is driven by security and conflict categories rather than economic categories, is a reliable leading indicator of increased geopolitical risk premium in that country's assets.
 
 ### Prediction Markets: Kalshi and Polymarket
 
 Prediction markets like Kalshi (regulated in the US) and Polymarket (offshore, crypto-based) allow trading on binary outcomes of real-world events, including geopolitical ones. The prices in these markets represent the aggregate probability that a given event will occur, as implied by the betting activity of informed participants.
 
-For a geopolitical risk monitor, prediction market prices are useful in two ways: (a) they provide a market-based probability for specific escalation scenarios (e.g., "Will the Iran-Israel conflict result in direct military exchange in the next 30 days?") that can be tracked alongside your other signals; and (b) sudden sharp moves in prediction market probabilities — particularly when they occur before news breaks broadly — are leading indicators that sophisticated participants have new information.
+For a geopolitical risk monitor, prediction market prices are useful in two ways: (a) they provide a market-based probability for specific escalation scenarios (e.g., "Will the Iran-Israel conflict result in direct military exchange in the next 30 days?") that can be tracked alongside your other signals; and (b) sudden sharp moves in prediction market probabilities, particularly when they occur before news breaks broadly, are leading indicators that sophisticated participants have new information.
 
 The limitation is that prediction market liquidity is still relatively thin for most geopolitical events, which means prices can be moved by small amounts of capital and may be less reliable than the underlying judgment of the participants.
 
 ## Layer 2: Quantitative Indicators
 
-The second layer transforms raw signals into structured quantitative indicators — numerical series with well-defined methodologies that can be compared across time and incorporated into composite risk scores.
+The second layer transforms raw signals into structured quantitative indicators: numerical series with well-defined methodologies that can be compared across time and incorporated into composite risk scores.
 
 ### The GPR Index: Methodology, Applications, and Limits
 
 The Geopolitical Risk Index developed by Dario Caldara and Matteo Iacoviello (Federal Reserve Board) is the academic gold standard for quantifying geopolitical risk. The methodology is straightforward: it counts the frequency of geopolitical risk-related words in a curated set of major newspapers (The New York Times, Chicago Tribune, The Washington Post, The Los Angeles Times, The Financial Times, The Economist, Associated Press, and others) in each calendar month, then normalizes the count relative to the total news volume in that month.
 
-The key virtue of the GPR Index is its **long history** — monthly data going back to 1900 — and its **methodological transparency** and **replicability**. You can understand exactly what it's measuring and why it moves. It is also low-noise: because it is averaged across dozens of publications over a full calendar month, it is not sensitive to individual headlines or short-term media cycles.
+The key virtue of the GPR Index is its **long history**, monthly data going back to 1900, and its **methodological transparency** and **replicability**. You can understand exactly what it's measuring and why it moves. It is also low-noise: because it is averaged across dozens of publications over a full calendar month, it is not sensitive to individual headlines or short-term media cycles.
 
-The key limitation is **lag**. Because the GPR is computed monthly and released with a delay, it is not useful for real-time trading signals. Its value is in providing historical context — what was the GPR reading during past major geopolitical events? How does the current period compare? — rather than as a timing indicator. When the GPR crossed 200 in August 2014 (Crimea annexation aftermath), traders who were using it as a signal were already several weeks late to the trade.
+The key limitation is **lag**. Because the GPR is computed monthly and released with a delay, it is not useful for real-time trading signals. Its value is in providing historical context: what was the GPR reading during past major geopolitical events? How does the current period compare?, rather than as a timing indicator. When the GPR crossed 200 in August 2014 (Crimea annexation aftermath), traders who were using it as a signal were already several weeks late to the trade.
 
 The correct use of GPR is as a **confirming indicator and contextual framework**: when GPR is elevated (above 200), you know you are operating in a period of elevated geopolitical risk, which changes the base rate for how seriously you should treat incoming escalation signals from other sources. When GPR is at 100-120 (near historical average), a single alarming headline is much less likely to represent a durable shift.
 
@@ -125,9 +125,9 @@ The correct use of GPR is as a **confirming indicator and contextual framework**
 
 The CBOE Volatility Index (VIX) measures the market's expectation of 30-day implied volatility in the S&P 500, derived from option prices. It is widely understood as a "fear index." But the level of VIX alone is a crude instrument. A VIX reading of 22 could reflect many things: a normal correction, an idiosyncratic event with limited global spillover, or genuine panic about a systemic risk.
 
-The **VIX term structure** is far more informative. VIX futures trade at multiple maturities — 1-month, 2-month, 3-month, 6-month. Normally, the term structure is in **contango**: longer-dated contracts are more expensive than shorter-dated ones, reflecting the premium for providing uncertainty protection over longer periods. This is the "calm" configuration.
+The **VIX term structure** is far more informative. VIX futures trade at multiple maturities: 1-month, 2-month, 3-month, 6-month. Normally, the term structure is in **contango**: longer-dated contracts are more expensive than shorter-dated ones, reflecting the premium for providing uncertainty protection over longer periods. This is the "calm" configuration.
 
-When geopolitical shock hits, the term structure inverts to **backwardation**: front-month VIX futures trade above longer-dated contracts. This happens because investors are panicking about the immediate future but have more uncertainty about the medium-term path. Backwardation is a highly reliable signal of genuine market stress — it is difficult to produce through market manipulation or a single algorithmic trade, because maintaining a backwardated VIX structure requires sustained institutional demand for near-term options protection.
+When geopolitical shock hits, the term structure inverts to **backwardation**: front-month VIX futures trade above longer-dated contracts. This happens because investors are panicking about the immediate future but have more uncertainty about the medium-term path. Backwardation is a highly reliable signal of genuine market stress: it is difficult to produce through market manipulation or a single algorithmic trade, because maintaining a backwardated VIX structure requires sustained institutional demand for near-term options protection.
 
 For a real-time geopolitical risk monitor, the key metric is the **spread between VIX spot (or 1-month futures) and 3-month VIX futures**. When this spread goes negative (i.e., spot > 3-month), the term structure is in backwardation and the signal is active. A spread of -3 or worse (spot 3 points above 3-month) represents a strong signal.
 
@@ -135,11 +135,11 @@ For a real-time geopolitical risk monitor, the key metric is the **spread betwee
 
 ### Credit Spreads: EMBI and CDX
 
-Sovereign and corporate credit spreads are the bond market's version of the VIX — they measure the risk premium that lenders demand to hold debt that carries default or political risk. Two indices are particularly useful for geopolitical risk monitoring:
+Sovereign and corporate credit spreads are the bond market's version of the VIX: they measure the risk premium that lenders demand to hold debt that carries default or political risk. Two indices are particularly useful for geopolitical risk monitoring:
 
-**EMBI+ (JPMorgan Emerging Market Bond Index Plus)** measures the yield spread of EM sovereign dollar-denominated bonds over equivalent US Treasuries. When the EMBI+ spreads widen, EM governments are being charged more for credit, which reflects either increased political/geopolitical risk or deteriorating fiscal fundamentals. During the Ukraine invasion of February 2022, broad EM EMBI+ spreads widened by 45 basis points in the first two weeks — even for countries with no direct exposure to the conflict — as the event triggered a global risk-off flight from EM exposure.
+**EMBI+ (JPMorgan Emerging Market Bond Index Plus)** measures the yield spread of EM sovereign dollar-denominated bonds over equivalent US Treasuries. When the EMBI+ spreads widen, EM governments are being charged more for credit, which reflects either increased political/geopolitical risk or deteriorating fiscal fundamentals. During the Ukraine invasion of February 2022, broad EM EMBI+ spreads widened by 45 basis points in the first two weeks, even for countries with no direct exposure to the conflict, as the event triggered a global risk-off flight from EM exposure.
 
-**CDX HY (High Yield Credit Default Swap Index)** tracks the cost of buying credit protection on a basket of US high-yield corporate bonds. When CDX HY widens rapidly, it signals financial stress that extends beyond equity market volatility. Geopolitical shocks that threaten the global economy — commodity supply disruptions, financial sanctions, escalation to systemic conflict — tend to widen CDX HY as well as EMBI+.
+**CDX HY (High Yield Credit Default Swap Index)** tracks the cost of buying credit protection on a basket of US high-yield corporate bonds. When CDX HY widens rapidly, it signals financial stress that extends beyond equity market volatility. Geopolitical shocks that threaten the global economy (commodity supply disruptions, financial sanctions, escalation to systemic conflict) tend to widen CDX HY as well as EMBI+.
 
 The key advantage of credit spread signals for geopolitical risk monitoring is their **persistence**: unlike VIX, which can spike and recover within days, credit spread widenings that are driven by genuine structural risk tend to persist and widen further as the situation develops. This makes them useful as confirming signals rather than leading indicators.
 
@@ -159,7 +159,7 @@ Safe haven assets are those that attract capital during periods of uncertainty, 
 
 The behavior of these assets during geopolitical stress is remarkably consistent. Gold tends to lead: it begins appreciating within hours of a major geopolitical development, often before equity markets show significant reaction. JPY and CHF appreciate within the same day. The USD tends to strengthen later, as the initial shock triggers risk-off sentiment that overrides any specific fundamental concern.
 
-Monitoring the simultaneous appreciation of gold, JPY, and CHF — even when equity markets have not moved significantly — is a leading indicator of an escalating geopolitical event that the options and credit markets have not yet fully digested.
+Monitoring the simultaneous appreciation of gold, JPY, and CHF, even when equity markets have not moved significantly, is a leading indicator of an escalating geopolitical event that the options and credit markets have not yet fully digested.
 
 ### EM FX Index and Defense Sector Relative Performance
 
@@ -167,19 +167,19 @@ Two additional indicators worth including in a comprehensive monitor:
 
 **EM FX Index** (J.P. Morgan Emerging Market Currency Index or similar): When geopolitical risk rises, capital flees EM currencies broadly, even in countries not directly involved. Tracking the EM FX index gives a real-time read on how much risk aversion is moving global capital allocations.
 
-**Defense sector relative performance** (e.g., XAR ETF — the SPDR S&P Aerospace and Defense ETF — vs S&P 500): In a geopolitical escalation, defense stocks tend to outperform the broader market as investors price increased military spending. A sharp relative outperformance of XAR vs the S&P 500, particularly when it is not accompanied by any fundamental news about defense contracts, is a market signal that sophisticated investors are pricing an escalation risk that hasn't yet surfaced in mainstream news.
+**Defense sector relative performance** (e.g., XAR ETF, the SPDR S&P Aerospace and Defense ETF, vs S&P 500): In a geopolitical escalation, defense stocks tend to outperform the broader market as investors price increased military spending. A sharp relative outperformance of XAR vs the S&P 500, particularly when it is not accompanied by any fundamental news about defense contracts, is a market signal that sophisticated investors are pricing an escalation risk that hasn't yet surfaced in mainstream news.
 
 ## Layer 3: Cross-Asset Confirmation
 
 The third layer is conceptually simple but practically crucial: **a geopolitical risk signal is only actionable when multiple independent indicators confirm each other simultaneously**.
 
-This principle arises from the statistical reality that any single indicator has a non-trivial false positive rate. VIX alone spikes for many reasons — earnings disappointments, macroeconomic surprises, technical selling pressure — that have nothing to do with geopolitical risk. Oil prices move due to OPEC decisions, weather events, demand revisions, and a dozen other fundamental factors. Credit spreads widen in response to financial contagion, ratings changes, and economic cycles. Even the GPR Index can spike due to media attention on events that ultimately prove inconsequential.
+This principle arises from the statistical reality that any single indicator has a non-trivial false positive rate. VIX alone spikes for many reasons (earnings disappointments, macroeconomic surprises, technical selling pressure) that have nothing to do with geopolitical risk. Oil prices move due to OPEC decisions, weather events, demand revisions, and a dozen other fundamental factors. Credit spreads widen in response to financial contagion, ratings changes, and economic cycles. Even the GPR Index can spike due to media attention on events that ultimately prove inconsequential.
 
 When two or three of these signals move in the same direction simultaneously, the probability of a false positive drops dramatically. This is the cross-asset confirmation test.
 
 **The multi-signal alignment rule.** In practice, a robust operational rule is: require at least three of the following five signals to be active before escalating from Yellow to Orange alert: (1) GPR Index elevated (above 180, trending up); (2) VIX term structure in backwardation (spot > 3-month); (3) EMBI+ spreads widening at rate of 20+ basis points per week; (4) Gold up 1%+ over 5 days; (5) Brent crude up 3%+ in past 24 hours with no fundamental explanation.
 
-This requirement for multi-signal alignment naturally creates a small delay — you won't catch the very first moment of a geopolitical escalation — but it dramatically reduces the false positive rate and prevents the alert fatigue that destroys monitoring systems over time.
+This requirement for multi-signal alignment naturally creates a small delay (you won't catch the very first moment of a geopolitical escalation) but it dramatically reduces the false positive rate and prevents the alert fatigue that destroys monitoring systems over time.
 
 **Why single-asset moves are almost always misleading.** Consider a concrete example: in October 2023, Brent crude jumped 2.8% on the day the Gaza war began. But WTI and Brent had already been on an upward trend for weeks due to OPEC+ cuts. Without the simultaneous move in gold (+2.1%), EM FX weakness (-0.9%), and VIX backwardation, the oil move alone might have been attributable to the ongoing supply dynamics rather than geopolitical risk. The cross-asset confirmation rule would have correctly identified the October 7 event as a genuine geopolitical signal because all five confirmatory signals were active within 48 hours.
 
@@ -187,7 +187,7 @@ This requirement for multi-signal alignment naturally creates a small delay — 
 
 ## Layer 4: Portfolio Response Rules
 
-The fourth layer translates confirmed geopolitical risk signals into concrete portfolio actions. This is where the monitoring system becomes useful — not as an intellectual exercise, but as a decision support tool.
+The fourth layer translates confirmed geopolitical risk signals into concrete portfolio actions. This is where the monitoring system becomes useful, not as an intellectual exercise, but as a decision support tool.
 
 **Tiered response structure.** The most effective frameworks use a three-tier alert system:
 
@@ -199,9 +199,9 @@ The fourth layer translates confirmed geopolitical risk signals into concrete po
 
 **Position sizing during alerts.** The key principle is proportionality. Don't go from 0 to 100% defensive in response to the first Orange alert. Use a graduated scale: at Orange, move 25% of the available risk budget into defensive mode; at Red, move 75%. Reserve the remaining 25% for the possibility that the event resolves faster than expected, which allows you to participate in the recovery rally without being completely flat.
 
-**Timing considerations.** The worst time to add geopolitical hedges is after the event. The optimal window is during the early confirmation phase — when two signals are active but before the event is on every front page. At this point, hedge costs (VIX premiums, gold prices) have risen modestly but are still significantly below the levels they'll reach if the escalation continues. This is why building the monitoring system before you need it is so critical: it is much harder to think clearly about hedging costs and portfolio construction when the market is already selling off 2% and the news is everywhere.
+**Timing considerations.** The worst time to add geopolitical hedges is after the event. The optimal window is during the early confirmation phase, when two signals are active but before the event is on every front page. At this point, hedge costs (VIX premiums, gold prices) have risen modestly but are still significantly below the levels they'll reach if the escalation continues. This is why building the monitoring system before you need it is so critical: it is much harder to think clearly about hedging costs and portfolio construction when the market is already selling off 2% and the news is everywhere.
 
-**When to remove hedges.** Geopolitical hedges are expensive to carry over time. Gold in a portfolio earns no yield. VIX futures in contango lose value from the roll. The monitoring system should include a systematic process for removing hedges as the situation de-escalates. Track the signals that activated the hedge and remove it when at least two of the confirmation signals have returned to baseline levels. Don't wait for complete resolution — that always comes after most of the risk premium has already been wrung out of prices.
+**When to remove hedges.** Geopolitical hedges are expensive to carry over time. Gold in a portfolio earns no yield. VIX futures in contango lose value from the roll. The monitoring system should include a systematic process for removing hedges as the situation de-escalates. Track the signals that activated the hedge and remove it when at least two of the confirmation signals have returned to baseline levels. Don't wait for complete resolution, that always comes after most of the risk premium has already been wrung out of prices.
 
 ## Layer 5: Risk Budget and Monitoring Cadence
 
@@ -221,9 +221,9 @@ The fifth layer is the infrastructure that keeps the first four layers running e
 
 Building a geopolitical risk monitor requires shedding several beliefs that are widespread in practitioner circles but fundamentally incorrect.
 
-**Misconception 1: More data equals better predictions.** The intuition here is understandable — surely more information leads to better decisions. But in geopolitical risk monitoring, the marginal signal after a certain point introduces more noise than insight. The analyst who is tracking 200 indicators is not 10 times better than the analyst tracking 20 indicators; they are likely worse, because the cognitive load of synthesizing 200 inputs leads to pattern-matching errors and inconsistent decision-making. The five-signal framework described in this post is deliberately lean. Build it, run it for six months, and only add a new signal if you have a specific, testable hypothesis for why it improves the signal-to-noise ratio.
+**Misconception 1: More data equals better predictions.** The intuition here is understandable: surely more information leads to better decisions. But in geopolitical risk monitoring, the marginal signal after a certain point introduces more noise than insight. The analyst who is tracking 200 indicators is not 10 times better than the analyst tracking 20 indicators; they are likely worse, because the cognitive load of synthesizing 200 inputs leads to pattern-matching errors and inconsistent decision-making. The five-signal framework described in this post is deliberately lean. Build it, run it for six months, and only add a new signal if you have a specific, testable hypothesis for why it improves the signal-to-noise ratio.
 
-**Misconception 2: The GPR Index is a trading signal.** The GPR's greatest strength — methodological rigor and historical consistency — is also its greatest weakness for real-time use. The monthly release cycle and publication lag mean that by the time you see an elevated GPR reading, the event driving it has already been fully priced by faster-moving signals. The GPR is useful for regime identification (are we in a high-risk period or a low-risk period?) and for historical context (how does today's risk compare with the run-up to the Iraq War?), not for timing trades.
+**Misconception 2: The GPR Index is a trading signal.** The GPR's greatest strength, methodological rigor and historical consistency, is also its greatest weakness for real-time use. The monthly release cycle and publication lag mean that by the time you see an elevated GPR reading, the event driving it has already been fully priced by faster-moving signals. The GPR is useful for regime identification (are we in a high-risk period or a low-risk period?) and for historical context (how does today's risk compare with the run-up to the Iraq War?), not for timing trades.
 
 **Misconception 3: Geopolitical risk always spikes VIX.** This is demonstrably false. The 7/7 London bombing, one of the deadliest terrorist attacks in British history, moved VIX by only 8% and recovered in three days. The 2015 Paris attacks moved VIX by 6%. The 2019 Soleimani killing moved VIX by 7%. Events that are dramatic in geopolitical terms often have modest market impact because: (a) they don't directly threaten global economic flows; (b) they're rapidly resolved or contained; or (c) markets had already partially priced the underlying risk. Your monitoring system should not treat "VIX didn't spike" as definitive evidence that no geopolitical risk is present.
 
@@ -235,11 +235,11 @@ Now we assemble the individual signals into a single composite risk score that c
 
 The composite score is on a 0-100 scale and is composed of three components:
 
-**Component 1: GPR Index — normalized to 0-40 points.** The GPR index historical average is 100, with a historical standard deviation of approximately 60. A GPR reading of 100 (baseline) scores 0 points. A GPR reading of 340+ (one of the highest on record, comparable to 9/11 or the Ukraine invasion) scores 40 points. The formula: `GPR_score = min(40, max(0, (GPR - 100) / 6))`. This gives a linear mapping from 100→0 to 340→40 points.
+**Component 1: GPR Index, normalized to 0-40 points.** The GPR index historical average is 100, with a historical standard deviation of approximately 60. A GPR reading of 100 (baseline) scores 0 points. A GPR reading of 340+ (one of the highest on record, comparable to 9/11 or the Ukraine invasion) scores 40 points. The formula: `GPR_score = min(40, max(0, (GPR - 100) / 6))`. This gives a linear mapping from 100→0 to 340→40 points.
 
-**Component 2: VIX term structure — 0 or 30 points.** This is a binary signal: 30 points if the VIX term structure is in backwardation (spot VIX > 3-month futures), 0 points otherwise. The binary nature reflects the fact that the presence of backwardation, at any magnitude, is the key threshold — the severity of the backwardation adds little additional predictive information.
+**Component 2: VIX term structure, 0 or 30 points.** This is a binary signal: 30 points if the VIX term structure is in backwardation (spot VIX > 3-month futures), 0 points otherwise. The binary nature reflects the fact that the presence of backwardation, at any magnitude, is the key threshold: the severity of the backwardation adds little additional predictive information.
 
-**Component 3: Brent geopolitical premium — normalized to 0-30 points.** The geopolitical premium is calculated as the difference between front-month Brent and the 5-year futures contract. A premium of 0 scores 0 points. A premium of \$20 or more (the level seen at peak Ukraine invasion risk) scores 30 points. Formula: `oil_score = min(30, max(0, premium_usd * 1.5))`.
+**Component 3: Brent geopolitical premium, normalized to 0-30 points.** The geopolitical premium is calculated as the difference between front-month Brent and the 5-year futures contract. A premium of 0 scores 0 points. A premium of \$20 or more (the level seen at peak Ukraine invasion risk) scores 30 points. Formula: `oil_score = min(30, max(0, premium_usd * 1.5))`.
 
 **Total risk score = GPR_score + VIX_score + oil_score.** A score of 0-25 corresponds to Green alert. 26-50 corresponds to Yellow alert. 51-75 corresponds to Orange alert. 76-100 corresponds to Red alert.
 
@@ -253,17 +253,17 @@ Let's test this framework against a live historical case.
 
 Question: If you implement a rule to exit EM equity positions whenever the GPR Index exceeds 200, how much of the peak-to-trough drawdown do you avoid in the two most extreme events in the dataset?
 
-**Event 1: 9/11 (September 2001).** The GPR Index for September 2001 was 326 — the highest reading in the full dataset. In the weeks following 9/11, MSCI EM equities fell 14.7% peak to trough. The GPR had been elevated above 200 briefly in August 2001 (around 210, reflecting increased chatter about terrorist threats in the Middle East), before briefly pulling back. A practitioner using a GPR > 200 exit rule on August 1, 2001 would have been flat of EM equities when 9/11 occurred. Value preserved: **14.7% on the EM equity allocation**.
+**Event 1: 9/11 (September 2001).** The GPR Index for September 2001 was 326: the highest reading in the full dataset. In the weeks following 9/11, MSCI EM equities fell 14.7% peak to trough. The GPR had been elevated above 200 briefly in August 2001 (around 210, reflecting increased chatter about terrorist threats in the Middle East), before briefly pulling back. A practitioner using a GPR > 200 exit rule on August 1, 2001 would have been flat of EM equities when 9/11 occurred. Value preserved: **14.7% on the EM equity allocation**.
 
 On a \$10M portfolio with 30% EM equity weight (a typical active EM tilt for this era), that's \$3 million at risk. At the GPR threshold, you would have exited with \$3M in EM. Post-9/11, those positions would have been worth \$2.56M at trough. **Return preserved: \$440,000** on the \$3M EM allocation, or 14.7%.
 
-**Event 2: Ukraine Invasion (February 2022).** The GPR Index for February 2022 was 345 — even higher than 9/11. But in January 2022, the GPR was already 220, well above the 200 threshold, as news coverage of Russian troop buildups along the Ukrainian border intensified. A practitioner using the GPR > 200 rule would have exited EM equities in late January 2022, before the invasion on February 24.
+**Event 2: Ukraine Invasion (February 2022).** The GPR Index for February 2022 was 345, even higher than 9/11. But in January 2022, the GPR was already 220, well above the 200 threshold, as news coverage of Russian troop buildups along the Ukrainian border intensified. A practitioner using the GPR > 200 rule would have exited EM equities in late January 2022, before the invasion on February 24.
 
 MSCI EM equities fell 9.3% in the two weeks following the invasion. On the same \$10M portfolio with 30% EM weight: **\$279,000 in avoided losses** on the EM allocation.
 
 Combined across both events: **\$719,000 in avoided losses**, at the cost of carrying cash for a few weeks in each case, missing modest upside if the events had not materialized.
 
-Important caveat: this analysis ignores the false-positive costs — the weeks in August 2001 and January 2022 where you held cash instead of EM equities and markets either went sideways or up modestly. The net value of the strategy depends on the trade-off between avoided losses and foregone gains, and on the cost of the exit/re-entry transactions.
+Important caveat: this analysis ignores the false-positive costs, the weeks in August 2001 and January 2022 where you held cash instead of EM equities and markets either went sideways or up modestly. The net value of the strategy depends on the trade-off between avoided losses and foregone gains, and on the cost of the exit/re-entry transactions.
 
 ![Safe haven asset average 7-day returns following major geopolitical shock events](/imgs/blogs/building-a-geopolitical-risk-monitor-data-indicators-signals-5.png)
 
@@ -305,9 +305,9 @@ Allocation of \$150,000: Split evenly between gold (\$75,000) and JPY exposure (
 
 **Total benefit of defensive shift: \$1,725 + \$1,050 + \$5,700 = \$8,475** over the 7-day window.
 
-Cost of the shift: transaction costs (assume 5 bps per leg × 2 legs × \$150,000 = \$150) plus the opportunity cost if EM equities had risen instead. At the Orange alert level, historical data suggests EM equities decline in approximately 68% of the events that trigger a three-signal confirmation — making the hedge economically rational in expectation even before accounting for the insurance value.
+Cost of the shift: transaction costs (assume 5 bps per leg × 2 legs × \$150,000 = \$150) plus the opportunity cost if EM equities had risen instead. At the Orange alert level, historical data suggests EM equities decline in approximately 68% of the events that trigger a three-signal confirmation: making the hedge economically rational in expectation even before accounting for the insurance value.
 
-Note: this is the expected value of the hedge based on historical averages. In any individual event, the actual outcome will differ significantly. The April 2024 Iran-Israel exchange resolved within days without further escalation, and markets recovered much of the selloff. In this case, the defensive shift would have cost approximately \$3,500 in foregone recovery gains minus the \$2,775 in safe haven appreciation — a net cost of roughly \$725. A small but acceptable price for the protection.
+Note: this is the expected value of the hedge based on historical averages. In any individual event, the actual outcome will differ significantly. The April 2024 Iran-Israel exchange resolved within days without further escalation, and markets recovered much of the selloff. In this case, the defensive shift would have cost approximately \$3,500 in foregone recovery gains minus the \$2,775 in safe haven appreciation: a net cost of roughly \$725. A small but acceptable price for the protection.
 
 #### Worked example:
 
@@ -315,13 +315,13 @@ Note: this is the expected value of the hedge based on historical averages. In a
 
 Let's construct the composite risk score for the day of the Ukraine invasion, using the formula defined above, and compare it to what a practitioner would have seen if they had been running this system in real time.
 
-**Date: February 24, 2022 — Russia launches full-scale invasion of Ukraine at 5:00 AM Kyiv time.**
+**Date: February 24, 2022 (Russia launches full-scale invasion of Ukraine at 5):00 AM Kyiv time.**
 
 **Component 1: GPR Index**
 The February 2022 GPR Index = 345 (highest ever recorded in the modern era).
 GPR_score = min(40, max(0, (345 - 100) / 6)) = min(40, 40.8) = **40 points**
 
-But wait — the February GPR index was not actually available on February 24. The monthly GPR is released with a lag. However, based on the January 2022 reading of approximately 220, we would have already scored: GPR_score = (220-100)/6 = 20 points. A practitioner running the system in real time would have had at least 20 points from GPR alone, based on the January reading that was already reflecting the troop buildup coverage.
+But wait: the February GPR index was not actually available on February 24. The monthly GPR is released with a lag. However, based on the January 2022 reading of approximately 220, we would have already scored: GPR_score = (220-100)/6 = 20 points. A practitioner running the system in real time would have had at least 20 points from GPR alone, based on the January reading that was already reflecting the troop buildup coverage.
 
 **Component 2: VIX Term Structure**
 On February 24, 2022, VIX spot opened at approximately 31.8. The March VIX futures (then the front-month) were at approximately 29. The 3-month (May) futures were approximately 25. The term structure was clearly in backwardation (31.8 > 25), triggering the binary signal. VIX_score = **30 points**
@@ -365,11 +365,11 @@ Here is a concrete implementation protocol for a practitioner who wants to run t
 
 The most important thing to understand about a geopolitical risk monitor is what it cannot do. It cannot predict the specific event that will occur. It cannot tell you whether a situation will escalate or de-escalate. It cannot forecast asset prices with any precision. And it is not a substitute for fundamental judgment about geopolitical dynamics.
 
-What it can do is systematically identify when you are operating in a regime of elevated geopolitical risk and provide a structured process for adjusting portfolio positioning in a way that is proportional to the evidence. That is not a small thing. The practitioner in the opening example who de-risked 15 minutes before the market selloff was not a genius — they were a disciplined implementer of a well-designed monitoring system. That discipline, applied consistently over years, is worth far more than any individual correct prediction.
+What it can do is systematically identify when you are operating in a regime of elevated geopolitical risk and provide a structured process for adjusting portfolio positioning in a way that is proportional to the evidence. That is not a small thing. The practitioner in the opening example who de-risked 15 minutes before the market selloff was not a genius: they were a disciplined implementer of a well-designed monitoring system. That discipline, applied consistently over years, is worth far more than any individual correct prediction.
 
-The practitioner who ignores geopolitical risk until it's on every front page will always be late. The practitioner who hedges against every whisper of conflict will bleed alpha in transaction costs and carry costs. The practitioner with a systematic, calibrated, multi-signal monitoring system will be neither — and over a full market cycle, that difference compounds significantly.
+The practitioner who ignores geopolitical risk until it's on every front page will always be late. The practitioner who hedges against every whisper of conflict will bleed alpha in transaction costs and carry costs. The practitioner with a systematic, calibrated, multi-signal monitoring system will be neither, and over a full market cycle, that difference compounds significantly.
 
-Build the system. Run it consistently. Review it rigorously. And remember: the goal is not to be right about what happens — it is to be appropriately positioned for the full range of what might happen.
+Build the system. Run it consistently. Review it rigorously. And remember: the goal is not to be right about what happens, it is to be appropriately positioned for the full range of what might happen.
 
 ## Further Reading and Data Sources
 

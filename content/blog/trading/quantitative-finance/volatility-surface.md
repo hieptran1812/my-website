@@ -29,24 +29,24 @@ The Black-Scholes formula gives a single price as a function of a single volatil
 
 ![The volatility surface: implied vol as a 2D function of strike and expiry](/imgs/blogs/volatility-surface-1.png)
 
-The diagram above is the mental model. The surface is a 2D function $\sigma(K, T)$ — implied volatility indexed by strike and expiry. Inputs are liquid market quotes and observable rates / dividends; outputs are everything downstream: vanilla prices for any $(K, T)$, exotic prices via richer dynamic models calibrated to the surface, risk Greeks for the book, and the coordinate system in which traders communicate. The surface is the daily mark; everything else is interpretation.
+The diagram above is the mental model. The surface is a 2D function $\sigma(K, T)$: implied volatility indexed by strike and expiry. Inputs are liquid market quotes and observable rates / dividends; outputs are everything downstream: vanilla prices for any $(K, T)$, exotic prices via richer dynamic models calibrated to the surface, risk Greeks for the book, and the coordinate system in which traders communicate. The surface is the daily mark; everything else is interpretation.
 
 This article is the deep dive on the volatility surface for a senior quant or staff-level engineer. It covers the structural shapes (smile, skew, term structure), the four mainstream parameterisations (SVI, SABR, Heston, Dupire local vol), the three arbitrage-free constraints, the local-vol-vs-stochastic-vol-vs-SLV decision, the calibration loop, the variance risk premium, surface Greeks, the production architecture for surfaces as versioned data products, and case studies of named surface failures. Companion articles: [Black-Scholes](/blog/trading/quantitative-finance/black-scholes) for the underlying formula, [Options Theory](/blog/trading/quantitative-finance/options-theory) for the payoff and Greek picture, [Derivatives Pricing](/blog/trading/quantitative-finance/derivatives-pricing) for the abstract framework.
 
 ## 1. The surface as the canonical market data
 
-A pricing system that uses a flat volatility — one $\sigma$ for the entire underlying — is a teaching tool, not a production system. Every serious options market has a non-flat surface, and the *shape* of the surface encodes information about market expectations, supply and demand for tail protection, regime, and liquidity. The surface is to options what the *yield curve* is to bonds: the daily-published, multi-dimensional state variable from which every consistent calculation flows.
+A pricing system that uses a flat volatility, one $\sigma$ for the entire underlying, is a teaching tool, not a production system. Every serious options market has a non-flat surface, and the *shape* of the surface encodes information about market expectations, supply and demand for tail protection, regime, and liquidity. The surface is to options what the *yield curve* is to bonds: the daily-published, multi-dimensional state variable from which every consistent calculation flows.
 
 What goes on the surface depends on the market:
 
 - **Equity index (SPX, NDX, RUT)**: strikes from 50% to 150% of spot, expiries from 0DTE to 5 years; quoted in implied vol. Tens of thousands of liquid quotes per day.
 - **Single-stock equities**: 30% to 200% of spot moneyness, expiries up to 2 years for actively-traded names; less liquid in wings; surface noisier.
 - **FX (G10 pairs)**: quoted in *delta-strike* convention (10-delta, 25-delta, ATM, 75-delta, 90-delta) rather than absolute strike; expiries 1 day to 10 years; very liquid for major pairs.
-- **Interest rates (swaptions)**: a 3D *cube* — expiry, swap tenor, strike — usually parameterised slice-by-slice in SABR.
+- **Interest rates (swaptions)**: a 3D *cube* (expiry, swap tenor, strike) usually parameterised slice-by-slice in SABR.
 - **Commodities (WTI, gold, agriculturals)**: surface shape varies by underlying; oil is downward-skewed, gold roughly symmetric, agriculturals seasonal.
 - **Credit (CDS-on-credit)**: the analog is the *implied default-intensity surface* indexed by tenor and rating tranche; smaller market, similar engineering.
 
-The architectural common thread: every market has a *coordinate system* for liquid quotes (whatever the convention), and the surface is the multi-dimensional smooth function that interpolates / extrapolates the quotes consistently. Everything downstream — vanillas, exotics, risk, hedging — reads from the surface.
+The architectural common thread: every market has a *coordinate system* for liquid quotes (whatever the convention), and the surface is the multi-dimensional smooth function that interpolates / extrapolates the quotes consistently. Everything downstream (vanillas, exotics, risk, hedging) reads from the surface.
 
 A junior quant who treats vol as a scalar will mis-quote every option whose strike or expiry differs from the trader's assumption. A senior quant always asks "which strike, which expiry, on which surface" and reads off a number. The mental cost of operating in 2D rather than scalar is large at first; the operational cost of *not* operating in 2D is much larger.
 
@@ -72,11 +72,11 @@ The flat-vol world predicts that all options on the same underlying have the sam
 
 **Equity skew.** SPX implied vol is roughly *monotonically decreasing* in strike. A 90% strike (10% OTM put) might have IV 22%; ATM IV 18%; a 110% strike (10% OTM call) IV 16%. The skew is steeper for short expiries and gentler for long. Drivers: insurance demand (everyone wants OTM puts on long-stock positions), the leverage effect (a falling stock has higher debt-to-equity ratio and is more volatile), risk-aversion (the market prices crash risk asymmetrically). The post-1987 skew has *never* gone away; even when realised vol is calm, OTM puts trade at a premium to OTM calls.
 
-**FX smile.** EUR/USD implied vol is roughly *symmetric* in moneyness — both wings have higher vol than ATM. Drivers: fat tails on both sides (currencies don't have a "natural" downside), no leverage effect. FX traders quote the smile via two numbers: the *butterfly* (smile curvature, average of OTM put and OTM call vol minus ATM vol) and the *risk reversal* (asymmetry, OTM call vol minus OTM put vol). Standard FX-options conventions are 25-delta and 10-delta butterflies and risk reversals.
+**FX smile.** EUR/USD implied vol is roughly *symmetric* in moneyness: both wings have higher vol than ATM. Drivers: fat tails on both sides (currencies don't have a "natural" downside), no leverage effect. FX traders quote the smile via two numbers: the *butterfly* (smile curvature, average of OTM put and OTM call vol minus ATM vol) and the *risk reversal* (asymmetry, OTM call vol minus OTM put vol). Standard FX-options conventions are 25-delta and 10-delta butterflies and risk reversals.
 
-**Commodity surfaces.** Oil is downward-skewed (similar to equity). Gold is roughly symmetric. Agriculturals are seasonal — corn vol surfaces have a U-shape across calendar months reflecting harvest timing. Each commodity has its own structural drivers; senior commodity quants know each surface's signature.
+**Commodity surfaces.** Oil is downward-skewed (similar to equity). Gold is roughly symmetric. Agriculturals are seasonal: corn vol surfaces have a U-shape across calendar months reflecting harvest timing. Each commodity has its own structural drivers; senior commodity quants know each surface's signature.
 
-**Term structure.** At fixed moneyness (e.g., ATM), implied vol varies with expiry. In *contango*, short-dated < long-dated — markets expect vol to rise toward its long-run mean. In *backwardation*, short-dated > long-dated — current vol is elevated and expected to revert down. Term structure shape encodes the market's expectation of the path of future vol.
+**Term structure.** At fixed moneyness (e.g., ATM), implied vol varies with expiry. In *contango*, short-dated < long-dated: markets expect vol to rise toward its long-run mean. In *backwardation*, short-dated > long-dated: current vol is elevated and expected to revert down. Term structure shape encodes the market's expectation of the path of future vol.
 
 A few useful observations:
 
@@ -303,7 +303,7 @@ A practical numerical issue. The Dupire formula involves a second derivative of 
 
 ### 5.1 The Markovian projection theorem
 
-There is a remarkable mathematical fact (Gyöngy 1986, Dupire 1994) that justifies the local-vol construction. Given any *general* SDE $dS_t = \mu_t \, dt + \sigma_t \, dW_t$ with possibly stochastic volatility $\sigma_t$, there exists a *Markovian projection* — a deterministic function $\sigma_M(t, S)$ — such that the SDE $dS_t = \mu \, dt + \sigma_M(t, S_t) \, dW_t$ has the same one-dimensional marginal distribution at every $T$ as the original. The Markovian projection is given by
+There is a remarkable mathematical fact (Gyöngy 1986, Dupire 1994) that justifies the local-vol construction. Given any *general* SDE $dS_t = \mu_t \, dt + \sigma_t \, dW_t$ with possibly stochastic volatility $\sigma_t$, there exists a *Markovian projection*, a deterministic function $\sigma_M(t, S)$, such that the SDE $dS_t = \mu \, dt + \sigma_M(t, S_t) \, dW_t$ has the same one-dimensional marginal distribution at every $T$ as the original. The Markovian projection is given by
 
 $$
 \sigma_M^2(t, S) = \mathbb{E}\big[\sigma_t^2 \,\big|\, S_t = S\big].
@@ -311,7 +311,7 @@ $$
 
 The Dupire formula is the special case where the marginal is dictated by the market option prices (which determine the marginal distribution of $S_T$ for every $T$ via Breeden-Litzenberger).
 
-The implication: *any* stochastic-vol model that calibrates to the market vanilla prices has the same Markovian projection — Dupire local vol. So local vol is the "unique" Markov calibrating model in a precise sense. But the *full* dynamics (joint distribution of $(S_t, v_t)$ over time) of stochastic-vol models differ from local-vol; that's what gives them different forward-smile behaviour and different Greeks.
+The implication: *any* stochastic-vol model that calibrates to the market vanilla prices has the same Markovian projection, Dupire local vol. So local vol is the "unique" Markov calibrating model in a precise sense. But the *full* dynamics (joint distribution of $(S_t, v_t)$ over time) of stochastic-vol models differ from local-vol; that's what gives them different forward-smile behaviour and different Greeks.
 
 This explains why local-vol gets vanilla pricing right but exotic pricing wrong. Local-vol matches the *one-dimensional marginal* at each $T$, but it doesn't match the *joint* dynamics. Forward-smile-sensitive products depend on the joint dynamics. Hence the SLV trick: combine stochastic vol (for joint dynamics) with local-vol overlay (for marginal calibration).
 
@@ -347,10 +347,10 @@ $$
 
 The four parameters' roles:
 
-- $\alpha$ — ATM vol level. If $\alpha$ doubles, ATM vol roughly doubles.
-- $\beta$ — backbone slope (CEV). $\beta = 0$ is normal Brownian (rates), $\beta = 1$ is lognormal (FX, equities). Often fixed at $\beta = 0.5$ or $\beta = 1$ during calibration.
-- $\rho$ — spot-vol correlation. Sets the skew direction. Negative $\rho$ produces equity-style skew; positive $\rho$ produces inverted skew.
-- $\nu$ — vol-of-vol. Sets the smile curvature. Higher $\nu$ produces a more pronounced smile.
+- $\alpha$: ATM vol level. If $\alpha$ doubles, ATM vol roughly doubles.
+- $\beta$: backbone slope (CEV). $\beta = 0$ is normal Brownian (rates), $\beta = 1$ is lognormal (FX, equities). Often fixed at $\beta = 0.5$ or $\beta = 1$ during calibration.
+- $\rho$: spot-vol correlation. Sets the skew direction. Negative $\rho$ produces equity-style skew; positive $\rho$ produces inverted skew.
+- $\nu$: vol-of-vol. Sets the smile curvature. Higher $\nu$ produces a more pronounced smile.
 
 Calibration is per-slice (per expiry, per swap tenor for swaptions): fix $\beta$, fit $(\alpha, \rho, \nu)$ via Levenberg-Marquardt to the observed smile. The Hagan formula is closed-form, so the fit takes milliseconds.
 
@@ -372,7 +372,7 @@ Vanilla pricing under Heston has a *semi*-closed form: the characteristic functi
 
 The Feller condition $2 \kappa \theta > \sigma_v^2$ ensures variance stays positive in the SDE. In production, calibration sometimes lands at parameters that violate Feller; this is a signal that the model is being stretched, and a more careful regularisation (or a richer model) is warranted.
 
-We covered the calibration challenges in [the derivatives pricing post](/blog/trading/quantitative-finance/derivatives-pricing) — multiple basins, parameter instability, exotic divergence. The mitigations are the same: warm-start from yesterday, regularise, monitor parameter time series, hold-out test.
+We covered the calibration challenges in [the derivatives pricing post](/blog/trading/quantitative-finance/derivatives-pricing): multiple basins, parameter instability, exotic divergence. The mitigations are the same: warm-start from yesterday, regularise, monitor parameter time series, hold-out test.
 
 ## 8. Local-vol vs stochastic-vol vs SLV
 
@@ -426,7 +426,7 @@ In practice, this is the most engineering-heavy step in modern SLV pricing libra
 
 ### 8.2 Why rough volatility?
 
-A 2014 paper by Gatheral, Jaisson, and Rosenbaum showed that *empirical realised volatility is rough* — the path of $\log \sigma_t$ has a Hurst exponent $H \approx 0.1$, far from the Brownian-motion value of $0.5$. This means realised vol is highly persistent on short timescales and reverts on longer ones. Standard stochastic-vol models (Heston) have $H = 0.5$ and miss this empirical structure. Rough Heston, rough Bergomi, and other "rough" models fit the term structure of ATM volatility much better than their Markovian counterparts.
+A 2014 paper by Gatheral, Jaisson, and Rosenbaum showed that *empirical realised volatility is rough*: the path of $\log \sigma_t$ has a Hurst exponent $H \approx 0.1$, far from the Brownian-motion value of $0.5$. This means realised vol is highly persistent on short timescales and reverts on longer ones. Standard stochastic-vol models (Heston) have $H = 0.5$ and miss this empirical structure. Rough Heston, rough Bergomi, and other "rough" models fit the term structure of ATM volatility much better than their Markovian counterparts.
 
 The trade-off: rough models are non-Markov, so PDE pricing doesn't apply. They can be priced via Monte Carlo with hybrid schemes that handle the singular kernel of fractional Brownian motion. Calibration is slower (~minutes) and more delicate. The benefit is realistic short-dated dynamics, particularly for products like 0DTE options and very-short-dated cliquets.
 
@@ -443,7 +443,7 @@ Surface calibration happens at a defined cadence. A typical production schedule:
 - **End-of-day.** Deep calibration with held-out tests, parameter time-series log, model-spread validation against alternative parameterisations.
 - **Weekly.** Full review of parameter time series across the past week; flag any parameters that jumped beyond historical bands.
 
-The *consumer* contract: every pricer reads the *latest published* surface from the cache. The pricer never fits its own surface — that would produce inconsistent pricing across the firm. The publisher is the authoritative source.
+The *consumer* contract: every pricer reads the *latest published* surface from the cache. The pricer never fits its own surface, that would produce inconsistent pricing across the firm. The publisher is the authoritative source.
 
 Validation gates inside the calibration loop:
 
@@ -454,7 +454,7 @@ Validation gates inside the calibration loop:
 5. **Exotic spread.** Price a benchmark exotic under the new vs old surface; spread ≤ bid-ask; flag if larger.
 6. **Implied density.** Non-negative everywhere; flag negative regions.
 
-A calibration that fails any gate doesn't publish silently — it raises an alarm, the on-duty quant is paged, and the consumers continue with the previous surface until the issue is resolved.
+A calibration that fails any gate doesn't publish silently: it raises an alarm, the on-duty quant is paged, and the consumers continue with the previous surface until the issue is resolved.
 
 ## 10. The variance risk premium
 
@@ -464,7 +464,7 @@ Implied volatility systematically exceeds realised volatility on equity indices.
 
 Empirical fact for SPX 1990–2024: mean implied 30-day vol ≈ 18.5%, mean realised 30-day vol ≈ 15.2%, spread ≈ 3.3 vol points. Annualised, this is about 6.6% of the variance. Selling 30-day SPX variance and rolling produces a positive average return of ~20% per year (in a leveraged-share form).
 
-Why does it persist? Because end-buyers of OTM puts (pension funds, asset managers seeking portfolio insurance) are inelastic on the long-vol side, and dealers on the short-vol side bear tail risk that requires capital. The reward to selling vol is the compensation for the tail risk — which materialises in events like 2018 Volmageddon, 2020 COVID crash, 2024 yen-carry unwind.
+Why does it persist? Because end-buyers of OTM puts (pension funds, asset managers seeking portfolio insurance) are inelastic on the long-vol side, and dealers on the short-vol side bear tail risk that requires capital. The reward to selling vol is the compensation for the tail risk, which materialises in events like 2018 Volmageddon, 2020 COVID crash, 2024 yen-carry unwind.
 
 A senior trader's view of VRP harvest:
 
@@ -481,11 +481,11 @@ $$
 \text{VIX}^2 = \frac{2}{T} \sum_i \frac{\Delta K_i}{K_i^2} e^{rT} Q(K_i) - \frac{1}{T}\left(\frac{F}{K_0} - 1\right)^2
 $$
 
-where the sum is over a strip of OTM strikes around 30-day-equivalent expiry. VIX is the model-free 30-day implied volatility — the strike of a 30-day variance swap on SPX. It is *the most-quoted volatility number in the world* and the underlying of a multi-billion-dollar futures and options market.
+where the sum is over a strip of OTM strikes around 30-day-equivalent expiry. VIX is the model-free 30-day implied volatility: the strike of a 30-day variance swap on SPX. It is *the most-quoted volatility number in the world* and the underlying of a multi-billion-dollar futures and options market.
 
 Senior quants treat VIX as a daily indicator of the SPX vol surface. A rising VIX indicates either (a) the level of the SPX surface is shifting up, or (b) the wings (deep OTM) are getting more expensive. Decomposing VIX into ATM-level vs wing-pricing requires looking at the surface itself; a VIX spike with stable ATM means the wings are pricing tail risk.
 
-VIX has its own surface — implied vols on VIX options form a complete surface with smile, skew, and term structure of their own. Trading "vol-of-vol" is essentially trading the VIX surface; VVIX is to VIX what VIX is to SPX. Senior cross-asset traders watch VIX, VVIX, and SKEW (the SPX-skew index) together to read multi-dimensional vol-pricing.
+VIX has its own surface: implied vols on VIX options form a complete surface with smile, skew, and term structure of their own. Trading "vol-of-vol" is essentially trading the VIX surface; VVIX is to VIX what VIX is to SPX. Senior cross-asset traders watch VIX, VVIX, and SKEW (the SPX-skew index) together to read multi-dimensional vol-pricing.
 
 ### 10.2 Variance-swap pricing on the surface
 
@@ -542,7 +542,7 @@ Production surfaces are typically stored in one of two forms:
 
 **Grid form.** A precomputed 2D grid of implied vol, total variance, or local vol on a dense $(K, T)$ mesh. ~100 KB per surface. Reading is a 2D interpolation lookup. Used when downstream consumers don't have access to the model evaluator.
 
-The trade-off: parameter form is compact but couples consumers to the specific model class. Grid form is bulky but model-agnostic. Most production systems publish *both* — parameters for sophisticated consumers, grids for legacy consumers.
+The trade-off: parameter form is compact but couples consumers to the specific model class. Grid form is bulky but model-agnostic. Most production systems publish *both*: parameters for sophisticated consumers, grids for legacy consumers.
 
 A third form, *hybrid*, stores the parameters plus a delta grid of model-vs-quote residuals at the calibration strikes. This is useful for diagnostics: when consumers see a discrepancy between their own pricing and the published surface, the residual grid pinpoints which strikes are mispriced and by how much.
 
@@ -588,7 +588,7 @@ Surfaces fail in named regimes that a senior quant should recognise.
 
 **Expiry weeks.** Pinning, gamma squeeze, and 0DTE flow distort the front-end of the surface. Mitigation: down-weight noisy front-end quotes, increase intraday cadence near expiry.
 
-**Regime shifts.** 2008 LIBOR-OIS, 2020 negative oil, 2014 negative rates, 2022 yen carry — each was a structural shift that broke assumptions baked into surface architecture. Mitigation: surface engineering that accepts curve-as-data, multi-currency, multi-rate inputs; ability to switch parameterisations (e.g., to Bachelier) when underlying support changes.
+**Regime shifts.** 2008 LIBOR-OIS, 2020 negative oil, 2014 negative rates, 2022 yen carry: each was a structural shift that broke assumptions baked into surface architecture. Mitigation: surface engineering that accepts curve-as-data, multi-currency, multi-rate inputs; ability to switch parameterisations (e.g., to Bachelier) when underlying support changes.
 
 ### 13.1 Practical bucket-vega computation
 
@@ -613,7 +613,7 @@ For a typical book of 100K options across 50+ underlyings, computing all bucket 
 
 ### 13.2 Skew-vega and risk reversals
 
-The 25-delta risk reversal — the difference between OTM call vol and OTM put vol — is a single-number summary of the skew. Trading the risk reversal directly hedges skew vega. A risk-reversal trade is long the OTM call, short the OTM put, both at 25-delta, vega-neutral via ATM straddles.
+The 25-delta risk reversal, the difference between OTM call vol and OTM put vol, is a single-number summary of the skew. Trading the risk reversal directly hedges skew vega. A risk-reversal trade is long the OTM call, short the OTM put, both at 25-delta, vega-neutral via ATM straddles.
 
 Senior FX and equity traders watch the 25-delta risk reversal time series as a sentiment indicator. A widening (more negative) equity risk reversal indicates rising crash fear; a narrowing indicates risk-on. The risk reversal often leads moves in the underlying by hours or days.
 
@@ -722,7 +722,7 @@ Beyond production, the volatility surface is a rich research object that has dri
 
 **Smile dynamics.** How does the surface evolve over time, conditional on movements in spot? This is the *forward smile* problem: given today's surface and a hypothetical future spot, what does the surface look like? Local-vol models predict a flat future smile; stochastic-vol models predict shape preservation; SLV interpolates. Empirically, real surfaces approximately preserve smile shape under spot moves, with a slight "sticky-strike" bias for short expiries and a "sticky-delta" bias for longer ones. Modelling these dynamics is the central question of forward-smile-sensitive product pricing.
 
-**Smile asymptotics.** As $|k| \to \infty$, what is the asymptotic behaviour of the smile? Lee (2004) showed that the asymptotic slope of total variance must be bounded by 2 (from above) and a corresponding lower bound exists. These bounds are often saturated in equity markets — the deep wings of equity surfaces are essentially linear in $k$. The Lee bounds are an arbitrage constraint at infinity.
+**Smile asymptotics.** As $|k| \to \infty$, what is the asymptotic behaviour of the smile? Lee (2004) showed that the asymptotic slope of total variance must be bounded by 2 (from above) and a corresponding lower bound exists. These bounds are often saturated in equity markets: the deep wings of equity surfaces are essentially linear in $k$. The Lee bounds are an arbitrage constraint at infinity.
 
 **Implied moments.** From the surface, one can extract not just the implied volatility but also implied skewness and kurtosis of the risk-neutral distribution. The Bakshi-Kapadia-Madan (2003) formulas express these moments as integrals over OTM option strikes. Senior quants who study the surface as a probabilistic object compute these moments and compare to realised moments to identify mispricings.
 
@@ -750,7 +750,7 @@ A senior quant's career path in surface engineering typically goes: junior fits 
 
 ## 21. The economics of surface expertise
 
-A final practical point. Building and maintaining a top-tier surface system at a major bank is an investment of millions of dollars per year in headcount and infrastructure. The returns are difficult to quantify because the surface enables every options business — vanilla market-making, exotics, structured products, risk management, P&L attribution. A bank without a serious surface team cannot sell sophisticated options products; with one, it can charge spreads that compensate for the surface infrastructure several times over.
+A final practical point. Building and maintaining a top-tier surface system at a major bank is an investment of millions of dollars per year in headcount and infrastructure. The returns are difficult to quantify because the surface enables every options business: vanilla market-making, exotics, structured products, risk management, P&L attribution. A bank without a serious surface team cannot sell sophisticated options products; with one, it can charge spreads that compensate for the surface infrastructure several times over.
 
 The economic argument for the investment, summarised:
 
@@ -829,4 +829,4 @@ The surface has structural shapes (smile, skew, term structure) driven by demand
 
 Production architecture treats the surface as a versioned data product, with a single source of truth, validation gates, and circuit breakers against degenerate fits. Cross-asset stress scenarios complement single-surface bucket Greeks for serious risk management.
 
-The remaining articles in this series — [Bond Pricing](/blog/trading/quantitative-finance/bond-pricing), [Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on each layer of the stack that lives on top of the surface.
+The remaining articles in this series ([Bond Pricing](/blog/trading/quantitative-finance/bond-pricing), [Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets)) go deeper on each layer of the stack that lives on top of the surface.

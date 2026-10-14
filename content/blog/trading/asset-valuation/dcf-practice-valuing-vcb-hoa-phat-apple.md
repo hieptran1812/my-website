@@ -2,7 +2,7 @@
 title: "DCF in Practice: Valuing VCB, Hoa Phat, and Apple"
 date: "2026-06-22"
 publishDate: "2026-06-22"
-description: "Walk through three real DCF valuations — Vietcombank (DDM), Hoa Phat (normalized FCFF), and Apple (FCFF) — to see how the same framework adapts to banks, cyclicals, and tech giants."
+description: "Walk through three real DCF valuations (Vietcombank (DDM), Hoa Phat (normalized FCFF), and Apple (FCFF)) to see how the same framework adapts to banks, cyclicals, and tech giants."
 tags: ["dcf", "discounted-cash-flow", "stock-valuation", "case-study", "vietcombank", "hoa-phat", "apple", "practical-valuation", "vietnam-stocks"]
 category: "trading"
 subcategory: "Finance"
@@ -12,16 +12,16 @@ readTime: 28
 ---
 
 > [!important]
-> **TL;DR** — The DCF formula is universal, but the inputs are company-specific; valuing a Vietnamese bank, a cyclical steelmaker, and a US tech giant correctly requires three different approaches to defining "cash flow."
+> **TL;DR**: The DCF formula is universal, but the inputs are company-specific; valuing a Vietnamese bank, a cyclical steelmaker, and a US tech giant correctly requires three different approaches to defining "cash flow."
 >
-> - Banks need DDM or FCFE — not FCFF — because debt is their raw material, not their financing choice.
+> - Banks need DDM or FCFE, not FCFF, because debt is their raw material, not their financing choice.
 > - Cyclical companies must use normalized, mid-cycle FCF, not peak-year numbers, or you will overvalue them by 2-3x.
 > - High-ROIC companies like Apple have low reinvestment needs, which means a large fraction of earnings converts to free cash flow and the DCF is sensitive to the terminal growth assumption.
-> - The single most consequential assumption in any DCF is often the discount rate — a 2 percentage-point difference in Ke for VCB produces a ~35% gap in the final equity value.
+> - The single most consequential assumption in any DCF is often the discount rate: a 2 percentage-point difference in Ke for VCB produces a ~35% gap in the final equity value.
 
 Imagine you are sitting in front of three stock screens. On the first, Vietcombank (VCB), Vietnam's largest commercial bank. On the second, Hoa Phat Group (HPG), the country's dominant steelmaker. On the third, Apple (AAPL), a company with a larger market cap than most national stock exchanges.
 
-You want to value all three using a discounted cash flow model. The formula you will use — present value equals the sum of future cash flows discounted at the appropriate rate — is identical in all three cases. But the moment you sit down to fill in the numbers, you realize the inputs look nothing alike. For the bank, you cannot even use the standard free cash flow definition. For the steelmaker, last year's cash flow was wildly different from the year before. For Apple, the business is in the middle of a structural shift that changes what the long-run cash flow profile looks like.
+You want to value all three using a discounted cash flow model. The formula you will use (present value equals the sum of future cash flows discounted at the appropriate rate) is identical in all three cases. But the moment you sit down to fill in the numbers, you realize the inputs look nothing alike. For the bank, you cannot even use the standard free cash flow definition. For the steelmaker, last year's cash flow was wildly different from the year before. For Apple, the business is in the middle of a structural shift that changes what the long-run cash flow profile looks like.
 
 This post is about that gap: the difference between knowing the DCF formula and knowing how to apply it to a specific, real company. We will build three complete models from scratch, show the arithmetic at every step, and end with bull/base/bear ranges for each company. Along the way, we will see why the same P/E ratio can mean something very different at a Vietnamese bank versus a US tech company.
 
@@ -33,38 +33,38 @@ Before we split into company-specific models, let us lock in the shared logic. T
 
 For a company, the practical challenge is: what counts as "the cash flow"? There are two definitions that matter here:
 
-**FCFF — Free Cash Flow to the Firm.** This is the cash the entire business generates after paying for its operations and capital investments, before any payments to debt or equity holders. It belongs to all capital providers. When you discount FCFF at WACC (the weighted average cost of capital — the blended rate demanded by both debt and equity holders), you get *enterprise value*. You then subtract net debt to arrive at equity value.
+**FCFF: Free Cash Flow to the Firm.** This is the cash the entire business generates after paying for its operations and capital investments, before any payments to debt or equity holders. It belongs to all capital providers. When you discount FCFF at WACC (the weighted average cost of capital: the blended rate demanded by both debt and equity holders), you get *enterprise value*. You then subtract net debt to arrive at equity value.
 
 $$\text{FCFF} = \text{EBIT} \times (1 - \text{tax rate}) + \text{D\&A} - \text{Capex} - \Delta\text{Working Capital}$$
 
-**FCFE / DDM — Free Cash Flow to Equity / Dividends.** This is the cash that flows specifically to equity holders, after debt service. For most companies, FCFE ≈ Net income − net capex − net working capital change + net borrowing. When you discount FCFE at \$K_e\$ (the cost of equity alone), you get equity value directly.
+**FCFE / DDM: Free Cash Flow to Equity / Dividends.** This is the cash that flows specifically to equity holders, after debt service. For most companies, FCFE ≈ Net income − net capex − net working capital change + net borrowing. When you discount FCFE at \$K_e\$ (the cost of equity alone), you get equity value directly.
 
 For most non-financial companies, FCFF is the preferred approach: it avoids the noise of financial leverage in the cash flow line and separates operating value from capital structure decisions.
 
 For banks, as we will see below, this distinction collapses entirely, and FCFE or DDM is the only coherent option.
 
-A word on *two-stage models*. Most companies cannot be valued as a simple perpetuity — they are not at a stable, forever-repeatable growth rate yet. So analysts use a two-stage model: explicit forecast for years 1–5 (or 1–10), then a terminal value at the end of that period assuming the company reaches steady state. The terminal value is usually computed via the Gordon Growth Model:
+A word on *two-stage models*. Most companies cannot be valued as a simple perpetuity: they are not at a stable, forever-repeatable growth rate yet. So analysts use a two-stage model: explicit forecast for years 1–5 (or 1–10), then a terminal value at the end of that period assuming the company reaches steady state. The terminal value is usually computed via the Gordon Growth Model:
 
 $$\text{TV} = \frac{\text{FCF}_n \times (1 + g)}{r - g}$$
 
-where \$g\$ is the long-run sustainable growth rate and \$r\$ is the discount rate. This terminal value often accounts for 60–80% of the total computed enterprise value — which means getting \$g\$ and \$r\$ right is more important than getting the year 1-5 forecast perfect.
+where \$g\$ is the long-run sustainable growth rate and \$r\$ is the discount rate. This terminal value often accounts for 60–80% of the total computed enterprise value, which means getting \$g\$ and \$r\$ right is more important than getting the year 1-5 forecast perfect.
 
 With that foundation in place, let us build each model.
 
 ---
 
-## Case 1: Vietcombank (VCB) — Banking on Equity Returns
+## Case 1: Vietcombank (VCB), Banking on Equity Returns
 
 ### Why You Cannot Use FCFF for a Bank
 
 For a manufacturing company or a tech company, "debt" is a financing choice. Apple *could* run debt-free; it chooses to borrow because the interest rate is cheap relative to its equity cost. For these companies, it makes sense to compute FCFF (operating cash flow available to all capital providers) and separately account for debt in the enterprise-value-to-equity bridge.
 
-For a bank, this distinction does not exist. Deposits, interbank borrowings, and bond issuances are not financing decisions — they are *raw materials*. Vietcombank takes in cheap funding (deposits at ~5%) and lends it out at higher rates (~9-10%). The spread between those rates, multiplied by the volume of assets, is the business. If you tried to separate out "debt" from operations for a bank, you would be removing the entire business model.
+For a bank, this distinction does not exist. Deposits, interbank borrowings, and bond issuances are not financing decisions: they are *raw materials*. Vietcombank takes in cheap funding (deposits at ~5%) and lends it out at higher rates (~9-10%). The spread between those rates, multiplied by the volume of assets, is the business. If you tried to separate out "debt" from operations for a bank, you would be removing the entire business model.
 
 This means the standard FCFF approach produces meaningless numbers for banks. Analysts instead use one of two approaches:
 
 1. **Dividend Discount Model (DDM):** Value the stream of dividends the bank actually pays out to shareholders.
-2. **FCFE (Free Cash Flow to Equity):** Model what the bank *could* pay out — net income minus the equity it needs to retain to support asset growth — and discount that at \$K_e\$.
+2. **FCFE (Free Cash Flow to Equity):** Model what the bank *could* pay out (net income minus the equity it needs to retain to support asset growth) and discount that at \$K_e\$.
 
 For VCB, we will use a two-stage DDM, because it forces us to think carefully about the payout policy and the sustainable growth rate, which are the central drivers of bank valuation.
 
@@ -75,7 +75,7 @@ For VCB, we will use a two-stage DDM, because it forces us to think carefully ab
 Vietcombank is Vietnam's largest bank by market capitalization and one of the country's four major state-owned commercial banks (SOCBs). As of 2023:
 
 - **Return on Equity (ROE):** approximately 22–24%, among the highest in Vietnam's banking sector, reflecting its pricing power, lower cost of funds (as a large, state-backed institution), and strong asset quality.
-- **Payout ratio:** Historically very low — VCB retained all earnings from 2018 to 2022 to support lending growth and meet Basel II capital requirements. It paid a cash dividend in 2023 (approximately \$VND 1,500 per share) for the first time in years, representing a payout ratio around 15% of net income.
+- **Payout ratio:** Historically very low, VCB retained all earnings from 2018 to 2022 to support lending growth and meet Basel II capital requirements. It paid a cash dividend in 2023 (approximately \$VND 1,500 per share) for the first time in years, representing a payout ratio around 15% of net income.
 - **Loan growth:** VCB has grown its loan book at roughly 15–20% per year during the high-growth phase.
 
 ![VCB ROE and payout ratio dual bar chart 2018-2023](/imgs/blogs/dcf-practice-valuing-vcb-hoa-phat-apple-3.png)
@@ -94,7 +94,7 @@ VCB's current ROE ≈ 22%, payout ratio ≈ 15%.
 
 $$g = 0.22 \times (1 - 0.15) = 0.22 \times 0.85 = 18.7\%$$
 
-A 18.7% perpetual growth rate is impossible — it would eventually exceed Vietnam's nominal GDP growth (~10–11% per year) and theoretically grow to absorb the entire economy. We cannot use a single-stage Gordon Growth Model with this input.
+A 18.7% perpetual growth rate is impossible: it would eventually exceed Vietnam's nominal GDP growth (~10–11% per year) and theoretically grow to absorb the entire economy. We cannot use a single-stage Gordon Growth Model with this input.
 
 **Step 2: Set up a two-stage model.**
 
@@ -141,7 +141,7 @@ Present value of terminal value: \$93,114 / (1.115)^5 = 93,114 / 1.724 = \text{V
 
 $$P = 8,236 + 54,009 = \text{VND } 62,245 \approx \text{VND } 62,000$$
 
-Wait — that is below the current market price of ~VND 89,000. What gives?
+Wait, that is below the current market price of ~VND 89,000. What gives?
 
 This is exactly where DCF humbles you. The model is highly sensitive to \$K_e\$ and \$g_n\$. Let us try a lower cost of equity (a bull-case argument that VCB deserves a premium rating given its state backing and dominant franchise):
 
@@ -152,7 +152,7 @@ This is exactly where DCF humbles you. The model is highly sensitive to \$K_e\$ 
 
 PV of TV = \$490,500 / (1.10)^5 = 490,500 / 1.611 = \text{VND } 304,470\$
 
-Bull case per share: ~VND 130,000 (model is extremely sensitive at this level — we are near a singularity where \$K_e - g_n\$ is tiny).
+Bull case per share: ~VND 130,000 (model is extremely sensitive at this level, we are near a singularity where \$K_e - g_n\$ is tiny).
 
 **Bear case:** \$K_e = 13\%\$, \$g_n = 7\%\$, payout stays at 15%.
 
@@ -178,7 +178,7 @@ Total: \~VND 109,000
 PV of TV: \$81,475 / (1.12)^5 = 46,231\$
 Total: \~VND 54,000
 
-**The result:** A 2 percentage-point difference in \$K_e\$ — within the range of legitimate disagreement — produces a **102% difference in intrinsic value** (VND 109,000 vs. VND 54,000). This is not a bug in the DCF — it is the honest mathematics of the situation. When a business has high growth and a long life, the discount rate choice swamps every other assumption.
+**The result:** A 2 percentage-point difference in \$K_e\$, within the range of legitimate disagreement, produces a **102% difference in intrinsic value** (VND 109,000 vs. VND 54,000). This is not a bug in the DCF: it is the honest mathematics of the situation. When a business has high growth and a long life, the discount rate choice swamps every other assumption.
 
 The lesson is not "DCF is broken." It is "the discount rate is a judgment call, and you must explicitly defend your choice."
 
@@ -189,13 +189,13 @@ The lesson is not "DCF is broken." It is "the discount rate is a judgment call, 
 | Bear     | 13%     | 7%      | ~VND 37,000 |
 | Base     | 11.5%   | 8%      | ~VND 62,000 |
 | Bull     | 10%     | 9%      | ~VND 130,000 |
-| Market price (2024) | — | — | ~VND 89,000 |
+| Market price (2024) |  |  | ~VND 89,000 |
 
-The market's current pricing of ~VND 89,000 implies a bull-to-base scenario — either a lower-than-historical \$K_e\$ (reflecting improved governance and state support premium), a higher terminal growth rate, or an expectation that VCB will significantly raise its payout ratio in coming years. All three are defensible arguments. None is wrong, which is precisely why VCB trades at a wide range of analyst targets.
+The market's current pricing of ~VND 89,000 implies a bull-to-base scenario: either a lower-than-historical \$K_e\$ (reflecting improved governance and state support premium), a higher terminal growth rate, or an expectation that VCB will significantly raise its payout ratio in coming years. All three are defensible arguments. None is wrong, which is precisely why VCB trades at a wide range of analyst targets.
 
 ---
 
-## Case 2: Hoa Phat Group (HPG) — Normalizing the Steel Cycle
+## Case 2: Hoa Phat Group (HPG), Normalizing the Steel Cycle
 
 ### The Cyclical Trap
 
@@ -203,7 +203,7 @@ Hoa Phat Group is Vietnam's largest steel producer, with a vertically integrated
 
 ![HPG revenue and EBITDA margin dual axis chart 2018-2023](/imgs/blogs/dcf-practice-valuing-vcb-hoa-phat-apple-4.png)
 
-If you run a DCF on HPG using 2021 numbers — the peak of the pandemic construction boom and steel supercycle — you will produce a wildly optimistic valuation. If you use 2023's trough numbers, you will produce an equally misleading low. The correct approach is to use *normalized*, mid-cycle numbers that represent what the company earns on average over a full business cycle.
+If you run a DCF on HPG using 2021 numbers, the peak of the pandemic construction boom and steel supercycle, you will produce a wildly optimistic valuation. If you use 2023's trough numbers, you will produce an equally misleading low. The correct approach is to use *normalized*, mid-cycle numbers that represent what the company earns on average over a full business cycle.
 
 This is the most important skill in valuing cyclical businesses: the ability to see through short-term noise to the normalized earnings power.
 
@@ -211,7 +211,7 @@ This is the most important skill in valuing cyclical businesses: the ability to 
 
 The starting point for normalizing is to pick a representative cycle period. For steel, a full cycle is typically 5–7 years. We use 2018–2023 (a near-complete cycle) and compute the average EBITDA margin: (14 + 13 + 16 + 23 + 11 + 10) / 6 = 87/6 ≈ **14.5%**. We round to **13%** as a slightly conservative mid-cycle estimate, since the recent years (2022–2023) show a structural shift toward oversupply in the region.
 
-For revenue, we use HPG's 2023 revenue of VND 120 trillion as the "mid-cycle revenue" base — this was approximately the pre-boom trajectory the company was on, and it reflects its current installed capacity without the boom-level volumes.
+For revenue, we use HPG's 2023 revenue of VND 120 trillion as the "mid-cycle revenue" base: this was approximately the pre-boom trajectory the company was on, and it reflects its current installed capacity without the boom-level volumes.
 
 #### Worked example: HPG Normalized FCFF
 
@@ -233,7 +233,7 @@ Where:
 
 \$\text{FCFF} = 13.48 - 8 - 2 = \text{VND } 3.48T\$
 
-Hmm — wait. Let us recheck using the EBITDA bridge directly (which is more common in practice):
+Hmm: wait. Let us recheck using the EBITDA bridge directly (which is more common in practice):
 
 \$\text{FCFF} = \text{EBITDA} \times (1 - \text{tax}) + \text{D\&A} \times \text{tax} - \text{Capex} - \Delta\text{WC}\$
 
@@ -280,7 +280,7 @@ $$\text{EV} = \frac{\text{FCFF}}{WACC - g} = \frac{7.5}{0.12 - 0.05} = \frac{7.5
 - Shares outstanding: ~7.9 billion shares (VND 7.9T par capital)
 - Per share: VND 47T / 7.9B = **VND 5,949/share** ≈ VND 6,000
 
-This is well below the market price of ~VND 26,000. The discrepancy reveals that this simple single-stage model is too pessimistic — it ignores the multi-year FCFF growth as the new Dung Quat 2 capacity comes online. A two-stage model with higher near-term FCFF in years 3–7 (as new capacity reaches utilization) would give a higher base-case value.
+This is well below the market price of ~VND 26,000. The discrepancy reveals that this simple single-stage model is too pessimistic: it ignores the multi-year FCFF growth as the new Dung Quat 2 capacity comes online. A two-stage model with higher near-term FCFF in years 3–7 (as new capacity reaches utilization) would give a higher base-case value.
 
 Let us run the full bull/base/bear:
 
@@ -306,15 +306,15 @@ That is broadly consistent with the market price of ~VND 26,000, suggesting the 
 
 When analysts disagree about HPG's valuation, the disagreement almost never centers on the discount rate (they all use roughly 11–13% WACC). It centers on what "normal" looks like: is VND 120T the right mid-cycle revenue base, or should it be VND 100T or VND 150T? Is 13% the right normalized margin, or 10% or 16%?
 
-This is not a technical question. It is a business judgment about where steel prices settle, whether HPG can maintain market share against Chinese imports, and whether domestic Vietnamese construction demand sustains or corrects. The DCF machinery faithfully converts those business judgments into a price — but the machinery itself cannot make the judgment.
+This is not a technical question. It is a business judgment about where steel prices settle, whether HPG can maintain market share against Chinese imports, and whether domestic Vietnamese construction demand sustains or corrects. The DCF machinery faithfully converts those business judgments into a price, but the machinery itself cannot make the judgment.
 
 ---
 
-## Case 3: Apple (AAPL) — The High-ROIC Complication
+## Case 3: Apple (AAPL), The High-ROIC Complication
 
 ### Why Apple Is Different
 
-Apple is one of the most profitable businesses ever created. In fiscal year 2023, it generated approximately \$100 billion in FCFF on \$383 billion of revenue — a 26% FCF margin that most companies cannot dream of.
+Apple is one of the most profitable businesses ever created. In fiscal year 2023, it generated approximately \$100 billion in FCFF on \$383 billion of revenue: a 26% FCF margin that most companies cannot dream of.
 
 The key to Apple's DCF is understanding *why* this margin is so high and whether it is sustainable. The answer lies in Apple's return on invested capital (ROIC), which has run at 50–70% in recent years. When a company earns such a high return on incremental investment, it needs to reinvest very little to sustain its growth. This is why Apple can return hundreds of billions to shareholders in buybacks and dividends while still growing earnings.
 
@@ -332,7 +332,7 @@ We start with FY2023 FCFF of approximately \$100 billion. This is well-documente
 - Net income: ~\$97B
 - D&A: ~\$12B
 - Capex: ~\$10B
-- ΔWC: ~\$0B (Apple has negative working capital — customers pay before Apple pays suppliers)
+- ΔWC: ~\$0B (Apple has negative working capital, customers pay before Apple pays suppliers)
 - FCFF ≈ 97 + 12 − 10 = ~\$99B ≈ **\$100B**
 
 (Note: FCFF from the firm perspective adds back after-tax interest. We simplify here because Apple's net interest income has been significant in recent years given its large cash balance.)
@@ -343,7 +343,7 @@ We start with FY2023 FCFF of approximately \$100 billion. This is well-documente
   - iPhone unit growth moderating toward low single digits
   - Services revenue growing 10–15% per year and becoming a larger share of mix
   - Margin expansion as Services (higher-margin) grows faster than hardware
-- Stage 2 (terminal): FCFF grows at **4% per year** — slightly above US nominal GDP growth (3–3.5%) to account for international expansion and continued Services penetration. This is aggressive but defensible given the ecosystem lock-in.
+- Stage 2 (terminal): FCFF grows at **4% per year**, slightly above US nominal GDP growth (3–3.5%) to account for international expansion and continued Services penetration. This is aggressive but defensible given the ecosystem lock-in.
 
 **Step 3: Set WACC.**
 
@@ -410,9 +410,9 @@ Let us run the scenarios:
 | Bear | 4% | 3% | 9.5% | ~\$112 |
 | Base | 7% | 4% | 8.5% | ~\$174 |
 | Bull | 9% | 4.5% | 8.0% | ~\$242 |
-| Market (2024) | — | — | — | ~\$189 |
+| Market (2024) |  |  |  | ~\$189 |
 
-At ~\$189, the market is pricing Apple at approximately the upper end of the base case — consistent with continued Services expansion and confidence in the ecosystem's durability.
+At ~\$189, the market is pricing Apple at approximately the upper end of the base case: consistent with continued Services expansion and confidence in the ecosystem's durability.
 
 ---
 
@@ -422,13 +422,13 @@ At ~\$189, the market is pricing Apple at approximately the upper end of the bas
 
 Let us now step back and look at the three companies side by side. The exercise reveals something important: the "same" P/E ratio means something completely different depending on the company.
 
-Apple trades at roughly 27× trailing earnings. That sounds expensive. But Apple's ROIC is 60%+ and it needs almost no reinvestment to sustain growth — so nearly all its earnings convert to free cash. A company with a 60% ROIC and no reinvestment need growing at 4% is arguably worth a very high multiple.
+Apple trades at roughly 27× trailing earnings. That sounds expensive. But Apple's ROIC is 60%+ and it needs almost no reinvestment to sustain growth, so nearly all its earnings convert to free cash. A company with a 60% ROIC and no reinvestment need growing at 4% is arguably worth a very high multiple.
 
-HPG trades at ~7× earnings in down years and ~3× in boom years. That sounds cheap. But steel is cyclical and capital-intensive, and the earnings in "down" years are the relevant baseline — the "cheap" P/E in a boom year is a mirage.
+HPG trades at ~7× earnings in down years and ~3× in boom years. That sounds cheap. But steel is cyclical and capital-intensive, and the earnings in "down" years are the relevant baseline: the "cheap" P/E in a boom year is a mirage.
 
 VCB trades at ~9× earnings. Banks typically trade at lower P/E multiples than tech companies because their earnings are more leverage-dependent and their growth requires capital retention. A 9× P/E for a 22% ROE bank with Vietnam's growth runway is arguably quite reasonable.
 
-The correct comparison across these three is not P/E. It is **P/E adjusted for growth, capital requirements, and risk profile** — which is, at its core, what a DCF model computes.
+The correct comparison across these three is not P/E. It is **P/E adjusted for growth, capital requirements, and risk profile**, which is, at its core, what a DCF model computes.
 
 | Metric | VCB | HPG | Apple |
 |--------|-----|-----|-------|
@@ -449,11 +449,11 @@ True in isolation, but missing the context. Lower WACCs are appropriate for lowe
 
 **Myth 2: If the DCF base case is above the market price, it is a buy.**
 
-The DCF output is only as good as its inputs. If your "base case" embeds growth assumptions that are optimistic and a WACC that is too low, the output is not a buy signal — it is a reflection of your own bias. Always sanity-check your DCF against market multiples: if your model implies HPG trades at 40× normalized EBITDA and the sector trades at 7×, your model has an error.
+The DCF output is only as good as its inputs. If your "base case" embeds growth assumptions that are optimistic and a WACC that is too low, the output is not a buy signal: it is a reflection of your own bias. Always sanity-check your DCF against market multiples: if your model implies HPG trades at 40× normalized EBITDA and the sector trades at 7×, your model has an error.
 
-**Myth 3: Terminal value doesn't matter much — it's just one component.**
+**Myth 3: Terminal value doesn't matter much, it's just one component.**
 
-It is usually 60–80% of enterprise value in a two-stage model. For Apple's base case, the terminal value accounts for \$2,154B out of a total EV of \$2,633B — that is 82%. Getting the terminal growth rate right matters enormously, yet it is the hardest input to pin down empirically.
+It is usually 60–80% of enterprise value in a two-stage model. For Apple's base case, the terminal value accounts for \$2,154B out of a total EV of \$2,633B, that is 82%. Getting the terminal growth rate right matters enormously, yet it is the hardest input to pin down empirically.
 
 **Myth 4: Banks are valued by P/B ratio, not DCF.**
 
@@ -465,7 +465,7 @@ For cyclical businesses (HPG, commodity companies, auto manufacturers), the most
 
 ---
 
-## How Analysts Disagree — and What To Do About It
+## How Analysts Disagree, and What To Do About It
 
 If you look at the range of analyst price targets for any of these three companies, you will typically see a 50–100% spread from lowest to highest. This is not analyst incompetence. It is the honest mathematics of the situation: small differences in WACC and terminal growth assumptions produce large differences in output, especially when the terminal value represents 70%+ of the total.
 
@@ -489,7 +489,7 @@ Instead of only computing intrinsic value and comparing to price, skilled analys
 
 **5. They update continuously.**
 
-A DCF is not a one-time calculation. When VCB reports quarterly results, when HPG announces new capacity additions, when Apple releases its Services revenue breakdown — these are all data points that update the inputs. The model lives as a living document, not a published report.
+A DCF is not a one-time calculation. When VCB reports quarterly results, when HPG announces new capacity additions, when Apple releases its Services revenue breakdown: these are all data points that update the inputs. The model lives as a living document, not a published report.
 
 ### The DCF Quality Checklist
 
@@ -501,19 +501,19 @@ Before publishing any DCF output, run it through these five sanity checks:
 2. **Is the WACC appropriate for country risk?** A Vietnamese company needs a country risk premium of 3–5% on top of a pure-play beta calculation. Failing to include this understates risk.
 3. **Is the terminal growth rate below nominal GDP?** In steady state, no company grows faster than the economy forever. For Vietnam, nominal GDP growth is 8–10%, so terminal g should be below that. For the US, nominal GDP is 3–4%, so terminal g should be capped around 3–4%.
 4. **Does the DCF-implied multiple match comps?** Compute EV/EBITDA (or P/B for banks, P/E for tech) implied by your DCF. If it is way out of line with sector multiples, find the error.
-5. **Is the sensitivity range under 2× the base case?** If your bull case is more than 2× your bear case, the model is unstable — likely because WACC is too close to terminal g. Widen the WACC or lower the terminal g until the model behaves.
+5. **Is the sensitivity range under 2× the base case?** If your bull case is more than 2× your bear case, the model is unstable: likely because WACC is too close to terminal g. Widen the WACC or lower the terminal g until the model behaves.
 
 ---
 
 ## How It Shows Up in Real Markets
 
-**Vietnam's 2022 market correction and bank valuations.** In 2022, VN-Index fell from a peak of ~1,500 to below 900 — a 40% drawdown. VCB's share price fell from ~VND 115,000 to ~VND 72,000 in the trough. With hindsight, this was driven almost entirely by a rise in the risk-free rate (Vietnamese government bond yields rose from ~2.5% to ~5% in 2022 as inflation picked up) and a spike in the country's credit risk premium. A DCF user who had built a model with \$K_e\$ locked at 10% would have been surprised; one who understood the rate sensitivity would have known that even a 2-percentage-point rise in the risk-free rate would push their intrinsic value estimate down 25–30%.
+**Vietnam's 2022 market correction and bank valuations.** In 2022, VN-Index fell from a peak of ~1,500 to below 900: a 40% drawdown. VCB's share price fell from ~VND 115,000 to ~VND 72,000 in the trough. With hindsight, this was driven almost entirely by a rise in the risk-free rate (Vietnamese government bond yields rose from ~2.5% to ~5% in 2022 as inflation picked up) and a spike in the country's credit risk premium. A DCF user who had built a model with \$K_e\$ locked at 10% would have been surprised; one who understood the rate sensitivity would have known that even a 2-percentage-point rise in the risk-free rate would push their intrinsic value estimate down 25–30%.
 
-**HPG's 2021 peak and the normalization error.** During the steel boom of 2021, several Vietnamese retail investors and smaller fund managers valued HPG using peak EBITDA. With VND 35T of EBITDA and a generous multiple, they arrived at target prices of VND 50,000–60,000 per share. When the cycle turned in 2022, HPG's EBITDA collapsed and the stock fell from ~VND 58,000 to under VND 18,000 — a 69% decline. Investors who had normalized correctly would have sold at the peak; those who anchored to the peak DCF held through the collapse.
+**HPG's 2021 peak and the normalization error.** During the steel boom of 2021, several Vietnamese retail investors and smaller fund managers valued HPG using peak EBITDA. With VND 35T of EBITDA and a generous multiple, they arrived at target prices of VND 50,000–60,000 per share. When the cycle turned in 2022, HPG's EBITDA collapsed and the stock fell from ~VND 58,000 to under VND 18,000: a 69% decline. Investors who had normalized correctly would have sold at the peak; those who anchored to the peak DCF held through the collapse.
 
-**Apple's Services rerating.** From 2018 to 2021, as Apple's Services revenue grew from \$37B to \$68B, the market's implied multiple for the whole company expanded significantly — even as iPhone revenue stagnated. This is the DCF in action: the market was repricing Apple's terminal growth assumption upward, reflecting a belief that the sticky, high-margin Services segment changed the long-run cash flow profile. A DCF model that held terminal g constant at 3% through this period would have persistently shown Apple as "overvalued" while missing the structural shift.
+**Apple's Services rerating.** From 2018 to 2021, as Apple's Services revenue grew from \$37B to \$68B, the market's implied multiple for the whole company expanded significantly, even as iPhone revenue stagnated. This is the DCF in action: the market was repricing Apple's terminal growth assumption upward, reflecting a belief that the sticky, high-margin Services segment changed the long-run cash flow profile. A DCF model that held terminal g constant at 3% through this period would have persistently shown Apple as "overvalued" while missing the structural shift.
 
-**The VCB bear case in practice.** During Vietnam's 2023 credit stress episode — where several real estate developers defaulted and non-performing loans system-wide spiked — VCB's share price dipped to ~VND 72,000. The market was briefly pricing a bear-case scenario: higher credit losses → lower net income → lower dividend capacity → bear DDM value. Within two quarters, VCB's NPL ratio stabilized and the share price recovered toward VND 90,000. The DCF framework correctly described the thesis; the market resolved the uncertainty.
+**The VCB bear case in practice.** During Vietnam's 2023 credit stress episode, where several real estate developers defaulted and non-performing loans system-wide spiked, VCB's share price dipped to ~VND 72,000. The market was briefly pricing a bear-case scenario: higher credit losses → lower net income → lower dividend capacity → bear DDM value. Within two quarters, VCB's NPL ratio stabilized and the share price recovered toward VND 90,000. The DCF framework correctly described the thesis; the market resolved the uncertainty.
 
 ---
 
@@ -522,19 +522,19 @@ Before publishing any DCF output, run it through these five sanity checks:
 The three models in this post build on the mechanics covered in earlier posts in this series:
 
 - The FCFF and FCFE definitions, and the DCF formula, are covered in detail in [Free Cash Flow Valuation: FCFE, FCFF, and the DCF Framework](/blog/trading/asset-valuation/free-cash-flow-valuation-fcfe-fcff-dcf-framework).
-- The Gordon Growth Model and terminal value sensitivity — including the mathematical singularity when WACC approaches g — is explored in [Terminal Value: Sensitivity, Assumptions, and What Your DCF Is Really Saying](/blog/trading/asset-valuation/terminal-value-sensitivity-assumptions-dcf).
+- The Gordon Growth Model and terminal value sensitivity, including the mathematical singularity when WACC approaches g, is explored in [Terminal Value: Sensitivity, Assumptions, and What Your DCF Is Really Saying](/blog/trading/asset-valuation/terminal-value-sensitivity-assumptions-dcf).
 - The WACC calculation, including beta estimation, country risk premium, and how to adapt it for emerging markets, is worked through in [Discount Rates in Practice: WACC, Cost of Equity, and Unlevered Beta](/blog/trading/asset-valuation/discount-rates-practice-wacc-cost-equity-unlevered-beta).
-- CAPM and the cost of equity derivation — the theoretical foundation for the Ke estimates used throughout this post — is in [Risk and Required Return: CAPM, Beta, and the Cost of Capital](/blog/trading/asset-valuation/risk-required-return-capm-beta-cost-capital).
+- CAPM and the cost of equity derivation, the theoretical foundation for the Ke estimates used throughout this post, is in [Risk and Required Return: CAPM, Beta, and the Cost of Capital](/blog/trading/asset-valuation/risk-required-return-capm-beta-cost-capital).
 
 ---
 
 ## Closing: The Map and the Territory
 
-A DCF model is a map. Maps are useful precisely because they simplify reality — they strip away noise and focus on the few variables that matter most. But a map is not the territory. VCB's true intrinsic value is not VND 62,000 or VND 95,000 or VND 130,000. It is whatever stream of dividends the bank will actually pay, discounted at the rate investors actually require. That number is unknowable in advance.
+A DCF model is a map. Maps are useful precisely because they simplify reality: they strip away noise and focus on the few variables that matter most. But a map is not the territory. VCB's true intrinsic value is not VND 62,000 or VND 95,000 or VND 130,000. It is whatever stream of dividends the bank will actually pay, discounted at the rate investors actually require. That number is unknowable in advance.
 
-What the DCF gives you is a structured way to make your assumptions explicit, test whether they are internally consistent, and compare them to what the market is implying. When your assumptions differ from the market's implied assumptions, you have identified the trade — but you still have to decide whether your view is right.
+What the DCF gives you is a structured way to make your assumptions explicit, test whether they are internally consistent, and compare them to what the market is implying. When your assumptions differ from the market's implied assumptions, you have identified the trade, but you still have to decide whether your view is right.
 
-The three cases in this post — a state-owned Vietnamese bank, a cyclical steelmaker, and a US mega-cap — span nearly the full range of valuation challenges. Banks require FCFE/DDM because debt is their business. Cyclicals require normalization because their reported earnings swing wildly with commodity prices. High-ROIC compounders require careful terminal value work because the terminal value dominates everything else.
+The three cases in this post (a state-owned Vietnamese bank, a cyclical steelmaker, and a US mega-cap) span nearly the full range of valuation challenges. Banks require FCFE/DDM because debt is their business. Cyclicals require normalization because their reported earnings swing wildly with commodity prices. High-ROIC compounders require careful terminal value work because the terminal value dominates everything else.
 
 Master these three adaptations and you will be able to approach almost any company's valuation without being blindsided by the inputs. The formula is the same. The craft is in knowing how to fill it in.
 

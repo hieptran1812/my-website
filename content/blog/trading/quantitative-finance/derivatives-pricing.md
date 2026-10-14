@@ -24,11 +24,11 @@ featured: true
 readTime: 50
 ---
 
-Most introductions to derivatives pricing open with a definition: "a derivative is a contract whose value depends on an underlying." That definition is technically correct and operationally useless. It tells you nothing about why the desk across the room is willing to quote a price, what number that price is, or what happens to the firm if that number is wrong. The reason desks can quote at all is that they have learned how to *manufacture* the payoff out of liquid instruments — the price they quote is the cost of the manufacturing process, not a forecast.
+Most introductions to derivatives pricing open with a definition: "a derivative is a contract whose value depends on an underlying." That definition is technically correct and operationally useless. It tells you nothing about why the desk across the room is willing to quote a price, what number that price is, or what happens to the firm if that number is wrong. The reason desks can quote at all is that they have learned how to *manufacture* the payoff out of liquid instruments: the price they quote is the cost of the manufacturing process, not a forecast.
 
 ![Pricing as manufacturing the payoff](/imgs/blogs/derivatives-pricing-1.png)
 
-The diagram above is the mental model the rest of this article is built on. A client wants the payoff on the left. The desk does not own that payoff anywhere; it builds the payoff out of stock and bonds (or futures, or other options) in the middle. The price the desk charges is the construction cost — plus a spread for risk, funding, capital, and the trader's bonus. Everything else in derivatives pricing — the partial differential equations, the change of measure, the Monte Carlo, the XVAs — is a refinement of this one idea: *price equals the cost of the replicating hedge*.
+The diagram above is the mental model the rest of this article is built on. A client wants the payoff on the left. The desk does not own that payoff anywhere; it builds the payoff out of stock and bonds (or futures, or other options) in the middle. The price the desk charges is the construction cost, plus a spread for risk, funding, capital, and the trader's bonus. Everything else in derivatives pricing (the partial differential equations, the change of measure, the Monte Carlo, the XVAs) is a refinement of this one idea: *price equals the cost of the replicating hedge*.
 
 This article is the deep-dive I wish someone had walked me through when I started on a derivatives desk. It works through the binomial tree, generalises to continuous time, derives the risk-neutral measure as a *consequence* of replication (not an assumption), surveys the three production pricing engines that real desks actually run, walks through greeks, calibration, and the XVA stack that turns the textbook price into a live quote, then closes with eight named pricing failures that each cost institutions real money. The audience is a senior quant or staff-level engineer who already knows option payoffs and elementary stochastic calculus and wants the engineering picture: which engine to reach for, where the model lies, what the desk actually does at 8am.
 
@@ -40,17 +40,17 @@ Suppose the desk sells a one-year European call on stock $S$ with strike $K = 10
 
 The way out is to *hedge*: the desk buys a quantity $\Delta$ of the stock, funded by a bond position $B$, such that the value of the portfolio $\Pi = \Delta S + B$ moves *in lock-step* with the option. If you can choose $\Delta$ and $B$ such that $\Pi$ matches the option's payoff in every future state of the world, then the desk is *immunised*: option moves up, hedge moves up by the same amount, net P&L is zero. The premium the desk charges is no longer a guess about the future stock price; it is the cost of the hedge it is about to put on.
 
-This is not a metaphor. It is literally how the desk operates. Every morning the system computes a $\Delta$, the trader buys or sells stock to that $\Delta$, and the residual P&L is what the model attributes to gamma, theta, vega, and unmodelled noise. If the model is right and the market is liquid, the residual is small. The price that comes out of replication is therefore the price that survives the hedging process — which is the only price the firm can defend in a P&L review.
+This is not a metaphor. It is literally how the desk operates. Every morning the system computes a $\Delta$, the trader buys or sells stock to that $\Delta$, and the residual P&L is what the model attributes to gamma, theta, vega, and unmodelled noise. If the model is right and the market is liquid, the residual is small. The price that comes out of replication is therefore the price that survives the hedging process, which is the only price the firm can defend in a P&L review.
 
 There are three immediate consequences of this framing, all of which structure the rest of the article.
 
-First: **the real-world probability of the stock going up does not appear in the price**. This is the single most counter-intuitive fact in derivatives pricing for outsiders. If you replicate the payoff, the price is determined by *what the hedge costs to set up*, which depends on today's spot, today's interest rate, and the volatility of the path — but not on the drift, because drift is hedged out by holding $\Delta$ stock.
+First: **the real-world probability of the stock going up does not appear in the price**. This is the single most counter-intuitive fact in derivatives pricing for outsiders. If you replicate the payoff, the price is determined by *what the hedge costs to set up*, which depends on today's spot, today's interest rate, and the volatility of the path, but not on the drift, because drift is hedged out by holding $\Delta$ stock.
 
 Second: **the price depends on what you can trade**. Replication requires liquid hedging instruments. If the underlying is illiquid, or if a risk factor (jumps, stochastic volatility, default) cannot be hedged with traded instruments, the model is *incomplete* and many prices are consistent with no-arbitrage. The price the desk quotes in an incomplete market is no longer unique; it depends on the desk's risk preferences, capital cost, and the spread it can charge.
 
 Third: **the price changes if the hedging environment changes**. When the 2008 funding crisis hit, the cost of borrowing money spiked. Suddenly the bond-funding leg of the replicating portfolio was much more expensive than the textbook risk-free rate suggested. Prices on long-dated trades moved by tens of basis points overnight, not because the underlying changed but because the manufacturing cost did. This is exactly what FVA (funding valuation adjustment) is, and we will return to it in §9.
 
-The mental model — *price equals manufacturing cost of the replicating hedge* — is the single most important sentence in this article. Every formal result that follows is a refinement of this idea.
+The mental model, *price equals manufacturing cost of the replicating hedge*, is the single most important sentence in this article. Every formal result that follows is a refinement of this idea.
 
 ## 2. The one-period binomial: where every pricing instinct comes from
 
@@ -70,7 +70,7 @@ $$
 \Delta = \frac{C_u - C_d}{S_u - S_d}.
 $$
 
-This is the *delta hedge ratio*: the number of shares the desk must hold per option sold to match the option's response to a one-step move in the stock. Substitute back to get $B$. The price today is $C_0 = \Delta S_0 + B$ — the cost of putting on the hedge.
+This is the *delta hedge ratio*: the number of shares the desk must hold per option sold to match the option's response to a one-step move in the stock. Substitute back to get $B$. The price today is $C_0 = \Delta S_0 + B$: the cost of putting on the hedge.
 
 Now do the algebra one more step. Define $q = \frac{(1+r) - d}{u - d}$. The expression for $C_0$ rearranges into
 
@@ -78,15 +78,15 @@ $$
 C_0 = \frac{1}{1+r} \big[ q \, C_u + (1-q) \, C_d \big].
 $$
 
-This is the punchline. The price equals a *discounted expected payoff*, where the expectation is taken under a probability $q$ that has nothing to do with the real-world probability of an up move. The real probability $p$ — the thing the equity research desk argues about all day — *never enters the calculation*. The replication argument has eliminated it.
+This is the punchline. The price equals a *discounted expected payoff*, where the expectation is taken under a probability $q$ that has nothing to do with the real-world probability of an up move. The real probability $p$, the thing the equity research desk argues about all day, *never enters the calculation*. The replication argument has eliminated it.
 
 The probability $q$ is called the *risk-neutral probability* (or the *equivalent martingale measure* in the continuous-time generalisation). It is the probability under which the discounted stock price $S/(1+r)^t$ is a martingale, i.e., its expected value tomorrow equals its value today. Under $q$, every traded asset earns the risk-free rate in expectation. Hence the name "risk-neutral": it is the world a hypothetical risk-neutral investor would believe in, but more importantly, it is the world in which the hedging argument lives.
 
 Three observations a senior quant should drill into a junior:
 
 1. **$q$ is not a real probability**. It is a pricing artefact derived from the absence of arbitrage. Confusing $q$ with the desk's view on direction is a categorical error and leads juniors to "discover" that the market has mispriced an option whenever their forecast disagrees with the implied $q$. It hasn't.
-2. **$q$ exists if and only if there is no arbitrage**. If $u > 1+r > d$ fails — say, ${1+r > u}$ — then the bond strictly dominates the stock and there is a free lunch. The formula gives $q$ outside $[0, 1]$, which signals the inconsistency. This is a baby version of the First Fundamental Theorem of Asset Pricing, which we'll meet next.
-3. **The hedge depends on the model, not on any real probability**. $\Delta$ is computed from $C_u, C_d, S_u, S_d$ — all model quantities. If the model is wrong (real states are not just up/down by $u$ and $d$), the hedge will not perfectly replicate, and the residual P&L is the model error.
+2. **$q$ exists if and only if there is no arbitrage**. If $u > 1+r > d$ fails (say, ${1+r > u}$) then the bond strictly dominates the stock and there is a free lunch. The formula gives $q$ outside $[0, 1]$, which signals the inconsistency. This is a baby version of the First Fundamental Theorem of Asset Pricing, which we'll meet next.
+3. **The hedge depends on the model, not on any real probability**. $\Delta$ is computed from $C_u, C_d, S_u, S_d$: all model quantities. If the model is wrong (real states are not just up/down by $u$ and $d$), the hedge will not perfectly replicate, and the residual P&L is the model error.
 
 A few lines of Python to make it concrete:
 
@@ -123,7 +123,7 @@ Two methods, identical answer. The replication path is interpretable (you can se
 
 The binomial tree generalises by chaining one-period steps backward in time. With $N$ steps, the option is priced by computing the payoff at the leaves and rolling backward through the tree, applying the one-step formula at every node. This converges to the Black–Scholes price as $N \to \infty$ when $u, d, r$ are calibrated to the GBM volatility, which we'll see in §3 of [the Black-Scholes article](/blog/trading/quantitative-finance/black-scholes) when it is published.
 
-For path-dependent or American options the tree handles them with a small modification: at each backward step, take the maximum of the continuation value (discounted expected next-step value) and the immediate exercise value. This single line — `value = max(continuation, intrinsic)` — is the entire engine for American options under a binomial model. Most production short-dated American pricers are still binomial trees because the convergence is acceptable and the code is unbreakable.
+For path-dependent or American options the tree handles them with a small modification: at each backward step, take the maximum of the continuation value (discounted expected next-step value) and the immediate exercise value. This single line, `value = max(continuation, intrinsic)`, is the entire engine for American options under a binomial model. Most production short-dated American pricers are still binomial trees because the convergence is acceptable and the code is unbreakable.
 
 ## 3. No-arbitrage as an engineering invariant
 
@@ -140,7 +140,7 @@ Real markets are incomplete. The dimensions of incompleteness are predictable:
 - **Credit.** Default is a Bernoulli event with no continuous tradable. CVA modeling lives here.
 - **Liquidity.** Funding spreads, bid-ask, and capacity all break the "frictionless" assumption.
 
-The engineering consequence is that every desk runs a *family* of $Q$'s — one calibrated daily, one calibrated weekly, one stress-shifted — and looks at the spread of exotic prices across the family as a model-risk reserve. We'll see in §11 (Calibration) that this spread can be *enormous* for path-dependent products.
+The engineering consequence is that every desk runs a *family* of $Q$'s (one calibrated daily, one calibrated weekly, one stress-shifted) and looks at the spread of exotic prices across the family as a model-risk reserve. We'll see in §11 (Calibration) that this spread can be *enormous* for path-dependent products.
 
 How to spot arbitrage in practice. The "free lunch on the screen" rarely looks like a textbook example. It looks like:
 
@@ -217,7 +217,7 @@ The drift becomes the risk-free rate $r$. This is exactly the binomial tree's ri
 
 The intuition that helps me most. The same set of paths is being weighted differently under $P$ and $Q$. A path that has the stock going up a lot has high probability under $P$ if $\mu$ is large (the real world expects equities to drift up) but only ordinary probability under $Q$ (where the drift is the much-smaller $r$). The Radon–Nikodym derivative $dQ/dP$ is the *re-weighting function*; pricing under $Q$ is a re-weighted average over the same paths.
 
-Why use $Q$ at all? Because the *replication argument* says option prices must be discounted expectations under $Q$, not under $P$. The real-world drift hedges out (we saw this in the binomial case). What survives is the volatility — and the discount rate, which is the cost of funding the hedge.
+Why use $Q$ at all? Because the *replication argument* says option prices must be discounted expectations under $Q$, not under $P$. The real-world drift hedges out (we saw this in the binomial case). What survives is the volatility, and the discount rate, which is the cost of funding the hedge.
 
 This has profound and underappreciated consequences:
 
@@ -229,7 +229,7 @@ The numéraire change is the most important practical trick in derivatives prici
 
 ![Numéraire zoo: pick the asset that makes the payoff trivial](/imgs/blogs/derivatives-pricing-6.png)
 
-The strategy is: pick the numéraire that makes the payoff *trivial* in some way. For a vanilla European call on stock, the money-market account is fine. But for a quanto option (payoff in a different currency than the stock), the stock measure makes the payoff a martingale and the pricing collapses to a one-line formula. For a swaption (option on a swap rate), the *annuity* (the sum of discount factors at each fixing date) is the right numéraire — the swap rate is a martingale under that measure, and the Black formula falls out. For an interest-rate cap, the $T$-forward measure makes the LIBOR rate a martingale and again gives a Black-style formula.
+The strategy is: pick the numéraire that makes the payoff *trivial* in some way. For a vanilla European call on stock, the money-market account is fine. But for a quanto option (payoff in a different currency than the stock), the stock measure makes the payoff a martingale and the pricing collapses to a one-line formula. For a swaption (option on a swap rate), the *annuity* (the sum of discount factors at each fixing date) is the right numéraire: the swap rate is a martingale under that measure, and the Black formula falls out. For an interest-rate cap, the $T$-forward measure makes the LIBOR rate a martingale and again gives a Black-style formula.
 
 The mantra: *one numéraire per payoff, the one that makes the dynamics simplest*. Production pricing libraries support multiple numéraires via an explicit measure-change step in the simulation engine. Hand-coded pricers that only use the money-market measure are forced into more complex SDEs and usually slower convergence.
 
@@ -259,7 +259,7 @@ When the contract has *early exercise* or *path-dependence* in a low-dimensional
 
 ![Crank-Nicolson PDE grid: backward induction across S × t](/imgs/blogs/derivatives-pricing-8.png)
 
-The diagram shows the structure. The right-most column carries the terminal payoff $\max(S_i - K, 0)$ (the yellow column). The top and bottom rows carry boundary conditions that encode contract details — for a call, $V \to S - Ke^{-r(T-t)}$ as $S \to \infty$ and $V \to 0$ as $S \to 0$. Each backward step solves a tridiagonal linear system using the Crank–Nicolson scheme (an average of explicit and implicit Euler), which is second-order accurate and unconditionally stable.
+The diagram shows the structure. The right-most column carries the terminal payoff $\max(S_i - K, 0)$ (the yellow column). The top and bottom rows carry boundary conditions that encode contract details: for a call, $V \to S - Ke^{-r(T-t)}$ as $S \to \infty$ and $V \to 0$ as $S \to 0$. Each backward step solves a tridiagonal linear system using the Crank–Nicolson scheme (an average of explicit and implicit Euler), which is second-order accurate and unconditionally stable.
 
 ```python
 import numpy as np
@@ -377,14 +377,14 @@ def lsm_american_put(S0, K, T, r, sigma, n_paths, n_steps, basis_degree=3, seed=
 Two engineering points worth nailing into a junior's head:
 
 1. **LSM is biased low.** It uses an estimated, sub-optimal exercise rule, so the price you get is a lower bound on the true American price. The Andersen–Broadie *dual* method gives an upper bound. The true price is in $[$LSM, dual$]$, and the spread is your model error budget.
-2. **Variance reduction is not optional**. Antithetic variates, control variates (price the corresponding European in closed form, use it as a control), stratified sampling, and quasi-Monte Carlo (Sobol' sequences) all matter. A naive MC with $10^5$ paths has a 95% CI around 5 cents on a $10 option; with antithetic + control variate it can be 0.5 cents at the same path count. Vega and gamma are even more sensitive — pathwise greeks plus AAD are essentially mandatory in production.
+2. **Variance reduction is not optional**. Antithetic variates, control variates (price the corresponding European in closed form, use it as a control), stratified sampling, and quasi-Monte Carlo (Sobol' sequences) all matter. A naive MC with $10^5$ paths has a 95% CI around 5 cents on a $10 option; with antithetic + control variate it can be 0.5 cents at the same path count. Vega and gamma are even more sensitive: pathwise greeks plus AAD are essentially mandatory in production.
 
 A practical menu of variance reduction tricks, in roughly the order I deploy them:
 
 - **Antithetic variates**: pair each draw $Z$ with $-Z$. Cuts variance for symmetric payoffs (vanilla, lookback) by half or more. Essentially free in code complexity. Always-on in production.
 - **Control variates**: simulate the exotic and a related vanilla in lockstep (same underlying paths). The vanilla has a closed-form price; subtract the simulated minus closed-form vanilla from the simulated exotic. This removes the *common* noise driven by the underlying. Variance reduction factor 5–50× for exotics on the same underlying as a tractable vanilla. Essentially mandatory for autocallables.
 - **Stratified sampling**: divide the support of the driving randomness into strata, sample each in proportion. For 1D Brownian terminals, equivalent to inverse-CDF on uniform Latin hypercube draws. Variance reduction 2–10× for smooth payoffs, less for discontinuous (barriers).
-- **Quasi-Monte Carlo (Sobol' / Halton)**: low-discrepancy sequences instead of pseudorandom. Convergence improves from $1/\sqrt{N}$ to roughly $\log(N)^d / N$ for low effective dimension. For 1D-equivalent payoffs, 10–50× speedup at the same accuracy. The catch is that QMC is "discrete" — you lose the standard-error estimator, must use randomised QMC (RQMC) to get one back.
+- **Quasi-Monte Carlo (Sobol' / Halton)**: low-discrepancy sequences instead of pseudorandom. Convergence improves from $1/\sqrt{N}$ to roughly $\log(N)^d / N$ for low effective dimension. For 1D-equivalent payoffs, 10–50× speedup at the same accuracy. The catch is that QMC is "discrete": you lose the standard-error estimator, must use randomised QMC (RQMC) to get one back.
 - **Importance sampling**: tilt the distribution to over-sample the regions where the payoff is non-zero. Critical for rare-event payoffs (deep OTM options, far barriers). Implementation requires a Girsanov shift on the simulation paths and a likelihood-ratio reweighting. 100× variance reduction for far-OTM is routine.
 - **Brownian bridge**: when only the terminal value matters, generate the terminal first then fill in the path conditional on terminal. Reduces effective dimension for QMC and improves convergence.
 - **Multi-level Monte Carlo (MLMC, Giles 2008)**: simulate at multiple discretisation levels, telescoping the cost. For SDEs where the discretisation error matters (everything path-dependent), MLMC reduces total cost from $O(\epsilon^{-3})$ to $O(\epsilon^{-2})$.
@@ -397,11 +397,11 @@ The price is a single number. The *greeks* are the partial derivatives of the pr
 
 The standard greeks:
 
-- $\Delta = \partial V / \partial S$ — sensitivity to spot. The hedge ratio.
-- $\Gamma = \partial^2 V / \partial S^2$ — convexity. Long gamma profits from large moves.
-- $\Theta = \partial V / \partial t$ — time decay. Negative for long options.
-- $\text{Vega} = \partial V / \partial \sigma$ — sensitivity to implied vol.
-- $\rho = \partial V / \partial r$ — sensitivity to rates.
+- $\Delta = \partial V / \partial S$: sensitivity to spot. The hedge ratio.
+- $\Gamma = \partial^2 V / \partial S^2$: convexity. Long gamma profits from large moves.
+- $\Theta = \partial V / \partial t$: time decay. Negative for long options.
+- $\text{Vega} = \partial V / \partial \sigma$: sensitivity to implied vol.
+- $\rho = \partial V / \partial r$: sensitivity to rates.
 - Cross-greeks: vanna ($\partial^2 V / \partial S \partial \sigma$), volga ($\partial^2 V / \partial \sigma^2$).
 
 Daily P&L decomposes into greek-times-move plus higher-order terms:
@@ -412,7 +412,7 @@ $$
 
 ![Daily P&L attribution: where the price comes from](/imgs/blogs/derivatives-pricing-10.png)
 
-The decomposition is the *desk's daily P&L attribution report*. Every morning the system posts what fraction of yesterday's P&L came from delta (typically zero for a delta-hedged book), from gamma (the convexity payoff), from theta (the time decay paid for being long gamma), from vega (the move in implied vols), and from a residual that captures everything the model didn't see — jumps, calibration drift, hedge slippage, basis risk.
+The decomposition is the *desk's daily P&L attribution report*. Every morning the system posts what fraction of yesterday's P&L came from delta (typically zero for a delta-hedged book), from gamma (the convexity payoff), from theta (the time decay paid for being long gamma), from vega (the move in implied vols), and from a residual that captures everything the model didn't see: jumps, calibration drift, hedge slippage, basis risk.
 
 The structural relationship for an option-buying book is that *gamma plus theta is the price*. You pay theta every day to be long gamma. If the realised volatility is exactly the implied volatility you paid for, on average $\Gamma \cdot (\Delta S)^2$ exactly offsets $\Theta \cdot \Delta t$ and the position breaks even. If realised exceeds implied, gamma harvests more than theta costs, and you make money. If realised is lower, you lose. The option price *is* the cost of the implied volatility; gamma–theta is the structural P&L line.
 
@@ -433,7 +433,7 @@ Three methods for greeks:
 | Pathwise + LRM (likelihood-ratio) | $O(1)$ per simulation | Machine precision pathwise; slow for some greeks | MC pricers |
 | AAD (adjoint algorithmic differentiation) | $O(1)$ in the number of risk factors | Machine precision | Production for high-dim risk |
 
-AAD is the modern engineering answer. It builds a tape of the forward computation, then runs the chain rule backward to compute *all* greeks in a single sweep — cost $\sim 3$–$5\times$ a single forward eval, regardless of the number of risk factors. We'll cover the architecture in §10. For now: a desk that prices a 50-risk-factor swap-book with AAD computes all 50 greeks for the cost of $3$–$5$ price evaluations; the desk that bumps does $51$ evaluations. The AAD desk wins by an order of magnitude on every overnight greek run.
+AAD is the modern engineering answer. It builds a tape of the forward computation, then runs the chain rule backward to compute *all* greeks in a single sweep: cost $\sim 3$–$5\times$ a single forward eval, regardless of the number of risk factors. We'll cover the architecture in §10. For now: a desk that prices a 50-risk-factor swap-book with AAD computes all 50 greeks for the cost of $3$–$5$ price evaluations; the desk that bumps does $51$ evaluations. The AAD desk wins by an order of magnitude on every overnight greek run.
 
 ## 8. Calibration: the price is only as good as the inputs
 
@@ -444,7 +444,7 @@ Up to now we have treated the model parameters ($\sigma$, mean-reversion, jump r
 Calibration is mathematically a non-linear least squares: minimise $\sum_i w_i (P_i^{\text{model}}(\theta) - P_i^{\text{market}})^2$ over the parameter vector $\theta$. The forward problem (parameters → prices) is generally easy; the inverse (prices → parameters) is hard for several reasons:
 
 1. **Non-convexity.** The objective surface has multiple local minima. Levenberg–Marquardt converges to whichever basin you start in; basin-hopping or differential evolution can find others. Two basins can fit the vanilla market within a few basis points and disagree on exotics by tens of percent.
-2. **Identifiability.** Some parameters are nearly redundant. In Heston, the parameter pair $(\sigma_v, \rho)$ is partially confounded — you can fit the same surface with high $\sigma_v$ and modest $\rho$ or modest $\sigma_v$ and steep $\rho$. Daily re-calibration jumps between these regimes if you don't constrain.
+2. **Identifiability.** Some parameters are nearly redundant. In Heston, the parameter pair $(\sigma_v, \rho)$ is partially confounded: you can fit the same surface with high $\sigma_v$ and modest $\rho$ or modest $\sigma_v$ and steep $\rho$. Daily re-calibration jumps between these regimes if you don't constrain.
 3. **Stability.** Small market moves should produce small parameter moves. A model whose calibrated parameters jump erratively day-to-day is producing unstable greeks and unhedgeable books. Regularisation (Tikhonov, L1-on-parameter-deltas) is the engineering fix.
 4. **Speed.** A daily calibration of a Heston surface across 200 strike-expiry pairs takes seconds with closed-form vanilla pricing; a stochastic-volatility-with-jumps model with MC vanilla pricing takes minutes; a full LSV (local–stochastic vol) with PDE-vanilla pricing can take hours. The choice of vanilla pricing engine is dictated by the calibration latency.
 
@@ -456,15 +456,15 @@ The senior engineer's calibration playbook:
 - **Hold-out testing**. Calibrate to a subset of the surface, predict the held-out points, measure the prediction error. A model that fits 100% of the calibration set with 10 bp RMSE but predicts the held-out wings at 50 bp is over-fit.
 - **Cross-validate exotics**. Price a benchmark exotic (e.g., a 1-year up-and-out call) under each calibration. If the price spread across calibrations is bigger than your bid-ask, your model is genuinely uncertain on this exotic and you must reserve for model risk.
 
-A worked numerical example of the calibration trap. Suppose the desk runs Heston, fits the SPX 1Y vol surface across 9 strikes (80%–120% moneyness in 5% steps). On a quiet day, the optimiser converges to $(\kappa, \theta, \sigma_v, \rho, v_0) = (1.8, 0.04, 0.55, -0.72, 0.039)$ with a vanilla RMSE of 7 bp. The next morning, the surface barely moves — the index is up 30 bp, ATM vol is unchanged, the smile shifted by less than 5 bp on each strike. The calibration *should* produce roughly the same parameters. Instead the optimiser converges to $(2.4, 0.038, 0.71, -0.55, 0.041)$ — vol-of-vol jumped from 0.55 to 0.71, correlation moved from $-0.72$ to $-0.55$. The vanilla RMSE is 6 bp, marginally better. Same fit. Different parameters.
+A worked numerical example of the calibration trap. Suppose the desk runs Heston, fits the SPX 1Y vol surface across 9 strikes (80%–120% moneyness in 5% steps). On a quiet day, the optimiser converges to $(\kappa, \theta, \sigma_v, \rho, v_0) = (1.8, 0.04, 0.55, -0.72, 0.039)$ with a vanilla RMSE of 7 bp. The next morning, the surface barely moves: the index is up 30 bp, ATM vol is unchanged, the smile shifted by less than 5 bp on each strike. The calibration *should* produce roughly the same parameters. Instead the optimiser converges to $(2.4, 0.038, 0.71, -0.55, 0.041)$: vol-of-vol jumped from 0.55 to 0.71, correlation moved from $-0.72$ to $-0.55$. The vanilla RMSE is 6 bp, marginally better. Same fit. Different parameters.
 
-Now price a 1-year forward-starting cliquet on those two parameter sets. Day 1's calibration gives 318 bp; day 2's gives 387 bp. A 22% jump in the price of an exotic that the desk holds, driven not by the market but by the optimiser's basin choice. Bid-ask on a cliquet is typically 50–100 bp; this 70 bp jump is a margin call on every counterparty whose collateral is computed off mark-to-model. Senior quants who have seen this once never forget it. The defensive measures — warm-starting from yesterday's calibration, regularising the parameter delta, monitoring time series for jumps, holding multiple calibrations and averaging — are not bureaucracy; they are how you keep the book stable.
+Now price a 1-year forward-starting cliquet on those two parameter sets. Day 1's calibration gives 318 bp; day 2's gives 387 bp. A 22% jump in the price of an exotic that the desk holds, driven not by the market but by the optimiser's basin choice. Bid-ask on a cliquet is typically 50–100 bp; this 70 bp jump is a margin call on every counterparty whose collateral is computed off mark-to-model. Senior quants who have seen this once never forget it. The defensive measures (warm-starting from yesterday's calibration, regularising the parameter delta, monitoring time series for jumps, holding multiple calibrations and averaging) are not bureaucracy; they are how you keep the book stable.
 
 The mathematical view: calibration is an inverse problem on a non-convex objective. Multiple basins can have nearly identical RMSE on the calibration set yet wildly different values on the *test* set (exotics). This is over-fitting in a different basin. The fix is the same as in machine learning: regularisation. In Heston calibration the usual regularisers are L2-on-parameter-deltas-from-yesterday, prior penalties on $\rho$ near $-1$ (numerical instability) or $\kappa\theta < \frac{1}{2}\sigma_v^2$ (Feller condition for positivity), and (in advanced setups) Bayesian-style priors with Hessian-based posteriors. Production calibration that ignores regularisation is a daily P&L bomb waiting to detonate.
 
 ## 9. Where the textbook lies: market frictions
 
-The clean theory we've assembled — replication, no-arbitrage, $Q$, greeks — assumes a frictionless market: continuous trading, no funding cost, no credit, no capital, no bid-ask. Real markets have all of these, and the cumulative effect on price can be larger than the model's stochastic-volatility correction.
+The clean theory we've assembled (replication, no-arbitrage, $Q$, greeks) assumes a frictionless market: continuous trading, no funding cost, no credit, no capital, no bid-ask. Real markets have all of these, and the cumulative effect on price can be larger than the model's stochastic-volatility correction.
 
 ![XVA stack: the real price is the model price plus adjustments](/imgs/blogs/derivatives-pricing-12.png)
 
@@ -473,7 +473,7 @@ The stack of *valuation adjustments* (collectively, *XVAs*) is what closes the g
 - **CVA** (credit valuation adjustment). The expected loss to the desk from counterparty default. $\text{CVA} = (1 - R) \int_0^T E^Q[D(0,t) \cdot \text{EE}(t) \cdot \lambda(t)] dt$, where $R$ is recovery, $\text{EE}$ is the expected exposure, and $\lambda$ is the default intensity. Typical impact: 5–100 bp on uncollateralised trades. After 2008, CVA desks became their own profit center, hedging the credit exposure of every uncollateralised counterparty.
 - **DVA** (debit valuation adjustment). The mirror: expected gain to the desk from *its own* default. Symmetric in theory, controversial in practice (you cannot really realise this).
 - **FVA** (funding valuation adjustment). The cost of funding the variation margin or the un-collateralised position at the desk's actual funding spread, not the textbook risk-free rate. This is what blew up in 2008–2010 when bank funding spreads exploded. Typical impact: 10–40 bp on long-dated trades.
-- **KVA** (capital valuation adjustment). The cost of the regulatory capital the desk must hold against the trade's credit/market risk over its lifetime. Basel III made this large — typical impact 5–50 bp.
+- **KVA** (capital valuation adjustment). The cost of the regulatory capital the desk must hold against the trade's credit/market risk over its lifetime. Basel III made this large: typical impact 5–50 bp.
 - **MVA** (margin valuation adjustment). The cost of funding the *initial margin* required by central clearing (post-2014). On a long-dated cleared swap, MVA can be 5–30 bp.
 
 The "real" price the desk shows the client is
@@ -509,7 +509,7 @@ The decomposition every serious library implements:
 
 Why orthogonal? Because every combination must be testable. *American put under Heston via PDE on yesterday's snapshot* must produce the same answer regardless of who calls the engine, in any environment. If American-ness is baked into the Heston model class, you cannot price European Heston options without changing the class, and the regression test surface explodes.
 
-QuantLib (the open-source reference) is a good study in this architecture, with some warts. The key abstraction is the `PricingEngine` interface: `Instrument::setupArguments(args)`, `Engine::calculate()`, `Instrument::fetchResults(results)`. The Bridge pattern. A `VanillaOption` instrument can be priced by an `AnalyticEuropeanEngine`, an `MCAmericanEngine`, an `FdBlackScholesVanillaEngine` — all interchangeable.
+QuantLib (the open-source reference) is a good study in this architecture, with some warts. The key abstraction is the `PricingEngine` interface: `Instrument::setupArguments(args)`, `Engine::calculate()`, `Instrument::fetchResults(results)`. The Bridge pattern. A `VanillaOption` instrument can be priced by an `AnalyticEuropeanEngine`, an `MCAmericanEngine`, an `FdBlackScholesVanillaEngine`: all interchangeable.
 
 ```python
 import QuantLib as ql
@@ -555,7 +555,7 @@ print(f"AM call: {am_call.NPV():.4f}")
 Two engineering rules I would die on a hill for:
 
 1. **Determinism.** Every price must be reproducible from (instrument, model, method, market-snapshot, seed). Reproducibility is the discipline that lets you debug a bad mark in production months later.
-2. **Greeks-by-bumping in unit tests, AAD/pathwise in production.** The bumped greek is the slow, sure ground truth; AAD is the fast, fragile production tool. If the AAD greek diverges from the bumped greek by more than tolerance, the AAD tape is broken — and you want to know that before a trader hedges off the broken number.
+2. **Greeks-by-bumping in unit tests, AAD/pathwise in production.** The bumped greek is the slow, sure ground truth; AAD is the fast, fragile production tool. If the AAD greek diverges from the bumped greek by more than tolerance, the AAD tape is broken, and you want to know that before a trader hedges off the broken number.
 
 ### AAD vs bumping
 
@@ -590,7 +590,7 @@ The cleanest way to learn pricing is by studying its failures. Below are eight n
 
 ### 11.1 The 1987 crash and the discovery of the smile
 
-Before October 19, 1987, equity-options desks priced with a flat Black–Scholes volatility — the same $\sigma$ for every strike. The 1987 crash, where the S&P 500 dropped 20.5% in one day, broke that assumption. After the crash, deep out-of-the-money puts started trading at much higher implied vols than at-the-money options, and the volatility smile / skew was born. Operationally, every options desk that priced 1987-vintage OTM puts at flat-vol mispriced its inventory by 30–60% on the strike axis.
+Before October 19, 1987, equity-options desks priced with a flat Black–Scholes volatility: the same $\sigma$ for every strike. The 1987 crash, where the S&P 500 dropped 20.5% in one day, broke that assumption. After the crash, deep out-of-the-money puts started trading at much higher implied vols than at-the-money options, and the volatility smile / skew was born. Operationally, every options desk that priced 1987-vintage OTM puts at flat-vol mispriced its inventory by 30–60% on the strike axis.
 
 The mechanism: the market re-priced tail risk. A 20% one-day drop is a $\sim 25\sigma$ event under a Gaussian model with $\sigma = 1\%$ daily. After 1987, the market refused to price tails with a Gaussian and instead priced them with a fat-tailed distribution. The implied-vol smile is the market's way of pricing tails without changing the formula.
 
@@ -647,7 +647,7 @@ The architectural lesson: implied vol is a market quantity, not a model paramete
 
 ### 11.7 Archegos 2021: total return swaps, price ≠ exposure
 
-Archegos was a family office running concentrated positions via *total return swaps* (TRS): the prime broker (e.g., Credit Suisse, Nomura) held the actual stock and Archegos took the synthetic exposure. Pricing the TRS itself is trivial — it's an equity forward. The problem is *exposure*: the prime broker has counterparty risk to Archegos for the difference between the stock price and the agreed forward.
+Archegos was a family office running concentrated positions via *total return swaps* (TRS): the prime broker (e.g., Credit Suisse, Nomura) held the actual stock and Archegos took the synthetic exposure. Pricing the TRS itself is trivial: it's an equity forward. The problem is *exposure*: the prime broker has counterparty risk to Archegos for the difference between the stock price and the agreed forward.
 
 The pricing systems priced the swaps correctly. The *risk* systems failed to aggregate exposure across counterparties (multiple primes financed Archegos in parallel without each knowing the others' exposure) and across positions (Archegos was concentrated in a few stocks; the marginal exposure when one of them fell was much larger than the netted-exposure metrics suggested). When the stocks fell in March 2021, Archegos couldn't post margin, and Credit Suisse and Nomura took $\sim \$10B$ of losses combined.
 
@@ -661,7 +661,7 @@ The pricing-architecture lesson is subtle: the price exists, the accounting choi
 
 The corollary at a more granular level: every risk system needs a *liquidity-weighted price*. The mark-to-market price assumes you can sell at the mid; the real liquidation price for a $100B HTM portfolio in a stressed market is materially below mid. SVB's bond portfolio at the moment of the run was probably 10–15% below the held-to-maturity book value at *fair* market quotes, but 25–30% below at *forced-liquidation* quotes (because no buyer wanted $100B of duration in two days). Modern risk systems include a *days-to-liquidate* sensitivity and a *peak-stress haircut* applied to mark-to-market. SVB-style failures should be caught by these metrics if they're surfaced to the risk committee weekly.
 
-A final, often-overlooked lesson from every case study above: **the pricing model and the operational reality are coupled**. The 1987 smile, LTCM's funding, Bear Stearns' tail correlation, Lehman's discount-curve change, the negative-oil contract spec, GameStop's order-book depth, Archegos's margin model, SVB's accounting policy — none of these are *purely* pricing-model issues. They are coupling issues between the model and the world it operates in. A senior quant's job is to know where those coupling points are. The model is right when the coupling points are stable; the model is dangerously wrong when the coupling points break. The discipline of *naming and monitoring* coupling points is what distinguishes a robust pricing system from a fragile one.
+A final, often-overlooked lesson from every case study above: **the pricing model and the operational reality are coupled**. The 1987 smile, LTCM's funding, Bear Stearns' tail correlation, Lehman's discount-curve change, the negative-oil contract spec, GameStop's order-book depth, Archegos's margin model, SVB's accounting policy: none of these are *purely* pricing-model issues. They are coupling issues between the model and the world it operates in. A senior quant's job is to know where those coupling points are. The model is right when the coupling points are stable; the model is dangerously wrong when the coupling points break. The discipline of *naming and monitoring* coupling points is what distinguishes a robust pricing system from a fragile one.
 
 ## 12. When to reach for which framework, and when not to
 
@@ -688,4 +688,4 @@ Three closing principles for the engineer-quant:
 
 **Build the pricing library so that it can be wrong loudly.** The worst pricing failures are silent: a model gives a confident number that is wrong by 10%. The defence is a culture of *calibration diagnostics, model spread reports, hedge slippage attribution, and parameter time series*. A senior quant should be able to look at any price the system produces and see immediately *which calibration produced it, what the residual was, and how sensitive the price is to alternative calibrations*. If the answer to "how do we know this price is right" is "because the system says so", the system will eventually print a number that costs the firm tens of millions of dollars. Make the system honest about its uncertainty, and the desk will trust the prices that *are* correct because they are clearly distinguished from the ones that are not.
 
-The remaining articles in this series — [Options Theory](/blog/trading/quantitative-finance/options-theory), [Black–Scholes](/blog/trading/quantitative-finance/black-scholes), [Volatility Surface](/blog/trading/quantitative-finance/volatility-surface), [Bond Pricing](/blog/trading/quantitative-finance/bond-pricing), [Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deep on each component sketched above. This article is the *map*; the others are the *territory*.
+The remaining articles in this series ([Options Theory](/blog/trading/quantitative-finance/options-theory), [Black–Scholes](/blog/trading/quantitative-finance/black-scholes), [Volatility Surface](/blog/trading/quantitative-finance/volatility-surface), [Bond Pricing](/blog/trading/quantitative-finance/bond-pricing), [Yield Curve Modeling](/blog/trading/quantitative-finance/yield-curve-modeling), [Fixed Income Analytics](/blog/trading/quantitative-finance/fixed-income-analytics), [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets)) go deep on each component sketched above. This article is the *map*; the others are the *territory*.

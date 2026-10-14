@@ -2,7 +2,7 @@
 title: "Time Value of Money: The Engine of Every Valuation Model"
 date: "2026-06-22"
 publishDate: "2026-06-22"
-description: "Why a dollar today is worth more than a dollar tomorrow — and how that single insight powers every DCF, bond price, mortgage, and option model ever built."
+description: "Why a dollar today is worth more than a dollar tomorrow, and how that single insight powers every DCF, bond price, mortgage, and option model ever built."
 tags: ["time-value-of-money", "present-value", "future-value", "discounting", "compounding", "tvm", "valuation", "dcf", "annuity", "npv"]
 category: "trading"
 subcategory: "Finance"
@@ -12,13 +12,13 @@ readTime: 42
 ---
 
 > [!important]
-> **TL;DR** — Time Value of Money is the single idea that every valuation model is built on: a dollar today is worth more than a dollar in the future because it can be invested, and that difference is precisely measurable.
+> **TL;DR**, Time Value of Money is the single idea that every valuation model is built on: a dollar today is worth more than a dollar in the future because it can be invested, and that difference is precisely measurable.
 >
 > - **Future Value** compounds a present amount forward: FV = PV × (1 + r)^n
 > - **Present Value** discounts a future cash flow backward: PV = CF / (1 + r)^n
-> - **Annuities** apply PV to a stream of equal payments — the formula that prices bonds, mortgages, and leases
+> - **Annuities** apply PV to a stream of equal payments: the formula that prices bonds, mortgages, and leases
 > - **NPV** is the sum of all discounted cash flows and the universal "accept or reject" rule for any investment
-> - The discount rate you choose — your required return — controls everything: a 1% change in r moves a long-dated asset's price by more than you'd expect
+> - The discount rate you choose, your required return, controls everything: a 1% change in r moves a long-dated asset's price by more than you'd expect
 
 ---
 
@@ -28,15 +28,15 @@ Imagine you win the lottery. The prize is \$1,000,000. You have two options:
 
 **Option A:** Receive the full \$1,000,000 today, in a single lump sum.
 
-**Option B:** Receive \$50,000 per year for 20 years — which adds up to \$1,000,000 in total payments.
+**Option B:** Receive \$50,000 per year for 20 years, which adds up to \$1,000,000 in total payments.
 
-Most people, when asked this question quickly, guess that the two options are roughly equal — after all, both pay out \$1 million. A few clever people say Option A must be better "because of inflation." But very few people can say *by exactly how much* Option A is better, or why.
+Most people, when asked this question quickly, guess that the two options are roughly equal: after all, both pay out \$1 million. A few clever people say Option A must be better "because of inflation." But very few people can say *by exactly how much* Option A is better, or why.
 
-Here is the precise answer: at a 6% discount rate — a reasonable assumption for what you could earn investing in a diversified portfolio — Option A is worth \$1,000,000 today, and Option B is worth only \$573,496 today. Option A is worth **74% more**.
+Here is the precise answer: at a 6% discount rate (a reasonable assumption for what you could earn investing in a diversified portfolio) Option A is worth \$1,000,000 today, and Option B is worth only \$573,496 today. Option A is worth **74% more**.
 
-That arithmetic gap — \$426,504 of value that disappears simply because of *when* you receive the money — is the Time Value of Money (TVM) in action. It is not a minor adjustment or a rounding assumption. It is the foundational truth on which every valuation model in finance is built. The DCF model, bond pricing, mortgage math, dividend discount models, option pricing — every single one traces back to the same core insight: *a dollar you receive sooner is worth more than a dollar you receive later, and the difference is exactly calculable.*
+That arithmetic gap (\$426,504 of value that disappears simply because of *when* you receive the money) is the Time Value of Money (TVM) in action. It is not a minor adjustment or a rounding assumption. It is the foundational truth on which every valuation model in finance is built. The DCF model, bond pricing, mortgage math, dividend discount models, option pricing, every single one traces back to the same core insight: *a dollar you receive sooner is worth more than a dollar you receive later, and the difference is exactly calculable.*
 
-This post builds TVM from the ground up. We start with the three reasons money has time value, then build the mechanics of compounding and discounting one formula at a time, then show how those mechanics extend to annuities, perpetuities, and finally to Net Present Value — the universal investment decision rule. Along the way, we'll price a Vietnamese government bond, compute a mortgage payment, and see why inflation data from the State Bank of Vietnam makes TVM feel very concrete to anyone saving in Vietnamese đồng.
+This post builds TVM from the ground up. We start with the three reasons money has time value, then build the mechanics of compounding and discounting one formula at a time, then show how those mechanics extend to annuities, perpetuities, and finally to Net Present Value: the universal investment decision rule. Along the way, we'll price a Vietnamese government bond, compute a mortgage payment, and see why inflation data from the State Bank of Vietnam makes TVM feel very concrete to anyone saving in Vietnamese đồng.
 
 ![TVM timeline: $100 compounds to $133 over 3 years at 10%](/imgs/blogs/time-value-of-money-engine-every-valuation-model-1.png)
 
@@ -46,25 +46,25 @@ The diagram above is the mental model for the whole post. A dollar invested toda
 
 ## Foundations: why money has time value
 
-Before we write a single formula, we need to understand *why* money has time value. There are three distinct reasons, and each maps onto a real cost you pay — or a real opportunity you give up — when you receive money later instead of now.
+Before we write a single formula, we need to understand *why* money has time value. There are three distinct reasons, and each maps onto a real cost you pay, or a real opportunity you give up, when you receive money later instead of now.
 
 ### Reason 1: opportunity cost
 
-If I give you \$100 today, you can invest it. At 5% annual interest, it becomes \$105 in one year. If you agree to wait a year for your \$100, you forego that \$5 — that is the *opportunity cost* of waiting. It is not inflation, it is not risk, it is simply the earning power that a dollar in your hands has right now.
+If I give you \$100 today, you can invest it. At 5% annual interest, it becomes \$105 in one year. If you agree to wait a year for your \$100, you forego that \$5, that is the *opportunity cost* of waiting. It is not inflation, it is not risk, it is simply the earning power that a dollar in your hands has right now.
 
-This is why even in a world with zero inflation and perfectly safe investments, money would still have time value. A savings account paying 0.5% means your \$100 today is worth more than \$100 in a year — by exactly 50 cents — purely because of the earning opportunity.
+This is why even in a world with zero inflation and perfectly safe investments, money would still have time value. A savings account paying 0.5% means your \$100 today is worth more than \$100 in a year, by exactly 50 cents, purely because of the earning opportunity.
 
 ### Reason 2: inflation
 
-Prices generally rise over time. A bag of groceries that costs \$50 today will likely cost \$52 or \$53 in a year. If you hold \$50 in cash for a year, its *real purchasing power* erodes — you can buy slightly less with it. So even if there were no investment return available at all, you'd prefer \$50 today over \$50 in a year because \$50 today buys more real stuff.
+Prices generally rise over time. A bag of groceries that costs \$50 today will likely cost \$52 or \$53 in a year. If you hold \$50 in cash for a year, its *real purchasing power* erodes: you can buy slightly less with it. So even if there were no investment return available at all, you'd prefer \$50 today over \$50 in a year because \$50 today buys more real stuff.
 
-Inflation and opportunity cost are related but separate. Your investment return (say, 5%) compensates you for *both* inflation (say, 2.5%) *and* the real component of the return (the remaining 2.5%). This distinction matters in practice — when you're valuing a company that operates in a high-inflation environment like Vietnam, you need to think carefully about whether your cash flows and your discount rate are expressed in *nominal* terms (including inflation) or *real* terms (stripping it out). More on this when we get to the Vietnam section.
+Inflation and opportunity cost are related but separate. Your investment return (say, 5%) compensates you for *both* inflation (say, 2.5%) *and* the real component of the return (the remaining 2.5%). This distinction matters in practice, when you're valuing a company that operates in a high-inflation environment like Vietnam, you need to think carefully about whether your cash flows and your discount rate are expressed in *nominal* terms (including inflation) or *real* terms (stripping it out). More on this when we get to the Vietnam section.
 
 ### Reason 3: risk
 
-Money promised in the future is less certain than money in your hand today. The counterparty who owes you \$100 in five years might default. The business whose cash flows you're projecting might miss its targets. Even a government can — and historically has — failed to honor its obligations. Risk *requires compensation*: if you are going to take on uncertainty, you demand a higher return to justify accepting it.
+Money promised in the future is less certain than money in your hand today. The counterparty who owes you \$100 in five years might default. The business whose cash flows you're projecting might miss its targets. Even a government can, and historically has, failed to honor its obligations. Risk *requires compensation*: if you are going to take on uncertainty, you demand a higher return to justify accepting it.
 
-This third reason is the one that makes discount rates vary so widely across different investments. A 30-day U.S. Treasury bill, backed by the full faith and credit of the U.S. government, commands a discount rate near the "risk-free rate" — perhaps 4.5% today. A venture-capital investment in a pre-revenue startup might require a 35% discount rate to justify the enormous risk of loss. The formula is the same; the rate is vastly different.
+This third reason is the one that makes discount rates vary so widely across different investments. A 30-day U.S. Treasury bill, backed by the full faith and credit of the U.S. government, commands a discount rate near the "risk-free rate": perhaps 4.5% today. A venture-capital investment in a pre-revenue startup might require a 35% discount rate to justify the enormous risk of loss. The formula is the same; the rate is vastly different.
 
 ### The three reasons unified: the discount rate
 
@@ -74,7 +74,7 @@ In practice, the discount rate `r` that we plug into our present value formulas 
 r = risk-free rate + inflation premium + risk premium
 ```
 
-Or more cleanly: `r` is the return you could earn on an alternative investment of similar risk. This is what economists call the *opportunity cost of capital*. If you can earn 8% per year by investing in a diversified stock index, then any investment you evaluate should be discounted at (at least) 8% — because that is what you give up to tie your money up in this alternative.
+Or more cleanly: `r` is the return you could earn on an alternative investment of similar risk. This is what economists call the *opportunity cost of capital*. If you can earn 8% per year by investing in a diversified stock index, then any investment you evaluate should be discounted at (at least) 8%, because that is what you give up to tie your money up in this alternative.
 
 This is the key insight that makes TVM not just an accounting concept but a decision tool: every time you compute the present value of a cash flow, you are implicitly comparing it to your best alternative use of that money.
 
@@ -90,7 +90,7 @@ Year 2: \$1,080 × 1.08 = **\$1,166.40**
 
 Year 3: \$1,166.40 × 1.08 = **\$1,259.71**
 
-Notice what happened. In year 1, the interest was \$80 (8% of \$1,000). In year 2, the interest was \$86.40 — not \$80 — because you earned 8% on the larger balance of \$1,080. In year 3, the interest was \$93.31. This is **compounding**: you earn returns *on* your returns, not just on your original principal.
+Notice what happened. In year 1, the interest was \$80 (8% of \$1,000). In year 2, the interest was \$86.40, not \$80, because you earned 8% on the larger balance of \$1,080. In year 3, the interest was \$93.31. This is **compounding**: you earn returns *on* your returns, not just on your original principal.
 
 The pattern is clear. We multiplied by 1.08 three times, which is the same as multiplying by (1.08)³. This gives us the **Future Value formula**:
 
@@ -110,15 +110,15 @@ It's worth pausing to understand why compounding is so dramatically different fr
 
 With simple interest at 8%, your \$1,000 grows by \$80 every single year. After 30 years: \$1,000 + (30 × \$80) = **\$3,400**.
 
-With compound interest at 8%, your interest each year is a little larger than the year before — because the balance it's applied to keeps growing. After 30 years: \$1,000 × (1.08)^30 = **\$10,063**.
+With compound interest at 8%, your interest each year is a little larger than the year before, because the balance it's applied to keeps growing. After 30 years: \$1,000 × (1.08)^30 = **\$10,063**.
 
-That is a difference of \$6,663 — nearly 3× more wealth — simply from the compounding mechanism, not from any difference in the stated rate.
+That is a difference of \$6,663, nearly 3× more wealth, simply from the compounding mechanism, not from any difference in the stated rate.
 
 ![Compounding vs simple interest: $1,000 at 8% over 30 years](/imgs/blogs/time-value-of-money-engine-every-valuation-model-2.png)
 
-The figure above makes this vivid. The simple interest line grows linearly — a straight diagonal. The compound interest line curves exponentially upward — slowly at first, then accelerating dramatically in the later years. This is the famous "hockey stick" shape that people associate with wealth accumulation, and it comes entirely from the mathematical property of (1+r)^n: exponential growth.
+The figure above makes this vivid. The simple interest line grows linearly: a straight diagonal. The compound interest line curves exponentially upward: slowly at first, then accelerating dramatically in the later years. This is the famous "hockey stick" shape that people associate with wealth accumulation, and it comes entirely from the mathematical property of (1+r)^n: exponential growth.
 
-The implication is profound: time matters enormously. An investor who starts at age 25 with the same savings rate as one who starts at age 35 ends up with a dramatically larger nest egg at retirement — not because they worked harder, but because their money had more years to compound.
+The implication is profound: time matters enormously. An investor who starts at age 25 with the same savings rate as one who starts at age 35 ends up with a dramatically larger nest egg at retirement, not because they worked harder, but because their money had more years to compound.
 
 ### The Rule of 72
 
@@ -128,7 +128,7 @@ This is an approximation (the exact answer uses logarithms), but it is accurate 
 
 ### Compounding frequency: more often is more powerful
 
-So far we've assumed annual compounding — interest is calculated and added to the balance once per year. In reality, most financial instruments compound more frequently: savings accounts may compound monthly, credit cards daily, continuous-compounding models exist in derivatives pricing.
+So far we've assumed annual compounding: interest is calculated and added to the balance once per year. In reality, most financial instruments compound more frequently: savings accounts may compound monthly, credit cards daily, continuous-compounding models exist in derivatives pricing.
 
 How does compounding frequency affect the outcome? Suppose you deposit \$1,000 at a stated annual rate of 12%. Let's compare different compounding frequencies over one year:
 
@@ -141,11 +141,11 @@ How does compounding frequency affect the outcome? Suppose you deposit \$1,000 a
 | Daily (365×/yr) | 12.747% | \$1,127.47 |
 | Continuous | 12.750% | \$1,127.50 |
 
-With annual compounding, the 12% stated rate *is* the effective rate. With monthly compounding, the stated 12% translates to an effective annual rate (EAR) of 12.683% — because each month's interest is added to the balance and earns its own interest for the remaining months.
+With annual compounding, the 12% stated rate *is* the effective rate. With monthly compounding, the stated 12% translates to an effective annual rate (EAR) of 12.683%, because each month's interest is added to the balance and earns its own interest for the remaining months.
 
 The general formula: **EAR = (1 + r/m)^m − 1**, where `r` is the stated annual rate and `m` is the number of compounding periods per year.
 
-For continuous compounding — the mathematical limit as m → ∞ — the formula becomes: **FV = PV × e^(r×t)**, where `e` ≈ 2.71828 is Euler's number. This formula is used extensively in derivatives pricing (the Black-Scholes model for options uses continuous compounding throughout).
+For continuous compounding, the mathematical limit as m → ∞, the formula becomes: **FV = PV × e^(r×t)**, where `e` ≈ 2.71828 is Euler's number. This formula is used extensively in derivatives pricing (the Black-Scholes model for options uses continuous compounding throughout).
 
 **Why this matters in practice:** When comparing financial products, always convert to the *effective annual rate* to make a true apples-to-apples comparison. A mortgage advertised at 7% monthly compounding has a higher true cost than one at 7% semi-annual compounding. In Vietnam, bank deposit advertisements frequently quote annual rates, but the compounding frequency varies; always read the fine print to understand the true return.
 
@@ -161,7 +161,7 @@ If you paid \$600 for an investment that returns \$1,000 in 8 years, what is you
 r = (FV/PV)^(1/n) − 1 = (1000/600)^(1/8) − 1 = (1.667)^0.125 − 1 = 1.0659 − 1 = 6.59%
 ```
 
-Your annualized return is **6.59%**. This calculation is used constantly in practice — for computing the historical annual return of a stock, the yield-to-maturity of a zero-coupon bond, the IRR of a real estate investment.
+Your annualized return is **6.59%**. This calculation is used constantly in practice: for computing the historical annual return of a stock, the yield-to-maturity of a zero-coupon bond, the IRR of a real estate investment.
 
 **Solving for n** (how long until you reach a target):
 
@@ -171,7 +171,7 @@ If you invest \$10,000 at 7% per year, how many years until you have \$25,000?
 n = ln(FV/PV) / ln(1+r) = ln(25000/10000) / ln(1.07) = ln(2.5) / ln(1.07) = 0.916 / 0.0677 = 13.5 years
 ```
 
-These inverse calculations — solving for r or n rather than FV or PV — are just as important as the forward calculation. They answer the questions investors actually ask: "How much is this investment really earning me?" and "How long until I reach my savings goal?"
+These inverse calculations, solving for r or n rather than FV or PV, are just as important as the forward calculation. They answer the questions investors actually ask: "How much is this investment really earning me?" and "How long until I reach my savings goal?"
 
 ### Growth at different rates
 
@@ -179,7 +179,7 @@ The impact of the discount rate compounds (literally) over time. The difference 
 
 ![Compound growth at 4%, 8%, 12% over 30 years](/imgs/blogs/time-value-of-money-engine-every-valuation-model-3.png)
 
-At 4%, \$1,000 becomes \$3,243 in 30 years. At 8%, it becomes \$10,063. At 12%, it becomes \$29,960. The 4% difference between the 8% and 12% scenarios produces nearly \$20,000 more wealth — almost a 3× gap — not from any magic, but simply because of exponential growth over a long enough time horizon. This is why small differences in return assumptions matter enormously when valuing long-lived assets.
+At 4%, \$1,000 becomes \$3,243 in 30 years. At 8%, it becomes \$10,063. At 12%, it becomes \$29,960. The 4% difference between the 8% and 12% scenarios produces nearly \$20,000 more wealth, almost a 3× gap, not from any magic, but simply because of exponential growth over a long enough time horizon. This is why small differences in return assumptions matter enormously when valuing long-lived assets.
 
 #### Worked example: the lottery revisited
 
@@ -196,7 +196,7 @@ This is an annuity (a stream of equal payments), and we'll derive the exact form
 
 Each payment is worth less and less in today's dollars because you have to wait longer to receive it. Sum all 20 discounted payments and you get \$573,496.
 
-**Option A is worth \$1,000,000 and Option B is worth \$573,496. Option A is 74% more valuable.** The \$426,504 difference is the time value: money delayed is money destroyed — partially, measurably, precisely.
+**Option A is worth \$1,000,000 and Option B is worth \$573,496. Option A is 74% more valuable.** The \$426,504 difference is the time value: money delayed is money destroyed, partially, measurably, precisely.
 
 ---
 
@@ -208,18 +208,18 @@ This operation is called **discounting**, and it is the arithmetic inverse of co
 
 $$PV = \frac{CF}{(1+r)^n}$$
 
-Where `CF` is the future cash flow expected at time `n`. This is the most important formula in all of finance. Every DCF model, every bond price, every mortgage payment, every option price — all of them reduce to computing this fraction many times and summing the results.
+Where `CF` is the future cash flow expected at time `n`. This is the most important formula in all of finance. Every DCF model, every bond price, every mortgage payment, every option price: all of them reduce to computing this fraction many times and summing the results.
 
 ![PV formula decomposition: every component labeled](/imgs/blogs/time-value-of-money-engine-every-valuation-model-4.png)
 
 Let's break down each component using the diagram above:
 
 - **CF** (Cash Flow): the amount of money you expect to receive at time `n`. This could be a coupon payment on a bond, a dividend from a stock, or the terminal value of a business in year 10 of a DCF.
-- **r** (Discount Rate): your required annual return — the opportunity cost of capital adjusted for risk. This is the "price of waiting" you demand.
+- **r** (Discount Rate): your required annual return, the opportunity cost of capital adjusted for risk. This is the "price of waiting" you demand.
 - **n** (Periods): how many years (or months, or quarters) into the future the cash flow arrives.
 - **PV** (Present Value): what that future cash flow is worth *right now*, in today's money.
 
-The denominator (1+r)^n is called the **discount factor**. At 10% for 5 years, the discount factor is (1.10)^5 = 1.611 — meaning you divide the future cash flow by 1.611 to get its present value.
+The denominator (1+r)^n is called the **discount factor**. At 10% for 5 years, the discount factor is (1.10)^5 = 1.611: meaning you divide the future cash flow by 1.611 to get its present value.
 
 #### Worked example: a future payment
 
@@ -227,9 +227,9 @@ Suppose you're promised a \$10,000 payment five years from now. You can earn 8% 
 
 PV = \$10,000 / (1.08)^5 = \$10,000 / 1.469 = **\$6,806**
 
-Intuition: if you invested \$6,806 today at 8% per year for 5 years, you'd have exactly \$10,000 at the end. So the promise of \$10,000 in five years, to an investor who can earn 8%, is exactly equivalent to having \$6,806 in hand today. The two are interchangeable — *at an 8% discount rate*.
+Intuition: if you invested \$6,806 today at 8% per year for 5 years, you'd have exactly \$10,000 at the end. So the promise of \$10,000 in five years, to an investor who can earn 8%, is exactly equivalent to having \$6,806 in hand today. The two are interchangeable: *at an 8% discount rate*.
 
-If your required return were higher — say, 12% — the present value drops further: PV = \$10,000 / (1.12)^5 = \$5,674. The same future payment is worth *less* to an investor who demands a higher return. This is why higher-risk assets trade at lower prices.
+If your required return were higher (say, 12%) the present value drops further: PV = \$10,000 / (1.12)^5 = \$5,674. The same future payment is worth *less* to an investor who demands a higher return. This is why higher-risk assets trade at lower prices.
 
 ### The discount rate controls everything
 
@@ -247,7 +247,7 @@ The bar chart above shows the present value of a single \$1,000 payment received
 | 10% | \$386 |
 | 15% | \$247 |
 
-The difference between a 3% and a 15% discount rate causes the same \$1,000 cash flow to be valued at \$744 vs. \$247 — a 3× gap. This is why arguments about "what discount rate to use" are not academic — they determine whether an asset looks cheap or expensive by hundreds of percent.
+The difference between a 3% and a 15% discount rate causes the same \$1,000 cash flow to be valued at \$744 vs. \$247: a 3× gap. This is why arguments about "what discount rate to use" are not academic: they determine whether an asset looks cheap or expensive by hundreds of percent.
 
 ---
 
@@ -255,7 +255,7 @@ The difference between a 3% and a 15% discount rate causes the same \$1,000 cash
 
 Most real-world financial instruments don't produce a single lump-sum payment. They produce a *series* of payments over time: bond coupon payments every six months, monthly mortgage payments, annual dividend payments, lease payments. When those payments are equal in size and occur at regular intervals, the stream is called an **annuity**.
 
-We could compute the present value of an annuity by discounting each payment individually and summing them — that's exactly what the annuity timeline below shows. But mathematicians long ago figured out a shortcut that turns those N individual calculations into a single formula.
+We could compute the present value of an annuity by discounting each payment individually and summing them, that's exactly what the annuity timeline below shows. But mathematicians long ago figured out a shortcut that turns those N individual calculations into a single formula.
 
 ![Annuity timeline: 5 payments of $1,000 each discounted back to today](/imgs/blogs/time-value-of-money-engine-every-valuation-model-5.png)
 
@@ -278,7 +278,7 @@ PV = \$1,000 × 3.791 = **\$3,791**
 
 ### Annuity due vs. ordinary annuity
 
-There's a subtle timing distinction worth knowing. An **ordinary annuity** (also called "annuity in arrears") has payments at the *end* of each period — this is the standard we've been using. An **annuity due** has payments at the *beginning* of each period — like rent, which is typically paid at the start of the month.
+There's a subtle timing distinction worth knowing. An **ordinary annuity** (also called "annuity in arrears") has payments at the *end* of each period: this is the standard we've been using. An **annuity due** has payments at the *beginning* of each period, like rent, which is typically paid at the start of the month.
 
 For an annuity due, all payments arrive one period earlier, so each one is discounted one fewer time. The present value of an annuity due is simply the ordinary annuity PV multiplied by (1+r):
 
@@ -288,7 +288,7 @@ For our example: PV_due = \$3,791 × 1.10 = \$4,170. Receiving the same five \$1
 
 #### Worked example: mortgage payment calculation
 
-Let's compute the monthly mortgage payment on a \$300,000 30-year fixed-rate mortgage at 7% per year. Mortgages are ordinary annuities with monthly payments — so we need to adjust the inputs.
+Let's compute the monthly mortgage payment on a \$300,000 30-year fixed-rate mortgage at 7% per year. Mortgages are ordinary annuities with monthly payments, so we need to adjust the inputs.
 
 - Monthly rate `r` = 7% / 12 = 0.5833% = 0.005833
 - Number of periods `n` = 30 × 12 = 360 months
@@ -308,7 +308,7 @@ C = $300,000 × [0.005833 / (1 − (1.005833)^−360)]
   = $1,996
 ```
 
-The monthly payment is **\$1,996**. Over 360 months, you pay 360 × \$1,996 = \$718,560 in total — more than twice the original loan. The \$418,560 excess is entirely interest: the price of borrowing \$300,000 for 30 years. This is time value of money made visible in your bank statement every month.
+The monthly payment is **\$1,996**. Over 360 months, you pay 360 × \$1,996 = \$718,560 in total: more than twice the original loan. The \$418,560 excess is entirely interest: the price of borrowing \$300,000 for 30 years. This is time value of money made visible in your bank statement every month.
 
 ---
 
@@ -336,9 +336,9 @@ A company pays an annual dividend of \$4 per share and you expect that dividend 
 
 $$P = \frac{\$4}{0.09 - 0.03} = \frac{\$4}{0.06} = \$66.67$$
 
-The fair value of this share is **\$66.67** — and that is literally the entire *Dividend Discount Model* in one step. The entire DCF framework for dividend-paying stocks traces back to this perpetuity formula. If the share trades at \$50, it looks cheap (dividend yield exceeds required return); if it trades at \$90, it looks expensive.
+The fair value of this share is **\$66.67**, and that is literally the entire *Dividend Discount Model* in one step. The entire DCF framework for dividend-paying stocks traces back to this perpetuity formula. If the share trades at \$50, it looks cheap (dividend yield exceeds required return); if it trades at \$90, it looks expensive.
 
-Notice how sensitive the price is to `g`. If growth expectations rise from 3% to 4%, the price becomes \$4 / (0.09 − 0.04) = \$4 / 0.05 = \$80 — a 20% increase in price from a 1% increase in growth expectations. This is why stocks are so sensitive to small changes in long-run growth forecasts.
+Notice how sensitive the price is to `g`. If growth expectations rise from 3% to 4%, the price becomes \$4 / (0.09 − 0.04) = \$4 / 0.05 = \$80: a 20% increase in price from a 1% increase in growth expectations. This is why stocks are so sensitive to small changes in long-run growth forecasts.
 
 ---
 
@@ -346,7 +346,7 @@ Notice how sensitive the price is to `g`. If growth expectations rise from 3% to
 
 We now have all the tools needed for the most important concept in corporate finance: **Net Present Value (NPV)**.
 
-NPV is the sum of the present values of *all* cash flows associated with an investment — inflows (positive) and outflows (negative). It answers the question: "If I make this investment, how much value am I creating or destroying, measured in today's dollars?"
+NPV is the sum of the present values of *all* cash flows associated with an investment: inflows (positive) and outflows (negative). It answers the question: "If I make this investment, how much value am I creating or destroying, measured in today's dollars?"
 
 $$NPV = \sum_{t=0}^{n} \frac{CF_t}{(1+r)^t}$$
 
@@ -355,7 +355,7 @@ Where `CF_t` is the cash flow at time `t` (negative for the initial outlay, posi
 The **NPV decision rule** is:
 - **NPV > 0**: Accept. The investment creates value. It earns more than your required return `r`.
 - **NPV < 0**: Reject. The investment destroys value. It earns less than your required return `r`.
-- **NPV = 0**: Indifferent. The investment earns exactly `r` — your required return, no more, no less.
+- **NPV = 0**: Indifferent. The investment earns exactly `r`: your required return, no more, no less.
 
 ![NPV decision pipeline: from cash flows to accept or reject](/imgs/blogs/time-value-of-money-engine-every-valuation-model-7.png)
 
@@ -363,20 +363,20 @@ The **NPV decision rule** is:
 
 You're evaluating a project that requires an upfront investment of \$1,000 and generates \$300 in year 1, \$400 in year 2, and \$500 in year 3. Your required return is 10%.
 
-Step 1 — List cash flows: −\$1,000 (now), +\$300 (yr 1), +\$400 (yr 2), +\$500 (yr 3).
+Step 1 (List cash flows): −\$1,000 (now), +\$300 (yr 1), +\$400 (yr 2), +\$500 (yr 3).
 
-Step 2 — Discount each:
+Step 2 (Discount each):
 
 - t=0: −\$1,000 / (1.10)^0 = −\$1,000.00
 - t=1: +\$300 / (1.10)^1 = +\$272.73
 - t=2: +\$400 / (1.10)^2 = +\$330.58
 - t=3: +\$500 / (1.10)^3 = +\$375.66
 
-Step 3 — Sum: −\$1,000 + \$272.73 + \$330.58 + \$375.66 = **−\$20.97**
+Step 3 (Sum): −\$1,000 + \$272.73 + \$330.58 + \$375.66 = **−\$20.97**
 
 NPV is slightly negative. **Reject this project.** Even though total undiscounted cash inflows (\$1,200) exceed the outlay (\$1,000), once we account for the time value of money and your 10% required return, the project destroys value. You'd be better off investing that \$1,000 elsewhere at 10%.
 
-If you lower the discount rate to 8%, the same project has NPV = +\$30 and you accept it. The critical rate where NPV exactly equals zero is called the **Internal Rate of Return (IRR)** — here approximately 9.7% — and it is the project's "true" return, measured in TVM-adjusted terms.
+If you lower the discount rate to 8%, the same project has NPV = +\$30 and you accept it. The critical rate where NPV exactly equals zero is called the **Internal Rate of Return (IRR)** (here approximately 9.7%) and it is the project's "true" return, measured in TVM-adjusted terms.
 
 ### The Internal Rate of Return (IRR): NPV's cousin
 
@@ -384,13 +384,13 @@ NPV requires you to choose a discount rate upfront. The **Internal Rate of Retur
 
 For the project above (−\$1,000 initial outlay, \$300/\$400/\$500 inflows), we showed NPV = −\$20.97 at 10%. If we lower the discount rate slightly to ~9.7%, NPV would be exactly zero. That 9.7% is the IRR.
 
-The IRR decision rule: accept if IRR > your required return (cost of capital); reject if IRR < required return. This gives the same answer as NPV in most cases, but IRR has pitfalls — notably, projects with multiple sign changes (cash outflows in the middle of a project) can have multiple IRRs, which are mathematically meaningless. NPV is the theoretically superior tool; IRR is the practically popular one because it produces an intuitive percentage that non-finance audiences can grasp.
+The IRR decision rule: accept if IRR > your required return (cost of capital); reject if IRR < required return. This gives the same answer as NPV in most cases, but IRR has pitfalls: notably, projects with multiple sign changes (cash outflows in the middle of a project) can have multiple IRRs, which are mathematically meaningless. NPV is the theoretically superior tool; IRR is the practically popular one because it produces an intuitive percentage that non-finance audiences can grasp.
 
 **Worked example: bond yield-to-maturity as an IRR**
 
 When you buy the Vietnamese government bond we priced earlier at \$959, you receive five years of \$60 coupons plus \$1,000 at maturity. What is your actual return if you hold to maturity?
 
-The answer is the IRR of these cash flows: −\$959 today, +\$60 in years 1–4, +\$1,060 in year 5. Solving numerically gives an IRR of exactly **7%** — confirming that buying a bond priced at a discount to face value earns you more than the coupon rate. This "IRR of a bond" is what the market calls the **yield to maturity (YTM)** — it is the single discount rate that equates the bond's price to the present value of its cash flows. It is IRR applied to fixed income.
+The answer is the IRR of these cash flows: −\$959 today, +\$60 in years 1–4, +\$1,060 in year 5. Solving numerically gives an IRR of exactly **7%**: confirming that buying a bond priced at a discount to face value earns you more than the coupon rate. This "IRR of a bond" is what the market calls the **yield to maturity (YTM)**: it is the single discount rate that equates the bond's price to the present value of its cash flows. It is IRR applied to fixed income.
 
 ### NPV vs. "just adding up the cash flows"
 
@@ -412,7 +412,7 @@ Project A is better. Receiving \$600 in one year beats receiving \$650 in three 
 
 ## How discount rate choice changes everything
 
-We touched on this earlier, but it deserves deeper treatment because it's where so many valuations go wrong — or where sophisticated analysts look to stress-test a thesis.
+We touched on this earlier, but it deserves deeper treatment because it's where so many valuations go wrong, or where sophisticated analysts look to stress-test a thesis.
 
 The present value formula inverts the compounding exponent: PV = CF / (1+r)^n. Because of the exponential, small changes in `r` have large effects on `n`-year-out cash flows, and the effect amplifies as `n` grows.
 
@@ -426,7 +426,7 @@ Let's quantify this. Consider a \$100 cash flow at different time horizons, disc
 | 20 years | \$21.45 | \$14.86 | −\$6.59 (30.7%) |
 | 30 years | \$9.94 | \$5.73 | −\$4.21 (42.3%) |
 
-A 2-percentage-point increase in the discount rate cuts the PV of a 30-year cash flow by 42%. This is why long-duration assets — growth stocks, long-dated bonds, infrastructure projects with 40-year cash flows — are so sensitive to changes in interest rates or risk premiums. When central banks raise rates, they're effectively raising the discount rate for the entire economy, which mechanically reduces the present value of all future cash flows.
+A 2-percentage-point increase in the discount rate cuts the PV of a 30-year cash flow by 42%. This is why long-duration assets (growth stocks, long-dated bonds, infrastructure projects with 40-year cash flows) are so sensitive to changes in interest rates or risk premiums. When central banks raise rates, they're effectively raising the discount rate for the entire economy, which mechanically reduces the present value of all future cash flows.
 
 ### The risk-free rate as the foundation
 
@@ -438,7 +438,7 @@ r = risk-free rate + equity risk premium + size/industry premium + specific risk
 
 For U.S. stocks, a common estimate is: 4.5% (risk-free) + 4.5% (equity risk premium) = 9% baseline. Riskier companies add further premiums; safer companies (utilities, consumer staples) might use a lower premium.
 
-The choice of equity risk premium is among the most contested topics in finance. Estimates range from 3% to 7% depending on methodology and time period studied. A 2-percentage-point change in the ERP would change the fair value of the S&P 500 index by roughly 15–25% — which is why it matters whether you're using a 4% or 6% assumption.
+The choice of equity risk premium is among the most contested topics in finance. Estimates range from 3% to 7% depending on methodology and time period studied. A 2-percentage-point change in the ERP would change the fair value of the S&P 500 index by roughly 15–25%, which is why it matters whether you're using a 4% or 6% assumption.
 
 ### Nominal vs. real discount rates: a crucial distinction
 
@@ -449,19 +449,19 @@ The discount rate you use in TVM can be expressed in two ways:
 
 The **Fisher equation** links them: (1 + nominal rate) = (1 + real rate) × (1 + inflation rate). For small rates, this approximates to: real rate ≈ nominal rate − inflation.
 
-The rule is: **your cash flow forecasts and your discount rate must both be in the same terms.** If you forecast cash flows in *nominal* dollars (growing with inflation as well as real growth), discount them at the *nominal* rate. If you project *real* cash flows (constant purchasing power, no inflation in the numbers), discount at the *real* rate. Either approach gives the same answer — but mixing them produces a number that is wrong by exactly the inflation assumption.
+The rule is: **your cash flow forecasts and your discount rate must both be in the same terms.** If you forecast cash flows in *nominal* dollars (growing with inflation as well as real growth), discount them at the *nominal* rate. If you project *real* cash flows (constant purchasing power, no inflation in the numbers), discount at the *real* rate. Either approach gives the same answer, but mixing them produces a number that is wrong by exactly the inflation assumption.
 
-In emerging-market contexts like Vietnam, where inflation has historically been volatile, this distinction is especially important. A Vietnamese company projecting revenues in nominal VND — growing partly from real business growth and partly from inflation — should be discounted at a nominal VND-denominated rate. Applying a USD-based discount rate to VND cash flows without adjusting for the inflation and currency differential is a common and costly error.
+In emerging-market contexts like Vietnam, where inflation has historically been volatile, this distinction is especially important. A Vietnamese company projecting revenues in nominal VND, growing partly from real business growth and partly from inflation, should be discounted at a nominal VND-denominated rate. Applying a USD-based discount rate to VND cash flows without adjusting for the inflation and currency differential is a common and costly error.
 
 ### Duration: the TVM sensitivity measure
 
 Investors and analysts need a single number that captures how sensitive a security's price is to changes in the discount rate. That number is called **duration** (specifically, Macaulay duration for bonds).
 
-Duration is the *weighted average time* until you receive your cash flows, where each cash flow's weight is its present value as a fraction of the total price. A bond that pays all its cash flows tomorrow has duration near zero (rate changes barely affect its price). A 30-year zero-coupon bond — which pays nothing until maturity — has duration of exactly 30 years and enormous rate sensitivity.
+Duration is the *weighted average time* until you receive your cash flows, where each cash flow's weight is its present value as a fraction of the total price. A bond that pays all its cash flows tomorrow has duration near zero (rate changes barely affect its price). A 30-year zero-coupon bond (which pays nothing until maturity) has duration of exactly 30 years and enormous rate sensitivity.
 
-The practical rule: for a 1-percentage-point increase in the discount rate, a bond's price falls by approximately `duration × 1%`. A 10-year duration bond loses about 10% of its value for every 1% rise in rates. This is why long-duration bonds are so much riskier when rates are rising — they experience the biggest price impact.
+The practical rule: for a 1-percentage-point increase in the discount rate, a bond's price falls by approximately `duration × 1%`. A 10-year duration bond loses about 10% of its value for every 1% rise in rates. This is why long-duration bonds are so much riskier when rates are rising: they experience the biggest price impact.
 
-Growth stocks are often described as "long-duration" assets. Their earnings are expected far in the future — years 5, 10, 20 and beyond. Like a long-term bond, their prices are extremely sensitive to the discount rate assumption. This is mechanically why growth stocks sold off sharply in 2022 when the U.S. Federal Reserve raised rates aggressively: higher rates meant higher discount rates, which slashed the present values of those distant future earnings.
+Growth stocks are often described as "long-duration" assets. Their earnings are expected far in the future: years 5, 10, 20 and beyond. Like a long-term bond, their prices are extremely sensitive to the discount rate assumption. This is mechanically why growth stocks sold off sharply in 2022 when the U.S. Federal Reserve raised rates aggressively: higher rates meant higher discount rates, which slashed the present values of those distant future earnings.
 
 ---
 
@@ -469,7 +469,7 @@ Growth stocks are often described as "long-duration" assets. Their earnings are 
 
 ### Misconception 1: "Compound interest applies only to savings accounts"
 
-Compounding is universal. Any time you earn returns on previous returns — dividends reinvested in more shares, profits reinvested into a business, a hedge fund's gains used to generate next year's profits — compounding is occurring. The formula (1+r)^n applies to any process where returns are proportional to the base. Even *losses* compound: a 50% loss requires a 100% gain to recover, not a 50% gain, because the base has shrunk.
+Compounding is universal. Any time you earn returns on previous returns (dividends reinvested in more shares, profits reinvested into a business, a hedge fund's gains used to generate next year's profits) compounding is occurring. The formula (1+r)^n applies to any process where returns are proportional to the base. Even *losses* compound: a 50% loss requires a 100% gain to recover, not a 50% gain, because the base has shrunk.
 
 ### Misconception 2: "If the total cash flows add up to more than the investment, it's a good deal"
 
@@ -481,11 +481,11 @@ This is half-right and half-wrong. If you use *nominal* cash flows (flows that i
 
 ### Misconception 4: "A higher discount rate always means a lower valuation"
 
-For most standard cash flows, yes. But some financial instruments — like floating-rate bonds, where coupons rise when rates rise — are partially protected from rising discount rates. And some complex derivative structures have nonlinear sensitivities. For a standard DCF or bond price, higher r = lower price. But don't overgeneralize.
+For most standard cash flows, yes. But some financial instruments (like floating-rate bonds, where coupons rise when rates rise) are partially protected from rising discount rates. And some complex derivative structures have nonlinear sensitivities. For a standard DCF or bond price, higher r = lower price. But don't overgeneralize.
 
 ### Misconception 5: "TVM math requires a spreadsheet"
 
-The three key formulas — FV = PV × (1+r)^n, PV = CF / (1+r)^n, and the annuity formula — can all be estimated mentally using the Rule of 72 and compound-factor tables. For a working professional, being able to estimate that "\$1M in 20 years at 7% is about \$250K today" (answer: \$258K — within 3%) is more valuable than perfect calculator dependence.
+The three key formulas (FV = PV × (1+r)^n, PV = CF / (1+r)^n, and the annuity formula) can all be estimated mentally using the Rule of 72 and compound-factor tables. For a working professional, being able to estimate that "\$1M in 20 years at 7% is about \$250K today" (answer: \$258K, within 3%) is more valuable than perfect calculator dependence.
 
 ### Misconception 6: "Higher growth always means higher stock prices"
 
@@ -497,7 +497,7 @@ The Gordon Growth Model shows why this is incomplete. P = C/(r − g). If growth
 
 ### Mortgage math: the cost of time
 
-Every mortgage is an annuity — a series of equal monthly payments that repay both principal and interest over a fixed term. The lender discounts those future payments at the mortgage rate to arrive at the loan amount they're willing to extend.
+Every mortgage is an annuity: a series of equal monthly payments that repay both principal and interest over a fixed term. The lender discounts those future payments at the mortgage rate to arrive at the loan amount they're willing to extend.
 
 The monthly payment formula we used earlier tells borrowers exactly what each 1% increase in mortgage rate costs them. On a \$300,000, 30-year mortgage:
 
@@ -505,7 +505,7 @@ The monthly payment formula we used earlier tells borrowers exactly what each 1%
 - At 7%: monthly payment = **\$1,996** / total paid = \$718,560
 - At 9%: monthly payment = **\$2,413** / total paid = \$868,742
 
-The difference between a 5% and 9% rate: \$288,975 more in total interest payments — almost the entire original loan amount again. This is why rising interest rates devastate affordability in real estate markets and why central bank rate decisions have such outsized effects on housing.
+The difference between a 5% and 9% rate: \$288,975 more in total interest payments, almost the entire original loan amount again. This is why rising interest rates devastate affordability in real estate markets and why central bank rate decisions have such outsized effects on housing.
 
 ### Vietnamese government bond pricing
 
@@ -525,7 +525,7 @@ The bond pays five annual coupons of \$60 plus the \$1,000 face value at maturit
 | 5 | \$1,060 | 1/(1.07)^5 = 0.7130 | \$755.78 |
 | **Total** | | | **\$959.01** |
 
-The bond trades at **\$959** — a *discount* to its \$1,000 face value — because the coupon rate (6%) is lower than the market yield (7%). This "bond prices fall when yields rise" relationship is one of the most fundamental in fixed-income markets, and it is a direct consequence of PV mechanics.
+The bond trades at **\$959** (a *discount* to its \$1,000 face value) because the coupon rate (6%) is lower than the market yield (7%). This "bond prices fall when yields rise" relationship is one of the most fundamental in fixed-income markets, and it is a direct consequence of PV mechanics.
 
 You can also verify this with the annuity formula: PV of coupons = \$60 × [1 − (1.07)^{-5}] / 0.07 = \$60 × 4.100 = \$246.00. PV of principal = \$1,000 / (1.07)^5 = \$712.99. Total = \$246.00 + \$712.99 = **\$958.99** (matches, within rounding).
 
@@ -535,7 +535,7 @@ Time value of money is not abstract when you live in a country with meaningful i
 
 ![Vietnam CPI inflation vs bank deposit rate 2015-2024](/imgs/blogs/time-value-of-money-engine-every-valuation-model-8.png)
 
-The green line in the chart above is the **real deposit rate** — what you actually earn above inflation. Notice that the real rate has generally been positive (meaning you do grow your purchasing power by saving in Vietnamese banks), but it compressed significantly in 2022 when inflation rose sharply while deposit rates didn't keep pace immediately.
+The green line in the chart above is the **real deposit rate**: what you actually earn above inflation. Notice that the real rate has generally been positive (meaning you do grow your purchasing power by saving in Vietnamese banks), but it compressed significantly in 2022 when inflation rose sharply while deposit rates didn't keep pace immediately.
 
 This chart illustrates a critical TVM principle: the **nominal interest rate** (what the bank advertises) and the **real interest rate** (what you actually earn in purchasing-power terms) are different. The Fisher equation formalizes this:
 
@@ -543,9 +543,9 @@ This chart illustrates a critical TVM principle: the **nominal interest rate** (
 real rate ≈ nominal rate − inflation rate
 ```
 
-In 2022, with inflation at ~3.2% and deposit rates at ~8%, the real return was approximately 4.8%. In 2021, with inflation at just 1.8% and deposit rates at ~5.5%, the real return was similarly ~3.7%. For a Vietnamese investor evaluating whether to put money in a savings account versus buying corporate bonds versus investing in stocks, the real discount rate — not the nominal one — is what determines whether you're creating or destroying purchasing power.
+In 2022, with inflation at ~3.2% and deposit rates at ~8%, the real return was approximately 4.8%. In 2021, with inflation at just 1.8% and deposit rates at ~5.5%, the real return was similarly ~3.7%. For a Vietnamese investor evaluating whether to put money in a savings account versus buying corporate bonds versus investing in stocks, the real discount rate, not the nominal one, is what determines whether you're creating or destroying purchasing power.
 
-For Vietnamese corporate bonds, which carry higher risk than government bonds, appropriate discount rates are typically 10–13% in nominal terms — implying real returns of 6–9% when inflation is near 3–4%. Using TVM, we can compute whether those bonds are fairly priced, expensive, or cheap based on the credit quality of the issuer.
+For Vietnamese corporate bonds, which carry higher risk than government bonds, appropriate discount rates are typically 10–13% in nominal terms: implying real returns of 6–9% when inflation is near 3–4%. Using TVM, we can compute whether those bonds are fairly priced, expensive, or cheap based on the credit quality of the issuer.
 
 ### Lease and installment pricing: TVM in everyday transactions
 
@@ -555,7 +555,7 @@ TVM is embedded in virtually every financial contract you sign, whether or not i
 
 PV = \$833 × [1 − (1.005)^{-36}] / 0.005 = \$833 × 32.87 = **\$27,381**
 
-The dealer is only receiving \$27,381 in present-value terms, even though you pay \$30,000 in total. So either the dealer has priced the car higher than they otherwise would (\$30,000 vs. a cash price of, say, \$27,000), or the manufacturer is subsidizing the interest cost to move inventory. "0% financing" is never truly free — the time value has to come from somewhere.
+The dealer is only receiving \$27,381 in present-value terms, even though you pay \$30,000 in total. So either the dealer has priced the car higher than they otherwise would (\$30,000 vs. a cash price of, say, \$27,000), or the manufacturer is subsidizing the interest cost to move inventory. "0% financing" is never truly free: the time value has to come from somewhere.
 
 **Rental vs. ownership decisions:** A property's value equals the present value of all the future rents it could generate. If a property generates \$2,000/month net rent indefinitely and the appropriate capitalization rate (a real estate discount rate) is 5%, its value is approximately \$2,000 × 12 / 0.05 = **\$480,000**. This "income approach" to real estate valuation is a direct application of the perpetuity formula.
 
@@ -569,11 +569,11 @@ C = \$1,000,000 / 94.46 = **\$10,586 per year**, or about \$882 per month. If yo
 
 \$1,000,000 = C × [(1.07)^20 − 1] / 0.07 = C × 40.99
 
-C = \$1,000,000 / 40.99 = **\$24,393 per year** — more than double the savings rate, simply because of 10 fewer years of compounding. Starting early is worth \$13,807 per year in required savings — an amount that compounds further into an enormous lifetime cost of procrastination.
+C = \$1,000,000 / 40.99 = **\$24,393 per year**: more than double the savings rate, simply because of 10 fewer years of compounding. Starting early is worth \$13,807 per year in required savings: an amount that compounds further into an enormous lifetime cost of procrastination.
 
 ### DCF valuation in practice
 
-When a professional analyst builds a DCF model for a company — say, a Vietnamese real estate developer — they are doing nothing more (and nothing less) than:
+When a professional analyst builds a DCF model for a company (say, a Vietnamese real estate developer) they are doing nothing more (and nothing less) than:
 
 1. Forecasting the company's free cash flows for 5–10 years
 2. Estimating a terminal value using the growing perpetuity formula
@@ -581,15 +581,15 @@ When a professional analyst builds a DCF model for a company — say, a Vietname
 4. Summing all the PVs to get the "intrinsic value" of the firm
 5. Comparing that intrinsic value to the market price to decide whether to buy, sell, or hold
 
-Step 3 — choosing the discount rate — is where most of the subjectivity (and most of the disagreement among analysts) lives. Two analysts looking at the same company can arrive at valuations that differ by 50% or more, simply because one uses a 10% discount rate and the other uses a 13% rate. Everything else — the cash flow forecasts, the growth assumptions, the terminal multiple — can be identical.
+Step 3, choosing the discount rate, is where most of the subjectivity (and most of the disagreement among analysts) lives. Two analysts looking at the same company can arrive at valuations that differ by 50% or more, simply because one uses a 10% discount rate and the other uses a 13% rate. Everything else (the cash flow forecasts, the growth assumptions, the terminal multiple) can be identical.
 
 This is why Warren Buffett has said that he uses the U.S. 30-year Treasury yield as his discount rate (adjusted for confidence in the forecast). It sounds overly simple, but it reflects a deep insight: if you cannot reliably project cash flows 10 or 20 years out, adding "risk premiums" on top of a noisy forecast just adds noise on noise.
 
 ### The corporate bond market
 
-In Vietnam's growing corporate bond market, TVM pricing is applied (or misapplied) constantly. Before the 2022 corporate bond market tightening — which saw a number of high-profile defaults by real estate companies — many retail investors were buying five-year corporate bonds at coupons of 9–12% without adequately accounting for the credit risk embedded in those rates.
+In Vietnam's growing corporate bond market, TVM pricing is applied (or misapplied) constantly. Before the 2022 corporate bond market tightening (which saw a number of high-profile defaults by real estate companies) many retail investors were buying five-year corporate bonds at coupons of 9–12% without adequately accounting for the credit risk embedded in those rates.
 
-The TVM framework would ask: if a risk-free government bond yields 6% and a corporate bond yields 10%, the implied extra yield (the *credit spread*) is 400 basis points. That spread is the market's estimate of the default risk. For an investor to be fairly compensated, the expected loss from default, multiplied by its probability, must be at least equal to the 4% premium. If default probability is 2% per year and recovery in default is 40 cents on the dollar, the expected annual loss is 2% × 60% = 1.2% per year — less than the 4% spread, suggesting the bond looked attractive on a risk-adjusted basis. But if default probability was actually 5% per year (as some issuers turned out to warrant), the expected annual loss was 5% × 60% = 3%, and the 4% spread barely compensated for the risk.
+The TVM framework would ask: if a risk-free government bond yields 6% and a corporate bond yields 10%, the implied extra yield (the *credit spread*) is 400 basis points. That spread is the market's estimate of the default risk. For an investor to be fairly compensated, the expected loss from default, multiplied by its probability, must be at least equal to the 4% premium. If default probability is 2% per year and recovery in default is 40 cents on the dollar, the expected annual loss is 2% × 60% = 1.2% per year: less than the 4% spread, suggesting the bond looked attractive on a risk-adjusted basis. But if default probability was actually 5% per year (as some issuers turned out to warrant), the expected annual loss was 5% × 60% = 3%, and the 4% spread barely compensated for the risk.
 
 This is TVM and probability working together: the discount rate is not just an opportunity cost, it is also a compensation for the *risk of not receiving the promised cash flows at all*.
 
@@ -639,7 +639,7 @@ lottery_pv = annuity_pv(50000, 0.06, 20)
 print(f"Lottery annuity PV: ${lottery_pv:,.0f}")  # ~$573,496
 ```
 
-Running these confirms every example in this post, and extending them to more complex scenarios — irregular cash flows, varying growth rates, mid-year discounting conventions — is straightforward. The math never changes; only the inputs do.
+Running these confirms every example in this post, and extending them to more complex scenarios (irregular cash flows, varying growth rates, mid-year discounting conventions) is straightforward. The math never changes; only the inputs do.
 
 ---
 
@@ -647,21 +647,21 @@ Running these confirms every example in this post, and extending them to more co
 
 Time Value of Money is the foundation. The rest of the Asset Valuation series builds directly on it:
 
-- **[What Is Value? Philosophy, Frameworks, and Asset Pricing](/blog/trading/asset-valuation/what-is-value-philosophy-frameworks-asset-pricing)** — the first post in this series covers why assets have value at all and the different schools of thought (intrinsic value, relative value, market-clearing price)
-- **[Discounted Cash Flow: The Complete Guide](/blog/trading?subcategory=equity-research)** — takes the TVM framework from this post and applies it to a full company valuation, with terminal value, WACC, and sensitivity tables
-- **[Bond Pricing, Yield, and Duration: Complete Guide](/blog/trading/quantitative-finance/bond-pricing)** — dives deep into how TVM applies to fixed-income instruments, including duration (the sensitivity of price to yield) and convexity
-- **[The Yield Curve Explained](/blog/trading/quantitative-finance/yield-curve-modeling)** — the yield curve is a market-derived set of discount rates for different time horizons; understanding TVM is prerequisite to understanding why the yield curve matters
+- **[What Is Value? Philosophy, Frameworks, and Asset Pricing](/blog/trading/asset-valuation/what-is-value-philosophy-frameworks-asset-pricing)**: the first post in this series covers why assets have value at all and the different schools of thought (intrinsic value, relative value, market-clearing price)
+- **[Discounted Cash Flow: The Complete Guide](/blog/trading?subcategory=equity-research)**, takes the TVM framework from this post and applies it to a full company valuation, with terminal value, WACC, and sensitivity tables
+- **[Bond Pricing, Yield, and Duration: Complete Guide](/blog/trading/quantitative-finance/bond-pricing)**, dives deep into how TVM applies to fixed-income instruments, including duration (the sensitivity of price to yield) and convexity
+- **[The Yield Curve Explained](/blog/trading/quantitative-finance/yield-curve-modeling)**: the yield curve is a market-derived set of discount rates for different time horizons; understanding TVM is prerequisite to understanding why the yield curve matters
 
 For deeper quantitative treatment:
 
-- **Expected Value and Probability Distributions** (math-for-quants series) — when cash flows are uncertain, you need to discount *expected* cash flows, which requires understanding probability
-- **Interest Rates, Bonds, and Stocks** (macro-trading series) — how central bank policy transmits into discount rates and asset prices across the whole economy
+- **Expected Value and Probability Distributions** (math-for-quants series), when cash flows are uncertain, you need to discount *expected* cash flows, which requires understanding probability
+- **Interest Rates, Bonds, and Stocks** (macro-trading series): how central bank policy transmits into discount rates and asset prices across the whole economy
 
 ### The one rule that governs all of valuation
 
-Every valuation model you'll ever use — no matter how complex, no matter how many columns the spreadsheet has — is just this: list the expected cash flows, choose a discount rate that reflects the risk of receiving them, discount each back to today, and sum. The complexity in real models comes from *estimating* those cash flows and *justifying* that discount rate, not from the mathematics of the operation itself.
+Every valuation model you'll ever use (no matter how complex, no matter how many columns the spreadsheet has) is just this: list the expected cash flows, choose a discount rate that reflects the risk of receiving them, discount each back to today, and sum. The complexity in real models comes from *estimating* those cash flows and *justifying* that discount rate, not from the mathematics of the operation itself.
 
-TVM is the arithmetic engine. Learning it thoroughly — not just how to apply the formulas, but why the discount rate works the way it does and why timing matters so much — is the single highest-leverage thing a student of finance can do. Once it clicks, the entire landscape of financial instruments starts to look like variations on the same theme.
+TVM is the arithmetic engine. Learning it thoroughly (not just how to apply the formulas, but why the discount rate works the way it does and why timing matters so much) is the single highest-leverage thing a student of finance can do. Once it clicks, the entire landscape of financial instruments starts to look like variations on the same theme.
 
 The lottery problem at the top of this post has an exact answer. Now you know how to compute it.
 
@@ -684,6 +684,6 @@ Here is a compact reference table of every formula introduced in this post, with
 | **Gordon Growth Model** | C₁ / (r − g) | \$4 / (0.09 − 0.03) = \$66.67 |
 | **NPV** | Σ CF_t / (1+r)^t | −\$1,000 + PV(inflows) = ? |
 
-Every valuation tool in professional finance — the DCF model, bond pricing, mortgage amortization, option pricing models, real estate cap rates, dividend discount models — reduces to one or more rows of this table. Master these nine formulas and you have the mathematical foundation for the entire discipline.
+Every valuation tool in professional finance (the DCF model, bond pricing, mortgage amortization, option pricing models, real estate cap rates, dividend discount models) reduces to one or more rows of this table. Master these nine formulas and you have the mathematical foundation for the entire discipline.
 
-The journey from here leads naturally to two questions that this post deliberately deferred: (1) how do you forecast the cash flows `CF` that go into these formulas? and (2) how exactly do you derive the discount rate `r` for different types of investments? Both are rich topics with their own post-length treatments — see the [DCF guide](/blog/trading?subcategory=equity-research) for the former and [WACC](/blog/trading?subcategory=equity-research) for the latter. But the TVM mechanics you've built here are the prerequisite for both — and for every other quantitative tool in the valuation toolkit.
+The journey from here leads naturally to two questions that this post deliberately deferred: (1) how do you forecast the cash flows `CF` that go into these formulas? and (2) how exactly do you derive the discount rate `r` for different types of investments? Both are rich topics with their own post-length treatments: see the [DCF guide](/blog/trading?subcategory=equity-research) for the former and [WACC](/blog/trading?subcategory=equity-research) for the latter. But the TVM mechanics you've built here are the prerequisite for both, and for every other quantitative tool in the valuation toolkit.

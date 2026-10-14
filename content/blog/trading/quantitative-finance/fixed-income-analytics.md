@@ -51,7 +51,7 @@ A second mental shift: *analytics is an interactive workflow*. Traders and risk 
 
 A third shift: *historical analytics matters*. Daily reports compare today's metrics to yesterday's, last week's, last month's. The analytics service must store and query historical snapshots efficiently. A 3-year history of daily DV01 by 1000 sub-categories is a billion-cell time-series; the storage and query infrastructure is non-trivial.
 
-A fourth shift: *analytics drives compensation*. Trader bonuses key off P&L attribution; risk-committee escalations key off VaR breaches; capital allocations key off sector concentrations. The analytics outputs are not just informational — they directly affect dollars in the firm. Errors are not abstract; they show up in salaries and bonuses.
+A fourth shift: *analytics drives compensation*. Trader bonuses key off P&L attribution; risk-committee escalations key off VaR breaches; capital allocations key off sector concentrations. The analytics outputs are not just informational: they directly affect dollars in the firm. Errors are not abstract; they show up in salaries and bonuses.
 
 A senior fixed-income engineer treats the analytics layer with at least as much engineering investment as the pricing layer. In some firms the analytics team is larger than the pricing team because the surface area is larger.
 
@@ -122,7 +122,7 @@ For 100K positions, the aggregation is microseconds; the engineering is in the c
 
 ### 2.1 The aggregation cube in detail
 
-The architectural heart of an analytics service is the *cube* — a multi-dimensional aggregation of position-level metrics. A cube has:
+The architectural heart of an analytics service is the *cube*: a multi-dimensional aggregation of position-level metrics. A cube has:
 
 - **Facts** (what is being aggregated): DV01, market value, P&L, accrued interest, capital, etc.
 - **Dimensions** (how it is aggregated): position, sector, rating, tenor bucket, issuer, currency, trader, strategy, legal entity, settlement date, etc.
@@ -346,7 +346,7 @@ The pipeline:
 
 Full book stress takes seconds-to-minutes depending on book size and pricing complexity. Standard cadence: daily for short scenarios, weekly for full historical replay. Intraday triggered runs on threshold market moves.
 
-A senior risk committee reviews stress P&Ls weekly; persistent worst-case losses exceeding tolerance force position reduction. The 2022-2024 hike cycle worked through standard scenarios within 18 months — books that survived had been stressed against worse scenarios in advance.
+A senior risk committee reviews stress P&Ls weekly; persistent worst-case losses exceeding tolerance force position reduction. The 2022-2024 hike cycle worked through standard scenarios within 18 months: books that survived had been stressed against worse scenarios in advance.
 
 ### 6.1 Stress-test design principles
 
@@ -493,7 +493,7 @@ Each level has its own reconciliation; consistency across levels is verified dai
 
 ## 9. Carry and roll-down
 
-Carry and roll-down are the structural daily P&L when the market doesn't move. Together they are the desk's *baseline* — what they earn just by holding positions overnight.
+Carry and roll-down are the structural daily P&L when the market doesn't move. Together they are the desk's *baseline*: what they earn just by holding positions overnight.
 
 ![Carry, roll-down, and the structural P&L](/imgs/blogs/fixed-income-analytics-9.png)
 
@@ -509,7 +509,7 @@ For a 5% coupon bond financed at 4.5% repo, daily carry on \$1B notional is $(5\
 
 Together: carry + roll-down = structural daily P&L when the market doesn't move. For a typical fixed-income book, this is $\sim 1$-$3$ bp per day or $\sim 5$-$15\%$ per year.
 
-The implication: a book that just *holds positions* earns this baseline. The trader's job is to add *alpha* on top — relative-value trades that earn more than carry + roll-down. Active trading should beat passive holding net of trading costs.
+The implication: a book that just *holds positions* earns this baseline. The trader's job is to add *alpha* on top: relative-value trades that earn more than carry + roll-down. Active trading should beat passive holding net of trading costs.
 
 A subtle but important point: *carry compensates for risk*. A junk bond yields 8% and finances at 4%; the 400 bp carry compensates the holder for default risk and liquidity risk. The carry is not free; it's a *risk premium*. Senior traders know to size positions by carry-adjusted-risk, not raw carry.
 
@@ -755,7 +755,7 @@ JPMorgan's London CIO desk took $6B in losses on synthetic credit positions. Ris
 
 ### 15.5 GE Capital 2008 commercial paper
 
-GE Capital's $300B commercial paper portfolio froze in October 2008. Pricing systems showed valuations close to par; analytics reports showed manageable risk. The reality was a complete liquidity collapse — the risk wasn't in the prices, it was in the inability to refinance. The lesson: liquidity risk is often invisible in standard analytics; explicit liquidity-stressed metrics are essential.
+GE Capital's $300B commercial paper portfolio froze in October 2008. Pricing systems showed valuations close to par; analytics reports showed manageable risk. The reality was a complete liquidity collapse: the risk wasn't in the prices, it was in the inability to refinance. The lesson: liquidity risk is often invisible in standard analytics; explicit liquidity-stressed metrics are essential.
 
 ### 15.6 The 2010 flash crash and pricing dislocations
 
@@ -1124,7 +1124,7 @@ A senior architect at a multi-entity firm spends meaningful time on this. The co
 
 A senior fixed-income analytics quant operates fluently in three roles: as an engineer (building the system), as a data architect (designing the cube), and as a quant (interpreting the numbers). The combination is rare and valuable.
 
-The remaining articles in this series — [Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets) — go deeper on specific product categories.
+The remaining articles in this series ([Short-Rate Models](/blog/trading/quantitative-finance/short-rate-models-vasicek-hull-white), [Exotic Derivatives](/blog/trading/quantitative-finance/exotic-derivatives), [Autocallables](/blog/trading/quantitative-finance/autocallables), and [Cliquets](/blog/trading/quantitative-finance/cliquets)) go deeper on specific product categories.
 
 ### 20.3a Real-time analytics: the next frontier
 
@@ -1189,7 +1189,7 @@ Smaller firms benefit proportionally; even a 10-person quant fund can justify $5
 
 ### 20.5a The trader-analytics user experience
 
-A subtle but important consideration: the analytics dashboard is not just a reporting tool — it is the trader's primary interface to their book. UX matters as much as accuracy.
+A subtle but important consideration: the analytics dashboard is not just a reporting tool, it is the trader's primary interface to their book. UX matters as much as accuracy.
 
 Strong dashboards have:
 
@@ -1258,12 +1258,12 @@ The three pillars depend on each other:
 
 A senior fixed-income engineering leader treats all three as a coherent system. Investment in any one without the others is wasted; balanced investment compounds.
 
-Analytics is the daily window into a multi-trillion-dollar fixed-income business. Doing it well — accurate, real-time, multi-dimensional, reconciled, integrated — is the silent competence that powers risk-aware trading at scale. The reward is a clear-headed view of one of the most operationally complex businesses in finance.
+Analytics is the daily window into a multi-trillion-dollar fixed-income business. Doing it well (accurate, real-time, multi-dimensional, reconciled, integrated) is the silent competence that powers risk-aware trading at scale. The reward is a clear-headed view of one of the most operationally complex businesses in finance.
 
-A final reflection on craft: the senior analytics quant produces nothing tangible. No bond is priced; no trade is executed; no curve is published. What they produce is *clarity* — the ability for traders, risk managers, finance, and regulators to *see* the firm's risk in a coherent way. That clarity, day after day, is what separates a firm that operates on insight from one that operates on hope. In a multi-trillion-dollar fixed-income business, the difference between insight and hope is hundreds of millions of dollars annually.
+A final reflection on craft: the senior analytics quant produces nothing tangible. No bond is priced; no trade is executed; no curve is published. What they produce is *clarity*: the ability for traders, risk managers, finance, and regulators to *see* the firm's risk in a coherent way. That clarity, day after day, is what separates a firm that operates on insight from one that operates on hope. In a multi-trillion-dollar fixed-income business, the difference between insight and hope is hundreds of millions of dollars annually.
 
 I have come to think of analytics work as the *epistemic infrastructure* of finance. It is the system by which a firm knows what it owns, what it owes, and what could go wrong. Without strong analytics, a firm is flying blind even when it appears to know what it is doing. With strong analytics, every decision can be examined, attributed, and improved.
 
 A useful mental model for analytics engineering: it is the *interpreter* between the messy reality of trading and the structured world of risk management. The interpreter must be precise (no information loss), fast (real-time decisions), and trusted (every consumer relies on it). Building good interpreters is hard; the analytics quant who can build them well is rare.
 
-For engineers entering the field: the work is unglamorous on the surface and deeply consequential underneath. The math is mostly aggregation and reconciliation; the engineering is mostly database design and dashboard latency. The reward is the satisfaction of building infrastructure that everyone trusts, that everyone uses, and that nobody thinks about — exactly as good infrastructure should be.
+For engineers entering the field: the work is unglamorous on the surface and deeply consequential underneath. The math is mostly aggregation and reconciliation; the engineering is mostly database design and dashboard latency. The reward is the satisfaction of building infrastructure that everyone trusts, that everyone uses, and that nobody thinks about: exactly as good infrastructure should be.
