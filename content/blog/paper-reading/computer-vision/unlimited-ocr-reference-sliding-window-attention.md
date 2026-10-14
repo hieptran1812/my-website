@@ -360,7 +360,7 @@ A few directions this opens, in rough order of how soon I'd try them.
 
 1. **The missing ablation, as a weekend project.** Continue-train the DeepSeek-OCR baseline on the *same* document data with full attention for the same 4,000 steps, and compare to the R-SWA variant. This single experiment settles the central scientific question of the paper. If you have the baseline checkpoint, it is cheap.
 
-2. **R-SWA for ASR, for real.** Audio is the cleanest transfer target: the mel-spectrogram (or encoder output) is the pinned reference, the transcript is the long output, and recent transcript context is all you need to stay oriented. Swap R-SWA into a Whisper-style or [Qwen3-ASR-style](/blog/paper-reading/speech-processing/qwen3-asr-technical-report) decoder and you get hour-long transcription with constant cache. This is the experiment I'd most want to see.
+2. **R-SWA for ASR, for real.** Audio is the cleanest transfer target: the mel-spectrogram (or encoder output) is the pinned reference, the transcript is the long output, and recent transcript context is all you need to stay oriented. Swap R-SWA into a Whisper-style or [Qwen3-ASR-style](/blog/machine-learning/frontier-models/qwen3-asr-technical-report) decoder and you get hour-long transcription with constant cache. This is the experiment I'd most want to see.
 
 3. **The prefill pool the paper promises.** The real path to "unlimited" is making the *prefix* streamable too: keep a pool of page-KV chunks and let the model learn to fetch the ones it needs (the page it's currently transcribing, plus neighbors), evicting the rest — literally "flipping through pages." This is retrieval over the KV cache, and it rhymes with offload/recompute ideas in the [KV-cache management literature](/blog/paper-reading/large-language-model/a-survey-on-large-language-model-acceleration-based-on-kv-cache-management). Hard, but it's the version that earns the title.
 
@@ -377,6 +377,6 @@ The deeper bet here is that **long-horizon generation is an attention-pattern pr
 - **Benchmark:** OmniDocBench (v1.5 / v1.6) — the OCR document-parsing benchmark used throughout.
 - Related on this blog:
   - [HunyuanOCR technical report](/blog/paper-reading/computer-vision/hunyuanocr-technical-report) — a sibling end-to-end OCR VLM, useful as a point of comparison.
-  - [GLM-OCR training recipe](/blog/paper-reading/computer-vision/glm-ocr-training-recipe) — how another end-to-end OCR model is trained.
+  - [GLM-OCR training recipe](/blog/machine-learning/frontier-models/glm-ocr-training-recipe) — how another end-to-end OCR model is trained.
   - [A survey on KV-cache management](/blog/paper-reading/large-language-model/a-survey-on-large-language-model-acceleration-based-on-kv-cache-management) — the cache-pressure problem R-SWA attacks, in full generality.
   - [MoBA: mixture of block attention](/blog/paper-reading/large-language-model/moba) — a sibling sparse-attention idea for long context.

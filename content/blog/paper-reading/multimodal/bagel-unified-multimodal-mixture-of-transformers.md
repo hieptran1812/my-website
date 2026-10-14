@@ -748,6 +748,6 @@ The deeper takeaway is architectural, and it generalizes beyond BAGEL. The reaso
 
 - BAGEL paper: "Emerging Properties in Unified Multimodal Pretraining" (arXiv:2505.14683).
 - Model weights and inference code: [ByteDance-Seed/BAGEL-7B-MoT on HuggingFace](https://huggingface.co/ByteDance-Seed/BAGEL-7B-MoT) and the [GitHub repo](https://github.com/ByteDance-Seed/Bagel) (Apache-2.0).
-- For the native-resolution vision-language lineage BAGEL's understanding side draws on: [Seed1.5-VL](/blog/paper-reading/multimodal/seed1-5-vl-native-resolution-vision-language) and [Qwen2-VL's any-resolution perception](/blog/paper-reading/multimodal/qwen2-vl-enhancing-vision-language-models-perception-of-the-world-at-any-resolution).
-- For the MoE/decoupled-encoder tradition in open multimodal models: [DeepSeek-VL/VL2's dynamic tiling and MoE](/blog/machine-learning/computer-vision/deepseek-vl-vl2-dynamic-tiling-moe).
-- For where BAGEL sits among ByteDance's models: [the ByteDance Seed model universe by use case](/blog/machine-learning/large-language-model/bytedance-seed-model-universe-by-use-case).
+- For the native-resolution vision-language lineage BAGEL's understanding side draws on: [Seed1.5-VL](/blog/machine-learning/frontier-models/seed1-5-vl-native-resolution-vision-language) and [Qwen2-VL's any-resolution perception](/blog/machine-learning/frontier-models/qwen2-vl-enhancing-vision-language-models-perception-of-the-world-at-any-resolution).
+- For the MoE/decoupled-encoder tradition in open multimodal models: [DeepSeek-VL/VL2's dynamic tiling and MoE](/blog/machine-learning/frontier-models/deepseek-vl-vl2-dynamic-tiling-moe).
+- For where BAGEL sits among ByteDance's models: [the ByteDance Seed model universe by use case](/blog/machine-learning/frontier-models/bytedance-seed-model-universe-by-use-case).

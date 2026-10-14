@@ -296,7 +296,7 @@ The 2x2 matrix above shows the consistency requirement. Across the four pretrain
 
 - **Paper (arXiv abstract):** [Muon is Scalable for LLM Training](https://arxiv.org/abs/2502.16982) — arXiv:2502.16982, v1, 24 Feb 2025 (cs.LG), Moonshot AI and UCLA.
 - **Code and models:** [MoonshotAI/Moonlight on GitHub](https://github.com/MoonshotAI/Moonlight); base checkpoint [moonshotai/Moonlight-16B-A3B](https://huggingface.co/moonshotai/Moonlight-16B-A3B) and instruct [moonshotai/Moonlight-16B-A3B-Instruct](https://huggingface.co/moonshotai/Moonlight-16B-A3B-Instruct).
-- [Kimi K2: Open Agentic Intelligence](/blog/paper-reading/large-language-model/kimi-k2) — the production model that took the Muon-at-scale lesson to a trillion-parameter MoE, with MuonClip stabilizing attention logits.
-- [Kimi Linear: An Expressive, Efficient Attention Architecture](/blog/paper-reading/large-language-model/kimi-linear) — a sibling efficiency lever from the same lab, on the attention side rather than the optimizer side.
-- [Kimi K2 Thinking: An Open-Source Reasoning Model Built on K2](/blog/paper-reading/large-language-model/kimi-k2-thinking) — how the same training stack scales into a reasoning model.
+- [Kimi K2: Open Agentic Intelligence](/blog/machine-learning/frontier-models/kimi-k2) — the production model that took the Muon-at-scale lesson to a trillion-parameter MoE, with MuonClip stabilizing attention logits.
+- [Kimi Linear: An Expressive, Efficient Attention Architecture](/blog/machine-learning/frontier-models/kimi-linear) — a sibling efficiency lever from the same lab, on the attention side rather than the optimizer side.
+- [Kimi K2 Thinking: An Open-Source Reasoning Model Built on K2](/blog/machine-learning/frontier-models/kimi-k2-thinking) — how the same training stack scales into a reasoning model.
 - [MoBA: Mixture of Block Attention for Long-Context LLMs](/blog/paper-reading/large-language-model/moba) — a complementary sparsity idea applied to attention for long context.

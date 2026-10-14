@@ -282,7 +282,7 @@ Do *not* reach for WorldVQA as a proxy for general multimodal capability. The au
 - WorldVQA: Measuring Atomic World Knowledge in Multimodal Large Language Models — arXiv abstract: [https://arxiv.org/abs/2602.02537](https://arxiv.org/abs/2602.02537)
 - Code and dataset (GitHub): [https://github.com/MoonshotAI/WorldVQA](https://github.com/MoonshotAI/WorldVQA)
 - Related reading on the model families evaluated here:
-  - [Kimi-VL: A Mixture-of-Experts Vision-Language Model](/blog/paper-reading/multimodal/kimi-vl)
-  - [Kimi K2.5: Visual Agentic Intelligence](/blog/paper-reading/large-language-model/kimi-k2-5)
-  - [Kimi K2 Thinking: An Open-Source Reasoning Model Built on K2](/blog/paper-reading/large-language-model/kimi-k2-thinking)
+  - [Kimi-VL: A Mixture-of-Experts Vision-Language Model](/blog/machine-learning/frontier-models/kimi-vl)
+  - [Kimi K2.5: Visual Agentic Intelligence](/blog/machine-learning/frontier-models/kimi-k2-5)
+  - [Kimi K2 Thinking: An Open-Source Reasoning Model Built on K2](/blog/machine-learning/frontier-models/kimi-k2-thinking)
   - [CombiBench: Benchmarking LLMs on Combinatorial Mathematics](/blog/paper-reading/reasoning/combibench)

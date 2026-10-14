@@ -881,7 +881,7 @@ Four large omissions, all intentional.
 
 **No fused kernels.** Every operation here is a separate PyTorch call, which means separate kernel launches and separate round trips to HBM for intermediate tensors. RMSNorm alone reads and writes the full activation twice. Track E replaces the hot ones with hand-written CUDA and Triton — and the correctness test for every one of those kernels is a diff against the code in this post.
 
-There is one more thing this post does not do: handle a `head_dim` that differs from `hidden_size / num_attention_heads`, sliding-window attention layers, QK-norm, attention sinks, or MoE routing. Several current models use one or more of those; the [modern LLM architectures comparison](/blog/machine-learning/large-language-model/modern-llm-architectures-qwen-llama-gemma-deepseek) walks through which family uses what. Adding each is a small, local change to `layer()` — which is itself an argument for keeping the reference implementation this plain.
+There is one more thing this post does not do: handle a `head_dim` that differs from `hidden_size / num_attention_heads`, sliding-window attention layers, QK-norm, attention sinks, or MoE routing. Several current models use one or more of those; the [modern LLM architectures comparison](/blog/machine-learning/frontier-models/modern-llm-architectures-qwen-llama-gemma-deepseek) walks through which family uses what. Adding each is a small, local change to `layer()` — which is itself an argument for keeping the reference implementation this plain.
 
 ## Case studies and real numbers
 

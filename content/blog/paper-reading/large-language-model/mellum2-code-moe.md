@@ -279,7 +279,7 @@ An amusing data-composition detail: they oversample self-identity dialogues **3�
 
 ### RLVR: GRPO with an MoE twist
 
-The final stage refines each SFT checkpoint with **Reinforcement Learning with Verifiable Rewards (RLVR)**. The choice of RLVR over RLHF is deliberate: every prompt in their corpus admits an *unambiguous, programmatic* correctness check — run the unit tests, check the math answer symbolically — so there's no need to train a separate reward model whose noise could dominate the gradient. (For the RLHF-style alternative and the GRPO lineage, see the sibling analysis of [DeepSeek-R1's RL recipe](/blog/paper-reading/large-language-model/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning).)
+The final stage refines each SFT checkpoint with **Reinforcement Learning with Verifiable Rewards (RLVR)**. The choice of RLVR over RLHF is deliberate: every prompt in their corpus admits an *unambiguous, programmatic* correctness check — run the unit tests, check the math answer symbolically — so there's no need to train a separate reward model whose noise could dominate the gradient. (For the RLHF-style alternative and the GRPO lineage, see the sibling analysis of [DeepSeek-R1's RL recipe](/blog/machine-learning/frontier-models/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning).)
 
 **The system.** RL runs on a Kubernetes cluster split into two fixed roles: a small group of *training* nodes that own the policy weights and run gradient updates, and a larger group of *inference* nodes that host the generation engines (vLLM) and produce rollouts. Reward computation is decoupled into its own microservice cluster — a verification gateway routes each request to the right backend (a code-execution sandbox, a symbolic/numeric math verifier, an LLM-as-judge for free-form outputs) — so verifiers never contend for GPUs with the trainer or the generation engines.
 
@@ -414,4 +414,4 @@ These are my extrapolations, not the paper's claims:
   - [Serving MoE models at scale](/blog/machine-learning/model-serving/serving-moe-models-at-scale) — the deployment-side view of the sparsity Mellum 2 exploits.
   - [Speculative decoding in production](/blog/machine-learning/model-serving/speculative-decoding-in-production) — the accept/reject mechanics the MTP draft head plugs into.
   - [MoE scaling laws](/blog/machine-learning/scaling-laws/moe-scaling-laws) — why 8-of-64 sits where it does on the quality-sparsity curve.
-  - [DeepSeek-R1: incentivizing reasoning via RL](/blog/paper-reading/large-language-model/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning) — the GRPO lineage Mellum 2's RLVR stage builds on.
+  - [DeepSeek-R1: incentivizing reasoning via RL](/blog/machine-learning/frontier-models/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning) — the GRPO lineage Mellum 2's RLVR stage builds on.

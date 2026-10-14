@@ -372,7 +372,7 @@ These are my extrapolations, not the paper's claims.
 
 Sibling posts on this blog worth reading next:
 
-- [Kimi Linear: An Expressive, Efficient Attention Architecture](/blog/paper-reading/large-language-model/kimi-linear) — a production stack built on a Gated-DeltaNet-style rule (Kimi Delta Attention).
-- [Qwen3-Next: Hybrid Attention and an 80B Model That Thinks With 3B](/blog/paper-reading/large-language-model/qwen3-next-hybrid-attention-ultra-sparse-moe) — ships Gated DeltaNet layers in a hybrid at scale.
-- [MiniMax-01: Lightning Attention, the 7:1 Hybrid, and a Million-Token Context](/blog/paper-reading/large-language-model/minimax-01-lightning-attention-hybrid-moe) — a sibling take on linear attention at production scale.
+- [Kimi Linear: An Expressive, Efficient Attention Architecture](/blog/machine-learning/frontier-models/kimi-linear) — a production stack built on a Gated-DeltaNet-style rule (Kimi Delta Attention).
+- [Qwen3-Next: Hybrid Attention and an 80B Model That Thinks With 3B](/blog/machine-learning/frontier-models/qwen3-next-hybrid-attention-ultra-sparse-moe) — ships Gated DeltaNet layers in a hybrid at scale.
+- [MiniMax-01: Lightning Attention, the 7:1 Hybrid, and a Million-Token Context](/blog/machine-learning/frontier-models/minimax-01-lightning-attention-hybrid-moe) — a sibling take on linear attention at production scale.
 - [Nested Learning: The Illusion of Deep Learning Architecture](/blog/paper-reading/large-language-model/nested-learning-the-illusion-of-deep-learning-architecture) — the test-time / online-learning framing that this paper's Table 1 lives inside.

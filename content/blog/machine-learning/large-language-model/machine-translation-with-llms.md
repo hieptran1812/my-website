@@ -76,7 +76,7 @@ Few-shot prompting is only as good as the examples you choose, and this is the p
 
 The practical recipe: index your TM source segments with a multilingual embedding model, retrieve the top 3–8 nearest neighbors of each input, optionally rerank them, and place the *most* similar example last (models weight the most recent in-context example most heavily). For high fuzzy-match segments (say, a TM match above 90%), skip the model entirely and reuse the human translation — that is the cheapest, highest-quality "translation" you will ever serve.
 
-Qwen's team has a nice writeup of treating translation as a reinforcement-learned LLM task end to end — worth reading alongside this as a concrete instantiation of the fine-tuned + preference approach: [Qwen-MT: Machine Translation as a Reinforcement-Learned LLM Task](/blog/paper-reading/large-language-model/qwen-mt-multilingual-translation).
+Qwen's team has a nice writeup of treating translation as a reinforcement-learned LLM task end to end — worth reading alongside this as a concrete instantiation of the fine-tuned + preference approach: [Qwen-MT: Machine Translation as a Reinforcement-Learned LLM Task](/blog/machine-learning/frontier-models/qwen-mt-multilingual-translation).
 
 ## Data: the real bottleneck
 
@@ -755,7 +755,7 @@ The honest summary: in 2026, a fine-tuned LLM with continued pretraining for low
 
 ## Further reading
 
-- [Qwen-MT: Machine Translation as a Reinforcement-Learned LLM Task](/blog/paper-reading/large-language-model/qwen-mt-multilingual-translation) — a concrete RL-for-MT system.
+- [Qwen-MT: Machine Translation as a Reinforcement-Learned LLM Task](/blog/machine-learning/frontier-models/qwen-mt-multilingual-translation) — a concrete RL-for-MT system.
 - [Training LLMs to Adapt to a New Language](/blog/machine-learning/large-language-model/training-llm-adapt-new-language) — the continued-pretraining mechanics for low-resource pairs.
 - [Effective LLM Fine-Tuning Techniques](/blog/machine-learning/large-language-model/effective-llm-fine-tuning-techniques) and [Fine-Tuning LLMs with DPO](/blog/machine-learning/large-language-model/fine-tuning-llm-with-dpo) — the SFT and preference-optimization foundations specialized above.
 - [Evaluating Conversational LLMs Beyond Perplexity](/blog/machine-learning?subcategory=large-language-model) — the broader evaluation philosophy behind the MT ladder.

@@ -337,7 +337,7 @@ The deeper lesson, independent of whether you adopt the exact stack, is the inve
 - **Code (GitHub):** [kvcache-ai/Mooncake](https://github.com/kvcache-ai/Mooncake)
 - **FAST 2025 (peer-reviewed, Best Paper):** [fast25-qin.pdf](https://www.usenix.org/system/files/fast25-qin.pdf)
 - Related reading on the Kimi/Moonshot stack and serving:
-  - [Kimi K2: Open Agentic Intelligence](/blog/paper-reading/large-language-model/kimi-k2)
-  - [Kimi Linear: An Expressive, Efficient Attention Architecture](/blog/paper-reading/large-language-model/kimi-linear)
+  - [Kimi K2: Open Agentic Intelligence](/blog/machine-learning/frontier-models/kimi-k2)
+  - [Kimi Linear: An Expressive, Efficient Attention Architecture](/blog/machine-learning/frontier-models/kimi-linear)
   - [MoBA: Mixture of Block Attention for Long-Context LLMs](/blog/paper-reading/large-language-model/moba)
-  - [Kimi K2 Thinking: An Open-Source Reasoning Model Built on K2](/blog/paper-reading/large-language-model/kimi-k2-thinking)
+  - [Kimi K2 Thinking: An Open-Source Reasoning Model Built on K2](/blog/machine-learning/frontier-models/kimi-k2-thinking)

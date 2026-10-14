@@ -19,7 +19,7 @@ This article is the decision framework I wish every team used before they touch 
 
 ![The architecture decision space: a task's information-flow shape selects the family, then you tune activation, attention, context, and size](/imgs/blogs/choosing-right-llm-architecture-task-1.webp)
 
-The diagram above is the mental model. Read it left to right: your task has a *shape* — does it primarily *understand* an input, *generate* an output, or *transform* one sequence into another — and that shape picks the family. Everything downstream of the family (dense vs sparse, how attention is wired, how long the context window is, how big the model needs to be) is a second set of dials you turn once the family is fixed. The mistake is reaching for the dials before you have chosen the lane. The rest of this post is a tour of that diagram, one axis at a time, and it leans on companion deep-dives like [modern LLM architectures](/blog/machine-learning/large-language-model/modern-llm-architectures-qwen-llama-gemma-deepseek) and [Mixture-of-Experts LLMs](/blog/machine-learning/large-language-model/moe-llm-architecture-training-finetuning-case-studies) for the parts that deserve a book of their own.
+The diagram above is the mental model. Read it left to right: your task has a *shape* — does it primarily *understand* an input, *generate* an output, or *transform* one sequence into another — and that shape picks the family. Everything downstream of the family (dense vs sparse, how attention is wired, how long the context window is, how big the model needs to be) is a second set of dials you turn once the family is fixed. The mistake is reaching for the dials before you have chosen the lane. The rest of this post is a tour of that diagram, one axis at a time, and it leans on companion deep-dives like [modern LLM architectures](/blog/machine-learning/frontier-models/modern-llm-architectures-qwen-llama-gemma-deepseek) and [Mixture-of-Experts LLMs](/blog/machine-learning/large-language-model/moe-llm-architecture-training-finetuning-case-studies) for the parts that deserve a book of their own.
 
 ## Why architecture choice is different from model choice
 
@@ -519,7 +519,7 @@ The meta-lesson under all of it: the architecture is a *consequence* of the task
 
 ## Further reading
 
-- [Modern LLM architectures: inside Qwen, Llama, Gemma, and DeepSeek](/blog/machine-learning/large-language-model/modern-llm-architectures-qwen-llama-gemma-deepseek) — how the production decoders actually wire GQA, MLA, RoPE, and MoE together.
+- [Modern LLM architectures: inside Qwen, Llama, Gemma, and DeepSeek](/blog/machine-learning/frontier-models/modern-llm-architectures-qwen-llama-gemma-deepseek) — how the production decoders actually wire GQA, MLA, RoPE, and MoE together.
 - [Mixture-of-Experts LLMs](/blog/machine-learning/large-language-model/moe-llm-architecture-training-finetuning-case-studies) and [optimizing MoE training and inference](/blog/machine-learning/large-language-model/optimizing-moe-training-and-inference) — the sparse-model axis in full depth.
 - [KV cache optimization and management](/blog/machine-learning/large-language-model/kv-cache) — the serving-side machinery behind the attention-variant choice.
 - [Embedding models](/blog/machine-learning/large-language-model/embedding-models-training-finetuning-case-studies) and [reranker models](/blog/machine-learning/large-language-model/reranker-models-training-finetuning-case-studies) — building the bi-encoder/cross-encoder cascade.

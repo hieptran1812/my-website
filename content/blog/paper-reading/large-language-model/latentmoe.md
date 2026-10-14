@@ -28,7 +28,7 @@ The figure below is the whole idea at a glance — the standard MoE layer on the
 
 ## The problem: MoE is optimized for the wrong cost
 
-Mixture-of-Experts models are the default recipe for scaling a language model's parameter count without scaling its per-token FLOPs. You keep a big bank of $N$ expert FFNs, but a router activates only the top-$K$ of them for each token. Parameters go up; compute per token stays flat. DeepSeek, Qwen, Mixtral, Grok, Kimi, Llama-4 — nearly every frontier open model is an MoE now. (If the router-and-experts picture is new to you, start with [DeepSeek's MoE lineage](/blog/machine-learning/large-language-model/deepseek-moe-lineage-fine-grained-shared-experts) and [serving MoE models at scale](/blog/machine-learning/model-serving/serving-moe-models-at-scale).)
+Mixture-of-Experts models are the default recipe for scaling a language model's parameter count without scaling its per-token FLOPs. You keep a big bank of $N$ expert FFNs, but a router activates only the top-$K$ of them for each token. Parameters go up; compute per token stays flat. DeepSeek, Qwen, Mixtral, Grok, Kimi, Llama-4 — nearly every frontier open model is an MoE now. (If the router-and-experts picture is new to you, start with [DeepSeek's MoE lineage](/blog/machine-learning/frontier-models/deepseek-moe-lineage-fine-grained-shared-experts) and [serving MoE models at scale](/blog/machine-learning/model-serving/serving-moe-models-at-scale).)
 
 Here is the thing the paper opens with, and it is worth sitting with: **the FLOP-per-token count that MoE is designed to hold constant is almost never the bottleneck at inference time.** The design lore — "keep FLOPs fixed, scale sparsity" — optimizes a quantity that does not dominate your serving bill. Two other quantities do, depending on the regime:
 
@@ -277,7 +277,7 @@ Trace one token through the layer, following the redrawn dataflow (which labels 
 3. **Route.** The router still reads the *original* full-width token $x$ (routing is cheap and quality-sensitive, so it is not compressed): $p' = \text{softmax}(W_r' x)$, and the top-$K$ (or top-$K'$) experts are selected.
 4. **Run experts in latent space.** Each routed expert $E_i(\cdot; \ell)$ lives *entirely* in $\mathbb{R}^{\ell}$: its weights are $W_\text{FC1}^{(i)}, W_\text{gate}^{(i)} \in \mathbb{R}^{m\times\ell}$ and $W_\text{FC2}^{(i)} \in \mathbb{R}^{\ell\times m}$. Because these are $\ell$-wide not $d$-wide, each expert's weights are $\alpha$-times smaller — so weight-loading bandwidth drops by $\alpha$ too.
 5. **Combine and up-project.** Aggregate the expert outputs weighted by the routing scores, then map back to $\mathbb{R}^{d}$ with $W_\uparrow \in \mathbb{R}^{d\times\ell}$.
-6. **Shared experts bypass.** A handful of always-on shared experts $E_j(\cdot; d)$ run at the *full* dimension $d$ and are added in — they are cheap relative to the routed experts and are left uncompressed to preserve a full-width pathway. (This is the [shared-expert](/blog/machine-learning/large-language-model/deepseek-moe-lineage-fine-grained-shared-experts) idea from DeepSeekMoE.)
+6. **Shared experts bypass.** A handful of always-on shared experts $E_j(\cdot; d)$ run at the *full* dimension $d$ and are added in — they are cheap relative to the routed experts and are left uncompressed to preserve a full-width pathway. (This is the [shared-expert](/blog/machine-learning/frontier-models/deepseek-moe-lineage-fine-grained-shared-experts) idea from DeepSeekMoE.)
 
 ### The math
 
@@ -378,7 +378,7 @@ Now the numbers that matter. On the **95B model at a 300B-token horizon** (Code 
 
 The headline is **MMLU-Pro 29.26 → 34.91**, a +5.65 jump at matched active parameters (8.44B vs 8.47B). Notice the eye-catcher: ℓ-MoEeff *also* scores 34.75 on MMLU-Pro — nearly matching the acc variant — while using only **5.62B active params** (a third fewer FLOPs). Both LatentMoE variants dominate the baseline; the choice between them is a cost-vs-accuracy dial.
 
-On the **hybrid Mamba-Attention 73B model at the full 1T-token horizon** (this is the architecture closest to what ships — a mostly-Mamba backbone with a few attention layers, the [Nemotron-H](/blog/machine-learning/large-language-model/nemotron-h-hybrid-mamba-transformer) style):
+On the **hybrid Mamba-Attention 73B model at the full 1T-token horizon** (this is the architecture closest to what ships — a mostly-Mamba backbone with a few attention layers, the [Nemotron-H](/blog/machine-learning/frontier-models/nemotron-h-hybrid-mamba-transformer) style):
 
 | Hybrid-73BT-8BA | Active | Total | MMLU-Pro | MMLU | Code | Math | Commonsense |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -458,4 +458,4 @@ These are my extrapolations, not the paper's claims:
 - **Paper:** Venmugil Elango et al., "LatentMoE: Toward Optimal Accuracy per FLOP and Parameter in Mixture of Experts," arXiv 2026. [arxiv.org/abs/2601.18089](https://arxiv.org/abs/2601.18089)
 - **Adopted by:** NVIDIA, "Nvidia Nemotron 3: Efficient and Open Intelligence," arXiv 2025. [arxiv.org/abs/2512.20856](https://arxiv.org/abs/2512.20856)
 - **Prior work referenced:** Barron (1993) on universal approximation bounds; Dai et al. (2024), DeepSeekMoE; Frantar et al. (2025), compression scaling laws (the EPM framework); Liu et al. (2025), MoLAE (the closest related latent-expert method).
-- **On this blog:** [DeepSeek's MoE lineage](/blog/machine-learning/large-language-model/deepseek-moe-lineage-fine-grained-shared-experts) · [Multi-head Latent Attention](/blog/machine-learning/large-language-model/multi-head-latent-attention-mla) · [Scaling laws for Mixture-of-Experts](/blog/machine-learning/scaling-laws/moe-scaling-laws) · [Roofline analysis for LLM inference](/blog/machine-learning/model-serving/roofline-analysis-for-llm-inference) · [Serving MoE models at scale](/blog/machine-learning/model-serving/serving-moe-models-at-scale)
+- **On this blog:** [DeepSeek's MoE lineage](/blog/machine-learning/frontier-models/deepseek-moe-lineage-fine-grained-shared-experts) · [Multi-head Latent Attention](/blog/machine-learning/large-language-model/multi-head-latent-attention-mla) · [Scaling laws for Mixture-of-Experts](/blog/machine-learning/scaling-laws/moe-scaling-laws) · [Roofline analysis for LLM inference](/blog/machine-learning/model-serving/roofline-analysis-for-llm-inference) · [Serving MoE models at scale](/blog/machine-learning/model-serving/serving-moe-models-at-scale)

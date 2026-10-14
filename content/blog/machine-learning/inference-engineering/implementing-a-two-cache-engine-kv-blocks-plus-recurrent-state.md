@@ -1084,6 +1084,6 @@ There is one more case worth naming explicitly. If you are memory-bound at *shor
 - Dao and Gu, [*Transformers are SSMs* (arXiv 2405.21060)](https://arxiv.org/abs/2405.21060) — the Mamba-2 / SSD formulation that fixes the state shapes we allocate.
 - [*Falcon-H1* (arXiv 2507.22448)](https://arxiv.org/abs/2507.22448) and the [`granite-4.0-h-small` model card](https://huggingface.co/ibm-granite/granite-4.0-h-small) — a parallel hybrid and a 4-attention-of-40-layers interleave, the two ends of the routing problem.
 - Within this series: [what inference engineering is](/blog/machine-learning/inference-engineering/what-inference-engineering-is), [the memory math of the KV cache](/blog/machine-learning/inference-engineering/the-memory-math-of-the-kv-cache), [paged KV cache: implementing blocks and a block table](/blog/machine-learning/inference-engineering/paged-kv-cache-implementing-blocks-and-a-block-table), [hybrid models and the end of the KV-cache assumption](/blog/machine-learning/inference-engineering/hybrid-models-and-the-end-of-the-kv-cache-assumption), and the capstone [inference engineering playbook](/blog/machine-learning/inference-engineering/the-inference-engineering-playbook).
-- Architecture-side companion: [Nemotron-H: how NVIDIA swaps most attention for Mamba-2](/blog/machine-learning/large-language-model/nemotron-h-hybrid-mamba-transformer).
+- Architecture-side companion: [Nemotron-H: how NVIDIA swaps most attention for Mamba-2](/blog/machine-learning/frontier-models/nemotron-h-hybrid-mamba-transformer).
 </content>
 </invoke>

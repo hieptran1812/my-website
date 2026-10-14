@@ -999,7 +999,7 @@ The shape of the argument generalizes. Every project that runs an LLM at scale h
 
 - [BPE tokenizer deep-dive](/blog/machine-learning/large-language-model/bpe-tokenizer) — the algorithm and a from-scratch implementation.
 - [Training an LLM to adapt to a new language](/blog/machine-learning/large-language-model/training-llm-adapt-new-language) — the sibling piece on full-stack adaptation, of which vocab extension is one part.
-- [Modern LLM architectures: Qwen, Llama, Gemma, DeepSeek](/blog/machine-learning/large-language-model/modern-llm-architectures-qwen-llama-gemma-deepseek) — how vocab choices shape these systems.
+- [Modern LLM architectures: Qwen, Llama, Gemma, DeepSeek](/blog/machine-learning/frontier-models/modern-llm-architectures-qwen-llama-gemma-deepseek) — how vocab choices shape these systems.
 - [Speech tokenizer](/blog/machine-learning/deep-learning/speech-tokenizer) — what tokenization looks like for audio.
 - Sennrich, Haddow, Birch, *Neural Machine Translation of Rare Words with Subword Units*, ACL 2016 — the canonical BPE paper for NLP.
 - Kudo, *Subword Regularization*, ACL 2018 — the Unigram LM paper and the case for sampled segmentations.

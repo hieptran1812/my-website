@@ -727,6 +727,6 @@ The most important engineering lesson is that the model is not the whole system.
 - Fish Audio Team. [Fish Audio S2 Technical Report](https://arxiv.org/abs/2603.08823).
 - [Fish Speech source code](https://github.com/fishaudio/fish-speech).
 - [Fish Audio S2 Pro weights](https://huggingface.co/fishaudio/s2-pro).
-- [MiniMax Speech: Speaker Encoder and Flow-VAE](/blog/paper-reading/speech-processing/minimax-speech-speaker-encoder-flow-vae).
-- [Kimi-Audio](/blog/paper-reading/speech-processing/kimi-audio).
-- [Qwen3-Omni Technical Report](/blog/paper-reading/multimodal/qwen3-omni-technical-report).
+- [MiniMax Speech: Speaker Encoder and Flow-VAE](/blog/machine-learning/frontier-models/minimax-speech-speaker-encoder-flow-vae).
+- [Kimi-Audio](/blog/machine-learning/frontier-models/kimi-audio).
+- [Qwen3-Omni Technical Report](/blog/machine-learning/frontier-models/qwen3-omni-technical-report).

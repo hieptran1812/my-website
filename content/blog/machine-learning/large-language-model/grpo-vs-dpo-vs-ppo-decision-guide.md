@@ -558,4 +558,4 @@ A few questions come up so often that they deserve direct answers.
 - [Beyond GRPO: DAPO, Dr. GRPO, GSPO, and the Loss-Aggregation Fixes of 2025](/blog/machine-learning/large-language-model/beyond-grpo-dapo-dr-grpo-gspo) — what to do once vanilla GRPO isn't enough.
 - [Training LLMs for Math](/blog/machine-learning/large-language-model/training-llm-for-math) — the verifiable-reward pipeline end to end.
 - [TRL: Transformer Reinforcement Learning Library](/blog/machine-learning/open-source-library/trl-lib) — the library that implements all three.
-- [DeepSeek-R1: Incentivizing Reasoning via Reinforcement Learning](/blog/paper-reading/large-language-model/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning) — the paper that made GRPO famous.
+- [DeepSeek-R1: Incentivizing Reasoning via Reinforcement Learning](/blog/machine-learning/frontier-models/deepseek-r1-incentivizing-reasoning-capability-in-llms-via-reinforcement-learning) — the paper that made GRPO famous.

@@ -22,7 +22,7 @@ Timer-S1 is ByteDance's answer, and the answer is that the field was scaling the
 > - **The result:** State-of-the-art *pre-trained* MASE `0.693` and CRPS `0.485` on GIFT-Eval; ~7.6% lower MASE and ~13.2% lower CRPS than the comparable Timer-3 / Sundial baseline trained on the same data.
 > - **Where it's weak:** The headline gains concentrate at medium and long horizons, the MoE makes serving heavier than the "0.75B active" number suggests, and the public release is forecasting-only — no probabilistic-anomaly or imputation heads yet.
 
-This is one entry in a longer reading of [ByteDance Research's open model releases](/blog/machine-learning/bytedance-research-model-atlas); its closest sibling is [ChatTS](/blog/machine-learning/signal-processing/chatts-aligning-time-series-llms), which attacks the *understanding-and-reasoning* side of time series while Timer-S1 attacks raw *forecasting*. If you want the mixture-of-experts background that Timer-S1 assumes, the [DeepSeek-MoE lineage post](/blog/machine-learning/large-language-model/deepseek-moe-lineage-fine-grained-shared-experts) covers fine-grained and shared-expert routing in detail.
+This is one entry in a longer reading of [ByteDance Research's open model releases](/blog/machine-learning/bytedance-research-model-atlas); its closest sibling is [ChatTS](/blog/machine-learning/signal-processing/chatts-aligning-time-series-llms), which attacks the *understanding-and-reasoning* side of time series while Timer-S1 attacks raw *forecasting*. If you want the mixture-of-experts background that Timer-S1 assumes, the [DeepSeek-MoE lineage post](/blog/machine-learning/frontier-models/deepseek-moe-lineage-fine-grained-shared-experts) covers fine-grained and shared-expert routing in detail.
 
 ## Context: how time-series foundation models got stuck
 
@@ -129,7 +129,7 @@ The whole reason an 8.3B model can be deployed at all is that it almost never ru
 
 Why does sparsity matter so much for a TSFM specifically? Time series are wildly heterogeneous: financial ticks, hourly electricity load, ECG waveforms, and IoT sensor streams have almost nothing in common in their statistics. A dense model has to cram all of those regimes into one shared FFN and hope the superposition does not interfere. An MoE can let routing carve the heterogeneity into specialists — one cluster of experts that handles smooth seasonal load, another that handles spiky impulse-like sensor data — and only pay for the few that a given token needs. The capacity-to-compute ratio that MoE buys is exactly what you want when the data distribution is a union of many sub-distributions.
 
-That said, the "0.75B active" figure is a *compute* statement, not a *memory* statement, and it is the number most likely to mislead a practitioner sizing hardware. All 8.3B parameters must be resident in memory to be routable, so the model's memory footprint is that of an 8.3B dense model even though each token's FLOPs are those of a 0.75B one. If you are used to the [MoE trade-offs from the LLM world](/blog/machine-learning/large-language-model/deepseek-moe-lineage-fine-grained-shared-experts), none of this is new — but it is worth saying plainly, because the headline number invites the wrong mental model for serving cost.
+That said, the "0.75B active" figure is a *compute* statement, not a *memory* statement, and it is the number most likely to mislead a practitioner sizing hardware. All 8.3B parameters must be resident in memory to be routable, so the model's memory footprint is that of an 8.3B dense model even though each token's FLOPs are those of a 0.75B one. If you are used to the [MoE trade-offs from the LLM world](/blog/machine-learning/frontier-models/deepseek-moe-lineage-fine-grained-shared-experts), none of this is new — but it is worth saying plainly, because the headline number invites the wrong mental model for serving cost.
 
 ### Load balancing and the specialization you hope for
 
@@ -463,5 +463,5 @@ None of this makes Timer-S1 the last word. The multivariate gap is real, the pub
 - **Sibling posts on this blog:**
   - [The ByteDance Research Model Atlas](/blog/machine-learning/bytedance-research-model-atlas) — where Timer-S1 sits in ByteDance's open-model lineup
   - [ChatTS: Teaching LLMs to Actually Read Time Series](/blog/machine-learning/signal-processing/chatts-aligning-time-series-llms) — the understanding-and-reasoning counterpart
-  - [The DeepSeek-MoE Lineage](/blog/machine-learning/large-language-model/deepseek-moe-lineage-fine-grained-shared-experts) — fine-grained and shared-expert routing background
+  - [The DeepSeek-MoE Lineage](/blog/machine-learning/frontier-models/deepseek-moe-lineage-fine-grained-shared-experts) — fine-grained and shared-expert routing background
   - [Vector Databases](/blog/machine-learning/ai-agent/vector-database) — retrieval plumbing for tool-using forecasting systems

@@ -379,4 +379,4 @@ It is worth ending on the convergence, because it is the strongest signal of all
 - **mbridge** — [the Megatron↔HuggingFace format bridge](https://github.com/ISEEKYAN/mbridge) slime uses for weight conversion.
 - [checkpoint-engine](/blog/machine-learning/open-source-library/checkpoint-engine) — Moonshot's standalone weight-sync middleware; a peer that converges on the same CUDA IPC final hop into SGLang.
 - [verl](/blog/machine-learning/open-source-library/verl-rlhf-library-deep-dive) — the HybridEngine RLHF library slime is most often compared against.
-- [Kimi k1.5](/blog/paper-reading/reinforcement-learning/kimi-k1-5) and [Kimi-Researcher](/blog/paper-reading/ai-agent/kimi-researcher) — large-scale and agentic RL recipes that motivate exactly the infrastructure slime provides.
+- [Kimi k1.5](/blog/machine-learning/frontier-models/kimi-k1-5) and [Kimi-Researcher](/blog/machine-learning/frontier-models/kimi-researcher) — large-scale and agentic RL recipes that motivate exactly the infrastructure slime provides.

@@ -30,7 +30,7 @@ The diagram above is the whole thesis at a glance. The top half is the *breadth*
 
 ## The problem: a box is not a sentence
 
-Modern VLMs — the [Qwen-VL series](/blog/paper-reading/multimodal/qwen2-vl-enhancing-vision-language-models-perception-of-the-world-at-any-resolution), InternVL, Shikra, [SEED1.5-VL](/blog/paper-reading/multimodal/seed1-5-vl-native-resolution-vision-language) — formulate detection as **next-token prediction (NTP)**. The model answers "where is the ship?" by generating a token sequence that encodes the coordinates. There are two dominant encodings:
+Modern VLMs — the [Qwen-VL series](/blog/machine-learning/frontier-models/qwen2-vl-enhancing-vision-language-models-perception-of-the-world-at-any-resolution), InternVL, Shikra, [SEED1.5-VL](/blog/machine-learning/frontier-models/seed1-5-vl-native-resolution-vision-language) — formulate detection as **next-token prediction (NTP)**. The model answers "where is the ship?" by generating a token sequence that encodes the coordinates. There are two dominant encodings:
 
 - **Textual digits.** The number ${1024}$ becomes the four characters `1`, `0`, `2`, `4`. A single box (four numbers plus box delimiters) can run to ${20}$-plus tokens.
 - **Quantized tokens.** Coordinates are normalized to a fixed grid (LocateAnything uses `[0, 1000]`) and each value becomes one special token: `<130>`, `<647>`, `<911>`, `<832>`. Now a box is roughly ${x_1 \to y_1 \to x_2 \to y_2}$ plus `<box>`/`</box>` — around ${6}$–${10}$ tokens.
@@ -61,7 +61,7 @@ The rest of the post takes each load-bearing technique from intuition to math.
 
 ## Method
 
-LocateAnything is built on a native-resolution VLM: a **Moon-ViT** vision encoder (from the [Kimi-VL](/blog/paper-reading/multimodal/kimi-vl) line), a **Qwen2.5** language decoder, and a two-layer MLP projector between them. "Native resolution" matters here for a specific reason: high-precision localization needs fine spatial detail, and downsampling every image to a fixed ${448 \times 448}$ grid throws that away before the model ever sees it.
+LocateAnything is built on a native-resolution VLM: a **Moon-ViT** vision encoder (from the [Kimi-VL](/blog/machine-learning/frontier-models/kimi-vl) line), a **Qwen2.5** language decoder, and a two-layer MLP projector between them. "Native resolution" matters here for a specific reason: high-precision localization needs fine spatial detail, and downsampling every image to a fixed ${448 \times 448}$ grid throws that away before the model ever sees it.
 
 ![Figure 3 from Wang et al. (2026): the architecture. An image plus a text query enters a Moon-ViT encoder, is projected by a two-layer MLP into a Qwen2.5 decoder, and the decoder emits a sequence of fixed-length blocks — Semantic, Box, Negative, and End.](/imgs/blogs/locate-anything-fig3.webp)
 
@@ -290,4 +290,4 @@ These are my extrapolations, not the paper's claims.
 
 - **Paper:** Wang, Liu, et al. *LocateAnything: Fast and High-Quality Vision-Language Grounding with Parallel Box Decoding.* NVIDIA LPR, 2026. [PDF](https://research.nvidia.com/labs/lpr/locate-anything/LocateAnything.pdf) · [Project page](https://research.nvidia.com/labs/lpr/locate-anything/)
 - **Prior art it builds on / compares to:** Pix2Seq (coordinate tokenization), Rex-Omni (the most-related quantized-token grounding VLM), Medusa / Block Diffusion / SDLM (the generic-MTP baselines it refutes), SAM 3 and Molmo (data-engine components).
-- **Sibling posts on this blog:** [SEED1.5-VL](/blog/paper-reading/multimodal/seed1-5-vl-native-resolution-vision-language) (a native-resolution grounding VLM baseline here), [Qwen2-VL](/blog/paper-reading/multimodal/qwen2-vl-enhancing-vision-language-models-perception-of-the-world-at-any-resolution) (the any-resolution, coordinate-token lineage), [Grounding Everything in Tokens](/blog/paper-reading/multimodal/grounding-everything-in-tokens-for-multimodal-large-language-models) (the token-as-grounding formulation), and [Kimi-VL](/blog/paper-reading/multimodal/kimi-vl) (the Moon-ViT encoder LocateAnything reuses).
+- **Sibling posts on this blog:** [SEED1.5-VL](/blog/machine-learning/frontier-models/seed1-5-vl-native-resolution-vision-language) (a native-resolution grounding VLM baseline here), [Qwen2-VL](/blog/machine-learning/frontier-models/qwen2-vl-enhancing-vision-language-models-perception-of-the-world-at-any-resolution) (the any-resolution, coordinate-token lineage), [Grounding Everything in Tokens](/blog/paper-reading/multimodal/grounding-everything-in-tokens-for-multimodal-large-language-models) (the token-as-grounding formulation), and [Kimi-VL](/blog/machine-learning/frontier-models/kimi-vl) (the Moon-ViT encoder LocateAnything reuses).

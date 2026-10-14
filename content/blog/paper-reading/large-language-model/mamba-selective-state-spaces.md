@@ -384,7 +384,7 @@ On the Pile, under the Chinchilla compute-optimal protocol from 125M to 1.3B par
 
 ### Downstream zero-shot evaluations
 
-The scaling curves translate into downstream wins. Trained on 300B tokens with the same tokenizer and data as Pythia and [RWKV](/blog/paper-reading/large-language-model/kimi-linear), Mamba is best-in-class at every size on common-sense reasoning:
+The scaling curves translate into downstream wins. Trained on 300B tokens with the same tokenizer and data as Pythia and [RWKV](/blog/machine-learning/frontier-models/kimi-linear), Mamba is best-in-class at every size on common-sense reasoning:
 
 | Model | Pile ppl ↓ | LAMBADA acc ↑ | HellaSwag ↑ | PIQA ↑ | Arc-E ↑ | WinoGrande ↑ | Average ↑ |
 |---|---|---|---|---|---|---|---|
@@ -440,5 +440,5 @@ These are my extrapolations, not the paper's claims:
 - **Paper:** Albert Gu and Tri Dao, "Mamba: Linear-Time Sequence Modeling with Selective State Spaces." arXiv:2312.00752 (2023, v2 2024). <https://arxiv.org/abs/2312.00752>
 - **Code and pretrained checkpoints:** `state-spaces/mamba` — <https://github.com/state-spaces/mamba>
 - **The direct follow-up:** [Mamba-2: state-space duality](/blog/paper-reading/large-language-model/mamba-2-state-space-duality) — recasts the selective SSM as a form of attention and makes it faster.
-- **Modern linear-recurrent descendants:** [Kimi Linear](/blog/paper-reading/large-language-model/kimi-linear) and [Gated DeltaNet](/blog/paper-reading/large-language-model/gated-delta-networks) — the gated-linear-attention lineage that grew alongside Mamba.
+- **Modern linear-recurrent descendants:** [Kimi Linear](/blog/machine-learning/frontier-models/kimi-linear) and [Gated DeltaNet](/blog/paper-reading/large-language-model/gated-delta-networks) — the gated-linear-attention lineage that grew alongside Mamba.
 - **The thing it replaces:** the [KV-cache management survey](/blog/paper-reading/large-language-model/a-survey-on-large-language-model-acceleration-based-on-kv-cache-management), for why constant-state inference matters, and [rotary embeddings](/blog/paper-reading/large-language-model/roformer-enhanced-transformer-with-rotary-position-embedding), the positional scheme in the Transformer++ baseline.

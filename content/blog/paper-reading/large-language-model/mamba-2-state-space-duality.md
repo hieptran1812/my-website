@@ -40,7 +40,7 @@ Let us be precise about the pain each side lives with, because SSD is best under
 
 So we have two models with complementary weaknesses, described in two incompatible languages. The obvious question — *can we give SSMs attention's hardware efficiency, and give attention SSMs' compressed state?* — was hard to even ask, because nobody had a formalism in which both models lived. Building that formalism is the paper's first and largest contribution. The payoff, later, is a model that is Pareto-better than both on the axes that matter.
 
-This is the same "linear attention" lineage that runs through [Lightning Attention](/blog/paper-reading/large-language-model/minimax-01-lightning-attention-hybrid-moe), [Gated DeltaNet](/blog/paper-reading/large-language-model/gated-delta-networks), and [Kimi Linear](/blog/paper-reading/large-language-model/kimi-linear); SSD is the framework that ties the knot between all of them and classical SSMs. If you want the broader map first, the [efficient-attention survey](/blog/paper-reading/large-language-model/efficient-attention-mechanisms-for-large-language-models-a-survey) is a good companion.
+This is the same "linear attention" lineage that runs through [Lightning Attention](/blog/machine-learning/frontier-models/minimax-01-lightning-attention-hybrid-moe), [Gated DeltaNet](/blog/paper-reading/large-language-model/gated-delta-networks), and [Kimi Linear](/blog/machine-learning/frontier-models/kimi-linear); SSD is the framework that ties the knot between all of them and classical SSMs. If you want the broader map first, the [efficient-attention survey](/blog/paper-reading/large-language-model/efficient-attention-mechanisms-for-large-language-models-a-survey) is a good companion.
 
 ## Contributions
 
@@ -325,7 +325,7 @@ On downstream zero-shot evals, the headline number: **Mamba-2-2.7B (300B tokens 
 |---|---|---|---|---|---|---|
 | Perplexity ↓ | 8.60 | 8.32 | 8.29 | 8.26 | 8.31 | 8.68 |
 
-The interpretation the authors offer — and I find it convincing — is a division of labor: SSD layers do the bulk sequence-to-sequence mixing with compressed state, and a handful of attention layers act as a precise retrieval mechanism for looking up exact past tokens, which a compressed state can't. This is the same lesson [Jamba and RecurrentGemma-style hybrids](/blog/paper-reading/large-language-model/kimi-linear) keep rediscovering.
+The interpretation the authors offer — and I find it convincing — is a division of labor: SSD layers do the bulk sequence-to-sequence mixing with compressed state, and a handful of attention layers act as a precise retrieval mechanism for looking up exact past tokens, which a compressed state can't. This is the same lesson [Jamba and RecurrentGemma-style hybrids](/blog/machine-learning/frontier-models/kimi-linear) keep rediscovering.
 
 **Speed.** This is where the duality pays its rent.
 
@@ -360,4 +360,4 @@ These are my extrapolations, not the paper's claims.
 - **Paper:** Tri Dao, Albert Gu. *Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality.* ICML 2024. [arXiv:2405.21060](https://arxiv.org/abs/2405.21060).
 - **Code & checkpoints:** [github.com/state-spaces/mamba](https://github.com/state-spaces/mamba) (the SSD layer is a few dozen lines; Listing 1 above is faithful to it).
 - **Prior work it builds on:** Katharopoulos et al., *Transformers are RNNs* (linear attention, 2020); Gu & Dao, *Mamba* (the selective SSM, 2023).
-- **Sibling posts on this blog:** [Gated DeltaNet](/blog/paper-reading/large-language-model/gated-delta-networks) and [Kimi Linear](/blog/paper-reading/large-language-model/kimi-linear) sit in the same linear-attention/SSM family; [Lightning Attention](/blog/paper-reading/large-language-model/minimax-01-lightning-attention-hybrid-moe) is another chunked linear-attention design; the [efficient-attention survey](/blog/paper-reading/large-language-model/efficient-attention-mechanisms-for-large-language-models-a-survey) maps the wider landscape SSD unifies.
+- **Sibling posts on this blog:** [Gated DeltaNet](/blog/paper-reading/large-language-model/gated-delta-networks) and [Kimi Linear](/blog/machine-learning/frontier-models/kimi-linear) sit in the same linear-attention/SSM family; [Lightning Attention](/blog/machine-learning/frontier-models/minimax-01-lightning-attention-hybrid-moe) is another chunked linear-attention design; the [efficient-attention survey](/blog/paper-reading/large-language-model/efficient-attention-mechanisms-for-large-language-models-a-survey) maps the wider landscape SSD unifies.
