@@ -22,6 +22,10 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/api/blog/posts": ["./src/lib/generated/blogPostsIndex.json"],
     "/api/blog": ["./src/lib/generated/blogPostsIndex.json"],
+    "/api/blog/search": [
+      "./src/lib/generated/searchIndex.json",
+      "./src/lib/generated/searchIndex.bin",
+    ],
     // The article page inlines each slug's precomputed ego graph; ship the index
     // so ISR revalidation (which re-runs the server component) can still read it.
     "/blog/[...slug]": ["./src/lib/generated/blogGraph.json"],

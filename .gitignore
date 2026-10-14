@@ -57,6 +57,8 @@ next-env.d.ts
 # generated at build time by scripts/buildRelatedGraph.ts (article page inlines
 # it; client falls back to /api/blog/graph when absent)
 /src/lib/generated/blogGraph.json
+/src/lib/generated/searchIndex.json
+/src/lib/generated/searchIndex.bin
 
 *.log
 

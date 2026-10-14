@@ -32,13 +32,15 @@ export default function CommandPalette() {
     const onKey = (e: KeyboardEvent) => {
       const isModK = (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k";
       // "/" opens search like GitHub/YouTube, but never steals a keystroke
-      // the reader is typing into a field.
+      // the reader is typing into a field, and defers to a page's own search
+      // box (BlogSearchBar focuses itself on "/").
       const isSlash =
         e.key === "/" &&
         !e.metaKey &&
         !e.ctrlKey &&
         !e.altKey &&
-        !isTypingTarget(e.target);
+        !isTypingTarget(e.target) &&
+        !document.querySelector("input[data-local-search]");
       if (isModK) {
         e.preventDefault();
         setOpen((v) => !v);

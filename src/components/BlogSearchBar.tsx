@@ -54,6 +54,7 @@ export default function BlogSearchBar({
       </div>
       <input
         ref={inputRef}
+        data-local-search
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
