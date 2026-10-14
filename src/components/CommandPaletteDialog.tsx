@@ -22,6 +22,7 @@ const NAV_LINKS = [
   { label: "Paper Reading", href: "/blog/paper-reading" },
   { label: "Machine Learning", href: "/blog/machine-learning" },
   { label: "Software Development", href: "/blog/software-development" },
+  { label: "Trading", href: "/blog/trading" },
   { label: "Notes", href: "/blog/notes" },
 ];
 
@@ -152,6 +153,7 @@ export default function CommandPaletteDialog({
             <kbd className="cmdk-kbd">↵</kbd> open
             <kbd className="cmdk-kbd">↑↓</kbd> nav
             <kbd className="cmdk-kbd">esc</kbd> close
+            <kbd className="cmdk-kbd">/</kbd> search
           </span>
           <span>
             <kbd className="cmdk-kbd">⌘</kbd>

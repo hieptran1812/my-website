@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
+import SearchButton from "./SearchButton";
 import { useTheme } from "../ThemeProvider";
 
 const navLinks = [
@@ -585,8 +586,9 @@ export default function Navigation() {
           ))}
         </div>
 
-        {/* Right side - Theme Toggle, Mobile Menu */}
+        {/* Right side - Search, Theme Toggle, Mobile Menu */}
         <div className="flex items-center gap-2">
+          <SearchButton />
           <ThemeToggle />
 
           {/* Mobile Menu Toggle Button */}
