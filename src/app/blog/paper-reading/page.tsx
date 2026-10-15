@@ -13,6 +13,9 @@ import SubcategoryFilter from "@/components/SubcategoryFilter";
 import BlogSearchBar from "@/components/BlogSearchBar";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 import { useSubcategoryFilter } from "@/components/hooks/useSubcategoryFilter";
+import VenueFilter, { selectionLabel } from "@/components/VenueFilter";
+import { useVenueFilter } from "@/components/hooks/useVenueFilter";
+import { extractVenueFromQuery, isVenueTag, venueLabel } from "@/lib/venue";
 
 const ACRONYMS = new Set([
   "ai",
@@ -115,10 +118,42 @@ export default function PaperReadingBlogPage() {
     setSelectedSlugs: setSelectedCategories,
   } = useSubcategoryFilter(categories);
 
-  const { searchTerm, setSearchTerm, filteredArticles } = useArticleSearch(
-    allArticles,
-    selectedCategories,
-  );
+  const {
+    searchTerm,
+    setSearchTerm,
+    filteredArticles: searchedArticles,
+  } = useArticleSearch(allArticles, selectedCategories);
+
+  // Conference / year / acceptance tier, read from venue tags such as
+  // `cvpr-2025-oral` (or a venue named in the title), narrowing the search.
+  const {
+    selection: venueSelection,
+    setVenueSelection,
+    filtered: filteredArticles,
+    facets: venueFacets,
+    venueOf,
+  } = useVenueFilter(allArticles, searchedArticles);
+  const venueActive =
+    venueSelection.confs.length +
+      venueSelection.years.length +
+      venueSelection.tiers.length >
+    0;
+
+  // A query like "cvpr 2025 oral diffusion" is asking for a venue filter:
+  // offer it as one click, keeping the rest of the words as the search.
+  const venueSuggestion = useMemo(() => {
+    const found = extractVenueFromQuery(searchTerm);
+    if (!found) return null;
+    const { venue, rest } = found;
+    const next = {
+      confs: [venue.conf],
+      years: venue.year ? [venue.year] : [],
+      tiers: venue.tier ? [venue.tier] : [],
+    };
+    const same =
+      selectionLabel(next) === selectionLabel(venueSelection) && !rest;
+    return same ? null : { next, rest, label: venueLabel(venue) };
+  }, [searchTerm, venueSelection]);
 
   // Initialize lazy loading with filtered articles
   const {
@@ -435,7 +470,9 @@ export default function PaperReadingBlogPage() {
                     All Articles
                   </h2>
                   <p style={{ color: "var(--text-secondary)" }}>
-                    {selectedCategories.length > 0 || searchTerm.trim()
+                    {selectedCategories.length > 0 ||
+                    searchTerm.trim() ||
+                    venueActive
                       ? `Showing ${filteredArticles.length} of ${allArticles.length} papers`
                       : `${allArticles.length} total research papers`}
                   </p>
@@ -454,7 +491,37 @@ export default function PaperReadingBlogPage() {
                     onSelectionChange={setSelectedCategories}
                     totalCount={allArticles.length}
                   />
+                  <VenueFilter
+                    selection={venueSelection}
+                    onChange={setVenueSelection}
+                    facets={venueFacets}
+                  />
                 </div>
+                {venueSuggestion && (
+                  <div className="flex justify-center -mt-8 mb-10">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setVenueSelection(venueSuggestion.next);
+                        setSearchTerm(venueSuggestion.rest);
+                      }}
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm border transition-colors hover:shadow-sm"
+                      style={{
+                        backgroundColor: "var(--accent-subtle)",
+                        borderColor: "var(--accent)",
+                        color: "var(--accent)",
+                      }}
+                    >
+                      <span aria-hidden>🎓</span>
+                      Filter by <strong>{venueSuggestion.label}</strong>
+                      {venueSuggestion.rest && (
+                        <span style={{ color: "var(--text-secondary)" }}>
+                          + search &ldquo;{venueSuggestion.rest}&rdquo;
+                        </span>
+                      )}
+                    </button>
+                  </div>
+                )}
 
                 {/* Articles Grid - 3 columns */}
                 {filteredArticles.length > 0 ? (
@@ -511,10 +578,25 @@ export default function PaperReadingBlogPage() {
                               {article.title}
                             </h3>
 
-                            {/* Tags under title */}
-                            {article.tags && article.tags.length > 0 && (
+                            {/* Venue badge + tags under title */}
+                            {(venueOf(article) ||
+                              (article.tags && article.tags.length > 0)) && (
                               <div className="flex flex-wrap gap-1 mb-3">
-                                {article.tags.slice(0, 2).map((tag) => (
+                                {venueOf(article) && (
+                                  <span
+                                    className="px-2 py-1 text-xs rounded-full font-semibold"
+                                    style={{
+                                      backgroundColor: "var(--accent)",
+                                      color: "white",
+                                    }}
+                                  >
+                                    {venueLabel(venueOf(article)!)}
+                                  </span>
+                                )}
+                                {(article.tags ?? [])
+                                  .filter((tag) => !isVenueTag(tag))
+                                  .slice(0, 2)
+                                  .map((tag) => (
                                   <span
                                     key={tag}
                                     className="px-2 py-1 text-xs rounded-full"
@@ -563,6 +645,7 @@ export default function PaperReadingBlogPage() {
                       onClick={() => {
                         setSelectedCategories([]);
                         setSearchTerm("");
+                        setVenueSelection({ confs: [], years: [], tiers: [] });
                       }}
                       className="px-4 py-2 rounded-lg transition-colors text-white"
                       style={{ backgroundColor: "var(--accent)" }}
