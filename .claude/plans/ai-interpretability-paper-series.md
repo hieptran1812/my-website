@@ -47,12 +47,12 @@ Created 2026-10-15. Source: the 111 kept stubs/drafts in `content/blog/paper-rea
 - [x] `the-geometry-of-categorical-and-hierarchical-concepts-in-large-language-models` | The Geometry of Categorical and Hierarchical Concepts in Large Language Models | https://arxiv.org/abs/2406.01506v3
 
 ### Wave 5
-- [ ] `on-the-origins-of-linear-representations-in-large-language-models` | On the Origins of Linear Representations in Large Language Models | https://arxiv.org/abs/2403.03867v1
-- [ ] `on-linear-representations-and-pretraining-data-frequency-in-language-models` | On Linear Representations and Pretraining Data Frequency in Language Models | https://arxiv.org/abs/2504.12459v1
-- [ ] `emergence-of-linear-truth-encodings-in-language-models` | Emergence of Linear Truth Encodings in Language Models | https://arxiv.org/abs/2510.15804v1
-- [ ] `linear-representations-of-political-perspective-emerge-in-large-language-models` | Linear Representations of Political Perspective Emerge in Large Language | https://arxiv.org/abs/2503.02080v2
-- [ ] `the-semantic-hub-hypothesis-language-models-share-semantic-representations-across-languages-and-modalities` | The Semantic Hub Hypothesis: Language Models Share Semantic Representations | https://arxiv.org/abs/2411.04986v3
-- [ ] `token-embeddings-violate-the-manifold-hypothesis` | Token Embeddings Violate the Manifold Hypothesis | https://arxiv.org/abs/2504.01002v3
+- [x] `on-the-origins-of-linear-representations-in-large-language-models` | On the Origins of Linear Representations in Large Language Models | https://arxiv.org/abs/2403.03867v1
+- [x] `on-linear-representations-and-pretraining-data-frequency-in-language-models` | On Linear Representations and Pretraining Data Frequency in Language Models | https://arxiv.org/abs/2504.12459v1
+- [x] `emergence-of-linear-truth-encodings-in-language-models` | Emergence of Linear Truth Encodings in Language Models | https://arxiv.org/abs/2510.15804v1
+- [x] `linear-representations-of-political-perspective-emerge-in-large-language-models` | Linear Representations of Political Perspective Emerge in Large Language | https://arxiv.org/abs/2503.02080v2
+- [x] `the-semantic-hub-hypothesis-language-models-share-semantic-representations-across-languages-and-modalities` | The Semantic Hub Hypothesis: Language Models Share Semantic Representations | https://arxiv.org/abs/2411.04986v3
+- [x] `token-embeddings-violate-the-manifold-hypothesis` | Token Embeddings Violate the Manifold Hypothesis | https://arxiv.org/abs/2504.01002v3
 
 ### Wave 6
 - [ ] `harnessing-the-universal-geometry-of-embeddings` | Harnessing the Universal Geometry of Embeddings | https://arxiv.org/abs/2505.12540v4
