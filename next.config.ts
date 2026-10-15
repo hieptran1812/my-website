@@ -40,6 +40,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/blog/paper-reading/ai-interpretability/vec2vec-universal-geometry-embeddings",
+        destination: "/blog/paper-reading/ai-interpretability/harnessing-the-universal-geometry-of-embeddings",
+        permanent: true,
+      },
+      {
         source: "/blog/machine-learning/large-language-model/vllm-inference",
         destination: "/blog/machine-learning/inference-frameworks/vllm-inference",
         permanent: true,

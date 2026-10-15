@@ -267,7 +267,7 @@ The paper's consequences, with my read on each:
 | Translation across modalities gets easier | Consistent with linear stitching of vision into LLMs |
 | Hallucination and bias may drop with scale | Conditional on lossless, diverse data, as the authors flag |
 
-The modality-sharing claim is where this paper has aged best. Later work like [vec2vec](/blog/paper-reading/ai-interpretability/vec2vec-universal-geometry-embeddings) pushed the idea further by translating between text embedding spaces with *no* paired data at all, which only works if the spaces share geometry.
+The modality-sharing claim is where this paper has aged best. Later work like [vec2vec](/blog/paper-reading/ai-interpretability/harnessing-the-universal-geometry-of-embeddings) pushed the idea further by translating between text embedding spaces with *no* paired data at all, which only works if the spaces share geometry.
 
 ## Counterexamples and limitations, in the authors' own words
 
@@ -313,6 +313,6 @@ For a practitioner the takeaway is narrower than the title: strong models' space
 - Huh, M., Cheung, B., Wang, T., and Isola, P. (2024). *Position: The Platonic Representation Hypothesis*. ICML 2024. [arXiv:2405.07987](https://arxiv.org/abs/2405.07987)
 - Project page: [phillipi.github.io/prh](https://phillipi.github.io/prh)
 - Code: [github.com/minyoungg/platonic-rep](https://github.com/minyoungg/platonic-rep)
-- Related on this site: [vec2vec: translating between embedding spaces with no paired data](/blog/paper-reading/ai-interpretability/vec2vec-universal-geometry-embeddings)
+- Related on this site: [vec2vec: translating between embedding spaces with no paired data](/blog/paper-reading/ai-interpretability/harnessing-the-universal-geometry-of-embeddings)
 - Related on this site: [Sampled softmax and contrastive losses for retrieval](/blog/machine-learning/recommendation-systems/sampled-softmax-and-contrastive-losses-for-retrieval)
 - Related on this site: Diffusion transformers with representation autoencoders

@@ -233,7 +233,7 @@ The paper summarizes this as English steering being "similarly effective". My re
 
 ## How this fits with nearby work
 
-The [Platonic Representation Hypothesis](/blog/paper-reading/ai-interpretability/position-the-platonic-representation-hypothesis) argues that separately trained vision and language models converge as they scale, and [vec2vec](/blog/paper-reading/ai-interpretability/vec2vec-universal-geometry-embeddings) translates between different models' embedding spaces. The semantic hub claim is narrower and in one sense stronger: inside one model, the representations align with no transformation at all.
+The [Platonic Representation Hypothesis](/blog/paper-reading/ai-interpretability/position-the-platonic-representation-hypothesis) argues that separately trained vision and language models converge as they scale, and [vec2vec](/blog/paper-reading/ai-interpretability/harnessing-the-universal-geometry-of-embeddings) translates between different models' embedding spaces. The semantic hub claim is narrower and in one sense stronger: inside one model, the representations align with no transformation at all.
 
 My extrapolation, not the paper's: a concept dictionary learned on English activations, such as a sparse autoencoder or the shared dictionaries in [Universal Sparse Autoencoders](/blog/paper-reading/ai-interpretability/universal-sparse-autoencoders-interpretable-cross-model-concept-alignment), should transfer to Chinese or code best in the middle layers.
 
@@ -259,4 +259,4 @@ My extrapolation, not the paper's: a concept dictionary learned on English activ
 3. Wendler et al. (2024). Do Llamas Work in English? On the Latent Language of Multilingual Transformers.
 4. Turner et al. (2024). Activation Addition (ActAdd), the steering method used for the interventions.
 5. nostalgebraist (2020). Interpreting GPT: the logit lens.
-6. On this site: [Position: The Platonic Representation Hypothesis](/blog/paper-reading/ai-interpretability/position-the-platonic-representation-hypothesis), [vec2vec](/blog/paper-reading/ai-interpretability/vec2vec-universal-geometry-embeddings), [Universal Sparse Autoencoders](/blog/paper-reading/ai-interpretability/universal-sparse-autoencoders-interpretable-cross-model-concept-alignment).
+6. On this site: [Position: The Platonic Representation Hypothesis](/blog/paper-reading/ai-interpretability/position-the-platonic-representation-hypothesis), [vec2vec](/blog/paper-reading/ai-interpretability/harnessing-the-universal-geometry-of-embeddings), [Universal Sparse Autoencoders](/blog/paper-reading/ai-interpretability/universal-sparse-autoencoders-interpretable-cross-model-concept-alignment).

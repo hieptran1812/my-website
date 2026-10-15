@@ -55,7 +55,7 @@ Created 2026-10-15. Source: the 111 kept stubs/drafts in `content/blog/paper-rea
 - [x] `token-embeddings-violate-the-manifold-hypothesis` | Token Embeddings Violate the Manifold Hypothesis | https://arxiv.org/abs/2504.01002v3
 
 ### Wave 6
-- [ ] `harnessing-the-universal-geometry-of-embeddings` | Harnessing the Universal Geometry of Embeddings | https://arxiv.org/abs/2505.12540v4
+- [x] `harnessing-the-universal-geometry-of-embeddings` | Harnessing the Universal Geometry of Embeddings | https://arxiv.org/abs/2505.12540v4
 - [x] `transformers-represent-belief-state-geometry-in-their-residual-stream` | Transformers Represent Belief State Geometry in their Residual Stream | https://arxiv.org/abs/2405.15943v3
 - [x] `layer-by-layer-uncovering-hidden-representations-in-language-models` | Layer by Layer: Uncovering Hidden Representations in Language Models | https://arxiv.org/abs/2502.02013v2
 - [x] `emergence-of-a-high-dimensional-abstraction-phase-in-language-transformers` | Emergence of a High-Dimensional Abstraction Phase in Language Transformers | https://arxiv.org/abs/2405.15471v4
