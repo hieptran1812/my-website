@@ -39,12 +39,12 @@ Created 2026-10-15. Source: the 111 kept stubs/drafts in `content/blog/paper-rea
 - [x] `the-computational-complexity-of-circuit-discovery-for-inner-interpretability` | The Computational Complexity of Circuit Discovery for Inner Interpretability | https://arxiv.org/abs/2410.08025v3
 
 ### Wave 4
-- [ ] `optimal-ablation-for-interpretability` | Optimal Ablation for Interpretability | https://arxiv.org/abs/2409.09951v1
-- [ ] `bilinear-mlps-enable-weight-based-mechanistic-interpretability` | Bilinear MLPs Enable Weight-based Mechanistic Interpretability | https://arxiv.org/abs/2410.08417v2
-- [ ] `a-implies-b-circuit-analysis-in-llms-for-propositional-logical-reasoning` | A Implies B: Circuit Analysis in LLMs for Propositional Logical Reasoning | https://arxiv.org/abs/2411.04105v4
-- [ ] `everything-everywhere-all-at-once-is-mechanistic-interpretability-identifiable` | Everything, Everywhere, All at Once: Is Mechanistic Interpretability | https://arxiv.org/abs/2502.20914v1
-- [ ] `hyperdas-towards-automating-mechanistic-interpretability-with-hypernetworks` | HyperDAS: Towards Automating Mechanistic Interpretability with Hypernetworks | https://arxiv.org/abs/2503.10894v3
-- [ ] `the-geometry-of-categorical-and-hierarchical-concepts-in-large-language-models` | The Geometry of Categorical and Hierarchical Concepts in Large Language Models | https://arxiv.org/abs/2406.01506v3
+- [x] `optimal-ablation-for-interpretability` | Optimal Ablation for Interpretability | https://arxiv.org/abs/2409.09951v1
+- [x] `bilinear-mlps-enable-weight-based-mechanistic-interpretability` | Bilinear MLPs Enable Weight-based Mechanistic Interpretability | https://arxiv.org/abs/2410.08417v2
+- [x] `a-implies-b-circuit-analysis-in-llms-for-propositional-logical-reasoning` | A Implies B: Circuit Analysis in LLMs for Propositional Logical Reasoning | https://arxiv.org/abs/2411.04105v4
+- [x] `everything-everywhere-all-at-once-is-mechanistic-interpretability-identifiable` | Everything, Everywhere, All at Once: Is Mechanistic Interpretability | https://arxiv.org/abs/2502.20914v1
+- [x] `hyperdas-towards-automating-mechanistic-interpretability-with-hypernetworks` | HyperDAS: Towards Automating Mechanistic Interpretability with Hypernetworks | https://arxiv.org/abs/2503.10894v3
+- [x] `the-geometry-of-categorical-and-hierarchical-concepts-in-large-language-models` | The Geometry of Categorical and Hierarchical Concepts in Large Language Models | https://arxiv.org/abs/2406.01506v3
 
 ### Wave 5
 - [ ] `on-the-origins-of-linear-representations-in-large-language-models` | On the Origins of Linear Representations in Large Language Models | https://arxiv.org/abs/2403.03867v1
