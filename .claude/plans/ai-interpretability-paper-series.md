@@ -23,12 +23,12 @@ Created 2026-10-15. Source: the 111 kept stubs/drafts in `content/blog/paper-rea
 - [x] `position-the-platonic-representation-hypothesis` | Position: The Platonic Representation Hypothesis | 
 
 ### Wave 2
-- [ ] `learning-multi-level-features-with-matryoshka-sparse-autoencoders` | Learning Multi-Level Features with Matryoshka Sparse Autoencoders | https://arxiv.org/abs/2503.17547v1
-- [ ] `dense-sae-latents-are-features-not-bugs` | Dense SAE Latents Are Features, Not Bugs | https://arxiv.org/abs/2506.15679v2
-- [ ] `sparse-autoencoders-do-not-find-canonical-units-of-analysis` | Sparse Autoencoders Do Not Find Canonical Units of Analysis | https://arxiv.org/abs/2502.04878v1
-- [ ] `are-sparse-autoencoders-useful-a-case-study-in-sparse-probing` | Are Sparse Autoencoders Useful? A Case Study in Sparse Probing | https://arxiv.org/abs/2502.16681v1
-- [ ] `universal-sparse-autoencoders-interpretable-cross-model-concept-alignment` | Universal Sparse Autoencoders: Interpretable Cross-Model Concept Alignment | https://arxiv.org/abs/2502.03714v1
-- [ ] `do-i-know-this-entity-knowledge-awareness-and-hallucinations-in-language-models` | Do I Know This Entity? Knowledge Awareness and Hallucinations in Language | https://arxiv.org/abs/2411.14257v2
+- [x] `learning-multi-level-features-with-matryoshka-sparse-autoencoders` | Learning Multi-Level Features with Matryoshka Sparse Autoencoders | https://arxiv.org/abs/2503.17547v1
+- [x] `dense-sae-latents-are-features-not-bugs` | Dense SAE Latents Are Features, Not Bugs | https://arxiv.org/abs/2506.15679v2
+- [x] `sparse-autoencoders-do-not-find-canonical-units-of-analysis` | Sparse Autoencoders Do Not Find Canonical Units of Analysis | https://arxiv.org/abs/2502.04878v1
+- [x] `are-sparse-autoencoders-useful-a-case-study-in-sparse-probing` | Are Sparse Autoencoders Useful? A Case Study in Sparse Probing | https://arxiv.org/abs/2502.16681v1
+- [x] `universal-sparse-autoencoders-interpretable-cross-model-concept-alignment` | Universal Sparse Autoencoders: Interpretable Cross-Model Concept Alignment | https://arxiv.org/abs/2502.03714v1
+- [x] `do-i-know-this-entity-knowledge-awareness-and-hallucinations-in-language-models` | Do I Know This Entity? Knowledge Awareness and Hallucinations in Language | https://arxiv.org/abs/2411.14257v2
 
 ### Wave 3
 - [ ] `sparse-autoencoders-reveal-temporal-difference-learning-in-large-language-models` | Sparse Autoencoders Reveal Temporal Difference Learning in Large Language | https://arxiv.org/abs/2410.01280v1
