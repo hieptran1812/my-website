@@ -5,15 +5,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 import FadeInWrapper from "@/components/FadeInWrapper";
+import CategoryHero from "@/components/CategoryHero";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
 import { TagList } from "@/components/TagBadge";
 import { getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
-import SubcategoryFilter from "@/components/SubcategoryFilter";
-import BlogSearchBar from "@/components/BlogSearchBar";
+import BlogFilterBar from "@/components/BlogFilterBar";
+import { useListingFilters } from "@/components/hooks/useListingFilters";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 import { useSubcategoryFilter } from "@/components/hooks/useSubcategoryFilter";
+import { categoryLabel } from "@/lib/categoryLabels";
+
+// Topic filtering happens in useListingFilters (so topic chips get faceted
+// counts); search runs unscoped. A stable reference keeps its memo valid.
+const NO_TOPICS: string[] = [];
 
 export default function NotesBlogPage() {
   const [allArticles, setAllArticles] = useState<Article[]>([]);
@@ -85,10 +91,22 @@ export default function NotesBlogPage() {
     setSelectedSlugs: setSelectedCategories,
   } = useSubcategoryFilter(categories);
 
-  const { searchTerm, setSearchTerm, filteredArticles } = useArticleSearch(
+  const {
+    searchTerm,
+    setSearchTerm,
+    filteredArticles: searchedArticles,
+    correctedQuery,
+  } = useArticleSearch(allArticles, NO_TOPICS);
+
+  // Topic, tag, reading-length and sort, faceted and mirrored in the URL.
+  const listing = useListingFilters({
     allArticles,
-    selectedCategories,
-  );
+    searched: searchedArticles,
+    searchTerm,
+    setSearchTerm,
+    selectedTopics: selectedCategories,
+  });
+  const filteredArticles = listing.filtered;
 
   // Initialize lazy loading with filtered articles
   const {
@@ -162,38 +180,21 @@ export default function NotesBlogPage() {
       >
         <main className="flex-1">
           <div className="max-w-6xl mx-auto px-6 py-16">
-            {/* Header with Category Name */}
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-3 mb-6">
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
-                  style={{
-                    background: "linear-gradient(135deg, #10b981, #34d399)",
-                  }}
-                >
-                  📝
-                </div>
-                <h1
-                  className="text-4xl md:text-5xl font-bold"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #10b981, #34d399, #059669)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Notes
-                </h1>
-              </div>
-              <p
-                className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Thoughts, stories, and little life moments that shape the way I
-                see the world
-              </p>
-            </div>
+            <CategoryHero
+              eyebrow="Blog · Category"
+              title="Notes"
+              accent="#10b981"
+              description="Thoughts, stories and small moments that shape the way I see the world."
+              stats={[
+                { value: allArticles.length, label: "notes" },
+                {
+                  value: new Set(
+                    allArticles.map((a) => a.subcategory).filter(Boolean),
+                  ).size,
+                  label: "topics",
+                },
+              ]}
+            />
 
             {/* Latest Articles Section */}
             {featuredArticle && (
@@ -239,7 +240,7 @@ export default function NotesBlogPage() {
                             className="text-sm font-bold uppercase tracking-wider"
                             style={{ color: "var(--accent)" }}
                           >
-                            {featuredArticle.category}
+                            {categoryLabel(featuredArticle.category)}
                           </span>
                         </div>
 
@@ -333,7 +334,7 @@ export default function NotesBlogPage() {
                                 className="text-xs font-medium uppercase tracking-wider"
                                 style={{ color: "var(--accent)" }}
                               >
-                                {article.category}
+                                {categoryLabel(article.category)}
                               </span>
                             </div>
 
@@ -400,27 +401,22 @@ export default function NotesBlogPage() {
                   >
                     All Articles
                   </h2>
-                  <p style={{ color: "var(--text-secondary)" }}>
-                    {selectedCategories.length > 0 || searchTerm.trim()
-                      ? `Showing ${filteredArticles.length} of ${allArticles.length} notes`
-                      : `${allArticles.length} total notes`}
-                  </p>
                 </div>
 
-                {/* Search & Filter Bar */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
-                  <BlogSearchBar
-                    value={searchTerm}
-                    onChange={setSearchTerm}
-                    placeholder="Search notes..."
-                  />
-                  <SubcategoryFilter
-                    categories={categories.slice(1)}
-                    selectedSlugs={selectedCategories}
-                    onSelectionChange={setSelectedCategories}
-                    totalCount={allArticles.length}
-                  />
-                </div>
+                {/* Search & Filters */}
+                <BlogFilterBar
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  placeholder="Search notes..."
+                  correctedQuery={correctedQuery}
+                  topics={categories.slice(1)}
+                  selectedTopics={selectedCategories}
+                  setSelectedTopics={setSelectedCategories}
+                  filters={listing}
+                  resultCount={filteredArticles.length}
+                  totalCount={allArticles.length}
+                  noun="notes"
+                />
 
                 {/* Articles Grid - 3 columns */}
                 {filteredArticles.length > 0 ? (
@@ -456,7 +452,7 @@ export default function NotesBlogPage() {
                                 className="text-xs font-medium uppercase tracking-wider"
                                 style={{ color: "var(--accent)" }}
                               >
-                                {article.category}
+                                {categoryLabel(article.category)}
                               </span>
                             </div>
 

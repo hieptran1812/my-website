@@ -150,7 +150,7 @@ const navLinks = [
         ),
       },
       {
-        name: "Trading",
+        name: "Finance & Markets",
         href: "/blog/trading",
         icon: (
           <svg

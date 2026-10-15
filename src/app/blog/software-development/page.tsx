@@ -5,14 +5,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 import FadeInWrapper from "@/components/FadeInWrapper";
+import CategoryHero from "@/components/CategoryHero";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
 import { getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
-import SubcategoryFilter from "@/components/SubcategoryFilter";
-import BlogSearchBar from "@/components/BlogSearchBar";
+import BlogFilterBar from "@/components/BlogFilterBar";
+import { useListingFilters } from "@/components/hooks/useListingFilters";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 import { useSubcategoryFilter } from "@/components/hooks/useSubcategoryFilter";
+import { categoryLabel } from "@/lib/categoryLabels";
 
 // Format a slug like "site-reliability-engineering" into a display name
 // "Site Reliability Engineering". Acronyms in `ACRONYMS` are uppercased intact.
@@ -45,6 +47,10 @@ function formatSubcategoryName(slug: string): string {
     )
     .join(" ");
 }
+
+// Topic filtering happens in useListingFilters (so topic chips get faceted
+// counts); search runs unscoped. A stable reference keeps its memo valid.
+const NO_TOPICS: string[] = [];
 
 export default function SoftwareDevelopmentBlogPage() {
   const [allArticles, setAllArticles] = useState<Article[]>([]);
@@ -104,10 +110,22 @@ export default function SoftwareDevelopmentBlogPage() {
     setSelectedSlugs: setSelectedCategories,
   } = useSubcategoryFilter(categories);
 
-  const { searchTerm, setSearchTerm, filteredArticles } = useArticleSearch(
+  const {
+    searchTerm,
+    setSearchTerm,
+    filteredArticles: searchedArticles,
+    correctedQuery,
+  } = useArticleSearch(allArticles, NO_TOPICS);
+
+  // Topic, tag, reading-length and sort, faceted and mirrored in the URL.
+  const listing = useListingFilters({
     allArticles,
-    selectedCategories,
-  );
+    searched: searchedArticles,
+    searchTerm,
+    setSearchTerm,
+    selectedTopics: selectedCategories,
+  });
+  const filteredArticles = listing.filtered;
 
   // Lazy loading configuration
   const ITEMS_PER_PAGE = 9;
@@ -186,38 +204,21 @@ export default function SoftwareDevelopmentBlogPage() {
       >
         <main className="flex-1">
           <div className="max-w-6xl mx-auto px-6 py-16">
-            {/* Header with Category Name */}
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-3 mb-6">
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
-                  style={{
-                    background: "linear-gradient(135deg, #22c55e, #10b981)",
-                  }}
-                >
-                  💻
-                </div>
-                <h1
-                  className="text-4xl md:text-5xl font-bold"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #22c55e, #10b981, #059669)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Software Development
-                </h1>
-              </div>
-              <p
-                className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                A personal collection of what I’ve learned in software
-                engineering
-              </p>
-            </div>
+            <CategoryHero
+              eyebrow="Blog · Category"
+              title="Software Development"
+              accent="#10b981"
+              description="Field notes on building and running software: system design, databases, reliability, and the craft that holds them together."
+              stats={[
+                { value: allArticles.length, label: "articles" },
+                {
+                  value: new Set(
+                    allArticles.map((a) => a.subcategory).filter(Boolean),
+                  ).size,
+                  label: "topics",
+                },
+              ]}
+            />
 
             {/* Latest Articles Section */}
             {featuredArticle && (
@@ -260,7 +261,7 @@ export default function SoftwareDevelopmentBlogPage() {
                             className="text-sm font-bold uppercase tracking-wider"
                             style={{ color: "var(--accent)" }}
                           >
-                            {featuredArticle.category}
+                            {categoryLabel(featuredArticle.category)}
                           </span>
                         </div>
 
@@ -354,7 +355,7 @@ export default function SoftwareDevelopmentBlogPage() {
                                 className="text-xs font-medium uppercase tracking-wider"
                                 style={{ color: "var(--accent)" }}
                               >
-                                {article.category}
+                                {categoryLabel(article.category)}
                               </span>
                             </div>
 
@@ -423,27 +424,22 @@ export default function SoftwareDevelopmentBlogPage() {
                   >
                     All Articles
                   </h2>
-                  <p style={{ color: "var(--text-secondary)" }}>
-                    {selectedCategories.length > 0 || searchTerm.trim()
-                      ? `Showing ${filteredArticles.length} of ${allArticles.length} articles`
-                      : `${allArticles.length} total articles`}
-                  </p>
                 </div>
 
-                {/* Search & Filter Bar */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
-                  <BlogSearchBar
-                    value={searchTerm}
-                    onChange={setSearchTerm}
-                    placeholder="Search articles..."
-                  />
-                  <SubcategoryFilter
-                    categories={categories.slice(1)}
-                    selectedSlugs={selectedCategories}
-                    onSelectionChange={setSelectedCategories}
-                    totalCount={allArticles.length}
-                  />
-                </div>
+                {/* Search & Filters */}
+                <BlogFilterBar
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  placeholder="Search articles..."
+                  correctedQuery={correctedQuery}
+                  topics={categories.slice(1)}
+                  selectedTopics={selectedCategories}
+                  setSelectedTopics={setSelectedCategories}
+                  filters={listing}
+                  resultCount={filteredArticles.length}
+                  totalCount={allArticles.length}
+                  noun="articles"
+                />
 
                 {/* Articles Grid - 3 columns */}
                 {filteredArticles.length > 0 ? (
@@ -479,7 +475,7 @@ export default function SoftwareDevelopmentBlogPage() {
                                 className="text-xs font-medium uppercase tracking-wider"
                                 style={{ color: "var(--accent)" }}
                               >
-                                {article.category}
+                                {categoryLabel(article.category)}
                               </span>
                             </div>
 
@@ -550,6 +546,7 @@ export default function SoftwareDevelopmentBlogPage() {
                       onClick={() => {
                         setSelectedCategories([]);
                         setSearchTerm("");
+                        listing.clear();
                       }}
                       className="px-4 py-2 rounded-lg transition-colors text-white"
                       style={{ backgroundColor: "var(--accent)" }}

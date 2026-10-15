@@ -336,7 +336,7 @@ export default function ArticleGraph({
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <span style={{ color: "var(--text-secondary)" }}>Trading</span>
+          <span style={{ color: "var(--text-secondary)" }}>Finance &amp; Markets</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-green-500"></div>

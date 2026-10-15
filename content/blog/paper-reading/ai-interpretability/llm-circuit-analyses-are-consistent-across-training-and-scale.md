@@ -15,6 +15,7 @@ tags:
   - pythia
   - eap-ig
   - neurips-2024-poster
+  - neurips-2024
 author: "Hiep Tran"
 featured: true
 readTime: 21

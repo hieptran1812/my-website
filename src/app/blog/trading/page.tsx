@@ -5,15 +5,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 import FadeInWrapper from "@/components/FadeInWrapper";
+import CategoryHero from "@/components/CategoryHero";
 import CollectionTag from "@/components/CollectionTag";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import { getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
-import SubcategoryFilter from "@/components/SubcategoryFilter";
-import BlogSearchBar from "@/components/BlogSearchBar";
+import BlogFilterBar from "@/components/BlogFilterBar";
+import { useListingFilters } from "@/components/hooks/useListingFilters";
 import SubstackLink from "@/components/SubstackLink";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 import { useSubcategoryFilter } from "@/components/hooks/useSubcategoryFilter";
+import { categoryLabel } from "@/lib/categoryLabels";
 
 // Format a slug like "quantitative-analysis" into a display name "Quantitative
 // Analysis". Acronyms in `ACRONYMS` are uppercased intact.
@@ -29,6 +31,10 @@ function formatSubcategoryName(slug: string): string {
     )
     .join(" ");
 }
+
+// Topic filtering happens in useListingFilters (so topic chips get faceted
+// counts); search runs unscoped. A stable reference keeps its memo valid.
+const NO_TOPICS: string[] = [];
 
 export default function TradingBlogPage() {
   const [allArticles, setAllArticles] = useState<Article[]>([]);
@@ -92,10 +98,22 @@ export default function TradingBlogPage() {
     setSelectedSlugs: setSelectedCategories,
   } = useSubcategoryFilter(categories);
 
-  const { searchTerm, setSearchTerm, filteredArticles } = useArticleSearch(
+  const {
+    searchTerm,
+    setSearchTerm,
+    filteredArticles: searchedArticles,
+    correctedQuery,
+  } = useArticleSearch(allArticles, NO_TOPICS);
+
+  // Topic, tag, reading-length and sort, faceted and mirrored in the URL.
+  const listing = useListingFilters({
     allArticles,
-    selectedCategories,
-  );
+    searched: searchedArticles,
+    searchTerm,
+    setSearchTerm,
+    selectedTopics: selectedCategories,
+  });
+  const filteredArticles = listing.filtered;
 
   // Initialize lazy loading with filtered articles
   const {
@@ -169,39 +187,21 @@ export default function TradingBlogPage() {
       >
         <main className="flex-1">
           <div className="max-w-6xl mx-auto px-6 py-16">
-            {/* Header with Category Name */}
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-3 mb-6">
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
-                  style={{
-                    background: "linear-gradient(135deg, #f97316, #fb923c)",
-                  }}
-                >
-                  ₿
-                </div>
-                <h1
-                  className="text-4xl md:text-5xl font-bold"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #f97316, #fb923c, #fdba74)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Trading
-                </h1>
-              </div>
-              <p
-                className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                A collection of my learnings and reflections on economics,
-                finance, and trading, written to document my growth and
-                understanding of the financial markets.
-              </p>
-            </div>
+            <CategoryHero
+              eyebrow="Blog · Category"
+              title="Finance & Markets"
+              accent="#f97316"
+              description="Economics, investing and quantitative finance, written down as I learn them: how markets work and how to think clearly about risk."
+              stats={[
+                { value: allArticles.length, label: "articles" },
+                {
+                  value: new Set(
+                    allArticles.map((a) => a.subcategory).filter(Boolean),
+                  ).size,
+                  label: "topics",
+                },
+              ]}
+            />
 
             {/* Latest Articles Section */}
             {featuredArticle && (
@@ -227,90 +227,90 @@ export default function TradingBlogPage() {
                           borderColor: "var(--card-border)",
                         }}
                       >
-                      <div className="grid md:grid-cols-5 gap-0">
-                        {/* Left: Featured Image (60%) */}
-                        <div className="md:col-span-3 relative w-full aspect-[672/366]">
-                          <Image
-                            {...getCardImageProps(featuredArticle)}
-                            alt={featuredArticle.title}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 60vw"
-                            quality={70}
-                            placeholder="blur"
-                            blurDataURL={BLUR_DATA_URL}
-                            priority
-                            fetchPriority="high"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                        </div>
+                        <div className="grid md:grid-cols-5 gap-0">
+                          {/* Left: Featured Image (60%) */}
+                          <div className="md:col-span-3 relative w-full aspect-[672/366]">
+                            <Image
+                              {...getCardImageProps(featuredArticle)}
+                              alt={featuredArticle.title}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, 60vw"
+                              quality={70}
+                              placeholder="blur"
+                              blurDataURL={BLUR_DATA_URL}
+                              priority
+                              fetchPriority="high"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                          </div>
 
-                        {/* Right: Article Info (40%) */}
-                        <div className="md:col-span-2 p-8 flex flex-col justify-center md:overflow-hidden">
-                          <div className="mb-4">
-                            <span
-                              className="text-sm font-bold uppercase tracking-wider"
+                          {/* Right: Article Info (40%) */}
+                          <div className="md:col-span-2 p-8 flex flex-col justify-center md:overflow-hidden">
+                            <div className="mb-4">
+                              <span
+                                className="text-sm font-bold uppercase tracking-wider"
+                                style={{ color: "var(--accent)" }}
+                              >
+                                {categoryLabel(featuredArticle.category)}
+                              </span>
+                            </div>
+
+                            {/* Collection tag */}
+                            {featuredArticle.collection && (
+                              <div className="mb-4">
+                                <CollectionTag
+                                  collection={featuredArticle.collection}
+                                  variant="detailed"
+                                  clickable={false}
+                                />
+                              </div>
+                            )}
+
+                            <h3
+                              className="text-2xl md:text-3xl font-bold mb-4 leading-tight hover:text-[var(--accent)] transition-colors duration-300"
+                              style={{ color: "var(--text-primary)" }}
+                            >
+                              {featuredArticle.title}
+                            </h3>
+                            <div
+                              className="text-sm flex items-center gap-4 mb-4"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              <span>
+                                {formatDateMedium(featuredArticle.date)}
+                              </span>
+                              <span>•</span>
+                              <span>{featuredArticle.readTime}</span>
+                            </div>
+                            <p
+                              className="text-base leading-relaxed mb-6 line-clamp-4"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              {featuredArticle.excerpt}
+                            </p>
+
+                            <div
+                              className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
                               style={{ color: "var(--accent)" }}
                             >
-                              {featuredArticle.category}
-                            </span>
-                          </div>
-
-                          {/* Collection tag */}
-                          {featuredArticle.collection && (
-                            <div className="mb-4">
-                              <CollectionTag
-                                collection={featuredArticle.collection}
-                                variant="detailed"
-                                clickable={false}
-                              />
+                              Read Article
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 5l7 7-7 7"
+                                />
+                              </svg>
                             </div>
-                          )}
-
-                          <h3
-                            className="text-2xl md:text-3xl font-bold mb-4 leading-tight hover:text-[var(--accent)] transition-colors duration-300"
-                            style={{ color: "var(--text-primary)" }}
-                          >
-                            {featuredArticle.title}
-                          </h3>
-                          <div
-                            className="text-sm flex items-center gap-4 mb-4"
-                            style={{ color: "var(--text-secondary)" }}
-                          >
-                            <span>
-                              {formatDateMedium(featuredArticle.date)}
-                            </span>
-                            <span>•</span>
-                            <span>{featuredArticle.readTime}</span>
-                          </div>
-                          <p
-                            className="text-base leading-relaxed mb-6 line-clamp-4"
-                            style={{ color: "var(--text-secondary)" }}
-                          >
-                            {featuredArticle.excerpt}
-                          </p>
-
-                          <div
-                            className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all duration-300"
-                            style={{ color: "var(--accent)" }}
-                          >
-                            Read Article
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 5l7 7-7 7"
-                              />
-                            </svg>
                           </div>
                         </div>
-                      </div>
                       </div>
                     </Link>
                     <SubstackLink
@@ -335,55 +335,55 @@ export default function TradingBlogPage() {
                                 borderColor: "var(--card-border)",
                               }}
                             >
-                            <div className="relative h-32 overflow-hidden">
-                              <Image
-                                {...getCardImageProps(article)}
-                                alt={article.title}
-                                fill
-                                className="object-cover transition-transform duration-300 group-hover:scale-105"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                                quality={70}
-                                placeholder="blur"
-                                blurDataURL={BLUR_DATA_URL}
-                              />
-                            </div>
-                            <div className="p-4">
-                              <div className="mb-2">
-                                <span
-                                  className="text-xs font-medium uppercase tracking-wider"
-                                  style={{ color: "var(--accent)" }}
-                                >
-                                  {article.category}
-                                </span>
+                              <div className="relative h-32 overflow-hidden">
+                                <Image
+                                  {...getCardImageProps(article)}
+                                  alt={article.title}
+                                  fill
+                                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                                  quality={70}
+                                  placeholder="blur"
+                                  blurDataURL={BLUR_DATA_URL}
+                                />
                               </div>
-
-                              {/* Collection tag */}
-                              {article.collection && (
+                              <div className="p-4">
                                 <div className="mb-2">
-                                  <CollectionTag
-                                    collection={article.collection}
-                                    variant="compact"
-                                    clickable={false}
-                                  />
+                                  <span
+                                    className="text-xs font-medium uppercase tracking-wider"
+                                    style={{ color: "var(--accent)" }}
+                                  >
+                                    {categoryLabel(article.category)}
+                                  </span>
                                 </div>
-                              )}
 
-                              <h4
-                                className="text-sm font-semibold mb-2 leading-tight line-clamp-2 group-hover:text-[var(--accent)] transition-colors duration-300"
-                                style={{ color: "var(--text-primary)" }}
-                              >
-                                {article.title}
-                              </h4>
+                                {/* Collection tag */}
+                                {article.collection && (
+                                  <div className="mb-2">
+                                    <CollectionTag
+                                      collection={article.collection}
+                                      variant="compact"
+                                      clickable={false}
+                                    />
+                                  </div>
+                                )}
 
-                              <div
-                                className="text-xs flex items-center gap-2"
-                                style={{ color: "var(--text-secondary)" }}
-                              >
-                                <span>{formatDateShort(article.date)}</span>
-                                <span>•</span>
-                                <span>{article.readTime}</span>
+                                <h4
+                                  className="text-sm font-semibold mb-2 leading-tight line-clamp-2 group-hover:text-[var(--accent)] transition-colors duration-300"
+                                  style={{ color: "var(--text-primary)" }}
+                                >
+                                  {article.title}
+                                </h4>
+
+                                <div
+                                  className="text-xs flex items-center gap-2"
+                                  style={{ color: "var(--text-secondary)" }}
+                                >
+                                  <span>{formatDateShort(article.date)}</span>
+                                  <span>•</span>
+                                  <span>{article.readTime}</span>
+                                </div>
                               </div>
-                            </div>
                             </div>
                           </Link>
                           <SubstackLink
@@ -409,37 +409,29 @@ export default function TradingBlogPage() {
                   >
                     All Articles
                   </h2>
-                  <p style={{ color: "var(--text-secondary)" }}>
-                    {selectedCategories.length > 0 || searchTerm.trim()
-                      ? `Showing ${filteredArticles.length} of ${allArticles.length} articles`
-                      : `${allArticles.length} total trading articles`}
-                  </p>
                 </div>
 
-                {/* Search & Filter Bar */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
-                  <BlogSearchBar
-                    value={searchTerm}
-                    onChange={setSearchTerm}
-                    placeholder="Search articles..."
-                  />
-                  <SubcategoryFilter
-                    categories={categories.slice(1)}
-                    selectedSlugs={selectedCategories}
-                    onSelectionChange={setSelectedCategories}
-                    totalCount={allArticles.length}
-                  />
-                </div>
+                {/* Search & Filters */}
+                <BlogFilterBar
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  placeholder="Search articles..."
+                  correctedQuery={correctedQuery}
+                  topics={categories.slice(1)}
+                  selectedTopics={selectedCategories}
+                  setSelectedTopics={setSelectedCategories}
+                  filters={listing}
+                  resultCount={filteredArticles.length}
+                  totalCount={allArticles.length}
+                  noun="articles"
+                />
 
                 {/* Articles Grid */}
                 {filteredArticles.length > 0 ? (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {displayedArticles.map((article) => (
                       <div key={article.id}>
-                        <Link
-                          href={`/blog/${article.slug}`}
-                          className="block"
-                        >
+                        <Link href={`/blog/${article.slug}`} className="block">
                           <div
                             className="group rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
                             style={{
@@ -447,55 +439,55 @@ export default function TradingBlogPage() {
                               borderColor: "var(--card-border)",
                             }}
                           >
-                          <div className="relative h-48 overflow-hidden">
-                            <Image
-                              {...getCardImageProps(article)}
-                              alt={article.title}
-                              fill
-                              className="object-cover transition-transform duration-300 group-hover:scale-105"
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                              quality={70}
-                              placeholder="blur"
-                              blurDataURL={BLUR_DATA_URL}
-                            />
-                          </div>
-                          <div className="p-6">
-                            <div className="mb-3">
-                              <span
-                                className="text-xs font-medium uppercase tracking-wider"
-                                style={{ color: "var(--accent)" }}
-                              >
-                                {article.category}
-                              </span>
+                            <div className="relative h-48 overflow-hidden">
+                              <Image
+                                {...getCardImageProps(article)}
+                                alt={article.title}
+                                fill
+                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                quality={70}
+                                placeholder="blur"
+                                blurDataURL={BLUR_DATA_URL}
+                              />
                             </div>
-
-                            {/* Collection tag */}
-                            {article.collection && (
+                            <div className="p-6">
                               <div className="mb-3">
-                                <CollectionTag
-                                  collection={article.collection}
-                                  variant="default"
-                                  clickable={false}
-                                />
+                                <span
+                                  className="text-xs font-medium uppercase tracking-wider"
+                                  style={{ color: "var(--accent)" }}
+                                >
+                                  {categoryLabel(article.category)}
+                                </span>
                               </div>
-                            )}
 
-                            <h3
-                              className="text-lg font-semibold mb-3 leading-tight group-hover:text-[var(--accent)] transition-colors duration-300"
-                              style={{ color: "var(--text-primary)" }}
-                            >
-                              {article.title}
-                            </h3>
+                              {/* Collection tag */}
+                              {article.collection && (
+                                <div className="mb-3">
+                                  <CollectionTag
+                                    collection={article.collection}
+                                    variant="default"
+                                    clickable={false}
+                                  />
+                                </div>
+                              )}
 
-                            <div
-                              className="text-sm flex items-center gap-3 mb-4"
-                              style={{ color: "var(--text-secondary)" }}
-                            >
-                              <span>{formatDateMedium(article.date)}</span>
-                              <span>•</span>
-                              <span>{article.readTime}</span>
+                              <h3
+                                className="text-lg font-semibold mb-3 leading-tight group-hover:text-[var(--accent)] transition-colors duration-300"
+                                style={{ color: "var(--text-primary)" }}
+                              >
+                                {article.title}
+                              </h3>
+
+                              <div
+                                className="text-sm flex items-center gap-3 mb-4"
+                                style={{ color: "var(--text-secondary)" }}
+                              >
+                                <span>{formatDateMedium(article.date)}</span>
+                                <span>•</span>
+                                <span>{article.readTime}</span>
+                              </div>
                             </div>
-                          </div>
                           </div>
                         </Link>
                         <SubstackLink
@@ -524,6 +516,7 @@ export default function TradingBlogPage() {
                       onClick={() => {
                         setSelectedCategories([]);
                         setSearchTerm("");
+                        listing.clear();
                       }}
                       className="px-4 py-2 rounded-lg transition-colors text-white"
                       style={{ backgroundColor: "var(--accent)" }}

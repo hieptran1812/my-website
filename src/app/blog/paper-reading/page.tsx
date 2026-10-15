@@ -5,17 +5,24 @@ import Link from "next/link";
 import Image from "next/image";
 import { getMarkdownArticlesByCategory, Article } from "@/lib/blog";
 import FadeInWrapper from "@/components/FadeInWrapper";
+import CategoryHero from "@/components/CategoryHero";
 import { useLazyLoading } from "@/components/hooks/useLazyLoading";
 import { formatDateShort, formatDateMedium } from "@/lib/dateUtils";
 import CollectionTag from "@/components/CollectionTag";
 import { getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
-import SubcategoryFilter from "@/components/SubcategoryFilter";
-import BlogSearchBar from "@/components/BlogSearchBar";
+import BlogFilterBar from "@/components/BlogFilterBar";
+import { useListingFilters } from "@/components/hooks/useListingFilters";
 import { useArticleSearch } from "@/components/hooks/useArticleSearch";
 import { useSubcategoryFilter } from "@/components/hooks/useSubcategoryFilter";
 import VenueFilter, { selectionLabel } from "@/components/VenueFilter";
 import { useVenueFilter } from "@/components/hooks/useVenueFilter";
-import { extractVenueFromQuery, isVenueTag, venueLabel } from "@/lib/venue";
+import {
+  extractVenueFromQuery,
+  getVenue,
+  isVenueTag,
+  venueLabel,
+} from "@/lib/venue";
+import { categoryLabel } from "@/lib/categoryLabels";
 
 const ACRONYMS = new Set([
   "ai",
@@ -47,6 +54,10 @@ function formatSubcategoryName(slug: string): string {
     )
     .join(" ");
 }
+
+// Topic filtering happens in useListingFilters (so topic chips get faceted
+// counts); search runs unscoped. A stable reference keeps its memo valid.
+const NO_TOPICS: string[] = [];
 
 export default function PaperReadingBlogPage() {
   const [allArticles, setAllArticles] = useState<Article[]>([]);
@@ -122,7 +133,18 @@ export default function PaperReadingBlogPage() {
     searchTerm,
     setSearchTerm,
     filteredArticles: searchedArticles,
-  } = useArticleSearch(allArticles, selectedCategories);
+    correctedQuery,
+  } = useArticleSearch(allArticles, NO_TOPICS);
+
+  // Topic, tag, reading-length and sort, faceted and mirrored in the URL.
+  const listing = useListingFilters({
+    allArticles,
+    searched: searchedArticles,
+    searchTerm,
+    setSearchTerm,
+    selectedTopics: selectedCategories,
+  });
+  const listedArticles = listing.filtered;
 
   // Conference / year / acceptance tier, read from venue tags such as
   // `cvpr-2025-oral` (or a venue named in the title), narrowing the search.
@@ -132,7 +154,14 @@ export default function PaperReadingBlogPage() {
     filtered: filteredArticles,
     facets: venueFacets,
     venueOf,
-  } = useVenueFilter(allArticles, searchedArticles);
+  } = useVenueFilter(allArticles, listedArticles);
+  // Distinct venues across the whole listing, for the header (the facet
+  // counts move with the active filters).
+  const conferenceCount = useMemo(
+    () =>
+      new Set(allArticles.map((a) => getVenue(a)?.conf).filter(Boolean)).size,
+    [allArticles],
+  );
   const venueActive =
     venueSelection.confs.length +
       venueSelection.years.length +
@@ -229,38 +258,22 @@ export default function PaperReadingBlogPage() {
       >
         <main className="flex-1">
           <div className="max-w-6xl mx-auto px-6 py-16">
-            {/* Header with Category Name */}
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-3 mb-6">
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
-                  style={{
-                    background: "linear-gradient(135deg, #3b82f6, #6366f1)",
-                  }}
-                >
-                  📚
-                </div>
-                <h1
-                  className="text-4xl md:text-5xl font-bold"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #3b82f6, #6366f1, #8b5cf6)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Paper Reading
-                </h1>
-              </div>
-              <p
-                className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Some summaries, explanations, and thoughts of mine while reading
-                research papers on Computer Science, AI, and Machine Learning
-              </p>
-            </div>
+            <CategoryHero
+              eyebrow="Blog · Category"
+              title="Paper Reading"
+              accent="#6366f1"
+              description="Close readings of research papers in AI and machine learning: what each one claims, how it actually works, and where it could go next."
+              stats={[
+                { value: allArticles.length, label: "papers" },
+                {
+                  value: new Set(
+                    allArticles.map((a) => a.subcategory).filter(Boolean),
+                  ).size,
+                  label: "topics",
+                },
+                { value: conferenceCount, label: "conferences" },
+              ]}
+            />
 
             {/* Latest Articles Section */}
             {featuredArticle && (
@@ -306,7 +319,7 @@ export default function PaperReadingBlogPage() {
                             className="text-sm font-bold uppercase tracking-wider"
                             style={{ color: "var(--accent)" }}
                           >
-                            {featuredArticle.category}
+                            {categoryLabel(featuredArticle.category)}
                           </span>
                         </div>
 
@@ -400,7 +413,7 @@ export default function PaperReadingBlogPage() {
                                 className="text-xs font-medium uppercase tracking-wider"
                                 style={{ color: "var(--accent)" }}
                               >
-                                {article.category}
+                                {categoryLabel(article.category)}
                               </span>
                             </div>
 
@@ -469,59 +482,74 @@ export default function PaperReadingBlogPage() {
                   >
                     All Articles
                   </h2>
-                  <p style={{ color: "var(--text-secondary)" }}>
-                    {selectedCategories.length > 0 ||
-                    searchTerm.trim() ||
-                    venueActive
-                      ? `Showing ${filteredArticles.length} of ${allArticles.length} papers`
-                      : `${allArticles.length} total research papers`}
-                  </p>
                 </div>
 
-                {/* Search & Filter Bar */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
-                  <BlogSearchBar
-                    value={searchTerm}
-                    onChange={setSearchTerm}
-                    placeholder="Search papers..."
-                  />
-                  <SubcategoryFilter
-                    categories={categories.slice(1)}
-                    selectedSlugs={selectedCategories}
-                    onSelectionChange={setSelectedCategories}
-                    totalCount={allArticles.length}
-                  />
-                  <VenueFilter
-                    selection={venueSelection}
-                    onChange={setVenueSelection}
-                    facets={venueFacets}
-                  />
-                </div>
-                {venueSuggestion && (
-                  <div className="flex justify-center -mt-8 mb-10">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setVenueSelection(venueSuggestion.next);
-                        setSearchTerm(venueSuggestion.rest);
-                      }}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm border transition-colors hover:shadow-sm"
-                      style={{
-                        backgroundColor: "var(--accent-subtle)",
-                        borderColor: "var(--accent)",
-                        color: "var(--accent)",
-                      }}
-                    >
-                      <span aria-hidden>🎓</span>
-                      Filter by <strong>{venueSuggestion.label}</strong>
-                      {venueSuggestion.rest && (
-                        <span style={{ color: "var(--text-secondary)" }}>
-                          + search &ldquo;{venueSuggestion.rest}&rdquo;
-                        </span>
-                      )}
-                    </button>
-                  </div>
-                )}
+                {/* Search & Filters */}
+                <BlogFilterBar
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  placeholder="Search papers..."
+                  correctedQuery={correctedQuery}
+                  topics={categories.slice(1)}
+                  selectedTopics={selectedCategories}
+                  setSelectedTopics={setSelectedCategories}
+                  filters={listing}
+                  resultCount={filteredArticles.length}
+                  totalCount={allArticles.length}
+                  noun="papers"
+                  extra={
+                    <VenueFilter
+                      selection={venueSelection}
+                      onChange={setVenueSelection}
+                      facets={venueFacets}
+                    />
+                  }
+                  extraPills={
+                    venueActive
+                      ? [
+                          {
+                            label: selectionLabel(venueSelection),
+                            onRemove: () =>
+                              setVenueSelection({
+                                confs: [],
+                                years: [],
+                                tiers: [],
+                              }),
+                          },
+                        ]
+                      : []
+                  }
+                  onClearExtra={() =>
+                    setVenueSelection({ confs: [], years: [], tiers: [] })
+                  }
+                  hint={
+                    venueSuggestion && (
+                      <div className="flex justify-center">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setVenueSelection(venueSuggestion.next);
+                            setSearchTerm(venueSuggestion.rest);
+                          }}
+                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm border transition-colors hover:shadow-sm"
+                          style={{
+                            backgroundColor: "var(--accent-subtle)",
+                            borderColor: "var(--accent)",
+                            color: "var(--accent)",
+                          }}
+                        >
+                          <span aria-hidden>🎓</span>
+                          Filter by <strong>{venueSuggestion.label}</strong>
+                          {venueSuggestion.rest && (
+                            <span style={{ color: "var(--text-secondary)" }}>
+                              + search &ldquo;{venueSuggestion.rest}&rdquo;
+                            </span>
+                          )}
+                        </button>
+                      </div>
+                    )
+                  }
+                />
 
                 {/* Articles Grid - 3 columns */}
                 {filteredArticles.length > 0 ? (
@@ -557,7 +585,7 @@ export default function PaperReadingBlogPage() {
                                 className="text-xs font-medium uppercase tracking-wider"
                                 style={{ color: "var(--accent)" }}
                               >
-                                {article.category}
+                                {categoryLabel(article.category)}
                               </span>
                             </div>
 
@@ -597,17 +625,17 @@ export default function PaperReadingBlogPage() {
                                   .filter((tag) => !isVenueTag(tag))
                                   .slice(0, 2)
                                   .map((tag) => (
-                                  <span
-                                    key={tag}
-                                    className="px-2 py-1 text-xs rounded-full"
-                                    style={{
-                                      backgroundColor: "var(--accent-subtle)",
-                                      color: "var(--accent)",
-                                    }}
-                                  >
-                                    {tag}
-                                  </span>
-                                ))}
+                                    <span
+                                      key={tag}
+                                      className="px-2 py-1 text-xs rounded-full"
+                                      style={{
+                                        backgroundColor: "var(--accent-subtle)",
+                                        color: "var(--accent)",
+                                      }}
+                                    >
+                                      {tag}
+                                    </span>
+                                  ))}
                               </div>
                             )}
 
@@ -645,6 +673,7 @@ export default function PaperReadingBlogPage() {
                       onClick={() => {
                         setSelectedCategories([]);
                         setSearchTerm("");
+                        listing.clear();
                         setVenueSelection({ confs: [], years: [], tiers: [] });
                       }}
                       className="px-4 py-2 rounded-lg transition-colors text-white"

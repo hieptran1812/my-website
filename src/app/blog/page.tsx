@@ -3,10 +3,16 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import FadeInWrapper from "@/components/FadeInWrapper";
+import CategoryHero from "@/components/CategoryHero";
 import ArticleCard from "@/components/ArticleCard";
 import ArticleGrid from "@/components/ArticleGrid";
 import { formatDateMedium, formatDateShort } from "@/lib/dateUtils";
-import { getArticleImageUrl, getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
+import {
+  getArticleImageUrl,
+  getCardImageProps,
+  BLUR_DATA_URL,
+} from "@/lib/articleImage";
+import { categoryLabel } from "@/lib/categoryLabels";
 
 interface BlogPostMetadata {
   slug: string;
@@ -60,7 +66,7 @@ function convertToArticle(post: BlogPostMetadata): Article {
 // Convert local Article to lib Article format
 function convertToLibArticle(
   article: Article,
-  originalSlug?: string
+  originalSlug?: string,
 ): import("@/lib/blog").Article {
   return {
     id: originalSlug || article.link.split("/").pop() || "unknown",
@@ -82,10 +88,10 @@ function convertToLibArticle(
 export default function BlogPage() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [articleSlugs, setArticleSlugs] = useState<Map<string, string>>(
-    new Map()
+    new Map(),
   );
   const [categoryCounts, setCategoryCounts] = useState<Record<string, number>>(
-    {}
+    {},
   );
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -100,7 +106,7 @@ export default function BlogPage() {
     async function fetchInitial() {
       try {
         const response = await fetch(
-          `/api/blog/posts?page=1&limit=${ITEMS_PER_PAGE}`
+          `/api/blog/posts?page=1&limit=${ITEMS_PER_PAGE}`,
         );
         const data: PostsResponse = await response.json();
         const posts = data.posts || [];
@@ -121,8 +127,8 @@ export default function BlogPage() {
           Math.max(
             0,
             (data.pagination?.total ?? convertedArticles.length) -
-              convertedArticles.length
-          )
+              convertedArticles.length,
+          ),
         );
         setPage(1);
       } catch (error) {
@@ -152,7 +158,7 @@ export default function BlogPage() {
     try {
       const nextPage = page + 1;
       const response = await fetch(
-        `/api/blog/posts?page=${nextPage}&limit=${ITEMS_PER_PAGE}`
+        `/api/blog/posts?page=${nextPage}&limit=${ITEMS_PER_PAGE}`,
       );
       const data: PostsResponse = await response.json();
       const posts = data.posts || [];
@@ -169,8 +175,9 @@ export default function BlogPage() {
       setRemainingCount(
         Math.max(
           0,
-          (data.pagination?.total ?? 0) - (articles.length + newArticles.length)
-        )
+          (data.pagination?.total ?? 0) -
+            (articles.length + newArticles.length),
+        ),
       );
     } catch (error) {
       console.error("Error loading more articles:", error);
@@ -204,8 +211,8 @@ export default function BlogPage() {
       color: "from-purple-500 to-pink-600",
     },
     {
-      name: "Trading",
-      description: "Market analysis and trading strategies",
+      name: "Finance & Markets",
+      description: "Economics, investing, quant and how markets work",
       link: "/blog/trading",
       icon: "₿",
       count: getCategoryCount("trading"),
@@ -269,21 +276,25 @@ export default function BlogPage() {
           <div className="max-w-6xl mx-auto px-6 py-16">
             {/* Header */}
             <FadeInWrapper duration={600} delay={100}>
-              <div className="mb-16 text-center">
-                <h1 className="text-4xl md:text-6xl font-bold mb-6 blog-title-animated">
-                  Blog
-                </h1>
-                <p
-                  className="text-xl max-w-3xl mx-auto blog-subtitle-animated"
-                  style={{
-                    color: "var(--text-secondary)",
-                  }}
-                >
-                  Thoughts on technology, software development, AI, and
-                  everything in between. Here I share insights, tutorials, and
-                  lessons learned from my journey in tech.
-                </p>
-              </div>
+              <CategoryHero
+                eyebrow="Writing"
+                title="Blog"
+                accent="var(--accent)"
+                description="Long-form notes on software, machine learning, research papers and markets: how things work, written down carefully enough to be useful."
+                stats={[
+                  {
+                    value: Object.values(categoryCounts)
+                      .reduce((sum, n) => sum + n, 0)
+                      .toLocaleString("en-US"),
+                    label: "articles",
+                  },
+                  {
+                    value: Object.values(categoryCounts).filter((n) => n > 0)
+                      .length,
+                    label: "categories",
+                  },
+                ]}
+              />
             </FadeInWrapper>
 
             {/* Latest Articles Section */}
@@ -327,7 +338,7 @@ export default function BlogPage() {
                             className="text-sm font-bold uppercase tracking-wider"
                             style={{ color: "var(--accent)" }}
                           >
-                            {featuredArticle.category}
+                            {categoryLabel(featuredArticle.category)}
                           </span>
                         </div>
                         <h3
@@ -411,7 +422,7 @@ export default function BlogPage() {
                                 className="text-xs font-medium uppercase tracking-wider"
                                 style={{ color: "var(--accent)" }}
                               >
-                                {article.category}
+                                {categoryLabel(article.category)}
                               </span>
                             </div>
                             <h4
@@ -499,7 +510,7 @@ export default function BlogPage() {
                           <ArticleCard
                             article={convertToLibArticle(
                               article,
-                              articleSlugs.get(article.link)
+                              articleSlugs.get(article.link),
                             )}
                             index={index}
                             variant="default"
@@ -537,7 +548,7 @@ export default function BlogPage() {
                           ) : (
                             `Load More Articles (${Math.min(
                               ITEMS_PER_PAGE,
-                              remainingCount
+                              remainingCount,
                             )} more)`
                           )}
                         </button>

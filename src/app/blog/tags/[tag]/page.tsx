@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -8,6 +14,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import TagBadge, { TagList } from "@/components/TagBadge";
 import { formatDateMedium } from "@/lib/dateUtils";
 import { getCardImageProps, BLUR_DATA_URL } from "@/lib/articleImage";
+import { categoryLabel } from "@/lib/categoryLabels";
 
 interface BlogPost {
   slug: string;
@@ -47,7 +54,7 @@ export default function TagPage() {
       try {
         // Server filters by tag so we only fetch this tag's posts (presorted).
         const response = await fetch(
-          `/api/blog/posts?tag=${encodeURIComponent(tagSlug.toLowerCase())}`
+          `/api/blog/posts?tag=${encodeURIComponent(tagSlug.toLowerCase())}`,
         );
         const data = await response.json();
         const allPosts: BlogPost[] = Array.isArray(data)
@@ -57,8 +64,9 @@ export default function TagPage() {
         // Defensive: re-apply the exact tag match the server uses.
         const filteredArticles = allPosts.filter((post) =>
           post.tags?.some(
-            (t) => t.toLowerCase().replace(/\s+/g, "-") === tagSlug.toLowerCase()
-          )
+            (t) =>
+              t.toLowerCase().replace(/\s+/g, "-") === tagSlug.toLowerCase(),
+          ),
         );
 
         setArticles(filteredArticles);
@@ -138,14 +146,20 @@ export default function TagPage() {
           <div className="relative">
             <div
               className="animate-spin rounded-full h-16 w-16 border-4 border-t-transparent"
-              style={{ borderColor: "var(--accent)", borderTopColor: "transparent" }}
+              style={{
+                borderColor: "var(--accent)",
+                borderTopColor: "transparent",
+              }}
             />
             <div
               className="absolute inset-0 animate-ping rounded-full h-16 w-16 border-4 opacity-20"
               style={{ borderColor: "var(--accent)" }}
             />
           </div>
-          <p className="mt-6 text-lg" style={{ color: "var(--text-secondary)" }}>
+          <p
+            className="mt-6 text-lg"
+            style={{ color: "var(--text-secondary)" }}
+          >
             Loading articles...
           </p>
         </div>
@@ -173,7 +187,8 @@ export default function TagPage() {
                     className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg"
                     style={{
                       backgroundColor: "var(--accent)",
-                      boxShadow: "0 8px 32px rgba(var(--accent-rgb, 130, 170, 255), 0.3)",
+                      boxShadow:
+                        "0 8px 32px rgba(var(--accent-rgb, 130, 170, 255), 0.3)",
                     }}
                   >
                     <svg
@@ -208,8 +223,8 @@ export default function TagPage() {
                   {articles.length === 0
                     ? "No articles found with this tag"
                     : articles.length === 1
-                    ? "1 article"
-                    : `${articles.length} articles`}
+                      ? "1 article"
+                      : `${articles.length} articles`}
                 </p>
 
                 {/* Breadcrumb */}
@@ -231,7 +246,9 @@ export default function TagPage() {
                     Tags
                   </Link>
                   <span>/</span>
-                  <span style={{ color: "var(--accent)" }}>{displayTagName}</span>
+                  <span style={{ color: "var(--accent)" }}>
+                    {displayTagName}
+                  </span>
                 </div>
               </div>
             </FadeInWrapper>
@@ -271,7 +288,10 @@ export default function TagPage() {
                       duration={400}
                       delay={Math.min(350 + index * 50, 600)}
                     >
-                      <Link href={`/blog/${article.slug}`} className="block group">
+                      <Link
+                        href={`/blog/${article.slug}`}
+                        className="block group"
+                      >
                         <article
                           className="rounded-xl border overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
                           style={{
@@ -302,7 +322,7 @@ export default function TagPage() {
                                 className="text-xs font-semibold uppercase tracking-wider"
                                 style={{ color: "var(--accent)" }}
                               >
-                                {article.category}
+                                {categoryLabel(article.category)}
                               </span>
                               <span
                                 className="text-xs"
@@ -348,7 +368,9 @@ export default function TagPage() {
                               className="flex items-center justify-between text-xs"
                               style={{ color: "var(--text-muted)" }}
                             >
-                              <span>{formatDateMedium(article.publishDate)}</span>
+                              <span>
+                                {formatDateMedium(article.publishDate)}
+                              </span>
                               <span className="inline-flex items-center gap-1 text-[var(--accent)] group-hover:gap-2 transition-all duration-300">
                                 Read more
                                 <svg
@@ -432,38 +454,39 @@ export default function TagPage() {
                 )}
 
                 {/* End of list indicator */}
-                {!hasMoreArticles && displayedArticles.length > ITEMS_PER_PAGE && (
-                  <div className="flex justify-center items-center py-8 mt-4">
-                    <div
-                      className="flex items-center gap-2 px-4 py-2 rounded-full"
-                      style={{
-                        backgroundColor: "var(--surface)",
-                        border: "1px solid var(--border)",
-                      }}
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        style={{ color: "var(--accent)" }}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                {!hasMoreArticles &&
+                  displayedArticles.length > ITEMS_PER_PAGE && (
+                    <div className="flex justify-center items-center py-8 mt-4">
+                      <div
+                        className="flex items-center gap-2 px-4 py-2 rounded-full"
+                        style={{
+                          backgroundColor: "var(--surface)",
+                          border: "1px solid var(--border)",
+                        }}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      <span
-                        className="text-sm"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        You&apos;ve seen all {articles.length} articles
-                      </span>
+                        <svg
+                          className="w-4 h-4"
+                          style={{ color: "var(--accent)" }}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        <span
+                          className="text-sm"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
+                          You&apos;ve seen all {articles.length} articles
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
               </FadeInWrapper>
             ) : (
               <FadeInWrapper duration={600} delay={300}>
@@ -497,7 +520,8 @@ export default function TagPage() {
                     className="text-lg mb-8"
                     style={{ color: "var(--text-secondary)" }}
                   >
-                    There are no articles with the tag &quot;{displayTagName}&quot; yet.
+                    There are no articles with the tag &quot;{displayTagName}
+                    &quot; yet.
                   </p>
                   <Link
                     href="/blog/tags"

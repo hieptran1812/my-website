@@ -13,7 +13,9 @@ export type VenueTier =
   | "oral"
   | "spotlight"
   | "highlight"
-  | "poster";
+  | "poster"
+  | "findings"
+  | "workshop";
 
 export interface Venue {
   /** Canonical conference slug: "cvpr", "neurips", ... */
@@ -22,35 +24,89 @@ export interface Venue {
   tier?: VenueTier;
 }
 
-/** Canonical slug → display name, plus spellings seen in the wild. */
-const CONFERENCES: Record<string, { name: string; aliases: string[] }> = {
-  cvpr: { name: "CVPR", aliases: [] },
-  iccv: { name: "ICCV", aliases: [] },
-  eccv: { name: "ECCV", aliases: [] },
-  wacv: { name: "WACV", aliases: [] },
-  neurips: { name: "NeurIPS", aliases: ["nips"] },
-  icml: { name: "ICML", aliases: [] },
-  iclr: { name: "ICLR", aliases: [] },
-  aaai: { name: "AAAI", aliases: [] },
-  ijcai: { name: "IJCAI", aliases: [] },
-  aistats: { name: "AISTATS", aliases: [] },
-  uai: { name: "UAI", aliases: [] },
-  colt: { name: "COLT", aliases: [] },
-  acl: { name: "ACL", aliases: [] },
-  emnlp: { name: "EMNLP", aliases: [] },
-  naacl: { name: "NAACL", aliases: [] },
-  coling: { name: "COLING", aliases: [] },
-  colm: { name: "COLM", aliases: [] },
-  tmlr: { name: "TMLR", aliases: [] },
-  kdd: { name: "KDD", aliases: ["sigkdd"] },
-  sigir: { name: "SIGIR", aliases: [] },
-  recsys: { name: "RecSys", aliases: [] },
-  interspeech: { name: "Interspeech", aliases: [] },
-  icassp: { name: "ICASSP", aliases: [] },
-  corl: { name: "CoRL", aliases: [] },
-  icra: { name: "ICRA", aliases: [] },
-  siggraph: { name: "SIGGRAPH", aliases: [] },
+export type VenueField =
+  "ml" | "vision" | "nlp" | "speech" | "ir" | "robotics" | "graphics" | "ai";
+
+export const FIELD_LABELS: Record<VenueField, string> = {
+  ml: "Machine learning",
+  vision: "Computer vision",
+  nlp: "NLP",
+  speech: "Speech & audio",
+  ir: "Data mining & IR",
+  robotics: "Robotics",
+  graphics: "Graphics",
+  ai: "General AI",
 };
+
+/**
+ * Canonical slug → display name, field, and spellings seen in the wild.
+ * `top` venues are always offered in the filter, even before a post has one,
+ * so the reader can see what the listing covers (or will).
+ */
+const CONFERENCES: Record<
+  string,
+  { name: string; field: VenueField; top?: boolean; aliases: string[] }
+> = {
+  neurips: { name: "NeurIPS", field: "ml", top: true, aliases: ["nips"] },
+  icml: { name: "ICML", field: "ml", top: true, aliases: [] },
+  iclr: { name: "ICLR", field: "ml", top: true, aliases: [] },
+  colm: { name: "COLM", field: "ml", top: true, aliases: [] },
+  aistats: { name: "AISTATS", field: "ml", aliases: [] },
+  uai: { name: "UAI", field: "ml", aliases: [] },
+  colt: { name: "COLT", field: "ml", aliases: [] },
+  tmlr: { name: "TMLR", field: "ml", aliases: [] },
+  jmlr: { name: "JMLR", field: "ml", aliases: [] },
+  mlsys: { name: "MLSys", field: "ml", aliases: [] },
+  cvpr: { name: "CVPR", field: "vision", top: true, aliases: [] },
+  iccv: { name: "ICCV", field: "vision", top: true, aliases: [] },
+  eccv: { name: "ECCV", field: "vision", top: true, aliases: [] },
+  wacv: { name: "WACV", field: "vision", aliases: [] },
+  bmvc: { name: "BMVC", field: "vision", aliases: [] },
+  "3dv": { name: "3DV", field: "vision", aliases: [] },
+  miccai: { name: "MICCAI", field: "vision", aliases: [] },
+  tpami: { name: "TPAMI", field: "vision", aliases: [] },
+  acl: { name: "ACL", field: "nlp", top: true, aliases: [] },
+  emnlp: { name: "EMNLP", field: "nlp", top: true, aliases: [] },
+  naacl: { name: "NAACL", field: "nlp", top: true, aliases: [] },
+  eacl: { name: "EACL", field: "nlp", aliases: [] },
+  coling: { name: "COLING", field: "nlp", aliases: [] },
+  tacl: { name: "TACL", field: "nlp", aliases: [] },
+  interspeech: { name: "Interspeech", field: "speech", top: true, aliases: [] },
+  icassp: { name: "ICASSP", field: "speech", top: true, aliases: [] },
+  asru: { name: "ASRU", field: "speech", aliases: [] },
+  slt: { name: "SLT", field: "speech", aliases: [] },
+  ismir: { name: "ISMIR", field: "speech", aliases: [] },
+  kdd: { name: "KDD", field: "ir", top: true, aliases: ["sigkdd"] },
+  sigir: { name: "SIGIR", field: "ir", top: true, aliases: [] },
+  www: { name: "WWW", field: "ir", aliases: ["thewebconf"] },
+  wsdm: { name: "WSDM", field: "ir", aliases: [] },
+  cikm: { name: "CIKM", field: "ir", aliases: [] },
+  recsys: { name: "RecSys", field: "ir", aliases: [] },
+  corl: { name: "CoRL", field: "robotics", top: true, aliases: [] },
+  rss: { name: "RSS", field: "robotics", aliases: [] },
+  icra: { name: "ICRA", field: "robotics", aliases: [] },
+  iros: { name: "IROS", field: "robotics", aliases: [] },
+  siggraph: { name: "SIGGRAPH", field: "graphics", top: true, aliases: [] },
+  "siggraph-asia": { name: "SIGGRAPH Asia", field: "graphics", aliases: [] },
+  aaai: { name: "AAAI", field: "ai", top: true, aliases: [] },
+  ijcai: { name: "IJCAI", field: "ai", aliases: [] },
+};
+
+/** Field → its conferences, top venues first, in registry order. */
+export function conferencesByField(): {
+  field: VenueField;
+  confs: { slug: string; top: boolean }[];
+}[] {
+  const groups = new Map<VenueField, { slug: string; top: boolean }[]>();
+  for (const [slug, c] of Object.entries(CONFERENCES)) {
+    const list = groups.get(c.field) ?? [];
+    list.push({ slug, top: Boolean(c.top) });
+    groups.set(c.field, list);
+  }
+  return (Object.keys(FIELD_LABELS) as VenueField[])
+    .filter((f) => groups.has(f))
+    .map((field) => ({ field, confs: groups.get(field)! }));
+}
 
 const ALIAS_TO_CONF = new Map<string, string>();
 for (const [slug, { aliases }] of Object.entries(CONFERENCES)) {
@@ -65,6 +121,8 @@ export const TIER_ORDER: VenueTier[] = [
   "spotlight",
   "highlight",
   "poster",
+  "findings",
+  "workshop",
 ];
 
 export const TIER_LABELS: Record<VenueTier, string> = {
@@ -73,6 +131,8 @@ export const TIER_LABELS: Record<VenueTier, string> = {
   spotlight: "Spotlight",
   highlight: "Highlight",
   poster: "Poster",
+  findings: "Findings",
+  workshop: "Workshop",
 };
 
 const TIER_WORDS: [RegExp, VenueTier][] = [
@@ -81,7 +141,12 @@ const TIER_WORDS: [RegExp, VenueTier][] = [
   [/^spotlight$/, "spotlight"],
   [/^highlights?$/, "highlight"],
   [/^poster$/, "poster"],
+  [/^findings$/, "findings"],
+  [/^workshops?$/, "workshop"],
 ];
+
+/** Track words that say "main conference" and carry no tier of their own. */
+const NEUTRAL_SUFFIX = /^(main|main-?track|conference|long|short)$/;
 
 function tierFromWord(word: string): VenueTier | undefined {
   const w = word.toLowerCase().replace(/[\s_]+/g, "-");
@@ -96,9 +161,15 @@ function normalizeYear(raw: string): number | undefined {
   return year >= 1980 && year <= 2100 ? year : undefined;
 }
 
+// Multi-word venues ("siggraph-asia") also match with a space in prose.
 const ALIAS_PATTERN = [...ALIAS_TO_CONF.keys()]
   .sort((a, b) => b.length - a.length)
+  .map((a) => a.replace(/-/g, "[-\\s]"))
   .join("|");
+
+function lookupConf(raw: string): string | undefined {
+  return ALIAS_TO_CONF.get(raw.toLowerCase().replace(/\s+/g, "-"));
+}
 
 /** `cvpr-2025-oral`, `neurips2024`, `iclr_25`, `icml-2024-award-candidate`. */
 const TAG_RE = new RegExp(
@@ -108,20 +179,22 @@ const TAG_RE = new RegExp(
 
 /** "NeurIPS 2024", "CVPR'25 Oral", "ICLR 2025 (Spotlight)". */
 const TEXT_RE = new RegExp(
-  `\\b(${ALIAS_PATTERN})\\s*'?(\\d{4}|\\d{2})\\b(?:\\s*[(\\[]?\\s*(award candidate|best paper|outstanding paper|oral|spotlight|highlight|poster))?`,
+  `\\b(${ALIAS_PATTERN})\\s*'?(\\d{4}|\\d{2})\\b(?:\\s*[(\\[]?\\s*(award candidate|best paper|outstanding paper|oral|spotlight|highlight|poster|findings|workshop))?`,
   "i",
 );
 
 export function parseVenueTag(tag: string): Venue | null {
   const m = TAG_RE.exec(tag.trim());
   if (!m) return null;
-  const conf = ALIAS_TO_CONF.get(m[1].toLowerCase());
+  const conf = lookupConf(m[1]);
   if (!conf) return null;
   const year = m[2] ? normalizeYear(m[2].replace("'", "")) : undefined;
-  const tier = m[3] ? tierFromWord(m[3]) : undefined;
+  const suffix = m[3]?.toLowerCase();
+  const tier = suffix ? tierFromWord(suffix) : undefined;
+  const neutral = suffix ? NEUTRAL_SUFFIX.test(suffix) : false;
   // A bare conference word with an unknown suffix ("acl-anthology") is a topic
   // tag, not a venue.
-  if (m[3] && !tier) return null;
+  if (suffix && !tier && !neutral) return null;
   // "acl" or "kdd" alone is too ambiguous to trust as a venue.
   if (!year && !tier) return null;
   return { conf, year, tier };
@@ -130,7 +203,7 @@ export function parseVenueTag(tag: string): Venue | null {
 export function parseVenueText(text: string): Venue | null {
   const m = TEXT_RE.exec(text);
   if (!m) return null;
-  const conf = ALIAS_TO_CONF.get(m[1].toLowerCase());
+  const conf = lookupConf(m[1]);
   if (!conf) return null;
   return {
     conf,
@@ -203,7 +276,11 @@ export function isVenueTag(tag: string): boolean {
 export function extractVenueFromQuery(
   query: string,
 ): { venue: Venue; rest: string } | null {
-  const tokens = query.trim().split(/\s+/).filter(Boolean);
+  const tokens = query
+    .trim()
+    .replace(/\bsiggraph\s+asia\b/gi, "siggraph-asia")
+    .split(/\s+/)
+    .filter(Boolean);
   let conf: string | undefined;
   let year: number | undefined;
   let tier: VenueTier | undefined;
@@ -211,9 +288,9 @@ export function extractVenueFromQuery(
   for (const raw of tokens) {
     const tok = raw.toLowerCase();
     const glued = TAG_RE.exec(tok);
-    if (!conf && glued && ALIAS_TO_CONF.has(glued[1].toLowerCase())) {
+    if (!conf && glued && lookupConf(glued[1])) {
       const parsed = {
-        conf: ALIAS_TO_CONF.get(glued[1].toLowerCase())!,
+        conf: lookupConf(glued[1])!,
         year: glued[2] ? normalizeYear(glued[2].replace("'", "")) : undefined,
         tier: glued[3] ? tierFromWord(glued[3]) : undefined,
       };

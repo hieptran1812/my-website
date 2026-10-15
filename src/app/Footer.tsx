@@ -17,7 +17,7 @@ const blogCategories = [
   { name: "Notes", href: "/blog/notes" },
   { name: "Software Development", href: "/blog/software-development" },
   { name: "Machine Learning", href: "/blog/machine-learning" },
-  { name: "Trading", href: "/blog/trading" },
+  { name: "Finance & Markets", href: "/blog/trading" },
 ];
 
 const resourceLinks = [

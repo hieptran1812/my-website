@@ -10,6 +10,7 @@ tags:
     "causal-analysis",
     "model-behavior",
     "ai-safety",
+    "emnlp-2026",
   ]
 date: "2026-01-07"
 author: "Hiep Tran"

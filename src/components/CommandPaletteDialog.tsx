@@ -25,7 +25,7 @@ const NAV_LINKS = [
   { label: "Paper Reading", href: "/blog/paper-reading" },
   { label: "Machine Learning", href: "/blog/machine-learning" },
   { label: "Software Development", href: "/blog/software-development" },
-  { label: "Trading", href: "/blog/trading" },
+  { label: "Finance & Markets", href: "/blog/trading" },
   { label: "Notes", href: "/blog/notes" },
 ];
 

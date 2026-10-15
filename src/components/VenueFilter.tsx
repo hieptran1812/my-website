@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { conferenceName, TIER_LABELS, type VenueTier } from "@/lib/venue";
+import {
+  conferenceName,
+  conferencesByField,
+  FIELD_LABELS,
+  TIER_LABELS,
+  type VenueTier,
+} from "@/lib/venue";
 import {
   isEmptySelection,
   type FacetOption,
@@ -51,10 +57,7 @@ function Chip({
       }}
     >
       <span>{label}</span>
-      <span
-        className="tabular-nums"
-        style={{ opacity: active ? 0.85 : 0.6 }}
-      >
+      <span className="tabular-nums" style={{ opacity: active ? 0.85 : 0.6 }}>
         {count}
       </span>
     </button>
@@ -84,7 +87,10 @@ function Section({
 export function selectionLabel(sel: VenueSelection): string {
   const parts = [
     sel.confs.map(conferenceName).join(" / "),
-    sel.years.slice().sort((a, b) => b - a).join(" / "),
+    sel.years
+      .slice()
+      .sort((a, b) => b - a)
+      .join(" / "),
     sel.tiers.map((t) => TIER_LABELS[t]).join(" / "),
   ].filter(Boolean);
   return parts.join(" · ");
@@ -116,6 +122,31 @@ export default function VenueFilter({
   }, [isOpen, close]);
 
   if (facets.venued === 0) return null;
+
+  // Every top venue is listed (dimmed at 0) so the reader sees the coverage;
+  // other venues appear once a post has them. Busiest first within a field.
+  const counts = new Map(facets.confs.map((c) => [c.value, c.count]));
+  const conferenceGroups = conferencesByField()
+    .map(({ field, confs }) => ({
+      field,
+      confs: confs
+        .filter(
+          (c) =>
+            c.top || counts.has(c.slug) || selection.confs.includes(c.slug),
+        )
+        .map((c, order) => ({
+          slug: c.slug,
+          count: counts.get(c.slug) ?? 0,
+          order,
+        }))
+        .sort((a, b) => b.count - a.count || a.order - b.order),
+    }))
+    .filter((g) => g.confs.length > 0)
+    .sort(
+      (a, b) =>
+        b.confs.reduce((s, c) => s + c.count, 0) -
+        a.confs.reduce((s, c) => s + c.count, 0),
+    );
 
   const empty = isEmptySelection(selection);
   const activeCount =
@@ -207,20 +238,34 @@ export default function VenueFilter({
               />
             </Section>
             <Section title="Conference">
-              {facets.confs.map((c) => (
-                <Chip
-                  key={c.value}
-                  label={conferenceName(c.value)}
-                  count={c.count}
-                  active={selection.confs.includes(c.value)}
-                  onClick={() =>
-                    onChange({
-                      ...selection,
-                      confs: toggle(selection.confs, c.value),
-                    })
-                  }
-                />
-              ))}
+              <div className="w-full space-y-2.5">
+                {conferenceGroups.map(({ field, confs }) => (
+                  <div key={field}>
+                    <div
+                      className="text-[11px] mb-1.5"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {FIELD_LABELS[field]}
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {confs.map((c) => (
+                        <Chip
+                          key={c.slug}
+                          label={conferenceName(c.slug)}
+                          count={c.count}
+                          active={selection.confs.includes(c.slug)}
+                          onClick={() =>
+                            onChange({
+                              ...selection,
+                              confs: toggle(selection.confs, c.slug),
+                            })
+                          }
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </Section>
             {facets.years.length > 0 && (
               <Section title="Year">
@@ -260,7 +305,10 @@ export default function VenueFilter({
             )}
           </div>
           {!empty && (
-            <div className="p-2 border-t" style={{ borderColor: "var(--border)" }}>
+            <div
+              className="p-2 border-t"
+              style={{ borderColor: "var(--border)" }}
+            >
               <button
                 type="button"
                 onClick={() => onChange({ confs: [], years: [], tiers: [] })}
