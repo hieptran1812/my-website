@@ -31,12 +31,12 @@ Created 2026-10-15. Source: the 111 kept stubs/drafts in `content/blog/paper-rea
 - [x] `do-i-know-this-entity-knowledge-awareness-and-hallucinations-in-language-models` | Do I Know This Entity? Knowledge Awareness and Hallucinations in Language | https://arxiv.org/abs/2411.14257v2
 
 ### Wave 3
-- [ ] `sparse-autoencoders-reveal-temporal-difference-learning-in-large-language-models` | Sparse Autoencoders Reveal Temporal Difference Learning in Large Language | https://arxiv.org/abs/2410.01280v1
-- [ ] `finding-transformer-circuits-with-edge-pruning` | Finding Transformer Circuits With Edge Pruning | https://arxiv.org/abs/2406.16778v3
-- [ ] `hypothesis-testing-the-circuit-hypothesis-in-llms` | Hypothesis Testing the Circuit Hypothesis in LLMs | https://arxiv.org/abs/2410.13032v1
-- [ ] `rethinking-circuit-completeness-in-language-models-and-or-and-adder-gates` | Rethinking Circuit Completeness in Language Models: AND, OR, and ADDER Gates | https://arxiv.org/abs/2505.10039v2
-- [ ] `llm-circuit-analyses-are-consistent-across-training-and-scale` | LLM Circuit Analyses Are Consistent Across Training and Scale | https://arxiv.org/abs/2407.10827v2
-- [ ] `the-computational-complexity-of-circuit-discovery-for-inner-interpretability` | The Computational Complexity of Circuit Discovery for Inner Interpretability | https://arxiv.org/abs/2410.08025v3
+- [x] `sparse-autoencoders-reveal-temporal-difference-learning-in-large-language-models` | Sparse Autoencoders Reveal Temporal Difference Learning in Large Language | https://arxiv.org/abs/2410.01280v1
+- [x] `finding-transformer-circuits-with-edge-pruning` | Finding Transformer Circuits With Edge Pruning | https://arxiv.org/abs/2406.16778v3
+- [x] `hypothesis-testing-the-circuit-hypothesis-in-llms` | Hypothesis Testing the Circuit Hypothesis in LLMs | https://arxiv.org/abs/2410.13032v1
+- [x] `rethinking-circuit-completeness-in-language-models-and-or-and-adder-gates` | Rethinking Circuit Completeness in Language Models: AND, OR, and ADDER Gates | https://arxiv.org/abs/2505.10039v2
+- [x] `llm-circuit-analyses-are-consistent-across-training-and-scale` | LLM Circuit Analyses Are Consistent Across Training and Scale | https://arxiv.org/abs/2407.10827v2
+- [x] `the-computational-complexity-of-circuit-discovery-for-inner-interpretability` | The Computational Complexity of Circuit Discovery for Inner Interpretability | https://arxiv.org/abs/2410.08025v3
 
 ### Wave 4
 - [ ] `optimal-ablation-for-interpretability` | Optimal Ablation for Interpretability | https://arxiv.org/abs/2409.09951v1
