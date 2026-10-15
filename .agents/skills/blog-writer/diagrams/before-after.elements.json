@@ -1,0 +1,52 @@
+{
+  "_comment": "Reference payload for mcp__excalidraw__batch_create_elements. Two-column 'naive vs optimized' comparison with a centered arrow. Replace the placeholder labels with the topic-specific flow steps.",
+  "elements": [
+    {
+      "type": "text",
+      "x": 460, "y": 50,
+      "text": "<TITLE: Naive vs Optimized>",
+      "fontSize": 28, "fontFamily": 1, "strokeColor": "#1e1e1e"
+    },
+    {
+      "type": "text",
+      "x": 220, "y": 130,
+      "text": "Before",
+      "fontSize": 22, "fontFamily": 1, "strokeColor": "#1e1e1e"
+    },
+    {
+      "type": "text",
+      "x": 880, "y": 130,
+      "text": "After",
+      "fontSize": 22, "fontFamily": 1, "strokeColor": "#1e1e1e"
+    },
+    {
+      "type": "rectangle",
+      "x": 80, "y": 180, "width": 420, "height": 520,
+      "strokeColor": "#1e1e1e", "backgroundColor": "#ffc9c9",
+      "fillStyle": "hachure", "strokeWidth": 1.5, "roughness": 1,
+      "roundness": { "type": 3 },
+      "label": "Step 1\nStep 2 (recompute)\nStep 3 (recompute)\n..."
+    },
+    {
+      "type": "rectangle",
+      "x": 700, "y": 180, "width": 420, "height": 520,
+      "strokeColor": "#1e1e1e", "backgroundColor": "#b2f2bb",
+      "fillStyle": "hachure", "strokeWidth": 1.5, "roughness": 1,
+      "roundness": { "type": 3 },
+      "label": "Step 1\nStep 2 (cache hit)\nStep 3 (cache hit)\n..."
+    },
+    {
+      "type": "arrow",
+      "x": 520, "y": 440,
+      "points": [[0, 0], [180, 0]],
+      "strokeColor": "#1e1e1e", "strokeWidth": 2,
+      "label": "optimize"
+    }
+  ],
+  "export": {
+    "format": "png",
+    "theme": "light",
+    "exportBackground": true,
+    "exportPadding": 24
+  }
+}

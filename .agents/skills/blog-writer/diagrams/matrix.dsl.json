@@ -1,0 +1,13 @@
+{
+  "type": "matrix",
+  "title": "Quantization regimes by deployment target",
+  "caption": "INT4 dominates only when latency, not memory, gates throughput; FP8 wins on H100-class hardware.",
+  "claim": "The optimal quantization choice changes with target hardware and request shape, not absolute model size.",
+  "rows": ["7B", "13B", "70B"],
+  "cols": ["A100 80G", "H100 80G", "L40S 48G", "RTX 4090"],
+  "cells": [
+    [{"label":"FP16",  "kind":"primary"}, {"label":"FP8",   "kind":"success"}, {"label":"FP8",   "kind":"success"}, {"label":"INT4",  "kind":"caution"}],
+    [{"label":"FP16",  "kind":"primary"}, {"label":"FP8",   "kind":"success"}, {"label":"INT4",  "kind":"caution"}, {"label":"INT4",  "kind":"caution"}],
+    [{"label":"INT4",  "kind":"caution"}, {"label":"FP8",   "kind":"success"}, {"label":"OOM",   "kind":"danger"},  {"label":"OOM",   "kind":"danger"}]
+  ]
+}

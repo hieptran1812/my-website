@@ -1,0 +1,13 @@
+{
+  "type": "timeline",
+  "title": "LLM serving milestones (2022 → 2025)",
+  "caption": "Each milestone halves throughput cost; the curve compounds because optimisations stack.",
+  "claim": "Inference cost per token has dropped roughly tenfold every two years through stacked systems-level wins.",
+  "events": [
+    { "id": "e1", "date": "2022-Q3", "label": "FasterTransformer\nfused kernels",          "kind": "neutral" },
+    { "id": "e2", "date": "2023-Q2", "label": "vLLM\nPagedAttention",                     "kind": "primary" },
+    { "id": "e3", "date": "2023-Q4", "label": "FlashAttention-2\nblock-sparse",            "kind": "primary" },
+    { "id": "e4", "date": "2024-Q3", "label": "FP8 inference\non H100",                    "kind": "success" },
+    { "id": "e5", "date": "2025-Q1", "label": "Speculative decode\n+ disaggregation",      "kind": "success" }
+  ]
+}

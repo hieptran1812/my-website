@@ -1,0 +1,19 @@
+{
+  "type": "pipeline",
+  "title": "vLLM request lifecycle",
+  "caption": "Decode dominates wall-clock for long outputs; prefill is FLOP-bound and runs once.",
+  "claim": "Decode dominates the wall-clock budget for outputs longer than a few hundred tokens.",
+  "nodes": [
+    { "id": "queue",     "label": "queue",     "kind": "neutral",  "anchor": "#scheduler" },
+    { "id": "scheduler", "label": "scheduler", "kind": "primary",  "anchor": "#scheduler" },
+    { "id": "prefill",   "label": "prefill",   "kind": "caution",  "anchor": "#prefill-vs-decode" },
+    { "id": "decode",    "label": "decode",    "kind": "primary",  "anchor": "#prefill-vs-decode" },
+    { "id": "emit",      "label": "emit token","kind": "success",  "anchor": "#streaming" }
+  ],
+  "edges": [
+    { "from": "queue",     "to": "scheduler" },
+    { "from": "scheduler", "to": "prefill",   "label": "compute" },
+    { "from": "prefill",   "to": "decode",    "label": "KV ready" },
+    { "from": "decode",    "to": "emit",      "label": "token" }
+  ]
+}

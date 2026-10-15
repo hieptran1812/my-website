@@ -1,0 +1,22 @@
+{
+  "type": "before-after",
+  "title": "PagedAttention vs contiguous KV-cache",
+  "caption": "Block-based allocation removes the dominant fragmentation cost without changing kernel arithmetic.",
+  "claim": "Switching from contiguous KV slabs to paged blocks recovers 30 to 60 percent of effective batch capacity.",
+  "before": {
+    "label": "Contiguous KV",
+    "nodes": [
+      { "id": "b1", "label": "preallocate max_seq_len",   "kind": "danger",  "anchor": "#fragmentation" },
+      { "id": "b2", "label": "fragmented free list",      "kind": "caution", "anchor": "#fragmentation" },
+      { "id": "b3", "label": "OOM at low utilization",    "kind": "danger",  "anchor": "#fragmentation" }
+    ]
+  },
+  "after": {
+    "label": "PagedAttention",
+    "nodes": [
+      { "id": "a1", "label": "fixed-size blocks",         "kind": "primary", "anchor": "#paged-attention" },
+      { "id": "a2", "label": "per-request page table",    "kind": "primary", "anchor": "#paged-attention" },
+      { "id": "a3", "label": "near-full memory packing",  "kind": "success", "anchor": "#paged-attention" }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "grid",
+  "title": "RAG system architecture (free placement on a 4 × 3 grid)",
+  "caption": "Ingestion runs offline on the left column; retrieval and generation run online across the rest.",
+  "claim": "Offline ingestion is decoupled from online retrieval so chunk staleness can be measured independently.",
+  "gridRows": 3,
+  "gridCols": 4,
+  "nodes": [
+    { "id": "docs",    "label": "raw docs\n(S3)",        "kind": "external", "row": 0, "col": 0,                           "anchor": "#ingest" },
+    { "id": "chunk",   "label": "chunker",                "kind": "neutral",  "row": 1, "col": 0,                           "anchor": "#ingest" },
+    { "id": "embed",   "label": "embed model",            "kind": "primary",  "row": 2, "col": 0,                           "anchor": "#ingest" },
+    { "id": "vstore",  "label": "vector store\n(pgvector)","kind": "external", "row": 0, "col": 1, "rowspan": 3,             "anchor": "#vstore" },
+    { "id": "query",   "label": "user query",             "kind": "neutral",  "row": 0, "col": 2,                           "anchor": "#online" },
+    { "id": "rerank",  "label": "cross-encoder\nrerank",  "kind": "primary",  "row": 1, "col": 2,                           "anchor": "#rerank" },
+    { "id": "llm",     "label": "LLM\n(generation)",      "kind": "primary",  "row": 2, "col": 2,                           "anchor": "#llm" },
+    { "id": "answer",  "label": "answer\n+ citations",    "kind": "success",  "row": 0, "col": 3, "rowspan": 3,             "anchor": "#answer" }
+  ],
+  "edges": [
+    { "from": "docs",   "to": "chunk" },
+    { "from": "chunk",  "to": "embed" },
+    { "from": "embed",  "to": "vstore" },
+    { "from": "query",  "to": "vstore" },
+    { "from": "vstore", "to": "rerank" },
+    { "from": "rerank", "to": "llm",    "label": "top-k" },
+    { "from": "llm",    "to": "answer" }
+  ]
+}
