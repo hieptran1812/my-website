@@ -1,6 +1,6 @@
 # Finance deep-dive outline skeleton
 
-Target: 38–60 min read, 8.5–13k words, ≥ 7 figures, ≥ 4 worked examples. The depth a practitioner respects, the on-ramp a beginner can climb. Mirrors the rigor of `quantitative-finance/black-scholes.md` but stays accessible the whole way down.
+Target: 9–14 min read, 2–3k prose words, 5–7 figures (≥ half pictorial, ≤ 2 box-flow), ≥ 3 worked examples. The depth a practitioner respects, the on-ramp a beginner can climb. Mirrors the rigor of `quantitative-finance/black-scholes.md` but stays accessible the whole way down.
 
 ## Section list
 
@@ -14,9 +14,9 @@ Target: 38–60 min read, 8.5–13k words, ≥ 7 figures, ≥ 4 worked examples.
    - Ladders difficulty: simple case first, then add a realistic wrinkle (fees, taxes, time, uncertainty) and show how much the answer moves.
    - Ends with a short "what this costs / when it breaks" note.
 6. **`## Common misconceptions`**: 4–6 wrong beliefs beginners hold, each corrected in 2–4 sentences with the *why*.
-7. **`## How it shows up in real markets`**: 4–8 named scenarios or historical episodes:
+7. **`## How it shows up in real markets`**: 2–3 named scenarios or historical episodes:
    - `### N. Short evocative name`
-   - 150–300 words: what happened, the mechanism from this post in action, the lesson. Real instruments, real dates, real numbers (cite the as-of date; every figure here must survive the Phase D2 fact-check).
+   - 120–200 words: what happened, the mechanism from this post in action, the lesson. Real instruments, real dates, real numbers (cite the as-of date; every figure here must survive the Phase D2 fact-check).
 8. **`## When this matters to you`**: where this touches the reader's money or decisions; honest about risk; "educational, not advice".
 9. **`## Sources & further reading`**: the provenance closer (also satisfies the verify sourcing gate). A short bulleted list: the primary sources behind the headline numbers (link text + publisher + as-of date), then 3–6 further-reading links (primary sources + sibling posts on this blog). Sourced inline as natural markdown links, not academic `[12]` superscripts.
 

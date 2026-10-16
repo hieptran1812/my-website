@@ -1,6 +1,6 @@
 # Paper-reading outline skeleton
 
-For posts under `content/blog/paper-reading/<area>/`. Target: 10–20 min read, 2.5–5k words, 1–2 diagrams.
+For posts under `content/blog/paper-reading/<area>/`. Target: 9–14 min read, 2–3k prose words, 4–6 figures (≥ half pictorial, ≤ 2 box-flow).
 
 ## Section list
 
@@ -21,8 +21,9 @@ For posts under `content/blog/paper-reading/<area>/`. Target: 10–20 min read, 
 
 ## Diagram plan defaults
 
-- Diagram 1: redraw the paper's key architecture figure in Excalidraw style (clearer, with annotations the original lacks).
-- Diagram 2 (optional): a results plot summary or a comparison-vs-prior-work matrix.
+- Figure 1: redraw the paper's key idea in Excalidraw style, as a `worked-example` or `cells` figure on a tiny instance where possible, rather than a box-per-module architecture chart.
+- Figure 2: the headline result as `bars` or an `xy-chart` with the baselines.
+- Figure 3+: whatever the method's shape is (`filmstrip` of training state, `space` for representations, `lanes` for compute).
 
 ## Required patterns to include
 

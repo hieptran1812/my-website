@@ -23,7 +23,9 @@ Before/after framing: left (the naive / costly / "before" state) leans red/amber
 
 ## Finance-native figure kinds
 
-Map each abstraction to the kind that matches its *shape*. Vary kinds across the post (blog-writer's diversity rule applies: ≥ 8 figures → ≥ 4 distinct kinds; no two adjacent figures share a skeleton).
+Map each abstraction to the kind that matches its *shape*. Blog-writer's rules apply in full (`diagram-authoring.md §Illustrate, don't label` and `§Diversity`): **at least half the figures are pictorial, box-and-arrow flows are at most ⅓ (max 2)**, no kind more than twice, no two adjacent figures share a skeleton.
+
+**Draw the money, not the vocabulary.** A finance figure is good when the reader can see the amounts: a coupon arrow is short and the principal arrow is tall; the debt block of a balance sheet is visibly bigger than the equity sliver; a loss region is a red area, not a red box with "loss" written in it. Draw quantities to scale whenever the prose gives the numbers. The kinds below are listed pictorial-first for that reason; reach for `pipeline`/`graph` only when the concept really is a sequence of steps between parties.
 
 ### Cash-flow timeline — `timeline` engine
 
@@ -52,7 +54,19 @@ Same construction as a payoff diagram: x-axis (maturity in years, or time), y-ax
 
 A balance sheet is two stacked columns of equal total height: **assets** on the left (blue), **liabilities + equity** on the right (amber for debt, green for equity). The visual claim is "the two sides balance". Use `before-after` (left vs right) or author two stacked-bar columns directly. Also use a single stacked column for a *capital stack* (senior debt → mezzanine → equity, riskiest on top).
 
-### Process / mechanism flow — `pipeline` or `graph`
+### Bars to scale — hand-authored `bars`
+
+Rectangles whose lengths are proportional to the amounts: fee drag over 30 years, where each dollar of a fund's return goes, the size of the players in a market, before vs after a rate hike. Value label at the end of each bar, the unit on the axis, the bar the claim is about in blue.
+
+### Position filmstrip — hand-authored `filmstrip`
+
+The same balance sheet, order book, or portfolio drawn 3–4 times left to right, one event per frame (the loan is made, the rate rises, the margin call hits, the position is closed). The reader watches the numbers move.
+
+### Order book / ladder — hand-authored `cells`
+
+Price levels as a stack of abutting cells, bids green below and asks red above, size drawn as bar width. Use for spread, depth, slippage, a large order walking the book.
+
+### Process / mechanism flow — `pipeline` or `graph` (box-flow, rationed)
 
 How something *happens* step by step: how a trade clears (you → broker → exchange → clearinghouse → settlement), how a loan is securitized, how a stablecoin mint/redeem works, how a payment rail moves money. Linear → `pipeline`; branching/merging → `graph`. Color the entity being explained blue, intermediaries lavender, the fee/risk leg amber.
 
@@ -85,13 +99,13 @@ Finance figures must spend their visual area proving the claim. A blank region i
 - **Caption is a thesis, not a label.** Bad: "Bond cash-flow diagram." Good: "A bond is just a stream of fixed inflows whose present value moves opposite to rates."
 - **Quantify**: every figure should carry real units (\$, %, bps, years). ≥ 60% of nodes/marks carry a number or qualifier, per the shared density rule.
 
-## Per-depth figure floors (minimums, never caps)
+## Per-depth figure floors
 
 - Concept ≥ 3 figures
 - Explainer ≥ 4
-- Deep-dive ≥ 7
+- Deep-dive ≥ 5
 
-Most posts exceed these. The ceiling is set by content: if a paragraph introduces an abstraction and the next ~30 lines have no figure, add one.
+With a 2,000 to 3,000-word post, aim for 4 to 7. If a paragraph introduces an abstraction and the next ~30 lines have no figure, add one, or merge it into a neighbouring figure.
 
 ## Abstraction inventory format (Phase B output)
 
@@ -100,10 +114,11 @@ For each abstract concept the post introduces, emit one bullet with:
 - **Claim** (≥ 8 words): the single sentence the figure proves
 - **Caption** (one sentence thesis, not a label restatement)
 - **Section anchor**: the heading it sits under
-- **Kind**: `cash-flow-timeline` | `payoff` | `yield-curve` | `balance-sheet` | `pipeline` | `graph` | `matrix` | `grid` | `tree` | hand-authored
+- **Kind**: pictorial `cash-flow-timeline` | `payoff` | `yield-curve` | `balance-sheet` | `bars` | `filmstrip` | `cells` (order book) | `worked-example`; structural `matrix` | `grid`; box-flow (≤ ⅓, max 2) `pipeline` | `graph` | `tree`
+- **Encoding**: what the geometry shows with the labels covered (e.g. "principal arrow 20× the coupon arrows", "loss region below breakeven shaded red")
 - **Sketch**: which boxes / lines / arrows / labels / numbers appear
 
-Figure count = abstraction count. Vary the kinds.
+Figure count = abstraction count, 4 to 7 for a 2,000 to 3,000-word post. Vary the kinds.
 
 ## Project layout memory
 

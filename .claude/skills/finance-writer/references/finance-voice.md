@@ -58,7 +58,7 @@ Use comparison tables aggressively. They are the fastest way to make a tradeoff 
 ## Required sections (finance-specific closers)
 
 - **Common misconceptions**: 3–6 beliefs beginners hold that are wrong, each corrected in 2–4 sentences with the *why*. This is where a finance post earns trust.
-- **How it shows up in real markets** (deep-dive): 4–8 named, concrete scenarios or historical episodes (~150–300 words each): what happened, the mechanism from the post in action, the lesson. Real instruments, real dates, real numbers where you can cite them.
+- **How it shows up in real markets** (deep-dive): 2–3 named, concrete scenarios or historical episodes (~120–200 words each): what happened, the mechanism from the post in action, the lesson. Real instruments, real dates, real numbers where you can cite them.
 - **When this matters to you / further reading**: close by telling the reader where this actually touches their life or their next learning step. Never a generic "Conclusion" or "In summary".
 
 ## Honesty & risk
@@ -69,13 +69,14 @@ Use comparison tables aggressively. They are the fastest way to make a tradeoff 
 - **Keep a figure consistent across the post.** A number in the TL;DR, a section, and a figure caption must be the same number. Unit drift (bps vs %, million vs billion, VND vs USD) is a fabrication in disguise.
 - **Name the risk alongside the upside.** Every instrument that can make money can lose it; say how and how much.
 
-## Length floors (hard gates, not warnings)
+## Length window (hard gate, both ends)
 
-- Deep-dive: **≥ 38 min read** (≥ 8,500 words; target 9k–13k)
-- Explainer: ≥ 18 min (~4,000 words)
-- Concept: ≥ 10 min (~2,200 words)
+Every depth ships at **2,000 to 3,000 prose words** (about 9 to 14 min read); frontmatter, code and animated-figure markup don't count. `verify-finance-post.sh` fails below 2,000 and above 3,000.
 
-If short, expand the weakest parts: more worked examples, more misconceptions, more real-market scenarios, deeper mechanics. Do not ship short.
+- Depth changes scope, not length. A concept post stays on one idea; a deep-dive covers the mechanism, its edge cases and 2–3 real episodes, each tightly.
+- Accessible and short are compatible: define each term once, in one sentence, at first use; one analogy per concept, not three; one worked example per mechanism, every step shown.
+- Let the figures carry the explanation, and write the one or two sentences that tell the reader what to notice.
+- Plan to ~2,600 words. Over 3,000: cut repeated explanations, the weakest misconception, the third episode. Under 2,000: deepen the central worked example. Never pad.
 
 ## Diagram embedding
 

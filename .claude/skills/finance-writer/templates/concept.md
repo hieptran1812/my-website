@@ -1,6 +1,6 @@
 # Finance concept (primer) outline skeleton
 
-Target: 10–18 min read, 2.2–3.5k words, ≥ 3 figures, ≥ 2 worked examples. A focused "what is X and why should I care" primer. Short, but still TL;DR-first, still foundations-first, still grounded in a worked example.
+Target: 9–14 min read, 2–3k prose words, 3–5 figures (≥ half pictorial, ≤ 2 box-flow), ≥ 2 worked examples. A focused "what is X and why should I care" primer. Short, but still TL;DR-first, still foundations-first, still grounded in a worked example.
 
 ## Section list
 

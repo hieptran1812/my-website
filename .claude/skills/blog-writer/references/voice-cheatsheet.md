@@ -36,16 +36,18 @@ Use comparison tables aggressively:
 
 ## Closing moves
 
-- **Deep-dives end with case studies**: 6–12 named, numbered incidents (~250–400 words each), then a closing **"When to reach for X / when not to"** section.
+- **Deep-dives end with case studies**: 2–4 named, numbered incidents (~120–200 words each), then a short closing **"When to reach for X / when not to"** section.
 - **Never write a generic "Conclusion".**
 
-## Length floors (hard gates, not warnings)
+## Length window (hard gate, both ends)
 
-- Deep-dive: **≥ 50 min read** (≥ 11,000 words; target 12k–16k)
-- Explainer: ≥ 25 min (~5,500 words)
-- Paper-reading: ≥ 30 min (~6,500 words)
+Every depth ships at **2,000 to 3,000 prose words** (about 9 to 14 min read). Frontmatter, code blocks and animated-figure markup don't count. `verify-post.sh` fails a post below 2,000 *and* above 3,000.
 
-If short, expand the weakest sections: more case studies, deeper internals, more code, more tables. Do not ship short.
+Depth now changes the *shape* of the post, not its length: a deep-dive covers more ground with fewer words per idea and ends on case studies; an explainer stays on one mechanism and walks it end to end with a worked example.
+
+- **Short means dense, not thin.** Every paragraph either moves the argument or carries a number. Cut the warm-up, the recap of the previous section, the third example of the same point, and any paragraph a figure already explains.
+- **Let the figures carry weight.** A well-drawn figure replaces 150 to 300 words of description; write the one or two sentences that tell the reader what to notice in it, not a tour of every box.
+- **Plan to ~2,600 words** so the first draft lands inside the window. If over 3,000, merge overlapping sections and drop the weakest example. If under 2,000, deepen the most load-bearing section with a worked example; never pad.
 
 ## Diagram embedding
 

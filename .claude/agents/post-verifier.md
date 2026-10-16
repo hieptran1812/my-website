@@ -49,7 +49,7 @@ STATS: <words> words, <n> static figs, <m> animated figs
 ## Hard rules
 
 - One line per failed gate. Never more than 12 lines total.
-- Quote the script's own gate name (word-count floor, diagram-count floor, abstraction coverage, WebP sharpness, webp-only embeds, forbidden text-diagram, animated-figure safety, slug-match, no-H1, English-only, frontmatter, em-dash) so the caller knows which phase to re-enter.
+- Quote the script's own gate name (word-count window, diagram-count floor, abstraction coverage, WebP sharpness, webp-only embeds, forbidden text-diagram, animated-figure safety, slug-match, no-H1, English-only, frontmatter, em-dash) so the caller knows which phase to re-enter.
 - The **em-dash** gate can name many lines. Report it as one line with the count and the first two line numbers, never the full list: the caller re-enters Phase D and re-reads its own draft anyway, and pasting 40 prose lines into its context is exactly what this agent exists to prevent.
 - Never attempt a fix, never edit the post, never re-run after a change. Report and stop.
 - If `verify-post.sh` is missing or errors before running its gates, say so in one line and stop.

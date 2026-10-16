@@ -171,14 +171,58 @@ Before accepting a rendered figure:
 
 The visual reviewer must record `PASS` only after checking the rendered pixels, not just the scene JSON. A figure that passes the mechanical validator but fails this rendered-layout gate must be re-authored.
 
+### Illustrate, don't label (mandatory)
+
+A figure exists to make the reader *see* the idea. A row of text boxes joined by arrows mostly restates the prose in rectangles: the reader still has to read every label to get anything out of it. That is a **text diagram**, and a post built from them fails review even when each one is individually tidy.
+
+**The cover-the-labels test.** Imagine every word in the figure blanked out. If the shapes alone still say something (this bar is 4× that one, these cells fill up left to right, the curve bends here, these two lanes overlap, this region is red), the figure illustrates. If all that is left is "some boxes, some arrows", it only labels. Recast it.
+
+**Encode the meaning in geometry, not only in text.**
+
+- **Quantity → size.** Draw bars, widths and areas *to scale*. A 70 GB weight block next to a 12 GB KV cache is a long rectangle next to a short one, not two equal boxes with numbers written inside.
+- **Count → repetition.** 8 attention heads are 8 drawn heads; a 16-token page is 16 cells. Up to ~32 elements, draw them all; beyond that, draw a run and an ellipsis cell.
+- **Change → side-by-side states.** Show the same structure at t0, t1, t2 (a filmstrip) so the reader watches the cache fill, the order book thin, the queue drain.
+- **Position → meaning.** Points in a 2D space, clusters as ellipses, a decision boundary as a line, distance as distance.
+- **Time → a horizontal axis with lanes.** Overlap, idle gaps and stalls are visible as lanes that do or don't overlap.
+- **Good vs bad → color by the shared palette** (green success, red danger, amber caution), always placed on the geometry that carries the meaning.
+
+**Pictorial vocabulary.** These are all buildable from the validator's primitives (`rectangle`, `ellipse`, `diamond`, `line`, `arrow`, `text`). Author them as hand-written element JSON; the DSL engines don't cover them.
+
+| Kind | Draws | Use for |
+| --- | --- | --- |
+| `xy-chart` | axes as `line`, curve as `arrow`, tick labels, annotated regions | tradeoffs, scaling, latency vs batch, payoff, yield curve, loss curve |
+| `bars` | rectangles proportional to value, stacked or grouped, with value labels | memory breakdown, cost split, before/after numbers, benchmark comparison |
+| `cells` | a grid or array of small cells holding real values; highlighted cells/rows | tensors, KV pages, cache lines, attention matrix, order book levels, hash buckets |
+| `filmstrip` | the same structure drawn 3 to 4 times left to right, one change per frame | state transitions: eviction, compaction, rebalancing, an order filling |
+| `lanes` | horizontal swimlanes on a shared time axis, blocks sized by duration | GPU streams, pipeline bubbles, overlap of compute and communication, settlement windows |
+| `space` | points, ellipse clusters, vectors, a boundary line in a 2D frame | embeddings, classification, optimization landscape, risk vs return |
+| `worked-example` | a tiny real instance (3 tokens, 4 prices, a 2×3 matrix) with the actual numbers flowing through each step | any formula or algorithm the prose walks through numerically |
+| `anatomy` | one object drawn as its shape with callouts naming the parts | a packet header, a bond's cash flows, a transformer block, a candlestick |
+| `scale` | quantities drawn to true relative size (pipes of different widths, nested squares) | bandwidth hierarchies, orders of magnitude, market size |
+| `analogy` | a simple scene from primitives (funnel, pipe, balance, ladder), labelled with the real objects | only when the prose uses that exact analogy |
+
+**Building pictorial kinds so they pass the validator** (learned the hard way on the finance and scaling-laws series):
+
+- **Cells and bars abut, they don't nest.** The overlap rule fails any two shapes whose boxes intersect by more than 0 px, but cells that share an edge exactly (overlap = 0) are fine. Draw a grid as edge-to-edge rectangles on the snap grid; never wrap it in a container rectangle (that is an overlap). Put the grid's name in a free text label above it.
+- **Curves are `arrow`s, axes are `line`s.** A data curve is an `arrow` with `"diagonal": true, "unbound": true` and `points[0] = [0,0]` at the first data point; offsets go negative in y to rise, and a rising curve declares a **negative `height`** so its bbox lands on the real top. Axes, gridlines and reference lines are `line` with `endArrowhead: null`.
+- **No shaded rectangles under a curve, no dots on it.** The curve would be flagged for crossing them. Mark regions with colored text boxes placed in the empty areas the curve leaves; those also fill the quadrants the dead-space rule checks.
+- **Every free label clears every stroke.** Compute the curve's y at the label's x-span and put the box above or below.
+- **Free text is `textAlign: "left"` with a pre-centred `x`.** Centered free text is centred on `x`, not inside its width, and drags the export crop.
+- **Filmstrips and lanes** are rows of the same structure; keep every frame or lane on the same stride and the same size so the eye compares like with like.
+
+**Box-flow budget.** The box-and-arrow kinds (`pipeline`, `graph`, `tree`, `layered-stack`, and any `before-after` that is just two box rows) together may make up **at most one third of a post's figures, and never more than 2.** At least half the figures must come from the pictorial vocabulary above. A box-flow figure has to earn its place: the concept really is a flow or a hierarchy, *and* the boxes carry structure (internal cells, sizes to scale, the failure branch), not just a noun each.
+
+**Readable by a newcomer.** The audience must get the point of the figure in under 5 seconds, without having read the section first. One idea per figure, the most important element biggest and most central, the real numbers from the prose's worked example on the picture, and an annotation (`// this is the bottleneck`) pointing at the thing to notice. If understanding it needs the paragraph next to it, the figure is not doing its job.
+
 ### Diversity across the post (mandatory)
 
-Eight near-identical box-and-arrow pipelines is a worse post than four pipelines + two stacks + a matrix + a timeline, even though both clear the count floor. Vary the figure *kind* to match each abstraction's actual shape:
+Six near-identical box-and-arrow pipelines is a worse post than one pipeline, a cells grid, an xy-chart, a filmstrip and a lanes timeline, even though both clear the count floor. Vary the figure *kind* to match each abstraction's actual shape:
 
-- **No single engine/type for more than ~half the figures.** A deep-dive with 8+ figures should use **≥ 4 distinct kinds** (e.g. `pipeline`, `graph`, `before-after`, `matrix`, `tree`, `timeline`, `grid`, `layered-stack`, hand-authored).
-- **Pick the kind from the concept, not convenience**: sequence/lifecycle → `pipeline` or `timeline`; branching/merging dataflow → `graph`; abstraction layers → `layered-stack`; naive-vs-optimized → `before-after`; axes × choices → `matrix`/`grid`; taxonomy/recursion → `tree`; memory/structure internals → hand-authored element figure.
-- **Two adjacent figures should not look interchangeable.** If figure N and N+1 share a layout skeleton, merge them or re-cast one in a different kind.
-- Diversity is reviewed in Phase E (visual pass) and planned in Phase B (the abstraction inventory assigns a kind per figure).
+- **No kind appears more than twice in one post**, and with ≥ 4 figures use **≥ 3 distinct kinds**; with ≥ 6, **≥ 4**.
+- **The box-flow budget above holds**: ≤ ⅓ of figures (max 2) are box-and-arrow kinds; ≥ ½ are pictorial.
+- **Pick the kind from the concept, not convenience**: a quantity comparison → `bars`; a tradeoff or trend → `xy-chart`; a data structure or tensor → `cells`; a state change → `filmstrip`; concurrency or timing → `lanes`; a formula → `worked-example`; only a genuine multi-step flow → `pipeline`/`graph`; only a genuine hierarchy → `tree`/`layered-stack`.
+- **Two adjacent figures should not look interchangeable.** If figure N and N+1 share a layout skeleton, recast one in a different kind.
+- Diversity is planned in Phase B (the abstraction inventory assigns a kind **and a visual encoding** per figure) and reviewed in Phase C2.
 
 ### No-overlap
 
@@ -277,15 +321,18 @@ How to judge each criterion:
 - **Balanced composition.** Mentally split the frame into quadrants: is the visual weight spread, or piled in one corner with the rest thin? Is the figure centered, or hugging an edge? Does the aspect ratio fit the content (pipeline wide-and-short, stack tall-and-narrow, matrix filling both axes)? A lopsided figure reads as unfinished even when every box is correct.
 - **No meaningless empty space.** The renderer crops to the content bbox, so any gap *inside* it ships as a blank band. Scan for a wide empty strip (usually a dead band below content that started too low) or a blank quadrant. The validator's rule 8 catches the gross cases; your eye catches the subtle ones (e.g. one row of a matrix half the height of the others). The fix is to rebalance/extend to a shared height — never to stretch a single card.
 - **Text renders correctly.** Confirm every label is Virgil (prose) or Cascadia (code) — if a label looks like a plain system sans-serif, the `fontFamily` leaked and it must be re-rendered. Check no text spills past its box, no two labels overlap, no label sits on top of an arrow stroke, and everything is legible without zooming.
+- **Illustrates, not just labels.** Apply the cover-the-labels test: with the words blanked, does the geometry still carry the idea (size, count, position, change, overlap)? If it is text boxes joined by arrows and the concept has quantities, structure, space or change, it fails; name the pictorial kind it should become. Also ask whether a reader new to the topic would get the point in 5 s without the paragraph beside it.
 - **Squint test (< 5 s).** Imagine the figure at 25%. Can you still tell the main path / bottleneck / outcome from color and position alone? If you need to read the labels to get the gist, the visual hierarchy is wrong: make the most important node bigger/brighter/more central, and cut accents to ≤ 3.
 
 Set-level, once across the whole post:
 
-- **Diversity.** Lay the figures side by side. If one kind is more than ~half of them, or two *adjacent* figures share a layout skeleton, recast one (see §Diversity across the post). A post of eight look-alike box-rows is a review failure even if each row is individually correct.
+- **Diversity.** Lay the figures side by side. If box-and-arrow kinds are more than a third of them (or more than 2), if any kind appears more than twice, or two *adjacent* figures share a layout skeleton, recast one (see §Diversity across the post). A post of eight look-alike box-rows is a review failure even if each row is individually correct.
 
 Write a one-line verdict per figure (`PASS` / `FAIL: <criterion> — <what's wrong>`) so the re-author loop is explicit. Only a fully-green set advances to drafting.
 
 ## DSL shortcut (opt-in only)
+
+The DSL engines only produce box-and-arrow layouts, so they cover the *box-flow* kinds and `matrix`/`grid`/`timeline`. Every pictorial kind in §Illustrate, don't label is hand-authored element JSON. Do not pick a box-flow kind because the DSL makes it easy to validate; that is exactly how a post ends up as six text diagrams.
 
 For canned shapes (pipeline, stack, before-after, matrix, tree, timeline, grid, graph), you may write a DSL JSON and convert with:
 

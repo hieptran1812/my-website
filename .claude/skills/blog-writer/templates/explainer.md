@@ -1,6 +1,6 @@
 # Explainer outline skeleton
 
-Mirrors `kv-cache.md`. Target: 8–15 min read, 2–4k words, 1–2 diagrams, no case studies (instead: worked examples).
+Mirrors `kv-cache.md`. Target: 9–14 min read, 2–3k prose words, 4–6 figures (≥ half pictorial, ≤ 2 box-flow), no case studies (instead: worked examples).
 
 ## Section list
 
@@ -17,8 +17,10 @@ Mirrors `kv-cache.md`. Target: 8–15 min read, 2–4k words, 1–2 diagrams, no
 
 ## Diagram plan defaults
 
-- Diagram 1: the before/after or the data-flow that motivates the topic. Embed in section 1 or 2.
-- Diagram 2 (optional): a memory-layout or shape diagram for section 5 or 6.
+- Figure 1: the pain made visible, e.g. `bars` of wasted work or an `xy-chart` of cost growing, embedded in section 1 or 2.
+- Figure 2: the mechanism as a `worked-example` on the same small numbers the prose uses (the 4-token sequence, the 2-dim vectors).
+- Figure 3: a `cells` memory layout or a `filmstrip` of the state changing step by step.
+- Figure 4: the trade-off or variants as `bars` or a `matrix`.
 
 ## Required patterns to include
 

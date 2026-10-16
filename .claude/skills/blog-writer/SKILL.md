@@ -1,11 +1,13 @@
 ---
 name: blog-writer
-description: Draft a long-form, principal-engineer-voice blog post for the my-website blog. Plans an outline, generates Excalidraw diagrams, then writes the full markdown into the correct content/blog/<category>/<subcategory>/ folder with valid frontmatter. Triggers on /blog-writer, "write a blog post about", "draft an article on", "new blog:".
+description: Draft a focused 2,000–3,000-word, principal-engineer-voice blog post for the my-website blog. Plans an outline, generates Excalidraw diagrams, then writes the full markdown into the correct content/blog/<category>/<subcategory>/ folder with valid frontmatter. Triggers on /blog-writer, "write a blog post about", "draft an article on", "new blog:".
 ---
 
 # blog-writer
 
-Drafts a long-form blog article in the house style of `my-website` — opinionated, principal-engineer voice, intuition before math, runnable code, comparison tables, case studies, and Excalidraw diagrams.
+Drafts a blog article in the house style of `my-website` — opinionated, principal-engineer voice, intuition before math, runnable code, comparison tables, case studies, and Excalidraw figures that *show* the idea rather than label it.
+
+**Length: every post is 2,000 to 3,000 prose words, at every depth.** Phase E fails a post outside that window, in both directions. Depth changes what the post covers, not how long it runs. **Figures: 4 to 7 per post, at least half pictorial** (charts, bars to scale, cell grids, filmstrips, time lanes, worked examples on real numbers), **at most 2 box-and-arrow flows.** See `references/diagram-authoring.md §Illustrate, don't label`.
 
 ## When to use
 
@@ -59,7 +61,7 @@ category: "machine-learning" # top-level folder name
 subcategory: "Large Language Model" # human-readable; optional
 author: "Hiep Tran"
 featured: true # true for deep-dives, false for explainers/notes
-readTime: 27 # integer minutes, recomputed in Phase E
+readTime: 12 # integer minutes, recomputed in Phase E
 ---
 ```
 
@@ -85,8 +87,9 @@ Ask via `AskUserQuestion` only what's missing:
    - Proposed title and slug
    - Target path (`content/blog/<category>/[<subcategory>/]<slug>.md`)
    - Section list (H2s with one-line summaries)
-   - **Abstraction inventory + diagram plan** — one bullet per abstract concept, each with claim / caption / section anchor / sketch (see `diagram-triggers.md`). Figure count = abstraction count. **Tag each figure `static` or `animated`.** Mark `animated` only when *motion carries the meaning* — a process unfolding step by step, a before→after state transition (cache fill/evict, memory compaction, rebalancing), something flowing along a path, a quantity sweeping/growing, or two strategies diverging "in the same round." Everything else stays `static`. Cap animated figures at **1–3 per post**; static Excalidraw WebP remains the default workhorse. (Motion-worthy criteria: see `animated-figures.md §When to animate`.)
-   - Case-study list (deep-dives): 3–12 named incidents, each one line
+   - **Abstraction inventory + diagram plan** — one bullet per abstract concept, each with claim / caption / section anchor / **kind** / **encoding** / sketch (see `diagram-triggers.md`). Figure count = abstraction count, 4 to 7. **Encoding** says what the geometry shows with the labels covered; if the honest answer is "boxes joined by arrows", pick a pictorial kind instead. Respect the box-flow budget (≤ ⅓ of figures, max 2) and no kind more than twice. **Tag each figure `static` or `animated`.** Mark `animated` only when *motion carries the meaning* — a process unfolding step by step, a before→after state transition (cache fill/evict, memory compaction, rebalancing), something flowing along a path, a quantity sweeping/growing, or two strategies diverging "in the same round." Everything else stays `static`. Cap animated figures at **1–3 per post**; static Excalidraw WebP remains the default workhorse. (Motion-worthy criteria: see `animated-figures.md §When to animate`.)
+   - Case-study list (deep-dives): 2–4 named incidents, each one line
+   - **Word budget per section**, summing to ~2,600 (the gate window is 2,000 to 3,000)
    - Code snippet plan: language, what it demonstrates, ~lines
    - 2–4 cross-links to existing posts
 5. **Print the outline and stop.** Wait for "go" / "approved" / edits.
@@ -99,7 +102,7 @@ This is the highest-value delegation in the skill, and the reason is arithmetic.
 
 Run the steps below inline **only** for a genuinely one-off post in a fresh session. Inside a series wave, never.
 
-1. **Read `references/diagram-authoring.md`.** Diagrams must be **diverse** (vary the figure kind per the plan — see §Diversity), **accurate** (every node/edge/number traces to the prose), and have **no meaningless empty space** (content fills the cropped frame).
+1. **Read `references/diagram-authoring.md`.** Diagrams must **illustrate, not label** (geometry carries the meaning; pictorial kinds are hand-authored element JSON — see §Illustrate, don't label), be **diverse** (vary the figure kind per the plan — see §Diversity), **accurate** (every node/edge/number traces to the prose), and have **no meaningless empty space** (content fills the cropped frame).
 2. For each planned figure: author element JSON → `.cache/blog-writer/<slug>/<slug>-<i>.in.json`.
 3. Validate + normalize each: `node scripts/author-scene.mjs <in.json> <scene.json>`. The validator enforces fonts, palette, containment, no-overlap, density, claim length, caption presence, snap grid, **and anti-dead-space (no blank quadrant/band)**. Read its error messages — they name the rule and offending element. Do not bypass.
 4. Batch render all scenes **to PNG inside the cache** via `mcp_excalidraw/scripts/render-scene-batch.mjs` with a manifest (one browser, ~150 ms per figure after startup).
@@ -145,8 +148,9 @@ The steps below are the inline path, for a one-off post you are rendering yourse
    4. **No meaningless empty space** — content fills the cropped frame; no wide empty band, no blank quadrant, no single card stretched to fake fullness. ("có nhiều khoảng trống không")
    5. **Text renders correctly** — all labels in Virgil/Cascadia (no system-font fallback), nothing overflows its box, nothing overlaps, no label sits on an arrow stroke; readable at a glance.
    6. **Squint test (< 5 s)** — at 25% the main path / bottleneck / outcome is still clear from color and position; one reading direction; ≤ 3 accent colors; no legend needed.
+   7. **Illustrates, not just labels** — with every word blanked out, the geometry still says something (size to scale, count, position, change between frames, overlap in time). Text boxes joined by arrows for a concept that has quantities, structure, space or change = FAIL; name the pictorial kind it should become. A newcomer gets the point in 5 s without the paragraph beside it. ("hình phải minh hoạ dễ hiểu nội dung, không chỉ là các ô text nối với nhau")
 
-4. Set-level (review all figures together, once): 7. **Diversity** — no single figure kind is > ~½ the set; no two adjacent figures share a layout skeleton. If they do, recast one (see §Diversity).
+4. Set-level (review all figures together, once): 8. **Diversity** — box-and-arrow kinds are ≤ ⅓ of the set (max 2), pictorial kinds ≥ ½, no kind appears more than twice, no two adjacent figures share a layout skeleton. If not, recast one (see §Diversity).
 
 **Decision rule:** any `FAIL` → re-author that figure (back to Phase C step 2: fix the `.dsl.json`/`.in.json`, re-validate, re-render, re-convert), then re-review by dispatching a fresh `figure-reviewer` for that figure only. Never "fix" a bad figure by editing the prose. Advance to Phase D **only when every figure is a clean PASS.**
 
@@ -157,8 +161,8 @@ The reviewer's `FAIL` text names what to change in the scene input, so you can h
 ### Phase D — Draft
 
 1. **Read `references/voice-cheatsheet.md`.**
-2. Write the full markdown via `Write` to the resolved target path. Frontmatter exactly per contract; today's date.
-   - **No em dashes, anywhere.** Body, headings, image alt text, and the frontmatter `title`/`description`. A *spaced* ` – ` is the same mark in disguise and is banned too; an *unspaced* `–` is a range (`2018–2022`) and is fine. Write the repaired punctuation as you draft: period between two independent clauses, colon when the second half explains the first, paired commas around an aside. Phase E fails the post otherwise, and finding it at the gate means editing 12,000 words instead of writing them right once. Full rule: `references/voice-cheatsheet.md §Punctuation`.
+2. Write the full markdown via `Write` to the resolved target path. Frontmatter exactly per contract; today's date. **Write to the Phase B word budget (~2,600 prose words); the gate fails anything under 2,000 or over 3,000.** Each figure gets one or two sentences telling the reader what to notice, not a paragraph re-describing it.
+   - **No em dashes, anywhere.** Body, headings, image alt text, and the frontmatter `title`/`description`. A *spaced* ` – ` is the same mark in disguise and is banned too; an *unspaced* `–` is a range (`2018–2022`) and is fine. Write the repaired punctuation as you draft: period between two independent clauses, colon when the second half explains the first, paired commas around an aside. Phase E fails the post otherwise, and finding it at the gate means editing the whole draft instead of writing it right once. Full rule: `references/voice-cheatsheet.md §Punctuation`.
 3. Embed each WebP immediately under the section heading it illustrates: `![alt](/imgs/blogs/<slug>-<n>.webp)`. Every embedded image must be `.webp` — no `.png`/`.jpg`/`.svg`. The first figure is referenced in the intro paragraph.
    - **Animated figures**: paste the validated `<figure class="blog-anim">…</figure>` block from `.cache/blog-writer/<slug>/<slug>-anim-<i>.fig.html` **verbatim** under its heading — not as `![]()`. Keep it one contiguous block with **no blank lines inside** and `<figure` at column 0 (a blank line makes CommonMark shatter the SVG into escaped text). A blank line *before* the opening `<figure` and *after* the closing `</figure>` is required, as for any block.
 4. Add cross-links inline using relative paths: `[KV cache](/blog/machine-learning/large-language-model/kv-cache)` (drop the `content/` prefix and `.md` extension).
@@ -173,9 +177,9 @@ bash .claude/skills/blog-writer/scripts/verify-post.sh <post.md> <slug> <depth>
 
 In a series wave, dispatch the **`post-verifier`** subagent instead of running this inline — it returns the pass line or the FAIL list and nothing else, keeping a failing post's full gate output out of the orchestrating session.
 
-`<depth>` is one of `deep-dive`, `explainer`, `paper-reading`. The script checks: word-count floor, diagram-count floor (static WebP embeds **+** inline animated figures), abstraction coverage (a WebP **or** a `blog-anim` figure within 30 lines of every prose abstraction), WebP sharpness, webp-only embeds (no `.png`/`.jpg`/`.gif`) + no leftover non-webp render artifacts, forbidden text-diagram substitutes (animated-figure blocks are excluded from the ASCII/Unicode scan), **animated-figure safety** (each `blog-anim` block is contiguous/no-blank-line, declarative with no `<script>`/`on*=`, accessible, and reduced-motion-aware), slug-match on every image, no-H1-in-body, English-only, frontmatter sanity, **no em dashes** (`—`, spaced ` – `, or ` -- ` in prose, headings, captions or frontmatter; code and math exempt, unspaced range en dashes allowed).
+`<depth>` is one of `deep-dive`, `explainer`, `paper-reading`. The script checks: word-count window (2,000 to 3,000 prose words; frontmatter, code and animated-figure markup excluded), diagram-count floor (static WebP embeds **+** inline animated figures), abstraction coverage (a WebP **or** a `blog-anim` figure within 30 lines of every prose abstraction), WebP sharpness, webp-only embeds (no `.png`/`.jpg`/`.gif`) + no leftover non-webp render artifacts, forbidden text-diagram substitutes (animated-figure blocks are excluded from the ASCII/Unicode scan), **animated-figure safety** (each `blog-anim` block is contiguous/no-blank-line, declarative with no `<script>`/`on*=`, accessible, and reduced-motion-aware), slug-match on every image, no-H1-in-body, English-only, frontmatter sanity, **no em dashes** (`—`, spaced ` – `, or ` -- ` in prose, headings, captions or frontmatter; code and math exempt, unspaced range en dashes allowed).
 
-Any FAIL means re-enter the named phase and fix. The fix for missing figures is _always_ to add the figure, never to delete the prose.
+Any FAIL means re-enter the named phase and fix. The fix for missing figures is _always_ to add the figure, never to delete the prose. The fix for an over-length post is to cut repetition (merged sections, the weakest example, paragraphs a figure already shows), never to cut a figure.
 
 **Final figure pass (prose-aware).** Phase C2 already cleared every figure against the visual rubric. Now that the prose exists, re-check the things that depend on the _written text_ — re-open any figure you're unsure about with `Read`:
 

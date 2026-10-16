@@ -1,6 +1,6 @@
 # Paper-analysis outline skeleton
 
-For posts under `content/blog/paper-reading/<area>/`. Target: 30+ min read, ≥ 6,500 words, ≥ 6 figures (**≥ 2 extracted from the PDF + ≥ 2 redrawn in Excalidraw**). This is the detailed sibling of blog-writer's `paper-reading.md`: deeper, with the paper's own figures and the full intuition→math ladder per technique.
+For posts under `content/blog/paper-reading/<area>/`. Target: 9–14 min read, 2–3k prose words, ≥ 6 figures (**≥ 2 extracted from the PDF + ≥ 2 redrawn in Excalidraw**, redrawn ones pictorial). This is the sibling of blog-writer's `paper-reading.md`, with the paper's own figures and a compact intuition→math ladder for each load-bearing technique. Rough budget: TL;DR + context 400, method 1,300, experiments 500, critique 400.
 
 ## Section list
 
@@ -10,7 +10,7 @@ For posts under `content/blog/paper-reading/<area>/`. Target: 30+ min read, ≥ 
 
 3. **`## Contributions`**: the paper's stated contributions, tightened into a numbered list (3–6 items), in your words. This is the map for the rest of the post.
 
-4. **`## Method`**: the heart, and the longest part. Lead with the **extracted architecture/method figure** (credited: "Figure N from <Authors> (<year>)"). Then one `###` sub-section **per load-bearing technique**, each climbing the full explanation ladder (`references/technique-explanation.md`): problem → intuition/analogy → mechanism → math (every symbol defined, shapes annotated) → worked micro-example → why-it-works/when-it-fails. Embed the redrawn diagrams where they make a mechanism or the math visible. At least one pytorch-shaped / pseudocode block reproducing the key idea.
+4. **`## Method`**: the heart, and the longest part. Lead with the **extracted architecture/method figure** (credited: "Figure N from <Authors> (<year>)"). Then one `###` sub-section **per load-bearing technique (2–4 of them)**, each climbing the full explanation ladder (`references/technique-explanation.md`): problem → intuition/analogy → mechanism → math (every symbol defined, shapes annotated) → worked micro-example → why-it-works/when-it-fails. Embed the redrawn diagrams where they make a mechanism or the math visible. At least one pytorch-shaped / pseudocode block reproducing the key idea.
 
 5. **`## Experiments & results`**: a table of the headline numbers with **baselines named**, datasets, and compute scale (extract the paper's results figure/plot if it's a keeper). One paragraph on "what's load-bearing in their setup that might not transfer" (data scale, a specific tokenizer, a tuned hyperparameter, eval choice). If there's an ablation that carries the argument, walk it.
 

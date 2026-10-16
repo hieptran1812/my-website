@@ -16,32 +16,39 @@ fail=0
 pass()  { echo "PASS  $1"; }
 warn()  { echo "WARN  $1"; }
 fail_() { echo "FAIL  $1"; fail=1; }
+# Prose words only: drop the frontmatter, ``` code fences, and inline animated-figure
+# blocks, so SVG markup and code never count toward (or against) the length window.
+prose_words() {
+  awk 'NR==1 && /^---[[:space:]]*$/ {fm=1; next}
+       fm { if (/^---[[:space:]]*$/) fm=0; next }
+       /^```/{f=!f; next} f{next}
+       /^<figure class="blog-anim"/{a=1} a{ if(/^<\/figure>/) a=0; next } 1' "$path" | wc -w | tr -d ' '
+}
 
 # Body starts after the second '---' (end of frontmatter).
 fm_end=$(grep -nE '^---[[:space:]]*$' "$path" | sed -n '2p' | cut -d: -f1)
 fm_end="${fm_end:-1}"
 
 # ── 1. Word-count gate ──────────────────────────────────────────────────────
-words=$(wc -w < "$path" | tr -d ' ')
+words=$(prose_words)
 read_time=$(( (words + 110) / 220 ))
-case "$depth" in
-  deep-dive) min=27; min_words=6000 ;;
-  explainer) min=16; min_words=3500 ;;
-  concept)   min=10; min_words=2000 ;;
-  *)         min=16; min_words=3500 ;;
-esac
-if [ "$words" -ge "$min_words" ]; then
-  pass "word-count: $words words, readTime=$read_time (floor=$min min)"
+# Every depth ships in the same window: 2,000 to 3,000 prose words (~9 to 14 min).
+# A series brief may override the window (e.g. WORD_MIN=3000 WORD_MAX=4000); the skill default is 2000-3000.
+min_words="${WORD_MIN:-2000}"; max_words="${WORD_MAX:-3000}"
+if [ "$words" -lt "$min_words" ]; then
+  fail_ "word-count: $words prose words / readTime=$read_time below floor $min_words. Deepen the thinnest section: one more worked example, the misconception it fixes."
+elif [ "$words" -gt "$max_words" ]; then
+  fail_ "word-count: $words prose words / readTime=$read_time above ceiling $max_words. Cut: merge overlapping sections, drop the weakest example or case study, let a figure carry what a paragraph re-explains."
 else
-  fail_ "word-count: $words words / readTime=$read_time below floor $min min ($min_words words). Expand thinnest sections (more worked examples, more misconceptions, deeper mechanics)."
+  pass "word-count: $words prose words, readTime=$read_time (window=$min_words-$max_words)"
 fi
 
 # ── 2. Diagram-count gate ────────────────────────────────────────────────────
 fig_count=$(grep -cE '^!\[' "$path" || true)
 case "$depth" in
   deep-dive) fig_min=5 ;;
-  explainer) fig_min=3 ;;
-  concept)   fig_min=2 ;;
+  explainer) fig_min=4 ;;
+  concept)   fig_min=3 ;;
   *)         fig_min=3 ;;
 esac
 if [ "$fig_count" -ge "$fig_min" ]; then
@@ -69,7 +76,7 @@ fi
 
 # ── 5. Worked-examples gate (finance) ────────────────────────────────────────
 case "$depth" in
-  deep-dive) ex_min=4 ;;
+  deep-dive) ex_min=3 ;;
   explainer) ex_min=3 ;;
   concept)   ex_min=2 ;;
   *)         ex_min=3 ;;

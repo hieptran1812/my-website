@@ -25,14 +25,14 @@ Do not read `diagram-triggers.md` or `voice-cheatsheet.md`; those belong to phas
 
 ## Procedure
 
-1. **Prefer the DSL.** Author `.cache/blog-writer/<slug>/<slug>-<i>.dsl.json` (`type` / `title` / `caption` / `claim` / `nodes` / `edges`) and expand with `node .claude/skills/blog-writer/scripts/layout-scene.mjs <in.dsl.json> <out.scene.json>`. The DSL is ~2.5× smaller than hand-placed element JSON and lays out by construction, so it passes the containment, overlap, coverage, and palette invariants without you reasoning about coordinates. Drop to hand-authored `.in.json` + `author-scene.mjs` **only** for figures whose shape no engine covers (memory layouts, wire formats, custom internals).
-2. **Honor the planned `kind` per figure.** Diversity is set in Phase B — do not collapse every figure to `pipeline` because it validates easily. With ≥ 5 figures use ≥ 3 distinct kinds; with ≥ 8 use ≥ 4; no two adjacent figures share a layout skeleton.
+1. **Illustrate first, then pick the tool.** Read `diagram-authoring.md §Illustrate, don't label` before authoring anything. Pictorial kinds (`xy-chart`, `bars`, `cells`, `filmstrip`, `lanes`, `space`, `worked-example`, `anatomy`, `scale`, `analogy`) are hand-authored `.in.json` + `author-scene.mjs`; the DSL engines only make box layouts. If the inventory hands you a box-flow kind whose **encoding** is really a quantity, a structure or a change, recast it as the pictorial kind and say so in the manifest. Use the DSL for the figures that genuinely are flows, trees or matrices: author `.cache/blog-writer/<slug>/<slug>-<i>.dsl.json` (`type` / `title` / `caption` / `claim` / `nodes` / `edges`) and expand with `node .claude/skills/blog-writer/scripts/layout-scene.mjs <in.dsl.json> <out.scene.json>`. The DSL is ~2.5× smaller than hand-placed element JSON and lays out by construction, so it passes the containment, overlap, coverage, and palette invariants without you reasoning about coordinates. For those box-flow figures, still give the boxes structure (sizes, internal cells, real numbers, the failure branch), not one noun each.
+2. **Honor the planned `kind` per figure, and the box-flow budget.** Diversity is set in Phase B — do not collapse every figure to `pipeline` because it validates easily. At least half the figures are pictorial; box-and-arrow kinds (`pipeline`, `graph`, `tree`, `layered-stack`, box-row `before-after`) are at most ⅓ and never more than 2; no kind more than twice; with ≥ 4 figures use ≥ 3 distinct kinds, with ≥ 6 use ≥ 4; no two adjacent figures share a layout skeleton.
 3. **Read validator errors and fix the input.** Each message names the rule and the offending element. Never bypass, never disable a check, never pad a scene to game the coverage floor.
 4. **Batch render once**, per `diagram-authoring.md §Batch render`: build the manifest, run `render-scene-batch.mjs`, then `cwebp -quiet -lossless -m 6` each cache PNG into `public/imgs/blogs/<slug>-<i>.webp`.
 5. **Check the floor**: every WebP ≥ 1600×900 px and ≥ 40 KB. Re-author anything that misses.
 6. **Animated figures** (only if tagged): author `<slug>-anim-<i>.fig.html` as a full `<figure class="blog-anim">` block — multi-line, **zero blank lines inside**, `<figure` at column 0 — and validate with `node .claude/skills/blog-writer/scripts/check-anim.mjs <fig.html>` until it prints `PASS`.
 
-7. **Gate every figure, then fix, then re-gate — here, not in your caller.** Dispatch one `figure-reviewer` subagent per figure, **all in a single message** so they run concurrently. Give each one its WebP path plus that figure's `_claim` / `_caption` / section anchor, and say whether it is authored (full rubric) or an extracted crop.
+7. **Gate every figure, then fix, then re-gate — here, not in your caller.** Dispatch one `figure-reviewer` subagent per figure, **all in a single message** so they run concurrently. Give each one its WebP path plus that figure's `_claim` / `_caption` / section anchor, and say whether it is authored (full 7-point rubric, including *illustrates, not just labels*) or an extracted crop.
 
    For every `FAIL`, apply the fix the reviewer named to that figure's `.dsl.json` / `.in.json`, re-validate, re-render, re-convert, then dispatch a fresh `figure-reviewer` **for the changed figures only**. Repeat until every figure is a clean PASS.
 
@@ -48,7 +48,7 @@ FIGURES <slug> — <n> shipped and gated, <m> animated
 2 matrix    <slug>-2.webp  1760x1120  64KB  PASS (2 fix rounds)
 ...
 ANIM 1 <slug>-anim-1.fig.html  PASS
-DIVERSITY: 4 kinds (pipeline, matrix, graph, layered-stack); no adjacent repeats
+DIVERSITY: 4 kinds (bars, cells, xy-chart, pipeline); pictorial 4/5, box-flow 1/5; no adjacent repeats; recast: fig 3 pipeline→filmstrip
 BLOCKED: <none | one line per figure still failing after 3 rounds, with the last verdict>
 ```
 

@@ -1,11 +1,13 @@
 ---
 name: finance-writer
-description: Draft a long-form, deep-dive-yet-accessible finance blog post for the my-website blog. Opens with a TL;DR box, builds every concept from first principles for a curious beginner, grounds it in worked dollar examples, and illustrates it with Excalidraw figures (cash-flow timelines, payoff charts, balance-sheet stacks). Writes valid frontmatter into content/blog/trading/<finance|crypto|quantitative-finance>/. Triggers on /finance-writer, "write a finance post about", "explain <finance topic> as a blog", "deep dive on <financial concept>".
+description: Draft a focused 2,000–3,000-word, deep-yet-accessible finance blog post for the my-website blog. Opens with a TL;DR box, builds every concept from first principles for a curious beginner, grounds it in worked dollar examples, and illustrates it with Excalidraw figures (cash-flow timelines, payoff charts, balance-sheet stacks). Writes valid frontmatter into content/blog/trading/<finance|crypto|quantitative-finance>/. Triggers on /finance-writer, "write a finance post about", "explain <finance topic> as a blog", "deep dive on <financial concept>".
 ---
 
 # finance-writer
 
-Drafts a long-form finance article that is **deep but never gatekept**: it assumes a smart, curious reader with *no finance background*, defines every term, builds intuition with everyday-money analogies before any formula, anchors each idea in a worked example with real dollar figures, and illustrates the abstractions with Excalidraw diagrams. Every post opens with a TL;DR box.
+Drafts a focused finance article that is **deep but never gatekept**: it assumes a smart, curious reader with *no finance background*, defines every term, builds intuition with everyday-money analogies before any formula, anchors each idea in a worked example with real dollar figures, and illustrates the abstractions with Excalidraw diagrams. Every post opens with a TL;DR box.
+
+**Length: 2,000 to 3,000 prose words at every depth** (the Phase E gate fails a post outside that window, in both directions). **Figures illustrate, they don't label:** at least half are pictorial (payoff and yield charts, bars to scale, cash-flow timelines with amounts, balance-sheet stacks drawn to size, filmstrips of a position changing), at most 2 are box-and-arrow flows. See `../blog-writer/references/diagram-authoring.md §Illustrate, don't label`.
 
 This is the finance sibling of [`blog-writer`](../blog-writer/SKILL.md). It **reuses blog-writer's diagram tooling verbatim** — the validator, the layout engines, the batch renderer are all domain-neutral. What changes is the *voice* (accessible expert, not principal-engineer war stories), the *structure* (TL;DR → foundations → deep dive → worked examples → misconceptions → real markets), the *diagram vocabulary* (finance-native figures + a finance semantic palette), and the *verify gate* (adds TL;DR-at-top, foundations-section, and worked-example checks).
 
@@ -85,8 +87,9 @@ Audience is fixed: **a curious smart beginner with no finance background**. Do n
    - **TL;DR draft** — the ≤ 6 bullets that will open the post (so the user approves the thesis up front)
    - **Foundations checklist** — the list of terms/prerequisites that will be defined from zero before the deep part begins
    - Section list (H2s with one-line summaries), ending with **Common misconceptions** and **How it shows up in real markets / case studies**
-   - **Abstraction inventory + figure plan** — one bullet per abstract concept: claim / caption / section anchor / figure kind (see `finance-diagrams.md`) / sketch. Figure count = abstraction count.
-   - **Worked-example plan** — 3+ named numeric walkthroughs (deep-dive), each one line: the scenario + the number being computed.
+   - **Abstraction inventory + figure plan** — one bullet per abstract concept: claim / caption / section anchor / figure kind (see `finance-diagrams.md`) / **encoding** (what the geometry shows with the labels covered) / sketch. Figure count = abstraction count, 4 to 7. Box-flow kinds ≤ ⅓ (max 2); no kind more than twice.
+   - **Worked-example plan** — 3 named numeric walkthroughs (deep-dive), each one line: the scenario + the number being computed.
+   - **Word budget per section**, summing to ~2,600 (the gate window is 2,000 to 3,000)
    - 2–4 cross-links to existing `trading/` posts
 5. **Print the outline and stop.** Wait for "go" / "approved" / edits.
 
@@ -136,6 +139,7 @@ Reviewers use the full rubric in `../blog-writer/references/diagram-authoring.md
 
 - **Sign convention is unambiguous** — inflows/gains are green and outflows/losses are red *consistently* across every figure; a reader never has to guess whether an arrow means "money in" or "money out".
 - **Axes are labeled with units** — any chart (payoff, yield curve, growth, distribution) labels both axes with what they measure and the unit (\$, %, years), and marks the reference points the prose names (strike, breakeven, par, spot).
+- **Illustrates, not just labels** — with the words blanked out, the geometry still shows the idea: a payoff kinks at the strike, the debt bar is 4× the equity bar, the coupon arrows repeat and the principal arrow towers over them. A boxes-and-arrows chain for something that has amounts, time or shape fails.
 - **Numbers match the worked example** — if a figure illustrates a worked example, its numbers are the *same* numbers the prose computes. No invented figures for visual balance.
 - **Rendered layout has no meaningless whitespace** — title and caption do not sit far above a body stranded at the bottom; internal blank bands stay below 20% unless they encode a labeled interval; a mechanical validator pass is insufficient without a pixel review.
 
@@ -185,11 +189,11 @@ Do not advance to Phase E with any claim left in an unverified state, any relati
 bash .claude/skills/finance-writer/scripts/verify-finance-post.sh <post.md> <slug> <depth>
 ```
 
-`<depth>` ∈ `deep-dive` | `explainer` | `concept`. The script checks everything blog-writer checks (word-count floor, diagram-count floor, abstraction coverage, WebP sharpness, webp-only embeds + no stray non-webp artifacts, forbidden text-diagram substitutes, slug-match, no-H1, English-only, frontmatter sanity, **no em dashes**) **plus four finance gates**:
+`<depth>` ∈ `deep-dive` | `explainer` | `concept`. The script checks everything blog-writer checks (word-count window 2,000 to 3,000 prose words, diagram-count floor, abstraction coverage, WebP sharpness, webp-only embeds + no stray non-webp artifacts, forbidden text-diagram substitutes, slug-match, no-H1, English-only, frontmatter sanity, **no em dashes**) **plus four finance gates**:
 
 - **TL;DR-at-top** — a `[!important]`/`[!note]`/`[!info]` callout or a `**TL;DR**` blockquote within the first ~25 body lines.
 - **Foundations section** — a heading matching the basics (`foundation|fundamentals|basics|first principles|primer|how .* works|background|the building blocks`) before the deep sections.
-- **Worked examples** — ≥ N concrete numeric walkthroughs (deep-dive ≥ 4, explainer ≥ 3, concept ≥ 2), detected by `worked example` / `example:` markers co-located with `$`/number figures.
+- **Worked examples** — ≥ N concrete numeric walkthroughs (deep-dive ≥ 3, explainer ≥ 3, concept ≥ 2), detected by `worked example` / `example:` markers co-located with `$`/number figures.
 - **Sourcing** — provenance for real figures: a deep-dive must carry a `## Sources`/`References`/`Further reading` section **or** inline citation links, and the gate WARNs with a count of live-number lines (price/index/rate/size) that lack a nearby citation, link, or as-of date. A hard FAIL only when a deep-dive has *zero* sourcing of any kind. This gate backstops Phase D2 — it does not replace the manual fact-check; an all-green gate on an unverified post still means the work isn't done.
 
 Any FAIL → re-enter the named phase and fix. A WARN on the sourcing gate means re-run the Phase D2 extractor and source or date those lines before shipping. The fix for a missing figure is *always* to add the figure, never to delete the prose. The fix for a missing worked example is to add a real numeric walkthrough, never to relabel prose.

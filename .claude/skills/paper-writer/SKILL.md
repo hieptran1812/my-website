@@ -1,11 +1,11 @@
 ---
 name: paper-writer
-description: Analyze a research paper end-to-end and draft a detailed paper-reading blog post for the my-website blog. Reads the actual PDF, explains every technique from intuition up to the math, extracts the paper's own figures (architecture diagrams, plots, tables) straight out of the PDF and embeds them, adds redrawn Excalidraw diagrams that clarify, and writes valid frontmatter into content/blog/paper-reading/<area>/. Triggers on /paper-writer, "analyze this paper", "read this paper", "explain this paper as a blog", "phân tích paper", an arxiv link, or an attached paper PDF.
+description: Analyze a research paper end-to-end and draft a focused 2,000–3,000-word paper-reading blog post for the my-website blog. Reads the actual PDF, explains every technique from intuition up to the math, extracts the paper's own figures (architecture diagrams, plots, tables) straight out of the PDF and embeds them, adds redrawn Excalidraw diagrams that clarify, and writes valid frontmatter into content/blog/paper-reading/<area>/. Triggers on /paper-writer, "analyze this paper", "read this paper", "explain this paper as a blog", "phân tích paper", an arxiv link, or an attached paper PDF.
 ---
 
 # paper-writer
 
-Drafts a **detailed, technique-by-technique analysis of a single research paper** in the house style of `my-website` — accessible-expert voice, intuition before math, every symbol defined, the paper's *own* figures cut out of the PDF and embedded alongside redrawn Excalidraw diagrams that make the ideas click.
+Drafts a **focused, technique-by-technique analysis of a single research paper** (2,000 to 3,000 prose words) in the house style of `my-website` — accessible-expert voice, intuition before math, every symbol defined, the paper's *own* figures cut out of the PDF and embedded alongside redrawn Excalidraw diagrams that make the ideas click.
 
 This is the paper-analysis sibling of [`blog-writer`](../blog-writer/SKILL.md) and [`finance-writer`](../finance-writer/SKILL.md). It **reuses blog-writer's diagram tooling verbatim** — the same validator (`author-scene.mjs`), layout engines (`layout-scene.mjs`), batch renderer (`render-scene-batch.mjs`), and semantic palette. Three things are new:
 
@@ -25,9 +25,9 @@ Do NOT use for: general concept explainers with no single source paper (use `blo
 
 - **Faithful to the source.** Every claim, number, and symbol traces to the actual paper text you read — not to prior knowledge of the method. Where you extrapolate beyond the paper, say so.
 - **The paper's real figures.** At least **2 figures cut straight out of the PDF** (the architecture diagram is almost always one), each credited to the paper.
-- **Redrawn clarity.** At least **2 Excalidraw diagrams** you author to explain something the paper's own figures leave implicit (a data-flow the paper only describes in prose, a loss decomposition, a before/after).
+- **Redrawn clarity.** At least **2 Excalidraw diagrams** you author to explain something the paper's own figures leave implicit. They must *illustrate*, not re-box the architecture: the method run on a tiny instance with real numbers (`worked-example`), the tensor or memory layout as `cells`, the training state changing as a `filmstrip`, the result as `bars`/`xy-chart`. At most one redrawn figure is a box-and-arrow flow. See `../blog-writer/references/diagram-authoring.md §Illustrate, don't label`.
 - **Intuition → math for every technique.** Each core technique gets the full explanation ladder (see `references/technique-explanation.md`): the problem, an analogy, the mechanism, the math with every symbol defined, a worked micro-example, and when it breaks.
-- **Detailed, not a summary.** Cover *every* load-bearing technique in the paper. Depth floor is higher than a normal paper-reading post (≥ 6,500 words).
+- **Focused, not a summary.** 2,000 to 3,000 prose words (the gate fails outside that window). Spend them on the 2–4 techniques the paper's result actually depends on; give each the explanation ladder in compact form, and mention minor tricks in a sentence each.
 
 ## Reference files (lazy-load)
 
@@ -96,7 +96,7 @@ paper:
    - **Technique inventory** — one bullet per load-bearing technique in the paper, each with: the equation(s) it hinges on, the intuition/analogy you'll open with, and whether it needs a redrawn diagram.
    - **Figure plan — two tracks:**
      - **Extract** (originals): one bullet per keeper figure → `<slug>-fig<n>` · page · rough box · one-line caption. (≥ 2.)
-     - **Redraw** (Excalidraw): one bullet per authored figure → claim / caption / section anchor / kind (`pipeline`/`graph`/`before-after`/`matrix`/`layered-stack`/hand-authored) · `static`|`animated`. (≥ 2. Tag `animated` only when motion carries the meaning; cap 1–3.)
+     - **Redraw** (Excalidraw): one bullet per authored figure → claim / caption / section anchor / kind (pictorial first: `worked-example`/`cells`/`filmstrip`/`xy-chart`/`bars`/`space`/`lanes`; box-flow `pipeline`/`graph`/`layered-stack` at most once) · **encoding** (what the geometry shows with the labels covered) · `static`|`animated`. (≥ 2. Tag `animated` only when motion carries the meaning; cap 1–3.)
    - Results table plan: which headline numbers, which baselines, which datasets.
    - 2–4 cross-links to existing posts.
 6. **Print the outline and stop.** Wait for "go" / "approved" / edits.
@@ -134,7 +134,7 @@ Gate **every** figure — extracted and redrawn — before any prose is built ar
 **Do not `Read` the figures in this session** — an image costs ~2k tokens on the way in and is re-billed as cached context on every later turn. See `../blog-writer/references/token-discipline.md`.
 
 - **Extracted originals** — judge the *crop*, not the design (you didn't draw it): tight to the figure, caption excluded, nothing clipped, nothing foreign bleeding in, legible at the shipped size. A FAIL means re-extract with a better box/DPI (back to Phase C1), never edit the prose.
-- **Redrawn diagrams** — the full blog-writer Phase C2 rubric (read `../blog-writer/references/diagram-authoring.md §Visual self-review`): faithful, arrows legible, balanced, no dead space, text renders, squint test; and set-level diversity.
+- **Redrawn diagrams** — the full blog-writer Phase C2 rubric (read `../blog-writer/references/diagram-authoring.md §Visual self-review`): faithful, arrows legible, balanced, no dead space, text renders, squint test, **illustrates not just labels**; and set-level diversity.
 
 Advance to Phase D only when every figure is a clean PASS.
 
@@ -157,7 +157,7 @@ Advance to Phase D only when every figure is a clean PASS.
 bash .claude/skills/paper-writer/scripts/verify-paper-post.sh <post.md> <slug>
 ```
 
-The script checks everything blog-writer's gate does — word-count floor (≥ 6,500), figure-count floor (≥ 6), abstraction coverage, webp-only embeds, no stray non-webp renders, no ASCII/Unicode/mermaid diagram substitutes, slug-match, no-H1-in-body, English-only, frontmatter sanity, **no em dashes** — split into two sharpness tiers (**extracted** `-fig<n>` ≥ 900 px long-side / ≥ 20 KB; **redrawn** `-<n>` ≥ 1600×900 / ≥ 40 KB) — **plus paper-specific gates**:
+The script checks everything blog-writer's gate does — word-count window (2,000 to 3,000 prose words), figure-count floor (≥ 6), abstraction coverage, webp-only embeds, no stray non-webp renders, no ASCII/Unicode/mermaid diagram substitutes, slug-match, no-H1-in-body, English-only, frontmatter sanity, **no em dashes** — split into two sharpness tiers (**extracted** `-fig<n>` ≥ 900 px long-side / ≥ 20 KB; **redrawn** `-<n>` ≥ 1600×900 / ≥ 40 KB) — **plus paper-specific gates**:
 
 - **TL;DR** callout near the top.
 - **≥ 2 extracted originals** (`-fig<n>.webp`) and **≥ 2 redrawn diagrams** (`-<n>.webp`) embedded.

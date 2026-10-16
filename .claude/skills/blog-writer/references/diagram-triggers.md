@@ -24,13 +24,13 @@ Anything that needs illustration earns a figure — there is no upper limit. Tri
 
 If the prose introduces an idea and the next paragraph does not have a figure within 30 lines, **add one**. Missing figures are defects, not stylistic choices.
 
-## Per-depth floors (minimums, never caps)
+## Per-depth floors
 
 - Explainer ≥ 4 figures
-- Paper-reading ≥ 5
-- Deep-dive ≥ 8
+- Paper-reading ≥ 4
+- Deep-dive ≥ 5
 
-Most posts will exceed these floors 2–3×. The ceiling is set by content.
+A post is 2,000 to 3,000 words, so plan **4 to 7 figures**, roughly one per 400 to 500 words. When there are more abstractions than that, merge related ones into one richer figure rather than dropping the picture; and prefer cutting a paragraph the figure already explains over cutting the figure.
 
 ## Abstraction inventory format (Phase B output)
 
@@ -39,18 +39,20 @@ For each abstract concept the post introduces, emit one bullet with:
 - **Claim** (≥ 8 words): the single sentence the figure proves
 - **Caption** (one sentence, not a label restatement): figure thesis
 - **Section anchor**: the markdown heading it sits under
-- **Kind**: the figure type chosen *from the concept's shape* — `pipeline` | `graph` | `before-after` | `matrix` | `grid` | `tree` | `timeline` | `layered-stack` | hand-authored element figure
-- **Sketch**: which boxes / arrows / labels appear
+- **Kind**, chosen *from the concept's shape*. Pictorial (the default): `xy-chart` | `bars` | `cells` | `filmstrip` | `lanes` | `space` | `worked-example` | `anatomy` | `scale` | `analogy`. Structural: `matrix` | `grid` | `timeline`. Box-flow (rationed): `pipeline` | `graph` | `tree` | `layered-stack` | `before-after`. Definitions in `diagram-authoring.md §Illustrate, don't label`.
+- **Encoding**: what the *geometry* says with the labels covered (e.g. "bar lengths to scale: weights 70 GB vs KV 12 GB", "16 cells fill left to right, 3 frames", "two lanes overlap except a 40 ms gap"). If you can only write "boxes connected by arrows", pick a different kind.
+- **Sketch**: which shapes / numbers / annotations appear, with the real numbers from the prose's worked example
 
-Figure count = abstraction count. If you found 9 abstractions, plan 9 figures.
+Figure count = abstraction count, within the 4 to 7 window.
 
 ## Figure-type diversity (plan it here)
 
-Vary the kinds so the post doesn't read as one diagram repeated N times:
+Vary the kinds so the post doesn't read as one diagram repeated N times, and so the figures *show* rather than label:
 
-- **No single kind for more than ~half the figures.** With ≥ 5 figures, use **≥ 3 distinct kinds**; with ≥ 8, use **≥ 4**.
-- **No two adjacent figures share a layout skeleton.** If two consecutive abstractions both map to "boxes left-to-right with arrows", recast one (merge, or switch to `graph`/`before-after`/`matrix`).
-- Map kind to concept shape: sequence/lifecycle → `pipeline`/`timeline`; branching or merging dataflow → `graph`; abstraction layers → `layered-stack`; naive-vs-optimized → `before-after`; axes × choices → `matrix`/`grid`; taxonomy/recursion → `tree`; memory/structure internals → hand-authored. See `diagram-authoring.md §Diversity across the post`.
+- **Box-flow budget: at most ⅓ of the figures (max 2) are box-and-arrow kinds; at least ½ are pictorial.**
+- **No kind more than twice.** With ≥ 4 figures use **≥ 3 distinct kinds**; with ≥ 6, **≥ 4**.
+- **No two adjacent figures share a layout skeleton.**
+- Map kind to concept shape: a quantity comparison → `bars`; a trend or tradeoff → `xy-chart`; a data structure, tensor, or memory layout → `cells`; a state change → `filmstrip`; concurrency or timing → `lanes`; a formula or algorithm → `worked-example`; one object's parts → `anatomy`; axes × choices → `matrix`; only a genuine branching flow → `graph`; only a genuine hierarchy → `tree`. See `diagram-authoring.md §Diversity across the post`.
 
 ## First figure ("mental model")
 

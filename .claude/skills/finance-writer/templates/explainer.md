@@ -1,6 +1,6 @@
 # Finance explainer outline skeleton
 
-Target: 18–30 min read, 4–6k words, ≥ 4 figures, ≥ 3 worked examples. One self-contained mechanism explained so well a beginner fully gets it. Less exhaustive than a deep-dive (no long real-markets catalog) but the same accessible-then-deep arc.
+Target: 9–14 min read, 2–3k prose words, 4–6 figures (≥ half pictorial, ≤ 2 box-flow), ≥ 3 worked examples. One self-contained mechanism explained so well a beginner fully gets it. Less exhaustive than a deep-dive (no long real-markets catalog) but the same accessible-then-deep arc.
 
 ## Section list
 

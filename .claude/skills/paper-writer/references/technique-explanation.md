@@ -32,7 +32,7 @@ Each core technique gets these six rungs, in order. Not every rung needs to be l
 
 ## Depth calibration
 
-- **Cover every load-bearing technique** — the ones the results actually depend on. A paper's contribution usually rests on 3–7 techniques; each gets the full ladder. Minor implementation details (a specific learning-rate warmup, a dataloader trick) get a sentence, not a ladder — unless the paper's whole point *is* that detail.
+- **Cover every load-bearing technique** — the ones the results actually depend on. A paper's contribution usually rests on a few techniques; pick the 2–4 the headline result depends on and give each the ladder in compact form (roughly 300–450 words per technique, so the post stays inside the 2,000 to 3,000-word window). The rest get a sentence each. Minor implementation details (a specific learning-rate warmup, a dataloader trick) get a sentence, not a ladder — unless the paper's whole point *is* that detail.
 - **Match rung length to difficulty.** A one-line reparameterization needs two sentences of intuition and one equation. A new attention variant or a novel loss needs the full treatment with a worked example.
 - **Don't inflate.** Detailed ≠ padded. Every paragraph either builds intuition, states mechanism, defines math, or works an example. Cut anything that merely restates.
 

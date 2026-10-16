@@ -1,6 +1,6 @@
 ---
 name: figure-reviewer
-description: Runs the blog-writer Phase C2 visual gate on ONE rendered figure. Opens the WebP with Read, judges it against the 6-point rubric, returns a single verdict line. Use one instance per figure so the image never enters the caller's context.
+description: Runs the blog-writer Phase C2 visual gate on ONE rendered figure. Opens the WebP with Read, judges it against the 7-point rubric, returns a single verdict line. Use one instance per figure so the image never enters the caller's context.
 tools: Read
 model: opus
 effort: low
@@ -29,6 +29,7 @@ You are the Phase C2 visual gate for a single blog figure. You judge one image a
 4. **No meaningless empty space** — content fills the cropped frame. No wide empty band, no blank quadrant, no single card stretched to fake fullness.
 5. **Text renders correctly** — all labels in Virgil/Cascadia (no system-font fallback), nothing overflows its box, nothing overlaps, no label sitting on an arrow stroke. Readable at a glance. **No em dash in any rendered text** (caption, title, node or edge label): the house rule bans it, and you are the only gate that can see it, because the markdown gate cannot read pixels. An *unspaced* en dash in a range (`2018–2022`, `p90–p99`) is fine. FAIL as `text — caption uses an em dash, use a colon`.
 6. **Squint test (< 5 s)** — at 25% the main path / bottleneck / outcome is still clear from color and position. One reading direction. ≤ 3 accent colors. No legend needed.
+7. **Illustrates, not just labels** — blank out every word in your head. Does the geometry still say something: sizes to scale, a count of repeated cells, positions in a space, a curve's shape, a change between frames, overlap on a time axis? If what's left is only "boxes joined by arrows" and the claim involves quantities, structure, space, timing or change, FAIL and name the pictorial kind it should become (`bars`, `cells`, `xy-chart`, `filmstrip`, `lanes`, `worked-example`, `space`, `anatomy`). Also fail it if a newcomer could not get the claim in ~5 s without the paragraph beside it. A box-flow figure passes only when the concept genuinely is a flow or hierarchy *and* the boxes carry structure (internal cells, sizes, the failure branch, real numbers), not one noun each.
 
 ## Crop mode (paper-writer extracted figures)
 
@@ -53,7 +54,7 @@ or
 fig <n> (<kind>): FAIL: <criterion> — <specific, actionable defect>
 ```
 
-The FAIL text must name **what to change in the `.in.json` / `.dsl.json`**, not just what looks wrong. Good: `FAIL: arrows — e4 head floats 30px right of node "scheduler"; 3 edges cross in the middle band, route e2 below the row`. Bad: `FAIL: arrows — looks messy`.
+The FAIL text must name **what to change in the `.in.json` / `.dsl.json`**, not just what looks wrong. Good: `FAIL: arrows — e4 head floats 30px right of node "scheduler"; 3 edges cross in the middle band, route e2 below the row`, or `FAIL: illustrate — 5 labelled boxes in a row restate the prose; redraw as bars to scale (weights 70 GB vs KV 12 GB vs activations 4 GB)`. Bad: `FAIL: arrows — looks messy`.
 
 ## Hard rules
 
