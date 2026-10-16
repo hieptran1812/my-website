@@ -502,8 +502,9 @@ export default function HeroSection() {
                 lineHeight: "1.7",
               }}
             >
-              I’m a curious nerd who loves diving into the intersection of AI,
-              systems, and finance. Besides coding, I am passionate about
+              I’m a nerd who loves diving into the intersection of AI, systems,
+              and finance with child-like curiosity and a healthy dose of
+              foolishness. Besides coding, I am passionate about
               building technology communities. I am happy to connect with
               recruiters, software engineers, friends and anyone who share some
               of the interests with me!
