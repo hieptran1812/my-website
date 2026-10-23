@@ -41,7 +41,7 @@ No `aiGenerated` field (repo convention; the gate's demand for it is an accepted
 7. **Check it numerically** (§6).
 8. **Where this shows up in practice** (§7).
 9. **What to remember:** 3–5 bullets in a blockquote or short list.
-10. **Where next:** links to the intro (#1), the capstone (#72) and 2–3 siblings. Plain sentences, not a bare link list.
+10. **Where next:** links to the intro (#1) and 2–3 existing siblings; name upcoming posts by title without links. Plain sentences, not a bare link list.
 
 Headings: `##` for sections, `###` inside. No H1 in the body.
 
@@ -93,7 +93,7 @@ Source the proof: a named paper appendix (with section), or a standard textbook 
 
 - One fenced Python block, ≤ ~30 lines, NumPy (or PyTorch only when the post is about autodiff / training), seeded, runnable as-is.
 - It verifies the post's central identity or theorem: finite-difference vs analytic gradient, Monte Carlo vs closed form, Sinkhorn plan vs LP, Euler vs exact flow, empirical coverage vs nominal.
-- **Run it once with Bash** (in the scratchpad, `python3 -I`) and paste the real output in a second fenced block labelled `text`. Never write output you did not see.
+- **Run it once with Bash** (in the scratchpad, `python3 -I`) and paste the real output in a second fenced block with NO language label (the verify gate FAILs on a ```text fence). Never write output you did not see.
 - One sentence after it: what agreement you expected and why the residual error has the size it has.
 
 ## 7. Where this shows up in practice
@@ -185,7 +185,7 @@ Every mathematical claim is (a) proved or derived in the post, (b) cited to a na
 | `machine-learning/reinforcement-learning/` | the RL series; we only do the math needed for RLHF / DPO / GRPO and MDP theory. |
 | `machine-learning/scaling-laws/` | empirical results; we do the fitting and the Lagrangian. |
 
-Link format: `/blog/machine-learning/mathematics/<slug>` (no trailing slash, no `.md`). Every post links #1 `how-to-read-the-math-in-an-ml-paper` and #72 `the-math-roadmap-for-ml-researchers`, 2–3 siblings, 1–2 neighbours. Links to series posts not yet written are fine (they resolve when the wave ships), but use the exact slug from the plan.
+Link format: `/blog/machine-learning/mathematics/<slug>` (no trailing slash, no `.md`). **Only link a post that exists:** committed (`git cat-file -e HEAD:content/blog/<path>.md` succeeds) or a sibling the orchestrator names as shipping in the same wave. Future series posts are mentioned by title without a link ("a later post on the Fokker–Planck equation"); the capstone wave back-fills links. Every post links #1 `how-to-read-the-math-in-an-ml-paper` (once it has shipped), 2–3 existing siblings, 1–2 neighbours.
 
 ## 12. Gates (definition of done)
 

@@ -1,0 +1,16 @@
+# Drafting-agent brief: Math for AI Research series
+
+You write ONE post of the "Math for AI Research" series. Follow the `blog-writer` skill (`.claude/skills/blog-writer/SKILL.md` and the references it tells you to read per phase), with these series overrides:
+
+1. **Read first, in full:** `.cache/blog-writer/_math-for-ai-series-kit.md`. It defines the post skeleton, the accessibility ladder, the four fixed blocks (Paper sentence decoded, Proof read line by line, Check it numerically, Where this shows up in practice), the LaTeX rules + scan, the figure primitives and the gates. The kit wins over the skill where they differ.
+2. **Your row:** grep your slug in `.claude/plans/math-for-ai-series.md` and read that row, your Track header, and any `#<your number>` line in §Scope extensions. Never read the whole plan.
+3. **Target:** `content/blog/machine-learning/mathematics/<slug>.md`. Check it does not exist and `git ls-files public/imgs/blogs/<slug>-*` is empty before starting. Frontmatter per kit §1; `date`/`publishDate` = the date the orchestrator gives you. `readTime` = (words + 110) / 220, integer division.
+4. **Length 3,000–4,000 prose words.** Gate: tell `post-verifier` to run `WORD_MIN=3000 WORD_MAX=4000 bash .claude/skills/blog-writer/scripts/verify-post.sh <post.md> <slug> deep-dive`. Every check must pass except the accepted `aiGenerated` FAIL.
+5. **Figures: 6 static (5–8) + 1 animated `blog-anim`.** Delegate all static figures to ONE `figure-author` dispatch. Pass it: the kit §8 (primitives, palette, coordinate conventions, gotchas), the figure inventory with each figure's claim and encoding, the requirement that ≥ ½ are pictorial and box-flow ≤ 2, and that every chart uses exact computed coordinates. Tell it to keep generator scripts in `.cache/blog-writer/<slug>/` only (six agents run in parallel; never a shared scratch filename) and to return only the manifest + a one-line summary of reviewer verdicts. Never open a WebP yourself. Author the animated figure yourself per `references/animated-figures.md` and validate it with `check-anim.mjs`.
+6. **Accessibility is the user's top requirement:** every concept climbs the kit §3 ladder (plain sentence → analogy → figure → small-number worked example → formal → general). Paragraphs ≤ 4 sentences. Recompute every number.
+7. **Run the §6 snippet** with Bash (`python3 -I`, in `.cache/blog-writer/<slug>/`) and paste the real output. **Run the kit §9 LaTeX scan** on your post before calling `post-verifier`; it must print nothing.
+8. **Faithful:** WebFetch each cited paper's arXiv abstract page once to confirm id + title. Never invent a paper, equation, id, company, number or output.
+9. **Links:** only to committed posts or to the same-wave siblings listed by the orchestrator (kit §11). Upcoming posts by title only.
+10. **No em dash** (`—`, spaced ` – `, ` -- `) anywhere, figure text included.
+11. **Isolation:** touch only your post, your `.cache/blog-writer/<slug>/`, and your `public/imgs/blogs/<slug>-N.webp`. Do not edit other posts. Do not git add / commit / push. After all gates pass, delete `.cache/blog-writer/<slug>/`.
+12. **Final reply, ONE line only:** `<slug> | words=N | figs=S static + A anim | gates: PASS | notes` or `BLOCKED: <reason>`. Summarise children; never paste their raw returns.
