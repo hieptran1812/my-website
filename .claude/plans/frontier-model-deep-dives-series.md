@@ -2,7 +2,7 @@
 
 **Folder:** `content/blog/machine-learning/frontier-models/` (subcategory "Frontier Models")
 **Why:** the 14 `*-model-family-timeline` posts catalog every release, but many major releases have no deep-dive. Gap analysis run 2026-10-23 against all 2,900 post titles. Kimi is fully covered; Llama, Gemma, gpt-oss, INTELLECT, Hermes have zero model deep-dives.
-**Size:** 36 posts, 6 waves of 6. Status: PLANNED (Wave 0 Fish Audio timeline shipped 2026-10-23; Wave 1 next).
+**Size:** 12 new family timelines (Waves T, T2) + 37 deep-dives (Waves 1–6). Open-weight families only. Status: PLANNED (Wave 0 Fish Audio timeline shipped 2026-10-23; Wave T next).
 
 ## Per-post contract
 
@@ -33,6 +33,36 @@ Timeline file per family: `deepseek-`, `qwen-`, `glm-`, `minimax-`, `nemotron-`,
 | 0 | `fish-audio-model-family-timeline` | Fish Audio | B | SHIPPED 2026-10-23 (4,486 words, 5 figs; latest = Fish Audio Drama 3, 2026-10-13); links existing `paper-reading/speech-processing/fish-audio-s2-controllable-text-to-speech` |
 
 Backfill done 2026-10-23: deepseek timeline now links Janus/Janus-Pro and DeepInfer; all other existing deep-dives were already linked.
+
+## Scope rule: open-weight families only (user decision 2026-10-23)
+
+Timelines and deep-dives are only for families that release weights. No GPT/o-series, Gemini, Claude, Grok timelines. For mixed labs (FLUX, Stability, Hunyuan, Mistral) catalog the open-weight lines; mention hosted-only siblings in one line each, as the Fish Audio timeline does.
+
+## Wave T: new family timelines (run BEFORE Wave 1, so deep-dives have a hub to link into)
+
+Same format as the existing `*-model-family-timeline` posts (glance table, one section per release, variant tables, license, primary-source link, "which to pick today"). blog-writer, WORD_MIN=2500 WORD_MAX=4500. After each ships: link any existing deep-dives of that family from the right section, and add the new timeline to the list of timeline files in the link-back rule.
+
+| # | Slug | Family | Corpus mentions (2026-10-23) |
+|---|---|---|---|
+| T1 | `mistral-model-family-timeline` | Mistral 7B, Mixtral, Codestral, Pixtral, Mistral Small/Medium open releases, Magistral, Devstral, Voxtral | 108 |
+| T2 | `stability-ai-model-family-timeline` | Stable Diffusion 1.x → SDXL → SD3/3.5, SVD, Stable Audio Open | 78 |
+| T3 | `whisper-model-family-timeline` | Whisper v1 → large-v3 → turbo, distil-whisper | 52 |
+| T4 | `flux-model-family-timeline` | Black Forest Labs FLUX.1 dev/schnell, Kontext, FLUX.2 open lines | 46 |
+| T5 | `hunyuan-model-family-timeline` | Tencent Hunyuan LLM (Large, A13B, Turbo-S open), Image, Video, 3D, OCR | 44 |
+| T6 | `meta-fair-vision-audio-model-family-timeline` | DINO/DINOv2/v3, SAM/SAM 2/3, AudioCraft/MusicGen, Seamless | 32 + 27 |
+
+## Wave T2: second-tier open families
+
+| # | Slug | Family | Mentions |
+|---|---|---|---|
+| T7 | `cohere-command-model-family-timeline` | Command R/R+, Aya, Command A (open weights, CC-BY-NC) | 28 |
+| T8 | `wan-model-family-timeline` | Alibaba Wan 2.1 → 2.2 → later video releases | 22 |
+| T9 | `falcon-model-family-timeline` | TII Falcon 1 → 2 → 3 → Falcon-H1, Mamba | 21 |
+| T10 | `microsoft-phi-model-family-timeline` | Phi-1 → Phi-4 (mini/multimodal/reasoning), VibeVoice | 17 |
+| T11 | `funaudiollm-model-family-timeline` | CosyVoice 1/2/3, SenseVoice, Fun-ASR | 13 |
+| T12 | `internlm-model-family-timeline` | InternLM 1–3, InternVL 1–3.5, Intern-S1 | 12 |
+
+Candidates for a later T3 wave (few mentions, rising open labs): Kyutai (Moshi/Unmute), AI21 Jamba, IBM Granite, StepFun, Xiaomi MiMo, Meituan LongCat, Ant Ling/Ring, MiniCPM, Baidu ERNIE 4.5, Liquid LFM.
 
 ## Wave 1: the open-weight pillars with zero coverage
 
