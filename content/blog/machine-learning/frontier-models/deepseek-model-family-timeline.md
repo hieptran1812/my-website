@@ -259,7 +259,7 @@ R1 was the first DeepSeek model under MIT, and the license explicitly allows dis
 
 ### Janus-Pro 1B / 7B (27 January 2025)
 
-[arXiv 2501.17811](https://arxiv.org/abs/2501.17811). The same decoupled-encoder design as Janus, with an optimized training strategy, more data and a 7B size. It released one week after R1.
+[arXiv 2501.17811](https://arxiv.org/abs/2501.17811). The same decoupled-encoder design as Janus, with an optimized training strategy, more data and a 7B size. It released one week after R1. Both Janus generations are explained in [Janus and Janus-Pro: decoupling visual encoding](/blog/machine-learning/computer-vision/janus-pro-decoupled-visual-encoding).
 
 | Variant | Params | Modality | Weights |
 |---|---|---|---|
@@ -406,7 +406,7 @@ DeepSeek's first experimental multimodal model in the V4 family, [announced](htt
 - **KV cache.** About a quarter of the HBM and an eighth of the SSD storage of V4.
 - **Reasoning effort** is a continuous setting from 1 to 100 instead of three levels.
 
-The announcement claims results ahead of V4-Pro. V4-Flash and V4-Flash-Vision-Exp were retired on the API the same day, and from 14 September `deepseek-v4-pro` requests route to V4.1-Flash "until V4.1-Pro launches". That is an announcement, not a release, so V4.1-Pro is not in this catalog.
+The announcement claims results ahead of V4-Pro. V4-Flash and V4-Flash-Vision-Exp were retired on the API the same day, and from 14 September `deepseek-v4-pro` requests route to V4.1-Flash "until V4.1-Pro launches". That is an announcement, not a release, so V4.1-Pro is not in this catalog. How DeepSeek serves V4.1-Flash in production is covered in [Inside DeepInfer](/blog/machine-learning/inference-frameworks/deepinfer-deepseek-production-inference-engine).
 
 | Variant | Backbone | Active (prefill / decode) | Context | Modality | Weights |
 |---|---|---|---|---|---|
