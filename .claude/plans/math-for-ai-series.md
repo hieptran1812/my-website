@@ -3,7 +3,7 @@
 **Subcategory:** `mathematics` (folder already exists under ML, currently empty; renders "Mathematics")
 **Path:** `content/blog/machine-learning/mathematics/<slug>.md`
 **frontmatter:** `category: "machine-learning"` · `subcategory: "Mathematics"`
-**Size:** **130 posts, 20 tracks (A to T, incl. R), 21 waves (0, 1–4, 4R, 5–19).** Rows 1–120 plus inserted 18a, 24a, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23). **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap (all 130 posts kept); Waves 0–1 COMPLETE; Wave 2 (Track B) next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
+**Size:** **130 posts, 20 tracks (A to T, incl. R), 21 waves (0, 1–4, 4R, 5–19).** Rows 1–120 plus inserted 18a, 24a, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23). **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap (all 130 posts kept); Waves 0–2 COMPLETE; Wave 3 (Track C) next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
 **Skill:** `blog-writer`, depth `deep-dive`. **Language:** English (repo convention, verify gate enforces it). Request came in VN.
 
 ### The user's request (2026-10-23, verbatim intent)
@@ -379,7 +379,7 @@ Waves are ordered by prerequisite; do not reorder without checking each post's *
 
 - [x] Wave 0: kit, render helper, 4 figure primitives. COMPLETE 2026-10-23: kit `.cache/blog-writer/_math-for-ai-series-kit.md` (skeleton, accessibility ladder, paper-decode, proof-walk, numeric-check, practice, LaTeX scan, gates), `_render-math.sh`, 4 primitives in `_math-primitives/` all PASSED figure-reviewer (ladder map needed 1 fix: crossing arrows), 0 post WebPs by design; 8 slugs over 60 chars shortened
 - [x] Wave 1: Track A, posts 1–6. COMPLETE 2026-10-23: 6 posts (3,794–3,958 words), 38 WebPs + 6 inline animations; all figure reviews, verify gates (WORD_MIN=3000), LaTeX scans and link checks passed. Gotcha: verify FAILs on a ```text fence, use an unlabelled or ```console fence
-- [ ] Wave 2: Track B, posts 7–12
+- [x] Wave 2: Track B, posts 7–12. COMPLETE 2026-10-23: 6 posts (3,781–3,968 words), 38 WebPs + 6 inline animations; all reviews, verify gates, LaTeX scans and link checks passed. Plan fix: #8 decodes the ReLU FFN (Transformer Eq. 2), not GELU
 - [ ] Wave 3: Track C, posts 13–18 + 18a
 - [ ] Wave 4: Track D, posts 19–24 + 24a
 - [ ] Wave 4R: Track R, posts 85–90
