@@ -2,7 +2,7 @@
 
 **Folder:** `content/blog/machine-learning/frontier-models/` (subcategory "Frontier Models")
 **Why:** the 14 `*-model-family-timeline` posts catalog every release, but many major releases have no deep-dive. Gap analysis run 2026-10-23 against all 2,900 post titles. Kimi is fully covered; Llama, Gemma, gpt-oss, INTELLECT, Hermes have zero model deep-dives.
-**Size:** 12 new family timelines (Waves T, T2) + 37 deep-dives (Waves 1–6). Open-weight families only. Status: PLANNED (Wave 0 Fish Audio timeline shipped 2026-10-23; Wave T next).
+**Size:** 12 new family timelines (Waves T, T2) + 37 deep-dives (Waves 1–6). Open-weight families only. Status: PLANNED (Wave 0 Fish Audio timeline shipped 2026-10-23; Wave T shipped 2026-10-23; Wave T2 next).
 
 ## Per-post contract
 
@@ -24,7 +24,7 @@ After a post passes `post-verifier`, edit its family timeline:
 4. Commit the timeline `.md` in the same wave commit as the post (explicit paths).
 5. Wave check: `grep -c <slug> <timeline>` ≥ 1 for every post in the wave before committing.
 
-Timeline file per family: `deepseek-`, `qwen-`, `glm-`, `minimax-`, `nemotron-`, `bytedance-seed-`, `llama-`, `gemma-`, `olmo-`, `smollm-`, `nous-hermes-`, `prime-intellect-intellect-model-family-timeline.md`, and `openai-gpt-oss-open-weight-models-timeline.md`, `fish-audio-model-family-timeline.md`.
+Timeline file per family: `deepseek-`, `qwen-`, `glm-`, `minimax-`, `nemotron-`, `bytedance-seed-`, `llama-`, `gemma-`, `olmo-`, `smollm-`, `nous-hermes-`, `prime-intellect-intellect-model-family-timeline.md`, and `openai-gpt-oss-open-weight-models-timeline.md`, `fish-audio-`, `mistral-`, `stability-ai-`, `whisper-`, `flux-`, `hunyuan-`, `meta-fair-vision-audio-model-family-timeline.md`.
 
 ## Wave 0 (in progress)
 
@@ -39,6 +39,8 @@ Backfill done 2026-10-23: deepseek timeline now links Janus/Janus-Pro and DeepIn
 Timelines and deep-dives are only for families that release weights. No GPT/o-series, Gemini, Claude, Grok timelines. For mixed labs (FLUX, Stability, Hunyuan, Mistral) catalog the open-weight lines; mention hosted-only siblings in one line each, as the Fish Audio timeline does.
 
 ## Wave T: new family timelines (run BEFORE Wave 1, so deep-dives have a hub to link into)
+
+**Status: SHIPPED 2026-10-23** (6/6; 3.5k to 4.4k words, 4 to 5 figs each). Hunyuan fig 2 re-authored after review (rounded bars hid 13B vs 21B).
 
 Same format as the existing `*-model-family-timeline` posts (glance table, one section per release, variant tables, license, primary-source link, "which to pick today"). blog-writer, WORD_MIN=2500 WORD_MAX=4500. After each ships: link any existing deep-dives of that family from the right section, and add the new timeline to the list of timeline files in the link-back rule.
 
