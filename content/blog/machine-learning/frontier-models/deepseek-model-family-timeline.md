@@ -373,7 +373,7 @@ The legacy `deepseek-chat` and `deepseek-reasoner` API names were routed to V4-F
 
 ### DSpark checkpoints (27 June 2026)
 
-DeepSeek-V4-Pro-DSpark and DeepSeek-V4-Flash-DSpark. The model cards are explicit that these are **not new models**: the same checkpoints with a DSpark speculative-decoding module attached, enabled in vLLM with `method: dspark` and in SGLang with a speculative-algorithm flag. The next day DeepSeek also published small draft heads for third-party models (DSpark, DFlash and EAGLE-3 drafters for Qwen3 4B/8B/14B and Gemma 4 12B) through its DeepSpec project. Every later V4 checkpoint ships with DSpark attached.
+DeepSeek-V4-Pro-DSpark and DeepSeek-V4-Flash-DSpark. The model cards are explicit that these are **not new models**: the same checkpoints with a DSpark speculative-decoding module attached, enabled in vLLM with `method: dspark` and in SGLang with a speculative-algorithm flag. The next day DeepSeek also published small draft heads for third-party models (DSpark, DFlash and EAGLE-3 drafters for Qwen3 4B/8B/14B and Gemma 4 12B) through its DeepSpec project. Every later V4 checkpoint ships with DSpark attached. How the drafter and its confidence-scheduled verification work is analyzed in [the DSpark paper deep-dive](/blog/paper-reading/large-language-model/dspark-confidence-scheduled-speculative-decoding).
 
 ### V4-Flash-0731 (31 July 2026) and V4-Pro GA / V4-Pro-0813 (13 August 2026)
 

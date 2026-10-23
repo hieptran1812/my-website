@@ -662,7 +662,7 @@ loss = (1.0 - lambda_base) * final_loss + lambda_base * base_loss
 
 ### DSpark: a cheap Markov correction plus a confidence head
 
-DSpark takes the same DFlash backbone and adds two heads. The first is a low-rank previous-token logit bias that makes block generation semi-autoregressive at almost no cost:
+DSpark takes the same DFlash backbone and adds two heads (the paper's argument and math are in [the DSpark deep-dive](/blog/paper-reading/large-language-model/dspark-confidence-scheduled-speculative-decoding)). The first is a low-rank previous-token logit bias that makes block generation semi-autoregressive at almost no cost:
 
 ```python
 # specforge/modeling/draft/dspark.py
