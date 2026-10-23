@@ -3,7 +3,7 @@
 **Subcategory:** `mathematics` (folder already exists under ML, currently empty; renders "Mathematics")
 **Path:** `content/blog/machine-learning/mathematics/<slug>.md`
 **frontmatter:** `category: "machine-learning"` · `subcategory: "Mathematics"`
-**Size:** **130 posts, 20 tracks (A to T, incl. R), 21 waves (0, 1–4, 4R, 5–19).** Rows 1–120 plus inserted 18a, 24a, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23). **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap (all 130 posts kept); Wave 0 next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
+**Size:** **130 posts, 20 tracks (A to T, incl. R), 21 waves (0, 1–4, 4R, 5–19).** Rows 1–120 plus inserted 18a, 24a, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23). **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap (all 130 posts kept); Wave 0 COMPLETE; Wave 1 (Track A) next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
 **Skill:** `blog-writer`, depth `deep-dive`. **Language:** English (repo convention, verify gate enforces it). Request came in VN.
 
 ### The user's request (2026-10-23, verbatim intent)
@@ -148,7 +148,7 @@ Cross-link spine (every post links both): **intro** `how-to-read-the-math-in-an-
 | 87 | `compactness-completeness-and-fixed-points` | Compactness, Bolzano–Weierstrass, extreme value theorem (existence of minimisers), completeness, Banach fixed-point theorem | Picard–Lindelöf existence for Neural ODEs; Sinkhorn as a contraction (Hilbert metric, cite) |
 | 88 | `interchanging-limits-integrals-and-derivatives` | Monotone / dominated convergence, Fubini–Tonelli, differentiating under the integral (Leibniz), when each swap is illegal | Flow Matching Thm. 1–2 proof (2210.02747, App. A): ∇ and E swapped |
 | 89 | `vector-calculus-divergence-theorem-and-integration-by-parts` | Divergence, Laplacian, divergence theorem, integration by parts in ℝᵈ, vanishing boundary terms, Stein's identity | Hyvärinen score-matching theorem (JMLR 2005, Thm. 1); Tweedie's formula |
-| 90 | `pdes-for-generative-models-transport-heat-and-characteristics` | Transport / continuity equation, heat equation = Gaussian smoothing, method of characteristics, weak solutions lite | Continuity equation ⇔ pushforward by the ODE flow (2210.02747; Villani, cite) |
+| 90 | `pdes-for-generative-models-transport-and-heat` | Transport / continuity equation, heat equation = Gaussian smoothing, method of characteristics, weak solutions lite | Continuity equation ⇔ pushforward by the ODE flow (2210.02747; Villani, cite) |
 
 ## Track E — Probability (Wave 5)
 
@@ -159,7 +159,7 @@ Cross-link spine (every post links both): **intro** `how-to-read-the-math-in-an-
 | 26 | `expectation-variance-and-the-tower-rule` | LOTUS, linearity, variance, covariance, law of total expectation, tower rule | Denoising objective as conditional expectation |
 | 27 | `conditional-probability-bayes-and-latent-variables` | Conditioning, Bayes, marginalisation, graphical models, latent-variable models | VAE generative model (1312.6114) |
 | 28 | `the-gaussian-everything-you-need` | Multivariate Gaussian, affine transforms, marginals, conditionals, product of Gaussians, KL closed form | DDPM forward marginal `q(x_t | x_0)` (2006.11239, Eq. 4) |
-| 29 | `monte-carlo-importance-sampling-and-the-reparameterization-trick` | MC estimators, variance, importance weights, score-function (REINFORCE) vs pathwise gradients, Gumbel-softmax | VAE reparameterisation (1312.6114); Gumbel-softmax (1611.01144) |
+| 29 | `monte-carlo-importance-sampling-reparameterization` | MC estimators, variance, importance weights, score-function (REINFORCE) vs pathwise gradients, Gumbel-softmax | VAE reparameterisation (1312.6114); Gumbel-softmax (1611.01144) |
 | 30 | `pushforward-measures-and-change-of-variables-for-densities` | Pushforward `T#p`, density transform with Jacobian, why generative models are pushforwards | Flow Matching's probability path (2210.02747) |
 
 ## Track F — Statistics and information theory (Wave 6)
@@ -209,7 +209,7 @@ Cross-link spine (every post links both): **intro** `how-to-read-the-math-in-an-
 | 52 | `wasserstein-distances-and-kantorovich-duality` | W1 / W2, Kantorovich–Rubinstein duality, Lipschitz critics, 1D closed form | WGAN (1701.07875, Eq. 3) |
 | 53 | `entropic-ot-and-the-sinkhorn-algorithm` | Entropic regularisation, Sinkhorn iterations as matrix scaling, convergence, GPU cost | Sinkhorn distances (Cuturi 1306.0895) |
 | 54 | `dynamic-ot-rectified-flow-and-schrodinger-bridges` | Benamou–Brenier, straight paths, minibatch OT couplings, rectified flow, Schrödinger bridge teaser | Rectified Flow (2209.03003); OT-CFM (2302.00482); DSB (2106.01357) |
-| 54a | `consistency-models-and-mean-flows-the-math-of-few-step-generation` | Self-consistency along the PF-ODE, consistency loss, average velocity and the MeanFlow identity, shortcut models | Consistency Models (2303.01469); MeanFlow (2505.13447) |
+| 54a | `consistency-models-mean-flows-few-step-generation` | Self-consistency along the PF-ODE, consistency loss, average velocity and the MeanFlow identity, shortcut models | Consistency Models (2303.01469); MeanFlow (2505.13447) |
 
 ## Track J — Geometry, symmetry and abstract algebra (Wave 10)
 
@@ -257,10 +257,10 @@ Cross-link spine (every post links both): **intro** `how-to-read-the-math-in-an-
 | --- | --- | --- | --- |
 | 73 | `floating-point-arithmetic-and-numerical-stability` | IEEE floats, bf16 / fp8 formats, rounding error, overflow in softmax, loss scaling, accumulation precision, stochastic rounding | DeepSeek-V3 FP8 training (2412.19437, Sec. 3.3) |
 | 74 | `quantization-math-rounding-error-hessians-and-rotations` | Uniform quantisers, MSE of rounding, outliers, Optimal Brain Surgeon → GPTQ (Hessian inverse via Cholesky), Hadamard rotations that spread outliers | GPTQ (2210.17323); QuaRot (2404.00456) |
-| 75 | `sampling-from-language-models-temperature-top-p-and-gumbel-max` | Softmax temperature as an exponential family knob, top-k / top-p as truncated distributions, Gumbel-max trick, beam search vs sampling | Nucleus sampling (1904.09751) |
+| 75 | `sampling-language-models-temperature-top-p-gumbel` | Softmax temperature as an exponential family knob, top-k / top-p as truncated distributions, Gumbel-max trick, beam search vs sampling | Nucleus sampling (1904.09751) |
 | 76 | `rejection-sampling-and-the-speculative-decoding-proof` | Rejection sampling, acceptance rate, the modified-rejection rule that keeps the target distribution exact, expected tokens per step | Leviathan et al. (2211.17192, Thm. 1); Chen et al. (2302.01318) |
 | 77 | `compression-is-prediction-arithmetic-coding-and-mdl` | Source coding theorem, arithmetic coding, bits per byte, MDL, Kolmogorov complexity, measuring memorisation in bits per parameter | Language Modeling Is Compression (2309.10668); ICML 2026 HM *How much can language models memorize?* (find id) |
-| 78 | `statistics-of-evaluation-error-bars-pass-at-k-and-significance` | Standard errors for benchmark accuracy, clustered / paired tests, the unbiased pass@k estimator, multiple comparisons, how many seeds | Adding Error Bars to Evals (2411.00640); Codex pass@k (2107.03374, Eq. 1) |
+| 78 | `statistics-of-evaluation-error-bars-and-pass-at-k` | Standard errors for benchmark accuracy, clustered / paired tests, the unbiased pass@k estimator, multiple comparisons, how many seeds | Adding Error Bars to Evals (2411.00640); Codex pass@k (2107.03374, Eq. 1) |
 
 ## Track N — Frontier theory: what 2025–2026 award papers assume (Wave 14)
 
@@ -272,7 +272,7 @@ Cross-link spine (every post links both): **intro** `how-to-read-the-math-in-an-
 | 79a | `discrete-diffusion-theory-ii-order-planning-and-reasoning` | Second discrete-diffusion post (4+ ICML 2026 and 3+ ICLR 2026 orals): unmasking order as a policy, any-order vs left-to-right likelihood, planners, why fixed order helps RL | ICML 2026 Outstanding *The Flexibility Trap*; *On the Reasoning Abilities of Masked Diffusion Language Models* (ICLR 2026 oral, find id) |
 | 80 | `linear-attention-delta-rule-and-test-time-regression` | Attention as fast-weight memory, linear attention as a recurrence, delta rule as online least squares, gating, Householder products, chunked parallel form | DeltaNet (2406.06484); Gated DeltaNet (2412.06464); TTT layers (2407.04620) |
 | 81 | `sparse-coding-superposition-and-compressed-sensing` | Sparse dictionary learning, near-orthogonal packing of features (JL), compressed sensing and RIP, superposition and its link to scaling laws, sparse autoencoders | Toy Models of Superposition (2209.10652); NeurIPS 2025 runner-up *Superposition Yields Robust Neural Scaling* (find id) |
-| 82 | `high-dimensional-asymptotics-random-features-and-double-descent` | The proportional limit, ridge regression and random-features risk curves, deterministic equivalents, double descent, why generalisation is decided by spectra | NeurIPS 2025 Best Paper *Why Diffusion Models Don't Memorize*; ICML 2026 HM *A Random Matrix Perspective on the Consistency of Diffusion Models*, *Provable Grokking in Ridge Regression* (find ids) |
+| 82 | `high-dimensional-asymptotics-and-double-descent` | The proportional limit, ridge regression and random-features risk curves, deterministic equivalents, double descent, why generalisation is decided by spectra | NeurIPS 2025 Best Paper *Why Diffusion Models Don't Memorize*; ICML 2026 HM *A Random Matrix Perspective on the Consistency of Diffusion Models*, *Provable Grokking in Ridge Regression* (find ids) |
 | 83 | `online-learning-regret-and-multiplicative-weights` | Regret, Hedge / multiplicative weights, online gradient descent, mirror descent, the regret view behind AdaGrad / Adam, mistake bounds | AdaGrad (Duchi et al. 2011, JMLR); NeurIPS 2025 runner-up *Optimal Mistake Bounds for Transductive Online Learning* (find id) |
 | 84 | `expressivity-of-transformers-formal-languages-and-circuits` | Formal languages and automata, circuit classes (TC0), what fixed-depth transformers can and cannot compute, chain-of-thought as extra depth, succinctness | Merrill & Sabharwal (2207.00729); ICLR 2026 Outstanding *Transformers are Inherently Succinct* (find id) |
 
@@ -293,7 +293,7 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 91 | `m-estimation-consistency-and-misspecification` | M-estimators, consistency, asymptotic normality, sandwich covariance, what happens when the model is wrong | *Why DPO is a Misspecified Estimator and How to Fix It* (2510.20413) |
 | 92 | `minimax-lower-bounds-le-cam-fano-and-assouad` | Minimax risk, reduction to testing, Le Cam two-point, Fano, Assouad, change-of-measure lower bounds for bandits | *Minimax Optimal Strategy for Delayed Observations in Online RL* (2603.03480); *Non-Asymptotic Analysis of (Sticky) Track-and-Stop* (2505.22475) |
 | 93 | `hermite-polynomials-single-index-models-and-sq-lower-bounds` | Hermite expansions, information exponent, single / multi-index models, statistical query and low-degree lower bounds, statistical–computational gaps | *An Optimized Franz–Parisi Criterion and its Equivalence with SQ Lower Bounds* (NeurIPS 2025 oral, OR:U8BwT6Rmw4); *Joint Learning in the Gaussian Single Index Model* (2505.21336) |
-| 94 | `algorithmic-stability-and-information-theoretic-generalization` | Uniform stability, MI / CMI generalisation bounds, why noisy SGD / Langevin generalise | *Tighter CMI-Based Generalization Bounds…* (NeurIPS 2025 oral, OR:VYLdKb5dzO); *Temperature is All You Need for Generalization in Langevin Dynamics…* (2505.19087) |
+| 94 | `stability-and-information-theoretic-generalization` | Uniform stability, MI / CMI generalisation bounds, why noisy SGD / Langevin generalise | *Tighter CMI-Based Generalization Bounds…* (NeurIPS 2025 oral, OR:VYLdKb5dzO); *Temperature is All You Need for Generalization in Langevin Dynamics…* (2505.19087) |
 | 95 | `conformal-prediction-and-exchangeability` | Exchangeability, de Finetti lite, split conformal and its finite-sample coverage proof (order statistics), conditional coverage limits | *Optimal Decision-Making Based on Prediction Sets* (2602.00989); AAAI-26 cost-sensitive conformal training (ojs 39384) |
 | 96 | `proper-scoring-rules-calibration-and-fenchel-young-losses` | Proper scoring rules, calibration error, swap regret ⇒ calibration, Fenchel–Young losses, surrogate regret bounds | *High-Dimensional Calibration from Swap Regret* (NeurIPS 2025 oral, OR:UVDihUz0iT); OR:A4Xx9irvpp |
 
@@ -328,7 +328,7 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 111 | `spectral-graph-theory-laplacians-and-oversmoothing` | Graph / hypergraph / sheaf Laplacians, Dirichlet energy, Cheeger, oversmoothing as heat diffusion, graph Fourier / wavelets | AAAI-26 Outstanding *High-Pass Matters…* (10.1609/aaai.v40i27.39469); *Foundations of Equivariant Deep Learning: Graph and Sheaf NNs* (2607.03798) |
 | 112 | `tensor-decompositions-cp-tucker-and-identifiability` | CP / Tucker, tensor rank, Kruskal uniqueness, ALS, identifiability via tensors | *Identifiability of Deep Polynomial Neural Networks* (NeurIPS 2025 oral, 2506.17093); OR:9FDErIfoVE |
 | 113 | `approximation-theory-chebyshev-and-minimax-polynomials` | Weierstrass, Chebyshev polynomials, equioscillation, minimax polynomial approximation, spectral collocation | *The Polar Express: Optimal Matrix Sign Methods… Muon* (2505.16932); *Chebyshev Policies and the Mountain Car Problem* (2605.22305) |
-| 114 | `implicit-differentiation-bilevel-optimization-and-operator-splitting` | Implicit function theorem, differentiating through argmins / fixed points (DEQs), bilevel optimisation, projections, ADMM / Douglas–Rachford | *Pinet: hard-constrained NNs with orthogonal projection layers* (2508.10480); 2601.22970 |
+| 114 | `implicit-differentiation-and-bilevel-optimization` | Implicit function theorem, differentiating through argmins / fixed points (DEQs), bilevel optimisation, projections, ADMM / Douglas–Rachford | *Pinet: hard-constrained NNs with orthogonal projection layers* (2508.10480); 2601.22970 |
 
 ## Track T — Advanced dynamics and generative theory (Wave 19, with capstone)
 
@@ -377,7 +377,7 @@ Waves are ordered by prerequisite; do not reorder without checking each post's *
 
 ### Progress checklist
 
-- [ ] Wave 0: kit, render helper, 4 figure primitives
+- [x] Wave 0: kit, render helper, 4 figure primitives. COMPLETE 2026-10-23: kit `.cache/blog-writer/_math-for-ai-series-kit.md` (skeleton, accessibility ladder, paper-decode, proof-walk, numeric-check, practice, LaTeX scan, gates), `_render-math.sh`, 4 primitives in `_math-primitives/` all PASSED figure-reviewer (ladder map needed 1 fix: crossing arrows), 0 post WebPs by design; 8 slugs over 60 chars shortened
 - [ ] Wave 1: Track A, posts 1–6
 - [ ] Wave 2: Track B, posts 7–12
 - [ ] Wave 3: Track C, posts 13–18 + 18a

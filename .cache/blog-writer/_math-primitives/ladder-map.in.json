@@ -1,0 +1,782 @@
+{
+ "title": "The math ladder: climb a rung, unlock a paper family",
+ "_claim": "Each track is a rung, and every rung unlocks specific paper families such as diffusion or flow matching.",
+ "_caption": "Each rung is one track of the series; the lit rung is where you stand and its arrows show which papers it opens.",
+ "elements": [
+  {
+   "type": "text",
+   "id": "title",
+   "x": 690,
+   "y": 60,
+   "width": 1020,
+   "height": 40,
+   "text": "The math ladder: climb a rung, unlock a paper family",
+   "fontSize": 32,
+   "fontFamily": 1
+  },
+  {
+   "type": "text",
+   "id": "caption",
+   "x": 250,
+   "y": 120,
+   "width": 1900,
+   "height": 40,
+   "text": "Each rung is one track of the series; the lit rung is where you stand and its arrows show which papers it opens.",
+   "fontSize": 28,
+   "fontFamily": 1
+  },
+  {
+   "type": "line",
+   "id": "rail-l",
+   "x": 360,
+   "y": 180,
+   "width": 0,
+   "height": 1420,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1420
+    ]
+   ],
+   "strokeColor": "#1e1e1e",
+   "strokeWidth": 4
+  },
+  {
+   "type": "line",
+   "id": "rail-r",
+   "x": 1000,
+   "y": 180,
+   "width": 0,
+   "height": 1420,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1420
+    ]
+   ],
+   "strokeColor": "#1e1e1e",
+   "strokeWidth": 4
+  },
+  {
+   "type": "rectangle",
+   "id": "rung0",
+   "x": 360,
+   "y": 1500,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "#e9ecef",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "A  Language of papers",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung1",
+   "x": 360,
+   "y": 1400,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "#e9ecef",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "B–C  Linear algebra",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung2",
+   "x": 360,
+   "y": 1300,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "#e9ecef",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "D  Calculus",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung3",
+   "x": 360,
+   "y": 1200,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "#e9ecef",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "R  Rigor",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung4",
+   "x": 360,
+   "y": 1100,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "#e9ecef",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "E  Probability",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung5",
+   "x": 360,
+   "y": 1000,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "#e9ecef",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "F  Information theory",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung6",
+   "x": 360,
+   "y": 900,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "#e9ecef",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "G  Optimization",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung7",
+   "x": 360,
+   "y": 800,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "#a5d8ff",
+   "strokeWidth": 4,
+   "fillStyle": "solid",
+   "label": {
+    "text": "H  Stochastic processes",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung8",
+   "x": 360,
+   "y": 700,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "transparent",
+   "strokeWidth": 2,
+   "label": {
+    "text": "I  Flows and OT",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung9",
+   "x": 360,
+   "y": 600,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "transparent",
+   "strokeWidth": 2,
+   "label": {
+    "text": "J  Geometry and symmetry",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung10",
+   "x": 360,
+   "y": 500,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "transparent",
+   "strokeWidth": 2,
+   "label": {
+    "text": "K  Architecture math",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung11",
+   "x": 360,
+   "y": 400,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "transparent",
+   "strokeWidth": 2,
+   "label": {
+    "text": "L  Learning theory",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung12",
+   "x": 360,
+   "y": 300,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "transparent",
+   "strokeWidth": 2,
+   "label": {
+    "text": "M  LLM practice",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "rung13",
+   "x": 360,
+   "y": 200,
+   "width": 640,
+   "height": 80,
+   "backgroundColor": "transparent",
+   "strokeWidth": 2,
+   "label": {
+    "text": "N–T  Frontier theory",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "line",
+   "id": "br-learned",
+   "x": 320,
+   "y": 900,
+   "width": 0,
+   "height": 680,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     680
+    ]
+   ],
+   "strokeColor": "#868e96",
+   "strokeWidth": 3
+  },
+  {
+   "type": "text",
+   "id": "t-learned",
+   "x": 60,
+   "y": 1190,
+   "width": 200,
+   "height": 100,
+   "text": "learned:\n7 rungs\nbelow you",
+   "fontSize": 24,
+   "fontFamily": 1
+  },
+  {
+   "type": "line",
+   "id": "br-ahead",
+   "x": 320,
+   "y": 200,
+   "width": 0,
+   "height": 580,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     580
+    ]
+   ],
+   "strokeColor": "#868e96",
+   "strokeWidth": 3,
+   "strokeStyle": "dashed"
+  },
+  {
+   "type": "text",
+   "id": "t-ahead",
+   "x": 60,
+   "y": 440,
+   "width": 200,
+   "height": 100,
+   "text": "ahead:\n6 rungs\nto climb",
+   "fontSize": 24,
+   "fontFamily": 1
+  },
+  {
+   "type": "text",
+   "id": "t-here",
+   "x": 60,
+   "y": 820,
+   "width": 200,
+   "height": 40,
+   "text": "you are here",
+   "fontSize": 24,
+   "fontFamily": 1,
+   "strokeColor": "#1971c2"
+  },
+  {
+   "type": "arrow",
+   "id": "a-here",
+   "x": 262,
+   "y": 840,
+   "width": 94,
+   "height": 0,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     94,
+     0
+    ]
+   ],
+   "strokeColor": "#1971c2",
+   "strokeWidth": 3,
+   "endArrowhead": "arrow",
+   "roughness": 0,
+   "endBinding": {
+    "elementId": "rung7",
+    "focus": 0,
+    "gap": 8
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "llm",
+   "x": 1700,
+   "y": 280,
+   "width": 620,
+   "height": 140,
+   "backgroundColor": "#d0bfff",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "LLM and RLHF\nscaling, DPO, GRPO",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "moe",
+   "x": 1700,
+   "y": 480,
+   "width": 620,
+   "height": 140,
+   "backgroundColor": "#d0bfff",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "Mixture of experts\nrouting, load balance",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "ot",
+   "x": 1700,
+   "y": 680,
+   "width": 620,
+   "height": 140,
+   "backgroundColor": "#d0bfff",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "Optimal transport\nSinkhorn, W2 couplings",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "fm",
+   "x": 1700,
+   "y": 880,
+   "width": 620,
+   "height": 140,
+   "backgroundColor": "#d0bfff",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "Flow matching\nrectified flow, CNF",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "rectangle",
+   "id": "diff",
+   "x": 1700,
+   "y": 1100,
+   "width": 620,
+   "height": 140,
+   "backgroundColor": "#d0bfff",
+   "strokeWidth": 2,
+   "fillStyle": "solid",
+   "label": {
+    "text": "Diffusion\nDDPM, score SDEs",
+    "fontSize": 22,
+    "fontFamily": 1
+   }
+  },
+  {
+   "type": "arrow",
+   "id": "u-12-llm",
+   "x": 1024,
+   "y": 340.0,
+   "width": 674,
+   "height": -13.3,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     674,
+     -13.3
+    ]
+   ],
+   "strokeColor": "#868e96",
+   "strokeWidth": 2,
+   "endArrowhead": "arrow",
+   "roughness": 0,
+   "diagonal": true,
+   "startBinding": {
+    "elementId": "rung12",
+    "focus": 0,
+    "gap": 8
+   },
+   "endBinding": {
+    "elementId": "llm",
+    "focus": 0,
+    "gap": 8
+   }
+  },
+  {
+   "type": "arrow",
+   "id": "u-11-llm",
+   "x": 1024,
+   "y": 440.0,
+   "width": 674,
+   "height": -66.7,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     674,
+     -66.7
+    ]
+   ],
+   "strokeColor": "#868e96",
+   "strokeWidth": 2,
+   "endArrowhead": "arrow",
+   "roughness": 0,
+   "diagonal": true,
+   "startBinding": {
+    "elementId": "rung11",
+    "focus": 0,
+    "gap": 8
+   },
+   "endBinding": {
+    "elementId": "llm",
+    "focus": 0,
+    "gap": 8
+   }
+  },
+  {
+   "type": "arrow",
+   "id": "u-10-moe",
+   "x": 1024,
+   "y": 540.0,
+   "width": 674,
+   "height": 10.0,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     674,
+     10.0
+    ]
+   ],
+   "strokeColor": "#868e96",
+   "strokeWidth": 2,
+   "endArrowhead": "arrow",
+   "roughness": 0,
+   "diagonal": true,
+   "startBinding": {
+    "elementId": "rung10",
+    "focus": 0,
+    "gap": 8
+   },
+   "endBinding": {
+    "elementId": "moe",
+    "focus": 0,
+    "gap": 8
+   }
+  },
+  {
+   "type": "arrow",
+   "id": "u-8-ot",
+   "x": 1024,
+   "y": 740.0,
+   "width": 674,
+   "height": 10.0,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     674,
+     10.0
+    ]
+   ],
+   "strokeColor": "#868e96",
+   "strokeWidth": 2,
+   "endArrowhead": "arrow",
+   "roughness": 0,
+   "diagonal": true,
+   "startBinding": {
+    "elementId": "rung8",
+    "focus": 0,
+    "gap": 8
+   },
+   "endBinding": {
+    "elementId": "ot",
+    "focus": 0,
+    "gap": 8
+   }
+  },
+  {
+   "type": "arrow",
+   "id": "u-8-fm",
+   "x": 1024,
+   "y": 740.0,
+   "width": 674,
+   "height": 186.7,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     674,
+     186.7
+    ]
+   ],
+   "strokeColor": "#868e96",
+   "strokeWidth": 2,
+   "endArrowhead": "arrow",
+   "roughness": 0,
+   "diagonal": true,
+   "startBinding": {
+    "elementId": "rung8",
+    "focus": 0,
+    "gap": 8
+   },
+   "endBinding": {
+    "elementId": "fm",
+    "focus": 0,
+    "gap": 8
+   }
+  },
+  {
+   "type": "arrow",
+   "id": "u-7-fm",
+   "x": 1024,
+   "y": 840.0,
+   "width": 674,
+   "height": 133.3,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     674,
+     133.3
+    ]
+   ],
+   "strokeColor": "#1971c2",
+   "strokeWidth": 5,
+   "endArrowhead": "arrow",
+   "roughness": 0,
+   "diagonal": true,
+   "startBinding": {
+    "elementId": "rung7",
+    "focus": 0,
+    "gap": 8
+   },
+   "endBinding": {
+    "elementId": "fm",
+    "focus": 0,
+    "gap": 8
+   }
+  },
+  {
+   "type": "arrow",
+   "id": "u-7-diff",
+   "x": 1024,
+   "y": 840.0,
+   "width": 674,
+   "height": 295.0,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     674,
+     295.0
+    ]
+   ],
+   "strokeColor": "#1971c2",
+   "strokeWidth": 5,
+   "endArrowhead": "arrow",
+   "roughness": 0,
+   "diagonal": true,
+   "startBinding": {
+    "elementId": "rung7",
+    "focus": 0,
+    "gap": 8
+   },
+   "endBinding": {
+    "elementId": "diff",
+    "focus": 0,
+    "gap": 8
+   }
+  },
+  {
+   "type": "arrow",
+   "id": "u-4-diff",
+   "x": 1024,
+   "y": 1140.0,
+   "width": 674,
+   "height": 30.0,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     674,
+     30.0
+    ]
+   ],
+   "strokeColor": "#868e96",
+   "strokeWidth": 2,
+   "endArrowhead": "arrow",
+   "roughness": 0,
+   "diagonal": true,
+   "startBinding": {
+    "elementId": "rung4",
+    "focus": 0,
+    "gap": 8
+   },
+   "endBinding": {
+    "elementId": "diff",
+    "focus": 0,
+    "gap": 8
+   }
+  },
+  {
+   "type": "arrow",
+   "id": "u-2-diff",
+   "x": 1024,
+   "y": 1340.0,
+   "width": 674,
+   "height": -135.0,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     674,
+     -135.0
+    ]
+   ],
+   "strokeColor": "#868e96",
+   "strokeWidth": 2,
+   "endArrowhead": "arrow",
+   "roughness": 0,
+   "diagonal": true,
+   "startBinding": {
+    "elementId": "rung2",
+    "focus": 0,
+    "gap": 8
+   },
+   "endBinding": {
+    "elementId": "diff",
+    "focus": 0,
+    "gap": 8
+   }
+  },
+  {
+   "type": "text",
+   "id": "t-unlock",
+   "x": 1700,
+   "y": 1280,
+   "width": 500,
+   "height": 60,
+   "text": "thick blue: what your rung H unlocks\ngrey: what other rungs unlock",
+   "fontSize": 22,
+   "fontFamily": 1
+  }
+ ],
+ "export": {
+  "padding": 48,
+  "minWidth": 1600,
+  "minHeight": 900
+ }
+}
