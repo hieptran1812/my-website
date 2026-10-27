@@ -3,7 +3,7 @@
 **Subcategory:** `mathematics` (folder already exists under ML, currently empty; renders "Mathematics")
 **Path:** `content/blog/machine-learning/mathematics/<slug>.md`
 **frontmatter:** `category: "machine-learning"` · `subcategory: "Mathematics"`
-**Size:** **130 posts, 20 tracks (A to T, incl. R), 21 waves (0, 1–4, 4R, 5–19).** Rows 1–120 plus inserted 18a, 24a, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23). **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap (all 130 posts kept); Waves 0–2 COMPLETE; Wave 3 (Track C) next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
+**Size:** **146 posts, 22 tracks (A to V, incl. R), 24 waves.** Rows 1–136 plus inserted 18a, 24a, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23); Tracks U (CNN) and V (RL) were added 2026-10-27. **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap; Waves 0–2 COMPLETE; Wave 3 (Track C) next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
 **Skill:** `blog-writer`, depth `deep-dive`. **Language:** English (repo convention, verify gate enforces it). Request came in VN.
 
 ### The user's request (2026-10-23, verbatim intent)
@@ -83,7 +83,7 @@ Every mathematical claim is one of: **(a) proved or derived** in the post, with 
 | `trading/math-for-quants/` (83 posts) | Itô, measure theory, OT, information geometry **for pricing and portfolios** | the same tools with ML examples and ML papers; cross-link, never re-derive their finance examples |
 | `image-generation/` (`the-math-of-ddpm`, `score-based-models-and-the-sde-view`, `flow-matching-and-rectified-flow`, `normalizing-flows-and-change-of-variables`) | the models, training recipes, samplers, code | the math those posts assume: SDEs, Fokker–Planck, continuity equation, pushforwards, OT |
 | `large-language-model/` (MoE, attention posts) | architectures and systems | routing as a mixture model, load-balance loss derivation, attention as kernel smoothing |
-| `reinforcement-learning/` | the RL series | only the policy-gradient / KL-regularised math needed for RLHF / DPO / GRPO |
+| `reinforcement-learning/` (79 posts) | algorithms, code, engineering, finance RL | Track V: the theorems and proofs RL papers cite (contraction, stochastic approximation, PG theorem, performance-difference lemma, concentrability), plus the RLHF / DPO / GRPO math in #66 |
 | `scaling-laws/` | empirical scaling results | power-law fitting and the Chinchilla Lagrangian |
 | `paper-reading/` | single-paper walkthroughs | the reusable tool each walkthrough relies on |
 
@@ -243,7 +243,7 @@ Cross-link spine (every post links both): **intro** `how-to-read-the-math-in-an-
 | 69 | `random-matrix-theory-for-deep-learning` | Wigner, Marchenko–Pastur, Stieltjes transform lite, weight-matrix spectra, heavy tails as a training diagnostic | Martin & Mahoney (1810.01075) |
 | 70 | `anatomy-of-a-theory-section` | Setup → assumptions → theorem → proof sketch → appendix; stating assumptions reviewers accept; worked dissection of one real paper | Flow Matching (2210.02747) theory section dissected |
 | 71 | `writing-proofs-that-survive-review` | The recurring lemma bag (add-and-subtract, telescoping, Grönwall, union bound, Young, change of measure), checking a proof numerically, common reviewer objections | DDIM (2010.02502) Thm. 1 proof walked |
-| 72 | `the-math-roadmap-for-ml-researchers` | Capstone: the 130-post map, which tracks each paper family needs (LLM, diffusion, FM, OT, MoE, SSM, RL), study orders by goal, textbook list | the ladder map, fully lit |
+| 72 | `the-math-roadmap-for-ml-researchers` | Capstone: the 146-post map, which tracks each paper family needs (LLM, diffusion, FM, OT, MoE, SSM, RL), study orders by goal, textbook list | the ladder map, fully lit |
 
 **Paper bank:** the ids above are the pre-picked sources. Each agent WebFetches `arxiv.org/abs/<id>` once to confirm title and equation before citing. If an equation number is wrong, cite by section instead; never guess.
 
@@ -297,12 +297,10 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 95 | `conformal-prediction-and-exchangeability` | Exchangeability, de Finetti lite, split conformal and its finite-sample coverage proof (order statistics), conditional coverage limits | *Optimal Decision-Making Based on Prediction Sets* (2602.00989); AAAI-26 cost-sensitive conformal training (ojs 39384) |
 | 96 | `proper-scoring-rules-calibration-and-fenchel-young-losses` | Proper scoring rules, calibration error, swap regret ⇒ calibration, Fenchel–Young losses, surrogate regret bounds | *High-Dimensional Calibration from Swap Regret* (NeurIPS 2025 oral, OR:UVDihUz0iT); OR:A4Xx9irvpp |
 
-## Track P — Decisions, games and RL theory (Wave 16)
+## Track P — Games, control and robust decisions (Wave 16; #97 and #98 moved to Track V)
 
 | # | Slug | Post | Paper |
 | --- | --- | --- | --- |
-| 97 | `mdps-bellman-operators-and-value-iteration` | MDPs, Bellman operators as γ-contractions (uses #87), value / policy iteration, robust MDPs, POMDP belief states | *State Entropy Regularization for Robust RL* (NeurIPS 2025 oral, 2506.07085); AAAI-25 Outstanding *Revelations* (ojs 34845) |
-| 98 | `stochastic-bandits-ucb-thompson-and-regret-lower-bounds` | Explore–exploit, UCB via concentration, Thompson sampling, Lai–Robbins lower bound, GP-UCB | *Improved Regret Bounds for GP-UCB* (2506.01393) |
 | 99 | `nash-equilibria-minimax-and-fixed-point-existence` | Normal / extensive-form games, von Neumann minimax, Nash existence via Brouwer / Kakutani, saddle points, PPAD | *The Complexity of Symmetric Equilibria in Min-Max Optimization…* (OR:75LMvs1CjG); *Multiplayer Nash Preference Optimization* (2509.23102) |
 | 100 | `no-regret-dynamics-and-learning-in-games` | No-regret ⇒ coarse correlated equilibrium, swap / Φ-regret, optimistic gradient, CFR, bilinear saddle-point dynamics | *Asymmetric Perturbation in Solving Bilinear Saddle-Point Optimization* (2506.05747); OR:rSsc9uCVBl |
 | 101 | `stochastic-optimal-control-hjb-and-adjoint-methods` | Control problems, HJB, adjoint method, path-space KL = control cost, Schrödinger bridge as control, IPF | *Adjoint Schrödinger Bridge Sampler* (NeurIPS 2025 oral, 2506.22565); 2508.12511 |
@@ -341,9 +339,43 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 119 | `large-deviations-and-rare-event-estimation` | Cramér / Chernoff, rate functions, Sanov, importance sampling for rare events, tail probabilities of LLM outputs | *Rare Event Analysis of Large Language Models* (2602.06791) |
 | 120 | `point-processes-poisson-and-hawkes` | Poisson processes, intensities, thinning, Hawkes self-excitation, likelihoods, branching representation | *A Representer Theorem for Hawkes Processes…* (2510.08916); 2508.11727 |
 
+## Track U — The math of convolutional networks (Wave 10U, after Wave 10)
+
+*Added 2026-10-27 (user: "bổ sung kiến thức toán cho các model CNN"). Needs #8, #12, #17, #20, #24a, #55. Neighbours to link, not re-derive: `computer-vision/why-convolution-works`, `deep-learning/layer-normalization-inside-out`.*
+
+| # | Slug | Post | Paper / proof read line by line |
+| --- | --- | --- | --- |
+| 121 | `discrete-convolution-the-math-of-cnn-layers` | Convolution vs cross-correlation, multi-channel conv as a tensor contraction, stride / padding / dilation and the output-size formula, conv as a (doubly block) Toeplitz matrix, im2col, transposed conv as the adjoint, backprop through conv is a conv | Convolution arithmetic guide (Dumoulin & Visin, 1603.07285); proof: the gradient of a conv layer w.r.t. its input is the transposed conv |
+| 122 | `receptive-fields-pooling-and-aliasing` | Receptive-field recursion, effective receptive field is Gaussian-shaped (CLT argument), pooling, Nyquist–Shannon sampling, why strided CNNs are not shift-invariant, blur-pooling fix | Effective receptive field (Luo et al., 1701.04128); anti-aliased CNNs (Zhang, 1904.11486) |
+| 123 | `batch-normalization-and-normalization-layers-the-math` | BatchNorm forward and the full backward derivation, Layer / Group / Instance norm as different reduction axes, scale invariance ⇒ effective learning rate and weight-decay interaction | BatchNorm (1502.03167, Alg. 1–2); GroupNorm (1803.08494); proof: a scale-invariant loss has gradient orthogonal to the weights |
+| 124 | `fast-convolution-fft-winograd-and-separable-filters` | Convolution theorem ⇒ FFT convolution and its crossover point, Winograd minimal filtering F(2,3) worked by hand, depthwise-separable conv as a low-rank / tensor factorisation, FLOP and parameter counts | Winograd conv (Lavin & Gray, 1509.09308); MobileNet (1704.04861) |
+| 125 | `group-equivariant-cnns-and-steerable-filters` | Lifting and group convolution, p4 / p4m rotations and reflections, proof that group conv is equivariant, steerable filters via circular harmonics | G-CNN (Cohen & Welling, 1602.07576); Steerable CNNs (1612.08498) |
+| 126 | `wavelets-scattering-and-deformation-stability` | Wavelets and multiresolution, the scattering transform, translation invariance plus Lipschitz stability to small deformations, why it explains CNN robustness and its limits | Invariant scattering convolution networks (Bruna & Mallat, 1203.1513); Mallat's *Group invariant scattering* (1101.2286) |
+
+## Track V — The math of reinforcement learning papers (Waves 9V1, 9V2, after Wave 9)
+
+*Added 2026-10-27 (user: "bổ sung kiến thức toán cho … reinforcement learning paper"). The repo's 79-post `reinforcement-learning/` series owns the algorithms and code; this track owns the **theorems and proofs** RL papers cite: contraction, stochastic approximation, the policy-gradient theorem, the performance-difference lemma, concentrability. #97 (MDPs) and #98 (bandits) move here from Track P so the track opens with them. Needs #26, #32, #36, #39, #43, #87. #66 (RLHF / DPO / GRPO) in Wave 11 now builds on #129.*
+
+| # | Slug | Post | Paper / proof read line by line |
+| --- | --- | --- | --- |
+| 97 | `mdps-bellman-operators-and-value-iteration` | MDPs, Bellman operators as γ-contractions (uses #87), value / policy iteration, robust MDPs, POMDP belief states (moved from Track P) | *State Entropy Regularization for Robust RL* (NeurIPS 2025 oral, 2506.07085); AAAI-25 Outstanding *Revelations* (ojs 34845); Bellman optimality operator is a γ-contraction in sup norm |
+| 127 | `temporal-difference-learning-and-stochastic-approximation` | TD(0), TD(λ) and eligibility traces, Q-learning, convergence via Robbins–Monro and the ODE method, bias / variance of n-step returns | Q-learning convergence (Watkins & Dayan 1992; Jaakkola, Jordan & Singh 1994, cite); proof sketch via contraction + stochastic approximation |
+| 128 | `value-function-approximation-and-the-deadly-triad` | Linear TD and its fixed point, projected Bellman equation, why the projection breaks contraction off-policy, Baird's counterexample, target networks and replay as stabilisers | Tsitsiklis & Van Roy 1997 (cite, IEEE TAC); DQN (1312.5602); proof: Π T is a contraction under the on-policy weighting |
+| 129 | `policy-gradient-theorem-baselines-and-gae` | Full proof of the policy-gradient theorem, log-derivative trick on trajectories, baselines keep it unbiased (proof), advantage, actor-critic, GAE as an exponentially weighted sum of TD errors | Sutton et al. 1999 (NeurIPS, cite); GAE (1506.02438, Eq. 16) |
+| 130 | `performance-difference-lemma-trpo-and-ppo` | Performance-difference lemma (proof), surrogate objective, TRPO's monotonic-improvement bound, KL trust region, PPO's clipped objective and what it does and does not guarantee | Kakade & Langford 2002 (cite); TRPO (1502.05477, Thm. 1); PPO (1707.06347, Eq. 7) |
+| 131 | `off-policy-learning-importance-sampling-and-retrace` | Trajectory vs per-decision importance sampling, variance blow-up with horizon, weighted IS, truncated / clipped ratios, Retrace and V-trace fixed points | Retrace (1606.02647); IMPALA V-trace (1802.01561) |
+| 132 | `maximum-entropy-rl-soft-bellman-and-sac` | Entropy-regularised objective, soft Bellman operator (contraction proof), Boltzmann optimal policy, control as inference, link to the KL-regularised RLHF objective | SAC (1801.01290); Levine's control-as-inference tutorial (1805.00909) |
+| 133 | `distributional-rl-and-the-wasserstein-bellman-operator` | Return distributions, the distributional Bellman operator is a contraction in the maximal Wasserstein metric (proof), why it is not in KL, categorical projection, quantile regression | C51 (1707.06887, Lemma 3); QR-DQN (1710.10044) |
+| 98 | `stochastic-bandits-ucb-thompson-and-regret-lower-bounds` | Explore–exploit, UCB via concentration, Thompson sampling, Lai–Robbins lower bound, GP-UCB (moved from Track P) | *Improved Regret Bounds for GP-UCB* (2506.01393); UCB regret bound via Hoeffding + union bound |
+| 134 | `exploration-in-mdps-optimism-and-regret-bounds` | Optimism in the face of uncertainty for MDPs, UCB-VI, regret vs sample complexity, PAC-MDP, lower bounds | UCBVI (Azar et al., 1703.05449) |
+| 135 | `planning-mcts-and-the-math-of-alphazero` | UCT as bandits on a tree, PUCT, simulation lemma (model error ⇒ value error, proof), value equivalence | AlphaZero (1712.01815); MuZero (1911.08265) |
+| 136 | `offline-rl-distribution-shift-and-pessimism` | Distribution shift, concentrability coefficients, why naive offline Q-learning overestimates, pessimism / lower-confidence bounds, CQL's lower-bound theorem | CQL (2006.04779, Thm. 3.2); pessimism in offline RL (Jin et al., 2012.15085) |
+
+---
+
 ## Scope extensions from the conference scan (drafting agents: grep your `#N` here too)
 
-- **#17** add tensor-network notation pointer to #112. **#20** implicit differentiation pointer to #114. **#23** exponential / reversible RK integrators. **#24** Koopman operators. **#24a** Fourier on discrete domains, functional ANOVA, graph Fourier pointer to #111. **#25a** exchangeability, de Finetti. **#29** rare-event importance sampling pointer to #119. **#32** von Neumann entropy aside. **#36** Bernstein, sub-exponential. **#38** quasi-Newton / BFGS, self-concordance. **#39** SVRG variance reduction, Robbins–Monro ODE method, two-timescale stochastic approximation. **#41** LP duality and complementary slackness, SDP and sum-of-squares relaxations. **#42** non-Euclidean steepest descent and edge of stability. **#43** SMC pointer to #117. **#54** OT on manifolds, constrained / conditional OT. **#55 / #58** quotient spaces under group actions. **#59** carré du champ / diffusion geometry. **#62** spectral-sphere / Muon-style constrained training. **#67** graph-learning example; information-theoretic bounds pointer to #94. **#68** Gaussian processes and Bayesian optimisation. **#69** spiked models and the BBP transition, free probability. **#78** conformal pointer to #95. **#82** Hermite pointer to #93, SGD summary-statistic ODEs. **#83** link to #98 / #100. **#84** communication-complexity and memory lower bounds, hyperplane arrangements / linear regions of ReLU nets. **#87** Brouwer and Kakutani fixed-point theorems.
+- **#17** add tensor-network notation pointer to #112. **#20** implicit differentiation pointer to #114. **#23** exponential / reversible RK integrators. **#24** Koopman operators. **#24a** Fourier on discrete domains, functional ANOVA, graph Fourier pointer to #111. **#25a** exchangeability, de Finetti. **#29** rare-event importance sampling pointer to #119. **#32** von Neumann entropy aside. **#36** Bernstein, sub-exponential. **#38** quasi-Newton / BFGS, self-concordance. **#39** SVRG variance reduction, Robbins–Monro ODE method, two-timescale stochastic approximation. **#41** LP duality and complementary slackness, SDP and sum-of-squares relaxations. **#42** non-Euclidean steepest descent and edge of stability. **#43** SMC pointer to #117. **#54** OT on manifolds, constrained / conditional OT. **#55 / #58** quotient spaces under group actions. **#59** carré du champ / diffusion geometry. **#62** spectral-sphere / Muon-style constrained training. **#67** graph-learning example; information-theoretic bounds pointer to #94. **#68** Gaussian processes and Bayesian optimisation. **#69** spiked models and the BBP transition, free probability. **#78** conformal pointer to #95. **#82** Hermite pointer to #93, SGD summary-statistic ODEs. **#83** link to #98 / #100. **#66** builds on #129 (PG theorem) and #130 (PPO); keep #66 on the LLM-specific objectives. **#84** communication-complexity and memory lower bounds, hyperplane arrangements / linear regions of ReLU nets. **#87** Brouwer and Kakutani fixed-point theorems.
 
 ---
 
@@ -362,18 +394,21 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 7 | G | 37–42 | optimization |
 | 8 | H | 43–48 + 47a, 48a | stochastic processes / diffusion math, incl. Girsanov (8) |
 | 9 | I | 49–54 + 54a | flows, optimal transport, few-step generation (7) |
+| 9V1 | V | 97, 127–131 | RL math I: MDPs, TD, function approximation, policy gradients, TRPO / PPO, off-policy |
+| 9V2 | V | 132, 133, 98, 134–136 | RL math II: max-entropy, distributional, bandits, exploration, planning, offline |
 | 10 | J | 55–60 | geometry, symmetry, abstract algebra |
+| 10U | U | 121–126 | the math of CNNs |
 | 11 | K | 61–66 + 66a | architecture math (attention, init, MoE, SSM, scaling, RLHF) |
 | 12 | L | 67–71 | learning theory and research craft (capstone #72 moves to Wave 19) |
 | 13 | M | 73–78 | LLM practice: numerics, quantisation, sampling, compression, eval statistics |
 | 14 | N | 79–84 + 79a | frontier theory (7) |
 | 15 | O | 91–96 | statistical theory and guarantees |
-| 16 | P | 97–102 | decisions, games, RL theory, control |
+| 16 | P | 99–102 | games, control, robust decisions (4) |
 | 17 | Q | 103–108 | causality, privacy, Shapley, social choice |
 | 18 | S | 109–114 | complexity, logic, graphs, tensors, approximation, implicit differentiation |
 | 19 | T | 115–120 + 72 | advanced dynamics and generative theory + capstone (7) |
 
-Waves are ordered by prerequisite; do not reorder without checking each post's *Needs*. The user's named topics (diffusion, FM, OT, MoE) live in Waves 8, 9 and 11. They need Tracks D–F (calculus, probability, information theory) but not G, J or L, so a "fast path" order 0, 1, 4, 4R, 5, 6, 8, 9, 11, 13, then the rest is valid if the user wants those posts sooner.
+Waves are ordered by prerequisite; do not reorder without checking each post's *Needs*. The user's named topics (diffusion, FM, OT, MoE) live in Waves 8, 9 and 11. They need Tracks D–F (calculus, probability, information theory) but not G, J or L, so a "fast path" order 0, 1, 4, 4R, 5, 6, 8, 9, 11, 13, then (RL readers: add 7, 9V1, 9V2 before 11; CNN readers: 10U only needs 1–4 plus #24a, #55) the rest is valid if the user wants those posts sooner.
 
 ### Progress checklist
 
@@ -388,13 +423,16 @@ Waves are ordered by prerequisite; do not reorder without checking each post's *
 - [ ] Wave 7: Track G, posts 37–42
 - [ ] Wave 8: Track H, posts 43–48 + 47a, 48a
 - [ ] Wave 9: Track I, posts 49–54 + 54a
+- [ ] Wave 9V1: Track V, posts 97, 127–131
+- [ ] Wave 9V2: Track V, posts 132, 133, 98, 134–136
 - [ ] Wave 10: Track J, posts 55–60
+- [ ] Wave 10U: Track U, posts 121–126
 - [ ] Wave 11: Track K, posts 61–66 + 66a
 - [ ] Wave 12: Track L, posts 67–71
 - [ ] Wave 13: Track M, posts 73–78
 - [ ] Wave 14: Track N, posts 79–84 + 79a
 - [ ] Wave 15: Track O, posts 91–96
-- [ ] Wave 16: Track P, posts 97–102
+- [ ] Wave 16: Track P, posts 99–102
 - [ ] Wave 17: Track Q, posts 103–108
 - [ ] Wave 18: Track S, posts 109–114
 - [ ] Wave 19: Track T, posts 115–120 + capstone 72
