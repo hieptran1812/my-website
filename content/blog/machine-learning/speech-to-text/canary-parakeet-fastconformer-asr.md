@@ -3,9 +3,9 @@ title: "Canary and Parakeet: How NVIDIA's FastConformer Makes Speech Recognition
 date: "2026-06-11"
 publishDate: "2026-06-11"
 description: "A deep dive into NVIDIA's FastConformer ASR encoder and the Canary and Parakeet model families — 8x downsampling, depthwise-separable convolutions, the CTC/RNN-T/TDT/attention decoder zoo, cache-aware streaming, and 11-hour long-audio transcription."
-tags: ["asr", "speech-recognition", "fastconformer", "conformer", "nvidia", "canary", "parakeet", "rnn-t", "ctc", "tdt", "streaming-asr", "deep-learning"]
+tags: ["asr", "speech-recognition", "fastconformer", "conformer", "nvidia", "canary", "parakeet", "rnn-t", "ctc", "tdt", "streaming-asr", "deep-learning", "speech-to-text"]
 category: "machine-learning"
-subcategory: "Deep Learning"
+subcategory: "Speech-to-Text"
 author: "Hiep Tran"
 featured: true
 readTime: 49
@@ -17,7 +17,7 @@ Speech recognition has a quiet scaling problem, and it is not the one people exp
 
 NVIDIA's **FastConformer** is a deceptively simple answer: cut the frame rate. Where the standard Conformer encoder downsamples the audio 4× before the transformer layers, FastConformer downsamples **8×**, using cheap depthwise-separable convolutions, so the encoder sees a *quarter* as many frames. That single change makes the encoder about **2.4× faster** with no meaningful loss in accuracy, and it unlocks transcribing **up to 11 hours of audio in a single pass** on one A100. On top of that one encoder, NVIDIA built two model families: **Parakeet** (FastConformer + a transducer or CTC decoder, tuned for fast, accurate, long-audio transcription) and **Canary** (FastConformer + an attention decoder, tuned for multilingual transcription *and* translation across 25 languages).
 
-This is the fifth post in a series reading NVIDIA's model reports for their reusable techniques — the first four covered language models ([Minitron](/blog/machine-learning/frontier-models/nvidia-minitron-pruning-distillation), [Nemotron-4 340B](/blog/machine-learning/frontier-models/nemotron-4-340b-synthetic-data-alignment), [Llama-Nemotron](/blog/machine-learning/frontier-models/llama-nemotron-efficient-reasoning-models), [Nemotron-H](/blog/machine-learning/frontier-models/nemotron-h-hybrid-mamba-transformer)) — and this one turns to speech. The reusable techniques are the **8× downsampling trick**, the **depthwise-separable convolutions** that make it cheap, the **decoder zoo** (CTC, RNN-T, TDT, attention) and how to choose among them, and **cache-aware streaming**. If you have read the [training ASR models guide](/blog/machine-learning/deep-learning/training-asr-models), this is the architecture deep dive that complements it.
+This is the fifth post in a series reading NVIDIA's model reports for their reusable techniques — the first four covered language models ([Minitron](/blog/machine-learning/frontier-models/nvidia-minitron-pruning-distillation), [Nemotron-4 340B](/blog/machine-learning/frontier-models/nemotron-4-340b-synthetic-data-alignment), [Llama-Nemotron](/blog/machine-learning/frontier-models/llama-nemotron-efficient-reasoning-models), [Nemotron-H](/blog/machine-learning/frontier-models/nemotron-h-hybrid-mamba-transformer)) — and this one turns to speech. The reusable techniques are the **8× downsampling trick**, the **depthwise-separable convolutions** that make it cheap, the **decoder zoo** (CTC, RNN-T, TDT, attention) and how to choose among them, and **cache-aware streaming**. If you have read the [training ASR models guide](/blog/machine-learning/speech-to-text/training-asr-models), this is the architecture deep dive that complements it.
 
 The mismatch the whole design resolves:
 
@@ -418,7 +418,7 @@ A reflective closing case study: speech sits between vision and language — it 
 - **Your audio is always short.** For one-second commands, the frame-rate advantage is small, and a simpler model may suffice.
 - **You need maximal accuracy regardless of cost.** A larger, slower attention model with full global context might edge out the efficient variants on the hardest benchmarks.
 - **You lack the NeMo/Riva tooling.** The streaming, long-audio, and TDT features are realized through NVIDIA's speech tooling; without it you reimplement a lot.
-- **Your task is not transcription/translation.** For speech *generation* (TTS) or *understanding* (intent, emotion), this encoder is a starting point but not the whole solution — see the [CosyVoice training](/blog/machine-learning/deep-learning/training-cosyvoice) and [speech tokenizer](/blog/machine-learning/deep-learning/speech-tokenizer) discussions.
+- **Your task is not transcription/translation.** For speech *generation* (TTS) or *understanding* (intent, emotion), this encoder is a starting point but not the whole solution — see the [CosyVoice training](/blog/machine-learning/text-to-speech/training-cosyvoice) and [speech tokenizer](/blog/machine-learning/deep-learning/speech-tokenizer) discussions.
 
 The one-sentence version:
 
@@ -427,9 +427,9 @@ The one-sentence version:
 ## Further reading
 
 - [FastConformer / Canary / Parakeet model docs (NVIDIA NeMo)](https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/asr/models.html) — the architecture and model-card details.
-- [Training ASR models](/blog/machine-learning/deep-learning/training-asr-models) — the broader ASR training picture this architecture slots into.
+- [Training ASR models](/blog/machine-learning/speech-to-text/training-asr-models) — the broader ASR training picture this architecture slots into.
 - [Speech tokenizer](/blog/machine-learning/deep-learning/speech-tokenizer) — how audio becomes discrete units, a complementary view of speech representation.
-- [Training CosyVoice](/blog/machine-learning/deep-learning/training-cosyvoice) — the speech-generation counterpart to recognition.
+- [Training CosyVoice](/blog/machine-learning/text-to-speech/training-cosyvoice) — the speech-generation counterpart to recognition.
 - [Why convolution works](/blog/machine-learning/computer-vision/why-convolution-works) — the locality intuition behind the convolution module and depthwise-separable convs.
 - [Choosing the right LLM architecture for a task](/blog/machine-learning/large-language-model/choosing-right-llm-architecture-task) — the same "match the architecture to the workload" thinking, on the language side, and a useful companion when deciding between encoder, decoder, and streaming trade-offs for a given speech deployment.
 - [Nemotron-4 340B synthetic data](/blog/machine-learning/frontier-models/nemotron-4-340b-synthetic-data-alignment) — the "less is more" data philosophy applied to language.

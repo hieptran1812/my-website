@@ -3,19 +3,7 @@ title: "Audio Input Bugs: Sample Rates, Mel-Spectrograms, and the Feature Mismat
 date: "2026-06-17"
 publishDate: "2026-06-17"
 description: "Find the speech preprocessing bugs that wreck recognition without a crash, by learning to print and visualize the exact spectrogram your model receives and compare it to the spec it was pretrained on."
-tags:
-  [
-    "debugging",
-    "model-training",
-    "speech",
-    "audio",
-    "preprocessing",
-    "torchaudio",
-    "whisper",
-    "finetuning",
-    "pytorch",
-    "deep-learning",
-  ]
+tags: ["debugging", "model-training", "speech", "audio", "preprocessing", "torchaudio", "whisper", "finetuning", "pytorch", "deep-learning", "speech-to-text", "asr", "speech-recognition"]
 category: "machine-learning"
 subcategory: "Debugging Training"
 author: "Hiep Tran"

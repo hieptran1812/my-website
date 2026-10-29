@@ -292,7 +292,7 @@ Two Nano-tier releases filled in the small end of the 3 family in spring 2026.
 
 **NVIDIA-Nemotron-3-Nano-4B (March 16, 2026)** is dense, not MoE: a Mamba-2 and MLP hybrid with 4 attention layers, compressed from Nano-9B-v2 with a new method, Nemotron Elastic, with 262K context. It is the third link in the Nano 2 chain shown in the lineage figure (12B base, 9B, 4B). License: NVIDIA Nemotron Open Model License, BF16 and FP8 builds.
 
-**Nemotron 3 Nano Omni 30B-A3B-Reasoning (April 28, 2026)** puts vision and audio encoders on the Nano 30B-A3B backbone and accepts video, audio, images and text with 256K context. NVIDIA positions it as the successor to Nano 12B v2 VL. The paper is arXiv 2604.24954 (April 27, 2026). The encoders are reported as C-RADIOv4-H for vision and a Parakeet TDT encoder for audio; I verified those only through the model listing and blog summary, not the card body. For the Parakeet lineage, see [Canary and Parakeet: FastConformer ASR](/blog/machine-learning/deep-learning/canary-parakeet-fastconformer-asr).
+**Nemotron 3 Nano Omni 30B-A3B-Reasoning (April 28, 2026)** puts vision and audio encoders on the Nano 30B-A3B backbone and accepts video, audio, images and text with 256K context. NVIDIA positions it as the successor to Nano 12B v2 VL. The paper is arXiv 2604.24954 (April 27, 2026). The encoders are reported as C-RADIOv4-H for vision and a Parakeet TDT encoder for audio; I verified those only through the model listing and blog summary, not the card body. For the Parakeet lineage, see [Canary and Parakeet: FastConformer ASR](/blog/machine-learning/speech-to-text/canary-parakeet-fastconformer-asr).
 
 | Variant | Date | Params | Architecture | Context | Modality | Weights |
 | --- | --- | --- | --- | --- | --- | --- |

@@ -3,17 +3,7 @@ title: "Weak Supervision and Low-Resource Speech: Scaling ASR Data Past Human Tr
 date: "2026-06-30"
 publishDate: "2026-06-30"
 description: "A principal-engineer field guide to building speech data without paying humans per minute: Whisper's 680k-hour weak-supervision recipe, why it deliberately filtered machine-generated transcripts, noisy-student pseudo-labeling with confidence and agreement filters, and the low-resource and multilingual playbook (MMS, mining, cross-lingual transfer) — with runnable pipelines, a worked yield calculation, and a symptom-to-fix troubleshooting section for hallucination and feedback loops."
-tags:
-  - training-data
-  - weak-supervision
-  - speech-recognition
-  - whisper
-  - pseudo-labeling
-  - noisy-student
-  - low-resource
-  - multilingual
-  - self-training
-  - mms
+tags: ["training-data", "weak-supervision", "speech-recognition", "whisper", "pseudo-labeling", "noisy-student", "low-resource", "multilingual", "self-training", "mms", "speech-to-text", "asr"]
 category: "machine-learning"
 subcategory: "Training Data"
 author: "Hiep Tran"
@@ -364,7 +354,7 @@ Every technique above has a characteristic failure mode. Here is the field guide
 
 The figure shows the three columns you check. On the genuine-speech segment the transcript is correct, the average log-probability is healthy (around −0.3), and nothing fires. On silence, the model invents a plausible sentence but the `no_speech_prob` spikes to ~0.9. On music, it loops, and the compression ratio blows up to ~6 (the `looks_machine_or_hallucinated` function from Section 3 catches both). The point is that hallucinations are undetectable in the *text* but obvious in the *decoder's own uncertainty signals* and the *repetition structure*.
 
-**Fix.** Layer three defenses: (1) run a voice-activity detector first and never feed non-speech segments to the model — `vad_filter=True` in faster-whisper, or a standalone Silero/WebRTC VAD; (2) gate on `no_speech_prob` and `avg_logprob` and drop segments that fail; (3) apply the compression-ratio and n-gram-repeat filters to kill loops. In self-training, hallucinated pseudo-labels are especially toxic because they are confident, so they sail through a naive confidence filter — which is exactly why you also need cross-model agreement. This failure mode is covered from the fine-tuning side in [debugging ASR fine-tuning](/blog/machine-learning/debugging-training/debugging-asr-finetuning), and the mechanism of why the decoder does this is in [Whisper Under the Hood](/blog/machine-learning/signal-processing/whisper-under-the-hood).
+**Fix.** Layer three defenses: (1) run a voice-activity detector first and never feed non-speech segments to the model — `vad_filter=True` in faster-whisper, or a standalone Silero/WebRTC VAD; (2) gate on `no_speech_prob` and `avg_logprob` and drop segments that fail; (3) apply the compression-ratio and n-gram-repeat filters to kill loops. In self-training, hallucinated pseudo-labels are especially toxic because they are confident, so they sail through a naive confidence filter — which is exactly why you also need cross-model agreement. This failure mode is covered from the fine-tuning side in [debugging ASR fine-tuning](/blog/machine-learning/debugging-training/debugging-asr-finetuning), and the mechanism of why the decoder does this is in [Whisper Under the Hood](/blog/machine-learning/speech-to-text/whisper-under-the-hood).
 
 ### 7.2 Confidence miscalibration in pseudo-labels
 
@@ -442,4 +432,4 @@ The through-line of this entire post is a single inversion of the supervised-lea
 - Pratap et al., *Scaling Speech Technology to 1,000+ Languages* (MMS, 2023) — alignment, mining, and per-language adapters.
 - Park et al., *Improved Noisy Student Training for Automatic Speech Recognition* (2020) — the iterative pseudo-labeling loop done right.
 - Baevski et al., *wav2vec 2.0* (2020) — self-supervised pre-training that makes ten-minute fine-tuning viable.
-- Companion posts: [speech data for ASR](/blog/machine-learning/training-data/speech-data-for-asr), [synthetic data generation](/blog/machine-learning/training-data/synthetic-data-generation), [Whisper Under the Hood](/blog/machine-learning/signal-processing/whisper-under-the-hood), and [debugging ASR fine-tuning](/blog/machine-learning/debugging-training/debugging-asr-finetuning).
+- Companion posts: [speech data for ASR](/blog/machine-learning/training-data/speech-data-for-asr), [synthetic data generation](/blog/machine-learning/training-data/synthetic-data-generation), [Whisper Under the Hood](/blog/machine-learning/speech-to-text/whisper-under-the-hood), and [debugging ASR fine-tuning](/blog/machine-learning/debugging-training/debugging-asr-finetuning).

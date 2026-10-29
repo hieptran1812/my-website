@@ -75,7 +75,7 @@ A natural objection: why three tiers and not a continuous risk score? A continuo
 
 ## The streaming architecture
 
-The generative variant, Qwen3Guard-Gen, is conceptually simple: it reformulates safety classification as an instruction-following task. You give a Qwen3-based model a conversation and a prompt that asks it to classify against the taxonomy, and it generates the verdict as text — the same "everything is text generation" move we saw in [Qwen3-ASR](/blog/machine-learning/frontier-models/qwen3-asr-technical-report). It is flexible, it can explain its reasoning, and it can even moderate the *thinking traces* of reasoning models. But it is also a full generation pass, which is too slow and too coarse for real-time use.
+The generative variant, Qwen3Guard-Gen, is conceptually simple: it reformulates safety classification as an instruction-following task. You give a Qwen3-based model a conversation and a prompt that asks it to classify against the taxonomy, and it generates the verdict as text — the same "everything is text generation" move we saw in [Qwen3-ASR](/blog/machine-learning/speech-to-text/qwen3-asr-technical-report). It is flexible, it can explain its reasoning, and it can even moderate the *thinking traces* of reasoning models. But it is also a full generation pass, which is too slow and too coarse for real-time use.
 
 Qwen3Guard-Stream is the architecturally interesting variant.
 
@@ -226,7 +226,7 @@ There is one further structural worry worth naming. A guardrail trained largely 
 - **Qwen3Guard models and code** — [github.com/QwenLM/Qwen3Guard](https://github.com/QwenLM/Qwen3Guard)
 - Related on this blog:
   - [Qwen3 Technical Report: One Model, Two Minds](/blog/machine-learning/frontier-models/qwen3-technical-report)
-  - [Qwen3-ASR: an all-in-one speech recognizer built on an audio LLM](/blog/machine-learning/frontier-models/qwen3-asr-technical-report)
+  - [Qwen3-ASR: an all-in-one speech recognizer built on an audio LLM](/blog/machine-learning/speech-to-text/qwen3-asr-technical-report)
   - [Safety-alignment fallback behaviors in LLM agents](/blog/machine-learning/ai-agent/safety-alignment-fallback-behaviors-llm-agents)
   - [Moloch's Bargain: emergent misalignment when LLMs compete](/blog/paper-reading/ai-safety/molochs-bargain-emergent-misalignment-when-llms-compete-for-audiences)
   - [Fine-tuning an LLM with GRPO](/blog/machine-learning/large-language-model/fine-tuning-llm-with-grpo)

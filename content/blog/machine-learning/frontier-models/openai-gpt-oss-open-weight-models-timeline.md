@@ -80,7 +80,7 @@ For context only, because they are not part of the language-model family: OpenAI
 | Whisper | Sep 2022 | Encoder-decoder ASR, tiny (39M) through large (1,550M); large-v3 added Nov 2023, turbo (809M) Sep 2024 | MIT |
 | Consistency models, Shap-E | 2023 | Diffusion and 3D research checkpoints on the OpenAI Hugging Face org | various |
 
-Whisper in particular became infrastructure, and [this blog's Whisper post](/blog/machine-learning/signal-processing/whisper-under-the-hood) walks through it. But for six years, if you wanted an OpenAI model that wrote text, you called an API. The open-weight LLM ecosystem in that period was built by Meta, Mistral, Alibaba, DeepSeek and others, which is the backdrop gpt-oss landed into.
+Whisper in particular became infrastructure, and [this blog's Whisper post](/blog/machine-learning/speech-to-text/whisper-under-the-hood) walks through it. But for six years, if you wanted an OpenAI model that wrote text, you called an API. The open-weight LLM ecosystem in that period was built by Meta, Mistral, Alibaba, DeepSeek and others, which is the backdrop gpt-oss landed into.
 
 ## gpt-oss-120b and gpt-oss-20b (August 5, 2025)
 

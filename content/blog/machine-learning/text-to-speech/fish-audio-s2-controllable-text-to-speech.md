@@ -2,9 +2,9 @@
 title: "Fish Audio S2: Dual-AR, Multi-Reward RL, and the Data Flywheel Behind Controllable TTS"
 date: "2026-07-31"
 description: "A technique-by-technique explanation of Fish Audio S2, from RVQ audio tokens and Dual-AR generation to instruction-following data, GRPO alignment, and low-latency SGLang serving."
-tags: ["paper-reading", "fish-audio-s2", "text-to-speech", "speech-synthesis", "audio-language-model", "dual-ar", "grpo", "reinforcement-learning", "streaming-inference"]
-category: "paper-reading"
-subcategory: "Speech Processing"
+tags: ["paper-reading", "fish-audio-s2", "text-to-speech", "speech-synthesis", "audio-language-model", "dual-ar", "grpo", "reinforcement-learning", "streaming-inference", "tts"]
+category: "machine-learning"
+subcategory: "Text-to-Speech"
 author: "Hiep Tran"
 featured: true
 readTime: 33
@@ -727,6 +727,6 @@ The most important engineering lesson is that the model is not the whole system.
 - Fish Audio Team. [Fish Audio S2 Technical Report](https://arxiv.org/abs/2603.08823).
 - [Fish Speech source code](https://github.com/fishaudio/fish-speech).
 - [Fish Audio S2 Pro weights](https://huggingface.co/fishaudio/s2-pro).
-- [MiniMax Speech: Speaker Encoder and Flow-VAE](/blog/machine-learning/frontier-models/minimax-speech-speaker-encoder-flow-vae).
+- [MiniMax Speech: Speaker Encoder and Flow-VAE](/blog/machine-learning/text-to-speech/minimax-speech-speaker-encoder-flow-vae).
 - [Kimi-Audio](/blog/machine-learning/frontier-models/kimi-audio).
 - [Qwen3-Omni Technical Report](/blog/machine-learning/frontier-models/qwen3-omni-technical-report).

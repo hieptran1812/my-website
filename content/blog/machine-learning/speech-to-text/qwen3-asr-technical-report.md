@@ -3,9 +3,9 @@ title: "Qwen3-ASR: An All-in-One Speech Recognizer Built on an Audio LLM"
 date: "2026-05-18"
 publishDate: "2026-05-18"
 description: "A close read of the Qwen3-ASR technical report: a Qwen3-Omni-derived recognizer that folds transcription, language ID, context biasing, singing, and forced alignment into one small model family."
-tags: ["qwen3-asr", "speech-recognition", "asr", "forced-alignment", "context-biasing", "audio-llm", "multilingual", "streaming-asr", "paper-reading"]
+tags: ["qwen3-asr", "speech-recognition", "asr", "forced-alignment", "context-biasing", "audio-llm", "multilingual", "streaming-asr", "paper-reading", "speech-to-text"]
 category: "machine-learning"
-subcategory: "Frontier Models"
+subcategory: "Speech-to-Text"
 author: "Hiep Tran"
 featured: false
 readTime: 30
@@ -32,13 +32,13 @@ This post reads the report the way you would read it to either deploy the model 
 
 ## Context: what came before
 
-The dominant open ASR model of the last few years was OpenAI's Whisper. Whisper was a genuine breakthrough — a single encoder-decoder transformer trained on 680K hours of weakly-supervised web audio, multilingual, robust, and free. Our [explainer on the Whisper encoder](/blog/machine-learning/signal-processing/whisper-under-the-hood) covers its design. But Whisper was, architecturally, a *dedicated* ASR model: an audio encoder feeding a text decoder trained specifically and only to transcribe.
+The dominant open ASR model of the last few years was OpenAI's Whisper. Whisper was a genuine breakthrough — a single encoder-decoder transformer trained on 680K hours of weakly-supervised web audio, multilingual, robust, and free. Our [explainer on the Whisper encoder](/blog/machine-learning/speech-to-text/whisper-under-the-hood) covers its design. But Whisper was, architecturally, a *dedicated* ASR model: an audio encoder feeding a text decoder trained specifically and only to transcribe.
 
 Two limitations of that design set up Qwen3-ASR.
 
 The first is **the missing world knowledge**. A dedicated ASR decoder is a small text model that has only ever seen transcripts. It has weak language modeling — it does not really *know* much. So when the audio is ambiguous (a rare name, a technical term, an accented vowel), it has little prior to fall back on. The insight that fixed this, across the field, was: what if the decoder were a real LLM? An LLM brings a vast language prior, so an ambiguous acoustic signal can be resolved by what is *plausible* — and it can be *prompted*, which opens the door to customization. This is the "audio LLM" or LALM (large audio-language model) direction, and Qwen's own [Qwen3-Omni](/blog/machine-learning/frontier-models/qwen3-omni-technical-report) is a full example of it.
 
-The second is **the pipeline-of-models tax**. Whisper transcribes; it does not give you reliable word-level timestamps (its alignment is a known weak spot), it does not bias toward your vocabulary, and it was not built for singing. Each of those needs another model or another hack. Production speech teams know this tax well — the post on [streaming ASR production pipelines](/blog/machine-learning?subcategory=signal-processing) walks through how many moving parts a real deployment accumulates.
+The second is **the pipeline-of-models tax**. Whisper transcribes; it does not give you reliable word-level timestamps (its alignment is a known weak spot), it does not bias toward your vocabulary, and it was not built for singing. Each of those needs another model or another hack. Production speech teams know this tax well — the post on [streaming ASR production pipelines](/blog/machine-learning/debugging-training/streaming-vs-offline-mismatch) walks through how many moving parts a real deployment accumulates.
 
 The tax is not only operational, it is a *quality* tax, and that is the part teams underestimate. Every seam between two models is a place where errors compound rather than cancel. If the language-ID model picks the wrong language, the transcription model — loaded for that wrong language — produces garbage, and no amount of transcription quality recovers it. If the voice-activity model trims a fraction of a second too aggressively, the transcriber never sees the first phoneme. The pipeline's accuracy is bounded by the *product* of its stages' accuracies, not the best of them, and the failure of an early stage is invisible to the later ones — they cannot know they were handed bad input. An all-in-one model collapses those seams: language identification and transcription are now one joint decision the model makes with full information, so a marginal language call and a marginal acoustic call inform each other instead of one silently dooming the other. The unification is partly an accuracy argument, not only a convenience one.
 
@@ -230,7 +230,7 @@ A final framing for the report as a whole. Qwen3-ASR is best read not as a stand
 - Related on this blog:
   - [Qwen3-Omni Technical Report](/blog/machine-learning/frontier-models/qwen3-omni-technical-report)
   - [Qwen3 Technical Report: One Model, Two Minds](/blog/machine-learning/frontier-models/qwen3-technical-report)
-  - [The Whisper encoder explained](/blog/machine-learning/signal-processing/whisper-under-the-hood)
-  - [Streaming ASR production pipeline](/blog/machine-learning?subcategory=signal-processing)
-  - [Noise-robust ASR in the real world](/blog/machine-learning?subcategory=signal-processing)
-  - [Code-switching ASR: Vietnamese-English](/blog/machine-learning?subcategory=signal-processing)
+  - [The Whisper encoder explained](/blog/machine-learning/speech-to-text/whisper-under-the-hood)
+  - [Streaming vs Offline Mismatch: When Train-Offline, Deploy-Streaming Breaks](/blog/machine-learning/debugging-training/streaming-vs-offline-mismatch)
+  - [Speech Data for ASR: Turning Long Audio Into Aligned Training Pairs](/blog/machine-learning/training-data/speech-data-for-asr)
+  - [Weak Supervision and Low-Resource Speech: Scaling ASR Data Past Human Transcription](/blog/machine-learning/training-data/weak-supervision-and-low-resource-speech)

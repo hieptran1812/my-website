@@ -3,17 +3,7 @@ title: "GAN Vocoders: HiFi-GAN and the Fast Path From Mel to Waveform"
 date: "2026-06-17"
 publishDate: "2026-06-17"
 description: "Learn why GAN vocoders like HiFi-GAN, BigVGAN, and Vocos turn a phase-free mel-spectrogram back into a clean waveform hundreds of times faster than real time, and build the intuition for the multi-period and multi-scale discriminators that kill the buzzing artifacts."
-tags:
-  [
-    "audio-generation",
-    "audio-synthesis",
-    "vocoder",
-    "hifi-gan",
-    "text-to-speech",
-    "neural-audio-codec",
-    "generative-ai",
-    "deep-learning",
-  ]
+tags: ["audio-generation", "audio-synthesis", "vocoder", "hifi-gan", "text-to-speech", "neural-audio-codec", "generative-ai", "deep-learning", "tts", "speech-synthesis"]
 category: "machine-learning"
 subcategory: "Audio Generation"
 author: "Hiep Tran"

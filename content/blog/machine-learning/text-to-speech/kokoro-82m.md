@@ -3,21 +3,9 @@ title: "Kokoro-82M: How an 82-Million-Parameter Model Reaches Near Human-Level T
 date: "2026-06-13"
 publishDate: "2026-06-13"
 description: "A full engineering teardown of Kokoro-82M — the cut-down StyleTTS 2 architecture, the iSTFTNet vocoder, the length-indexed voicepacks, the misaki G2P, and the loss stack that trained it — and why a tiny non-autoregressive model beats billion-parameter LLM-TTS on cost and latency."
-tags:
-  [
-    "text-to-speech",
-    "kokoro",
-    "styletts2",
-    "istftnet",
-    "vocoder",
-    "speech-synthesis",
-    "g2p",
-    "signal-processing",
-    "neural-audio",
-    "adain",
-  ]
+tags: ["text-to-speech", "kokoro", "styletts2", "istftnet", "vocoder", "speech-synthesis", "g2p", "signal-processing", "neural-audio", "adain", "tts"]
 category: "machine-learning"
-subcategory: "Signal Processing"
+subcategory: "Text-to-Speech"
 author: "Hiep Tran"
 featured: true
 readTime: 51
@@ -295,7 +283,7 @@ A subtle but real production detail: the iSTFT path is numerically sensitive. Ma
 
 ![iSTFTNet stops upsampling early: HiFi-GAN upsamples all the way to samples with transposed convs, while iSTFTNet predicts magnitude and phase and lets one iSTFT finish the reconstruction.](/imgs/blogs/kokoro-82m-5.webp)
 
-To see why iSTFTNet is fast you have to know what it replaces. **HiFi-GAN**, the workhorse vocoder of the late 2010s and the direct ancestor here, takes an 80-bin mel spectrogram at frame resolution and upsamples it all the way to waveform resolution using a stack of **transposed convolutions**. To go from a frame every ~256 samples to one value per sample, it upsamples by factors that multiply to 256 (for example 8 × 8 × 2 × 2), with residual blocks at each stage. Those late upsampling stages are enormous: they operate at or near full audio resolution, on tens of thousands of time steps per second, and they dominate the vocoder's compute. (We have a full teardown of this in [HiFi-GAN](/blog/machine-learning/signal-processing/hifi-gan).)
+To see why iSTFTNet is fast you have to know what it replaces. **HiFi-GAN**, the workhorse vocoder of the late 2010s and the direct ancestor here, takes an 80-bin mel spectrogram at frame resolution and upsamples it all the way to waveform resolution using a stack of **transposed convolutions**. To go from a frame every ~256 samples to one value per sample, it upsamples by factors that multiply to 256 (for example 8 × 8 × 2 × 2), with residual blocks at each stage. Those late upsampling stages are enormous: they operate at or near full audio resolution, on tens of thousands of time steps per second, and they dominate the vocoder's compute. (We have a full teardown of this in [HiFi-GAN](/blog/machine-learning/text-to-speech/hifi-gan).)
 
 iSTFTNet's insight, from the 2022 paper, is that a mel vocoder is secretly solving three inverse problems at once: recover the full-resolution magnitude spectrum, recover the phase, and convert frequency back to time. A pure-ConvNet vocoder solves all three implicitly and jointly with its upsampling stack — which means it is spending a large fraction of its compute learning to approximate an *inverse Fourier transform*, a transform we have a closed-form, exact, blazingly fast algorithm for.
 
@@ -399,7 +387,7 @@ The data story is the real headline if you care about reproducibility and ethics
 The positioning matrix lays out the tradeoff against the systems Kokoro is most often compared to. Read it as four axes, not one score.
 
 - **Parameters.** Kokoro is 82M. XTTS-v2 is ~470M. Orpheus is built on a 3B LLM. Tortoise is roughly a billion across its stack. On pure footprint, Kokoro is in a different weight class — it fits comfortably on a phone, in a browser via ONNX/WASM, or on a CPU-only server.
-- **Latency.** Kokoro is non-autoregressive: one forward pass, latency flat in output length, faster than real time on CPU. The autoregressive systems (Orpheus, Tortoise) generate audio tokens sequentially, so latency grows with output length and effectively requires a GPU for interactive use. XTTS sits in between. (Our deep-dive on [Orpheus TTS](/blog/machine-learning/signal-processing/orpheus-tts-llm-speech-snac) walks through exactly why the LLM-codec approach pays that latency tax.)
+- **Latency.** Kokoro is non-autoregressive: one forward pass, latency flat in output length, faster than real time on CPU. The autoregressive systems (Orpheus, Tortoise) generate audio tokens sequentially, so latency grows with output length and effectively requires a GPU for interactive use. XTTS sits in between. (Our deep-dive on [Orpheus TTS](/blog/machine-learning/text-to-speech/orpheus-tts-llm-speech-snac) walks through exactly why the LLM-codec approach pays that latency tax.)
 - **Voice control.** This is the axis where Kokoro *loses*. Its voices are fixed voicepacks; it cannot clone a voice from reference audio. XTTS, Orpheus, and Tortoise all do zero-shot cloning from a few seconds of audio. If "make it sound like *this specific person*" is the requirement, Kokoro is disqualified.
 - **Training cost.** Kokoro cost ~\$1k. The others cost orders of magnitude more in compute and data. For anyone who wants to *fine-tune* or *retrain* rather than just run, this is decisive: you can fine-tune Kokoro on a single GPU in an afternoon.
 
@@ -468,7 +456,7 @@ Kokoro is a sharp tool with a sharp edge. The decision is rarely about quality i
 
 - You need **zero-shot voice cloning** from a few seconds of reference audio. The encoder that would do this is not in the model. Use XTTS, Orpheus, or a dedicated cloning system.
 - You need **highly expressive or emotional delivery** that varies per utterance — laughter, shouting, crying, dramatic range. Frozen styles and a deterministic predictor give consistent, natural *read* speech, not theatrical range.
-- You need **conversational paralinguistics** — backchannels, disfluencies, "um"s and "uh"s placed naturally. That is the home turf of LLM-TTS systems (see [Orpheus](/blog/machine-learning/signal-processing/orpheus-tts-llm-speech-snac)).
+- You need **conversational paralinguistics** — backchannels, disfluencies, "um"s and "uh"s placed naturally. That is the home turf of LLM-TTS systems (see [Orpheus](/blog/machine-learning/text-to-speech/orpheus-tts-llm-speech-snac)).
 - Your target **language has no good phonemizer.** Without a correct G2P, Kokoro mispronounces fluently and confidently. Budget for the front-end first.
 - You need **singing, or precise musical pitch control.** The F0 predictor is tuned for speech prosody, not melody.
 
@@ -478,7 +466,7 @@ The meta-lesson is the one worth keeping after the implementation details fade: 
 
 - **StyleTTS 2** — the parent architecture, with the style diffusion, differentiable duration, and SLM adversarial training Kokoro inherits: [arXiv:2306.07691](https://arxiv.org/abs/2306.07691).
 - **iSTFTNet** — the fast spectral vocoder that does the heavy lifting: [arXiv:2203.02395](https://arxiv.org/abs/2203.02395).
-- **HiFi-GAN, in depth** — the vocoder iSTFTNet modifies, and the source of the MPD/MRD adversarial recipe: [HiFi-GAN](/blog/machine-learning/signal-processing/hifi-gan).
-- **Orpheus TTS** — the autoregressive LLM-plus-codec approach Kokoro contrasts with, and why it pays a latency tax: [Orpheus TTS](/blog/machine-learning/signal-processing/orpheus-tts-llm-speech-snac).
-- **Training CosyVoice** — another modern TTS training pipeline, for comparison on data and objectives: [Training CosyVoice](/blog/machine-learning/deep-learning/training-cosyvoice).
+- **HiFi-GAN, in depth** — the vocoder iSTFTNet modifies, and the source of the MPD/MRD adversarial recipe: [HiFi-GAN](/blog/machine-learning/text-to-speech/hifi-gan).
+- **Orpheus TTS** — the autoregressive LLM-plus-codec approach Kokoro contrasts with, and why it pays a latency tax: [Orpheus TTS](/blog/machine-learning/text-to-speech/orpheus-tts-llm-speech-snac).
+- **Training CosyVoice** — another modern TTS training pipeline, for comparison on data and objectives: [Training CosyVoice](/blog/machine-learning/text-to-speech/training-cosyvoice).
 - **misaki** and **kokoro** on GitHub (`hexgrad/misaki`, `hexgrad/kokoro`) — the actual G2P and inference code referenced throughout.

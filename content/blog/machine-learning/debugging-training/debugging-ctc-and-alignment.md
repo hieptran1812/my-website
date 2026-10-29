@@ -3,19 +3,7 @@ title: "Debugging CTC and Alignment: The Blank Token, Inf Loss, and Collapsed Ou
 date: "2026-06-17"
 publishDate: "2026-06-17"
 description: "A first-principles guide to the Connectionist Temporal Classification loss and the bugs unique to it: the inf-loss trap when input frames run short, blank-index mismatches that train the wrong column, and the all-blank collapse, with runnable asserts and alignment visualizations that catch each before it wastes a run."
-tags:
-  [
-    "debugging",
-    "model-training",
-    "ctc",
-    "speech",
-    "asr",
-    "alignment",
-    "pytorch",
-    "torchaudio",
-    "finetuning",
-    "deep-learning",
-  ]
+tags: ["debugging", "model-training", "ctc", "speech", "asr", "alignment", "pytorch", "torchaudio", "finetuning", "deep-learning", "speech-to-text", "speech-recognition"]
 category: "machine-learning"
 subcategory: "Debugging Training"
 author: "Hiep Tran"

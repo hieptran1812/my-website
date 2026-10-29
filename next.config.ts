@@ -283,7 +283,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/blog/paper-reading/speech-processing/qwen3-asr-technical-report",
-        destination: "/blog/machine-learning/frontier-models/qwen3-asr-technical-report",
+        destination: "/blog/machine-learning/speech-to-text/qwen3-asr-technical-report",
         permanent: true,
       },
       {
@@ -448,7 +448,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/blog/paper-reading/speech-processing/minimax-speech-speaker-encoder-flow-vae",
-        destination: "/blog/machine-learning/frontier-models/minimax-speech-speaker-encoder-flow-vae",
+        destination: "/blog/machine-learning/text-to-speech/minimax-speech-speaker-encoder-flow-vae",
         permanent: true,
       },
       {
@@ -484,6 +484,78 @@ const nextConfig: NextConfig = {
       {
         source: "/blog/machine-learning/large-language-model/modern-llm-architectures-qwen-llama-gemma-deepseek",
         destination: "/blog/machine-learning/frontier-models/modern-llm-architectures-qwen-llama-gemma-deepseek",
+        permanent: true,
+      },
+      // TTS and STT posts were consolidated into content/blog/machine-learning/
+      // text-to-speech/ and speech-to-text/. Series members stayed in their series.
+      {
+        source: "/blog/machine-learning/signal-processing/kokoro-82m",
+        destination: "/blog/machine-learning/text-to-speech/kokoro-82m",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/signal-processing/orpheus-tts-llm-speech-snac",
+        destination: "/blog/machine-learning/text-to-speech/orpheus-tts-llm-speech-snac",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/signal-processing/cosyvoice-v1-v3-tokens-flow-matching-streaming",
+        destination: "/blog/machine-learning/text-to-speech/cosyvoice-v1-v3-tokens-flow-matching-streaming",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/signal-processing/distilling-fast-tts-non-verbal",
+        destination: "/blog/machine-learning/text-to-speech/distilling-fast-tts-non-verbal",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/signal-processing/hifi-gan",
+        destination: "/blog/machine-learning/text-to-speech/hifi-gan",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/deep-learning/training-cosyvoice",
+        destination: "/blog/machine-learning/text-to-speech/training-cosyvoice",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/frontier-models/minimax-speech-speaker-encoder-flow-vae",
+        destination: "/blog/machine-learning/text-to-speech/minimax-speech-speaker-encoder-flow-vae",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/frontier-models/fish-audio-model-family-timeline",
+        destination: "/blog/machine-learning/text-to-speech/fish-audio-model-family-timeline",
+        permanent: true,
+      },
+      {
+        source: "/blog/paper-reading/speech-processing/fish-audio-s2-controllable-text-to-speech",
+        destination: "/blog/machine-learning/text-to-speech/fish-audio-s2-controllable-text-to-speech",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/signal-processing/whisper-under-the-hood",
+        destination: "/blog/machine-learning/speech-to-text/whisper-under-the-hood",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/deep-learning/training-asr-models",
+        destination: "/blog/machine-learning/speech-to-text/training-asr-models",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/deep-learning/canary-parakeet-fastconformer-asr",
+        destination: "/blog/machine-learning/speech-to-text/canary-parakeet-fastconformer-asr",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/frontier-models/qwen3-asr-technical-report",
+        destination: "/blog/machine-learning/speech-to-text/qwen3-asr-technical-report",
+        permanent: true,
+      },
+      {
+        source: "/blog/machine-learning/frontier-models/whisper-model-family-timeline",
+        destination: "/blog/machine-learning/speech-to-text/whisper-model-family-timeline",
         permanent: true,
       },
     ];

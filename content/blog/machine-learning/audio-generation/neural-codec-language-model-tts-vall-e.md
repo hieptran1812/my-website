@@ -3,17 +3,7 @@ title: "VALL-E: Text-to-Speech as Codec Language Modeling"
 date: "2026-06-17"
 publishDate: "2026-06-17"
 description: "How VALL-E turned text-to-speech into next-token prediction over EnCodec tokens, cloned an unseen voice from three seconds, and seeded the entire zero-shot TTS wave."
-tags:
-  [
-    "audio-generation",
-    "audio-synthesis",
-    "text-to-speech",
-    "voice-cloning",
-    "neural-audio-codec",
-    "language-models",
-    "generative-ai",
-    "deep-learning",
-  ]
+tags: ["audio-generation", "audio-synthesis", "text-to-speech", "voice-cloning", "neural-audio-codec", "language-models", "generative-ai", "deep-learning", "tts", "speech-synthesis"]
 category: "machine-learning"
 subcategory: "Audio Generation"
 author: "Hiep Tran"

@@ -3,9 +3,9 @@ title: "The Whisper Family, Release by Release: From the 2022 Checkpoints to lar
 date: "2026-10-23"
 publishDate: "2026-10-23"
 description: "A chronological reference catalog of OpenAI's open-weight Whisper speech models through October 2026: the nine original checkpoints, large-v2, large-v3 and large-v3-turbo, plus the open ecosystem built on the weights and the hosted models that replaced them, with dates, specs, licenses and primary sources."
-tags: ["whisper", "openai", "speech-recognition", "asr", "whisper-large-v3", "whisper-turbo", "distil-whisper", "open-weights", "model-family", "timeline"]
+tags: ["whisper", "openai", "speech-recognition", "asr", "whisper-large-v3", "whisper-turbo", "distil-whisper", "open-weights", "model-family", "timeline", "speech-to-text"]
 category: "machine-learning"
-subcategory: "Frontier Models"
+subcategory: "Speech-to-Text"
 author: "Hiep Tran"
 featured: false
 readTime: 16
@@ -19,7 +19,7 @@ That shape is unusual, and it is the main thing worth knowing about the family. 
 
 Look at the top lane after October 2024. **As of October 23, 2026, the newest open-weight OpenAI speech model is still Whisper large-v3-turbo** (`openai/whisper-large-v3-turbo`, shipped in `openai-whisper` 20240930). The newest OpenAI speech models of any kind are `gpt-transcribe` and `gpt-live-transcribe` (July 28, 2026), which have no published weights.
 
-A note on method. I pulled the GitHub release list and CHANGELOG of `openai/whisper`, the announcement threads in its Discussions tab (the closest thing Whisper has to release notes), the `model-card.md` in the repo, the Hugging Face Hub API for every repo under `openai` and `distil-whisper` (creation dates and each `config.json`), the arXiv papers, and the OpenAI API changelog for the hosted models. The OpenAI blog itself returned 403 to my fetcher, so where a date only appears there I fall back to the model card or the Hub and say so. "Hub created" is a lower bound on the public date. If you want the mechanism rather than the catalog (log-mel front end, special-token task format, timestamp decoding), read [Whisper Under the Hood](/blog/machine-learning/signal-processing/whisper-under-the-hood) first.
+A note on method. I pulled the GitHub release list and CHANGELOG of `openai/whisper`, the announcement threads in its Discussions tab (the closest thing Whisper has to release notes), the `model-card.md` in the repo, the Hugging Face Hub API for every repo under `openai` and `distil-whisper` (creation dates and each `config.json`), the arXiv papers, and the OpenAI API changelog for the hosted models. The OpenAI blog itself returned 403 to my fetcher, so where a date only appears there I fall back to the model card or the Hub and say so. "Hub created" is a lower bound on the public date. If you want the mechanism rather than the catalog (log-mel front end, special-token task format, timestamp decoding), read [Whisper Under the Hood](/blog/machine-learning/speech-to-text/whisper-under-the-hood) first.
 
 ## The timeline at a glance
 
@@ -216,7 +216,7 @@ The open line never changed license, which is rare in this catalog. What changed
 | Word timestamps, long recordings | WhisperX | VAD segmentation plus forced alignment |
 | Tiny footprint, English | tiny.en or base.en | `.en` helps most at these sizes |
 
-If you are fine-tuning rather than picking, [Debugging ASR Finetuning](/blog/machine-learning/debugging-training/debugging-asr-finetuning) covers the Whisper-specific failure modes. If you are open to non-Whisper models, compare against [Qwen3-ASR](/blog/machine-learning/frontier-models/qwen3-asr-technical-report) and [NVIDIA's Canary and Parakeet](/blog/machine-learning/deep-learning/canary-parakeet-fastconformer-asr) before defaulting to turbo.
+If you are fine-tuning rather than picking, [Debugging ASR Finetuning](/blog/machine-learning/debugging-training/debugging-asr-finetuning) covers the Whisper-specific failure modes. If you are open to non-Whisper models, compare against [Qwen3-ASR](/blog/machine-learning/speech-to-text/qwen3-asr-technical-report) and [NVIDIA's Canary and Parakeet](/blog/machine-learning/speech-to-text/canary-parakeet-fastconformer-asr) before defaulting to turbo.
 
 ## What this catalog could not verify
 

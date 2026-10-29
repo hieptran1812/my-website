@@ -2,17 +2,8 @@
 title: "Whisper Under the Hood: Architecture, Training, and Deployment"
 publishDate: "2026-04-18"
 category: "machine-learning"
-subcategory: "Signal Processing"
-tags:
-  [
-    "whisper",
-    "ASR",
-    "speech-recognition",
-    "openai",
-    "transformer",
-    "multilingual",
-    "deployment",
-  ]
+subcategory: "Speech-to-Text"
+tags: ["whisper", "ASR", "speech-recognition", "openai", "transformer", "multilingual", "deployment", "speech-to-text"]
 date: "2026-04-18"
 author: "Hiep Tran"
 featured: false

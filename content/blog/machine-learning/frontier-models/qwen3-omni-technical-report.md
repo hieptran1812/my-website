@@ -37,9 +37,9 @@ Three prior-art threads matter.
 
 The **Thinker-Talker pattern** itself. Generating speech and generating text are different problems. Text is discrete tokens at the pace of language; speech is a continuous waveform that must come out in real time, paced by the clock, with prosody and timbre. Bolting speech generation onto a text model as just-another-output-head tends to make the model worse at both. The Thinker-Talker split — one module that reasons and writes, a second that vocalizes — is the architectural acknowledgment that these are two jobs.
 
-The **audio encoder question**. Almost every audio-capable LLM since 2023 used OpenAI's Whisper encoder as the front-end — it was strong, available, and free. But Whisper was trained for transcription, at a fixed token rate, on a fixed data scale; reusing it means inheriting its ceiling. Our [explainer on the Whisper encoder](/blog/machine-learning/signal-processing/whisper-under-the-hood) covers what that encoder is and is not built for.
+The **audio encoder question**. Almost every audio-capable LLM since 2023 used OpenAI's Whisper encoder as the front-end — it was strong, available, and free. But Whisper was trained for transcription, at a fixed token rate, on a fixed data scale; reusing it means inheriting its ceiling. Our [explainer on the Whisper encoder](/blog/machine-learning/speech-to-text/whisper-under-the-hood) covers what that encoder is and is not built for.
 
-The **real-time speech problem**. A voice assistant that takes two seconds to start talking feels broken. The discrete-codec approach to neural speech — represent audio as sequences of codec tokens, as in EnCodec and SoundStream (see [speech tokenizers](/blog/machine-learning/deep-learning/speech-tokenizer)) — made streaming synthesis possible, but the vocoder that turns codec tokens back into a waveform was often a block-wise diffusion model, which by construction waits for a *block* of tokens before it can produce sound. First-packet latency is covered in depth in [real-time TTS and first-audio-byte latency](/blog/machine-learning?subcategory=signal-processing).
+The **real-time speech problem**. A voice assistant that takes two seconds to start talking feels broken. The discrete-codec approach to neural speech — represent audio as sequences of codec tokens, as in EnCodec and SoundStream (see [speech tokenizers](/blog/machine-learning/deep-learning/speech-tokenizer)) — made streaming synthesis possible, but the vocoder that turns codec tokens back into a waveform was often a block-wise diffusion model, which by construction waits for a *block* of tokens before it can produce sound. First-packet latency is covered in depth in [real-time TTS and first-audio-byte latency](/blog/machine-learning/audio-generation/real-time-streaming-and-full-duplex-speech).
 
 The gap Qwen3-Omni claims to close sits across all three: prove the unified model has no trade-off, replace the borrowed audio encoder with something purpose-built, and drive first-packet latency low enough that the model feels like a conversation partner rather than a transcription service.
 
@@ -232,7 +232,7 @@ What is load-bearing in the setup, and might not transfer:
 - Related on this blog:
   - [Qwen3 Technical Report: One Model, Two Minds](/blog/machine-learning/frontier-models/qwen3-technical-report)
   - [Qwen2-VL: enhancing vision-language models' perception at any resolution](/blog/machine-learning/frontier-models/qwen2-vl-enhancing-vision-language-models-perception-of-the-world-at-any-resolution)
-  - [The Whisper encoder explained](/blog/machine-learning/signal-processing/whisper-under-the-hood)
-  - [Speech tokenizers: EnCodec, SoundStream, Mimi](/blog/machine-learning?subcategory=signal-processing)
-  - [Real-time TTS and first-audio-byte latency](/blog/machine-learning?subcategory=signal-processing)
+  - [The Whisper encoder explained](/blog/machine-learning/speech-to-text/whisper-under-the-hood)
+  - [EnCodec, DAC, and the Modern Neural Codec](/blog/machine-learning/audio-generation/encodec-dac-and-the-modern-codec)
+  - [Real-time TTS and first-audio-byte latency](/blog/machine-learning/audio-generation/real-time-streaming-and-full-duplex-speech)
   - [Kimi-Audio](/blog/machine-learning/frontier-models/kimi-audio)

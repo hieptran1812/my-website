@@ -3,17 +3,7 @@ title: "Speech Data for ASR: Turning Long Audio Into Aligned Training Pairs"
 date: "2026-06-30"
 publishDate: "2026-06-30"
 description: "How ASR training data is really made — audio-transcript pairs, the axes that decide label cost, where the audio comes from, and the segmentation-plus-forced-alignment machinery that manufactures utterance-level pairs from a long recording and a book."
-tags:
-  - training-data
-  - speech-recognition
-  - asr
-  - forced-alignment
-  - voice-activity-detection
-  - montreal-forced-aligner
-  - librispeech
-  - common-voice
-  - audio-preprocessing
-  - ctc-segmentation
+tags: ["training-data", "speech-recognition", "asr", "forced-alignment", "voice-activity-detection", "montreal-forced-aligner", "librispeech", "common-voice", "audio-preprocessing", "ctc-segmentation", "speech-to-text"]
 category: "machine-learning"
 subcategory: "Training Data"
 author: "Hiep Tran"
@@ -29,7 +19,7 @@ That manufacturing step — taking long recordings plus a known transcript and c
 
 The diagram above is the mental model for this entire post, and the rest of the article is a tour of it. You start with a long recording and a known transcript. You standardize the audio to 16 kHz mono. You run voice-activity detection to find the speech and throw away the silence, music, and applause. You run forced alignment to snap the known words onto the audio timeline. You cut on the resulting word boundaries. You filter out the segments the aligner was not confident about. What falls out the right side is a pile of clean `(audio, text)` pairs — the thing your model actually trains on. Miss any stage and the pile is contaminated.
 
-This post is written for engineers who will build or debug an ASR data pipeline: the person who has to explain why the model transcribes the LibriVox intro boilerplate onto every clip, or why word error rate on their in-house data is triple what the leaderboard promised. We build intuition first, then the math of alignment, then real code with `torchaudio`, Silero VAD, the Montreal Forced Aligner, and `webdataset`, then a worked scenario with concrete segment counts, and finally a troubleshooting section and a set of named case studies. If you want the model side of the story, the companion post on [how Whisper handles audio](/blog/machine-learning/signal-processing/whisper-under-the-hood) covers the encoder; here we stay resolutely on the data.
+This post is written for engineers who will build or debug an ASR data pipeline: the person who has to explain why the model transcribes the LibriVox intro boilerplate onto every clip, or why word error rate on their in-house data is triple what the leaderboard promised. We build intuition first, then the math of alignment, then real code with `torchaudio`, Silero VAD, the Montreal Forced Aligner, and `webdataset`, then a worked scenario with concrete segment counts, and finally a troubleshooting section and a set of named case studies. If you want the model side of the story, the companion post on [how Whisper handles audio](/blog/machine-learning/speech-to-text/whisper-under-the-hood) covers the encoder; here we stay resolutely on the data.
 
 ## Why speech data is a different problem
 
@@ -453,7 +443,7 @@ The one-sentence version: forced alignment is a machine that turns *known text p
 
 ## Further reading
 
-- [How Whisper handles audio](/blog/machine-learning/signal-processing/whisper-under-the-hood) — the encoder side of ASR, and why 16 kHz log-mel is the standard front-end.
+- [How Whisper handles audio](/blog/machine-learning/speech-to-text/whisper-under-the-hood) — the encoder side of ASR, and why 16 kHz log-mel is the standard front-end.
 - [Debugging CTC and alignment](/blog/machine-learning/debugging-training/debugging-ctc-and-alignment) — when the trellis, beam, or blank handling goes wrong.
 - [Audio input bugs](/blog/machine-learning/debugging-training/audio-input-bugs) — the silent sample-rate, channel, and scaling failures that survive every unit test.
 - [Weak supervision and low-resource speech](/blog/machine-learning/training-data/weak-supervision-and-low-resource-speech) — pseudo-labeling, self-training, and building ASR where no clean transcript exists.

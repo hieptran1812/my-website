@@ -3,18 +3,7 @@ title: "Zero-Shot Voice Cloning and the TTS Frontier"
 date: "2026-06-17"
 publishDate: "2026-06-17"
 description: "Clone any voice from a few seconds of audio: the two recipes (codec language models vs flow matching), the open models you can run today, the closed frontier, and how to measure a clone honestly."
-tags:
-  [
-    "audio-generation",
-    "audio-synthesis",
-    "text-to-speech",
-    "voice-cloning",
-    "zero-shot-tts",
-    "flow-matching",
-    "generative-ai",
-    "deep-learning",
-    "neural-audio-codec",
-  ]
+tags: ["audio-generation", "audio-synthesis", "text-to-speech", "voice-cloning", "zero-shot-tts", "flow-matching", "generative-ai", "deep-learning", "neural-audio-codec", "tts", "speech-synthesis"]
 category: "machine-learning"
 subcategory: "Audio Generation"
 author: "Hiep Tran"

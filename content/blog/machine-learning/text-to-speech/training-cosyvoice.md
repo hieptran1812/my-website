@@ -2,19 +2,8 @@
 title: "Training CosyVoice: A Complete Guide to LLM-Based Text-to-Speech"
 publishDate: "2026-04-17"
 category: "machine-learning"
-subcategory: "Deep Learning"
-tags:
-  [
-    "cosyvoice",
-    "tts",
-    "text-to-speech",
-    "speech-synthesis",
-    "flow-matching",
-    "deep-learning",
-    "voice-cloning",
-    "audio",
-    "llm",
-  ]
+subcategory: "Text-to-Speech"
+tags: ["cosyvoice", "tts", "text-to-speech", "speech-synthesis", "flow-matching", "deep-learning", "voice-cloning", "audio", "llm"]
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false

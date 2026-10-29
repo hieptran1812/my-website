@@ -30,7 +30,7 @@ Timeline file per family: `deepseek-`, `qwen-`, `glm-`, `minimax-`, `nemotron-`,
 
 | # | Slug | Family | Skill | Status |
 |---|---|---|---|---|
-| 0 | `fish-audio-model-family-timeline` | Fish Audio | B | SHIPPED 2026-10-23 (4,486 words, 5 figs; latest = Fish Audio Drama 3, 2026-10-13); links existing `paper-reading/speech-processing/fish-audio-s2-controllable-text-to-speech` |
+| 0 | `fish-audio-model-family-timeline` | Fish Audio | B | SHIPPED 2026-10-23 (4,486 words, 5 figs; latest = Fish Audio Drama 3, 2026-10-13); links existing `machine-learning/text-to-speech/fish-audio-s2-controllable-text-to-speech` |
 
 Backfill done 2026-10-23: deepseek timeline now links Janus/Janus-Pro and DeepInfer; all other existing deep-dives were already linked.
 

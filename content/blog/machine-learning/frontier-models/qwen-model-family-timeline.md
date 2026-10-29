@@ -296,7 +296,7 @@ A caveat on Qwen3-Max: the official blog is a JavaScript-rendered page and the p
 | Qwen3-ASR 0.6B / 1.7B + ForcedAligner-0.6B | ~2026-01-28 | Built on Qwen3-Omni; 30 languages plus 22 Chinese dialects; an API-only Qwen3-ASR-Flash preceded it in September 2025 | Open, Apache 2.0 | [card](https://huggingface.co/Qwen/Qwen3-ASR-1.7B) |
 | Qwen3-Coder-Next | 2026-01-30 | Qwen3-Next design at 80B total, 3B active; 48 layers, 512 experts (10 + 1 shared), 256K context, non-thinking only | Open, Apache 2.0 | [card](https://huggingface.co/Qwen/Qwen3-Coder-Next) |
 
-Deep-dives: [Qwen3-ASR technical report](/blog/machine-learning/frontier-models/qwen3-asr-technical-report) and [Qwen3-Coder-Next: scaling agentic training, not model size](/blog/machine-learning/frontier-models/qwen3-coder-next-technical-report). Qwen3-Coder-Next is the signal that Qwen had committed to the hybrid architecture: a production coder, not a research branch, built on the Qwen3-Next skeleton two weeks before Qwen3.5.
+Deep-dives: [Qwen3-ASR technical report](/blog/machine-learning/speech-to-text/qwen3-asr-technical-report) and [Qwen3-Coder-Next: scaling agentic training, not model size](/blog/machine-learning/frontier-models/qwen3-coder-next-technical-report). Qwen3-Coder-Next is the signal that Qwen had committed to the hybrid architecture: a production coder, not a research branch, built on the Qwen3-Next skeleton two weeks before Qwen3.5.
 
 ## 7. Qwen3.5 (February to March 2026): the hybrid becomes the mainline
 

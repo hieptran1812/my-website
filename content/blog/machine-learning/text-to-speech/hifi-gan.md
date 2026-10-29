@@ -2,18 +2,8 @@
 title: "HiFi-GAN: High-Fidelity Neural Vocoder for Real-Time Speech Synthesis"
 publishDate: "2026-03-15"
 category: "machine-learning"
-subcategory: "Signal Processing"
-tags:
-  [
-    "HiFi-GAN",
-    "vocoder",
-    "speech-synthesis",
-    "GAN",
-    "signal-processing",
-    "deep-learning",
-    "audio-generation",
-    "TTS",
-  ]
+subcategory: "Text-to-Speech"
+tags: ["HiFi-GAN", "vocoder", "speech-synthesis", "GAN", "signal-processing", "deep-learning", "audio-generation", "TTS", "text-to-speech"]
 date: "2026-03-15"
 author: "Hiep Tran"
 featured: false

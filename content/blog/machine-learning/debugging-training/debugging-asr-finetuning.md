@@ -3,19 +3,7 @@ title: "Debugging ASR Finetuning: Whisper, wav2vec2, and the WER That Lies"
 date: "2026-06-17"
 publishDate: "2026-06-17"
 description: "Find the silent failures that ruin a speech-recognition finetune — the wrong language token, the SpecAugment that underfits, the processor that doesn't match the checkpoint — and learn why your WER is often measuring your scorer, not your model."
-tags:
-  [
-    "debugging",
-    "model-training",
-    "speech",
-    "asr",
-    "whisper",
-    "wav2vec2",
-    "finetuning",
-    "pytorch",
-    "evaluation",
-    "deep-learning",
-  ]
+tags: ["debugging", "model-training", "speech", "asr", "whisper", "wav2vec2", "finetuning", "pytorch", "evaluation", "deep-learning", "speech-to-text", "speech-recognition"]
 category: "machine-learning"
 subcategory: "Debugging Training"
 author: "Hiep Tran"

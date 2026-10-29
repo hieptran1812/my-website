@@ -3,18 +3,8 @@ title: "MiniMax-Speech: Intrinsic Zero-Shot TTS with a Learnable Speaker Encoder
 publishDate: "2026-06-10"
 date: "2026-06-10"
 category: "machine-learning"
-subcategory: "Frontier Models"
-tags:
-  - minimax
-  - text-to-speech
-  - zero-shot-tts
-  - speaker-encoder
-  - flow-matching
-  - flow-vae
-  - voice-cloning
-  - variational-autoencoder
-  - autoregressive-tts
-  - multilingual-tts
+subcategory: "Text-to-Speech"
+tags: ["minimax", "text-to-speech", "zero-shot-tts", "speaker-encoder", "flow-matching", "flow-vae", "voice-cloning", "variational-autoencoder", "autoregressive-tts", "multilingual-tts", "tts", "speech-synthesis"]
 description: "A deep read of MiniMax-Speech: how a learnable, transcript-free speaker encoder and a normalizing-flow VAE deliver intrinsic zero-shot voice cloning across 32 languages, and why both choices generalize."
 author: "Hiep Tran"
 featured: true
@@ -150,7 +140,7 @@ class FlowVAELatent(nn.Module):
 
 The `log_det_jac` term is the whole difference from a vanilla VAE: it is the log-determinant of the flow's Jacobian, the correction that lets you measure the KL of the *warped* distribution against a standard-normal base. The resynthesis ablation shows Flow-VAE beating a plain VAE on essentially every metric — wideband PESQ 4.30 versus 4.20, plus lower WER inside the full TTS system — and, more important per the paper, better *stability*. The transferable recipe is clean: in any "predict-the-latent-then-decode" generative stack, escape the standard-normal straitjacket by putting an invertible flow on the VAE latent, and escape the mel bottleneck by modeling a learned latent instead.
 
-A note on the vocoder, because it is easy to overlook: there is no separate off-the-shelf vocoder (no HiFi-GAN bolted on the end). The Flow-VAE *decoder* is the vocoder — the encoder-decoder is trained jointly, so the same network that defines the latent also reconstructs the waveform from it. The paper's resynthesis ablation labels the systems "Dac-Vae" and "Dac-Flow-Vae," which strongly implies a [DAC](/blog/machine-learning/signal-processing/hifi-gan)-style (Descript Audio Codec) encoder-decoder backbone. The significance is architectural tidiness: by making the latent and the vocoder two ends of one jointly-trained module, MiniMax avoids the train-test mismatch that plagues pipelines where a vocoder is trained separately on ground-truth mels and then asked to render imperfect generated mels at inference. When the same network defines and renders the latent, there is no representational gap to cross.
+A note on the vocoder, because it is easy to overlook: there is no separate off-the-shelf vocoder (no HiFi-GAN bolted on the end). The Flow-VAE *decoder* is the vocoder — the encoder-decoder is trained jointly, so the same network that defines the latent also reconstructs the waveform from it. The paper's resynthesis ablation labels the systems "Dac-Vae" and "Dac-Flow-Vae," which strongly implies a [DAC](/blog/machine-learning/text-to-speech/hifi-gan)-style (Descript Audio Codec) encoder-decoder backbone. The significance is architectural tidiness: by making the latent and the vocoder two ends of one jointly-trained module, MiniMax avoids the train-test mismatch that plagues pipelines where a vocoder is trained separately on ground-truth mels and then asked to render imperfect generated mels at inference. When the same network defines and renders the latent, there is no representational gap to cross.
 
 ### The flow-matching decoder
 

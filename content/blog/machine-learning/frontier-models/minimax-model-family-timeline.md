@@ -120,7 +120,7 @@ Between MiniMax-01 and M1, the media tracks moved fast. None of these ship weigh
 
 **Image-01 (April 2, 2025).** MiniMax's first text-to-image model, generating in multiple aspect ratios (release notes).
 
-**Speech-02 (April 2, 2025).** Announced in [the Speech-02 series post](https://www.minimax.io/news/speech-02-series) as the successor to Speech-01, in two tiers: Speech-02-HD for high-fidelity work like voiceovers and audiobooks, and Speech-02-Turbo for low latency. The launch post claims 30+ languages and zero-shot voice cloning from about 10 seconds of audio. On May 12, 2025, MiniMax published the research behind it: [MiniMax-Speech: Intrinsic Zero-Shot Text-to-Speech with a Learnable Speaker Encoder](https://arxiv.org/abs/2505.07916), arXiv 2505.07916. Its central idea is that the speaker encoder is trained jointly with the autoregressive TTS model instead of being a frozen speaker-verification network, and the acoustic side uses a Flow-VAE. The [MiniMax-Speech deep-dive](/blog/machine-learning/frontier-models/minimax-speech-speaker-encoder-flow-vae) covers both.
+**Speech-02 (April 2, 2025).** Announced in [the Speech-02 series post](https://www.minimax.io/news/speech-02-series) as the successor to Speech-01, in two tiers: Speech-02-HD for high-fidelity work like voiceovers and audiobooks, and Speech-02-Turbo for low latency. The launch post claims 30+ languages and zero-shot voice cloning from about 10 seconds of audio. On May 12, 2025, MiniMax published the research behind it: [MiniMax-Speech: Intrinsic Zero-Shot Text-to-Speech with a Learnable Speaker Encoder](https://arxiv.org/abs/2505.07916), arXiv 2505.07916. Its central idea is that the speaker encoder is trained jointly with the autoregressive TTS model instead of being a frozen speaker-verification network, and the acoustic side uses a Flow-VAE. The [MiniMax-Speech deep-dive](/blog/machine-learning/text-to-speech/minimax-speech-speaker-encoder-flow-vae) covers both.
 
 | Release | Date | Track | Key specs | Weights |
 | --- | --- | --- | --- | --- |
@@ -438,4 +438,4 @@ Two practical rules for any M2-line or M3 deployment. First, preserve the `<thin
 - [MiniMax-M2: Why They Walked Back Linear Attention for Agents](/blog/machine-learning/frontier-models/minimax-m2-full-attention-agentic)
 - [Reading the MiniMax Papers](/blog/machine-learning/frontier-models/minimax-papers-lightning-attention-cispo)
 - [MiniMax Sparse Attention](/blog/machine-learning/frontier-models/minimax-sparse-attention)
-- [MiniMax-Speech](/blog/machine-learning/frontier-models/minimax-speech-speaker-encoder-flow-vae)
+- [MiniMax-Speech](/blog/machine-learning/text-to-speech/minimax-speech-speaker-encoder-flow-vae)

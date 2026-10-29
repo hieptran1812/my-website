@@ -3,17 +3,7 @@ title: "Prosody, Emotion, and Expressive Speech: Beyond Intelligibility"
 date: "2026-06-17"
 publishDate: "2026-06-17"
 description: "Why correct TTS sounds flat, and the full toolkit for fixing it: reference encoders, global style tokens, explicit F0-energy-duration control, emotion labels, description-driven style, and the sampling that gives codec models expression for free."
-tags:
-  [
-    "audio-generation",
-    "audio-synthesis",
-    "text-to-speech",
-    "prosody",
-    "expressive-speech",
-    "voice-cloning",
-    "generative-ai",
-    "deep-learning",
-  ]
+tags: ["audio-generation", "audio-synthesis", "text-to-speech", "prosody", "expressive-speech", "voice-cloning", "generative-ai", "deep-learning", "tts", "speech-synthesis"]
 category: "machine-learning"
 subcategory: "Audio Generation"
 author: "Hiep Tran"

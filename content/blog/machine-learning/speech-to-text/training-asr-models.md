@@ -2,19 +2,8 @@
 title: "Training Automatic Speech Recognition Models: A Complete Guide"
 publishDate: "2026-04-17"
 category: "machine-learning"
-subcategory: "Deep Learning"
-tags:
-  [
-    "asr",
-    "speech-recognition",
-    "deep-learning",
-    "whisper",
-    "ctc",
-    "transducer",
-    "conformer",
-    "audio",
-    "transformer",
-  ]
+subcategory: "Speech-to-Text"
+tags: ["asr", "speech-recognition", "deep-learning", "whisper", "ctc", "transducer", "conformer", "audio", "transformer", "speech-to-text"]
 date: "2026-04-17"
 author: "Hiep Tran"
 featured: false

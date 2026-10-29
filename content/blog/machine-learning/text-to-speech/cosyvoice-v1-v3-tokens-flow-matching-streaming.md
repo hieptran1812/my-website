@@ -3,23 +3,9 @@ title: "Inside the CosyVoice Series: Supervised Speech Tokens, Flow Matching, an
 date: "2026-06-13"
 publishDate: "2026-06-13"
 description: "A technique-by-technique deep dive through three CosyVoice papers — supervised S3 tokens, FSQ, optimal-transport flow matching, unified streaming, and DiffRO post-training — and the engineering trade-offs behind each decision."
-tags:
-  [
-    "cosyvoice",
-    "text-to-speech",
-    "speech-synthesis",
-    "flow-matching",
-    "fsq",
-    "tokenizer",
-    "streaming",
-    "reinforcement-learning",
-    "voice-cloning",
-    "llm",
-    "audio",
-    "tts",
-  ]
+tags: ["cosyvoice", "text-to-speech", "speech-synthesis", "flow-matching", "fsq", "tokenizer", "streaming", "reinforcement-learning", "voice-cloning", "llm", "audio", "tts"]
 category: "machine-learning"
-subcategory: "Signal Processing"
+subcategory: "Text-to-Speech"
 author: "Hiep Tran"
 featured: true
 readTime: 50
@@ -29,7 +15,7 @@ Most engineers meet a text-to-speech system as a black box: text goes in, a `.wa
 
 The CosyVoice family from Alibaba's Tongyi Speech Lab is a good case to study because it ships as three papers across roughly eighteen months — [CosyVoice 1](https://arxiv.org/abs/2407.05407), [CosyVoice 2](https://arxiv.org/abs/2412.10117), and [CosyVoice 3](https://arxiv.org/abs/2505.17589) — and each one changes exactly one or two load-bearing components while keeping the skeleton fixed. That makes it a controlled experiment in TTS systems design. You can watch a single decision — the speech tokenizer, the streaming scheme, the post-training objective — get isolated, swapped, and measured. This post walks that arc technique by technique, and at every step asks the three questions that matter for a staff-level read: why does this work, when does it fail, and what is the second-order consequence nobody mentions in the abstract.
 
-If you want the companion "here is how you would actually train one" walkthrough with interview questions, I wrote that separately in [Training CosyVoice](/blog/machine-learning/deep-learning/training-cosyvoice). This piece is the opposite lens: a retrospective on *why* the architecture is shaped the way it is, with CosyVoice 3's net-new techniques — a multi-task tokenizer, differentiable reward optimization, and million-hour scaling — as the centerpiece.
+If you want the companion "here is how you would actually train one" walkthrough with interview questions, I wrote that separately in [Training CosyVoice](/blog/machine-learning/text-to-speech/training-cosyvoice). This piece is the opposite lens: a retrospective on *why* the architecture is shaped the way it is, with CosyVoice 3's net-new techniques — a multi-task tokenizer, differentiable reward optimization, and million-hour scaling — as the centerpiece.
 
 ## Why a modern TTS stack breaks the black-box assumption
 
@@ -593,8 +579,8 @@ The deeper point is that CosyVoice's three papers are a master class in *constra
 - [CosyVoice 2: Scalable Streaming Speech Synthesis with Large Language Models](https://arxiv.org/abs/2412.10117) — FSQ, the Qwen2.5 backbone, unified streaming, and chunk-aware flow matching.
 - [CosyVoice 3: Towards In-the-wild Speech Generation via Scaling-up and Post-training](https://arxiv.org/abs/2505.17589) — the multi-task tokenizer, DiffRO, the million-hour data pipeline, and CV3-Eval.
 - [Finite Scalar Quantization: VQ-VAE Made Simple](https://arxiv.org/abs/2309.15505) — the FSQ technique CosyVoice 2 adopts.
-- [Training CosyVoice: a complete guide](/blog/machine-learning/deep-learning/training-cosyvoice) — the companion how-to-train walkthrough with interview questions.
-- [Orpheus TTS and SNAC: LLM speech with codec tokens](/blog/machine-learning/signal-processing/orpheus-tts-llm-speech-snac) — a sibling LLM-codec TTS system for contrast.
-- [HiFi-GAN, the GAN vocoder explained](/blog/machine-learning/signal-processing/hifi-gan) — the vocoder CosyVoice uses as its final stage.
-- [Whisper internals: the ASR encoder](/blog/machine-learning/signal-processing/whisper-under-the-hood) — the ASR-encoder lineage that supervised speech tokens are tapped from.
+- [Training CosyVoice: a complete guide](/blog/machine-learning/text-to-speech/training-cosyvoice) — the companion how-to-train walkthrough with interview questions.
+- [Orpheus TTS and SNAC: LLM speech with codec tokens](/blog/machine-learning/text-to-speech/orpheus-tts-llm-speech-snac) — a sibling LLM-codec TTS system for contrast.
+- [HiFi-GAN, the GAN vocoder explained](/blog/machine-learning/text-to-speech/hifi-gan) — the vocoder CosyVoice uses as its final stage.
+- [Whisper internals: the ASR encoder](/blog/machine-learning/speech-to-text/whisper-under-the-hood) — the ASR-encoder lineage that supervised speech tokens are tapped from.
 - [Fine-tuning LLMs with DPO](/blog/machine-learning/large-language-model/fine-tuning-llm-with-dpo) — background on the preference-optimization method DiffRO improves upon.

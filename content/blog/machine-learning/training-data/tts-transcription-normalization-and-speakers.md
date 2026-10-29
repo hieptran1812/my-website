@@ -3,17 +3,7 @@ title: "TTS Transcripts, Text Normalization, and Speakers: The Text Side of Voic
 date: "2026-06-30"
 publishDate: "2026-06-30"
 description: "A principal-engineer field guide to the text half of a text-to-speech corpus: verbatim transcripts, text normalization, grapheme-to-phoneme, speaker diarization and embeddings, and how modern zero-shot TTS corpora are mined from audiobooks and podcasts at scale."
-tags:
-  - training-data
-  - text-to-speech
-  - text-normalization
-  - grapheme-to-phoneme
-  - speaker-diarization
-  - speaker-embeddings
-  - phonemization
-  - voice-cloning
-  - pyannote
-  - nemo
+tags: ["training-data", "text-to-speech", "text-normalization", "grapheme-to-phoneme", "speaker-diarization", "speaker-embeddings", "phonemization", "voice-cloning", "pyannote", "nemo", "tts", "speech-synthesis"]
 category: "machine-learning"
 subcategory: "Training Data"
 author: "Hiep Tran"
@@ -508,7 +498,7 @@ A voice-cloning paper reported a speaker-similarity of 0.95 and could not reprod
 
 ### 6. The Emilia bet on messy audio
 
-A team had a pristine 200-hour single-speaker corpus and a model that sounded natural but flat — it could not do expressive or conversational delivery. Adding a mined, in-the-wild multi-speaker corpus in the Emilia style (podcasts, talk shows, source-separated and filtered) — deliberately *messier* data — gave the model the prosodic range it lacked, at the cost of more aggressive filtering to keep noise out. Lesson: **studio-clean data teaches pronunciation; in-the-wild data teaches expression.** Zero-shot systems need both. This mirrors the streaming, expressive direction of systems like [CosyVoice](/blog/machine-learning/signal-processing/cosyvoice-v1-v3-tokens-flow-matching-streaming).
+A team had a pristine 200-hour single-speaker corpus and a model that sounded natural but flat — it could not do expressive or conversational delivery. Adding a mined, in-the-wild multi-speaker corpus in the Emilia style (podcasts, talk shows, source-separated and filtered) — deliberately *messier* data — gave the model the prosodic range it lacked, at the cost of more aggressive filtering to keep noise out. Lesson: **studio-clean data teaches pronunciation; in-the-wild data teaches expression.** Zero-shot systems need both. This mirrors the streaming, expressive direction of systems like [CosyVoice](/blog/machine-learning/text-to-speech/cosyvoice-v1-v3-tokens-flow-matching-streaming).
 
 ## When to reach for this machinery — and when not to
 
@@ -533,5 +523,5 @@ The unifying principle is the one we opened with: in TTS the transcript is the c
 - [Data for text-to-speech: cleaning and enhancement](/blog/machine-learning/training-data/data-for-text-to-speech-cleaning-and-enhancement) — the audio half of the same corpus problem.
 - [Neural codec language model TTS: VALL-E](/blog/machine-learning/audio-generation/neural-codec-language-model-tts-vall-e) — what large mined corpora unlock.
 - [Zero-shot voice cloning and the TTS frontier](/blog/machine-learning/audio-generation/zero-shot-voice-cloning-and-the-tts-frontier) — where speaker embeddings and multi-speaker data lead.
-- [CosyVoice v1–v3: tokens, flow matching, and streaming](/blog/machine-learning/signal-processing/cosyvoice-v1-v3-tokens-flow-matching-streaming) — a modern expressive, streaming system built on this kind of data.
+- [CosyVoice v1–v3: tokens, flow matching, and streaming](/blog/machine-learning/text-to-speech/cosyvoice-v1-v3-tokens-flow-matching-streaming) — a modern expressive, streaming system built on this kind of data.
 - NVIDIA NeMo `nemo_text_processing` (WFST text normalization), `phonemizer` + `espeak-ng` (G2P), and `pyannote.audio` (diarization and embeddings) — the three open-source workhorses used throughout this post.

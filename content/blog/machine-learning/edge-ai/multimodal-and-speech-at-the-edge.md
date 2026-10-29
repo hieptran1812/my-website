@@ -3,19 +3,7 @@ title: "Multimodal and speech at the edge: on-device VLMs and streaming ASR"
 date: "2026-06-17"
 publishDate: "2026-06-17"
 description: "Text LLMs on a phone are basically solved — the frontier is a device that can see, hear, and respond in real time, so this post derives the real-time factor, the vision-token prefill blowup, and the latency budget, then shows runnable whisper.cpp and small-VLM flows with measured numbers."
-tags:
-  [
-    "edge-ai",
-    "model-optimization",
-    "multimodal",
-    "speech-recognition",
-    "vision-language-models",
-    "whisper",
-    "streaming-asr",
-    "on-device-llm",
-    "inference",
-    "efficient-ml",
-  ]
+tags: ["edge-ai", "model-optimization", "multimodal", "speech-recognition", "vision-language-models", "whisper", "streaming-asr", "on-device-llm", "inference", "efficient-ml", "speech-to-text", "asr"]
 category: "machine-learning"
 subcategory: "Edge AI"
 author: "Hiep Tran"

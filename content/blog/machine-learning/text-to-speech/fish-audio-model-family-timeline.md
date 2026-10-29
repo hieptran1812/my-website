@@ -3,9 +3,9 @@ title: "The Fish Audio Family, Release by Release: From Fish Speech 1.0 to Drama
 date: "2026-10-23"
 publishDate: "2026-10-23"
 description: "A chronological reference catalog of Fish Audio's text-to-speech models from the Bert-VITS2 era to October 2026: Fish Speech 1.0 through 1.5, Fish Agent, OpenAudio S1 and S1-mini, Fish Audio S2 Pro, the hosted S2.1 Pro and the Drama 3 MoE, with dates, specs, licenses and primary sources."
-tags: ["fish-audio", "fish-speech", "text-to-speech", "speech-synthesis", "openaudio-s1", "fish-audio-s2", "drama-3", "open-weights", "model-family", "timeline"]
+tags: ["fish-audio", "fish-speech", "text-to-speech", "speech-synthesis", "openaudio-s1", "fish-audio-s2", "drama-3", "open-weights", "model-family", "timeline", "tts"]
 category: "machine-learning"
-subcategory: "Frontier Models"
+subcategory: "Text-to-Speech"
 author: "Hiep Tran"
 featured: false
 readTime: 20
@@ -19,7 +19,7 @@ That much churn makes the family hard to keep straight. Model names change (Fish
 
 Read the dates on the cards; the 2024 burst is stacked so the cards do not collide. One fact up front, because it is the question people ask most: **as of October 23, 2026, the newest open-weight Fish Audio model is Drama 3 (`fishaudio/drama-3`, released October 13, 2026), and the newest model on the hosted API is S2.1 Pro, which has no published weights.** The S2 Pro checkpoint from March 2026 remains supported in the same inference server.
 
-A note on method and dates. I pulled the GitHub release list for `fishaudio/fish-speech`, the Hugging Face Hub API for every model under `fishaudio` (sorted by creation date, with each repo's `config.json` and file list), the README at each release tag, the arXiv reports, and the Fish Audio blog and API docs. Where a release note or blog post exists I use its date. Where only the Hub exists I write "Hub created", which is a lower bound on the public date. Parameter counts marked "about" are my own estimates from a released config and checkpoint size, and I say so each time. If you want the technique-level story of S2 rather than a catalog, read the companion deep-dive on [Fish Audio S2's Dual-AR and multi-reward RL](/blog/paper-reading/speech-processing/fish-audio-s2-controllable-text-to-speech).
+A note on method and dates. I pulled the GitHub release list for `fishaudio/fish-speech`, the Hugging Face Hub API for every model under `fishaudio` (sorted by creation date, with each repo's `config.json` and file list), the README at each release tag, the arXiv reports, and the Fish Audio blog and API docs. Where a release note or blog post exists I use its date. Where only the Hub exists I write "Hub created", which is a lower bound on the public date. Parameter counts marked "about" are my own estimates from a released config and checkpoint size, and I say so each time. If you want the technique-level story of S2 rather than a catalog, read the companion deep-dive on [Fish Audio S2's Dual-AR and multi-reward RL](/blog/machine-learning/text-to-speech/fish-audio-s2-controllable-text-to-speech).
 
 ## The timeline at a glance
 
@@ -155,7 +155,7 @@ The release notes call it a "new Dual-AR architecture with Qwen3 backbone, repla
 | EmergentTTS-Eval win rate vs gpt-4o-mini-tts | 81.88% |
 | Streaming (one H200, SGLang) | RTF 0.195, ~100 ms to first audio |
 
-The report also shows where S2 is not the best: on its long-audio Chinese test Qwen3-TTS has a higher speaker-similarity mean (0.574 against 0.557), and CosyVoice 3 edges it on the hard Chinese set (5.83 against 5.99). License: the S2 release switched the repo to the **Fish Audio Research License**: free for research and non-commercial use, commercial use needs a separate license. For the technique-level walkthrough of the RL and data pipeline, see the [S2 deep-dive](/blog/paper-reading/speech-processing/fish-audio-s2-controllable-text-to-speech).
+The report also shows where S2 is not the best: on its long-audio Chinese test Qwen3-TTS has a higher speaker-similarity mean (0.574 against 0.557), and CosyVoice 3 edges it on the hard Chinese set (5.83 against 5.99). License: the S2 release switched the repo to the **Fish Audio Research License**: free for research and non-commercial use, commercial use needs a separate license. For the technique-level walkthrough of the RL and data pipeline, see the [S2 deep-dive](/blog/machine-learning/text-to-speech/fish-audio-s2-controllable-text-to-speech).
 
 ## S2.1 Pro (June 23, 2026, hosted only)
 

@@ -477,6 +477,6 @@ The through-line: TTS data work is the discipline of deciding what the model is 
 - [Speech data for ASR](/blog/machine-learning/training-data/speech-data-for-asr) — the opposite discipline: why recognizers want the messy audio a synthesizer must reject.
 - [TTS transcription, normalization, and speakers](/blog/machine-learning/training-data/tts-transcription-normalization-and-speakers) — the text-side companion to this audio-side post: punctuation, normalization, alignment, and speaker labeling.
 - [Text-to-speech from Tacotron to VITS](/blog/machine-learning/audio-generation/text-to-speech-from-tacotron-to-vits) — the acoustic models and vocoders that consume this data.
-- [Kokoro-82M](/blog/machine-learning/signal-processing/kokoro-82m) — a small, high-quality open TTS model, and a case study in what clean data buys you.
+- [Kokoro-82M](/blog/machine-learning/text-to-speech/kokoro-82m) — a small, high-quality open TTS model, and a case study in what clean data buys you.
 - [Measuring data quality](/blog/machine-learning/training-data/measuring-data-quality) — the clean-proxy-ablation loop for setting gate floors honestly.
 - LibriTTS (Zen et al., 2019) and LibriTTS-R (2023) — the corpora that prove ASR data is not TTS data.

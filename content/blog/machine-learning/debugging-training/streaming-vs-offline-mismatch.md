@@ -3,19 +3,7 @@ title: "Streaming vs Offline Mismatch: When Train-Offline, Deploy-Streaming Brea
 date: "2026-06-17"
 publishDate: "2026-06-17"
 description: "Your ASR model scores 8.7% WER in the offline eval and 16% in production, and the model never changed — here is how to localize the streaming gap and close it."
-tags:
-  [
-    "debugging",
-    "model-training",
-    "speech",
-    "asr",
-    "streaming",
-    "finetuning",
-    "deep-learning",
-    "pytorch",
-    "torchaudio",
-    "train-serve-skew",
-  ]
+tags: ["debugging", "model-training", "speech", "asr", "streaming", "finetuning", "deep-learning", "pytorch", "torchaudio", "train-serve-skew", "speech-to-text", "speech-recognition"]
 category: "machine-learning"
 subcategory: "Debugging Training"
 author: "Hiep Tran"

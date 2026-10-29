@@ -3,18 +3,7 @@ title: "Text-to-Speech: From Tacotron to VITS"
 date: "2026-06-17"
 publishDate: "2026-06-17"
 description: "How neural TTS went from a brittle attention-aligned mel predictor to a single end-to-end model that turns text into a waveform with natural prosody, and the duration-prediction idea that made it robust."
-tags:
-  [
-    "audio-generation",
-    "audio-synthesis",
-    "text-to-speech",
-    "tacotron",
-    "fastspeech",
-    "vits",
-    "generative-ai",
-    "deep-learning",
-    "speech-synthesis",
-  ]
+tags: ["audio-generation", "audio-synthesis", "text-to-speech", "tacotron", "fastspeech", "vits", "generative-ai", "deep-learning", "speech-synthesis", "tts"]
 category: "machine-learning"
 subcategory: "Audio Generation"
 author: "Hiep Tran"
