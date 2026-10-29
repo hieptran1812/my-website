@@ -16,24 +16,25 @@ const workExperience = [
     period: "Jan 2024 - Present",
     type: "Full-time",
     description:
-      "Developing and maintaining multimodal AI companion with capabilities for chat conversations, image sharing, and visual understanding through camera interactions",
+      "Building agent frameworks, multimodal AI companions, RAG pipelines and the training and serving stack behind them, from fine-tuning to multi-node GPU training.",
     responsibilities: [
-      "Conducted research on controlling Large Language Model behavior without explicit prompting through activation steering techniques",
-      "Developed and maintained multimodal AI companion integrating vision-language models for understanding images and natural conversations about visual content. Implemented real-time camera interaction system enabling users to share images and receive intelligent responses based on visual understanding",
-      "Architected end-to-end RAG pipeline integrating document ingestion, chunking, embedding, vector storage, and LLM-based answer generation for financial reports and market data",
-      "Built chat interface with multimodal context awareness, supporting seamless transitions between text and image-based conversations",
-      "Performed Large Language Model and vision model fine-tuning including SFT, DPO, and multimodal alignment tasks, with scalable model serving using vLLM and SGlang",
-      "Developed core framework supporting long-term memory, tool usage, dynamic prompts, and multi-turn multimodal interactions",
-      "Worked on additional AI capabilities including user emotion detection from text and images, image generation with diffusion models and LoRA, and multi-speaker diarization",
+      "Agent Harness: Built agent framework with long-term memory, tool calling, dynamic prompts and multi-turn interactions; used the Jev System One model for fast routing and guardrailing; built agent evaluation and benchmarks",
+      "Multimodal AI Companion: Integrated vision-language models for real-time camera interaction and conversations about images",
+      "RAG: Architected end-to-end pipeline (ingestion, chunking, embedding, vector search, generation) for financial reports and market data",
+      "Fine-tuning & Serving: SFT, DPO and multimodal alignment for LLMs and vision models; serving with vLLM and SGLang",
+      "Distributed Training: Multi-GPU, multi-node model training on NVIDIA H100 clusters",
+      "Research: Activation steering to control LLM behavior without prompting or fine-tuning",
+      "Other: Emotion detection from text and images; image generation with diffusion models and LoRA",
     ],
     technologies: [
       "Python",
       "PyTorch",
       "LLM",
       "AI Agent",
-      "LangChain",
+      "RAG",
       "vLLM",
-      "SGlang",
+      "SGLang",
+      "H100",
     ],
     icon: "🔬",
   },
@@ -46,61 +47,39 @@ const workExperience = [
     description:
       "Developing and maintaining AI systems for Vietnamese document understanding and computer vision applications for social media platforms.",
     responsibilities: [
-      "Developing and maintaining Automated Information Extraction module for Vietnamese document understanding, often achieve 99% of accuracy",
-      "Developing and optimizing automatic face attendance system with face detection and recognition, mask wearing check, person tracking modules",
-      "Development of image and video classification system for Lotus social network",
+      "Document Understanding: Built and maintained information extraction module for Vietnamese documents, often reaching 99% accuracy",
+      "Face Recognition: Developed and optimized face attendance system with face detection and recognition, mask checking and person tracking",
+      "Image & Video Classification: Built content classification system for the Lotus social network",
+      "Generative AI: Fine-tuned Stable Diffusion to automatically generate banners",
+      "MLOps: Deployed models with Kubernetes, Docker, Triton Inference Server and FastAPI; automated training and deployment pipelines with Airflow",
     ],
     technologies: [
       "Python",
       "PyTorch",
       "Computer Vision",
       "NLP",
+      "Stable Diffusion",
+      "Kubernetes",
+      "Triton",
       "Airflow",
-      "Docker",
     ],
     icon: "🔬",
-  },
-  {
-    title: "AI Engineer",
-    company: "A.L.I.S VIETNAM",
-    location: "Hanoi, Vietnam",
-    period: "April 2022 - Dec 2022",
-    type: "Personal Project",
-    description:
-      "Developing a system to convert speech and text into sign language to assist Deaf people in accessing information.",
-    responsibilities: [
-      "Study of speech-to-text, text-to-speech models, GANs, recognition and conversion models to human actions",
-      "Implement pipeline for machine learning model using FastAPI, Docker, Kubeflow",
-      "Research and development of multimodal AI systems for accessibility",
-      "Design and implement real-time processing systems for sign language conversion",
-    ],
-    technologies: [
-      "Python",
-      "GANs",
-      "Speech Recognition",
-      "Computer Vision",
-      "FastAPI",
-      "Docker",
-      "Kubeflow",
-    ],
-    icon: "🤝",
   },
   {
     title: "Viblo Algorithm Content Creator",
     company: "Sun* Vietnam",
     location: "Hanoi, Vietnam",
-    period: "June 2021 - Dec 2023",
+    period: "June 2021 - June 2024",
     type: "Content Creator",
     description:
       "Contributing articles and algorithmic challenges on the Viblo ecosystem, focusing on AI/ML education and research.",
     responsibilities: [
       "Contributing articles, algorithmic challenges on the Viblo ecosystem",
-      "Research and publish articles on Computer Vision, Natural Language Processing, Recommendation system and MLOps",
-      "Creating educational content for the developer community",
-      "Sharing insights on latest AI/ML trends and technologies",
+      "Research and publish articles on Computer Vision, Large Language Model, Natural Language Processing, Recommendation system and MLOps",
     ],
     technologies: [
       "Computer Vision",
+      "LLM",
       "Natural Language Processing",
       "Recommendation Systems",
       "MLOps",
@@ -129,6 +108,50 @@ const workExperience = [
       "Time Series",
     ],
     icon: "🔬",
+  },
+];
+
+// Personal Projects
+const personalProjects = [
+  {
+    title: "Founder & Solo Developer",
+    company: "BandPeak",
+    url: "https://bandpeak.com/",
+    location: "Hanoi, Vietnam",
+    period: "Sep 2026 - Present",
+    type: "Personal Project",
+    description:
+      "Building a comprehensive AI-powered English learning platform covering IELTS mock exams, vocabulary, grammar, pronunciation and listening.",
+    responsibilities: [
+      "Building a comprehensive AI-powered English learning platform covering IELTS mock exams, vocabulary, grammar, pronunciation and listening",
+      "Developed AI grading for Writing and Speaking, AI writing coach, spoken roleplay and chat tutor",
+    ],
+    technologies: ["LLM", "Speech AI", "AI Grading", "EdTech"],
+    icon: "🚀",
+  },
+  {
+    title: "AI Engineer",
+    company: "A.L.I.S VIETNAM",
+    url: "",
+    location: "Hanoi, Vietnam",
+    period: "April 2022 - 2023",
+    type: "Personal Project",
+    description:
+      "Developing a system to convert speech and text into sign language to assist Deaf people in accessing information.",
+    responsibilities: [
+      "Developing a system to convert speech and text into sign language to assist Deaf people in accessing information",
+      "Studying of speech-to-text, text-to-speech models, GANs, recognition and conversion models to human actions",
+      "Implement pipeline for machine learning model using FastAPI, Docker",
+    ],
+    technologies: [
+      "Python",
+      "GANs",
+      "Speech Recognition",
+      "Text-to-Speech",
+      "FastAPI",
+      "Docker",
+    ],
+    icon: "🤝",
   },
 ];
 
@@ -176,12 +199,10 @@ const awards = {
     {
       title: "Developer Circles Vietnam Innovation Challenge",
       organizer: "Facebook and Coderschool",
-      achievement: "FPT Track Winner",
+      achievement: "FPT Track Challenge Winner",
       icon: "🏅",
       year: "2022",
     },
-  ],
-  innovation: [
     {
       title: "Build On Vietnam 2022",
       organizer: "Amazon Web Services",
@@ -190,9 +211,9 @@ const awards = {
       year: "2022",
     },
     {
-      title: "Creative Idea Challenge",
+      title: "Creative Idea Challenge 2022",
       organizer:
-        "School of Information and Communication Technology - Hanoi University of Science and Technology",
+        "School of Information and Communication Technology, Hanoi University of Science and Technology",
       achievement: "First Prize",
       icon: "💡",
       year: "2022",
@@ -207,14 +228,14 @@ const awards = {
       year: "2022",
     },
     {
-      title: "P-Startup Student Startup Idea Contest",
+      title: "P-Startup Student Startup Idea Contest 2022",
       organizer: "Posts and Telecommunications Institute of Technology",
       achievement: "First Prize",
       icon: "🥇",
       year: "2022",
     },
     {
-      title: "Social Business Creation",
+      title: "Social Business Creation 2022",
       organizer: "HEC Montréal",
       achievement: "Finalist",
       icon: "🌟",
@@ -224,7 +245,7 @@ const awards = {
   technical: [
     {
       title: "VAIPE Medicine Pill Image Recognition Challenge",
-      organizer: "VinUni-Illinois Smart Health Center (VISHC) at VinUniversity",
+      organizer: "VinUni-Illinois Smart Health Center (VISHC), VinUniversity",
       achievement: "Encouragement Prize",
       icon: "🔬",
       year: "2022",
@@ -241,24 +262,34 @@ const awards = {
 
 const education = [
   {
-    degree: "Master of Science in Computer Science",
-    institution: "Posts And Telecommunications Institute of Technology",
+    degree: "Master of Computer Science",
+    institution: "Posts and Telecommunications Institute of Technology",
     year: "2024-2026",
     specialization: "Machine Learning & AI",
+    highlights: [
+      "Researching AI safety and alignment, including controlling LLM behavior through activation steering",
+      "Studying interpretability and robustness of open-weight foundation models, including the Qwen, DeepSeek, Kimi and Gemma families",
+    ],
     coursework: [
-      "Advanced Machine Learning",
+      "Machine Learning",
       "Deep Learning",
-      "Computer Vision",
+      "Large Language Models",
       "Natural Language Processing",
-      "Distributed Systems",
+      "Computer Vision",
+      "Reinforcement Learning",
       "Advanced Algorithms",
+      "Distributed Systems",
     ],
   },
   {
-    degree: "Bachelor of Science in Computer Science",
-    institution: "Posts And Telecommunications Institute of Technology",
+    degree: "Bachelor of Computer Science",
+    institution: "Posts and Telecommunications Institute of Technology",
     year: "2018-2023",
     specialization: "Software Engineering",
+    highlights: [
+      "CPA: 3.25/4",
+      "Merit-based Scholarship for Excellent Students in the semesters of freshman, sophomore and junior",
+    ],
     coursework: [
       "Data Structures & Algorithms",
       "Software Engineering",
@@ -268,7 +299,40 @@ const education = [
       "Web Development",
       "Artificial Intelligence",
     ],
-    gpa: "3.25/4.0",
+  },
+];
+
+// Technical Skills
+const technicalSkills = [
+  { category: "Programming Languages", items: ["Python", "Java"] },
+  {
+    category: "AI Frameworks/Libraries",
+    items: [
+      "PyTorch",
+      "Transformers",
+      "LangChain",
+      "Haystack",
+      "LlamaIndex",
+      "Scikit-learn",
+      "OpenCV",
+      "TRL",
+      "Unsloth",
+    ],
+  },
+  {
+    category: "Backend and Database",
+    items: ["FastAPI", "Redis", "SQL", "Qdrant"],
+  },
+  { category: "Cloud and Tools", items: ["Git", "GCP"] },
+  {
+    category: "MLOps",
+    items: [
+      "Docker",
+      "Kubernetes",
+      "Triton Inference Server",
+      "vLLM",
+      "SGLang",
+    ],
   },
 ];
 
@@ -288,7 +352,6 @@ const AwardsCarousel = ({
 }) => {
   const categories = [
     { id: "hackathons", name: "Hackathons", icon: "🚀" },
-    { id: "innovation", name: "Innovation", icon: "💡" },
     { id: "entrepreneurship", name: "Entrepreneurship", icon: "💼" },
     { id: "technical", name: "Technical Competitions", icon: "🔬" },
   ];
@@ -412,7 +475,9 @@ const AwardsCarousel = ({
                 className="text-xl sm:text-2xl font-semibold mb-6 flex items-center"
                 style={{ color: "var(--text-primary)" }}
               >
-                <span className="mr-3 text-xl sm:text-2xl">{category.icon}</span>
+                <span className="mr-3 text-xl sm:text-2xl">
+                  {category.icon}
+                </span>
                 {category.name}
               </h3>
 
@@ -705,177 +770,206 @@ export default function About() {
               ))}
             </div>
           </div>{" "}
-          {/* Work Experience Timeline */}
-          <div className="mb-20">
-            <ScrollReveal animation="fade-up" duration={700}>
-              <h2
-                className="text-3xl sm:text-4xl font-bold text-center mb-4"
-                style={{ color: "var(--text-primary)" }}
-              >
-                Professional Experience
-              </h2>
-            </ScrollReveal>
-            <ScrollReveal animation="fade-up" delay={100} duration={700}>
-              <p
-                className="text-lg text-center mb-12 max-w-3xl mx-auto"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Timeline of my professional journey in AI research and software
-                development
-              </p>
-            </ScrollReveal>
-            <div className="space-y-8">
-              {workExperience.map((job, index) => (
-                <ScrollReveal
-                  key={index}
-                  animation="slide-left"
-                  delay={150 + index * 100}
-                  duration={800}
+          {/* Work Experience Timeline + Personal Projects */}
+          {[
+            {
+              heading: "Professional Experience",
+              subtitle:
+                "Timeline of my professional journey in AI research and software development",
+              items: workExperience,
+            },
+            {
+              heading: "Personal Projects",
+              subtitle: "Products and side projects I build on my own",
+              items: personalProjects,
+            },
+          ].map((section) => (
+            <div className="mb-20" key={section.heading}>
+              <ScrollReveal animation="fade-up" duration={700}>
+                <h2
+                  className="text-3xl sm:text-4xl font-bold text-center mb-4"
+                  style={{ color: "var(--text-primary)" }}
                 >
-                  <div className="relative">
-                    {/* Timeline connector */}
-                    {index < workExperience.length - 1 && (
-                      <div
-                        className="absolute left-8 top-20 w-0.5 h-16 z-0"
-                        style={{ backgroundColor: "var(--card-border)" }}
-                      />
-                    )}
-
-                    <div
-                      className="relative p-5 sm:p-8 rounded-2xl border transform hover:shadow-lg hover:scale-[1.01] transition-all duration-300"
-                      style={{
-                        backgroundColor: "var(--card-bg)",
-                        borderColor: "var(--card-border)",
-                      }}
+                  {section.heading}
+                </h2>
+              </ScrollReveal>
+              <ScrollReveal animation="fade-up" delay={100} duration={700}>
+                <p
+                  className="text-lg text-center mb-12 max-w-3xl mx-auto"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  {section.subtitle}
+                </p>
+              </ScrollReveal>
+              <div className="space-y-8">
+                {section.items.map(
+                  (
+                    job: (typeof section.items)[number] & { url?: string },
+                    index,
+                  ) => (
+                    <ScrollReveal
+                      key={index}
+                      animation="slide-left"
+                      delay={150 + index * 100}
+                      duration={800}
                     >
-                      <div className="grid md:grid-cols-4 gap-6">
-                        {/* Timeline icon and period */}
-                        <div className="md:col-span-1">
-                          <div className="flex flex-col items-start">
-                            <div
-                              className="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4 border-4 transition-all duration-300 hover:scale-110"
-                              style={{
-                                backgroundColor: "var(--card-bg)",
-                                borderColor: "var(--accent)",
-                                color: "var(--accent)",
-                              }}
-                            >
-                              {job.icon}
-                            </div>
-                            <div
-                              className="text-sm font-bold mb-1"
-                              style={{ color: "var(--accent)" }}
-                            >
-                              {job.period}
-                            </div>
-                            <div
-                              className="text-xs"
-                              style={{ color: "var(--text-secondary)" }}
-                            >
-                              {job.type}
-                            </div>
-                          </div>
-                        </div>
+                      <div className="relative">
+                        {/* Timeline connector */}
+                        {index < section.items.length - 1 && (
+                          <div
+                            className="absolute left-8 top-20 w-0.5 h-16 z-0"
+                            style={{ backgroundColor: "var(--card-border)" }}
+                          />
+                        )}
 
-                        {/* Job details */}
-                        <div className="md:col-span-3">
-                          <div className="mb-4">
-                            <h3
-                              className="text-2xl font-bold mb-2"
-                              style={{ color: "var(--text-primary)" }}
-                            >
-                              {job.title}
-                            </h3>
-                            <p
-                              className="text-lg font-semibold mb-1"
-                              style={{ color: "var(--accent)" }}
-                            >
-                              {job.company}
-                            </p>
-                            <p
-                              className="text-sm mb-4"
-                              style={{ color: "var(--text-secondary)" }}
-                            >
-                              📍 {job.location}
-                            </p>
-                            <p
-                              className="leading-relaxed mb-4"
-                              style={{ color: "var(--text-secondary)" }}
-                            >
-                              {job.description}
-                            </p>
-                          </div>
-
-                          {/* Responsibilities */}
-                          <div className="mb-4">
-                            <h4
-                              className="font-semibold mb-3"
-                              style={{ color: "var(--text-primary)" }}
-                            >
-                              Key Responsibilities:
-                            </h4>
-                            <ul className="space-y-2">
-                              {job.responsibilities.map((resp, idx) => (
-                                <li
-                                  key={idx}
-                                  className="flex items-start text-sm transition-all duration-300 hover:translate-x-1"
+                        <div
+                          className="relative p-5 sm:p-8 rounded-2xl border transform hover:shadow-lg hover:scale-[1.01] transition-all duration-300"
+                          style={{
+                            backgroundColor: "var(--card-bg)",
+                            borderColor: "var(--card-border)",
+                          }}
+                        >
+                          <div className="grid md:grid-cols-4 gap-6">
+                            {/* Timeline icon and period */}
+                            <div className="md:col-span-1">
+                              <div className="flex flex-col items-start">
+                                <div
+                                  className="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4 border-4 transition-all duration-300 hover:scale-110"
+                                  style={{
+                                    backgroundColor: "var(--card-bg)",
+                                    borderColor: "var(--accent)",
+                                    color: "var(--accent)",
+                                  }}
+                                >
+                                  {job.icon}
+                                </div>
+                                <div
+                                  className="text-sm font-bold mb-1"
+                                  style={{ color: "var(--accent)" }}
+                                >
+                                  {job.period}
+                                </div>
+                                <div
+                                  className="text-xs"
                                   style={{ color: "var(--text-secondary)" }}
                                 >
-                                  <span
-                                    className="mr-3 mt-1 text-xs"
-                                    style={{ color: "var(--accent)" }}
-                                  >
-                                    •
-                                  </span>
-                                  {resp}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                                  {job.type}
+                                </div>
+                              </div>
+                            </div>
 
-                          {/* Technologies */}
-                          <div>
-                            <h4
-                              className="font-semibold mb-3"
-                              style={{ color: "var(--text-primary)" }}
-                            >
-                              Technologies & Tools:
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {job.technologies.map((tech, idx) => (
-                                <span
-                                  key={idx}
-                                  className="px-3 py-1 rounded-lg text-xs font-medium transition-all duration-200 hover:scale-105"
-                                  style={{
-                                    backgroundColor: "var(--surface)",
-                                    color: "var(--text-secondary)",
-                                  }}
-                                  onMouseEnter={(e) => {
-                                    e.currentTarget.style.backgroundColor =
-                                      "var(--surface-accent)";
-                                    e.currentTarget.style.color =
-                                      "var(--accent)";
-                                  }}
-                                  onMouseLeave={(e) => {
-                                    e.currentTarget.style.backgroundColor =
-                                      "var(--surface)";
-                                    e.currentTarget.style.color =
-                                      "var(--text-secondary)";
-                                  }}
+                            {/* Job details */}
+                            <div className="md:col-span-3">
+                              <div className="mb-4">
+                                <h3
+                                  className="text-2xl font-bold mb-2"
+                                  style={{ color: "var(--text-primary)" }}
                                 >
-                                  {tech}
-                                </span>
-                              ))}
+                                  {job.title}
+                                </h3>
+                                <p
+                                  className="text-lg font-semibold mb-1"
+                                  style={{ color: "var(--accent)" }}
+                                >
+                                  {job.url ? (
+                                    <a
+                                      href={job.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="hover:underline"
+                                    >
+                                      {job.company}
+                                    </a>
+                                  ) : (
+                                    job.company
+                                  )}
+                                </p>
+                                <p
+                                  className="text-sm mb-4"
+                                  style={{ color: "var(--text-secondary)" }}
+                                >
+                                  📍 {job.location}
+                                </p>
+                                <p
+                                  className="leading-relaxed mb-4"
+                                  style={{ color: "var(--text-secondary)" }}
+                                >
+                                  {job.description}
+                                </p>
+                              </div>
+
+                              {/* Responsibilities */}
+                              <div className="mb-4">
+                                <h4
+                                  className="font-semibold mb-3"
+                                  style={{ color: "var(--text-primary)" }}
+                                >
+                                  Key Responsibilities:
+                                </h4>
+                                <ul className="space-y-2">
+                                  {job.responsibilities.map((resp, idx) => (
+                                    <li
+                                      key={idx}
+                                      className="flex items-start text-sm transition-all duration-300 hover:translate-x-1"
+                                      style={{ color: "var(--text-secondary)" }}
+                                    >
+                                      <span
+                                        className="mr-3 mt-1 text-xs"
+                                        style={{ color: "var(--accent)" }}
+                                      >
+                                        •
+                                      </span>
+                                      {resp}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+
+                              {/* Technologies */}
+                              <div>
+                                <h4
+                                  className="font-semibold mb-3"
+                                  style={{ color: "var(--text-primary)" }}
+                                >
+                                  Technologies & Tools:
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {job.technologies.map((tech, idx) => (
+                                    <span
+                                      key={idx}
+                                      className="px-3 py-1 rounded-lg text-xs font-medium transition-all duration-200 hover:scale-105"
+                                      style={{
+                                        backgroundColor: "var(--surface)",
+                                        color: "var(--text-secondary)",
+                                      }}
+                                      onMouseEnter={(e) => {
+                                        e.currentTarget.style.backgroundColor =
+                                          "var(--surface-accent)";
+                                        e.currentTarget.style.color =
+                                          "var(--accent)";
+                                      }}
+                                      onMouseLeave={(e) => {
+                                        e.currentTarget.style.backgroundColor =
+                                          "var(--surface)";
+                                        e.currentTarget.style.color =
+                                          "var(--text-secondary)";
+                                      }}
+                                    >
+                                      {tech}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ))}
+                    </ScrollReveal>
+                  ),
+                )}
+              </div>
             </div>
-          </div>
+          ))}
           <div className="mb-20">
             <ScrollReveal animation="fade-up" duration={700}>
               <h2
@@ -890,8 +984,8 @@ export default function About() {
                 className="text-lg text-center mb-12 max-w-3xl mx-auto"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Recognition for innovation, entrepreneurship, and technical
-                excellence
+                Recognition in hackathons, entrepreneurship, and technical
+                competitions
               </p>
             </ScrollReveal>
 
@@ -953,6 +1047,23 @@ export default function About() {
                         >
                           {edu.year} • Specialization: {edu.specialization}{" "}
                         </p>
+                        <ul className="space-y-1 mb-4">
+                          {edu.highlights.map((item, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start text-sm"
+                              style={{ color: "var(--text-secondary)" }}
+                            >
+                              <span
+                                className="mr-3 mt-1 text-xs"
+                                style={{ color: "var(--accent)" }}
+                              >
+                                •
+                              </span>
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
                         <div>
                           <h4
                             className="font-semibold mb-2"
@@ -1004,6 +1115,54 @@ export default function About() {
               ))}
             </div>
           </div>
+          {/* Technical Skills */}
+          <div className="mb-20">
+            <ScrollReveal animation="fade-up" duration={700}>
+              <h2
+                className="text-3xl sm:text-4xl font-bold text-center mb-12"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Technical Skills
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal animation="fade-up" delay={150} duration={800}>
+              <div
+                className="max-w-5xl mx-auto p-5 sm:p-8 rounded-2xl border space-y-5"
+                style={{
+                  backgroundColor: "var(--card-bg)",
+                  borderColor: "var(--card-border)",
+                }}
+              >
+                {technicalSkills.map((group) => (
+                  <div
+                    key={group.category}
+                    className="grid md:grid-cols-4 gap-3 items-start"
+                  >
+                    <h3
+                      className="font-semibold"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      {group.category}
+                    </h3>
+                    <div className="md:col-span-3 flex flex-wrap gap-2">
+                      {group.items.map((item) => (
+                        <span
+                          key={item}
+                          className="px-3 py-1 rounded-lg text-sm"
+                          style={{
+                            backgroundColor: "var(--surface)",
+                            color: "var(--text-secondary)",
+                          }}
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+          </div>
           {/* Research Interests */}
           <div className="mb-20">
             <ScrollReveal animation="fade-up" duration={700}>
@@ -1054,9 +1213,10 @@ export default function About() {
                             •
                           </span>
                           <div>
-                            <strong>Large Language Models & NLP:</strong>{" "}
-                            Advancing transformer architectures, few-shot
-                            learning, and multilingual understanding
+                            <strong>AI Safety & Interpretability:</strong>{" "}
+                            Controlling LLM behavior through activation
+                            steering; interpretability and robustness of
+                            open-weight models (Qwen, DeepSeek, Kimi, Gemma)
                           </div>
                         </li>
                       </ScrollReveal>
@@ -1073,9 +1233,9 @@ export default function About() {
                             •
                           </span>
                           <div>
-                            <strong>Computer Vision & Multimodal AI:</strong>{" "}
-                            Developing efficient vision models and cross-modal
-                            learning systems
+                            <strong>LLM Agents & Multimodal AI:</strong> Agent
+                            frameworks with memory and tool calling,
+                            vision-language models, and RAG systems
                           </div>
                         </li>
                       </ScrollReveal>
@@ -1092,9 +1252,9 @@ export default function About() {
                             •
                           </span>
                           <div>
-                            <strong>MLOps & AI Infrastructure:</strong> Building
-                            scalable ML systems and automated deployment
-                            pipelines
+                            <strong>Fine-tuning & Serving:</strong> SFT, DPO and
+                            multimodal alignment; serving with vLLM, SGLang and
+                            Triton Inference Server
                           </div>
                         </li>
                       </ScrollReveal>
@@ -1111,9 +1271,8 @@ export default function About() {
                             •
                           </span>
                           <div>
-                            <strong>Distributed Systems:</strong> Designing
-                            fault-tolerant, high-performance computing systems
-                            for AI workloads
+                            <strong>Distributed Training:</strong> Multi-GPU,
+                            multi-node model training on NVIDIA H100 clusters
                           </div>
                         </li>
                       </ScrollReveal>
@@ -1281,7 +1440,7 @@ export default function About() {
                     duration={700}
                   >
                     <a
-                      href="https://linkedin.com/in/hieptran1812"
+                      href="https://www.linkedin.com/in/hieptran01/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center px-8 py-4 font-semibold rounded-xl transition-all duration-200 border shadow-lg hover:shadow-xl transform hover:scale-105"
