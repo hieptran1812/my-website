@@ -3,7 +3,7 @@
 **Subcategory:** `learn-from-kaggle` (EXISTING folder, renders "Learn from Kaggle"; holds the AIMO-2 solutions post and will hold the Game-Agents series)
 **Path:** `content/blog/machine-learning/learn-from-kaggle/<slug>.md`
 **frontmatter:** `category: "machine-learning"` · `subcategory: "Learn from Kaggle"`
-**Size:** **41 posts, 9 tracks (A to I), 7 waves of 6** (2 posts deferred until their competitions close). **STATUS: PLANNED 2026-10-27, awaiting user approval.**
+**Size:** **41 posts, 9 tracks (A to I).** **STATUS 2026-10-31: 38/41 SHIPPED (A1, B1–B7, C1–C5, D1, D2, D4–D6, E1–E5, F1–F8, H1–H6, I1). Remaining DEFERRED: D3 ARC Prize 2026 (winners 2026-12-04), G1 Gemma 4 Developer Agent (closes 2026-12-02), G2 Name That LLM (closes 2027-01-13): re-fetch bank sections first, then add each to I1's to-come box removal.**
 **Language:** English (repo rule; state it in every agent brief). Request came in VN: *viết writeup chi tiết, dễ hiểu cho từng cuộc thi dựa vào writeup các đội đã publish và discussion; trình bày dễ hiểu, chi tiết, hình minh hoạ trực quan.*
 **Skill:** `blog-writer` (ML engine).
 
