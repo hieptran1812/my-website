@@ -53,7 +53,7 @@ A **bond** is a loan you make to a government or a company. You hand over, say, 
 
 So why does a bond's *price* move around if its payments are fixed? Because the world's interest rate changes, and that changes what a fixed stream is worth. Here is the intuition. Suppose you own a bond paying \$30 a year (a 3% coupon on \$1,000). Now suppose newly issued bonds start paying \$50 a year (5%) because the central bank raised rates. Nobody wants your stingy \$30 bond at \$1,000 anymore — they can get \$50 elsewhere. So the price of your bond *falls* until its effective yield matches the new 5%. **When interest rates rise, existing bond prices fall; when rates fall, existing bond prices rise.** This inverse relationship is the most important fact in fixed income.
 
-The sensitivity of a bond's price to a change in rates is called its **duration**, measured in years. A bond with a duration of 17 years (typical for a long Treasury) loses about 17% of its value if rates rise 1 percentage point, and gains about 17% if rates fall 1 point. This is why **long-dated** bonds swing the most — and it is the entire explanation for why long Treasuries fell about 31% in 2022 when long-term yields jumped. Duration is leverage on the interest rate: the longer the bond, the bigger the price move per unit of rate change. We lean on the full [duration and convexity](/blog/trading/macro-trading/real-vs-nominal-inflation-real-yields-master-signal) mechanism rather than re-deriving it here.
+The sensitivity of a bond's price to a change in rates is called its **duration**, measured in years. A bond with a duration of 17 years (typical for a long Treasury) loses about 17% of its value if rates rise 1 percentage point, and gains about 17% if rates fall 1 point. This is why **long-dated** bonds swing the most — and it is the entire explanation for why long Treasuries fell about 31% in 2022 when long-term yields jumped. Duration is leverage on the interest rate: the longer the bond, the bigger the price move per unit of rate change. We lean on the full [duration and convexity](/blog/trading/macro-trading/how-monetary-policy-moves-bonds-duration-convexity) mechanism rather than re-deriving it here.
 
 ### The discount rate: the variable that prices everything
 
@@ -100,15 +100,15 @@ Take stock volatility of 16% and bond volatility of 12% (roughly long-Treasury l
 
 - First term: (0.6 × 16)^2 = 9.6^2 = 92.2
 - Second term: (0.4 × 12)^2 = 4.8^2 = 23.0
-- Cross term: 2 × 0.6 × 0.4 × (−0.40) × 16 × 12 = −35.4
-- Variance = 92.2 + 23.0 − 35.4 = 79.8 → volatility = √79.8 ≈ **8.9%**
+- Cross term: 2 × 0.6 × 0.4 × (−0.40) × 16 × 12 = −36.9
+- Variance = 92.2 + 23.0 − 36.9 = 78.3 → volatility = √78.3 ≈ **8.9%**
 
 Now flip the correlation to +0.60, as in 2022, holding everything else fixed:
 
-- Cross term: 2 × 0.6 × 0.4 × (+0.60) × 16 × 12 = +53.1
-- Variance = 92.2 + 23.0 + 53.1 = 168.3 → volatility = √168.3 ≈ **13.0%**
+- Cross term: 2 × 0.6 × 0.4 × (+0.60) × 16 × 12 = +55.3
+- Variance = 92.2 + 23.0 + 55.3 = 170.5 → volatility = √170.5 ≈ **13.1%**
 
-The same holdings — not one share bought or sold — went from about 8.9% volatility to about 13.0%, a **46% jump in risk**, purely because the correlation flipped sign. On a \$1,000,000 portfolio, a one-standard-deviation bad year went from roughly a \$89,000 swing to roughly a \$130,000 swing. **The flip did not just lose money; it silently made the entire portfolio far riskier than its owner believed, with no change in what was held.**
+The same holdings — not one share bought or sold — went from about 8.9% volatility to about 13.1%, a **48% jump in risk**, purely because the correlation flipped sign. On a \$1,000,000 portfolio, a one-standard-deviation bad year went from roughly an \$89,000 swing to roughly a \$131,000 swing. **The flip did not just lose money; it silently made the entire portfolio far riskier than its owner believed, with no change in what was held.**
 
 ## The damage: the worst year for 60/40 in a century
 
@@ -118,7 +118,7 @@ Now the carnage, asset by asset. The chart below shows 2022 total returns across
 
 The numbers are stark. The S&P 500 returned about −18.1%. The Nasdaq 100, packed with long-duration tech whose value sits far in the future, returned about −32.5% — the discount-rate hit lands hardest on the longest-dated cash flows, whether those cash flows belong to a 20-year bond or a high-growth software company. Long Treasuries (20-year-plus) returned about −31.2%, their worst calendar year in the history of the index. Even investment-grade corporate bonds fell about 15.4% and high-yield bonds about 11.2%. The plain 60/40 portfolio lost about 16.1%.
 
-To put that 16% in perspective: a balanced 60/40 portfolio of US stocks and bonds has had only a handful of years worse than 2022 in the last hundred-plus years, and most of those were in the Great Depression. What made 2022 uniquely painful was not the *size* of the loss but its *character*. In a normal bad year — 2008, say — stocks crater but bonds rally hard, so 60/40 loses far less than stocks alone. In 2008, the S&P fell about 37% while long Treasuries *gained* roughly 26%, so a 60/40 portfolio lost only about 13% — far less than the stock leg, exactly as the hedge promised. In 2022, the bonds fell *more* than the stocks. The hedge did not just fail to help; it was the bigger source of the loss. That contrast — bonds up 26% in 2008 versus down 31% in 2022, against similar-sized equity drawdowns — is the single cleanest illustration of what the correlation sign does to a portfolio. Same two assets, same balanced split, opposite outcomes, and the only thing that changed was whether the dominant shock was a growth scare or an inflation scare.
+To put that 16% in perspective: a balanced 60/40 portfolio of US stocks and bonds has had only a handful of years worse than 2022 in the last hundred-plus years, and most of those were in the Great Depression. What made 2022 uniquely painful was not the *size* of the loss but its *character*. In a normal bad year — 2008, say — stocks crater but bonds rally hard, so 60/40 loses far less than stocks alone. In 2008, the S&P fell about 37% while long Treasuries *gained* roughly 26%, so a 60/40 portfolio built with long Treasuries lost only about 12%, far less than the stock leg, exactly as the hedge promised. In 2022, the bonds fell *more* than the stocks. The hedge did not just fail to help; it was the bigger source of the loss. That contrast — bonds up 26% in 2008 versus down 31% in 2022, with stocks falling in both years — is the single cleanest illustration of what the correlation sign does to a portfolio. Same two assets, same balanced split, opposite outcomes, and the only thing that changed was whether the dominant shock was a growth scare or an inflation scare.
 
 #### Worked example: the 60/40 drawdown on a \$100,000 portfolio
 
@@ -161,7 +161,7 @@ Trace it node by node. An **inflation shock** hit: US CPI tore from under 2% to 
 
 Now the single discount rate forks into both assets. On the equity side, a higher discount rate means future earnings are worth less today, so **price-to-earnings multiples compress** — investors pay fewer dollars per dollar of earnings. Stocks fell, with the longest-duration names (tech, the Nasdaq) hit hardest. On the bond side, a higher yield means **duration bites**: a long Treasury with ~17-year duration loses roughly 17% per percentage point of yield increase, and yields rose more than two points. Bonds fell, hard.
 
-The two falling assets converge on the bottom node: the **correlation flips** from about −0.40 to +0.60. This is the heart of the matter. In a growth shock, the discount rate moves *down* (Fed cuts), which lifts bonds while stocks fall — opposite directions, negative correlation. In an inflation shock, the discount rate moves *up* (Fed hikes), which sinks both — same direction, positive correlation. **The sign of the stock-bond correlation is, to a first approximation, the sign of what is happening to the discount rate, and that is set by whether the dominant shock is growth or inflation.**
+The two falling assets converge on the final node: the **correlation flips** from about −0.40 to +0.60. This is the heart of the matter. In a growth shock, the discount rate moves *down* (Fed cuts), which lifts bonds while stocks fall — opposite directions, negative correlation. In an inflation shock, the discount rate moves *up* (Fed hikes), which sinks both — same direction, positive correlation. **The sign of the stock-bond correlation is, to a first approximation, the sign of what is happening to the discount rate, and that is set by whether the dominant shock is growth or inflation.**
 
 This is why 2022 was not a freak. The diversification 60/40 sells depends on the Fed *cutting* into a stock selloff. When the Fed is *hiking* into an inflation shock, that whole machine runs in reverse. The bonds are no longer a hedge against the stocks; they are a second, more leveraged bet on the same rising rate. Two assets collapse into one trade. The [cross-asset transmission map](/blog/trading/macro-trading/how-policy-moves-every-asset-cross-asset-transmission-map) shows how the same rate move propagates across every market, not just these two.
 
@@ -185,7 +185,7 @@ The story is in the two lines. CPI was running near or below the Fed's 2% target
 
 That is the input to the whole chain. A 9.1% inflation print is the kind of number that forces a central bank to choose price stability over everything else, including the stock market and the bond market. The Fed's reaction function in 2022 was the inverse of a growth scare: instead of cutting to support asset prices, it hiked to crush demand, *knowing* it would hurt asset prices.
 
-It is worth naming the policy error that amplified the shock, because it is part of why the flip was so violent. Through most of 2021, the Fed insisted the inflation was "transitory" — a temporary side effect of supply-chain snarls and reopening demand that would fade on its own. So it kept the funds rate at zero and kept buying bonds (quantitative easing) even as CPI climbed past 5%, then 6%, then 7%. When the "transitory" call was finally abandoned in late 2021 and early 2022, the Fed found itself far behind the curve, with inflation near 8% and a policy rate still at zero. The catch-up was therefore not a measured tightening but a sprint — four straight 0.75-point hikes, a pace unheard of in the modern era. A more gradual tightening, begun earlier, might have repriced the discount rate slowly enough to spread the pain across years; instead the entire repricing was compressed into nine months, which is why both stocks and bonds fell so far so fast. The lateness of the start made the steepness of the path, and the steepness of the path is what made the correlation flip so abrupt. For the full mechanism of how the Fed's path drives the front end of the curve, see [the fed funds path and front-end correlation](/blog/trading/macro-correlations/the-fed-funds-path-and-front-end-correlation); for the macro narrative of the cycle itself, see the macro-trading post on [2021-2023 inflation and the fastest hiking cycle](/blog/trading/macro-trading/the-business-cycle-four-phases-for-traders).
+It is worth naming the policy error that amplified the shock, because it is part of why the flip was so violent. Through most of 2021, the Fed insisted the inflation was "transitory" — a temporary side effect of supply-chain snarls and reopening demand that would fade on its own. So it kept the funds rate at zero and kept buying bonds (quantitative easing) even as CPI climbed past 5%, then 6%, then 7%. When the "transitory" call was finally abandoned in late 2021 and early 2022, the Fed found itself far behind the curve, with inflation near 8% and a policy rate still at zero. The catch-up was therefore not a measured tightening but a sprint — four straight 0.75-point hikes, a pace unheard of in the modern era. A more gradual tightening, begun earlier, might have repriced the discount rate slowly enough to spread the pain across years; instead the entire repricing was compressed into nine months, which is why both stocks and bonds fell so far so fast. The lateness of the start made the steepness of the path, and the steepness of the path is what made the correlation flip so abrupt. For the full mechanism of how the Fed's path drives the front end of the curve, see [the fed funds path and front-end correlation](/blog/trading/macro-correlations/the-fed-funds-path-and-front-end-correlation); for the macro narrative of the cycle itself, see the macro-trading post on [2021-2023 inflation and the fastest hiking cycle](/blog/trading/macro-trading/2021-2023-inflation-and-the-fastest-hiking-cycle).
 
 The deeper lesson is about which shock dominates. In a low-inflation world, the Fed has the freedom to cut whenever markets wobble — the so-called "Fed put" — because there is no inflation constraint. In a high-inflation world, that freedom vanishes. The Fed *cannot* ride to the rescue, because cutting would re-ignite the inflation it is trying to kill. So the negative stock-bond correlation, which depends on the Fed cutting into weakness, is structurally unavailable. The inflation regime does not merely flip the correlation; it removes the mechanism that would have made it negative.
 
@@ -205,10 +205,10 @@ Suppose you are deciding how much faith to put in your bond hedge today, and cor
 
 Quantify the cost. With corr = +0.05 instead of the −0.40 you assumed, redo the 60/40 variance from earlier (stock vol 16%, bond vol 12%):
 
-- Cross term at corr +0.05: 2 × 0.6 × 0.4 × 0.05 × 16 × 12 = +4.4
-- Variance = 92.2 + 23.0 + 4.4 = 119.6 → volatility = √119.6 ≈ **10.9%**
+- Cross term at corr +0.05: 2 × 0.6 × 0.4 × 0.05 × 16 × 12 = +4.6
+- Variance = 92.2 + 23.0 + 4.6 = 119.8 → volatility = √119.8 ≈ **10.9%**
 
-Versus 8.9% at the assumed −0.40, your real risk is about **22% higher** than the brochure implied, and a single bad inflation surprise could push the correlation into outright positive territory. **The number that matters for your hedge is not last decade's average correlation; it is the inflation regime you are standing in right now — and a 3.5% reading means the hedge is already gone.**
+Versus 8.9% at the assumed −0.40, your real risk is about **24% higher** than the brochure implied, and a single bad inflation surprise could push the correlation into outright positive territory. **The number that matters for your hedge is not last decade's average correlation; it is the inflation regime you are standing in right now — and a 3.5% reading means the hedge is already gone.**
 
 ## How it shows up in real markets: the 2022 timeline
 
@@ -249,7 +249,7 @@ Two assets deserve a closer look because they confused a lot of investors. **Gol
 
 **TIPS** (Treasury Inflation-Protected Securities) also surprised people. You might expect inflation-linked bonds to thrive in a 9% inflation year, but TIPS fell about 12% in 2022. The reason: TIPS are still *bonds*, with duration, and the real-yield component rose enough to overwhelm the inflation-compensation gain. They fell less than nominal Treasuries (the inflation accrual helped), but they still fell, because duration risk dominated. The takeaway is that even the "inflation bond" is not immune when the shock is a *rate* shock — the discount-rate channel reaches almost everything with fixed cash flows.
 
-The broad lesson is not "sell all your stocks and bonds." It is that a portfolio whose only two assets are stocks and bonds has *one* effective bet — the discount rate — even though it looks like two. True diversification against an inflation shock requires an asset with the opposite inflation exposure: real assets, commodities, energy, or cash that re-prices upward as rates rise. The [all-weather and risk-parity](/blog/trading/cross-asset/correlation-and-the-diversification-free-lunch) approach of owning every macro regime exists precisely to survive years like 2022, when the two assets everyone owns collapse into one.
+The broad lesson is not "sell all your stocks and bonds." It is that a portfolio whose only two assets are stocks and bonds has *one* effective bet — the discount rate — even though it looks like two. True diversification against an inflation shock requires an asset with the opposite inflation exposure: real assets, commodities, energy, or cash that re-prices upward as rates rise. The [all-weather and risk-parity](/blog/trading/cross-asset/all-weather-and-risk-parity-owning-every-regime) approach of owning every macro regime exists precisely to survive years like 2022, when the two assets everyone owns collapse into one.
 
 #### Worked example: what a 10% commodity sleeve would have added
 
@@ -272,11 +272,11 @@ This matters because risk-budgeting models, which professional allocators use to
 
 Let us put precise numbers on the risk transformation, building on the earlier calculation. Use stock volatility 16%, bond volatility 12%, weights 0.6 and 0.4, and a \$500,000 portfolio. The portfolio variance has three pieces: the stock term (fixed at 92.2), the bond term (fixed at 23.0), and the cross term, which is the only thing the correlation touches.
 
-- At corr = −0.40: cross term = −35.4 → variance 79.8 → vol **8.9%** → a one-sigma year swings about \$44,600.
+- At corr = −0.40: cross term = −36.9 → variance 78.3 → vol **8.9%** → a one-sigma year swings about \$44,300.
 - At corr = 0.00: cross term = 0 → variance 115.2 → vol **10.7%** → a one-sigma year swings about \$53,700.
-- At corr = +0.60: cross term = +53.1 → variance 168.3 → vol **13.0%** → a one-sigma year swings about \$64,900.
+- At corr = +0.60: cross term = +55.3 → variance 170.5 → vol **13.1%** → a one-sigma year swings about \$65,300.
 
-The cross term swung by 88.5 points of variance (from −35.4 to +53.1) — more than the entire stock term and bond term combined could not change. On the \$500,000 portfolio, the *expected* size of a bad year grew from roughly \$44,600 to roughly \$64,900, a **45% increase in risk**, with not one share traded. **The single most important number in your portfolio is the one that never appears on your statement — the correlation between your assets — and in 2022 it quietly turned a moderate-risk portfolio into an aggressive one overnight.**
+The cross term swung by 92.2 points of variance (from −36.9 to +55.3), as much as the entire stock term and four times the bond term. On the \$500,000 portfolio, the *expected* size of a bad year grew from roughly \$44,300 to roughly \$65,300, a **48% increase in risk**, with not one share traded. **The single most important number in your portfolio is the one that never appears on your statement — the correlation between your assets — and in 2022 it quietly turned a moderate-risk portfolio into an aggressive one overnight.**
 
 ## Common misconceptions
 
@@ -328,5 +328,5 @@ Within this series — the correlation structure itself:
 Mechanism and portfolio context (other complete series):
 
 - [Cross-asset: the 60/40 engine](/blog/trading/cross-asset/stock-bond-correlation-the-60-40-engine) — the portfolio math of the stock-bond correlation.
-- [Macro-trading: the business cycle and the fastest hiking cycle](/blog/trading/macro-trading/the-business-cycle-four-phases-for-traders) — the macro narrative of the 2021-2023 inflation shock.
+- [Macro-trading: 2021-2023 inflation and the fastest hiking cycle](/blog/trading/macro-trading/2021-2023-inflation-and-the-fastest-hiking-cycle) — the macro narrative of the 2021-2023 inflation shock.
 - [Macro-trading: how policy moves every asset](/blog/trading/macro-trading/how-policy-moves-every-asset-cross-asset-transmission-map) — how a single rate move propagates across all markets.

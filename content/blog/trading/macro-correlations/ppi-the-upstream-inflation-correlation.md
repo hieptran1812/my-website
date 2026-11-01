@@ -19,7 +19,7 @@ readTime: 40
 > - **Desks nowcast core PCE off PPI.** Several PCE components — health-care services, financial services, portfolio management, air transport — are built directly from PPI source data, not from CPI. A PPI surprise mechanically nudges the PCE estimate even before PCE is released.
 > - **PPI's market beta is muted.** A PPI surprise moves rates, stocks, and the dollar the *same direction* as a CPI surprise but with a much smaller move, because it is a noisier and only-partial read on the consumer inflation the Fed targets.
 
-In the spring of 2022, the most frightening inflation number in America was not the one that made the front page. The headline Consumer Price Index hit 8.5% year-over-year in March 2022 and that was the figure on every screen. But a day earlier, a quieter release had landed: the Producer Price Index for final demand had jumped **11.7%** year-over-year — the hottest in the history of that series. Producers, the firms that make and ship physical goods, were paying and charging far more than consumers were yet feeling. The shock was already in the system; it simply had not finished traveling down the price ladder to the checkout aisle.
+In the spring of 2022, the most frightening inflation number in America was not the one that made the front page. The headline Consumer Price Index hit 8.5% year-over-year in March 2022 and that was the figure on every screen. But a day later, a quieter release landed: the Producer Price Index for final demand had jumped **11.7%** year-over-year — the hottest in the history of that series. Producers, the firms that make and ship physical goods, were paying and charging far more than consumers were yet feeling. The shock was already in the system; it simply had not finished traveling down the price ladder to the checkout aisle.
 
 Traders who understood the *order* of that ladder had an edge. They knew that the 11.7% producer print was not a separate story from the 8.5% consumer print — it was the *same* inflation, observed one rung higher up, where it arrives first. They knew that some of that producer heat would pass through to consumer goods over the following months, and some of it would get absorbed by fattened or thinned corporate margins instead. And they knew the Federal Reserve does not target either PPI or CPI directly — it targets a third gauge, core PCE, several of whose ingredients are lifted *straight out of the PPI report*. The producer print was, quietly, a read-through to the one number the central bank actually watches.
 
@@ -162,7 +162,7 @@ When you compute the cross-correlation between PPI and core *goods* CPI — slid
 Two things follow from that short lead, and they pull in opposite directions:
 
 - **It is not a long-horizon forecast.** You cannot look at today's PPI and confidently call CPI two quarters out. The chain from producer gate to consumer checkout for physical goods is short, so PPI's predictive horizon is short too. Anyone selling PPI as a crystal ball for next year's inflation is overpromising.
-- **It is a genuine same-week edge.** Because PPI is released a day before CPI in most months, that one-month statistical lead becomes a *one-day* informational lead in practice. The PPI print is real, fresh data about the same inflation that CPI will report hours later. A hot PPI goods number is a real (if noisy) reason to lean toward a hot CPI print the next morning.
+- **It is a genuine same-week edge.** In months when PPI is released the day before CPI, that one-month statistical lead becomes a *one-day* informational lead in practice. The PPI print is real, fresh data about the same inflation that CPI will report hours later. A hot PPI goods number is a real (if noisy) reason to lean toward a hot CPI print the next morning.
 
 #### Worked example: from a PPI surprise to a CPI lean
 
@@ -188,7 +188,7 @@ Suppose the PPI report shows the **portfolio-management and investment-advice** 
 
 - contribution ≈ +1.5% × 1.5% weight = **+0.0225pp** to monthly core PCE.
 
-That is more than two hundredths of a point on core PCE from a *single* PPI services line, before any other component moves. Annualized, a +0.02pp monthly surprise is roughly +0.27pp on the annual core-PCE pace — not trivial when the Fed is parsing whether core PCE is running at a 2.6% or a 2.9% pace. **This is the concrete mechanism behind "desks revise their PCE estimate off PPI": the PPI report literally contains the source prices for parts of the Fed's target gauge, so a PPI surprise updates the PCE estimate by arithmetic, not by analogy.** When you hear a strategist say "today's PPI raised our core-PCE tracking estimate by three basis points," this is exactly the calculation they ran.
+That is more than two hundredths of a point on core PCE from a *single* PPI services line, before any other component moves. Annualized, a +0.0225pp monthly surprise is roughly +0.27pp on the annual core-PCE pace — not trivial when the Fed is parsing whether core PCE is running at a 2.6% or a 2.9% pace. **This is the concrete mechanism behind "desks revise their PCE estimate off PPI": the PPI report literally contains the source prices for parts of the Fed's target gauge, so a PPI surprise updates the PCE estimate by arithmetic, not by analogy.** When you hear a strategist say "today's PPI raised our core-PCE tracking estimate by three basis points," this is exactly the calculation they ran.
 
 ### Why PPI's own market reaction is muted
 
@@ -224,7 +224,7 @@ Take an identical +5% input-cost shock to a goods producer and run it through th
 - **Hot-demand regime.** Output price rises 5% × 0.9 = **+4.5%**. On a \$10.00 product with \$7.00 cost: new cost \$7.35, new price \$10.45, new margin \$3.10 — margin *rises* by \$0.10. Here rising PPI is bullish for the producer (it has pricing power) and the shock lands in CPI (+4.5% on this good).
 - **Soft-demand regime.** Output price rises 5% × 0.3 = **+1.5%**. New cost \$7.35, new price \$10.15, new margin \$2.80 — margin *falls* by \$0.20. Here the same rising PPI is bearish for the producer (it eats the cost) and barely reaches CPI (+1.5%).
 
-The identical +5% PPI shock produced a +\$0.10 margin and a hot CPI in one regime, and a −\$0.20 margin and a cool CPI in the other. **The shock did not change; the pricing-power regime did — and it flipped the sign of both the equity effect and the CPI read-through.** This is why you must always pair a PPI print with a read on demand before you decide what it means.
+The identical +5% PPI shock produced a +\$0.10 margin and a hot CPI in one regime, and a −\$0.20 margin and a cool CPI in the other. **The shock did not change; the pricing-power regime did — and it flipped the sign of the equity effect while shrinking the CPI read-through to a third.** This is why you must always pair a PPI print with a read on demand before you decide what it means.
 
 ## The margin angle: when PPI becomes an equity trade
 
@@ -258,7 +258,7 @@ So the same wedge that is bearish for margins on the way up can be bullish on th
 
 Five myths about producer prices, each corrected with a number or a mechanism.
 
-**Myth 1: "PPI is a reliable leading indicator of CPI by several months."** No. PPI leads core *goods* CPI by about **one month**, not a quarter, and it barely leads *headline* CPI at all because headline CPI is dominated by services and shelter that PPI does not touch. The lead is real but short. If you are using last quarter's PPI to forecast this quarter's CPI, you are extrapolating a one-month signal four times too far.
+**Myth 1: "PPI is a reliable leading indicator of CPI by several months."** No. PPI leads core *goods* CPI by about **one month**, not a quarter, and it barely leads *headline* CPI at all because headline CPI is dominated by services and shelter that PPI does not touch. The lead is real but short. If you are using last quarter's PPI to forecast this quarter's CPI, you are extrapolating a one-month signal three times too far.
 
 **Myth 2: "A hot PPI means a hot CPI tomorrow, dollar for dollar."** No. The empirical pass-through slope is about **0.72**, and the same-month read-through from a goods-PPI surprise to core-goods CPI is a few hundredths of a point — a thumb on the scale, not an arithmetic prediction. PPI shifts the *probability* of a hot CPI; it does not set its value. Roughly 30 cents of every producer-price dollar never reaches the consumer.
 
@@ -286,7 +286,7 @@ The very top of the upstream chain is energy, and it is the cleanest place to wa
 
 ### The monthly ritual: PPI as the CPI read-through
 
-Every month, the cleanest live demonstration is the PPI-then-CPI sequence. In a typical month PPI lands the day before CPI. When PPI's goods and PCE-relevant services lines surprise hot, desks immediately mark up both their CPI estimate for the next morning and their core-PCE nowcast, and rates drift in the hawkish direction *into* the CPI print. When PPI surprises cold, the opposite. The PPI report is the warm-up act that sets the crowd's expectations for the CPI headliner — which is precisely the read-through framing developed in the event-trading companion, [PPI: the upstream signal and the CPI read-through](/blog/trading/event-trading/ppi-the-upstream-signal-and-cpi-read-through). That post covers the intraday reaction mechanics; this one covers the correlation structure underneath them.
+Every month, the cleanest live demonstration is the PPI-then-CPI sequence. In months when PPI lands the day before CPI, the sequence is cleanest. When PPI's goods and PCE-relevant services lines surprise hot, desks immediately mark up both their CPI estimate for the next morning and their core-PCE nowcast, and rates drift in the hawkish direction *into* the CPI print. When PPI surprises cold, the opposite. The PPI report is the warm-up act that sets the crowd's expectations for the CPI headliner — which is precisely the read-through framing developed in the event-trading companion, [PPI: the upstream signal and the CPI read-through](/blog/trading/event-trading/ppi-the-upstream-signal-and-cpi-read-through). That post covers the intraday reaction mechanics; this one covers the correlation structure underneath them.
 
 #### Worked example: the full-sample correlation from the arrays
 

@@ -148,16 +148,16 @@ For roughly 2007 to 2021, this relationship was almost a straight line.
 
 ![Gold versus the ten-year real yield scatter with the two regimes split](/imgs/blogs/the-macro-asset-correlation-matrix-6.png)
 
-Look at the blue dots and the down-sloping line: as real yields rose, gold fell, year after year, with a correlation around −0.8 to −0.9 over that window. That is one of the cleanest macro correlations you will ever find, which is why this series gives it a dedicated post: [real yields and the cleanest macro correlation](/blog/trading/macro-correlations/real-yields-and-the-cleanest-macro-correlation).
+Look at the red dots and the down-sloping line: as real yields rose, gold fell, year after year, with a correlation of about −0.9 or stronger over that window (−0.96 on these annual points). That is one of the cleanest macro correlations you will ever find, which is why this series gives it a dedicated post: [real yields and the cleanest macro correlation](/blog/trading/macro-correlations/real-yields-and-the-cleanest-macro-correlation).
 
-Now look at the orange points — 2022 through 2025. They sit *above* the line, completely off the old relationship. Real yields rose sharply (from negative to around +2%), and by the textbook gold should have collapsed. Instead it climbed to record highs above \$2,600/oz. The correlation in that window flipped to roughly +0.6. What broke it? A new buyer that does not care about opportunity cost: central banks, especially in emerging markets, bought gold aggressively to diversify away from the dollar after the 2022 reserve freezes. A clean fifteen-year correlation can break in a single regime, and this is the canonical case.
+Now look at the orange points — 2022 through 2025. They sit *above* the line, completely off the old relationship. Real yields rose sharply (from negative to around +2%), and by the textbook gold should have collapsed. Instead it climbed to record highs, averaging about \$3,430/oz in 2025 and trading above \$4,000 late that year. The correlation in that window flipped to roughly +0.7. What broke it? A new buyer that does not care about opportunity cost: central banks, especially in emerging markets, bought gold aggressively to diversify away from the dollar after the 2022 reserve freezes. A clean fifteen-year correlation can break in a single regime, and this is the canonical case.
 
 #### Worked example: full-sample correlation versus the regime split
 
 Here is the lie of the full sample, made arithmetic. Using the gold-versus-real-yield data:
 
 - Over **2007-2021**, the correlation between the real yield and the gold price is about **−0.9** (a strong, clean inverse link).
-- Over **2022-2025**, the correlation is about **+0.8** (the decoupling — gold and real yields rose together).
+- Over **2022-2025**, the correlation is about **+0.7** (the decoupling — gold and real yields rose together).
 - Over the **full 2007-2025 sample**, the two regimes partly cancel and the correlation collapses toward roughly **0** — "no relationship at all."
 
 If you had naively computed one correlation over the whole period, you would have concluded gold and real yields are unrelated — exactly backwards from the truth, which is that they are *very* strongly related, just with the sign depending on the regime. The intuition: never trust a single full-sample correlation; always ask whether it is averaging across two opposite worlds.
@@ -198,7 +198,7 @@ There is a beautiful, counterintuitive twist in the credit row. *Wider* spreads 
 
 - When the high-yield spread is tight at about **3.0%**, the S&P's subsequent 12-month return averages around **+10%** — decent, but you are buying when everyone is calm and valuations are full.
 - When the spread blows out to about **8.0%**, the subsequent 12-month return averages around **+18%**.
-- At a crisis-level **10.8%** spread (think the depths of 2008), the forward return averages around **+35%**.
+- At a crisis-level **10.8%** spread (territory first crossed in late 2008 and revisited at the March 2020 peak), the forward return averages around **+35%**.
 
 The intuition: wide spreads mean fear is already in the price, and fear that is already priced is the friend of future returns — the credit canary that warns you of the drawdown *as it happens* is the same signal that, at its extreme, marks the best entry points. (Contemporaneous correlation: strongly negative. Forward-looking correlation: strongly positive. Same data, opposite sign, depending on whether you mean "now" or "next year" — a perfect illustration of why lead-lag matters.)
 
@@ -243,7 +243,7 @@ The matrix is not an abstraction. Here are three dated episodes where reading it
 
 **2022 — the year the matrix flipped.** This is the master case. Inflation ran to a 40-year high (CPI peaked at 9.06% in June 2022), the Fed hiked the funds rate from near zero to 4.5% in nine months, and the 10-year real yield rocketed from about −0.95% in late 2021 to roughly +1.7% by late 2022. Read the rates row of the matrix and you can predict the whole year: stocks down (S&P −18%), bonds down *harder* (long Treasuries −30%), gold flat despite record inflation (real yields up), the dollar up (DXY to a peak of 114.8 in September), EM hammered, crypto crushed (Bitcoin from \$46k to \$16.5k). Every one of those moves is the rates-and-real-yields row playing out, plus the dollar row reinforcing it. The matrix did not fail in 2022 — it *worked*, for anyone who knew which row was driving.
 
-**2023-2024 — gold breaks its leash.** Real yields stayed high (around +1.7% to +2.2%), so by the textbook gold should have languished. Instead it rallied to records above \$2,600/oz by 2025. The "clean" gold-versus-real-yield correlation broke because a price-insensitive buyer — central banks diversifying reserves — entered the market. Anyone reading the matrix as gospel would have shorted gold into a 40%+ rally. The lesson is not that the matrix is wrong; it is that every cell can flip when a *new mechanism* shows up, and you have to keep asking "is the usual driver still in charge?"
+**2023-2024 — gold breaks its leash.** Real yields stayed high (around +1.7% to +2.2%), so by the textbook gold should have languished. Instead it rallied to records, averaging about \$3,430/oz in 2025 and topping \$4,000 late in the year. The "clean" gold-versus-real-yield correlation broke because a price-insensitive buyer — central banks diversifying reserves — entered the market. Anyone reading the matrix as gospel would have shorted gold into a 40%+ rally. The lesson is not that the matrix is wrong; it is that every cell can flip when a *new mechanism* shows up, and you have to keep asking "is the usual driver still in charge?"
 
 **2024-2025 — Bitcoin's correlation fades.** As the acute liquidity stress of 2022 receded, Bitcoin's correlation with the Nasdaq drifted from +0.6 back toward +0.2-0.3. An asset that traded as pure high-beta risk in the squeeze started to trade somewhat more on its own (ETF flows, halving cycle, idiosyncratic crypto news). The cell did not flip sign, but its *strength* changed a lot — a reminder that even when the direction holds, the magnitude is regime-dependent, and a hedge sized for a +0.6 correlation is mis-sized when it drops to +0.2.
 

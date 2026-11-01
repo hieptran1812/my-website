@@ -80,7 +80,7 @@ Look at the actual path of the US unemployment rate over the last few years. It 
 
 ![US unemployment rate path with the 2020 spike and slow normalization](/imgs/blogs/unemployment-claims-and-the-recession-correlation-2.png)
 
-Read the chart left to right. In February 2020, U-3 was **3.5%** — a fifty-year low. The economy looked spectacular. Two months later, after the pandemic shutdowns, it hit **14.8%**, the highest since the Great Depression. Then it spent four years grinding back down toward 3.4%, before drifting *up* again to 4.3% by 2026.
+Read the chart left to right. In February 2020, U-3 was **3.5%** — a fifty-year low. The economy looked spectacular. Two months later, after the pandemic shutdowns, it hit **14.8%**, the highest since the Great Depression. Then it spent nearly three years grinding back down toward 3.4%, before drifting *up* again to 4.3% by 2026.
 
 Now ask the question that matters: at any point on this chart, could the *level* have warned you of the next downturn? In February 2020 the level was 3.5% and screaming "all is well" — one month before the sharpest recession in living memory. That is the lagging indicator's fatal flaw: **the level looks best right before the cycle breaks.** A low unemployment rate is not a sign of safety; it is, if anything, a sign of a late cycle, because unemployment is lowest at the *peak*, just before the contraction.
 
@@ -127,7 +127,7 @@ Assume the 3-month-average unemployment rate prints these values (illustrative, 
 
 ```
 month         3m-avg U-3
-2023-06          3.5%      <- the trailing-12m low
+2023-11          3.5%      <- the trailing-12m low
 2024-01          3.7%
 2024-04          3.9%
 2024-07          4.1%
@@ -187,31 +187,31 @@ In the recession phase, representative real returns are roughly **−10% for sto
 Now let us make the rotation pay, with explicit dollars. Suppose in March your labor signals line up — claims have broken higher, and you judge recession probability has jumped. You manage a **\$10,000,000** balanced book, currently allocated **70% stocks / 30% bonds**:
 
 ```
-starting book          \$10,000,000
-  stocks  (70%)        \$7,000,000
-  bonds   (30%)        \$3,000,000
+starting book          $10,000,000
+  stocks  (70%)        $7,000,000
+  bonds   (30%)        $3,000,000
 ```
 
 You execute the recession playbook and flip to **30% stocks / 70% bonds**:
 
 ```
 rotated book
-  stocks  (30%)        \$3,000,000
-  bonds   (70%)        \$7,000,000
+  stocks  (30%)        $3,000,000
+  bonds   (70%)        $7,000,000
 ```
 
 Over the following recessionary year, using the clock's representative returns (stocks −10%, government bonds +10%):
 
 ```
 had you NOT rotated (70/30):
-  stocks  \$7,000,000 x (1 - 0.10) = \$6,300,000
-  bonds   \$3,000,000 x (1 + 0.10) = \$3,300,000
-  total                              \$9,600,000   (-4.0%)
+  stocks  $7,000,000 x (1 - 0.10) = $6,300,000
+  bonds   $3,000,000 x (1 + 0.10) = $3,300,000
+  total                              $9,600,000   (-4.0%)
 
 after rotating (30/70):
-  stocks  \$3,000,000 x (1 - 0.10) = \$2,700,000
-  bonds   \$7,000,000 x (1 + 0.10) = \$7,700,000
-  total                              \$10,400,000  (+4.0%)
+  stocks  $3,000,000 x (1 - 0.10) = $2,700,000
+  bonds   $7,000,000 x (1 + 0.10) = $7,700,000
+  total                              $10,400,000  (+4.0%)
 ```
 
 The rotation turned a **−\$400,000** loss into a **+\$400,000** gain — an **\$800,000 swing** on a \$10M book, worth **8 percentage points** of relative performance. The intuition: in a recession the sign of the stock-bond bet flips, so the single most valuable thing your labor signal bought you was the conviction to be *long bonds and light stocks* before the rate confirmed what the claims data already knew.
@@ -243,7 +243,7 @@ price change  ≈  -duration x change in yield
               ≈  -16 x (-1.25%)
               ≈  +20%
 
-dollar gain   ≈  \$2,000,000 x 0.20  =  \$400,000
+dollar gain   ≈  $2,000,000 x 0.20  =  $400,000
 ```
 
 So the long-bond leg earns roughly **\$400,000** on a 1.25pp rate decline — and that is *before* the coupons you collect along the way. Meanwhile the stocks you sold to fund it were falling. The intuition: in a recession the central bank's rate cuts are a transfer of value from growth assets to duration, and owning duration is how you stand on the receiving end of that transfer. The longer the duration, the larger your share — which is why "long the long end" is the classic recession trade, and why getting the labor signal right early enough to put it on matters so much.
@@ -278,7 +278,7 @@ expected fwd return  =  3.4 x (spread) - 9
 So with the spread at 8%, the model points to roughly **+18%** over the next year. Say you decide to add **\$500,000** of equity exposure on this signal. The point estimate implies an expected gain of:
 
 ```
-\$500,000 x 0.182 = \$91,000 expected gain over 12 months
+$500,000 x 0.182 = $91,000 expected gain over 12 months
 ```
 
 The intuition — and the giant caveat — is that this is an *average* over historical wide-spread episodes; the realized outcome has a huge spread of its own (sometimes the spread widens further before it recovers, and you are early and underwater for months). The signal tells you the *odds are in your favor when fear is extreme*, not that any single trade will work. You are paid for buying the fear, on average, because the fear was overdone — but "on average" is doing heavy lifting, and you must size for the path, not just the destination.
@@ -293,9 +293,9 @@ The COVID shock is the cleanest possible illustration of both the labor signal a
 
 What did the correlation do? For about two weeks in March 2020, **everything fell together** — stocks, corporate bonds, gold, even Treasuries briefly, as the "dash for cash" forced investors to sell whatever they could. This is the recurring lesson that [correlations go to one in a crisis](/blog/trading/cross-asset/when-correlations-go-to-one-in-a-crisis): the diversification you counted on evaporates exactly when you need it most. (We build this failure mode in [correlation during crises, when diversification fails](/blog/trading/macro-correlations/correlation-during-crises-when-diversification-fails).)
 
-But then, once the Federal Reserve flooded the system with liquidity and cut rates to zero, the *normal* recession correlation reasserted itself with a vengeance: **bonds and duration won.** Long Treasuries rallied hard as yields collapsed toward record lows; the 10-year fell to **0.62%** by mid-2020. An investor who had been long duration through the spring — or who rotated into it as the labor catastrophe became clear — was richly rewarded. The everything-to-one phase was brief; the risk-off phase that followed was the textbook recession correlation, just compressed into weeks because the shock was so violent.
+But then, once the Federal Reserve flooded the system with liquidity and cut rates to zero, the *normal* recession correlation reasserted itself with a vengeance: **bonds and duration won.** Long Treasuries rallied hard as yields collapsed toward record lows; the 10-year closed at a record low near **0.5%** in August 2020. An investor who had been long duration through the spring — or who rotated into it as the labor catastrophe became clear — was richly rewarded. The everything-to-one phase was brief; the risk-off phase that followed was the textbook recession correlation, just compressed into weeks because the shock was so violent.
 
-Watch the broader cross-asset map snap into the recession configuration as the panic resolved. The dollar spiked in the dash-for-cash (everyone needed dollars to meet margin calls and fund redemptions), then eased as the Fed's liquidity reached the system — a textbook risk-off-then-relief dollar path. Gold initially fell with everything else in the forced-selling phase, then rallied to record highs as real yields collapsed (gold tracks real yields, not the labor data directly — see [inflation and gold, the real-yield story](/blog/trading/macro-correlations/inflation-and-gold-the-real-yield-story)). High-yield credit spreads blew out toward 9% at the trough, then compressed violently — and by the scatter relationship above, that ~9% spread was a screaming forward-return signal: the S&P went on to nearly double off the March 2020 low over the following eighteen months. Every leg of the recession correlation fired, just on fast-forward.
+Watch the broader cross-asset map snap into the recession configuration as the panic resolved. The dollar spiked in the dash-for-cash (everyone needed dollars to meet margin calls and fund redemptions), then eased as the Fed's liquidity reached the system — a textbook risk-off-then-relief dollar path. Gold initially fell with everything else in the forced-selling phase, then rallied to record highs as real yields collapsed (gold tracks real yields, not the labor data directly — see [inflation and gold, the real-yield story](/blog/trading/macro-correlations/inflation-and-gold-the-real-yield-story)). High-yield credit spreads blew out to nearly 11% at the trough, then compressed violently — and by the scatter relationship above, that ~11% spread was a screaming forward-return signal: the S&P went on to nearly double off the March 2020 low over the following eighteen months. Every leg of the recession correlation fired, just on fast-forward.
 
 The honest caveat is that almost no one *rotated into the 2020 panic in real time* — the speed and depth were paralyzing. The lesson is not "you would have nailed it" but "the recession correlation structure is reliable enough that, even in the most chaotic downturn in living memory, bonds beat stocks and wide spreads preceded high forward returns exactly as the framework predicts." The framework is robust; the discipline to act on it is the hard part.
 
@@ -315,14 +315,14 @@ Let us price the 2024 mistake. Suppose in August 2024 you took the Sahm trigger 
 
 ```
 had you stayed 80/20 (no false rotation):
-  stocks  \$4,000,000 x 1.15 = \$4,600,000
-  bonds   \$1,000,000 x 1.02 = \$1,020,000
-  total                        \$5,620,000   (+12.4%)
+  stocks  $4,000,000 x 1.15 = $4,600,000
+  bonds   $1,000,000 x 1.02 = $1,020,000
+  total                        $5,620,000   (+12.4%)
 
 after the false rotation to 40/60:
-  stocks  \$2,000,000 x 1.15 = \$2,300,000
-  bonds   \$3,000,000 x 1.02 = \$3,060,000
-  total                        \$5,360,000   (+7.2%)
+  stocks  $2,000,000 x 1.15 = $2,300,000
+  bonds   $3,000,000 x 1.02 = $3,060,000
+  total                        $5,360,000   (+7.2%)
 ```
 
 The false rotation *cost* you **\$260,000** — about **5 percentage points** of return — versus simply holding. That is the price of a false positive, and it is the mirror image of the +\$800,000 swing the *true* recession rotation earned earlier. The asymmetry is the whole game: the recession signal is enormously valuable when right and meaningfully costly when wrong, so you do not act on it mechanically — you require *confirmation* (claims breaking, spreads widening) before you commit the rotation. The single tell that would have saved you \$260,000 in 2024 was that initial claims never broke higher.
@@ -333,7 +333,7 @@ A handful of beliefs about the labor data and recessions are widespread, intuiti
 
 **Myth 1: "A low unemployment rate means the economy is safe."** No — a low unemployment rate is, if anything, a *late-cycle* warning. U-3 was 3.5% in February 2020, one month before a 14.8% spike; it was near multi-decade lows before the 2001 and 2007 recessions too. The level is a laggard that looks best at the peak. What you watch is the *change* off the low (the Sahm rule's +0.5pp), not the comfortable-looking level.
 
-**Myth 2: "Two negative quarters of GDP is the definition of a recession."** That is a rule of thumb, not the definition. The NBER defines a recession as a broad, sustained decline and weighs employment, income, and production — and it dates recessions *in hindsight*, often a year late. In 2022 the US had two negative GDP quarters and the NBER declared *no recession*, precisely because the labor market kept growing. GDP is a lagging, heavily-revised number; do not let it anchor your recession call.
+**Myth 2: "Two negative quarters of GDP is the definition of a recession."** That is a rule of thumb, not the definition. The NBER defines a recession as a broad, sustained decline and weighs employment, income, and production — and it dates recessions *in hindsight*, often a year late. In 2022 the US had two negative GDP quarters and the NBER never declared a recession, precisely because the labor market kept growing. GDP is a lagging, heavily-revised number; do not let it anchor your recession call.
 
 **Myth 3: "The yield curve inverting means a recession is imminent."** The curve inverting means a recession is *probable within the next year or two* — the historical lead from first inversion to recession start ranges from **6 to 22 months**, averaging ~15. "Imminent" is wrong by up to two years. The curve is an early *alert*, not a *timing* tool; you pair it with the late-firing labor data to time the actual rotation.
 

@@ -80,13 +80,13 @@ The figure above is the whole idea in one picture. The expected band — say cor
 
 #### Worked example: computing a raw surprise
 
-The November 2023 core CPI printed at 0.28% month-over-month against a consensus of 0.30%. The surprise is:
+The October 2023 core CPI, released on 14 November 2023, printed at 0.23% month-over-month against a consensus of 0.30%. The surprise is:
 
 ```
-surprise = 0.28% - 0.30% = -0.02pp
+surprise = 0.23% - 0.30% = -0.07pp
 ```
 
-A small *negative* (cooler-than-expected) surprise. Even though core inflation that month was running near 4% year-over-year — a high level by historical standards — the print was a hair *below* what the market expected, so the market read it as good news. The S&P rose that day. The intuition: a high level of inflation can still produce a *positive* market reaction if the print comes in below the (high) consensus. The level was already feared and priced; the cooler-than-feared surprise is what moved the tape.
+A modest *negative* (cooler-than-expected) surprise. Even though core inflation that month was running near 4% year-over-year — a high level by historical standards — the print was *below* what the market expected, so the market read it as good news. The S&P rose about 1.9% that day. The intuition: a high level of inflation can still produce a *positive* market reaction if the print comes in below the (high) consensus. The level was already feared and priced; the cooler-than-feared surprise is what moved the tape.
 
 ### Standardizing the surprise: putting CPI and NFP on one scale
 
@@ -320,7 +320,7 @@ Every cell in this grid is a beta you could estimate with the event-study regres
 
 **September 2022 — the level fell, the surprise was hot, stocks crashed.** As described in the opening, headline CPI *declined* from 8.5% to 8.3% year-over-year, but the print beat the 8.1% consensus and the core measure was hot. The S&P fell 4.3% in a day. The textbook demonstration that the surprise, not the level, drives the move: an improving level produced one of the worst days of the cycle because the surprise was positive. Plug the surprise into the CPI beta and the cross-asset reaction — stocks down hard, yields up, dollar up, gold down — falls right out of the table.
 
-**November 2023 — the cool surprise that turned the cycle.** Core CPI printed at 0.28% month-over-month versus 0.30% expected — a small *negative* surprise of just −0.02pp. The level of inflation was still elevated (core near 4% year-over-year), but the print missed (cooler than) consensus, and the market read it as the first solid evidence that disinflation was real. The S&P rallied, yields fell, and the move kicked off the late-2023 "Fed pivot" rally. A tiny negative surprise against a high level produced a large positive market reaction — exactly the opposite of what a level-based intuition predicts.
+**November 2023 — the cool surprise that turned the cycle.** The October core CPI, released on 14 November, printed at 0.23% month-over-month versus 0.30% expected — a modest *negative* surprise of −0.07pp. The level of inflation was still elevated (core near 4% year-over-year), but the print missed (cooler than) consensus, and the market read it as the first solid evidence that disinflation was real. The S&P rallied about 1.9%, the 2-year yield fell roughly 20bp, and the move helped kick off the late-2023 "Fed pivot" rally. A modest negative surprise against a high level produced a large positive market reaction — exactly the opposite of what a level-based intuition predicts.
 
 **The good-news-is-bad payrolls days of 2022-23.** Repeatedly in that period, a hot jobs report sold off stocks on release: strong payrolls meant the Fed had to keep hiking, so yields jumped and equities fell. The same data — robust hiring — that would have been celebrated in a normal expansion was punished, because the reaction function had inverted. A trader who had estimated the NFP beta on pre-2022 data would have bought the strong print and been run over. The sign of the beta had flipped with the regime.
 
