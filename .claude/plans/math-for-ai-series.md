@@ -3,7 +3,7 @@
 **Subcategory:** `mathematics` (folder already exists under ML, currently empty; renders "Mathematics")
 **Path:** `content/blog/machine-learning/mathematics/<slug>.md`
 **frontmatter:** `category: "machine-learning"` · `subcategory: "Mathematics"`
-**Size:** **157 posts, 23 tracks (A to W, incl. R), 26 waves.** Rows 1–147 plus inserted 18a, 24a, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23); Tracks U (CNN) and V (RL) were added 2026-10-27; Track W (constructing losses: general, vision, LLM, RL, diffusion) 2026-11-03. **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap; Waves 0–2 COMPLETE; Wave 3 (Track C) next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
+**Size:** **164 posts, 24 tracks (A to X, incl. R), 27 waves.** Rows 1–154 plus inserted 18a, 24a, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23); Tracks U (CNN) and V (RL) were added 2026-10-27; Track W (constructing losses: general, vision, LLM, RL, diffusion) and Track X (the mathematics of activation functions) 2026-11-03. **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap; Waves 0–2 COMPLETE; Wave 3 (Track C) next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
 **Skill:** `blog-writer`, depth `deep-dive`. **Language:** English (repo convention, verify gate enforces it). Request came in VN.
 
 ### The user's request (2026-10-23, verbatim intent)
@@ -243,7 +243,7 @@ Cross-link spine (every post links both): **intro** `how-to-read-the-math-in-an-
 | 69 | `random-matrix-theory-for-deep-learning` | Wigner, Marchenko–Pastur, Stieltjes transform lite, weight-matrix spectra, heavy tails as a training diagnostic | Martin & Mahoney (1810.01075) |
 | 70 | `anatomy-of-a-theory-section` | Setup → assumptions → theorem → proof sketch → appendix; stating assumptions reviewers accept; worked dissection of one real paper | Flow Matching (2210.02747) theory section dissected |
 | 71 | `writing-proofs-that-survive-review` | The recurring lemma bag (add-and-subtract, telescoping, Grönwall, union bound, Young, change of measure), checking a proof numerically, common reviewer objections | DDIM (2010.02502) Thm. 1 proof walked |
-| 72 | `the-math-roadmap-for-ml-researchers` | Capstone: the 157-post map, which tracks each paper family needs (LLM, diffusion, FM, OT, MoE, SSM, RL), study orders by goal, textbook list | the ladder map, fully lit |
+| 72 | `the-math-roadmap-for-ml-researchers` | Capstone: the 164-post map, which tracks each paper family needs (LLM, diffusion, FM, OT, MoE, SSM, RL), study orders by goal, textbook list | the ladder map, fully lit |
 
 **Paper bank:** the ids above are the pre-picked sources. Each agent WebFetches `arxiv.org/abs/<id>` once to confirm title and equation before citing. If an equation number is wrong, cite by section instead; never guess.
 
@@ -390,6 +390,21 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 146 | `policy-losses-in-rl-surrogates-entropy-and-actor-critic` | The "pseudo-loss" whose gradient equals the policy gradient (stop-gradient on the advantage), PPO total loss = clip + value + entropy and their coefficients, value clipping, SAC's actor, critic and temperature losses, reparameterisation vs score-function gradients | PPO (1707.06347, Eq. 9); SAC (1812.05905, Eq. 7, 18); *Implementation Matters* (2005.12729) |
 | 147 | `diffusion-and-flow-matching-losses-weighting-and-targets` | ε-, x₀-, v- and velocity-prediction are one loss under different weightings, the ELBO as a weighted denoising loss, SNR weighting, Min-SNR, EDM's preconditioning and loss weight, flow-matching loss as a special weighting | Kingma & Gao (2303.00848, Eq. 1–3); EDM (2206.00364, Table 1); Min-SNR (2303.09556); v-prediction (2202.00512) |
 
+
+## Track X — The mathematics of activation functions (Wave 7X, after 7W)
+
+*Added 2026-11-03 (user: "bổ sung thêm bản chất toán học của các activation function"). Every post explains an activation by **what it is mathematically** (a gate, a smoothed max, an expectation, a projection, a kernel) rather than by a list of formulas, and draws it with the same 4 panels: f, f′, the region it is linear / saturated, and what it does to a Gaussian input (output mean and variance, computed exactly). Boundary: #8 decodes the ReLU FFN, #4 owns log-sum-exp, #61 owns softmax attention, #62 owns Xavier / He init and μP, #75 owns softmax temperature for sampling. Neighbour to link, not re-derive: `debugging-training/dead-neurons-and-saturated-activations`. Agents: WebFetch every arXiv id below before citing.*
+
+| # | Slug | Post | Paper sentence decoded |
+| --- | --- | --- | --- |
+| 148 | `why-nonlinearity-activation-functions-from-first-principles` | Stacked linear layers collapse to one (proof), what a nonlinearity buys: ReLU networks are piecewise linear and carve input space into linear regions (count grows with depth), constructive universal approximation with ReLU "hat" functions, the Kolmogorov–Arnold representation theorem and KANs as learnable activations | Montúfar et al. (1402.1869, Thm. on linear regions); KAN (2404.19756, Eq. 2.1) |
+| 149 | `sigmoid-tanh-and-the-vanishing-gradient-story` | Sigmoid as the logistic CDF and the Bernoulli natural parameter, tanh = 2σ(2x) − 1, bounds σ′ ≤ 1/4 and tanh′ ≤ 1, products of Jacobians through depth and time (proof of vanishing / exploding), saturation, why gates in LSTM / GRU keep sigmoid | Pascanu, Mikolov & Bengio (1211.5063, Sec. 2); Glorot & Bengio 2010 (cite) |
+| 150 | `relu-family-homogeneity-dying-units-and-selu` | ReLU = max(0, x): subgradients at 0, positive homogeneity and the rescaling symmetry it gives the loss landscape, dying ReLU as a probability under a Gaussian pre-activation, Leaky / PReLU, ELU, SELU's self-normalising fixed point (derived), squared ReLU | SELU (1706.02515, Thm. 1); PReLU (1502.01852); Primer squared ReLU (2109.08668) |
+| 151 | `smooth-activations-gelu-silu-and-softplus` | Softplus as the smooth max of 0 and x (log-sum-exp with 2 terms), GELU = x·Φ(x) as the expectation of a stochastic 0/1 gate, its tanh approximation and its error, SiLU / Swish x·σ(βx) interpolating linear (β→0) and ReLU (β→∞), non-monotonic dip, why smoothness matters for second-order methods | GELU (1606.08415, Sec. 2); Swish (1710.05941) |
+| 152 | `gated-linear-units-swiglu-and-multiplicative-interactions` | GLU family: a product of two linear maps is a degree-2 polynomial (bilinear), what multiplication adds over a pointwise nonlinearity, SwiGLU / GeGLU, the 8/3 hidden-width rule that keeps parameters equal, massive activations and outliers it produces (link to quantisation) | GLU (1612.08083); Shazeer (2002.05202, Eq. 5–6); Massive Activations (2402.17762) |
+| 153 | `softmax-sparsemax-and-entmax-as-projections` | Softmax as the gradient of log-sum-exp and as entropy-regularised argmax (variational form, proof via Lagrangian), its Jacobian diag(p) − ppᵀ, sparsemax as Euclidean projection onto the simplex (closed form via KKT), entmax interpolating them, sigmoid vs softmax as output activations | Sparsemax (1602.02068, Prop. 1); entmax (1905.05702) |
+| 154 | `activations-at-infinite-width-dual-kernels-and-edge-of-chaos` | An activation induces a kernel on Gaussian inputs (dual activation / arc-cosine kernel, computed exactly for ReLU), Hermite coefficients of an activation, the length map and correlation map, edge of chaos and why the activation sets trainable depth | Poole et al. (1606.05340); Schoenholz et al. (1611.01232); Cho & Saul 2009 arc-cosine kernel (cite) |
+
 ---
 
 ## Scope extensions from the conference scan (drafting agents: grep your `#N` here too)
@@ -412,6 +427,7 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 6 | F | 31–36 + 32a, 32b | statistics and information theory, incl. the KL deep-dive (8 agents) |
 | 7 | G | 37–42 | optimization |
 | 7W | W | 137–139, 141, 142 | constructing losses I: NLL recipe, surrogates, contrastive, composite, LLM pretraining / SFT / distillation |
+| 7X | X | 148–154 | the mathematics of activation functions (7) |
 | 8 | H | 43–48 + 47a, 48a | stochastic processes / diffusion math, incl. Girsanov (8) |
 | 9 | I | 49–54 + 54a | flows, optimal transport, few-step generation (7) |
 | 9V1 | V | 97, 127–131 | RL math I: MDPs, TD, function approximation, policy gradients, TRPO / PPO, off-policy |
@@ -429,7 +445,7 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 18 | S | 109–114 | complexity, logic, graphs, tensors, approximation, implicit differentiation |
 | 19 | T | 115–120 + 72 | advanced dynamics and generative theory + capstone (7) |
 
-Waves are ordered by prerequisite; do not reorder without checking each post's *Needs*. The user's named topics (diffusion, FM, OT, MoE) live in Waves 8, 9 and 11. They need Tracks D–F (calculus, probability, information theory) but not G, J or L, so a "fast path" order 0, 1, 4, 4R, 5, 6, 8, 9, 11, 13, then (RL readers: add 7, 9V1, 9V2 before 11; CNN readers: 10U only needs 1–4 plus #24a, #55; loss readers: 7W needs 6 and 7, 11W needs 8, 9, 9V1, 9V2, 11) the rest is valid if the user wants those posts sooner.
+Waves are ordered by prerequisite; do not reorder without checking each post's *Needs*. The user's named topics (diffusion, FM, OT, MoE) live in Waves 8, 9 and 11. They need Tracks D–F (calculus, probability, information theory) but not G, J or L, so a "fast path" order 0, 1, 4, 4R, 5, 6, 8, 9, 11, 13, then (RL readers: add 7, 9V1, 9V2 before 11; CNN readers: 10U only needs 1–4 plus #24a, #55; activation readers: 7X needs 4, 5 and 7; loss readers: 7W needs 6 and 7, 11W needs 8, 9, 9V1, 9V2, 11) the rest is valid if the user wants those posts sooner.
 
 ### Progress checklist
 
@@ -443,6 +459,7 @@ Waves are ordered by prerequisite; do not reorder without checking each post's *
 - [ ] Wave 6: Track F, posts 31–36 + 32a, 32b (KL deep-dive)
 - [ ] Wave 7: Track G, posts 37–42
 - [ ] Wave 7W: Track W, posts 137–139, 141, 142
+- [ ] Wave 7X: Track X, posts 148–154
 - [ ] Wave 8: Track H, posts 43–48 + 47a, 48a
 - [ ] Wave 9: Track I, posts 49–54 + 54a
 - [ ] Wave 9V1: Track V, posts 97, 127–131
