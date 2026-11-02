@@ -3,7 +3,7 @@
 **Subcategory:** `mathematics` (folder already exists under ML, currently empty; renders "Mathematics")
 **Path:** `content/blog/machine-learning/mathematics/<slug>.md`
 **frontmatter:** `category: "machine-learning"` · `subcategory: "Mathematics"`
-**Size:** **146 posts, 22 tracks (A to V, incl. R), 24 waves.** Rows 1–136 plus inserted 18a, 24a, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23); Tracks U (CNN) and V (RL) were added 2026-10-27. **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap; Waves 0–2 COMPLETE; Wave 3 (Track C) next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
+**Size:** **157 posts, 23 tracks (A to W, incl. R), 26 waves.** Rows 1–147 plus inserted 18a, 24a, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23); Tracks U (CNN) and V (RL) were added 2026-10-27; Track W (constructing losses: general, vision, LLM, RL, diffusion) 2026-11-03. **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap; Waves 0–2 COMPLETE; Wave 3 (Track C) next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
 **Skill:** `blog-writer`, depth `deep-dive`. **Language:** English (repo convention, verify gate enforces it). Request came in VN.
 
 ### The user's request (2026-10-23, verbatim intent)
@@ -243,7 +243,7 @@ Cross-link spine (every post links both): **intro** `how-to-read-the-math-in-an-
 | 69 | `random-matrix-theory-for-deep-learning` | Wigner, Marchenko–Pastur, Stieltjes transform lite, weight-matrix spectra, heavy tails as a training diagnostic | Martin & Mahoney (1810.01075) |
 | 70 | `anatomy-of-a-theory-section` | Setup → assumptions → theorem → proof sketch → appendix; stating assumptions reviewers accept; worked dissection of one real paper | Flow Matching (2210.02747) theory section dissected |
 | 71 | `writing-proofs-that-survive-review` | The recurring lemma bag (add-and-subtract, telescoping, Grönwall, union bound, Young, change of measure), checking a proof numerically, common reviewer objections | DDIM (2010.02502) Thm. 1 proof walked |
-| 72 | `the-math-roadmap-for-ml-researchers` | Capstone: the 146-post map, which tracks each paper family needs (LLM, diffusion, FM, OT, MoE, SSM, RL), study orders by goal, textbook list | the ladder map, fully lit |
+| 72 | `the-math-roadmap-for-ml-researchers` | Capstone: the 157-post map, which tracks each paper family needs (LLM, diffusion, FM, OT, MoE, SSM, RL), study orders by goal, textbook list | the ladder map, fully lit |
 
 **Paper bank:** the ids above are the pre-picked sources. Each agent WebFetches `arxiv.org/abs/<id>` once to confirm title and equation before citing. If an equation number is wrong, cite by section instead; never guess.
 
@@ -371,6 +371,25 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 135 | `planning-mcts-and-the-math-of-alphazero` | UCT as bandits on a tree, PUCT, simulation lemma (model error ⇒ value error, proof), value equivalence | AlphaZero (1712.01815); MuZero (1911.08265) |
 | 136 | `offline-rl-distribution-shift-and-pessimism` | Distribution shift, concentrability coefficients, why naive offline Q-learning overestimates, pessimism / lower-confidence bounds, CQL's lower-bound theorem | CQL (2006.04779, Thm. 3.2); pessimism in offline RL (Jin et al., 2012.15085) |
 
+
+## Track W — Constructing loss functions: general, vision, LLM, RL, diffusion (Waves 7W, 11W; #140 in 10U)
+
+*Added 2026-11-03 (user: "bổ sung các xây dựng các loss trong LLM, RL, ..."). Every post answers the same question: **why is the loss this formula and not another one?** Each loss is built from a modelling assumption (a noise model, a margin, a preference model, a policy-gradient identity), and the post shows what changes when the assumption changes. Boundary: #31 / #32 / #32a own cross-entropy and KL themselves, #34 owns InfoNCE as an MI bound, #96 owns proper scoring rules, #66 owns the KL-regularised RLHF objective and the DPO derivation, Track V owns the RL theorems. Track W owns the **loss as it is written in code**: reductions and normalisation, stop-gradients, surrogate "pseudo-losses" whose gradient is the estimator, weighting, and the variant families papers compare. Every post carries a **"Loss anatomy"** figure (each term of the formula labelled with the assumption it encodes) and a numeric check that the autograd gradient of the coded loss equals the derived gradient. Neighbours to link, not re-derive: `debugging-training/the-loss-masking-bug`, `debugging-training/loss-function-bugs`, `debugging-rlhf-dpo-and-preference-tuning`, `deepseekmath-data-pipeline-and-grpo-origin` (resolve folders by `ls`). Agents: WebFetch every arXiv id below before citing.*
+
+| # | Slug | Post | Paper sentence decoded |
+| --- | --- | --- | --- |
+| 137 | `loss-functions-as-negative-log-likelihoods` | The recipe "pick a noise model, take −log p": MSE ⇔ Gaussian, L1 ⇔ Laplace (median), Huber as the robust hybrid, BCE ⇔ Bernoulli, Poisson / count losses, heteroscedastic Gaussian NLL and why it fails (β-NLL), quantile / pinball loss | Kendall & Gal (1703.04977, Eq. 5); β-NLL (2203.09168) |
+| 138 | `classification-surrogate-losses-margins-and-consistency` | 0-1 loss is not trainable; hinge, logistic, exponential, squared hinge as convex surrogates; margins; classification-calibration and why logistic is consistent (Bartlett, Jordan & McAuliffe 2006, cite); multiclass softmax vs one-vs-all; focal loss as a down-weighted cross-entropy | Focal loss (1708.02002, Eq. 5) |
+| 139 | `contrastive-and-metric-learning-losses` | Contrastive (pairwise) and triplet losses with margins, hard-negative mining, InfoNCE as softmax over a batch, CLIP's symmetric loss, sigmoid vs softmax (SigLIP), temperature as a sharpness knob, alignment and uniformity | FaceNet (1503.03832, Eq. 1); SigLIP (2303.15343, Eq. 1); Wang & Isola (2005.10242) |
+| 140 | `segmentation-and-detection-losses-dice-iou-giou` | Pixel-wise cross-entropy vs class imbalance, soft Dice and its gradient, Tversky, IoU is not differentiable everywhere, GIoU / DIoU, Lovász extension as a convex surrogate of IoU (runs in Wave 10U) | V-Net Dice (1606.04797); GIoU (1902.09630); Lovász-Softmax (1705.08790) |
+| 141 | `composite-losses-weighting-regularizers-and-lagrangians` | Sum of losses = scalarised multi-objective, Pareto front, penalty vs Lagrange multiplier vs constraint, weight decay as a Gaussian prior, auxiliary losses, uncertainty-based task weighting, gradient conflict (PCGrad) | Kendall, Gal & Cipolla (1705.07115, Eq. 7); PCGrad (2001.06782) |
+| 142 | `llm-pretraining-sft-and-distillation-losses` | Next-token cross-entropy as written in code: per-token vs per-sequence averaging (the gradient-accumulation bug), masking prompt and padding tokens in SFT, z-loss, label smoothing, multi-token prediction, distillation with forward KL (soft targets, temperature²) vs reverse KL (MiniLLM) | PaLM z-loss (2204.02311, Sec. 5); Hinton et al. (1503.02531); MiniLLM (2306.08543); MTP (2404.19737) |
+| 143 | `preference-losses-reward-models-dpo-and-variants` | Bradley–Terry reward-model loss, the DPO loss as a reparameterised reward (derivation pointer to #66), what each variant changes: IPO (squared loss, no overfitting to deterministic preferences), KTO (prospect theory, unpaired data), SimPO (length-normalised, reference-free), ORPO (odds ratio inside SFT) | DPO (2305.18290, Eq. 7); IPO (2310.12036); KTO (2402.01306); SimPO (2405.14734); ORPO (2403.07691) |
+| 144 | `rl-losses-for-llms-ppo-grpo-and-their-fixes` | The token-level PPO-clip loss for LLMs, GRPO's group-normalised advantage, KL penalty in the loss vs in the reward and the k1 / k2 / k3 KL estimators, length and difficulty biases from normalisation (Dr. GRPO), clip-higher and token-level averaging (DAPO), sequence-level ratios (GSPO) | GRPO (2402.03300, Eq. 3); Dr. GRPO (2503.20783); DAPO (2503.14476); GSPO (2507.18071) |
+| 145 | `value-losses-in-rl-td-targets-huber-and-classification` | The TD loss is a semi-gradient, not the gradient of any objective (proof sketch), target networks as a frozen target, Huber in DQN, double-Q targets, quantile Huber loss for distributional RL, value learning as classification (HL-Gauss) | Double DQN (1509.06461); QR-DQN (1710.10044, Eq. 10); *Stop Regressing* (2403.03950) |
+| 146 | `policy-losses-in-rl-surrogates-entropy-and-actor-critic` | The "pseudo-loss" whose gradient equals the policy gradient (stop-gradient on the advantage), PPO total loss = clip + value + entropy and their coefficients, value clipping, SAC's actor, critic and temperature losses, reparameterisation vs score-function gradients | PPO (1707.06347, Eq. 9); SAC (1812.05905, Eq. 7, 18); *Implementation Matters* (2005.12729) |
+| 147 | `diffusion-and-flow-matching-losses-weighting-and-targets` | ε-, x₀-, v- and velocity-prediction are one loss under different weightings, the ELBO as a weighted denoising loss, SNR weighting, Min-SNR, EDM's preconditioning and loss weight, flow-matching loss as a special weighting | Kingma & Gao (2303.00848, Eq. 1–3); EDM (2206.00364, Table 1); Min-SNR (2303.09556); v-prediction (2202.00512) |
+
 ---
 
 ## Scope extensions from the conference scan (drafting agents: grep your `#N` here too)
@@ -392,13 +411,15 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 5 | E | 25–30 + 25a | probability, incl. measure-theoretic (7) |
 | 6 | F | 31–36 + 32a, 32b | statistics and information theory, incl. the KL deep-dive (8 agents) |
 | 7 | G | 37–42 | optimization |
+| 7W | W | 137–139, 141, 142 | constructing losses I: NLL recipe, surrogates, contrastive, composite, LLM pretraining / SFT / distillation |
 | 8 | H | 43–48 + 47a, 48a | stochastic processes / diffusion math, incl. Girsanov (8) |
 | 9 | I | 49–54 + 54a | flows, optimal transport, few-step generation (7) |
 | 9V1 | V | 97, 127–131 | RL math I: MDPs, TD, function approximation, policy gradients, TRPO / PPO, off-policy |
 | 9V2 | V | 132, 133, 98, 134–136 | RL math II: max-entropy, distributional, bandits, exploration, planning, offline |
 | 10 | J | 55–60 | geometry, symmetry, abstract algebra |
-| 10U | U | 121–126 | the math of CNNs |
+| 10U | U | 121–126 + 140 | the math of CNNs + segmentation / detection losses (7) |
 | 11 | K | 61–66 + 66a | architecture math (attention, init, MoE, SSM, scaling, RLHF) |
+| 11W | W | 143–147 | constructing losses II: preference losses, LLM RL losses, RL value / policy losses, diffusion losses |
 | 12 | L | 67–71 | learning theory and research craft (capstone #72 moves to Wave 19) |
 | 13 | M | 73–78 | LLM practice: numerics, quantisation, sampling, compression, eval statistics |
 | 14 | N | 79–84 + 79a | frontier theory (7) |
@@ -408,7 +429,7 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 18 | S | 109–114 | complexity, logic, graphs, tensors, approximation, implicit differentiation |
 | 19 | T | 115–120 + 72 | advanced dynamics and generative theory + capstone (7) |
 
-Waves are ordered by prerequisite; do not reorder without checking each post's *Needs*. The user's named topics (diffusion, FM, OT, MoE) live in Waves 8, 9 and 11. They need Tracks D–F (calculus, probability, information theory) but not G, J or L, so a "fast path" order 0, 1, 4, 4R, 5, 6, 8, 9, 11, 13, then (RL readers: add 7, 9V1, 9V2 before 11; CNN readers: 10U only needs 1–4 plus #24a, #55) the rest is valid if the user wants those posts sooner.
+Waves are ordered by prerequisite; do not reorder without checking each post's *Needs*. The user's named topics (diffusion, FM, OT, MoE) live in Waves 8, 9 and 11. They need Tracks D–F (calculus, probability, information theory) but not G, J or L, so a "fast path" order 0, 1, 4, 4R, 5, 6, 8, 9, 11, 13, then (RL readers: add 7, 9V1, 9V2 before 11; CNN readers: 10U only needs 1–4 plus #24a, #55; loss readers: 7W needs 6 and 7, 11W needs 8, 9, 9V1, 9V2, 11) the rest is valid if the user wants those posts sooner.
 
 ### Progress checklist
 
@@ -421,13 +442,15 @@ Waves are ordered by prerequisite; do not reorder without checking each post's *
 - [ ] Wave 5: Track E, posts 25–30 + 25a
 - [ ] Wave 6: Track F, posts 31–36 + 32a, 32b (KL deep-dive)
 - [ ] Wave 7: Track G, posts 37–42
+- [ ] Wave 7W: Track W, posts 137–139, 141, 142
 - [ ] Wave 8: Track H, posts 43–48 + 47a, 48a
 - [ ] Wave 9: Track I, posts 49–54 + 54a
 - [ ] Wave 9V1: Track V, posts 97, 127–131
 - [ ] Wave 9V2: Track V, posts 132, 133, 98, 134–136
 - [ ] Wave 10: Track J, posts 55–60
-- [ ] Wave 10U: Track U, posts 121–126
+- [ ] Wave 10U: Track U, posts 121–126 + 140
 - [ ] Wave 11: Track K, posts 61–66 + 66a
+- [ ] Wave 11W: Track W, posts 143–147
 - [ ] Wave 12: Track L, posts 67–71
 - [ ] Wave 13: Track M, posts 73–78
 - [ ] Wave 14: Track N, posts 79–84 + 79a
