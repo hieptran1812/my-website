@@ -162,3 +162,106 @@ Created 2026-10-15. Source: the 111 kept stubs/drafts in `content/blog/paper-rea
 - [ ] `conceptattention-diffusion-transformers-learn-highly-interpretable-features` | ConceptAttention: Diffusion Transformers Learn Highly Interpretable Features | https://arxiv.org/abs/2502.04320v2
 - [ ] `forking-paths-in-neural-text-generation` | Forking Paths in Neural Text Generation | https://arxiv.org/abs/2412.07961v1
 - [ ] `monet-mixture-of-monosemantic-experts-for-transformers` | Monet: Mixture of Monosemantic Experts for Transformers | https://arxiv.org/abs/2412.04139v4
+
+## Phase 2: top-conference scan, ICLR/ICML/NeurIPS 2025–2026 (added 2026-11-03)
+
+Source: venue scan on 2026-11-03 (papernotes interpretability indexes for ICLR26/ICML25/ICML26/NeurIPS25/NeurIPS26, plus the ICLR26 oral mirror at iclr-2026-oral.vercel.app/topic/interpretability). These papers are **not** among the 111 kept stubs, and no post exists for any of them anywhere in `content/blog/`. A grep of the corpus on 2026-11-03 found no title collision.
+
+Same spec as Phase 1 (3–4k words, 7–9 figs, ≥3 extracted from the paper, no em dashes). Differences:
+- **No stub file exists.** The drafting agent creates `content/blog/paper-reading/ai-interpretability/<slug>.md`. Slugs below are provisional: if the real paper title differs, slug it from the real title. Before writing, run `ls` on the folder to confirm the post isn't there.
+- **arXiv links still need resolving.** At dispatch, the orchestrator does one WebSearch per paper to get the arXiv/OpenReview URL and the authors, then writes the URL into the line here. If a paper can't be found, swap in the next unclaimed paper from a later wave.
+- **Venue tag.** It comes from the scan. Oral status is confirmed only for the five ICLR26 orals (from an unofficial mirror). Lines marked `(verify)` were recalled from memory, not scanned, so confirm the venue first.
+- Priority order: W20–W21 are the "most original idea" picks. W22–W29 are thematic clusters. W30 is the pre-2025 classics backlog.
+
+### Wave 20 (top picks, part 1)
+- [ ] `addressing-divergent-representations-from-causal-interventions-on-neural-networks` | Addressing Divergent Representations from Causal Interventions on Neural Networks | ICLR26 **oral** | patching/steering pushes the model off-distribution, which undercuts interp conclusions
+- [ ] `verifying-chain-of-thought-reasoning-via-its-computational-graph` | Verifying Chain-of-Thought Reasoning via Its Computational Graph | ICLR26 **oral** | attribution graphs as execution traces
+- [ ] `all-circuits-lead-to-rome-rethinking-functional-anisotropy-in-circuit-and-sheaf-discovery` | All Circuits Lead to Rome | ICML26 | many near-disjoint circuits per task
+- [ ] `mib-a-mechanistic-interpretability-benchmark` | MIB: A Mechanistic Interpretability Benchmark | ICML25 | SAE features don't beat neurons for localization
+- [ ] `the-price-of-amortized-inference-in-sparse-autoencoders` | The Price of Amortized Inference in SAEs | ICLR26 | dead/dense latents + absorption come from the shared encoder; LocA-SAE
+- [ ] `automated-interpretability-metrics-do-not-distinguish-trained-and-random-transformers` | Automated Interpretability Metrics Do Not Distinguish Trained and Random Transformers | ICLR26
+
+### Wave 21 (top picks, part 2)
+- [ ] `decomposing-llm-computation-with-jets` | Decomposing LLM Computation with Jets | ICLR26 | Taylor-jet path expansion; logit lens is a special case
+- [ ] `discovering-interpretable-algorithms-by-decompiling-transformers-to-rasp` | Decompiling Transformers to RASP | ICML26
+- [ ] `llms-process-lists-with-general-filter-heads` | LLMs Process Lists With General Filter Heads | ICLR26
+- [ ] `learning-to-interpret-weight-differences-in-language-models` | Learning to Interpret Weight Differences | ICLR26
+- [ ] `sparse-autoencoders-are-topic-models` | Sparse Autoencoders are Topic Models | ICML26
+- [ ] `can-circuit-alignment-predict-ood-generalization` | Can Circuit Alignment Predict OOD Generalization? | NeurIPS26
+
+### Wave 22 (circuit theory and verification)
+- [ ] `formal-mechanistic-interpretability` | Formal Mechanistic Interpretability (NN verification → provable circuits) | ICLR26
+- [ ] `certified-circuits-stability-guarantees-for-mechanistic-circuits` | Certified Circuits | ICML26
+- [ ] `scalable-circuit-learning-for-interpreting-large-language-models` | Scalable Circuit Learning (Lasso on observational data) | ICML26
+- [ ] `circuit-fingerprints-how-answer-tokens-encode-their-geometrical-path` | Circuit Fingerprints | ICML26
+- [ ] `beyond-components-singular-vector-based-interpretability-of-transformer-circuits` | Beyond Components: Singular Vector-Based Interpretability | NeurIPS25
+- [ ] `validating-mechanistic-interpretations-an-axiomatic-approach` | Validating Mechanistic Interpretations: An Axiomatic Approach | ICML25
+
+### Wave 23 (mechanisms inside LLMs)
+- [ ] `language-models-use-lookbacks-to-track-beliefs` | Language Models Use Lookbacks to Track Beliefs | ICLR26
+- [ ] `mixing-mechanisms-how-language-models-retrieve-bound-entities-in-context` | Mixing Mechanisms | ICLR26
+- [ ] `latent-planning-emerges-with-scale` | Latent Planning Emerges with Scale (transcoder circuits, Qwen-3) | ICLR26
+- [ ] `wheres-the-plan-locating-latent-planning-in-language-models` | Where's the Plan? | ICML26
+- [ ] `how-language-models-process-negation` | How Language Models Process Negation | ICML26
+- [ ] `the-discrete-log-clock-how-a-transformer-learns-modular-multiplication` | The Discrete-Log Clock | ICML26
+
+### Wave 24 (SAE theory and critique)
+- [ ] `sparse-autoencoders-trained-on-the-same-data-learn-different-features` | SAEs Trained on the Same Data Learn Different Features | ICLR26
+- [ ] `towards-atoms-of-large-language-models` | Towards Atoms of Large Language Models | ICML26
+- [ ] `temporal-sparse-autoencoders` | Temporal SAEs: Leveraging the Sequential Nature of Language | ICLR26 **oral** (pair with "Priors in Time", ICLR26)
+- [ ] `taming-polysemanticity-in-llms` | Taming Polysemanticity in LLMs (frequency resonance, GBA) | ICLR26
+- [ ] `on-the-limits-of-sparse-autoencoders` | On the Limits of Sparse Autoencoders (closed form + WSAE) | ICLR26
+- [ ] `transformer-key-value-memories-are-nearly-as-interpretable-as-sparse-autoencoders` | KV Memories ≈ SAEs | NeurIPS25
+
+### Wave 25 (model diffing: reading what fine-tuning changed)
+- [ ] `narrow-finetuning-leaves-clearly-readable-traces-in-activation-differences` | Narrow Finetuning Leaves Clearly Readable Traces | ICLR26
+- [ ] `persona-features-control-emergent-misalignment` | Persona Features Control Emergent Misalignment | ICLR26
+- [ ] `watch-the-weights-unsupervised-monitoring-and-control-of-fine-tuned-llms` | Watch the Weights | ICLR26
+- [ ] `block-em-preventing-emergent-misalignment-via-latent-blocking` | BLOCK-EM | ICML26
+- [ ] `reinforcement-learning-fine-tuning-enhances-activation-intensity-and-diversity` | RL Fine-Tuning Enhances Activation Intensity and Diversity | ICLR26
+- [ ] `emergent-misalignment-narrow-finetuning-can-produce-broadly-misaligned-llms` | Emergent Misalignment | ICML25 (verify)
+
+### Wave 26 (attention and architecture components)
+- [ ] `attention-sinks-and-compression-valleys-are-two-sides-of-the-same-coin` | Attention Sinks and Compression Valleys | ICLR26
+- [ ] `towards-understanding-the-nature-of-attention-with-low-rank-sparse-decomposition` | Lorsa | ICLR26
+- [ ] `singular-vectors-of-attention-heads-align-with-features` | Singular Vectors of Attention Heads Align with Features | ICML26
+- [ ] `causal-head-gating-interpreting-roles-of-attention-heads` | Causal Head Gating | NeurIPS25
+- [ ] `the-achilles-heel-of-llms-a-few-neurons-collapse-the-model` | The Achilles' Heel of LLMs (~3 neurons) | ICLR26
+- [ ] `small-transformers-dont-need-layernorm` | Small Transformers Don't Need LayerNorm | ICLR26
+
+### Wave 27 (representation theory)
+- [ ] `language-models-are-injective-and-hence-invertible` | Language Models are Injective and Hence Invertible | ICLR26
+- [ ] `i-predict-therefore-i-am-linear-representations-of-concept-posteriors` | I Predict Therefore I Am | ICLR26
+- [ ] `why-linear-interpretability-works-invariant-subspaces` | Why Linear Interpretability Works | ICML26
+- [ ] `causality-is-not-invariance-function-vectors-vs-concept-vectors` | Causality ≠ Invariance | ICLR26
+- [ ] `parameter-symmetries-determine-representational-geometry` | Parameter Symmetries Determine Representational Geometry | NeurIPS26
+- [ ] `temporal-superposition-and-feature-geometry-of-rnns-under-memory-demands` | Temporal Superposition and Feature Geometry of RNNs | ICLR26 **oral**
+
+### Wave 28 (steering and reading activations)
+- [ ] `activation-steering-with-a-feedback-controller` | Activation Steering with a Feedback Controller (PID) | ICLR26
+- [ ] `cot-vectors-transferring-chain-of-thought-via-activation-vectors` | CoT Vectors | ICLR26
+- [ ] `understanding-task-vectors-in-in-context-learning` | Understanding Task Vectors in ICL (rank-1 limit) | ICLR26
+- [ ] `latentqa-teaching-llms-to-decode-activations-into-natural-language` | LatentQA | ICLR26
+- [ ] `base-models-know-how-to-reason-thinking-models-learn-when` | Base Models Know How to Reason, Thinking Models Learn When | NeurIPS25
+- [ ] `to-steer-or-not-to-steer-mera` | To Steer or Not to Steer? (MERA) | ICML25
+
+### Wave 29 (miscellaneous originals)
+- [ ] `thought-branches-interpreting-llm-reasoning-requires-resampling` | Thought Branches | ICLR26
+- [ ] `fresh-in-memory-training-order-recency-is-linearly-encoded` | Fresh in Memory | ICLR26
+- [ ] `the-expert-strikes-back-interpreting-mixture-of-experts-at-expert-level` | The Expert Strikes Back | ICML26
+- [ ] `dynamic-weight-grafting-how-llms-retrieve-new-facts` | Dynamic Weight Grafting | ICLR26
+- [ ] `exploratory-causal-inference-in-saence` | Exploratory Causal Inference in SAEnce | ICLR26 **oral**
+- [ ] `inference-time-decomposition-of-activations-itda` | ITDA (matching pursuit instead of SAE training, 405B) | ICML25
+
+### Wave 30 (pre-2025 classics backlog: not in corpus as of 2026-11-03)
+- [ ] `interpretability-in-the-wild-indirect-object-identification-circuit-in-gpt2` | IOI | ICLR23
+- [ ] `progress-measures-for-grokking-via-mechanistic-interpretability` | Progress Measures for Grokking | ICLR23
+- [ ] `emergent-world-representations-othello-gpt` | Emergent World Representations (Othello-GPT) | ICLR23
+- [ ] `locating-and-editing-factual-associations-in-gpt-rome` | ROME | NeurIPS22
+- [ ] `towards-automated-circuit-discovery-for-mechanistic-interpretability` | ACDC | NeurIPS23
+- [ ] `refusal-in-language-models-is-mediated-by-a-single-direction` | Refusal Is Mediated by a Single Direction | NeurIPS24
+
+### Reserve (swap in if a paper above can't be found)
+Mixture of Decoders (NeurIPS25) · MP-SAE (NeurIPS25) · Bigram Subnetworks (NeurIPS25) · AbsTopK (ICLR26) · Priors in Time (ICLR26) · Token Alignment Heads (ICLR26) · Deleuzian Representation Hypothesis (ICLR26) · NeuronEval (ICML25) · PersonaManifold (NeurIPS26) · Deep Minds and Shallow Probes (NeurIPS26) · Query Circuits (ICML26) · Hedonic Neurons (ICLR26) · Residual Stream Analysis with Multi-Layer SAEs (ICLR25, verify). NeurIPS26 (verify; from an arXiv digest, not the official list): Semantic Optimal Transport for SAE Feature Matching and Circuit Compression · DifFRACT: Diffusion Feature Reconstruction and Attribution for Circuit Tracing · Taming CoT Obfuscation in VLMs: From Mechanistic Evidence to Activation-Level Enforcement.
+
+**NeurIPS 2026 coverage is INCOMPLETE.** As of 2026-11-03, papernotes indexes only 233 NeurIPS26 notes in total (10 under Interpretability), out of several thousand accepted papers. Before Wave 25 is dispatched, re-scan the official list (neurips.cc/virtual/2026 or OpenReview) for interpretability/circuits/SAE/steering papers and add a NeurIPS26 wave.
