@@ -264,4 +264,51 @@ Same spec as Phase 1 (3–4k words, 7–9 figs, ≥3 extracted from the paper, n
 ### Reserve (swap in if a paper above can't be found)
 Mixture of Decoders (NeurIPS25) · MP-SAE (NeurIPS25) · Bigram Subnetworks (NeurIPS25) · AbsTopK (ICLR26) · Priors in Time (ICLR26) · Token Alignment Heads (ICLR26) · Deleuzian Representation Hypothesis (ICLR26) · NeuronEval (ICML25) · PersonaManifold (NeurIPS26) · Deep Minds and Shallow Probes (NeurIPS26) · Query Circuits (ICML26) · Hedonic Neurons (ICLR26) · Residual Stream Analysis with Multi-Layer SAEs (ICLR25, verify). NeurIPS26 (verify; from an arXiv digest, not the official list): Semantic Optimal Transport for SAE Feature Matching and Circuit Compression · DifFRACT: Diffusion Feature Reconstruction and Attribution for Circuit Tracing · Taming CoT Obfuscation in VLMs: From Mechanistic Evidence to Activation-Level Enforcement.
 
-**NeurIPS 2026 coverage is INCOMPLETE.** As of 2026-11-03, papernotes indexes only 233 NeurIPS26 notes in total (10 under Interpretability), out of several thousand accepted papers. Before Wave 25 is dispatched, re-scan the official list (neurips.cc/virtual/2026 or OpenReview) for interpretability/circuits/SAE/steering papers and add a NeurIPS26 wave.
+NeurIPS26 coverage: done 2026-11-03 from the official list (Waves 31–35 below).
+
+## Phase 2b: NeurIPS 2026 official-list scan (added 2026-11-03)
+
+Source: https://neurips.cc/virtual/2026/loc/sydney/papers.html. The page lists ~9,130 posters; keyword filtering left 362 interpretability-related titles, curated below. Acceptance is confirmed (official list); poster URLs are on neurips.cc/virtual/2026/poster/<id>, so resolve arXiv at dispatch. Same Phase 2 rules (new file, provisional slug, check folder first). "Can Circuit Alignment Predict OOD Generalization?" (W21) is confirmed NeurIPS26.
+
+### Wave 31 (NeurIPS26: interp methodology under attack)
+- [ ] `the-dead-salmons-of-ai-interpretability-the-need-for-a-statistical-inference-perspective` | The Dead Salmons of AI Interpretability: The Need for a Statistical Inference Perspective | NeurIPS26
+- [ ] `sanity-checks-for-sparse-autoencoders-do-saes-beat-random-baselines` | Sanity Checks for Sparse Autoencoders: Do SAEs Beat Random Baselines? | NeurIPS26
+- [ ] `is-a-linear-probe-evidence-of-a-linear-representation` | Is a Linear Probe Evidence of a Linear Representation? | NeurIPS26
+- [ ] `the-curse-of-multiple-mediators-hidden-interaction-effects-in-activation-patching` | The Curse of Multiple Mediators: Hidden Interaction Effects in Activation Patching | NeurIPS26
+- [ ] `patchbench-measuring-collateral-damage-in-activation-patching` | PatchBench: Measuring Collateral Damage in Activation Patching | NeurIPS26
+- [ ] `conclusions-from-circuit-extraction-depend-on-the-level-of-description-a-controlled-compar` | Conclusions from Circuit Extraction Depend on the Level of Description: A Controlled Comparison | NeurIPS26
+
+### Wave 32 (NeurIPS26: circuits)
+- [ ] `cross-model-circuit-discovery` | Cross-Model Circuit Discovery | NeurIPS26
+- [ ] `many-circuits-one-mechanism-input-variation-and-evaluation-granularity-in-circuit-discover` | Many Circuits, One Mechanism: Input Variation and Evaluation Granularity in Circuit Discovery | NeurIPS26
+- [ ] `finding-interpretable-prompt-specific-circuits-in-language-models` | Finding Interpretable Prompt-Specific Circuits in Language Models | NeurIPS26
+- [ ] `the-commit-abstain-circuit-why-language-models-hallucinate-instead-of-abstaining` | The Commit-Abstain Circuit: Why Language Models Hallucinate Instead of Abstaining | NeurIPS26
+- [ ] `diffract-diffusion-feature-reconstruction-and-attribution-for-circuit-tracing` | DifFRACT: Diffusion Feature Reconstruction and Attribution for Circuit Tracing | NeurIPS26
+- [ ] `navigating-by-old-maps-the-pitfalls-of-static-mechanistic-localization-in-llm-post-trainin` | Navigating by Old Maps: The Pitfalls of Static Mechanistic Localization in LLM Post-Training | NeurIPS26
+
+### Wave 33 (NeurIPS26: features, SAEs, superposition)
+- [ ] `the-parameters-in-weight-sparse-transformers-are-interpretable` | The parameters in weight-sparse transformers are interpretable | NeurIPS26
+- [ ] `what-does-a-sparse-autoencoder-feature-do-a-weight-based-account` | What Does a Sparse Autoencoder Feature Do? A Weight-Based Account | NeurIPS26
+- [ ] `the-rate-distortion-polysemanticity-tradeoff-in-saes` | The Rate-Distortion-Polysemanticity Tradeoff in SAEs | NeurIPS26
+- [ ] `probing-for-representation-manifolds-in-superposition` | Probing for Representation Manifolds in Superposition | NeurIPS26
+- [ ] `bypassing-pc1-makes-saes-more-reproducible` | Bypassing PC1 Makes SAEs More Reproducible | NeurIPS26
+- [ ] `idempotency-exposes-consistency-problems-in-sparse-autoencoders` | Idempotency Exposes Consistency Problems in Sparse Autoencoders | NeurIPS26
+
+### Wave 34 (NeurIPS26: mechanisms and theory)
+- [ ] `subliminal-learning-is-steering-vector-distillation` | Subliminal Learning Is Steering Vector Distillation | NeurIPS26
+- [ ] `how-are-linear-representations-learned-exact-solutions-to-the-dynamics-of-abstraction` | How are linear representations learned? Exact solutions to the dynamics of abstraction | NeurIPS26
+- [ ] `a-single-neuron-is-sufficient-to-bypass-safety-alignment-in-large-language-models` | A Single Neuron Is Sufficient to Bypass Safety Alignment in Large Language Models | NeurIPS26
+- [ ] `the-superactivator-mechanism-transformers-concentrate-reliable-concept-signals-in-the-tail` | The SuperActivator Mechanism: Transformers Concentrate Reliable Concept Signals in the Tail | NeurIPS26
+- [ ] `state-copying-crowds-out-reasoning-mechanistic-evidence-for-delta-planning-in-autoregressi` | State Copying Crowds Out Reasoning: Mechanistic Evidence for Delta Planning in Autoregressive Models | NeurIPS26
+- [ ] `neural-networks-are-more-modular-than-single-neurons-suggest` | Neural networks are more modular than single neurons suggest | NeurIPS26
+
+### Wave 35 (NeurIPS26: model diffing, weight-space interp, steering)
+- [ ] `transcoder-adapters-for-reasoning-model-diffing` | Transcoder Adapters for Reasoning-Model Diffing | NeurIPS26
+- [ ] `mmdiff-multimodal-model-diffing-for-feature-discovery-and-control` | MMDiff: Multimodal Model Diffing for Feature Discovery and Control | NeurIPS26
+- [ ] `loracles-self-supervised-weight-space-interpretability-at-scale` | LoRAcles: Self-Supervised Weight-Space Interpretability at Scale | NeurIPS26
+- [ ] `predictive-concept-decoders-training-scalable-end-to-end-interpretability-assistants` | Predictive Concept Decoders: Training Scalable End-to-End Interpretability Assistants | NeurIPS26
+- [ ] `steering-vectors-as-a-training-signal-in-llm-post-training` | Steering Vectors as a Training Signal in LLM Post-Training | NeurIPS26
+- [ ] `the-sharp-directions-are-against-you-curvature-analysis-of-activation-steering` | The Sharp Directions Are Against You: Curvature Analysis of Activation Steering | NeurIPS26
+
+### NeurIPS26 reserve
+A Mechanistic Analysis of Looped Reasoning Language Models · Inside the Loop: A Mechanistic Study of Weight-Tied Transformers on Depth-Bound Algorithmic Tasks · Do Latent-CoT Models Think Step-by-Step? A Mechanistic Study on Sequential Reasoning Tasks · A Mechanistic Investigation of Theory of Mind in a Large Language Model · Tracing Persona Vectors Through LLM Pretraining · Emergent Misalignment as Data-Mediated Transfer · Conditional misalignment: common interventions can hide emergent misalignment behind contextual triggers · Mechanistic Interpretability Needs Philosophy · Attributions All the Way Down? The Metagame of Interpretability · Causal Abstractions, Categorically Unified · Parasite Features: Causal Abstraction Through Spurious Pathways · Structural Support Certificates for Mechanistic Hypothesis Selection · Same Function, Different Mechanism: Implementation-Local Geometry Beyond Accuracy · Neuron Populations Exhibit Divergent Selectivity with Scale · fmxcoders: Factorized Masked Crosscoders for Cross-Layer Feature Discovery · Matryoshka Transcoders and Hierarchy Misalignment: When SAE Absorption Protection Does Not Transfer · The Unembedding Bottleneck: A Mechanistic Analysis of Single Digit Counting in LLMs · Position Without Positional Embeddings: A Directional Mechanism in NoPE Transformers · Attention Sinks as Spectral Spikes: A Mechanism Analysis of Gated Attention · The Mechanism of Weak-to-Strong Generalization: Feature Elicitation from Latent Knowledge · What Do SAE Features Encode? Evidence from Human Neural Activity · Two Stages of Folding: Convergent Mechanisms in AI Protein Folding Trunks · Semantic Optimal Transport for Sparse Autoencoder Feature Matching and Circuit Compression · Taming CoT Obfuscation in VLMs: From Mechanistic Evidence to Activation-Level Enforcement · Intrinsically Interpretable Attention via Sparse Post-Training · LLM Rheology: Auditing Refusal Geometry in Aligned Language Models
