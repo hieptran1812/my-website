@@ -165,7 +165,7 @@ Columns: slug stem (append `-math-for-quants`) | core math | the QR use | prereq
 
 | # | Slug stem | Core math | QR use | Prereqs |
 | --- | --- | --- | --- | --- |
-| G1 | `characteristic-functions-fourier-pricing-cos` | Lévy-Khintchine recap, Carr-Madan FFT, COS method, damping, truncation error | fast pricing under Heston/jumps | levy-processes, jump-diffusion-stoch-vol |
+| G1 | `characteristic-functions-fourier-pricing-cos` | Lévy-Khintchine recap, Carr-Madan FFT, COS method, damping, truncation error | fast pricing under Heston/jumps | levy-processes, jump-diffusion-stoch-vol; essence in ML/mathematics `transforms-in-probability-mgf-and-characteristic-functions` (math-for-ai #24d), link don't re-derive |
 | G2 | `malliavin-greeks-pathwise-likelihood-ratio` | pathwise vs likelihood-ratio vs Malliavin weights, digital greeks | Monte Carlo greeks that do not explode | monte-carlo-variance-reduction, girsanov |
 | G3 | `arbitrage-free-vol-surface-svi` | static arbitrage (calendar, butterfly), Durrleman condition, SVI/SSVI fitting | building a surface a trader trusts | volatility-surface (quant-research) |
 | G4 | `automatic-differentiation-aad-risk` | forward vs reverse mode, tape, checkpointing, AAD for greeks at scale | full-book risk in seconds | matrix-calculus |

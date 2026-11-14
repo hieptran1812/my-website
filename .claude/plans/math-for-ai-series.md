@@ -3,7 +3,7 @@
 **Subcategory:** `mathematics` (folder already exists under ML, currently empty; renders "Mathematics")
 **Path:** `content/blog/machine-learning/mathematics/<slug>.md`
 **frontmatter:** `category: "machine-learning"` · `subcategory: "Mathematics"`
-**Size:** **164 posts, 24 tracks (A to X, incl. R), 27 waves.** Rows 1–154 plus inserted 18a, 24a, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23); Tracks U (CNN) and V (RL) were added 2026-10-27; Track W (constructing losses: general, vision, LLM, RL, diffusion) and Track X (the mathematics of activation functions) 2026-11-03. **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap; Waves 0–2 COMPLETE; Wave 3 (Track C) next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
+**Size:** **167 posts, 25 tracks (A to X, incl. R and D′), 28 waves.** Rows 1–154 plus inserted 18a, 24a, 24b, 24c, 24d, 25a, 32a, 32b, 47a, 48a, 54a, 66a, 79a; numbering stays stable, suffixed rows run in their track's wave. Tracks O–T come from a 4-venue oral / spotlight scan (2026-10-23); Tracks U (CNN) and V (RL) were added 2026-10-27; Track W (constructing losses: general, vision, LLM, RL, diffusion) and Track X (the mathematics of activation functions) 2026-11-03. **STATUS: APPROVED 2026-10-23 as a run-gradually roadmap; Waves 0–2 COMPLETE; Wave 3 (Track C) next.** User overrides: **3,000–4,000 words**, must be easy to understand, highly visual, and show real-world applications.
 **Skill:** `blog-writer`, depth `deep-dive`. **Language:** English (repo convention, verify gate enforces it). Request came in VN.
 
 ### The user's request (2026-10-23, verbatim intent)
@@ -137,6 +137,18 @@ Cross-link spine (every post links both): **intro** `how-to-read-the-math-in-an-
 | 24 | `function-spaces-and-operators-lite` | Metric / normed / Hilbert spaces, L², completeness, operators, universal approximation in context | Neural operators / RKHS teaser |
 | 24a | `fourier-analysis-for-deep-learning` | Fourier series / DFT, convolution theorem, FFT, frequencies of RoPE, spectral bias, Fourier features, long convolutions | Fourier features (2006.10739); Hyena (2302.10866); YaRN frequency view (2309.00071) |
 
+## Track D′ — Transforms: what they really are (Wave 4F, after Wave 4, before 4R)
+
+*Added 2026-11-13 (user: "kiến thức về Fourier, Laplace... đã nói về bản chất chưa?"). Audit found Fourier only applied in `trading/math-for-quants/spectral-analysis-long-memory-math-for-quants` (DFT/FFT/periodogram, no theory), the MGF in `expectation-variance-moments-math-for-quants` without naming it a Laplace transform, and the Laplace transform nowhere in the corpus. Every other "Laplace" in this plan (approximation, distribution, DP mechanism, graph Laplacian) is a different object. These three posts teach the essence once; #24a then becomes the deep-learning application post and runs LAST in Wave 4F. Needs #8 (inner products), #12/#14 (basis change, eigenvectors), #22 (integrals), #23 (ODEs).*
+
+| # | Slug | Post | Paper |
+| --- | --- | --- | --- |
+| 24b | `fourier-transform-the-essence` | **Why sinusoids:** complex exponentials are the eigenfunctions of every linear shift-invariant operator, so the Fourier transform is a change of basis that diagonalises convolution (convolution theorem as a corollary, not a trick); orthogonality of e^{iωt} as an inner product on L²; Fourier series → transform as the period grows; Parseval/Plancherel as "rotation preserves length"; DFT as the finite unitary matrix, circulant ⇔ diagonal in that basis; uncertainty principle (time–frequency trade-off); aliasing/Nyquist recap linked not re-derived | Fourier Neural Operator (2010.08895): the kernel integral as a pointwise product in Fourier space |
+| 24c | `laplace-and-z-transforms-damping-poles-and-stability` | **Laplace = Fourier with a damping knob e^{-σt}:** handles growing/decaying signals the Fourier integral cannot; region of convergence; turns linear ODEs into algebra (derivative → multiplication by s); transfer function, poles and zeros, stability = poles in the left half-plane; z-transform as the discrete twin (unit circle ⇔ imaginary axis), EMA / AR filters and their poles, ZOH discretisation mapping s → z = e^{sΔ}; why a linear recurrence is a convolution with a geometric kernel | S4 (2111.00396): SSM kernel computed via the truncated generating function at roots of unity; HiPPO (2008.07669) as a linear ODE |
+| 24d | `transforms-in-probability-mgf-and-characteristic-functions` | **The MGF is a Laplace transform, the characteristic function is a Fourier transform:** the density of a sum of independent variables is a convolution, so its transform is a product; cumulants as the log-transform (why they add); CLT proof via characteristic functions in five lines; uniqueness and Lévy continuity theorem; why the cf always exists and the MGF may not (fat tails, Cauchy); Bochner's theorem → random Fourier features; pointer to option pricing by Fourier inversion (quant-researcher G1, Carr-Madan) | Random Fourier features (Rahimi & Recht, NeurIPS 2007, Bochner step); Fourier features (2006.10739) |
+
+**Boundary:** link, don't re-derive, `trading/math-for-quants/spectral-analysis-long-memory-math-for-quants` (periodogram, leakage, Hurst), `expectation-variance-moments-math-for-quants` (MGF mechanics), `levy-processes-jumps-math-for-quants` (Lévy-Khintchine). #24a, #64 (SSM), #111 (graph Fourier), #124 (FFT conv), #126 (wavelets) must link back to 24b/24c instead of re-explaining the transform. Each post keeps one "same idea, three costumes" figure (signal ↔ spectrum, ODE ↔ algebra, density ↔ cf).
+
 ## Track R — Rigor for reading proofs (Wave 4R, between Waves 4 and 5)
 
 *Added 2026-10-23 for the proof-reading requirement. The posts in Tracks A–D give intuition; Track R gives the precise definitions and theorems that appendix proofs invoke by name. Needs #3, #5, #19–#23.*
@@ -243,7 +255,7 @@ Cross-link spine (every post links both): **intro** `how-to-read-the-math-in-an-
 | 69 | `random-matrix-theory-for-deep-learning` | Wigner, Marchenko–Pastur, Stieltjes transform lite, weight-matrix spectra, heavy tails as a training diagnostic | Martin & Mahoney (1810.01075) |
 | 70 | `anatomy-of-a-theory-section` | Setup → assumptions → theorem → proof sketch → appendix; stating assumptions reviewers accept; worked dissection of one real paper | Flow Matching (2210.02747) theory section dissected |
 | 71 | `writing-proofs-that-survive-review` | The recurring lemma bag (add-and-subtract, telescoping, Grönwall, union bound, Young, change of measure), checking a proof numerically, common reviewer objections | DDIM (2010.02502) Thm. 1 proof walked |
-| 72 | `the-math-roadmap-for-ml-researchers` | Capstone: the 164-post map, which tracks each paper family needs (LLM, diffusion, FM, OT, MoE, SSM, RL), study orders by goal, textbook list | the ladder map, fully lit |
+| 72 | `the-math-roadmap-for-ml-researchers` | Capstone: the 167-post map, which tracks each paper family needs (LLM, diffusion, FM, OT, MoE, SSM, RL), study orders by goal, textbook list | the ladder map, fully lit |
 
 **Paper bank:** the ids above are the pre-picked sources. Each agent WebFetches `arxiv.org/abs/<id>` once to confirm title and equation before citing. If an equation number is wrong, cite by section instead; never guess.
 
@@ -421,7 +433,8 @@ Four parallel scans: **NeurIPS 2025** (40 orals + 357 spotlights, ~65 theory abs
 | 1 | A | 1–6 | the language of papers |
 | 2 | B | 7–12 | linear algebra I |
 | 3 | C | 13–18 + 18a | linear algebra II (7) |
-| 4 | D | 19–24 + 24a | calculus, analysis, Fourier (7) |
+| 4 | D | 19–24 | calculus and analysis (6) |
+| 4F | D′ | 24b, 24c, 24d, then 24a | transforms, essence first: Fourier, Laplace / z, transforms in probability, then Fourier for deep learning (4) |
 | 4R | R | 85–90 | rigor for reading proofs: quantifiers, convergence, compactness, limit swaps, integration by parts, PDEs |
 | 5 | E | 25–30 + 25a | probability, incl. measure-theoretic (7) |
 | 6 | F | 31–36 + 32a, 32b | statistics and information theory, incl. the KL deep-dive (8 agents) |
