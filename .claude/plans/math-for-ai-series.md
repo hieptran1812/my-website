@@ -1,5 +1,8 @@
 # Math for AI Research: From First Principles to the Theory Section
 
+> **2026-11-15: BLOG SERIES CANCELLED by the user** (12 posts shipped, Waves 0–2; do not write more blog posts). This file is kept only as the scope source for the AI Academy course AI 417 (`~/Documents/ai-academy-syllabus`, stubs cite "Math for AI Track X #N"). Delete it once AI 417 is fully written.
+
+
 **Subcategory:** `mathematics` (folder already exists under ML, currently empty; renders "Mathematics")
 **Path:** `content/blog/machine-learning/mathematics/<slug>.md`
 **frontmatter:** `category: "machine-learning"` · `subcategory: "Mathematics"`
