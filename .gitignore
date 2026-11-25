@@ -59,9 +59,14 @@ next-env.d.ts
 /src/lib/generated/blogGraph.json
 /src/lib/generated/searchIndex.json
 /src/lib/generated/searchIndex.bin
+/src/lib/generated/searchBodies.json
+/src/lib/generated/searchBodies.bin
 
 *.log
 
 # paste-ready Substack exports (.claude/scripts/to-substack.mjs)
 /.substack
 /.substack-created.json
+
+# paste-ready X decks (.claude/scripts/to-x.mjs)
+/.x

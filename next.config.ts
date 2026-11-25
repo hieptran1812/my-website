@@ -19,12 +19,20 @@ const nextConfig: NextConfig = {
   },
   // Ship the build-time blog index with the listing routes that read it at
   // runtime (the loader falls back to a live corpus walk if it's ever absent).
+  // The search route reads snippets from the build-time body store
+  // (searchBodies.bin), so it must not drag the ~180 MB markdown corpus in:
+  // that pushed the function past Vercel's 250 MB limit.
+  outputFileTracingExcludes: {
+    "/api/blog/search": ["./content/**"],
+  },
   outputFileTracingIncludes: {
     "/api/blog/posts": ["./src/lib/generated/blogPostsIndex.json"],
     "/api/blog": ["./src/lib/generated/blogPostsIndex.json"],
     "/api/blog/search": [
       "./src/lib/generated/searchIndex.json",
       "./src/lib/generated/searchIndex.bin",
+      "./src/lib/generated/searchBodies.json",
+      "./src/lib/generated/searchBodies.bin",
     ],
     // The article page inlines each slug's precomputed ego graph; ship the index
     // so ISR revalidation (which re-runs the server component) can still read it.

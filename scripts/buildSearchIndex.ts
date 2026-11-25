@@ -21,18 +21,21 @@ import {
   INDEX_BIN,
   INDEX_JSON,
 } from "../src/lib/searchEngine";
+import { writeBodies, BODIES_BIN, BODIES_JSON } from "../src/lib/searchBodies";
 
 async function main() {
   const t0 = Date.now();
   console.log("🔎 Building full-text search index…");
   try {
     const corpus = await loadAllPosts();
-    const index = buildIndex(
-      corpus,
-      isPaywalledFile,
-      path.join(process.cwd(), "content", "blog"),
-    );
+    const blogDir = path.join(process.cwd(), "content", "blog");
+    const index = buildIndex(corpus, isPaywalledFile, blogDir);
     const { jsonBytes, binBytes } = writeIndex(index);
+    const bodies = writeBodies(index, blogDir);
+    console.log(
+      `✅ Stored ${bodies.count} snippet bodies → searchBodies.bin ` +
+        `(${(bodies.binBytes / 1e6).toFixed(1)} MB)`,
+    );
     console.log(
       `✅ Indexed ${index.docs.length} posts, ${index.vocab.length} terms, ` +
         `${index.docIds.length} postings → searchIndex.json ` +
@@ -41,7 +44,7 @@ async function main() {
     );
   } catch (err) {
     console.warn("⚠️  Search index build failed; route will index at runtime.", err);
-    for (const f of [INDEX_JSON, INDEX_BIN]) fs.rmSync(f, { force: true });
+    for (const f of [INDEX_JSON, INDEX_BIN, BODIES_JSON, BODIES_BIN]) fs.rmSync(f, { force: true });
   }
 }
 

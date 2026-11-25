@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { NextRequest, NextResponse } from "next/server";
 import { buildSnippet, cleanMarkdown, search } from "@/lib/searchEngine";
 import { getSearchIndex } from "@/lib/searchIndexLoader";
+import { readStoredBody } from "@/lib/searchBodies";
 
 interface SearchHit {
   slug: string;
@@ -32,6 +33,10 @@ function fixedSnippet(text: string): string {
 }
 
 function readBody(file: string): string {
+  // Production reads the build-time store; content/blog is not shipped with
+  // this function (see outputFileTracingExcludes in next.config.ts).
+  const stored = readStoredBody(file);
+  if (stored !== null) return stored;
   try {
     return cleanMarkdown(matter(fs.readFileSync(path.join(BLOG_DIR, file), "utf8")).content);
   } catch {
