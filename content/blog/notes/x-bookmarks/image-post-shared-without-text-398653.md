@@ -1,0 +1,31 @@
+---
+title: "Image Post Shared Without Text"
+publishDate: "2025-12-13"
+date: "2025-12-13"
+category: "notes"
+subcategory: "X Bookmarks"
+tags: ["x-bookmarks", "tools", "industry-news"]
+author: "Hiep Tran"
+featured: false
+excerpt: "This post has no text; its content is in the attached media."
+---
+
+> Source: [@RichardMoglen on X](https://x.com/RichardMoglen/status/1999938309431398653) · posted 2025-12-13
+
+## Summary
+
+The post has no text. Its content is in the image or video at the link.
+
+## Background
+
+There is no written content to explain here. Open the link to see the media.
+
+## What I took away
+
+- Open the link to see the media.
+- Add your own note about the media if you find it useful.
+
+## Reference
+
+- Original post: [https://x.com/RichardMoglen/status/1999938309431398653](https://x.com/RichardMoglen/status/1999938309431398653)
+- Author: [@RichardMoglen](https://x.com/RichardMoglen) on X, posted 2025-12-13

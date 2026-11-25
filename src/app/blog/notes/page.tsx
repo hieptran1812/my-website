@@ -33,7 +33,7 @@ export default function NotesBlogPage() {
         const { articles } = await getMarkdownArticlesByCategory(
           "notes",
           1,
-          2000, // Fetch the full category — needed so the subcategory filter shows all values
+          10000, // Fetch the full category — needed so the subcategory filter shows all values
         );
         // Ensure articles is always an array
         setAllArticles(Array.isArray(articles) ? articles : []);
@@ -405,6 +405,7 @@ export default function NotesBlogPage() {
 
                 {/* Search & Filters */}
                 <BlogFilterBar
+                  showTime
                   searchTerm={searchTerm}
                   setSearchTerm={setSearchTerm}
                   placeholder="Search notes..."

@@ -4,7 +4,10 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import BlogSearchBar from "@/components/BlogSearchBar";
 import {
   LENGTH_BUCKETS,
+  RECENT_WINDOWS,
   SORT_OPTIONS,
+  monthName,
+  timeLabel,
   type ListingFilters,
 } from "@/components/hooks/useListingFilters";
 
@@ -34,6 +37,8 @@ interface BlogFilterBarProps {
   onClearExtra?: () => void;
   /** Rendered under the search row (e.g. a one-click venue suggestion). */
   hint?: React.ReactNode;
+  /** Show the time row (recent windows, years, months of the chosen year). */
+  showTime?: boolean;
 }
 
 /** How many topic chips show before "+N more". */
@@ -263,6 +268,7 @@ export default function BlogFilterBar({
   extraPills = [],
   onClearExtra,
   hint,
+  showTime = false,
 }: BlogFilterBarProps) {
   const [showAllTopics, setShowAllTopics] = useState(false);
 
@@ -320,8 +326,32 @@ export default function BlogFilterBar({
       label: LENGTH_BUCKETS.find((b) => b.key === l)?.label ?? l,
       onRemove: () => filters.toggleLength(l),
     })),
+    ...(filters.time
+      ? [
+          {
+            label: timeLabel(filters.time),
+            onRemove: () => filters.setTime(null),
+          },
+        ]
+      : []),
     ...extraPills,
   ];
+
+  const times = filters.facets.times;
+  const years = [...times.keys()]
+    .filter((k) => /^\d{4}$/.test(k))
+    .sort((a, b) => b.localeCompare(a));
+  // Months appear once a year (or one of its months) is chosen.
+  const activeYear = filters.time && /^\d{4}/.test(filters.time)
+    ? filters.time.slice(0, 4)
+    : null;
+  const months = activeYear
+    ? [...times.keys()]
+        .filter((k) => k.length === 7 && k.startsWith(activeYear))
+        .sort((a, b) => b.localeCompare(a))
+    : [];
+  const pickTime = (k: string) =>
+    filters.setTime(filters.time === k ? null : k);
 
   const clearAll = () => {
     setSearchTerm("");
@@ -420,6 +450,73 @@ export default function BlogFilterBar({
             >
               {showAllTopics ? "Show fewer" : `+${hiddenCount} more`}
             </button>
+          )}
+        </div>
+      )}
+
+      {/* Time */}
+      {showTime && years.length > 0 && (
+        <div className="space-y-2">
+          <div
+            className="flex items-center gap-2 overflow-x-auto -mx-6 px-6 pb-1 sm:mx-0 sm:px-0 sm:pb-0 sm:flex-wrap sm:justify-center sm:overflow-visible"
+            style={{ scrollbarWidth: "none" }}
+          >
+            <Label>Time</Label>
+            <Chip active={!filters.time} onClick={() => filters.setTime(null)}>
+              Any time
+            </Chip>
+            {RECENT_WINDOWS.map((w) => {
+              const active = filters.time === w.key;
+              const n = times.get(w.key) ?? 0;
+              return (
+                <Chip
+                  key={w.key}
+                  active={active}
+                  disabled={n === 0 && !active}
+                  onClick={() => pickTime(w.key)}
+                >
+                  {w.label}
+                  <Count n={n} active={active} />
+                </Chip>
+              );
+            })}
+            {years.map((y) => {
+              const active = activeYear === y;
+              const n = times.get(y) ?? 0;
+              return (
+                <Chip
+                  key={y}
+                  active={active}
+                  disabled={n === 0 && !active}
+                  onClick={() => pickTime(y)}
+                >
+                  {y}
+                  <Count n={n} active={active} />
+                </Chip>
+              );
+            })}
+          </div>
+          {months.length > 0 && (
+            <div
+              className="flex items-center gap-2 overflow-x-auto -mx-6 px-6 pb-1 sm:mx-0 sm:px-0 sm:pb-0 sm:flex-wrap sm:justify-center sm:overflow-visible"
+              style={{ scrollbarWidth: "none" }}
+            >
+              <Label>{activeYear}</Label>
+              {months.map((m) => {
+                const active = filters.time === m;
+                const n = times.get(m) ?? 0;
+                return (
+                  <Chip
+                    key={m}
+                    active={active}
+                    onClick={() => filters.setTime(active ? activeYear : m)}
+                  >
+                    {monthName(m)}
+                    <Count n={n} active={active} />
+                  </Chip>
+                );
+              })}
+            </div>
           )}
         </div>
       )}

@@ -42,13 +42,66 @@ export function lengthBucket(a: Article): LengthBucket {
   return m < 15 ? "quick" : m <= 40 ? "medium" : "deep";
 }
 
+/**
+ * Time window, single-select: a relative window ("7d", "30d", "90d"), a year
+ * ("2025") or a month ("2025-11"), matched against the article's date.
+ */
+export const RECENT_WINDOWS: { key: string; label: string; days: number }[] = [
+  { key: "7d", label: "Past week", days: 7 },
+  { key: "30d", label: "Past month", days: 30 },
+  { key: "90d", label: "Past 3 months", days: 90 },
+];
+
+const MONTHS = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+function isTimeKey(k: string | null): k is string {
+  return (
+    !!k &&
+    (RECENT_WINDOWS.some((w) => w.key === k) || /^\d{4}(-(0[1-9]|1[0-2]))?$/.test(k))
+  );
+}
+
+/** "YYYY-MM-DD" of the article, or "" when it has no usable date. */
+function dayOf(a: Article): string {
+  const d = (a.date || "").slice(0, 10);
+  return /^\d{4}-\d{2}-\d{2}$/.test(d) ? d : "";
+}
+
+export function matchesTime(a: Article, key: string, now = Date.now()): boolean {
+  const day = dayOf(a);
+  if (!day) return false;
+  const w = RECENT_WINDOWS.find((x) => x.key === key);
+  if (w) return now - new Date(day).getTime() <= w.days * 86_400_000;
+  return day.startsWith(key);
+}
+
+export function timeLabel(key: string): string {
+  const w = RECENT_WINDOWS.find((x) => x.key === key);
+  if (w) return w.label;
+  const [y, m] = key.split("-");
+  return m ? `${MONTHS[parseInt(m, 10) - 1]} ${y}` : y;
+}
+
+export function monthName(key: string): string {
+  return MONTHS[parseInt(key.slice(5, 7), 10) - 1] ?? key;
+}
+
 function normTag(t: string): string {
   return t.trim().toLowerCase();
 }
 
 function readUrl() {
   if (typeof window === "undefined") {
-    return { q: "", tags: [], lengths: [], sort: null as SortKey | null };
+    return {
+      q: "",
+      tags: [],
+      lengths: [],
+      sort: null as SortKey | null,
+      time: null as string | null,
+    };
   }
   const p = new URLSearchParams(window.location.search);
   const list = (k: string) =>
@@ -69,6 +122,7 @@ function readUrl() {
       ),
     ],
     sort: SORT_OPTIONS.some((o) => o.key === sort) ? sort : null,
+    time: isTimeKey(p.get("time")) ? p.get("time") : null,
   };
 }
 
@@ -77,9 +131,10 @@ function writeUrl(state: {
   tags: string[];
   lengths: LengthBucket[];
   sort: SortKey | null;
+  time: string | null;
 }) {
   const p = new URLSearchParams(window.location.search);
-  ["q", "tag", "len", "sort"].forEach((k) => p.delete(k));
+  ["q", "tag", "len", "sort", "time"].forEach((k) => p.delete(k));
   const others = p.toString();
   const mine = [
     state.q.trim() ? `q=${encodeURIComponent(state.q.trim())}` : "",
@@ -88,6 +143,7 @@ function writeUrl(state: {
       : "",
     state.lengths.length ? `len=${state.lengths.join(",")}` : "",
     state.sort ? `sort=${state.sort}` : "",
+    state.time ? `time=${state.time}` : "",
   ].filter(Boolean);
   const query = [others, ...mine].filter(Boolean).join("&");
   const url = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
@@ -122,6 +178,7 @@ export function useListingFilters({
   const [sortChoice, setSortChoice] = useState<SortKey | null>(
     initial.current.sort,
   );
+  const [time, setTime] = useState<string | null>(initial.current.time);
 
   // Seed the search box from ?q= once.
   useEffect(() => {
@@ -130,8 +187,8 @@ export function useListingFilters({
   }, []);
 
   useEffect(() => {
-    writeUrl({ q: searchTerm, tags, lengths, sort: sortChoice });
-  }, [searchTerm, tags, lengths, sortChoice]);
+    writeUrl({ q: searchTerm, tags, lengths, sort: sortChoice, time });
+  }, [searchTerm, tags, lengths, sortChoice, time]);
 
   const hasQuery = searchTerm.trim().length >= 2;
   // "Best match" only means something while searching; otherwise the
@@ -165,9 +222,14 @@ export function useListingFilters({
     [lengths],
   );
 
+  const inTime = useCallback(
+    (a: Article) => !time || matchesTime(a, time),
+    [time],
+  );
+
   const filtered = useMemo(() => {
     const out = searched.filter(
-      (a) => inTopics(a) && inTags(a) && inLengths(a),
+      (a) => inTopics(a) && inTags(a) && inLengths(a) && inTime(a),
     );
     if (sort === "relevance" || (sort === "newest" && !hasQuery)) return out;
     const time = (a: Article) => new Date(a.date).getTime() || 0;
@@ -190,32 +252,48 @@ export function useListingFilters({
         break;
     }
     return sorted;
-  }, [searched, inTopics, inTags, inLengths, sort, hasQuery]);
+  }, [searched, inTopics, inTags, inLengths, inTime, sort, hasQuery]);
 
   const facets = useMemo(() => {
     const topics = new Map<string, number>();
     const lens = new Map<LengthBucket, number>();
     const tagCounts = new Map<string, number>();
+    // Time counts: keys are windows, years and months ("2025", "2025-11").
+    const times = new Map<string, number>();
+    const bump = (m: Map<string, number>, k: string) =>
+      m.set(k, (m.get(k) ?? 0) + 1);
+    const now = Date.now();
     for (const a of searched) {
       const t = inTopics(a);
       const g = inTags(a);
       const l = inLengths(a);
-      if (g && l && a.subcategory) {
+      const d = inTime(a);
+      if (g && l && d && a.subcategory) {
         const k = a.subcategory.toLowerCase();
         topics.set(k, (topics.get(k) ?? 0) + 1);
       }
-      if (t && g) {
+      if (t && g && d) {
         const b = lengthBucket(a);
         lens.set(b, (lens.get(b) ?? 0) + 1);
       }
-      if (t && g && l) {
+      if (t && g && l && d) {
         for (const tag of tagSets.get(a.id) ?? []) {
           tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
         }
       }
+      if (t && g && l) {
+        const day = dayOf(a);
+        if (day) {
+          bump(times, day.slice(0, 4));
+          bump(times, day.slice(0, 7));
+          for (const w of RECENT_WINDOWS) {
+            if (matchesTime(a, w.key, now)) bump(times, w.key);
+          }
+        }
+      }
     }
-    return { topics, lengths: lens, tags: tagCounts };
-  }, [searched, inTopics, inTags, inLengths, tagSets]);
+    return { topics, lengths: lens, tags: tagCounts, times };
+  }, [searched, inTopics, inTags, inLengths, inTime, tagSets]);
 
   // Tags worth suggesting as a next refinement: frequent in the current
   // results but not in all of them (a tag every result has narrows nothing).
@@ -243,6 +321,7 @@ export function useListingFilters({
     setTags([]);
     setLengths([]);
     setSortChoice(null);
+    setTime(null);
   }, []);
 
   return {
@@ -256,8 +335,10 @@ export function useListingFilters({
     sort,
     hasQuery,
     setSort: (s: SortKey) => setSortChoice(s),
+    time,
+    setTime,
     clear,
-    active: tags.length > 0 || lengths.length > 0,
+    active: tags.length > 0 || lengths.length > 0 || !!time,
   };
 }
 
