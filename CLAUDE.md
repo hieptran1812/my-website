@@ -83,7 +83,8 @@ Watch one number: **p50 context**. Baseline was 148k (p90 380k). Target for seri
 
 - **Images are not in git.** `public/imgs/` is gitignored; images live in Cloudflare R2 (bucket `halleywiki-media`) and are served from `https://img.halleywiki.com/imgs/…`. Posts keep referencing `/imgs/blogs/…`; `src/lib/mediaUrl.ts` maps those to the CDN.
 - **After adding images:** run `npm run optimize-blog-images`, then `npm run sync-media` (uploads only new/changed files). Commit the `.md` and `src/lib/generated/blogImageManifest.json`, not the `.webp`. An image that was never synced is a broken image in production.
-- **Markdown stays in git** (`content/blog`, source of truth). Serverless functions do not ship it (Vercel 250 MB limit): the production build mirrors it to the private bucket `halleywiki-content` (`npm run sync-content`) and functions read it via `src/lib/contentSource.ts`.
+- **Markdown stays in git** (`content/blog`, source of truth). Serverless functions do not ship it (Vercel 250 MB limit): every push to `main` mirrors it to the private bucket `halleywiki-content` (`npm run sync-content`, in GitHub Actions) and functions read it via `src/lib/contentSource.ts`.
+- **The Vercel build computes nothing heavy.** `.github/workflows/related-graph.yml` builds the related graph, blog index and search index on each push to `main` and uploads them to R2; `vercel-build` downloads them (`scripts/generatedR2.ts fetch`), falling back to building locally if CI is late or fails.
 - Both syncs go through the gateway Worker in `infra/r2-worker` and need `R2_GATEWAY_URL` + `R2_GATEWAY_SECRET` (in `.env.local` and Vercel env).
 
 ## Series conventions

@@ -1,21 +1,26 @@
-# Precompute the related-articles graph outside the Vercel build.
+# Precompute build-time generated files outside the Vercel build.
 #
-# The graph took 15–19 min of every Vercel build (2-core builder). This job
-# computes it on a 4-core runner, reusing last run's force layouts, and uploads
-# it to R2; the Vercel build waits for it and downloads it
-# (scripts/relatedGraphR2.ts fetch). Runs on every push to main so each deploy
-# finds a graph for its own commit.
-name: Related-articles graph
+# The related graph, blog index, search index and R2 content sync took
+# ~20 min, later ~4 min, of every Vercel build (2-core builder, one after the
+# other). These two jobs run them in parallel on GitHub runners and upload the
+# results to R2; the Vercel build waits for both and downloads them
+# (scripts/generatedR2.ts fetch). Runs on every push to main so each deploy
+# finds results for its own commit.
+name: Build-time generated files
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-# One at a time, in push order: a later commit's graph must land last.
+# One at a time, in push order: a later commit's results must land last.
 concurrency:
   group: related-graph
   cancel-in-progress: false
+
+env:
+  R2_GATEWAY_URL: ${{ secrets.R2_GATEWAY_URL }}
+  R2_GATEWAY_SECRET: ${{ secrets.R2_GATEWAY_SECRET }}
 
 jobs:
   graph:
@@ -40,9 +45,24 @@ jobs:
 
       - run: npm run build-blog-index
       - run: npm run build-related-graph
+      - run: npx tsx scripts/generatedR2.ts put graph
 
-      - name: Upload to R2
-        run: npx tsx scripts/relatedGraphR2.ts put
-        env:
-          R2_GATEWAY_URL: ${{ secrets.R2_GATEWAY_URL }}
-          R2_GATEWAY_SECRET: ${{ secrets.R2_GATEWAY_SECRET }}
+  indexes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - run: npm run build-blog-index
+      - run: npm run build-search-index
+      # Before the upload: once the sha lands, the deploy serves this commit's
+      # posts, so their markdown must already be in R2.
+      - run: npm run sync-content
+      - run: npx tsx scripts/generatedR2.ts put indexes
