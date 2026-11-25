@@ -86,7 +86,7 @@ export async function GET(
 ) {
   const { slug } = await params;
   const slugStr = (slug || []).join("/");
-  const meta = getPostMeta(slugStr);
+  const meta = await getPostMeta(slugStr);
 
   // If slug is unknown, render a generic cover so the route never 404s
   // (related cards/og share would otherwise show broken images).

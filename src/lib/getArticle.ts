@@ -13,6 +13,7 @@ import remarkCallouts from "./remarkCallouts";
 import rehypeImageOptimize from "./rehypeImageOptimize";
 import { resolvePostCover } from "./getRelatedPosts";
 import { applyPaywallToFile } from "./paywall";
+import { readPostRaw, slugToRelPath } from "./contentSource";
 
 export interface ArticleData {
   title: string;
@@ -33,25 +34,6 @@ export interface ArticleData {
 
 const blogDir = path.join(process.cwd(), "content", "blog");
 
-function findArticleFile(
-  baseDir: string,
-  slugParts: string[],
-): string | null {
-  if (slugParts.length === 0) return null;
-
-  if (slugParts.length === 1) {
-    const filePath = path.join(baseDir, `${slugParts[0]}.md`);
-    return fs.existsSync(filePath) ? filePath : null;
-  }
-
-  const dirPath = path.join(baseDir, slugParts[0]);
-  if (fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
-    return findArticleFile(dirPath, slugParts.slice(1));
-  }
-
-  return null;
-}
-
 /**
  * Reads and renders a single article. Wrapped in React.cache() below so that
  * the detail page's generateMetadata() and the page component — which both
@@ -59,12 +41,14 @@ function findArticleFile(
  * markdown parse instead of doing the full remark/rehype pipeline twice.
  */
 async function getArticleImpl(slug: string): Promise<ArticleData | null> {
-  const slugParts = slug.split("/");
-  const articlePath = findArticleFile(blogDir, slugParts);
+  // Disk in dev/build, R2 in serverless functions (see contentSource.ts).
+  const rel = slugToRelPath(slug);
+  if (!rel) return null;
+  const fileContent = await readPostRaw(rel);
+  if (fileContent === null) return null;
+  const articlePath = path.join(blogDir, ...rel.split("/"));
+  const slugParts = rel.replace(/\.md$/, "").split("/");
 
-  if (!articlePath) return null;
-
-  const fileContent = fs.readFileSync(articlePath, "utf8");
   const { data: metadata, content: markdownContent } = matter(fileContent);
 
   const { protectedContent, mathBlocks } = protectMathBlocks(markdownContent);

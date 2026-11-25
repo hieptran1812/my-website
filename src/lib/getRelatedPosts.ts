@@ -720,6 +720,15 @@ export interface PprTransition {
   slugToIdx: Map<string, number>;
   /** rows[i] = list of [targetIdx, normalisedWeight] for node i. */
   rows: Array<Array<[number, number]>>;
+  /**
+   * The same rows packed as CSR typed arrays: node i's edges are
+   * colIdx/weights[rowPtr[i] .. rowPtr[i+1]). The power iteration walks these
+   * instead of `rows` — boxed [j, w] tuples made it ~8× slower, and it runs
+   * once per post at build time.
+   */
+  rowPtr: Int32Array;
+  colIdx: Int32Array;
+  weights: Float64Array;
 }
 
 /**
@@ -761,7 +770,22 @@ export function buildPprTransition(
     }
     rows[i] = row;
   }
-  return { slugs, slugToIdx, rows };
+  let nnz = 0;
+  for (const row of rows) nnz += row.length;
+  const rowPtr = new Int32Array(slugs.length + 1);
+  const colIdx = new Int32Array(nnz);
+  const weights = new Float64Array(nnz);
+  let k = 0;
+  for (let i = 0; i < rows.length; i++) {
+    rowPtr[i] = k;
+    for (const [j, w] of rows[i]) {
+      colIdx[k] = j;
+      weights[k] = w;
+      k++;
+    }
+  }
+  rowPtr[rows.length] = k;
+  return { slugs, slugToIdx, rows, rowPtr, colIdx, weights };
 }
 
 /**
@@ -783,25 +807,30 @@ export function personalizedPageRankFast(
   const seedIdx = tr.slugToIdx.get(seedSlug);
   if (n === 0 || seedIdx === undefined) return new Map();
 
+  const { rowPtr, colIdx, weights } = tr;
   let p = new Float64Array(n);
+  let next = new Float64Array(n);
   p[seedIdx] = 1;
 
   for (let iter = 0; iter < iterations; iter++) {
-    const next = new Float64Array(n);
+    next.fill(0);
     next[seedIdx] += alpha; // restart contribution
     for (let i = 0; i < n; i++) {
       const pi = p[i];
       if (pi === 0) continue;
-      const row = tr.rows[i];
       const flow = (1 - alpha) * pi;
-      if (row.length === 0) {
+      const start = rowPtr[i];
+      const end = rowPtr[i + 1];
+      if (start === end) {
         // Dangling node: send mass back to seed.
         next[seedIdx] += flow;
         continue;
       }
-      for (const [j, w] of row) next[j] += flow * w;
+      for (let k = start; k < end; k++) next[colIdx[k]] += flow * weights[k];
     }
+    const t = p;
     p = next;
+    next = t;
   }
 
   const out = new Map<string, number>();

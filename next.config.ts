@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: "inline",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Blog/project images are served from R2 (see src/lib/mediaUrl.ts).
+    remotePatterns: [{ protocol: "https", hostname: "img.halleywiki.com" }],
   },
   experimental: {
     // gray-matter is server-only — tree-shake hint does nothing for it. Keep
@@ -27,8 +29,9 @@ const nextConfig: NextConfig = {
   // src/lib/blogGraphIndex.ts); the plain 37 MB JSON is never read at runtime
   // and pushed /api/blog/graph and /blog/[...slug] over the limit too.
   outputFileTracingExcludes: {
-    "/api/blog/search": ["./content/**"],
-    "**": ["./src/lib/generated/blogGraph.json"],
+    // Functions read post markdown from R2 (src/lib/contentSource.ts), so
+    // none of them ships the ~180 MB corpus.
+    "**": ["./content/blog/**", "./src/lib/generated/blogGraph.json"],
   },
   outputFileTracingIncludes: {
     "/api/blog/posts": ["./src/lib/generated/blogPostsIndex.json"],
@@ -54,6 +57,13 @@ const nextConfig: NextConfig = {
   // The slug is the folder path, so every old URL needs a permanent redirect.
   async redirects() {
     return [
+      // Images moved to R2. Code maps /imgs/… to the CDN directly (mediaUrl);
+      // this catches any reference that still points at the old path.
+      {
+        source: "/imgs/:path*",
+        destination: "https://img.halleywiki.com/imgs/:path*",
+        permanent: true,
+      },
       {
         source: "/blog/paper-reading/ai-interpretability/vec2vec-universal-geometry-embeddings",
         destination: "/blog/paper-reading/ai-interpretability/harnessing-the-universal-geometry-of-embeddings",

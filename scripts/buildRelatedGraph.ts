@@ -34,6 +34,7 @@
  *   GRAPH_WORKERS=N  override the auto-detected shard count
  */
 
+import crypto from "crypto";
 import fs from "fs";
 import os from "os";
 import zlib from "zlib";
@@ -157,8 +158,81 @@ function layout(graph: GraphResponse): Map<string, { x: number; y: number }> {
   return pos;
 }
 
-function toStored(graph: GraphResponse): StoredGraph {
+// ─────────────── Layout cache ───────────────
+//
+// The force layout is ~2/3 of this script's time, and most ego graphs come out
+// the same from one deploy to the next. The layout is a pure function of its
+// input (d3-force seeds its own LCG), so it is cached across builds under a
+// hash of exactly that input. .next/cache survives between Vercel builds.
+
+const LAYOUT_CACHE = path.join(
+  process.cwd(),
+  ".next",
+  "cache",
+  "blog-graph-layout.json",
+);
+const layoutCachePart = (shard: number): string =>
+  `${LAYOUT_CACHE}.part${shard}`;
+
+type CachedPos = Array<[number, number]>; // aligned with graph.nodes
+let layoutCache: Record<string, CachedPos> | null = null;
+const layoutUsed: Record<string, CachedPos> = {};
+let layoutHits = 0;
+
+function loadLayoutCache(): Record<string, CachedPos> {
+  if (layoutCache) return layoutCache;
+  try {
+    layoutCache = JSON.parse(fs.readFileSync(LAYOUT_CACHE, "utf8"));
+  } catch {
+    layoutCache = {};
+  }
+  return layoutCache!;
+}
+
+function layoutKey(graph: GraphResponse): string {
+  return crypto
+    .createHash("sha1")
+    .update(
+      JSON.stringify([
+        LAYOUT_TICKS,
+        graph.currentNodeId,
+        graph.nodes.map((n) => [n.id, n.relevance]),
+        graph.edges.map((e) => [e.source, e.target, e.weight]),
+      ]),
+    )
+    .digest("base64");
+}
+
+function layoutCached(graph: GraphResponse): Map<string, { x: number; y: number }> {
+  const key = layoutKey(graph);
+  const hit = loadLayoutCache()[key];
+  if (hit && hit.length === graph.nodes.length) {
+    layoutHits++;
+    layoutUsed[key] = hit;
+    const pos = new Map<string, { x: number; y: number }>();
+    graph.nodes.forEach((n, i) => pos.set(n.id, { x: hit[i][0], y: hit[i][1] }));
+    return pos;
+  }
   const pos = layout(graph);
+  layoutUsed[key] = graph.nodes.map((n) => {
+    const p = pos.get(n.id) ?? { x: 0, y: 0 };
+    return [p.x, p.y];
+  });
+  return pos;
+}
+
+/** Keep only this build's layouts, so the cache never grows past one corpus. */
+function saveLayoutCache(entries: Record<string, CachedPos>): void {
+  try {
+    fs.mkdirSync(path.dirname(LAYOUT_CACHE), { recursive: true });
+    fs.writeFileSync(LAYOUT_CACHE, JSON.stringify(entries));
+  } catch {
+    /* a cache write failure only costs the next build time */
+  }
+}
+
+function toStored(graph: GraphResponse): StoredGraph {
+  const pos = layoutCached(graph);
   const idxOf = new Map<string, number>();
   graph.nodes.forEach((n, i) => idxOf.set(n.id, i));
   return {
@@ -232,7 +306,7 @@ function shardCount(): number {
   const override = Number(process.env.GRAPH_WORKERS);
   if (Number.isFinite(override) && override >= 1) return Math.floor(override);
   const byCpu = Math.max(1, os.cpus().length - 1);
-  const byMem = Math.max(1, Math.floor(os.totalmem() / (2 * 1024 ** 3)));
+  const byMem = Math.max(1, Math.floor(os.totalmem() / (4 * 1024 ** 3)));
   return Math.min(byCpu, byMem, MAX_SHARDS);
 }
 
@@ -273,7 +347,13 @@ async function runAsShard(shard: number, count: number): Promise<void> {
   const { map, done, skipped } = await computeShard(shard, count);
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
   fs.writeFileSync(partPath(shard), JSON.stringify(map));
-  process.send?.({ shard, done, skipped });
+  try {
+    fs.mkdirSync(path.dirname(LAYOUT_CACHE), { recursive: true });
+    fs.writeFileSync(layoutCachePart(shard), JSON.stringify(layoutUsed));
+  } catch {
+    /* ignore */
+  }
+  process.send?.({ shard, done, skipped, hits: layoutHits });
 }
 
 /**
@@ -317,9 +397,10 @@ function runShardedChildren(
         env: { ...process.env, GRAPH_SHARD: `${shard}:${count}` },
         stdio: ["ignore", "inherit", "inherit", "ipc"],
       });
-      child.on("message", (msg: { done?: number; skipped?: number }) => {
+      child.on("message", (msg: { done?: number; skipped?: number; hits?: number }) => {
         done += msg.done ?? 0;
         skipped += msg.skipped ?? 0;
+        layoutHits += msg.hits ?? 0;
       });
       child.on("error", () => {
         failed = true;
@@ -363,6 +444,16 @@ async function main() {
     const res = await runShardedChildren(shards);
     if (res.ok) {
       const written = mergeParts(shards);
+      const merged: Record<string, CachedPos> = {};
+      for (let i = 0; i < shards; i++) {
+        try {
+          Object.assign(merged, JSON.parse(fs.readFileSync(layoutCachePart(i), "utf8")));
+          fs.unlinkSync(layoutCachePart(i));
+        } catch {
+          /* ignore */
+        }
+      }
+      saveLayoutCache(merged);
       if (written === 0) throw new Error("all shards produced empty output");
       done = res.done;
       skipped = res.skipped;
@@ -386,13 +477,14 @@ async function main() {
   if (!wroteViaShards) {
     const res = await computeShard(0, 1);
     writeIndex(res.map);
+    saveLayoutCache(layoutUsed);
     done = res.done;
     skipped = res.skipped;
   }
 
   const bytes = fs.statSync(OUT_PATH).size;
   console.log(
-    `✅ Wrote ${done} ego graphs (${skipped} skipped) → ${path.relative(
+    `✅ Wrote ${done} ego graphs (${skipped} skipped, ${layoutHits} cached layouts) → ${path.relative(
       process.cwd(),
       OUT_PATH,
     )} (${(bytes / 1024 / 1024).toFixed(1)} MB) in ${(

@@ -64,8 +64,9 @@ export default function rehypeImageOptimize() {
           node.properties.decoding = "async";
         }
 
-        // Swap to the converted WebP last (no-op for un-converted images).
-        if (entry) node.properties.src = toWebp(src);
+        // Swap to the converted WebP last; toWebp also maps /imgs/… to the
+        // media CDN, so un-converted images go through it too.
+        if (src) node.properties.src = toWebp(src);
       }
 
       if (node.children) {

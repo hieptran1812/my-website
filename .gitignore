@@ -71,3 +71,5 @@ next-env.d.ts
 
 # paste-ready X decks (.claude/scripts/to-x.mjs)
 /.x
+# Images live in Cloudflare R2 (npm run sync-media); see CLAUDE.md
+/public/imgs/

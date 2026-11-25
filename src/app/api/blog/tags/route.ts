@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { readCorpus } from "@/lib/contentSource";
 import matter from "gray-matter";
 
 interface TagInfo {
@@ -16,40 +15,14 @@ interface TagInfo {
  */
 export async function GET() {
   try {
-    const contentDir = path.join(process.cwd(), "content/blog");
-
-    // Recursively get all markdown files
-    const getAllMarkdownFiles = (dir: string): string[] => {
-      const files: string[] = [];
-
-      if (!fs.existsSync(dir)) {
-        return files;
-      }
-
-      const items = fs.readdirSync(dir);
-
-      for (const item of items) {
-        const fullPath = path.join(dir, item);
-        const stat = fs.statSync(fullPath);
-
-        if (stat.isDirectory()) {
-          files.push(...getAllMarkdownFiles(fullPath));
-        } else if (item.endsWith(".md")) {
-          files.push(fullPath);
-        }
-      }
-
-      return files;
-    };
-
-    const markdownFiles = getAllMarkdownFiles(contentDir);
+    // Disk in dev/build, the R2 corpus bundle in serverless functions.
+    const corpus = await readCorpus();
 
     // Process all files and extract tags
     const tagData: Record<string, { count: number; categories: Set<string> }> = {};
 
-    for (const filePath of markdownFiles) {
+    for (const [filePath, fileContent] of Object.entries(corpus)) {
       try {
-        const fileContent = fs.readFileSync(filePath, "utf-8");
         const { data: frontmatter } = matter(fileContent);
 
         const tags = frontmatter.tags || [];

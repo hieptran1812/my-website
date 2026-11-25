@@ -79,9 +79,16 @@ node .claude/scripts/token-report.mjs
 
 Watch one number: **p50 context**. Baseline was 148k (p90 380k). Target for series waves is **p50 under 60k, p90 under 120k**.
 
+## Images and content storage (R2)
+
+- **Images are not in git.** `public/imgs/` is gitignored; images live in Cloudflare R2 (bucket `halleywiki-media`) and are served from `https://img.halleywiki.com/imgs/…`. Posts keep referencing `/imgs/blogs/…`; `src/lib/mediaUrl.ts` maps those to the CDN.
+- **After adding images:** run `npm run optimize-blog-images`, then `npm run sync-media` (uploads only new/changed files). Commit the `.md` and `src/lib/generated/blogImageManifest.json`, not the `.webp`. An image that was never synced is a broken image in production.
+- **Markdown stays in git** (`content/blog`, source of truth). Serverless functions do not ship it (Vercel 250 MB limit): the production build mirrors it to the private bucket `halleywiki-content` (`npm run sync-content`) and functions read it via `src/lib/contentSource.ts`.
+- Both syncs go through the gateway Worker in `infra/r2-worker` and need `R2_GATEWAY_URL` + `R2_GATEWAY_SECRET` (in `.env.local` and Vercel env).
+
 ## Series conventions
 
-- **Commit per wave, explicit paths.** Only that wave's `.md` + `.webp`. Never `git add -A`.
+- **Commit per wave, explicit paths.** Only that wave's `.md` (+ the image manifest); images go to R2 via `npm run sync-media`, not git. Never `git add -A`.
 - **Always `git pull --rebase --autostash` before pushing** — several sessions share `main`.
 - **Check the post doesn't already exist** before running the figure pipeline; a same-slug re-render clobbers committed WebPs. Restore with `git checkout` if it happens.
 - **Agents can go idle mid-pipeline** with no `.md` written. Verify on disk before committing; resume via `SendMessage` rather than re-dispatching.

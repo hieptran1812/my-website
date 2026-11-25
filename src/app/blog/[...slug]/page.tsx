@@ -14,9 +14,17 @@ const SITE_URL = "https://halleyverse.dev";
 
 export const revalidate = 3600;
 
+// Short notes saved from X (~half the corpus, rarely visited) are not
+// prerendered: they render on first request and are cached like any ISR page
+// (markdown comes from R2 then, see src/lib/contentSource.ts). Prerendering
+// them roughly doubled the "Generating static pages" step of every build.
+const ON_DEMAND_PREFIXES = ["notes/x-bookmarks/"];
+
 export async function generateStaticParams() {
   const slugs = getAllBlogSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return slugs
+    .filter((slug) => !ON_DEMAND_PREFIXES.some((p) => slug.join("/").startsWith(p)))
+    .map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({

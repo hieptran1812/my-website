@@ -7,8 +7,8 @@
  * memory bounded (one copy in process).
  */
 
-import fs from "fs";
 import path from "path";
+import { readCorpus } from "./contentSource";
 import matter from "gray-matter";
 import { derivePostLocation } from "./postPath";
 
@@ -73,9 +73,8 @@ function isString(value: unknown): value is string {
   return typeof value === "string";
 }
 
-function readEntry(absPath: string): BlogIndexEntry | null {
+function readEntry(absPath: string, raw: string): BlogIndexEntry | null {
   try {
-    const raw = fs.readFileSync(absPath, "utf8");
     const parsed = matter(raw);
     const data = parsed.data as Record<string, unknown>;
     const { category, subcategory } = derivePostLocation(absPath, data, blogDir);
@@ -125,31 +124,18 @@ function readEntry(absPath: string): BlogIndexEntry | null {
   }
 }
 
-function walkBlog(): BlogIndexEntry[] {
+/**
+ * Every post in the corpus. Reads content/blog when it is on disk (dev, build)
+ * and the R2 corpus bundle in serverless functions — see contentSource.ts.
+ */
+async function walkBlog(): Promise<BlogIndexEntry[]> {
+  const files = await readCorpus();
   const out: BlogIndexEntry[] = [];
-  const seen = new Set<string>();
-  if (!fs.existsSync(blogDir)) return out;
-
-  const stack: string[] = [blogDir];
-  while (stack.length > 0) {
-    const dir = stack.pop()!;
-    let entries: fs.Dirent[];
-    try {
-      entries = fs.readdirSync(dir, { withFileTypes: true });
-    } catch {
-      continue;
-    }
-    for (const e of entries) {
-      const full = path.join(dir, e.name);
-      if (e.isDirectory()) {
-        stack.push(full);
-      } else if (e.isFile() && e.name.endsWith(".md")) {
-        if (seen.has(full)) continue;
-        seen.add(full);
-        const entry = readEntry(full);
-        if (entry) out.push(entry);
-      }
-    }
+  // Insertion order mirrors the old directory walk, so downstream ordering
+  // (and tie-breaks in the related-graph build) is unchanged.
+  for (const rel of Object.keys(files)) {
+    const entry = readEntry(path.join(blogDir, ...rel.split("/")), files[rel]);
+    if (entry) out.push(entry);
   }
   return out;
 }
@@ -163,7 +149,7 @@ export async function loadAllPosts(): Promise<BlogIndexEntry[]> {
 
   inFlight = (async () => {
     try {
-      const out = walkBlog();
+      const out = await walkBlog();
       cached = out;
       cachedAt = Date.now();
       return out;

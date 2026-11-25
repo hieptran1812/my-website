@@ -1,0 +1,14 @@
+# Private gateway to the site's R2 buckets (see README.md).
+name = "halleywiki-r2"
+main = "index.js"
+compatibility_date = "2026-11-01"
+workers_dev = false
+routes = [{ pattern = "r2-gw.halleywiki.com", custom_domain = true }]
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "halleywiki-media"
+
+[[r2_buckets]]
+binding = "CONTENT"
+bucket_name = "halleywiki-content"

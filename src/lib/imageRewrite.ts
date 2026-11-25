@@ -18,6 +18,7 @@
  */
 
 import manifest from "./generated/blogImageManifest.json";
+import { mediaUrl } from "./mediaUrl";
 
 export interface BlogImageEntry {
   /** Served width after downscale (intrinsic px). */
@@ -52,10 +53,10 @@ export function imageDims(src: string): BlogImageEntry | undefined {
  */
 export function toWebp(src: string): string {
   if (!src) return src;
-  return dims[src] ? src.replace(RASTER_EXT_RE, ".webp") : src;
+  return mediaUrl(dims[src] ? src.replace(RASTER_EXT_RE, ".webp") : src);
 }
 
 /** Rewrites a converted path to its 16:9 card thumbnail (`.cover.webp`). */
 export function toCoverThumb(src: string): string {
-  return src.replace(RASTER_EXT_RE, ".cover.webp");
+  return mediaUrl(src.replace(RASTER_EXT_RE, ".cover.webp"));
 }

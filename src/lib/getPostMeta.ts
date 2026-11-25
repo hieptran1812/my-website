@@ -1,7 +1,7 @@
-import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { derivePostLocation } from "./postPath";
+import { readPostRaw, slugToRelPath } from "./contentSource";
 
 export interface PostMeta {
   slug: string;
@@ -17,19 +17,13 @@ export interface PostMeta {
 
 const blogDir = path.join(process.cwd(), "content", "blog");
 
-/** Resolve a slug like "paper-reading/foo/bar" to its on-disk markdown file. */
-function findFile(slug: string): string | null {
-  const parts = slug.split("/").filter(Boolean);
-  if (parts.length === 0) return null;
-  const candidate = path.join(blogDir, ...parts) + ".md";
-  if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) return candidate;
-  return null;
-}
-
-export function getPostMeta(slug: string): PostMeta | null {
-  const file = findFile(slug);
-  if (!file) return null;
-  const raw = fs.readFileSync(file, "utf8");
+export async function getPostMeta(slug: string): Promise<PostMeta | null> {
+  // Disk in dev/build, R2 in serverless functions (see contentSource.ts).
+  const rel = slugToRelPath(slug);
+  if (!rel) return null;
+  const raw = await readPostRaw(rel);
+  if (raw === null) return null;
+  const file = path.join(blogDir, ...rel.split("/"));
   const { data } = matter(raw);
   const { category, subcategory } = derivePostLocation(file, data, blogDir);
   return {

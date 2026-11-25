@@ -5,6 +5,7 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
 import remarkGfm from "remark-gfm";
+import { mediaUrl } from "./mediaUrl";
 
 // Project interface for type safety
 export interface ProjectData {
@@ -105,7 +106,7 @@ export async function getProjectBySlug(
       githubUrl: data.githubUrl || null,
       liveUrl: data.liveUrl || null,
       stars: data.stars,
-      image: data.image || null,
+      image: data.image ? mediaUrl(data.image) : null,
       highlights: data.highlights || [],
       difficulty: data.difficulty || "Intermediate",
     };
@@ -143,7 +144,7 @@ export async function getAllProjects(): Promise<ProjectMetadata[]> {
         githubUrl: data.githubUrl || null,
         liveUrl: data.liveUrl || null,
         stars: data.stars,
-        image: data.image || null,
+        image: data.image ? mediaUrl(data.image) : null,
         highlights: data.highlights || [],
         difficulty: data.difficulty || "Intermediate",
       });

@@ -1,4 +1,5 @@
 import { imageDims, toWebp, toCoverThumb } from "./imageRewrite";
+import { isMediaCdn } from "./mediaUrl";
 
 const PLACEHOLDER_IMAGES = ["/blog-placeholder.jpg", "/images/default-blog.jpg"];
 
@@ -69,7 +70,10 @@ export function getCardImageProps(article: {
   if (raw.startsWith("/api/og")) {
     return { src: raw, unoptimized: true };
   }
-  return { src: toWebp(raw), unoptimized: false };
+  const src = toWebp(raw);
+  // CDN images are already WebP; resizing them through /_next/image would only
+  // spend Vercel's image-optimization quota.
+  return { src, unoptimized: isMediaCdn(src) };
 }
 
 /**
