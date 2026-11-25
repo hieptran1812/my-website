@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Metadata } from "next";
 import BlogReader from "../../components/BlogReader";
 import FadeInWrapper from "@/components/FadeInWrapper";
-import { getArticle, getAllBlogSlugs } from "@/lib/getArticle";
+import { getArticle } from "@/lib/getArticle";
+import { getAllPostsLite } from "@/lib/blogPostsIndex";
 import { getRelatedPosts, getSeriesContext } from "@/lib/getRelatedPosts";
 import { getPrecomputedGraph } from "@/lib/blogGraphIndex";
 import RelatedPosts from "@/components/RelatedPosts";
@@ -14,17 +15,20 @@ const SITE_URL = "https://halleyverse.dev";
 
 export const revalidate = 3600;
 
-// Short notes saved from X (~half the corpus, rarely visited) are not
-// prerendered: they render on first request and are cached like any ISR page
-// (markdown comes from R2 then, see src/lib/contentSource.ts). Prerendering
-// them roughly doubled the "Generating static pages" step of every build.
+// Only the newest posts are prerendered; every other post renders on its
+// first request and is then cached like any ISR page (markdown comes from R2
+// then, see src/lib/contentSource.ts). Prerendering all ~6k posts was ~10 min
+// of every build; new posts are the ones being shared, so they stay instant.
+// Short notes saved from X never count toward the prerendered set.
+const PRERENDER_NEWEST = 50;
 const ON_DEMAND_PREFIXES = ["notes/x-bookmarks/"];
 
 export async function generateStaticParams() {
-  const slugs = getAllBlogSlugs();
-  return slugs
-    .filter((slug) => !ON_DEMAND_PREFIXES.some((p) => slug.join("/").startsWith(p)))
-    .map((slug) => ({ slug }));
+  const posts = await getAllPostsLite(); // newest first
+  return posts
+    .filter((p) => !ON_DEMAND_PREFIXES.some((pre) => p.slug.startsWith(pre)))
+    .slice(0, PRERENDER_NEWEST)
+    .map((p) => ({ slug: p.slug.split("/") }));
 }
 
 export async function generateMetadata({

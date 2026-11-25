@@ -1,0 +1,48 @@
+# Precompute the related-articles graph outside the Vercel build.
+#
+# The graph took 15–19 min of every Vercel build (2-core builder). This job
+# computes it on a 4-core runner, reusing last run's force layouts, and uploads
+# it to R2; the Vercel build waits for it and downloads it
+# (scripts/relatedGraphR2.ts fetch). Runs on every push to main so each deploy
+# finds a graph for its own commit.
+name: Related-articles graph
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One at a time, in push order: a later commit's graph must land last.
+concurrency:
+  group: related-graph
+  cancel-in-progress: false
+
+jobs:
+  graph:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Restore force-layout cache
+        uses: actions/cache@v4
+        with:
+          path: .next/cache/blog-graph-layout.json
+          key: graph-layout-${{ github.sha }}
+          restore-keys: graph-layout-
+
+      - run: npm run build-blog-index
+      - run: npm run build-related-graph
+
+      - name: Upload to R2
+        run: npx tsx scripts/relatedGraphR2.ts put
+        env:
+          R2_GATEWAY_URL: ${{ secrets.R2_GATEWAY_URL }}
+          R2_GATEWAY_SECRET: ${{ secrets.R2_GATEWAY_SECRET }}
