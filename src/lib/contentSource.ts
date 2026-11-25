@@ -31,6 +31,8 @@ let localCorpus: boolean | undefined;
 
 /** True when the markdown corpus is on disk (dev and build). */
 export function hasLocalCorpus(): boolean {
+  // CONTENT_SOURCE=r2 forces the R2 path even with content/ on disk (testing).
+  if (process.env.CONTENT_SOURCE === "r2") return false;
   if (localCorpus === undefined) {
     try {
       localCorpus = fs.statSync(BLOG_DIR).isDirectory();
@@ -53,7 +55,9 @@ async function gatewayGet(key: string): Promise<Response | null> {
   if (!GATEWAY || !SECRET) return null;
   const res = await fetch(
     `${GATEWAY}/content/${key.split("/").map(encodeURIComponent).join("/")}`,
-    { headers: { authorization: `Bearer ${SECRET}` }, cache: "no-store" },
+    // Not `cache: "no-store"`: that marks an ISR render as dynamic and Next
+    // throws DYNAMIC_SERVER_USAGE (500) for every on-demand post.
+    { headers: { authorization: `Bearer ${SECRET}` }, next: { revalidate: 3600 } },
   );
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`R2 content ${key}: HTTP ${res.status}`);
