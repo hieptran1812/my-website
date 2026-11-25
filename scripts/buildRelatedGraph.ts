@@ -36,6 +36,7 @@
 
 import fs from "fs";
 import os from "os";
+import zlib from "zlib";
 import path from "path";
 import { fork } from "child_process";
 import {
@@ -190,6 +191,19 @@ function toStored(graph: GraphResponse): StoredGraph {
 function writeIndex(map: Record<string, StoredGraph>): void {
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
   fs.writeFileSync(OUT_PATH, JSON.stringify(map));
+  writeCompressed();
+}
+
+// The article page ships the graph with its serverless function; the plain
+// JSON (~37 MB) pushed that function past Vercel's 250 MB limit, so the
+// runtime reads this brotli copy instead (see src/lib/blogGraphIndex.ts).
+function writeCompressed(): void {
+  fs.writeFileSync(
+    OUT_PATH.replace(/\.json$/, ".br"),
+    zlib.brotliCompressSync(fs.readFileSync(OUT_PATH), {
+      params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 9 },
+    }),
+  );
 }
 
 // ─────────────── Sharding ───────────────
@@ -277,6 +291,7 @@ function mergeParts(count: number): number {
   }
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
   fs.writeFileSync(OUT_PATH, `{${bodies.join(",")}}`);
+  writeCompressed();
   for (let i = 0; i < count; i++) {
     try {
       fs.unlinkSync(partPath(i));

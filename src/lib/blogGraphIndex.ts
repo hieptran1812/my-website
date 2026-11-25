@@ -18,6 +18,7 @@
 
 import fs from "fs";
 import path from "path";
+import zlib from "zlib";
 
 export interface PrecomputedGraphNode {
   slug: string;
@@ -62,7 +63,7 @@ const GENERATED_PATH = path.join(
   "src",
   "lib",
   "generated",
-  "blogGraph.json",
+  "blogGraph.br",
 );
 
 // `undefined` = not yet attempted; `null` = attempted, unavailable.
@@ -79,7 +80,11 @@ function loadAll(): Record<string, PrecomputedGraph> | null {
     return null;
   }
   try {
-    const raw = fs.readFileSync(GENERATED_PATH, "utf8");
+    // Brotli copy written by scripts/buildRelatedGraph.ts; the plain JSON is
+    // kept out of the serverless bundle (Vercel's 250 MB function limit).
+    const raw = zlib
+      .brotliDecompressSync(fs.readFileSync(GENERATED_PATH))
+      .toString("utf8");
     const parsed = JSON.parse(raw) as Record<string, PrecomputedGraph>;
     cache = parsed && typeof parsed === "object" ? parsed : null;
   } catch {

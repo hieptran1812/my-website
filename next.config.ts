@@ -22,8 +22,13 @@ const nextConfig: NextConfig = {
   // The search route reads snippets from the build-time body store
   // (searchBodies.bin), so it must not drag the ~180 MB markdown corpus in:
   // that pushed the function past Vercel's 250 MB limit.
+  //
+  // The precomputed graph ships brotli-compressed (blogGraph.br, read by
+  // src/lib/blogGraphIndex.ts); the plain 37 MB JSON is never read at runtime
+  // and pushed /api/blog/graph and /blog/[...slug] over the limit too.
   outputFileTracingExcludes: {
     "/api/blog/search": ["./content/**"],
+    "**": ["./src/lib/generated/blogGraph.json"],
   },
   outputFileTracingIncludes: {
     "/api/blog/posts": ["./src/lib/generated/blogPostsIndex.json"],
@@ -36,7 +41,9 @@ const nextConfig: NextConfig = {
     ],
     // The article page inlines each slug's precomputed ego graph; ship the index
     // so ISR revalidation (which re-runs the server component) can still read it.
-    "/blog/[...slug]": ["./src/lib/generated/blogGraph.json"],
+    // Keys are picomatch globs: "[...slug]" would read as a character class
+    // and never match, so escape the brackets.
+    "/blog/\\[...slug\\]": ["./src/lib/generated/blogGraph.br"],
   },
   compress: true,
   poweredByHeader: false,
